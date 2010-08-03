@@ -16,4 +16,8 @@ class Error
     self.where(attrs).first || create(attrs)
   end
   
+  def last_notice_at
+    notices.last.try(:created_at)
+  end
+  
 end

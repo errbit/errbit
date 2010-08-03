@@ -40,4 +40,17 @@ describe Error do
     end
   end
   
+  context '#last_notice_at' do
+    it "returns the created_at timestamp of the latest notice" do
+      error = Factory(:error)
+      error.last_notice_at.should be_nil
+      
+      notice1 = Factory(:notice, :error => error)
+      error.last_notice_at.should == notice1.created_at
+      
+      notice2 = Factory(:notice, :error => error)
+      error.last_notice_at.should == notice2.created_at
+    end
+  end
+  
 end
