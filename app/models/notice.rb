@@ -2,6 +2,7 @@ require 'hoptoad'
 
 class Notice
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :backtrace, :type => Array
   field :server_environment, :type => Hash
