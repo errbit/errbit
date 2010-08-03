@@ -2,6 +2,26 @@ require 'spec_helper'
 
 describe Notice do
   
+  context 'validations' do
+    it 'requires a backtrace' do
+      notice = Factory.build(:notice, :backtrace => nil)
+      notice.should_not be_valid
+      notice.errors[:backtrace].should include("can't be blank")
+    end
+    
+    it 'requires the server_environment' do
+      notice = Factory.build(:notice, :server_environment => nil)
+      notice.should_not be_valid
+      notice.errors[:server_environment].should include("can't be blank")
+    end
+    
+    it 'requires the notifier' do
+      notice = Factory.build(:notice, :notifier => nil)
+      notice.should_not be_valid
+      notice.errors[:notifier].should include("can't be blank")
+    end
+  end
+  
   context '#from_xml' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
@@ -9,7 +29,7 @@ describe Notice do
     
     it 'finds the correct error for the notice' do
       Error.should_receive(:for).with({
-        :class_name   => 'HoptoadTestingException',
+        :klass        => 'HoptoadTestingException',
         :message      => 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.',
         :component    => 'application',
         :action       => 'verify',

@@ -13,4 +13,5 @@ end
 group :test do
   gem 'rspec', '>= 2.0.0.beta.19'
   gem 'database_cleaner', '0.5.2'
+  gem 'factory_girl_rails'
 end

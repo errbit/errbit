@@ -2,10 +2,24 @@ require 'spec_helper'
 
 describe Error do
   
+  context 'validations' do
+    it 'requires a klass' do
+      error = Factory.build(:error, :klass => nil)
+      error.should_not be_valid
+      error.errors[:klass].should include("can't be blank")
+    end
+    
+    it 'requires an environment' do
+      error = Factory.build(:error, :environment => nil)
+      error.should_not be_valid
+      error.errors[:environment].should include("can't be blank")
+    end
+  end
+  
   context '#for' do
     before do
       @conditions = {
-        :class_name   => 'Whoops',
+        :klass        => 'Whoops',
         :message      => 'Whoops: Oopsy Daisy',
         :component    => 'Foo',
         :action       => 'bar',

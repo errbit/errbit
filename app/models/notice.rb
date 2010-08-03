@@ -11,11 +11,13 @@ class Notice
   
   embedded_in :error, :inverse_of => :notices
   
+  validates_presence_of :backtrace, :server_environment, :notifier
+  
   def self.from_xml(hoptoad_xml)
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
     
     error = Error.for({
-      :class_name => hoptoad_notice['error']['class'],
+      :klass      => hoptoad_notice['error']['class'],
       :message    => hoptoad_notice['error']['message'],
       :component  => hoptoad_notice['request']['component'],
       :action     => hoptoad_notice['request']['action'],
