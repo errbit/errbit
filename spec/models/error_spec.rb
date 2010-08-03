@@ -53,4 +53,19 @@ describe Error do
     end
   end
   
+  context "#resolved?" do
+    it "should start out as unresolved" do
+      error = Error.new
+      error.should_not be_resolved
+      error.should be_unresolved
+    end
+    
+    it "should be able to be resolved" do
+      error = Factory(:error)
+      error.should_not be_resolved
+      error.resolve!
+      error.reload.should be_resolved
+    end
+  end
+  
 end

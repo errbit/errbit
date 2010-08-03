@@ -7,6 +7,7 @@ class Error
   field :component
   field :action
   field :environment
+  field :resolved, :type => Boolean
   
   embeds_many :notices
   
@@ -14,6 +15,14 @@ class Error
   
   def self.for(attrs)
     self.where(attrs).first || create(attrs)
+  end
+  
+  def resolve!
+    self.update_attributes(:resolved => true)
+  end
+  
+  def unresolved?
+    !resolved?
   end
   
   def last_notice_at
