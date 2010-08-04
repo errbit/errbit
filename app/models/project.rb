@@ -6,6 +6,7 @@ class Project
   field :api_key
   
   embeds_many :watchers
+  embeds_many :deploys
   references_many :errs
   
   before_validation :generate_api_key, :on => :create

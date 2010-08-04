@@ -80,13 +80,17 @@ describe Notice do
   end
   
   describe "email notifications" do
+    before do
+      @watcher = Factory(:watcher)
+      @error = Factory(:err, :project => @watcher.project)
+    end
+    
     App.email_at_notices.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
-        error = Factory(:err)
-        error.notices.stub(:count).and_return(threshold)
+        @error.notices.stub(:count).and_return(threshold)
         Mailer.should_receive(:error_notification).
           and_return(mock('email', :deliver => true))
-        Factory(:notice, :err => error)
+        Factory(:notice, :err => @error)
       end
     end
   end
