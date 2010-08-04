@@ -1,4 +1,5 @@
-Factory.define :error do |e|
+Factory.define :err do |e|
+  e.project       {|p| p.association :project}
   e.klass         'FooError'
   e.message       'FooError: Too Much Bar'
   e.component     'foo'
@@ -7,7 +8,7 @@ Factory.define :error do |e|
 end
 
 Factory.define :notice do |n|
-  n.error               {|e| e.association :error}
+  n.err       {|e| e.association :err}
   n.backtrace           { random_backtrace }
   n.server_environment  'server-environment' => 'production'
   n.notifier            'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com'

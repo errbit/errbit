@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe Error do
+describe Err do
   
   context 'validations' do
     it 'requires a klass' do
-      error = Factory.build(:error, :klass => nil)
+      error = Factory.build(:err, :klass => nil)
       error.should_not be_valid
       error.errors[:klass].should include("can't be blank")
     end
     
     it 'requires an environment' do
-      error = Factory.build(:error, :environment => nil)
+      error = Factory.build(:err, :environment => nil)
       error.should_not be_valid
       error.errors[:environment].should include("can't be blank")
     end
@@ -18,7 +18,9 @@ describe Error do
   
   context '#for' do
     before do
+      @project = Factory(:project)
       @conditions = {
+        :project      => @project,
         :klass        => 'Whoops',
         :message      => 'Whoops: Oopsy Daisy',
         :component    => 'Foo',
@@ -28,40 +30,44 @@ describe Error do
     end
     
     it 'returns the correct error if one already exists' do
-      existing = Error.create(@conditions)
-      Error.for(@conditions).should == existing
+      existing = Err.create(@conditions)
+      Err.for(@conditions).should == existing
+    end
+    
+    it 'assigns the returned error to the given project' do
+      Err.for(@conditions).project.should == @project
     end
     
     it 'creates a new error if a matching one does not already exist' do
-      Error.where(@conditions).exists?.should == false
+      Err.where(@conditions.except(:project)).exists?.should == false
       lambda {
-        Error.for(@conditions)
-      }.should change(Error,:count).by(1)
+        Err.for(@conditions)
+      }.should change(Err,:count).by(1)
     end
   end
   
   context '#last_notice_at' do
     it "returns the created_at timestamp of the latest notice" do
-      error = Factory(:error)
+      error = Factory(:err)
       error.last_notice_at.should be_nil
       
-      notice1 = Factory(:notice, :error => error)
+      notice1 = Factory(:notice, :err => error)
       error.last_notice_at.should == notice1.created_at
       
-      notice2 = Factory(:notice, :error => error)
+      notice2 = Factory(:notice, :err => error)
       error.last_notice_at.should == notice2.created_at
     end
   end
   
   context "#resolved?" do
     it "should start out as unresolved" do
-      error = Error.new
+      error = Err.new
       error.should_not be_resolved
       error.should be_unresolved
     end
     
     it "should be able to be resolved" do
-      error = Factory(:error)
+      error = Factory(:err)
       error.should_not be_resolved
       error.resolve!
       error.reload.should be_resolved

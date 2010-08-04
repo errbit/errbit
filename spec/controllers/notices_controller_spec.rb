@@ -5,6 +5,7 @@ describe NoticesController do
   context 'POST[XML] notices#create' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
+      Project.stub(:find_by_api_key!).and_return(Factory.build(:project))
       @notice = Notice.from_xml(@xml)
       
       request.env['Content-type'] = 'text/xml'

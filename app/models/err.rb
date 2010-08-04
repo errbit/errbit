@@ -1,4 +1,4 @@
-class Error
+class Err
   include Mongoid::Document
   include Mongoid::Timestamps
   
@@ -9,12 +9,14 @@ class Error
   field :environment
   field :resolved, :type => Boolean
   
+  referenced_in :project
   embeds_many :notices
   
   validates_presence_of :klass, :environment
   
   def self.for(attrs)
-    self.where(attrs).first || create(attrs)
+    project = attrs.delete(:project)
+    project.errs.where(attrs).first || project.errs.create(attrs)
   end
   
   def resolve!

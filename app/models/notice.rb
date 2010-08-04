@@ -9,14 +9,16 @@ class Notice
   field :request, :type => Hash
   field :notifier, :type => Hash
   
-  embedded_in :error, :inverse_of => :notices
+  embedded_in :err, :inverse_of => :notices
   
   validates_presence_of :backtrace, :server_environment, :notifier
   
   def self.from_xml(hoptoad_xml)
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
+    project = Project.find_by_api_key!(hoptoad_notice['api-key'])
     
-    error = Error.for({
+    error = Err.for({
+      :project    => project,
       :klass      => hoptoad_notice['error']['class'],
       :message    => hoptoad_notice['error']['message'],
       :component  => hoptoad_notice['request']['component'],
