@@ -5,6 +5,7 @@ class Project
   field :name, :type => String
   field :api_key
   
+  embeds_many :watchers
   references_many :errs
   
   before_validation :generate_api_key, :on => :create
