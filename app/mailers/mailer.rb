@@ -7,8 +7,18 @@ class Mailer < ActionMailer::Base
     @project  = notice.err.project
     
     mail({
-      :to => @project.watchers.map(&:email),
-      :subject => "[#{@project.name}] #{@notice.err.message}"
+      :to       => @project.watchers.map(&:email),
+      :subject  => "[#{@project.name}] #{@notice.err.message}"
+    })
+  end
+  
+  def deploy_notification(deploy)
+    @deploy   = deploy
+    @project  = deploy.project
+    
+    mail({
+      :to       => @project.watchers.map(&:email),
+      :subject  => "[#{@project.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
     })
   end
   

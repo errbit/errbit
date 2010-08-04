@@ -16,4 +16,12 @@ describe Deploy do
     end
   end
   
+  context 'being created' do
+    it 'should send an email notification' do
+      Mailer.should_receive(:deploy_notification).
+        and_return(mock('email', :deliver => true))
+      Factory(:deploy, :project => Factory(:project_with_watcher))
+    end
+  end
+  
 end

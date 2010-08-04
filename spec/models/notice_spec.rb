@@ -42,7 +42,7 @@ describe Notice do
         :action       => 'verify',
         :environment  => 'development'
       }).and_return(err = Err.new)
-      err.notices.stub(:create)
+      err.notices.stub(:create!)
       @notice = Notice.from_xml(@xml)
     end
     
@@ -81,8 +81,8 @@ describe Notice do
   
   describe "email notifications" do
     before do
-      @watcher = Factory(:watcher)
-      @error = Factory(:err, :project => @watcher.project)
+      @project = Factory(:project_with_watcher)
+      @error = Factory(:err, :project => @project)
     end
     
     App.email_at_notices.each do |threshold|

@@ -4,5 +4,4 @@ This error has occurred <%= pluralize @notice.err.notices.count, 'time' %>. You 
 
   <%= error_notice_url(@notice.err, @notice) %>
   
-Your loyal servant,
-Hypnotoad
+<%= render :partial => 'signature' %>

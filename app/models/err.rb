@@ -19,7 +19,7 @@ class Err
   
   def self.for(attrs)
     project = attrs.delete(:project)
-    project.errs.unresolved.where(attrs).first || project.errs.create(attrs)
+    project.errs.unresolved.where(attrs).first || project.errs.create!(attrs)
   end
   
   def resolve!

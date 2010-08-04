@@ -5,6 +5,12 @@ Factory.define(:project) do |p|
   p.name { Factory.next :project_name }
 end
 
+Factory.define(:project_with_watcher, :parent => :project) do |p|
+  p.after_create {|project|
+    Factory(:watcher, :project => project)
+  }
+end
+
 Factory.define(:watcher) do |w|
   w.project {|p| p.association :project}
   w.email   { Factory.next :email }
