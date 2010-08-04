@@ -7,16 +7,19 @@ class Err
   field :component
   field :action
   field :environment
-  field :resolved, :type => Boolean
+  field :resolved, :type => Boolean, :default => false
   
   referenced_in :project
   embeds_many :notices
   
   validates_presence_of :klass, :environment
   
+  scope :resolved, where(:resolved => true)
+  scope :unresolved, where(:resolved => false)
+  
   def self.for(attrs)
     project = attrs.delete(:project)
-    project.errs.where(attrs).first || project.errs.create(attrs)
+    project.errs.unresolved.where(attrs).first || project.errs.create(attrs)
   end
   
   def resolve!

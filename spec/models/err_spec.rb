@@ -74,4 +74,24 @@ describe Err do
     end
   end
   
+  context "Scopes" do
+    context "resolved" do
+      it 'only finds resolved Errors' do
+        resolved = Factory(:err, :resolved => true)
+        unresolved = Factory(:err, :resolved => false)
+        Err.resolved.all.should include(resolved)
+        Err.resolved.all.should_not include(unresolved)
+      end
+    end
+    
+    context "unresolved" do
+      it 'only finds unresolved Errors' do
+        resolved = Factory(:err, :resolved => true)
+        unresolved = Factory(:err, :resolved => false)
+        Err.unresolved.all.should_not include(resolved)
+        Err.unresolved.all.should include(unresolved)
+      end
+    end
+  end
+  
 end
