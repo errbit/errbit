@@ -5,5 +5,8 @@ Hypnotoad::Application.routes.draw do
   # match '/deploys.txt' => 'deploys#create'
   
   resources :notices
+  resources :errors do
+    resources :notices
+  end
   
 end

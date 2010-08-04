@@ -11,6 +11,8 @@ class Notice
   
   embedded_in :err, :inverse_of => :notices
   
+  after_create :deliver_notification, :if => :should_notify?
+  
   validates_presence_of :backtrace, :server_environment, :notifier
   
   def self.from_xml(hoptoad_xml)
@@ -33,5 +35,15 @@ class Notice
       :notifier => hoptoad_notice['notifier']
     })
   end
+  
+  def deliver_notification
+    Mailer.error_notification(self).deliver
+  end
+  
+  protected
+  
+    def should_notify?
+      App.email_at_notices.include?(err.notices.count) && err.project.watchers.any?
+    end
   
 end

@@ -1,0 +1,8 @@
+An error has just occurred in <%= @notice.err.environment %>: <%= @notice.err.message %>
+
+This error has occurred <%= pluralize @notice.err.notices.count, 'time' %>. You should really look into it here:
+
+  <%= error_notice_url(@notice.err, @notice) %>
+  
+Your loyal servant,
+Hypnotoad
