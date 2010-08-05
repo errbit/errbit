@@ -1,0 +1,13 @@
+- content_for :title, @project.name
+- content_for :meta do
+  %strong Errors Caught:
+  = @project.errs.count
+  %strong API Key:
+  = @project.api_key
+- content_for :action_bar do
+  = link_to 'edit', edit_project_path(@project)
+  |
+  = link_to 'destroy', project_path(@project), :method => :destroy, :confirm => 'Seriously?'
+
+%h3 Errors
+= render 'errs/table', :errs => @errs

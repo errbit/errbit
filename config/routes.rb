@@ -4,6 +4,7 @@ Hypnotoad::Application.routes.draw do
   match '/notifier_api/v2/notices' => 'notices#create'
   match '/deploys.txt' => 'deploys#create'
   
+  resources :errs,    :only => [:index]
   resources :notices, :only => [:show]
   resources :deploys, :only => [:show]
   

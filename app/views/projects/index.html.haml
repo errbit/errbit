@@ -1,12 +1,14 @@
 - content_for :title, 'Projects'
 
-%table
+%table.projects
   %thead
     %tr
-      %th Project Name
+      %th Name
+      %th Last Deploy
       %th Errors
   %tbody
     - @projects.each do |project|
       %tr
-        %td= link_to project.name, project_path(project)
-        %td= link_to project.errs.unresolved.count, project_errs_path(project)
+        %td.name= link_to project.name, project_path(project)
+        %td.deploy= project.last_deploy_at ? project.last_deploy_at.to_s(:micro) : 'n/a'
+        %td.count= link_to project.errs.unresolved.count, project_errs_path(project)

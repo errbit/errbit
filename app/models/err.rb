@@ -34,4 +34,10 @@ class Err
     notices.last.try(:created_at)
   end
   
+  def where
+    where = component
+    where << "##{action}" if action.present?
+    where
+  end
+  
 end

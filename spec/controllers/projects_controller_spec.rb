@@ -11,4 +11,12 @@ describe ProjectsController do
     end
   end
   
+  describe "GET /projects/:id" do
+    it 'finds the project' do
+      project = Factory(:project)
+      get :show, :id => project.id
+      assigns(:project).should == project
+    end
+  end
+  
 end

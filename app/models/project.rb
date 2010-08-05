@@ -19,6 +19,10 @@ class Project
     where(:api_key => key).first || raise(Mongoid::Errors::DocumentNotFound.new(self,key))
   end
   
+  def last_deploy_at
+    deploys.last && deploys.last.created_at
+  end
+  
   protected
   
     def generate_api_key

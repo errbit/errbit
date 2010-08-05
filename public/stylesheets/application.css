@@ -147,7 +147,7 @@ form > div > span {
 /* Tables */
 table { width: 100%; border: 1px solid #C6C6C6; margin-bottom: 1.5em; }
 table th, table td { border-bottom: 1px solid #C6C6C6; padding: 10px 8px; text-align: left; }
-table th { background-color: #E2E2E2; font-weight: bold; text-transform: uppercase; }
+table th { background-color: #E2E2E2; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
 table .main { width: 100%; }
 
@@ -159,3 +159,29 @@ table .main { width: 100%; }
 .html ul, .html ol  { margin-left: 2em; margin-bottom: 1em; }
 .html ul li   { margin-bottom: 0.5em; list-style: disc; }
 .html ol li   { margin-bottom: 0.5em; list-style: decimal; }
+
+/* Projects Table */
+table.projects td.name {
+  width: 100%;
+}
+table.projects td.deploy {
+  white-space: no-wrap;
+}
+
+/* Err Tables */
+table.errs td.message {
+  width: 100%;
+}
+table.errs td.message a { 
+  display: block;
+}
+table.errs td.message em {
+  color: #727272;
+  font-size: 0.9em;
+}
+table.errs td.latest {
+  white-space: nowrap;
+}
+table.errs td.deploy {
+  white-space: nowrap;
+}
