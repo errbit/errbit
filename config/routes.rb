@@ -6,8 +6,13 @@ Hypnotoad::Application.routes.draw do
   
   resources :notices, :only => [:show]
   resources :deploys, :only => [:show]
-  resources :errors do
-    resources :notices
+  
+  resources :projects do
+    resources :errs do
+      resources :notices
+    end
   end
+  
+  root :to => 'projects#index'
   
 end

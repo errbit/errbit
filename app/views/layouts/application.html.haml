@@ -1,0 +1,28 @@
+!!! html
+%html
+  %head
+    %title 
+      Cartless &mdash;
+      = yield(:page_title).present? ? yield(:page_title) : yield(:title)
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
+    = javascript_include_tag :defaults
+    = stylesheet_link_tag 'reset', 'application'
+    = yield :head
+  %body{:id => controller.controller_name, :class => controller.action_name}
+    #header
+      = link_to 'Hypnotoad', root_path, :id => 'site-name'
+      
+    = render :partial => 'shared/navigation'
+    
+    #content-title
+      %h1= yield :title
+      %span.meta= yield :meta
+    - if action_bar = yield(:action_bar)
+      #action-bar
+        = action_bar
+    #content      
+      = render :partial => 'shared/flash_messages'
+      = yield
+    #footer
+      Powered by Hypnotoad. All Glory to the Hypnotoad.
+    = yield :scripts

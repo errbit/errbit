@@ -1,0 +1,12 @@
+- content_for :title, 'Projects'
+
+%table
+  %thead
+    %tr
+      %th Project Name
+      %th Errors
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td= link_to project.name, project_path(project)
+        %td= link_to project.errs.unresolved.count, project_errs_path(project)

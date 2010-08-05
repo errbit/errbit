@@ -4,6 +4,7 @@ class Project
   
   field :name, :type => String
   field :api_key
+  key :name
   
   embeds_many :watchers
   embeds_many :deploys
