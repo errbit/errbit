@@ -1,0 +1,21 @@
+%pre
+  %code
+    :preserve
+    
+      # Require the hoptoad_notifier gem in you App.
+      #
+      # Rails 3 - In your Gemfile
+      #  gem 'hoptoad_notifier'
+      #
+      # Rails 2 - In environment.rb
+      #  config.gem 'hoptoad_notifier'
+      #
+      # Then add the following to config/initializers/hoptoad.rb
+      HoptoadNotifier.configure do |config|
+         config.api_key = '#{project.api_key}'
+         config.host    = '#{request.host}'
+         config.port    = #{request.port}
+         # Note: Deployment notifications only work on port 80
+      end
+      
+      

@@ -1,0 +1,10 @@
+%div.required
+  = f.label :name
+  = f.text_field :name
+  
+%fieldset
+  %legend Watchers
+  - f.fields_for :watchers do |w|
+    %div
+      = w.label :email
+      = w.text_field :email

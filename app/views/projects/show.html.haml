@@ -7,7 +7,25 @@
 - content_for :action_bar do
   = link_to 'edit', edit_project_path(@project)
   |
-  = link_to 'destroy', project_path(@project), :method => :destroy, :confirm => 'Seriously?'
+  = link_to 'destroy', project_path(@project), :method => :delete, :confirm => 'Seriously?'
+  
+- if @project.errs.none?
+  %h3 Setup your app
+  = render 'configuration_instructions', :project => @project
+
+%h3 Watchers
+%table.watchers
+  %thead
+    %tr
+      %th Email
+  %tbody
+    - @project.watchers.each do |watcher|
+      %tr
+        %td= watcher.email
+    - if @project.watchers.none?
+      %tr
+        %td
+          %em Sadly, no one is watching this project
 
 %h3 Errors
 = render 'errs/table', :errs => @errs

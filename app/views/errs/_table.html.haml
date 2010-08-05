@@ -21,3 +21,7 @@
         %td.latest #{time_ago_in_words(err.last_notice_at)} ago
         %td.deploy= err.project.last_deploy_at ? err.project.last_deploy_at.to_date.to_s(:micro) : 'n/a'
         %td.count= err.notices.count
+    - if errs.none?
+      %tr
+        %td{:colspan => (@project ? 5 : 6)}
+          %em No errors have been caught, yet

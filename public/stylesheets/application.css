@@ -151,6 +151,17 @@ table th { background-color: #E2E2E2; font-weight: bold; text-transform: upperca
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
 table .main { width: 100%; }
 
+/* Code */
+pre {
+  padding: 0.8em;
+  margin-bottom: 1em;
+  color: #f0f0f0;
+  background-color: #222;
+  border: 1px solid #444;
+  font-family: monaco, courier, monospace;
+  font-size: 1.1em;
+}
+
 /* HTML Styling */
 .html { padding-left: 1em; border-left: 2px solid #C6C6C6;}
 .html h1, .html h2, .html h3, .html h4, .html h5, .html h6 {
