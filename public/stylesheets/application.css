@@ -172,27 +172,21 @@ pre {
 .html ol li   { margin-bottom: 0.5em; list-style: decimal; }
 
 /* Projects Table */
-table.projects td.name {
+table.projects td.name, table.errs td.message {
   width: 100%;
 }
-table.projects td.deploy {
-  white-space: no-wrap;
+td.deploy {
+  white-space: nowrap;
+}
+td.latest {
+  white-space: nowrap;
 }
 
 /* Err Tables */
-table.errs td.message {
-  width: 100%;
-}
 table.errs td.message a { 
   display: block;
 }
 table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
-}
-table.errs td.latest {
-  white-space: nowrap;
-}
-table.errs td.deploy {
-  white-space: nowrap;
 }

@@ -19,7 +19,7 @@
           = link_to err.message, project_err_path(err.project, err)
           %em= err.where
         %td.latest #{time_ago_in_words(err.last_notice_at)} ago
-        %td.deploy= err.project.last_deploy_at ? err.project.last_deploy_at.to_date.to_s(:micro) : 'n/a'
+        %td.deploy= err.project.last_deploy_at ? err.project.last_deploy_at.to_s(:micro) : 'n/a'
         %td.count= err.notices.count
     - if errs.none?
       %tr
