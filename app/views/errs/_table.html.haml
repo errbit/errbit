@@ -14,7 +14,7 @@
         %td.environment
           %abbr{:title => err.environment}= err.environment.chars.first.upcase
         - unless @project
-          %td.project= err.project
+          %td.project= err.project.name
         %td.message
           = link_to err.message, project_err_path(err.project, err)
           %em= err.where
