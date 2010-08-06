@@ -2,6 +2,10 @@
   = f.label :name
   = f.text_field :name
   
+%div.checkbox
+  = f.check_box :resolve_errs_on_deploy
+  = f.label :resolve_errs_on_deploy, 'Resolve errors on deploy'
+  
 %fieldset.nested-wrapper
   %legend Watchers
   - f.fields_for :watchers do |w|

@@ -122,6 +122,7 @@ form label {
   display: block; 
 }
 form label.inline { display: inline; }
+form .checkbox label { display: inline; }
 form .required label { color: #BF3838;}
 form input[type=text], form input[type=password] {
   width: 96%; padding: 0.8em;

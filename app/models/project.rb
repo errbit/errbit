@@ -4,6 +4,7 @@ class Project
   
   field :name, :type => String
   field :api_key
+  field :resolve_errs_on_deploy, :type => Boolean, :default => false
   key :name
   
   embeds_many :watchers
