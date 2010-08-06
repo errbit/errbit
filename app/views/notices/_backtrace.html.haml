@@ -8,7 +8,8 @@
       %td
         %ul.lines
           - lines.each do |line|
-            %li{:class => (line['file'].gsub!('[PROJECT_ROOT]','') ? 'in-project' : nil)}
+            - in_project = line['file'].gsub!('[PROJECT_ROOT]','') && !line['file'].match(/^\/vendor\//)
+            %li{:class => (in_project ? 'in-project' : nil)}
               = line['file']
               &rarr;
               %strong= line['method']
