@@ -13,7 +13,7 @@
   .float-left viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
   = link_to "back to '#{@project.name}'", project_path(@project)
   |
-  = link_to 'resolve', '#' if @err.unresolved?
+  = link_to 'resolve', resolve_project_err_path(@project, @err), :method => :put, :confirm => 'Seriously?' if @err.unresolved?
 
 %h3#summary Summary
 = render 'notices/summary', :notice => @notice

@@ -11,6 +11,9 @@ Hypnotoad::Application.routes.draw do
   resources :projects do
     resources :errs do
       resources :notices
+      member do
+        put :resolve
+      end
     end
   end
   

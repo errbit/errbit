@@ -82,6 +82,25 @@ describe Err do
     end
   end
   
+  context "resolve!" do
+    it "marks the error as resolved" do
+      err = Factory(:err)
+      err.should_not be_resolved
+      err.resolve!
+      err.should be_resolved
+    end
+    
+    it "should throw an error if it's not successful" do
+      err = Factory(:err)
+      err.should_not be_resolved
+      err.klass = nil
+      err.should_not be_valid
+      lambda {
+        err.resolve!
+      }.should raise_error(Mongoid::Errors::Validations)
+    end
+  end
+  
   context "Scopes" do
     context "resolved" do
       it 'only finds resolved Errors' do

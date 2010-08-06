@@ -25,7 +25,7 @@ class Err
   end
   
   def resolve!
-    self.update_attributes(:resolved => true)
+    self.update_attributes!(:resolved => true)
   end
   
   def unresolved?

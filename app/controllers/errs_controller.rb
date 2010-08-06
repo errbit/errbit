@@ -11,4 +11,17 @@ class ErrsController < ApplicationController
     @notice   = @notices.first
   end
   
+  def resolve
+    @project  = Project.find(params[:project_id])
+    @err      = @project.errs.unresolved.find(params[:id])
+    
+    # Deal with bug in mogoid where find is returning an Enumberable obj
+    @err = @err.first if @err.respond_to?(:first)
+    
+    @err.resolve!
+    
+    flash[:success] = 'Great news everyone! The error has been resolved.'
+    redirect_to errs_path
+  end
+  
 end
