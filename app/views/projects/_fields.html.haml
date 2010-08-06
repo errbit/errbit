@@ -2,9 +2,9 @@
   = f.label :name
   = f.text_field :name
   
-%fieldset
+%fieldset.nested-wrapper
   %legend Watchers
   - f.fields_for :watchers do |w|
-    %div
+    %div.nested
       = w.label :email
       = w.text_field :email
