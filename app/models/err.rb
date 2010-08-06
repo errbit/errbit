@@ -7,6 +7,7 @@ class Err
   field :action
   field :environment
   field :fingerprint
+  field :last_notice_at, :type => DateTime
   field :resolved, :type => Boolean, :default => false
   
   referenced_in :project
@@ -16,6 +17,7 @@ class Err
   
   scope :resolved, where(:resolved => true)
   scope :unresolved, where(:resolved => false)
+  scope :ordered, order_by(:last_notice_at.desc)
   
   def self.for(attrs)
     project = attrs.delete(:project)
@@ -28,10 +30,6 @@ class Err
   
   def unresolved?
     !resolved?
-  end
-  
-  def last_notice_at
-    notices.last.try(:created_at)
   end
   
   def where

@@ -12,9 +12,12 @@ class Notice
   
   embedded_in :err, :inverse_of => :notices
   
+  after_create :cache_last_notice_at
   after_create :deliver_notification, :if => :should_notify?
   
   validates_presence_of :backtrace, :server_environment, :notifier
+  
+  scope :ordered, order_by(:created_at.asc)
   
   def self.from_xml(hoptoad_xml)
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
@@ -59,6 +62,10 @@ class Notice
   
   def deliver_notification
     Mailer.error_notification(self).deliver
+  end
+  
+  def cache_last_notice_at
+    err.update_attributes(:last_notice_at => created_at)
   end
   
   protected
