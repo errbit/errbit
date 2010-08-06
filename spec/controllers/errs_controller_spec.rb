@@ -17,6 +17,19 @@ describe ErrsController do
     end
   end
   
+  describe "GET /errs/all" do
+    it "gets a paginated list of all errors" do
+      errors = WillPaginate::Collection.new(1,30)
+      3.times { errors << Factory(:err) }
+      3.times { errors << Factory(:err, :resolved => true)}
+      Err.should_receive(:ordered).and_return(
+        mock('proxy', :paginate => errors)
+      )
+      get :index
+      assigns(:errs).should == errors
+    end
+  end
+  
   describe "GET /projects/:project_id/errs/:id" do
     before do
       3.times { Factory(:notice, :err => err)}

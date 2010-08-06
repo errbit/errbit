@@ -4,6 +4,10 @@ class ErrsController < ApplicationController
     @errs = Err.unresolved.ordered.paginate(:page => params[:page])
   end
   
+  def all
+    @errs = Err.ordered.paginate(:page => params[:page])
+  end
+  
   def show
     @project  = Project.find(params[:project_id])
     @err      = @project.errs.find(params[:id])

@@ -1,5 +1,5 @@
-- content_for :title, 'Unresolved Errors'
+- content_for :title, 'All Errors'
 - content_for :action_bar do
   = will_paginate(@errs)
-  = link_to 'show resolved', all_errs_path
+  = link_to 'hide resolved', errs_path
 = render 'table', :errs => @errs
