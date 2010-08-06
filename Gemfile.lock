@@ -112,3 +112,4 @@ DEPENDENCIES
   rails (= 3.0.0.rc)
   rspec (>= 2.0.0.beta.19)
   rspec-rails (>= 2.0.0.beta.19)
+  will_paginate

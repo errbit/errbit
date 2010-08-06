@@ -1,0 +1,14 @@
+.backtrace
+  %table
+    %tr
+      %th
+        %ul.line-numbers
+          - lines.each do |line|
+            %li= line['number']
+      %td
+        %ul.lines
+          - lines.each do |line|
+            %li{:class => (line['file'].gsub!('[PROJECT_ROOT]','') ? 'in-project' : nil)}
+              = line['file']
+              &rarr;
+              %strong= line['method']

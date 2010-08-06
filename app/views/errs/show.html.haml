@@ -1,0 +1,19 @@
+- content_for :title, @err.message
+- content_for :meta do
+  %strong Where:
+  = @err.where
+  %strong Environment:
+  = @err.environment.titleize
+  %strong Type:
+  = @err.klass
+  %strong Last Notice:
+  = @err.last_notice_at.to_s(:micro)
+- content_for :action_bar do
+  = will_paginate @notices, :param_name => :notice, :page_links => false
+  .float-left viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
+  = link_to "back to '#{@project.name}'", project_path(@project)
+  |
+  = link_to 'resolve', '#' if @err.unresolved?
+  
+%h3#backtrace Backtrace
+= render 'notices/backtrace', :lines => @notice.backtrace

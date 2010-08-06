@@ -9,6 +9,8 @@ body {
 }
 
 /* Convenience Classes */
+.float-left   { float: left; }
+.float-right  { float: right; }
 .clear        { clear: both; }
 .clear-left   { clear: left; }
 .clear-right  { clear: right; }
@@ -171,6 +173,26 @@ pre {
 .html ul li   { margin-bottom: 0.5em; list-style: disc; }
 .html ol li   { margin-bottom: 0.5em; list-style: decimal; }
 
+/* Pagination */
+.pagination {
+  float: left;
+  margin-right: 0.8em;
+  text-align: left;
+  font-size: 0.9em;
+}
+.pagination a, .pagination span {
+  display: inline-block;
+  padding: 0 0.3em;
+  background-color: #666666;
+  border: 1px solid #505050;
+}
+.pagination a:hover {
+  text-decoration: none !important;
+}
+.pagination span {
+  color: #AAA;
+}
+
 /* Projects Table */
 table.projects td.name, table.errs td.message {
   width: 100%;
@@ -189,4 +211,33 @@ table.errs td.message a {
 table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
+}
+
+/* Backtrace */
+.backtrace {
+  width: 100%;
+  overflow: auto;
+}
+.backtrace table {
+  margin: 0;
+}
+.backtrace td {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  color: #A2A2A2;
+  background-color: #222 !important;
+}
+.backtrace ul.line-numbers li {
+  text-align: right;
+}
+.backtrace ul.lines {
+  padding: 10px 8px;
+  overflow: auto;
+}
+.backtrace li {
+  white-space: nowrap;
+}
+.backtrace li.in-project {
+  color: #2adb2e;
 }

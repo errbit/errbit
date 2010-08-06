@@ -18,7 +18,7 @@
     #content-title
       %h1= yield :title
       %span.meta= yield :meta
-    - if action_bar = yield(:action_bar)
+    - if (action_bar = yield(:action_bar)).present?
       #action-bar
         = action_bar
     #content      

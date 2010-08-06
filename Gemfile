@@ -5,6 +5,7 @@ gem 'libxml-ruby'
 gem 'bson_ext', :require => nil
 gem 'mongoid', '2.0.0.beta.15'
 gem 'haml'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'rspec-rails', '>= 2.0.0.beta.19'
