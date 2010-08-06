@@ -1,0 +1,13 @@
+%table.summary
+  %tr
+    %th URL
+    %td.main= notice.request['url']
+  %tr
+    %th Where
+    %td= notice.err.where
+  %tr
+    %th Occurred
+    %td= notice.created_at.to_s(:micro)
+  %tr
+    %th Similar
+    %td= notice.err.notices.count - 1

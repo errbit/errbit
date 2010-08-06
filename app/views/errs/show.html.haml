@@ -14,6 +14,18 @@
   = link_to "back to '#{@project.name}'", project_path(@project)
   |
   = link_to 'resolve', '#' if @err.unresolved?
-  
+
+%h3#summary Summary
+= render 'notices/summary', :notice => @notice
+
 %h3#backtrace Backtrace
 = render 'notices/backtrace', :lines => @notice.backtrace
+
+%h3#environment Environment
+= render 'notices/environment', :notice => @notice
+
+%h3#params Parameters
+= render 'notices/params', :notice => @notice
+
+%h3#session Session
+= render 'notices/session', :notice => @notice

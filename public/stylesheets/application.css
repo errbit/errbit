@@ -203,6 +203,9 @@ td.deploy {
 td.latest {
   white-space: nowrap;
 }
+td.count {
+  text-align: right;
+}
 
 /* Err Tables */
 table.errs td.message a { 
@@ -214,30 +217,31 @@ table.errs td.message em {
 }
 
 /* Backtrace */
-.backtrace {
+.window {
   width: 100%;
+  margin-bottom: 1em;
   overflow: auto;
 }
-.backtrace table {
+.window table {
   margin: 0;
 }
-.backtrace td {
+table.backtrace td {
   width: 100%;
   padding: 0;
   margin: 0;
   color: #A2A2A2;
   background-color: #222 !important;
 }
-.backtrace ul.line-numbers li {
+table.backtrace ul.line-numbers li {
   text-align: right;
 }
-.backtrace ul.lines {
+table.backtrace ul.lines {
   padding: 10px 8px;
   overflow: auto;
 }
-.backtrace li {
+table.backtrace li {
   white-space: nowrap;
 }
-.backtrace li.in-project {
+table.backtrace li.in-project {
   color: #2adb2e;
 }

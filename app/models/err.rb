@@ -35,7 +35,7 @@ class Err
   end
   
   def where
-    where = component
+    where = component.dup
     where << "##{action}" if action.present?
     where
   end

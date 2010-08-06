@@ -1,0 +1,6 @@
+.window
+  %table.environment
+    - notice.env_vars.each do |key,val|
+      %tr
+        %th= key
+        %td.main= val
