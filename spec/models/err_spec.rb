@@ -22,7 +22,6 @@ describe Err do
       @conditions = {
         :project      => @project,
         :klass        => 'Whoops',
-        :message      => 'Whoops: Oopsy Daisy',
         :component    => 'Foo',
         :action       => 'bar',
         :environment  => 'production'
@@ -56,6 +55,15 @@ describe Err do
       
       notice2 = Factory(:notice, :err => error)
       error.last_notice_at.should == notice2.created_at
+    end
+  end
+  
+  context '#message' do
+    it 'returns the message from the first notice' do
+      err = Factory(:err)
+      notice1 = Factory(:notice, :err => err, :message => 'ERR 1')
+      notice2 = Factory(:notice, :err => err, :message => 'ERR 2')
+      err.message.should == notice1.message
     end
   end
   

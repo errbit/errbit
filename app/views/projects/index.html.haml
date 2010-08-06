@@ -13,3 +13,9 @@
         %td.name= link_to project.name, project_path(project)
         %td.deploy= project.last_deploy_at ? project.last_deploy_at.to_s(:micro) : 'n/a'
         %td.count= link_to project.errs.unresolved.count, project_errs_path(project)
+    - if @projects.none?
+      %tr
+        %td{:colspan => 3}
+          %em
+            No projects here.
+            = link_to 'Click here to create your first one', new_project_path

@@ -26,6 +26,7 @@ describe Notice do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
       @project = Factory(:project, :api_key => 'ALLGLORYTOTHEHYPNOTOAD')
+      Digest::MD5.stub(:hexdigest).and_return('fingerprintdigest')
     end
     
     it 'finds the correct project' do
@@ -37,10 +38,10 @@ describe Notice do
       Err.should_receive(:for).with({
         :project      => @project,
         :klass        => 'HoptoadTestingException',
-        :message      => 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.',
         :component    => 'application',
         :action       => 'verify',
-        :environment  => 'development'
+        :environment  => 'development',
+        :fingerprint  => 'fingerprintdigest'
       }).and_return(err = Err.new)
       err.notices.stub(:create!)
       @notice = Notice.from_xml(@xml)
@@ -54,6 +55,11 @@ describe Notice do
     it 'assigns an error to the notice' do
       @notice = Notice.from_xml(@xml)
       @notice.err.should be_a(Err)
+    end
+    
+    it 'captures the error message' do
+      @notice = Notice.from_xml(@xml)
+      @notice.message.should == 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.'
     end
     
     it 'captures the backtrace' do

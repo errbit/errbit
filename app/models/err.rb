@@ -3,10 +3,10 @@ class Err
   include Mongoid::Timestamps
   
   field :klass
-  field :message
   field :component
   field :action
   field :environment
+  field :fingerprint
   field :resolved, :type => Boolean, :default => false
   
   referenced_in :project
@@ -38,6 +38,10 @@ class Err
     where = component.dup
     where << "##{action}" if action.present?
     where
+  end
+  
+  def message
+    notices.first.message || klass
   end
   
 end

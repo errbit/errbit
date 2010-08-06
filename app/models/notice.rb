@@ -4,6 +4,7 @@ class Notice
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  field :message
   field :backtrace, :type => Array
   field :server_environment, :type => Hash
   field :request, :type => Hash
@@ -23,19 +24,20 @@ class Notice
     hoptoad_notice['request']['action']     = nil if hoptoad_notice['request']['action'].blank?
     
     error = Err.for({
-      :project    => project,
-      :klass      => hoptoad_notice['error']['class'],
-      :message    => hoptoad_notice['error']['message'],
-      :component  => hoptoad_notice['request']['component'],
-      :action     => hoptoad_notice['request']['action'],
-      :environment  => hoptoad_notice['server-environment']['environment-name']
+      :project      => project,
+      :klass        => hoptoad_notice['error']['class'],
+      :component    => hoptoad_notice['request']['component'],
+      :action       => hoptoad_notice['request']['action'],
+      :environment  => hoptoad_notice['server-environment']['environment-name'],
+      :fingerprint  => hoptoad_notice['fingerprint']
     })
     
     error.notices.create!({
-      :backtrace => hoptoad_notice['error']['backtrace']['line'],
+      :message            => hoptoad_notice['error']['message'],
+      :backtrace          => hoptoad_notice['error']['backtrace']['line'],
       :server_environment => hoptoad_notice['server-environment'],
-      :request => hoptoad_notice['request'],
-      :notifier => hoptoad_notice['notifier']
+      :request            => hoptoad_notice['request'],
+      :notifier           => hoptoad_notice['notifier']
     })
   end
   
