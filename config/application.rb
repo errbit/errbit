@@ -37,7 +37,7 @@ module Hypnotoad
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails form)
     
     # > rails generate - config
     config.generators do |g|
