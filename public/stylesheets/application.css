@@ -4,7 +4,7 @@ html {
   font-size: 62.8%; font-family: "Lucida Grande","Lucida Sans",Arial,sans-serif;
 }
 body { 
-  margin: 0 auto; padding: 0 5px; width: 900px; 
+  margin: 0; padding: 0;
   font-size: 1.3em; line-height: 1.4em;
 }
 
@@ -29,19 +29,33 @@ h6 { font-size: 0.9em; line-height: 1.2em; }
 p { margin-bottom: 1em; }
 
 /* Links */
-a         { color: #BF3838; text-decoration: none;}
-a:visited { color: #674646;}
-a:hover   { color: #BF3838; text-decoration: underline; }
+a         { color: #0069cc; text-decoration: none;}
+a:visited { color: #0069cc;}
+a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
 
-/* Header */
-#header {
-  height: 90px;
+header > div, #nav-bar, #content-wrapper, #footer { 
+  width: 900px; 
+  margin: 0 auto;
   position: relative;
 }
-#header #site-name {
-  font-size: 2.31em; font-weight: bold; line-height: 90px; text-decoration: none; text-transform: uppercase;
-  color: #585858;
+
+/* Header */
+header {
+  height: 75px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #fff;
+  background: #000 url(images/header.png) 0 0 repeat-x;
+}
+header #site-name {
+  display: block;
+  width: 88px;
+  height: 31px;
+  position: absolute;
+  top: 22px;
+  left: 2px;
+  background: transparent url(images/logo.png) 0 0 no-repeat;
+  text-indent: -5000em;
 }
 #header #session-links {
   position: absolute; top: 15px; right: 0;
@@ -50,41 +64,100 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Navigation */
 #nav-bar {
-  margin-bottom: 20px;
-  background-color: #585858;
+  margin-bottom: 24px;
+  height: 41px;
 }
-#nav-bar li { float: left; }
+#nav-bar li { 
+  float: left; 
+  margin-right: 18px;
+  color: #666;
+  background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border: 1px solid #bbb; 
+}
 #nav-bar li a {
-  display: block; padding: 20px 30px;
-  color: #fff;
-  font-size: 1.231em; font-weight: bold; line-height: 1em; text-decoration: none;
+  color: #666;
+  display: block; 
+  padding: 0 20px 0 40px;
+  font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
+  text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
+  background: transparent 10px 8px no-repeat;
 }
-#nav-bar li a:hover { background-color: #686868; }
-#nav-bar li a.active { background-color: #BF3838;}
+#nav-bar li a:hover { color: #666;}
+#nav-bar li.projects a { background-image: url(images/icons/briefcase.png); }
+#nav-bar li.errors a { background-image: url(images/icons/error.png); }
+#nav-bar li:hover { 
+  box-shadow: 0 0 3px #69c;
+  -moz-box-shadow: 0 0 3px #69c;
+  -webkit-box-shadow: 0 0 3px #69c;
+}
+#nav-bar li.active { 
+  border-color: #fff; 
+  background-color: #CCC;
+  background-image: none;
+  box-shadow: inset 0 0 5px #999; 
+  -moz-box-shadow: inset 0 0 5px #999; 
+  -webkit-box-shadow: inset 0 0 5px #999;
+}
+
+/* Content Wrapper */
+section#content-wrapper {
+  border: 1px solid #C6C6C6;
+}
 
 /* Content Title */
 #content-title {
-  padding: 30px 20px; border: 1px solid #C6C6C6; border-bottom: none;
-  background-color: #FFF;
+  padding: 30px 20px; 
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #FFF;
+  background-color: #e2e2e2;
 }
 #content-title h1 {
   padding: 0; margin: 0; border: none;
-  font-size: 2em; line-height: 1em; font-weight: bold; font-style: italic; font-family: georgia, times, serif;
+  color: #666;
+  font-size: 2em; line-height: 1em; font-weight: bold; font-family: arial, sans-serif;
 }
 #content-title .meta { font-size: 0.9em; color: #787878; }
 
 /* Action Bar */
 #action-bar {
-  padding: 5px 20px; border: 1px solid #C6C6C6; border-top:none; border-bottom: none;
-  color: #E2E2E2; background-color: #585858;
-  text-align: right;
+  position: absolute;
+  top: 25px; right: 20px;
 }
-#action-bar a { color: #E2E2E2; text-decoration: none; }
-#action-bar a:hover { color: #FFF; text-decoration: underline;}
+#action-bar span {  
+  display: inline-block;
+  margin-left: 18px;
+  text-decoration: none;
+  color: #666;
+  background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border: 1px solid #bbb;
+}
+#action-bar span a {
+  color: #666;
+  display: block; 
+  padding: 0 20px 0 40px;
+  font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
+  text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
+  background: transparent 10px 8px no-repeat;
+}
+#action-bar a:hover { text-decoration: none;}
+#action-bar span:hover { 
+  box-shadow: 0 0 3px #69c;
+  -moz-box-shadow: 0 0 3px #69c;
+  -webkit-box-shadow: 0 0 3px #69c;
+}
+#action-bar a.add {
+  background-image: url(images/icons/add.png);
+}
 
 /* Content */
 #content {
-  padding: 20px; border: 1px solid #C6C6C6;
+  padding: 20px; border-top: 1px solid #C6C6C6;
   background-color: #FFF;
 } 
  
@@ -148,8 +221,24 @@ form > div > span {
 }
 
 /* Tables */
-table { width: 100%; border: 1px solid #C6C6C6; margin-bottom: 1.5em; }
-table th, table td { border-bottom: 1px solid #C6C6C6; padding: 10px 8px; text-align: left; }
+table { 
+  width: 100%; 
+  border: 1px solid #C6C6C6; 
+  margin-bottom: 1.5em; 
+  border-collapse: separate;
+}
+table thead th {
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #FFF;
+}
+table tbody tr:first-child td {
+  border-top: 1px solid #C6C6C6;
+}
+table th, table td { 
+  border-top: 1px solid #C6C6C6; 
+  padding: 10px 8px; 
+  text-align: left; 
+}
 table th { background-color: #E2E2E2; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
 table .main { width: 100%; }
@@ -195,6 +284,8 @@ pre {
 }
 
 /* Projects Table */
+table.projects tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
+
 table.projects td.name, table.errs td.message {
   width: 100%;
 }
@@ -205,7 +296,22 @@ td.latest {
   white-space: nowrap;
 }
 td.count {
-  text-align: right;
+  text-align: center;
+}
+
+.count a {
+  display: inline-block;
+  padding: 0.1em 0.7em;
+  color: #fff;
+  background: #cc0033 url(images/error-badge-bg.png) 0 bottom repeat-x;
+  border: 1px solid #900;
+  border-radius: 18px;
+  -moz-border-radius: 18px;
+  -webkit-border-radius: 18px;
+  font-weight: bold;
+}
+.count a:hover {
+  text-decoration: none;
 }
 
 /* Err Tables */

@@ -10,20 +10,22 @@
     = stylesheet_link_tag 'reset', 'application'
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    #header
-      = link_to 'Hypnotoad', root_path, :id => 'site-name'
+    %header
+      %div
+        = link_to 'Hypnotoad', root_path, :id => 'site-name'
       
     = render :partial => 'shared/navigation'
     
-    #content-title
-      %h1= yield :title
-      %span.meta= yield :meta
-    - if (action_bar = yield(:action_bar)).present?
-      #action-bar
-        = action_bar
-    #content      
-      = render :partial => 'shared/flash_messages'
-      = yield
+    %section#content-wrapper
+      #content-title
+        %h1= yield :title
+        %span.meta= yield :meta
+        - if (action_bar = yield(:action_bar)).present?
+          #action-bar
+            = action_bar
+      #content      
+        = render :partial => 'shared/flash_messages'
+        = yield
     #footer
-      Powered by Hypnotoad. All Glory to the Hypnotoad.
+      Powered by Errbit.
     = yield :scripts

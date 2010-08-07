@@ -1,5 +1,6 @@
-- content_for :title, 'Projects'
-- content_for :action_bar, link_to('new project', new_project_path)
+- content_for :title, 'Apps'
+- content_for :action_bar do
+  %span= link_to('Add a New App', new_project_path, :class => 'add')
 
 %table.projects
   %thead
@@ -12,7 +13,11 @@
       %tr
         %td.name= link_to project.name, project_path(project)
         %td.deploy= project.last_deploy_at ? project.last_deploy_at.to_s(:micro) : 'n/a'
-        %td.count= link_to project.errs.unresolved.count, project_errs_path(project)
+        %td.count
+          - if project.errs.any?
+            = link_to project.errs.unresolved.count, project_errs_path(project)
+          - else
+            \-
     - if @projects.none?
       %tr
         %td{:colspan => 3}
