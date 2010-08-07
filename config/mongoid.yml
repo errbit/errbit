@@ -8,11 +8,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: hypnotoad_development
+  database: errbit_development
 
 test:
   <<: *defaults
-  database: hypnotoad_test
+  database: errbit_test
 
 # set these environment variables on your prod server
 production:

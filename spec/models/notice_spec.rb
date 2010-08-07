@@ -25,7 +25,7 @@ describe Notice do
   context '#from_xml' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @project = Factory(:project, :api_key => 'ALLGLORYTOTHEHYPNOTOAD')
+      @project = Factory(:project, :api_key => 'APIKEY')
       Digest::MD5.stub(:hexdigest).and_return('fingerprintdigest')
     end
     

@@ -19,7 +19,7 @@ end
 Factory.define(:deploy) do |d|
   d.project       {|p| p.association :project}
   d.username      'clyde.frog'
-  d.repository    'git@github.com/jdpace/hypnotoad.git'
+  d.repository    'git@github.com/jdpace/errbit.git'
   d.environment   'production'
   d.revision      '2e601cb575ca97f1a1097f12d0edfae241a70263'
 end

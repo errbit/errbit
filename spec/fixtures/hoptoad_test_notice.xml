@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <notice version="2.0">
-  <api-key>ALLGLORYTOTHEHYPNOTOAD</api-key>
+  <api-key>APIKEY</api-key>
   <notifier>
     <name>Hoptoad Notifier</name>
     <version>2.3.2</version>

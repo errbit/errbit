@@ -10,8 +10,8 @@ describe Project do
     end
     
     it 'requires unique names' do
-      Factory(:project, :name => 'Hypnotoad')
-      project = Factory.build(:project, :name => 'Hypnotoad')
+      Factory(:project, :name => 'Errbit')
+      project = Factory.build(:project, :name => 'Errbit')
       project.should_not be_valid
       project.errors[:name].should include('is already taken')
     end

@@ -6,16 +6,16 @@ describe DeploysController do
     before do
       @params = {
         'local_username' => 'john.doe',
-        'scm_repository' => 'git@github.com/jdpace/hypnotoad.git',
+        'scm_repository' => 'git@github.com/jdpace/errbit.git',
         'rails_env'      => 'production',
         'scm_revision'   => '19d77837eef37902cf5df7e4445c85f392a8d0d5'
       }
-      @project = Factory(:project_with_watcher, :api_key => 'ALLGLORYTOTHEHYPNOTOAD')
+      @project = Factory(:project_with_watcher, :api_key => 'APIKEY')
     end
     
     it 'finds the project via the api key' do
-      Project.should_receive(:find_by_api_key!).with('ALLGLORYTOTHEHYPNOTOAD').and_return(@project)
-      post :create, :deploy => @params, :api_key => 'ALLGLORYTOTHEHYPNOTOAD'
+      Project.should_receive(:find_by_api_key!).with('APIKEY').and_return(@project)
+      post :create, :deploy => @params, :api_key => 'APIKEY'
     end
     
     it 'creates a deploy' do
@@ -24,14 +24,14 @@ describe DeploysController do
         with({
           :username     => 'john.doe',
           :environment  => 'production',
-          :repository   => 'git@github.com/jdpace/hypnotoad.git',
+          :repository   => 'git@github.com/jdpace/errbit.git',
           :revision     => '19d77837eef37902cf5df7e4445c85f392a8d0d5'
         }).and_return(Factory(:deploy))
-      post :create, :deploy => @params, :api_key => 'ALLGLORYTOTHEHYPNOTOAD'
+      post :create, :deploy => @params, :api_key => 'APIKEY'
     end
     
     it 'sends an email notification', :focused => true do
-      post :create, :deploy => @params, :api_key => 'ALLGLORYTOTHEHYPNOTOAD'
+      post :create, :deploy => @params, :api_key => 'APIKEY'
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@project.watchers.first.email)
       email.subject.should == "[#{@project.name}] Deployed to production by john.doe"

@@ -1,4 +1,4 @@
-Hypnotoad::Application.routes.draw do
+Errbit::Application.routes.draw do
   
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create'
