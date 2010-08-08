@@ -283,6 +283,27 @@ pre {
   color: #AAA;
 }
 
+/* Buttons */
+a.button {
+  display: inline-block;
+  padding: 0 0.8em;
+  color: #666;
+  background-color: #EBEBEB;
+  border: 1px solid #BBB;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  box-shadow: inset 0px 0px 4px #FFF;
+  -moz-box-shadow: inset 0px 0px 4px #FFF;
+  -webkit-box-shadow: inset 0px 0px 4px #FFF;
+  line-height: 30px;
+}
+a:hover.button {
+  box-shadow: 0px 0px 4px #69C;
+  -moz-box-shadow: 0px 0px 4px #69C;
+  -webkit-box-shadow: 0px 0px 4px #69C
+}
+
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 

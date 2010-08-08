@@ -1,5 +1,5 @@
 - content_for :title, 'All Errs'
 - content_for :action_bar do
   = will_paginate(@errs)
-  = link_to 'hide resolved', errs_path
+  = link_to 'hide resolved', errs_path, :class => 'button'
 = render 'table', :errs => @errs
