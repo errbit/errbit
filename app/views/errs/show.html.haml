@@ -12,7 +12,7 @@
 
 %h4= @notice.message
   
-= will_paginate @notices, :param_name => :notice, :page_links => false
+= will_paginate @notices, :param_name => :notice, :page_links => false, :class => 'notice-pagination'
 viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
 
 .tab-bar

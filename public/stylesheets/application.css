@@ -424,6 +424,12 @@ table.errs td.message em {
   font-size: 0.9em;
 }
 
+/* Notices Pagination */
+.notice-pagination {
+  float: left;
+  margin-right: 2em;
+}
+
 /* Backtrace */
 .window {
   width: 100%;
