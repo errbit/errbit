@@ -1,8 +1,0 @@
-- content_for :title, 'Add Project'
-- content_for :action_bar, link_to('cancel', projects_path)
-
-= form_for @project do |f|
-  
-  = render 'fields', :f => f
-    
-  %div= f.submit 'Add'

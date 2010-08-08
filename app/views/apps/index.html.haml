@@ -1,0 +1,26 @@
+- content_for :title, 'Apps'
+- content_for :action_bar do
+  %span= link_to('Add a New App', new_app_path, :class => 'add')
+
+%table.apps
+  %thead
+    %tr
+      %th Name
+      %th Last Deploy
+      %th Errors
+  %tbody
+    - @apps.each do |app|
+      %tr
+        %td.name= link_to app.name, app_path(app)
+        %td.deploy= app.last_deploy_at ? app.last_deploy_at.to_s(:micro) : 'n/a'
+        %td.count
+          - if app.errs.any?
+            = link_to app.errs.unresolved.count, app_errs_path(app)
+          - else
+            \-
+    - if @apps.none?
+      %tr
+        %td{:colspan => 3}
+          %em
+            No apps here.
+            = link_to 'Click here to create your first one', new_app_path

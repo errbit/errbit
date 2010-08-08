@@ -1,24 +1,24 @@
 class Mailer < ActionMailer::Base
-  default :from => App.email_from
-  default_url_options[:host] = App.host
+  default :from => Errbit::Config.email_from
+  default_url_options[:host] = Errbit::Config.host
   
   def error_notification(notice)
     @notice   = notice
-    @project  = notice.err.project
+    @app  = notice.err.app
     
     mail({
-      :to       => @project.watchers.map(&:email),
-      :subject  => "[#{@project.name}] #{@notice.err.message}"
+      :to       => @app.watchers.map(&:email),
+      :subject  => "[#{@app.name}] #{@notice.err.message}"
     })
   end
   
   def deploy_notification(deploy)
     @deploy   = deploy
-    @project  = deploy.project
+    @app  = deploy.app
     
     mail({
-      :to       => @project.watchers.map(&:email),
-      :subject  => "[#{@project.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
+      :to       => @app.watchers.map(&:email),
+      :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
     })
   end
   

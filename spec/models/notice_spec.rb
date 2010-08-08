@@ -25,18 +25,18 @@ describe Notice do
   context '#from_xml' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @project = Factory(:project, :api_key => 'APIKEY')
+      @app = Factory(:app, :api_key => 'APIKEY')
       Digest::MD5.stub(:hexdigest).and_return('fingerprintdigest')
     end
     
-    it 'finds the correct project' do
+    it 'finds the correct app' do
       @notice = Notice.from_xml(@xml)
-      @notice.err.project.should == @project
+      @notice.err.app.should == @app
     end
     
     it 'finds the correct error for the notice' do
       Err.should_receive(:for).with({
-        :project      => @project,
+        :app      => @app,
         :klass        => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
@@ -87,11 +87,11 @@ describe Notice do
   
   describe "email notifications" do
     before do
-      @project = Factory(:project_with_watcher)
-      @error = Factory(:err, :project => @project)
+      @app = Factory(:app_with_watcher)
+      @error = Factory(:err, :app => @app)
     end
     
-    App.email_at_notices.each do |threshold|
+    Errbit::Config.email_at_notices.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
         @error.notices.stub(:count).and_return(threshold)
         Mailer.should_receive(:error_notification).

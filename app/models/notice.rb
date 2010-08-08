@@ -21,13 +21,13 @@ class Notice
   
   def self.from_xml(hoptoad_xml)
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
-    project = Project.find_by_api_key!(hoptoad_notice['api-key'])
+    app = App.find_by_api_key!(hoptoad_notice['api-key'])
     
     hoptoad_notice['request']['component']  = 'unknown' if hoptoad_notice['request']['component'].blank?
     hoptoad_notice['request']['action']     = nil if hoptoad_notice['request']['action'].blank?
     
     error = Err.for({
-      :project      => project,
+      :app      => app,
       :klass        => hoptoad_notice['error']['class'],
       :component    => hoptoad_notice['request']['component'],
       :action       => hoptoad_notice['request']['action'],
@@ -71,7 +71,7 @@ class Notice
   protected
   
     def should_notify?
-      App.email_at_notices.include?(err.notices.count) && err.project.watchers.any?
+      Errbit::Config.email_at_notices.include?(err.notices.count) && err.app.watchers.any?
     end
   
 end

@@ -11,9 +11,9 @@
 - content_for :action_bar do
   = will_paginate @notices, :param_name => :notice, :page_links => false
   .float-left viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
-  = link_to "back to '#{@project.name}'", project_path(@project)
+  = link_to "back to '#{@app.name}'", app_path(@app)
   |
-  = link_to 'resolve', resolve_project_err_path(@project, @err), :method => :put, :confirm => 'Seriously?' if @err.unresolved?
+  = link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => 'Seriously?' if @err.unresolved?
 
 %h3#summary Summary
 = render 'notices/summary', :notice => @notice

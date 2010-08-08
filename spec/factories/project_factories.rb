@@ -1,23 +1,23 @@
-Factory.sequence(:project_name) {|n| "Project ##{n}"}
+Factory.sequence(:app_name) {|n| "App ##{n}"}
 Factory.sequence(:email) {|n| "email#{n}@example.com"}
 
-Factory.define(:project) do |p|
-  p.name { Factory.next :project_name }
+Factory.define(:app) do |p|
+  p.name { Factory.next :app_name }
 end
 
-Factory.define(:project_with_watcher, :parent => :project) do |p|
-  p.after_create {|project|
-    Factory(:watcher, :project => project)
+Factory.define(:app_with_watcher, :parent => :app) do |p|
+  p.after_create {|app|
+    Factory(:watcher, :app => app)
   }
 end
 
 Factory.define(:watcher) do |w|
-  w.project {|p| p.association :project}
+  w.app {|p| p.association :app}
   w.email   { Factory.next :email }
 end
 
 Factory.define(:deploy) do |d|
-  d.project       {|p| p.association :project}
+  d.app       {|p| p.association :app}
   d.username      'clyde.frog'
   d.repository    'git@github.com/jdpace/errbit.git'
   d.environment   'production'

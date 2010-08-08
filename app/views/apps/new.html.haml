@@ -1,0 +1,8 @@
+- content_for :title, 'Add App'
+- content_for :action_bar, link_to('cancel', apps_path)
+
+= form_for @app do |f|
+  
+  = render 'fields', :f => f
+    
+  %div= f.submit 'Add'

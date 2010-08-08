@@ -4,7 +4,7 @@ class Watcher
   
   field :email
   
-  embedded_in :project, :inverse_of => :watchers
+  embedded_in :app, :inverse_of => :watchers
   
   validates_presence_of :email
   

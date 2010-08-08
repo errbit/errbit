@@ -1,0 +1,31 @@
+- content_for :title, @app.name
+- content_for :meta do
+  %strong Errors Caught:
+  = @app.errs.count
+  %strong API Key:
+  = @app.api_key
+- content_for :action_bar do
+  = link_to 'edit', edit_app_path(@app)
+  |
+  = link_to 'destroy', app_path(@app), :method => :delete, :confirm => 'Seriously?'
+  
+- if @app.errs.none?
+  %h3 Setup your app
+  = render 'configuration_instructions', :app => @app
+
+%h3 Watchers
+%table.watchers
+  %thead
+    %tr
+      %th Email
+  %tbody
+    - @app.watchers.each do |watcher|
+      %tr
+        %td= watcher.email
+    - if @app.watchers.none?
+      %tr
+        %td
+          %em Sadly, no one is watching this app
+
+%h3 Errors
+= render 'errs/table', :errs => @errs

@@ -12,7 +12,7 @@
       #
       # Then add the following to config/initializers/hoptoad.rb
       HoptoadNotifier.configure do |config|
-         config.api_key = '#{project.api_key}'
+         config.api_key = '#{app.api_key}'
          config.host    = '#{request.host}'
          config.port    = #{request.port}
          # Note: Deployment notifications only work on port 80

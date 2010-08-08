@@ -1,0 +1,8 @@
+- content_for :title, 'Edit App'
+- content_for :action_bar, link_to('cancel', app_path(@app))
+
+= form_for @app do |f|
+  
+  = render 'fields', :f => f
+    
+  %div= f.submit 'Update'

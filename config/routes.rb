@@ -12,7 +12,7 @@ Errbit::Application.routes.draw do
   resources :notices, :only => [:show]
   resources :deploys, :only => [:show]
   
-  resources :projects do
+  resources :apps do
     resources :errs do
       resources :notices
       member do
@@ -21,6 +21,6 @@ Errbit::Application.routes.draw do
     end
   end
   
-  root :to => 'projects#index'
+  root :to => 'apps#index'
   
 end

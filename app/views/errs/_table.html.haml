@@ -2,8 +2,8 @@
   %thead
     %tr
       %th
-      - unless @project
-        %th Project
+      - unless @app
+        %th App
       %th What &amp; Where
       %th Latest
       %th Deploy
@@ -13,15 +13,15 @@
       %tr
         %td.environment
           %abbr{:title => err.environment}= err.environment.chars.first.upcase
-        - unless @project
-          %td.project= err.project.name
+        - unless @app
+          %td.app= err.app.name
         %td.message
-          = link_to err.message, project_err_path(err.project, err)
+          = link_to err.message, app_err_path(err.app, err)
           %em= err.where
         %td.latest #{time_ago_in_words(err.last_notice_at)} ago
-        %td.deploy= err.project.last_deploy_at ? err.project.last_deploy_at.to_s(:micro) : 'n/a'
+        %td.deploy= err.app.last_deploy_at ? err.app.last_deploy_at.to_s(:micro) : 'n/a'
         %td.count= err.notices.count
     - if errs.none?
       %tr
-        %td{:colspan => (@project ? 5 : 6)}
+        %td{:colspan => (@app ? 5 : 6)}
           %em No errors have been caught, yet

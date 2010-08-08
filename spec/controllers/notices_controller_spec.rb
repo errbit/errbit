@@ -5,8 +5,8 @@ describe NoticesController do
   context 'POST[XML] notices#create' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @project = Factory(:project_with_watcher)
-      Project.stub(:find_by_api_key!).and_return(@project)
+      @app = Factory(:app_with_watcher)
+      App.stub(:find_by_api_key!).and_return(@app)
       @notice = Notice.from_xml(@xml)
       
       request.env['Content-type'] = 'text/xml'
@@ -22,7 +22,7 @@ describe NoticesController do
     it "sends a notification email" do
       post :create
       email = ActionMailer::Base.deliveries.last
-      email.to.should include(@project.watchers.first.email)
+      email.to.should include(@app.watchers.first.email)
       email.subject.should include(@notice.err.message)
     end
   end

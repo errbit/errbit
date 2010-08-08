@@ -18,9 +18,9 @@ describe Err do
   
   context '#for' do
     before do
-      @project = Factory(:project)
+      @app = Factory(:app)
       @conditions = {
-        :project      => @project,
+        :app      => @app,
         :klass        => 'Whoops',
         :component    => 'Foo',
         :action       => 'bar',
@@ -33,12 +33,12 @@ describe Err do
       Err.for(@conditions).should == existing
     end
     
-    it 'assigns the returned error to the given project' do
-      Err.for(@conditions).project.should == @project
+    it 'assigns the returned error to the given app' do
+      Err.for(@conditions).app.should == @app
     end
     
     it 'creates a new error if a matching one does not already exist' do
-      Err.where(@conditions.except(:project)).exists?.should == false
+      Err.where(@conditions.except(:app)).exists?.should == false
       lambda {
         Err.for(@conditions)
       }.should change(Err,:count).by(1)

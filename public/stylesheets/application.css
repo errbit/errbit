@@ -86,7 +86,7 @@ header #site-name {
   background: transparent 10px 8px no-repeat;
 }
 #nav-bar li a:hover { color: #666;}
-#nav-bar li.projects a { background-image: url(images/icons/briefcase.png); }
+#nav-bar li.apps a { background-image: url(images/icons/briefcase.png); }
 #nav-bar li.errors a { background-image: url(images/icons/error.png); }
 #nav-bar li:hover { 
   box-shadow: 0 0 3px #69c;
@@ -283,10 +283,10 @@ pre {
   color: #AAA;
 }
 
-/* Projects Table */
-table.projects tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
+/* Apps Table */
+table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
-table.projects td.name, table.errs td.message {
+table.apps td.name, table.errs td.message {
   width: 100%;
 }
 td.deploy {
@@ -349,7 +349,7 @@ table.backtrace ul.lines {
 table.backtrace li {
   white-space: nowrap;
 }
-table.backtrace li.in-project {
+table.backtrace li.in-app {
   color: #2adb2e;
   background-color: #2f2f2f;
 }

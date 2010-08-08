@@ -1,5 +1,5 @@
 Factory.define :err do |e|
-  e.project       {|p| p.association :project}
+  e.app       {|p| p.association :app}
   e.klass         'FooError'
   e.component     'foo'
   e.action        'bar'

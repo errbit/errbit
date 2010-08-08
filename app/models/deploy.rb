@@ -7,10 +7,10 @@ class Deploy
   field :environment
   field :revision
   
-  embedded_in :project, :inverse_of => :deploys
+  embedded_in :app, :inverse_of => :deploys
   
   after_create :deliver_notification, :if => :should_notify?
-  after_create :resolve_project_errs, :if => :should_resolve_project_errs?
+  after_create :resolve_app_errs, :if => :should_resolve_app_errs?
   
   validates_presence_of :username, :environment
   
@@ -18,18 +18,18 @@ class Deploy
     Mailer.deploy_notification(self).deliver
   end
   
-  def resolve_project_errs
-    project.errs.unresolved.each {|err| err.resolve!}
+  def resolve_app_errs
+    app.errs.unresolved.each {|err| err.resolve!}
   end
   
   protected
   
     def should_notify?
-      project.watchers.any?
+      app.watchers.any?
     end
     
-    def should_resolve_project_errs?
-      project.resolve_errs_on_deploy?
+    def should_resolve_app_errs?
+      app.resolve_errs_on_deploy?
     end
   
 end

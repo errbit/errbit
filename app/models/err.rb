@@ -10,7 +10,7 @@ class Err
   field :last_notice_at, :type => DateTime
   field :resolved, :type => Boolean, :default => false
   
-  referenced_in :project
+  referenced_in :app
   embeds_many :notices
   
   validates_presence_of :klass, :environment
@@ -20,8 +20,8 @@ class Err
   scope :ordered, order_by(:last_notice_at.desc)
   
   def self.for(attrs)
-    project = attrs.delete(:project)
-    project.errs.unresolved.where(attrs).first || project.errs.create!(attrs)
+    app = attrs.delete(:app)
+    app.errs.unresolved.where(attrs).first || app.errs.create!(attrs)
   end
   
   def resolve!
