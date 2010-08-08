@@ -309,9 +309,15 @@ td.count {
   -moz-border-radius: 18px;
   -webkit-border-radius: 18px;
   font-weight: bold;
+  opacity: 0.8;
+  -moz-opacity: 0.8;
+  -webkit-opacity: 0.8
 }
 .count a:hover {
   text-decoration: none;
+  opacity: 1;
+  -moz-opacity: 1;
+  -webkit-opacity: 1;
 }
 
 /* Err Tables */
