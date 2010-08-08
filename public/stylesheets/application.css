@@ -265,22 +265,58 @@ pre {
 
 /* Pagination */
 .pagination {
-  float: left;
-  margin-right: 0.8em;
-  text-align: left;
-  font-size: 0.9em;
+  margin: 24px 0;
+  text-align: center;
 }
-.pagination a, .pagination span {
+.pagination a, .pagination em, .pagination span {
   display: inline-block;
-  padding: 0 0.3em;
-  background-color: #666666;
-  border: 1px solid #505050;
+  padding: 0 0.8em;
+  margin: 0 0.2em;
+  line-height: 30px;
+  color: #666;
+  background: #FFF url(images/button-bg.png) 0 50% repeat-x;
+  border: 1px solid #BBB;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 .pagination a:hover {
   text-decoration: none !important;
+  box-shadow: 0px 0px 4px #69C;
+  -moz-box-shadow: 0px 0px 4px #69C;
+  -webkit-box-shadow: 0px 0px 4px #69C
 }
-.pagination span {
-  color: #AAA;
+.pagination .previous_page, .pagination .next_page {
+  padding: 0 1em;
+  margin: 0 2.5em 0 0;
+  line-height: 39px;
+  border-radius: 39px;
+  -moz-border-radius: 39px;
+  -webkit-border-radius: 39px;
+}
+.pagination .next_page {
+  margin: 0 0 0 2.5em;
+}
+.pagination .disabled {
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  -webkit-opacity: 0.5;
+}
+.pagination em {
+  padding: 0em 0.6em;
+  line-height: 26px;
+  background-color: #CCC;
+  background-image: none;
+  border-color: #FFF;
+  box-shadow: inset 0 0 5px #999; 
+  -moz-box-shadow: inset 0 0 5px #999; 
+  -webkit-box-shadow: inset 0 0 5px #999;
+  font-style: normal;
+}
+.pagination .gap {
+  padding: 0 0.4em;
+  border: none;
+  background: none;
 }
 
 /* Buttons */
