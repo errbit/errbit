@@ -1,9 +1,7 @@
 %table.errs
   %thead
     %tr
-      %th
-      - unless @app
-        %th App
+      %th App
       %th What &amp; Where
       %th Latest
       %th Deploy
@@ -11,10 +9,9 @@
   %tbody
     - errs.each do |err|
       %tr
-        %td.environment
-          %abbr{:title => err.environment}= err.environment.chars.first.upcase
-        - unless @app
-          %td.app= err.app.name
+        %td.app
+          = err.app.name
+          %span.environment= err.environment
         %td.message
           = link_to err.message, app_err_path(err.app, err)
           %em= err.where
