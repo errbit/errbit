@@ -6,27 +6,27 @@ describe ErrsController do
   let(:err) { Factory(:err, :app => app) }
   
   describe "GET /errs" do
-    it "gets a paginated list of unresolved errors" do
-      errors = WillPaginate::Collection.new(1,30)
-      3.times { errors << Factory(:err) }
+    it "gets a paginated list of unresolved errs" do
+      errs = WillPaginate::Collection.new(1,30)
+      3.times { errs << Factory(:err) }
       Err.should_receive(:unresolved).and_return(
-        mock('proxy', :ordered => mock('proxy', :paginate => errors))
+        mock('proxy', :ordered => mock('proxy', :paginate => errs))
       )
       get :index
-      assigns(:errs).should == errors
+      assigns(:errs).should == errs
     end
   end
   
   describe "GET /errs/all" do
-    it "gets a paginated list of all errors" do
-      errors = WillPaginate::Collection.new(1,30)
-      3.times { errors << Factory(:err) }
-      3.times { errors << Factory(:err, :resolved => true)}
+    it "gets a paginated list of all errs" do
+      errs = WillPaginate::Collection.new(1,30)
+      3.times { errs << Factory(:err) }
+      3.times { errs << Factory(:err, :resolved => true)}
       Err.should_receive(:ordered).and_return(
-        mock('proxy', :paginate => errors)
+        mock('proxy', :paginate => errs)
       )
       get :index
-      assigns(:errs).should == errors
+      assigns(:errs).should == errs
     end
   end
   

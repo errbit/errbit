@@ -24,7 +24,7 @@ class ErrsController < ApplicationController
     
     @err.resolve!
     
-    flash[:success] = 'Great news everyone! The error has been resolved.'
+    flash[:success] = 'Great news everyone! The err has been resolved.'
     redirect_to errs_path
   end
   

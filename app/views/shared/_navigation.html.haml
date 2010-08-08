@@ -2,5 +2,5 @@
   %ul
     //%li= link_to 'Dashboard', admin_dashboard_path, :class => active_if_here(:dashboards)
     %li.apps{:class => active_if_here(:apps)}= link_to 'Apps',  apps_path
-    %li.errors{:class => active_if_here(:errs)}= link_to 'Errs',    errs_path
+    %li.errs{:class => active_if_here(:errs)}= link_to 'Errs',    errs_path
   %div.clear

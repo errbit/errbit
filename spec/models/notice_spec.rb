@@ -34,7 +34,7 @@ describe Notice do
       @notice.err.app.should == @app
     end
     
-    it 'finds the correct error for the notice' do
+    it 'finds the correct err for the notice' do
       Err.should_receive(:for).with({
         :app      => @app,
         :klass        => 'HoptoadTestingException',
@@ -52,12 +52,12 @@ describe Notice do
       @notice.should be_persisted
     end
     
-    it 'assigns an error to the notice' do
+    it 'assigns an err to the notice' do
       @notice = Notice.from_xml(@xml)
       @notice.err.should be_a(Err)
     end
     
-    it 'captures the error message' do
+    it 'captures the err message' do
       @notice = Notice.from_xml(@xml)
       @notice.message.should == 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.'
     end
@@ -88,15 +88,15 @@ describe Notice do
   describe "email notifications" do
     before do
       @app = Factory(:app_with_watcher)
-      @error = Factory(:err, :app => @app)
+      @err = Factory(:err, :app => @app)
     end
     
     Errbit::Config.email_at_notices.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
-        @error.notices.stub(:count).and_return(threshold)
-        Mailer.should_receive(:error_notification).
+        @err.notices.stub(:count).and_return(threshold)
+        Mailer.should_receive(:err_notification).
           and_return(mock('email', :deliver => true))
-        Factory(:notice, :err => @error)
+        Factory(:notice, :err => @err)
       end
     end
   end

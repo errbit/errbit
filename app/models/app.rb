@@ -14,7 +14,8 @@ class App
   before_validation :generate_api_key, :on => :create
   
   validates_presence_of :name, :api_key
-  validates_uniqueness_of :name, :api_key, :allow_blank => true, :on => :create
+  validates_uniqueness_of :name, :allow_blank => true
+  validates_uniqueness_of :api_key, :allow_blank => true
   
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }

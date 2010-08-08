@@ -26,7 +26,7 @@ class Notice
     hoptoad_notice['request']['component']  = 'unknown' if hoptoad_notice['request']['component'].blank?
     hoptoad_notice['request']['action']     = nil if hoptoad_notice['request']['action'].blank?
     
-    error = Err.for({
+    err = Err.for({
       :app      => app,
       :klass        => hoptoad_notice['error']['class'],
       :component    => hoptoad_notice['request']['component'],
@@ -35,7 +35,7 @@ class Notice
       :fingerprint  => hoptoad_notice['fingerprint']
     })
     
-    error.notices.create!({
+    err.notices.create!({
       :message            => hoptoad_notice['error']['message'],
       :backtrace          => hoptoad_notice['error']['backtrace']['line'],
       :server_environment => hoptoad_notice['server-environment'],
@@ -61,7 +61,7 @@ class Notice
   end
   
   def deliver_notification
-    Mailer.error_notification(self).deliver
+    Mailer.err_notification(self).deliver
   end
   
   def cache_last_notice_at

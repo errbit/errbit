@@ -87,7 +87,7 @@ header #site-name {
 }
 #nav-bar li a:hover { color: #666;}
 #nav-bar li.apps a { background-image: url(images/icons/briefcase.png); }
-#nav-bar li.errors a { background-image: url(images/icons/error.png); }
+#nav-bar li.errs a { background-image: url(images/icons/error.png); }
 #nav-bar li:hover { 
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;

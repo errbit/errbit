@@ -1,6 +1,6 @@
 - content_for :title, @app.name
 - content_for :meta do
-  %strong Errors Caught:
+  %strong Errs Caught:
   = @app.errs.count
   %strong API Key:
   = @app.api_key
@@ -27,5 +27,5 @@
         %td
           %em Sadly, no one is watching this app
 
-%h3 Errors
+%h3 Errs
 = render 'errs/table', :errs => @errs

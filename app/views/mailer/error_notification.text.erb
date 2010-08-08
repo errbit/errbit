@@ -1,7 +1,0 @@
-An error has just occurred in <%= @notice.err.environment %>: <%= @notice.err.message %>
-
-This error has occurred <%= pluralize @notice.err.notices.count, 'time' %>. You should really look into it here:
-
-  <%= app_err_notice_url(@app, @notice.err, @notice) %>
-  
-<%= render :partial => 'signature' %>

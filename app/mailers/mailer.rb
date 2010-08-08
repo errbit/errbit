@@ -2,7 +2,7 @@ class Mailer < ActionMailer::Base
   default :from => Errbit::Config.email_from
   default_url_options[:host] = Errbit::Config.host
   
-  def error_notification(notice)
+  def err_notification(notice)
     @notice   = notice
     @app  = notice.err.app
     
