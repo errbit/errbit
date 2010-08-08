@@ -2,7 +2,7 @@
 %html
   %head
     %title 
-      Hypnotoad &mdash;
+      Errbit &mdash;
       = yield(:page_title).present? ? yield(:page_title) : yield(:title)
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
     = csrf_meta_tag
@@ -12,7 +12,7 @@
   %body{:id => controller.controller_name, :class => controller.action_name}
     %header
       %div
-        = link_to 'Hypnotoad', root_path, :id => 'site-name'
+        = link_to 'Errbit', root_path, :id => 'site-name'
       
     = render :partial => 'shared/navigation'
     
