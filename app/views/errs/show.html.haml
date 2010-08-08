@@ -1,31 +1,44 @@
-- content_for :title, @err.message
+- content_for :page_title, @err.message
+- content_for :title, @err.klass
 - content_for :meta do
   %strong Where:
   = @err.where
   %strong Environment:
-  = @err.environment.titleize
-  %strong Type:
-  = @err.klass
+  = @err.environment
   %strong Last Notice:
   = @err.last_notice_at.to_s(:micro)
 - content_for :action_bar do
-  = will_paginate @notices, :param_name => :notice, :page_links => false
-  .float-left viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
-  = link_to "back to '#{@app.name}'", app_path(@app)
-  |
-  = link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => 'Seriously?' if @err.unresolved?
+  %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => 'Seriously?', :class => 'resolve' if @err.unresolved?
 
-%h3#summary Summary
-= render 'notices/summary', :notice => @notice
+%h4= @notice.message
+  
+= will_paginate @notices, :param_name => :notice, :page_links => false
+viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
 
-%h3#backtrace Backtrace
-= render 'notices/backtrace', :lines => @notice.backtrace
+.tab-bar
+  %ul
+    %li= link_to 'Summary', '#summary', :rel => 'summary', :class => 'button'
+    %li= link_to 'Backtrace', '#backtrace', :rel => 'backtrace', :class => 'button'
+    %li= link_to 'Environment', '#environment', :rel => 'environment', :class => 'button'
+    %li= link_to 'Parameters', '#params', :rel => 'params', :class => 'button'
+    %li= link_to 'Session', '#session', :rel => 'session', :class => 'button'
 
-%h3#environment Environment
-= render 'notices/environment', :notice => @notice
+#summary
+  %h3 Summary
+  = render 'notices/summary', :notice => @notice
 
-%h3#params Parameters
-= render 'notices/params', :notice => @notice
+#backtrace
+  %h3 Backtrace
+  = render 'notices/backtrace', :lines => @notice.backtrace
+  
+#environment
+  %h3 Environment
+  = render 'notices/environment', :notice => @notice
 
-%h3#session Session
-= render 'notices/session', :notice => @notice
+#params
+  %h3 Parameters
+  = render 'notices/params', :notice => @notice
+
+#session
+  %h3 Session
+  = render 'notices/session', :notice => @notice

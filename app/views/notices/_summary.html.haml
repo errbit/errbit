@@ -1,9 +1,12 @@
 .window
   %table.summary
+    %tr
+      %th Message
+      %td.main.nowrap= notice.message
     - if notice.request['url'].present?
       %tr
         %th URL
-        %td.main.nowrap= link_to notice.request['url'], notice.request['url']
+        %td.nowrap= link_to notice.request['url'], notice.request['url']
     %tr
       %th Where
       %td= notice.err.where
