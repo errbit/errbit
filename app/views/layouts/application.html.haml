@@ -10,13 +10,13 @@
     = stylesheet_link_tag 'reset', 'application'
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    %header
+    #header
       %div
         = link_to 'Errbit', root_path, :id => 'site-name'
       
     = render :partial => 'shared/navigation'
     
-    %section#content-wrapper
+    #content-wrapper
       #content-title
         %h1= yield :title
         %span.meta= yield :meta

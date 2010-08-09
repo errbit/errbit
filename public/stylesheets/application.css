@@ -34,20 +34,20 @@ a:visited { color: #0069cc;}
 a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
 
-header > div, #nav-bar, #content-wrapper, #footer { 
+#header > div, #nav-bar, #content-wrapper, #footer { 
   width: 900px; 
   margin: 0 auto;
   position: relative;
 }
 
 /* Header */
-header {
+#header {
   height: 75px;
   margin-bottom: 24px;
   border-bottom: 1px solid #fff;
   background: #000 url(images/header.png) 0 0 repeat-x;
 }
-header #site-name {
+#header #site-name {
   display: block;
   width: 88px;
   height: 31px;
@@ -103,7 +103,7 @@ header #site-name {
 }
 
 /* Content Wrapper */
-section#content-wrapper {
+#content-wrapper {
   border: 1px solid #C6C6C6;
 }
 
