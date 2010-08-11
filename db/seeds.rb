@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
+# Create an initial Admin User
+admin_email = "errbit@#{Errbit::Config.host}"
+admin_pass  = 'password'
+
+puts "Creating an initial admin user:"
+puts "-- email:    #{admin_email}"
+puts "-- password: #{admin_pass}"
+puts ""
+puts "Be sure to change these credentials ASAP!"
+User.create!({
+  :name                   => 'Errbit Admin',
+  :email                  => admin_email,
+  :password               => admin_pass,
+  :password_confirmation  => admin_pass,
+  :admin                  => true
+})
