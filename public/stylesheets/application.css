@@ -58,8 +58,35 @@ a.action  { float: right; font-size: 0.9em;}
   text-indent: -5000em;
 }
 #header #session-links {
-  position: absolute; top: 15px; right: 0;
+  position: absolute; top: 18px; right: 0;
   font-size: 0.9em;
+}
+#header #session-links li {
+  float: right;
+  color: #FFF;
+  background-color: #000;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border: 1px solid #484B4F;
+  font-size: 14px;
+  font-weight: bold;
+}
+#header #session-links li:hover {
+  box-shadow: 0 0 3px #69c;
+  -moz-box-shadow: 0 0 3px #69c;
+  -webkit-box-shadow: 0 0 3px #69c;
+}
+#header #session-links a {
+  color: #FFF;
+  padding: 0 10px 0 30px;
+  line-height: 37px;
+}
+#header #session-links a:hover {
+  text-decoration: none;
+}
+#header #session-links #sign-out {
+  background: transparent url(images/icons/bullet-red-sm.png) 12px 50% no-repeat;
 }
 
 /* Navigation */

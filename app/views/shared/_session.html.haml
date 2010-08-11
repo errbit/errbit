@@ -1,0 +1,3 @@
+- if current_user
+  %ul#session-links
+    %li= link_to 'Sign out', destroy_session_path(:user), :id => 'sign-out'
