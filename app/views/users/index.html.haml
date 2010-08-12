@@ -1,0 +1,16 @@
+- content_for :title, 'Users'
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th.main Email
+      %th Admin?
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td.nowrap= link_to user.name, user_path(user)
+        %td= user.email
+        %td= user.admin? ? 'Y' : 'N'
+= will_paginate @users, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+      
