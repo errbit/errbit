@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe AppsController do
   
+  it_requires_authentication
+  
+  before do
+    sign_in Factory(:user)
+  end
+  
   describe "GET /apps" do
     it 'finds all apps' do
       3.times { Factory(:app) }

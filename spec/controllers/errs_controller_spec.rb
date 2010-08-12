@@ -2,8 +2,17 @@ require 'spec_helper'
 
 describe ErrsController do
   
+  it_requires_authentication :for => {
+    :index => :get, :all => :get, :show => :get, :resolve => :put
+  },
+  :params => {:app_id => 'dummyid', :id => 'dummyid'}
+  
   let(:app) { Factory(:app) }
   let(:err) { Factory(:err, :app => app) }
+  
+  before do
+    sign_in Factory(:user)
+  end
   
   describe "GET /errs" do
     it "gets a paginated list of unresolved errs" do
