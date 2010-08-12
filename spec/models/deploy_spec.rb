@@ -33,11 +33,13 @@ describe Deploy do
     end
     
     context 'when the app has resolve_errs_on_deploy set to true' do
-      it 'should not resolve the apps errs' do
+      it 'should resolve the apps errs that were in the same environment' do
         app = Factory(:app, :resolve_errs_on_deploy => true)
-        @errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :resolved => false, :app => app)}
-        Factory(:deploy, :app => app)
-        app.reload.errs.all?{|err| err.resolved?}.should == true
+        @prod_errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :resolved => false, :app => app, :environment => 'production')}
+        @staging_errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :resolved => false, :app => app, :environment => 'staging')}
+        Factory(:deploy, :app => app, :environment => 'production')
+        @prod_errs.all?{|err| err.reload.resolved?}.should == true
+        @staging_errs.all?{|err| err.reload.resolved?}.should == false
       end
     end
   end
