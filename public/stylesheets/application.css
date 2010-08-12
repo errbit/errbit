@@ -239,6 +239,14 @@ form textarea {
 }
 form textarea.short { height: 8em; }
 form textarea.supershort { height: 4em; }
+form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
+  box-shadow: 0px 0px 4px #69C;
+  -moz-box-shadow: 0px 0px 4px #69C;
+  -webkit-box-shadow: 0px 0px 4px #69C
+}
+form input[type=checkbox]:focus + label{
+  color: #69C;
+}
 form input[type=submit] {
   display:block; width: auto; padding: 0.5em;
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
