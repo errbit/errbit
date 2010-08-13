@@ -5,13 +5,29 @@ describe AppsController do
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
   
-  describe "GET /apps" do
-    it 'finds all apps' do
-      sign_in Factory(:user)
-      3.times { Factory(:app) }
-      apps = App.all
-      get :index
-      assigns(:apps).should == apps
+  describe "GET /apps", :focused => true do
+    context 'when logged in as an admin' do
+      it 'finds all apps' do
+        sign_in Factory(:admin)
+        3.times { Factory(:app) }
+        apps = App.all
+        get :index
+        assigns(:apps).should == apps
+      end
+    end
+    
+    context 'when logged in as a regular user' do
+      it 'finds apps the user is watching' do
+        sign_in(user = Factory(:user))
+        unwatched_app = Factory(:app)
+        watched_app1 = Factory(:app)
+        watched_app2 = Factory(:app)
+        Factory(:watcher, :user => user, :app => watched_app1)
+        Factory(:watcher, :user => user, :app => watched_app2)
+        get :index
+        assigns(:apps).should include(watched_app1, watched_app2)
+        assigns(:apps).should_not include(unwatched_app)
+      end
     end
   end
   

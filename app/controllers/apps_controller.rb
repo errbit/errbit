@@ -3,7 +3,7 @@ class AppsController < ApplicationController
   before_filter :require_admin!, :except => [:index, :show]
   
   def index
-    @apps = App.all
+    @apps = current_user.admin? ? App.all : current_user.apps.all
   end
   
   def show
