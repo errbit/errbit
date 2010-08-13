@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AppsController, :focused => true do
+describe AppsController do
   
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
