@@ -6,9 +6,8 @@
   = @app.api_key
 - content_for :action_bar do
   - if current_user.admin?
-    = link_to 'edit', edit_app_path(@app)
-    |
-    = link_to 'destroy', app_path(@app), :method => :delete, :confirm => 'Seriously?'
+    = link_to 'edit', edit_app_path(@app), :class => 'button'
+    = link_to 'destroy', app_path(@app), :method => :delete, :confirm => 'Seriously?', :class => 'button'
   
 - if @app.errs.none?
   %h3 Setup your app

@@ -1,4 +1,6 @@
 - content_for :title, 'Users'
+- content_for :action_bar do
+  %span= link_to('Add a New User', new_user_path, :class => 'add')
 
 %table
   %thead

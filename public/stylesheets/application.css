@@ -362,6 +362,7 @@ pre {
 a.button {
   display: inline-block;
   padding: 0 0.8em;
+  margin-left: 0.5em;
   color: #666;
   background-color: #EBEBEB;
   border: 1px solid #BBB;
