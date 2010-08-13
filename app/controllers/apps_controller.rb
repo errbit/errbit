@@ -1,5 +1,7 @@
 class AppsController < ApplicationController
   
+  before_filter :require_admin!, :except => [:index, :show]
+  
   def index
     @apps = App.all
   end

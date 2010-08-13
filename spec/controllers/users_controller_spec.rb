@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController do
   
   it_requires_authentication
-  it_requires_admin
+   it_requires_admin_privileges
   
   context 'Signed in as an admin' do
     before do

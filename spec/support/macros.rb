@@ -27,7 +27,7 @@ def it_requires_authentication(options = {})
   end
 end
 
-def it_requires_admin(options = {})
+def  it_requires_admin_privileges(options = {})
   default_options = {
     :for => {
       :index    => :get,
