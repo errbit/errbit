@@ -20,7 +20,11 @@ class User
   end
   
   def apps
-    App.where('watchers.user_id' => id)
+    App.where('watchers.user_id' => id.to_s)
+  end
+  
+  def watching?(app)
+    apps.all.include?(app)
   end
   
   protected

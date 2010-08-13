@@ -1,23 +1,27 @@
 class ErrsController < ApplicationController
   
+  before_filter :find_app, :except => [:index, :all]
+  
   def index
-    @errs = Err.unresolved.ordered.paginate(:page => params[:page])
+    app_scope = current_user.admin? ? App.all : current_user.apps
+    @errs = Err.for_apps(app_scope).unresolved.ordered.paginate(:page => params[:page])
   end
   
   def all
-    @errs = Err.ordered.paginate(:page => params[:page])
+    app_scope = current_user.admin? ? App.all : current_user.apps
+    @errs = Err.for_apps(app_scope).ordered.paginate(:page => params[:page])
   end
   
   def show
-    @app  = App.find(params[:app_id])
     @err      = @app.errs.find(params[:id])
-    @notices  = @err.notices.ordered.paginate(:page => (params[:notice] || @err.notices.count), :per_page => 1)
+    page      = (params[:notice] || @err.notices.count)
+    page      = 1 if page.zero?
+    @notices  = @err.notices.ordered.paginate(:page => page, :per_page => 1)
     @notice   = @notices.first
   end
   
   def resolve
-    @app  = App.find(params[:app_id])
-    @err      = @app.errs.unresolved.find(params[:id])
+    @err  = @app.errs.unresolved.find(params[:id])
     
     # Deal with bug in mogoid where find is returning an Enumberable obj
     @err = @err.first if @err.respond_to?(:first)
@@ -27,5 +31,15 @@ class ErrsController < ApplicationController
     flash[:success] = 'Great news everyone! The err has been resolved.'
     redirect_to errs_path
   end
+  
+  protected
+  
+    def find_app
+      @app = App.find(params[:app_id])
+      
+      # Mongoid Bug: could not chain: current_user.apps.find_by_id!
+      # apparently finding by 'watchers.email' and 'id' is broken
+      raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
+    end
   
 end

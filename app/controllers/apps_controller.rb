@@ -1,13 +1,13 @@
 class AppsController < ApplicationController
   
   before_filter :require_admin!, :except => [:index, :show]
+  before_filter :find_app, :except => [:index, :new, :create]
   
   def index
     @apps = current_user.admin? ? App.all : current_user.apps.all
   end
   
   def show
-    @app = current_user.admin? ? App.find(params[:id]) : current_user.apps.find_by_id!(params[:id])
     @errs  = @app.errs.paginate
   end
   
@@ -17,7 +17,6 @@ class AppsController < ApplicationController
   end
   
   def edit
-    @app = App.find(params[:id])
     @app.watchers.build if @app.watchers.none?
   end
   
@@ -32,9 +31,7 @@ class AppsController < ApplicationController
     end
   end
   
-  def update
-    @app = App.find(params[:id])
-    
+  def update    
     if @app.update_attributes(params[:app])
       flash[:success] = "Good news everyone! '#{@app.name}' was successfully updated."
       redirect_to app_path(@app)
@@ -44,9 +41,18 @@ class AppsController < ApplicationController
   end
   
   def destroy
-    @app = App.find(params[:id])
     @app.destroy
     flash[:success] = "'#{@app.name}' was successfully destroyed."
     redirect_to apps_path
   end
+  
+  protected
+  
+    def find_app
+      @app = App.find(params[:id])
+      
+      # Mongoid Bug: could not chain: current_user.apps.find_by_id!
+      # apparently finding by 'watchers.email' and 'id' is broken
+      raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
+    end
 end

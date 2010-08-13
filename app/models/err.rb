@@ -19,6 +19,7 @@ class Err
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :in_env, lambda {|env| where(:environment => env)}
+  scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
   
   def self.for(attrs)
     app = attrs.delete(:app)
