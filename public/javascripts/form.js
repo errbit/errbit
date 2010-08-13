@@ -26,7 +26,7 @@ function makeNestedItemsDestroyable(wrapper) {
 
 function appendNestedItem() {
   var addLink = $(this);
-  var nestedItem = addLink.parent().find('.nested').first().clone();
+  var nestedItem = addLink.parent().find('.nested').first().clone().show();
   nestedItem.find('input, select').each(function(){
     var input = $(this);
     var timestamp = new Date();
@@ -47,8 +47,6 @@ function removeNestedItem() {
     var destroyFlagName = inputNameExample.replace(/\[[^\]]*\]$/,'[_destroy]')
     var destroyFlag = $('<input/>').attr('name',destroyFlagName).attr('type','hidden').val('true');
     $("input[name='"+idFieldName+"']").after(destroyFlag);
-    nestedItem.hide();
-  } else {
-    nestedItem.remove();
   }
+  nestedItem.hide();
 }
