@@ -17,11 +17,11 @@
 %table.watchers
   %thead
     %tr
-      %th Email
+      %th User or Email
   %tbody
     - @app.watchers.each do |watcher|
       %tr
-        %td= watcher.email
+        %td= watcher.label
     - if @app.watchers.none?
       %tr
         %td

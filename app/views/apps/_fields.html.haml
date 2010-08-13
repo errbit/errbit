@@ -10,5 +10,10 @@
   %legend Watchers
   - f.fields_for :watchers do |w|
     %div.nested
-      = w.label :email
-      = w.text_field :email
+      %div
+        = w.label :user
+        = w.select :user_id, User.all.map{|u| [u.name,u.id]}, :include_blank => '-- Select a User --'
+      %strong.option - OR -
+      %div
+        = w.label :email
+        = w.text_field :email

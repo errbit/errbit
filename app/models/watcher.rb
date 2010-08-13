@@ -9,6 +9,10 @@ class Watcher
   
   validate :ensure_user_or_email
   
+  def label
+    user ? user.name : email
+  end
+  
   protected
   
     def ensure_user_or_email

@@ -257,6 +257,23 @@ form > div > span {
   font-size: 0.85em;
   color: #787878;
 }
+form strong.option {
+  display: block;
+  margin: 0.7em 0;
+  color: #999;
+}
+
+form .nested {
+  border-top: 1px dotted #BBB;
+  margin-top: 1.5em;
+  padding-top: 1.5em;
+}
+
+form legend + .nested {
+  border: none;
+  margin-top: 0;
+  padding-top: 0;
+}
 
 /* Tables */
 table { 
