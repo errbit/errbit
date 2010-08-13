@@ -30,7 +30,7 @@ describe DeploysController do
       post :create, :deploy => @params, :api_key => 'APIKEY'
     end
     
-    it 'sends an email notification', :focused => true do
+    it 'sends an email notification' do
       post :create, :deploy => @params, :api_key => 'APIKEY'
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)

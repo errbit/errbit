@@ -1,0 +1,7 @@
+- content_for :title, 'New User'
+
+= form_for @user do |f|
+  
+  = render 'fields', :f => f
+    
+  %div= f.submit 'Add'

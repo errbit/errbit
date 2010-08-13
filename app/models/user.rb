@@ -8,7 +8,6 @@ class User
 
   field :name
   field :admin, :type => Boolean, :default => false
-  key :name
   
   validates_presence_of :name
 

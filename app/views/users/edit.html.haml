@@ -1,0 +1,7 @@
+- content_for :title, "Edit #{@user.name}"
+
+= form_for @user do |f|
+  = @user.errors.full_messages.to_sentence
+  = render 'fields', :f => f
+    
+  %div= f.submit 'Update'
