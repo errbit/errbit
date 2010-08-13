@@ -18,7 +18,7 @@ body {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 { padding: 0.2em 0; margin-bottom: 1em; border-bottom: 1px solid #E2E2E2;}
-h1 { font-size: 2.0em; line-height: 1.2em; }
+h1 { font-size: 2.0em; line-height: 1.2em; text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;}
 h2 { font-size: 1.7em; line-height: 1.2em; }
 h3 { font-size: 1.5em; line-height: 1.2em; }
 h4 { font-size: 1.3em; line-height: 1.2em; }
@@ -115,6 +115,7 @@ a.action  { float: right; font-size: 0.9em;}
 #nav-bar li a:hover { color: #666;}
 #nav-bar li.apps a { background-image: url(images/icons/briefcase.png); }
 #nav-bar li.errs a { background-image: url(images/icons/error.png); }
+#nav-bar li.users a { background-image: url(images/icons/user.png); }
 #nav-bar li:hover { 
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
@@ -251,6 +252,52 @@ form input[type=submit] {
   display:block; width: auto; padding: 0.5em;
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
   border: none; color: #FFF; background-color: #387fc1;
+}
+form div.send_password input[type=submit],
+form div.change_password input[type=submit],
+form div.add_app input[type=submit],
+input#user_submit[type=submit] {
+  color: #666;
+  display: block; 
+  padding: 0 20px 0 20px;
+  font-size: 12px; font-weight: bold; line-height: 30px; text-decoration: none;
+  text-shadow: 1px 1px 0px #FFF; 
+  -webkit-text-shadow: 1px 1px 0px #FFF;
+  background: transparent no-repeat;
+  border: none;
+}
+form div.sign_in,
+form div.send_password,
+form div.change_password,
+form div.add_app,
+input#user_submit[type=submit] { 
+  color: #666;
+  background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border: 1px solid #bbb; 
+  display: inline-block;
+}
+form div.sign_in:hover,
+form div.send_password:hover,
+form div.change_password:hover,
+form div.add_app:hover,
+input#user_submit[type=submit]:hover { 
+  color: #666; 
+  box-shadow: 0 0 3px #69c;
+  -moz-box-shadow: 0 0 3px #69c;
+  -webkit-box-shadow: 0 0 3px #69c;
+}
+form div.sign_in button {
+  color: #666;
+  display: block; 
+  padding: 0 20px 0 40px;
+  font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
+  text-shadow: 1px 1px 0px #FFF; 
+  -webkit-text-shadow: 1px 1px 0px #FFF;
+  background: transparent url(images/icons/right-arrow.png) 5px 5px no-repeat;
+  border: none;
 }
 form > div > span {
   display: block; margin-top: 0.5em;

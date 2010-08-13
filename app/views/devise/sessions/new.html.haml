@@ -14,4 +14,5 @@
       = f.check_box :remember_me, :tabindex => 3
       = f.label :remember_me
       
-  %div= f.submit "Sign in"
+  %div.sign_in
+    %button{:type => 'submit'}= "Sign in"
