@@ -207,6 +207,10 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #flash-messages .notice, #flash-messages .success { background: transparent url(images/icons/success.png) 16px 50% no-repeat; }
 #flash-messages .error                            { background: transparent url(images/icons/error.png)   16px 50% no-repeat; }
+#flash-messages .alert {
+  background: #ffc url(images/icons/warning.png) 10px 7px no-repeat;
+  border-color: #e4bb69;
+}
 
 /* Forms */
 form {
