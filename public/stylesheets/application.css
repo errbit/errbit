@@ -205,8 +205,18 @@ a.action  { float: right; font-size: 0.9em;}
   background-color: #F9F9F9;
   line-height: 1em;
 }
-#flash-messages .notice, #flash-messages .success { background: transparent url(images/icons/success.png) 16px 50% no-repeat; }
-#flash-messages .error                            { background: transparent url(images/icons/error.png)   16px 50% no-repeat; }
+#flash-messages .notice {
+  background-color: #b5eeff;
+  border: 1px solid #6cf;
+}
+#flash-messages li.success { 
+  background: #cfc url(images/icons/success.png) 16px 50% no-repeat;
+  border: 1px solid #6c3;
+}
+#flash-messages li.error { 
+  background: #fcc url(images/icons/error.png)   16px 50% no-repeat;
+  border: 1px solid #f99;
+}
 #flash-messages .alert {
   background: #ffc url(images/icons/warning.png) 10px 7px no-repeat;
   border-color: #e4bb69;
@@ -231,7 +241,7 @@ form label {
 }
 form label.inline { display: inline; }
 form .checkbox label { display: inline; }
-form .required label { color: #BF3838;}
+form .required label { color: #990000;}
 form input[type=text], form input[type=password] {
   width: 96%; padding: 0.8em;
   font-size: 1em;
@@ -329,7 +339,7 @@ form legend + .nested {
 /* Tables */
 table { 
   width: 100%; 
-  border: 1px solid #C6C6C6; 
+  border: 1px solid #C6C6C6;
   margin-bottom: 1.5em; 
   border-collapse: separate;
 }
@@ -349,6 +359,9 @@ table th { background-color: #E2E2E2; font-weight: bold; text-transform: upperca
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
 table .main { width: 100%; }
 
+table.single_user {
+  border-top: none;
+}
 /* Code */
 pre {
   padding: 0.8em;
@@ -443,10 +456,11 @@ a.button {
   line-height: 30px;
 }
 a:hover.button {
-  box-shadow: 0px 0px 4px #69C;
-  -moz-box-shadow: 0px 0px 4px #69C;
-  -webkit-box-shadow: 0px 0px 4px #69C;
+  box-shadow: 0px 0px 4px #ccc;
+  -moz-box-shadow: 0px 0px 4px #ccc;
+  -webkit-box-shadow: 0px 0px 4px #ccc;
   text-decoration: none;
+  background-color: #eee;
 }
 a.button.active {
   border-color: #fff; 
