@@ -8,7 +8,7 @@
       %th Count
   %tbody
     - errs.each do |err|
-      %tr
+      %tr{:class => err.resolved? ? 'resolved' : 'unresolved'}
         %td.app
           = err.app.name
           %span.environment= err.environment

@@ -476,6 +476,11 @@ table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
 }
+table.errs tr.resolved td > * {
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  -webkit-opacity: 0.5;
+}
 
 /* Notices Pagination */
 .notice-pagination {

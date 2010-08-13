@@ -16,11 +16,14 @@ class User
   # Mongoid doesn't seem to currently support
   # referencing embedded documents
   def watchers
-    App.all.map(&:watchers).flatten.select {|w| w.user_id == id}
+    App.all.map(&:watchers).flatten.select {|w| w.user_id.to_s == id.to_s}
   end
   
   def apps
-    App.where('watchers.user_id' => id.to_s)
+    # This is completely wasteful but became necessary
+    # due to bugs in Mongoid 
+    app_ids = watchers.map {|w| w.app.id}
+    App.any_in(:_id => app_ids)
   end
   
   def watching?(app)

@@ -21,7 +21,7 @@ class ErrsController < ApplicationController
   end
   
   def resolve
-    @err  = @app.errs.unresolved.find(params[:id])
+    @err  = @app.errs.find(params[:id])
     
     # Deal with bug in mogoid where find is returning an Enumberable obj
     @err = @err.first if @err.respond_to?(:first)

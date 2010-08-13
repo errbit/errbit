@@ -123,15 +123,13 @@ describe ErrsController do
       
       @err = Factory(:err)
       App.stub(:find).with(@err.app.id).and_return(@err.app)
-      @err.app.errs.stub(:unresolved).
-        and_return(stub('proxy', :find => @err))
+      @err.app.errs.stub(:find).and_return(@err)
       @err.stub(:resolve!)
     end
     
     it 'finds the app and the err' do
       App.should_receive(:find).with(@err.app.id).and_return(@err.app)
-      @err.app.errs.should_receive(:unresolved).
-        and_return(mock('proxy', :find => @err))
+      @err.app.errs.should_receive(:find).and_return(@err)
       put :resolve, :app_id => @err.app.id, :id => @err.id
       assigns(:app).should == @err.app
       assigns(:err).should == @err

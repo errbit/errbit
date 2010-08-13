@@ -22,8 +22,7 @@ class App
   
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)
-    raise app_id.inspect
-    where(:id => app_id).first || raise(Mongoid::Errors::DocumentNotFound.new(self,app_id))
+    where(:_id => app_id).first || raise(Mongoid::Errors::DocumentNotFound.new(self,app_id))
   end
   
   def self.find_by_api_key!(key)
