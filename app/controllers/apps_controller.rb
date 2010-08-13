@@ -7,7 +7,7 @@ class AppsController < ApplicationController
   end
   
   def show
-    @app = App.find(params[:id])
+    @app = current_user.admin? ? App.find(params[:id]) : current_user.apps.find_by_id!(params[:id])
     @errs  = @app.errs.paginate
   end
   

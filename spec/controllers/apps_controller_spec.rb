@@ -5,7 +5,7 @@ describe AppsController do
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
   
-  describe "GET /apps", :focused => true do
+  describe "GET /apps" do
     context 'when logged in as an admin' do
       it 'finds all apps' do
         sign_in Factory(:admin)
@@ -32,11 +32,27 @@ describe AppsController do
   end
   
   describe "GET /apps/:id" do
-    it 'finds the app' do
-      sign_in Factory(:user)
-      app = Factory(:app)
-      get :show, :id => app.id
-      assigns(:app).should == app
+    context 'logged in as an admin' do
+      it 'finds the app' do
+        sign_in Factory(:admin)
+        app = Factory(:app)
+        get :show, :id => app.id
+        assigns(:app).should == app
+      end
+    end
+    
+    context 'logged in as a user' do
+      it 'finds the app if the user is watching it' do
+        
+      end
+      
+      it 'does not find the app if the user is not watching it' do
+        sign_in Factory(:user)
+        app = Factory(:app)
+        lambda { 
+          get :show, :id => app.id
+        }.should raise_error(Mongoid::Errors::DocumentNotFound)
+      end
     end
   end
   

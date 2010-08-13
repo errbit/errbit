@@ -20,6 +20,11 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
   
+  # Mongoid Bug: find(id) on association proxies returns an Enumerator
+  def self.find_by_id!(app_id)
+    where(:id => app_id).first || raise(Mongoid::Errors::DocumentNotFound.new(self,key))
+  end
+  
   def self.find_by_api_key!(key)
     where(:api_key => key).first || raise(Mongoid::Errors::DocumentNotFound.new(self,key))
   end
