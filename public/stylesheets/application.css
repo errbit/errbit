@@ -547,6 +547,11 @@ table.errs tr.resolved td > * {
   -webkit-opacity: 0.5;
 }
 
+/* Resolve Errs */
+#action-bar a.resolve {
+  background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
+}
+
 /* Notices Pagination */
 .notice-pagination {
   float: left;
