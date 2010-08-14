@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     
-    flash[:success[ = "That's sad. #{@user.name} is no longer part of your team."
+    flash[:success] = "That's sad. #{@user.name} is no longer part of your team."
     redirect_to users_path
   end
   

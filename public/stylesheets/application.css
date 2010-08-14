@@ -237,11 +237,12 @@ form fieldset legend {
 }
 form label {
   font-weight: bold; text-transform: uppercase; line-height: 1.6em;
-  display: block; 
+  display: inline-block; 
 }
 form label.inline { display: inline; }
 form .checkbox label { display: inline; }
-form .required label { color: #990000;}
+form .required label { padding-right: 20px; background: transparent url(images/icons/required.png) right 50% no-repeat; }
+form .field_with_errors label { color: #900; }
 form input[type=text], form input[type=password] {
   width: 96%; padding: 0.8em;
   font-size: 1em;
@@ -267,24 +268,7 @@ form input[type=submit] {
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
   border: none; color: #FFF; background-color: #387fc1;
 }
-form div.send_password input[type=submit],
-form div.change_password input[type=submit],
-form div.add_app input[type=submit],
-input#user_submit[type=submit] {
-  color: #666;
-  display: block; 
-  padding: 0 20px 0 20px;
-  font-size: 12px; font-weight: bold; line-height: 30px; text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF; 
-  -webkit-text-shadow: 1px 1px 0px #FFF;
-  background: transparent no-repeat;
-  border: none;
-}
-form div.sign_in,
-form div.send_password,
-form div.change_password,
-form div.add_app,
-input#user_submit[type=submit] { 
+form div.buttons { 
   color: #666;
   background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
   border-radius: 50px;
@@ -293,25 +277,25 @@ input#user_submit[type=submit] {
   border: 1px solid #bbb; 
   display: inline-block;
 }
-form div.sign_in:hover,
-form div.send_password:hover,
-form div.change_password:hover,
-form div.add_app:hover,
-input#user_submit[type=submit]:hover { 
+form div.buttons:hover { 
   color: #666; 
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
-form div.sign_in button {
+form div.buttons input, form div.buttons button {
+  padding: 0 20px;
   color: #666;
-  display: block; 
-  padding: 0 20px 0 40px;
-  font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF; 
+  background: none;
+  font-size: 14px; font-weight: bold; line-height: 36px; text-decoration: none;
+  text-shadow: 1px 1px 0px #FFF;
+  -moz-text-shadow: 1px 1px 0px #FFF;
   -webkit-text-shadow: 1px 1px 0px #FFF;
-  background: transparent url(images/icons/right-arrow.png) 5px 5px no-repeat;
   border: none;
+}
+form div.buttons button.sign_in {
+  padding-left: 40px;
+  background: transparent url(images/icons/right-arrow.png) 3px 3px no-repeat;
 }
 form > div > span {
   display: block; margin-top: 0.5em;
@@ -334,6 +318,21 @@ form legend + .nested {
   border: none;
   margin-top: 0;
   padding-top: 0;
+}
+
+form .error-messages {
+  padding: 13px;
+  background: #fcc;
+  border: 1px solid #f99;
+}
+
+form .error-messages h2 {
+  font-size: 1.2em;
+  border-color: #F99;
+}
+form .error-messages ul {
+  margin-left: 2em;
+  list-style-type: square;
 }
 
 /* Tables */

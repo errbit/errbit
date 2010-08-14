@@ -20,7 +20,7 @@ function makeNestedItemsDestroyable(wrapper) {
     var nestedItem = $(this);
     var destroyLink = $('<a/>').text('remove').addClass('remove-nested');
     destroyLink.css('float','right');
-    nestedItem.find('label').first().prepend(destroyLink);
+    nestedItem.find('label').first().before(destroyLink);
   })
 }
 

@@ -1,7 +1,7 @@
 - content_for :title, "Change your password"
 
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
+  = errors_for resource
   = f.hidden_field :reset_password_token
   .required
     = f.label :password, 'New password'
@@ -9,4 +9,4 @@
   .required
     = f.label :password_confirmation, 'One more time'
     = f.password_field :password_confirmation
-  %div.change_password= f.submit "Change my password"
+  %div.buttons= f.submit "Change my password"
