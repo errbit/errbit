@@ -2,6 +2,17 @@
 
 $(function(){
   activateTabbedPanels();
+  
+  $('#watcher_name').live("click", function() {
+    $(this).closest('form').find('.show').removeClass('show');
+    $('#app_watchers_attributes_0_user_id').addClass('show');
+  });
+
+  $('#watcher_email').live("click", function() {
+    $(this).closest('form').find('.show').removeClass('show');
+    $('#app_watchers_attributes_0_email').addClass('show');
+  });
+
 });
 
 function activateTabbedPanels() {
