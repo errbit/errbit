@@ -122,7 +122,7 @@ describe UsersController do
       
       it "sets a message to display" do
         delete :destroy, :id => @user.id
-        request.flash[:success[.should include('no longer part of your team')
+        request.flash[:success].should include('no longer part of your team')
       end
     end
     
