@@ -1,3 +1,12 @@
+# Mongoid Configuration
+# =====================
+#
+# Copy this file to config/mongoid.yml and
+# modify it accordingly. This file will automatically
+# be copied to shared/config on the server when
+# `cap deploy:setup` is ran the first time. Be sure
+# to place production specific settings there
+
 defaults: &defaults
   host: localhost
   # slaves:
