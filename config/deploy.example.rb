@@ -1,12 +1,17 @@
-require 'config/environment'
+# Deploy Config
+# =============
+#
+# Copy this file to config/deploy.rb and customize it as needed.
+# Then run `cap deploy:setup` to set up your server and finally
+# `cap deploy` whenever you would like to deploy Errbit. Refer
+# to the Readme for more information.
 
 set :application, "errbit"
 set :repository,  "http://github.com/jdpace/errbit.git"
 
-set :scm, :git
-set :scm_verbose, true
-set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't determine current branch") }
-set :branch, defer { current_branch }
+role :web, "errbit.example.com"
+role :app, "errbit.example.com"
+role :db,  "errbit.example.com", :primary => true
 
 set :user, :deploy
 set :use_sudo, false
@@ -19,9 +24,10 @@ set :copy_cache, true
 set :copy_exclude, [".git"]
 set :copy_compression, :bz2
 
-role :web, Errbit::Config.host
-role :app, Errbit::Config.host
-role :db,  Errbit::Config.host, :primary => true
+set :scm, :git
+set :scm_verbose, true
+set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't determine current branch") }
+set :branch, defer { current_branch }
 
 after 'deploy:update_code', 'bundler:install'
 
