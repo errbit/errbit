@@ -29,7 +29,7 @@ set :scm_verbose, true
 set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't determine current branch") }
 set :branch, defer { current_branch }
 
-after 'deploy:update_code', 'bundler:install'
+after 'deploy:update_code', 'errbit:symlink_configs', 'bundler:install'
 
 namespace :deploy do
   task :start do ; end
@@ -49,5 +49,22 @@ namespace :bundler do
   task :install, :rolse => :app do
     bundler.symlink_vendor
     run("cd #{release_path} && bundle install vendor/bundler_gems --without development test")
+  end
+end
+
+namespace :errbit do
+  task :setup_configs do
+    shared_configs = File.join(shared_path,'config')
+    run "mkdir -p #{shared_configs}"
+    run "if [ ! -f #{shared_configs}/config.yml ]; then cp #{latest_release}/config/config.example.yml #{shared_configs}/config.yml; fi"
+    run "if [ ! -f #{shared_configs}/mongoid.yml ]; then cp #{latest_release}/config/mongoid.example.yml #{shared_configs}/mongoid.yml; fi"
+  end
+  
+  task :symlink_configs do
+    errbit.setup_configs
+    shared_configs = File.join(shared_path,'config')
+    release_configs = File.join(release_path,'config')
+    run("ln -nfs #{shared_configs}/config.yml #{release_configs}/config.yml")
+    run("ln -nfs #{shared_configs}/mongoid.yml #{release_configs}/mongoid.yml")
   end
 end
