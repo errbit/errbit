@@ -1,4 +1,0 @@
-host: errbit.example.com
-
-email_at_notices: [1, 10, 100]
-email_from: errbit@example.com
