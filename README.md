@@ -35,6 +35,5 @@ Deploy:
 TODO
 ----
 
-Add form.error_messages
 Add a deployment view
 Add ability for watchers to be configured for types of notifications they should receive
