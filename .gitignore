@@ -4,3 +4,4 @@ log/*.log
 tmp/**/*
 config/config.yml
 config/deploy.rb
+config/mongoid.yml

@@ -1,3 +1,6 @@
+puts "Seeding database"
+puts "-------------------------------"
+
 # Create an initial Admin User
 admin_email = "errbit@#{Errbit::Config.host}"
 admin_pass  = 'password'
