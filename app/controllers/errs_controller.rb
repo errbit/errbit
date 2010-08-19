@@ -15,7 +15,7 @@ class ErrsController < ApplicationController
   def show
     @err      = @app.errs.find(params[:id])
     page      = (params[:notice] || @err.notices.count)
-    page      = 1 if page.zero?
+    page      = 1 if page.to_i.zero?
     @notices  = @err.notices.ordered.paginate(:page => page, :per_page => 1)
     @notice   = @notices.first
   end
