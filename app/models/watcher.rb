@@ -13,6 +13,10 @@ class Watcher
     user ? user.name : email
   end
   
+  def address
+    user.try(:email) || email
+  end
+  
   protected
   
     def ensure_user_or_email

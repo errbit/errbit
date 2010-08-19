@@ -6,7 +6,7 @@ class Mailer < ActionMailer::Base
     @app  = notice.err.app
     
     mail({
-      :to       => @app.watchers.map(&:email),
+      :to       => @app.watchers.map(&:address),
       :subject  => "[#{@app.name}] #{@notice.err.message}"
     })
   end
@@ -16,7 +16,7 @@ class Mailer < ActionMailer::Base
     @app  = deploy.app
     
     mail({
-      :to       => @app.watchers.map(&:email),
+      :to       => @app.watchers.map(&:address),
       :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
     })
   end
