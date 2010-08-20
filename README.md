@@ -73,6 +73,13 @@ TODO
 * Add a deployment view
 * Add ability for watchers to be configured for types of notifications they should receive
 
+Special Thanks
+--------------
+
+* [Michael Parenteau](http://michaelparenteau.com) - For rocking the Errbit design and providing a great user experience.
+* [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
+* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Hoptoad](http://hoptoadapp.com).
+
 Contributing
 ------------
  
