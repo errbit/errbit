@@ -8,10 +8,6 @@
   - if current_user.admin?
     = link_to 'edit', edit_app_path(@app), :class => 'button'
     = link_to 'destroy', app_path(@app), :method => :delete, :confirm => 'Seriously?', :class => 'button'
-  
-- if @app.errs.none?
-  %h3 Setup your app
-  = render 'configuration_instructions', :app => @app
 
 %h3 Watchers
 %table.watchers
@@ -27,5 +23,9 @@
         %td
           %em Sadly, no one is watching this app
 
-%h3 Errs
-= render 'errs/table', :errs => @errs
+- if @app.errs.any?
+  %h3 Errs
+  = render 'errs/table', :errs => @errs
+- else
+  %h3 No errs have been caught yet, make sure you setup your app
+  = render 'configuration_instructions', :app => @app
