@@ -21,5 +21,5 @@
     - if errs.none?
       %tr
         %td{:colspan => (@app ? 5 : 6)}
-          %em No errs have been caught, yet
+          %em No errs here
 = will_paginate @errs, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
