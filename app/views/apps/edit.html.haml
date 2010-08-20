@@ -1,5 +1,5 @@
 - content_for :title, 'Edit App'
-- content_for :action_bar, link_to('cancel', app_path(@app))
+- content_for :action_bar, link_to('cancel', app_path(@app), :class => 'button')
 
 = form_for @app do |f|
   

@@ -1,4 +1,5 @@
 - content_for :title, "Edit #{@user.name}"
+- content_for :action_bar, link_to('cancel', user_path(@user), :class => 'button')
 
 = form_for @user do |f|
   = @user.errors.full_messages.to_sentence
