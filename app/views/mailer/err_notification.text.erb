@@ -2,6 +2,6 @@ An err has just occurred in <%= @notice.err.environment %>: <%= @notice.err.mess
 
 This err has occurred <%= pluralize @notice.err.notices.count, 'time' %>. You should really look into it here:
 
-  <%= app_err_notice_url(@app, @notice.err, @notice) %>
+  <%= app_err_url(@app, @notice.err) %>
   
 <%= render :partial => 'signature' %>
