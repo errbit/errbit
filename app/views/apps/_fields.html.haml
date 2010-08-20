@@ -14,9 +14,9 @@
     %div.watcher.nested
       %div.choose
         = w.radio_button :watcher_type, :user
-        = label_tag :watcher_type_user, 'User'
+        = label_tag :watcher_type_user, 'User', :for => label_for_attr(w, 'watcher_type_user')
         = w.radio_button :watcher_type, :email
-        = label_tag :watcher_type_email, 'Email Address'
+        = label_tag :watcher_type_email, 'Email Address', :for => label_for_attr(w, 'watcher_type_email')
       %div.user{:class => w.object.email.blank? ? 'choosen' : nil}
         = w.select :user_id, User.all.map{|u| [u.name,u.id.to_s]}, :include_blank => '-- Select a User --'
       %div.email{:class => w.object.email.present? ? 'choosen' : nil}

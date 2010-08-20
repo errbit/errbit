@@ -30,14 +30,19 @@ function makeNestedItemsDestroyable(wrapper) {
 function appendNestedItem() {
   var addLink = $(this);
   var nestedItem = addLink.parent().find('.nested').first().clone().show();
+  var timestamp = new Date();
+  timestamp = timestamp.valueOf();
+  
   nestedItem.find('input, select').each(function(){
     var input = $(this);
-    var timestamp = new Date();
-    timestamp = timestamp.valueOf();
     input.attr('id', input.attr('id').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
     input.attr('name', input.attr('name').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
     if(input.attr('type') != 'radio')
       input.val('');
+  });
+  nestedItem.find('label').each(function(){
+    var label = $(this);
+    label.attr('for', label.attr('for').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
   });
   addLink.before(nestedItem);
 }
