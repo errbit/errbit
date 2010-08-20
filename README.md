@@ -1,5 +1,21 @@
-Errbit: The open source self-hosted Hoptoad Server
-=====================================================
+Errbit: The open source self-hosted error catcher
+=================================================
+
+Errbit is an open source, self-hosted error catcher. It is [Hoptoad](http://hoptoadapp.com) 
+API compliant so you can just point the Hoptoad notifier at your Errbit server if you are 
+already using Hoptoad.
+
+Errbit may be a good fit for you if:
+
+* Your exceptions may contain sensitive data that you don't want sitting on someone else's server
+* Your application is behind a firewall
+* You'd like to brand your error catcher
+* You want to add customer features to your error catcher
+* You're crazy and love managing servers
+
+If this doesn't sound like you, you should probably stick with [Hoptoad](http://hoptoadapp.com).
+The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
+They have a free package and even offer a *"Hoptoad behind your firewall"* solution.
 
 Installation
 ------------
@@ -7,12 +23,12 @@ Installation
 *Note*: This app is intended for people with experience deploying and maintining
 Rails applications. If you're uncomfortable with any step below then Errbit is not
 for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at 
-[Thoughbot](http://thoughtbot.com), which Errbit is based on.
+[Thoughtbot](http://thoughtbot.com), which Errbit is based on.
 
 **Set your local box or server(Ubuntu):**
 
   1. Install MongoDB
-    * Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages) then:
+    * Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
       
             aptitude update
             aptitude install mongodb
