@@ -14,7 +14,7 @@ describe User do
     
     it 'has many watchers' do
       user = Factory(:user)
-      watcher = Factory(:watcher, :user => user, :email => nil)
+      watcher = Factory(:user_watcher, :user => user)
       user.watchers.should_not be_empty
       user.watchers.should include(watcher)
     end
@@ -22,7 +22,7 @@ describe User do
     it "destroys any related watchers when it is destroyed" do
       user = Factory(:user)
       app  = Factory(:app)
-      watcher = Factory(:watcher, :app => app, :user => user, :email => nil)
+      watcher = Factory(:user_watcher, :app => app, :user => user)
       user.watchers.should_not be_empty
       user.destroy
       app.reload.watchers.should_not include(watcher)
@@ -32,7 +32,7 @@ describe User do
       user = Factory(:user)
       watched_app  = Factory(:app)
       unwatched_app = Factory(:app)
-      watcher = Factory(:watcher, :app => watched_app, :user => user, :email => nil)
+      watcher = Factory(:user_watcher, :app => watched_app, :user => user)
       user.apps.all.should include(watched_app)
       user.apps.all.should_not include(unwatched_app)
     end

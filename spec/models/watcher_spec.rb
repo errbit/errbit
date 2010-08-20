@@ -15,6 +15,7 @@ describe Watcher do
       watcher.should_not be_valid
       
       watcher.user = Factory(:user)
+      watcher.watcher_type = 'user'
       watcher.should be_valid
     end
   end
@@ -22,12 +23,12 @@ describe Watcher do
   context 'address' do
     it "returns the user's email address if there is a user" do
       user = Factory(:user, :email => 'foo@bar.com')
-      watcher = Factory(:watcher, :user => user)
+      watcher = Factory(:user_watcher, :user => user)
       watcher.address.should == 'foo@bar.com'
     end
     
     it "returns the email if there is no user" do
-      watcher = Factory(:watcher, :email => 'widgets@acme.com', :user => nil)
+      watcher = Factory(:watcher, :email => 'widgets@acme.com')
       watcher.address.should == 'widgets@acme.com'
     end
   end

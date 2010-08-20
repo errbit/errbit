@@ -28,8 +28,8 @@ describe ErrsController do
       it 'gets a paginated list of unresolved errs for the users apps' do
         sign_in(user = Factory(:user))
         unwatched_err = Factory(:err)
-        watched_unresolved_err = Factory(:err, :app => Factory(:watcher, :user => user).app, :resolved => false)
-        watched_resolved_err = Factory(:err, :app => Factory(:watcher, :user => user).app, :resolved => true)
+        watched_unresolved_err = Factory(:err, :app => Factory(:user_watcher, :user => user).app, :resolved => false)
+        watched_resolved_err = Factory(:err, :app => Factory(:user_watcher, :user => user).app, :resolved => true)
         get :index
         assigns(:errs).should include(watched_unresolved_err)
         assigns(:errs).should_not include(unwatched_err, watched_resolved_err)
@@ -56,8 +56,8 @@ describe ErrsController do
       it 'gets a paginated list of all errs for the users apps' do
         sign_in(user = Factory(:user))
         unwatched_err = Factory(:err)
-        watched_unresolved_err = Factory(:err, :app => Factory(:watcher, :user => user).app, :resolved => false)
-        watched_resolved_err = Factory(:err, :app => Factory(:watcher, :user => user).app, :resolved => true)
+        watched_unresolved_err = Factory(:err, :app => Factory(:user_watcher, :user => user).app, :resolved => false)
+        watched_resolved_err = Factory(:err, :app => Factory(:user_watcher, :user => user).app, :resolved => true)
         get :all
         assigns(:errs).should include(watched_resolved_err, watched_unresolved_err)
         assigns(:errs).should_not include(unwatched_err)
@@ -100,7 +100,7 @@ describe ErrsController do
         sign_in(@user = Factory(:user))
         @unwatched_err = Factory(:err)
         @watched_app = Factory(:app)
-        @watcher = Factory(:watcher, :user => @user, :app => @watched_app)
+        @watcher = Factory(:user_watcher, :user => @user, :app => @watched_app)
         @watched_err = Factory(:err, :app => @watched_app)
       end
       

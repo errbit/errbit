@@ -22,8 +22,8 @@ describe AppsController do
         unwatched_app = Factory(:app)
         watched_app1 = Factory(:app)
         watched_app2 = Factory(:app)
-        Factory(:watcher, :user => user, :app => watched_app1)
-        Factory(:watcher, :user => user, :app => watched_app2)
+        Factory(:user_watcher, :user => user, :app => watched_app1)
+        Factory(:user_watcher, :user => user, :app => watched_app2)
         get :index
         assigns(:apps).should include(watched_app1, watched_app2)
         assigns(:apps).should_not include(unwatched_app)

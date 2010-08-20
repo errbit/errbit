@@ -12,8 +12,14 @@ Factory.define(:app_with_watcher, :parent => :app) do |p|
 end
 
 Factory.define(:watcher) do |w|
-  w.app {|p| p.association :app}
+  w.association :app
+  w.watcher_type 'email'
   w.email   { Factory.next :email }
+end
+
+Factory.define(:user_watcher, :parent => :watcher) do |w|
+  w.watcher_type 'user'
+  w.association :user
 end
 
 Factory.define(:deploy) do |d|
