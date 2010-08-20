@@ -1,5 +1,8 @@
 $(function(){
   activateNestedForms();
+  
+  if($('div.watcher.nested').length)
+    activateWatcherTypeSelector();
 });
 
 function activateNestedForms() {
@@ -33,7 +36,8 @@ function appendNestedItem() {
     timestamp = timestamp.valueOf();
     input.attr('id', input.attr('id').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
     input.attr('name', input.attr('name').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
-    input.val('');
+    if(input.attr('type') != 'radio')
+      input.val('');
   });
   addLink.before(nestedItem);
 }
@@ -49,4 +53,13 @@ function removeNestedItem() {
     $("input[name='"+idFieldName+"']").after(destroyFlag);
   }
   nestedItem.hide();
+}
+
+function activateWatcherTypeSelector() {
+  $('div.watcher input[name*=watcher_type]').live('click', function(){
+    var choosen = $(this).val();
+    var wrapper = $(this).closest('.nested');
+    wrapper.find('div.choosen').removeClass('choosen');
+    wrapper.find('div.'+choosen).addClass('choosen');
+  });
 }

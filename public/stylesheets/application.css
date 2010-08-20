@@ -486,6 +486,18 @@ a.button.active {
   margin-right: 14px;
 }
 
+/* Watchers Form */
+div.nested.watcher .user, div.nested.watcher .email {
+  display: none;
+}
+div.nested.watcher .choosen {
+  display: block;
+}
+div.nested.watcher .choose {
+  margin-bottom: 0.5em;
+}
+
+
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
