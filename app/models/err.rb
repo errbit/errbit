@@ -23,7 +23,7 @@ class Err
   
   def self.for(attrs)
     app = attrs.delete(:app)
-    app.errs.unresolved.where(attrs).first || app.errs.create!(attrs)
+    app.errs.where(attrs).first || app.errs.create!(attrs)
   end
   
   def resolve!

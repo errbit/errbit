@@ -34,6 +34,7 @@ class Notice
       :environment  => hoptoad_notice['server-environment']['environment-name'],
       :fingerprint  => hoptoad_notice['fingerprint']
     })
+    err.update_attributes(:resolved => false) if err.resolved?
     
     err.notices.create!({
       :message            => hoptoad_notice['error']['message'],

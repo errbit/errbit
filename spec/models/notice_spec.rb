@@ -42,9 +42,24 @@ describe Notice do
         :action       => 'verify',
         :environment  => 'development',
         :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Err.new)
+      }).and_return(err = Factory(:err))
       err.notices.stub(:create!)
       @notice = Notice.from_xml(@xml)
+    end
+    
+    it 'marks the err as unresolve if it was previously resolved' do
+      Err.should_receive(:for).with({
+        :app      => @app,
+        :klass        => 'HoptoadTestingException',
+        :component    => 'application',
+        :action       => 'verify',
+        :environment  => 'development',
+        :fingerprint  => 'fingerprintdigest'
+      }).and_return(err = Factory(:err, :resolved => true))
+      err.should be_resolved
+      @notice = Notice.from_xml(@xml)
+      @notice.err.should == err
+      @notice.err.should_not be_resolved
     end
     
     it 'should create a new notice' do
