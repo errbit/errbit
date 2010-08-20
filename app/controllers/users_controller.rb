@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   respond_to :html
   
-  before_filter :require_admin!
+  before_filter :require_admin!, :except => [:edit, :update]
+  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :require_user_edit_priviledges, :only => [:edit, :update]
   
   def index
     @users = User.paginate(:page => params[:page])
@@ -16,7 +18,6 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
   end
   
   def create
@@ -37,7 +38,8 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
     
-    @user = User.find(params[:id])
+    # Set protected attributes
+    @user.admin = params[:user][:admin] if current_user.admin?
     
     if @user.update_attributes(params[:user])
       flash[:success] = "#{@user.name}'s information was successfully updated"
@@ -48,11 +50,21 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     
     flash[:success] = "That's sad. #{@user.name} is no longer part of your team."
     redirect_to users_path
   end
+  
+  protected
+  
+    def find_user
+      @user = User.find(params[:id])
+    end
+
+    def require_user_edit_priviledges
+      can_edit = current_user == @user || current_user.admin?
+      redirect_to(root_path) and return(false) unless can_edit
+    end
   
 end

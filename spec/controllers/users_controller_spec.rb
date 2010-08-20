@@ -3,7 +3,61 @@ require 'spec_helper'
 describe UsersController do
   
   it_requires_authentication
-   it_requires_admin_privileges
+  it_requires_admin_privileges :for => {
+    :index    => :get,
+    :show     => :get,
+    :new      => :get,
+    :create   => :post,
+    :destroy  => :delete
+  }
+  
+  context 'Signed in as a regular user' do
+    before do
+      sign_in @user = Factory(:user)
+    end
+    
+    context "GET /users/:other_id/edit" do
+      it "redirects to the home page" do
+        get :edit, :id => Factory(:user).id
+        response.should redirect_to(root_path)
+      end
+    end
+    
+    context "GET /users/:my_id/edit" do
+      it 'finds the user' do
+        get :edit, :id => @user.id
+        assigns(:user).should == @user
+      end
+    end
+    
+    context "PUT /users/:other_id" do
+      it "redirects to the home page" do
+        put :update, :id => Factory(:user).id
+        response.should redirect_to(root_path)
+      end
+    end
+    
+    context "PUT /users/:my_id/id" do
+      context "when the update is successful" do        
+        it "sets a message to display" do
+          put :update, :id => @user.to_param, :user => {:name => 'Kermit'}
+          request.flash[:success].should include('updated')
+        end
+        
+        it "redirects to the user's page" do
+          put :update, :id => @user.to_param, :user => {:name => 'Kermit'}
+          response.should redirect_to(user_path(@user))
+        end
+      end
+      
+      context "when the update is unsuccessful" do        
+        it "renders the edit page" do
+          put :update, :id => @user.to_param, :user => {:name => nil}
+          response.should render_template(:edit)
+        end
+      end
+    end
+  end
   
   context 'Signed in as an admin' do
     before do

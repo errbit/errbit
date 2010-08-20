@@ -63,6 +63,7 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #header #session-links li {
   float: right;
+  margin-left: 10px;
   color: #FFF;
   background-color: #000;
   border-radius: 6px;
@@ -87,6 +88,9 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #header #session-links #sign-out {
   background: transparent url(images/icons/bullet-red-sm.png) 12px 50% no-repeat;
+}
+#header #session-links #edit-profile {
+  padding-left: 10px;
 }
 
 /* Navigation */

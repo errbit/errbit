@@ -15,7 +15,8 @@
 .required
   = f.label :password_confirmation
   = f.password_field :password_confirmation
-  
-.checkbox
-  = f.check_box :admin
-  = f.label :admin, 'Admin?'
+
+- if current_user.admin?
+  .checkbox
+    = f.check_box :admin
+    = f.label :admin, 'Admin?'

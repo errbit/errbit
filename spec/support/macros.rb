@@ -9,7 +9,7 @@ def it_requires_authentication(options = {})
       :update   => :put,
       :destroy  => :delete
     },
-    :params => {:id => 'dummyid'}
+    :params => {:id => '4c6c760494df2a18cc000015'}
   }
   options.reverse_merge!(default_options)
   

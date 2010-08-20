@@ -13,6 +13,8 @@ class User
   
   validates_presence_of :name
   
+  attr_protected :admin
+  
   # Mongoid doesn't seem to currently support
   # referencing embedded documents
   def watchers
