@@ -205,11 +205,14 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Flash Messages */
 #flash-messages li {
-  padding: 13px 45px; margin-bottom:25px; border: 1px solid #C6C6C6;
+  padding: 13px 45px; 
+  margin-bottom:25px; 
+  border: 1px solid #C6C6C6;
   background-color: #F9F9F9;
   line-height: 1em;
 }
-#flash-messages .notice {
+#flash-messages li.notice {
+  padding-left: 20px; 
   background-color: #b5eeff;
   border: 1px solid #6cf;
 }
