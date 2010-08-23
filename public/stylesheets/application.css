@@ -294,6 +294,8 @@ form div.buttons input, form div.buttons button {
   padding: 0 20px;
   color: #666;
   background: none;
+  display: inline-block;
+  height: 36px;
   font-size: 14px; font-weight: bold; line-height: 36px; text-decoration: none;
   text-shadow: 1px 1px 0px #FFF;
   -moz-text-shadow: 1px 1px 0px #FFF;
