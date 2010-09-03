@@ -67,6 +67,29 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
         
         cap deploy:setup deploy
 
+**Deploying to Heroku:**
+
+  1. Clone the repository
+
+        git clone http://github.com/jdpace/errbit.git
+
+  2. Create & configure for Heroku
+
+        gem install heroku
+        heroku create
+        heroku addons:add mongohq:free
+        heroku addons:add sendgrid:free
+        heroku config:add HEROKU=true
+        heroku config:add ERRBIT_HOST=some-hostname.example.com
+        heroku config:add ERRBIT_EMAIL_FROM=example@example.com
+        git push heroku master
+
+  3. Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
+
+        heroku rake db:seed
+
+  4. Enjoy!
+
 TODO
 ----
 
