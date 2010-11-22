@@ -18,8 +18,7 @@ RSpec.configure do |config|
   config.alias_example_to :fit, :focused => true
   
   config.before(:each) do
-    DatabaseCleaner.orm = "mongoid" 
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner.clean
   end
 end
