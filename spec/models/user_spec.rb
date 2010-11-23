@@ -38,5 +38,14 @@ describe User do
     end
     
   end
+
+  context "First user" do
+    it "should be created this admin access via db:seed" do
+      require 'rake'
+      Errbit::Application.load_tasks
+      Rake::Task["db:seed"].execute
+      User.first.admin.should be_true
+    end
+  end
   
 end
