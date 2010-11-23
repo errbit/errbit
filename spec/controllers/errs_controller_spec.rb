@@ -12,8 +12,11 @@ describe ErrsController do
     
   describe "GET /errs" do
     context 'when logged in as an admin' do
-      it "gets a paginated list of unresolved errs" do
+      before(:each) do
         sign_in Factory(:admin)
+      end
+
+      it "gets a paginated list of unresolved errs" do
         errs = WillPaginate::Collection.new(1,30)
         3.times { errs << Factory(:err) }
         Err.should_receive(:unresolved).and_return(
@@ -21,6 +24,11 @@ describe ErrsController do
         )
         get :index
         assigns(:errs).should == errs
+      end
+      
+      it "should handle lots of errors" do
+        1000.times { Factory :notice }
+        lambda { get :index }.should_not raise_error
       end
     end
     

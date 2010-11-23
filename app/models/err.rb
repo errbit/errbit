@@ -9,7 +9,9 @@ class Err
   field :fingerprint
   field :last_notice_at, :type => DateTime
   field :resolved, :type => Boolean, :default => false
-  
+
+  index :last_notice_at
+
   referenced_in :app
   embeds_many :notices
   
