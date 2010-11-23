@@ -23,6 +23,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
+    # Set protected attributes
+    @user.admin = params[:user].try(:[], :admin) if current_user.admin?
+    
     if @user.save
       flash[:success] = "#{@user.name} is now part of the team. Be sure to add them as a project watcher."
       redirect_to user_path(@user)
