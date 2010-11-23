@@ -43,7 +43,7 @@ describe AppsController do
     
     context 'logged in as a user' do
       it 'finds the app if the user is watching it' do
-        
+        pending
       end
       
       it 'does not find the app if the user is not watching it' do
