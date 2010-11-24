@@ -32,12 +32,21 @@ describe AppsController do
   end
   
   describe "GET /apps/:id" do
+    render_views
     context 'logged in as an admin' do
-      it 'finds the app' do
+      before(:each) do
         sign_in Factory(:admin)
-        app = Factory(:app)
-        get :show, :id => app.id
-        assigns(:app).should == app
+        @app = Factory(:app)
+      end
+
+      it 'finds the app' do
+        get :show, :id => @app.id
+        assigns(:app).should == @app
+      end
+
+      it "should not raise errors for app with err without notices" do
+        Factory :err, :app => @app
+        lambda { get :show, :id => @app.id }.should_not raise_error
       end
     end
     
