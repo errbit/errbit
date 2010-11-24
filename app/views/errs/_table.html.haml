@@ -15,7 +15,7 @@
         %td.message
           = link_to err.message, app_err_path(err.app, err)
           %em= err.where
-        %td.latest #{time_ago_in_words(err.last_notice_at)} ago
+        %td.latest #{time_ago_in_words(last_notice_at err)} ago
         %td.deploy= err.app.last_deploy_at ? err.app.last_deploy_at.to_s(:micro) : 'n/a'
         %td.count= link_to err.notices.count, app_err_path(err.app, err)
     - if errs.none?

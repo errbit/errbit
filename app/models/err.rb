@@ -45,7 +45,7 @@ class Err
   end
   
   def message
-    notices.first.message || klass
+    notices.first.try(:message) || klass
   end
   
 end

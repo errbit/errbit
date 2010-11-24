@@ -6,11 +6,11 @@
   %strong Environment:
   = @err.environment
   %strong Last Notice:
-  = @err.last_notice_at.to_s(:micro)
+  = last_notice_at(@err).to_s(:micro)
 - content_for :action_bar do
   %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => 'Seriously?', :class => 'resolve' if @err.unresolved?
 
-%h4= @notice.message
+%h4= @notice.try(:message)
   
 = will_paginate @notices, :param_name => :notice, :page_links => false, :class => 'notice-pagination'
 viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
@@ -23,22 +23,23 @@ viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
     %li= link_to 'Parameters', '#params', :rel => 'params', :class => 'button'
     %li= link_to 'Session', '#session', :rel => 'session', :class => 'button'
 
-#summary
-  %h3 Summary
-  = render 'notices/summary', :notice => @notice
-
-#backtrace
-  %h3 Backtrace
-  = render 'notices/backtrace', :lines => @notice.backtrace
+- if @notice
+  #summary
+    %h3 Summary
+    = render 'notices/summary', :notice => @notice
   
-#environment
-  %h3 Environment
-  = render 'notices/environment', :notice => @notice
-
-#params
-  %h3 Parameters
-  = render 'notices/params', :notice => @notice
-
-#session
-  %h3 Session
-  = render 'notices/session', :notice => @notice
+  #backtrace
+    %h3 Backtrace
+    = render 'notices/backtrace', :lines => @notice.backtrace
+    
+  #environment
+    %h3 Environment
+    = render 'notices/environment', :notice => @notice
+  
+  #params
+    %h3 Parameters
+    = render 'notices/params', :notice => @notice
+  
+  #session
+    %h3 Session
+    = render 'notices/session', :notice => @notice
