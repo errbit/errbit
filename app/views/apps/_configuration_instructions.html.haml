@@ -16,7 +16,7 @@
       HoptoadNotifier.configure do |config|
          config.api_key = '#{app.api_key}'
          config.host    = '#{request.host}'
-         config.port    = #{request.port} # Note: Deployment notifications only work on port 80
+         config.port    = #{request.port}
       end
       #
       # Testing
