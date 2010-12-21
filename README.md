@@ -70,7 +70,6 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 TODO
 ----
 
-* Add a deployment view
 * Add ability for watchers to be configured for types of notifications they should receive
 
 Special Thanks
