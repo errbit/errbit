@@ -23,6 +23,28 @@
         %td
           %em Sadly, no one is watching this app
 
+%h3 Latest Deploys
+- if @deploys.any?
+  %table.deploys
+    %thead
+      %tr
+        %th When
+        %th Who
+        %th Message
+        %th Repository
+        %th Revision
+
+    %tbody
+      - @deploys.each do |deploy|
+        %tr
+          %td.when #{deploy.created_at.to_s(:micro)}
+          %td.who #{deploy.username}
+          %td.message #{deploy.message}
+          %td.repository #{deploy.repository}
+          %td.revision #{deploy.revision}
+- else
+  %h3 No deploys
+
 - if @app.errs.any?
   %h3 Errs
   = render 'errs/table', :errs => @errs

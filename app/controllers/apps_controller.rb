@@ -9,6 +9,7 @@ class AppsController < ApplicationController
   
   def show
     @errs  = @app.errs.paginate
+    @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
   end
   
   def new
