@@ -15,5 +15,11 @@ class DeploysController < ApplicationController
     })
     render :xml => @deploy
   end
+
+  def index 
+    app = current_user.apps.find(:conditions => {:name => params[:app_id]}).first
+
+    @deploys = app.deploys.order_by(:created_at.desc)
+  end
   
 end

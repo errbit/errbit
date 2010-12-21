@@ -22,6 +22,8 @@ Errbit::Application.routes.draw do
         put :resolve
       end
     end
+
+    resources :deploys, :only => [:index]
   end
   
   devise_for :users
