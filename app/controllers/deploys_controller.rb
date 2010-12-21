@@ -17,7 +17,7 @@ class DeploysController < ApplicationController
   def index 
     app = current_user.apps.find(:conditions => {:name => params[:app_id]}).first
 
-    @deploys = app.deploys.order_by(:created_at.desc)
+    @deploys = app.deploys.order_by(:created_at.desc).paginate(:page =>  params[:page], :per_page => 10)
   end
   
 end
