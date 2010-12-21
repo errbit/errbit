@@ -6,6 +6,7 @@ class Deploy
   field :repository
   field :environment
   field :revision
+  field :message
   
   embedded_in :app, :inverse_of => :deploys
   
