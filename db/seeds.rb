@@ -10,10 +10,12 @@ puts "-- email:    #{admin_email}"
 puts "-- password: #{admin_pass}"
 puts ""
 puts "Be sure to change these credentials ASAP!"
-User.create!({
+admin = User.new({
   :name                   => 'Errbit Admin',
   :email                  => admin_email,
   :password               => admin_pass,
-  :password_confirmation  => admin_pass,
-  :admin                  => true
+  :password_confirmation  => admin_pass
 })
+
+admin.admin = true
+admin.save!
