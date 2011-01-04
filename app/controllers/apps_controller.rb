@@ -8,7 +8,7 @@ class AppsController < ApplicationController
   end
   
   def show
-    @errs  = @app.errs.paginate(:page => params[:page], :per_page => Err.per_page)
+    @errs  = @app.errs.ordered.paginate(:page => params[:page], :per_page => Err.per_page)
   end
   
   def new
