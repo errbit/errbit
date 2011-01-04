@@ -6,6 +6,8 @@ class Deploy
   field :repository
   field :environment
   field :revision
+
+  index :created_at, Mongo::DESCENDING
   
   embedded_in :app, :inverse_of => :deploys
   
