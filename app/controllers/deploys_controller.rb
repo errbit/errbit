@@ -15,7 +15,9 @@ class DeploysController < ApplicationController
   end
 
   def index 
-    app = current_user.apps.find(params[:app_id]).first
+    # See AppsController#find_app for the reasoning behind this code. 
+    app = App.find(params[:app_id])
+    raise(Mongoid::Errors::DocumentNotFound.new(App,app.id)) unless current_user.admin? || current_user.watching?(app)
 
     @deploys = app.deploys.order_by(:created_at.desc).paginate(:page =>  params[:page], :per_page => 10)
   end
