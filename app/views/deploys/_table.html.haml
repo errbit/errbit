@@ -4,7 +4,6 @@
       %th App
       %th When
       %th Who
-      %th Message
       %th Repository
       %th Revision
   %tbody
@@ -15,6 +14,5 @@
           %span.environment= deploy.environment
         %td.latest #{time_ago_in_words(deploy.created_at)} ago
         %td.who #{deploy.username}
-        %td.message #{deploy.message}
         %td.repository #{deploy.repository}
         %td.revision #{deploy.revision}
