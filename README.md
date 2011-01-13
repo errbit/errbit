@@ -39,7 +39,7 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
         
   3. Install Bundler
   
-         gem install bundler --pre
+         gem install bundler
          
 **Running Locally:**
 
