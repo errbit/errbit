@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :require_user_edit_priviledges, :only => [:edit, :update]
   
   def index
-    @users = User.paginate(:page => params[:page])
+    @users = User.paginate(:page => params[:page], :per_page => User.per_page)
   end
   
   def show
@@ -22,6 +22,9 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    
+    # Set protected attributes
+    @user.admin = params[:user].try(:[], :admin) if current_user.admin?
     
     if @user.save
       flash[:success] = "#{@user.name} is now part of the team. Be sure to add them as a project watcher."

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe DeploysController do
+  render_views
   
   context 'POST #create' do
     before do
@@ -37,6 +38,23 @@ describe DeploysController do
       email.subject.should == "[#{@app.name}] Deployed to production by john.doe"
     end
     
+  end
+
+  context "GET #index" do
+    before(:each) do
+      @deploy = Factory :deploy
+      sign_in Factory(:admin)
+      get :index, :app_id => @deploy.app.id
+    end
+
+    it "should render successfully" do
+      response.should be_success
+    end
+
+    it "should contain info about existing deploy" do
+      response.body.should match(@deploy.revision)
+      response.body.should match(@deploy.app.name)
+    end
   end
   
 end

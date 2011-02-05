@@ -1,4 +1,6 @@
 class Err
+  cattr_reader :per_page
+  @@per_page = 30
   include Mongoid::Document
   include Mongoid::Timestamps
   
@@ -9,7 +11,9 @@ class Err
   field :fingerprint
   field :last_notice_at, :type => DateTime
   field :resolved, :type => Boolean, :default => false
-  
+
+  index :last_notice_at
+
   referenced_in :app
   embeds_many :notices
   
@@ -41,7 +45,7 @@ class Err
   end
   
   def message
-    notices.first.message || klass
+    notices.first.try(:message) || klass
   end
   
 end

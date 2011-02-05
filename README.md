@@ -39,7 +39,7 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
         
   3. Install Bundler
   
-         gem install bundler --pre
+         gem install bundler
          
 **Running Locally:**
 
@@ -70,7 +70,6 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 TODO
 ----
 
-* Add a deployment view
 * Add ability for watchers to be configured for types of notifications they should receive
 
 Special Thanks

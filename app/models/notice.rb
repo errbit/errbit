@@ -23,6 +23,7 @@ class Notice
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
     app = App.find_by_api_key!(hoptoad_notice['api-key'])
     
+    hoptoad_notice['request'] ||= {}
     hoptoad_notice['request']['component']  = 'unknown' if hoptoad_notice['request']['component'].blank?
     hoptoad_notice['request']['action']     = nil if hoptoad_notice['request']['action'].blank?
     

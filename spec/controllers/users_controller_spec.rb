@@ -48,6 +48,11 @@ describe UsersController do
           put :update, :id => @user.to_param, :user => {:name => 'Kermit'}
           response.should redirect_to(user_path(@user))
         end
+        
+        it "should not be able to become an admin" do
+          put :update, :id => @user.to_param, :user => {:admin => true}
+          @user.reload.admin.should be_false
+        end
       end
       
       context "when the update is unsuccessful" do        
@@ -100,19 +105,24 @@ describe UsersController do
     context "POST /users" do
       context "when the create is successful" do
         before do
-          @user = Factory(:user)
-          User.should_receive(:new).and_return(@user)
-          @user.should_receive(:save).and_return(true)
+          @attrs = {:user => Factory.attributes_for(:user)}
         end
         
         it "sets a message to display" do
-          post :create
+          post :create, @attrs
           request.flash[:success].should include('part of the team')
         end
         
         it "redirects to the user's page" do
-          post :create
-          response.should redirect_to(user_path(@user))
+          post :create, @attrs
+          response.should redirect_to(user_path(assigns(:user)))
+        end
+
+        it "should be able to create admin" do
+          @attrs[:user][:admin] = true
+          post :create, @attrs
+          response.should be_redirect
+          User.find(assigns(:user).to_param).admin.should be_true
         end
       end
       
@@ -144,6 +154,12 @@ describe UsersController do
         it "redirects to the user's page" do
           put :update, :id => @user.to_param, :user => {:name => 'Kermit'}
           response.should redirect_to(user_path(@user))
+        end
+        
+        it "should be able to make user an admin" do
+          put :update, :id => @user.to_param, :user => {:admin => true}
+          response.should be_redirect
+          User.find(assigns(:user).to_param).admin.should be_true
         end
       end
       

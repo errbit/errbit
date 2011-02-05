@@ -98,6 +98,11 @@ describe Notice do
       @notice = Notice.from_xml(@xml)
       @notice.notifier['name'].should == 'Hoptoad Notifier'
     end
+
+    it "should handle params withour 'request' section" do
+      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
+      lambda { Notice.from_xml(@xml) }.should_not raise_error
+    end
   end
   
   describe "email notifications" do

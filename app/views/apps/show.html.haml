@@ -2,6 +2,8 @@
 - content_for :meta do
   %strong Errs Caught:
   = @app.errs.count
+  %strong Deploy Count:
+  = @app.deploys.count
   %strong API Key:
   = @app.api_key
 - content_for :action_bar do
@@ -23,9 +25,30 @@
         %td
           %em Sadly, no one is watching this app
 
+%h3 Latest Deploys
+- if @deploys.any?
+  %table.deploys
+    %thead
+      %tr
+        %th When
+        %th Who
+        %th Repository
+        %th Revision
+
+    %tbody
+      - @deploys.each do |deploy|
+        %tr
+          %td.when #{deploy.created_at.to_s(:micro)}
+          %td.who #{deploy.username}
+          %td.repository #{deploy.repository}
+          %td.revision #{deploy.revision}
+  = link_to "All Deploys (#{@app.deploys.count})", app_deploys_path(@app), :class => 'button'
+- else
+  %h3 No deploys
+
 - if @app.errs.any?
-  %h3 Errs
+  %h3.clear Errs
   = render 'errs/table', :errs => @errs
 - else
-  %h3 No errs have been caught yet, make sure you setup your app
+  %h3.clear No errs have been caught yet, make sure you setup your app
   = render 'configuration_instructions', :app => @app

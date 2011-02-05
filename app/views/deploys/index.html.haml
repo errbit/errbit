@@ -1,0 +1,3 @@
+- content_for :title, 'Deploys'
+= render 'table', :deploys => @deploys
+= will_paginate @deploys, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'

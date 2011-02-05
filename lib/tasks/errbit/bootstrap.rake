@@ -26,6 +26,8 @@ namespace :errbit do
     Rake::Task['errbit:copy_configs'].execute
     puts "\n"
     Rake::Task['db:seed'].invoke
+    puts "\n"
+    Rake::Task['db:mongoid:create_indexes'].invoke
   end
   
 end
