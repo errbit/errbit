@@ -13,6 +13,7 @@ class Err
   field :resolved, :type => Boolean, :default => false
 
   index :last_notice_at
+  index :app_id
 
   referenced_in :app
   embeds_many :notices
