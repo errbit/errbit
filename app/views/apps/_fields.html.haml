@@ -5,9 +5,17 @@
   = f.text_field :name
   
 %div.checkbox
+  = f.check_box :notify_on_errs
+  = f.label :notify_on_errs, 'Notify on errors'
+
+%div.checkbox
   = f.check_box :resolve_errs_on_deploy
   = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'
-  
+
+%div.checkbox
+  = f.check_box :notify_on_deploys
+  = f.label :notify_on_deploys, 'Notify on deploys'
+
 %fieldset.nested-wrapper
   %legend Watchers
   - f.fields_for :watchers do |w|

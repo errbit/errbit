@@ -32,6 +32,7 @@
       %tr
         %th When
         %th Who
+        %th Message
         %th Repository
         %th Revision
 
@@ -40,6 +41,7 @@
         %tr
           %td.when #{deploy.created_at.to_s(:micro)}
           %td.who #{deploy.username}
+          %td.message #{deploy.message}
           %td.repository #{deploy.repository}
           %td.revision #{deploy.revision}
   = link_to "All Deploys (#{@app.deploys.count})", app_deploys_path(@app), :class => 'button'

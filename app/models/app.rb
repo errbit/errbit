@@ -5,6 +5,8 @@ class App
   field :name, :type => String
   field :api_key
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
+  field :notify_on_errs, :type => Boolean, :default => false
+  field :notify_on_deploys, :type => Boolean, :default => false
   key :name
   
   embeds_many :watchers
