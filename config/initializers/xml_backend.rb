@@ -1,1 +1,1 @@
-ActiveSupport::XmlMini.backend = 'LibXML'
+ActiveSupport::XmlMini.backend = 'Nokogiri'
