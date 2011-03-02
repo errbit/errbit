@@ -2,11 +2,14 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 gem 'nokogiri'
-gem 'bson_ext', '~> 1.2'
 gem 'mongoid', '~> 2.0.0.rc.6'
 gem 'haml'
 gem 'will_paginate'
 gem 'devise', '~> 1.1.3'
+
+platform :ruby do
+  gem 'bson_ext', '~> 1.2'
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.1'
