@@ -12,6 +12,7 @@ class User
   field :admin, :type => Boolean, :default => false
 
   after_destroy :destroy_watchers
+  before_save :ensure_authentication_token
   
   validates_presence_of :name
   

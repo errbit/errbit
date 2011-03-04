@@ -124,6 +124,11 @@ describe UsersController do
           response.should be_redirect
           User.find(assigns(:user).to_param).admin.should be_true
         end
+
+        it "should has auth token" do
+          post :create, @attrs
+          User.last.authentication_token.should_not be_blank
+        end
       end
       
       context "when the create is unsuccessful" do
