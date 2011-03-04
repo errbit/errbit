@@ -10,7 +10,7 @@ class User
 
   field :name
   field :admin, :type => Boolean, :default => false
-    
+
   after_destroy :destroy_watchers
   
   validates_presence_of :name

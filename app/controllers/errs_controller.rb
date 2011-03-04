@@ -4,7 +4,14 @@ class ErrsController < ApplicationController
   
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
-    @errs = Err.for_apps(app_scope).unresolved.ordered.paginate(:page => params[:page], :per_page => Err.per_page)
+    respond_to do |format|
+      format.html do
+        @errs = Err.for_apps(app_scope).unresolved.ordered.paginate(:page => params[:page], :per_page => Err.per_page)
+      end
+      format.atom do
+        @errs = Err.for_apps(app_scope).unresolved.ordered
+      end
+    end
   end
   
   def all
