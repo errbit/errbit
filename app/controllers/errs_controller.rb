@@ -29,7 +29,10 @@ class ErrsController < ApplicationController
     @err.resolve!
     
     flash[:success] = 'Great news everyone! The err has been resolved.'
-    redirect_to errs_path
+
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to app_path(@app)
   end
   
   protected

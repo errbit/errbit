@@ -151,7 +151,13 @@ describe ErrsController do
       request.flash[:success].should match(/Great news/)
     end
     
-    it "should redirect do the errs page" do
+    it "should redirect to the app page" do
+      put :resolve, :app_id => @err.app.id, :id => @err.id
+      response.should redirect_to(app_path(@err.app))
+    end
+
+    it "should redirect back to errs page" do
+      request.env["Referer"] = errs_path
       put :resolve, :app_id => @err.app.id, :id => @err.id
       response.should redirect_to(errs_path)
     end
