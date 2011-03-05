@@ -1,4 +1,4 @@
 atom_feed do |feed|
-  feed.title("Errbit notices at #{root_url}")
+  feed.title("Errbit notices for #{h @app.name} at #{root_url}")
   render :partial => "errs/list", :locals => {:feed => feed}
 end
