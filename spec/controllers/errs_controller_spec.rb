@@ -11,19 +11,24 @@ describe ErrsController do
   let(:err) { Factory(:err, :app => app) }
     
   describe "GET /errs" do
+    render_views
     context 'when logged in as an admin' do
       before(:each) do
         sign_in Factory(:admin)
+        @notice = Factory :notice
+        @err = @notice.err
       end
 
-      it "gets a paginated list of unresolved errs" do
-        errs = WillPaginate::Collection.new(1,30)
-        3.times { errs << Factory(:err) }
-        Err.should_receive(:unresolved).and_return(
-          mock('proxy', :ordered => mock('proxy', :paginate => errs))
-        )
+      it "should successfully list errs" do
         get :index
-        assigns(:errs).should == errs
+        response.should be_success
+        response.body.should match(@err.message)
+      end
+
+      it "should list atom feed successfully" do
+        get :index, :format => "atom"
+        response.should be_success
+        response.body.should match(@err.message)
       end
       
       it "should handle lots of errors" do

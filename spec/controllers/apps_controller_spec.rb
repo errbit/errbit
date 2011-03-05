@@ -37,6 +37,8 @@ describe AppsController do
       before(:each) do
         sign_in Factory(:admin)
         @app = Factory(:app)
+        @err = Factory :err, :app => @app
+        @notice = Factory :notice, :err => @err
       end
 
       it 'finds the app' do
@@ -47,6 +49,12 @@ describe AppsController do
       it "should not raise errors for app with err without notices" do
         Factory :err, :app => @app
         lambda { get :show, :id => @app.id }.should_not raise_error
+      end
+
+      it "should list atom feed successfully" do
+        get :show, :id => @app.id, :format => "atom"
+        response.should be_success
+        response.body.should match(@err.message)
       end
     end
     
