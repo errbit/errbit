@@ -13,7 +13,10 @@ describe ErrsController do
   describe "GET /errs" do
     context 'when logged in as an admin' do
       before(:each) do
-        sign_in Factory(:admin)
+        @user = Factory(:admin)
+        sign_in @user
+        @notice = Factory :notice
+        @err = @notice.err
       end
 
       it "gets a paginated list of unresolved errs" do
@@ -29,6 +32,23 @@ describe ErrsController do
       it "should handle lots of errors" do
         1000.times { Factory :notice }
         lambda { get :index }.should_not raise_error
+      end
+
+      context "pagination" do
+        before(:each) do
+          35.times { Factory :err }
+        end
+
+        it "should have default per_page value for user" do
+          get :index
+          assigns(:errs).size.should == User::PER_PAGE
+        end
+
+        it "should be able to override default per_page value" do
+          @user.update_attribute :per_page, 10
+          get :index
+          assigns(:errs).size.should == 10
+        end
       end
     end
     

@@ -1,6 +1,4 @@
 class Err
-  cattr_reader :per_page
-  @@per_page = 30
   include Mongoid::Document
   include Mongoid::Timestamps
   
