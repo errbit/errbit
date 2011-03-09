@@ -35,7 +35,8 @@ describe AppsController do
     render_views
     context 'logged in as an admin' do
       before(:each) do
-        sign_in Factory(:admin)
+        @user = Factory(:admin)
+        sign_in @user
         @app = Factory(:app)
         @err = Factory :err, :app => @app
         @notice = Factory :notice, :err => @err
@@ -55,6 +56,23 @@ describe AppsController do
         get :show, :id => @app.id, :format => "atom"
         response.should be_success
         response.body.should match(@err.message)
+      end
+
+      context "pagination" do
+        before(:each) do
+          35.times { Factory :err, :app => @app }
+        end
+
+        it "should have default per_page value for user" do
+          get :show, :id => @app.id
+          assigns(:errs).size.should == User::PER_PAGE
+        end
+
+        it "should be able to override default per_page value" do
+          @user.update_attribute :per_page, 10
+          get :show, :id => @app.id
+          assigns(:errs).size.should == 10
+        end
       end
     end
     

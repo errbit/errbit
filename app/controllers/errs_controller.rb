@@ -6,7 +6,7 @@ class ErrsController < ApplicationController
     app_scope = current_user.admin? ? App.all : current_user.apps
     respond_to do |format|
       format.html do
-        @errs = Err.for_apps(app_scope).unresolved.ordered.paginate(:page => params[:page], :per_page => Err.per_page)
+        @errs = Err.for_apps(app_scope).unresolved.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
       end
       format.atom do
         @errs = Err.for_apps(app_scope).unresolved.ordered
@@ -16,7 +16,7 @@ class ErrsController < ApplicationController
   
   def all
     app_scope = current_user.admin? ? App.all : current_user.apps
-    @errs = Err.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => Err.per_page)
+    @errs = Err.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
   end
   
   def show

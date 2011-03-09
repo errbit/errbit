@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :require_user_edit_priviledges, :only => [:edit, :update]
   
   def index
-    @users = User.paginate(:page => params[:page], :per_page => User.per_page)
+    @users = User.paginate(:page => params[:page], :per_page => current_user.per_page)
   end
   
   def show
