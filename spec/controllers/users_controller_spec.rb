@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  render_views
   
   it_requires_authentication
   it_requires_admin_privileges :for => {
@@ -28,6 +29,11 @@ describe UsersController do
         get :edit, :id => @user.id
         assigns(:user).should == @user
       end
+
+      it "should have per_page option" do
+        get :edit, :id => @user.id
+        response.body.should match(/id="user_per_page"/)
+      end
     end
     
     context "PUT /users/:other_id" do
@@ -52,6 +58,11 @@ describe UsersController do
         it "should not be able to become an admin" do
           put :update, :id => @user.to_param, :user => {:admin => true}
           @user.reload.admin.should be_false
+        end
+
+        it "should be able to set per_page option" do
+          put :update, :id => @user.to_param, :user => {:per_page => 555}
+          @user.reload.per_page.should == 555
         end
       end
       
