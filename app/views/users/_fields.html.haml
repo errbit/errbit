@@ -7,6 +7,10 @@
 .required
   = f.label :email
   = f.text_field :email
+
+.required
+  = f.label 'Entries per page'
+  = f.select :per_page, [10, 20, 30, 50, 75, 100]
   
 .required
   = f.label :password
