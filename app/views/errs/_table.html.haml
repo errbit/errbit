@@ -19,7 +19,7 @@
         %td.latest #{time_ago_in_words(last_notice_at err)} ago
         %td.deploy= err.app.last_deploy_at ? err.app.last_deploy_at.to_s(:micro) : 'n/a'
         %td.count= link_to err.notices.count, app_err_path(err.app, err)
-        %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(err.app, err), :title => "Resolve", :method => :put, :confirm => 'Seriously?', :class => 'resolve' if err.unresolved?
+        %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(err.app, err), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if err.unresolved?
     - if errs.none?
       %tr
         %td{:colspan => (@app ? 5 : 6)}
