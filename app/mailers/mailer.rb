@@ -7,7 +7,7 @@ class Mailer < ActionMailer::Base
     
     mail({
       :to       => @app.watchers.map(&:address),
-      :subject  => "[#{@app.name}] #{@notice.err.message}"
+      :subject  => "[#{@app.name}][#{@notice.err.environment}] #{@notice.err.message}"
     })
   end
   
