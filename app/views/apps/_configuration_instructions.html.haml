@@ -1,7 +1,7 @@
 %pre
   %code
     :preserve
-    
+
       # Require the hoptoad_notifier gem in you App.
       # --------------------------------------------
       #
@@ -14,9 +14,10 @@
       # Then add the following to config/initializers/errbit.rb
       # -------------------------------------------------------
       HoptoadNotifier.configure do |config|
-         config.api_key = '#{app.api_key}'
-         config.host    = '#{request.host}'
-         config.port    = #{request.port}
+        config.api_key = '#{app.api_key}'
+        config.host    = '#{request.host}'
+        config.port    = #{request.port}
+        config.secure  = config.port == 443
       end
       #
       # Testing
@@ -28,5 +29,4 @@
       # Run:
       #  rake hoptoad:test
       #  refresh this page
-      
-      
+
