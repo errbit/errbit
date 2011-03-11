@@ -14,7 +14,7 @@ user = User.where(:email => admin_email).first || User.new({
   :name                   => 'Errbit Admin',
   :email                  => admin_email,
   :password               => admin_pass,
-  :password_confirmation  => admin_pass,
+  :password_confirmation  => admin_pass
 })
 
 user.admin = true
