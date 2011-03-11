@@ -35,7 +35,7 @@ a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
 
 #header > div, #nav-bar, #content-wrapper, #footer { 
-  width: 900px; 
+  width: 930px;
   margin: 0 auto;
   position: relative;
 }
