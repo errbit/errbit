@@ -7,4 +7,3 @@ config/deploy.rb
 config/mongoid.yml
 .rvmrc
 *~
-Gemfile.lock
