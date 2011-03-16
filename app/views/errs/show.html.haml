@@ -1,6 +1,8 @@
 - content_for :page_title, @err.message
 - content_for :title, @err.klass
 - content_for :meta do
+  %strong App:
+  = @app.name
   %strong Where:
   = @err.where
   %strong Environment:

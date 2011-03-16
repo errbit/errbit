@@ -5,7 +5,8 @@ class App
   field :name, :type => String
   field :api_key
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
-  key :name
+  # Some legacy apps may have sting as key instead of BSON::ObjectID
+  identity :type => String
   
   embeds_many :watchers
   embeds_many :deploys
