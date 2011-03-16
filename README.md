@@ -98,6 +98,7 @@ Special Thanks
 --------------
 
 * [Michael Parenteau](http://michaelparenteau.com) - For rocking the Errbit design and providing a great user experience.
+* [Nick Recobra aka oruen](https://github.com/oruen) - Nick is Errbit's first core contributor. He's been working hard at making Errbit more awesome.
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
 * [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Hoptoad](http://hoptoadapp.com).
 
