@@ -33,6 +33,7 @@ describe ErrsController do
       end
       
       it "should handle lots of errors" do
+        pending "Turning off long running spec"
         1000.times { Factory :notice }
         lambda { get :index }.should_not raise_error
       end
