@@ -7,7 +7,13 @@ class App
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   # Some legacy apps may have sting as key instead of BSON::ObjectID
   identity :type => String
-  
+  # There seems to be a Mongoid bug making it impossible to use String identity with references_many feature:
+  # https://github.com/mongoid/mongoid/issues/703
+  # Using 32 character string as a workaround.
+  before_save :on => :create do |r|
+    r.id = ActiveSupport::SecureRandom.hex
+  end
+
   embeds_many :watchers
   embeds_many :deploys
   references_many :errs, :dependent => :destroy
