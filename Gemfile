@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.5'
 gem 'nokogiri'
-gem 'mongoid', '~> 2.0.0.rc.6'
+gem 'mongoid', '~> 2.0.0.rc.7'
 gem 'haml'
 gem 'will_paginate'
 gem 'devise', '~> 1.1.8'
