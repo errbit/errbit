@@ -5,7 +5,7 @@ gem 'nokogiri'
 gem 'mongoid', '~> 2.0.0.rc.6'
 gem 'haml'
 gem 'will_paginate'
-gem 'devise', '~> 1.1.3'
+gem 'devise', '~> 1.1.8'
 
 platform :ruby do
   gem 'bson_ext', '~> 1.2'
