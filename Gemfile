@@ -12,11 +12,11 @@ platform :ruby do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.1'
+  gem 'rspec-rails', '~> 2.5'
 end
 
 group :test do
-  gem 'rspec', '~> 2.1'
+  gem 'rspec', '~> 2.5'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'factory_girl_rails'
 end

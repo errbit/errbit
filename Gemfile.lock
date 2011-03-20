@@ -113,6 +113,6 @@ DEPENDENCIES
   mongoid (~> 2.0.0.rc.7)
   nokogiri
   rails (= 3.0.5)
-  rspec (~> 2.1)
-  rspec-rails (~> 2.1)
+  rspec (~> 2.5)
+  rspec-rails (~> 2.5)
   will_paginate
