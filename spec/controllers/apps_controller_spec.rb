@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe AppsController do
-  
+  render_views
+
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
   
@@ -32,7 +33,6 @@ describe AppsController do
   end
   
   describe "GET /apps/:id" do
-    render_views
     context 'logged in as an admin' do
       before(:each) do
         @user = Factory(:admin)
@@ -151,10 +151,6 @@ describe AppsController do
       end
     
       context "when the update is successful" do
-        before do
-          @app.should_receive(:update_attributes).and_return(true)
-        end
-      
         it "should redirect to the app page" do
           put :update, :id => @app.id, :app => {}
           response.should redirect_to(app_path(@app))
@@ -163,6 +159,14 @@ describe AppsController do
         it "should display a message" do
           put :update, :id => @app.id, :app => {}
           request.flash[:success].should match(/success/)
+        end
+      end
+
+      context "changing name" do
+        it "should redirect to app page" do
+          id = @app.id
+          put :update, :id => id, :app => {:name => "new name"}
+          response.should redirect_to(app_path(id))
         end
       end
     

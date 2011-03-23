@@ -10,7 +10,7 @@ class App
   # There seems to be a Mongoid bug making it impossible to use String identity with references_many feature:
   # https://github.com/mongoid/mongoid/issues/703
   # Using 32 character string as a workaround.
-  before_save :on => :create do |r|
+  before_create do |r|
     r.id = ActiveSupport::SecureRandom.hex
   end
 
