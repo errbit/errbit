@@ -10,7 +10,7 @@
   
 %fieldset.nested-wrapper
   %legend Watchers
-  - f.fields_for :watchers do |w|
+  = f.fields_for :watchers do |w|
     %div.watcher.nested
       %div.choose
         = w.radio_button :watcher_type, :user
