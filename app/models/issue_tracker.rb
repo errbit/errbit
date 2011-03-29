@@ -13,6 +13,9 @@ class IssueTracker
 
   protected
   def check_lighthouseapp_params
-    errors.add(:base, "You must specify your Lighthouseapp account, token and project id") if %w( api_token project_id account ).map {|m| self[m].blank? }.any?
+    blank_flags = %w( api_token project_id account ).map {|m| self[m].blank? }
+    if blank_flags.any? && !blank_flags.all?
+      errors.add(:base, "You must specify your Lighthouseapp account, token and project id")
+    end
   end
 end
