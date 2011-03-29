@@ -147,7 +147,6 @@ describe AppsController do
     describe "PUT /apps/:id" do
       before do
         @app = Factory(:app)
-        App.stub(:find).with(@app.id).and_return(@app)
       end
     
       context "when the update is successful" do
@@ -172,9 +171,58 @@ describe AppsController do
     
       context "when the update is unsuccessful" do
         it "should render the edit page" do
-          @app.should_receive(:update_attributes).and_return(false)
-          put :update, :id => @app.id, :app => {}
+          put :update, :id => @app.id, :app => { :name => '' }
           response.should render_template(:edit)
+        end
+      end
+
+      context "setting up issue tracker", :cur => true do
+        context "unknown tracker type" do
+          before(:each) do
+            put :update, :id => @app.id, :app => { :issue_trackers_attributes => { '0' => {
+              :issue_tracker_type => 'unknown', :project_id => '1234', :api_token => '123123', :account => 'myapp'
+            } } }
+            @app.reload
+          end
+
+          it "should not create issue tracker" do
+            @app.issue_trackers.should be_empty
+          end
+        end
+
+        context "lighthouseapp" do
+          it "should save tracker params" do
+            put :update, :id => @app.id, :app => { :issue_trackers_attributes => { '0' => {
+              :issue_tracker_type => 'lighthouseapp', :project_id => '1234', :api_token => '123123', :account => 'myapp'
+            } } }
+            @app.reload
+
+            tracker = @app.issue_trackers.first
+            tracker.issue_tracker_type.should == 'lighthouseapp'
+            tracker.project_id.should == '1234'
+            tracker.api_token.should == '123123'
+            tracker.account.should == 'myapp'
+          end
+
+          it "should show validation notice when sufficient params are not present" do
+            put :update, :id => @app.id, :app => { :issue_trackers_attributes => { '0' => {
+              :issue_tracker_type => 'lighthouseapp', :project_id => '1234', :api_token => '123123'
+            } } }
+            @app.reload
+
+            @app.issue_trackers.should be_empty
+            response.body.should match(/You must specify your Lighthouseapp account, token and project id/) 
+          end
+
+          it "should show validation notice when sufficient params are not present" do
+            put :update, :id => @app.id, :app => { :issue_trackers_attributes => { '0' => {
+              :issue_tracker_type => 'lighthouseapp', :project_id => '1234', :api_token => '123123'
+            } } }
+            @app.reload
+
+            @app.issue_trackers.should be_empty
+            response.body.should match(/You must specify your Lighthouseapp account, token and project id/) 
+          end
         end
       end
     end

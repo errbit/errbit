@@ -46,6 +46,9 @@ GEM
       railties (>= 3.0.0)
     haml (3.0.25)
     i18n (0.5.0)
+    lighthouse-api (2.0)
+      activeresource (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -110,6 +113,7 @@ DEPENDENCIES
   devise (~> 1.1.8)
   factory_girl_rails
   haml
+  lighthouse-api
   mongoid (~> 2.0.0.rc.7)
   nokogiri
   rails (= 3.0.5)

@@ -6,6 +6,7 @@ gem 'mongoid', '~> 2.0.0.rc.7'
 gem 'haml'
 gem 'will_paginate'
 gem 'devise', '~> 1.1.8'
+gem 'lighthouse-api'
 
 platform :ruby do
   gem 'bson_ext', '~> 1.2'

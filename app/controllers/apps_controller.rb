@@ -26,6 +26,7 @@ class AppsController < ApplicationController
   
   def edit
     @app.watchers.build if @app.watchers.none?
+    @app.issue_trackers.build if @app.issue_trackers.none?
   end
   
   def create

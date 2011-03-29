@@ -89,6 +89,11 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
   4. Enjoy!
 
+Lighthouseapp integration
+-------------------------
+
+* Get an API token with full access to the project (visit http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token to learn how to get it)
+
 TODO
 ----
 
