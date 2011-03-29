@@ -28,11 +28,13 @@ GEM
       activemodel (= 3.0.5)
       activesupport (= 3.0.5)
     activesupport (3.0.5)
+    addressable (2.2.4)
     arel (2.0.9)
     bcrypt-ruby (2.1.4)
     bson (1.2.4)
     bson_ext (1.2.4)
     builder (2.1.2)
+    crack (0.1.8)
     database_cleaner (0.6.5)
     devise (1.1.8)
       bcrypt-ruby (~> 2.1.2)
@@ -102,6 +104,9 @@ GEM
     tzinfo (0.3.25)
     warden (1.0.3)
       rack (>= 1.0.0)
+    webmock (1.6.2)
+      addressable (>= 2.2.2)
+      crack (>= 0.1.7)
     will_paginate (3.0.pre2)
 
 PLATFORMS
@@ -119,4 +124,5 @@ DEPENDENCIES
   rails (= 3.0.5)
   rspec (~> 2.5)
   rspec-rails (~> 2.5)
+  webmock
   will_paginate
