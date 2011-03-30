@@ -10,7 +10,14 @@
   %strong Last Notice:
   = last_notice_at(@err).to_s(:micro)
 - content_for :action_bar do
-  %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve' if @err.unresolved?
+  - if @err.app.issue_tracker
+    - if @err.issue_link.blank?
+      %span= link_to 'create issue', create_issue_app_err_path(@app, @err), :method => :post, :class => 'create-issue'
+    - else
+      %span= link_to 'go to issue', @err.issue_link, :class => 'goto-issue'
+      = link_to 'clear issue', clear_issue_app_err_path(@app, @err), :method => :delete, :confirm => "Clear err issues?", :class => 'clear-issue'
+  - if @err.unresolved?
+    %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve'
 
 %h4= @notice.try(:message)
   

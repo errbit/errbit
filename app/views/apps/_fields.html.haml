@@ -21,3 +21,20 @@
         = w.select :user_id, User.all.map{|u| [u.name,u.id.to_s]}, :include_blank => '-- Select a User --'
       %div.email{:class => w.object.email.present? ? 'choosen' : nil}
         = w.text_field :email
+
+%fieldset
+  %legend Issue tracker
+  = f.fields_for :issue_tracker do |w|
+    %div.watcher.nested
+      %div.choose
+        = w.radio_button :issue_tracker_type, :lighthouseapp
+        = label_tag :issue_tracker_type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'issue_tracker_type_lighthouseapp')
+      %div.lighthouseapp{:class => 'choosen'}
+        = w.label :account, "Account"
+        = w.text_field :account
+        = w.label :api_token, "API token"
+        = w.text_field :api_token
+        = w.label :project_id, "Project ID"
+        = w.text_field :project_id
+        
+

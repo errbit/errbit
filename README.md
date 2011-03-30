@@ -89,6 +89,13 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
   4. Enjoy!
 
+Lighthouseapp integration
+-------------------------
+
+* Account is the name of your subdomain, i.e. **litcafe** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview 
+* Errbit uses token-based authentication. Get your API Token or visit [http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token](http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token) to learn how to get it.
+* Project id is number identifier of your project, i.e. **73466** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview 
+
 TODO
 ----
 

@@ -20,6 +20,8 @@ Errbit::Application.routes.draw do
       resources :notices
       member do
         put :resolve
+        post :create_issue
+        delete :clear_issue
       end
     end
 

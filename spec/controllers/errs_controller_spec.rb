@@ -123,6 +123,33 @@ describe ErrsController do
         get :show, :app_id => app.id, :id => err.id
         response.should be_success
       end
+
+      context "create issue button" do
+        let(:button_matcher) { match(/create issue/) }
+
+        it "should not exist for err's app without issue tracker" do
+          err = Factory :err
+          get :show, :app_id => err.app.id, :id => err.id
+
+          response.body.should_not button_matcher  
+        end
+  
+        it "should exist for err's app with issue tracker" do
+          tracker = Factory(:lighthouseapp_tracker)
+          err = Factory(:err, :app => tracker.app)
+          get :show, :app_id => err.app.id, :id => err.id
+
+          response.body.should button_matcher
+        end
+  
+        it "should not exist for err with issue_link" do
+          tracker = Factory(:lighthouseapp_tracker)
+          err = Factory(:err, :app => tracker.app, :issue_link => "http://some.host")
+          get :show, :app_id => err.app.id, :id => err.id
+
+          response.body.should_not button_matcher
+        end
+      end
     end
     
     context 'when logged in as a user' do
@@ -186,5 +213,119 @@ describe ErrsController do
       response.should redirect_to(errs_path)
     end
   end
-  
+
+  describe "POST /apps/:app_id/errs/:id/create_issue" do
+    render_views
+
+    before(:each) do
+      sign_in Factory(:admin)
+    end
+
+    context "successful issue creation" do
+      context "lighthouseapp tracker" do
+        let(:notice) { Factory :notice }
+        let(:tracker) { Factory :lighthouseapp_tracker, :app => notice.err.app }
+        let(:err) { notice.err }
+
+        before(:each) do
+          number = 5
+          @issue_link = "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets/#{number}.xml"
+          body = "<ticket><number type=\"integer\">#{number}</number></ticket>"
+          stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
+
+          post :create_issue, :app_id => err.app.id, :id => err.id
+          err.reload
+        end
+
+        it "should make request to Lighthouseapp with err params" do
+          requested = have_requested(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml")
+          WebMock.should requested.with(:headers => {'X-Lighthousetoken' => tracker.api_token})
+          WebMock.should requested.with(:body => /<tag>errbit<\/tag>/)
+          WebMock.should requested.with(:body => /<title>\[#{ err.environment }\]\[#{err.where}\] #{err.message.to_s.truncate(100)}<\/title>/)
+          WebMock.should requested.with(:body => /<body>.+<\/body>/m)
+        end
+
+        it "should redirect to err page" do
+          response.should redirect_to( app_err_path(err.app, err) )
+        end
+
+        it "should create issue link for err" do
+          err.issue_link.should == @issue_link.sub(/\.xml$/, '')
+        end
+      end
+    end
+
+    context "absent issue tracker" do
+      let(:err) { Factory :err }
+
+      before(:each) do
+        post :create_issue, :app_id => err.app.id, :id => err.id
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+
+      it "should set flash error message telling issue tracker of the app doesn't exist" do
+        flash[:error].should == "This up has no issue tracker setup."
+      end
+    end
+
+    context "error during request to a tracker" do
+      context "lighthouseapp tracker" do
+        let(:tracker) { Factory :lighthouseapp_tracker }
+        let(:err) { Factory :err, :app => tracker.app }
+
+        before(:each) do
+          stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").to_return(:status => 500)
+
+          post :create_issue, :app_id => err.app.id, :id => err.id
+        end
+
+        it "should redirect to err page" do
+          response.should redirect_to( app_err_path(err.app, err) )
+        end
+
+        it "should notify of connection error" do
+          flash[:error].should == "There was an error during issue creation. Check your tracker settings or try again later."
+        end
+      end
+    end
+  end
+
+  describe "DELETE /apps/:app_id/errs/:id/clear_issue" do
+    before(:each) do
+      sign_in Factory(:admin)
+    end
+
+    context "err with issue" do
+      let(:err) { Factory :err, :issue_link => "http://some.host" }
+
+      before(:each) do
+        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        err.reload
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+
+      it "should clear issue link" do
+        err.issue_link.should be_nil
+      end
+    end
+
+    context "err without issue" do
+      let(:err) { Factory :err }
+
+      before(:each) do
+        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        err.reload
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+    end
+  end
 end

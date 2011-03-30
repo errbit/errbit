@@ -22,10 +22,12 @@ class AppsController < ApplicationController
   def new
     @app = App.new
     @app.watchers.build
+    @app.issue_tracker = IssueTracker.new
   end
   
   def edit
     @app.watchers.build if @app.watchers.none?
+    @app.issue_tracker = IssueTracker.new if @app.issue_tracker.nil?
   end
   
   def create
