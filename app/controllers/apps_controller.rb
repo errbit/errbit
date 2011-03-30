@@ -22,6 +22,7 @@ class AppsController < ApplicationController
   def new
     @app = App.new
     @app.watchers.build
+    @app.issue_tracker = IssueTracker.new
   end
   
   def edit

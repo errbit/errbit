@@ -14,7 +14,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.5'
-  gem 'webmock'
+  gem 'webmock', :require => false
 end
 
 group :test do
