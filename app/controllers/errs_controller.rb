@@ -28,6 +28,8 @@ class ErrsController < ApplicationController
   end
 
   def create_issue
+    set_tracker_params
+
     if @app.issue_tracker
       @app.issue_tracker.create_issue @err
     else
@@ -64,6 +66,12 @@ class ErrsController < ApplicationController
 
     def find_err
       @err = @app.errs.find(params[:id])
+    end
+
+    def set_tracker_params
+      IssueTracker.default_url_options[:host] = request.host
+      IssueTracker.default_url_options[:port] = request.port
+      IssueTracker.default_url_options[:protocol] = request.scheme
     end
   
 end
