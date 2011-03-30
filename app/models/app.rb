@@ -16,7 +16,7 @@ class App
 
   embeds_many :watchers
   embeds_many :deploys
-  embeds_many :issue_trackers
+  embeds_one :issue_tracker
   references_many :errs, :dependent => :destroy
   
   before_validation :generate_api_key, :on => :create
@@ -25,11 +25,11 @@ class App
   validates_uniqueness_of :name, :allow_blank => true
   validates_uniqueness_of :api_key, :allow_blank => true
   validates_associated :watchers
-  validate :check_issue_trackers
+  validate :check_issue_tracker
   
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
-  accepts_nested_attributes_for :issue_trackers, :allow_destroy => true,
+  accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
     :reject_if => proc { |attrs| !%w( lighthouseapp ).include?(attrs[:issue_tracker_type]) }
   
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
@@ -51,12 +51,12 @@ class App
       self.api_key ||= ActiveSupport::SecureRandom.hex
     end
 
-    def check_issue_trackers
-      issue_trackers.map(&:valid?)
-      issue_trackers.each do |tracker|
-        tracker.errors.full_messages.each do |error|
+    def check_issue_tracker
+      if issue_tracker.present?
+        issue_tracker.valid?
+        issue_tracker.errors.full_messages.each do |error|
           errors[:base] << error
-        end if tracker.errors
+        end if issue_tracker.errors
       end
     end
 end

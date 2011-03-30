@@ -4,7 +4,7 @@ class IssueTracker
 
   validate :check_lighthouseapp_params
   
-  embedded_in :app, :inverse_of => :issue_trackers
+  embedded_in :app, :inverse_of => :issue_tracker
 
   field :account, :type => String
   field :api_token, :type => String
