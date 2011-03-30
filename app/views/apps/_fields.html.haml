@@ -22,7 +22,7 @@
       %div.email{:class => w.object.email.present? ? 'choosen' : nil}
         = w.text_field :email
 
-%fieldset.nested-wrapper
+%fieldset
   %legend Issue tracker
   = f.fields_for :issue_tracker do |w|
     %div.watcher.nested
