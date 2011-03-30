@@ -21,6 +21,7 @@ Errbit::Application.routes.draw do
       member do
         put :resolve
         post :create_issue
+        delete :clear_issue
       end
     end
 

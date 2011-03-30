@@ -40,6 +40,11 @@ class ErrsController < ApplicationController
     flash[:error] = "There was an error during issue creation. Check your tracker settings or try again later."
     redirect_to app_err_path(@app, @err)
   end
+
+  def clear_issue
+    @err.update_attribute :issue_link, nil
+    redirect_to app_err_path(@app, @err)
+  end
   
   def resolve
     # Deal with bug in mogoid where find is returning an Enumberable obj

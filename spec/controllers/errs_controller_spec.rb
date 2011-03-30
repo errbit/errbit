@@ -292,4 +292,40 @@ describe ErrsController do
       end
     end
   end
+
+  describe "DELETE /apps/:app_id/errs/:id/clear_issue" do
+    before(:each) do
+      sign_in Factory(:admin)
+    end
+
+    context "err with issue" do
+      let(:err) { Factory :err, :issue_link => "http://some.host" }
+
+      before(:each) do
+        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        err.reload
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+
+      it "should clear issue link" do
+        err.issue_link.should be_nil
+      end
+    end
+
+    context "err without issue" do
+      let(:err) { Factory :err }
+
+      before(:each) do
+        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        err.reload
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+    end
+  end
 end
