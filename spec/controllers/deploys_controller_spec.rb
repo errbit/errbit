@@ -9,7 +9,8 @@ describe DeploysController do
         'local_username' => 'john.doe',
         'scm_repository' => 'git@github.com/jdpace/errbit.git',
         'rails_env'      => 'production',
-        'scm_revision'   => '19d77837eef37902cf5df7e4445c85f392a8d0d5'
+        'scm_revision'   => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
+        'message'        => 'johns first deploy'
       }
       @app = Factory(:app_with_watcher, :api_key => 'APIKEY')
     end
@@ -26,7 +27,9 @@ describe DeploysController do
           :username     => 'john.doe',
           :environment  => 'production',
           :repository   => 'git@github.com/jdpace/errbit.git',
-          :revision     => '19d77837eef37902cf5df7e4445c85f392a8d0d5'
+          :revision     => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
+          :message      => 'johns first deploy'
+
         }).and_return(Factory(:deploy))
       post :create, :deploy => @params, :api_key => 'APIKEY'
     end
