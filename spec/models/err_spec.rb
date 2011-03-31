@@ -124,7 +124,7 @@ describe Err do
   context 'being created' do
     context 'when the app has err notifications set to false' do
       it 'should not send an email notification' do
-        app = Factory(:app_with_watcher, :notify_on_deploys => false)
+        app = Factory(:app_with_watcher, :notify_on_errs => false)
         Mailer.should_not_receive(:err_notification)
         Factory(:err, :app => app)
       end
