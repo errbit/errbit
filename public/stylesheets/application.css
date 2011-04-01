@@ -579,6 +579,22 @@ table.errs tr.resolved td > * {
   background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
 }
 
+#action-bar a.lighthouseapp_create {
+  background: transparent url(/images/lighthouseapp_create.png) 6px 5px no-repeat;
+}
+
+#action-bar a.redmine_create {
+  background: transparent url(/images/redmine_create.png) 6px 5px no-repeat;
+}
+
+#action-bar a.lighthouseapp_goto {
+  background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
+}
+
+#action-bar a.redmine_goto {
+  background: transparent url(/images/redmine_goto.png) 6px 5px no-repeat;
+}
+
 /* Notices Pagination */
 .notice-pagination {
   float: left;
