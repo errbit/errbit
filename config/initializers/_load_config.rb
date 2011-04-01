@@ -15,4 +15,6 @@ else
 end
 
 # Set config specific values
-ActionMailer::Base.default_url_options[:host] = Errbit::Config.host
+(Errbit::Application.config.action_mailer.default_url_options ||= {}).tap do |default|
+  default.merge! :host => Errbit::Config.host if default[:host].blank?
+end
