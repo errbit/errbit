@@ -25,15 +25,24 @@
 %fieldset
   %legend Issue tracker
   = f.fields_for :issue_tracker do |w|
-    %div.watcher.nested
+    %div.issue_tracker.nested
       %div.choose
         = w.radio_button :issue_tracker_type, :lighthouseapp
         = label_tag :issue_tracker_type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'issue_tracker_type_lighthouseapp')
-      %div.lighthouseapp{:class => 'choosen'}
+        = w.radio_button :issue_tracker_type, :redmine
+        = label_tag :issue_tracker_type_redmine, 'Redmine', :for => label_for_attr(w, 'issue_tracker_type_redmine')
+      %div.tracker_params{:class => lighthouse_tracker?(w.object) ? 'choosen' : nil}
         = w.label :account, "Account"
-        = w.text_field :account
+        = w.text_field :account, :placeholder => "abc from abc.lighthouseapp.com"
         = w.label :api_token, "API token"
-        = w.text_field :api_token
+        = w.text_field :api_token, :placeholder => "API Token for your account"
+        = w.label :project_id, "Project ID"
+        = w.text_field :project_id, :placeholder => "123 from abc from abc.lighthouseapp.com/projects/123"
+      %div.tracker_params{:class => lighthouse_tracker?(w.object) ? nil : 'choosen'}
+        = w.label :account, "Redmine URL"
+        = w.text_field :account, :placeholder => "like http://www.redmine.org/"
+        = w.label :api_token, "API token"
+        = w.text_field :api_token, :placeholder => "API Token for your account"
         = w.label :project_id, "Project ID"
         = w.text_field :project_id
         

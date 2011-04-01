@@ -5,7 +5,7 @@ class IssueTracker
   include Rails.application.routes.url_helpers
   default_url_options[:host] = Errbit::Application.config.action_mailer.default_url_options[:host]
 
-  validate :check_lighthouseapp_params
+  validate :check_params
   
   embedded_in :app, :inverse_of => :issue_tracker
 
@@ -87,10 +87,15 @@ class IssueTracker
   end
 
   protected
-  def check_lighthouseapp_params
+  def check_params
     blank_flags = %w( api_token project_id account ).map {|m| self[m].blank? }
     if blank_flags.any? && !blank_flags.all?
-      errors.add(:base, "You must specify your Lighthouseapp account, token and project id")
+      message = if issue_tracker_type == 'lighthouseapp'
+        "You must specify your Lighthouseapp account, api token and project id"
+      else
+        "You must specify your Redmine url, api token and project id"
+      end
+      errors.add(:base, message)
     end
   end
 end

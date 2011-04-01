@@ -30,7 +30,7 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !%w( lighthouseapp ).include?(attrs[:issue_tracker_type]) }
+  :reject_if => proc { |attrs| !%w( lighthouseapp redmine ).include?(attrs[:issue_tracker_type]) }
   
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)

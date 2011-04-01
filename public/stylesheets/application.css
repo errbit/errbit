@@ -501,14 +501,15 @@ a.button.active {
   margin-right: 14px;
 }
 
-/* Watchers Form */
-div.nested.watcher .user, div.nested.watcher .email {
+/* Watchers and Issue Tracker Forms */
+div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .lighthouseapp, div.issue_tracker.nested .redmine {
   display: none;
 }
-div.nested.watcher .choosen {
+div.nested.watcher .choosen, div.nested.issue_tracker .choosen {
   display: block;
 }
-div.nested.watcher .choose {
+
+div.nested.watcher .choose, div.nested.issue_tracker .choose {
   margin-bottom: 0.5em;
 }
 
