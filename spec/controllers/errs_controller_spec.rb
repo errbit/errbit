@@ -253,6 +253,38 @@ describe ErrsController do
           err.issue_link.should == @issue_link.sub(/\.xml$/, '')
         end
       end
+
+      context "redmine tracker" do
+        let(:notice) { Factory :notice }
+        let(:tracker) { Factory :redmine_tracker, :app => notice.err.app }
+        let(:err) { notice.err }
+
+        before(:each) do
+          number = 5
+          @issue_link = "#{tracker.account}/projects/#{tracker.project_id}/issues/#{number}.xml"
+          body = "<issue></issue>"
+          stub_request(:post, "#{tracker.account}/projects/#{tracker.project_id}/issues.xml").to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
+
+          post :create_issue, :app_id => err.app.id, :id => err.id
+          err.reload
+        end
+
+        it "should make request to Lighthouseapp with err params" do
+          requested = have_requested(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml")
+          WebMock.should requested.with(:headers => {'X-Lighthousetoken' => tracker.api_token})
+          WebMock.should requested.with(:body => /<tag>errbit<\/tag>/)
+          WebMock.should requested.with(:body => /<title>\[#{ err.environment }\]\[#{err.where}\] #{err.message.to_s.truncate(100)}<\/title>/)
+          WebMock.should requested.with(:body => /<body>.+<\/body>/m)
+        end
+
+        it "should redirect to err page" do
+          response.should redirect_to( app_err_path(err.app, err) )
+        end
+
+        it "should create issue link for err" do
+          err.issue_link.should == @issue_link.sub(/\.xml$/, '')
+        end
+      end
     end
 
     context "absent issue tracker" do
