@@ -1,0 +1,34 @@
+[See this exception on Errbit](<%= app_err_url err.app, err %> "See this exception on Errbit")
+<% if notice = err.notices.first %>
+  # <%= notice.message %> #
+  ## Summary ##
+  <% if notice.request['url'].present? %>
+    ### URL ###
+    [<%= notice.request['url'] %>](<%= notice.request['url'] %>)"
+  <% end %>
+  ### Where ###
+  <%= notice.err.where %>
+
+  ### Occured ###
+  <%= notice.created_at.to_s(:micro) %>
+
+  ### Similar ###
+  <%= (notice.err.notices.count - 1).to_s %>
+
+  ## Params ##
+  <code><%= pretty_hash(notice.params) %></code>
+
+  ## Session ##
+  <code><%= pretty_hash(notice.session) %></code>
+
+  ## Backtrace ##
+  <code>
+  <% for line in notice.backtrace %><%= line['number'] %>:  <%= line['file'].sub(/^\[PROJECT_ROOT\]/, '') %> -> **<%= line['method'] %>**
+  <% end %>
+  </code>
+
+  ## Environment ##
+  <% for key, val in notice.env_vars %>
+    <%= key %>: <%= val %>
+  <% end %>
+<% end %>
