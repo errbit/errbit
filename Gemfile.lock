@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/oruen/redmine_client.git
-  revision: ab198901fdd7f67f43614c8e72e6c10f38c9387a
+  revision: 0df20a8b695869b03cfa129560b938a0af346add
   specs:
     redmine_client (0.0.1)
       activeresource (>= 2.3.0)

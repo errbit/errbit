@@ -262,19 +262,18 @@ describe ErrsController do
         before(:each) do
           number = 5
           @issue_link = "#{tracker.account}/projects/#{tracker.project_id}/issues/#{number}.xml"
-          body = "<issue></issue>"
+          body = "<issue><id type=\"integer\">#{number}</id></issue>"
           stub_request(:post, "#{tracker.account}/projects/#{tracker.project_id}/issues.xml").to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
 
           post :create_issue, :app_id => err.app.id, :id => err.id
           err.reload
         end
 
-        it "should make request to Lighthouseapp with err params" do
-          requested = have_requested(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml")
-          WebMock.should requested.with(:headers => {'X-Lighthousetoken' => tracker.api_token})
-          WebMock.should requested.with(:body => /<tag>errbit<\/tag>/)
-          WebMock.should requested.with(:body => /<title>\[#{ err.environment }\]\[#{err.where}\] #{err.message.to_s.truncate(100)}<\/title>/)
-          WebMock.should requested.with(:body => /<body>.+<\/body>/m)
+        it "should make request to Redmine with err params" do
+          requested = have_requested(:post, "#{tracker.account}/projects/#{tracker.project_id}/issues.xml")
+          WebMock.should requested.with(:headers => {'X-Redmine-API-Key' => tracker.api_token})
+          WebMock.should requested.with(:body => /<subject>\[#{ err.environment }\]\[#{err.where}\] #{err.message.to_s.truncate(100)}<\/subject>/)
+          WebMock.should requested.with(:body => /<description>.+<\/description>/m)
         end
 
         it "should redirect to err page" do

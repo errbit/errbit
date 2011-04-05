@@ -21,7 +21,16 @@ class IssueTracker
 
   protected
   def create_redmine_issue err
-    
+    token = api_token
+    RedmineClient::Base.configure do
+      self.token = token
+    end
+    RedmineClient::Issue.site = account + "/projects/:project_id"
+    issue = RedmineClient::Issue.new(:project_id => project_id)
+    issue.subject = issue_title err
+    issue.description = ERB.new(File.read(Rails.root + "app/views/errs/redmine_body.txt.erb").gsub(/^\s*/, '')).result(binding)
+    issue.save!
+    err.update_attribute :issue_link, "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml$/, '')
   end
 
   def create_lighthouseapp_issue err
@@ -32,13 +41,17 @@ class IssueTracker
     Lighthouse::Ticket.site
 
     ticket = Lighthouse::Ticket.new(:project_id => project_id)
-    ticket.title = "[#{ err.environment }][#{ err.where }] #{err.message.to_s.truncate(100)}"
+    ticket.title = issue_title err
 
     ticket.body = ERB.new(File.read(Rails.root + "app/views/errs/lighthouseapp_body.txt.erb").gsub(/^\s*/, '')).result(binding)
 
     ticket.tags << "errbit"
     ticket.save!
     err.update_attribute :issue_link, "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, '')
+  end
+
+  def issue_title err
+    "[#{ err.environment }][#{ err.where }] #{err.message.to_s.truncate(100)}"
   end
 
   def check_params
