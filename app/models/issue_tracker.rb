@@ -28,7 +28,7 @@ class IssueTracker
     RedmineClient::Issue.site = account + "/projects/:project_id"
     issue = RedmineClient::Issue.new(:project_id => project_id)
     issue.subject = issue_title err
-    issue.description = ERB.new(File.read(Rails.root + "app/views/errs/redmine_body.txt.erb").gsub(/^\s*/, '')).result(binding)
+    issue.description = self.class.redmine_body_template.result(binding)
     issue.save!
     err.update_attribute :issue_link, "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml$/, '')
   end
@@ -43,7 +43,7 @@ class IssueTracker
     ticket = Lighthouse::Ticket.new(:project_id => project_id)
     ticket.title = issue_title err
 
-    ticket.body = ERB.new(File.read(Rails.root + "app/views/errs/lighthouseapp_body.txt.erb").gsub(/^\s*/, '')).result(binding)
+    ticket.body = self.class.lighthouseapp_body_template.result(binding)
 
     ticket.tags << "errbit"
     ticket.save!
@@ -63,6 +63,16 @@ class IssueTracker
         "You must specify your Redmine url, api token and project id"
       end
       errors.add(:base, message)
+    end
+  end
+
+  class << self
+    def lighthouseapp_body_template
+      @@lighthouseapp_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/lighthouseapp_body.txt.erb").gsub(/^\s*/, ''))
+    end
+  
+    def redmine_body_template
+      @@redmine_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/redmine_body.txt.erb").gsub(/^\s*/, ''))
     end
   end
 end
