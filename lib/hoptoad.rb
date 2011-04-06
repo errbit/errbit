@@ -1,13 +1,13 @@
 module Hoptoad
   module V2
     require 'digest/md5'
-    
+
     class ApiVersionError < StandardError
       def initialize
         super "Wrong API Version: Expecting v2.0"
       end
     end
-    
+
     def self.parse_xml(xml)
       parsed  = ActiveSupport::XmlMini.backend.parse(xml)['notice']
       raise ApiVersionError unless parsed && parsed['version'] == '2.0'
@@ -15,9 +15,9 @@ module Hoptoad
       rekeyed['fingerprint'] = Digest::MD5.hexdigest(rekeyed['error']['backtrace'].to_s)
       rekeyed
     end
-    
+
     private
-      
+
       def self.rekey(node)
         if node.is_a?(Hash) && node.has_key?('var') && node.has_key?('key')
           {node['key'] => rekey(node['var'])}

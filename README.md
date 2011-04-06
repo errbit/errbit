@@ -89,17 +89,24 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
   4. Enjoy!
 
+Upgrading
+---------
+*Note*: If upgrading from a version of Errbit that used Notices embedded in Errs please run:
+
+         1. git pull origin master ( assuming origin is the github.com/jdpace/errbit repo )
+         2. rake db:migrate
+
 Lighthouseapp integration
 -------------------------
 
-* Account is the name of your subdomain, i.e. **litcafe** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview 
+* Account is the name of your subdomain, i.e. **litcafe** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
 * Errbit uses token-based authentication. Get your API Token or visit [http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token](http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token) to learn how to get it.
 * Project id is number identifier of your project, i.e. **73466** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
 
 Redmine integration
 -------------------------
 
-* Account is the host of your redmine installation, i.e. **http://redmine.org** 
+* Account is the host of your redmine installation, i.e. **http://redmine.org**
 * Errbit uses token-based authentication. Get your API Key or visit [http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication) to learn how to get it.
 * Project id is an identifier of your project, i.e. **chilliproject** for project at http://www.redmine.org/projects/chilliproject
 

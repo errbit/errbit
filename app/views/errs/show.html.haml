@@ -20,7 +20,7 @@
     %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve'
 
 %h4= @notice.try(:message)
-  
+
 = will_paginate @notices, :param_name => :notice, :page_links => false, :class => 'notice-pagination'
 viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
 
@@ -36,19 +36,19 @@ viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
   #summary
     %h3 Summary
     = render 'notices/summary', :notice => @notice
-  
+
   #backtrace
     %h3 Backtrace
     = render 'notices/backtrace', :lines => @notice.backtrace
-    
+
   #environment
     %h3 Environment
     = render 'notices/environment', :notice => @notice
-  
+
   #params
     %h3 Parameters
     = render 'notices/params', :notice => @notice
-  
+
   #session
     %h3 Session
     = render 'notices/session', :notice => @notice

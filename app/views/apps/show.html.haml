@@ -50,7 +50,7 @@
 - else
   %h3 No deploys
 
-- if @app.errs.any?
+- if @app.errs.count > 0
   %h3.clear Errs
   = render 'errs/table', :errs => @errs
 - else

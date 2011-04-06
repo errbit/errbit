@@ -2,5 +2,5 @@
   %table.environment
     - notice.env_vars.each do |key,val|
       %tr
-        %th= key
+        %th= raw key
         %td.main= val

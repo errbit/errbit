@@ -13,7 +13,7 @@
   <%= notice.created_at.to_s(:micro) %>
 
   ### Similar ###
-  <%= (notice.err.notices.count - 1).to_s %>
+  <%= (notice.err.notices_count - 1).to_s %>
 
   ## Params ##
   <code><%= pretty_hash(notice.params) %></code>
