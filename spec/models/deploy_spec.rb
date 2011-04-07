@@ -42,6 +42,13 @@ describe Deploy do
         @staging_errs.all?{|err| err.reload.resolved?}.should == false
       end
     end
+
+    context 'when the app has deploy notifications set to false' do
+      it 'should not send an email notification' do
+        Mailer.should_not_receive(:deploy_notification)
+        Factory(:deploy, :app => Factory(:app_with_watcher, :notify_on_deploys => false))
+      end
+    end
   end
   
 end

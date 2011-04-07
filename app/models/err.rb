@@ -12,6 +12,7 @@ class Err
   field :issue_link, :type => String
 
   index :last_notice_at
+  index :app_id
 
   referenced_in :app
   embeds_many :notices

@@ -5,6 +5,9 @@ class App
   field :name, :type => String
   field :api_key
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
+  field :notify_on_errs, :type => Boolean, :default => true
+  field :notify_on_deploys, :type => Boolean, :default => true
+
   # Some legacy apps may have sting as key instead of BSON::ObjectID
   identity :type => String
   # There seems to be a Mongoid bug making it impossible to use String identity with references_many feature:
