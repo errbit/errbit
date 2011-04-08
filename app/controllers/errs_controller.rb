@@ -36,7 +36,8 @@ class ErrsController < ApplicationController
       flash[:error] = "This up has no issue tracker setup."
     end
     redirect_to app_err_path(@app, @err)
-  rescue ActiveResource::ConnectionError
+  rescue ActiveResource::ConnectionError => e
+    Rails.logger.error e.to_s
     flash[:error] = "There was an error during issue creation. Check your tracker settings or try again later."
     redirect_to app_err_path(@app, @err)
   end

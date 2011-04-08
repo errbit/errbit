@@ -211,17 +211,32 @@ describe AppsController do
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Lighthouseapp account, token and project id/) 
+            response.body.should match(/You must specify your Lighthouseapp account, api token and project id/) 
+          end
+        end
+
+        context "redmine" do
+          it "should save tracker params" do
+            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+              :issue_tracker_type => 'redmine', :project_id => '1234', :api_token => '123123', :account => 'http://myapp.com'
+            } }
+            @app.reload
+
+            tracker = @app.issue_tracker
+            tracker.issue_tracker_type.should == 'redmine'
+            tracker.project_id.should == '1234'
+            tracker.api_token.should == '123123'
+            tracker.account.should == 'http://myapp.com'
           end
 
           it "should show validation notice when sufficient params are not present" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'lighthouseapp', :project_id => '1234', :api_token => '123123'
+              :issue_tracker_type => 'redmine', :project_id => '1234', :api_token => '123123'
             } }
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Lighthouseapp account, token and project id/) 
+            response.body.should match(/You must specify your Redmine url, api token and project id/) 
           end
         end
       end

@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/oruen/redmine_client.git
+  revision: 0df20a8b695869b03cfa129560b938a0af346add
+  specs:
+    redmine_client (0.0.1)
+      activeresource (>= 2.3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -122,6 +129,7 @@ DEPENDENCIES
   mongoid (~> 2.0.0.rc.7)
   nokogiri
   rails (= 3.0.5)
+  redmine_client!
   rspec (~> 2.5)
   rspec-rails (~> 2.5)
   webmock

@@ -3,6 +3,9 @@ $(function(){
   
   if($('div.watcher.nested').length)
     activateWatcherTypeSelector();
+
+  if($('div.issue_tracker.nested').length)
+    activateIssueTrackerTypeSelector();
 });
 
 function activateNestedForms() {
@@ -66,5 +69,21 @@ function activateWatcherTypeSelector() {
     var wrapper = $(this).closest('.nested');
     wrapper.find('div.choosen').removeClass('choosen');
     wrapper.find('div.'+choosen).addClass('choosen');
+  });
+}
+
+function activateIssueTrackerTypeSelector() {
+  var not_choosen = $("div.tracker_params").filter(function () {
+    return !$(this).hasClass("choosen");
+  });
+  window.hiddenTracker = not_choosen.html();
+  not_choosen.remove();
+  $('div.issue_tracker input[name*=issue_tracker_type]').live('click', function(){
+    var choosen = $(this).val();
+    var wrapper = $(this).closest('.nested');
+    var tmp;
+    tmp = wrapper.find('div.choosen').html();
+    wrapper.find('div.choosen').html(window.hiddenTracker);
+    window.hiddenTracker = tmp;
   });
 }

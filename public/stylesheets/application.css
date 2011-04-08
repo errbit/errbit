@@ -501,14 +501,15 @@ a.button.active {
   margin-right: 14px;
 }
 
-/* Watchers Form */
-div.nested.watcher .user, div.nested.watcher .email {
+/* Watchers and Issue Tracker Forms */
+div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .lighthouseapp, div.issue_tracker.nested .redmine {
   display: none;
 }
-div.nested.watcher .choosen {
+div.nested.watcher .choosen, div.nested.issue_tracker .choosen {
   display: block;
 }
-div.nested.watcher .choose {
+
+div.nested.watcher .choose, div.nested.issue_tracker .choose {
   margin-bottom: 0.5em;
 }
 
@@ -576,6 +577,22 @@ table.errs tr.resolved td > * {
 /* Resolve Errs */
 #action-bar a.resolve {
   background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
+}
+
+#action-bar a.lighthouseapp_create {
+  background: transparent url(/images/lighthouseapp_create.png) 6px 5px no-repeat;
+}
+
+#action-bar a.redmine_create {
+  background: transparent url(/images/redmine_create.png) 6px 5px no-repeat;
+}
+
+#action-bar a.lighthouseapp_goto {
+  background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
+}
+
+#action-bar a.redmine_goto {
+  background: transparent url(/images/redmine_goto.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */
