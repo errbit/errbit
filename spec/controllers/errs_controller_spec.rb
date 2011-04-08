@@ -261,17 +261,18 @@ describe ErrsController do
 
         before(:each) do
           number = 5
-          @issue_link = "#{tracker.account}/projects/#{tracker.project_id}/issues/#{number}.xml"
-          body = "<issue><id type=\"integer\">#{number}</id></issue>"
-          stub_request(:post, "#{tracker.account}/projects/#{tracker.project_id}/issues.xml").to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
+          @issue_link = "#{tracker.account}/issues/#{number}.xml?project_id=#{tracker.project_id}"
+          body = "<issue><subject>my subject</subject><id>#{number}</id></issue>"
+          stub_request(:post, "#{tracker.account}/issues.xml").to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
 
           post :create_issue, :app_id => err.app.id, :id => err.id
           err.reload
         end
 
         it "should make request to Redmine with err params" do
-          requested = have_requested(:post, "#{tracker.account}/projects/#{tracker.project_id}/issues.xml")
+          requested = have_requested(:post, "#{tracker.account}/issues.xml")
           WebMock.should requested.with(:headers => {'X-Redmine-API-Key' => tracker.api_token})
+          WebMock.should requested.with(:body => /<project-id>#{tracker.project_id}<\/project-id>/)
           WebMock.should requested.with(:body => /<subject>\[#{ err.environment }\]\[#{err.where}\] #{err.message.to_s.truncate(100)}<\/subject>/)
           WebMock.should requested.with(:body => /<description>.+<\/description>/m)
         end
@@ -281,7 +282,7 @@ describe ErrsController do
         end
 
         it "should create issue link for err" do
-          err.issue_link.should == @issue_link.sub(/\.xml$/, '')
+          err.issue_link.should == @issue_link.sub(/\.xml/, '')
         end
       end
     end
