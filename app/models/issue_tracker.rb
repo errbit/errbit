@@ -73,7 +73,7 @@ class IssueTracker
     end
   
     def redmine_body_template
-      @@redmine_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/redmine_body.txt.erb").gsub(/^\s*/, ''))
+      @@redmine_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/redmine_body.txt.erb"))
     end
   end
 end
