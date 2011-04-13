@@ -31,7 +31,7 @@ set :scm_verbose, true
 set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't determine current branch") }
 set :branch, defer { current_branch }
 
-after 'deploy:update_code', 'errbit:symlink_configs', 'bundler:install'
+after 'deploy:update_code', 'errbit:symlink_configs'
 
 namespace :deploy do
   task :start do ; end
