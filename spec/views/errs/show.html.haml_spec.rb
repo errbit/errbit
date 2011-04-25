@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "errs/show.html.erb" do 
   before do 
     err = Factory(:err)
-    assign :err, err
+    assign :err, err.problem
     assign :app, err.app
-    assign :notices, err.notices.ordered.paginate(:page => 1, :per_page => 1)
+    assign :notices, err.notices.paginate(:page => 1, :per_page => 1)
     assign :notice, err.notices.first
   end
 

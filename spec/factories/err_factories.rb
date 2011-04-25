@@ -1,5 +1,9 @@
+Factory.define :problem do |p|
+  p.app            {|a| a.association :app}
+end
+
 Factory.define :err do |e|
-  e.app       {|p| p.association :app}
+  e.problem        {|p| p.association :problem}
   e.klass         'FooError'
   e.component     'foo'
   e.action        'bar'
