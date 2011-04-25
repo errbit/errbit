@@ -254,7 +254,7 @@ describe AppsController do
 
           it "should show validation notice when sufficient params are not present" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'pivotal', :project_id => '1234', :api_token => '123123' } }
+              :issue_tracker_type => 'pivotal', :project_id => '1234' } }
             @app.reload
 
             @app.issue_tracker.should be_nil
