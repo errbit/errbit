@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe ErrsController do
-  
+
   it_requires_authentication :for => {
     :index => :get, :all => :get, :show => :get, :resolve => :put
   },
   :params => {:app_id => 'dummyid', :id => 'dummyid'}
-  
+
   let(:app) { Factory(:app) }
   let(:err) { Factory(:err, :app => app) }
-    
+
   describe "GET /errs" do
     render_views
     context 'when logged in as an admin' do
@@ -31,7 +31,7 @@ describe ErrsController do
         response.should be_success
         response.body.should match(@err.message)
       end
-      
+
       it "should handle lots of errors" do
         pending "Turning off long running spec"
         1000.times { Factory :notice }
@@ -55,7 +55,7 @@ describe ErrsController do
         end
       end
     end
-    
+
     context 'when logged in as a user' do
       it 'gets a paginated list of unresolved errs for the users apps' do
         sign_in(user = Factory(:user))
@@ -68,7 +68,7 @@ describe ErrsController do
       end
     end
   end
-  
+
   describe "GET /errs/all" do
     context 'when logged in as an admin' do
       it "gets a paginated list of all errs" do
@@ -83,7 +83,7 @@ describe ErrsController do
         assigns(:errs).should == errs
       end
     end
-    
+
     context 'when logged in as a user' do
       it 'gets a paginated list of all errs for the users apps' do
         sign_in(user = Factory(:user))
@@ -96,29 +96,29 @@ describe ErrsController do
       end
     end
   end
-  
+
   describe "GET /apps/:app_id/errs/:id" do
     render_views
-    
+
     before do
       3.times { Factory(:notice, :err => err)}
     end
-    
+
     context 'when logged in as an admin' do
       before do
         sign_in Factory(:admin)
       end
-    
+
       it "finds the app" do
         get :show, :app_id => app.id, :id => err.id
         assigns(:app).should == app
       end
-    
+
       it "finds the err" do
         get :show, :app_id => app.id, :id => err.id
         assigns(:err).should == err
       end
-    
+
       it "successfully render page" do
         get :show, :app_id => app.id, :id => err.id
         response.should be_success
@@ -131,9 +131,9 @@ describe ErrsController do
           err = Factory :err
           get :show, :app_id => err.app.id, :id => err.id
 
-          response.body.should_not button_matcher  
+          response.body.should_not button_matcher
         end
-  
+
         it "should exist for err's app with issue tracker" do
           tracker = Factory(:lighthouseapp_tracker)
           err = Factory(:err, :app => tracker.app)
@@ -141,7 +141,7 @@ describe ErrsController do
 
           response.body.should button_matcher
         end
-  
+
         it "should not exist for err with issue_link" do
           tracker = Factory(:lighthouseapp_tracker)
           err = Factory(:err, :app => tracker.app, :issue_link => "http://some.host")
@@ -151,7 +151,7 @@ describe ErrsController do
         end
       end
     end
-    
+
     context 'when logged in as a user' do
       before do
         sign_in(@user = Factory(:user))
@@ -160,12 +160,12 @@ describe ErrsController do
         @watcher = Factory(:user_watcher, :user => @user, :app => @watched_app)
         @watched_err = Factory(:err, :app => @watched_app)
       end
-      
+
       it 'finds the err if the user is watching the app' do
         get :show, :app_id => @watched_app.to_param, :id => @watched_err.id
         assigns(:err).should == @watched_err
       end
-      
+
       it 'raises a DocumentNotFound error if the user is not watching the app' do
         lambda {
           get :show, :app_id => @unwatched_err.app_id, :id => @unwatched_err.id
@@ -173,17 +173,17 @@ describe ErrsController do
       end
     end
   end
-  
+
   describe "PUT /apps/:app_id/errs/:id/resolve" do
     before do
       sign_in Factory(:admin)
-      
+
       @err = Factory(:err)
       App.stub(:find).with(@err.app.id).and_return(@err.app)
       @err.app.errs.stub(:find).and_return(@err)
       @err.stub(:resolve!)
     end
-    
+
     it 'finds the app and the err' do
       App.should_receive(:find).with(@err.app.id).and_return(@err.app)
       @err.app.errs.should_receive(:find).and_return(@err)
@@ -191,17 +191,17 @@ describe ErrsController do
       assigns(:app).should == @err.app
       assigns(:err).should == @err
     end
-    
+
     it "should resolve the issue" do
       @err.should_receive(:resolve!).and_return(true)
       put :resolve, :app_id => @err.app.id, :id => @err.id
     end
-    
+
     it "should display a message" do
       put :resolve, :app_id => @err.app.id, :id => @err.id
       request.flash[:success].should match(/Great news/)
     end
-    
+
     it "should redirect to the app page" do
       put :resolve, :app_id => @err.app.id, :id => @err.id
       response.should redirect_to(app_path(@err.app))
@@ -270,6 +270,39 @@ describe ErrsController do
         end
 
         it "should make request to Redmine with err params" do
+          requested = have_requested(:post, "#{tracker.account}/issues.xml")
+          WebMock.should requested.with(:headers => {'X-Redmine-API-Key' => tracker.api_token})
+          WebMock.should requested.with(:body => /<project-id>#{tracker.project_id}<\/project-id>/)
+          WebMock.should requested.with(:body => /<subject>\[#{ err.environment }\]\[#{err.where}\] #{err.message.to_s.truncate(100)}<\/subject>/)
+          WebMock.should requested.with(:body => /<description>.+<\/description>/m)
+        end
+
+        it "should redirect to err page" do
+          response.should redirect_to( app_err_path(err.app, err) )
+        end
+
+        it "should create issue link for err" do
+          err.issue_link.should == @issue_link.sub(/\.xml/, '')
+        end
+      end
+
+      context "redmine tracker" do
+        let(:notice) { Factory :notice }
+        let(:tracker) { Factory :pivotal_tracker, :app => notice.err.app }
+        let(:err) { notice.err }
+
+        before(:each) do
+          pending
+          number = 5
+          @issue_link = "#{tracker.account}/issues/#{number}.xml?project_id=#{tracker.project_id}"
+          body = "<issue><subject>my subject</subject><id>#{number}</id></issue>"
+          stub_request(:post, "#{tracker.account}/issues.xml").to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
+
+          post :create_issue, :app_id => err.app.id, :id => err.id
+          err.reload
+        end
+
+        it "should make request to Pivotal Tracker with err params" do
           requested = have_requested(:post, "#{tracker.account}/issues.xml")
           WebMock.should requested.with(:headers => {'X-Redmine-API-Key' => tracker.api_token})
           WebMock.should requested.with(:body => /<project-id>#{tracker.project_id}<\/project-id>/)

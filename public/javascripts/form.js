@@ -1,6 +1,6 @@
 $(function(){
   activateNestedForms();
-  
+
   if($('div.watcher.nested').length)
     activateWatcherTypeSelector();
 
@@ -11,9 +11,9 @@ $(function(){
 function activateNestedForms() {
   $('.nested-wrapper').each(function(){
     var wrapper = $(this);
-    
+
     makeNestedItemsDestroyable(wrapper);
-    
+
     var addLink = $('<a/>').text('add another').addClass('add-nested');
     addLink.click(appendNestedItem);
     wrapper.append(addLink);
@@ -35,7 +35,7 @@ function appendNestedItem() {
   var nestedItem = addLink.parent().find('.nested').first().clone().show();
   var timestamp = new Date();
   timestamp = timestamp.valueOf();
-  
+
   nestedItem.find('input, select').each(function(){
     var input = $(this);
     input.attr('id', input.attr('id').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
@@ -73,17 +73,10 @@ function activateWatcherTypeSelector() {
 }
 
 function activateIssueTrackerTypeSelector() {
-  var not_choosen = $("div.tracker_params").filter(function () {
-    return !$(this).hasClass("choosen");
-  });
-  window.hiddenTracker = not_choosen.html();
-  not_choosen.remove();
   $('div.issue_tracker input[name*=issue_tracker_type]').live('click', function(){
-    var choosen = $(this).val();
+    var chosen = $(this).val();
     var wrapper = $(this).closest('.nested');
-    var tmp;
-    tmp = wrapper.find('div.choosen').html();
-    wrapper.find('div.choosen').html(window.hiddenTracker);
-    window.hiddenTracker = tmp;
+    wrapper.find('div.chosen').removeClass('chosen');
+    wrapper.find('div.'+chosen).addClass('chosen');
   });
 }

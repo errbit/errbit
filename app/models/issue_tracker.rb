@@ -6,7 +6,7 @@ class IssueTracker
   default_url_options[:host] = Errbit::Application.config.action_mailer.default_url_options[:host]
 
   validate :check_params
-  
+
   embedded_in :app, :inverse_of => :issue_tracker
 
   field :account, :type => String
@@ -15,8 +15,14 @@ class IssueTracker
   field :issue_tracker_type, :type => String, :default => 'lighthouseapp'
 
   def create_issue err
-    return create_lighthouseapp_issue err if issue_tracker_type == 'lighthouseapp'
-    create_redmine_issue err if issue_tracker_type == 'redmine'
+    case issue_tracker_type
+    when 'lighthouseapp'
+      create_lighthouseapp_issue err
+    when 'redmine'
+      create_redmine_issue err
+    when 'pivotal'
+      create_pivotal_issue err
+    end
   end
 
   protected
@@ -32,6 +38,14 @@ class IssueTracker
     issue.description = self.class.redmine_body_template.result(binding)
     issue.save!
     err.update_attribute :issue_link, "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}")
+  end
+
+  def create_pivotal_issue err
+    PivotalTracker::Client.token = api_token
+    PivotalTracker::Client.use_ssl = true
+    project = PivotalTracker::Project.find project_id.to_i
+    story = project.stories.create :name => issue_title(err), :story_type => 'bug', :description => self.class.pivotal_body_template.result(binding)
+    err.update_attribute :issue_link, "https://www.pivotaltracker.com/story/show/#{story.id}"
   end
 
   def create_lighthouseapp_issue err
@@ -56,12 +70,17 @@ class IssueTracker
   end
 
   def check_params
-    blank_flags = %w( api_token project_id account ).map {|m| self[m].blank? }
+    blank_flag_fields = %w(api_token project_id)
+    blank_flag_fields << 'account' if %w(lighthouseapp redmine).include? issue_tracker_type
+    blank_flags = blank_flag_fields.map {|m| self[m].blank? }
     if blank_flags.any? && !blank_flags.all?
-      message = if issue_tracker_type == 'lighthouseapp'
+      message = case issue_tracker_type
+      when 'lighthouseapp'
         "You must specify your Lighthouseapp account, api token and project id"
-      else
+      when 'redmine'
         "You must specify your Redmine url, api token and project id"
+      when 'pivotal'
+        "You must specify your Pivotal Tracker api token and project id"
       end
       errors.add(:base, message)
     end
@@ -71,9 +90,13 @@ class IssueTracker
     def lighthouseapp_body_template
       @@lighthouseapp_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/lighthouseapp_body.txt.erb").gsub(/^\s*/, ''))
     end
-  
+
     def redmine_body_template
       @@redmine_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/redmine_body.txt.erb"))
+    end
+
+    def pivotal_body_template
+      @@pivotal_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/pivotal_body.txt.erb"))
     end
   end
 end
