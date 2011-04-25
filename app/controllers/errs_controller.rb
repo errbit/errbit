@@ -1,9 +1,9 @@
 class ErrsController < ApplicationController
   include ActionView::Helpers::TextHelper
   
-  before_filter :find_app, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several]
-  before_filter :find_err, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several]
-  before_filter :find_selected_errs, :only => [:destroy_several, :resolve_several, :unresolve_several]
+  before_filter :find_app, :except => [:index, :all, :destroy_several, :merge_several, :resolve_several, :unresolve_several]
+  before_filter :find_err, :except => [:index, :all, :destroy_several, :merge_several, :resolve_several, :unresolve_several]
+  before_filter :find_selected_errs, :only => [:destroy_several, :merge_several, :resolve_several, :unresolve_several]
   
   
   
@@ -77,6 +77,17 @@ class ErrsController < ApplicationController
   def unresolve_several
     @selected_errs.each(&:unresolve!)
     flash[:success] = "#{pluralize(@selected_errs.count, 'err has', 'errs have')} been unresolved."
+    redirect_to :back
+  end
+  
+  
+  def merge_several
+    if @selected_errs.length < 2
+      flash[:notice] = "You must select at least two errors to merge"
+    else
+      @merged_problem = Problem.merge!(@selected_errs)
+      flash[:notice] = "#{@selected_errs.count} errors have been merged."
+    end
     redirect_to :back
   end
   
