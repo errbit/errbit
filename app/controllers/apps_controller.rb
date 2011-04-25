@@ -16,6 +16,7 @@ class AppsController < InheritedResources::Base
           @errs = resource.errs.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
           @all_errs = false
         end
+        @selected_errs = params[:errs] || []
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do

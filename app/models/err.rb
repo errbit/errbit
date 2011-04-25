@@ -37,6 +37,10 @@ class Err
     self.update_attributes!(:resolved => true)
   end
 
+  def unresolve!
+    self.update_attributes!(:resolved => false)
+  end
+
   def unresolved?
     !resolved?
   end
@@ -52,4 +56,3 @@ class Err
   end
 
 end
-

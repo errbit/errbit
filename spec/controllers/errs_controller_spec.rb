@@ -525,5 +525,39 @@ describe ErrsController do
     end
   end
 
+  describe "Bulk Actions" do
+    before(:each) do
+      sign_in Factory(:admin)
+      @err1 = Factory(:err, :resolved => true)
+      @err2 = Factory(:err, :resolved => false)
+    end
+    
+    it "should apply to multiple errs" do
+      post :resolve_several, :errs => [@err1.id.to_s, @err2.id.to_s]
+      assigns(:selected_errs).should == [@err1, @err2]
+    end
+    
+    context "POST /errs/resolve_several" do
+      it "should resolve the issue" do
+        post :resolve_several, :errs => [@err2.id.to_s]
+        @err2.reload.resolved?.should == true
+      end
+    end
+    
+    context "POST /errs/unresolve_several" do
+      it "should unresolve the issue" do
+        post :unresolve_several, :errs => [@err1.id.to_s]
+        @err1.reload.resolved?.should == false
+      end
+    end
+    
+    context "POST /errs/destroy_several" do
+      it "should delete the errs" do
+        lambda {
+          post :destroy_several, :errs => [@err1.id.to_s]
+        }.should change(Err, :count).by(-1)
+      end
+    end
+  end
 end
 
