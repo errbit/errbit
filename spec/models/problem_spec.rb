@@ -77,7 +77,7 @@ describe Problem do
   end
   
   
-  context "#merge!" do
+  context ".merge!" do
     it "collects the Errs from several problems into one and deletes the other problems" do
       problem1 = Factory(:err).problem
       problem2 = Factory(:err).problem
@@ -88,6 +88,22 @@ describe Problem do
         merged_problem = Problem.merge!(problem1, problem2)
         merged_problem.reload.errs.length.should == 2
       }.should change(Problem, :count).by(-1)
+    end
+  end
+  
+  
+  context "#unmerge!" do
+    it "collects the Errs from several problems into one and deletes the other problems" do
+      problem1 = Factory(:err).problem
+      problem2 = Factory(:err).problem
+      merged_problem = Problem.merge!(problem1, problem2)
+      merged_problem.errs.length.should == 2
+      
+      lambda {
+        problems = merged_problem.unmerge!
+        problems.length.should == 2
+        merged_problem.reload.errs.length.should == 1
+      }.should change(Problem, :count).by(1)
     end
   end
   

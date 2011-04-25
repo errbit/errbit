@@ -37,6 +37,23 @@ class Problem
   end
   
   
+  def merged?
+    errs.length > 1
+  end
+  
+  
+  def unmerge!
+    problems = [self]
+    errs[1..-1].each do |err|
+      new_problem = app.problems.create!
+      new_problem.errs << err.dup
+      problems << new_problem
+      err.destroy
+    end
+    problems
+  end
+  
+  
   # !todo: order
   def notices
     errs.inject([]) {|all, err| all + err.notices.ordered}
