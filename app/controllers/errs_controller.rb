@@ -6,17 +6,21 @@ class ErrsController < ApplicationController
   before_filter :find_selected_errs, :only => [:destroy_several, :resolve_several, :unresolve_several]
   
   
+  
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
     where_clause = {}
-    where_clause[:environment] = params[:environment] if(params[:environment].present?)
+    where_clause["errs.environment"] = params[:environment] if(params[:environment].present?)
     @selected_errs = params[:errs] || []
     respond_to do |format|
       format.html do
-        @errs = Err.for_apps(app_scope).where(where_clause).unresolved.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @errs = Problem.for_apps(app_scope).where(where_clause).unresolved.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
       end
       format.atom do
-        @errs = Err.for_apps(app_scope).where(where_clause).unresolved.ordered
+        @errs = Problem.for_apps(app_scope).where(where_clause).unresolved.ordered
+      end
+      format.atom do
+        @errs = Problem.for_apps(app_scope).unresolved.ordered
       end
     end
   end
@@ -24,15 +28,15 @@ class ErrsController < ApplicationController
   
   def all
     app_scope = current_user.admin? ? App.all : current_user.apps
+    @errs = Problem.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
     @selected_errs = params[:errs] || []
-    @errs = Err.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
   end
   
   
   def show
     page      = (params[:notice] || @err.notices_count)
     page      = 1 if page.to_i.zero?
-    @notices  = @err.notices.ordered.paginate(:page => page, :per_page => 1)
+    @notices  = @err.notices.paginate(:page => page, :per_page => 1)
     @notice   = @notices.first
     @comment = Comment.new
   end
@@ -65,9 +69,7 @@ class ErrsController < ApplicationController
     @err = @err.first if @err.respond_to?(:first)
     
     @err.resolve!
-    
     flash[:success] = 'Great news everyone! The err has been resolved.'
-    
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to app_path(@app)
@@ -132,7 +134,10 @@ protected
   
   
   def find_err
-    @err = @app.errs.find(params[:id])
+    @err = @app.problems.find(params[:id])
+    
+    # Deal with bug in mogoid where find is returning an Enumberable obj
+    @err = @err.first if @err.respond_to?(:first)
   end
   
   
@@ -149,7 +154,7 @@ protected
       flash[:notice] = "You have not selected any errors"
       redirect_to :back
     else
-      @selected_errs = Array(Err.find(err_ids))
+      @selected_errs = Array(Problem.find(err_ids))
     end
   end
   

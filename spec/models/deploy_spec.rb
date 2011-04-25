@@ -26,20 +26,20 @@ describe Deploy do
     context 'when the app has resolve_errs_on_deploy set to false' do
       it 'should not resolve the apps errs' do
         app = Factory(:app, :resolve_errs_on_deploy => false)
-        @errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :resolved => false, :app => app)}
+        @errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :problem => Factory(:problem, :resolved => false, :app => app))}
         Factory(:deploy, :app => app)
-        app.reload.errs.none?{|err| err.resolved?}.should == true
+        app.reload.problems.none?{|problem| problem.resolved?}.should == true
       end
     end
 
     context 'when the app has resolve_errs_on_deploy set to true' do
       it 'should resolve the apps errs that were in the same environment' do
         app = Factory(:app, :resolve_errs_on_deploy => true)
-        @prod_errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :resolved => false, :app => app, :environment => 'production')}
-        @staging_errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :resolved => false, :app => app, :environment => 'staging')}
+        @prod_errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :problem => Factory(:problem, :resolved => false, :app => app), :environment => 'production')}
+        @staging_errs = 3.times.inject([]) {|errs,_| errs << Factory(:err, :problem => Factory(:problem, :resolved => false, :app => app), :environment => 'staging')}
         Factory(:deploy, :app => app, :environment => 'production')
-        @prod_errs.all?{|err| err.reload.resolved?}.should == true
-        @staging_errs.all?{|err| err.reload.resolved?}.should == false
+        @prod_errs.all?{|err| err.problem.reload.resolved?}.should == true
+        @staging_errs.all?{|err| err.problem.reload.resolved?}.should == false
       end
     end
 

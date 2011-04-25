@@ -8,19 +8,19 @@ class AppsController < InheritedResources::Base
     where_clause = {}
     respond_to do |format|
       format.html do
-        where_clause[:environment] = params[:environment] if(params[:environment].present?)
+        where_clause["errs.environment"] = params[:environment] if(params[:environment].present?)
         if(params[:all_errs])
-          @errs = resource.errs.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+          @errs = resource.problems.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
           @all_errs = true
         else
-          @errs = resource.errs.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+          @errs = resource.problems.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
           @all_errs = false
         end
         @selected_errs = params[:errs] || []
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do
-        @errs = resource.errs.unresolved.ordered
+        @errs = resource.problems.unresolved.ordered
       end
     end
   end

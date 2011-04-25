@@ -1,5 +1,5 @@
 Factory.define(:app) do |p|
-  p.name { Factory.next :app_name }
+  p.sequence(:name) {|n| "App ##{n}"}
 end
 
 Factory.define(:app_with_watcher, :parent => :app) do |p|
@@ -20,7 +20,7 @@ Factory.define(:user_watcher, :parent => :watcher) do |w|
 end
 
 Factory.define(:deploy) do |d|
-  d.app       {|p| p.association :app}
+  d.app           {|p| p.association :app}
   d.username      'clyde.frog'
   d.repository    'git@github.com/jdpace/errbit.git'
   d.environment   'production'

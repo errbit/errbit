@@ -1,13 +1,17 @@
+Factory.define :problem do |p|
+  p.app            {|a| a.association :app}
+  p.comments      []
+end
+
 Factory.define :err do |e|
-  e.app       {|p| p.association :app}
+  e.problem        {|p| p.association :problem}
   e.klass         'FooError'
   e.component     'foo'
   e.action        'bar'
   e.environment   'production'
-  e.comments      []
 end
 
-Factory.define(:err_with_comments, :parent => :err) do |ec|
+Factory.define(:problem_with_comments, :parent => :problem) do |ec|
   ec.comments     { (1..3).map{Factory(:comment)} }
 end
 

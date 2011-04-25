@@ -7,7 +7,7 @@ class Deploy
   field :environment
   field :revision
   field :message
-
+  
   index :created_at, Mongo::DESCENDING
 
   embedded_in :app, :inverse_of => :deploys
@@ -22,7 +22,7 @@ class Deploy
   end
 
   def resolve_app_errs
-    app.errs.unresolved.in_env(environment).each {|err| err.resolve!}
+    app.problems.unresolved.in_env(environment).each {|problem| problem.resolve!}
   end
 
   protected
