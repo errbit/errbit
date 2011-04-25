@@ -556,6 +556,17 @@ describe ErrsController do
       end
     end
     
+    context "POST /errs/unmerge_several" do
+      it "should unmerge a merged problem" do
+        merged_problem = Problem.merge!(@problem1, @problem2)
+        merged_problem.errs.length.should == 2
+        lambda {
+          post :unmerge_several, :errs => [merged_problem.id.to_s]
+          merged_problem.reload.errs.length.should == 1
+        }.should change(Problem, :count).by(1)
+      end
+    end
+    
     context "POST /errs/resolve_several" do
       it "should resolve the issue" do
         post :resolve_several, :errs => [@problem2.id.to_s]
