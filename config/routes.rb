@@ -6,11 +6,14 @@ Errbit::Application.routes.draw do
   match '/notifier_api/v2/notices' => 'notices#create'
   match '/deploys.txt' => 'deploys#create'
   
-  resources :notices, :only => [:show]
-  resources :deploys, :only => [:show]
+  resources :notices,   :only => [:show]
+  resources :deploys,   :only => [:show]
   resources :users
-  resources :errs,    :only => [:index] do
+  resources :errs,      :only => [:index] do
     collection do
+      post :destroy_several
+      post :resolve_several
+      post :unresolve_several
       get :all
     end
   end
@@ -20,6 +23,7 @@ Errbit::Application.routes.draw do
       resources :notices
       member do
         put :resolve
+        put :unresolve
         post :create_issue
         delete :clear_issue
       end

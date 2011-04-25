@@ -11,6 +11,7 @@ class AppsController < ApplicationController
     respond_to do |format|
       format.html do
         @errs = @app.errs.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @selected_errs = params[:errs] || []
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do
