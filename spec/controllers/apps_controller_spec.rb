@@ -5,7 +5,7 @@ describe AppsController do
 
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
-  
+
   describe "GET /apps" do
     context 'when logged in as an admin' do
       it 'finds all apps' do
@@ -16,7 +16,7 @@ describe AppsController do
         assigns(:apps).should == apps
       end
     end
-    
+
     context 'when logged in as a regular user' do
       it 'finds apps the user is watching' do
         sign_in(user = Factory(:user))
@@ -31,7 +31,7 @@ describe AppsController do
       end
     end
   end
-  
+
   describe "GET /apps/:id" do
     context 'logged in as an admin' do
       before(:each) do
@@ -75,27 +75,27 @@ describe AppsController do
         end
       end
     end
-    
+
     context 'logged in as a user' do
       it 'finds the app if the user is watching it' do
         pending
       end
-      
+
       it 'does not find the app if the user is not watching it' do
         sign_in Factory(:user)
         app = Factory(:app)
-        lambda { 
+        lambda {
           get :show, :id => app.id
         }.should raise_error(Mongoid::Errors::DocumentNotFound)
       end
     end
   end
-  
+
   context 'logged in as an admin' do
     before do
       sign_in Factory(:admin)
     end
-  
+
     describe "GET /apps/new" do
       it 'instantiates a new app with a prebuilt watcher' do
         get :new
@@ -104,7 +104,7 @@ describe AppsController do
         assigns(:app).watchers.should_not be_empty
       end
     end
-  
+
     describe "GET /apps/:id/edit" do
       it 'finds the correct app' do
         app = Factory(:app)
@@ -112,29 +112,29 @@ describe AppsController do
         assigns(:app).should == app
       end
     end
-  
+
     describe "POST /apps" do
       before do
         @app = Factory(:app)
         App.stub(:new).and_return(@app)
       end
-    
+
       context "when the create is successful" do
         before do
           @app.should_receive(:save).and_return(true)
         end
-      
+
         it "should redirect to the app page" do
           post :create, :app => {}
           response.should redirect_to(app_path(@app))
         end
-      
+
         it "should display a message" do
           post :create, :app => {}
           request.flash[:success].should match(/success/)
         end
       end
-    
+
       context "when the create is unsuccessful" do
         it "should render the new page" do
           @app.should_receive(:save).and_return(false)
@@ -143,18 +143,18 @@ describe AppsController do
         end
       end
     end
-  
+
     describe "PUT /apps/:id" do
       before do
         @app = Factory(:app)
       end
-    
+
       context "when the update is successful" do
         it "should redirect to the app page" do
           put :update, :id => @app.id, :app => {}
           response.should redirect_to(app_path(@app))
         end
-      
+
         it "should display a message" do
           put :update, :id => @app.id, :app => {}
           request.flash[:success].should match(/success/)
@@ -168,7 +168,7 @@ describe AppsController do
           response.should redirect_to(app_path(id))
         end
       end
-    
+
       context "when the update is unsuccessful" do
         it "should render the edit page" do
           put :update, :id => @app.id, :app => { :name => '' }
@@ -179,7 +179,7 @@ describe AppsController do
       context "setting up issue tracker", :cur => true do
         context "unknown tracker type" do
           before(:each) do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => { 
+            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
               :issue_tracker_type => 'unknown', :project_id => '1234', :api_token => '123123', :account => 'myapp'
             } }
             @app.reload
@@ -211,7 +211,7 @@ describe AppsController do
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Lighthouseapp account, api token and project id/) 
+            response.body.should match(/You must specify your Lighthouseapp account, api token and project id/)
           end
         end
 
@@ -236,38 +236,60 @@ describe AppsController do
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Redmine url, api token and project id/) 
+            response.body.should match(/You must specify your Redmine url, api token and project id/)
+          end
+        end
+
+        context "pivotal" do
+          it "should save tracker params" do
+            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+              :issue_tracker_type => 'pivotal', :project_id => '1234', :api_token => '123123' } }
+            @app.reload
+
+            tracker = @app.issue_tracker
+            tracker.issue_tracker_type.should == 'pivotal'
+            tracker.project_id.should == '1234'
+            tracker.api_token.should == '123123'
+          end
+
+          it "should show validation notice when sufficient params are not present" do
+            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+              :issue_tracker_type => 'pivotal', :project_id => '1234' } }
+            @app.reload
+
+            @app.issue_tracker.should be_nil
+            response.body.should match(/You must specify your Pivotal Tracker api token and project id/)
           end
         end
       end
     end
-  
+
     describe "DELETE /apps/:id" do
       before do
         @app = Factory(:app)
         App.stub(:find).with(@app.id).and_return(@app)
       end
-    
+
       it "should find the app" do
         delete :destroy, :id => @app.id
         assigns(:app).should == @app
       end
-    
+
       it "should destroy the app" do
         @app.should_receive(:destroy)
         delete :destroy, :id => @app.id
       end
-    
+
       it "should display a message" do
         delete :destroy, :id => @app.id
         request.flash[:success].should match(/success/)
       end
-    
+
       it "should redirect to the apps page" do
         delete :destroy, :id => @app.id
         response.should redirect_to(apps_path)
       end
     end
   end
-  
+
 end
