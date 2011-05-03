@@ -562,7 +562,7 @@ table.errs td.app .environment {
 table.errs td.message a { 
   width: 420px;
   display: block;
-   word-wrap: break-word;
+  word-wrap: break-word;
 }
 table.errs td.message em {
   color: #727272;
@@ -572,6 +572,27 @@ table.errs tr.resolved td > * {
   opacity: 0.5;
   -moz-opacity: 0.5;
   -webkit-opacity: 0.5;
+}
+
+/* Tally tables */
+table.tally {
+  border:none;
+}
+table.tally td,
+table.tally th {
+  border:none !important;
+  background:none !important;
+  padding:8px 0 0;
+}
+table.tally tbody tr:first-child td,
+table.tally tbody tr:first-child th {
+  padding-top:0;
+}
+table.tally td.percent {
+  width:4.5em;
+}
+table.tally th.value {
+  text-transform:none;
 }
 
 /* Resolve Errs */

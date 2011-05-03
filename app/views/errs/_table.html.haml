@@ -11,7 +11,7 @@
     - errs.each do |err|
       %tr{:class => err.resolved? ? 'resolved' : 'unresolved'}
         %td.app
-          = err.app.name
+          = link_to err.app.name, app_path(err.app)
           %span.environment= err.environment
         %td.message
           = link_to err.message, app_err_path(err.app, err)

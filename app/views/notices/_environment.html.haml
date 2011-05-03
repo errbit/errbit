@@ -1,6 +1,6 @@
 .window
   %table.environment
-    - notice.env_vars.each do |key,val|
+    - notice.env_vars.sort_by {|pair| pair[0]}.each do |pair|
       %tr
-        %th= key
-        %td.main= val
+        %th= pair[0]
+        %td.main= pair[1]

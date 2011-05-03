@@ -1,0 +1,5 @@
+%table.tally
+  - rows.each do |row|
+    %tr
+      %td.percent= number_to_percentage(row[0], :precision => 1)
+      %th.value= row[1]
