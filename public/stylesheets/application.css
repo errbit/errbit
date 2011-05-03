@@ -1,9 +1,9 @@
-html { 
+html {
   margin: 0; padding: 0;
   color: #585858; background-color: #E2E2E2;
   font-size: 62.8%; font-family: Helvetica, "Lucida Grande","Lucida Sans",Arial,sans-serif;
 }
-body { 
+body {
   margin: 0; padding: 0;
   font-size: 1.3em; line-height: 1.4em;
 }
@@ -34,7 +34,7 @@ a:visited { color: #0069cc;}
 a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
 
-#header > div, #nav-bar, #content-wrapper, #footer { 
+#header > div, #nav-bar, #content-wrapper, #footer {
   width: 930px;
   margin: 0 auto;
   position: relative;
@@ -98,19 +98,19 @@ a.action  { float: right; font-size: 0.9em;}
   margin-bottom: 24px;
   height: 41px;
 }
-#nav-bar li { 
-  float: left; 
+#nav-bar li {
+  float: left;
   margin-right: 18px;
   color: #666;
   background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
   border-radius: 50px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
-  border: 1px solid #bbb; 
+  border: 1px solid #bbb;
 }
 #nav-bar li a {
   color: #666;
-  display: block; 
+  display: block;
   padding: 0 20px 0 40px;
   font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
   text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
@@ -120,17 +120,17 @@ a.action  { float: right; font-size: 0.9em;}
 #nav-bar li.apps a { background-image: url(images/icons/briefcase.png); }
 #nav-bar li.errs a { background-image: url(images/icons/error.png); }
 #nav-bar li.users a { background-image: url(images/icons/user.png); }
-#nav-bar li:hover { 
+#nav-bar li:hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
-#nav-bar li.active { 
-  border-color: #fff; 
+#nav-bar li.active {
+  border-color: #fff;
   background-color: #CCC;
   background-image: none;
-  box-shadow: inset 0 0 5px #999; 
-  -moz-box-shadow: inset 0 0 5px #999; 
+  box-shadow: inset 0 0 5px #999;
+  -moz-box-shadow: inset 0 0 5px #999;
   -webkit-box-shadow: inset 0 0 5px #999;
 }
 
@@ -141,13 +141,13 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Content Title */
 #content-title {
-  padding: 30px 20px; 
+  padding: 30px 20px;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #FFF;
   background-color: #e2e2e2;
 }
 #content-title h1 {
-  padding: 0; margin: 0; 
+  padding: 0; margin: 0;
   width: 85%;
   border: none;
   color: #666;
@@ -161,7 +161,7 @@ a.action  { float: right; font-size: 0.9em;}
   position: absolute;
   top: 25px; right: 20px;
 }
-#action-bar span {  
+#action-bar span {
   display: inline-block;
   margin-left: 18px;
   text-decoration: none;
@@ -174,14 +174,14 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #action-bar span a {
   color: #666;
-  display: block; 
+  display: block;
   padding: 0 20px 0 40px;
   font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
   text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
   background: transparent 10px 8px no-repeat;
 }
 #action-bar a:hover { text-decoration: none;}
-#action-bar span:hover { 
+#action-bar span:hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
@@ -194,14 +194,14 @@ a.action  { float: right; font-size: 0.9em;}
 #content {
   padding: 20px; border-top: 1px solid #C6C6C6;
   background-color: #FFF;
-} 
+}
 
-#content a.button { 
+#content a.button {
   float: right;
   display: block;
   margin-bottom: 10px;
 }
- 
+
 /* Footer */
 #footer {
   padding: 20px 0;
@@ -211,22 +211,22 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Flash Messages */
 #flash-messages li {
-  padding: 13px 45px; 
-  margin-bottom:25px; 
+  padding: 13px 45px;
+  margin-bottom:25px;
   border: 1px solid #C6C6C6;
   background-color: #F9F9F9;
   line-height: 1em;
 }
 #flash-messages li.notice {
-  padding-left: 20px; 
+  padding-left: 20px;
   background-color: #b5eeff;
   border: 1px solid #6cf;
 }
-#flash-messages li.success { 
+#flash-messages li.success {
   background: #cfc url(images/icons/success.png) 16px 50% no-repeat;
   border: 1px solid #6c3;
 }
-#flash-messages li.error { 
+#flash-messages li.error {
   background: #fcc url(images/icons/error.png)   16px 50% no-repeat;
   border: 1px solid #f99;
 }
@@ -244,13 +244,13 @@ form fieldset {
   padding: 0.8em; margin-bottom: 1em;
   background-color: #F0F0F0; border: 1px solid #C6C6C6; border-left: none; border-right: none;
 }
-form fieldset legend { 
-  font-size: 1.2em; font-weight: bold; text-transform: uppercase; 
+form fieldset legend {
+  font-size: 1.2em; font-weight: bold; text-transform: uppercase;
   color: #555;
 }
 form label {
   font-weight: bold; text-transform: uppercase; line-height: 1.6em;
-  display: inline-block; 
+  display: inline-block;
 }
 form label.inline { display: inline; }
 form .checkbox label { display: inline; }
@@ -281,17 +281,17 @@ form input[type=submit] {
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
   border: none; color: #FFF; background-color: #387fc1;
 }
-form div.buttons { 
+form div.buttons {
   color: #666;
   background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
   border-radius: 50px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
-  border: 1px solid #bbb; 
+  border: 1px solid #bbb;
   display: inline-block;
 }
-form div.buttons:hover { 
-  color: #666; 
+form div.buttons:hover {
+  color: #666;
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
@@ -351,10 +351,10 @@ form .error-messages ul {
 }
 
 /* Tables */
-table { 
-  width: 100%; 
+table {
+  width: 100%;
   border: 1px solid #C6C6C6;
-  margin-bottom: 1.5em; 
+  margin-bottom: 1.5em;
   border-collapse: separate;
 }
 table thead th {
@@ -364,10 +364,10 @@ table thead th {
 table tbody tr:first-child td {
   border-top: 1px solid #C6C6C6;
 }
-table th, table td { 
-  border-top: 1px solid #C6C6C6; 
-  padding: 10px 8px; 
-  text-align: left; 
+table th, table td {
+  border-top: 1px solid #C6C6C6;
+  padding: 10px 8px;
+  text-align: left;
 }
 table th { background-color: #E2E2E2; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
@@ -442,8 +442,8 @@ pre {
   background-color: #CCC;
   background-image: none;
   border-color: #FFF;
-  box-shadow: inset 0 0 5px #999; 
-  -moz-box-shadow: inset 0 0 5px #999; 
+  box-shadow: inset 0 0 5px #999;
+  -moz-box-shadow: inset 0 0 5px #999;
   -webkit-box-shadow: inset 0 0 5px #999;
   font-style: normal;
 }
@@ -477,11 +477,11 @@ a:hover.button {
   background-color: #eee;
 }
 a.button.active {
-  border-color: #fff; 
+  border-color: #fff;
   background-color: #CCC;
   background-image: none;
-  box-shadow: inset 0 0 5px #999; 
-  -moz-box-shadow: inset 0 0 5px #999; 
+  box-shadow: inset 0 0 5px #999;
+  -moz-box-shadow: inset 0 0 5px #999;
   -webkit-box-shadow: inset 0 0 5px #999;
 }
 
@@ -502,10 +502,10 @@ a.button.active {
 }
 
 /* Watchers and Issue Tracker Forms */
-div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .lighthouseapp, div.issue_tracker.nested .redmine {
+div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .lighthouseapp, div.issue_tracker.nested .redmine, div.issue_tracker.nested .pivotal {
   display: none;
 }
-div.nested.watcher .choosen, div.nested.issue_tracker .choosen {
+div.nested.watcher .choosen, div.nested.issue_tracker .chosen {
   display: block;
 }
 
@@ -559,7 +559,7 @@ table.errs td.app .environment {
   font-size: 0.8em;
   color: #999;
 }
-table.errs td.message a { 
+table.errs td.message a {
   width: 420px;
   display: block;
   word-wrap: break-word;
@@ -608,12 +608,20 @@ table.tally th.value {
   background: transparent url(/images/redmine_create.png) 6px 5px no-repeat;
 }
 
+#action-bar a.pivotal_create {
+  background: transparent url(/images/pivotal_create.png) 6px 5px no-repeat;
+}
+
 #action-bar a.lighthouseapp_goto {
   background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
 }
 
 #action-bar a.redmine_goto {
   background: transparent url(/images/redmine_goto.png) 6px 5px no-repeat;
+}
+
+#action-bar a.pivotal_goto {
+  background: transparent url(/images/pivotal_goto.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */

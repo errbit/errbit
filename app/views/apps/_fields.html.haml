@@ -3,7 +3,7 @@
 %div.required
   = f.label :name
   = f.text_field :name
-  
+
 %div.checkbox
   = f.check_box :notify_on_errs
   = f.label :notify_on_errs, 'Notify on errors'
@@ -39,19 +39,24 @@
         = label_tag :issue_tracker_type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'issue_tracker_type_lighthouseapp')
         = w.radio_button :issue_tracker_type, :redmine
         = label_tag :issue_tracker_type_redmine, 'Redmine', :for => label_for_attr(w, 'issue_tracker_type_redmine')
-      %div.tracker_params{:class => lighthouse_tracker?(w.object) ? 'choosen' : nil}
+        = w.radio_button :issue_tracker_type, :pivotal
+        = label_tag :issue_tracker_type_pivotal, 'Pivotal Tracker', :for => label_for_attr(w, 'issue_tracker_type_pivotal')
+      %div.tracker_params.lighthouseapp{:class => lighthouse_tracker?(w.object) ? 'chosen' : nil}
         = w.label :account, "Account"
         = w.text_field :account, :placeholder => "abc from abc.lighthouseapp.com"
         = w.label :api_token, "API token"
         = w.text_field :api_token, :placeholder => "API Token for your account"
         = w.label :project_id, "Project ID"
         = w.text_field :project_id, :placeholder => "123 from abc from abc.lighthouseapp.com/projects/123"
-      %div.tracker_params{:class => lighthouse_tracker?(w.object) ? nil : 'choosen'}
+      %div.tracker_params.redmine{:class => redmine_tracker?(w.object) ? 'chosen' : nil}
         = w.label :account, "Redmine URL"
         = w.text_field :account, :placeholder => "like http://www.redmine.org/"
         = w.label :api_token, "API token"
         = w.text_field :api_token, :placeholder => "API Token for your account"
         = w.label :project_id, "Project ID"
         = w.text_field :project_id
-        
-
+      %div.tracker_params.pivotal{:class => pivotal_tracker?(w.object) ? 'chosen' : nil}
+        = w.label :project_id, "Project ID"
+        = w.text_field :project_id
+        = w.label :api_token, "API token"
+        = w.text_field :api_token, :placeholder => "API Token for your account"

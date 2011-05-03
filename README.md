@@ -110,6 +110,12 @@ Redmine integration
 * Errbit uses token-based authentication. Get your API Key or visit [http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication) to learn how to get it.
 * Project id is an identifier of your project, i.e. **chilliproject** for project at http://www.redmine.org/projects/chilliproject
 
+Pivotal Tracker integration
+-------------------------
+
+* Errbit uses token-based authentication. Get your API Key or visit [http://www.pivotaltracker.com/help/api](http://www.pivotaltracker.com/help/api) to learn how to get it.
+* Project id is an identifier of your project, i.e. **24324** for project at http://www.pivotaltracker.com/projects/24324
+
 TODO
 ----
 
