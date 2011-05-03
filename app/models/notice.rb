@@ -51,6 +51,11 @@ class Notice
     })
   end
 
+  def user_agent
+    agent_string = env_vars['HTTP_USER_AGENT']
+    agent_string.blank? ? nil : UserAgent.parse(agent_string)
+  end
+  
   def request
     read_attribute(:request) || {}
   end
