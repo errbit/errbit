@@ -3,10 +3,17 @@ class ApplicationController < ActionController::Base
   
   before_filter :authenticate_user!
   
-  protected
+  rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
   
-    def require_admin!
-      redirect_to(root_path) and return(false) unless user_signed_in? && current_user.admin?
-    end
+  
+protected
+  
+  def redirect_to_root
+    redirect_to(root_path)
+  end
+  
+  def require_admin!
+    redirect_to(root_path) and return(false) unless user_signed_in? && current_user.admin?
+  end
   
 end

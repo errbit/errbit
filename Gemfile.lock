@@ -109,6 +109,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.25)
+    useragent (0.3.1)
     warden (1.0.3)
       rack (>= 1.0.0)
     webmock (1.6.2)
@@ -132,5 +133,6 @@ DEPENDENCIES
   redmine_client!
   rspec (~> 2.5)
   rspec-rails (~> 2.5)
+  useragent (~> 0.3.1)
   webmock
   will_paginate

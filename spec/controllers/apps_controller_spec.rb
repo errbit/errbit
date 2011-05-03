@@ -38,7 +38,7 @@ describe AppsController do
         @user = Factory(:admin)
         sign_in @user
         @app = Factory(:app)
-        @err = Factory :err, :app => @app
+        @err = Factory(:err, :problem => Factory(:problem, :app => @app))
         @notice = Factory :notice, :err => @err
       end
 
@@ -48,7 +48,7 @@ describe AppsController do
       end
 
       it "should not raise errors for app with err without notices" do
-        Factory :err, :app => @app
+        Factory(:err, :problem => Factory(:problem, :app => @app))
         lambda { get :show, :id => @app.id }.should_not raise_error
       end
 
@@ -60,7 +60,7 @@ describe AppsController do
 
       context "pagination" do
         before(:each) do
-          35.times { Factory :err, :app => @app }
+          35.times { Factory(:err, :problem => Factory(:problem, :app => @app)) }
         end
 
         it "should have default per_page value for user" do

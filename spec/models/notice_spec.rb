@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Notice do
   
+  
   context 'validations' do
     it 'requires a backtrace' do
       notice = Factory.build(:notice, :backtrace => nil)
@@ -22,6 +23,7 @@ describe Notice do
     end
   end
   
+  
   context '#from_xml' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
@@ -35,8 +37,8 @@ describe Notice do
     end
     
     it 'finds the correct err for the notice' do
-      Err.should_receive(:for).with({
-        :app      => @app,
+      App.should_receive(:find_by_api_key!).and_return(@app)
+      @app.should_receive(:find_or_create_err!).with({
         :klass        => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
@@ -47,15 +49,15 @@ describe Notice do
       @notice = Notice.from_xml(@xml)
     end
     
-    it 'marks the err as unresolve if it was previously resolved' do
-      Err.should_receive(:for).with({
-        :app      => @app,
+    it 'marks the err as unresolved if it was previously resolved' do
+      App.should_receive(:find_by_api_key!).and_return(@app)
+      @app.should_receive(:find_or_create_err!).with({
         :klass        => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
         :environment  => 'development',
         :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Factory(:err, :resolved => true))
+      }).and_return(err = Factory(:err, :problem => Factory(:problem, :resolved => true)))
       err.should be_resolved
       @notice = Notice.from_xml(@xml)
       @notice.err.should == err
@@ -98,17 +100,32 @@ describe Notice do
       @notice = Notice.from_xml(@xml)
       @notice.notifier['name'].should == 'Hoptoad Notifier'
     end
-
+    
     it "should handle params withour 'request' section" do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
       lambda { Notice.from_xml(@xml) }.should_not raise_error
     end
   end
   
+  
+  describe "user agent" do
+    it "should be parsed and human-readable" do
+      notice = Factory.build(:notice, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
+      notice.user_agent.browser.should == 'Chrome'
+      notice.user_agent.version.to_s.should =~ /^10\.0/
+    end
+    
+    it "should be nil if HTTP_USER_AGENT is blank" do
+      notice = Factory.build(:notice)
+      notice.user_agent.should == nil
+    end
+  end
+  
+  
   describe "email notifications" do
     before do
       @app = Factory(:app_with_watcher)
-      @err = Factory(:err, :app => @app)
+      @err = Factory(:err, :problem => @app.problems.create!)
     end
     
     Errbit::Config.email_at_notices.each do |threshold|
@@ -120,5 +137,6 @@ describe Notice do
       end
     end
   end
+  
   
 end

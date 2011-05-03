@@ -19,6 +19,9 @@ class Notice
   
   scope :ordered, order_by(:created_at.asc)
   
+  delegate :problem, :app, :to => :err
+  
+  
   def self.from_xml(hoptoad_xml)
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
     app = App.find_by_api_key!(hoptoad_notice['api-key'])
@@ -27,16 +30,14 @@ class Notice
     hoptoad_notice['request']['component']  = 'unknown' if hoptoad_notice['request']['component'].blank?
     hoptoad_notice['request']['action']     = nil if hoptoad_notice['request']['action'].blank?
     
-    err = Err.for({
-      :app      => app,
-      :klass        => hoptoad_notice['error']['class'],
-      :component    => hoptoad_notice['request']['component'],
-      :action       => hoptoad_notice['request']['action'],
-      :environment  => hoptoad_notice['server-environment']['environment-name'],
-      :fingerprint  => hoptoad_notice['fingerprint']
+    err = app.find_or_create_err!({
+      :klass              => hoptoad_notice['error']['class'],
+      :component          => hoptoad_notice['request']['component'],
+      :action             => hoptoad_notice['request']['action'],
+      :environment        => hoptoad_notice['server-environment']['environment-name'],
+      :fingerprint        => hoptoad_notice['fingerprint']
     })
-    err.update_attributes(:resolved => false) if err.resolved?
-    
+    err.problem.update_attributes(:resolved => false) if err.problem.resolved?
     err.notices.create!({
       :message            => hoptoad_notice['error']['message'],
       :backtrace          => hoptoad_notice['error']['backtrace']['line'],
@@ -46,34 +47,49 @@ class Notice
     })
   end
   
+  
+  def user_agent
+    agent_string = env_vars['HTTP_USER_AGENT']
+    agent_string.blank? ? nil : UserAgent.parse(agent_string)
+  end
+  
+  
   def request
     read_attribute(:request) || {}
   end
+  
   
   def env_vars
     request['cgi-data'] || {}
   end
   
+  
   def params
     request['params'] || {}
   end
+  
   
   def session
     request['session'] || {}
   end
   
+  
   def deliver_notification
     Mailer.err_notification(self).deliver
   end
   
+  
   def cache_last_notice_at
-    err.update_attributes(:last_notice_at => created_at)
+    problem.update_attributes(:last_notice_at => created_at) unless problem.last_notice_at && problem.last_notice_at > created_at
   end
   
-  protected
   
-    def should_notify?
-      err.app.notify_on_errs? && Errbit::Config.email_at_notices.include?(err.notices.count) && err.app.watchers.any?
-    end
+protected
+  
+  
+  def should_notify?
+    app.notify_on_errs? && Errbit::Config.email_at_notices.include?(err.notices.count) && app.watchers.any?
+  end
+  
   
 end

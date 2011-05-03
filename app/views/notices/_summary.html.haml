@@ -16,3 +16,6 @@
     %tr
       %th Similar
       %td= notice.err.notices.count - 1
+    %tr
+      %th Browser
+      %td= user_agent_graph(notice.err)

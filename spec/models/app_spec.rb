@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe App do
   
+  
   context 'validations' do
     it 'requires a name' do
       app = Factory.build(:app, :name => nil)
@@ -24,6 +25,7 @@ describe App do
     end
   end
   
+  
   context 'being created' do
     it 'generates a new api-key' do
       app = Factory.build(:app)
@@ -37,5 +39,36 @@ describe App do
       app.api_key.should match(/^[a-f0-9]{32}$/)
     end
   end
+  
+  
+  context '#find_or_create_err!' do
+    before do
+      @app = Factory(:app)
+      @conditions = {
+        :klass        => 'Whoops',
+        :component    => 'Foo',
+        :action       => 'bar',
+        :environment  => 'production'
+      }
+    end
+    
+    it 'returns the correct err if one already exists' do
+      existing = Factory(:err, @conditions.merge(:problem => Factory(:problem, :app => @app)))
+      @app.find_err(@conditions).should == existing
+      @app.find_or_create_err!(@conditions).should == existing
+    end
+    
+    it 'assigns the returned err to the given app' do
+      @app.find_or_create_err!(@conditions).app.should == @app
+    end
+    
+    it 'creates a new problem if a matching one does not already exist' do
+      @app.find_err(@conditions).should be_nil
+      lambda {
+        @app.find_or_create_err!(@conditions)
+      }.should change(Problem,:count).by(1)
+    end
+  end
+  
   
 end
