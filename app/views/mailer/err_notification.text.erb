@@ -1,4 +1,4 @@
-An err has just occurred in <%= @notice.err.environment %>: <%= @notice.err.message %>
+An err has just occurred in <%= @notice.err.environment %>: <%= raw(@notice.err.message) %>
 
 This err has occurred <%= pluralize @notice.err.notices_count, 'time' %>. You should really look into it here:
 
