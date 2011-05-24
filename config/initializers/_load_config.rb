@@ -5,6 +5,9 @@ if ENV['HEROKU']
   Errbit::Config.host = ENV['ERRBIT_HOST']
   Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
   Errbit::Config.email_at_notices = [1,3,10] #ENV['ERRBIT_EMAIL_AT_NOTICES']
+  Errbit::Config.api_key = ENV['ERRBIT_API_KEY']
+  Errbit::Config.secure = ENV['ERRBIT_SECURE']
+  Errbit::Config.secure = ENV['ERRBIT_PORT']
 else
   yaml = File.read(Rails.root.join('config','config.yml'))
   config = YAML.load(yaml)
