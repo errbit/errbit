@@ -19,6 +19,12 @@ email_from: errbit@example.com
 # an email notification.
 email_at_notices: [1, 10, 100]
 
-# Set to false to suppress confirmation when 
+# Set to false to suppress confirmation when
 # resolving errors.
 confirm_resolve_err: true
+
+# This settings needed if you want to detect self-produced by Errbit issues
+# api_key: ABCDEF
+## port:         keep it blank if standart (80 for http and 443 for https connections)
+## secure:       set this to true if you have https for your Errbit installation
+

@@ -16,6 +16,10 @@ platform :ruby do
   gem 'bson_ext', '~> 1.2'
 end
 
+group :production do
+  gem 'hoptoad_notifier'
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.5'
   gem 'webmock', :require => false

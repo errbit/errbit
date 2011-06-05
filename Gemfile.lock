@@ -58,6 +58,9 @@ GEM
     haml (3.0.25)
     happymapper (0.3.2)
       libxml-ruby (~> 1.1.3)
+    hoptoad_notifier (2.4.9)
+      activesupport
+      builder
     i18n (0.5.0)
     libxml-ruby (1.1.4)
     lighthouse-api (2.0)
@@ -144,6 +147,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails
   haml
+  hoptoad_notifier
   lighthouse-api
   mongoid (= 2.0.0.rc.8)
   mongoid_rails_migrations
