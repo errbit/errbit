@@ -1,10 +1,11 @@
 !!! html
 %html
   %head
-    %title 
+    %title
       Errbit &mdash;
       = yield(:page_title).present? ? yield(:page_title) : yield(:title)
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
+    = favicon_link_tag
     = csrf_meta_tag
     = javascript_include_tag :defaults
     = stylesheet_link_tag 'reset', 'application'
@@ -14,9 +15,9 @@
       %div
         = link_to 'Errbit', root_path, :id => 'site-name'
         = render 'shared/session'
-      
+
     = render 'shared/navigation' if current_user
-    
+
     #content-wrapper
       #content-title
         %h1= yield :title
@@ -24,7 +25,7 @@
         - if (action_bar = yield(:action_bar)).present?
           #action-bar
             = action_bar
-      #content      
+      #content
         = render :partial => 'shared/flash_messages'
         = yield
     #footer= "Powered by #{link_to 'Errbit', 'http://github.com/jdpace/errbit', :target => '_blank'}: the open source error catcher.".html_safe
