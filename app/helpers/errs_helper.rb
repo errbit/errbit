@@ -8,10 +8,10 @@ module ErrsHelper
     Errbit::Config.confirm_resolve_err === false ? nil : 'Seriously?'
   end
   
-  def link_to_github app, notice, text=nil
-    file_name   = notice.top_in_app_backtrace_line['file'].split('/').last
-    file_path   = notice.top_in_app_backtrace_line['file'].gsub('[PROJECT_ROOT]', '')
-    line_number = notice.top_in_app_backtrace_line['number']
+  def link_to_github app, line, text=nil
+    file_name   = line['file'].split('/').last
+    file_path   = line['file'].gsub('[PROJECT_ROOT]', '')
+    line_number = line['number']
     link_to(text || file_name, "#{app.github_url_to_file(file_path)}#L#{line_number}", :target => '_blank')
   end
   
