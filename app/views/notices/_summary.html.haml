@@ -19,7 +19,3 @@
     %tr
       %th Browser
       %td= user_agent_graph(notice.err)
-    - if @app.github_url?
-      %tr
-        %th GitHub
-        %td= link_to_github(@app, notice)

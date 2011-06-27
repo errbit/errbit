@@ -4,7 +4,8 @@
       %th
         %ul.line-numbers
           - lines.each do |line|
-            %li= line['number']
+            %li= (@app.github_url? && Notice.in_app_backtrace_line?(line)) ? link_to_github(@app, @notice, line['number']) : line['number']
+
       %td
         %ul.lines
           - lines.each do |line|

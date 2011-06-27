@@ -56,6 +56,10 @@ class Notice
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
   
+  def self.in_app_backtrace_line? line
+    line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))}
+  end
+  
   def request
     read_attribute(:request) || {}
   end
@@ -81,7 +85,7 @@ class Notice
   end
   
   def top_in_app_backtrace_line
-    @top_in_app_backtrace_line ||= self.backtrace.find {|line| line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))} }
+    @top_in_app_backtrace_line ||= self.backtrace.find {|line| Notice.in_app_backtrace_line?(line) }
   end
   
   protected
@@ -122,4 +126,3 @@ class Notice
     end
   end
 end
-
