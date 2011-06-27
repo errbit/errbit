@@ -4,6 +4,7 @@ class App
 
   field :name, :type => String
   field :api_key
+  field :github_url
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
   field :notify_on_deploys, :type => Boolean, :default => true
@@ -23,7 +24,8 @@ class App
   references_many :errs, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
-
+  before_save :normalize_github_url
+  
   validates_presence_of :name, :api_key
   validates_uniqueness_of :name, :allow_blank => true
   validates_uniqueness_of :api_key, :allow_blank => true
@@ -58,7 +60,15 @@ class App
     !(self[:notify_on_deploys] == false)
   end
   alias :notify_on_deploys? :notify_on_deploys
-
+  
+  def github_url?
+    self.github_url.present?
+  end
+  
+  def github_url_to_file(file)
+    "#{self.github_url}/blob/master#{file}"
+  end
+  
   protected
 
     def generate_api_key
@@ -73,4 +83,12 @@ class App
         end if issue_tracker.errors
       end
     end
+    
+    def normalize_github_url
+      return if self.github_url.blank?
+      self.github_url.gsub!(%r{^http://|git@}, 'https://')
+      self.github_url.gsub!(/github\.com:/, 'github.com/')
+      self.github_url.gsub!(/\.git$/, '')
+    end
+  
 end
