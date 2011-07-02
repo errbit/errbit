@@ -11,6 +11,7 @@ gem 'redmine_client', :git => "git://github.com/oruen/redmine_client.git"
 gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
+gem 'thin'
 
 platform :ruby do
   gem 'bson_ext', '~> 1.2'
