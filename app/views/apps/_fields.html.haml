@@ -8,6 +8,10 @@
   = f.check_box :notify_on_errs
   = f.label :notify_on_errs, 'Notify on errors'
 
+%div
+  = f.label :github_url
+  = f.text_field :github_url
+
 %div.checkbox
   = f.check_box :resolve_errs_on_deploy
   = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'

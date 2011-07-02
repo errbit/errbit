@@ -21,7 +21,36 @@ describe Notice do
       notice.errors[:notifier].should include("can't be blank")
     end
   end
+  
+  context '#top_in_app_backtrace_line' do
+    before do
+      backtrace = [{
+        'number'  => rand(999),
+        'file'    => '[GEM_ROOT]/gems/actionpack-3.0.4/lib/action_controller/metal/rescue.rb', 
+        'method'  => ActiveSupport.methods.shuffle.first
+      }, {
+        'number'  => rand(999),
+        'file'    => '[PROJECT_ROOT]/vendor/plugins/seamless_database_pool/lib/seamless_database_pool/controller_filter.rb', 
+        'method'  => ActiveSupport.methods.shuffle.first
+      }, {
+        'number'  => rand(999),
+        'file'    => '[PROJECT_ROOT]/lib/set_headers.rb',
+        'method'  => ActiveSupport.methods.shuffle.first
+      }, {
+        'number'  => rand(999),
+        'file'    => '[PROJECT_ROOT]/lib/detect_api.rb',
+        'method'  => ActiveSupport.methods.shuffle.first
+      }]
 
+      @notice = Factory(:notice, :backtrace => backtrace)
+    end
+    
+    it 'finds the correct line' do
+      line = @notice.top_in_app_backtrace_line
+      line['file'].should == '[PROJECT_ROOT]/lib/set_headers.rb'
+    end
+  end
+  
   context '#from_xml' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
