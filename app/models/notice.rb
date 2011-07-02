@@ -56,6 +56,10 @@ class Notice
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
   
+  def self.in_app_backtrace_line? line
+    line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))}
+  end
+  
   def request
     read_attribute(:request) || {}
   end
@@ -79,7 +83,11 @@ class Notice
   def cache_last_notice_at
     err.update_attributes(:last_notice_at => created_at)
   end
-
+  
+  def top_in_app_backtrace_line
+    @top_in_app_backtrace_line ||= self.backtrace.find {|line| Notice.in_app_backtrace_line?(line) }
+  end
+  
   protected
 
   def should_notify?
@@ -118,4 +126,3 @@ class Notice
     end
   end
 end
-

@@ -27,6 +27,16 @@
         %td
           %em Sadly, no one is watching this app
 
+- if @app.github_url?
+  %h3 Repository
+  %table.repository
+    %thead
+      %tr
+        %th GitHub
+    %tbody
+      %tr
+        %td= link_to(@app.github_url, @app.github_url, :target => '_blank')
+
 %h3 Latest Deploys
 - if @deploys.any?
   %table.deploys
