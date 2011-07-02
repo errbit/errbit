@@ -11,9 +11,6 @@ gem 'redmine_client', :git => "git://github.com/oruen/redmine_client.git"
 gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
-if ENV['HEROKU']
-  gem 'thin'
-end
 
 platform :ruby do
   gem 'bson_ext', '~> 1.2'
@@ -29,4 +26,8 @@ group :test do
   gem 'database_cleaner', '~> 0.6.0'
   gem 'factory_girl_rails'
   gem 'email_spec'
+end
+
+group :heroku do
+  gem 'thin'
 end
