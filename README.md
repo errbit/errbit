@@ -17,6 +17,14 @@ If this doesn't sound like you, you should probably stick with [Hoptoad](http://
 The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
 They have a free package and even offer a *"Hoptoad behind your firewall"* solution.
 
+Demo
+----
+
+There is a demo available at [http://errbit-demo.herokuapp.com/](http://errbit-demo.herokuapp.com/)
+
+Email: demo@errbit-demo.herokuapp.com
+Password: password
+
 Installation
 ------------
 
