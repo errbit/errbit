@@ -17,7 +17,6 @@ platform :ruby do
 end
 
 group :development, :test do
-  gem 'awesome_print'
   gem 'rspec-rails', '~> 2.5'
   gem 'webmock', :require => false
 end
