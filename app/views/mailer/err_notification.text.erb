@@ -4,4 +4,8 @@ This err has occurred <%= pluralize @notice.err.notices_count, 'time' %>. You sh
 
   <%= app_err_url(@app, @notice.err) %>
 
+Backtrace follows:
+
+<%= @notice.backtrace.collect { |l| l ? "  #{l['file']}:#{l['number']}" : nil }.compact.join("\n") %>
+  
 <%= render :partial => 'signature' %>
