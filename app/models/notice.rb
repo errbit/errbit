@@ -57,7 +57,7 @@ class Notice
   end
   
   def self.in_app_backtrace_line? line
-    line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))}
+    !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
   end
   
   def request
@@ -82,10 +82,6 @@ class Notice
 
   def cache_last_notice_at
     err.update_attributes(:last_notice_at => created_at)
-  end
-  
-  def top_in_app_backtrace_line
-    @top_in_app_backtrace_line ||= self.backtrace.find {|line| Notice.in_app_backtrace_line?(line) }
   end
   
   protected

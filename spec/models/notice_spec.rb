@@ -22,9 +22,8 @@ describe Notice do
     end
   end
   
-  context '#top_in_app_backtrace_line' do
-    before do
-      backtrace = [{
+  context '.in_app_backtrace_line?' do
+    let(:backtrace) do [{
         'number'  => rand(999),
         'file'    => '[GEM_ROOT]/gems/actionpack-3.0.4/lib/action_controller/metal/rescue.rb', 
         'method'  => ActiveSupport.methods.shuffle.first
@@ -36,18 +35,19 @@ describe Notice do
         'number'  => rand(999),
         'file'    => '[PROJECT_ROOT]/lib/set_headers.rb',
         'method'  => ActiveSupport.methods.shuffle.first
-      }, {
-        'number'  => rand(999),
-        'file'    => '[PROJECT_ROOT]/lib/detect_api.rb',
-        'method'  => ActiveSupport.methods.shuffle.first
       }]
-
-      @notice = Factory(:notice, :backtrace => backtrace)
     end
-    
-    it 'finds the correct line' do
-      line = @notice.top_in_app_backtrace_line
-      line['file'].should == '[PROJECT_ROOT]/lib/set_headers.rb'
+
+    it "should be false for line not starting with PROJECT_ROOT" do
+      Notice.in_app_backtrace_line?(backtrace[0]).should == false
+    end
+
+    it "should be false for file in vendor dir" do
+      Notice.in_app_backtrace_line?(backtrace[1]).should == false
+    end
+
+    it "should be true for application file" do
+      Notice.in_app_backtrace_line?(backtrace[2]).should == true
     end
   end
   
