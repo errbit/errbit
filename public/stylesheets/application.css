@@ -660,3 +660,11 @@ table.backtrace li.in-app {
   color: #2adb2e;
   background-color: #2f2f2f;
 }
+
+span.click_span {
+  font-size: 0.7em;
+}
+
+#deploys_div, #repository_div, #watchers_div {
+  display: none;
+}
