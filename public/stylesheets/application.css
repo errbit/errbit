@@ -376,13 +376,18 @@ table .main { width: 100%; }
 table.single_user {
   border-top: none;
 }
+
+.params {
+  width: 100%;
+  color: #f0f0f0;
+  background-color: #222;
+  overflow: auto;
+}
+
 /* Code */
 pre {
   padding: 0.8em;
   margin-bottom: 1em;
-  color: #f0f0f0;
-  background-color: #222;
-  border: 1px solid #444;
   font-family: monaco, courier, monospace;
   font-size: 1.1em;
 }
@@ -634,7 +639,6 @@ table.tally th.value {
 .window {
   width: 100%;
   margin-bottom: 1em;
-  overflow: auto;
 }
 .window table {
   margin: 0;
