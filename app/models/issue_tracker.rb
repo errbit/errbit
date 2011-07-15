@@ -22,6 +22,8 @@ class IssueTracker
       create_redmine_issue err
     when 'pivotal'
       create_pivotal_issue err
+    when 'fogbugz'
+      create_fogbugz_issue err
     end
   end
 
@@ -65,6 +67,18 @@ class IssueTracker
     err.update_attribute :issue_link, "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, '')
   end
 
+  def create_fogbugz_issue err
+    FogBugz.account = account
+    FogBugz.token = api_token
+    FogBugz::Issue.site
+    issue = FogBugz::Issue.new(:project_id => project_id)
+    issue.subject = issue_title err
+    issue.body = self.class.fogbugz_body_template.result(binding)
+    issue.tags << 'errbit'
+    issue.save!
+    err.update_attribute :issue_link, "#{FogBugz::Issue.site.to_s.sub(/#{FogBugz::Issue.site.path}$/, '')}#{FogBugz::Issue.element_path(issue.id, :project => project_id}".sub(/\.xml$/, '')
+  end
+
   def issue_title err
     "[#{ err.environment }][#{ err.where }] #{err.message.to_s.truncate(100)}"
   end
@@ -81,6 +95,8 @@ class IssueTracker
         "You must specify your Redmine url, api token and project id"
       when 'pivotal'
         "You must specify your Pivotal Tracker api token and project id"
+      when 'fogbugz'
+        "You must specify your FogBugz account, project id, username, and password"
       end
       errors.add(:base, message)
     end
@@ -97,6 +113,10 @@ class IssueTracker
 
     def pivotal_body_template
       @@pivotal_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/pivotal_body.txt.erb"))
+    end
+
+    def fogbugz_body_template
+      @@fogbugz_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/fogbugz_body.txt.erb))
     end
   end
 end
