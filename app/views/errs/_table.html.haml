@@ -12,7 +12,10 @@
       %tr{:class => err.resolved? ? 'resolved' : 'unresolved'}
         %td.app
           = link_to err.app.name, app_path(err.app)
-          %span.environment= link_to err.environment, app_path(environment: err.environment)
+          - if(current_page?(:controller => 'errs'))
+            %span.environment= link_to err.environment, errs_path(environment: err.environment)
+          - else
+            %span.environment= link_to err.environment, app_path(environment: err.environment)
         %td.message
           = link_to err.message, app_err_path(err.app, err)
           %em= err.where
