@@ -5,6 +5,13 @@ GIT
     redmine_client (0.0.1)
       activeresource (>= 2.3.0)
 
+PATH
+  remote: /Users/tracey/Development/gems/ruby-fogbugz
+  specs:
+    ruby-fogbugz (0.0.3)
+      crack
+      typhoeus
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -131,6 +138,9 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
+    typhoeus (0.2.4)
+      mime-types
+      mime-types
     tzinfo (0.3.26)
     useragent (0.3.1)
     warden (1.0.3)
@@ -159,6 +169,7 @@ DEPENDENCIES
   redmine_client!
   rspec (~> 2.5)
   rspec-rails (~> 2.5)
+  ruby-fogbugz!
   thin
   useragent (~> 0.3.1)
   webmock

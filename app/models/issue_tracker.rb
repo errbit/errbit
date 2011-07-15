@@ -68,15 +68,18 @@ class IssueTracker
   end
 
   def create_fogbugz_issue err
-    FogBugz.account = account
-    FogBugz.token = api_token
-    FogBugz::Issue.site
-    issue = FogBugz::Issue.new(:project_id => project_id)
-    issue.subject = issue_title err
-    issue.body = self.class.fogbugz_body_template.result(binding)
-    issue.tags << 'errbit'
-    issue.save!
-    err.update_attribute :issue_link, "#{FogBugz::Issue.site.to_s.sub(/#{FogBugz::Issue.site.path}$/, '')}#{FogBugz::Issue.element_path(issue.id, :project => project_id}".sub(/\.xml$/, '')
+    fogbugz = Fogbugz::Interface.new(:email => email, :password => password, :uri => uri)
+    fogbugz.account = account
+    fogbugz.token = api_token
+
+    issue = {}
+    issue['sTitle'] = issue_title err
+    issue['sProject'] = project_id
+    issue['sEvent'] = self.class.fogbugz_body_template.result(binding)
+    issue['sTags'] << 'errbit'
+
+    fogbugz.command(
+    # err.update_attribute :issue_link, "#{FogBugz::Issue.site.to_s.sub(/#{FogBugz::Issue.site.path}$/, '')}#{FogBugz::Issue.element_path(issue.id, :project => project_id}".sub(/\.xml$/, '')
   end
 
   def issue_title err
@@ -116,7 +119,7 @@ class IssueTracker
     end
 
     def fogbugz_body_template
-      @@fogbugz_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/fogbugz_body.txt.erb))
+      @@fogbugz_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/fogbugz_body.txt.erb"))
     end
   end
 end
