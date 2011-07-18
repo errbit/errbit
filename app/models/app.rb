@@ -21,7 +21,7 @@ class App
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
-  references_many :errs, :dependent => :destroy
+  has_many :errs, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_url
@@ -35,7 +35,7 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !%w(lighthouseapp redmine pivotal).include?(attrs[:issue_tracker_type]) }
+    :reject_if => proc { |attrs| !%w(lighthouseapp redmine pivotal fogbugz).include?(attrs[:issue_tracker_type]) }
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)

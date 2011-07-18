@@ -12,6 +12,8 @@ class IssueTracker
   field :account, :type => String
   field :api_token, :type => String
   field :project_id, :type => String
+  field :username, :type => String
+  field :password, :type => String
   field :issue_tracker_type, :type => String, :default => 'lighthouseapp'
 
   def create_issue err
@@ -68,18 +70,20 @@ class IssueTracker
   end
 
   def create_fogbugz_issue err
-    fogbugz = Fogbugz::Interface.new(:email => email, :password => password, :uri => uri)
-    fogbugz.account = account
-    fogbugz.token = api_token
+    fogbugz = Fogbugz::Interface.new(:email => username, :password => password, :uri => "https://#{account}.fogbugz.com")
+    fogbugz.authenticate
 
     issue = {}
     issue['sTitle'] = issue_title err
-    issue['sProject'] = project_id
+    issue['sArea'] = project_id
+    puts err.app.inspect
+    puts app_err_url(err.app, err)
     issue['sEvent'] = self.class.fogbugz_body_template.result(binding)
-    issue['sTags'] << 'errbit'
+    issue['sTags'] = ['errbit'].join(',')
+    issue['cols'] = ['ixBug'].join(',')
 
-    fogbugz.command(
-    # err.update_attribute :issue_link, "#{FogBugz::Issue.site.to_s.sub(/#{FogBugz::Issue.site.path}$/, '')}#{FogBugz::Issue.element_path(issue.id, :project => project_id}".sub(/\.xml$/, '')
+    # fb_resp = fogbugz.command(:new, issue)
+    # err.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
   end
 
   def issue_title err
@@ -87,19 +91,24 @@ class IssueTracker
   end
 
   def check_params
-    blank_flag_fields = %w(api_token project_id)
-    blank_flag_fields << 'account' if %w(lighthouseapp redmine).include? issue_tracker_type
+    blank_flag_fields = %w(project_id)
+    if(%w(fogbugz).include?(issue_tracker_type))
+      blank_flag_fields += %w(username password)
+    else
+      blank_flag_fields << 'api_token'
+    end
+    blank_flag_fields << 'account' if(%w(fogbugz lighthouseapp redmine).include?(issue_tracker_type))
     blank_flags = blank_flag_fields.map {|m| self[m].blank? }
     if blank_flags.any? && !blank_flags.all?
       message = case issue_tracker_type
       when 'lighthouseapp'
-        "You must specify your Lighthouseapp account, api token and project id"
+        'You must specify your Lighthouseapp account, api token and project id'
       when 'redmine'
-        "You must specify your Redmine url, api token and project id"
+        'You must specify your Redmine url, api token and project id'
       when 'pivotal'
-        "You must specify your Pivotal Tracker api token and project id"
+        'You must specify your Pivotal Tracker api token and project id'
       when 'fogbugz'
-        "You must specify your FogBugz account, project id, username, and password"
+        'You must specify your FogBugz Area Name, Username, and Password'
       end
       errors.add(:base, message)
     end

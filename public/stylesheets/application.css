@@ -507,7 +507,7 @@ a.button.active {
 }
 
 /* Watchers and Issue Tracker Forms */
-div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .lighthouseapp, div.issue_tracker.nested .redmine, div.issue_tracker.nested .pivotal {
+div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .lighthouseapp, div.issue_tracker.nested .redmine, div.issue_tracker.nested .pivotal, div.issue_tracker.nested .fogbugz {
   display: none;
 }
 div.nested.watcher .choosen, div.nested.issue_tracker .chosen {

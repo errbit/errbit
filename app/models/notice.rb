@@ -11,7 +11,7 @@ class Notice
   field :request, :type => Hash
   field :notifier, :type => Hash
 
-  referenced_in :err
+  belongs_to :err
   index :err_id
 
   after_create :cache_last_notice_at

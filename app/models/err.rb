@@ -16,8 +16,8 @@ class Err
   index :last_notice_at
   index :app_id
 
-  referenced_in :app
-  references_many :notices
+  belongs_to :app, inverse_of: :errs
+  has_many :notices
 
   validates_presence_of :klass, :environment
 

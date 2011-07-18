@@ -261,6 +261,33 @@ describe AppsController do
             response.body.should match(/You must specify your Pivotal Tracker api token and project id/)
           end
         end
+
+        context "fogbugz" do
+          context 'with correct params' do
+            before do
+              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :issue_tracker_type => 'fogbugz', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
+              @app.reload
+            end
+
+            subject {@app.issue_tracker}
+            its(:issue_tracker_type) {should == 'fogbugz'}
+            its(:project_id) {should == 'Service - Peon'}
+            its(:username) {should == '1234'}
+            its(:password) {should == '123123'}
+          end
+
+          context 'insufficient params' do
+            it 'shows validation notice' do
+              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :issue_tracker_type => 'fogbugz', :project_id => '1234' } }
+              @app.reload
+
+              @app.issue_tracker.should be_nil
+              response.body.should match(/You must specify your FogBugz Area Name, Username, and Password/)
+            end
+          end
+        end
       end
     end
 
