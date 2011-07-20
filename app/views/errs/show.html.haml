@@ -11,7 +11,7 @@
   = last_notice_at(@err).to_s(:micro)
 - content_for :action_bar do
   / some sort of mongoid association bug or something. have to actually search for the stupid app instead of using @err.app
-  - if App.where(_id: @err.app_id).first.issue_tracker
+  - if @err.app.issue_tracker
     - if @err.issue_link.blank?
       %span= link_to 'create issue', create_issue_app_err_path(@app, @err), :method => :post, :class => "#{@app.issue_tracker.issue_tracker_type}_create create-issue"
     - else

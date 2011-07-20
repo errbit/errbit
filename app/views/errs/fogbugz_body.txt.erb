@@ -1,5 +1,4 @@
-<% # some sort of stupid mongoid bugg that doesn't allow us to use err.app. have to explicitly search for it %>
-"See this exception on Errbit": <%= app_err_url(App.where(_id: err.app_id).first, err) %>
+"See this exception on Errbit": <%= app_err_url(err.app, err) %>
 <% if notice = err.notices.first %>
   <%= notice.message %>
 
