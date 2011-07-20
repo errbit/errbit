@@ -266,12 +266,13 @@ describe AppsController do
           context 'with correct params' do
             before do
               put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :issue_tracker_type => 'fogbugz', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
+                :issue_tracker_type => 'fogbugz', :account => 'abc', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
               @app.reload
             end
 
             subject {@app.issue_tracker}
             its(:issue_tracker_type) {should == 'fogbugz'}
+            its(:account) {should == 'abc'}
             its(:project_id) {should == 'Service - Peon'}
             its(:username) {should == '1234'}
             its(:password) {should == '123123'}

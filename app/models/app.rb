@@ -21,7 +21,7 @@ class App
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
-  has_many :errs, :dependent => :destroy
+  has_many :errs, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_url

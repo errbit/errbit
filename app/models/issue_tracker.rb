@@ -76,14 +76,12 @@ class IssueTracker
     issue = {}
     issue['sTitle'] = issue_title err
     issue['sArea'] = project_id
-    puts err.app.inspect
-    puts app_err_url(err.app, err)
     issue['sEvent'] = self.class.fogbugz_body_template.result(binding)
     issue['sTags'] = ['errbit'].join(',')
     issue['cols'] = ['ixBug'].join(',')
 
-    # fb_resp = fogbugz.command(:new, issue)
-    # err.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
+    fb_resp = fogbugz.command(:new, issue)
+    err.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
   end
 
   def issue_title err

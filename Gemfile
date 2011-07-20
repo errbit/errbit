@@ -14,12 +14,13 @@ gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz', :path => '/Users/tracey/Development/gems/ruby-fogbugz'
 
 platform :ruby do
-  gem 'bson_ext', '~> 1.2'
+  gem 'bson_ext', '~> 1.3.1'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.5'
   gem 'webmock', :require => false
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :test do
