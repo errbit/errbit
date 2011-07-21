@@ -617,6 +617,10 @@ table.tally th.value {
   background: transparent url(/images/pivotal_create.png) 6px 5px no-repeat;
 }
 
+#action-bar a.fogbugz_create {
+  background: transparent url(/images/fogbugz_create.png) 6px 5px no-repeat;
+}
+
 #action-bar a.lighthouseapp_goto {
   background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
 }
@@ -627,6 +631,10 @@ table.tally th.value {
 
 #action-bar a.pivotal_goto {
   background: transparent url(/images/pivotal_goto.png) 6px 5px no-repeat;
+}
+
+#action-bar a.fogbugz_goto {
+  background: transparent url(/images/fogbugz_goto.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */
