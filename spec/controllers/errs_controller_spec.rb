@@ -358,7 +358,7 @@ describe ErrsController do
     end
   end
 
-  describe "DELETE /apps/:app_id/errs/:id/clear_issue" do
+  describe "DELETE /apps/:app_id/errs/:id/unlink_issue" do
     before(:each) do
       sign_in Factory(:admin)
     end
@@ -367,7 +367,7 @@ describe ErrsController do
       let(:err) { Factory :err, :issue_link => "http://some.host" }
 
       before(:each) do
-        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        delete :unlink_issue, :app_id => err.app.id, :id => err.id
         err.reload
       end
 
@@ -384,7 +384,7 @@ describe ErrsController do
       let(:err) { Factory :err }
 
       before(:each) do
-        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        delete :unlink_issue, :app_id => err.app.id, :id => err.id
         err.reload
       end
 
