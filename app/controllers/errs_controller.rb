@@ -44,7 +44,7 @@ class ErrsController < ApplicationController
     redirect_to app_err_path(@app, @err)
   end
 
-  def clear_issue
+  def unlink_issue
     @err.update_attribute :issue_link, nil
     redirect_to app_err_path(@app, @err)
   end
