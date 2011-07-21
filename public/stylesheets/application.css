@@ -647,10 +647,13 @@ table.tally th.value {
 .window {
   width: 100%;
   margin-bottom: 1em;
+  overflow: auto;
 }
+
 .window table {
   margin: 0;
 }
+
 table.backtrace td {
   width: 100%;
   padding: 0;
