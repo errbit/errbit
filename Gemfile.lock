@@ -5,13 +5,6 @@ GIT
     redmine_client (0.0.1)
       activeresource (>= 2.3.0)
 
-PATH
-  remote: /Users/tracey/Development/gems/ruby-fogbugz
-  specs:
-    ruby-fogbugz (0.0.3)
-      crack
-      typhoeus
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -142,6 +135,9 @@ GEM
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
       ruby-debug-base19 (>= 0.11.19)
+    ruby-fogbugz (0.0.4)
+      crack
+      typhoeus
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
     thin (1.2.11)
@@ -183,7 +179,7 @@ DEPENDENCIES
   rspec (~> 2.5)
   rspec-rails (~> 2.5)
   ruby-debug19
-  ruby-fogbugz!
+  ruby-fogbugz
   thin
   useragent (~> 0.3.1)
   webmock

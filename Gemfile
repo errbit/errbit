@@ -11,7 +11,7 @@ gem 'redmine_client', :git => "git://github.com/oruen/redmine_client.git"
 gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
-gem 'ruby-fogbugz', :require => 'fogbugz', :path => '/Users/tracey/Development/gems/ruby-fogbugz'
+gem 'ruby-fogbugz', :require => 'fogbugz'
 
 platform :ruby do
   gem 'bson_ext', '~> 1.3.1'
