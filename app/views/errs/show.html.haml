@@ -10,7 +10,7 @@
   %strong Last Notice:
   = last_notice_at(@err).to_s(:micro)
 - content_for :action_bar do
-  - if @err.app.issue_tracker
+  - if @err.app.issue_tracker_configured?
     - if @err.issue_link.blank?
       %span= link_to 'create issue', create_issue_app_err_path(@app, @err), :method => :post, :class => "#{@app.issue_tracker.issue_tracker_type}_create create-issue"
     - else

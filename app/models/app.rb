@@ -69,6 +69,9 @@ class App
     "#{self.github_url}/blob/master#{file}"
   end
   
+  def issue_tracker_configured?
+    issue_tracker && !issue_tracker.project_id.blank?
+  end
   protected
 
     def generate_api_key
