@@ -1,5 +1,5 @@
-if ENV['MONGOHQ_URL']
-  settings = URI.parse(ENV['MONGOHQ_URL'] || 'mongodb://localhost/sushi')
+if mongo = ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI']
+  settings = URI.parse(mongo)
   database_name = settings.path.gsub(/^\//, '')
 
   Mongoid.configure do |config|
