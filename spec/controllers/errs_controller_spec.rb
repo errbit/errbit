@@ -54,6 +54,50 @@ describe ErrsController do
           assigns(:errs).size.should == 10
         end
       end
+
+      context 'with environment filters' do
+        before(:each) do
+          environments = ['production', 'test', 'development', 'staging']
+          20.times do |i|
+            Factory.create(:err, environment: environments[i % environments.length])
+          end
+        end
+
+        context 'no params' do
+          it 'shows errs for all environments' do
+            get :index
+            assigns(:errs).size.should == 21
+          end
+        end
+
+        context 'environment production' do
+          it 'shows errs for just production' do
+            get :index, environment: :production
+            assigns(:errs).size.should == 6
+          end
+        end
+
+        context 'environment staging' do
+          it 'shows errs for just staging' do
+            get :index, environment: :staging
+            assigns(:errs).size.should == 5
+          end
+        end
+
+        context 'environment development' do
+          it 'shows errs for just development' do
+            get :index, environment: :development
+            assigns(:errs).size.should == 5
+          end
+        end
+
+        context 'environment test' do
+          it 'shows errs for just test' do
+            get :index, environment: :test
+            assigns(:errs).size.should == 5
+          end
+        end
+      end
     end
 
     context 'when logged in as a user' do
