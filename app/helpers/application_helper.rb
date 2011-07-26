@@ -42,4 +42,8 @@ module ApplicationHelper
   def pivotal_tracker? object
     object.issue_tracker_type == "pivotal"
   end
+
+  def fogbugz_tracker? object
+    object.issue_tracker_type == 'fogbugz'
+  end
 end

@@ -5,12 +5,14 @@ class ErrsController < ApplicationController
 
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
+    where_clause = {}
+    where_clause[:environment] = params[:environment] if(params[:environment].present?)
     respond_to do |format|
       format.html do
-        @errs = Err.for_apps(app_scope).unresolved.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @errs = Err.for_apps(app_scope).where(where_clause).unresolved.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
       end
       format.atom do
-        @errs = Err.for_apps(app_scope).unresolved.ordered
+        @errs = Err.for_apps(app_scope).where(where_clause).unresolved.ordered
       end
     end
   end
@@ -42,7 +44,7 @@ class ErrsController < ApplicationController
     redirect_to app_err_path(@app, @err)
   end
 
-  def clear_issue
+  def unlink_issue
     @err.update_attribute :issue_link, nil
     redirect_to app_err_path(@app, @err)
   end

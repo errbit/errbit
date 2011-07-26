@@ -8,9 +8,17 @@ class AppsController < ApplicationController
   end
 
   def show
+    where_clause = {}
     respond_to do |format|
       format.html do
-        @errs = @app.errs.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        where_clause[:environment] = params[:environment] if(params[:environment].present?)
+        if(params[:all_errs])
+          @errs = @app.errs.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+          @all_errs = true
+        else
+          @errs = @app.errs.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+          @all_errs = false
+        end
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do

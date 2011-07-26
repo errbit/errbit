@@ -21,11 +21,11 @@ class App
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
-  references_many :errs, :dependent => :destroy
+  has_many :errs, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_url
-  
+
   validates_presence_of :name, :api_key
   validates_uniqueness_of :name, :allow_blank => true
   validates_uniqueness_of :api_key, :allow_blank => true
@@ -35,7 +35,7 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !%w(lighthouseapp redmine pivotal).include?(attrs[:issue_tracker_type]) }
+    :reject_if => proc { |attrs| !%w(lighthouseapp redmine pivotal fogbugz).include?(attrs[:issue_tracker_type]) }
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)
@@ -60,18 +60,19 @@ class App
     !(self[:notify_on_deploys] == false)
   end
   alias :notify_on_deploys? :notify_on_deploys
-  
+
   def github_url?
     self.github_url.present?
   end
-  
+
   def github_url_to_file(file)
     "#{self.github_url}/blob/master#{file}"
   end
-  
+ 
   def issue_tracker_configured?
     issue_tracker && !issue_tracker.project_id.blank?
   end
+
   protected
 
     def generate_api_key
@@ -86,12 +87,12 @@ class App
         end if issue_tracker.errors
       end
     end
-    
+
     def normalize_github_url
       return if self.github_url.blank?
       self.github_url.gsub!(%r{^http://|git@}, 'https://')
       self.github_url.gsub!(/github\.com:/, 'github.com/')
       self.github_url.gsub!(/\.git$/, '')
     end
-  
+
 end

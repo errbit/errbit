@@ -12,6 +12,8 @@ class IssueTracker
   field :account, :type => String
   field :api_token, :type => String
   field :project_id, :type => String
+  field :username, :type => String
+  field :password, :type => String
   field :issue_tracker_type, :type => String, :default => 'lighthouseapp'
 
   def create_issue err
@@ -22,6 +24,8 @@ class IssueTracker
       create_redmine_issue err
     when 'pivotal'
       create_pivotal_issue err
+    when 'fogbugz'
+      create_fogbugz_issue err
     end
   end
 
@@ -65,22 +69,44 @@ class IssueTracker
     err.update_attribute :issue_link, "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, '')
   end
 
+  def create_fogbugz_issue err
+    fogbugz = Fogbugz::Interface.new(:email => username, :password => password, :uri => "https://#{account}.fogbugz.com")
+    fogbugz.authenticate
+
+    issue = {}
+    issue['sTitle'] = issue_title err
+    issue['sArea'] = project_id
+    issue['sEvent'] = self.class.fogbugz_body_template.result(binding)
+    issue['sTags'] = ['errbit'].join(',')
+    issue['cols'] = ['ixBug'].join(',')
+
+    fb_resp = fogbugz.command(:new, issue)
+    err.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
+  end
+
   def issue_title err
     "[#{ err.environment }][#{ err.where }] #{err.message.to_s.truncate(100)}"
   end
 
   def check_params
-    blank_flag_fields = %w(api_token project_id)
-    blank_flag_fields << 'account' if %w(lighthouseapp redmine).include? issue_tracker_type
+    blank_flag_fields = %w(project_id)
+    if(%w(fogbugz).include?(issue_tracker_type))
+      blank_flag_fields += %w(username password)
+    else
+      blank_flag_fields << 'api_token'
+    end
+    blank_flag_fields << 'account' if(%w(fogbugz lighthouseapp redmine).include?(issue_tracker_type))
     blank_flags = blank_flag_fields.map {|m| self[m].blank? }
     if blank_flags.any? && !blank_flags.all?
       message = case issue_tracker_type
       when 'lighthouseapp'
-        "You must specify your Lighthouseapp account, api token and project id"
+        'You must specify your Lighthouseapp account, api token and project id'
       when 'redmine'
-        "You must specify your Redmine url, api token and project id"
+        'You must specify your Redmine url, api token and project id'
       when 'pivotal'
-        "You must specify your Pivotal Tracker api token and project id"
+        'You must specify your Pivotal Tracker api token and project id'
+      when 'fogbugz'
+        'You must specify your FogBugz Area Name, Username, and Password'
       end
       errors.add(:base, message)
     end
@@ -97,6 +123,10 @@ class IssueTracker
 
     def pivotal_body_template
       @@pivotal_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/pivotal_body.txt.erb"))
+    end
+
+    def fogbugz_body_template
+      @@fogbugz_body_template ||= ERB.new(File.read(Rails.root + "app/views/errs/fogbugz_body.txt.erb"))
     end
   end
 end

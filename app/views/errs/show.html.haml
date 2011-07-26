@@ -5,6 +5,7 @@
   = @app.name
   %strong Where:
   = @err.where
+  %br
   %strong Environment:
   = @err.environment
   %strong Last Notice:
@@ -15,7 +16,7 @@
       %span= link_to 'create issue', create_issue_app_err_path(@app, @err), :method => :post, :class => "#{@app.issue_tracker.issue_tracker_type}_create create-issue"
     - else
       %span= link_to 'go to issue', @err.issue_link, :class => "#{@app.issue_tracker.issue_tracker_type}_goto goto-issue"
-      = link_to 'clear issue', clear_issue_app_err_path(@app, @err), :method => :delete, :confirm => "Clear err issues?", :class => "clear-issue"
+      = link_to 'unlink issue', unlink_issue_app_err_path(@app, @err), :method => :delete, :confirm => "Unlink err issues?", :class => "unlink-issue"
   - if @err.unresolved?
     %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve'
 

@@ -54,6 +54,50 @@ describe ErrsController do
           assigns(:errs).size.should == 10
         end
       end
+
+      context 'with environment filters' do
+        before(:each) do
+          environments = ['production', 'test', 'development', 'staging']
+          20.times do |i|
+            Factory.create(:err, environment: environments[i % environments.length])
+          end
+        end
+
+        context 'no params' do
+          it 'shows errs for all environments' do
+            get :index
+            assigns(:errs).size.should == 21
+          end
+        end
+
+        context 'environment production' do
+          it 'shows errs for just production' do
+            get :index, environment: :production
+            assigns(:errs).size.should == 6
+          end
+        end
+
+        context 'environment staging' do
+          it 'shows errs for just staging' do
+            get :index, environment: :staging
+            assigns(:errs).size.should == 5
+          end
+        end
+
+        context 'environment development' do
+          it 'shows errs for just development' do
+            get :index, environment: :development
+            assigns(:errs).size.should == 5
+          end
+        end
+
+        context 'environment test' do
+          it 'shows errs for just test' do
+            get :index, environment: :test
+            assigns(:errs).size.should == 5
+          end
+        end
+      end
     end
 
     context 'when logged in as a user' do
@@ -358,7 +402,7 @@ describe ErrsController do
     end
   end
 
-  describe "DELETE /apps/:app_id/errs/:id/clear_issue" do
+  describe "DELETE /apps/:app_id/errs/:id/unlink_issue" do
     before(:each) do
       sign_in Factory(:admin)
     end
@@ -367,7 +411,7 @@ describe ErrsController do
       let(:err) { Factory :err, :issue_link => "http://some.host" }
 
       before(:each) do
-        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        delete :unlink_issue, :app_id => err.app.id, :id => err.id
         err.reload
       end
 
@@ -384,7 +428,7 @@ describe ErrsController do
       let(:err) { Factory :err }
 
       before(:each) do
-        delete :clear_issue, :app_id => err.app.id, :id => err.id
+        delete :unlink_issue, :app_id => err.app.id, :id => err.id
         err.reload
       end
 

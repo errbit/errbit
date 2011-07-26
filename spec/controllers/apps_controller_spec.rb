@@ -74,6 +74,71 @@ describe AppsController do
           assigns(:errs).size.should == 10
         end
       end
+
+      context 'with resolved errors' do
+        before(:each) do
+          resolved_err = Factory.create(:err, app: @app, resolved: true)
+          Factory.create(:notice, err: resolved_err)
+        end
+
+        context 'and no params' do
+          it 'shows only unresolved errs' do
+            get :show, id: @app.id
+            assigns(:errs).size.should == 1
+          end
+        end
+
+        context 'and all_errs=true params' do
+          it 'shows all errors' do
+            get :show, id: @app.id, all_errs: true
+            assigns(:errs).size.should == 2
+          end
+        end
+      end
+
+      context 'with environment filters' do
+        before(:each) do
+          environments = ['production', 'test', 'development', 'staging']
+          20.times do |i|
+            Factory.create(:err, app: @app, environment: environments[i % environments.length])
+          end
+        end
+
+        context 'no params' do
+          it 'shows errs for all environments' do
+            get :show, id: @app.id
+            assigns(:errs).size.should == 21
+          end
+        end
+
+        context 'environment production' do
+          it 'shows errs for just production' do
+            get :show, id: @app.id, environment: :production
+            assigns(:errs).size.should == 6
+          end
+        end
+
+        context 'environment staging' do
+          it 'shows errs for just staging' do
+            get :show, id: @app.id, environment: :staging
+            assigns(:errs).size.should == 5
+          end
+        end
+
+        context 'environment development' do
+          it 'shows errs for just development' do
+            get :show, id: @app.id, environment: :development
+            assigns(:errs).size.should == 5
+          end
+        end
+
+        context 'environment test' do
+          it 'shows errs for just test' do
+            get :show, id: @app.id, environment: :test
+            assigns(:errs).size.should == 5
+          end
+        end
+      end
     end
 
     context 'logged in as a user' do
@@ -259,6 +324,34 @@ describe AppsController do
 
             @app.issue_tracker.should be_nil
             response.body.should match(/You must specify your Pivotal Tracker api token and project id/)
+          end
+        end
+
+        context "fogbugz" do
+          context 'with correct params' do
+            before do
+              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :issue_tracker_type => 'fogbugz', :account => 'abc', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
+              @app.reload
+            end
+
+            subject {@app.issue_tracker}
+            its(:issue_tracker_type) {should == 'fogbugz'}
+            its(:account) {should == 'abc'}
+            its(:project_id) {should == 'Service - Peon'}
+            its(:username) {should == '1234'}
+            its(:password) {should == '123123'}
+          end
+
+          context 'insufficient params' do
+            it 'shows validation notice' do
+              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :issue_tracker_type => 'fogbugz', :project_id => '1234' } }
+              @app.reload
+
+              @app.issue_tracker.should be_nil
+              response.body.should match(/You must specify your FogBugz Area Name, Username, and Password/)
+            end
           end
         end
       end
