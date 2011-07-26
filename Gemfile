@@ -20,7 +20,7 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 2.5'
   gem 'webmock', :require => false
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :test do
