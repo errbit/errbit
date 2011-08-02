@@ -83,7 +83,7 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
   2. Create & configure for Heroku
 
          gem install heroku
-         heroku create
+         heroku create example-errbit --stack cedar
          heroku addons:add mongohq:free
          heroku addons:add sendgrid:free
          heroku config:add HEROKU=true
@@ -93,7 +93,7 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
   3. Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
 
-         heroku rake db:seed
+         heroku run rake db:seed
 
   4. Enjoy!
 
