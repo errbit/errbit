@@ -39,6 +39,8 @@
   = f.fields_for :issue_tracker do |w|
     %div.issue_tracker.nested
       %div.choose
+        = w.radio_button :issue_tracker_type, :none
+        = label_tag :issue_tracker_type_lighthouseapp, '(None)', :for => label_for_attr(w, 'issue_tracker_type_none')
         = w.radio_button :issue_tracker_type, :lighthouseapp
         = label_tag :issue_tracker_type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'issue_tracker_type_lighthouseapp')
         = w.radio_button :issue_tracker_type, :redmine
@@ -75,3 +77,4 @@
         = w.text_field :username, :placeholder => 'Username/Email for your account'
         = w.label :password, 'account password'
         = w.password_field :password, :placeholder => 'Password for your account'
+
