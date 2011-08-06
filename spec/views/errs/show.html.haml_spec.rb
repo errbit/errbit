@@ -1,9 +1,11 @@
 require 'spec_helper'
 
-describe "errs/show.html.erb" do 
-  before do 
+describe "errs/show.html.erb" do
+  before do
     err = Factory(:err)
+    comment = Factory(:comment)
     assign :err, err
+    assign :comment, comment
     assign :app, err.app
     assign :notices, err.notices.ordered.paginate(:page => 1, :per_page => 1)
     assign :notice, err.notices.first
@@ -12,7 +14,7 @@ describe "errs/show.html.erb" do
   describe "content_for :action_bar" do
 
     it "should confirm the 'resolve' link by default" do
-      render 
+      render
       action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
       resolve_link = action_bar.match(/(<a href.*?(class="resolve").*?>)/)[0]
       resolve_link.should =~ /data-confirm="Seriously\?"/
@@ -20,7 +22,7 @@ describe "errs/show.html.erb" do
 
     it "should confirm the 'resolve' link if configuration is unset" do
       Errbit::Config.stub(:confirm_resolve_err).and_return(nil)
-      render 
+      render
       action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
       resolve_link = action_bar.match(/(<a href.*?(class="resolve").*?>)/)[0]
       resolve_link.should =~ /data-confirm="Seriously\?"/
@@ -28,7 +30,7 @@ describe "errs/show.html.erb" do
 
     it "should not confirm the 'resolve' link if configured not to" do
       Errbit::Config.stub(:confirm_resolve_err).and_return(false)
-      render 
+      render
       action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
       resolve_link = action_bar.match(/(<a href.*?(class="resolve").*?>)/)[0]
       resolve_link.should_not =~ /data-confirm=/
@@ -37,3 +39,4 @@ describe "errs/show.html.erb" do
   end
 
 end
+
