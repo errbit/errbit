@@ -14,7 +14,7 @@ class IssueTracker
   field :project_id, :type => String
   field :username, :type => String
   field :password, :type => String
-  field :issue_tracker_type, :type => String, :default => 'lighthouseapp'
+  field :issue_tracker_type, :type => String, :default => 'none'
 
   def create_issue err
     case issue_tracker_type
@@ -130,3 +130,4 @@ class IssueTracker
     end
   end
 end
+
