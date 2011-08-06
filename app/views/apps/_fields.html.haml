@@ -4,21 +4,34 @@
   = f.label :name
   = f.text_field :name
 
-%div.checkbox
-  = f.check_box :notify_on_errs
-  = f.label :notify_on_errs, 'Notify on errors'
-
 %div
   = f.label :github_url
   = f.text_field :github_url
+
+%fieldset
+  %legend Notifications
+  %div.checkbox
+    = f.check_box :notify_on_errs
+    = f.label :notify_on_errs, 'Notify on errors'
+  %div.email_at_notices_nested{:style => f.object.notify_on_errs ? '' : 'display: none;'}
+    .field-helpertext Send a notification every
+    -# Edit the email_at_notices array as a CSV string
+    = f.text_field :email_at_notices, :value => f.object.email_at_notices.join(", ")
+    .field-helpertext times an error occurs. (CSV)
+  %div.checkbox
+    = f.check_box :notify_on_deploys
+    = f.label :notify_on_deploys, 'Notify on deploys'
+
+:javascript
+  $('#app_notify_on_errs').change(function(){
+    var el = $('.email_at_notices_nested');
+    this.checked ? el.show() : el.hide();
+  });
 
 %div.checkbox
   = f.check_box :resolve_errs_on_deploy
   = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'
 
-%div.checkbox
-  = f.check_box :notify_on_deploys
-  = f.label :notify_on_deploys, 'Notify on deploys'
 
 %fieldset.nested-wrapper
   %legend Watchers
@@ -75,3 +88,4 @@
         = w.text_field :username, :placeholder => 'Username/Email for your account'
         = w.label :password, 'account password'
         = w.password_field :password, :placeholder => 'Password for your account'
+

@@ -8,6 +8,7 @@ class App
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
   field :notify_on_deploys, :type => Boolean, :default => true
+  field :email_at_notices, :type => Array, :default => Errbit::Config.default_email_at_notices
 
   # Some legacy apps may have sting as key instead of BSON::ObjectID
   identity :type => String
@@ -68,7 +69,7 @@ class App
   def github_url_to_file(file)
     "#{self.github_url}/blob/master#{file}"
   end
- 
+
   def issue_tracker_configured?
     issue_tracker && !issue_tracker.project_id.blank?
   end
@@ -96,3 +97,4 @@ class App
     end
 
 end
+

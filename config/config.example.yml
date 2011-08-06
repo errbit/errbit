@@ -14,11 +14,13 @@ host: errbit.example.com
 # will be sent from.
 email_from: errbit@example.com
 
-# Configure when emails are sent for an error.
+# Configure the default value for when emails are sent for an error.
 # [1,3,7] = 1st, 3rd, and 7th occurence triggers
 # an email notification.
-email_at_notices: [1, 10, 100]
+# Each app can be configured individually.
+default_email_at_notices: [1, 10, 100]
 
-# Set to false to suppress confirmation when 
+# Set to false to suppress confirmation when
 # resolving errors.
 confirm_resolve_err: true
+
