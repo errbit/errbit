@@ -35,7 +35,7 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !%w(lighthouseapp redmine pivotal fogbugz).include?(attrs[:issue_tracker_type]) }
+    :reject_if => proc { |attrs| !%w(none lighthouseapp redmine pivotal fogbugz).include?(attrs[:issue_tracker_type]) }
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)
@@ -68,9 +68,9 @@ class App
   def github_url_to_file(file)
     "#{self.github_url}/blob/master#{file}"
   end
- 
+
   def issue_tracker_configured?
-    issue_tracker && !issue_tracker.project_id.blank?
+    issue_tracker && issue_tracker.issue_tracker_type != "none" && !issue_tracker.project_id.blank?
   end
 
   protected
@@ -96,3 +96,4 @@ class App
     end
 
 end
+
