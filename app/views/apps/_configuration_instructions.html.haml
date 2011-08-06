@@ -2,8 +2,8 @@
   %code
     :preserve
 
-      # Require the hoptoad_notifier gem in you App.
-      # --------------------------------------------
+      # Require the hoptoad_notifier gem in your App.
+      # ---------------------------------------------
       #
       # Rails 3 - In your Gemfile
       #  gem 'hoptoad_notifier'
@@ -13,12 +13,15 @@
       #
       # Then add the following to config/initializers/errbit.rb
       # -------------------------------------------------------
+
       HoptoadNotifier.configure do |config|
-        config.api_key = '#{app.api_key}'
-        config.host    = '#{request.host}'
-        config.port    = #{request.port}
-        config.secure  = config.port == 443
+        config.api_key     = '#{app.api_key}'
+        config.host        = '#{request.host}'
+        config.port        = #{request.port}
+        config.secure      = config.port == 443
+        config.js_notifier = true
       end
+
       #
       # Testing
       # -------
