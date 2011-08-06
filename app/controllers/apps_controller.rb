@@ -2,6 +2,7 @@ class AppsController < ApplicationController
 
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :find_app, :except => [:index, :new, :create]
+  before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
 
   def index
     @apps = current_user.admin? ? App.all : current_user.apps.all
@@ -73,4 +74,21 @@ class AppsController < ApplicationController
       # apparently finding by 'watchers.email' and 'id' is broken
       raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
     end
+
+    # email_at_notices is edited as a string, and stored as an array.
+    def parse_email_at_notices_or_set_default
+      if params[:app] && val = params[:app][:email_at_notices]
+        # Sanitize negative values, split on comma,
+        # strip, parse as integer, remove all '0's.
+        # If empty, set as default and show an error message.
+        email_at_notices = val.gsub(/-\d+/,"").split(",").map{|v| v.strip.to_i }.reject{|v| v == 0}
+        if email_at_notices.any?
+          params[:app][:email_at_notices] = email_at_notices
+        else
+          default_array = params[:app][:email_at_notices] = Errbit::Config.default_email_at_notices
+          flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
+        end
+      end
+    end
 end
+

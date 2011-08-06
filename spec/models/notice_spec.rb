@@ -21,15 +21,15 @@ describe Notice do
       notice.errors[:notifier].should include("can't be blank")
     end
   end
-  
+
   context '.in_app_backtrace_line?' do
     let(:backtrace) do [{
         'number'  => rand(999),
-        'file'    => '[GEM_ROOT]/gems/actionpack-3.0.4/lib/action_controller/metal/rescue.rb', 
+        'file'    => '[GEM_ROOT]/gems/actionpack-3.0.4/lib/action_controller/metal/rescue.rb',
         'method'  => ActiveSupport.methods.shuffle.first
       }, {
         'number'  => rand(999),
-        'file'    => '[PROJECT_ROOT]/vendor/plugins/seamless_database_pool/lib/seamless_database_pool/controller_filter.rb', 
+        'file'    => '[PROJECT_ROOT]/vendor/plugins/seamless_database_pool/lib/seamless_database_pool/controller_filter.rb',
         'method'  => ActiveSupport.methods.shuffle.first
       }, {
         'number'  => rand(999),
@@ -50,7 +50,7 @@ describe Notice do
       Notice.in_app_backtrace_line?(backtrace[2]).should == true
     end
   end
-  
+
   context '#from_xml' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
@@ -159,20 +159,22 @@ describe Notice do
       notice.user_agent.browser.should == 'Chrome'
       notice.user_agent.version.to_s.should =~ /^10\.0/
     end
-    
+
     it "should be nil if HTTP_USER_AGENT is blank" do
       notice = Factory.build(:notice)
       notice.user_agent.should == nil
     end
   end
-  
-  describe "email notifications" do
+
+  describe "email notifications (configured individually for each app)" do
+    custom_thresholds = [2, 4, 8, 16, 32, 64]
+
     before do
-      @app = Factory(:app_with_watcher)
+      @app = Factory(:app_with_watcher, :email_at_notices => custom_thresholds)
       @err = Factory(:err, :app => @app)
     end
 
-    Errbit::Config.email_at_notices.each do |threshold|
+    custom_thresholds.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
         @err.notices.stub(:count).and_return(threshold)
         Mailer.should_receive(:err_notification).
@@ -183,3 +185,4 @@ describe Notice do
   end
 
 end
+
