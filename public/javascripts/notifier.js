@@ -1,12 +1,12 @@
-var Hoptoad = {
+var Errbit = {
   VERSION           : '2.0',
   NOTICE_XML        : '<?xml version="1.0" encoding="UTF-8"?>\
   <notice version="2.0">\
     <api-key></api-key>\
     <notifier>\
-      <name>hoptoad_notifier_js</name>\
+      <name>errbit_notifier_js</name>\
       <version>2.0</version>\
-      <url>http://hoptoadapp.com</url>\
+      <url>http://NOTIFIER_HOST</url>\
     </notifier>\
     <error>\
       <class>EXCEPTION_CLASS</class>\
@@ -28,8 +28,8 @@ var Hoptoad = {
   backtrace_filters : [/notifier\.js/],
 
   notify: function(error) {
-    var xml     = escape(Hoptoad.generateXML(error));
-    var host    = Hoptoad.host || 'hoptoadapp.com';
+    var xml     = escape(Errbit.generateXML(error));
+    var host    = Errbit.host || 'github.com/jdpace/errbit';
     var url     = '//' + host + '/notifier_api/v2/notices?data=' + xml;
     var request = document.createElement('iframe');
 
@@ -44,42 +44,42 @@ var Hoptoad = {
   setEnvironment: function(value) {
     var matcher = /<environment-name>.*<\/environment-name>/;
 
-    Hoptoad.NOTICE_XML  = Hoptoad.NOTICE_XML.replace(matcher,
+    Errbit.NOTICE_XML  = Errbit.NOTICE_XML.replace(matcher,
                                                      '<environment-name>' +
                                                        value +
                                                      '</environment-name>')
   },
 
   setHost: function(value) {
-    Hoptoad.host = value;
+    Errbit.host = value;
   },
 
   setKey: function(value) {
     var matcher = /<api-key>.*<\/api-key>/;
 
-    Hoptoad.NOTICE_XML = Hoptoad.NOTICE_XML.replace(matcher,
+    Errbit.NOTICE_XML = Errbit.NOTICE_XML.replace(matcher,
                                                     '<api-key>' +
                                                       value +
                                                     '</api-key>');
   },
 
   setErrorDefaults: function(value) {
-    Hoptoad.errorDefaults = value;
+    Errbit.errorDefaults = value;
   },
 
   generateXML: function(errorWithoutDefaults) {
-    var error = Hoptoad.mergeDefault(Hoptoad.errorDefaults, errorWithoutDefaults);
+    var error = Errbit.mergeDefault(Errbit.errorDefaults, errorWithoutDefaults);
 
-    var xml       = Hoptoad.NOTICE_XML;
-    var url       = Hoptoad.escapeText(error.url       || '');
-    var component = Hoptoad.escapeText(error.component || '');
-    var action    = Hoptoad.escapeText(error.action    || '');
-    var type      = Hoptoad.escapeText(error.type      || 'Error');
-    var message   = Hoptoad.escapeText(error.message   || 'Unknown error.');
-    var backtrace = Hoptoad.generateBacktrace(error);
+    var xml       = Errbit.NOTICE_XML;
+    var url       = Errbit.escapeText(error.url       || '');
+    var component = Errbit.escapeText(error.component || '');
+    var action    = Errbit.escapeText(error.action    || '');
+    var type      = Errbit.escapeText(error.type      || 'Error');
+    var message   = Errbit.escapeText(error.message   || 'Unknown error.');
+    var backtrace = Errbit.generateBacktrace(error);
 
 
-    if (Hoptoad.trim(url) == '' && Hoptoad.trim(component) == '') {
+    if (Errbit.trim(url) == '' && Errbit.trim(component) == '') {
       xml = xml.replace(/<request>.*<\/request>/, '');
     } else {
       var data    = '';
@@ -87,7 +87,7 @@ var Hoptoad = {
       var cgi_data = error['cgi-data'] || {};
       cgi_data["HTTP_USER_AGENT"] = navigator.userAgent;
       data += '<cgi-data>';
-      data += Hoptoad.generateVariables(cgi_data);
+      data += Errbit.generateVariables(cgi_data);
       data += '</cgi-data>';
 
       var methods = ['params', 'session'];
@@ -97,18 +97,19 @@ var Hoptoad = {
 
         if (error[type]) {
           data += '<' + type + '>';
-          data += Hoptoad.generateVariables(error[type]);
+          data += Errbit.generateVariables(error[type]);
           data += '</' + type + '>';
         }
       }
 
       xml = xml.replace('</request>',        data + '</request>')
+               .replace('NOTIFIER_HOST',     host)
                .replace('REQUEST_URL',       url)
                .replace('REQUEST_ACTION',    action)
                .replace('REQUEST_COMPONENT', component);
     }
 
-    return xml.replace('PROJECT_ROOT',      Hoptoad.ROOT)
+    return xml.replace('PROJECT_ROOT',     Errbit.ROOT)
               .replace('EXCEPTION_CLASS',   type)
               .replace('EXCEPTION_MESSAGE', message)
               .replace('BACKTRACE_LINES',   backtrace.join(''));
@@ -126,14 +127,14 @@ var Hoptoad = {
     }
 
     var backtrace  = [];
-    var stacktrace = Hoptoad.getStackTrace(error);
+    var stacktrace = Errbit.getStackTrace(error);
 
     for (var i = 0, l = stacktrace.length; i < l; i++) {
       var line    = stacktrace[i];
-      var matches = line.match(Hoptoad.BACKTRACE_MATCHER);
+      var matches = line.match(Errbit.BACKTRACE_MATCHER);
 
-      if (matches && Hoptoad.validBacktraceLine(line)) {
-        var file = matches[2].replace(Hoptoad.ROOT, '[PROJECT_ROOT]');
+      if (matches && Errbit.validBacktraceLine(line)) {
+        var file = matches[2].replace(Errbit.ROOT, '[PROJECT_ROOT]');
 
         if (i == 0) {
           if (matches[2].match(document.location.href)) {
@@ -141,8 +142,8 @@ var Hoptoad = {
           }
         }
 
-        backtrace.push('<line method="' + Hoptoad.escapeText(matches[1]) +
-                       '" file="' + Hoptoad.escapeText(file) +
+        backtrace.push('<line method="' + Errbit.escapeText(matches[1]) +
+                       '" file="' + Errbit.escapeText(file) +
                        '" number="' + matches[3] + '" />');
       }
     }
@@ -169,8 +170,8 @@ var Hoptoad = {
   },
 
   validBacktraceLine: function(line) {
-    for (var i = 0; i < Hoptoad.backtrace_filters.length; i++) {
-      if (line.match(Hoptoad.backtrace_filters[i])) {
+    for (var i = 0; i < Errbit.backtrace_filters.length; i++) {
+      if (line.match(Errbit.backtrace_filters[i])) {
         return false;
       }
     }
@@ -183,8 +184,8 @@ var Hoptoad = {
     var result = '';
 
     for (key in parameters) {
-      result += '<var key="' + Hoptoad.escapeText(key) + '">' +
-                  Hoptoad.escapeText(parameters[key]) +
+      result += '<var key="' + Errbit.escapeText(key) + '">' +
+                  Errbit.escapeText(parameters[key]) +
                 '</var>';
     }
 
@@ -283,7 +284,7 @@ guessFunctionName:function(a,b){try{return this.guessFunctionNameFromLines(b,thi
 
 window.onerror = function(message, file, line) {
   setTimeout(function() {
-    Hoptoad.notify({
+    Errbit.notify({
       message : message,
       stack   : '()@' + file + ':' + line
     });
