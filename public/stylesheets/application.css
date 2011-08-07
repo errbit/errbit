@@ -352,7 +352,6 @@ form .error-messages ul {
 
 form .field-helpertext {
   display: inline;
-  text-transform: uppercase;
 }
 
 form input#app_email_at_notices {
