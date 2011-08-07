@@ -37,12 +37,12 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
   1. Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
 
-         aptitude update
-         aptitude install mongodb
+         apt-get update
+         apt-get install mongodb
 
-  2. Install libxml
+  2. Install libxml and libcurl
 
-         apt-get install libxml2 libxml2-dev libxslt-dev
+         apt-get install libxml2 libxml2-dev libxslt-dev libcurl4-openssl-dev
 
   3. Install Bundler
 
@@ -152,3 +152,4 @@ Copyright
 ---------
 
 Copyright (c) 2010 Jared Pace. See LICENSE for details.
+
