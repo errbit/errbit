@@ -38,5 +38,38 @@ describe "errs/show.html.erb" do
 
   end
 
+  describe "content_for :comments" do
+    it 'should display comments and new comment form when no issue tracker' do
+      err = Factory(:err_with_comments)
+      assign :err, err
+      assign :app, err.app
+      render
+      comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
+      comments_section.should =~ /Test comment/
+      comments_section.should =~ /Add a comment/
+    end
+
+    context "with issue tracker" do
+      def with_issue_tracker(err)
+        err.app.issue_tracker = IssueTracker.new :issue_tracker_type => "lighthouseapp", :project_id => "1234"
+        assign :err, err
+        assign :app, err.app
+      end
+
+      it 'should not display the comments section' do
+        with_issue_tracker(Factory(:err))
+        render
+        view.instance_variable_get(:@_content_for)[:comments].should be_blank
+      end
+
+      it 'should display existing comments' do
+        with_issue_tracker(Factory(:err_with_comments))
+        render
+        comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
+        comments_section.should =~ /Test comment/
+        comments_section.should_not =~ /Add a comment/
+      end
+    end
+  end
 end
 
