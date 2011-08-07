@@ -20,16 +20,17 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 2.5'
   gem 'webmock', :require => false
+  gem 'factory_girl_rails'
   #gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :test do
   gem 'rspec', '~> 2.5'
   gem 'database_cleaner', '~> 0.6.0'
-  gem 'factory_girl_rails'
   gem 'email_spec'
 end
 
 group :heroku do
   gem 'thin'
 end
+
