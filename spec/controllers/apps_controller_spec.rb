@@ -241,6 +241,27 @@ describe AppsController do
         end
       end
 
+      context "changing email_at_notices" do
+        it "should parse legal csv values" do
+          put :update, :id => @app.id, :app => { :email_at_notices => '1,   4,      7,8,  10' }
+          @app.reload
+          @app.email_at_notices.should == [1, 4, 7, 8, 10]
+        end
+        context "failed parsing of CSV" do
+          it "should set the default value" do
+            @app = Factory(:app, :email_at_notices => [1, 2, 3, 4])
+            put :update, :id => @app.id, :app => { :email_at_notices => 'asdf, -1,0,foobar,gd00,0,abc' }
+            @app.reload
+            @app.email_at_notices.should == Errbit::Config.default_email_at_notices
+          end
+
+          it "should display a message" do
+            put :update, :id => @app.id, :app => { :email_at_notices => 'qwertyuiop' }
+            request.flash[:error].should match(/Couldn't parse/)
+          end
+        end
+      end
+
       context "setting up issue tracker", :cur => true do
         context "unknown tracker type" do
           before(:each) do
@@ -386,3 +407,4 @@ describe AppsController do
   end
 
 end
+

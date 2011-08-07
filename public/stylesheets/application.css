@@ -350,6 +350,17 @@ form .error-messages ul {
   list-style-type: square;
 }
 
+form .field-helpertext {
+  display: inline;
+  text-transform: uppercase;
+}
+
+form input#app_email_at_notices {
+  width: 130px;
+  margin: 0 5px;
+}
+
+
 /* Tables */
 table {
   width: 100%;
@@ -683,3 +694,4 @@ span.click_span {
 #deploys_div, #repository_div, #watchers_div {
   display: none;
 }
+
