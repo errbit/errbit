@@ -297,7 +297,7 @@ describe AppsController do
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Lighthouseapp account, api token and project id/)
+            response.body.should match(/You must specify your Lighthouseapp account, API token and Project ID/)
           end
         end
 
@@ -322,7 +322,7 @@ describe AppsController do
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Redmine url, api token and project id/)
+            response.body.should match(/You must specify your Redmine URL, API token and Project ID/)
           end
         end
 
@@ -344,7 +344,7 @@ describe AppsController do
             @app.reload
 
             @app.issue_tracker.should be_nil
-            response.body.should match(/You must specify your Pivotal Tracker api token and project id/)
+            response.body.should match(/You must specify your Pivotal Tracker API token and Project ID/)
           end
         end
 
@@ -375,6 +375,37 @@ describe AppsController do
             end
           end
         end
+
+        context "mingle" do
+          context 'with correct params' do
+            before do
+              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :issue_tracker_type => 'mingle', :project_id => 'test', :account => 'http://mingle.example.com',
+                :username => '1234', :password => '123123', :ticket_properties => "card_type = Defect"
+              } }
+              @app.reload
+            end
+
+            subject {@app.issue_tracker}
+            its(:issue_tracker_type) {should == 'mingle'}
+            its(:project_id) {should == 'test'}
+            its(:username) {should == '1234'}
+            its(:password) {should == '123123'}
+          end
+
+          it "should show validation notice when sufficient params are not present" do
+            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+              :issue_tracker_type => 'mingle', :project_id => 'test', :account => 'http://mingle.example.com',
+              :username => '1234', :password => '1234', :ticket_properties => "cards_type = Defect"
+            } }
+            @app.reload
+
+            @app.issue_tracker.should be_nil
+            response.body.should match(/You must specify your Mingle URL, Project ID, Card Type \(in default card properties\), Sign-in name, and Password/)
+          end
+        end
+
+
       end
     end
 
