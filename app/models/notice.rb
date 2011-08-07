@@ -55,11 +55,11 @@ class Notice
     agent_string = env_vars['HTTP_USER_AGENT']
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
-  
+
   def self.in_app_backtrace_line? line
     !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
   end
-  
+
   def request
     read_attribute(:request) || {}
   end
@@ -83,11 +83,11 @@ class Notice
   def cache_last_notice_at
     err.update_attributes(:last_notice_at => created_at)
   end
-  
+
   protected
 
   def should_notify?
-    err.app.notify_on_errs? && Errbit::Config.email_at_notices.include?(err.notices.count) && err.app.watchers.any?
+    err.app.notify_on_errs? && err.app.email_at_notices.include?(err.notices.count) && err.app.watchers.any?
   end
 
 
@@ -122,3 +122,4 @@ class Notice
     end
   end
 end
+
