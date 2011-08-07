@@ -170,8 +170,13 @@ describe Notice do
     custom_thresholds = [2, 4, 8, 16, 32, 64]
 
     before do
+      Errbit::Config.per_app_email_at_notices = true
       @app = Factory(:app_with_watcher, :email_at_notices => custom_thresholds)
       @err = Factory(:err, :app => @app)
+    end
+
+    after do
+      Errbit::Config.per_app_email_at_notices = false
     end
 
     custom_thresholds.each do |threshold|
