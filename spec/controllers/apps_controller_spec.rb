@@ -252,7 +252,7 @@ describe AppsController do
             @app = Factory(:app, :email_at_notices => [1, 2, 3, 4])
             put :update, :id => @app.id, :app => { :email_at_notices => 'asdf, -1,0,foobar,gd00,0,abc' }
             @app.reload
-            @app.email_at_notices.should == Errbit::Config.default_email_at_notices
+            @app.email_at_notices.should == Errbit::Config.email_at_notices
           end
 
           it "should display a message" do

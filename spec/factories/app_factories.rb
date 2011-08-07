@@ -1,6 +1,5 @@
 Factory.define(:app) do |p|
   p.name { Factory.next :app_name }
-  p.email_at_notices { [1, 10, 100] }
 end
 
 Factory.define(:app_with_watcher, :parent => :app) do |p|

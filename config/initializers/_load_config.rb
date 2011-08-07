@@ -4,7 +4,7 @@ if ENV['HEROKU']
   Errbit::Config = OpenStruct.new
   Errbit::Config.host = ENV['ERRBIT_HOST']
   Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
-  Errbit::Config.default_email_at_notices = [1,3,10] #ENV['ERRBIT_EMAIL_AT_NOTICES']
+  Errbit::Config.email_at_notices = [1,3,10] #ENV['ERRBIT_EMAIL_AT_NOTICES']
   Errbit::Application.config.action_mailer.smtp_settings = {
     :address        => "smtp.sendgrid.net",
     :port           => "25",

@@ -13,11 +13,11 @@
   %div.checkbox
     = f.check_box :notify_on_errs
     = f.label :notify_on_errs, 'Notify on errors'
-  %div.email_at_notices_nested{:style => f.object.notify_on_errs ? '' : 'display: none;'}
-    .field-helpertext Send a notification every
-    -# Edit the email_at_notices array as a CSV string
-    = f.text_field :email_at_notices, :value => f.object.email_at_notices.join(", ")
-    .field-helpertext times an error occurs. (CSV)
+  - if Errbit::Config.per_app_email_at_notices
+    %div.email_at_notices_nested{:style => f.object.notify_on_errs ? '' : 'display: none;'}
+      .field-helpertext Send a notification every
+      = f.text_field :email_at_notices, :value => f.object.email_at_notices.join(", ")
+      .field-helpertext times an error occurs (comma separated).
   %div.checkbox
     = f.check_box :notify_on_deploys
     = f.label :notify_on_deploys, 'Notify on deploys'
