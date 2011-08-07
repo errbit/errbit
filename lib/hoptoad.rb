@@ -10,7 +10,7 @@ module Hoptoad
 
     def self.parse_xml(xml)
       parsed  = ActiveSupport::XmlMini.backend.parse(xml)['notice']
-      raise ApiVersionError(parsed['version']) unless parsed && parsed['version'].to_s == '2.0'
+      raise ApiVersionError.new(parsed['version']) unless parsed && parsed['version'].to_s == '2.0'
       rekeyed = rekey(parsed)
       rekeyed['fingerprint'] = Digest::MD5.hexdigest(rekeyed['error']['backtrace'].to_s)
       rekeyed

@@ -132,6 +132,11 @@ describe Notice do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
       lambda { Notice.from_xml(@xml) }.should_not raise_error
     end
+
+    it "should raise ApiVersionError" do
+      @xml = Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_wrong_version.xml').read
+      expect { Notice.from_xml(@xml)  }.to raise_error(Hoptoad::V2::ApiVersionError)
+    end
   end
 
   describe "key sanitization" do
