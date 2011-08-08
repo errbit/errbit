@@ -48,7 +48,7 @@ namespace :errbit do
     run "if [ ! -f #{shared_configs}/config.yml ]; then cp #{latest_release}/config/config.example.yml #{shared_configs}/config.yml; fi"
     run "if [ ! -f #{shared_configs}/mongoid.yml ]; then cp #{latest_release}/config/mongoid.example.yml #{shared_configs}/mongoid.yml; fi"
   end
-  
+
   task :symlink_configs do
     errbit.setup_configs
     shared_configs = File.join(shared_path,'config')

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DeploysController do
   render_views
-  
+
   context 'POST #create' do
     before do
       @params = {
@@ -14,12 +14,12 @@ describe DeploysController do
       }
       @app = Factory(:app_with_watcher, :api_key => 'APIKEY')
     end
-    
+
     it 'finds the app via the api key' do
       App.should_receive(:find_by_api_key!).with('APIKEY').and_return(@app)
       post :create, :deploy => @params, :api_key => 'APIKEY'
     end
-    
+
     it 'creates a deploy' do
       App.stub(:find_by_api_key!).and_return(@app)
       @app.deploys.should_receive(:create!).
@@ -33,14 +33,14 @@ describe DeploysController do
         }).and_return(Factory(:deploy))
       post :create, :deploy => @params, :api_key => 'APIKEY'
     end
-    
+
     it 'sends an email notification' do
       post :create, :deploy => @params, :api_key => 'APIKEY'
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)
       email.subject.should == "[#{@app.name}] Deployed to production by john.doe"
     end
-    
+
   end
 
   context "GET #index" do
@@ -59,5 +59,5 @@ describe DeploysController do
       response.body.should match(@deploy.app.name)
     end
   end
-  
+
 end

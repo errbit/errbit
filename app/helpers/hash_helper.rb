@@ -1,9 +1,9 @@
 module HashHelper
-  
+
   def pretty_hash(hash, nesting = 0)
     tab_size = 2
     nesting += 1
-    
+
     pretty  = "{"
     sorted_keys = hash.keys.sort
     sorted_keys.each do |key|
@@ -16,5 +16,5 @@ module HashHelper
     nesting -= 1
     pretty += "\n#{' '*nesting*tab_size}}"
   end
-  
+
 end

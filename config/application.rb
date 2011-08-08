@@ -38,7 +38,7 @@ module Errbit
 
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.javascript_expansions[:defaults] = %w(jquery rails form)
-    
+
     # > rails generate - config
     config.generators do |g|
       g.orm             :mongoid

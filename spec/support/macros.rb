@@ -12,12 +12,12 @@ def it_requires_authentication(options = {})
     :params => {:id => '4c6c760494df2a18cc000015'}
   }
   options.reverse_merge!(default_options)
-  
+
   context 'when signed out' do
     before do
       sign_out :user
     end
-    
+
     options[:for].each do |action, method|
       it "#{method.to_s.upcase} #{action} redirects to the sign in page" do
         send(method, action, options[:params])
@@ -41,13 +41,13 @@ def  it_requires_admin_privileges(options = {})
     :params => {:id => 'dummyid'}
   }
   options.reverse_merge!(default_options)
-  
+
   context 'when signed in as a regular user' do
     before do
       sign_out :user
       sign_in Factory(:user)
     end
-    
+
     options[:for].each do |action, method|
       it "#{method.to_s.upcase} #{action} redirects to the root path" do
         send(method, action, options[:params])
