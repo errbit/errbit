@@ -62,13 +62,15 @@
         = label_tag :issue_tracker_type_pivotal, 'Pivotal Tracker', :for => label_for_attr(w, 'issue_tracker_type_pivotal')
         = w.radio_button :issue_tracker_type, :fogbugz
         = label_tag :issue_tracker_type_fogbugz, 'FogBugz', :for => label_for_attr(w, 'issue_tracker_type_fogbugz')
-      %div.tracker_params.lighthouseapp{:class => lighthouse_tracker?(w.object) ? 'chosen' : nil}
+        = w.radio_button :issue_tracker_type, :mingle
+        = label_tag :issue_tracker_type_fogbugz, 'Mingle', :for => label_for_attr(w, 'issue_tracker_type_mingle')
+      %div.tracker_params.lighthouseapp{:class => lighthouseapp_tracker?(w.object) ? 'chosen' : nil}
         = w.label :account, "Account"
         = w.text_field :account, :placeholder => "abc from abc.lighthouseapp.com"
         = w.label :api_token, "API token"
         = w.text_field :api_token, :placeholder => "API Token for your account"
         = w.label :project_id, "Project ID"
-        = w.text_field :project_id, :placeholder => "123 from  abc.lighthouseapp.com/projects/123"
+        = w.text_field :project_id
       %div.tracker_params.redmine{:class => redmine_tracker?(w.object) ? 'chosen' : nil}
         = w.label :account, "Redmine URL"
         = w.text_field :account, :placeholder => "like http://www.redmine.org/"
@@ -86,8 +88,19 @@
         = w.text_field :project_id
         = w.label :account, "FogBugz URL"
         = w.text_field :account, :placeholder => "abc from http://abc.fogbugz.com/"
-        = w.label :username, 'account username'
+        = w.label :username, 'Username'
         = w.text_field :username, :placeholder => 'Username/Email for your account'
-        = w.label :password, 'account password'
+        = w.label :password, 'Password'
+        = w.password_field :password, :placeholder => 'Password for your account'
+      %div.tracker_params.mingle{:class => mingle_tracker?(w.object) ? 'chosen' : nil}
+        = w.label :account, "Mingle URL"
+        = w.text_field :account, :placeholder => "http://mingle.yoursite.com/"
+        = w.label :project_id, "Project ID"
+        = w.text_field :project_id
+        = w.label :ticket_properties, "Card Properties (comma separated key=value pairs)"
+        = w.text_field :ticket_properties, :placeholder => "card_type = Defect, defect_status = Open, priority = Essential"
+        = w.label :username, 'Sign-in name'
+        = w.text_field :username, :placeholder => 'Sign-in name for your account'
+        = w.label :password, 'Password'
         = w.password_field :password, :placeholder => 'Password for your account'
 
