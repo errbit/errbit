@@ -18,6 +18,7 @@ class Err
 
   belongs_to :app
   has_many :notices
+  has_many :comments, :inverse_of => :err, :dependent => :destroy
 
   validates_presence_of :klass, :environment
 
@@ -51,3 +52,4 @@ class Err
   end
 
 end
+

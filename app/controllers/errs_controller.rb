@@ -27,6 +27,7 @@ class ErrsController < ApplicationController
     page      = 1 if page.to_i.zero?
     @notices  = @err.notices.ordered.paginate(:page => page, :per_page => 1)
     @notice   = @notices.first
+    @comment = Comment.new
   end
 
   def create_issue
@@ -62,6 +63,30 @@ class ErrsController < ApplicationController
     redirect_to app_path(@app)
   end
 
+
+  def create_comment
+    @comment = Comment.new(params[:comment].merge(:user_id => current_user.id))
+    if @comment.valid?
+      @err.comments << @comment
+      @err.save
+      flash[:success] = "Comment saved!"
+    else
+      flash[:error] = "I'm sorry, your comment was blank! Try again?"
+    end
+    redirect_to app_err_path(@app, @err)
+  end
+
+  def destroy_comment
+    @comment = Comment.find(params[:comment_id])
+    if @comment.destroy
+      flash[:success] = "Comment deleted!"
+    else
+      flash[:error] = "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
+    end
+    redirect_to app_err_path(@app, @err)
+  end
+
+
   protected
 
     def find_app
@@ -83,3 +108,4 @@ class ErrsController < ApplicationController
     end
 
 end
+

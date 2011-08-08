@@ -139,14 +139,17 @@ a.action  { float: right; font-size: 0.9em;}
   border: 1px solid #C6C6C6;
 }
 
-/* Content Title */
-#content-title {
+/* Content Title and Comments */
+#content-title, #content-comments {
   padding: 30px 20px;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #FFF;
   background-color: #e2e2e2;
 }
-#content-title h1 {
+#content-comments {
+  background-color: #ffffff;
+}
+#content-title h1, #content-comments h3 {
   padding: 0; margin: 0;
   width: 85%;
   border: none;
@@ -154,6 +157,11 @@ a.action  { float: right; font-size: 0.9em;}
   font-size: 2em; line-height: 1em; font-weight: bold; font-family: arial, sans-serif;
   word-wrap: break-word;
 }
+#content-comments h3 {
+  font-size: 1.5em;
+  margin-bottom: 14px;
+}
+
 #content-title .meta { font-size: 0.9em; color: #787878; }
 
 /* Action Bar */
@@ -611,6 +619,7 @@ table.tally th.value {
   text-transform:none;
 }
 
+
 /* Resolve Errs */
 #action-bar a.resolve {
   background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
@@ -693,5 +702,30 @@ span.click_span {
 
 #deploys_div, #repository_div, #watchers_div {
   display: none;
+}
+
+/* Comments */
+#content-comments form p {
+  margin: 30px 0 0 0;
+  text-transform: uppercase;
+}
+table.comment tbody th {
+  text-transform: none;
+  font-weight: normal;
+  height: 20px;
+  line-height: 0.5em;
+}
+table.comment tbody td {
+  background-color: #F9F9F9;
+}
+#content-comments a.destroy-comment {
+  color: #EE0000;
+  margin-right: 5px;
+}
+#content-comments a.destroy-comment:hover {
+  text-decoration: none;
+}
+#content-comments #comment_submit {
+  margin-top: 15px;
 }
 

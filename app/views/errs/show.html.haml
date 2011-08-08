@@ -20,6 +20,25 @@
   - if @err.unresolved?
     %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve'
 
+- if !@app.issue_tracker_configured? || @err.comments.any?
+  - content_for :comments do
+    %h3 Comments on this Err
+    - @err.comments.each do |comment|
+      .window
+        %table.comment
+          %tr
+            %th
+              %span= link_to '&#10008;'.html_safe, destroy_comment_app_err_path(@app, @err) << "?comment_id=#{comment.id}", :method => :delete, :confirm => "Are sure you don't need this comment?", :class => "destroy-comment"
+              = time_ago_in_words(comment.created_at, true) << " ago by "
+              = link_to comment.user.email, user_path(comment.user)
+          %tr
+            %td= comment.body.gsub("\n", "<br>").html_safe
+    - unless @app.issue_tracker_configured?
+      = form_for @comment, :url => create_comment_app_err_path(@app, @err) do |comment_form|
+        %p Add a comment
+        = comment_form.text_area :body, :style => "width: 420px; height: 80px;"
+        = comment_form.submit "Save Comment"
+
 %h4= @notice.try(:message)
 
 = will_paginate @notices, :param_name => :notice, :page_links => false, :class => 'notice-pagination'
@@ -53,3 +72,4 @@ viewing occurrence #{@notices.current_page} of #{@notices.total_pages}
   #session
     %h3 Session
     = render 'notices/session', :notice => @notice
+
