@@ -23,11 +23,11 @@
     = f.label :notify_on_deploys, 'Notify on deploys'
 
 %div.checkbox
-  = f.check_box :resolve_errs_on_deploy
-  = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'
+  = f.check_box :notify_all_users, 'data-hide-when-checked' => '.watchers.nested-wrapper'
+  = f.label :notify_all_users, 'Send notifications to all users'
 
 
-%fieldset.nested-wrapper
+%fieldset.watchers.nested-wrapper{:style => f.object.notify_all_users ? 'display: none;' : ''}
   %legend Watchers
   = f.fields_for :watchers do |w|
     %div.watcher.nested
@@ -40,6 +40,10 @@
         = w.select :user_id, User.all.map{|u| [u.name,u.id.to_s]}, :include_blank => '-- Select a User --'
       %div.watcher_params.email{:class => w.object.email.present? ? 'chosen' : nil}
         = w.text_field :email
+
+%div.checkbox
+  = f.check_box :resolve_errs_on_deploy
+  = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'
 
 %fieldset
   %legend Issue tracker

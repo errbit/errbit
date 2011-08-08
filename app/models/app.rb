@@ -6,6 +6,7 @@ class App
   field :api_key
   field :github_url
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
+  field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
   field :notify_on_deploys, :type => Boolean, :default => true
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
@@ -72,6 +73,10 @@ class App
 
   def issue_tracker_configured?
     issue_tracker && issue_tracker.issue_tracker_type != "none" && !issue_tracker.project_id.blank?
+  end
+
+  def notification_recipients
+    notify_all_users ? User.all.map(&:email) : watchers.map(&:address)
   end
 
   protected
