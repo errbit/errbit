@@ -11,7 +11,7 @@
 %fieldset
   %legend Notifications
   %div.checkbox
-    = f.check_box :notify_on_errs
+    = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
     = f.label :notify_on_errs, 'Notify on errors'
   - if Errbit::Config.per_app_email_at_notices
     %div.email_at_notices_nested{:style => f.object.notify_on_errs ? '' : 'display: none;'}
@@ -21,12 +21,6 @@
   %div.checkbox
     = f.check_box :notify_on_deploys
     = f.label :notify_on_deploys, 'Notify on deploys'
-
-:javascript
-  $('#app_notify_on_errs').change(function(){
-    var el = $('.email_at_notices_nested');
-    this.checked ? el.show() : el.hide();
-  });
 
 %div.checkbox
   = f.check_box :resolve_errs_on_deploy

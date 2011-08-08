@@ -1,5 +1,6 @@
 $(function(){
   activateNestedForms();
+  activateCheckboxHooks();
 
   if($('div.watcher.nested').length)
     activateTypeSelector('watcher');
@@ -71,6 +72,23 @@ function activateTypeSelector(field_class, section_class) {
     var wrapper = $(this).closest('.nested');
     wrapper.find('div.chosen.'+section_class).removeClass('chosen');
     wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen');
+  });
+}
+
+
+function activateCheckboxHooks() {
+  // Hooks to hide/show content when a checkbox is clicked
+  $('input[type="checkbox"][data-hide-when-checked]').each(function(){
+    $(this).change(function(){
+      el = $($(this).data('hide-when-checked'));
+      $(this).attr('checked') ? el.hide() : el.show();
+    });
+  });
+  $('input[type="checkbox"][data-show-when-checked]').each(function(){
+    $(this).change(function(){
+      el = $($(this).data('show-when-checked'));
+      $(this).attr('checked') ? el.show() : el.hide();
+    });
   });
 }
 
