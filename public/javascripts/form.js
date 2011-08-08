@@ -2,10 +2,10 @@ $(function(){
   activateNestedForms();
 
   if($('div.watcher.nested').length)
-    activateWatcherTypeSelector();
+    activateTypeSelector('watcher');
 
   if($('div.issue_tracker.nested').length)
-    activateIssueTrackerTypeSelector();
+    activateTypeSelector('issue_tracker', 'tracker_params');
 });
 
 function activateNestedForms() {
@@ -63,20 +63,14 @@ function removeNestedItem() {
   nestedItem.hide();
 }
 
-function activateWatcherTypeSelector() {
-  $('div.watcher input[name*=watcher_type]').live('click', function(){
-    var choosen = $(this).val();
+
+function activateTypeSelector(field_class, section_class) {
+  section_class = section_class || field_class+"_params";   // section_class can be deduced if not given
+  $('div.'+field_class+' input[name*='+field_class+'_type]').live('click', function(){
+    var chosen = $(this).val();
     var wrapper = $(this).closest('.nested');
-    wrapper.find('div.choosen').removeClass('choosen');
-    wrapper.find('div.'+choosen).addClass('choosen');
+    wrapper.find('div.chosen.'+section_class).removeClass('chosen');
+    wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen');
   });
 }
 
-function activateIssueTrackerTypeSelector() {
-  $('div.issue_tracker input[name*=issue_tracker_type]').live('click', function(){
-    var chosen = $(this).val();
-    var wrapper = $(this).closest('.nested');
-    wrapper.find('div.chosen').removeClass('chosen');
-    wrapper.find('div.'+chosen).addClass('chosen');
-  });
-}

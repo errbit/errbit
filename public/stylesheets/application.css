@@ -525,14 +525,13 @@ a.button.active {
 }
 
 /* Watchers and Issue Tracker Forms */
-div.nested.watcher .user, div.nested.watcher .email, div.issue_tracker.nested .tracker_params {
+div.watcher.nested .watcher_params, div.issue_tracker.nested .tracker_params {
   display: none;
 }
-div.nested.watcher .choosen, div.nested.issue_tracker .chosen {
-  display: block;
+div.nested .chosen {
+  display: block !important;
 }
-
-div.nested.watcher .choose, div.nested.issue_tracker .choose {
+div.nested .choose {
   margin-bottom: 0.5em;
 }
 
