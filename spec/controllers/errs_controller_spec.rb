@@ -330,7 +330,7 @@ describe ErrsController do
         end
       end
 
-      context "redmine tracker" do
+      context "pivotal tracker" do
         let(:notice) { Factory :notice }
         let(:tracker) { Factory :pivotal_tracker, :app => notice.err.app }
         let(:err) { notice.err }
@@ -360,6 +360,40 @@ describe ErrsController do
 
         it "should create issue link for err" do
           err.issue_link.should == @issue_link.sub(/\.xml/, '')
+        end
+      end
+
+      context "mingle tracker" do
+        let(:notice) { Factory :notice }
+        let(:tracker) { Factory :mingle_tracker, :app => notice.err.app }
+        let(:err) { notice.err }
+
+        before(:each) do
+          number = 5
+          @issue_link = "#{tracker.account}/projects/#{tracker.project_id}/cards/#{number}.xml"
+          @basic_auth = tracker.account.gsub("https://", "https://#{tracker.username}:#{tracker.password}@")
+          body = "<card><id type=\"integer\">#{number}</id></card>"
+          stub_request(:post, "#{@basic_auth}/api/v1/projects/#{tracker.project_id}/cards.xml").
+                       to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
+
+          post :create_issue, :app_id => err.app.id, :id => err.id
+          err.reload
+        end
+
+        it "should make request to Mingle with err params" do
+          requested = have_requested(:post, "#{@basic_auth}/api/v1/projects/#{tracker.project_id}/cards.xml")
+          WebMock.should requested.with(:headers => {'Content-Type' => 'application/xml'})
+          WebMock.should requested.with(:body => /FooError: Too Much Bar/)
+          WebMock.should requested.with(:body => /See this exception on Errbit/)
+          WebMock.should requested.with(:body => /<card-type-name>Defect<\/card-type-name>/)
+        end
+
+        it "should redirect to err page" do
+          response.should redirect_to( app_err_path(err.app, err) )
+        end
+
+        it "should create issue link for err" do
+          err.issue_link.should == @issue_link.sub(/\.xml$/, '')
         end
       end
     end

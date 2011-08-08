@@ -1,10 +1,5 @@
 module ApplicationHelper
 
-
-  def lighthouse_tracker? object
-    object.issue_tracker_type == "lighthouseapp"
-  end
-
   def user_agent_graph(error)
     tallies = tally(error.notices) {|notice| pretty_user_agent(notice.user_agent)}
     create_percentage_table(tallies, :total => error.notices.count)
@@ -39,16 +34,11 @@ module ApplicationHelper
     object.issue_tracker_type == "none"
   end
 
-  def redmine_tracker? object
-    object.issue_tracker_type == "redmine"
+  %w(lighthouseapp redmine pivotal fogbugz mingle).each do |tracker|
+    define_method("#{tracker}_tracker?".to_sym) do |object|
+      object.issue_tracker_type == tracker
+    end
   end
 
-  def pivotal_tracker? object
-    object.issue_tracker_type == "pivotal"
-  end
-
-  def fogbugz_tracker? object
-    object.issue_tracker_type == 'fogbugz'
-  end
 end
 
