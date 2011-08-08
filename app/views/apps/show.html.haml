@@ -22,18 +22,24 @@
   Watchers
   %span{:class => 'click_span'} (show/hide)
 #watchers_div
-  %table.watchers
-    %thead
-      %tr
-        %th User or Email
-    %tbody
-      - @app.watchers.each do |watcher|
+  - if @app.notify_all_users
+    %table.watchers
+      %thead
         %tr
-          %td= watcher.label
-      - if @app.watchers.none?
+          %th All users will be notified when something happens.
+  - else
+    %table.watchers
+      %thead
         %tr
-          %td
-            %em Sadly, no one is watching this app
+          %th User or Email
+      %tbody
+        - @app.watchers.each do |watcher|
+          %tr
+            %td= watcher.label
+        - if @app.watchers.none?
+          %tr
+            %td
+              %em Sadly, no one is watching this app
 
 - if @app.github_url?
   %h3{:id => 'repository_toggle'}
@@ -80,3 +86,4 @@
 - else
   %h3.clear No errs have been caught yet, make sure you setup your app
   = render 'configuration_instructions', :app => @app
+
