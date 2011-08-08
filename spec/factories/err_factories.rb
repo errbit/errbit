@@ -4,6 +4,11 @@ Factory.define :err do |e|
   e.component     'foo'
   e.action        'bar'
   e.environment   'production'
+  e.comments      []
+end
+
+Factory.define(:err_with_comments, :parent => :err) do |ec|
+  ec.comments     { (1..3).map{Factory(:comment)} }
 end
 
 Factory.define :notice do |n|
@@ -23,3 +28,4 @@ def random_backtrace
   }}
   backtrace
 end
+

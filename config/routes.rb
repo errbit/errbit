@@ -22,6 +22,8 @@ Errbit::Application.routes.draw do
         put :resolve
         post :create_issue
         delete :unlink_issue
+        post :create_comment
+        delete :destroy_comment
       end
     end
 
@@ -33,3 +35,4 @@ Errbit::Application.routes.draw do
   root :to => 'apps#index'
 
 end
+

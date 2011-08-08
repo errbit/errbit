@@ -53,7 +53,7 @@
     %div.issue_tracker.nested
       %div.choose
         = w.radio_button :issue_tracker_type, :none
-        = label_tag :issue_tracker_type_lighthouseapp, '(None)', :for => label_for_attr(w, 'issue_tracker_type_none')
+        = label_tag :issue_tracker_type_none, '(None)', :for => label_for_attr(w, 'issue_tracker_type_none')
         = w.radio_button :issue_tracker_type, :lighthouseapp
         = label_tag :issue_tracker_type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'issue_tracker_type_lighthouseapp')
         = w.radio_button :issue_tracker_type, :redmine
@@ -62,6 +62,8 @@
         = label_tag :issue_tracker_type_pivotal, 'Pivotal Tracker', :for => label_for_attr(w, 'issue_tracker_type_pivotal')
         = w.radio_button :issue_tracker_type, :fogbugz
         = label_tag :issue_tracker_type_fogbugz, 'FogBugz', :for => label_for_attr(w, 'issue_tracker_type_fogbugz')
+      %div.tracker_params.none{:class => no_tracker?(w.object) ? 'chosen' : nil}
+        %p When no issue tracker has been configured, you will be able to leave comments on errors.
       %div.tracker_params.lighthouseapp{:class => lighthouse_tracker?(w.object) ? 'chosen' : nil}
         = w.label :account, "Account"
         = w.text_field :account, :placeholder => "abc from abc.lighthouseapp.com"

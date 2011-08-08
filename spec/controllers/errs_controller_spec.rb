@@ -437,4 +437,60 @@ describe ErrsController do
       end
     end
   end
+
+
+  describe "POST /apps/:app_id/errs/:id/create_comment" do
+    render_views
+
+    before(:each) do
+      sign_in Factory(:admin)
+    end
+
+    context "successful comment creation" do
+      let(:err) { Factory(:err) }
+      let(:user) { Factory(:user) }
+
+      before(:each) do
+        post :create_comment, :app_id => err.app.id, :id => err.id,
+             :comment => { :body => "One test comment", :user_id => user.id }
+        err.reload
+      end
+
+      it "should create the comment" do
+        err.comments.size.should == 1
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+    end
+  end
+
+  describe "DELETE /apps/:app_id/errs/:id/destroy_comment" do
+    render_views
+
+    before(:each) do
+      sign_in Factory(:admin)
+    end
+
+    context "successful comment deletion" do
+      let(:err) { Factory :err_with_comments }
+      let(:comment) { err.comments.first }
+
+      before(:each) do
+        delete :destroy_comment, :app_id => err.app.id, :id => err.id, :comment_id => comment.id
+        err.reload
+      end
+
+      it "should delete the comment" do
+        err.comments.detect{|c| c.id.to_s == comment.id }.should == nil
+      end
+
+      it "should redirect to err page" do
+        response.should redirect_to( app_err_path(err.app, err) )
+      end
+    end
+  end
+
 end
+

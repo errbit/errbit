@@ -28,5 +28,9 @@
       #content
         = render :partial => 'shared/flash_messages'
         = yield
+      - if content_for?(:comments)
+        #content-comments
+          = yield :comments
     #footer= "Powered by #{link_to 'Errbit', 'http://github.com/jdpace/errbit', :target => '_blank'}: the open source error catcher.".html_safe
     = yield :scripts
+
