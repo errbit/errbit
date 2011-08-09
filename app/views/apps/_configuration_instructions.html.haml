@@ -19,9 +19,13 @@
         config.host        = '#{request.host}'
         config.port        = #{request.port}
         config.secure      = config.port == 443
-        config.js_notifier = true
       end
 
+      # Set up Javascript notifications
+      # -------------------------------
+      #
+      # To receive notifications for javascript errors,
+      # you should add <%= hoptoad_javascript_notifier %> to the top of your layouts.
       #
       # Testing
       # -------
