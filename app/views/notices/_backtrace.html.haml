@@ -9,8 +9,10 @@
       %td
         %ul.lines
           - lines.each do |line|
+            - line['file'] = "[unknown source]" if line['file'].blank?
             - in_app = line['file'].gsub!('[PROJECT_ROOT]','') && !line['file'].match(/^\/vendor\//)
             %li{:class => (in_app ? 'in-app' : nil)}
               = line['file']
               &rarr;
               %strong= line['method']
+
