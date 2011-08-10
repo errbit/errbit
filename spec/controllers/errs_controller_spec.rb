@@ -32,12 +32,6 @@ describe ErrsController do
         response.body.should match(@err.message)
       end
 
-      it "should handle lots of errors" do
-        pending "Turning off long running spec"
-        1000.times { Factory :notice }
-        lambda { get :index }.should_not raise_error
-      end
-
       context "pagination" do
         before(:each) do
           35.times { Factory :err }
