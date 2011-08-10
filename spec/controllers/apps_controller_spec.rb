@@ -143,7 +143,12 @@ describe AppsController do
 
     context 'logged in as a user' do
       it 'finds the app if the user is watching it' do
-        pending
+        user = Factory(:user)
+        app = Factory(:app)
+        watcher = Factory(:user_watcher, :app => app, :user => user)
+        sign_in user
+        get :show, :id => app.id
+        assigns(:app).should == app
       end
 
       it 'does not find the app if the user is not watching it' do
