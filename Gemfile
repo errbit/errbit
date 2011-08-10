@@ -5,7 +5,7 @@ gem 'nokogiri'
 gem 'mongoid', '2.0.2'
 gem 'haml'
 gem 'will_paginate'
-gem 'devise', '~> 1.1.8'
+gem 'devise', '~> 1.4.0'
 gem 'lighthouse-api'
 gem 'redmine_client', :git => "git://github.com/oruen/redmine_client.git"
 gem 'mongoid_rails_migrations'
