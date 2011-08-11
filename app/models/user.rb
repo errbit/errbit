@@ -7,6 +7,7 @@ class User
          :recoverable, :rememberable, :trackable,
          :validatable, :token_authenticatable
 
+  field :email
   field :name
   field :admin, :type => Boolean, :default => false
   field :per_page, :type => Fixnum, :default => PER_PAGE
@@ -45,3 +46,4 @@ class User
       watchers.each(&:destroy)
     end
 end
+
