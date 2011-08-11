@@ -19,6 +19,8 @@ class User
 
   attr_protected :admin
 
+  has_many :apps, :foreign_key => 'watchers.user_id'
+
   if Errbit::Config.user_has_username
     field :username
     validates_presence_of :username
@@ -30,10 +32,6 @@ class User
 
   def per_page
     self[:per_page] || PER_PAGE
-  end
-
-  def apps
-    App.where('watchers.user_id' => id)
   end
 
   def watching?(app)
