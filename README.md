@@ -121,25 +121,34 @@ Upgrading
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
 
 
-Lighthouseapp integration
+Lighthouseapp Integration
 -------------------------
 
 * Account is the name of your subdomain, i.e. **litcafe** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
 * Errbit uses token-based authentication. Get your API Token or visit [http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token](http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token) to learn how to get it.
 * Project id is number identifier of your project, i.e. **73466** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
 
-Redmine integration
+Redmine Integration
 -------------------------
 
 * Account is the host of your redmine installation, i.e. **http://redmine.org**
 * Errbit uses token-based authentication. Get your API Key or visit [http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication) to learn how to get it.
 * Project id is an identifier of your project, i.e. **chilliproject** for project at http://www.redmine.org/projects/chilliproject
 
-Pivotal Tracker integration
+Pivotal Tracker Integration
 -------------------------
 
 * Errbit uses token-based authentication. Get your API Key or visit [http://www.pivotaltracker.com/help/api](http://www.pivotaltracker.com/help/api) to learn how to get it.
 * Project id is an identifier of your project, i.e. **24324** for project at http://www.pivotaltracker.com/projects/24324
+
+Thoughtworks Mingle Integration
+-------------------------------
+
+* Account is the host of your mingle installation. i.e. **https://mingle.example.com**  *note*: You should use SSL if possible.
+* Errbit uses 'sign-in name' & password authentication. You may want to set up an **errbit** user with limited rights.
+* Project id is the identifier of your project, i.e. **awesomeapp** for project at https://mingle.example.com/projects/awesomeapp
+* Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional. i.e. card_type = Defect, status = Open, priority = Essential
+
 
 TODO
 ----
