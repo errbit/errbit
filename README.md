@@ -100,29 +100,15 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
 **Configuring LDAP authentication:**
 
-  1. Add the following line to Errbit's Gemfile:
+Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
 
-         gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
+If you want to authenticate via `username`, add the following lines to `app/models/user.rb`:
 
-  2. Install new dependencies
-
-         bundle install
-
-  3. Run the rails generator for `devise_ldap_authenticatable`
-
-         rails generate devise_ldap_authenticatable:install --advanced
-
-  4. Configure your LDAP settings in `config/initializers/devise.rb`.
-
-  5. If you want to authenticate via `username`, then add the following lines to `app/models/user.rb`:
-
-            field :username
-            before_save :set_ldap_email
-            def set_ldap_email
-              self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
-            end
-
-To learn more, please follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
+          field :username
+          before_save :set_ldap_email
+          def set_ldap_email
+            self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
+          end
 
 
 Upgrading
