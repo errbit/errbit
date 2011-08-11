@@ -113,10 +113,13 @@ If you want to authenticate via `username`, add the following lines to `app/mode
 
 Upgrading
 ---------
-*Note*: If upgrading from a version of Errbit that used Notices embedded in Errs please run:
+*Note*: When upgrading Errbit, please run:
 
          1. git pull origin master ( assuming origin is the github.com/jdpace/errbit repo )
          2. rake db:migrate
+
+If we change the way that data is stored, this will run any migrations to bring your database up to date.
+
 
 Lighthouseapp integration
 -------------------------
