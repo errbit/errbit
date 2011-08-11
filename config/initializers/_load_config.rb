@@ -1,6 +1,15 @@
 require 'ostruct'
 
-if ENV['HEROKU']
+config_file = Rails.root.join('config', Rails.env == "test" ? "config.example.yml" : "config.yml")
+Errbit::Config = nil # assign global scope
+if File.exists?(config_file)
+  yaml = File.read(config_file)
+  config = YAML.load(yaml)
+
+  config.merge!(config.delete(Rails.env)) if config.has_key?(Rails.env)
+
+  Errbit::Config = OpenStruct.new(config)
+elsif ENV['HEROKU']
   Errbit::Config = OpenStruct.new
   Errbit::Config.host = ENV['ERRBIT_HOST']
   Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
@@ -14,13 +23,7 @@ if ENV['HEROKU']
     :domain         => ENV['SENDGRID_DOMAIN']
   }
 else
-  config_file = Rails.env == "test" ? "config.example.yml" : "config.yml"
-  yaml = File.read(Rails.root.join('config', config_file))
-  config = YAML.load(yaml)
-
-  config.merge!(config.delete(Rails.env)) if config.has_key?(Rails.env)
-
-  Errbit::Config = OpenStruct.new(config)
+  raise("Missing config file #{config_file}")
 end
 
 # Set config specific values
