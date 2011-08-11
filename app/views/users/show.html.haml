@@ -8,6 +8,10 @@
   %tr
     %th Email
     %td.main= @user.email
+  - if Errbit::Config.user_has_username
+    %tr
+      %th Username
+      %td.main= @user.username
   %tr
     %th Admin?
     %td= @user.admin? ? 'Y' : 'N'

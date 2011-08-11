@@ -19,6 +19,11 @@ class User
 
   attr_protected :admin
 
+  if Errbit::Config.user_has_username
+    field :username
+    validates_presence_of :username
+  end
+
   # Mongoid doesn't seem to currently support
   # referencing embedded documents
   def watchers

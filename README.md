@@ -100,11 +100,13 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
 **Configuring LDAP authentication:**
 
-Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
+  1. In `config/config.yml`, set `user_has_username` to `true`
+  2. Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
+  to set up the devise_ldap_authenticatable gem.
 
-If you want to authenticate via `username`, add the following lines to `app/models/user.rb`:
+  3. If you are authenticating by `username`, you will need to set the user's email
+  after authentication. You can do this by adding the following lines to `app/models/user.rb`:
 
-          field :username
           before_save :set_ldap_email
           def set_ldap_email
             self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")

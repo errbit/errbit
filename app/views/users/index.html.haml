@@ -6,13 +6,17 @@
   %thead
     %tr
       %th Name
+      - if Errbit::Config.user_has_username
+        %th Username
       %th.main Email
       %th Admin?
   %tbody
     - @users.each do |user|
       %tr
         %td.nowrap= link_to user.name, user_path(user)
+        - if Errbit::Config.user_has_username
+          %td= user.username
         %td= user.email
         %td= user.admin? ? 'Y' : 'N'
 = will_paginate @users, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
-      
+

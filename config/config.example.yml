@@ -6,6 +6,7 @@
 # be copied to shared/config on the server when
 # `cap deploy:setup` is ran the first time. Be sure
 # to place production specific settings there
+# You will need to restart the server after changing any settings.
 
 # The host of your errbit server
 host: errbit.example.com
@@ -25,4 +26,8 @@ email_at_notices: [1, 10, 100]
 
 # Configure whether or not the user should be prompted before resolving an error.
 confirm_resolve_err: true
+
+# Add an optional 'username' field to Users.
+# Helpful if you want to plug in your own authentication strategy.
+user_has_username: false
 

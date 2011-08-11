@@ -10,7 +10,10 @@ en:
       unauthenticated: 'You need to sign in before continuing.'
       unconfirmed: 'You have to confirm your account before continuing.'
       locked: 'Your account is locked.'
-      invalid: 'Invalid email or password.'
+      invalid: 'Invalid login details.'
+      user:
+        email_invalid: 'Invalid email or password.'
+        username_invalid: 'Invalid username or password.'
       invalid_token: 'Invalid authentication token.'
       timeout: 'Your session expired, please sign in again to continue.'
       inactive: 'Your account was not activated yet.'
@@ -37,3 +40,4 @@ en:
         subject: 'Reset password instructions'
       unlock_instructions:
         subject: 'Unlock Instructions'
+
