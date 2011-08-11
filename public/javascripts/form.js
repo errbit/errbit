@@ -66,12 +66,16 @@ function removeNestedItem() {
 
 
 function activateTypeSelector(field_class, section_class) {
-  section_class = section_class || field_class+"_params";   // section_class can be deduced if not given
+  var section_class = section_class || field_class+"_params";   // section_class can be deduced if not given
+  // disable all inactive tabs to avoid sending its values on server
+  $('div.'+field_class+' > div.'+section_class).not('.chosen').find('input')
+    .attr('disabled','disabled').val('');
+
   $('div.'+field_class+' input[name*='+field_class+'_type]').live('click', function(){
     var chosen = $(this).val();
     var wrapper = $(this).closest('.nested');
-    wrapper.find('div.chosen.'+section_class).removeClass('chosen');
-    wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen');
+    wrapper.find('div.chosen.'+section_class).removeClass('chosen').find('input').attr('disabled','disabled');
+    wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen').find('input').removeAttr('disabled');
   });
 }
 

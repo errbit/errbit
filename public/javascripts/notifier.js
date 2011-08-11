@@ -6,7 +6,7 @@ var Errbit = {
     <notifier>\
       <name>errbit_notifier_js</name>\
       <version>2.0</version>\
-      <url>http://NOTIFIER_HOST</url>\
+      <url>https://github.com/jdpace/errbit</url>\
     </notifier>\
     <error>\
       <class>EXCEPTION_CLASS</class>\
@@ -30,7 +30,7 @@ var Errbit = {
   notify: function(error) {
     var xml     = escape(Errbit.generateXML(error));
     var host    = Errbit.host || 'github.com/jdpace/errbit';
-    var url     = '//' + host + '/notifier_api/v2/notices?data=' + xml;
+    var url     = '//' + host + '/notifier_api/v2/notices.xml?data=' + xml;
     var request = document.createElement('iframe');
 
     request.style.width   = '1px';
@@ -103,7 +103,6 @@ var Errbit = {
       }
 
       xml = xml.replace('</request>',        data + '</request>')
-               .replace('NOTIFIER_HOST',     host)
                .replace('REQUEST_URL',       url)
                .replace('REQUEST_ACTION',    action)
                .replace('REQUEST_COMPONENT', component);

@@ -14,7 +14,8 @@ if ENV['HEROKU']
     :domain         => ENV['SENDGRID_DOMAIN']
   }
 else
-  yaml = File.read(Rails.root.join('config','config.yml'))
+  config_file = Rails.env == "test" ? "config.example.yml" : "config.yml"
+  yaml = File.read(Rails.root.join('config', config_file))
   config = YAML.load(yaml)
 
   config.merge!(config.delete(Rails.env)) if config.has_key?(Rails.env)

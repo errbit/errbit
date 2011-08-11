@@ -100,57 +100,57 @@ for you. Checkout [Hoptoad](http://hoptoadapp.com) from the guys over at
 
 **Configuring LDAP authentication:**
 
-  1. Add the following line to Errbit's Gemfile:
+  1. In `config/config.yml`, set `user_has_username` to `true`
+  2. Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
+  to set up the devise_ldap_authenticatable gem.
 
-         gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
+  3. If you are authenticating by `username`, you will need to set the user's email
+  after authentication. You can do this by adding the following lines to `app/models/user.rb`:
 
-  2. Install new dependencies
-
-         bundle install
-
-  3. Run the rails generator for `devise_ldap_authenticatable`
-
-         rails generate devise_ldap_authenticatable:install --advanced
-
-  4. Configure your LDAP settings in `config/initializers/devise.rb`.
-
-  5. If you want to authenticate via `username`, then add the following lines to `app/models/user.rb`:
-
-            field :username
-            before_save :set_ldap_email
-            def set_ldap_email
-              self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
-            end
-
-To learn more, please follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
+          before_save :set_ldap_email
+          def set_ldap_email
+            self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
+          end
 
 
 Upgrading
 ---------
-*Note*: If upgrading from a version of Errbit that used Notices embedded in Errs please run:
+*Note*: When upgrading Errbit, please run:
 
          1. git pull origin master ( assuming origin is the github.com/jdpace/errbit repo )
          2. rake db:migrate
 
-Lighthouseapp integration
+If we change the way that data is stored, this will run any migrations to bring your database up to date.
+
+
+Lighthouseapp Integration
 -------------------------
 
 * Account is the name of your subdomain, i.e. **litcafe** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
 * Errbit uses token-based authentication. Get your API Token or visit [http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token](http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token) to learn how to get it.
 * Project id is number identifier of your project, i.e. **73466** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
 
-Redmine integration
+Redmine Integration
 -------------------------
 
 * Account is the host of your redmine installation, i.e. **http://redmine.org**
 * Errbit uses token-based authentication. Get your API Key or visit [http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication) to learn how to get it.
 * Project id is an identifier of your project, i.e. **chilliproject** for project at http://www.redmine.org/projects/chilliproject
 
-Pivotal Tracker integration
+Pivotal Tracker Integration
 -------------------------
 
 * Errbit uses token-based authentication. Get your API Key or visit [http://www.pivotaltracker.com/help/api](http://www.pivotaltracker.com/help/api) to learn how to get it.
 * Project id is an identifier of your project, i.e. **24324** for project at http://www.pivotaltracker.com/projects/24324
+
+Thoughtworks Mingle Integration
+-------------------------------
+
+* Account is the host of your mingle installation. i.e. **https://mingle.example.com**  *note*: You should use SSL if possible.
+* Errbit uses 'sign-in name' & password authentication. You may want to set up an **errbit** user with limited rights.
+* Project id is the identifier of your project, i.e. **awesomeapp** for project at https://mingle.example.com/projects/awesomeapp
+* Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional. i.e. card_type = Defect, status = Open, priority = Essential
+
 
 TODO
 ----

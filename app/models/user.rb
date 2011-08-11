@@ -7,6 +7,7 @@ class User
          :recoverable, :rememberable, :trackable,
          :validatable, :token_authenticatable
 
+  field :email
   field :name
   field :admin, :type => Boolean, :default => false
   field :per_page, :type => Fixnum, :default => PER_PAGE
@@ -17,6 +18,11 @@ class User
   validates_presence_of :name
 
   attr_protected :admin
+
+  if Errbit::Config.user_has_username
+    field :username
+    validates_presence_of :username
+  end
 
   # Mongoid doesn't seem to currently support
   # referencing embedded documents
@@ -45,3 +51,4 @@ class User
       watchers.each(&:destroy)
     end
 end
+
