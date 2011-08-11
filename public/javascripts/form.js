@@ -74,7 +74,7 @@ function activateTypeSelector(field_class, section_class) {
   $('div.'+field_class+' input[name*='+field_class+'_type]').live('click', function(){
     var chosen = $(this).val();
     var wrapper = $(this).closest('.nested');
-    wrapper.find('div.chosen.'+section_class).removeClass('chosen').attr('disabled','disabled');;
+    wrapper.find('div.chosen.'+section_class).removeClass('chosen').find('input').attr('disabled','disabled');
     wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen').find('input').removeAttr('disabled');
   });
 }
