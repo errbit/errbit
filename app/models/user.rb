@@ -24,10 +24,8 @@ class User
     validates_presence_of :username
   end
 
-  # Mongoid doesn't seem to currently support
-  # referencing embedded documents
   def watchers
-    App.all.map(&:watchers).flatten.select {|w| w.user_id.to_s == id.to_s}
+    apps.map(&:watchers).flatten.select {|w| w.user_id.to_s == id.to_s}
   end
 
   def per_page
@@ -35,10 +33,7 @@ class User
   end
 
   def apps
-    # This is completely wasteful but became necessary
-    # due to bugs in Mongoid
-    app_ids = watchers.map {|w| w.app.id}
-    App.any_in(:_id => app_ids)
+    App.where('watchers.user_id' => id)
   end
 
   def watching?(app)
