@@ -14,8 +14,8 @@ host: errbit.example.com
 # will be sent from.
 email_from: errbit@example.com
 
-# if you turn on this option, email_at_notices will be configured on per app basis
-# at App edit page
+# If you turn on this option, email_at_notices can be
+# configured on a per app basis, at the App edit page
 per_app_email_at_notices: false
 
 # Configure when emails are sent for an error.
@@ -23,4 +23,6 @@ per_app_email_at_notices: false
 # an email notification.
 email_at_notices: [1, 10, 100]
 
+# Configure whether or not the user should be prompted before resolving an error.
 confirm_resolve_err: true
+
