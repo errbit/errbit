@@ -201,15 +201,7 @@ describe AppsController do
 
         it "should display a message" do
           post :create, :app => {}
-          request.flash[:success].should match(/success/)
-        end
-      end
-
-      context "when the create is unsuccessful" do
-        it "should render the new page" do
-          @app.should_receive(:save).and_return(false)
-          post :create, :app => {}
-          response.should render_template(:new)
+          request.flash[:notice].should match(/success/)
         end
       end
     end
@@ -227,7 +219,7 @@ describe AppsController do
 
         it "should display a message" do
           put :update, :id => @app.id, :app => {}
-          request.flash[:success].should match(/success/)
+          request.flash[:notice].should match(/success/)
         end
       end
 
@@ -432,7 +424,7 @@ describe AppsController do
 
       it "should display a message" do
         delete :destroy, :id => @app.id
-        request.flash[:success].should match(/success/)
+        request.flash[:notice].should match(/success/)
       end
 
       it "should redirect to the apps page" do

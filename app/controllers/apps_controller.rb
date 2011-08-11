@@ -1,12 +1,7 @@
-class AppsController < ApplicationController
+class AppsController < InheritedResources::Base
 
   before_filter :require_admin!, :except => [:index, :show]
-  before_filter :find_app, :except => [:index, :new, :create]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
-
-  def index
-    @apps = current_user.admin? ? App.all : current_user.apps.all
-  end
 
   def show
     where_clause = {}
@@ -14,65 +9,47 @@ class AppsController < ApplicationController
       format.html do
         where_clause[:environment] = params[:environment] if(params[:environment].present?)
         if(params[:all_errs])
-          @errs = @app.errs.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+          @errs = resource.errs.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
           @all_errs = true
         else
-          @errs = @app.errs.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+          @errs = resource.errs.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
           @all_errs = false
         end
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do
-        @errs = @app.errs.unresolved.ordered
+        @errs = resource.errs.unresolved.ordered
       end
     end
   end
 
   def new
-    @app = App.new
-    @app.watchers.build
+    build_resource.watchers.build
     @app.issue_tracker = IssueTracker.new
+    new!
   end
 
   def edit
-    @app.watchers.build if @app.watchers.none?
-    @app.issue_tracker = IssueTracker.new if @app.issue_tracker.nil?
+    resource.watchers.build if resource.watchers.none?
+    resource.issue_tracker = IssueTracker.new if resource.issue_tracker.nil?
+    edit!
   end
 
   def create
-    @app = App.new(params[:app])
-
-    if @app.save
-      flash[:success] = 'Great success! Configure your app with the API key below'
-      redirect_to app_path(@app)
-    else
-      render :new
-    end
+    create! :success => 'Great success! Configure your app with the API key below'
   end
 
   def update
-    if @app.update_attributes(params[:app])
-      flash[:success] = "Good news everyone! '#{@app.name}' was successfully updated."
-      redirect_to app_path(@app)
-    else
-      render :edit
-    end
+    update! :success => "Good news everyone! '#{resource.name}' was successfully updated."
   end
 
   def destroy
-    @app.destroy
-    flash[:success] = "'#{@app.name}' was successfully destroyed."
-    redirect_to apps_path
+    destroy! :success =>  "'#{resource.name}' was successfully destroyed."
   end
 
   protected
-
-    def find_app
-      @app = App.find(params[:id])
-
-      # Mongoid Bug: could not chain: current_user.apps.find_by_id!
-      # apparently finding by 'watchers.email' and 'id' is broken
-      raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
+    def begin_of_association_chain
+      current_user unless current_user.admin?
     end
 
     # email_at_notices is edited as a string, and stored as an array.
