@@ -6,7 +6,7 @@ var Errbit = {
     <notifier>\
       <name>errbit_notifier_js</name>\
       <version>2.0</version>\
-      <url>http://NOTIFIER_HOST</url>\
+      <url>https://github.com/jdpace/errbit</url>\
     </notifier>\
     <error>\
       <class>EXCEPTION_CLASS</class>\
@@ -103,7 +103,6 @@ var Errbit = {
       }
 
       xml = xml.replace('</request>',        data + '</request>')
-               .replace('NOTIFIER_HOST',     host)
                .replace('REQUEST_URL',       url)
                .replace('REQUEST_ACTION',    action)
                .replace('REQUEST_COMPONENT', component);
