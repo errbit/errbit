@@ -24,6 +24,18 @@ class AppsController < InheritedResources::Base
     end
   end
 
+  def create
+    @app = App.new(params[:app])
+    initialize_subclassed_issue_tracker
+    create!
+  end
+
+  def update
+    @app = resource
+    initialize_subclassed_issue_tracker
+    update!
+  end
+
   def new
     plug_params build_resource
     new!
@@ -34,7 +46,16 @@ class AppsController < InheritedResources::Base
     edit!
   end
 
+
   protected
+    def initialize_subclassed_issue_tracker
+      if params[:app][:issue_tracker_attributes] && tracker_type = params[:app][:issue_tracker_attributes][:type]
+        if IssueTracker.subclasses.map(&:to_s).include?(tracker_type.to_s)
+          @app.issue_tracker = tracker_type.constantize.new(params[:app][:issue_tracker_attributes])
+        end
+      end
+    end
+
     def begin_of_association_chain
       current_user unless current_user.admin?
     end
@@ -45,7 +66,7 @@ class AppsController < InheritedResources::Base
 
     def plug_params app
       app.watchers.build if app.watchers.none?
-      app.issue_tracker = IssueTracker.new if app.issue_tracker.nil?
+      app.issue_tracker = IssueTracker.new unless app.issue_tracker_configured?
     end
 
     # email_at_notices is edited as a string, and stored as an array.

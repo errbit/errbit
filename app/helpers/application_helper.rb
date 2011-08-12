@@ -29,16 +29,5 @@ module ApplicationHelper
     tallies.values.inject(0) {|sum, n| sum + n}
   end
   private :total_from_tallies
-
-  def no_tracker? object
-    object.issue_tracker_type == "none"
-  end
-
-  %w(lighthouseapp redmine pivotal fogbugz mingle).each do |tracker|
-    define_method("#{tracker}_tracker?".to_sym) do |object|
-      object.issue_tracker_type == tracker
-    end
-  end
-
 end
 

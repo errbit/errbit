@@ -1,28 +1,22 @@
-Factory.define :generic_tracker, :class => IssueTracker do |e|
+Factory.define :issue_tracker do |e|
   e.api_token { Factory.next :word }
   e.project_id { Factory.next :word }
   e.association :app, :factory => :app
-end
-
-Factory.define :lighthouseapp_tracker, :parent => :generic_tracker do |e|
-  e.issue_tracker_type 'lighthouseapp'
   e.account { Factory.next :word }
+  e.username { Factory.next :word }
+  e.password { Factory.next :word }
 end
 
-Factory.define :redmine_tracker, :parent => :generic_tracker do |e|
-  e.issue_tracker_type 'redmine'
-  e.account { "http://#{Factory.next(:word)}.com" }
+%w(lighthouse pivotal_labs fogbugz).each do |t|
+  Factory.define "#{t}_tracker".to_sym, :parent => :issue_tracker, :class => "#{t}_tracker".to_sym do |e|; end
 end
 
-Factory.define :pivotal_tracker, :parent => :generic_tracker do |e|
-  e.issue_tracker_type 'pivotal'
+Factory.define :redmine_tracker, :parent => :issue_tracker, :class => :redmine_tracker do |e|
+  e.account 'http://redmine.example.com'
 end
 
-Factory.define :mingle_tracker, :parent => :generic_tracker do |t|
-  t.issue_tracker_type 'mingle'
-  t.account  "https://mingle.example.com"
-  t.ticket_properties 'card_type = Defect, defect_status = open, priority = essential'
-  t.username "test_user"
-  t.password "test_password"
+Factory.define :mingle_tracker, :parent => :issue_tracker, :class => :mingle_tracker do |e|
+  e.account 'https://mingle.example.com'
+  e.ticket_properties 'card_type = Defect, defect_status = open, priority = essential'
 end
 

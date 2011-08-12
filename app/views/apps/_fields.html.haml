@@ -50,40 +50,40 @@
   = f.fields_for :issue_tracker do |w|
     %div.issue_tracker.nested
       %div.choose
-        = w.radio_button :issue_tracker_type, :none
-        = label_tag :issue_tracker_type_none, '(None)', :for => label_for_attr(w, 'issue_tracker_type_none')
-        = w.radio_button :issue_tracker_type, :lighthouseapp
-        = label_tag :issue_tracker_type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'issue_tracker_type_lighthouseapp')
-        = w.radio_button :issue_tracker_type, :redmine
-        = label_tag :issue_tracker_type_redmine, 'Redmine', :for => label_for_attr(w, 'issue_tracker_type_redmine')
-        = w.radio_button :issue_tracker_type, :pivotal
-        = label_tag :issue_tracker_type_pivotal, 'Pivotal Tracker', :for => label_for_attr(w, 'issue_tracker_type_pivotal')
-        = w.radio_button :issue_tracker_type, :fogbugz
-        = label_tag :issue_tracker_type_fogbugz, 'FogBugz', :for => label_for_attr(w, 'issue_tracker_type_fogbugz')
-        = w.radio_button :issue_tracker_type, :mingle
-        = label_tag :issue_tracker_type_fogbugz, 'Mingle', :for => label_for_attr(w, 'issue_tracker_type_mingle')
-      %div.tracker_params.none{:class => no_tracker?(w.object) ? 'chosen' : nil}
+        = w.radio_button :type, "IssueTracker", 'data-section' => 'none'
+        = label_tag :type_none, '(None)', :for => label_for_attr(w, 'type_none')
+        = w.radio_button :type, "LighthouseTracker", 'data-section' => 'lighthouse'
+        = label_tag :type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'type_lighthouseapp')
+        = w.radio_button :type, "RedmineTracker", 'data-section' => 'redmine'
+        = label_tag :type_redmine, 'Redmine', :for => label_for_attr(w, 'type_redmine')
+        = w.radio_button :type, "PivotalTracker", 'data-section' => 'pivotal'
+        = label_tag :type_pivotal, 'Pivotal Tracker', :for => label_for_attr(w, 'type_pivotal')
+        = w.radio_button :type, "FogbugzTracker", 'data-section' => 'fogbugz'
+        = label_tag :type_fogbugz, 'FogBugz', :for => label_for_attr(w, 'type_fogbugz')
+        = w.radio_button :type, "MingleTracker", 'data-section' => 'mingle'
+        = label_tag :type_fogbugz, 'Mingle', :for => label_for_attr(w, 'type_mingle')
+      %div.tracker_params.none{:class => (w.object && !(w.object.class < IssueTracker)) ? 'chosen' : nil}
         %p When no issue tracker has been configured, you will be able to leave comments on errors.
-      %div.tracker_params.lighthouseapp{:class => lighthouseapp_tracker?(w.object) ? 'chosen' : nil}
+      %div.tracker_params.lighthouse{:class => w.object.is_a?(LighthouseTracker) ? 'chosen' : nil}
         = w.label :account, "Account"
         = w.text_field :account, :placeholder => "abc from abc.lighthouseapp.com"
         = w.label :api_token, "API token"
         = w.text_field :api_token, :placeholder => "API Token for your account"
         = w.label :project_id, "Project ID"
         = w.text_field :project_id
-      %div.tracker_params.redmine{:class => redmine_tracker?(w.object) ? 'chosen' : nil}
+      %div.tracker_params.redmine{:class => w.object.is_a?(RedmineTracker) ? 'chosen' : nil}
         = w.label :account, "Redmine URL"
         = w.text_field :account, :placeholder => "like http://www.redmine.org/"
         = w.label :api_token, "API token"
         = w.text_field :api_token, :placeholder => "API Token for your account"
         = w.label :project_id, "Project ID"
         = w.text_field :project_id
-      %div.tracker_params.pivotal{:class => pivotal_tracker?(w.object) ? 'chosen' : nil}
+      %div.tracker_params.pivotal{:class => w.object.is_a?(PivotalLabsTracker) ? 'chosen' : nil}
         = w.label :project_id, "Project ID"
         = w.text_field :project_id
         = w.label :api_token, "API token"
         = w.text_field :api_token, :placeholder => "API Token for your account"
-      %div.tracker_params.fogbugz{:class => fogbugz_tracker?(w.object) ? 'chosen' : nil}
+      %div.tracker_params.fogbugz{:class => w.object.is_a?(FogbugzTracker) ? 'chosen' : nil}
         = w.label :project_id, "Area Name"
         = w.text_field :project_id
         = w.label :account, "FogBugz URL"
@@ -92,7 +92,7 @@
         = w.text_field :username, :placeholder => 'Username/Email for your account'
         = w.label :password, 'Password'
         = w.password_field :password, :placeholder => 'Password for your account'
-      %div.tracker_params.mingle{:class => mingle_tracker?(w.object) ? 'chosen' : nil}
+      %div.tracker_params.mingle{:class => w.object.is_a?(MingleTracker) ? 'chosen' : nil}
         = w.label :account, "Mingle URL"
         = w.text_field :account, :placeholder => "http://mingle.yoursite.com/"
         = w.label :project_id, "Project ID"

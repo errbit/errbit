@@ -263,25 +263,25 @@ describe AppsController do
         context "unknown tracker type" do
           before(:each) do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'unknown', :project_id => '1234', :api_token => '123123', :account => 'myapp'
+              :type => 'unknown', :project_id => '1234', :api_token => '123123', :account => 'myapp'
             } }
             @app.reload
           end
 
           it "should not create issue tracker" do
-            @app.issue_tracker.should be_nil
+            @app.issue_tracker_configured?.should == false
           end
         end
 
         context "lighthouseapp" do
           it "should save tracker params" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'lighthouseapp', :project_id => '1234', :api_token => '123123', :account => 'myapp'
+              :type => 'LighthouseTracker', :project_id => '1234', :api_token => '123123', :account => 'myapp'
             } }
             @app.reload
 
             tracker = @app.issue_tracker
-            tracker.issue_tracker_type.should == 'lighthouseapp'
+            tracker.should be_a(LighthouseTracker)
             tracker.project_id.should == '1234'
             tracker.api_token.should == '123123'
             tracker.account.should == 'myapp'
@@ -289,11 +289,11 @@ describe AppsController do
 
           it "should show validation notice when sufficient params are not present" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'lighthouseapp', :project_id => '1234', :api_token => '123123'
+              :type => 'LighthouseTracker', :project_id => '1234', :api_token => '123123'
             } }
             @app.reload
 
-            @app.issue_tracker.should be_nil
+            @app.issue_tracker_configured?.should == false
             response.body.should match(/You must specify your Lighthouseapp account, API token and Project ID/)
           end
         end
@@ -301,12 +301,12 @@ describe AppsController do
         context "redmine" do
           it "should save tracker params" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'redmine', :project_id => '1234', :api_token => '123123', :account => 'http://myapp.com'
+              :type => 'RedmineTracker', :project_id => '1234', :api_token => '123123', :account => 'http://myapp.com'
             } }
             @app.reload
 
             tracker = @app.issue_tracker
-            tracker.issue_tracker_type.should == 'redmine'
+            tracker.should be_a(RedmineTracker)
             tracker.project_id.should == '1234'
             tracker.api_token.should == '123123'
             tracker.account.should == 'http://myapp.com'
@@ -314,11 +314,11 @@ describe AppsController do
 
           it "should show validation notice when sufficient params are not present" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'redmine', :project_id => '1234', :api_token => '123123'
+              :type => 'RedmineTracker', :project_id => '1234', :api_token => '123123'
             } }
             @app.reload
 
-            @app.issue_tracker.should be_nil
+            @app.issue_tracker_configured?.should == false
             response.body.should match(/You must specify your Redmine URL, API token and Project ID/)
           end
         end
@@ -326,21 +326,21 @@ describe AppsController do
         context "pivotal" do
           it "should save tracker params" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'pivotal', :project_id => '1234', :api_token => '123123' } }
+              :type => 'PivotalLabsTracker', :project_id => '1234', :api_token => '123123' } }
             @app.reload
 
             tracker = @app.issue_tracker
-            tracker.issue_tracker_type.should == 'pivotal'
+            tracker.should be_a(PivotalLabsTracker)
             tracker.project_id.should == '1234'
             tracker.api_token.should == '123123'
           end
 
           it "should show validation notice when sufficient params are not present" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'pivotal', :project_id => '1234' } }
+              :type => 'PivotalLabsTracker', :project_id => '1234' } }
             @app.reload
 
-            @app.issue_tracker.should be_nil
+            @app.issue_tracker_configured?.should == false
             response.body.should match(/You must specify your Pivotal Tracker API token and Project ID/)
           end
         end
@@ -349,12 +349,12 @@ describe AppsController do
           context 'with correct params' do
             before do
               put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :issue_tracker_type => 'fogbugz', :account => 'abc', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
+                :type => 'FogbugzTracker', :account => 'abc', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
               @app.reload
             end
 
             subject {@app.issue_tracker}
-            its(:issue_tracker_type) {should == 'fogbugz'}
+            its(:type) {should == "FogbugzTracker"}
             its(:account) {should == 'abc'}
             its(:project_id) {should == 'Service - Peon'}
             its(:username) {should == '1234'}
@@ -364,11 +364,11 @@ describe AppsController do
           context 'insufficient params' do
             it 'shows validation notice' do
               put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :issue_tracker_type => 'fogbugz', :project_id => '1234' } }
+                :type => 'FogbugzTracker', :project_id => '1234' } }
               @app.reload
 
-              @app.issue_tracker.should be_nil
-              response.body.should match(/You must specify your FogBugz Area Name, Username, and Password/)
+              @app.issue_tracker_configured?.should == false
+              response.body.should match(/You must specify your FogBugz Area Name, FogBugz URL, Username, and Password/)
             end
           end
         end
@@ -377,14 +377,14 @@ describe AppsController do
           context 'with correct params' do
             before do
               put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :issue_tracker_type => 'mingle', :project_id => 'test', :account => 'http://mingle.example.com',
+                :type => 'MingleTracker', :project_id => 'test', :account => 'http://mingle.example.com',
                 :username => '1234', :password => '123123', :ticket_properties => "card_type = Defect"
               } }
               @app.reload
             end
 
             subject {@app.issue_tracker}
-            its(:issue_tracker_type) {should == 'mingle'}
+            its(:type) {should == "MingleTracker"}
             its(:project_id) {should == 'test'}
             its(:username) {should == '1234'}
             its(:password) {should == '123123'}
@@ -392,12 +392,12 @@ describe AppsController do
 
           it "should show validation notice when sufficient params are not present" do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :issue_tracker_type => 'mingle', :project_id => 'test', :account => 'http://mingle.example.com',
+              :type => 'MingleTracker', :project_id => 'test', :account => 'http://mingle.example.com',
               :username => '1234', :password => '1234', :ticket_properties => "cards_type = Defect"
             } }
             @app.reload
 
-            @app.issue_tracker.should be_nil
+            @app.issue_tracker_configured?.should == false
             response.body.should match(/You must specify your Mingle URL, Project ID, Card Type \(in default card properties\), Sign-in name, and Password/)
           end
         end

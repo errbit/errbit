@@ -51,7 +51,7 @@ describe "errs/show.html.erb" do
 
     context "with issue tracker" do
       def with_issue_tracker(err)
-        err.app.issue_tracker = IssueTracker.new :issue_tracker_type => "lighthouseapp", :project_id => "1234"
+        err.app.issue_tracker = PivotalLabsTracker.new :api_token => "token token token", :project_id => "1234"
         assign :err, err
         assign :app, err.app
       end

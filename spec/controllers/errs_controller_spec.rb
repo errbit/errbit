@@ -173,7 +173,7 @@ describe ErrsController do
         end
 
         it "should exist for err's app with issue tracker" do
-          tracker = Factory(:lighthouseapp_tracker)
+          tracker = Factory(:lighthouse_tracker)
           err = Factory(:err, :app => tracker.app)
           get :show, :app_id => err.app.id, :id => err.id
 
@@ -181,7 +181,7 @@ describe ErrsController do
         end
 
         it "should not exist for err with issue_link" do
-          tracker = Factory(:lighthouseapp_tracker)
+          tracker = Factory(:lighthouse_tracker)
           err = Factory(:err, :app => tracker.app, :issue_link => "http://some.host")
           get :show, :app_id => err.app.id, :id => err.id
 
@@ -262,7 +262,7 @@ describe ErrsController do
     context "successful issue creation" do
       context "lighthouseapp tracker" do
         let(:notice) { Factory :notice }
-        let(:tracker) { Factory :lighthouseapp_tracker, :app => notice.err.app }
+        let(:tracker) { Factory :lighthouse_tracker, :app => notice.err.app }
         let(:err) { notice.err }
 
         before(:each) do
@@ -326,7 +326,7 @@ describe ErrsController do
 
       context "pivotal tracker" do
         let(:notice) { Factory :notice }
-        let(:tracker) { Factory :pivotal_tracker, :app => notice.err.app, :project_id => 10 }
+        let(:tracker) { Factory :pivotal_labs_tracker, :app => notice.err.app, :project_id => 10 }
         let(:err) { notice.err }
 
         before(:each) do
@@ -370,7 +370,7 @@ describe ErrsController do
         before(:each) do
           number = 5
           @issue_link = "#{tracker.account}/projects/#{tracker.project_id}/cards/#{number}.xml"
-          @basic_auth = tracker.account.gsub("https://", "https://#{tracker.username}:#{tracker.password}@")
+          @basic_auth = tracker.account.gsub("://", "://#{tracker.username}:#{tracker.password}@")
           body = "<card><id type=\"integer\">#{number}</id></card>"
           stub_request(:post, "#{@basic_auth}/api/v1/projects/#{tracker.project_id}/cards.xml").
                        to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
@@ -415,7 +415,7 @@ describe ErrsController do
 
     context "error during request to a tracker" do
       context "lighthouseapp tracker" do
-        let(:tracker) { Factory :lighthouseapp_tracker }
+        let(:tracker) { Factory :lighthouse_tracker }
         let(:err) { Factory :err, :app => tracker.app }
 
         before(:each) do
