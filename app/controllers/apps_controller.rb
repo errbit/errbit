@@ -2,6 +2,7 @@ class AppsController < InheritedResources::Base
 
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
+  respond_to :html
 
   def show
     where_clause = {}
@@ -24,32 +25,27 @@ class AppsController < InheritedResources::Base
   end
 
   def new
-    build_resource.watchers.build
-    @app.issue_tracker = IssueTracker.new
+    plug_params build_resource
     new!
   end
 
   def edit
-    resource.watchers.build if resource.watchers.none?
-    resource.issue_tracker = IssueTracker.new if resource.issue_tracker.nil?
+    plug_params resource
     edit!
-  end
-
-  def create
-    create! :success => 'Great success! Configure your app with the API key below'
-  end
-
-  def update
-    update! :success => "Good news everyone! '#{resource.name}' was successfully updated."
-  end
-
-  def destroy
-    destroy! :success =>  "'#{resource.name}' was successfully destroyed."
   end
 
   protected
     def begin_of_association_chain
       current_user unless current_user.admin?
+    end
+
+    def interpolation_options
+      {:app_name => resource.name}
+    end
+
+    def plug_params app
+      app.watchers.build if app.watchers.none?
+      app.issue_tracker = IssueTracker.new if app.issue_tracker.nil?
     end
 
     # email_at_notices is edited as a string, and stored as an array.

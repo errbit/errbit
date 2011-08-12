@@ -3,3 +3,11 @@
 
 en:
   hello: "Hello world"
+  flash:
+    apps:
+      create:
+        success: Great success! Configure your app with the API key below
+      update:
+        success: "Good news everyone! '%{app_name}' was successfully updated."
+      destroy:
+        success: "'%{app_name}' was successfully destroyed."
