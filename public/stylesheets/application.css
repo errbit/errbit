@@ -638,6 +638,10 @@ table.tally th.value {
   background: transparent url(/images/fogbugz_create.png) 6px 5px no-repeat;
 }
 
+#action-bar a.mingle_create {
+  background: transparent url(/images/mingle_create.png) 6px 5px no-repeat;
+}
+
 #action-bar a.lighthouseapp_goto {
   background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
 }
@@ -652,6 +656,10 @@ table.tally th.value {
 
 #action-bar a.fogbugz_goto {
   background: transparent url(/images/fogbugz_goto.png) 6px 5px no-repeat;
+}
+
+#action-bar a.mingle_goto {
+  background: transparent url(/images/mingle_goto.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */
