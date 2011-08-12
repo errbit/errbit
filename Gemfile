@@ -12,6 +12,7 @@ gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
+gem 'inherited_resources'
 
 platform :ruby do
   gem 'bson_ext', '~> 1.3.1'

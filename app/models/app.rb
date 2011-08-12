@@ -39,9 +39,8 @@ class App
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
     :reject_if => proc { |attrs| !%w(none lighthouseapp redmine pivotal fogbugz mingle).include?(attrs[:issue_tracker_type]) }
 
-  # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)
-    where(:_id => app_id).first || raise(Mongoid::Errors::DocumentNotFound.new(self,app_id))
+    find app_id
   end
 
   def self.find_by_api_key!(key)

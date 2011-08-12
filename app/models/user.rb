@@ -19,26 +19,19 @@ class User
 
   attr_protected :admin
 
+  has_many :apps, :foreign_key => 'watchers.user_id'
+
   if Errbit::Config.user_has_username
     field :username
     validates_presence_of :username
   end
 
-  # Mongoid doesn't seem to currently support
-  # referencing embedded documents
   def watchers
-    App.all.map(&:watchers).flatten.select {|w| w.user_id.to_s == id.to_s}
+    apps.map(&:watchers).flatten.select {|w| w.user_id.to_s == id.to_s}
   end
 
   def per_page
     self[:per_page] || PER_PAGE
-  end
-
-  def apps
-    # This is completely wasteful but became necessary
-    # due to bugs in Mongoid
-    app_ids = watchers.map {|w| w.app.id}
-    App.any_in(:_id => app_ids)
   end
 
   def watching?(app)
