@@ -25,14 +25,12 @@ class AppsController < InheritedResources::Base
   end
 
   def new
-    build_resource.watchers.build
-    @app.issue_tracker = IssueTracker.new
+    plug_params build_resource
     new!
   end
 
   def edit
-    resource.watchers.build if resource.watchers.none?
-    resource.issue_tracker = IssueTracker.new if resource.issue_tracker.nil?
+    plug_params resource
     edit!
   end
 
@@ -43,6 +41,11 @@ class AppsController < InheritedResources::Base
 
     def interpolation_options
       {:app_name => resource.name}
+    end
+
+    def plug_params app
+      app.watchers.build if app.watchers.none?
+      app.issue_tracker = IssueTracker.new if app.issue_tracker.nil?
     end
 
     # email_at_notices is edited as a string, and stored as an array.
