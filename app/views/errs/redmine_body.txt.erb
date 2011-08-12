@@ -32,14 +32,12 @@ h2. Session
 h2. Backtrace
 
 | Line | File | Method |
-<% for line in notice.backtrace %>
-| <%= line['number'] %> | <%= line['file'].sub(/^\[PROJECT_ROOT\]/, '') %> | *<%= line['method'] %>* |
+<% for line in notice.backtrace %>| <%= line['number'] %> | <%= line['file'].sub(/^\[PROJECT_ROOT\]/, '') %> | *<%= line['method'] %>* |
 <% end %>
 
 h2. Environment
 
-<% for key, val in notice.env_vars %>
-| <%= key %> | <%= val %> |
+<% for key, val in notice.env_vars %>| <%= key %> | <%= val %> |
 <% end %>
 
 <% end %>
