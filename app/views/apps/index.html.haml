@@ -15,7 +15,7 @@
         %td.deploy= app.last_deploy_at ? link_to( app.last_deploy_at.to_s(:micro), app_deploys_path(app)) : 'n/a'
         %td.count
           - if app.errs.count > 0
-            = link_to app.errs.unresolved.count, app_errs_path(app)
+            = link_to app.errs.unresolved.count, app_path(app)
           - else
             \-
     - if @apps.none?
