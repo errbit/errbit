@@ -2,6 +2,7 @@ class AppsController < InheritedResources::Base
 
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
+  respond_to :html
 
   def show
     where_clause = {}
@@ -35,21 +36,13 @@ class AppsController < InheritedResources::Base
     edit!
   end
 
-  def create
-    create! :success => 'Great success! Configure your app with the API key below'
-  end
-
-  def update
-    update! :success => "Good news everyone! '#{resource.name}' was successfully updated."
-  end
-
-  def destroy
-    destroy! :success =>  "'#{resource.name}' was successfully destroyed."
-  end
-
   protected
     def begin_of_association_chain
       current_user unless current_user.admin?
+    end
+
+    def interpolation_options
+      {:app_name => resource.name}
     end
 
     # email_at_notices is edited as a string, and stored as an array.
