@@ -1,2 +1,11 @@
 rvm: 1.9.2
 
+# Only build master branch
+branches:
+  only:
+    - master
+
+# Disable notifications for now.
+notifications:
+  disabled: true
+
