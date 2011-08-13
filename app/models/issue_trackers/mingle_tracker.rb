@@ -25,8 +25,7 @@ class MingleTracker < IssueTracker
   end
 
   def body_template
-    # Mingle also uses textile markup, so the redmine template is perfect.
-    @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/redmine_body.txt.erb"))
+    @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/textile_body.txt.erb"))
   end
 
   def ticket_properties_hash
