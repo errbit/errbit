@@ -7,5 +7,5 @@ branches:
 
 # Disable notifications for now.
 notifications:
-  disabled: true
+  disabled: false
 
