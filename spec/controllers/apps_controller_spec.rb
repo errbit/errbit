@@ -77,20 +77,20 @@ describe AppsController do
 
       context 'with resolved errors' do
         before(:each) do
-          resolved_err = Factory.create(:err, app: @app, resolved: true)
-          Factory.create(:notice, err: resolved_err)
+          resolved_err = Factory.create(:err, :app => @app, :resolved => true)
+          Factory.create(:notice, :err => resolved_err)
         end
 
         context 'and no params' do
           it 'shows only unresolved errs' do
-            get :show, id: @app.id
+            get :show, :id => @app.id
             assigns(:errs).size.should == 1
           end
         end
 
         context 'and all_errs=true params' do
           it 'shows all errors' do
-            get :show, id: @app.id, all_errs: true
+            get :show, :id => @app.id, :all_errs => true
             assigns(:errs).size.should == 2
           end
         end
@@ -100,41 +100,41 @@ describe AppsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Factory.create(:err, app: @app, environment: environments[i % environments.length])
+            Factory.create(:err, :app => @app, :environment => environments[i % environments.length])
           end
         end
 
         context 'no params' do
           it 'shows errs for all environments' do
-            get :show, id: @app.id
+            get :show, :id => @app.id
             assigns(:errs).size.should == 21
           end
         end
 
         context 'environment production' do
           it 'shows errs for just production' do
-            get :show, id: @app.id, environment: :production
+            get :show, :id => @app.id, :environment => :production
             assigns(:errs).size.should == 6
           end
         end
 
         context 'environment staging' do
           it 'shows errs for just staging' do
-            get :show, id: @app.id, environment: :staging
+            get :show, :id => @app.id, :environment => :staging
             assigns(:errs).size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows errs for just development' do
-            get :show, id: @app.id, environment: :development
+            get :show, :id => @app.id, :environment => :development
             assigns(:errs).size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows errs for just test' do
-            get :show, id: @app.id, environment: :test
+            get :show, :id => @app.id, :environment => :test
             assigns(:errs).size.should == 5
           end
         end
@@ -435,4 +435,3 @@ describe AppsController do
   end
 
 end
-

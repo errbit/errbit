@@ -53,7 +53,7 @@ describe ErrsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Factory.create(:err, environment: environments[i % environments.length])
+            Factory.create(:err, :environment => environments[i % environments.length])
           end
         end
 
@@ -66,28 +66,28 @@ describe ErrsController do
 
         context 'environment production' do
           it 'shows errs for just production' do
-            get :index, environment: :production
+            get :index, :environment => :production
             assigns(:errs).size.should == 6
           end
         end
 
         context 'environment staging' do
           it 'shows errs for just staging' do
-            get :index, environment: :staging
+            get :index, :environment => :staging
             assigns(:errs).size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows errs for just development' do
-            get :index, environment: :development
+            get :index, :environment => :development
             assigns(:errs).size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows errs for just test' do
-            get :index, environment: :test
+            get :index, :environment => :test
             assigns(:errs).size.should == 5
           end
         end
