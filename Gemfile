@@ -14,6 +14,10 @@ gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
 gem 'inherited_resources'
 
+group :production do
+  gem 'hoptoad_notifier', "~> 2.3"
+end
+
 platform :ruby do
   gem 'bson_ext', '~> 1.3.1'
 end
