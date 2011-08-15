@@ -7,7 +7,6 @@ branches:
   only:
     - master
 
-# Disable notifications for now.
-notifications:
-  disabled: false
+# To stop Travis from running tests for a new commit, add the following to your commit message: [ci skip]
+# You should add this when you edit documentation or comments, etc.
 
