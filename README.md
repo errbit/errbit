@@ -82,17 +82,10 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
          git clone http://github.com/jdpace/errbit.git
 
-  2. Copy database settings from mongoid.example.yml, and commit mongoid.yml to repository
-
-        cp config/mongoid.example.yml config/mongoid.yml
-        sed -i "\|^config/mongoid.yml$|d" .gitignore
-        git add config/mongoid.yml .gitignore
-        git commit -m "Added mongoid.yml config for heroku."
-
-  3. Create & configure for Heroku
+  2. Create & configure for Heroku
 
          gem install heroku
-         heroku create example-errbit --stack cedar
+         heroku create example-errbit
          heroku addons:add mongohq:free
          heroku addons:add sendgrid:free
          heroku config:add HEROKU=true
@@ -100,11 +93,11 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
          heroku config:add ERRBIT_EMAIL_FROM=example@example.com
          git push heroku master
 
-  4. Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
+  3. Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
 
          heroku run rake db:seed
 
-  5. Enjoy!
+  4. Enjoy!
 
 
 **Configuring LDAP authentication:**
