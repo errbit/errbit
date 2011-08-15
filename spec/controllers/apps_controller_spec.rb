@@ -38,7 +38,7 @@ describe AppsController do
         @user = Factory(:admin)
         sign_in @user
         @app = Factory(:app)
-        @err = Factory :err, :app => @app
+        @err = Factory(:err, :problem => Factory(:problem, :app => @app))
         @notice = Factory :notice, :err => @err
       end
 
@@ -48,7 +48,7 @@ describe AppsController do
       end
 
       it "should not raise errors for app with err without notices" do
-        Factory :err, :app => @app
+        Factory(:err, :problem => Factory(:problem, :app => @app))
         lambda { get :show, :id => @app.id }.should_not raise_error
       end
 
@@ -60,7 +60,7 @@ describe AppsController do
 
       context "pagination" do
         before(:each) do
-          35.times { Factory :err, :app => @app }
+          35.times { Factory(:err, :problem => Factory(:problem, :app => @app)) }
         end
 
         it "should have default per_page value for user" do
@@ -77,18 +77,18 @@ describe AppsController do
 
       context 'with resolved errors' do
         before(:each) do
-          resolved_err = Factory.create(:err, app: @app, resolved: true)
-          Factory.create(:notice, err: resolved_err)
+          resolved_problem = Factory.create(:problem, app: @app, resolved: true)
+          Factory.create(:notice, err: Factory(:err, problem: resolved_problem))
         end
 
         context 'and no params' do
-          it 'shows only unresolved errs' do
+          it 'shows only unresolved problems' do
             get :show, id: @app.id
             assigns(:errs).size.should == 1
           end
         end
 
-        context 'and all_errs=true params' do
+        context 'and all_problems=true params' do
           it 'shows all errors' do
             get :show, id: @app.id, all_errs: true
             assigns(:errs).size.should == 2
@@ -100,7 +100,7 @@ describe AppsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Factory.create(:err, app: @app, environment: environments[i % environments.length])
+            Factory.create(:err, problem: Factory(:problem, app: @app), environment: environments[i % environments.length])
           end
         end
 

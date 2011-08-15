@@ -1,30 +1,39 @@
-%table.errs
-  %thead
-    %tr
-      %th App
-      %th What &amp; Where
-      %th Latest
-      %th Deploy
-      %th Count
-      %th Resolve
-  %tbody
-    - errs.each do |err|
-      %tr{:class => err.resolved? ? 'resolved' : 'unresolved'}
-        %td.app
-          = link_to err.app.name, app_path(err.app)
-          - if current_page?(:controller => 'errs')
-            %span.environment= link_to err.environment, errs_path(environment: err.environment)
-          - else
-            %span.environment= link_to err.environment, app_path(err.app, environment: err.environment)
-        %td.message
-          = link_to err.message, app_err_path(err.app, err)
-          %em= err.where
-        %td.latest #{time_ago_in_words(last_notice_at err)} ago
-        %td.deploy= err.app.last_deploy_at ? err.app.last_deploy_at.to_s(:micro) : 'n/a'
-        %td.count= link_to err.notices_count, app_err_path(err.app, err)
-        %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(err.app, err), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if err.unresolved?
-    - if errs.none?
+=form_tag do
+  %table.errs.selectable
+    %thead
       %tr
-        %td{:colspan => 6}
-          %em No errs here
-= will_paginate @errs, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+        %th
+        %th App
+        %th What &amp; Where
+        %th Latest
+        %th Deploy
+        %th Count
+    %tbody
+      - errs.each do |err|
+        %tr{:class => err.resolved? ? 'resolved' : 'unresolved'}
+          %td.select
+            = check_box_tag "errs[]", err.id, @selected_errs.member?(err.id.to_s)
+          %td.app
+            = link_to err.app.name, app_path(err.app)
+            - if current_page?(:controller => 'errs')
+              %span.environment= link_to err.environment, errs_path(environment: err.environment)
+            - else
+              %span.environment= link_to err.environment, app_path(err.app, environment: err.environment)
+          %td.message
+            = link_to err.message, app_err_path(err.app, err)
+            %em= err.where
+          %td.latest #{time_ago_in_words(last_notice_at err)} ago
+          %td.deploy= err.app.last_deploy_at ? err.app.last_deploy_at.to_s(:micro) : 'n/a'
+          %td.count= link_to err.notices.count, app_err_path(err.app, err)
+      - if errs.none?
+        %tr
+          %td{:colspan => (@app ? 5 : 6)}
+            %em No errs here
+  = will_paginate @errs, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+  .tab-bar
+    %ul
+      %li= submit_tag 'Merge', :id => 'merge_errs', :class => 'button', 'data-action' => merge_several_errs_path
+      %li= submit_tag 'Unmerge', :id => 'unmerge_errs', :class => 'button', 'data-action' => unmerge_several_errs_path
+      %li= submit_tag 'Resolve', :id => 'resolve_errs', :class => 'button', 'data-action' => resolve_several_errs_path
+      %li= submit_tag 'Unresolve', :id => 'unresolve_errs', :class => 'button', 'data-action' => unresolve_several_errs_path
+      %li= submit_tag 'Delete', :id => 'delete_errs', :class => 'button', 'data-action' => destroy_several_errs_path

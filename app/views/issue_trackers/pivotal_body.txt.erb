@@ -3,7 +3,7 @@ See this exception on Errbit: <%= app_err_url err.app, err %>
     <% if notice.request['url'].present? %>URL: <%= notice.request['url'] %><% end %>
     Where: <%= notice.err.where %>
     Occurred: <%= notice.created_at.to_s :micro %>
-    Similar: <%= (notice.err.notices.count - 1).to_s %>
+    Similar: <%= (notice.problem.notices.count - 1).to_s %>
 
     Params:
     <%= pretty_hash notice.params %>

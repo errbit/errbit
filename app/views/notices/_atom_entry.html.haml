@@ -12,7 +12,7 @@
   = notice.created_at.to_s(:micro)
 %p
   %strong Similar:
-  = notice.err.notices_count - 1
+  = notice.problem.notices_count - 1
 
 %h3 Params
 %p= pretty_hash(notice.params)

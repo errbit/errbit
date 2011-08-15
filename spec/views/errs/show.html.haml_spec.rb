@@ -4,10 +4,10 @@ describe "errs/show.html.erb" do
   before do
     err = Factory(:err)
     comment = Factory(:comment)
-    assign :err, err
+    assign :err, err.problem
     assign :comment, comment
     assign :app, err.app
-    assign :notices, err.notices.ordered.paginate(:page => 1, :per_page => 1)
+    assign :notices, err.notices.paginate(:page => 1, :per_page => 1)
     assign :notice, err.notices.first
   end
 
@@ -40,8 +40,8 @@ describe "errs/show.html.erb" do
 
   describe "content_for :comments" do
     it 'should display comments and new comment form when no issue tracker' do
-      err = Factory(:err_with_comments)
-      assign :err, err
+      err = Factory(:err, :problem => Factory(:problem_with_comments))
+      assign :err, err.problem
       assign :app, err.app
       render
       comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
@@ -57,13 +57,15 @@ describe "errs/show.html.erb" do
       end
 
       it 'should not display the comments section' do
-        with_issue_tracker(Factory(:err))
+        err = Factory(:err)
+        with_issue_tracker(err.problem)
         render
         view.instance_variable_get(:@_content_for)[:comments].should be_blank
       end
 
       it 'should display existing comments' do
-        with_issue_tracker(Factory(:err_with_comments))
+        err = Factory(:err, :problem => Factory(:problem_with_comments))
+        with_issue_tracker(err.problem)
         render
         comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
         comments_section.should =~ /Test comment/
