@@ -85,7 +85,7 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
   2. Create & configure for Heroku
 
          gem install heroku
-         heroku create example-errbit
+         heroku create example-errbit --stack cedar
          heroku addons:add mongohq:free
          heroku addons:add sendgrid:free
          heroku config:add HEROKU=true
