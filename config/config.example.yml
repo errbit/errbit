@@ -31,3 +31,13 @@ confirm_resolve_err: true
 # Helpful if you want to plug in your own authentication strategy.
 user_has_username: false
 
+# Configure tracking for Errbit's own internal errors.
+# There is a central Errbit instance running on heroku,
+# and other Errbit instances will send their errors there by default.
+# Please leave this section commented unless you really need to change it.
+# ------------------------------------------------------------------------
+# report_self_errors: true
+# self_errors_host: errbit-central.heroku.com
+# self_errors_port: 80
+# self_errors_api_key: 11e5ce322856e540481e6a0789893179
+
