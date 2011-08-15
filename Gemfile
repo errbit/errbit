@@ -22,7 +22,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.5'
   gem 'webmock', :require => false
   gem 'factory_girl_rails'
-  #gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'ruby-debug', :platform => :mri_18
+  gem 'ruby-debug19', :platform => :mri_19, :require => 'ruby-debug'
 end
 
 group :test do
