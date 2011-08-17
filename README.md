@@ -1,6 +1,6 @@
 Errbit [![TravisCI](https://secure.travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
 ======
-
+ 
 **The open source self-hosted error catcher**
 
 Errbit is a tool for collecting and managing errors from other applications.
