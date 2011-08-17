@@ -17,7 +17,7 @@ class IssueTracker
   validate :check_params
 
   # Subclasses are responsible for overwriting this method.
-  def check_params; end
+  def check_params; true; end
 
   def issue_title err
     "[#{ err.environment }][#{ err.where }] #{err.message.to_s.truncate(100)}"
