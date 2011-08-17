@@ -532,8 +532,44 @@ div.nested .chosen {
   display: block !important;
 }
 div.nested .choose {
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
+div.issue_tracker.nested img {
+  vertical-align: middle;
+}
+
+/* Icons for Issue Tracker Radio Buttons */
+div.issue_tracker.nested label.label_radio {
+  color: #777777;
+  padding-left: 33px;
+  background: url(/images/lighthouseapp_create.png) no-repeat;
+  line-height: 30px;
+  margin-bottom: 6px;
+  margin-right: 8px;
+}
+div.issue_tracker.nested .label_radio input {
+  position: absolute; left: -9999px;
+}
+
+div.issue_tracker.nested label.r_on {
+  color: #262626;
+}
+
+
+/* Inactive icons */
+div.issue_tracker.nested label.none { background: url(/images/none_inactive.png) no-repeat; }
+div.issue_tracker.nested label.redmine { background: url(/images/redmine_inactive.png) no-repeat; }
+div.issue_tracker.nested label.lighthouseapp { background: url(/images/lighthouseapp_inactive.png) no-repeat; }
+div.issue_tracker.nested label.mingle { background: url(/images/mingle_inactive.png) no-repeat; }
+div.issue_tracker.nested label.fogbugz { background: url(/images/fogbugz_inactive.png) no-repeat; }
+div.issue_tracker.nested label.pivotal { background: url(/images/pivotal_inactive.png) no-repeat; }
+/* Active icons */
+div.issue_tracker.nested label.r_on.none { background: url(/images/none_create.png) no-repeat; }
+div.issue_tracker.nested label.r_on.redmine { background: url(/images/redmine_create.png) no-repeat; }
+div.issue_tracker.nested label.r_on.lighthouseapp { background: url(/images/lighthouseapp_create.png) no-repeat; }
+div.issue_tracker.nested label.r_on.mingle { background: url(/images/mingle_create.png) no-repeat; }
+div.issue_tracker.nested label.r_on.fogbugz { background: url(/images/fogbugz_create.png) no-repeat; }
+div.issue_tracker.nested label.r_on.pivotal { background: url(/images/pivotal_create.png) no-repeat; }
 
 
 /* Apps Table */

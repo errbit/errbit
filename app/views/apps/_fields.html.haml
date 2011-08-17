@@ -50,18 +50,26 @@
   = f.fields_for :issue_tracker do |w|
     %div.issue_tracker.nested
       %div.choose
-        = w.radio_button :type, "IssueTracker", 'data-section' => 'none'
-        = label_tag :type_none, '(None)', :for => label_for_attr(w, 'type_issuetracker')
-        = w.radio_button :type, "LighthouseTracker", 'data-section' => 'lighthouse'
-        = label_tag :type_lighthouseapp, 'Lighthouse', :for => label_for_attr(w, 'type_lighthousetracker')
-        = w.radio_button :type, "RedmineTracker", 'data-section' => 'redmine'
-        = label_tag :type_redmine, 'Redmine', :for => label_for_attr(w, 'type_redminetracker')
-        = w.radio_button :type, "PivotalTracker", 'data-section' => 'pivotal'
-        = label_tag :type_pivotal, 'Pivotal Tracker', :for => label_for_attr(w, 'type_pivotaltracker')
-        = w.radio_button :type, "FogbugzTracker", 'data-section' => 'fogbugz'
-        = label_tag :type_fogbugz, 'FogBugz', :for => label_for_attr(w, 'type_fogbugztracker')
-        = w.radio_button :type, "MingleTracker", 'data-section' => 'mingle'
-        = label_tag :type_fogbugz, 'Mingle', :for => label_for_attr(w, 'type_mingletracker')
+        = label_tag :type_none, :for => label_for_attr(w, 'type_issuetracker'), :class => "label_radio none" do
+          = w.radio_button :type, "IssueTracker", 'data-section' => 'none'
+          (None)
+        = label_tag :type_lighthouseapp, :for => label_for_attr(w, 'type_lighthousetracker'), :class => "label_radio lighthouseapp" do
+          = w.radio_button :type, "LighthouseTracker", 'data-section' => 'lighthouse'
+          Lighthouse
+        = label_tag :type_redmine, :for => label_for_attr(w, 'type_redminetracker'), :class => "label_radio redmine" do
+          = w.radio_button :type, "RedmineTracker", 'data-section' => 'redmine'
+          Redmine
+        = label_tag :type_pivotal, :for => label_for_attr(w, 'type_pivotallabstracker'), :class => "label_radio pivotal" do
+          = w.radio_button :type, "PivotalLabsTracker", 'data-section' => 'pivotal'
+          Pivotal Tracker
+        %br
+        = label_tag :type_fogbugz, :for => label_for_attr(w, 'type_fogbugztracker'), :class => "label_radio fogbugz" do
+          = w.radio_button :type, "FogbugzTracker", 'data-section' => 'fogbugz'
+          FogBugz
+        = label_tag :type_fogbugz, :for => label_for_attr(w, 'type_mingletracker'), :class => "label_radio mingle" do
+          = w.radio_button :type, "MingleTracker", 'data-section' => 'mingle'
+          Mingle
+
       %div.tracker_params.none{:class => (w.object && !(w.object.class < IssueTracker)) ? 'chosen' : nil}
         %p When no issue tracker has been configured, you will be able to leave comments on errors.
       %div.tracker_params.lighthouse{:class => w.object.is_a?(LighthouseTracker) ? 'chosen' : nil}

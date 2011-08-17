@@ -7,6 +7,12 @@ $(function(){
 
   if($('div.issue_tracker.nested').length)
     activateTypeSelector('issue_tracker', 'tracker_params');
+
+  $('body').addClass('has-js');
+  $('.label_radio').click(function(){
+    activateLabelIcons();
+  });
+  activateLabelIcons();
 });
 
 function activateNestedForms() {
@@ -95,4 +101,16 @@ function activateCheckboxHooks() {
     });
   });
 }
+
+
+function activateLabelIcons() {
+  if ($('.label_radio input').length) {
+    $('.label_radio').each(function(){
+      $(this).removeClass('r_on');
+    });
+    $('.label_radio input:checked').each(function(){
+      $(this).parent('label').addClass('r_on');
+    });
+  };
+};
 
