@@ -52,15 +52,16 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
 **Running Locally:**
 
-  1. Bootstrap Errbit. This will copy over config.yml and also seed the database.
-
-         rake errbit:bootstrap
-
-  2. Update the config.yml and mongoid.yml files with information about your environment
-  3. Install dependencies
+  1. Install dependencies
 
          bundle install
 
+  2. Bootstrap Errbit. This will copy over config.yml and also seed the database.
+
+         rake errbit:bootstrap
+
+  3. Update the config.yml and mongoid.yml files with information about your environment
+  
   4. Start Server
 
          script/rails server
