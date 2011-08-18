@@ -456,7 +456,7 @@ EOF
       end
 
       it "should set flash error message telling issue tracker of the app doesn't exist" do
-        flash[:error].should == "This up has no issue tracker setup."
+        flash[:error].should == "This app has no issue tracker setup."
       end
     end
 
