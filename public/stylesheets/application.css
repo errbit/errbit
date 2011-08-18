@@ -540,7 +540,7 @@ div.issue_tracker.nested img {
 
 /* Icons for Issue Tracker Radio Buttons */
 div.issue_tracker.nested label.label_radio {
-  color: #777777;
+  color: #929292;
   padding-left: 33px;
   margin-bottom: 6px;
   margin-right: 8px;
@@ -551,7 +551,7 @@ div.issue_tracker.nested .label_radio input {
 }
 
 div.issue_tracker.nested label.r_on {
-  color: #262626;
+  color: #191919;
 }
 
 
@@ -562,6 +562,7 @@ div.issue_tracker.nested label.lighthouseapp { background: url(/images/lighthous
 div.issue_tracker.nested label.mingle { background: url(/images/mingle_inactive.png) no-repeat; }
 div.issue_tracker.nested label.fogbugz { background: url(/images/fogbugz_inactive.png) no-repeat; }
 div.issue_tracker.nested label.pivotal { background: url(/images/pivotal_inactive.png) no-repeat; }
+div.issue_tracker.nested label.github { background: url(/images/github_inactive.png) no-repeat; }
 /* Active icons */
 div.issue_tracker.nested label.r_on.none { background: url(/images/none_create.png) no-repeat; }
 div.issue_tracker.nested label.r_on.redmine { background: url(/images/redmine_create.png) no-repeat; }
@@ -569,7 +570,7 @@ div.issue_tracker.nested label.r_on.lighthouseapp { background: url(/images/ligh
 div.issue_tracker.nested label.r_on.mingle { background: url(/images/mingle_create.png) no-repeat; }
 div.issue_tracker.nested label.r_on.fogbugz { background: url(/images/fogbugz_create.png) no-repeat; }
 div.issue_tracker.nested label.r_on.pivotal { background: url(/images/pivotal_create.png) no-repeat; }
-
+div.issue_tracker.nested label.r_on.github { background: url(/images/github_create.png) no-repeat; }
 
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
@@ -677,6 +678,10 @@ table.tally th.value {
   background: transparent url(/images/mingle_create.png) 6px 5px no-repeat;
 }
 
+#action-bar a.github_create {
+  background: transparent url(/images/github_create.png) 6px 5px no-repeat;
+}
+
 #action-bar a.lighthouseapp_goto {
   background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
 }
@@ -695,6 +700,10 @@ table.tally th.value {
 
 #action-bar a.mingle_goto {
   background: transparent url(/images/mingle_goto.png) 6px 5px no-repeat;
+}
+
+#action-bar a.github_goto {
+  background: transparent url(/images/github_goto.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */

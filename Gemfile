@@ -12,6 +12,7 @@ gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
+gem 'octokit'
 gem 'inherited_resources'
 
 group :production do

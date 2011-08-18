@@ -6,6 +6,9 @@
         = label_tag :type_none, :for => label_for_attr(w, 'type_issuetracker'), :class => "label_radio none" do
           = w.radio_button :type, "IssueTracker", 'data-section' => 'none'
           (None)
+        = label_tag :type_github, :for => label_for_attr(w, 'type_githubtracker'), :class => "label_radio github" do
+          = w.radio_button :type, "GithubTracker", 'data-section' => 'github'
+          Github Issues
         = label_tag :type_lighthouseapp, :for => label_for_attr(w, 'type_lighthousetracker'), :class => "label_radio lighthouseapp" do
           = w.radio_button :type, "LighthouseTracker", 'data-section' => 'lighthouse'
           Lighthouse
@@ -15,7 +18,6 @@
         = label_tag :type_pivotal, :for => label_for_attr(w, 'type_pivotallabstracker'), :class => "label_radio pivotal" do
           = w.radio_button :type, "PivotalLabsTracker", 'data-section' => 'pivotal'
           Pivotal Tracker
-        %br
         = label_tag :type_fogbugz, :for => label_for_attr(w, 'type_fogbugztracker'), :class => "label_radio fogbugz" do
           = w.radio_button :type, "FogbugzTracker", 'data-section' => 'fogbugz'
           FogBugz
@@ -25,6 +27,13 @@
 
       %div.tracker_params.none{:class => (w.object && !(w.object.class < IssueTracker)) ? 'chosen' : nil}
         %p When no issue tracker has been configured, you will be able to leave comments on errors.
+      %div.tracker_params.github{:class => w.object.is_a?(GithubTracker) ? 'chosen' : nil}
+        = w.label :project_id, "Repository"
+        = w.text_field :project_id, :placeholder => "errbit/errbit from https://github.com/errbit/errbit"
+        = w.label :username, "Username"
+        = w.text_field :username, :placeholder => "Your username on Github"
+        = w.label :api_token, "Token"
+        = w.text_field :api_token, :placeholder => "Your API Token"
       %div.tracker_params.lighthouse{:class => w.object.is_a?(LighthouseTracker) ? 'chosen' : nil}
         = w.label :account, "Account"
         = w.text_field :account, :placeholder => "abc from abc.lighthouseapp.com"

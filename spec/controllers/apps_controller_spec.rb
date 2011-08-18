@@ -402,6 +402,33 @@ describe AppsController do
           end
         end
 
+        context "github issues" do
+          context 'with correct params' do
+            before do
+              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :type => 'GithubTracker', :project_id => 'test', :username => 'user',
+                :api_token => '123123'
+              } }
+              @app.reload
+            end
+
+            subject {@app.issue_tracker}
+            its(:type) {should == "GithubTracker"}
+            its(:project_id) {should == 'test'}
+            its(:username) {should == 'user'}
+            its(:api_token) {should == '123123'}
+          end
+
+          it "should show validation notice when sufficient params are not present" do
+            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
+                :type => 'GithubTracker', :project_id => 'test', :username => 'user'
+            } }
+            @app.reload
+
+            @app.issue_tracker_configured?.should == false
+            response.body.should match(/You must specify your Github repository, username and API token/)
+          end
+        end
 
       end
     end
@@ -435,3 +462,4 @@ describe AppsController do
   end
 
 end
+
