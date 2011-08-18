@@ -273,163 +273,34 @@ describe AppsController do
           end
         end
 
-        context "lighthouseapp" do
-          it "should save tracker params" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'LighthouseTracker', :project_id => '1234', :api_token => '123123', :account => 'myapp'
-            } }
-            @app.reload
+        IssueTracker.subclasses.each do |tracker_klass|
+          context tracker_klass do
+            it "should save tracker params" do
+              params = tracker_klass::RequiredFields.inject({}){|hash,f| hash[f] = "test_value"; hash }
+              params['ticket_properties'] = "card_type = defect" if tracker_klass == MingleTracker
+              params['type'] = tracker_klass.to_s
+              put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
-            tracker = @app.issue_tracker
-            tracker.should be_a(LighthouseTracker)
-            tracker.project_id.should == '1234'
-            tracker.api_token.should == '123123'
-            tracker.account.should == 'myapp'
-          end
-
-          it "should show validation notice when sufficient params are not present" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'LighthouseTracker', :project_id => '1234', :api_token => '123123'
-            } }
-            @app.reload
-
-            @app.issue_tracker_configured?.should == false
-            response.body.should match(/You must specify your Lighthouseapp account, API token and Project ID/)
-          end
-        end
-
-        context "redmine" do
-          it "should save tracker params" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'RedmineTracker', :project_id => '1234', :api_token => '123123', :account => 'http://myapp.com'
-            } }
-            @app.reload
-
-            tracker = @app.issue_tracker
-            tracker.should be_a(RedmineTracker)
-            tracker.project_id.should == '1234'
-            tracker.api_token.should == '123123'
-            tracker.account.should == 'http://myapp.com'
-          end
-
-          it "should show validation notice when sufficient params are not present" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'RedmineTracker', :project_id => '1234', :api_token => '123123'
-            } }
-            @app.reload
-
-            @app.issue_tracker_configured?.should == false
-            response.body.should match(/You must specify your Redmine URL, API token and Project ID/)
-          end
-        end
-
-        context "pivotal" do
-          it "should save tracker params" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'PivotalLabsTracker', :project_id => '1234', :api_token => '123123' } }
-            @app.reload
-
-            tracker = @app.issue_tracker
-            tracker.should be_a(PivotalLabsTracker)
-            tracker.project_id.should == '1234'
-            tracker.api_token.should == '123123'
-          end
-
-          it "should show validation notice when sufficient params are not present" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'PivotalLabsTracker', :project_id => '1234' } }
-            @app.reload
-
-            @app.issue_tracker_configured?.should == false
-            response.body.should match(/You must specify your Pivotal Tracker API token and Project ID/)
-          end
-        end
-
-        context "fogbugz" do
-          context 'with correct params' do
-            before do
-              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :type => 'FogbugzTracker', :account => 'abc', :project_id => 'Service - Peon', :username => '1234', :password => '123123' } }
               @app.reload
+              tracker = @app.issue_tracker
+              tracker.should be_a(tracker_klass)
+              tracker_klass::RequiredFields.each do |required|
+                tracker.send(required.to_sym).should == 'test_value'
+              end
             end
 
-            subject {@app.issue_tracker}
-            its(:type) {should == "FogbugzTracker"}
-            its(:account) {should == 'abc'}
-            its(:project_id) {should == 'Service - Peon'}
-            its(:username) {should == '1234'}
-            its(:password) {should == '123123'}
-          end
+            it "should show validation notice when sufficient params are not present" do
+              # Leave out one required param
+              params = tracker_klass::RequiredFields[1..-1].inject({}){|hash,f| hash[f] = "test_value"; hash }
+              params['type'] = tracker_klass.to_s
+              put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
-          context 'insufficient params' do
-            it 'shows validation notice' do
-              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :type => 'FogbugzTracker', :project_id => '1234' } }
               @app.reload
-
               @app.issue_tracker_configured?.should == false
-              response.body.should match(/You must specify your FogBugz Area Name, FogBugz URL, Username, and Password/)
+              response.body.should match(/You must specify your/)
             end
           end
         end
-
-        context "mingle" do
-          context 'with correct params' do
-            before do
-              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :type => 'MingleTracker', :project_id => 'test', :account => 'http://mingle.example.com',
-                :username => '1234', :password => '123123', :ticket_properties => "card_type = Defect"
-              } }
-              @app.reload
-            end
-
-            subject {@app.issue_tracker}
-            its(:type) {should == "MingleTracker"}
-            its(:project_id) {should == 'test'}
-            its(:username) {should == '1234'}
-            its(:password) {should == '123123'}
-          end
-
-          it "should show validation notice when sufficient params are not present" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'MingleTracker', :project_id => 'test', :account => 'http://mingle.example.com',
-              :username => '1234', :password => '1234', :ticket_properties => "cards_type = Defect"
-            } }
-            @app.reload
-
-            @app.issue_tracker_configured?.should == false
-            response.body.should match(/You must specify your Mingle URL, Project ID, Card Type \(in default card properties\), Sign-in name, and Password/)
-          end
-        end
-
-        context "github issues" do
-          context 'with correct params' do
-            before do
-              put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :type => 'GithubTracker', :project_id => 'test', :username => 'user',
-                :api_token => '123123'
-              } }
-              @app.reload
-            end
-
-            subject {@app.issue_tracker}
-            its(:type) {should == "GithubTracker"}
-            its(:project_id) {should == 'test'}
-            its(:username) {should == 'user'}
-            its(:api_token) {should == '123123'}
-          end
-
-          it "should show validation notice when sufficient params are not present" do
-            put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-                :type => 'GithubTracker', :project_id => 'test', :username => 'user'
-            } }
-            @app.reload
-
-            @app.issue_tracker_configured?.should == false
-            response.body.should match(/You must specify your Github repository, username and API token/)
-          end
-        end
-
       end
     end
 
