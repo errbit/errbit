@@ -74,3 +74,8 @@
         = w.label :password, 'Password'
         = w.password_field :password, :placeholder => 'Password for your account'
 
+      .image_preloader
+        - %w(none github lighthouseapp redmine pivotal fogbugz mingle).each do |tracker|
+          = image_tag "#{tracker}_inactive.png"
+          = image_tag "#{tracker}_create.png"
+
