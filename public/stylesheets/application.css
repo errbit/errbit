@@ -538,7 +538,7 @@ div.nested .choose {
 div.issue_tracker.nested .choose {
   background-color: #ebebeb;
   border: 1px solid #dddddd;
-  margin: 5px 15px 18px;
+  margin: 0 0 15px;
   padding: 12px;
 }
 div.issue_tracker.nested img {
