@@ -31,7 +31,7 @@ class MingleTracker < IssueTracker
 
   def ticket_properties_hash
     # Parses 'key=value, key2=value2' from ticket_properties into a ruby hash.
-    self.ticket_properties.split(",").inject({}) do |hash, pair|
+    self.ticket_properties.to_s.split(",").inject({}) do |hash, pair|
       key, value = pair.split("=").map(&:strip)
       hash[key] = value
       hash
