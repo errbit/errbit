@@ -78,7 +78,8 @@ function activateTypeSelector(field_class, section_class) {
     .attr('disabled','disabled').val('');
 
   $('div.'+field_class+' input[name*=type]').live('click', function(){
-    var chosen = $(this).data("section");
+    // Look for section in 'data-section', and fall back to 'value'
+    var chosen = $(this).data("section") || $(this).val();
     var wrapper = $(this).closest('.nested');
     wrapper.find('div.chosen.'+section_class).removeClass('chosen').find('input').attr('disabled','disabled');
     wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen').find('input').removeAttr('disabled');
