@@ -532,7 +532,14 @@ div.nested .chosen {
   display: block !important;
 }
 div.nested .choose {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+}
+
+div.issue_tracker.nested .choose {
+  background-color: #ebebeb;
+  border: 1px solid #dddddd;
+  margin: 5px 15px 18px;
+  padding: 12px;
 }
 div.issue_tracker.nested img {
   vertical-align: middle;
@@ -545,6 +552,9 @@ div.issue_tracker.nested label.label_radio {
   margin-bottom: 6px;
   margin-right: 8px;
   line-height: 30px;
+}
+div.issue_tracker.nested .choose {
+  padding-bottom: 6px;
 }
 div.issue_tracker.nested label.label_radio:hover {
   color: #696969;
