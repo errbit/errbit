@@ -1,8 +1,9 @@
 class MingleTracker < IssueTracker
-  def self.label; "mingle"; end
+  Label = "mingle"
+  RequiredFields = %w(account project_id username password)
 
   def check_params
-    if %w(account project_id username password).detect {|f| self[f].blank? } or !ticket_properties_hash["card_type"]
+    if RequiredFields.detect {|f| self[f].blank? } or !ticket_properties_hash["card_type"]
       errors.add :base, 'You must specify your Mingle URL, Project ID, Card Type (in default card properties), Sign-in name, and Password'
     end
   end

@@ -1,8 +1,9 @@
 class PivotalLabsTracker < IssueTracker
-  def self.label; "pivotal"; end
+  Label = "pivotal"
+  RequiredFields = %w(api_token project_id)
 
   def check_params
-    if %w(api_token project_id).detect {|f| self[f].blank? }
+    if RequiredFields.detect {|f| self[f].blank? }
       errors.add :base, 'You must specify your Pivotal Tracker API token and Project ID'
     end
   end

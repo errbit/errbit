@@ -1,8 +1,9 @@
 class GithubTracker < IssueTracker
-  def self.label; "github"; end
+  Label = "github"
+  RequiredFields = %w(project_id username api_token)
 
   def check_params
-    if %w(project_id username api_token ).detect {|f| self[f].blank? }
+    if RequiredFields.detect {|f| self[f].blank? }
       errors.add :base, 'You must specify your Github repository, username and API token'
     end
   end
