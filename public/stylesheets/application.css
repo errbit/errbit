@@ -546,11 +546,14 @@ div.issue_tracker.nested label.label_radio {
   margin-right: 8px;
   line-height: 30px;
 }
+div.issue_tracker.nested label.label_radio:hover {
+  color: #696969;
+}
 div.issue_tracker.nested .label_radio input {
   position: absolute; left: -9999px;
 }
 
-div.issue_tracker.nested label.r_on {
+div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover {
   color: #191919;
 }
 
