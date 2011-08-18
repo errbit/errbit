@@ -1,4 +1,4 @@
-class PivotalLabsTracker < IssueTracker
+class IssueTrackers::PivotalLabsTracker < IssueTracker
   Label = "pivotal"
   RequiredFields = %w(api_token project_id)
 

@@ -1,4 +1,4 @@
-class MingleTracker < IssueTracker
+class IssueTrackers::MingleTracker < IssueTracker
   Label = "mingle"
   RequiredFields = %w(account project_id username password)
 

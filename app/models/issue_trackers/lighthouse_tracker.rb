@@ -1,4 +1,4 @@
-class LighthouseTracker < IssueTracker
+class IssueTrackers::LighthouseTracker < IssueTracker
   Label = "lighthouseapp"
   RequiredFields = %w(account api_token project_id)
 

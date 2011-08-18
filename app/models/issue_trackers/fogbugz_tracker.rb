@@ -1,4 +1,4 @@
-class FogbugzTracker < IssueTracker
+class IssueTrackers::FogbugzTracker < IssueTracker
   Label = "fogbugz"
   RequiredFields = %w(project_id account username password)
 

@@ -1,4 +1,4 @@
-class RedmineTracker < IssueTracker
+class IssueTrackers::RedmineTracker < IssueTracker
   Label = "redmine"
   RequiredFields = %w(account api_token project_id)
 

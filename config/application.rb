@@ -46,6 +46,9 @@ module Errbit
       g.test_framework  :rspec, :fixture => false
     end
 
+    # IssueTracker subclasses use inheritance, so preloading models provides querying consistency in dev mode.
+    config.mongoid.preload_models = true
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

@@ -162,9 +162,11 @@ describe Err do
       notice1 = Factory(:notice, :err => @err, :message => 'ERR 1')
       lambda {
         @err.notices.first.destroy
+        @err.reload
       }.should change(@err, :notices_count).from(1).to(0)
     end
   end
 
 
 end
+

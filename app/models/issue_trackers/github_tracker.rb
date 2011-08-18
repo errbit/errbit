@@ -1,4 +1,4 @@
-class GithubTracker < IssueTracker
+class IssueTrackers::GithubTracker < IssueTracker
   Label = "github"
   RequiredFields = %w(project_id username api_token)
 
