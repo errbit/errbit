@@ -36,7 +36,7 @@ class ErrsController < ApplicationController
     if @app.issue_tracker
       @app.issue_tracker.create_issue @err
     else
-      flash[:error] = "This up has no issue tracker setup."
+      flash[:error] = "This app has no issue tracker setup."
     end
     redirect_to app_err_path(@app, @err)
   rescue ActiveResource::ConnectionError => e
