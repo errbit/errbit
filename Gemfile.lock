@@ -94,7 +94,7 @@ GEM
     mime-types (1.16)
     mongo (1.3.1)
       bson (>= 1.3.1)
-    mongoid (2.1.1)
+    mongoid (2.1.2)
       activemodel (~> 3.0)
       mongo (~> 1.3)
       tzinfo (~> 0.3.22)
@@ -208,7 +208,7 @@ DEPENDENCIES
   hoptoad_notifier (~> 2.3)
   inherited_resources
   lighthouse-api
-  mongoid (= 2.1.1)
+  mongoid (= 2.1.2)
   mongoid_rails_migrations
   nokogiri
   octokit
