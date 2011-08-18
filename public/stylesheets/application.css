@@ -542,10 +542,9 @@ div.issue_tracker.nested img {
 div.issue_tracker.nested label.label_radio {
   color: #777777;
   padding-left: 33px;
-  background: url(/images/lighthouseapp_create.png) no-repeat;
-  line-height: 30px;
   margin-bottom: 6px;
   margin-right: 8px;
+  line-height: 30px;
 }
 div.issue_tracker.nested .label_radio input {
   position: absolute; left: -9999px;
