@@ -8,6 +8,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    SystemTimer (1.2.3)
     abstract (1.0.0)
     actionmailer (3.0.5)
       actionpack (= 3.0.5)
@@ -199,6 +200,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  SystemTimer
   bson_ext (~> 1.3.1)
   database_cleaner (~> 0.6.0)
   devise (~> 1.4.0)
