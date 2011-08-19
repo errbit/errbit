@@ -7,6 +7,8 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 # require "active_resource/railtie"
 require 'mongoid/railtie'
+require 'will_paginate/array' # make paginate available on Array
+
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.

@@ -4,7 +4,7 @@ gem 'rails', '3.0.5'
 gem 'nokogiri'
 gem 'mongoid', '2.1.2'
 gem 'haml'
-gem 'will_paginate'
+gem 'will_paginate', '>=3'
 gem 'devise', '~> 1.4.0'
 gem 'lighthouse-api'
 gem 'redmine_client', :git => "git://github.com/oruen/redmine_client.git"
