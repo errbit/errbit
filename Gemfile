@@ -14,6 +14,7 @@ gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
 gem 'octokit'
 gem 'inherited_resources'
+gem 'SystemTimer', :platform => :ruby_18
 
 group :production do
   gem 'hoptoad_notifier', "~> 2.3"
