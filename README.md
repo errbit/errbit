@@ -81,7 +81,7 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
   1. Clone the repository
 
-         git clone http://github.com/jdpace/errbit.git
+         git clone http://github.com/errbit/errbit.git
 
   2. Create & configure for Heroku
 
@@ -120,7 +120,7 @@ Upgrading
 ---------
 *Note*: When upgrading Errbit, please run:
 
-         1. git pull origin master ( assuming origin is the github.com/jdpace/errbit repo )
+         1. git pull origin master ( assuming origin is the github.com/errbit/errbit repo )
          2. rake db:migrate
 
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
