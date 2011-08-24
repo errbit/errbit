@@ -68,7 +68,7 @@
       <line number="631" file="[GEM_ROOT]/gems/rake-0.8.7/lib/rake.rb" method="each"/>
       <line number="631" file="[GEM_ROOT]/gems/rake-0.8.7/lib/rake.rb" method="execute"/>
       <line number="597" file="[GEM_ROOT]/gems/rake-0.8.7/lib/rake.rb" method="invoke_with_call_chain"/>
-      <line number="242" file="/Users/jdpace/.rvm/rubies/ree-1.8.7-2010.02/lib/ruby/1.8/monitor.rb" method="synchronize"/>
+      <line number="242" file="/Users/errbit/.rvm/rubies/ree-1.8.7-2010.02/lib/ruby/1.8/monitor.rb" method="synchronize"/>
       <line number="590" file="[GEM_ROOT]/gems/rake-0.8.7/lib/rake.rb" method="invoke_with_call_chain"/>
       <line number="583" file="[GEM_ROOT]/gems/rake-0.8.7/lib/rake.rb" method="invoke"/>
       <line number="2051" file="[GEM_ROOT]/gems/rake-0.8.7/lib/rake.rb" method="invoke_task"/>
