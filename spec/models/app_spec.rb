@@ -44,40 +44,40 @@ describe App do
     end
 
     it 'does not touch https github urls' do
-      app = Factory.build(:app, :github_url => "https://github.com/jdpace/errbit")
+      app = Factory.build(:app, :github_url => "https://github.com/errbit/errbit")
       app.save
-      app.github_url.should == "https://github.com/jdpace/errbit"
+      app.github_url.should == "https://github.com/errbit/errbit"
     end
 
     it 'normalizes http github urls' do
-      app = Factory.build(:app, :github_url => "http://github.com/jdpace/errbit")
+      app = Factory.build(:app, :github_url => "http://github.com/errbit/errbit")
       app.save
-      app.github_url.should == "https://github.com/jdpace/errbit"
+      app.github_url.should == "https://github.com/errbit/errbit"
     end
 
     it 'normalizes public git repo as a github url' do
-      app = Factory.build(:app, :github_url => "https://github.com/jdpace/errbit.git")
+      app = Factory.build(:app, :github_url => "https://github.com/errbit/errbit.git")
       app.save
-      app.github_url.should == "https://github.com/jdpace/errbit"
+      app.github_url.should == "https://github.com/errbit/errbit"
     end
 
     it 'normalizes private git repo as a github url' do
-      app = Factory.build(:app, :github_url => "git@github.com:jdpace/errbit.git")
+      app = Factory.build(:app, :github_url => "git@github.com:errbit/errbit.git")
       app.save
-      app.github_url.should == "https://github.com/jdpace/errbit"
+      app.github_url.should == "https://github.com/errbit/errbit"
     end
   end
 
   context '#github_url_to_file' do
     it 'resolves to full path to file' do
-      app = Factory(:app, :github_url => "https://github.com/jdpace/errbit")
-      app.github_url_to_file('/path/to/file').should == "https://github.com/jdpace/errbit/blob/master/path/to/file"
+      app = Factory(:app, :github_url => "https://github.com/errbit/errbit")
+      app.github_url_to_file('/path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
     end
   end
 
   context '#github_url?' do
     it 'is true when there is a github_url' do
-      app = Factory(:app, :github_url => "https://github.com/jdpace/errbit")
+      app = Factory(:app, :github_url => "https://github.com/errbit/errbit")
       app.github_url?.should be_true
     end
 

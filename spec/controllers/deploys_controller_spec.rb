@@ -7,7 +7,7 @@ describe DeploysController do
     before do
       @params = {
         'local_username' => 'john.doe',
-        'scm_repository' => 'git@github.com/jdpace/errbit.git',
+        'scm_repository' => 'git@github.com/errbit/errbit.git',
         'rails_env'      => 'production',
         'scm_revision'   => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
         'message'        => 'johns first deploy'
@@ -26,7 +26,7 @@ describe DeploysController do
         with({
           :username     => 'john.doe',
           :environment  => 'production',
-          :repository   => 'git@github.com/jdpace/errbit.git',
+          :repository   => 'git@github.com/errbit/errbit.git',
           :revision     => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
           :message      => 'johns first deploy'
 
