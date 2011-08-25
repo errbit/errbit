@@ -5,17 +5,14 @@ class AppsController < InheritedResources::Base
   respond_to :html
 
   def show
-    where_clause = {}
     respond_to do |format|
       format.html do
-        where_clause[:environment] = params[:environment] if(params[:environment].present?)
-        if(params[:all_errs])
-          @errs = resource.errs.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
-          @all_errs = true
-        else
-          @errs = resource.errs.unresolved.where(where_clause).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
-          @all_errs = false
-        end
+        @all_errs = !!params[:all_errs]
+
+        @errs = resource.errs
+        @errs = @errs.unresolved unless @all_errs
+        @errs = @errs.in_env(params[:environment]).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do
@@ -45,7 +42,6 @@ class AppsController < InheritedResources::Base
     plug_params resource
     edit!
   end
-
 
   protected
     def initialize_subclassed_issue_tracker

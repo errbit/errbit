@@ -5,15 +5,12 @@ class ErrsController < ApplicationController
 
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
-    where_clause = {}
-    where_clause[:environment] = params[:environment] if(params[:environment].present?)
+    @errs = Err.for_apps(app_scope).in_env(params[:environment]).unresolved.ordered
     respond_to do |format|
       format.html do
-        @errs = Err.for_apps(app_scope).where(where_clause).unresolved.ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @errs = @errs.paginate(:page => params[:page], :per_page => current_user.per_page)
       end
-      format.atom do
-        @errs = Err.for_apps(app_scope).where(where_clause).unresolved.ordered
-      end
+      format.atom
     end
   end
 

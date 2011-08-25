@@ -13,14 +13,14 @@
   - if current_user.admin?
     = link_to 'edit', edit_app_path(@app), :class => 'button'
     = link_to 'destroy', app_path(@app), :method => :delete, :confirm => 'Seriously?', :class => 'button'
-    - if @all_errs == true
+    - if @all_errs
       = link_to 'unresolved errs', app_path(@app), :class => 'button'
     - else
-      = link_to 'all errs', app_path(@app, {:all_errs => true}), :class => 'button'
+      = link_to 'all errs', app_path(@app, :all_errs => true), :class => 'button'
 
-%h3{:id => 'watchers_toggle'}
+%h3#watchers_toggle
   Watchers
-  %span{:class => 'click_span'} (show/hide)
+  %span.click_span (show/hide)
 #watchers_div
   - if @app.notify_all_users
     %table.watchers
@@ -42,9 +42,9 @@
               %em Sadly, no one is watching this app
 
 - if @app.github_url?
-  %h3{:id => 'repository_toggle'}
+  %h3#repository_toggle
     Repository
-    %span{:class => 'click_span'} (show/hide)
+    %span.click_span (show/hide)
   #repository_div
     %table.repository
       %thead
@@ -54,9 +54,9 @@
         %tr
           %td= link_to(@app.github_url, @app.github_url, :target => '_blank')
 
-%h3{:id => 'deploys_toggle'}
+%h3#deploys_toggle
   Latest Deploys
-  %span{:class => 'click_span'} (show/hide)
+  %span.click_span (show/hide)
 #deploys_div
   - if @deploys.any?
     %table.deploys
