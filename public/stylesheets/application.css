@@ -567,23 +567,6 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover {
   color: #191919;
 }
 
-/* Inactive icons */
-div.issue_tracker.nested label.none { background: url(/images/none_inactive.png) no-repeat; }
-div.issue_tracker.nested label.redmine { background: url(/images/redmine_inactive.png) no-repeat; }
-div.issue_tracker.nested label.lighthouseapp { background: url(/images/lighthouseapp_inactive.png) no-repeat; }
-div.issue_tracker.nested label.mingle { background: url(/images/mingle_inactive.png) no-repeat; }
-div.issue_tracker.nested label.fogbugz { background: url(/images/fogbugz_inactive.png) no-repeat; }
-div.issue_tracker.nested label.pivotal { background: url(/images/pivotal_inactive.png) no-repeat; }
-div.issue_tracker.nested label.github { background: url(/images/github_inactive.png) no-repeat; }
-/* Active icons */
-div.issue_tracker.nested label.r_on.none { background: url(/images/none_create.png) no-repeat; }
-div.issue_tracker.nested label.r_on.redmine { background: url(/images/redmine_create.png) no-repeat; }
-div.issue_tracker.nested label.r_on.lighthouseapp { background: url(/images/lighthouseapp_create.png) no-repeat; }
-div.issue_tracker.nested label.r_on.mingle { background: url(/images/mingle_create.png) no-repeat; }
-div.issue_tracker.nested label.r_on.fogbugz { background: url(/images/fogbugz_create.png) no-repeat; }
-div.issue_tracker.nested label.r_on.pivotal { background: url(/images/pivotal_create.png) no-repeat; }
-div.issue_tracker.nested label.r_on.github { background: url(/images/github_create.png) no-repeat; }
-
 /* Icons need to be preloaded, otherwise it looks bad */
 .image_preloader { display: none; }
 
@@ -671,54 +654,6 @@ table.tally th.value {
 /* Resolve Errs */
 #action-bar a.resolve {
   background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
-}
-
-#action-bar a.lighthouseapp_create {
-  background: transparent url(/images/lighthouseapp_create.png) 6px 5px no-repeat;
-}
-
-#action-bar a.redmine_create {
-  background: transparent url(/images/redmine_create.png) 6px 5px no-repeat;
-}
-
-#action-bar a.pivotal_create {
-  background: transparent url(/images/pivotal_create.png) 6px 5px no-repeat;
-}
-
-#action-bar a.fogbugz_create {
-  background: transparent url(/images/fogbugz_create.png) 6px 5px no-repeat;
-}
-
-#action-bar a.mingle_create {
-  background: transparent url(/images/mingle_create.png) 6px 5px no-repeat;
-}
-
-#action-bar a.github_create {
-  background: transparent url(/images/github_create.png) 6px 5px no-repeat;
-}
-
-#action-bar a.lighthouseapp_goto {
-  background: transparent url(/images/lighthouseapp_goto.png) 6px 5px no-repeat;
-}
-
-#action-bar a.redmine_goto {
-  background: transparent url(/images/redmine_goto.png) 6px 5px no-repeat;
-}
-
-#action-bar a.pivotal_goto {
-  background: transparent url(/images/pivotal_goto.png) 6px 5px no-repeat;
-}
-
-#action-bar a.fogbugz_goto {
-  background: transparent url(/images/fogbugz_goto.png) 6px 5px no-repeat;
-}
-
-#action-bar a.mingle_goto {
-  background: transparent url(/images/mingle_goto.png) 6px 5px no-repeat;
-}
-
-#action-bar a.github_goto {
-  background: transparent url(/images/github_goto.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */
