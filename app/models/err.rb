@@ -25,8 +25,11 @@ class Err
   scope :resolved, where(:resolved => true)
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
-  scope :in_env, lambda {|env| where(:environment => env)}
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  
+  def self.in_env(env)
+    env.present? ? where(:environment => env) : scoped
+  end
 
   def self.for(attrs)
     app = attrs.delete(:app)

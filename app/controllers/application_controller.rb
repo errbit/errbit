@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def require_admin!
-      redirect_to(root_path) and return(false) unless user_signed_in? && current_user.admin?
+      redirect_to root_path unless user_signed_in? && current_user.admin?
     end
 
 end
