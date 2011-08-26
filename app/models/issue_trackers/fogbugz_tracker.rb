@@ -1,9 +1,23 @@
 class IssueTrackers::FogbugzTracker < IssueTracker
   Label = "fogbugz"
-  RequiredFields = %w(project_id account username password)
+  Fields = [
+    [:project_id, {
+      :label       => "Area Name"
+    }],
+    [:account, {
+      :label       => "FogBugz URL",
+      :placeholder => "abc from http://abc.fogbugz.com/"
+    }],
+    [:username, {
+      :placeholder => "Username/Email for your account"
+    }],
+    [:password, {
+      :placeholder => "Password for your account"
+    }]
+  ]
 
   def check_params
-    if RequiredFields.detect {|f| self[f].blank? }
+    if Fields.detect {|f| self[f[0]].blank? }
       errors.add :base, 'You must specify your FogBugz Area Name, FogBugz URL, Username, and Password'
     end
   end

@@ -46,7 +46,7 @@ class AppsController < InheritedResources::Base
   protected
     def initialize_subclassed_issue_tracker
       if params[:app][:issue_tracker_attributes] && tracker_type = params[:app][:issue_tracker_attributes][:type]
-        if IssueTracker.subclasses.map(&:to_s).concat(["IssueTracker"]).include?(tracker_type.to_s)
+        if IssueTracker.subclasses.map(&:name).concat(["IssueTracker"]).include?(tracker_type)
           @app.issue_tracker = tracker_type.constantize.new(params[:app][:issue_tracker_attributes])
         end
       end

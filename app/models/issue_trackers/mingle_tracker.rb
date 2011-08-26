@@ -1,9 +1,28 @@
 class IssueTrackers::MingleTracker < IssueTracker
   Label = "mingle"
-  RequiredFields = %w(account project_id username password)
+  Fields = [
+    [:account, {
+      :label       => "Mingle URL",
+      :placeholder => "abc from http://abc.fogbugz.com/"
+    }],
+    [:project_id, {
+      :placeholder => "Mingle project"
+    }],
+    [:ticket_properties, {
+      :label       => "Card Properties (comma separated key=value pairs)",
+      :placeholder => "card_type = Defect, defect_status = Open, priority = Essential"
+    }],
+    [:username, {
+      :label       => "Sign-in name",
+      :placeholder => "Sign-in name for your account"
+    }],
+    [:password, {
+      :placeholder => "Password for your account"
+    }]
+  ]
 
   def check_params
-    if RequiredFields.detect {|f| self[f].blank? } or !ticket_properties_hash["card_type"]
+    if Fields.detect {|f| self[f[0]].blank? } or !ticket_properties_hash["card_type"]
       errors.add :base, 'You must specify your Mingle URL, Project ID, Card Type (in default card properties), Sign-in name, and Password'
     end
   end

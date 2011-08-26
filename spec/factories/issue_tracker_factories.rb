@@ -20,7 +20,7 @@ Factory.define :mingle_tracker, :parent => :issue_tracker, :class => :mingle_tra
   e.ticket_properties 'card_type = Defect, defect_status = open, priority = essential'
 end
 
-Factory.define :github_tracker, :parent => :issue_tracker, :class => :github_tracker do |e|
+Factory.define :github_issues_tracker, :parent => :issue_tracker, :class => :github_issues_tracker do |e|
   e.project_id 'test_account/test_project'
   e.username 'test_username'
 end

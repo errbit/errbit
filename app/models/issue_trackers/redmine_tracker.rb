@@ -1,9 +1,18 @@
 class IssueTrackers::RedmineTracker < IssueTracker
   Label = "redmine"
-  RequiredFields = %w(account api_token project_id)
+  Fields = [
+    [:account, {
+      :label       => "Redmine URL",
+      :placeholder => "e.g. http://www.redmine.org/"
+    }],
+    [:api_token, {
+      :placeholder => "API Token for your account"
+    }],
+    [:project_id, {}]
+  ]
 
   def check_params
-    if RequiredFields.detect {|f| self[f].blank? }
+    if Fields.detect {|f| self[f[0]].blank? }
       errors.add :base, 'You must specify your Redmine URL, API token and Project ID'
     end
   end

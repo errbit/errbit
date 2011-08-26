@@ -1,9 +1,19 @@
 class IssueTrackers::LighthouseTracker < IssueTracker
   Label = "lighthouseapp"
-  RequiredFields = %w(account api_token project_id)
+  Fields = [
+    [:account, {
+      :placeholder => "abc from abc.lighthouseapp.com"
+    }],
+    [:api_token, {
+      :placeholder => "API Token for your account"
+    }],
+    [:project_id, {
+      :placeholder => "Lighthouse project"
+    }]
+  ]
 
   def check_params
-    if RequiredFields.detect {|f| self[f].blank? }
+    if Fields.detect {|f| self[f[0]].blank? }
       errors.add :base, 'You must specify your Lighthouseapp account, API token and Project ID'
     end
   end
