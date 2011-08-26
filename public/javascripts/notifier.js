@@ -29,7 +29,7 @@ var Errbit = {
 
   notify: function(error) {
     var xml     = escape(Errbit.generateXML(error));
-    var host    = Errbit.host || 'github.com/errbit/errbit';
+    var host    = Errbit.host;
     var url     = '//' + host + '/notifier_api/v2/notices.xml?data=' + xml;
     var request = document.createElement('iframe');
 
