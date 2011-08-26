@@ -1,4 +1,4 @@
-var Errbit = {
+var Hoptoad = {
   VERSION           : '2.0',
   NOTICE_XML        : '<?xml version="1.0" encoding="UTF-8"?>\
   <notice version="2.0">\
@@ -28,8 +28,8 @@ var Errbit = {
   backtrace_filters : [/notifier\.js/],
 
   notify: function(error) {
-    var xml     = escape(Errbit.generateXML(error));
-    var host    = Errbit.host;
+    var xml     = escape(Hoptoad.generateXML(error));
+    var host    = Hoptoad.host;
     var url     = '//' + host + '/notifier_api/v2/notices.xml?data=' + xml;
     var request = document.createElement('iframe');
 
@@ -44,42 +44,42 @@ var Errbit = {
   setEnvironment: function(value) {
     var matcher = /<environment-name>.*<\/environment-name>/;
 
-    Errbit.NOTICE_XML  = Errbit.NOTICE_XML.replace(matcher,
+    Hoptoad.NOTICE_XML  = Hoptoad.NOTICE_XML.replace(matcher,
                                                      '<environment-name>' +
                                                        value +
                                                      '</environment-name>')
   },
 
   setHost: function(value) {
-    Errbit.host = value;
+    Hoptoad.host = value;
   },
 
   setKey: function(value) {
     var matcher = /<api-key>.*<\/api-key>/;
 
-    Errbit.NOTICE_XML = Errbit.NOTICE_XML.replace(matcher,
+    Hoptoad.NOTICE_XML = Hoptoad.NOTICE_XML.replace(matcher,
                                                     '<api-key>' +
                                                       value +
                                                     '</api-key>');
   },
 
   setErrorDefaults: function(value) {
-    Errbit.errorDefaults = value;
+    Hoptoad.errorDefaults = value;
   },
 
   generateXML: function(errorWithoutDefaults) {
-    var error = Errbit.mergeDefault(Errbit.errorDefaults, errorWithoutDefaults);
+    var error = Hoptoad.mergeDefault(Hoptoad.errorDefaults, errorWithoutDefaults);
 
-    var xml       = Errbit.NOTICE_XML;
-    var url       = Errbit.escapeText(error.url       || '');
-    var component = Errbit.escapeText(error.component || '');
-    var action    = Errbit.escapeText(error.action    || '');
-    var type      = Errbit.escapeText(error.type      || 'Error');
-    var message   = Errbit.escapeText(error.message   || 'Unknown error.');
-    var backtrace = Errbit.generateBacktrace(error);
+    var xml       = Hoptoad.NOTICE_XML;
+    var url       = Hoptoad.escapeText(error.url       || '');
+    var component = Hoptoad.escapeText(error.component || '');
+    var action    = Hoptoad.escapeText(error.action    || '');
+    var type      = Hoptoad.escapeText(error.type      || 'Error');
+    var message   = Hoptoad.escapeText(error.message   || 'Unknown error.');
+    var backtrace = Hoptoad.generateBacktrace(error);
 
 
-    if (Errbit.trim(url) == '' && Errbit.trim(component) == '') {
+    if (Hoptoad.trim(url) == '' && Hoptoad.trim(component) == '') {
       xml = xml.replace(/<request>.*<\/request>/, '');
     } else {
       var data    = '';
@@ -87,7 +87,7 @@ var Errbit = {
       var cgi_data = error['cgi-data'] || {};
       cgi_data["HTTP_USER_AGENT"] = navigator.userAgent;
       data += '<cgi-data>';
-      data += Errbit.generateVariables(cgi_data);
+      data += Hoptoad.generateVariables(cgi_data);
       data += '</cgi-data>';
 
       var methods = ['params', 'session'];
@@ -97,7 +97,7 @@ var Errbit = {
 
         if (error[type]) {
           data += '<' + type + '>';
-          data += Errbit.generateVariables(error[type]);
+          data += Hoptoad.generateVariables(error[type]);
           data += '</' + type + '>';
         }
       }
@@ -108,7 +108,7 @@ var Errbit = {
                .replace('REQUEST_COMPONENT', component);
     }
 
-    return xml.replace('PROJECT_ROOT',     Errbit.ROOT)
+    return xml.replace('PROJECT_ROOT',     Hoptoad.ROOT)
               .replace('EXCEPTION_CLASS',   type)
               .replace('EXCEPTION_MESSAGE', message)
               .replace('BACKTRACE_LINES',   backtrace.join(''));
@@ -126,14 +126,14 @@ var Errbit = {
     }
 
     var backtrace  = [];
-    var stacktrace = Errbit.getStackTrace(error);
+    var stacktrace = Hoptoad.getStackTrace(error);
 
     for (var i = 0, l = stacktrace.length; i < l; i++) {
       var line    = stacktrace[i];
-      var matches = line.match(Errbit.BACKTRACE_MATCHER);
+      var matches = line.match(Hoptoad.BACKTRACE_MATCHER);
 
-      if (matches && Errbit.validBacktraceLine(line)) {
-        var file = matches[2].replace(Errbit.ROOT, '[PROJECT_ROOT]');
+      if (matches && Hoptoad.validBacktraceLine(line)) {
+        var file = matches[2].replace(Hoptoad.ROOT, '[PROJECT_ROOT]');
 
         if (i == 0) {
           if (matches[2].match(document.location.href)) {
@@ -141,8 +141,8 @@ var Errbit = {
           }
         }
 
-        backtrace.push('<line method="' + Errbit.escapeText(matches[1]) +
-                       '" file="' + Errbit.escapeText(file) +
+        backtrace.push('<line method="' + Hoptoad.escapeText(matches[1]) +
+                       '" file="' + Hoptoad.escapeText(file) +
                        '" number="' + matches[3] + '" />');
       }
     }
@@ -169,8 +169,8 @@ var Errbit = {
   },
 
   validBacktraceLine: function(line) {
-    for (var i = 0; i < Errbit.backtrace_filters.length; i++) {
-      if (line.match(Errbit.backtrace_filters[i])) {
+    for (var i = 0; i < Hoptoad.backtrace_filters.length; i++) {
+      if (line.match(Hoptoad.backtrace_filters[i])) {
         return false;
       }
     }
@@ -183,8 +183,8 @@ var Errbit = {
     var result = '';
 
     for (key in parameters) {
-      result += '<var key="' + Errbit.escapeText(key) + '">' +
-                  Errbit.escapeText(parameters[key]) +
+      result += '<var key="' + Hoptoad.escapeText(key) + '">' +
+                  Hoptoad.escapeText(parameters[key]) +
                 '</var>';
     }
 
@@ -283,7 +283,7 @@ guessFunctionName:function(a,b){try{return this.guessFunctionNameFromLines(b,thi
 
 window.onerror = function(message, file, line) {
   setTimeout(function() {
-    Errbit.notify({
+    Hoptoad.notify({
       message : message,
       stack   : '()@' + file + ':' + line
     });
