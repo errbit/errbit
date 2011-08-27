@@ -75,7 +75,7 @@ class App
   end
 
   def notification_recipients
-    notify_all_users ? User.all.map(&:email) : watchers.map(&:address)
+    notify_all_users ? User.all.map(&:email).reject(&:blank?) : watchers.map(&:address)
   end
 
   protected
