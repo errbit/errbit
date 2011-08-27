@@ -28,16 +28,30 @@ email_at_notices: [1, 10, 100]
 confirm_resolve_err: true
 
 # Add an optional 'username' field to Users.
-# Helpful if you want to plug in your own authentication strategy.
+# Helpful when you need to plug in a custom authentication strategy, such as LDAP.
 user_has_username: false
+
+
+# Configure SMTP settings. If you are running Errbit on Heroku,
+# sendgrid will be configured by default.
+# ------------------------------------------------------------------------
+#smtp_settings:
+#  :address:              ADDRESS
+#  :domain:               DOMAIN
+#  :port:                 "25"
+#  :authentication:       :plain, :login, :cram_md5
+#  :enable_starttls_auto: true
+#  :user_name:            USERNAME
+#  :password:             PASSWORD
+
 
 # Configure tracking for Errbit's own internal errors.
 # There is a central Errbit instance running on heroku,
 # and other Errbit instances will send their errors there by default.
-# Please leave this section commented unless you really need to change it.
-# ------------------------------------------------------------------------
-# report_self_errors: true
-# self_errors_host: errbit-central.heroku.com
-# self_errors_port: 80
-# self_errors_api_key: 11e5ce322856e540481e6a0789893179
+# Please leave this section commented if you don't need to override the defaults.
+# -------------------------------------------------------------------------------
+#report_self_errors:  true
+#self_errors_host:    errbit-central.heroku.com
+#self_errors_port:    80
+#self_errors_api_key: 11e5ce322856e540481e6a0789893179
 

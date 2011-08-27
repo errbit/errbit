@@ -12,7 +12,7 @@ if ENV['HEROKU']
   Errbit::Config.self_errors_port = ENV['ERRBIT_SELF_ERRORS_PORT']
   Errbit::Config.self_errors_api_key = ENV['ERRBIT_SELF_ERRORS_API_KEY']
 
-  Errbit::Application.config.action_mailer.smtp_settings = {
+  Errbit::Config.smtp_settings = {
     :address        => "smtp.sendgrid.net",
     :port           => "25",
     :authentication => :plain,
@@ -31,6 +31,11 @@ if File.exists?(config_file)
   config.each do |k,v|
     Errbit::Config.send("#{k}=", v)
   end
+end
+
+# Set SMTP settings if given, but retain defaults if not.
+if smtp = Errbit::Config.smtp_settings
+  Errbit::Application.config.action_mailer.smtp_settings = smtp
 end
 
 # Set config specific values
