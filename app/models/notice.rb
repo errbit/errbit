@@ -107,6 +107,8 @@ class Notice
     [:server_environment, :request, :notifier].each do |h|
       send("#{h}=",sanitize_hash(send(h)))
     end
+    # Set unknown backtrace files
+    backtrace.each{|line| line['file'] = "[unknown source]" if line['file'].blank? }
   end
 
   def sanitize_hash(h)

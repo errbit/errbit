@@ -12,5 +12,6 @@ See this exception on Errbit: <%= app_err_url err.app, err %>
     <%= pretty_hash notice.session %>
 
     Backtrace:
-    <%= notice.backtrace[0..4].map { |line| "#{line['number']}: #{line['file'].sub(/^\[PROJECT_ROOT\]/, '')} -> *#{line['method']}*" }.join "\n" %>
+    <%= notice.backtrace[0..4].map { |line| "#{line['number']}: #{line['file'].to_s.sub(/^\[PROJECT_ROOT\]/, '')} -> *#{line['method']}*" }.join "\n" %>
 <% end %>
+
