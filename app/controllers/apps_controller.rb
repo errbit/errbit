@@ -34,12 +34,12 @@ class AppsController < InheritedResources::Base
   end
 
   def new
-    plug_params build_resource
+    plug_params(build_resource)
     new!
   end
 
   def edit
-    plug_params resource
+    plug_params(resource)
     edit!
   end
 
@@ -63,6 +63,7 @@ class AppsController < InheritedResources::Base
     def plug_params app
       app.watchers.build if app.watchers.none?
       app.issue_tracker = IssueTracker.new unless app.issue_tracker_configured?
+      app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
     end
 
     # email_at_notices is edited as a string, and stored as an array.

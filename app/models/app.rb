@@ -78,6 +78,22 @@ class App
     notify_all_users ? User.all.map(&:email).reject(&:blank?) : watchers.map(&:address)
   end
 
+  # Copy app attributes from another app.
+  def copy_attributes_from(app_id)
+    if copy_app = App.where(:_id => app_id).first
+      # Copy fields
+      (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
+        self.send("#{k}=", copy_app.send(k))
+      end
+      # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
+      %w(watchers issue_tracker).each do |relation|
+        if obj = copy_app.send(relation)
+          self.send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
+        end
+      end
+    end
+  end
+
   protected
 
     def generate_api_key

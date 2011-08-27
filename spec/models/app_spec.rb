@@ -99,5 +99,16 @@ describe App do
     end
   end
 
+  context "copying attributes from existing app" do
+    it "should only copy the necessary fields" do
+      @app, @copy_app = Factory(:app, :name => "app", :github_url => "url"),
+                        Factory(:app, :name => "copy_app", :github_url => "copy url")
+      @copy_watcher = Factory(:watcher, :email => "copywatcher@example.com", :app => @copy_app)
+      @app.copy_attributes_from(@copy_app.id)
+      @app.name.should == "app"
+      @app.github_url.should == "copy url"
+      @app.watchers.first.email.should == "copywatcher@example.com"
+    end
+  end
 end
 

@@ -173,6 +173,16 @@ describe AppsController do
         assigns(:app).should be_new_record
         assigns(:app).watchers.should_not be_empty
       end
+
+      it "should copy attributes from an existing app" do
+        @app = Factory(:app, :name => "do not copy",
+                             :github_url => "github.com/test/example")
+        get :new, :copy_attributes_from => @app.id
+        assigns(:app).should be_a(App)
+        assigns(:app).should be_new_record
+        assigns(:app).name.should be_blank
+        assigns(:app).github_url.should == "github.com/test/example"
+      end
     end
 
     describe "GET /apps/:id/edit" do
