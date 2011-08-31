@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "errs/show.html.erb" do
+describe "errs/show.html.haml" do
   before do
     err = Factory(:err)
     comment = Factory(:comment)
