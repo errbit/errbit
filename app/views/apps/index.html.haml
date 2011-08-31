@@ -12,7 +12,7 @@
     - @apps.each do |app|
       %tr
         %td.name= link_to app.name, app_path(app)
-        %td.deploy= app.last_deploy_at ? link_to( app.last_deploy_at.to_s(:micro) << " (#{app.deploys.last.revision.to_s[0,7]})", app_deploys_path(app)) : 'n/a'
+        %td.deploy= app.last_deploy_at ? link_to( app.last_deploy_at.to_s(:micro) << " (#{app.deploys.last.short_revision})", app_deploys_path(app)) : 'n/a'
         %td.count
           - if app.errs.count > 0
             = link_to app.errs.unresolved.count, app_path(app)

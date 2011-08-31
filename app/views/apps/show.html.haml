@@ -77,7 +77,7 @@
             %td.who #{deploy.username}
             %td.message #{deploy.message}
             %td.repository #{deploy.repository}
-            %td.revision #{deploy.revision}
+            %td.revision #{deploy.short_revision}
     = link_to "All Deploys (#{@app.deploys.count})", app_deploys_path(@app), :class => 'button'
   - else
     %h3 No deploys

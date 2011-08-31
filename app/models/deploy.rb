@@ -25,6 +25,10 @@ class Deploy
     app.errs.unresolved.in_env(environment).each {|err| err.resolve!}
   end
 
+  def short_revision
+    revision.to_s[0,7]
+  end
+
   protected
 
     def should_notify?
@@ -36,3 +40,4 @@ class Deploy
     end
 
 end
+

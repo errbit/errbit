@@ -51,4 +51,8 @@ describe Deploy do
     end
   end
 
+  it "should produce a shortened revision with 7 characters" do
+    Deploy.new(:revision => "1234567890abcdef").short_revision.should == "1234567"
+  end
 end
+
