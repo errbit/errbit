@@ -63,6 +63,7 @@
       %thead
         %tr
           %th When
+          %th Environment
           %th Who
           %th Message
           %th Repository
@@ -72,6 +73,7 @@
         - @deploys.each do |deploy|
           %tr
             %td.when #{deploy.created_at.to_s(:micro)}
+            %td.environment #{deploy.environment}
             %td.who #{deploy.username}
             %td.message #{deploy.message}
             %td.repository #{deploy.repository}
