@@ -650,6 +650,10 @@ table.tally th.value {
   text-transform:none;
 }
 
+/* Deploys table */
+table.deploys td.when {
+  width: 102px;
+}
 
 /* Resolve Errs */
 #action-bar a.resolve {
