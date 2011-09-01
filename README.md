@@ -1,6 +1,6 @@
 Errbit [![TravisCI](https://secure.travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
 ======
- 
+
 **The open source self-hosted error catcher**
 
 Errbit is a tool for collecting and managing errors from other applications.
@@ -61,7 +61,7 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
          rake errbit:bootstrap
 
   3. Update the config.yml and mongoid.yml files with information about your environment
-  
+
   4. Start Server
 
          script/rails server
@@ -152,6 +152,12 @@ Issue Trackers
 * Errbit uses 'sign-in name' & password authentication. You may want to set up an **errbit** user with limited rights.
 * Project id is the identifier of your project, i.e. **awesomeapp** for project at https://mingle.example.com/projects/awesomeapp
 * Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional. i.e. card_type = Defect, status = Open, priority = Essential
+
+**Github Issues Integration**
+
+* For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
+* Errbit uses token-based authentication. Get your API Token or visit [http://help.github.com/set-your-user-name-email-and-github-token/](http://help.github.com/set-your-user-name-email-and-github-token/) to learn how to get it.
+* You will also need to provide the username that your API Token is connected to.
 
 
 Errbit for Errbit
