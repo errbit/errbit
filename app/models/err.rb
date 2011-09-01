@@ -15,6 +15,7 @@ class Err
 
   index :last_notice_at
   index :app_id
+  index :notices
 
   belongs_to :app
   has_many :notices
@@ -26,7 +27,7 @@ class Err
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
-  
+
   def self.in_env(env)
     env.present? ? where(:environment => env) : scoped
   end
