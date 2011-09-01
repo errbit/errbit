@@ -57,3 +57,11 @@ namespace :errbit do
     run("ln -nfs #{shared_configs}/mongoid.yml #{release_configs}/mongoid.yml")
   end
 end
+
+namespace :db do
+  desc "Create the indexes defined on your mongoid models"
+  task :create_mongoid_indexes do
+    run "bundle exec rake db:mongoid:create_indexes"
+  end
+end
+
