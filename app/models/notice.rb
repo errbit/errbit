@@ -23,6 +23,7 @@ class Notice
   validates_presence_of :backtrace, :server_environment, :notifier
 
   scope :ordered, order_by(:created_at.asc)
+  index :created_at
 
   def self.from_xml(hoptoad_xml)
     hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
