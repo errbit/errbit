@@ -6,6 +6,7 @@ if ENV['HEROKU']
   Errbit::Config.host = ENV['ERRBIT_HOST']
   Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
   Errbit::Config.email_at_notices = [1,3,10] #ENV['ERRBIT_EMAIL_AT_NOTICES']
+  Errbit::Config.confirm_resolve_err = ENV['ERRBIT_CONFIRM_RESOLVE_ERR']
 
   Errbit::Config.report_self_errors = ENV['ERRBIT_REPORT_SELF_ERRORS']
   Errbit::Config.self_errors_host = ENV['ERRBIT_SELF_ERRORS_HOST']
