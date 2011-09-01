@@ -45,7 +45,7 @@ class Notice
 
     err.notices.create!({
       :message            => hoptoad_notice['error']['message'],
-      :backtrace          => hoptoad_notice['error']['backtrace']['line'],
+      :backtrace          => [hoptoad_notice['error']['backtrace']['line']].flatten,
       :server_environment => hoptoad_notice['server-environment'],
       :request            => hoptoad_notice['request'],
       :notifier           => hoptoad_notice['notifier']
