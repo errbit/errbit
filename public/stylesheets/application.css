@@ -601,8 +601,8 @@ td.count {
   -webkit-opacity: 0.8
 }
 .count a.resolved {
-  background: #00cc33 url(images/resolved-badge-bg.png) 0 bottom repeat-x;
-  border: 1px solid #090;
+  background: #05B81d url(images/resolved-badge-bg.png) 0 bottom repeat-x;
+  border: 1px solid #080;
 }
 .count a:hover {
   text-decoration: none;
