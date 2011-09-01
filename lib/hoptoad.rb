@@ -9,6 +9,7 @@ module Hoptoad
     end
 
     def self.parse_xml(xml)
+      xml = xml.unpack('C*').pack('U*')  # Repack string into Unicode to fix invalid UTF-8 chars
       parsed  = ActiveSupport::XmlMini.backend.parse(xml)['notice']
       raise ApiVersionError.new(parsed['version']) unless parsed && parsed['version'].to_s == '2.0'
       rekeyed = rekey(parsed)
