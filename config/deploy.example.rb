@@ -61,7 +61,7 @@ end
 namespace :db do
   desc "Create the indexes defined on your mongoid models"
   task :create_mongoid_indexes do
-    run "bundle exec rake db:mongoid:create_indexes"
+    run "cd #{current_path} && bundle exec rake db:mongoid:create_indexes"
   end
 end
 
