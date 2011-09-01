@@ -98,7 +98,15 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
          heroku run rake db:seed
 
-  4. Enjoy!
+  4. If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
+
+         # Install the heroku cron addon, to clear resolved errors daily:
+         heroku addons:add cron:daily
+
+         # Or, clear resolved errors manually:
+         heroku rake errbit:db:clear_resolved
+
+  5. Enjoy!
 
 
 **Configuring LDAP authentication:**
