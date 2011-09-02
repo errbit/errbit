@@ -164,17 +164,33 @@ Issue Trackers
 **Github Issues Integration**
 
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* Errbit uses token-based authentication. Get your API Token or visit [http://help.github.com/set-your-user-name-email-and-github-token/](http://help.github.com/set-your-user-name-email-and-github-token/) to learn how to get it.
+* On [https://github.com](https://github.com), click "Account Settings", and then "Account Admin" to find your **API Token**.
 * You will also need to provide the username that your API Token is connected to.
 
 
-Errbit for Errbit
------------------
+What if Errbit has an error?
+----------------------------
 
-There is a central Errbit instance running on heroku at **http://errbit-central.heroku.com**.
-Your Errbit instance will send it's errors there by default.
-If you are running vanilla Errbit, it would be really helpful if you could leave these settings unchanged.
-However, if you fork Errbit and are making lots of changes, please do point your errors back to your own instance of Errbit.
+Errbit will log it's own errors to an internal app named 'Self.Errbit'.
+The 'Self.Errbit' app will be automatically created whenever the first error happens.
+
+If your Errbit instance has logged an error, we would appreciate a bug report on Github Issues.
+You can do this manually at [https://github.com/errbit/errbit/issues](https://github.com/errbit/errbit/issues),
+or you can set up our Github Issues as the issue tracker for your 'Self.Errbit' app:
+
+  1. Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake hoptoad:test`.)
+
+  2. In the **Issue Tracker** section, click **Github Issues**.
+
+  3. Fill in the **Account/Repository** field with **errbit/errbit**.
+
+  4. Fill in the **Username** field with your github username.
+
+  5. On [https://github.com](https://github.com), click "Account Settings", and then "Account Admin" to find your **API Token**.
+
+  6. Save the settings by clicking **Update App** (or **Add App**)
+
+  7. You will now be able to easily post a bug report on Github Issues.
 
 
 TODO
