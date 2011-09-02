@@ -207,7 +207,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails
   haml
-  hoptoad_notifier (~> 2.3)
+  hoptoad_notifier (~> 2.4)
   inherited_resources
   lighthouse-api
   mongoid (= 2.1.2)

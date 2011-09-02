@@ -15,10 +15,7 @@ gem 'ruby-fogbugz', :require => 'fogbugz'
 gem 'octokit'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
-
-group :production do
-  gem 'hoptoad_notifier', "~> 2.3"
-end
+gem 'hoptoad_notifier', "~> 2.4"
 
 platform :ruby do
   gem 'bson_ext', '~> 1.3.1'
