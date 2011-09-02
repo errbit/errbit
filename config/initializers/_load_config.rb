@@ -2,6 +2,7 @@ require 'ostruct'
 
 Errbit::Config = OpenStruct.new
 
+# If Errbit is running on Heroku, config can be set from environment variables.
 if ENV['HEROKU']
   Errbit::Config.host = ENV['ERRBIT_HOST']
   Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
@@ -23,8 +24,10 @@ if ENV['HEROKU']
   }
 end
 
+# Use example config for test environment.
 config_file = Rails.root.join('config', Rails.env == "test" ? "config.example.yml" : "config.yml")
 
+# Load config if config file exists.
 if File.exists?(config_file)
   yaml = File.read(config_file)
   config = YAML.load(yaml)
@@ -32,9 +35,12 @@ if File.exists?(config_file)
   config.each do |k,v|
     Errbit::Config.send("#{k}=", v)
   end
+# Raise an error if we are not running tests, not running on Heroku, and config.yml doesn't exist.
+elsif not ENV['HEROKU']
+  raise "Please copy 'config/config.example.yml' to 'config/config.yml' and configure your settings."
 end
 
-# Set SMTP settings if given, but retain defaults if not.
+# Set SMTP settings if given.
 if smtp = Errbit::Config.smtp_settings
   Errbit::Application.config.action_mailer.smtp_settings = smtp
 end
