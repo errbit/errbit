@@ -44,14 +44,3 @@ user_has_username: false
 #  :user_name:            USERNAME
 #  :password:             PASSWORD
 
-
-# Configure tracking for Errbit's own internal errors.
-# By default, Errbit will log it's own errors to an internal App named 'Self.Errbit'.
-# The 'Self.Errbit' app will be automatically created whenever the first error happens.
-# Uncomment this section if you would rather send error reports to our central Errbit instance.
-# ---------------------------------------------------------------------------------------------
-#report_self_errors:  true
-#self_errors_host:    errbit-central.heroku.com
-#self_errors_port:    80
-#self_errors_api_key: 11e5ce322856e540481e6a0789893179
-
