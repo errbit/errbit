@@ -46,10 +46,10 @@ user_has_username: false
 
 
 # Configure tracking for Errbit's own internal errors.
-# There is a central Errbit instance running on heroku,
-# and other Errbit instances will send their errors there by default.
-# Please leave this section commented if you don't need to override the defaults.
-# -------------------------------------------------------------------------------
+# By default, Errbit will log it's own errors to an internal App named 'Self.Errbit'.
+# The 'Self.Errbit' app will be automatically created whenever the first error happens.
+# Uncomment this section if you would rather send error reports to our central Errbit instance.
+# ---------------------------------------------------------------------------------------------
 #report_self_errors:  true
 #self_errors_host:    errbit-central.heroku.com
 #self_errors_port:    80
