@@ -85,6 +85,11 @@ class Notice
     err.update_attributes(:last_notice_at => created_at)
   end
 
+  # Backtrace containing only files from the app itself (ignore gems)
+  def app_backtrace
+    backtrace.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
+  end
+
   protected
 
   def should_notify?
