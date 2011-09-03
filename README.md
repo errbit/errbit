@@ -1,4 +1,4 @@
-Errbit [![TravisCI](https://secure.travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
+Errbit [![TravisCI](http://travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
 ======
 
 **The open source self-hosted error catcher**
@@ -39,72 +39,96 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
   1. Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
 
-         apt-get update
-         apt-get install mongodb
+```bash
+apt-get update
+apt-get install mongodb
+```
 
   2. Install libxml and libcurl
 
-         apt-get install libxml2 libxml2-dev libxslt-dev libcurl4-openssl-dev
+```bash
+apt-get install libxml2 libxml2-dev libxslt-dev libcurl4-openssl-dev
+```
 
   3. Install Bundler
 
-         gem install bundler
+```bash
+gem install bundler
+```
 
 **Running Locally:**
 
   1. Install dependencies
 
-         bundle install
+```bash
+bundle install
+```
 
   2. Bootstrap Errbit. This will copy over config.yml and also seed the database.
 
-         rake errbit:bootstrap
+```bash
+rake errbit:bootstrap
+```
 
   3. Update the config.yml and mongoid.yml files with information about your environment
 
   4. Start Server
 
-         script/rails server
+```bash
+script/rails server
+```
 
 **Deploying:**
 
   1. Bootstrap Errbit. This will copy over config.yml and also seed the database.
 
-         rake errbit:bootstrap
+```bash
+rake errbit:bootstrap
+```
 
   2. Update the deploy.rb file with information about your server
   3. Setup server and deploy
 
-         cap deploy:setup deploy
+```bash
+cap deploy:setup deploy
+```
 
 **Deploying to Heroku:**
 
   1. Clone the repository
 
-         git clone http://github.com/errbit/errbit.git
+```bash
+git clone http://github.com/errbit/errbit.git
+```
 
   2. Create & configure for Heroku
 
-         gem install heroku
-         heroku create example-errbit --stack cedar
-         heroku addons:add mongohq:free
-         heroku addons:add sendgrid:free
-         heroku config:add HEROKU=true
-         heroku config:add ERRBIT_HOST=some-hostname.example.com
-         heroku config:add ERRBIT_EMAIL_FROM=example@example.com
-         git push heroku master
+```bash
+gem install heroku
+heroku create example-errbit --stack cedar
+heroku addons:add mongohq:free
+heroku addons:add sendgrid:free
+heroku config:add HEROKU=true
+heroku config:add ERRBIT_HOST=some-hostname.example.com
+heroku config:add ERRBIT_EMAIL_FROM=example@example.com
+git push heroku master
+```
 
   3. Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
 
-         heroku run rake db:seed
+```bash
+heroku run rake db:seed
+```
 
   4. If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
 
-         # Install the heroku cron addon, to clear resolved errors daily:
-         heroku addons:add cron:daily
+```bash
+# Install the heroku cron addon, to clear resolved errors daily:
+heroku addons:add cron:daily
 
-         # Or, clear resolved errors manually:
-         heroku rake errbit:db:clear_resolved
+# Or, clear resolved errors manually:
+heroku rake errbit:db:clear_resolved
+```
 
   5. Enjoy!
 
@@ -118,18 +142,21 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
   3. If you are authenticating by `username`, you will need to set the user's email
   after authentication. You can do this by adding the following lines to `app/models/user.rb`:
 
-          before_save :set_ldap_email
-          def set_ldap_email
-            self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
-          end
-
+```ruby
+  before_save :set_ldap_email
+  def set_ldap_email
+    self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
+  end
+```
 
 Upgrading
 ---------
 *Note*: When upgrading Errbit, please run:
 
-         1. git pull origin master ( assuming origin is the github.com/errbit/errbit repo )
-         2. rake db:migrate
+```bash
+git pull origin master # assuming origin is the github.com/errbit/errbit repo
+rake db:migrate
+```
 
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
 
@@ -220,5 +247,5 @@ Contributing
 Copyright
 ---------
 
-Copyright (c) 2010 Jared Pace. See LICENSE for details.
+Copyright (c) 2010-2011 Jared Pace. See LICENSE for details.
 
