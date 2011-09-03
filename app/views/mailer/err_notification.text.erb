@@ -1,10 +1,32 @@
-An err has just occurred in <%= @notice.err.environment %>: <%= raw(@notice.err.message) %>
+An err has just occurred in <%= @app.name %>, on the <%= @notice.err.environment %> environment.
 
-This err has occurred <%= pluralize @notice.err.notices_count, 'time' %>. You should really look into it here:
+This err has occurred <%= pluralize @notice.err.notices_count, 'time' %>.
 
-  <%= app_err_url(@app, @notice.err) %>
+You can view it on Errbit here: <%= app_err_url(@app, @notice.err) %>
 
-Backtrace follows:
 
-<%= @notice.backtrace.collect { |l| l ? "  #{l['file']}:#{l['number']}" : nil }.compact.join("\n") %>
+ERROR MESSAGE:
+
+<%= raw(@notice.err.message) %>
+
+
+WHERE:
+
+<%= @notice.err.where %>
+
+<% @notice.app_backtrace.map {|l| "#{l['file']}:#{l['number']}" }.each do |line| %>
+  <%= line %>
+<% end %>
+
+
+URL:
+
+<%= @notice.request['url'] %>
+
+
+BACKTRACE:
+
+<% @notice.backtrace.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line| %>
+  <%= line %>
+<% end %>
 
