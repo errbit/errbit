@@ -12,7 +12,7 @@ describe DeploysController do
         'scm_revision'   => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
         'message'        => 'johns first deploy'
       }
-      @app = Factory(:app_with_watcher, :api_key => 'APIKEY')
+      @app = Factory(:app_with_watcher, :notify_on_deploys => true, :api_key => 'APIKEY')
     end
 
     it 'finds the app via the api key' do
@@ -34,7 +34,7 @@ describe DeploysController do
       post :create, :deploy => @params, :api_key => 'APIKEY'
     end
 
-    it 'sends an email notification' do
+    it 'sends an email notification when configured to do so' do
       post :create, :deploy => @params, :api_key => 'APIKEY'
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)
@@ -61,3 +61,4 @@ describe DeploysController do
   end
 
 end
+

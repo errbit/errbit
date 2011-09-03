@@ -20,7 +20,7 @@ describe Deploy do
     it 'should send an email notification' do
       Mailer.should_receive(:deploy_notification).
         and_return(mock('email', :deliver => true))
-      Factory(:deploy, :app => Factory(:app_with_watcher))
+      Factory(:deploy, :app => Factory(:app_with_watcher, :notify_on_deploys => true))
     end
 
     context 'when the app has resolve_errs_on_deploy set to false' do
