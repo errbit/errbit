@@ -8,7 +8,7 @@ class App
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
-  field :notify_on_deploys, :type => Boolean, :default => true
+  field :notify_on_deploys, :type => Boolean, :default => false
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
 
   # Some legacy apps may have string as key instead of BSON::ObjectID
