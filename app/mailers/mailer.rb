@@ -3,6 +3,8 @@
 require Rails.root.join('config/routes.rb')
 
 class Mailer < ActionMailer::Base
+  include InlineCss
+
   default :from => Errbit::Config.email_from
 
   def err_notification(notice)

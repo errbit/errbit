@@ -1,9 +1,8 @@
 <%= @app.name %> was just deployed to <%= @deploy.environment %> by <%= @deploy.username %>.
 
 Details:
-  
+
   What: <%= @app.name %><%= "@#{@deploy.revision}" unless @deploy.revision.blank? %>
   When: <%= @deploy.created_at.to_s %>
   From: <%= @deploy.repository.blank? ? 'n/a' : @deploy.repository %>
 
-<%= render :partial => 'signature' %>

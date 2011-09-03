@@ -1,0 +1,2 @@
+require 'inline_css'
+

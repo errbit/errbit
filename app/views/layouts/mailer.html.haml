@@ -1,0 +1,70 @@
+%html
+  %head
+    :css
+      td.header {
+        padding: 10px 20px 10px 20px;
+        height: 75px;
+        background-color: #11112f;
+        text-align: left;
+        border-bottom: 1px solid #ccccee;
+      }
+        td.header a {
+          display: block;
+          height: 31px;
+          width: 88px;
+          margin-top: 10px;
+        }
+          td.header a img {
+            border: none;
+          }
+
+      td.section, td.content, td.footer {
+        font-family: Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        background-color: #ffffff;
+        text-align: left;
+      }
+      td.section {
+        padding: 0;
+        border-bottom: 1px solid #dddddd;
+      }
+      td.content {
+        padding: 20px 20px 10px 20px;
+        line-height: 1.3em;
+      }
+      td.footer {
+        padding: 10px 20px 20px 20px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #666666;
+      }
+
+      a.bold, span.bold { font-weight: bold; }
+
+      p { margin: 0 0 15px 0; }
+      p.heading {
+        color: #6a6a6a;
+        margin-bottom: 4px;
+      }
+      p.monospace, p.backtrace { font-family: monospace; }
+      p.backtrace { margin-bottom: 2px; }
+
+  %body
+    %div
+      %table(cellpadding="0" cellspacing="0" border="0" width="100%")
+        %tbody
+          %tr
+            %td.header
+              = link_to image_tag(URI.join(root_url,"stylesheets/images/logo.png").to_s), root_url
+
+          = yield
+
+      %table(cellpadding="0" cellspacing="0" border="0" align="left" width="100%")
+        %tbody
+          %tr
+            %td.footer
+              Your loyal servant,
+              = link_to 'Errbit', root_path
+
+      %br
+
