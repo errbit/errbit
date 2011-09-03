@@ -1,0 +1,30 @@
+%tr
+  %td.section
+    %table(cellpadding="0" cellspacing="0" border="0" align="left")
+      %tbody
+        %tr
+          %td.content(valign="top")
+            %div
+              %p
+                = link_to(@app.name, app_url(@app), :class => "bold")
+                was just deployed to
+                %span.bold= @deploy.environment
+                by
+                %span.bold= @deploy.username + "."
+
+%tr
+  %td.section
+    %table(cellpadding="0" cellspacing="0" border="0" align="left")
+      %tbody
+        %tr
+          %td.content(valign="top")
+            %div
+              %p.heading WHAT:
+              %p
+                - revision = @deploy.revision.present? ? content_tag(:span, "@#{@deploy.revision}", :class => "revision") : ""
+                = (@app.name + revision).html_safe
+              %p.heading WHEN:
+              %p= @deploy.created_at.to_s(:rfc822)
+              %p.heading REPOSITORY:
+              %p= @deploy.repository.blank? ? 'n/a' : link_to(nil, @deploy.repository)
+

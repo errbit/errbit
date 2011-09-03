@@ -2,7 +2,7 @@
 
 Details:
 
-  What: <%= @app.name %><%= "@#{@deploy.revision}" unless @deploy.revision.blank? %>
-  When: <%= @deploy.created_at.to_s %>
-  From: <%= @deploy.repository.blank? ? 'n/a' : @deploy.repository %>
+        What: <%= @app.name %><%= "@#{@deploy.revision}" unless @deploy.revision.blank? %>
+        When: <%= @deploy.created_at.to_s(:rfc822) %>
+  Repository: <%= @deploy.repository.blank? ? 'n/a' : @deploy.repository %>
 
