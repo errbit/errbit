@@ -46,7 +46,9 @@ class AppsController < InheritedResources::Base
   protected
     def collection
       # Sort apps by number of unresolved errs (highest number first)
-      @apps ||= App.all.sort{|a,b| b.errs.unresolved.count <=> a.errs.unresolved.count }
+      @apps ||= end_of_association_chain.all.sort{|a,b|
+        b.errs.unresolved.count <=> a.errs.unresolved.count
+      }
     end
 
     def initialize_subclassed_issue_tracker
@@ -58,6 +60,8 @@ class AppsController < InheritedResources::Base
     end
 
     def begin_of_association_chain
+      # Filter the @apps collection to apps watched by the current user, unless user is an admin.
+      # If user is an admin, then no filter is applied, and all apps are shown.
       current_user unless current_user.admin?
     end
 
