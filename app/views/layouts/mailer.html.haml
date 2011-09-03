@@ -1,5 +1,6 @@
 %html
   %head
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     :css
       td.header {
         padding: 10px 20px 10px 20px;
@@ -50,8 +51,8 @@
       p.monospace, p.backtrace { font-family: monospace; }
       p.backtrace { margin-bottom: 2px; }
 
-  %body
-    %div
+  %body(leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0")
+    %center
       %table(cellpadding="0" cellspacing="0" border="0" width="100%")
         %tbody
           %tr
@@ -60,12 +61,8 @@
 
           = yield
 
-      %table(cellpadding="0" cellspacing="0" border="0" align="left" width="100%")
-        %tbody
           %tr
             %td.footer
               Your loyal servant,
               = link_to 'Errbit', root_path
-
-      %br
 
