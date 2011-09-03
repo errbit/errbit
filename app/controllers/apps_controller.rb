@@ -44,6 +44,11 @@ class AppsController < InheritedResources::Base
   end
 
   protected
+    def collection
+      # Sort apps by number of unresolved errs (highest number first)
+      @apps ||= App.all.sort{|a,b| b.errs.unresolved.count <=> a.errs.unresolved.count }
+    end
+
     def initialize_subclassed_issue_tracker
       if params[:app][:issue_tracker_attributes] && tracker_type = params[:app][:issue_tracker_attributes][:type]
         if IssueTracker.subclasses.map(&:name).concat(["IssueTracker"]).include?(tracker_type)
