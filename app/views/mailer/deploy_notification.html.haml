@@ -19,10 +19,8 @@
         %tr
           %td.content(valign="top")
             %div
-              %p.heading WHAT:
-              %p
-                - revision = @deploy.revision.present? ? content_tag(:span, "@#{@deploy.revision}", :class => "revision") : ""
-                = (@app.name + revision).html_safe
+              %p.heading REVISION:
+              %p= @deploy.revision
               %p.heading WHEN:
               %p= @deploy.created_at.to_s(:rfc822)
               %p.heading REPOSITORY:
