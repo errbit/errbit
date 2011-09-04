@@ -23,7 +23,7 @@
           %td.content(valign="top")
             %div
               %p.heading ERROR MESSAGE:
-              %p= raw(@notice.err.message)
+              %p= @notice.err.message
               %p.heading WHERE:
               %p.monospace
                 = @notice.err.where

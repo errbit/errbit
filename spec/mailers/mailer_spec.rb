@@ -5,10 +5,11 @@ describe Mailer do
     include EmailSpec::Helpers
     include EmailSpec::Matchers
 
-    it "should not html-escape the notice's message" do
+    it "should html-escape the notice's message for the html part" do
       @notice = Factory(:notice, :message => "class < ActionController::Base")
       @email = Mailer.err_notification(@notice)
-      @email.should have_body_text("class < ActionController::Base")
+      @email.should have_body_text("class &lt; ActionController::Base")
     end
   end
 end
+
