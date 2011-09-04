@@ -45,6 +45,7 @@ GEM
     builder (2.1.2)
     columnize (0.3.4)
     crack (0.1.8)
+    css_parser (1.1.9)
     daemons (1.1.4)
     database_cleaner (0.6.7)
     devise (1.4.2)
@@ -75,7 +76,7 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
-    hpricot (0.8.4)
+    htmlentities (4.3.0)
     i18n (0.5.0)
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
@@ -122,6 +123,9 @@ GEM
       nokogiri (~> 1.4.1)
       rest-client (~> 1.5.1)
     polyglot (0.3.1)
+    premailer (1.7.1)
+      css_parser (>= 1.1.9)
+      htmlentities (>= 4.0.0)
     rack (1.2.2)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
@@ -178,8 +182,6 @@ GEM
       typhoeus
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
-    tamtam (0.0.3)
-      hpricot
     thin (1.2.11)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -218,6 +220,7 @@ DEPENDENCIES
   nokogiri
   octokit
   pivotal-tracker
+  premailer
   rails (= 3.0.5)
   redmine_client!
   rspec (~> 2.5)
@@ -225,7 +228,6 @@ DEPENDENCIES
   ruby-debug
   ruby-debug19
   ruby-fogbugz
-  tamtam
   thin
   useragent (~> 0.3.1)
   webmock

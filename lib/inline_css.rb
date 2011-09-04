@@ -4,11 +4,15 @@
 module InlineCss
   def render(*args)
     if (template = args.first[:template]) && template.mime_type.html?
-      # TamTam expects a <style> tag in the head of your layout.
-      TamTam.inline(:document => super)
+      premailer = Premailer.new(super,
+                                  :with_html_string => true,
+                                  :css => [Rails.root.join("public/stylesheets/email.css").to_s])
+      premailer.to_inline_css
     else
       super
     end
   end
 end
+
+ActionMailer::Base.send :include, InlineCss
 
