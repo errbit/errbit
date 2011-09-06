@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notice version="2.0">
+  <api-key>APIKEY</api-key>
+  <notifier>
+    <name>Hoptoad Notifier</name>
+    <version>2.3.2</version>
+    <url>http://hoptoadapp.com</url>
+  </notifier>
+  <error>
+    <class>HoptoadTestingException</class>
+    <message>HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.</message>
+    <backtrace>
+      <line number="425" file="[GEM_ROOT]/gems/activesupport-3.0.0.rc/lib/active_support/callbacks.rb" method="_run__2115867319__process_action__262109504__callbacks"/>
+    </backtrace>
+  </error>
+  <request>
+    <url>http://example.org/verify</url>
+    <component>application</component>
+    <action>verify</action>
+    <params>
+      <var key="action">verify</var>
+      <var key="controller">application</var>
+    </params>
+    <cgi-data>
+      <var key="rack.session"/>
+      <var key="action_dispatch.request.formats">text/html</var>
+      <var key="action_dispatch.request.parameters">
+        <var key="action">verify</var>
+        <var key="controller">application</var>
+      </var>
+      <var key="SERVER_NAME">example.org</var>
+      <var key="rack.url_scheme">http</var>
+      <var key="action_dispatch.remote_ip"/>
+      <var key="CONTENT_LENGTH">0</var>
+      <var key="rack.errors">#&lt;StringIO:0x103d9dec0&gt;</var>
+      <var key="action_dispatch.request.unsigned_session_cookie"/>
+      <var key="action_dispatch.request.query_parameters"/>
+      <var key="HTTPS">off</var>
+      <var key="rack.run_once">false</var>
+      <var key="PATH_INFO">/verify</var>
+      <var key="action_dispatch.secret_token">994f235e3372684bc736dd11842b754d2ddcffc8c2958d33a29527c3217becd6655fa4653a318bc7c34131f9baf2acc0c424ed07e48e0e5e87c6cd34d711e985</var>
+      <var key="rack.version">11</var>
+      <var key="SCRIPT_NAME"/>
+      <var key="action_dispatch.request.path_parameters">
+        <var key="action">verify</var>
+        <var key="controller">application</var>
+      </var>
+      <var key="rack.multithread">false</var>
+      <var key="action_dispatch.parameter_filter">password</var>
+      <var key="action_dispatch.cookies"/>
+      <var key="action_dispatch.request.request_parameters"/>
+      <var key="rack.multiprocess">true</var>
+      <var key="rack.request.query_hash"/>
+      <var key="SERVER_PORT">80</var>
+      <var key="REQUEST_METHOD">GET</var>
+      <var key="action_controller.instance">#&lt;ApplicationController:0x103d2f560&gt;</var>
+      <var key="rack.session.options">
+        <var key="secure">false</var>
+        <var key="httponly">true</var>
+        <var key="path">/</var>
+        <var key="expire_after"/>
+        <var key="domain"/>
+        <var key="id"/>
+      </var>
+      <var key="rack.input">#&lt;StringIO:0x103d9dc90&gt;</var>
+      <var key="action_dispatch.request.content_type"/>
+      <var key="rack.request.query_string"/>
+      <var key="QUERY_STRING"/>
+    </cgi-data>
+  </request>
+  <server-environment>
+    <project-root>/path/to/sample/project</project-root>
+    <environment-name>development</environment-name>
+  </server-environment>
+</notice>

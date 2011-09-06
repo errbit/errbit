@@ -39,107 +39,17 @@ describe Notice do
         'method'  => ActiveSupport.methods.shuffle.first
       }]
     end
-
+    
     it "should be false for line not starting with PROJECT_ROOT" do
       Notice.in_app_backtrace_line?(backtrace[0]).should == false
     end
-
+    
     it "should be false for file in vendor dir" do
       Notice.in_app_backtrace_line?(backtrace[1]).should == false
     end
-
+    
     it "should be true for application file" do
       Notice.in_app_backtrace_line?(backtrace[2]).should == true
-    end
-  end
-  
-  
-  context '#from_xml' do
-    before do
-      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @app = Factory(:app, :api_key => 'APIKEY')
-      Digest::MD5.stub(:hexdigest).and_return('fingerprintdigest')
-    end
-    
-    it 'finds the correct app' do
-      @notice = Notice.from_xml(@xml)
-      @notice.err.app.should == @app
-    end
-    
-    it 'finds the correct err for the notice' do
-      App.should_receive(:find_by_api_key!).and_return(@app)
-      @app.should_receive(:find_or_create_err!).with({
-        :klass        => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Factory(:err))
-      err.notices.stub(:create!)
-      @notice = Notice.from_xml(@xml)
-    end
-    
-    
-    it 'marks the err as unresolved if it was previously resolved' do
-      App.should_receive(:find_by_api_key!).and_return(@app)
-      @app.should_receive(:find_or_create_err!).with({
-        :klass        => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Factory(:err, :problem => Factory(:problem, :resolved => true)))
-      err.should be_resolved
-      @notice = Notice.from_xml(@xml)
-      @notice.err.should == err
-      @notice.err.should_not be_resolved
-    end
-    
-    it 'should create a new notice' do
-      @notice = Notice.from_xml(@xml)
-      @notice.should be_persisted
-    end
-    
-    it 'assigns an err to the notice' do
-      @notice = Notice.from_xml(@xml)
-      @notice.err.should be_a(Err)
-    end
-    
-    it 'captures the err message' do
-      @notice = Notice.from_xml(@xml)
-      @notice.message.should == 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.'
-    end
-    
-    it 'captures the backtrace' do
-      @notice = Notice.from_xml(@xml)
-      @notice.backtrace.size.should == 73
-      @notice.backtrace.last['file'].should == '[GEM_ROOT]/bin/rake'
-    end
-    
-    it 'captures the server_environment' do
-      @notice = Notice.from_xml(@xml)
-      @notice.server_environment['environment-name'].should == 'development'
-    end
-    
-    it 'captures the request' do
-      @notice = Notice.from_xml(@xml)
-      @notice.request['url'].should == 'http://example.org/verify'
-      @notice.request['params']['controller'].should == 'application'
-    end
-    
-    it 'captures the notifier' do
-      @notice = Notice.from_xml(@xml)
-      @notice.notifier['name'].should == 'Hoptoad Notifier'
-    end
-    
-    it "should handle params withour 'request' section" do
-      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
-      lambda { Notice.from_xml(@xml) }.should_not raise_error
-    end
-    
-    it "should raise ApiVersionError" do
-      @xml = Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_wrong_version.xml').read
-      expect { Notice.from_xml(@xml)  }.to raise_error(Hoptoad::V2::ApiVersionError)
     end
   end
   
@@ -179,7 +89,7 @@ describe Notice do
     before do
       Errbit::Config.per_app_email_at_notices = true
       @app = Factory(:app_with_watcher, :email_at_notices => custom_thresholds)
-      @problem = Factory(:err, :problem => @app.problems.create!)
+      @err = Factory(:err, :problem => Factory(:problem, :app => @app))
     end
     
     after do
@@ -188,10 +98,10 @@ describe Notice do
     
     custom_thresholds.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
-        @problem.notices.stub(:count).and_return(threshold)
+        @err.problem.stub(:notices_count).and_return(threshold)
         Mailer.should_receive(:err_notification).
           and_return(mock('email', :deliver => true))
-        Factory(:notice, :err => @problem)
+        Factory(:notice, :err => @err)
       end
     end
   end

@@ -16,8 +16,8 @@ class Notice
   index :err_id
   index :created_at
   
+  after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
   after_create :deliver_notification, :if => :should_notify?
-  after_create :increase_counter_cache, :cache_attributes_on_problem
   before_save :sanitize
   before_destroy :decrease_counter_cache
   
@@ -27,34 +27,6 @@ class Notice
   scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
   
   delegate :app, :problem, :to => :err
-  
-  
-  
-  def self.from_xml(hoptoad_xml)
-    hoptoad_notice = Hoptoad::V2.parse_xml(hoptoad_xml)
-    app = App.find_by_api_key!(hoptoad_notice['api-key'])
-    
-    hoptoad_notice['request'] ||= {}
-    hoptoad_notice['request']['component']  = 'unknown' if hoptoad_notice['request']['component'].blank?
-    hoptoad_notice['request']['action']     = nil if hoptoad_notice['request']['action'].blank?
-    
-    err = app.find_or_create_err!({
-      :klass              => hoptoad_notice['error']['class'],
-      :component          => hoptoad_notice['request']['component'],
-      :action             => hoptoad_notice['request']['action'],
-      :environment        => hoptoad_notice['server-environment']['environment-name'],
-      :fingerprint        => hoptoad_notice['fingerprint']
-    })
-    err.problem.update_attributes(:resolved => false) if err.problem.resolved?
-    err.notices.create!({
-      :klass              => hoptoad_notice['error']['class'],
-      :message            => hoptoad_notice['error']['message'],
-      :backtrace          => [hoptoad_notice['error']['backtrace']['line']].flatten,
-      :server_environment => hoptoad_notice['server-environment'],
-      :request            => hoptoad_notice['request'],
-      :notifier           => hoptoad_notice['notifier']
-    })
-  end
   
   
   
@@ -127,7 +99,7 @@ protected
   
   
   def should_notify?
-    app.notify_on_errs? && (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(err.notices.count) && app.watchers.any?
+    app.notify_on_errs? && (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(problem.notices_count) && app.watchers.any?
   end
   
   
@@ -138,6 +110,11 @@ protected
   
   def decrease_counter_cache
     problem.inc(:notices_count, -1)
+  end
+  
+  
+  def unresolve_problem
+    problem.update_attribute(:resolved, false) if problem.resolved?
   end
   
   
