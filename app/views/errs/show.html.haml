@@ -1,40 +1,40 @@
-- content_for :page_title, @err.message
-- content_for :title, @err.klass
+- content_for :page_title, @problem.message
+- content_for :title, @problem.klass
 - content_for :meta do
   %strong App:
   = link_to @app.name, app_path(@app)
   %strong Where:
-  = @err.where
+  = @problem.where
   %br
   %strong Environment:
-  = @err.environment
+  = @problem.environment
   %strong Last Notice:
-  = last_notice_at(@err).to_s(:micro)
+  = last_notice_at(@problem).to_s(:micro)
 - content_for :action_bar do
-  - if @err.app.issue_tracker_configured?
-    - if @err.issue_link.blank?
-      %span= link_to 'create issue', create_issue_app_err_path(@app, @err), :method => :post, :class => "#{@app.issue_tracker.class::Label}_create create-issue"
+  - if @problem.app.issue_tracker_configured?
+    - if @problem.issue_link.blank?
+      %span= link_to 'create issue', create_issue_app_err_path(@app, @problem), :method => :post, :class => "#{@app.issue_tracker.class::Label}_create create-issue"
     - else
-      %span= link_to 'go to issue', @err.issue_link, :target => "_blank", :class => "#{@app.issue_tracker.class::Label}_goto goto-issue"
-      = link_to 'unlink issue', unlink_issue_app_err_path(@app, @err), :method => :delete, :confirm => "Unlink err issues?", :class => "unlink-issue"
-  - if @err.unresolved?
-    %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve'
+      %span= link_to 'go to issue', @problem.issue_link, :class => "#{@app.issue_tracker.class::Label}_goto goto-issue"
+      = link_to 'unlink issue', unlink_issue_app_err_path(@app, @problem), :method => :delete, :confirm => "Unlink err issues?", :class => "unlink-issue"
+  - if @problem.unresolved?
+    %span= link_to 'resolve', resolve_app_err_path(@app, @problem), :method => :put, :confirm => err_confirm, :class => 'resolve'
 
-- if !@app.issue_tracker_configured? || @err.comments.any?
+- if !@app.issue_tracker_configured? || @problem.comments.any?
   - content_for :comments do
     %h3 Comments on this Err
-    - @err.comments.each do |comment|
+    - @problem.comments.each do |comment|
       .window
         %table.comment
           %tr
             %th
-              %span= link_to '&#10008;'.html_safe, destroy_comment_app_err_path(@app, @err) << "?comment_id=#{comment.id}", :method => :delete, :confirm => "Are sure you don't need this comment?", :class => "destroy-comment"
+              %span= link_to '&#10008;'.html_safe, destroy_comment_app_err_path(@app, @problem) << "?comment_id=#{comment.id}", :method => :delete, :confirm => "Are sure you don't need this comment?", :class => "destroy-comment"
               = time_ago_in_words(comment.created_at, true) << " ago by "
               = link_to comment.user.email, user_path(comment.user)
           %tr
             %td= comment.body.gsub("\n", "<br>").html_safe
     - unless @app.issue_tracker_configured?
-      = form_for @comment, :url => create_comment_app_err_path(@app, @err) do |comment_form|
+      = form_for @comment, :url => create_comment_app_err_path(@app, @problem) do |comment_form|
         %p Add a comment
         = comment_form.text_area :body, :style => "width: 420px; height: 80px;"
         = comment_form.submit "Save Comment"

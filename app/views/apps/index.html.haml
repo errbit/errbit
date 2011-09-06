@@ -14,7 +14,7 @@
         %td.name= link_to app.name, app_path(app)
         %td.deploy= app.last_deploy_at ? link_to( app.last_deploy_at.to_s(:micro) << " (#{app.deploys.last.short_revision})", app_deploys_path(app)) : 'n/a'
         %td.count
-          - if app.errs.count > 0
+          - if app.problems.count > 0
             - unresolved = @unresolved_counts[app.id]
             = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
           - else

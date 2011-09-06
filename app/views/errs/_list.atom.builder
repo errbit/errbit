@@ -1,12 +1,12 @@
-feed.updated(@errs.first.created_at)
+feed.updated(@problems.first.created_at)
 
-for err in @errs
-  notice = err.notices.first
+for problem in @problems
+  notice = problem.notices.first
 
-  feed.entry(err, :url => app_err_url(err.app, err)) do |entry|
-    entry.title "[#{ err.where }] #{err.message.to_s.truncate(27)}"
+  feed.entry(problem, :url => app_err_url(problem.app, problem)) do |entry|
+    entry.title "[#{ problem.where }] #{problem.message.to_s.truncate(27)}"
     entry.author do |author|
-      author.name "#{ err.app.name } [#{ err.environment }]"
+      author.name "#{ problem.app.name } [#{ problem.environment }]"
     end
     if notice
       entry.summary(notice_atom_summary(notice), :type => "html")

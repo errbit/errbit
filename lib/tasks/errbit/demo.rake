@@ -4,7 +4,7 @@ namespace :errbit do
     require 'factory_girl_rails'
     Dir.glob(File.join(Rails.root,'spec/factories/*.rb')).each {|f| require f }
     app = Factory(:app, :name => "Demo App #{Time.now.strftime("%N")}")
-    Factory(:notice, :err => Factory(:err, :app => app))
+    Factory(:notice, :err => Factory(:err, :problem => Factory(:problem, :app => app)))
     puts "=== Created demo app: '#{app.name}', with an example error."
   end
 end

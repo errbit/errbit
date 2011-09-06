@@ -62,7 +62,7 @@ $(function() {
   function activateSelectableRows() {
     $('.selectable tr').click(function(event) {
       if(!_.include(['A', 'INPUT', 'BUTTON', 'TEXTAREA'], event.target.nodeName)) {
-        var checkbox = $(this).find('input[name="errs[]"]');
+        var checkbox = $(this).find('input[name="problems[]"]');
         checkbox.attr('checked', !checkbox.is(':checked'));
       }
     })

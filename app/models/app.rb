@@ -1,7 +1,7 @@
 class App
   include Mongoid::Document
   include Mongoid::Timestamps
-
+  
   field :name, :type => String
   field :api_key
   field :github_url
@@ -10,53 +10,65 @@ class App
   field :notify_on_errs, :type => Boolean, :default => true
   field :notify_on_deploys, :type => Boolean, :default => false
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
-
+  
   # Some legacy apps may have string as key instead of BSON::ObjectID
   identity :type => String
+  
   # There seems to be a Mongoid bug making it impossible to use String identity with references_many feature:
   # https://github.com/mongoid/mongoid/issues/703
   # Using 32 character string as a workaround.
   before_create do |r|
     r.id = ActiveSupport::SecureRandom.hex
   end
-
+  
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
-  has_many :errs, :inverse_of => :app, :dependent => :destroy
-
+  has_many :problems, :inverse_of => :app, :dependent => :destroy
+  
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_url
-
+  
   validates_presence_of :name, :api_key
   validates_uniqueness_of :name, :allow_blank => true
   validates_uniqueness_of :api_key, :allow_blank => true
   validates_associated :watchers
   validate :check_issue_tracker
-
+  
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
     :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
-
+  
+  
+  
+  def find_or_create_err!(attrs)
+    Err.where(attrs).first || problems.create!.errs.create!(attrs)
+  end
+  
+  
+  
+  # Mongoid Bug: find(id) on association proxies returns an Enumerator
   def self.find_by_id!(app_id)
     find app_id
   end
-
+  
   def self.find_by_api_key!(key)
     where(:api_key => key).first || raise(Mongoid::Errors::DocumentNotFound.new(self,key))
   end
-
+  
   def last_deploy_at
     deploys.last && deploys.last.created_at
   end
-
+  
+  
   # Legacy apps don't have notify_on_errs and notify_on_deploys params
   def notify_on_errs
     !(self[:notify_on_errs] == false)
   end
   alias :notify_on_errs? :notify_on_errs
-
+  
+  
   def notify_on_deploys
     !(self[:notify_on_deploys] == false)
   end
@@ -117,4 +129,3 @@ class App
     end
 
 end
-

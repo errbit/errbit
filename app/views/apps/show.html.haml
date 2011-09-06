@@ -4,7 +4,7 @@
   = javascript_include_tag 'apps.show'
 - content_for :meta do
   %strong Errs Caught:
-  = @app.errs.count
+  = @app.problems.count
   %strong Deploy Count:
   = @app.deploys.count
   %strong API Key:
@@ -82,9 +82,9 @@
   - else
     %h3 No deploys
 
-- if @app.errs.count > 0
+- if @app.problems.any?
   %h3.clear Errs
-  = render 'errs/table', :errs => @errs
+  = render 'errs/table', :errs => @problems
 - else
   %h3.clear No errs have been caught yet, make sure you setup your app
   = render 'configuration_instructions', :app => @app

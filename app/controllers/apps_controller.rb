@@ -1,56 +1,56 @@
 class AppsController < InheritedResources::Base
-
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
   respond_to :html
-
+  
+  
   def show
     respond_to do |format|
       format.html do
         @all_errs = !!params[:all_errs]
         
-        @errs = resource.errs
-        @errs = @errs.unresolved unless @all_errs
-        @errs = @errs.in_env(params[:environment]).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @problems = resource.problems
+        @problems = @problems.unresolved unless @all_errs
+        @problems = @problems.in_env(params[:environment]).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
         
-        @selected_errs = params[:errs] || []
+        @selected_problems = params[:problems] || []
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do
-        @errs = resource.errs.unresolved.ordered
+        @problems = resource.problems.unresolved.ordered
       end
     end
   end
-
+  
   def create
     @app = App.new(params[:app])
     initialize_subclassed_issue_tracker
     create!
   end
-
+  
   def update
     @app = resource
     initialize_subclassed_issue_tracker
     update!
   end
-
+  
   def new
     plug_params(build_resource)
     new!
   end
-
+  
   def edit
     plug_params(resource)
     edit!
   end
-
+  
   protected
     def collection
       # Sort apps by number of unresolved errs, descending.
       # Caches the unresolved err counts while performing the sort.
       @unresolved_counts = {}
       @apps ||= end_of_association_chain.all.sort{|a,b|
-        [a,b].each{|app| @unresolved_counts[app.id] ||= app.errs.unresolved.count }
+        [a,b].each{|app| @unresolved_counts[app.id] ||= app.problems.unresolved.count }
         @unresolved_counts[b.id] <=> @unresolved_counts[a.id]
       }
     end

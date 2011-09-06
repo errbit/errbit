@@ -1,18 +1,18 @@
-An err has just occurred in <%= @app.name %>, on the <%= @notice.err.environment %> environment.
+An err has just occurred in <%= @notice.environment_name %>: <%= raw(@notice.message) %>
 
-This err has occurred <%= pluralize @notice.err.notices_count, 'time' %>.
+This err has occurred <%= pluralize @notice.problem.notices_count, 'time' %>. You should really look into it here:
 
-You can view it on Errbit here: <%= app_err_url(@app, @notice.err) %>
+  <%= app_err_url(@app, @notice.problem) %>
 
 
 ERROR MESSAGE:
 
-<%= raw(@notice.err.message) %>
+<%= raw(@notice.message) %>
 
 
 WHERE:
 
-<%= @notice.err.where %>
+<%= @notice.where %>
 
 <% @notice.app_backtrace.map {|l| "#{l['file']}:#{l['number']}" }.each do |line| %>
   <%= line %>

@@ -1,16 +1,16 @@
-"See this exception on Errbit": <%= app_err_url(err.app, err) %>
-<% if notice = err.notices.first %>
+"See this exception on Errbit": <%= app_err_url(problem.app, problem) %>
+<% if notice = problem.notices.first %>
   <%= notice.message %>
 
   Summary
    - Where
-    <%= notice.err.where %>
+    <%= notice.where %>
 
    - Occured
     <%= notice.created_at.to_s(:micro) %>
 
    - Similar
-    <%= (notice.err.notices_count - 1).to_s %>
+    <%= (notice.problem.notices_count - 1).to_s %>
 
   Params
   <%= pretty_hash(notice.params) %>

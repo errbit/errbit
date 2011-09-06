@@ -1,9 +1,9 @@
-See this exception on Errbit: <%= app_err_url err.app, err %>
-<% if notice = err.notices.first %>
+See this exception on Errbit: <%= app_err_url problem.app, problem %>
+<% if notice = problem.notices.first %>
     <% if notice.request['url'].present? %>URL: <%= notice.request['url'] %><% end %>
-    Where: <%= notice.err.where %>
+    Where: <%= notice.where %>
     Occurred: <%= notice.created_at.to_s :micro %>
-    Similar: <%= (notice.err.notices.count - 1).to_s %>
+    Similar: <%= (notice.problem.notices.count - 1).to_s %>
 
     Params:
     <%= pretty_hash notice.params %>

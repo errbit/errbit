@@ -18,20 +18,20 @@ class IssueTrackers::LighthouseTracker < IssueTracker
     end
   end
 
-  def create_issue(err)
+  def create_issue(problem)
     Lighthouse.account = account
     Lighthouse.token = api_token
     # updating lighthouse account
     Lighthouse::Ticket.site
 
     ticket = Lighthouse::Ticket.new(:project_id => project_id)
-    ticket.title = issue_title err
+    ticket.title = issue_title problem
 
     ticket.body = body_template.result(binding)
 
     ticket.tags << "errbit"
     ticket.save!
-    err.update_attribute :issue_link, "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, '')
+    problem.update_attribute :issue_link, "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, '')
   end
 
   def body_template

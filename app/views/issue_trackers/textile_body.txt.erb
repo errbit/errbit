@@ -1,7 +1,7 @@
-<% if notice = err.notices.first %>
+<% if notice = problem.notices.first %>
 h1. <%= notice.message %>
 
-h3. "See this exception on Errbit":<%= app_err_url err.app, err %>
+h3. "See this exception on Errbit":<%= app_err_url problem.app, problem %>
 
 h2. Summary
 <% if notice.request['url'].present? %>
@@ -11,7 +11,7 @@ h3. URL
 <% end %>
 h3. Where
 
-<%= notice.err.where %>
+<%= notice.where %>
 
 h3. Occurred
 
@@ -19,7 +19,7 @@ h3. Occurred
 
 h3. Similar
 
-<%= (notice.err.notices_count - 1).to_s %>
+<%= (notice.problem.notices_count - 1).to_s %>
 
 h2. Params
 
