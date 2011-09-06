@@ -20,12 +20,12 @@ if ENV['HEROKU']
 end
 
 # Use example config for test environment.
-config_file = Rails.root.join('config', Rails.env == "test" ? "config.example.yml" : "config.yml")
+default_config_file = Rails.root.join("config", "config.example.yml")
+config_file = Rails.env == "test" ? default_config_file : Rails.root.join("config", "config.yml")
 
 # Load config if config file exists.
 if File.exists?(config_file)
-  yaml = File.read(config_file)
-  config = YAML.load(yaml)
+  config = YAML.load_file(config_file)
   config.merge!(config.delete(Rails.env)) if config.has_key?(Rails.env)
   config.each do |k,v|
     Errbit::Config.send("#{k}=", v)
@@ -33,6 +33,12 @@ if File.exists?(config_file)
 # Raise an error if we are not running tests, not running on Heroku, and config.yml doesn't exist.
 elsif not ENV['HEROKU']
   raise "Please copy 'config/config.example.yml' to 'config/config.yml' and configure your settings."
+end
+
+# Set default settings from config.example.yml if key is missing from config.yml
+default_config = YAML.load_file(default_config_file)
+default_config.each do |k,v|
+  Errbit::Config.send("#{k}=", v) if Errbit::Config.send(k) === nil
 end
 
 # Set SMTP settings if given.
