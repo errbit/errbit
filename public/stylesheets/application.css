@@ -628,6 +628,7 @@ table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
 }
+
 table.errs tr.resolved td > * {
   opacity: 0.5;
   -moz-opacity: 0.5;
@@ -735,5 +736,21 @@ table.comment tbody td {
 }
 #content-comments #comment_submit {
   margin-top: 15px;
+}
+/* Inline comments in tables */
+table.errs tr td.message .inline_comment {
+  display: inline-block;
+  padding: 3px 7px;
+  margin: 6px 0;
+  background-color: #F5F5F5;
+  border: 1px solid #E6E6E6;
+}
+table.errs tr:hover td.message .inline_comment {
+  background-color: #EEEEEE;
+  border-color: #DFDFDF;
+}
+
+table.errs tr td.message .inline_comment em.commenter {
+  color: #999999;
 }
 
