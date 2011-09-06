@@ -38,7 +38,11 @@ describe "errs/show.html.haml" do
 
   end
 
-  describe "content_for :comments" do
+  describe "content_for :comments with comments disabled for configured issue tracker" do
+    before do
+      Errbit::Config.stub(:allow_comments_with_issue_tracker).and_return(false)
+    end
+
     it 'should display comments and new comment form when no issue tracker' do
       err = Factory(:err_with_comments)
       assign :err, err

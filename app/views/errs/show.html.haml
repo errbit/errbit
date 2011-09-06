@@ -20,7 +20,7 @@
   - if @err.unresolved?
     %span= link_to 'resolve', resolve_app_err_path(@app, @err), :method => :put, :confirm => err_confirm, :class => 'resolve'
 
-- if !@app.issue_tracker_configured? || @err.comments.any?
+- if Errbit::Config.allow_comments_with_issue_tracker || !@app.issue_tracker_configured? || @err.comments.any?
   - content_for :comments do
     %h3 Comments on this Err
     - @err.comments.each do |comment|
@@ -33,7 +33,7 @@
               = link_to comment.user.email, user_path(comment.user)
           %tr
             %td= comment.body.gsub("\n", "<br>").html_safe
-    - unless @app.issue_tracker_configured?
+    - if Errbit::Config.allow_comments_with_issue_tracker || !@app.issue_tracker_configured?
       = form_for @comment, :url => create_comment_app_err_path(@app, @err) do |comment_form|
         %p Add a comment
         = comment_form.text_area :body, :style => "width: 420px; height: 80px;"

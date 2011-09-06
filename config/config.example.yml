@@ -31,6 +31,10 @@ confirm_resolve_err: true
 # Helpful when you need to plug in a custom authentication strategy, such as LDAP.
 user_has_username: false
 
+# Allow comments while an issue tracker is configured.
+# This is useful when you don't need to create a ticket,
+# and you want to attach a short note to the err.
+allow_comments_with_issue_tracker: true
 
 # Configure SMTP settings. If you are running Errbit on Heroku,
 # sendgrid will be configured by default.
