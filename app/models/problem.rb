@@ -54,6 +54,19 @@ class Problem
   end
   
   
+  def self.merge!(*problems)
+    problems = problems.flatten.uniq
+    merged_problem = problems.shift
+    problems.each do |problem|
+      merged_problem.errs.concat Err.where(:problem_id => problem.id)
+      problem.errs(true) # reload problem.errs (should be empty) before problem.destroy
+      problem.destroy
+    end
+    merged_problem.cache_notice_attributes
+    merged_problem
+  end
+  
+  
   
   def cache_notice_attributes(notice=nil)
     notice ||= notices.first

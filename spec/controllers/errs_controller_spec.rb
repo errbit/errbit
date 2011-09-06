@@ -413,13 +413,32 @@ describe ErrsController do
   describe "Bulk Actions" do
     before(:each) do
       sign_in Factory(:admin)
-      @problem1 = Factory(:problem, :resolved => true)
-      @problem2 = Factory(:problem, :resolved => false)
+      @problem1 = Factory(:err, :problem => Factory(:problem, :resolved => true)).problem
+      @problem2 = Factory(:err, :problem => Factory(:problem, :resolved => false)).problem
     end
     
     it "should apply to multiple problems" do
       post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
       assigns(:selected_problems).should == [@problem1, @problem2]
+    end
+    
+    it "should require at least one problem" do
+      post :resolve_several, :problems => []
+      request.flash[:notice].should match(/You have not selected any/)
+    end
+    
+    context "POST /errs/merge_several" do
+      it "should require at least two problems" do
+        post :merge_several, :problems => [@problem1.id.to_s]
+        request.flash[:notice].should match(/You must select at least two/)
+      end
+      
+      it "should merge the problems" do
+        lambda {
+          post :merge_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
+          assigns(:merged_problem).reload.errs.length.should == 2
+        }.should change(Problem, :count).by(-1)
+      end
     end
     
     context "POST /errs/resolve_several" do

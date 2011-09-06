@@ -34,6 +34,7 @@
   = will_paginate @problems, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
   .tab-bar
     %ul
+      %li= submit_tag 'Merge', :id => 'merge_errs', :class => 'button', 'data-action' => merge_several_errs_path
       %li= submit_tag 'Resolve', :id => 'resolve_errs', :class => 'button', 'data-action' => resolve_several_errs_path
       %li= submit_tag 'Unresolve', :id => 'unresolve_errs', :class => 'button', 'data-action' => unresolve_several_errs_path
       %li= submit_tag 'Delete', :id => 'delete_errs', :class => 'button', 'data-action' => destroy_several_errs_path
