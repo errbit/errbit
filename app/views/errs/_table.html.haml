@@ -20,7 +20,7 @@
           - else
             %span.environment= link_to err.environment, app_path(err.app, :environment => err.environment)
         %td.message
-          = link_to err.message, app_err_path(err.app, err)
+          = link_to truncate(err.message, :length => 230), app_err_path(err.app, err)
           %em= err.where
           - if err.comments.any?
             - comment = err.comments.last
