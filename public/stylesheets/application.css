@@ -742,15 +742,20 @@ table.errs tr td.message .inline_comment {
   display: inline-block;
   padding: 3px 7px;
   margin: 6px 0;
-  background-color: #F5F5F5;
-  border: 1px solid #E6E6E6;
+  background-color: #E8F4FF;
+  border: 1px solid #E2E2E2;
+  text-shadow: 0 1px 0 #DDFFFF;
+  font-style: normal;
 }
 table.errs tr:hover td.message .inline_comment {
-  background-color: #EEEEEE;
-  border-color: #DFDFDF;
+  background-color: #E2EFFB;
+  border-color: #DBDBDB;
+  text-shadow: 0 1px 0 #CCFBFB;
 }
-
+table.errs tr td.message .inline_comment em {
+  color: #555555;
+}
 table.errs tr td.message .inline_comment em.commenter {
-  color: #999999;
+  color: #888888;
 }
 
