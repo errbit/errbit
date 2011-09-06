@@ -39,19 +39,19 @@ class Problem
   end
   
   
+  
   def resolve!
     self.update_attributes!(:resolved => true)
   end
-  
   
   def unresolve!
     self.update_attributes!(:resolved => false)
   end
   
-  
   def unresolved?
     !resolved?
   end
+  
   
   
   def self.merge!(*problems)
@@ -62,11 +62,30 @@ class Problem
       problem.errs(true) # reload problem.errs (should be empty) before problem.destroy
       problem.destroy
     end
-    merged_problem.cache_notice_attributes
+    merged_problem.reset_cached_attributes
     merged_problem
   end
   
+  def merged?
+    errs.length > 1
+  end
   
+  def unmerge!
+    [self] + errs[1..-1].map(&:id).map do |err_id|
+      err = Err.find(err_id)
+      app.problems.create.tap do |new_problem|
+        err.update_attribute(:problem_id, new_problem.id)
+        new_problem.reset_cached_attributes
+      end
+    end
+  end
+  
+  
+  
+  def reset_cached_attributes
+    update_attribute(:notices_count, notices.count)
+    cache_notice_attributes
+  end
   
   def cache_notice_attributes(notice=nil)
     notice ||= notices.first

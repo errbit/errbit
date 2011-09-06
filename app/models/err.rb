@@ -13,9 +13,11 @@ class Err
   field :fingerprint
   
   belongs_to :problem
+  index :problem_id
+  
   has_many :notices, :inverse_of => :err, :dependent => :destroy
   
-  validates_presence_of :klass, :environment, :problem
+  validates_presence_of :klass, :environment
   
   delegate :app,
            :resolved?,

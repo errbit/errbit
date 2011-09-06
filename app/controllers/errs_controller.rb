@@ -1,9 +1,9 @@
 class ErrsController < ApplicationController
   include ActionView::Helpers::TextHelper
   
-  before_filter :find_app, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several]
-  before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several]
-  before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several]
+  before_filter :find_app, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
+  before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
+  before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   
   
   
@@ -115,6 +115,13 @@ class ErrsController < ApplicationController
       @merged_problem = Problem.merge!(@selected_problems)
       flash[:notice] = "#{@selected_problems.count} errors have been merged."
     end
+    redirect_to :back
+  end
+  
+  
+  def unmerge_several
+    all = @selected_problems.map(&:unmerge!).flatten
+    flash[:success] = "#{pluralize(all.length, 'err has', 'errs have')} been unmerged."
     redirect_to :back
   end
   
