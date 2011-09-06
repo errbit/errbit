@@ -582,13 +582,14 @@ td.deploy {
 td.latest {
   white-space: nowrap;
 }
-td.count {
+td.count, td.issue_link {
   text-align: center;
 }
 
 .count a {
   display: inline-block;
   padding: 0.1em 0.7em;
+  margin-top: 3px;
   color: #fff;
   background: #cc0033 url(images/error-badge-bg.png) 0 bottom repeat-x;
   border: 1px solid #900;

@@ -1,3 +1,4 @@
+- any_issue_links = errs.any?{|e| e.issue_link.present? }
 %table.errs
   %thead
     %tr
@@ -6,6 +7,8 @@
       %th Latest
       %th Deploy
       %th Count
+      - if any_issue_links
+        %th Issue
       %th Resolve
   %tbody
     - errs.each do |err|
@@ -22,9 +25,14 @@
         %td.latest #{time_ago_in_words(last_notice_at err)} ago
         %td.deploy= err.app.last_deploy_at ? err.app.last_deploy_at.to_s(:micro) : 'n/a'
         %td.count= link_to err.notices_count, app_err_path(err.app, err)
+        - if any_issue_links
+          %td.issue_link
+            - if err.issue_link.present?
+              = link_to image_tag("#{err.app.issue_tracker.class::Label}_goto.png"), err.issue_link, :target => "_blank"
         %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(err.app, err), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if err.unresolved?
     - if errs.none?
       %tr
         %td{:colspan => 6}
           %em No errs here
 = will_paginate @errs, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+
