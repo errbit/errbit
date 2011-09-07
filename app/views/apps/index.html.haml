@@ -13,8 +13,11 @@
       %tr
         %td.name= link_to app.name, app_path(app)
         %td.deploy
-          - revision = app.deploys.last.short_revision
-          = app.last_deploy_at ? link_to( app.last_deploy_at.to_s(:micro) << (revision.present? ? " (#{revision})" : ""), app_deploys_path(app)) : 'n/a'
+          - if app.last_deploy_at
+            - revision = app.deploys.last.short_revision
+            = link_to( app.last_deploy_at.to_s(:micro) << (revision.present? ? " (#{revision})" : ""), app_deploys_path(app))
+          - else
+            'n/a'
         %td.count
           - if app.errs.count > 0
             - unresolved = @unresolved_counts[app.id]
