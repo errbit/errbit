@@ -1,6 +1,6 @@
 td.header {
-  padding: 10px 20px 10px 20px;
-  height: 75px;
+  padding: 10px 20px 8px 20px;
+  height: 70px;
   background-color: #11112f;
   text-align: left;
   border-bottom: 1px solid #ccccee;
@@ -9,7 +9,7 @@ td.header {
     display: block;
     height: 31px;
     width: 88px;
-    margin-top: 10px;
+    margin-top: 4px;
   }
     /* Style 'Errbit' logo alt text if image cannot be loaded. */
     td.header a img {
