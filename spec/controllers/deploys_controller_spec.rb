@@ -55,7 +55,7 @@ describe DeploysController do
     end
 
     it "should contain info about existing deploy" do
-      response.body.should match(@deploy.revision)
+      response.body.should match(@deploy.short_revision)
       response.body.should match(@deploy.app.name)
     end
   end
