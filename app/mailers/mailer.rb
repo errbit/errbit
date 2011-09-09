@@ -9,21 +9,16 @@ class Mailer < ActionMailer::Base
     @notice   = notice
     @app  = notice.err.app
 
-    mail({
-      :to       => @app.notification_recipients,
-      :subject  => "[#{@app.name}][#{@notice.err.environment}] #{@notice.err.message}"
-    })
+    mail :to      => @app.notification_recipients,
+         :subject => "[#{@app.name}][#{@notice.err.environment}] #{@notice.err.message}"
   end
 
   def deploy_notification(deploy)
     @deploy   = deploy
     @app  = deploy.app
 
-    mail({
-      :to       => @app.notification_recipients,
-      :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
-    })
+    mail :to       => @app.notification_recipients,
+         :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
   end
-
 end
 

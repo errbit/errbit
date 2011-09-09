@@ -56,6 +56,9 @@ module Errbit
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # Configure Devise mailer to use our mailer layout.
+    config.to_prepare { Devise::Mailer.layout "mailer" }
   end
 end
 
