@@ -4,9 +4,13 @@
   = f.label :name
   = f.text_field :name
 
-%div
-  = f.label :github_url
-  = f.text_field :github_url
+%fieldset
+  %legend Links to Codebase
+  %div
+    = f.label :github_url
+    = f.text_field :github_url
+    = f.label :redmine_url
+    = f.text_field :redmine_url
 
 %fieldset
   %legend Notifications
