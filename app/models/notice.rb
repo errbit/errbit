@@ -57,7 +57,7 @@ class Notice
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
 
-  def self.in_app_backtrace_line? line
+  def self.in_app_backtrace_line?(line)
     !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
   end
 

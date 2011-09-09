@@ -4,16 +4,32 @@ module NoticesHelper
     render :partial => "notices/atom_entry.html.haml", :locals => {:notice => notice}
   end
 
-  def render_line_number(app, line)
-    unless Notice.in_app_backtrace_line?(line)
-      line['number']
-    else
-      case true
-      when app.github_url? then link_to_github(app, line, line['number'])
-      when app.redmine_url? then link_to_redmine(app, line, line['number'])
-      else
-        line['number']
+  def line_number_with_link(app, line)
+    return "&nbsp;".html_safe unless line['number']
+    if Notice.in_app_backtrace_line?(line)
+      return link_to_github(app, line, line['number']) if app.github_url?
+      if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
+        # Return link to file on tracker if issue tracker supports this
+        return link_to_issue_tracker_file(app, line, line['number'])
       end
     end
+    line['number']
+  end
+
+  def filepath_parts(file)
+    [file.split('/').last, file.gsub('[PROJECT_ROOT]', '')]
+  end
+
+  def link_to_github(app, line, text = nil)
+    file_name, file_path = filepath_parts(line['file'])
+    href = "%s#L%s" % [app.github_url_to_file(file_path), line['number']]
+    link_to(text || file_name, href, :target => '_blank')
+  end
+
+  def link_to_issue_tracker_file(app, line, text = nil)
+    file_name, file_path = filepath_parts(line['file'])
+    href = app.issue_tracker.url_to_file(file_path, line['number'])
+    link_to(text || file_name, href, :target => '_blank')
   end
 end
+

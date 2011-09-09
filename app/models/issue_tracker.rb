@@ -8,6 +8,7 @@ class IssueTracker
   embedded_in :app, :inverse_of => :issue_tracker
 
   field :project_id, :type => String
+  field :alt_project_id, :type => String # Specify an alternative project id. e.g. for viewing files
   field :api_token, :type => String
   field :account, :type => String
   field :username, :type => String
