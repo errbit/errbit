@@ -687,18 +687,17 @@ table.backtrace td {
   width: 100%;
   padding: 0;
   margin: 0;
-  color: #A2A2A2;
+  color: #C7C7C7;
   background-color: #222 !important;
 }
 table.backtrace ul.line-numbers {
   padding-top: 1px;
 }
 table.backtrace ul.line-numbers li {
-  border-bottom: 0;
-  text-align: right;
+  border-bottom: 1px solid transparent;
   font-size: 13px;
   line-height: 20px;
-  padding-bottom: 1px;
+  text-align: right;
 }
 
 table.backtrace ul.lines {
@@ -706,7 +705,7 @@ table.backtrace ul.lines {
   overflow: auto;
 }
 table.backtrace ul.lines li {
-  border-bottom: 1px solid #2B2B2B;
+  border-bottom: 1px solid #2A2A2A;
   font-size: 13px;
   line-height: 20px;
   white-space: nowrap;
