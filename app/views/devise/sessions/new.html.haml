@@ -1,13 +1,13 @@
 - content_for :title, 'Sign in'
+- auth_key = Devise.authentication_keys.first
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  - auth_key = Devise.authentication_keys.first
   .required
     = f.label auth_key
     = f.text_field auth_key, :tabindex => 1
 
   .required
-    = link_to 'forget it?', new_password_path(resource_name), :class => 'float-right'
+    = link_to 'forget it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
     = f.label :password
     = f.password_field :password, :tabindex => 2
 
@@ -18,4 +18,11 @@
 
   %div.buttons
     %button{:type => 'submit', :class => 'sign_in'}= "Sign in"
+
+:javascript
+  $('a#forgot_password').click(function(){
+    // Set email field on password reset page to email that user entered on this page
+    location.href = $(this).attr('href') + "?email=" + $('#user_#{auth_key}').val();
+    return false;
+  });
 

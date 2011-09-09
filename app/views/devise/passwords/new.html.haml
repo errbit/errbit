@@ -3,6 +3,7 @@
   = errors_for resource
   .required
     = f.label :email
-    = f.text_field :email
-    
+    = f.text_field :email, :value => params[:email]
+
   %div.buttons= f.submit "Send me reset password instructions"
+
