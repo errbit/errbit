@@ -694,7 +694,7 @@ table.backtrace ul.line-numbers {
   padding-top: 1px;
 }
 table.backtrace ul.line-numbers li {
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid #F0F0F0;
   font-size: 13px;
   line-height: 20px;
   text-align: right;
