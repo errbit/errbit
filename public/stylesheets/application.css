@@ -690,11 +690,15 @@ table.backtrace td {
   color: #A2A2A2;
   background-color: #222 !important;
 }
+table.backtrace ul.line-numbers {
+  padding-top: 1px;
+}
 table.backtrace ul.line-numbers li {
   border-bottom: 0;
   text-align: right;
   font-size: 13px;
-  line-height: 21px;
+  line-height: 20px;
+  padding-bottom: 1px;
 }
 
 table.backtrace ul.lines {
