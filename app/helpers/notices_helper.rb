@@ -5,7 +5,7 @@ module NoticesHelper
   end
 
   def line_number_with_link(app, line)
-    return "&nbsp;".html_safe unless line['number']
+    return "&nbsp;".html_safe if line['number'].blank?
     if Notice.in_app_backtrace_line?(line)
       return link_to_github(app, line, line['number']) if app.github_url?
       if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
