@@ -1,6 +1,6 @@
-# An Err is a group of notices that can programatically
-# be determined to be equal. (Errbit groups notices into
-# errs by a notice's fingerprint.)
+# Represents a set of Notices which can be automatically
+# determined to refer to the same Error (Errbit groups
+# notices into errs by a notice's fingerprint.)
 
 class Err
   include Mongoid::Document

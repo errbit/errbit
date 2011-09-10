@@ -1,5 +1,6 @@
-# An Problem is a group of errs that the user
-# has declared to be equal.
+# Represents a single Problem. The problem may have been
+# reported as various Errs, but the user has grouped the
+# Errs together as belonging to the same problem.
 
 class Problem
   include Mongoid::Document
