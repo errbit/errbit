@@ -1,16 +1,16 @@
 .window
   %table.backtrace
-    %tr
+    %tr.padding
       %th
-        %ul.line-numbers
-          - lines.each do |line|
-            %li= line_number_with_link(@app, line)
       %td
-        %ul.lines
-          - lines.each do |line|
-            - in_app = line['file'].to_s.gsub!('[PROJECT_ROOT]','') && !line['file'].to_s.match(/^\/vendor\//)
-            %li{:class => (in_app ? 'in-app' : nil)}
-              = line['file']
-              &rarr;
-              %strong= line['method']
+    - lines.each do |line|
+      %tr
+        %th.line-numbers= line_number_with_link(@app, line)
+        %td.lines{:class => (Notice.in_app_backtrace_line?(line) ? 'in-app' : nil)}
+          = line['file']
+          &rarr;
+          %strong= line['method']
+    %tr.padding
+      %th
+      %td
 
