@@ -32,8 +32,8 @@ confirm_resolve_err: true
 user_has_username: false
 
 # Allow comments while an issue tracker is configured.
-# This is useful when you don't need to create a ticket,
-# and you want to attach a short note to the err.
+# This is useful if the err is not critical enough to create a ticket,
+# but you want to leave a short comment.
 allow_comments_with_issue_tracker: true
 
 # Configure SMTP settings. If you are running Errbit on Heroku,
