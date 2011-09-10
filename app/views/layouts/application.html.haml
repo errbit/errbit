@@ -17,10 +17,8 @@
     #header
       %div
         = link_to 'Errbit', root_path, :id => 'site-name'
+        = render 'shared/navigation' if current_user
         = render 'shared/session'
-
-    = render 'shared/navigation' if current_user
-
     #content-wrapper
       #content-title
         %h1= yield :title
