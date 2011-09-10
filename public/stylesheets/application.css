@@ -702,15 +702,14 @@ table.backtrace th.line-numbers {
   border-bottom: 1px solid #F0F0F0;
   font-size: 13px;
   text-align: right;
-  vertical-align: middle;
+  vertical-align: top;
   padding: 1px 6px 1px 7px;
 }
 
 table.backtrace td.lines {
-  border-bottom: 1px solid #2A2A2A;
   font-size: 13px;
   padding-left: 8px;
-  vertical-align: middle;
+  vertical-align: top;
   white-space: nowrap;
 }
 table.backtrace td.lines.in-app {
