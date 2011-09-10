@@ -83,9 +83,6 @@ class Notice
     Mailer.err_notification(self).deliver
   end
   
-  def cache_last_notice_at
-    err.update_attributes(:last_notice_at => created_at)
-  end
   
   # Backtrace containing only files from the app itself (ignore gems)
   def app_backtrace
@@ -93,9 +90,7 @@ class Notice
   end
   
   
-  
 protected
-  
   
   
   def should_notify?
