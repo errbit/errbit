@@ -661,27 +661,18 @@ table.deploys td.when {
 .window table {
   margin: 0;
 }
-
-table.backtrace td {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  color: #A2A2A2;
+table.backtrace td.line {
+  color: #777; /* 47% */
   background-color: #222 !important;
+  border: none;
+  padding: 1px 8px;
 }
-table.backtrace ul.line-numbers li {
-  text-align: right;
+table.backtrace td.line .file {
+  color:#d2d2d2; /* 82% */
 }
-table.backtrace ul.lines {
-  padding: 10px 8px;
-  overflow: auto;
-}
-table.backtrace li {
-  white-space: nowrap;
-}
-table.backtrace li.in-app {
-  color: #2adb2e;
-  background-color: #2f2f2f;
+table.backtrace td.line .method {
+  color:#ececec; /* 93% */
+  font-weight:bold;
 }
 
 span.click_span {
@@ -717,3 +708,6 @@ table.comment tbody td {
   margin-top: 15px;
 }
 
+table.backtrace tr.in-app td.line         { color:#156E16; /* 43% */}
+table.backtrace tr.in-app td.line .file   { color:#25C227; /* 76% */}
+table.backtrace tr.in-app td.line .method { color:#2adb2e; /* 86% */}
