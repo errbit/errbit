@@ -4,6 +4,7 @@ log/*.log
 tmp/**/*
 config/config.yml
 config/deploy.rb
+config/deploy
 config/mongoid.yml
 .rvmrc
 *~
