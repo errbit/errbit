@@ -7,18 +7,24 @@ class Problem
   include Mongoid::Timestamps
   
   field :last_notice_at, :type => DateTime
+  field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :issue_link, :type => String
   
   # Cached fields
+  field :app_name, :type => String
   field :notices_count, :type => Integer, :default => 0
   field :message
   field :environment
   field :klass
   field :where
   
-  index :last_notice_at
   index :app_id
+  index :app_name
+  index :message
+  index :last_notice_at
+  index :last_deploy_at
+  index :notices_count
   
   belongs_to :app
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
@@ -28,6 +34,10 @@ class Problem
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  
+  before_create :cache_app_attributes
+  
+  
   
   def self.in_env(env)
     env.present? ? where(:environment => env) : scoped
@@ -67,6 +77,18 @@ class Problem
     merged_problem
   end
   
+  def self.ordered_by(sort, order)
+    case sort
+    when "app";            order_by(["app_name", order])
+    when "message";        order_by(["message", order])
+    when "last_notice_at"; order_by(["last_notice_at", order])
+    when "last_deploy_at"; order_by(["last_deploy_at", order])
+    when "count";          order_by(["notices_count", order])
+    else raise("\"#{sort}\" is not a recognized sort")
+    end
+  end
+  
+  
   def merged?
     errs.length > 1
   end
@@ -85,7 +107,16 @@ class Problem
   
   def reset_cached_attributes
     update_attribute(:notices_count, notices.count)
+    cache_app_attributes
     cache_notice_attributes
+  end
+  
+  def cache_app_attributes
+    if app
+      self.app_name = app.name
+      self.last_deploy_at = app.last_deploy_at
+      self.save if persisted?
+    end
   end
   
   def cache_notice_attributes(notice=nil)

@@ -28,6 +28,7 @@ class App
   
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_url
+  after_update :store_cached_attributes_on_problems
   
   validates_presence_of :name, :api_key
   validates_uniqueness_of :name, :allow_blank => true
@@ -148,7 +149,11 @@ class App
   end
 
   protected
-
+    
+    def store_cached_attributes_on_problems
+      problems.each(&:cache_app_attributes)
+    end
+    
     def generate_api_key
       self.api_key ||= ActiveSupport::SecureRandom.hex
     end

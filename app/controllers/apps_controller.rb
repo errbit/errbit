@@ -8,10 +8,14 @@ class AppsController < InheritedResources::Base
     respond_to do |format|
       format.html do
         @all_errs = !!params[:all_errs]
+        @sort = params[:sort]
+        @order = params[:order]
+        @sort = "app" unless %w{message last_notice_at last_deploy_at count}.member?(@sort)
+        @order = "asc" unless (@order == "desc")
         
         @problems = resource.problems
         @problems = @problems.unresolved unless @all_errs
-        @problems = @problems.in_env(params[:environment]).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @problems = @problems.in_env(params[:environment]).ordered_by(@sort, @order).paginate(:page => params[:page], :per_page => current_user.per_page)
         
         @selected_problems = params[:problems] || []
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
