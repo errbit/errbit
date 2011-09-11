@@ -24,6 +24,7 @@ Factory.define :notice do |n|
   n.message             'FooError: Too Much Bar'
   n.backtrace           { random_backtrace }
   n.server_environment  'environment-name' => 'production'
+  n.request             {{ 'component' => 'foo', 'action' => 'bar' }}
   n.notifier            'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com'
 end
 
