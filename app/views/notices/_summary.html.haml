@@ -19,3 +19,9 @@
     %tr
       %th Browser
       %td= user_agent_graph(notice.err)
+    %tr
+      %th App Server
+      %td= notice.server_environment && notice.server_environment["hostname"]
+    %tr
+      %th Rel. Directory
+      %td= notice.server_environment && notice.server_environment["project-root"]
