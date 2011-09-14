@@ -1,6 +1,8 @@
 .window
   %table.environment
-    - notice.env_vars.sort_by {|pair| pair[0]}.each do |pair|
+    - html_entities = HTMLEntities.new
+    - notice.env_vars.sort_by {|pair| pair[0]}.each do |key, value|
       %tr
-        %th= pair[0]
-        %td.main= pair[1]
+        %th= h(html_entities.decode(key))
+        %td.main= h(html_entities.decode(value))
+

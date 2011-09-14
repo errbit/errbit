@@ -222,6 +222,7 @@ DEPENDENCIES
   factory_girl_rails
   haml
   hoptoad_notifier (~> 2.4)
+  htmlentities (~> 4.3.0)
   inherited_resources
   lighthouse-api
   mongoid (= 2.1.2)
