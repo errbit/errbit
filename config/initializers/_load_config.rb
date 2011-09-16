@@ -51,3 +51,6 @@ end
   default.merge! :host => Errbit::Config.host if default[:host].blank?
 end
 
+(ActionMailer::Base.default_url_options ||= {}).tap do |default|
+  default.merge! :host => Errbit::Config.host if default[:host].blank?
+end
