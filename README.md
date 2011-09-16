@@ -35,7 +35,7 @@ Rails applications. If you're uncomfortable with any step below then Errbit is n
 for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 [Thoughtbot](http://thoughtbot.com), which Errbit is based on.
 
-**Set your local box or server(Ubuntu):**
+**Set up your local box or server(Ubuntu):**
 
   1. Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
 

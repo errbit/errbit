@@ -44,6 +44,8 @@ end
 # Set SMTP settings if given.
 if smtp = Errbit::Config.smtp_settings
   Errbit::Application.config.action_mailer.smtp_settings = smtp
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = smtp
 end
 
 # Set config specific values
