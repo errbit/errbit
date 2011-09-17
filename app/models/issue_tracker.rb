@@ -3,7 +3,7 @@ class IssueTracker
   include Mongoid::Timestamps
   include HashHelper
   include Rails.application.routes.url_helpers
-  default_url_options[:host] = Errbit::Application.config.action_mailer.default_url_options[:host]
+  default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
 
   embedded_in :app, :inverse_of => :issue_tracker
 
