@@ -191,7 +191,7 @@ Issue Trackers
 **Github Issues Integration**
 
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* On [https://github.com](https://github.com), click "Account Settings", and then "Account Admin" to find your **API Token**.
+* If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
 * You will also need to provide the username that your API Token is connected to.
 
 
@@ -213,7 +213,7 @@ or you can set up the Github Issues tracker for your **Self.Errbit** app:
 
   4. Fill in the **Username** field with your github username.
 
-  5. On [https://github.com](https://github.com), click "Account Settings", and then "Account Admin" to find your Github **API Token**.
+  5. If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
 
   6. Save the settings by clicking **Update App** (or **Add App**)
 
