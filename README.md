@@ -217,7 +217,7 @@ or you can set up the Github Issues tracker for your **Self.Errbit** app:
 
   6. Save the settings by clicking **Update App** (or **Add App**)
 
-  7. You will now be able to easily post a bug report to Github Issues.
+  7. You can now easily post bug reports to Github Issues by clicking the **Create Issue** button on a **Self.Errbit** error.
 
 
 TODO
