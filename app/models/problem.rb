@@ -76,7 +76,9 @@ class Problem
   end
 
   def unmerge!
-    [self] + errs[1..-1].map(&:id).map do |err_id|
+    problem_errs = errs.to_a
+    problem_errs.shift
+    [self] + problem_errs.map(&:id).map do |err_id|
       err = Err.find(err_id)
       app.problems.create.tap do |new_problem|
         err.update_attribute(:problem_id, new_problem.id)

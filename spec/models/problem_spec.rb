@@ -98,11 +98,12 @@ describe Problem do
       merged_problem = Problem.merge!(problem1, problem2)
       merged_problem.errs.length.should == 2
 
-      lambda {
-        problems = merged_problem.unmerge!
-        problems.length.should == 2
-        merged_problem.errs(true).length.should == 1
-      }.should change(Problem, :count).by(1)
+      expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
+      merged_problem.errs(true).length.should == 1
+    end
+
+    it "runs smoothly for problem without errs" do
+      expect { Factory(:problem).unmerge! }.not_to raise_error
     end
   end
 
