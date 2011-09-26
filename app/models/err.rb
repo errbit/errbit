@@ -19,10 +19,7 @@ class Err
 
   validates_presence_of :klass, :environment
 
-  delegate :app,
-           :resolved?,
-           :to => :problem
-
+  delegate :app, :resolved?, :to => :problem
 
 end
 

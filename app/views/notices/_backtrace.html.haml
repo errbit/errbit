@@ -1,13 +1,13 @@
 .window
   %table.backtrace
     - lines.each do |line|
-      - in_app = line['file'].gsub!('[PROJECT_ROOT]','') && !line['file'].match(/^\/vendor\//)
-      - path = File.dirname(line['file']) + '/'
+      - path = File.dirname(line['file'])
+      - path = path == "." ? "" : path + '/'
       - file = File.basename(line['file'])
-      %tr{:class => (in_app ? 'in-app' : nil)}
-        %td.line
+      %tr
+        %td.line{:class => (Notice.in_app_backtrace_line?(line) ? 'in-app' : nil)}
           %span.path>= path
-          %span.file= "#{file}:" << line_number_with_link(@app, line)
+          %span.file= line['number'].blank? ? file : ("#{file}:" << line_number_with_link(@app, line)).html_safe
           &rarr;
           %span.method= line['method']
 

@@ -16,8 +16,8 @@ class LinkErrsToProblems < Mongoid::Migration
       end
     end
 
-    Rake::Task["errbit:db:update_notices_count"].invoke
     Rake::Task["errbit:db:update_problem_attrs"].invoke
+    Rake::Task["errbit:db:update_notices_count"].invoke
   end
 
   def self.down

@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'hoptoad_notifier'
 
 class ErrorReport
   attr_reader :klass, :message, :backtrace, :request, :server_environment, :api_key, :notifier
