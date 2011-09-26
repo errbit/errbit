@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/oruen/redmine_client.git
-  revision: 0df20a8b695869b03cfa129560b938a0af346add
+  revision: e578d298649f653f7102b245f9e5056314f2dc05
   specs:
-    redmine_client (0.0.1)
+    oruen_redmine_client (0.0.1)
       activeresource (>= 2.3.0)
 
 GEM
@@ -229,9 +229,9 @@ DEPENDENCIES
   mongoid_rails_migrations
   nokogiri
   octokit
+  oruen_redmine_client!
   pivotal-tracker
   rails (= 3.0.10)
-  redmine_client!
   rspec (~> 2.6)
   rspec-rails (~> 2.6)
   ruby-debug
