@@ -3,11 +3,11 @@
     %thead
       %tr
         %th
-        %th App
-        %th What &amp; Where
-        %th Latest
-        %th Deploy
-        %th Count
+        %th= link_for_sort "App"
+        %th= link_for_sort "What &amp; Where".html_safe, "message"
+        %th= link_for_sort "Latest", "last_notice_at"
+        %th= link_for_sort "Deploy", "last_deploy_at"
+        %th= link_for_sort "Count"
         %th Resolve
     %tbody
       - errs.each do |problem|
@@ -24,7 +24,7 @@
             = link_to problem.message, app_err_path(problem.app, problem)
             %em= problem.where
           %td.latest #{time_ago_in_words(last_notice_at problem)} ago
-          %td.deploy= problem.app.last_deploy_at ? problem.app.last_deploy_at.to_s(:micro) : 'n/a'
+          %td.deploy= problem.last_deploy_at ? problem.last_deploy_at.to_s(:micro) : 'n/a'
           %td.count= link_to problem.notices.count, app_err_path(problem.app, problem)
           %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(problem.app, problem), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if problem.unresolved?
       - if errs.none?

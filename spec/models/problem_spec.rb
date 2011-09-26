@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Problem do
-
-
   context '#last_notice_at' do
     it "returns the created_at timestamp of the latest notice" do
       err = Factory(:err)
@@ -131,7 +129,6 @@ describe Problem do
 
 
   context "notice counter cache" do
-
     before do
       @app = Factory(:app)
       @problem = Factory(:problem, :app => @app)
@@ -158,5 +155,46 @@ describe Problem do
   end
 
 
+  context "#app_name" do
+    before do
+      @app = Factory(:app)
+    end
+
+    it "is set when a problem is created" do
+      problem = Factory(:problem, :app => @app)
+      assert_equal @app.name, problem.app_name
+    end
+
+    it "is updated when an app is updated" do
+      problem = Factory(:problem, :app => @app)
+      lambda {
+        @app.update_attributes!(:name => "Bar App")
+        problem.reload
+      }.should change(problem, :app_name).to("Bar App")
+    end
+  end
+
+
+  context "#last_deploy_at" do
+    before do
+      @app = Factory(:app)
+      @last_deploy = 10.days.ago.localtime.round(0)
+      deploy = Factory(:deploy, :app => @app, :created_at => @last_deploy)
+    end
+
+    it "is set when a problem is created" do
+      problem = Factory(:problem, :app => @app)
+      assert_equal @last_deploy, problem.last_deploy_at
+    end
+
+    it "is updated when a deploy is created" do
+      problem = Factory(:problem, :app => @app)
+      next_deploy = 5.minutes.ago.localtime.round(0)
+      lambda {
+        @deploy = Factory(:deploy, :app => @app, :created_at => next_deploy)
+        problem.reload
+      }.should change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
+    end
+  end
 end
 

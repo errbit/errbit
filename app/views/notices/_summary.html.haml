@@ -2,7 +2,7 @@
   %table.summary
     %tr
       %th Message
-      %td.main.nowrap= notice.message
+      %td.main.nowrap= message_graph(notice.problem)
     - if notice.request['url'].present?
       %tr
         %th URL
@@ -19,6 +19,9 @@
     %tr
       %th Browser
       %td= user_agent_graph(notice.problem)
+    %tr
+      %th Tenant
+      %td= tenant_graph(notice.problem)
     %tr
       %th App Server
       %td= notice.server_environment && notice.server_environment["hostname"]
