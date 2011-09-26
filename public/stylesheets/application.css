@@ -442,7 +442,8 @@ pre {
 
 /* Pagination */
 .pagination {
-  margin: 24px 0;
+  margin: 0 0 25px;
+  font-size: 17px;
   text-align: center;
 }
 .pagination em {
