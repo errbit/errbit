@@ -89,6 +89,10 @@ a.action  { float: right; font-size: 0.9em;}
   padding: 0 14px;
   line-height: 30px;
 }
+#header #session-links #sign-out {
+  background: transparent url(images/icons/bullet-red-sm.png) 12px 50% no-repeat;
+  padding-left: 29px;
+}
 #header #session-links a:hover {
   text-decoration: none;
 }
@@ -101,10 +105,10 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #nav-bar li {
   float: left;
-  height: 38px;
+  height: 34px;
   margin-right: 12px;
   color: #666;
-  background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
+  background: #FFF url(images/button-bg.png) 0 -2px repeat-x;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   -moz-border-top-left-radius: 12px;
@@ -117,9 +121,13 @@ a.action  { float: right; font-size: 0.9em;}
   color: #666;
   display: block;
   padding: 0 20px 0 40px;
-  font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
-  background: transparent 10px 8px no-repeat;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 37px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #FFF;
+  -webkit-text-shadow: 1px 1px 0px #FFF;
+  background: transparent 10px 6px no-repeat;
 }
 #nav-bar li a:hover { color: #666;}
 #nav-bar li.apps a { background-image: url(images/icons/briefcase.png); }
@@ -136,7 +144,7 @@ a.action  { float: right; font-size: 0.9em;}
   background-image: none;
   border-width:1px 1px 0;
   margin-bottom:-2px;
-  height:40px;
+  height: 37px;
 }
 
 /* Content Wrapper */
