@@ -55,12 +55,12 @@ a.action  { float: right; font-size: 0.9em;}
   width: 88px;
   height: 31px;
   position: absolute;
-  top: 26px;
+  top: 22px;
   left: 2px;
-  font-size: 2.5em;
-  font-weight:bold;
-  color: white !important;
+  background: transparent url(images/logo.png) 0 0 no-repeat;
+  text-indent: -5000em;
 }
+
 #header #session-links {
   position: absolute; top: 18px; right: 0;
   font-size: 0.9em;
