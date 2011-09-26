@@ -5,16 +5,14 @@ class ErrsController < ApplicationController
   before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
 
-
-
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
-    
+
     @sort = params[:sort]
     @order = params[:order]
     @sort = "app" unless %w{message last_notice_at last_deploy_at count}.member?(@sort)
     @order = "asc" unless (@order == "desc")
-    
+
     @problems = Problem.for_apps(app_scope).in_env(params[:environment]).unresolved.ordered_by(@sort, @order)
     @selected_problems = params[:problems] || []
     respond_to do |format|
@@ -25,13 +23,11 @@ class ErrsController < ApplicationController
     end
   end
 
-
   def all
     app_scope = current_user.admin? ? App.all : current_user.apps
     @problems = Problem.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
     @selected_problems = params[:problems] || []
   end
-
 
   def show
     page      = (params[:notice] || @problem.notices_count)
@@ -40,7 +36,6 @@ class ErrsController < ApplicationController
     @notice   = @notices.first
     @comment = Comment.new
   end
-
 
   def create_issue
     set_tracker_params
@@ -57,12 +52,10 @@ class ErrsController < ApplicationController
     redirect_to app_err_path(@app, @problem)
   end
 
-
   def unlink_issue
     @problem.update_attribute :issue_link, nil
     redirect_to app_err_path(@app, @problem)
   end
-
 
   def resolve
     # Deal with bug in mongoid where find is returning an Enumberable obj
@@ -75,7 +68,6 @@ class ErrsController < ApplicationController
     redirect_to app_path(@app)
   end
 
-
   def create_comment
     @comment = Comment.new(params[:comment].merge(:user_id => current_user.id))
     if @comment.valid?
@@ -87,7 +79,6 @@ class ErrsController < ApplicationController
     end
     redirect_to app_err_path(@app, @problem)
   end
-
 
   def destroy_comment
     @comment = Comment.find(params[:comment_id])
@@ -106,13 +97,11 @@ class ErrsController < ApplicationController
     redirect_to :back
   end
 
-
   def unresolve_several
     @selected_problems.each(&:unresolve!)
     flash[:success] = "#{pluralize(@selected_problems.count, 'err has', 'errs have')} been unresolved."
     redirect_to :back
   end
-
 
   def merge_several
     if @selected_problems.length < 2
@@ -124,13 +113,11 @@ class ErrsController < ApplicationController
     redirect_to :back
   end
 
-
   def unmerge_several
     all = @selected_problems.map(&:unmerge!).flatten
     flash[:success] = "#{pluralize(all.length, 'err has', 'errs have')} been unmerged."
     redirect_to :back
   end
-
 
   def destroy_several
     @selected_problems.each(&:destroy)
@@ -138,44 +125,36 @@ class ErrsController < ApplicationController
     redirect_to :back
   end
 
+  protected
+    def find_app
+      @app = App.find(params[:app_id])
 
-protected
-
-
-  def find_app
-    @app = App.find(params[:app_id])
-
-    # Mongoid Bug: could not chain: current_user.apps.find_by_id!
-    # apparently finding by 'watchers.email' and 'id' is broken
-    raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
-  end
-
-
-  def find_problem
-    @problem = @app.problems.find(params[:id])
-
-    # Deal with bug in mogoid where find is returning an Enumberable obj
-    @problem = @problem.first if @problem.respond_to?(:first)
-  end
-
-
-  def set_tracker_params
-    IssueTracker.default_url_options[:host] = request.host
-    IssueTracker.default_url_options[:port] = request.port
-    IssueTracker.default_url_options[:protocol] = request.scheme
-  end
-
-
-  def find_selected_problems
-    err_ids = (params[:problems] || []).compact
-    if err_ids.empty?
-      flash[:notice] = "You have not selected any errors"
-      redirect_to :back
-    else
-      @selected_problems = Array(Problem.find(err_ids))
+      # Mongoid Bug: could not chain: current_user.apps.find_by_id!
+      # apparently finding by 'watchers.email' and 'id' is broken
+      raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
     end
-  end
 
+    def find_problem
+      @problem = @app.problems.find(params[:id])
 
+      # Deal with bug in mogoid where find is returning an Enumberable obj
+      @problem = @problem.first if @problem.respond_to?(:first)
+    end
+
+    def set_tracker_params
+      IssueTracker.default_url_options[:host] = request.host
+      IssueTracker.default_url_options[:port] = request.port
+      IssueTracker.default_url_options[:protocol] = request.scheme
+    end
+
+    def find_selected_problems
+      err_ids = (params[:problems] || []).compact
+      if err_ids.empty?
+        flash[:notice] = "You have not selected any errors"
+        redirect_to :back
+      else
+        @selected_problems = Array(Problem.find(err_ids))
+      end
+    end
 end
 
