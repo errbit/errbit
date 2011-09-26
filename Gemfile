@@ -8,7 +8,7 @@ gem 'will_paginate', '>=3'
 gem 'htmlentities', "~> 4.3.0"
 gem 'devise', '~> 1.4.0'
 gem 'lighthouse-api'
-gem 'oruen_redmine_client', :git => "git://github.com/oruen/redmine_client.git", :require => 'redmine_client'
+gem 'oruen_redmine_client', :require => 'redmine_client'
 gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
