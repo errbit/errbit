@@ -606,6 +606,7 @@ td.count, td.issue_link {
 /* Err Tables */
 table.errs td.app {
   padding-right: 2em;
+  width: 20%;
 }
 table.errs td.app .environment {
   font-size: 0.8em;
