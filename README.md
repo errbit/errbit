@@ -107,7 +107,7 @@ git clone http://github.com/errbit/errbit.git
 gem install heroku
 heroku create example-errbit --stack cedar
 heroku addons:add mongohq:free
-heroku addons:add sendgrid:free
+heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
@@ -241,7 +241,7 @@ Contributing
 We welcome any contributions. If you need to tweak Errbit for your organization's needs,
 there are probably other users who will appreciate your work.
 Please try to determine whether or not your feature should be **global** or **optional**,
-and make **optional** features configurable via `config/config.yml`. 
+and make **optional** features configurable via `config/config.yml`.
 
 **Examples of optional features:**
 
