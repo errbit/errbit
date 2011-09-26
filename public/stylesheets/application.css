@@ -43,12 +43,13 @@ a.action  { float: right; font-size: 0.9em;}
 /* Header */
 #header {
   margin-bottom: 24px;
+  height: 70px;
   border-bottom: 1px solid #fff;
-  background: black;
   position:relative;
+  background: #000000;
 }
 #header > div {
-  height:64px;
+  height: 70px;
 }
 #header #site-name {
   display: block;
@@ -62,7 +63,9 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 #header #session-links {
-  position: absolute; top: 18px; right: 0;
+  position: absolute;
+  top: 20px;
+  right: 0;
   font-size: 0.9em;
 }
 #header #session-links li {
