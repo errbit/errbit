@@ -9,9 +9,8 @@ class ErrsController < ApplicationController
     app_scope = current_user.admin? ? App.all : current_user.apps
 
     @sort = params[:sort]
-    @order = params[:order]
-    @sort = "app" unless %w{message last_notice_at last_deploy_at count}.member?(@sort)
-    @order = "asc" unless (@order == "desc")
+    @sort = "last_notice_at" unless %w{app message last_notice_at last_deploy_at count}.member?(@sort)
+    @order = params[:order] || "desc"
 
     @problems = Problem.for_apps(app_scope).in_env(params[:environment]).unresolved.ordered_by(@sort, @order)
     @selected_problems = params[:problems] || []
