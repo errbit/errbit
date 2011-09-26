@@ -10,9 +10,7 @@ class LinkErrsToProblems < Mongoid::Migration
 
     # Create a Problem for each Err
     Err.all.each do |err|
-      app_id = err['app_id']
-      app = app_id && App.where(:_id => app_id).first
-      if app
+      if err['app_id'] && app = App.where(:_id => err['app_id']).first
         err.problem = app.problems.create
         err.save
       end
@@ -25,3 +23,4 @@ class LinkErrsToProblems < Mongoid::Migration
   def self.down
   end
 end
+
