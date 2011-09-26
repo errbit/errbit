@@ -23,7 +23,7 @@ describe ErrsController do
       it "should successfully list errs" do
         get :index
         response.should be_success
-        response.body.should match(@problem.message)
+        response.body.gsub("&#8203;", "").should match(@problem.message)
       end
 
       it "should list atom feed successfully" do

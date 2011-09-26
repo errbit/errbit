@@ -8,9 +8,10 @@ module ErrsHelper
   end
 
   def trucated_err_message(problem)
-    msg = truncate(problem.message, :length => 300)
-    # Insert invisible unicode characters so that firefox can emulate 'word-wrap: break-word' CSS
-    msg.scan(/.{1,5}/).join("&#8203;").html_safe
+    unless (msg = problem.message).blank?
+      # Truncate & insert invisible chars so that firefox can emulate 'word-wrap: break-word' CSS rule
+      truncate(msg, :length => 300).scan(/.{1,5}/).join("&#8203;").html_safe
+    end
   end
 end
 
