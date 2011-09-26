@@ -726,10 +726,9 @@ table.backtrace td.line.in-app {
   color: #2adb2e;
   background-color: #2f2f2f;
 }
+table.backtrace td.line.in-app span.file   { color:#2AEB2E; }
+table.backtrace td.line.in-app span.method { color:#2ACB2E; }
 
-table.backtrace tr.in-app td.line         { color:#156E16; /* 43% */}
-table.backtrace tr.in-app td.line .file   { color:#2adb2e; /* 76% */}
-table.backtrace tr.in-app td.line .method { color:#25C227; /* 86% */}
 
 /* Extra empty rows at top and bottom of table */
 table.backtrace tr.padding th, table.backtrace tr.padding td {
