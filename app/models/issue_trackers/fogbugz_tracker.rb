@@ -22,19 +22,19 @@ class IssueTrackers::FogbugzTracker < IssueTracker
     end
   end
 
-  def create_issue(err)
+  def create_issue(problem)
     fogbugz = Fogbugz::Interface.new(:email => username, :password => password, :uri => "https://#{account}.fogbugz.com")
     fogbugz.authenticate
 
     issue = {}
-    issue['sTitle'] = issue_title err
+    issue['sTitle'] = issue_title problem
     issue['sArea'] = project_id
     issue['sEvent'] = body_template.result(binding)
     issue['sTags'] = ['errbit'].join(',')
     issue['cols'] = ['ixBug'].join(',')
 
     fb_resp = fogbugz.command(:new, issue)
-    err.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
+    problem.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
   end
 
   def body_template

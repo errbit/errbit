@@ -1,21 +1,30 @@
+Factory.define :problem do |p|
+  p.app            {|a| a.association :app}
+  p.comments      []
+end
+
+Factory.define(:problem_with_comments, :parent => :problem) do |ec|
+  ec.comments     { (1..3).map { Factory(:comment) } }
+end
+
+
+
 Factory.define :err do |e|
-  e.app           {|p| p.association :app }
+  e.problem        {|p| p.association :problem}
   e.klass         'FooError'
   e.component     'foo'
   e.action        'bar'
   e.environment   'production'
-  e.comments      []
 end
 
-Factory.define(:err_with_comments, :parent => :err) do |ec|
-  ec.comments     { (1..3).map{Factory(:comment)} }
-end
+
 
 Factory.define :notice do |n|
   n.err                 {|e| e.association :err}
   n.message             'FooError: Too Much Bar'
   n.backtrace           { random_backtrace }
-  n.server_environment  'server-environment' => 'production'
+  n.server_environment  'environment-name' => 'production'
+  n.request             {{ 'component' => 'foo', 'action' => 'bar' }}
   n.notifier            'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com'
 end
 

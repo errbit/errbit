@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe GithubIssuesTracker do
-  it "should create an issue on Github Issues with err params, and set issue link for err" do
+  it "should create an issue on Github Issues with problem params, and set issue link for problem" do
     notice = Factory :notice
-    tracker = Factory :github_issues_tracker, :app => notice.err.app
-    err = notice.err
+    tracker = Factory :github_issues_tracker, :app => notice.app
+    problem = notice.problem
 
     number = 5
     @issue_link = "https://github.com/#{tracker.project_id}/issues/#{number}"
@@ -27,15 +27,15 @@ EOF
     stub_request(:post, "https://#{tracker.username}%2Ftoken:#{tracker.api_token}@github.com/api/v2/json/issues/open/#{tracker.project_id}").
       to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
 
-    err.app.issue_tracker.create_issue(err)
-    err.reload
+    problem.app.issue_tracker.create_issue(problem)
+    problem.reload
 
     requested = have_requested(:post, "https://#{tracker.username}%2Ftoken:#{tracker.api_token}@github.com/api/v2/json/issues/open/#{tracker.project_id}")
     WebMock.should requested.with(:headers => {'Content-Type' => 'application/x-www-form-urlencoded'})
     WebMock.should requested.with(:body => /title=%5Bproduction%5D%5Bfoo%23bar%5D%20FooError%3A%20Too%20Much%20Bar/)
     WebMock.should requested.with(:body => /See%20this%20exception%20on%20Errbit/)
 
-    err.issue_link.should == @issue_link
+    problem.issue_link.should == @issue_link
   end
 end
 

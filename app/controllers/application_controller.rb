@@ -10,11 +10,20 @@ class ApplicationController < ActionController::Base
     (location == root_path && App.count == 1) ? app_path(App.first) : location
   end
 
-  protected
+  rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
 
-    def require_admin!
-      redirect_to root_path unless user_signed_in? && current_user.admin?
-    end
+
+protected
+
+
+  def require_admin!
+    redirect_to_root unless user_signed_in? && current_user.admin?
+  end
+
+  def redirect_to_root
+    redirect_to(root_path)
+  end
+
 
 end
 

@@ -13,12 +13,12 @@ class IssueTrackers::PivotalLabsTracker < IssueTracker
     end
   end
 
-  def create_issue(err)
+  def create_issue(problem)
     PivotalTracker::Client.token = api_token
     PivotalTracker::Client.use_ssl = true
     project = PivotalTracker::Project.find project_id.to_i
-    story = project.stories.create :name => issue_title(err), :story_type => 'bug', :description => body_template.result(binding)
-    err.update_attribute :issue_link, "https://www.pivotaltracker.com/story/show/#{story.id}"
+    story = project.stories.create :name => issue_title(problem), :story_type => 'bug', :description => body_template.result(binding)
+    problem.update_attribute :issue_link, "https://www.pivotaltracker.com/story/show/#{story.id}"
   end
 
   def body_template

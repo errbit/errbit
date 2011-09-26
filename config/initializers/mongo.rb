@@ -8,3 +8,4 @@ if mongo = ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI']
     config.allow_dynamic_fields = false
   end
 end
+

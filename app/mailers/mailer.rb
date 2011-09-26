@@ -7,10 +7,10 @@ class Mailer < ActionMailer::Base
 
   def err_notification(notice)
     @notice   = notice
-    @app  = notice.err.app
+    @app      = notice.app
 
     mail :to      => @app.notification_recipients,
-         :subject => "[#{@app.name}][#{@notice.err.environment}] #{@notice.err.message}"
+         :subject => "[#{@app.name}][#{@notice.environment_name}] #{@notice.message}"
   end
 
   def deploy_notification(deploy)

@@ -22,3 +22,4 @@ class Hash
   end
 
 end
+

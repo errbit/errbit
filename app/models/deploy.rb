@@ -22,7 +22,7 @@ class Deploy
   end
 
   def resolve_app_errs
-    app.errs.unresolved.in_env(environment).each {|err| err.resolve!}
+    app.problems.unresolved.in_env(environment).each {|problem| problem.resolve!}
   end
 
   def short_revision

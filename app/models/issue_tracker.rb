@@ -20,8 +20,8 @@ class IssueTracker
   # Subclasses are responsible for overwriting this method.
   def check_params; true; end
 
-  def issue_title err
-    "[#{ err.environment }][#{ err.where }] #{err.message.to_s.truncate(100)}"
+  def issue_title(problem)
+    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
   end
 
   # Allows us to set the issue tracker class from a single form.

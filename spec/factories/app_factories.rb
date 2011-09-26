@@ -20,7 +20,7 @@ Factory.define(:user_watcher, :parent => :watcher) do |w|
 end
 
 Factory.define(:deploy) do |d|
-  d.app       {|p| p.association :app}
+  d.app           {|p| p.association :app}
   d.username      'clyde.frog'
   d.repository    'git@github.com/errbit/errbit.git'
   d.environment   'production'

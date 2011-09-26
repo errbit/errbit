@@ -3,11 +3,12 @@ require 'spec_helper'
 describe "errs/show.html.haml" do
   before do
     err = Factory(:err)
+    problem = err.problem
     comment = Factory(:comment)
-    assign :err, err
+    assign :problem, problem
     assign :comment, comment
-    assign :app, err.app
-    assign :notices, err.notices.ordered.paginate(:page => 1, :per_page => 1)
+    assign :app, problem.app
+    assign :notices, err.notices.paginate(:page => 1, :per_page => 1)
     assign :notice, err.notices.first
   end
 
@@ -44,9 +45,9 @@ describe "errs/show.html.haml" do
     end
 
     it 'should display comments and new comment form when no issue tracker' do
-      err = Factory(:err_with_comments)
-      assign :err, err
-      assign :app, err.app
+      problem = Factory(:problem_with_comments)
+      assign :problem, problem
+      assign :app, problem.app
       render
       comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
       comments_section.should =~ /Test comment/
@@ -54,20 +55,22 @@ describe "errs/show.html.haml" do
     end
 
     context "with issue tracker" do
-      def with_issue_tracker(err)
-        err.app.issue_tracker = PivotalLabsTracker.new :api_token => "token token token", :project_id => "1234"
-        assign :err, err
-        assign :app, err.app
+      def with_issue_tracker(problem)
+        problem.app.issue_tracker = PivotalLabsTracker.new :api_token => "token token token", :project_id => "1234"
+        assign :problem, problem
+        assign :app, problem.app
       end
 
       it 'should not display the comments section' do
-        with_issue_tracker(Factory(:err))
+        problem = Factory(:problem)
+        with_issue_tracker(problem)
         render
         view.instance_variable_get(:@_content_for)[:comments].should be_blank
       end
 
       it 'should display existing comments' do
-        with_issue_tracker(Factory(:err_with_comments))
+        problem = Factory(:problem_with_comments)
+        with_issue_tracker(problem)
         render
         comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
         comments_section.should =~ /Test comment/

@@ -17,10 +17,10 @@ class MoveNoticesToSeparateCollection < Mongoid::Migration
       mongo_db.collection("errs").update({ "_id" => err['_id']}, { "$unset" => { "notices" => 1}})
     end
     Rake::Task["errbit:db:update_notices_count"].invoke
-    Rake::Task["errbit:db:update_err_message"].invoke
+    Rake::Task["errbit:db:update_problem_attrs"].invoke
   end
 
   def self.down
   end
-
 end
+

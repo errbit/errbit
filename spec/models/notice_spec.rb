@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Notice do
 
+
   context 'validations' do
     it 'requires a backtrace' do
       notice = Factory.build(:notice, :backtrace => nil)
@@ -21,6 +22,7 @@ describe Notice do
       notice.errors[:notifier].should include("can't be blank")
     end
   end
+
 
   context '.in_app_backtrace_line?' do
     let(:backtrace) do [{
@@ -51,93 +53,6 @@ describe Notice do
     end
   end
 
-  context '#from_xml' do
-    before do
-      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @app = Factory(:app, :api_key => 'APIKEY')
-      Digest::MD5.stub(:hexdigest).and_return('fingerprintdigest')
-    end
-
-    it 'finds the correct app' do
-      @notice = Notice.from_xml(@xml)
-      @notice.err.app.should == @app
-    end
-
-    it 'finds the correct err for the notice' do
-      Err.should_receive(:for).with({
-        :app      => @app,
-        :klass        => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Factory(:err))
-      err.notices.stub(:create!)
-      @notice = Notice.from_xml(@xml)
-    end
-
-    it 'marks the err as unresolve if it was previously resolved' do
-      Err.should_receive(:for).with({
-        :app      => @app,
-        :klass        => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Factory(:err, :resolved => true))
-      err.should be_resolved
-      @notice = Notice.from_xml(@xml)
-      @notice.err.should == err
-      @notice.err.should_not be_resolved
-    end
-
-    it 'should create a new notice' do
-      @notice = Notice.from_xml(@xml)
-      @notice.should be_persisted
-    end
-
-    it 'assigns an err to the notice' do
-      @notice = Notice.from_xml(@xml)
-      @notice.err.should be_a(Err)
-    end
-
-    it 'captures the err message' do
-      @notice = Notice.from_xml(@xml)
-      @notice.message.should == 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.'
-    end
-
-    it 'captures the backtrace' do
-      @notice = Notice.from_xml(@xml)
-      @notice.backtrace.size.should == 73
-      @notice.backtrace.last['file'].should == '[GEM_ROOT]/bin/rake'
-    end
-
-    it 'captures the server_environment' do
-      @notice = Notice.from_xml(@xml)
-      @notice.server_environment['environment-name'].should == 'development'
-    end
-
-    it 'captures the request' do
-      @notice = Notice.from_xml(@xml)
-      @notice.request['url'].should == 'http://example.org/verify'
-      @notice.request['params']['controller'].should == 'application'
-    end
-
-    it 'captures the notifier' do
-      @notice = Notice.from_xml(@xml)
-      @notice.notifier['name'].should == 'Hoptoad Notifier'
-    end
-
-    it "should handle params without 'request' section" do
-      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
-      lambda { Notice.from_xml(@xml) }.should_not raise_error
-    end
-
-    it "should raise ApiVersionError" do
-      @xml = Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_wrong_version.xml').read
-      expect { Notice.from_xml(@xml)  }.to raise_error(Hoptoad::V2::ApiVersionError)
-    end
-  end
 
   describe "key sanitization" do
     before do
@@ -153,6 +68,7 @@ describe Notice do
     end
   end
 
+
   describe "user agent" do
     it "should be parsed and human-readable" do
       notice = Factory.build(:notice, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
@@ -166,13 +82,14 @@ describe Notice do
     end
   end
 
+
   describe "email notifications (configured individually for each app)" do
     custom_thresholds = [2, 4, 8, 16, 32, 64]
 
     before do
       Errbit::Config.per_app_email_at_notices = true
       @app = Factory(:app_with_watcher, :email_at_notices => custom_thresholds)
-      @err = Factory(:err, :app => @app)
+      @err = Factory(:err, :problem => Factory(:problem, :app => @app))
     end
 
     after do
@@ -181,13 +98,14 @@ describe Notice do
 
     custom_thresholds.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
-        @err.notices.stub(:count).and_return(threshold)
+        @err.problem.stub(:notices_count).and_return(threshold)
         Mailer.should_receive(:err_notification).
           and_return(mock('email', :deliver => true))
         Factory(:notice, :err => @err)
       end
     end
   end
+
 
 end
 

@@ -7,20 +7,20 @@ describe NoticesController do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
       @app = Factory(:app_with_watcher)
       App.stub(:find_by_api_key!).and_return(@app)
-      @notice = Notice.from_xml(@xml)
+      @notice = App.report_error!(@xml)
 
       request.env['Content-type'] = 'text/xml'
       request.env['Accept'] = 'text/xml, application/xml'
     end
 
     it "generates a notice from xml [POST]" do
-      Notice.should_receive(:from_xml).with(@xml).and_return(@notice)
+      App.should_receive(:report_error!).with(@xml).and_return(@notice)
       request.should_receive(:raw_post).and_return(@xml)
       post :create
     end
 
     it "generates a notice from xml [GET]" do
-      Notice.should_receive(:from_xml).with(@xml).and_return(@notice)
+      App.should_receive(:report_error!).with(@xml).and_return(@notice)
       get :create, {:data => @xml}
     end
 
@@ -29,10 +29,11 @@ describe NoticesController do
       post :create
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)
-      email.subject.should include(@notice.err.message)
+      email.subject.should include(@notice.message)
       email.subject.should include("[#{@app.name}]")
-      email.subject.should include("[#{@notice.err.environment}]")
+      email.subject.should include("[#{@notice.environment_name}]")
     end
   end
 
 end
+

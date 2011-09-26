@@ -7,13 +7,13 @@
   [<%= notice.request['url'] %>](<%= notice.request['url'] %>)"
 <% end %>
 ### Where ###
-<%= notice.err.where %>
+<%= notice.where %>
 
 ### Occured ###
 <%= notice.created_at.to_s(:micro) %>
 
 ### Similar ###
-<%= (notice.err.notices_count - 1).to_s %>
+<%= (notice.problem.notices_count - 1).to_s %>
 
 ## Params ##
 ```

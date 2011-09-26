@@ -6,6 +6,7 @@ describe AppsController do
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
 
+
   describe "GET /apps" do
     context 'when logged in as an admin' do
       it 'finds all apps' do
@@ -38,8 +39,7 @@ describe AppsController do
         @user = Factory(:admin)
         sign_in @user
         @app = Factory(:app)
-        @err = Factory :err, :app => @app
-        @notice = Factory :notice, :err => @err
+        @problem = Factory(:notice, :err => Factory(:err, :problem => Factory(:problem, :app => @app))).problem
       end
 
       it 'finds the app' do
@@ -48,50 +48,51 @@ describe AppsController do
       end
 
       it "should not raise errors for app with err without notices" do
-        Factory :err, :app => @app
+        Factory(:err, :problem => Factory(:problem, :app => @app))
         lambda { get :show, :id => @app.id }.should_not raise_error
       end
 
       it "should list atom feed successfully" do
         get :show, :id => @app.id, :format => "atom"
         response.should be_success
-        response.body.should match(@err.message)
+        response.body.should match(@problem.message)
       end
 
       context "pagination" do
         before(:each) do
-          35.times { Factory :err, :app => @app }
+          35.times { Factory(:err, :problem => Factory(:problem, :app => @app)) }
         end
 
         it "should have default per_page value for user" do
           get :show, :id => @app.id
-          assigns(:errs).size.should == User::PER_PAGE
+          assigns(:problems).size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
           @user.update_attribute :per_page, 10
           get :show, :id => @app.id
-          assigns(:errs).size.should == 10
+          assigns(:problems).size.should == 10
         end
       end
 
       context 'with resolved errors' do
         before(:each) do
-          resolved_err = Factory.create(:err, :app => @app, :resolved => true)
-          Factory.create(:notice, :err => resolved_err)
+          resolved_problem = Factory(:problem, :app => @app)
+          Factory(:notice, :err => Factory(:err, :problem => resolved_problem))
+          resolved_problem.resolve!
         end
 
         context 'and no params' do
-          it 'shows only unresolved errs' do
+          it 'shows only unresolved problems' do
             get :show, :id => @app.id
-            assigns(:errs).size.should == 1
+            assigns(:problems).size.should == 1
           end
         end
 
-        context 'and all_errs=true params' do
+        context 'and all_problems=true params' do
           it 'shows all errors' do
             get :show, :id => @app.id, :all_errs => true
-            assigns(:errs).size.should == 2
+            assigns(:problems).size.should == 2
           end
         end
       end
@@ -100,42 +101,42 @@ describe AppsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Factory.create(:err, :app => @app, :environment => environments[i % environments.length])
+            Factory.create(:problem, :app => @app, :environment => environments[i % environments.length])
           end
         end
 
         context 'no params' do
           it 'shows errs for all environments' do
             get :show, :id => @app.id
-            assigns(:errs).size.should == 21
+            assigns(:problems).size.should == 21
           end
         end
 
         context 'environment production' do
           it 'shows errs for just production' do
-            get :show, :id => @app.id, :environment => :production
-            assigns(:errs).size.should == 6
+            get :show, :id => @app.id, :environment => 'production'
+            assigns(:problems).size.should == 6
           end
         end
 
         context 'environment staging' do
           it 'shows errs for just staging' do
-            get :show, :id => @app.id, :environment => :staging
-            assigns(:errs).size.should == 5
+            get :show, :id => @app.id, :environment => 'staging'
+            assigns(:problems).size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows errs for just development' do
-            get :show, :id => @app.id, :environment => :development
-            assigns(:errs).size.should == 5
+            get :show, :id => @app.id, :environment => 'development'
+            assigns(:problems).size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows errs for just test' do
-            get :show, :id => @app.id, :environment => :test
-            assigns(:errs).size.should == 5
+            get :show, :id => @app.id, :environment => 'test'
+            assigns(:problems).size.should == 5
           end
         end
       end
@@ -344,6 +345,7 @@ describe AppsController do
       end
     end
   end
+
 
 end
 

@@ -27,21 +27,21 @@ class IssueTrackers::MingleTracker < IssueTracker
     end
   end
 
-  def create_issue(err)
+  def create_issue(problem)
     properties = ticket_properties_hash
     basic_auth = account.gsub(/https?:\/\//, "https://#{username}:#{password}@")
     Mingle.set_site "#{basic_auth}/api/v1/projects/#{project_id}/"
 
     card = Mingle::Card.new
     card.card_type_name = properties.delete("card_type")
-    card.name = issue_title(err)
+    card.name = issue_title(problem)
     card.description = body_template.result(binding)
     properties.each do |property, value|
       card.send("cp_#{property}=", value)
     end
 
     card.save!
-    err.update_attribute :issue_link, URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s
+    problem.update_attribute :issue_link, URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s
   end
 
   def body_template

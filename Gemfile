@@ -24,7 +24,7 @@ platform :ruby do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.5'
+  gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
   gem 'factory_girl_rails'
   unless ENV['TRAVIS']
@@ -34,7 +34,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec', '~> 2.5'
+  gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
 end
