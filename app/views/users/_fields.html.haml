@@ -18,6 +18,10 @@
   = f.select :per_page, [10, 20, 30, 50, 75, 100]
 
 .required
+  = f.label :time_zone
+  = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
+
+.required
   = f.label :password
   = f.password_field :password
 
