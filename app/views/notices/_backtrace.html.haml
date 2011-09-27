@@ -4,10 +4,11 @@
       - path = File.dirname(line['file'])
       - path = path == "." ? "" : path + '/'
       - file = File.basename(line['file'])
+      - file = "#{file}:#{line['number']}" unless line['number'].blank?
       %tr
         %td.line{:class => (Notice.in_app_backtrace_line?(line) ? 'in-app' : nil)}
           %span.path>= path
-          %span.file= line['number'].blank? ? file : ("#{file}:" + line_number_with_link(@app, line).to_s).html_safe
+          %span.file= link_to_source_file(@app, line, file).html_safe
           &rarr;
           %span.method= line['method']
 

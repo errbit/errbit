@@ -4,15 +4,15 @@ module NoticesHelper
     render :partial => "notices/atom_entry.html.haml", :locals => {:notice => notice}
   end
 
-  def line_number_with_link(app, line)
+  def link_to_source_file(app, line, text)
     if Notice.in_app_backtrace_line?(line)
-      return link_to_github(app, line, line['number']) if app.github_url?
+      return link_to_github(app, line, text) if app.github_url?
       if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
         # Return link to file on tracker if issue tracker supports this
-        return link_to_issue_tracker_file(app, line, line['number'])
+        return link_to_issue_tracker_file(app, line, text)
       end
     end
-    line['number']
+    text
   end
 
   def filepath_parts(file)
