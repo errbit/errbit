@@ -23,8 +23,12 @@ module ApplicationHelper
   end
   
   def get_host(url)
-    uri = url && URI.parse(url)
-    uri.blank? ? "N/A" : uri.host
+    begin
+      uri = url && URI.parse(url)
+      uri.blank? ? "N/A" : uri.host
+    rescue URI::InvalidURIError
+      "N/A"
+    end
   end
   
   
