@@ -44,13 +44,13 @@ a.action  { float: right; font-size: 0.9em;}
 /* Header */
 #header {
   margin-bottom: 24px;
-  height: 70px;
+  height: 71px;
   border-bottom: 1px solid #fff;
   position:relative;
   background: #000000;
 }
 #header > div {
-  height: 70px;
+  height: 71px;
 }
 #header #site-name {
   display: block;
