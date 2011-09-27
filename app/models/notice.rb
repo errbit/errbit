@@ -91,7 +91,7 @@ class Notice
   end
 
   def decrease_counter_cache
-    problem.inc(:notices_count, -1)
+    problem.inc(:notices_count, -1) if err
   end
 
   def unresolve_problem
