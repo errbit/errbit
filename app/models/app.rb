@@ -94,7 +94,7 @@ class App
   end
 
   def last_deploy_at
-    deploys.last && deploys.last.created_at
+    (last_deploy = deploys.last) && last_deploy.created_at
   end
 
 

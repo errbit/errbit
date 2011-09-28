@@ -109,7 +109,9 @@ class Problem
   def cache_app_attributes
     if app
       self.app_name = app.name
-      self.last_deploy_at = app.last_deploy_at
+      self.last_deploy_at = if (last_deploy = app.deploys.where(:environment => self.environment).last)
+        last_deploy.created_at
+      end
       self.save if persisted?
     end
   end
