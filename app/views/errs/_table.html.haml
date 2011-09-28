@@ -17,9 +17,9 @@
           %td.app
             = link_to problem.app.name, app_path(problem.app)
             - if current_page?(:controller => 'errs')
-              %span.environment= link_to problem.environment, errs_path(environment: problem.environment)
+              %span.environment= link_to problem.environment, errs_path(:environment => problem.environment)
             - else
-              %span.environment= link_to problem.environment, app_path(problem.app, environment: problem.environment)
+              %span.environment= link_to problem.environment, app_path(problem.app, :environment => problem.environment)
           %td.message
             = link_to trucated_err_message(problem), app_err_path(problem.app, problem)
             %em= problem.where
