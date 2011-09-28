@@ -16,6 +16,10 @@ describe UsersController do
     before do
       sign_in @user = Factory(:user)
     end
+    
+    it "should set a time zone" do
+      Time.zone.should.to_s == @user.time_zone
+    end
 
     context "GET /users/:other_id/edit" do
       it "redirects to the home page" do
@@ -33,6 +37,11 @@ describe UsersController do
       it "should have per_page option" do
         get :edit, :id => @user.id
         response.body.should match(/id="user_per_page"/)
+      end
+
+      it "should have time_zone option" do
+        get :edit, :id => @user.id
+        response.body.should match(/id="user_time_zone"/)
       end
     end
 
@@ -63,6 +72,11 @@ describe UsersController do
         it "should be able to set per_page option" do
           put :update, :id => @user.to_param, :user => {:per_page => 555}
           @user.reload.per_page.should == 555
+        end
+        
+        it "should be able to set time_zone option" do
+          put :update, :id => @user.to_param, :user => {:time_zone => "Warsaw"}
+          @user.reload.time_zone.should == "Warsaw"
         end
       end
 
