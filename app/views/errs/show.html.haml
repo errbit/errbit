@@ -22,7 +22,7 @@
 
 - if Errbit::Config.allow_comments_with_issue_tracker || !@app.issue_tracker_configured? || @problem.comments.any?
   - content_for :comments do
-    %h3 Comments on this Err
+    %h3 Comments
     - @problem.comments.each do |comment|
       .window
         %table.comment
