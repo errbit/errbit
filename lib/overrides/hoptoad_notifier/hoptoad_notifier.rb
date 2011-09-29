@@ -14,9 +14,8 @@ HoptoadNotifier.module_eval do
             app.save!
           end
           notice.send("api_key=", app.api_key)
-          # Create notice internally.
-          debugger
 
+          # Create notice internally.
           report = ErrorReport.new(notice.to_xml)
           report.generate_notice!
 
