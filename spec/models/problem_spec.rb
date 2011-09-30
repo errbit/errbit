@@ -180,16 +180,16 @@ describe Problem do
     before do
       @app = Factory(:app)
       @last_deploy = 10.days.ago.localtime.round(0)
-      deploy = Factory(:deploy, :app => @app, :created_at => @last_deploy)
+      deploy = Factory(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
     end
 
     it "is set when a problem is created" do
-      problem = Factory(:problem, :app => @app)
+      problem = Factory(:problem, :app => @app, :environment => "production")
       assert_equal @last_deploy, problem.last_deploy_at
     end
 
     it "is updated when a deploy is created" do
-      problem = Factory(:problem, :app => @app)
+      problem = Factory(:problem, :app => @app, :environment => "production")
       next_deploy = 5.minutes.ago.localtime.round(0)
       lambda {
         @deploy = Factory(:deploy, :app => @app, :created_at => next_deploy)
