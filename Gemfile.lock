@@ -155,6 +155,7 @@ GEM
     responders (0.6.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    ri_cal (0.8.8)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -230,6 +231,7 @@ DEPENDENCIES
   oruen_redmine_client
   pivotal-tracker
   rails (= 3.0.10)
+  ri_cal
   rspec (~> 2.6)
   rspec-rails (~> 2.6)
   ruby-debug
