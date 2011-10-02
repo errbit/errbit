@@ -1,3 +1,4 @@
+- any_issue_links = errs.any?{|e| e.issue_link.present? }
 =form_tag do
   %table.errs.selectable
     %thead
@@ -8,6 +9,8 @@
         %th= link_for_sort "Latest", "last_notice_at"
         %th= link_for_sort "Deploy", "last_deploy_at"
         %th= link_for_sort "Count"
+        - if any_issue_links
+          %th Issue
         %th Resolve
     %tbody
       - errs.each do |problem|
@@ -26,6 +29,10 @@
           %td.latest #{time_ago_in_words(last_notice_at problem)} ago
           %td.deploy= problem.last_deploy_at ? problem.last_deploy_at.to_s(:micro) : 'n/a'
           %td.count= link_to problem.notices.count, app_err_path(problem.app, problem)
+          - if any_issue_links
+            %td.issue_link
+              - if problem.issue_link.present?
+                = link_to image_tag("#{problem.app.issue_tracker.class::Label}_goto.png"), problem.issue_link, :target => "_blank"
           %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(problem.app, problem), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if problem.unresolved?
       - if errs.none?
         %tr
