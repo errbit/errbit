@@ -12,7 +12,11 @@ class LinkErrsToProblems < Mongoid::Migration
     puts "==== Create a Problem for each Err..."
     Err.all.each do |err|
       if err['app_id'] && app = App.where(:_id => err['app_id']).first
-        err.problem = app.problems.create
+        err.problem = app.problems.create(:_id => err.id)
+        err.problem.resolve! if err.resolved
+        # don't bother checking err for issue link, if it ain't got one the NoMethodError
+        # is raised, else this works fine.
+        err.problem.update_attribute(:issue_link, err.issue_link) rescue NoMethodError
         err.save
       end
     end
