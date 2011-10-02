@@ -13,6 +13,9 @@
       %th Username
       %td.main= @user.username
   %tr
+    %th Token
+    %td= @user.authentication_token
+  %tr
     %th Admin?
     %td= @user.admin? ? 'Y' : 'N'
   %tr
