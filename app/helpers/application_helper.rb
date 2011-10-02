@@ -3,6 +3,21 @@ module ApplicationHelper
     create_percentage_table_for(problem) {|notice| notice.message}
   end
 
+  def generate_ical(deploys)
+    RiCal.Calendar do |cal|
+      deploys.each_with_index do |deploy,idx|
+        cal.event do |event|
+          event.summary     = "#{idx+1} #{deploy.repository}"
+          event.description = deploy.revision
+          event.dtstart     = deploy.created_at
+          event.dtend       = deploy.created_at + 60.minutes
+          event.location    = deploy.environment
+          event.organizer   = deploy.username
+        end
+      end
+    end.to_s
+  end
+
   def user_agent_graph(problem)
     create_percentage_table_for(problem) {|notice| pretty_user_agent(notice.user_agent)}
   end
