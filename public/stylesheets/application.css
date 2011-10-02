@@ -788,18 +788,18 @@ table.errs tr td.message .inline_comment {
   margin: 6px 0;
   background-color: #E8F4FF;
   border: 1px solid #E2E2E2;
-  text-shadow: 0 1px 0 #DDFFFF;
+  text-shadow: 0 1px 0 #FAFAFA;
   font-style: normal;
 }
 table.errs tr:hover td.message .inline_comment {
   background-color: #E2EFFB;
   border-color: #DBDBDB;
-  text-shadow: 0 1px 0 #CCFBFB;
+  text-shadow: 0 1px 0 #FFFFFF;
 }
 table.errs tr td.message .inline_comment em {
-  color: #555555;
+  color: #444;
 }
 table.errs tr td.message .inline_comment em.commenter {
-  color: #888888;
+  color: #777;
 }
 
