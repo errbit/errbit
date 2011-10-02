@@ -23,6 +23,8 @@ platform :ruby do
   gem 'bson_ext', '~> 1.4.0'
 end
 
+gem 'ri_cal'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
