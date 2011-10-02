@@ -7,12 +7,12 @@ module ApplicationHelper
     RiCal.Calendar do |cal|
       deploys.each_with_index do |deploy,idx|
         cal.event do |event|
-          event.summary     = "#{idx+1} #{deploy.repository}"
-          event.description = deploy.revision
+          event.summary     = "#{idx+1} #{deploy.repository.to_s}"
+          event.description = deploy.revision.to_s
           event.dtstart     = deploy.created_at
           event.dtend       = deploy.created_at + 60.minutes
-          event.location    = deploy.environment
-          event.organizer   = deploy.username
+          event.location    = deploy.environment.to_s
+          event.organizer   = deploy.username.to_s
         end
       end
     end.to_s
