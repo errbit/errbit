@@ -219,6 +219,12 @@ a.action  { float: right; font-size: 0.9em;}
   background-image: url(images/icons/add.png);
 }
 
+#action-bar .calendar_link {
+  background: url(/images/ical.png) no-repeat scroll 11px 4px transparent;
+  padding-left: 47px;
+}
+
+
 /* Content */
 #content {
   padding: 20px; border-top: 1px solid #C6C6C6;

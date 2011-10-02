@@ -1,3 +1,7 @@
 - content_for :title, 'Deploys'
+- content_for :action_bar do
+  - if current_user.authentication_token
+    %span= link_to 'calendar subscription', app_deploys_path(@app, :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
 = render 'table', :deploys => @deploys
 = will_paginate @deploys, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+
