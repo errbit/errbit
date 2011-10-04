@@ -9,8 +9,8 @@ module ApplicationHelper
         cal.event do |event|
           event.summary     = "#{idx+1} #{deploy.repository.to_s}"
           event.description = deploy.revision.to_s
-          event.dtstart     = deploy.created_at
-          event.dtend       = deploy.created_at + 60.minutes
+          event.dtstart     = deploy.created_at.utc
+          event.dtend       = deploy.created_at.utc + 60.minutes
           event.location    = deploy.environment.to_s
           event.organizer   = deploy.username.to_s
         end
