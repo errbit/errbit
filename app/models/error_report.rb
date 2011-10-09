@@ -45,6 +45,7 @@ class ErrorReport
       :fingerprint => fingerprint)
 
     err.notices << notice
+    err.respond_to?(:problem) && err.problem.cache_notice_attributes
     notice
   end
 end
