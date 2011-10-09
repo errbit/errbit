@@ -100,7 +100,7 @@ class Notice
 
 
   def cache_attributes_on_problem
-    problem.cache_notice_attributes(self) if problem.notices_count == 1
+    problem.cache_notice_attributes(self)
   end
 
   def sanitize
