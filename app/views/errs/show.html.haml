@@ -11,6 +11,8 @@
   %strong Last Notice:
   = last_notice_at(@problem).to_s(:micro)
 - content_for :action_bar do
+  - if current_user.authentication_token
+    %span= link_to 'iCal', app_err_path(:app_id => @app.id, :id => @problem.id, :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
   - if @problem.app.issue_tracker_configured?
     - if @problem.issue_link.blank?
       %span= link_to 'create issue', create_issue_app_err_path(@app, @problem), :method => :post, :class => "#{@app.issue_tracker.class::Label}_create create-issue"

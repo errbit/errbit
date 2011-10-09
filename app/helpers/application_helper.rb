@@ -3,6 +3,22 @@ module ApplicationHelper
     create_percentage_table_for(problem) {|notice| notice.message}
   end
 
+  def generate_problem_ical(notices)
+    RiCal.Calendar do |cal|
+      notices.each_with_index do |notice,idx|
+        cal.event do |event|
+          event.summary     = "#{idx+1} #{notice.message.to_s}"
+          event.description = notice.request['url']
+          event.dtstart     = notice.created_at.utc
+          event.dtend       = notice.created_at.utc + 60.minutes
+          event.organizer   = notice.server_environment && notice.server_environment["hostname"]
+          event.location    = notice.server_environment && notice.server_environment["project-root"]
+          event.url         = app_err_url(:app_id => notice.problem.app.id, :id => notice.problem)
+        end
+      end
+    end.to_s
+  end
+
   def generate_ical(deploys)
     RiCal.Calendar { |cal|
       deploys.each_with_index do |deploy,idx|
