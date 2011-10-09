@@ -10,6 +10,7 @@ describe "errs/show.html.haml" do
     assign :app, problem.app
     assign :notices, err.notices.paginate(:page => 1, :per_page => 1)
     assign :notice, err.notices.first
+    controller.stub(:current_user) { Factory(:user) }
   end
 
   describe "content_for :action_bar" do
