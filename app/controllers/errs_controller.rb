@@ -34,6 +34,10 @@ class ErrsController < ApplicationController
     @notices  = @problem.notices.paginate(:page => page, :per_page => 1)
     @notice   = @notices.first
     @comment = Comment.new
+    if request.headers['X-PJAX']
+      params["_pjax"] = nil
+      render :layout => false
+    end
   end
 
   def create_issue
