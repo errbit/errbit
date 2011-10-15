@@ -39,7 +39,7 @@ module Errbit
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery underscore-1.1.6 rails form)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery underscore-1.1.6 rails form jquery.pjax)
 
     # > rails generate - config
     config.generators do |g|
