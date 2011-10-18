@@ -421,7 +421,6 @@ table thead + tbody tr:first-child td {
 }
 table th { background-color: #ececec; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
-table tbody tr:nth-child(even) td { background-color: #fff; }
 table .main { width: 100%; }
 
 table.single_user {
