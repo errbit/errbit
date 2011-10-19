@@ -34,7 +34,7 @@
                 %em= truncate(comment.body, :length => 100, :separator => ' ')
           %td.latest #{time_ago_in_words(last_notice_at problem)} ago
           %td.deploy= problem.last_deploy_at ? problem.last_deploy_at.to_s(:micro) : 'n/a'
-          %td.count= link_to problem.notices.count, app_err_path(problem.app, problem)
+          %td.count= link_to problem.notices_count, app_err_path(problem.app, problem)
           - if any_issue_links
             %td.issue_link
               - if problem.issue_link.present?
