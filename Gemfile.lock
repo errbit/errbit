@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/bensymonds/rpm_contrib.git
+  revision: 84ee78da6d0f154468d47c9e1e6597997e157291
+  branch: mongo-1.4.0_update
+  specs:
+    rpm_contrib (2.1.6.beta1)
+      newrelic_rpm (>= 3.1.1)
+      newrelic_rpm (>= 3.1.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -159,8 +168,6 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ri_cal (0.8.8)
-    rpm_contrib (2.1.4)
-      newrelic_rpm (>= 3.1.1)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -232,14 +239,13 @@ DEPENDENCIES
   lighthouse-api
   mongoid (= 2.1.2)
   mongoid_rails_migrations
-  newrelic_rpm
   nokogiri
   octokit
   oruen_redmine_client
   pivotal-tracker
   rails (= 3.0.10)
   ri_cal
-  rpm_contrib
+  rpm_contrib!
   rspec (~> 2.6)
   rspec-rails (~> 2.6)
   ruby-debug

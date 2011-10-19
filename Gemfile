@@ -18,8 +18,7 @@ gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
-gem 'rpm_contrib'
-gem 'newrelic_rpm'
+gem 'rpm_contrib', :git => "git://github.com/bensymonds/rpm_contrib.git", :branch => "mongo-1.4.0_update"
 gem 'kaminari'
 
 platform :ruby do
