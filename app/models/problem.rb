@@ -21,6 +21,7 @@ class Problem
   field :user_agents, :type => Array, :default => []
   field :messages, :type => Array, :default => []
   field :hosts, :type => Array, :default => []
+  field :comments_count, :type => Integer, :default => 0
 
   index :app_id
   index :app_name

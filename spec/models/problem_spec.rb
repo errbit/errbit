@@ -276,5 +276,31 @@ describe Problem do
     end
   end
 
+  context "comment counter cache" do
+    before do
+      @app = Factory(:app)
+      @problem = Factory(:problem, :app => @app)
+    end
+
+    it "#comments_count returns 0 by default" do
+      @problem.comments_count.should == 0
+    end
+
+    it "adding a comment increases #comments_count by 1" do
+      lambda {
+        Factory(:comment, :err => @problem)
+      }.should change(@problem, :comments_count).from(0).to(1)
+    end
+
+    it "removing a comment decreases #comments_count by 1" do
+      comment1 = Factory(:comment, :err => @problem)
+      lambda {
+        @problem.reload.comments.first.destroy
+        @problem.reload
+      }.should change(@problem, :comments_count).from(1).to(0)
+    end
+  end
+
+
 end
 
