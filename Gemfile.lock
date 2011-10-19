@@ -217,7 +217,6 @@ GEM
     webmock (1.7.6)
       addressable (~> 2.2, > 2.2.5)
       crack (>= 0.1.7)
-    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -254,4 +253,3 @@ DEPENDENCIES
   thin
   useragent (~> 0.3.1)
   webmock
-  will_paginate (>= 3)

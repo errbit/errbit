@@ -4,7 +4,6 @@ gem 'rails', '3.0.10'
 gem 'nokogiri'
 gem 'mongoid', '2.1.2'
 gem 'haml'
-gem 'will_paginate', '>=3'
 gem 'htmlentities', "~> 4.3.0"
 gem 'devise', '~> 1.4.0'
 gem 'lighthouse-api'
