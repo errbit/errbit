@@ -1,4 +1,4 @@
-Errbit [![TravisCI](http://travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
+Errbit [![TravisCI](https://travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
 ======
 
 **The open source self-hosted error catcher**
