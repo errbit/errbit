@@ -82,6 +82,36 @@ describe Notice do
     end
   end
 
+  describe "user agent string" do
+    it "should be parsed and human-readable" do
+      notice = Factory.build(:notice, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
+      notice.user_agent_string.should == 'Chrome 10.0.648.204'
+    end
+
+    it "should be nil if HTTP_USER_AGENT is blank" do
+      notice = Factory.build(:notice)
+      notice.user_agent_string.should == "N/A"
+    end
+  end
+
+  describe "host" do
+    it "returns host if url is valid" do
+      notice = Factory.build(:notice, :request => {'url' => "http://example.com/resource/12"})
+      notice.host.should == 'example.com'
+    end
+    
+    it "returns 'N/A' when url is not valid" do
+      notice = Factory.build(:notice, :request => {'url' => "some string"})
+      notice.host.should == 'N/A'
+    end
+
+    it "returns 'N/A' when url is empty" do
+      notice = Factory.build(:notice, :request => {})
+      notice.host.should == 'N/A'
+    end
+
+  end
+
 
   describe "email notifications (configured individually for each app)" do
     custom_thresholds = [2, 4, 8, 16, 32, 64]

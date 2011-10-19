@@ -10,18 +10,3 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe ApplicationHelper do
-  describe "get_host" do
-    it "returns host if url is valid" do
-      helper.get_host("http://example.com/resource/12").should == 'example.com'
-    end
-    
-    it "returns 'N/A' when url is not valid" do
-      helper.get_host("some string").should == 'N/A'
-    end
-
-    it "returns 'N/A' when url is empty" do
-      helper.get_host({}).should == 'N/A'
-    end
-  end
-end

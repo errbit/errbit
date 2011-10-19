@@ -1,6 +1,6 @@
 module ApplicationHelper
   def message_graph(problem)
-    create_percentage_table_for(problem) {|notice| notice.message}
+    create_percentage_table_for(problem.messages)
   end
 
   def generate_problem_ical(notices)
@@ -35,35 +35,19 @@ module ApplicationHelper
   end
 
   def user_agent_graph(problem)
-    create_percentage_table_for(problem) {|notice| pretty_user_agent(notice.user_agent)}
-  end
-
-  def pretty_user_agent(user_agent)
-    (user_agent.nil? || user_agent.none?) ? "N/A" : "#{user_agent.browser} #{user_agent.version}"
+    create_percentage_table_for(problem.user_agents)
   end
 
   def tenant_graph(problem)
-    create_percentage_table_for(problem) {|notice| get_host(notice.request['url'])}
+    create_percentage_table_for(problem.hosts)
   end
 
-  def get_host(url)
-    begin
-      uri = url && URI.parse(url)
-      uri.blank? ? "N/A" : uri.host
-    rescue URI::InvalidURIError
-      "N/A"
-    end
+  def create_percentage_table_for(collection)
+    create_percentage_table_from_tallies(tally(collection))
   end
 
-
-  def create_percentage_table_for(problem, &block)
-    tallies = tally(problem.notices, &block)
-    create_percentage_table_from_tallies(tallies, :total => problem.notices.count)
-  end
-
-  def tally(collection, &block)
-    collection.inject({}) do |tallies, item|
-      value = yield item
+  def tally(collection)
+    collection.inject({}) do |tallies, value|
       tallies[value] = (tallies[value] || 0) + 1
       tallies
     end
