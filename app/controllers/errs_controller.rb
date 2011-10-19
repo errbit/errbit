@@ -16,7 +16,7 @@ class ErrsController < ApplicationController
     @selected_problems = params[:problems] || []
     respond_to do |format|
       format.html do
-        @problems = @problems.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @problems = @problems.page(params[:page]).per(current_user.per_page)
       end
       format.atom
     end
@@ -24,7 +24,7 @@ class ErrsController < ApplicationController
 
   def all
     app_scope = current_user.admin? ? App.all : current_user.apps
-    @problems = Problem.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+    @problems = Problem.for_apps(app_scope).ordered.page(params[:page]).per(current_user.per_page)
     @selected_problems = params[:problems] || []
   end
 

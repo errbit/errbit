@@ -65,13 +65,13 @@ describe AppsController do
 
         it "should have default per_page value for user" do
           get :show, :id => @app.id
-          assigns(:problems).size.should == User::PER_PAGE
+          assigns(:problems).to_a.size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
           @user.update_attribute :per_page, 10
           get :show, :id => @app.id
-          assigns(:problems).size.should == 10
+          assigns(:problems).to_a.size.should == 10
         end
       end
 

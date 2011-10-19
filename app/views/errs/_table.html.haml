@@ -44,7 +44,7 @@
         %tr
           %td{:colspan => (@app ? 5 : 6)}
             %em No errs here
-  = will_paginate @problems, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+  = paginate errs
   .tab-bar
     %ul
       %li= submit_tag 'Merge', :id => 'merge_errs', :class => 'button', 'data-action' => merge_several_errs_path
