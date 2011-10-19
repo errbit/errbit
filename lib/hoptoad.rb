@@ -18,6 +18,7 @@ module Hoptoad
     def self.get_version_processor(version)
       case version
       when '2.0'; Hoptoad::V2
+      when '2.2'; Hoptoad::V2
       else;       raise ApiVersionError
       end
     end
