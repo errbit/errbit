@@ -31,7 +31,7 @@ class ErrsController < ApplicationController
   def show
     page      = (params[:notice] || @problem.notices_count)
     page      = 1 if page.to_i.zero?
-    @notices  = @problem.notices.paginate(:page => page, :per_page => 1)
+    @notices  = @problem.notices.page(page.to_i).per(1)
     @notice   = @notices.first
     @comment = Comment.new
     if request.headers['X-PJAX']

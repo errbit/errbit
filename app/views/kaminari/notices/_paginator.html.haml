@@ -1,0 +1,13 @@
+-#  The container tag
+-#  available local variables
+-#    current_page:  a page object for the currently displayed page
+-#    num_pages:     total number of pages
+-#    per_page:      number of items to fetch per page
+-#    remote:        data-remote
+-#    paginator:     the paginator that renders the pagination tags inside
+= paginator.render do
+  .notice-pagination<
+    = prev_page_tag
+    = next_page_tag
+.notice-pagination-loader= image_tag 'loader.gif'
+viewing occurrence #{current_page} of #{num_pages}

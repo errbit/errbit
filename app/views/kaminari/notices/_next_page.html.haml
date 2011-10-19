@@ -1,0 +1,2 @@
+~ link_to_unless current_page.last?, raw('Next →'), url,  :class => "next_page", :rel => "next", :remote => remote do |name|
+  ~ content_tag :span, name, :class => 'next_page disabled'
