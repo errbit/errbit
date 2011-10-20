@@ -17,7 +17,6 @@ gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
-gem 'rpm_contrib', :git => "git://github.com/bensymonds/rpm_contrib.git", :branch => "mongo-1.4.0_update"
 gem 'kaminari'
 
 platform :ruby do
@@ -35,6 +34,7 @@ group :development, :test do
     gem 'ruby-debug', :platform => :mri_18
     gem 'ruby-debug19', :platform => :mri_19, :require => 'ruby-debug'
   end
+  gem 'rpm_contrib', :git => "git://github.com/bensymonds/rpm_contrib.git", :branch => "mongo-1.4.0_update"
 end
 
 group :test do
