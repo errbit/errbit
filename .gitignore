@@ -9,3 +9,4 @@ config/mongoid.yml
 .rvmrc
 *~
 *.rbc
+.DS_Store
