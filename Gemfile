@@ -43,6 +43,6 @@ group :test do
 end
 
 group :heroku do
-  gem 'thin'
+  gem 'unicorn'
 end
 
