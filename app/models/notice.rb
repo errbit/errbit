@@ -83,7 +83,7 @@ class Notice
   protected
 
   def should_notify?
-    app.notify_on_errs? && (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(problem.notices_count) && app.watchers.any?
+    app.notify_on_errs? && (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(problem.notices_count) && app.notification_recipients.any?
   end
 
   def increase_counter_cache
