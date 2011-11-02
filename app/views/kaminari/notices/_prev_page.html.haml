@@ -1,0 +1,2 @@
+~ link_to_unless current_page.first?, raw('← Previous'), url, :class => "previous_page", :rel => "prev", :remote => remote do |name|
+  ~ content_tag :span, name, :class => 'previous_page disabled'

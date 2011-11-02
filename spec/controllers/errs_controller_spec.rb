@@ -39,13 +39,13 @@ describe ErrsController do
 
         it "should have default per_page value for user" do
           get :index
-          assigns(:problems).size.should == User::PER_PAGE
+          assigns(:problems).to_a.size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
           @user.update_attribute :per_page, 10
           get :index
-          assigns(:problems).size.should == 10
+          assigns(:problems).to_a.size.should == 10
         end
       end
 
@@ -111,11 +111,11 @@ describe ErrsController do
     context 'when logged in as an admin' do
       it "gets a paginated list of all errs" do
         sign_in Factory(:admin)
-        errs = WillPaginate::Collection.new(1,30)
+        errs = Kaminari.paginate_array((1..30).to_a)
         3.times { errs << Factory(:err).problem }
         3.times { errs << Factory(:err, :problem => Factory(:problem, :resolved => true)).problem }
         Problem.should_receive(:ordered).and_return(
-          mock('proxy', :paginate => errs)
+          mock('proxy', :page => mock('other_proxy', :per => errs))
         )
         get :all
         assigns(:problems).should == errs

@@ -16,7 +16,7 @@ class ErrsController < ApplicationController
     @selected_problems = params[:problems] || []
     respond_to do |format|
       format.html do
-        @problems = @problems.paginate(:page => params[:page], :per_page => current_user.per_page)
+        @problems = @problems.page(params[:page]).per(current_user.per_page)
       end
       format.atom
     end
@@ -24,14 +24,14 @@ class ErrsController < ApplicationController
 
   def all
     app_scope = current_user.admin? ? App.all : current_user.apps
-    @problems = Problem.for_apps(app_scope).ordered.paginate(:page => params[:page], :per_page => current_user.per_page)
+    @problems = Problem.for_apps(app_scope).ordered.page(params[:page]).per(current_user.per_page)
     @selected_problems = params[:problems] || []
   end
 
   def show
     page      = (params[:notice] || @problem.notices_count)
     page      = 1 if page.to_i.zero?
-    @notices  = @problem.notices.paginate(:page => page, :per_page => 1)
+    @notices  = @problem.notices.page(page.to_i).per(1)
     @notice   = @notices.first
     @comment = Comment.new
     if request.headers['X-PJAX']

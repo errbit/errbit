@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/bensymonds/rpm_contrib.git
+  revision: 84ee78da6d0f154468d47c9e1e6597997e157291
+  branch: mongo-1.4.0_update
+  specs:
+    rpm_contrib (2.1.6.beta1)
+      newrelic_rpm (>= 3.1.1)
+      newrelic_rpm (>= 3.1.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -80,6 +89,8 @@ GEM
     inherited_resources (1.3.0)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
     libxml-ruby (2.2.2)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
@@ -107,6 +118,7 @@ GEM
       railties (>= 3.0.0)
     multi_json (1.0.3)
     multipart-post (1.1.3)
+    newrelic_rpm (3.2.0)
     nokogiri (1.5.0)
     octokit (0.6.4)
       addressable (~> 2.2.6)
@@ -205,7 +217,6 @@ GEM
     webmock (1.7.6)
       addressable (~> 2.2, > 2.2.5)
       crack (>= 0.1.7)
-    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -223,6 +234,7 @@ DEPENDENCIES
   hoptoad_notifier (~> 2.4)
   htmlentities (~> 4.3.0)
   inherited_resources
+  kaminari
   lighthouse-api
   mongoid (= 2.1.2)
   mongoid_rails_migrations
@@ -232,6 +244,7 @@ DEPENDENCIES
   pivotal-tracker
   rails (= 3.0.10)
   ri_cal
+  rpm_contrib!
   rspec (~> 2.6)
   rspec-rails (~> 2.6)
   ruby-debug
@@ -240,4 +253,3 @@ DEPENDENCIES
   thin
   useragent (~> 0.3.1)
   webmock
-  will_paginate (>= 3)

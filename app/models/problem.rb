@@ -18,6 +18,10 @@ class Problem
   field :environment
   field :klass
   field :where
+  field :user_agents, :type => Array, :default => []
+  field :messages, :type => Array, :default => []
+  field :hosts, :type => Array, :default => []
+  field :comments_count, :type => Integer, :default => 0
 
   index :app_id
   index :app_name
@@ -123,8 +127,20 @@ class Problem
       :message => notice.message,
       :environment => notice.environment_name,
       :klass => notice.klass,
-      :where => notice.where) if notice
+      :where => notice.where,
+      :messages => messages.push(notice.message),
+      :hosts => hosts.push(notice.host),
+      :user_agents => user_agents.push(notice.user_agent_string)
+      ) if notice
     update_attributes!(attrs)
   end
+
+  def remove_cached_notice_attribures(notice)
+    messages.delete_at(messages.index(notice.message))
+    hosts.delete_at(hosts.index(notice.host))
+    user_agents.delete_at(user_agents.index(notice.user_agent_string))
+    save!
+  end
+
 end
 

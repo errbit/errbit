@@ -197,5 +197,110 @@ describe Problem do
       }.should change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
     end
   end
+
+  context "notice messages cache" do
+    before do
+      @app = Factory(:app)
+      @problem = Factory(:problem, :app => @app)
+      @err = Factory(:err, :problem => @problem)
+    end
+
+    it "#messages returns [] by default" do
+      @problem.messages.should == []
+    end
+
+    it "adding a notice adds a string to #messages" do
+      lambda {
+        Factory(:notice, :err => @err, :message => 'ERR 1')
+      }.should change(@problem, :messages).from([]).to(['ERR 1'])
+    end
+
+    it "removing a notice removes string from #messages" do
+      notice1 = Factory(:notice, :err => @err, :message => 'ERR 1')
+      lambda {
+        @err.notices.first.destroy
+        @problem.reload
+      }.should change(@problem, :messages).from(['ERR 1']).to([])
+    end
+  end
+
+  context "notice hosts cache" do
+    before do
+      @app = Factory(:app)
+      @problem = Factory(:problem, :app => @app)
+      @err = Factory(:err, :problem => @problem)
+    end
+
+    it "#hosts returns [] by default" do
+      @problem.hosts.should == []
+    end
+
+    it "adding a notice adds a string to #hosts" do
+      lambda {
+        Factory(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
+      }.should change(@problem, :hosts).from([]).to(['example.com'])
+    end
+
+    it "removing a notice removes string from #hosts" do
+      notice1 = Factory(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
+      lambda {
+        @err.notices.first.destroy
+        @problem.reload
+      }.should change(@problem, :hosts).from(['example.com']).to([])
+    end
+  end
+
+  context "notice user_agents cache" do
+    before do
+      @app = Factory(:app)
+      @problem = Factory(:problem, :app => @app)
+      @err = Factory(:err, :problem => @problem)
+    end
+
+    it "#user_agents returns [] by default" do
+      @problem.user_agents.should == []
+    end
+
+    it "adding a notice adds a string to #user_agents" do
+      lambda {
+        Factory(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
+      }.should change(@problem, :user_agents).from([]).to(['Chrome 10.0.648.204'])
+    end
+
+    it "removing a notice removes string from #user_agents" do
+      notice1 = Factory(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
+      lambda {
+        @err.notices.first.destroy
+        @problem.reload
+      }.should change(@problem, :user_agents).from(['Chrome 10.0.648.204']).to([])
+    end
+  end
+
+  context "comment counter cache" do
+    before do
+      @app = Factory(:app)
+      @problem = Factory(:problem, :app => @app)
+    end
+
+    it "#comments_count returns 0 by default" do
+      @problem.comments_count.should == 0
+    end
+
+    it "adding a comment increases #comments_count by 1" do
+      lambda {
+        Factory(:comment, :err => @problem)
+      }.should change(@problem, :comments_count).from(0).to(1)
+    end
+
+    it "removing a comment decreases #comments_count by 1" do
+      comment1 = Factory(:comment, :err => @problem)
+      lambda {
+        @problem.reload.comments.first.destroy
+        @problem.reload
+      }.should change(@problem, :comments_count).from(1).to(0)
+    end
+  end
+
+
 end
 
