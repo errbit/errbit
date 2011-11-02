@@ -11,3 +11,4 @@ config/newrelic.yml
 .rvmrc
 *~
 *.rbc
+.DS_Store
