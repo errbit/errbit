@@ -33,7 +33,7 @@ class Deploy
   protected
 
     def should_notify?
-      app.notify_on_deploys? && app.watchers.any?
+      app.notify_on_deploys? && app.notification_recipients.any?
     end
 
     def should_resolve_app_errs?
