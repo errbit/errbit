@@ -106,6 +106,24 @@ describe Notice do
     end
   end
 
+  describe "email notifications for a resolved issue" do
 
+    before do
+      Errbit::Config.per_app_email_at_notices = true
+      @app = Factory(:app_with_watcher, :email_at_notices => [1])
+      @err = Factory(:err, :problem => Factory(:problem, :app => @app, :notices_count => 100))
+    end
+
+    after do
+      Errbit::Config.per_app_email_at_notices = false
+    end
+
+    it "should send email notification after 1 notice since an error has been resolved" do
+      @err.problem.resolve!
+      Mailer.should_receive(:err_notification).
+        and_return(mock('email', :deliver => true))
+      Factory(:notice, :err => @err)
+    end
+  end
 end
 
