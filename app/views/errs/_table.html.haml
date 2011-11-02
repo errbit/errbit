@@ -26,7 +26,7 @@
           %td.message
             = link_to trucated_err_message(problem), app_err_path(problem.app, problem)
             %em= problem.where
-            - if problem.comments.any?
+            - if problem.comments_count > 0
               - comment = problem.comments.last
               %br
               .inline_comment
@@ -34,7 +34,7 @@
                 %em= truncate(comment.body, :length => 100, :separator => ' ')
           %td.latest #{time_ago_in_words(last_notice_at problem)} ago
           %td.deploy= problem.last_deploy_at ? problem.last_deploy_at.to_s(:micro) : 'n/a'
-          %td.count= link_to problem.notices.count, app_err_path(problem.app, problem)
+          %td.count= link_to problem.notices_count, app_err_path(problem.app, problem)
           - if any_issue_links
             %td.issue_link
               - if problem.issue_link.present?
@@ -44,7 +44,7 @@
         %tr
           %td{:colspan => (@app ? 5 : 6)}
             %em No errs here
-  = will_paginate @problems, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+  = paginate errs
   .tab-bar
     %ul
       %li= submit_tag 'Merge', :id => 'merge_errs', :class => 'button', 'data-action' => merge_several_errs_path

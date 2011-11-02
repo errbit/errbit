@@ -19,7 +19,7 @@ class Notice
   after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
   after_create :deliver_notification, :if => :should_notify?
   before_save :sanitize
-  before_destroy :decrease_counter_cache
+  before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
   validates_presence_of :backtrace, :server_environment, :notifier
 
@@ -31,6 +31,10 @@ class Notice
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
+  end
+
+  def user_agent_string
+    (user_agent.nil? || user_agent.none?) ? "N/A" : "#{user_agent.browser} #{user_agent.version}"
   end
 
   def environment_name
@@ -57,6 +61,17 @@ class Notice
 
   def request
     read_attribute(:request) || {}
+  end
+
+  def url
+    request['url']
+  end
+
+  def host
+    uri = url && URI.parse(url)
+    uri.blank? ? "N/A" : uri.host
+  rescue URI::InvalidURIError
+    "N/A"
   end
 
   def env_vars
@@ -94,10 +109,13 @@ class Notice
     problem.inc(:notices_count, -1) if err
   end
 
+  def remove_cached_attributes_from_problem
+    problem.remove_cached_notice_attribures(self) if err
+  end
+
   def unresolve_problem
     problem.update_attribute(:resolved, false) if problem.resolved?
   end
-
 
   def cache_attributes_on_problem
     problem.cache_notice_attributes(self)

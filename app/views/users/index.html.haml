@@ -18,5 +18,5 @@
           %td= user.username
         %td= user.email
         %td= user.admin? ? 'Y' : 'N'
-= will_paginate @users, :previous_label => '&laquo; Previous', :next_label => 'Next &raquo;'
+= paginate @users
 

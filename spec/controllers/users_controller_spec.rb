@@ -100,7 +100,7 @@ describe UsersController do
         @user.update_attribute :per_page, 2
         users = 3.times { Factory(:user) }
         get :index
-        assigns(:users).size.should == 2
+        assigns(:users).to_a.size.should == 2
       end
     end
 
