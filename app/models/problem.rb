@@ -47,7 +47,7 @@ class Problem
   end
 
   def resolve!
-    self.update_attributes!(:resolved => true)
+    self.update_attributes!(:resolved => true, :notices_count => 0)
   end
 
   def unresolve!
