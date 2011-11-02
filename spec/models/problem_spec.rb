@@ -205,14 +205,14 @@ describe Problem do
       @err = Factory(:err, :problem => @problem)
     end
 
-    it "#messages returns [] by default" do
-      @problem.messages.should == []
+    it "#messages should be empty by default" do
+      @problem.messages.should == {}
     end
 
     it "adding a notice adds a string to #messages" do
       lambda {
         Factory(:notice, :err => @err, :message => 'ERR 1')
-      }.should change(@problem, :messages).from([]).to(['ERR 1'])
+      }.should change(@problem, :messages).from({}).to({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}})
     end
 
     it "removing a notice removes string from #messages" do
@@ -220,7 +220,7 @@ describe Problem do
       lambda {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :messages).from(['ERR 1']).to([])
+      }.should change(@problem, :messages).from({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}}).to({})
     end
   end
 
@@ -231,14 +231,14 @@ describe Problem do
       @err = Factory(:err, :problem => @problem)
     end
 
-    it "#hosts returns [] by default" do
-      @problem.hosts.should == []
+    it "#hosts should be empty by default" do
+      @problem.hosts.should == {}
     end
 
     it "adding a notice adds a string to #hosts" do
       lambda {
         Factory(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
-      }.should change(@problem, :hosts).from([]).to(['example.com'])
+      }.should change(@problem, :hosts).from({}).to({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}})
     end
 
     it "removing a notice removes string from #hosts" do
@@ -246,7 +246,7 @@ describe Problem do
       lambda {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :hosts).from(['example.com']).to([])
+      }.should change(@problem, :hosts).from({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}}).to({})
     end
   end
 
@@ -257,14 +257,14 @@ describe Problem do
       @err = Factory(:err, :problem => @problem)
     end
 
-    it "#user_agents returns [] by default" do
-      @problem.user_agents.should == []
+    it "#user_agents should be empty by default" do
+      @problem.user_agents.should == {}
     end
 
     it "adding a notice adds a string to #user_agents" do
       lambda {
         Factory(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      }.should change(@problem, :user_agents).from([]).to(['Chrome 10.0.648.204'])
+      }.should change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204') => {'value' => 'Chrome 10.0.648.204', 'count' => 1}})
     end
 
     it "removing a notice removes string from #user_agents" do
@@ -272,7 +272,7 @@ describe Problem do
       lambda {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :user_agents).from(['Chrome 10.0.648.204']).to([])
+      }.should change(@problem, :user_agents).from({Digest::MD5.hexdigest('Chrome 10.0.648.204') => {'value' => 'Chrome 10.0.648.204', 'count' => 1}}).to({})
     end
   end
 
