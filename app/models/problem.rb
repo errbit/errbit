@@ -18,9 +18,9 @@ class Problem
   field :environment
   field :klass
   field :where
-  field :user_agents, :type => Array, :default => []
-  field :messages, :type => Array, :default => []
-  field :hosts, :type => Array, :default => []
+  field :user_agents, :type => Hash, :default => {}
+  field :messages,    :type => Hash, :default => {}
+  field :hosts,       :type => Hash, :default => {}
   field :comments_count, :type => Integer, :default => 0
 
   index :app_id
@@ -128,19 +128,45 @@ class Problem
       :environment => notice.environment_name,
       :klass => notice.klass,
       :where => notice.where,
-      :messages => messages.push(notice.message),
-      :hosts => hosts.push(notice.host),
-      :user_agents => user_agents.push(notice.user_agent_string)
+      :messages    => attribute_count_increase(:messages, notice.message),
+      :hosts       => attribute_count_increase(:hosts, notice.host),
+      :user_agents => attribute_count_increase(:user_agents, notice.user_agent_string)
       ) if notice
     update_attributes!(attrs)
   end
 
   def remove_cached_notice_attribures(notice)
-    messages.delete_at(messages.index(notice.message))
-    hosts.delete_at(hosts.index(notice.host))
-    user_agents.delete_at(user_agents.index(notice.user_agent_string))
-    save!
+    update_attributes!(
+      :messages    => attribute_count_descrease(:messages, notice.message),
+      :hosts       => attribute_count_descrease(:hosts, notice.host),
+      :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string)
+    )
   end
+
+  private
+    def attribute_count_increase(name, value)
+      counter, index = send(name), attribute_index(value)
+      if counter[index].nil?
+        counter[index] = {'value' => value, 'count' => 1}
+      else
+        counter[index]['count'] += 1
+      end
+      counter
+    end
+
+    def attribute_count_descrease(name, value)
+      counter, index = send(name), attribute_index(value)
+      if counter[index]['count'] > 1
+        counter[index]['count'] -= 1
+      else
+        counter.delete(index)
+      end
+      counter
+    end
+
+    def attribute_index(value)
+      Digest::MD5.hexdigest(value.to_s)
+    end
 
 end
 
