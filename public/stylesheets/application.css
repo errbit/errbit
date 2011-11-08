@@ -820,3 +820,5 @@ table.errs tr td.message .inline_comment em.commenter {
   color: #777;
 }
 
+.current.asc:after { content: ' ↑'; }
+.current.desc:after { content: ' ↓'; }
