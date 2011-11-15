@@ -7,10 +7,10 @@ module ErrsHelper
     Errbit::Config.confirm_resolve_err === false ? nil : 'Seriously?'
   end
 
-  def trucated_err_message(problem)
+  def truncated_err_message(problem)
     unless (msg = problem.message).blank?
       # Truncate & insert invisible chars so that firefox can emulate 'word-wrap: break-word' CSS rule
-      truncate(msg, :length => 300).scan(/.{1,5}/).join("&#8203;").html_safe
+      truncate(msg, :length => 300).scan(/.{1,5}/).map { |s| h(s) }.join("&#8203;").html_safe
     end
   end
 end
