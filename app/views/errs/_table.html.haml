@@ -24,7 +24,7 @@
             - else
               %span.environment= link_to problem.environment, app_path(problem.app, :environment => problem.environment)
           %td.message
-            = link_to trucated_err_message(problem), app_err_path(problem.app, problem)
+            = link_to truncated_err_message(problem), app_err_path(problem.app, problem)
             %em= problem.where
             - if problem.comments_count > 0
               - comment = problem.comments.last
