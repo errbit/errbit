@@ -391,7 +391,7 @@
       }
     );
 
-    e.preventDefault();
+    event.preventDefault();
   });
 
   $(rails.formSubmitSelector).live('ajax:beforeSend.rails', function(event) {
