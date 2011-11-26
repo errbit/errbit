@@ -3,7 +3,7 @@
   %table.errs.selectable
     %thead
       %tr
-        %th
+        %th= check_box_tag "toggle_problems_checkboxes"
         %th= link_for_sort "App"
         %th= link_for_sort "What &amp; Where".html_safe, "message"
         %th= link_for_sort "Latest", "last_notice_at"
@@ -42,7 +42,7 @@
           %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(problem.app, problem), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if problem.unresolved?
       - if errs.none?
         %tr
-          %td{:colspan => (@app ? 5 : 6)}
+          %td{:colspan => (@app ? 6 : 7)}
             %em No errs here
   = paginate errs
   .tab-bar
