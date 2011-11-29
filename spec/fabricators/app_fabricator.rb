@@ -1,5 +1,5 @@
 Fabricator(:app) do
-  name { sequence(:app_name) }
+  name { sequence(:app_name){|n| "App ##{n}"} }
 end
 
 Fabricator(:app_with_watcher, :from => :app) do
