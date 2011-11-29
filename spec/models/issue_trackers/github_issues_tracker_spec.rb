@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe GithubIssuesTracker do
   it "should create an issue on Github Issues with problem params, and set issue link for problem" do
-    notice = Factory :notice
-    tracker = Factory :github_issues_tracker, :app => notice.app
+    notice = Fabricate :notice
+    tracker = Fabricate :github_issues_tracker, :app => notice.app
     problem = notice.problem
 
     number = 5
