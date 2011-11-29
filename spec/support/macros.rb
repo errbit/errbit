@@ -45,7 +45,7 @@ def  it_requires_admin_privileges(options = {})
   context 'when signed in as a regular user' do
     before do
       sign_out :user
-      sign_in Factory(:user)
+      sign_in Fabricate(:user)
     end
 
     options[:for].each do |action, method|
