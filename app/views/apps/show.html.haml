@@ -1,6 +1,6 @@
 - content_for :title, @app.name
 - content_for :head do
-  = auto_discovery_link_tag :atom, app_url(@app, User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => "Errbit notices for #{@app.name} at #{root_url}"
+  = auto_discovery_link_tag :atom, app_path(@app, User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => "Errbit notices for #{@app.name} at #{request.host}"
   = javascript_include_tag 'apps.show'
 - content_for :meta do
   %strong Errors Caught:
