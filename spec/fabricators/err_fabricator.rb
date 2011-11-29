@@ -10,9 +10,9 @@ Fabricator :notice do
   err!
   message             'FooError: Too Much Bar'
   backtrace           { random_backtrace }
-  server_environment  'environment-name' => 'production'
+  server_environment  { {'environment-name' => 'production'} }
   request             {{ 'component' => 'foo', 'action' => 'bar' }}
-  notifier            'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com'
+  notifier            {{ 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' }}
 end
 
 def random_backtrace
