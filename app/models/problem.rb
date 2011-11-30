@@ -116,7 +116,9 @@ class Problem
       self.last_deploy_at = if (last_deploy = app.deploys.where(:environment => self.environment).last)
         last_deploy.created_at
       end
-      self.save if persisted?
+      collection.update({'_id' => self.id},
+                        {'$set' => {'app_name' => self.app_name,
+                          'last_deploy_at' => self.last_deploy_at}})
     end
   end
 

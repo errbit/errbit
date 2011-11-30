@@ -1,6 +1,29 @@
 require 'spec_helper'
 
 describe Problem do
+  describe "Fabrication" do
+    context "Fabricate(:problem)" do
+      it 'should be valid' do
+        Fabricate.build(:problem).should be_valid
+      end
+      it 'should have no comment' do
+        lambda do
+          Fabricate(:problem)
+        end.should_not change(Comment, :count)
+      end
+    end
+
+    context "Fabricate(:problem_with_comments)" do
+      it 'should be valid' do
+        Fabricate.build(:problem_with_comments).should be_valid
+      end
+      it 'should have 3 comments' do
+        lambda do
+          Fabricate(:problem_with_comments)
+        end.should change(Comment, :count).by(3)
+      end
+    end
+  end
   context '#last_notice_at' do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
