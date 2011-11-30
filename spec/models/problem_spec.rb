@@ -91,6 +91,11 @@ describe Problem do
       problem = Fabricate(:problem)
       problem.should_not be_resolved
       problem.stub!(:valid?).and_return(false)
+      ## update_attributes not test #valid? but #errors.any?
+      # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
+      er = ActiveModel::Errors.new(problem)
+      er.add_on_blank(:resolved)
+      problem.stub!(:errors).and_return(er)
       problem.should_not be_valid
       lambda {
         problem.resolve!
