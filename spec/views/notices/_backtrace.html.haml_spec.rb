@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "notices/_backtrace.html.haml" do
   describe 'missing file in backtrace' do
     before do
-      @notice = Factory(:notice, :backtrace => [{
+      @notice = Fabricate(:notice, :backtrace => [{
         'number'  => rand(999),
         'file'    => nil,
         'method'  => ActiveSupport.methods.shuffle.first
