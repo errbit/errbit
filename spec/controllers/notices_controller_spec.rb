@@ -5,7 +5,7 @@ describe NoticesController do
   context 'notices API' do
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @app = Factory(:app_with_watcher)
+      @app = Fabricate(:app_with_watcher)
       App.stub(:find_by_api_key!).and_return(@app)
       @notice = App.report_error!(@xml)
 
