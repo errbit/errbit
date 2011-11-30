@@ -10,8 +10,8 @@ describe AppsController do
   describe "GET /apps" do
     context 'when logged in as an admin' do
       it 'finds all apps' do
-        sign_in Factory(:admin)
-        3.times { Factory(:app) }
+        sign_in Fabricate(:admin)
+        3.times { Fabricate(:app) }
         apps = App.all
         get :index
         assigns(:apps).should == apps
@@ -20,12 +20,12 @@ describe AppsController do
 
     context 'when logged in as a regular user' do
       it 'finds apps the user is watching' do
-        sign_in(user = Factory(:user))
-        unwatched_app = Factory(:app)
-        watched_app1 = Factory(:app)
-        watched_app2 = Factory(:app)
-        Factory(:user_watcher, :user => user, :app => watched_app1)
-        Factory(:user_watcher, :user => user, :app => watched_app2)
+        sign_in(user = Fabricate(:user))
+        unwatched_app = Fabricate(:app)
+        watched_app1 = Fabricate(:app)
+        watched_app2 = Fabricate(:app)
+        Fabricate(:user_watcher, :user => user, :app => watched_app1)
+        Fabricate(:user_watcher, :user => user, :app => watched_app2)
         get :index
         assigns(:apps).should include(watched_app1, watched_app2)
         assigns(:apps).should_not include(unwatched_app)
@@ -36,10 +36,10 @@ describe AppsController do
   describe "GET /apps/:id" do
     context 'logged in as an admin' do
       before(:each) do
-        @user = Factory(:admin)
+        @user = Fabricate(:admin)
         sign_in @user
-        @app = Factory(:app)
-        @problem = Factory(:notice, :err => Factory(:err, :problem => Factory(:problem, :app => @app))).problem
+        @app = Fabricate(:app)
+        @problem = Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => @app))).problem
       end
 
       it 'finds the app' do
@@ -48,7 +48,7 @@ describe AppsController do
       end
 
       it "should not raise errors for app with err without notices" do
-        Factory(:err, :problem => Factory(:problem, :app => @app))
+        Fabricate(:err, :problem => Fabricate(:problem, :app => @app))
         lambda { get :show, :id => @app.id }.should_not raise_error
       end
 
@@ -60,7 +60,7 @@ describe AppsController do
 
       context "pagination" do
         before(:each) do
-          35.times { Factory(:err, :problem => Factory(:problem, :app => @app)) }
+          35.times { Fabricate(:err, :problem => Fabricate(:problem, :app => @app)) }
         end
 
         it "should have default per_page value for user" do
@@ -77,8 +77,8 @@ describe AppsController do
 
       context 'with resolved errors' do
         before(:each) do
-          resolved_problem = Factory(:problem, :app => @app)
-          Factory(:notice, :err => Factory(:err, :problem => resolved_problem))
+          resolved_problem = Fabricate(:problem, :app => @app)
+          Fabricate(:notice, :err => Fabricate(:err, :problem => resolved_problem))
           resolved_problem.resolve!
         end
 
@@ -101,7 +101,7 @@ describe AppsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Factory.create(:problem, :app => @app, :environment => environments[i % environments.length])
+            Fabricate(:problem, :app => @app, :environment => environments[i % environments.length])
           end
         end
 
@@ -144,17 +144,17 @@ describe AppsController do
 
     context 'logged in as a user' do
       it 'finds the app if the user is watching it' do
-        user = Factory(:user)
-        app = Factory(:app)
-        watcher = Factory(:user_watcher, :app => app, :user => user)
+        user = Fabricate(:user)
+        app = Fabricate(:app)
+        watcher = Fabricate(:user_watcher, :app => app, :user => user)
         sign_in user
         get :show, :id => app.id
         assigns(:app).should == app
       end
 
       it 'does not find the app if the user is not watching it' do
-        sign_in Factory(:user)
-        app = Factory(:app)
+        sign_in Fabricate(:user)
+        app = Fabricate(:app)
         lambda {
           get :show, :id => app.id
         }.should raise_error(Mongoid::Errors::DocumentNotFound)
@@ -164,7 +164,7 @@ describe AppsController do
 
   context 'logged in as an admin' do
     before do
-      sign_in Factory(:admin)
+      sign_in Fabricate(:admin)
     end
 
     describe "GET /apps/new" do
@@ -176,7 +176,7 @@ describe AppsController do
       end
 
       it "should copy attributes from an existing app" do
-        @app = Factory(:app, :name => "do not copy",
+        @app = Fabricate(:app, :name => "do not copy",
                              :github_url => "github.com/test/example")
         get :new, :copy_attributes_from => @app.id
         assigns(:app).should be_a(App)
@@ -188,7 +188,7 @@ describe AppsController do
 
     describe "GET /apps/:id/edit" do
       it 'finds the correct app' do
-        app = Factory(:app)
+        app = Fabricate(:app)
         get :edit, :id => app.id
         assigns(:app).should == app
       end
@@ -196,7 +196,7 @@ describe AppsController do
 
     describe "POST /apps" do
       before do
-        @app = Factory(:app)
+        @app = Fabricate(:app)
         App.stub(:new).and_return(@app)
       end
 
@@ -219,7 +219,7 @@ describe AppsController do
 
     describe "PUT /apps/:id" do
       before do
-        @app = Factory(:app)
+        @app = Fabricate(:app)
       end
 
       context "when the update is successful" do
@@ -257,7 +257,7 @@ describe AppsController do
         end
         context "failed parsing of CSV" do
           it "should set the default value" do
-            @app = Factory(:app, :email_at_notices => [1, 2, 3, 4])
+            @app = Fabricate(:app, :email_at_notices => [1, 2, 3, 4])
             put :update, :id => @app.id, :app => { :email_at_notices => 'asdf, -1,0,foobar,gd00,0,abc' }
             @app.reload
             @app.email_at_notices.should == Errbit::Config.email_at_notices
@@ -320,7 +320,7 @@ describe AppsController do
 
     describe "DELETE /apps/:id" do
       before do
-        @app = Factory(:app)
+        @app = Fabricate(:app)
         App.stub(:find).with(@app.id).and_return(@app)
       end
 

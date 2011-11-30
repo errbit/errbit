@@ -6,7 +6,7 @@ describe Mailer do
     include EmailSpec::Matchers
 
     before do
-      @notice = Factory(:notice, :message => "class < ActionController::Base")
+      @notice = Fabricate(:notice, :message => "class < ActionController::Base")
       @email = Mailer.err_notification(@notice).deliver
     end
 

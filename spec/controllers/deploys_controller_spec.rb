@@ -12,7 +12,7 @@ describe DeploysController do
         'scm_revision'   => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
         'message'        => 'johns first deploy'
       }
-      @app = Factory(:app_with_watcher, :notify_on_deploys => true, :api_key => 'APIKEY')
+      @app = Fabricate(:app_with_watcher, :notify_on_deploys => true, :api_key => 'APIKEY')
     end
 
     it 'finds the app via the api key' do
@@ -30,7 +30,7 @@ describe DeploysController do
           :revision     => '19d77837eef37902cf5df7e4445c85f392a8d0d5',
           :message      => 'johns first deploy'
 
-        }).and_return(Factory(:deploy))
+        }).and_return(Fabricate(:deploy))
       post :create, :deploy => @params, :api_key => 'APIKEY'
     end
 
@@ -45,8 +45,8 @@ describe DeploysController do
 
   context "GET #index" do
     before(:each) do
-      @deploy = Factory :deploy
-      sign_in Factory(:admin)
+      @deploy = Fabricate :deploy
+      sign_in Fabricate(:admin)
       get :index, :app_id => @deploy.app.id
     end
 
