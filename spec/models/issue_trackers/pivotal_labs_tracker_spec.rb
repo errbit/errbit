@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe PivotalLabsTracker do
   it "should create an issue on Pivotal Tracker with problem params, and set issue link for problem" do
-    notice = Factory :notice
-    tracker = Factory :pivotal_labs_tracker, :app => notice.app, :project_id => 10
+    notice = Fabricate :notice
+    tracker = Fabricate :pivotal_labs_tracker, :app => notice.app, :project_id => 10
     problem = notice.problem
 
     story_id = 5

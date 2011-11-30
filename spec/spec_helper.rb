@@ -10,6 +10,10 @@ require 'webmock/rspec'
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
+Fabrication.configure do |config|
+  fabricator_dir = "spec/fabricators"
+end
+
 RSpec.configure do |config|
   config.mock_with :rspec
   config.include Devise::TestHelpers, :type => :controller

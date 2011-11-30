@@ -14,16 +14,16 @@ describe UsersController do
 
   context 'Signed in as a regular user' do
     before do
-      sign_in @user = Factory(:user)
+      sign_in @user = Fabricate(:user)
     end
-    
+
     it "should set a time zone" do
       Time.zone.should.to_s == @user.time_zone
     end
 
     context "GET /users/:other_id/edit" do
       it "redirects to the home page" do
-        get :edit, :id => Factory(:user).id
+        get :edit, :id => Fabricate(:user).id
         response.should redirect_to(root_path)
       end
     end
@@ -47,7 +47,7 @@ describe UsersController do
 
     context "PUT /users/:other_id" do
       it "redirects to the home page" do
-        put :update, :id => Factory(:user).id
+        put :update, :id => Fabricate(:user).id
         response.should redirect_to(root_path)
       end
     end
@@ -73,7 +73,7 @@ describe UsersController do
           put :update, :id => @user.to_param, :user => {:per_page => 555}
           @user.reload.per_page.should == 555
         end
-        
+
         it "should be able to set time_zone option" do
           put :update, :id => @user.to_param, :user => {:time_zone => "Warsaw"}
           @user.reload.time_zone.should == "Warsaw"
@@ -91,14 +91,14 @@ describe UsersController do
 
   context 'Signed in as an admin' do
     before do
-      @user = Factory(:admin)
+      @user = Fabricate(:admin)
       sign_in @user
     end
 
     context "GET /users" do
       it 'paginates all users' do
         @user.update_attribute :per_page, 2
-        users = 3.times { Factory(:user) }
+        users = 3.times { Fabricate(:user) }
         get :index
         assigns(:users).to_a.size.should == 2
       end
@@ -106,7 +106,7 @@ describe UsersController do
 
     context "GET /users/:id" do
       it 'finds the user' do
-        user = Factory(:user)
+        user = Fabricate(:user)
         get :show, :id => user.id
         assigns(:user).should == user
       end
@@ -122,7 +122,7 @@ describe UsersController do
 
     context "GET /users/:id/edit" do
       it 'finds the user' do
-        user = Factory(:user)
+        user = Fabricate(:user)
         get :edit, :id => user.id
         assigns(:user).should == user
       end
@@ -131,7 +131,7 @@ describe UsersController do
     context "POST /users" do
       context "when the create is successful" do
         before do
-          @attrs = {:user => Factory.attributes_for(:user)}
+          @attrs = {:user => Fabricate.attributes_for(:user)}
         end
 
         it "sets a message to display" do
@@ -159,7 +159,7 @@ describe UsersController do
 
       context "when the create is unsuccessful" do
         before do
-          @user = Factory(:user)
+          @user = Fabricate(:user)
           User.should_receive(:new).and_return(@user)
           @user.should_receive(:save).and_return(false)
         end
@@ -174,7 +174,7 @@ describe UsersController do
     context "PUT /users/:id" do
       context "when the update is successful" do
         before do
-          @user = Factory(:user)
+          @user = Fabricate(:user)
         end
 
         it "sets a message to display" do
@@ -196,7 +196,7 @@ describe UsersController do
 
       context "when the update is unsuccessful" do
         before do
-          @user = Factory(:user)
+          @user = Fabricate(:user)
         end
 
         it "renders the edit page" do
@@ -208,7 +208,7 @@ describe UsersController do
 
     context "DELETE /users/:id" do
       before do
-        @user = Factory(:user)
+        @user = Fabricate(:user)
       end
 
       it "destroys the user" do

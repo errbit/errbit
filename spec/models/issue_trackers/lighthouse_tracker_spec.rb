@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe LighthouseTracker do
   it "should create an issue on Lighthouse with problem params, and set issue link for problem" do
-    notice = Factory :notice
-    tracker = Factory :lighthouse_tracker, :app => notice.app
+    notice = Fabricate :notice
+    tracker = Fabricate :lighthouse_tracker, :app => notice.app
     problem = notice.problem
 
     number = 5

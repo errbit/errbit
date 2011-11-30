@@ -45,6 +45,7 @@ module Errbit
       g.orm             :mongoid
       g.template_engine :haml
       g.test_framework  :rspec, :fixture => false
+      g.fixture_replacement :fabrication
     end
 
     # IssueTracker subclasses use inheritance, so preloading models provides querying consistency in dev mode.
