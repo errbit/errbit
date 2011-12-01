@@ -202,11 +202,10 @@ describe Problem do
     end
   end
 
-
   context "#last_deploy_at" do
     before do
       @app = Fabricate(:app)
-      @last_deploy = 10.days.ago.localtime.round(0)
+      @last_deploy = Time.at(10.days.ago.localtime.to_i)
       deploy = Fabricate(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
     end
 
@@ -217,7 +216,7 @@ describe Problem do
 
     it "is updated when a deploy is created" do
       problem = Fabricate(:problem, :app => @app, :environment => "production")
-      next_deploy = 5.minutes.ago.localtime.round(0)
+      next_deploy = Time.at(5.minutes.ago.localtime.to_i)
       lambda {
         @deploy = Fabricate(:deploy, :app => @app, :created_at => next_deploy)
         problem.reload
