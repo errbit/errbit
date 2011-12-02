@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe MingleTracker do
   it "should create an issue on Mingle with problem params, and set issue link for problem" do
-    notice = Factory :notice
-    tracker = Factory :mingle_tracker, :app => notice.app
+    notice = Fabricate :notice
+    tracker = Fabricate :mingle_tracker, :app => notice.app
     problem = notice.problem
 
     number = 5

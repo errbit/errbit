@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe "errs/show.html.haml" do
   before do
-    err = Factory(:err)
+    err = Fabricate(:err)
     problem = err.problem
-    comment = Factory(:comment)
+    comment = Fabricate(:comment)
     assign :problem, problem
     assign :comment, comment
     assign :app, problem.app
     assign :notices, err.notices.page(1).per(1)
     assign :notice, err.notices.first
-    controller.stub(:current_user) { Factory(:user) }
+    controller.stub(:current_user) { Fabricate(:user) }
   end
 
   describe "content_for :action_bar" do
@@ -46,7 +46,7 @@ describe "errs/show.html.haml" do
     end
 
     it 'should display comments and new comment form when no issue tracker' do
-      problem = Factory(:problem_with_comments)
+      problem = Fabricate(:problem_with_comments)
       assign :problem, problem
       assign :app, problem.app
       render
@@ -63,14 +63,15 @@ describe "errs/show.html.haml" do
       end
 
       it 'should not display the comments section' do
-        problem = Factory(:problem)
+        problem = Fabricate(:problem)
         with_issue_tracker(problem)
         render
         view.instance_variable_get(:@_content_for)[:comments].should be_blank
       end
 
       it 'should display existing comments' do
-        problem = Factory(:problem_with_comments)
+        problem = Fabricate(:problem_with_comments)
+        problem.reload
         with_issue_tracker(problem)
         render
         comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])

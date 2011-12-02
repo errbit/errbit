@@ -7,17 +7,17 @@ describe ErrsController do
   },
   :params => {:app_id => 'dummyid', :id => 'dummyid'}
 
-  let(:app) { Factory(:app) }
-  let(:err) { Factory(:err, :problem => Factory(:problem, :app => app, :environment => "production")) }
+  let(:app) { Fabricate(:app) }
+  let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production")) }
 
 
   describe "GET /errs" do
     render_views
     context 'when logged in as an admin' do
       before(:each) do
-        @user = Factory(:admin)
+        @user = Fabricate(:admin)
         sign_in @user
-        @problem = Factory(:notice, :err => Factory(:err, :problem => Factory(:problem, :app => app, :environment => "production"))).problem
+        @problem = Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production"))).problem
       end
 
       it "should successfully list errs" do
@@ -34,7 +34,7 @@ describe ErrsController do
 
       context "pagination" do
         before(:each) do
-          35.times { Factory :err }
+          35.times { Fabricate :err }
         end
 
         it "should have default per_page value for user" do
@@ -53,7 +53,7 @@ describe ErrsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Factory(:problem, :environment => environments[i % environments.length])
+            Fabricate(:problem, :environment => environments[i % environments.length])
           end
         end
 
@@ -96,10 +96,10 @@ describe ErrsController do
 
     context 'when logged in as a user' do
       it 'gets a paginated list of unresolved errs for the users apps' do
-        sign_in(user = Factory(:user))
-        unwatched_err = Factory(:err)
-        watched_unresolved_err = Factory(:err, :problem => Factory(:problem, :app => Factory(:user_watcher, :user => user).app, :resolved => false))
-        watched_resolved_err = Factory(:err, :problem => Factory(:problem, :app => Factory(:user_watcher, :user => user).app, :resolved => true))
+        sign_in(user = Fabricate(:user))
+        unwatched_err = Fabricate(:err)
+        watched_unresolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false))
+        watched_resolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true))
         get :index
         assigns(:problems).should include(watched_unresolved_err.problem)
         assigns(:problems).should_not include(unwatched_err.problem, watched_resolved_err.problem)
@@ -110,10 +110,10 @@ describe ErrsController do
   describe "GET /errs/all" do
     context 'when logged in as an admin' do
       it "gets a paginated list of all errs" do
-        sign_in Factory(:admin)
+        sign_in Fabricate(:admin)
         errs = Kaminari.paginate_array((1..30).to_a)
-        3.times { errs << Factory(:err).problem }
-        3.times { errs << Factory(:err, :problem => Factory(:problem, :resolved => true)).problem }
+        3.times { errs << Fabricate(:err).problem }
+        3.times { errs << Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem }
         Problem.should_receive(:ordered).and_return(
           mock('proxy', :page => mock('other_proxy', :per => errs))
         )
@@ -124,10 +124,10 @@ describe ErrsController do
 
     context 'when logged in as a user' do
       it 'gets a paginated list of all errs for the users apps' do
-        sign_in(user = Factory(:user))
-        unwatched_err = Factory(:problem)
-        watched_unresolved_err = Factory(:problem, :app => Factory(:user_watcher, :user => user).app, :resolved => false)
-        watched_resolved_err = Factory(:problem, :app => Factory(:user_watcher, :user => user).app, :resolved => true)
+        sign_in(user = Fabricate(:user))
+        unwatched_err = Fabricate(:problem)
+        watched_unresolved_err = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false)
+        watched_resolved_err = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true)
         get :all
         assigns(:problems).should include(watched_resolved_err, watched_unresolved_err)
         assigns(:problems).should_not include(unwatched_err)
@@ -139,12 +139,12 @@ describe ErrsController do
     render_views
 
     before do
-      3.times { Factory(:notice, :err => err)}
+      3.times { Fabricate(:notice, :err => err)}
     end
 
     context 'when logged in as an admin' do
       before do
-        sign_in Factory(:admin)
+        sign_in Fabricate(:admin)
       end
 
       it "finds the app" do
@@ -166,23 +166,23 @@ describe ErrsController do
         let(:button_matcher) { match(/create issue/) }
 
         it "should not exist for err's app without issue tracker" do
-          err = Factory :err
+          err = Fabricate :err
           get :show, :app_id => err.app.id, :id => err.problem.id
 
           response.body.should_not button_matcher
         end
 
         it "should exist for err's app with issue tracker" do
-          tracker = Factory(:lighthouse_tracker)
-          err = Factory(:err, :problem => Factory(:problem, :app => tracker.app))
+          tracker = Fabricate(:lighthouse_tracker)
+          err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app))
           get :show, :app_id => err.app.id, :id => err.problem.id
 
           response.body.should button_matcher
         end
 
         it "should not exist for err with issue_link" do
-          tracker = Factory(:lighthouse_tracker)
-          err = Factory(:err, :problem => Factory(:problem, :app => tracker.app, :issue_link => "http://some.host"))
+          tracker = Fabricate(:lighthouse_tracker)
+          err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app, :issue_link => "http://some.host"))
           get :show, :app_id => err.app.id, :id => err.problem.id
 
           response.body.should_not button_matcher
@@ -192,11 +192,11 @@ describe ErrsController do
 
     context 'when logged in as a user' do
       before do
-        sign_in(@user = Factory(:user))
-        @unwatched_err = Factory(:err)
-        @watched_app = Factory(:app)
-        @watcher = Factory(:user_watcher, :user => @user, :app => @watched_app)
-        @watched_err = Factory(:err, :problem => Factory(:problem, :app => @watched_app))
+        sign_in(@user = Fabricate(:user))
+        @unwatched_err = Fabricate(:err)
+        @watched_app = Fabricate(:app)
+        @watcher = Fabricate(:user_watcher, :user => @user, :app => @watched_app)
+        @watched_err = Fabricate(:err, :problem => Fabricate(:problem, :app => @watched_app))
       end
 
       it 'finds the err if the user is watching the app' do
@@ -214,9 +214,9 @@ describe ErrsController do
 
   describe "PUT /apps/:app_id/errs/:id/resolve" do
     before do
-      sign_in Factory(:admin)
+      sign_in Fabricate(:admin)
 
-      @problem = Factory(:err)
+      @problem = Fabricate(:err)
       App.stub(:find).with(@problem.app.id).and_return(@problem.app)
       @problem.app.problems.stub(:find).and_return(@problem.problem)
       @problem.problem.stub(:resolve!)
@@ -256,13 +256,13 @@ describe ErrsController do
     render_views
 
     before(:each) do
-      sign_in Factory(:admin)
+      sign_in Fabricate(:admin)
     end
 
     context "successful issue creation" do
       context "lighthouseapp tracker" do
-        let(:notice) { Factory :notice }
-        let(:tracker) { Factory :lighthouse_tracker, :app => notice.app }
+        let(:notice) { Fabricate :notice }
+        let(:tracker) { Fabricate :lighthouse_tracker, :app => notice.app }
         let(:problem) { notice.problem }
 
         before(:each) do
@@ -283,7 +283,7 @@ describe ErrsController do
     end
 
     context "absent issue tracker" do
-      let(:problem) { Factory :problem }
+      let(:problem) { Fabricate :problem }
 
       before(:each) do
         post :create_issue, :app_id => problem.app.id, :id => problem.id
@@ -300,8 +300,8 @@ describe ErrsController do
 
     context "error during request to a tracker" do
       context "lighthouseapp tracker" do
-        let(:tracker) { Factory :lighthouse_tracker }
-        let(:err) { Factory(:err, :problem => Factory(:problem, :app => tracker.app)) }
+        let(:tracker) { Fabricate :lighthouse_tracker }
+        let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app)) }
 
         before(:each) do
           stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").to_return(:status => 500)
@@ -322,11 +322,11 @@ describe ErrsController do
 
   describe "DELETE /apps/:app_id/errs/:id/unlink_issue" do
     before(:each) do
-      sign_in Factory(:admin)
+      sign_in Fabricate(:admin)
     end
 
     context "err with issue" do
-      let(:err) { Factory(:err, :problem => Factory(:problem, :issue_link => "http://some.host")) }
+      let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :issue_link => "http://some.host")) }
 
       before(:each) do
         delete :unlink_issue, :app_id => err.app.id, :id => err.problem.id
@@ -343,7 +343,7 @@ describe ErrsController do
     end
 
     context "err without issue" do
-      let(:err) { Factory :err }
+      let(:err) { Fabricate :err }
 
       before(:each) do
         delete :unlink_issue, :app_id => err.app.id, :id => err.problem.id
@@ -361,12 +361,12 @@ describe ErrsController do
     render_views
 
     before(:each) do
-      sign_in Factory(:admin)
+      sign_in Fabricate(:admin)
     end
 
     context "successful comment creation" do
-      let(:problem) { Factory(:problem) }
-      let(:user) { Factory(:user) }
+      let(:problem) { Fabricate(:problem) }
+      let(:user) { Fabricate(:user) }
 
       before(:each) do
         post :create_comment, :app_id => problem.app.id, :id => problem.id,
@@ -388,15 +388,15 @@ describe ErrsController do
     render_views
 
     before(:each) do
-      sign_in Factory(:admin)
+      sign_in Fabricate(:admin)
     end
 
     context "successful comment deletion" do
-      let(:problem) { Factory(:problem_with_comments) }
-      let(:comment) { problem.comments.first }
+      let(:problem) { Fabricate(:problem_with_comments) }
+      let(:comment) { problem.reload.comments.first }
 
       before(:each) do
-        delete :destroy_comment, :app_id => problem.app.id, :id => problem.id, :comment_id => comment.id
+        delete :destroy_comment, :app_id => problem.app.id, :id => problem.id, :comment_id => comment.id.to_s
         problem.reload
       end
 
@@ -412,9 +412,9 @@ describe ErrsController do
 
   describe "Bulk Actions" do
     before(:each) do
-      sign_in Factory(:admin)
-      @problem1 = Factory(:err, :problem => Factory(:problem, :resolved => true)).problem
-      @problem2 = Factory(:err, :problem => Factory(:problem, :resolved => false)).problem
+      sign_in Fabricate(:admin)
+      @problem1 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem
+      @problem2 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => false)).problem
     end
 
     it "should apply to multiple problems" do
