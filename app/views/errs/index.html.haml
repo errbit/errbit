@@ -1,6 +1,6 @@
 - content_for :title, 'Unresolved Errors'
 - content_for :head do
-  = auto_discovery_link_tag :atom, errs_url(User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => "Errbit notices at #{root_url}"
+  = auto_discovery_link_tag :atom, errs_path(User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => "Errbit notices at #{request.host}"
 - content_for :action_bar do
   = link_to 'show resolved', all_errs_path, :class => 'button'
 = render 'table', :errs => @problems
