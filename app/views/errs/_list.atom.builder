@@ -1,4 +1,4 @@
-feed.updated(@problems.first.created_at)
+feed.updated(@problems.first.try(:created_at) || Time.now)
 
 for problem in @problems
   notice = problem.notices.first
