@@ -205,7 +205,7 @@ If your Errbit instance has logged an error, we would appreciate a bug report on
 You can post this manually at [https://github.com/errbit/errbit/issues](https://github.com/errbit/errbit/issues),
 or you can set up the Github Issues tracker for your **Self.Errbit** app:
 
-  1. Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake hoptoad:test`.)
+  1. Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake airbrake:test`.)
 
   2. In the **Issue Tracker** section, click **Github Issues**.
 
