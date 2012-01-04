@@ -288,11 +288,12 @@ describe AppsController do
           context tracker_klass do
             it "should save tracker params" do
               params = tracker_klass::Fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
-              params['ticket_properties'] = "card_type = defect" if tracker_klass == MingleTracker
-              params['type'] = tracker_klass.to_s
+              params[:ticket_properties] = "card_type = defect" if tracker_klass == MingleTracker
+              params[:type] = tracker_klass.to_s
               put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
               @app.reload
+
               tracker = @app.issue_tracker
               tracker.should be_a(tracker_klass)
               tracker_klass::Fields.each do |field, field_info|
@@ -306,7 +307,7 @@ describe AppsController do
             it "should show validation notice when sufficient params are not present" do
               # Leave out one required param
               params = tracker_klass::Fields[1..-1].inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
-              params['type'] = tracker_klass.to_s
+              params[:type] = tracker_klass.to_s
               put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
               @app.reload
