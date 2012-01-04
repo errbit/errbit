@@ -10,8 +10,8 @@ class AppsController < InheritedResources::Base
 
         @sort = params[:sort]
         @order = params[:order]
-        @sort = "app" unless %w{message last_notice_at last_deploy_at count}.member?(@sort)
-        @order = "asc" unless (@order == "desc")
+        @sort = "last_notice_at" unless %w{message app last_deploy_at count}.member?(@sort)
+        @order = "desc" unless (@order == "asc")
 
         @problems = resource.problems
         @problems = @problems.unresolved unless @all_errs
