@@ -11,6 +11,9 @@
 # The host of your errbit server
 host: errbit.example.com
 
+# Enforce SSL connections
+enforce_ssl: false
+
 # The email address which email notifications
 # will be sent from.
 email_from: errbit@example.com
