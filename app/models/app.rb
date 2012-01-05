@@ -124,7 +124,11 @@ class App
   end
 
   def notification_recipients
-    notify_all_users ? User.all.map(&:email).reject(&:blank?) : watchers.map(&:address)
+    if notify_all_users
+      (User.all.map(&:email).reject(&:blank?) + watchers.map(&:address)).uniq
+    else
+      watchers.map(&:address)
+    end
   end
 
   # Copy app attributes from another app.

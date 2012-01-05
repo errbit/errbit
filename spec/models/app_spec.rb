@@ -88,12 +88,12 @@ describe App do
   end
 
   context "notification recipients" do
-    it "should send notices to either all users, or the configured watchers" do
+    it "should send notices to either all users plus watchers, or the configured watchers" do
       @app = Fabricate(:app)
       3.times { Fabricate(:user) }
       5.times { Fabricate(:watcher, :app => @app) }
       @app.notify_all_users = true
-      @app.notification_recipients.size.should == 3
+      @app.notification_recipients.size.should == 8
       @app.notify_all_users = false
       @app.notification_recipients.size.should == 5
     end
