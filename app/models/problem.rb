@@ -2,14 +2,6 @@
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.
 
-## Add methode nan? in Time because needed by #max(:created_at)
-#
-# Fix on  Mongoid > 2.3.x with commit :
-# https://github.com/mongoid/mongoid/commit/5481556e24480f0a1783f85d6b5b343b0cef7192
-class Time
-  def nan?; false ;end
-end
-
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -132,7 +124,7 @@ class Problem
 
   def cache_notice_attributes(notice=nil)
     notice ||= notices.first
-    attrs = {:last_notice_at => notices.max(:created_at)}
+    attrs = {:last_notice_at => notices.order_by([:created_at, :asc]).last.try(:created_at)}
     attrs.merge!(
       :message => notice.message,
       :environment => notice.environment_name,
