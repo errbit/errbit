@@ -14,6 +14,7 @@ class Err
 
   belongs_to :problem
   index :problem_id
+  index :klass
 
   has_many :notices, :inverse_of => :err, :dependent => :destroy
 

@@ -13,8 +13,14 @@ class Notice
   field :klass
 
   belongs_to :err
-  index :err_id
   index :created_at
+  index(
+    [
+      [ :err_id, Mongo::ASCENDING ],
+      [ :created_at, Mongo::ASCENDING ],
+      [ :_id, Mongo::ASCENDING ]
+    ]
+  )
 
   after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
   after_create :deliver_notification, :if => :should_notify?
