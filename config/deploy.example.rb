@@ -11,13 +11,13 @@ config = YAML.load_file('config/config.yml')['deployment'] || {}
 require 'bundler/capistrano'
 
 set :application, "errbit"
-set :repository,  config['repository'] || "http://github.com/errbit/errbit.git"
+set :repository,  config['repository']
 
-role :web, config['hosts']['web'] || "errbit.example.com"
-role :app, config['hosts']['app'] || "errbit.example.com"
-role :db,  config['hosts']['db']  || "errbit.example.com", :primary => true
+role :web, config['hosts']['web']
+role :app, config['hosts']['app']
+role :db,  config['hosts']['db'], :primary => true
 
-set :user, config['user'] || :deploy
+set :user, config['user']
 set :use_sudo, false
 if config.has_key?('ssh_key')
   set :ssh_options,      { :forward_agent => true, :keys => [ config['ssh_key'] ] }
@@ -26,7 +26,7 @@ else
 end
 default_run_options[:pty] = true
 
-set :deploy_to, config['deploy_to'] || "/var/www/apps/#{application}"
+set :deploy_to, config['deploy_to']
 set :deploy_via, :remote_cache
 set :copy_cache, true
 set :copy_exclude, [".git"]
