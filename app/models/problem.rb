@@ -158,7 +158,7 @@ class Problem
 
     def attribute_count_descrease(name, value)
       counter, index = send(name), attribute_index(value)
-      if counter[index]['count'] > 1
+      if counter[index] && counter[index]['count'] > 1
         counter[index]['count'] -= 1
       else
         counter.delete(index)

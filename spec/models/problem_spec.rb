@@ -248,6 +248,13 @@ describe Problem do
         @problem.reload
       }.should change(@problem, :messages).from({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}}).to({})
     end
+
+    it "removing a notice from the problem with broken counter should not raise an error" do
+      notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
+      @problem.messages = {}
+      @problem.save!
+      expect {@err.notices.first.destroy}.not_to raise_error
+    end
   end
 
   context "notice hosts cache" do
