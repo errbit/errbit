@@ -12,7 +12,7 @@
       %td= notice.where
     %tr
       %th Occurred
-      %td= notice.created_at.to_s(:micro)
+      %td= notice.created_at.to_s(:precise)
     %tr
       %th Similar
       %td= problem.notices_count - 1
