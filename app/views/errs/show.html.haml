@@ -9,7 +9,7 @@
   %strong Environment:
   = @problem.environment
   %strong Last Notice:
-  = last_notice_at(@problem).to_s(:micro)
+  = last_notice_at(@problem).to_s(:precise)
 - content_for :action_bar do
   - if current_user.authentication_token
     %span= link_to 'iCal', app_err_path(:app_id => @app.id, :id => @problem.id, :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
