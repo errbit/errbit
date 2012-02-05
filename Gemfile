@@ -20,6 +20,8 @@ gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari'
 gem 'rack-ssl-enforcer'
+gem 'heroku'
+gem 'newrelic_rpm'
 
 platform :ruby do
   gem 'mongo', '= 1.3.1'
