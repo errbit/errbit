@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iterations type="array">
+  <iteration>
+    <id type="integer">4</id>
+    <number type="integer">4</number>
+    <start type="datetime">2010/08/02 05:00:00 UTC</start>
+    <finish type="datetime">2010/08/09 05:00:00 UTC</finish>
+    <stories type="array">
+      <story>
+        <id type="integer">4460038</id>
+        <project_id type="integer">102622</project_id>
+        <story_type>feature</story_type>
+        <url>http://www.pivotaltracker.com/story/show/4460038</url>
+        <estimate type="integer">1</estimate>
+        <current_state>unstarted</current_state>
+        <description>This is a story that has comments.</description>
+        <name>This is for comments</name>
+        <requested_by>Jon Mischo</requested_by>
+        <created_at type="datetime">2010/07/27 21:53:16 UTC</created_at>
+        <updated_at type="datetime">2010/07/27 22:20:48 UTC</updated_at>
+        <notes type="array">
+          <note>
+            <id type="integer">2111593</id>
+            <text>This is a comment...whee!</text>
+            <author>Jon</author>
+            <noted_at type="datetime">2010/07/27 22:15:48 UTC</noted_at>
+          </note>
+          <note>
+            <id type="integer">2128955</id>
+            <text>Test note</text>
+            <author>Test Suite Access</author>
+            <noted_at type="datetime">2010/07/29 18:15:09 UTC</noted_at>
+          </note>
+          <note>
+            <id type="integer">2128959</id>
+            <text>Test note</text>
+            <author>Test Suite Access</author>
+            <noted_at type="datetime">2010/07/29 18:16:12 UTC</noted_at>
+          </note>
+          <note>
+            <id type="integer">2129077</id>
+            <text>Test note</text>
+            <author>Test Suite Access</author>
+            <noted_at type="datetime">2010/07/29 18:22:26 UTC</noted_at>
+          </note>
+          <note>
+            <id type="integer">2129374</id>
+            <text>Test note</text>
+            <author>Test Suite Access</author>
+            <noted_at type="datetime">2010/07/29 18:55:44 UTC</noted_at>
+          </note>
+        </notes>
+      </story>
+    </stories>
+  </iteration>
+  <iteration>
+    <id type="integer">5</id>
+    <number type="integer">5</number>
+    <start type="datetime">2010/08/09 05:00:00 UTC</start>
+    <finish type="datetime">2010/08/16 05:00:00 UTC</finish>
+    <stories type="array">
+      <story>
+        <id type="integer">4460598</id>
+        <project_id type="integer">102622</project_id>
+        <story_type>feature</story_type>
+        <url>http://www.pivotaltracker.com/story/show/4460598</url>
+        <estimate type="integer">3</estimate>
+        <current_state>unstarted</current_state>
+        <description>This story has attachments.</description>
+        <name>Story with attachments</name>
+        <requested_by>Jon Mischo</requested_by>
+        <created_at type="datetime">2010/07/27 22:33:13 UTC</created_at>
+        <updated_at type="datetime">2010/07/27 22:33:28 UTC</updated_at>
+        <attachments type="array">
+          <attachment>
+            <id type="integer">491576</id>
+            <filename>LICENSE</filename>
+            <description></description>
+            <uploaded_by>Jon</uploaded_by>
+            <uploaded_at type="datetime">2010/07/27 22:34:23 UTC</uploaded_at>
+            <url>http://www.pivotaltracker.com/resource/download/491576</url>
+          </attachment>
+          <attachment>
+            <id type="integer">493019</id>
+            <filename>README.rdoc</filename>
+            <description>README file from api gem</description>
+            <uploaded_by>Jon</uploaded_by>
+            <uploaded_at type="datetime">2010/07/28 15:16:18 UTC</uploaded_at>
+            <url>http://www.pivotaltracker.com/resource/download/493019</url>
+          </attachment>
+        </attachments>
+      </story>
+    </stories>
+  </iteration>
+  <iteration>
+    <id type="integer">6</id>
+    <number type="integer">6</number>
+    <start type="datetime">2010/08/16 05:00:00 UTC</start>
+    <finish type="datetime">2010/08/23 05:00:00 UTC</finish>
+    <stories type="array">
+      <story>
+        <id type="integer">4473735</id>
+        <project_id type="integer">102622</project_id>
+        <story_type>feature</story_type>
+        <url>http://www.pivotaltracker.com/story/show/4473735</url>
+        <estimate type="integer">1</estimate>
+        <current_state>unstarted</current_state>
+        <description></description>
+        <name>Attachment upload test story</name>
+        <requested_by>Jon</requested_by>
+        <created_at type="datetime">2010/07/28 18:17:33 UTC</created_at>
+        <updated_at type="datetime">2010/07/28 18:17:44 UTC</updated_at>
+        <attachments type="array">
+          <attachment>
+            <id type="integer">495851</id>
+            <filename>LICENSE</filename>
+            <description></description>
+            <uploaded_by>Test Suite Access</uploaded_by>
+            <uploaded_at type="datetime">2010/07/29 19:07:19 UTC</uploaded_at>
+            <url>http://www.pivotaltracker.com/resource/download/495851</url>
+          </attachment>
+          <attachment>
+            <id type="integer">495856</id>
+            <filename>LICENSE</filename>
+            <description></description>
+            <uploaded_by>Test Suite Access</uploaded_by>
+            <uploaded_at type="datetime">2010/07/29 19:09:27 UTC</uploaded_at>
+            <url>http://www.pivotaltracker.com/resource/download/495856</url>
+          </attachment>
+          <attachment>
+            <id type="integer">495858</id>
+            <filename>LICENSE</filename>
+            <description></description>
+            <uploaded_by>Test Suite Access</uploaded_by>
+            <uploaded_at type="datetime">2010/07/29 19:11:44 UTC</uploaded_at>
+            <url>http://www.pivotaltracker.com/resource/download/495858</url>
+          </attachment>
+          <attachment>
+            <id type="integer">495863</id>
+            <filename>LICENSE</filename>
+            <description></description>
+            <uploaded_by>Test Suite Access</uploaded_by>
+            <uploaded_at type="datetime">2010/07/29 19:13:06 UTC</uploaded_at>
+            <url>http://www.pivotaltracker.com/resource/download/495863</url>
+          </attachment>
+        </attachments>
+      </story>
+      <story>
+        <id type="integer">4490874</id>
+        <project_id type="integer">102622</project_id>
+        <story_type>feature</story_type>
+        <url>http://www.pivotaltracker.com/story/show/4490874</url>
+        <estimate type="integer">0</estimate>
+        <current_state>unstarted</current_state>
+        <description></description>
+        <name>Movable Story</name>
+        <requested_by>Test Suite Access</requested_by>
+        <created_at type="datetime">2010/07/29 18:12:31 UTC</created_at>
+        <updated_at type="datetime">2010/07/29 19:13:12 UTC</updated_at>
+      </story>
+    </stories>
+  </iteration>
+</iterations>

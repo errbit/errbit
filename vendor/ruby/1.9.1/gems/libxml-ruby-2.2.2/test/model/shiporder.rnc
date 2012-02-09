@@ -1,0 +1,28 @@
+#
+# relax ng schema in compact syntax; this cannot be used within libxml but
+# was used to write the schema as compact syntax makes it easier to handle.
+# relax ng schema in xml syntax was created using trang.
+#
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
+
+start = shiporder
+
+shiporder  = element shiporder { attribute orderid { text }, 
+                                 attribute xsi:noNamespaceSchemaLocation { text }, 
+                               orderperson, shipto, item* }
+
+orderperson = element orderperson { text }
+
+shipto = element shipto { name, address, city, country }
+
+name = element name { text }
+address = element address { text }
+city = element city { text }
+country = element country { text }
+
+item = element item { title, note?, quantity, price }
+
+title = element title { text }
+note = element note { text }
+quantity = element quantity { text }
+price = element price { text }

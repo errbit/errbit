@@ -1,0 +1,50 @@
+it:
+  mongoid:
+    errors:
+      messages:
+        taken:
+          è già utilizzato
+        callbacks:
+          "Calling %{method} on %{klass} resulted in a false return from a callback."
+        document_not_found:
+          Documento non trovato per la classe %{klass} con id(s) %{identifiers}.
+        eager_load:
+          "Eager loading :%{name} is not supported due to it being a many-to-many
+          or polymorphic belongs_to relation."
+        invalid_database:
+          Il database dovrebbe essere un Mongo::DB, non %{name}.
+        invalid_type:
+          Il campo è stato definito come %{klass} ma ha ricevuto
+          un %{other} con valore %{value}.
+        invalid_options:
+          "Invalid option :%{invalid} provided to relation :%{name}. Valid options
+          are: %{valid}."
+        unsupported_version:
+          MongoDB %{version} non è supportato, aggiorna a %{mongo_version}.
+        validations:
+          Validazione fallita - %{errors}.
+        invalid_collection:
+          Accesso alla collezione per %{klass} non permesso in quanto è
+          un documento embedded, accedi alla collezione dal documento root.
+        invalid_field:
+          Definire un campo con il nome %{name} non è permesso.
+          Non definire campi che vadano in conflitto con nomi di attributi
+          o metodi di Mongoid. Usa Document#instance_methods per consultare
+          la lista dei nomi.
+        too_many_nested_attribute_records:
+          Il numero di attrubuti nested per %{association} è limitato
+          a %{limit} records.
+        embedded_in_must_have_inverse_of:
+          Le opzioni di associazioni embedded_in devono includere inverse_of.
+        dependent_only_references_one_or_many:
+          "L'opzione dependent => destroy|delete è valida solo per
+          associazioni references_one o references_many."
+        association_cant_have_inverse_of:
+          Non è permesso definire un inverse_of in questa associazione.
+          Usa questa opzione solo per embedded_in o references_many as array.
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
+        mixed_relations:
+          Referencing a(n) %{embedded} document from the %{root} document via a
+          relational association is not allowed since the %{embedded} is embedded.

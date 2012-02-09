@@ -1,0 +1,7 @@
+Seconds - Freq="SECONDLY", BYSECOND
+Minutes - Freq="MINUTELY", BYMINUTE
+Hours -   Freq="HOURLY",   BYHOUR
+Days -    Freq="DAILY",    BYDAY, BYMONTHDAY, BYYEARDAY
+Weeks -   Freq="WEEKLY",   BYWEEKNO
+Months -  Freq="MONTHLY",  BYMONTH
+Years -   Freq="YEARLY"

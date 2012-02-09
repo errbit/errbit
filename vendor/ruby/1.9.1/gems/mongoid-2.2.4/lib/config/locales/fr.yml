@@ -1,0 +1,53 @@
+fr:
+  mongoid:
+    errors:
+      messages:
+        taken:
+          est déjà pris.
+        callbacks:
+          "Calling %{method} on %{klass} resulted in a false return from a callback."
+        document_not_found:
+          Document introuvable pour la classe %{klass} avec les ids %{identifiers}.
+        eager_load:
+          "Eager loading :%{name} is not supported due to it being a many-to-many
+          or polymorphic belongs_to relation."
+        invalid_database:
+          La base de données doit être une Mongo::DB, pas %{name}.
+        invalid_type:
+          Le champ a été défini comme un(e) %{klass} mais a reçu un(e)
+          %{other} avec la valeur %{value}.
+        invalid_options:
+          "Invalid option :%{invalid} provided to relation :%{name}. Valid options
+          are: %{valid}."
+        unsupported_version:
+          "MongoDB %{version} n'est pas supporté, veuillez mettre à jour avec
+          %{mongo_version}"
+        validations:
+          La validation a échouée - %{errors}.
+        invalid_collection:
+          "L'accès à la collection pour %{klass} n'est pas autorisé puisque
+          ce n'est pas un document embarqué, veuillez accéder à la collection
+          depuis le document racine."
+        invalid_field:
+          "Définir un champ appellé %{name} n'est pas autorisé. Veuillez ne
+          pas définir de champs en conflit avec les attributs internes de
+          Mongoid ou des noms de méthodes. Utilisez Document#instance_methods
+          pour consulter la liste des noms."
+        too_many_nested_attribute_records:
+          "Le nombre d'attributs imbriqués pour %{association} est limité à
+          %{limit} enregistrements."
+        embedded_in_must_have_inverse_of:
+          Les options pour les associations embedded_in doivent inclure
+          inverse_of.
+        dependent_only_references_one_or_many:
+          "L'option dependent => destroy|delete fournie est seulement valide
+          pour les associations references_on ou references_many."
+        association_cant_have_inverse_of:
+          "Definir un inverse_of pour cette association n'est pas autorisé.
+          Utilisez cette option seulement sur embedded_in ou references_many."
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
+        mixed_relations:
+          Referencing a(n) %{embedded} document from the %{root} document via a
+          relational association is not allowed since the %{embedded} is embedded.

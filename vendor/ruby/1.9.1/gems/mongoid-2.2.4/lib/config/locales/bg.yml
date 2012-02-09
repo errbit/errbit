@@ -1,0 +1,52 @@
+bg:
+  mongoid:
+    errors:
+      messages:
+        taken:
+          е вече заето
+        callbacks:
+          "Calling %{method} on %{klass} resulted in a false return from a callback."
+        document_not_found:
+          Не е намерен документ %{klass} с id(та) %{identifiers}.
+        eager_load:
+          "Eager loading :%{name} is not supported due to it being a many-to-many
+          or polymorphic belongs_to relation."
+        invalid_database:
+          Базата данни трябва да е от тип Mnogo:DB, а не  %{name}.
+        invalid_type:
+          Полето е дефинирано като a(n) %{klass}, но се присвоява %{other}
+          със стойност %{value}.
+        invalid_options:
+          "Invalid option :%{invalid} provided to relation :%{name}. Valid options
+          are: %{valid}."
+        unsupported_version:
+          MongoDB %{version} не се подържа, моля ползвайте версия след %{mongo_version}.
+        validations:
+          Неуспешна валидация - %{errors} грешки.
+        invalid_collection:
+          Достъпа до колекцията за %{klass} не е разрешена, тъй като
+          тя е вложен документ, можете да я достъпите през главният документ
+        invalid_field:
+          Дефинирането на поле с име %{name} не е разрешено. Не дефинирайте
+          полета, които са в конфликт с Mongoid вътрешните атрибути.
+          Можете да ги видите с Document#instance_methods
+        too_many_nested_attribute_records:
+          Присвояването на вложини атрибути за %{association}  е
+          ограничено до %{limit} записа
+        embedded_in_must_have_inverse_of:
+          Опциите на embedded_in асоциацията трябва да съдържат inverse_of.
+        dependent_only_references_one_or_many:
+          Опцията dependent => destroy|delete, която е посочена е
+          валидна само за references_one или references_many връзки
+        association_cant_have_inverse_of:
+          Дефинирането на inverse_of за тази асоциация не е позволено.
+          Използвайте тази опция само за  embedded_in  или
+          references_many като масив.
+        calling_document_find_with_nil_is_invalid:
+          Извикването на Document#find със nil е невалидно
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
+        mixed_relations:
+          Referencing a(n) %{embedded} document from the %{root} document via a
+          relational association is not allowed since the %{embedded} is embedded.

@@ -1,0 +1,57 @@
+ro:
+  mongoid:
+    errors:
+      messages:
+        taken:
+          este deja folosit
+        callbacks:
+          "Calling %{method} on %{klass} resulted in a false return from a callback."
+        document_not_found:
+          Nu există document în clasa %{klass} cu id %{identifiers}.
+        eager_load:
+          "Eager loading :%{name} is not supported due to it being a many-to-many
+          or polymorphic belongs_to relation."
+        invalid_database:
+          Baza de date ar trebui să fie de tipul Mongo::DB, nu %{name}.
+        invalid_type:
+          Câmpul a fost definit ca şi un(o) %{klass}, dar valoarea
+          recepţionată %{value} este de clasa %{other}.
+        invalid_options:
+          "Invalid option :%{invalid} provided to relation :%{name}. Valid options
+          are: %{valid}."
+        unsupported_version:
+          Versiunea MongoDB %{version} nu este suportată.
+          Vă rugăm să folosiţi versiunea %{mongo_version}.
+        validations:
+          Validare nereuşită - %{errors}.
+        invalid_collection:
+          Accesul la colecţie din clasa %{klass} este interzisă, fiindcă
+          este un document încorporat. Vă rugăm accesaţi colecţia din
+          documentul rădăcină.
+        invalid_field:
+          Folosirea denumirii %{name} ptr. un câmp este interzisă. Vă
+          rugăm să evitaţi utilizarea acelor cuvinte care intră în conflict
+          cu denumirile folosite de proprietăţile sau metodele Mongoid-lui.
+          Folosiţi comanda Document#instance_methods pentru a afla care
+          sunt acestea.
+        too_many_nested_attribute_records:
+          În cazul %{association} folosirea atributelor îmbricate este
+          limitat la %{limit} înregistrări.
+        embedded_in_must_have_inverse_of:
+          Folosirea opţiunii  inverse_of este obligatorie în cazul
+          asociaţiilor de tip  embedded_in.
+        dependent_only_references_one_or_many:
+          Opţiunea dependent => destroy|delete poate fi folosită doar în
+          cazul asociaţiilor de tip references_one sau references_many.
+        association_cant_have_inverse_of:
+          Folosire opţiunii inverse_of la acest tip de asociaţie este
+          interzisă. Aceasta poate fi folosită doar la asociaţiile de
+          tip embedded_in sau references_many as array.
+        calling_document_find_with_nil_is_invalid:
+          Folosirea metodei Document#find cu valoarea nil este invalidă.
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
+        mixed_relations:
+          Referencing a(n) %{embedded} document from the %{root} document via a
+          relational association is not allowed since the %{embedded} is embedded.

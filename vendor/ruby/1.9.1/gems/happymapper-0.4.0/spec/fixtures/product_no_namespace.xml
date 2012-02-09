@@ -1,0 +1,10 @@
+<products>
+  <product>
+    <title>A Title</title>
+    <features_bullets>
+      <feature>This is feature text 1</feature>
+      <feature>This is feature text 2</feature>
+      <bug>This is a bug</bug>
+    </features_bullets>
+  </product>
+</products>

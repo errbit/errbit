@@ -1,0 +1,35 @@
+- class
+- created
+- description
+- dtstart 
+- dtstamp
+- last-modified
+- organizer
+- recurrence-id
+- sequence
+- status
+- summary
+- uid
+- url
+- attach:
+    multi: *
+- attendee:
+    multi: *
+- categories:
+    multi: *
+- comment:
+    multi: *
+- contact:
+    multi: *
+- exdate:
+    multi: *
+- exrule:
+    multi: *
+- related-to:
+    multi: *
+- rdate:
+    multi: *
+- rrule:
+    multi: *
+- request-status:
+    multi: *

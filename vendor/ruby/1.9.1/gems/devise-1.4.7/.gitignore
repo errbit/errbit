@@ -1,0 +1,12 @@
+**/*/log/*
+**/*/tmp/*
+*~
+coverage/*
+*.sqlite3
+.bundle
+rdoc/*
+pkg
+log
+test/tmp/*
+Gemfile.lock
+

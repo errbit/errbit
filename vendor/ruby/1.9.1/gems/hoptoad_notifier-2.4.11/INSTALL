@@ -1,0 +1,25 @@
+=== Configuration
+
+You should have something like this in config/initializers/hoptoad.rb.
+
+  HoptoadNotifier.configure do |config|
+    config.api_key = '1234567890abcdef'
+  end
+
+(Please note that this configuration should be in a global configuration, and
+is *not* environment-specific. Hoptoad is smart enough to know what errors are
+caused by what environments, so your staging errors don't get mixed in with
+your production errors.)
+
+You can test that Hoptoad is working in your production environment by using 
+this rake task (from RAILS_ROOT):
+
+  rake hoptoad:test
+
+If everything is configured properly, that task will send a notice to Hoptoad 
+which will be visible immediately.
+
+NOTE FOR RAILS 1.2.* USERS:
+
+You will need to copy the hoptoad_notifier_tasks.rake file into your
+RAILS_ROOT/lib/tasks directory in order for the rake hoptoad:test task to work.

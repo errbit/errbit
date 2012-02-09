@@ -1,0 +1,13 @@
+/*
+ * Premailer styles - should not import
+ *
+ * Copyright (c) 2009 Dialect Communications Group (dialect.ca)
+ *
+ * $Package: Premailer $
+ * $Date: 2009-02-09 17:15:56 -0800 (Mon, 09 Feb 2009) $WCDATE$ $
+ * $Rev: 95 $WCREV$ $
+ */
+
+body {
+	background: none red !important;
+}

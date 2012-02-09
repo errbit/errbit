@@ -1,0 +1,23 @@
+en:
+  flash:
+    actions:
+      create:
+        success: "Resource created with success"
+        failure: "Resource could not be created"
+      with_block:
+        success: "Resource with block created with success"        
+    addresses:
+      update:
+        success: "Nice! %{resource_name} was updated with success!"
+        failure: "Oh no! We could not update your address!"
+      destroy:
+        success: "Successfully deleted the address at %{reference}"
+        notice: "Successfully deleted the chosen address at %{reference}"
+    admin:
+      actions:
+        create:
+          notice: "Admin created address with success"
+      addresses:
+        update:
+          notice: "Admin updated address with success"
+

@@ -1,0 +1,51 @@
+sv:
+  mongoid:
+    errors:
+      messages:
+        taken:
+          har redan använts
+        callbacks:
+          "Calling %{method} on %{klass} resulted in a false return from a callback."
+        document_not_found:
+          Inget dokument kunde hittas för klass %{klass} med id %{identifiers}.
+        eager_load:
+          "Eager loading :%{name} is not supported due to it being a many-to-many
+          or polymorphic belongs_to relation."
+        invalid_database:
+          Databasen bör vara Mongo::DB, inte %{name}.
+        invalid_type:
+          Fältet var definerat som %{klass}, men fick %{other} med
+          värdet %{value}.
+        invalid_options:
+          "Invalid option :%{invalid} provided to relation :%{name}. Valid options
+          are: %{valid}."
+        unsupported_version:
+          MongoDB %{version} stöds ej, vänligen upgradera
+          till %{mongo_version}.
+        validations:
+          Validering misslyckades - %{errors}.
+        invalid_collection:
+          Tillgång till kollektionen för %{klass} är inte tillåten eftersom den
+          är ett inbäddat dokument, vänligen accessa kollektionen från
+          rotdokumentet.
+        invalid_field:
+          Att definera ett fält med namnet %{name} är inte tillåtet. Definera inte
+          fält som är i konflikt med Mongoids interna attribut eller metod
+          namn. Använd Document#instance_methods för att se vilka namn detta innefattar.
+        too_many_nested_attribute_records:
+          Acceptans av nästlade attribut för %{association} är begränsat
+          till %{limit} register.
+        embedded_in_must_have_inverse_of:
+          Alternativ för en embedded_in association måste innehålla inverse_of.
+        dependent_only_references_one_or_many:
+          Alternativet dependent => destroy|delete som angavs
+          är endast giltigt för references_one eller references_many associationer.
+        association_cant_have_inverse_of:
+          Att definera inverse_of på denna association är inte tillåtet. Använd
+          endast detta alternativ på embedded_in eller references_many as array.
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
+        mixed_relations:
+          Referencing a(n) %{embedded} document from the %{root} document via a
+          relational association is not allowed since the %{embedded} is embedded.

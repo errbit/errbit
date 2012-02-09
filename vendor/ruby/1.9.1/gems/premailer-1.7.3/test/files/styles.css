@@ -1,0 +1,106 @@
+/*
+ * Premailer styles
+ *
+ * Copyright (c) 2009 Dialect Communications Group (dialect.ca)
+ *
+ * $Package: Premailer $
+ * $Date: 2009-02-09 17:15:56 -0800 (Mon, 09 Feb 2009) $WCDATE$ $
+ * $Rev: 95 $WCREV$ $
+ */
+
+@import "noimport.css" print;
+
+
+/*** structure and table cells ***/
+body{font:13px/1.231 "Arial",sans-serif;color: #fff;background-color: #9EBF00;}
+
+ #wrapper { width: 100%; margin: 2em 0; background-color: #9EBF00; color: #fff; }
+ 
+.container { margin: 0 auto; line-height: 130%; color: #4d4d4d; text-align: left; }
+
+.frame { background-color: #b6d93f; font-size: 1px; line-height: 1px;  }
+
+.hairline { background-color: #9ebf00; font-size: 1px; line-height: 1px; }
+
+.masthead, .gutter { color: #999; background-color: #fff; }
+
+.content { line-height: 158%; color: #999; background-color: #fff; }
+
+#webversion, #footer { margin: 0 auto; text-align: center; font-size: 85%; }
+
+
+/*** general styles ***/
+h1, h1 a, h2, h2 a {  color: #9ebf00; }
+
+h1 span { padding: 0 .5em; background: #fff; }
+
+h1 {
+	margin: 32px 0 19px;
+	font: bold 85% "Verdana", sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: .1em;
+	background: transparent url("dots_h.gif") repeat-x 0 55%;
+}
+
+h2 { margin: 0 0 .4em; font: normal 205%/109% "Arial", sans-serif; }
+
+h3, h3 a { color: #808080; }
+
+h3 { margin: 0 0 .1em; font: normal 165%/109% "Arial", sans-serif; }
+
+table{ border-collapse:collapse;border-spacing:0; border: 0; }
+
+caption,th,td {text-align:left;font-weight:normal; margin: 0; padding: 0; }
+
+pre,code,kbd,samp,tt{font-family:monospace;line-height:100%;}
+
+th, td { vertical-align: top; }
+
+a { text-decoration: none; }
+
+blockquote { margin: 0; padding: 5px 30px; text-align: center; }
+
+blockquote, blockquote p { font: italic 16px/145% "Georgia", serif; }
+
+p, blockquote { color: #999; }
+
+p { margin: 0 0 1em; font: normal 100%/158% "Arial", sans-serif; vertical-align: top; }
+
+
+.hide { text-align: center; color: red; font-size: 150%; }
+
+/*** specific elements ***/
+h2 + h3 { font-style: italic;}
+p[attr~=quote]  { font-style: italic;}
+ul li:first-of-type { font-style: italic;}
+
+.content p a, .content li a { color: #8AAD09; text-decoration: underline; }
+
+.content p.dt { margin-bottom: .8em; font: italic 95%/135% "Arial", sans-serif; }
+
+img.right { float: right; margin: 0 0 30px 20px; }
+
+.contact { text-align: center; background: #9EC03B url("contact_bg.png") repeat 0 0; }
+
+.contact, .contact p, .contact a { color: #fff; text-decoration: none; }
+
+.contact p { margin-bottom: 0; line-height: 140%; }
+
+.contact a:hover { text-decoration: underline; }
+
+#webversion, #webversion a {
+	font: bold 12px/28px "Trebuchet", "Trebuchet MS", serif;
+	color: #fff;
+	background: #9ebf00;
+}
+
+#credit { padding-bottom: 20px; }
+
+#credit, #credit a {
+	color: #fff;
+	font: normal 10px/13px "Verdana", sans-serif;
+	text-align: center;
+}
+
+#contact_info { padding: 5px; }

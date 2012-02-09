@@ -1,0 +1,108 @@
+= raindrops - real-time stats for preforking Rack servers
+
+Raindrops is a real-time stats toolkit to show statistics for Rack HTTP
+servers.  It is designed for preforking servers such as Rainbows! and
+Unicorn, but should support any Rack HTTP server under Ruby 1.9, 1.8 and
+Rubinius on platforms supporting POSIX shared memory.  It may also be
+used as a generic scoreboard for sharing atomic counters across multiple
+processes.
+
+== Features
+
+* counters are shared across all forked children and lock-free
+
+* counters are kept on separate cache lines to reduce contention under SMP
+
+* may expose server statistics as a Rack Middleware endpoint
+  (default: "/_raindrops")
+
+* middleware displays the number of actively processing and writing
+  clients from a single request regardless of which worker process
+  it hits.
+
+== Linux-only Extra Features!
+
+* Middleware response includes extra stats for bound TCP and
+  Unix domain sockets (configurable, it can include stats from
+  other TCP or UNIX domain socket servers).
+
+* TCP socket stats use efficient inet_diag facilities via netlink
+  instead of parsing /proc/net/tcp to minimize overhead.
+  This was fun to discover and write.
+
+* TCP_Info reporting may be used to check stat for every accepted client
+  on TCP servers
+
+Users of older Linux kernels need to ensure that the the "inet_diag"
+and "tcp_diag" kernel modules are loaded as they do not autoload correctly
+
+== Install
+
+We recommend GCC 4+ (or compatible) to support the
+{atomic builtins}[http://gcc.gnu.org/onlinedocs/gcc/Atomic-Builtins.html]
+(__sync_{add,sub}_and_fetch()).  For non-GCC 4+ users, we also support
+compilation with the
+{libatomic_ops}[http://www.hpl.hp.com/research/linux/atomic_ops/]
+package starting with Raindrops 0.4.0.
+
+If you're using a packaged Ruby distribution, make sure you have a C
+compiler and the matching Ruby development libraries and headers.
+
+If you use RubyGems:
+
+    gem install raindrops
+
+Otherwise grab the latest tarball from:
+
+http://raindrops.bogomips.org/files/
+
+Unpack it, and run "ruby setup.rb"
+
+== Usage
+
+See Raindrops::Middleware and Raindrops::LastDataRecv documentation for
+use Rack servers.  The entire library is fully-documented and we are
+responsive on the mailing list (mailto:raindrops@librelist.org) if you
+have any questions or comments.
+
+== Development
+
+You can get the latest source via git from the following locations:
+
+  git://bogomips.org/raindrops.git
+  git://repo.or.cz/raindrops.git (mirror)
+
+You may browse the code from the web and download the latest snapshot
+tarballs here:
+
+* http://bogomips.org/raindrops.git (cgit)
+* http://repo.or.cz/w/raindrops.git (gitweb)
+
+Inline patches (from "git format-patch") to the mailing list are
+preferred because they allow code review and comments in the reply to
+the patch.
+
+We will adhere to mostly the same conventions for patch submissions as
+git itself.  See the Documentation/SubmittingPatches document
+distributed with git on on patch submission guidelines to follow.  Just
+don't email the git mailing list or maintainer with raindrops patches.
+
+raindrops is currently dual-licensed under the LGPLv2.1 and LGPLv3.  To
+allow for a transition to future versions of the LGPL, contributors are
+required to sign-off changes allowing allowing the project leader to
+relicense raindrops under newer versions of the LGPL (which should be
+similar in spirit to the existing LGPL).
+
+== Contact
+
+All feedback (bug reports, user/development discussion, patches, pull
+requests) go to the mailing list: mailto:raindrops@librelist.org
+
+The mailing list is mirrored to Gmane, all information about the
+group is here:
+
+http://gmane.org/info.php?group=gmane.comp.lang.ruby.raindrops.general
+
+Mailing list archives in mbox format may be downloaded here:
+
+http://raindrops.bogomips.org/archives/

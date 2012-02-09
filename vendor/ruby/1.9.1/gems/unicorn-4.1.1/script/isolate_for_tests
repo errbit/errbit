@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+# scripts/Makefiles can read and eval the output of this script and
+# use it as RUBYLIB
+require 'rubygems'
+require 'isolate'
+fp = File.open(__FILE__, "rb")
+fp.flock(File::LOCK_EX)
+
+ruby_engine = defined?(RUBY_ENGINE) ? RUBY_ENGINE : 'ruby'
+opts = {
+  :system => false,
+  # we want "ruby-1.8.7" and not "ruby-1.8", so disable :multiruby
+  :multiruby => false,
+  :path => "tmp/isolate/#{ruby_engine}-#{RUBY_VERSION}",
+}
+
+pid = fork do
+  Isolate.now!(opts) do
+    gem 'sqlite3-ruby', '1.2.5'
+    gem 'raindrops', '0.7.0'
+    gem 'kgio', '2.6.0'
+    gem 'rack', '1.3.2'
+  end
+end
+_, status = Process.waitpid2(pid)
+status.success? or abort status.inspect
+lib_paths = Dir["#{opts[:path]}/gems/*-*/lib"].map { |x| File.expand_path(x) }
+dst = "tmp/isolate/#{ruby_engine}-#{RUBY_VERSION}.mk"
+File.open("#{dst}.#$$", "w") do |fp|
+  fp.puts "ISOLATE_LIBS=#{lib_paths.join(':')}"
+end
+File.rename("#{dst}.#$$", dst)
+
+# pure Ruby gems can be shared across all Rubies
+%w(3.0.0).each do |rails_ver|
+  opts[:path] = "tmp/isolate/rails-#{rails_ver}"
+  pid = fork do
+    Isolate.now!(opts) do
+      gem 'rake', '0.8.7'
+      gem 'rails', rails_ver
+    end
+  end
+  _, status = Process.waitpid2(pid)
+  status.success? or abort status.inspect
+  more = Dir["#{opts[:path]}/gems/*-*/lib"].map { |x| File.expand_path(x) }
+  lib_paths.concat(more)
+end

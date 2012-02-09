@@ -1,0 +1,35 @@
+LIBRARY libxml_ruby.so
+EXPORTS
+Init_libxml_ruby
+rxml_document_wrap
+rxml_xpath_to_value
+rxml_xpath_from_value
+
+cXMLAttr DATA
+cXMLAttrDecl DATA
+cXMLAttributes DATA
+cXMLDocument DATA
+cXMLDtd DATA
+cXMLHtmlParser DATA
+cXMLHtmlParserContext DATA
+cXMLNamespace DATA
+cXMLNamespaces DATA
+cXMLNode DATA
+cXMLParser DATA
+cXMLParserContext DATA
+cXMLReader DATA
+cXMLRelaxNG DATA
+cXMLSaxParser DATA
+cXMLSchema DATA
+cXMLXInclude DATA
+cXMLXPathContext DATA
+cXMLXPathExpression DATA
+cXMLXPathObject DATA
+cXMLXPointer DATA
+eXMLError DATA
+mLibXML DATA
+mXML DATA
+mXMLEncoding DATA
+mXMLHtmlParserOptions DATA
+mXMLParserOptions DATA
+mXPath DATA

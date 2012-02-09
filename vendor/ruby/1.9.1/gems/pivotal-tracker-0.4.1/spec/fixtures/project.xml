@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <id>102622</id>
+  <name>Pivotal Tracker API Gem</name>
+  <iteration_length type="integer">1</iteration_length>
+  <week_start_day>Monday</week_start_day>
+  <point_scale>0,1,2,3</point_scale>
+  <account>Jon</account>
+  <velocity_scheme>Average of 3 iterations</velocity_scheme>
+  <current_velocity>2</current_velocity>
+  <initial_velocity>2</initial_velocity>
+  <number_of_done_iterations_to_show>12</number_of_done_iterations_to_show>
+  <labels></labels>
+  <last_activity_at type="datetime">2010/07/29 19:13:13 UTC</last_activity_at>
+  <allow_attachments>true</allow_attachments>
+  <public>true</public>
+  <use_https>false</use_https>
+  <bugs_and_chores_are_estimatable>true</bugs_and_chores_are_estimatable>
+  <commit_mode>true</commit_mode>
+  <memberships>
+    <membership>
+      <id>331822</id>
+      <person>
+        <email>jmischo@sittercity.com</email>
+        <name>Jon</name>
+        <initials>JM</initials>
+      </person>
+      <role>Owner</role>
+    </membership>
+    <membership>
+      <id>331823</id>
+      <person>
+        <email>jmischo@quagility.com</email>
+        <name>Jon Mischo</name>
+        <initials>JM</initials>
+      </person>
+      <role>Owner</role>
+    </membership>
+    <membership>
+      <id>331832</id>
+      <person>
+        <email>pivotal-tracker-api-gem@quagility.com</email>
+        <name>Test Suite Access</name>
+        <initials>TEST</initials>
+      </person>
+      <role>Member</role>
+    </membership>
+  </memberships>
+  <integrations>
+  </integrations>
+</project>

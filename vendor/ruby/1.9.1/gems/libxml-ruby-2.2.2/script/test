@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+%w{test lib ext/libxml}.each{ |path| $LOAD_PATH.unshift(path) }
+
+load './test/test_suite.rb'
+

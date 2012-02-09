@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ItemSearchResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2005-10-05" xmlns:georss="http://www.georss.org/georss">
+	<OperationRequest>
+		<HTTPHeaders>
+			<Header Name="UserAgent">
+			</Header>
+		</HTTPHeaders>
+		<RequestId>16WRJBVEM155Q026KCV1</RequestId>
+		<Arguments>
+			<Argument Name="SearchIndex" Value="Books"></Argument>
+			<Argument Name="Service" Value="AWSECommerceService"></Argument>
+			<Argument Name="Title" Value="Ruby on Rails"></Argument>
+			<Argument Name="Operation" Value="ItemSearch"></Argument>
+			<Argument Name="AWSAccessKeyId" Value="dontbeaswoosh"></Argument>
+		</Arguments>
+		<RequestProcessingTime>0.064924955368042</RequestProcessingTime>
+	</OperationRequest>
+	<Items>
+		<Request>
+			<IsValid>True</IsValid>
+			<ItemSearchRequest>
+				<SearchIndex>Books</SearchIndex>
+				<Title>Ruby on Rails</Title>
+			</ItemSearchRequest>
+		</Request>
+		<TotalResults>22</TotalResults>
+		<TotalPages>3</TotalPages>
+		<Item>
+			<ASIN>0321480791</ASIN>
+			<georss:point>38.5351715088 -121.7948684692</georss:point>
+		<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=0321480791%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0321480791%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Michael Hartl</Author>
+				<Author>Aurelius Prochazka</Author>
+				<Manufacturer>Addison-Wesley Professional</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>RailsSpace: Building a Social Networking Website with Ruby on Rails (Addison-Wesley Professional Ruby Series)</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>047022388X</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=047022388X%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/047022388X%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Noel Rappin</Author>
+				<Manufacturer>Wrox</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Professional Ruby on Rails</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>1590598814</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=1590598814%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/1590598814%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Ola Bini</Author>
+				<Manufacturer>Apress</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Practical JRuby on Rails Web 2.0 Projects: Bringing Ruby on Rails to Java</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>0596101325</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=0596101325%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0596101325%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Bruce Tate</Author>
+				<Author>Curt Hibbs</Author>
+				<Manufacturer>O'Reilly Media, Inc.</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Ruby on Rails: Up and Running</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>0470081201</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=0470081201%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0470081201%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Barry Burd</Author>
+				<Manufacturer>For Dummies</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Ruby on Rails For Dummies (For Dummies (Computer/Tech))</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>0975841955</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=0975841955%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0975841955%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Patrick Lenz</Author>
+				<Manufacturer>SitePoint</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Build Your Own Ruby on Rails Web Applications</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>0470069155</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=0470069155%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0470069155%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Steve,  Ph.D. Holzner</Author>
+				<Manufacturer>Wrox</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Beginning Ruby on Rails (Wrox Beginning Guides)</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>1590597362</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=1590597362%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/1590597362%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Christian Hellsten</Author>
+				<Author>Jarkko Laine</Author>
+				<Manufacturer>Apress</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Beginning Ruby on Rails E-Commerce: From Novice to Professional (Rails)</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>1590597524</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=1590597524%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/1590597524%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Justin Williams</Author>
+				<Manufacturer>friends of ED</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>Rails Solutions: Ruby on Rails Made Easy (Solutions)</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>0321517067</ASIN>
+			<DetailPageURL>http://www.amazon.com/gp/redirect.html%3FASIN=0321517067%26tag=ws%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0321517067%253FSubscriptionId=dontbeaswoosh</DetailPageURL>
+			<ItemAttributes>
+				<Author>Aurelius Prochazka</Author>
+				<Manufacturer>Addison-Wesley Professional</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>RailsSpace Ruby on Rails Tutorial (Video Training) (LiveLessons)</Title>
+			</ItemAttributes>
+		</Item>
+	</Items>
+</ItemSearchResponse>

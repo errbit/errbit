@@ -1,0 +1,46 @@
+- class
+- completed
+- created
+- description
+- dtstamp
+- dtstart
+- geo
+- last-modified
+- location
+- organizer
+- percent-complete
+- priority
+- recurrence-id
+- sequence
+- status
+- summary
+- uid
+- url
+- due:
+    conflicts_with: duration
+- duration:
+    conflicts_with: due
+- attach:
+    multi: *
+- attendee:
+    multi: *
+- categories:
+    multi: *
+- comment:
+    multi: *
+- contact:
+    multi: *
+- exdate:
+    multi: *
+- exrule:
+    multi: *
+- request-status:
+    multi: *
+- related-to:
+    multi: *
+- resources:
+    multi: *
+- rdate:
+    multi: *
+- rrule:
+    multi: *

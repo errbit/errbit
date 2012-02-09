@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commit>
+  <removed type="array">
+    <removed>
+      <filename>commands.rb</filename>
+    </removed>
+    <removed>
+      <filename>helpers.rb</filename>
+    </removed>
+  </removed>
+  <added type="array">
+    <added>
+      <filename>commands/commands.rb</filename>
+    </added>
+    <added>
+      <filename>commands/helpers.rb</filename>
+    </added>
+  </added>
+  <message>move commands.rb and helpers.rb into commands/ dir</message>
+  <modified type="array">
+    <modified>
+      <diff>@@ -56,7 +56,7 @@ module GitHub
+   end
+ 
+   def load(file)
+-    file[0] == ?/ ? super : super(BasePath + "/#{file}")
++    file[0] == ?/ ? super : super(BasePath + "/commands/#{file}")
+   end
+ 
+   def debug(*messages)</diff>
+      <filename>lib/github.rb</filename>
+    </modified>
+  </modified>
+  <parents type="array">
+    <parent>
+      <id>d462d2a2e60438ded3dd9e8e6593ca4146c5a0ba</id>
+    </parent>
+  </parents>
+  <url>http://github.com/defunkt/github-gem/commit/c26d4ce9807ecf57d3f9eefe19ae64e75bcaaa8b</url>
+  <author>
+    <name>Chris Wanstrath</name>
+    <email>chris@ozmm.org</email>
+  </author>
+  <id>c26d4ce9807ecf57d3f9eefe19ae64e75bcaaa8b</id>
+  <committed-date>2008-03-02T16:45:41-08:00</committed-date>
+  <authored-date>2008-03-02T16:45:41-08:00</authored-date>
+  <tree>28a1a1ca3e663d35ba8bf07d3f1781af71359b76</tree>
+  <committer>
+    <name>Chris Wanstrath</name>
+    <email>chris@ozmm.org</email>
+  </committer>
+</commit>

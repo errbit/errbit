@@ -1,0 +1,63 @@
+= kgio Hacker's Guide
+
+=== Documentation
+
+We use the latest version of {wrongdoc}[http://bogomips.org/wrongdoc] as
+much as possible.
+
+Please wrap documentation at 72 characters-per-line or less (long URLs
+are exempt) so it is comfortably readable from terminals.
+
+When referencing mailing list posts, use
+"http://mid.gmane.org/$MESSAGE_ID" if possible since the Message-ID
+remains searchable even if Gmane becomes unavailable.
+
+=== Code Compatibility
+
+We target Ruby 1.8.6+, 1.9.1+ and Rubinius 1.1+ and their
+respective C APIs.
+
+All of our C code should be compatible with all reasonably modern Unices
+and should run on compilers supported by the versions of Ruby we target.
+
+We will NEVER directly support non-Free platforms under any circumstances.
+
+Our C code follows K&R indentation style (hard tabs, tabs are always 8
+characters wide) and NOT the indentation style of Matz Ruby.
+
+== Contributing
+
+Contributions are welcome in the form of patches, pull requests, code
+review, testing, documentation, user support or any other feedback.  The
+{kgio mailing list}[mailto:kgio@librelist.org] is the
+central coordination point for all user and developer feedback and bug
+reports.
+
+=== Submitting Patches
+
+Follow conventions already established in the code and do not exceed 80
+characters per line.
+
+Inline patches (from "git format-patch -M") to the mailing list are
+preferred because they allow code review and comments in the reply to
+the patch.
+
+We will adhere to mostly the same conventions for patch submissions as
+git itself.  See the Documentation/SubmittingPatches document
+distributed with git on on patch submission guidelines to follow.  Just
+don't email the git mailing list or maintainer with kgio patches :)
+
+== Running Development Versions
+
+It is easy to install the contents of your git working directory:
+
+Via RubyGems (RubyGems 1.3.5+ recommended for prerelease versions):
+
+  gmake install-gem
+
+Without RubyGems (via setup.rb):
+
+  gmake install
+
+It is not at all recommended to mix a RubyGems installation with an
+installation done without RubyGems, however.

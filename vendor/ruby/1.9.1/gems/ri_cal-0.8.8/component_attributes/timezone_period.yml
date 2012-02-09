@@ -1,0 +1,11 @@
+- dtstart
+- tzoffsetto
+- tzoffsetfrom
+- comment:
+    multi: *
+- rdate:
+    multi: *
+- rrule:
+    multi: *
+- tzname:
+    multi: *

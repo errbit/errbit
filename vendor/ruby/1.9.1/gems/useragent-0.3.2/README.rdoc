@@ -1,0 +1,19 @@
+= UserAgent
+
+UserAgent is a Ruby library that parses and compares HTTP User Agents.
+
+
+=== Example
+
+  Browser = Struct.new(:browser, :version)
+  SupportedBrowsers = [
+    Browser.new("Safari", "3.1.1"),
+    Browser.new("Firefox", "2.0.0.14"),
+    Browser.new("Internet Explorer", "7.0")
+  ]
+
+  user_agent = UserAgent.parse(request.user_agent)
+  SupportedBrowsers.detect { |browser| user_agent >= browser }
+
+
+Copyright (c) 2009 Joshua Peek, released under the MIT license

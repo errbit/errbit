@@ -1,0 +1,111 @@
+= Rack::SslEnforcer
+
+Rack::SslEnforcer is a simple Rack middleware to enforce SSL connections. As of Version 0.2.0, Rack::SslEnforcer marks
+Cookies as secure by default (HSTS must be set manually).
+
+Tested on Ruby 1.8.7, 1.9.2, REE, JRuby and Rubinius.
+
+== Installation
+
+  gem install rack-ssl-enforcer
+
+
+== Basic Usage
+
+  require 'rack/ssl-enforcer'
+  use Rack::SslEnforcer
+
+Or, if you are using Bundler, just add this to your Gemfile:
+
+  gem 'rack-ssl-enforcer'
+
+To use Rack::SslEnforcer in your Rails application, add the following line to your application
+config file (<tt>config/application.rb</tt> for Rails 3, <tt>config/environment.rb</tt> for Rails 2):
+
+  config.middleware.use Rack::SslEnforcer
+
+If all you want is SSL for your whole application, you are done! However, you can specify some
+
+
+== Options
+
+You might need the :redirect_to option if the requested URL can't be determined (e.g. if using a proxy).
+
+  config.middleware.use Rack::SslEnforcer, :redirect_to => 'https://example.org'
+
+You can also define specific regex patterns or paths or hosts to redirect.
+
+  config.middleware.use Rack::SslEnforcer, :only => /^\/admin\//
+  config.middleware.use Rack::SslEnforcer, :only => "/login"
+  config.middleware.use Rack::SslEnforcer, :only => ["/login", /\.xml$/]
+  config.middleware.use Rack::SslEnforcer, :only_hosts => 'api.example.com'
+  config.middleware.use Rack::SslEnforcer, :only_hosts => [/[www|api]\.example\.org$/, 'example.com']
+  config.middleware.use Rack::SslEnforcer, :except_hosts => 'help.example.com'
+  config.middleware.use Rack::SslEnforcer, :except_hosts => /[help|blog]\.example\.com$/
+
+Note: hosts options take precedence over the path options. See tests for examples.
+
+Use the :strict option to force http for all requests not matching your :only specification
+
+  config.middleware.use Rack::SslEnforcer, :only => ["/login", /\.xml$/], :strict => true
+  config.middleware.use Rack::SslEnforcer, :only_hosts => 'api.example.com', :strict => true
+
+Or in the case where you have matching urls with different methods (Rails RESTful routes: get#users post#users || get#user/:id put#user/:id) you may need to post and put to secure but redirect to http on get.
+
+  config.middleware.use Rack::SslEnforcer, :only => [%r{^/users/}], :mixed => true
+
+The above will allow you to post/put from the secure/non-secure urls keeping the original schema.
+
+To set HSTS expiry and subdomain inclusion (defaults: one year, true). Strict option disables HSTS.
+
+  config.middleware.use Rack::SslEnforcer, :hsts => { :expires => 500, :subdomains => false }
+  config.middleware.use Rack::SslEnforcer, :hsts => true # equivalent to { :expires => 31536000, :subdomains => true }
+
+Finally you might want to share a cookie based session between http and https.
+This is not possible by default with Rack::SslEnforcer for security reasons.
+See: [http://en.wikipedia.org/wiki/HTTP_cookie#Cookie_theft_and_session_hijacking]
+
+Nevertheless, you can set the option :force_secure_cookies to false in order to be able to share a cookie based session between http and https:
+
+  config.middleware.use Rack::SslEnforcer, :only => "/login", :force_secure_cookies => false
+
+But be aware that if you do so, you have to make sure that the content of you cookie is encoded.
+This can be done using a coder with Rack::Session::Cookie.
+See: [https://github.com/rack/rack/blob/master/lib/rack/session/cookie.rb#L28-42]
+
+
+== TODO
+
+* Add configuration option to specify local http / https ports
+* Cleanup tests
+
+
+== Contributors
+
+* {Dan Mayer}[http://github.com/danmayer]
+* {Rémy Coutable}[http://github.com/rymai]
+* {Thibaud Guillaume-Gentil}[http://github.com/thibaudgg]
+* {Paul Annesley}[https://github.com/pda]
+* {Saimon Moore}[https://github.com/saimonmoore]
+
+
+== Credits
+
+Flagging cookies as secure functionality and HSTS support is greatly inspired by {Joshua Peek's Rack::SSL}[https://github.com/josh/rack-ssl]
+
+
+== Note on Patches/Pull Requests
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version,
+  that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+
+== Copyright
+
+Copyright (c) 2010 Tobias Matthies. See LICENSE for details.

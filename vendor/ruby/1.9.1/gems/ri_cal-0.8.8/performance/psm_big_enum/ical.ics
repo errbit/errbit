@@ -1,0 +1,3171 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Australian Tech Events
+X-WR-TIMEZONE:Australia/Sydney
+X-WR-CALDESC:TO ADD EVENTS INVITE THIS ADDRESS\;\npf44opfb12hherild7h2pl11b
+ 4@group.calendar.google.com\n\nThis is a public calendar to know what's com
+ ing up all around the country in the technology industry.\n\nIncludes digit
+ al\, internet\, web\, enterprise\, software\, hardware\, and it's various f
+ lavours. \n\nFeel free to add real events. Keep it real. 
+BEGIN:VTIMEZONE
+TZID:Australia/Perth
+X-LIC-LOCATION:Australia/Perth
+BEGIN:STANDARD
+TZOFFSETFROM:+0800
+TZOFFSETTO:+0800
+TZNAME:WST
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VTIMEZONE
+TZID:Australia/Sydney
+X-LIC-LOCATION:Australia/Sydney
+BEGIN:STANDARD
+TZOFFSETFROM:+1100
+TZOFFSETTO:+1000
+TZNAME:EST
+DTSTART:19700405T030000
+RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=1SU
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+1000
+TZOFFSETTO:+1100
+TZNAME:EST
+DTSTART:19701004T020000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1SU
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VTIMEZONE
+TZID:Australia/Brisbane
+X-LIC-LOCATION:Australia/Brisbane
+BEGIN:STANDARD
+TZOFFSETFROM:+1000
+TZOFFSETTO:+1000
+TZNAME:EST
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART:20090524T023000Z
+DTEND:20090524T053000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:9pbl144kd7gnm6mke770b451e4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090514T110431Z
+DESCRIPTION:
+LAST-MODIFIED:20090524T103426Z
+LOCATION:Tilley's\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: LindaTUB/CTUB
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090528T053000Z
+DTEND:20090528T093000Z
+DTSTAMP:20090531T005744Z
+UID:t5sv1t2igl0hpkmnflpcfv3o30@google.com
+CLASS:PUBLIC
+CREATED:20090524T074356Z
+DESCRIPTION:For details\, link here: http://tedxsydney.eventbrite.com
+LAST-MODIFIED:20090524T074356Z
+LOCATION:Australian Technology Park - 1 Wyndham St - Alexandria - Sydney\, 
+ New South Wales NSW 2015  - Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:TEDxSydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20090522T080000
+DTEND;TZID=Australia/Sydney:20090522T100000
+RRULE:FREQ=WEEKLY;BYDAY=FR;WKST=MO
+DTSTAMP:20090531T005744Z
+UID:stv9cip8ggbb21u10et27fseh0@google.com
+CLASS:PUBLIC
+CREATED:20090524T073957Z
+DESCRIPTION:
+LAST-MODIFIED:20090524T073957Z
+LOCATION:Single Origin Cafe\, Surry Hills
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Social Coffee Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20090530T100000
+DTEND;TZID=Australia/Brisbane:20090530T120000
+RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=SA;WKST=MO
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=tyrone castillo:mailto:tyrone.castillo@gmail.com
+UID:560kqu4fjkasgsagnjbrlkmm10@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090522T224346Z
+DESCRIPTION:OpenCoffee is about creating a regular\, informal\, meeting pla
+ ce for people involved in\, or who want to be involved in the Startup scene
+ . \n\nOpenCoffee Club was started to encourage entrepreneurs\, developers\,
+  creatives\, developers and investors to organise real-world informal meetu
+ ps to chat\, network and grow a better ecosystem for business startups. \n\
+ nWe know that Brisbane is a hive of innovative and talented people\, but we
+ 've never really had a regular place for anyone with an interest in busines
+ s startups to just hang out.\n\nThe more we get to know each other\, the mo
+ re we help motivate and inspire ourselves through open discussion and hard 
+ work.\n\nMeet us at New Farm every second Saturday between 10AM-12AM\n\nThe
+  key is a regular place and a regular time\, so feel free to join in anytim
+ e.\n\nJoin our Facebook group and receive all event updates.\n\nhttp://tiny
+ url.com/ocbrissie\n
+LAST-MODIFIED:20090522T225448Z
+LOCATION:Vue Lounge\, 83 Merthyr Road\, New Farm\, Brisbane
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:OpenCoffee Brisbane
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090601T080000Z
+DTEND:20090601T090000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:snjcbjgh8b8mkmu8pnu878gp88@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090519T221623Z
+DESCRIPTION:Don Norman's The Design of Future Things (discussion) and 7 Hab
+ its of Highly Effective People (review by Ryan Merton and Jessica Enders)
+LAST-MODIFIED:20090519T221624Z
+LOCATION:TBC
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: UXbookclub Canberra
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090626T230000Z
+DTEND:20090627T080000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Jodie Miners:mailto:jminers@gmail.com
+UID:3q80jammn3g7rfm9vr8grtmr54@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090518T031247Z
+DESCRIPTION:More details to come soon
+LAST-MODIFIED:20090518T031344Z
+LOCATION:ATP
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:BarCamp Sydney #5
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090612T230000Z
+DTEND:20090613T080000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:1hrldln9ausmo7a9jspvjr7lnk@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090426T053153Z
+DESCRIPTION:http://anyvite.com/5qitmm44gl
+LAST-MODIFIED:20090516T012324Z
+LOCATION:Google Australia\, 48 Pirrama Road\, Pyrmont\, NSW 2009
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:SYD: OpenAustralia hackfest
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090515T023000Z
+DTEND:20090515T040000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:4n4sl6habrssq3kd51bm6sl2e8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090513T100313Z
+DESCRIPTION:http://www.facebook.com/event.php?eid=84721216885
+LAST-MODIFIED:20090514T021041Z
+LOCATION:Social Media Club Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: SMC lunch
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090511T073000Z
+DTEND:20090511T090000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:dol0f1doomjg65tn4unn8r2ku0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090505T214835Z
+DESCRIPTION:
+LAST-MODIFIED:20090510T212337Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: UXbookclub Canberra
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090611
+DTEND;VALUE=DATE:20090612
+DTSTAMP:20090531T005744Z
+UID:s9gvsrummt0sc6sruk7bbl8kpo@google.com
+CLASS:PUBLIC
+CREATED:20090510T105750Z
+DESCRIPTION:
+LAST-MODIFIED:20090510T105750Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Remix Sydney
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090509T030000Z
+DTEND:20090509T043000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:ri7lokmdd5ogf0uvm986p2bbo8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090507T130346Z
+DESCRIPTION:
+LAST-MODIFIED:20090509T012430Z
+LOCATION:Pancake Parlour\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: CTUB
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20091104
+DTEND;VALUE=DATE:20091107
+DTSTAMP:20090531T005744Z
+UID:a503hkimhbltcq8egd42bg6q1o@google.com
+CLASS:PUBLIC
+CREATED:20090508T052901Z
+DESCRIPTION:
+LAST-MODIFIED:20090508T052901Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Edge of the Web Perth
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090514T073000Z
+DTEND:20090514T093000Z
+DTSTAMP:20090531T005744Z
+UID:kiqjld1fsvuvh3a55u2drvqr8s@google.com
+CLASS:PUBLIC
+CREATED:20090507T043353Z
+DESCRIPTION:Product Talks 2: “Challenges Developing and Launching a New Pro
+ duct”\n\nThis month’s session will be led by Alan Jones (alan@pollenizer.co
+ m) who describes himself as an “online product guy with a background in com
+ munications\, Product Management and creative communications.” He’s been a 
+ Product Manager since 1995 joining a startup team for a Microsoft  product 
+ and spending 6 years at Yahoo in Product Management. He is currently part o
+ f the Pollenizer team.\n\nRSVP: info@brainmates.com.au or +61 (2) 9232-8147
+ \n\nAbout Product Talks\n------------------------------\n\nProduct Talks is
+  a free event for Product Managers.\n\nWe started “Product Talks” to facili
+ tate conversations about the many common challenges faced by Product Manage
+ rs. To fuel discussion\, we’ve prepared a topic for each event. The session
+ s are generally led by Nick Coster who asks a series of questions and occas
+ ionally voices his own opinion. We encourage open debate so the group can l
+ earn from us and each other. On occasions\, “Product Talks” is led by a gue
+ st speaker.\n\n“Product Talks” is also a networking function. We’re keen fo
+ r Product Managers across different industries to meet up and exchange busi
+ ness cards. You never know where your next job offer will come from.
+LAST-MODIFIED:20090507T043636Z
+LOCATION:Brainmates\, Level 9\, 84 Pitt Street\, Sydney\, NSW 2000
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Brainmates Product Talk: developing and launching new products
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090826
+DTEND;VALUE=DATE:20090829
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:9alj0gmkduibksfnfklsnrjf4c@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090207T233852Z
+DESCRIPTION:UX Australia 2009 is a 3-day user experience design conference\
+ , with inspiring and practical presentations\, covering a range of topics a
+ bout how to design great experiences for people.\n\nIt will be held on 25-2
+ 7 August 2009\, in Canberra (Australia). The venue is Hotel Realm\, a new 5
+  star hotel in Barton.\n\nUX Australia 2009 is a community conference\, wit
+ h presentations proposed from our community and reviewed by our community.
+LAST-MODIFIED:20090504T091623Z
+LOCATION:Hotel Realm\, 14 National Cct\, Barton
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:UXAustralia
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090512
+DTEND;VALUE=DATE:20090515
+DTSTAMP:20090531T005744Z
+UID:n4d82odia4po4232qo53e8upl8@google.com
+CLASS:PUBLIC
+CREATED:20090501T000643Z
+DESCRIPTION:
+LAST-MODIFIED:20090501T000643Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CeBIT Sydney
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090515
+DTEND;VALUE=DATE:20090517
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Melbourne IT Events:mailto:9g6eqh0tpcsrd3fjc6s6sv51m0@group.ca
+ lendar.google.com
+UID:7ttrj54ln0o3ls59o1q8nvlii8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081201T015018Z
+DESCRIPTION:ACS Victorian Branch 2009 Conference "Greening ICT towards Sust
+ ainability"\n\nInvitation\nWelcome to the 2009 ACS Victorian Branch Confere
+ nce\, join us as we investigate how as ICT Professionals we can be more env
+ ironmentally sensitive in the use of computing and how we can mitigate agai
+ nst future risks.  Hear how Intel is helping in Green ICT\, how ETS (Emissi
+ ons Trading Scheme) or Carbon Trading will impact on the ICT Industry\, lis
+ ten to speakers talk about Cloud Computing and how ICT is contributing to s
+ olving issues with Water Management.\n \nThis year again\, you will have th
+ e opportunity to add your experience and knowledge in the Symposium discuss
+ ions where you can have your say on such diverse topic as The Carbon Footpr
+ int\, Virtual IT Environments\, Innovation & New Technology\, ICT Sustainab
+ ility & its impact in the Environment\, Recycle & Reuse and much\, much mor
+ e.\n\nWe also offer several excellent Professional Development opportunitie
+ s on subjects such as Do More With Less - Lean Techniques for IT Profession
+ als\, Environmental responsibilities in Project Management\, Virtual Worlds
+  and The Green Business Analyst.\n\nAll this at the relaxing Novotel Forest
+  Resort in Creswick!  This is the number one event for ACS Victoria in 2009
+  so don't miss the chance to mix with your peers\, share experiences and re
+ lax in a superb environmentally friendly environment.  \n\nWayne Moncur MAC
+ S(Snr) CPA\n2009 ACS Victoria Conference Chairman\n\nConference Program\nA 
+ full Conference Program including speaker photos & biographies will be publ
+ ished soon!  Watch this space for details.\n\nAbout the Venue\nThe Novotel 
+ Forest Resort Creswick is a brand new\, 4½ star luxury\, eco friendly hotel
+  that opened on 26th March 2008 . It features 144 beautiful accommodation r
+ ooms and is situated on 150 acres of bushland and surrounded by an 18 hole 
+ golf course that was designed by professional golfer\, Robert Allenby.\n\nI
+ t is located just 80 minutes from Melbourne CBD in the heart of spa country
+  Victoria \, only 10 minutes from the historic city of Ballarat and 20 minu
+ tes from Daylesford and Hepburn Springs. Luxury features of the Resort incl
+ ude an a-la-carte restaurant\, lobby bar\, conference and function faciliti
+ es\, boutique day spa and numerous recreational facilities.\n\nFor more inf
+ ormation about the venue please visit http://www.novotel.forestresort.com.a
+ u/\n\nAccommodation Bookings\nPlease note Conference Registration excludes 
+ accommodation.\n\nThe cost of accommodation at the Novotel Forest Resort\, 
+ Creswick is $185 per delegate\, per night including gourmet buffet breakfas
+ t. If attending with a Partner\, an additional rate of $15 applies (to incl
+ ude breakfast).\n\nIf you wish to secure accommodation at Novotel Forest Re
+ sort\, the host venue\, please contact the Novotel Forest Resort on 1300 78
+ 0 411 (Toll Free) or 03 5345 9600.  Please note accommodation is payable at
+  time of booking.\n\nPlease quote "Australian Computer Society Conference" 
+ at the time of booking to receive this discounted rate.\n\nPartners/Guests\
+ nPartners/Guests are welcome.  Registration includes catering\, pre dinner 
+ drinks & dinner (Friday evening).  A fun & exciting Partner Program will al
+ so be available with details to be published in the New Year!
+LAST-MODIFIED:20090428T043538Z
+LOCATION:Novotel Forest Resort 1500 Midland Highway Creswick\, Vic 3363 
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Greening ICT towards Sustainability - ACS
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090427T080000Z
+DTEND:20090427T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=engEDU & Events AU:mailto:google.com_nncftoqgvuerqsi67hda512k1
+ 0@group.calendar.google.com
+UID:mrictfscgc7ftmopns8c6qmvrc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090408T013757Z
+DESCRIPTION:The Google App Engine team just announced various new features:
+  support for Java as a runtime language\, cron support\, database import\, 
+ and access to firewalled data. \n\nJoin us for a talk by Google engineers t
+ hat have been working on the new App Engine features\, and learn how you ca
+ n get started using Google App Engine for your Java web apps.\n\nMore info 
+ here:\nhttp://sites.google.com/site/gdeveloperworkshopsyd/\n
+LAST-MODIFIED:20090426T104659Z
+LOCATION:Level 5\, Jumbuck\, 48 Pirrama Rd\, Pyrmont (Google Sydney Office)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Google App Engine:  Java & Other Shiny New Stuff
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090512T000000Z
+DTEND:20090512T090000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Russell Smith:mailto:russellsmit@gmail.com
+UID:vutvuh53l1iskaal4epe41rt2g@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090426T062519Z
+DESCRIPTION:A series of 4 free seminars\, lead by Industry Experts for ISV'
+ s considering transitioning to SaaS\nFull details: http://saasclusternsw.co
+ m/\n
+LAST-MODIFIED:20090426T064853Z
+LOCATION:DSRD Parramatta
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:NSW SaaS Cluster Transition Seminars
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090526T080000Z
+DTEND:20090526T110000Z
+DTSTAMP:20090531T005744Z
+UID:dbcpqt07n2klmjtat9511ai9cs@google.com
+CLASS:PUBLIC
+CREATED:20090420T122434Z
+DESCRIPTION:
+LAST-MODIFIED:20090420T122434Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Growth Town 3 - Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090515T040000Z
+DTEND:20090515T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:ijivkrgpjoqh4af5al2e0tk77c@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090417T005220Z
+DESCRIPTION:Canberra Web Standards Group meeting\, May 2009.\n\nIvan Herman
+ \, W3C - Introduction and applications of semantic web. Michael Smith\, W3C
+  - HTML5\, XHTML2: Learning from history about how to drive the future of t
+ he Web.
+LAST-MODIFIED:20090417T005221Z
+LOCATION:Bunker Theatre\, Department of Environment\, Water\, Heritage and 
+ the Arts\, John Gorton Building\, King Edward Tce\, Parkes\, ACT 2600
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: WSG meeting
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090410T050000Z
+DTEND:20090410T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:1pfjendpbl7paean2jbarhi9lc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090409T113349Z
+DESCRIPTION:Canberra Twitter meetup.
+LAST-MODIFIED:20090410T000508Z
+LOCATION:CREAM Cafe\, Bunda Street\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: CTUB (DekTUB)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090406T073000Z
+DTEND:20090406T090000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:sklisoqio07njjq6iq9uadfk3c@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090405T214326Z
+DESCRIPTION:
+LAST-MODIFIED:20090405T214327Z
+LOCATION:Tea Lounge\, Hyatt
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CBR: UX Bookclub
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20090211T083000
+DTEND;TZID=Australia/Sydney:20090211T100000
+RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=TH;WKST=SU
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=gee dot:mailto:geedot@gmail.com
+UID:5a1grda7iinmbu6bmt0kr45fis@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090208T112254Z
+DESCRIPTION:Finally\, what we've all been waiting for...\n\nOpenCoffee is b
+ ased on a similar\, successful idea introduced in London\, and is about cre
+ ating a regular\, informal\, meeting place for people involved in\, or who 
+ want to be involved in\, the Tech Startup Industry\n\nWe know Sydney has th
+ e talent\, but we've never really had a regular place for all the technolog
+ y entrepreneurs\, investors\, developers\, creatives and anyone else with a
+ n interest in tech startups to just hang out.\n\nThe more we get to know ea
+ ch other and spur each other on through collaboration and competition the f
+ aster the Sydney Tech Startup industry will grow and the quicker we can mak
+ e ourselves a global player.\n\nLet's do this.\n
+LAST-MODIFIED:20090402T005044Z
+LOCATION:Sydney CBD - CHECK THIS SITE FOR DETAILS -  http://www.meetup.com/
+ open-coffee-sydney/
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sydney OpenCoffee Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090416T073000Z
+DTEND:20090416T100000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Club Events:mailto:f91a7itlb8rb132bsj4781biuo@group.calendar.g
+ oogle.com
+UID:d5nlq059pjint697ot5nn71674@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090205T052124Z
+DESCRIPTION:Details at http://www.churchillclub.org.au/23.asp?eventId=192\n
+ \n
+LAST-MODIFIED:20090331T213006Z
+LOCATION:The Churchill Club : 7 Leveon Street\, Melbourne
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Melbourne : The Future of Search
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090409T073000Z
+DTEND:20090409T100000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Club Events:mailto:f91a7itlb8rb132bsj4781biuo@group.calendar.g
+ oogle.com
+UID:0j1563ae5oul602vh44flcuhcs@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090205T045444Z
+DESCRIPTION:http://www.churchillclub.org.au/23.asp?eventId=197\n\nThe Hypot
+ hetical\nAs the global economy slides into recession\, sovereign wealth fun
+ ds are continuing to rake in the money.\n\nAs bank shares head south\, Abu 
+ Dhabi has made a play for ANZ. The matter has gone to the Foreign Investmen
+ t Review Board but pressure is building to give it the nod with Australian 
+ banks increasingly exposed to bad debts and writedowns. The Treasurer Wayne
+  Swan has indicated the Government will give it full consideration. If the 
+ Government approves the deal\, it will open the way for more acquisitions. 
+ ANZ CEO Mike Smith says he sees no problem with the deal as Abu Dhabi’s fun
+ d has indicated it wants to keep the ANZ’s strategic plan in place.\n\nWhat
+ ’s next?\n\nPrice $33 Members / $55 Non Members.  Ticket price includes dri
+ nks\, canapés and a podcast from the evening.\n\nPanelists:\nDavid James - 
+ Reporter at BRW\nProf Paul Kerrin - Melbourne Business School\n\nModerator\
+ nLeon Gettler
+LAST-MODIFIED:20090331T212709Z
+LOCATION:The Churchill Club : 7 Leveon Street\, Melbourne 
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Leon Gettler Hypothetical
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090326T070000Z
+DTEND:20090326T090000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Victorian Java User Goup:mailto:np46h4o4b0d6c4rtjb65luf640@gro
+ up.calendar.google.com
+UID:frtt3flnk605r391polutiklkc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090324T234153Z
+DESCRIPTION:D.I.Y Device Sensor Networks using Java.\n\nYou are strongly en
+ couraged to bring along some form of wireless GUI\, such as a netbook\, iPh
+ one\, iPod touch or mobile phone with 3G data plan. Make sure you have a Tw
+ itter account and a mobile client ready. Audience participation will make i
+ t more fun :) For more see: https://victorianjug.dev.java.net/2009/March/Ma
+ rch.html
+LAST-MODIFIED:20090324T234455Z
+LOCATION:Sun\, McKillop/Dunlop Room\, Level 7\, 476 St. Kilda Road
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:VJUG Meeting
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090319T210000Z
+DTEND:20090319T220000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:d6lq832d6eq95rbe21sdqrh2a8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090319T114727Z
+DESCRIPTION:Social Media Club Canberra breakfast\, CREAM Cafe\, Bunda Stree
+ t Canberra
+LAST-MODIFIED:20090319T114728Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SMCC
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090318T033000Z
+DTEND:20090318T060000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:djv7li3enfo404jir0o4k35754@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090220T033400Z
+DESCRIPTION:Stephen Collins and Mark Schenk presenting.
+LAST-MODIFIED:20090318T061753Z
+LOCATION:NLA\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Canberra WSG meeting
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090331T090000Z
+DTEND:20090331T120000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Mike Boyd:mailto:miboyd@gmail.com
+UID:aimikg11icftj4mio5khmumuac@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090224T020449Z
+DESCRIPTION:It is with great pleasure (and a huge sigh of relief!) that I p
+ resent the first ever Brisbane edition of The Hive.\n\nThe Hive is networki
+ ng for Entrepreneuers - monthly events that feature prominent entrepreneurs
+  from the local community\, who are kind enough to donate their time and sh
+ are with us some of their experiences and wisdom. This basic concept gives 
+ rise to our motto: “The Hive - Connecting the entrepreneurs of today and to
+ morrow”.\n\nWe get together to share advice\, talk and hang out. Membership
+  is free and easy\, and everyone’s invited. If you have an idea and want to
+  launch a venture or already have a venture then make sure you come along.\
+ n\nThe Hive Brisbane is very excited to be kicking off the year with guest 
+ entrepreneur Richard Eastes from Vroom Vroom Vroom!\n\nRichard Eastes\n\nTh
+ e details:\n\nThe Hive Brisbane meets Richard Eastes - VroomVroomVroom.com\
+ n\nWhen: Tuesday 31st March\, 2009\n\nWhere: The Fox Hotel - West End (Corn
+ er of Hope & Melbourne Streets\, South Brisbane)\n\nTime: 7 - 10pm\n\nCost:
+  FREE! (But you buy your own drinks!)\n\nEmail: brisbane “AT” thehive.org.a
+ u\n\nFaceBook: Join The Hive Facebook Group & RSVP to this Facebook event.\
+ nhttp://www.facebook.com/editevent.php?eid=73264960856#/event.php?eid=73264
+ 960856&ref=nf\n\n\nWhat you can expect:\n\n- An introduction to The Hive\n-
+  Plenty of time to chat to fellow entrepreneurs and others interested in en
+ trepreneurship\, exchange ideas\, tips etc.\n- A short presentation by Rich
+ ard Eastes from from Vroom Vroom Vroom.\n\nRichard’s story:\n\nRichard took
+  a risk when he spent his life savings on VroomVroomVroom - a travel startu
+ p that was booking a mere 20 online car rental reservations per day. He qui
+ ckly grew it from his Brisbane bedroom into Australia’s fastest growing tra
+ vel company. Winning various business awards such as Deloitte FAST50\, it n
+ ow generates close to $5m in sales each month. The company is expanding glo
+ bally and is poised to becoming a great Australian export.\n\nAs a project 
+ to compliment VroomVroomVroom.com’s carbon neutral car rental\, Richard sta
+ rted http://www.greenlogo.com which has calculated that the internet produc
+ es approximately 1200 tonnes of CO2 per hour. GreenLogo reduces this by tra
+ cking the CO2 produced by a website and then pays for its carbon credits us
+ ing sponsors.\n\nRichard loves networking nights\, innovative employees\, t
+ ouch rugby\, social media sites and is addicted to Twitter. Follow him at h
+ ttp://twitter.com/eastes\n—\n\nThis event is FREE but you buy your own drin
+ ks!\n\nIf anyone is interested in sponsoring the event\, please contact us.
+ \n\nSee you there!\n\nMike Boyd and The Hive Team\nhttp://www.thehive.org.a
+ u\nhttp://www.mikeboyd.com.au\n
+LAST-MODIFIED:20090315T233235Z
+LOCATION:The Fox Hotel - West End (Corner of Hope & Melbourne Streets\, Sou
+ th Brisbane)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Hive Brisbane meets Richard Eastes - VroomVroomVroom.com
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090330
+DTEND;VALUE=DATE:20090401
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Ben Grubb:mailto:bengrubb@gmail.com
+UID:CCAF2EF0-BC07-49B4-B780-F2C962E9CFF1
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090315T080240Z
+DESCRIPTION:http://getready.eventplanet.com.au/
+LAST-MODIFIED:20090315T220131Z
+LOCATION:Sydney's Hilton
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:Digital Television Conference
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090331
+DTEND;VALUE=DATE:20090402
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Ben Grubb:mailto:bengrubb@gmail.com
+UID:35hjq9dhtksrkrpukd753d73e0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090315T215830Z
+DESCRIPTION:http://www.commsday.com/node/313
+LAST-MODIFIED:20090315T215904Z
+LOCATION:Sydney's Swissotel.
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CommsDay Summit 2009
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090401T070000Z
+DTEND:20090401T100000Z
+DTSTAMP:20090531T005744Z
+UID:3v3qde51nab559njrefgooq0c8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20090308T071250Z
+DESCRIPTION:
+LAST-MODIFIED:20090308T071258Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Growth Town - Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20080821T190000
+DTEND;TZID=Australia/Sydney:20080821T210000
+RRULE:FREQ=MONTHLY;WKST=SU;UNTIL=20091217T080000Z;BYDAY=3TH
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Work:mailto:18flh1ke19u4v1avj0a4k9r6vs@group.calendar.google.c
+ om
+UID:qn72fma070fpp50cevkja8lv00@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080822T055626Z
+DESCRIPTION:http://groups.drupal.org/australia
+LAST-MODIFIED:20090308T044806Z
+LOCATION:ABC Center\, Ultimo
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Sydney Drupal Users Group Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090313T030000Z
+DTEND:20090313T050000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Andrew Corbett-Jones:mailto:acj@batfink.com.au
+UID:60k52dfn4s86n2mhvdooihele0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090304T213501Z
+DESCRIPTION:Details and RSVP here\;\nhttp://startup-australia.wikidot.com/b
+ uilding-in-the-uk\n\nRSVP is a must\n\nAlex van Someren is a Cambridge-base
+ d entrepreneur and Dealmaker with the UK Global Entreprenuer Programme whic
+ h helps entrepreneurs and companies to locate in the UK. \n\nHis biography:
+  "I became involved with local firm Acorn Computer as a young teenager. I l
+ eft school at 17 to join the company\, working on the prototype BBC before 
+ starting my own consulting firm. I went on to co-found ANT Limited in 1990 
+ to produce networking products - ANT plc was listed on the London AIM marke
+ t in 2005 and is now positioned in the embedded software market for IPTV.\n
+ \nFrom 1996 I was CEO of nCipher which I co-founded with my brother to deve
+ lop internet security products. We raised a total of £14m ($28m) in venture
+  capital investments between 1996 and 2000\; nCipher plc was listed on the 
+ London Stock Exchange in 2000\, raising a further £108m ($216m) at IPO. I e
+ xpanded the company by making four acquisitions before recruiting my succes
+ sor and exiting the business in December 2007. The company was sold to Thal
+ es SA in October 2008."
+LAST-MODIFIED:20090306T051411Z
+LOCATION:British Consulate-General\, Level 16 The Gateway\,  1 Macquarie Pl
+ ace
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Meet Alex van Someren\, UK entrepreneur
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090306T070000Z
+DTEND:20090306T090000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:ssj0qsp3d2g5aiaonos7m02um8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090224T205104Z
+DESCRIPTION:Follow @CTUB for details.
+LAST-MODIFIED:20090305T044343Z
+LOCATION:
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:CTUB
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090321T020000Z
+DTEND:20090321T040000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:r006uv677tilj7a729emsn7jr4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090214T212630Z
+DESCRIPTION:#NoCleanFeed. http://www.facebook.com/event.php?eid=50062819138
+LAST-MODIFIED:20090303T033916Z
+LOCATION:March
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:DLC March in March (Canberra)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090401T063000Z
+DTEND:20090401T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Stephen Lead:mailto:stephen.lead@gmail.com
+UID:6er15312tn8uv7dra3rehps6e8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090302T221814Z
+DESCRIPTION:Ignite is coming to Melbourne!\n\nIgnite Web will feature short
+ \, sharp presentations all about the web. Each presentation consists of 20 
+ slides\, which last for 15 seconds each\, giving a guaranteed 5 minute pres
+ entation.\n\nwww.IgniteWeb.com.au for more information and to register - it
+ 's free.
+LAST-MODIFIED:20090302T221814Z
+LOCATION:The Apartment\, 401 Lt Bourke Street\, Melbourne\, VIC\, 30001
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ignite Web
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090303T063000Z
+DTEND:20090303T083000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Pamela Fox:mailto:pamelafox@google.com
+UID:8hfmjsnjfh8ekflgttcvgru8h4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090129T004234Z
+DESCRIPTION:Google App Engine enables you to build web applications on the 
+ same scalable systems that power Google applications. The talk will give an
+  overview of the App Engine architecture from a developer's perspective\, f
+ ollowed by a live demonstration.\nThe codelab will involve making a wiki ap
+ plication.\n\nMore info here:\nhttp://sites.google.com/site/gdeveloperworks
+ hopsyd/\n
+LAST-MODIFIED:20090301T225612Z
+LOCATION:SYD-DAR-18-Fraser (20) VC
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Google Developer Workshop: Google App Engine
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090301
+DTEND;VALUE=DATE:20090302
+DTSTAMP:20090531T005744Z
+UID:ngq19tf0cujrt8666n1jhbppik@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20080911T102427Z
+DESCRIPTION:Let's get involved together and do some tidying up with Mr Kier
+ nan and friends.\nhttp://www.cleanup.org.au/au/Campaigns/clean_up_australia
+ _day.html\n
+LAST-MODIFIED:20090217T213542Z
+LOCATION:to be confirmed
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Clean Up Austraya Day
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090304T070000Z
+DTEND:20090304T090000Z
+DTSTAMP:20090531T005744Z
+UID:8hlb9cvsqlgm3u41qj1ilrgne0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20090211T131627Z
+DESCRIPTION:RSVP here please\n\nhttp://startup-australia.wikidot.com/growth
+ -town\n\n\nOpen meeting of people who are looking to grow their existing te
+ ch business. People who have successfully grown or successfully failed a ne
+ w business of their are asked to come and share their stories. 
+LAST-MODIFIED:20090217T043453Z
+LOCATION:Atlassian office - 173-185 Sussex Street 
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Growth Town - Inaugural Event - Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090212T210000Z
+DTEND:20090212T220000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:bjciislfa13qhvd40tmi41lqfs@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090211T060449Z
+DESCRIPTION:
+LAST-MODIFIED:20090211T060520Z
+LOCATION:CREAM cafe\, Civic\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SMCC breakfast #3
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20090323T183000
+DTEND;TZID=Australia/Brisbane:20090323T203000
+DTSTAMP:20090531T005744Z
+UID:E2A6531D-B8B0-4C36-862A-E90C84F66DF0
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+RECURRENCE-ID;TZID=Australia/Brisbane:20090302T183000
+CLASS:PUBLIC
+CREATED:20090209T230154Z
+DESCRIPTION:
+LAST-MODIFIED:20090209T230244Z
+LOCATION:Toowong Library
+SEQUENCE:6
+STATUS:CONFIRMED
+SUMMARY:Brisbane Cocoaheads
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20090218T183000
+DTEND;TZID=Australia/Brisbane:20090218T203000
+DTSTAMP:20090531T005744Z
+UID:E2A6531D-B8B0-4C36-862A-E90C84F66DF0
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+RECURRENCE-ID;TZID=Australia/Brisbane:20090202T183000
+CLASS:PUBLIC
+CREATED:20090209T230154Z
+DESCRIPTION:Nathan Day is coming up from Sydney to talk about a whole bunch
+  of Cocoa libraries/projects that he's authored:\n\nNDAlias\n•Alias Records
+ \n•Core API\n•Alias File extension (Optional)\nNDLaunchServices\n•alternati
+ ve to NSWorkspace\n•open array of files\nNDHotKeyEvent\n•what are Hot Key E
+ vents\n•What NDHotKeyEvent does\nNDProcess\n•what is it\n•how it differs fr
+ om UNIX information\nNDResourceFork\n•What are resource forks\n•structured 
+ data API\n•raw data API\nNDRunLoopMessenger\n•what is DO\n•why regular DO i
+ s over kill\n•target:performSelector: methods\n•postNotification:\n•proxy\n
+ NDScript\n•NDAppleScriptObject replacement\n•three kinds of AppleScript Dat
+ a\n•script data\n•script handlers\n•script context (AppleScript)\n•coercion
+ \n•other features\n•execution of script in separate thread\nNDFiber\n•What 
+ are fibers\n•use in NDScript\n•why you should not use them usually\nSTT(X)\
+ n•generate XML from structured text\n•nested regular expressions\n•possible
+  uses\n•headerDoc replacement\n•source code generation
+LAST-MODIFIED:20090209T230244Z
+LOCATION:Toowong Library
+SEQUENCE:8
+STATUS:CONFIRMED
+SUMMARY:Brisbane Cocoaheads
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20081006T183000
+DTEND;TZID=Australia/Brisbane:20081006T203000
+RRULE:FREQ=MONTHLY;INTERVAL=1;BYDAY=1MO
+DTSTAMP:20090531T005744Z
+UID:E2A6531D-B8B0-4C36-862A-E90C84F66DF0
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20090209T230154Z
+DESCRIPTION:
+LAST-MODIFIED:20090209T230243Z
+LOCATION:Toowong Library
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Brisbane Cocoaheads
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090204T033000Z
+DTEND:20090204T053000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:6l3ci9merssldbgrueam4jbjt8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090113T011859Z
+DESCRIPTION:
+LAST-MODIFIED:20090204T022051Z
+LOCATION:National Library of Australia\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Canberra WSG meeting
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090210T063000Z
+DTEND:20090210T080000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Pamela Fox:mailto:pamelafox@google.com
+UID:2plmfrlrst14vrc7nqg9kp5lsc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090129T010355Z
+DESCRIPTION:GMail recently introduced offline support using the Gears plugi
+ n. We'll go over the various modules in Gears\, and focus on those that ena
+ ble offline support. \nThe codelab will involve taking a website offline (r
+ esources and data).\n\nMore info here:\nhttp://sites.google.com/site/gdevel
+ operworkshopsyd/\n
+LAST-MODIFIED:20090204T003547Z
+LOCATION:SYD-DAR-18-Fraser (20) VC
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Google Developer Workshop: Gears
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090202T063000Z
+DTEND:20090202T083000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:eaketgv17tgdnfn1cdh4tkmur8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090107T204523Z
+DESCRIPTION:http://groups.google.com.au/group/uxbookclubcanberra/\nhttp://u
+ xbookclub.org/doku.php?id=canberra\n
+LAST-MODIFIED:20090202T122729Z
+LOCATION:Trinity\, Dickson
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:UXBookClub Canberra
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090212T203000Z
+DTEND:20090212T213000Z
+DTSTAMP:20090531T005744Z
+UID:ftdr3uh6qf3p96uekpram3r560@google.com
+CLASS:PUBLIC
+CREATED:20090202T110727Z
+DESCRIPTION:
+LAST-MODIFIED:20090202T110727Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Social Coffee - Sacred Grounds Surry Hills
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080605T080000Z
+DTEND:20080605T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Sydney PHP Group:mailto:gd7e9voq3odsh6l2io5p1gonu4@group.calen
+ dar.google.com
+UID:co50vn8pdeminu47uvnfcho4fg@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+RECURRENCE-ID:20080605T080000Z
+CLASS:PUBLIC
+CREATED:20080605T050305Z
+DESCRIPTION:The Sydney PHP Group meets every first Thursday of the month\, 
+ with the exception of January (holidays). For venue information\, visit syd
+ php.org
+LAST-MODIFIED:20090201T233144Z
+LOCATION:Sydney\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sydney PHP Group monthly meeting
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20080605T180000
+DTEND;TZID=Australia/Sydney:20080605T210000
+RRULE:FREQ=MONTHLY;BYDAY=1TH;WKST=SU
+EXDATE;TZID=Australia/Sydney:20090402T180000
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Sydney PHP Group:mailto:gd7e9voq3odsh6l2io5p1gonu4@group.calen
+ dar.google.com
+UID:co50vn8pdeminu47uvnfcho4fg@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080605T050305Z
+DESCRIPTION:The Sydney PHP Group meets every first Thursday of the month\, 
+ with the exception of January (holidays). For venue information\, visit syd
+ php.org
+LAST-MODIFIED:20090201T233142Z
+LOCATION:Sydney\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sydney PHP Group monthly meeting
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090204T060000Z
+DTEND:20090204T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:jdocil71vgt0p3pp1mrqbtd9l4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090120T122438Z
+DESCRIPTION:Back-up plan is PJ's. Please RSVP direct to Nathanael Boehm @Na
+ thanaelB and get on the CTUB mailing list.
+LAST-MODIFIED:20090201T201719Z
+LOCATION:Muddle Bar
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:CTUB drinks at Muddle Bar
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090203T063000Z
+DTEND:20090203T080000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Pamela Fox:mailto:pamelafox@google.com
+UID:8rhup4mc4oqfghc2lq41bv9t9o@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090129T010506Z
+DESCRIPTION:We'll go over what the new Maps API for Flash can do\, and show
+  how to easily integrate it with other libraries for parsing XML/GeoRSS/KML
+ /JSON. We'll also show how to use it with the HTTP version of the Google AJ
+ AX libraries. The talk will include an introduction to ActionScript3\, Flex
+  development\, and Flex controls.\nThe codelab will be making a map that us
+ es all of the features of the API\, and the free Flex SDK.\n\nMore info her
+ e:\nhttp://sites.google.com/site/gdeveloperworkshopsyd/\n
+LAST-MODIFIED:20090129T060401Z
+LOCATION:SYD-DAR-18-Fraser (20) VC
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Google Developer Workshop: The Maps API for Flash
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090310T063000Z
+DTEND:20090310T083000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Pamela Fox:mailto:pamelafox@google.com
+UID:3p0b0iomvmlh1oiced0ai38ed0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090129T003123Z
+DESCRIPTION:Google Spreadsheets is more than just a web version of Microsof
+ t Excel - it also has a full read/write Google data (AtomPUB) API\, and sup
+ port for Google Visualization API Gadgets. This talk will introduce both of
+  these ways of enhancing the functionality of spreadsheets - from the simpl
+ e to the sophisticated.\nThe codelab will involve making a spreadsheets-bas
+ ed map\, and a spreadsheets-powered command-line database.\n\nMore info her
+ e:\nhttp://sites.google.com/site/gdeveloperworkshopsyd/\n
+LAST-MODIFIED:20090129T035854Z
+LOCATION:SYD-DAR-18-Fraser (20) VC\, SYD-DAR-18-Perkins (20)
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:Google Developer Workshop: Spreadsheets API & Gadgets
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20090107T180000
+DTEND;TZID=Australia/Sydney:20090107T200000
+RRULE:FREQ=MONTHLY;BYDAY=1WE;WKST=MO;UNTIL=20090202T125959Z
+DTSTAMP:20090531T005744Z
+UID:1a4qtqirorlui4upotput1d1qs@google.com
+CLASS:PUBLIC
+CREATED:20090106T021722Z
+DESCRIPTION:http://maps.google.com.au/maps/ms?ie=UTF8&om=1&hl=en&msa=0&msid
+ =106883881245726865333.00044470f9f8eacb3e8a2&ll=-33.868687\,151.193365&spn=
+ 0.002441\,0.004372&t=h&z=18
+LAST-MODIFIED:20090128T114617Z
+LOCATION:Pyrmont basketball courts
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Silicon Beach Basketball - Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090204T073000Z
+DTEND:20090204T100000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:ndvls5hg6nvejcfkpuc9tdh27c@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090120T122515Z
+DESCRIPTION:Dickson Asian Noodle House. Please RSVP direct to Nathanael Boe
+ hm @NathanaelB by midday 2 Feb.
+LAST-MODIFIED:20090120T122515Z
+LOCATION:DANH
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CTUB dinner at DANH
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090217
+DTEND;VALUE=DATE:20090218
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=P Rai:mailto:dekrazee1@gmail.com
+UID:h6ep9o55oo1789aln0j572gmg0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090119T074940Z
+DESCRIPTION:http://adknowledgesydney.eventbrite.com/
+LAST-MODIFIED:20090119T075758Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Digital Tipping Point:
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090120T063000Z
+DTEND:20090120T093000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=P Rai:mailto:dekrazee1@gmail.com
+UID:ld1c8tghjffcgm8uql0aururkg@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090119T073835Z
+DESCRIPTION:I'm available for any enquiries - T @deswalsh or 0413 089 355 -
+  via Des Walsh
+LAST-MODIFIED:20090119T073836Z
+LOCATION:Melbourne Hotel\, West End
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Social Media Club meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20090127T180000
+DTEND;TZID=Australia/Sydney:20090127T200000
+RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=TU;WKST=MO
+DTSTAMP:20090531T005744Z
+UID:vf6v37nuk5ec8p624gr71jrvq8@google.com
+CLASS:PUBLIC
+CREATED:20090106T021722Z
+DESCRIPTION:http://maps.google.com.au/maps/ms?ie=UTF8&om=1&hl=en&msa=0&msid
+ =106883881245726865333.00044470f9f8eacb3e8a2&ll=-33.868687\,151.193365&spn=
+ 0.002441\,0.004372&t=h&z=18
+LAST-MODIFIED:20090119T061248Z
+LOCATION:Pyrmont basketball courts
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Silicon Bech Basketball - Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20090123T080000
+DTEND;TZID=Australia/Sydney:20090123T100000
+RRULE:FREQ=WEEKLY;BYDAY=FR;WKST=SU
+DTSTAMP:20090531T005744Z
+UID:vt8n131fbgv6j01mb4vaadt5dk@google.com
+CLASS:PUBLIC
+CREATED:20090119T030944Z
+DESCRIPTION:Details at http://www.rosshill.com.au/article/social-media-brea
+ kfast-melbourne/ 
+LAST-MODIFIED:20090119T030944Z
+LOCATION:Mr Tulk Cafe (at State Library opposite Melbourne Central)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Melbourne Social Media Breakfast
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20081215T180000
+DTEND;TZID=Australia/Brisbane:20081215T200000
+RRULE:FREQ=MONTHLY;INTERVAL=1;UNTIL=20090118T135959Z;BYDAY=3MO
+DTSTAMP:20090531T005744Z
+UID:625E1795-5F15-400C-A7D3-0BA6F3DC1F0C
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+URL:http://events.linkedin.com/pub/13182
+CLASS:PUBLIC
+CREATED:20081215T012701Z
+DESCRIPTION:If you are based in Brisbane and want to surf the Mobile Tsunam
+ i in to 2009\, then come and chat mo with other mobile monday industry prof
+ essionals.\nThis event is open with no set agenda apart from introductions 
+ and if you want to demo what you do then let me know in advance.\nMobile Mo
+ nday Brisbane - now happening every 3rd Monday of the Month.
+LAST-MODIFIED:20090115T231224Z
+LOCATION:V Lounge\, 115 Wickham Street Fortitude Valley\, 4006
+SEQUENCE:10
+STATUS:CONFIRMED
+SUMMARY:Mobile Monday Brisbane
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20090119T180000
+DTEND;TZID=Australia/Brisbane:20090119T200000
+RRULE:FREQ=MONTHLY;INTERVAL=1;BYDAY=3MO
+DTSTAMP:20090531T005744Z
+UID:15F3591A-10A8-4E09-9D5B-25E4C00F185E
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+URL:http://events.linkedin.com/pub/29352
+CLASS:PUBLIC
+CREATED:20090115T231218Z
+DESCRIPTION:If you are based in Brisbane and want to surf the Mobile Tsunam
+ i in to 2009\, then come and chat mo with other mobile monday industry prof
+ essionals.\nThis event is open with no set agenda apart from introductions 
+ and if you want to demo what you do then let me know in advance.\nMobile Mo
+ nday Brisbane - now happening every 3rd Monday of the Month.
+LAST-MODIFIED:20090115T231219Z
+LOCATION:V Lounge\, 115 Wickham Street Fortitude Valley\, 4006
+SEQUENCE:9
+STATUS:CONFIRMED
+SUMMARY:Mobile Monday Brisbane
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090115T210000Z
+DTEND:20090115T220000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:1fkcbn880c638ov7rkdscnhpv4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090113T203607Z
+DESCRIPTION:http://www.facebook.com/event.php?eid=60485730201
+LAST-MODIFIED:20090113T203650Z
+LOCATION:CREAM cafe\, Bunda Street\, Canberra\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Social Media Club Canberra breakfast
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090128T074500Z
+DTEND:20090128T110000Z
+DTSTAMP:20090531T005744Z
+UID:AE617672-AED1-46D9-AE1E-30CDAE5DFF41
+URL:http://barcamp.org/BrisbaneMobility2009-1
+CLASS:PUBLIC
+CREATED:20090111T222021Z
+DESCRIPTION:
+LAST-MODIFIED:20090111T222124Z
+LOCATION:UQ\, School of ITEE\, GP South Building
+SEQUENCE:6
+STATUS:CONFIRMED
+SUMMARY:Brisbane Android & Mobile Intenet User's Group
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090327T220000Z
+DTEND:20090328T060000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:csqrs542lga4kajs026jptrq1g@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090109T213530Z
+DESCRIPTION:
+LAST-MODIFIED:20090109T213531Z
+LOCATION:ANU\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:BarCampCanberra v2
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20090117
+DTEND;VALUE=DATE:20090119
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=P Rai:mailto:dekrazee1@gmail.com
+UID:rjgtnqli2hlasls7lje86nsj4o@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20090106T015805Z
+DESCRIPTION:'Exercise for entrepreneurs'\nhttp://www.startup-australia.org/
+ startupcamp2signup
+LAST-MODIFIED:20090106T020307Z
+LOCATION:ATP Innovations Suite 145\, Level 1\, National Innovation Centre A
+ ustralian Technology Park Eveleigh NSW 1430 http://www.atp-innovations.com.
+ au/finding-us-directions/
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:StartupCamp II (Sydney)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Brisbane:20081117T180000
+DTEND;TZID=Australia/Brisbane:20081117T200000
+RRULE:FREQ=MONTHLY;INTERVAL=1;UNTIL=20081214T135959Z;BYDAY=3MO
+DTSTAMP:20090531T005744Z
+UID:47D77CCC-B219-41C5-98DB-9D83B3960B59
+URL:http://events.linkedin.com/pub/13182
+CLASS:PUBLIC
+CREATED:00001231T000000Z
+DESCRIPTION:The first Mobile Monday Brisbane.\nIf you are based in Brisbane
+  and want to surf the Mobile Tsunami in to 2009\, then come and chat mo wit
+ h other mobile monday industry professionals.\nThis event is open with no s
+ et agenda apart from introductions and if you want to demo what you do then
+  let me know in advance.\nMobile Monday Brisbane - now happening every 3rd 
+ Monday of the Month.
+LAST-MODIFIED:20081215T012705Z
+LOCATION:V Lounge\, 115 Wickham Street Fortitude Valley\, 4006
+SEQUENCE:10
+STATUS:CONFIRMED
+SUMMARY:Mobile Monday Brisbane
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081216T070000Z
+DTEND:20081216T110000Z
+DTSTAMP:20090531T005744Z
+UID:4liq5mllmgtomtnsoguunen75o@google.com
+CLASS:PUBLIC
+CREATED:20081210T010948Z
+DESCRIPTION:http://www.facebook.com/home.php#/event.php?eid=43757231313\n\n
+ Centennial Hotel (Front Bar)\nStreet:\n88 Oxford Street\, Woollahra
+LAST-MODIFIED:20081210T010949Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Entreprenuer and Self Employed
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20080815T170000
+DTEND;TZID=Australia/Sydney:20080815T200000
+RRULE:FREQ=WEEKLY;BYDAY=FR;WKST=SU;UNTIL=20081211T125959Z
+DTSTAMP:20090531T005744Z
+UID:ta2m43n5fsntvnl52fid34mbik@google.com
+CLASS:PUBLIC
+CREATED:20080608T221354Z
+DESCRIPTION:Everyone is welcome for these Friday drinks a good pub. Anyone 
+ in IT\, web\, start-ups\, grown-ups\, programmers\, analysts\, entrepreneur
+ s\, product people\, QA\, designers. \n\nSydney:\nEvery Friday from 5pm in 
+ the Grace Hotel 77Bar on the Mezzanine level\, cnr King and York\n\nPost on
+  the Silicon Beach mailing list if unsure: http://siliconbeachaustralia.org
+LAST-MODIFIED:20081207T083213Z
+LOCATION:Sydney: Grace hotel
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Official Friday: Australian IT Geek Drinks
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20081212T170000
+DTEND;TZID=Australia/Sydney:20081212T200000
+RRULE:FREQ=WEEKLY;BYDAY=FR;WKST=SU
+DTSTAMP:20090531T005744Z
+UID:loia1b0vm4ovlu5n56bi9564uc@google.com
+CLASS:PUBLIC
+CREATED:20080608T221354Z
+DESCRIPTION:Everyone is welcome for these Friday drinks a good pub. Anyone 
+ in IT\, web\, start-ups\, grown-ups\, programmers\, analysts\, entrepreneur
+ s\, product people\, QA\, designers. \n\nSydney:\nEvery Friday from 5pm in 
+ the Grace Hotel 77Bar on the Mezzanine level\, cnr King and York\n\nMelbour
+ ne:\nTrunk‎\, 275 Exhibition St Melbourne\n\nPost on the Silicon Beach mail
+ ing list if unsure: http://siliconbeachaustralia.org
+LAST-MODIFIED:20081207T083213Z
+LOCATION:Sydney: Grace hotel
+SEQUENCE:3
+STATUS:CONFIRMED
+SUMMARY:Official Friday: Australian IT Geek Drinks
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20081213
+DTEND;VALUE=DATE:20081214
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Pamela Fox:mailto:pamelafox@google.com
+UID:4add59oorr2j3m0l31qfl7um40@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081124T043401Z
+DESCRIPTION:Join us for a half-day of hacking in the iGoogle OpenSocial san
+ dbox!\n\nThis hackathon is intended for developers who are either already i
+ Google OpenSocial developers and want an excuse to get some work done in th
+ e company of others\, or experienced web developers who want to start creat
+ ing OpenSocial apps.\n\nSeats are limited\, so follow the instructions on t
+ he wiki to sign-up for the event:\nhttp://wiki.opensocial.org/index.php?tit
+ le=IGoogle_OpenSocial_Hackathon\n\n
+LAST-MODIFIED:20081205T053649Z
+LOCATION:201 Sussex St Sydney Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:OpenSocial Hackathon
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081212T070000Z
+DTEND:20081212T093000Z
+DTSTAMP:20090531T005744Z
+UID:9rnog2qpmcmpol93qt5rgoln40@google.com
+CLASS:PUBLIC
+CREATED:20081111T040351Z
+DESCRIPTION:
+LAST-MODIFIED:20081204T081717Z
+LOCATION:
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Webblast
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081216T023000Z
+DTEND:20081216T033000Z
+DTSTAMP:20090531T005744Z
+UID:ABDD6B42-AC59-47AE-9D23-B73EFE0E020D
+URL:message:%3C7c8e03ed0812011742k21e835an9fd9f9090abfb570@mail.gmail.com%3
+ E
+CLASS:PUBLIC
+CREATED:20081203T221135Z
+DESCRIPTION:Greg Davis will be giving a presentation on Highly Componentise
+ d Java Systems\n\n"Employing XP practices in a disciplined way at the coal 
+ face has had a profound impact on our Java coding style.  Extremely powerfu
+ l concepts and patterns continually emerge and are harvested.  These concep
+ ts are then leverage by the team to ramp up their velocity.\n\n"This contin
+ ual harvesting of patterns has created a Java programming style which is hi
+ ghly "componentised".  Small reusable patterns and approaches are assembled
+  into "components" which produce rock solid\, easily understandable and doc
+ umentable systems.\n\n"This presentation demonstrates this highly component
+ ised approach and how it enables the establishment of powerful\, beneficial
+  memes in development."\n\nPLEASE NOTE: a few changes for this months meeti
+ ng. This month's meeting is in the Theatrette\, which is on the same level 
+ as the Community Room (just don't make a left turn at the escalators :)). I
+ t only sits 40\, but hopefully that won't be a problem. Also\, there is no 
+ food allowed in the Threatrette (but then I haven't seen many people bring 
+ lunches lately).\n\nAnd thanks to JetBrains\, we'll be giving away one lice
+ nse to a choice of one of their products (IntelliJ IDEA Personal License\, 
+ ReSharper Personal License\, TeamCity Build  Agent (for their Continuous In
+ tegration and Build Server)\, Ruby IDE Personal License (I think this is Ru
+ byMine?) or dotTrace Personal License (memory & performance profiler)).
+LAST-MODIFIED:20081203T221321Z
+LOCATION:Theatrette (ground floor)\; Brisbane Square Library\,\; 266 George
+  Street\,\; Brisbane
+SEQUENCE:6
+STATUS:CONFIRMED
+SUMMARY:Brisbane XP December Meeting
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081201T070000Z
+DTEND:20081201T100000Z
+DTSTAMP:20090531T005744Z
+UID:b2790tdt6penakvckh6isgg1v8@google.com
+CLASS:PUBLIC
+CREATED:20081126T023729Z
+DESCRIPTION:
+LAST-MODIFIED:20081127T025135Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Mobile Monday Christmas Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20081106
+DTEND;VALUE=DATE:20081108
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Michael Liubinskas:mailto:bigmick@gmail.com
+UID:9jc4uj52d91dcp067f3esm9dfs@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=DECLINED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20080604T003335Z
+DESCRIPTION:http://www.edgeoftheweb.org.au/
+LAST-MODIFIED:20081118T095850Z
+LOCATION:Perth\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Edge of the Web (Perth)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20081203
+DTEND;VALUE=DATE:20081206
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=OSDC Calendar:mailto:242u3g2hmfkiai7cnodllkqkrs@group.calendar
+ .google.com
+UID:son62asfpdqm1qdnsgaq7uicrc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080430T041719Z
+DESCRIPTION:http://www.osdc.com.au/2008/
+LAST-MODIFIED:20081117T071357Z
+LOCATION:SMC Conference Centre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:OSDC Conference
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20081202
+DTEND;VALUE=DATE:20081203
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=OSDC Calendar:mailto:242u3g2hmfkiai7cnodllkqkrs@group.calendar
+ .google.com
+UID:9tseenak3q5fp79l8a5fet98a0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080430T041712Z
+DESCRIPTION:http://www.osdc.com.au/2008/ghackathon
+LAST-MODIFIED:20081117T071336Z
+LOCATION:SMC Conference Centre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Google Hackathon @ OSDC 2008
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081216T020000Z
+DTEND:20081216T080000Z
+DTSTAMP:20090531T005744Z
+UID:g1plplo3a306lcp4b177gffan8@google.com
+CLASS:PUBLIC
+CREATED:20081117T051356Z
+DESCRIPTION:http://www.slatteryit.com.au/FundingConnect2008/NSW/\n\n$220.00
+LAST-MODIFIED:20081117T051356Z
+LOCATION:The Mint
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Funding Connect Event
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081107T090000Z
+DTEND:20081107T143000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Chris Barraud:mailto:thatgrumguy@gmail.com
+UID:dva50a8sggeibommcmdfnp2674@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081015T091255Z
+DESCRIPTION:http://www.wawebawards.com.au/
+LAST-MODIFIED:20081107T055121Z
+LOCATION:The University Club of Western Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The WA Web Awards
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081108T010000Z
+DTEND:20081108T143000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Chris Barraud:mailto:thatgrumguy@gmail.com
+UID:bmndjruns3ueem142op2h9rogc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081015T091334Z
+DESCRIPTION:Taken from: http://ptub.info\n\nWith the WA Web Week upon us we
+  thought that it was time to pull our finger out and give you lot a breakdo
+ wn on what exactly is planned for PTUB Saturday. In true PTUB tradition\, w
+ e wanted to make sure that all involved would be catered for so it was deci
+ ded that we should all enjoy in the post-EOTW coital-esque afterglow by del
+ ivering PTUB Saturday in three equally exciting yet delicious acts.\n\nEver
+ yone is welcome to join us for acts 1 and 3 however if you wish to partake 
+ in the second act\, please contact @lu_lu or @thatgrumguy NOW to see if sea
+ ts are still available.\n\nIn preparation for the long day we know some of 
+ you will be rather fragile from the debaucheries of the night before. Mothe
+ r dearest always used to say the first step to a brilliant day out is to fi
+ ll your belly up in a nutritious way.\n\nThat’s exactly what we’re going to
+  do:\n\n\nACT 1 : BREAKFAST – 10:00 to 12:00\n\n\nTiger Tiger Coffee Bar is
+  a favourite amongst the Perth Twitter crew with its great location\, great
+  food\, great coffee and most importantly – free WiFi!\n\nThis little gem n
+ estled deep inside the bowels of the Perth CBD is choc-full of delicious or
+ al pleasures such as nutella and mascarpone cinnamon bagels\, oven-roasted 
+ field mushrooms with Brebirousse cheese and delicious buttery crumpets.\n\n
+ We’ll be heading down to Tiger Tiger at around 10:00 to nom up some delicio
+ us treats.\n\nTheir address is :\n\nShop 4 / 329 Murray Street\, Perth\n\nG
+ oogle Map: http://tinyurl.com/TigerTigerMap\nTwitter : http://twitter.com/t
+ igertigercb\nWebsite: http://tigertigercoffeebar.com/\nMenu: http://tinyurl
+ .com/TigerTigerMenu\n\n\nACT 2 : WINE TOUR – 12:15 to 5:00\n\n\nAfter we ha
+ ve stuffed ourselves silly with lots of coffee and treats\, we’ll be making
+  our way down to the Wellington St Tourist Coach Stand which is evidently d
+ irectly in front of the Wellington St Bus Station\, which is just west of t
+ he Perth Train Station for those who aren’t from this lovely city of Perth.
+ \n\nThis is the departure point for the wine tour so all attendees must be 
+ at the stand by 12:15 otherwise we will leave without you and tweet bad stu
+ ff about you to the rest of the world.\n\nFrom there we journey towards to 
+ the valley where we will be:\n\n* Wine tasting at Lancaster Winery\n* Wine 
+ tasting and cheeseboard at Edgecombe Brothers Winery\n* Wine tasting and no
+ ugat tasting at Charlies Winery\n* Beer sample and snack basket at Elmars i
+ n the Valley Brewery\n* Chocolate tastings at Margaret River Chocolate Comp
+ any\n\nWe shall be finishing up at 4:30 where we’ll jump back into the bus 
+ to return to the city.\n\n\nACT 3 : DINNER\, DRINKS\, SHITS & GIGGLES – 5:3
+ 0 to LATE\n\n\nDepending on how many haven’t passed out from the sheer exci
+ tement of the day we will venture into the city in search of dinner and oth
+ er forms of entertainment. At this stage plans will be fluid depending on t
+ he outcome of the day however if you wish to join us\, follow @PTUB\, @lu_l
+ u and @thatgrumguy on twitter for ongoing updates.\n\nSuggestions for post-
+ PTUB:\n\n* Dinner & drinks at The Belgian Beer Cafe\n* Drinks & skydiving f
+ rom several hundred meters in the air\n* A quick round of genuine Absinthe 
+ shooters followed by a game of Russian Roulette\n* Journey to Northbridge f
+ or pasta\, clubs n' pubs\n\nWhatever we end up doing\, we intend to do it l
+ ong and hard into the night.\n\n- love\, your unofficial official PTUB orga
+ nisers.
+LAST-MODIFIED:20081107T054844Z
+LOCATION:Perth\, Western Australia
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:PTUB @ the edge of Edge of the Web
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081129T000000Z
+DTEND:20081129T120000Z
+DTSTAMP:20090531T005744Z
+UID:1A83950A-261E-4AA8-947E-A5ACE93DF4A4
+URL:http://barcamp.org/BarCampGoldCoast2
+CLASS:PUBLIC
+CREATED:20081103T065357Z
+DESCRIPTION:
+LAST-MODIFIED:20081103T065402Z
+LOCATION:
+SEQUENCE:3
+STATUS:CONFIRMED
+SUMMARY:BarCamp Gold Coast
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081114T220000Z
+DTEND:20081115T070000Z
+DTSTAMP:20090531T005744Z
+UID:6htjc7gs5ip2evislthkp8gkvk@google.com
+CLASS:PUBLIC
+CREATED:20081103T024158Z
+DESCRIPTION:
+LAST-MODIFIED:20081103T024207Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Barcamp 4
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081128T060000Z
+DTEND:20081128T103000Z
+DTSTAMP:20090531T005744Z
+UID:rkufivtu87jkiac11vncjle8c8@google.com
+CLASS:PUBLIC
+CREATED:20081103T012949Z
+DESCRIPTION:
+LAST-MODIFIED:20081103T012949Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Movember Party - Fox Studios
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081111T080000Z
+DTEND:20081111T100000Z
+DTSTAMP:20090531T005744Z
+UID:k8sd0ei3tm6etf0a7q3u4242q8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20081031T035010Z
+DESCRIPTION:For full details make sure you register at www.thehive.org.au
+LAST-MODIFIED:20081031T035935Z
+LOCATION:TBC\, Melbourne CBD.
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Hive
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081031T100000Z
+DTEND:20081031T150000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Chris Barraud:mailto:thatgrumguy@gmail.com
+UID:fus13644n0tbgc15cndp47see4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081026T040026Z
+DESCRIPTION:Details at:\n\nhttp://tinyurl.com/halloweenptub\nhttp://twitter
+ .com/ptub\n\nWith all the hullabaloo about the superfun winoTUB event happe
+ ning after Edge of the Web\, we forgot all about the fact that this Friday 
+ will be Halloween!\n\nThe Perth crew decided to whip up a mini-shindig to c
+ elebrate this rather American tradition by dressing up in the sexiest costu
+ mes known to man and returning to the scene of the last PTUB dress-up party
+  - Little Creatures in Freo.\n\nEveryone is invited\; young\, old\, male\, 
+ female\, geek\, nerd\, twitterer\, plurker\, whatever - the only prerequisi
+ te is that you have a jolly old time and take as many incriminating photos 
+ of the people around you as you can.\n\nIf you do take pictures\, please re
+ member to tag them PTUB and HalloweenPTUB.\n\nDETAILS!\n\nWhere: Little Cre
+ atures Brewing - 40 Mews Road\, Fremantle\n(rough map: http://ut.ag/00kC )\
+ nWhich day: Friday 31st October 2008\nWhat time: 7pm until late\n\nSign up 
+ at the Facebook event if you'd like to stalk your prey beforehand.\n\nhttp:
+ //www.littlecreatures.com.au/\nhttp://www.facebook.com/event.php?eid=327612
+ 77895
+LAST-MODIFIED:20081031T022336Z
+LOCATION:Little Creatures Brewing - 40 Mews Road\, Fremantle
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:MiniHalloweenPTUB at Little Creatures Freo
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081029T080000Z
+DTEND:20081029T100000Z
+DTSTAMP:20090531T005744Z
+UID:D2D9DA6C-2AB7-478C-829A-2323948AAB19
+URL:http://www.meetup.com/Scrummaster/calendar/8885336/
+CLASS:PUBLIC
+CREATED:20081025T230302Z
+DESCRIPTION:Inaugural Meeting
+LAST-MODIFIED:20081025T230411Z
+LOCATION:Third floor Room 301 S Block\; QUT\, Gardens point campus Brisbane
+SEQUENCE:9
+STATUS:CONFIRMED
+SUMMARY:Brisbane Scrum Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081212T063000Z
+DTEND:20081212T093000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=P Rai:mailto:dekrazee1@gmail.com
+UID:7amn9lbp6dofub66ue54v0trs0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081021T053127Z
+DESCRIPTION:http://www.ignitespatial.com/
+LAST-MODIFIED:20081021T053653Z
+LOCATION:Occidental Hotel
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Ignite Spatial
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081023T060000Z
+DTEND:20081023T080000Z
+DTSTAMP:20090531T005744Z
+UID:kmfpg8tuq5ascg3i22ihm40k1g@google.com
+CLASS:PUBLIC
+CREATED:20081014T064920Z
+LAST-MODIFIED:20081014T064920Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Debate IT - Museum of Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081106T083000Z
+DTEND:20081106T123000Z
+DTSTAMP:20090531T005744Z
+UID:eb601tn12qibpc3uecttv5dss0@google.com
+CLASS:PUBLIC
+CREATED:20081013T061241Z
+DESCRIPTION:Webjam 9 will rock Perth in conjunction with the Edge of the We
+ b conference. Webjam attendance is open to anyone\, just register to attend
+  at http://webjam.com.au/webjam9
+LAST-MODIFIED:20081013T061240Z
+LOCATION:UWA Tavern\, UWA\, Perth
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Webjam 9
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20081114T220000Z
+DTEND:20081116T060000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Jodie Miners:mailto:jminers@gmail.com
+UID:jm7dgl1nhslc4t03065nded3mg@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20081007T020419Z
+DESCRIPTION:see www.officedevcon.com.au\n\nThis is a community run event fo
+ r people interested in Microsoft Office Development. It is a free 2 day con
+ ference. 
+LAST-MODIFIED:20081007T020419Z
+LOCATION:Microsoft Offices
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Office Devcon
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080924T223000Z
+DTEND:20080925T073000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:th54rmnje9paqhh8ffv0h284uc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+RECURRENCE-ID:20080924T223000Z
+CLASS:PUBLIC
+CREATED:20080821T012023Z
+LAST-MODIFIED:20080923T230606Z
+LOCATION:Sydney\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Web Directions South 2008
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080924T070000Z
+DTEND:20080924T120000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:f3blnlq4idi5l731f8k9qhli64@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080821T011254Z
+DESCRIPTION:
+LAST-MODIFIED:20080923T211631Z
+LOCATION:Harlequin Inn
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Pre-WDS port80 drinks
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080919T110000Z
+DTEND:20080919T153000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Chris Barraud:mailto:thatgrumguy@gmail.com
+UID:lk03m0j2b1r1vh361nbccm8n2s@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080911T021149Z
+DESCRIPTION:This event is open to those who microblog in Perth\, Western Au
+ stralia.\n\nMore information can be found at http://ptub.info\n\nAvast\, ye
+  scurvy scallywags! With the warmer weather returnin'\, it be time for the 
+ PTUB crew t' emerge from its vast slumber and terrorise the citizens o' Per
+ th. We shall be journeyin' towards the port o' the Fremantle t' crack open 
+ a Pale Ale or three at the Little Creatures Brewery for International Talk 
+ Like a Pirate Day!\n\nAttendees be encouraged t' dress up as their fa'orite
+  pirate or wench\, and drink as much rum\, swill or grog as a PPTUBber can 
+ handle.\n\nAye\, so come one\, come all t' the piratest o' all pirate days 
+ on land\, garrrrrrrr!\n\n[TRANSLATION: Friday will be Talk Like a Pirate da
+ y. There will be a PTUB at Little Creatures in Freo. Be there otherwise @lu
+ _lu might stab you in the Jolly Rogers. Come in costume for extra points*!]
+ \n\nDETAILS!\n\nWhere:  (rough map: http://ut.ag/00kC )\nWhich day: Friday 
+ 19th September 2008\nWhat time: 7pm until late\n\nhttp://www.littlecreature
+ s.com.au/
+LAST-MODIFIED:20080918T061825Z
+LOCATION:Little Creatures Brewing - 40 Mews Road\, Fremantle\, Western Aust
+ ralia
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:PPTUB #1 - Perth Pirate Twitter Underground Brigade
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080911T080000Z
+DTEND:20080911T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:9kgd1c90pf0pdfpt3l2akgbgkk@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080910T230931Z
+DESCRIPTION:
+LAST-MODIFIED:20080910T230931Z
+LOCATION:82 Wentworth Avenue Kingston Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Adobe User Group Canberra
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080925T093000Z
+DTEND:20080925T135900Z
+DTSTAMP:20090531T005744Z
+UID:6h7jnhtc6084tteh8hicd8i7os@google.com
+CLASS:PUBLIC
+CREATED:20080910T223301Z
+DESCRIPTION:Our first Webjam in 12 months is going to be the biggest ever! 
+ Get your proposals and RSVPs in now or miss out!\nhttp://webjam.com.au/webj
+ am8
+LAST-MODIFIED:20080910T223301Z
+LOCATION:Bar Broadway\, corner of Regent and Broadway\, Sydney\, NSW
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Webjam 8
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080925T093000Z
+DTEND:20080925T140000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Jodie Miners:mailto:jminers@gmail.com
+UID:hss4cuuu6jssf73hj1eopep2ds@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080908T073404Z
+DESCRIPTION:Come on down to the Pontoon bar after the free drinks run out a
+ t Web Directions.
+LAST-MODIFIED:20080908T073404Z
+LOCATION:Pontoon Bar\, Darling Harbour
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:AussieTUB (Twitter users from all around Australia and farther afie
+ ld welcome)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080908T080000Z
+DTEND:20080908T110000Z
+DTSTAMP:20090531T005744Z
+UID:B75C1EF2-4435-48E0-98BC-8EDE818059BA
+URL:http://groups.google.com/group/qjug
+CLASS:PUBLIC
+CREATED:20080908T061006Z
+DESCRIPTION:Come and meet Groovy - the Java\, Ruby and Scala killer!
+LAST-MODIFIED:20080908T061238Z
+LOCATION:
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Queensland Java Users' Group
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080912T080000Z
+DTEND:20080912T135900Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Ben Grubb:mailto:bengrubb@gmail.com
+UID:7ughmkr2o30sujcds333a5ojfs@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080907T155138Z
+DESCRIPTION:When: Friday\, September 12th @ 6 PM though Ben will be later t
+ han that...\nWhere: Ball & Chain Grill\nWhat to Bring: Money for food and d
+ rinks as well as cameras!\nContact: ben.grubb[at]mactalk.com.au or myself o
+ n mactalk[at]nigelhoneyphotos.com
+LAST-MODIFIED:20080907T155941Z
+LOCATION:Ball & Chain Grill Hobart
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:MacTalk Hobart Meet
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080914T020000Z
+DTEND:20080914T135900Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Ben Grubb:mailto:bengrubb@gmail.com
+UID:cmte3i7r5kta3gvuhi17337ep8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080907T155612Z
+DESCRIPTION:When: Sunday\, 14th September @ 12 noon\nWhere: South Perth For
+ eshore:\n\nhttp://maps.google.com.au/maps/ms?ie=UTF8&om=1&hl=en&msa=0&msid=
+ 117653044730579597094.0004558f7860ae2a250ab&t=h&ll=-31.974454\,115.867814&s
+ pn=0.004018\,0.007794&z=18\n\nWhat to Bring: It's BYO food & drink for the 
+ most part - MacTalk isn't putting up any cash for the meet due to being pau
+ pers for our new server.\nContact: \nhttp://forums.mactalk.com.au/members/j
+ eremy_warnock/
+LAST-MODIFIED:20080907T155801Z
+LOCATION:South Perth Foreshore
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:MacTalk Perth Meet
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080926T080000Z
+DTEND:20080926T135900Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Ben Grubb:mailto:bengrubb@gmail.com
+UID:746E260B-877B-4620-BCA3-2A0CA8271920
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080725T153539Z
+DESCRIPTION:MacTalk.com.au and Brisbane Twitter Underground Brigade Unite! 
+ @ http://www.boardwalkbar.com.au/
+LAST-MODIFIED:20080907T154854Z
+LOCATION:Boardwalk Level Riparian Plaza\, 71 Eagle Street\, Brisbane\, QLD
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:BTUB + MacTalk Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080905T023000Z
+DTEND:20080905T033000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:0vs353q1t3hktdiug9j4m6ugdo@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080829T013100Z
+DESCRIPTION:Follow @CTUB for more information and updates.
+LAST-MODIFIED:20080829T013212Z
+LOCATION:Civic\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CTUB lunch at King O'Malley's
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20080925T083000
+DTEND;TZID=Australia/Sydney:20080925T173000
+RRULE:FREQ=DAILY;UNTIL=20080925T223000Z;WKST=MO
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:th54rmnje9paqhh8ffv0h284uc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080821T012023Z
+LAST-MODIFIED:20080821T012023Z
+LOCATION:Sydney\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Web Directions South 2008
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20080606T170000
+DTEND;TZID=Australia/Sydney:20080606T200000
+RRULE:FREQ=WEEKLY;BYDAY=FR;WKST=SU;UNTIL=20080814T135959Z
+DTSTAMP:20090531T005744Z
+UID:12i0dac3jvq89ovmbj4k065fdk@google.com
+CLASS:PUBLIC
+CREATED:20080608T221354Z
+DESCRIPTION:Everyone is welcome for these Friday drinks a good pub. Anyone 
+ in IT\, web\, start-ups\, grown-ups\, programmers\, analysts\, entrepreneur
+ s\, product people\, QA\, designers. \n\nSydney:\nWe usually meet by the po
+ ol table on level 2. 
+LAST-MODIFIED:20080819T050656Z
+LOCATION:Sydney: Shelbourne Hotel\, Cnr Market and Sussex
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:FITSBAD: Friday IT Silicon Beach Australian Drinks
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080815T000000Z
+DTEND:20080815T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Melbourne Jelly:mailto:mail@ppeach.com
+UID:6lqlbjq2gs8aig6eugn18boc3g@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=DECLINED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+RECURRENCE-ID:20080815T000000Z
+CLASS:PUBLIC
+CREATED:20080803T073807Z
+DESCRIPTION:Change of work scenery\, hang around people doing interesting t
+ hings for a day. Coworking in a a relaxed environment for people doing thin
+ gs\, from geeks\, graphic designers\, to idea people.
+LAST-MODIFIED:20080811T053305Z
+LOCATION:Joe's Garage\, 366 Brunswick Street Fitzroy\, Victoria 3065
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Melbourne Jelly
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080801T000000Z
+DTEND:20080801T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Melbourne Jelly:mailto:mail@ppeach.com
+UID:6lqlbjq2gs8aig6eugn18boc3g@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+RECURRENCE-ID:20080801T000000Z
+CLASS:PUBLIC
+CREATED:20080803T073807Z
+DESCRIPTION:Change of work scenery\, hang around people doing interesting t
+ hings for a day. Coworking in a a relaxed environment for people doing thin
+ gs\, from geeks\, graphic designers\, to idea people.
+LAST-MODIFIED:20080805T132952Z
+LOCATION:Joe's Garage\, 366 Brunswick Street Fitzroy\, Victoria 3065
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Melbourne Jelly
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Sydney:20080801T100000
+DTEND;TZID=Australia/Sydney:20080801T170000
+RRULE:FREQ=MONTHLY;WKST=MO;BYDAY=1FR,3FR
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Melbourne Jelly:mailto:mail@ppeach.com
+UID:6lqlbjq2gs8aig6eugn18boc3g@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080803T073807Z
+DESCRIPTION:Change of work scenery\, hang around people doing interesting t
+ hings for a day. Coworking in a a relaxed environment for people doing thin
+ gs\, from geeks\, graphic designers\, to idea people.
+LAST-MODIFIED:20080805T132951Z
+LOCATION:Joe's Garage\, 366 Brunswick Street Fitzroy\, Victoria 3065
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Melbourne Jelly
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080827T073000Z
+DTEND:20080827T130000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Jennifer Hiley:mailto:jenniferhiley@gmail.com
+UID:1clpemd4oul657uv3p24nraio8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080803T233113Z
+DESCRIPTION:Swedish Beers Down Under (#2) – drink beer\, talk mobile\, drin
+ k more beer\, talk nonsense…\n\nPeople keep asking when the next Swedish Be
+ ers is happening. Well\, mark your diaries for Wednesday\, 27th August 2008
+  at the Redoak Boutique Beer Café\, 201 Clarence Street\, Sydney – same ven
+ ue as last time. Once again\, drinking commences @ 5.30pm. This month\, Swe
+ dish Beers is being sponsored by the nice people at BlueCentral\, so when y
+ ou have a drink\, you’ve got them to thank!\n\ncheck us out @ http://www.sw
+ edishbeers.co.uk\n\nPlease feel free to invite anyone else who you find int
+ eresting enough to attend!\n\nskål\n\nJen²\n\nSwedish Beers Sydney event is
+  brought to you by Sydney mobilists\, Jen²\, who are Jennifer Hiley of 5th 
+ Finger & Jennifer Wilson of Lean Forward\n
+LAST-MODIFIED:20080803T233113Z
+LOCATION:The Redoak Beer Cafe\, 201 Clarence Street\, Sydney
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Swedish Beers Down Under
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080729T090000Z
+DTEND:20080729T123000Z
+DTSTAMP:20090531T005744Z
+UID:vftif7it7pailqnujl2k8kl2k4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20080720T103850Z
+DESCRIPTION:fromSYMONS DEBRA <debra.symons@alcatel-lucent.com.au>\ntomick@l
+ iubinskas.com\ndateMon\, Jul 14\, 2008 at 10:05 AM\nsubjectaugmented realit
+ y event\nmailed-bybounce.secureserver.net\n\nhide details Jul 14 (7 days ag
+ o)\n\n\nReply\n\n\n\nHi Mick\,\n\nI hope all is going well for you.\n\nI’d 
+ like to invite you to AIMIA NSW’s next free event on augmented reality beca
+ use I think this topic will be of great interest to you.\n\n \n\nWe are abo
+ ut to experience myriad applications of augmented reality via our mobile ph
+ ones. Mobile devices and augmented reality are made for each other and the 
+ possibilities of “AR” are impressive. It’s been said that a tremendous augm
+ ented reality industry is waiting to emerge and will become one of the most
+  influential technological shifts yet experienced.\n\n \n\nWe have a great 
+ panel to talk about the various forms of augmented reality (or location-bas
+ ed services) and how they will impact our lives from both a commercial and 
+ a social viewpoint.\n\nJason Collins is our international guest speaker. He
+  recently showed a mobile augmented reality interface prototype he develope
+ d with Georgia Tech at CTIA Wireless in Las Vegas earlier in the year. He w
+ ill be giving a similar demo on the night and talk about mobile augmented r
+ eality services beyond QR codes.\n\nAaron Stafford is a researcher at the W
+ earable Computer Lab\, School of Computer and Information Science\, Univers
+ ity of South Australia. His projects remind me of Robocop technology in its
+  infancy. He will show videos of the amazing work his department is doing a
+ t the lab.\n\nViveka Weiley is a Geospatial and Collaborative Virtual Envir
+ onments Researcher at the University of Technology\, Sydney. He will be tal
+ king about his mixed-reality installation at The Powerhouse Museum.\n\nAdam
+  Dunne is the Sales & Marketing Director at AURA Interactive and he will be
+  talking about the marketing opportunities of augmented and mixed-reality s
+ ervices.\n\n \n\nMick\, come and have a complimentary drink with us and hea
+ r about local and international developments in this exciting new technolog
+ y.\n\nI look forward to seeing you on Tuesday\, 29th July\, 6.30pm at The P
+ rivilege Club\, cnr George and King Streets\, Sydney.\n\n \n\nBest regards\
+ ,\n\nDebra\n\n \n\nHere is a link to the event website for more info: http:
+ //www.aimia.com.au/i-cms?page=4635\n\nPlease forward this invitation onto y
+ our friends\, colleagues and networks. They are very welcome and I’m sure t
+ he content will be of interest to them.\n\n \n\n \n\nDebra Symons\n\nWeb De
+ signer and Developer\n\nIT Applications and Solutions\n\nAlcatel-Lucent Aus
+ tralasia\n\n280 Botany Road\n\nAlexandria NSW 2015\n\nAustralia\n\n \n\nAlc
+ anet: 2704 5879\n\nTelephone: +61 2 8306 5879\n\nFax: +61 2 8306 5684\n\nMo
+ bile: 0417 665514\n\nEmail: debra.symons@alcatel-lucent.com.au\n\n \n
+LAST-MODIFIED:20080729T061902Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:AIMIA Event - Privlidge bar
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080804T080000Z
+DTEND:20080804T110000Z
+DTSTAMP:20090531T005744Z
+UID:0i4pj5dv2l6pq8atfopjfk48ic@google.com
+CLASS:PUBLIC
+CREATED:20080729T021512Z
+DESCRIPTION:http://www.mobilemondaysydney.com/2008/07/28/august-2008-mobile
+ -futures-part-1-xumii-and-google/
+LAST-MODIFIED:20080729T021540Z
+LOCATION:Priviledge Bar\, Cnr King and George St
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Mobile Monday - Xumii and Google
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080619T073000Z
+DTEND:20080619T103000Z
+DTSTAMP:20090531T005744Z
+UID:am61gnffu2o50ol9imf2ng24gg@google.com
+CLASS:PUBLIC
+CREATED:20080616T022213Z
+DESCRIPTION:Open Drinks. All welcome. For our inter-state guests. \n\nPass 
+ it on. \n\n5pm. Drop by the new apple store to mock them and pick up free t
+ -shirt.\n5.30pm walk down to the Loft\n\nThe Loft\nKing St Wharf\nwww.thelo
+ ftsydney.com
+LAST-MODIFIED:20080722T023957Z
+LOCATION:The Loft\, King St Wharf
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:(Updated) Drinks for Web Hobbits
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080723T043000Z
+DTEND:20080723T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:htqhbq5hh3cq6frtfoqvq2ea04@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080708T043920Z
+DESCRIPTION:Jessica Enders of Formulate Information Design presents "The se
+ crets of successful online forms" followed by Alexi Paschalidis (Oxide Inte
+ ractive) and Tim Siers (Royal Australian Navy) presenting  on the redevelop
+ ment of the Royal Australian Navy web site.
+LAST-MODIFIED:20080721T035436Z
+LOCATION:National Library of Australia\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Canberra Web Standards Group
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080714T230000Z
+DTEND:20080715T063000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Phil Pollenizer:mailto:kpdvgepahkppepcm6dbjkp3pac@group.calend
+ ar.google.com
+UID:vlm598lkpeavdj125k9mpusqeo@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080714T031334Z
+DESCRIPTION:We'll be streaming FOM08 here:\nhttp://www.pollenizer.com/chase
+ r/\n\nMore info:\nhttp://www.futureexploration.net/fom08/
+LAST-MODIFIED:20080714T031334Z
+LOCATION:http://www.pollenizer.com/chaser/
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Conference Chaser at FOM08
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080724T213000Z
+DTEND:20080724T223000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Phil Pollenizer:mailto:kpdvgepahkppepcm6dbjkp3pac@group.calend
+ ar.google.com
+UID:0cnshdfg3af4j51a8k4gr89unc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080713T220228Z
+DESCRIPTION:Mike Cannon-Brookes\, Atlassian\n\n\nFriday 25 July 2008\n\n\nV
+ enue: Slide Bar\, 41 Oxford Street\, Darlinghurst\, Sydney\n\n\nMike Cannon
+ -Brookes from Atlassian will be our guest speaker for a breakfast on 25 Jul
+ y.\n\nMike is co-founder and CEO of Atlassian Pty Ltd an innovative\, award
+ -winning enterprise software company. As well as being frighteningly young 
+ and good-looking\, Mike has been instrumental in building Atlassian into on
+ e of Australia's brightest technology exports. Amazingly\, Mike (along with
+  his co-founder Scott Farquhar) has done this with no external funding. Com
+ e along and hear this amazing and inspirational story in the unique Innovat
+ ion Bay environment.\n\nAtlassian produces tools that help technical and bu
+ siness teams collaborate\, plan projects and build software. Based in Austr
+ alia\, Atlassian currently has over 10\,000 enterprise customers around the
+  globe and has been named one of the "Fastest Growing Companies" by both De
+ loitte and BRW Magazine.\n\nMike has received international recognition for
+  his work including the Australian IT Professional of the Year in 2004 and 
+ being named Australian Entrepreneur Of The Year in 2006. Outside Atlassian\
+ , he is an active investor and advisor to a few technology-focused ventures
+ \, and participates in a number of open source projects.\n\nHis blog is ent
+ itled rebelutionary\n\nPrice: $10 - payable in cash to a bucket on the door
+  
+LAST-MODIFIED:20080713T235117Z
+LOCATION:Slide Bar
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Innovation Bay with Mike Cannon-Brookes
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20080801
+DTEND;VALUE=DATE:20080802
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:ncp21mi9r0g3u3r8rdhkprd6ko@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080711T052833Z
+DESCRIPTION:Join the Usability Challenge 2008 and participate in the world'
+ s first global usability drive!\n\nOn 1 August 2008\, we are asking anyone 
+ with a passion for usability to solve a usability problem...any usability p
+ roblem at all...and help make the world a better/safer/less annoying place.
+ \n\n1. Find a usability problem\n\n2. Design a solution\n\n3. Share it with
+  a person who can solve the problem by implementing your solution\n\nhttp:/
+ /www.usabilitychallenge.org/
+LAST-MODIFIED:20080711T052833Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Usability Challenge 2008
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080731T093000Z
+DTEND:20080731T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Phil Morle:mailto:phil.morle@gmail.com
+UID:g0firv96cm1nc45h206fpam3us@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080707T080221Z
+DESCRIPTION:
+LAST-MODIFIED:20080707T080222Z
+LOCATION:James Squire Brewhouse\, Darling Harbour
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sydney Cocoa Users Group
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080707T083000Z
+DTEND:20080707T123000Z
+DTSTAMP:20090531T005744Z
+UID:7ri347d4kpu4uvg8oci7jqjuic@google.com
+CLASS:PUBLIC
+CREATED:20080630T052306Z
+DESCRIPTION:http://www.mobilemondaysydney.com/\n\n:: 6.30pm for 7pm\, Mon 7
+ th July 2008\n:: The Privilege Bar (part of the Blacket Hotel\n:: Entry on 
+ George St.\, (corner George and King.) Map here.\n
+LAST-MODIFIED:20080706T093617Z
+LOCATION:Privilege Bar Cnr George and King
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Mobile Monday
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080703T080000Z
+DTEND:20080703T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Sydney PHP Group:mailto:gd7e9voq3odsh6l2io5p1gonu4@group.calen
+ dar.google.com
+UID:co50vn8pdeminu47uvnfcho4fg@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+RECURRENCE-ID:20080703T080000Z
+CLASS:PUBLIC
+CREATED:20080605T050305Z
+DESCRIPTION:Update: July meeting cancelled due to illness. More at sydphp.o
+ rg\n\nThe Sydney PHP Group meets every first Thursday of the month\, with t
+ he exception of January (holidays). For more information\, visit sydphp.org
+LAST-MODIFIED:20080703T043258Z
+LOCATION:CodeGear offices\, Sydney\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sydney PHP Group monthly meeting
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080704T073000Z
+DTEND:20080704T100000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:be4rq4hhaqqbssj110jk0kg5kk@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080701T065653Z
+LAST-MODIFIED:20080702T042908Z
+LOCATION:Trinity Bar\, Dickson\, ACT
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:CTUB 7
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080703T060000Z
+DTEND:20080703T070000Z
+DTSTAMP:20090531T005744Z
+UID:pnoetmgev65ooho21db1g7l3vo@google.com
+CLASS:PUBLIC
+CREATED:20080626T222143Z
+LAST-MODIFIED:20080702T024206Z
+LOCATION:1 Barrack St\, Sydney\, NSW\, Australia
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Update: Co-Working Sydney Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Perth:20080702T180000
+DTEND;TZID=Australia/Perth:20080702T210000
+RRULE:FREQ=MONTHLY;BYDAY=1WE;WKST=SU
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Perth Web Events:mailto:5ma3bsugrlhfq8tspln37hi2ko@group.calen
+ dar.google.com
+UID:a2cpu0fqkv603j4dcs22sbpelc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080701T042339Z
+DESCRIPTION:Join us at The Velvet Lounge next to the Flying Scotsman pub in
+  Mt Lawley (corner of Beaufort and Grosvenor Streets) and meet your fellow 
+ web professionals. There’s free food\, a bar and each month we host two\, t
+ en minute talks from members on their area of expertise.\n\nNo need to regi
+ ster\, just rock up and join in! The night kicks off at 6.00pm. Talks start
+  around 6:30pm 
+LAST-MODIFIED:20080701T042340Z
+LOCATION:Velvet Lounge\, The Flying Scotsman 639 Beaufort St Mount Lawley W
+ A 6050
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Port80 / AWIA MIni Talks
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080627T020000Z
+DTEND:20080627T030000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Nathanael Boehm:mailto:nathanael.boehm@gmail.com
+UID:ua68rfb8mofhu44sigu3mnoqo0@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080626T045739Z
+DESCRIPTION:Canberra Twitter usergroup meet-up.
+LAST-MODIFIED:20080626T045740Z
+LOCATION:The Bakery Cafe\, Bunda Street\, Canberra
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CTUB 6
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080712T010000Z
+DTEND:20080712T080000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Randal Leeb-du Toit:mailto:randal.leebdutoit@gmail.com
+UID:f6bniddmj63fkve55iha6hvg8s@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080625T005507Z
+DESCRIPTION:MySpace devJams are a great opportunity for developers to learn
+  more about the MySpace Developer Platform\, the largest implementation of 
+ Open Social. \n\nHear inside views from the MySpace dev team\, get hot tips
+  on building social media apps and have an unprecedented opportunity to wor
+ k in teams on ... (truncated)\n-----\nSee http://upcoming.yahoo.com/event/8
+ 31277/ for all the details!
+LAST-MODIFIED:20080625T005507Z
+LOCATION:Mitchellake Sydney\, Level 1\, 1 O'Briens Lane\, Darlinghurst Sydn
+ ey\, New South Wales 2010
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:MySpace devJam Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080719T010000Z
+DTEND:20080719T080000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Randal Leeb-du Toit:mailto:randal.leebdutoit@gmail.com
+UID:5ul9k7mbtbr9c6n45r6jajpfio@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080625T005439Z
+DESCRIPTION:MySpace devJams are a great opportunity for developers to learn
+  more about the MySpace Developer Platform\, the largest implementation of 
+ Open Social.\n\nHear inside views from the MySpace dev team\, get hot tips 
+ on building social media apps and have an unprecedented opportunity to work
+  in teams on a... (truncated)\n-----\nSee http://upcoming.yahoo.com/event/8
+ 31287/ for all the details!
+LAST-MODIFIED:20080625T005440Z
+LOCATION:Mitchellake Melbourne\, Suite 501\, 217 A'Beckett Street Melbourne
+ \, Victoria 3000
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:MySpace devJam Melbourne
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080726T010000Z
+DTEND:20080726T070000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Randal Leeb-du Toit:mailto:randal.leebdutoit@gmail.com
+UID:do6hsa45ccqc24fu6r6q0pj14c@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080625T005359Z
+DESCRIPTION:MySpace devJams are a great opportunity for developers to learn
+  more about the MySpace Developer Platform\, the largest implementation of 
+ Open Social.\n\nThis is a special Games devJam and attendees will be able t
+ o hear inside views from the MySpace dev team\, get hot tips on building so
+ cial gaming ap... (truncated)\n-----\nSee http://upcoming.yahoo.com/event/8
+ 31297/ for all the details!
+LAST-MODIFIED:20080625T005400Z
+LOCATION:Mitchellake Sydney\, Level 1\, 1 O'Briens Lane\, Darlinghurst Sydn
+ ey\, New South Wales 2010
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:MySpace devJam Games
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080625T080000Z
+DTEND:20080625T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Catherine Eibner:mailto:ceibner@gmail.com
+UID:040000008200E00074C5B7101A82E0080000000050F3434E5DD5C801000000000000000
+ 0100000004C83EFF8DA0A2A48A0C034EA63BC5357
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080623T081130Z
+DESCRIPTION:Outsourcing\, and ASP.NET MVC Framework\n\nHow to manage Outsou
+ rcing by Bob McGilvray\nOverview of ASP.NET MVC by Tatham Oddie\n\nOutsouri
+ ng\nIn this presentation Bob covers his experiences with outsourcing large 
+ software projects to overseas development teams. Bob will be covering the b
+ enefits\, problems and techniques for managing an outsourced development.\n
+ \nMVC Framework\nIn this session Tatham introduces the MVC design pattern a
+ nd then explains Microsoft's ASP.NET implementation. The presentation will 
+ be high level\, covering where MVC is beneficial\, where it is inappropriat
+ e\, and why you would consider it in your business.\n\nhttp://www.facebook.
+ com/event.php?eid=44672385385
+LAST-MODIFIED:20080623T083311Z
+LOCATION:Microsoft HQ\, North Ryde\, 1 Epping Road\, North ryde NSW 2113
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SBTUG: 25 June 2008
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080624T223000Z
+DTEND:20080625T033000Z
+DTSTAMP:20090531T005744Z
+UID:3obj3jal5cbifsnv1fcmtif760@google.com
+CLASS:PUBLIC
+CREATED:20080622T033906Z
+DESCRIPTION:http://www.nickhodge.com/blog/archives/2542
+LAST-MODIFIED:20080622T033906Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Matt Bai\, Canberra Talk
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080625T070000Z
+DTEND:20080625T113000Z
+DTSTAMP:20090531T005744Z
+UID:ft79rr5g0p5snnk1r4oh4dk0ng@google.com
+CLASS:PUBLIC
+CREATED:20080622T025536Z
+DESCRIPTION:http://webstandardsgroup.org/meetings/sydney.cfm
+LAST-MODIFIED:20080622T025536Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:WSG Usability
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20080630
+DTEND;VALUE=DATE:20080701
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=OSDC Calendar:mailto:242u3g2hmfkiai7cnodllkqkrs@group.calendar
+ .google.com
+UID:p1mh3bupgv150m751c8h86e5ac@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080620T104741Z
+DESCRIPTION:The Open Source Developers Conference call for papers closes to
+ day. Submit your proposal at http://www.osdc.com.au/
+LAST-MODIFIED:20080620T104742Z
+LOCATION:http://www.osdc.com.au/
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:OSDC call for papers closes
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20080623
+DTEND;VALUE=DATE:20080624
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=OSDC Calendar:mailto:242u3g2hmfkiai7cnodllkqkrs@group.calendar
+ .google.com
+UID:ama77ris50aeslgofpok70ts8k@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080620T104549Z
+DESCRIPTION:Open Source Developers Conference (OSDC) call for papers closes
+  in 1 week.
+LAST-MODIFIED:20080620T104550Z
+LOCATION:http://www.osdc.com.au/
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:OSDC call for papers closes in 1 week
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080703T083000Z
+DTEND:20080703T113000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=P Rai:mailto:dekrazee1@gmail.com
+UID:tg21opcmca19vbtc9a1k6h04ak@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080618T031959Z
+DESCRIPTION:http://www.facebook.com/home.php#/event.php?eid=26195845089&ref
+ =nf
+LAST-MODIFIED:20080618T032252Z
+LOCATION:620 Harris St. Ultimo\, Sydney
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Beer2.0
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080619T081500Z
+DTEND:20080619T103000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Phil Pollenizer:mailto:kpdvgepahkppepcm6dbjkp3pac@group.calend
+ ar.google.com
+UID:b9mb896rt212fodkqq365hcscg@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080605T223824Z
+DESCRIPTION:\n\n\nThanks for RSVPing for the SyPy meeting on Thursday night
+ . The lifts will be in security mode\, so please meet on the ground floor o
+ f tower 1. We'll be ferrying people up the lifts between 6:15 and 6:30. If 
+ you don't quite make it by 6:30\, please call me on 0401 966 348.\n\nBrett 
+ will also be doing a presention for Google Developer day on Wednesday\, and
+  he's conscious that many of you will be going to that.\nHis SyPy presentat
+ ion will cover new material\, and be more focussed on Python. If you're not
+  going to developer day\, you might like to review this video of Brett givi
+ ng the same presentation at Google I/O:\n\nhttp://sites.google.com/site/io/
+ building-scalable-web-applications-with-google-app-engine\n\nAfter the pres
+ entation\, we'll head out to a quiet\, nearby bar. If you haven't before\, 
+ please come along and meet your fellow Python and web developers - they're 
+ an interesting bunch.\n\nFinally\, the address details again:\n\nThursday\,
+  June 19\, 2008 6:15-8:30PM\nGoogle Australia\nTower 1 Darling Park\n201 Su
+ ssex St\nSydney\n(http://maps.google.com.au/maps?hl=en&q=201+Sussex+St\,+Sy
+ dney+NSW+2000\,+Australia&ie=UTF8&z=16&iwloc=addr)\n\nLook forward to seein
+ g you Thursday night\,\n
+LAST-MODIFIED:20080618T021929Z
+LOCATION:Google Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Google App Engine Talk
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080618T073000Z
+DTEND:20080618T120000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Alison Young:mailto:alegrya@gmail.com
+UID:j9j5gc0fmhagjmbt06g30dpmas@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080617T012619Z
+DESCRIPTION:Jed White of Itechne\, the organiser and sponsor of PubCamp wil
+ l be hosting STUB drinks at the Customs House Bar which is located behind t
+ he Marriott in Circular Quay at 5.30p and also at 8p following the unconfer
+ ence sessions.\n\nCome along and meet the attendees of PubCamp and other Tw
+ itter people from Sydney and beyond.
+LAST-MODIFIED:20080617T013011Z
+LOCATION:Customs House Bar\, Macquarie Place\, Sydney NSW
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:STUB drinks at PubCamp
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080619T070000Z
+DTEND:20080619T073000Z
+DTSTAMP:20090531T005744Z
+UID:h7p9fn74b3r6q3m47f9330jfs4@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Australian 
+ Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.calendar
+ .google.com
+CLASS:PUBLIC
+CREATED:20080615T052346Z
+LAST-MODIFIED:20080615T110606Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Apple Store Opens
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20080624
+DTEND;VALUE=DATE:20080625
+DTSTAMP:20090531T005744Z
+UID:g6voe9ithump27dcevbclhbkb4@google.com
+CLASS:PUBLIC
+CREATED:20080612T214159Z
+DESCRIPTION:http://creativecommons.org.au/australasiancommons
+LAST-MODIFIED:20080612T214159Z
+LOCATION:Brisbane
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Creative Commons Australasia
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080618T050000Z
+DTEND:20080618T110000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Tom Kelshaw:mailto:tomkelshaw@gmail.com
+UID:oes2vnss350u4g70h8c9l6a91g@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080609T140957Z
+DESCRIPTION:A Conference and Unconference\n\n Come along to "PubCamp - The 
+ Web 2.0 Media Day - A Conference and Unconference". It's a free event about
+  the future of media and the Web covering Web 2.0\, social and citizen medi
+ a\, the semantic web\, mobile\, widgets\, online advertising and revenue mo
+ dels\, copyright\, cross-media and more.\n\nYou might have heard of BarCamp
+ . Interested in where media is heading? Then PubCamp is for you!\n\n* Immer
+ se yourself in good ideas with smart people in an information-packed aftern
+ oon and evening.\n\n* Share leading-edge insights into where the Web and on
+ line media are heading and explore case studies and examples from around th
+ e world.\n\n* Be part of a conversation and debate with other people workin
+ g in media and online.\n\n* Find out how other people are approaching the c
+ hallenges\, and take part in open panel and workshop discussions.\n\nPubCam
+ p - The Web 2.0 Media Day is free to attend and has two parts. A formal con
+ ference and briefing seminar with traditional sessions runs from 3-5pm\, an
+ d an open "unconference" designed to foster community and conversation runs
+  from 6-8pm. Everyone is welcome to attend either or both\, and there's a n
+ etworking session with drinks and nibbles from 5-6pm.\n\nThe event will be 
+ available online if you can't make it in person.\n\nGet involved and bring 
+ along colleagues and friends. If you have topics you'd like to see covered\
+ , ideas for presentations\, or want to start a conversation\, then the Unco
+ nference is your chance. It's open for everyone. To nominate sessions or fi
+ nd out more go to the website.\n\nPlease pass on an invitation to anyone yo
+ u think might want to be involved too.\n\nSeats are limited\, so RSVP early
+ .\n\nSee also the Melbourne event on the 23rd for those south of the border
+ !\n\nHomepage\nhttp://www.semanticmedia.org/pubcamp/ \n\nAlso check out the
+  Friendfeed Room for more discussion and ideas:\nhttp://friendfeed.com/room
+ s/pubcamp\n\nAnd follow the event on Twitter:\nhttp://twitter.com/pubcamp\n
+ \nhttp://www.facebook.com/event.php?eid=15591841378
+LAST-MODIFIED:20080612T102042Z
+LOCATION:Marriott Sydney Harbour Hotel\, near Circular Quay.\, 30 Pitt St
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:PubCamp Sydney - The Web 2.0 Media Day
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080705T020000Z
+DTEND:20080705T100000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Trippything Events:mailto:trippything.com_t762maquor0c9mtdndar
+ tun410@group.calendar.google.com
+UID:3deph3073e3g6j01l6rm0d94e8@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080610T232124Z
+DESCRIPTION:Over at Elliot's house (picture 'Flight of the Conchords'\, he'
+ s the band and I'm Murray) and he had an excellent idea: invite a mob of de
+ veloper mates over one night soon\, set out some documentation on a wiki\, 
+ lay on a lot of pizza and beer\, bump up the volume\, and see how many pars
+ ers for Trippything we can write before the sun comes up.\n\nI thought we m
+ ight call it "ParsingOut" and if it proves popular\, then this would be Par
+ singOutOne since we're likely to do it more often than once a year.\n\nTher
+ e will be music\, food\, drink\, friends\, lucky door prizes and random\, s
+ pectacular acts of bravado.
+LAST-MODIFIED:20080612T050310Z
+LOCATION:50 Mill Hill Road\, Bondi Junction NSW
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:ParsingOut One
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080616T080000Z
+DTEND:20080616T100000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=SyXPAC:mailto:r287adh12us00a8dsk6c94mauk@group.calendar.google
+ .com
+UID:dfmtue8e5l277lbs85coo287vk@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080611T215008Z
+DESCRIPTION:Presentation 1: "Everything you know about Agile is probably wr
+ ong" - Frank Huang\n\nAfter this\, potentially a presentation on WebDriver 
+ by Simon Stewart or just general discussion
+LAST-MODIFIED:20080611T220137Z
+LOCATION:Atlassian\, 173-185 Sussex St\, Sydney 2001
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:SyXPAC meeting: Everything you know about Agile is probably wrong
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20080711
+DTEND;VALUE=DATE:20080712
+DTSTAMP:20090531T005744Z
+UID:l02pt95ld0b8cbt8lh8ng8h5m0@google.com
+CLASS:PUBLIC
+CREATED:20080610T211134Z
+LAST-MODIFIED:20080610T211134Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:iPhone Released
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080612T081500Z
+DTEND:20080612T130000Z
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Damana Madden:mailto:damana@gmail.com
+UID:7k1l2otettjrr4qav5bpchr2hc@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080605T122145Z
+DESCRIPTION:The next Sydney dinner will be hosted by our friends at Yahoo!7
+  at their fabulous office in Walsh Bay on the 12th of June. As requested\, 
+ we have technical talks\, networking activities\, drinks and food.\n\nRegis
+ tration has closed but there is a waiting list. People often pull out last 
+ minute so there is a chance you will get in.\n\nGeek guys must be accompani
+ ed by a geek girl.
+LAST-MODIFIED:20080610T130948Z
+LOCATION:Yahoo!7 in Walsh Bay
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Girl Geek Dinner 0b11
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080714T220000Z
+DTEND:20080715T070000Z
+DTSTAMP:20090531T005744Z
+UID:v2sqlnu2rir6vhkpe4so34bsq8@google.com
+CLASS:PUBLIC
+CREATED:20080605T213228Z
+DESCRIPTION:http://www.futureexploration.net/fom08/
+LAST-MODIFIED:20080605T213228Z
+LOCATION:Sydney
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Furture of Media (Sydney
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20080619T020000Z
+DTEND:20080619T050000Z
+DTSTAMP:20090531T005744Z
+UID:mtlg8rmk5rrnb0sldi4g4itgr4@google.com
+CLASS:PUBLIC
+CREATED:20080605T212929Z
+DESCRIPTION:http://www.futureexploration.net/topweb2apps/ 
+LAST-MODIFIED:20080605T213107Z
+LOCATION:Sydney
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Top 100 Australian Web Applications
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20080908
+DTEND;VALUE=DATE:20080911
+DTSTAMP:20090531T005744Z
+ORGANIZER;CN=Mick Liubinskas:mailto:mliubinskas@gmail.com
+UID:5jjfe61nejt88e7pvp0hiaopbk@google.com
+ATTENDEE;CUTYPE=GROUP;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Austral
+ ian Tech Events;X-NUM-GUESTS=0:mailto:pf44opfb12hherild7h2pl11b4@group.cale
+ ndar.google.com
+CLASS:PUBLIC
+CREATED:20080530T042002Z
+LAST-MODIFIED:20080530T042331Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Techcrunch 50 (USA)
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

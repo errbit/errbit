@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<radars>
+  <radar>
+    <places>
+      <place>
+        <name>Store</name>
+      </place>
+    </places>
+  </radar>
+  <radar></radar>
+  <radar>
+    <places>
+      <place>
+        <name>Work</name>
+      </place>
+      <place>
+        <name>Home</name>
+      </place>
+    </places>
+  </radar>
+</radars>

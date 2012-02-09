@@ -1,0 +1,5 @@
+Description:
+    Creates email_steps.rb in your cucumber step_definitions.
+    
+Examples:
+    `script/rails generate email_spec:steps`

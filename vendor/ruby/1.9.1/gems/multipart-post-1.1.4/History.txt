@@ -1,0 +1,33 @@
+=== 1.1.3 / 2011-07-25
+
+- More configurable header specification for parts (Gerrit Riessen)
+
+=== 1.1.2 / 2011-05-24
+
+- Fix CRLF file part miscalculation (Johannes Wagener)
+- Fix Epilogue CRLF issue (suggestion by Neil Spring)
+
+=== 1.1.1 / 2011-05-13
+
+- GH# 9: Fixed Ruby 1.9.2 StringIO bug (thanks Alex Koppel)
+
+=== 1.1.0 / 2011-01-11
+
+- API CHANGE: UploadIO.convert! removed in favor of UploadIO.new
+  (Jeff Hodges)
+
+=== 1.0.1 / 2010-04-27
+
+- Doc updates, make gemspec based on more modern Rubygems
+
+=== 1.0 / 2009-02-12
+
+- Many fixes from mlooney, seems to work now. Putting the 0.9 seal of
+  approval on it.
+
+=== 0.1 / 2008-08-12
+
+* 1 major enhancement
+
+  * Birthday!
+

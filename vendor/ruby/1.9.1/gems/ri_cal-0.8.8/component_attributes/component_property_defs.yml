@@ -1,0 +1,180 @@
+calscale:
+    purpose: This property defines the calendar scale used for the calendar information specified in the calendar object.
+    constant_value: GREGORIAN
+    rfc_ref: "4.7.1 p 73"
+method:
+    purpose: This property defines the iCalendar object method associated with the calendar object
+    ruby_name: icalendar_method
+    rfc_ref: "4.7.2 p 74-75"
+prodid:
+    purpose: This property specifies the identifier for the product that created the iCalendar object.
+    required: true
+    default_value: '-//com.denhaven2/NONSGML ri_cal gem//EN'
+    rfc_ref: '4.7.3 pp 75-76'    
+version:
+    purpose: This property specifies the identifier corresponding to thehighest version number or the minimum and maximum range of the iCalendar specification that is required in order to interpret the iCalendar object.
+    constant_value: '2.0'
+    rfc_ref: '4.7.4 pp 76-77'    
+attach:
+    purpose: The property provides the capability to associate a document object with a calendar component.
+    type: Uri
+    rfc_ref: '4.8.1.1 pp 77-78'
+categories:
+    purpose: This property defines the categories for a calendar component.
+    type: Array
+    array_type: Text
+    rfc_ref: '4.8.1.2 pp 78-79'
+class:
+    ruby_name: security_class
+    purpose: This property defines the access classification for a calendar component.
+    rfc_ref: '4.8.1.3 pp 79-80'   
+comment:
+    purpose: This property specifies non-processing information intended to provide a comment to the calendar user.
+    rfc_ref: '4.8.1.4 pp 80-81'
+description:
+    purpose: This property provides a more complete description of the calendar component, than that provided by the "SUMMARY" property.
+    rfc_ref: '4.8.1.5 pp 81-82'
+geo:
+    purpose: This property specifies information related to the global position for the activity specified by a calendar component.
+    type: Geo
+    rfc_ref: '4.8.1.6 pp 82-83'
+location:
+    purpose: This property defines the intended venue for the activity defined by a calendar component.
+    rfc_ref: '4.8.1.7 pp 84'
+percent-complete:
+    purpose: This property is used by an assignee or delegatee of a to-do to convey the percent completion of a to-do to the Organizer.
+    type: Integer
+    rfc_ref: '4.8.1.8 pp 85'
+priority:
+    type: Integer
+    purpose: This property defines the relative priority for a calendar component.
+    rfc_ref: '4.8.1.9 pp 85-87'
+resources:
+    purpose: This property defines the equipment or resources anticipated for an activity specified by a calendar entity.
+    type: 'Array'
+    rfc_ref: '4.8.1.10 pp 87-88'
+status:
+    purpose: This property defines a short summary or subject for the calendar component.
+    rfc_ref: '4.8.1.11 pp 80-89'
+summary:
+    purpose: This property defines a short summary or subject for the calendar component.
+    rfc_ref: '4.8.1.12 pp 89-90'
+completed:
+    purpose: This property specifies the date and time that a to-do was actually completed.
+    type: DateTime
+    type_constraint: must_be_utc
+    rfc_ref: '4.8.2.1 pp 90-91'
+dtend:
+    purpose: This property specifies the date and time that a calendar component ends.
+    type: date_time_or_date
+    rfc_ref: '4.8.2.2 pp 91-92'
+due:
+    purpose: This property defines the date and time that a to-do is expected to be completed.
+    type: date_time_or_date
+    rfc_ref: '4.8.2.3 pp 92-93'
+dtstart: 
+    purpose: This property specifies when the calendar component begins.
+    type: date_time_or_date
+    rfc_ref: '4.8.2.4 pp 93-94'
+duration:
+    purpose: This property specifies a positive duration of time.
+    type: Duration
+    rfc_ref: '4.8.2.5 pp 94-95'
+freebusy:
+    purpose: This property defines one or more free or busy time intervals.
+    type: Period
+    type_constraint: must_be_utc
+    rfc_ref: '4.8.2.6 pp 95-96'
+transp:
+    purpose: This property defines whether an event is transparent or not to busy time searches.
+    rfc_ref: '4.8.2.7 pp 96-97'
+tzid:
+    purpose: This property specifies the text value that uniquely indentifies the "VTIMEZONE" calendar component.
+    rfc_ref: '4.8.3.1 pp 97-98'
+tzname:
+    purpose: This property specifies the customary designation for a time zone description.
+    rfc_ref: '4.8.3.2 p 99'
+tzoffsetfrom:
+    purpose: This property specifies the offset which is in use prior to this time zone observance
+    type: UtcOffset
+    rfc_ref: '4.8.3.3 pp 99-100'
+tzoffsetto:
+    purpose: This property specifies the offset which is in use in this time zone observance
+    type: UtcOffset
+    rfc_ref: '4.8.3.4 pp 100-101'
+tzurl:
+    purpose: The TZURL provies a means for a VTIMEZONE component to point to a network location that can be used to retrieve an up-to_date version of itself.
+    type: Uri
+    rfc_ref: '4.8.3.4 p 101'    
+attendee:
+    purpose: The property defines an 'Attendee' within a calendar component.
+    type: CalAddress
+    rfc_ref: '4.8.4.1 pp 102-104'   
+contact:
+    purpose: The property is used to represent contact information oralternately a reference to contact information associated with the calendar component.
+    rfc_ref: '4.8.4.2 pp 104-106'   
+organizer:
+    purpose: The property defines the organizer for a calendar component.
+    type: CalAddress
+    rfc_ref: '4.8.4.3 pp 106-107'   
+recurrence-id:
+    purpose: This property is used in conjunction with the "UID" and "SEQUENCE" property to identify a specific instance of a recurring "VEVENT", "VTODO" or "VJOURNAL" calendar component. The property value is the effective value of the "DTSTART" property of the recurrence instance.
+    type: date_time_or_date
+    rfc_ref: '4.8.4.4 pp 107-109'   
+related-to:
+    purpose: The property is used to represent a relationship or reference between one calendar component and another.
+    rfc_ref: '4.8.4.5 pp 109-110'   
+url:
+    purpose: This property defines a Uniform Resource Locator (URL) associated with the iCalendar object.
+    type: Uri
+    rfc_ref: '4.8.4.6 pp 110-111'   
+uid:
+    purpose: This property defines the persistent, globally unique identifier for the calendar component.
+    rfc_ref: '4.8.4.7 pp 111-112'   
+exdate:
+    purpose: This property defines the list of date/time exceptions for a recurring calendar component.
+    type: 'OccurrenceList'
+    rfc_ref: '4.8.5.1 pp 112-114'   
+exrule:
+    purpose: This property defines a rule or repeating pattern for an exception to a recurrence set.
+    type: 'RecurrenceRule'
+    rfc_ref: '4.8.5.2 pp 114-125'   
+rdate:
+    purpose: This property defines the list of date/times for a recurring calendar component.
+    type: 'OccurrenceList'
+    rfc_ref: '4.8.5.3 pp 115-117'   
+rrule:
+    purpose: This property defines a rule or repeating pattern for recurring events, to-dos, or time zone definitions.
+    type: 'RecurrenceRule'
+    rfc_ref: '4.8.5.4 pp 117-125'
+action:
+    purpose: This property defines the action to be invoked when an alarm is triggered
+    rfc_ref: '4.8.6.1 p 126'
+repeat:
+    purpose: This property defines the number of times the alarm should be repeated, after the initial trigger.
+    type: Integer
+    rfc_ref: '4.8.6.2 p 126-127'
+trigger:
+    purpose: This property specifies when an alarm will trigger.
+    type: Duration
+    rfc_ref: '4.8.6.3 p 127-129'
+created:
+    purpose: This property specifies the date and time that the calendar information was created by teh calendar user agent in the calendar store.
+    type: ZuluDateTime
+    rfc_ref: '4.8.7.1 pp 129-130'   
+dtstamp:
+    purpose: This property indicates the date/time that the instance of the iCalendar object was created.
+    type: ZuluDateTime
+    auto_set: to_ical
+    rfc_ref: '4.8.7.2 pp 130-131'   
+last-modified:
+    purpose: This property specifies the date and time that the information associated with the calendar component was last revised in teh calendar store.
+    type: ZuluDateTime
+    rfc_ref: '4.8.7.3 p 131'   
+sequence:
+    purpose: This property defines the revision sequence number of the calendar component within a sequence of revisions.
+    type: Integer
+    auto_set: sequence_modifiers
+    rfc_ref: '4.8.7.4 pp 131-133'   
+request-status:
+    rfc_ref: '4.8.8.2 pp 134-136'   

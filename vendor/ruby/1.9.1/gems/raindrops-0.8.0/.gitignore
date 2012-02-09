@@ -1,0 +1,17 @@
+*.o
+*.so
+*.log
+*.rbc
+Makefile
+/GIT-VERSION-FILE
+/local.mk
+/NEWS
+/ChangeLog
+/.manifest
+/man
+/pkg
+/doc
+/LATEST
+/tmp
+# http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
+/Gemfile.lock

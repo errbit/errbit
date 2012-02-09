@@ -1,0 +1,44 @@
+en:
+  mongoid:
+    errors:
+      messages:
+        taken:
+          "पहले ही ले लिया है"
+        callbacks:
+          "Calling %{method} on %{klass} resulted in a false return from a callback."
+        document_not_found:
+          "%{identifiers}  id(s) के साथ, वर्ग %{klass} के लिए दस्तावेज़ नहीं मिला."
+        eager_load:
+          "Eager loading :%{name} is not supported due to it being a many-to-many
+          or polymorphic belongs_to relation."
+        invalid_database:
+          "डेटाबेस Mongo::DB होना चाहिए, %{name} नहीं."
+        invalid_options:
+          "Invalid option :%{invalid} provided to relation :%{name}. Valid options
+          are: %{valid}."
+        invalid_type:
+          "फील्ड a(n) %{klass} के रूप में परिभाषित किया गया था. लेकिन %{value} मूल्य के साथ एक %{other} प्राप्त किया."
+        unsupported_version:
+          "MongoDB %{version} समर्थित नहीं है, कृपया %{mongo_version} से उन्नयन."
+        validations:
+          "सत्यापन विफल - %{errors}."
+        invalid_collection:
+          "%{klass} के लिए संग्रह करने के लिए प्रवेश के बाद से यह एक एम्बेडेड दस्तावेज़ की अनुमति नहीं है, जड़ दस्तावेज़ से एक संग्रह का उपयोग करें."
+        invalid_field:
+          "एक %{name} के नाम क्षेत्र परिभाषित की अनुमति नहीं है. फ़ील्ड परिभाषित नहीं है कि Mongoid आंतरिक गुण या विधि नाम के साथ संघर्ष. दस्तावेज़ का उपयोग करें.#instance_methods."
+        too_many_nested_attribute_records:
+          "%{assosiation} लिए स्वीकारना नेस्टेड विशेषताएँ %{limit} रिकॉर्ड करने के लिए सीमित है."
+        embedded_in_must_have_inverse_of:
+          "embedded_in संघ के लिए विकल्प inverse_of शामिल करना चाहिए."
+        dependent_only_references_one_or_many:
+          "dependent => destroy|delete विकल्प है कि आपूर्ति की गई थी references_one या references_many संघों पर ही मान्य है."
+        association_cant_have_inverse_of:
+          "इस सहयोग पर एक inverse_of परिभाषित की अनुमति नहीं है.केवल embedded_in या सरणी के रूप में references_many पर इस विकल्प का उपयोग करें."
+        calling_document_find_with_nil_is_invalid:
+          "दस्तावेज़ को बुला रहा है"
+        unsaved_document:
+          "You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved."
+        mixed_relations:
+          "Referencing a(n) %{embedded} document from the %{root} document via a
+          relational association is not allowed since the %{embedded} is embedded."

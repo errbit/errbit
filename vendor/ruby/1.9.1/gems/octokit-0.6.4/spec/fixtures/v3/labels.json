@@ -1,0 +1,17 @@
+[
+  {
+    "color": "02d7e1",
+    "url": "https://api.github.com/repos/pengwynn/octokit/labels/V3+Transition",
+    "name": "V3 Transition"
+  },
+  {
+    "color": "ededed",
+    "url": "https://api.github.com/repos/pengwynn/octokit/labels/V3+Addition",
+    "name": "V3 Addition"
+  },
+  {
+    "color": "e10c02",
+    "url": "https://api.github.com/repos/pengwynn/octokit/labels/Bug",
+    "name": "Bug"
+  }
+]

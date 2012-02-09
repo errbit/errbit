@@ -1,0 +1,4 @@
+@import "import-circular-reference.css";
+
+body { color: black; background: white; }
+p { margin: 0px; }

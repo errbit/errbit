@@ -1,0 +1,55 @@
+= happymapper
+
+== DESCRIPTION:
+
+XML to object mapping library. I have included examples to help get you going. The specs should also point you in the right direction.
+
+== FEATURES:
+
+* Easy to define xml attributes and elements for an object
+* Fast because it uses libxml-ruby under the hood
+* Automatic conversion of xml to defined objects
+
+== EXAMPLES:
+
+Here is a simple example that maps Twitter statuses and users.
+
+  class User
+    include HappyMapper
+
+    element :id, Integer
+    element :name, String
+    element :screen_name, String
+    element :location, String
+    element :description, String
+    element :profile_image_url, String
+    element :url, String
+    element :protected, Boolean
+    element :followers_count, Integer
+  end
+
+  class Status
+    include HappyMapper
+
+    element :id, Integer
+    element :text, String
+    element :created_at, Time
+    element :source, String
+    element :truncated, Boolean
+    element :in_reply_to_status_id, Integer
+    element :in_reply_to_user_id, Integer
+    element :favorited, Boolean
+    has_one :user, User
+  end
+
+See examples directory in the gem for more examples.
+
+http://github.com/jnunemaker/happymapper/tree/master/examples/
+
+== INSTALL:
+
+* gem install happymapper
+
+== DOCS:
+
+http://rdoc.info/projects/jnunemaker/happymapper

@@ -1,0 +1,53 @@
+= Frequently Asked Questions about Unicorn
+
+===  I've installed Rack 1.1.x, why can't Unicorn load Rails (2.3.5)?
+
+Rails 2.3.5 is not compatible with Rack 1.1.x.  Unicorn is compatible
+with both Rack 1.1.x and Rack 1.0.x, and RubyGems will load the latest
+version of Rack installed on the system.  Uninstalling the Rack 1.1.x
+gem should solve gem loading issues with Rails 2.3.5.  Rails 2.3.6
+and later correctly support Rack 1.1.x.
+
+=== Why are my redirects going to "http" URLs when my site uses https?
+
+If your site is entirely behind https, then Rack applications that use
+"rack.url_scheme" can set the following in the Unicorn config file:
+
+  HttpRequest::DEFAULTS["rack.url_scheme"] = "https"
+
+For frameworks that do not use "rack.url_scheme", you can also
+try setting one or both of the following:
+
+  HttpRequest::DEFAULTS["HTTPS"] = "on"
+  HttpRequest::DEFAULTS["HTTP_X_FORWARDED_PROTO"] = "https"
+
+Otherwise, you can configure your proxy (nginx) to send the
+"X-Forwarded-Proto: https" header only for parts of the site that use
+https.  For nginx, you can do it with the following line in appropriate
+"location" blocks of your nginx config file:
+
+  proxy_set_header X-Forwarded-Proto https;
+
+=== Why are log messages from Unicorn are unformatted when using Rails?
+
+Current versions of Rails unfortunately overrides the default Logger
+formatter.
+
+You can undo this behavior with the default logger in your Unicorn
+config file:
+
+  Configurator::DEFAULTS[:logger].formatter = Logger::Formatter.new
+
+Of course you can specify an entirely different logger as well
+with the "logger" directive described by Unicorn::Configurator.
+
+=== Why am I getting "connection refused"/502 errors under high load?
+
+Short answer: your application cannot keep up.
+
+You can increase the size of the :backlog parameter if your kernel
+supports a larger listen() queue, but keep in mind having a large listen
+queue makes failover to a different machine more difficult.
+
+See the TUNING and Unicorn::Configurator documents for more information
+on :backlog-related topics.

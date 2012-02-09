@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<address>
+  <streetaddress>123 Smith Dr</streetaddress>
+  <streetaddress>Apt 31</streetaddress>
+  <city>Anytown</city>
+  <stateOrProvince>ST</stateOrProvince>
+  <zip>12345</zip>
+  <country>USA</country>
+</address>

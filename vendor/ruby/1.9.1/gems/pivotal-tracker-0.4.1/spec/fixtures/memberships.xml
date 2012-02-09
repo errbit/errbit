@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<memberships type="array">
+  <membership>
+    <id>331822</id>
+    <person>
+      <email>jmischo@sittercity.com</email>
+      <name>Jon</name>
+      <initials>JM</initials>
+    </person>
+    <role>Owner</role>
+    <project>
+      <id>102622</id>
+      <name>Pivotal Tracker API Gem</name>
+    </project>
+  </membership>
+  <membership>
+    <id>331823</id>
+    <person>
+      <email>jmischo@quagility.com</email>
+      <name>Jon Mischo</name>
+      <initials>JM</initials>
+    </person>
+    <role>Owner</role>
+    <project>
+      <id>102622</id>
+      <name>Pivotal Tracker API Gem</name>
+    </project>
+  </membership>
+  <membership>
+    <id>331832</id>
+    <person>
+      <email>pivotal-tracker-api-gem@quagility.com</email>
+      <name>Test Suite Access</name>
+      <initials>TEST</initials>
+    </person>
+    <role>Member</role>
+    <project>
+      <id>102622</id>
+      <name>Pivotal Tracker API Gem</name>
+    </project>
+  </membership>
+</memberships>

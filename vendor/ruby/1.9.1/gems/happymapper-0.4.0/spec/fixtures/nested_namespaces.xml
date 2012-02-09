@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EDXLDistribution>
+	<contentObject>
+		<confidentiality>Sensitive</confidentiality>
+		<xmlContent>
+			<embeddedXMLContent>
+				<ns1:alert xmlns:ns1="http://schemas.google.com/analytics/2009">
+				  <severity>Severe</severity>
+					<ns1:identifier>CDC-2006-183</ns1:identifier>
+					<ns1:info>
+						<ns1:category>Health</ns1:category>
+					</ns1:info>
+				</ns1:alert>
+			</embeddedXMLContent>
+		</xmlContent>
+	</contentObject>
+</EDXLDistribution>

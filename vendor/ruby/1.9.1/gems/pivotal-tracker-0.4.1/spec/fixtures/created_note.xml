@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<story>
+  <id type="integer">4492112</id>
+  <project_id type="integer">102622</project_id>
+  <story_type>feature</story_type>
+  <url>http://www.pivotaltracker.com/story/show/4492112</url>
+  <estimate type="integer">-1</estimate>
+  <current_state>unscheduled</current_state>
+  <description></description>
+  <name>Create stuff</name>
+  <requested_by>Test Suite Access</requested_by>
+  <created_at type="datetime">2010/07/29 19:15:16 UTC</created_at>
+  <updated_at type="datetime">2010/07/29 19:15:16 UTC</updated_at>
+</story>

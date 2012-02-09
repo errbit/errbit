@@ -1,0 +1,89 @@
+<aws:weather xmlns:aws="http://www.aws.com/aws">
+  <aws:api version="2.0"/>
+  <aws:WebURL>http://weather.weatherbug.com/IN/Carmel-weather.html?ZCode=Z5546&amp;Units=0&amp;stat=MOCAR</aws:WebURL>
+  <aws:ob>
+    <aws:ob-date>
+      <aws:year number="2008"/>
+      <aws:month number="12" text="December" abbrv="Dec"/>
+      <aws:day number="30" text="Tuesday" abbrv="Tue"/>
+      <aws:hour number="4" hour-24="16"/>
+      <aws:minute number="18"/>
+      <aws:second number="01"/>
+      <aws:am-pm abbrv="PM"/>
+      <aws:time-zone offset="-5" text="Eastern Standard Time" abbrv="EST"/>
+    </aws:ob-date>
+    <aws:requested-station-id>mocar</aws:requested-station-id>
+    <aws:station-id>MOCAR</aws:station-id>
+    <aws:station>Mohawk Trail ES</aws:station>
+    <aws:city-state zipcode="46033">Carmel,  IN</aws:city-state>
+    <aws:country>USA</aws:country>
+    <aws:latitude>39.9711111111111</aws:latitude>
+    <aws:longitude>-86.0938888888889</aws:longitude>
+    <aws:site-url>http://www1.ccs.k12.in.us/mte/home</aws:site-url>
+    <aws:aux-temp units="&amp;deg;F">74</aws:aux-temp>
+    <aws:aux-temp-rate units="&amp;deg;F">+0.0</aws:aux-temp-rate>
+    <aws:current-condition icon="http://deskwx.weatherbug.com/images/Forecast/icons/cond007.gif">Sunny</aws:current-condition>
+    <aws:dew-point units="&amp;deg;F">35</aws:dew-point>
+    <aws:elevation units="ft">817</aws:elevation>
+    <aws:feels-like units="&amp;deg;F">51</aws:feels-like>
+    <aws:gust-time>
+      <aws:year number="0001"/>
+      <aws:month number="1" text="January" abbrv="Jan"/>
+      <aws:day number="1" text="Monday" abbrv="Mon"/>
+      <aws:hour number="12" hour-24="00"/>
+      <aws:minute number="00"/>
+      <aws:second number="00"/>
+      <aws:am-pm abbrv="AM"/>
+      <aws:time-zone offset="-5" text="Eastern Standard Time" abbrv="EST"/>
+    </aws:gust-time>
+    <aws:gust-direction>W</aws:gust-direction>
+    <aws:gust-speed units="mph">25</aws:gust-speed>
+    <aws:humidity units="%">53</aws:humidity>
+    <aws:humidity-high units="%">100.0</aws:humidity-high>
+    <aws:humidity-low units="%">42.5</aws:humidity-low>
+    <aws:humidity-rate>-5.0</aws:humidity-rate>
+    <aws:indoor-temp units="&amp;deg;F">75</aws:indoor-temp>
+    <aws:indoor-temp-rate units="&amp;deg;F">+0.0</aws:indoor-temp-rate>
+    <aws:light>28</aws:light>
+    <aws:light-rate>-1.5</aws:light-rate>
+    <aws:moon-phase moon-phase-img="http://api.wxbug.net/images/moonphase/mphase02.gif">-10</aws:moon-phase>
+    <aws:pressure units="&quot;">29.71</aws:pressure>
+    <aws:pressure-high units="&quot;">30.18</aws:pressure-high>
+    <aws:pressure-low units="&quot;">29.71</aws:pressure-low>
+    <aws:pressure-rate units="&quot;/h">-0.04</aws:pressure-rate>
+    <aws:rain-month units="&quot;">6.64</aws:rain-month>
+    <aws:rain-rate units="&quot;/h">0.00</aws:rain-rate>
+    <aws:rain-rate-max units="&quot;/h">0.00</aws:rain-rate-max>
+    <aws:rain-today units="&quot;">0.00</aws:rain-today>
+    <aws:rain-year units="&quot;">53.83</aws:rain-year>
+    <aws:temp units="&amp;deg;F">51.8</aws:temp>
+    <aws:temp-high units="&amp;deg;F">52</aws:temp-high>
+    <aws:temp-low units="&amp;deg;F">29</aws:temp-low>
+    <aws:temp-rate units="&amp;deg;F/h">+2.5</aws:temp-rate>
+    <aws:sunrise>
+      <aws:year number="2008"/>
+      <aws:month number="12" text="December" abbrv="Dec"/>
+      <aws:day number="30" text="Tuesday" abbrv="Tue"/>
+      <aws:hour number="8" hour-24="08"/>
+      <aws:minute number="06"/>
+      <aws:second number="02"/>
+      <aws:am-pm abbrv="AM"/>
+      <aws:time-zone offset="-5" text="Eastern Standard Time" abbrv="EST"/>
+    </aws:sunrise>
+    <aws:sunset>
+      <aws:year number="2008"/>
+      <aws:month number="12" text="December" abbrv="Dec"/>
+      <aws:day number="30" text="Tuesday" abbrv="Tue"/>
+      <aws:hour number="5" hour-24="17"/>
+      <aws:minute number="28"/>
+      <aws:second number="53"/>
+      <aws:am-pm abbrv="PM"/>
+      <aws:time-zone offset="-5" text="Eastern Standard Time" abbrv="EST"/>
+    </aws:sunset>
+    <aws:wet-bulb units="&amp;deg;F">44.24</aws:wet-bulb>
+    <aws:wind-speed units="mph">4</aws:wind-speed>
+    <aws:wind-speed-avg units="mph">7</aws:wind-speed-avg>
+    <aws:wind-direction>SSW</aws:wind-direction>
+    <aws:wind-direction-avg>SW</aws:wind-direction-avg>
+  </aws:ob>
+</aws:weather>

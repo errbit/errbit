@@ -1,0 +1,10 @@
+---
+cgit_url: http://bogomips.org/unicorn.git
+git_url: git://bogomips.org/unicorn.git
+rdoc_url: http://unicorn.bogomips.org/
+changelog_start: v1.1.5
+merge_html:
+  unicorn_1: Documentation/unicorn.1.html
+  unicorn_rails_1: Documentation/unicorn_rails.1.html
+public_email: mongrel-unicorn@rubyforge.org
+private_email: unicorn@bogomips.org

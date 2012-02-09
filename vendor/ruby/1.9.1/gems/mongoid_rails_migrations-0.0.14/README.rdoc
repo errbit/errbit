@@ -1,0 +1,58 @@
+== RELEASE NOTES
+* Rails 3.1 compatible
+
+== SYNOPSIS
+* Data migrations for Mongoid.
+
+== MIGRATE WHEN ...
+* You need to rearrange data
+* The migrating is good
+
+== REQUIREMENTS
+* rails ~> 3.0.0
+* mongoid ~> 2.0.0 (this isn't currently enforced)
+
+== INSTALL
+* gem install mongoid_rails_migrations
+* In your Gemfile, include (after including mongoid):
+  gem "mongoid_rails_migrations", "0.0.13"
+
+== FEATURES AND HOW TO USE
+* generator:
+  * rails generate mongoid:migration your_migration_name_here
+
+* migrations:
+  * db:migrate
+  * db:migrate:down
+  * db:migrate:up
+  * db:rollback
+  * db:migrate:redo
+  * db:migrate:reset
+  * db:reseed (handled by mongoid)
+  * db:version
+
+== NOTES
+* Only tested with ruby 1.9.2
+
+== CREDITS TO
+  * rails
+  * mongoid
+
+Much of this gem simply modifies existing code from both projects.
+With that out of the way, on to the license.
+
+== LICENSE (MIT)
+
+Copyright © 2010: Alan Da Costa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'),
+to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+The software is provided 'as is', without warranty of any kind, express or implied, including but not limited to the warranties of
+merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any
+claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the
+software or the use or other dealings in the software.

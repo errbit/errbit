@@ -1,0 +1,59 @@
+# this is the local.mk file used by Eric Wong on his dev boxes.
+# GNUmakefile will source local.mk in the top-level source tree
+# if it is present.
+#
+# This is depends on a bunch of GNU-isms from bash, sed, touch.
+
+DLEXT := so
+
+# Avoid loading rubygems to speed up tests because gmake is
+# fork+exec heavy with Ruby.
+prefix = $(HOME)
+
+# XXX clean this up
+ifeq ($(r192),)
+  ifeq ($(r19),)
+    ifeq ($(rbx),)
+      ifeq ($(r186),)
+        RUBY := $(prefix)/bin/ruby
+      else
+        prefix := $(prefix)/r186-p114
+        export PATH := $(prefix)/bin:$(PATH)
+        RUBY := $(prefix)/bin/ruby
+      endif
+    else
+      prefix := $(prefix)/rbx
+      export PATH := $(prefix)/bin:$(PATH)
+      RUBY := $(prefix)/bin/rbx
+    endif
+  else
+    prefix := $(prefix)/ruby-1.9
+    export PATH := $(prefix)/bin:$(PATH)
+    RUBY := $(prefix)/bin/ruby --disable-gems
+  endif
+else
+  prefix := $(prefix)/ruby-1.9.2
+  export PATH := $(prefix)/bin:$(PATH)
+  RUBY := $(prefix)/bin/ruby --disable-gems
+endif
+
+# pipefail is THE reason to use bash (v3+) or never revisions of ksh93
+# SHELL := /bin/bash -e -o pipefail
+SHELL := /bin/ksh93 -e -o pipefail
+
+full-test: test-18 test-191 test-192 test-rbx test-186
+
+# FIXME: keep eye on Rubinius activity and wait for fixes from upstream
+# so we don't need RBX_SKIP anymore
+test-rbx: export RBX_SKIP := 1
+test-rbx: export RUBY := $(RUBY)
+test-rbx:
+	$(MAKE) test test-integration rbx=T 2>&1 |sed -e 's!^!rbx !'
+test-186:
+	$(MAKE) test-all r186=1 2>&1 |sed 's!^!1.8.6 !'
+test-18:
+	$(MAKE) test-all 2>&1 |sed 's!^!1.8 !'
+test-191:
+	$(MAKE) test-all r19=1 2>&1 |sed 's!^!1.9.1 !'
+test-192:
+	$(MAKE) test-all r192=1 2>&1 |sed 's!^!1.9.2 !'

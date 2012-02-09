@@ -1,0 +1,10 @@
+- action
+- description
+- trigger
+- duration
+- repeat
+- summary
+- attendee:
+    multi: *
+- attach:
+    multi: *

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+# This binary used in rubygems environment only as part of installed gem
+
+require 'rubygems'
+require 'premailer/executor'
+

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# File: script/benchmark_subject
+
+require File.expand_path(File.join(File.dirname(__FILE__), %w[.. lib ri_cal]))
+require 'rubygems'
+subject_name = ARGV[0] || "paris_eastern"
+
+require File.expand_path(File.join(File.dirname(__FILE__), %w[.. performance], [subject_name], "subject"))
+
+devnul = Object.new
+def devnul.puts(string)
+end
+
+subject = Subject.new(devnul)
+
+require 'benchmark'
+
+Benchmark.bmbm do |results|
+  results.report("Benchmark #{subject_name}:") { subject.run }
+end
+
+puts
+puts

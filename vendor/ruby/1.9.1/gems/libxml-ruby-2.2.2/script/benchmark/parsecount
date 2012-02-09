@@ -1,0 +1,170 @@
+#!/usr/bin/env ruby
+#
+# Each test has an XML Parser open a 98k XML document and count one type of leaf 
+# element (466 entries). This is repeated a total of 100 times, twice for each Parser. 
+# Summary measurements are from the second test.
+#
+# Tests run on a MacBook Pro, Mac OS X 10.5.5, 4GB memory, 2.5 GHz Intel Core 2 Duo.
+# 
+# Library versions:
+#   hpricot 0.6.164
+#   libxml: 0.9.2
+# 
+# All benchmarks were run twice in sequence and the measurements presented here are from 
+# the second run. Java automatically optimizes JRuby code which is run many times and the 
+# speedup from the first to the second test is from 40 to 75%. There is no essential 
+# difference in the speed of the C version of Ruby between the first test and the second.
+# 
+# Summary:
+#
+#   100 times: Open 98k XML document and count one type of leaf element (466 entries)
+# 
+#   JRuby (Java 1.6.0_03-p3-Soylatte using server mode): jdom_document_builder     0.360
+#   MRI: libxml v0.9.2                                                             0.383
+#   JRuby (Java 1.6.0_07): jdom_document_builder                                   0.401
+#   JRuby (Java 1.5.0_16): jdom_document_builder                                   0.428
+#   JRuby (Java 1.6.0_03-p3-Soylatte using server mode): hpricot                   1.977
+#   JRuby (Java 1.5.0_16): hpricot                                                 2.027
+#   JRuby (Java 1.6.0_07): hpricot                                                 2.094
+#   MRI: hpricot                                                                   2.140
+#   JRuby (Java 1.6.0_03-p3-Soylatte using server mode): rexml                     5.488
+#   JRuby (Java 1.5.0_16): rexml                                                   5.569
+#   JRuby (Java 1.5.0_16): rexml                                                   5.578
+#   MRI: rexml                                                                     8.606
+# 
+# Ruby version: MRI 1.8.6 (2008-03-03 rev 114), platform: universal-darwin9.0
+# --------------------------------------------------------------------------------
+#                             user     system      total        real
+# rexml                   8.170000   0.100000   8.270000 (  8.606676)
+# hpricot                 1.990000   0.040000   2.030000 (  2.140865)
+# libxml                  0.350000   0.020000   0.370000 (  0.383475)
+# 
+# JRuby 1.1.5 (svn r8078) on Java 1.5.0_16
+# --------------------------------------------------------------------------------
+#                             user     system      total        real
+# rexml                   5.578000   0.000000   5.578000 (  5.578371)
+# hpricot                 2.028000   0.000000   2.028000 (  2.027348)
+# jdom_document_builder   0.429000   0.000000   0.429000 (  0.428713)
+# 
+# JRuby 1.1.5 (svn r8078) on Java 1.6.0_07
+# --------------------------------------------------------------------------------
+#                             user     system      total        real
+# rexml                   5.569000   0.000000   5.569000 (  5.569135)
+# hpricot                 2.094000   0.000000   2.094000 (  2.093635)
+# jdom_document_builder   0.401000   0.000000   0.401000 (  0.401115)
+# 
+# JRuby 1.1.5 (svn r8078) on Java 1.6.0_07 using server mode (-J-server)
+# --------------------------------------------------------------------------------
+#                             user     system      total        real
+# rexml                   5.489000   0.000000   5.489000 (  5.488560)
+# hpricot                 1.977000   0.000000   1.977000 (  1.976845)
+# jdom_document_builder   0.377000   0.000000   0.377000 (  0.377808)
+# 
+# JRuby 1.1.5 (svn r8078) on Java 1.6.0_03-p3 (Soylatte) using server mode (-J-server)
+# --------------------------------------------------------------------------------
+#                             user     system      total        real
+# rexml                   5.596000   0.000000   5.596000 (  5.596212)
+# hpricot                 1.937000   0.000000   1.937000 (  1.937312)
+# jdom_document_builder   0.360000   0.000000   0.360000 (  0.360068)
+
+require 'rubygems'
+require 'benchmark'
+require "rexml/document"
+require 'hpricot'
+
+if RUBY_PLATFORM =~ /java/ 
+    include Java 
+    import javax.xml.parsers.DocumentBuilder
+    import javax.xml.parsers.DocumentBuilderFactory
+    @dbf = DocumentBuilderFactory.new_instance
+    @ruby_info = "Ruby version: JRuby #{RUBY_VERSION} (#{RUBY_RELEASE_DATE} rev #{RUBY_PATCHLEVEL}) [i386-jruby#{JRUBY_VERSION}]"
+    @ruby_info << ", platform: Java, version #{java.lang.System.getProperty('java.version')}"
+  else
+    @ruby_info = "Ruby version: MRI #{RUBY_VERSION} (#{RUBY_RELEASE_DATE} rev #{RUBY_PATCHLEVEL})"
+    @ruby_info << ", platform: #{RUBY_PLATFORM}"
+
+    gem 'nokogiri', '>= 1.0.6'
+    require 'nokogiri'
+
+    gem 'libxml-ruby', '>= 0.9.2'
+    require 'libxml'
+    @xml_parser = LibXML::XML::Parser.new
+end
+
+file = File.expand_path(File.join(File.dirname(__FILE__), "sock_entries.xml"))
+@bundle_with_466_sock_entries = File.read(file)
+
+def rexml_count_socks
+  doc = REXML::Document.new(@bundle_with_466_sock_entries).root
+  socks = doc.elements.to_a('./sockEntries').length
+end
+
+unless RUBY_PLATFORM =~ /java/ 
+  def nokogiri_count_socks
+    #doc = Nokogiri(@bundle_with_466_sock_entries)
+    #socks = doc.search('//sockEntries').length
+  end
+
+  def libxml_count_socks
+    @xml_parser = LibXML::XML::Parser.new
+    @xml_parser.string = @bundle_with_466_sock_entries
+    doc = @xml_parser.parse
+    socks = doc.find('//sockEntries').length
+  end
+end
+
+def hpricot_count_socks
+  doc = Hpricot.XML(@bundle_with_466_sock_entries)
+  socks = doc.search("//sockEntries").length
+end
+
+if RUBY_PLATFORM =~ /java/ 
+  def jdom_document_builder_count_socks
+    file = File.expand_path(File.join(File.dirname(__FILE__), "sock_entries.xml"))
+    doc = @dbf.new_document_builder.parse(file).get_document_element
+    socks = doc.getElementsByTagName("sockEntries")
+    socks.get_length
+  end
+end
+
+n = 100
+test_iterations = ARGV.first.to_i 
+test_iterations = 1 unless test_iterations > 1
+puts 
+puts @ruby_info
+puts
+puts "#{n} times: Open 98k XML document and count one type of leaf element (466 entries)"
+puts
+print "running benchmark "
+if test_iterations == 1 
+  puts "once.\n\n"
+else
+  puts "#{test_iterations} times.\n\n"
+end
+test_iterations.times do
+  Benchmark.bmbm do |x|
+    x.report("rexml") { n.times {rexml_count_socks} }
+    x.report("hpricot")  { n.times {hpricot_count_socks} }
+    x.report("jdom_document_builder")  { n.times {jdom_document_builder_count_socks} } if RUBY_PLATFORM =~ /java/
+    #x.report("nokogiri") { n.times {nokogiri_count_socks} }  unless RUBY_PLATFORM =~ /java/
+    x.report("libxml") { n.times {libxml_count_socks} }  unless RUBY_PLATFORM =~ /java/ 
+  end
+  puts
+end
+
+#
+# jrexml doesn't appear to have any speedup in this test
+#
+# if RUBY_PLATFORM =~ /java/ 
+#   require 'jrexml'
+#   def rexml_with_jrexml_count_socks
+#     doc = REXML::Document.new(@bundle_with_466_sock_entries).root
+#     socks = doc.elements.to_a('./sockEntries').length
+#   end
+# 
+#   puts "\nNow add in JREXML to see if it speeds up rexml\n"
+#   Benchmark.bmbm do |x|
+#     x.report("rexml+jrexml") { n.times {rexml_with_jrexml_count_socks} }
+#   end
+#   puts
+# end

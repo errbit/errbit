@@ -1,0 +1,1580 @@
+[
+  {
+    "user": {
+      "type": "User",
+      "login": "davelab",
+      "gravatar_url": "https://secure.gravatar.com/avatar/49f568b11482e9100fde9e21c6c05585?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "html_url": "https://github.com/davelab",
+      "url": "https://api.github.com/users/davelab",
+      "created_at": "2011-04-09T13:14:20Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/388",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/388",
+    "labels": [
+
+    ],
+    "number": 388,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-28T19:41:50Z",
+    "created_at": "2011-04-28T19:41:50Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Hi,\r\ni followed this tutorial for poliphormic and STI models with upload method: http://tinyurl.com/236sp5y\r\ni want to know the best method to integrate this in rails_admin with a unic model page that include the file input for upload many images.\r\nthanks",
+    "title": "upload with paperclip & STI assets model",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "bbenezech",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c1607873b99845b2cd53f8634860d4d4?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "benoit.benezech@gmail.com",
+      "html_url": "https://github.com/bbenezech",
+      "url": "https://api.github.com/users/bbenezech",
+      "company": "",
+      "location": "Paris, France",
+      "blog": "",
+      "name": "Benoit Bénézech",
+      "created_at": "2008-09-29T20:55:27Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/387",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/387",
+    "labels": [
+
+    ],
+    "number": 387,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-28T13:58:25Z",
+    "created_at": "2011-04-28T13:58:25Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "We need to manually update ckeditor fields before we post them through AJAX.\r\n\r\nSee https://github.com/bbenezech/rails_admin/commit/5d024d55d04c0dab8447abfc9dd9a0af6c1c69f8",
+    "title": "Ajax posting of CKeditor fields",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "alec-c4",
+      "gravatar_url": "https://secure.gravatar.com/avatar/561f6b93e60563dabb66fb9802d06fa3?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "alec@alec-c4.com",
+      "html_url": "https://github.com/alec-c4",
+      "url": "https://api.github.com/users/alec-c4",
+      "company": "CyberBerry",
+      "location": "Moscow, Russia",
+      "blog": "http://alec-c4.com",
+      "name": "Alexey Poimtsev",
+      "created_at": "2008-09-19T07:47:03Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/385",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/385",
+    "labels": [
+
+    ],
+    "number": 385,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-27T21:04:26Z",
+    "created_at": "2011-04-27T21:04:26Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Hi,\r\ni have model called Flag\r\n     class Flag < ActiveRecord::Base\r\n       attr_accessible :report_type, :flaggeable_id, :flaggeable_type, :return_to\r\n       ########## Associations\r\n       belongs_to :author, :class_name => \"User\"\r\n       belongs_to :flaggeable, :polymorphic => true\r\n     end\r\n\r\nand when i attempting to access this model from rails_admin i see error\r\n\r\nNoMethodError in RailsAdmin::MainsController#list\r\n\r\nYou have a nil object when you didn't expect it!\r\nYou might have expected an instance of Array.\r\nThe error occurred while evaluating nil.map\r\n\r\nFull traces - http://pastie.org/1840863\r\nBut, when i have commented line  belongs_to :flaggeable, :polymorphic => true everything works fine.\r\n\r\nCould you check please work with polymorphs?",
+    "title": "polymorphic associations causes exception",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "bbenezech",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c1607873b99845b2cd53f8634860d4d4?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "benoit.benezech@gmail.com",
+      "html_url": "https://github.com/bbenezech",
+      "url": "https://api.github.com/users/bbenezech",
+      "company": "",
+      "location": "Paris, France",
+      "blog": "",
+      "name": "Benoit Bénézech",
+      "created_at": "2008-09-29T20:55:27Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/384",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/384",
+    "labels": [
+
+    ],
+    "number": 384,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-27T18:59:00Z",
+    "created_at": "2011-04-27T16:04:05Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "since commit https://github.com/sferik/rails_admin/commit/f7870747d211efaa36beb401c411e1517aa00da1\n\nhttps://github.com/sferik/rails_admin/blob/master/spec/lib/install_spec.rb\n\nand\n\nhttps://github.com/sferik/rails_admin/blob/master/spec/lib/uninstall_spec.rb\n\nchange Rails.configuration.root to some tmp folder to test installation stuff, and do not change it back to dummy_app root folder.\n\nPlease someone fix it, I tried and it drove me mad.",
+    "title": "Build broken",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "jmccartie",
+      "gravatar_url": "https://secure.gravatar.com/avatar/544e2e76286098a2c64c3638401d2191?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "",
+      "html_url": "https://github.com/jmccartie",
+      "url": "https://api.github.com/users/jmccartie",
+      "company": "LifeChurch.tv",
+      "location": "Edmond, OK",
+      "blog": "http://blog.mccartie.com",
+      "name": "Jon McCartie",
+      "created_at": "2009-09-30T19:06:08Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/383",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/383",
+    "labels": [
+
+    ],
+    "number": 383,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-26T01:34:41Z",
+    "created_at": "2011-04-25T21:23:34Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Was attempting to add some [action caching](http://guides.rubyonrails.org/caching_with_rails.html#action-caching) to my app, but didn't know if rails_admin had the ability to expire caches.  For example:\n\n    class PagesController < ApplicationController\n      caches_action :index\n\n      def index\n         @pages = Page.all\n      end\n    end\n\nIn order to invalidate this cache, I need to expire it (`expire_action :action => :index`), but since I don't have a create/update action (all done through rails_admin), not sure how to invalidate it.\n\nAssuming this doesn't exist, would love to have the ability to specify which models should perform those actions.  (should probably be inclusive [not exclusive/default] and require adding to a config)\n\n(happy to take a stab at it -- just may need a few hints)\n\n    ",
+    "title": "Permit Action Caching",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "markbates",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c6f2229ca2c8dcf0176f036508ec2c3b?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "mark+github@markbates.com",
+      "html_url": "https://github.com/markbates",
+      "url": "https://api.github.com/users/markbates",
+      "company": null,
+      "location": "Boston, MA",
+      "blog": "http://www.metabates.com",
+      "name": "Mark Bates",
+      "created_at": "2008-03-21T15:55:40Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/382",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/382",
+    "labels": [
+
+    ],
+    "number": 382,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": "https://github.com/sferik/rails_admin/pull/382",
+      "diff_url": "https://github.com/sferik/rails_admin/pull/382.diff",
+      "patch_url": "https://github.com/sferik/rails_admin/pull/382.patch"
+    },
+    "updated_at": "2011-04-25T17:52:26Z",
+    "created_at": "2011-04-25T17:52:26Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I encountered this in Postgres project that is using search vectors. The property type was coming in as nil for this field and subsequently blows up Rails Admin. I've set it to ignore this column entirely if the property type is nil.",
+    "title": "Ignore field when property type is nil",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "brodock",
+      "gravatar_url": "https://secure.gravatar.com/avatar/2c8545cf821ed984bae91dcda758e105?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "brodock@gmail.com",
+      "html_url": "https://github.com/brodock",
+      "url": "https://api.github.com/users/brodock",
+      "company": null,
+      "location": "Florianópolis, SC",
+      "blog": "http://blog.gabrielmazetto.eti.br",
+      "name": "Gabriel Mazetto",
+      "created_at": "2008-08-13T19:34:17Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/379",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/379",
+    "labels": [
+
+    ],
+    "number": 379,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-22T00:33:33Z",
+    "created_at": "2011-04-22T00:33:33Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Imagine that for example:\r\n\r\na Model Product with a has_one association to a Item.\r\nWhen creating a Product, I would like to have all ˜Products\" and \"Item\" fields on the same screen.\r\n\r\nBy just saying that makes someone suggest that I shall append the \"item fields\" to the products table, but imagine that the \"Items table\" is not only for products, it can be used by many other models that has the need for that specifc information.\r\n\r\nThis should be configurable, as the select field approuch today, can be useful for someone this other approuch could be of some help to others like me that use this style of data modeling.",
+    "title": "has_one associated model should optionaly be automatically created while creating the other one",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "bbenezech",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c1607873b99845b2cd53f8634860d4d4?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "benoit.benezech@gmail.com",
+      "html_url": "https://github.com/bbenezech",
+      "url": "https://api.github.com/users/bbenezech",
+      "company": "",
+      "location": "Paris, France",
+      "blog": "",
+      "name": "Benoit Bénézech",
+      "created_at": "2008-09-29T20:55:27Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/375",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/375",
+    "labels": [
+
+    ],
+    "number": 375,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": "https://github.com/sferik/rails_admin/pull/375",
+      "diff_url": "https://github.com/sferik/rails_admin/pull/375.diff",
+      "patch_url": "https://github.com/sferik/rails_admin/pull/375.patch"
+    },
+    "updated_at": "2011-04-19T10:43:14Z",
+    "created_at": "2011-04-19T10:43:14Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "issue #314\r\n",
+    "title": "314 new menu",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "bbenezech",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c1607873b99845b2cd53f8634860d4d4?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "benoit.benezech@gmail.com",
+      "html_url": "https://github.com/bbenezech",
+      "url": "https://api.github.com/users/bbenezech",
+      "company": "",
+      "location": "Paris, France",
+      "blog": "",
+      "name": "Benoit Bénézech",
+      "created_at": "2008-09-29T20:55:27Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/372",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/372",
+    "labels": [
+
+    ],
+    "number": 372,
+    "comments": 1,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-15T13:07:18Z",
+    "created_at": "2011-04-15T07:57:03Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "This cause javascript problems (filtering multiselect not showing for example) when you open a form in popup with same field name as in parent form, since popups are not in iframes.\n\nI can see two possible follow-up : \n\n* Put the popup form in an iframe\n\n* Refactor the ids generation, and I can't see any good reason not to use a form builder\n\nSecond solution is better of course, it opens the possibility for nested attributes and form factorisation, and better maintainability.\nSimple form and formtastic are interesting options.\n\nAny opinion on this ?",
+    "title": "Form fields ids are not unique.",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "aunderwo",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c1e8f7f62a20b3030463b1bc908f0f5d?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "github@ants.oib.com",
+      "html_url": "https://github.com/aunderwo",
+      "url": "https://api.github.com/users/aunderwo",
+      "company": null,
+      "location": "Watford, UK",
+      "blog": null,
+      "name": "Anthony Underwood",
+      "created_at": "2008-02-19T17:30:53Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/370",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/370",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 370,
+    "comments": 5,
+    "assignee": {
+      "type": "User",
+      "login": "kaapa",
+      "gravatar_url": "https://secure.gravatar.com/avatar/40a0afa49eb7b12db4dcda70b2e1520d?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "petteri.kaapa@gmail.com",
+      "html_url": "https://github.com/kaapa",
+      "url": "https://api.github.com/users/kaapa",
+      "company": null,
+      "location": "Finland",
+      "blog": null,
+      "name": "Petteri Kääpä",
+      "created_at": "2010-03-03T23:01:52Z"
+    },
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-29T06:10:46Z",
+    "created_at": "2011-04-09T15:01:22Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "When viewing a model that has a polymorphic association (via belongs to) I am getting the following problem:\r\n\r\n    You have a nil object when you didn't expect it!\r\n    You might have expected an instance of Array.\r\n    The error occurred while evaluating nil.map\r\n\r\ntrace is\r\n\r\n     /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/fields/types/polymorphic_association.rb:33:in `associated_model_config'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/fields/types/polymorphic_association.rb:21:in `block in <class:PolymorphicAssociation>'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/base.rb:83:in `instance_eval'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/base.rb:83:in `block in register_instance_option'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/base.rb:57:in `block in register_instance_option'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/has_fields.rb:60:in `block in visible_fields'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/has_fields.rb:60:in `select'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/lib/rails_admin/config/has_fields.rb:60:in `visible_fields'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/app/controllers/rails_admin/main_controller.rb:339:in `list_entries'\r\n    /Users/anthony/.rvm/gems/ruby-1.9.2-p0/bundler/gems/rails_admin-1ee2f2af816b/app/controllers/rails_admin/main_controller.rb:36:in `list'\r\n\r\nI'm sure this used to work fine in earlier versions of rails_admin :(",
+    "title": "Polymorphic association problem",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "dustMason",
+      "gravatar_url": "https://secure.gravatar.com/avatar/e9ed2af775174211429aae4d5e7805c6?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/dustMason",
+      "url": "https://api.github.com/users/dustMason",
+      "company": "Genuine Parts, LLC",
+      "location": "Oakland, CA",
+      "blog": "http://specifyapp.com",
+      "name": "Jordan Sitkin",
+      "created_at": "2010-08-19T01:05:32Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/366",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/366",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 366,
+    "comments": 2,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-27T18:04:15Z",
+    "created_at": "2011-04-04T20:23:28Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I have a model with the primary key of \"merchant_id\". When trying to view the model data in rails_admin I get an error\r\n    ActiveRecord::StatementInvalid in RailsAdmin::MainsController#list\r\nI'm using the ActiveRecord adaptor (as indicated in the error). I'm assuming this is due to the use of *find_by_id* in some places, rather than *find*. While *find_by_id* makes sense because it returns *nil* when the record cant be found, it precludes the ability to use ActiveRecord to set any primary key value on a model.\r\n\r\nAfter altering the *get* method in /lib/rails_admin/adapters/active_record.rb to use *find* instead of *find_by_id*, this is the error I see:\r\n    PGError: ERROR:  column \"id\" does not exist\r\n    LINE 1: SELECT  \"stores\".* FROM \"stores\" ORDER BY id desc LIMIT 20 O...\r\n                                                      ^\r\n    : SELECT  \"stores\".* FROM \"stores\" ORDER BY id desc LIMIT 20 OFFSET 0\r\nand the relevant part of the full trace:\r\n    /Users/turtle/Documents/CodeLibrary/rails_admin_master/lib/rails_admin/adapters/active_record.rb:46:in `all'\r\n    /Users/turtle/Documents/CodeLibrary/rails_admin_master/lib/rails_admin/adapters/active_record.rb:60:in `paginated'\r\n    /Users/turtle/Documents/CodeLibrary/rails_admin_master/app/controllers/rails_admin/main_controller.rb:348:in `list_entries'\r\n    /Users/turtle/Documents/CodeLibrary/rails_admin_master/app/controllers/rails_admin/main_controller.rb:36:in `list'",
+    "title": "Error when trying to administrate models with primary keys named anything but \"id\"",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "amrnt",
+      "gravatar_url": "https://secure.gravatar.com/avatar/1be13b794a692d0b083fb52485eb22ea?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "amrnt0@gmail.com",
+      "html_url": "https://github.com/amrnt",
+      "url": "https://api.github.com/users/amrnt",
+      "company": "",
+      "location": "Nablus, PS",
+      "blog": "http://rushthinking.com",
+      "name": "Amr Numan Tamimi",
+      "created_at": "2008-08-24T16:59:34Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/362",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/362",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 362,
+    "comments": 13,
+    "assignee": {
+      "type": "User",
+      "login": "caboteria",
+      "gravatar_url": "https://secure.gravatar.com/avatar/e381ef5e90b6ed2bd5082a9a463cea3b?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/caboteria",
+      "url": "https://api.github.com/users/caboteria",
+      "company": null,
+      "location": "Massachusetts, USA",
+      "blog": "http://www.caboteria.org/",
+      "name": "toby cabot",
+      "created_at": "2009-05-15T21:51:49Z"
+    },
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-22T14:03:11Z",
+    "created_at": "2011-04-01T09:31:43Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "In the `admin/:model` the search form must not point to `/rails_admin/main/list`...\r\nPlease check it I have the same error in the whole `list` pages of the models\r\n\r\nAmr",
+    "title": "Error in the `action` of the search form of models in `list` page",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "dustMason",
+      "gravatar_url": "https://secure.gravatar.com/avatar/e9ed2af775174211429aae4d5e7805c6?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/dustMason",
+      "url": "https://api.github.com/users/dustMason",
+      "company": "Genuine Parts, LLC",
+      "location": "Oakland, CA",
+      "blog": "http://specifyapp.com",
+      "name": "Jordan Sitkin",
+      "created_at": "2010-08-19T01:05:32Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/361",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/361",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 361,
+    "comments": 2,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:55:45Z",
+    "created_at": "2011-03-30T22:22:49Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I have a model event.rb:\r\n    class Event < ActiveRecord::Base\r\n      serialize :data\r\n      belongs_to :user\r\n    end\r\n    class ProductAddedEvent < Event; end\r\n    class CollectionCreatedEvent < Event; end\r\n    class FollowingEvent < Event; end\r\n    class FollowedEvent < Event; end\r\n    class CommentAddedEvent < Event; end\r\nwhich seems to be causing Rails Admin (latest version as of today) to throw an error when I try to look at any model:\r\n\tuninitialized constant CollectionCreatedEvent\r\n\r\nExtracted Source:\r\n\t1: <%\r\n\t2:   max_visible_tabs = RailsAdmin::Config::Sections::Navigation.max_visible_tabs\r\n\t3:   models = RailsAdmin::Config.visible_models.select { |model| authorized?(:list, model.abstract_model) }\r\n\t4: %>\r\n\t5:       <ul id=\"nav\">\r\n\t6:         <li <%if @page_type == \"dashboard\" %>class=\"active\"<% end %>><%= link_to(t(\"admin.dashboard.name\"), rails_admin_dashboard_path) %></li>\r\n\r\nFull Trace:\r\n\tactivesupport (3.0.6.rc1) lib/active_support/inflector/methods.rb:113:in `constantize'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/inflector/methods.rb:112:in `each'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/inflector/methods.rb:112:in `constantize'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/core_ext/string/inflections.rb:43:in `constantize'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/lib/rails_admin/abstract_model.rb:74:in `model'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/lib/rails_admin/config.rb:46:in `model'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/lib/rails_admin/config.rb:67:in `models'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/lib/rails_admin/config.rb:67:in `map'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/lib/rails_admin/config.rb:67:in `models'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/lib/rails_admin/config.rb:95:in `visible_models'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/app/views/rails_admin/main/_navigation.html.erb:3:in `___ibrary__uby__ems_____bundler_gems_rails_admin_______dfdc___app_views_rails_admin_main__navigation_html_erb___1743824518_2190578620_2143870'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:135:in `send'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:135:in `render'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:54:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:127:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:333:in `render_partial'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:262:in `render'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications/instrumenter.rb:21:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:260:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:378:in `_render_partial'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/rendering.rb:22:in `render_without_haml'\r\n\thaml (3.0.25) lib/haml/helpers/action_view_mods.rb:13:in `render'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/app/views/layouts/rails_admin/_header.html.erb:13:in `___ibrary__uby__ems_____bundler_gems_rails_admin_______dfdc___app_views_layouts_rails_admin__header_html_erb__169155594_2190609040_527550'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:135:in `send'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:135:in `render'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:54:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:127:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:333:in `render_partial'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:262:in `render'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications/instrumenter.rb:21:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:260:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/partials.rb:378:in `_render_partial'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/rendering.rb:22:in `render_without_haml'\r\n\thaml (3.0.25) lib/haml/helpers/action_view_mods.rb:13:in `render'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/app/views/layouts/rails_admin/list.html.erb:18:in `___ibrary__uby__ems_____bundler_gems_rails_admin_______dfdc___app_views_layouts_rails_admin_list_html_erb___556108490_2187854440_0'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:135:in `send'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:135:in `render'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:54:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_view/template.rb:127:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/layouts.rb:80:in `_render_layout'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/rendering.rb:62:in `_render_template'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications/instrumenter.rb:21:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/rendering.rb:56:in `_render_template'\r\n\tactionpack (3.0.6.rc1) lib/action_view/render/rendering.rb:26:in `render_without_haml'\r\n\thaml (3.0.25) lib/haml/helpers/action_view_mods.rb:13:in `render'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/rendering.rb:115:in `_render_template'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/rendering.rb:109:in `render_to_body'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/renderers.rb:47:in `render_to_body'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/compatibility.rb:55:in `render_to_body'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/rendering.rb:102:in `render_to_string'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/rendering.rb:93:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/rendering.rb:17:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/instrumentation.rb:40:in `render'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/core_ext/benchmark.rb:5:in `ms'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/core_ext/benchmark.rb:5:in `ms'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/instrumentation.rb:40:in `render'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'\r\n\tactiverecord (3.0.6.rc1) lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/instrumentation.rb:39:in `render'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/app/controllers/rails_admin/main_controller.rb:39:in `list'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/mime_responds.rb:192:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/mime_responds.rb:192:in `respond_to'\r\n\t/Library/Ruby/Gems/1.8/bundler/gems/rails_admin-508288dfdc24/app/controllers/rails_admin/main_controller.rb:38:in `list'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/base.rb:150:in `process_action'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/rendering.rb:11:in `process_action'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/callbacks.rb:18:in `process_action'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/callbacks.rb:456:in `_run__1766623449__process_action__743455353__callbacks'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/callbacks.rb:410:in `send'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/callbacks.rb:94:in `send'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/callbacks.rb:94:in `run_callbacks'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/callbacks.rb:17:in `process_action'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications/instrumenter.rb:21:in `instrument'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/notifications.rb:52:in `instrument'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/instrumentation.rb:29:in `process_action'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/rescue.rb:17:in `process_action'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/base.rb:119:in `process'\r\n\tactionpack (3.0.6.rc1) lib/abstract_controller/rendering.rb:41:in `process'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal.rb:138:in `dispatch'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'\r\n\tactionpack (3.0.6.rc1) lib/action_controller/metal.rb:178:in `action'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/routing/route_set.rb:62:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/routing/route_set.rb:62:in `dispatch'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/routing/route_set.rb:27:in `call'\r\n\track-mount (0.6.14) lib/rack/mount/route_set.rb:148:in `call'\r\n\track-mount (0.6.14) lib/rack/mount/code_generation.rb:93:in `recognize'\r\n\track-mount (0.6.14) lib/rack/mount/code_generation.rb:82:in `optimized_each'\r\n\track-mount (0.6.14) lib/rack/mount/code_generation.rb:92:in `recognize'\r\n\track-mount (0.6.14) lib/rack/mount/route_set.rb:139:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/routing/route_set.rb:493:in `call'\r\n\thaml (3.0.25) lib/sass/plugin/rack.rb:41:in `call'\r\n\twarden (1.0.3) lib/warden/manager.rb:35:in `call'\r\n\twarden (1.0.3) lib/warden/manager.rb:34:in `catch'\r\n\twarden (1.0.3) lib/warden/manager.rb:34:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/head.rb:14:in `call'\r\n\track (1.2.2) lib/rack/methodoverride.rb:24:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/params_parser.rb:21:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/flash.rb:182:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/cookies.rb:302:in `call'\r\n\tactiverecord (3.0.6.rc1) lib/active_record/query_cache.rb:32:in `call'\r\n\tactiverecord (3.0.6.rc1) lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'\r\n\tactiverecord (3.0.6.rc1) lib/active_record/query_cache.rb:12:in `cache'\r\n\tactiverecord (3.0.6.rc1) lib/active_record/query_cache.rb:31:in `call'\r\n\tactiverecord (3.0.6.rc1) lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/callbacks.rb:46:in `call'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/callbacks.rb:416:in `_run_call_callbacks'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/callbacks.rb:44:in `call'\r\n\track (1.2.2) lib/rack/sendfile.rb:107:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/remote_ip.rb:48:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'\r\n\trailties (3.0.6.rc1) lib/rails/rack/logger.rb:13:in `call'\r\n\track (1.2.2) lib/rack/runtime.rb:17:in `call'\r\n\tactivesupport (3.0.6.rc1) lib/active_support/cache/strategy/local_cache.rb:72:in `call'\r\n\track (1.2.2) lib/rack/lock.rb:11:in `call'\r\n\track (1.2.2) lib/rack/lock.rb:11:in `synchronize'\r\n\track (1.2.2) lib/rack/lock.rb:11:in `call'\r\n\tactionpack (3.0.6.rc1) lib/action_dispatch/middleware/static.rb:30:in `call'\r\n\trailties (3.0.6.rc1) lib/rails/application.rb:168:in `call'\r\n\trailties (3.0.6.rc1) lib/rails/application.rb:77:in `send'\r\n\trailties (3.0.6.rc1) lib/rails/application.rb:77:in `method_missing'\r\n\trailties (3.0.6.rc1) lib/rails/rack/log_tailer.rb:14:in `call'\r\n\track (1.2.2) lib/rack/content_length.rb:13:in `call'\r\n\track (1.2.2) lib/rack/handler/webrick.rb:52:in `service'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'\r\n\t/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'\r\n\track (1.2.2) lib/rack/handler/webrick.rb:13:in `run'\r\n\track (1.2.2) lib/rack/server.rb:213:in `start'\r\n\trailties (3.0.6.rc1) lib/rails/commands/server.rb:65:in `start'\r\n\trailties (3.0.6.rc1) lib/rails/commands.rb:30\r\n\trailties (3.0.6.rc1) lib/rails/commands.rb:27:in `tap'\r\n\trailties (3.0.6.rc1) lib/rails/commands.rb:27\r\n\tscript/rails:6:in `require'\r\n\tscript/rails:6\r\n\r\nNote that hiding the models in an initializer doesn't seem to help:\r\n    RailsAdmin.config do |config|\r\n      config.model Event::ProductAddedEvent do\r\n        visible false\r\n      end\r\n      config.model Event::CollectionCreatedEvent do\r\n        visible false\r\n      end\r\n      config.model Event::FollowingEvent do\r\n        visible false\r\n      end\r\n      config.model Event::FollowedEvent do\r\n        visible false\r\n      end\r\n      config.model Event::CommentAddedEvent do\r\n        visible false\r\n      end\r\n    end",
+    "title": "uninitialized constant Error caused by STI models",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "wolframarnold",
+      "gravatar_url": "https://secure.gravatar.com/avatar/5a60d6c66b7737ba71cecc4c46fc6fd5?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "wolfram@rubyfocus.biz",
+      "html_url": "https://github.com/wolframarnold",
+      "url": "https://api.github.com/users/wolframarnold",
+      "company": "http://www.rubyfocus.biz",
+      "location": "San Francisco",
+      "blog": "http://www.rubyfocus.biz",
+      "name": "Wolfram Arnold",
+      "created_at": "2008-12-23T09:14:23Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/359",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/359",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/cleanup",
+        "color": "96e7ff",
+        "name": "cleanup"
+      }
+    ],
+    "number": 359,
+    "comments": 2,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:54:52Z",
+    "created_at": "2011-03-29T22:17:12Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Follow-up on the conversation from: https://github.com/sferik/rails_admin/pull/356\r\n\r\n@sferik Yes, I would be interested in working on a more permanent solution for namespaced models.\r\n\r\nI had a brief look. One idea, in line with Rails conventions, would be to permit namespaced routing, e.g. /:namespace/:model/:id/edit or even /:ns_1/:ns_2/.../:ns_k/:model/:id/edit. This would touch a lot of code, because route generation using the named route methods is scattered throughout and currently accepts the model name parameter.\r\n\r\nAnother problem is that the .to_param method is currently used for multiple different purposes, which are not all compatible when taking namespaces into account. The easiest hack was the ~ but that's clearly not satisfactory.\r\n\r\nI'd love to hear your ideas for alternative approaches. Should we open a new issue for this?\r\n\r\nWolf",
+    "title": "Architecture improvements for full namespaced model support.",
+    "milestone": {
+      "open_issues": 6,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/5",
+      "description": "A release for things that don't need to make it into the first release but are still important",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 5,
+      "due_on": "2011-10-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:58Z",
+      "state": "open",
+      "title": "0.1",
+      "closed_issues": 0
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "slbug",
+      "gravatar_url": "https://secure.gravatar.com/avatar/ce5d1a4d26241d16575889a6f1ed4487?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "",
+      "html_url": "https://github.com/slbug",
+      "url": "https://api.github.com/users/slbug",
+      "company": null,
+      "location": null,
+      "blog": null,
+      "name": "bUg.",
+      "created_at": "2009-07-25T23:22:26Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/354",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/354",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 354,
+    "comments": 5,
+    "assignee": {
+      "type": "User",
+      "login": "caboteria",
+      "gravatar_url": "https://secure.gravatar.com/avatar/e381ef5e90b6ed2bd5082a9a463cea3b?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/caboteria",
+      "url": "https://api.github.com/users/caboteria",
+      "company": null,
+      "location": "Massachusetts, USA",
+      "blog": "http://www.caboteria.org/",
+      "name": "toby cabot",
+      "created_at": "2009-05-15T21:51:49Z"
+    },
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-17T17:37:36Z",
+    "created_at": "2011-03-27T04:06:01Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Kaminari provides helper for rendering pagination (e.g. <%= paginate @users %> ), but rails_admin also have same helper (with differenet params). And helper from rails admin getting called from my views. \r\n\r\nCan you please check it?",
+    "title": "Conflict with Kaminari",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "slbug",
+      "gravatar_url": "https://secure.gravatar.com/avatar/ce5d1a4d26241d16575889a6f1ed4487?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "",
+      "html_url": "https://github.com/slbug",
+      "url": "https://api.github.com/users/slbug",
+      "company": null,
+      "location": null,
+      "blog": null,
+      "name": "bUg.",
+      "created_at": "2009-07-25T23:22:26Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/353",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/353",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 353,
+    "comments": 3,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-20T18:07:41Z",
+    "created_at": "2011-03-26T15:16:33Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Right now i have default ordering in some models. And when i trying to edit model with has_many through relations it tries to load records with default scope from another model. \r\n\r\ne.g. i have store, product, offer models. store has_many products through offers. offer has price field and default scope to order by price. when i trying to edit product it produces sql query with error (select products.... joins offers .... order by price...). there is error because price field not included in select clause.",
+    "title": "Please add option to ignore all default_scopes.",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "sferik",
+      "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "sferik@gmail.com",
+      "html_url": "https://github.com/sferik",
+      "url": "https://api.github.com/users/sferik",
+      "company": "Code for America",
+      "location": "San Francisco",
+      "blog": "http://twitter.com/sferik",
+      "name": "Erik Michaels-Ober",
+      "created_at": "2008-05-14T20:36:12Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/350",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/350",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 350,
+    "comments": 1,
+    "assignee": {
+      "type": "User",
+      "login": "hurrycane",
+      "gravatar_url": "https://secure.gravatar.com/avatar/dfa3143343f3680753e0ae09de57bcd6?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "bogdan@cadmio.org",
+      "html_url": "https://github.com/hurrycane",
+      "url": "https://api.github.com/users/hurrycane",
+      "company": null,
+      "location": "Iasi, Romania",
+      "blog": "http://students.info.uaic.ro/~bogdan.gaza/",
+      "name": "Bogdan Gaza",
+      "created_at": "2008-03-09T19:31:14Z"
+    },
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-16T23:37:11Z",
+    "created_at": "2011-03-25T17:22:05Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "`rails destroy` is the opposite of `rails generate`\n\nWe should have a task that cleans up any assets that may have been installed by rails_admin and adds a migration to drop the `rails_admin_histories` table.",
+    "title": "Easy Uninstall",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "kristyan",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c4d366fe45c7abc95aaa06e4d3d51545?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/kristyan",
+      "url": "https://api.github.com/users/kristyan",
+      "company": "teamer.net",
+      "location": "Dublin ",
+      "blog": "http://teamer.net",
+      "name": "Kristyan Connolly",
+      "created_at": "2010-03-12T14:01:44Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/343",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/343",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/enhancement",
+        "color": "9cf098",
+        "name": "enhancement"
+      }
+    ],
+    "number": 343,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:54:21Z",
+    "created_at": "2011-03-22T14:12:04Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "It would be great if we could override the default search mechanic, to allow for a customized search on a per model bases. For example, one way to do this would be to have a config setting such as \n<pre><code>\nconfig.model Cars do\n  search_method :search\nend\n\n</pre></code>\nor globally for all models\n<pre><code>\nRailsAdmin.search_with_method :search \n\n</pre></code>\nThis would mean in the case of the Car model, searches would be performed by calling: \n<pre><code>Car.search query, offset, limit </pre></code>\ndynamically in preference to the default search. This would of course return a list of Car models which would be understood by rails admin and rendered in the search results.\n\nThis would be a very powerful feature as it would allow users to customize searches and potentially use search indexers such as Sphinx/Solr etc.. to perform the actual search in the background. \n\nI would like to hear other any other comments/suggestions ?\n\n\n\n\n",
+    "title": "Ability to override search",
+    "milestone": {
+      "open_issues": 8,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/6",
+      "description": "",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 6,
+      "due_on": "2011-12-01T08:00:00Z",
+      "created_at": "2011-04-10T02:45:24Z",
+      "state": "open",
+      "title": "0.2",
+      "closed_issues": 1
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "kristyan",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c4d366fe45c7abc95aaa06e4d3d51545?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/kristyan",
+      "url": "https://api.github.com/users/kristyan",
+      "company": "teamer.net",
+      "location": "Dublin ",
+      "blog": "http://teamer.net",
+      "name": "Kristyan Connolly",
+      "created_at": "2010-03-12T14:01:44Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/342",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/342",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/enhancement",
+        "color": "9cf098",
+        "name": "enhancement"
+      }
+    ],
+    "number": 342,
+    "comments": 1,
+    "assignee": null,
+    "pull_request": {
+      "html_url": "https://github.com/sferik/rails_admin/pull/342",
+      "diff_url": "https://github.com/sferik/rails_admin/pull/342.diff",
+      "patch_url": "https://github.com/sferik/rails_admin/pull/342.patch"
+    },
+    "updated_at": "2011-04-15T18:46:11Z",
+    "created_at": "2011-03-22T12:10:32Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Hi\r\n\r\nI have changed the field search so that now the user can search over a field by selecting the field from a drop-down menu containing the list of fields (Corresponding to the viewable list that can be set in the config). I removed the field:query based search as I found our users had difficulty remembering field names etc..\r\n\r\nI am not sure if this is a patch that you want, but please take a look. \r\n\r\nNote, if you except this patch you will probably need to remove/change the specs already written for field search. Sorry I don't have the time to update the specs right now.\r\n\r\nKris\r\n\r\n",
+    "title": "Dropdown field search",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "lemig",
+      "gravatar_url": "https://secure.gravatar.com/avatar/ed767aa54affe4612de576ccb6341c7f?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "lemig@hotmail.com",
+      "html_url": "https://github.com/lemig",
+      "url": "https://api.github.com/users/lemig",
+      "company": null,
+      "location": "Brussels",
+      "blog": null,
+      "name": "Miguel Cabero",
+      "created_at": "2009-04-28T13:50:48Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/332",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/332",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 332,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:55:44Z",
+    "created_at": "2011-03-18T20:04:04Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "From your config doc :\nRailsAdmin.config do |config|\n  config.model Team do\n    edit do\n      group :default do\n        hide\n      end\n    end\n  end\nend\n\nThis would hide the \"Basic info\" group which is accessed by the symbol :default. THIS WORKS.\nAssociations' groups can be accessed by the name of the association, such as :fans or :players. THIS DOES NOT SEEM TO WORK\n",
+    "title": "bug Association visibility in edit mode seems broken",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "kristyan",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c4d366fe45c7abc95aaa06e4d3d51545?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/kristyan",
+      "url": "https://api.github.com/users/kristyan",
+      "company": "teamer.net",
+      "location": "Dublin ",
+      "blog": "http://teamer.net",
+      "name": "Kristyan Connolly",
+      "created_at": "2010-03-12T14:01:44Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/331",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/331",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/enhancement",
+        "color": "9cf098",
+        "name": "enhancement"
+      }
+    ],
+    "number": 331,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:54:20Z",
+    "created_at": "2011-03-18T14:58:05Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "It would be great if search was improved to allow searching over date fields. ",
+    "title": "Ability To Search Over Dates",
+    "milestone": {
+      "open_issues": 8,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/6",
+      "description": "",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 6,
+      "due_on": "2011-12-01T08:00:00Z",
+      "created_at": "2011-04-10T02:45:24Z",
+      "state": "open",
+      "title": "0.2",
+      "closed_issues": 1
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "snmgian",
+      "gravatar_url": "https://secure.gravatar.com/avatar/f9e2fd650facaeab7e3a72472941f2af?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/snmgian",
+      "url": "https://api.github.com/users/snmgian",
+      "company": "moove-it",
+      "location": "MVD Uruguay",
+      "blog": null,
+      "name": "gian",
+      "created_at": "2009-04-13T01:27:57Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/326",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/326",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/enhancement",
+        "color": "9cf098",
+        "name": "enhancement"
+      },
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/extension",
+        "color": "ca9cff",
+        "name": "extension"
+      }
+    ],
+    "number": 326,
+    "comments": 4,
+    "assignee": null,
+    "pull_request": {
+      "html_url": "https://github.com/sferik/rails_admin/pull/326",
+      "diff_url": "https://github.com/sferik/rails_admin/pull/326.diff",
+      "patch_url": "https://github.com/sferik/rails_admin/pull/326.patch"
+    },
+    "updated_at": "2011-03-29T08:07:17Z",
+    "created_at": "2011-03-17T20:21:37Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Sometimes a model can't be destroyed with a delete sql statement, it only requires an update on a field named like 'removed' or 'disabled'.\n\n",
+    "title": "Adding support for custom destroy methods on models",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "baldowl",
+      "gravatar_url": "https://secure.gravatar.com/avatar/4a7070e4dc250fc62726d0de31cc33cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/baldowl",
+      "url": "https://api.github.com/users/baldowl",
+      "company": null,
+      "location": "Italy",
+      "blog": "http://baldowl.github.com",
+      "name": "Emanuele Vicentini",
+      "created_at": "2008-07-08T06:38:10Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/323",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/323",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      },
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/i18n",
+        "color": "ffd4bd",
+        "name": "i18n"
+      }
+    ],
+    "number": 323,
+    "comments": 7,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:55:44Z",
+    "created_at": "2011-03-16T07:40:46Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I've just updated to the current HEAD and localization is gone. Bisecting from c43dabf8956c767562065c397db4095e488ae687 I found that commit d036623ea79f49cdb49a32688b0e0354178b628e seems to be the culprit.\r\n\r\nAnyone else? Maybe I missed some step when updating?",
+    "title": "Broken localization?",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "gunn",
+      "gravatar_url": "https://secure.gravatar.com/avatar/67c0c5d4a82a8b28405d2fe4f581cc65?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "arthur@gunn.co.nz",
+      "html_url": "https://github.com/gunn",
+      "url": "https://api.github.com/users/gunn",
+      "company": null,
+      "location": "Dunedin, New Zealand",
+      "blog": null,
+      "name": "Arthur Gunn",
+      "created_at": "2008-12-24T14:56:57Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/317",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/317",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/enhancement",
+        "color": "9cf098",
+        "name": "enhancement"
+      }
+    ],
+    "number": 317,
+    "comments": 20,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:55:44Z",
+    "created_at": "2011-03-12T02:45:13Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I've put up a repo with some mockups at: https://github.com/gunn/rails_admin-prototypes/\r\n\r\nThe idea would be to base this on the current jquery branch, and modify the markup to be consistent with what the [web-app-theme project](https://github.com/pilu/web-app-theme) provides. This would make us compatible with a few nice css / js themes in addition to the one shown in my mockups.\r\n\r\nWhat do people think?",
+    "title": "Rails Admin should be prettier.",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "epdp",
+      "gravatar_url": "https://secure.gravatar.com/avatar/0cc22d068bb10e47f74bcce06ea93431?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "tech@elpulgardelpanda.com",
+      "html_url": "https://github.com/epdp",
+      "url": "https://api.github.com/users/epdp",
+      "company": "El pulgar del panda, tecnología web creativa.",
+      "location": "Barcelona",
+      "blog": "http://www.elpulgardelpanda.com",
+      "name": "Rafa de Bofarull",
+      "created_at": "2008-04-15T04:06:39Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/314",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/314",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/enhancement",
+        "color": "9cf098",
+        "name": "enhancement"
+      }
+    ],
+    "number": 314,
+    "comments": 4,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-19T10:45:20Z",
+    "created_at": "2011-03-11T09:49:15Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I needed to be able to specify the order of Navigation tabs. I coded this on rails_admin.rb initializer:\n\n    # order navigation tabs (0 the last)\n    # example:\n    # \n    #   config.model Offer do  \n    #     navigation.order = 10\n    #   end\n    #\n    module RailsAdmin\n       module Config\n          module Sections\n            class Navigation\n              attr_accessor :order\n              @order = 0\n\n             def self.visible_models\n               RailsAdmin::Config.models.select {|m| m.navigation.visible? }.sort do |a,b|\n                 a.navigation.order ||= 0\n                 b.navigation.order ||= 0\n                 b.navigation.order <=> a.navigation.order\n              end\n            end\n          end\n        end\n      end\n    end\n\nHope it helps someone. Maybe someday this functionality will be aded to rails_admin. It would have to be implemented in some other way, so this code really doesn't help at all, but it works for me in the meanwhile.",
+    "title": "Navigation tab order",
+    "milestone": {
+      "open_issues": 6,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/5",
+      "description": "A release for things that don't need to make it into the first release but are still important",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 5,
+      "due_on": "2011-10-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:58Z",
+      "state": "open",
+      "title": "0.1",
+      "closed_issues": 0
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "kristyan",
+      "gravatar_url": "https://secure.gravatar.com/avatar/c4d366fe45c7abc95aaa06e4d3d51545?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": null,
+      "html_url": "https://github.com/kristyan",
+      "url": "https://api.github.com/users/kristyan",
+      "company": "teamer.net",
+      "location": "Dublin ",
+      "blog": "http://teamer.net",
+      "name": "Kristyan Connolly",
+      "created_at": "2010-03-12T14:01:44Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/296",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/296",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 296,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:55:44Z",
+    "created_at": "2011-02-23T18:17:37Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "There does not appear to be a partial called _file_upload.html.erb  to render a file upload field, Is there a reason for this?",
+    "title": "file_upload field",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "alec-c4",
+      "gravatar_url": "https://secure.gravatar.com/avatar/561f6b93e60563dabb66fb9802d06fa3?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "alec@alec-c4.com",
+      "html_url": "https://github.com/alec-c4",
+      "url": "https://api.github.com/users/alec-c4",
+      "company": "CyberBerry",
+      "location": "Moscow, Russia",
+      "blog": "http://alec-c4.com",
+      "name": "Alexey Poimtsev",
+      "created_at": "2008-09-19T07:47:03Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/291",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/291",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 291,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-02-21T22:46:48Z",
+    "created_at": "2011-02-17T20:06:12Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "Hi,\r\nI have overwritten method permission_denied of declarative_authorization in my application_controller with following code\r\n\r\n       def permission_denied \r\n         render_403 \r\n       end \r\n       def render_403 \r\n         render_error(403) \r\n       end \r\n       def render_error(status_code) \r\n         render :file => \"#{Rails.root}/public/ \r\n     #{status_code}.html\", :status => status_code, :layout => false \r\n       end \r\n\r\non attempt to access /admin/ url without admin rights everytime i see following error:\r\n\r\n     NoMethodError in Rails admin/mainController#index \r\n     undefined method `update' for nil:NilClass \r\n\r\nCould you please check you plugin for this issue?",
+    "title": "permission_denied method causes error",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "krisleech",
+      "gravatar_url": "https://secure.gravatar.com/avatar/57053c3320e9426dda3909868cd46947?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "",
+      "html_url": "https://github.com/krisleech",
+      "url": "https://api.github.com/users/krisleech",
+      "company": "Interkonect Services UK Limited",
+      "location": "Nottingham, UK",
+      "blog": "interkonect.com",
+      "name": "Kris Leech",
+      "created_at": "2009-03-23T17:19:15Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/289",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/289",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 289,
+    "comments": 3,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-27T18:30:48Z",
+    "created_at": "2011-02-16T20:19:12Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "initializers/rails_admin.rb\n\n<pre>\nconfig.model Competition do\nend\n</pre>\n\nthen \n\n<pre>\nrake db:drop\nrake db:create\nrake db:migrate\n</pre>\n\nIn fact any rake task (which loads the environment) whic is run  after dropping the database fails. This would appear to be because \"config.model\" needs to call Competition, I assume to get a list of database fields, and because the competitions table does not exist ActiveRecord raises an exception.\n\nThe solution I am using so far is to wrap the config.model block like so:\n\n<pre>\nif defined? Competition\n  config.model Competition\n  end\nend\n</pre>\n\nRuby 1.9.2\nRails 3.0.3\nrails_admin HEAD\n\n",
+    "title": "\"config.model\" raises \"table doesn't exist\" exception if database is dropped",
+    "milestone": {
+      "open_issues": 26,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/4",
+      "description": "The first gem release",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 4,
+      "due_on": "2011-08-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:04Z",
+      "state": "open",
+      "title": "0.0",
+      "closed_issues": 4
+    }
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "bradphelan",
+      "gravatar_url": "https://secure.gravatar.com/avatar/53f7def58ca1dfdc13369dfd5e2aaace?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "bradphelan@xtargets.com",
+      "html_url": "https://github.com/bradphelan",
+      "url": "https://api.github.com/users/bradphelan",
+      "company": "XTargets",
+      "location": "Austria",
+      "blog": "xtargets.com",
+      "name": "Brad Phelan",
+      "created_at": "2008-07-21T06:42:34Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/281",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/281",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 281,
+    "comments": 0,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-02-12T07:17:45Z",
+    "created_at": "2011-02-12T07:17:45Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "This is related to [rails issue](https://rails.lighthouseapp.com/projects/8994/tickets/6217-has_many-through-associations-are-created-with-create-even-if-the-parent-is-created-with-create)\r\n\r\nIf I have a model\r\n\r\n    class Course\r\n        has_many :registrations\r\n        has_many :students, :through => :registrations\r\n    end\r\n\r\nand the model \r\n\r\n\r\n    class Registration\r\n      validate :number_of_courses, :on_create\r\n      attr_readonly :student, :course\r\n    \r\n      def number_of_courses\r\n        if student.courses.size >= MAXIMUM_NUMBER_OF_COURSES_PER_STUDENT\r\n          false\r\n        else\r\n          true\r\n        end\r\n      end\r\n    end\r\n\r\nnow within the rails admin UI if I add more than 5 courses to\r\na student instead of getting a nice error message I get a backtrace \r\nerror returned.\r\n\r\nThe reason for this is at\r\n\r\n\r\n    ----------------------\r\n    /app/controllers/rails_admin/main_controller.rb\r\n    ----------------------\r\n     85         if @object.save\r\n     86           AbstractHistory.create_update_history @abstract_model, @object, @cached_assocations_hash, associations_hash, @modified_assoc, @old_object, _current_user\r\n     87           redirect_to_on_success\r\n     88         else\r\n     89           render_error :edit\r\n     90         end\r\n\r\n\r\n@object.save should return false if the validations fail. However as it is one of\r\nthe validations on the associated Registration objects that fail as they are\r\ncreated automagically an exception is thrown where none is expected.\r\n\r\nThis may be a Rails bug but you probably need a work around in railsadmin\r\n\r\nRegards\r\n\r\nBrad\r\n\r\n",
+    "title": "validation errors on join model in has_many :through => .... causes backtrace",
+    "milestone": null
+  },
+  {
+    "user": {
+      "type": "User",
+      "login": "fellix",
+      "gravatar_url": "https://secure.gravatar.com/avatar/a70aa5d32b9c30f1f9c94d0ae47093ac?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "email": "felix.rafael@gmail.com",
+      "html_url": "https://github.com/fellix",
+      "url": "https://api.github.com/users/fellix",
+      "company": "",
+      "location": "Brasil",
+      "blog": "http://blog.rollingwithcode.com/",
+      "name": "Rafael Felix",
+      "created_at": "2008-10-16T13:22:10Z"
+    },
+    "html_url": "https://github.com/sferik/rails_admin/issues/279",
+    "url": "https://api.github.com/repos/sferik/rails_admin/issues/279",
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/sferik/rails_admin/labels/bug",
+        "color": "ff9c9c",
+        "name": "bug"
+      }
+    ],
+    "number": 279,
+    "comments": 10,
+    "assignee": null,
+    "pull_request": {
+      "html_url": null,
+      "diff_url": null,
+      "patch_url": null
+    },
+    "updated_at": "2011-04-10T02:54:51Z",
+    "created_at": "2011-02-09T10:15:12Z",
+    "closed_at": null,
+    "state": "open",
+    "body": "I've added the ckeditor to some fields for admim, running at local host it works well but when I deploied the app into heroku, I get an error 'undefined method 'ckeditor''.\r\n\r\nhttps://github.com/fellix/rollingblog/blob/master/config/initializers/rails_admin.rb\r\n\r\nI comment the code below, and the app is running now, I can't use ckeditor at heroku?\r\nAnyone else have the same error?",
+    "title": "Error deploing at Heroku with ckeditor",
+    "milestone": {
+      "open_issues": 6,
+      "url": "https://api.github.com/repos/sferik/rails_admin/milestones/5",
+      "description": "A release for things that don't need to make it into the first release but are still important",
+      "creator": {
+        "type": "User",
+        "login": "sferik",
+        "gravatar_url": "https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb?s=30&d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png",
+        "email": "sferik@gmail.com",
+        "html_url": "https://github.com/sferik",
+        "url": "https://api.github.com/users/sferik",
+        "company": "Code for America",
+        "location": "San Francisco",
+        "blog": "http://twitter.com/sferik",
+        "name": "Erik Michaels-Ober",
+        "created_at": "2008-05-14T20:36:12Z"
+      },
+      "number": 5,
+      "due_on": "2011-10-01T07:00:00Z",
+      "created_at": "2011-04-10T02:44:58Z",
+      "state": "open",
+      "title": "0.1",
+      "closed_issues": 0
+    }
+  }
+]

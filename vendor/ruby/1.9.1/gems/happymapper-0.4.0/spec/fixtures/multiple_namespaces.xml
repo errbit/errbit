@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<v2:TrackReply xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:v2='http://fedex.com/ws/track/v2'>
+  <v2:HighestSeverity>SUCCESS</v2:HighestSeverity>
+  <v2:Notifications>
+    <v2:Severity>SUCCESS</v2:Severity>
+    <v2:Source>trck</v2:Source>
+    <v2:Code>0</v2:Code>
+    <v2:Message>Request was successfully processed.</v2:Message>
+    <v2:LocalizedMessage>Request was successfully processed.</v2:LocalizedMessage>
+  </v2:Notifications>
+  <ns:TransactionDetail xmlns:ns='http://fedex.com/ws/track/v2'>
+<ns:CustomerTransactionId>20090102-111321</ns:CustomerTransactionId>
+</ns:TransactionDetail>
+  <ns:Version xmlns:ns='http://fedex.com/ws/track/v2'>
+<ns:ServiceId>trck</ns:ServiceId>
+<ns:Major>2</ns:Major>
+<ns:Intermediate>0</ns:Intermediate>
+<ns:Minor>0</ns:Minor>
+</ns:Version>
+  <v2:DuplicateWaybill>false</v2:DuplicateWaybill>
+  <v2:MoreData>false</v2:MoreData>
+  <v2:TrackDetails>
+    <v2:TrackingNumber>9611018034267800045212</v2:TrackingNumber>
+    <v2:TrackingNumberUniqueIdentifier>120081227094248461000~034267800045212</v2:TrackingNumberUniqueIdentifier>
+    <v2:StatusCode>OD</v2:StatusCode>
+    <v2:StatusDescription>On FedEx vehicle for delivery</v2:StatusDescription>
+    <v2:CarrierCode>FDXG</v2:CarrierCode>
+    <v2:ServiceInfo>Ground-Package Returns Program-Domestic</v2:ServiceInfo>
+    <v2:PackageWeight>
+      <v2:Units>LB</v2:Units>
+      <v2:Value>2.6</v2:Value>
+    </v2:PackageWeight>
+    <v2:Packaging>Package</v2:Packaging>
+    <v2:PackageSequenceNumber>1</v2:PackageSequenceNumber>
+    <v2:PackageCount>1</v2:PackageCount>
+    <v2:OriginLocationAddress>
+      <v2:City>SANFORD</v2:City>
+      <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+      <v2:CountryCode>US</v2:CountryCode>
+      <v2:Residential>false</v2:Residential>
+    </v2:OriginLocationAddress>
+    <v2:ShipTimestamp>2008-12-29T00:00:00</v2:ShipTimestamp>
+    <v2:EstimatedDeliveryTimestamp>2009-01-02T00:00:00</v2:EstimatedDeliveryTimestamp>
+    <v2:SignatureProofOfDeliveryAvailable>false</v2:SignatureProofOfDeliveryAvailable>
+    <v2:ProofOfDeliveryNotificationsAvailable>true</v2:ProofOfDeliveryNotificationsAvailable>
+    <v2:ExceptionNotificationsAvailable>true</v2:ExceptionNotificationsAvailable>
+    <v2:Events>
+      <v2:Timestamp>2009-01-02T06:00:00</v2:Timestamp>
+      <v2:EventType>OD</v2:EventType>
+      <v2:EventDescription>On FedEx vehicle for delivery</v2:EventDescription>
+      <v2:Address>
+        <v2:City>WICHITA</v2:City>
+        <v2:StateOrProvinceCode>KS</v2:StateOrProvinceCode>
+        <v2:PostalCode>67226</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2009-01-02T01:17:32</v2:Timestamp>
+      <v2:EventType>AR</v2:EventType>
+      <v2:EventDescription>At local FedEx facility</v2:EventDescription>
+      <v2:Address>
+        <v2:City>WICHITA</v2:City>
+        <v2:StateOrProvinceCode>KS</v2:StateOrProvinceCode>
+        <v2:PostalCode>67226</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2009-01-01T21:49:49</v2:Timestamp>
+      <v2:EventType>DP</v2:EventType>
+      <v2:EventDescription>Departed FedEx location</v2:EventDescription>
+      <v2:Address>
+        <v2:City>LENEXA</v2:City>
+        <v2:StateOrProvinceCode>KS</v2:StateOrProvinceCode>
+        <v2:PostalCode>66227</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-31T16:19:00</v2:Timestamp>
+      <v2:EventType>AR</v2:EventType>
+      <v2:EventDescription>Arrived at FedEx location</v2:EventDescription>
+      <v2:Address>
+        <v2:City>LENEXA</v2:City>
+        <v2:StateOrProvinceCode>KS</v2:StateOrProvinceCode>
+        <v2:PostalCode>66227</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-30T11:01:23</v2:Timestamp>
+      <v2:EventType>DP</v2:EventType>
+      <v2:EventDescription>Departed FedEx location</v2:EventDescription>
+      <v2:Address>
+        <v2:City>ORLANDO</v2:City>
+        <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+        <v2:PostalCode>32809</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-30T05:00:00</v2:Timestamp>
+      <v2:EventType>AR</v2:EventType>
+      <v2:EventDescription>Arrived at FedEx location</v2:EventDescription>
+      <v2:Address>
+        <v2:City>ORLANDO</v2:City>
+        <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+        <v2:PostalCode>32809</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-30T03:16:33</v2:Timestamp>
+      <v2:EventType>DP</v2:EventType>
+      <v2:EventDescription>Left FedEx origin facility</v2:EventDescription>
+      <v2:Address>
+        <v2:City>SANFORD</v2:City>
+        <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+        <v2:PostalCode>32771</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-29T22:46:00</v2:Timestamp>
+      <v2:EventType>AR</v2:EventType>
+      <v2:EventDescription>Arrived at FedEx location</v2:EventDescription>
+      <v2:Address>
+        <v2:City>SANFORD</v2:City>
+        <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+        <v2:PostalCode>32771</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-29T17:12:00</v2:Timestamp>
+      <v2:EventType>PU</v2:EventType>
+      <v2:EventDescription>Picked up</v2:EventDescription>
+      <v2:Address>
+        <v2:City>SANFORD</v2:City>
+        <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+        <v2:PostalCode>32771</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+    <v2:Events>
+      <v2:Timestamp>2008-12-27T09:40:00</v2:Timestamp>
+      <v2:EventType>IP</v2:EventType>
+      <v2:EventDescription>In FedEx possession</v2:EventDescription>
+      <v2:StatusExceptionCode>084</v2:StatusExceptionCode>
+      <v2:StatusExceptionDescription>Tendered at FedEx location</v2:StatusExceptionDescription>
+      <v2:Address>
+        <v2:City>LONGWOOD</v2:City>
+        <v2:StateOrProvinceCode>FL</v2:StateOrProvinceCode>
+        <v2:PostalCode>327506398</v2:PostalCode>
+        <v2:CountryCode>US</v2:CountryCode>
+        <v2:Residential>false</v2:Residential>
+      </v2:Address>
+    </v2:Events>
+  </v2:TrackDetails>
+</v2:TrackReply>

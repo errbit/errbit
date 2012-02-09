@@ -1,0 +1,8 @@
+<%= form_tag '/welcome/signup' do -%>
+    <label for="Name">Name</label>
+    <%= text_field_tag 'Name' %>
+    <label for="Email">Email</label>
+    <%= text_field_tag 'Email' %>
+    <div><%= submit_tag 'Sign up' %></div>
+<% end -%>
+
