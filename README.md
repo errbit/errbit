@@ -107,6 +107,9 @@ git clone http://github.com/errbit/errbit.git
 gem install heroku
 heroku create example-errbit --stack cedar
 heroku addons:add mongohq:free
+cp config/mongoid.mongohq.yml config/mongoid.yml
+git add -f config/mongoid.yml
+git commit -m "Added mongoid config for MongoHQ"
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add ERRBIT_HOST=some-hostname.example.com
