@@ -58,7 +58,8 @@ module Hoptoad
         :server_environment => notice['server-environment'],
 
         :api_key            => notice['api-key'],
-        :notifier           => notice['notifier']
+        :notifier           => notice['notifier'],
+        :user_info          => notice['user-info'] || {}
       }
     end
   end

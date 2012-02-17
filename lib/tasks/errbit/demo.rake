@@ -52,7 +52,13 @@ namespace :errbit do
                         'action' => 'error'
                       },
           :server_environment => {'environment-name' => Rails.env.to_s},
-          :notifier => {:name => "seeds.rb"}
+          :notifier => {:name => "seeds.rb"},
+          :app_user => {
+            :id => "1234",
+            :username => "jsmith",
+            :name => "John Smith",
+            :url => "http://www.example.com/users/jsmith"
+          }
         })
         
         app.report_error!(error_report)
