@@ -133,6 +133,12 @@ heroku addons:add cron:daily
 heroku rake errbit:db:clear_resolved
 ```
 
+  5. You may want to enable the deployment hook for heroku :
+
+```bash
+heroku addons:add deployhooks:http url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
+```
+
   5. Enjoy!
 
 
