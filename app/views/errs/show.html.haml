@@ -50,7 +50,8 @@
   %ul
     %li= link_to 'Summary', '#summary', :rel => 'summary', :class => 'button'
     %li= link_to 'Backtrace', '#backtrace', :rel => 'backtrace', :class => 'button'
-    %li= link_to 'Application User', '#user_info', :rel => 'user_info', :class => 'button'
+    - if @notice.user_info.present?
+      %li= link_to 'Application User', '#user_info', :rel => 'user_info', :class => 'button'
     %li= link_to 'Environment', '#environment', :rel => 'environment', :class => 'button'
     %li= link_to 'Parameters', '#params', :rel => 'params', :class => 'button'
     %li= link_to 'Session', '#session', :rel => 'session', :class => 'button'
