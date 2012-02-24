@@ -5,8 +5,9 @@ Errbit::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
-  # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  # Full error reports are enabled, since this is an internal application.
+  config.consider_all_requests_local       = true
+  # Caching is turned on
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
