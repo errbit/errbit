@@ -21,6 +21,7 @@
       = link_to 'unlink issue', unlink_issue_app_err_path(@app, @problem), :method => :delete, :confirm => "Unlink err issues?", :class => "unlink-issue"
   - if @problem.unresolved?
     %span= link_to 'resolve', resolve_app_err_path(@app, @problem), :method => :put, :confirm => err_confirm, :class => 'resolve'
+  %span= link_to 'up', (request.env['HTTP_REFERER'] ? :back : app_errs_path(@app)), :class => 'up'
 
 - if Errbit::Config.allow_comments_with_issue_tracker || !@app.issue_tracker_configured? || @problem.comments.any?
   - content_for :comments do

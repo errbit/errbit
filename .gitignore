@@ -9,6 +9,7 @@ config/deploy
 config/mongoid.yml
 config/newrelic.yml
 .rvmrc
+.idea
 *~
 *.rbc
 .DS_Store
