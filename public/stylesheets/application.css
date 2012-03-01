@@ -672,6 +672,11 @@ table.deploys td.when {
   background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
 }
 
+/* Go Up */
+#action-bar a.up {
+  background: transparent url(images/icons/up.png) 6px 5px no-repeat;
+}
+
 /* Notices Pagination */
 .notice-pagination {
   float: left;

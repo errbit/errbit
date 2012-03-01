@@ -38,6 +38,24 @@ describe "errs/show.html.haml" do
       resolve_link.should_not =~ /data-confirm=/
     end
 
+    it "should link 'up' to HTTP_REFERER if is set" do
+      url = 'http://localhost:3000/errs'
+      controller.request.env['HTTP_REFERER'] = url
+      render
+      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar.should =~ /<span><a href=\"#{url}\" class=\"up\">up<\/a><\/span>/
+    end
+
+    it "should link 'up' to app_errs_path if HTTP_REFERER isn't set'" do
+      controller.request.env['HTTP_REFERER'] = nil
+      problem = Fabricate(:problem_with_comments)
+      assign :problem, problem
+      assign :app, problem.app
+      render
+      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar.should =~ /<span><a href=\"#{app_errs_path(problem.app)}\" class=\"up\">up<\/a><\/span>/
+    end
+
   end
 
   describe "content_for :comments with comments disabled for configured issue tracker" do
