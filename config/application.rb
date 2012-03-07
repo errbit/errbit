@@ -52,7 +52,7 @@ module Errbit
     config.mongoid.preload_models = true
 
     # Set up observers
-    config.mongoid.observers = :deploy_observer
+    config.mongoid.observers = :deploy_observer, :notice_observer
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
