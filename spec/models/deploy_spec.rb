@@ -17,12 +17,6 @@ describe Deploy do
   end
 
   context 'being created' do
-    it 'should send an email notification' do
-      Mailer.should_receive(:deploy_notification).
-        and_return(mock('email', :deliver => true))
-      Fabricate(:deploy, :app => Fabricate(:app_with_watcher, :notify_on_deploys => true))
-    end
-
     context 'when the app has resolve_errs_on_deploy set to false' do
       it 'should not resolve the apps errs' do
         app = Fabricate(:app, :resolve_errs_on_deploy => false)
@@ -43,12 +37,6 @@ describe Deploy do
       end
     end
 
-    context 'when the app has deploy notifications set to false' do
-      it 'should not send an email notification' do
-        Mailer.should_not_receive(:deploy_notification)
-        Fabricate(:deploy, :app => Fabricate(:app_with_watcher, :notify_on_deploys => false))
-      end
-    end
   end
 
   it "should produce a shortened revision with 7 characters" do
