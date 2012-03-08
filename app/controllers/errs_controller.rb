@@ -29,9 +29,7 @@ class ErrsController < ApplicationController
   end
 
   def show
-    page      = (params[:notice] || @problem.notices_count)
-    page      = 1 if page.to_i.zero?
-    @notices  = @problem.notices.page(page.to_i).per(1)
+    @notices  = @problem.notices.reverse_ordered.page(params[:notice]).per(1)
     @notice   = @notices.first
     @comment = Comment.new
     if request.headers['X-PJAX']

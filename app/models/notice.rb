@@ -30,6 +30,7 @@ class Notice
   validates_presence_of :backtrace, :server_environment, :notifier
 
   scope :ordered, order_by(:created_at.asc)
+  scope :reverse_ordered, order_by(:created_at.desc)
   scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
 
   delegate :app, :problem, :to => :err
