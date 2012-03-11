@@ -109,7 +109,5 @@ describe Notice do
       notice = Fabricate.build(:notice, :request => {})
       notice.host.should == 'N/A'
     end
-
   end
-
 end
