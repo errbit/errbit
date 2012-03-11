@@ -51,6 +51,9 @@ module Errbit
     # IssueTracker subclasses use inheritance, so preloading models provides querying consistency in dev mode.
     config.mongoid.preload_models = true
 
+    # Set up observers
+    config.mongoid.observers = :deploy_observer, :notice_observer
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

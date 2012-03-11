@@ -23,7 +23,6 @@ class Notice
   )
 
   after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
-  after_create :deliver_notification, :if => :should_notify?
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -93,20 +92,12 @@ class Notice
     request['session'] || {}
   end
 
-  def deliver_notification
-    Mailer.err_notification(self).deliver
-  end
-
   # Backtrace containing only files from the app itself (ignore gems)
   def app_backtrace
     backtrace.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
   end
 
   protected
-
-  def should_notify?
-    app.notify_on_errs? && (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(problem.notices_count) && app.notification_recipients.any?
-  end
 
   def increase_counter_cache
     problem.inc(:notices_count, 1)
