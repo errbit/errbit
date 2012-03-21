@@ -114,7 +114,7 @@ describe ErrsController do
         errs = Kaminari.paginate_array((1..30).to_a)
         3.times { errs << Fabricate(:err).problem }
         3.times { errs << Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem }
-        Problem.should_receive(:ordered).and_return(
+        Problem.should_receive(:ordered_by).and_return(
           mock('proxy', :page => mock('other_proxy', :per => errs))
         )
         get :all
