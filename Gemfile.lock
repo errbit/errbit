@@ -33,13 +33,22 @@ GEM
       activemodel (= 3.0.10)
       activesupport (= 3.0.10)
     activesupport (3.0.10)
-    addressable (2.2.6)
+    addressable (2.2.7)
     archive-tar-minitar (0.5.2)
     arel (2.0.10)
     bcrypt-ruby (3.0.1)
     bson (1.3.1)
     bson_ext (1.3.1)
     builder (2.1.2)
+    capybara (1.1.2)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (~> 2.0)
+      xpath (~> 0.1.4)
+    childprocess (0.3.1)
+      ffi (~> 1.0.6)
     columnize (0.3.4)
     crack (0.3.1)
     css_parser (1.2.5)
@@ -60,13 +69,14 @@ GEM
       addressable (~> 2.2.6)
       multipart-post (~> 1.1.0)
       rack (>= 1.1.0, < 2)
-    faraday_middleware (0.7.0)
-      faraday (~> 0.7.3)
+    faraday_middleware (0.8.6)
+      faraday (>= 0.7.4, < 0.9)
+    ffi (1.0.11)
     haml (3.1.3)
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)
     has_scope (0.5.1)
-    hashie (1.0.0)
+    hashie (1.2.0)
     hoptoad_notifier (2.4.11)
       activesupport
       builder
@@ -78,6 +88,8 @@ GEM
     kaminari (0.12.4)
       rails (>= 3.0.0)
     kgio (2.6.0)
+    launchy (2.1.0)
+      addressable (~> 2.2.6)
     libxml-ruby (2.2.2)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
@@ -103,15 +115,28 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.0.0)
       railties (>= 3.0.0)
-    multi_json (1.0.4)
-    multipart-post (1.1.4)
+    multi_json (1.1.0)
+    multipart-post (1.1.5)
     nokogiri (1.5.0)
-    octokit (0.6.4)
-      addressable (~> 2.2.6)
-      faraday (~> 0.7.3)
-      faraday_middleware (~> 0.7.0.rc1)
-      hashie (~> 1.0.0)
-      multi_json (~> 1.0.2)
+    oa-core (0.3.2)
+    oauth2 (0.5.2)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
+    octokit (1.0.0)
+      addressable (~> 2.2)
+      faraday (~> 0.7)
+      faraday_middleware (~> 0.8)
+      hashie (~> 1.2)
+      multi_json (~> 1.0)
+    omniauth (1.0.3)
+      hashie (~> 1.2)
+      rack
+    omniauth-github (1.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+    omniauth-oauth2 (1.0.0)
+      oauth2 (~> 0.5.0)
+      omniauth (~> 1.0)
     orm_adapter (0.0.5)
     oruen_redmine_client (0.0.1)
       activeresource (>= 2.3.0)
@@ -128,7 +153,7 @@ GEM
     premailer (1.7.3)
       css_parser (>= 1.1.9)
       htmlentities (>= 4.0.0)
-    rack (1.2.4)
+    rack (1.2.5)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-ssl-enforcer (0.2.4)
@@ -187,6 +212,12 @@ GEM
       typhoeus
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
+    rubyzip (0.9.6.1)
+    selenium-webdriver (2.20.0)
+      childprocess (>= 0.2.5)
+      ffi (~> 1.0)
+      multi_json (~> 1.0)
+      rubyzip
     thor (0.14.6)
     treetop (1.4.10)
       polyglot
@@ -205,6 +236,8 @@ GEM
     webmock (1.7.6)
       addressable (~> 2.2, > 2.2.5)
       crack (>= 0.1.7)
+    xpath (0.1.4)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -214,6 +247,7 @@ DEPENDENCIES
   actionmailer_inline_css (~> 1.3.0)
   bson (= 1.3.1)
   bson_ext (= 1.3.1)
+  capybara
   database_cleaner (~> 0.6.0)
   devise (~> 1.4.0)
   email_spec
@@ -223,12 +257,15 @@ DEPENDENCIES
   htmlentities (~> 4.3.0)
   inherited_resources
   kaminari
+  launchy
   lighthouse-api
   mongo (= 1.3.1)
   mongoid (~> 2.2.2)
   mongoid_rails_migrations
   nokogiri
-  octokit (= 0.6.4)
+  oa-core
+  octokit
+  omniauth-github
   oruen_redmine_client
   pivotal-tracker
   rack-ssl-enforcer

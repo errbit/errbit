@@ -13,6 +13,10 @@
   = f.label :email
   = f.text_field :email
 
+- if Errbit::Config.github_authentication
+  = f.label :github_login
+  = f.text_field :github_login
+
 .required
   = f.label 'Entries per page'
   = f.select :per_page, [10, 20, 30, 50, 75, 100]

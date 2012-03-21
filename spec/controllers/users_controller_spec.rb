@@ -78,6 +78,11 @@ describe UsersController do
           put :update, :id => @user.to_param, :user => {:time_zone => "Warsaw"}
           @user.reload.time_zone.should == "Warsaw"
         end
+
+        it "should be able to set github_login option" do
+          put :update, :id => @user.to_param, :user => {:github_login => "awesome_name"}
+          @user.reload.github_login.should == "awesome_name"
+        end
       end
 
       context "when the update is unsuccessful" do
@@ -226,7 +231,6 @@ describe UsersController do
         request.flash[:success].should include('no longer part of your team')
       end
     end
-
   end
-end
 
+end
