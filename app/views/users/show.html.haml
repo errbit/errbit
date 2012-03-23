@@ -12,6 +12,10 @@
     %tr
       %th Username
       %td.main= @user.username
+  - if Errbit::Config.github_authentication && @user.github_login.present?
+    %tr
+      %th GitHub
+      %td.main= link_to @user.github_login, "https://github.com/#{@user.github_login}"
   %tr
     %th Token
     %td= @user.authentication_token
