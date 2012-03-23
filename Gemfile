@@ -14,7 +14,7 @@ gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
-gem 'octokit', '0.6.4'
+gem 'octokit', '~> 1.0.0'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'hoptoad_notifier', "~> 2.4"
