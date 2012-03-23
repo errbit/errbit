@@ -6,9 +6,9 @@ feature 'Log in' do
     Fabricate(:user, :github_login => 'nashby')
   end
 
-  scenario 'log in via Github' do
+  scenario 'log in via GitHub' do
     visit '/'
-    click_link 'Sign in with Github'
+    click_link 'Sign in with GitHub'
     page.should have_content 'Successfully authorized from Github account'
   end
 end
