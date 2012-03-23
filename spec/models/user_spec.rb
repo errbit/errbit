@@ -19,6 +19,16 @@ describe User do
       user = Fabricate.build(:user, :password => nil, :github_login => 'nashby')
       user.should be_valid
     end
+
+    it 'requires uniq github login' do
+      user1 = Fabricate(:user, :github_login => 'nashby')
+      user1.should be_valid
+
+      user2 = Fabricate.build(:user, :github_login => 'nashby')
+      user2.save
+      user2.should_not be_valid
+      user2.errors[:github_login].should include("is already taken")
+    end
   end
 
   describe '.find_for_github_oauth' do

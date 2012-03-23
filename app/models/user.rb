@@ -18,6 +18,7 @@ class User
   before_save :ensure_authentication_token
 
   validates_presence_of :name
+  validates_uniqueness_of :github_login, :allow_nil => true
 
   attr_protected :admin
 
