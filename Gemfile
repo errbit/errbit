@@ -20,6 +20,7 @@ gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari'
 gem 'rack-ssl-enforcer'
+gem 'fabrication'   # Both for tests, and loading demo data
 
 platform :ruby do
   gem 'mongo', '= 1.3.1'
@@ -32,7 +33,6 @@ gem 'ri_cal'
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
-  gem 'fabrication'
   unless ENV['TRAVIS']
     gem 'ruby-debug', :platform => :mri_18
     gem 'ruby-debug19', :platform => :mri_19, :require => 'ruby-debug'
