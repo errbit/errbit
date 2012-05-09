@@ -1,6 +1,7 @@
 module Mingle
   class Card < ActiveResource::Base
     # site template ~> "https://username:password@mingle.example.com/api/v1/projects/:project_id/"
+    self.format = :xml
   end
   def self.set_site(site)
     # ActiveResource seems to clone and freeze the @site variable
