@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MingleTracker do
+describe IssueTrackers::MingleTracker do
   it "should create an issue on Mingle with problem params, and set issue link for problem" do
     notice = Fabricate :notice
     tracker = Fabricate :mingle_tracker, :app => notice.app

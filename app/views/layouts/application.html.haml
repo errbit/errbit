@@ -10,7 +10,7 @@
     = javascript_include_tag :defaults
     = stylesheet_link_tag 'reset', 'application', 'jquery.alerts'
     :css
-      #{render :partial => "issue_trackers/icons.css"}
+      #{render :partial => "issue_trackers/icons", :formats => :css}
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
