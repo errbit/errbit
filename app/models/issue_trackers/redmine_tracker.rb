@@ -31,6 +31,7 @@ class IssueTrackers::RedmineTracker < IssueTracker
     RedmineClient::Base.configure do
       self.token = token
       self.site = acc
+      self.format = :xml
     end
     issue = RedmineClient::Issue.new(:project_id => project_id)
     issue.subject = issue_title problem

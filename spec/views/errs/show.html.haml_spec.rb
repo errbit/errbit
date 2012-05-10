@@ -17,7 +17,7 @@ describe "errs/show.html.haml" do
 
     it "should confirm the 'resolve' link by default" do
       render
-      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar = String.new(view.view_flow.get(:action_bar))
       resolve_link = action_bar.match(/(<a href.*?(class="resolve").*?>)/)[0]
       resolve_link.should =~ /data-confirm="Seriously\?"/
     end
@@ -25,7 +25,7 @@ describe "errs/show.html.haml" do
     it "should confirm the 'resolve' link if configuration is unset" do
       Errbit::Config.stub(:confirm_resolve_err).and_return(nil)
       render
-      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar = String.new(view.view_flow.get(:action_bar))
       resolve_link = action_bar.match(/(<a href.*?(class="resolve").*?>)/)[0]
       resolve_link.should =~ /data-confirm="Seriously\?"/
     end
@@ -33,7 +33,7 @@ describe "errs/show.html.haml" do
     it "should not confirm the 'resolve' link if configured not to" do
       Errbit::Config.stub(:confirm_resolve_err).and_return(false)
       render
-      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar = String.new(view.view_flow.get(:action_bar))
       resolve_link = action_bar.match(/(<a href.*?(class="resolve").*?>)/)[0]
       resolve_link.should_not =~ /data-confirm=/
     end
@@ -42,7 +42,7 @@ describe "errs/show.html.haml" do
       url = 'http://localhost:3000/errs'
       controller.request.env['HTTP_REFERER'] = url
       render
-      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar = String.new(view.view_flow.get(:action_bar))
       action_bar.should =~ /<span><a href=\"#{url}\" class=\"up\">up<\/a><\/span>/
     end
 
@@ -52,7 +52,7 @@ describe "errs/show.html.haml" do
       assign :problem, problem
       assign :app, problem.app
       render
-      action_bar = String.new(view.instance_variable_get(:@_content_for)[:action_bar])
+      action_bar = String.new(view.view_flow.get(:action_bar))
       action_bar.should =~ /<span><a href=\"#{app_errs_path(problem.app)}\" class=\"up\">up<\/a><\/span>/
     end
 
@@ -68,7 +68,7 @@ describe "errs/show.html.haml" do
       assign :problem, problem
       assign :app, problem.app
       render
-      comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
+      comments_section = String.new(view.view_flow.get(:comments))
       comments_section.should =~ /Test comment/
       comments_section.should =~ /Add a comment/
     end
@@ -84,7 +84,7 @@ describe "errs/show.html.haml" do
         problem = Fabricate(:problem)
         with_issue_tracker(problem)
         render
-        view.instance_variable_get(:@_content_for)[:comments].should be_blank
+        view.view_flow.get(:comments).should be_blank
       end
 
       it 'should display existing comments' do
@@ -92,7 +92,7 @@ describe "errs/show.html.haml" do
         problem.reload
         with_issue_tracker(problem)
         render
-        comments_section = String.new(view.instance_variable_get(:@_content_for)[:comments])
+        comments_section = String.new(view.view_flow.get(:comments))
         comments_section.should =~ /Test comment/
         comments_section.should_not =~ /Add a comment/
       end
