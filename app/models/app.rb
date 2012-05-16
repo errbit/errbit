@@ -14,12 +14,13 @@ class App
   # Some legacy apps may have string as key instead of BSON::ObjectID
   identity :type => String
 
-  # There seems to be a Mongoid bug making it impossible to use String identity with references_many feature:
-  # https://github.com/mongoid/mongoid/issues/703
-  # Using 32 character string as a workaround.
-  before_create do |r|
-    r.id = ActiveSupport::SecureRandom.hex
-  end
+  # Bug fix
+  # # There seems to be a Mongoid bug making it impossible to use String identity with references_many feature:
+  # # https://github.com/mongoid/mongoid/issues/703
+  # # Using 32 character string as a workaround.
+  # before_create do |r|
+  #   r.id = ActiveSupport::SecureRandom.hex
+  # end
 
   embeds_many :watchers
   embeds_many :deploys
@@ -154,7 +155,7 @@ class App
     end
 
     def generate_api_key
-      self.api_key ||= ActiveSupport::SecureRandom.hex
+      self.api_key ||= SecureRandom.hex
     end
 
     def check_issue_tracker

@@ -36,8 +36,6 @@ Errbit::Application.routes.draw do
     resources :deploys, :only => [:index]
   end
 
-  devise_for :users
-
   root :to => 'apps#index'
 
 end
