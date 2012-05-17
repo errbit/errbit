@@ -42,7 +42,7 @@
           %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(problem.app, problem), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if problem.unresolved?
       - if errs.none?
         %tr
-          %td{:colspan => (@app ? 6 : 7)}
+          %td{:colspan => (any_issue_links ? 8 : 7)}
             %em No errs here
   = paginate errs
   .tab-bar
