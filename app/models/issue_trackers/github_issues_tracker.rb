@@ -8,21 +8,21 @@ class IssueTrackers::GithubIssuesTracker < IssueTracker
     [:username, {
       :placeholder => "Your username on Github"
     }],
-    [:api_token, {
-      :placeholder => "Your Github API Token"
+    [:password, {
+      :placeholder => "Password for your account"
     }]
   ]
 
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
-      errors.add :base, 'You must specify your Github repository, username and API Token'
+      errors.add :base, 'You must specify your Github repository, username and password'
     end
   end
 
   def create_issue(err)
-    client = Octokit::Client.new(:login => username, :token => api_token)
+    client = Octokit::Client.new(:login => username, :password => password)
     issue = client.create_issue(project_id, issue_title(err), body_template.result(binding).unpack('C*').pack('U*'), options = {})
-    err.update_attribute :issue_link, issue.html_url
+    err.update_attribute :issue_link, issue.issue.html_url
   end
 
   def body_template
