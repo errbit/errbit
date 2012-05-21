@@ -7,7 +7,7 @@ gem 'mongoid', '~> 2.2.2'
 
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
-gem 'devise', '~> 1.4.0'
+gem 'devise', '~> 1.5.3'
 gem 'lighthouse-api'
 gem 'oruen_redmine_client', :require => 'redmine_client'
 gem 'mongoid_rails_migrations'
