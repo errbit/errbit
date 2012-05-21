@@ -3,15 +3,13 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable,
-         :validatable, :token_authenticatable
+  devise *Errbit::Config.devise_modules
 
   field :email
   field :name
   field :admin, :type => Boolean, :default => false
   field :per_page, :type => Fixnum, :default => PER_PAGE
-  field :time_zone, :default => "UTC" 
+  field :time_zone, :default => "UTC"
 
   after_destroy :destroy_watchers
   before_save :ensure_authentication_token
