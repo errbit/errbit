@@ -34,9 +34,9 @@ unless defined?(Errbit::Config)
     config.each do |k,v|
       Errbit::Config.send("#{k}=", v)
     end
-  # Raise an error if we are not running tests, not running on Heroku, and config.yml doesn't exist.
+  # Show message if we are not running tests, not running on Heroku, and config.yml doesn't exist.
   elsif not ENV['HEROKU']
-    raise "Please copy 'config/config.example.yml' to 'config/config.yml' and configure your settings."
+    puts "Please copy 'config/config.example.yml' to 'config/config.yml' and configure your settings. Using default settings."
   end
 
   # Set default devise modules
