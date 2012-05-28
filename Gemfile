@@ -31,6 +31,7 @@ platform :ruby do
 end
 
 gem 'ri_cal'
+gem 'json', '~> 1.4.6'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
