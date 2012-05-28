@@ -2,7 +2,7 @@ require 'digest/md5'
 require 'hoptoad_notifier'
 
 class ErrorReport
-  attr_reader :klass, :message, :backtrace, :request, :server_environment, :api_key, :notifier, :user_info
+  attr_reader :klass, :message, :backtrace, :request, :server_environment, :api_key, :notifier, :user_attributes
 
   def initialize(xml_or_attributes)
     @attributes = (xml_or_attributes.is_a?(String) ? Hoptoad.parse_xml!(xml_or_attributes) : xml_or_attributes).with_indifferent_access
@@ -36,7 +36,7 @@ class ErrorReport
       :request => request,
       :server_environment => server_environment,
       :notifier => notifier,
-      :user_info => user_info)
+      :user_attributes => user_attributes)
 
     err = app.find_or_create_err!(
       :klass => klass,

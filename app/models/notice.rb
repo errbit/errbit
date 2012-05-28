@@ -10,7 +10,7 @@ class Notice
   field :server_environment, :type => Hash
   field :request, :type => Hash
   field :notifier, :type => Hash
-  field :user_info, :type => Hash
+  field :user_attributes, :type => Hash
   field :klass
 
   belongs_to :err

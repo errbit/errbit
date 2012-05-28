@@ -59,7 +59,7 @@ module Hoptoad
 
         :api_key            => notice['api-key'],
         :notifier           => notice['notifier'],
-        :user_info          => notice['user-info'] || {}
+        :user_attributes    => notice['user-attributes'] || {}
       }
     end
   end
