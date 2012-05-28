@@ -145,6 +145,8 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
+    rails_autolink (1.0.9)
+      rails (~> 3.1)
     railties (3.2.3)
       actionpack (= 3.2.3)
       activesupport (= 3.2.3)
@@ -230,6 +232,7 @@ DEPENDENCIES
   pivotal-tracker
   rack-ssl-enforcer
   rails (~> 3.2.0)
+  rails_autolink (~> 1.0.9)
   ri_cal
   rspec (~> 2.6)
   rspec-rails (~> 2.6)
