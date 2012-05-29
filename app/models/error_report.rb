@@ -10,7 +10,11 @@ class ErrorReport
   end
 
   def fingerprint
-    @fingerprint ||= Digest::MD5.hexdigest(backtrace[0].to_s)
+    normalized_backtrace = backtrace[0...3].map do |trace|
+      trace.merge 'method' => trace['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
+    end
+
+    @fingerprint ||= Digest::MD5.hexdigest(normalized_backtrace.to_s)
   end
 
   def rails_env
