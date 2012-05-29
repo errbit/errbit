@@ -170,6 +170,26 @@ rake db:migrate
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
 
 
+User information in error reports
+-----------------------------
+
+Errbit can display information about the user who experienced the error,
+which gives you the ability to ask your users for more information,
+or notify them when the bug is fixed.
+
+If you would like to include information about the current user in your error reports,
+you can replace the `airbrake` gem in your `Gemfile` with the `airbrake_user_attributes` gem.
+This gem is a wrapper around the `airbrake` gem. It will inject information about the current user into the error report,
+if your Rails app's controller responds to a `#current_user` method.
+The user attributes are filtered, so that no authentication-related fields are included.
+
+Whenever user information is received with an error report, it will displayed under the **User Details** tab:
+
+![User details tab](http://i.imgur.com/J3aOa.png)
+
+(This tab will be hidden if no user information is available.)
+
+
 Issue Trackers
 --------------
 
