@@ -36,9 +36,9 @@ gem 'json', '~> 1.4.6'
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
-  unless ENV['TRAVIS']
+  unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
-    # gem 'ruby-debug19', :platform => :mri_19, :require => 'ruby-debug'
+    gem (RUBY_VERSION == "1.9.2" ? 'ruby-debug19' : 'debugger'), :platform => :mri_19
   end
   # gem 'rpm_contrib', :git => "git://github.com/bensymonds/rpm_contrib.git", :branch => "mongo-1.4.0_update"
 end
