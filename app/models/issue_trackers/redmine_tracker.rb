@@ -25,7 +25,7 @@ class IssueTrackers::RedmineTracker < IssueTracker
     end
   end
 
-  def create_issue(problem, reported_by)
+  def create_issue(problem, reported_by = nil)
     token = api_token
     acc = account
     RedmineClient::Base.configure do
