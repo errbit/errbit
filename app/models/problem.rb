@@ -16,7 +16,7 @@ class Problem
   field :notices_count, :type => Integer, :default => 0
   field :message
   field :environment
-  field :klass
+  field :error_class
   field :where
   field :user_agents, :type => Hash, :default => {}
   field :messages,    :type => Hash, :default => {}
@@ -128,7 +128,7 @@ class Problem
     attrs.merge!(
       :message => notice.message,
       :environment => notice.environment_name,
-      :klass => notice.klass,
+      :error_class => notice.error_class,
       :where => notice.where,
       :messages    => attribute_count_increase(:messages, notice.message),
       :hosts       => attribute_count_increase(:hosts, notice.host),

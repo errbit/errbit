@@ -47,7 +47,7 @@ class App
   #
   # Accepts either XML or a hash with the following attributes:
   #
-  # * <tt>:klass</tt> - the class of error
+  # * <tt>:error_class</tt> - the class of error
   # * <tt>:message</tt> - the error message
   # * <tt>:backtrace</tt> - an array of stack trace lines
   #
@@ -67,7 +67,7 @@ class App
   #
   # Accepts a hash with the following attributes:
   #
-  # * <tt>:klass</tt> - the class of error
+  # * <tt>:error_class</tt> - the class of error
   # * <tt>:message</tt> - the error message
   # * <tt>:backtrace</tt> - an array of stack trace lines
   #

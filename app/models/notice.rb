@@ -11,7 +11,7 @@ class Notice
   field :request, :type => Hash
   field :notifier, :type => Hash
   field :user_attributes, :type => Hash
-  field :klass
+  field :error_class
 
   belongs_to :err
   index :created_at

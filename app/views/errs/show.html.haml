@@ -1,5 +1,5 @@
 - content_for :page_title, @problem.message
-- content_for :title, @problem.klass
+- content_for :title, @problem.error_class
 - content_for :meta do
   %strong App:
   = link_to @app.name, app_path(@app)

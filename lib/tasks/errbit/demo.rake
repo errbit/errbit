@@ -9,22 +9,22 @@ namespace :errbit do
     app.problems.delete_all
     
     errors = [{
-      :klass => "ArgumentError",
+      :error_class => "ArgumentError",
       :message => "wrong number of arguments (3 for 0)"
     }, {
-      :klass => "RuntimeError",
+      :error_class => "RuntimeError",
       :message => "Could not find Red October"
     }, {
-      :klass => "TypeError",
+      :error_class => "TypeError",
       :message => "can't convert Symbol into Integer"
     }, {
-      :klass => "ActiveRecord::RecordNotFound",
+      :error_class => "ActiveRecord::RecordNotFound",
       :message => "could not find a record with the id 5"
     }, {
-      :klass => "NameError",
+      :error_class => "NameError",
       :message => "uninitialized constant Tag"
     }, {
-      :klass => "SyntaxError",
+      :error_class => "SyntaxError",
       :message => "unexpected tSTRING_BEG, expecting keyword_do or '{' or '('"
     }]
     
@@ -44,7 +44,7 @@ namespace :errbit do
       rand(34).times do
         
         error_report = error_template.reverse_merge({
-          :klass => "StandardError",
+          :error_class => "StandardError",
           :message => "Oops. Something went wrong!",
           :backtrace => random_backtrace,
           :request => {

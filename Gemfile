@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.2.0'
 
 gem 'nokogiri'
-gem 'mongoid', '~> 2.2.2'
+gem 'mongoid', '~> 2.4.10'
 
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"

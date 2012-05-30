@@ -1,6 +1,6 @@
 Fabricator :err do
   problem!
-  klass!         { 'FooError' }
+  error_class!         { 'FooError' }
   component     'foo'
   action        'bar'
   environment   'production'
