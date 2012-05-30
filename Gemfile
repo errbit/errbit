@@ -53,6 +53,9 @@ group :heroku do
   gem 'unicorn'
 end
 
+# Use thin for development
+gem 'thin', :group => :development, :platform => :ruby
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
