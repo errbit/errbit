@@ -53,3 +53,10 @@ group :heroku do
   gem 'unicorn'
 end
 
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'execjs'
+  gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'uglifier',     '>= 1.0.3'
+end

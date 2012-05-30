@@ -7,7 +7,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 # require "active_resource/railtie"
 require 'mongoid/railtie'
-
+require "sprockets/railtie"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -37,9 +37,6 @@ module Errbit
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery underscore-1.1.6 rails form jquery.pjax jquery.alerts rails.alerts)
-
     # > rails generate - config
     config.generators do |g|
       g.orm             :mongoid
@@ -62,6 +59,16 @@ module Errbit
 
     # Configure Devise mailer to use our mailer layout.
     config.to_prepare { Devise::Mailer.layout "mailer" }
+
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Need to initialize Rails environment for issue_tracker_icons.css.erb
+    config.assets.initialize_on_precompile = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
   end
 end
 

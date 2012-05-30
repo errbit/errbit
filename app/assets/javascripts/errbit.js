@@ -39,7 +39,7 @@ $(function() {
     $('.notice-pagination').each(function() {
       $('.notice-pagination a').pjax('#content', { timeout: 2000});
       $('#content').bind('pjax:start',  function() {
-	$('.notice-pagination-loader').css("visibility", "visible");
+  $('.notice-pagination-loader').css("visibility", "visible");
         currentTab = $('.tab-bar ul li a.button.active').attr('rel');
       });
 
