@@ -95,4 +95,10 @@ $(function() {
   }
 
   init();
+
+  // Show external backtrace lines when clicking separator
+  $('td.backtrace_separator span').live('click', function(){
+    $('tr.hidden_external_backtrace').removeClass('hidden_external_backtrace');
+    $('td.backtrace_separator').hide();
+  });
 });

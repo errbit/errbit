@@ -762,6 +762,26 @@ table.backtrace td.line.in-app {
 table.backtrace td.line.in-app .file   { color: #2AEB2E; }
 table.backtrace td.line.in-app .method { color: #2ACB2E; }
 
+/* External backtrace classes and separators */
+table.backtrace tr.hidden_external_backtrace {
+  display: none;
+}
+table.backtrace td.backtrace_separator span {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0px 11px 5px;
+  margin: 4px 0;
+  background-color: #444444;
+  border: 1px solid #555555;
+}
+table.backtrace td.backtrace_separator span:hover {
+  background-color: #666666;
+  border: 1px solid #777777;
+}
+
+
 
 /* Extra empty rows at top and bottom of table */
 table.backtrace tr.padding th, table.backtrace tr.padding td {
