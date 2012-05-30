@@ -22,7 +22,7 @@ class IssueTrackers::FogbugzTracker < IssueTracker
     end
   end
 
-  def create_issue(problem, reported_by = nil = nil)
+  def create_issue(problem, reported_by = nil)
     fogbugz = Fogbugz::Interface.new(:email => username, :password => password, :uri => "https://#{account}.fogbugz.com")
     fogbugz.authenticate
 
