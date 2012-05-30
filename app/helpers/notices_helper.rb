@@ -46,14 +46,6 @@ module NoticesHelper
     line_groups
   end
 
-  def rows_for_line_segment(lines, start, length, row_class = nil)
-    html = ""
-    lines[start, length].each do |line|
-      html << render(:partial => "notices/backtrace_line", :locals => {:line => line, :row_class => row_class})
-    end
-    html.html_safe
-  end
-
   def path_for_backtrace_line(line)
     path = File.dirname(line['file'])
     path == "." ? "" : path + '/'

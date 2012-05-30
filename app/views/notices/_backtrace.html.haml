@@ -2,16 +2,15 @@
   %table.backtrace
     -# Group lines into internal / external so we can toggle the external backtrace
     -# Includes a margin of x lines that are not toggled.
-    - external_margin = 3
+    - em = 3 # (external backtrace margin)
     - grouped_lines(lines).each do |in_app, line_group|
-      - if !in_app && line_group.size > (external_margin * 3)
-        = rows_for_line_segment(line_group, 0, external_margin)
-        = rows_for_line_segment(line_group, 2, line_group.size - (external_margin * 2), 'hidden_external_backtrace')
+      - if !in_app && line_group.size > (em * 3)
+        = render :partial => 'notices/backtrace_line', :collection => line_group[0, em], :as => :line
+        = render :partial => 'notices/backtrace_line', :collection => line_group[em, line_group.size - (em * 2)], :as => :line, :locals => {:row_class => 'hidden_external_backtrace'}
         %tr
           %td.line.backtrace_separator
             %span ...
-        = rows_for_line_segment(line_group, external_margin * -1, external_margin)
+        = render :partial => 'notices/backtrace_line', :collection => line_group[em * -1, em], :as => :line
 
       - else
-        - line_group.each do |line|
-          = render :partial => "notices/backtrace_line", :locals => {:line => line}
+        = render :partial => "notices/backtrace_line", :collection => line_group, :as => :line
