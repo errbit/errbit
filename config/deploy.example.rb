@@ -9,6 +9,7 @@
 config = YAML.load_file('config/config.yml')['deployment'] || {}
 
 require 'bundler/capistrano'
+load 'deploy/assets'
 
 set :application, "errbit"
 set :repository,  config['repository']
@@ -38,7 +39,6 @@ set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't d
 set :branch, defer { current_branch }
 
 after 'deploy:update_code', 'errbit:symlink_configs'
-before "deploy:create_symlink", "assets:compile"
 
 namespace :deploy do
   task :start do ; end
@@ -63,16 +63,6 @@ namespace :errbit do
     run("ln -nfs #{shared_configs}/config.yml #{release_configs}/config.yml")
     run("ln -nfs #{shared_configs}/mongoid.yml #{release_configs}/mongoid.yml")
   end
-end
-
-namespace :assets do
-  desc <<-DESC
-    Compile assets.
-  DESC
-  task :compile, :roles => :app do
-    run "cd #{latest_release} && bundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:precompile"
-  end
-
 end
 
 namespace :db do
