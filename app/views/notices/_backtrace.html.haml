@@ -4,7 +4,7 @@
     -# Includes a margin of x lines that are not toggled.
     - external_margin = 3
     - grouped_lines(lines).each do |in_app, line_group|
-      - if !in_app && line_group.size > 6
+      - if !in_app && line_group.size > (external_margin * 3)
         = rows_for_line_segment(line_group, 0, external_margin)
         = rows_for_line_segment(line_group, 2, line_group.size - (external_margin * 2), 'hidden_external_backtrace')
         %tr
