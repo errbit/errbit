@@ -18,7 +18,7 @@ class IssueTrackers::LighthouseTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by)
     Lighthouse.account = account
     Lighthouse.token = api_token
     # updating lighthouse account

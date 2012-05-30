@@ -39,7 +39,7 @@ class ErrsController < ApplicationController
     set_tracker_params
 
     if @app.issue_tracker
-      @app.issue_tracker.create_issue @problem
+      @app.issue_tracker.create_issue @problem, current_user
     else
       flash[:error] = "This app has no issue tracker setup."
     end

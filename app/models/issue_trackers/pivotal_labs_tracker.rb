@@ -13,7 +13,7 @@ class IssueTrackers::PivotalLabsTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by)
     PivotalTracker::Client.token = api_token
     PivotalTracker::Client.use_ssl = true
     project = PivotalTracker::Project.find project_id.to_i

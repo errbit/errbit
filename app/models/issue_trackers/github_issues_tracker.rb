@@ -19,10 +19,10 @@ class IssueTrackers::GithubIssuesTracker < IssueTracker
     end
   end
 
-  def create_issue(err)
+  def create_issue(problem, reported_by)
     client = Octokit::Client.new(:login => username, :token => api_token)
-    issue = client.create_issue(project_id, issue_title(err), body_template.result(binding).unpack('C*').pack('U*'), options = {})
-    err.update_attribute :issue_link, issue.html_url
+    issue = client.create_issue(project_id, issue_title(problem), body_template.result(binding).unpack('C*').pack('U*'), options = {})
+    problem.update_attribute :issue_link, issue.html_url
   end
 
   def body_template
