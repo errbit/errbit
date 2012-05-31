@@ -1,4 +1,4 @@
-- any_issue_links = errs.any?{|e| e.issue_link.present? }
+- any_issue_links = errs.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
 =form_tag do
   %table.errs.selectable
     %thead
@@ -37,7 +37,7 @@
           %td.count= link_to problem.notices_count, app_err_path(problem.app, problem)
           - if any_issue_links
             %td.issue_link
-              - if problem.issue_link.present?
+              - if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending'
                 = link_to image_tag("#{problem.app.issue_tracker.class::Label}_goto.png"), problem.issue_link, :target => "_blank"
           %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_err_path(problem.app, problem), :title => "Resolve", :method => :put, :confirm => err_confirm, :class => 'resolve' if problem.unresolved?
       - if errs.none?
