@@ -832,13 +832,13 @@ table.errs tr td.message .inline_comment {
   display: inline-block;
   padding: 3px 7px;
   margin: 6px 0;
-  background-color: #E8F4FF;
+  background-color: #DAE5FF;
   border: 1px solid #E2E2E2;
   text-shadow: 0 1px 0 #FAFAFA;
   font-style: normal;
 }
 table.errs tr:hover td.message .inline_comment {
-  background-color: #E2EFFB;
+  background-color: #D5E0FA;
   border-color: #DBDBDB;
   text-shadow: 0 1px 0 #FFFFFF;
 }
