@@ -30,7 +30,6 @@ EOF
     problem.reload
 
     requested = have_requested(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{tracker.project_id}/issues")
-    WebMock.should requested.with(:headers => {'Accept'=>'*/*', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'})
     WebMock.should requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
     WebMock.should requested.with(:body => /See this exception on Errbit/)
 
