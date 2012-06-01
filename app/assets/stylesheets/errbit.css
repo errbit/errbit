@@ -224,6 +224,8 @@ a.action  { float: right; font-size: 0.9em;}
   padding-left: 47px;
 }
 
+#action-bar span.github a { background: url(images/icons/github.png) no-repeat 6px 5px; }
+
 
 /* Content */
 #content {
@@ -851,5 +853,3 @@ table.errs tr td.message .inline_comment em.commenter {
 
 .current.asc:after { content: ' ↑'; }
 .current.desc:after { content: ' ↓'; }
-
-span.github a { background: url(../images/github.png) no-repeat 5px 5px; }
