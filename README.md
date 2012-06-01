@@ -261,8 +261,8 @@ Issue Trackers
 **Github Issues Integration**
 
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
-* You will also need to provide the username that your API Token is connected to.
+* You will also need to provide your username and password for your Github account.
+  * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
 
 
 What if Errbit has an error?
