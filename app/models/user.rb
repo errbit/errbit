@@ -6,6 +6,7 @@ class User
   devise *Errbit::Config.devise_modules
 
   field :email
+  field :github_login
   field :name
   field :admin, :type => Boolean, :default => false
   field :per_page, :type => Fixnum, :default => PER_PAGE
@@ -15,6 +16,7 @@ class User
   before_save :ensure_authentication_token
 
   validates_presence_of :name
+  validates_uniqueness_of :github_login, :allow_nil => true
 
   attr_protected :admin
 
@@ -35,6 +37,16 @@ class User
 
   def watching?(app)
     apps.all.include?(app)
+  end
+
+  def self.find_for_github_oauth(omniauth_env)
+    data = omniauth_env.extra.raw_info
+
+    User.where(:github_login => data.login).first
+  end
+
+  def password_required?
+    github_login.present? ? false : super
   end
 
   protected

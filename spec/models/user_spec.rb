@@ -8,6 +8,36 @@ describe User do
       user.should_not be_valid
       user.errors[:name].should include("can't be blank")
     end
+
+    it 'requires password without github login' do
+      user = Fabricate.build(:user, :password => nil)
+      user.should_not be_valid
+      user.errors[:password].should include("can't be blank")
+    end
+
+    it "doesn't require password with github login" do
+      user = Fabricate.build(:user, :password => nil, :github_login => 'nashby')
+      user.should be_valid
+    end
+
+    it 'requires uniq github login' do
+      user1 = Fabricate(:user, :github_login => 'nashby')
+      user1.should be_valid
+
+      user2 = Fabricate.build(:user, :github_login => 'nashby')
+      user2.save
+      user2.should_not be_valid
+      user2.errors[:github_login].should include("is already taken")
+    end
+  end
+
+  describe '.find_for_github_oauth' do
+    let(:auth_hash) { Hashie::Mash.new(:provider => 'github', :extra => { :raw_info => { :login => 'nashby' } }) }
+
+    it 'finds user by github login' do
+      user = Fabricate(:user, :github_login => 'nashby')
+      User.find_for_github_oauth(auth_hash).should == user
+    end
   end
 
   context 'Watchers' do

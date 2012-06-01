@@ -14,6 +14,10 @@ unless defined?(Errbit::Config)
     Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME']
     Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER']
 
+    Errbit::Config.github_authentication = ENV['GITHUB_AUTHENTICATION']
+    Errbit::Config.github_client_id = ENV['GITHUB_CLIENT_ID']
+    Errbit::Config.github_secret = ENV['GITHUB_SECRET']
+
     Errbit::Config.smtp_settings = {
       :address        => "smtp.sendgrid.net",
       :port           => "25",
@@ -42,7 +46,7 @@ unless defined?(Errbit::Config)
   # Set default devise modules
   Errbit::Config.devise_modules = [:database_authenticatable,
                                    :recoverable, :rememberable, :trackable,
-                                   :validatable, :token_authenticatable]
+                                   :validatable, :token_authenticatable, :omniauthable]
 end
 
 # Set default settings from config.example.yml if key is missing from config.yml

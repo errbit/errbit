@@ -12,6 +12,8 @@ $(function() {
 
     toggleProblemsCheckboxes();
 
+    bindRequiredPasswordMarks();
+
     $('#watcher_name').live("click", function() {
       $(this).closest('form').find('.show').removeClass('show');
       $('#app_watchers_attributes_0_user_id').addClass('show');
@@ -97,6 +99,24 @@ $(function() {
     });
   }
 
+  function bindRequiredPasswordMarks() {
+    $('#user_github_login').keyup(function(event) {
+      toggleRequiredPasswordMarks(this)
+    });
+  }
+
+  function toggleRequiredPasswordMarks(input) {
+      if($(input).val() == "") {
+        $('#user_password').parent().attr('class', 'required')
+        $('#user_password_confirmation').parent().attr('class', 'required')
+      } else {
+        $('#user_password').parent().attr('class', '')
+        $('#user_password_confirmation').parent().attr('class', '')
+      }
+  }
+
+  toggleRequiredPasswordMarks();
+
   function hide_external_backtrace() {
     $('tr.toggle_external_backtrace').hide();
     $('td.backtrace_separator').show();
@@ -109,5 +129,6 @@ $(function() {
   $('td.backtrace_separator span').live('click', show_external_backtrace);
   // Hide external backtrace on page load
   hide_external_backtrace();
+
   init();
 });
