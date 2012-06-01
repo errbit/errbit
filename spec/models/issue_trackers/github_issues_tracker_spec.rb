@@ -10,18 +10,16 @@ describe IssueTrackers::GithubIssuesTracker do
     @issue_link = "https://github.com/#{tracker.project_id}/issues/#{number}"
     body = <<EOF
 {
-  "issue": {
-    "position": 1.0,
-    "number": #{number},
-    "votes": 0,
-    "created_at": "2010/01/21 13:45:59 -0800",
-    "comments": 0,
-    "body": "Test Body",
-    "title": "Test Issue",
-    "user": "test_user",
-    "state": "open",
-    "html_url": "#{@issue_link}"
-  }
+  "position": 1.0,
+  "number": #{number},
+  "votes": 0,
+  "created_at": "2010/01/21 13:45:59 -0800",
+  "comments": 0,
+  "body": "Test Body",
+  "title": "Test Issue",
+  "user": "test_user",
+  "state": "open",
+  "html_url": "#{@issue_link}"
 }
 EOF
 
