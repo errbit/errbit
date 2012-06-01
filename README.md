@@ -220,7 +220,7 @@ if your Rails app's controller responds to a `#current_user` method.
 The user's attributes are filtered to remove authentication fields.
 
 If user information is received with an error report,
-it will displayed under the *User Details* tab:
+it will be displayed under the *User Details* tab:
 
 
 ![User details tab](http://errbit.github.com/errbit/images/error_user_information.png)
