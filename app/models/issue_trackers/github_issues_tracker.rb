@@ -21,8 +21,12 @@ class IssueTrackers::GithubIssuesTracker < IssueTracker
 
   def create_issue(problem, reported_by = nil)
     client = Octokit::Client.new(:login => username, :password => password)
-    issue = client.create_issue(project_id, issue_title(problem), body_template.result(binding).unpack('C*').pack('U*'), options = {})
-    problem.update_attribute :issue_link, issue.issue.html_url
+    begin
+      issue = client.create_issue(project_id, issue_title(problem), body_template.result(binding).unpack('C*').pack('U*'), options = {})
+      problem.update_attribute :issue_link, issue.issue.html_url
+    rescue Octokit::Unauthorized
+      raise IssueTrackers::AuthenticationError, "Could not authenticate with Github. Please check your username and password."
+    end
   end
 
   def body_template
