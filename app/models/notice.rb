@@ -62,10 +62,6 @@ class Notice
     where
   end
 
-  def self.in_app_backtrace_line?(line)
-    !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
-  end
-
   def request
     read_attribute(:request) || {}
   end

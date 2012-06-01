@@ -1,11 +1,16 @@
 # encoding: utf-8
 module NoticesHelper
-  def notice_atom_summary notice
+  def in_app_backtrace_line?(line)
+    !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
+  end
+
+  def notice_atom_summary(notice)
     render :partial => "notices/atom_entry.html.haml", :locals => {:notice => notice}
   end
 
-  def link_to_source_file(app, line, text)
-    if Notice.in_app_backtrace_line?(line)
+  def link_to_source_file(app, line, &block)
+    text = capture_haml(&block)
+    if in_app_backtrace_line?(line)
       return link_to_github(app, line, text) if app.github_url?
       if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
         # Return link to file on tracker if issue tracker supports this
@@ -36,7 +41,7 @@ module NoticesHelper
   def grouped_lines(lines)
     line_groups = []
     lines.each do |line|
-      in_app = Notice.in_app_backtrace_line?(line)
+      in_app = in_app_backtrace_line?(line)
       if line_groups.last && line_groups.last[0] == in_app
         line_groups.last[1] << line
       else
@@ -48,12 +53,16 @@ module NoticesHelper
 
   def path_for_backtrace_line(line)
     path = File.dirname(line['file'])
-    path == "." ? "" : path + '/'
+    return '' if path == '.'
+    # Remove [PROJECT_ROOT]
+    path.gsub!('[PROJECT_ROOT]/', '')
+    # Make gem name bold if starts with [GEM_ROOT]/gems
+    path.gsub!(/\[GEM_ROOT\]\/gems\/([^\/]+)/, "<strong>\\1</strong>")
+    (path << '/').html_safe
   end
 
   def file_for_backtrace_line(line)
     file = File.basename(line['file'])
-    line['number'].present? ? "#{file}:#{line['number']}" : file
   end
 end
 

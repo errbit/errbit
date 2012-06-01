@@ -24,36 +24,6 @@ describe Notice do
   end
 
 
-  context '.in_app_backtrace_line?' do
-    let(:backtrace) do [{
-        'number'  => rand(999),
-        'file'    => '[GEM_ROOT]/gems/actionpack-3.0.4/lib/action_controller/metal/rescue.rb',
-        'method'  => ActiveSupport.methods.shuffle.first
-      }, {
-        'number'  => rand(999),
-        'file'    => '[PROJECT_ROOT]/vendor/plugins/seamless_database_pool/lib/seamless_database_pool/controller_filter.rb',
-        'method'  => ActiveSupport.methods.shuffle.first
-      }, {
-        'number'  => rand(999),
-        'file'    => '[PROJECT_ROOT]/lib/set_headers.rb',
-        'method'  => ActiveSupport.methods.shuffle.first
-      }]
-    end
-
-    it "should be false for line not starting with PROJECT_ROOT" do
-      Notice.in_app_backtrace_line?(backtrace[0]).should == false
-    end
-
-    it "should be false for file in vendor dir" do
-      Notice.in_app_backtrace_line?(backtrace[1]).should == false
-    end
-
-    it "should be true for application file" do
-      Notice.in_app_backtrace_line?(backtrace[2]).should == true
-    end
-  end
-
-
   describe "key sanitization" do
     before do
       @hash = { "some.key" => { "$nested.key" => {"$Path" => "/", "some$key" => "key"}}}

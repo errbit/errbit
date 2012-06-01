@@ -741,26 +741,27 @@ table.backtrace td.line {
   vertical-align: top;
   white-space: nowrap;
 }
-
 table.backtrace td.line .file {
-  color: #ededed;
-  font-weight:bold;
+  font-weight: bold;
 }
-table.backtrace td.line .file a {
-  color: #21A4FF;
-}
-
 table.backtrace td.line .method {
   color: #aaa;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 table.backtrace td.line.in-app {
   color: #2adb2e;
   background-color: #2f2f2f;
 }
-table.backtrace td.line.in-app .file   { color: #2AEB2E; }
+table.backtrace td.line.in-app .path,
+table.backtrace td.line.in-app .number { color: #2ACB2E; }
+table.backtrace td.line.in-app .file   { color: #3AFB3E; }
 table.backtrace td.line.in-app .method { color: #2ACB2E; }
+
+table.backtrace td.line.in-app a .path,
+table.backtrace td.line.in-app a .number,
+table.backtrace td.line.in-app a:hover { color: #21B4FF; }
+table.backtrace td.line.in-app a .file { color: #31C4FF; }
 
 /* External backtrace classes and separators */
 table.backtrace tr.hidden_external_backtrace {
