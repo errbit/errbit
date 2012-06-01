@@ -1,7 +1,11 @@
-Errbit [![TravisCI](http://travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
+Errbit [![TravisCI][travis-img-url]][travis-ci-url]
 ======
 
-**The open source self-hosted error catcher**
+[travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
+[travis-ci-url]: http://travis-ci.org/errbit/errbit
+
+### The open source, self-hosted error catcher
+
 
 Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
