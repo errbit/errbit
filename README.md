@@ -7,6 +7,41 @@ Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
 so if you are already using Airbrake, you can just point hoptoad_notifier at your Errbit server.
 
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/apps.png" target="_blank" title="Apps">
+        <img src="http://errbit.github.com/errbit/images/apps_thumb.png" alt="Apps">
+      </a>
+      <br />
+      <em>Apps</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/app_errors.png" target="_blank" title="Errors">
+        <img src="http://errbit.github.com/errbit/images/app_errors_thumb.png" alt="Errors">
+      </a>
+      <br />
+      <em>Errors</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/error_summary.png" target="_blank" title="Error Summary">
+        <img src="http://errbit.github.com/errbit/images/error_summary_thumb.png" alt="Error Summary">
+      </a>
+      <br />
+      <em>Error Summary</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/error_backtrace.png" target="_blank" title="Error Backtraces">
+        <img src="http://errbit.github.com/errbit/images/error_backtrace_thumb.png" alt="Error Backtraces">
+      </a>
+      <br />
+      <em>Error Backtraces</em>
+    </td>
+  </tr>
+</table>
+
+
 Errbit may be a good fit for you if:
 
 * Your exceptions may contain sensitive data that you don't want sitting on someone else's server
