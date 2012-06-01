@@ -220,7 +220,7 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 #action-bar .calendar_link {
-  background: url(/assets/ical.png) no-repeat scroll 11px 4px transparent;
+  background: url(images/icons/ical.png) no-repeat scroll 12px 6px transparent;
   padding-left: 47px;
 }
 
