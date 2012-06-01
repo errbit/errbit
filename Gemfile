@@ -7,14 +7,21 @@ gem 'mongoid', '~> 2.4.10'
 
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
+
 gem 'devise', '~> 1.5.3'
+
+gem 'omniauth-github'
+gem 'oa-core'
+
 gem 'lighthouse-api'
 gem 'oruen_redmine_client', :require => 'redmine_client'
 gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
 gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
+
 gem 'octokit', '~> 1.0.0'
+
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'hoptoad_notifier', "~> 2.4"
@@ -44,6 +51,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'launchy'
   gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
