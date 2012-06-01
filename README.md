@@ -8,7 +8,7 @@
 
 Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
-so if you are already using Airbrake, you can just point hoptoad_notifier at your Errbit server.
+so if you are already using Airbrake, you can just point the `airbrake` gem to your Errbit server.
 
 
 <table>
