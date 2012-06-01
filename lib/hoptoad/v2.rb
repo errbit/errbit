@@ -50,7 +50,7 @@ module Hoptoad
 
     def self.for_errbit_api(notice)
       {
-        :klass              => notice['error']['class'] || notice['error']['key'],
+        :error_class        => notice['error']['class'] || notice['error']['key'],
         :message            => notice['error']['message'],
         :backtrace          => notice['error']['backtrace']['line'],
 
@@ -58,7 +58,8 @@ module Hoptoad
         :server_environment => notice['server-environment'],
 
         :api_key            => notice['api-key'],
-        :notifier           => notice['notifier']
+        :notifier           => notice['notifier'],
+        :user_attributes    => notice['user-attributes'] || {}
       }
     end
   end

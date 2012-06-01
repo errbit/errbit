@@ -1,11 +1,49 @@
-Errbit [![TravisCI](http://travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
-======
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url]
 
-**The open source self-hosted error catcher**
+[travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
+[travis-ci-url]: http://travis-ci.org/errbit/errbit
+
+### The open source, self-hosted error catcher
+
 
 Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
-so if you are already using Airbrake, you can just point hoptoad_notifier at your Errbit server.
+so if you are already using Airbrake, you can just point the `airbrake` gem to your Errbit server.
+
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/apps.png" target="_blank" title="Apps">
+        <img src="http://errbit.github.com/errbit/images/apps_thumb.png" alt="Apps">
+      </a>
+      <br />
+      <em>Apps</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/app_errors.png" target="_blank" title="Errors">
+        <img src="http://errbit.github.com/errbit/images/app_errors_thumb.png" alt="Errors">
+      </a>
+      <br />
+      <em>Errors</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/error_summary.png" target="_blank" title="Error Summary">
+        <img src="http://errbit.github.com/errbit/images/error_summary_thumb.png" alt="Error Summary">
+      </a>
+      <br />
+      <em>Error Summary</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/error_backtrace.png" target="_blank" title="Error Backtraces">
+        <img src="http://errbit.github.com/errbit/images/error_backtrace_thumb.png" alt="Error Backtraces">
+      </a>
+      <br />
+      <em>Error Backtraces</em>
+    </td>
+  </tr>
+</table>
+
 
 Errbit may be a good fit for you if:
 
@@ -170,6 +208,29 @@ rake db:migrate
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
 
 
+User information in error reports
+-----------------------------
+
+Errbit can now display information about the user who experienced an error.
+This gives you the ability to ask the user for more information,
+and let them know when you've fixed the bug.
+
+If you would like to include information about the current user in your error reports,
+you can replace the `airbrake` gem in your Gemfile with `airbrake_user_attributes`,
+which wraps the `airbrake` gem and injects user information.
+It will inject information about the current user into the error report
+if your Rails app's controller responds to a `#current_user` method.
+The user's attributes are filtered to remove authentication fields.
+
+If user information is received with an error report,
+it will be displayed under the *User Details* tab:
+
+
+![User details tab](http://errbit.github.com/errbit/images/error_user_information.png)
+
+(This tab will be hidden if no user information is available.)
+
+
 Issue Trackers
 --------------
 
@@ -200,8 +261,8 @@ Issue Trackers
 **Github Issues Integration**
 
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
-* You will also need to provide the username that your API Token is connected to.
+* You will also need to provide your username and password for your Github account.
+  * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
 
 
 What if Errbit has an error?

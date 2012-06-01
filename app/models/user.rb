@@ -3,9 +3,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable,
-         :validatable, :token_authenticatable, :omniauthable
+  devise *Errbit::Config.devise_modules
 
   field :email
   field :github_login

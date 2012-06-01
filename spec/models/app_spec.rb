@@ -117,7 +117,7 @@ describe App do
     before do
       @app = Fabricate(:app)
       @conditions = {
-        :klass        => 'Whoops',
+        :error_class  => 'Whoops',
         :component    => 'Foo',
         :action       => 'bar',
         :environment  => 'production'
@@ -158,7 +158,7 @@ describe App do
     it 'finds the correct err for the notice' do
       App.should_receive(:find_by_api_key!).and_return(@app)
       @app.should_receive(:find_or_create_err!).with({
-        :klass        => 'HoptoadTestingException',
+        :error_class  => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
         :environment  => 'development',
@@ -171,7 +171,7 @@ describe App do
     it 'marks the err as unresolved if it was previously resolved' do
       App.should_receive(:find_by_api_key!).and_return(@app)
       @app.should_receive(:find_or_create_err!).with({
-        :klass        => 'HoptoadTestingException',
+        :error_class  => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
         :environment  => 'development',

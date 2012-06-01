@@ -41,7 +41,7 @@ $(function() {
     $('.notice-pagination').each(function() {
       $('.notice-pagination a').pjax('#content', { timeout: 2000});
       $('#content').bind('pjax:start',  function() {
-	$('.notice-pagination-loader').css("visibility", "visible");
+  $('.notice-pagination-loader').css("visibility", "visible");
         currentTab = $('.tab-bar ul li a.button.active').attr('rel');
       });
 
@@ -72,6 +72,9 @@ $(function() {
 
     tab.closest('.tab-bar').find('a.active').removeClass('active');
     tab.addClass('active');
+
+    // If clicking into 'backtrace' tab, hide external backtrace
+    if (tab.attr('rel') == "backtrace") { hide_external_backtrace(); }
 
     $('.panel').hide();
     panel.show();
@@ -113,6 +116,19 @@ $(function() {
   }
 
   toggleRequiredPasswordMarks();
+
+  function hide_external_backtrace() {
+    $('tr.toggle_external_backtrace').hide();
+    $('td.backtrace_separator').show();
+  }
+  function show_external_backtrace() {
+    $('tr.toggle_external_backtrace').show();
+    $('td.backtrace_separator').hide();
+  }
+  // Show external backtrace lines when clicking separator
+  $('td.backtrace_separator span').live('click', show_external_backtrace);
+  // Hide external backtrace on page load
+  hide_external_backtrace();
 
   init();
 });

@@ -27,7 +27,7 @@ class IssueTrackers::MingleTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by = nil)
     properties = ticket_properties_hash
     basic_auth = account.gsub(/https?:\/\//, "https://#{username}:#{password}@")
     Mingle.set_site "#{basic_auth}/api/v1/projects/#{project_id}/"

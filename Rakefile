@@ -7,7 +7,7 @@ require 'bundler'
 
 Errbit::Application.load_tasks
 
-Rake::Task[:default].clear
+Rake::Task[:default].clear if Rake::Task.task_defined?(:default)
 
 namespace :spec do
   desc "Preparing test env"

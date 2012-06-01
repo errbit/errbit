@@ -10,7 +10,8 @@ class Notice
   field :server_environment, :type => Hash
   field :request, :type => Hash
   field :notifier, :type => Hash
-  field :klass
+  field :user_attributes, :type => Hash
+  field :error_class
 
   belongs_to :err
   index :created_at
@@ -59,10 +60,6 @@ class Notice
     where = component.to_s.dup
     where << "##{action}" if action.present?
     where
-  end
-
-  def self.in_app_backtrace_line?(line)
-    !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
   end
 
   def request

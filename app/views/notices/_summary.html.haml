@@ -3,6 +3,9 @@
     %tr
       %th Message
       %td.main.nowrap= message_graph(problem)
+    %tr
+      %th Error Class
+      %td= notice.error_class
     - if notice.request['url'].present?
       %tr
         %th URL

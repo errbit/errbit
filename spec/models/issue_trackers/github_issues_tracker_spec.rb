@@ -10,30 +10,29 @@ describe IssueTrackers::GithubIssuesTracker do
     @issue_link = "https://github.com/#{tracker.project_id}/issues/#{number}"
     body = <<EOF
 {
-  "issue": {
-    "position": 1.0,
-    "number": #{number},
-    "votes": 0,
-    "created_at": "2010/01/21 13:45:59 -0800",
-    "comments": 0,
-    "body": "Test Body",
-    "title": "Test Issue",
-    "user": "test_user",
-    "state": "open",
-    "html_url": "#{@issue_link}"
-  }
+  "position": 1.0,
+  "number": #{number},
+  "votes": 0,
+  "created_at": "2010/01/21 13:45:59 -0800",
+  "comments": 0,
+  "body": "Test Body",
+  "title": "Test Issue",
+  "user": "test_user",
+  "state": "open",
+  "html_url": "#{@issue_link}"
 }
 EOF
-    stub_request(:post, "https://#{tracker.username}%2Ftoken:#{tracker.api_token}@github.com/api/v2/json/issues/open/#{tracker.project_id}").
+
+    stub_request(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{tracker.project_id}/issues").
       to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
-    requested = have_requested(:post, "https://#{tracker.username}%2Ftoken:#{tracker.api_token}@github.com/api/v2/json/issues/open/#{tracker.project_id}")
-    WebMock.should requested.with(:headers => {'Content-Type' => 'application/x-www-form-urlencoded'})
-    WebMock.should requested.with(:body => /title=%5Bproduction%5D%5Bfoo%23bar%5D%20FooError%3A%20Too%20Much%20Bar/)
-    WebMock.should requested.with(:body => /See%20this%20exception%20on%20Errbit/)
+    requested = have_requested(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{tracker.project_id}/issues")
+    WebMock.should requested.with(:headers => {'Accept'=>'*/*', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'})
+    WebMock.should requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
+    WebMock.should requested.with(:body => /See this exception on Errbit/)
 
     problem.issue_link.should == @issue_link
   end

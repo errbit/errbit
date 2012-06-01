@@ -8,7 +8,7 @@ module Mingle
     # after the first use. It seems that the only way to change @site
     # is to drop the subclass, and then reload it.
     Mingle.send(:remove_const, :Card)
-    load File.join(Rails.root,'lib','issue_tracker_apis','mingle.rb')
+    load File.join(Rails.root,'lib','issue_trackers', 'apis','mingle.rb')
     Mingle::Card.site = site
   end
 end
