@@ -258,10 +258,10 @@ Issue Trackers
 * Project id is the identifier of your project, i.e. **awesomeapp** for project at https://mingle.example.com/projects/awesomeapp
 * Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional. i.e. card_type = Defect, status = Open, priority = Essential
 
-**Github Issues Integration**
+**GitHub Issues Integration**
 
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* You will also need to provide your username and password for your Github account.
+* You will also need to provide your username and password for your GitHub account.
   * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
 
 
@@ -271,23 +271,23 @@ What if Errbit has an error?
 Errbit will log it's own errors to an internal app named **Self.Errbit**.
 The **Self.Errbit** app will be automatically created whenever the first error happens.
 
-If your Errbit instance has logged an error, we would appreciate a bug report on Github Issues.
+If your Errbit instance has logged an error, we would appreciate a bug report on GitHub Issues.
 You can post this manually at [https://github.com/errbit/errbit/issues](https://github.com/errbit/errbit/issues),
-or you can set up the Github Issues tracker for your **Self.Errbit** app:
+or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
 
   1. Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake airbrake:test`.)
 
-  2. In the **Issue Tracker** section, click **Github Issues**.
+  2. In the **Issue Tracker** section, click **GitHub Issues**.
 
   3. Fill in the **Account/Repository** field with **errbit/errbit**.
 
   4. Fill in the **Username** field with your github username.
 
-  5. If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
+  5. If you are logged in on [GitHub](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
 
   6. Save the settings by clicking **Update App** (or **Add App**)
 
-  7. You can now easily post bug reports to Github Issues by clicking the **Create Issue** button on a **Self.Errbit** error.
+  7. You can now easily post bug reports to GitHub Issues by clicking the **Create Issue** button on a **Self.Errbit** error.
 
 
 TODO

@@ -3,16 +3,17 @@ require 'capybara/rspec'
 
 OmniAuth.config.test_mode = true
 
-RSpec.configure do |config|
-  config.before(:each) do
-    OmniAuth.config.mock_auth[:github] = Hashie::Mash.new(
-      'provider' => 'github',
-      'uid' => '1763',
-      'extra' => {
-        'raw_info' => {
-          'login' => 'nashby'
-        }
+def mock_auth(user = "test_user", token = "abcdef")
+  OmniAuth.config.mock_auth[:github] = Hashie::Mash.new(
+    'provider' => 'github',
+    'uid' => '1763',
+    'extra' => {
+      'raw_info' => {
+        'login' => user
       }
-    )
-  end
+    },
+    'credentials' => {
+      'token' => token
+    }
+  )
 end

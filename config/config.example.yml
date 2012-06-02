@@ -49,8 +49,8 @@ deployment:
   user: deploy
   deploy_to: /var/www/apps/errbit
 
-# Github OAuth configuration
-# If you want to allow authentication via Github, you will need to register
+# GitHub OAuth configuration
+# If you want to allow authentication via GitHub, you will need to register
 # your app at: https://github.com/settings/applications
 # If you hosted Errbit at errbit.example.com, you would fill in:
 #

@@ -27,3 +27,5 @@ RSpec.configure do |config|
   end
   config.include WebMock::API
 end
+
+OmniAuth.config.test_mode = true
