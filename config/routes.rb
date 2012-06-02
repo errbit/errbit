@@ -8,7 +8,11 @@ Errbit::Application.routes.draw do
 
   resources :notices,   :only => [:show]
   resources :deploys,   :only => [:show]
-  resources :users
+  resources :users do
+    member do
+      delete :unlink_github
+    end
+  end
   resources :errs,      :only => [:index] do
     collection do
       post :destroy_several

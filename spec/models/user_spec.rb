@@ -31,15 +31,6 @@ describe User do
     end
   end
 
-  describe '.find_for_github_oauth' do
-    let(:auth_hash) { Hashie::Mash.new(:provider => 'github', :extra => { :raw_info => { :login => 'nashby' } }) }
-
-    it 'finds user by github login' do
-      user = Fabricate(:user, :github_login => 'nashby')
-      User.find_for_github_oauth(auth_hash).should == user
-    end
-  end
-
   context 'Watchers' do
 
     it 'has many watchers' do

@@ -225,7 +225,7 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 #action-bar span.github a { background: url(images/icons/github.png) no-repeat 6px 5px; }
-
+#action-bar span.unlink_github a { background: url(images/icons/unlink_github.png) no-repeat 6px 5px; }
 
 /* Content */
 #content {
