@@ -18,7 +18,7 @@
           - tracker::Fields.each do |field, field_info|
             = w.label field, field_info[:label] || field.to_s.titleize
             - field_type = field == :password ? :password_field : :text_field
-            = w.send field_type, field, :placeholder => field_info[:placeholder]
+            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field)
 
       .image_preloader
         - (IssueTracker.subclasses.map{|t| t::Label } << 'none').each do |tracker|
