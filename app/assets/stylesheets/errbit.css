@@ -579,6 +579,17 @@ table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #
 table.apps td.name, table.errs td.message {
   width: 100%;
 }
+table.apps td {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+table.apps td.issue_tracker, table.apps td.count {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+table.apps td.issue_tracker img { vertical-align: top; }
+
 td.message .line {
   display:inline-block;
   margin-left:1em;
