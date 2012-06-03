@@ -50,10 +50,26 @@ class AppsController < InheritedResources::Base
 
   protected
     def collection
-      # Sort apps by number of unresolved errs, descending.
-      # Caches the unresolved err counts while performing the sort.
       @unresolved_counts, @problem_counts = {}, {}
-      @apps ||= end_of_association_chain.all.sort{|a,b|
+      @apps ||= begin
+        apps = end_of_association_chain.all
+
+        if apps.count > 1
+          apps = sort_by_unresolved_errs(apps)
+        elsif apps.count > 0
+          app = apps.first
+          @unresolved_counts[app.id] ||= app.problems.unresolved.count
+          @problem_counts[app.id]    ||= app.problems.count
+        end
+
+        apps
+      end
+    end
+
+    # Sort apps by number of unresolved errs, descending.
+    # Caches the unresolved err counts while performing the sort.
+    def sort_by_unresolved_errs(apps)
+      apps.sort{|a,b|
         [a,b].each do |app|
           @unresolved_counts[app.id] ||= app.problems.unresolved.count
           @problem_counts[app.id]    ||= app.problems.count
