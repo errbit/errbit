@@ -576,17 +576,15 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover {
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
-table.apps td.name, table.errs td.message {
-  width: 100%;
-}
-table.apps td {
-  padding-top: 16px;
-  padding-bottom: 16px;
+table.apps td.name, table.errs td.message { width: 100%; }
+table.apps td { padding: 16px 25px; }
+table.apps th { padding: 10px 25px; }
+
+table.apps td.issue_tracker, table.apps td.count, table.apps td.deploy {
+  text-align: center;
 }
 table.apps td.issue_tracker, table.apps td.count {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
+  padding: 10px 8px;
 }
 table.apps td.issue_tracker img { vertical-align: top; }
 

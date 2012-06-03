@@ -8,10 +8,10 @@ class AppsController < InheritedResources::Base
       format.html do
         @all_errs = !!params[:all_errs]
 
-        @sort = params[:sort]
+        @sort  = params[:sort]
         @order = params[:order]
-        @sort = "last_notice_at" unless %w{message app last_deploy_at count}.member?(@sort)
-        @order = "desc" unless (@order == "asc")
+        @sort  = "last_notice_at" unless %w{message app last_deploy_at last_notice_at count}.member?(@sort)
+        @order = "desc" unless %w{asc desc}.member?(@order)
 
         @problems = resource.problems
         @problems = @problems.unresolved unless @all_errs
@@ -52,10 +52,14 @@ class AppsController < InheritedResources::Base
     def collection
       # Sort apps by number of unresolved errs, descending.
       # Caches the unresolved err counts while performing the sort.
-      @unresolved_counts = {}
+      @unresolved_counts, @problem_counts = {}, {}
       @apps ||= end_of_association_chain.all.sort{|a,b|
-        [a,b].each{|app| @unresolved_counts[app.id] ||= app.problems.unresolved.count }
-        @unresolved_counts[b.id] <=> @unresolved_counts[a.id]
+        [a,b].each do |app|
+          @unresolved_counts[app.id] ||= app.problems.unresolved.count
+          @problem_counts[app.id]    ||= app.problems.count
+        end
+        unresolved = @unresolved_counts[b.id] <=> @unresolved_counts[a.id]
+        unresolved != 0 ? unresolved : @problem_counts[b.id] <=> @problem_counts[a.id]
       }
     end
 
