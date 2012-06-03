@@ -4,6 +4,8 @@ describe "apps/index.html.haml" do
   before do
     app = Fabricate(:app, :deploys => [Fabricate(:deploy, :revision => "123456789abcdef")])
     assign :apps, [app]
+    assign :problem_counts, {app.id => 0}
+    assign :unresolved_counts, {app.id => 0}
     controller.stub(:current_user) { Fabricate(:user) }
   end
 
