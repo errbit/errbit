@@ -54,29 +54,20 @@ class AppsController < InheritedResources::Base
       @apps ||= begin
         apps = end_of_association_chain.all
 
-        if apps.count > 1
-          apps = sort_by_unresolved_errs(apps)
-        elsif apps.count > 0
-          app = apps.first
+        # Cache counts for unresolved errs and problems
+        apps.each do |app|
           @unresolved_counts[app.id] ||= app.problems.unresolved.count
           @problem_counts[app.id]    ||= app.problems.count
+        end
+
+        # Sort apps by number of unresolved errs, then problem counts.
+        apps.sort! do |a,b|
+          unresolved = @unresolved_counts[b.id] <=> @unresolved_counts[a.id]
+          unresolved != 0 ? unresolved : @problem_counts[b.id] <=> @problem_counts[a.id]
         end
 
         apps
       end
-    end
-
-    # Sort apps by number of unresolved errs, descending.
-    # Caches the unresolved err counts while performing the sort.
-    def sort_by_unresolved_errs(apps)
-      apps.sort{|a,b|
-        [a,b].each do |app|
-          @unresolved_counts[app.id] ||= app.problems.unresolved.count
-          @problem_counts[app.id]    ||= app.problems.count
-        end
-        unresolved = @unresolved_counts[b.id] <=> @unresolved_counts[a.id]
-        unresolved != 0 ? unresolved : @problem_counts[b.id] <=> @problem_counts[a.id]
-      }
     end
 
     def initialize_subclassed_issue_tracker
