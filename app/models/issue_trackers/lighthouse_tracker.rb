@@ -2,7 +2,7 @@ class IssueTrackers::LighthouseTracker < IssueTracker
   Label = "lighthouseapp"
   Fields = [
     [:account, {
-      :placeholder => "abc from abc.lighthouseapp.com"
+      :placeholder => "abc from http://abc.lighthouseapp.com"
     }],
     [:api_token, {
       :placeholder => "API Token for your account"
@@ -36,6 +36,10 @@ class IssueTrackers::LighthouseTracker < IssueTracker
 
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/lighthouseapp_body.txt.erb").gsub(/^\s*/, ''))
+  end
+
+  def url
+    "http://#{account}.lighthouseapp.com"
   end
 end
 

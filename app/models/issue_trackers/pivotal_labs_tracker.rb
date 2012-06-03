@@ -24,5 +24,9 @@ class IssueTrackers::PivotalLabsTracker < IssueTracker
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/pivotal_body.txt.erb"))
   end
+
+  def url
+    "https://www.pivotaltracker.com/"
+  end
 end
 

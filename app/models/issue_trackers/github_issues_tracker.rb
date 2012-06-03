@@ -32,4 +32,8 @@ class IssueTrackers::GithubIssuesTracker < IssueTracker
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/github_issues_body.txt.erb").gsub(/^\s*/, ''))
   end
+
+  def url
+    "https://github.com/#{project_id}/issues"
+  end
 end

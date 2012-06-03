@@ -40,5 +40,9 @@ class IssueTrackers::FogbugzTracker < IssueTracker
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/fogbugz_body.txt.erb"))
   end
+
+  def url
+    "http://#{account}.fogbugz.com/"
+  end
 end
 

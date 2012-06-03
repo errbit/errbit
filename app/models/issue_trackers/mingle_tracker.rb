@@ -3,7 +3,7 @@ class IssueTrackers::MingleTracker < IssueTracker
   Fields = [
     [:account, {
       :label       => "Mingle URL",
-      :placeholder => "abc from http://abc.fogbugz.com/"
+      :placeholder => "http://mingle.example.com/"
     }],
     [:project_id, {
       :placeholder => "Mingle project"
@@ -55,6 +55,12 @@ class IssueTrackers::MingleTracker < IssueTracker
       hash[key] = value
       hash
     end
+  end
+
+  def url
+    acc_url = account.start_with?('http') ? account : "http://#{account}"
+    URI.parse("#{acc_url}/projects/#{project_id}").to_s
+  rescue URI::InvalidURIError
   end
 end
 

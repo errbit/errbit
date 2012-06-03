@@ -50,5 +50,11 @@ class IssueTrackers::RedmineTracker < IssueTracker
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/textile_body.txt.erb"))
   end
+
+  def url
+    acc_url = account.start_with?('http') ? account : "http://#{account}"
+    URI.parse("#{acc_url}?project_id=#{project_id}").to_s
+  rescue URI::InvalidURIError
+  end
 end
 
