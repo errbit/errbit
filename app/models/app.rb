@@ -4,7 +4,7 @@ class App
 
   field :name, :type => String
   field :api_key
-  field :github_url
+  field :github_repo
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
@@ -28,7 +28,7 @@ class App
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
-  before_save :normalize_github_url
+  before_save :normalize_github_repo
   after_update :store_cached_attributes_on_problems
 
   validates_presence_of :name, :api_key
@@ -112,13 +112,18 @@ class App
   alias :notify_on_deploys? :notify_on_deploys
 
 
-  def github_url?
-    self.github_url.present?
+  def github_repo?
+    self.github_repo.present?
+  end
+
+  def github_url
+    "https://github.com/#{github_repo}" if github_repo?
   end
 
   def github_url_to_file(file)
-    "#{self.github_url}/blob/master#{file}"
+    "#{github_url}/blob/master#{file}"
   end
+
 
   def issue_tracker_configured?
     !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.project_id.present?)
@@ -167,11 +172,11 @@ class App
       end
     end
 
-    def normalize_github_url
-      return if self.github_url.blank?
-      self.github_url.gsub!(%r{^http://|git@}, 'https://')
-      self.github_url.gsub!(/github\.com:/, 'github.com/')
-      self.github_url.gsub!(/\.git$/, '')
+    def normalize_github_repo
+      return if github_repo.blank?
+      github_repo.strip!
+      github_repo.sub!(/(git@|https?:\/\/)github\.com(\/|:)/, '')
+      github_repo.sub!(/\.git$/, '')
     end
 end
 

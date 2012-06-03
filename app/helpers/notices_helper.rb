@@ -11,7 +11,7 @@ module NoticesHelper
   def link_to_source_file(app, line, &block)
     text = capture_haml(&block)
     if in_app_backtrace_line?(line)
-      return link_to_github(app, line, text) if app.github_url?
+      return link_to_github(app, line, text) if app.github_repo?
       if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
         # Return link to file on tracker if issue tracker supports this
         return link_to_issue_tracker_file(app, line, text)
