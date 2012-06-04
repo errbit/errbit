@@ -183,7 +183,7 @@ heroku addons:add deployhooks:http url="http://YOUR_ERRBIT_HOST/deploys.txt?api_
 Authentication
 --------------
 
-**Configuring GitHub authentication:**
+### Configuring GitHub authentication:
 
   * In `config/config.yml`, set `github_authentication` to `true`
   * Register your instance of Errbit at: https://github.com/settings/applications
@@ -215,7 +215,7 @@ You can change the requested account permissions by setting `github_access_scope
 </table>
 
 
-**Configuring LDAP authentication:**
+### Configuring LDAP authentication:
 
   * In `config/config.yml`, set `user_has_username` to `true`
   * Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
