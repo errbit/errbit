@@ -62,8 +62,9 @@ class AppsController < InheritedResources::Base
 
         # Sort apps by number of unresolved errs, then problem counts.
         apps.sort do |a,b|
-          unresolved = @unresolved_counts[b.id] <=> @unresolved_counts[a.id]
-          unresolved != 0 ? unresolved : @problem_counts[b.id] <=> @problem_counts[a.id]
+          (@unresolved_counts[b.id] <=> @unresolved_counts[a.id]).nonzero? ||
+          (@problem_counts[b.id] <=> @problem_counts[a.id]).nonzero? ||
+          a.name <=> b.name
         end
       end
     end
