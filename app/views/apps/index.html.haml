@@ -36,7 +36,7 @@
               = link_to( app.last_deploy_at.to_s(:micro) << (revision.present? ? " (#{revision})" : ""), app_deploys_path(app))
         %td.count
           - if @problem_counts[app.id] > 0
-            - unresolved = @unresolved_counts[app.id] || app.problems.unresolved.count
+            - unresolved = @unresolved_counts[app.id]
             = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
     - if @apps.none?
       %tr
