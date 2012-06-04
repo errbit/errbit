@@ -162,11 +162,17 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Content Title and Comments */
 #content-title, #content-comments {
-  padding: 43px 24px 37px;
+  padding: 30px 24px;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #FFF;
   background-color: #f2f2f2;
 }
+
+/* Make err title bar bigger to fit more buttons */
+#content-title.err_show {
+  padding: 43px 24px 37px;
+}
+
 #content-comments {
   background-color: #ffffff;
 }

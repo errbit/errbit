@@ -18,7 +18,7 @@
         = render 'shared/navigation' if current_user
         = render 'shared/session'
     #content-wrapper
-      #content-title
+      #content-title{ :class => (yield :title_css_class).to_s }
         %h1= yield :title
         %span.meta= yield :meta
         - if (action_bar = yield(:action_bar)).present?
