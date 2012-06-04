@@ -88,29 +88,6 @@ class ErrsController < ApplicationController
     redirect_to app_path(@app)
   end
 
-  def create_comment
-    @comment = Comment.new(params[:comment].merge(:user_id => current_user.id))
-    if @comment.valid?
-      @problem.comments << @comment
-      @problem.save
-      flash[:success] = "Comment saved!"
-    else
-      flash[:error] = "I'm sorry, your comment was blank! Try again?"
-    end
-    redirect_to app_err_path(@app, @problem)
-  end
-
-  def destroy_comment
-    @comment = Comment.find(params[:comment_id])
-    if @comment.destroy
-      flash[:success] = "Comment deleted!"
-    else
-      flash[:error] = "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
-    end
-    redirect_to app_err_path(@app, @problem)
-  end
-
-
   def resolve_several
     @selected_problems.each(&:resolve!)
     flash[:success] = "Great news everyone! #{pluralize(@selected_problems.count, 'err has', 'errs have')} been resolved."
