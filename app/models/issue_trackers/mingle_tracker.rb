@@ -1,5 +1,7 @@
 class IssueTrackers::MingleTracker < IssueTracker
   Label = "mingle"
+  Note = "Note: <strong>CARD PROPERTIES</strong> must be comma separated <em>key = value</em> pairs"
+
   Fields = [
     [:account, {
       :label       => "Mingle URL",
@@ -9,7 +11,7 @@ class IssueTrackers::MingleTracker < IssueTracker
       :placeholder => "Mingle project"
     }],
     [:ticket_properties, {
-      :label       => "Card Properties (comma separated key=value pairs)",
+      :label       => "Card Properties",
       :placeholder => "card_type = Defect, defect_status = Open, priority = Essential"
     }],
     [:username, {

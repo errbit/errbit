@@ -44,6 +44,10 @@ class User
     github_login.present? ? false : super
   end
 
+  def github_account?
+    github_login.present? && github_oauth_token.present?
+  end
+
   protected
 
     def destroy_watchers

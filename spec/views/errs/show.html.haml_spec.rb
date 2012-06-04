@@ -56,6 +56,19 @@ describe "errs/show.html.haml" do
       action_bar.should have_selector("span a.up[href='#{app_errs_path(problem.app)}']", :text => 'up')
     end
 
+    context 'create issue links' do
+      it 'should allow creating issue for github if current user has linked their github account' do
+        user = Fabricate(:user, :github_login => 'test_user', :github_oauth_token => 'abcdef')
+        controller.stub(:current_user) { user }
+
+        problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
+        assign :problem, problem
+        assign :app, problem.app
+        render
+
+        action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
+      end
+    end
   end
 
   describe "content_for :comments with comments disabled for configured issue tracker" do

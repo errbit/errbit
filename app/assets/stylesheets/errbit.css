@@ -162,10 +162,10 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Content Title and Comments */
 #content-title, #content-comments {
-  padding: 30px 20px;
+  padding: 43px 24px 37px;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #FFF;
-  background-color: #ececec;
+  background-color: #f2f2f2;
 }
 #content-comments {
   background-color: #ffffff;
@@ -188,11 +188,13 @@ a.action  { float: right; font-size: 0.9em;}
 /* Action Bar */
 #action-bar {
   position: absolute;
-  top: 25px; right: 20px;
+  text-align: right;
+  top: 22px; right: 24px;
 }
 #action-bar span {
   display: inline-block;
   margin-left: 18px;
+  margin-bottom: 16px;
   text-decoration: none;
   color: #666;
   background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
@@ -667,10 +669,11 @@ table.tally tbody tr:first-child th {
   padding-top:0;
 }
 table.tally td.percent {
-  width:4.5em;
+  padding-right: 10px;
 }
 table.tally th.value {
-  text-transform:none;
+  width: 100%;
+  text-transform: none;
 }
 
 /* Deploys table */

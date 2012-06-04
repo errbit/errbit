@@ -5,6 +5,7 @@ class ErrsController < ApplicationController
   before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :set_sorting_params, :only => [:index, :all]
+  before_filter :set_tracker_params, :only => [:create_issue]
 
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
@@ -36,21 +37,38 @@ class ErrsController < ApplicationController
   end
 
   def create_issue
-    set_tracker_params
-
-    if @app.issue_tracker
-      begin
-        @app.issue_tracker.create_issue @problem, current_user
-      rescue Exception => ex
-        flash[:error] = ex.message
+    # Create an issue on GitHub using user's github token
+    if params[:tracker] == 'user_github'
+      if !@app.github_repo?
+        flash[:error] = "This app doesn't have a GitHub repo set up."
+      elsif !current_user.github_account?
+        flash[:error] = "You haven't linked your Github account."
+      else
+        @tracker = GithubIssuesTracker.new(
+          :app         => @app,
+          :login       => current_user.github_login,
+          :oauth_token => current_user.github_oauth_token
+        )
       end
+
+    # Or, create an issue using the App's issue tracker
+    elsif @app.issue_tracker_configured?
+      @tracker = @app.issue_tracker
+
+    # Otherwise, display error about missing tracker configuration.
     else
       flash[:error] = "This app has no issue tracker setup."
     end
-    redirect_to app_err_path(@app, @problem)
-  rescue ActiveResource::ConnectionError => e
-    Rails.logger.error e.to_s
-    flash[:error] = "There was an error during issue creation. Check your tracker settings or try again later."
+
+    if flash[:error].blank? && @tracker
+      begin
+        @tracker.create_issue @problem, current_user
+      rescue Exception => ex
+        Rails.logger.error "Error during issue creation: " << ex.message
+        flash[:error] = "There was an error during issue creation: #{ex.message}"
+      end
+    end
+
     redirect_to app_err_path(@app, @problem)
   end
 

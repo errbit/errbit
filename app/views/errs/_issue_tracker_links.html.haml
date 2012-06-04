@@ -1,0 +1,12 @@
+- if @app.issue_tracker_configured? || current_user.github_account?
+  - if @problem.issue_link.present?
+    %span= link_to 'go to issue', @problem.issue_link, :class => "#{@app.issue_tracker.class::Label}_goto goto-issue"
+    = link_to 'unlink issue', unlink_issue_app_err_path(@app, @problem), :method => :delete, :confirm => "Unlink err issues?", :class => "unlink-issue"
+  - elsif @problem.issue_link == "pending"
+    %span.disabled= link_to 'creating...', '#', :class => "#{@app.issue_tracker.class::Label}_inactive create-issue"
+    = link_to 'retry', create_issue_app_err_path(@app, @problem), :method => :post
+  - else
+    - if current_user.github_account? && @app.github_repo?
+      %span= link_to 'create issue', create_issue_app_err_path(@app, @problem, :tracker => 'user_github'), :method => :post, :class => "github_create create-issue"
+    - if @app.issue_tracker_configured? && !@app.issue_tracker.is_a?(GithubIssuesTracker)
+      %span= link_to 'create issue', create_issue_app_err_path(@app, @problem), :method => :post, :class => "#{@app.issue_tracker.class::Label}_create create-issue"

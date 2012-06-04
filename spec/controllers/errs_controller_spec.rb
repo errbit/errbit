@@ -330,7 +330,7 @@ describe ErrsController do
         end
 
         it "should notify of connection error" do
-          flash[:error].should == "There was an error during issue creation. Check your tracker settings or try again later."
+          flash[:error].should include("There was an error during issue creation:")
         end
       end
     end
