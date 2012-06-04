@@ -119,7 +119,10 @@ Devise.setup do |config|
   # config.sign_out_all_scopes = false
 
   if Errbit::Config.github_authentication || Rails.env.test?
-    config.omniauth :github, Errbit::Config.github_client_id, Errbit::Config.github_secret, :scope => 'repo'
+    config.omniauth :github,
+                    Errbit::Config.github_client_id,
+                    Errbit::Config.github_secret,
+                    :scope => Errbit::Config.github_access_scope.join(",")
   end
 
   # ==> Navigation configuration

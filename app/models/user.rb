@@ -48,6 +48,10 @@ class User
     github_login.present? && github_oauth_token.present?
   end
 
+  def can_create_github_issues?
+    github_account? && Errbit::Config.github_access_scope.include?('repo')
+  end
+
   protected
 
     def destroy_watchers

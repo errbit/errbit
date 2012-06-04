@@ -202,9 +202,17 @@ After you have followed these instructions, you will be able to **Sign in with G
 
 You will also be able to link your GitHub profile to your user account on your **Edit profile** page.
 
-If you have signed in with GitHub, or linked your GitHub profile,
-you are able to create an issue on GitHub if the App has a GitHub repo configured.
-You will also be able to create an issue on a configured issue trackers.
+If you have signed in with GitHub, or linked your GitHub profile, and the App has a GitHub repo configured,
+then you will be able to create issues on GitHub.
+You will still be able to create an issue on the App's configured issue tracker.
+
+You can change the requested account permissions by setting `github_access_scope` to:
+
+<table>
+  <tr><th>['repo'] </th><td>Allow creating issues for public and private repos.</td></tr>
+  <tr><th>['public_repo'] </th><td>Only allow creating issues for public repos.</td></tr>
+  <tr><th>[] </th><td>No permission to create issues on any repos.</td></tr>
+</table>
 
 
 **Configuring LDAP authentication:**
