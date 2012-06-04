@@ -372,60 +372,6 @@ describe ErrsController do
     end
   end
 
-
-  describe "POST /apps/:app_id/errs/:id/create_comment" do
-    render_views
-
-    before(:each) do
-      sign_in Fabricate(:admin)
-    end
-
-    context "successful comment creation" do
-      let(:problem) { Fabricate(:problem) }
-      let(:user) { Fabricate(:user) }
-
-      before(:each) do
-        post :create_comment, :app_id => problem.app.id, :id => problem.id,
-             :comment => { :body => "One test comment", :user_id => user.id }
-        problem.reload
-      end
-
-      it "should create the comment" do
-        problem.comments.size.should == 1
-      end
-
-      it "should redirect to problem page" do
-        response.should redirect_to( app_err_path(problem.app, problem) )
-      end
-    end
-  end
-
-  describe "DELETE /apps/:app_id/errs/:id/destroy_comment" do
-    render_views
-
-    before(:each) do
-      sign_in Fabricate(:admin)
-    end
-
-    context "successful comment deletion" do
-      let(:problem) { Fabricate(:problem_with_comments) }
-      let(:comment) { problem.reload.comments.first }
-
-      before(:each) do
-        delete :destroy_comment, :app_id => problem.app.id, :id => problem.id, :comment_id => comment.id.to_s
-        problem.reload
-      end
-
-      it "should delete the comment" do
-        problem.comments.detect{|c| c.id.to_s == comment.id }.should == nil
-      end
-
-      it "should redirect to problem page" do
-        response.should redirect_to( app_err_path(problem.app, problem) )
-      end
-    end
-  end
-
   describe "Bulk Actions" do
     before(:each) do
       sign_in Fabricate(:admin)
