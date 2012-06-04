@@ -198,9 +198,7 @@ Authentication
     in `config/config.yml` with your app's Client ID and Secret key.
 
 
-After you have followed these instructions, you will be able to
-<img src="http://errbit.github.com/errbit/images/sign_in_with_github_button.png" alt="Sign in with GitHub">
-on the Login page.
+After you have followed these instructions, you will be able to **Sign in with GitHub** on the Login page.
 
 You will also be able to link your GitHub profile to your user account on your **Edit profile** page.
 
