@@ -37,7 +37,10 @@ class IssueTrackers::RedmineTracker < IssueTracker
     issue.subject = issue_title problem
     issue.description = body_template.result(binding)
     issue.save!
-    problem.update_attribute :issue_link, "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}")
+    problem.update_attributes(
+      :issue_link => "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}"),
+      :issue_type => Label
+    )
   end
 
   def url_to_file(file_path, line_number = nil)

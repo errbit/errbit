@@ -10,6 +10,7 @@ class Problem
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :issue_link, :type => String
+  field :issue_type, :type => String
 
   # Cached fields
   field :app_name, :type => String
@@ -143,6 +144,12 @@ class Problem
       :hosts       => attribute_count_descrease(:hosts, notice.host),
       :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string)
     )
+  end
+
+  def issue_type
+    # Return issue_type if configured, but fall back to detecting app's issue tracker
+    attributes['issue_type'] ||=
+    (app.issue_tracker_configured? && app.issue_tracker.class::Label) || nil
   end
 
   private

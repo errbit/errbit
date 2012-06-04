@@ -29,5 +29,10 @@ class IssueTracker
   def type=(t); self._type=t; end
 
   def url; nil; end
+
+  Label = ''
+  def self.label
+    self::Label
+  end
 end
 

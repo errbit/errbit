@@ -43,7 +43,10 @@ class IssueTrackers::MingleTracker < IssueTracker
     end
 
     card.save!
-    problem.update_attribute :issue_link, URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s
+    problem.update_attributes(
+      :issue_link => URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s,
+      :issue_type => Label
+    )
   end
 
   def body_template

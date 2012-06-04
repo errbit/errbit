@@ -31,7 +31,11 @@ class IssueTrackers::LighthouseTracker < IssueTracker
 
     ticket.tags << "errbit"
     ticket.save!
-    problem.update_attribute :issue_link, "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, '')
+    problem.update_attributes(
+      :issue_link => "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, ''),
+      :issue_type => Label
+    )
+
   end
 
   def body_template

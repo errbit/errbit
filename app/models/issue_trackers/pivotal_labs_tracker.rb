@@ -18,7 +18,10 @@ class IssueTrackers::PivotalLabsTracker < IssueTracker
     PivotalTracker::Client.use_ssl = true
     project = PivotalTracker::Project.find project_id.to_i
     story = project.stories.create :name => issue_title(problem), :story_type => 'bug', :description => body_template.result(binding)
-    problem.update_attribute :issue_link, "https://www.pivotaltracker.com/story/show/#{story.id}"
+    problem.update_attributes(
+      :issue_link => "https://www.pivotaltracker.com/story/show/#{story.id}",
+      :issue_type => Label
+    )
   end
 
   def body_template

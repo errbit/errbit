@@ -34,7 +34,11 @@ class IssueTrackers::FogbugzTracker < IssueTracker
     issue['cols'] = ['ixBug'].join(',')
 
     fb_resp = fogbugz.command(:new, issue)
-    problem.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
+    problem.update_attributes(
+      :issue_link => "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}",
+      :issue_type => Label
+    )
+
   end
 
   def body_template
