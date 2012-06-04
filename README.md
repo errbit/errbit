@@ -187,7 +187,8 @@ Authentication
 
   * In `config/config.yml`, set `github_authentication` to `true`
   * Register your instance of Errbit at: https://github.com/settings/applications
-     If you hosted Errbit at errbit.example.com, you would fill in:
+
+If you hosted Errbit at errbit.example.com, you would fill in:
 
 <table>
   <tr><th>URL:</th><td>http://errbit.example.com/</td></tr>
