@@ -27,13 +27,13 @@ Errbit::Application.routes.draw do
   resources :apps do
     resources :errs do
       resources :notices
+      resources :comments, :only => [:create, :destroy]
+
       member do
         put :resolve
         put :unresolve
         post :create_issue
         delete :unlink_issue
-        post :create_comment
-        delete :destroy_comment
       end
     end
 
