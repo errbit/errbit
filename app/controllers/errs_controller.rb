@@ -41,7 +41,7 @@ class ErrsController < ApplicationController
     if @app.issue_tracker
       begin
         @app.issue_tracker.create_issue @problem, current_user
-      rescue IssueTrackers::IssueTrackerError => ex
+      rescue Exception => ex
         flash[:error] = ex.message
       end
     else
