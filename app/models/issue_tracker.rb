@@ -30,9 +30,9 @@ class IssueTracker
 
   def url; nil; end
 
+  # Retrieve tracker label from either class or instance.
   Label = ''
-  def self.label
-    self::Label
-  end
+  def self.label; self::Label; end
+  def label; self.class.label; end
 end
 
