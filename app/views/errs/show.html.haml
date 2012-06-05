@@ -18,7 +18,7 @@
     %span= link_to 'iCal', app_err_path(:app_id => @app.id, :id => @problem.id, :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
   %span>= link_to 'up', (request.env['HTTP_REFERER'] ? :back : app_errs_path(@app)), :class => 'up'
   %br
-  = render :partial => "issue_tracker_links"
+  = render "issue_tracker_links"
 
 - if Errbit::Config.allow_comments_with_issue_tracker || !@app.issue_tracker_configured? || @problem.comments.any?
   - content_for :comments do

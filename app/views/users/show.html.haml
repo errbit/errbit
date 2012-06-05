@@ -1,6 +1,6 @@
 - content_for :title, @user.name
 - content_for :action_bar do
-  = render :partial => 'shared/link_github_account', :locals => {:user => @user}
+  = render 'shared/link_github_account', :user => @user
   %span= link_to('Add a New User', new_user_path, :class => 'add')
   = link_to 'edit', edit_user_path(@user), :class => 'button'
   = link_to 'destroy', user_path(@user), :method => :delete, :confirm => 'Seriously?', :class => 'button'

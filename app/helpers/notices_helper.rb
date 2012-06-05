@@ -5,7 +5,7 @@ module NoticesHelper
   end
 
   def notice_atom_summary(notice)
-    render :partial => "notices/atom_entry.html.haml", :locals => {:notice => notice}
+    render "notices/atom_entry.html.haml", :notice => notice
   end
 
   def link_to_source_file(app, line, &block)

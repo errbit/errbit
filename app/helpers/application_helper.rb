@@ -58,7 +58,7 @@ module ApplicationHelper
     percent = 100.0 / total.to_f
     rows    = tallies.map {|value, count| [(count.to_f * percent), value]} \
                      .sort {|a, b| a[0] <=> b[0]}
-    render :partial => "errs/tally_table", :locals => {:rows => rows}
+    render "errs/tally_table", :rows => rows
   end
 
   private

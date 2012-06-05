@@ -1,6 +1,6 @@
 - content_for :title, "Edit #{@user.name}"
 - content_for :action_bar do
-  = render :partial => 'shared/link_github_account', :locals => {:user => @user}
+  = render 'shared/link_github_account', :user => @user
   = link_to('cancel', user_path(@user), :class => 'button')
 
 = form_for @user, :html => {:autocomplete => "off"} do |f|

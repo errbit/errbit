@@ -25,7 +25,7 @@
           #action-bar
             = action_bar
       #content
-        = render :partial => 'shared/flash_messages'
+        = render 'shared/flash_messages'
         = yield
       - if content_for?(:comments)
         #content-comments
