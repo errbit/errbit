@@ -9,15 +9,8 @@ class UsersController < ApplicationController
     @users = User.all.page(params[:page]).per(current_user.per_page)
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def new
     @user = User.new
-  end
-
-  def edit
   end
 
   def create
