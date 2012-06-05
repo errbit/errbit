@@ -78,9 +78,6 @@ class ErrsController < ApplicationController
   end
 
   def resolve
-    # Deal with bug in mongoid where find is returning an Enumberable obj
-    @problem = @problem.first if @problem.respond_to?(:first)
-
     @problem.resolve!
     flash[:success] = 'Great news everyone! The err has been resolved.'
     redirect_to :back
@@ -133,9 +130,6 @@ class ErrsController < ApplicationController
 
     def find_problem
       @problem = @app.problems.find(params[:id])
-
-      # Deal with bug in mogoid where find is returning an Enumberable obj
-      @problem = @problem.first if @problem.respond_to?(:first)
     end
 
     def set_tracker_params
