@@ -35,9 +35,6 @@ class CommentsController < ApplicationController
 
     def find_problem
       @problem = @app.problems.find(params[:err_id])
-
-      # Deal with bug in mogoid where find is returning an Enumberable obj
-      @problem = @problem.first if @problem.respond_to?(:first)
     end
 end
 
