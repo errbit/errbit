@@ -1,6 +1,6 @@
 Errbit::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create'
@@ -8,7 +8,11 @@ Errbit::Application.routes.draw do
 
   resources :notices,   :only => [:show]
   resources :deploys,   :only => [:show]
-  resources :users
+  resources :users do
+    member do
+      delete :unlink_github
+    end
+  end
   resources :errs,      :only => [:index] do
     collection do
       post :destroy_several
@@ -23,20 +27,18 @@ Errbit::Application.routes.draw do
   resources :apps do
     resources :errs do
       resources :notices
+      resources :comments, :only => [:create, :destroy]
+
       member do
         put :resolve
         put :unresolve
         post :create_issue
         delete :unlink_issue
-        post :create_comment
-        delete :destroy_comment
       end
     end
 
     resources :deploys, :only => [:index]
   end
-
-  devise_for :users
 
   root :to => 'apps#index'
 

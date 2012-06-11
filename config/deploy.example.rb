@@ -6,21 +6,28 @@
 # `cap deploy` whenever you would like to deploy Errbit. Refer
 # to the Readme for more information.
 
+config = YAML.load_file('config/config.yml')['deployment'] || {}
+
 require 'bundler/capistrano'
+load 'deploy/assets'
 
 set :application, "errbit"
-set :repository,  "http://github.com/jdpace/errbit.git"
+set :repository,  config['repository']
 
-role :web, "errbit.example.com"
-role :app, "errbit.example.com"
-role :db,  "errbit.example.com", :primary => true
+role :web, config['hosts']['web']
+role :app, config['hosts']['app']
+role :db,  config['hosts']['db'], :primary => true
 
-set :user, :deploy
+set :user, config['user']
 set :use_sudo, false
-set :ssh_options,      { :forward_agent => true }
+if config.has_key?('ssh_key')
+  set :ssh_options,      { :forward_agent => true, :keys => [ config['ssh_key'] ] }
+else
+  set :ssh_options,      { :forward_agent => true }
+end
 default_run_options[:pty] = true
 
-set :deploy_to, "/var/www/apps/#{application}"
+set :deploy_to, config['deploy_to']
 set :deploy_via, :remote_cache
 set :copy_cache, true
 set :copy_exclude, [".git"]

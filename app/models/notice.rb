@@ -10,20 +10,27 @@ class Notice
   field :server_environment, :type => Hash
   field :request, :type => Hash
   field :notifier, :type => Hash
-  field :klass
+  field :user_attributes, :type => Hash
+  field :error_class
 
   belongs_to :err
-  index :err_id
   index :created_at
+  index(
+    [
+      [ :err_id, Mongo::ASCENDING ],
+      [ :created_at, Mongo::ASCENDING ],
+      [ :_id, Mongo::ASCENDING ]
+    ]
+  )
 
   after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
-  after_create :deliver_notification, :if => :should_notify?
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
   validates_presence_of :backtrace, :server_environment, :notifier
 
   scope :ordered, order_by(:created_at.asc)
+  scope :reverse_ordered, order_by(:created_at.desc)
   scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
 
   delegate :app, :problem, :to => :err
@@ -55,10 +62,6 @@ class Notice
     where
   end
 
-  def self.in_app_backtrace_line?(line)
-    !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
-  end
-
   def request
     read_attribute(:request) || {}
   end
@@ -86,20 +89,12 @@ class Notice
     request['session'] || {}
   end
 
-  def deliver_notification
-    Mailer.err_notification(self).deliver
-  end
-
   # Backtrace containing only files from the app itself (ignore gems)
   def app_backtrace
     backtrace.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
   end
 
   protected
-
-  def should_notify?
-    app.notify_on_errs? && (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(problem.notices_count) && app.notification_recipients.any?
-  end
 
   def increase_counter_cache
     problem.inc(:notices_count, 1)

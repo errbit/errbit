@@ -12,7 +12,7 @@ describe "notices/_backtrace.html.haml" do
     end
 
     it "should replace nil file with [unknown source]" do
-      render :partial => "notices/backtrace", :locals => {:lines => @notice.backtrace}
+      render "notices/backtrace", :lines => @notice.backtrace
       rendered.should match(/\[unknown source\]/)
     end
   end

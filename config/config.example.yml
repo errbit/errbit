@@ -11,6 +11,9 @@
 # The host of your errbit server
 host: errbit.example.com
 
+# Enforce SSL connections
+enforce_ssl: false
+
 # The email address which email notifications
 # will be sent from.
 email_from: errbit@example.com
@@ -35,6 +38,34 @@ user_has_username: false
 # This is useful if the err is not critical enough to create a ticket,
 # but you want to leave a short comment.
 allow_comments_with_issue_tracker: true
+
+# Setup your deploy options for capistrano.
+deployment:
+  hosts:
+    web: errbit.example.com
+    app: errbit.example.com
+    db: errbit.example.com
+  repository: http://github.com/errbit/errbit.git
+  user: deploy
+  deploy_to: /var/www/apps/errbit
+
+# GitHub OAuth configuration
+# If you want to allow authentication via GitHub, you will need to register
+# your app at: https://github.com/settings/applications
+# If you hosted Errbit at errbit.example.com, you would fill in:
+#
+#          URL: http://errbit.example.com/
+# Callback URL: http://errbit.example.com/users/auth/github
+#
+# After you have registered your app, copy your Client ID and Secret key below.
+github_authentication: false
+github_client_id: 'GITHUB_CLIENT_ID'
+github_secret: 'GITHUB_SECRET'
+# GitHub Permissions to request from user
+#   ['repo']        - Allow creating issues for public and private repos.
+#   ['public_repo'] - Only allow creating issues for public repos.
+#   []              - No permission to create issues on any repos.
+github_access_scope: ['repo']
 
 # Configure SMTP settings. If you are running Errbit on Heroku,
 # sendgrid will be configured by default.

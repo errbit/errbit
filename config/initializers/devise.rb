@@ -118,6 +118,13 @@ Devise.setup do |config|
   # In case of sign_out_all_scopes set to true any logout action will sign out all active scopes.
   # config.sign_out_all_scopes = false
 
+  if Errbit::Config.github_authentication || Rails.env.test?
+    config.omniauth :github,
+                    Errbit::Config.github_client_id,
+                    Errbit::Config.github_secret,
+                    :scope => Errbit::Config.github_access_scope.join(",")
+  end
+
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
   # :html, should redirect to the sign in page when the user does not have

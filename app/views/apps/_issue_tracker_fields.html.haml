@@ -7,20 +7,23 @@
           = w.radio_button :type, "IssueTracker", 'data-section' => 'none'
           (None)
         - IssueTracker.subclasses.each do |tracker|
-          = label_tag "type_#{tracker::Label}:", :for => label_for_attr(w, "type_#{tracker.name.downcase.gsub(':','')}"), :class => "label_radio #{tracker::Label}" do
-            = w.radio_button :type, tracker.name, 'data-section' => tracker::Label
+          = label_tag "type_#{tracker.label}:", :for => label_for_attr(w, "type_#{tracker.name.downcase.gsub(':','')}"), :class => "label_radio #{tracker.label}" do
+            = w.radio_button :type, tracker.name, 'data-section' => tracker.label
             = tracker.name[/::(.*)Tracker/,1].titleize
 
       %div.tracker_params.none{:class => (w.object && !(w.object.class < IssueTracker)) ? 'chosen' : nil}
         %p When no issue tracker has been configured, you will be able to leave comments on errors.
       - IssueTracker.subclasses.each do |tracker|
-        %div.tracker_params{:class => (w.object.is_a?(tracker) ? 'chosen ' : '') << tracker::Label}
+        %div.tracker_params{:class => (w.object.is_a?(tracker) ? 'chosen ' : '') << tracker.label}
+          - if defined?(tracker::Note)
+            %p= tracker::Note.html_safe
           - tracker::Fields.each do |field, field_info|
             = w.label field, field_info[:label] || field.to_s.titleize
-            = w.text_field field, :placeholder => field_info[:placeholder]
+            - field_type = field == :password ? :password_field : :text_field
+            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field)
 
       .image_preloader
-        - (IssueTracker.subclasses.map{|t| t::Label } << 'none').each do |tracker|
+        - (IssueTracker.subclasses.map{|t| t.label } << 'none').each do |tracker|
           = image_tag "#{tracker}_inactive.png"
           = image_tag "#{tracker}_create.png"
 

@@ -1,6 +1,11 @@
 - content_for :title, 'Sign in'
 - auth_key = Devise.authentication_keys.first
 
+- if Errbit::Config.github_authentication
+  - content_for :action_bar do
+    %div.action-bar
+      %span.github= link_to "Sign in with GitHub", user_omniauth_authorize_path(:github)
+
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .required
     = f.label auth_key

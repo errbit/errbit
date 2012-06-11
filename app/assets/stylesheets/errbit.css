@@ -35,7 +35,7 @@ a:visited { color: #0069cc;}
 a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
 
-#header > div, #nav-bar, #content-wrapper, #footer {
+#header > div, #content-wrapper, #footer {
   width: 930px;
   margin: 0 auto;
   position: relative;
@@ -162,11 +162,17 @@ a.action  { float: right; font-size: 0.9em;}
 
 /* Content Title and Comments */
 #content-title, #content-comments {
-  padding: 30px 20px;
+  padding: 30px 24px;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #FFF;
-  background-color: #ececec;
+  background-color: #f2f2f2;
 }
+
+/* Make err title bar bigger to fit more buttons */
+#content-title.err_show {
+  padding: 43px 24px 37px;
+}
+
 #content-comments {
   background-color: #ffffff;
 }
@@ -188,11 +194,13 @@ a.action  { float: right; font-size: 0.9em;}
 /* Action Bar */
 #action-bar {
   position: absolute;
-  top: 25px; right: 20px;
+  text-align: right;
+  top: 22px; right: 24px;
 }
 #action-bar span {
   display: inline-block;
   margin-left: 18px;
+  margin-bottom: 16px;
   text-decoration: none;
   color: #666;
   background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
@@ -220,10 +228,12 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 #action-bar .calendar_link {
-  background: url(/images/ical.png) no-repeat scroll 11px 4px transparent;
+  background: url(images/icons/ical.png) no-repeat scroll 12px 6px transparent;
   padding-left: 47px;
 }
 
+#action-bar span.github a { background: url(images/icons/github.png) no-repeat 6px 5px; }
+#action-bar span.unlink_github a { background: url(images/icons/unlink_github.png) no-repeat 6px 5px; }
 
 /* Content */
 #content {
@@ -574,9 +584,18 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover {
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
-table.apps td.name, table.errs td.message {
-  width: 100%;
+table.apps td.name, table.errs td.message { width: 100%; }
+table.apps td { padding: 16px 25px; }
+table.apps th { padding: 10px 25px; }
+
+table.apps td.issue_tracker, table.apps td.count, table.apps td.deploy {
+  text-align: center;
 }
+table.apps td.issue_tracker, table.apps td.count {
+  padding: 10px 8px;
+}
+table.apps td.issue_tracker img { vertical-align: top; }
+
 td.message .line {
   display:inline-block;
   margin-left:1em;
@@ -656,10 +675,11 @@ table.tally tbody tr:first-child th {
   padding-top:0;
 }
 table.tally td.percent {
-  width:4.5em;
+  padding-right: 10px;
 }
 table.tally th.value {
-  text-transform:none;
+  width: 100%;
+  text-transform: none;
 }
 
 /* Deploys table */
@@ -670,6 +690,11 @@ table.deploys td.when {
 /* Resolve Errs */
 #action-bar a.resolve {
   background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
+}
+
+/* Go Up */
+#action-bar a.up {
+  background: transparent url(images/icons/up.png) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */
@@ -736,26 +761,47 @@ table.backtrace td.line {
   vertical-align: top;
   white-space: nowrap;
 }
-
 table.backtrace td.line .file {
-  color: #ededed;
-  font-weight:bold;
+  font-weight: bold;
 }
-table.backtrace td.line .file a {
-  color: #21A4FF;
-}
-
 table.backtrace td.line .method {
   color: #aaa;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 table.backtrace td.line.in-app {
   color: #2adb2e;
   background-color: #2f2f2f;
 }
-table.backtrace td.line.in-app .file   { color: #2AEB2E; }
+table.backtrace td.line.in-app .path,
+table.backtrace td.line.in-app .number { color: #2ACB2E; }
+table.backtrace td.line.in-app .file   { color: #3AFB3E; }
 table.backtrace td.line.in-app .method { color: #2ACB2E; }
+
+table.backtrace td.line.in-app a .path,
+table.backtrace td.line.in-app a .number,
+table.backtrace td.line.in-app a:hover { color: #21B4FF; }
+table.backtrace td.line.in-app a .file { color: #31C4FF; }
+
+/* External backtrace classes and separators */
+table.backtrace tr.hidden_external_backtrace {
+  display: none;
+}
+table.backtrace td.backtrace_separator span {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0px 11px 5px;
+  margin: 4px 0;
+  background-color: #444444;
+  border: 1px solid #555555;
+}
+table.backtrace td.backtrace_separator span:hover {
+  background-color: #666666;
+  border: 1px solid #777777;
+}
+
 
 
 /* Extra empty rows at top and bottom of table */
@@ -806,13 +852,13 @@ table.errs tr td.message .inline_comment {
   display: inline-block;
   padding: 3px 7px;
   margin: 6px 0;
-  background-color: #E8F4FF;
+  background-color: #DAE5FF;
   border: 1px solid #E2E2E2;
   text-shadow: 0 1px 0 #FAFAFA;
   font-style: normal;
 }
 table.errs tr:hover td.message .inline_comment {
-  background-color: #E2EFFB;
+  background-color: #D5E0FA;
   border-color: #DBDBDB;
   text-shadow: 0 1px 0 #FFFFFF;
 }

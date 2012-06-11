@@ -13,16 +13,23 @@ class IssueTrackers::PivotalLabsTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by = nil)
     PivotalTracker::Client.token = api_token
     PivotalTracker::Client.use_ssl = true
     project = PivotalTracker::Project.find project_id.to_i
     story = project.stories.create :name => issue_title(problem), :story_type => 'bug', :description => body_template.result(binding)
-    problem.update_attribute :issue_link, "https://www.pivotaltracker.com/story/show/#{story.id}"
+    problem.update_attributes(
+      :issue_link => "https://www.pivotaltracker.com/story/show/#{story.id}",
+      :issue_type => Label
+    )
   end
 
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/pivotal_body.txt.erb"))
+  end
+
+  def url
+    "https://www.pivotaltracker.com/"
   end
 end
 

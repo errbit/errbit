@@ -3,6 +3,9 @@
     %tr
       %th Message
       %td.main.nowrap= message_graph(problem)
+    %tr
+      %th Error Class
+      %td= notice.error_class
     - if notice.request['url'].present?
       %tr
         %th URL
@@ -12,7 +15,7 @@
       %td= notice.where
     %tr
       %th Occurred
-      %td= notice.created_at.to_s(:micro)
+      %td= notice.created_at.to_s(:precise)
     %tr
       %th Similar
       %td= problem.notices_count - 1

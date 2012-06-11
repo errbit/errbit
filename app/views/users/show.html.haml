@@ -1,8 +1,10 @@
 - content_for :title, @user.name
 - content_for :action_bar do
+  = render 'shared/link_github_account', :user => @user
   %span= link_to('Add a New User', new_user_path, :class => 'add')
   = link_to 'edit', edit_user_path(@user), :class => 'button'
   = link_to 'destroy', user_path(@user), :method => :delete, :confirm => 'Seriously?', :class => 'button'
+
 
 %table.single_user
   %tr
@@ -12,9 +14,10 @@
     %tr
       %th Username
       %td.main= @user.username
-  %tr
-    %th Token
-    %td= @user.authentication_token
+  - if Errbit::Config.github_authentication && @user.github_login.present?
+    %tr
+      %th GitHub Login
+      %td.main= link_to @user.github_login, "https://github.com/#{@user.github_login}"
   %tr
     %th Admin?
     %td= @user.admin? ? 'Y' : 'N'
