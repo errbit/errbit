@@ -98,7 +98,7 @@ class Notice
     # If gems are vendored into project, treat vendored gem dir as [GEM_ROOT]
     (read_attribute(:backtrace) || []).map do |line|
       # Changes "[PROJECT_ROOT]/rubygems/ruby/1.9.1/gems" to "[GEM_ROOT]/gems"
-      line.merge 'file' => line['file'].gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
+      line.merge 'file' => line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
     end
   end
 
