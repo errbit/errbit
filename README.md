@@ -163,11 +163,29 @@ heroku run rake db:seed
 
   * If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
 
+  * With the heroku-scheduler add-on (replacement for cron):
+
+```bash
+# Install the heroku scheduler add-on
+heroku addons:add scheduler:standard
+
+# Go open the dashboard to schedule the job.  You should use
+# 'rake errbit:db:clear_resolved' as the task command, and schedule it
+# at whatever frequency you like (once/day should work great).
+heroku addons:open scheduler
+
+```
+
+  * With the cron add-on:
+
 ```bash
 # Install the heroku cron addon, to clear resolved errors daily:
 heroku addons:add cron:daily
+```
 
-# Or, clear resolved errors manually:
+  * Or clear resolved errors manually:
+
+```bash
 heroku rake errbit:db:clear_resolved
 ```
 
