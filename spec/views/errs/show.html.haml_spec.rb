@@ -13,6 +13,12 @@ describe "errs/show.html.haml" do
     controller.stub(:current_user) { Fabricate(:user) }
   end
 
+  def with_issue_tracker(tracker, problem)
+    problem.app.issue_tracker = tracker.new :api_token => "token token token", :project_id => "1234"
+    assign :problem, problem
+    assign :app, problem.app
+  end
+
   describe "content_for :action_bar" do
     def action_bar
       view.content_for(:action_bar)
@@ -68,6 +74,16 @@ describe "errs/show.html.haml" do
 
         action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
       end
+
+      it 'should allow creating issue for github if application has a github tracker' do
+        problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
+        with_issue_tracker(GithubIssuesTracker, problem)
+        assign :problem, problem
+        assign :app, problem.app
+        render
+
+        action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
+      end
     end
   end
 
@@ -87,15 +103,9 @@ describe "errs/show.html.haml" do
     end
 
     context "with issue tracker" do
-      def with_issue_tracker(problem)
-        problem.app.issue_tracker = PivotalLabsTracker.new :api_token => "token token token", :project_id => "1234"
-        assign :problem, problem
-        assign :app, problem.app
-      end
-
       it 'should not display the comments section' do
         problem = Fabricate(:problem)
-        with_issue_tracker(problem)
+        with_issue_tracker(PivotalLabsTracker, problem)
         render
         view.view_flow.get(:comments).should be_blank
       end
@@ -103,7 +113,7 @@ describe "errs/show.html.haml" do
       it 'should display existing comments' do
         problem = Fabricate(:problem_with_comments)
         problem.reload
-        with_issue_tracker(problem)
+        with_issue_tracker(PivotalLabsTracker, problem)
         render
 
         view.content_for(:comments).should include('Test comment')
