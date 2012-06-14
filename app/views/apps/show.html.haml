@@ -32,10 +32,14 @@
       %thead
         %tr
           %th User or Email
+          %th
       %tbody
         - @app.watchers.each do |watcher|
           %tr
-            %td= watcher.label
+            %td
+              = watcher.label
+            %td
+              = link_to 'unsubscribe',  app_watcher_path({:app_id => @app, :id => watcher.id}), :method => :delete, :class => 'button', :confirm => 'Are you sure?'
         - if @app.watchers.none?
           %tr
             %td

@@ -36,8 +36,8 @@ Errbit::Application.routes.draw do
         delete :unlink_issue
       end
     end
-
     resources :deploys, :only => [:index]
+    resources :watchers, :only => [:destroy]
   end
 
   root :to => 'apps#index'
