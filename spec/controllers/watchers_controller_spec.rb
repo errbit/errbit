@@ -10,7 +10,7 @@ describe WatchersController do
       sign_in Fabricate(:admin)
     end
 
-    context "successful comment deletion" do
+    context "successful watcher deletion" do
       let(:problem) { Fabricate(:problem_with_comments) }
       let(:watcher) { app.watchers.first }
 
