@@ -41,7 +41,7 @@ describe "errs/show.html.haml" do
       Errbit::Config.stub(:confirm_resolve_err).and_return(false)
       render
 
-      action_bar.should_not have_selector('a.resolve[data-confirm]')
+      action_bar.should have_selector('a.resolve[data-confirm="null"]')
     end
 
     it "should link 'up' to HTTP_REFERER if is set" do
