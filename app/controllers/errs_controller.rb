@@ -46,7 +46,7 @@ class ErrsController < ApplicationController
       else
         @tracker = GithubIssuesTracker.new(
           :app         => @app,
-          :login       => current_user.github_login,
+          :username    => current_user.github_login,
           :oauth_token => current_user.github_oauth_token
         )
       end
