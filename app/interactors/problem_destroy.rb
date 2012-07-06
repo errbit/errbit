@@ -12,6 +12,20 @@ class ProblemDestroy
     problem.delete
   end
 
+  ##
+  # Destroy all problem pass in args
+  #
+  # @params [ Array[Problem] ] problems the list of problem need to be delete
+  #   can be a single Problem
+  # @return [ Integer ]
+  #   the number of problem destroy
+  #
+  def self.execute(problems)
+    Array(problems).each{ |problem|
+      ProblemDestroy.new(problem).execute
+    }.count
+  end
+
   private
 
   def errs_id
