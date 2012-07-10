@@ -55,10 +55,10 @@ if defined? RedmineClient
       @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/textile_body.txt.erb"))
     end
 
-    def url
-      acc_url = account.start_with?('http') ? account : "http://#{account}"
-      URI.parse("#{acc_url}?project_id=#{project_id}").to_s
-    rescue URI::InvalidURIError
-    end
+  def url
+    acc_url = account.start_with?('http') ? account : "http://#{account}"
+    acc_url = "#{acc_url}/" unless acc_url.ends_with?('/')
+    URI.parse("#{acc_url}projects/#{project_id}").to_s
+  rescue URI::InvalidURIError
   end
 end
