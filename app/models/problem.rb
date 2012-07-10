@@ -119,7 +119,7 @@ class Problem
       end
       collection.update({'_id' => self.id},
                         {'$set' => {'app_name' => self.app_name,
-                          'last_deploy_at' => self.last_deploy_at}})
+                          'last_deploy_at' => self.last_deploy_at.try(:utc)}})
     end
   end
 
