@@ -28,7 +28,7 @@ gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari'
 gem 'rack-ssl-enforcer'
-gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
+gem 'fabrication', "~> 2.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
 
 platform :ruby do
