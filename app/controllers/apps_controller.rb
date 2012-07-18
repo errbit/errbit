@@ -1,9 +1,13 @@
 class AppsController < InheritedResources::Base
+  skip_before_filter :authenticate_user!, :only => [:show]
+  before_filter :authenticate_user_unless_atom!, :only => [:show]
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
   respond_to :html
 
   def show
+    @app = App.find_by_api_key!(params[:api_key]) unless user_signed_in?
+
     respond_to do |format|
       format.html do
         @all_errs = !!params[:all_errs]
@@ -104,6 +108,10 @@ class AppsController < InheritedResources::Base
           flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
         end
       end
+    end
+
+    def authenticate_user_unless_atom!
+      authenticate_user! unless request.format == 'atom'
     end
 end
 
