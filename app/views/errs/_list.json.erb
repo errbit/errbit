@@ -1,0 +1,1 @@
+<%= @problems.collect{ |problem| %Q({"title": "[#{problem.where}] #{problem.message.to_s.gsub(/["\n\r]/, " ").truncate(50)}", "env": "#{problem.environment}", "count": #{problem.notices_count}, "last_occurrence": "#{problem.notices.reverse_ordered.limit(1).first.created_at}"}) }.join(',').html_safe %>

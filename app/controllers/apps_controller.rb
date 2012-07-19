@@ -1,6 +1,6 @@
 class AppsController < InheritedResources::Base
   skip_before_filter :authenticate_user!, :only => [:show]
-  before_filter :authenticate_user_unless_atom!, :only => [:show]
+  before_filter :authenticate_user_unless_json!, :only => [:show]
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
   respond_to :html
@@ -26,6 +26,9 @@ class AppsController < InheritedResources::Base
       end
       format.atom do
         @problems = resource.problems.unresolved.ordered
+      end
+      format.json do
+        @problems = resource.problems.unresolved.only(:where, :message, :environment, :notices_count).ordered
       end
     end
   end
@@ -110,8 +113,8 @@ class AppsController < InheritedResources::Base
       end
     end
 
-    def authenticate_user_unless_atom!
-      authenticate_user! unless request.format == 'atom'
+    def authenticate_user_unless_json!
+      authenticate_user! unless request.format == 'json'
     end
 end
 
