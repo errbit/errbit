@@ -28,7 +28,7 @@ class AppsController < InheritedResources::Base
         @problems = resource.problems.unresolved.ordered
       end
       format.json do
-        @problems = resource.problems.unresolved.only(:where, :message, :environment, :notices_count).ordered
+        @problems = resource.problems.unresolved.ordered
       end
     end
   end

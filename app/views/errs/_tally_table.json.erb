@@ -1,0 +1,3 @@
+[<%= rows.collect { |row|
+  %Q({"percent": "#{number_to_percentage(row[0], :precision => 1)}", "value": "#{row[1].gsub('"', '\"').gsub(/\n/, '\n')}"})
+}.join(', ').html_safe -%>]

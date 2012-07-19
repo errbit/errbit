@@ -1,1 +1,4 @@
-<%= @problems.collect{ |problem| %Q({"title": "[#{problem.where}] #{problem.message.to_s.gsub(/["\n\r]/, " ").truncate(50)}", "env": "#{problem.environment}", "count": #{problem.notices_count}, "last_occurrence": "#{problem.notices.reverse_ordered.limit(1).first.created_at}"}) }.join(',').html_safe %>
+<%= @problems.collect{ |problem|
+  notice = problem.notices.reverse_ordered.limit(1).first
+  %Q({"messages": #{message_graph(problem).html_safe}, "error_class": "#{escape_javascript problem.error_class}", "url": "#{notice.try(:request).try(:[], 'url')}", "env": "#{problem.environment}", "count": #{problem.notices_count}, "last_occurrence": "#{problem.last_notice_at}"})
+}.join(',').html_safe -%>
