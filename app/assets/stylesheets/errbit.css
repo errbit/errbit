@@ -209,7 +209,8 @@ a.action  { float: right; font-size: 0.9em;}
   -webkit-border-radius: 50px;
   border: 1px solid #bbb;
 }
-#action-bar span a {
+#action-bar span a,
+#action-bar span input {
   color: #666;
   display: block;
   padding: 0 20px 0 40px;
@@ -222,6 +223,27 @@ a.action  { float: right; font-size: 0.9em;}
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
+}
+#action-bar form {
+  display: inline-block;
+}
+#action-bar form span {
+  border-radius: 0 50px 50px 0;
+  -moz-border-radius: 0 50px 50px 0;
+  -webkit-border-radius: 0 50px 50px 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+#action-bar input.link-issue {
+  width: 35px;
+  border-radius: 50px 0 0 50px;
+  -moz-border-radius: 50px 0 0 50px;
+  -webkit-border-radius: 50px 0 0 50px;
+}
+#action-bar span input.link-issue {
+  min-width: 120px;
+  margin: 0;
+  text-transform: none;
 }
 #action-bar a.add {
   background-image: url(images/icons/add.png);

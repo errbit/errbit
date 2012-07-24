@@ -49,6 +49,32 @@ class ProblemsController < ApplicationController
     redirect_to app_problem_path(@app, @problem)
   end
 
+  def link_issue
+    # Link an issue from the App's issue tracker
+    if @app.issue_tracker_configured?
+      @tracker = @app.issue_tracker
+
+    # Otherwise, display error about missing tracker configuration.
+    else
+      flash[:error] = "This app has no issue tracker setup."
+    end
+
+    if params[:issue_id].blank?
+      flash[:error] = "Please enter an issue tracker ticket number."
+    end
+
+    if flash[:error].blank? && @tracker
+      begin
+        @tracker.link_issue @problem, params[:issue_id]
+      rescue Exception => ex
+        Rails.logger.error "Error during issue creation: " << ex.message
+        flash[:error] = "There was an error during issue creation: #{ex.message}"
+      end
+    end
+
+    redirect_to app_err_path(@app, @problem)
+  end
+
   def resolve
     @problem.resolve!
     flash[:success] = 'Great news everyone! The err has been resolved.'

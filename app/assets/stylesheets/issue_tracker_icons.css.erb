@@ -8,8 +8,9 @@ div.issue_tracker.nested label.<%= tracker %> {
 div.issue_tracker.nested label.r_on.<%= tracker %> {
   background: url(<%= tracker %>_create.png) no-repeat;
 }
-#action-bar a.<%= tracker %>_create {
-   background: transparent url(<%= tracker %>_create.png) 6px 5px no-repeat;
+#action-bar a.<%= tracker %>_create,
+#action-bar input.<%= tracker %>_link {
+   background: transparent url(/assets/<%= tracker %>_create.png) 6px 5px no-repeat;
 }
 #action-bar a.<%= tracker %>_goto {
   background: transparent url(<%= tracker %>_goto.png) 6px 5px no-repeat;
