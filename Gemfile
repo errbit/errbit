@@ -61,6 +61,9 @@ gem 'rushover'
 gem 'omniauth-github'
 
 
+gem 'aws-s3'
+gem 'heroku-mongo-backup', :git => 'git://github.com/JangoSteve/heroku-mongo-backup.git', :branch => 'more-info'
+
 platform :ruby do
   gem 'mongo', '= 1.6.2'
   gem 'bson', '= 1.6.2'
