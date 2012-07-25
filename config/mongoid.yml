@@ -1,8 +1,33 @@
-# Mongoid Configuration for MongoHQ on Heroku
-# ===========================================
+# Mongoid Configuration
+# =====================
 #
-# Copy this file to config/mongoid.yml,
-# commit it to your repo, then push to heroku.
+# Copy this file to config/mongoid.yml and
+# modify it accordingly. This file will automatically
+# be copied to shared/config on the server when
+# `cap deploy:setup` is ran the first time. Be sure
+# to place production specific settings there
 
+defaults: &defaults
+  host: localhost
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+  #   - host: slave2.local
+  #     port: 27019
+
+development:
+  <<: *defaults
+  database: errbit_development
+
+test:
+  <<: *defaults
+  database: errbit_test
+
+# set these environment variables on your prod server
 production:
-  uri: <%= ENV['MONGOHQ_URL'] %>
+  <<: *defaults
+  host: <%= ENV['MONGOID_HOST'] %>
+  port: <%= ENV['MONGOID_PORT'] %>
+  username: <%= ENV['MONGOID_USERNAME'] %>
+  password: <%= ENV['MONGOID_PASSWORD'] %>
+  database: <%= ENV['MONGOID_DATABASE'] %>
