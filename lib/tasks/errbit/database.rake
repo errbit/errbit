@@ -24,51 +24,26 @@ namespace :errbit do
       puts "=== Cleared #{count} resolved errors from the database." if count > 0
     end
 
-    desc "Regenerate fingerprints"
-    task :regenerate_fingerprints => :environment do
-
-      def normalize_backtrace(backtrace)
-        backtrace[0...3].map do |trace|
-          trace.merge 'method' => trace['method'].to_s.gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
-        end
-      end
-
-      def fingerprint(source)
-        Digest::SHA1.hexdigest(source.to_s)
-      end
-
-      puts "Regenerating Err fingerprints"
-      Err.create_indexes
-      Err.all.each do |err|
-        next if err.notices.count == 0
-        source = {
-          :backtrace => normalize_backtrace(err.notices.first.backtrace).to_s,
-          :error_class => err.error_class,
-          :component => err.component,
-          :action => err.action,
-          :environment => err.environment,
-          :api_key => err.app.api_key
-        }
-        err.update_attributes(:fingerprint => fingerprint(source))
-      end
+    desc "Scrub backtrace and other data from resolved notices."
+    task :scrub_resolved_notices => :environment do
+      count = Problem.resolved.count
+      Problem.resolved.each {|problem| problem.notices.scrub! }
+      puts "=== Scrubbed notices for #{count} resolved errors from the database." if count > 0
     end
 
-    desc "Remove notices in batch"
-    task :notices_delete, [ :problem_id ] => [ :environment ] do
-      BATCH_SIZE = 1000
-      if args[:problem_id]
-        item_count = Problem.find(args[:problem_id]).notices.count
-        removed_count = 0
-        puts "Notices to remove: #{item_count}"
-        while item_count > 0
-          Problem.find(args[:problem_id]).notices.limit(BATCH_SIZE).each do |notice|
-            notice.remove
-            removed_count += 1
-          end
-          item_count -= BATCH_SIZE
-          puts "Removed #{removed_count} notices"
-        end
-      end
+    desc "Scrub backtrace and other data from all but most recent 100 notices for problems with more than 100 notices."
+    task :scrub_extraneous_notices => :environment do
+      count = Problem.unresolved.where(:notices_count.gt => 100).count
+      Problem.unresolved.where(:notices_count.gt => 100).each {|problem|
+        notice_count = problem.notices.count
+        # HACK: Can't just call with #limit scope, because
+        # mongoid doesn't play nicely with #limit, unless
+        # using #to_a at end.
+        # See https://github.com/mongoid/mongoid/issues/1100
+        hundredth = problem.notices.limit(1).skip(notice_count - 100).first
+        problem.notices.where(:created_at.lt => hundredth.created_at).scrub!
+      }
+      puts "=== Scrubbed all but most recent 100 notices for #{count} errors from the database." if count > 0
     end
   end
 end
