@@ -22,7 +22,7 @@ class IssueTracker
   def check_params; true; end
 
   def issue_title(problem)
-    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+    "Error - #{ problem.environment } #{ problem.where }"
   end
 
   # Allows us to set the issue tracker class from a single form.
