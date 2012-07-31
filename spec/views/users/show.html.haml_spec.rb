@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe 'users/show.html.haml' do
   let(:user) do
-    user = stub_model(User, :created_at => Time.now)
+    stub_model(User, :created_at => Time.now)
   end
 
   before do
     Errbit::Config.stub(:github_authentication) { true }
-    controller.stub(:current_user) { Fabricate(:user) }
+    controller.stub(:current_user) { stub_model(User) }
   end
 
   context 'with GitHub authentication' do
@@ -39,9 +39,8 @@ describe 'users/show.html.haml' do
 
     context 'viewing own user page' do
       before do
-        @user = Fabricate(:user)
-        controller.stub!(:current_user).and_return(@user)
-        assign :user, @user
+        controller.stub(:current_user) { user }
+        assign :user, user
       end
 
       it 'shows link github button when no login or token' do
@@ -50,8 +49,9 @@ describe 'users/show.html.haml' do
       end
 
       it 'shows unlink github button when login and token' do
-        @user.github_login = 'test_user'
-        @user.github_oauth_token = 'abcdef'
+        user.github_login = 'test_user'
+        user.github_oauth_token = 'abcdef'
+
         render
         view.content_for(:action_bar).should include('Unlink GitHub account')
       end

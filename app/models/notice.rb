@@ -94,6 +94,14 @@ class Notice
     backtrace.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
   end
 
+  def backtrace
+    # If gems are vendored into project, treat vendored gem dir as [GEM_ROOT]
+    (read_attribute(:backtrace) || []).map do |line|
+      # Changes "[PROJECT_ROOT]/rubygems/ruby/1.9.1/gems" to "[GEM_ROOT]/gems"
+      line.merge 'file' => line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
+    end
+  end
+
   protected
 
   def increase_counter_cache
@@ -121,7 +129,7 @@ class Notice
       send("#{h}=",sanitize_hash(send(h)))
     end
     # Set unknown backtrace files
-    backtrace.each{|line| line['file'] = "[unknown source]" if line['file'].blank? }
+    read_attribute(:backtrace).each{|line| line['file'] = "[unknown source]" if line['file'].blank? }
   end
 
   def sanitize_hash(h)
