@@ -5,6 +5,9 @@ gem 'rails', '3.2.6'
 gem 'nokogiri'
 gem 'mongoid', '~> 2.4.10'
 
+# force SSL
+gem 'rack-ssl', :require => 'rack/ssl'
+
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 

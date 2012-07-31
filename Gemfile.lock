@@ -297,6 +297,7 @@ DEPENDENCIES
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
+  rack-ssl
   rack-ssl-enforcer
   rails (= 3.2.6)
   rails_autolink (~> 1.0.9)
