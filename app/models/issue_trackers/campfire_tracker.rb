@@ -1,7 +1,7 @@
 class IssueTrackers::CampfireTracker < IssueTracker
   Label = "campfire"
   Fields = [
-      [:account, {
+      [:subdomain, {
           :placeholder => "Campfire Subdomain"
       }],
       [:api_token, {
@@ -9,22 +9,22 @@ class IssueTrackers::CampfireTracker < IssueTracker
       }],
       [:project_id, {
           :placeholder => "Room ID",
-          :label       => "Room ID",
+          :label       => "Room ID"
       }],
   ]
 
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
-      errors.add :base, 'You must specify your Campfire subdomain, API token and Room ID'
+      errors.add :base, 'You must specify your Campfire Subdomain, API token and Room ID'
     end
   end
 
   def create_issue(problem, reported_by = nil)
     # build the campfire client
-    campy = Campy::Room.new(:account => account, :token => api_token, :room_id => project_id)
+    campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => project_id)
 
     # post the issue to the campfire room
-    campy.paste issue_title problem
+    campy.paste "[errbit] http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{issue_title problem}"
 
     # update the problem to say where it was sent
     problem.update_attributes(
@@ -34,6 +34,6 @@ class IssueTrackers::CampfireTracker < IssueTracker
   end
 
   def url
-    "http://#{account}.campfirenow.com"
+    "http://#{subdomain}.campfirenow.com"
   end
 end

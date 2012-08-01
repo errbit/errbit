@@ -14,7 +14,7 @@ class IssueTracker
   field :username, :type => String
   field :password, :type => String
   field :ticket_properties, :type => String
-  field :room_id, :type => String
+  field :subdomain, :type => String
 
   validate :check_params
 
