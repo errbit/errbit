@@ -28,7 +28,7 @@ class IssueTrackers::CampfireTracker < IssueTracker
 
     # update the problem to say where it was sent
     problem.update_attributes(
-        :issue_link => "Sent to Campfire",
+        :issue_link => url,
         :issue_type => Label
     )
   end
