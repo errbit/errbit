@@ -6,7 +6,7 @@ class NoticeObserver < Mongoid::Observer
 
     # if the app has the campfire tracker, post into the chat
     if !notice.app.issue_tracker.nil? && notice.app.issue_tracker.is_a?(CampfireTracker)
-      app.issue_tracker.create_issue(notice)
+      notice.app.issue_tracker.create_issue(notice)
     end
 
     Mailer.err_notification(notice).deliver
