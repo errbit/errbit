@@ -34,6 +34,7 @@ gem 'rack-ssl-enforcer'
 gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
 gem 'campy'
+gem 'heroku'
 
 platform :ruby do
   gem 'mongo', '= 1.3.1'

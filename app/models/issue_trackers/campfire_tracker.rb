@@ -24,7 +24,7 @@ class IssueTrackers::CampfireTracker < IssueTracker
     campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => project_id)
 
     # post the issue to the campfire room
-    campy.paste "[errbit] http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{issue_title problem}"
+    campy.speak "[errbit] http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{issue_title problem}"
 
     # update the problem to say where it was sent
     problem.update_attributes(
