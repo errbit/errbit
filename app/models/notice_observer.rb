@@ -5,7 +5,7 @@ class NoticeObserver < Mongoid::Observer
     return unless should_notify? notice
 
     # if the app has the campfire tracker, post into the chat
-    if !notice.app.issue_tracker.nil? && notice.app.issue_tracker.class.name == "IssueTrackers::CampfireTracker"
+    if !notice.app.issue_tracker.nil? && notice.app.issue_tracker.is_a?(CampfireTracker)
       app.issue_tracker.create_issue(notice)
     end
 
@@ -20,5 +20,4 @@ class NoticeObserver < Mongoid::Observer
       (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(notice.problem.notices_count) &&
       app.notification_recipients.any?
   end
-
 end
