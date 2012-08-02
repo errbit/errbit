@@ -9,15 +9,13 @@ describe IssueTrackers::CampfireTracker do
     # stub out campy methods
     campy = mock('CampfireTracker')
     Campy::Room.stub(:new).and_return(campy)
-    campy.stub(:paste) { true }
+    campy.stub(:speak) { true }
 
     # expectations
-    campy.should_receive(:paste).once.with(/errbit|production|foo#bar/).and_return(true)
+    campy.should_receive(:speak).once.with(/errbit|production|foo#bar/).and_return(true)
 
     # create the issue
     tracker.create_issue(notice.problem)
   end
-
-
 end
 

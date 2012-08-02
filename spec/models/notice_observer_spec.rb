@@ -43,4 +43,26 @@ describe NoticeObserver do
       Fabricate(:notice, :err => @err)
     end
   end
+
+  describe "notifications for campfire" do
+
+    before do
+      Errbit::Config.per_app_email_at_notices = true
+      @app = Fabricate(:app_with_watcher, :email_at_notices => [1], :issue_tracker => Fabricate(:campfire_tracker))
+      @err = Fabricate(:err, :problem => Fabricate(:problem, :app => @app, :notices_count => 100))
+    end
+
+    after do
+      Errbit::Config.per_app_email_at_notices = false
+    end
+
+    it "should create a campfire issue" do
+      @err.problem.stub(:notices_count).and_return(1)
+      @app.issue_tracker.stub!(:create_issue).and_return(true)
+      @app.issue_tracker.should_receive(:create_issue)
+
+      Fabricate(:notice, :err => @err)
+    end
+  end
+
 end
