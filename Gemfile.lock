@@ -68,7 +68,6 @@ GEM
       rspec (~> 2.0)
     erubis (2.7.0)
     eventmachine (0.12.10)
-    excon (0.15.5)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fabrication (1.3.2)
@@ -82,14 +81,6 @@ GEM
       libxml-ruby (~> 2.0)
     has_scope (0.5.1)
     hashie (1.2.0)
-    heroku (2.30.1)
-      heroku-api (~> 0.3.1)
-      launchy (>= 0.3.2)
-      netrc (~> 0.7.5)
-      rest-client (~> 1.6.1)
-      rubyzip
-    heroku-api (0.3.2)
-      excon (~> 0.15.5)
     hike (1.2.1)
     hoptoad_notifier (2.4.11)
       activesupport
@@ -137,7 +128,6 @@ GEM
       railties (>= 3.0.0)
     multi_json (1.3.6)
     multipart-post (1.1.5)
-    netrc (0.7.5)
     nokogiri (1.5.0)
     oa-core (0.3.2)
     oauth2 (0.5.2)
@@ -295,7 +285,6 @@ DEPENDENCIES
   execjs
   fabrication (~> 1.3.0)
   haml
-  heroku
   hoptoad_notifier (~> 2.4)
   htmlentities (~> 4.3.0)
   inherited_resources
