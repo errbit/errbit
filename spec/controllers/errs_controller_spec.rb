@@ -188,6 +188,14 @@ describe ErrsController do
           response.body.should_not button_matcher
         end
 
+        it "should not exist for err's app with campfire" do
+          tracker = Fabricate(:campfire_tracker)
+          err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app))
+          get :show, :app_id => err.app.id, :id => err.problem.id
+
+          response.body.should_not button_matcher
+        end
+
         it "should exist for err's app with issue tracker" do
           tracker = Fabricate(:lighthouse_tracker)
           err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app))
