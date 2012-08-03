@@ -41,7 +41,7 @@ namespace :errbit do
     end
 
     errors.each do |error_template|
-      rand(1).times do
+      rand34.times do
 
         error_report = error_template.reverse_merge({
           :error_class => "StandardError",
