@@ -35,7 +35,8 @@ class App
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
     :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
-
+  accepts_nested_attributes_for :notification_service, :allow_destroy => true,
+    :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
   # Processes a new error report.
   #
@@ -139,7 +140,7 @@ class App
         self.send("#{k}=", copy_app.send(k))
       end
       # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
-      %w(watchers issue_tracker).each do |relation|
+      %w(watchers issue_tracker notification_service).each do |relation|
         if obj = copy_app.send(relation)
           self.send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
         end
