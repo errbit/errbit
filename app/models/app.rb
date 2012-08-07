@@ -17,6 +17,8 @@ class App
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
+  embeds_one :notification_service
+
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
