@@ -4,9 +4,9 @@ class NoticeObserver < Mongoid::Observer
   def after_create notice
     return unless should_notify? notice
 
-    # if the app has the campfire tracker, post into the chat
-    if !notice.app.issue_tracker.nil? && notice.app.issue_tracker.is_a?(CampfireTracker)
-      notice.app.issue_tracker.create_issue(notice.problem)
+    # if the app has a notficiation service, fire it off
+    unless notice.app.notification_service.nil?
+      notice.app.notification_service.create_notification(notice.problem)
     end
 
     Mailer.err_notification(notice).deliver
