@@ -90,6 +90,7 @@ class AppsController < InheritedResources::Base
     def plug_params app
       app.watchers.build if app.watchers.none?
       app.issue_tracker = IssueTracker.new unless app.issue_tracker_configured?
+      app.notification_service = NotificationService.new
       app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
     end
 
