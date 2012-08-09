@@ -61,9 +61,22 @@ module ApplicationHelper
     render "errs/tally_table", :rows => rows
   end
 
+  def head(collection)
+    collection.first(head_size) 
+  end
+
+  def tail(collection)
+    collection.to_a[head_size..-1].to_a
+  end
+
   private
     def total_from_tallies(tallies)
       tallies.values.inject(0) {|sum, n| sum + n}
     end
+
+    def head_size
+      4
+    end
+
 end
 
