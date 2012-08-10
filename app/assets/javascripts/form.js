@@ -8,6 +8,9 @@ $(function(){
   if($('div.issue_tracker.nested').length)
     activateTypeSelector('issue_tracker', 'tracker_params');
 
+  if($('div.notification_service.nested').length)
+    activateTypeSelector('notification_service', 'notification_params');
+
   $('body').addClass('has-js');
   $('.label_radio').click(function(){
     activateLabelIcons();
