@@ -124,6 +124,11 @@ class App
     !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.project_id.present?)
   end
 
+  def notification_service_configured?
+    !!(notification_service && notification_service.class < NotificationService && notification_service.api_token.present?)
+  end
+
+
   def notification_recipients
     if notify_all_users
       (User.all.map(&:email).reject(&:blank?) + watchers.map(&:address)).uniq
