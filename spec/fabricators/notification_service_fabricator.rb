@@ -1,12 +1,10 @@
-Fabricator(:notification_service) do
+Fabricator :notification_service  do
+  app!
   room_id { sequence :word }
   api_token { sequence :word }
   subdomain { sequence :word }
 end
 
-Fabricator :campfire_notification_service, :from => :notification_service, :class_name => "NotificationService::CampfireService" do
-  room_id '123456'
-  api_token 'ertj3qh4895oqhfiugs4g74p5w96'
-  subdomain 'waffles'
+%w(campfire).each do |t|
+  Fabricator "#{t}_notification_service".to_sym, :from => :notification_service, :class_name => "NotificationService::#{t.camelcase}Service"
 end
-
