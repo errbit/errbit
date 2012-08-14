@@ -191,7 +191,7 @@ heroku run rake db:seed
   * You may want to enable the deployment hook for heroku :
 
 ```bash
-heroku addons:add deployhooks:http url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
+heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
 ```
 
   * Enjoy!
