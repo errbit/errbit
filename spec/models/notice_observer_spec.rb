@@ -44,7 +44,7 @@ describe NoticeObserver do
   end
 
   describe "should send a notification if a notification service is configured" do
-    let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service)) }
+    let(:app) { app = Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
     let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
 
     before do
@@ -56,11 +56,13 @@ describe NoticeObserver do
     end
 
     it "should create a campfire notification" do
-      pending "not working yet"
-      #err.problem.stub(:notices_count).and_return(1)
-      #app.notification_service.stub!(:create_notification).and_return(true)
-      #app.notification_service.should_receive(:create_notification)
+      err.problem.stub(:notices_count) { 1 }
+      app.notification_service.stub!(:create_notification).and_return(true)
+      app.stub!(:notification_recipients => %w('ryan@system88.com'))
+      app.notification_service.should_receive(:create_notification)
 
+      Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => [{ :error => 'Le Broken' }], :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
     end
   end
 
