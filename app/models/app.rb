@@ -17,6 +17,8 @@ class App
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
+  embeds_one :notification_service
+
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
@@ -33,7 +35,8 @@ class App
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
     :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
-
+  accepts_nested_attributes_for :notification_service, :allow_destroy => true,
+    :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
   # Processes a new error report.
   #
@@ -121,6 +124,11 @@ class App
     !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.project_id.present?)
   end
 
+  def notification_service_configured?
+    !!(notification_service && notification_service.class < NotificationService && notification_service.api_token.present?)
+  end
+
+
   def notification_recipients
     if notify_all_users
       (User.all.map(&:email).reject(&:blank?) + watchers.map(&:address)).uniq
@@ -137,7 +145,7 @@ class App
         self.send("#{k}=", copy_app.send(k))
       end
       # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
-      %w(watchers issue_tracker).each do |relation|
+      %w(watchers issue_tracker notification_service).each do |relation|
         if obj = copy_app.send(relation)
           self.send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
         end

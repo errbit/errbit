@@ -29,12 +29,14 @@ class AppsController < InheritedResources::Base
   def create
     @app = App.new(params[:app])
     initialize_subclassed_issue_tracker
+    initialize_subclassed_notification_service
     create!
   end
 
   def update
     @app = resource
     initialize_subclassed_issue_tracker
+    initialize_subclassed_notification_service
     update!
   end
 
@@ -70,9 +72,19 @@ class AppsController < InheritedResources::Base
     end
 
     def initialize_subclassed_issue_tracker
+      # set the app's issue tracker
       if params[:app][:issue_tracker_attributes] && tracker_type = params[:app][:issue_tracker_attributes][:type]
         if IssueTracker.subclasses.map(&:name).concat(["IssueTracker"]).include?(tracker_type)
           @app.issue_tracker = tracker_type.constantize.new(params[:app][:issue_tracker_attributes])
+        end
+      end
+    end
+
+  def initialize_subclassed_notification_service
+      # set the app's notification service
+      if params[:app][:notification_service_attributes] && notification_type = params[:app][:notification_service_attributes][:type]
+        if NotificationService.subclasses.map(&:name).concat(["NotificationService"]).include?(notification_type)
+          @app.notification_service = notification_type.constantize.new(params[:app][:notification_service_attributes])
         end
       end
     end
@@ -90,6 +102,7 @@ class AppsController < InheritedResources::Base
     def plug_params app
       app.watchers.build if app.watchers.none?
       app.issue_tracker = IssueTracker.new unless app.issue_tracker_configured?
+      app.notification_service = NotificationService.new unless app.notification_service_configured?
       app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
     end
 

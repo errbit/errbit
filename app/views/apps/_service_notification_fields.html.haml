@@ -1,0 +1,25 @@
+%fieldset
+  %legend Notification Service
+  = f.fields_for :notification_service do |w|
+    %div.notification_service.nested
+      %div.choose
+        = label_tag :type_none, :for => label_for_attr(w, 'type_notificationservice'), :class => "label_radio none" do
+          = w.radio_button :type, "NotificationService", 'data-section' => 'none'
+          (None)
+        - NotificationService.subclasses.each do |notification_service|
+          = label_tag "type_#{notification_service.label}:", :for => label_for_attr(w, "type_#{notification_service.name.downcase.gsub(':','')}"), :class => "label_radio #{notification_service.label}" do
+            = w.radio_button :type, notification_service.name, 'data-section' => notification_service.label
+            = notification_service.name[/::(.*)Service/,1].titleize
+
+      %div.notification_params.none{:class => (w.object && !(w.object.class < NotificationService)) ? 'chosen' : nil}
+      - NotificationService.subclasses.each do |notification_service|
+        %div.notification_params{:class => (w.object.is_a?(notification_service) ? 'chosen ' : '') << notification_service.label}
+          - notification_service::Fields.each do |field, field_info|
+            = w.label field, field_info[:label] || field.to_s.titleize
+            - field_type = field == :password ? :password_field : :text_field
+            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field)
+
+      .image_preloader
+        - (NotificationService.subclasses.map{|t| t.label } << 'none').each do |notification_service|
+          = image_tag "#{notification_service}_inactive.png"
+          = image_tag "#{notification_service}_create.png"
