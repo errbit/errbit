@@ -114,8 +114,8 @@ class ErrsController < ApplicationController
   end
 
   def destroy_several
-    @selected_problems.each(&:destroy)
-    flash[:notice] = "#{pluralize(@selected_problems.count, 'err has', 'errs have')} been deleted."
+    nb_problem_destroy = ProblemDestroy.execute(@selected_problems)
+    flash[:notice] = "#{pluralize(nb_problem_destroy, 'err has', 'errs have')} been deleted."
     redirect_to :back
   end
 
