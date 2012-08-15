@@ -40,8 +40,12 @@ namespace :errbit do
         # mongoid doesn't play nicely with #limit, unless
         # using #to_a at end.
         # See https://github.com/mongoid/mongoid/issues/1100
-        hundredth = problem.notices.limit(1).skip(notice_count - 100).first
-        problem.notices.where(:created_at.lt => hundredth.created_at).scrub!
+        if notice_count > 100 # sometimes cached :notices_count isn't accurate
+          hundredth = problem.notices.limit(1).skip(notice_count - 100).first
+          problem.notices.where(:created_at.lt => hundredth.created_at).scrub!
+        else
+          count -= 1
+        end
       }
       puts "=== Scrubbed all but most recent 100 notices for #{count} errors from the database." if count > 0
     end
