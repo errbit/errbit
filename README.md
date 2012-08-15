@@ -144,10 +144,10 @@ git clone http://github.com/errbit/errbit.git
 ```bash
 gem install heroku
 heroku create example-errbit --stack cedar
-heroku addons:add mongohq:free
-cp -f config/mongoid.mongohq.yml config/mongoid.yml
+heroku addons:add mongolab:starter
+cp -f config/mongoid.mongolab.yml config/mongoid.yml
 git add -f config/mongoid.yml
-git commit -m "Added mongoid config for MongoHQ"
+git commit -m "Added mongoid config for Mongolab"
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add ERRBIT_HOST=some-hostname.example.com
