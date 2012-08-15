@@ -26,4 +26,8 @@ test:
 # set these environment variables on your prod server
 production:
   <<: *defaults
-  uri: <%= ENV['MONGOLAB_URI'] %>
+  host: <%= ENV['MONGOLAB_HOST'] %>
+  port: <%= ENV['MONGOLAB_PORT'] %>
+  username: <%= ENV['MONGOLAB_USERNAME'] %>
+  password: <%= ENV['MONGOLAB_PASSWORD'] %>
+  database: <%= ENV['MONGOLAB_DATABASE'] %>
