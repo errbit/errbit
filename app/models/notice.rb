@@ -107,7 +107,7 @@ class Notice
   end
 
   def self.scrub!
-    scoped.update_all(:backtrace => [], :request => {}, :notifier => {})
+    scoped.update_all(:backtrace => [{'number' => 0, 'file' => '[scrubbed]', 'method' => '[scrubbed]'}], :request => {'component' => '[scrubbed]'}, :notifier => {'name' => '[scrubbed]'})
   end
 
   protected
