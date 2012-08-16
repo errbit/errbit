@@ -1,4 +1,4 @@
-if mongo = ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI']
+if mongo = ENV['MONGOLAB_URI'] || ENV['MONGOHQ_URL']
   settings = URI.parse(mongo)
   database_name = settings.path.gsub(/^\//, '')
 
