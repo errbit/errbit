@@ -87,6 +87,15 @@ describe Problem do
       problem.should be_resolved
     end
 
+    it "should record the time when it was resolved" do
+      problem = Fabricate(:problem)
+      expected_resolved_at = Time.now
+      Timecop.freeze(expected_resolved_at) do
+        problem.resolve!
+      end
+      problem.resolved_at.to_s.should == expected_resolved_at.to_s
+    end
+
     it "should throw an err if it's not successful" do
       problem = Fabricate(:problem)
       problem.should_not be_resolved

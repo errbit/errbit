@@ -9,6 +9,7 @@ class Problem
   field :last_notice_at, :type => DateTime
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
+  field :resolved_at, :type => Time
   field :issue_link, :type => String
   field :issue_type, :type => String
 
@@ -52,7 +53,7 @@ class Problem
   end
 
   def resolve!
-    self.update_attributes!(:resolved => true, :notices_count => 0)
+    self.update_attributes!(:resolved => true, :resolved_at => Time.now, :notices_count => 0)
   end
 
   def unresolve!

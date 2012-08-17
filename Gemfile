@@ -58,6 +58,7 @@ group :test do
   gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
+  gem 'timecop'
 end
 
 group :heroku do
