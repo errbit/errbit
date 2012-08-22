@@ -17,16 +17,25 @@ describe NoticesController do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
       request.should_receive(:raw_post).and_return(@xml)
       post :create
+      response.should be_success
+      # Same RegExp from Airbrake::UserInformer#replacement (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/user_informer.rb#L8)
+      # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
+      response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
     end
 
     it "generates a notice from xml [GET]" do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
       get :create, {:data => @xml}
+      response.should be_success
+      response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
     end
 
     it "sends a notification email" do
+      App.should_receive(:report_error!).with(@xml).and_return(@notice)
       request.should_receive(:raw_post).and_return(@xml)
       post :create
+      response.should be_success
+      response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)
       email.subject.should include(@notice.message)
