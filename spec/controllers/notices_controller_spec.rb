@@ -21,7 +21,7 @@ describe NoticesController do
       request.should_receive(:raw_post).and_return(@xml)
       post :create
       response.should be_success
-      # Same RegExp from Airbrake::UserInformer#replacement (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/user_informer.rb#L8)
+      # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
       # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
       response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
     end
