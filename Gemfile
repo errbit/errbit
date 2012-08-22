@@ -32,9 +32,9 @@ gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
 
 platform :ruby do
-  gem 'mongo', '= 1.3.1'
-  gem 'bson', '= 1.3.1'
-  gem 'bson_ext', '= 1.3.1'
+  gem 'mongo', '= 1.6.2'
+  gem 'bson', '= 1.6.2'
+  gem 'bson_ext', '= 1.6.2'
 end
 
 gem 'ri_cal'
@@ -47,7 +47,8 @@ group :development, :test do
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
   end
-  # gem 'rpm_contrib', :git => "git://github.com/bensymonds/rpm_contrib.git", :branch => "mongo-1.4.0_update"
+#  gem 'rpm_contrib'
+#  gem 'newrelic_rpm'
 end
 
 group :test do
