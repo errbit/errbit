@@ -7,6 +7,7 @@ class Problem
   include Mongoid::Timestamps
 
   field :last_notice_at, :type => DateTime
+  field :first_notice_at, :type => DateTime
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :resolved_at, :type => Time
@@ -29,6 +30,7 @@ class Problem
   index :app_name
   index :message
   index :last_notice_at
+  index :first_notice_at
   index :last_deploy_at
   index :notices_count
 
@@ -126,7 +128,7 @@ class Problem
 
   def cache_notice_attributes(notice=nil)
     notice ||= notices.first
-    attrs = {:last_notice_at => notices.order_by([:created_at, :asc]).last.try(:created_at)}
+    attrs = {:last_notice_at => notices.order_by([:created_at, :asc]).last.try(:created_at), :first_notice_at => notices.order_by([:created_at, :asc]).first.try(:created_at)}
     attrs.merge!(
       :message => notice.message,
       :environment => notice.environment_name,
