@@ -1,6 +1,5 @@
 require 'hoptoad'
 require 'recurse'
-require 'builder'
 
 class Notice
   include Mongoid::Document
