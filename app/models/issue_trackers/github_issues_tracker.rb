@@ -21,7 +21,7 @@ class IssueTrackers::GithubIssuesTracker < IssueTracker
 
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
-      errors.add :base, 'You must specify your GitHub repository, username and password'
+      errors.add :base, 'You must specify your GitHub username and password'
     end
   end
 

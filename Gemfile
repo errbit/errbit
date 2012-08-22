@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.0'
+gem 'rails', '3.2.6'
 
 gem 'nokogiri'
 gem 'mongoid', '~> 2.4.10'
@@ -45,7 +45,7 @@ group :development, :test do
   gem 'webmock', :require => false
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
-    gem (RUBY_VERSION == "1.9.2" ? 'ruby-debug19' : 'debugger'), :platform => :mri_19
+    gem 'debugger', :platform => :mri_19
   end
   # gem 'rpm_contrib', :git => "git://github.com/bensymonds/rpm_contrib.git", :branch => "mongo-1.4.0_update"
 end

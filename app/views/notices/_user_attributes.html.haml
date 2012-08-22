@@ -6,4 +6,4 @@
     - user.each do |user_key, user_value|
       %tr
         %th= user_key
-        %td= auto_link(user_value).html_safe
+        %td= auto_link(user_value.to_s).html_safe

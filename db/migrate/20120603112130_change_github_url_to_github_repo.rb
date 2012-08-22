@@ -3,7 +3,7 @@ class ChangeGithubUrlToGithubRepo < Mongoid::Migration
     App.collection.update({}, {'$rename' => {'github_url' => 'github_repo'}}, multi: true, safe: true)
     App.all.each do |app|
       app.send :normalize_github_repo
-      app.save!
+      app.save
     end
   end
 
