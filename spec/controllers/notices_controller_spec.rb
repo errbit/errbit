@@ -21,6 +21,7 @@ describe NoticesController do
       # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
       # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
       response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
+      response.body.should match(%r{<url[^>]*>(.+)#{locate_path(@notice.id)}</url>})
     end
 
     it "generates a notice from xml [GET]" do
@@ -28,6 +29,7 @@ describe NoticesController do
       get :create, :data => @xml, :format => :xml
       response.should be_success
       response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
+      response.body.should match(%r{<url[^>]*>(.+)#{locate_path(@notice.id)}</url>})
     end
 
     it "sends a notification email" do
@@ -36,6 +38,7 @@ describe NoticesController do
       post :create, :format => :xml
       response.should be_success
       response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
+      response.body.should match(%r{<url[^>]*>(.+)#{locate_path(@notice.id)}</url>})
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)
       email.subject.should include(@notice.message)
