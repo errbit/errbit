@@ -11,15 +11,12 @@ describe NoticesController do
       @app = Fabricate(:app_with_watcher)
       App.stub(:find_by_api_key!).and_return(@app)
       @notice = App.report_error!(@xml)
-
-      request.env['Content-type'] = 'text/xml'
-      request.env['Accept'] = 'text/xml, application/xml'
     end
 
     it "generates a notice from xml [POST]" do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
       request.should_receive(:raw_post).and_return(@xml)
-      post :create
+      post :create, :format => :xml
       response.should be_success
       # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
       # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
@@ -28,7 +25,7 @@ describe NoticesController do
 
     it "generates a notice from xml [GET]" do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
-      get :create, {:data => @xml}
+      get :create, :data => @xml, :format => :xml
       response.should be_success
       response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
     end
@@ -36,7 +33,7 @@ describe NoticesController do
     it "sends a notification email" do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
       request.should_receive(:raw_post).and_return(@xml)
-      post :create
+      post :create, :format => :xml
       response.should be_success
       response.body.should match(%r{<id[^>]*>#{@notice.id}</id>})
       email = ActionMailer::Base.deliveries.last
