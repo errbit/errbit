@@ -144,10 +144,10 @@ git clone http://github.com/errbit/errbit.git
 ```bash
 gem install heroku
 heroku create example-errbit --stack cedar
-heroku addons:add mongohq:free
-cp -f config/mongoid.mongohq.yml config/mongoid.yml
+heroku addons:add mongolab:starter
+cp -f config/mongoid.mongolab.yml config/mongoid.yml
 git add -f config/mongoid.yml
-git commit -m "Added mongoid config for MongoHQ"
+git commit -m "Added mongoid config for Mongolab"
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add ERRBIT_HOST=some-hostname.example.com
@@ -191,7 +191,7 @@ heroku run rake db:seed
   * You may want to enable the deployment hook for heroku :
 
 ```bash
-heroku addons:add deployhooks:http url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
+heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
 ```
 
   * Enjoy!
@@ -232,6 +232,43 @@ You can change the requested account permissions by setting `github_access_scope
   <tr><th>[] </th><td>No permission to create issues on any repos.</td></tr>
 </table>
 
+
+### GitHub authentication when served on Heroku
+
+You will need to set up Heroku variables accordingly as described in [Configuring GitHub authentication](#configuring-github-authentication):
+
+* GITHUB_AUTHENTICATION
+
+```bash
+heroku config:add GITHUB_AUTHENTICATION=true
+```
+
+* GITHUB_CLIENT_ID
+
+```bash
+heroku config:add GITHUB_CLIENT_ID=the_client_id_provided_by_GitHub
+```
+
+* GITHUB_SECRET
+
+```bash
+heroku config:add GITHUB_SECRET=the_secret_provided_by_GitHub
+```
+
+* GITHUB_ACCESS_SCOPE - set only one scope `repo` or `public_repo`. If you really need to put more than one, separate them with comma.
+
+```bash
+heroku config:add GITHUB_ACCESS_SCOPE=repo,public_repo
+```
+
+__Note__: To avoid restarting your Heroku app 4 times you can set Heroku variables in a single command, i.e:
+
+```bash
+heroku config:add GITHUB_AUTHENTICATION=true \
+GITHUB_CLIENT_ID=the_client_id_provided_by_GitHub \
+GITHUB_SECRET=the_secret_provided_by_GitHub \
+GITHUB_ACCESS_SCOPE=repo,public_repo
+```
 
 ### Configuring LDAP authentication:
 
