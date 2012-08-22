@@ -6,5 +6,11 @@ class NoticesController < ApplicationController
     @notice = App.report_error!(params[:data] || request.raw_post)
     render :xml => @notice
   end
+
+  # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
+  def locate
+    problem = Notice.find(params[:id]).problem
+    redirect_to app_err_path(problem.app, problem)
+  end
 end
 

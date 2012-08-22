@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe NoticesController do
+  it_requires_authentication :for => { :locate => :get }
+
+  let(:app) { Fabricate(:app) }
 
   context 'notices API' do
     before do
@@ -41,6 +44,22 @@ describe NoticesController do
       email.subject.should include(@notice.message)
       email.subject.should include("[#{@app.name}]")
       email.subject.should include("[#{@notice.environment_name}]")
+    end
+  end
+
+  describe "GET /locate/:id" do
+    context 'when logged in as an admin' do
+      before(:each) do
+        @user = Fabricate(:admin)
+        sign_in @user
+      end
+
+      it "should locate notice and redirect to problem" do
+        problem = Fabricate(:problem, :app => app, :environment => "production")
+        notice = Fabricate(:notice, :err => Fabricate(:err, :problem => problem))
+        get :locate, :id => notice.id
+        response.should redirect_to(app_err_path(problem.app, problem))
+      end
     end
   end
 
