@@ -40,6 +40,22 @@ describe Problem do
     end
   end
 
+  context '#first_notice_at' do
+    it "returns the created_at timestamp of the first notice" do
+      err = Fabricate(:err)
+      problem = err.problem
+      problem.should_not be_nil
+
+      problem.first_notice_at.should be_nil
+
+      notice1 = Fabricate(:notice, :err => err)
+      problem.first_notice_at.should == notice1.created_at
+
+      notice2 = Fabricate(:notice, :err => err)
+      problem.first_notice_at.should == notice1.created_at
+    end
+  end
+
 
   context '#message' do
     it "adding a notice caches its message" do
