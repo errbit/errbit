@@ -32,6 +32,7 @@ class Problem
   index :last_notice_at
   index :first_notice_at
   index :last_deploy_at
+  index :resolved_at
   index :notices_count
 
   belongs_to :app
@@ -105,6 +106,10 @@ class Problem
     when "count";          order_by(["notices_count", order])
     else raise("\"#{sort}\" is not a recognized sort")
     end
+  end
+  
+  def self.in_date_range(date_range)
+    where(:first_notice_at.lte => date_range.end).where("$or" => [{:resolved_at => nil}, {:resolved_at.gte => date_range.begin}])
   end
 
 

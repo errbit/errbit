@@ -38,6 +38,7 @@ platform :ruby do
 end
 
 gem 'ri_cal'
+gem 'rabl'
 gem 'yajl-ruby'
 
 group :development, :test do
@@ -46,6 +47,7 @@ group :development, :test do
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
+    gem 'pry'
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'

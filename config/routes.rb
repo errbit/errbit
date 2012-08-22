@@ -41,6 +41,12 @@ Errbit::Application.routes.draw do
     resources :deploys, :only => [:index]
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :problems, :only => [:index]
+    end
+  end 
+
   root :to => 'apps#index'
 
 end
