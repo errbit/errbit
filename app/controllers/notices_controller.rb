@@ -4,7 +4,7 @@ class NoticesController < ApplicationController
   def create
     # params[:data] if the notice came from a GET request, raw_post if it came via POST
     @notice = App.report_error!(params[:data] || request.raw_post)
-    render :xml => @notice
+    render :xml => @notice.to_xml(:only => false, :methods => [:id])
   end
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.

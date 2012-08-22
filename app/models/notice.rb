@@ -36,15 +36,6 @@ class Notice
 
   delegate :app, :problem, :to => :err
 
-  def to_xml(options = {})
-    options[:indent] ||= 2
-    xml = options[:builder] ||= ::Builder::XmlMarkup.new(:indent => options[:indent])
-    xml.instruct! unless options[:skip_instruct]
-    xml.notice do
-      xml.id self.id
-    end
-  end
-
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
