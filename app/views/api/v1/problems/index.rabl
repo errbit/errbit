@@ -7,5 +7,6 @@ attributes :app_id,
            :where,
            :first_notice_at,
            :last_notice_at,
+           :resolved,
            :resolved_at,
            :notice_count
