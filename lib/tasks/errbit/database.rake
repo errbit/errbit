@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 namespace :errbit do
   namespace :db do
     
@@ -21,5 +23,35 @@ namespace :errbit do
       Problem.resolved.each {|problem| problem.destroy }
       puts "=== Cleared #{count} resolved errors from the database." if count > 0
     end
+
+    desc "Regenerate fingerprints"
+    task :regenerate_fingerprints => :environment do
+
+      def normalize_backtrace(backtrace)
+        backtrace[0...3].map do |trace|
+          trace.merge 'method' => trace['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
+        end
+      end
+
+      def fingerprint(source)
+        Digest::SHA1.hexdigest(source.to_s)
+      end
+
+      puts "Regenerating Err fingerprints"
+      Err.create_indexes
+      Err.all.limit(10).each do |err|
+        next if err.notices.count == 0
+        source = {
+          :backtrace => normalize_backtrace(err.notices.first.backtrace).to_s,
+          :error_class => err.error_class,
+          :component => err.component,
+          :action => err.action,
+          :environment => err.environment,
+          :api_key => err.app.api_key
+        }
+        err.update_attributes(:fingerprint => fingerprint(source))
+      end
+    end
+
   end
 end
