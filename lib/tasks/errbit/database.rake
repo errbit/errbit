@@ -39,7 +39,7 @@ namespace :errbit do
 
       puts "Regenerating Err fingerprints"
       Err.create_indexes
-      Err.all.limit(10).each do |err|
+      Err.all.each do |err|
         next if err.notices.count == 0
         source = {
           :backtrace => normalize_backtrace(err.notices.first.backtrace).to_s,
