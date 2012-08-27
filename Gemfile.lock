@@ -193,9 +193,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
       slop (>= 2.4.4, < 3)
-    rabl (0.6.13)
-      activesupport (>= 2.3.14)
-      multi_json (~> 1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -325,7 +322,6 @@ DEPENDENCIES
   oruen_redmine_client
   pivotal-tracker
   pry
-  rabl
   rack-ssl-enforcer
   rails (= 3.2.6)
   rails_autolink (~> 1.0.9)

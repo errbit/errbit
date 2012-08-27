@@ -37,13 +37,13 @@ Errbit::Application.routes.draw do
         delete :unlink_issue
       end
     end
-
+    
     resources :deploys, :only => [:index]
   end
 
   namespace :api do
     namespace :v1 do
-      resources :problems, :only => [:index]
+      resources :problems, :only => [:index], :defaults => { :format => 'json' }
     end
   end 
 

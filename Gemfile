@@ -38,8 +38,7 @@ platform :ruby do
 end
 
 gem 'ri_cal'
-gem 'rabl'
-gem 'yajl-ruby'
+gem 'yajl-ruby', :require => "yajl"
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
