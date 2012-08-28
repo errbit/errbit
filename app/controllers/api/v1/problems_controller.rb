@@ -11,12 +11,12 @@ class Api::V1::ProblemsController < ApplicationController
       query = {:first_notice_at=>{"$lte"=>end_date}, "$or"=>[{:resolved_at=>nil}, {:resolved_at=>{"$gte"=>start_date}}]}
     end
     
-    results = benchmark("[api/v1/problems_controller] query time") { Mongoid.master["problems"].find(query, fields: fields).to_a }
+    results = benchmark("[api/v1/problems_controller] query time") { Mongoid.master["problems"].find(query, :fields => fields).to_a }
     
     respond_to do |format|
-      format.html { render json: Yajl.dump(results) } # render JSON if no extension specified on path
-      format.json { render json: Yajl.dump(results) }
-      format.xml  { render xml:  results }
+      format.html { render :json => Yajl.dump(results) } # render JSON if no extension specified on path
+      format.json { render :json => Yajl.dump(results) }
+      format.xml  { render :xml  => results }
     end
   end
   
