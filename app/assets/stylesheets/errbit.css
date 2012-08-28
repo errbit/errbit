@@ -841,6 +841,9 @@ table.comment tbody th {
   height: 20px;
   line-height: 0.5em;
 }
+table.comment tbody th img {
+  float: right;
+}
 table.comment tbody td {
   background-color: #F9F9F9;
 }

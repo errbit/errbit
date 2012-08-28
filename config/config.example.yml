@@ -39,6 +39,13 @@ user_has_username: false
 # but you want to leave a short comment.
 allow_comments_with_issue_tracker: true
 
+# Enable Gravatar.
+use_gravatar: false
+# Default Gravatar size.
+gravatar_size: 40
+# Default Gravatar image, can be: mm, identicon, monsterid, wavatar, retro.
+gravatar_default: identicon
+
 # Setup your deploy options for capistrano.
 deployment:
   hosts:

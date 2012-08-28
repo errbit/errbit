@@ -13,5 +13,17 @@ module ErrsHelper
       truncate(msg, :length => 300).scan(/.{1,5}/).map { |s| h(s) }.join("&#8203;").html_safe
     end
   end
+
+  def gravatar_tag(email, options = {})
+    default_options = {
+      :s => Errbit::Config.gravatar_size,
+      :d => Errbit::Config.gravatar_default,
+      :alt => email
+    }
+    options.reverse_merge! default_options
+    params = options.extract!(:s, :d).delete_if { |k, v| v.blank? }
+    email_hash = Digest::MD5.hexdigest(email)
+    image_tag "http://www.gravatar.com/avatar/#{email_hash}?#{params.to_query}", options
+  end
 end
 
