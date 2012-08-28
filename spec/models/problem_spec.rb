@@ -40,6 +40,22 @@ describe Problem do
     end
   end
 
+  context '#first_notice_at' do
+    it "returns the created_at timestamp of the first notice" do
+      err = Fabricate(:err)
+      problem = err.problem
+      problem.should_not be_nil
+
+      problem.first_notice_at.should be_nil
+
+      notice1 = Fabricate(:notice, :err => err)
+      problem.first_notice_at.should == notice1.created_at
+
+      notice2 = Fabricate(:notice, :err => err)
+      problem.first_notice_at.should == notice1.created_at
+    end
+  end
+
 
   context '#message' do
     it "adding a notice caches its message" do
@@ -85,6 +101,15 @@ describe Problem do
       problem.should_not be_resolved
       problem.resolve!
       problem.should be_resolved
+    end
+
+    it "should record the time when it was resolved" do
+      problem = Fabricate(:problem)
+      expected_resolved_at = Time.now
+      Timecop.freeze(expected_resolved_at) do
+        problem.resolve!
+      end
+      problem.resolved_at.to_s.should == expected_resolved_at.to_s
     end
 
     it "should throw an err if it's not successful" do

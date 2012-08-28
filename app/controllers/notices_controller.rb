@@ -18,4 +18,3 @@ class NoticesController < ApplicationController
     redirect_to app_err_path(problem.app, problem)
   end
 end
-

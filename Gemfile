@@ -38,7 +38,7 @@ platform :ruby do
 end
 
 gem 'ri_cal'
-gem 'yajl-ruby'
+gem 'yajl-ruby', :require => "yajl"
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
@@ -46,6 +46,7 @@ group :development, :test do
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
+    gem 'pry'
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
@@ -58,6 +59,7 @@ group :test do
   gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
+  gem 'timecop'
 end
 
 group :heroku do
