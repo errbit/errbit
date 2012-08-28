@@ -90,6 +90,7 @@ describe "errs/show.html.haml" do
   describe "content_for :comments with comments disabled for configured issue tracker" do
     before do
       Errbit::Config.stub(:allow_comments_with_issue_tracker).and_return(false)
+      Errbit::Config.stub(:use_gravatar).and_return(true)
     end
 
     it 'should display comments and new comment form when no issue tracker' do
@@ -99,6 +100,7 @@ describe "errs/show.html.haml" do
       render
 
       view.content_for(:comments).should include('Test comment')
+      view.content_for(:comments).should have_selector('img[src^="http://www.gravatar.com/avatar"]')
       view.content_for(:comments).should include('Add a comment')
     end
 
@@ -117,6 +119,7 @@ describe "errs/show.html.haml" do
         render
 
         view.content_for(:comments).should include('Test comment')
+        view.content_for(:comments).should have_selector('img[src^="http://www.gravatar.com/avatar"]')
         view.content_for(:comments).should_not include('Add a comment')
       end
     end
