@@ -1,10 +1,14 @@
 - content_for :title, @user.name
+- if Errbit::Config.use_gravatar
+  - content_for :title_style do
+    background: url('#{gravatar_url @user.email, :s => 86}') no-repeat;
+    padding-left: 106px;
+
 - content_for :action_bar do
   = render 'shared/link_github_account', :user => @user
   %span= link_to('Add a New User', new_user_path, :class => 'add')
   = link_to 'edit', edit_user_path(@user), :class => 'button'
   = link_to 'destroy', user_path(@user), :method => :delete, :data => { :confirm => 'Seriously?' }, :class => 'button'
-
 
 %table.single_user
   %tr
