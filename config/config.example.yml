@@ -40,9 +40,7 @@ user_has_username: false
 allow_comments_with_issue_tracker: true
 
 # Enable Gravatar.
-use_gravatar: false
-# Default Gravatar size.
-gravatar_size: 40
+use_gravatar: true
 # Default Gravatar image, can be: mm, identicon, monsterid, wavatar, retro.
 gravatar_default: identicon
 

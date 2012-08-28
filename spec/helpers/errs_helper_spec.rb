@@ -18,18 +18,12 @@ describe ErrsHelper do
     context "default config" do
       before do
         Errbit::Config.stub(:use_gravatar).and_return(true)
-        Errbit::Config.stub(:gravatar_size).and_return(48)
         Errbit::Config.stub(:gravatar_default).and_return('identicon')
       end
 
       it "should render image_tag with correct alt and src" do
         expected = "<img alt=\"#{email}\" src=\"#{base_url}?d=identicon&amp;s=48\" />"
         helper.gravatar_tag(email).should eq(expected)
-      end
-
-      it "should override :s" do
-        expected = "<img alt=\"#{email}\" src=\"#{base_url}?d=identicon&amp;s=64\" />"
-        helper.gravatar_tag(email, :s => 64).should eq(expected)
       end
 
       it "should override :d" do

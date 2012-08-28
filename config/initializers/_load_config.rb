@@ -15,7 +15,6 @@ unless defined?(Errbit::Config)
     Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER']
 
     Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
-    Errbit::Config.gravatar_size = ENV['ERRBIT_GRAVATAR_SIZE']
     Errbit::Config.gravatar_default = ENV['ERRBIT_GRAVATAR_DEFAULT']
 
     Errbit::Config.github_authentication = ENV['GITHUB_AUTHENTICATION']

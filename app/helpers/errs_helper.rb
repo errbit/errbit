@@ -16,9 +16,9 @@ module ErrsHelper
 
   def gravatar_tag(email, options = {})
     default_options = {
-      :s => Errbit::Config.gravatar_size,
       :d => Errbit::Config.gravatar_default,
-      :alt => email
+      :alt => email,
+      :class => 'gravatar'
     }
     options.reverse_merge! default_options
     params = options.extract!(:s, :d).delete_if { |k, v| v.blank? }
