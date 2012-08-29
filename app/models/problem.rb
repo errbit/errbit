@@ -6,8 +6,8 @@ class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :last_notice_at, :type => DateTime
-  field :first_notice_at, :type => DateTime
+  field :last_notice_at, :type => DateTime, :default => Proc.new { Time.now }
+  field :first_notice_at, :type => DateTime, :default => Proc.new { Time.now }
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :resolved_at, :type => Time
@@ -45,6 +45,8 @@ class Problem
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  
+  validates_presence_of :last_notice_at, :first_notice_at
 
 
   def self.in_env(env)
@@ -132,17 +134,22 @@ class Problem
   end
 
   def cache_notice_attributes(notice=nil)
-    notice ||= notices.first
-    attrs = {:last_notice_at => notices.order_by([:created_at, :asc]).last.try(:created_at), :first_notice_at => notices.order_by([:created_at, :asc]).first.try(:created_at)}
+    first_notice = notices.order_by([:created_at, :asc]).first
+    last_notice = notices.order_by([:created_at, :asc]).last
+    notice ||= first_notice
+    
+    attrs = {}
+    attrs[:first_notice_at] = first_notice.created_at if first_notice
+    attrs[:last_notice_at] = last_notice.created_at if last_notice
     attrs.merge!(
-      :message => notice.message,
+      :message     => notice.message,
       :environment => notice.environment_name,
       :error_class => notice.error_class,
-      :where => notice.where,
+      :where       => notice.where,
       :messages    => attribute_count_increase(:messages, notice.message),
       :hosts       => attribute_count_increase(:hosts, notice.host),
       :user_agents => attribute_count_increase(:user_agents, notice.user_agent_string)
-      ) if notice
+    ) if notice
     update_attributes!(attrs)
   end
 

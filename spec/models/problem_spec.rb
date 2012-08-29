@@ -24,13 +24,12 @@ describe Problem do
       end
     end
   end
+  
   context '#last_notice_at' do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
       problem.should_not be_nil
-
-      problem.last_notice_at.should be_nil
 
       notice1 = Fabricate(:notice, :err => err)
       problem.last_notice_at.should == notice1.created_at
@@ -45,8 +44,6 @@ describe Problem do
       err = Fabricate(:err)
       problem = err.problem
       problem.should_not be_nil
-
-      problem.first_notice_at.should be_nil
 
       notice1 = Fabricate(:notice, :err => err)
       problem.first_notice_at.should == notice1.created_at
