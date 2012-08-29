@@ -22,23 +22,13 @@ describe ErrsHelper do
       end
 
       it "should render image_tag with correct alt and src" do
-        expected = "<img alt=\"#{email}\" src=\"#{base_url}?d=identicon&amp;s=48\" />"
-        helper.gravatar_tag(email).should eq(expected)
+        expected = "<img alt=\"#{email}\" class=\"gravatar\" src=\"#{base_url}?d=identicon&amp;s=48\" />"
+        helper.gravatar_tag(email, :s => 48).should eq(expected)
       end
 
       it "should override :d" do
-        expected = "<img alt=\"#{email}\" src=\"#{base_url}?d=retro&amp;s=48\" />"
-        helper.gravatar_tag(email, :d => 'retro').should eq(expected)
-      end
-
-      it "should override alt" do
-        expected = "<img alt=\"gravatar\" src=\"#{base_url}?d=identicon&amp;s=48\" />"
-        helper.gravatar_tag(email, :alt => 'gravatar').should eq(expected)
-      end
-
-      it "should pass other options to image_tag" do
-        expected = "<img align=\"left\" alt=\"#{email}\" src=\"#{base_url}?d=identicon&amp;s=48\" />"
-        helper.gravatar_tag(email, :align => :left).should eq(expected)
+        expected = "<img alt=\"#{email}\" class=\"gravatar\" src=\"#{base_url}?d=retro&amp;s=48\" />"
+        helper.gravatar_tag(email, :d => 'retro', :s => 48).should eq(expected)
       end
     end
   end
