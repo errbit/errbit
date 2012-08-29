@@ -10,7 +10,7 @@
   %strong Environment:
   = @problem.environment
   %strong Last Notice:
-  = last_notice_at(@problem).to_s(:precise)
+  = @problem.last_notice_at.to_s(:precise)
 - content_for :action_bar do
   - if @problem.unresolved?
     %span= link_to 'resolve', resolve_app_err_path(@app, @problem), :method => :put, :data => { :confirm => err_confirm }, :class => 'resolve'
