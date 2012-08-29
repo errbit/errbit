@@ -22,4 +22,3 @@ class Err
   delegate :app, :resolved?, :to => :problem
 
 end
-

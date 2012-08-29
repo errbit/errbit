@@ -46,7 +46,7 @@ class App
     Err.where(
       :fingerprint => attrs[:fingerprint]
     ).first ||
-      problems.create!.errs.create!(attrs)
+      problems.create!(attrs.slice(:error_class, :environment)).errs.create!(attrs)
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator

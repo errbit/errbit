@@ -23,7 +23,9 @@ class ErrorReport
   end
 
   def rails_env
-    server_environment['environment-name'] || 'development'
+    rails_env = server_environment['environment-name']
+    rails_env = 'development' if rails_env.blank?
+    rails_env
   end
 
   def component

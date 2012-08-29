@@ -39,6 +39,8 @@ class Problem
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
   has_many :comments, :inverse_of => :err, :dependent => :destroy
 
+  validates_presence_of :error_class, :environment
+
   before_create :cache_app_attributes
 
   scope :resolved, where(:resolved => true)
@@ -91,11 +93,12 @@ class Problem
   end
 
   def unmerge!
+    attrs = {:error_class => error_class, :environment => environment}
     problem_errs = errs.to_a
     problem_errs.shift
     [self] + problem_errs.map(&:id).map do |err_id|
       err = Err.find(err_id)
-      app.problems.create.tap do |new_problem|
+      app.problems.create(attrs).tap do |new_problem|
         err.update_attribute(:problem_id, new_problem.id)
         new_problem.reset_cached_attributes
       end
