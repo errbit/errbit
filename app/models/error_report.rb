@@ -28,14 +28,6 @@ class ErrorReport
     rails_env
   end
 
-  def component
-    request['component'] || 'unknown'
-  end
-
-  def action
-    request['action']
-  end
-
   def app
     @app ||= App.where(:api_key => api_key).first
   end
@@ -71,8 +63,6 @@ class ErrorReport
   def error
     @error ||= app.find_or_create_err!(
       :error_class => error_class,
-      :component => component,
-      :action => action,
       :environment => rails_env,
       :fingerprint => fingerprint
     )

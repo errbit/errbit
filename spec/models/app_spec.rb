@@ -162,9 +162,8 @@ describe App do
       @app = Fabricate(:app)
       @conditions = {
         :error_class  => 'Whoops',
-        :component    => 'Foo',
-        :action       => 'bar',
-        :environment  => 'production'
+        :environment  => 'production',
+        :fingerprint  => 'some-finger-print'
       }
     end
 
