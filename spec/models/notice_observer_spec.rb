@@ -25,7 +25,6 @@ describe NoticeObserver do
   end
 
   describe "email notifications for a resolved issue" do
-
     before do
       Errbit::Config.per_app_email_at_notices = true
       @app = Fabricate(:app_with_watcher, :email_at_notices => [1])
@@ -44,24 +43,26 @@ describe NoticeObserver do
     end
   end
 
-  describe "notifications for campfire" do
+  describe "should send a notification if a notification service is configured" do
+    let(:app) { app = Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
+    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
 
     before do
       Errbit::Config.per_app_email_at_notices = true
-      @app = Fabricate(:app_with_watcher, :email_at_notices => [1], :issue_tracker => Fabricate(:campfire_tracker))
-      @err = Fabricate(:err, :problem => Fabricate(:problem, :app => @app, :notices_count => 100))
     end
 
     after do
       Errbit::Config.per_app_email_at_notices = false
     end
 
-    it "should create a campfire issue" do
-      @err.problem.stub(:notices_count).and_return(1)
-      @app.issue_tracker.stub!(:create_issue).and_return(true)
-      @app.issue_tracker.should_receive(:create_issue)
+    it "should create a campfire notification" do
+      err.problem.stub(:notices_count) { 1 }
+      app.notification_service.stub!(:create_notification).and_return(true)
+      app.stub!(:notification_recipients => %w('ryan@system88.com'))
+      app.notification_service.should_receive(:create_notification)
 
-      Fabricate(:notice, :err => @err)
+      Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => [{ :error => 'Le Broken' }], :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
     end
   end
 

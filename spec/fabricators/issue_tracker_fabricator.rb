@@ -24,10 +24,3 @@ Fabricator :github_issues_tracker, :from => :issue_tracker, :class_name => "Issu
   project_id 'test_account/test_project'
   username 'test_username'
 end
-
-Fabricator :campfire_tracker, :from => :issue_tracker, :class_name => "IssueTrackers::CampfireTracker" do
-  subdomain 'camproomname'
-  api_token 1234567890
-  project_id 888555
-end
-
