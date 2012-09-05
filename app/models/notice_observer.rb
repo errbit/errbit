@@ -16,9 +16,8 @@ class NoticeObserver < Mongoid::Observer
 
   def should_notify? notice
     app = notice.app
-    a = app.notify_on_errs? &&
+    app.notify_on_errs? &&
       (Errbit::Config.per_app_email_at_notices && app.email_at_notices || Errbit::Config.email_at_notices).include?(notice.problem.notices_count) &&
       app.notification_recipients.any?
-    a
   end
 end
