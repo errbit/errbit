@@ -1,14 +1,16 @@
 .window
   %table.backtrace
-    - lines.each do |line|
-      - path = File.dirname(line['file'])
-      - path = path == "." ? "" : path + '/'
-      - file = File.basename(line['file'])
-      - file = "#{file}:#{line['number']}" unless line['number'].blank?
-      %tr
-        %td.line{:class => (Notice.in_app_backtrace_line?(line) ? 'in-app' : nil)}
-          %span.path>= path
-          %span.file= link_to_source_file(@app, line, file).html_safe
-          &rarr;
-          %span.method= line['method']
+    -# Group lines into internal / external so we can toggle the external backtrace
+    -# Includes a margin of x lines that are not toggled.
+    - em = 4 # (external backtrace margin)
+    - grouped_lines(lines).each do |in_app, line_group|
+      - if !in_app && line_group.size > (em * 3)
+        = render :partial => 'notices/backtrace_line', :collection => line_group[0, em], :as => :line
+        = render :partial => 'notices/backtrace_line', :collection => line_group[em, line_group.size - (em * 2)], :as => :line, :locals => {:row_class => 'toggle_external_backtrace'}
+        %tr
+          %td.line.backtrace_separator
+            %span ...
+        = render :partial => 'notices/backtrace_line', :collection => line_group[em * -1, em], :as => :line
 
+      - else
+        = render :partial => "notices/backtrace_line", :collection => line_group, :as => :line

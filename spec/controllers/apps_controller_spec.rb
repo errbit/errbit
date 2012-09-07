@@ -31,6 +31,17 @@ describe AppsController do
         assigns(:apps).should_not include(unwatched_app)
       end
     end
+
+    context 'when there is only one app' do
+      it 'sets unresolved_counts and problem_counts variables' do
+        sign_in Fabricate(:admin)
+        app = Fabricate(:app)
+        get :index
+
+        assigns(:unresolved_counts).should == {app.id => 0}
+        assigns(:problem_counts).should    == {app.id => 0}
+      end
+    end
   end
 
   describe "GET /apps/:id" do
@@ -177,12 +188,12 @@ describe AppsController do
 
       it "should copy attributes from an existing app" do
         @app = Fabricate(:app, :name => "do not copy",
-                             :github_url => "github.com/test/example")
+                             :github_repo => "test/example")
         get :new, :copy_attributes_from => @app.id
         assigns(:app).should be_a(App)
         assigns(:app).should be_new_record
         assigns(:app).name.should be_blank
-        assigns(:app).github_url.should == "github.com/test/example"
+        assigns(:app).github_repo.should == "test/example"
       end
     end
 

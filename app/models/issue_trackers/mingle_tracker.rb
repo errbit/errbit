@@ -1,15 +1,17 @@
 class IssueTrackers::MingleTracker < IssueTracker
   Label = "mingle"
+  Note = "Note: <strong>CARD PROPERTIES</strong> must be comma separated <em>key = value</em> pairs"
+
   Fields = [
     [:account, {
       :label       => "Mingle URL",
-      :placeholder => "abc from http://abc.fogbugz.com/"
+      :placeholder => "http://mingle.example.com/"
     }],
     [:project_id, {
       :placeholder => "Mingle project"
     }],
     [:ticket_properties, {
-      :label       => "Card Properties (comma separated key=value pairs)",
+      :label       => "Card Properties",
       :placeholder => "card_type = Defect, defect_status = Open, priority = Essential"
     }],
     [:username, {
@@ -27,7 +29,7 @@ class IssueTrackers::MingleTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by = nil)
     properties = ticket_properties_hash
     basic_auth = account.gsub(/https?:\/\//, "https://#{username}:#{password}@")
     Mingle.set_site "#{basic_auth}/api/v1/projects/#{project_id}/"
@@ -41,7 +43,10 @@ class IssueTrackers::MingleTracker < IssueTracker
     end
 
     card.save!
-    problem.update_attribute :issue_link, URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s
+    problem.update_attributes(
+      :issue_link => URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s,
+      :issue_type => Label
+    )
   end
 
   def body_template
@@ -55,6 +60,12 @@ class IssueTrackers::MingleTracker < IssueTracker
       hash[key] = value
       hash
     end
+  end
+
+  def url
+    acc_url = account.start_with?('http') ? account : "http://#{account}"
+    URI.parse("#{acc_url}/projects/#{project_id}").to_s
+  rescue URI::InvalidURIError
   end
 end
 

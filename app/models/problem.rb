@@ -10,13 +10,14 @@ class Problem
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :issue_link, :type => String
+  field :issue_type, :type => String
 
   # Cached fields
   field :app_name, :type => String
   field :notices_count, :type => Integer, :default => 0
   field :message
   field :environment
-  field :klass
+  field :error_class
   field :where
   field :user_agents, :type => Hash, :default => {}
   field :messages,    :type => Hash, :default => {}
@@ -118,7 +119,7 @@ class Problem
       end
       collection.update({'_id' => self.id},
                         {'$set' => {'app_name' => self.app_name,
-                          'last_deploy_at' => self.last_deploy_at}})
+                          'last_deploy_at' => self.last_deploy_at.try(:utc)}})
     end
   end
 
@@ -128,7 +129,7 @@ class Problem
     attrs.merge!(
       :message => notice.message,
       :environment => notice.environment_name,
-      :klass => notice.klass,
+      :error_class => notice.error_class,
       :where => notice.where,
       :messages    => attribute_count_increase(:messages, notice.message),
       :hosts       => attribute_count_increase(:hosts, notice.host),
@@ -143,6 +144,12 @@ class Problem
       :hosts       => attribute_count_descrease(:hosts, notice.host),
       :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string)
     )
+  end
+
+  def issue_type
+    # Return issue_type if configured, but fall back to detecting app's issue tracker
+    attributes['issue_type'] ||=
+    (app.issue_tracker_configured? && app.issue_tracker.label) || nil
   end
 
   private

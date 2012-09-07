@@ -22,6 +22,6 @@ Fabricator(:deploy) do
   username      'clyde.frog'
   repository    'git@github.com/errbit/errbit.git'
   environment   'production'
-  revision      { ActiveSupport::SecureRandom.hex(10) }
+  revision      { SecureRandom.hex(10) }
 end
 

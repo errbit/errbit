@@ -1,0 +1,15 @@
+//= require jquery
+//= require underscore-1.1.6
+//= require rails
+//= require form
+//= require jquery.pjax
+//= require jquery.alerts
+//= require rails.alerts
+//= require errbit
+//= require apps.show
+//= require_self
+
+// Allow any gems named 'errbit_*' to require their own assets
+<% Gem.loaded_specs.keys.grep(/^errbit_/).each do |plugin|
+  require_asset(plugin) rescue Sprockets::FileNotFound
+end %>

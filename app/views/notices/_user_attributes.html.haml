@@ -1,0 +1,9 @@
+.window
+  %table.user_attributes
+    %tr
+      %td
+        %strong Information about the user who experienced the error.
+    - user.each do |user_key, user_value|
+      %tr
+        %th= user_key
+        %td= auto_link(user_value.to_s).html_safe

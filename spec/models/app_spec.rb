@@ -37,53 +37,53 @@ describe App do
       app.api_key.should match(/^[a-f0-9]{32}$/)
     end
 
-    it 'is fine with blank github urls' do
-      app = Fabricate.build(:app, :github_url => "")
+    it 'is fine with blank github repos' do
+      app = Fabricate.build(:app, :github_repo => "")
       app.save
-      app.github_url.should == ""
+      app.github_repo.should == ""
     end
 
-    it 'does not touch https github urls' do
-      app = Fabricate.build(:app, :github_url => "https://github.com/errbit/errbit")
+    it 'doesnt touch github user/repo' do
+      app = Fabricate.build(:app, :github_repo => "errbit/errbit")
       app.save
-      app.github_url.should == "https://github.com/errbit/errbit"
+      app.github_repo.should == "errbit/errbit"
     end
 
-    it 'normalizes http github urls' do
-      app = Fabricate.build(:app, :github_url => "http://github.com/errbit/errbit")
+    it 'removes domain from https github repos' do
+      app = Fabricate.build(:app, :github_repo => "https://github.com/errbit/errbit")
       app.save
-      app.github_url.should == "https://github.com/errbit/errbit"
+      app.github_repo.should == "errbit/errbit"
     end
 
-    it 'normalizes public git repo as a github url' do
-      app = Fabricate.build(:app, :github_url => "https://github.com/errbit/errbit.git")
+    it 'normalizes public git repo as a github repo' do
+      app = Fabricate.build(:app, :github_repo => "https://github.com/errbit/errbit.git")
       app.save
-      app.github_url.should == "https://github.com/errbit/errbit"
+      app.github_repo.should == "errbit/errbit"
     end
 
-    it 'normalizes private git repo as a github url' do
-      app = Fabricate.build(:app, :github_url => "git@github.com:errbit/errbit.git")
+    it 'normalizes private git repo as a github repo' do
+      app = Fabricate.build(:app, :github_repo => "git@github.com:errbit/errbit.git")
       app.save
-      app.github_url.should == "https://github.com/errbit/errbit"
+      app.github_repo.should == "errbit/errbit"
     end
   end
 
   context '#github_url_to_file' do
     it 'resolves to full path to file' do
-      app = Fabricate(:app, :github_url => "https://github.com/errbit/errbit")
+      app = Fabricate(:app, :github_repo => "errbit/errbit")
       app.github_url_to_file('/path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
     end
   end
 
-  context '#github_url?' do
-    it 'is true when there is a github_url' do
-      app = Fabricate(:app, :github_url => "https://github.com/errbit/errbit")
-      app.github_url?.should be_true
+  context '#github_repo?' do
+    it 'is true when there is a github_repo' do
+      app = Fabricate(:app, :github_repo => "errbit/errbit")
+      app.github_repo?.should be_true
     end
 
-    it 'is false when no github_url' do
+    it 'is false when no github_repo' do
       app = Fabricate(:app)
-      app.github_url?.should be_false
+      app.github_repo?.should be_false
     end
   end
 
@@ -102,12 +102,12 @@ describe App do
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do
-      @app, @copy_app = Fabricate(:app, :name => "app", :github_url => "url"),
-                        Fabricate(:app, :name => "copy_app", :github_url => "copy url")
+      @app, @copy_app = Fabricate(:app, :name => "app", :github_repo => "url"),
+                        Fabricate(:app, :name => "copy_app", :github_repo => "copy url")
       @copy_watcher = Fabricate(:watcher, :email => "copywatcher@example.com", :app => @copy_app)
       @app.copy_attributes_from(@copy_app.id)
       @app.name.should == "app"
-      @app.github_url.should == "copy url"
+      @app.github_repo.should == "copy url"
       @app.watchers.first.email.should == "copywatcher@example.com"
     end
   end
@@ -117,7 +117,7 @@ describe App do
     before do
       @app = Fabricate(:app)
       @conditions = {
-        :klass        => 'Whoops',
+        :error_class  => 'Whoops',
         :component    => 'Foo',
         :action       => 'bar',
         :environment  => 'production'
@@ -158,7 +158,7 @@ describe App do
     it 'finds the correct err for the notice' do
       App.should_receive(:find_by_api_key!).and_return(@app)
       @app.should_receive(:find_or_create_err!).with({
-        :klass        => 'HoptoadTestingException',
+        :error_class  => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
         :environment  => 'development',
@@ -171,7 +171,7 @@ describe App do
     it 'marks the err as unresolved if it was previously resolved' do
       App.should_receive(:find_by_api_key!).and_return(@app)
       @app.should_receive(:find_or_create_err!).with({
-        :klass        => 'HoptoadTestingException',
+        :error_class  => 'HoptoadTestingException',
         :component    => 'application',
         :action       => 'verify',
         :environment  => 'development',

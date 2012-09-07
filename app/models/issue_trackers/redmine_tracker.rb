@@ -25,18 +25,22 @@ class IssueTrackers::RedmineTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by = nil)
     token = api_token
     acc = account
     RedmineClient::Base.configure do
       self.token = token
       self.site = acc
+      self.format = :xml
     end
     issue = RedmineClient::Issue.new(:project_id => project_id)
     issue.subject = issue_title problem
     issue.description = body_template.result(binding)
     issue.save!
-    problem.update_attribute :issue_link, "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}")
+    problem.update_attributes(
+      :issue_link => "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}"),
+      :issue_type => Label
+    )
   end
 
   def url_to_file(file_path, line_number = nil)
@@ -48,6 +52,12 @@ class IssueTrackers::RedmineTracker < IssueTracker
 
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/textile_body.txt.erb"))
+  end
+
+  def url
+    acc_url = account.start_with?('http') ? account : "http://#{account}"
+    URI.parse("#{acc_url}?project_id=#{project_id}").to_s
+  rescue URI::InvalidURIError
   end
 end
 

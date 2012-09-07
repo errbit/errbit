@@ -1,0 +1,9 @@
+%tr{:class => defined?(row_class) ? row_class : nil}
+  %td.line{:class => (in_app_backtrace_line?(line) ? 'in-app' : nil)}
+    = link_to_source_file(@app, line) do
+      %span.path>= path_for_backtrace_line(line)
+      %span.file>=  file_for_backtrace_line(line)
+      - if line['number'].present?
+        %span.number>= ":#{line['number']}"
+    &rarr;
+    %span.method= line['method']

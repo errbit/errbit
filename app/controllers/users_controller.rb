@@ -2,22 +2,15 @@ class UsersController < ApplicationController
   respond_to :html
 
   before_filter :require_admin!, :except => [:edit, :update]
-  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_user, :only => [:show, :edit, :update, :destroy, :unlink_github]
   before_filter :require_user_edit_priviledges, :only => [:edit, :update]
 
   def index
     @users = User.all.page(params[:page]).per(current_user.per_page)
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def new
     @user = User.new
-  end
-
-  def edit
   end
 
   def create
@@ -57,6 +50,11 @@ class UsersController < ApplicationController
 
     flash[:success] = "That's sad. #{@user.name} is no longer part of your team."
     redirect_to users_path
+  end
+
+  def unlink_github
+    @user.update_attributes :github_login => nil, :github_oauth_token => nil
+    redirect_to user_path(@user)
   end
 
   protected

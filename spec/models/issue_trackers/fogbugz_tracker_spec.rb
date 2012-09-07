@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FogbugzTracker do
+describe IssueTrackers::FogbugzTracker do
   it "should create an issue on Fogbugz with problem params, and set issue link for problem" do
     notice = Fabricate :notice
     tracker = Fabricate :fogbugz_tracker, :app => notice.app

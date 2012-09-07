@@ -1,11 +1,49 @@
-Errbit [![TravisCI](http://travis-ci.org/errbit/errbit.png?branch=master)](http://travis-ci.org/errbit/errbit)
-======
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url]
 
-**The open source self-hosted error catcher**
+[travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
+[travis-ci-url]: http://travis-ci.org/errbit/errbit
+
+### The open source, self-hosted error catcher
+
 
 Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
-so if you are already using Airbrake, you can just point hoptoad_notifier at your Errbit server.
+so if you are already using Airbrake, you can just point the `airbrake` gem to your Errbit server.
+
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/apps.png" target="_blank" title="Apps">
+        <img src="http://errbit.github.com/errbit/images/apps_thumb.png" alt="Apps">
+      </a>
+      <br />
+      <em>Apps</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/app_errors.png" target="_blank" title="Errors">
+        <img src="http://errbit.github.com/errbit/images/app_errors_thumb.png" alt="Errors">
+      </a>
+      <br />
+      <em>Errors</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/error_summary.png" target="_blank" title="Error Summary">
+        <img src="http://errbit.github.com/errbit/images/error_summary_thumb.png" alt="Error Summary">
+      </a>
+      <br />
+      <em>Error Summary</em>
+    </td>
+    <td align="center">
+      <a href="http://errbit.github.com/errbit/images/error_backtrace.png" target="_blank" title="Error Backtraces">
+        <img src="http://errbit.github.com/errbit/images/error_backtrace_thumb.png" alt="Error Backtraces">
+      </a>
+      <br />
+      <em>Error Backtraces</em>
+    </td>
+  </tr>
+</table>
+
 
 Errbit may be a good fit for you if:
 
@@ -37,20 +75,20 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
 **Set up your local box or server(Ubuntu):**
 
-  1. Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
+  * Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
 
 ```bash
 apt-get update
 apt-get install mongodb
 ```
 
-  2. Install libxml and libcurl
+  * Install libxml and libcurl
 
 ```bash
 apt-get install libxml2 libxml2-dev libxslt-dev libcurl4-openssl-dev
 ```
 
-  3. Install Bundler
+  * Install Bundler
 
 ```bash
 gem install bundler
@@ -58,21 +96,21 @@ gem install bundler
 
 **Running Locally:**
 
-  1. Install dependencies
+  * Install dependencies
 
 ```bash
 bundle install
 ```
 
-  2. Bootstrap Errbit. This will copy over config.yml and also seed the database.
+  * Bootstrap Errbit. This will copy over config.yml and also seed the database.
 
 ```bash
 rake errbit:bootstrap
 ```
 
-  3. Update the config.yml and mongoid.yml files with information about your environment
+  * Update the config.yml and mongoid.yml files with information about your environment
 
-  4. Start Server
+  * Start Server
 
 ```bash
 script/rails server
@@ -80,14 +118,14 @@ script/rails server
 
 **Deploying:**
 
-  1. Bootstrap Errbit. This will copy over config.yml and also seed the database.
+  * Bootstrap Errbit. This will copy over config.yml and also seed the database.
 
 ```bash
 rake errbit:bootstrap
 ```
 
-  2. Update the deploy.rb file with information about your server
-  3. Setup server and deploy
+  * Update the deploy.rb file with information about your server
+  * Setup server and deploy
 
 ```bash
 cap deploy:setup deploy
@@ -95,18 +133,21 @@ cap deploy:setup deploy
 
 **Deploying to Heroku:**
 
-  1. Clone the repository
+  * Clone the repository
 
 ```bash
 git clone http://github.com/errbit/errbit.git
 ```
 
-  2. Create & configure for Heroku
+  * Create & configure for Heroku
 
 ```bash
 gem install heroku
 heroku create example-errbit --stack cedar
-heroku addons:add mongohq:free
+heroku addons:add mongolab:starter
+cp -f config/mongoid.mongolab.yml config/mongoid.yml
+git add -f config/mongoid.yml
+git commit -m "Added mongoid config for Mongolab"
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add ERRBIT_HOST=some-hostname.example.com
@@ -114,33 +155,129 @@ heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master
 ```
 
-  3. Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
+  * Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
 
 ```bash
 heroku run rake db:seed
 ```
 
-  4. If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
+  * If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
+
+    * With the heroku-scheduler add-on (replacement for cron):
+
+    ```bash
+    # Install the heroku scheduler add-on
+    heroku addons:add scheduler:standard
+    
+    # Go open the dashboard to schedule the job.  You should use
+    # 'rake errbit:db:clear_resolved' as the task command, and schedule it
+    # at whatever frequency you like (once/day should work great).
+    heroku addons:open scheduler
+    ```
+
+    * With the cron add-on:
+
+    ```bash
+    # Install the heroku cron addon, to clear resolved errors daily:
+    heroku addons:add cron:daily
+    ```
+
+    * Or clear resolved errors manually:
+
+    ```bash
+    heroku rake errbit:db:clear_resolved
+    ```
+
+  * You may want to enable the deployment hook for heroku :
 
 ```bash
-# Install the heroku cron addon, to clear resolved errors daily:
-heroku addons:add cron:daily
-
-# Or, clear resolved errors manually:
-heroku rake errbit:db:clear_resolved
+heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
 ```
 
-  5. Enjoy!
+  * Enjoy!
 
 
-**Configuring LDAP authentication:**
+Authentication
+--------------
 
-  1. In `config/config.yml`, set `user_has_username` to `true`
-  2. Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
+### Configuring GitHub authentication:
+
+  * In `config/config.yml`, set `github_authentication` to `true`
+  * Register your instance of Errbit at: https://github.com/settings/applications
+
+If you hosted Errbit at errbit.example.com, you would fill in:
+
+<table>
+  <tr><th>URL:</th><td>http://errbit.example.com/</td></tr>
+  <tr><th>Callback URL:</th><td>http://errbit.example.com/users/auth/github</td></tr>
+</table>
+
+  * After you have registered your app, set `github_client_id` and `github_secret`
+    in `config/config.yml` with your app's Client ID and Secret key.
+
+
+After you have followed these instructions, you will be able to **Sign in with GitHub** on the Login page.
+
+You will also be able to link your GitHub profile to your user account on your **Edit profile** page.
+
+If you have signed in with GitHub, or linked your GitHub profile, and the App has a GitHub repo configured,
+then you will be able to create issues on GitHub.
+You will still be able to create an issue on the App's configured issue tracker.
+
+You can change the requested account permissions by setting `github_access_scope` to:
+
+<table>
+  <tr><th>['repo'] </th><td>Allow creating issues for public and private repos.</td></tr>
+  <tr><th>['public_repo'] </th><td>Only allow creating issues for public repos.</td></tr>
+  <tr><th>[] </th><td>No permission to create issues on any repos.</td></tr>
+</table>
+
+
+### GitHub authentication when served on Heroku
+
+You will need to set up Heroku variables accordingly as described in [Configuring GitHub authentication](#configuring-github-authentication):
+
+* GITHUB_AUTHENTICATION
+
+```bash
+heroku config:add GITHUB_AUTHENTICATION=true
+```
+
+* GITHUB_CLIENT_ID
+
+```bash
+heroku config:add GITHUB_CLIENT_ID=the_client_id_provided_by_GitHub
+```
+
+* GITHUB_SECRET
+
+```bash
+heroku config:add GITHUB_SECRET=the_secret_provided_by_GitHub
+```
+
+* GITHUB_ACCESS_SCOPE - set only one scope `repo` or `public_repo`. If you really need to put more than one, separate them with comma.
+
+```bash
+heroku config:add GITHUB_ACCESS_SCOPE=repo,public_repo
+```
+
+__Note__: To avoid restarting your Heroku app 4 times you can set Heroku variables in a single command, i.e:
+
+```bash
+heroku config:add GITHUB_AUTHENTICATION=true \
+GITHUB_CLIENT_ID=the_client_id_provided_by_GitHub \
+GITHUB_SECRET=the_secret_provided_by_GitHub \
+GITHUB_ACCESS_SCOPE=repo,public_repo
+```
+
+### Configuring LDAP authentication:
+
+  * In `config/config.yml`, set `user_has_username` to `true`
+  * Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
   to set up the devise_ldap_authenticatable gem.
 
-  3. If you are authenticating by `username`, you will need to set the user's email
-  after authentication. You can do this by adding the following lines to `app/models/user.rb`:
+  * If you are authenticating by `username`, you will need to set the user's email manually
+  before authentication. You must add the following lines to `app/models/user.rb`:
 
 ```ruby
   before_save :set_ldap_email
@@ -151,7 +288,7 @@ heroku rake errbit:db:clear_resolved
 
 Upgrading
 ---------
-*Note*: When upgrading Errbit, please run:
+When upgrading Errbit, please run:
 
 ```bash
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
@@ -159,6 +296,29 @@ rake db:migrate
 ```
 
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
+
+
+User information in error reports
+---------------------------------
+
+Errbit can now display information about the user who experienced an error.
+This gives you the ability to ask the user for more information,
+and let them know when you've fixed the bug.
+
+If you would like to include information about the current user in your error reports,
+you can replace the `airbrake` gem in your Gemfile with `airbrake_user_attributes`,
+which wraps the `airbrake` gem and injects user information.
+It will inject information about the current user into the error report
+if your Rails app's controller responds to a `#current_user` method.
+The user's attributes are filtered to remove authentication fields.
+
+If user information is received with an error report,
+it will be displayed under the *User Details* tab:
+
+
+![User details tab](http://errbit.github.com/errbit/images/error_user_information.png)
+
+(This tab will be hidden if no user information is available.)
 
 
 Issue Trackers
@@ -186,13 +346,17 @@ Issue Trackers
 * Account is the host of your mingle installation. i.e. **https://mingle.example.com**  *note*: You should use SSL if possible.
 * Errbit uses 'sign-in name' & password authentication. You may want to set up an **errbit** user with limited rights.
 * Project id is the identifier of your project, i.e. **awesomeapp** for project at https://mingle.example.com/projects/awesomeapp
-* Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional. i.e. card_type = Defect, status = Open, priority = Essential
+* Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional, e.g.:
 
-**Github Issues Integration**
+```
+card_type = Defect, status = Open, priority = Essential
+```
+
+**GitHub Issues Integration**
 
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
-* You will also need to provide the username that your API Token is connected to.
+* You will also need to provide your username and password for your GitHub account.
+  * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
 
 
 What if Errbit has an error?
@@ -201,23 +365,23 @@ What if Errbit has an error?
 Errbit will log it's own errors to an internal app named **Self.Errbit**.
 The **Self.Errbit** app will be automatically created whenever the first error happens.
 
-If your Errbit instance has logged an error, we would appreciate a bug report on Github Issues.
+If your Errbit instance has logged an error, we would appreciate a bug report on GitHub Issues.
 You can post this manually at [https://github.com/errbit/errbit/issues](https://github.com/errbit/errbit/issues),
-or you can set up the Github Issues tracker for your **Self.Errbit** app:
+or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
 
-  1. Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake airbrake:test`.)
+  * Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake airbrake:test`.)
 
-  2. In the **Issue Tracker** section, click **Github Issues**.
+  * In the **Issue Tracker** section, click **GitHub Issues**.
 
-  3. Fill in the **Account/Repository** field with **errbit/errbit**.
+  * Fill in the **Account/Repository** field with **errbit/errbit**.
 
-  4. Fill in the **Username** field with your github username.
+  * Fill in the **Username** field with your github username.
 
-  5. If you are logged in on [Github](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
+  * If you are logged in on [GitHub](https://github.com), you can find your **API Token** on this page: [https://github.com/account/admin](https://github.com/account/admin).
 
-  6. Save the settings by clicking **Update App** (or **Add App**)
+  * Save the settings by clicking **Update App** (or **Add App**)
 
-  7. You can now easily post bug reports to Github Issues by clicking the **Create Issue** button on a **Self.Errbit** error.
+  * You can now easily post bug reports to GitHub Issues by clicking the **Create Issue** button on a **Self.Errbit** error.
 
 
 TODO

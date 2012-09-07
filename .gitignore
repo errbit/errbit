@@ -4,6 +4,7 @@ log/*.log
 tmp/**/*
 tmp/*
 .rvmrc
+.idea
 *~
 *.rbc
 .DS_Store

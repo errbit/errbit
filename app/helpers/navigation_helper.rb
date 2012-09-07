@@ -34,4 +34,15 @@ module NavigationHelper
     active
   end
 
+  # Returns the page number in reverse order.
+  # Needed when reverse chronological paginating notices but
+  # want to display the actual chronological occurrence number.
+  #
+  # E.G. - Given 6 notices, page 2 shows the second from last
+  # occurrence indexed by 1, but it is diplaying the 5th ever
+  # occurence of that error.
+  def page_count_from_end(current_page, total_pages)
+    (total_pages.to_i - current_page.to_i) + 1
+  end
+
 end

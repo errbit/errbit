@@ -7,7 +7,7 @@ namespace :errbit do
     configs = {
       'config.example.yml'  => 'config.yml',
       'deploy.example.rb'   => 'deploy.rb',
-      'mongoid.example.yml' => 'mongoid.yml'
+      (ENV['HEROKU'] ? 'mongoid.mongohq.yml' : 'mongoid.example.yml') => 'mongoid.yml'
     }
     
     puts "Copying example config files..."

@@ -22,7 +22,7 @@ class IssueTrackers::FogbugzTracker < IssueTracker
     end
   end
 
-  def create_issue(problem)
+  def create_issue(problem, reported_by = nil)
     fogbugz = Fogbugz::Interface.new(:email => username, :password => password, :uri => "https://#{account}.fogbugz.com")
     fogbugz.authenticate
 
@@ -34,11 +34,19 @@ class IssueTrackers::FogbugzTracker < IssueTracker
     issue['cols'] = ['ixBug'].join(',')
 
     fb_resp = fogbugz.command(:new, issue)
-    problem.update_attribute :issue_link, "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}"
+    problem.update_attributes(
+      :issue_link => "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}",
+      :issue_type => Label
+    )
+
   end
 
   def body_template
     @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/fogbugz_body.txt.erb"))
+  end
+
+  def url
+    "http://#{account}.fogbugz.com/"
   end
 end
 

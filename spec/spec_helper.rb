@@ -17,7 +17,6 @@ end
 RSpec.configure do |config|
   config.mock_with :rspec
   config.include Devise::TestHelpers, :type => :controller
-
   config.filter_run :focused => true
   config.run_all_when_everything_filtered = true
   config.alias_example_to :fit, :focused => true
@@ -28,3 +27,5 @@ RSpec.configure do |config|
   end
   config.include WebMock::API
 end
+
+OmniAuth.config.test_mode = true

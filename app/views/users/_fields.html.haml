@@ -13,8 +13,12 @@
   = f.label :email
   = f.text_field :email
 
+- if Errbit::Config.github_authentication
+  = f.label :github_login
+  = f.text_field :github_login
+
 .required
-  = f.label 'Entries per page'
+  = f.label :per_page, 'Entries per page'
   = f.select :per_page, [10, 20, 30, 50, 75, 100]
 
 .required
@@ -23,7 +27,7 @@
 
 .required
   = f.label :password
-  = f.password_field :password
+  = f.password_field :password, :autocomplete => "off"
 
 .required
   = f.label :password_confirmation
