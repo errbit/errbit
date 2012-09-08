@@ -13,6 +13,7 @@ unless defined?(Errbit::Config)
     Errbit::Config.confirm_resolve_err = ENV['ERRBIT_CONFIRM_RESOLVE_ERR']
     Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME']
     Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER']
+    Errbit::Config.enforce_ssl = ENV['ERRBIT_ENFORCE_SSL']
 
     Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
     Errbit::Config.gravatar_default = ENV['ERRBIT_GRAVATAR_DEFAULT']
