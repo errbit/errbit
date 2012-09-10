@@ -33,7 +33,7 @@ module NoticesHelper
 
   def link_to_bitbucket(app, line, text = nil)
     file_name, file_path = filepath_parts(line['file'])
-    href = "%s#L%s" % [app.bitbucket_url_to_file(file_path), line['number']]
+    href = "%s#cl-%s" % [app.bitbucket_url_to_file(file_path), line['number']]
     link_to(text || file_name, href, :target => '_blank')
   end
 
