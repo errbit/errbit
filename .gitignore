@@ -8,3 +8,4 @@ tmp/*
 *~
 *.rbc
 .DS_Store
+config/config.yml
