@@ -1,5 +1,0 @@
-== Running features in this app
-
-1. Make sure you have latest bundler gem.
-2. cd into rails3_root and run `bundle install`
-3. run script/rails generate email_spec:steps

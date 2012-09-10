@@ -1,1 +1,0 @@
-require 'notifier_job'

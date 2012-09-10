@@ -1,7 +1,0 @@
-*.gem
-.bundle
-Gemfile.lock
-pkg/*
-
-doc
-log

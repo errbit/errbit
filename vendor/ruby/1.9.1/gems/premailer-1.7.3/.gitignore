@@ -1,7 +1,0 @@
-.DS_Store
-*.gem
-Gemfile.lock
-bin/*.html
-html/
-vendor/
-rdoc/
