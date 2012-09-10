@@ -6,3 +6,7 @@
 
 production:
   uri: <%= ENV['MONGOHQ_URL'] %>
+
+development:
+  host: localhost
+  database: errbit_development
