@@ -4,6 +4,7 @@ Errbit::Application.routes.draw do
 
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create'
+  match '/locate/:id' => 'notices#locate', :as => :locate
   match '/deploys.txt' => 'deploys#create'
 
   resources :notices,   :only => [:show]

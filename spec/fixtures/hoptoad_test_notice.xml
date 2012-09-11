@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notice version="2.0">
+<notice version="2.3">
   <api-key>APIKEY</api-key>
   <notifier>
     <name>Hoptoad Notifier</name>
@@ -144,4 +144,10 @@
     <project-root>/path/to/sample/project</project-root>
     <environment-name>development</environment-name>
   </server-environment>
+  <current-user>
+    <id>123</id>
+    <name>Mr. Bean</name>
+    <email>mr.bean@example.com</email>
+    <username>mrbean</username>
+  </current-user>
 </notice>

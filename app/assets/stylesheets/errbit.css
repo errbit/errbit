@@ -648,6 +648,13 @@ table.errs td.app .environment {
 table.errs td.message a {
   display: block;
   word-wrap: break-word;
+  /* PjpG - configuration in WHAT & WHERE table's columns using ellipsis to avoid oversizing table's width */
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+  /* ------ */
 }
 table.errs td.message em {
   color: #727272;
@@ -834,15 +841,30 @@ table.comment tbody th {
   height: 20px;
   line-height: 0.5em;
 }
+table.comment th span, table.comment th img {
+  vertical-align: middle;
+}
+table.comment th span.comment-info {
+  line-height: 21px;
+}
+table.comment img.gravatar {
+  margin-right: 7px;
+}
+
 table.comment tbody td {
   background-color: #F9F9F9;
 }
 #content-comments a.destroy-comment {
   color: #EE0000;
   margin-right: 5px;
+  margin-top: 2px;
+  font-size: 21px;
+  line-height: 1;
+  float: right;
 }
 #content-comments a.destroy-comment:hover {
   text-decoration: none;
+  color: #AA0000;
 }
 #content-comments #comment_submit {
   margin-top: 15px;
@@ -871,3 +893,12 @@ table.errs tr td.message .inline_comment em.commenter {
 
 .current.asc:after { content: ' ↑'; }
 .current.desc:after { content: ' ↓'; }
+
+
+table.users td {
+  vertical-align: middle;
+}
+table.users td img.gravatar {
+  vertical-align: middle;
+  margin-left: 3px;
+}

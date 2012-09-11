@@ -1,8 +1,8 @@
-# Mongoid Configuration for MongoHQ on Heroku
+# Mongoid Configuration for MongoLab on Heroku
 # ===========================================
 #
 # Copy this file to config/mongoid.yml,
 # commit it to your repo, then push to heroku.
 
 production:
-  uri: <%= ENV['MONGOHQ_URL'] %>
+  uri: <%= ENV['MONGOLAB_URI'] %>
