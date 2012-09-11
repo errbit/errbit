@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 
 gem 'nokogiri'
 gem 'mongoid', '~> 2.4.10'
@@ -49,6 +49,7 @@ group :development, :test do
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
+  gem 'capistrano'
 end
 
 group :test do
