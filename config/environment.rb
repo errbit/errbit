@@ -4,6 +4,7 @@ if RUBY_VERSION.to_f >= 1.9
   require 'yaml'
   YAML::ENGINE.yamler = 'syck'
 end
+#puts ENV.inspect
 # Initialize the rails application
 Errbit::Application.initialize!
 
