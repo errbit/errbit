@@ -11,6 +11,7 @@ class Notice
   field :request, :type => Hash
   field :notifier, :type => Hash
   field :user_attributes, :type => Hash
+  field :current_user, :type => Hash
   field :error_class
 
   belongs_to :err

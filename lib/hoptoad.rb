@@ -3,7 +3,7 @@ require 'hoptoad/v2'
 module Hoptoad
   class ApiVersionError < StandardError
     def initialize
-      super "Wrong API Version: Expecting 2.0, 2.1, or 2.2"
+      super "Wrong API Version: Expecting 2.0, 2.1, 2.2 or 2.3"
     end
   end
 
@@ -16,7 +16,7 @@ module Hoptoad
   private
     def self.get_version_processor(version)
       case version
-      when /2\.[012]/; Hoptoad::V2
+      when /2\.[0123]/; Hoptoad::V2
       else;            raise ApiVersionError
       end
     end

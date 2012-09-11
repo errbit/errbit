@@ -230,6 +230,15 @@ describe App do
       lambda { @notice = App.report_error!(xml) }.should_not raise_error
       @notice.backtrace.length.should == 1
     end
+
+    it 'captures the current_user' do
+      @notice = App.report_error!(@xml)
+      @notice.current_user['id'].should == '123'
+      @notice.current_user['name'].should == 'Mr. Bean'
+      @notice.current_user['email'].should == 'mr.bean@example.com'
+      @notice.current_user['username'].should == 'mrbean'
+    end
+ 
   end
 
 
