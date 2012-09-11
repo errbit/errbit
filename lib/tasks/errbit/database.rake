@@ -29,6 +29,7 @@ namespace :errbit do
       count = Problem.resolved.count
       Problem.resolved.each {|problem| problem.notices.scrub! }
       puts "=== Scrubbed notices for #{count} resolved errors from the database." if count > 0
+      Rake::Task["errbit:db:compact_notices"].invoke
     end
 
     desc "Scrub backtrace and other data from all but most recent 100 notices for problems with more than 100 notices."
@@ -48,6 +49,12 @@ namespace :errbit do
         end
       }
       puts "=== Scrubbed all but most recent 100 notices for #{count} errors from the database." if count > 0
+      Rake::Task["errbit:db:compact_notices"].invoke
+    end
+
+    desc "Compact notices collection"
+    task :compact_notices => :environment do
+      puts "=== ran repairDatabase to free physical space" if Mongoid.database.command({ "repairDatabase" => 1 })
     end
   end
 end
