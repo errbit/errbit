@@ -12,10 +12,10 @@
   - if current_user.admin?
     = link_to 'edit', edit_app_path(@app), :class => 'button'
     = link_to 'destroy', app_path(@app), :method => :delete, :data => { :confirm => 'Seriously?' }, :class => 'button'
-    - if @all_errs
-      = link_to 'unresolved errs', app_path(@app), :class => 'button'
-    - else
-      = link_to 'all errs', app_path(@app, :all_errs => true), :class => 'button'
+  - if @all_errs
+    = link_to 'unresolved errs', app_path(@app), :class => 'button'
+  - else
+    = link_to 'all errs', app_path(@app, :all_errs => true), :class => 'button'
 
 %h3#watchers_toggle
   Watchers
