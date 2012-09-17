@@ -384,6 +384,19 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
   * You can now easily post bug reports to GitHub Issues by clicking the **Create Issue** button on a **Self.Errbit** error.
 
 
+Use Errbit with applications written in other languages
+-------------------------------------------------------
+
+In theory, any Airbrake-compatible error catcher for other languages should work with Errbit.
+Solutions known to work are listed below:
+
+<table>
+  <tr>
+    <th>PHP (&gt;= 5.3)</th>
+    <td>https://github.com/flippa/errbit-php</td>
+  </tr>
+</table>
+
 TODO
 ----
 
