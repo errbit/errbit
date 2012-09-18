@@ -15,6 +15,7 @@ class Err
   belongs_to :problem
   index :problem_id
   index :error_class
+  index :fingerprint
 
   has_many :notices, :inverse_of => :err, :dependent => :destroy
 
