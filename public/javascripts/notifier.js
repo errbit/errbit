@@ -92,13 +92,13 @@ var Hoptoad = {
 
       var methods = ['params', 'session'];
 
-      for (var i = 0; i < 2; i++) {
-        var type = methods[i];
+      for (var i = 0; i < methods.length; i++) {
+        var method = methods[i];
 
-        if (error[type]) {
-          data += '<' + type + '>';
-          data += Hoptoad.generateVariables(error[type]);
-          data += '</' + type + '>';
+        if (error[method]) {
+          data += '<' + method + '>';
+          data += Hoptoad.generateVariables(error[method]);
+          data += '</' + method + '>';
         }
       }
 
