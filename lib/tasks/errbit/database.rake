@@ -2,13 +2,13 @@ require 'digest/sha1'
 
 namespace :errbit do
   namespace :db do
-    
+
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"
       Problem.all.each(&:cache_notice_attributes)
     end
-    
+
     desc "Updates Problem#notices_count"
     task :update_notices_count => :environment do
       puts "Updating problem.notices_count"
@@ -16,7 +16,7 @@ namespace :errbit do
         p.update_attributes(:notices_count => p.notices.count)
       end
     end
-    
+
     desc "Delete resolved errors from the database. (Useful for limited heroku databases)"
     task :clear_resolved => :environment do
       count = Problem.resolved.count
@@ -29,7 +29,7 @@ namespace :errbit do
 
       def normalize_backtrace(backtrace)
         backtrace[0...3].map do |trace|
-          trace.merge 'method' => trace['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
+          trace.merge 'method' => trace['method'].to_s.gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
         end
       end
 
