@@ -1,4 +1,4 @@
-require 'digest/md5'
+require 'digest/sha1'
 require 'hoptoad_notifier'
 
 class ErrorReport
@@ -10,11 +10,7 @@ class ErrorReport
   end
 
   def fingerprint
-    normalized_backtrace = backtrace[0...3].map do |trace|
-      trace.merge 'method' => trace['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
-    end
-
-    @fingerprint ||= Digest::MD5.hexdigest(normalized_backtrace.to_s)
+    @fingerprint ||= Digest::SHA1.hexdigest(fingerprint_source.to_s)
   end
 
   def rails_env
@@ -55,5 +51,24 @@ class ErrorReport
     err.notices << notice
     notice
   end
+
+  private
+  def fingerprint_source
+    {
+      :backtrace => normalized_backtrace.to_s,
+      :error_class => error_class,
+      :component => component,
+      :action => action,
+      :environment => rails_env,
+      :api_key => api_key
+    }
+  end
+
+  def normalized_backtrace
+    backtrace[0...3].map do |trace|
+      trace.merge 'method' => trace['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
+    end
+  end
+
 end
 
