@@ -24,4 +24,3 @@ Fabricator :github_issues_tracker, :from => :issue_tracker, :class_name => "Issu
   project_id 'test_account/test_project'
   username 'test_username'
 end
-

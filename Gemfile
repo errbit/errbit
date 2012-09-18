@@ -5,6 +5,9 @@ gem 'rails', '3.2.8'
 gem 'nokogiri'
 gem 'mongoid', '~> 2.4.10'
 
+# force SSL
+gem 'rack-ssl', :require => 'rack/ssl'
+
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 
@@ -30,6 +33,7 @@ gem 'kaminari'
 gem 'rack-ssl-enforcer'
 gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
+gem 'campy'
 
 platform :ruby do
   gem 'mongo', '= 1.6.2'
@@ -45,7 +49,6 @@ group :development, :test do
   gem 'webmock', :require => false
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
-    gem 'debugger', :platform => :mri_19
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
