@@ -57,6 +57,11 @@ If this doesn't sound like you, you should probably stick with [Airbrake](http:/
 The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
 They have a free package and even offer a *"Airbrake behind your firewall"* solution.
 
+Mailing List
+------------
+
+Join the Google Group at https://groups.google.com/group/errbit to receive updates and notifications.
+
 Demo
 ----
 
@@ -168,7 +173,7 @@ heroku run rake db:seed
     ```bash
     # Install the heroku scheduler add-on
     heroku addons:add scheduler:standard
-    
+
     # Go open the dashboard to schedule the job.  You should use
     # 'rake errbit:db:clear_resolved' as the task command, and schedule it
     # at whatever frequency you like (once/day should work great).
