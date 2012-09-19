@@ -59,8 +59,5 @@ Errbit::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  # enable HTTPS
-  config.middleware.insert_before Rack::Lock, "Rack::SSL"
 end
 
