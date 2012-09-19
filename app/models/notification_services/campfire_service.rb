@@ -1,4 +1,4 @@
-class NotificationService::CampfireService < NotificationService
+class NotificationServices::CampfireService < NotificationService
   Label = "campfire"
   Fields = [
       [:subdomain, {
