@@ -6,10 +6,10 @@ class Err
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :error_class
+  field :error_class, :default => "UnknownError"
   field :component
   field :action
-  field :environment
+  field :environment, :default => "unknown"
   field :fingerprint
 
   belongs_to :problem
@@ -18,8 +18,6 @@ class Err
   index :fingerprint
 
   has_many :notices, :inverse_of => :err, :dependent => :destroy
-
-  validates_presence_of :error_class, :environment
 
   delegate :app, :resolved?, :to => :problem
 
