@@ -27,13 +27,16 @@ gem 'octokit', '~> 1.0.0'
 
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
-gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari'
 gem 'rack-ssl-enforcer'
 gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
 gem 'campy'
+
+# Please don't update this to airbrake - We override the send_notice method
+# to handle internal errors.
+gem 'hoptoad_notifier', "~> 2.4"
 
 platform :ruby do
   gem 'mongo', '= 1.6.2'
