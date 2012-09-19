@@ -12,6 +12,7 @@ module NoticesHelper
     text = capture_haml(&block)
     if in_app_backtrace_line?(line)
       return link_to_github(app, line, text) if app.github_repo?
+      return link_to_bitbucket(app, line, text) if app.bitbucket_repo?
       if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
         # Return link to file on tracker if issue tracker supports this
         return link_to_issue_tracker_file(app, line, text)
@@ -27,6 +28,12 @@ module NoticesHelper
   def link_to_github(app, line, text = nil)
     file_name, file_path = filepath_parts(line['file'])
     href = "%s#L%s" % [app.github_url_to_file(file_path), line['number']]
+    link_to(text || file_name, href, :target => '_blank')
+  end
+
+  def link_to_bitbucket(app, line, text = nil)
+    file_name, file_path = filepath_parts(line['file'])
+    href = "%s#cl-%s" % [app.bitbucket_url_to_file(file_path), line['number']]
     link_to(text || file_name, href, :target => '_blank')
   end
 

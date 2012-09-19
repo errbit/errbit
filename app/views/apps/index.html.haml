@@ -6,8 +6,8 @@
   %thead
     %tr
       %th Name
-      - if any_github_repos?
-        %th GitHub Repo
+      - if any_github_repos? || any_bitbucket_repos?
+        %th Repository
       - if any_notification_services?
         %th Notification Service
       - if any_issue_trackers?
@@ -19,10 +19,12 @@
     - @apps.each do |app|
       %tr
         %td.name= link_to app.name, app_path(app)
-        - if any_github_repos?
+        - if any_github_repos? or any_bitbucket_repos?
           %td.github_repo
             - if app.github_repo?
               = link_to(app.github_repo, app.github_url, :target => '_blank')
+            - if app.bitbucket_repo?
+              = link_to(app.bitbucket_repo, app.bitbucket_url, :target => '_blank')
         - if any_notification_services?
           %td.notification_service
             - if app.notification_service_configured?

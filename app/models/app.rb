@@ -5,6 +5,7 @@ class App
   field :name, :type => String
   field :api_key
   field :github_repo
+  field :bitbucket_repo
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
@@ -116,6 +117,18 @@ class App
 
   def github_url_to_file(file)
     "#{github_url}/blob/master#{file}"
+  end
+
+  def bitbucket_repo?
+    self.bitbucket_repo.present?
+  end
+
+  def bitbucket_url
+    "https://bitbucket.org/#{bitbucket_repo}" if bitbucket_repo?
+  end
+
+  def bitbucket_url_to_file(file)
+    "#{bitbucket_url}/src/master#{file}"
   end
 
 
