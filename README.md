@@ -67,7 +67,7 @@ Demo
 
 There is a demo available at [http://errbit-demo.herokuapp.com/](http://errbit-demo.herokuapp.com/)
 
-Email: demo@errbit-demo.herokuapp.com
+Email: demo@errbit-demo.herokuapp.com<br/>
 Password: password
 
 Installation
