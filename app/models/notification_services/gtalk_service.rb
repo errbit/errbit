@@ -21,6 +21,10 @@ class NotificationServices::GtalkService < NotificationService
     end
   end
 
+  def url
+    "http://www.google.com/talk/"
+  end
+
   def create_notification(problem)
     # build the xmpp client
     client = Jabber::Client.new(Jabber::JID.new(subdomain))
