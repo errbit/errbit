@@ -17,7 +17,7 @@ class NotificationServices::GtalkService < NotificationService
 
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
-      errors.add :base, 'You must specify your XMPP Domain, Username and Room Name'
+      errors.add :base, 'You must specify your Username, Password and To User'
     end
   end
 
