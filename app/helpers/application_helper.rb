@@ -13,7 +13,7 @@ module ApplicationHelper
           event.dtend       = notice.created_at.utc + 60.minutes
           event.organizer   = notice.server_environment && notice.server_environment["hostname"]
           event.location    = notice.server_environment && notice.server_environment["project-root"]
-          event.url         = app_err_url(:app_id => notice.problem.app.id, :id => notice.problem)
+          event.url         = app_problem_url(:app_id => notice.problem.app.id, :id => notice.problem)
         end
       end
     end.to_s
@@ -58,11 +58,11 @@ module ApplicationHelper
     percent = 100.0 / total.to_f
     rows    = tallies.map {|value, count| [(count.to_f * percent), value]} \
                      .sort {|a, b| a[0] <=> b[0]}
-    render "errs/tally_table", :rows => rows
+    render "problems/tally_table", :rows => rows
   end
 
   def head(collection)
-    collection.first(head_size) 
+    collection.first(head_size)
   end
 
   def tail(collection)

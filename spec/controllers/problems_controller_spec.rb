@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ErrsController do
+describe ProblemsController do
 
   it_requires_authentication :for => {
     :index => :get, :all => :get, :show => :get, :resolve => :put
@@ -11,7 +11,7 @@ describe ErrsController do
   let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production")) }
 
 
-  describe "GET /errs" do
+  describe "GET /problems" do
     render_views
     context 'when logged in as an admin' do
       before(:each) do
@@ -20,7 +20,7 @@ describe ErrsController do
         @problem = Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production"))).problem
       end
 
-      it "should successfully list errs" do
+      it "should successfully list problems" do
         get :index
         response.should be_success
         response.body.gsub("&#8203;", "").should match(@problem.message)
@@ -58,35 +58,35 @@ describe ErrsController do
         end
 
         context 'no params' do
-          it 'shows errs for all environments' do
+          it 'shows problems for all environments' do
             get :index
             assigns(:problems).size.should == 21
           end
         end
 
         context 'environment production' do
-          it 'shows errs for just production' do
+          it 'shows problems for just production' do
             get :index, :environment => 'production'
             assigns(:problems).size.should == 6
           end
         end
 
         context 'environment staging' do
-          it 'shows errs for just staging' do
+          it 'shows problems for just staging' do
             get :index, :environment => 'staging'
             assigns(:problems).size.should == 5
           end
         end
 
         context 'environment development' do
-          it 'shows errs for just development' do
+          it 'shows problems for just development' do
             get :index, :environment => 'development'
             assigns(:problems).size.should == 5
           end
         end
 
         context 'environment test' do
-          it 'shows errs for just test' do
+          it 'shows problems for just test' do
             get :index, :environment => 'test'
             assigns(:problems).size.should == 5
           end
@@ -95,7 +95,7 @@ describe ErrsController do
     end
 
     context 'when logged in as a user' do
-      it 'gets a paginated list of unresolved errs for the users apps' do
+      it 'gets a paginated list of unresolved problems for the users apps' do
         sign_in(user = Fabricate(:user))
         unwatched_err = Fabricate(:err)
         watched_unresolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false))
@@ -107,35 +107,35 @@ describe ErrsController do
     end
   end
 
-  describe "GET /errs/all" do
+  describe "GET /problems/all" do
     context 'when logged in as an admin' do
-      it "gets a paginated list of all errs" do
+      it "gets a paginated list of all problems" do
         sign_in Fabricate(:admin)
-        errs = Kaminari.paginate_array((1..30).to_a)
-        3.times { errs << Fabricate(:err).problem }
-        3.times { errs << Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem }
+        problems = Kaminari.paginate_array((1..30).to_a)
+        3.times { problems << Fabricate(:err).problem }
+        3.times { problems << Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem }
         Problem.should_receive(:ordered_by).and_return(
-          mock('proxy', :page => mock('other_proxy', :per => errs))
+          mock('proxy', :page => mock('other_proxy', :per => problems))
         )
         get :all
-        assigns(:problems).should == errs
+        assigns(:problems).should == problems
       end
     end
 
     context 'when logged in as a user' do
-      it 'gets a paginated list of all errs for the users apps' do
+      it 'gets a paginated list of all problems for the users apps' do
         sign_in(user = Fabricate(:user))
-        unwatched_err = Fabricate(:problem)
-        watched_unresolved_err = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false)
-        watched_resolved_err = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true)
+        unwatched_problem = Fabricate(:problem)
+        watched_unresolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false)
+        watched_resolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true)
         get :all
-        assigns(:problems).should include(watched_resolved_err, watched_unresolved_err)
-        assigns(:problems).should_not include(unwatched_err)
+        assigns(:problems).should include(watched_resolved_problem, watched_unresolved_problem)
+        assigns(:problems).should_not include(unwatched_problem)
       end
     end
   end
 
-  describe "GET /apps/:app_id/errs/:id" do
+  describe "GET /apps/:app_id/problems/:id" do
     render_views
 
     context 'when logged in as an admin' do
@@ -148,7 +148,7 @@ describe ErrsController do
         assigns(:app).should == app
       end
 
-      it "finds the err" do
+      it "finds the problem" do
         get :show, :app_id => app.id, :id => err.problem.id
         assigns(:problem).should == err.problem
       end
@@ -181,14 +181,14 @@ describe ErrsController do
       context "create issue button" do
         let(:button_matcher) { match(/create issue/) }
 
-        it "should not exist for err's app without issue tracker" do
+        it "should not exist for problem's app without issue tracker" do
           err = Fabricate :err
           get :show, :app_id => err.app.id, :id => err.problem.id
 
           response.body.should_not button_matcher
         end
 
-        it "should exist for err's app with issue tracker" do
+        it "should exist for problem's app with issue tracker" do
           tracker = Fabricate(:lighthouse_tracker)
           err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app))
           get :show, :app_id => err.app.id, :id => err.problem.id
@@ -196,7 +196,7 @@ describe ErrsController do
           response.body.should button_matcher
         end
 
-        it "should not exist for err with issue_link" do
+        it "should not exist for problem with issue_link" do
           tracker = Fabricate(:lighthouse_tracker)
           err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app, :issue_link => "http://some.host"))
           get :show, :app_id => err.app.id, :id => err.problem.id
@@ -215,7 +215,7 @@ describe ErrsController do
         @watched_err = Fabricate(:err, :problem => Fabricate(:problem, :app => @watched_app))
       end
 
-      it 'finds the err if the user is watching the app' do
+      it 'finds the problem if the user is watching the app' do
         get :show, :app_id => @watched_app.to_param, :id => @watched_err.problem.id
         assigns(:problem).should == @watched_err.problem
       end
@@ -228,7 +228,7 @@ describe ErrsController do
     end
   end
 
-  describe "PUT /apps/:app_id/errs/:id/resolve" do
+  describe "PUT /apps/:app_id/problems/:id/resolve" do
     before do
       sign_in Fabricate(:admin)
 
@@ -238,7 +238,7 @@ describe ErrsController do
       @problem.problem.stub(:resolve!)
     end
 
-    it 'finds the app and the err' do
+    it 'finds the app and the problem' do
       App.should_receive(:find).with(@problem.app.id).and_return(@problem.app)
       @problem.app.problems.should_receive(:find).and_return(@problem.problem)
       put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
@@ -261,14 +261,14 @@ describe ErrsController do
       response.should redirect_to(app_path(@problem.app))
     end
 
-    it "should redirect back to errs page" do
-      request.env["Referer"] = errs_path
+    it "should redirect back to problems page" do
+      request.env["Referer"] = problems_path
       put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
-      response.should redirect_to(errs_path)
+      response.should redirect_to(problems_path)
     end
   end
 
-  describe "POST /apps/:app_id/errs/:id/create_issue" do
+  describe "POST /apps/:app_id/problems/:id/create_issue" do
     render_views
 
     before(:each) do
@@ -293,7 +293,7 @@ describe ErrsController do
         end
 
         it "should redirect to problem page" do
-          response.should redirect_to( app_err_path(problem.app, problem) )
+          response.should redirect_to( app_problem_path(problem.app, problem) )
         end
       end
     end
@@ -306,7 +306,7 @@ describe ErrsController do
       end
 
       it "should redirect to problem page" do
-        response.should redirect_to( app_err_path(problem.app, problem) )
+        response.should redirect_to( app_problem_path(problem.app, problem) )
       end
 
       it "should set flash error message telling issue tracker of the app doesn't exist" do
@@ -325,8 +325,8 @@ describe ErrsController do
           post :create_issue, :app_id => err.app.id, :id => err.problem.id
         end
 
-        it "should redirect to err page" do
-          response.should redirect_to( app_err_path(err.app, err.problem) )
+        it "should redirect to problem page" do
+          response.should redirect_to( app_problem_path(err.app, err.problem) )
         end
 
         it "should notify of connection error" do
@@ -336,12 +336,12 @@ describe ErrsController do
     end
   end
 
-  describe "DELETE /apps/:app_id/errs/:id/unlink_issue" do
+  describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
     before(:each) do
       sign_in Fabricate(:admin)
     end
 
-    context "err with issue" do
+    context "problem with issue" do
       let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :issue_link => "http://some.host")) }
 
       before(:each) do
@@ -349,8 +349,8 @@ describe ErrsController do
         err.problem.reload
       end
 
-      it "should redirect to err page" do
-        response.should redirect_to( app_err_path(err.app, err.problem) )
+      it "should redirect to problem page" do
+        response.should redirect_to( app_problem_path(err.app, err.problem) )
       end
 
       it "should clear issue link" do
@@ -366,8 +366,8 @@ describe ErrsController do
         err.problem.reload
       end
 
-      it "should redirect to err page" do
-        response.should redirect_to( app_err_path(err.app, err.problem) )
+      it "should redirect to problem page" do
+        response.should redirect_to( app_problem_path(err.app, err.problem) )
       end
     end
   end
@@ -389,7 +389,7 @@ describe ErrsController do
       request.flash[:notice].should match(/You have not selected any/)
     end
 
-    context "POST /errs/merge_several" do
+    context "POST /problems/merge_several" do
       it "should require at least two problems" do
         post :merge_several, :problems => [@problem1.id.to_s]
         request.flash[:notice].should match(/You must select at least two/)
@@ -403,7 +403,7 @@ describe ErrsController do
       end
     end
 
-    context "POST /errs/unmerge_several" do
+    context "POST /problems/unmerge_several" do
       it "should unmerge a merged problem" do
         merged_problem = Problem.merge!(@problem1, @problem2)
         merged_problem.errs.length.should == 2
@@ -414,22 +414,22 @@ describe ErrsController do
       end
     end
 
-    context "POST /errs/resolve_several" do
+    context "POST /problems/resolve_several" do
       it "should resolve the issue" do
         post :resolve_several, :problems => [@problem2.id.to_s]
         @problem2.reload.resolved?.should == true
       end
     end
 
-    context "POST /errs/unresolve_several" do
+    context "POST /problems/unresolve_several" do
       it "should unresolve the issue" do
         post :unresolve_several, :problems => [@problem1.id.to_s]
         @problem1.reload.resolved?.should == false
       end
     end
 
-    context "POST /errs/destroy_several" do
-      it "should delete the errs" do
+    context "POST /problems/destroy_several" do
+      it "should delete the problems" do
         lambda {
           post :destroy_several, :problems => [@problem1.id.to_s]
         }.should change(Problem, :count).by(-1)

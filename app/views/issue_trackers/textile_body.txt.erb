@@ -1,7 +1,7 @@
 <% if notice = problem.notices.first %>
 h1. <%= notice.message %>
 
-h3. "See this exception on Errbit":<%= app_err_url problem.app, problem %>
+h3. "See this exception on Errbit":<%= app_problem_url problem.app, problem %>
 
 h2. Summary
 <% if notice.request['url'].present? %>
