@@ -33,10 +33,13 @@ gem 'rack-ssl-enforcer'
 gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
 gem 'campy'
+gem 'xmpp4r'
+gem 'hipchat-api'
+gem 'bitbucket_rest_api'
 
 # Please don't update this to airbrake - We override the send_notice method
 # to handle internal errors.
-gem 'hoptoad_notifier', "~> 2.4"
+gem 'hoptoad_notifier', '~> 2.4'
 
 platform :ruby do
   gem 'mongo', '= 1.6.2'
