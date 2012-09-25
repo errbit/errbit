@@ -23,7 +23,7 @@ class IssueTrackers::BitbucketIssuesTracker < IssueTracker
   end
 
   def create_issue(problem, reported_by = nil)
-    bitbucket = BitBucket.new basic_auth: "#{api_token}:#{project_id}"
+    bitbucket = BitBucket.new :basic_auth => "#{api_token}:#{project_id}"
 
     begin
       issue = bitbucket.issues.create api_token, repo_name.split('/')[1], :title => issue_title(problem), :content => body_template.result(binding), :priority => 'critical'
