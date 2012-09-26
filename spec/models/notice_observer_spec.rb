@@ -44,7 +44,7 @@ describe NoticeObserver do
   end
 
   describe "should send a notification if a notification service is configured" do
-    let(:app) { app = Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
+    let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
     let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
 
     before do
@@ -56,9 +56,6 @@ describe NoticeObserver do
     end
 
     it "should create a campfire notification" do
-      err.problem.stub(:notices_count) { 1 }
-      app.notification_service.stub!(:create_notification).and_return(true)
-      app.stub!(:notification_recipients => %w('ryan@system88.com'))
       app.notification_service.should_receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
@@ -67,7 +64,7 @@ describe NoticeObserver do
   end
 
   describe "should not send a notification if a notification service is not configured" do
-    let(:app) { app = Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:notification_service))}
+    let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:notification_service))}
     let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
 
     before do
@@ -79,8 +76,6 @@ describe NoticeObserver do
     end
 
     it "should not create a campfire notification" do
-      err.problem.stub(:notices_count) { 1 }
-      app.stub!(:notification_recipients => %w('ryan@system88.com'))
       app.notification_service.should_not_receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
@@ -88,4 +83,22 @@ describe NoticeObserver do
     end
   end
 
+  describe 'hipcat notifications' do
+    let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:hipchat_notification_service))}
+    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
+
+    before do
+      Errbit::Config.per_app_email_at_notices = true
+    end
+
+    after do
+      Errbit::Config.per_app_email_at_notices = false
+    end
+
+    it 'creates a hipchat notification' do
+      app.notification_service.should_receive(:create_notification)
+
+      Fabricate(:notice, :err => err)
+    end
+  end
 end
