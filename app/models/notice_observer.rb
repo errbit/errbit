@@ -2,12 +2,12 @@ class NoticeObserver < Mongoid::Observer
   observe :notice
 
   def after_create notice
-    return unless should_notify? notice
-
-    # if the app has a notficiation service, fire it off
+    # if the app has a notification service, fire it off
     if notice.app.notification_service_configured?
       notice.app.notification_service.create_notification(notice.problem)
     end
+
+    return unless should_notify? notice
 
     Mailer.err_notification(notice).deliver
   end
