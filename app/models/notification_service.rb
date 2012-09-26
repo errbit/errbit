@@ -1,6 +1,9 @@
 class NotificationService
   include Mongoid::Document
 
+  include Rails.application.routes.url_helpers
+  default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
+
   field :room_id, :type => String
   field :api_token, :type => String
   field :subdomain, :type => String
