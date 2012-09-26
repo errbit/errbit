@@ -16,7 +16,7 @@ describe CommentsController do
       let(:user) { Fabricate(:user) }
 
       before(:each) do
-        post :create, :app_id => problem.app.id, :err_id => problem.id,
+        post :create, :app_id => problem.app.id, :problem_id => problem.id,
              :comment => { :body => "One test comment", :user_id => user.id }
         problem.reload
       end
@@ -26,7 +26,7 @@ describe CommentsController do
       end
 
       it "should redirect to problem page" do
-        response.should redirect_to( app_err_path(problem.app, problem) )
+        response.should redirect_to( app_problem_path(problem.app, problem) )
       end
     end
   end
@@ -43,7 +43,7 @@ describe CommentsController do
       let(:comment) { problem.reload.comments.first }
 
       before(:each) do
-        delete :destroy, :app_id => problem.app.id, :err_id => problem.id, :id => comment.id.to_s
+        delete :destroy, :app_id => problem.app.id, :problem_id => problem.id, :id => comment.id.to_s
         problem.reload
       end
 
@@ -52,7 +52,7 @@ describe CommentsController do
       end
 
       it "should redirect to problem page" do
-        response.should redirect_to( app_err_path(problem.app, problem) )
+        response.should redirect_to( app_problem_path(problem.app, problem) )
       end
     end
   end
