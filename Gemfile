@@ -34,8 +34,8 @@ gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
 gem 'campy'
 gem 'xmpp4r'
-gem 'hipchat-api'
 gem 'bitbucket_rest_api'
+gem 'hipchat'
 
 # Please don't update this to airbrake - We override the send_notice method
 # to handle internal errors.
