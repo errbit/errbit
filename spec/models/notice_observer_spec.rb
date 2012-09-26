@@ -65,6 +65,7 @@ describe NoticeObserver do
                      :backtrace => [{ :error => 'Le Broken' }], :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
     end
   end
+
   describe "should not send a notification if a notification service is not configured" do
     let(:app) { app = Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:notification_service))}
     let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
@@ -79,7 +80,6 @@ describe NoticeObserver do
 
     it "should not create a campfire notification" do
       err.problem.stub(:notices_count) { 1 }
-      #app.notification_service.stub!(:create_notification).and_return(true)
       app.stub!(:notification_recipients => %w('ryan@system88.com'))
       app.notification_service.should_not_receive(:create_notification)
 
