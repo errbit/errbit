@@ -5,7 +5,7 @@ class NoticeObserver < Mongoid::Observer
     return unless should_notify? notice
 
     # if the app has a notficiation service, fire it off
-    unless notice.app.notification_service.nil?
+    if notice.app.notification_service_configured?
       notice.app.notification_service.create_notification(notice.problem)
     end
 
