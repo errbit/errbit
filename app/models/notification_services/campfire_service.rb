@@ -19,6 +19,10 @@ class NotificationServices::CampfireService < NotificationService
     end
   end
 
+  def url
+    "http://campfirenow.com/"
+  end
+
   def create_notification(problem)
     # build the campfire client
     campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => room_id)
