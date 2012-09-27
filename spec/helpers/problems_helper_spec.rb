@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ErrsHelper do
-  describe '#truncated_err_message' do
+describe ProblemsHelper do
+  describe '#truncated_problem_message' do
     it 'is html safe' do
       problem = double('problem', :message => '#<NoMethodError: ...>')
-      truncated = helper.truncated_err_message(problem)
+      truncated = helper.truncated_problem_message(problem)
       truncated.should be_html_safe
       truncated.should_not include('<', '>')
     end

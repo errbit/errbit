@@ -83,7 +83,7 @@
 
 - if @app.problems.any?
   %h3.clear Errors
-  = render 'errs/table', :errs => @problems
+  = render 'problems/table', :problems => @problems
 - else
   %h3.clear No errs have been caught yet, make sure you setup your app
   = render 'configuration_instructions', :app => @app

@@ -14,7 +14,7 @@ Errbit::Application.routes.draw do
       delete :unlink_github
     end
   end
-  resources :errs,      :only => [:index] do
+  resources :problems,      :only => [:index] do
     collection do
       post :destroy_several
       post :resolve_several
@@ -26,7 +26,7 @@ Errbit::Application.routes.draw do
   end
 
   resources :apps do
-    resources :errs do
+    resources :problems do
       resources :notices
       resources :comments, :only => [:create, :destroy]
 
@@ -37,7 +37,7 @@ Errbit::Application.routes.draw do
         delete :unlink_issue
       end
     end
-    
+
     resources :deploys, :only => [:index]
   end
 
@@ -46,7 +46,7 @@ Errbit::Application.routes.draw do
       resources :problems, :only => [:index], :defaults => { :format => 'json' }
       resources :notices, :only => [:index], :defaults => { :format => 'json' }
     end
-  end 
+  end
 
   root :to => 'apps#index'
 

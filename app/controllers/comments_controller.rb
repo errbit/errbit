@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "I'm sorry, your comment was blank! Try again?"
     end
-    redirect_to app_err_path(@app, @problem)
+    redirect_to app_problem_path(@app, @problem)
   end
 
   def destroy
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
     end
-    redirect_to app_err_path(@app, @problem)
+    redirect_to app_problem_path(@app, @problem)
   end
 
   protected
@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
     end
 
     def find_problem
-      @problem = @app.problems.find(params[:err_id])
+      @problem = @app.problems.find(params[:problem_id])
     end
 end
 
