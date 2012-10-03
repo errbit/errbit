@@ -26,7 +26,7 @@ URL:
 
 BACKTRACE:
 
-<% @notice.backtrace.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line| %>
+<% @notice.backtrace_lines.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line| %>
   <%= line %>
 <% end %>
 

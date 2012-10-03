@@ -22,7 +22,7 @@
 
 %h3 Backtrace
 %table
-  - for line in notice.backtrace
+  - for line in notice.backtrace_lines
     %tr
       %td
         = "#{line['number']}:"

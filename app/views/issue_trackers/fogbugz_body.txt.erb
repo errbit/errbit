@@ -19,7 +19,7 @@
   <%= pretty_hash(notice.session) %>
 
   Backtrace
-  <% for line in notice.backtrace %>
+  <% for line in notice.backtrace_lines %>
     <%= line['number'] %>:  <%= line['file'].to_s.sub(/^\[PROJECT_ROOT\]/, '') %>
   <% end %>
 

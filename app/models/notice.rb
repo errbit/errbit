@@ -6,15 +6,16 @@ class Notice
   include Mongoid::Timestamps
 
   field :message
-  field :backtrace, :type => Array
   field :server_environment, :type => Hash
   field :request, :type => Hash
   field :notifier, :type => Hash
   field :user_attributes, :type => Hash
   field :current_user, :type => Hash
   field :error_class
+  delegate :lines, :to => :backtrace, :prefix => true
 
   belongs_to :err
+  belongs_to :backtrace, :index => true
   index :created_at
   index(
     [
@@ -28,7 +29,7 @@ class Notice
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
-  validates_presence_of :backtrace, :server_environment, :notifier
+  validates_presence_of :server_environment, :notifier, :backtrace
 
   scope :ordered, order_by(:created_at.asc)
   scope :reverse_ordered, order_by(:created_at.desc)
@@ -92,15 +93,7 @@ class Notice
 
   # Backtrace containing only files from the app itself (ignore gems)
   def app_backtrace
-    backtrace.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
-  end
-
-  def backtrace
-    # If gems are vendored into project, treat vendored gem dir as [GEM_ROOT]
-    (read_attribute(:backtrace) || []).map do |line|
-      # Changes "[PROJECT_ROOT]/rubygems/ruby/1.9.1/gems" to "[GEM_ROOT]/gems"
-      line.merge 'file' => line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
-    end
+    backtrace_lines.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
   end
 
   protected
@@ -129,8 +122,6 @@ class Notice
     [:server_environment, :request, :notifier].each do |h|
       send("#{h}=",sanitize_hash(send(h)))
     end
-    # Set unknown backtrace files
-    read_attribute(:backtrace).each{|line| line['file'] = "[unknown source]" if line['file'].blank? }
   end
 
   def sanitize_hash(h)

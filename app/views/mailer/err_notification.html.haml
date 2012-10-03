@@ -36,7 +36,7 @@
                 - if @notice.request['url'].present?
                   = link_to @notice.request['url'], @notice.request['url']
               %p.heading BACKTRACE:
-              - @notice.backtrace.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line|
+              - @notice.backtrace_lines.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line|
                 %p.backtrace= line
               %br
 
