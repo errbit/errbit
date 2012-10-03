@@ -6,6 +6,7 @@ class App
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
@@ -106,6 +107,9 @@ class App
   end
   alias :notify_on_deploys? :notify_on_deploys
 
+  def repo_branch
+    self.repository_branch.present? ? self.repository_branch : 'master'
+  end
 
   def github_repo?
     self.github_repo.present?
@@ -116,7 +120,7 @@ class App
   end
 
   def github_url_to_file(file)
-    "#{github_url}/blob/master#{file}"
+    "#{github_url}/blob/#{repo_branch + file}"
   end
 
   def bitbucket_repo?
@@ -128,7 +132,7 @@ class App
   end
 
   def bitbucket_url_to_file(file)
-    "#{bitbucket_url}/src/master#{file}"
+    "#{bitbucket_url}/src/#{repo_branch + file}"
   end
 
 
