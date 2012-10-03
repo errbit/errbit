@@ -17,7 +17,7 @@ class NotificationServices::HipchatService < NotificationService
   end
 
   def create_notification(problem)
-    url = app_err_url problem.app, problem
+    url = app_problem_url problem.app, problem
     message = <<-MSG.strip_heredoc
       [#{ERB::Util.html_escape problem.app.name}]#{ERB::Util.html_escape notification_description(problem)}<br>
       <a href="#{url}">#{url}</a>

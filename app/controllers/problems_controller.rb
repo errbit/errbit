@@ -1,4 +1,4 @@
-class ErrsController < ApplicationController
+class ProblemsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_filter :find_app, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
@@ -69,12 +69,12 @@ class ErrsController < ApplicationController
       end
     end
 
-    redirect_to app_err_path(@app, @problem)
+    redirect_to app_problem_path(@app, @problem)
   end
 
   def unlink_issue
     @problem.update_attribute :issue_link, nil
-    redirect_to app_err_path(@app, @problem)
+    redirect_to app_problem_path(@app, @problem)
   end
 
   def resolve
