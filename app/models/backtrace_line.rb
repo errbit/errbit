@@ -1,7 +1,7 @@
 class BacktraceLine
   include Mongoid::Document
 
-  field :number, type: Integer
+  field :number, :type => Integer
   field :file
   field :method
 
