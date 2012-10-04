@@ -6,5 +6,9 @@ class BacktraceLine
   field :method
 
   embedded_in :backtrace
+
+  def fingerprint
+    [number, file, method].join
+  end
 end
 

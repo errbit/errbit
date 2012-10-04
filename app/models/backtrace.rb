@@ -26,7 +26,7 @@ class Backtrace
 
   private
   def generate_fingerprint
-    self.fingerprint = Digest::SHA1.hexdigest(lines.join)
+    self.fingerprint = Digest::SHA1.hexdigest(lines.map(&:fingerprint).join)
   end
 
 end
