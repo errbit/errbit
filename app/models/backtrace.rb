@@ -6,9 +6,13 @@ class Backtrace
   index :fingerprint
 
   has_many :notices
+  has_one :notice
+
   embeds_many :lines, :class_name => "BacktraceLine"
 
   after_initialize :generate_fingerprint
+
+  delegate :app, :to => :notice
 
   def self.find_or_create(attributes = {})
     new(attributes).similar || create(attributes)

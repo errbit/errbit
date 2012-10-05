@@ -1,51 +1,38 @@
 module BacktraceLineHelper
-  def link_to_source_file(app, line, &block)
+  def link_to_source_file(line, &block)
     text = capture_haml(&block)
-    if line.in_app?
-      return link_to_github(app, line, text) if app.github_repo?
-      return link_to_bitbucket(app, line, text) if app.bitbucket_repo?
-      if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
-        # Return link to file on tracker if issue tracker supports this
-        return link_to_issue_tracker_file(app, line, text)
-      end
-    end
+    line.in_app? ? link_to_in_app_source_file(line, text) : link_to_external_source_file(text)
+  end
+
+  private
+  def link_to_in_app_source_file(line, text)
+    link_to_repo_source_file(line, text) || link_to_issue_tracker_file(line, text)
+  end
+
+  def link_to_repo_source_file(line, text)
+    link_to_github(line, text) || link_to_bitbucket(line, text)
+  end
+
+  def link_to_external_source_file(text)
     text
   end
 
-  def filepath_parts(file)
-    [file.split('/').last, file]
+  def link_to_github(line, text = nil)
+    return unless line.app.github_repo?
+    href = "%s#L%s" % [line.app.github_url_to_file(line.file), line.number]
+    link_to(text || line.file_name, href, :target => '_blank')
   end
 
-  def link_to_github(app, line, text = nil)
-    file_name, file_path = filepath_parts(line.file)
-    href = "%s#L%s" % [app.github_url_to_file(file_path), line.number]
-    link_to(text || file_name, href, :target => '_blank')
+  def link_to_bitbucket(line, text = nil)
+    return unless line.app.bitbucket_repo?
+    href = "%s#cl-%s" % [line.app.bitbucket_url_to_file(line.file), line.number]
+    link_to(text || line.file_name, href, :target => '_blank')
   end
 
-  def link_to_bitbucket(app, line, text = nil)
-    file_name, file_path = filepath_parts(line.file)
-    href = "%s#cl-%s" % [app.bitbucket_url_to_file(file_path), line.number]
-    link_to(text || file_name, href, :target => '_blank')
-  end
-
-  def link_to_issue_tracker_file(app, line, text = nil)
-    file_name, file_path = filepath_parts(line.file_relative)
-    href = app.issue_tracker.url_to_file(file_path, line.number)
-    link_to(text || file_name, href, :target => '_blank')
-  end
-
-  def path_for_backtrace_line(line)
-    path = File.dirname(line.file)
-    return '' if path == '.'
-    # Remove [PROJECT_ROOT]
-    path.gsub!('[PROJECT_ROOT]/', '')
-    # Make gem name bold if starts with [GEM_ROOT]/gems
-    path.gsub!(/\[GEM_ROOT\]\/gems\/([^\/]+)/, "<strong>\\1</strong>")
-    (path << '/').html_safe
-  end
-
-  def file_for_backtrace_line(line)
-    file = File.basename(line.file)
+  def link_to_issue_tracker_file(line, text = nil)
+    return unless line.app.issue_tracker && line.app.issue_tracker.respond_to?(:url_to_file)
+    href = line.app.issue_tracker.url_to_file(line.file, line.number)
+    link_to(text || line.file_name, href, :target => '_blank')
   end
 
 end

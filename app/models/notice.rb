@@ -13,6 +13,7 @@ class Notice
   field :current_user, :type => Hash
   field :error_class
   delegate :lines, :to => :backtrace, :prefix => true
+  delegate :app, :to => :err
 
   belongs_to :err
   belongs_to :backtrace, :index => true
