@@ -91,9 +91,8 @@ class Notice
     request['session'] || {}
   end
 
-  # Backtrace containing only files from the app itself (ignore gems)
-  def app_backtrace
-    backtrace_lines.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
+  def in_app_backtrace_lines
+    backtrace_lines.in_app
   end
 
   protected

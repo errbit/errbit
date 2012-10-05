@@ -1,16 +1,12 @@
 # encoding: utf-8
 module NoticesHelper
-  def in_app_backtrace_line?(line)
-    !!(line['file'] =~ %r{^\[PROJECT_ROOT\]/(?!(vendor))})
-  end
-
   def notice_atom_summary(notice)
     render "notices/atom_entry.html.haml", :notice => notice
   end
 
   def link_to_source_file(app, line, &block)
     text = capture_haml(&block)
-    if in_app_backtrace_line?(line)
+    if line.in_app?
       return link_to_github(app, line, text) if app.github_repo?
       return link_to_bitbucket(app, line, text) if app.bitbucket_repo?
       if app.issue_tracker && app.issue_tracker.respond_to?(:url_to_file)
@@ -48,7 +44,7 @@ module NoticesHelper
   def grouped_lines(lines)
     line_groups = []
     lines.each do |line|
-      in_app = in_app_backtrace_line?(line)
+      in_app = line.in_app?
       if line_groups.last && line_groups.last[0] == in_app
         line_groups.last[1] << line
       else
