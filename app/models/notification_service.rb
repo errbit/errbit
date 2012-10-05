@@ -7,7 +7,8 @@ class NotificationService
   field :room_id, :type => String
   field :api_token, :type => String
   field :subdomain, :type => String
-
+  field :sender_name, :type => String
+  
   embedded_in :app, :inverse_of => :notification_service
 
   validate :check_params

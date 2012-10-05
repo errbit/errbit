@@ -5,6 +5,6 @@ Fabricator :notification_service  do
   subdomain { sequence :word }
 end
 
-%w(campfire hipchat).each do |t|
+%w(campfire hipchat hoiio).each do |t|
   Fabricator "#{t}_notification_service".to_sym, :from => :notification_service, :class_name => "NotificationService::#{t.camelcase}Service"
 end

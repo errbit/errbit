@@ -44,6 +44,7 @@ gem 'octokit', '~> 1.0.0'
 gem 'campy'
 # Hipchat
 gem 'hipchat'
+gem 'hoi'
 
 # Authentication
 # ---------------------------------------
@@ -69,6 +70,7 @@ group :development, :test do
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
     gem 'pry'
+    gem 'pry-rails'
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
