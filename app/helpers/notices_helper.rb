@@ -18,24 +18,24 @@ module NoticesHelper
   end
 
   def filepath_parts(file)
-    [file.split('/').last, file.gsub('[PROJECT_ROOT]', '')]
+    [file.split('/').last, file]
   end
 
   def link_to_github(app, line, text = nil)
-    file_name, file_path = filepath_parts(line['file'])
-    href = "%s#L%s" % [app.github_url_to_file(file_path), line['number']]
+    file_name, file_path = filepath_parts(line.file)
+    href = "%s#L%s" % [app.github_url_to_file(file_path), line.number]
     link_to(text || file_name, href, :target => '_blank')
   end
 
   def link_to_bitbucket(app, line, text = nil)
-    file_name, file_path = filepath_parts(line['file'])
-    href = "%s#cl-%s" % [app.bitbucket_url_to_file(file_path), line['number']]
+    file_name, file_path = filepath_parts(line.file)
+    href = "%s#cl-%s" % [app.bitbucket_url_to_file(file_path), line.number]
     link_to(text || file_name, href, :target => '_blank')
   end
 
   def link_to_issue_tracker_file(app, line, text = nil)
-    file_name, file_path = filepath_parts(line['file'])
-    href = app.issue_tracker.url_to_file(file_path, line['number'])
+    file_name, file_path = filepath_parts(line.file_relative)
+    href = app.issue_tracker.url_to_file(file_path, line.number)
     link_to(text || file_name, href, :target => '_blank')
   end
 
@@ -55,7 +55,7 @@ module NoticesHelper
   end
 
   def path_for_backtrace_line(line)
-    path = File.dirname(line['file'])
+    path = File.dirname(line.file)
     return '' if path == '.'
     # Remove [PROJECT_ROOT]
     path.gsub!('[PROJECT_ROOT]/', '')
@@ -65,7 +65,7 @@ module NoticesHelper
   end
 
   def file_for_backtrace_line(line)
-    file = File.basename(line['file'])
+    file = File.basename(line.file)
   end
 end
 

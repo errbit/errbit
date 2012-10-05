@@ -27,7 +27,7 @@
 
 ## Backtrace ##
 ```
-<% for line in notice.backtrace_lines %><%= line['number'] %>:  <%= line['file'].to_s.sub(/^\[PROJECT_ROOT\]/, '') %> -> **<%= line['method'] %>**
+<% for line in notice.backtrace_lines %><%= line.number %>:  <%= line.file_relative %> -> **<%= line.method %>**
 <% end %>
 ```
 

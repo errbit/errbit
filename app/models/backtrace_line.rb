@@ -17,5 +17,10 @@ class BacktraceLine
   def in_app?
     !!(file =~ IN_APP_REGEXP)
   end
+
+  def file_relative
+    file.to_s.sub(/^\[PROJECT_ROOT\]/, '')
+  end
+
 end
 
