@@ -59,13 +59,17 @@ class ErrorReport
   private
   def fingerprint_source
     {
-      :backtrace => backtrace.lines[0..3],
+      :backtrace => backtrace_head.map(&:to_s),
       :error_class => error_class,
       :component => component,
       :action => action,
       :environment => rails_env,
       :api_key => api_key
     }
+  end
+
+  def backtrace_head
+    backtrace.lines[0..3]
   end
 
 end
