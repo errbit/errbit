@@ -10,10 +10,6 @@ class BacktraceLine
 
   scope :in_app, where(:file => IN_APP_REGEXP)
 
-  def fingerprint
-    [number, file, method].join
-  end
-
   def to_s
     "#{file}:#{number}"
   end
