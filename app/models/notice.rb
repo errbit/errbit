@@ -30,7 +30,7 @@ class Notice
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
-  validates_presence_of :server_environment, :notifier, :backtrace
+  validates_presence_of :backtrace, :server_environment, :notifier
 
   scope :ordered, order_by(:created_at.asc)
   scope :reverse_ordered, order_by(:created_at.desc)
