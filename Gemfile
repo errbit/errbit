@@ -44,7 +44,10 @@ gem 'octokit', '~> 1.0.0'
 gem 'campy'
 # Hipchat
 gem 'hipchat'
+# Hoiio
 gem 'hoi'
+# Pushover
+gem 'rushover'
 
 # Authentication
 # ---------------------------------------
