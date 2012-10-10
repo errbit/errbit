@@ -44,6 +44,7 @@ gem 'octokit', '~> 1.0.0'
 gem 'campy'
 # Hipchat
 gem 'hipchat'
+# Hoiio (SMS)
 gem 'hoi'
 
 # Authentication
