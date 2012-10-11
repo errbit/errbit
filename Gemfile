@@ -76,6 +76,7 @@ group :development, :test do
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
   gem 'capistrano'
+  gem 'capistrano_colors'
 end
 
 group :test do
