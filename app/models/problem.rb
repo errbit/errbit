@@ -153,7 +153,7 @@ class Problem
     update_attributes!(attrs)
   end
 
-  def remove_cached_notice_attribures(notice)
+  def remove_cached_notice_attributes(notice)
     update_attributes!(
       :messages    => attribute_count_descrease(:messages, notice.message),
       :hosts       => attribute_count_descrease(:hosts, notice.host),
