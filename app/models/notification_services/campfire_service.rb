@@ -25,7 +25,7 @@ if defined? Campy
       campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => room_id)
 
       # post the issue to the campfire room
-      campy.speak "[errbit] http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"
+      campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}/problems/#{problem.id.to_s}"
     end
   end
 end
