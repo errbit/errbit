@@ -38,6 +38,9 @@ gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.0.0'
 
+# Bitbucket Issues
+gem 'bitbucket_rest_api'
+
 # Notification services
 # ---------------------------------------
 # Campfire
