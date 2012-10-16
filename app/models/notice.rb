@@ -114,7 +114,7 @@ class Notice
   end
 
   def remove_cached_attributes_from_problem
-    problem.remove_cached_notice_attribures(self) if err
+    problem.remove_cached_notice_attributes(self) if err
   end
 
   def unresolve_problem

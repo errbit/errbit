@@ -1,3 +1,5 @@
+require 'active_resource'
+
 module Mingle
   class Card < ActiveResource::Base
     # site template ~> "https://username:password@mingle.example.com/api/v1/projects/:project_id/"

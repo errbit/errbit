@@ -60,6 +60,9 @@ default_config.each do |k,v|
   Errbit::Config.send("#{k}=", v) if Errbit::Config.send(k) === nil
 end
 
+# Disable GitHub oauth if gem is missing
+Errbit::Config.github_authentication = false unless defined?(OmniAuth::Strategies::GitHub)
+
 # Set SMTP settings if given.
 if smtp = Errbit::Config.smtp_settings
   ActionMailer::Base.delivery_method = :smtp

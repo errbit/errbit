@@ -1,45 +1,60 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
-
-gem 'nokogiri'
 gem 'mongoid', '~> 2.4.10'
-
-# force SSL
-gem 'rack-ssl', :require => 'rack/ssl'
-
+gem 'mongoid_rails_migrations'
+gem 'devise', '~> 1.5.3'
+gem 'nokogiri'
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
+gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
-gem 'devise', '~> 1.5.3'
-
-gem 'omniauth-github'
-gem 'oa-core'
-
-gem 'lighthouse-api'
-gem 'oruen_redmine_client', :require => 'redmine_client'
-gem 'mongoid_rails_migrations'
 gem 'useragent', '~> 0.3.1'
-gem 'pivotal-tracker'
-gem 'ruby-fogbugz', :require => 'fogbugz'
-
-gem 'octokit', '~> 1.0.0'
-
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari'
 gem 'rack-ssl-enforcer'
-gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
+gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
 gem 'rails_autolink', '~> 1.0.9'
-gem 'campy'
-gem 'xmpp4r'
-gem 'bitbucket_rest_api'
-gem 'hipchat'
+# Please don't update hoptoad_notifier to airbrake.
+# It's for internal use only, and we monkeypatch certain methods
+gem 'hoptoad_notifier', "~> 2.4"
 
-# Please don't update this to airbrake - We override the send_notice method
-# to handle internal errors.
-gem 'hoptoad_notifier', '~> 2.4'
+
+# Remove / comment out any of the gems below if you want to disable
+# a given issue tracker, notification service, or authentication.
+
+# Issue Trackers
+# ---------------------------------------
+# Lighthouse
+gem 'lighthouse-api'
+# Redmine
+gem 'oruen_redmine_client', :require => 'redmine_client'
+# Pivotal Tracker
+gem 'pivotal-tracker'
+# Fogbugz
+gem 'ruby-fogbugz', :require => 'fogbugz'
+# Github Issues
+gem 'octokit', '~> 1.0.0'
+
+# Bitbucket Issues
+gem 'bitbucket_rest_api'
+
+# Notification services
+# ---------------------------------------
+# Campfire
+gem 'campy'
+# Hipchat
+gem 'hipchat'
+# Hoiio (SMS)
+gem 'hoi'
+
+# Authentication
+# ---------------------------------------
+# GitHub OAuth
+gem 'omniauth-github'
+
 
 platform :ruby do
   gem 'mongo', '= 1.6.2'
@@ -47,6 +62,8 @@ platform :ruby do
   gem 'bson_ext', '= 1.6.2'
 end
 
+gem 'omniauth'
+gem 'oa-core'
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
 
@@ -57,10 +74,12 @@ group :development, :test do
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
     gem 'pry'
+    gem 'pry-rails'
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
   gem 'capistrano'
+  gem 'capistrano_colors'
 end
 
 group :test do
@@ -86,3 +105,5 @@ group :assets do
   gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
 end
+
+gem 'turbo-sprockets-rails3'

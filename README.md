@@ -406,6 +406,10 @@ Solutions known to work are listed below:
     <th>PHP (&gt;= 5.3)</th>
     <td>https://github.com/flippa/errbit-php</td>
   </tr>
+  <tr>
+    <th>Python</th>
+    <td>https://github.com/mkorenkov/errbit.py , https://github.com/pulseenergy/airbrakepy</td>
+  </tr>
 </table>
 
 TODO
