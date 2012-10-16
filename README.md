@@ -362,6 +362,12 @@ card_type = Defect, status = Open, priority = Essential
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
 * You will also need to provide your username and password for your GitHub account.
   * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
+  
+**Bitbucket Issues Integration**
+
+* For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **errbit/errbit**
+* You will also need to provide your username and password for your Bitbucket account.
+
 
 
 What if Errbit has an error?
