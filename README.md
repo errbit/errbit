@@ -190,7 +190,7 @@ heroku run rake db:seed
     * Or clear resolved errors manually:
 
     ```bash
-    heroku rake errbit:db:clear_resolved
+    heroku run rake errbit:db:clear_resolved
     ```
 
   * You may want to enable the deployment hook for heroku :
