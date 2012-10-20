@@ -47,8 +47,11 @@ gem 'bitbucket_rest_api'
 gem 'campy'
 # Hipchat
 gem 'hipchat'
+<<<<<<< HEAD
 # Hoiio (SMS)
 gem 'hoi'
+# Pushover (iOS Push notifications)
+gem 'rushover'
 
 # Authentication
 # ---------------------------------------

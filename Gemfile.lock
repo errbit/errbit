@@ -269,6 +269,9 @@ GEM
     ruby-fogbugz (0.1.1)
       crack
     rubyzip (0.9.9)
+    rushover (0.1.1)
+      json
+      rest-client
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
@@ -362,6 +365,7 @@ DEPENDENCIES
   rspec-rails (~> 2.6)
   ruby-debug
   ruby-fogbugz
+  rushover
   therubyracer
   thin
   timecop
