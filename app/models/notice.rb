@@ -111,7 +111,7 @@ class Notice
   end
 
   def unresolve_problem
-    problem.update_attribute(:resolved, false) if problem.resolved?
+    problem.update_attributes!(:resolved => false, :resolved_at => nil, :notices_count => 1) if problem.resolved?
   end
 
   def cache_attributes_on_problem

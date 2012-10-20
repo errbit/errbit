@@ -109,6 +109,15 @@ describe Problem do
       problem.resolved_at.to_s.should == expected_resolved_at.to_s
     end
 
+    it "should not reset notice count" do
+      problem = Fabricate(:problem, :notices_count => 1)
+      original_notices_count = problem.notices_count
+      original_notices_count.should > 0
+      
+      problem.resolve!
+      problem.notices_count.should == original_notices_count
+    end
+
     it "should throw an err if it's not successful" do
       problem = Fabricate(:problem)
       problem.should_not be_resolved
