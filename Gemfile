@@ -47,6 +47,8 @@ gem 'bitbucket_rest_api'
 gem 'campy'
 # Hipchat
 gem 'hipchat'
+# Google Talk
+gem 'xmpp4r'
 # Hoiio (SMS)
 gem 'hoi'
 # Pushover (iOS Push notifications)

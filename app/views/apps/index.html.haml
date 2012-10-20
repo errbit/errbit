@@ -28,7 +28,11 @@
         - if any_notification_services?
           %td.notification_service
             - if app.notification_service_configured?
-              = image_tag("#{app.notification_service.label}_goto.png")
+              - notification_service_img = image_tag("#{app.notification_service.label}_goto.png")
+              - if app.notification_service.url
+                = link_to( notification_service_img, app.notification_service.url, :target => "_blank" )
+              - else
+                = notification_service_img
         - if any_issue_trackers?
           %td.issue_tracker
             - if app.issue_tracker_configured?
