@@ -5,6 +5,9 @@
   = f.text_field :name
 
 %div
+  = f.label :repository_branch
+  = f.text_field :repository_branch, :placeholder => "master"
+%div
   = f.label :github_repo
   = f.text_field :github_repo, :placeholder => "errbit/errbit from https://github.com/errbit/errbit"
 %div
