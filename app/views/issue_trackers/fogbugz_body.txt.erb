@@ -19,7 +19,7 @@
   <%= pretty_hash(notice.session) %>
 
   Backtrace
-  <% for line in notice.backtrace_lines %>
+  <% notice.backtrace_lines.each do |line| %>
     <%= line.number %>:  <%= line.file_relative %>
   <% end %>
 

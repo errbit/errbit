@@ -32,7 +32,7 @@ h2. Session
 h2. Backtrace
 
 | Line | File | Method |
-<% for line in notice.backtrace_lines %>| <%= line.number %> | <%= line.file_relative %> | *<%= line.method %>* |
+<% notice.backtrace_lines.each do |line| %>| <%= line.number %> | <%= line.file_relative %> | *<%= line.method %>* |
 <% end %>
 
 h2. Environment
