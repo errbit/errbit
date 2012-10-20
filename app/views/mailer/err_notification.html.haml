@@ -27,16 +27,15 @@
               %p.heading WHERE:
               %p.monospace
                 = @notice.where
-              - if (app_backtrace = @notice.app_backtrace).any?
-                - app_backtrace.map {|l| "#{l['file']}:#{l['number']}" }.each do |line|
-                  %p.backtrace= line
+              - @notice.in_app_backtrace_lines.each do |line|
+                %p.backtrace= line
                 %br
               %p.heading URL:
               %p.monospace
                 - if @notice.request['url'].present?
                   = link_to @notice.request['url'], @notice.request['url']
               %p.heading BACKTRACE:
-              - @notice.backtrace.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line|
+              - @notice.backtrace_lines.each do |line|
                 %p.backtrace= line
               %br
 

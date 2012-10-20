@@ -14,7 +14,7 @@ WHERE:
 
 <%= @notice.where %>
 
-<% @notice.app_backtrace.map {|l| "#{l['file']}:#{l['number']}" }.each do |line| %>
+<% @notice.in_app_backtrace_lines.each do |line| %>
   <%= line %>
 <% end %>
 
@@ -26,7 +26,7 @@ URL:
 
 BACKTRACE:
 
-<% @notice.backtrace.map {|l| l ? "#{l['file']}:#{l['number']}" : nil }.compact.each do |line| %>
+<% @notice.backtrace_lines.each do |line| %>
   <%= line %>
 <% end %>
 
