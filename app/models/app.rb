@@ -102,6 +102,10 @@ class App
   end
   alias :notify_on_errs? :notify_on_errs
 
+  def notifiable?
+    notify_on_errs? && notification_recipients.any?
+  end
+
   def notify_on_deploys
     !(self[:notify_on_deploys] == false)
   end
@@ -167,6 +171,10 @@ class App
         end
       end
     end
+  end
+
+  def email_at_notices
+    Errbit::Config.per_app_email_at_notices ? read_attribute(:email_at_notices) : Errbit::Config.email_at_notices
   end
 
   protected
