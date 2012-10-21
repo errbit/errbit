@@ -261,6 +261,10 @@ describe AppsController do
       end
 
       context "changing email_at_notices" do
+        before do
+          Errbit::Config.per_app_email_at_notices = true
+        end
+
         it "should parse legal csv values" do
           put :update, :id => @app.id, :app => { :email_at_notices => '1,   4,      7,8,  10' }
           @app.reload
