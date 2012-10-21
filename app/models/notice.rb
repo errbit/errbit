@@ -94,6 +94,18 @@ class Notice
     backtrace_lines.in_app
   end
 
+  def similar_count
+    problem.notices_count
+  end
+
+  def notifiable?
+    app.email_at_notices.include?(similar_count)
+  end
+
+  def should_notify?
+    app.notifiable? && notifiable?
+  end
+
   protected
 
   def increase_counter_cache
