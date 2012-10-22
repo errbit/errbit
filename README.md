@@ -280,6 +280,10 @@ GITHUB_ACCESS_SCOPE=repo,public_repo
   * In `config/config.yml`, set `user_has_username` to `true`
   * Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
   to set up the devise_ldap_authenticatable gem.
+  * Create a new initializer (e.g. ```config/initializers/devise_ldap.rb```) and add the following code to enable ldap authentication in the User-model:
+```ruby
+Errbit::Config.devise_modules << :ldap_authenticatable
+```
 
   * If you are authenticating by `username`, you will need to set the user's email manually
   before authentication. You must add the following lines to `app/models/user.rb`:
