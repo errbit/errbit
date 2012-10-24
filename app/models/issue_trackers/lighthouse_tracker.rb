@@ -1,3 +1,4 @@
+# encoding: utf-8
 if defined? Lighthouse
   class IssueTrackers::LighthouseTracker < IssueTracker
     Label = "lighthouseapp"
@@ -26,7 +27,9 @@ if defined? Lighthouse
       Lighthouse::Ticket.site
       Lighthouse::Ticket.format = :xml
       ticket = Lighthouse::Ticket.new(:project_id => project_id)
-      ticket.title = "test"
+      ticket.title = issue_title problem
+      Rails.logger.error binding
+      Rails.logger.error body_template.result(binding)
 
       ticket.body = body_template.result(binding)
 
