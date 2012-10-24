@@ -61,12 +61,12 @@ class ProblemsController < ApplicationController
     end
 
     if flash[:error].blank? && @tracker
-      #begin
+      begin
         @tracker.create_issue @problem, current_user
-      #rescue Exception => ex
-      #  Rails.logger.error "Error during issue creation: " << ex.message
-      #  flash[:error] = "There was an error during issue creation: #{ex.message}"
-      #end
+      rescue Exception => ex
+        Rails.logger.error "Error during issue creation: " << ex.message
+        flash[:error] = "There was an error during issue creation: #{ex.message}"
+      end
     end
 
     redirect_to app_problem_path(@app, @problem)
