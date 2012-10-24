@@ -26,9 +26,9 @@ if defined? Lighthouse
       Lighthouse::Ticket.site
       Lighthouse::Ticket.format = :xml
       ticket = Lighthouse::Ticket.new(:project_id => project_id)
-      ticket.title = issue_title problem
+      ticket.title = "test problem"
 
-      ticket.body = body_template.result(binding)
+      ticket.body = "test"
 
       ticket.tags << "errbit"
       ticket.save!
