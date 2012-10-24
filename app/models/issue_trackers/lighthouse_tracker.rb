@@ -29,7 +29,7 @@ if defined? Lighthouse
       ticket = Lighthouse::Ticket.new(:project_id => project_id)
       ticket.title = issue_title problem
 
-      ticket.body = "i am àââæèèê"
+      ticket.body = body_template.result(binding)
 
       ticket.tags << "errbit"
       ticket.save!
