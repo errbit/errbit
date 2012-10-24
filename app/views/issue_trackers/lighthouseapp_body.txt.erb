@@ -14,14 +14,5 @@
 
   ### Similar ###
   <%= (notice.problem.notices_count - 1).to_s %>
-
-
-  ## Backtrace ##
-  <code>
-  <% notice.backtrace_lines.each do |line| %><%= line.number %>:  <%= line.file_relative %> -> **<%= line.method %>**
-  <% end %>
-  </code>
-
-
 <% end %>
 
