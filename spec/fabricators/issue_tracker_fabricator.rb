@@ -25,3 +25,7 @@ Fabricator :github_issues_tracker, :from => :issue_tracker, :class_name => "Issu
   username 'test_username'
 end
 
+Fabricator :bitbucket_issues_tracker, :from => :issue_tracker, :class_name => "IssueTrackers::BitbucketIssuesTracker" do
+  project_id 'password'
+  api_token 'test_username'
+end

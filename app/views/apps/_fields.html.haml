@@ -5,8 +5,14 @@
   = f.text_field :name
 
 %div
+  = f.label :repository_branch
+  = f.text_field :repository_branch, :placeholder => "master"
+%div
   = f.label :github_repo
   = f.text_field :github_repo, :placeholder => "errbit/errbit from https://github.com/errbit/errbit"
+%div
+  = f.label :bitbucket_repo
+  = f.text_field :bitbucket_repo, :placeholder => "errbit/errbit from https://bitbucket.org/errbit/errbit"
 
 %fieldset
   %legend Notifications
@@ -46,4 +52,5 @@
   = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'
 
 = render "issue_tracker_fields", :f => f
+= render "service_notification_fields", :f => f
 

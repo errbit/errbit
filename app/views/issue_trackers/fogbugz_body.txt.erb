@@ -1,4 +1,4 @@
-"See this exception on Errbit": <%= app_err_url(problem.app, problem) %>
+"See this exception on Errbit": <%= app_problem_url(problem.app, problem) %>
 <% if notice = problem.notices.first %>
   <%= notice.message %>
 
@@ -19,8 +19,8 @@
   <%= pretty_hash(notice.session) %>
 
   Backtrace
-  <% for line in notice.backtrace %>
-    <%= line['number'] %>:  <%= line['file'].to_s.sub(/^\[PROJECT_ROOT\]/, '') %>
+  <% notice.backtrace_lines.each do |line| %>
+    <%= line.number %>:  <%= line.file_relative %>
   <% end %>
 
   Environment

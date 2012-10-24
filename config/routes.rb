@@ -4,6 +4,7 @@ Errbit::Application.routes.draw do
 
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create'
+  match '/locate/:id' => 'notices#locate', :as => :locate
   match '/deploys.txt' => 'deploys#create'
 
   resources :notices,   :only => [:show]
@@ -13,7 +14,7 @@ Errbit::Application.routes.draw do
       delete :unlink_github
     end
   end
-  resources :errs,      :only => [:index] do
+  resources :problems,      :only => [:index] do
     collection do
       post :destroy_several
       post :resolve_several
@@ -25,7 +26,7 @@ Errbit::Application.routes.draw do
   end
 
   resources :apps do
-    resources :errs do
+    resources :problems do
       resources :notices
       resources :comments, :only => [:create, :destroy]
 
@@ -38,6 +39,13 @@ Errbit::Application.routes.draw do
     end
     resources :deploys, :only => [:index]
     resources :watchers, :only => [:destroy]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :problems, :only => [:index], :defaults => { :format => 'json' }
+      resources :notices, :only => [:index], :defaults => { :format => 'json' }
+    end
   end
 
   root :to => 'apps#index'

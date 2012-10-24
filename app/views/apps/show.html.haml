@@ -12,10 +12,10 @@
   - if current_user.admin?
     = link_to 'edit', edit_app_path(@app), :class => 'button'
     = link_to 'destroy', app_path(@app), :method => :delete, :data => { :confirm => 'Seriously?' }, :class => 'button'
-    - if @all_errs
-      = link_to 'unresolved errs', app_path(@app), :class => 'button'
-    - else
-      = link_to 'all errs', app_path(@app, :all_errs => true), :class => 'button'
+  - if @all_errs
+    = link_to 'unresolved errs', app_path(@app), :class => 'button'
+  - else
+    = link_to 'all errs', app_path(@app, :all_errs => true), :class => 'button'
   = link_to 'unwatch',  app_watcher_path({:app_id => @app, :id => current_user.id}), :method => :delete, :class => 'button', :confirm => 'Are you sure?'
 %h3#watchers_toggle
   Watchers
@@ -83,7 +83,7 @@
 
 - if @app.problems.any?
   %h3.clear Errors
-  = render 'errs/table', :errs => @problems
+  = render 'problems/table', :problems => @problems
 - else
   %h3.clear No errs have been caught yet, make sure you setup your app
   = render 'configuration_instructions', :app => @app

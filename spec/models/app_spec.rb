@@ -200,8 +200,8 @@ describe App do
 
     it 'captures the backtrace' do
       @notice = App.report_error!(@xml)
-      @notice.backtrace.size.should == 73
-      @notice.backtrace.last['file'].should == '[GEM_ROOT]/bin/rake'
+      @notice.backtrace_lines.size.should == 73
+      @notice.backtrace_lines.last['file'].should == '[GEM_ROOT]/bin/rake'
     end
 
     it 'captures the server_environment' do
@@ -228,8 +228,17 @@ describe App do
     it "should handle params with only a single line of backtrace" do
       xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
       lambda { @notice = App.report_error!(xml) }.should_not raise_error
-      @notice.backtrace.length.should == 1
+      @notice.backtrace_lines.length.should == 1
     end
+
+    it 'captures the current_user' do
+      @notice = App.report_error!(@xml)
+      @notice.current_user['id'].should == '123'
+      @notice.current_user['name'].should == 'Mr. Bean'
+      @notice.current_user['email'].should == 'mr.bean@example.com'
+      @notice.current_user['username'].should == 'mrbean'
+    end
+
   end
 
 

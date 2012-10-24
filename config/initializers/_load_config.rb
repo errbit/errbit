@@ -13,6 +13,10 @@ unless defined?(Errbit::Config)
     Errbit::Config.confirm_resolve_err = ENV['ERRBIT_CONFIRM_RESOLVE_ERR']
     Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME']
     Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER']
+    Errbit::Config.enforce_ssl = ENV['ERRBIT_ENFORCE_SSL']
+
+    Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
+    Errbit::Config.gravatar_default = ENV['ERRBIT_GRAVATAR_DEFAULT']
 
     Errbit::Config.github_authentication = ENV['GITHUB_AUTHENTICATION']
     Errbit::Config.github_client_id = ENV['GITHUB_CLIENT_ID']
@@ -55,6 +59,9 @@ default_config = YAML.load_file(default_config_file)
 default_config.each do |k,v|
   Errbit::Config.send("#{k}=", v) if Errbit::Config.send(k) === nil
 end
+
+# Disable GitHub oauth if gem is missing
+Errbit::Config.github_authentication = false unless defined?(OmniAuth::Strategies::GitHub)
 
 # Set SMTP settings if given.
 if smtp = Errbit::Config.smtp_settings

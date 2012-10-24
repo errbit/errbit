@@ -122,7 +122,8 @@ Devise.setup do |config|
     config.omniauth :github,
                     Errbit::Config.github_client_id,
                     Errbit::Config.github_secret,
-                    :scope => Errbit::Config.github_access_scope.join(",")
+                    :scope => Errbit::Config.github_access_scope.join(","),
+                    :skip_info => true
   end
 
   # ==> Navigation configuration

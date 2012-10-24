@@ -1,0 +1,18 @@
+  /* Notification Service inactive, select, create and goto icons */
+<% notification_services = NotificationService.subclasses.map{|t| t.label } << 'none' %>
+
+<% notification_services.each do |notification_service| %>
+div.notification_service.nested label.<%= notification_service %> {
+  background: url(/assets/<%= notification_service %>_inactive.png) no-repeat;
+}
+div.notification_service.nested label.r_on.<%= notification_service %> {
+  background: url(/assets/<%= notification_service %>_create.png) no-repeat;
+}
+#action-bar a.<%= notification_service %>_create {
+  background: transparent url(/assets/<%= notification_service %>_create.png) 6px 5px no-repeat;
+}
+#action-bar a.<%= notification_service %>_goto {
+  background: transparent url(/assets/<%= notification_service %>_goto.png) 6px 5px no-repeat;
+}
+<% end %>
+

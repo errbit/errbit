@@ -18,7 +18,7 @@
         = render 'shared/navigation' if current_user
         = render 'shared/session'
     #content-wrapper
-      #content-title{ :class => (yield :title_css_class).to_s }
+      #content-title{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
         %h1= yield :title
         %span.meta= yield :meta
         - if (action_bar = yield(:action_bar)).present?
@@ -33,3 +33,4 @@
     #footer= "Powered by #{link_to 'Errbit', 'http://github.com/errbit/errbit', :target => '_blank'}: the open source error catcher.".html_safe
     = yield :scripts
 
+= yield :before_title

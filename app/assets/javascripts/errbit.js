@@ -130,5 +130,10 @@ $(function() {
   // Hide external backtrace on page load
   hide_external_backtrace();
 
+  $('.head a.show_tail').click(function(e) {
+    $(this).hide().closest('.head_and_tail').find('.tail').show();
+    e.preventDefault();
+  });
+
   init();
 });

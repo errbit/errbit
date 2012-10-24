@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'users/show.html.haml' do
   let(:user) do
-    stub_model(User, :created_at => Time.now)
+    stub_model(User, :created_at => Time.now, :email => "test@example.com")
   end
 
   before do
