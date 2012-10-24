@@ -1,4 +1,3 @@
-# encoding: utf-8
 class ProblemsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
@@ -66,7 +65,7 @@ class ProblemsController < ApplicationController
         @tracker.create_issue @problem, current_user
       rescue Exception => ex
         Rails.logger.error "Error during issue creation: " << ex.message
-        flash[:error] = "There was an error during issue creation: #{ex.message}"
+        flash[:error] = "There was an error during issue creation: #{ex}"
       end
     end
 
