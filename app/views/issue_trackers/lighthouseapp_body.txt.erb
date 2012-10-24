@@ -15,9 +15,17 @@
   ### Similar ###
   <%= (notice.problem.notices_count - 1).to_s %>
 
-  ## Params ##
-  <code><%= pretty_hash(notice.params) %></code>
 
-  
+
+  ## Backtrace ##
+  <code>
+  <% notice.backtrace_lines.each do |line| %><%= line.number %>:  <%= line.file_relative %> -> **<%= line.method %>**
+  <% end %>
+  </code>
+
+  ## Environment ##
+  <% for key, val in notice.env_vars %>
+    <%= key %>: <%= val %>
+  <% end %>
 <% end %>
 
