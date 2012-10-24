@@ -1,4 +1,3 @@
-# encoding: utf-8
 if defined? Lighthouse
   class IssueTrackers::LighthouseTracker < IssueTracker
     Label = "lighthouseapp"
