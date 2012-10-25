@@ -17,6 +17,10 @@ if defined? HipChat
       end
     end
 
+    def url
+      "https://www.hipchat.com/sign_in"
+    end
+
     def create_notification(problem)
       url = app_problem_url problem.app, problem
       message = <<-MSG.strip_heredoc

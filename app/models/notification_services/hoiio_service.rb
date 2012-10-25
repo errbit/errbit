@@ -21,6 +21,10 @@ class NotificationServices::HoiioService < NotificationService
     end
   end
 
+  def url
+    "https://secure.hoiio.com/user/"
+  end
+
   def notification_description(problem)
     "[#{ problem.environment }]#{problem.message.to_s.truncate(50)}"
   end
