@@ -2,16 +2,18 @@ if defined? Campy
   class NotificationServices::CampfireService < NotificationService
     Label = "campfire"
     Fields = [
-        [:subdomain, {
-            :placeholder => "Campfire Subdomain"
-        }],
-        [:api_token, {
-            :placeholder => "API Token"
-        }],
-        [:room_id, {
-            :placeholder => "Room ID",
-            :label       => "Room ID"
-        }],
+      [:subdomain, {
+        :label       => "Campfire Subdomain",
+        :placeholder => "example"
+      }],
+      [:api_token, {
+        :label       => "API Token",
+        :placeholder => "1aa1111a111111aaaa11a11a1111a11a11111a11"
+      }],
+      [:room_id, {
+        :label       => "Room ID number",
+        :placeholder => "123456"
+      }]
     ]
 
     def check_params
