@@ -586,8 +586,8 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, 
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
 table.apps td.name, table.errs td.message { width: 100%; }
-table.apps td { padding: 16px 25px; }
-table.apps th { padding: 10px 25px; }
+table.apps td { padding: 16px 20px; }
+table.apps th { padding: 10px 20px; }
 
 table.apps td.issue_tracker, table.apps td.count, table.apps td.deploy {
   text-align: center;
