@@ -376,7 +376,7 @@ card_type = Defect, status = Open, priority = Essential
 * For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
 * You will also need to provide your username and password for your GitHub account.
   * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
-  
+
 **Bitbucket Issues Integration**
 
 * For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **errbit/errbit**
@@ -436,7 +436,10 @@ Special Thanks
 --------------
 
 * [Michael Parenteau](http://michaelparenteau.com) - For rocking the Errbit design and providing a great user experience.
-* [Nick Recobra aka oruen](https://github.com/oruen) - Nick is Errbit's first core contributor. He's been working hard at making Errbit more awesome.
+* [Nick Recobra (@oruen)](https://github.com/oruen) - Nick is Errbit's first core contributor. He's been working hard at making Errbit more awesome.
+* [Nathan Broadbent (@ndbroadbent)](https://github.com/ndbroadbent) - Maintaining Errbit and contributing many features
+* [Vasiliy Ermolovich (@nashby)](https://github.com/nashby) - Contributing and helping to resolve issues and pull requests
+* [Marcin Ciunelis (@martinciu)](https://github.com/martinciu) - Helping to improve Errbit's architecture
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
 * [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrakeapp.com).
 
