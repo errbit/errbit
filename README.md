@@ -443,6 +443,8 @@ Special Thanks
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
 * [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrakeapp.com).
 
+See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details.
+
 
 Contributing
 ------------
