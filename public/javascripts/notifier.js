@@ -133,7 +133,7 @@ var Hoptoad = {
       var matches = line.match(Hoptoad.BACKTRACE_MATCHER);
 
       if (matches && Hoptoad.validBacktraceLine(line)) {
-        var file = matches[2].replace(Hoptoad.ROOT, '[PROJECT_ROOT]');
+        var file = matches[2].replace(Hoptoad.ROOT, 'BOOOOOOOOOOOP');
 
         if (i == 0) {
           if (matches[2].match(document.location.href)) {
