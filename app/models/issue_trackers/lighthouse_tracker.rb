@@ -3,13 +3,14 @@ if defined? Lighthouse
     Label = "lighthouseapp"
     Fields = [
       [:account, {
-        :placeholder => "abc from http://abc.lighthouseapp.com"
+        :placeholder => "example from http://example.lighthouseapp.com"
       }],
       [:api_token, {
         :placeholder => "API Token for your account"
       }],
       [:project_id, {
-        :placeholder => "Lighthouse project"
+        :label       => "Lighthouse Project ID number",
+        :placeholder => "#####"
       }]
     ]
 
