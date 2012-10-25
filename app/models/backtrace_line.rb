@@ -1,6 +1,6 @@
 class BacktraceLine
   include Mongoid::Document
-  IN_APP_PATH = %r{^\[CATSSSSSSSSSSSSSSSSS\]\/(?!(vendor))}
+  IN_APP_PATH = %r{^\[PROJECT_ROOT\]}
   GEMS_PATH   = %r{\[GEM_ROOT\]\/gems\/([^\/]+)}
 
   field :number, :type => Integer
@@ -34,9 +34,8 @@ class BacktraceLine
   end
 
   def decorated_path
-    path.sub('', '').
+    path.sub(BacktraceLine::IN_APP_PATH, '').
       sub(BacktraceLine::GEMS_PATH, "<strong>\\1</strong>")
   end
-#BacktraceLine::IN_APP_PATH
-end
 
+end
