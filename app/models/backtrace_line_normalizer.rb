@@ -9,7 +9,7 @@ class BacktraceLineNormalizer
 
   private
   def normalized_file
-    @raw_line['file'].blank? ? "[unknown source]" :  @raw_line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
+    # @raw_line['file'].blank? ? "[unknown source]" :  @raw_line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
   end
 
   def normalized_method
