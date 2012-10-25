@@ -19,7 +19,7 @@ module BacktraceLineHelper
 
   def link_to_github(line, text = nil)
     return unless line.app.github_repo?
-    href = "%s#L%s" % [line.app.github_url_to_file(line.decorated_path), line.number]
+    href = "%s#L%s" % [line.app.github_url_to_file(line.decorated_path + line.file_name), line.number]
     link_to(text || line.file_name, href, :target => '_blank')
   end
 
