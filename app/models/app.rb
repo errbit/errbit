@@ -169,6 +169,14 @@ class App
     end
   end
 
+  def unresolved_count
+    @unresolved_count ||= problems.unresolved.count
+  end
+
+  def problem_count
+    @problem_count ||= problems.count
+  end
+
   protected
 
     def store_cached_attributes_on_problems
