@@ -23,6 +23,31 @@ describe App do
     end
   end
 
+  describe '<=>' do
+    it 'is compared by unresolved count' do
+      app_0 = stub_model(App, :name => 'app', :unresolved_count => 1, :problem_count => 1)
+      app_1 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 1)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+
+    it 'is compared by problem count' do
+      app_0 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 1)
+      app_1 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 0)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+
+    it 'is compared by name' do
+      app_0 = stub_model(App, :name => 'app_0', :unresolved_count => 0, :problem_count => 0)
+      app_1 = stub_model(App, :name => 'app_1', :unresolved_count => 0, :problem_count => 0)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+  end
 
   context 'being created' do
     it 'generates a new api-key' do
