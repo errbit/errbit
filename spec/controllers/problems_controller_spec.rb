@@ -419,6 +419,16 @@ describe ProblemsController do
         post :resolve_several, :problems => [@problem2.id.to_s]
         @problem2.reload.resolved?.should == true
       end
+
+      it "should display a message about 1 err" do
+        post :resolve_several, :problems => [@problem2.id.to_s]
+        flash[:success].should match(/1 err has been resolved/)
+      end
+
+      it "should display a message about 2 errs" do
+        post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
+        flash[:success].should match(/2 errs have been resolved/)
+      end
     end
 
     context "POST /problems/unresolve_several" do
