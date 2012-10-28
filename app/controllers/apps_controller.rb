@@ -52,16 +52,7 @@ class AppsController < InheritedResources::Base
 
   protected
     def collection
-      @apps ||= begin
-        apps = end_of_association_chain.all
-
-        # Sort apps by number of unresolved errs, then problem counts.
-        apps.sort do |a, b|
-          (b.unresolved_count <=> a.unresolved_count).nonzero? ||
-          (b.problem_count <=> a.problem_count).nonzero? ||
-          a.name <=> b.name
-        end
-      end
+      @apps ||= end_of_association_chain.all.sort
     end
 
     def initialize_subclassed_issue_tracker
