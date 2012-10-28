@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Notice do
-
-
   context 'validations' do
     it 'requires a backtrace' do
       notice = Fabricate.build(:notice, :backtrace => nil)
@@ -23,7 +21,6 @@ describe Notice do
     end
   end
 
-
   describe "key sanitization" do
     before do
       @hash = { "some.key" => { "$nested.key" => {"$Path" => "/", "some$key" => "key"}}}
@@ -37,7 +34,6 @@ describe Notice do
       end
     end
   end
-
 
   describe "user agent" do
     it "should be parsed and human-readable" do
@@ -78,6 +74,13 @@ describe Notice do
     it "returns 'N/A' when url is empty" do
       notice = Fabricate.build(:notice, :request => {})
       notice.host.should == 'N/A'
+    end
+  end
+
+  describe "request" do
+    it "returns empty hash if not set" do
+      notice = Notice.new
+      notice.request.should == {}
     end
   end
 end
