@@ -80,7 +80,7 @@ class AppsController < InheritedResources::Base
       end
     end
 
-  def initialize_subclassed_notification_service
+    def initialize_subclassed_notification_service
       # set the app's notification service
       if params[:app][:notification_service_attributes] && notification_type = params[:app][:notification_service_attributes][:type]
         if NotificationService.subclasses.map(&:name).concat(["NotificationService"]).include?(notification_type)
