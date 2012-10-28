@@ -64,7 +64,7 @@ class Notice
   end
 
   def request
-    read_attribute(:request) || {}
+    super || {}
   end
 
   def url
