@@ -1,6 +1,4 @@
 class ProblemsController < ApplicationController
-  include ActionView::Helpers::TextHelper
-
   before_filter :find_app, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
@@ -87,13 +85,13 @@ class ProblemsController < ApplicationController
 
   def resolve_several
     @selected_problems.each(&:resolve!)
-    flash[:success] = "Great news everyone! #{pluralize(@selected_problems.count, 'err has', 'errs have')} been resolved."
+    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, :count => @selected_problems.count)} been resolved."
     redirect_to :back
   end
 
   def unresolve_several
     @selected_problems.each(&:unresolve!)
-    flash[:success] = "#{pluralize(@selected_problems.count, 'err has', 'errs have')} been unresolved."
+    flash[:success] = "#{I18n.t(:n_errs_have, :count => @selected_problems.count)} been unresolved."
     redirect_to :back
   end
 
@@ -109,13 +107,13 @@ class ProblemsController < ApplicationController
 
   def unmerge_several
     all = @selected_problems.map(&:unmerge!).flatten
-    flash[:success] = "#{pluralize(all.length, 'err has', 'errs have')} been unmerged."
+    flash[:success] = "#{I18n.t(:n_errs_have, :count => all.length)} been unmerged."
     redirect_to :back
   end
 
   def destroy_several
     nb_problem_destroy = ProblemDestroy.execute(@selected_problems)
-    flash[:notice] = "#{pluralize(nb_problem_destroy, 'err has', 'errs have')} been deleted."
+    flash[:notice] = "#{I18n.t(:n_errs_have, :count => nb_problem_destroy)} been deleted."
     redirect_to :back
   end
 
