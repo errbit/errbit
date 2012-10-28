@@ -40,7 +40,7 @@
                   = time_ago_in_words(comment.created_at, true) << " ago by [Unknown User]"
                 %span.delete= link_to '&#10008;'.html_safe, app_problem_comment_path(@app, @problem, comment), :method => :delete, :data => { :confirm => "Are sure you don't need this comment?" }, :class => "destroy-comment"
           %tr
-            %td= comment.body.gsub("\n", "<br>").html_safe
+            %td= simple_format comment.body
     - if Errbit::Config.allow_comments_with_issue_tracker || !@app.issue_tracker_configured?
       = form_for @comment, :url => app_problem_comments_path(@app, @problem) do |comment_form|
         %p Add a comment
