@@ -31,17 +31,6 @@ describe AppsController do
         assigns(:apps).should_not include(unwatched_app)
       end
     end
-
-    context 'when there is only one app' do
-      it 'sets unresolved_counts and problem_counts variables' do
-        sign_in Fabricate(:admin)
-        app = Fabricate(:app)
-        get :index
-
-        assigns(:unresolved_counts).should == {app.id => 0}
-        assigns(:problem_counts).should    == {app.id => 0}
-      end
-    end
   end
 
   describe "GET /apps/:id" do

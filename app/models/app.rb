@@ -1,6 +1,7 @@
 class App
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Comparable
 
   field :name, :type => String
   field :api_key
@@ -167,6 +168,21 @@ class App
         end
       end
     end
+  end
+
+  def unresolved_count
+    @unresolved_count ||= problems.unresolved.count
+  end
+
+  def problem_count
+    @problem_count ||= problems.count
+  end
+
+  # Compare by number of unresolved errs, then problem counts.
+  def <=>(other)
+    (other.unresolved_count <=> unresolved_count).nonzero? ||
+    (other.problem_count <=> problem_count).nonzero? ||
+    name <=> other.name
   end
 
   protected
