@@ -142,11 +142,11 @@ class App
 
 
   def issue_tracker_configured?
-    !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.project_id.present?)
+    !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.configured?)
   end
 
   def notification_service_configured?
-    !!(notification_service && notification_service.class < NotificationService && notification_service.api_token.present?)
+    !!(notification_service && notification_service.class < NotificationService && notification_service.configured?)
   end
 
 

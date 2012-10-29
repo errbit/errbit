@@ -30,4 +30,8 @@ class NotificationService
   Label = ''
   def self.label; self::Label; end
   def label; self.class.label; end
+
+  def configured?
+    api_token.present?
+  end
 end

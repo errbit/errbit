@@ -35,5 +35,9 @@ class IssueTracker
   Label = ''
   def self.label; self::Label; end
   def label; self.class.label; end
+
+  def configured?
+    project_id.present?
+  end
 end
 
