@@ -190,7 +190,7 @@ class App
   end
 
   def email_at_notices
-    Errbit::Config.per_app_email_at_notices ? read_attribute(:email_at_notices) : Errbit::Config.email_at_notices
+    Errbit::Config.per_app_email_at_notices ? super : Errbit::Config.email_at_notices
   end
 
   protected
