@@ -99,12 +99,12 @@ class App
 
   # Legacy apps don't have notify_on_errs and notify_on_deploys params
   def notify_on_errs
-    !(self[:notify_on_errs] == false)
+    !(super == false)
   end
   alias :notify_on_errs? :notify_on_errs
 
   def notify_on_deploys
-    !(self[:notify_on_deploys] == false)
+    !(super == false)
   end
   alias :notify_on_deploys? :notify_on_deploys
 
