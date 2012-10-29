@@ -43,7 +43,7 @@
     - if @problem.comments_allowed?
       = form_for @comment, :url => app_problem_comments_path(@app, @problem) do |comment_form|
         %p Add a comment
-        = comment_form.text_area :body, :style => "width: 420px; height: 80px;"
+        = comment_form.text_area :body
         = comment_form.submit "Save Comment"
 
 %h4= @notice.try(:message)
