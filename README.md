@@ -383,6 +383,13 @@ card_type = Defect, status = Open, priority = Essential
 * For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **errbit/errbit**
 * You will also need to provide your username and password for your Bitbucket account.
 
+**Gitlab Issues Integration**
+
+* Account is the host of your gitlab installation. i.e. **http://gitlab.example.com**
+* To authenticate, Errbit uses token-based authentication. Get your API Key in your user settings (or create special user for this purpose)
+* You also need to provide project name (shortname) or ID (number) for issues to be created
+* **Currently (as of 3.0), Gitlab has 2000 character limit for issue description.** It is necessary to turn it off at your instance, because Errbit issues body is much longer. Please comment validation line in issue model in models folder https://github.com/gitlabhq/gitlabhq/blob/master/app/models/issue.rb#L10
+
 
 
 What if Errbit has an error?
