@@ -311,6 +311,7 @@ When upgrading Errbit, please run:
 
 ```bash
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
+bundle install
 rake db:migrate
 ```
 
