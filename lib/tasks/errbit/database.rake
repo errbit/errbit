@@ -3,7 +3,7 @@ require 'digest/sha1'
 namespace :errbit do
   namespace :db do
 
-    desc "Delete all of the notices" do
+    desc "Delete all of the notices that are 3 days old" do
       task :delete_notices => :environment do
         puts "Deleting Notices"
         Notice.where(:created_at.lt => 3.days.ago).destroy_all
