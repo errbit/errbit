@@ -4,7 +4,6 @@ gem 'rails', '3.2.8'
 gem 'mongoid', '~> 2.4.10'
 gem 'mongoid_rails_migrations'
 gem 'devise', '~> 1.5.3'
-gem 'nokogiri'
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
@@ -66,7 +65,6 @@ platform :ruby do
   gem 'bson_ext', '= 1.6.2'
 end
 
-gem 'omniauth'
 gem 'oa-core'
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
@@ -88,7 +86,6 @@ end
 group :test do
   gem 'capybara'
   gem 'launchy'
-  gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
   gem 'timecop'

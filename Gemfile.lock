@@ -348,10 +348,8 @@ DEPENDENCIES
   mongo (= 1.6.2)
   mongoid (~> 2.4.10)
   mongoid_rails_migrations
-  nokogiri
   oa-core
   octokit (~> 1.0.0)
-  omniauth
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
@@ -361,7 +359,6 @@ DEPENDENCIES
   rails (= 3.2.8)
   rails_autolink (~> 1.0.9)
   ri_cal
-  rspec (~> 2.6)
   rspec-rails (~> 2.6)
   ruby-debug
   ruby-fogbugz
