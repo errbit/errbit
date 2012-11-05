@@ -355,7 +355,6 @@ DEPENDENCIES
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
-  pry
   pry-rails
   rack-ssl
   rack-ssl-enforcer
