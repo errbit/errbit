@@ -77,7 +77,6 @@ group :development, :test do
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
-    gem 'pry'
     gem 'pry-rails'
   end
 #  gem 'rpm_contrib'
