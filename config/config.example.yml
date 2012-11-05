@@ -53,6 +53,8 @@ deployment:
   repository: http://github.com/errbit/errbit.git
   user: deploy
   deploy_to: /var/www/apps/errbit
+  # setup path to unicorn pids folder (or deploy_to/shared/pids will be used)
+  # pids: /var/www/apps/errbit/shared/pids
 
 # GitHub OAuth configuration
 # If you want to allow authentication via GitHub, you will need to register
