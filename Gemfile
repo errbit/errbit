@@ -65,7 +65,6 @@ platform :ruby do
   gem 'bson_ext', '= 1.6.2'
 end
 
-gem 'oa-core'
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
 

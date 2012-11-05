@@ -169,7 +169,6 @@ GEM
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
-    oa-core (0.3.2)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -348,7 +347,6 @@ DEPENDENCIES
   mongo (= 1.6.2)
   mongoid (~> 2.4.10)
   mongoid_rails_migrations
-  oa-core
   octokit (~> 1.0.0)
   omniauth-github
   oruen_redmine_client
