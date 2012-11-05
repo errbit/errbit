@@ -10,7 +10,7 @@ describe IssueTrackers::BitbucketIssuesTracker do
 
     number = 123
     @issue_link = "https://bitbucket.org/#{repo}/issue/#{number}/"
-    body = <<EOF 
+    body = <<EOF
 {
     "status": "new",
     "priority": "critical",

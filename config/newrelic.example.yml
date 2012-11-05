@@ -31,13 +31,13 @@ common: &default_settings
   # into a New Relic "application" on your home dashboard page. If you want
   # to map this instance into multiple apps, like "AJAX Requests" and
   # "All UI" then specify a semicolon-separated list of up to three
-  # distinct names.  If you comment this out, it defaults to the 
+  # distinct names.  If you comment this out, it defaults to the
   # capitalized RAILS_ENV (i.e., Production, Staging, etc)
   app_name: <%= ENV["NEW_RELIC_APP_NAME"] %>
 
-  # When "true", the agent collects performance data about your 
+  # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at
-  # newrelic.com. This global switch is normally overridden for each 
+  # newrelic.com. This global switch is normally overridden for each
   # environment below. (formerly called 'enabled')
   monitor_mode: true
 
@@ -72,11 +72,11 @@ common: &default_settings
 
   # Set your application's Apdex threshold value with the 'apdex_t'
   # setting, in seconds. The apdex_t value determines the buckets used
-  # to compute your overall Apdex score. 
+  # to compute your overall Apdex score.
   # Requests that take less than apdex_t seconds to process will be
   # classified as Satisfying transactions; more than apdex_t seconds
   # as Tolerating transactions; and more than four times the apdex_t
-  # value as Frustrating transactions. 
+  # value as Frustrating transactions.
   # For more about the Apdex standard, see
   # http://support.newrelic.com/faqs/general/apdex
   apdex_t: 0.5
@@ -97,7 +97,7 @@ common: &default_settings
   # Rails: the RoR filter_parameter_logging excludes parameters
   # Java: create a config setting called "ignored_params" and set it to
   #     a comma separated list of HTTP parameter names.
-  #     ex: ignored_params: credit_card, ssn, password 
+  #     ex: ignored_params: credit_card, ssn, password
   capture_params: false
 
   # Transaction tracer captures deep information about slow
@@ -136,7 +136,7 @@ common: &default_settings
     # set to false when using other adapters.
     # explain_enabled: true
 
-    # Threshold for query execution time below which query plans will not 
+    # Threshold for query execution time below which query plans will not
     # not be captured.  Relevant only when `explain_enabled` is true.
     # explain_threshold: 0.5
 
@@ -149,10 +149,10 @@ common: &default_settings
     # product level.
     enabled: true
 
-    # Rails Only - tells error collector whether or not to capture a 
-    # source snippet around the place of the error when errors are View 
+    # Rails Only - tells error collector whether or not to capture a
+    # source snippet around the place of the error when errors are View
     # related.
-    capture_source: true    
+    capture_source: true
 
     # To stop specific errors from reporting to New Relic, set this property
     # to comma-separated values.  Default is to ignore routing errors,
@@ -172,7 +172,7 @@ common: &default_settings
   # disable_memcache_instrumentation: true
   # disable_dj: true
 
-  # Certain types of instrumentation such as GC stats will not work if 
+  # Certain types of instrumentation such as GC stats will not work if
   # you are running multi-threaded.  Please let us know.
   # multi_threaded = false
 
@@ -190,15 +190,15 @@ development:
   <<: *default_settings
   # Turn off communication to New Relic service in development mode (also
   # 'enabled').
-  # NOTE: for initial evaluation purposes, you may want to temporarily 
+  # NOTE: for initial evaluation purposes, you may want to temporarily
   # turn agent communication on in development mode.
   monitor_mode: false
 
-  # Rails Only - when running in Developer Mode, the New Relic Agent will 
+  # Rails Only - when running in Developer Mode, the New Relic Agent will
   # present performance information on the last 100 transactions you have
   # executed since starting the app server.
   # NOTE: There is substantial overhead when running in developer mode.
-  # Do not use for production or load testing.  
+  # Do not use for production or load testing.
   developer_mode: true
 
   # Enable textmate links

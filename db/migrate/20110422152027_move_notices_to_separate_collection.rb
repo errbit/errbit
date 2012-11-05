@@ -5,10 +5,10 @@ class MoveNoticesToSeparateCollection < Mongoid::Migration
     errs = mongo_db.collection("errs").find({ }, :fields => ["notices"])
     errs.each do |err|
       next unless err['notices']
-      
+
       # This Err was created after the Problem->Err->Notice redesign
       next if err['app_id'].nil? or err['problem_id']
-      
+
       e = Err.find(err['_id'])
       # disable email notifications
       old_notify = e.app.notify_on_errs?

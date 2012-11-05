@@ -24,7 +24,7 @@ describe Problem do
       end
     end
   end
-  
+
   context '#last_notice_at' do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
@@ -113,7 +113,7 @@ describe Problem do
       problem = Fabricate(:problem, :notices_count => 1)
       original_notices_count = problem.notices_count
       original_notices_count.should > 0
-      
+
       problem.resolve!
       problem.notices_count.should == original_notices_count
     end
