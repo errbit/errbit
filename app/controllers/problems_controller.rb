@@ -35,36 +35,10 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    # Create an issue on GitHub using user's github token
-    if params[:tracker] == 'user_github'
-      if !@app.github_repo?
-        flash[:error] = "This app doesn't have a GitHub repo set up."
-      elsif !current_user.github_account?
-        flash[:error] = "You haven't linked your Github account."
-      else
-        @tracker = GithubIssuesTracker.new(
-          :app         => @app,
-          :username    => current_user.github_login,
-          :oauth_token => current_user.github_oauth_token
-        )
-      end
+    issue_creation = IssueCreation.new(@problem, current_user, params[:tracker])
 
-    # Or, create an issue using the App's issue tracker
-    elsif @app.issue_tracker_configured?
-      @tracker = @app.issue_tracker
-
-    # Otherwise, display error about missing tracker configuration.
-    else
-      flash[:error] = "This app has no issue tracker setup."
-    end
-
-    if flash[:error].blank? && @tracker
-      begin
-        @tracker.create_issue @problem, current_user
-      rescue Exception => ex
-        Rails.logger.error "Error during issue creation: " << ex.message
-        flash[:error] = "There was an error during issue creation: #{ex.message}"
-      end
+    unless issue_creation.execute
+      flash[:error] = issue_creation.errors[:base].first
     end
 
     redirect_to app_problem_path(@app, @problem)
