@@ -39,7 +39,7 @@ set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't d
 set :branch, defer { current_branch }
 
 after 'deploy:update_code', 'errbit:symlink_configs'
-# uncomment if unicorn is running on production (do not forget to setup config)
+# if unicorn is started through something like runit (the tool which restarts the process when it's stopped)
 # after 'deploy:restart', 'unicorn:stop'
 
 namespace :deploy do
