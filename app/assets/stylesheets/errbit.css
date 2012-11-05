@@ -713,7 +713,9 @@ table.deploys td.when {
 .notice-pagination-loader {
   visibility: hidden;
   float: left;
-  margin-right: 2em;
+  width: 16px;
+  height: 16px;
+  margin-right: 1em;
 }
 .notice-pagination-loader img {
   vertical-align: middle
