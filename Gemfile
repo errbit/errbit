@@ -83,9 +83,12 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'launchy'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'launchy'
   gem 'timecop'
 end
 
