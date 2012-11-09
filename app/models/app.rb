@@ -125,6 +125,7 @@ class App
   end
 
   def github_url_to_file(file)
+    file = "/#{file}" unless file.start_with? '/'
     "#{github_url}/blob/#{repo_branch + file}"
   end
 
