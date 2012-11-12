@@ -83,6 +83,8 @@ group :development, :test do
   gem 'capistrano'
 end
 
+gem 'foreman', :group => :development
+
 group :test do
   gem 'capybara'
   gem 'launchy'
