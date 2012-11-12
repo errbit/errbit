@@ -6,7 +6,7 @@ module BacktraceLineHelper
 
   private
   def link_to_in_app_source_file(line, text)
-    link_to_repo_source_file(line, text) || link_to_issue_tracker_file(line, text)
+    link_to_repo_source_file(line, text) || link_to_issue_tracker_file(line, text) || text || line.file_name
   end
 
   def link_to_repo_source_file(line, text)
