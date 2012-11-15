@@ -19,7 +19,7 @@ class WatchersController < ApplicationController
 
     def require_watcher_edit_priviledges
       can_edit = current_user == @watcher.user || current_user.admin?
-      redirect_to(root_path) and return(false) unless can_edit
+      redirect_to(root_path) unless can_edit
     end
 
 end
