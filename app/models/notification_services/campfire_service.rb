@@ -2,16 +2,18 @@ if defined? Campy
   class NotificationServices::CampfireService < NotificationService
     Label = "campfire"
     Fields = [
-        [:subdomain, {
-            :placeholder => "Campfire Subdomain"
-        }],
-        [:api_token, {
-            :placeholder => "API Token"
-        }],
-        [:room_id, {
-            :placeholder => "Room ID",
-            :label       => "Room ID"
-        }],
+      [:subdomain, {
+        :label       => "Subdomain",
+        :placeholder => "subdomain from http://{{subdomain}}.campfirenow.com"
+      }],
+      [:api_token, {
+        :label       => "API Token",
+        :placeholder => "123456789abcdef123456789abcdef"
+      }],
+      [:room_id, {
+        :label       => "Room ID",
+        :placeholder => "123456"
+      }]
     ]
 
     def check_params
@@ -21,7 +23,7 @@ if defined? Campy
     end
 
     def url
-      "http://campfirenow.com/"
+      "http://#{subdomain}.campfirenow.com/"
     end
 
     def create_notification(problem)

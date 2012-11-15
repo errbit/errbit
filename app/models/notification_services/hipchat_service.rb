@@ -6,8 +6,8 @@ if defined? HipChat
         :placeholder => "API Token"
       }],
       [:room_id, {
-        :placeholder => "Room ID",
-        :label       => "Room ID"
+        :placeholder => "Room name",
+        :label       => "Room name"
       }],
     ]
 
@@ -15,6 +15,10 @@ if defined? HipChat
       if Fields.any? { |f, _| self[f].blank? }
         errors.add :base, 'You must specify your Hipchat API token and Room ID'
       end
+    end
+
+    def url
+      "https://www.hipchat.com/sign_in"
     end
 
     def create_notification(problem)

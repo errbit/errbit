@@ -1,7 +1,7 @@
 require 'fileutils'
 
 namespace :errbit do
-  
+
   desc "Copys of example config files"
   task :copy_configs do
     configs = {
@@ -9,7 +9,7 @@ namespace :errbit do
       'deploy.example.rb'   => 'deploy.rb',
       (ENV['HEROKU'] ? 'mongoid.mongohq.yml' : 'mongoid.example.yml') => 'mongoid.yml'
     }
-    
+
     puts "Copying example config files..."
     configs.each do |old, new|
       if File.exists?("config/#{new}")
@@ -20,7 +20,7 @@ namespace :errbit do
       end
     end
   end
-  
+
   desc "Copy's over example files and seeds the database"
   task :bootstrap do
     Rake::Task['errbit:copy_configs'].execute
@@ -29,5 +29,5 @@ namespace :errbit do
     puts "\n"
     Rake::Task['db:mongoid:create_indexes'].invoke
   end
-  
+
 end

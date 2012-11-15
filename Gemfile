@@ -4,7 +4,6 @@ gem 'rails', '3.2.8'
 gem 'mongoid', '~> 2.4.10'
 gem 'mongoid_rails_migrations'
 gem 'devise', '~> 1.5.3'
-gem 'nokogiri'
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
@@ -37,6 +36,8 @@ gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.0.0'
+# Gitlab
+gem 'gitlab'
 
 # Bitbucket Issues
 gem 'bitbucket_rest_api'
@@ -66,8 +67,6 @@ platform :ruby do
   gem 'bson_ext', '= 1.6.2'
 end
 
-gem 'omniauth'
-gem 'oa-core'
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
 
@@ -77,25 +76,22 @@ group :development, :test do
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
-    gem 'pry'
     gem 'pry-rails'
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
   gem 'capistrano'
-  gem 'capistrano_colors'
 end
 
 group :test do
   gem 'capybara'
   gem 'launchy'
-  gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
   gem 'timecop'
 end
 
-group :heroku do
+group :heroku, :production do
   gem 'unicorn'
 end
 
@@ -108,6 +104,7 @@ group :assets do
   gem 'execjs'
   gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
+  gem 'underscore-rails'
 end
 
 gem 'turbo-sprockets-rails3'

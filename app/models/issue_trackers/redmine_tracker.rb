@@ -4,7 +4,7 @@ if defined? RedmineClient
     Fields = [
       [:account, {
         :label       => "Redmine URL",
-        :placeholder => "e.g. http://www.redmine.org/"
+        :placeholder => "http://www.redmine.org/"
       }],
       [:api_token, {
         :placeholder => "API Token for your account"

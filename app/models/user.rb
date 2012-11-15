@@ -33,7 +33,7 @@ class User
   end
 
   def per_page
-    self[:per_page] || PER_PAGE
+    super || PER_PAGE
   end
 
   def watching?(app)

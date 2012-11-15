@@ -15,6 +15,10 @@ Fabricator :redmine_tracker, :from => :issue_tracker, :class_name => "IssueTrack
   account 'http://redmine.example.com'
 end
 
+Fabricator :gitlab_tracker, :from => :issue_tracker, :class_name => "IssueTrackers::GitlabTracker" do
+  account 'http://gitlab.example.com'
+end
+
 Fabricator :mingle_tracker, :from => :issue_tracker, :class_name => "IssueTrackers::MingleTracker" do
   account 'https://mingle.example.com'
   ticket_properties 'card_type = Defect, defect_status = open, priority = essential'

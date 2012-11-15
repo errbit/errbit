@@ -13,7 +13,7 @@ class Notice
   field :current_user, :type => Hash
   field :error_class
   delegate :lines, :to => :backtrace, :prefix => true
-  delegate :app, :to => :err
+  delegate :app, :problem, :to => :err
 
   belongs_to :err
   belongs_to :backtrace, :index => true
@@ -35,8 +35,6 @@ class Notice
   scope :ordered, order_by(:created_at.asc)
   scope :reverse_ordered, order_by(:created_at.desc)
   scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
-
-  delegate :app, :problem, :to => :err
 
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
@@ -66,7 +64,7 @@ class Notice
   end
 
   def request
-    read_attribute(:request) || {}
+    super || {}
   end
 
   def url
@@ -94,6 +92,18 @@ class Notice
 
   def in_app_backtrace_lines
     backtrace_lines.in_app
+  end
+
+  def similar_count
+    problem.notices_count
+  end
+
+  def notifiable?
+    app.email_at_notices.include?(similar_count)
+  end
+
+  def should_notify?
+    app.notifiable? && notifiable?
   end
 
   protected

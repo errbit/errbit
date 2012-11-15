@@ -35,7 +35,7 @@ if defined? Octokit
       end
 
       begin
-        issue = client.create_issue(project_id, issue_title(problem), body_template.result(binding).unpack('C*').pack('U*'), options = {})
+        issue = client.create_issue(project_id, issue_title(problem), body_template.result(binding).unpack('C*').pack('U*'))
         problem.update_attributes(
           :issue_link => issue.html_url,
           :issue_type => Label

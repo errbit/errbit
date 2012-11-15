@@ -3,19 +3,22 @@ if defined? Lighthouse
     Label = "lighthouseapp"
     Fields = [
       [:account, {
-        :placeholder => "abc from http://abc.lighthouseapp.com"
+        :label       => "Subdomain",
+        :placeholder => "subdomain from http://{{subdomain}}.lighthouseapp.com"
       }],
       [:api_token, {
-        :placeholder => "API Token for your account"
+        :label       => "API Token",
+        :placeholder => "123456789abcdef123456789abcdef"
       }],
       [:project_id, {
-        :placeholder => "Lighthouse project"
+        :label       => "Project ID",
+        :placeholder => "123456"
       }]
     ]
 
     def check_params
       if Fields.detect {|f| self[f[0]].blank? }
-        errors.add :base, 'You must specify your Lighthouseapp account, API token and Project ID'
+        errors.add :base, 'You must specify your Lighthouseapp Subdomain, API token and Project ID'
       end
     end
 
