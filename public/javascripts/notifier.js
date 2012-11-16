@@ -22,6 +22,7 @@ var Hoptoad = {
       <project-root>PROJECT_ROOT</project-root>\
       <environment-name>production</environment-name>\
     </server-environment>\
+    ADDITIONAL_INFO\
   </notice>',
   ROOT              : window.location.protocol + '//' + window.location.host,
   BACKTRACE_MATCHER : /^(.*)\@(.*)\:(\d+)$/,
@@ -106,6 +107,21 @@ var Hoptoad = {
                .replace('REQUEST_URL',       url)
                .replace('REQUEST_ACTION',    action)
                .replace('REQUEST_COMPONENT', component);
+
+      var info = '';
+      var methods = ['user_attributes', 'current_user'];
+
+      for (var i = 0; i < methods.length; i++) {
+        var method = methods[i];
+
+        if (error[method]) {
+          info += '<' + method.replace('_','-') + '>';
+          info += Hoptoad.generateVariables(error[method]);
+          info += '</' + method.replace('_','-') + '>';
+        }
+      }
+
+      xml = xml.replace('ADDITIONAL_INFO', info)
     }
 
     return xml.replace('PROJECT_ROOT',     Hoptoad.ROOT)
@@ -192,11 +208,11 @@ var Hoptoad = {
   },
 
   escapeText: function(text) {
-    return text.replace(/&/g, '&#38;')
-               .replace(/</g, '&#60;')
-               .replace(/>/g, '&#62;')
-               .replace(/'/g, '&#39;')
-               .replace(/"/g, '&#34;');
+    return text.toString().replace(/&/g, '&#38;')
+                           .replace(/</g, '&#60;')
+                           .replace(/>/g, '&#62;')
+                           .replace(/'/g, '&#39;')
+                           .replace(/"/g, '&#34;');
   },
 
   trim: function(text) {
