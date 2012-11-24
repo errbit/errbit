@@ -62,9 +62,9 @@ gem 'omniauth-github'
 
 
 platform :ruby do
-  gem 'mongo', '= 1.6.2'
   gem 'bson', '= 1.6.2'
   gem 'bson_ext', '= 1.6.2'
+  gem 'mongo', '= 1.6.2'
 end
 
 gem 'ri_cal'
@@ -74,9 +74,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
   unless ENV["CI"]
-    gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
     gem 'pry-rails'
+    gem 'ruby-debug', :platform => :mri_18
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
@@ -87,9 +87,9 @@ gem 'foreman', :group => :development
 
 group :test do
   gem 'capybara'
-  gem 'launchy'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
+  gem 'launchy'
   gem 'timecop'
 end
 
@@ -106,6 +106,8 @@ group :assets do
   gem 'execjs'
   gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
+  gem 'jquery-rails'
+  gem 'pjax_rails'
   gem 'underscore-rails'
 end
 
