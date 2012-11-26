@@ -17,6 +17,10 @@ class NotificationServices::PushoverService < NotificationService
     end
   end
 
+  def url
+    "https://pushover.net/login"
+  end
+
   def create_notification(problem)
     # build the hoi client
     notification = Rushover::Client.new(subdomain)

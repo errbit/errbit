@@ -23,7 +23,7 @@ if defined? Campy
     end
 
     def url
-      "http://campfirenow.com/"
+      "http://#{subdomain}.campfirenow.com/"
     end
 
     def create_notification(problem)
