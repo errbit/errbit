@@ -98,11 +98,6 @@ describe App do
       app = Fabricate(:app, :github_repo => "errbit/errbit")
       app.github_url_to_file('/path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
     end
-
-    it 'resolves to full path to file without leading root symbol' do
-      app = Fabricate(:app, :github_repo => "errbit/errbit")
-      app.github_url_to_file('path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
-    end
   end
 
   context '#github_repo?' do
