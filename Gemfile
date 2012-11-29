@@ -36,6 +36,8 @@ gem 'pivotal-tracker'
 gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.0.0'
+# Gitlab
+gem 'gitlab'
 
 # Bitbucket Issues
 gem 'bitbucket_rest_api'
@@ -80,6 +82,8 @@ group :development, :test do
 #  gem 'newrelic_rpm'
   gem 'capistrano'
 end
+
+gem 'foreman', :group => :development
 
 group :test do
   gem 'capybara'
