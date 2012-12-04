@@ -12,7 +12,7 @@ gem 'useragent', '~> 0.3.1'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
-gem 'kaminari'
+gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer'
 gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
 gem 'rails_autolink', '~> 1.0.9'
