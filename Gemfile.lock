@@ -346,7 +346,7 @@ DEPENDENCIES
   hoptoad_notifier (~> 2.4)
   htmlentities (~> 4.3.0)
   inherited_resources
-  kaminari
+  kaminari (>= 0.14.1)
   launchy
   lighthouse-api
   mongo (= 1.6.2)
