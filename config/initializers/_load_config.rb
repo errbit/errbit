@@ -24,12 +24,12 @@ unless defined?(Errbit::Config)
     Errbit::Config.github_access_scope = ENV['GITHUB_ACCESS_SCOPE'].split(',').map(&:strip) if ENV['GITHUB_ACCESS_SCOPE']
 
     Errbit::Config.smtp_settings = {
-      :address        => "smtp.sendgrid.net",
-      :port           => "25",
+      :address        => ENV['SMTP_SERVER'],
+      :port           => ENV['SMTP_PORT'] || 25,
       :authentication => :plain,
-      :user_name      => ENV['SENDGRID_USERNAME'],
-      :password       => ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['SENDGRID_DOMAIN']
+      :user_name      => ENV['SMTP_USERNAME'],
+      :password       => ENV['SMTP_PASSWORD'],
+      :domain         => ENV['ERRBIT_EMAIL_FROM'].split('@').last
     }
   end
 
