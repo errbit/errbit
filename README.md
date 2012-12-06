@@ -157,9 +157,6 @@ heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
-heroku config:add SMTP_SERVER=smtp.sendgrid.net
-heroku config:add SMTP_USERNAME=the-username-provided-by-sendgrid
-heroku config:add SMTP_PASSWORD=the-password-provided-by-sendgrid
 git push heroku master
 ```
 
