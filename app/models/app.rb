@@ -125,7 +125,7 @@ class App
   end
 
   def github_url_to_file(file)
-    "#{github_url}/blob/#{repo_branch + file}"
+    "#{github_url}/blob/#{repo_branch}/#{file}"
   end
 
   def bitbucket_repo?
@@ -137,7 +137,7 @@ class App
   end
 
   def bitbucket_url_to_file(file)
-    "#{bitbucket_url}/src/#{repo_branch + file}"
+    "#{bitbucket_url}/src/#{repo_branch}/#{file}"
   end
 
 
