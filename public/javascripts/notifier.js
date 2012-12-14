@@ -221,71 +221,33 @@ var Hoptoad = {
   }
 };
 
-
-
-
+// From: http://stacktracejs.com/
+//
 // Domain Public by Eric Wendelin http://eriwen.com/ (2008)
-//          Luke Smith http://lucassmith.name/ (2008)
-//          Loic Dachary <loic@dachary.org> (2008)
-//          Johan Euphrosine <proppy@aminche.com> (2008)
-//          Øyvind Sean Kinsey http://kinsey.no/blog (2010)
-//
-// Information and discussions
-// http://jspoker.pokersource.info/skin/test-printstacktrace.html
-// http://eriwen.com/javascript/js-stack-trace/
-// http://eriwen.com/javascript/stacktrace-update/
-// http://pastie.org/253058
-// http://browsershots.org/http://jspoker.pokersource.info/skin/test-printstacktrace.html
-//
-//
-// guessFunctionNameFromLines comes from firebug
-//
-// Software License Agreement (BSD License)
-//
-// Copyright (c) 2007, Parakey Inc.
-// All rights reserved.
-//
-// Redistribution and use of this software in source and binary forms, with or without modification,
-// are permitted provided that the following conditions are met:
-//
-// * Redistributions of source code must retain the above
-//   copyright notice, this list of conditions and the
-//   following disclaimer.
-//
-// * Redistributions in binary form must reproduce the above
-//   copyright notice, this list of conditions and the
-//   following disclaimer in the documentation and/or other
-//   materials provided with the distribution.
-//
-// * Neither the name of Parakey Inc. nor the names of its
-//   contributors may be used to endorse or promote products
-//   derived from this software without specific prior
-//   written permission of Parakey Inc.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
-// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-// IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-// OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-function printStackTrace(a){var b=a&&a.e?a.e:null;a=a?!!a.guess:true;var c=new printStackTrace.implementation;b=c.run(b);return a?c.guessFunctions(b):b}printStackTrace.implementation=function(){};
-printStackTrace.implementation.prototype={run:function(a){var b=this._mode||this.mode();if(b==="other")return this.other(arguments.callee);else{var c;if(!(c=a))a:{try{0()}catch(d){c=d;break a}c=void 0}a=c;return this[b](a)}},mode:function(){try{0()}catch(a){if(a.arguments)return this._mode="chrome";else if(a.stack)return this._mode="firefox";else if(window.opera&&!("stacktrace"in a))return this._mode="opera"}return this._mode="other"},chrome:function(a){return a.stack.replace(/^.*?\n/,"").replace(/^.*?\n/,
-"").replace(/^.*?\n/,"").replace(/^[^\(]+?[\n$]/gm,"").replace(/^\s+at\s+/gm,"").replace(/^Object.<anonymous>\s*\(/gm,"{anonymous}()@").split("\n")},firefox:function(a){return a.stack.replace(/^.*?\n/,"").replace(/(?:\n@:0)?\s+$/m,"").replace(/^\(/gm,"{anonymous}(").split("\n")},opera:function(a){a=a.message.split("\n");var b=/Line\s+(\d+).*?script\s+(http\S+)(?:.*?in\s+function\s+(\S+))?/i,c,d,e;c=4;d=0;for(e=a.length;c<e;c+=2)if(b.test(a[c]))a[d++]=(RegExp.$3?RegExp.$3+"()@"+RegExp.$2+RegExp.$1:
-"{anonymous}()@"+RegExp.$2+":"+RegExp.$1)+" -- "+a[c+1].replace(/^\s+/,"");a.splice(d,a.length-d);return a},other:function(a){for(var b=/function\s*([\w\-$]+)?\s*\(/i,c=[],d=0,e,f;a&&c.length<10;){e=b.test(a.toString())?RegExp.$1||"{anonymous}":"{anonymous}";f=Array.prototype.slice.call(a.arguments);c[d++]=e+"("+printStackTrace.implementation.prototype.stringifyArguments(f)+")";if(a===a.caller&&window.opera)break;a=a.caller}return c},stringifyArguments:function(a){for(var b=0;b<a.length;++b){var c=
-a[b];if(typeof c=="object")a[b]="#object";else if(typeof c=="function")a[b]="#function";else if(typeof c=="string")a[b]='"'+c+'"'}return a.join(",")},sourceCache:{},ajax:function(a){var b=this.createXMLHTTPObject();if(b){b.open("GET",a,false);b.setRequestHeader("User-Agent","XMLHTTP/1.0");b.send("");return b.responseText}},createXMLHTTPObject:function(){for(var a,b=[function(){return new XMLHttpRequest},function(){return new ActiveXObject("Msxml2.XMLHTTP")},function(){return new ActiveXObject("Msxml3.XMLHTTP")},
-function(){return new ActiveXObject("Microsoft.XMLHTTP")}],c=0;c<b.length;c++)try{a=b[c]();this.createXMLHTTPObject=b[c];return a}catch(d){}},getSource:function(a){a in this.sourceCache||(this.sourceCache[a]=this.ajax(a).split("\n"));return this.sourceCache[a]},guessFunctions:function(a){for(var b=0;b<a.length;++b){var c=a[b],d=/{anonymous}\(.*\)@(\w+:\/\/([-\w\.]+)+(:\d+)?[^:]+):(\d+):?(\d+)?/.exec(c);if(d){var e=d[1];d=d[4];if(e&&d){e=this.guessFunctionName(e,d);a[b]=c.replace("{anonymous}",e)}}}return a},
-guessFunctionName:function(a,b){try{return this.guessFunctionNameFromLines(b,this.getSource(a))}catch(c){return"getSource failed with url: "+a+", exception: "+c.toString()}},guessFunctionNameFromLines:function(a,b){for(var c=/function ([^(]*)\(([^)]*)\)/,d=/['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(function|eval|new Function)/,e="",f=0;f<10;++f){e=b[a-f]+e;if(e!==undefined){var g=d.exec(e);if(g&&g[1])return g[1];else if((g=c.exec(e))&&g[1])return g[1]}}return"(?)"}};
+//                  Luke Smith http://lucassmith.name/ (2008)
+//                  Loic Dachary <loic@dachary.org> (2008)
+//                  Johan Euphrosine <proppy@aminche.com> (2008)
+//                  Oyvind Sean Kinsey http://kinsey.no/blog (2010)
+//                  Victor Homyakov <victor-homyakov@users.sourceforge.net> (2010)
 
-
-
+function printStackTrace(a){var a=a||{guess:!0},b=a.e||null,a=!!a.guess,d=new printStackTrace.implementation,b=d.run(b);return a?d.guessAnonymousFunctions(b):b}printStackTrace.implementation=function(){};
+printStackTrace.implementation.prototype={run:function(a,b){a=a||this.createException();b=b||this.mode(a);return"other"===b?this.other(arguments.callee):this[b](a)},createException:function(){try{this.undef()}catch(a){return a}},mode:function(a){return a.arguments&&a.stack?"chrome":a.stack&&a.sourceURL?"safari":"string"===typeof a.message&&"undefined"!==typeof window&&window.opera?!a.stacktrace||-1<a.message.indexOf("\n")&&a.message.split("\n").length>a.stacktrace.split("\n").length?"opera9":!a.stack?
+"opera10a":0>a.stacktrace.indexOf("called from line")?"opera10b":"opera11":a.stack?"firefox":"other"},instrumentFunction:function(a,b,d){var a=a||window,c=a[b];a[b]=function(){d.call(this,printStackTrace().slice(4));return a[b]._instrumented.apply(this,arguments)};a[b]._instrumented=c},deinstrumentFunction:function(a,b){a[b].constructor===Function&&(a[b]._instrumented&&a[b]._instrumented.constructor===Function)&&(a[b]=a[b]._instrumented)},chrome:function(a){a=(a.stack+"\n").replace(/^\S[^\(]+?[\n$]/gm,
+"").replace(/^\s+(at eval )?at\s+/gm,"").replace(/^([^\(]+?)([\n$])/gm,"{anonymous}()@$1$2").replace(/^Object.<anonymous>\s*\(([^\)]+)\)/gm,"{anonymous}()@$1").split("\n");a.pop();return a},safari:function(a){return a.stack.replace(/\[native code\]\n/m,"").replace(/^@/gm,"{anonymous}()@").split("\n")},firefox:function(a){return a.stack.replace(/(?:\n@:0)?\s+$/m,"").replace(/^[\(@]/gm,"{anonymous}()@").split("\n")},opera11:function(a){for(var b=/^.*line (\d+), column (\d+)(?: in (.+))? in (\S+):$/,
+a=a.stacktrace.split("\n"),d=[],c=0,f=a.length;c<f;c+=2){var e=b.exec(a[c]);if(e){var g=e[4]+":"+e[1]+":"+e[2],e=e[3]||"global code",e=e.replace(/<anonymous function: (\S+)>/,"$1").replace(/<anonymous function>/,"{anonymous}");d.push(e+"@"+g+" -- "+a[c+1].replace(/^\s+/,""))}}return d},opera10b:function(a){for(var b=/^(.*)@(.+):(\d+)$/,a=a.stacktrace.split("\n"),d=[],c=0,f=a.length;c<f;c++){var e=b.exec(a[c]);e&&d.push((e[1]?e[1]+"()":"global code")+"@"+e[2]+":"+e[3])}return d},opera10a:function(a){for(var b=
+/Line (\d+).*script (?:in )?(\S+)(?:: In function (\S+))?$/i,a=a.stacktrace.split("\n"),d=[],c=0,f=a.length;c<f;c+=2){var e=b.exec(a[c]);e&&d.push((e[3]||"{anonymous}")+"()@"+e[2]+":"+e[1]+" -- "+a[c+1].replace(/^\s+/,""))}return d},opera9:function(a){for(var b=/Line (\d+).*script (?:in )?(\S+)/i,a=a.message.split("\n"),d=[],c=2,f=a.length;c<f;c+=2){var e=b.exec(a[c]);e&&d.push("{anonymous}()@"+e[2]+":"+e[1]+" -- "+a[c+1].replace(/^\s+/,""))}return d},other:function(a){for(var b=/function\s*([\w\-$]+)?\s*\(/i,
+d=[],c,f;a&&a.arguments&&10>d.length;)c=b.test(a.toString())?RegExp.$1||"{anonymous}":"{anonymous}",f=Array.prototype.slice.call(a.arguments||[]),d[d.length]=c+"("+this.stringifyArguments(f)+")",a=a.caller;return d},stringifyArguments:function(a){for(var b=[],d=Array.prototype.slice,c=0;c<a.length;++c){var f=a[c];void 0===f?b[c]="undefined":null===f?b[c]="null":f.constructor&&(f.constructor===Array?b[c]=3>f.length?"["+this.stringifyArguments(f)+"]":"["+this.stringifyArguments(d.call(f,0,1))+"..."+
+this.stringifyArguments(d.call(f,-1))+"]":f.constructor===Object?b[c]="#object":f.constructor===Function?b[c]="#function":f.constructor===String?b[c]='"'+f+'"':f.constructor===Number&&(b[c]=f))}return b.join(",")},sourceCache:{},ajax:function(a){var b=this.createXMLHTTPObject();if(b)try{return b.open("GET",a,!1),b.send(null),b.responseText}catch(d){}return""},createXMLHTTPObject:function(){for(var a,b=[function(){return new XMLHttpRequest},function(){return new ActiveXObject("Msxml2.XMLHTTP")},function(){return new ActiveXObject("Msxml3.XMLHTTP")},
+function(){return new ActiveXObject("Microsoft.XMLHTTP")}],d=0;d<b.length;d++)try{return a=b[d](),this.createXMLHTTPObject=b[d],a}catch(c){}},isSameDomain:function(a){return"undefined"!==typeof location&&-1!==a.indexOf(location.hostname)},getSource:function(a){a in this.sourceCache||(this.sourceCache[a]=this.ajax(a).split("\n"));return this.sourceCache[a]},guessAnonymousFunctions:function(a){for(var b=0;b<a.length;++b){var d=/^(.*?)(?::(\d+))(?::(\d+))?(?: -- .+)?$/,c=a[b],f=/\{anonymous\}\(.*\)@(.*)/.exec(c);
+if(f){var e=d.exec(f[1]);e&&(d=e[1],f=e[2],e=e[3]||0,d&&(this.isSameDomain(d)&&f)&&(d=this.guessAnonymousFunction(d,f,e),a[b]=c.replace("{anonymous}",d)))}}return a},guessAnonymousFunction:function(a,b){var d;try{d=this.findFunctionName(this.getSource(a),b)}catch(c){d="getSource failed with url: "+a+", exception: "+c.toString()}return d},findFunctionName:function(a,b){for(var d=/function\s+([^(]*?)\s*\(([^)]*)\)/,c=/['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function\b/,f=/['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(?:eval|new Function)\b/,
+e="",g,j=Math.min(b,20),h,i=0;i<j;++i)if(g=a[b-i-1],h=g.indexOf("//"),0<=h&&(g=g.substr(0,h)),g)if(e=g+e,(g=c.exec(e))&&g[1]||(g=d.exec(e))&&g[1]||(g=f.exec(e))&&g[1])return g[1];return"(?)"}};
 
 window.onerror = function(message, file, line) {
   setTimeout(function() {
     Hoptoad.notify({
       message : message,
       stack   : '()@' + file + ':' + line
+      url     : document.location.href
     });
   }, 100);
   return true;
