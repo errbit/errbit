@@ -246,7 +246,7 @@ window.onerror = function(message, file, line) {
   setTimeout(function() {
     Hoptoad.notify({
       message : message,
-      stack   : '()@' + file + ':' + line
+      stack   : '()@' + file + ':' + line,
       url     : document.location.href
     });
   }, 100);
