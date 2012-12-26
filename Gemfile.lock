@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/NARKOZ/gitlab
+  revision: e4d7dd7dd4be587e44de388eb64d164cab5d464f
+  specs:
+    gitlab (2.2.0)
+      httparty
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -99,8 +106,6 @@ GEM
     ffi (1.1.4)
     foreman (0.60.2)
       thor (>= 0.13.6)
-    gitlab (2.1.0)
-      httparty
     haml (3.1.6)
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)

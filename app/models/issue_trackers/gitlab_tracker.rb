@@ -10,7 +10,7 @@ if defined? Gitlab
         :placeholder => "API Token for your account"
       }],
       [:project_id, {
-        :label       => "Ticket Project Short Name / ID",
+        :label       => "Ticket Project ID (use Number)",
         :placeholder => "Gitlab Project where issues will be created"
       }]
     ]
@@ -23,19 +23,25 @@ if defined? Gitlab
 
     def create_issue(problem, reported_by = nil)
       Gitlab.configure do |config|
-        config.endpoint = "#{account}/api/v2"
+        config.endpoint = "#{account}/api/v3"
         config.private_token = api_token
         config.user_agent = 'Errbit User Agent'
       end
       title = issue_title problem
-      description = body_template.result(binding)
-      Gitlab.create_issue(project_id, title, { :description => description, :labels => "errbit" } )
+      description_summary = summary_template.result(binding)
+      description_body = body_template.result(binding)
+      ticket = Gitlab.create_issue(project_id, title, { :description => description_summary, :labels => "errbit" } )
+      Gitlab.create_issue_note(project_id, ticket.id, description_body)
+    end
+
+    def summary_template
+      @@summary_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/gitlab_summary.txt.erb").gsub(/^\s*/, ''))
     end
 
     def body_template
       @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/gitlab_body.txt.erb").gsub(/^\s*/, ''))
     end
-    
+
     def url
       "#{account}/#{project_id}/issues"
     end

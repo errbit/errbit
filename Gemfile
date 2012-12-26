@@ -37,7 +37,7 @@ gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.0.0'
 # Gitlab
-gem 'gitlab'
+gem 'gitlab', :git => 'git://github.com/NARKOZ/gitlab'
 
 # Bitbucket Issues
 gem 'bitbucket_rest_api'
