@@ -7,20 +7,20 @@ describe IssueTrackers::GitlabTracker do
     problem = notice.problem
 
     number = 5
-    @issue_link = "#{tracker.account}/#{tracker.project_id}/issues/#{number}/#{tracker.api_token}"
+    @issue_link = "#{tracker.account}/api/v3/projects/#{tracker.project_id}/issues/#{number}/?private_token=#{tracker.api_token}"
     body = <<EOF
 {
   "title": "Title"
 }
 EOF
 
-    stub_request(:post, "#{tracker.account}/#{tracker.project_id}/issues/#{tracker.api_token}").
+    stub_request(:post, "#{tracker.account}/api/v3/projects/#{tracker.project_id}/issues/?private_token=#{tracker.api_token}").
       to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
-    requested = have_requested(:post, "#{tracker.account}/#{tracker.project_id}/issues/#{tracker.api_token}")
+    requested = have_requested(:post, "#{tracker.account}/api/v3/projects/#{tracker.project_id}/issues/?private_token=#{tracker.api_token}")
     WebMock.should requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
     WebMock.should requested.with(:body => /See this exception on Errbit/)
 
