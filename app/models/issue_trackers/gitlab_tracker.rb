@@ -36,8 +36,8 @@ if defined? Gitlab
 
     def summary_template
       @@summary_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/gitlab_summary.txt.erb").gsub(/^\s*/, ''))
-
     end
+
     def body_template
       @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/gitlab_body.txt.erb").gsub(/^\s*/, ''))
     end
