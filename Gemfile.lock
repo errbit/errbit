@@ -344,7 +344,7 @@ DEPENDENCIES
   execjs
   fabrication (~> 1.3.0)
   foreman
-  gitlab
+  gitlab!
   haml
   hipchat
   hoi
