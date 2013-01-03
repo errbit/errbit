@@ -199,6 +199,12 @@ heroku run rake db:seed
 heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
 ```
 
+  * You may also want to configure a different secret token for each deploy:
+
+```bash
+heroku config:add SECRET_TOKEN=some-secret-token
+```
+
   * Enjoy!
 
 
