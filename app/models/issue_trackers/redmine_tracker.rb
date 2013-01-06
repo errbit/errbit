@@ -35,10 +35,12 @@ if defined? RedmineClient
     def create_issue(problem, reported_by = nil)
       token = api_token
       acc = account
+      user = username
+      passwd = password
       RedmineClient::Base.configure do
         self.token = token
-        self.user = username
-        self.password = password
+        self.user = user
+        self.password = passwd
         self.site = acc
         self.format = :xml
       end
