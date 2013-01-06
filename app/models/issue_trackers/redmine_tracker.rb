@@ -67,7 +67,7 @@ if defined? RedmineClient
 
     def url
       acc_url = account.start_with?('http') ? account : "http://#{account}"
-      URI.parse("#{acc_url}?project_id=#{project_id}").to_s
+      URI.parse("#{acc_url}/projects/#{project_id}").to_s
     rescue URI::InvalidURIError
     end
   end
