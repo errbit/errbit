@@ -6,7 +6,7 @@ namespace :errbit do
     desc "Delete all of the notices" do
       task :delete_notices => :environment do
         puts "Deleting Notices"
-        Notice.where(:created_at.lt => 1.days.ago).destroy_all
+        Notice.where(:created_at.lt => 1.hour.ago).destroy_all
       end
     end
 
