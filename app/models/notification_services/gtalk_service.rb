@@ -10,14 +10,14 @@ class NotificationServices::GtalkService < NotificationService
           :label       => "Password"
       }],
       [:room_id, {
-          :placeholder => "touser@example.com",
-          :label       => "Send To User"
+          :placeholder => "touser@example.com, anotheruser@example.com",
+          :label       => "Send To User(s)"
       }],
   ]
 
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
-      errors.add :base, 'You must specify your Username, Password and To User'
+      errors.add :base, 'You must specify your Username, Password and To User(s)'
     end
   end
 
@@ -31,7 +31,9 @@ class NotificationServices::GtalkService < NotificationService
     client.connect("talk.google.com")
     client.auth(api_token)
 
-    # post the issue to the xmpp room
-    client.send(Jabber::Message.new(room_id, "[errbit] http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"))
+    # post the issue to the xmpp room(s)
+    room_id.gsub(/ /i, ",").gsub(/;/i, ",").split(",").map(&:strip).reject(&:empty?).each do |room|
+      client.send(Jabber::Message.new(room, "[errbit] http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"))
+    end
   end
 end
