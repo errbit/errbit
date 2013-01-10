@@ -10,7 +10,7 @@ class Mailer < ActionMailer::Base
     @app      = notice.app
 
     mail :to      => @app.notification_recipients,
-         :subject => "[#{@app.name}][#{@notice.environment_name}] #{@notice.message}"
+         :subject => "[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
   def deploy_notification(deploy)
