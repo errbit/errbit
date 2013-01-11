@@ -51,7 +51,7 @@ describe NoticesController do
       response.body.should match(%r{<url[^>]*>(.+)#{locate_path(@notice.id)}</url>})
       email = ActionMailer::Base.deliveries.last
       email.to.should include(@app.watchers.first.email)
-      email.subject.should include(@notice.message)
+      email.subject.should include(@notice.message.truncate(50))
       email.subject.should include("[#{@app.name}]")
       email.subject.should include("[#{@notice.environment_name}]")
     end
