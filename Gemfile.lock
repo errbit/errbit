@@ -167,7 +167,7 @@ GEM
       rails (>= 3.0.0)
       railties (>= 3.0.0)
     multi_json (1.5.0)
-    multi_xml (0.5.1)
+    multi_xml (0.5.2)
     multipart-post (1.1.5)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
