@@ -264,6 +264,11 @@ describe App do
       @notice.current_user['username'].should == 'mrbean'
     end
 
+    it 'captures the framework' do
+      @notice = App.report_error!(@xml)
+      @notice.framework.should == 'Rails: 3.2.11'
+    end
+
   end
 
 
