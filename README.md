@@ -87,7 +87,7 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
 ```bash
 apt-get update
-apt-get install mongodb
+apt-get install mongodb-10gen
 ```
 
   * Install libxml and libcurl
