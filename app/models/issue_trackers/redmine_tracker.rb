@@ -39,57 +39,49 @@ if defined? RedmineClient
       issue.description = body_template.result(binding)
       issue.save!
       problem.update_attributes(
-        :issue_link => "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}"),
+        :issue_link => issue_link(issue.id),
         :issue_type => Label
       )
     end
-    issue = RedmineClient::Issue.new(:project_id => project_id)
-    issue.subject = issue_title problem
-    issue.description = body_template.result(binding)
-    issue.save!
-    problem.update_attributes(
-      :issue_link => issue_link(issue.id),
-      :issue_type => Label
-    )
-  end
 
-  def link_issue(problem, issue_id)
-    token = api_token
-    acc = account
-    RedmineClient::Base.configure do
-      self.token = token
-      self.site = acc
-      self.format = :xml
+    def link_issue(problem, issue_id)
+      token = api_token
+      acc = account
+      RedmineClient::Base.configure do
+        self.token = token
+        self.site = acc
+        self.format = :xml
+      end
+      issue = RedmineClient::Issue.find(issue_id)
+      issue.notes = body_template.result(binding)
+      issue.save!
+      problem.update_attributes(
+        :issue_link => issue_link(issue_id),
+        :issue_type => Label
+      )
     end
-    issue = RedmineClient::Issue.find(issue_id)
-    issue.notes = body_template.result(binding)
-    issue.save!
-    problem.update_attributes(
-      :issue_link => issue_link(issue_id),
-      :issue_type => Label
-    )
-  end
 
-  def url_to_file(file_path, line_number = nil)
-    # alt_project_id let's users specify a different project for tickets / app files.
-    project = self.alt_project_id.present? ? self.alt_project_id : self.project_id
-    url = "#{self.account}/projects/#{project}/repository/annotate/#{file_path.sub(/^\//,'')}"
-    line_number ? url << "#L#{line_number}" : url
-  end
+    def url_to_file(file_path, line_number = nil)
+      # alt_project_id let's users specify a different project for tickets / app files.
+      project = self.alt_project_id.present? ? self.alt_project_id : self.project_id
+      url = "#{self.account}/projects/#{project}/repository/annotate/#{file_path.sub(/^\//,'')}"
+      line_number ? url << "#L#{line_number}" : url
+    end
 
     def body_template
       @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/textile_body.txt.erb"))
     end
 
-  def url
-    acc_url = account.start_with?('http') ? account : "http://#{account}"
-    acc_url = "#{acc_url}/" unless acc_url.ends_with?('/')
-    URI.parse("#{acc_url}projects/#{project_id}").to_s
-  rescue URI::InvalidURIError
-  end
+    def url
+      acc_url = account.start_with?('http') ? account : "http://#{account}"
+      acc_url = "#{acc_url}/" unless acc_url.ends_with?('/')
+      URI.parse("#{acc_url}projects/#{project_id}").to_s
+    rescue URI::InvalidURIError
+    end
 
-  protected
-  def issue_link(issue_id)
-    "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue_id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}")
+    protected
+    def issue_link(issue_id)
+      "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue_id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}")
+    end
   end
 end
