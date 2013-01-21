@@ -13,7 +13,7 @@ class BacktraceLineNormalizer
   end
 
   def normalized_method
-    @raw_line['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
+    @raw_line['method'].blank? ? "[unknown method]" : @raw_line['method'].gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
   end
 
 end
