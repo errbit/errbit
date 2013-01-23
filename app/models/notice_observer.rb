@@ -7,9 +7,10 @@ class NoticeObserver < Mongoid::Observer
       notice.app.notification_service.create_notification(notice.problem)
     end
 
-    if notice.app.notification_recipients.any?
-      Mailer.err_notification(notice).deliver
-    end
+    #Disable mail notifications due to sendgrid being overloaded
+    #if notice.app.notification_recipients.any?
+    #  Mailer.err_notification(notice).deliver
+    #end
   end
 
   private
