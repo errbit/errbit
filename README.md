@@ -124,20 +124,18 @@ rake errbit:bootstrap
 script/rails server
 ```
 
-**Deploying:**
+Deploying:
+----------
 
-  * Bootstrap Errbit. This will copy over config.yml and also seed the database.
-
-```bash
-rake errbit:bootstrap
-```
-
-  * Update the deploy.rb file with information about your server
+  * Copy `config/deploy.example.rb` to `config/deploy.rb`
+  * Update the `deploy.rb` or `config.yml` file with information about your server
   * Setup server and deploy
 
 ```bash
 cap deploy:setup deploy
 ```
+
+(Note: The capistrano deploy script will automatically generate a unique secret token.)
 
 **Deploying to Heroku:**
 
@@ -155,6 +153,7 @@ heroku create example-errbit --stack cedar
 heroku addons:add mongolab:starter
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
+heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master

@@ -56,6 +56,12 @@ namespace :errbit do
     run "mkdir -p #{shared_configs}"
     run "if [ ! -f #{shared_configs}/config.yml ]; then cp #{latest_release}/config/config.example.yml #{shared_configs}/config.yml; fi"
     run "if [ ! -f #{shared_configs}/mongoid.yml ]; then cp #{latest_release}/config/mongoid.example.yml #{shared_configs}/mongoid.yml; fi"
+
+    # Generate unique secret token
+    run %Q{if [ ! -f #{shared_configs}/secret_token.rb ]; then
+      cd #{current_release};
+      echo "Errbit::Application.config.secret_token = '$(bundle exec rake secret)'" > #{shared_configs}/secret_token.rb;
+    fi}.compact
   end
 
   task :symlink_configs do
@@ -64,6 +70,7 @@ namespace :errbit do
     release_configs = File.join(release_path,'config')
     run("ln -nfs #{shared_configs}/config.yml #{release_configs}/config.yml")
     run("ln -nfs #{shared_configs}/mongoid.yml #{release_configs}/mongoid.yml")
+    run("ln -nfs #{shared_configs}/secret_token.rb #{release_configs}/initializers/secret_token.rb")
   end
 end
 
