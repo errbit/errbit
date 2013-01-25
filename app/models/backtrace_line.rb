@@ -1,6 +1,6 @@
 class BacktraceLine
   include Mongoid::Document
-  IN_APP_PATH = %r{^\[PROJECT_ROOT\](?!(\/vendor))}
+  IN_APP_PATH = %r{^\[PROJECT_ROOT\](?!(\/vendor))/?}
   GEMS_PATH   = %r{\[GEM_ROOT\]\/gems\/([^\/]+)}
 
   field :number, :type => Integer
