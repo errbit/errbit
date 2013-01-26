@@ -55,7 +55,7 @@ gem 'hoi'
 # Pushover (iOS Push notifications)
 gem 'rushover'
 # Hubot
-gem 'faraday'
+gem 'httparty'
 
 # Authentication
 # ---------------------------------------
