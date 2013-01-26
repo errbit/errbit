@@ -26,7 +26,7 @@ class NotificationServices::HubotService < NotificationService
   end
 
   def create_notification(problem)
-    Faraday.post(url, :message => message_for_hubot(problem), :room => room_id)
+    HTTParty.post(url, :body => {:message => message_for_hubot(problem), :room => room_id})
   end
 end
 
