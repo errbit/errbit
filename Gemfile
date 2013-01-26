@@ -54,6 +54,8 @@ gem 'xmpp4r'
 gem 'hoi'
 # Pushover (iOS Push notifications)
 gem 'rushover'
+# Hubot
+gem 'httparty'
 
 # Authentication
 # ---------------------------------------
