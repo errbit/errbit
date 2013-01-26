@@ -351,6 +351,7 @@ DEPENDENCIES
   hoi
   hoptoad_notifier (~> 2.4)
   htmlentities (~> 4.3.0)
+  httparty
   inherited_resources
   kaminari (>= 0.14.1)
   launchy
