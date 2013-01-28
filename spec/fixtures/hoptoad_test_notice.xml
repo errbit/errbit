@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notice version="2.3">
+<notice version="2.4">
   <api-key>APIKEY</api-key>
   <notifier>
     <name>Hoptoad Notifier</name>
     <version>2.3.2</version>
     <url>http://hoptoadapp.com</url>
   </notifier>
+  <framework>Rails: 3.2.11</framework>
   <error>
     <class>HoptoadTestingException</class>
     <message>HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.</message>
