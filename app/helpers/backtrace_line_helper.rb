@@ -31,7 +31,7 @@ module BacktraceLineHelper
 
   def link_to_issue_tracker_file(line, text = nil)
     return unless line.app.issue_tracker && line.app.issue_tracker.respond_to?(:url_to_file)
-    href = line.app.issue_tracker.url_to_file(line.file, line.number)
+    href = line.app.issue_tracker.url_to_file(line.file_relative, line.number)
     link_to(text || line.file_name, href, :target => '_blank')
   end
 
