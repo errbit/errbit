@@ -22,7 +22,7 @@ class NotificationServices::HubotService < NotificationService
   end
 
   def message_for_hubot(problem)
-    notification_description(problem)
+    "#{notification_description(problem)} #{problem_url(problem)}"
   end
 
   def create_notification(problem)
