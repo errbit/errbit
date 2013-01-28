@@ -28,6 +28,10 @@
     %tr
       %th App Server
       %td= notice.server_environment && notice.server_environment["hostname"]
+    - if notice.framework
+      %tr
+        %th Framework
+        %td= notice.framework
     %tr
       %th Rel. Directory
       %td= notice.server_environment && notice.server_environment["project-root"]
