@@ -13,7 +13,8 @@ else
   if ENV['SECRET_TOKEN'].present?
     Errbit::Application.config.secret_token = ENV['SECRET_TOKEN']
 
-  else
+  # Do not raise an error if secret token is not available dureng assets precompilation
+  elsif ENV['RAILS_GROUPS'] != 'assets'
     raise <<-ERROR
 
   You must generate a unique secret token for your Errbit instance.
