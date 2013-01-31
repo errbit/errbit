@@ -3,6 +3,7 @@ Fabricator :notification_service  do
   room_id { sequence :word }
   api_token { sequence :word }
   subdomain { sequence :word }
+  server { sequence :word }
 end
 
 %w(campfire gtalk hipchat hoiio pushover hubot).each do |t|

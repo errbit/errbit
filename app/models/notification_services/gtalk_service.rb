@@ -1,6 +1,10 @@
 class NotificationServices::GtalkService < NotificationService
   Label = "gtalk"
   Fields = [
+      [:server, {
+          :placeholder => "talk.google.com",
+          :label       => "Server"
+      }],
       [:subdomain, {
           :placeholder => "username@example.com",
           :label       => "Username"
@@ -17,7 +21,7 @@ class NotificationServices::GtalkService < NotificationService
 
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
-      errors.add :base, 'You must specify your Username, Password and To User(s)'
+      errors.add :base, 'You must specify your XMPP server, Username, Password and To User(s)'
     end
   end
 
@@ -28,7 +32,7 @@ class NotificationServices::GtalkService < NotificationService
   def create_notification(problem)
     # build the xmpp client
     client = Jabber::Client.new(Jabber::JID.new(subdomain))
-    client.connect("talk.google.com")
+    client.connect(server)
     client.auth(api_token)
 
     # post the issue to the xmpp room(s)
