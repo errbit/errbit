@@ -14,7 +14,7 @@ describe NotificationService::GtalkService do
     message = double("message")
     Jabber::JID.should_receive(:new).with(notification_service.subdomain).and_return(jid)
     Jabber::Client.should_receive(:new).with(jid).and_return(gtalk)
-    gtalk.should_receive(:connect)
+    gtalk.should_receive(:connect).with(notification_service.service)
     gtalk.should_receive(:auth).with(notification_service.api_token)
     message_value = """#{problem.app.name.to_s}
 http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
