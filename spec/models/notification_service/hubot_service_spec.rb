@@ -8,7 +8,7 @@ describe NotificationService::HubotService do
     problem = notice.problem
 
     # faraday stubbing
-    HTTParty.should_receive(:post).with(notification_service.api_token, :body => {:message => '[production][foo#bar] FooError: Too Much Bar', :room => notification_service.room_id}).and_return(true)
+    HTTParty.should_receive(:post).with(notification_service.api_token, :body => {:message => an_instance_of(String), :room => notification_service.room_id}).and_return(true)
 
     notification_service.create_notification(problem)
   end
