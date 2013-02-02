@@ -443,6 +443,13 @@ TODO
 * Add ability for watchers to be configured for types of notifications they should receive
 
 
+People using Errbit
+-------------------
+
+See our wiki page for a [list of people and companies around the world who use Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit).
+Feel free to [edit this page](https://github.com/errbit/errbit/wiki/People-using-Errbit/_edit), and add your name and country to the list if you are using Errbit.
+
+
 Special Thanks
 --------------
 
