@@ -779,7 +779,7 @@ printStackTrace.implementation.prototype = {
 			
                 switch (this.options['outputFormat']) {
                     case 'XML':
-	                   outputData = escape(this.generateXML(this.generateDataJSON(error)));
+	                   outputData = encodeURIComponent(this.generateXML(this.generateDataJSON(error)));
 					   url = ('https:' == document.location.protocol ? 'https://' : 'http://') + this.options.host + '/notifier_api/v2/notices';
                         _sendGETRequest(url, outputData);
 					   break;
