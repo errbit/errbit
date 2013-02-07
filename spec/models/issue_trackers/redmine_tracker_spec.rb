@@ -10,7 +10,7 @@ describe IssueTrackers::RedmineTracker do
     body = "<issue><subject>my subject</subject><id>#{number}</id></issue>"
 
     # Build base url with account URL, and username/password basic auth
-    base_url = tracker.account.gsub /http:\/\//, "http://#{tracker.username}:#{tracker.password}@"
+    base_url = tracker.account.gsub 'http://', "http://#{tracker.username}:#{tracker.password}@"
 
     stub_request(:post, "#{base_url}/issues.xml").
                  to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
