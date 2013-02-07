@@ -39,6 +39,12 @@ user_has_username: false
 # but you want to leave a short comment.
 allow_comments_with_issue_tracker: true
 
+# Display internal errors in production
+# Since this is an internal application, you might like to see what caused Errbit to crash.
+# Pull requests are always welcome!
+# However, you might be more comfortable setting this to false if your server can be accessed by anyone.
+display_internal_errors: true
+
 # Enable Gravatar.
 use_gravatar: true
 # Default Gravatar image, can be: mm, identicon, monsterid, wavatar, retro.
