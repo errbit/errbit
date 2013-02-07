@@ -74,3 +74,6 @@ end
   default.merge! :host => Errbit::Config.host if default[:host].blank?
 end
 
+if Rails.env.production?
+  Rails.application.config.consider_all_requests_local = Errbit::Config.display_internal_errors
+end

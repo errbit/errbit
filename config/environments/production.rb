@@ -6,7 +6,7 @@ Errbit::Application.configure do
   config.cache_classes = true
 
   # Shows or hides all error details if something goes wrong inside Errbit
-  config.consider_all_requests_local       = Errbit::Config.display_internal_errors
+  config.consider_all_requests_local       = false
   # Caching is turned on
   config.action_controller.perform_caching = true
 
