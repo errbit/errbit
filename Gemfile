@@ -49,7 +49,7 @@ gem 'campy'
 # Hipchat
 gem 'hipchat'
 # Google Talk
-gem 'xmpp4r'
+gem 'xmpp4r', :require => ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
 gem 'hoi'
 # Pushover (iOS Push notifications)
