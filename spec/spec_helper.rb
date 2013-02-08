@@ -5,6 +5,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'database_cleaner'
 require 'webmock/rspec'
+require 'xmpp4r'
+require 'xmpp4r/muc'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.

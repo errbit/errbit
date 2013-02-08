@@ -6,9 +6,11 @@ class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :last_notice_at, :type => DateTime
+  field :last_notice_at, :type => DateTime, :default => Proc.new { Time.now }
+  field :first_notice_at, :type => DateTime, :default => Proc.new { Time.now }
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
+  field :resolved_at, :type => Time
   field :issue_link, :type => String
   field :issue_type, :type => String
 
@@ -28,7 +30,9 @@ class Problem
   index :app_name
   index :message
   index :last_notice_at
+  index :first_notice_at
   index :last_deploy_at
+  index :resolved_at
   index :notices_count
 
   belongs_to :app
@@ -41,6 +45,8 @@ class Problem
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  
+  validates_presence_of :last_notice_at, :first_notice_at
 
 
   def self.in_env(env)
@@ -51,12 +57,16 @@ class Problem
     Notice.for_errs(errs).ordered
   end
 
+  def comments_allowed?
+    Errbit::Config.allow_comments_with_issue_tracker || !app.issue_tracker_configured?
+  end
+
   def resolve!
-    self.update_attributes!(:resolved => true, :notices_count => 0)
+    self.update_attributes!(:resolved => true, :resolved_at => Time.now)
   end
 
   def unresolve!
-    self.update_attributes!(:resolved => false)
+    self.update_attributes!(:resolved => false, :resolved_at => nil)
   end
 
   def unresolved?
@@ -103,6 +113,10 @@ class Problem
     else raise("\"#{sort}\" is not a recognized sort")
     end
   end
+  
+  def self.in_date_range(date_range)
+    where(:first_notice_at.lte => date_range.end).where("$or" => [{:resolved_at => nil}, {:resolved_at.gte => date_range.begin}])
+  end
 
 
   def reset_cached_attributes
@@ -124,21 +138,26 @@ class Problem
   end
 
   def cache_notice_attributes(notice=nil)
-    notice ||= notices.first
-    attrs = {:last_notice_at => notices.order_by([:created_at, :asc]).last.try(:created_at)}
+    first_notice = notices.order_by([:created_at, :asc]).first
+    last_notice = notices.order_by([:created_at, :asc]).last
+    notice ||= first_notice
+    
+    attrs = {}
+    attrs[:first_notice_at] = first_notice.created_at if first_notice
+    attrs[:last_notice_at] = last_notice.created_at if last_notice
     attrs.merge!(
-      :message => notice.message,
+      :message     => notice.message,
       :environment => notice.environment_name,
       :error_class => notice.error_class,
-      :where => notice.where,
+      :where       => notice.where,
       :messages    => attribute_count_increase(:messages, notice.message),
       :hosts       => attribute_count_increase(:hosts, notice.host),
       :user_agents => attribute_count_increase(:user_agents, notice.user_agent_string)
-      ) if notice
+    ) if notice
     update_attributes!(attrs)
   end
 
-  def remove_cached_notice_attribures(notice)
+  def remove_cached_notice_attributes(notice)
     update_attributes!(
       :messages    => attribute_count_descrease(:messages, notice.message),
       :hosts       => attribute_count_descrease(:hosts, notice.host),

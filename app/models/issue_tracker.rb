@@ -14,6 +14,7 @@ class IssueTracker
   field :username, :type => String
   field :password, :type => String
   field :ticket_properties, :type => String
+  field :subdomain, :type => String
 
   validate :check_params
 
@@ -34,5 +35,9 @@ class IssueTracker
   Label = ''
   def self.label; self::Label; end
   def label; self.class.label; end
+
+  def configured?
+    project_id.present?
+  end
 end
 

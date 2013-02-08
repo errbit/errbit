@@ -3,6 +3,7 @@ rvm:
   - 1.9.3
   - 1.9.2
   - 1.8.7
+services: mongodb
 
 # To stop Travis from running tests for a new commit,
 # add the following to your commit message: [ci skip]

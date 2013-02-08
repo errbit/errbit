@@ -23,6 +23,31 @@ describe App do
     end
   end
 
+  describe '<=>' do
+    it 'is compared by unresolved count' do
+      app_0 = stub_model(App, :name => 'app', :unresolved_count => 1, :problem_count => 1)
+      app_1 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 1)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+
+    it 'is compared by problem count' do
+      app_0 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 1)
+      app_1 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 0)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+
+    it 'is compared by name' do
+      app_0 = stub_model(App, :name => 'app_0', :unresolved_count => 0, :problem_count => 0)
+      app_1 = stub_model(App, :name => 'app_1', :unresolved_count => 0, :problem_count => 0)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+  end
 
   context 'being created' do
     it 'generates a new api-key' do
@@ -71,7 +96,7 @@ describe App do
   context '#github_url_to_file' do
     it 'resolves to full path to file' do
       app = Fabricate(:app, :github_repo => "errbit/errbit")
-      app.github_url_to_file('/path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
+      app.github_url_to_file('path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
     end
   end
 
@@ -200,8 +225,8 @@ describe App do
 
     it 'captures the backtrace' do
       @notice = App.report_error!(@xml)
-      @notice.backtrace.size.should == 73
-      @notice.backtrace.last['file'].should == '[GEM_ROOT]/bin/rake'
+      @notice.backtrace_lines.size.should == 73
+      @notice.backtrace_lines.last['file'].should == '[GEM_ROOT]/bin/rake'
     end
 
     it 'captures the server_environment' do
@@ -228,7 +253,7 @@ describe App do
     it "should handle params with only a single line of backtrace" do
       xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
       lambda { @notice = App.report_error!(xml) }.should_not raise_error
-      @notice.backtrace.length.should == 1
+      @notice.backtrace_lines.length.should == 1
     end
 
     it 'captures the current_user' do
@@ -238,7 +263,12 @@ describe App do
       @notice.current_user['email'].should == 'mr.bean@example.com'
       @notice.current_user['username'].should == 'mrbean'
     end
- 
+
+    it 'captures the framework' do
+      @notice = App.report_error!(@xml)
+      @notice.framework.should == 'Rails: 3.2.11'
+    end
+
   end
 
 

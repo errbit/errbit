@@ -19,6 +19,13 @@ describe Mailer do
     it "should have inline css" do
       email.should have_body_text('<p class="backtrace" style="')
     end
+
+    context 'with a very long message' do
+      let(:notice)  { Fabricate(:notice, :message => 6.times.collect{|a| "0123456789" }.join('')) }
+      it "should truncate the long message" do
+        email.subject.should =~ / \d{47}\.{3}$/
+      end
+    end
   end
 end
 

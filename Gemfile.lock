@@ -1,46 +1,62 @@
+GIT
+  remote: git://github.com/NARKOZ/gitlab
+  revision: f2ba111dba70eca5346a880c541dafaf35d3332a
+  specs:
+    gitlab (2.2.0)
+      httparty
+
 GEM
   remote: http://rubygems.org/
   specs:
     SystemTimer (1.2.3)
-    actionmailer (3.2.8)
-      actionpack (= 3.2.8)
+    actionmailer (3.2.11)
+      actionpack (= 3.2.11)
       mail (~> 2.4.4)
     actionmailer_inline_css (1.3.1)
       actionmailer (>= 3.0.0)
       nokogiri (>= 1.4.4)
       premailer (>= 1.7.1)
-    actionpack (3.2.8)
-      activemodel (= 3.2.8)
-      activesupport (= 3.2.8)
+    actionpack (3.2.11)
+      activemodel (= 3.2.11)
+      activesupport (= 3.2.11)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.4)
       rack (~> 1.4.0)
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
-      sprockets (~> 2.1.3)
-    activemodel (3.2.8)
-      activesupport (= 3.2.8)
+      sprockets (~> 2.2.1)
+    activemodel (3.2.11)
+      activesupport (= 3.2.11)
       builder (~> 3.0.0)
-    activerecord (3.2.8)
-      activemodel (= 3.2.8)
-      activesupport (= 3.2.8)
+    activerecord (3.2.11)
+      activemodel (= 3.2.11)
+      activesupport (= 3.2.11)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.8)
-      activemodel (= 3.2.8)
-      activesupport (= 3.2.8)
-    activesupport (3.2.8)
+    activeresource (3.2.11)
+      activemodel (= 3.2.11)
+      activesupport (= 3.2.11)
+    activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bitbucket_rest_api (0.1.1)
+      faraday (~> 0.8.1)
+      faraday_middleware (~> 0.8.1)
+      hashie (~> 1.2.0)
+      multi_json (~> 1.3)
+      nokogiri (~> 1.5.2)
+      simple_oauth
     bson (1.6.2)
     bson_ext (1.6.2)
       bson (~> 1.6.2)
-    builder (3.0.3)
-    capistrano (2.13.3)
+    builder (3.0.4)
+    campy (0.1.3)
+      multi_json (~> 1.0)
+    capistrano (2.13.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -55,6 +71,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.5)
       ffi (~> 1.0, >= 1.0.6)
+    coderay (1.0.6)
     columnize (0.3.6)
     crack (0.3.1)
     css_parser (1.2.6)
@@ -62,14 +79,14 @@ GEM
       rdoc
     daemons (1.1.8)
     database_cleaner (0.6.7)
-    debugger (1.2.0)
+    debugger (1.3.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.3)
+      debugger-ruby_core_source (~> 1.1.7)
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.3)
-    devise (1.5.3)
+    debugger-ruby_core_source (1.1.7)
+    devise (1.5.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
@@ -82,35 +99,44 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fabrication (1.3.2)
-    faraday (0.8.1)
+    faraday (0.8.4)
       multipart-post (~> 1.1)
     faraday_middleware (0.8.8)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.1.4)
-    haml (3.1.6)
+    foreman (0.60.2)
+      thor (>= 0.13.6)
+    haml (3.1.7)
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)
     has_scope (0.5.1)
     hashie (1.2.0)
-    highline (1.6.13)
+    highline (1.6.15)
     hike (1.2.1)
+    hipchat (0.4.1)
+      httparty
+    hoi (0.0.6)
+      httparty (> 0.6.0)
+      json (> 1.4.0)
     hoptoad_notifier (2.4.11)
       activesupport
       builder
     htmlentities (4.3.1)
+    httparty (0.10.0)
+      multi_json (~> 1.0)
+      multi_xml
     httpauth (0.1)
     i18n (0.6.1)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
     journey (1.0.4)
-    json (1.7.5)
+    json (1.7.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
-    kaminari (0.13.0)
+    kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-      railties (>= 3.0.0)
     kgio (2.7.4)
     launchy (2.1.2)
       addressable (~> 2.3)
@@ -127,6 +153,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.7.1)
     mime-types (1.19)
     mongo (1.6.2)
       bson (~> 1.6.2)
@@ -139,17 +166,17 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.0.0)
       railties (>= 3.0.0)
-    multi_json (1.3.6)
+    multi_json (1.5.0)
+    multi_xml (0.5.2)
     multipart-post (1.1.5)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.5.2)
+    net-ssh (2.6.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
-    oa-core (0.3.2)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -162,13 +189,13 @@ GEM
       faraday_middleware (~> 0.8)
       hashie (~> 1.2)
       multi_json (~> 1.3)
-    omniauth (1.1.0)
+    omniauth (1.1.1)
       hashie (~> 1.2)
       rack
     omniauth-github (1.0.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-oauth2 (1.1.0)
+    omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.0.7)
@@ -187,33 +214,39 @@ GEM
     premailer (1.7.3)
       css_parser (>= 1.1.9)
       htmlentities (>= 4.0.0)
-    rack (1.4.1)
+    pry (0.9.9.6)
+      coderay (~> 1.0.5)
+      method_source (~> 0.7.1)
+      slop (>= 2.4.4, < 3)
+    pry-rails (0.2.0)
+      pry
+    rack (1.4.3)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
     rack-ssl-enforcer (0.2.4)
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
-    rails (3.2.8)
-      actionmailer (= 3.2.8)
-      actionpack (= 3.2.8)
-      activerecord (= 3.2.8)
-      activeresource (= 3.2.8)
-      activesupport (= 3.2.8)
+    rails (3.2.11)
+      actionmailer (= 3.2.11)
+      actionpack (= 3.2.11)
+      activerecord (= 3.2.11)
+      activeresource (= 3.2.11)
+      activesupport (= 3.2.11)
       bundler (~> 1.0)
-      railties (= 3.2.8)
+      railties (= 3.2.11)
     rails_autolink (1.0.9)
       rails (~> 3.1)
-    railties (3.2.8)
-      actionpack (= 3.2.8)
-      activesupport (= 3.2.8)
+    railties (3.2.11)
+      actionpack (= 3.2.11)
+      activesupport (= 3.2.11)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     raindrops (0.10.0)
-    rake (0.9.2.2)
+    rake (10.0.3)
     rbx-require-relative (0.0.9)
     rdoc (3.12)
       json (~> 1.4)
@@ -243,13 +276,19 @@ GEM
     ruby-fogbugz (0.1.1)
       crack
     rubyzip (0.9.9)
+    rushover (0.1.1)
+      json
+      rest-client
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    sprockets (2.1.3)
+    simple_oauth (0.1.9)
+    slop (2.4.4)
+    sprockets (2.2.2)
       hike (~> 1.2)
+      multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     therubyracer (0.10.2)
@@ -260,13 +299,18 @@ GEM
       rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
-    treetop (1.4.10)
+    timecop (0.3.5)
+    treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.33)
+    turbo-sprockets-rails3 (0.3.6)
+      railties (> 3.2.8, < 4.0.0)
+      sprockets (>= 2.0.0)
+    tzinfo (0.3.35)
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
+    underscore-rails (1.4.2.1)
     unicorn (4.3.1)
       kgio (~> 2.6)
       rack
@@ -277,6 +321,7 @@ GEM
     webmock (1.8.7)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
+    xmpp4r (0.5)
     xpath (0.1.4)
       nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
@@ -287,44 +332,55 @@ PLATFORMS
 DEPENDENCIES
   SystemTimer
   actionmailer_inline_css (~> 1.3.0)
+  bitbucket_rest_api
   bson (= 1.6.2)
   bson_ext (= 1.6.2)
+  campy
   capistrano
   capybara
   database_cleaner (~> 0.6.0)
   debugger
-  devise (~> 1.5.3)
+  devise (~> 1.5.4)
   email_spec
   execjs
   fabrication (~> 1.3.0)
+  foreman
+  gitlab!
   haml
+  hipchat
+  hoi
   hoptoad_notifier (~> 2.4)
   htmlentities (~> 4.3.0)
+  httparty
   inherited_resources
-  kaminari
+  kaminari (>= 0.14.1)
   launchy
   lighthouse-api
   mongo (= 1.6.2)
   mongoid (~> 2.4.10)
   mongoid_rails_migrations
-  nokogiri
-  oa-core
   octokit (~> 1.0.0)
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
+  pry-rails
+  rack-ssl
   rack-ssl-enforcer
-  rails (= 3.2.8)
+  rails (= 3.2.11)
   rails_autolink (~> 1.0.9)
   ri_cal
-  rspec (~> 2.6)
   rspec-rails (~> 2.6)
   ruby-debug
   ruby-fogbugz
+  rushover
   therubyracer
   thin
+  timecop
+  turbo-sprockets-rails3
   uglifier (>= 1.0.3)
+  underscore-rails
   unicorn
   useragent (~> 0.3.1)
   webmock
+  xmpp4r
   yajl-ruby

@@ -6,15 +6,18 @@ class Notice
   include Mongoid::Timestamps
 
   field :message
-  field :backtrace, :type => Array
   field :server_environment, :type => Hash
   field :request, :type => Hash
   field :notifier, :type => Hash
   field :user_attributes, :type => Hash
   field :current_user, :type => Hash
+  field :framework
   field :error_class
+  delegate :lines, :to => :backtrace, :prefix => true
+  delegate :app, :problem, :to => :err
 
   belongs_to :err
+  belongs_to :backtrace, :index => true
   index :created_at
   index(
     [
@@ -33,8 +36,6 @@ class Notice
   scope :ordered, order_by(:created_at.asc)
   scope :reverse_ordered, order_by(:created_at.desc)
   scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
-
-  delegate :app, :problem, :to => :err
 
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
@@ -64,7 +65,7 @@ class Notice
   end
 
   def request
-    read_attribute(:request) || {}
+    super || {}
   end
 
   def url
@@ -90,17 +91,20 @@ class Notice
     request['session'] || {}
   end
 
-  # Backtrace containing only files from the app itself (ignore gems)
-  def app_backtrace
-    backtrace.select { |l| l && l['file'] && l['file'].include?("[PROJECT_ROOT]") }
+  def in_app_backtrace_lines
+    backtrace_lines.in_app
   end
 
-  def backtrace
-    # If gems are vendored into project, treat vendored gem dir as [GEM_ROOT]
-    (read_attribute(:backtrace) || []).map do |line|
-      # Changes "[PROJECT_ROOT]/rubygems/ruby/1.9.1/gems" to "[GEM_ROOT]/gems"
-      line.merge 'file' => line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
-    end
+  def similar_count
+    problem.notices_count
+  end
+
+  def notifiable?
+    app.email_at_notices.include?(similar_count)
+  end
+
+  def should_notify?
+    app.notifiable? && notifiable?
   end
 
   protected
@@ -114,11 +118,11 @@ class Notice
   end
 
   def remove_cached_attributes_from_problem
-    problem.remove_cached_notice_attribures(self) if err
+    problem.remove_cached_notice_attributes(self) if err
   end
 
   def unresolve_problem
-    problem.update_attribute(:resolved, false) if problem.resolved?
+    problem.update_attributes!(:resolved => false, :resolved_at => nil, :notices_count => 1) if problem.resolved?
   end
 
   def cache_attributes_on_problem
@@ -129,8 +133,6 @@ class Notice
     [:server_environment, :request, :notifier].each do |h|
       send("#{h}=",sanitize_hash(send(h)))
     end
-    # Set unknown backtrace files
-    read_attribute(:backtrace).each{|line| line['file'] = "[unknown source]" if line['file'].blank? }
   end
 
   def sanitize_hash(h)

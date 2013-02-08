@@ -1,10 +1,13 @@
 class App
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Comparable
 
   field :name, :type => String
   field :api_key
   field :github_repo
+  field :bitbucket_repo
+  field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
@@ -17,6 +20,8 @@ class App
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
+  embeds_one :notification_service
+
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
@@ -33,7 +38,8 @@ class App
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
     :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
-
+  accepts_nested_attributes_for :notification_service, :allow_destroy => true,
+    :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
   # Processes a new error report.
   #
@@ -74,8 +80,7 @@ class App
   end
 
   def find_or_create_err!(attrs)
-    Err.any_in(:problem_id => problems.map { |a| a.id }).
-        where(attrs).first || problems.create!.errs.create!(attrs)
+    Err.where(:fingerprint => attrs[:fingerprint]).first || problems.create!.errs.create!(attrs)
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
@@ -94,15 +99,22 @@ class App
 
   # Legacy apps don't have notify_on_errs and notify_on_deploys params
   def notify_on_errs
-    !(self[:notify_on_errs] == false)
+    !(super == false)
   end
   alias :notify_on_errs? :notify_on_errs
 
+  def notifiable?
+    notify_on_errs? && notification_recipients.any?
+  end
+
   def notify_on_deploys
-    !(self[:notify_on_deploys] == false)
+    !(super == false)
   end
   alias :notify_on_deploys? :notify_on_deploys
 
+  def repo_branch
+    self.repository_branch.present? ? self.repository_branch : 'master'
+  end
 
   def github_repo?
     self.github_repo.present?
@@ -113,13 +125,30 @@ class App
   end
 
   def github_url_to_file(file)
-    "#{github_url}/blob/master#{file}"
+    "#{github_url}/blob/#{repo_branch}/#{file}"
+  end
+
+  def bitbucket_repo?
+    self.bitbucket_repo.present?
+  end
+
+  def bitbucket_url
+    "https://bitbucket.org/#{bitbucket_repo}" if bitbucket_repo?
+  end
+
+  def bitbucket_url_to_file(file)
+    "#{bitbucket_url}/src/#{repo_branch}/#{file}"
   end
 
 
   def issue_tracker_configured?
-    !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.project_id.present?)
+    !!(issue_tracker.class < IssueTracker && issue_tracker.configured?)
   end
+
+  def notification_service_configured?
+    !!(notification_service.class < NotificationService && notification_service.configured?)
+  end
+
 
   def notification_recipients
     if notify_all_users
@@ -137,12 +166,31 @@ class App
         self.send("#{k}=", copy_app.send(k))
       end
       # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
-      %w(watchers issue_tracker).each do |relation|
+      %w(watchers issue_tracker notification_service).each do |relation|
         if obj = copy_app.send(relation)
           self.send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
         end
       end
     end
+  end
+
+  def unresolved_count
+    @unresolved_count ||= problems.unresolved.count
+  end
+
+  def problem_count
+    @problem_count ||= problems.count
+  end
+
+  # Compare by number of unresolved errs, then problem counts.
+  def <=>(other)
+    (other.unresolved_count <=> unresolved_count).nonzero? ||
+    (other.problem_count <=> problem_count).nonzero? ||
+    name <=> other.name
+  end
+
+  def email_at_notices
+    Errbit::Config.per_app_email_at_notices ? super : Errbit::Config.email_at_notices
   end
 
   protected
