@@ -5,6 +5,9 @@ class NotificationService
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
 
   field :room_id, :type => String
+  field :user_id, :type => String
+  field :service_url, :type => String
+  field :service, :type => String
   field :api_token, :type => String
   field :subdomain, :type => String
   field :sender_name, :type => String
