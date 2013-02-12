@@ -1,6 +1,6 @@
 class NotificationServices::HubotService < NotificationService
   Label = "hubot"
-  Fields = [
+  Fields += [
     [:api_token, {
       :placeholder => 'http://hubot.example.org:8080/hubot/say',
       :label => 'Hubot URL'

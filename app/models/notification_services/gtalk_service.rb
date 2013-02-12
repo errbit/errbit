@@ -1,6 +1,6 @@
 class NotificationServices::GtalkService < NotificationService
   Label = "gtalk"
-  Fields = [
+  Fields += [
       [:subdomain, {
           :placeholder => "username@example.com",
           :label       => "Username"
