@@ -103,7 +103,7 @@ class App
   end
   alias :notify_on_errs? :notify_on_errs
 
-  def notifiable?
+  def emailable?
     notify_on_errs? && notification_recipients.any?
   end
 
