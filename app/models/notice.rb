@@ -99,12 +99,16 @@ class Notice
     problem.notices_count
   end
 
-  def notifiable?
+  def emailable?
     app.email_at_notices.include?(similar_count)
   end
 
+  def should_email?
+    app.emailable? && emailable?
+  end
+
   def should_notify?
-    app.notifiable? && notifiable?
+    app.notification_service.notify_at_notices.include?(0) || app.notification_service.notify_at_notices.include?(similar_count)
   end
 
   protected
