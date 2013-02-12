@@ -17,7 +17,8 @@
           - notification_service::Fields.each do |field, field_info|
             = w.label field, field_info[:label] || field.to_s.titleize
             - field_type = field == :password ? :password_field : :text_field
-            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field)
+            - value = field == :notify_at_notices ? w.object.notify_at_notices.join(", ") : w.object.send(field)
+            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => value
 
       .image_preloader
         - (NotificationService.subclasses.map{|t| t.label } << 'none').each do |notification_service|
