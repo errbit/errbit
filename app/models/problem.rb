@@ -40,19 +40,27 @@ class Problem
   has_many :comments, :inverse_of => :err, :dependent => :destroy
 
   before_create :cache_app_attributes
-
+  
   scope :resolved, where(:resolved => true)
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
   
   validates_presence_of :last_notice_at, :first_notice_at
-
-
+  
+  
+  def self.all_else_unresolved all
+    if all
+      find(:all)
+    else
+      where(:resolved => false)
+    end
+  end
+  
   def self.in_env(env)
     env.present? ? where(:environment => env) : scoped
   end
-
+  
   def notices
     Notice.for_errs(errs).ordered
   end
@@ -60,20 +68,20 @@ class Problem
   def comments_allowed?
     Errbit::Config.allow_comments_with_issue_tracker || !app.issue_tracker_configured?
   end
-
+  
   def resolve!
     self.update_attributes!(:resolved => true, :resolved_at => Time.now)
   end
-
+  
   def unresolve!
     self.update_attributes!(:resolved => false, :resolved_at => nil)
   end
-
+  
   def unresolved?
     !resolved?
   end
-
-
+  
+  
   def self.merge!(*problems)
     problems = problems.flatten.uniq
     merged_problem = problems.shift
@@ -85,11 +93,11 @@ class Problem
     merged_problem.reset_cached_attributes
     merged_problem
   end
-
+  
   def merged?
     errs.length > 1
   end
-
+  
   def unmerge!
     problem_errs = errs.to_a
     problem_errs.shift
@@ -102,7 +110,7 @@ class Problem
     end
   end
 
-
+  
   def self.ordered_by(sort, order)
     case sort
     when "app";            order_by(["app_name", order])
@@ -171,6 +179,10 @@ class Problem
     (app.issue_tracker_configured? && app.issue_tracker.label) || nil
   end
 
+  def self.search(value)
+    where.or(error_class: /#{value}/i).or(where: /#{value}/i).or(message: /#{value}/i).or(app_name: /#{value}/i).or(environment: /#{value}/i)
+  end
+
   private
     def attribute_count_increase(name, value)
       counter, index = send(name), attribute_index(value)
@@ -195,6 +207,5 @@ class Problem
     def attribute_index(value)
       Digest::MD5.hexdigest(value.to_s)
     end
-
 end
 
