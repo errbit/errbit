@@ -22,6 +22,7 @@ Errbit::Application.routes.draw do
       post :merge_several
       post :unmerge_several
       get :all
+      get :search, :format => [:js]
     end
   end
 

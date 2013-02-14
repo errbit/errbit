@@ -82,7 +82,13 @@
 
 - if @app.problems.any?
   %h3.clear Errors
-  = render 'problems/table', :problems => @problems
+  %section
+    = form_tag search_problems_path(:all_errs => @all_errs, :app_id => @app.id), :method => :get, :remote => true do
+      = text_field_tag :search, params[:search], :placeholder => 'Search for issues'
+  %br
+  %section
+    .problem_table{:id => 'problem_table'}
+      = render 'problems/table', :problems => @problems
 - else
   %h3.clear No errs have been caught yet, make sure you setup your app
   = render 'configuration_instructions', :app => @app

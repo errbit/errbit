@@ -7,8 +7,8 @@ class ProblemsController < ApplicationController
 
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
-
-    @problems = Problem.for_apps(app_scope).in_env(params[:environment]).unresolved.ordered_by(@sort, @order)
+    @all_errs = params[:all_errs]
+    @problems = Problem.for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(@all_errs).ordered_by(@sort, @order)
     @selected_problems = params[:problems] || []
     respond_to do |format|
       format.html do
@@ -18,11 +18,11 @@ class ProblemsController < ApplicationController
     end
   end
 
-  def all
-    app_scope = current_user.admin? ? App.all : current_user.apps
-    @problems = Problem.for_apps(app_scope).ordered_by(@sort, @order).page(params[:page]).per(current_user.per_page)
-    @selected_problems = params[:problems] || []
-  end
+#  def all
+#    app_scope = current_user.admin? ? App.all : current_user.apps
+#    @problems = Problem.for_apps(app_scope).ordered_by(@sort, @order).page(params[:page]).per(current_user.per_page)
+#    @selected_problems = params[:problems] || []
+#  end
 
   def show
     @notices  = @problem.notices.reverse_ordered.page(params[:notice]).per(1)
@@ -92,9 +92,12 @@ class ProblemsController < ApplicationController
   end
 
   def search
-    app_scope = current_user.admin? ? App.all : current_user.apps
-
-    @problems = Problem.for_apps(app_scope).in_env(params[:environment]).unresolved.ordered_by(@sort, @order)
+    if params[:app_id]
+      app_scope = App.where(:_id => params[:app_id])
+    else
+      app_scope = current_user.admin? ? App.all : current_user.apps
+    end
+    @problems = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(@sort, @order)
     @selected_problems = params[:problems] || []
     @problems = @problems.page(params[:page]).per(current_user.per_page)
     render :content_type => 'text/javascript'
