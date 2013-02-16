@@ -3,6 +3,13 @@ require 'digest/sha1'
 namespace :errbit do
   namespace :db do
 
+    desc "Delete all of the notices that are 3 days old" do
+      task :delete_notices => :environment do
+        puts "Deleting Notices"
+        Notice.where(:created_at.lt => 3.days.ago).destroy_all
+      end
+    end
+
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"
@@ -53,7 +60,7 @@ namespace :errbit do
       end
     end
 
-    desc "Remove notices in batch"
+    desc "Remove notices in batch (for a specific problem)"
     task :notices_delete, [ :problem_id ] => [ :environment ] do
       BATCH_SIZE = 1000
       if args[:problem_id]
