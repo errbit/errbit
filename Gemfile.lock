@@ -287,7 +287,7 @@ GEM
     ruby-fogbugz (0.1.1)
       crack
     rubyzip (0.9.9)
-    rushover (0.1.1)
+    rushover (0.3.0)
       json
       rest-client
     selenium-webdriver (2.25.0)
