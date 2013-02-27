@@ -85,9 +85,9 @@ group :development, :test do
   gem 'capistrano'
 
   # better errors
-  gem 'better_errors', :platform => :ruby_18
-  gem 'binding_of_caller', :platform => :ruby_18
-  gem 'meta_request', :platform => :ruby_18
+  gem 'better_errors', :platform => :ruby_19
+  gem 'binding_of_caller', :platform => :ruby_19
+  gem 'meta_request', :platform => :ruby_19
 end
 
 gem 'foreman', :group => :development
