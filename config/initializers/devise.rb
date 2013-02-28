@@ -69,7 +69,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length
-  config.password_length = 6..20
+  config.password_length = 6..1024
 
   # Regex to use to validate the email address
   config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
