@@ -24,6 +24,11 @@ URL:
 <%= @notice.request['url'] %>
 
 
+BROWSER:
+
+<%= @notice.user_agent_string %>
+
+
 BACKTRACE:
 
 <% @notice.backtrace_lines.each do |line| %>

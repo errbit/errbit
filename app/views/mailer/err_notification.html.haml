@@ -34,6 +34,9 @@
               %p.monospace
                 - if @notice.request['url'].present?
                   = link_to @notice.request['url'], @notice.request['url']
+              %p.heading BROWSER:
+              %p.monospace
+                = user_agent_graph(@notice.problem)
               %p.heading BACKTRACE:
               - @notice.backtrace_lines.each do |line|
                 %p.backtrace= line
