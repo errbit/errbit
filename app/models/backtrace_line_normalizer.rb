@@ -1,6 +1,6 @@
 class BacktraceLineNormalizer
   def initialize(raw_line)
-    @raw_line = raw_line
+    @raw_line = raw_line || {}
   end
 
   def call
