@@ -59,11 +59,10 @@ module Hoptoad
 
         :api_key            => notice['api-key'],
         :notifier           => notice['notifier'],
-        :user_attributes    => notice['user-attributes'] || {},
-        :current_user       => notice['current-user'] || {},
+        # 'current-user' from airbrake, 'user-attributes' from airbrake_user_attributes gem
+        :user_attributes    => notice['current-user'] || notice['user-attributes'] || {},
         :framework          => notice['framework']
       }
     end
   end
 end
-

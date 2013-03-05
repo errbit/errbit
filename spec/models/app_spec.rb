@@ -258,10 +258,10 @@ describe App do
 
     it 'captures the current_user' do
       @notice = App.report_error!(@xml)
-      @notice.current_user['id'].should == '123'
-      @notice.current_user['name'].should == 'Mr. Bean'
-      @notice.current_user['email'].should == 'mr.bean@example.com'
-      @notice.current_user['username'].should == 'mrbean'
+      @notice.user_attributes['id'].should == '123'
+      @notice.user_attributes['name'].should == 'Mr. Bean'
+      @notice.user_attributes['email'].should == 'mr.bean@example.com'
+      @notice.user_attributes['username'].should == 'mrbean'
     end
 
     it 'captures the framework' do

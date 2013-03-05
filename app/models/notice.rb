@@ -10,7 +10,6 @@ class Notice
   field :request, :type => Hash
   field :notifier, :type => Hash
   field :user_attributes, :type => Hash
-  field :current_user, :type => Hash
   field :framework
   field :error_class
   delegate :lines, :to => :backtrace, :prefix => true
