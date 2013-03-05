@@ -29,6 +29,7 @@
                 = @notice.where
               - @notice.in_app_backtrace_lines.each do |line|
                 %p.backtrace= line
+              %br
               %p.heading URL:
               %p.monospace
                 - if @notice.request['url'].present?
