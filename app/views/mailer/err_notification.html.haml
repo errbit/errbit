@@ -28,7 +28,9 @@
               %p.monospace
                 = @notice.where
               - @notice.in_app_backtrace_lines.each do |line|
-                %p.backtrace= line
+                %p.backtrace
+                  = link_to_source_file(line) do
+                    = line.to_s
               %br
               %p.heading URL:
               %p.monospace
@@ -40,6 +42,7 @@
               %br
               %p.heading FULL BACKTRACE:
               - @notice.backtrace_lines.each do |line|
-                %p.backtrace= line
+                %p.backtrace
+                  = link_to_source_file(line) do
+                    = line.to_s
               %br
-
