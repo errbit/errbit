@@ -8,7 +8,7 @@ gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
-gem 'useragent', '~> 0.3.1'
+gem 'useragent', '~> 0.4.16'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
