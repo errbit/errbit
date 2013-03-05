@@ -2,8 +2,8 @@
   %table.user_attributes
     %tr
       %td
-        %strong Information about the user who experienced the error.
-    - user.each do |user_key, user_value|
+        %strong The user who experienced the error:
+    - user.each do |key, value|
       %tr
-        %th= user_key
-        %td= auto_link(user_value.to_s).html_safe
+        %th= key
+        %td= auto_link(auto_link(value.to_s, :urls, :target => "_blank"), :email_addresses).html_safe
