@@ -30,9 +30,9 @@ describe IssueTrackers::RedmineTracker do
   it "should generate a url where a file with line number can be viewed" do
     t = Fabricate(:redmine_tracker, :account => 'http://redmine.example.com', :project_id => "errbit")
     t.url_to_file("/example/file").should ==
-      'http://redmine.example.com/projects/errbit/repository/annotate/example/file'
+      'http://redmine.example.com/projects/errbit/repository/revisions/master/changes/example/file'
     t.url_to_file("/example/file", 25).should ==
-      'http://redmine.example.com/projects/errbit/repository/annotate/example/file#L25'
+      'http://redmine.example.com/projects/errbit/repository/revisions/master/changes/example/file#L25'
   end
 
   it "should use the alt_project_id to generate a file/linenumber url, if given" do
@@ -40,6 +40,6 @@ describe IssueTrackers::RedmineTracker do
                                   :project_id => "errbit",
                                   :alt_project_id => "actual_project")
     t.url_to_file("/example/file", 25).should ==
-      'http://redmine.example.com/projects/actual_project/repository/annotate/example/file#L25'
+      'http://redmine.example.com/projects/actual_project/repository/revisions/master/changes/example/file#L25'
   end
 end
