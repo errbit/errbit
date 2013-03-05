@@ -9,7 +9,7 @@ class BacktraceLineNormalizer
 
   private
   def normalized_file
-    if @raw_line['file'].blank?
+    if @raw_line.blank? || @raw_line['file'].blank?
       "[unknown source]"
     else
       file = @raw_line['file'].to_s
@@ -22,7 +22,7 @@ class BacktraceLineNormalizer
   end
 
   def normalized_method
-    if @raw_line['method'].blank?
+    if @raw_line.blank? || @raw_line['method'].blank?
       "[unknown method]"
     else
       @raw_line['method'].to_s.gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
