@@ -5,5 +5,7 @@
       %span.file>= line.file_name
       - if line.number.present?
         %span.number>= ":#{line.number}"
+      - if line.column.present?
+        %span.number>= ":#{line.column}"
     &rarr;
     %span.method= line.method
