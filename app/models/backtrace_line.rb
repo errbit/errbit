@@ -15,7 +15,7 @@ class BacktraceLine
   delegate :app, :to => :backtrace
 
   def to_s
-    "#{file}:#{number}" << (column.present? ? ":#{column}" : "")
+    "#{file_relative}:#{number}" << (column.present? ? ":#{column}" : "")
   end
 
   def in_app?
