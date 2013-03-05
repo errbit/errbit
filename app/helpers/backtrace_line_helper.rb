@@ -7,11 +7,22 @@ module BacktraceLineHelper
   private
   def link_to_in_app_source_file(line, text)
     return unless line.in_app?
-    link_to_repo_source_file(line, text) || link_to_issue_tracker_file(line, text)
+    if line.file_name =~ /\.js$/
+      link_to_hosted_javascript(line, text)
+    else
+      link_to_repo_source_file(line, text) ||
+      link_to_issue_tracker_file(line, text)
+    end
   end
 
   def link_to_repo_source_file(line, text)
     link_to_github(line, text) || link_to_bitbucket(line, text)
+  end
+
+  def link_to_hosted_javascript(line, text)
+    if line.app.asset_host?
+      link_to(text, "#{line.app.asset_host}/#{line.file_relative}", :target => '_blank')
+    end
   end
 
   def link_to_external_source_file(text)
