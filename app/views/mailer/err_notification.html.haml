@@ -29,7 +29,6 @@
                 = @notice.where
               - @notice.in_app_backtrace_lines.each do |line|
                 %p.backtrace= line
-                %br
               %p.heading URL:
               %p.monospace
                 - if @notice.request['url'].present?
@@ -37,7 +36,8 @@
               %p.heading BROWSER:
               %p.monospace
                 = user_agent_graph(@notice.problem)
-              %p.heading BACKTRACE:
+              %br
+              %p.heading FULL BACKTRACE:
               - @notice.backtrace_lines.each do |line|
                 %p.backtrace= line
               %br
