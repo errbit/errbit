@@ -59,8 +59,10 @@ class ErrorReport
 
   private
   def fingerprint_source
+    # If backtrace is blank, use notice message for fingerprint
+    backtrace_or_message = backtrace.lines.any? ? backtrace.id : message
     {
-      :backtrace => backtrace.id,
+      :backtrace_or_message => backtrace_or_message,
       :error_class => error_class,
       :component => component,
       :action => action,
