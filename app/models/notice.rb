@@ -43,7 +43,11 @@ class Notice
   end
 
   def user_agent_string
-    (user_agent.nil? || user_agent.none?) ? "N/A" : "#{user_agent.browser} #{user_agent.version}"
+    if user_agent.nil? || user_agent.none?
+      "N/A"
+    else
+      "#{user_agent.browser} #{user_agent.version} (#{user_agent.os})"
+    end
   end
 
   def environment_name
