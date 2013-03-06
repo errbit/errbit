@@ -23,5 +23,15 @@ class Mailer < ActionMailer::Base
     mail :to       => @app.notification_recipients,
          :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
   end
-end
 
+  def comment_notification(comment)
+    @comment  = comment
+    @user     = comment.user
+    @problem  = comment.err
+    @notice   = @problem.notices.first
+    @app      = @problem.app
+
+    mail :to      => @app.notification_recipients,
+         :subject => "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+  end
+end
