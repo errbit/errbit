@@ -328,7 +328,7 @@ describe Problem do
     it "adding a notice adds a string to #user_agents" do
       lambda {
         Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      }.should change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204') => {'value' => 'Chrome 10.0.648.204', 'count' => 1}})
+      }.should change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204 (Intel Mac OS X 10_6_7)') => {'value' => 'Chrome 10.0.648.204 (Intel Mac OS X 10_6_7)', 'count' => 1}})
     end
 
     it "removing a notice removes string from #user_agents" do
@@ -336,7 +336,7 @@ describe Problem do
       lambda {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :user_agents).from({Digest::MD5.hexdigest('Chrome 10.0.648.204') => {'value' => 'Chrome 10.0.648.204', 'count' => 1}}).to({})
+      }.should change(@problem, :user_agents).from({Digest::MD5.hexdigest('Chrome 10.0.648.204 (Intel Mac OS X 10_6_7)') => {'value' => 'Chrome 10.0.648.204 (Intel Mac OS X 10_6_7)', 'count' => 1}}).to({})
     end
   end
 
