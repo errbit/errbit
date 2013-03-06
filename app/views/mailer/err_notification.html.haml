@@ -48,9 +48,11 @@
                       %td(style="text-align: right; padding-right: 10px; color: #6a6a6a;")= key.to_s.titleize + ":"
                       %td= auto_link(value.to_s)
                 %br
-              %p.heading FULL BACKTRACE:
-              - @notice.backtrace_lines.each do |line|
-                %p.backtrace
-                  = link_to_source_file(line) do
-                    = line.to_s
-              %br
+              - if @notice.backtrace_lines.any?
+                %br
+                %p.heading FULL BACKTRACE:
+                - @notice.backtrace_lines.each do |line|
+                  %p.backtrace
+                    = link_to_source_file(line) do
+                      = line.to_s
+                %br
