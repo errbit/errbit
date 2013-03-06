@@ -58,10 +58,17 @@ class ErrorReport
 
   private
   def fingerprint_source
-    # If backtrace is blank, use notice message for fingerprint
-    backtrace_or_message = backtrace.lines.any? ? backtrace.id : message
+    # Find the first backtrace line with a file and line number.
+    if line = backtrace.lines.detect {|l| l.number.present? && l.file.present? }
+      # If line exists, only use file and number.
+      file_or_message = "#{line.file}:#{line.number}"
+    else
+      # If no backtrace, use error message
+      file_or_message = message
+    end
+
     {
-      :backtrace_or_message => backtrace_or_message,
+      :file_or_message => file_or_message,
       :error_class => error_class,
       :component => component,
       :action => action,
