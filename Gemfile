@@ -42,6 +42,10 @@ gem 'gitlab', :git => 'git://github.com/NARKOZ/gitlab'
 # Bitbucket Issues
 gem 'bitbucket_rest_api'
 
+# Unfuddle
+gem "taskmapper", "~> 0.8.0"
+gem "taskmapper-unfuddle", "~> 0.7.0"
+
 # Notification services
 # ---------------------------------------
 # Campfire
