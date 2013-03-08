@@ -10,6 +10,7 @@ describe Mailer do
     before do
       notice.backtrace.lines.last.update_attributes(:file => "[PROJECT_ROOT]/path/to/file.js")
       notice.app.update_attributes :asset_host => "http://example.com"
+      notice.problem.update_attributes :notices_count => 3
 
       @email = Mailer.err_notification(notice).deliver
     end
@@ -28,6 +29,10 @@ describe Mailer do
 
     it "should have links to source files" do
       @email.should have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
+    end
+
+    it "should have the error count in the subject" do
+      @email.subject.should =~ /^\(3\) /
     end
 
     context 'with a very long message' do
