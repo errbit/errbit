@@ -79,6 +79,11 @@ describe UsersController do
           @user.reload.time_zone.should == "Warsaw"
         end
 
+        it "should be able to not set github_login option" do
+          put :update, :id => @user.to_param, :user => {:github_login => " "}
+          @user.reload.github_login.should == nil
+        end
+
         it "should be able to set github_login option" do
           put :update, :id => @user.to_param, :user => {:github_login => "awesome_name"}
           @user.reload.github_login.should == "awesome_name"
