@@ -13,7 +13,7 @@ class Api::V1::StatsController < ApplicationController
     stats = {
       :name => @app.name,
       :last_error_time => @last_error_time,
-      :unresolved_errors => @app.problems.unresolved.count
+      :unresolved_errors => @app.unresolved_count
     }
 
     respond_to do |format|
