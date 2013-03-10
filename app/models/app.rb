@@ -1,7 +1,7 @@
 class App
+  include Comparable
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Comparable
 
   field :name, :type => String
   field :api_key
