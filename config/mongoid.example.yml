@@ -9,6 +9,8 @@
 
 defaults: &defaults
   host: localhost
+  identity_map_enabled: true
+
   # slaves:
   #   - host: slave1.local
   #     port: 27018
