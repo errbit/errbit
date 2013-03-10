@@ -6,9 +6,9 @@
 -#    remote:        data-remote
 -#    paginator:     the paginator that renders the pagination tags inside
 = paginator.render do
-  .notice-pagination<
+  .notice-pagination
     = next_page_tag
-    |&nbsp;
+    |
     = prev_page_tag
 .notice-pagination-loader= image_tag 'loader.gif'
 viewing occurrence #{page_count_from_end(current_page, total_pages)} of #{total_pages}
