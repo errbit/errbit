@@ -23,8 +23,13 @@ namespace :errbit do
       count = 0
       Problem.resolved.each do |problem|
         if not cutoff or problem.last_notice_at <= cutoff
-          problem.destroy
-          count += 1
+          begin
+            problem.destroy
+          rescue StandardError => e
+            $stderr.puts("Failed to delete problem #{problem.id}: #{e.message}")
+          else
+            count += 1
+          end
         end
       end
       puts "=== Cleared #{count} resolved errors from the database." if count > 0
