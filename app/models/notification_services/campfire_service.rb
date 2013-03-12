@@ -1,7 +1,7 @@
 if defined? Campy
   class NotificationServices::CampfireService < NotificationService
     Label = "campfire"
-    Fields = [
+    Fields += [
       [:subdomain, {
         :label       => "Subdomain",
         :placeholder => "subdomain from http://{{subdomain}}.campfirenow.com"

@@ -1,6 +1,6 @@
 class NotificationServices::HoiioService < NotificationService
   Label = "hoiio"
-  Fields = [
+  Fields += [
       [:api_token, {
           :placeholder => "App ID",
           :label => "App ID"

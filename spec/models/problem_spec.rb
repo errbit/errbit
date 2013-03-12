@@ -185,9 +185,20 @@ describe Problem do
         Problem.unresolved.all.should include(unresolved)
       end
     end
+
+    context "searching" do
+      it 'finds the correct record' do
+        find = Fabricate(:problem, :resolved => false, :error_class => 'theErrorclass::other', 
+                         :message => "other", :where => 'errorclass', :environment => 'development', :app_name => 'other')
+        dont_find = Fabricate(:problem, :resolved => false, :error_class => "Batman", 
+                              :message => 'todo', :where => 'classerror', :environment => 'development', :app_name => 'other')
+        Problem.search("theErrorClass").unresolved.should include(find)
+        Problem.search("theErrorClass").unresolved.should_not include(dont_find)
+      end
+    end
   end
-
-
+    
+  
   context "notice counter cache" do
     before do
       @app = Fabricate(:app)

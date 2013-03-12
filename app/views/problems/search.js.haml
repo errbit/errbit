@@ -1,0 +1,5 @@
+$("#problem_table").empty().append("#{escape_javascript(render('problems/table', :problems => @problems))}");
+$.getScript('/assets/errbit.js')
+$("#flash-messages").empty()
+
+	
