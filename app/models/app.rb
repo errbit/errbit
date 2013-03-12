@@ -1,12 +1,13 @@
 class App
+  include Comparable
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Comparable
 
   field :name, :type => String
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :asset_host
   field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false

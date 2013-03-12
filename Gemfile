@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem 'mongoid', '~> 2.4.10'
 gem 'mongoid_rails_migrations'
 gem 'devise', '~> 1.5.4'
@@ -8,7 +8,7 @@ gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
-gem 'useragent', '~> 0.3.1'
+gem 'useragent', '~> 0.4.16'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
@@ -83,6 +83,11 @@ group :development, :test do
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
   gem 'capistrano'
+
+  # better errors
+  gem 'better_errors', :platform => :ruby_19
+  gem 'binding_of_caller', :platform => :ruby_19
+  gem 'meta_request', :platform => :ruby_19
 end
 
 gem 'foreman', :group => :development

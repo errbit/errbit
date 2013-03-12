@@ -12,7 +12,6 @@ class NotificationService
   field :subdomain, :type => String
   field :sender_name, :type => String
   field :notify_at_notices, :type => Array, :default => Errbit::Config.notify_at_notices
-  
   embedded_in :app, :inverse_of => :notification_service
 
   validate :check_params
@@ -51,5 +50,9 @@ class NotificationService
 
   def configured?
     api_token.present?
+  end
+
+  def problem_url(problem)
+    "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
   end
 end

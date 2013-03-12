@@ -28,6 +28,12 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
   config.include WebMock::API
+
+  config.include Haml, :type => :helper
+  config.include Haml::Helpers, :type => :helper
+  config.before(:each, :type => :helper) do |config|
+    init_haml_helpers
+  end
 end
 
 OmniAuth.config.test_mode = true

@@ -4,6 +4,7 @@ class BacktraceLine
   GEMS_PATH   = %r{\[GEM_ROOT\]\/gems\/([^\/]+)}
 
   field :number, :type => Integer
+  field :column, :type => Integer
   field :file
   field :method
 
@@ -14,7 +15,7 @@ class BacktraceLine
   delegate :app, :to => :backtrace
 
   def to_s
-    "#{file}:#{number}"
+    "#{file_relative}:#{number}" << (column.present? ? ":#{column}" : "")
   end
 
   def in_app?

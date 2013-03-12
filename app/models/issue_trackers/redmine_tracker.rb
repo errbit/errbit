@@ -9,6 +9,12 @@ if defined? RedmineClient
       [:api_token, {
         :placeholder => "API Token for your account"
       }],
+      [:username, {
+        :placeholder => "Your username"
+      }],
+      [:password, {
+        :placeholder => "Your password"
+      }],
       [:project_id, {
         :label       => "Ticket Project",
         :placeholder => "Redmine Project where tickets will be created"
@@ -22,15 +28,19 @@ if defined? RedmineClient
 
     def check_params
       if Fields.detect {|f| self[f[0]].blank? && !f[1][:optional]}
-        errors.add :base, 'You must specify your Redmine URL, API token and Project ID'
+        errors.add :base, 'You must specify your Redmine URL, API token, Username, Password and Project ID'
       end
     end
 
     def create_issue(problem, reported_by = nil)
       token = api_token
       acc = account
+      user = username
+      passwd = password
       RedmineClient::Base.configure do
         self.token = token
+        self.user = user
+        self.password = passwd
         self.site = acc
         self.format = :xml
       end
@@ -47,7 +57,7 @@ if defined? RedmineClient
     def url_to_file(file_path, line_number = nil)
       # alt_project_id let's users specify a different project for tickets / app files.
       project = self.alt_project_id.present? ? self.alt_project_id : self.project_id
-      url = "#{self.account}/projects/#{project}/repository/annotate/#{file_path.sub(/^\//,'')}"
+      url = "#{self.account.gsub(/\/$/, '')}/projects/#{project}/repository/revisions/#{app.repository_branch}/changes/#{file_path.sub(/\[PROJECT_ROOT\]/, '').sub(/^\//,'')}"
       line_number ? url << "#L#{line_number}" : url
     end
 

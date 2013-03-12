@@ -1,9 +1,16 @@
-An err has just occurred in <%= @notice.environment_name %>: <%= raw(@notice.message) %>
+<%= @user.name %> has just commented on an error that occurred in <%= @notice.environment_name %>: <%= raw(@notice.message) %>
 
 This err has occurred <%= pluralize @notice.problem.notices_count, 'time' %>. You should really look into it here:
 
   <%= app_problem_url(@app, @notice.problem) %>
 
+
+COMMENT:
+
+<%= @comment.body %>
+
+
+-----------------------------------------------
 
 ERROR MESSAGE:
 
@@ -27,20 +34,3 @@ URL:
 BROWSER:
 
 <%= @notice.user_agent_string %>
-
-
-<%- if @notice.user_attributes.present? %>
-USER:
-
-<%- @notice.user_attributes.each do |key, value| %>
-<%= key.to_s.titleize %>: <%= value.to_s %>
-<%- end %>
-
-<%- end %>
-
-BACKTRACE:
-
-<% @notice.backtrace_lines.each do |line| %>
-  <%= line %>
-<% end %>
-

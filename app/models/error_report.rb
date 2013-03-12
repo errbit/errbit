@@ -2,7 +2,7 @@ require 'digest/sha1'
 require 'hoptoad_notifier'
 
 class ErrorReport
-  attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :current_user, :framework
+  attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :framework
 
   def initialize(xml_or_attributes)
     @attributes = (xml_or_attributes.is_a?(String) ? Hoptoad.parse_xml!(xml_or_attributes) : xml_or_attributes).with_indifferent_access
@@ -42,7 +42,6 @@ class ErrorReport
       :server_environment => server_environment,
       :notifier => notifier,
       :user_attributes => user_attributes,
-      :current_user => current_user,
       :framework => framework
     )
 
@@ -59,8 +58,17 @@ class ErrorReport
 
   private
   def fingerprint_source
+    # Find the first backtrace line with a file and line number.
+    if line = backtrace.lines.detect {|l| l.number.present? && l.file.present? }
+      # If line exists, only use file and number.
+      file_or_message = "#{line.file}:#{line.number}"
+    else
+      # If no backtrace, use error message
+      file_or_message = message
+    end
+
     {
-      :backtrace => backtrace.id,
+      :file_or_message => file_or_message,
       :error_class => error_class,
       :component => component,
       :action => action,
