@@ -13,3 +13,4 @@ config/newrelic.yml
 *~
 *.rbc
 .DS_Store
+*#
