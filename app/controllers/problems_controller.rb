@@ -18,12 +18,6 @@ class ProblemsController < ApplicationController
     end
   end
 
-#  def all
-#    app_scope = current_user.admin? ? App.all : current_user.apps
-#    @problems = Problem.for_apps(app_scope).ordered_by(@sort, @order).page(params[:page]).per(current_user.per_page)
-#    @selected_problems = params[:problems] || []
-#  end
-
   def show
     @notices  = @problem.notices.reverse_ordered.page(params[:notice]).per(1)
     @notice   = @notices.first
