@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ProblemsController do
 
   it_requires_authentication :for => {
-    :index => :get, :all => :get, :show => :get, :resolve => :put
+    :index => :get, :show => :get, :resolve => :put, :search => :get
   },
   :params => {:app_id => 'dummyid', :id => 'dummyid'}
 
