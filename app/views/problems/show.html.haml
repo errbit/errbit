@@ -37,7 +37,7 @@
               - else
                 %span.comment-info
                   = time_ago_in_words(comment.created_at, true) << " ago by [Unknown User]"
-              %span.delete= link_to '&#10008;'.html_safe, [@app, @problem, comment], :method => :delete, :data => { :confirm => "Are sure you don't need this comment?" }, :class => "destroy-comment"
+              %span.delete= link_to '&#10008;'.html_safe, [@app, @problem, comment], :method => :delete, :data => { :confirm => "Are you sure you don't need this comment?" }, :class => "destroy-comment"
           %tr
             %td= simple_format comment.body
     - if @problem.comments_allowed?
