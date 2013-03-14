@@ -82,15 +82,17 @@ group :development, :test do
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
+end
+
+group :development do
   gem 'capistrano'
 
   # better errors
-  gem 'better_errors', :platform => :ruby_19
+  gem 'better_errors'    , :platform => :ruby_19
   gem 'binding_of_caller', :platform => :ruby_19
-  gem 'meta_request', :platform => :ruby_19
+  gem 'meta_request'     , :platform => :ruby_19
+  gem 'foreman'
 end
-
-gem 'foreman', :group => :development
 
 group :test do
   gem 'capybara'
