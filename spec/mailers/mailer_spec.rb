@@ -6,10 +6,14 @@ describe Mailer do
     include EmailSpec::Matchers
 
     let(:notice)  { Fabricate(:notice, :message => "class < ActionController::Base") }
+    let!(:user)   { Fabricate(:admin) }
 
     before do
       notice.backtrace.lines.last.update_attributes(:file => "[PROJECT_ROOT]/path/to/file.js")
-      notice.app.update_attributes :asset_host => "http://example.com"
+      notice.app.update_attributes(
+        :asset_host => "http://example.com",
+        :notify_all_users => true
+      )
       notice.problem.update_attributes :notices_count => 3
 
       @email = Mailer.err_notification(notice).deliver
