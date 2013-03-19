@@ -6,7 +6,7 @@ GIT
       httparty
 
 GIT
-  remote: git@github.com:rtomayko/tilt.git
+  remote: git://github.com/rtomayko/tilt
   revision: 24ea7e9fa5a0624188069393abf033bb8b3f218c
   specs:
     tilt (1.3.6)
