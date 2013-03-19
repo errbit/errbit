@@ -8,6 +8,9 @@ gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
+# Remove this when tilt 1.3.7 is released.
+gem 'tilt', :git => 'git@github.com:rtomayko/tilt.git'
+
 gem 'useragent', '~> 0.4.16'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
