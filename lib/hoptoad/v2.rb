@@ -18,6 +18,8 @@ module Hoptoad
           {normalize_key(node['key']) => rekey(node['__content__'])}
         elsif node.has_key?('__content__')
           rekey(node['__content__'])
+        elsif node.has_key?('key')
+          {normalize_key(node['key']) => nil}
         else
           node.inject({}) {|rekeyed, (key, val)| rekeyed.merge(normalize_key(key) => rekey(val))}
         end
