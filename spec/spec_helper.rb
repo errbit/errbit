@@ -34,6 +34,9 @@ RSpec.configure do |config|
   config.before(:each, :type => :helper) do |config|
     init_haml_helpers
   end
+
+  # Ensure each spec runs in isolation
+  config.before(:each) { Mongoid::IdentityMap.clear }
 end
 
 OmniAuth.config.test_mode = true
