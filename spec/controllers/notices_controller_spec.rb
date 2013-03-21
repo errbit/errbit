@@ -24,6 +24,36 @@ describe NoticesController do
       response.body.should match(%r{<url[^>]*>(.+)#{locate_path(@notice.id)}</url>})
     end
 
+    it "should trnasform xml <va> tags to hashes correctly" do
+      App.should_receive(:report_error!).with(@xml).and_return(@notice)
+      request.should_receive(:raw_post).and_return(@xml)
+      post :create, :format => :xml
+
+      # XML: <var key="SCRIPT_NAME"/>
+      @notice.env_vars.should have_key('SCRIPT_NAME') 
+      @notice.env_vars['SCRIPT_NAME'].should be_nil # blank ends up nil
+
+      # XML representation:
+      # <var key="rack.session.options">
+      #   <var key="secure">false</var>
+      #   <var key="httponly">true</var>
+      #   <var key="path">/</var>
+      #   <var key="expire_after"/>
+      #   <var key="domain"/>
+      #   <var key="id"/>
+      # </var>
+      expected = {
+        'secure'        => 'false',
+        'httponly'      => 'true',
+        'path'          => '/',
+        'expire_after'  => nil,
+        'domain'        => nil,
+        'id'            => nil
+      }
+      @notice.env_vars.should have_key('rack_session_options')
+      @notice.env_vars['rack_session_options'].should eql(expected)
+    end
+
     it "generates a notice from xml in a data param [POST]" do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
       post :create, :data => @xml, :format => :xml
