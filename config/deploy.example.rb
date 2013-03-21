@@ -35,8 +35,7 @@ set :copy_compression, :bz2
 
 set :scm, :git
 set :scm_verbose, true
-set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't determine current branch") }
-set :branch, defer { current_branch }
+set :branch, config['branch'] || 'master'
 
 before 'deploy:assets:symlink', 'errbit:symlink_configs'
 # if unicorn is started through something like runit (the tool which restarts the process when it's stopped)
