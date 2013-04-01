@@ -394,6 +394,12 @@ card_type = Defect, status = Open, priority = Essential
 * To authenticate, Errbit uses token-based authentication. Get your API Key in your user settings (or create special user for this purpose)
 * You also need to provide project ID (it needs to be Number) for issues to be created
 
+**JIRA Issues Integration**
+* Domain is the host of JIRA application. i.e. **https://issues.apache.org/jira**
+* To authenticate is used basic authentication. We strongly suggest to use SSL connection (https). You need to provide username and password.
+* Project is also needed to identify projects.
+* User who is reporting issue to JIRA is set as a reporter, however this user matching is based only on the email address. User bruce@example.com in Errbit will be in JIRA matched to user bruce. In case of not existing user bruce in JIRA, basic authentication user is used.
+
 
 What if Errbit has an error?
 ----------------------------

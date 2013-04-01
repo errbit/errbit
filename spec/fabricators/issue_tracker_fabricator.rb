@@ -33,3 +33,10 @@ Fabricator :bitbucket_issues_tracker, :from => :issue_tracker, :class_name => "I
   project_id 'password'
   api_token 'test_username'
 end
+
+Fabricator :jira_tracker, :from => :issue_tracker, :class_name => "IssueTrackers::JiraTracker" do
+  account 'https://jira.test.test'
+  project_id 'KAM'
+  username 'admin'
+  password 'test_pass'
+end
