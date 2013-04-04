@@ -10,7 +10,7 @@
     <class>HoptoadTestingException</class>
     <message>HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.</message>
     <backtrace>
-      <line number="425" file="[GEM_ROOT]/gems/activesupport-3.0.0.rc/lib/active_support/callbacks.rb" method="_run__2115867319__process_action__262109504__callbacks"/>
+      <line number="425" file="[GEM_ROOT]/gems/activesupport-3.0.0.rc/lib/active_support/callbacks.rb" method_name="_run__2115867319__process_action__262109504__callbacks"/>
     </backtrace>
   </error>
   <request>

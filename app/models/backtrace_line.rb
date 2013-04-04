@@ -6,7 +6,10 @@ class BacktraceLine
   field :number, :type => Integer
   field :column, :type => Integer
   field :file
-  field :method
+  field :method_name
+
+  # TODO: remove me when the support for Airbrake 3.1.10 is removed 
+  alias :method :method_name
 
   embedded_in :backtrace
 
