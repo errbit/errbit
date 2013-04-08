@@ -107,7 +107,7 @@ GEM
       mail (~> 2.2)
       rspec (~> 2.0)
     erubis (2.7.0)
-    eventmachine (0.12.10)
+    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fabrication (1.3.2)
