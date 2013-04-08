@@ -124,6 +124,25 @@ describe App do
     end
   end
 
+  context "emailable?" do
+    it "should be true if notify on errs and there are notification recipients" do
+      app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
+      2.times { Fabricate(:watcher, :app => app) }
+      app.emailable?.should be_true
+    end
+
+    it "should be false if notify on errs is disabled" do
+      app = Fabricate(:app, :notify_on_errs => false, :notify_all_users => false)
+      2.times { Fabricate(:watcher, :app => app) }
+      app.emailable?.should be_false
+    end
+
+    it "should be false if there are no notification recipients" do
+      app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
+      app.watchers.should be_empty
+      app.emailable?.should be_false
+    end
+  end
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do

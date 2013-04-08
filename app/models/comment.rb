@@ -14,6 +14,14 @@ class Comment
 
   validates_presence_of :body
 
+  def notification_recipients
+    app.notification_recipients - [user.email]
+  end
+
+  def emailable?
+    app.emailable? && notification_recipients.any?
+  end
+
   protected
     def increase_counter_cache
       err.inc(:comments_count, 1)
@@ -24,4 +32,3 @@ class Comment
     end
 
 end
-
