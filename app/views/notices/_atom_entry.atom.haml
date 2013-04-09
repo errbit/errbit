@@ -28,7 +28,7 @@
         = "#{line.number}:"
         &nbsp;&nbsp;
       %td
-        = raw "#{h line.file_relative} -> #{content_tag :strong, h(line.method)}"
+        = raw "#{h line.file_relative} -> #{content_tag :strong, h(line.method_name)}"
 
 %h3 Environment
 %table
