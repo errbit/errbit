@@ -46,5 +46,36 @@ describe Mailer do
       end
     end
   end
-end
 
+  context "Comment Notification" do
+    include EmailSpec::Helpers
+    include EmailSpec::Matchers
+
+    let!(:notice) { Fabricate(:notice) }
+    let!(:comment) { Fabricate.build(:comment, :err => notice.problem) }
+    let!(:watcher) { Fabricate(:watcher, :app => comment.app) }
+    let(:recipients) { ['recipient@example.com', 'another@example.com']}
+
+    before do
+      comment.stub(:notification_recipients).and_return(recipients)
+      Fabricate(:notice, :err => notice.err)
+      @email = Mailer.comment_notification(comment).deliver
+    end
+
+    it "should send the email" do
+      ActionMailer::Base.deliveries.size.should == 1
+    end
+
+    it "should be sent to comment notification recipients" do
+      @email.to.should == recipients
+    end
+
+    it "should have the notices count in the body" do
+      @email.should have_body_text("This err has occurred 2 times")
+    end
+
+    it "should have the comment body" do
+      @email.should have_body_text(comment.body)
+    end
+  end
+end

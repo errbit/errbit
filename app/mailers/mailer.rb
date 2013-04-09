@@ -34,8 +34,7 @@ class Mailer < ActionMailer::Base
     @notice   = @problem.notices.first
     @app      = @problem.app
 
-    # Don't send comment notification to user who posted the comment
-    recipients = @app.notification_recipients - [comment.user.email]
+    recipients = @comment.notification_recipients
 
     mail :to      => recipients,
          :subject => "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
