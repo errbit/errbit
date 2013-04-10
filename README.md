@@ -144,6 +144,7 @@ cap deploy:setup deploy
 ```bash
 git clone http://github.com/errbit/errbit.git
 ```
+  * Update `db/seeds.rb` with admin credentials for your initial login.
 
   * Create & configure for Heroku
 
