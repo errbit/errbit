@@ -10,6 +10,10 @@ class ProblemDestroy
     delete_errs
     delete_comments
     problem.delete
+    # Mongoid doesn't remove entries deleted with
+    # collection.remove(:field => { '$in' => array }) queries
+    # So, to be safe, we should clear the identity map
+    Mongoid::IdentityMap.clear
   end
 
   ##
