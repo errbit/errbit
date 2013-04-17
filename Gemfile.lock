@@ -216,7 +216,7 @@ GEM
     orm_adapter (0.0.7)
     oruen_redmine_client (0.0.1)
       activeresource (>= 2.3.0)
-    pivotal-tracker (0.5.4)
+    pivotal-tracker (0.5.10)
       builder
       builder
       happymapper (>= 0.3.2)
