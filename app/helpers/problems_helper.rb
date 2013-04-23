@@ -11,10 +11,14 @@ module ProblemsHelper
   end
 
   def gravatar_tag(email, options = {})
+    return nil unless email.present?
+    
     image_tag gravatar_url(email, options), :alt => email, :class => 'gravatar'
   end
 
   def gravatar_url(email, options = {})
+    return nil unless email.present?
+
     default_options = {
       :d => Errbit::Config.gravatar_default,
     }
