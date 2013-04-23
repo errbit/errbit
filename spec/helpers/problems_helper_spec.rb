@@ -31,5 +31,21 @@ describe ProblemsHelper do
         helper.gravatar_tag(email, :d => 'retro', :s => 48).should eq(expected)
       end
     end
+
+    context "no email" do
+      it "should not render the tag" do
+        helper.gravatar_tag(nil).should be_nil
+      end
+    end
+  end
+
+  describe "#gravatar_url" do
+    context "no email" do
+      let(:email) { nil }
+      
+      it "should return nil" do
+        helper.gravatar_url(email).should be_nil
+      end
+    end
   end
 end
