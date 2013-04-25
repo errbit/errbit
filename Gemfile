@@ -9,7 +9,7 @@ gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
 # Remove this when tilt 1.3.7 is released.
-gem 'tilt', :git => 'git://github.com/rtomayko/tilt'
+gem 'tilt', :git => 'https://github.com/rtomayko/tilt.git'
 
 gem 'useragent', '~> 0.4.16'
 gem 'inherited_resources'
@@ -40,7 +40,7 @@ gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.0.0'
 # Gitlab
-gem 'gitlab', :git => 'git://github.com/NARKOZ/gitlab'
+gem 'gitlab', :git => 'https://github.com/NARKOZ/gitlab.git'
 
 # Bitbucket Issues
 gem 'bitbucket_rest_api'

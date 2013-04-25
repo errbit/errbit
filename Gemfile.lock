@@ -1,12 +1,12 @@
 GIT
-  remote: git://github.com/NARKOZ/gitlab
+  remote: https://github.com/NARKOZ/gitlab.git
   revision: f2ba111dba70eca5346a880c541dafaf35d3332a
   specs:
     gitlab (2.2.0)
       httparty
 
 GIT
-  remote: git://github.com/rtomayko/tilt
+  remote: https://github.com/rtomayko/tilt.git
   revision: 24ea7e9fa5a0624188069393abf033bb8b3f218c
   specs:
     tilt (1.3.6)
