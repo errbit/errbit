@@ -101,6 +101,7 @@ group :test do
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
   gem 'timecop'
+  gem 'coveralls', :require => false
 end
 
 group :heroku, :production do
