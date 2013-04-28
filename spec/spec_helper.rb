@@ -40,3 +40,5 @@ RSpec.configure do |config|
 end
 
 OmniAuth.config.test_mode = true
+
+WebMock.disable_net_connect! :allow => /coveralls\.io/
