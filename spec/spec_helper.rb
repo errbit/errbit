@@ -37,8 +37,10 @@ RSpec.configure do |config|
   config.before(:each, :type => :helper) do |config|
     init_haml_helpers
   end
+
+  config.after(:all) do
+    WebMock.disable_net_connect! :allow => /coveralls\.io/
+  end
 end
 
 OmniAuth.config.test_mode = true
-
-WebMock.disable_net_connect! :allow => /coveralls\.io/
