@@ -21,6 +21,7 @@ namespace :errbit do
     task :clear_resolved => :environment do
       count = Problem.resolved.count
       Problem.resolved.each {|problem| problem.destroy }
+      Mongoid.config.master.command(:repairDatabase => 1)
       puts "=== Cleared #{count} resolved errors from the database." if count > 0
     end
 
