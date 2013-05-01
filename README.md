@@ -151,7 +151,7 @@ git clone http://github.com/errbit/errbit.git
 ```bash
 gem install heroku
 heroku create example-errbit --stack cedar
-heroku addons:add mongolab:starter
+heroku addons:add mongolab:sandbox
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
