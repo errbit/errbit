@@ -4,6 +4,8 @@
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
+[![Coverage Status](https://coveralls.io/repos/errbit/errbit/badge.png?branch=master)](https://coveralls.io/r/errbit/errbit)
+
 
 
 ### The open source, self-hosted error catcher
