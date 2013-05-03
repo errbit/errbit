@@ -24,13 +24,13 @@ describe NoticesController do
       response.body.should match(%r{<url[^>]*>(.+)#{locate_path(@notice.id)}</url>})
     end
 
-    it "should trnasform xml <va> tags to hashes correctly" do
+    it "should transform xml <va> tags to hashes correctly" do
       App.should_receive(:report_error!).with(@xml).and_return(@notice)
       request.should_receive(:raw_post).and_return(@xml)
       post :create, :format => :xml
 
       # XML: <var key="SCRIPT_NAME"/>
-      @notice.env_vars.should have_key('SCRIPT_NAME') 
+      @notice.env_vars.should have_key('SCRIPT_NAME')
       @notice.env_vars['SCRIPT_NAME'].should be_nil # blank ends up nil
 
       # XML representation:

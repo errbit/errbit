@@ -44,19 +44,30 @@ class ErrorReport
       :user_attributes => user_attributes,
       :framework => framework
     )
+    error.notices << notice
+    notice
+  end
 
-    err = app.find_or_create_err!(
+  ##
+  # Error associate to this error_report
+  #
+  # Can already exist or not
+  #
+  # @return [ Error ]
+  def error
+    @error ||= app.find_or_create_err!(
       :error_class => error_class,
       :component => component,
       :action => action,
       :environment => rails_env,
-      :fingerprint => fingerprint)
-
-    err.notices << notice
-    notice
+      :fingerprint => fingerprint
+    )
   end
 
   private
+
+
+
   def fingerprint_source
     # Find the first backtrace line with a file and line number.
     if line = backtrace.lines.detect {|l| l.number.present? && l.file.present? }
