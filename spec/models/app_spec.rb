@@ -195,76 +195,6 @@ describe App do
       ErrorReport.any_instance.stub(:fingerprint).and_return('fingerprintdigest')
     end
 
-    it 'finds the correct app' do
-      @notice = App.report_error!(@xml)
-      @notice.err.app.should == @app
-    end
-
-    it 'finds the correct err for the notice' do
-      App.should_receive(:find_by_api_key!).and_return(@app)
-      @app.should_receive(:find_or_create_err!).with({
-        :error_class  => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Fabricate(:err))
-      err.notices.stub(:create!)
-      @notice = App.report_error!(@xml)
-    end
-
-    it 'marks the err as unresolved if it was previously resolved' do
-      App.should_receive(:find_by_api_key!).and_return(@app)
-      @app.should_receive(:find_or_create_err!).with({
-        :error_class  => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)))
-      err.should be_resolved
-      @notice = App.report_error!(@xml)
-      @notice.err.should == err
-      @notice.err.should_not be_resolved
-    end
-
-    it 'should create a new notice' do
-      @notice = App.report_error!(@xml)
-      @notice.should be_persisted
-    end
-
-    it 'assigns an err to the notice' do
-      @notice = App.report_error!(@xml)
-      @notice.err.should be_a(Err)
-    end
-
-    it 'captures the err message' do
-      @notice = App.report_error!(@xml)
-      @notice.message.should == 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.'
-    end
-
-    it 'captures the backtrace' do
-      @notice = App.report_error!(@xml)
-      @notice.backtrace_lines.size.should == 73
-      @notice.backtrace_lines.last['file'].should == '[GEM_ROOT]/bin/rake'
-    end
-
-    it 'captures the server_environment' do
-      @notice = App.report_error!(@xml)
-      @notice.server_environment['environment-name'].should == 'development'
-    end
-
-    it 'captures the request' do
-      @notice = App.report_error!(@xml)
-      @notice.request['url'].should == 'http://example.org/verify'
-      @notice.request['params']['controller'].should == 'application'
-    end
-
-    it 'captures the notifier' do
-      @notice = App.report_error!(@xml)
-      @notice.notifier['name'].should == 'Hoptoad Notifier'
-    end
-
     it "should handle params without 'request' section" do
       xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
       lambda { App.report_error!(xml) }.should_not raise_error
@@ -276,18 +206,6 @@ describe App do
       @notice.backtrace_lines.length.should == 1
     end
 
-    it 'captures the current_user' do
-      @notice = App.report_error!(@xml)
-      @notice.user_attributes['id'].should == '123'
-      @notice.user_attributes['name'].should == 'Mr. Bean'
-      @notice.user_attributes['email'].should == 'mr.bean@example.com'
-      @notice.user_attributes['username'].should == 'mrbean'
-    end
-
-    it 'captures the framework' do
-      @notice = App.report_error!(@xml)
-      @notice.framework.should == 'Rails: 3.2.11'
-    end
 
   end
 

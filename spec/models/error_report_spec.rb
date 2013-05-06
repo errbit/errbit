@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ErrorReport do
   context "with notice without line of backtrace" do
     let(:xml){
-      Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
+      Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
     }
 
     let(:error_report) {
@@ -16,6 +16,12 @@ describe ErrorReport do
         :api_key => 'APIKEY'
       )
     }
+
+    describe "#app" do
+      it 'find the good app' do
+        expect(error_report.app).to eq app
+      end
+    end
 
     describe "#backtrace" do
 
@@ -32,6 +38,41 @@ describe ErrorReport do
           app.reload.problems.count
         }.by(1)
       end
+      describe "notice create" do
+        before { error_report.generate_notice! }
+        subject { error_report.notice }
+        its(:message) { 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.' }
+        its(:framework) { should == 'Rails: 3.2.11' }
+
+        it 'has complete backtrace' do
+          subject.backtrace_lines.size.should == 73
+          subject.backtrace_lines.last['file'].should == '[GEM_ROOT]/bin/rake'
+        end
+        it 'has server_environement' do
+          subject.server_environment['environment-name'].should == 'development'
+        end
+
+        it 'has request' do
+          subject.request['url'].should == 'http://example.org/verify'
+          subject.request['params']['controller'].should == 'application'
+        end
+
+        it 'has notifier' do
+          subject.notifier['name'].should == 'Hoptoad Notifier'
+        end
+
+        it 'get user_attributes' do
+          subject.user_attributes['id'].should == '123'
+          subject.user_attributes['name'].should == 'Mr. Bean'
+          subject.user_attributes['email'].should == 'mr.bean@example.com'
+          subject.user_attributes['username'].should == 'mrbean'
+        end
+      end
+
+      it 'save a notice assignes to err' do
+        error_report.generate_notice!
+        error_report.notice.err.should be_a(Err)
+      end
 
       it 'memoize the notice' do
         expect {
@@ -40,6 +81,46 @@ describe ErrorReport do
         }.to change {
           Notice.count
         }.by(1)
+      end
+
+      it 'find the correct err for the notice' do
+        Fabricate(
+          :err, {
+            :fingerprint => 'eeb6cc484167899c061e7859008c4b23bae0851c',
+            :problem => Fabricate(:problem, :resolved => true)
+          }
+        )
+        expect {
+          error_report.generate_notice!
+        }.to change {
+          error_report.error.resolved?
+        }.from(true).to(false)
+      end
+
+      context "with xml without request section" do
+        let(:xml){
+          Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
+        }
+        it "save a notice" do
+          expect {
+            error_report.generate_notice!
+          }.to change {
+            app.reload.problems.count
+          }.by(1)
+        end
+      end
+
+      context "with xml with only a single line of backtrace" do
+        let(:xml){
+          Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
+        }
+        it "save a notice" do
+          expect {
+            error_report.generate_notice!
+          }.to change {
+            app.reload.problems.count
+          }.by(1)
+        end
       end
     end
 
