@@ -10,7 +10,7 @@ describe ErrorReport do
       ErrorReport.new(xml)
     }
 
-    let(:app) {
+    let!(:app) {
       Fabricate(
         :app,
         :api_key => 'APIKEY'
@@ -24,7 +24,7 @@ describe ErrorReport do
       end
     end
 
-    context "#generate_notice!" do
+    describe "#generate_notice!" do
       it "save a notice" do
         expect {
           error_report.generate_notice!
@@ -32,6 +32,52 @@ describe ErrorReport do
           app.reload.problems.count
         }.by(1)
       end
+
+      it 'memoize the notice' do
+        expect {
+          error_report.generate_notice!
+          error_report.generate_notice!
+        }.to change {
+          Notice.count
+        }.by(1)
+      end
     end
+
+    describe "#valid?" do
+      context "with valid error report" do
+        it "return true" do
+          expect(error_report.valid?).to be true
+        end
+      end
+      context "with not valid api_key" do
+        before do
+          App.where(:api_key => app.api_key).delete_all
+        end
+        it "return false" do
+          expect(error_report.valid?).to be false
+        end
+      end
+    end
+
+    describe "#notice" do
+      context "before generate_notice!" do
+        it 'return nil' do
+          expect(error_report.notice).to be nil
+        end
+      end
+
+      context "after generate_notice!" do
+        before do
+          error_report.generate_notice!
+        end
+
+        it 'return the notice' do
+          expect(error_report.notice).to be_a Notice
+        end
+
+      end
+    end
+
+
   end
 end
