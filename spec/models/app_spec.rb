@@ -187,7 +187,8 @@ describe App do
   end
 
 
-  context '#report_error!' do
+  context '#report_error!', :pending => true do
+    # method delete. test need to be on spec/models/error_report
     before do
       @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
       @app = Fabricate(:app, :api_key => 'APIKEY')
@@ -290,6 +291,17 @@ describe App do
 
   end
 
+  describe ".find_by_api_key!" do
+    it 'return the app with api_key' do
+      app = Fabricate(:app)
+      expect(App.find_by_api_key!(app.api_key)).to eq app
+    end
+    it 'raise Mongoid::Errors::DocumentNotFound if not found' do
+      expect {
+        App.find_by_api_key!('foo')
+      }.to raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  end
 
 end
 

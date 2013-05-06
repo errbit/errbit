@@ -5,11 +5,17 @@ class NoticesController < ApplicationController
 
   def create
     # params[:data] if the notice came from a GET request, raw_post if it came via POST
-    notice = App.report_error!(params[:data] || request.raw_post)
-    api_xml = notice.to_xml(:only => false, :methods => [:id]) do |xml|
-      xml.url locate_url(notice.id, :host => Errbit::Config.host)
+    report = ErrorReport.new(params[:data] || request.raw_post)
+
+    if report.valid?
+      report.generate_notice!
+      api_xml = report.notice.to_xml(:only => false, :methods => [:id]) do |xml|
+        xml.url locate_url(report.notice.id, :host => Errbit::Config.host)
+      end
+      render :xml => api_xml
+    else
+      render :text => "Your API key is unknown", :status => 422
     end
-    render :xml => api_xml
   end
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
@@ -17,4 +23,5 @@ class NoticesController < ApplicationController
     problem = Notice.find(params[:id]).problem
     redirect_to app_problem_path(problem.app, problem)
   end
+
 end

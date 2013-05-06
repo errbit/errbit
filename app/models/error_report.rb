@@ -26,7 +26,7 @@ class ErrorReport
   end
 
   def app
-    @app ||= App.find_by_api_key!(api_key)
+    @app ||= App.where(:api_key => api_key).first
   end
 
   def backtrace
@@ -34,7 +34,9 @@ class ErrorReport
   end
 
   def generate_notice!
-    notice = Notice.new(
+    return unless valid?
+    return @notice if @notice
+    @notice = Notice.new(
       :message => message,
       :error_class => error_class,
       :backtrace_id => backtrace.id,
@@ -44,9 +46,10 @@ class ErrorReport
       :user_attributes => user_attributes,
       :framework => framework
     )
-    error.notices << notice
-    notice
+    error.notices << @notice
+    @notice
   end
+  attr_reader :notice
 
   ##
   # Error associate to this error_report
@@ -64,9 +67,11 @@ class ErrorReport
     )
   end
 
+  def valid?
+    !!app
+  end
+
   private
-
-
 
   def fingerprint_source
     # Find the first backtrace line with a file and line number.
