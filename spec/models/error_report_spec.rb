@@ -67,6 +67,31 @@ describe ErrorReport do
           subject.user_attributes['email'].should == 'mr.bean@example.com'
           subject.user_attributes['username'].should == 'mrbean'
         end
+        it 'valid env_vars' do
+        # XML: <var key="SCRIPT_NAME"/>
+        subject.env_vars.should have_key('SCRIPT_NAME')
+        subject.env_vars['SCRIPT_NAME'].should be_nil # blank ends up nil
+
+        # XML representation:
+        # <var key="rack.session.options">
+        #   <var key="secure">false</var>
+        #   <var key="httponly">true</var>
+        #   <var key="path">/</var>
+        #   <var key="expire_after"/>
+        #   <var key="domain"/>
+        #   <var key="id"/>
+        # </var>
+        expected = {
+          'secure'        => 'false',
+          'httponly'      => 'true',
+          'path'          => '/',
+          'expire_after'  => nil,
+          'domain'        => nil,
+          'id'            => nil
+        }
+        subject.env_vars.should have_key('rack_session_options')
+        subject.env_vars['rack_session_options'].should eql(expected)
+      end
       end
 
       it 'save a notice assignes to err' do
