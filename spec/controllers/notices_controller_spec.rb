@@ -27,32 +27,6 @@ describe NoticesController do
         response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
 
-      it "should transform xml <va> tags to hashes correctly" do
-        pending # TODO, need to be test on ErrorReport model
-        # XML: <var key="SCRIPT_NAME"/>
-        notice.env_vars.should have_key('SCRIPT_NAME')
-        notice.env_vars['SCRIPT_NAME'].should be_nil # blank ends up nil
-
-        # XML representation:
-        # <var key="rack.session.options">
-        #   <var key="secure">false</var>
-        #   <var key="httponly">true</var>
-        #   <var key="path">/</var>
-        #   <var key="expire_after"/>
-        #   <var key="domain"/>
-        #   <var key="id"/>
-        # </var>
-        expected = {
-          'secure'        => 'false',
-          'httponly'      => 'true',
-          'path'          => '/',
-          'expire_after'  => nil,
-          'domain'        => nil,
-          'id'            => nil
-        }
-        notice.env_vars.should have_key('rack_session_options')
-        notice.env_vars['rack_session_options'].should eql(expected)
-      end
     end
 
     it "generates a notice from xml in a data param [POST]" do
