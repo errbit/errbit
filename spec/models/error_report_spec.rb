@@ -97,6 +97,22 @@ describe ErrorReport do
         }.from(true).to(false)
       end
 
+      context "with notification service configured" do
+        before do
+          app.notify_on_errs = true
+          app.watchers.build(:email => 'foo@example.com')
+          app.save
+        end
+        it 'send email' do
+          notice = error_report.generate_notice!
+          email = ActionMailer::Base.deliveries.last
+          email.to.should include(app.watchers.first.email)
+          email.subject.should include(notice.message.truncate(50))
+          email.subject.should include("[#{app.name}]")
+          email.subject.should include("[#{notice.environment_name}]")
+        end
+      end
+
       context "with xml without request section" do
         let(:xml){
           Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
@@ -158,7 +174,6 @@ describe ErrorReport do
 
       end
     end
-
 
   end
 end

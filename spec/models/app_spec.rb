@@ -187,28 +187,6 @@ describe App do
   end
 
 
-  context '#report_error!', :pending => true do
-    # method delete. test need to be on spec/models/error_report
-    before do
-      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @app = Fabricate(:app, :api_key => 'APIKEY')
-      ErrorReport.any_instance.stub(:fingerprint).and_return('fingerprintdigest')
-    end
-
-    it "should handle params without 'request' section" do
-      xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
-      lambda { App.report_error!(xml) }.should_not raise_error
-    end
-
-    it "should handle params with only a single line of backtrace" do
-      xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
-      lambda { @notice = App.report_error!(xml) }.should_not raise_error
-      @notice.backtrace_lines.length.should == 1
-    end
-
-
-  end
-
   describe ".find_by_api_key!" do
     it 'return the app with api_key' do
       app = Fabricate(:app)
