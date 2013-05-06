@@ -77,21 +77,6 @@ describe NoticesController do
         expect(response.status).to eq 422
       end
     end
-
-    # Not relevant here, Nee to be test on App.report_error! test
-    it "sends a notification email", :pending => true do
-      App.should_receive(:report_error!).with(xml).and_return(notice)
-      request.should_receive(:raw_post).and_return(xml)
-      post :create, :format => :xml
-      response.should be_success
-      response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
-      response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
-      email = ActionMailer::Base.deliveries.last
-      email.to.should include(app.watchers.first.email)
-      email.subject.should include(notice.message.truncate(50))
-      email.subject.should include("[#{app.name}]")
-      email.subject.should include("[#{notice.environment_name}]")
-    end
   end
 
   describe "GET /locate/:id" do

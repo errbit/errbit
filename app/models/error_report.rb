@@ -1,6 +1,20 @@
 require 'digest/sha1'
 require 'hoptoad_notifier'
 
+##
+# Processes a new error report.
+#
+# Accepts a hash with the following attributes:
+#
+# * <tt>:error_class</tt> - the class of error
+# * <tt>:message</tt> - the error message
+# * <tt>:backtrace</tt> - an array of stack trace lines
+#
+# * <tt>:request</tt> - a hash of values describing the request
+# * <tt>:server_environment</tt> - a hash of values describing the server environment
+#
+# * <tt>:notifier</tt> - information to identify the source of the error report
+#
 class ErrorReport
   attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :framework
 
