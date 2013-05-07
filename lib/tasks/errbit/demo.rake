@@ -42,15 +42,15 @@ namespace :errbit do
 
     errors.each do |error_template|
       rand(34).times do
-
-        error_report = error_template.reverse_merge({
+        ErrorReport.new(error_template.reverse_merge({
+          :api_key => app.api_key,
           :error_class => "StandardError",
           :message => "Oops. Something went wrong!",
           :backtrace => random_backtrace,
           :request => {
-                        'component' => 'main',
-                        'action' => 'error'
-                      },
+            'component' => 'main',
+            'action' => 'error'
+          },
           :server_environment => {'environment-name' => Rails.env.to_s},
           :notifier => {:name => "seeds.rb"},
           :app_user => {
@@ -59,9 +59,7 @@ namespace :errbit do
             :name => "John Smith",
             :url => "http://www.example.com/users/jsmith"
           }
-        })
-
-        app.report_error!(error_report)
+        })).generate_notice!
       end
     end
 
