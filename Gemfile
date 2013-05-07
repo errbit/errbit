@@ -78,6 +78,7 @@ gem 'yajl-ruby', :require => "yajl"
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
+  gem 'airbrake', :require => false
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19

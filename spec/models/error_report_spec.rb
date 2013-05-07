@@ -1,4 +1,20 @@
 require 'spec_helper'
+require 'airbrake/version'
+require 'airbrake/backtrace'
+require 'airbrake/notice'
+
+# MonkeyPatch to instanciate a Airbrake::Notice without configure
+# Airbrake
+#
+module Airbrake
+  API_VERSION = '2.4'
+
+  class Notice
+    def framework
+      'rails'
+    end
+  end
+end
 
 describe ErrorReport do
   context "with notice without line of backtrace" do
@@ -38,6 +54,21 @@ describe ErrorReport do
           app.reload.problems.count
         }.by(1)
       end
+      context "with notice generate by Airbrake gem" do
+        let(:xml) { Airbrake::Notice.new(
+          :exception => Exception.new,
+          :api_key => 'API_KEY',
+          :project_root => Rails.root
+        ).to_xml }
+        it 'save a notice' do
+          expect {
+            error_report.generate_notice!
+          }.to change {
+            app.reload.problems.count
+          }.by(1)
+        end
+      end
+
       describe "notice create" do
         before { error_report.generate_notice! }
         subject { error_report.notice }
