@@ -57,7 +57,7 @@ describe ErrorReport do
       context "with notice generate by Airbrake gem" do
         let(:xml) { Airbrake::Notice.new(
           :exception => Exception.new,
-          :api_key => 'API_KEY',
+          :api_key => 'APIKEY',
           :project_root => Rails.root
         ).to_xml }
         it 'save a notice' do
