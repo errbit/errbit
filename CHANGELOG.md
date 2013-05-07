@@ -9,6 +9,8 @@
 - Update gem of Mongo to 1.8.5
 - [#457][] Add task information about db:seed in Readme. ([@mildavw][])
 - Add support of Ruby 2.0.0
+- [#475][] Return a HTTP 422 status code when you try push notice with
+  bad api key. ([@shingara][])
 
 ### Bug fixes
 
@@ -17,3 +19,4 @@
 - [#455][] Avoid raising exception if you comment an exception and no
   other user are define to received this comment. ([@alvarobp][])
 - [#453][] Fix ruby 2.0.0 incompatibilities with gem ([@SamSaffron][])
+- [#476][] Fix javascript notifier issue with IE8 ([@sdepold][])
