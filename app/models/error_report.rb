@@ -1,6 +1,20 @@
 require 'digest/sha1'
 require 'hoptoad_notifier'
 
+##
+# Processes a new error report.
+#
+# Accepts a hash with the following attributes:
+#
+# * <tt>:error_class</tt> - the class of error
+# * <tt>:message</tt> - the error message
+# * <tt>:backtrace</tt> - an array of stack trace lines
+#
+# * <tt>:request</tt> - a hash of values describing the request
+# * <tt>:server_environment</tt> - a hash of values describing the server environment
+#
+# * <tt>:notifier</tt> - information to identify the source of the error report
+#
 class ErrorReport
   attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :framework
 
@@ -26,7 +40,7 @@ class ErrorReport
   end
 
   def app
-    @app ||= App.find_by_api_key!(api_key)
+    @app ||= App.where(:api_key => api_key).first
   end
 
   def backtrace
@@ -34,7 +48,9 @@ class ErrorReport
   end
 
   def generate_notice!
-    notice = Notice.new(
+    return unless valid?
+    return @notice if @notice
+    @notice = Notice.new(
       :message => message,
       :error_class => error_class,
       :backtrace_id => backtrace.id,
@@ -44,19 +60,33 @@ class ErrorReport
       :user_attributes => user_attributes,
       :framework => framework
     )
+    error.notices << @notice
+    @notice
+  end
+  attr_reader :notice
 
-    err = app.find_or_create_err!(
+  ##
+  # Error associate to this error_report
+  #
+  # Can already exist or not
+  #
+  # @return [ Error ]
+  def error
+    @error ||= app.find_or_create_err!(
       :error_class => error_class,
       :component => component,
       :action => action,
       :environment => rails_env,
-      :fingerprint => fingerprint)
+      :fingerprint => fingerprint
+    )
+  end
 
-    err.notices << notice
-    notice
+  def valid?
+    !!app
   end
 
   private
+
   def fingerprint_source
     # Find the first backtrace line with a file and line number.
     if line = backtrace.lines.detect {|l| l.number.present? && l.file.present? }
