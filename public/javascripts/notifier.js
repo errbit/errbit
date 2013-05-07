@@ -572,7 +572,7 @@ printStackTrace.implementation.prototype = {
          * Is used to generate getter and setter method names.
          */
         capitalizeFirstLetter: function (str) {
-            return str[0].toUpperCase() + str.slice(1);  
+            return str.charAt(0).toUpperCase() + str.slice(1);  
         },
         
         /*
