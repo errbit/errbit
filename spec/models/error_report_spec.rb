@@ -142,7 +142,7 @@ describe ErrorReport do
       it 'find the correct err for the notice' do
         Fabricate(
           :err, {
-            :fingerprint => 'eeb6cc484167899c061e7859008c4b23bae0851c',
+            :fingerprint => error_report.fingerprint,
             :problem => Fabricate(:problem, :resolved => true)
           }
         )
