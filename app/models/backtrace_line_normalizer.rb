@@ -1,6 +1,6 @@
 class BacktraceLineNormalizer
   def initialize(raw_line)
-    @raw_line = raw_line
+    @raw_line = raw_line || {}
   end
 
   def call
@@ -12,7 +12,12 @@ class BacktraceLineNormalizer
     if @raw_line['file'].blank?
       "[unknown source]"
     else
-      @raw_line['file'].to_s.gsub(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
+      file = @raw_line['file'].to_s
+      # Detect lines from gem
+      file.gsub!(/\[PROJECT_ROOT\]\/.*\/ruby\/[0-9.]+\/gems/, '[GEM_ROOT]/gems')
+      # Strip any query strings
+      file.gsub!(/\?[^\?]*$/, '')
+      @raw_line['file'] = file
     end
   end
 

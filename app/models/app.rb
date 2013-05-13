@@ -1,12 +1,13 @@
 class App
+  include Comparable
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Comparable
 
   field :name, :type => String
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :asset_host
   field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
@@ -41,46 +42,11 @@ class App
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
-  # Processes a new error report.
-  #
-  # Accepts either XML or a hash with the following attributes:
-  #
-  # * <tt>:error_class</tt> - the class of error
-  # * <tt>:message</tt> - the error message
-  # * <tt>:backtrace</tt> - an array of stack trace lines
-  #
-  # * <tt>:request</tt> - a hash of values describing the request
-  # * <tt>:server_environment</tt> - a hash of values describing the server environment
-  #
-  # * <tt>:api_key</tt> - the API key with which the error was reported
-  # * <tt>:notifier</tt> - information to identify the source of the error report
-  #
-  def self.report_error!(*args)
-    report = ErrorReport.new(*args)
-    report.generate_notice!
-  end
-
-
-  # Processes a new error report.
-  #
-  # Accepts a hash with the following attributes:
-  #
-  # * <tt>:error_class</tt> - the class of error
-  # * <tt>:message</tt> - the error message
-  # * <tt>:backtrace</tt> - an array of stack trace lines
-  #
-  # * <tt>:request</tt> - a hash of values describing the request
-  # * <tt>:server_environment</tt> - a hash of values describing the server environment
-  #
-  # * <tt>:notifier</tt> - information to identify the source of the error report
-  #
-  def report_error!(hash)
-    report = ErrorReport.new(hash.merge(:api_key => api_key))
-    report.generate_notice!
-  end
-
   def find_or_create_err!(attrs)
-    Err.where(:fingerprint => attrs[:fingerprint]).first || problems.create!.errs.create!(attrs)
+    Err.where(
+      :fingerprint => attrs[:fingerprint]
+    ).first ||
+      problems.create!.errs.create!(attrs)
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
@@ -103,7 +69,7 @@ class App
   end
   alias :notify_on_errs? :notify_on_errs
 
-  def notifiable?
+  def emailable?
     notify_on_errs? && notification_recipients.any?
   end
 

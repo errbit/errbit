@@ -1,0 +1,50 @@
+%tr
+  %td.section
+    %table(cellpadding="0" cellspacing="0" border="0" align="left")
+      %tbody
+        %tr
+          %td.content(valign="top")
+            %div
+              %p
+                = @user.name
+                has just commented on an error that occurred in
+                = link_to(@app.name, app_url(@app), :class => "bold") << ","
+                on the
+                %span.bold= @problem.environment
+                environment.
+                %br
+                This err has occurred #{pluralize @problem.notices_count, 'time'}.
+              %p
+                = link_to("Click here to view the error and add a comment on Errbit", app_problem_url(@app, @problem), :class => "bold") << "."
+
+%tr
+  %td.section
+    %table(cellpadding="0" cellspacing="0" border="0" align="left")
+      %tbody
+        %tr
+          %td.content(valign="top")
+            %div
+              %p.heading COMMENT:
+              %br
+              %p= @comment.body.to_s.gsub("\n", "<br/>").html_safe
+
+%tr
+  %td.section
+    %table(cellpadding="0" cellspacing="0" border="0" align="left")
+      %tbody
+        %tr
+          %td.content(valign="top")
+            %div
+              %p.heading ERROR MESSAGE:
+              %p= @problem.message
+              %p.heading WHERE:
+              %p.monospace
+                = @problem.where
+              %p.heading URL:
+              %p.monospace
+                - if @notice.request['url'].present?
+                  = link_to @notice.request['url'], @notice.request['url']
+              %p.heading BROWSER:
+              %p.monospace
+                = user_agent_graph(@problem)
+              %br

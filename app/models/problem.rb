@@ -45,9 +45,17 @@ class Problem
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
-  
+
   validates_presence_of :last_notice_at, :first_notice_at
 
+
+  def self.all_else_unresolved all
+    if all
+      find(:all)
+    else
+      where(:resolved => false)
+    end
+  end
 
   def self.in_env(env)
     env.present? ? where(:environment => env) : scoped
@@ -113,7 +121,7 @@ class Problem
     else raise("\"#{sort}\" is not a recognized sort")
     end
   end
-  
+
   def self.in_date_range(date_range)
     where(:first_notice_at.lte => date_range.end).where("$or" => [{:resolved_at => nil}, {:resolved_at.gte => date_range.begin}])
   end
@@ -141,7 +149,7 @@ class Problem
     first_notice = notices.order_by([:created_at, :asc]).first
     last_notice = notices.order_by([:created_at, :asc]).last
     notice ||= first_notice
-    
+
     attrs = {}
     attrs[:first_notice_at] = first_notice.created_at if first_notice
     attrs[:last_notice_at] = last_notice.created_at if last_notice
@@ -171,6 +179,10 @@ class Problem
     (app.issue_tracker_configured? && app.issue_tracker.label) || nil
   end
 
+  def self.search(value)
+    where.or(:error_class => /#{value}/i).or(:where => /#{value}/i).or(:message => /#{value}/i).or(:app_name => /#{value}/i).or(:environment => /#{value}/i)
+  end
+
   private
     def attribute_count_increase(name, value)
       counter, index = send(name), attribute_index(value)
@@ -195,6 +207,5 @@ class Problem
     def attribute_index(value)
       Digest::MD5.hexdigest(value.to_s)
     end
-
 end
 

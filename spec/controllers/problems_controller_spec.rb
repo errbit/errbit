@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ProblemsController do
 
   it_requires_authentication :for => {
-    :index => :get, :all => :get, :show => :get, :resolve => :put
+    :index => :get, :show => :get, :resolve => :put, :search => :get
   },
   :params => {:app_id => 'dummyid', :id => 'dummyid'}
 
@@ -107,7 +107,7 @@ describe ProblemsController do
     end
   end
 
-  describe "GET /problems/all" do
+  describe "GET /problems - previously all" do
     context 'when logged in as an admin' do
       it "gets a paginated list of all problems" do
         sign_in Fabricate(:admin)
@@ -117,7 +117,7 @@ describe ProblemsController do
         Problem.should_receive(:ordered_by).and_return(
           mock('proxy', :page => mock('other_proxy', :per => problems))
         )
-        get :all
+        get :index, :all_errs => true
         assigns(:problems).should == problems
       end
     end
@@ -128,7 +128,7 @@ describe ProblemsController do
         unwatched_problem = Fabricate(:problem)
         watched_unresolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false)
         watched_resolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true)
-        get :all
+        get :index, :all_errs => true
         assigns(:problems).should include(watched_resolved_problem, watched_unresolved_problem)
         assigns(:problems).should_not include(unwatched_problem)
       end

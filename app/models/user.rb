@@ -52,6 +52,13 @@ class User
     github_account? && Errbit::Config.github_access_scope.include?('repo')
   end
 
+  def github_login=(login)
+    if login.is_a?(String) && login.strip.empty?
+      login = nil
+    end
+    self[:github_login] = login
+  end
+
   protected
 
     def destroy_watchers

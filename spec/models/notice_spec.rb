@@ -51,7 +51,7 @@ describe Notice do
   describe "user agent string" do
     it "should be parsed and human-readable" do
       notice = Fabricate.build(:notice, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      notice.user_agent_string.should == 'Chrome 10.0.648.204'
+      notice.user_agent_string.should == 'Chrome 10.0.648.204 (Intel Mac OS X 10_6_7)'
     end
 
     it "should be nil if HTTP_USER_AGENT is blank" do

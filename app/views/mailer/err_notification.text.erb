@@ -24,6 +24,20 @@ URL:
 <%= @notice.request['url'] %>
 
 
+BROWSER:
+
+<%= @notice.user_agent_string %>
+
+
+<%- if @notice.user_attributes.present? %>
+USER:
+
+<%- @notice.user_attributes.each do |key, value| %>
+<%= key.to_s.titleize %>: <%= value.to_s %>
+<%- end %>
+
+<%- end %>
+
 BACKTRACE:
 
 <% @notice.backtrace_lines.each do |line| %>

@@ -1,14 +1,17 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
-gem 'mongoid', '~> 2.4.10'
+gem 'rails', '3.2.13'
+gem 'mongoid', '~> 2.7.1'
 gem 'mongoid_rails_migrations'
 gem 'devise', '~> 1.5.4'
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
-gem 'useragent', '~> 0.3.1'
+# Remove this when tilt 1.3.7 is released.
+gem 'tilt', :git => 'https://github.com/rtomayko/tilt.git'
+
+gem 'useragent', '~> 0.4.16'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
@@ -37,7 +40,7 @@ gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.0.0'
 # Gitlab
-gem 'gitlab', :git => 'git://github.com/NARKOZ/gitlab'
+gem 'gitlab', :git => 'https://github.com/NARKOZ/gitlab.git'
 
 # Bitbucket Issues
 gem 'bitbucket_rest_api'
@@ -64,9 +67,9 @@ gem 'omniauth-github'
 
 
 platform :ruby do
-  gem 'mongo', '= 1.6.2'
-  gem 'bson', '= 1.6.2'
-  gem 'bson_ext', '= 1.6.2'
+  gem 'mongo'
+  gem 'bson'
+  gem 'bson_ext'
 end
 
 gem 'ri_cal'
@@ -75,6 +78,7 @@ gem 'yajl-ruby', :require => "yajl"
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock', :require => false
+  gem 'airbrake', :require => false
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
@@ -82,10 +86,17 @@ group :development, :test do
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
-  gem 'capistrano'
 end
 
-gem 'foreman', :group => :development
+group :development do
+  gem 'capistrano'
+
+  # better errors
+  gem 'better_errors'    , :platform => :ruby_19
+  gem 'binding_of_caller', :platform => :ruby_19
+  gem 'meta_request'     , :platform => :ruby_19
+  gem 'foreman'
+end
 
 group :test do
   gem 'capybara'
@@ -93,6 +104,7 @@ group :test do
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
   gem 'timecop'
+  gem 'coveralls', :require => false
 end
 
 group :heroku, :production do

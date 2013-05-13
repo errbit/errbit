@@ -37,7 +37,7 @@
               - else
                 %span.comment-info
                   = time_ago_in_words(comment.created_at, true) << " ago by [Unknown User]"
-              %span.delete= link_to '&#10008;'.html_safe, [@app, @problem, comment], :method => :delete, :data => { :confirm => "Are sure you don't need this comment?" }, :class => "destroy-comment"
+              %span.delete= link_to '&#10008;'.html_safe, [@app, @problem, comment], :method => :delete, :data => { :confirm => "Are you sure you don't need this comment?" }, :class => "destroy-comment"
           %tr
             %td= simple_format comment.body
     - if @problem.comments_allowed?
@@ -55,7 +55,7 @@
     %li= link_to 'Summary', '#summary', :rel => 'summary', :class => 'button'
     %li= link_to 'Backtrace', '#backtrace', :rel => 'backtrace', :class => 'button'
     - if @notice && @notice.user_attributes.present?
-      %li= link_to 'User Details', '#user_attributes', :rel => 'user_attributes', :class => 'button'
+      %li= link_to 'User', '#user_attributes', :rel => 'user_attributes', :class => 'button'
     %li= link_to 'Environment', '#environment', :rel => 'environment', :class => 'button'
     %li= link_to 'Parameters', '#params', :rel => 'params', :class => 'button'
     %li= link_to 'Session', '#session', :rel => 'session', :class => 'button'
@@ -71,7 +71,7 @@
 
   - if @notice.user_attributes.present?
     #user_attributes
-      %h3 User Details
+      %h3 User
       = render 'notices/user_attributes', :user => @notice.user_attributes
 
   #environment

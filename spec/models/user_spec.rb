@@ -29,6 +29,15 @@ describe User do
       user2.should_not be_valid
       user2.errors[:github_login].should include("is already taken")
     end
+
+    it 'allows blank / null github_login' do
+      user1 = Fabricate(:user, :github_login => ' ')
+      user1.should be_valid
+
+      user2 = Fabricate.build(:user, :github_login => ' ')
+      user2.save
+      user2.should be_valid
+    end
   end
 
   context 'Watchers' do

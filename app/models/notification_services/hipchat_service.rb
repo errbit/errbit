@@ -1,7 +1,7 @@
 if defined? HipChat
   class NotificationServices::HipchatService < NotificationService
     Label = 'hipchat'
-    Fields = [
+    Fields += [
       [:api_token, {
         :placeholder => "API Token"
       }],

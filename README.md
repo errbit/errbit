@@ -1,18 +1,21 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url]
 
 
 
 [travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
-[codeclimate-img-url]: https://codeclimate.com/badge.png
+[codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
+[coveralls-img-url]: https://coveralls.io/repos/errbit/errbit/badge.png?branch=master
+[coveralls-url]:https://coveralls.io/r/errbit/errbit
+
 
 
 ### The open source, self-hosted error catcher
 
 
 Errbit is a tool for collecting and managing errors from other applications.
-It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
+It is [Airbrake](http://airbrake.io) (formerly known as Hoptoad) API compliant,
 so if you are already using Airbrake, you can just point the `airbrake` gem to your Errbit server.
 
 
@@ -58,7 +61,7 @@ Errbit may be a good fit for you if:
 * You want to add customer features to your error catcher
 * You're crazy and love managing servers
 
-If this doesn't sound like you, you should probably stick with [Airbrake](http://airbrakeapp.com).
+If this doesn't sound like you, you should probably stick with [Airbrake](http://airbrake.io).
 The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
 They have a free package and even offer a *"Airbrake behind your firewall"* solution.
 
@@ -80,7 +83,7 @@ Installation
 
 *Note*: This app is intended for people with experience deploying and maintining
 Rails applications. If you're uncomfortable with any step below then Errbit is not
-for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
+for you. Checkout [Airbrake](http://airbrake.io) from the guys over at
 [Thoughtbot](http://thoughtbot.com), which Errbit is based on.
 
 **Set up your local box or server(Ubuntu):**
@@ -146,13 +149,14 @@ cap deploy:setup deploy
 ```bash
 git clone http://github.com/errbit/errbit.git
 ```
+  * Update `db/seeds.rb` with admin credentials for your initial login.
 
   * Create & configure for Heroku
 
 ```bash
 gem install heroku
 heroku create example-errbit --stack cedar
-heroku addons:add mongolab:starter
+heroku addons:add mongolab:sandbox
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
@@ -461,7 +465,7 @@ Special Thanks
 * [Vasiliy Ermolovich (@nashby)](https://github.com/nashby) - Contributing and helping to resolve issues and pull requests
 * [Marcin Ciunelis (@martinciu)](https://github.com/martinciu) - Helping to improve Errbit's architecture
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
-* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrakeapp.com).
+* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrake.io).
 
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details.
 
