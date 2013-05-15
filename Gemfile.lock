@@ -95,7 +95,7 @@ GEM
       rest-client
       simplecov (>= 0.7)
       thor
-    crack (0.3.1)
+    crack (0.3.2)
     css_parser (1.2.6)
       addressable
       rdoc
