@@ -326,6 +326,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    test-queue (0.1.3)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -413,6 +414,7 @@ DEPENDENCIES
   ruby-debug
   ruby-fogbugz
   rushover
+  test-queue
   therubyracer
   thin
   tilt!

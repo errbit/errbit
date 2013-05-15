@@ -86,6 +86,7 @@ group :development, :test do
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
+  gem 'test-queue', :require => false
 end
 
 group :development do
@@ -99,6 +100,7 @@ group :development do
 
   # Use thin for development
   gem 'thin', :group => :development, :platform => :ruby
+
 end
 
 group :test do
