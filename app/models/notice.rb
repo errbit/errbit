@@ -26,7 +26,7 @@ class Notice
     ]
   )
 
-  after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
+  after_create :cache_attributes_on_problem, :unresolve_problem
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -116,10 +116,6 @@ class Notice
 
   protected
 
-  def increase_counter_cache
-    problem.inc(:notices_count, 1)
-  end
-
   def decrease_counter_cache
     problem.inc(:notices_count, -1) if err
   end
@@ -133,7 +129,7 @@ class Notice
   end
 
   def cache_attributes_on_problem
-    problem.cache_notice_attributes(self)
+    ProblemUpdaterCache.new(problem, self).update
   end
 
   def sanitize
