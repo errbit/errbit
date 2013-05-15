@@ -96,6 +96,9 @@ group :development do
   gem 'binding_of_caller', :platform => :ruby_19
   gem 'meta_request'     , :platform => :ruby_19
   gem 'foreman'
+
+  # Use thin for development
+  gem 'thin', :group => :development, :platform => :ruby
 end
 
 group :test do
@@ -111,8 +114,6 @@ group :heroku, :production do
   gem 'unicorn'
 end
 
-# Use thin for development
-gem 'thin', :group => :development, :platform => :ruby
 
 # Gems used only for assets and not required
 # in production environments by default.
