@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'rubygems'
 require 'bundler'
 Bundler.setup(:default, :development, :test)
 require 'test_queue'
