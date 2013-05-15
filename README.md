@@ -1,4 +1,4 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemansium-img-url]][gemnasium-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
 
 [travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
