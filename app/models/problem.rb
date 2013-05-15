@@ -83,15 +83,7 @@ class Problem
 
 
   def self.merge!(*problems)
-    problems = problems.flatten.uniq
-    merged_problem = problems.shift
-    problems.each do |problem|
-      merged_problem.errs.concat Err.where(:problem_id => problem.id)
-      problem.errs(true) # reload problem.errs (should be empty) before problem.destroy
-      problem.destroy
-    end
-    merged_problem.reset_cached_attributes
-    merged_problem
+    ProblemMerge.new(problems).merge
   end
 
   def merged?
@@ -128,9 +120,7 @@ class Problem
 
 
   def reset_cached_attributes
-    update_attribute(:notices_count, notices.count)
-    cache_app_attributes
-    cache_notice_attributes
+    ProblemUpdaterCache.new(self).update
   end
 
   def cache_app_attributes
@@ -143,26 +133,6 @@ class Problem
                         {'$set' => {'app_name' => self.app_name,
                           'last_deploy_at' => self.last_deploy_at.try(:utc)}})
     end
-  end
-
-  def cache_notice_attributes(notice=nil)
-    first_notice = notices.order_by([:created_at, :asc]).first
-    last_notice = notices.order_by([:created_at, :asc]).last
-    notice ||= first_notice
-
-    attrs = {}
-    attrs[:first_notice_at] = first_notice.created_at if first_notice
-    attrs[:last_notice_at] = last_notice.created_at if last_notice
-    attrs.merge!(
-      :message     => notice.message,
-      :environment => notice.environment_name,
-      :error_class => notice.error_class,
-      :where       => notice.where,
-      :messages    => attribute_count_increase(:messages, notice.message),
-      :hosts       => attribute_count_increase(:hosts, notice.host),
-      :user_agents => attribute_count_increase(:user_agents, notice.user_agent_string)
-    ) if notice
-    update_attributes!(attrs)
   end
 
   def remove_cached_notice_attributes(notice)
@@ -184,15 +154,6 @@ class Problem
   end
 
   private
-    def attribute_count_increase(name, value)
-      counter, index = send(name), attribute_index(value)
-      if counter[index].nil?
-        counter[index] = {'value' => value, 'count' => 1}
-      else
-        counter[index]['count'] += 1
-      end
-      counter
-    end
 
     def attribute_count_descrease(name, value)
       counter, index = send(name), attribute_index(value)
