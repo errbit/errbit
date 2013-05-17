@@ -351,6 +351,20 @@ it will be displayed under the *User Details* tab:
 
 (This tab will be hidden if no user information is available.)
 
+Adding javascript errors notifications
+--------------------------------------
+
+Errbit easily supports javascript errors notifications. You just need to add `config.js_notifier = true` to the errbit initializer in the rails app.
+
+```
+Errbit.configure do |config|
+  config.host    = 'YOUR-ERRBIT-HOST'
+  config.api_key = 'YOUR-PROJECT-API-KEY'
+  config.js_notifier = true
+end
+```
+
+Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or inlcude `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
 
 Issue Trackers
 --------------
