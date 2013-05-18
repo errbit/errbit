@@ -9,7 +9,7 @@
     - if @app.github_repo?
       - if current_user.can_create_github_issues?
         %span= link_to 'create issue', create_issue_app_problem_path(@app, @problem, :tracker => 'user_github'), :method => :post, :class => "github_create create-issue"
-      - elsif @app.issue_tracker_configured? && @app.issue_tracker.is_a?(GithubIssuesTracker)
+      - elsif @app.issue_tracker_configured? && @app.issue_tracker.label.eql?('github')
         %span= link_to 'create issue', create_issue_app_problem_path(@app, @problem), :method => :post, :class => "github_create create-issue"
-    - if @app.issue_tracker_configured? && !@app.issue_tracker.is_a?(GithubIssuesTracker)
+    - if @app.issue_tracker_configured? && !@app.issue_tracker.label.eql?('github')
       %span= link_to 'create issue', create_issue_app_problem_path(@app, @problem), :method => :post, :class => "#{@app.issue_tracker.label}_create create-issue"
