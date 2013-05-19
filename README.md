@@ -457,6 +457,11 @@ Solutions known to work are listed below:
   </tr>
 </table>
 
+Develop on Errbit
+-----------------
+
+A guide can help on this way on  [**Errbit Advanced Developer Guide**](https://github.com/errbit/errbit/blob/master/docs/DEVELOPER-ADVANCED.md)
+
 TODO
 ----
 
