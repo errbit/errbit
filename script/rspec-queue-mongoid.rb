@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require 'rubygems'
+require 'test_queue'
 require 'bundler'
 Bundler.setup(:default, :development, :test)
-require 'test_queue'
 require 'test_queue/runner/rspec'
 
 

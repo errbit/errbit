@@ -86,7 +86,6 @@ group :development, :test do
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
-  gem 'test-queue', :require => false
 end
 
 group :development do
