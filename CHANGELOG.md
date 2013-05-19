@@ -11,6 +11,8 @@
 - Add support of Ruby 2.0.0
 - [#475][] Return a HTTP 422 status code when you try push notice with
   bad api key. ([@shingara][])
+- Return a 400 http status when you try put a notice without args.
+  ([@shingara][])
 
 ### Bug fixes
 
