@@ -1,11 +1,14 @@
 class NoticesController < ApplicationController
-  respond_to :xml
+
+  class ParamsError < StandardError; end
 
   skip_before_filter :authenticate_user!, :only => :create
 
+  rescue_from ParamsError, :with => :bad_params
+
   def create
     # params[:data] if the notice came from a GET request, raw_post if it came via POST
-    report = ErrorReport.new(params[:data] || request.raw_post)
+    report = ErrorReport.new(notice_params)
 
     if report.valid?
       report.generate_notice!
@@ -22,6 +25,21 @@ class NoticesController < ApplicationController
   def locate
     problem = Notice.find(params[:id]).problem
     redirect_to app_problem_path(problem.app, problem)
+  end
+
+  private
+
+  def notice_params
+    return @notice_params if @notice_params
+    @notice_params = params[:data] || request.raw_post
+    if @notice_params.blank?
+      raise ParamsError.new('Need a data params in GET or raw post data')
+    end
+    @notice_params
+  end
+
+  def bad_params(exception)
+    render :text => exception.message, :status => :bad_request
   end
 
 end

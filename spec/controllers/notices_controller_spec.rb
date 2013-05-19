@@ -9,17 +9,29 @@ describe NoticesController do
   let(:error_report) { mock(:valid? => true, :generate_notice! => true, :notice => notice) }
 
   context 'notices API' do
-    before do
-      ErrorReport.should_receive(:new).with(xml).and_return(error_report)
-    end
-
-    context "with xml pass in raw_port" do
+    context "with all params" do
       before do
-        request.should_receive(:raw_post).and_return(xml)
-        post :create, :format => :xml
+        ErrorReport.should_receive(:new).with(xml).and_return(error_report)
       end
 
-      it "generates a notice from raw xml [POST]" do
+      context "with xml pass in raw_port" do
+        before do
+          request.should_receive(:raw_post).and_return(xml)
+          post :create, :format => :xml
+        end
+
+        it "generates a notice from raw xml [POST]" do
+          response.should be_success
+          # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
+          # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
+          response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
+          response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
+        end
+
+      end
+
+      it "generates a notice from xml in a data param [POST]" do
+        post :create, :data => xml, :format => :xml
         response.should be_success
         # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
         # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
@@ -27,28 +39,26 @@ describe NoticesController do
         response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
 
+      it "generates a notice from xml [GET]" do
+        get :create, :data => xml, :format => :xml
+        response.should be_success
+        response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
+        response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
+      end
+      context "with an invalid API_KEY" do
+        let(:error_report) { mock(:valid? => false) }
+        it 'return 422' do
+          post :create, :format => :xml, :data => xml
+          expect(response.status).to eq 422
+        end
+      end
     end
 
-    it "generates a notice from xml in a data param [POST]" do
-      post :create, :data => xml, :format => :xml
-      response.should be_success
-      # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
-      # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
-      response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
-      response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
-    end
-
-    it "generates a notice from xml [GET]" do
-      get :create, :data => xml, :format => :xml
-      response.should be_success
-      response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
-      response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
-    end
-    context "with an invalid API_KEY" do
-      let(:error_report) { mock(:valid? => false) }
-      it 'return 422' do
-        post :create, :format => :xml, :data => xml
-        expect(response.status).to eq 422
+    context "without params needed" do
+      it 'return 400' do
+        post :create, :format => :xml
+        expect(response.status).to eq 400
+        expect(response.body).to eq 'Need a data params in GET or raw post data'
       end
     end
   end
