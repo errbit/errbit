@@ -61,9 +61,9 @@ Errbit may be a good fit for you if:
 * You want to add customer features to your error catcher
 * You're crazy and love managing servers
 
-If this doesn't sound like you, you should probably stick with [Airbrake](http://airbrake.io).
-The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
-They have a free package and even offer a *"Airbrake behind your firewall"* solution.
+If this doesn't sound like you, you should probably stick with a hosted service such as
+[Airbrake](http://airbrake.io).
+
 
 Mailing List
 ------------
@@ -83,8 +83,7 @@ Installation
 
 *Note*: This app is intended for people with experience deploying and maintining
 Rails applications. If you're uncomfortable with any step below then Errbit is not
-for you. Checkout [Airbrake](http://airbrake.io) from the guys over at
-[Thoughtbot](http://thoughtbot.com), which Errbit is based on.
+for you.
 
 **Set up your local box or server(Ubuntu):**
 
