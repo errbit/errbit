@@ -71,10 +71,12 @@ describe User do
 
   context "First user" do
     it "should be created this admin access via db:seed" do
-      require 'rake'
-      Errbit::Application.load_tasks
-      Rake::Task["db:seed"].execute
-      User.first.admin.should be_true
+      expect {
+        $stdout.stub(:puts => true)
+        require Rails.root.join('db/seeds.rb')
+      }.to change {
+        User.where(:admin => true).count
+      }.from(0).to(1)
     end
   end
 
