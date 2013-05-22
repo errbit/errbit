@@ -23,6 +23,17 @@ describe Problem do
         end.should change(Comment, :count).by(3)
       end
     end
+
+    context "Fabricate(:problem_with_errs)" do
+      it 'should be valid' do
+        Fabricate.build(:problem_with_errs).should be_valid
+      end
+      it 'should have 3 errs' do
+        lambda do
+          Fabricate(:problem_with_errs)
+        end.should change(Err, :count).by(3)
+      end
+    end
   end
 
   context '#last_notice_at' do
@@ -49,7 +60,7 @@ describe Problem do
       problem.first_notice_at.should == notice1.created_at
 
       notice2 = Fabricate(:notice, :err => err)
-      problem.first_notice_at.should == notice1.created_at
+      problem.first_notice_at.to_time.should eq notice1.created_at
     end
   end
 
@@ -134,22 +145,6 @@ describe Problem do
     end
   end
 
-
-  context ".merge!" do
-    it "collects the Errs from several problems into one and deletes the other problems" do
-      problem1 = Fabricate(:err).problem
-      problem2 = Fabricate(:err).problem
-      problem1.errs.length.should == 1
-      problem2.errs.length.should == 1
-
-      lambda {
-        merged_problem = Problem.merge!(problem1, problem2)
-        merged_problem.reload.errs.length.should == 2
-      }.should change(Problem, :count).by(-1)
-    end
-  end
-
-
   context "#unmerge!" do
     it "creates a separate problem for each err" do
       problem1 = Fabricate(:notice).problem
@@ -188,17 +183,17 @@ describe Problem do
 
     context "searching" do
       it 'finds the correct record' do
-        find = Fabricate(:problem, :resolved => false, :error_class => 'theErrorclass::other', 
+        find = Fabricate(:problem, :resolved => false, :error_class => 'theErrorclass::other',
                          :message => "other", :where => 'errorclass', :environment => 'development', :app_name => 'other')
-        dont_find = Fabricate(:problem, :resolved => false, :error_class => "Batman", 
+        dont_find = Fabricate(:problem, :resolved => false, :error_class => "Batman",
                               :message => 'todo', :where => 'classerror', :environment => 'development', :app_name => 'other')
         Problem.search("theErrorClass").unresolved.should include(find)
         Problem.search("theErrorClass").unresolved.should_not include(dont_find)
       end
     end
   end
-    
-  
+
+
   context "notice counter cache" do
     before do
       @app = Fabricate(:app)
@@ -213,15 +208,15 @@ describe Problem do
     it "adding a notice increases #notices_count by 1" do
       lambda {
         Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.should change(@problem, :notices_count).from(0).to(1)
+      }.should change(@problem.reload, :notices_count).from(0).to(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
       notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      lambda {
+      expect {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :notices_count).from(1).to(0)
+      }.to change(@problem, :notices_count).from(1).to(0)
     end
   end
 

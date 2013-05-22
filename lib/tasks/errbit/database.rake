@@ -6,7 +6,9 @@ namespace :errbit do
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"
-      Problem.all.each(&:cache_notice_attributes)
+      Problem.all.each{|problem|
+        ProblemUpdaterCache.new(self).update
+      }
     end
 
     desc "Updates Problem#notices_count"
