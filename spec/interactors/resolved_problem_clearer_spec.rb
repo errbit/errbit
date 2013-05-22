@@ -29,9 +29,12 @@ describe ResolvedProblemClearer do
 
     context "with problem resolve" do
       before do
+        Mongoid.config.master.stub(:command).and_call_original
+        Mongoid.config.master.stub(:command).with({:repairDatabase => 1})
         problems.first.resolve!
         problems.second.resolve!
       end
+
       it 'delete problem resolve' do
         expect {
           expect(resolved_problem_clearer.execute).to eq 2
