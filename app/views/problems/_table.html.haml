@@ -48,9 +48,5 @@
   = paginate problems
   .tab-bar
     %ul
-      %li= submit_tag 'Merge', :id => 'merge_problems', :class => 'button', 'data-action' => merge_several_problems_path
-      %li= submit_tag 'Unmerge', :id => 'unmerge_problems', :class => 'button', 'data-action' => unmerge_several_problems_path
-      %li= submit_tag 'Resolve', :id => 'resolve_problems', :class => 'button', 'data-action' => resolve_several_problems_path
-      %li= submit_tag 'Unresolve', :id => 'unresolve_problems', :class => 'button', 'data-action' => unresolve_several_problems_path
-      %li= submit_tag 'Delete', :id => 'delete_problems', :class => 'button', 'data-action' => destroy_several_problems_path
-
+      - %w(merge unmerge resolve unresolve delete).each do |action|
+        %li= submit_tag action.capitalize, :id => "#{action}_problems", :class => 'button', :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']), :confirm => problem_confirm }
