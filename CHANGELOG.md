@@ -13,6 +13,8 @@
   bad api key. ([@shingara][])
 - Return a 400 http status when you try put a notice without args.
   ([@shingara][])
+- [#486][] Add confirms box when you do massive action. ([@manuelmeurer][])
+- [#487][] Add specific template to redmine notification with less useless data. ([@tvdeyen][])
 
 ### Bug fixes
 
@@ -40,6 +42,8 @@
 [#475]: https://github.com/errbit/errbit/issues/475
 [#476]: https://github.com/errbit/errbit/issues/476
 [#478]: https://github.com/errbit/errbit/issues/478
+[#487]: https://github.com/errbit/errbit/issues/487
+[#486]: https://github.com/errbit/errbit/issues/486
 [@SamSaffron]: https://github.com/SamSaffron
 [@adamjt]: https://github.com/adamjt
 [@alvarobp]: https://github.com/alvarobp
@@ -49,3 +53,5 @@
 [@shingara]: https://github.com/shingara
 [@tamaloa]: https://github.com/tamaloa
 [@ivanyv]: https://github.com/ivanyv
+[@manuelmeurer]: https://github.com/manuelmeurer
+[@tvdeyen]: https://github.com/tvdeyen
