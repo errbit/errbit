@@ -62,7 +62,7 @@ if defined? RedmineClient
     end
 
     def body_template
-      @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/textile_body.txt.erb"))
+      @@body_template ||= ERB.new(File.read(Rails.root + "app/views/issue_trackers/redmine_body.txt.erb"))
     end
 
     def url
