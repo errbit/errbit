@@ -57,10 +57,10 @@ describe Problem do
       problem.should_not be_nil
 
       notice1 = Fabricate(:notice, :err => err)
-      expect(problem.first_notice_at.to_i).to be_within(1).of(notice.created_at.to_i)
+      expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
 
       notice2 = Fabricate(:notice, :err => err)
-      expect(problem.first_notice_at.to_i).to be_within(1).of(notice.created_at.to_i)
+      expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
     end
   end
 
