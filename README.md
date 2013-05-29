@@ -513,5 +513,5 @@ and make **optional** features configurable via `config/config.yml`.
 Copyright
 ---------
 
-Copyright (c) 2010-2011 Jared Pace. See LICENSE for details.
+Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
 
