@@ -1,4 +1,4 @@
-## 0.1.0 - Not released yet
+## 0.1.0 - 2013-05-29
 
 ### Improvements
 
