@@ -5,15 +5,16 @@ gem 'mongoid', '~> 2.7.1'
 gem 'mongoid_rails_migrations'
 gem 'devise', '~> 1.5.4'
 gem 'haml'
-gem 'htmlentities', "~> 4.3.0"
+gem 'htmlentities'
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
-gem 'useragent', '~> 0.4.16'
+gem 'useragent'
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer'
+# fabrication 1.3.0 is last supporting ruby 1.8. Update when stop supporting this version too
 gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
 gem 'rails_autolink', '~> 1.0.9'
 # Please don't update hoptoad_notifier to airbrake.
@@ -44,8 +45,8 @@ gem 'bitbucket_rest_api'
 
 # Notification services
 # ---------------------------------------
-# Campfire
-gem 'campy'
+# Campfire ( We can't upgrade to 1.0 because drop support of ruby 1.8
+gem 'campy', '0.1.3'
 # Hipchat
 gem 'hipchat'
 # Google Talk

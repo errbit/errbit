@@ -125,14 +125,15 @@ GEM
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
-    haml (3.1.7)
+    haml (4.0.3)
+      tilt
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)
     has_scope (0.5.1)
     hashie (1.2.0)
     highline (1.6.19)
     hike (1.2.2)
-    hipchat (0.4.1)
+    hipchat (0.9.0)
       httparty
     hoi (0.0.6)
       httparty (> 0.6.0)
@@ -141,22 +142,22 @@ GEM
       activesupport
       builder
     htmlentities (4.3.1)
-    httparty (0.10.0)
+    httparty (0.11.0)
       multi_json (~> 1.0)
-      multi_xml
-    httpauth (0.1)
+      multi_xml (>= 0.5.2)
+    httpauth (0.2.0)
     i18n (0.6.1)
-    inherited_resources (1.3.1)
+    inherited_resources (1.4.0)
       has_scope (~> 0.5.0)
-      responders (~> 0.6)
+      responders (~> 0.9)
     journey (1.0.4)
     json (1.8.0)
-    jwt (0.1.5)
-      multi_json (>= 1.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.7.4)
+    kgio (2.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
     libv8 (3.11.8.17)
@@ -201,13 +202,13 @@ GEM
     nokogiri (1.5.9)
     nokogiri-happymapper (0.5.7)
       nokogiri (~> 1.5)
-    oauth2 (0.8.0)
+    oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    octokit (1.0.7)
+    octokit (1.18.0)
       addressable (~> 2.2)
       faraday (~> 0.8)
       faraday_middleware (~> 0.8)
@@ -216,7 +217,7 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-github (1.0.2)
+    omniauth-github (1.1.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
     omniauth-oauth2 (1.1.1)
@@ -261,8 +262,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails_autolink (1.0.9)
-      rails (~> 3.1)
+    rails_autolink (1.1.0)
+      rails (> 3.1)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -270,13 +271,13 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.10.0)
+    raindrops (0.11.0)
     rake (10.0.4)
     rbx-require-relative (0.0.9)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.4)
-    responders (0.9.2)
+    responders (0.9.3)
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -340,11 +341,11 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     underscore-rails (1.4.2.1)
-    unicorn (4.3.1)
+    unicorn (4.6.2)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    useragent (0.4.16)
+    useragent (0.6.0)
     warden (1.2.1)
       rack (>= 1.0)
     webmock (1.11.0)
@@ -367,7 +368,7 @@ DEPENDENCIES
   bitbucket_rest_api
   bson
   bson_ext
-  campy
+  campy (= 0.1.3)
   capistrano
   capybara
   coveralls
@@ -383,7 +384,7 @@ DEPENDENCIES
   hipchat
   hoi
   hoptoad_notifier (~> 2.4)
-  htmlentities (~> 4.3.0)
+  htmlentities
   httparty
   inherited_resources
   kaminari (>= 0.14.1)
@@ -393,7 +394,7 @@ DEPENDENCIES
   mongo
   mongoid (~> 2.7.1)
   mongoid_rails_migrations
-  octokit (~> 1.0.0)
+  octokit
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
@@ -401,7 +402,7 @@ DEPENDENCIES
   rack-ssl
   rack-ssl-enforcer
   rails (= 3.2.13)
-  rails_autolink (~> 1.0.9)
+  rails_autolink
   ri_cal
   rspec-rails (~> 2.6)
   ruby-debug
@@ -414,7 +415,7 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   underscore-rails
   unicorn
-  useragent (~> 0.4.16)
+  useragent
   webmock
   xmpp4r
   yajl-ruby
