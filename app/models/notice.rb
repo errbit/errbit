@@ -114,6 +114,15 @@ class Notice
     app.notification_service.notify_at_notices.include?(0) || app.notification_service.notify_at_notices.include?(similar_count)
   end
 
+  ##
+  # TODO: Move on decorator maybe
+  #
+  def project_root
+    if server_environment
+      server_environment['project-root'] || ''
+    end
+  end
+
   protected
 
   def decrease_counter_cache
@@ -137,6 +146,7 @@ class Notice
       send("#{h}=",sanitize_hash(send(h)))
     end
   end
+
 
   def sanitize_hash(h)
     h.recurse do

@@ -8,11 +8,11 @@ module ApplicationHelper
       notices.each_with_index do |notice,idx|
         cal.event do |event|
           event.summary     = "#{idx+1} #{notice.message.to_s}"
-          event.description = notice.request['url']
+          event.description = notice.url if notice.url
           event.dtstart     = notice.created_at.utc
           event.dtend       = notice.created_at.utc + 60.minutes
           event.organizer   = notice.server_environment && notice.server_environment["hostname"]
-          event.location    = notice.server_environment && notice.server_environment["project-root"]
+          event.location    = notice.project_root
           event.url         = app_problem_url(:app_id => notice.problem.app.id, :id => notice.problem)
         end
       end
