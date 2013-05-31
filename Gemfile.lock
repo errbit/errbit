@@ -72,15 +72,12 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (1.1.2)
+    capybara (2.1.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      selenium-webdriver (~> 2.0)
-      xpath (~> 0.1.4)
-    childprocess (0.3.5)
-      ffi (~> 1.0, >= 1.0.6)
+      xpath (~> 2.0)
     coderay (1.0.9)
     colorize (0.5.8)
     columnize (0.3.6)
@@ -95,7 +92,7 @@ GEM
       addressable
       rdoc
     daemons (1.1.9)
-    database_cleaner (0.6.7)
+    database_cleaner (1.0.1)
     debug_inspector (0.0.2)
     debugger (1.6.0)
       columnize (>= 0.3.1)
@@ -121,7 +118,6 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.8.8)
       faraday (>= 0.7.4, < 0.9)
-    ffi (1.1.4)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -161,8 +157,6 @@ GEM
     launchy (2.3.0)
       addressable (~> 2.3)
     libv8 (3.11.8.17)
-    libwebsocket (0.1.5)
-      addressable
     libxml-ruby (2.6.0)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
@@ -172,7 +166,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    meta_request (0.2.5)
+    meta_request (0.2.6)
       callsite
       rack-contrib
       railties
@@ -300,15 +294,9 @@ GEM
       linecache (>= 0.3)
     ruby-fogbugz (0.1.1)
       crack
-    rubyzip (0.9.9)
     rushover (0.3.0)
       json
       rest-client
-    selenium-webdriver (2.25.0)
-      childprocess (>= 0.2.5)
-      libwebsocket (~> 0.1.3)
-      multi_json (~> 1.0)
-      rubyzip
     simple_oauth (0.2.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -340,7 +328,7 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    underscore-rails (1.4.2.1)
+    underscore-rails (1.4.4)
     unicorn (4.6.2)
       kgio (~> 2.6)
       rack
@@ -352,7 +340,7 @@ GEM
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
     xmpp4r (0.5)
-    xpath (0.1.4)
+    xpath (2.0.0)
       nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
 
@@ -372,7 +360,7 @@ DEPENDENCIES
   capistrano
   capybara
   coveralls
-  database_cleaner (~> 0.6.0)
+  database_cleaner
   debugger
   devise (~> 1.5.4)
   email_spec

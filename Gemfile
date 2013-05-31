@@ -103,7 +103,7 @@ end
 group :test do
   gem 'capybara'
   gem 'launchy'
-  gem 'database_cleaner', '~> 0.6.0'
+  gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', :require => false
