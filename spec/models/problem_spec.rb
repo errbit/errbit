@@ -3,9 +3,6 @@ require 'spec_helper'
 describe Problem do
   describe "Fabrication" do
     context "Fabricate(:problem)" do
-      it 'should be valid' do
-        Fabricate.build(:problem).should be_valid
-      end
       it 'should have no comment' do
         lambda do
           Fabricate(:problem)
@@ -14,9 +11,6 @@ describe Problem do
     end
 
     context "Fabricate(:problem_with_comments)" do
-      it 'should be valid' do
-        Fabricate.build(:problem_with_comments).should be_valid
-      end
       it 'should have 3 comments' do
         lambda do
           Fabricate(:problem_with_comments)
@@ -25,9 +19,6 @@ describe Problem do
     end
 
     context "Fabricate(:problem_with_errs)" do
-      it 'should be valid' do
-        Fabricate.build(:problem_with_errs).should be_valid
-      end
       it 'should have 3 errs' do
         lambda do
           Fabricate(:problem_with_errs)
