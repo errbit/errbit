@@ -101,7 +101,8 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  # Capybara 2.1.0 no more support 1.8.7 ruby version
+  gem 'capybara', "~> 2.0.1"
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
