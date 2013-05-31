@@ -16,7 +16,7 @@ gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer'
 # fabrication 1.3.0 is last supporting ruby 1.8. Update when stop supporting this version too
 gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
-gem 'rails_autolink', '~> 1.0.9'
+gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
@@ -36,7 +36,7 @@ gem 'pivotal-tracker'
 # Fogbugz
 gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
-gem 'octokit', '~> 1.0.0'
+gem 'octokit'
 # Gitlab
 gem 'gitlab', :git => 'https://github.com/NARKOZ/gitlab.git'
 
