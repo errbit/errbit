@@ -104,7 +104,8 @@ group :test do
   # Capybara 2.1.0 no more support 1.8.7 ruby version
   gem 'capybara', "~> 2.0.1"
   gem 'launchy'
-  gem 'database_cleaner'
+  # DatabaseCleaner 1.0.0 drop the support of ruby 1.8.7
+  gem 'database_cleaner', '~> 0.9.0'
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', :require => false
