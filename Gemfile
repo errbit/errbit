@@ -122,6 +122,8 @@ group :assets do
   gem 'execjs'
   gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
+  gem 'jquery-rails'
+  gem 'pjax_rails'
   gem 'underscore-rails'
   gem 'turbo-sprockets-rails3'
 end
