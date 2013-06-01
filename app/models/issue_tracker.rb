@@ -15,6 +15,7 @@ class IssueTracker
   field :password, :type => String
   field :ticket_properties, :type => String
   field :subdomain, :type => String
+  field :milestone_id, :type => String
 
   validate :check_params
 
@@ -40,4 +41,3 @@ class IssueTracker
     project_id.present?
   end
 end
-

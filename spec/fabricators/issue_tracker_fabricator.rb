@@ -33,3 +33,8 @@ Fabricator :bitbucket_issues_tracker, :from => :issue_tracker, :class_name => "I
   project_id 'password'
   api_token 'test_username'
 end
+
+Fabricator :unfuddle_issues_tracker, :from => :issue_tracker, :class_name => "IssueTrackers::UnfuddleTracker" do
+  account 'test'
+  project_id 15
+end
