@@ -1,15 +1,13 @@
 require 'spec_helper'
 
 describe IssueTrackers::UnfuddleTracker do
+
+  let(:issue_link) { "https://test.unfuddle.com/projects/15/tickets/2436" }
+  let(:notice) { Fabricate :notice }
+  let(:tracker) { Fabricate :unfuddle_issues_tracker, :app => notice.app }
+  let(:problem) { notice.problem }
+
   it "should create an issue on Unfuddle Issues with problem params, and set issue link for problem" do
-    repo = "test_user/test_repo"
-    notice = Fabricate :notice
-    tracker = Fabricate :unfuddle_issues_tracker, :app => notice.app
-    problem = notice.problem
-
-    number = 123
-    @issue_link = "https://test.unfuddle.com/projects/15/tickets/2436"
-
 project_xml = <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
@@ -73,6 +71,7 @@ EOF
   <updated-at>2013-03-07T16:04:05Z</updated-at>
 </ticket>
 EOF
+
     stub_request(:get, "https://#{tracker.username}:#{tracker.password}@test.unfuddle.com/api/v1/projects/#{tracker.project_id}.xml").
       with(:headers => {'Accept'=>'application/xml', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => project_xml, :headers => {})
@@ -88,6 +87,7 @@ EOF
     WebMock.should requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
     WebMock.should requested.with(:content => /See this exception on Errbit/)
 
-    problem.issue_link.should == @issue_link
+    problem.issue_link.should == issue_link
+    problem.issue_type.should == IssueTrackers::UnfuddleTracker::Label
   end
 end

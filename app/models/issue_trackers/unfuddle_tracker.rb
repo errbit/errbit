@@ -50,7 +50,7 @@ class IssueTrackers::UnfuddleTracker < IssueTracker
 
       issue = unfuddle.project(project_id.to_i).ticket!(issue_options)
       problem.update_attributes(
-                                :issue_link => "https://#{account}.unfuddle.com/projects/#{project_id}/tickets/#{issue['id']}",
+                                :issue_link => File.join("#{url}/tickets/#{issue['id']}"),
                                 :issue_type => Label
                                 )
     rescue ActiveResource::UnauthorizedAccess
@@ -64,6 +64,6 @@ class IssueTrackers::UnfuddleTracker < IssueTracker
   end
 
   def url
-    "https://devmen.unfuddle.com/projects/#{project_id}"
+    "https://#{account}.unfuddle.com/projects/#{project_id}"
   end
 end
