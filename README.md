@@ -413,6 +413,14 @@ card_type = Defect, status = Open, priority = Essential
 * To authenticate, Errbit uses token-based authentication. Get your API Key in your user settings (or create special user for this purpose)
 * You also need to provide project ID (it needs to be Number) for issues to be created
 
+**Unfuddle Issues Integration**
+
+* Account is your unfuddle domain
+* Username your unfuddle username
+* Password your unfuddle password
+* Project id the id of your project where your ticket is create
+* Milestone id the id of your milestone where your ticket is create
+
 
 What if Errbit has an error?
 ----------------------------
