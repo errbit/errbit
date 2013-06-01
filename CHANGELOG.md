@@ -3,6 +3,8 @@
 ### Improvements
 
 - Update some gems ([@shingara][])
+- [#492][] Improve some Pjax call ([@nfedyashev][])
+- [#428][] Add the support of Unfuddle Tracker ([@parallel588][])
 
 ### Bug Fixes
 
@@ -40,7 +42,10 @@
 - [#478][] Fix issue about calculation of statisque of problem after
   merge ([@shingara][])
 
+<!-- Issue fix -->
+
 [#343]: https://github.com/errbit/errbit/issues/343
+[#428]: https://github.com/errbit/errbit/issues/428
 [#453]: https://github.com/errbit/errbit/issues/453
 [#455]: https://github.com/errbit/errbit/issues/455
 [#457]: https://github.com/errbit/errbit/issues/457
@@ -54,6 +59,10 @@
 [#478]: https://github.com/errbit/errbit/issues/478
 [#487]: https://github.com/errbit/errbit/issues/487
 [#486]: https://github.com/errbit/errbit/issues/486
+[#492]: https://github.com/errbit/errbit/issues/492
+
+<!-- Contributor on Errbit Thanks to all of them -->
+
 [@SamSaffron]: https://github.com/SamSaffron
 [@adamjt]: https://github.com/adamjt
 [@alvarobp]: https://github.com/alvarobp
@@ -65,3 +74,6 @@
 [@ivanyv]: https://github.com/ivanyv
 [@manuelmeurer]: https://github.com/manuelmeurer
 [@tvdeyen]: https://github.com/tvdeyen
+[@nfedyashev]: https://github.com/nfedyashev
+[@parallel588]: https://github.com/parallel588
+
