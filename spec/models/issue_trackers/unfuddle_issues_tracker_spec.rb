@@ -73,7 +73,6 @@ EOF
 EOF
 
     stub_request(:get, "https://#{tracker.username}:#{tracker.password}@test.unfuddle.com/api/v1/projects/#{tracker.project_id}.xml").
-      with(:headers => {'Accept'=>'application/xml', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => project_xml, :headers => {})
 
 
