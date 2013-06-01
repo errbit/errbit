@@ -22,10 +22,6 @@ class ProblemsController < ApplicationController
     @notices  = @problem.notices.reverse_ordered.page(params[:notice]).per(1)
     @notice   = @notices.first
     @comment = Comment.new
-    if request.headers['X-PJAX']
-      params["_pjax"] = nil
-      render :layout => false
-    end
   end
 
   def create_issue
