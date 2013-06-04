@@ -19,8 +19,6 @@ class User
   validates_presence_of :name
   validates_uniqueness_of :github_login, :allow_nil => true
 
-  attr_protected :admin
-
   has_many :apps, :foreign_key => 'watchers.user_id'
 
   if Errbit::Config.user_has_username

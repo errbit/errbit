@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'users/show.html.haml' do
+
   let(:user) do
     stub_model(User, :created_at => Time.now, :email => "test@example.com")
   end
@@ -8,12 +9,12 @@ describe 'users/show.html.haml' do
   before do
     Errbit::Config.stub(:github_authentication) { true }
     controller.stub(:current_user) { stub_model(User) }
+    view.stub(:user) { user }
   end
 
   context 'with GitHub authentication' do
     it 'shows github login' do
       user.github_login = 'test_user'
-      assign :user, user
       render
       rendered.should match(/GitHub/)
       rendered.should match(/test_user/)
@@ -21,7 +22,6 @@ describe 'users/show.html.haml' do
 
     it 'does not show github if blank' do
       user.github_login = ' '
-      assign :user, user
       render
       rendered.should_not match(/GitHub/)
     end
@@ -30,7 +30,6 @@ describe 'users/show.html.haml' do
   context "Linking GitHub account" do
     context 'viewing another user page' do
       it "doesn't show and github linking buttons if user is not current user" do
-        assign :user, user
         render
         view.content_for(:action_bar).should_not include('Link GitHub account')
         view.content_for(:action_bar).should_not include('Unlink GitHub account')
@@ -40,7 +39,6 @@ describe 'users/show.html.haml' do
     context 'viewing own user page' do
       before do
         controller.stub(:current_user) { user }
-        assign :user, user
       end
 
       it 'shows link github button when no login or token' do
