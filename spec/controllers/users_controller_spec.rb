@@ -183,24 +183,18 @@ describe UsersController do
 
     context "PUT /users/:id" do
       context "when the update is successful" do
+        before {
+          put :update, :id => user.to_param, :user => user_params
+        }
 
-        it "sets a message to display" do
-          put :update, :id => user.to_param, :user => {:name => 'Kermit'}
-          request.flash[:success].should include('updated')
-        end
-
-        it "redirects to the user's page" do
-          put :update, :id => user.to_param, :user => {:name => 'Kermit'}
-          response.should redirect_to(user_path(user))
-        end
-
-        it "should be able to make user an admin" do
-          put :update, :id => user.to_param, :user => {:admin => true}
-          response.should be_redirect
-          User.find(controller.user.to_param).admin.should be_true
+        context "with normal params" do
+          let(:user_params) { {:name => 'Kermit'} }
+          it "sets a message to display" do
+            expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.update.success', :name => user.name)
+            expect(response).to redirect_to(user_path(user))
+          end
         end
       end
-
       context "when the update is unsuccessful" do
 
         it "renders the edit page" do
@@ -238,6 +232,36 @@ describe UsersController do
         end
       end
     end
+
+    describe "#user_params" do
+      context "with current user not admin" do
+        before {
+          controller.stub(:current_user).and_return(user)
+          controller.stub(:params).and_return(ActionController::Parameters.new(user_param))
+        }
+        let(:user_param) { {'user' => { :name => 'foo', :admin => true }} }
+        it 'not have admin field' do
+          expect(controller.send(:user_params)).to eq ({'name' => 'foo'})
+        end
+        context "with password and password_confirmation empty?" do
+          let(:user_param) { {'user' => { :name => 'foo', 'password' => '', 'password_confirmation' => '' }} }
+          it 'not have password and password_confirmation field' do
+            expect(controller.send(:user_params)).to eq ({'name' => 'foo'})
+          end
+        end
+      end
+
+      context "with current user admin" do
+        it 'have admin field'
+        context "with password and password_confirmation empty?" do
+          it 'not have password and password_confirmation field'
+        end
+        context "on his own user" do
+          it 'not have admin field'
+        end
+      end
+    end
+
   end
 
 end

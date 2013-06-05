@@ -25,26 +25,25 @@ class UsersController < ApplicationController
   end
 
   def update
-    # Devise Hack
-    # if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-    #   params[:user].delete(:password)
-    #   params[:user].delete(:password_confirmation)
-    # end
-
     if user.update_attributes(user_params)
-      flash[:success] = "#{user.name}'s information was successfully updated"
+      flash[:success] = I18n.t('controllers.users.flash.update.success', :name => user.name)
       redirect_to user_path(user)
     else
       render :edit
     end
   end
 
+  ##
+  # Destroy the user pass in args
+  #
+  # @param [ String ] id the id of user we want delete
+  #
   def destroy
     if user == current_user
       flash[:error] = I18n.t('controllers.users.flash.destroy.error')
     else
       UserDestroy.new(user).destroy
-      flash[:success] = "That's sad. #{user.name} is no longer part of your team."
+      flash[:success] = I18n.t('controllers.users.flash.destroy.success', :name => user.name)
     end
     redirect_to users_path
   end
@@ -62,13 +61,18 @@ class UsersController < ApplicationController
     end
 
   def user_params
-    params[:user] ? params.require(:user).permit(*user_permit_params) : {}
+    @user_params ||= params[:user] ? params.require(:user).permit(*user_permit_params) : {}
   end
 
   def user_permit_params
-    @user_permit_params ||= [:name, :username, :email, :github_login, :per_page, :time_zone, :password, :password_confirmation]
-    @user_permit_params << :admin if current_user.admin?
+    @user_permit_params ||= [:name,:username, :email, :github_login, :per_page, :time_zone]
+    @user_permit_params << :admin if current_user.admin? && current_user.id != params[:id]
+    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all?{|pa| !pa.blank? }
     @user_permit_params
+  end
+
+  def user_password_params
+    @user_password_params ||= params[:user] ? params.require(:user).permit(:password, :password_confirmation) : {}
   end
 
 end
