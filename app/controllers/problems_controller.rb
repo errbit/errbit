@@ -19,7 +19,9 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    @notices  = @problem.notices.reverse_ordered.page(params[:notice]).per(1)
+    all_notices = @problem.notices
+    notice_index = params[:notice] || all_notices.count
+    @notices  = all_notices.page(notice_index).per(1)
     @notice   = @notices.first
     @comment = Comment.new
   end
