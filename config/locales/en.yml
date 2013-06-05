@@ -14,3 +14,11 @@ en:
   n_errs_have:
     one:   "%{count} err has"
     other: "%{count} errs have"
+
+
+  controllers:
+    users:
+      flash:
+        destroy:
+          success: "That's sad. %{name} is no longer part of your team."
+          error: "You can't delete yourself"

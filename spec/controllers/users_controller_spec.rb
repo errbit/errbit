@@ -212,19 +212,30 @@ describe UsersController do
 
     context "DELETE /users/:id" do
 
-      it "destroys the user" do
-        delete :destroy, :id => user.id
-        User.where(:id => user.id).first.should be_nil
+      context "with a destroy success" do
+        let(:user_destroy) { mock(:destroy => true) }
+
+        before {
+          UserDestroy.should_receive(:new).with(user).and_return(user_destroy)
+          delete :destroy, :id => user.id
+        }
+
+        it 'should destroy user' do
+          expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.destroy.success', :name => user.name)
+          response.should redirect_to(users_path)
+        end
       end
 
-      it "redirects to the users index page" do
-        delete :destroy, :id => user.id
-        response.should redirect_to(users_path)
-      end
+      context "with trying destroy himself" do
+        before {
+          UserDestroy.should_not_receive(:new)
+          delete :destroy, :id => admin.id
+        }
 
-      it "sets a message to display" do
-        delete :destroy, :id => user.id
-        request.flash[:success].should include('no longer part of your team')
+        it 'should not destroy user' do
+          response.should redirect_to(users_path)
+          expect(request.flash[:error]).to eq I18n.t('controllers.users.flash.destroy.error')
+        end
       end
     end
   end

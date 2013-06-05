@@ -40,9 +40,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user.destroy
-
-    flash[:success] = "That's sad. #{user.name} is no longer part of your team."
+    if user == current_user
+      flash[:error] = I18n.t('controllers.users.flash.destroy.error')
+    else
+      UserDestroy.new(user).destroy
+      flash[:success] = "That's sad. #{user.name} is no longer part of your team."
+    end
     redirect_to users_path
   end
 

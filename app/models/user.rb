@@ -13,7 +13,6 @@ class User
   field :per_page, :type => Fixnum, :default => PER_PAGE
   field :time_zone, :default => "UTC"
 
-  after_destroy :destroy_watchers
   before_save :ensure_authentication_token
 
   validates_presence_of :name
@@ -57,10 +56,5 @@ class User
     self[:github_login] = login
   end
 
-  protected
-
-    def destroy_watchers
-      watchers.each(&:destroy)
-    end
 end
 
