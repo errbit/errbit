@@ -17,7 +17,7 @@ gem 'strong_parameters'
 gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
-gem 'rack-ssl-enforcer'
+gem 'rack-ssl-enforcer', :require => false
 # fabrication 1.3.0 is last supporting ruby 1.8. Update when stop supporting this version too
 gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
 gem 'rails_autolink'
