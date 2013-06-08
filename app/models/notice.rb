@@ -1,4 +1,3 @@
-require 'hoptoad'
 require 'recurse'
 
 class Notice
