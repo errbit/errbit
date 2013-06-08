@@ -49,15 +49,6 @@ describe User do
       user.watchers.should include(watcher)
     end
 
-    it "destroys any related watchers when it is destroyed" do
-      user = Fabricate(:user)
-      app  = Fabricate(:app)
-      watcher = Fabricate(:user_watcher, :app => app, :user => user)
-      user.watchers.should_not be_empty
-      user.destroy
-      app.reload.watchers.should_not include(watcher)
-    end
-
     it "has many apps through watchers" do
       user = Fabricate(:user)
       watched_app  = Fabricate(:app)

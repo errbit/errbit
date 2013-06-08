@@ -5,6 +5,8 @@
 - Update some gems ([@shingara][])
 - [#492][] Improve some Pjax call ([@nfedyashev][])
 - [#428][] Add the support of Unfuddle Tracker ([@parallel588][])
+- Avoid to delete his own user ([@shingara][])
+- [#456] Avoid to delete admin access of current user logged ([@shingara][])
 
 ### Bug Fixes
 
@@ -48,6 +50,7 @@
 [#428]: https://github.com/errbit/errbit/issues/428
 [#453]: https://github.com/errbit/errbit/issues/453
 [#455]: https://github.com/errbit/errbit/issues/455
+[#456]: https://github.com/errbit/errbit/issues/456
 [#457]: https://github.com/errbit/errbit/issues/457
 [#460]: https://github.com/errbit/errbit/issues/460
 [#466]: https://github.com/errbit/errbit/issues/466
