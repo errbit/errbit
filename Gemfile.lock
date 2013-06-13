@@ -122,6 +122,9 @@ GEM
     faraday_middleware (0.8.8)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.8.1)
+    flowdock (0.3.1)
+      httparty (~> 0.7)
+      multi_json
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -397,6 +400,7 @@ DEPENDENCIES
   email_spec
   execjs
   fabrication (~> 1.3.0)
+  flowdock
   foreman
   gitlab!
   haml

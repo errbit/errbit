@@ -65,6 +65,8 @@ gem 'hoi'
 gem 'rushover'
 # Hubot
 gem 'httparty'
+# Flowdock
+gem 'flowdock'
 
 # Authentication
 # ---------------------------------------
