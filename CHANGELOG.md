@@ -11,6 +11,8 @@
 ### Bug Fixes
 
 - [#343][] Fix the ical generation. ([@shingara][])
+- [#503][] Fix issue on where the service_url choose never use. ([@nfedyashev][])
+- [#506][] Fix issue on bitbucket issue tracker creation failed. ([@Gonzih][])
 
 ## 0.1.0 - 2013-05-29
 
@@ -63,6 +65,8 @@
 [#487]: https://github.com/errbit/errbit/issues/487
 [#486]: https://github.com/errbit/errbit/issues/486
 [#492]: https://github.com/errbit/errbit/issues/492
+[#503]: https://github.com/errbit/errbit/issues/503
+[#506]: https://github.com/errbit/errbit/issues/506
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
@@ -79,4 +83,5 @@
 [@tvdeyen]: https://github.com/tvdeyen
 [@nfedyashev]: https://github.com/nfedyashev
 [@parallel588]: https://github.com/parallel588
+[@Gonzih]: https://github.com/Gonzih
 
