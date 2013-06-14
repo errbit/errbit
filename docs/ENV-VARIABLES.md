@@ -41,6 +41,10 @@ You can allow the GITHUB auth
 
 ## Email sending configuration
 
+You can define how you connect your email sending system By all of this
+information. All mail can be send only by SMTP if you use variable
+system
+
 * SMTP_SERVER
 * SMTP_PORT
 * SMTP_USERNAME
@@ -49,8 +53,16 @@ You can allow the GITHUB auth
 
 ## MongoDB
 
+You can define your MongoDB connection by 2 ways. If you have an URL,
+you can define one of this ENV variables. All independently can works
+
 * MONGOLAB_URI
 * MONGOHQ_URL
+
+If you have a complete MongoDB connection you can define it by all
+information associate to your MongoDB connection. You need define all
+variable.
+
 * MONGOID_HOST
 * MONGOID_PORT
 * MONGOID_USERNAME
