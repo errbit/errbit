@@ -48,6 +48,13 @@ describe Api::V1::NoticesController do
         expect(notices.length).to eq 4
       end
 
+      it "should return the right fields for each notice" do
+        get :index, {:auth_token => @user.authentication_token}
+        expect(response).to be_success
+        notice = JSON.load(response.body).first.fetch("notice")
+        expect(notice.keys).to match_array(%w{created_at message error_class app_id app_name})
+      end
+
     end
   end
 

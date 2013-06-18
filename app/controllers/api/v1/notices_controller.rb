@@ -2,8 +2,8 @@ class Api::V1::NoticesController < ApplicationController
   respond_to :json, :xml
 
   def index
-    fields = %w{created_at message error_class}
-    notices = Notice.select(fields)
+    fields = %w{notices.created_at notices.message notices.error_class problems.app_id problems.app_name}
+    notices = Notice.select(fields).joins(:err => :problem)
 
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
