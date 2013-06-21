@@ -11,7 +11,7 @@ feature 'Sign in with GitHub' do
 
     visit '/'
     click_link 'Sign in with GitHub'
-    page.should have_content 'Successfully authorized from GitHub account'
+    page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => 'GitHub')
   end
 
   scenario 'reject unrecognized user if authenticating via GitHub' do
