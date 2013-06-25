@@ -6,7 +6,10 @@
 - [#492][] Improve some Pjax call ([@nfedyashev][])
 - [#428][] Add the support of Unfuddle Tracker ([@parallel588][])
 - Avoid to delete his own user ([@shingara][])
-- [#456] Avoid to delete admin access of current user logged ([@shingara][])
+- [#456][] Avoid to delete admin access of current user logged ([@shingara][])
+- [#253][] Refactor the Fingerprint generation ([@boblail][])
+- [#508][] Merge comments to when you merge problems ([@shingara][])
+- Update the Devise Gem to the last one ([@shingara][])
 
 ### Bug Fixes
 
@@ -48,6 +51,7 @@
 
 <!-- Issue fix -->
 
+[#253]: https://github.com/errbit/errbit/issues/253
 [#343]: https://github.com/errbit/errbit/issues/343
 [#428]: https://github.com/errbit/errbit/issues/428
 [#453]: https://github.com/errbit/errbit/issues/453
@@ -67,6 +71,7 @@
 [#492]: https://github.com/errbit/errbit/issues/492
 [#503]: https://github.com/errbit/errbit/issues/503
 [#506]: https://github.com/errbit/errbit/issues/506
+[#508]: https://github.com/errbit/errbit/issues/508
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
@@ -84,4 +89,4 @@
 [@nfedyashev]: https://github.com/nfedyashev
 [@parallel588]: https://github.com/parallel588
 [@Gonzih]: https://github.com/Gonzih
-
+[@boblail]: https://github.com/boblail
