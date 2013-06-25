@@ -15,7 +15,7 @@ gem 'inherited_resources'
 gem 'decent_exposure'
 gem 'strong_parameters'
 gem 'SystemTimer', :platform => :ruby_18
-gem 'actionmailer_inline_css', "~> 1.3.0"
+gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer'
 # fabrication 1.3.0 is last supporting ruby 1.8. Update when stop supporting this version too
@@ -92,6 +92,7 @@ group :development, :test do
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
+  gem 'quiet_assets'
 end
 
 group :development do
