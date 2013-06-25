@@ -134,8 +134,7 @@ GEM
     hashie (1.2.0)
     highline (1.6.19)
     hike (1.2.3)
-    hipchat (0.9.0)
-      httparty
+    hipchat (0.10.0)
       httparty
     hoi (0.0.6)
       httparty (> 0.6.0)
