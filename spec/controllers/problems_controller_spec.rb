@@ -171,8 +171,8 @@ describe ProblemsController do
           assigns(:notices).should include(notices.last)
         end
 
-        it "paginates the notices 1 at a time, based on then notice param" do
-          get :show, :app_id => app.id, :id => err.problem.id, :notice => 3
+        it "paginates the notices 1 at a time, based on the notice param" do
+          get :show, :app_id => app.id, :id => err.problem.id, :notice => 1
           assigns(:notices).entries.count.should == 1
           assigns(:notices).should include(notices.first)
         end
