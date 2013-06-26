@@ -21,6 +21,15 @@ en:
       errbit: 'Errbit'
       powered_html: "Powered by %{link} : the open source error catcher."
 
+  shared:
+    navigation:
+      apps: 'Apps'
+      errors: 'Errors'
+      users: 'Users'
+    session:
+      sign_out: 'Sign out'
+      edit_profile: 'Edit profile'
+
   controllers:
     users:
       flash:
