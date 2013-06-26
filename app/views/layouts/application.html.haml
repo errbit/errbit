@@ -2,7 +2,8 @@
 %html
   %head
     %title
-      Errbit &mdash;
+      = t('.title')
+      &mdash;
       = yield(:page_title).present? ? yield(:page_title) : yield(:title)
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
     = favicon_link_tag
@@ -14,7 +15,7 @@
   %body{:id => controller.controller_name, :class => controller.action_name}
     #header
       %div
-        = link_to 'Errbit', root_path, :id => 'site-name'
+        = link_to t('.errbit'), root_path, :id => 'site-name'
         = render 'shared/navigation' if current_user
         = render 'shared/session'
     #content-wrapper
@@ -30,5 +31,5 @@
       - if content_for?(:comments)
         #content-comments
           = yield :comments
-    #footer Powered by #{link_to 'Errbit', 'http://github.com/errbit/errbit', :target => '_blank'}: the open source error catcher.
+    #footer= t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
     = yield :scripts
