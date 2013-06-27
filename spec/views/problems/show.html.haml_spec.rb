@@ -6,7 +6,7 @@ describe "problems/show.html.haml" do
     comment = Fabricate(:comment)
     assign :problem, problem
     assign :comment, comment
-    assign :app, problem.app
+    view.stub(:app).and_return(problem.app)
     assign :notices, problem.notices.page(1).per(1)
     assign :notice, problem.notices.first
     controller.stub(:current_user) { Fabricate(:user) }
@@ -15,7 +15,7 @@ describe "problems/show.html.haml" do
   def with_issue_tracker(tracker, problem)
     problem.app.issue_tracker = tracker.new :api_token => "token token token", :project_id => "1234"
     assign :problem, problem
-    assign :app, problem.app
+    view.stub(:app).and_return(problem.app)
   end
 
   describe "content_for :action_bar" do
@@ -55,7 +55,7 @@ describe "problems/show.html.haml" do
       controller.request.env['HTTP_REFERER'] = nil
       problem = Fabricate(:problem_with_comments)
       assign :problem, problem
-      assign :app, problem.app
+      view.stub(:app).and_return(problem.app)
       render
 
       action_bar.should have_selector("span a.up[href='#{app_problems_path(problem.app)}']", :text => 'up')
@@ -68,7 +68,7 @@ describe "problems/show.html.haml" do
 
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
         assign :problem, problem
-        assign :app, problem.app
+        view.stub(:app).and_return(problem.app)
         render
 
         action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
@@ -78,10 +78,52 @@ describe "problems/show.html.haml" do
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
         with_issue_tracker(GithubIssuesTracker, problem)
         assign :problem, problem
-        assign :app, problem.app
+        view.stub(:app).and_return(problem.app)
         render
 
         action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
+      end
+
+      context "without issue tracker associate on app" do
+        let(:problem){ Problem.new(:new_record => false, :app => app) }
+        let(:app) { App.new(:new_record => false) }
+
+        it 'not see link to create issue' do
+          assign :problem, problem
+          view.stub(:app).and_return(problem.app)
+          render
+          expect(view.content_for(:action_bar)).to_not match(/create issue/)
+        end
+
+      end
+
+      context "with lighthouse tracker on app" do
+        let(:app) { App.new(:new_record => false, :issue_tracker => tracker ) }
+        let(:tracker) {
+          IssueTrackers::LighthouseTracker.new(:project_id => 'x')
+        }
+        context "with problem without issue link" do
+          let(:problem){ Problem.new(:new_record => false, :app => app) }
+          it 'not see link if no issue tracker' do
+            assign :problem, problem
+            view.stub(:app).and_return(problem.app)
+            render
+            expect(view.content_for(:action_bar)).to match(/create issue/)
+          end
+
+        end
+
+        context "with problem with issue link" do
+          let(:problem){ Problem.new(:new_record => false, :app => app, :issue_link => 'http://foo') }
+
+          it 'not see link if no issue tracker' do
+            assign :problem, problem
+            view.stub(:app).and_return(problem.app)
+            render
+            expect(view.content_for(:action_bar)).to_not match(/create issue/)
+          end
+        end
+
       end
     end
   end
@@ -95,7 +137,7 @@ describe "problems/show.html.haml" do
     it 'should display comments and new comment form when no issue tracker' do
       problem = Fabricate(:problem_with_comments)
       assign :problem, problem
-      assign :app, problem.app
+      view.stub(:app).and_return(problem.app)
       render
 
       view.content_for(:comments).should include('Test comment')

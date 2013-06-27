@@ -1,9 +1,23 @@
+##
+# Manage problems
+#
+# List of actions available :
+# MEMBER => :show, :edit, :update, :create, :destroy, :resolve, :unresolve, :create_issue, :unlink_issue
+# COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
-  before_filter :find_app, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search]
+
   before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search]
   before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :set_sorting_params, :only => [:index, :all, :search]
   before_filter :set_tracker_params, :only => [:create_issue]
+
+  expose(:app) {
+    if current_user.admin?
+      App.find(params[:app_id])
+    else
+      current_user.apps.find(params[:app_id])
+    end
+  }
 
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
@@ -31,12 +45,12 @@ class ProblemsController < ApplicationController
       flash[:error] = issue_creation.errors[:base].first
     end
 
-    redirect_to app_problem_path(@app, @problem)
+    redirect_to app_problem_path(app, @problem)
   end
 
   def unlink_issue
     @problem.update_attribute :issue_link, nil
-    redirect_to app_problem_path(@app, @problem)
+    redirect_to app_problem_path(app, @problem)
   end
 
   def resolve
@@ -44,7 +58,7 @@ class ProblemsController < ApplicationController
     flash[:success] = 'Great news everyone! The err has been resolved.'
     redirect_to :back
   rescue ActionController::RedirectBackError
-    redirect_to app_path(@app)
+    redirect_to app_path(app)
   end
 
   def resolve_several
@@ -94,16 +108,9 @@ class ProblemsController < ApplicationController
   end
 
   protected
-    def find_app
-      @app = App.find(params[:app_id])
-
-      # Mongoid Bug: could not chain: current_user.apps.find_by_id!
-      # apparently finding by 'watchers.email' and 'id' is broken
-      raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
-    end
 
     def find_problem
-      @problem = @app.problems.find(params[:id])
+      @problem = app.problems.find(params[:id])
     end
 
     def set_tracker_params
