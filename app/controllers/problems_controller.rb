@@ -6,7 +6,6 @@
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
 
-  before_filter :find_problem, :except => [:index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search]
   before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :set_sorting_params, :only => [:index, :all, :search]
   before_filter :set_tracker_params, :only => [:create_issue]
@@ -17,6 +16,9 @@ class ProblemsController < ApplicationController
     else
       current_user.apps.find(params[:app_id])
     end
+  }
+  expose(:problem) {
+    app.problems.find(params[:id])
   }
 
   def index
@@ -33,28 +35,28 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    @notices  = @problem.notices.reverse_ordered.page(params[:notice]).per(1)
+    @notices  = problem.notices.reverse_ordered.page(params[:notice]).per(1)
     @notice   = @notices.first
     @comment = Comment.new
   end
 
   def create_issue
-    issue_creation = IssueCreation.new(@problem, current_user, params[:tracker])
+    issue_creation = IssueCreation.new(problem, current_user, params[:tracker])
 
     unless issue_creation.execute
       flash[:error] = issue_creation.errors[:base].first
     end
 
-    redirect_to app_problem_path(app, @problem)
+    redirect_to app_problem_path(app, problem)
   end
 
   def unlink_issue
-    @problem.update_attribute :issue_link, nil
-    redirect_to app_problem_path(app, @problem)
+    problem.update_attribute :issue_link, nil
+    redirect_to app_problem_path(app, problem)
   end
 
   def resolve
-    @problem.resolve!
+    problem.resolve!
     flash[:success] = 'Great news everyone! The err has been resolved.'
     redirect_to :back
   rescue ActionController::RedirectBackError
@@ -108,10 +110,6 @@ class ProblemsController < ApplicationController
   end
 
   protected
-
-    def find_problem
-      @problem = app.problems.find(params[:id])
-    end
 
     def set_tracker_params
       IssueTracker.default_url_options[:host] = request.host

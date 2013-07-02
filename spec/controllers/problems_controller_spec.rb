@@ -138,7 +138,7 @@ describe ProblemsController do
 
       it "finds the problem" do
         get :show, :app_id => app.id, :id => err.problem.id
-        assigns(:problem).should == err.problem
+        controller.problem.should == err.problem
       end
 
       it "successfully render page" do
@@ -179,7 +179,7 @@ describe ProblemsController do
 
       it 'finds the problem if the user is watching the app' do
         get :show, :app_id => @watched_app.to_param, :id => @watched_err.problem.id
-        assigns(:problem).should == @watched_err.problem
+        controller.problem.should == @watched_err.problem
       end
 
       it 'raises a DocumentNotFound error if the user is not watching the app' do
@@ -205,7 +205,7 @@ describe ProblemsController do
       @problem.app.problems.should_receive(:find).and_return(@problem.problem)
       put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
       controller.app.should == @problem.app
-      assigns(:problem).should == @problem.problem
+      controller.problem.should == @problem.problem
     end
 
     it "should resolve the issue" do

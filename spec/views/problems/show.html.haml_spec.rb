@@ -1,20 +1,23 @@
 require 'spec_helper'
 
 describe "problems/show.html.haml" do
+  let(:problem) { Fabricate(:problem) }
+  let(:comment) { Fabricate(:comment) }
+
   before do
-    problem = Fabricate(:problem)
-    comment = Fabricate(:comment)
-    assign :problem, problem
-    assign :comment, comment
     view.stub(:app).and_return(problem.app)
+    view.stub(:problem).and_return(problem)
+
+    assign :comment, comment
     assign :notices, problem.notices.page(1).per(1)
     assign :notice, problem.notices.first
+
     controller.stub(:current_user) { Fabricate(:user) }
   end
 
   def with_issue_tracker(tracker, problem)
     problem.app.issue_tracker = tracker.new :api_token => "token token token", :project_id => "1234"
-    assign :problem, problem
+    view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end
 
@@ -54,7 +57,7 @@ describe "problems/show.html.haml" do
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
       controller.request.env['HTTP_REFERER'] = nil
       problem = Fabricate(:problem_with_comments)
-      assign :problem, problem
+      view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
       render
 
@@ -67,7 +70,7 @@ describe "problems/show.html.haml" do
         controller.stub(:current_user) { user }
 
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
-        assign :problem, problem
+        view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
 
@@ -77,7 +80,7 @@ describe "problems/show.html.haml" do
       it 'should allow creating issue for github if application has a github tracker' do
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
         with_issue_tracker(GithubIssuesTracker, problem)
-        assign :problem, problem
+        view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
 
@@ -89,7 +92,7 @@ describe "problems/show.html.haml" do
         let(:app) { App.new(:new_record => false) }
 
         it 'not see link to create issue' do
-          assign :problem, problem
+          view.stub(:problem).and_return(problem)
           view.stub(:app).and_return(problem.app)
           render
           expect(view.content_for(:action_bar)).to_not match(/create issue/)
@@ -105,7 +108,7 @@ describe "problems/show.html.haml" do
         context "with problem without issue link" do
           let(:problem){ Problem.new(:new_record => false, :app => app) }
           it 'not see link if no issue tracker' do
-            assign :problem, problem
+            view.stub(:problem).and_return(problem)
             view.stub(:app).and_return(problem.app)
             render
             expect(view.content_for(:action_bar)).to match(/create issue/)
@@ -117,7 +120,7 @@ describe "problems/show.html.haml" do
           let(:problem){ Problem.new(:new_record => false, :app => app, :issue_link => 'http://foo') }
 
           it 'not see link if no issue tracker' do
-            assign :problem, problem
+            view.stub(:problem).and_return(problem)
             view.stub(:app).and_return(problem.app)
             render
             expect(view.content_for(:action_bar)).to_not match(/create issue/)
@@ -136,7 +139,7 @@ describe "problems/show.html.haml" do
 
     it 'should display comments and new comment form when no issue tracker' do
       problem = Fabricate(:problem_with_comments)
-      assign :problem, problem
+      view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
       render
 
