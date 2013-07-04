@@ -51,6 +51,9 @@ gem 'bitbucket_rest_api'
 gem "taskmapper", "~> 0.8.0"
 gem "taskmapper-unfuddle", "~> 0.7.0"
 
+# Jira
+gem 'jira-ruby', :require => 'jira'
+
 # Notification services
 # ---------------------------------------
 # Campfire ( We can't upgrade to 1.0 because drop support of ruby 1.8

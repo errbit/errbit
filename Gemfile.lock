@@ -123,6 +123,7 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.8.8)
       faraday (>= 0.7.4, < 0.9)
+    ffi (1.9.0)
     flowdock (0.3.1)
       httparty (~> 0.7)
       multi_json
@@ -154,6 +155,10 @@ GEM
     inherited_resources (1.4.0)
       has_scope (~> 0.5.0)
       responders (~> 0.9)
+    jira-ruby (0.1.2)
+      activesupport
+      oauth
+      railties
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -207,6 +212,7 @@ GEM
     nokogiri (1.5.10)
     nokogiri-happymapper (0.5.7)
       nokogiri (~> 1.5)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -413,6 +419,7 @@ DEPENDENCIES
   htmlentities
   httparty
   inherited_resources
+  jira-ruby
   jquery-rails (~> 2.1.4)
   kaminari (>= 0.14.1)
   launchy
