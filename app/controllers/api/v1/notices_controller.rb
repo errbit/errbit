@@ -11,7 +11,9 @@ class Api::V1::NoticesController < ApplicationController
       query = {:created_at => {"$lte" => end_date, "$gte" => start_date}}
     end
 
-    results = benchmark("[api/v1/notices_controller] query time") { Mongoid.master["notices"].find(query, :fields => fields).to_a }
+    results = benchmark("[api/v1/notices_controller] query time") do
+      Notice.where(query).with(:consistency => :strong).only(fields).to_a
+    end
 
     respond_to do |format|
       format.html { render :json => Yajl.dump(results) } # render JSON if no extension specified on path

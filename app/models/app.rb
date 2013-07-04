@@ -15,9 +15,6 @@ class App
   field :notify_on_deploys, :type => Boolean, :default => false
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
 
-  # Some legacy apps may have string as key instead of BSON::ObjectID
-  identity :type => String
-
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
@@ -61,7 +58,7 @@ class App
   end
 
   def self.find_by_api_key!(key)
-    where(:api_key => key).first || raise(Mongoid::Errors::DocumentNotFound.new(self,key))
+    find_by(:api_key => key)
   end
 
   def last_deploy_at

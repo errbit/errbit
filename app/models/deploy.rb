@@ -8,7 +8,7 @@ class Deploy
   field :revision
   field :message
 
-  index :created_at, Mongo::DESCENDING
+  index(:created_at => -1)
 
   embedded_in :app, :inverse_of => :deploys
 

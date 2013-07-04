@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'mongoid', '~> 2.7.1'
+gem 'mongoid', '~> 3.1.4'
 
 # Mongoid rails migration > 0.0.14 is not compatible to Mongoid 2.x
 gem 'mongoid_rails_migrations', '~> 0.0.14'
@@ -74,13 +74,6 @@ gem 'flowdock'
 # ---------------------------------------
 # GitHub OAuth
 gem 'omniauth-github'
-
-
-platform :ruby do
-  gem 'mongo'
-  gem 'bson'
-  gem 'bson_ext'
-end
 
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"

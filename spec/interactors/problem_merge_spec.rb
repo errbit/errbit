@@ -38,7 +38,7 @@ describe ProblemMerge do
 
     it 'move all err in one problem' do
       problem_merge.merge
-      problem.reload.errs.should eq (first_errs | merged_errs)
+      expect(problem.reload.errs.map(&:id).sort).to eq (first_errs | merged_errs).map(&:id).sort
     end
 
     it 'update problem cache' do
