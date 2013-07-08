@@ -972,8 +972,8 @@ printStackTrace.implementation.prototype = {
                     //        '" number="' + matches[3] + '" />');
                     
                     backtrace.push({
-                        'function': matches[1],
-                        file: file,
+                        'function': Util.escape(matches[1]),
+                        file: Util.escape(file),
                         line: matches[3]
                     });
                 }
