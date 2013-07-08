@@ -7,7 +7,7 @@ namespace :errbit do
     task :update_problem_attrs => :environment do
       puts "Updating problems"
       Problem.all.each{|problem|
-        ProblemUpdaterCache.new(self).update
+        ProblemUpdaterCache.new(problem).update
       }
     end
 
