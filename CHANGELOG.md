@@ -18,6 +18,7 @@
 - [#506][] Fix issue on bitbucket issue tracker creation failed. ([@Gonzih][])
 - [#514][] Add CDATA in xml return by Javascript. ([@mildavw][])
 - [#517][] Javascript escape path from javascript Notifier. ([@roryf][])
+- [#518][] Fix issue when you try launch task errbit:db:update_update_problem_attrs. ([@shingara][])
 
 ## 0.1.0 - 2013-05-29
 
