@@ -17,6 +17,14 @@ class IssueTracker
   field :subdomain, :type => String
   field :milestone_id, :type => String
 
+  # Is there any better way to enhance the props? Putting them into the subclass leads to
+  # an error while rendering the form fields -.-
+  field :base_url, :type => String
+  field :context_path, :type => String
+  field :issue_type, :type => String
+  field :issue_component, :type => String
+  field :issue_priority, :type => String
+
   validate :check_params
 
   # Subclasses are responsible for overwriting this method.
