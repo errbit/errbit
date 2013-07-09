@@ -9,7 +9,7 @@
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .required
     = f.label auth_key
-    = f.text_field auth_key, :tabindex => 1
+    = f.text_field auth_key, :type => (Errbit::Config.user_has_username ? 'text' : 'email'), :tabindex => 1
 
   .required
     = link_to 'forget it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
