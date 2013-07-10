@@ -4,7 +4,6 @@ env:
 rvm:
   - 2.0.0
   - 1.9.3
-  - 1.9.2
   - rbx-19mode
 services: mongodb
 #script: ./script/rspec-queue-mongoid.rb --format progress spec
