@@ -81,7 +81,7 @@ Password: password
 Installation
 ------------
 
-*Note*: This app is intended for people with experience deploying and maintining
+*Note*: This app is intended for people with experience deploying and maintaining
 Rails applications. If you're uncomfortable with any step below then Errbit is not
 for you.
 
@@ -365,7 +365,7 @@ Errbit.configure do |config|
 end
 ```
 
-Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or inlcude `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
+Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or include `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
 
 Issue Trackers
 --------------
