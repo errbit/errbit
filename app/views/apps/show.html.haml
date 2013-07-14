@@ -15,7 +15,7 @@
     = link_to 'unresolved errs', app_path(@app), :class => 'button'
   - else
     = link_to 'all errs', app_path(@app, :all_errs => true), :class => 'button'
-
+  = link_to 'unwatch',  app_watcher_path({:app_id => @app, :id => current_user.id}), :method => :delete, :class => 'button', :confirm => 'Are you sure?'
 %h3#watchers_toggle
   Watchers
   %span.click_span (show/hide)
