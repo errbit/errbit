@@ -150,6 +150,8 @@ git clone http://github.com/errbit/errbit.git
 ```
   * Update `db/seeds.rb` with admin credentials for your initial login.
 
+  * Run `bundle`
+
   * Create & configure for Heroku
 
 ```bash
@@ -467,7 +469,11 @@ Solutions known to work are listed below:
 Develop on Errbit
 -----------------
 
-A guide can help on this way on  [**Errbit Advanced Developer Guide**](https://github.com/errbit/errbit/blob/master/docs/DEVELOPER-ADVANCED.md)
+A guide can help on this way on  [**Errbit Advanced Developer Guide**](docs/DEVELOPER-ADVANCED.md)
+
+## Other documentation
+
+* [All ENV variables availables to configure Errbit](docs/ENV-VARIABLES.md)
 
 TODO
 ----

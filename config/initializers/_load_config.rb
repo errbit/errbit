@@ -4,15 +4,17 @@ default_config_file = Rails.root.join("config", "config.example.yml")
 # Allow a Rails Engine to override config by defining it earlier
 unless defined?(Errbit::Config)
   Errbit::Config = OpenStruct.new
+  use_env = ENV['HEROKU'] || ENV['USE_ENV']
 
   # If Errbit is running on Heroku, config can be set from environment variables.
-  if ENV['HEROKU']
+  if use_env
     Errbit::Config.host = ENV['ERRBIT_HOST']
     Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
-    Errbit::Config.email_at_notices = ENV['ERRBIT_EMAIL_AT_NOTICES']
-    Errbit::Config.confirm_resolve_err = ENV['ERRBIT_CONFIRM_RESOLVE_ERR']
-    Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME']
-    Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER']
+    #  Not really easy to use like an env because need an array and ENV return a string :(
+    # Errbit::Config.email_at_notices = ENV['ERRBIT_EMAIL_AT_NOTICES']
+    Errbit::Config.confirm_resolve_err = ENV['ERRBIT_CONFIRM_RESOLVE_ERR'].to_i == 0
+    Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME'].to_i == 1
+    Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER'].to_i == 0
     Errbit::Config.enforce_ssl = ENV['ERRBIT_ENFORCE_SSL']
 
     Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
@@ -29,7 +31,7 @@ unless defined?(Errbit::Config)
       :authentication => :plain,
       :user_name      => ENV['SMTP_USERNAME']   || ENV['SENDGRID_USERNAME'],
       :password       => ENV['SMTP_PASSWORD']   || ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['SENDGRID_DOMAIN'] || ENV['ERRBIT_EMAIL_FROM'].split('@').last
+      :domain         => ENV['SMTP_DOMAIN'] || ENV['SENDGRID_DOMAIN'] || ENV['ERRBIT_EMAIL_FROM'].split('@').last
     }
   end
 
@@ -44,7 +46,7 @@ unless defined?(Errbit::Config)
       Errbit::Config.send("#{k}=", v)
     end
   # Show message if we are not running tests, not running on Heroku, and config.yml doesn't exist.
-  elsif not ENV['HEROKU']
+  elsif not use_env
     puts "Please copy 'config/config.example.yml' to 'config/config.yml' and configure your settings. Using default settings."
   end
 
