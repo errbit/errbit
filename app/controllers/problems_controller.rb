@@ -6,8 +6,8 @@
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
 
-  before_filter :set_sorting_params, :only => [:index, :all, :search]
-  before_filter :set_tracker_params, :only => [:create_issue]
+
+  include ProblemsSearcher
 
   before_filter :need_selected_problem, :only => [
     :resolve_several, :unresolve_several, :unmerge_several
@@ -25,25 +25,35 @@ class ProblemsController < ApplicationController
     app.problems.find(params[:id])
   }
 
-  expose(:err_ids) {
-    (params[:problems] || []).compact
+
+  expose(:all_errs) {
+    params[:all_errs]
   }
 
-  expose(:selected_problems) {
-    Array(Problem.find(err_ids))
+  expose(:app_scope) {
+    apps = current_user.admin? ? App.all : current_user.apps
+    params[:app_id] ? apps.where(:_id => params[:app_id]) : apps
   }
 
-  def index
-    app_scope = current_user.admin? ? App.all : current_user.apps
-    @all_errs = params[:all_errs]
-    @problems = Problem.for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(@all_errs).ordered_by(@sort, @order)
-    respond_to do |format|
-      format.html do
-        @problems = @problems.page(params[:page]).per(current_user.per_page)
-      end
-      format.atom
+  expose(:params_environement) {
+    params[:environment]
+  }
+
+  expose(:problems) {
+    pro = Problem.for_apps(
+      app_scope
+    ).in_env(
+      params_environement
+    ).all_else_unresolved(all_errs).ordered_by(params_sort, params_order)
+
+    if request.format == :html
+      pro.page(params[:page]).per(current_user.per_page)
+    else
+      pro
     end
-  end
+  }
+
+  def index; end
 
   def show
     @notices  = problem.notices.reverse_ordered.page(params[:notice]).per(1)
@@ -52,10 +62,11 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
+    IssueTracker.update_url_options(request)
     issue_creation = IssueCreation.new(problem, current_user, params[:tracker])
 
     unless issue_creation.execute
-      flash[:error] = issue_creation.errors[:base].first
+      flash[:error] = issue_creation.errors.full_messages.join(', ')
     end
 
     redirect_to app_problem_path(app, problem)
@@ -114,30 +125,13 @@ class ProblemsController < ApplicationController
   end
 
   def search
-    if params[:app_id]
-      app_scope = App.where(:_id => params[:app_id])
-    else
-      app_scope = current_user.admin? ? App.all : current_user.apps
-    end
-    @problems = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(@sort, @order)
+    @problems = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
     @selected_problems = params[:problems] || []
     @problems = @problems.page(params[:page]).per(current_user.per_page)
     render :content_type => 'text/javascript'
   end
 
   protected
-
-    def set_tracker_params
-      IssueTracker.default_url_options[:host] = request.host
-      IssueTracker.default_url_options[:port] = request.port
-      IssueTracker.default_url_options[:protocol] = request.scheme
-    end
-
-    def set_sorting_params
-      @sort = params[:sort]
-      @sort = "last_notice_at" unless %w{app message last_notice_at last_deploy_at count}.member?(@sort)
-      @order = params[:order] || "desc"
-    end
 
   ##
   # Redirect :back if no errors selected

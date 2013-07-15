@@ -1,4 +1,7 @@
 class AppsController < InheritedResources::Base
+
+  include ProblemsSearcher
+
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
   before_filter :parse_notice_at_notices_or_set_default, :only => [:create, :update]
@@ -9,16 +12,10 @@ class AppsController < InheritedResources::Base
       format.html do
         @all_errs = !!params[:all_errs]
 
-        @sort  = params[:sort]
-        @order = params[:order]
-        @sort  = "last_notice_at" unless %w{message app last_deploy_at last_notice_at count}.member?(@sort)
-        @order = "desc" unless %w{asc desc}.member?(@order)
-
         @problems = resource.problems
         @problems = @problems.unresolved unless @all_errs
-        @problems = @problems.in_env(params[:environment]).ordered_by(@sort, @order).page(params[:page]).per(current_user.per_page)
+        @problems = @problems.in_env(params[:environment]).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
 
-        @selected_problems = params[:problems] || []
         @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
       end
       format.atom do

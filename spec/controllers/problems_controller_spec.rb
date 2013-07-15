@@ -27,13 +27,13 @@ describe ProblemsController do
 
         it "should have default per_page value for user" do
           get :index
-          assigns(:problems).to_a.size.should == User::PER_PAGE
+          controller.problems.to_a.size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
           @user.update_attribute :per_page, 10
           get :index
-          assigns(:problems).to_a.size.should == 10
+          controller.problems.to_a.size.should == 10
         end
       end
 
@@ -48,35 +48,35 @@ describe ProblemsController do
         context 'no params' do
           it 'shows problems for all environments' do
             get :index
-            assigns(:problems).size.should == 21
+            controller.problems.size.should == 21
           end
         end
 
         context 'environment production' do
           it 'shows problems for just production' do
             get :index, :environment => 'production'
-            assigns(:problems).size.should == 6
+            controller.problems.size.should == 6
           end
         end
 
         context 'environment staging' do
           it 'shows problems for just staging' do
             get :index, :environment => 'staging'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows problems for just development' do
             get :index, :environment => 'development'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows problems for just test' do
             get :index, :environment => 'test'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
       end
@@ -89,8 +89,8 @@ describe ProblemsController do
         watched_unresolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false))
         watched_resolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true))
         get :index
-        assigns(:problems).should include(watched_unresolved_err.problem)
-        assigns(:problems).should_not include(unwatched_err.problem, watched_resolved_err.problem)
+        controller.problems.should include(watched_unresolved_err.problem)
+        controller.problems.should_not include(unwatched_err.problem, watched_resolved_err.problem)
       end
     end
   end
@@ -106,7 +106,7 @@ describe ProblemsController do
           mock('proxy', :page => mock('other_proxy', :per => problems))
         )
         get :index, :all_errs => true
-        assigns(:problems).should == problems
+        controller.problems.should == problems
       end
     end
 
@@ -117,8 +117,8 @@ describe ProblemsController do
         watched_unresolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false)
         watched_resolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true)
         get :index, :all_errs => true
-        assigns(:problems).should include(watched_resolved_problem, watched_unresolved_problem)
-        assigns(:problems).should_not include(unwatched_problem)
+        controller.problems.should include(watched_resolved_problem, watched_unresolved_problem)
+        controller.problems.should_not include(unwatched_problem)
       end
     end
   end
