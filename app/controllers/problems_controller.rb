@@ -6,9 +6,12 @@
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
 
-  before_filter :find_selected_problems, :only => [:destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several]
   before_filter :set_sorting_params, :only => [:index, :all, :search]
   before_filter :set_tracker_params, :only => [:create_issue]
+
+  before_filter :need_selected_problem, :only => [
+    :resolve_several, :unresolve_several, :unmerge_several
+  ]
 
   expose(:app) {
     if current_user.admin?
@@ -17,15 +20,23 @@ class ProblemsController < ApplicationController
       current_user.apps.find(params[:app_id])
     end
   }
+
   expose(:problem) {
     app.problems.find(params[:id])
+  }
+
+  expose(:err_ids) {
+    (params[:problems] || []).compact
+  }
+
+  expose(:selected_problems) {
+    Array(Problem.find(err_ids))
   }
 
   def index
     app_scope = current_user.admin? ? App.all : current_user.apps
     @all_errs = params[:all_errs]
     @problems = Problem.for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(@all_errs).ordered_by(@sort, @order)
-    @selected_problems = params[:problems] || []
     respond_to do |format|
       format.html do
         @problems = @problems.page(params[:page]).per(current_user.per_page)
@@ -64,35 +75,40 @@ class ProblemsController < ApplicationController
   end
 
   def resolve_several
-    @selected_problems.each(&:resolve!)
-    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, :count => @selected_problems.count)} been resolved."
+    selected_problems.each(&:resolve!)
+    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, :count => selected_problems.count)} been resolved."
     redirect_to :back
   end
 
   def unresolve_several
-    @selected_problems.each(&:unresolve!)
-    flash[:success] = "#{I18n.t(:n_errs_have, :count => @selected_problems.count)} been unresolved."
+    selected_problems.each(&:unresolve!)
+    flash[:success] = "#{I18n.t(:n_errs_have, :count => selected_problems.count)} been unresolved."
     redirect_to :back
   end
 
+  ##
+  # Action to merge several Problem in One problem
+  #
+  # @param [ Array<String> ] :problems the list of problem ids
+  #
   def merge_several
-    if @selected_problems.length < 2
-      flash[:notice] = "You must select at least two errors to merge"
+    if selected_problems.length < 2
+      flash[:notice] = I18n.t('controllers.problems.flash.need_two_errors_merge')
     else
-      @merged_problem = Problem.merge!(@selected_problems)
-      flash[:notice] = "#{@selected_problems.count} errors have been merged."
+      ProblemMerge.new(selected_problems).merge
+      flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', :nb => selected_problems.count)
     end
     redirect_to :back
   end
 
   def unmerge_several
-    all = @selected_problems.map(&:unmerge!).flatten
+    all = selected_problems.map(&:unmerge!).flatten
     flash[:success] = "#{I18n.t(:n_errs_have, :count => all.length)} been unmerged."
     redirect_to :back
   end
 
   def destroy_several
-    nb_problem_destroy = ProblemDestroy.execute(@selected_problems)
+    nb_problem_destroy = ProblemDestroy.execute(selected_problems)
     flash[:notice] = "#{I18n.t(:n_errs_have, :count => nb_problem_destroy)} been deleted."
     redirect_to :back
   end
@@ -117,20 +133,20 @@ class ProblemsController < ApplicationController
       IssueTracker.default_url_options[:protocol] = request.scheme
     end
 
-    def find_selected_problems
-      err_ids = (params[:problems] || []).compact
-      if err_ids.empty?
-        flash[:notice] = "You have not selected any errors"
-        redirect_to :back
-      else
-        @selected_problems = Array(Problem.find(err_ids))
-      end
-    end
-
     def set_sorting_params
       @sort = params[:sort]
       @sort = "last_notice_at" unless %w{app message last_notice_at last_deploy_at count}.member?(@sort)
       @order = params[:order] || "desc"
     end
+
+  ##
+  # Redirect :back if no errors selected
+  #
+  def need_selected_problem
+    if err_ids.empty?
+      flash[:notice] = I18n.t('controllers.problems.flash.no_select_problem')
+      redirect_to :back
+    end
+  end
 end
 

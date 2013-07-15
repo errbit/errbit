@@ -341,31 +341,25 @@ describe ProblemsController do
       @problem2 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => false)).problem
     end
 
-    it "should apply to multiple problems" do
-      post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
-      assigns(:selected_problems).should == [@problem1, @problem2]
-    end
-
-    it "should require at least one problem" do
-      post :resolve_several, :problems => []
-      request.flash[:notice].should match(/You have not selected any/)
-    end
-
     context "POST /problems/merge_several" do
       it "should require at least two problems" do
         post :merge_several, :problems => [@problem1.id.to_s]
-        request.flash[:notice].should match(/You must select at least two/)
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.need_two_errors_merge')
       end
 
       it "should merge the problems" do
-        lambda {
-          post :merge_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
-          assigns(:merged_problem).reload.errs.length.should == 2
-        }.should change(Problem, :count).by(-1)
+        ProblemMerge.should_receive(:new).and_return(double(:merge => true))
+        post :merge_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
       end
     end
 
     context "POST /problems/unmerge_several" do
+
+      it "should require at least one problem" do
+        post :unmerge_several, :problems => []
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.no_select_problem')
+      end
+
       it "should unmerge a merged problem" do
         merged_problem = Problem.merge!(@problem1, @problem2)
         merged_problem.errs.length.should == 2
@@ -374,9 +368,16 @@ describe ProblemsController do
           merged_problem.reload.errs.length.should == 1
         }.should change(Problem, :count).by(1)
       end
+
     end
 
     context "POST /problems/resolve_several" do
+
+      it "should require at least one problem" do
+        post :resolve_several, :problems => []
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.no_select_problem')
+      end
+
       it "should resolve the issue" do
         post :resolve_several, :problems => [@problem2.id.to_s]
         @problem2.reload.resolved?.should == true
@@ -390,10 +391,17 @@ describe ProblemsController do
       it "should display a message about 2 errs" do
         post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
         flash[:success].should match(/2 errs have been resolved/)
+        controller.selected_problems.should == [@problem1, @problem2]
       end
     end
 
     context "POST /problems/unresolve_several" do
+
+      it "should require at least one problem" do
+        post :unresolve_several, :problems => []
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.no_select_problem')
+      end
+
       it "should unresolve the issue" do
         post :unresolve_several, :problems => [@problem1.id.to_s]
         @problem1.reload.resolved?.should == false
