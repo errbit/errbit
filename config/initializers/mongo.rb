@@ -3,7 +3,7 @@ config_file = Rails.root.join("config", "mongoid.yml")
 if config_file.file? &&
   YAML.load(ERB.new(File.read(config_file)).result)[Rails.env].values.flatten.any?
   ::Mongoid.load!(config_file)
-else
+elsif ENV['HEROKU'] || ENV['USE_ENV']
   # No mongoid.yml file. Use ENV variable to define your MongoDB
   # configuration
   if mongo = ENV['MONGOLAB_URI'] || ENV['MONGOHQ_URL']
