@@ -2,7 +2,6 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-
   flash:
     apps:
       create:
@@ -32,6 +31,18 @@ en:
       edit_profile: 'Edit profile'
 
   controllers:
+    apps:
+      flash:
+        create:
+          success: "Your app was successfully created."
+          error:  "You app was successfully destroyed."
+        update:
+          success: "You app was successfully updated."
+          error: "You app was not updated"
+        destroy:
+          success: "You app was successfully destroyed."
+          error: "You app could not be destroyed."
+
     users:
       flash:
         destroy:
@@ -45,6 +56,7 @@ en:
         need_two_errors_merge: "You must select at least two errors to merge"
         merge_several:
           success: "%{nb} errors have been merged."
+
 
   devise:
     registrations:

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "apps/edit.html.haml" do
   before do
     app = stub_model(App)
-    assign :app, app
+    view.stub(:app).and_return(app)
     controller.stub(:current_user) { stub_model(User) }
   end
 

@@ -1,4 +1,4 @@
-class AppsController < InheritedResources::Base
+class AppsController < ApplicationController
 
   include ProblemsSearcher
 
@@ -7,57 +7,86 @@ class AppsController < InheritedResources::Base
   before_filter :parse_notice_at_notices_or_set_default, :only => [:create, :update]
   respond_to :html
 
-  def show
-    respond_to do |format|
-      format.html do
-        @all_errs = !!params[:all_errs]
+  expose(:app_scope) {
+    (current_user.admin? ? App : current_user.apps)
+  }
 
-        @problems = resource.problems
-        @problems = @problems.unresolved unless @all_errs
-        @problems = @problems.in_env(params[:environment]).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
+  expose(:apps) {
+    app_scope.all.sort
+  }
 
-        @deploys = @app.deploys.order_by(:created_at.desc).limit(5)
-      end
-      format.atom do
-        @problems = resource.problems.unresolved.ordered
-      end
+  expose(:app, :ancestor => :app_scope)
+
+  expose(:all_errs) {
+    !!params[:all_errs]
+  }
+  expose(:problems) {
+    if request.format == :atom
+      app.problems.unresolved.ordered
+    else
+      pr = app.problems
+      pr = pr.unresolved unless all_errs
+      pr.in_env(
+        params[:environment]
+      ).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
     end
-  end
+  }
 
-  def create
-    @app = App.new(params[:app])
-    initialize_subclassed_issue_tracker
-    initialize_subclassed_notification_service
-    create!
-  end
+  expose(:deploys) {
+    app.deploys.order_by(:created_at.desc).limit(5)
+  }
 
-  def update
-    @app = resource
-    initialize_subclassed_issue_tracker
-    initialize_subclassed_notification_service
-    update!
+  def index; end
+  def show
+    app
   end
 
   def new
-    plug_params(build_resource)
-    new!
+    plug_params(app)
+  end
+
+  def create
+    initialize_subclassed_issue_tracker
+    initialize_subclassed_notification_service
+    if app.save
+      redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.create.success') }
+    else
+      flash[:error] = I18n.t('controllers.apps.flash.create.error')
+      render :new
+    end
+  end
+
+  def update
+    initialize_subclassed_issue_tracker
+    initialize_subclassed_notification_service
+    if app.save
+      redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.update.success') }
+    else
+      flash[:error] = I18n.t('controllers.apps.flash.update.error')
+      render :edit
+    end
   end
 
   def edit
-    plug_params(resource)
-    edit!
+    plug_params(app)
+  end
+
+  def destroy
+    if app.destroy
+      redirect_to apps_url, :flash => { :success => I18n.t('controllers.apps.flash.destroy.success') }
+    else
+      flash[:error] = I18n.t('controllers.apps.flash.destroy.error')
+      render :show
+    end
   end
 
   protected
-    def collection
-      @apps ||= end_of_association_chain.all.sort
-    end
 
     def initialize_subclassed_issue_tracker
       # set the app's issue tracker
       if params[:app][:issue_tracker_attributes] && tracker_type = params[:app][:issue_tracker_attributes][:type]
         if IssueTracker.subclasses.map(&:name).concat(["IssueTracker"]).include?(tracker_type)
-          @app.issue_tracker = tracker_type.constantize.new(params[:app][:issue_tracker_attributes])
+          app.issue_tracker = tracker_type.constantize.new(params[:app][:issue_tracker_attributes])
         end
       end
     end
@@ -66,19 +95,9 @@ class AppsController < InheritedResources::Base
       # set the app's notification service
       if params[:app][:notification_service_attributes] && notification_type = params[:app][:notification_service_attributes][:type]
         if NotificationService.subclasses.map(&:name).concat(["NotificationService"]).include?(notification_type)
-          @app.notification_service = notification_type.constantize.new(params[:app][:notification_service_attributes])
+          app.notification_service = notification_type.constantize.new(params[:app][:notification_service_attributes])
         end
       end
-    end
-
-    def begin_of_association_chain
-      # Filter the @apps collection to apps watched by the current user, unless user is an admin.
-      # If user is an admin, then no filter is applied, and all apps are shown.
-      current_user unless current_user.admin?
-    end
-
-    def interpolation_options
-      {:app_name => resource.name}
     end
 
     def plug_params app

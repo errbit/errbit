@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "apps/index.html.haml" do
   before do
     app = stub_model(App, :deploys => [stub_model(Deploy, :created_at => Time.now, :revision => "123456789abcdef")])
-    assign :apps, [app]
+    view.stub(:apps).and_return([app])
     controller.stub(:current_user) { stub_model(User) }
   end
 

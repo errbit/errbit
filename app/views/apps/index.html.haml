@@ -16,7 +16,7 @@
         %th Last Deploy
       %th Errors
   %tbody
-    - @apps.each do |app|
+    - apps.each do |app|
       %tr
         %td.name= link_to app.name, app_path(app)
         - if any_github_repos? or any_bitbucket_repos?
@@ -50,7 +50,7 @@
           - if app.problem_count > 0
             - unresolved = app.unresolved_count
             = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
-    - if @apps.none?
+    - if apps.none?
       %tr
         %td{:colspan => 3}
           %em

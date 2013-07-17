@@ -29,5 +29,6 @@ module ProblemsSearcher
     expose(:err_ids) {
       (params[:problems] || []).compact
     }
+
   end
 end
