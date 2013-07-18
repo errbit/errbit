@@ -1,15 +1,15 @@
-- if @app.issue_tracker_configured? || current_user.github_account?
-  - if @problem.issue_link.present?
-    %span= link_to 'go to issue', @problem.issue_link, :class => "#{@problem.issue_type}_goto goto-issue"
-    = link_to 'unlink issue', unlink_issue_app_problem_path(@app, @problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue"
-  - elsif @problem.issue_link == "pending"
-    %span.disabled= link_to 'creating...', '#', :class => "#{@problem.issue_type}_inactive create-issue"
-    = link_to 'retry', create_issue_app_problem_path(@app, @problem), :method => :post
+- if app.issue_tracker_configured? || current_user.github_account?
+  - if problem.issue_link.present?
+    %span= link_to 'go to issue', problem.issue_link, :class => "#{problem.issue_type}_goto goto-issue"
+    = link_to 'unlink issue', unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue"
+  - elsif problem.issue_link == "pending"
+    %span.disabled= link_to 'creating...', '#', :class => "#{problem.issue_type}_inactive create-issue"
+    = link_to 'retry', create_issue_app_problem_path(app, problem), :method => :post
   - else
-    - if @app.github_repo?
+    - if app.github_repo?
       - if current_user.can_create_github_issues?
-        %span= link_to 'create issue', create_issue_app_problem_path(@app, @problem, :tracker => 'user_github'), :method => :post, :class => "github_create create-issue"
-      - elsif @app.issue_tracker_configured? && @app.issue_tracker.label.eql?('github')
-        %span= link_to 'create issue', create_issue_app_problem_path(@app, @problem), :method => :post, :class => "github_create create-issue"
-    - if @app.issue_tracker_configured? && !@app.issue_tracker.label.eql?('github')
-      %span= link_to 'create issue', create_issue_app_problem_path(@app, @problem), :method => :post, :class => "#{@app.issue_tracker.label}_create create-issue"
+        %span= link_to 'create issue', create_issue_app_problem_path(app, problem, :tracker => 'user_github'), :method => :post, :class => "github_create create-issue"
+      - elsif app.issue_tracker_configured? && app.issue_tracker.label.eql?('github')
+        %span= link_to 'create issue', create_issue_app_problem_path(app, problem), :method => :post, :class => "github_create create-issue"
+    - if app.issue_tracker_configured? && !app.issue_tracker.label.eql?('github')
+      %span= link_to 'create issue', create_issue_app_problem_path(app, problem), :method => :post, :class => "#{app.issue_tracker.label}_create create-issue"

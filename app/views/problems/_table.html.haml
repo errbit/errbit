@@ -16,7 +16,7 @@
       - problems.each do |problem|
         %tr{:class => problem.resolved? ? 'resolved' : 'unresolved'}
           %td.select
-            = check_box_tag "problems[]", problem.id, @selected_problems.member?(problem.id.to_s)
+            = check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s)
           %td.app
             = link_to problem.app.name, app_path(problem.app)
             - if current_page?(:controller => 'problems')

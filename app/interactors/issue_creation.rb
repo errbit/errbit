@@ -41,15 +41,11 @@ class IssueCreation
   end
 
   def execute
-    if tracker
-      begin
-        tracker.create_issue problem, user
-      rescue => ex
-        Rails.logger.error "Error during issue creation: " << ex.message
-        errors.add :base, "There was an error during issue creation: #{ex.message}"
-      end
-    end
-
+    tracker.create_issue problem, user if tracker
     errors.empty?
+  rescue => ex
+    Rails.logger.error "Error during issue creation: " << ex.message
+    errors.add :base, "There was an error during issue creation: #{ex.message}"
+    false
   end
 end
