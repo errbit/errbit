@@ -12,24 +12,12 @@ describe ProblemsController do
 
 
   describe "GET /problems" do
-    render_views
+    #render_views
     context 'when logged in as an admin' do
       before(:each) do
         @user = Fabricate(:admin)
         sign_in @user
         @problem = Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production"))).problem
-      end
-
-      it "should successfully list problems" do
-        get :index
-        response.should be_success
-        response.body.gsub("&#8203;", "").should match(@problem.message)
-      end
-
-      it "should list atom feed successfully" do
-        get :index, :format => "atom"
-        response.should be_success
-        response.body.should match(@problem.message)
       end
 
       context "pagination" do
@@ -39,13 +27,13 @@ describe ProblemsController do
 
         it "should have default per_page value for user" do
           get :index
-          assigns(:problems).to_a.size.should == User::PER_PAGE
+          controller.problems.to_a.size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
           @user.update_attribute :per_page, 10
           get :index
-          assigns(:problems).to_a.size.should == 10
+          controller.problems.to_a.size.should == 10
         end
       end
 
@@ -60,35 +48,35 @@ describe ProblemsController do
         context 'no params' do
           it 'shows problems for all environments' do
             get :index
-            assigns(:problems).size.should == 21
+            controller.problems.size.should == 21
           end
         end
 
         context 'environment production' do
           it 'shows problems for just production' do
             get :index, :environment => 'production'
-            assigns(:problems).size.should == 6
+            controller.problems.size.should == 6
           end
         end
 
         context 'environment staging' do
           it 'shows problems for just staging' do
             get :index, :environment => 'staging'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows problems for just development' do
             get :index, :environment => 'development'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows problems for just test' do
             get :index, :environment => 'test'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
       end
@@ -101,8 +89,8 @@ describe ProblemsController do
         watched_unresolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false))
         watched_resolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true))
         get :index
-        assigns(:problems).should include(watched_unresolved_err.problem)
-        assigns(:problems).should_not include(unwatched_err.problem, watched_resolved_err.problem)
+        controller.problems.should include(watched_unresolved_err.problem)
+        controller.problems.should_not include(unwatched_err.problem, watched_resolved_err.problem)
       end
     end
   end
@@ -118,7 +106,7 @@ describe ProblemsController do
           mock('proxy', :page => mock('other_proxy', :per => problems))
         )
         get :index, :all_errs => true
-        assigns(:problems).should == problems
+        controller.problems.should == problems
       end
     end
 
@@ -129,14 +117,14 @@ describe ProblemsController do
         watched_unresolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false)
         watched_resolved_problem = Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true)
         get :index, :all_errs => true
-        assigns(:problems).should include(watched_resolved_problem, watched_unresolved_problem)
-        assigns(:problems).should_not include(unwatched_problem)
+        controller.problems.should include(watched_resolved_problem, watched_unresolved_problem)
+        controller.problems.should_not include(unwatched_problem)
       end
     end
   end
 
   describe "GET /apps/:app_id/problems/:id" do
-    render_views
+    #render_views
 
     context 'when logged in as an admin' do
       before do
@@ -145,12 +133,12 @@ describe ProblemsController do
 
       it "finds the app" do
         get :show, :app_id => app.id, :id => err.problem.id
-        assigns(:app).should == app
+        controller.app.should == app
       end
 
       it "finds the problem" do
         get :show, :app_id => app.id, :id => err.problem.id
-        assigns(:problem).should == err.problem
+        controller.problem.should == err.problem
       end
 
       it "successfully render page" do
@@ -178,32 +166,6 @@ describe ProblemsController do
         end
       end
 
-      context "create issue button" do
-        let(:button_matcher) { match(/create issue/) }
-
-        it "should not exist for problem's app without issue tracker" do
-          err = Fabricate :err
-          get :show, :app_id => err.app.id, :id => err.problem.id
-
-          response.body.should_not button_matcher
-        end
-
-        it "should exist for problem's app with issue tracker" do
-          tracker = Fabricate(:lighthouse_tracker)
-          err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app))
-          get :show, :app_id => err.app.id, :id => err.problem.id
-
-          response.body.should button_matcher
-        end
-
-        it "should not exist for problem with issue_link" do
-          tracker = Fabricate(:lighthouse_tracker)
-          err = Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app, :issue_link => "http://some.host"))
-          get :show, :app_id => err.app.id, :id => err.problem.id
-
-          response.body.should_not button_matcher
-        end
-      end
     end
 
     context 'when logged in as a user' do
@@ -217,7 +179,7 @@ describe ProblemsController do
 
       it 'finds the problem if the user is watching the app' do
         get :show, :app_id => @watched_app.to_param, :id => @watched_err.problem.id
-        assigns(:problem).should == @watched_err.problem
+        controller.problem.should == @watched_err.problem
       end
 
       it 'raises a DocumentNotFound error if the user is not watching the app' do
@@ -242,8 +204,8 @@ describe ProblemsController do
       App.should_receive(:find).with(@problem.app.id).and_return(@problem.app)
       @problem.app.problems.should_receive(:find).and_return(@problem.problem)
       put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
-      assigns(:app).should == @problem.app
-      assigns(:problem).should == @problem.problem
+      controller.app.should == @problem.app
+      controller.problem.should == @problem.problem
     end
 
     it "should resolve the issue" do
@@ -269,7 +231,7 @@ describe ProblemsController do
   end
 
   describe "POST /apps/:app_id/problems/:id/create_issue" do
-    render_views
+    #render_views
 
     before(:each) do
       sign_in Fabricate(:admin)
@@ -379,31 +341,25 @@ describe ProblemsController do
       @problem2 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => false)).problem
     end
 
-    it "should apply to multiple problems" do
-      post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
-      assigns(:selected_problems).should == [@problem1, @problem2]
-    end
-
-    it "should require at least one problem" do
-      post :resolve_several, :problems => []
-      request.flash[:notice].should match(/You have not selected any/)
-    end
-
     context "POST /problems/merge_several" do
       it "should require at least two problems" do
         post :merge_several, :problems => [@problem1.id.to_s]
-        request.flash[:notice].should match(/You must select at least two/)
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.need_two_errors_merge')
       end
 
       it "should merge the problems" do
-        lambda {
-          post :merge_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
-          assigns(:merged_problem).reload.errs.length.should == 2
-        }.should change(Problem, :count).by(-1)
+        ProblemMerge.should_receive(:new).and_return(double(:merge => true))
+        post :merge_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
       end
     end
 
     context "POST /problems/unmerge_several" do
+
+      it "should require at least one problem" do
+        post :unmerge_several, :problems => []
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.no_select_problem')
+      end
+
       it "should unmerge a merged problem" do
         merged_problem = Problem.merge!(@problem1, @problem2)
         merged_problem.errs.length.should == 2
@@ -412,9 +368,16 @@ describe ProblemsController do
           merged_problem.reload.errs.length.should == 1
         }.should change(Problem, :count).by(1)
       end
+
     end
 
     context "POST /problems/resolve_several" do
+
+      it "should require at least one problem" do
+        post :resolve_several, :problems => []
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.no_select_problem')
+      end
+
       it "should resolve the issue" do
         post :resolve_several, :problems => [@problem2.id.to_s]
         @problem2.reload.resolved?.should == true
@@ -428,10 +391,17 @@ describe ProblemsController do
       it "should display a message about 2 errs" do
         post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
         flash[:success].should match(/2 errs have been resolved/)
+        controller.selected_problems.should == [@problem1, @problem2]
       end
     end
 
     context "POST /problems/unresolve_several" do
+
+      it "should require at least one problem" do
+        post :unresolve_several, :problems => []
+        request.flash[:notice].should eql I18n.t('controllers.problems.flash.no_select_problem')
+      end
+
       it "should unresolve the issue" do
         post :unresolve_several, :problems => [@problem1.id.to_s]
         @problem1.reload.resolved?.should == false

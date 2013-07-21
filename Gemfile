@@ -11,7 +11,6 @@ gem 'htmlentities'
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
 gem 'useragent'
-gem 'inherited_resources'
 gem 'decent_exposure'
 gem 'strong_parameters'
 gem 'SystemTimer', :platform => :ruby_18

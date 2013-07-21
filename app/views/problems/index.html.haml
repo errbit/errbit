@@ -1,15 +1,17 @@
 - content_for :title, @all_errs ? 'All Errors' : 'Unresolved Errors'
 - content_for :head do
   = auto_discovery_link_tag :atom, problems_path(User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => "Errbit notices at #{request.host}"
+
 - content_for :action_bar do
   - if @all_errs
     = link_to 'hide resolved', problems_path, :class => 'button'
   - else
     = link_to 'show resolved', problems_path(:all_errs => true), :class => 'button'
+
 %section
   = form_tag search_problems_path(:all_errs => @all_errs), :method => :get, :remote => true do
     = text_field_tag :search, params[:search], :placeholder => 'Search for issues'
 %br
 %section
-  .problem_table{:id => 'problem_table'}
-    = render 'problems/table', :problems => @problems
+  #problem_table.problem_table
+    = render 'problems/table'

@@ -152,7 +152,6 @@ describe Problem do
     end
   end
 
-
   context "Scopes" do
     context "resolved" do
       it 'only finds resolved Problems' do

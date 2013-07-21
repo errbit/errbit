@@ -6,15 +6,13 @@ describe AppsController do
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
 
-
   describe "GET /apps" do
     context 'when logged in as an admin' do
       it 'finds all apps' do
         sign_in Fabricate(:admin)
         3.times { Fabricate(:app) }
-        apps = App.all
         get :index
-        assigns(:apps).should == apps
+        controller.apps.should == App.all.sort.entries
       end
     end
 
@@ -27,8 +25,8 @@ describe AppsController do
         Fabricate(:user_watcher, :user => user, :app => watched_app1)
         Fabricate(:user_watcher, :user => user, :app => watched_app2)
         get :index
-        assigns(:apps).should include(watched_app1, watched_app2)
-        assigns(:apps).should_not include(unwatched_app)
+        controller.apps.should include(watched_app1, watched_app2)
+        controller.apps.should_not include(unwatched_app)
       end
     end
   end
@@ -44,7 +42,7 @@ describe AppsController do
 
       it 'finds the app' do
         get :show, :id => @app.id
-        assigns(:app).should == @app
+        controller.app.should == @app
       end
 
       it "should not raise errors for app with err without notices" do
@@ -65,13 +63,13 @@ describe AppsController do
 
         it "should have default per_page value for user" do
           get :show, :id => @app.id
-          assigns(:problems).to_a.size.should == User::PER_PAGE
+          controller.problems.to_a.size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
           @user.update_attribute :per_page, 10
           get :show, :id => @app.id
-          assigns(:problems).to_a.size.should == 10
+          controller.problems.to_a.size.should == 10
         end
       end
 
@@ -85,14 +83,14 @@ describe AppsController do
         context 'and no params' do
           it 'shows only unresolved problems' do
             get :show, :id => @app.id
-            assigns(:problems).size.should == 1
+            controller.problems.size.should == 1
           end
         end
 
         context 'and all_problems=true params' do
           it 'shows all errors' do
             get :show, :id => @app.id, :all_errs => true
-            assigns(:problems).size.should == 2
+            controller.problems.size.should == 2
           end
         end
       end
@@ -108,35 +106,35 @@ describe AppsController do
         context 'no params' do
           it 'shows errs for all environments' do
             get :show, :id => @app.id
-            assigns(:problems).size.should == 21
+            controller.problems.size.should == 21
           end
         end
 
         context 'environment production' do
           it 'shows errs for just production' do
             get :show, :id => @app.id, :environment => 'production'
-            assigns(:problems).size.should == 6
+            controller.problems.size.should == 6
           end
         end
 
         context 'environment staging' do
           it 'shows errs for just staging' do
             get :show, :id => @app.id, :environment => 'staging'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows errs for just development' do
             get :show, :id => @app.id, :environment => 'development'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows errs for just test' do
             get :show, :id => @app.id, :environment => 'test'
-            assigns(:problems).size.should == 5
+            controller.problems.size.should == 5
           end
         end
       end
@@ -149,7 +147,7 @@ describe AppsController do
         watcher = Fabricate(:user_watcher, :app => app, :user => user)
         sign_in user
         get :show, :id => app.id
-        assigns(:app).should == app
+        controller.app.should == app
       end
 
       it 'does not find the app if the user is not watching it' do
@@ -170,19 +168,19 @@ describe AppsController do
     describe "GET /apps/new" do
       it 'instantiates a new app with a prebuilt watcher' do
         get :new
-        assigns(:app).should be_a(App)
-        assigns(:app).should be_new_record
-        assigns(:app).watchers.should_not be_empty
+        controller.app.should be_a(App)
+        controller.app.should be_new_record
+        controller.app.watchers.should_not be_empty
       end
 
       it "should copy attributes from an existing app" do
         @app = Fabricate(:app, :name => "do not copy",
                              :github_repo => "test/example")
         get :new, :copy_attributes_from => @app.id
-        assigns(:app).should be_a(App)
-        assigns(:app).should be_new_record
-        assigns(:app).name.should be_blank
-        assigns(:app).github_repo.should == "test/example"
+        controller.app.should be_a(App)
+        controller.app.should be_new_record
+        controller.app.name.should be_blank
+        controller.app.github_repo.should == "test/example"
       end
     end
 
@@ -190,7 +188,7 @@ describe AppsController do
       it 'finds the correct app' do
         app = Fabricate(:app)
         get :edit, :id => app.id
-        assigns(:app).should == app
+        controller.app.should == app
       end
     end
 
@@ -326,12 +324,11 @@ describe AppsController do
     describe "DELETE /apps/:id" do
       before do
         @app = Fabricate(:app)
-        App.stub(:find).with(@app.id).and_return(@app)
       end
 
       it "should find the app" do
         delete :destroy, :id => @app.id
-        assigns(:app).should == @app
+        controller.app.should == @app
       end
 
       it "should destroy the app" do

@@ -1,29 +1,29 @@
-- content_for :page_title, @problem.message
+- content_for :page_title, problem.message
 - content_for :title_css_class, 'err_show'
-- content_for :title, @problem.error_class || truncate(@problem.message, :length => 32)
+- content_for :title, problem.error_class || truncate(problem.message, :length => 32)
 - content_for :meta do
   %strong App:
-  = link_to @app.name, @app
+  = link_to app.name, app
   %strong Where:
-  = @problem.where
+  = problem.where
   %br
   %strong Environment:
-  = @problem.environment
+  = problem.environment
   %strong Last Notice:
-  = @problem.last_notice_at.to_s(:precise)
+  = problem.last_notice_at.to_s(:precise)
 - content_for :action_bar do
-  - if @problem.unresolved?
-    %span= link_to 'resolve', [:resolve, @app, @problem], :method => :put, :data => { :confirm => problem_confirm }, :class => 'resolve'
+  - if problem.unresolved?
+    %span= link_to 'resolve', [:resolve, app, problem], :method => :put, :data => { :confirm => problem_confirm }, :class => 'resolve'
   - if current_user.authentication_token
-    %span= link_to 'iCal', polymorphic_path([@app, @problem], :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
-  %span>= link_to 'up', (request.env['HTTP_REFERER'] ? :back : app_problems_path(@app)), :class => 'up'
+    %span= link_to 'iCal', polymorphic_path([app, problem], :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
+  %span>= link_to 'up', (request.env['HTTP_REFERER'] ? :back : app_problems_path(app)), :class => 'up'
   %br
   = render "issue_tracker_links"
 
-- if @problem.comments_allowed? || @problem.comments.any?
+- if problem.comments_allowed? || problem.comments.any?
   - content_for :comments do
     %h3 Comments
-    - @problem.comments.each do |comment|
+    - problem.comments.each do |comment|
       .window
         %table.comment
           %tr
@@ -37,11 +37,11 @@
               - else
                 %span.comment-info
                   = time_ago_in_words(comment.created_at, true) << " ago by [Unknown User]"
-              %span.delete= link_to '&#10008;'.html_safe, [@app, @problem, comment], :method => :delete, :data => { :confirm => "Are you sure you don't need this comment?" }, :class => "destroy-comment"
+              %span.delete= link_to '&#10008;'.html_safe, [app, problem, comment], :method => :delete, :data => { :confirm => "Are you sure you don't need this comment?" }, :class => "destroy-comment"
           %tr
             %td= simple_format comment.body
-    - if @problem.comments_allowed?
-      = form_for [@app, @problem, @comment] do |comment_form|
+    - if problem.comments_allowed?
+      = form_for [app, problem, @comment] do |comment_form|
         %p Add a comment
         = comment_form.text_area :body
         = comment_form.submit "Save Comment"
@@ -63,7 +63,7 @@
 - if @notice
   #summary
     %h3 Summary
-    = render 'notices/summary', :notice => @notice, :problem => @problem
+    = render 'notices/summary', :notice => @notice
 
   #backtrace
     %h3 Backtrace
