@@ -1,7 +1,7 @@
 /**
  * Unobtrusive scripting adapter for jQuery
  *
- * Requires jQuery 1.6.0 or later.
+ * Requires jQuery 1.6.0. Not compatible to jquery > 1.9
  * https://github.com/rails/jquery-ujs
 
  * Uploading file using rails.js
@@ -131,11 +131,11 @@
           method = element.data('method');
           url = element.data('url');
           data = element.serialize();
-          if (element.data('params')) data = data + "&" + element.data('params'); 
+          if (element.data('params')) data = data + "&" + element.data('params');
         } else {
           method = element.data('method');
           url = element.attr('href');
-          data = element.data('params') || null; 
+          data = element.data('params') || null;
         }
 
         options = {

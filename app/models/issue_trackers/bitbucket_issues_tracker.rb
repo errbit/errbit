@@ -26,7 +26,9 @@ class IssueTrackers::BitbucketIssuesTracker < IssueTracker
     bitbucket = BitBucket.new :basic_auth => "#{api_token}:#{project_id}"
 
     begin
-      issue = bitbucket.issues.create api_token, repo_name.split('/')[1], :title => issue_title(problem), :content => body_template.result(binding), :priority => 'critical'
+      r_user = repo_name.split('/')[0]
+      r_name = repo_name.split('/')[1]
+      issue = bitbucket.issues.create r_user, r_name, :title => issue_title(problem), :content => body_template.result(binding), :priority => 'critical'
       problem.update_attributes(
         :issue_link => "https://bitbucket.org/#{repo_name}/issue/#{issue.local_id}/",
         :issue_type => Label

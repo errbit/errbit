@@ -43,7 +43,7 @@ describe NoticeObserver do
     end
   end
 
-  describe "should send a notification if a notification service is configured" do
+  describe "should send a notification if a notification service is configured with defaults" do
     let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
     let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
     let(:backtrace) { Fabricate(:backtrace) }
@@ -101,6 +101,43 @@ describe NoticeObserver do
       app.notification_service.should_receive(:create_notification)
 
       Fabricate(:notice, :err => err)
+    end
+  end
+  
+  describe "should send a notification at desired intervals" do
+    let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service, :notify_at_notices => [1,2]))}
+    let(:backtrace) { Fabricate(:backtrace) }
+
+    before do
+      Errbit::Config.per_app_email_at_notices = true
+    end
+
+    after do
+      Errbit::Config.per_app_email_at_notices = false
+    end
+
+    it "should create a campfire notification on first notice" do
+      err = Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 1))
+      app.notification_service.should_receive(:create_notification)
+
+      Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
+    end
+
+    it "should create a campfire notification on second notice" do
+      err = Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 1))
+      app.notification_service.should_receive(:create_notification)
+
+      Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
+    end
+
+    it "should not create a campfire notification on third notice" do
+      err = Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 1))
+      app.notification_service.should_receive(:create_notification)
+
+      Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
     end
   end
 end

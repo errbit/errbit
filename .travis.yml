@@ -1,9 +1,19 @@
 language: ruby
+env:
+  - COVERAGE=true
 rvm:
+  - 2.0.0
   - 1.9.3
   - 1.9.2
   - 1.8.7
+  - rbx-19mode
+  - rbx-18mode
 services: mongodb
+#script: ./script/rspec-queue-mongoid.rb --format progress spec
+matrix:
+  allow_failures:
+    - rvm: rbx-19mode
+    - rvm: rbx-18mode
 
 # To stop Travis from running tests for a new commit,
 # add the following to your commit message: [ci skip]

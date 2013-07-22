@@ -1,0 +1,17 @@
+<% if notice = problem.notices.first %>
+h2. Summary
+<% if notice.request['url'].present? %>
+h3. URL
+
+"<%= notice.request['url'] %>":<%= notice.request['url'] %>
+<% end %>
+h3. Where
+
+<%= notice.where %>
+
+h3. When
+
+<%= notice.created_at.to_s(:micro) %>
+
+"More Details on Errbit":<%= app_problem_url problem.app, problem %>
+<% end %>

@@ -1,9 +1,12 @@
 Fabricator(:app) do
   name { sequence(:app_name){|n| "App ##{n}"} }
+  repository_branch 'master'
 end
 
 Fabricator(:app_with_watcher, :from => :app) do
-  watchers(:count => 1) { |parent, i| Fabricate.build(:watcher, :app => parent) }
+  watchers(:count => 1) { |parent, i|
+    Fabricate.build(:watcher, :app => parent)
+  }
 end
 
 Fabricator(:watcher) do

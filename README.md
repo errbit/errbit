@@ -1,16 +1,21 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
 
 [travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
-[codeclimate-img-url]: https://codeclimate.com/badge.png
+[codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
+[coveralls-img-url]: https://coveralls.io/repos/errbit/errbit/badge.png?branch=master
+[coveralls-url]:https://coveralls.io/r/errbit/errbit
+[gemnasium-img-url]:https://gemnasium.com/errbit/errbit.png
+[gemnasium-url]:https://gemnasium.com/errbit/errbit
+
 
 
 ### The open source, self-hosted error catcher
 
 
 Errbit is a tool for collecting and managing errors from other applications.
-It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
+It is [Airbrake](http://airbrake.io) (formerly known as Hoptoad) API compliant,
 so if you are already using Airbrake, you can just point the `airbrake` gem to your Errbit server.
 
 
@@ -56,9 +61,9 @@ Errbit may be a good fit for you if:
 * You want to add customer features to your error catcher
 * You're crazy and love managing servers
 
-If this doesn't sound like you, you should probably stick with [Airbrake](http://airbrakeapp.com).
-The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
-They have a free package and even offer a *"Airbrake behind your firewall"* solution.
+If this doesn't sound like you, you should probably stick with a hosted service such as
+[Airbrake](http://airbrake.io).
+
 
 Mailing List
 ------------
@@ -76,10 +81,9 @@ Password: password
 Installation
 ------------
 
-*Note*: This app is intended for people with experience deploying and maintining
+*Note*: This app is intended for people with experience deploying and maintaining
 Rails applications. If you're uncomfortable with any step below then Errbit is not
-for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
-[Thoughtbot](http://thoughtbot.com), which Errbit is based on.
+for you.
 
 **Set up your local box or server(Ubuntu):**
 
@@ -87,7 +91,7 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
 ```bash
 apt-get update
-apt-get install mongodb
+apt-get install mongodb-10gen
 ```
 
   * Install libxml and libcurl
@@ -124,20 +128,18 @@ rake errbit:bootstrap
 script/rails server
 ```
 
-**Deploying:**
+Deploying:
+----------
 
-  * Bootstrap Errbit. This will copy over config.yml and also seed the database.
-
-```bash
-rake errbit:bootstrap
-```
-
-  * Update the deploy.rb file with information about your server
+  * Copy `config/deploy.example.rb` to `config/deploy.rb`
+  * Update the `deploy.rb` or `config.yml` file with information about your server
   * Setup server and deploy
 
 ```bash
 cap deploy:setup deploy
 ```
+
+(Note: The capistrano deploy script will automatically generate a unique secret token.)
 
 **Deploying to Heroku:**
 
@@ -146,15 +148,19 @@ cap deploy:setup deploy
 ```bash
 git clone http://github.com/errbit/errbit.git
 ```
+  * Update `db/seeds.rb` with admin credentials for your initial login.
+
+  * Run `bundle`
 
   * Create & configure for Heroku
 
 ```bash
 gem install heroku
 heroku create example-errbit --stack cedar
-heroku addons:add mongolab:starter
+heroku addons:add mongolab:sandbox
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
+heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master
@@ -197,6 +203,12 @@ heroku run rake db:seed
 
 ```bash
 heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
+```
+
+  * You may also want to configure a different secret token for each deploy:
+
+```bash
+heroku config:add SECRET_TOKEN=some-secret-token
 ```
 
   * Enjoy!
@@ -311,6 +323,7 @@ When upgrading Errbit, please run:
 
 ```bash
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
+bundle install
 rake db:migrate
 ```
 
@@ -339,6 +352,20 @@ it will be displayed under the *User Details* tab:
 
 (This tab will be hidden if no user information is available.)
 
+Adding javascript errors notifications
+--------------------------------------
+
+Errbit easily supports javascript errors notifications. You just need to add `config.js_notifier = true` to the errbit initializer in the rails app.
+
+```
+Errbit.configure do |config|
+  config.host    = 'YOUR-ERRBIT-HOST'
+  config.api_key = 'YOUR-PROJECT-API-KEY'
+  config.js_notifier = true
+end
+```
+
+Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or include `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
 
 Issue Trackers
 --------------
@@ -382,6 +409,19 @@ card_type = Defect, status = Open, priority = Essential
 * For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **errbit/errbit**
 * You will also need to provide your username and password for your Bitbucket account.
 
+**Gitlab Issues Integration**
+
+* Account is the host of your gitlab installation. i.e. **http://gitlab.example.com**
+* To authenticate, Errbit uses token-based authentication. Get your API Key in your user settings (or create special user for this purpose)
+* You also need to provide project ID (it needs to be Number) for issues to be created
+
+**Unfuddle Issues Integration**
+
+* Account is your unfuddle domain
+* Username your unfuddle username
+* Password your unfuddle password
+* Project id the id of your project where your ticket is create
+* Milestone id the id of your milestone where your ticket is create
 
 
 What if Errbit has an error?
@@ -426,10 +466,26 @@ Solutions known to work are listed below:
   </tr>
 </table>
 
+Develop on Errbit
+-----------------
+
+A guide can help on this way on  [**Errbit Advanced Developer Guide**](docs/DEVELOPER-ADVANCED.md)
+
+## Other documentation
+
+* [All ENV variables availables to configure Errbit](docs/ENV-VARIABLES.md)
+
 TODO
 ----
 
 * Add ability for watchers to be configured for types of notifications they should receive
+
+
+People using Errbit
+-------------------
+
+See our wiki page for a [list of people and companies around the world who use Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit).
+Feel free to [edit this page](https://github.com/errbit/errbit/wiki/People-using-Errbit/_edit), and add your name and country to the list if you are using Errbit.
 
 
 Special Thanks
@@ -441,7 +497,7 @@ Special Thanks
 * [Vasiliy Ermolovich (@nashby)](https://github.com/nashby) - Contributing and helping to resolve issues and pull requests
 * [Marcin Ciunelis (@martinciu)](https://github.com/martinciu) - Helping to improve Errbit's architecture
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
-* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrakeapp.com).
+* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrake.io).
 
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details.
 
@@ -471,5 +527,5 @@ and make **optional** features configurable via `config/config.yml`.
 Copyright
 ---------
 
-Copyright (c) 2010-2011 Jared Pace. See LICENSE for details.
+Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
 

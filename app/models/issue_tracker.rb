@@ -16,6 +16,7 @@ class IssueTracker
   field :password, :type => String
   field :ticket_properties, :type => String
   field :subdomain, :type => String
+  field :milestone_id, :type => String
 
   validate :check_params
 
@@ -36,5 +37,19 @@ class IssueTracker
   Label = ''
   def self.label; self::Label; end
   def label; self.class.label; end
-end
 
+  def configured?
+    project_id.present?
+  end
+
+  ##
+  # Update default_url_option with valid data from the request information
+  #
+  # @param [ Request ] a request with host, port and protocol
+  #
+  def self.update_url_options(request)
+    IssueTracker.default_url_options[:host] = request.host
+    IssueTracker.default_url_options[:port] = request.port
+    IssueTracker.default_url_options[:protocol] = request.scheme
+  end
+end

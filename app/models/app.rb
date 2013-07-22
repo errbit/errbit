@@ -1,4 +1,5 @@
 class App
+  include Comparable
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -6,6 +7,7 @@ class App
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :asset_host
   field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
@@ -40,46 +42,11 @@ class App
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
-  # Processes a new error report.
-  #
-  # Accepts either XML or a hash with the following attributes:
-  #
-  # * <tt>:error_class</tt> - the class of error
-  # * <tt>:message</tt> - the error message
-  # * <tt>:backtrace</tt> - an array of stack trace lines
-  #
-  # * <tt>:request</tt> - a hash of values describing the request
-  # * <tt>:server_environment</tt> - a hash of values describing the server environment
-  #
-  # * <tt>:api_key</tt> - the API key with which the error was reported
-  # * <tt>:notifier</tt> - information to identify the source of the error report
-  #
-  def self.report_error!(*args)
-    report = ErrorReport.new(*args)
-    report.generate_notice!
-  end
-
-
-  # Processes a new error report.
-  #
-  # Accepts a hash with the following attributes:
-  #
-  # * <tt>:error_class</tt> - the class of error
-  # * <tt>:message</tt> - the error message
-  # * <tt>:backtrace</tt> - an array of stack trace lines
-  #
-  # * <tt>:request</tt> - a hash of values describing the request
-  # * <tt>:server_environment</tt> - a hash of values describing the server environment
-  #
-  # * <tt>:notifier</tt> - information to identify the source of the error report
-  #
-  def report_error!(hash)
-    report = ErrorReport.new(hash.merge(:api_key => api_key))
-    report.generate_notice!
-  end
-
   def find_or_create_err!(attrs)
-    Err.where(:fingerprint => attrs[:fingerprint]).first || problems.create!.errs.create!(attrs)
+    Err.where(
+      :fingerprint => attrs[:fingerprint]
+    ).first ||
+      problems.create!.errs.create!(attrs)
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
@@ -98,12 +65,16 @@ class App
 
   # Legacy apps don't have notify_on_errs and notify_on_deploys params
   def notify_on_errs
-    !(self[:notify_on_errs] == false)
+    !(super == false)
   end
   alias :notify_on_errs? :notify_on_errs
 
+  def emailable?
+    notify_on_errs? && notification_recipients.any?
+  end
+
   def notify_on_deploys
-    !(self[:notify_on_deploys] == false)
+    !(super == false)
   end
   alias :notify_on_deploys? :notify_on_deploys
 
@@ -120,7 +91,7 @@ class App
   end
 
   def github_url_to_file(file)
-    "#{github_url}/blob/#{repo_branch + file}"
+    "#{github_url}/blob/#{repo_branch}/#{file}"
   end
 
   def bitbucket_repo?
@@ -132,16 +103,16 @@ class App
   end
 
   def bitbucket_url_to_file(file)
-    "#{bitbucket_url}/src/#{repo_branch + file}"
+    "#{bitbucket_url}/src/#{repo_branch}/#{file}"
   end
 
 
   def issue_tracker_configured?
-    !!(issue_tracker && issue_tracker.class < IssueTracker && issue_tracker.project_id.present?)
+    !!(issue_tracker.class < IssueTracker && issue_tracker.configured?)
   end
 
   def notification_service_configured?
-    !!(notification_service && notification_service.class < NotificationService && notification_service.api_token.present?)
+    !!(notification_service.class < NotificationService && notification_service.configured?)
   end
 
 
@@ -167,6 +138,25 @@ class App
         end
       end
     end
+  end
+
+  def unresolved_count
+    @unresolved_count ||= problems.unresolved.count
+  end
+
+  def problem_count
+    @problem_count ||= problems.count
+  end
+
+  # Compare by number of unresolved errs, then problem counts.
+  def <=>(other)
+    (other.unresolved_count <=> unresolved_count).nonzero? ||
+    (other.problem_count <=> problem_count).nonzero? ||
+    name <=> other.name
+  end
+
+  def email_at_notices
+    Errbit::Config.per_app_email_at_notices ? super : Errbit::Config.email_at_notices
   end
 
   protected

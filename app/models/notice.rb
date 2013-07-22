@@ -1,4 +1,3 @@
-require 'hoptoad'
 require 'recurse'
 
 class Notice
@@ -10,10 +9,10 @@ class Notice
   field :request, :type => Hash
   field :notifier, :type => Hash
   field :user_attributes, :type => Hash
-  field :current_user, :type => Hash
+  field :framework
   field :error_class
   delegate :lines, :to => :backtrace, :prefix => true
-  delegate :app, :to => :err
+  delegate :app, :problem, :to => :err
 
   belongs_to :err
   belongs_to :backtrace, :index => true
@@ -26,7 +25,7 @@ class Notice
     ]
   )
 
-  after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
+  after_create :cache_attributes_on_problem, :unresolve_problem
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -36,15 +35,17 @@ class Notice
   scope :reverse_ordered, order_by(:created_at.desc)
   scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
 
-  delegate :app, :problem, :to => :err
-
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
 
   def user_agent_string
-    (user_agent.nil? || user_agent.none?) ? "N/A" : "#{user_agent.browser} #{user_agent.version}"
+    if user_agent.nil? || user_agent.none?
+      "N/A"
+    else
+      "#{user_agent.browser} #{user_agent.version} (#{user_agent.os})"
+    end
   end
 
   def environment_name
@@ -66,7 +67,7 @@ class Notice
   end
 
   def request
-    read_attribute(:request) || {}
+    super || {}
   end
 
   def url
@@ -96,11 +97,32 @@ class Notice
     backtrace_lines.in_app
   end
 
-  protected
-
-  def increase_counter_cache
-    problem.inc(:notices_count, 1)
+  def similar_count
+    problem.notices_count
   end
+
+  def emailable?
+    app.email_at_notices.include?(similar_count)
+  end
+
+  def should_email?
+    app.emailable? && emailable?
+  end
+
+  def should_notify?
+    app.notification_service.notify_at_notices.include?(0) || app.notification_service.notify_at_notices.include?(similar_count)
+  end
+
+  ##
+  # TODO: Move on decorator maybe
+  #
+  def project_root
+    if server_environment
+      server_environment['project-root'] || ''
+    end
+  end
+
+  protected
 
   def decrease_counter_cache
     problem.inc(:notices_count, -1) if err
@@ -115,7 +137,7 @@ class Notice
   end
 
   def cache_attributes_on_problem
-    problem.cache_notice_attributes(self)
+    ProblemUpdaterCache.new(problem, self).update
   end
 
   def sanitize
@@ -123,6 +145,7 @@ class Notice
       send("#{h}=",sanitize_hash(send(h)))
     end
   end
+
 
   def sanitize_hash(h)
     h.recurse do

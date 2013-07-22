@@ -12,7 +12,7 @@
 //		$.jAlert( message, [title, callback] )
 //		$.jConfirm( message, [title, callback] )
 //		$.jPrompt( message, [value, title, callback] )
-// 
+//
 // History:
 //
 //		1.00 - Released (29 December 2008)
@@ -22,16 +22,16 @@
 //		1.2 - global methods removed.
 //
 // License:
-// 
+//
 // This plugin is dual-licensed under the GNU General Public License and the MIT License and
-// is copyright 2008 A Beautiful Site, LLC. 
+// is copyright 2008 A Beautiful Site, LLC.
 //
 (function($) {
-	
+
 	$.alerts = {
-		
+
 		// These properties can be read/written by accessing $.alerts.propertyName from your scripts at any time
-		
+
 		verticalOffset: -75,                // vertical offset of the dialog from center screen, in pixels
 		horizontalOffset: 0,                // horizontal offset of the dialog from center screen, in pixels/
 		repositionOnResize: true,           // re-centers the dialog on window resize
@@ -46,37 +46,37 @@
 			confirm: 'Confirm',
 			prompt: 'Prompt'
 		},
-		
+
 		// Public methods
-		
+
 		alert: function(message, title, callback) {
 			if (! title) title = $.alerts.titles.alert;
 			$.alerts._show(title, message, null, 'alert', function(result) {
 				if (callback) callback(result);
 			});
 		},
-		
+
 		confirm: function(message, title, callback) {
 			if (! title) title = $.alerts.titles.confirm;
 			$.alerts._show(title, message, null, 'confirm', function(result) {
 				if (callback) callback(result);
 			});
 		},
-			
+
 		prompt: function(message, value, title, callback) {
       if (! title) title = $.alerts.titles.prompt;
 			$.alerts._show(title, message, value, 'prompt', function(result) {
 				if(callback) callback(result);
 			});
 		},
-		
+
 		// Private methods
-		
+
 		_show: function(title, msg, value, type, callback) {
-			
+
 			$.alerts._hide();
 			$.alerts._overlay('show');
-			
+
 			$("BODY").append(
 			  '<div id="popup_container">' +
 			    '<h1 id="popup_title"></h1>' +
@@ -84,32 +84,34 @@
 			      '<div id="popup_message"></div>' +
 				'</div>' +
 			  '</div>');
-			
+
 			if( $.alerts.dialogClass ) $("#popup_container").addClass($.alerts.dialogClass);
-			
+
 			// IE6 Fix
-			var pos = ($.browser.msie && parseInt($.browser.version, 10) <= 6 ) ? 'absolute' : 'fixed'; 
-			
+      // No more $.browser in Jquery > 1,9 and not support IE 6
+			// var pos = ($.browser.msie && parseInt($.browser.version, 10) <= 6 ) ? 'absolute' : 'fixed';
+      var pos = 'fixed';
+
 			$("#popup_container").css({
 				position: pos,
 				zIndex: 99999,
 				padding: 0,
 				margin: 0
 			});
-			
+
 			$("#popup_title").text(title);
 			$("#popup_content").addClass(type);
 			$("#popup_message").text(msg);
 			$("#popup_message").html( $("#popup_message").text().replace(/\n/g, '<br />') );
-			
+
 			$("#popup_container").css({
 				minWidth: $("#popup_container").outerWidth(),
 				maxWidth: $("#popup_container").outerWidth()
 			});
-			
+
 			$.alerts._reposition();
 			$.alerts._maintainPosition(true);
-			
+
 			switch( type ) {
 			case 'alert':
 				$("#popup_message").after('<div id="popup_panel"><input type="button" value="' + $.alerts.okButton + '" id="popup_ok" /></div>');
@@ -158,20 +160,20 @@
 				break;
 			default: break;
 			}
-			
+
 			// Make draggable
 			if ($.alerts.draggable && $.fn.draggable) {
 				$("#popup_container").draggable({ handle: $("#popup_title") });
 				$("#popup_title").css({ cursor: 'move' });
 			}
 		},
-		
+
 		_hide: function() {
 			$("#popup_container").remove();
 			$.alerts._overlay('hide');
 			$.alerts._maintainPosition(false);
 		},
-		
+
 		_overlay: function(status) {
 			switch( status ) {
 				case 'show':
@@ -194,23 +196,23 @@
         default: break;
 			}
 		},
-		
+
 		_reposition: function() {
 			var top = (($(window).height() / 2) - ($("#popup_container").outerHeight() / 2)) + $.alerts.verticalOffset;
 			var left = (($(window).width() / 2) - ($("#popup_container").outerWidth() / 2)) + $.alerts.horizontalOffset;
 			if( top < 0 ) top = 0;
 			if( left < 0 ) left = 0;
-			
+
 			// IE6 fix
-			if( $.browser.msie && parseInt($.browser.version, 10) <= 6 ) top = top + $(window).scrollTop();
-			
+			// if( $.browser.msie && parseInt($.browser.version, 10) <= 6 ) top = top + $(window).scrollTop();
+
 			$("#popup_container").css({
 				top: top + 'px',
 				left: left + 'px'
 			});
 			$("#popup_overlay").height( $(document).height() );
 		},
-		
+
 		_maintainPosition: function(status) {
 			if( $.alerts.repositionOnResize ) {
 				switch(status) {
@@ -224,7 +226,7 @@
 				}
 			}
 		}
-		
+
 	};
-	
+
 })(jQuery);

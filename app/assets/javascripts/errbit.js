@@ -14,21 +14,12 @@ $(function() {
 
     bindRequiredPasswordMarks();
 
-    $('#watcher_name').live("click", function() {
-      $(this).closest('form').find('.show').removeClass('show');
-      $('#app_watchers_attributes_0_user_id').addClass('show');
-    });
-
-    $('#watcher_email').live("click", function() {
-      $(this).closest('form').find('.show').removeClass('show');
-      $('#app_watchers_attributes_0_email').addClass('show');
-    });
-
-    $('a.copy_config').live("click", function() {
+    // On page apps/:app_id/edit
+    $('a.copy_config').on("click", function() {
       $('select.choose_other_app').show().focus();
     });
 
-    $('select.choose_other_app').live("change", function() {
+    $('select.choose_other_app').on("change", function() {
       var loc = window.location;
       window.location.href = loc.protocol + "//" + loc.host + loc.pathname +
                              "?copy_attributes_from=" + $(this).val();
@@ -39,13 +30,12 @@ $(function() {
     });
 
     $('.notice-pagination').each(function() {
-      $('.notice-pagination a').pjax('#content', { timeout: 2000});
-      $('#content').bind('pjax:start',  function() {
-  $('.notice-pagination-loader').css("visibility", "visible");
-        currentTab = $('.tab-bar ul li a.button.active').attr('rel');
-      });
+      $.pjax.defaults = {timeout: 2000};
 
-      $('#content').bind('pjax:end',  function() {
+      $('#content').pjax('.notice-pagination a').on('pjax:start', function() {
+        $('.notice-pagination-loader').css("visibility", "visible");
+        currentTab = $('.tab-bar ul li a.button.active').attr('rel');
+      }).on('pjax:end', function() {
         activateTabbedPanels();
       });
     });
@@ -83,7 +73,7 @@ $(function() {
   function toggleProblemsCheckboxes() {
     var checkboxToggler = $('#toggle_problems_checkboxes');
 
-    checkboxToggler.live("click", function() {
+    checkboxToggler.on("click", function() {
       $('input[name^="problems"]').each(function() {
         this.checked = checkboxToggler.get(0).checked;
       });
@@ -126,7 +116,7 @@ $(function() {
     $('td.backtrace_separator').hide();
   }
   // Show external backtrace lines when clicking separator
-  $('td.backtrace_separator span').live('click', show_external_backtrace);
+  $('td.backtrace_separator span').on('click', show_external_backtrace);
   // Hide external backtrace on page load
   hide_external_backtrace();
 

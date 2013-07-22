@@ -23,6 +23,31 @@ describe App do
     end
   end
 
+  describe '<=>' do
+    it 'is compared by unresolved count' do
+      app_0 = stub_model(App, :name => 'app', :unresolved_count => 1, :problem_count => 1)
+      app_1 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 1)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+
+    it 'is compared by problem count' do
+      app_0 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 1)
+      app_1 = stub_model(App, :name => 'app', :unresolved_count => 0, :problem_count => 0)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+
+    it 'is compared by name' do
+      app_0 = stub_model(App, :name => 'app_0', :unresolved_count => 0, :problem_count => 0)
+      app_1 = stub_model(App, :name => 'app_1', :unresolved_count => 0, :problem_count => 0)
+
+      app_0.should < app_1
+      app_1.should > app_0
+    end
+  end
 
   context 'being created' do
     it 'generates a new api-key' do
@@ -71,7 +96,7 @@ describe App do
   context '#github_url_to_file' do
     it 'resolves to full path to file' do
       app = Fabricate(:app, :github_repo => "errbit/errbit")
-      app.github_url_to_file('/path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
+      app.github_url_to_file('path/to/file').should == "https://github.com/errbit/errbit/blob/master/path/to/file"
     end
   end
 
@@ -99,6 +124,25 @@ describe App do
     end
   end
 
+  context "emailable?" do
+    it "should be true if notify on errs and there are notification recipients" do
+      app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
+      2.times { Fabricate(:watcher, :app => app) }
+      app.emailable?.should be_true
+    end
+
+    it "should be false if notify on errs is disabled" do
+      app = Fabricate(:app, :notify_on_errs => false, :notify_all_users => false)
+      2.times { Fabricate(:watcher, :app => app) }
+      app.emailable?.should be_false
+    end
+
+    it "should be false if there are no notification recipients" do
+      app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
+      app.watchers.should be_empty
+      app.emailable?.should be_false
+    end
+  end
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do
@@ -143,104 +187,17 @@ describe App do
   end
 
 
-  context '#report_error!' do
-    before do
-      @xml = Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-      @app = Fabricate(:app, :api_key => 'APIKEY')
-      ErrorReport.any_instance.stub(:fingerprint).and_return('fingerprintdigest')
+  describe ".find_by_api_key!" do
+    it 'return the app with api_key' do
+      app = Fabricate(:app)
+      expect(App.find_by_api_key!(app.api_key)).to eq app
     end
-
-    it 'finds the correct app' do
-      @notice = App.report_error!(@xml)
-      @notice.err.app.should == @app
+    it 'raise Mongoid::Errors::DocumentNotFound if not found' do
+      expect {
+        App.find_by_api_key!('foo')
+      }.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
-
-    it 'finds the correct err for the notice' do
-      App.should_receive(:find_by_api_key!).and_return(@app)
-      @app.should_receive(:find_or_create_err!).with({
-        :error_class  => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Fabricate(:err))
-      err.notices.stub(:create!)
-      @notice = App.report_error!(@xml)
-    end
-
-    it 'marks the err as unresolved if it was previously resolved' do
-      App.should_receive(:find_by_api_key!).and_return(@app)
-      @app.should_receive(:find_or_create_err!).with({
-        :error_class  => 'HoptoadTestingException',
-        :component    => 'application',
-        :action       => 'verify',
-        :environment  => 'development',
-        :fingerprint  => 'fingerprintdigest'
-      }).and_return(err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)))
-      err.should be_resolved
-      @notice = App.report_error!(@xml)
-      @notice.err.should == err
-      @notice.err.should_not be_resolved
-    end
-
-    it 'should create a new notice' do
-      @notice = App.report_error!(@xml)
-      @notice.should be_persisted
-    end
-
-    it 'assigns an err to the notice' do
-      @notice = App.report_error!(@xml)
-      @notice.err.should be_a(Err)
-    end
-
-    it 'captures the err message' do
-      @notice = App.report_error!(@xml)
-      @notice.message.should == 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.'
-    end
-
-    it 'captures the backtrace' do
-      @notice = App.report_error!(@xml)
-      @notice.backtrace_lines.size.should == 73
-      @notice.backtrace_lines.last['file'].should == '[GEM_ROOT]/bin/rake'
-    end
-
-    it 'captures the server_environment' do
-      @notice = App.report_error!(@xml)
-      @notice.server_environment['environment-name'].should == 'development'
-    end
-
-    it 'captures the request' do
-      @notice = App.report_error!(@xml)
-      @notice.request['url'].should == 'http://example.org/verify'
-      @notice.request['params']['controller'].should == 'application'
-    end
-
-    it 'captures the notifier' do
-      @notice = App.report_error!(@xml)
-      @notice.notifier['name'].should == 'Hoptoad Notifier'
-    end
-
-    it "should handle params without 'request' section" do
-      xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
-      lambda { App.report_error!(xml) }.should_not raise_error
-    end
-
-    it "should handle params with only a single line of backtrace" do
-      xml = Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
-      lambda { @notice = App.report_error!(xml) }.should_not raise_error
-      @notice.backtrace_lines.length.should == 1
-    end
-
-    it 'captures the current_user' do
-      @notice = App.report_error!(@xml)
-      @notice.current_user['id'].should == '123'
-      @notice.current_user['name'].should == 'Mr. Bean'
-      @notice.current_user['email'].should == 'mr.bean@example.com'
-      @notice.current_user['username'].should == 'mrbean'
-    end
-
   end
-
 
 end
 

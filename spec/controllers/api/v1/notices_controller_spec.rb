@@ -22,7 +22,7 @@ describe Api::V1::NoticesController do
 
       it "should return XML if XML is requested" do
         get :index, :auth_token => @user.authentication_token, :format => "xml"
-        lambda { XML::Parser.string(response.body).parse }.should_not raise_error
+        Nokogiri::XML(response.body).errors.should be_empty
       end
 
       it "should return JSON by default" do

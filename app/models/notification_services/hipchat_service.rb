@@ -1,13 +1,13 @@
 if defined? HipChat
   class NotificationServices::HipchatService < NotificationService
     Label = 'hipchat'
-    Fields = [
+    Fields += [
       [:api_token, {
         :placeholder => "API Token"
       }],
       [:room_id, {
-        :placeholder => "Room ID",
-        :label       => "Room ID"
+        :placeholder => "Room name",
+        :label       => "Room name"
       }],
     ]
 

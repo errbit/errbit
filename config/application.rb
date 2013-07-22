@@ -9,9 +9,12 @@ require "action_mailer/railtie"
 require 'mongoid/railtie'
 require "sprockets/railtie"
 
-# If you have a Gemfile, require the gems listed there, including any gems
-# you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
 
 module Errbit
   class Application < Rails::Application
@@ -45,11 +48,14 @@ module Errbit
       g.fixture_replacement :fabrication
     end
 
+    # Enable the mongoid identity map for performance
+    Mongoid.identity_map_enabled = true
+
     # IssueTracker subclasses use inheritance, so preloading models provides querying consistency in dev mode.
     config.mongoid.preload_models = true
 
     # Set up observers
-    config.mongoid.observers = :deploy_observer, :notice_observer
+    config.mongoid.observers = :deploy_observer, :notice_observer, :comment_observer
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
