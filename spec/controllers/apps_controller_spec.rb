@@ -52,7 +52,6 @@ describe AppsController do
       it "should list atom feed successfully" do
         get :show, :id => @app.id, :format => "atom"
         response.should be_success
-        response.body.should match(@problem.message)
       end
 
       context "pagination" do
