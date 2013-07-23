@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "apps/edit.html.haml" do
+describe "apps/new.html.haml" do
   let(:app) { stub_model(App) }
   before do
     view.stub(:app).and_return(app)
@@ -12,10 +12,10 @@ describe "apps/edit.html.haml" do
       view.content_for(:action_bar)
     end
 
-    it "should confirm the 'destroy' link" do
+    it "should confirm the 'cancel' link" do
       render
 
-      action_bar.should have_selector('a.button[data-confirm="Seriously?"]')
+      action_bar.should have_selector('a.button', :text => 'cancel')
     end
 
   end

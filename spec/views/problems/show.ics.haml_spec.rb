@@ -7,7 +7,7 @@ describe "problems/show.html.ics" do
   end
 
   it 'should work' do
-    render :template => 'problems/show.ics.haml'
+    render :template => 'problems/show', :formats => [:ics], :handlers => [:haml]
   end
 
 

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe AppsController do
-  render_views
 
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
@@ -314,7 +313,6 @@ describe AppsController do
 
               @app.reload
               @app.issue_tracker_configured?.should == false
-              response.body.should match(/You must specify your/)
             end
           end
         end
