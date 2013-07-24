@@ -44,7 +44,7 @@ gem 'octokit'
 gem 'gitlab', :git => 'https://github.com/NARKOZ/gitlab.git'
 
 # Bitbucket Issues
-gem 'bitbucket_rest_api'
+gem 'bitbucket_rest_api', :require => false
 
 # Unfuddle
 gem "taskmapper", "~> 0.8.0"
