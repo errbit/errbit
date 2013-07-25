@@ -379,6 +379,11 @@ printStackTrace.implementation.prototype = {
                 '<project-root>{project_root}</project-root>' +
                 '<environment-name>{environment}</environment-name>' +
             '</server-environment>' +
+            '<current-user>' +
+                '<id>{user_id}</id>' +
+                '<name>{user_name}</name>' +
+                '<email>{user_email}</email>' +
+            '</current-user>' +
         '</notice>',
         REQUEST_VARIABLE_GROUP_XML = '<{group_name}>{inner_content}</{group_name}>',
         REQUEST_VARIABLE_XML = '<var key="{key}">{value}</var>',
@@ -411,9 +416,9 @@ printStackTrace.implementation.prototype = {
                 "rootDirectory": "{project_root}",
                 "action": "{request_action}",
 
-				"userId": "{}",
-				"userName": "{}",
-				"userEmail": "{}",
+				"userId": "{user_id}",
+				"userName": "{user_name}",
+				"userEmail": "{user_email}",
             },
             "environment": {},
 			//"session": "",
@@ -682,6 +687,15 @@ printStackTrace.implementation.prototype = {
         }, {
             variable: 'outputFormat',
             namespace: 'options'
+        }, {
+            methodName: 'setCurrentUser',
+            method: (function (value) {
+                for (var key in value) {
+                    if (value.hasOwnProperty(key)) {
+                        Config.xmlData['user_' + key] = value[key];
+                    }
+                }
+            })
         }, {
             methodName: 'setTrackJQ',
             variable: 'trackJQ',
