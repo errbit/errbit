@@ -12,6 +12,7 @@
 - Update the Devise Gem to the last one ([@shingara][])
 - [#524][] Add current user information on the notifer.js ([@roryf][])
 - [#523][] Update javascript-stacktrace ([@aliscott][])
+- [#516][] Add Jira Issue tracker ([@xenji][])
 
 ### Bug Fixes
 
@@ -78,6 +79,7 @@
 [#506]: https://github.com/errbit/errbit/issues/506
 [#508]: https://github.com/errbit/errbit/issues/508
 [#514]: https://github.com/errbit/errbit/issues/514
+[#516]: https://github.com/errbit/errbit/issues/516
 [#517]: https://github.com/errbit/errbit/issues/517
 [#524]: https://github.com/errbit/errbit/issues/524
 
@@ -101,3 +103,4 @@
 [@shingara]: https://github.com/shingara
 [@tamaloa]: https://github.com/tamaloa
 [@tvdeyen]: https://github.com/tvdeyen
+[@xenji]: https://github.com/xenji
