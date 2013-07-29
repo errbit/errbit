@@ -151,6 +151,10 @@ GEM
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.1)
+    jira-ruby (0.1.2)
+      activesupport
+      oauth
+      railties
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -204,6 +208,7 @@ GEM
     nokogiri (1.5.10)
     nokogiri-happymapper (0.5.7)
       nokogiri (~> 1.5)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -407,6 +412,7 @@ DEPENDENCIES
   hoptoad_notifier (~> 2.4)
   htmlentities
   httparty
+  jira-ruby
   jquery-rails (~> 2.1.4)
   kaminari (>= 0.14.1)
   launchy
