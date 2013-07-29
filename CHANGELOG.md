@@ -4,7 +4,7 @@
 
 - Update some gems ([@shingara][])
 - [#492][] Improve some Pjax call ([@nfedyashev][])
-- [#428][] Add the support of Unfuddle Tracker ([@parallel588][])
+- [#428][] Add the support of Unfuddle Issue Tracker ([@parallel588][])
 - Avoid to delete his own user ([@shingara][])
 - [#456][] Avoid to delete admin access of current user logged ([@shingara][])
 - [#253][] Refactor the Fingerprint generation ([@boblail][])
