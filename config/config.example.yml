@@ -102,3 +102,8 @@ github_access_scope: ['repo']
 #  :user_name:            USERNAME
 #  :password:             PASSWORD
 
+
+# If you want send your email by your sendmail
+# sendmail_settings:
+#  :location: '/usr/sbin/sendmail'
+#  :arguments: '-i -t'

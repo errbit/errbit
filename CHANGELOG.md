@@ -13,6 +13,8 @@
 - [#524][] Add current user information on the notifer.js ([@roryf][])
 - [#523][] Update javascript-stacktrace ([@aliscott][])
 - [#516][] Add Jira Issue tracker ([@xenji][])
+- [#512][] Add capabilities to configure the use of sendmail to send
+  email from Errbit ([@shingara][])
 
 ### Bug Fixes
 
