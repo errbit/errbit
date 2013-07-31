@@ -118,7 +118,7 @@ group :test do
   # DatabaseCleaner 1.0.0 drop the support of ruby 1.8.7
   gem 'database_cleaner', '~> 0.9.0'
   gem 'email_spec'
-  gem 'timecop'
+  gem 'timecop', '0.6.1' # last version compatible to ruby 1.8
   gem 'coveralls', :require => false
 end
 

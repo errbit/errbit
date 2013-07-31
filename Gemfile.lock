@@ -182,7 +182,7 @@ GEM
       callsite
       rack-contrib
       railties
-    method_source (0.8.1)
+    method_source (0.8.2)
     mime-types (1.23)
     mongo (1.8.6)
       bson (~> 1.8.6)
@@ -352,7 +352,7 @@ GEM
       rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
-    timecop (0.6.2.2)
+    timecop (0.6.1)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -442,7 +442,7 @@ DEPENDENCIES
   taskmapper-unfuddle (~> 0.7.0)
   therubyracer
   thin
-  timecop
+  timecop (= 0.6.1)
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   underscore-rails
