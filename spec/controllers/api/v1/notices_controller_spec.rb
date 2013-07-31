@@ -17,7 +17,7 @@ describe Api::V1::NoticesController do
 
       it "should return JSON if JSON is requested" do
         get :index, :auth_token => @user.authentication_token, :format => "json"
-        lambda { JSON.load(response.body) }.should_not raise_error(JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error() #JSON::ParserError)
       end
 
       it "should return XML if XML is requested" do
@@ -27,7 +27,7 @@ describe Api::V1::NoticesController do
 
       it "should return JSON by default" do
         get :index, :auth_token => @user.authentication_token
-        lambda { JSON.load(response.body) }.should_not raise_error(JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error() #JSON::ParserError)
       end
 
       describe "given a date range" do

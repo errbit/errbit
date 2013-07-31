@@ -103,7 +103,7 @@ describe ProblemsController do
         3.times { problems << Fabricate(:err).problem }
         3.times { problems << Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem }
         Problem.should_receive(:ordered_by).and_return(
-          mock('proxy', :page => mock('other_proxy', :per => problems))
+          double('proxy', :page => double('other_proxy', :per => problems))
         )
         get :index, :all_errs => true
         controller.problems.should == problems

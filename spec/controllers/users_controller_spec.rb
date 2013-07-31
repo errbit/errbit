@@ -207,7 +207,7 @@ describe UsersController do
     context "DELETE /users/:id" do
 
       context "with a destroy success" do
-        let(:user_destroy) { mock(:destroy => true) }
+        let(:user_destroy) { double(:destroy => true) }
 
         before {
           UserDestroy.should_receive(:new).with(user).and_return(user_destroy)

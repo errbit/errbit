@@ -18,7 +18,7 @@ describe NoticeObserver do
       it "sends an email notification after #{threshold} notice(s)" do
         @err.problem.stub(:notices_count).and_return(threshold)
         Mailer.should_receive(:err_notification).
-          and_return(mock('email', :deliver => true))
+          and_return(double('email', :deliver => true))
         Fabricate(:notice, :err => @err)
       end
     end
@@ -38,7 +38,7 @@ describe NoticeObserver do
     it "should send email notification after 1 notice since an error has been resolved" do
       @err.problem.resolve!
       Mailer.should_receive(:err_notification).
-        and_return(mock('email', :deliver => true))
+        and_return(double('email', :deliver => true))
       Fabricate(:notice, :err => @err)
     end
   end
@@ -103,7 +103,7 @@ describe NoticeObserver do
       Fabricate(:notice, :err => err)
     end
   end
-  
+
   describe "should send a notification at desired intervals" do
     let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service, :notify_at_notices => [1,2]))}
     let(:backtrace) { Fabricate(:backtrace) }

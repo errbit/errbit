@@ -42,7 +42,7 @@ describe ProblemMerge do
     end
 
     it 'update problem cache' do
-      ProblemUpdaterCache.should_receive(:new).with(problem).and_return(mock(:update => true))
+      ProblemUpdaterCache.should_receive(:new).with(problem).and_return(double(:update => true))
       problem_merge.merge
     end
 
