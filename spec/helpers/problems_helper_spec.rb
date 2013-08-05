@@ -62,10 +62,7 @@ describe ProblemsHelper do
       let(:email_hash) { Digest::MD5.hexdigest email }
 
       it "should return the http url" do
-        # request.env['HTTPS'] = 'on'
         ActionController::TestRequest.any_instance.stub ssl?: true
-
-
         helper.gravatar_url(email).should eq("https://secure.gravatar.com/avatar/#{email_hash}?d=identicon")
       end
     end
