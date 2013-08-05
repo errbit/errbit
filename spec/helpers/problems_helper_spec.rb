@@ -42,9 +42,31 @@ describe ProblemsHelper do
   describe "#gravatar_url" do
     context "no email" do
       let(:email) { nil }
-      
+
       it "should return nil" do
         helper.gravatar_url(email).should be_nil
+      end
+    end
+
+    context "without ssl" do
+      let(:email) { "gravatar@example.com" }
+      let(:email_hash) { Digest::MD5.hexdigest email }
+
+      it "should return the http url" do
+        helper.gravatar_url(email).should eq("http://www.gravatar.com/avatar/#{email_hash}?d=identicon")
+      end
+    end
+
+    context "with ssl" do
+      let(:email) { "gravatar@example.com" }
+      let(:email_hash) { Digest::MD5.hexdigest email }
+
+      it "should return the http url" do
+        # request.env['HTTPS'] = 'on'
+        ActionController::TestRequest.any_instance.stub ssl?: true
+
+
+        helper.gravatar_url(email).should eq("https://secure.gravatar.com/avatar/#{email_hash}?d=identicon")
       end
     end
   end
