@@ -6,7 +6,7 @@ describe NoticesController do
   let(:notice) { Fabricate(:notice) }
   let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read }
   let(:app) { Fabricate(:app) }
-  let(:error_report) { mock(:valid? => true, :generate_notice! => true, :notice => notice) }
+  let(:error_report) { double(:valid? => true, :generate_notice! => true, :notice => notice) }
 
   context 'notices API' do
     context "with all params" do
@@ -46,7 +46,7 @@ describe NoticesController do
         response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
       context "with an invalid API_KEY" do
-        let(:error_report) { mock(:valid? => false) }
+        let(:error_report) { double(:valid? => false) }
         it 'return 422' do
           post :create, :format => :xml, :data => xml
           expect(response.status).to eq 422

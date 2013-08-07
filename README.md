@@ -423,6 +423,18 @@ card_type = Defect, status = Open, priority = Essential
 * Project id the id of your project where your ticket is create
 * Milestone id the id of your milestone where your ticket is create
 
+** Jira Issue Integration **
+
+* base_url the jira URL
+* context_path Context Path (Just "/" if empty otherwise with leading slash)
+* username HTTP Basic Auth User
+* password HTTP Basic Auth Password
+* project_id The project Key where the issue will be created
+* account Assign to this user. If empty, Jira takes the project default.
+* issue_component Website - Other
+* issue_type Issue type
+* issue_priority Priority
+
 
 What if Errbit has an error?
 ----------------------------

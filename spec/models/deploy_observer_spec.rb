@@ -5,7 +5,7 @@ describe DeployObserver do
     context 'and the app should notify on deploys' do
       it 'should send an email notification' do
         Mailer.should_receive(:deploy_notification).
-          and_return(mock('email', :deliver => true))
+          and_return(double('email', :deliver => true))
         Fabricate(:deploy, :app => Fabricate(:app_with_watcher, :notify_on_deploys => true))
       end
     end

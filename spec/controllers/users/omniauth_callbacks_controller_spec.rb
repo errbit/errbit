@@ -12,7 +12,7 @@ describe Users::OmniauthCallbacksController do
         :credentials => { :token => token }
       )
     }
-    @controller.stub!(:env).and_return(env)
+    @controller.stub(:env).and_return(env)
   end
 
   context 'Linking a GitHub account to a signed in user' do

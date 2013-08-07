@@ -9,7 +9,7 @@ describe NotificationService::GtalkService do
     problem = notice.problem
 
     #gtalk stubbing
-    gtalk = mock('GtalkService')
+    gtalk = double('GtalkService')
     jid = double("jid")
     message = double("message")
     Jabber::JID.should_receive(:new).with(notification_service.subdomain).and_return(jid)
@@ -19,13 +19,13 @@ describe NotificationService::GtalkService do
     message_value = """#{problem.app.name.to_s}
 http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
 #{notification_service.notification_description problem}"""
-    
+
     Jabber::Message.should_receive(:new).with(notification_service.user_id, message_value).and_return(message)
     Jabber::Message.should_receive(:new).with(notification_service.room_id, message_value).and_return(message)
-    
+
     Jabber::MUC::SimpleMUCClient.should_receive(:new).and_return(gtalk)
     gtalk.should_receive(:join).with(notification_service.room_id + "/errbit")
-    
+
     #assert
     gtalk.should_receive(:send).exactly(2).times.with(message)
 
@@ -43,7 +43,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
 #{@notification_service.notification_description @problem}"""
 
       # gtalk stubbing
-      @gtalk = mock('GtalkService')
+      @gtalk = double('GtalkService')
       @gtalk.should_receive(:connect)
       @gtalk.should_receive(:auth)
       jid = double("jid")
@@ -86,7 +86,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
       @notification_service.room_id = ""
       @notification_service.create_notification(@problem)
     end
-    
+
   end
 
   it "it should send a notification to room only" do
@@ -97,7 +97,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
     problem = notice.problem
 
     #gtalk stubbing
-    gtalk = mock('GtalkService')
+    gtalk = double('GtalkService')
     jid = double("jid")
     message = double("message")
     Jabber::JID.should_receive(:new).with(notification_service.subdomain).and_return(jid)
@@ -107,11 +107,11 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
     message_value = """#{problem.app.name.to_s}
 http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
 #{notification_service.notification_description problem}"""
-    
+
     Jabber::Message.should_receive(:new).with(notification_service.room_id, message_value).and_return(message)
-    
+
     Jabber::MUC::SimpleMUCClient.should_receive(:new).and_return(gtalk)
-    gtalk.should_receive(:join).with(notification_service.room_id + "/errbit")    
+    gtalk.should_receive(:join).with(notification_service.room_id + "/errbit")
 
     notification_service.user_id = ""
 

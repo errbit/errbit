@@ -10,7 +10,7 @@ describe CommentObserver do
       it 'should send an email notification' do
         Mailer.should_receive(:comment_notification).
           with(comment).
-          and_return(mock('email', :deliver => true))
+          and_return(double('email', :deliver => true))
         comment.save
       end
     end

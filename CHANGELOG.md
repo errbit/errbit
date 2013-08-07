@@ -4,12 +4,17 @@
 
 - Update some gems ([@shingara][])
 - [#492][] Improve some Pjax call ([@nfedyashev][])
-- [#428][] Add the support of Unfuddle Tracker ([@parallel588][])
+- [#428][] Add the support of Unfuddle Issue Tracker ([@parallel588][])
 - Avoid to delete his own user ([@shingara][])
 - [#456][] Avoid to delete admin access of current user logged ([@shingara][])
 - [#253][] Refactor the Fingerprint generation ([@boblail][])
 - [#508][] Merge comments to when you merge problems ([@shingara][])
 - Update the Devise Gem to the last one ([@shingara][])
+- [#524][] Add current user information on the notifer.js ([@roryf][])
+- [#523][] Update javascript-stacktrace ([@aliscott][])
+- [#516][] Add Jira Issue tracker ([@xenji][])
+- [#512][] Add capabilities to configure the use of sendmail to send
+  email from Errbit ([@shingara][])
 
 ### Bug Fixes
 
@@ -76,24 +81,28 @@
 [#506]: https://github.com/errbit/errbit/issues/506
 [#508]: https://github.com/errbit/errbit/issues/508
 [#514]: https://github.com/errbit/errbit/issues/514
+[#516]: https://github.com/errbit/errbit/issues/516
 [#517]: https://github.com/errbit/errbit/issues/517
+[#524]: https://github.com/errbit/errbit/issues/524
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
+[@Gonzih]: https://github.com/Gonzih
 [@SamSaffron]: https://github.com/SamSaffron
 [@adamjt]: https://github.com/adamjt
+[@aliscott]: http://github.com/aliscott
 [@alvarobp]: https://github.com/alvarobp
+[@boblail]: https://github.com/boblail
 [@chadcf]: https://github.com/chadcf
+[@ivanyv]: https://github.com/ivanyv
+[@manuelmeurer]: https://github.com/manuelmeurer
 [@mildavw]: https://github.com/mildavw
+[@mildavw]: https://github.com/mildavw
+[@nfedyashev]: https://github.com/nfedyashev
+[@parallel588]: https://github.com/parallel588
+[@roryf]: https://github.com/roryf
 [@sdepold]: https://github.com/sdepold
 [@shingara]: https://github.com/shingara
 [@tamaloa]: https://github.com/tamaloa
-[@ivanyv]: https://github.com/ivanyv
-[@manuelmeurer]: https://github.com/manuelmeurer
 [@tvdeyen]: https://github.com/tvdeyen
-[@nfedyashev]: https://github.com/nfedyashev
-[@parallel588]: https://github.com/parallel588
-[@Gonzih]: https://github.com/Gonzih
-[@boblail]: https://github.com/boblail
-[@roryf]: https://github.com/roryf
-[@mildavw]: https://github.com/mildavw
+[@xenji]: https://github.com/xenji

@@ -71,6 +71,11 @@ if smtp = Errbit::Config.smtp_settings
   ActionMailer::Base.smtp_settings = smtp
 end
 
+if sendmail = Errbit::Config.sendmail_settings
+  ActionMailer::Base.delivery_method = :sendmail
+  ActionMailer::Base.sendmail_settings = sendmail
+end
+
 # Set config specific values
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|
   default.merge! :host => Errbit::Config.host if default[:host].blank?

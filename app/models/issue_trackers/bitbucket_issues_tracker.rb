@@ -1,3 +1,4 @@
+require 'bitbucket_rest_api'
 class IssueTrackers::BitbucketIssuesTracker < IssueTracker
   Label = "bitbucket"
   Note = 'Please configure your Bitbucket repository in the <strong>BITBUCKET REPO</strong> field above.'

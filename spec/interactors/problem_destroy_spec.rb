@@ -8,8 +8,8 @@ describe ProblemDestroy do
   context "in unit way" do
     let(:problem) {
       problem = Problem.new
-      problem.stub(:errs).and_return(mock(:criteria, :only => [err_1, err_2]))
-      problem.stub(:comments).and_return(mock(:criteria, :only => [comment_1, comment_2]))
+      problem.stub(:errs).and_return(double(:criteria, :only => [err_1, err_2]))
+      problem.stub(:comments).and_return(double(:criteria, :only => [comment_1, comment_2]))
       problem.stub(:delete)
       problem
     }

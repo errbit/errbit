@@ -8,7 +8,7 @@ describe NotificationService::PushoverService do
     problem = notice.problem
 
     # hoi stubbing
-    notification = mock('PushoverService')
+    notification = double('PushoverService')
     Rushover::Client.stub(:new).and_return(notification)
     notification.stub(:notify) { true }
 
