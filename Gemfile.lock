@@ -315,7 +315,7 @@ GEM
     rushover (0.3.0)
       json
       rest-client
-    safe_yaml (0.9.4)
+    safe_yaml (0.9.5)
     selenium-webdriver (2.33.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
