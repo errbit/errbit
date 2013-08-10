@@ -15,6 +15,8 @@
 - [#516][] Add Jira Issue tracker ([@xenji][])
 - [#512][] Add capabilities to configure the use of sendmail to send
   email from Errbit ([@shingara][])
+- [#532][] Use https link in Gravatar if you use errbit on https
+  ([@jeroenj][])
 
 ### Bug Fixes
 
@@ -84,6 +86,7 @@
 [#516]: https://github.com/errbit/errbit/issues/516
 [#517]: https://github.com/errbit/errbit/issues/517
 [#524]: https://github.com/errbit/errbit/issues/524
+[#532]: https://github.com/errbit/errbit/issues/532
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
@@ -92,9 +95,11 @@
 [@adamjt]: https://github.com/adamjt
 [@aliscott]: http://github.com/aliscott
 [@alvarobp]: https://github.com/alvarobp
+[@arthurnn]: https://github.com/arthurnn
 [@boblail]: https://github.com/boblail
 [@chadcf]: https://github.com/chadcf
 [@ivanyv]: https://github.com/ivanyv
+[@jeroenj]: https://github.com/jeroenj
 [@manuelmeurer]: https://github.com/manuelmeurer
 [@mildavw]: https://github.com/mildavw
 [@mildavw]: https://github.com/mildavw
@@ -106,3 +111,4 @@
 [@tamaloa]: https://github.com/tamaloa
 [@tvdeyen]: https://github.com/tvdeyen
 [@xenji]: https://github.com/xenji
+

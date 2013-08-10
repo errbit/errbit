@@ -508,10 +508,11 @@ Special Thanks
 * [Nathan Broadbent (@ndbroadbent)](https://github.com/ndbroadbent) - Maintaining Errbit and contributing many features
 * [Vasiliy Ermolovich (@nashby)](https://github.com/nashby) - Contributing and helping to resolve issues and pull requests
 * [Marcin Ciunelis (@martinciu)](https://github.com/martinciu) - Helping to improve Errbit's architecture
+* [Cyril Mougel (@shingara)](https://github.com/shingara) - Maintaining Errbit and contributing many features
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
 * [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrake.io).
 
-See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details.
+See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details. You can see another list of Contributors by release version on [CONTRIBUTORS.md]
 
 
 Contributing
@@ -534,6 +535,7 @@ and make **optional** features configurable via `config/config.yml`.
 * Add tests for it. This is important so we don't break it in a future version unintentionally.
 * Commit, do not mess with Rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself we can ignore when we pull)
 * Send us a pull request. Bonus points for topic branches.
+* Add you on the CONTRIBUTORS.md file on the current release
 
 
 Copyright
