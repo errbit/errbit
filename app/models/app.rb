@@ -7,6 +7,7 @@ class App
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :gitlab_repo_url
   field :asset_host
   field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
@@ -110,6 +111,21 @@ class App
 
   def bitbucket_url_to_file(file)
     "#{bitbucket_url}/src/#{repo_branch}/#{file}"
+  end
+
+  def gitlab_repo
+    url = URI.parse(self.gitlab_repo_url)
+    url.path.gsub(/^\/|\/$/, '').presence
+  rescue URI::InvalidURIError
+    return nil
+  end
+
+  def gitlab_repo_url?
+    self.gitlab_repo_url.present?
+  end
+
+  def gitlab_url_to_file(file)
+    "#{gitlab_repo_url}/blob/#{repo_branch}/#{file}"
   end
 
 
