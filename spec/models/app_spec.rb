@@ -91,6 +91,13 @@ describe App do
       app.save
       app.github_repo.should == "errbit/errbit"
     end
+
+    it 'extracts gitlab repo path from url' do
+      app = Fabricate.build(:app, :gitlab_repo_url => "https://git.example.com/foo/bar/")
+      app.save
+      app.gitlab_repo_url.should == "https://git.example.com/foo/bar/"
+      app.gitlab_repo.should == "foo/bar"
+    end
   end
 
   context '#github_url_to_file' do
