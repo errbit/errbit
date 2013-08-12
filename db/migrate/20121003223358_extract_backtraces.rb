@@ -6,7 +6,7 @@ class ExtractBacktraces < Mongoid::Migration
       notice.backtrace = backtrace
       notice['backtrace'] = nil
       notice.save!
-    end
+    end unless Notice.reflect_on_association(:backtrace).present?
     say "run `db.repairDatabase()` (in mongodb console) to recover deleted space"
   end
 
