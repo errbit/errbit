@@ -6,7 +6,7 @@ if config_file.file? &&
 elsif ENV['HEROKU'] || ENV['USE_ENV']
   # No mongoid.yml file. Use ENV variable to define your MongoDB
   # configuration
-  if mongo = ENV['MONGOLAB_URI'] || ENV['MONGOHQ_URL']
+  if mongo = ENV['MONGOLAB_URI'] || ENV['MONGOHQ_URL'] || ENV['MONGODB_URL']
     settings = URI.parse(mongo)
     database_name = settings.path.gsub(/^\//, '')
   else
