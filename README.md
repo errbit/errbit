@@ -423,7 +423,7 @@ card_type = Defect, status = Open, priority = Essential
 * Project id the id of your project where your ticket is create
 * Milestone id the id of your milestone where your ticket is create
 
-** Jira Issue Integration **
+**Jira Issue Integration**
 
 * base_url the jira URL
 * context_path Context Path (Just "/" if empty otherwise with leading slash)
