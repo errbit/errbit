@@ -69,3 +69,9 @@ variable.
 * MONGOID_PASSWORD
 * MONGOID_DATABASE
 
+## Flowdock notification adapter
+
+If you noticed default Gravatar icon in your Flowdock notifications you
+may want to [add Errbit icon](http://gravatar.com) for email that is
+set in ERRBIT_EMAIL_FROM.
+You don't need to approve or authorize it on Flowdock because it is used only for an icon.
