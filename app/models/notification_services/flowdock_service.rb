@@ -21,7 +21,7 @@ if defined? Flowdock
     end
 
     def create_notification(problem)
-      flow = Flowdock::Flow.new(:api_token => api_token, :source => "Errbit", :from => {:name => "Errbit", :address => 'support@flowdock.com'})
+      flow = Flowdock::Flow.new(:api_token => api_token, :source => "Errbit", :from => {:name => "Errbit", :address => ENV['ERRBIT_EMAIL_FROM'] || 'support@flowdock.com'})
       subject = "[#{problem.environment}] #{problem.message.to_s.truncate(100)}"
       url = app_problem_url problem.app, problem
       flow.push_to_team_inbox(:subject => subject, :content => content(problem, url), :project => project_name(problem), :link => url)
