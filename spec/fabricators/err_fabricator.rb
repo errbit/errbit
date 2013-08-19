@@ -1,9 +1,6 @@
 Fabricator :err do
   problem!
-  error_class!         { 'FooError' }
-  component     'foo'
-  action        'bar'
-  environment   'production'
+  fingerprint 'some-finger-print'
 end
 
 Fabricator :notice do
