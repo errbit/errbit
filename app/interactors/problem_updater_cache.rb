@@ -43,8 +43,6 @@ class ProblemUpdaterCache
     attrs[:last_notice_at] = last_notice.created_at if last_notice
     attrs.merge!(
       :message     => notice.message,
-      :environment => notice.environment_name,
-      :error_class => notice.error_class,
       :where       => notice.where,
       :messages    => attribute_count(:message, messages),
       :hosts       => attribute_count(:host, hosts),

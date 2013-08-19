@@ -23,15 +23,9 @@ class ErrorReport
   end
 
   def rails_env
-    server_environment['environment-name'] || 'development'
-  end
-
-  def component
-    request['component'] || 'unknown'
-  end
-
-  def action
-    request['action']
+    rails_env = server_environment['environment-name']
+    rails_env = 'development' if rails_env.blank?
+    rails_env
   end
 
   def app
@@ -69,8 +63,6 @@ class ErrorReport
   def error
     @error ||= app.find_or_create_err!(
       :error_class => error_class,
-      :component => component,
-      :action => action,
       :environment => rails_env,
       :fingerprint => fingerprint
     )
