@@ -17,6 +17,7 @@
   email from Errbit ([@shingara][])
 - [#532][] Use https link in Gravatar if you use errbit on https
   ([@jeroenj][])
+- [#536][] Order app by name by default ([@2called-chaos][])
 
 ### Bug Fixes
 
@@ -90,6 +91,7 @@
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
+[@2called-chaos]: https://github.com/2called-chaos
 [@Gonzih]: https://github.com/Gonzih
 [@SamSaffron]: https://github.com/SamSaffron
 [@adamjt]: https://github.com/adamjt
@@ -111,4 +113,3 @@
 [@tamaloa]: https://github.com/tamaloa
 [@tvdeyen]: https://github.com/tvdeyen
 [@xenji]: https://github.com/xenji
-

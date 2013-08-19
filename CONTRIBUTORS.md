@@ -1,5 +1,6 @@
 ## 0.2.0 - Not Released Yet
 
+- [@2called-chaos][]
 - [@Gonzih][]
 - [@aliscott][]
 - [@arthurnn][]
@@ -28,6 +29,7 @@
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
+[@2called-chaos]: https://github.com/2called-chaos
 [@Gonzih]: https://github.com/Gonzih
 [@SamSaffron]: https://github.com/SamSaffron
 [@adamjt]: https://github.com/adamjt
