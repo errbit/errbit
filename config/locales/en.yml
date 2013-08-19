@@ -57,7 +57,6 @@ en:
         merge_several:
           success: "%{nb} errors have been merged."
 
-
   devise:
     registrations:
       signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
@@ -66,3 +65,16 @@ en:
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
+
+  apps:
+    index:
+      notify: Notification Service
+      tracker: Tracker
+      last_deploy: Last Deploy
+      errors: Errors
+      name: Name
+      repository: Repository
+      title: Apps
+      new_app: Add a New App
+      no_apps: 'No apps here.'
+      click_to_create: 'Click here to create your first one'
