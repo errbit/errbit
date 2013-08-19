@@ -252,6 +252,7 @@ a.action  { float: right; font-size: 0.9em;}
   padding: 20px 0;
   font-size: 0.8em; text-align: center;
   color: #929292;
+  margin-bottom: 40px;
 }
 
 /* Flash Messages */
@@ -508,6 +509,13 @@ a.button.active {
 /* Tab Bar */
 .tab-bar {
   margin-top: 12px;
+  margin-bottom: 0;
+  position: fixed;
+  bottom: 0;
+  width: 888px;
+  background-color: #e6e6e6;
+  border: 1px solid #ccc;
+  z-index: 1;
 }
 #content .tab-bar a.button {
   border-bottom:0;
@@ -528,7 +536,7 @@ a.button.active {
   height:31px;
 }
 .tab-bar ul {
-  padding: 9px 0 0;
+  padding: 9px 0 9px;
   line-height:0;
 }
 .tab-bar li {
