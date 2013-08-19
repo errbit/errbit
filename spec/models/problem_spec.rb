@@ -1,6 +1,21 @@
 require 'spec_helper'
 
 describe Problem do
+  
+  context 'validations' do
+    it 'requires a error_class' do
+      err = Fabricate.build(:problem, :error_class => nil)
+      err.should_not be_valid
+      err.errors[:error_class].should include("can't be blank")
+    end
+
+    it 'requires an environment' do
+      err = Fabricate.build(:problem, :environment => nil)
+      err.should_not be_valid
+      err.errors[:environment].should include("can't be blank")
+    end
+  end
+  
   describe "Fabrication" do
     context "Fabricate(:problem)" do
       it 'should have no comment' do

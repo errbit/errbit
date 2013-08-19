@@ -27,8 +27,6 @@ describe ProblemUpdaterCache do
 
         it 'update information about this notice' do
           expect(problem.message).to eq notice.message
-          expect(problem.environment).to eq notice.environment_name
-          expect(problem.error_class).to eq notice.error_class
           expect(problem.where).to eq notice.where
         end
 
@@ -68,8 +66,6 @@ describe ProblemUpdaterCache do
         end
         it 'update information about this notice' do
           expect(problem.message).to eq notice.message
-          expect(problem.environment).to eq notice.environment_name
-          expect(problem.error_class).to eq notice.error_class
           expect(problem.where).to eq notice.where
         end
 
@@ -118,8 +114,6 @@ describe ProblemUpdaterCache do
 
       it 'update information about this notice' do
         expect(problem.message).to eq notice.message
-        expect(problem.environment).to eq notice.environment_name
-        expect(problem.error_class).to eq notice.error_class
         expect(problem.where).to eq notice.where
       end
 
