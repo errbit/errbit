@@ -18,6 +18,10 @@
 - [#532][] Use https link in Gravatar if you use errbit on https
   ([@jeroenj][])
 - [#536][] Order app by name by default ([@2called-chaos][])
+- [#542][] Allow the MONGODB_URL env configuration about Mongodb ([@bacongobbler][])
+- [#530][] Improve the flowdock notification ([@nfedyashev][])
+- [#531][] Improve the HipChat notification message ([@brendonrapp][])
+
 
 ### Bug Fixes
 
@@ -87,7 +91,10 @@
 [#516]: https://github.com/errbit/errbit/issues/516
 [#517]: https://github.com/errbit/errbit/issues/517
 [#524]: https://github.com/errbit/errbit/issues/524
+[#530]: https://github.com/errbit/errbit/issues/530
+[#531]: https://github.com/errbit/errbit/issues/531
 [#532]: https://github.com/errbit/errbit/issues/532
+[#542]: https://github.com/errbit/errbit/issues/542
 
 <!-- Contributor on Errbit Thanks to all of them -->
 
@@ -98,7 +105,9 @@
 [@aliscott]: http://github.com/aliscott
 [@alvarobp]: https://github.com/alvarobp
 [@arthurnn]: https://github.com/arthurnn
+[@bacongobbler]: https://github.com/bacongobbler
 [@boblail]: https://github.com/boblail
+[@brendonrapp]: https://github.com/brendonrapp
 [@chadcf]: https://github.com/chadcf
 [@ivanyv]: https://github.com/ivanyv
 [@jeroenj]: https://github.com/jeroenj
@@ -112,4 +121,5 @@
 [@shingara]: https://github.com/shingara
 [@tamaloa]: https://github.com/tamaloa
 [@tvdeyen]: https://github.com/tvdeyen
+[@williamn]: https://github.com/williamn
 [@xenji]: https://github.com/xenji
