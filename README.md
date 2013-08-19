@@ -156,7 +156,9 @@ git clone http://github.com/errbit/errbit.git
 
 ```bash
 gem install heroku
-heroku create example-errbit --stack cedar
+heroku create example-errbit
+# If you really want, you can define your stack and your buildpack. the default is good to us :
+# heroku create example-errbit --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
 heroku addons:add mongolab:sandbox
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
@@ -325,6 +327,7 @@ When upgrading Errbit, please run:
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
 bundle install
 rake db:migrate
+rake assets:precompile
 ```
 
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
