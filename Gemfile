@@ -3,9 +3,8 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'mongoid', '~> 3.1.4'
 
-# Mongoid rails migration > 0.0.14 is not compatible to Mongoid 2.x
-gem 'mongoid_rails_migrations', '~> 0.0.14'
-gem 'devise', '~> 2.2.6' # Last version supporting ruby 1.8.7
+gem 'mongoid_rails_migrations', '~> 1.0.1'
+gem 'devise'
 gem 'haml'
 gem 'htmlentities'
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL

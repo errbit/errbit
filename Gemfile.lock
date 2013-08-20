@@ -185,11 +185,11 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
-    mongoid_rails_migrations (0.0.14)
-      activesupport (>= 3.0.0)
+    mongoid_rails_migrations (1.0.1)
+      activesupport (>= 3.2.0)
       bundler (>= 1.0.0)
-      rails (>= 3.0.0)
-      railties (>= 3.0.0)
+      rails (>= 3.2.0)
+      railties (>= 3.2.0)
     moped (1.5.1)
     multi_json (1.7.9)
     multi_xml (0.5.5)
@@ -392,7 +392,7 @@ DEPENDENCIES
   database_cleaner (~> 0.9.0)
   debugger
   decent_exposure
-  devise (~> 2.2.6)
+  devise
   email_spec
   execjs
   fabrication (~> 1.3.0)
@@ -412,7 +412,7 @@ DEPENDENCIES
   lighthouse-api
   meta_request
   mongoid (~> 3.1.4)
-  mongoid_rails_migrations (~> 0.0.14)
+  mongoid_rails_migrations (~> 1.0.1)
   octokit
   omniauth-github
   oruen_redmine_client
