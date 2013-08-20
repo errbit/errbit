@@ -11,7 +11,7 @@ describe AppsController do
         sign_in Fabricate(:admin)
         3.times { Fabricate(:app) }
         get :index
-        controller.apps.should == App.all.sort.entries
+        controller.apps.entries.should == App.all.sort.entries
       end
     end
 
