@@ -60,7 +60,8 @@ if defined? JIRA
           :password => password,
           :site => base_url,
           :context_path => context_path,
-          :auth_type => :basic
+          :auth_type => :basic,
+          :use_ssl => base_url.match(/^https/) ? true : false
       }
       client = JIRA::Client.new(options)
 
