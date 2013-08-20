@@ -1006,7 +1006,7 @@ printStackTrace.implementation.prototype = {
                     error = Util.merge(this.options.errorDefaults, errorWithoutDefaults),
                     
                     component = error.component || '',
-                    request_url = (error.url || '' + location.hash),
+                    request_url = (error.url || '' + location.href),
                     
                     methods = ['cgi-data', 'params', 'session'],
                     _outputData = null;
