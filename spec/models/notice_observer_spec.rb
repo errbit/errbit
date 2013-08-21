@@ -24,6 +24,7 @@ describe "Callback on Notice" do
     end
   end
 
+
   describe "email notifications for a resolved issue" do
     before do
       Errbit::Config.per_app_email_at_notices = true
@@ -39,6 +40,13 @@ describe "Callback on Notice" do
       @err.problem.resolve!
       Mailer.should_receive(:err_notification).
         and_return(double('email', :deliver => true))
+      Fabricate(:notice, :err => @err)
+    end
+    it 'self notify if mailer failed' do
+      @err.problem.resolve!
+      Mailer.should_receive(:err_notification).
+        and_raise(ArgumentError)
+      HoptoadNotifier.should_receive(:notify)
       Fabricate(:notice, :err => @err)
     end
   end
@@ -58,6 +66,30 @@ describe "Callback on Notice" do
 
     it "should create a campfire notification" do
       app.notification_service.should_receive(:create_notification)
+
+      Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
+    end
+  end
+
+  describe "send a notification if a notification service is configured with defaults but failed" do
+    let(:app) { Fabricate(:app_with_watcher,
+                          :notify_on_errs => true,
+                          :email_at_notices => [1, 100], :notification_service => Fabricate(:campfire_notification_service))}
+    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 99)) }
+    let(:backtrace) { Fabricate(:backtrace) }
+
+    before do
+      Errbit::Config.per_app_email_at_notices = true
+    end
+
+    after do
+      Errbit::Config.per_app_email_at_notices = false
+    end
+
+    it "send email" do
+      app.notification_service.should_receive(:create_notification).and_raise(ArgumentError)
+      Mailer.should_receive(:err_notification).and_return(double(:deliver => true))
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
