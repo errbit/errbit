@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NoticeObserver do
+describe "Callback on Notice" do
   describe "email notifications (configured individually for each app)" do
     custom_thresholds = [2, 4, 8, 16, 32, 64]
 

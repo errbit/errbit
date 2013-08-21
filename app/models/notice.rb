@@ -17,6 +17,7 @@ class Notice
   belongs_to :err
   belongs_to :backtrace, :index => true
   index :created_at
+
   index(
     [
       [ :err_id, Mongo::ASCENDING ],
@@ -26,6 +27,8 @@ class Notice
   )
 
   after_create :cache_attributes_on_problem, :unresolve_problem
+  after_create :email_notification
+  after_create :services_notification
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -158,6 +161,22 @@ class Notice
         h
       end
     end
+  end
+
+  private
+
+  ##
+  # Send email notification if needed
+  def email_notification
+    return true unless should_email?
+    Mailer.err_notification(self).deliver
+  end
+
+  ##
+  # Launch all notification define on the app associate to this notice
+  def services_notification
+    return true unless app.notification_service_configured? and should_notify?
+    app.notification_service.create_notification(problem)
   end
 
 end
