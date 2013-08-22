@@ -25,7 +25,7 @@ $(function() {
                              "?copy_attributes_from=" + $(this).val();
     });
 
-    $('input[type=submit][data-action]').click(function() {
+    $('input[type=submit][data-action]').live('click', function() {
       $(this).closest('form').attr('action', $(this).attr('data-action'));
     });
 
