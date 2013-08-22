@@ -31,6 +31,8 @@
 - [#514][] Add CDATA in xml return by Javascript. ([@mildavw][])
 - [#517][] Javascript escape path from javascript Notifier. ([@roryf][])
 - [#518][] Fix issue when you try launch task errbit:db:update_update_problem_attrs. ([@shingara][])
+- [#526][] Fix issue of pagination after search. ([@shingara][])
+- [#528][] Fix issue of action after search. ([@shingara][])
 
 ## 0.1.0 - 2013-05-29
 
@@ -91,6 +93,8 @@
 [#516]: https://github.com/errbit/errbit/issues/516
 [#517]: https://github.com/errbit/errbit/issues/517
 [#524]: https://github.com/errbit/errbit/issues/524
+[#526]: https://github.com/errbit/errbit/issues/526
+[#528]: https://github.com/errbit/errbit/issues/528
 [#530]: https://github.com/errbit/errbit/issues/530
 [#531]: https://github.com/errbit/errbit/issues/531
 [#532]: https://github.com/errbit/errbit/issues/532
