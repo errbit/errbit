@@ -438,6 +438,14 @@ card_type = Defect, status = Open, priority = Essential
 * issue_type Issue type
 * issue_priority Priority
 
+Notification Service
+--------------------
+
+**Flowdock Notification**
+
+Allow notification to [Flowdock](https://www.flowdock.com/). See
+[complete documentation](docs/notifications/flowdock/index.md)
+
 
 What if Errbit has an error?
 ----------------------------
