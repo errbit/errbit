@@ -10,7 +10,7 @@ You need define the API token.
 It is purposely called Flow API Token and not Flowdock API Token to make
 it more obvious for user which one of the two tokens we expect:
 
-![flow token](flow_token_api.png)
+![flow token](flow_token_api.jpg)
 
 ### Sender ( not configure )
 
