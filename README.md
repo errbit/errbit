@@ -136,7 +136,7 @@ Deploying:
   * Setup server and deploy
 
 ```bash
-cap deploy:setup deploy
+cap deploy:setup deploy db:create_mongoid_indexes
 ```
 
 (Note: The capistrano deploy script will automatically generate a unique secret token.)
@@ -168,10 +168,12 @@ heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master
 ```
 
-  * Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
+  * Seed the DB (_NOTE_: No bootstrap task is used on Heroku!) and
+    create index
 
 ```bash
 heroku run rake db:seed
+heroku run rake db:mongoid:create_indexes
 ```
 
   * If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
