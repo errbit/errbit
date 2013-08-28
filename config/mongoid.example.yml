@@ -7,29 +7,34 @@
 # `cap deploy:setup` is ran the first time. Be sure
 # to place production specific settings there
 
-defaults: &defaults
-  host: localhost
-  identity_map_enabled: true
-
-  # slaves:
-  #   - host: slave1.local
-  #     port: 27018
-  #   - host: slave2.local
-  #     port: 27019
-
 development:
-  <<: *defaults
-  database: errbit_development
+  sessions:
+    default:
+      database: errbit_development
+      hosts:
+        - localhost:27017
+  options:
+    identity_map_enabled: true
+    use_utc: true
 
 test:
-  <<: *defaults
-  database: errbit_test
+  sessions:
+    default:
+      hosts:
+        - localhost:27017
+      database: errbit_test
+  options:
+    identity_map_enabled: true
+    use_utc: true
 
 # set these environment variables on your prod server
 production:
-  <<: *defaults
-  host: <%= ENV['MONGOID_HOST'] %>
-  port: <%= ENV['MONGOID_PORT'] %>
-  username: <%= ENV['MONGOID_USERNAME'] %>
-  password: <%= ENV['MONGOID_PASSWORD'] %>
-  database: <%= ENV['MONGOID_DATABASE'] %>
+  sessions:
+    default:
+      database: <%= ENV['MONGOID_DATABASE'] %>
+      hosts:
+        - <%=ENV["MONGOID_HOST"]%><%=ENV["MONGOID_PORT"]%>
+      username: <%= ENV['MONGOID_USERNAME'] %>
+      password: <%= ENV['MONGOID_PASSWORD'] %>
+  options:
+    identity_map_enabled: true

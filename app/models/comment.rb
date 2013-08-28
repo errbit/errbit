@@ -6,7 +6,7 @@ class Comment
   before_destroy :decrease_counter_cache
 
   field :body, :type => String
-  index :user_id
+  index(:user_id => 1)
 
   belongs_to :err, :class_name => "Problem"
   belongs_to :user

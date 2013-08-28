@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/NARKOZ/gitlab.git
-  revision: 53d7a8a86dfed63e56eeb16ea496bb7a82de337e
+  revision: 7a00d38c53335010d2fb8a233247fe2c97338903
   specs:
     gitlab (2.2.0)
       httparty
@@ -41,8 +41,7 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     addressable (2.3.5)
-    airbrake (3.1.12)
-      activesupport
+    airbrake (3.1.13)
       builder
       json
     arel (3.0.2)
@@ -59,9 +58,6 @@ GEM
       multi_json (~> 1.3)
       nokogiri (~> 1.5.2)
       simple_oauth
-    bson (1.8.6)
-    bson_ext (1.8.6)
-      bson (~> 1.8.6)
     builder (3.0.4)
     callsite (0.0.11)
     campy (0.1.3)
@@ -104,7 +100,7 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
     decent_exposure (2.2.1)
-    devise (2.2.6)
+    devise (2.2.7)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -137,7 +133,7 @@ GEM
     hashie (1.2.0)
     highline (1.6.19)
     hike (1.2.3)
-    hipchat (0.10.0)
+    hipchat (0.11.0)
       httparty
     hoi (0.0.6)
       httparty (> 0.6.0)
@@ -168,8 +164,8 @@ GEM
     kgio (2.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
-    libv8 (3.11.8.17)
-    libxml-ruby (2.6.0)
+    libv8 (3.16.14.3)
+    libxml-ruby (2.7.0)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -178,24 +174,24 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    meta_request (0.2.7)
+    meta_request (0.2.8)
       callsite
       rack-contrib
       railties
     method_source (0.8.2)
-    mime-types (1.23)
-    mongo (1.8.6)
-      bson (~> 1.8.6)
-    mongoid (2.7.1)
-      activemodel (~> 3.1)
-      mongo (~> 1.8)
+    mime-types (1.24)
+    mongoid (3.1.4)
+      activemodel (~> 3.2)
+      moped (~> 1.4)
+      origin (~> 1.0)
       tzinfo (~> 0.3.22)
-    mongoid_rails_migrations (0.0.14)
-      activesupport (>= 3.0.0)
+    mongoid_rails_migrations (1.0.1)
+      activesupport (>= 3.2.0)
       bundler (>= 1.0.0)
-      rails (>= 3.0.0)
-      railties (>= 3.0.0)
-    multi_json (1.7.8)
+      rails (>= 3.2.0)
+      railties (>= 3.2.0)
+    moped (1.5.1)
+    multi_json (1.7.9)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     net-scp (1.1.2)
@@ -230,18 +226,17 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    origin (1.1.0)
     orm_adapter (0.4.0)
     oruen_redmine_client (0.0.1)
       activeresource (>= 2.3.0)
     pivotal-tracker (0.5.10)
-      builder
       builder
       crack
       happymapper (>= 0.3.2)
       nokogiri (>= 1.4.3)
       nokogiri (>= 1.5.5)
       nokogiri-happymapper (>= 0.5.4)
-      rest-client (~> 1.6.0)
       rest-client (~> 1.6.0)
     pjax_rails (0.3.4)
       jquery-rails
@@ -293,8 +288,8 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ri_cal (0.8.8)
-    rspec-core (2.14.4)
-    rspec-expectations (2.14.1)
+    rspec-core (2.14.5)
+    rspec-expectations (2.14.2)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.3)
     rspec-rails (2.14.0)
@@ -316,7 +311,7 @@ GEM
       json
       rest-client
     safe_yaml (0.9.5)
-    selenium-webdriver (2.34.0)
+    selenium-webdriver (2.35.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
       rubyzip
@@ -343,8 +338,8 @@ GEM
     taskmapper-unfuddle (0.7.0)
       addressable (~> 2.2)
       taskmapper (~> 0.8)
-    therubyracer (0.11.4)
-      libv8 (~> 3.11.8.12)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
       ref
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -353,10 +348,10 @@ GEM
     thor (0.18.1)
     tilt (1.4.1)
     timecop (0.6.1)
-    treetop (1.4.14)
+    treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbo-sprockets-rails3 (0.3.6)
+    turbo-sprockets-rails3 (0.3.9)
       railties (> 3.2.8, < 4.0.0)
       sprockets (>= 2.0.0)
     tzinfo (0.3.37)
@@ -390,8 +385,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bitbucket_rest_api
-  bson
-  bson_ext
   campy (= 0.1.3)
   capistrano
   capybara (~> 2.0.1)
@@ -399,7 +392,7 @@ DEPENDENCIES
   database_cleaner (~> 0.9.0)
   debugger
   decent_exposure
-  devise (~> 2.2.6)
+  devise
   email_spec
   execjs
   fabrication (~> 1.3.0)
@@ -418,9 +411,8 @@ DEPENDENCIES
   launchy
   lighthouse-api
   meta_request
-  mongo
-  mongoid (~> 2.7.1)
-  mongoid_rails_migrations (~> 0.0.14)
+  mongoid (~> 3.1.4)
+  mongoid_rails_migrations (~> 1.0.1)
   octokit
   omniauth-github
   oruen_redmine_client

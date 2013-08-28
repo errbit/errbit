@@ -195,13 +195,13 @@ describe ProblemsController do
       sign_in Fabricate(:admin)
 
       @problem = Fabricate(:err)
-      App.stub(:find).with(@problem.app.id).and_return(@problem.app)
+      App.stub(:find).with(@problem.app.id.to_s).and_return(@problem.app)
       @problem.app.problems.stub(:find).and_return(@problem.problem)
       @problem.problem.stub(:resolve!)
     end
 
     it 'finds the app and the problem' do
-      App.should_receive(:find).with(@problem.app.id).and_return(@problem.app)
+      App.should_receive(:find).with(@problem.app.id.to_s).and_return(@problem.app)
       @problem.app.problems.should_receive(:find).and_return(@problem.problem)
       put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
       controller.app.should == @problem.app

@@ -8,8 +8,8 @@ class Err
 
   field :fingerprint
 
-  index :problem_id
-  index :fingerprint
+  index problem_id: 1
+  index fingerprint: 1
 
   belongs_to :problem
   has_many :notices, :inverse_of => :err, :dependent => :destroy
