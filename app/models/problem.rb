@@ -153,7 +153,13 @@ class Problem
   end
 
   def self.search(value)
-    any_of({:error_class => /#{value}/i}, {:message => /#{value}/i}, {:app_name => /#{value}/i}, {:environment => /#{value}/i})
+    any_of(
+      {:error_class => /#{value}/i},
+      {:where => /#{value}/i},
+      {:message => /#{value}/i},
+      {:app_name => /#{value}/i},
+      {:environment => /#{value}/i}
+    )
   end
 
   private

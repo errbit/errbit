@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Problem do
-  
+
   context 'validations' do
     it 'requires a error_class' do
       err = Fabricate.build(:problem, :error_class => nil)
@@ -15,7 +15,7 @@ describe Problem do
       err.errors[:environment].should include("can't be blank")
     end
   end
-  
+
   describe "Fabrication" do
     context "Fabricate(:problem)" do
       it 'should have no comment' do
@@ -194,6 +194,10 @@ describe Problem do
                               :message => 'todo', :where => 'classerror', :environment => 'development', :app_name => 'other')
         Problem.search("theErrorClass").unresolved.should include(find)
         Problem.search("theErrorClass").unresolved.should_not include(dont_find)
+      end
+      it 'find on where message' do
+        problem = Fabricate(:problem, :where => 'cyril')
+        Problem.search('cyril').entries.should eq [problem]
       end
     end
   end
