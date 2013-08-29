@@ -28,7 +28,6 @@ elsif ENV['HEROKU'] || ENV['USE_ENV']
           hosts: [ "#{settings.host}:#{settings.port}" ]
         }
       },
-      options: { allow_dynamic_fields: false, use_activesupport_time_zone: true, identity_map_enabled: true }
     }
 
     if settings.user && settings.password
@@ -39,3 +38,7 @@ elsif ENV['HEROKU'] || ENV['USE_ENV']
     config.load_configuration(hash)
   end
 end
+
+Mongoid.allow_dynamic_fields = false
+Mongoid.use_activesupport_time_zone = true
+Mongoid.identity_map_enabled = true
