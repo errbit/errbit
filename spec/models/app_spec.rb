@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe App do
+  context "Attributes" do
+    it { should have_field(:_id).of_type(String) }
+    it { should have_field(:name).of_type(String) }
+    it { should have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
+    it { should have_fields(:resolve_errs_on_deploy, :notify_all_users, :notify_on_errs, :notify_on_deploys).of_type(Boolean) }
+    it { should have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
+  end
+
   context 'validations' do
     it 'requires a name' do
       app = Fabricate.build(:app, :name => nil)
@@ -156,7 +164,6 @@ describe App do
     end
   end
 
-
   context '#find_or_create_err!' do
     before do
       @app = Fabricate(:app)
@@ -184,7 +191,6 @@ describe App do
       }.should change(Problem,:count).by(1)
     end
   end
-
 
   describe ".find_by_api_key!" do
     it 'return the app with api_key' do

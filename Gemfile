@@ -112,6 +112,7 @@ group :test do
   gem 'email_spec'
   gem 'timecop', '0.6.1' # last version compatible to ruby 1.8
   gem 'coveralls', :require => false
+  gem 'mongoid-rspec', :require => false
 end
 
 group :heroku, :production do
