@@ -15,6 +15,14 @@ class App
   field :notify_on_deploys, :type => Boolean, :default => false
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
 
+  # Some legacy apps may have string as key instead of BSON::ObjectID
+  # identity :type => String
+  field :_id,
+    type: String,
+    pre_processed: true,
+    default: ->{ Moped::BSON::ObjectId.new.to_s }
+
+
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker
