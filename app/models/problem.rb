@@ -39,7 +39,7 @@ class Problem
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
   has_many :comments, :inverse_of => :err, :dependent => :destroy
 
-  validates_presence_of :error_class, :environment
+  validates_presence_of :environment
 
   before_create :cache_app_attributes
 

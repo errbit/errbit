@@ -158,30 +158,43 @@ describe App do
 
 
   context '#find_or_create_err!' do
-    before do
-      @app = Fabricate(:app)
-      @conditions = {
+    let(:app) { Fabricate(:app) }
+    let(:conditions) { {
         :error_class  => 'Whoops',
         :environment  => 'production',
         :fingerprint  => 'some-finger-print'
       }
-    end
+    }
 
     it 'returns the correct err if one already exists' do
-      existing = Fabricate(:err, @conditions.merge(:problem => Fabricate(:problem, :app => @app)))
-      Err.where(@conditions).first.should == existing
-      @app.find_or_create_err!(@conditions).should == existing
+      existing = Fabricate(:err, conditions.merge(:problem => Fabricate(:problem, :app => app)))
+      Err.where(conditions).first.should == existing
+      app.find_or_create_err!(conditions).should == existing
     end
 
     it 'assigns the returned err to the given app' do
-      @app.find_or_create_err!(@conditions).app.should == @app
+      app.find_or_create_err!(conditions).app.should == app
     end
 
     it 'creates a new problem if a matching one does not already exist' do
-      Err.where(@conditions).first.should be_nil
+      Err.where(conditions).first.should be_nil
       lambda {
-        @app.find_or_create_err!(@conditions)
+        app.find_or_create_err!(conditions)
       }.should change(Problem,:count).by(1)
+    end
+
+    context "without error_class" do
+      let(:conditions) { {
+        :environment  => 'production',
+        :fingerprint  => 'some-finger-print'
+      }
+      }
+      it 'save the err' do
+        Err.where(conditions).first.should be_nil
+        lambda {
+          app.find_or_create_err!(conditions)
+        }.should change(Problem,:count).by(1)
+      end
     end
   end
 
