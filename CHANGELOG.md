@@ -1,4 +1,4 @@
-## 0.2.0 - Not released Yet
+## 0.2.0 - 2013-09-11
 
 ### Improvements
 

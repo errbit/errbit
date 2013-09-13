@@ -3,12 +3,6 @@ require 'spec_helper'
 describe Problem do
 
   context 'validations' do
-    it 'requires a error_class' do
-      err = Fabricate.build(:problem, :error_class => nil)
-      err.should_not be_valid
-      err.errors[:error_class].should include("can't be blank")
-    end
-
     it 'requires an environment' do
       err = Fabricate.build(:problem, :environment => nil)
       err.should_not be_valid
@@ -70,7 +64,6 @@ describe Problem do
     end
   end
 
-
   context '#message' do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
@@ -81,7 +74,6 @@ describe Problem do
     end
   end
 
-
   context 'being created' do
     context 'when the app has err notifications set to false' do
       it 'should not send an email notification' do
@@ -91,7 +83,6 @@ describe Problem do
       end
     end
   end
-
 
   context "#resolved?" do
     it "should start out as unresolved" do
@@ -107,7 +98,6 @@ describe Problem do
       problem.reload.should be_resolved
     end
   end
-
 
   context "resolve!" do
     it "marks the problem as resolved" do
@@ -202,7 +192,6 @@ describe Problem do
     end
   end
 
-
   context "notice counter cache" do
     before do
       @app = Fabricate(:app)
@@ -228,7 +217,6 @@ describe Problem do
       }.to change(@problem, :notices_count).from(1).to(0)
     end
   end
-
 
   context "#app_name" do
     let!(:app) { Fabricate(:app) }
