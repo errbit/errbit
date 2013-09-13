@@ -78,6 +78,13 @@ There is a demo available at [http://errbit-demo.herokuapp.com/](http://errbit-d
 Email: demo@errbit-demo.herokuapp.com<br/>
 Password: password
 
+# Requirement
+
+The list of requirement to install Errbit is :
+
+ * Ruby 1.9.3 or higher
+ * MongoDB 2.2.0 or higher
+
 Installation
 ------------
 

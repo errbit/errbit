@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '~> 3.2.13'
 gem 'mongoid', '~> 3.1.4'
 
 gem 'mongoid_rails_migrations', '~> 1.0.1'
