@@ -22,8 +22,8 @@ describe Backtrace do
 
   describe "find_or_create" do
     subject { described_class.find_or_create(attributes) }
-    let(:attributes) { mock :attributes }
-    let(:backtrace) { mock :backtrace }
+    let(:attributes) { double :attributes }
+    let(:backtrace) { double :backtrace }
 
     before { described_class.stub(:new => backtrace) }
 
@@ -37,7 +37,7 @@ describe Backtrace do
     end
 
     context "similar backtrace exist" do
-      let(:similar_backtrace) { mock :similar_backtrace }
+      let(:similar_backtrace) { double :similar_backtrace }
       before { backtrace.stub(:similar => similar_backtrace) }
 
       it { should == similar_backtrace }

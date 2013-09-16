@@ -5,8 +5,8 @@ Errbit::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
-  # Full error reports are enabled, since this is an internal application.
-  config.consider_all_requests_local       = true
+  # Shows or hides all error details if something goes wrong inside Errbit
+  config.consider_all_requests_local       = false
   # Caching is turned on
   config.action_controller.perform_caching = true
 
@@ -59,5 +59,6 @@ Errbit::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  config.static_cache_control = "public, max-age=7200"
 end
 

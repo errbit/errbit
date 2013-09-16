@@ -13,12 +13,28 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
 
+  class StrongParametersWithEagerAttributesStrategy < DecentExposure::StrongParametersStrategy
+    def attributes
+      super
+      @attributes ||= params[inflector.param_key] || {}
+    end
+  end
+
+  decent_configuration do
+    strategy StrongParametersWithEagerAttributesStrategy
+  end
 
 protected
 
 
+  ##
+  # Check if the current_user is admin or not and redirect to root url if not
+  #
   def require_admin!
-    redirect_to_root unless user_signed_in? && current_user.admin?
+    unless user_signed_in? && current_user.admin?
+      flash[:error] = "Sorry, you don't have permission to do that"
+      redirect_to_root
+    end
   end
 
   def redirect_to_root
@@ -30,4 +46,3 @@ protected
   end
 
 end
-

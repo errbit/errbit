@@ -8,7 +8,7 @@ describe NotificationService::CampfireService do
     problem = notice.problem
 
     #campy stubbing
-    campy = mock('CampfireService')
+    campy = double('CampfireService')
     Campy::Room.stub(:new).and_return(campy)
     campy.stub(:speak) { true }
 

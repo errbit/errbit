@@ -9,25 +9,25 @@ describe Api::V1::NoticesController do
 
     describe "GET /api/v1/notices" do
       before do
-        Fabricate(:notice, :created_at => DateTime.new(2012, 8, 01))
-        Fabricate(:notice, :created_at => DateTime.new(2012, 8, 01))
-        Fabricate(:notice, :created_at => DateTime.new(2012, 8, 21))
-        Fabricate(:notice, :created_at => DateTime.new(2012, 8, 30))
+        Fabricate(:notice, :created_at => Time.new(2012, 8, 01))
+        Fabricate(:notice, :created_at => Time.new(2012, 8, 01))
+        Fabricate(:notice, :created_at => Time.new(2012, 8, 21))
+        Fabricate(:notice, :created_at => Time.new(2012, 8, 30))
       end
 
       it "should return JSON if JSON is requested" do
         get :index, :auth_token => @user.authentication_token, :format => "json"
-        lambda { JSON.load(response.body) }.should_not raise_error(JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error() #JSON::ParserError)
       end
 
       it "should return XML if XML is requested" do
         get :index, :auth_token => @user.authentication_token, :format => "xml"
-        lambda { XML::Parser.string(response.body).parse }.should_not raise_error
+        Nokogiri::XML(response.body).errors.should be_empty
       end
 
       it "should return JSON by default" do
         get :index, :auth_token => @user.authentication_token
-        lambda { JSON.load(response.body) }.should_not raise_error(JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error() #JSON::ParserError)
       end
 
       describe "given a date range" do

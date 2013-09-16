@@ -1,4 +1,4 @@
 - if current_user
   %ul#session-links
-    %li= link_to 'Sign out', destroy_session_path(:user), :id => 'sign-out'
-    %li= link_to 'Edit profile', edit_user_path(current_user), :id => 'edit-profile'
+    %li= link_to t('.sign_out'), destroy_session_path(:user), :id => 'sign-out', :method => :delete
+    %li= link_to t('.edit_profile'), edit_user_path(current_user), :id => 'edit-profile'

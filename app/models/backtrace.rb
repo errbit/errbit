@@ -3,7 +3,7 @@ class Backtrace
   include Mongoid::Timestamps
 
   field :fingerprint
-  index :fingerprint
+  index :fingerprint => 1
 
   has_many :notices
   has_one :notice
@@ -19,11 +19,11 @@ class Backtrace
   end
 
   def similar
-    Backtrace.first(:conditions => { :fingerprint => fingerprint } )
+    Backtrace.find_by(:fingerprint => fingerprint) rescue nil
   end
 
   def raw=(raw)
-    raw.each do |raw_line|
+    raw.compact.each do |raw_line|
       lines << BacktraceLine.new(BacktraceLineNormalizer.new(raw_line).call)
     end
   end

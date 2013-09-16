@@ -1,16 +1,21 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
 
 [travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
-[codeclimate-img-url]: https://codeclimate.com/badge.png
+[codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
+[coveralls-img-url]: https://coveralls.io/repos/errbit/errbit/badge.png?branch=master
+[coveralls-url]:https://coveralls.io/r/errbit/errbit
+[gemnasium-img-url]:https://gemnasium.com/errbit/errbit.png
+[gemnasium-url]:https://gemnasium.com/errbit/errbit
+
 
 
 ### The open source, self-hosted error catcher
 
 
 Errbit is a tool for collecting and managing errors from other applications.
-It is [Airbrake](http://airbrakeapp.com) (formerly known as Hoptoad) API compliant,
+It is [Airbrake](http://airbrake.io) (formerly known as Hoptoad) API compliant,
 so if you are already using Airbrake, you can just point the `airbrake` gem to your Errbit server.
 
 
@@ -56,9 +61,9 @@ Errbit may be a good fit for you if:
 * You want to add customer features to your error catcher
 * You're crazy and love managing servers
 
-If this doesn't sound like you, you should probably stick with [Airbrake](http://airbrakeapp.com).
-The [Thoughtbot](http://thoughtbot.com) guys offer great support for it and it is much more worry-free.
-They have a free package and even offer a *"Airbrake behind your firewall"* solution.
+If this doesn't sound like you, you should probably stick with a hosted service such as
+[Airbrake](http://airbrake.io).
+
 
 Mailing List
 ------------
@@ -73,13 +78,19 @@ There is a demo available at [http://errbit-demo.herokuapp.com/](http://errbit-d
 Email: demo@errbit-demo.herokuapp.com<br/>
 Password: password
 
+# Requirement
+
+The list of requirement to install Errbit is :
+
+ * Ruby 1.9.3 or higher
+ * MongoDB 2.2.0 or higher
+
 Installation
 ------------
 
-*Note*: This app is intended for people with experience deploying and maintining
+*Note*: This app is intended for people with experience deploying and maintaining
 Rails applications. If you're uncomfortable with any step below then Errbit is not
-for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
-[Thoughtbot](http://thoughtbot.com), which Errbit is based on.
+for you.
 
 **Set up your local box or server(Ubuntu):**
 
@@ -87,7 +98,7 @@ for you. Checkout [Airbrake](http://airbrakeapp.com) from the guys over at
 
 ```bash
 apt-get update
-apt-get install mongodb
+apt-get install mongodb-10gen
 ```
 
   * Install libxml and libcurl
@@ -124,20 +135,18 @@ rake errbit:bootstrap
 script/rails server
 ```
 
-**Deploying:**
+Deploying:
+----------
 
-  * Bootstrap Errbit. This will copy over config.yml and also seed the database.
-
-```bash
-rake errbit:bootstrap
-```
-
-  * Update the deploy.rb file with information about your server
+  * Copy `config/deploy.example.rb` to `config/deploy.rb`
+  * Update the `deploy.rb` or `config.yml` file with information about your server
   * Setup server and deploy
 
 ```bash
-cap deploy:setup deploy
+cap deploy:setup deploy db:create_mongoid_indexes
 ```
+
+(Note: The capistrano deploy script will automatically generate a unique secret token.)
 
 **Deploying to Heroku:**
 
@@ -146,24 +155,32 @@ cap deploy:setup deploy
 ```bash
 git clone http://github.com/errbit/errbit.git
 ```
+  * Update `db/seeds.rb` with admin credentials for your initial login.
+
+  * Run `bundle`
 
   * Create & configure for Heroku
 
 ```bash
 gem install heroku
-heroku create example-errbit --stack cedar
-heroku addons:add mongolab:starter
+heroku create example-errbit
+# If you really want, you can define your stack and your buildpack. the default is good to us :
+# heroku create example-errbit --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+heroku addons:add mongolab:sandbox
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
+heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master
 ```
 
-  * Seed the DB (_NOTE_: No bootstrap task is used on Heroku!)
+  * Seed the DB (_NOTE_: No bootstrap task is used on Heroku!) and
+    create index
 
 ```bash
 heroku run rake db:seed
+heroku run rake db:mongoid:create_indexes
 ```
 
   * If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
@@ -197,6 +214,12 @@ heroku run rake db:seed
 
 ```bash
 heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
+```
+
+  * You may also want to configure a different secret token for each deploy:
+
+```bash
+heroku config:add SECRET_TOKEN=some-secret-token
 ```
 
   * Enjoy!
@@ -313,6 +336,7 @@ When upgrading Errbit, please run:
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
 bundle install
 rake db:migrate
+rake assets:precompile
 ```
 
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
@@ -340,6 +364,20 @@ it will be displayed under the *User Details* tab:
 
 (This tab will be hidden if no user information is available.)
 
+Adding javascript errors notifications
+--------------------------------------
+
+Errbit easily supports javascript errors notifications. You just need to add `config.js_notifier = true` to the errbit initializer in the rails app.
+
+```
+Errbit.configure do |config|
+  config.host    = 'YOUR-ERRBIT-HOST'
+  config.api_key = 'YOUR-PROJECT-API-KEY'
+  config.js_notifier = true
+end
+```
+
+Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or include `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
 
 Issue Trackers
 --------------
@@ -387,9 +425,35 @@ card_type = Defect, status = Open, priority = Essential
 
 * Account is the host of your gitlab installation. i.e. **http://gitlab.example.com**
 * To authenticate, Errbit uses token-based authentication. Get your API Key in your user settings (or create special user for this purpose)
-* You also need to provide project name (shortname) or ID (number) for issues to be created
-* **Currently (as of 3.0), Gitlab has 2000 character limit for issue description.** It is necessary to turn it off at your instance, because Errbit issues body is much longer. Please comment validation line in issue model in models folder https://github.com/gitlabhq/gitlabhq/blob/master/app/models/issue.rb#L10
+* You also need to provide project ID (it needs to be Number) for issues to be created
 
+**Unfuddle Issues Integration**
+
+* Account is your unfuddle domain
+* Username your unfuddle username
+* Password your unfuddle password
+* Project id the id of your project where your ticket is create
+* Milestone id the id of your milestone where your ticket is create
+
+**Jira Issue Integration**
+
+* base_url the jira URL
+* context_path Context Path (Just "/" if empty otherwise with leading slash)
+* username HTTP Basic Auth User
+* password HTTP Basic Auth Password
+* project_id The project Key where the issue will be created
+* account Assign to this user. If empty, Jira takes the project default.
+* issue_component Website - Other
+* issue_type Issue type
+* issue_priority Priority
+
+Notification Service
+--------------------
+
+**Flowdock Notification**
+
+Allow notification to [Flowdock](https://www.flowdock.com/). See
+[complete documentation](docs/notifications/flowdock/index.md)
 
 
 What if Errbit has an error?
@@ -434,10 +498,26 @@ Solutions known to work are listed below:
   </tr>
 </table>
 
+Develop on Errbit
+-----------------
+
+A guide can help on this way on  [**Errbit Advanced Developer Guide**](docs/DEVELOPER-ADVANCED.md)
+
+## Other documentation
+
+* [All ENV variables availables to configure Errbit](docs/ENV-VARIABLES.md)
+
 TODO
 ----
 
 * Add ability for watchers to be configured for types of notifications they should receive
+
+
+People using Errbit
+-------------------
+
+See our wiki page for a [list of people and companies around the world who use Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit).
+Feel free to [edit this page](https://github.com/errbit/errbit/wiki/People-using-Errbit/_edit), and add your name and country to the list if you are using Errbit.
 
 
 Special Thanks
@@ -448,10 +528,11 @@ Special Thanks
 * [Nathan Broadbent (@ndbroadbent)](https://github.com/ndbroadbent) - Maintaining Errbit and contributing many features
 * [Vasiliy Ermolovich (@nashby)](https://github.com/nashby) - Contributing and helping to resolve issues and pull requests
 * [Marcin Ciunelis (@martinciu)](https://github.com/martinciu) - Helping to improve Errbit's architecture
+* [Cyril Mougel (@shingara)](https://github.com/shingara) - Maintaining Errbit and contributing many features
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
-* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrakeapp.com).
+* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrake.io).
 
-See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details.
+See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details. You can see another list of Contributors by release version on [CONTRIBUTORS.md]
 
 
 Contributing
@@ -474,10 +555,11 @@ and make **optional** features configurable via `config/config.yml`.
 * Add tests for it. This is important so we don't break it in a future version unintentionally.
 * Commit, do not mess with Rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself we can ignore when we pull)
 * Send us a pull request. Bonus points for topic branches.
+* Add you on the CONTRIBUTORS.md file on the current release
 
 
 Copyright
 ---------
 
-Copyright (c) 2010-2011 Jared Pace. See LICENSE for details.
+Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
 

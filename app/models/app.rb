@@ -1,12 +1,13 @@
 class App
+  include Comparable
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Comparable
 
   field :name, :type => String
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :asset_host
   field :repository_branch
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
@@ -15,7 +16,12 @@ class App
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
 
   # Some legacy apps may have string as key instead of BSON::ObjectID
-  identity :type => String
+  # identity :type => String
+  field :_id,
+    type: String,
+    pre_processed: true,
+    default: ->{ Moped::BSON::ObjectId.new.to_s }
+
 
   embeds_many :watchers
   embeds_many :deploys
@@ -41,46 +47,17 @@ class App
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
-  # Processes a new error report.
+  # Acceps a hash with the following attributes:
   #
-  # Accepts either XML or a hash with the following attributes:
+  # * <tt>:error_class</tt> - the class of error (required to create a new Problem)
+  # * <tt>:environment</tt> - the environment the source app was running in (required to create a new Problem)
+  # * <tt>:fingerprint</tt> - a unique value identifying the notice
   #
-  # * <tt>:error_class</tt> - the class of error
-  # * <tt>:message</tt> - the error message
-  # * <tt>:backtrace</tt> - an array of stack trace lines
-  #
-  # * <tt>:request</tt> - a hash of values describing the request
-  # * <tt>:server_environment</tt> - a hash of values describing the server environment
-  #
-  # * <tt>:api_key</tt> - the API key with which the error was reported
-  # * <tt>:notifier</tt> - information to identify the source of the error report
-  #
-  def self.report_error!(*args)
-    report = ErrorReport.new(*args)
-    report.generate_notice!
-  end
-
-
-  # Processes a new error report.
-  #
-  # Accepts a hash with the following attributes:
-  #
-  # * <tt>:error_class</tt> - the class of error
-  # * <tt>:message</tt> - the error message
-  # * <tt>:backtrace</tt> - an array of stack trace lines
-  #
-  # * <tt>:request</tt> - a hash of values describing the request
-  # * <tt>:server_environment</tt> - a hash of values describing the server environment
-  #
-  # * <tt>:notifier</tt> - information to identify the source of the error report
-  #
-  def report_error!(hash)
-    report = ErrorReport.new(hash.merge(:api_key => api_key))
-    report.generate_notice!
-  end
-
   def find_or_create_err!(attrs)
-    Err.where(:fingerprint => attrs[:fingerprint]).first || problems.create!.errs.create!(attrs)
+    Err.where(
+      :fingerprint => attrs[:fingerprint]
+    ).first ||
+      problems.create!(attrs.slice(:error_class, :environment)).errs.create!(attrs.slice(:fingerprint, :problem_id))
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
@@ -89,7 +66,7 @@ class App
   end
 
   def self.find_by_api_key!(key)
-    where(:api_key => key).first || raise(Mongoid::Errors::DocumentNotFound.new(self,key))
+    find_by(:api_key => key)
   end
 
   def last_deploy_at
@@ -103,7 +80,7 @@ class App
   end
   alias :notify_on_errs? :notify_on_errs
 
-  def notifiable?
+  def emailable?
     notify_on_errs? && notification_recipients.any?
   end
 
@@ -125,7 +102,7 @@ class App
   end
 
   def github_url_to_file(file)
-    "#{github_url}/blob/#{repo_branch + file}"
+    "#{github_url}/blob/#{repo_branch}/#{file}"
   end
 
   def bitbucket_repo?
@@ -137,7 +114,7 @@ class App
   end
 
   def bitbucket_url_to_file(file)
-    "#{bitbucket_url}/src/#{repo_branch + file}"
+    "#{bitbucket_url}/src/#{repo_branch}/#{file}"
   end
 
 

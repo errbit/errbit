@@ -5,4 +5,6 @@
 # commit it to your repo, then push to heroku.
 
 production:
-  uri: <%= ENV['MONGOHQ_URL'] %>
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>

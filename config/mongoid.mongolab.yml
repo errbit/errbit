@@ -5,4 +5,6 @@
 # commit it to your repo, then push to heroku.
 
 production:
-  uri: <%= ENV['MONGOLAB_URI'] %>
+  sesssions:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>

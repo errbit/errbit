@@ -15,7 +15,7 @@ describe NotificationServices::HipchatService do
   end
 
   it 'escapes html in message' do
-    service.stub(:notification_description => '<3')
+    problem.stub(:message => '<3')
     room.should_receive(:send) do |_, message|
       message.should_not include('<3')
       message.should include('&lt;3')

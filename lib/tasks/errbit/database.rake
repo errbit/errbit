@@ -6,7 +6,9 @@ namespace :errbit do
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"
-      Problem.all.each(&:cache_notice_attributes)
+      Problem.all.each{|problem|
+        ProblemUpdaterCache.new(problem).update
+      }
     end
 
     desc "Updates Problem#notices_count"
@@ -19,9 +21,8 @@ namespace :errbit do
 
     desc "Delete resolved errors from the database. (Useful for limited heroku databases)"
     task :clear_resolved => :environment do
-      count = Problem.resolved.count
-      Problem.resolved.each {|problem| problem.destroy }
-      puts "=== Cleared #{count} resolved errors from the database." if count > 0
+      require 'resolved_problem_clearer'
+      puts "=== Cleared #{ResolvedProblemClearer.new.execute} resolved errors from the database."
     end
 
     desc "Regenerate fingerprints"

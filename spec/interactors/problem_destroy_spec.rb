@@ -8,8 +8,8 @@ describe ProblemDestroy do
   context "in unit way" do
     let(:problem) {
       problem = Problem.new
-      problem.stub(:errs).and_return(mock(:criteria, :only => [err_1, err_2]))
-      problem.stub(:comments).and_return(mock(:criteria, :only => [comment_1, comment_2]))
+      problem.stub(:errs).and_return(double(:criteria, :only => [err_1, err_2]))
+      problem.stub(:comments).and_return(double(:criteria, :only => [comment_1, comment_2]))
       problem.stub(:delete)
       problem
     }
@@ -32,17 +32,17 @@ describe ProblemDestroy do
       end
 
       it 'delete all errs associate' do
-        Err.collection.should_receive(:remove).with(:_id => { '$in' => [err_1.id, err_2.id] })
+        Err.should_receive(:delete_all).with(:_id => { '$in' => [err_1.id, err_2.id] })
         problem_destroy.execute
       end
 
       it 'delete all comments associate' do
-        Comment.collection.should_receive(:remove).with(:_id => { '$in' => [comment_1.id, comment_2.id] })
+        Comment.should_receive(:delete_all).with(:_id => { '$in' => [comment_1.id, comment_2.id] })
         problem_destroy.execute
       end
 
       it 'delete all notice of associate to this errs' do
-        Notice.collection.should_receive(:remove).with({:err_id => { '$in' => [err_1.id, err_2.id] }})
+        Notice.should_receive(:delete_all).with({:err_id => { '$in' => [err_1.id, err_2.id] }})
         problem_destroy.execute
       end
     end

@@ -1,22 +1,22 @@
-- content_for :title, 'Apps'
+- content_for :title, t('.title')
 - content_for :action_bar do
-  %span= link_to('Add a New App', new_app_path, :class => 'add') if current_user.admin?
+  %span= link_to(t('.new_app'), new_app_path, :class => 'add') if current_user.admin?
 
 %table.apps
   %thead
     %tr
-      %th Name
+      %th= t('.name')
       - if any_github_repos? || any_bitbucket_repos?
-        %th Repository
+        %th= t('.repository')
       - if any_notification_services?
-        %th Notification Service
+        %th= t('.notify')
       - if any_issue_trackers?
-        %th Tracker
+        %th= t('.tracker')
       - if any_deploys?
-        %th Last Deploy
-      %th Errors
+        %th= t('.last_deploy')
+      %th=t('.errors')
   %tbody
-    - @apps.each do |app|
+    - apps.each do |app|
       %tr
         %td.name= link_to app.name, app_path(app)
         - if any_github_repos? or any_bitbucket_repos?
@@ -50,10 +50,10 @@
           - if app.problem_count > 0
             - unresolved = app.unresolved_count
             = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
-    - if @apps.none?
+    - if apps.none?
       %tr
         %td{:colspan => 3}
           %em
-            No apps here.
-            = link_to 'Click here to create your first one', new_app_path
+            = t('.no_apps')
+            = link_to t('.click_to_create'), new_app_path
 

@@ -13,8 +13,8 @@
       %th.main Email
       %th Admin?
   %tbody
-    - @users.each do |user|
-      %tr
+    - users.each do |user|
+      %tr.user_list
         - if Errbit::Config.use_gravatar
           %td= gravatar_tag user.email, :s => 24
         %td.nowrap= link_to user.name, user_path(user)
@@ -22,5 +22,5 @@
           %td= user.username
         %td= user.email
         %td= user.admin? ? 'Y' : 'N'
-= paginate @users
+= paginate users
 

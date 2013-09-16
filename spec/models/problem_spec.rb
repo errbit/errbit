@@ -1,11 +1,17 @@
 require 'spec_helper'
 
 describe Problem do
+
+  context 'validations' do
+    it 'requires an environment' do
+      err = Fabricate.build(:problem, :environment => nil)
+      err.should_not be_valid
+      err.errors[:environment].should include("can't be blank")
+    end
+  end
+
   describe "Fabrication" do
     context "Fabricate(:problem)" do
-      it 'should be valid' do
-        Fabricate.build(:problem).should be_valid
-      end
       it 'should have no comment' do
         lambda do
           Fabricate(:problem)
@@ -14,13 +20,18 @@ describe Problem do
     end
 
     context "Fabricate(:problem_with_comments)" do
-      it 'should be valid' do
-        Fabricate.build(:problem_with_comments).should be_valid
-      end
       it 'should have 3 comments' do
         lambda do
           Fabricate(:problem_with_comments)
         end.should change(Comment, :count).by(3)
+      end
+    end
+
+    context "Fabricate(:problem_with_errs)" do
+      it 'should have 3 errs' do
+        lambda do
+          Fabricate(:problem_with_errs)
+        end.should change(Err, :count).by(3)
       end
     end
   end
@@ -46,13 +57,12 @@ describe Problem do
       problem.should_not be_nil
 
       notice1 = Fabricate(:notice, :err => err)
-      problem.first_notice_at.should == notice1.created_at
+      expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
 
       notice2 = Fabricate(:notice, :err => err)
-      problem.first_notice_at.should == notice1.created_at
+      expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
     end
   end
-
 
   context '#message' do
     it "adding a notice caches its message" do
@@ -64,7 +74,6 @@ describe Problem do
     end
   end
 
-
   context 'being created' do
     context 'when the app has err notifications set to false' do
       it 'should not send an email notification' do
@@ -74,7 +83,6 @@ describe Problem do
       end
     end
   end
-
 
   context "#resolved?" do
     it "should start out as unresolved" do
@@ -91,7 +99,6 @@ describe Problem do
     end
   end
 
-
   context "resolve!" do
     it "marks the problem as resolved" do
       problem = Fabricate(:problem)
@@ -102,7 +109,7 @@ describe Problem do
 
     it "should record the time when it was resolved" do
       problem = Fabricate(:problem)
-      expected_resolved_at = Time.now
+      expected_resolved_at = Time.zone.now
       Timecop.freeze(expected_resolved_at) do
         problem.resolve!
       end
@@ -121,34 +128,18 @@ describe Problem do
     it "should throw an err if it's not successful" do
       problem = Fabricate(:problem)
       problem.should_not be_resolved
-      problem.stub!(:valid?).and_return(false)
+      problem.stub(:valid?).and_return(false)
       ## update_attributes not test #valid? but #errors.any?
       # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
       er = ActiveModel::Errors.new(problem)
       er.add_on_blank(:resolved)
-      problem.stub!(:errors).and_return(er)
+      problem.stub(:errors).and_return(er)
       problem.should_not be_valid
       lambda {
         problem.resolve!
       }.should raise_error(Mongoid::Errors::Validations)
     end
   end
-
-
-  context ".merge!" do
-    it "collects the Errs from several problems into one and deletes the other problems" do
-      problem1 = Fabricate(:err).problem
-      problem2 = Fabricate(:err).problem
-      problem1.errs.length.should == 1
-      problem2.errs.length.should == 1
-
-      lambda {
-        merged_problem = Problem.merge!(problem1, problem2)
-        merged_problem.reload.errs.length.should == 2
-      }.should change(Problem, :count).by(-1)
-    end
-  end
-
 
   context "#unmerge!" do
     it "creates a separate problem for each err" do
@@ -165,7 +156,6 @@ describe Problem do
       expect { Fabricate(:problem).unmerge! }.not_to raise_error
     end
   end
-
 
   context "Scopes" do
     context "resolved" do
@@ -185,8 +175,22 @@ describe Problem do
         Problem.unresolved.all.should include(unresolved)
       end
     end
-  end
 
+    context "searching" do
+      it 'finds the correct record' do
+        find = Fabricate(:problem, :resolved => false, :error_class => 'theErrorclass::other',
+                         :message => "other", :where => 'errorclass', :environment => 'development', :app_name => 'other')
+        dont_find = Fabricate(:problem, :resolved => false, :error_class => "Batman",
+                              :message => 'todo', :where => 'classerror', :environment => 'development', :app_name => 'other')
+        Problem.search("theErrorClass").unresolved.should include(find)
+        Problem.search("theErrorClass").unresolved.should_not include(dont_find)
+      end
+      it 'find on where message' do
+        problem = Fabricate(:problem, :where => 'cyril')
+        Problem.search('cyril').entries.should eq [problem]
+      end
+    end
+  end
 
   context "notice counter cache" do
     before do
@@ -202,18 +206,17 @@ describe Problem do
     it "adding a notice increases #notices_count by 1" do
       lambda {
         Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.should change(@problem, :notices_count).from(0).to(1)
+      }.should change(@problem.reload, :notices_count).from(0).to(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
       notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      lambda {
+      expect {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :notices_count).from(1).to(0)
+      }.to change(@problem, :notices_count).from(1).to(0)
     end
   end
-
 
   context "#app_name" do
     let!(:app) { Fabricate(:app) }
@@ -328,7 +331,7 @@ describe Problem do
     it "adding a notice adds a string to #user_agents" do
       lambda {
         Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      }.should change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204') => {'value' => 'Chrome 10.0.648.204', 'count' => 1}})
+      }.should change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}})
     end
 
     it "removing a notice removes string from #user_agents" do
@@ -336,7 +339,9 @@ describe Problem do
       lambda {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :user_agents).from({Digest::MD5.hexdigest('Chrome 10.0.648.204') => {'value' => 'Chrome 10.0.648.204', 'count' => 1}}).to({})
+      }.should change(@problem, :user_agents).from({
+        Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}
+      }).to({})
     end
   end
 

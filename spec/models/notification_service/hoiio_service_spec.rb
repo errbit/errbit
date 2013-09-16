@@ -8,7 +8,7 @@ describe NotificationService::HoiioService do
     problem = notice.problem
 
     # hoi stubbing
-    sms = mock('HoiioService')
+    sms = double('HoiioService')
     Hoi::SMS.stub(:new).and_return(sms)
     sms.stub(:send) { true }
 
