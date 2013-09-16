@@ -1,3 +1,23 @@
+## 0.3.0 - Not released Yet
+
+### Improvements
+
+- [#515][] Update to Mongoid 3.1 ([@arthurnn][])
+
+
+[#515]: https://github.com/errbit/errbit/issues/515
+
+## 0.2.1 - Not released Yet
+
+### Bug Fixes
+
+- [#558][] Avoid failure if you remote bitbucket_rest_api gem
+  ([@shingara][])
+
+[@shingara]: https://github.com/shingara
+
+[#558]: https://github.com/errbit/errbit/issues/558
+
 ## 0.2.0 - 2013-09-11
 
 ### Improvements

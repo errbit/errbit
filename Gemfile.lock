@@ -431,7 +431,7 @@ DEPENDENCIES
   quiet_assets
   rack-ssl
   rack-ssl-enforcer
-  rails (= 3.2.13)
+  rails (~> 3.2.13)
   rails_autolink
   ri_cal
   rspec-rails (~> 2.6)

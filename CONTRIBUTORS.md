@@ -1,4 +1,9 @@
-## 0.2.0 - Not Released Yet
+## 0.3.0 - Not released yet
+
+- [@arthurnn][]
+- [@shingara][]
+
+## 0.2.0 - 2013-09-11
 
 - [@2called-chaos][]
 - [@Gonzih][]
