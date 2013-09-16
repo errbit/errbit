@@ -1,12 +1,18 @@
 ## 0.2.1 - Not released Yet
 
+### Improvements
+
+- [#552][] Limite size of asset on errbit ([@tscolari][])
+
 ### Bug Fixes
 
 - [#558][] Avoid failure if you remote bitbucket_rest_api gem
   ([@shingara][])
 
 [@shingara]: https://github.com/shingara
+[@tscolari]: https://github.com/tscolari
 
+[#552]: https://github.com/errbit/errbit/issues/552
 [#558]: https://github.com/errbit/errbit/issues/558
 
 ## 0.2.0 - 2013-09-11
