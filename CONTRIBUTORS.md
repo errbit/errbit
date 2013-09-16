@@ -3,6 +3,17 @@
 - [@arthurnn][]
 - [@shingara][]
 
+[@shingara]: https://github.com/shingara
+[@arthurnn]: https://github.com/arthurnn
+
+## 0.2.1 - Not released yet
+
+- [@shingara][]
+- [@tscolari][]
+
+[@shingara]: https://github.com/shingara
+[@tscolari]: https://github.com/tscolari
+
 ## 0.2.0 - 2013-09-11
 
 - [@2called-chaos][]
