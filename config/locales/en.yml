@@ -83,6 +83,7 @@ en:
       all_errs: all errs
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
+      are_you_sure: 'Are you sure?'
       atom_title: "Errbit notices for %{name} at %{host}"
       deploy_count: "Deploy Count:"
       edit: edit
