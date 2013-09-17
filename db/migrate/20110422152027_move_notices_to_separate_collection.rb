@@ -20,10 +20,11 @@ class MoveNoticesToSeparateCollection < Mongoid::Migration
       e.app.update_attribute(:notify_on_errs, old_notify)
       mongo_db.collection("errs").update({ "_id" => err['_id']}, { "$unset" => { "notices" => 1}})
     end
-    Problem.where(:environment => '').each {|pr|
-      pr.update_attributes(:environment => 'old')
-    }
-    Problem.where(:environment => nil).each {|pr|
+    (
+      Problem.where(:environment => '') |
+      Problem.where(:environment => nil) |
+      Problem.where(:environment => {})
+    ).each {|pr|
       pr.update_attributes(:environment => 'old')
     }
     Rake::Task["errbit:db:update_notices_count"].invoke
