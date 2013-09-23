@@ -34,6 +34,7 @@ if defined? Lighthouse
       ticket.body = body_template.result(binding)
 
       ticket.tags << "errbit"
+      ticket.tags << "dev"
       ticket.save!
       problem.update_attributes(
         :issue_link => "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, ''),
