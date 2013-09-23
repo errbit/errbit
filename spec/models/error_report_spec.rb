@@ -84,7 +84,7 @@ describe ErrorReport do
         end
 
         it 'has request' do
-          subject.request['url'].should == 'http://example.org/verify'
+          subject.request['url'].should == 'http://example.org/verify/cupcake=fistfight&lovebird=doomsayer'
           subject.request['params']['controller'].should == 'application'
         end
 
