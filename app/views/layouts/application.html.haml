@@ -31,5 +31,8 @@
       - if content_for?(:comments)
         #content-comments
           = yield :comments
-    #footer= t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
+    #footer
+      = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
+      %br
+      = Errbit::Version.to_s
     = yield :scripts
