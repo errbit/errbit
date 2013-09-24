@@ -12,7 +12,6 @@ gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 gem 'useragent'
 gem 'decent_exposure'
 gem 'strong_parameters'
-gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer', :require => false
@@ -93,13 +92,13 @@ group :development do
   gem 'capistrano'
 
   # better errors
-  gem 'better_errors'    , :platform => :ruby_19
-  gem 'binding_of_caller', :platform => :ruby_19
-  gem 'meta_request'     , :platform => :ruby_19
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
   gem 'foreman'
 
   # Use thin for development
-  gem 'thin', :group => :development, :platform => :ruby
+  gem 'puma'
 
 end
 
