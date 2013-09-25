@@ -1,10 +1,12 @@
 ## 0.3.0 - Not released yet
 
 - [@arthurnn][]
+- [@numbata][]
 - [@shingara][]
 
-[@shingara]: https://github.com/shingara
 [@arthurnn]: https://github.com/arthurnn
+[@numbata]: https://github.com/numbata
+[@shingara]: https://github.com/shingara
 
 ## 0.2.1 - Not released yet
 

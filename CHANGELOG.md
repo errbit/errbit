@@ -2,9 +2,16 @@
 
 ### Improvements
 
-- [#515][] Update to Mongoid 3.1 ([@arthurnn][])
+- [#515][] Update to Mongoid 3.1 ([@arthurnn][], [@shingara][])
+- Drop the 1.8 support
+- [#289][] Add unwatch button on App view ([@numbata][], [@shingara][])
 
 
+[@arthurnn]: https://github.com/arthurnn
+[@numbata]: https://github.com/numbata
+[@shingara]: https://github.com/shingara
+
+[#289]: https://github.com/errbit/errbit/issues/289
 [#515]: https://github.com/errbit/errbit/issues/515
 
 ## 0.2.1 - Not released Yet
