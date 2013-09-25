@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'airbrake/version'
 require 'airbrake/backtrace'
 require 'airbrake/notice'
+require 'airbrake/utils/params_cleaner'
 
 # MonkeyPatch to instanciate a Airbrake::Notice without configure
 # Airbrake
@@ -141,9 +142,9 @@ describe ErrorReport do
 
       it 'find the correct err for the notice' do
         err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true))
-        
+
         ErrorReport.any_instance.stub(:fingerprint).and_return(err.fingerprint)
-        
+
         expect {
           error_report.generate_notice!
         }.to change {

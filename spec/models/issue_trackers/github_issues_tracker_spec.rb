@@ -25,8 +25,14 @@ describe IssueTrackers::GithubIssuesTracker do
 }
 EOF
 
-    stub_request(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues").
-      to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
+    stub_request(:post,
+                 "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues").
+      to_return(:status => 201,
+                :headers => {
+        'Location' => @issue_link,
+        'Content-Type' => 'application/json',
+      },
+                :body => body )
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload

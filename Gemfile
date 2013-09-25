@@ -1,10 +1,15 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.13'
-gem 'mongoid', '~> 3.1.4'
+RAILS_VERSION = '~> 3.2.14'
 
-gem 'mongoid_rails_migrations', '~> 1.0.1'
-gem 'devise'
+gem 'actionmailer', RAILS_VERSION
+gem 'actionpack', RAILS_VERSION
+gem 'railties', RAILS_VERSION
+
+gem 'mongoid'
+
+gem 'mongoid_rails_migrations'
+gem 'devise', '~> 2.2.1'
 gem 'haml'
 gem 'htmlentities'
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
@@ -37,7 +42,7 @@ gem 'pivotal-tracker'
 # Fogbugz
 gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
-gem 'octokit'
+gem 'octokit', '~> 1.18'
 # Gitlab
 gem 'gitlab', :git => 'https://github.com/NARKOZ/gitlab.git'
 
