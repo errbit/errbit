@@ -1,8 +1,12 @@
 ## 0.2.1 - Not released yet
 
+- [@anicet][]
+- [@nashby][]
 - [@shingara][]
 - [@tscolari][]
 
+[@anicet]: https://github.com/anicet
+[@nashby]: https://github.com/nashby
 [@shingara]: https://github.com/shingara
 [@tscolari]: https://github.com/tscolari
 

@@ -3,17 +3,24 @@
 ### Improvements
 
 - [#552][] Limite size of asset on errbit ([@tscolari][])
+- [#562][] See the version number of errbit on footer ([@nashby][])
+- [#555][] Avoid same group by same error if other line of backtrace
+  instead of first change ([@shingara][])
 
 ### Bug Fixes
 
 - [#558][] Avoid failure if you remote bitbucket_rest_api gem
   ([@shingara][])
+- [#559][] Fix some issue on the migration with old database
+  ([@shingara][])
 
+[@nashby]: https://github.com/nashby
 [@shingara]: https://github.com/shingara
 [@tscolari]: https://github.com/tscolari
 
 [#552]: https://github.com/errbit/errbit/issues/552
 [#558]: https://github.com/errbit/errbit/issues/558
+[#562]: https://github.com/errbit/errbit/issues/562
 
 ## 0.2.0 - 2013-09-11
 
