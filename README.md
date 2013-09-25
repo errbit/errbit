@@ -328,8 +328,8 @@ user.admin = true
 user.save!
 ```
 
-Upgrading
----------
+## Upgrading
+
 When upgrading Errbit, please run:
 
 ```bash
@@ -342,8 +342,14 @@ rake assets:precompile
 If we change the way that data is stored, this will run any migrations to bring your database up to date.
 
 
-User information in error reports
----------------------------------
+### Upgrade from errbit 0.2 to 0.3
+
+The file of MongoDB connection config/database.yml change between 0.2 to
+0.3. So Check the new config/database.yml.example file and update it in
+good way.
+
+
+## User information in error reports
 
 Errbit can now display information about the user who experienced an error.
 This gives you the ability to ask the user for more information,
