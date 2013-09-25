@@ -10,8 +10,10 @@ class RegenerateErrFingerprints < Mongoid::Migration
           :environment => err.environment,
           :api_key     => err.app.api_key
         }
-        fingerprint = Digest::SHA1.hexdigest(fingerprint_source.to_s)
-        err.update_attribute(:fingerprint, fingerprint)
+        err.update_attribute(
+          :fingerprint,
+          Fingerprint.generate(err.notices.first, err.app.api_key)
+        )
       end
     end
   end
