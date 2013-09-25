@@ -1,5 +1,5 @@
 Fabricator :issue_tracker do
-  app!
+  app
   api_token { sequence :word }
   project_id { sequence :word }
   account { sequence :word }

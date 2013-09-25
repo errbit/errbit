@@ -11,7 +11,12 @@ describe Backtrace do
     end
 
     context "similar backtrace exist" do
-      let!(:similar_backtrace) { Fabricate(:backtrace, :fingerprint => fingerprint) }
+      let!(:similar_backtrace) {
+        b =  Fabricate(:backtrace)
+        b.fingerprint = fingerprint
+        b.save!
+        b
+      }
       let(:fingerprint) { "fingerprint" }
 
       before { subject.stub(:fingerprint => fingerprint) }

@@ -174,8 +174,11 @@ describe App do
     }
 
     it 'returns the correct err if one already exists' do
-      existing = Fabricate(:err, conditions.merge(:problem => Fabricate(:problem, :app => app)))
-      Err.where(conditions).first.should == existing
+      existing = Fabricate(:err, {
+        :problem => Fabricate(:problem, :app => app),
+        :fingerprint => conditions[:fingerprint]
+      })
+      Err.where(:fingerprint => conditions[:fingerprint]).first.should == existing
       app.find_or_create_err!(conditions).should == existing
     end
 

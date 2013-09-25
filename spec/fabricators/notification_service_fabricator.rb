@@ -1,5 +1,5 @@
 Fabricator :notification_service  do
-  app!
+  app
   room_id { sequence :word }
   api_token { sequence :word }
   subdomain { sequence :word }

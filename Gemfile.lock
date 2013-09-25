@@ -109,7 +109,7 @@ GEM
       mail (~> 2.2)
     erubis (2.7.0)
     execjs (2.0.1)
-    fabrication (1.3.2)
+    fabrication (2.8.1)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.0)
@@ -404,7 +404,7 @@ DEPENDENCIES
   devise (~> 2.2.1)
   email_spec
   execjs
-  fabrication (~> 1.3.0)
+  fabrication
   flowdock
   foreman
   gitlab!

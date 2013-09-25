@@ -20,8 +20,7 @@ gem 'strong_parameters'
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer', :require => false
-# fabrication 1.3.0 is last supporting ruby 1.8. Update when stop supporting this version too
-gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
+gem 'fabrication'
 gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods

@@ -19,7 +19,7 @@ class Backtrace
   end
 
   def similar
-    Backtrace.find_by(:fingerprint => fingerprint) rescue nil
+    Backtrace.where(:fingerprint => fingerprint).first
   end
 
   def raw=(raw)
