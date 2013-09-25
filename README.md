@@ -348,6 +348,9 @@ The file of MongoDB connection config/database.yml change between 0.2 to
 0.3. So Check the new config/database.yml.example file and update it in
 good way.
 
+This change is not need to be done if you use only ENV variable to
+define you access to MongoDB database.
+
 
 ## User information in error reports
 
