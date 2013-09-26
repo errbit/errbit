@@ -57,8 +57,7 @@ gem 'jira-ruby', :require => 'jira'
 
 # Notification services
 # ---------------------------------------
-# Campfire ( We can't upgrade to 1.0 because drop support of ruby 1.8
-gem 'campy', '0.1.3'
+gem 'campy'
 # Hipchat
 gem 'hipchat'
 # Google Talk
