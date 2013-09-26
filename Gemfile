@@ -9,7 +9,7 @@ gem 'railties', RAILS_VERSION
 gem 'mongoid'
 
 gem 'mongoid_rails_migrations'
-gem 'devise', '~> 2.2.1'
+gem 'devise'
 gem 'haml'
 gem 'htmlentities'
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL

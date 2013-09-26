@@ -44,6 +44,7 @@ GEM
       builder
       json
     arel (3.0.2)
+    atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
@@ -97,11 +98,12 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
     decent_exposure (2.3.0)
-    devise (2.2.7)
+    devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (~> 3.1)
-      warden (~> 1.2.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.4)
     dotenv (0.9.0)
     email_spec (1.5.0)
@@ -353,6 +355,8 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
+    thread_safe (0.1.3)
+      atomic
     tilt (1.4.1)
     timecop (0.6.1)
     tins (0.10.0)
@@ -401,7 +405,7 @@ DEPENDENCIES
   database_cleaner (~> 0.9.0)
   debugger
   decent_exposure
-  devise (~> 2.2.1)
+  devise
   email_spec
   execjs
   fabrication
