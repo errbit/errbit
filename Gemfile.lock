@@ -332,13 +332,13 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
       railties (~> 3.0)
-    taskmapper (0.8.1)
+    taskmapper (1.0.1)
       activeresource (~> 3.0)
       activesupport (~> 3.0)
       hashie (~> 2.0)
-    taskmapper-unfuddle (0.7.0)
-      addressable (~> 2.2)
-      taskmapper (~> 0.8)
+    taskmapper-unfuddle (0.8.0)
+      addressable
+      taskmapper
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.12.0)
@@ -434,8 +434,8 @@ DEPENDENCIES
   ruby-fogbugz
   rushover
   strong_parameters
-  taskmapper (~> 0.8.0)
-  taskmapper-unfuddle (~> 0.7.0)
+  taskmapper
+  taskmapper-unfuddle
   therubyracer
   timecop
   turbo-sprockets-rails3
