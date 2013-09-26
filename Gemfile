@@ -99,27 +99,25 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'foreman'
+  gem 'foreman', :require => false
 
   # Use thin for development
-  gem 'puma'
+  gem 'puma', :require => false
 
 end
 
 group :test do
-  # Capybara 2.1.0 no more support 1.8.7 ruby version
-  gem 'capybara', "~> 2.0.1"
+  gem 'capybara'
   gem 'launchy'
-  # DatabaseCleaner 1.0.0 drop the support of ruby 1.8.7
-  gem 'database_cleaner', '~> 0.9.0'
+  gem 'database_cleaner'
   gem 'email_spec'
-  gem 'timecop', '0.6.1' # last version compatible to ruby 1.8
+  gem 'timecop'
   gem 'coveralls', :require => false
   gem 'mongoid-rspec', :require => false
 end
 
 group :heroku, :production do
-  gem 'unicorn'
+  gem 'unicorn', :require => false
 end
 
 

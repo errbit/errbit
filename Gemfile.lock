@@ -68,15 +68,12 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (2.0.3)
+    capybara (2.1.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      selenium-webdriver (~> 2.0)
-      xpath (~> 1.0.0)
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
+      xpath (~> 2.0)
     coderay (1.0.9)
     columnize (0.3.6)
     coveralls (0.7.0)
@@ -89,7 +86,7 @@ GEM
       safe_yaml (~> 0.9.0)
     css_parser (1.3.5)
       addressable
-    database_cleaner (0.9.1)
+    database_cleaner (1.1.1)
     debug_inspector (0.0.2)
     debugger (1.6.2)
       columnize (>= 0.3.1)
@@ -116,7 +113,6 @@ GEM
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    ffi (1.9.0)
     flowdock (0.3.1)
       httparty (~> 0.7)
       multi_json
@@ -125,7 +121,7 @@ GEM
       thor (>= 0.13.6)
     haml (4.0.3)
       tilt
-    happymapper (0.4.0)
+    happymapper (0.4.1)
       libxml-ruby (~> 2.0)
     hashie (2.0.5)
     highline (1.6.19)
@@ -317,16 +313,10 @@ GEM
       linecache (>= 0.3)
     ruby-fogbugz (0.1.1)
       crack
-    rubyzip (0.9.9)
     rushover (0.3.0)
       json
       rest-client
     safe_yaml (0.9.7)
-    selenium-webdriver (2.35.1)
-      childprocess (>= 0.2.5)
-      multi_json (~> 1.0)
-      rubyzip (< 1.0.0)
-      websocket (~> 1.0.4)
     simple_oauth (0.2.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -358,8 +348,8 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    timecop (0.6.1)
-    tins (0.10.0)
+    timecop (0.6.3)
+    tins (0.11.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -381,9 +371,8 @@ GEM
     webmock (1.13.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
-    websocket (1.0.7)
     xmpp4r (0.5)
-    xpath (1.0.0)
+    xpath (2.0.0)
       nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
 
@@ -400,9 +389,9 @@ DEPENDENCIES
   bitbucket_rest_api
   campy (= 0.1.3)
   capistrano
-  capybara (~> 2.0.1)
+  capybara
   coveralls
-  database_cleaner (~> 0.9.0)
+  database_cleaner
   debugger
   decent_exposure
   devise
@@ -448,7 +437,7 @@ DEPENDENCIES
   taskmapper (~> 0.8.0)
   taskmapper-unfuddle (~> 0.7.0)
   therubyracer
-  timecop (= 0.6.1)
+  timecop
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   underscore-rails
