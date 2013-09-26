@@ -16,7 +16,7 @@ module BacktraceLineHelper
   end
 
   def link_to_repo_source_file(line, text)
-    link_to_github(line, text) || link_to_bitbucket(line, text)
+    link_to_github(line, text) || link_to_bitbucket(line, text) || link_to_gitlab(line, text)
   end
 
   def link_to_hosted_javascript(line, text)
@@ -38,6 +38,12 @@ module BacktraceLineHelper
   def link_to_bitbucket(line, text = nil)
     return unless line.app.bitbucket_repo?
     href = "%s#cl-%s" % [line.app.bitbucket_url_to_file(line.decorated_path + line.file_name), line.number]
+    link_to(text || line.file_name, href, :target => '_blank')
+  end
+
+  def link_to_gitlab(line, text = nil)
+    return unless line.app.gitlab_repo_url?
+    href = "%s#L%s" % [line.app.gitlab_url_to_file(line.decorated_path + line.file_name), line.number]
     link_to(text || line.file_name, href, :target => '_blank')
   end
 

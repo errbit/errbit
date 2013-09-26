@@ -6,7 +6,7 @@
   %thead
     %tr
       %th= t('.name')
-      - if any_github_repos? || any_bitbucket_repos?
+      - if any_github_repos? || any_bitbucket_repos? || any_gitlab_repos?
         %th= t('.repository')
       - if any_notification_services?
         %th= t('.notify')
@@ -25,6 +25,8 @@
               = link_to(app.github_repo, app.github_url, :target => '_blank')
             - if app.bitbucket_repo?
               = link_to(app.bitbucket_repo, app.bitbucket_url, :target => '_blank')
+            - if app.gitlab_repo_url?
+              = link_to(app.gitlab_repo, app.gitlab_repo_url, :target => '_blank')
         - if any_notification_services?
           %td.notification_service
             - if app.notification_service_configured?
