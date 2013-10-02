@@ -33,7 +33,7 @@ production:
     default:
       database: <%= ENV['MONGOID_DATABASE'] %>
       hosts:
-        - <%=ENV["MONGOID_HOST"]%><%=ENV["MONGOID_PORT"]%>
+        - '<%=ENV["MONGOID_HOST"]%>:<%=ENV["MONGOID_PORT"]%>'
       username: <%= ENV['MONGOID_USERNAME'] %>
       password: <%= ENV['MONGOID_PASSWORD'] %>
   options:
