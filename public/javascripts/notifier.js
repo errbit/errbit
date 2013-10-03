@@ -506,7 +506,7 @@ printStackTrace.implementation.prototype = {
                 '<backtrace>{backtrace_lines}</backtrace>' +
             '</error>' +
             '<request>' +
-                '<url>{request_url}</url>' +
+                '<url><![CDATA[{request_url}]]></url>' +
                 '<component>{request_component}</component>' +
                 '<action>{request_action}</action>' +
                 '{request}' +

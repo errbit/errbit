@@ -87,7 +87,7 @@
     </backtrace>
   </error>
   <request>
-    <url>http://example.org/verify</url>
+    <url><![CDATA[http://example.org/verify/cupcake=fistfight&lovebird=doomsayer]]></url>
     <component>application</component>
     <action>verify</action>
     <params>
