@@ -170,6 +170,10 @@ class App
     Errbit::Config.per_app_email_at_notices ? super : Errbit::Config.email_at_notices
   end
 
+  def regenerate_api_key!
+    set(:api_key, SecureRandom.hex)
+  end
+
   protected
 
     def store_cached_attributes_on_problems

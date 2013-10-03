@@ -21,4 +21,10 @@ Fabricator(:problem_with_errs, :from => :problem) do
   }
 end
 
-
+Fabricator(:problem_resolved, :from => :problem) do
+  after_create do |pr|
+    Fabricate(:notice,
+              :err => Fabricate(:err, :problem => pr))
+    pr.resolve!
+  end
+end
