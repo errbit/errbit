@@ -100,7 +100,7 @@ group :development do
   gem 'meta_request'
   gem 'foreman', :require => false
 
-  # Use thin for development
+  # Use puma for development
   gem 'puma', :require => false
 
 end
