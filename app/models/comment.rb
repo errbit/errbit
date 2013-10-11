@@ -5,6 +5,8 @@ class Comment
   after_create :increase_counter_cache
   before_destroy :decrease_counter_cache
 
+  after_create :deliver_email, :if => :emailable?
+
   field :body, :type => String
   index(:user_id => 1)
 
@@ -13,6 +15,10 @@ class Comment
   delegate   :app, :to => :err
 
   validates_presence_of :body
+
+  def deliver_email
+    Mailer.comment_notification(self).deliver
+  end
 
   def notification_recipients
     app.notification_recipients - [user.email]
