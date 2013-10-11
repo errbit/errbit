@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CommentObserver do
+describe "Callback on Comment" do
   context 'when a Comment is saved' do
     let(:comment) { Fabricate.build(:comment) }
 

@@ -14,6 +14,7 @@ class Deploy
 
   after_create :resolve_app_errs, :if => :should_resolve_app_errs?
   after_create :store_cached_attributes_on_problems
+  after_create :deliver_email
 
   validates_presence_of :username, :environment
 
@@ -34,5 +35,12 @@ class Deploy
     def store_cached_attributes_on_problems
       Problem.where(:app_id => app.id).each(&:cache_app_attributes)
     end
+
+    def deliver_email
+      if app.notify_on_deploys? && app.notification_recipients.any?
+        Mailer.deploy_notification(self).deliver
+      end
+    end
+
 end
 
