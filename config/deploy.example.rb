@@ -69,7 +69,7 @@ namespace :errbit do
     release_configs = File.join(release_path,'config')
     run("ln -nfs #{shared_configs}/config.yml #{release_configs}/config.yml")
     run("ln -nfs #{shared_configs}/mongoid.yml #{release_configs}/mongoid.yml")
-    run("ln -nfs #{shared_configs}/secret_token.rb #{release_configs}/initializers/secret_token.rb")
+    run("ln -nfs #{shared_configs}/secret_token.rb #{release_configs}/initializers/__secret_token.rb")
   end
 end
 

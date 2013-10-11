@@ -14,7 +14,7 @@ else
     Errbit::Application.config.secret_token = ENV['SECRET_TOKEN']
 
   # Do not raise an error if secret token is not available during assets precompilation
-  elsif ENV['RAILS_GROUPS'] != 'assets'
+  elsif ENV['RAILS_GROUPS'] != 'assets' && !Errbit::Application.config.secret_token
     raise <<-ERROR
 
   You must generate a unique secret token for your Errbit instance.
@@ -27,9 +27,9 @@ else
       heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
 
   If you are deploying in some other way, please run the following command to generate a new secret token,
-  and commit the new `config/initializers/secret_token.rb`:
+  and commit the new `config/initializers/__secret_token.rb`:
 
-      echo "Errbit::Application.config.secret_token = '$(bundle exec rake secret)'" > config/initializers/secret_token.rb
+      echo "Errbit::Application.config.secret_token = '$(bundle exec rake secret)'" > config/initializers/__secret_token.rb
 
   ERROR
   end
