@@ -80,6 +80,11 @@ class AppsController < ApplicationController
     end
   end
 
+  def regenerate_api_key
+    app.regenerate_api_key!
+    redirect_to edit_app_path(app)
+  end
+
   protected
 
     def initialize_subclassed_issue_tracker

@@ -39,6 +39,9 @@ Errbit::Application.routes.draw do
     end
     resources :deploys, :only => [:index]
     resources :watchers, :only => [:destroy]
+    member do
+      post :regenerate_api_key
+    end
   end
 
   namespace :api do
