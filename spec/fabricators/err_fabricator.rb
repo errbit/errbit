@@ -21,3 +21,4 @@ Fabricator :backtrace_line do
   file { "/path/to/file/#{SecureRandom.hex(4)}.rb" }
   method(:method) { ActiveSupport.methods.shuffle.first }
 end
+

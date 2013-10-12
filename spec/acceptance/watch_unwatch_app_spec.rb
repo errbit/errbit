@@ -12,12 +12,9 @@ feature 'A user can watch and unwatch an application' do
   end
 
   scenario 'log in watch a project and unwatch it' do
-    visit '/'
-    fill_in :user_email, :with => user.email
-    fill_in :user_password, :with => 'password'
-    click_on I18n.t('devise.sessions.new.sign_in')
+    log_in user
     click_on I18n.t('apps.show.unwatch')
-    expect(page).to have_content(I18n.t('apps.index.no_apps')
+    expect(page).to have_content(I18n.t('apps.index.no_apps'))
   end
 
 end

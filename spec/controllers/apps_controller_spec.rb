@@ -5,11 +5,37 @@ describe AppsController do
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
 
+  let(:admin) { Fabricate(:admin) }
+  let(:user) { Fabricate(:user) }
+  let(:watcher) { Fabricate(:user_watcher, :app => app, :user => user) }
+  let(:unwatched_app) { Fabricate(:app) }
+  let(:app) { unwatched_app }
+  let(:watched_app1) do
+    a = Fabricate(:app)
+    Fabricate(:user_watcher, :user => user, :app => a)
+    a
+  end
+  let(:watched_app2) do
+    a = Fabricate(:app)
+    Fabricate(:user_watcher, :user => user, :app => a)
+    a
+  end
+  let(:err) do
+    Fabricate(:err, :problem => problem)
+  end
+  let(:notice) do
+    Fabricate(:notice, :err => err)
+  end
+  let(:problem) do
+    Fabricate(:problem, :app => app)
+  end
+  let(:problem_resolved) { Fabricate(:problem_resolved, :app => app) }
+
   describe "GET /apps" do
     context 'when logged in as an admin' do
       it 'finds all apps' do
-        sign_in Fabricate(:admin)
-        3.times { Fabricate(:app) }
+        sign_in admin
+        unwatched_app && watched_app1 && watched_app2
         get :index
         controller.apps.entries.should == App.all.sort.entries
       end
@@ -17,12 +43,8 @@ describe AppsController do
 
     context 'when logged in as a regular user' do
       it 'finds apps the user is watching' do
-        sign_in(user = Fabricate(:user))
-        unwatched_app = Fabricate(:app)
-        watched_app1 = Fabricate(:app)
-        watched_app2 = Fabricate(:app)
-        Fabricate(:user_watcher, :user => user, :app => watched_app1)
-        Fabricate(:user_watcher, :user => user, :app => watched_app2)
+        sign_in(user)
+        watched_app1 && watched_app2 && unwatched_app
         get :index
         controller.apps.should include(watched_app1, watched_app2)
         controller.apps.should_not include(unwatched_app)
@@ -33,61 +55,56 @@ describe AppsController do
   describe "GET /apps/:id" do
     context 'logged in as an admin' do
       before(:each) do
-        @user = Fabricate(:admin)
-        sign_in @user
-        @app = Fabricate(:app)
-        @problem = Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => @app))).problem
+        sign_in admin
       end
 
       it 'finds the app' do
-        get :show, :id => @app.id
-        controller.app.should == @app
+        get :show, :id => app.id
+        controller.app.should == app
       end
 
       it "should not raise errors for app with err without notices" do
-        Fabricate(:err, :problem => Fabricate(:problem, :app => @app))
-        lambda { get :show, :id => @app.id }.should_not raise_error
+        err
+        lambda { get :show, :id => app.id }.should_not raise_error
       end
 
       it "should list atom feed successfully" do
-        get :show, :id => @app.id, :format => "atom"
+        get :show, :id => app.id, :format => "atom"
         response.should be_success
       end
 
       context "pagination" do
         before(:each) do
-          35.times { Fabricate(:err, :problem => Fabricate(:problem, :app => @app)) }
+          35.times { Fabricate(:err, :problem => Fabricate(:problem, :app => app)) }
         end
 
         it "should have default per_page value for user" do
-          get :show, :id => @app.id
+          get :show, :id => app.id
           controller.problems.to_a.size.should == User::PER_PAGE
         end
 
         it "should be able to override default per_page value" do
-          @user.update_attribute :per_page, 10
-          get :show, :id => @app.id
+          admin.update_attribute :per_page, 10
+          get :show, :id => app.id
           controller.problems.to_a.size.should == 10
         end
       end
 
       context 'with resolved errors' do
         before(:each) do
-          resolved_problem = Fabricate(:problem, :app => @app)
-          Fabricate(:notice, :err => Fabricate(:err, :problem => resolved_problem))
-          resolved_problem.resolve!
+          problem_resolved && problem
         end
 
         context 'and no params' do
           it 'shows only unresolved problems' do
-            get :show, :id => @app.id
+            get :show, :id => app.id
             controller.problems.size.should == 1
           end
         end
 
         context 'and all_problems=true params' do
           it 'shows all errors' do
-            get :show, :id => @app.id, :all_errs => true
+            get :show, :id => app.id, :all_errs => true
             controller.problems.size.should == 2
           end
         end
@@ -97,41 +114,41 @@ describe AppsController do
         before(:each) do
           environments = ['production', 'test', 'development', 'staging']
           20.times do |i|
-            Fabricate(:problem, :app => @app, :environment => environments[i % environments.length])
+            Fabricate(:problem, :app => app, :environment => environments[i % environments.length])
           end
         end
 
         context 'no params' do
           it 'shows errs for all environments' do
-            get :show, :id => @app.id
-            controller.problems.size.should == 21
+            get :show, :id => app.id
+            controller.problems.size.should == 20
           end
         end
 
         context 'environment production' do
           it 'shows errs for just production' do
-            get :show, :id => @app.id, :environment => 'production'
-            controller.problems.size.should == 6
+            get :show, :id => app.id, :environment => 'production'
+            controller.problems.size.should == 5
           end
         end
 
         context 'environment staging' do
           it 'shows errs for just staging' do
-            get :show, :id => @app.id, :environment => 'staging'
+            get :show, :id => app.id, :environment => 'staging'
             controller.problems.size.should == 5
           end
         end
 
         context 'environment development' do
           it 'shows errs for just development' do
-            get :show, :id => @app.id, :environment => 'development'
+            get :show, :id => app.id, :environment => 'development'
             controller.problems.size.should == 5
           end
         end
 
         context 'environment test' do
           it 'shows errs for just test' do
-            get :show, :id => @app.id, :environment => 'test'
+            get :show, :id => app.id, :environment => 'test'
             controller.problems.size.should == 5
           end
         end
@@ -140,9 +157,7 @@ describe AppsController do
 
     context 'logged in as a user' do
       it 'finds the app if the user is watching it' do
-        user = Fabricate(:user)
-        app = Fabricate(:app)
-        watcher = Fabricate(:user_watcher, :app => app, :user => user)
+        watcher
         sign_in user
         get :show, :id => app.id
         controller.app.should == app
@@ -160,7 +175,7 @@ describe AppsController do
 
   context 'logged in as an admin' do
     before do
-      sign_in Fabricate(:admin)
+      sign_in admin
     end
 
     describe "GET /apps/new" do
@@ -345,6 +360,34 @@ describe AppsController do
     end
   end
 
+  describe "POST /apps/:id/regenerate_api_key" do
+
+    context "like watcher" do
+      before do
+        sign_in watcher.user
+      end
+
+      it 'redirect to root with flash error' do
+        post :regenerate_api_key, :id => 'foo'
+        expect(request).to redirect_to root_path
+      end
+
+    end
+
+    context "like admin" do
+      before do
+        sign_in admin
+      end
+
+      it 'redirect_to app view' do
+        expect do
+          post :regenerate_api_key, :id => app.id
+          expect(request).to redirect_to edit_app_path(app)
+        end.to change { app.api_key }
+      end
+    end
+
+  end
 
 end
 
