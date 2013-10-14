@@ -53,7 +53,7 @@ unless defined?(Errbit::Config)
   # Set default devise modules
   Errbit::Config.devise_modules = [:database_authenticatable,
                                    :recoverable, :rememberable, :trackable,
-                                   :validatable, :token_authenticatable, :omniauthable]
+                                   :validatable, :omniauthable]
 end
 
 # Set default settings from config.example.yml if key is missing from config.yml
