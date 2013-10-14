@@ -81,7 +81,7 @@ gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.6'
+  gem 'rspec-rails'
   gem 'webmock', :require => false
   gem 'airbrake', :require => false
   gem 'ruby-debug', :platform => :mri_18

@@ -428,7 +428,7 @@ DEPENDENCIES
   rails_autolink
   railties (~> 3.2.14)
   ri_cal
-  rspec-rails (~> 2.6)
+  rspec-rails
   ruby-debug
   ruby-fogbugz
   rushover

@@ -70,7 +70,7 @@ describe ProblemUpdaterCache do
         end
 
         it 'update first_notice_at' do
-          expect(problem.first_notice_at.to_i).to be_within(1).of(notice.created_at.to_i)
+          expect(problem.first_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
         end
 
         it 'update last_notice_at' do
