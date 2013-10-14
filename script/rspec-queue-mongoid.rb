@@ -9,7 +9,9 @@ require 'test_queue/runner/rspec'
 class MongoidRspecRunner < TestQueue::Runner::RSpec
   def after_fork(num)
     super
-    Mongoid.master = Mongoid.master.connection.db(Mongoid.master.name + "_#{num}")
+    Mongoid.override_database(
+      "#{Mongoid.session(:default).options[:database]}_#{num}"
+    )
   end
 end
 
