@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
   before_filter :set_time_zone
 
@@ -45,4 +46,12 @@ protected
     Time.zone = current_user.time_zone if user_signed_in?
   end
 
+  def authenticate_user_from_token!
+    user_token = params[User.token_authentication_key].presence
+    user       = user_token && User.find_by(authentication_token: user_token)
+
+    if user
+      sign_in user, store: false
+    end
+  end
 end
