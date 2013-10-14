@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby (ENV['RUBY_VERSION'] || '2.0.0')
 
 RAILS_VERSION = '~> 3.2.14'
 
