@@ -7,7 +7,7 @@
 %div
   %label Api Key
   %span= app.api_key
-  = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app), :class => 'button', :method => 'post'
+  = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app.id), :class => 'button', :method => 'post'
 %div
   = f.label :repository_branch
   = f.text_field :repository_branch, :placeholder => "master"
