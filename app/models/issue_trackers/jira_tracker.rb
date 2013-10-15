@@ -77,11 +77,12 @@ if defined? JIRA
               },
               :priority => {
                   :name => issue_priority,
-              },
-
-              :components => [{:name => issue_component}]
+              }
           }
       }
+
+      #might be able to use delimeter to have multiple
+      issue[:fields][:components] = [{:name => issue_component}] if issue_component.present?
 
       issue[:fields][:assignee] = {:name => account} if account
 
