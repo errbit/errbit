@@ -17,6 +17,9 @@ feature "Regeneration api_Key" do
     }.to change {
       app.reload.api_key
     }
+    click_link I18n.t('shared.navigation.apps')
+    click_link I18n.t('apps.index.new_app')
+    expect(page).to_not have_button I18n.t('apps.fields.regenerate_api_key')
   end
 
   scenario "a user cannot access to edit page" do
