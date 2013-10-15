@@ -1,12 +1,25 @@
 ## 0.3.0 - Not released yet
 
 - [@arthurnn][]
+- [@emgiezet][]
+- [@jamescmartinez][]
+- [@mildavw][]
+- [@nashby][]
 - [@numbata][]
 - [@shingara][]
+- [@simi][]
+- [@ugisozols][]
 
 [@arthurnn]: https://github.com/arthurnn
+[@emgiezet]: https://github.com/emgiezet
+[@jamescmartinez]: https://github.com/jamescmartinez
+[@mildavw]: https://github.com/mildavw
+[@nashby]: https://github.com/nashby
 [@numbata]: https://github.com/numbata
 [@shingara]: https://github.com/shingara
+[@simi]: https://github.com/simi
+[@ugisozols]: https://github.com/ugisozols
+
 
 ## 0.2.1 - Not released yet
 
