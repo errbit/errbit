@@ -93,7 +93,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 2.0', :require => false
 
   # better errors
   gem 'better_errors'
