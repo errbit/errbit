@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby (ENV['RUBY_VERSION'] || '2.0.0') unless ENV['CI']
 
-RAILS_VERSION = '~> 3.2.14'
+RAILS_VERSION = '~> 3.2.15'
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION

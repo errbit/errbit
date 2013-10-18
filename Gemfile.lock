@@ -147,7 +147,7 @@ GEM
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    json (1.8.0)
+    json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
     kaminari (0.14.1)
@@ -379,9 +379,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (~> 3.2.14)
+  actionmailer (~> 3.2.15)
   actionmailer_inline_css
-  actionpack (~> 3.2.14)
+  actionpack (~> 3.2.15)
   airbrake
   better_errors
   binding_of_caller
@@ -426,7 +426,7 @@ DEPENDENCIES
   rack-ssl
   rack-ssl-enforcer
   rails_autolink
-  railties (~> 3.2.14)
+  railties (~> 3.2.15)
   ri_cal
   rspec-rails
   ruby-debug
