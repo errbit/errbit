@@ -36,8 +36,8 @@ class IssueTrackers::UnfuddleTracker < IssueTracker
   end
 
   def create_issue(problem, reported_by = nil)
-    unfuddle = TaskMapper.new(:unfuddle, :username => username, :password => password, :account => account)
 
+    Unfuddle.config(account, username, password)
     begin
       issue_options = {:project_id => project_id,
         :summary => issue_title(problem),
@@ -48,9 +48,9 @@ class IssueTrackers::UnfuddleTracker < IssueTracker
 
       issue_options[:milestone_id] = milestone_id if milestone_id.present?
 
-      issue = unfuddle.project(project_id.to_i).ticket!(issue_options)
+      issue = Unfuddle::Ticket.create(issue_options)
       problem.update_attributes(
-                                :issue_link => File.join("#{url}/tickets/#{issue['id']}"),
+                                :issue_link => File.join("#{url}/tickets/#{issue.id}"),
                                 :issue_type => Label
                                 )
     rescue ActiveResource::UnauthorizedAccess

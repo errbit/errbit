@@ -49,10 +49,6 @@ gem 'gitlab', :git => 'https://github.com/NARKOZ/gitlab.git'
 # Bitbucket Issues
 gem 'bitbucket_rest_api', :require => false
 
-# Unfuddle
-gem "taskmapper"
-gem "taskmapper-unfuddle"
-
 # Jira
 gem 'jira-ruby', :require => 'jira'
 
