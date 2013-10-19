@@ -18,6 +18,7 @@
 
 - [#565][] Treat request URL as CDATA so query string params don't
   result in invalid XML ([@mildavw][])
+- [#594][] Dont use ^ and $ on email_regexp([@arthurnn][])
 
 
 [@arthurnn]: https://github.com/arthurnn
@@ -30,6 +31,8 @@
 [#515]: https://github.com/errbit/errbit/issues/515
 [#547]: https://github.com/errbit/errbit/issues/547
 [#565]: https://github.com/errbit/errbit/issues/565
+[#588]: https://github.com/errbit/errbit/issues/588
+[#594]: https://github.com/errbit/errbit/pull/594
 
 ## 0.2.1 - Not released Yet
 
