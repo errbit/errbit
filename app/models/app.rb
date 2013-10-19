@@ -21,7 +21,7 @@ class App
   field :_id,
     type: String,
     pre_processed: true,
-    default: ->{ Moped::BSON::ObjectId.new.to_s }
+    default: ->{ BSON::ObjectId.new.to_s }
 
 
   embeds_many :watchers
