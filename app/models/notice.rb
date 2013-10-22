@@ -164,6 +164,8 @@ class Notice
   def email_notification
     return true unless should_email?
     Mailer.err_notification(self).deliver
+  rescue Net::SMTPFatalError
+    # prevent recursion when sending of notification fails
   rescue => e
     HoptoadNotifier.notify(e)
   end
