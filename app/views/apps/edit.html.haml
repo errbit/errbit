@@ -5,7 +5,7 @@
     :data => { :confirm => t('apps.confirm_delete') }, :class => 'button'
   = link_to('cancel', app_path(app), :class => 'button')
 
-= form_for app do |f|
+= form_for app_decorate do |f|
 
   = render 'fields', :f => f
 

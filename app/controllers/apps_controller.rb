@@ -16,6 +16,9 @@ class AppsController < ApplicationController
   }
 
   expose(:app, :ancestor => :app_scope)
+  expose(:app_decorate) do
+    AppDecorator.new(app)
+  end
 
   expose(:all_errs) {
     !!params[:all_errs]

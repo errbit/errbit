@@ -125,4 +125,6 @@ en:
       watchers: Watchers
       when:  When
       who: Who
+    issue_tracker_fields:
+      legend: Issue Tracker
 

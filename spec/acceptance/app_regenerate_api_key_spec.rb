@@ -28,5 +28,4 @@ feature "Regeneration api_Key" do
     click_link app.name if page.current_url != app_url(app)
     expect(page).to_not have_button I18n.t('apps.show.edit')
   end
-
 end

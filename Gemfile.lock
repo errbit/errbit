@@ -95,6 +95,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
     dotenv (0.9.0)
+    draper (1.2.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0.3)
     email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -282,6 +286,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    request_store (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ri_cal (0.8.8)
@@ -382,6 +387,7 @@ DEPENDENCIES
   debugger
   decent_exposure
   devise
+  draper
   email_spec
   execjs
   fabrication
