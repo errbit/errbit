@@ -4,7 +4,7 @@
   = link_to 'destroy application', app_path(app), :method => :delete, :data => { :confirm => 'Seriously?' }, :class => 'button'
   = link_to('cancel', app_path(app), :class => 'button')
 
-= form_for app do |f|
+= form_for app_decorate do |f|
 
   = render 'fields', :f => f
 

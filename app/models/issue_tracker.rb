@@ -3,6 +3,11 @@ class IssueTracker
   include Mongoid::Timestamps
   include HashHelper
   include Rails.application.routes.url_helpers
+
+  Fields = []
+  Note = 'When no issue tracker has been configured, you will be able to leave comments on errors.'
+  Label = 'none'
+
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
 
   embedded_in :app, :inverse_of => :issue_tracker
@@ -41,7 +46,6 @@ class IssueTracker
   def url; nil; end
 
   # Retrieve tracker label from either class or instance.
-  Label = ''
   def self.label; self::Label; end
   def label; self.class.label; end
 
