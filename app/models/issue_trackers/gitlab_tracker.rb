@@ -12,12 +12,16 @@ if defined? Gitlab
       [:project_id, {
         :label       => "Ticket Project ID (use Number)",
         :placeholder => "Gitlab Project where issues will be created"
+      }],
+      [:alt_project_id, {
+        :label       => "Project Name (namespace/project)",
+        :placeholder => "Gitlab Project where issues will be created"
       }]
     ]
 
     def check_params
       if Fields.detect {|f| self[f[0]].blank?}
-        errors.add :base, 'You must specify your Gitlab URL, API token and Project ID'
+        errors.add :base, 'You must specify your Gitlab URL, API token, Project ID and Project Name'
       end
     end
 
@@ -43,7 +47,7 @@ if defined? Gitlab
     end
 
     def url
-      "#{account}/#{project_id}/issues"
+      "#{account}/#{alt_project_id}/issues"
     end
   end
 end
