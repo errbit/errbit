@@ -20,3 +20,12 @@ After you just need launch the script with adapting runner of mongoid.
 
 In my case, the complete test suite down to 2min after a 16min long
 before.
+
+## Avoid running acceptance test with phantomjs
+
+Some acceptance test use phantomjs to interpret the Javascript in page.
+To avoid this test you can launch your test by skipping js tag
+
+```
+bundle exec rspec spec --tag="~js"
+```
