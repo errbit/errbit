@@ -55,7 +55,7 @@ RSpec.configure do |config|
   end
 
   config.after(:all) do
-    WebMock.disable_net_connect! :allow => /coveralls\.io/
+    WebMock.disable_net_connect! :allow => /coveralls\.io|127\.0\.0\.1/
   end
 end
 

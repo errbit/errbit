@@ -4,9 +4,7 @@ class IssueTracker
   include HashHelper
   include Rails.application.routes.url_helpers
 
-  Fields = []
-  Note = 'When no issue tracker has been configured, you will be able to leave comments on errors.'
-  Label = 'none'
+  Note = ''
 
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
 

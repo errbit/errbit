@@ -104,9 +104,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'launchy'
-  gem 'database_cleaner'
+  gem 'capybara', :require => false
+  gem 'poltergeist', :require => false
+  gem 'launchy', :require => false
+  gem 'database_cleaner', :require => false
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', :require => false
