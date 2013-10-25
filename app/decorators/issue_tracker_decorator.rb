@@ -4,8 +4,8 @@ class IssueTrackerDecorator < Draper::Decorator
 
   def issue_trackers
     @issue_trackers ||= [
-        IssueTracker,
-        IssueTracker.subclasses
+      IssueTracker::None,
+      IssueTracker.subclasses.select{|klass| klass != IssueTracker::None }
     ].flatten
     @issue_trackers.each do |it|
       yield IssueTrackerDecorator.new(it)
