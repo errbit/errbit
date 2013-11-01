@@ -12,7 +12,7 @@ class AppsController < ApplicationController
   }
 
   expose(:apps) {
-    app_scope.all.sort
+    app_scope.all.sort.to_a
   }
 
   expose(:app, :ancestor => :app_scope)
@@ -143,4 +143,3 @@ class AppsController < ApplicationController
       end
     end
 end
-

@@ -12,27 +12,27 @@ module AppsHelper
   end
 
   def any_github_repos?
-    detect_any_apps_with_attributes unless @any_github_repos
+    detect_any_apps_with_attributes if @any_github_repos.nil?
     @any_github_repos
   end
 
   def any_notification_services?
-    detect_any_apps_with_attributes unless @any_notification_services
+    detect_any_apps_with_attributes if @any_notification_services.present?
     @any_notification_services
   end
 
   def any_bitbucket_repos?
-    detect_any_apps_with_attributes unless @any_bitbucket_repos
+    detect_any_apps_with_attributes if @any_bitbucket_repos.nil?
     @any_bitbucket_repos
   end
 
   def any_issue_trackers?
-    detect_any_apps_with_attributes unless @any_issue_trackers
+    detect_any_apps_with_attributes if @any_issue_trackers.nil?
     @any_issue_trackers
   end
 
   def any_deploys?
-    detect_any_apps_with_attributes unless @any_deploys
+    detect_any_apps_with_attributes if @any_deploys.nil?
     @any_deploys
   end
 
@@ -50,4 +50,3 @@ module AppsHelper
     end
   end
 end
-
