@@ -400,7 +400,5 @@ describe AppsController do
         end.to change { app.api_key }
       end
     end
-
   end
-
 end

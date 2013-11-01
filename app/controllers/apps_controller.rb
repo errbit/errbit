@@ -15,7 +15,8 @@ class AppsController < ApplicationController
     app_scope.all.sort.to_a
   }
 
-  expose(:app, :ancestor => :app_scope)
+  expose(:app, ancestor: :app_scope, attributes: :app_params)
+
   expose(:app_decorate) do
     AppDecorator.new(app)
   end
@@ -23,6 +24,7 @@ class AppsController < ApplicationController
   expose(:all_errs) {
     !!params[:all_errs]
   }
+
   expose(:problems) {
     if request.format == :atom
       app.problems.unresolved.ordered
@@ -139,5 +141,10 @@ class AppsController < ApplicationController
           flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
         end
       end
+    end
+
+  private
+    def app_params
+      params.require(:app).permit!
     end
 end

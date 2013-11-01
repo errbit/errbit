@@ -15,9 +15,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
 
   class StrongParametersWithEagerAttributesStrategy < DecentExposure::StrongParametersStrategy
-    def attributes
-      super
-      @attributes ||= params[inflector.param_key] || {}
+    def assign_attributes?
+      singular? && !get? && !delete? && (params[options[:param_key] || inflector.param_key]).present?
     end
   end
 

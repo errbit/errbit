@@ -172,7 +172,7 @@ class App
   end
 
   def regenerate_api_key!
-    set(:api_key, SecureRandom.hex)
+    update_attribute(:api_key, SecureRandom.hex)
   end
 
   ##
