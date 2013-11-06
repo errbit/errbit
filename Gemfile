@@ -3,6 +3,7 @@ ruby (ENV['RUBY_VERSION'] || '2.0.0') unless ENV['CI']
 
 RAILS_VERSION = '~> 3.2.15'
 
+gem 'rails', RAILS_VERSION
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION

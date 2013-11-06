@@ -1,0 +1,24 @@
+production:
+    rails:
+        server:
+            unique_name: frontend
+        configuration:
+            ruby_version: 2.0.0
+    environment_variables:
+        SECRET_TOKEN: AUTO_GENERATE_30
+staging:
+    rails:
+        server:
+            unique_name: frontend
+        configuration:
+            ruby_version: 2.0.0
+    environment_variables:
+        SECRET_TOKEN: AUTO_GENERATE_30
+development:
+    rails:
+        server:
+            unique_name: frontend
+        configuration:
+            ruby_version: 2.0.0
+    environment_variables:
+        SECRET_TOKEN: AUTO_GENERATE_30
