@@ -321,8 +321,8 @@ describe AppsController do
 
             it "should show validation notice when sufficient params are not present" do
               # Leave out one required param
-              params = tracker_klass::Fields[1..-1].inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
-              params[:type] = tracker_klass.to_s
+              # TODO. previous test was not relevant because one params can be enough. So put noone
+              params = {:type => tracker_klass.to_s }
               put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
               @app.reload

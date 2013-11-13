@@ -25,6 +25,7 @@ gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
+gem 'draper', :require => false
 
 
 # Remove / comment out any of the gems below if you want to disable
@@ -102,9 +103,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'launchy'
-  gem 'database_cleaner'
+  gem 'capybara', :require => false
+  gem 'poltergeist', :require => false
+  gem 'launchy', :require => false
+  gem 'database_cleaner', :require => false
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', :require => false

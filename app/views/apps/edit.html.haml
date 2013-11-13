@@ -1,12 +1,12 @@
-- content_for :title, 'Edit App'
+- content_for :title, t('.title')
 - content_for :action_bar do
   = link_to_copy_attributes_from_other_app
-  = link_to 'destroy application', app_path(app), :method => :delete, :data => { :confirm => 'Seriously?' }, :class => 'button'
-  = link_to('cancel', app_path(app), :class => 'button')
+  = link_to t('.destroy'), app_path(app), :method => :delete, :data => { :confirm => t('.seriously') }, :class => 'button'
+  = link_to(t('.cancel'), app_path(app), :class => 'button')
 
-= form_for app do |f|
+= form_for app_decorate do |f|
 
   = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Update App'
+  %div.buttons= f.submit t('.update')
 
