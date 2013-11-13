@@ -113,6 +113,9 @@ GEM
       thor (>= 0.13.6)
     gitlab (3.0.0)
       httparty
+    gli (2.8.1)
+    grancher (0.1.5)
+      gash
     haml (4.0.3)
       tilt
     happymapper (0.4.1)
@@ -134,6 +137,15 @@ GEM
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.5)
+    jeweler (1.8.8)
+      builder
+      bundler (~> 1.0)
+      git (>= 1.2.5)
+      github_api (= 0.10.1)
+      highline (>= 1.6.15)
+      nokogiri (= 1.5.10)
+      rake
+      rdoc
     jira-ruby (0.1.2)
       activesupport
       oauth
@@ -219,6 +231,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    open4 (1.3.0)
     origin (1.1.0)
     orm_adapter (0.4.0)
     oruen_redmine_client (0.0.1)
@@ -276,6 +289,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    rainbow (1.1.4)
     raindrops (0.12.0)
     rake (10.1.0)
     rbx-require-relative (0.0.9)
@@ -311,6 +325,9 @@ GEM
       json
       rest-client
     safe_yaml (0.9.7)
+    sdoc (0.3.20)
+      json (>= 1.1.3)
+      rdoc (~> 3.10)
     simple_oauth (0.2.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -337,6 +354,14 @@ GEM
     tilt (1.4.1)
     timecop (0.6.3)
     tins (0.12.0)
+    trac4r (1.2.4)
+      gli
+      gli (>= 1.1.0)
+      grancher
+      jeweler
+      rainbow
+      rainbow (>= 1.0.4)
+      sdoc
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -423,6 +448,7 @@ DEPENDENCIES
   strong_parameters
   therubyracer
   timecop
+  trac4r (~> 1.2.4)
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   underscore-rails
