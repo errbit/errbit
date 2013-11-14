@@ -413,7 +413,6 @@ DEPENDENCIES
   quiet_assets
   rack-ssl
   rack-ssl-enforcer
-  rails (~> 3.2.15)
   rails_autolink
   railties (~> 3.2.15)
   ri_cal
