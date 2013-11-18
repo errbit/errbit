@@ -70,7 +70,7 @@ $(function() {
     panel.show();
   }
 
-  function toggleProblemsCheckboxes() {
+  window.toggleProblemsCheckboxes = function() {
     var checkboxToggler = $('#toggle_problems_checkboxes');
 
     checkboxToggler.on("click", function() {
