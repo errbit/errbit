@@ -28,21 +28,18 @@ describe "problems/show.html.haml" do
 
     it "should confirm the 'resolve' link by default" do
       render
-
-      action_bar.should have_selector('a.resolve[data-confirm="Seriously?"]')
+      action_bar.should have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
     end
 
     it "should confirm the 'resolve' link if configuration is unset" do
-      Errbit::Config.stub(:confirm_resolve_err).and_return(nil)
+      Errbit::Config.stub(:confirm_err_actions).and_return(nil)
       render
-
-      action_bar.should have_selector('a.resolve[data-confirm="Seriously?"]')
+      action_bar.should have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
     end
 
     it "should not confirm the 'resolve' link if configured not to" do
-      Errbit::Config.stub(:confirm_resolve_err).and_return(false)
+      Errbit::Config.stub(:confirm_err_actions).and_return(false)
       render
-
       action_bar.should have_selector('a.resolve[data-confirm="null"]')
     end
 
@@ -50,7 +47,6 @@ describe "problems/show.html.haml" do
       url = 'http://localhost:3000/problems'
       controller.request.env['HTTP_REFERER'] = url
       render
-
       action_bar.should have_selector("span a.up[href='#{url}']", :text => 'up')
     end
 

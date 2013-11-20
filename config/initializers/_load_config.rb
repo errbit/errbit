@@ -12,7 +12,7 @@ unless defined?(Errbit::Config)
     Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
     #  Not really easy to use like an env because need an array and ENV return a string :(
     # Errbit::Config.email_at_notices = ENV['ERRBIT_EMAIL_AT_NOTICES']
-    Errbit::Config.confirm_resolve_err = ENV['ERRBIT_CONFIRM_RESOLVE_ERR'].to_i == 0
+    Errbit::Config.confirm_err_actions = ENV['ERRBIT_CONFIRM_ERR_ACTIONS'].to_i == 0
     Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME'].to_i == 1
     Errbit::Config.allow_comments_with_issue_tracker = ENV['ERRBIT_ALLOW_COMMENTS_WITH_ISSUE_TRACKER'].to_i == 0
     Errbit::Config.enforce_ssl = ENV['ERRBIT_ENFORCE_SSL']

@@ -1,6 +1,6 @@
 module ProblemsHelper
-  def problem_confirm
-    Errbit::Config.confirm_resolve_err === false ? nil : 'Seriously?'
+  def problem_confirm(action)
+    t('problems.confirm.%s' % action) unless Errbit::Config.confirm_err_actions.eql? false
   end
 
   def truncated_problem_message(problem)

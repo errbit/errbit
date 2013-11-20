@@ -36,8 +36,8 @@ per_app_notify_at_notices: false
 # [0] for all notices, provided notification service is configured
 notify_at_notices: [0]
 
-# Configure whether or not the user should be prompted before resolving an error.
-confirm_resolve_err: true
+# Configure whether or not the user should be prompted before resolving/deleting/merging/etc an error.
+confirm_err_actions: true
 
 # Add an optional 'username' field to Users.
 # Helpful when you need to plug in a custom authentication strategy, such as LDAP.
