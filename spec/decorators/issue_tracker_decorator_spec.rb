@@ -2,37 +2,28 @@ require 'spec_helper'
 
 describe IssueTrackerDecorator do
 
-    class Foo
-      Note = 'hello <strong></strong>'
-      Fields = [
-        [:foo, :bar]
-      ]
-      Label = 'foo'
-      def self.label; Label; end
-      def _type
-        'Foo'
-      end
+    let(:none_tracker) do
+      ErrbitPlugin::NoneIssueTracker.new(Object.new, 'none')
     end
 
-    class Bar
-      Label = 'bar'
-      def self.label; Label; end
-      def _type
-        'Bar'
-      end
+    let(:tracker) do
+      ErrbitPlugin::FakeIssueTracker.new(Object.new, 'fake')
+    end
+
+    let(:decorator) do
+      IssueTrackerDecorator.new(tracker, 'fake')
     end
 
   describe "#note" do
 
-
     it 'return the html_safe of Note' do
-      expect(IssueTrackerDecorator.new(Foo).note).to eql 'hello <strong></strong>'.html_safe
+      expect(decorator.note).to eql tracker.note
     end
   end
 
   describe "#issue_trackers" do
     it 'return an array of IssueTrackerDecorator' do
-      IssueTrackerDecorator.new(Foo).issue_trackers do |it|
+      decorator.issue_trackers do |it|
         expect(it).to be_a(IssueTrackerDecorator)
       end
     end
@@ -40,20 +31,20 @@ describe IssueTrackerDecorator do
 
   describe "#fields" do
     it 'return all Fields define decorate' do
-      IssueTrackerDecorator.new(Foo).fields do |itf|
+      decorator.fields do |itf|
         expect(itf).to be_a(IssueTrackerFieldDecorator)
-        expect(itf.object).to eql :foo
-        expect(itf.field_info).to eql :bar
+        expect([:foo, :bar]).to be_include(itf.object)
+        expect([{:label => 'foo'}, {:label => 'bar'}]).to be_include(itf.field_info)
       end
     end
   end
 
   describe "#params_class" do
     it 'add the label in class' do
-      expect(IssueTrackerDecorator.new(Bar).params_class(Foo.new)).to eql 'bar'
+      expect(decorator.params_class(IssueTracker.new(:type_tracker => 'none'))).to eql 'fake'
     end
     it 'add chosen class if _type is same' do
-      expect(IssueTrackerDecorator.new(Foo).params_class(Foo.new)).to eql 'chosen foo'
+      expect(decorator.params_class(IssueTracker.new(:type_tracker => 'fake'))).to eql 'chosen fake'
     end
   end
 end

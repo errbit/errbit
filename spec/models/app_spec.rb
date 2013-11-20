@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe App do
+
   context "Attributes" do
     it { should have_field(:_id).of_type(String) }
     it { should have_field(:name).of_type(String) }
@@ -217,6 +218,27 @@ describe App do
       expect {
         App.find_by_api_key!('foo')
       }.to raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  end
+
+  describe "#comments_allowed?" do
+    context "without issue_tracker" do
+      it 'return true' do
+        expect(App.new.comments_allowed?).to be_true
+      end
+    end
+
+    context "with issue_tracker" do
+      let(:issue_tracker) do
+        ist = IssueTracker.new
+        ist.stub(:comments_allowed?).and_return('foo')
+        ist
+      end
+      it 'delegate to issue_tracker' do
+        expect(App.new(
+          :issue_tracker => issue_tracker
+        ).comments_allowed?).to eql 'foo'
+      end
     end
   end
 

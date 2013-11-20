@@ -99,7 +99,7 @@ class AppsController < ApplicationController
 
     def plug_params app
       app.watchers.build if app.watchers.none?
-      app.issue_tracker = IssueTracker.new unless app.issue_tracker_configured?
+      app.issue_tracker ||= IssueTracker.new
       app.notification_service = NotificationService.new unless app.notification_service_configured?
       app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
     end

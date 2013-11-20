@@ -13,10 +13,10 @@ class IssueTrackerFieldDecorator < Draper::Decorator
   end
 
 
-  def input(form)
-    form.send(input_field, object,
+  def input(form, issue_tracker)
+    form.send(input_field, key.to_s,
               :placeholder => field_info[:placeholder],
-              :value => form.object.send(object))
+              :value => issue_tracker.options[key.to_s])
   end
 
   private

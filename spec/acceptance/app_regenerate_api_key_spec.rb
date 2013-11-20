@@ -72,17 +72,17 @@ feature "Create an application" do
     log_in admin
     click_on I18n.t('apps.index.new_app')
     fill_in 'app_name', :with => 'My new app'
-    find('.label_radio.bitbucket').click
-    within ".bitbucket.tracker_params" do
-      fill_in 'app_issue_tracker_attributes_api_token', :with => 'token'
-      fill_in 'app_issue_tracker_attributes_project_id', :with => 'pass'
+    find('.label_radio.github').click
+    within ".github.tracker_params" do
+      fill_in 'app_issue_tracker_attributes_options_username', :with => 'token'
+      fill_in 'app_issue_tracker_attributes_options_password', :with => 'pass'
     end
     click_on I18n.t('apps.new.add_app')
     expect(page.has_content?(I18n.t('controllers.apps.flash.create.success'))).to eql true
     app = App.where(:name => 'My new app').first
-    expect(app.issue_tracker).to be_a IssueTracker::BitbucketIssuesTracker
-    expect(app.issue_tracker.api_token).to eql 'token'
-    expect(app.issue_tracker.project_id).to eql 'pass'
+    expect(app.issue_tracker.type_tracker).to eql 'IssueTrackers::GithubIssuesTracker'
+    expect(app.issue_tracker.options['username']).to eql 'token'
+    expect(app.issue_tracker.options['password']).to eql 'pass'
 
     click_on I18n.t('shared.navigation.apps')
     click_on 'My new app'
@@ -91,6 +91,6 @@ feature "Create an application" do
     click_on I18n.t('apps.edit.update')
     expect(page.has_content?(I18n.t('controllers.apps.flash.update.success'))).to eql true
     app = App.where(:name => 'My new app').first
-    expect(app.issue_tracker).to be_a IssueTracker::None
+    expect(app.issue_tracker.tracker).to be_a ErrbitPlugin::NoneIssueTracker
   end
 end

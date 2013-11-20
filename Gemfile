@@ -27,30 +27,13 @@ gem 'rails_autolink'
 gem 'hoptoad_notifier', "~> 2.4"
 gem 'draper', :require => false
 
+gem 'errbit_plugin',
+  :git => 'https://github.com/errbit/errbit_plugin.git'
+  # :path => 'vendor/gems/errbit_plugin'
+gem 'errbit_github_plugin',
+  :git => 'https://github.com/errbit/errbit_github_plugin.git'
+  # :path => 'vendor/gems/errbit_github_plugin'
 
-# Remove / comment out any of the gems below if you want to disable
-# a given issue tracker, notification service, or authentication.
-
-# Issue Trackers
-# ---------------------------------------
-# Lighthouse
-gem 'lighthouse-api'
-# Redmine
-gem 'oruen_redmine_client', :require => 'redmine_client'
-# Pivotal Tracker
-gem 'pivotal-tracker'
-# Fogbugz
-gem 'ruby-fogbugz', :require => 'fogbugz'
-# Github Issues
-gem 'octokit', '~> 1.18'
-# Gitlab
-gem 'gitlab', '~> 3.0.0'
-
-# Bitbucket Issues
-gem 'bitbucket_rest_api', :require => false
-
-# Jira
-gem 'jira-ruby', :require => 'jira'
 
 # Notification services
 # ---------------------------------------
@@ -80,7 +63,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webmock', :require => false
   gem 'airbrake', :require => false
-  gem 'ruby-debug', :platform => :mri_18
   gem 'debugger', :platform => :mri_19
   gem 'pry-rails'
 #  gem 'rpm_contrib'
@@ -116,7 +98,6 @@ end
 group :heroku, :production do
   gem 'unicorn', :require => false
 end
-
 
 # Gems used only for assets and not required
 # in production environments by default.

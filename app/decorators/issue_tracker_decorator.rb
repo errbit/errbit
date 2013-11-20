@@ -1,23 +1,26 @@
 class IssueTrackerDecorator < Draper::Decorator
 
+  def initialize(object, key)
+    @object = object
+    @key = key
+  end
+  attr_reader :key
+
   delegate_all
 
   def issue_trackers
-    @issue_trackers ||= [
-      IssueTracker::None,
-      IssueTracker.subclasses.select{|klass| klass != IssueTracker::None }
-    ].flatten
-    @issue_trackers.each do |it|
-      yield IssueTrackerDecorator.new(it)
+    @issue_trackers ||= ErrbitPlugin::Register.issue_trackers
+    @issue_trackers.each do |key, it|
+      yield IssueTrackerDecorator.new(it.new(app, {}), key)
     end
   end
 
   def note
-    object::Note.html_safe
+    object.note.html_safe
   end
 
   def fields
-    object::Fields.each do |field, field_info|
+    object.fields.each do |field, field_info|
       yield IssueTrackerFieldDecorator.new(field, field_info)
     end
   end
@@ -29,7 +32,7 @@ class IssueTrackerDecorator < Draper::Decorator
   private
 
   def choosen?(issue_tracker)
-    object.to_s == issue_tracker._type ? 'chosen' : ''
+    key == issue_tracker.type_tracker.to_s ? 'chosen' : ''
   end
 
 end
