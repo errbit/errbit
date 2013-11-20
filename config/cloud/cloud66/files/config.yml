@@ -1,0 +1,98 @@
+# The host of your errbit server
+
+# Enforce SSL connections
+enforce_ssl: false
+
+# The email address which email notifications
+# will be sent from.
+#email_from:
+
+# If you turn on this option, email_at_notices can be
+# configured on a per app basis, at the App edit page
+per_app_email_at_notices: false
+
+# Configure when emails are sent for an error.
+# [1,3,7] = 1st, 3rd, and 7th occurence triggers
+# an email notification.
+email_at_notices: [1, 10, 100]
+
+# If you turn on this option, notify_at_notices can be
+# configured on a per app basis, at the App edit page
+per_app_notify_at_notices: false
+
+# Configure when emails are sent for an error.
+# [1,3,7] = 1st, 3rd, and 7th occurence triggers
+# [0] for all notices, provided notification service is configured
+notify_at_notices: [0]
+
+# Configure whether or not the user should be prompted before resolving an error.
+confirm_resolve_err: true
+
+# Add an optional 'username' field to Users.
+# Helpful when you need to plug in a custom authentication strategy, such as LDAP.
+user_has_username: false
+
+# Allow comments while an issue tracker is configured.
+# This is useful if the err is not critical enough to create a ticket,
+# but you want to leave a short comment.
+allow_comments_with_issue_tracker: true
+
+# Display internal errors in production
+# Since this is an internal application, you might like to see what caused Errbit to crash.
+# Pull requests are always welcome!
+# However, you might be more comfortable setting this to false if your server can be accessed by anyone.
+display_internal_errors: true
+# The host of your errbit server
+
+allow_comments_with_issue_tracker: true
+# Enable Gravatar.
+use_gravatar: true
+# Default Gravatar image, can be: mm, identicon, monsterid, wavatar, retro.
+gravatar_default: identicon
+
+# Setup your deploy options for capistrano.
+#deployment:
+#  hosts:
+#    web: errbit.example.com
+#    app: errbit.example.com
+#    db: errbit.example.com
+#  repository: http://github.com/errbit/errbit.git
+#  branch: master
+#  user: deploy
+#  deploy_to: /var/www/apps/errbit
+#  # setup path to unicorn pids folder (or deploy_to/shared/pids will be used)
+#  # pids: /var/www/apps/errbit/shared/pids
+
+# GitHub OAuth configuration
+# If you want to allow authentication via GitHub, you will need to register
+# your app at: https://github.com/settings/applications
+# If you hosted Errbit at errbit.example.com, you would fill in:
+#
+#          URL: http://errbit.example.com/
+# Callback URL: http://errbit.example.com/users/auth/github
+#
+# After you have registered your app, copy your Client ID and Secret key below.
+
+# GitHub Permissions to request from user
+#   ['repo']        - Allow creating issues for public and private repos.
+#   ['public_repo'] - Only allow creating issues for public repos.
+#   []              - No permission to create issues on any repos.
+github_access_scope: ['repo']
+
+# Configure SMTP settings. If you are running Errbit on Heroku,
+# sendgrid will be configured by default.
+# ------------------------------------------------------------------------
+#smtp_settings:
+#  :address:
+#  :domain:
+#  :port:
+#  :authentication: :plain
+#  :enable_starttls_auto:
+#  :user_name:
+#  :password:
+
+
+# If you want send your email by your sendmail
+# sendmail_settings:
+#  :location: '/usr/sbin/sendmail'
+#  :arguments: '-i -t'
