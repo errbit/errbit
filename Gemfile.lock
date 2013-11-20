@@ -1,12 +1,14 @@
-PATH
-  remote: vendor/gems/errbit_github_plugin
+GIT
+  remote: https://github.com/errbit/errbit_github_plugin.git
+  revision: c0f3b366110b4c5e61b06a0acbdb3e19aa2b0379
   specs:
     errbit_github_plugin (0.0.1)
       errbit_plugin
       octokit
 
-PATH
-  remote: vendor/gems/errbit_plugin
+GIT
+  remote: https://github.com/errbit/errbit_plugin.git
+  revision: 87345bdd9adefb834dc3df7485c3d7b9d80545f4
   specs:
     errbit_plugin (0.0.1)
 
@@ -153,8 +155,6 @@ GEM
     launchy (2.3.0)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
-    linecache (0.46)
-      rbx-require-relative (> 0.0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -196,8 +196,8 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    octokit (2.1.2)
-      sawyer (~> 0.5.0)
+    octokit (2.6.0)
+      sawyer (~> 0.5.1)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -258,7 +258,6 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.12.0)
     rake (10.1.0)
-    rbx-require-relative (0.0.9)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -281,16 +280,11 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    ruby-debug (0.10.4)
-      columnize (>= 0.1)
-      ruby-debug-base (~> 0.10.4.0)
-    ruby-debug-base (0.10.4)
-      linecache (>= 0.3)
     rushover (0.3.0)
       json
       rest-client
     safe_yaml (0.9.7)
-    sawyer (0.5.0)
+    sawyer (0.5.1)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     simplecov (0.7.1)
@@ -396,7 +390,6 @@ DEPENDENCIES
   railties (~> 3.2.15)
   ri_cal
   rspec-rails
-  ruby-debug
   rushover
   strong_parameters
   therubyracer
