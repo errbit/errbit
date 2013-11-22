@@ -14,8 +14,7 @@ describe "apps/edit.html.haml" do
 
     it "should confirm the 'destroy' link" do
       render
-
-      action_bar.should have_selector('a.button[data-confirm="Seriously?"]')
+      action_bar.should have_selector('a.button[data-confirm="%s"]' % I18n.t('apps.confirm_delete'))
     end
 
   end

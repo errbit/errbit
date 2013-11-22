@@ -53,6 +53,12 @@ describe 'users/show.html.haml' do
         render
         view.content_for(:action_bar).should include('Unlink GitHub account')
       end
+
+      it "should confirm the 'resolve' link by default" do
+        render
+        view.content_for(:action_bar).should have_selector('a.delete[data-confirm="%s"]' % I18n.t('.users.confirm_delete'))
+      end
+
     end
   end
 end

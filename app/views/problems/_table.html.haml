@@ -40,7 +40,9 @@
             %td.issue_link
               - if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending'
                 = link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, :target => "_blank"
-          %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_problem_path(problem.app, problem), :title => "Resolve", :method => :put, :data => { :confirm => problem_confirm }, :class => 'resolve' if problem.unresolved?
+          %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_problem_path(problem.app, problem),
+            :title => "Resolve", :method => :put, :data => { :confirm => problem_confirm('resolve_one') },
+            :class => 'resolve' if problem.unresolved?
       - if problems.none?
         %tr
           %td{:colspan => (any_issue_links ? 8 : 7)}
@@ -49,4 +51,6 @@
   .tab-bar
     %ul
       - %w(merge unmerge resolve unresolve delete).each do |action|
-        %li= submit_tag action.capitalize, :id => "#{action}_problems", :class => 'button', :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']), :confirm => problem_confirm }
+        %li= submit_tag action.capitalize, :id => "#{action}_problems", :class => 'button',
+          :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
+          :confirm => problem_confirm(action) }

@@ -69,7 +69,21 @@ en:
       new:
         sign_in: "Sign in"
 
+  problems:
+    confirm:
+      delete: "Permanently delete selected issues?"
+      resolve: "Resolve selected issues? They can be unresolved later."
+      resolve_one: "Resolve this issue? It can be unresolved later."
+      merge: "Merge select issues? They can be unmerged later."
+      unmerge: "Unmerge selected issues? They can be re-merged later."
+      unresolve: "Unresolve selected issues? They can be resolved again later."
+
+  comments:
+    confirm_delete: "Premanently delete this comment?"
+  users:
+    confirm_delete: "Permanently delete this user?"
   apps:
+    confirm_delete: "Permanently delete this app?"
     index:
       notify: Notification Service
       tracker: Tracker
