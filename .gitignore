@@ -19,3 +19,5 @@ bundle
 coverage
 *#
 .ruby-version
+
+lib/tasks/sync.rake
