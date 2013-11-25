@@ -8,6 +8,15 @@ GIT
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
+GIT
+  remote: git://github.com/mongoid/moped.git
+  revision: e238b4a757d64d980e3137c5b57a37a1729733a9
+  specs:
+    moped (2.0.0.beta6)
+      bson (~> 2.2)
+      connection_pool (~> 1.2)
+      optionable (~> 0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,7 +57,7 @@ GEM
       builder
       json
     arel (4.0.2)
-    atomic (1.1.14)
+    atomic (1.1.16)
     bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
@@ -215,10 +224,6 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.2.0)
       railties (>= 3.2.0)
-    moped (2.0.0.beta6)
-      bson (~> 2.2)
-      connection_pool (~> 1.2)
-      optionable (~> 0.2.0)
     multi_json (1.9.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
@@ -366,8 +371,8 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.1.3)
-      atomic
+    thread_safe (0.3.1)
+      atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
     timecop (0.6.3)
     tins (0.12.0)
@@ -441,6 +446,8 @@ DEPENDENCIES
   mongoid!
   mongoid-rspec
   mongoid_rails_migrations
+  moped!
+  octokit (~> 2.0)
   omniauth-github
   pjax_rails
   poltergeist
