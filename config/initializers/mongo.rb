@@ -40,4 +40,3 @@ elsif ENV['HEROKU'] || ENV['USE_ENV']
 end
 
 Mongoid.use_activesupport_time_zone = true
-Mongoid.identity_map_enabled = true

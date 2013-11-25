@@ -14,7 +14,6 @@ development:
       hosts:
         - localhost:27017
   options:
-    identity_map_enabled: true
     use_utc: true
 
 test:
@@ -24,7 +23,6 @@ test:
         - localhost:27017
       database: errbit_test
   options:
-    identity_map_enabled: true
     use_utc: true
 
 # set these environment variables on your prod server
@@ -37,4 +35,4 @@ production:
       username: <%= ENV['MONGOID_USERNAME'] %>
       password: <%= ENV['MONGOID_PASSWORD'] %>
   options:
-    identity_map_enabled: true
+    use_utc: true
