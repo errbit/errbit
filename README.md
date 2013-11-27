@@ -323,9 +323,13 @@ Errbit::Config.devise_modules << :ldap_authenticatable
   before authentication. You must add the following lines to `app/models/user.rb`:
 
 ```ruby
-  before_save :set_ldap_email
-  def set_ldap_email
-    self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
+  def ldap_before_save
+    name = Devise::LDAP::Adapter.get_ldap_param(self.username, "givenName")
+    surname = Devise::LDAP::Adapter.get_ldap_param(self.username, "sn")
+    mail = Devise::LDAP::Adapter.get_ldap_param(self.username, "mail")
+
+    self.name = (name + surname).join ' '
+    self.email = mail.first
   end
 ```
 
