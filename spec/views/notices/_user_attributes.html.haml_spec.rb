@@ -11,7 +11,7 @@ describe "notices/_user_attributes.html.haml" do
       assign :app, notice.err.app
 
       render "notices/user_attributes", :user => notice.user_attributes
-      rendered.should have_link('http://example.com')
+      expect(rendered).to have_link('http://example.com')
     end
   end
 end

@@ -11,39 +11,39 @@ describe NoticesController do
   context 'notices API' do
     context "with all params" do
       before do
-        ErrorReport.should_receive(:new).with(xml).and_return(error_report)
+        expect(ErrorReport).to receive(:new).with(xml).and_return(error_report)
       end
 
       context "with xml pass in raw_port" do
         before do
-          request.should_receive(:raw_post).and_return(xml)
+          expect(request).to receive(:raw_post).and_return(xml)
           post :create, :format => :xml
         end
 
         it "generates a notice from raw xml [POST]" do
-          response.should be_success
+          expect(response).to be_success
           # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
           # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
-          response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
-          response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
+          expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
+          expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
         end
 
       end
 
       it "generates a notice from xml in a data param [POST]" do
         post :create, :data => xml, :format => :xml
-        response.should be_success
+        expect(response).to be_success
         # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
         # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
-        response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
-        response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
+        expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
+        expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
 
       it "generates a notice from xml [GET]" do
         get :create, :data => xml, :format => :xml
-        response.should be_success
-        response.body.should match(%r{<id[^>]*>#{notice.id}</id>})
-        response.body.should match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
+        expect(response).to be_success
+        expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
+        expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
       context "with an invalid API_KEY" do
         let(:error_report) { double(:valid? => false) }
@@ -74,7 +74,7 @@ describe NoticesController do
         problem = Fabricate(:problem, :app => app, :environment => "production")
         notice = Fabricate(:notice, :err => Fabricate(:err, :problem => problem))
         get :locate, :id => notice.id
-        response.should redirect_to(app_problem_path(problem.app, problem))
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
       end
     end
   end

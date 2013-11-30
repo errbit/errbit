@@ -10,7 +10,7 @@ describe "apps/index.html.haml" do
   describe "deploy column" do
     it "should show the first 7 characters of the revision in parentheses" do
       render
-      rendered.should match(/\(1234567\)/)
+      expect(rendered).to match(/\(1234567\)/)
     end
   end
 end

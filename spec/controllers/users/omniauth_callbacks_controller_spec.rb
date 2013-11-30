@@ -25,16 +25,16 @@ describe Users::OmniauthCallbacksController do
       stub_env_for_github_omniauth("existing_user")
       get :github
 
-      request.flash[:error].should include('already registered')
-      response.should redirect_to(user_path(@user))
+      expect(request.flash[:error]).to include('already registered')
+      expect(response).to redirect_to(user_path(@user))
     end
 
     it "should link an authorized GitHub account" do
       stub_env_for_github_omniauth("new_user")
       get :github
 
-      request.flash[:success].should include('Successfully linked')
-      response.should redirect_to(user_path(@user))
+      expect(request.flash[:success]).to include('Successfully linked')
+      expect(response).to redirect_to(user_path(@user))
     end
   end
 

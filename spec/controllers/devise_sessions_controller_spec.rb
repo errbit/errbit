@@ -13,13 +13,13 @@ describe Devise::SessionsController do
 
     it 'redirects to app index page if there are no apps for the user' do
       post :create, { :user => { 'email' => user.email, 'password' => user.password } }
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
 
     it 'redirects to app page if there is app for the user' do
       Fabricate(:user_watcher, :app => app, :user => user)
       post :create, { :user => { 'email' => user.email, 'password' => user.password } }
-      response.should redirect_to(app_path(app))
+      expect(response).to redirect_to(app_path(app))
     end
   end
 end

@@ -24,7 +24,7 @@ describe Api::V1::ProblemsController do
 
       it "should return XML if XML is requested" do
         get :index, :auth_token => @user.authentication_token, :format => "xml"
-        Nokogiri::XML(response.body).errors.should be_empty
+        expect(Nokogiri::XML(response.body).errors).to be_empty
       end
 
       it "should return JSON by default" do
@@ -38,18 +38,18 @@ describe Api::V1::ProblemsController do
 
         it "should return only the problems open during the date range" do
           get :index, {:auth_token => @user.authentication_token, :start_date => "2012-08-20", :end_date => "2012-08-27"}
-          response.should be_success
+          expect(response).to be_success
           problems = JSON.load response.body
-          problems.length.should == 2
+          expect(problems.length).to eq 2
         end
 
       end
 
       it "should return all problems" do
         get :index, {:auth_token => @user.authentication_token}
-        response.should be_success
+        expect(response).to be_success
         problems = JSON.load response.body
-        problems.length.should == 4
+        expect(problems.length).to eq 4
       end
 
     end

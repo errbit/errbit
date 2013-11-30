@@ -6,7 +6,7 @@ describe BacktraceLine do
   describe "root at the start of decorated filename" do
     let(:raw_line) { { 'number' => rand(999), 'file' => '[PROJECT_ROOT]/app/controllers/pages_controller.rb', 'method' => ActiveSupport.methods.shuffle.first.to_s } }
     it "should leave leading root symbol in filepath" do
-      subject.decorated_path.should == 'app/controllers/'
+      expect(subject.decorated_path).to eq 'app/controllers/'
     end
   end
 end

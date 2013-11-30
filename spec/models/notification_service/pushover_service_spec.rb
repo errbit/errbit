@@ -13,7 +13,7 @@ describe NotificationService::PushoverService do
     notification.stub(:notify) { true }
 
     #assert
-    notification.should_receive(:notify)
+    expect(notification).to receive(:notify)
 
     notification_service.create_notification(problem)
   end
