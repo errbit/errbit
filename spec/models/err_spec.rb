@@ -5,14 +5,14 @@ describe Err do
   context 'validations' do
     it 'requires a fingerprint' do
       err = Fabricate.build(:err, :fingerprint => nil)
-      err.should_not be_valid
-      err.errors[:fingerprint].should include("can't be blank")
+      expect(err).to_not be_valid
+      expect(err.errors[:fingerprint]).to include("can't be blank")
     end
 
     it 'requires a problem' do
       err = Fabricate.build(:err, :problem_id => nil, :problem => nil)
-      err.should_not be_valid
-      err.errors[:problem_id].should include("can't be blank")
+      expect(err).to_not be_valid
+      expect(err.errors[:problem_id]).to include("can't be blank")
     end
   end
 

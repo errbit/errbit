@@ -32,9 +32,9 @@ EOF
     problem.reload
 
     requested = have_requested(:post, "https://#{tracker.api_token}:#{tracker.project_id}@bitbucket.org/api/1.0/repositories/test_user/test_repo/issues/")
-    WebMock.should requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
-    WebMock.should requested.with(:content => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(:content => /See this exception on Errbit/)
 
-    problem.issue_link.should == @issue_link
+    expect(problem.issue_link).to eq @issue_link
   end
 end

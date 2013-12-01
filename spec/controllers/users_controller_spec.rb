@@ -22,20 +22,20 @@ describe UsersController do
     end
 
     it "should set a time zone" do
-      Time.zone.should.to_s == user.time_zone
+      expect(Time.zone.to_s).to match(user.time_zone)
     end
 
     context "GET /users/:other_id/edit" do
       it "redirects to the home page" do
         get :edit, :id => other_user.id
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
     context "GET /users/:my_id/edit" do
       it 'finds the user' do
         get :edit, :id => user.id
-        controller.user.should == user
+        expect(controller.user).to eq user
         expect(response).to render_template 'edit'
       end
 
@@ -44,7 +44,7 @@ describe UsersController do
     context "PUT /users/:other_id" do
       it "redirects to the home page" do
         put :update, :id => other_user.id
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -52,12 +52,12 @@ describe UsersController do
       context "when the update is successful" do
         it "sets a message to display" do
           put :update, :id => user.to_param, :user => {:name => 'Kermit'}
-          request.flash[:success].should include('updated')
+          expect(request.flash[:success]).to include('updated')
         end
 
         it "redirects to the user's page" do
           put :update, :id => user.to_param, :user => {:name => 'Kermit'}
-          response.should redirect_to(user_path(user))
+          expect(response).to redirect_to(user_path(user))
         end
 
         it "should not be able to become an admin" do
@@ -70,29 +70,29 @@ describe UsersController do
 
         it "should be able to set per_page option" do
           put :update, :id => user.to_param, :user => {:per_page => 555}
-          user.reload.per_page.should == 555
+          expect(user.reload.per_page).to eq 555
         end
 
         it "should be able to set time_zone option" do
           put :update, :id => user.to_param, :user => {:time_zone => "Warsaw"}
-          user.reload.time_zone.should == "Warsaw"
+          expect(user.reload.time_zone).to eq "Warsaw"
         end
 
         it "should be able to not set github_login option" do
           put :update, :id => user.to_param, :user => {:github_login => " "}
-          user.reload.github_login.should == nil
+          expect(user.reload.github_login).to eq nil
         end
 
         it "should be able to set github_login option" do
           put :update, :id => user.to_param, :user => {:github_login => "awesome_name"}
-          user.reload.github_login.should == "awesome_name"
+          expect(user.reload.github_login).to eq "awesome_name"
         end
       end
 
       context "when the update is unsuccessful" do
         it "renders the edit page" do
           put :update, :id => user.to_param, :user => {:name => nil}
-          response.should render_template(:edit)
+          expect(response).to render_template(:edit)
         end
       end
     end
@@ -111,7 +111,7 @@ describe UsersController do
           Fabricate(:user)
         }
         get :index
-        controller.users.to_a.size.should == 2
+        expect(controller.users.to_a.size).to eq 2
       end
 
     end
@@ -119,22 +119,22 @@ describe UsersController do
     context "GET /users/:id" do
       it 'finds the user' do
         get :show, :id => user.id
-        controller.user.should == user
+        expect(controller.user).to eq user
       end
     end
 
     context "GET /users/new" do
       it 'assigns a new user' do
         get :new
-        controller.user.should be_a(User)
-        controller.user.should be_new_record
+        expect(controller.user).to be_a(User)
+        expect(controller.user).to be_new_record
       end
     end
 
     context "GET /users/:id/edit" do
       it 'finds the user' do
         get :edit, :id => user.id
-        controller.user.should == user
+        expect(controller.user).to eq user
       end
     end
 
@@ -144,24 +144,24 @@ describe UsersController do
 
         it "sets a message to display" do
           post :create, attrs
-          request.flash[:success].should include('part of the team')
+          expect(request.flash[:success]).to include('part of the team')
         end
 
         it "redirects to the user's page" do
           post :create, attrs
-          response.should redirect_to(user_path(controller.user))
+          expect(response).to redirect_to(user_path(controller.user))
         end
 
         it "should be able to create admin" do
           attrs[:user][:admin] = true
           post :create, attrs
-          response.should be_redirect
-          User.find(controller.user.to_param).admin.should be_true
+          expect(response).to be_redirect
+          expect(User.find(controller.user.to_param).admin).to be_true
         end
 
         it "should has auth token" do
           post :create, attrs
-          User.last.authentication_token.should_not be_blank
+          expect(User.last.authentication_token).to_not be_blank
         end
       end
 
@@ -170,13 +170,13 @@ describe UsersController do
           Struct.new(:admin, :attributes).new(true, {})
         }
         before do
-          User.should_receive(:new).and_return(user)
-          user.should_receive(:save).and_return(false)
+          expect(User).to receive(:new).and_return(user)
+          expect(user).to receive(:save).and_return(false)
         end
 
         it "renders the new page" do
           post :create, :user => { :username => 'foo' }
-          response.should render_template(:new)
+          expect(response).to render_template(:new)
         end
       end
     end
@@ -199,7 +199,7 @@ describe UsersController do
 
         it "renders the edit page" do
           put :update, :id => user.to_param, :user => {:name => nil}
-          response.should render_template(:edit)
+          expect(response).to render_template(:edit)
         end
       end
     end
@@ -210,24 +210,24 @@ describe UsersController do
         let(:user_destroy) { double(:destroy => true) }
 
         before {
-          UserDestroy.should_receive(:new).with(user).and_return(user_destroy)
+          expect(UserDestroy).to receive(:new).with(user).and_return(user_destroy)
           delete :destroy, :id => user.id
         }
 
         it 'should destroy user' do
           expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.destroy.success', :name => user.name)
-          response.should redirect_to(users_path)
+          expect(response).to redirect_to(users_path)
         end
       end
 
       context "with trying destroy himself" do
         before {
-          UserDestroy.should_not_receive(:new)
+          expect(UserDestroy).to_not receive(:new)
           delete :destroy, :id => admin.id
         }
 
         it 'should not destroy user' do
-          response.should redirect_to(users_path)
+          expect(response).to redirect_to(users_path)
           expect(request.flash[:error]).to eq I18n.t('controllers.users.flash.destroy.error')
         end
       end

@@ -17,7 +17,7 @@ describe "Callback on Notice" do
     custom_thresholds.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
         @err.problem.stub(:notices_count).and_return(threshold)
-        Mailer.should_receive(:err_notification).
+        expect(Mailer).to receive(:err_notification).
           and_return(double('email', :deliver => true))
         Fabricate(:notice, :err => @err)
       end
@@ -38,15 +38,15 @@ describe "Callback on Notice" do
 
     it "should send email notification after 1 notice since an error has been resolved" do
       @err.problem.resolve!
-      Mailer.should_receive(:err_notification).
+      expect(Mailer).to receive(:err_notification).
         and_return(double('email', :deliver => true))
       Fabricate(:notice, :err => @err)
     end
     it 'self notify if mailer failed' do
       @err.problem.resolve!
-      Mailer.should_receive(:err_notification).
+      expect(Mailer).to receive(:err_notification).
         and_raise(ArgumentError)
-      HoptoadNotifier.should_receive(:notify)
+      expect(HoptoadNotifier).to receive(:notify)
       Fabricate(:notice, :err => @err)
     end
   end
@@ -65,7 +65,7 @@ describe "Callback on Notice" do
     end
 
     it "should create a campfire notification" do
-      app.notification_service.should_receive(:create_notification)
+      expect(app.notification_service).to receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
@@ -88,8 +88,8 @@ describe "Callback on Notice" do
     end
 
     it "send email" do
-      app.notification_service.should_receive(:create_notification).and_raise(ArgumentError)
-      Mailer.should_receive(:err_notification).and_return(double(:deliver => true))
+      expect(app.notification_service).to receive(:create_notification).and_raise(ArgumentError)
+      expect(Mailer).to receive(:err_notification).and_return(double(:deliver => true))
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
@@ -110,7 +110,7 @@ describe "Callback on Notice" do
     end
 
     it "should not create a campfire notification" do
-      app.notification_service.should_not_receive(:create_notification)
+      expect(app.notification_service).to_not receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
@@ -130,7 +130,7 @@ describe "Callback on Notice" do
     end
 
     it 'creates a hipchat notification' do
-      app.notification_service.should_receive(:create_notification)
+      expect(app.notification_service).to receive(:create_notification)
 
       Fabricate(:notice, :err => err)
     end
@@ -150,7 +150,7 @@ describe "Callback on Notice" do
 
     it "should create a campfire notification on first notice" do
       err = Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 1))
-      app.notification_service.should_receive(:create_notification)
+      expect(app.notification_service).to receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
@@ -158,7 +158,7 @@ describe "Callback on Notice" do
 
     it "should create a campfire notification on second notice" do
       err = Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 1))
-      app.notification_service.should_receive(:create_notification)
+      expect(app.notification_service).to receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
@@ -166,7 +166,7 @@ describe "Callback on Notice" do
 
     it "should not create a campfire notification on third notice" do
       err = Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 1))
-      app.notification_service.should_receive(:create_notification)
+      expect(app.notification_service).to receive(:create_notification)
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })

@@ -10,15 +10,15 @@ describe NotificationServices::HipchatService do
   end
 
   it 'sends message' do
-    room.should_receive(:send)
+    expect(room).to receive(:send)
     service.create_notification(problem)
   end
 
   it 'escapes html in message' do
     problem.stub(:message => '<3')
-    room.should_receive(:send) do |_, message|
-      message.should_not include('<3')
-      message.should include('&lt;3')
+    expect(room).to receive(:send) do |_, message|
+      expect(message).to_not include('<3')
+      expect(message).to include('&lt;3')
     end
     service.create_notification(problem)
   end

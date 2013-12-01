@@ -38,10 +38,10 @@ EOF
     problem.reload
 
     requested = have_requested(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues")
-    WebMock.should requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
-    WebMock.should requested.with(:body => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(:body => /See this exception on Errbit/)
 
-    problem.issue_link.should == @issue_link
+    expect(problem.issue_link).to eq @issue_link
   end
 end
 

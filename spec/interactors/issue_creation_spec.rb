@@ -16,7 +16,7 @@ describe IssueCreation do
 
   it 'creates an issue if issue tracker is configured' do
     tracker = Fabricate(:lighthouse_tracker, :app => notice.app)
-    tracker.should_receive(:create_issue)
+    expect(tracker).to receive(:create_issue)
     issue_creation.execute
     expect(errors).to be_empty
   end

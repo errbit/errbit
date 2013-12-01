@@ -22,7 +22,7 @@ describe ResolvedProblemClearer do
       end
       it 'not repair database' do
         Mongoid.default_session.stub(:command).and_call_original
-        Mongoid.default_session.should_not_receive(:command).with({:repairDatabase => 1})
+        expect(Mongoid.default_session).to_not receive(:command).with({:repairDatabase => 1})
         resolved_problem_clearer.execute
       end
     end
@@ -47,7 +47,7 @@ describe ResolvedProblemClearer do
 
       it 'repair database' do
         Mongoid.default_session.stub(:command).and_call_original
-        Mongoid.default_session.should_receive(:command).with({:repairDatabase => 1})
+        expect(Mongoid.default_session).to receive(:command).with({:repairDatabase => 1})
         resolved_problem_clearer.execute
       end
     end

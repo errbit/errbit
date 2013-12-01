@@ -83,10 +83,10 @@ EOF
     problem.reload
 
     requested = have_requested(:post,"https://#{tracker.username}:#{tracker.password}@test.unfuddle.com/api/v1/projects/#{tracker.project_id}/tickets.xml" )
-    WebMock.should requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
-    WebMock.should requested.with(:content => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(:content => /See this exception on Errbit/)
 
-    problem.issue_link.should == issue_link
-    problem.issue_type.should == IssueTrackers::UnfuddleTracker::Label
+    expect(problem.issue_link).to eq issue_link
+    expect(problem.issue_type).to eq IssueTrackers::UnfuddleTracker::Label
   end
 end

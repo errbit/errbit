@@ -13,7 +13,7 @@ describe NotificationService::CampfireService do
     campy.stub(:speak) { true }
 
     #assert
-    campy.should_receive(:speak)
+    expect(campy).to receive(:speak)
 
     notification_service.create_notification(problem)
   end
