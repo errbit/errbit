@@ -45,6 +45,19 @@ describe "Notices management" do
 
     end
 
+    # the JS notifier allows for both GET and POST requests
+    context "with GET request" do
+      let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read }
+      it 'save a new notice' do
+        expect {
+          get '/notifier_api/v2/notices', :data => xml
+          expect(response).to be_success
+        }.to change {
+          errbit_app.problems.count
+        }.by(1)
+      end
+    end
+
   end
 
 end
