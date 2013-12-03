@@ -3,7 +3,7 @@ Errbit::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
-  post '/notifier_api/v2/notices' => 'notices#create'
+  match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
   get '/locate/:id' => 'notices#locate', :as => :locate
   post '/deploys.txt' => 'deploys#create'
 
