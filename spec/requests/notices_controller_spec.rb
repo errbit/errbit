@@ -45,7 +45,6 @@ describe "Notices management" do
 
     end
 
-    # the JS notifier allows for both GET and POST requests
     context "with GET request" do
       let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read }
       it 'save a new notice' do
@@ -57,7 +56,5 @@ describe "Notices management" do
         }.by(1)
       end
     end
-
   end
-
 end
