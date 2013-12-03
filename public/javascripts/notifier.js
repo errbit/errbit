@@ -1026,9 +1026,10 @@ printStackTrace.implementation.prototype = {
                     } ()),
                     
                     project_root: this.ROOT,
-                    exception_class: (error.type || 'Error'),
-                    exception_message: (error.message || 'Unknown error.'),
-                    backtrace_lines: this.generateBacktrace(error)
+                    exception_class: (error.type || errorWithoutDefaults.type ||
+                                        (errorWithoutDefaults.constructor.name != "Object" ? errorWithoutDefaults.constructor.name : 'Error')),
+                    exception_message: (error.message || errorWithoutDefaults.message || 'Unknown error.'),
+                    backtrace_lines: this.generateBacktrace(errorWithoutDefaults)
                 }
                 
                 outputData = Util.merge(outputData, _outputData);
@@ -1165,12 +1166,11 @@ printStackTrace.implementation.prototype = {
         }
     };
 
-    window.onerror = function (message, file, line) {
+    window.onerror = function (message, file, line, code, error) {
         setTimeout(function () {
-            new Notifier().notify({
-                message: message,
-                stack: '()@' + file + ':' + line
-            });
+            var e = error || {stack: '()@' + file + ':' + line}
+            e.message = message
+            new Notifier().notify(e);
         }, 0);
 
         return true;
