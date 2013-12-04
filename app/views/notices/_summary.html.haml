@@ -25,9 +25,14 @@
     %tr
       %th Tenant
       %td= tenant_graph(problem)
-    %tr
-      %th App Server
-      %td= notice.server_environment && notice.server_environment["hostname"]
+    - if notice.server_environment && notice.server_environment["hostname"]
+      %tr
+        %th App Server
+        %td= notice.server_environment && notice.server_environment["hostname"]
+    - if notice.app_version.present?
+      %tr
+        %th App Version
+        %td= notice.app_version
     - if notice.framework
       %tr
         %th Framework

@@ -119,6 +119,12 @@ class Notice
     end
   end
 
+  def app_version
+    if server_environment
+      server_environment['app-version'] || ''
+    end
+  end
+
   protected
 
   def decrease_counter_cache
