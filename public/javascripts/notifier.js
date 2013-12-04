@@ -514,6 +514,7 @@ printStackTrace.implementation.prototype = {
             '<server-environment>' +
                 '<project-root>{project_root}</project-root>' +
                 '<environment-name>{environment}</environment-name>' +
+                '<app-version>{appVersion}</app-version>' +
             '</server-environment>' +
             '<current-user>' +
                 '<id>{user_id}</id>' +
@@ -551,10 +552,11 @@ printStackTrace.implementation.prototype = {
 				"url": "{request_url}",
                 "rootDirectory": "{project_root}",
                 "action": "{request_action}",
+                "app-version": "{appVersion}",
 
-				"userId": "{user_id}",
-				"userName": "{user_name}",
-				"userEmail": "{user_email}",
+                "userId": "{user_id}",
+                "userName": "{user_name}",
+                "userEmail": "{user_email}",
             },
             "environment": {},
 			//"session": "",
@@ -859,6 +861,9 @@ printStackTrace.implementation.prototype = {
                     stack: e.stack
                 });
             })
+        }, {
+            variable: 'appVersion',
+            namespace: 'xmlData'
         }
     ];
 
