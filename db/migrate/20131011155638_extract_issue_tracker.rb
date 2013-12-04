@@ -4,7 +4,7 @@ class ExtractIssueTracker < Mongoid::Migration
     App.collection.find.each do |app|
       if app['issue_tracker'] && !app['issue_tracker'].empty?
         it = app['issue_tracker']
-        it['type_tracker'] = 'IssueTrackers::BitbucketIssuesTracker'
+        it['type_tracker'] = app['issue_tracker']['_type']
         it['options'] = app['issue_tracker'].dup
         it.delete('_type')
         App.collection.find(
