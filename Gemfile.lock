@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/errbit/errbit_plugin.git
-  revision: 87345bdd9adefb834dc3df7485c3d7b9d80545f4
+  revision: 1bac2fb6800b0ad24233093fc6891d34bb20e2eb
   specs:
     errbit_plugin (0.0.1)
 
