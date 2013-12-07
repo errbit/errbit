@@ -4,8 +4,22 @@ Fabricator(:app) do
 end
 
 Fabricator(:app_with_watcher, :from => :app) do
-  watchers(:count => 1) { |parent, i|
-    Fabricate.build(:watcher, :app => parent)
+  after_create do |parent|
+    parent.watchers.create Fabricate.attributes_for(:watcher, :app => parent)
+  end
+end
+
+Fabricator(:app_with_user_watcher, :from => :app) do
+  after_create do |parent|
+    parent.watchers.create Fabricate.attributes_for(:user_watcher, :app => parent)
+  end
+end
+
+Fabricator(:app_with_deploys, :from => :app) do
+  after_create { |parent|
+    3.times do
+      Fabricate(:deploy, :app => parent)
+    end
   }
 end
 

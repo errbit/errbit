@@ -1,10 +1,7 @@
-class Watcher
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class Watcher < ActiveRecord::Base
 
-  field :email
 
-  embedded_in :app, :inverse_of => :watchers
+  belongs_to :app, :inverse_of => :watchers
   belongs_to :user
 
   validate :ensure_user_or_email

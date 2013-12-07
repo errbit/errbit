@@ -16,7 +16,8 @@ describe "problems/show.html.haml" do
   end
 
   def with_issue_tracker(tracker, problem)
-    problem.app.issue_tracker = tracker.new :api_token => "token token token", :project_id => "1234"
+    # problem with has_one and sti, cause reverse creating
+    tracker.create :api_token => "token token token", :project_id => "1234", :app => problem.app
     view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end
@@ -75,7 +76,7 @@ describe "problems/show.html.haml" do
 
       it 'should allow creating issue for github if application has a github tracker' do
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
-        with_issue_tracker(GithubIssuesTracker, problem)
+        with_issue_tracker(IssueTrackers::GithubIssuesTracker, problem)
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
@@ -147,7 +148,7 @@ describe "problems/show.html.haml" do
     context "with issue tracker" do
       it 'should not display the comments section' do
         problem = Fabricate(:problem)
-        with_issue_tracker(PivotalLabsTracker, problem)
+        with_issue_tracker(IssueTrackers::PivotalLabsTracker, problem)
         render
         expect(view.view_flow.get(:comments)).to be_blank
       end
@@ -155,7 +156,7 @@ describe "problems/show.html.haml" do
       it 'should display existing comments' do
         problem = Fabricate(:problem_with_comments)
         problem.reload
-        with_issue_tracker(PivotalLabsTracker, problem)
+        with_issue_tracker(IssueTrackers::PivotalLabsTracker, problem)
         render
 
         expect(view.content_for(:comments)).to include('Test comment')

@@ -48,6 +48,7 @@ describe Comment do
 
     it 'should be false if there are no notification recipients' do
       watcher.destroy
+      comment.err.reload
       expect(app.emailable?).to be_true
       expect(comment.emailable?).to be_false
     end

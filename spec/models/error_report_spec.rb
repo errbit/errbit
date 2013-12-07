@@ -155,11 +155,18 @@ describe ErrorReport do
       context "with notification service configured" do
         before do
           app.notify_on_errs = true
+          app.email_at_notices = [1]
           app.watchers.build(:email => 'foo@example.com')
-          app.save
+          app.save!
         end
+        
         it 'send email' do
-          notice = error_report.generate_notice!
+          notice = nil
+          expect {
+            notice = error_report.generate_notice!
+          }.to change {
+            ActionMailer::Base.deliveries.count
+          }.by(1)
           email = ActionMailer::Base.deliveries.last
           expect(email.to).to include(app.watchers.first.email)
           expect(email.subject).to include(notice.message.truncate(50))

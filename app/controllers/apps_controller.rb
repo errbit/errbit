@@ -33,7 +33,7 @@ class AppsController < ApplicationController
   }
 
   expose(:deploys) {
-    app.deploys.order_by(:created_at.desc).limit(5)
+    app.deploys.by_created_at.limit(5)
   }
 
   def index; end

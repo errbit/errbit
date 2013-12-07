@@ -3,6 +3,13 @@ require 'digest/sha1'
 namespace :errbit do
   namespace :db do
 
+    desc "Data migrate from mongodb"
+    task :migrate_from_mongo, [:mongoid_config_file] => [:environment] do |t, args|
+      raise "you must specified mongoid config file, example: rake 'db:migrate_from_mongo[config/mongoid.yml]'" unless args[:mongoid_config_file]
+      config = YAML.load_file(args[:mongoid_config_file])
+      DataMigration.start(config[Rails.env])
+    end
+
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"

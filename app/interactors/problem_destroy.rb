@@ -29,20 +29,20 @@ class ProblemDestroy
   private
 
   def errs_id
-    problem.errs.only(:id).map(&:id)
+    @errs_id ||= problem.errs.pluck(:id)
   end
 
   def comments_id
-    problem.comments.only(:id).map(&:id)
+    @comments_id ||= problem.comments.pluck(:id)
   end
 
   def delete_errs
-    Notice.delete_all(:err_id => { '$in' => errs_id })
-    Err.delete_all(:_id => { '$in' => errs_id })
+    Notice.delete_all(err_id: errs_id)
+    Err.delete_all(id: errs_id)
   end
 
   def delete_comments
-    Comment.delete_all(:_id => { '$in' => comments_id })
+    Comment.delete_all(id: comments_id)
   end
 
 end

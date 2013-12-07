@@ -1,2 +1,2 @@
 # Include nested notification services models
-include NotificationServices
+Dir.glob(Rails.root.join('app/models/notification_services/*.rb')).each {|t| require t }
