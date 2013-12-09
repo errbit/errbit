@@ -73,27 +73,12 @@ class ErrorReport
   end
 
   def should_keep?
-
     app_version = server_environment['app-version'] || ''
-
-      if self.app.min_app_version.present?
-
-        if app_version.length > 0
-
-          if Gem::Version.new(app_version) >= Gem::Version.new(self.app.min_app_version)
-            true
-          else
-            false
-          end
-
-        else
-          true
-        end
-
-      else
-        true
-      end
-
+    if self.app.current_app_version.present? && ( app_version.length <= 0 || Gem::Version.new(app_version) < Gem::Version.new(self.app.current_app_version) )
+      false
+    else
+      true
+    end
   end
 
   private

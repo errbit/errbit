@@ -11,7 +11,6 @@ class NoticesController < ApplicationController
     report = ErrorReport.new(notice_params)
 
     if report.valid?
-
       if report.should_keep?
         report.generate_notice!
         api_xml = report.notice.to_xml(:only => false, :methods => [:id]) do |xml|
@@ -19,9 +18,8 @@ class NoticesController < ApplicationController
         end
         render :xml => api_xml
       else
-        render :nothing => true
+        render :xml => "Notice for old app version ignored"
       end
-
     else
       render :text => "Your API key is unknown", :status => 422
     end
