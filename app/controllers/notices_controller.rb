@@ -18,7 +18,7 @@ class NoticesController < ApplicationController
         end
         render :xml => api_xml
       else
-        render :xml => "Notice for old app version ignored"
+        render :text => "Notice for old app version ignored"
       end
     else
       render :text => "Your API key is unknown", :status => 422
