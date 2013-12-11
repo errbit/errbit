@@ -3,6 +3,7 @@ class NotificationService
 
   include Rails.application.routes.url_helpers
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
+  default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
 
   field :room_id, :type => String
   field :user_id, :type => String

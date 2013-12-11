@@ -9,6 +9,7 @@ unless defined?(Errbit::Config)
   # If Errbit is running on Heroku, config can be set from environment variables.
   if use_env
     Errbit::Config.host = ENV['ERRBIT_HOST']
+    Errbit::Config.port = ENV['ERRBIT_PORT']
     Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
     #  Not really easy to use like an env because need an array and ENV return a string :(
     # Errbit::Config.email_at_notices = ENV['ERRBIT_EMAIL_AT_NOTICES']
@@ -78,7 +79,12 @@ end
 
 # Set config specific values
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|
-  default.merge! :host => Errbit::Config.host if default[:host].blank?
+  options_from_config = {
+    host: Errbit::Config.host,
+    port: Errbit::Config.port
+  }.select { |k, v| v }
+
+  default.reverse_merge!(options_from_config)
 end
 
 if Rails.env.production?

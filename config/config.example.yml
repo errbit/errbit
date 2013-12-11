@@ -11,6 +11,10 @@
 # The host of your errbit server
 host: errbit.example.com
 
+# The port for your errbit server.
+# Only set this if it isn't the default for the protocol (i.e.. 80 for HTTP, 443 for HTTPS)
+# port: 8080
+
 # Enforce SSL connections
 enforce_ssl: false
 
