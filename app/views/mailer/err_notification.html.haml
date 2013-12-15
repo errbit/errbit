@@ -29,7 +29,7 @@
                 = @notice.where
               - @notice.in_app_backtrace_lines.each do |line|
                 %p.backtrace
-                  = link_to_source_file(line) do
+                  = link_to_source_file(line, @notice) do
                     = line.to_s
               %br
               - if @notice.app_version.present?
@@ -58,6 +58,6 @@
                 %p.heading FULL BACKTRACE:
                 - @notice.backtrace_lines.each do |line|
                   %p.backtrace
-                    = link_to_source_file(line) do
+                    = link_to_source_file(line, @notice) do
                       = line.to_s
                 %br

@@ -129,8 +129,9 @@ class App < ActiveRecord::Base
     "https://github.com/#{github_repo}" if github_repo?
   end
 
-  def github_url_to_file(file)
-    "#{github_url}/blob/#{repo_branch}/#{file}"
+  def github_url_to_file(file, git_commit=nil)
+    ref = git_commit || repo_branch
+    "#{github_url}/blob/#{ref}/#{file}"
   end
 
   def bitbucket_repo?
