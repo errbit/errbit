@@ -1,13 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-# require 'rails/all'
-# require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-# require "active_resource/railtie"
-require 'mongoid/railtie'
-require "sprockets/railtie"
+require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -39,17 +33,11 @@ module Errbit
 
     # > rails generate - config
     config.generators do |g|
-      g.orm             :mongoid
+      g.orm             :active_record
       g.template_engine :haml
       g.test_framework  :rspec, :fixture => false
       g.fixture_replacement :fabrication
     end
-
-    # Enable the mongoid identity map for performance
-    Mongoid.identity_map_enabled = true
-
-    # IssueTracker subclasses use inheritance, so preloading models provides querying consistency in dev mode.
-    config.mongoid.preload_models = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

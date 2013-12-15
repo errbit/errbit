@@ -32,7 +32,7 @@ class ProblemsController < ApplicationController
 
   expose(:app_scope) {
     apps = current_user.admin? ? App.all : current_user.apps
-    params[:app_id] ? apps.where(:_id => params[:app_id]) : apps
+    params[:app_id] ? apps.where(:id => params[:app_id]) : apps
   }
 
   expose(:params_environement) {

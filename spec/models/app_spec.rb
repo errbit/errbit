@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe App do
-  context "Attributes" do
-    it { should have_field(:_id).of_type(String) }
-    it { should have_field(:name).of_type(String) }
-    it { should have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
-    it { should have_fields(:resolve_errs_on_deploy, :notify_all_users, :notify_on_errs, :notify_on_deploys).of_type(Boolean) }
-    it { should have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
-  end
 
   context 'validations' do
     it 'requires a name' do
@@ -20,14 +13,14 @@ describe App do
       Fabricate(:app, :name => 'Errbit')
       app = Fabricate.build(:app, :name => 'Errbit')
       expect(app).to_not be_valid
-      expect(app.errors[:name]).to include('is already taken')
+      expect(app.errors[:name]).to include('has already been taken')
     end
 
     it 'requires unique api_keys' do
       Fabricate(:app, :api_key => 'APIKEY')
       app = Fabricate.build(:app, :api_key => 'APIKEY')
       expect(app).to_not be_valid
-      expect(app.errors[:api_key]).to include('is already taken')
+      expect(app.errors[:api_key]).to include('has already been taken')
     end
   end
 
@@ -125,6 +118,7 @@ describe App do
       @app = Fabricate(:app)
       3.times { Fabricate(:user) }
       5.times { Fabricate(:watcher, :app => @app) }
+      @app.reload
       @app.notify_all_users = true
       expect(@app.notification_recipients.size).to eq 8
       @app.notify_all_users = false
@@ -135,13 +129,13 @@ describe App do
   context "emailable?" do
     it "should be true if notify on errs and there are notification recipients" do
       app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
-      2.times { Fabricate(:watcher, :app => app) }
+      2.times { app.watchers.build Fabricate.attributes_for(:watcher) }
       expect(app.emailable?).to be_true
     end
 
     it "should be false if notify on errs is disabled" do
       app = Fabricate(:app, :notify_on_errs => false, :notify_all_users => false)
-      2.times { Fabricate(:watcher, :app => app) }
+      2.times { app.watchers.build Fabricate.attributes_for(:watcher) }
       expect(app.emailable?).to be_false
     end
 
@@ -178,7 +172,7 @@ describe App do
         :problem => Fabricate(:problem, :app => app),
         :fingerprint => conditions[:fingerprint]
       })
-      expect(Err.where(:fingerprint => conditions[:fingerprint]).first).to eq existing
+      expect(Err.where(conditions.slice(:fingerprint)).first).to eq existing
       expect(app.find_or_create_err!(conditions)).to eq existing
     end
 
@@ -187,7 +181,7 @@ describe App do
     end
 
     it 'creates a new problem if a matching one does not already exist' do
-      expect(Err.where(conditions).first).to be_nil
+      expect(Err.where(conditions.slice(:fingerprint)).first).to be_nil
       expect {
         app.find_or_create_err!(conditions)
       }.to change(Problem,:count).by(1)
@@ -200,7 +194,7 @@ describe App do
       }
       }
       it 'save the err' do
-        expect(Err.where(conditions).first).to be_nil
+        expect(Err.where(conditions.slice(:fingerprint)).first).to be_nil
         expect {
           app.find_or_create_err!(conditions)
         }.to change(Problem,:count).by(1)
@@ -213,10 +207,10 @@ describe App do
       app = Fabricate(:app)
       expect(App.find_by_api_key!(app.api_key)).to eq app
     end
-    it 'raise Mongoid::Errors::DocumentNotFound if not found' do
+    it 'raise ActiveRecord::RecordNotFound if not found' do
       expect {
         App.find_by_api_key!('foo')
-      }.to raise_error(Mongoid::Errors::DocumentNotFound)
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 

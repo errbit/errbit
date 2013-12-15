@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NotificationService::HoiioService do
+describe NotificationServices::HoiioService do
   it "it should send a notification to hoiio" do
     # setup
     notice = Fabricate :notice

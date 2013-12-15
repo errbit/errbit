@@ -86,8 +86,11 @@ describe ProblemsController do
       it 'gets a paginated list of unresolved problems for the users apps' do
         sign_in(user = Fabricate(:user))
         unwatched_err = Fabricate(:err)
-        watched_unresolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => false))
-        watched_resolved_err = Fabricate(:err, :problem => Fabricate(:problem, :app => Fabricate(:user_watcher, :user => user).app, :resolved => true))
+        Fabricate(:user_watcher, user: user, app: app)
+        app.watchers(true)
+        
+        watched_unresolved_err = Fabricate(:err, problem: Fabricate(:problem, app: app, resolved: false))
+        watched_resolved_err = Fabricate(:err, problem: Fabricate(:problem, app: app, resolved: true))
         get :index
         expect(controller.problems).to include(watched_unresolved_err.problem)
         expect(controller.problems).to_not include(unwatched_err.problem, watched_resolved_err.problem)
@@ -185,7 +188,7 @@ describe ProblemsController do
       it 'raises a DocumentNotFound error if the user is not watching the app' do
         expect {
           get :show, :app_id => @unwatched_err.problem.app_id, :id => @unwatched_err.problem.id
-        }.to raise_error(Mongoid::Errors::DocumentNotFound)
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

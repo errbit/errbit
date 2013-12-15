@@ -1,14 +1,9 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 3.2.15'
+gem 'rails', '~> 3.2.15'
 
-gem 'actionmailer', RAILS_VERSION
-gem 'actionpack', RAILS_VERSION
-gem 'railties', RAILS_VERSION
+gem 'pg'
 
-gem 'mongoid'
-
-gem 'mongoid_rails_migrations'
 gem 'devise'
 gem 'haml'
 gem 'htmlentities'
@@ -26,6 +21,9 @@ gem 'rails_autolink'
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
 
+# Need for mongodb data import
+gem 'mongo', :require => false
+gem 'bson_ext', :require => false
 
 # Remove / comment out any of the gems below if you want to disable
 # a given issue tracker, notification service, or authentication.
@@ -108,7 +106,6 @@ group :test do
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', :require => false
-  gem 'mongoid-rspec', :require => false
 end
 
 group :heroku, :production do

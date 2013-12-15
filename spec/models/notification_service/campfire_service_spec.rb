@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NotificationService::CampfireService do
+describe NotificationServices::CampfireService do
   it "it should send a notification to campfire" do
     # setup
     notice = Fabricate :notice

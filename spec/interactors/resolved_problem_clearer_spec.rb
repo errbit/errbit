@@ -20,17 +20,10 @@ describe ResolvedProblemClearer do
           Problem.count
         }
       end
-      it 'not repair database' do
-        Mongoid.default_session.stub(:command).and_call_original
-        expect(Mongoid.default_session).to_not receive(:command).with({:repairDatabase => 1})
-        resolved_problem_clearer.execute
-      end
     end
 
     context "with problem resolve" do
       before do
-        Mongoid.default_session.stub(:command).and_call_original
-        Mongoid.default_session.stub(:command).with({:repairDatabase => 1})
         problems.first.resolve!
         problems.second.resolve!
       end
@@ -41,14 +34,8 @@ describe ResolvedProblemClearer do
         }.to change {
           Problem.count
         }.by(-2)
-        expect(Problem.where(:_id => problems.first.id).first).to be_nil
-        expect(Problem.where(:_id => problems.second.id).first).to be_nil
-      end
-
-      it 'repair database' do
-        Mongoid.default_session.stub(:command).and_call_original
-        expect(Mongoid.default_session).to receive(:command).with({:repairDatabase => 1})
-        resolved_problem_clearer.execute
+        expect(Problem.where(:id => problems.first.id).first).to be_nil
+        expect(Problem.where(:id => problems.second.id).first).to be_nil
       end
     end
   end

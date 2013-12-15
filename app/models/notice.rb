@@ -1,36 +1,42 @@
 require 'recurse'
 
-class Notice
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class Notice < ActiveRecord::Base
 
-  field :message
-  field :server_environment, :type => Hash
-  field :request, :type => Hash
-  field :notifier, :type => Hash
-  field :user_attributes, :type => Hash
-  field :framework
-  field :error_class
+  serialize :server_environment, Hash
+  serialize :request, Hash
+  serialize :notifier, Hash
+  serialize :user_attributes, Hash
+  serialize :current_user, Hash
+
   delegate :lines, :to => :backtrace, :prefix => true
   delegate :app, :problem, :to => :err
 
   belongs_to :err
-  belongs_to :backtrace, :index => true
-
-  index(:created_at => 1)
-  index(:err_id => 1, :created_at => 1, :_id => 1)
+  belongs_to :backtrace
 
   after_create :cache_attributes_on_problem, :unresolve_problem
   after_create :email_notification
   after_create :services_notification
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
+  after_initialize :default_values
 
   validates_presence_of :backtrace, :server_environment, :notifier
 
-  scope :ordered, order_by(:created_at.asc)
-  scope :reverse_ordered, order_by(:created_at.desc)
-  scope :for_errs, lambda {|errs| where(:err_id.in => errs.all.map(&:id))}
+  scope :ordered, -> { reorder('created_at asc') }
+  scope :reverse_ordered, -> { reorder('created_at desc') }
+  scope :for_errs, lambda {|errs| where(:err_id => errs.pluck(:id))}
+  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
+
+  def default_values
+    if self.new_record?
+      self.server_environment ||= Hash.new
+      self.request ||= Hash.new
+      self.notifier ||= Hash.new
+      self.user_attributes ||= Hash.new
+      self.current_user ||= Hash.new
+    end
+  end
 
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']

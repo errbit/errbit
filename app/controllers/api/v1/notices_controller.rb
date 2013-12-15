@@ -2,18 +2,16 @@ class Api::V1::NoticesController < ApplicationController
   respond_to :json, :xml
 
   def index
-    query = {}
-    fields = %w{created_at message error_class}
+    fields = %w{notices.created_at notices.message notices.error_class problems.app_id problems.app_name}
+    notices = Notice.select(fields).joins(:err => :problem)
 
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
       end_date = Time.parse(params[:end_date]).utc
-      query = {:created_at => {"$lte" => end_date, "$gte" => start_date}}
+      notices = notices.created_between(start_date, end_date)
     end
 
-    results = benchmark("[api/v1/notices_controller] query time") do
-      Notice.where(query).with(:consistency => :strong).only(fields).to_a
-    end
+    results = benchmark("[api/v1/notices_controller] query time") { notices.all }
 
     respond_to do |format|
       format.html { render :json => Yajl.dump(results) } # render JSON if no extension specified on path

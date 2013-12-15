@@ -1,38 +1,68 @@
-class App
+class App < ActiveRecord::Base
   include Comparable
-  include Mongoid::Document
-  include Mongoid::Timestamps
 
-  field :name, :type => String
-  field :api_key
-  field :github_repo
-  field :bitbucket_repo
-  field :asset_host
-  field :repository_branch
-  field :resolve_errs_on_deploy, :type => Boolean, :default => false
-  field :notify_all_users, :type => Boolean, :default => false
-  field :notify_on_errs, :type => Boolean, :default => true
-  field :notify_on_deploys, :type => Boolean, :default => false
-  field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
+  serialize :email_at_notices, Array
 
-  # Some legacy apps may have string as key instead of BSON::ObjectID
-  # identity :type => String
-  field :_id,
-    type: String,
-    pre_processed: true,
-    default: ->{ Moped::BSON::ObjectId.new.to_s }
+  has_many :watchers, inverse_of: :app
+  has_many :deploys, inverse_of: :app
+
+  has_one :issue_tracker, inverse_of: :app, dependent: :destroy
+  has_one :notification_service, inverse_of: :app, dependent: :destroy
 
 
-  embeds_many :watchers
-  embeds_many :deploys
-  embeds_one :issue_tracker
-  embeds_one :notification_service
+
+  def issue_tracker
+    return @tentative_issue_tracker if has_tentative_issue_tracker?
+    super
+  end
+  
+  def has_tentative_issue_tracker?
+    !!defined?(@tentative_issue_tracker)
+  end
+  
+  alias_method :set_issue_tracker, :issue_tracker=
+  def issue_tracker=(value)
+    @tentative_issue_tracker = value
+  end
+  
+  after_save :commit_issue_tracker, :if => :has_tentative_issue_tracker?
+  
+  def commit_issue_tracker
+    set_issue_tracker @tentative_issue_tracker
+    remove_instance_variable :@tentative_issue_tracker
+  end
+
+
+
+  def notification_service
+    return @tentative_notification_service if has_tentative_notification_service?
+    super
+  end
+  
+  def has_tentative_notification_service?
+    !!defined?(@tentative_notification_service)
+  end
+  
+  alias_method :set_notification_service, :notification_service=
+  def notification_service=(value)
+    @tentative_notification_service = value
+  end
+  
+  after_save :commit_notification_service, :if => :has_tentative_notification_service?
+  
+  def commit_notification_service
+    set_notification_service @tentative_notification_service
+    remove_instance_variable :@tentative_notification_service
+  end
+
+
 
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_repo
   after_update :store_cached_attributes_on_problems
+  after_initialize :default_values
 
   validates_presence_of :name, :api_key
   validates_uniqueness_of :name, :allow_blank => true
@@ -47,7 +77,14 @@ class App
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
-  # Acceps a hash with the following attributes:
+  # Set default values for new record
+  def default_values  
+    if self.new_record?
+      self.email_at_notices ||= Errbit::Config.email_at_notices
+    end
+  end
+
+  # Accepts a hash with the following attributes:
   #
   # * <tt>:error_class</tt> - the class of error (required to create a new Problem)
   # * <tt>:environment</tt> - the environment the source app was running in (required to create a new Problem)
@@ -58,15 +95,6 @@ class App
       :fingerprint => attrs[:fingerprint]
     ).first ||
       problems.create!(attrs.slice(:error_class, :environment)).errs.create!(attrs.slice(:fingerprint, :problem_id))
-  end
-
-  # Mongoid Bug: find(id) on association proxies returns an Enumerator
-  def self.find_by_id!(app_id)
-    find app_id
-  end
-
-  def self.find_by_api_key!(key)
-    find_by(:api_key => key)
   end
 
   def last_deploy_at
@@ -129,7 +157,7 @@ class App
 
   def notification_recipients
     if notify_all_users
-      (User.all.map(&:email).reject(&:blank?) + watchers.map(&:address)).uniq
+      (User.with_not_blank_email.map(&:email) + watchers.map(&:address)).uniq
     else
       watchers.map(&:address)
     end
@@ -137,9 +165,9 @@ class App
 
   # Copy app attributes from another app.
   def copy_attributes_from(app_id)
-    if copy_app = App.where(:_id => app_id).first
+    if copy_app = App.find(app_id)
       # Copy fields
-      (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
+      (copy_app.attribute_names - %w(id name created_at updated_at)).each do |k|
         self.send("#{k}=", copy_app.send(k))
       end
       # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
@@ -171,7 +199,7 @@ class App
   end
 
   def regenerate_api_key!
-    set(:api_key, SecureRandom.hex)
+    update_column :api_key, SecureRandom.hex
   end
 
   protected

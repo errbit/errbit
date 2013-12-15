@@ -1,22 +1,14 @@
-class Deploy
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class Deploy < ActiveRecord::Base
 
-  field :username
-  field :repository
-  field :environment
-  field :revision
-  field :message
-
-  index(:created_at => -1)
-
-  embedded_in :app, :inverse_of => :deploys
+  belongs_to :app, :inverse_of => :deploys
 
   after_create :resolve_app_errs, :if => :should_resolve_app_errs?
   after_create :store_cached_attributes_on_problems
   after_create :deliver_email
 
   validates_presence_of :username, :environment
+
+  scope :by_created_at, order("created_at DESC")
 
   def resolve_app_errs
     app.problems.unresolved.in_env(environment).each {|problem| problem.resolve!}
