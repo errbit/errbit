@@ -25,7 +25,7 @@ class Backtrace < ActiveRecord::Base
 
   private
   def generate_fingerprint
-    self.fingerprint = Digest::SHA1.hexdigest(lines.map(&:to_s).join)
+    self.fingerprint = Digest::SHA1.hexdigest(lines.join)
   end
 
 end
