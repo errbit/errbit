@@ -83,7 +83,7 @@ Password: password
 The list of requirement to install Errbit is :
 
  * Ruby 1.9.3 or higher
- * MongoDB 2.2.0 or higher
+ * Postgres
 
 By default it's the Ruby 2.0.0 to use. But you can define your own ruby
 version with RUBY_VERSION variable between :
@@ -101,11 +101,11 @@ for you.
 
 **Set up your local box or server(Ubuntu):**
 
-  * Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
+  * Install Postgres (if it is not already installed)
 
 ```bash
 apt-get update
-apt-get install mongodb-10gen
+apt-get install postgresql-9.3
 ```
 
   * Install libxml and libcurl
@@ -134,7 +134,7 @@ bundle install
 rake errbit:bootstrap
 ```
 
-  * Update the config.yml and mongoid.yml files with information about your environment
+  * Update the config.yml and database.yml files with information about your environment
 
   * Start Server
 
@@ -150,7 +150,7 @@ Deploying:
   * Setup server and deploy
 
 ```bash
-cap deploy:setup deploy db:create_mongoid_indexes
+cap deploy:setup deploy
 ```
 
 (Note: The capistrano deploy script will automatically generate a unique secret token.)
@@ -173,7 +173,7 @@ gem install heroku
 heroku create example-errbit
 # If you really want, you can define your stack and your buildpack. the default is good to us :
 # heroku create example-errbit --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
-heroku addons:add mongolab:sandbox
+heroku addons:add heroku-postgresql:dev
 heroku addons:add sendgrid:starter
 heroku config:add HEROKU=true
 heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
@@ -190,7 +190,6 @@ git push heroku master
 
 ```bash
 heroku run rake db:seed
-heroku run rake db:mongoid:create_indexes
 ```
 
   * If you are using a free database on Heroku, you may want to periodically clear resolved errors to free up space.
