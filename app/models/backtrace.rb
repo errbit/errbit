@@ -5,7 +5,7 @@ class Backtrace < ActiveRecord::Base
 
   has_many :lines, class_name: 'BacktraceLine', :order => "created_at ASC"
 
-  after_initialize :generate_fingerprint
+  after_initialize :generate_fingerprint, :if => :new_record?
 
   delegate :app, :to => :notice
 

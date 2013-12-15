@@ -16,7 +16,6 @@ describe WatchersController do
 
         before(:each) do
           delete :destroy, :app_id => app.id, :id => watcher.user.id.to_s
-          problem.reload
         end
 
         it "should delete the watcher" do

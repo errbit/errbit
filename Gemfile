@@ -23,7 +23,7 @@ gem 'hoptoad_notifier', "~> 2.4"
 
 # Need for mongodb data import
 gem 'mongo', :require => false
-gem 'activerecord-import', :require => false
+gem 'bson_ext', :require => false
 
 # Remove / comment out any of the gems below if you want to disable
 # a given issue tracker, notification service, or authentication.

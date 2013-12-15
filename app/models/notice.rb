@@ -25,8 +25,8 @@ class Notice < ActiveRecord::Base
 
   scope :ordered, -> { reorder('created_at asc') }
   scope :reverse_ordered, -> { reorder('created_at desc') }
-  scope :for_errs, lambda {|errs| where(:err_id => errs.all.map(&:id))}
-  scope :created_between, lambda {|start_date, end_date| where("created_at BETWEEN :start_date and :end_date", start_date: start_date, end_date: end_date)}
+  scope :for_errs, lambda {|errs| where(:err_id => errs.pluck(:id))}
+  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
 
   def default_values
     if self.new_record?
@@ -97,7 +97,7 @@ class Notice < ActiveRecord::Base
   end
 
   def in_app_backtrace_lines
-    backtrace_lines.select(&:in_app?)
+    backtrace_lines.in_app
   end
 
   def similar_count

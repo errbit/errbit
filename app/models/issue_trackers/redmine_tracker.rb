@@ -44,7 +44,7 @@ if defined? RedmineClient
         self.site = acc
         self.format = :xml
       end
-      issue = RedmineClient::Issue.new(:project_id => project_id)
+      issue = RedmineClient::Issue.new(:project_id => project_id.to_s)
       issue.subject = issue_title problem
       issue.description = body_template.result(binding)
       issue.save!

@@ -10,6 +10,53 @@ class App < ActiveRecord::Base
   has_one :notification_service, inverse_of: :app, dependent: :destroy
 
 
+
+  def issue_tracker
+    return @tentative_issue_tracker if has_tentative_issue_tracker?
+    super
+  end
+  
+  def has_tentative_issue_tracker?
+    !!defined?(@tentative_issue_tracker)
+  end
+  
+  alias_method :set_issue_tracker, :issue_tracker=
+  def issue_tracker=(value)
+    @tentative_issue_tracker = value
+  end
+  
+  after_save :commit_issue_tracker, :if => :has_tentative_issue_tracker?
+  
+  def commit_issue_tracker
+    set_issue_tracker @tentative_issue_tracker
+    remove_instance_variable :@tentative_issue_tracker
+  end
+
+
+
+  def notification_service
+    return @tentative_notification_service if has_tentative_notification_service?
+    super
+  end
+  
+  def has_tentative_notification_service?
+    !!defined?(@tentative_notification_service)
+  end
+  
+  alias_method :set_notification_service, :notification_service=
+  def notification_service=(value)
+    @tentative_notification_service = value
+  end
+  
+  after_save :commit_notification_service, :if => :has_tentative_notification_service?
+  
+  def commit_notification_service
+    set_notification_service @tentative_notification_service
+    remove_instance_variable :@tentative_notification_service
+  end
+
+
+
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
@@ -29,6 +76,13 @@ class App < ActiveRecord::Base
     :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+
+  # Set default values for new record
+  def default_values  
+    if self.new_record?
+      self.email_at_notices ||= Errbit::Config.email_at_notices
+    end
+  end
 
   # Accepts a hash with the following attributes:
   #

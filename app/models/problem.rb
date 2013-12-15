@@ -20,7 +20,11 @@ class Problem < ActiveRecord::Base
   scope :resolved, where(:resolved => true)
   scope :unresolved, where(:resolved => false)
   scope :ordered, order("last_notice_at desc")
-  scope :for_apps, lambda {|apps| where(:app_id => apps.map(&:id))}
+  
+  def self.for_apps(apps)
+    return where(app_id: apps.pluck(:id)) if apps.is_a? ActiveRecord::Relation
+    where(app_id: apps.map(&:id))
+  end
 
   validates_presence_of :last_notice_at, :first_notice_at
 
@@ -39,7 +43,7 @@ class Problem < ActiveRecord::Base
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all
-      all
+      scoped
     else
       where(:resolved => false)
     end
@@ -131,17 +135,6 @@ class Problem < ActiveRecord::Base
       :hosts       => attribute_count_descrease(:hosts, notice.host),
       :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string)
     )
-  end
-
-  #FIXME: проблема при разношерстных мессаджах (PID, Time, etc.) Их становится слишком много и эррбит тормозит на запись
-  def messages
-    m = notices.group(:message).count
-    @messages = {}
-    m.each_pair do |key, value|
-      index = attribute_index(key)
-      @messages[index] = {'count' => value, 'value' => key}
-    end
-    @messages
   end
 
   def issue_type

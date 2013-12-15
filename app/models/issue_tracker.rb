@@ -10,21 +10,11 @@ class IssueTracker < ActiveRecord::Base
   validate :check_params
 
   # Subclasses are responsible for overwriting this method.
-  # FIXME: problem with AR & has_one, try resolve this through patch build_issue_tracker
-  def check_params
-    return true if type.blank?
-    sti = type.constantize.new(self.attributes)
-    sti.valid?
-    sti.errors[:base].each {|msg| self.errors.add :base, msg}
-  end
+  def check_params; true; end
 
   def issue_title(problem)
     "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
   end
-
-  # Allows us to set the issue tracker class from a single form.
-  def type; self._type; end
-  def type=(t); self._type=t; end
 
   def url; nil; end
 

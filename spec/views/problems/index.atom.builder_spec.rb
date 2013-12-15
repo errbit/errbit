@@ -3,10 +3,11 @@ require 'spec_helper'
 describe "problems/index.atom.builder" do
 
   it 'display problem message' do
-    app = App.new(:new_record => false)
-    view.stub(:problems).and_return([Problem.new(
-      :message => 'foo',
-      :new_record => false, :app => app), Problem.new(:new_record => false, :app => app)])
+    app = Fabricate :app
+    view.stub(:problems).and_return([
+      Fabricate(:problem, :message => 'foo', :app => app),
+      Fabricate(:problem, :app => app)
+    ])
     render
     expect(rendered).to match('foo')
   end

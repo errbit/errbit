@@ -2,7 +2,6 @@ class Api::V1::NoticesController < ApplicationController
   respond_to :json, :xml
 
   def index
-    query = {}
     fields = %w{created_at message error_class}
     notices = Notice.select(fields)
 

@@ -164,8 +164,3 @@ class MongodbDataStubs
     end
   end
 end
-
-%w(apps users problems comments errs notices backtraces).each do |collection|
-  MongodbDataStubs.send(collection).stub(:find).and_return(MongodbDataStubs.send(collection))
-  MongodbDataStubs.send(collection).stub(:find_one).and_return(MongodbDataStubs.send(collection).last)
-end

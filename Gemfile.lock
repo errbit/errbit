@@ -26,8 +26,6 @@ GEM
       activesupport (= 3.2.16)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-import (0.4.1)
-      activerecord (>= 3.0)
     activeresource (3.2.16)
       activemodel (= 3.2.16)
       activesupport (= 3.2.16)
@@ -54,6 +52,8 @@ GEM
       nokogiri (~> 1.5.2)
       simple_oauth
     bson (1.9.2)
+    bson_ext (1.9.2)
+      bson (~> 1.9.2)
     builder (3.0.4)
     callsite (0.0.11)
     campy (1.0.0)
@@ -354,11 +354,11 @@ PLATFORMS
 
 DEPENDENCIES
   actionmailer_inline_css
-  activerecord-import
   airbrake
   better_errors
   binding_of_caller
   bitbucket_rest_api
+  bson_ext
   campy
   capistrano (~> 2.0)
   capybara

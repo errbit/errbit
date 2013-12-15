@@ -12,7 +12,7 @@ puts "-- email:    #{admin_email}"
 puts "-- password: #{admin_pass}"
 puts ""
 puts "Be sure to change these credentials ASAP!"
-user = User.find_or_initialize_by(:email => admin_email) do |u|
+user = User.find_or_initialize_by_email(admin_email) do |u|
   u.name = 'Errbit Admin'
   u.password = admin_pass
   u.password_confirmation = admin_pass

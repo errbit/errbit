@@ -2,6 +2,8 @@ class NotificationService < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
   default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
+  
+  serialize :notify_at_notices, JSON
 
   belongs_to :app, inverse_of: :notification_service
 
@@ -27,8 +29,6 @@ class NotificationService < ActiveRecord::Base
   def notification_description(problem)
     "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
   end
-
-  # Allows us to set the issue tracker class from a single form.
 
   def url; nil; end
 

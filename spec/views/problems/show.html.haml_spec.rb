@@ -76,7 +76,7 @@ describe "problems/show.html.haml" do
 
       it 'should allow creating issue for github if application has a github tracker' do
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
-        with_issue_tracker(IssueTrackers::GithubIssuesTracker, problem)
+        with_issue_tracker(GithubIssuesTracker, problem)
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
@@ -85,8 +85,8 @@ describe "problems/show.html.haml" do
       end
 
       context "without issue tracker associate on app" do
-        let(:problem){ Problem.new(:new_record => false, :app => app) }
-        let(:app) { App.new(:new_record => false) }
+        let(:problem) { Fabricate :problem, :app => app }
+        let(:app) { Fabricate :app }
 
         it 'not see link to create issue' do
           view.stub(:problem).and_return(problem)
@@ -98,12 +98,10 @@ describe "problems/show.html.haml" do
       end
 
       context "with lighthouse tracker on app" do
-        let(:app) { App.new(:new_record => false, :issue_tracker => tracker ) }
-        let(:tracker) {
-          IssueTrackers::LighthouseTracker.new(:project_id => 'x')
-        }
+        let(:app) { Fabricate :app, :issue_tracker => tracker }
+        let(:tracker) { Fabricate :lighthouse_tracker }
         context "with problem without issue link" do
-          let(:problem){ Problem.new(:new_record => false, :app => app) }
+          let(:problem) { Fabricate :problem, :app => app }
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
             view.stub(:app).and_return(problem.app)
@@ -114,7 +112,7 @@ describe "problems/show.html.haml" do
         end
 
         context "with problem with issue link" do
-          let(:problem){ Problem.new(:new_record => false, :app => app, :issue_link => 'http://foo') }
+          let(:problem) { Fabricate :problem, :app => app, :issue_link => 'http://foo' }
 
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
@@ -148,7 +146,7 @@ describe "problems/show.html.haml" do
     context "with issue tracker" do
       it 'should not display the comments section' do
         problem = Fabricate(:problem)
-        with_issue_tracker(IssueTrackers::PivotalLabsTracker, problem)
+        with_issue_tracker(PivotalLabsTracker, problem)
         render
         expect(view.view_flow.get(:comments)).to be_blank
       end
@@ -156,7 +154,7 @@ describe "problems/show.html.haml" do
       it 'should display existing comments' do
         problem = Fabricate(:problem_with_comments)
         problem.reload
-        with_issue_tracker(IssueTrackers::PivotalLabsTracker, problem)
+        with_issue_tracker(PivotalLabsTracker, problem)
         render
 
         expect(view.content_for(:comments)).to include('Test comment')

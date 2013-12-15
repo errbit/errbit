@@ -18,6 +18,7 @@ describe Comment do
 
     before do
       Fabricate(:user_watcher, :app => app, :user => comment_user)
+      app.watchers(true)
     end
 
     it 'includes app notification_recipients except user email' do
@@ -34,6 +35,7 @@ describe Comment do
 
     before do
       Fabricate(:user_watcher, :app => app, :user => comment_user)
+      app.watchers(true)
     end
 
     it 'should be true if app is emailable? and there are notification recipients' do
