@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NotificationService::PushoverService do
+describe NotificationServices::PushoverService do
   it "it should send a notification to Pushover" do
     # setup
     notice = Fabricate :notice

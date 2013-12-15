@@ -1,16 +1,11 @@
-class Backtrace
-  include Mongoid::Document
-  include Mongoid::Timestamps
-
-  field :fingerprint
-  index :fingerprint => 1
+class Backtrace < ActiveRecord::Base
 
   has_many :notices
   has_one :notice
 
-  embeds_many :lines, :class_name => "BacktraceLine"
+  has_many :lines, class_name: 'BacktraceLine', :order => "created_at ASC"
 
-  after_initialize :generate_fingerprint
+  after_initialize :generate_fingerprint, :if => :new_record?
 
   delegate :app, :to => :notice
 
@@ -30,7 +25,7 @@ class Backtrace
 
   private
   def generate_fingerprint
-    self.fingerprint = Digest::SHA1.hexdigest(lines.map(&:to_s).join)
+    self.fingerprint = Digest::SHA1.hexdigest(lines.join)
   end
 
 end

@@ -137,7 +137,7 @@ describe Problem do
       expect(problem).to_not be_valid
       expect {
         problem.resolve!
-      }.to raise_error(Mongoid::Errors::Validations)
+      }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 

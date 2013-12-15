@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   expose(:user, :attributes => :user_params)
   expose(:users) {
-    User.all.page(params[:page]).per(current_user.per_page)
+    User.page(params[:page]).per(current_user.per_page)
   }
 
   def index; end

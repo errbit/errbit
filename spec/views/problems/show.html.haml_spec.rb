@@ -16,7 +16,8 @@ describe "problems/show.html.haml" do
   end
 
   def with_issue_tracker(tracker, problem)
-    problem.app.issue_tracker = tracker.new :api_token => "token token token", :project_id => "1234"
+    # problem with has_one and sti, cause reverse creating
+    tracker.create :api_token => "token token token", :project_id => "1234", :app => problem.app
     view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end
@@ -84,8 +85,8 @@ describe "problems/show.html.haml" do
       end
 
       context "without issue tracker associate on app" do
-        let(:problem){ Problem.new(:new_record => false, :app => app) }
-        let(:app) { App.new(:new_record => false) }
+        let(:problem) { Fabricate :problem, :app => app }
+        let(:app) { Fabricate :app }
 
         it 'not see link to create issue' do
           view.stub(:problem).and_return(problem)
@@ -97,12 +98,10 @@ describe "problems/show.html.haml" do
       end
 
       context "with lighthouse tracker on app" do
-        let(:app) { App.new(:new_record => false, :issue_tracker => tracker ) }
-        let(:tracker) {
-          IssueTrackers::LighthouseTracker.new(:project_id => 'x')
-        }
+        let(:app) { Fabricate :app, :issue_tracker => tracker }
+        let(:tracker) { Fabricate :lighthouse_tracker }
         context "with problem without issue link" do
-          let(:problem){ Problem.new(:new_record => false, :app => app) }
+          let(:problem) { Fabricate :problem, :app => app }
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
             view.stub(:app).and_return(problem.app)
@@ -113,7 +112,7 @@ describe "problems/show.html.haml" do
         end
 
         context "with problem with issue link" do
-          let(:problem){ Problem.new(:new_record => false, :app => app, :issue_link => 'http://foo') }
+          let(:problem) { Fabricate :problem, :app => app, :issue_link => 'http://foo' }
 
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)

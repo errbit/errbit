@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: errbit_test
+  username: postgres

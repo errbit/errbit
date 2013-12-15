@@ -1,11 +1,7 @@
 require 'spec_helper'
 
 describe WatchersController do
-  let(:app) do
-    a = Fabricate(:app)
-    Fabricate(:user_watcher, :app => a)
-    a
-  end
+  let(:app) { Fabricate(:app_with_user_watcher) }
 
   describe "DELETE /apps/:app_id/watchers/:id/destroy" do
 
@@ -20,11 +16,10 @@ describe WatchersController do
 
         before(:each) do
           delete :destroy, :app_id => app.id, :id => watcher.user.id.to_s
-          problem.reload
         end
 
         it "should delete the watcher" do
-          expect(app.watchers.detect{|w| w.id.to_s == watcher.id }).to be nil
+          expect(app.watchers(true).detect{|w| w.id.to_s == watcher.id }).to be nil
         end
 
         it "should redirect to index page" do

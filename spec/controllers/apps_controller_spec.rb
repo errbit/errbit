@@ -168,7 +168,7 @@ describe AppsController do
         app = Fabricate(:app)
         expect{
           get :show, :id => app.id
-        }.to raise_error(Mongoid::Errors::DocumentNotFound)
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -303,7 +303,7 @@ describe AppsController do
           context tracker_klass do
             it "should save tracker params" do
               params = tracker_klass::Fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
-              params[:ticket_properties] = "card_type = defect" if tracker_klass == MingleTracker
+              params[:ticket_properties] = "card_type = defect" if tracker_klass == IssueTrackers::MingleTracker
               params[:type] = tracker_klass.to_s
               put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
@@ -346,6 +346,7 @@ describe AppsController do
       end
 
       it "should destroy the app" do
+        controller.stub(:app).and_return(@app)
         expect(@app).to receive(:destroy)
         delete :destroy, :id => @app.id
       end
@@ -385,7 +386,7 @@ describe AppsController do
         expect do
           post :regenerate_api_key, :id => app.id
           expect(request).to redirect_to edit_app_path(app)
-        end.to change { app.api_key }
+        end.to change { app.reload.api_key }
       end
     end
 
