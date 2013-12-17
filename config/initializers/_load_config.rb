@@ -81,7 +81,8 @@ end
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|
   options_from_config = {
     host: Errbit::Config.host,
-    port: Errbit::Config.port
+    port: Errbit::Config.port,
+    protocol: Errbit::Config.protocol
   }.select { |k, v| v }
 
   default.reverse_merge!(options_from_config)
