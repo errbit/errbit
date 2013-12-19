@@ -57,7 +57,7 @@ if defined? RedmineClient
     def url_to_file(file_path, line_number = nil)
       # alt_project_id let's users specify a different project for tickets / app files.
       project = self.alt_project_id.present? ? self.alt_project_id : self.project_id
-      url = "#{self.account.gsub(/\/$/, '')}/projects/#{project}/repository/revisions/#{app.repository_branch}/changes/#{file_path.sub(/\[PROJECT_ROOT\]/, '').sub(/^\//,'')}"
+      url = "#{self.account.gsub(/\/$/, '')}/projects/#{project}/repository/revisions/#{app.repository_branch}/entry/#{file_path.sub(/\[PROJECT_ROOT\]/, '').sub(/^\//,'')}"
       line_number ? url << "#L#{line_number}" : url
     end
 
