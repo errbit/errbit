@@ -1,19 +1,11 @@
-class NotificationService
-  include Mongoid::Document
-
+class NotificationService < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
   default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
+  
+  serialize :notify_at_notices, JSON
 
-  field :room_id, :type => String
-  field :user_id, :type => String
-  field :service_url, :type => String
-  field :service, :type => String
-  field :api_token, :type => String
-  field :subdomain, :type => String
-  field :sender_name, :type => String
-  field :notify_at_notices, :type => Array, :default => Errbit::Config.notify_at_notices
-  embedded_in :app, :inverse_of => :notification_service
+  belongs_to :app, inverse_of: :notification_service
 
   validate :check_params
 
@@ -37,10 +29,6 @@ class NotificationService
   def notification_description(problem)
     "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
   end
-
-  # Allows us to set the issue tracker class from a single form.
-  def type; self._type; end
-  def type=(t); self._type=t; end
 
   def url; nil; end
 

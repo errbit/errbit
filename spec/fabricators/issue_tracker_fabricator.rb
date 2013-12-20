@@ -1,10 +1,10 @@
 Fabricator :issue_tracker do
   app
-  api_token { sequence :word }
+  api_token "some-token"
   project_id { sequence :word }
-  account { sequence :word }
-  username { sequence :word }
-  password { sequence :word }
+  account "account-name"
+  username "johnsoda"
+  password "password"
 end
 
 %w(lighthouse pivotal_labs fogbugz).each do |t|

@@ -26,7 +26,7 @@
           %td.message
             = link_to truncated_problem_message(problem), app_problem_path(problem.app, problem)
             %em= problem.where
-            - if problem.comments_count > 0
+            - if problem.comments.count > 0
               - comment = problem.comments.last
               %br
               .inline_comment

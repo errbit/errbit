@@ -52,7 +52,7 @@ class ProblemUpdaterCache
   end
 
   def notices
-    @notices ||= @notice ? [@notice].sort(&:created_at) : problem.notices.order_by([:created_at, :asc])
+    @notices ||= @notice ? [@notice].sort(&:created_at) : problem.notices.order("created_at ASC")
   end
 
   def messages

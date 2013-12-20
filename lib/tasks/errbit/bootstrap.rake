@@ -7,7 +7,7 @@ namespace :errbit do
     configs = {
       'config.example.yml'  => 'config.yml',
       'deploy.example.rb'   => 'deploy.rb',
-      (ENV['HEROKU'] ? 'mongoid.mongohq.yml' : 'mongoid.example.yml') => 'mongoid.yml'
+      'database.example.yml'   => 'database.yml',
     }
 
     puts "Copying example config files..."
@@ -26,8 +26,6 @@ namespace :errbit do
     Rake::Task['errbit:copy_configs'].execute
     puts "\n"
     Rake::Task['db:seed'].invoke
-    puts "\n"
-    Rake::Task['db:mongoid:create_indexes'].invoke
   end
 
 end

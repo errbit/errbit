@@ -2,58 +2,48 @@
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.
 
-class Problem
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class Problem < ActiveRecord::Base
 
-  field :last_notice_at, :type => DateTime, :default => Proc.new { Time.now }
-  field :first_notice_at, :type => DateTime, :default => Proc.new { Time.now }
-  field :last_deploy_at, :type => Time
-  field :resolved, :type => Boolean, :default => false
-  field :resolved_at, :type => Time
-  field :issue_link, :type => String
-  field :issue_type, :type => String
+  serialize :messages, Hash
+  serialize :user_agents, Hash
+  serialize :hosts, Hash
 
-  # Cached fields
-  field :app_name, :type => String
-  field :notices_count, :type => Integer, :default => 0
-  field :message
-  field :environment
-  field :error_class
-  field :where
-  field :user_agents, :type => Hash, :default => {}
-  field :messages,    :type => Hash, :default => {}
-  field :hosts,       :type => Hash, :default => {}
-  field :comments_count, :type => Integer, :default => 0
-
-  index :app_id => 1
-  index :app_name => 1
-  index :message => 1
-  index :last_notice_at => 1
-  index :first_notice_at => 1
-  index :last_deploy_at => 1
-  index :resolved_at => 1
-  index :notices_count => 1
-
-  belongs_to :app
+  belongs_to :app, inverse_of: :problems
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
   has_many :comments, :inverse_of => :err, :dependent => :destroy
 
   validates_presence_of :environment
 
   before_create :cache_app_attributes
+  after_initialize :default_values
 
   scope :resolved, where(:resolved => true)
   scope :unresolved, where(:resolved => false)
-  scope :ordered, order_by(:last_notice_at.desc)
-  scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  scope :ordered, order("last_notice_at desc")
+  
+  def self.for_apps(apps)
+    return where(app_id: apps.pluck(:id)) if apps.is_a? ActiveRecord::Relation
+    where(app_id: apps.map(&:id))
+  end
 
   validates_presence_of :last_notice_at, :first_notice_at
 
+  def default_values
+    if self.new_record?
+      self.user_agents ||= Hash.new
+      self.messages ||= Hash.new
+      self.hosts ||= Hash.new
+      self.comments_count ||= 0
+      self.notices_count ||= 0
+      self.resolved = false if self.resolved.nil?
+      self.first_notice_at ||= Time.new
+      self.last_notice_at ||= Time.new
+    end
+  end
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all
-      all
+      scoped
     else
       where(:resolved => false)
     end
@@ -108,17 +98,17 @@ class Problem
 
   def self.ordered_by(sort, order)
     case sort
-    when "app";            order_by(["app_name", order])
-    when "message";        order_by(["message", order])
-    when "last_notice_at"; order_by(["last_notice_at", order])
-    when "last_deploy_at"; order_by(["last_deploy_at", order])
-    when "count";          order_by(["notices_count", order])
+    when "app";            order("app_name #{order}")
+    when "message";        order("message #{order}")
+    when "last_notice_at"; order("last_notice_at #{order}")
+    when "last_deploy_at"; order("last_deploy_at #{order}")
+    when "count";          order("notices_count #{order}")
     else raise("\"#{sort}\" is not a recognized sort")
     end
   end
 
   def self.in_date_range(date_range)
-    where(:first_notice_at.lte => date_range.end).where("$or" => [{:resolved_at => nil}, {:resolved_at.gte => date_range.begin}])
+    where(["first_notice_at <= ? AND (resolved_at IS NULL OR resolved_at >= ?)", date_range.end, date_range.begin])
   end
 
 
@@ -132,9 +122,10 @@ class Problem
       self.last_deploy_at = if (last_deploy = app.deploys.where(:environment => self.environment).last)
         last_deploy.created_at.utc
       end
-      collection.find('_id' => self.id)
-                .update({'$set' => {'app_name' => self.app_name,
-                          'last_deploy_at' => self.last_deploy_at.try(:utc)}})
+      Problem.where(id: self).update_all(
+        app_name: self.app_name,
+        last_deploy_at: self.last_deploy_at
+      )
     end
   end
 
@@ -152,13 +143,17 @@ class Problem
     (app.issue_tracker_configured? && app.issue_tracker.label) || nil
   end
 
+  def inc(attr, increment_by)
+    self.update_attribute(attr, self.send(attr) + increment_by)
+  end
+
   def self.search(value)
-    any_of(
-      {:error_class => /#{value}/i},
-      {:where => /#{value}/i},
-      {:message => /#{value}/i},
-      {:app_name => /#{value}/i},
-      {:environment => /#{value}/i}
+    t = arel_table
+    where(t[:error_class].matches("%#{value}%")
+      .or(t[:where].matches("%#{value}%"))
+      .or(t[:message].matches("%#{value}%"))
+      .or(t[:app_name].matches("%#{value}%"))
+      .or(t[:environment].matches("%#{value}%"))
     )
   end
 

@@ -6,7 +6,7 @@ class Api::V1::StatsController < ApplicationController
   before_filter :require_api_key_or_authenticate_user!
 
   def app
-    if problem = @app.problems.order_by(:last_notice_at.desc).first
+    if problem = @app.problems.order("last_notice_at desc").first
       @last_error_time = problem.last_notice_at
     end
 

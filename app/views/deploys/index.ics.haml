@@ -1,1 +1,1 @@
-= generate_ical(@app.deploys.order_by(:created_at.asc))
+= generate_ical(@app.deploys.order("created_at asc"))

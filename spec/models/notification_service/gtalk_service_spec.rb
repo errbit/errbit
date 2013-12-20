@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NotificationService::GtalkService do
+describe NotificationServices::GtalkService do
   it "it should send a notification to gtalk" do
     # setup
     notice = Fabricate :notice

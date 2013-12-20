@@ -2,19 +2,12 @@
 # determined to refer to the same Error (Errbit groups
 # notices into errs by a notice's fingerprint.)
 
-class Err
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class Err < ActiveRecord::Base
 
-  field :fingerprint
-
-  index problem_id: 1
-  index fingerprint: 1
-
-  belongs_to :problem
+  belongs_to :problem, :inverse_of => :errs
   has_many :notices, :inverse_of => :err, :dependent => :destroy
 
-  validates_presence_of :problem_id, :fingerprint
+  validates_presence_of :problem, :fingerprint
 
   delegate :app, :resolved?, :to => :problem
 

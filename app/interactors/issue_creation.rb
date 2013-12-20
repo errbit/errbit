@@ -21,7 +21,7 @@ class IssueCreation
       elsif !user.github_account?
         errors.add :base, "You haven't linked your Github account."
       else
-        @tracker = GithubIssuesTracker.new(
+        @tracker = IssueTrackers::GithubIssuesTracker.new(
           :app         => app,
           :username    => user.github_login,
           :oauth_token => user.github_oauth_token
