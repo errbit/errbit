@@ -173,6 +173,10 @@ a.action  { float: right; font-size: 0.9em;}
   padding: 43px 24px 37px;
 }
 
+#content-title.err_show.resolved{
+  background-color: #90EE90;
+}
+
 #content-comments {
   background-color: #ffffff;
 }
