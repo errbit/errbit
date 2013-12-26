@@ -1171,13 +1171,16 @@ printStackTrace.implementation.prototype = {
         }
     };
 
+    var oldOnerror = window.onerror;
     window.onerror = function (message, file, line, code, error) {
         setTimeout(function () {
             var e = error || {stack: '()@' + file + ':' + line}
             e.message = message
             new Notifier().notify(e);
         }, 0);
-
+        if (oldOnerror) {
+          return oldOnerror(message, file, line, code, error);
+        }
         return true;
     };
 })();
