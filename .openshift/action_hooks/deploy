@@ -9,6 +9,23 @@ set -e
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 
 
+if [ -z "$USE_ENV" ]
+then
+    echo 'YES' > $OPENSHIFT_HOMEDIR/.env/user_vars/USE_ENV
+    echo "$OPENSHIFT_APP_DNS" > $OPENSHIFT_HOMEDIR/.env/user_vars/ERRBIT_HOST
+    echo "errbit@$OPENSHIFT_APP_DNS" > $OPENSHIFT_HOMEDIR/.env/user_vars/ERRBIT_EMAIL_FROM
+    echo 'false' > $OPENSHIFT_HOMEDIR/.env/user_vars/ERRBIT_ENFORCE_SSL
+    echo 'true' > $OPENSHIFT_HOMEDIR/.env/user_vars/ERRBIT_USE_GRAVATAR
+    echo 'identicon' > $OPENSHIFT_HOMEDIR/.env/user_vars/ERRBIT_GRAVATAR_DEFAULT
+    echo 'false' > $OPENSHIFT_HOMEDIR/.env/user_vars/ERRBIT_GITHUB_AUTHENTICATION
+
+    # SMTP
+    echo 'localhost' > $OPENSHIFT_HOMEDIR/.env/user_vars/SMTP_SERVER
+    echo '25' > $OPENSHIFT_HOMEDIR/.env/user_vars/SMTP_PORT
+    echo "$OPENSHIFT_APP_DNS" > $OPENSHIFT_HOMEDIR/.env/user_vars/SMTP_DOMAIN
+    echo "none" > $OPENSHIFT_HOMEDIR/.env/user_vars/OPENSSL_VERIFY_MODE
+fi
+
 if [ -z "$SECRET_TOKEN" ]
 then
     echo "Generate SECRET_TOKEN"
