@@ -266,8 +266,8 @@ git push
     create index
 
 ```bash
-rhc ssh [app_name] 'cd $OPENSHIFT_REPO_DIR; bundle rake db:seed'
-rhc ssh [app_name] 'cd $OPENSHIFT_REPO_DIR; bundle rake db:mongoid:create_indexes'
+rhc ssh [app_name] 'cd $OPENSHIFT_REPO_DIR; bundle exec rake db:seed RAILS_ENV=${RAILS_ENV:-production}'
+rhc ssh [app_name] 'cd $OPENSHIFT_REPO_DIR; bundle exec rake db:mongoid:create_indexes RAILS_ENV=${RAILS_ENV:-production}'
 ```
 
   * That's it! Enjoy!
