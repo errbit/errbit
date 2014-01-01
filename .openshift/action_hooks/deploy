@@ -1,0 +1,36 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+set -e
+
+if [ -z "$OPENSHIFT_MONGODB_DB_HOST" ]
+then
+    echo 1>&2
+    echo "Could not find mysql database.  Please run:" 1>&2
+    echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c mongodb-2.2" 1>&2
+    echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
+    echo 1>&2
+    exit 5
+fi
+
+export MONGOID_HOST = "$OPENSHIFT_MONGODB_DB_HOST"
+export MONGOID_PORT = "$OPENSHIFT_MONGODB_DB_PORT"
+export MONGOID_USERNAME = "$OPENSHIFT_MONGODB_DB_USERNAME"
+export MONGOID_PASSWORD = "$OPENSHIFT_MONGODB_DB_PASSWORD"
+export MONGOID_DATABASE = "$OPENSHIFT_APP_NAME"
+
+pushd ${OPENSHIFT_REPO_DIR} > /dev/null
+
+if [ -z "$SECRET_TOKEN" ]
+then
+    export SECRET_TOKEN="$(RAILS_ENV=${RAILS_ENV:-production} bundle exec rake secret)"
+fi
+
+bundle exec rake errbit:copy_configs RAILS_ENV=${RAILS_ENV:-production}
+
+echo "exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}"
+bundle exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}
+popd > /dev/null
