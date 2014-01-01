@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+echo "SETUP MongoDB ========================================"
+
+if [ -z "$OPENSHIFT_MONGODB_DB_HOST" ]
+then
+    echo 1>&2
+    echo "Could not find mysql database.  Please run:" 1>&2
+    echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c mongodb-2.2" 1>&2
+    echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
+    echo 1>&2
+    exit 5
+fi
+
+export MONGOID_HOST=$OPENSHIFT_MONGODB_DB_HOST
+export MONGOID_PORT=$OPENSHIFT_MONGODB_DB_PORT
+export MONGOID_USERNAME=$OPENSHIFT_MONGODB_DB_USERNAME
+export MONGOID_PASSWORD=$OPENSHIFT_MONGODB_DB_PASSWORD
+export MONGOID_DATABASE=$OPENSHIFT_APP_NAME
+
+echo $MONGOID_HOST > $OPENSHIFT_HOMEDIR/.env/user_vars/MONGOID_HOST
+echo $MONGOID_PORT > $OPENSHIFT_HOMEDIR/.env/user_vars/MONGOID_PORT
+echo $MONGOID_USERNAME > $OPENSHIFT_HOMEDIR/.env/user_vars/MONGOID_USERNAME
+echo $MONGOID_PASSWORD > $OPENSHIFT_HOMEDIR/.env/user_vars/MONGOID_PASSWORD
+echo $MONGOID_DATABASE > $OPENSHIFT_HOMEDIR/.env/user_vars/MONGOID_DATABASE
+
+cd $OPENSHIFT_REPO_DIR; bundle exec rake errbit:copy_configs RAILS_ENV=${RAILS_ENV:-production}

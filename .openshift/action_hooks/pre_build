@@ -3,21 +3,5 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
-
 set -e
-
-if [ -z "$OPENSHIFT_MONGODB_DB_HOST" ]
-then
-    echo 1>&2
-    echo "Could not find mysql database.  Please run:" 1>&2
-    echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c mongodb-2.2" 1>&2
-    echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
-    echo 1>&2
-    exit 5
-fi
-
-export MONGOID_HOST=$OPENSHIFT_MONGODB_DB_HOST
-export MONGOID_PORT=$OPENSHIFT_MONGODB_DB_PORT
-export MONGOID_USERNAME=$OPENSHIFT_MONGODB_DB_USERNAME
-export MONGOID_PASSWORD=$OPENSHIFT_MONGODB_DB_PASSWORD
-export MONGOID_DATABASE=$OPENSHIFT_APP_NAME
+echo "Pre Build"

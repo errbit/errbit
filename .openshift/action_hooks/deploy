@@ -8,12 +8,14 @@ set -e
 
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 
+
 if [ -z "$SECRET_TOKEN" ]
 then
+    echo "Generate SECRET_TOKEN"
     export SECRET_TOKEN="$(RAILS_ENV=${RAILS_ENV:-production} bundle exec rake secret)"
+    echo $SECRET_TOKEN > $OPENSHIFT_HOMEDIR/.env/user_vars/SECRET_TOKEN
 fi
 
-bundle exec rake errbit:copy_configs RAILS_ENV=${RAILS_ENV:-production}
 
 echo "exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}"
 bundle exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}
