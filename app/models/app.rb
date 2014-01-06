@@ -9,6 +9,7 @@ class App
   field :bitbucket_repo
   field :asset_host
   field :repository_branch
+  field :current_app_version
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
