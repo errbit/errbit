@@ -2,7 +2,7 @@ class Api::V1::ProblemsController < ApplicationController
   respond_to :json, :xml
 
   def index
-    problems = Problem.select %w{app_id app_name environment message problems.where first_notice_at last_notice_at resolved resolved_at notices_count}
+    problems = Problem.select %w{problems.id app_id app_name environment message problems.where first_notice_at last_notice_at resolved resolved_at notices_count}
 
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
