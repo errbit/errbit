@@ -28,7 +28,7 @@ namespace :errbit do
     desc "Delete old errors from the database. (Useful for limited heroku databases)"
     task :clear_outdated => :environment do
       require 'outdated_problem_clearer'
-      puts "=== Cleared #{OutdatedProblemClearer.new.execute} resolved errors from the database."
+      puts "=== Cleared #{OutdatedProblemClearer.new.execute} outdated errors from the database."
     end
 
     desc "Regenerate fingerprints"

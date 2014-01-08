@@ -23,7 +23,7 @@ class OutdatedProblemClearer
   end
 
   def criteria
-    @criteria = (Time.new - Problem.last_notice_at) / 3600 / 24 > 7
+    @criteria = Problem.outdated
   end
 
   def repair_database
