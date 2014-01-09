@@ -332,6 +332,7 @@ form input[type=submit] {
   display:block; width: auto; padding: 0.5em;
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
   border: none; color: #FFF; background-color: #387fc1;
+  cursor: pointer;
 }
 form input[type=submit].button {
   font-size: 1em;
