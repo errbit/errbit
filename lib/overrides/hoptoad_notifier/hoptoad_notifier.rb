@@ -8,7 +8,7 @@ HoptoadNotifier.module_eval do
       def send_notice(notice)
         # Log the error internally if we are not in a development environment.
         if configuration.public?
-          app = App.find_or_initialize_by(:name => "Self.Errbit")
+          app = App.find_or_initialize_by_name("Self.Errbit")
           app.github_repo = "errbit/errbit"
           app.save!
           notice.send("api_key=", app.api_key)
