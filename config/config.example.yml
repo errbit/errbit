@@ -73,7 +73,7 @@ deployment:
     web: errbit.example.com
     app: errbit.example.com
     db: errbit.example.com
-  repository: http://github.com/errbit/errbit.git
+  repository: https://github.com/errbit/errbit.git
   branch: master
   user: deploy
   deploy_to: /var/www/apps/errbit
