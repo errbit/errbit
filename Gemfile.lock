@@ -213,6 +213,8 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
+    omniauth-gds (3.0.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-github (1.1.1)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
@@ -235,6 +237,7 @@ GEM
       rest-client (~> 1.6.0)
     pjax_rails (0.3.4)
       jquery-rails
+    plek (1.7.0)
     polyglot (0.3.3)
     premailer (1.7.3)
       css_parser (>= 1.1.9)
@@ -404,10 +407,12 @@ DEPENDENCIES
   mongoid-rspec
   mongoid_rails_migrations
   octokit (~> 1.18)
+  omniauth-gds (= 3.0.0)
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
   pjax_rails
+  plek (= 1.7.0)
   pry-rails
   puma
   quiet_assets
