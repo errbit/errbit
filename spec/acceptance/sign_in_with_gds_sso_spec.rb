@@ -2,10 +2,6 @@ require 'acceptance/acceptance_helper'
 
 feature 'Sign in with GDS SSO' do
 
-  def mock_gds_sso_auth(uid, details = {})
-    OmniAuth.config.mock_auth[:gds] = gds_omniauth_hash_stub(uid, details)
-  end
-
   context "no existing local user" do
     scenario 'logging in as a user with signin permission' do
       mock_gds_sso_auth('1234')

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Devise::SessionsController do
+describe Devise::SessionsController, :pending => "No longer applicable due to GDS SSO" do
   render_views
 
   describe "POST /users/sign_in" do
