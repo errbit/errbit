@@ -415,6 +415,34 @@ describe ProblemsController do
         }.to change(Problem, :count).by(-1)
       end
     end
+
+    describe "POST /apps/:app_id/problems/destroy_all" do
+      before do
+        sign_in Fabricate(:admin)
+        @app      = Fabricate(:app)
+        @problem1 = Fabricate(:problem, :app=>@app)
+        @problem2 = Fabricate(:problem, :app=>@app)
+      end
+
+      it "destroys all problems" do
+        expect {
+          post :destroy_all, :app_id => @app.id
+        }.to change(Problem, :count).by(-2)
+        expect(controller.app).to eq @app
+      end
+
+      it "should display a message" do
+        put :destroy_all, :app_id => @app.id
+        expect(request.flash[:success]).to match(/been deleted/)
+      end
+
+      it "should redirect back to the app page" do
+        request.env["Referer"] = edit_app_path(@app)
+        put :destroy_all, :app_id => @app.id
+        expect(response).to redirect_to(edit_app_path(@app))
+      end
+    end
+
   end
 
 end

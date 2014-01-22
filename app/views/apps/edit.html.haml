@@ -1,6 +1,8 @@
 - content_for :title, 'Edit App'
 - content_for :action_bar do
   = link_to_copy_attributes_from_other_app
+  = link_to 'delete all errs', destroy_all_app_problems_path(app), :method => :post,
+    :data => { :confirm => t('apps.confirm_destroy_all_problems') }, :class => 'button'
   = link_to 'delete application', app_path(app), :method => :delete,
     :data => { :confirm => t('apps.confirm_delete') }, :class => 'button'
   = link_to('cancel', app_path(app), :class => 'button')

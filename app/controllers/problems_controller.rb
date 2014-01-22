@@ -124,6 +124,14 @@ class ProblemsController < ApplicationController
     redirect_to :back
   end
 
+  def destroy_all
+    nb_problem_destroy = ProblemDestroy.execute(app.problems)
+    flash[:success] = "#{I18n.t(:n_errs_have, :count => nb_problem_destroy)} been deleted."
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to app_path(app)
+  end
+
   def search
     ps = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
     selected_problems = params[:problems] || []
