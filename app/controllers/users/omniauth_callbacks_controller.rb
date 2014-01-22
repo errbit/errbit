@@ -30,6 +30,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def gds
     auth = env["omniauth.auth"]
     if user = User.find_for_gds_oauth(auth)
+      user.clear_remotely_signed_out!
       flash[:success] = I18n.t "devise.omniauth_callbacks.success", :kind => "GDS Signon"
       sign_in_and_redirect user, :event => :authentication
     else

@@ -38,6 +38,7 @@ class User
 
   ### GDS SSO
   field :uid, :type => String
+  field :remotely_signed_out, :type => Boolean, :default => false
 
   before_save :ensure_authentication_token
 
@@ -90,6 +91,18 @@ class User
 
   def self.token_authentication_key
     :auth_token
+  end
+
+  def active_for_authentication?
+    super && ! remotely_signed_out
+  end
+
+  def set_remotely_signed_out!
+    self.update_attribute(:remotely_signed_out, true) unless self.remotely_signed_out
+  end
+
+  def clear_remotely_signed_out!
+    self.update_attribute(:remotely_signed_out, false) if self.remotely_signed_out
   end
 
   def self.find_for_gds_oauth(auth_hash)

@@ -1,6 +1,6 @@
 require 'acceptance/acceptance_helper'
 
-feature 'Sign in with GDS SSO' do
+feature 'Authentication with GDS SSO' do
 
   context "no existing local user" do
     scenario 'logging in as a user with signin permission' do
@@ -73,6 +73,42 @@ feature 'Sign in with GDS SSO' do
 
       # shouldn't actually delete the user...
       expect(User.find(@user.id)).to be
+    end
+  end
+
+  context "respecting the remotely_signed_out flag" do
+    before :each do
+      @user = Fabricate(:user, :uid => '123456')
+    end
+
+    scenario "forcing the user to re-auth against signon when remotely_signed_out is set" do
+      log_in(@user)
+      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
+
+      @user.set_remotely_signed_out!
+
+      # We have to assert we are redirected to the sign_in page.
+      # If we just allowed following redirects, it would just do the sign_in dance again against the mock omniauth
+      # and leave us back on the homepage logged_in
+      page.driver.options[:follow_redirects] = false
+      visit "/"
+      expect(page.status_code).to eq(302)
+      expect(page.response_headers["Location"]).to eq("http://www.example.com/users/sign_in")
+    end
+
+    scenario "remotely_signed_out user logs in through SSO" do
+      @user.set_remotely_signed_out!
+      mock_gds_sso_auth(@user.uid)
+
+      visit "/"
+      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
+
+      @user.reload
+      expect(@user).not_to be_remotely_signed_out
+    end
+
+    after :each do
+      page.driver.options[:follow_redirects] = true
     end
   end
 end

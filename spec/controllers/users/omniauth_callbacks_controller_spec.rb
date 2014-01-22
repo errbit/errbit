@@ -57,7 +57,7 @@ describe Users::OmniauthCallbacksController do
 
     context "with a valid user" do
       before :each do
-        @mock_user = mock_model(User)
+        @mock_user = mock_model(User, :clear_remotely_signed_out! => nil)
         User.stub(:find_for_gds_oauth).and_return(@mock_user)
 
         @controller.stub(:sign_in_and_redirect)
@@ -66,6 +66,11 @@ describe Users::OmniauthCallbacksController do
 
       it "should create/update a user from the details" do
         User.should_receive(:find_for_gds_oauth).with(@stub_omniauth_hash).and_return(@mock_user)
+        get :gds
+      end
+
+      it "should clear remotely_signed_out flag on the user" do
+        @mock_user.should_receive(:clear_remotely_signed_out!)
         get :gds
       end
 
