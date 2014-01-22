@@ -9,7 +9,7 @@ feature 'Sign in with GDS SSO' do
   context "no existing local user" do
     scenario 'logging in as a user with signin permission' do
       mock_gds_sso_auth('1234')
-      visit '/users/auth/gds'
+      visit '/'
 
       expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
 
@@ -22,7 +22,7 @@ feature 'Sign in with GDS SSO' do
 
     scenario 'logging in as a signon with admin permission sets local admin flag' do
       mock_gds_sso_auth('1234', :permissions => %w(signin admin))
-      visit '/users/auth/gds'
+      visit '/'
 
       expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
 
@@ -33,7 +33,7 @@ feature 'Sign in with GDS SSO' do
 
     scenario 'attempting to log in as a user without signin permission' do
       mock_gds_sso_auth('1234', :permissions => [])
-      visit '/users/auth/gds'
+      visit '/'
 
       expect(page).to have_content(I18n.t("devise.omniauth_callbacks.failure", :kind => 'GDS Signon', :reason => "Computer says no"))
 
