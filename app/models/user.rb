@@ -39,6 +39,7 @@ class User
   ### GDS SSO
   field :uid, :type => String
   field :remotely_signed_out, :type => Boolean, :default => false
+  index :uid => 1
 
   before_save :ensure_authentication_token
 
