@@ -8,16 +8,8 @@
 # to place production specific settings there
 # You will need to restart the server after changing any settings.
 
-# The host of your errbit server
-host: errbit.dev.gov.uk
+# Host and protocol are set from Plek by the _load_config_overrides initializer
 
-# The port for your errbit server.
-# Only set this if it isn't the default for the protocol (i.e.. 80 for HTTP, 443 for HTTPS)
-# port: 8080
-
-# The protocol for your errbit server.
-# Only set if not running default HTTP
-# protocol: https
 
 # Enforce SSL connections
 enforce_ssl: false
