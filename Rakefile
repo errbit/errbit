@@ -14,7 +14,7 @@ namespace :spec do
   task :prepare do
     tmp_env = Rails.env
     Rails.env = "test"
-    %w( errbit:bootstrap ).each do |task|
+    %w( db:drop db:mongoid:create_indexes ).each do |task|
       Rake::Task[task].invoke
     end
     Rails.env = tmp_env
