@@ -58,5 +58,6 @@ Errbit::Application.routes.draw do
 
   root :to => 'apps#index'
 
+  get "/healthcheck", :to => proc {|env| [200, {}, ["OK"]] }
 end
 
