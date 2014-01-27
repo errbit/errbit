@@ -72,12 +72,15 @@ gem 'flowdock'
 # GitHub OAuth
 gem 'omniauth-github'
 
-#### End GDS additions ####
+#### GDS additions ####
 # GDS Signon
 gem 'omniauth-gds', '3.0.0'
 gem 'plek', '1.7.0'
 
 gem 'aws-ses'
+
+# Use our branch until https://github.com/shadabahmed/logstasher/pull/20 is merged
+gem 'logstasher', :git => "https://github.com/alphagov/logstasher", :branch => "disable_parameter_logging"
 #### End GDS additions ####
 
 gem 'ri_cal'
