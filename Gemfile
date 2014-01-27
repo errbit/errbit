@@ -77,7 +77,7 @@ gem 'omniauth-github'
 gem 'omniauth-gds', '3.0.0'
 gem 'plek', '1.7.0'
 
-gem 'aws-ses', :require => "aws/ses"
+gem 'aws-ses'
 #### End GDS additions ####
 
 gem 'ri_cal'
