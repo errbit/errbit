@@ -72,9 +72,13 @@ gem 'flowdock'
 # GitHub OAuth
 gem 'omniauth-github'
 
+#### End GDS additions ####
 # GDS Signon
 gem 'omniauth-gds', '3.0.0'
 gem 'plek', '1.7.0'
+
+gem 'aws-ses'
+#### End GDS additions ####
 
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
