@@ -3,16 +3,16 @@
 
 <% notification_services.each do |notification_service| %>
 div.notification_service.nested label.<%= notification_service %> {
-  background: url(<%= notification_service %>_inactive.png) no-repeat;
+  background: url(<%= asset_path "#{ notification_service }_inactive.png" %>) no-repeat;
 }
 div.notification_service.nested label.r_on.<%= notification_service %> {
-  background: url(<%= notification_service %>_create.png) no-repeat;
+  background: url(<%= asset_path "#{ notification_service }_create.png" %>) no-repeat;
 }
 #action-bar a.<%= notification_service %>_create {
-  background: transparent url(<%= notification_service %>_create.png) 6px 5px no-repeat;
+  background: transparent url(<%= asset_path "#{ notification_service }_create.png" %>) 6px 5px no-repeat;
 }
 #action-bar a.<%= notification_service %>_goto {
-  background: transparent url(<%= notification_service %>_goto.png) 6px 5px no-repeat;
+  background: transparent url(<%= asset_path "#{ notification_service }_goto.png" %>) 6px 5px no-repeat;
 }
 <% end %>
 
