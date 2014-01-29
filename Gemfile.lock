@@ -73,12 +73,25 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    capybara (2.2.1)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     coderay (1.1.0)
     columnize (0.3.6)
+    coveralls (0.7.0)
+      multi_json (~> 1.3)
+      rest-client
+      simplecov (>= 0.7)
+      term-ansicolor
+      thor
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
     css_parser (1.3.5)
       addressable
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     debugger (1.6.5)
       columnize (>= 0.3.1)
@@ -95,7 +108,11 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.2)
     dotenv (0.9.0)
+    email_spec (1.5.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.6)
@@ -145,6 +162,8 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.1)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     libv8 (3.16.14.3)
     libxml-ruby (2.7.0)
     lighthouse-api (2.0)
@@ -167,6 +186,10 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.29)
+    mongoid-rspec (1.10.0)
+      mongoid (>= 3.0.1)
+      rake
+      rspec (>= 2.14)
     mongoid_rails_migrations (1.0.1)
       activesupport (>= 3.2.0)
       bundler (>= 1.0.0)
@@ -219,11 +242,13 @@ GEM
       activeresource (>= 2.3.0)
     pivotal-tracker (0.5.12)
       builder
+      builder
       crack
       happymapper (>= 0.3.2)
       nokogiri (>= 1.4.3)
       nokogiri (>= 1.5.5)
       nokogiri-happymapper (>= 0.5.4)
+      rest-client (~> 1.6.0)
       rest-client (~> 1.6.0)
     pjax_rails (0.4.0)
       jquery-rails
@@ -278,6 +303,10 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ri_cal (0.8.8)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
     rspec-core (2.14.7)
     rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -302,6 +331,11 @@ GEM
       rest-client
     safe_yaml (0.9.7)
     simple_oauth (0.2.0)
+    simplecov (0.8.2)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     slop (3.4.7)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -313,6 +347,8 @@ GEM
       activemodel (~> 3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -320,6 +356,8 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timecop (0.7.1)
+    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -342,6 +380,8 @@ GEM
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
     xmpp4r (0.5.5)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     yajl-ruby (1.2.0)
 
 PLATFORMS
@@ -357,9 +397,13 @@ DEPENDENCIES
   bitbucket_rest_api
   campy
   capistrano (~> 2.0)
+  capybara
+  coveralls
+  database_cleaner
   debugger
   decent_exposure
   devise
+  email_spec
   execjs
   fabrication
   flowdock
@@ -375,9 +419,11 @@ DEPENDENCIES
   jira-ruby
   jquery-rails (~> 2.1.4)
   kaminari (>= 0.14.1)
+  launchy
   lighthouse-api
   meta_request
   mongoid
+  mongoid-rspec
   mongoid_rails_migrations
   octokit (~> 1.18)
   omniauth-github
@@ -398,6 +444,7 @@ DEPENDENCIES
   rushover
   strong_parameters
   therubyracer
+  timecop
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   underscore-rails
