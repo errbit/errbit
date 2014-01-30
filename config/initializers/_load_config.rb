@@ -54,7 +54,7 @@ unless defined?(Errbit::Config)
   # Set default devise modules
   Errbit::Config.devise_modules = [:database_authenticatable,
                                    :recoverable, :rememberable, :trackable,
-                                   :validatable, :omniauthable]
+                                   :validatable, :omniauthable, :timeoutable]
 
   # Set the hostname automatically
   unless Rails.env.test?
