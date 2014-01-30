@@ -17,6 +17,7 @@ class IssueTracker
   field :ticket_properties, :type => String
   field :subdomain, :type => String
   field :milestone_id, :type => String
+  field :tracker_id, :type => String
 
   # Is there any better way to enhance the props? Putting them into the subclass leads to
   # an error while rendering the form fields -.-

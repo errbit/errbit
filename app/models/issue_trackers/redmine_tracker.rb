@@ -23,12 +23,21 @@ if defined? RedmineClient
         :optional    => true,
         :label       => "App Project",
         :placeholder => "Where app's files & revisions can be viewed. (Leave blank to use the above project by default)"
+      }],
+      [:tracker_id, {
+       :optional     => true,
+       :label        => "Issue Tracker Id",
+       :placeholder  => "The tracker where tickets will be created. (Leave blank to use default)"
       }]
     ]
 
     def check_params
       if Fields.detect {|f| self[f[0]].blank? && !f[1][:optional]}
         errors.add :base, 'You must specify your Redmine URL, API token, Username, Password and Project ID'
+      end
+
+      if Fields.detect {|f| f[0] == :tracker_id && !self[f[0]].blank? && !/[0-9]/.match(self[f[0]].to_s)}
+        errors.add :base, 'Issue Tracker Id must be a number'
       end
     end
 
@@ -47,6 +56,7 @@ if defined? RedmineClient
       issue = RedmineClient::Issue.new(:project_id => project_id)
       issue.subject = issue_title problem
       issue.description = body_template.result(binding)
+      issue.tracker_id = tracker_id if tracker_id.present?
       issue.save!
       problem.update_attributes(
         :issue_link => "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}"),
