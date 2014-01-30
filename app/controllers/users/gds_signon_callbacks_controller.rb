@@ -3,6 +3,12 @@ class Users::GDSSignonCallbacksController < ApplicationController
   skip_before_filter :authenticate_user!
   before_filter :authenticate_api_user!
 
+  def update
+    oauth_hash = GDSBearerToken.omniauth_style_response(request.body)
+    User.find_for_gds_oauth(oauth_hash)
+    head :ok
+  end
+
   def reauth
     user = User.where(:uid => params[:uid]).first
     user.set_remotely_signed_out! if user
