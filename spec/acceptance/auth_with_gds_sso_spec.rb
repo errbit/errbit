@@ -76,6 +76,21 @@ feature 'Authentication with GDS SSO' do
     end
   end
 
+  context "session timeout" do
+    it "should timeout the session after 30 mins inactivity" do
+      mock_gds_sso_auth('1234')
+
+      visit '/'
+      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
+
+      Timecop.travel(32.minutes.from_now)
+
+      visit '/problems'
+      # The flash message indicates we've done the oauth dance again
+      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
+    end
+  end
+
   context "respecting the remotely_signed_out flag" do
     before :each do
       @user = Fabricate(:user, :uid => '123456')
