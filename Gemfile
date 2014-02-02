@@ -71,7 +71,7 @@ gem 'flowdock'
 # ---------------------------------------
 # GitHub OAuth
 gem 'omniauth-github'
-gem 'github_api', :git => "https://github.com/cih/github.git" # peter-murach's version doesn't work with faraday >= 0.9
+gem 'github_api', '~> 0.11.2'
 
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
