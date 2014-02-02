@@ -71,7 +71,6 @@ gem 'flowdock'
 # ---------------------------------------
 # GitHub OAuth
 gem 'omniauth-github'
-gem 'github_api', '~> 0.11.2'
 
 gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
