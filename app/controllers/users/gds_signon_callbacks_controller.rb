@@ -1,4 +1,4 @@
-class Users::GDSSignonCallbacksController < ApplicationController
+class Users::GdsSignonCallbacksController < ApplicationController
 
   skip_before_filter :authenticate_user!
   before_filter :authenticate_api_user!
