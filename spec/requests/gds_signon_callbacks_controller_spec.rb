@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Users::GDSSignonCallbacksController do
-  describe "PUT update" do
+describe "GDS Signon callbacks" do
+  describe "User update" do
     before :each do
       @user = Fabricate(:user, :uid => "5678", :name => "Original Name", :email => "original@example.com")
     end
@@ -13,10 +13,7 @@ describe Users::GDSSignonCallbacksController do
 
       it "should update the target user's details" do
         post_details = signon_user_hash(:uid => "5678", :name => "Updated Name", :email => "updated@example.com", :perms => ["signin", "editor"])
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        request.env['CONTENT_TYPE'] = 'application/json'
-        request.env["RAW_POST_DATA"] = post_details.to_json
-        put :update, :uid => "5678"
+        put "/auth/gds/api/users/5678", post_details.to_json, {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(200)
         @user.reload
@@ -26,21 +23,16 @@ describe Users::GDSSignonCallbacksController do
       end
 
       it "should respond with success for a non-existent user" do
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        request.env['CONTENT_TYPE'] = 'application/json'
-        request.env["RAW_POST_DATA"] = signon_user_hash(:uid => "321").to_json
-        put :update, :uid => "321"
+        put "/auth/gds/api/users/321", signon_user_hash(:uid => "321").to_json, {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(200)
       end
     end
 
-    context "without an authorised user" do
+    context "without an authorisation user" do
 
       it "should be unauthorised with no bearer token" do
-        request.env['CONTENT_TYPE'] = 'application/json'
-        request.env["RAW_POST_DATA"] = signon_user_hash(:uid => "5678").to_json
-        put :update, :uid => "5678"
+        put "/auth/gds/api/users/5678", signon_user_hash(:uid => "5678").to_json, {'CONTENT_TYPE' => 'application/json'}
 
         expect(response.code.to_i).to eq(401)
         @user.reload
@@ -50,10 +42,7 @@ describe Users::GDSSignonCallbacksController do
       it "should be unauthorised with an invalid bearer token" do
         stub_signon_invalid_token("12345678")
 
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        request.env['CONTENT_TYPE'] = 'application/json'
-        request.env["RAW_POST_DATA"] = signon_user_hash(:uid => "5678").to_json
-        put :update, :uid => "5678"
+        put "/auth/gds/api/users/5678", signon_user_hash(:uid => "5678").to_json, {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(401)
         @user.reload
@@ -63,10 +52,7 @@ describe Users::GDSSignonCallbacksController do
       it "should be unauthorised for a user without the 'user_update_permission' permission" do
         stub_signon_user("12345678", %w(signin))
 
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        request.env['CONTENT_TYPE'] = 'application/json'
-        request.env["RAW_POST_DATA"] = signon_user_hash(:uid => "5678").to_json
-        put :update, :uid => "5678"
+        put "/auth/gds/api/users/5678", signon_user_hash(:uid => "5678").to_json, {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(401)
         @user.reload
@@ -75,7 +61,7 @@ describe Users::GDSSignonCallbacksController do
     end
   end
 
-  describe "POST reauth" do
+  describe "User reauth" do
     before :each do
       @user = Fabricate(:user, :uid => "5678")
     end
@@ -86,8 +72,7 @@ describe Users::GDSSignonCallbacksController do
       end
 
       it "should set remotely_signed_out on the target user" do
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        post :reauth, :uid => "5678"
+        post "/auth/gds/api/users/5678/reauth", "{}", {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(200)
         @user.reload
@@ -95,8 +80,7 @@ describe Users::GDSSignonCallbacksController do
       end
 
       it "should respond with success for a non-existent user" do
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        post :reauth, :uid => "1234"
+        post "/auth/gds/api/users/1234/reauth", "{}", {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(200)
 
@@ -108,7 +92,7 @@ describe Users::GDSSignonCallbacksController do
     context "without an authorised user" do
 
       it "should be unauthorised with no bearer token" do
-        post :reauth, :uid => "5678"
+        post "/auth/gds/api/users/5678/reauth", "{}", {'CONTENT_TYPE' => 'application/json'}
 
         expect(response.code.to_i).to eq(401)
         @user.reload
@@ -118,8 +102,7 @@ describe Users::GDSSignonCallbacksController do
       it "should be unauthorised with an invalid bearer token" do
         stub_signon_invalid_token("12345678")
 
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        post :reauth, :uid => "5678"
+        post "/auth/gds/api/users/5678/reauth", "{}", {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(401)
         @user.reload
@@ -129,8 +112,7 @@ describe Users::GDSSignonCallbacksController do
       it "should be unauthorised for a user without the 'user_update_permission' permission" do
         stub_signon_user("12345678", %w(signin))
 
-        request.env["HTTP_AUTHORIZATION"] = "Bearer 12345678"
-        post :reauth, :uid => "5678"
+        post "/auth/gds/api/users/5678/reauth", "{}", {'CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer 12345678"}
 
         expect(response.code.to_i).to eq(401)
         @user.reload
