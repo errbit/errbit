@@ -299,6 +299,13 @@ heroku config:add GITHUB_SECRET=the_secret_provided_by_GitHub
 heroku config:add GITHUB_ACCESS_SCOPE=repo,public_repo
 ```
 
+* GITHUB_ORG_ID [*optional*] - If set, any user of the specified GitHub Organization can login.  If it is their first time, an account will automatically be created for them.
+
+```bash
+heroku config:add GITHUB_ORG_ID=1234567
+```
+
+
 __Note__: To avoid restarting your Heroku app 4 times you can set Heroku variables in a single command, i.e:
 
 ```bash
