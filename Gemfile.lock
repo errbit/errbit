@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/alphagov/logstasher
-  revision: 90203a7e06fbdcd9fa323723e4874bbce90b6254
-  branch: disable_parameter_logging
-  specs:
-    logstasher (0.4.1)
-      logstash-event (~> 1.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -172,6 +164,8 @@ GEM
     linecache (0.46)
       rbx-require-relative (> 0.0.4)
     logstash-event (1.1.5)
+    logstasher (0.4.8)
+      logstash-event (~> 1.1.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -420,7 +414,7 @@ DEPENDENCIES
   kaminari (>= 0.14.1)
   launchy
   lighthouse-api
-  logstasher!
+  logstasher (= 0.4.8)
   meta_request
   mongoid
   mongoid-rspec

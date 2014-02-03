@@ -80,8 +80,7 @@ gem 'warden-oauth2', '0.0.1'
 
 gem 'aws-ses'
 
-# Use our branch until https://github.com/shadabahmed/logstasher/pull/20 is merged
-gem 'logstasher', :git => "https://github.com/alphagov/logstasher", :branch => "disable_parameter_logging"
+gem 'logstasher', '0.4.8'
 #### End GDS additions ####
 
 gem 'ri_cal'
