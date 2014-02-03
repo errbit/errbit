@@ -103,13 +103,15 @@ describe User do
           expect(u.email).to eq('test@example.com')
         end
 
-        it "should set the admin flag" do
+        it "should set the admin flag and permissions" do
           u = User.find_for_gds_oauth(@oauth_hash)
           expect(u).not_to be_admin
+          expect(u.permissions).to eq(['signin'])
 
           @oauth_hash['extra']['user']['permissions'] = %w(signin admin)
           u = User.find_for_gds_oauth(@oauth_hash)
           expect(u).to be_admin
+          expect(u.permissions).to eq(['signin', 'admin'])
         end
 
         it "should return a falseish value if the user can't be created" do
@@ -132,15 +134,17 @@ describe User do
           expect(@user.email).to eq('test@example.com')
         end
 
-        it "should update the admin flag" do
+        it "should update the permissions and admin flag" do
           @user.update_attributes!(:admin => true)
 
           User.find_for_gds_oauth(@oauth_hash)
           expect(@user.reload).not_to be_admin
+          expect(@user.permissions).to eq(['signin'])
 
           @oauth_hash['extra']['user']['permissions'] = %w(signin admin)
           User.find_for_gds_oauth(@oauth_hash)
           expect(@user.reload).to be_admin
+          expect(@user.permissions).to eq(['signin', 'admin'])
         end
 
         it "should return falseish if the user can't be updated" do

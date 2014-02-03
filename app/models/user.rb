@@ -39,6 +39,7 @@ class User
   ### GDS SSO
   field :uid, :type => String
   field :remotely_signed_out, :type => Boolean, :default => false
+  field :permissions, :type => Array, :default => []
   index :uid => 1
 
   before_save :ensure_authentication_token
@@ -113,6 +114,7 @@ class User
     return false unless permissions.include?('signin')
 
     user = self.where(:uid => auth_hash['uid']).first_or_initialize
+    user.permissions = permissions
     user.admin = permissions.include?("admin")
     user.name = auth_hash['info']['name']
     user.email = auth_hash['info']['email']

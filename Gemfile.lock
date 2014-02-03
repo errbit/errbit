@@ -372,6 +372,8 @@ GEM
     useragent (0.8.3)
     warden (1.2.3)
       rack (>= 1.0)
+    warden-oauth2 (0.0.1)
+      warden
     webmock (1.15.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
@@ -450,6 +452,7 @@ DEPENDENCIES
   underscore-rails
   unicorn
   useragent
+  warden-oauth2 (= 0.0.1)
   webmock
   xmpp4r
   yajl-ruby

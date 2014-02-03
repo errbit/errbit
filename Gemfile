@@ -76,6 +76,7 @@ gem 'omniauth-github'
 # GDS Signon
 gem 'omniauth-gds', '3.0.0'
 gem 'plek', '1.7.0'
+gem 'warden-oauth2', '0.0.1'
 
 gem 'aws-ses'
 
