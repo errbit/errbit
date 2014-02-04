@@ -83,7 +83,7 @@ feature 'Authentication with GDS SSO' do
       visit '/'
       expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", :kind => 'GDS Signon'))
 
-      Timecop.travel(32.minutes.from_now)
+      Timecop.travel((8.hours + 2.minutes).from_now)
 
       visit '/problems'
       # The flash message indicates we've done the oauth dance again
