@@ -99,7 +99,7 @@ class App
   end
 
   def github_url
-    "https://github.com/#{github_repo}" if github_repo?
+    "#{Errbit::Config.github_url}/#{github_repo}" if github_repo?
   end
 
   def github_url_to_file(file)
@@ -196,8 +196,10 @@ class App
 
     def normalize_github_repo
       return if github_repo.blank?
+      github_host = URI.parse(Errbit::Config.github_url).host
+      github_host = Regexp.escape(github_host)
       github_repo.strip!
-      github_repo.sub!(/(git@|https?:\/\/)github\.com(\/|:)/, '')
+      github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
       github_repo.sub!(/\.git$/, '')
     end
 end
