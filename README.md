@@ -234,6 +234,44 @@ heroku config:add SECRET_TOKEN=some-secret-token
 
   * Enjoy!
 
+**Deploying to OpenShift:**
+
+  * Install rhc gem
+
+```bash
+gem install rhc
+```
+
+  * Create App in OpenShift
+
+```bash
+rhc app create [app_name] ruby-1.9 mongodb-2.2
+```
+
+  * Add this upstream Errbit repository
+
+```bash
+cd app_name
+git remote add upstream -m master git@github.com:parallel588/errbit.git
+git pull -s recursive -X theirs upstream master
+```
+
+  * Push your new code
+
+```bash
+git push
+```
+
+ * Seed the DB (_NOTE_: No bootstrap task is used on OpeShift!) and
+    create index
+
+```bash
+rhc ssh [app_name] 'cd $OPENSHIFT_REPO_DIR; bundle exec rake db:seed RAILS_ENV=${RAILS_ENV:-production}'
+rhc ssh [app_name] 'cd $OPENSHIFT_REPO_DIR; bundle exec rake db:mongoid:create_indexes RAILS_ENV=${RAILS_ENV:-production}'
+```
+
+  * That's it! Enjoy!
+
 
 Authentication
 --------------
@@ -600,4 +638,3 @@ Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/errbit/errbit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
