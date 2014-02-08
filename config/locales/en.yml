@@ -35,13 +35,13 @@ en:
       flash:
         create:
           success: "Your app was successfully created."
-          error:  "You app was successfully destroyed."
+          error:  "Your app could not be created."
         update:
-          success: "You app was successfully updated."
-          error: "You app was not updated"
+          success: "Your app was successfully updated."
+          error: "Your app could not be updated."
         destroy:
-          success: "You app was successfully destroyed."
-          error: "You app could not be destroyed."
+          success: "Your app was successfully destroyed."
+          error: "Your app could not be destroyed."
 
     users:
       flash:
