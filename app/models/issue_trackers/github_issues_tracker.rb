@@ -41,7 +41,7 @@ if defined? Octokit
           body_template.result(binding).unpack('C*').pack('U*')
         )
         problem.update_attributes(
-          :issue_link => issue.html_url,
+          :issue_link => issue.rels[:html].href,
           :issue_type => Label
         )
 
