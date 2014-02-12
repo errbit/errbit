@@ -30,8 +30,11 @@ function activateAdvancedSearchAPI() {
 
   $form.submit(function(){
       var _a      = document.createElement('a'),
-          search = $filledInputs.serialize();
-        if (history && history.pushState) {
+          $form         = $('#advanced-search'),
+          $inputs       = $form.find(':text'),
+          $filledInputs = $inputs.filter('[value!=""]');
+      search = $filledInputs.serialize();
+      if (history && history.pushState) {
           _a.href = window.location;
           _a.search = (_a.search.length ? '&' : '?') + search;
 
