@@ -46,6 +46,7 @@ class ProblemUpdaterCache
       :where       => notice.where,
       :messages    => attribute_count(:message, messages),
       :hosts       => attribute_count(:host, hosts),
+      :servers     => append_app_servers(:environment_host, servers),
       :user_agents => attribute_count(:user_agent_string, user_agents)
     ) if notice
     problem.update_attributes!(attrs)
@@ -67,6 +68,10 @@ class ProblemUpdaterCache
     @notice ? problem.user_agents : {}
   end
 
+  def servers
+    @notice ? problem.servers : {}
+  end
+
   private
 
     def attribute_count(value, init)
@@ -84,5 +89,15 @@ class ProblemUpdaterCache
     def attribute_index(value)
       @attributes_index ||= {}
       @attributes_index[value.to_s] ||= Digest::MD5.hexdigest(value.to_s)
+    end
+
+    def append_app_servers(value, init)
+      init.tap do |counts|
+        notices.each do |notice|
+          if (!counts.include?(notice.send(value))) then
+            counts << notice.send(value)
+          end
+          end
+      end
     end
 end
