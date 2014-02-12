@@ -14,7 +14,7 @@
 %br
 %h3.clear="Advanced search"
 %section
-  = form_tag advanced_search_problems_path(:all_errs => all_errs), :method => :get, :remote => true, :id => "advanced-search" do
+  = form_tag advanced_search_problems_path(:all_errs => @all_errs), :method => :get, :remote => true, :id => "advanced-search" do
     =text_field_tag :env, params[:env], :placeholder => "Environment"
     =text_field_tag :host, params[:host], :placeholder => "Host"
     =text_field_tag :query, params[:query], :placeholder => "Search for issues"
