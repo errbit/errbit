@@ -69,7 +69,7 @@ class ProblemUpdaterCache
   end
 
   def servers
-    @notice ? problem.servers : {}
+    @notice ? problem.servers : []
   end
 
   private

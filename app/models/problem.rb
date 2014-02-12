@@ -143,8 +143,7 @@ class Problem
     update_attributes!(
       :messages    => attribute_count_descrease(:messages, notice.message),
       :hosts       => attribute_count_descrease(:hosts, notice.host),
-      :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string),
-      :servers => attribute_count_descrease(:servers, notice.environment_host)
+      :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string)
     )
   end
 
