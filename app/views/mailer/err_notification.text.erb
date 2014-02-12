@@ -18,6 +18,11 @@ WHERE:
   <%= line %>
 <% end %>
 
+<%- if @notice.app_version.present? %>
+APP VERSION:
+
+<%= @notice.app_version %>
+<%- end %>
 
 URL:
 

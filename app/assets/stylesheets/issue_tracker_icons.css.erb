@@ -3,16 +3,16 @@
 
 <% trackers.each do |tracker| %>
 div.issue_tracker.nested label.<%= tracker %> {
-  background: url(<%= tracker %>_inactive.png) no-repeat;
+  background: url(<%= asset_path "#{ tracker }_inactive.png" %>) no-repeat;
 }
 div.issue_tracker.nested label.r_on.<%= tracker %> {
-  background: url(<%= tracker %>_create.png) no-repeat;
+  background: url(<%= asset_path "#{ tracker }_create.png" %>) no-repeat;
 }
 #action-bar a.<%= tracker %>_create {
-   background: transparent url(<%= tracker %>_create.png) 6px 5px no-repeat;
+  background: transparent url(<%= asset_path "#{ tracker }_create.png" %>) 6px 5px no-repeat;
 }
 #action-bar a.<%= tracker %>_goto {
-  background: transparent url(<%= tracker %>_goto.png) 6px 5px no-repeat;
+  background: transparent url(<%= asset_path "#{ tracker }_goto.png" %>) 6px 5px no-repeat;
 }
 <% end %>
 

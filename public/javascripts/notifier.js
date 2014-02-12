@@ -514,6 +514,7 @@ printStackTrace.implementation.prototype = {
             '<server-environment>' +
                 '<project-root>{project_root}</project-root>' +
                 '<environment-name>{environment}</environment-name>' +
+                '<app-version>{appVersion}</app-version>' +
             '</server-environment>' +
             '<current-user>' +
                 '<id>{user_id}</id>' +
@@ -551,14 +552,15 @@ printStackTrace.implementation.prototype = {
 				"url": "{request_url}",
                 "rootDirectory": "{project_root}",
                 "action": "{request_action}",
+                "app-version": "{appVersion}",
 
-				"userId": "{user_id}",
-				"userName": "{user_name}",
-				"userEmail": "{user_email}",
+                "userId": "{user_id}",
+                "userName": "{user_name}",
+                "userEmail": "{user_email}"
             },
             "environment": {},
 			//"session": "",
-			"params": {},
+			"params": {}
         };
 
     Util = {
@@ -859,6 +861,9 @@ printStackTrace.implementation.prototype = {
                     stack: e.stack
                 });
             })
+        }, {
+            variable: 'appVersion',
+            namespace: 'xmlData'
         }
     ];
 
@@ -1026,9 +1031,10 @@ printStackTrace.implementation.prototype = {
                     } ()),
                     
                     project_root: this.ROOT,
-                    exception_class: (error.type || 'Error'),
-                    exception_message: (error.message || 'Unknown error.'),
-                    backtrace_lines: this.generateBacktrace(error)
+                    exception_class: (error.type || errorWithoutDefaults.type ||
+                                        (errorWithoutDefaults.constructor.name != "Object" ? errorWithoutDefaults.constructor.name : 'Error')),
+                    exception_message: (error.message || errorWithoutDefaults.message || 'Unknown error.'),
+                    backtrace_lines: this.generateBacktrace(errorWithoutDefaults)
                 }
                 
                 outputData = Util.merge(outputData, _outputData);
@@ -1165,12 +1171,11 @@ printStackTrace.implementation.prototype = {
         }
     };
 
-    window.onerror = function (message, file, line) {
+    window.onerror = function (message, file, line, code, error) {
         setTimeout(function () {
-            new Notifier().notify({
-                message: message,
-                stack: '()@' + file + ':' + line
-            });
+            var e = error || {stack: '()@' + file + ':' + line}
+            e.message = message
+            new Notifier().notify(e);
         }, 0);
 
         return true;

@@ -16,12 +16,12 @@ describe IssueTrackers::LighthouseTracker do
     problem.reload
 
     requested = have_requested(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml")
-    WebMock.should requested.with(:headers => {'X-Lighthousetoken' => tracker.api_token})
-    WebMock.should requested.with(:body => /<tag>errbit<\/tag>/)
-    WebMock.should requested.with(:body => /<title>\[#{ problem.environment }\]\[#{problem.where}\] #{problem.message.to_s.truncate(100)}<\/title>/)
-    WebMock.should requested.with(:body => /<body>.+<\/body>/m)
+    expect(WebMock).to requested.with(:headers => {'X-Lighthousetoken' => tracker.api_token})
+    expect(WebMock).to requested.with(:body => /<tag>errbit<\/tag>/)
+    expect(WebMock).to requested.with(:body => /<title>\[#{ problem.environment }\]\[#{problem.where}\] #{problem.message.to_s.truncate(100)}<\/title>/)
+    expect(WebMock).to requested.with(:body => /<body>.+<\/body>/m)
 
-    problem.issue_link.should == @issue_link.sub(/\.xml$/, '')
+    expect(problem.issue_link).to eq @issue_link.sub(/\.xml$/, '')
   end
 end
 

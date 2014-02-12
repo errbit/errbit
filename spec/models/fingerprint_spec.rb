@@ -44,7 +44,7 @@ describe Fingerprint do
       end
 
       its 'fingerprints should be equal' do
-        Fingerprint.generate(notice1, 'api key').should eq Fingerprint.generate(notice2, 'api key')
+        expect(Fingerprint.generate(notice1, 'api key')).to eq Fingerprint.generate(notice2, 'api key')
       end
     end
 
@@ -57,7 +57,7 @@ describe Fingerprint do
       end
 
       its 'fingerprints should not be equal' do
-        Fingerprint.generate(notice1, 'api key').should_not eq Fingerprint.generate(notice2, 'api key')
+        expect(Fingerprint.generate(notice1, 'api key')).to_not eq Fingerprint.generate(notice2, 'api key')
       end
     end
   end

@@ -2,6 +2,9 @@
 - content_for :head do
   = auto_discovery_link_tag :atom, app_path(app, User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => t('.atom_title', :name => app.name, :host => request.host)
 - content_for :meta do
+  - if app.current_app_version.present?
+    %strong="Latest App Version:"
+    = app.current_app_version
   %strong=t('.errors_caught')
   = app.problems.count
   %strong=t('.deploy_count')

@@ -14,7 +14,7 @@ describe "apps/edit.html.haml" do
 
     it "should confirm the 'destroy' link" do
       render
-      action_bar.should have_selector('a.button[data-confirm="%s"]' % I18n.t('apps.confirm_delete'))
+      expect(action_bar).to have_selector('a.button[data-confirm="%s"]' % I18n.t('apps.confirm_delete'))
     end
 
   end
@@ -28,7 +28,7 @@ describe "apps/edit.html.haml" do
 
     it 'see the error' do
       render
-      rendered.should match(/You must specify your/)
+      expect(rendered).to match(/You must specify your/)
     end
   end
 

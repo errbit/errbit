@@ -12,7 +12,7 @@ feature 'Sign in with GitHub' do
 
     visit '/'
     click_link 'Sign in with GitHub'
-    page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => 'GitHub')
+    expect(page).to have_content I18n.t("devise.omniauth_callbacks.success", :kind => 'GitHub')
   end
 
   scenario 'reject unrecognized user if authenticating via GitHub' do
@@ -20,6 +20,6 @@ feature 'Sign in with GitHub' do
 
     visit '/'
     click_link 'Sign in with GitHub'
-    page.should have_content 'There are no authorized users with GitHub login'
+    expect(page).to have_content 'There are no authorized users with GitHub login'
   end
 end

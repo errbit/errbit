@@ -8,7 +8,7 @@ describe "Callback on Comment" do
       before { comment.stub(:emailable?).and_return(true) }
 
       it 'should send an email notification' do
-        Mailer.should_receive(:comment_notification).
+        expect(Mailer).to receive(:comment_notification).
           with(comment).
           and_return(double('email', :deliver => true))
         comment.save
@@ -19,7 +19,7 @@ describe "Callback on Comment" do
       before { comment.stub(:emailable?).and_return(false) }
 
       it 'should not send an email notification' do
-        Mailer.should_not_receive(:comment_notification)
+        expect(Mailer).to_not receive(:comment_notification)
         comment.save
       end
     end

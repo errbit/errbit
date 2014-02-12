@@ -11,6 +11,14 @@
 # The host of your errbit server
 host: errbit.example.com
 
+# The port for your errbit server.
+# Only set this if it isn't the default for the protocol (i.e.. 80 for HTTP, 443 for HTTPS)
+# port: 8080
+
+# The protocol for your errbit server.
+# Only set if not running default HTTP
+# protocol: https
+
 # Enforce SSL connections
 enforce_ssl: false
 
@@ -65,7 +73,7 @@ deployment:
     web: errbit.example.com
     app: errbit.example.com
     db: errbit.example.com
-  repository: http://github.com/errbit/errbit.git
+  repository: https://github.com/errbit/errbit.git
   branch: master
   user: deploy
   deploy_to: /var/www/apps/errbit
@@ -89,6 +97,10 @@ github_secret: 'GITHUB_SECRET'
 #   ['public_repo'] - Only allow creating issues for public repos.
 #   []              - No permission to create issues on any repos.
 github_access_scope: ['repo']
+
+# Change this to point to the URL of your GitHub Enterprise installation, if
+# you want to link local repositories.
+github_url: https://github.com
 
 # Configure SMTP settings. If you are running Errbit on Heroku,
 # sendgrid will be configured by default.

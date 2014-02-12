@@ -5,33 +5,33 @@ describe Problem do
   context 'validations' do
     it 'requires an environment' do
       err = Fabricate.build(:problem, :environment => nil)
-      err.should_not be_valid
-      err.errors[:environment].should include("can't be blank")
+      expect(err).to_not be_valid
+      expect(err.errors[:environment]).to include("can't be blank")
     end
   end
 
   describe "Fabrication" do
     context "Fabricate(:problem)" do
       it 'should have no comment' do
-        lambda do
+        expect{
           Fabricate(:problem)
-        end.should_not change(Comment, :count)
+        }.to_not change(Comment, :count)
       end
     end
 
     context "Fabricate(:problem_with_comments)" do
       it 'should have 3 comments' do
-        lambda do
+        expect{
           Fabricate(:problem_with_comments)
-        end.should change(Comment, :count).by(3)
+        }.to change(Comment, :count).by(3)
       end
     end
 
     context "Fabricate(:problem_with_errs)" do
       it 'should have 3 errs' do
-        lambda do
+        expect{
           Fabricate(:problem_with_errs)
-        end.should change(Err, :count).by(3)
+        }.to change(Err, :count).by(3)
       end
     end
   end
@@ -40,13 +40,13 @@ describe Problem do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
-      problem.should_not be_nil
+      expect(problem).to_not be_nil
 
       notice1 = Fabricate(:notice, :err => err)
-      problem.last_notice_at.should == notice1.created_at
+      expect(problem.last_notice_at).to eq notice1.created_at
 
       notice2 = Fabricate(:notice, :err => err)
-      problem.last_notice_at.should == notice2.created_at
+      expect(problem.last_notice_at).to eq notice2.created_at
     end
   end
 
@@ -54,7 +54,7 @@ describe Problem do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
-      problem.should_not be_nil
+      expect(problem).to_not be_nil
 
       notice1 = Fabricate(:notice, :err => err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
@@ -68,9 +68,9 @@ describe Problem do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
       problem = err.problem
-      lambda {
+      expect {
         Fabricate(:notice, :err => err, :message => 'ERR 1')
-      }.should change(problem, :message).from(nil).to('ERR 1')
+      }.to change(problem, :message).from(nil).to('ERR 1')
     end
   end
 
@@ -78,7 +78,7 @@ describe Problem do
     context 'when the app has err notifications set to false' do
       it 'should not send an email notification' do
         app = Fabricate(:app_with_watcher, :notify_on_errs => false)
-        Mailer.should_not_receive(:err_notification)
+        expect(Mailer).to_not receive(:err_notification)
         Fabricate(:problem, :app => app)
       end
     end
@@ -87,24 +87,24 @@ describe Problem do
   context "#resolved?" do
     it "should start out as unresolved" do
       problem = Problem.new
-      problem.should_not be_resolved
-      problem.should be_unresolved
+      expect(problem).to_not be_resolved
+      expect(problem).to be_unresolved
     end
 
     it "should be able to be resolved" do
       problem = Fabricate(:problem)
-      problem.should_not be_resolved
+      expect(problem).to_not be_resolved
       problem.resolve!
-      problem.reload.should be_resolved
+      expect(problem.reload).to be_resolved
     end
   end
 
   context "resolve!" do
     it "marks the problem as resolved" do
       problem = Fabricate(:problem)
-      problem.should_not be_resolved
+      expect(problem).to_not be_resolved
       problem.resolve!
-      problem.should be_resolved
+      expect(problem).to be_resolved
     end
 
     it "should record the time when it was resolved" do
@@ -113,31 +113,31 @@ describe Problem do
       Timecop.freeze(expected_resolved_at) do
         problem.resolve!
       end
-      problem.resolved_at.to_s.should == expected_resolved_at.to_s
+      expect(problem.resolved_at.to_s).to eq expected_resolved_at.to_s
     end
 
     it "should not reset notice count" do
       problem = Fabricate(:problem, :notices_count => 1)
       original_notices_count = problem.notices_count
-      original_notices_count.should > 0
+      expect(original_notices_count).to be > 0
 
       problem.resolve!
-      problem.notices_count.should == original_notices_count
+      expect(problem.notices_count).to eq original_notices_count
     end
 
     it "should throw an err if it's not successful" do
       problem = Fabricate(:problem)
-      problem.should_not be_resolved
+      expect(problem).to_not be_resolved
       problem.stub(:valid?).and_return(false)
       ## update_attributes not test #valid? but #errors.any?
       # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
       er = ActiveModel::Errors.new(problem)
       er.add_on_blank(:resolved)
       problem.stub(:errors).and_return(er)
-      problem.should_not be_valid
-      lambda {
+      expect(problem).to_not be_valid
+      expect {
         problem.resolve!
-      }.should raise_error(Mongoid::Errors::Validations)
+      }.to raise_error(Mongoid::Errors::Validations)
     end
   end
 
@@ -146,10 +146,10 @@ describe Problem do
       problem1 = Fabricate(:notice).problem
       problem2 = Fabricate(:notice).problem
       merged_problem = Problem.merge!(problem1, problem2)
-      merged_problem.errs.length.should == 2
+      expect(merged_problem.errs.length).to eq 2
 
       expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
-      merged_problem.errs(true).length.should == 1
+      expect(merged_problem.errs(true).length).to eq 1
     end
 
     it "runs smoothly for problem without errs" do
@@ -162,8 +162,8 @@ describe Problem do
       it 'only finds resolved Problems' do
         resolved = Fabricate(:problem, :resolved => true)
         unresolved = Fabricate(:problem, :resolved => false)
-        Problem.resolved.all.should include(resolved)
-        Problem.resolved.all.should_not include(unresolved)
+        expect(Problem.resolved.all).to include(resolved)
+        expect(Problem.resolved.all).to_not include(unresolved)
       end
     end
 
@@ -171,8 +171,8 @@ describe Problem do
       it 'only finds unresolved Problems' do
         resolved = Fabricate(:problem, :resolved => true)
         unresolved = Fabricate(:problem, :resolved => false)
-        Problem.unresolved.all.should_not include(resolved)
-        Problem.unresolved.all.should include(unresolved)
+        expect(Problem.unresolved.all).to_not include(resolved)
+        expect(Problem.unresolved.all).to include(unresolved)
       end
     end
 
@@ -182,12 +182,12 @@ describe Problem do
                          :message => "other", :where => 'errorclass', :environment => 'development', :app_name => 'other')
         dont_find = Fabricate(:problem, :resolved => false, :error_class => "Batman",
                               :message => 'todo', :where => 'classerror', :environment => 'development', :app_name => 'other')
-        Problem.search("theErrorClass").unresolved.should include(find)
-        Problem.search("theErrorClass").unresolved.should_not include(dont_find)
+        expect(Problem.search("theErrorClass").unresolved).to include(find)
+        expect(Problem.search("theErrorClass").unresolved).to_not include(dont_find)
       end
       it 'find on where message' do
         problem = Fabricate(:problem, :where => 'cyril')
-        Problem.search('cyril').entries.should eq [problem]
+        expect(Problem.search('cyril').entries).to eq [problem]
       end
     end
   end
@@ -200,13 +200,13 @@ describe Problem do
     end
 
     it "#notices_count returns 0 by default" do
-      @problem.notices_count.should == 0
+      expect(@problem.notices_count).to eq 0
     end
 
     it "adding a notice increases #notices_count by 1" do
-      lambda {
+      expect {
         Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.should change(@problem.reload, :notices_count).from(0).to(1)
+      }.to change(@problem.reload, :notices_count).from(0).to(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
@@ -229,10 +229,10 @@ describe Problem do
     end
 
     it "is updated when an app is updated" do
-      lambda {
+      expect {
         app.update_attributes!(:name => "Bar App")
         problem.reload
-      }.should change(problem, :app_name).to("Bar App")
+      }.to change(problem, :app_name).to("Bar App")
     end
   end
 
@@ -251,10 +251,10 @@ describe Problem do
     it "is updated when a deploy is created" do
       problem = Fabricate(:problem, :app => @app, :environment => "production")
       next_deploy = Time.at(5.minutes.ago.localtime.to_i)
-      lambda {
+      expect {
         @deploy = Fabricate(:deploy, :app => @app, :created_at => next_deploy)
         problem.reload
-      }.should change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
+      }.to change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
     end
   end
 
@@ -266,21 +266,21 @@ describe Problem do
     end
 
     it "#messages should be empty by default" do
-      @problem.messages.should == {}
+      expect(@problem.messages).to eq ({})
     end
 
     it "adding a notice adds a string to #messages" do
-      lambda {
+      expect {
         Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.should change(@problem, :messages).from({}).to({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}})
+      }.to change(@problem, :messages).from({}).to({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}})
     end
 
     it "removing a notice removes string from #messages" do
       notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      lambda {
+      expect {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :messages).from({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}}).to({})
+      }.to change(@problem, :messages).from({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}}).to({})
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
@@ -299,21 +299,21 @@ describe Problem do
     end
 
     it "#hosts should be empty by default" do
-      @problem.hosts.should == {}
+      expect(@problem.hosts).to eq ({})
     end
 
     it "adding a notice adds a string to #hosts" do
-      lambda {
+      expect {
         Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
-      }.should change(@problem, :hosts).from({}).to({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}})
+      }.to change(@problem, :hosts).from({}).to({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}})
     end
 
     it "removing a notice removes string from #hosts" do
       notice1 = Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
-      lambda {
+      expect {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :hosts).from({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}}).to({})
+      }.to change(@problem, :hosts).from({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}}).to({})
     end
   end
 
@@ -325,21 +325,21 @@ describe Problem do
     end
 
     it "#user_agents should be empty by default" do
-      @problem.user_agents.should == {}
+      expect(@problem.user_agents).to eq ({})
     end
 
     it "adding a notice adds a string to #user_agents" do
-      lambda {
+      expect {
         Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      }.should change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}})
+      }.to change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}})
     end
 
     it "removing a notice removes string from #user_agents" do
       notice1 = Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      lambda {
+      expect {
         @err.notices.first.destroy
         @problem.reload
-      }.should change(@problem, :user_agents).from({
+      }.to change(@problem, :user_agents).from({
         Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}
       }).to({})
     end
@@ -352,21 +352,21 @@ describe Problem do
     end
 
     it "#comments_count returns 0 by default" do
-      @problem.comments_count.should == 0
+      expect(@problem.comments_count).to eq 0
     end
 
     it "adding a comment increases #comments_count by 1" do
-      lambda {
+      expect {
         Fabricate(:comment, :err => @problem)
-      }.should change(@problem, :comments_count).from(0).to(1)
+      }.to change(@problem, :comments_count).from(0).to(1)
     end
 
     it "removing a comment decreases #comments_count by 1" do
       comment1 = Fabricate(:comment, :err => @problem)
-      lambda {
+      expect {
         @problem.reload.comments.first.destroy
         @problem.reload
-      }.should change(@problem, :comments_count).from(1).to(0)
+      }.to change(@problem, :comments_count).from(1).to(0)
     end
   end
 

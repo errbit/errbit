@@ -8,7 +8,7 @@ describe "problems/index.atom.builder" do
       :message => 'foo',
       :new_record => false, :app => app), Problem.new(:new_record => false, :app => app)])
     render
-    rendered.should match('foo')
+    expect(rendered).to match('foo')
   end
 
 end

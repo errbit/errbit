@@ -32,6 +32,11 @@
                   = link_to_source_file(line) do
                     = line.to_s
               %br
+              - if @notice.app_version.present?
+                %p.heading APP VERSION:
+                %p.monospace
+                  = @notice.app_version
+                %br
               %p.heading URL:
               %p.monospace
                 - if @notice.request['url'].present?

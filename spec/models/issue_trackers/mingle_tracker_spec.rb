@@ -17,12 +17,12 @@ describe IssueTrackers::MingleTracker do
     problem.reload
 
     requested = have_requested(:post, "#{@basic_auth}/api/v1/projects/#{tracker.project_id}/cards.xml")
-    WebMock.should requested.with(:headers => {'Content-Type' => 'application/xml'})
-    WebMock.should requested.with(:body => /FooError: Too Much Bar/)
-    WebMock.should requested.with(:body => /See this exception on Errbit/)
-    WebMock.should requested.with(:body => /<card-type-name>Defect<\/card-type-name>/)
+    expect(WebMock).to requested.with(:headers => {'Content-Type' => 'application/xml'})
+    expect(WebMock).to requested.with(:body => /FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(:body => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(:body => /<card-type-name>Defect<\/card-type-name>/)
 
-    problem.issue_link.should == @issue_link.sub(/\.xml$/, '')
+    expect(problem.issue_link).to eq @issue_link.sub(/\.xml$/, '')
   end
 end
 
