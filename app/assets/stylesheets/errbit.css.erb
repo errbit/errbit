@@ -59,7 +59,7 @@ a.action  { float: right; font-size: 0.9em;}
   position: absolute;
   top: 22px;
   left: 2px;
-  background: transparent url(images/logo.png) 0 0 no-repeat;
+  background: transparent url(<%= asset_path 'images/logo.png' %>) 0 0 no-repeat;
   text-indent: -5000em;
 }
 
@@ -94,7 +94,7 @@ a.action  { float: right; font-size: 0.9em;}
   line-height: 30px;
 }
 #header #session-links #sign-out {
-  background: transparent url(images/icons/bullet-red-sm.png) 12px 50% no-repeat;
+  background: transparent url(<%= asset_path "images/icons/bullet-red-sm.png" %>) 12px 50% no-repeat;
   padding-left: 29px;
 }
 #header #session-links a:hover {
@@ -124,7 +124,7 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #nav-bar li.active {
   border-color: #fff;
-  background: #FFF url(images/button-bg.png) 0 -2px repeat-x;
+  background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 -2px repeat-x;
   border-width:1px 1px 0;
   margin-bottom:-2px;
   height: 37px;
@@ -146,9 +146,9 @@ a.action  { float: right; font-size: 0.9em;}
   background: transparent 10px 6px no-repeat;
 }
 #nav-bar li a:hover { color: #666;}
-#nav-bar li.apps a { background-image: url(images/icons/briefcase.png); }
-#nav-bar li.errs a { background-image: url(images/icons/error.png); }
-#nav-bar li.users a { background-image: url(images/icons/user.png); }
+#nav-bar li.apps a { background-image: url(<%= asset_path "images/icons/briefcase.png" %>); }
+#nav-bar li.errs a { background-image: url(<%= asset_path "images/icons/error.png" %>); }
+#nav-bar li.users a { background-image: url(<%= asset_path "images/icons/user.png" %>); }
 #nav-bar li:not(.active):hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
@@ -171,6 +171,10 @@ a.action  { float: right; font-size: 0.9em;}
 /* Make err title bar bigger to fit more buttons */
 #content-title.err_show {
   padding: 43px 24px 37px;
+}
+
+#content-title.err_show.resolved{
+  background-color: #90EE90;
 }
 
 #content-comments {
@@ -203,7 +207,7 @@ a.action  { float: right; font-size: 0.9em;}
   margin-bottom: 16px;
   text-decoration: none;
   color: #666;
-  background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
+  background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 bottom repeat-x;
   border-radius: 50px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -224,16 +228,16 @@ a.action  { float: right; font-size: 0.9em;}
   -webkit-box-shadow: 0 0 3px #69c;
 }
 #action-bar a.add {
-  background-image: url(images/icons/add.png);
+  background-image: url(<%= asset_path "images/icons/add.png" %>);
 }
 
 #action-bar .calendar_link {
-  background: url(images/icons/ical.png) no-repeat scroll 12px 6px transparent;
+  background: url(<%= asset_path "images/icons/ical.png" %>) no-repeat scroll 12px 6px transparent;
   padding-left: 47px;
 }
 
-#action-bar span.github a { background: url(images/icons/github.png) no-repeat 6px 5px; }
-#action-bar span.unlink_github a { background: url(images/icons/unlink_github.png) no-repeat 6px 5px; }
+#action-bar span.github a { background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px; }
+#action-bar span.unlink_github a { background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px; }
 
 /* Content */
 #content {
@@ -268,15 +272,15 @@ a.action  { float: right; font-size: 0.9em;}
   border: 1px solid #6cf;
 }
 #flash-messages li.success {
-  background: #cfc url(images/icons/success.png) 16px 50% no-repeat;
+  background: #cfc url(<%= asset_path "images/icons/success.png" %>) 16px 50% no-repeat;
   border: 1px solid #6c3;
 }
 #flash-messages li.error {
-  background: #fcc url(images/icons/error.png)   16px 50% no-repeat;
+  background: #fcc url(<%= asset_path "images/icons/error.png" %>)   16px 50% no-repeat;
   border: 1px solid #f99;
 }
 #flash-messages .alert {
-  background: #ffc url(images/icons/warning.png) 10px 7px no-repeat;
+  background: #ffc url(<%= asset_path "images/icons/warning.png" %>) 10px 7px no-repeat;
   border-color: #e4bb69;
 }
 
@@ -302,7 +306,7 @@ form label {
 }
 form label.inline { display: inline; }
 form .checkbox label { display: inline; }
-form .required label { padding-right: 20px; background: transparent url(images/icons/required.png) right 50% no-repeat; }
+form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
 form .field_with_errors label { color: #900; }
 form input[type=text], form input[type=password], form input[type=email] {
   width: 96%; padding: 0.8em;
@@ -328,6 +332,7 @@ form input[type=submit] {
   display:block; width: auto; padding: 0.5em;
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
   border: none; color: #FFF; background-color: #387fc1;
+  cursor: pointer;
 }
 form input[type=submit].button {
   font-size: 1em;
@@ -335,7 +340,7 @@ form input[type=submit].button {
 }
 form div.buttons {
   color: #666;
-  background: #FFF url(images/button-bg.png) 0 bottom repeat-x;
+  background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 bottom repeat-x;
   border-radius: 50px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -362,7 +367,7 @@ form div.buttons input, form div.buttons button {
 }
 form div.buttons button.sign_in {
   padding-left: 40px;
-  background: transparent url(images/icons/right-arrow.png) 3px 3px no-repeat;
+  background: transparent url(<%= asset_path "images/icons/right-arrow.png" %>) 3px 3px no-repeat;
 }
 form strong.option {
   display: block;
@@ -616,7 +621,7 @@ td.count, td.issue_link {
   padding: 0.1em 0.7em;
   margin-top: 3px;
   color: #fff;
-  background: #cc0033 url(images/error-badge-bg.png) 0 bottom repeat-x;
+  background: #cc0033 url(<%= asset_path "images/error-badge-bg.png" %>) 0 bottom repeat-x;
   border: 1px solid #900;
   border-radius: 18px;
   -moz-border-radius: 18px;
@@ -627,7 +632,7 @@ td.count, td.issue_link {
   -webkit-opacity: 0.8
 }
 .count a.resolved {
-  background: #05B81d url(images/resolved-badge-bg.png) 0 bottom repeat-x;
+  background: #05B81d url(<%= asset_path "images/resolved-badge-bg.png" %>) 0 bottom repeat-x;
   border: 1px solid #080;
 }
 .count a:hover {
@@ -696,12 +701,12 @@ table.deploys td.when {
 
 /* Resolve Errs */
 #action-bar a.resolve {
-  background: transparent url(images/icons/thumbs-up.png) 6px 5px no-repeat;
+  background: transparent url(<%= asset_path "images/icons/thumbs-up.png" %>) 6px 5px no-repeat;
 }
 
 /* Go Up */
 #action-bar a.up {
-  background: transparent url(images/icons/up.png) 6px 5px no-repeat;
+  background: transparent url(<%= asset_path "images/icons/up.png" %>) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */

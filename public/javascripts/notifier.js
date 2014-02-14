@@ -556,11 +556,11 @@ printStackTrace.implementation.prototype = {
 
                 "userId": "{user_id}",
                 "userName": "{user_name}",
-                "userEmail": "{user_email}",
+                "userEmail": "{user_email}"
             },
             "environment": {},
 			//"session": "",
-			"params": {},
+			"params": {}
         };
 
     Util = {
