@@ -370,6 +370,56 @@ describe Problem do
     end
   end
 
+  describe "#issue_type" do
+    context "without issue_type fill in Problem" do
+      let(:problem) do
+        Problem.new(:app => app)
+      end
+
+      let(:app) do
+        App.new(:issue_tracker => issue_tracker)
+      end
+
+      context "without issue_tracker associate to app" do
+        let(:issue_tracker) do
+          nil
+        end
+        it 'return nil' do
+          expect(problem.issue_type).to be_nil
+        end
+      end
+
+      context "with issue_tracker valid associate to app" do
+        let(:issue_tracker) do
+          it = IssueTracker.new
+          it.stub(:tracker).and_return(double(:configured? => true, :label => 'foo'))
+          it
+        end
+
+        it 'return the issue_tracker label' do
+          expect(problem.issue_type).to eql 'foo'
+        end
+      end
+
+      context "with issue_tracker not valid associate to app" do
+        let(:issue_tracker) do
+          it = IssueTracker.new
+          it.stub(:tracker).and_return(double(:configured? => false))
+          it
+        end
+        it 'return nil' do
+          expect(problem.issue_type).to be_nil
+        end
+      end
+    end
+
+    context "with issue_type fill in Problem" do
+      it 'return the value associate' do
+        expect(Problem.new(:issue_type => 'foo').issue_type).to eql 'foo'
+      end
+    end
+  end
+
 
 end
 

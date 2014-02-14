@@ -16,6 +16,9 @@ class AppsController < ApplicationController
   }
 
   expose(:app, :ancestor => :app_scope)
+  expose(:app_decorate) do
+    AppDecorator.new(app)
+  end
 
   expose(:all_errs) {
     !!params[:all_errs]
@@ -46,7 +49,6 @@ class AppsController < ApplicationController
   end
 
   def create
-    initialize_subclassed_issue_tracker
     initialize_subclassed_notification_service
     if app.save
       redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.create.success') }
@@ -57,7 +59,6 @@ class AppsController < ApplicationController
   end
 
   def update
-    initialize_subclassed_issue_tracker
     initialize_subclassed_notification_service
     if app.save
       redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.update.success') }
@@ -87,15 +88,6 @@ class AppsController < ApplicationController
 
   protected
 
-    def initialize_subclassed_issue_tracker
-      # set the app's issue tracker
-      if params[:app][:issue_tracker_attributes] && tracker_type = params[:app][:issue_tracker_attributes][:type]
-        if IssueTracker.subclasses.map(&:name).concat(["IssueTracker"]).include?(tracker_type)
-          app.issue_tracker = tracker_type.constantize.new(params[:app][:issue_tracker_attributes])
-        end
-      end
-    end
-
     def initialize_subclassed_notification_service
       # set the app's notification service
       if params[:app][:notification_service_attributes] && notification_type = params[:app][:notification_service_attributes][:type]
@@ -107,7 +99,7 @@ class AppsController < ApplicationController
 
     def plug_params app
       app.watchers.build if app.watchers.none?
-      app.issue_tracker = IssueTracker.new unless app.issue_tracker_configured?
+      app.issue_tracker ||= IssueTracker.new
       app.notification_service = NotificationService.new unless app.notification_service_configured?
       app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
     end

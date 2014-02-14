@@ -1,5 +1,8 @@
 require 'spec_helper'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
 
 OmniAuth.config.test_mode = true
 

@@ -8,15 +8,16 @@ describe ProblemsController do
   :params => {:app_id => 'dummyid', :id => 'dummyid'}
 
   let(:app) { Fabricate(:app) }
-  let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production")) }
+  let(:err) { Fabricate(:err, :problem => problem) }
+  let(:admin) { Fabricate(:admin) }
+  let(:problem) { Fabricate(:problem, :app => app, :environment => "production") }
 
 
   describe "GET /problems" do
     #render_views
     context 'when logged in as an admin' do
       before(:each) do
-        @user = Fabricate(:admin)
-        sign_in @user
+        sign_in admin
         @problem = Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production"))).problem
       end
 
@@ -31,7 +32,7 @@ describe ProblemsController do
         end
 
         it "should be able to override default per_page value" do
-          @user.update_attribute :per_page, 10
+          admin.update_attribute :per_page, 10
           get :index
           expect(controller.problems.to_a.size).to eq 10
         end
@@ -98,7 +99,7 @@ describe ProblemsController do
   describe "GET /problems - previously all" do
     context 'when logged in as an admin' do
       it "gets a paginated list of all problems" do
-        sign_in Fabricate(:admin)
+        sign_in admin
         problems = Kaminari.paginate_array((1..30).to_a)
         3.times { problems << Fabricate(:err).problem }
         3.times { problems << Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem }
@@ -128,7 +129,7 @@ describe ProblemsController do
 
     context 'when logged in as an admin' do
       before do
-        sign_in Fabricate(:admin)
+        sign_in admin
       end
 
       it "finds the app" do
@@ -192,7 +193,7 @@ describe ProblemsController do
 
   describe "PUT /apps/:app_id/problems/:id/resolve" do
     before do
-      sign_in Fabricate(:admin)
+      sign_in admin
 
       @problem = Fabricate(:err)
       App.stub(:find).with(@problem.app.id.to_s).and_return(@problem.app)
@@ -231,76 +232,50 @@ describe ProblemsController do
   end
 
   describe "POST /apps/:app_id/problems/:id/create_issue" do
-    #render_views
 
     before(:each) do
-      sign_in Fabricate(:admin)
+      sign_in admin
     end
 
     context "successful issue creation" do
       context "lighthouseapp tracker" do
         let(:notice) { Fabricate :notice }
-        let(:tracker) { Fabricate :lighthouse_tracker, :app => notice.app }
         let(:problem) { notice.problem }
 
         before(:each) do
-          number = 5
-          @issue_link = "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets/#{number}.xml"
-          body = "<ticket><number type=\"integer\">#{number}</number></ticket>"
-          stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").
-                       to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
-
+          controller.stub(:problem).and_return(problem)
+          controller.stub(:current_user).and_return(admin)
+          IssueCreation.should_receive(:new).with(problem, admin, nil, request).and_return(double(:execute => true))
           post :create_issue, :app_id => problem.app.id, :id => problem.id
-          problem.reload
         end
 
         it "should redirect to problem page" do
           expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+          expect(flash[:error]).to be_blank
         end
       end
     end
 
-    context "absent issue tracker" do
-      let(:problem) { Fabricate :problem }
-
+    context "error during request to a tracker" do
       before(:each) do
+        IssueCreation.should_receive(:new).with(problem, admin, nil, request).and_return(
+          double(:execute => false, :errors => double(:full_messages => ['not create']))
+        )
+        controller.stub(:problem).and_return(problem)
         post :create_issue, :app_id => problem.app.id, :id => problem.id
       end
 
       it "should redirect to problem page" do
         expect(response).to redirect_to( app_problem_path(problem.app, problem) )
-      end
-
-      it "should set flash error message telling issue tracker of the app doesn't exist" do
-        expect(flash[:error]).to eq "This app has no issue tracker setup."
+        expect(flash[:error]).to eql 'not create'
       end
     end
 
-    context "error during request to a tracker" do
-      context "lighthouseapp tracker" do
-        let(:tracker) { Fabricate :lighthouse_tracker }
-        let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => tracker.app)) }
-
-        before(:each) do
-          stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").to_return(:status => 500)
-
-          post :create_issue, :app_id => err.app.id, :id => err.problem.id
-        end
-
-        it "should redirect to problem page" do
-          expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
-        end
-
-        it "should notify of connection error" do
-          expect(flash[:error]).to include("There was an error during issue creation:")
-        end
-      end
-    end
   end
 
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
     before(:each) do
-      sign_in Fabricate(:admin)
+      sign_in admin
     end
 
     context "problem with issue" do
@@ -336,7 +311,7 @@ describe ProblemsController do
 
   describe "Bulk Actions" do
     before(:each) do
-      sign_in Fabricate(:admin)
+      sign_in admin
       @problem1 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem
       @problem2 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => false)).problem
     end

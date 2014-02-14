@@ -5,11 +5,23 @@ class IssueCreation
 
   delegate :app, :to => :problem
 
-  def initialize(problem, user, tracker_name)
+  def initialize(problem, user, tracker_name, request)
     @problem = problem
     @user    = user
     @tracker_name = tracker_name
+    IssueTracker.update_url_options(request)
   end
+
+  def execute
+    tracker.create_issue(problem, user) if tracker
+    errors.empty?
+  rescue => ex
+    Rails.logger.error "Error during issue creation: " << ex.message
+    errors.add :base, "There was an error during issue creation: #{ex.message}"
+    false
+  end
+
+  private
 
   def tracker
     return @tracker if @tracker
@@ -21,10 +33,11 @@ class IssueCreation
       elsif !user.github_account?
         errors.add :base, "You haven't linked your Github account."
       else
-        @tracker = GithubIssuesTracker.new(
-          :app         => app,
-          :username    => user.github_login,
-          :oauth_token => user.github_oauth_token
+        @tracker = ErrbitGithubPlugin::IssueTracker.new(
+          app, {
+            :username    => user.github_login,
+            :oauth_token => user.github_oauth_token
+          }
         )
       end
 
@@ -38,14 +51,5 @@ class IssueCreation
     end
 
     @tracker
-  end
-
-  def execute
-    tracker.create_issue problem, user if tracker
-    errors.empty?
-  rescue => ex
-    Rails.logger.error "Error during issue creation: " << ex.message
-    errors.add :base, "There was an error during issue creation: #{ex.message}"
-    false
   end
 end

@@ -68,7 +68,7 @@ class Problem
   end
 
   def comments_allowed?
-    Errbit::Config.allow_comments_with_issue_tracker || !app.issue_tracker_configured?
+    Errbit::Config.allow_comments_with_issue_tracker || app.comments_allowed?
   end
 
   def resolve!

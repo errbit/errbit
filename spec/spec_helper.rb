@@ -24,6 +24,7 @@ require 'webmock/rspec'
 require 'xmpp4r'
 require 'xmpp4r/muc'
 require 'mongoid-rspec'
+require 'errbit_plugin/issue_trackers/fake'
 
 
 # Requires supporting files with custom matchers and macros, etc,
@@ -54,8 +55,8 @@ RSpec.configure do |config|
     init_haml_helpers
   end
 
-  config.after(:all) do
-    WebMock.disable_net_connect! :allow => /coveralls\.io/
+  config.before(:all) do
+    WebMock.disable_net_connect! :allow => /coveralls\.io|127\.0\.0\.1/
   end
 end
 
