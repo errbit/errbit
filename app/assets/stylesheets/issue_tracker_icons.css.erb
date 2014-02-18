@@ -1,7 +1,8 @@
 /* Issue Tracker inactive, select, create and goto icons */
-<% trackers = IssueTracker.subclasses.map{|t| t.label } << 'none' %>
+<% trackers = ErrbitPlugin::Register.issue_trackers.values %>
 
-<% trackers.each do |tracker| %>
+<% trackers.each do |tracker_klass| %>
+<% tracker = tracker_klass.new(nil, nil).label %>
 div.issue_tracker.nested label.<%= tracker %> {
   background: url(<%= tracker %>_inactive.png) no-repeat;
 }
