@@ -26,6 +26,7 @@ def log_in(user)
   user.update_attributes!(:uid => Devise.friendly_token) if user.uid.blank?
   mock_gds_sso_auth(user.uid,
                    :email => user.email,
+                   :name => user.name,
                    :permissions => user.admin? ? %w(signin admin) : %w(signin)
                    )
   visit '/'
