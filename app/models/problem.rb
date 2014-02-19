@@ -25,6 +25,7 @@ class Problem
   field :messages,    :type => Hash, :default => {}
   field :hosts,       :type => Hash, :default => {}
   field :comments_count, :type => Integer, :default => 0
+  field :servers, :type => Array, :default => []
 
   index :app_id => 1
   index :app_name => 1
@@ -47,6 +48,7 @@ class Problem
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  scope :outdated, where(:last_notice_at.lt => 1.week.ago)
 
   validates_presence_of :last_notice_at, :first_notice_at
 
@@ -159,6 +161,14 @@ class Problem
       {:message => /#{value}/i},
       {:app_name => /#{value}/i},
       {:environment => /#{value}/i}
+    )
+  end
+
+  def self.filter(env, hostname, query_string)
+    all_of(
+        {'$or' =>[{:error_class => /#{query_string}/i}, {:message => /#{query_string}/i}]},
+        {:environment =>  /#{env}/i},
+        {:servers => /#{hostname}/i}
     )
   end
 

@@ -22,6 +22,7 @@ Errbit::Application.routes.draw do
       post :merge_several
       post :unmerge_several
       get :search
+      get :advanced_search
     end
   end
 
@@ -52,6 +53,11 @@ Errbit::Application.routes.draw do
     namespace :v1 do
       resources :problems, :only => [:index], :defaults => { :format => 'json' }
       resources :notices,  :only => [:index], :defaults => { :format => 'json' }
+      resources :errors, :only => [], :defaults => { :format => 'json'} do
+        collection do
+          get :app
+        end
+      end
       resources :stats, :only => [], :defaults => { :format => 'json' } do
         collection do
           get :app

@@ -109,6 +109,8 @@ en:
       edit: edit
       environment: Environment
       errors: Errors
+      host: Host
+      advanced_search : "Advanced Search"
       errors_caught: "Errors Caught:"
       github_repo: GitHub Repo
       latest_deploys: Latest Deploys
