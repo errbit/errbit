@@ -30,6 +30,10 @@ Errbit::Application.routes.draw do
       resources :notices
       resources :comments, :only => [:create, :destroy]
 
+      collection do
+        post :destroy_all
+      end
+
       member do
         put :resolve
         put :unresolve
