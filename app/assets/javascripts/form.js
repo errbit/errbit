@@ -81,7 +81,7 @@ function activateTypeSelector(field_class, section_class) {
   $('div.'+field_class+' > div.'+section_class).not('.chosen').find('input')
     .attr('disabled','disabled').val('');
 
-  $('div.'+field_class+' input[name*=type]').on('click', function(){
+  $('div.'+field_class).find('.choose input[name*=type]').on('click', function(){
     // Look for section in 'data-section', and fall back to 'value'
     var chosen = $(this).data("section") || $(this).val();
     var wrapper = $(this).closest('.nested');

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 3.2.15'
+RAILS_VERSION = '~> 3.2.17'
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
@@ -41,7 +41,7 @@ gem 'pivotal-tracker'
 # Fogbugz
 gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
-gem 'octokit', '~> 1.18'
+gem 'octokit', '~> 2.0'
 # Gitlab
 gem 'gitlab', '~> 3.0.0'
 

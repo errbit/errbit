@@ -98,6 +98,10 @@ github_secret: 'GITHUB_SECRET'
 #   []              - No permission to create issues on any repos.
 github_access_scope: ['repo']
 
+# Change this to point to the URL of your GitHub Enterprise installation, if
+# you want to link local repositories.
+github_url: https://github.com
+
 # Configure SMTP settings. If you are running Errbit on Heroku,
 # sendgrid will be configured by default.
 # ------------------------------------------------------------------------
