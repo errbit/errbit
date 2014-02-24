@@ -1,0 +1,21 @@
+# Mongoid Configuration
+# =====================
+#
+# Copy this file to config/mongoid.yml and
+# modify it accordingly. This file will automatically
+# be copied to shared/config on the server when
+# `cap deploy:setup` is ran the first time. Be sure
+# to place production specific settings there
+
+# set these environment variables on your prod server
+@@RAILS_ENV@@:
+  sessions:
+    default:
+      @@MONGO_HOSTNAMES@@
+      username: @@ERRBIT_DB_USER@@
+      password: @@ERRBIT_DB_PASSWORD@@
+      database: @@ERRBIT_DB_NAME@@
+      read: :secondary
+  options:
+    identity_map_enabled: true
+    use_utc: true
