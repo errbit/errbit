@@ -11,6 +11,7 @@
 @@RAILS_ENV@@:
   sessions:
     default:
+      hosts:
       @@MONGO_HOSTNAMES@@
       username: @@ERRBIT_DB_USER@@
       password: @@ERRBIT_DB_PASSWORD@@
