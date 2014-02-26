@@ -52,7 +52,7 @@ class Mailer < ActionMailer::Base
 
     errbit_headers 'App' => @app.name,
                    'Environment' => @notice.environment_name,
-                   'Problem-Id' => @problem.problem_id,
+                   'Problem-Id' => @problem.id,
                    'Comment-Author' => @user.name
 
     mail :to      => recipients,
