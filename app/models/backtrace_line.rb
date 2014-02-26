@@ -10,7 +10,7 @@ class BacktraceLine
 
   embedded_in :backtrace
 
-  scope :in_app, where(:file => IN_APP_PATH)
+  scope :in_app, ->{ where(:file => IN_APP_PATH) }
 
   delegate :app, :to => :backtrace
 
@@ -40,4 +40,3 @@ class BacktraceLine
   end
 
 end
-

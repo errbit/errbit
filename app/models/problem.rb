@@ -43,9 +43,9 @@ class Problem
 
   before_create :cache_app_attributes
 
-  scope :resolved, where(:resolved => true)
-  scope :unresolved, where(:resolved => false)
-  scope :ordered, order_by(:last_notice_at.desc)
+  scope :resolved, ->{ where(:resolved => true) }
+  scope :unresolved, ->{ where(:resolved => false) }
+  scope :ordered, ->{ order_by(:last_notice_at.desc) }
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
 
   validates_presence_of :last_notice_at, :first_notice_at
@@ -184,4 +184,3 @@ class Problem
       Digest::MD5.hexdigest(value.to_s)
     end
 end
-
