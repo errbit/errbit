@@ -23,7 +23,7 @@ class OutdatedProblemClearer
   end
 
   def criteria
-    @criteria = Problem.outdated
+    @criteria ||= Problem.outdated
   end
 
   def repair_database
