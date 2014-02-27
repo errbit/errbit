@@ -1,17 +1,20 @@
 # Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
 
-[travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
-[travis-ci-url]: http://travis-ci.org/errbit/errbit
-[codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
-[codeclimate-url]: https://codeclimate.com/github/errbit/errbit
-[coveralls-img-url]: https://coveralls.io/repos/errbit/errbit/badge.png?branch=master
-[coveralls-url]:https://coveralls.io/r/errbit/errbit
-[gemnasium-img-url]:https://gemnasium.com/errbit/errbit.png
-[gemnasium-url]:https://gemnasium.com/errbit/errbit
+[travis-img-url]: https://secure.travis-ci.org/concordia-publishing-house/errbit.png?branch=master
+[travis-ci-url]: http://travis-ci.org/concordia-publishing-house/errbit
+[codeclimate-img-url]: https://codeclimate.com/github/concordia-publishing-house/errbit.png
+[codeclimate-url]: https://codeclimate.com/github/concordia-publishing-house/errbit
+[coveralls-img-url]: https://coveralls.io/repos/concordia-publishing-house/errbit/badge.png?branch=master
+[coveralls-url]:https://coveralls.io/r/concordia-publishing-house/errbit
+[gemnasium-img-url]:https://gemnasium.com/concordia-publishing-house/errbit.png
+[gemnasium-url]:https://gemnasium.com/concordia-publishing-house/errbit
 
 
 
 ### The open source, self-hosted error catcher
+
+
+**This is a fork of Errbit that runs on Postgres rather than MongoDB. For the official Errbit, go to errbit/errbit.** 
 
 
 Errbit is a tool for collecting and managing errors from other applications.
@@ -160,7 +163,7 @@ cap deploy:setup deploy
   * Clone the repository
 
 ```bash
-git clone http://github.com/errbit/errbit.git
+git clone http://github.com/concordia-publishing-house/errbit.git
 ```
   * Update `db/seeds.rb` with admin credentials for your initial login.
 
@@ -346,7 +349,7 @@ user.save!
 When upgrading Errbit, please run:
 
 ```bash
-git pull origin master # assuming origin is the github.com/errbit/errbit repo
+git pull origin master # assuming origin is the github.com/concordia-publishing-house/errbit repo
 bundle install
 rake db:migrate
 rake assets:precompile
@@ -434,13 +437,13 @@ card_type = Defect, status = Open, priority = Essential
 
 **GitHub Issues Integration**
 
-* For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
+* For 'Account/Repository', the account will either be a username or organization. i.e. **concordia-publishing-house/errbit**
 * You will also need to provide your username and password for your GitHub account.
   * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
 
 **Bitbucket Issues Integration**
 
-* For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **errbit/errbit**
+* For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **concordia-publishing-house/errbit**
 * You will also need to provide your username and password for your Bitbucket account.
 
 **Gitlab Issues Integration**
@@ -485,14 +488,14 @@ Errbit will log it's own errors to an internal app named **Self.Errbit**.
 The **Self.Errbit** app will be automatically created whenever the first error happens.
 
 If your Errbit instance has logged an error, we would appreciate a bug report on GitHub Issues.
-You can post this manually at [https://github.com/errbit/errbit/issues](https://github.com/errbit/errbit/issues),
+You can post this manually at [https://github.com/concordia-publishing-house/errbit/issues](https://github.com/concordia-publishing-house/errbit/issues),
 or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
 
   * Go to the **Self.Errbit** app's edit page. If that app does not exist yet, go to the apps page and click **Add a new App** to create it. (You can also create it by running `rake airbrake:test`.)
 
   * In the **Issue Tracker** section, click **GitHub Issues**.
 
-  * Fill in the **Account/Repository** field with **errbit/errbit**.
+  * Fill in the **Account/Repository** field with **concordia-publishing-house/errbit**.
 
   * Fill in the **Username** field with your github username.
 
@@ -542,8 +545,8 @@ TODO
 People using Errbit
 -------------------
 
-See our wiki page for a [list of people and companies around the world who use Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit).
-Feel free to [edit this page](https://github.com/errbit/errbit/wiki/People-using-Errbit/_edit), and add your name and country to the list if you are using Errbit.
+See our wiki page for a [list of people and companies around the world who use Errbit](https://github.com/concordia-publishing-house/errbit/wiki/People-using-Errbit).
+Feel free to [edit this page](https://github.com/concordia-publishing-house/errbit/wiki/People-using-Errbit/_edit), and add your name and country to the list if you are using Errbit.
 
 
 Special Thanks
@@ -558,7 +561,7 @@ Special Thanks
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
 * [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrake.io).
 
-See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details. You can see another list of Contributors by release version on [CONTRIBUTORS.md]
+See the [contributors graph](https://github.com/concordia-publishing-house/errbit/graphs/contributors) for further details. You can see another list of Contributors by release version on [CONTRIBUTORS.md]
 
 
 Contributing
@@ -588,8 +591,3 @@ Copyright
 ---------
 
 Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/errbit/errbit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
