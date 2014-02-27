@@ -47,6 +47,7 @@ class Problem
   scope :unresolved, where(:resolved => false)
   scope :ordered, order_by(:last_notice_at.desc)
   scope :for_apps, lambda {|apps| where(:app_id.in => apps.all.map(&:id))}
+  scope :matching, lambda {|query| where (:message => /#{query}/i)}
 
   validates_presence_of :last_notice_at, :first_notice_at
 

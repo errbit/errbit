@@ -25,6 +25,18 @@ namespace :errbit do
       puts "=== Cleared #{ResolvedProblemClearer.new.execute} resolved errors from the database."
     end
 
+    desc "Delete specific errors from the database. (Useful for limited heroku databases)"
+    task :clear_filtered, [:query, :limit, :dry] => :environment do |t, args|
+      require 'filter_cleaner'
+      if !defined? args["dry"]
+        args["dry"] = true
+      end
+      if !defined? args["limit"]
+        args["limit"] = 100
+      end
+      puts "=== Cleared #{FilteredProblemClearer.new.execute(args)}  matching errors from the database."
+    end
+
     desc "Regenerate fingerprints"
     task :regenerate_fingerprints => :environment do
 
