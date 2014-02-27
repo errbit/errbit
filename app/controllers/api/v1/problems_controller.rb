@@ -1,6 +1,14 @@
 class Api::V1::ProblemsController < ApplicationController
   respond_to :json, :xml
 
+  rescue_from ActiveRecord::RecordNotFound do
+    head :not_found
+  end
+
+  expose(:problem) {
+    Problem.find(params[:id])
+  }
+
   def index
     problems = Problem.select %w{problems.id app_id app_name environment message problems.where first_notice_at last_notice_at resolved resolved_at notices_count}
 
@@ -17,6 +25,16 @@ class Api::V1::ProblemsController < ApplicationController
       format.json { render :json => Yajl.dump(results) }
       format.xml  { render :xml  => results }
     end
+  end
+  
+  def resolve
+    problem.resolve!
+    head :ok
+  end
+  
+  def unresolve
+    problem.unresolve!
+    head :ok
   end
 
 end

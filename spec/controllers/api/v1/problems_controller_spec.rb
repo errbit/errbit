@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe Api::V1::ProblemsController do
-
+  
+  
+  let(:problem) do
+    Fabricate(:problem)
+  end
+  
+  
   context "when logged in" do
     before do
       @user = Fabricate(:user)
@@ -52,6 +58,36 @@ describe Api::V1::ProblemsController do
         expect(problems.length).to eq 4
       end
 
+    end
+
+
+    describe "PUT /api/v1/problems/:id/resolve" do
+      it "should resolve the given problem" do
+        controller.stub(:problem).and_return(problem)
+        expect(problem).to receive(:resolve!)
+        put :resolve, :id => problem.id, :auth_token => @user.authentication_token, :format => "json"
+        expect(response).to be_success
+      end
+      
+      it "should respond with 404 if the problem doesn't exist" do
+        put :resolve, :id => 1999, :auth_token => @user.authentication_token, :format => "json"
+        expect(response).to be_not_found
+      end
+    end
+
+
+    describe "PUT /api/v1/problems/:id/unresolve" do
+      it "should unresolve the given problem" do
+        controller.stub(:problem).and_return(problem)
+        expect(problem).to receive(:unresolve!)
+        put :unresolve, :id => problem.id, :auth_token => @user.authentication_token, :format => "json"
+        expect(response).to be_success
+      end
+      
+      it "should respond with 404 if the problem doesn't exist" do
+        put :unresolve, :id => 1999, :auth_token => @user.authentication_token, :format => "json"
+        expect(response).to be_not_found
+      end
     end
   end
 

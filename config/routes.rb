@@ -46,7 +46,12 @@ Errbit::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :problems, :only => [:index], :defaults => { :format => 'json' }
+      resources :problems, :only => [:index], :defaults => { :format => 'json' } do
+        member do
+          put :resolve
+          put :unresolve
+        end
+      end
       resources :notices,  :only => [:index], :defaults => { :format => 'json' }
       resources :stats, :only => [], :defaults => { :format => 'json' } do
         collection do
