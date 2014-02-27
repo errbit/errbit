@@ -6,11 +6,13 @@ class FilteredProblemClearer
   # Clear all problem already resolved
   #
   def execute(args)
+    puts("Errors returned by the Query:")
     nb_problem_matching(args['query'], args['limit'].to_s).tap { |nb|
       if nb > 0
         criteria(args['query'], args['limit'].to_s).each do |problem|
-          print(problem.printable)
-          if !(args["dry"])
+          puts(problem.printable)
+          if (args["dry"]) != "true"
+            puts("Destroying problem")
             ProblemDestroy.new(problem).execute
           end
         end

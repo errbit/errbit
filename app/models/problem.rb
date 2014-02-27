@@ -164,7 +164,7 @@ class Problem
   end
 
   def printable
-    return :app_name + "/" + :message
+    return app_name + "/" + message
   end
 
   private

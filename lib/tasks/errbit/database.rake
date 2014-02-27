@@ -29,7 +29,7 @@ namespace :errbit do
     task :clear_filtered, [:query, :limit, :dry] => :environment do |t, args|
       require 'filter_cleaner'
       if !defined? args["dry"]
-        args["dry"] = true
+        args["dry"] = "true"
       end
       if !defined? args["limit"]
         args["limit"] = 100
