@@ -6,11 +6,11 @@ class FilteredProblemClearer
   # Clear all problem already resolved
   #
   def execute(args)
-    nb_problem_matching(args['query'], args['limit']).tap { |nb|
+    nb_problem_matching(args['query'], args['limit'].to_s).tap { |nb|
       if nb > 0
-        criteria(args['query'], args['limit']).each do |problem|
-          print(problem.message)
-          if (args["dry"])
+        criteria(args['query'], args['limit'].to_s).each do |problem|
+          print(problem.printable)
+          if !(args["dry"])
             ProblemDestroy.new(problem).execute
           end
         end
