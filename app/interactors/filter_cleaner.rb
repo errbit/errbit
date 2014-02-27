@@ -7,9 +7,9 @@ class FilteredProblemClearer
   #
   def execute(args)
     puts("Errors returned by the Query:")
-    nb_problem_matching(args['query'], args['limit'].to_s).tap { |nb|
+    nb_problem_matching(args['query'], args['limit'].to_i).tap { |nb|
       if nb > 0
-        criteria(args['query'], args['limit'].to_s).each do |problem|
+        criteria(args['query'], args['limit'].to_i).each do |problem|
           puts(problem.printable)
           if (args["dry"]) != "true"
             puts("Destroying problem")
@@ -24,7 +24,11 @@ class FilteredProblemClearer
   private
 
   def nb_problem_matching(query, limit)
-    @count ||= criteria(query, limit).count
+    matches = criteria(query, limit).count
+    if matches > limit
+      matches = limit
+    end
+    @count ||= matches
   end
 
   def criteria(query, limit)

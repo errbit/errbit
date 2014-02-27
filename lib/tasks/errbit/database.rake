@@ -34,7 +34,11 @@ namespace :errbit do
       if !defined? args["limit"]
         args["limit"] = 100
       end
-      puts "=== Cleared #{FilteredProblemClearer.new.execute(args)}  matching errors from the database."
+      if  args["dry"] != "true"
+        puts "=== Cleared #{FilteredProblemClearer.new.execute(args)}  matching errors from the database."
+      else
+        puts "=== No errors were hurt during the task"
+      end
     end
 
     desc "Regenerate fingerprints"
