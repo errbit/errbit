@@ -26,17 +26,20 @@ class NotificationServices::HoiioService < NotificationService
   end
 
   def notification_description(problem)
-    "[#{ problem.environment }]#{problem.message.to_s.truncate(50)}"
+    "[#{problem.environment}]#{problem.message.to_s.truncate(50)}"
   end
 
   def create_notification(problem)
-    # build the hoi client
     sms = Hoi::SMS.new(api_token, subdomain)
 
-    # send sms
     room_id.split(',').each do |number|
-      sms.send :dest => number, :msg => "http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"
+      sms.send :dest => number, :msg => form_message(problem)
     end
+  end
 
+  private
+
+  def form_message(problem)
+    "#{problem_url(problem)} #{notification_description(problem)}"
   end
 end

@@ -18,7 +18,7 @@ class NotificationService
   validate :check_params
 
   if Errbit::Config.per_app_notify_at_notices
-    Fields = [[:notify_at_notices, 
+    Fields = [[:notify_at_notices,
                { :placeholder => 'comma separated numbers or simply 0 for every notice',
                  :label => 'notify on errors (0 for all errors)'
                }
@@ -26,7 +26,7 @@ class NotificationService
   else
     Fields = []
   end
-       
+
   def notify_at_notices
     Errbit::Config.per_app_notify_at_notices ? super : Errbit::Config.notify_at_notices
   end
@@ -54,6 +54,7 @@ class NotificationService
   end
 
   def problem_url(problem)
-    "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
+    app_problem_url(problem.app, problem)
+#    "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
   end
 end

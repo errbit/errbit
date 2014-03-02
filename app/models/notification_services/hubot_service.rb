@@ -21,12 +21,16 @@ class NotificationServices::HubotService < NotificationService
     api_token
   end
 
-  def message_for_hubot(problem)
-    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem_url(problem)}"
+  def create_notification(problem)
+    HTTParty.post(url,
+                  :body => { :message => form_message(problem),
+                    :room => room_id })
   end
 
-  def create_notification(problem)
-    HTTParty.post(url, :body => {:message => message_for_hubot(problem), :room => room_id})
+  private
+
+  def form_message(problem)
+    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem_url(problem)}"
   end
 end
 

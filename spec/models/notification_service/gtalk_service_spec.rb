@@ -17,7 +17,7 @@ describe NotificationService::GtalkService do
     expect(gtalk).to receive(:connect).with(notification_service.service)
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
     message_value = """#{problem.app.name.to_s}
-http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
+#{notification_service.problem_url(problem)} a
 #{notification_service.notification_description problem}"""
 
     expect(Jabber::Message).to receive(:new).with(notification_service.user_id, message_value).and_return(message)
@@ -39,7 +39,7 @@ http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
       @notification_service = Fabricate :gtalk_notification_service, :app => @notice.app
       @problem = @notice.problem
       @error_msg = """#{@problem.app.name.to_s}
-http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
+#{@notification_service.problem_url(@problem)}
 #{@notification_service.notification_description @problem}"""
 
       # gtalk stubbing
@@ -50,6 +50,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
       Jabber::JID.stub(:new).with(@notification_service.subdomain).and_return(jid)
       Jabber::Client.stub(:new).with(jid).and_return(@gtalk)
     end
+
     it "should send a notification to all ',' separated users" do
       expect(Jabber::Message).to receive(:new).with("first@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("second@domain.org", @error_msg)
@@ -62,6 +63,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
       @notification_service.room_id = ""
       @notification_service.create_notification(@problem)
     end
+
     it "should send a notification to all ';' separated users" do
       expect(Jabber::Message).to receive(:new).with("first@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("second@domain.org", @error_msg)
@@ -74,6 +76,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
       @notification_service.room_id = ""
       @notification_service.create_notification(@problem)
     end
+
     it "should send a notification to all ' ' separated users" do
       expect(Jabber::Message).to receive(:new).with("first@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("second@domain.org", @error_msg)
@@ -105,7 +108,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
     expect(gtalk).to receive(:connect)
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
     message_value = """#{problem.app.name.to_s}
-http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
+#{notification_service.problem_url(problem)}
 #{notification_service.notification_description problem}"""
 
     expect(Jabber::Message).to receive(:new).with(notification_service.room_id, message_value).and_return(message)
