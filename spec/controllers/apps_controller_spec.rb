@@ -8,7 +8,7 @@ describe AppsController do
   let(:admin) { Fabricate(:admin) }
   let(:user) { Fabricate(:user) }
   let(:watcher) { Fabricate(:user_watcher, :app => app, :user => user) }
-  let(:unwatched_app) { Fabricate(:app) }
+  let(:unwatched_app) { Fabricate(:app, :name => "Zulu app") }
   let(:app) { unwatched_app }
   let(:watched_app1) do
     a = Fabricate(:app)
@@ -33,20 +33,20 @@ describe AppsController do
 
   describe "GET /apps" do
     context 'when logged in as an admin' do
-      it 'finds all apps' do
+      it 'finds all apps ordered by name' do
         sign_in admin
         unwatched_app && watched_app1 && watched_app2
         get :index
-        expect(controller.apps.entries).to eq App.all.sort.entries
+        expect(controller.apps.entries).to eq App.asc('name').entries
       end
     end
 
     context 'when logged in as a regular user' do
-      it 'still finds all apps' do
+      it 'still finds all apps ordered by name' do
         sign_in(user)
         watched_app1 && watched_app2 && unwatched_app
         get :index
-        expect(controller.apps.entries).to eq App.all.sort.entries
+        expect(controller.apps.entries).to eq App.asc('name').entries
       end
     end
   end
