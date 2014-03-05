@@ -77,7 +77,7 @@ feature 'Authentication with GDS SSO' do
   end
 
   context "session timeout" do
-    it "should timeout the session after 30 mins inactivity" do
+    it "should timeout the session after 8 hours inactivity" do
       mock_gds_sso_auth('1234')
 
       visit '/'
