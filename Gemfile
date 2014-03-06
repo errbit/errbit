@@ -105,6 +105,7 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
+  gem 'test_after_commit'
   gem 'coveralls', :require => false
 end
 

@@ -15,8 +15,7 @@ class Notice < ActiveRecord::Base
   belongs_to :backtrace
 
   after_create :cache_attributes_on_problem, :unresolve_problem
-  after_create :email_notification
-  after_create :services_notification
+  after_commit :email_notification, :services_notification, on: :create
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
   after_initialize :default_values

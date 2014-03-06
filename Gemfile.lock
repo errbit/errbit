@@ -314,6 +314,7 @@ GEM
       railties (~> 3.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
+    test_after_commit (0.2.2)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -405,6 +406,7 @@ DEPENDENCIES
   ruby-fogbugz
   rushover
   strong_parameters
+  test_after_commit
   therubyracer
   timecop
   turbo-sprockets-rails3
