@@ -89,7 +89,7 @@ describe Users::OmniauthCallbacksController do
         get :gds
 
         expect(response.status).to eq(403)
-        expect(response.body).to match("Computer says no")
+        expect(response.body).to match("You do not have permission to access the app")
       end
     end
   end

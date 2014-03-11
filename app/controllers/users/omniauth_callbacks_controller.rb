@@ -44,7 +44,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:success] = I18n.t "devise.omniauth_callbacks.success", :kind => "GDS Signon"
       sign_in_and_redirect user, :event => :authentication
     else
-      render :status => 403, :text => I18n.t("devise.omniauth_callbacks.failure", :kind => "GDS Signon", :reason => "Computer says no")
+      render :status => 403, :text => I18n.t("devise.omniauth_callbacks.failure", :kind => "GDS Signon", :reason => "You do not have permission to access the app")
     end
   end
 
