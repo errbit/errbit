@@ -31,7 +31,7 @@ feature 'Authentication with GDS SSO' do
       mock_gds_sso_auth('1234', :permissions => [])
       visit '/'
 
-      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.failure", :kind => 'GDS Signon', :reason => "Computer says no"))
+      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.failure", :kind => 'GDS Signon', :reason => "You do not have permission to access the app"))
 
       u = User.where(:uid => '1234').first
       expect(u).to be_nil
@@ -69,7 +69,7 @@ feature 'Authentication with GDS SSO' do
       mock_gds_sso_auth('1234', :permissions => [])
       visit '/'
 
-      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.failure", :kind => 'GDS Signon', :reason => "Computer says no"))
+      expect(page).to have_content(I18n.t("devise.omniauth_callbacks.failure", :kind => 'GDS Signon', :reason => "You do not have permission to access the app"))
 
       # shouldn't actually delete the user...
       expect(User.find(@user.id)).to be
