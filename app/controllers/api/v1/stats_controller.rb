@@ -12,6 +12,7 @@ class Api::V1::StatsController < ApplicationController
 
     stats = {
       :name => @app.name,
+      :id => @app.id,
       :last_error_time => @last_error_time,
       :unresolved_errors => @app.unresolved_count
     }
