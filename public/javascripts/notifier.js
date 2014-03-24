@@ -1154,6 +1154,13 @@ printStackTrace.implementation.prototype = {
                     stacktrace[i] += '@unsupported.js';
                 }
 
+                // Special case for sprocket coffee stacktrace:
+                //  "Function.foo (http://host/file.js?body=1:666:42)" becomes "Function.foo @http://host/file.js?body=1:666"
+                if (stacktrace[i].match(/\([^\s]+:(\d+):(\d+)\)$/)) {
+                    stacktrace[i] = stacktrace[i].replace(/\((.+):(\d+):(\d+)\)$/, '@$1:$2')
+                    continue;
+                }
+
                 stacktrace[i] += ':0';
             }
 
