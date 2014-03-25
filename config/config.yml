@@ -52,7 +52,7 @@ allow_comments_with_issue_tracker: true
 # Since this is an internal application, you might like to see what caused Errbit to crash.
 # Pull requests are always welcome!
 # However, you might be more comfortable setting this to false if your server can be accessed by anyone.
-display_internal_errors: true
+display_internal_errors: false
 
 # Enable Gravatar.
 use_gravatar: true
