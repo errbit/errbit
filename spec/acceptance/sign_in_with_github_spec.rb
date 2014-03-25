@@ -1,6 +1,6 @@
 require 'acceptance/acceptance_helper'
 
-feature 'Sign in with GitHub' do
+feature 'Sign in with GitHub', :pending => "No longer applicable due to GDS SSO" do
 
   background do
     Errbit::Config.stub(:github_authentication) { true }

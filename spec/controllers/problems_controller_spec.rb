@@ -182,10 +182,9 @@ describe ProblemsController do
         expect(controller.problem).to eq @watched_err.problem
       end
 
-      it 'raises a DocumentNotFound error if the user is not watching the app' do
-        expect {
-          get :show, :app_id => @unwatched_err.problem.app_id, :id => @unwatched_err.problem.id
-        }.to raise_error(Mongoid::Errors::DocumentNotFound)
+      it 'still finds the problem if the user is not watching the app' do
+        get :show, :app_id => @unwatched_err.problem.app_id, :id => @unwatched_err.problem.id
+        expect(controller.problem).to eq @unwatched_err.problem
       end
     end
   end

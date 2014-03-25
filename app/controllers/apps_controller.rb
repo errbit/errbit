@@ -8,11 +8,11 @@ class AppsController < ApplicationController
   respond_to :html
 
   expose(:app_scope) {
-    (current_user.admin? ? App : current_user.apps)
+    App
   }
 
   expose(:apps) {
-    app_scope.all.sort.to_a
+    app_scope.asc('name').to_a
   }
 
   expose(:app, :ancestor => :app_scope)

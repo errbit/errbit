@@ -158,6 +158,9 @@ GEM
       activesupport (>= 3.0.0)
     linecache (0.46)
       rbx-require-relative (> 0.0.4)
+    logstash-event (1.1.5)
+    logstasher (0.4.8)
+      logstash-event (~> 1.1.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -207,6 +210,8 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
+    omniauth-gds (3.0.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-github (1.1.1)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
@@ -229,6 +234,7 @@ GEM
       rest-client (~> 1.6.0)
     pjax_rails (0.3.4)
       jquery-rails
+    plek (1.7.0)
     polyglot (0.3.4)
     premailer (1.7.3)
       css_parser (>= 1.1.9)
@@ -352,6 +358,8 @@ GEM
     useragent (0.8.3)
     warden (1.2.3)
       rack (>= 1.0)
+    warden-oauth2 (0.0.1)
+      warden
     webmock (1.15.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
@@ -396,15 +404,18 @@ DEPENDENCIES
   kaminari (>= 0.14.1)
   launchy
   lighthouse-api
+  logstasher (= 0.4.8)
   meta_request
   mongoid
   mongoid-rspec
   mongoid_rails_migrations
   octokit (~> 2.0)
+  omniauth-gds (= 3.0.0)
   omniauth-github
   oruen_redmine_client
   pivotal-tracker
   pjax_rails
+  plek (= 1.7.0)
   pry-rails
   puma
   quiet_assets
@@ -425,6 +436,7 @@ DEPENDENCIES
   underscore-rails
   unicorn
   useragent
+  warden-oauth2 (= 0.0.1)
   webmock
   xmpp4r
   yajl-ruby
