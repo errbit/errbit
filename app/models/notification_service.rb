@@ -17,6 +17,8 @@ class NotificationService
 
   validate :check_params
 
+
+
   if Errbit::Config.per_app_notify_at_notices
     Fields = [[:notify_at_notices,
                { :placeholder => 'comma separated numbers or simply 0 for every notice',
@@ -34,10 +36,6 @@ class NotificationService
   # Subclasses are responsible for overwriting this method.
   def check_params; true; end
 
-  def notification_description(problem)
-    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
-  end
-
   # Allows us to set the issue tracker class from a single form.
   def type; self._type; end
   def type=(t); self._type=t; end
@@ -53,8 +51,46 @@ class NotificationService
     api_token.present?
   end
 
+  private
+
+  # Each subclass should call form_* in order to call the correct
+  # method for the object.  If you do need to override a certain
+  # message simply add the deploy_ or problem_ method to the subclass
+  # i.e problem_message deploy_message.  Having said this as each
+  # subclass has a custom method for the problem message formation
+  # I have left it out of this class.
+  def method_missing(method, *args, &block)
+    if method.to_s.start_with?('form')
+      method = method.to_s.split('_').last
+      send_message_type(method, *args)
+    else
+      super
+    end
+  end
+
+  def send_message_type(method, message_info)
+    meth = "#{message_info.class.name.underscore}_#{method}".to_sym
+    send(meth, message_info)
+  end
+
+  def deploy_message(deploy)
+    %Q(#{deploy_subject(deploy)} with revision #{deploy.revision})
+  end
+  alias_method :deploy_description, :deploy_message
+
+  def deploy_subject(deploy)
+    %Q(#{deploy.app.name} has been deployed to #{deploy.environment})
+  end
+
+  def deploy_url(deploy)
+    app_url(deploy.app)
+  end
+
   def problem_url(problem)
     app_problem_url(problem.app, problem)
-#    "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
+  end
+
+  def problem_description(problem)
+    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
   end
 end
