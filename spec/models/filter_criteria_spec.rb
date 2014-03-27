@@ -12,6 +12,17 @@ describe FilterCriteria do
     allow(notice).to receive(:where).and_return('application#index')
   end
 
+  context 'validation' do
+    it 'is valid with one criterium' do
+      filter.where = 'test'
+      expect(filter.valid?).to eq true
+    end
+
+    it 'is invalid with no criterium' do
+      expect(filter.valid?).to eq false
+    end
+  end
+
   context 'message' do
     it 'matches "Too Much Bar"' do
       filter.message = 'Too Much Bar'
