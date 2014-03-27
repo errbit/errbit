@@ -6,6 +6,8 @@ class FilterCriteria
   field :url
   field :where
 
+  validate :at_least_one_criteria_present
+
   def pass? notice
     matches = []
     [:message, :error_class, :url, :where].each do |sym|
@@ -19,5 +21,12 @@ class FilterCriteria
   def match_criteria(attribute, notice)
     criteria = Regexp.new self[attribute]
     criteria === notice.send(attribute)
+  end
+
+  def at_least_one_criteria_present
+    present = [message, error_class, url, where].map(&:present?)
+    unless present.any?
+      errors.add(:base, 'At least one criteria must be present.')
+    end
   end
 end
