@@ -9,11 +9,15 @@ class FilterCriteria
   def pass? notice
     matches = []
     [:message, :error_class, :url, :where].each do |sym|
-      if self[sym].present?
-        regex = Regexp.new self[sym]
-        matches << ( regex === notice.send(sym) )
-      end
+      matches << match_criteria(sym, notice) if self[sym].present?
     end
     matches.any? { |m| m == false }
+  end
+
+  private
+
+  def match_criteria(attribute, notice)
+    criteria = Regexp.new self[attribute]
+    criteria === notice.send(attribute)
   end
 end
