@@ -1,4 +1,4 @@
-class FilterCriteria
+class Filter
   include Mongoid::Document
 
   field :message
