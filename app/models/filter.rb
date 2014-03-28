@@ -7,6 +7,8 @@ class Filter
   field :url
   field :where
 
+  belongs_to :app
+
   validates :description, :presence => true
   validate :at_least_one_criteria_present
 
