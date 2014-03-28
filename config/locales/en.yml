@@ -42,7 +42,17 @@ en:
         destroy:
           success: "Your app was successfully destroyed."
           error: "Your app could not be destroyed."
-
+    filters:
+      flash:
+        create:
+          success: "The filter is now added. All new errors will pass through this."
+          error: "Your filter could not be created."
+        update:
+          success: "Your filter was successfully updated."
+          error: "Your filter could not be updated."
+        destroy:
+          success: "Your filter was successfully destroyed."
+          error: "Your filter could not be destroyed."
     users:
       flash:
         destroy:
@@ -77,7 +87,8 @@ en:
       merge: "Merge select issues? They can be unmerged later."
       unmerge: "Unmerge selected issues? They can be re-merged later."
       unresolve: "Unresolve selected issues? They can be resolved again later."
-
+  filter:
+    confirm_delete: "Premanently delete this filter?"
   comments:
     confirm_delete: "Premanently delete this comment?"
   users:
