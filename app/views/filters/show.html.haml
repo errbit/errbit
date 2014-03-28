@@ -1,0 +1,21 @@
+- content_for :title, "Filter"
+
+- content_for :action_bar do
+  %span= link_to('Add a New Filter', new_filter_path, :class => 'add')
+  = link_to 'edit', edit_filter_path(filter), :class => 'button'
+  = link_to 'destroy', filter_path(filter), :method => :delete,
+    :data => { :confirm => t('filter.confirm_delete') }, :class => 'delete button'
+
+%table.single_filter
+  %tr
+    %th Message
+    %td.main= filter.message
+  %tr
+    %th Error Class
+    %td= filter.error_class
+  %tr
+    %th URL
+    %td= filter.url
+  %tr
+    %th Where
+    %td= filter.where
