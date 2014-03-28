@@ -21,6 +21,10 @@ class Filter
     matches.any? { |m| m == false }
   end
 
+  def global?
+    app.nil?
+  end
+
   private
 
   def match_criteria(attribute, notice)
