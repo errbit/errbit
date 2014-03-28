@@ -36,6 +36,7 @@ class FiltersController < ApplicationController
 
   private
   def filter_params
-    params.require(:filter).permit(:message, :url, :error_class, :where)
+    params.require(:filter).permit(:message, :url, :error_class, :where,
+                                   :description)
   end
 end

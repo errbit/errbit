@@ -96,6 +96,13 @@ en:
       error_class: Error Class
       url: URL
       where: Where
+      description: Description
+    show:
+      message: Message
+      error_class: Error Class
+      url: URL
+      where: Where
+      description: Description
   comments:
     confirm_delete: "Premanently delete this comment?"
   users:

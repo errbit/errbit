@@ -1,11 +1,13 @@
 class Filter
   include Mongoid::Document
 
+  field :description
   field :message
   field :error_class
   field :url
   field :where
 
+  validates :description, :presence => true
   validate :at_least_one_criteria_present
 
   def pass? notice

@@ -4,18 +4,21 @@
   %span= link_to('Add a New Global Filter', new_filter_path, :class => 'add')
   = link_to 'edit', edit_filter_path(filter), :class => 'button'
   = link_to 'destroy', filter_path(filter), :method => :delete,
-    :data => { :confirm => t('filter.confirm_delete') }, :class => 'delete button'
+    :data => { :confirm => t('filters.confirm_delete') }, :class => 'delete button'
 
 %table.single_filter
   %tr
-    %th Message
+    %th= t('.description')
+    %td.main= filter.description
+  %tr
+    %th= t('.message')
     %td.main= filter.message
   %tr
-    %th Error Class
+    %th= t('.error_class')
     %td= filter.error_class
   %tr
-    %th URL
+    %th= t('.url')
     %td= filter.url
   %tr
-    %th Where
+    %th= t('.where')
     %td= filter.where
