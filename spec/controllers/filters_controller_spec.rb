@@ -61,6 +61,13 @@ describe FiltersController do
         }.to change(Filter, :count).by(1)
       end
 
+      it 'creates association with application when specified' do
+        attributes[:app_id] = Fabricate(:app).id
+        expect {
+          post :create, :filter => attributes
+        }.to change(Filter, :count).by(1)
+      end
+
       it 'redirecs to filter#show' do
         post :create, :filter => attributes
         expect(response).to redirect_to filter_path(controller.filter)

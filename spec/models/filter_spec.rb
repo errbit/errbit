@@ -131,4 +131,18 @@ describe Filter do
     end
   end
 
+  context 'can belong to an application' do
+    let(:filter) { Fabricate(:filter) }
+    it 'has reference to an application' do
+      app = Fabricate(:app)
+      filter.app = app
+      expect(filter.app).to eq app
+    end
+
+    it 'can be global by not specifying an application' do
+      filter.app = nil
+      expect(filter.app).to eq nil
+      expect(filter.valid?).to eq true
+    end
+  end
 end
