@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe FilterCriteriumController do
+describe FiltersController do
   it_requires_authentication
   it_requires_admin_privileges
 
   let(:admin) { Fabricate(:admin) }
-  let(:filter) { Fabricate(:filter_criteria, where: 'test') }
+  let(:filter) { Fabricate(:filter, :where => 'test') }
   before { sign_in admin}
 
   describe 'GET #index' do
     it 'populates an array with all filters' do
       get :index
-      expect(assigns :filters).to match_array FilterCriteria.all
+      expect(controller.filters).to match_array Filter.all
     end
   end
 
@@ -19,7 +19,7 @@ describe FilterCriteriumController do
     before { get :show, :id => filter.id }
 
     it 'assigns the requested fiter to @filter' do
-      expect(assigns :filter).to eq filter
+      expect(controller.filter).to eq filter
     end
 
     it 'renders the :show template' do
@@ -30,8 +30,8 @@ describe FilterCriteriumController do
   describe 'GET #new' do
     before { get :new }
 
-    it 'assigns a new FilterCriteria to @filter' do
-      expect(assigns :filter).to be_a_new FilterCriteria
+    it 'assigns a new Filter to @filter' do
+      expect(controller.filter).to be_a_new Filter
     end
 
     it 'renders the :new template' do
@@ -43,7 +43,7 @@ describe FilterCriteriumController do
     before { get :edit, :id => filter.id }
 
     it 'assigns the filter to @filter' do
-      expect(assigns :filter).to eq filter
+      expect(controller.filter).to eq filter
     end
 
     it 'renders the :edit template' do
@@ -53,17 +53,17 @@ describe FilterCriteriumController do
 
   describe 'POST #create' do
     context 'with valid attributes' do
-      let(:attributes) { Fabricate.attributes_for :filter_criteria, where: 'test' }
+      let(:attributes) { Fabricate.attributes_for :filter, :where => 'test' }
 
       it 'saves the new filter in the database' do
         expect {
-          post :create, filter_criteria: attributes
-        }.to change(FilterCriteria, :count).by(1)
+          post :create, :filter => attributes
+        }.to change(Filter, :count).by(1)
       end
 
       it 'redirecs to filter#show' do
-        post :create, filter_criteria: attributes
-        expect(response).to redirect_to filter_criterium_path(assigns :filter)
+        post :create, :filter => attributes
+        expect(response).to redirect_to filter_path(controller.filter)
       end
     end
 
@@ -71,12 +71,12 @@ describe FilterCriteriumController do
       let(:attributes) { Fabricate.attributes_for(:empty_filter, :message => '') }
       it 'does not save the new product in the database' do
         expect {
-          post :create, filter_criteria: attributes
-        }.to_not change(FilterCriteria, :count)
+          post :create, :filter => attributes
+        }.to_not change(Filter, :count)
       end
 
       it 're-renders the :new template' do
-        post :create, filter_criteria: attributes
+        post :create, :filter => attributes
         expect(response).to render_template :new
       end
     end
@@ -85,13 +85,13 @@ describe FilterCriteriumController do
   describe 'PATCH #update' do
     context 'with valid attributes' do
       before do
-        attributes = Fabricate.attributes_for(:filter_criteria, where: 'hello world')
-        put :update, :id => filter.id, filter_criteria: attributes
+        attributes = Fabricate.attributes_for(:filter, :where => 'hello world')
+        put :update, :id => filter.id, :filter => attributes
         filter.reload
       end
 
       it 'locates the requested filter' do
-        expect(assigns :filter).to eq filter
+        expect(controller.filter).to eq filter
       end
 
       it 'updates the filter in the database' do
@@ -106,7 +106,7 @@ describe FilterCriteriumController do
     context 'with invalid attributes' do
       before do
         attributes = Fabricate.attributes_for(:empty_filter, :message => '')
-        put :update, :id => filter.id, filter_criteria: attributes
+        put :update, :id => filter.id, :filter => attributes
         filter.reload
       end
 
@@ -121,17 +121,17 @@ describe FilterCriteriumController do
   end
 
   describe 'DELETE #destroy' do
-    let!(:filter) { Fabricate(:filter_criteria, where: 'test') }
+    let!(:filter) { Fabricate(:filter, :where => 'test') }
 
     it 'deletes the filter' do
       expect {
         delete :destroy, :id => filter.id
-      }.to change(FilterCriteria, :count).by(-1)
+      }.to change(Filter, :count).by(-1)
     end
 
     it 'redirects to filters#index' do
       delete :destroy, :id => filter.id
-      expect(response).to redirect_to filter_criterium_url
+      expect(response).to redirect_to filters_url
     end
   end
 end
