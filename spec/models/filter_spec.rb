@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FilterCriteria do
+describe Filter do
   context "attributes" do
     it { should have_fields(:message, :error_class, :url, :where) }
   end
