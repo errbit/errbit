@@ -5,7 +5,8 @@
 %table.filters
   %thead
     %tr
-      %th= t('.description')
+      %th.main= t('.description')
+      %th Global?
   %tbody
     = render filters
     - if filters.none?

@@ -22,3 +22,7 @@
   %tr
     %th= t('.where')
     %td= filter.where
+  - if filter.app
+    %tr
+      %th= t('.app')
+      %td= link_to filter.app_name, filter.app
