@@ -4,6 +4,7 @@ class FiltersController < ApplicationController
 
   expose(:filter, :attributes => :filter_params)
   expose(:filters) { Filter.all }
+  expose(:apps) { App.all.sort }
 
   def index; end
   def show; end
