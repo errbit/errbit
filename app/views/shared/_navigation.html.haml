@@ -4,4 +4,5 @@
     %li.errs{:class => active_if_here(:problems)}= link_to t('.errors'), problems_path
     - if user_signed_in? && current_user.admin?
       %li.users{:class => active_if_here(:users)}= link_to t('.users'), users_path
+      %li.filters{:class => active_if_here(:filters)}= link_to t('.filters'), filters_path
   %div.clear
