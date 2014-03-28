@@ -6,11 +6,6 @@ class FiltersController < ApplicationController
   expose(:filters) { Filter.all }
   expose(:apps) { App.all.sort }
 
-  def index; end
-  def show; end
-  def new; end
-  def edit; end
-
   def create
     if filter.save
       flash[:success] = t('controllers.filters.flash.create.success')
