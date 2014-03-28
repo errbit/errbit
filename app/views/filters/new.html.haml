@@ -1,8 +1,8 @@
-- content_for :title, 'New Filter'
+- content_for :title, 'New Global Filter'
 - content_for :action_bar, link_to('cancel', filters_path, :class => 'button')
 
 = form_for filter do |f|
 
   = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Add Filter'
+  %div.buttons= f.submit 'Add Global Filter'
