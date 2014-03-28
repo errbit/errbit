@@ -5,7 +5,7 @@ describe FilterCriteria do
     it { should have_fields(:message, :error_class, :url, :where) }
   end
 
-  let!(:filter) { Fabricate.build(:filter_criteria) }
+  let!(:filter) { Fabricate.build(:empty_filter, :message => '') }
   let(:notice) { Fabricate.build(:notice, error_class: 'FooError') }
   before do
     allow(notice).to receive(:url).and_return('http://example.com/apple-touch-icon.png')
