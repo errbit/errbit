@@ -8,6 +8,7 @@ class Filter
   field :where
 
   belongs_to :app
+  delegate :name, :to => :app, :prefix => true
 
   validates :description, :presence => true
   validate :at_least_one_criteria_present
