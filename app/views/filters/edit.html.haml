@@ -1,4 +1,4 @@
-- content_for :title, "Edit Global Filter"
+- content_for :title, "Edit Filter"
 - content_for :action_bar do
   = link_to('cancel', filter_path(filter), :class => 'button')
 
@@ -6,5 +6,5 @@
   = filter.errors.full_messages.to_sentence
   = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Update Global Filter'
+  %div.buttons= f.submit 'Update Filter'
 

@@ -90,7 +90,7 @@ en:
   filters:
     confirm_delete: "Premanently delete this filter?"
     index:
-      no_filters: 'No global filters here.'
+      no_filters: 'No filters here.'
       click_to_create: 'Click here to create your first one'
       message: Message
       error_class: Error Class
