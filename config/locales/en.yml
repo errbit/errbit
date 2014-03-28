@@ -87,8 +87,15 @@ en:
       merge: "Merge select issues? They can be unmerged later."
       unmerge: "Unmerge selected issues? They can be re-merged later."
       unresolve: "Unresolve selected issues? They can be resolved again later."
-  filter:
+  filters:
     confirm_delete: "Premanently delete this filter?"
+    index:
+      no_filters: 'No global filters here.'
+      click_to_create: 'Click here to create your first one'
+      message: Message
+      error_class: Error Class
+      url: URL
+      where: Where
   comments:
     confirm_delete: "Premanently delete this comment?"
   users:
