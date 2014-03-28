@@ -5,9 +5,15 @@
 %table.filters
   %thead
     %tr
-      %th Message
-      %th Error Class
-      %th URL
-      %th Where
+      %th= t('.message')
+      %th= t('.error_class')
+      %th= t('.url')
+      %th= t('.where')
   %tbody
     = render filters
+    - if filters.none?
+      %tr
+        %td{:colspan => 4}
+          %em
+            = t('.no_filters')
+            = link_to t('.click_to_create'), new_filter_path
