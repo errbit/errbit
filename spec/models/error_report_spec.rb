@@ -47,6 +47,19 @@ describe ErrorReport do
       end
     end
 
+    describe "#fingerprint_strategy" do
+      after(:all) {
+        error_report.fingerprint_strategy = Fingerprint
+      }
+
+      it "should be possible to change how fingerprints are generated" do
+        strategy = double()
+        strategy.should_receive(:generate){ 'fingerprints' }
+        error_report.fingerprint_strategy = strategy
+        error_report.generate_notice!
+      end
+    end
+
     describe "#generate_notice!" do
       it "save a notice" do
         expect {
