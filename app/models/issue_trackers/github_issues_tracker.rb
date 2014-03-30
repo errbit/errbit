@@ -29,7 +29,7 @@ if defined? Octokit
     def create_issue(problem, reported_by = nil)
       # Login using OAuth token, if given.
       if oauth_token
-        client = Octokit::Client.new(:login => username, :oauth_token => oauth_token)
+        client = Octokit::Client.new(:login => username, :access_token => oauth_token)
       else
         client = Octokit::Client.new(:login => username, :password => password)
       end
