@@ -1,11 +1,15 @@
 class Filter
   include Mongoid::Document
 
+  FIELDS = [:message, :error_class, :url, :where]
+
   field :description
   field :message
   field :error_class
   field :url
   field :where
+
+  scope :global, -> { where(:app => nil) }
 
   belongs_to :app
   delegate :name, :to => :app, :prefix => true
@@ -15,7 +19,7 @@ class Filter
 
   def pass? notice
     matches = []
-    [:message, :error_class, :url, :where].each do |sym|
+    FIELDS.each do |sym|
       matches << match_criteria(sym, notice) if self[sym].present?
     end
     matches.any? { |m| m == false }
