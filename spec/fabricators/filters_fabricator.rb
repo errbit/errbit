@@ -13,3 +13,10 @@ Fabricator :empty_filter, :from => :filter do
   url ''
   where ''
 end
+
+Fabricator :foobar_notice, :from => :notice do
+  message             'FooError: Too Much Bar'
+  server_environment  { {'environment-name' => 'production'} }
+  request             {{ 'component' => 'foo', 'action' => 'bar' }}
+  notifier            {{ 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' }}
+end
