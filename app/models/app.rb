@@ -176,6 +176,12 @@ class App
     set(:api_key, SecureRandom.hex)
   end
 
+  def keep_notice?(notice)
+    criteria = self.filters.map(&:dup)
+    criteria = criteria + Filter.global
+    criteria.map { |c| c.pass? notice }.all?
+  end
+
   protected
 
     def store_cached_attributes_on_problems
