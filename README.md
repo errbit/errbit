@@ -409,6 +409,19 @@ end
 
 Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or include `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
 
+Using custom fingerprinting methods
+-----------------------------------
+
+Errbit now allows you to easily use your own Fingerprint Strategy if that's what you'd like to do. If you are upgrading from a very old version of errbit, you can use the `LegacyFingerprint` to provide yourself
+with compatibility. The fingerprint strategy can be changed by adding an initializer to errbit:
+
+```ruby
+# config/fingerprint.rb
+ErrorReport.fingerprint_strategy = LegacyFingerprint
+```
+
+The easiest way to add custom fingerprint methods is to simply subclass `Fingerprint`
+
 Issue Trackers
 --------------
 
