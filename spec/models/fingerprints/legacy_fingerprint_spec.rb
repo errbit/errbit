@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MD5Fingerprint do
+describe LegacyFingerprint do
   context 'being created' do
     let(:backtrace) do
       Backtrace.create(:raw => [
@@ -23,7 +23,7 @@ describe MD5Fingerprint do
       end
 
       it "normalizes the fingerprint of generated methods" do
-        expect(MD5Fingerprint.generate(notice1, "api key")).to eql MD5Fingerprint.generate(notice2, "api key")
+        expect(LegacyFingerprint.generate(notice1, "api key")).to eql LegacyFingerprint.generate(notice2, "api key")
       end
     end
 
@@ -36,7 +36,7 @@ describe MD5Fingerprint do
       end
 
       it "normalizes the fingerprint of generated methods" do
-        expect(MD5Fingerprint.generate(notice1, "api key")).to eql MD5Fingerprint.generate(notice2, "api key")
+        expect(LegacyFingerprint.generate(notice1, "api key")).to eql LegacyFingerprint.generate(notice2, "api key")
       end
     end
   end
