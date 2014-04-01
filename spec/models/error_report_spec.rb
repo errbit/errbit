@@ -258,6 +258,21 @@ describe ErrorReport do
         end
       end
 
+      context "with filters set" do
+        before do
+          expect(error_report).to receive(:old_version?).and_return(false)
+        end
+
+        it 'returns false when fails to pass one or more filters' do
+          expect(error_report.app).to receive(:keep_notice?).and_return(false)
+          expect(error_report.should_keep?).to eq false
+        end
+
+        it 'returns true when passes all filters' do
+          expect(error_report.app).to receive(:keep_notice?).and_return(true)
+          expect(error_report.should_keep?).to eq true
+        end
+      end
     end
 
   end
