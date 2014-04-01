@@ -73,7 +73,7 @@ class ErrorReport
   end
 
   def should_keep?
-    if old_version?
+    if old_version? || !notice_passes_filters?
       false
     else
       true
@@ -85,6 +85,19 @@ class ErrorReport
   def old_version?
     app_version = server_environment['app-version'] || ''
     self.app.current_app_version.present? && ( app_version.length <= 0 || Gem::Version.new(app_version) < Gem::Version.new(self.app.current_app_version) )
+  end
+
+  def notice_passes_filters?
+    notice = Notice.new(
+      :message => message,
+      :error_class => error_class,
+      :request => request,
+      :server_environment => server_environment,
+      :notifier => notifier,
+      :user_attributes => user_attributes,
+      :framework => framework
+    )
+    app.keep_notice? notice
   end
 
   def fingerprint
