@@ -177,8 +177,8 @@ class App
   end
 
   def keep_notice?(notice)
-    criteria = self.filters.map(&:dup)
-    criteria = criteria + Filter.global
+    criteria  = filters.map(&:dup)
+    criteria += Filter.global
     criteria.map { |c| c.pass? notice }.all?
   end
 

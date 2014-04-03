@@ -80,7 +80,7 @@ class ErrorReport
 
   def current_version?
     app_version = server_environment['app-version'] || ''
-    current_version = self.app.current_app_version
+    current_version = app.current_app_version
     return true unless current_version.present?
     return false if app_version.length <= 0
     Gem::Version.new(app_version) >= Gem::Version.new(current_version)
