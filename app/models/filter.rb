@@ -34,7 +34,7 @@ class Filter
   end
 
   def at_least_one_criteria_present
-    present = [message, error_class, url, where].map(&:present?)
+    present = FIELDS.map { |sym| self[sym] }.map(&:present?)
     errors.add(:base, 'At least one criteria must be present.') if present.none?
   end
 end
