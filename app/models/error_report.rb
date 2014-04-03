@@ -73,21 +73,20 @@ class ErrorReport
   end
 
   def should_keep?
-    if old_version? || !notice_passes_filters?
-      false
-    else
-      true
-    end
+    current_version? && passes_filters?
   end
 
   private
 
-  def old_version?
+  def current_version?
     app_version = server_environment['app-version'] || ''
-    self.app.current_app_version.present? && ( app_version.length <= 0 || Gem::Version.new(app_version) < Gem::Version.new(self.app.current_app_version) )
+    current_version = self.app.current_app_version
+    return true unless current_version.present?
+    return false if app_version.length <= 0
+    Gem::Version.new(app_version) >= Gem::Version.new(current_version)
   end
 
-  def notice_passes_filters?
+  def passes_filters?
     notice = Notice.new(
       :message => message,
       :error_class => error_class,
