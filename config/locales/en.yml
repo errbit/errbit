@@ -88,7 +88,7 @@ en:
       unmerge: "Unmerge selected issues? They can be re-merged later."
       unresolve: "Unresolve selected issues? They can be resolved again later."
   filters:
-    confirm_delete: "Premanently delete this filter?"
+    confirm_delete: "Permanently delete this filter?"
     index:
       no_filters: 'No filters here.'
       click_to_create: 'Click here to create your first one'
@@ -104,7 +104,7 @@ en:
       where: Where
       description: Description
   comments:
-    confirm_delete: "Premanently delete this comment?"
+    confirm_delete: "Permanently delete this comment?"
   users:
     confirm_delete: "Permanently delete this user?"
   apps:
