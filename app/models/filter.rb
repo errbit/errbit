@@ -18,10 +18,7 @@ class Filter
   validate :at_least_one_criteria_present
 
   def pass? notice
-    matches = []
-    FIELDS.each do |sym|
-      matches << match_criteria(sym, notice) if self[sym].present?
-    end
+    matches = FIELDS.map { |sym| match?(sym, notice) if self[sym].present? }
     matches.any? { |m| m == false }
   end
 
@@ -31,15 +28,13 @@ class Filter
 
   private
 
-  def match_criteria(attribute, notice)
+  def match?(attribute, notice)
     criteria = Regexp.new self[attribute]
     criteria === notice.send(attribute)
   end
 
   def at_least_one_criteria_present
     present = [message, error_class, url, where].map(&:present?)
-    unless present.any?
-      errors.add(:base, 'At least one criteria must be present.')
-    end
+    errors.add(:base, 'At least one criteria must be present.') if present.none?
   end
 end
