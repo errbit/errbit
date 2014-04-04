@@ -19,7 +19,7 @@ class ErrorReport
               :notifier, :user_attributes, :framework, :notice
 
   cattr_accessor :fingerprint_strategy do
-    Fingerprint
+    Fingerprint::Sha1
   end
 
   def initialize(xml_or_attributes)
