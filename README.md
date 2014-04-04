@@ -399,11 +399,11 @@ Using custom fingerprinting methods
 -----------------------------------
 
 Errbit allows you to use your own Fingerprinting Strategy.
-If you are upgrading from a very old version of errbit, you can use the `LegacyFingerprint` for compatibility. The fingerprint strategy can be changed by adding an initializer to errbit:
+If you are upgrading from a very old version of errbit, you can use the `Fingerprint::MD5` for compatibility. The fingerprint strategy can be changed by adding an initializer to errbit:
 
 ```ruby
 # config/fingerprint.rb
-ErrorReport.fingerprint_strategy = LegacyFingerprint
+ErrorReport.fingerprint_strategy = Fingerprint::MD5
 ```
 
 The easiest way to add custom fingerprint methods is to simply subclass `Fingerprint`
