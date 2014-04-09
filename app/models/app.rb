@@ -30,7 +30,7 @@ class App
   embeds_one :notification_service
 
   has_many :problems, :inverse_of => :app, :dependent => :destroy
-  has_many :filters
+  has_many :filters, :dependent => :destroy
 
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_repo
