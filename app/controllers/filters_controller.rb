@@ -8,7 +8,8 @@ class FiltersController < ApplicationController
 
   def create
     if filter.save
-      redirect_to filter, success: t('controllers.filters.flash.create.success')
+      flash[:success] = t('controllers.filters.flash.create.success')
+      redirect_to filter
     else
       render :new
     end
@@ -16,7 +17,8 @@ class FiltersController < ApplicationController
 
   def update
     if filter.update_attributes filter_params
-      redirect_to filter, success: t('controllers.filters.flash.update.success')
+      flash[:success] = t('controllers.filters.flash.update.success')
+      redirect_to filter
     else
       render :edit
     end
@@ -24,7 +26,8 @@ class FiltersController < ApplicationController
 
   def destroy
     filter.destroy
-    redirect_to filters_url, success: t('controllers.filters.flash.destroy.success')
+    flash[:success] = t('controllers.filters.flash.destroy.success')
+    redirect_to filters_url
   end
 
   private
