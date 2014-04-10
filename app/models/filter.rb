@@ -9,7 +9,7 @@ class Filter
   field :url
   field :where
 
-  scope :global, -> { where(app_id: nil, app_id: "") }
+  scope :global, -> { where(app_id: nil, app_id: '') }
 
   belongs_to :app
   delegate :name, to: :app, prefix: true
