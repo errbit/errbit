@@ -86,17 +86,20 @@ class ErrorReport
     Gem::Version.new(app_version) >= Gem::Version.new(current_version)
   end
 
-  def passes_filters?
-    notice = Notice.new(
-      :message => message,
-      :error_class => error_class,
-      :request => request,
-      :server_environment => server_environment,
-      :notifier => notifier,
-      :user_attributes => user_attributes,
-      :framework => framework
+  def build_notice
+    Notice.new(
+      message:            message,
+      error_class:        error_class,
+      request:            request,
+      server_environment: server_environment,
+      notifier:           notifier,
+      user_attributes:    user_attributes,
+      framework:          framework
     )
-    app.keep_notice? notice
+  end
+
+  def passes_filters?
+    app.keep_notice? build_notice
   end
 
   def fingerprint
