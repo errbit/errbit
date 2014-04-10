@@ -610,7 +610,3 @@ Copyright
 
 Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
 
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/errbit/errbit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
