@@ -202,38 +202,38 @@ describe ProblemsController do
     before do
       sign_in Fabricate(:admin)
 
-      @problem = Fabricate(:err)
-      App.stub(:find).with(@problem.app.id.to_s).and_return(@problem.app)
-      @problem.app.problems.stub(:find).and_return(@problem.problem)
-      @problem.problem.stub(:resolve!)
+      @err = Fabricate(:err)
+      App.stub(:find).with(@err.app.id.to_s).and_return(@err.app)
+      @err.app.problems.stub(:find).and_return(@err.problem)
+      @err.problem.stub(:resolve!)
     end
 
     it 'finds the app and the problem' do
-      expect(App).to receive(:find).with(@problem.app.id.to_s).and_return(@problem.app)
-      expect(@problem.app.problems).to receive(:find).and_return(@problem.problem)
-      put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
-      expect(controller.app).to eq @problem.app
-      expect(controller.problem).to eq @problem.problem
+      expect(App).to receive(:find).with(@err.app.id.to_s).and_return(@err.app)
+      expect(@err.app.problems).to receive(:find).and_return(@err.problem)
+      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      expect(controller.app).to eq @err.app
+      expect(controller.problem).to eq @err.problem
     end
 
     it "should resolve the issue" do
-      expect(@problem.problem).to receive(:resolve!).and_return(true)
-      put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
+      expect(@err.problem).to receive(:resolve!).and_return(true)
+      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
     end
 
     it "should display a message" do
-      put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
+      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
       expect(request.flash[:success]).to match(/Great news/)
     end
 
     it "should redirect to the app page" do
-      put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
-      expect(response).to redirect_to(app_path(@problem.app))
+      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      expect(response).to redirect_to(app_path(@err.app))
     end
 
     it "should redirect back to problems page" do
       request.env["Referer"] = problems_path
-      put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
+      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
       expect(response).to redirect_to(problems_path)
     end
   end
