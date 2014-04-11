@@ -1,0 +1,13 @@
+#!/bin/bash
+# Everything in this bootstrap script
+# is idempotent. It is OK to run again
+# on an existing project if you are
+# uncertain whether it is set up.
+
+git submodule update --init
+bundle || exit
+bundle exec rake db:create db:migrate || exit
+bundle exec rake spec
+
+echo "If this is the first time you've cloned Errbit"
+echo "You might want to run \`bundle exec rake errbit:bootstrap\`"
