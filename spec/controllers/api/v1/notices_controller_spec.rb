@@ -31,14 +31,12 @@ describe Api::V1::NoticesController do
       end
 
       describe "given a date range" do
-
         it "should return only the notices created during the date range" do
           get :index, {:auth_token => @user.authentication_token, :start_date => "2012-08-01", :end_date => "2012-08-27"}
           expect(response).to be_success
           notices = JSON.load response.body
           expect(notices.length).to eq 3
         end
-
       end
 
       it "should return all notices" do

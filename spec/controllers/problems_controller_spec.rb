@@ -11,8 +11,8 @@ describe ProblemsController do
   let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production")) }
 
 
+
   describe "GET /problems" do
-    #render_views
     context 'when logged in as an admin' do
       before(:each) do
         @user = Fabricate(:admin)
@@ -98,6 +98,8 @@ describe ProblemsController do
     end
   end
 
+
+
   describe "GET /problems - previously all" do
     context 'when logged in as an admin' do
       it "gets a paginated list of all problems" do
@@ -126,9 +128,9 @@ describe ProblemsController do
     end
   end
 
-  describe "GET /apps/:app_id/problems/:id" do
-    #render_views
 
+
+  describe "GET /apps/:app_id/problems/:id" do
     context 'when logged in as an admin' do
       before do
         sign_in Fabricate(:admin)
@@ -168,8 +170,9 @@ describe ProblemsController do
           expect(assigns(:notices)).to include(notices.first)
         end
       end
-
     end
+
+
 
     context 'when logged in as a user' do
       before do
@@ -192,6 +195,8 @@ describe ProblemsController do
       end
     end
   end
+
+
 
   describe "PUT /apps/:app_id/problems/:id/resolve" do
     before do
@@ -233,9 +238,9 @@ describe ProblemsController do
     end
   end
 
-  describe "POST /apps/:app_id/problems/:id/create_issue" do
-    #render_views
 
+
+  describe "POST /apps/:app_id/problems/:id/create_issue" do
     before(:each) do
       sign_in Fabricate(:admin)
     end
@@ -301,6 +306,8 @@ describe ProblemsController do
     end
   end
 
+
+
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
     before(:each) do
       sign_in Fabricate(:admin)
@@ -337,6 +344,8 @@ describe ProblemsController do
     end
   end
 
+
+
   describe "Bulk Actions" do
     before(:each) do
       sign_in Fabricate(:admin)
@@ -357,7 +366,6 @@ describe ProblemsController do
     end
 
     context "POST /problems/unmerge_several" do
-
       it "should require at least one problem" do
         post :unmerge_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -371,11 +379,9 @@ describe ProblemsController do
           expect(merged_problem.reload.errs.length).to eq 1
         }.to change(Problem, :count).by(1)
       end
-
     end
 
     context "POST /problems/resolve_several" do
-
       it "should require at least one problem" do
         post :resolve_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -399,7 +405,6 @@ describe ProblemsController do
     end
 
     context "POST /problems/unresolve_several" do
-
       it "should require at least one problem" do
         post :unresolve_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -421,4 +426,3 @@ describe ProblemsController do
   end
 
 end
-
