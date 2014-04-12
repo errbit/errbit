@@ -137,17 +137,17 @@ describe ProblemsController do
       end
 
       it "finds the app" do
-        get :show, :app_id => app.id, :id => err.problem.id
+        get :show, :app_id => app.id, :id => err.id
         expect(controller.app).to eq app
       end
 
       it "finds the problem" do
-        get :show, :app_id => app.id, :id => err.problem.id
+        get :show, :app_id => app.id, :id => err.id
         expect(controller.problem).to eq err.problem
       end
 
       it "successfully render page" do
-        get :show, :app_id => app.id, :id => err.problem.id
+        get :show, :app_id => app.id, :id => err.id
         expect(response).to be_success
       end
 
@@ -159,13 +159,13 @@ describe ProblemsController do
         end
 
         it "paginates the notices 1 at a time, starting with the most recent" do
-          get :show, :app_id => app.id, :id => err.problem.id
+          get :show, :app_id => app.id, :id => err.id
           expect(assigns(:notices).entries.count).to eq 1
           expect(assigns(:notices)).to include(notices.last)
         end
 
         it "paginates the notices 1 at a time, based on then notice param" do
-          get :show, :app_id => app.id, :id => err.problem.id, :notice => 3
+          get :show, :app_id => app.id, :id => err.id, :notice => 3
           expect(assigns(:notices).entries.count).to eq 1
           expect(assigns(:notices)).to include(notices.first)
         end
@@ -184,13 +184,13 @@ describe ProblemsController do
       end
 
       it 'finds the problem if the user is watching the app' do
-        get :show, :app_id => @watched_app.to_param, :id => @watched_err.problem.id
+        get :show, :app_id => @watched_app.to_param, :id => @watched_err.id
         expect(controller.problem).to eq @watched_err.problem
       end
 
       it 'raises a DocumentNotFound error if the user is not watching the app' do
         expect {
-          get :show, :app_id => @unwatched_err.problem.app_id, :id => @unwatched_err.problem.id
+          get :show, :app_id => @unwatched_err.problem.app_id, :id => @unwatched_err.id
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
@@ -204,36 +204,36 @@ describe ProblemsController do
 
       @err = Fabricate(:err)
       App.stub(:find).with(@err.app.id.to_s).and_return(@err.app)
-      @err.app.problems.stub(:find).and_return(@err.problem)
+      @err.app.errs.stub(:find).and_return(@err)
       @err.problem.stub(:resolve!)
     end
 
     it 'finds the app and the problem' do
       expect(App).to receive(:find).with(@err.app.id.to_s).and_return(@err.app)
-      expect(@err.app.problems).to receive(:find).and_return(@err.problem)
-      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      expect(@err.app.errs).to receive(:find).with(@err.id.to_s).and_return(@err)
+      put :resolve, :app_id => @err.app.id, :id => @err.id
       expect(controller.app).to eq @err.app
       expect(controller.problem).to eq @err.problem
     end
 
     it "should resolve the issue" do
       expect(@err.problem).to receive(:resolve!).and_return(true)
-      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      put :resolve, :app_id => @err.app.id, :id => @err.id
     end
 
     it "should display a message" do
-      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      put :resolve, :app_id => @err.app.id, :id => @err.id
       expect(request.flash[:success]).to match(/Great news/)
     end
 
     it "should redirect to the app page" do
-      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      put :resolve, :app_id => @err.app.id, :id => @err.id
       expect(response).to redirect_to(app_path(@err.app))
     end
 
     it "should redirect back to problems page" do
       request.env["Referer"] = problems_path
-      put :resolve, :app_id => @err.app.id, :id => @err.problem.id
+      put :resolve, :app_id => @err.app.id, :id => @err.id
       expect(response).to redirect_to(problems_path)
     end
   end
@@ -249,7 +249,7 @@ describe ProblemsController do
       context "lighthouseapp tracker" do
         let(:notice) { Fabricate :notice }
         let(:tracker) { Fabricate :lighthouse_tracker, :app => notice.app }
-        let(:problem) { notice.problem }
+        let(:err) { notice.err }
 
         before(:each) do
           number = 5
@@ -258,25 +258,24 @@ describe ProblemsController do
           stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").
                        to_return(:status => 201, :headers => {'Location' => @issue_link}, :body => body )
 
-          post :create_issue, :app_id => problem.app.id, :id => problem.id
-          problem.reload
+          post :create_issue, :app_id => err.app.id, :id => err.id
         end
 
         it "should redirect to problem page" do
-          expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+          expect(response).to redirect_to( app_err_path(err.app, err) )
         end
       end
     end
 
     context "absent issue tracker" do
-      let(:problem) { Fabricate :problem }
+      let(:err) { Fabricate :err }
 
       before(:each) do
-        post :create_issue, :app_id => problem.app.id, :id => problem.id
+        post :create_issue, :app_id => err.app.id, :id => err.id
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(response).to redirect_to( app_err_path(err.app, err) )
       end
 
       it "should set flash error message telling issue tracker of the app doesn't exist" do
@@ -292,11 +291,11 @@ describe ProblemsController do
         before(:each) do
           stub_request(:post, "http://#{tracker.account}.lighthouseapp.com/projects/#{tracker.project_id}/tickets.xml").to_return(:status => 500)
 
-          post :create_issue, :app_id => err.app.id, :id => err.problem.id
+          post :create_issue, :app_id => err.app.id, :id => err.id
         end
 
         it "should redirect to problem page" do
-          expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+          expect(response).to redirect_to( app_err_path(err.app, err) )
         end
 
         it "should notify of connection error" do
@@ -317,12 +316,12 @@ describe ProblemsController do
       let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :issue_link => "http://some.host")) }
 
       before(:each) do
-        delete :unlink_issue, :app_id => err.app.id, :id => err.problem.id
+        delete :unlink_issue, :app_id => err.app.id, :id => err.id
         err.problem.reload
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+        expect(response).to redirect_to( app_err_path(err.app, err) )
       end
 
       it "should clear issue link" do
@@ -334,12 +333,12 @@ describe ProblemsController do
       let(:err) { Fabricate :err }
 
       before(:each) do
-        delete :unlink_issue, :app_id => err.app.id, :id => err.problem.id
+        delete :unlink_issue, :app_id => err.app.id, :id => err.id
         err.problem.reload
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+        expect(response).to redirect_to( app_err_path(err.app, err) )
       end
     end
   end

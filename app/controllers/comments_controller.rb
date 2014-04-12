@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include UrlHelper
+  
   before_filter :find_app
   before_filter :find_problem
 
@@ -34,7 +36,7 @@ class CommentsController < ApplicationController
     end
 
     def find_problem
-      @problem = @app.problems.find(params[:problem_id])
+      @problem = @app.errs.find(params[:problem_id]).problem
     end
 end
 

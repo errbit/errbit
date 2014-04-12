@@ -5,6 +5,7 @@ class App < ActiveRecord::Base
 
   has_many :watchers, inverse_of: :app
   has_many :deploys, inverse_of: :app
+  has_many :errs, through: :problems
 
   has_one :issue_tracker, inverse_of: :app, dependent: :destroy
   has_one :notification_service, inverse_of: :app, dependent: :destroy

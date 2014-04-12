@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe Api::V1::ProblemsController do
   
-  
-  let(:problem) do
-    Fabricate(:problem)
-  end
+  let(:err) { Fabricate(:err) }
+  let(:problem) { err.problem }
   
   
   context "when logged in" do
@@ -63,7 +61,7 @@ describe Api::V1::ProblemsController do
       it "should resolve the given problem" do
         controller.stub(:problem).and_return(problem)
         expect(problem).to receive(:resolve!)
-        put :resolve, :id => problem.id, :auth_token => @user.authentication_token, :format => "json"
+        put :resolve, :id => err.id, :auth_token => @user.authentication_token, :format => "json"
         expect(response).to be_success
       end
       
@@ -78,7 +76,7 @@ describe Api::V1::ProblemsController do
       it "should unresolve the given problem" do
         controller.stub(:problem).and_return(problem)
         expect(problem).to receive(:unresolve!)
-        put :unresolve, :id => problem.id, :auth_token => @user.authentication_token, :format => "json"
+        put :unresolve, :id => err.id, :auth_token => @user.authentication_token, :format => "json"
         expect(response).to be_success
       end
       

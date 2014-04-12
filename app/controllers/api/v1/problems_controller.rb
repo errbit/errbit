@@ -4,10 +4,9 @@ class Api::V1::ProblemsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do
     head :not_found
   end
-
-  expose(:problem) {
-    Problem.find(params[:id])
-  }
+  
+  expose(:err) { Err.find(params[:id]) }
+  expose(:problem) { err.problem }
 
   def index
     problems = Problem.select %w{problems.id app_id app_name environment message problems.where first_notice_at last_notice_at resolved resolved_at notices_count}

@@ -12,11 +12,12 @@ describe CommentsController do
     end
 
     context "successful comment creation" do
-      let(:problem) { Fabricate(:problem) }
+      let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production")) }
+      let(:problem) { err.problem }
       let(:user) { Fabricate(:user) }
 
       before(:each) do
-        post :create, :app_id => problem.app.id, :problem_id => problem.id,
+        post :create, :app_id => problem.app.id, :problem_id => err.id,
              :comment => { :body => "One test comment", :user_id => user.id }
         problem.reload
       end
@@ -26,7 +27,7 @@ describe CommentsController do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(response).to redirect_to( app_err_path(problem.app, problem) )
       end
     end
   end
@@ -39,11 +40,12 @@ describe CommentsController do
     end
 
     context "successful comment deletion" do
-      let(:problem) { Fabricate(:problem_with_comments) }
+      let(:err) { Fabricate(:err, :problem => Fabricate(:problem_with_comments)) }
+      let(:problem) { err.problem }
       let(:comment) { problem.reload.comments.first }
 
       before(:each) do
-        delete :destroy, :app_id => problem.app.id, :problem_id => problem.id, :id => comment.id.to_s
+        delete :destroy, :app_id => problem.app.id, :problem_id => err.id, :id => comment.id.to_s
         problem.reload
       end
 
@@ -52,7 +54,7 @@ describe CommentsController do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(response).to redirect_to( app_err_path(problem.app, problem) )
       end
     end
   end

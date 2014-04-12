@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe NotificationServices::HipchatService do
   let(:service) { Fabricate.build(:hipchat_notification_service) }
-  let(:problem) { Fabricate(:problem) }
+  let(:problem) { Fabricate(:err, :problem => Fabricate(:problem)).problem }
   let(:room) { double }
 
   before do

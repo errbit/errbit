@@ -21,10 +21,13 @@ class ProblemsController < ApplicationController
     end
   }
 
-  expose(:problem) {
-    app.problems.find(params[:id])
+  expose(:err) {
+    app.errs.find(params[:id])
   }
 
+  expose(:problem) {
+    err.problem if err
+  }
 
   expose(:all_errs) {
     params[:all_errs]
@@ -69,12 +72,12 @@ class ProblemsController < ApplicationController
       flash[:error] = issue_creation.errors.full_messages.join(', ')
     end
 
-    redirect_to app_problem_path(app, problem)
+    redirect_to app_err_path(app, err)
   end
 
   def unlink_issue
     problem.update_attribute :issue_link, nil
-    redirect_to app_problem_path(app, problem)
+    redirect_to app_err_path(app, err)
   end
 
   def resolve

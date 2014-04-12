@@ -74,7 +74,7 @@ describe NoticesController do
         problem = Fabricate(:problem, :app => app, :environment => "production")
         notice = Fabricate(:notice, :err => Fabricate(:err, :problem => problem))
         get :locate, :id => notice.id
-        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+        expect(response).to redirect_to(app_err_path(problem.app, problem))
       end
     end
   end

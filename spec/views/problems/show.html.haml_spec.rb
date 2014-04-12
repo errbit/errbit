@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe "problems/show.html.haml" do
-  let(:problem) { Fabricate(:problem) }
+  let(:problem) { Fabricate(:err, :problem => Fabricate(:problem)).problem }
   let(:comment) { Fabricate(:comment) }
 
   before do
     view.stub(:app).and_return(problem.app)
     view.stub(:problem).and_return(problem)
+    view.stub(:err).and_return(problem.errs.first)
 
     assign :comment, comment
     assign :notices, problem.notices.page(1).per(1)
@@ -53,7 +54,7 @@ describe "problems/show.html.haml" do
 
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
       controller.request.env['HTTP_REFERER'] = nil
-      problem = Fabricate(:problem_with_comments)
+      problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments)).problem
       view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
       render
@@ -66,7 +67,7 @@ describe "problems/show.html.haml" do
         user = Fabricate(:user, :github_login => 'test_user', :github_oauth_token => 'abcdef')
         controller.stub(:current_user) { user }
 
-        problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
+        problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))).problem
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
@@ -75,7 +76,7 @@ describe "problems/show.html.haml" do
       end
 
       it 'should allow creating issue for github if application has a github tracker' do
-        problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
+        problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))).problem
         with_issue_tracker(GithubIssuesTracker, problem)
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
@@ -85,7 +86,7 @@ describe "problems/show.html.haml" do
       end
 
       context "without issue tracker associate on app" do
-        let(:problem) { Fabricate :problem, :app => app }
+        let(:problem) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)).problem }
         let(:app) { Fabricate :app }
 
         it 'not see link to create issue' do
@@ -101,7 +102,7 @@ describe "problems/show.html.haml" do
         let(:app) { Fabricate :app, :issue_tracker => tracker }
         let(:tracker) { Fabricate :lighthouse_tracker }
         context "with problem without issue link" do
-          let(:problem) { Fabricate :problem, :app => app }
+          let(:problem) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)).problem }
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
             view.stub(:app).and_return(problem.app)
@@ -112,7 +113,7 @@ describe "problems/show.html.haml" do
         end
 
         context "with problem with issue link" do
-          let(:problem) { Fabricate :problem, :app => app, :issue_link => 'http://foo' }
+          let(:problem) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :issue_link => 'http://foo')).problem }
 
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
@@ -133,7 +134,7 @@ describe "problems/show.html.haml" do
     end
 
     it 'should display comments and new comment form when no issue tracker' do
-      problem = Fabricate(:problem_with_comments)
+      problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments)).problem
       view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
       render
@@ -145,14 +146,14 @@ describe "problems/show.html.haml" do
 
     context "with issue tracker" do
       it 'should not display the comments section' do
-        problem = Fabricate(:problem)
+        problem = Fabricate(:err, :problem => Fabricate(:problem)).problem
         with_issue_tracker(PivotalLabsTracker, problem)
         render
         expect(view.view_flow.get(:comments)).to be_blank
       end
 
       it 'should display existing comments' do
-        problem = Fabricate(:problem_with_comments)
+        problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments)).problem
         problem.reload
         with_issue_tracker(PivotalLabsTracker, problem)
         render

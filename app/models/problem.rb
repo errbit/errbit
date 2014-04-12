@@ -156,6 +156,10 @@ class Problem < ActiveRecord::Base
       .or(t[:environment].matches("%#{value}%"))
     )
   end
+  
+  def to_param
+    errs.first.id
+  end
 
   private
 

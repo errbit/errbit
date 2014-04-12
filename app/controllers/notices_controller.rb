@@ -23,8 +23,8 @@ class NoticesController < ApplicationController
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
   def locate
-    problem = Notice.find(params[:id]).problem
-    redirect_to app_problem_path(problem.app, problem)
+    err = Notice.find(params[:id]).err
+    redirect_to app_err_path(err.app, err)
   end
 
   private

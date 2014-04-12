@@ -13,7 +13,7 @@ module ApplicationHelper
           event.dtend       = notice.created_at.utc + 60.minutes
           event.organizer   = notice.server_environment && notice.server_environment["hostname"]
           event.location    = notice.project_root
-          event.url         = app_problem_url(:app_id => notice.problem.app.id, :id => notice.problem)
+          event.url         = app_err_url(:app_id => notice.app.id, :id => notice.err.id)
         end
       end
     end.to_s
