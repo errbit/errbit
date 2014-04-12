@@ -53,8 +53,8 @@ describe Api::V1::ProblemsController do
         problems = JSON.load response.body
         expect(problems.length).to eq 4
       end
-
     end
+
 
 
     describe "PUT /api/v1/problems/:id/resolve" do
@@ -70,6 +70,7 @@ describe Api::V1::ProblemsController do
         expect(response).to be_not_found
       end
     end
+
 
 
     describe "PUT /api/v1/problems/:id/unresolve" do

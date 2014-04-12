@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
   end
 
   protected
+
     def find_app
       @app = App.find(params[:app_id])
 
@@ -38,5 +39,5 @@ class CommentsController < ApplicationController
     def find_problem
       @problem = @app.errs.find(params[:problem_id]).problem
     end
+  
 end
-
