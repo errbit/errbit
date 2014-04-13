@@ -16,6 +16,10 @@ class Api::V1::ProblemsController < ApplicationController
       end_date = Time.parse(params[:end_date]).utc
       problems = problems.in_date_range(start_date..end_date)
     end
+    
+    if params.key?(:app_id)
+      problems = problems.where(app_id: params[:app_id])
+    end
 
     results = benchmark("[api/v1/problems_controller] query time") { problems.to_a }
 

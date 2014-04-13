@@ -13,10 +13,12 @@ describe Api::V1::ProblemsController do
 
     describe "GET /api/v1/problems" do
       before do
-        Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 02))
-        Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 21))
-        Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 21))
-        Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 30))
+        @app_1 = Fabricate(:app)
+        @app_2 = Fabricate(:app)
+        Fabricate(:problem_with_err, :app => @app_2, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 02))
+        Fabricate(:problem_with_err, :app => @app_2, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 21))
+        Fabricate(:problem_with_err, :app => @app_1, :first_notice_at => Date.new(2012, 8, 21))
+        Fabricate(:problem_with_err, :app => @app_2, :first_notice_at => Date.new(2012, 8, 30))
       end
 
 
@@ -44,6 +46,15 @@ describe Api::V1::ProblemsController do
           expect(response).to be_success
           problems = JSON.load response.body
           expect(problems.length).to eq 2
+        end
+      end
+
+      describe "given an app" do
+        it "should return only the problems for the given app" do
+          get :index, {:auth_token => @user.authentication_token, :app_id => @app_1.id}
+          expect(response).to be_success
+          problems = JSON.load response.body
+          expect(problems.length).to eq 1
         end
       end
 
