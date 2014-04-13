@@ -3,4 +3,3 @@ Fabricator :comment do
   body       'Test comment'
   err(:fabricator => :err)
 end
-

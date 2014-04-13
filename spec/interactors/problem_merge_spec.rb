@@ -22,9 +22,7 @@ describe ProblemMerge do
   end
 
   describe "#merge" do
-    let!(:problem_merge) {
-      ProblemMerge.new(problem, problem_1)
-    }
+    let!(:problem_merge) { ProblemMerge.new(problem, problem_1) }
     let(:first_errs) { problem.errs }
     let(:merged_errs) { problem_1.errs }
     let!(:notice) { Fabricate(:notice, :err => first_errs.first) }
