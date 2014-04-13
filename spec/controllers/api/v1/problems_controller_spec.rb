@@ -58,6 +58,15 @@ describe Api::V1::ProblemsController do
         end
       end
 
+      describe "when only open problems are requested" do
+        it "should return only the problems haven't been resolved" do
+          get :index, {:auth_token => @user.authentication_token, :open => true}
+          expect(response).to be_success
+          problems = JSON.load response.body
+          expect(problems.length).to eq 2
+        end
+      end
+
       it "should return all problems" do
         get :index, {:auth_token => @user.authentication_token}
         expect(response).to be_success

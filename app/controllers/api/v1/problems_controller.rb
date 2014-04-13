@@ -20,6 +20,10 @@ class Api::V1::ProblemsController < ApplicationController
     if params.key?(:app_id)
       problems = problems.where(app_id: params[:app_id])
     end
+    
+    if params[:open].to_s.downcase == "true"
+      problems = problems.where(resolved_at: nil)
+    end
 
     results = benchmark("[api/v1/problems_controller] query time") { problems.to_a }
 
