@@ -39,12 +39,12 @@
               - else
                 %span.comment-info
                   = time_ago_in_words(comment.created_at, true) << " ago by [Unknown User]"
-              %span.delete= link_to '&#10008;'.html_safe, [app, problem, comment], :method => :delete,
+              %span.delete= link_to '&#10008;'.html_safe, [app, err, comment], :method => :delete,
                 :data => { :confirm => t("comments.confirm_delete") }, :class => "destroy-comment"
           %tr
             %td= simple_format comment.body
     - if problem.comments_allowed?
-      = form_for [app, problem, @comment] do |comment_form|
+      = form_for [app, err, @comment] do |comment_form|
         %p Add a comment
         = comment_form.text_area :body
         = comment_form.submit "Save Comment"

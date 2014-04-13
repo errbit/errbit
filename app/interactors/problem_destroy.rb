@@ -7,9 +7,11 @@ class ProblemDestroy
   end
 
   def execute
-    delete_errs
-    delete_comments
-    problem.delete
+    Problem.transaction do
+      delete_comments
+      delete_errs
+      problem.delete
+    end
   end
 
   ##

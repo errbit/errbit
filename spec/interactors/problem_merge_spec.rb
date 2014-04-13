@@ -47,8 +47,8 @@ describe ProblemMerge do
     end
 
     context "with problem with comment" do
-      let!(:comment) { Fabricate(:comment, :err => problem ) }
-      let!(:comment_2) { Fabricate(:comment, :err => problem_1, :user => comment.user ) }
+      let!(:comment) { Fabricate(:comment, :err => problem.errs.first ) }
+      let!(:comment_2) { Fabricate(:comment, :err => problem_1.errs.first, :user => comment.user ) }
       
       it 'merge comment' do
         problem.comments(true)
@@ -59,7 +59,7 @@ describe ProblemMerge do
         }.to change{
           problem.comments.count
         }.from(1).to(2)
-        expect(comment_2.reload.err).to eq problem
+        expect(comment_2.reload.problem).to eq problem
       end
     end
   end

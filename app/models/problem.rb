@@ -10,7 +10,7 @@ class Problem < ActiveRecord::Base
 
   belongs_to :app, inverse_of: :problems
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
-  has_many :comments, :inverse_of => :err, :dependent => :destroy
+  has_many :comments, :through => :errs
 
   validates_presence_of :environment
 

@@ -12,7 +12,7 @@ describe Comment do
   context 'notification_recipients' do
     let(:app) { Fabricate(:app) }
     let!(:watcher) { Fabricate(:watcher, :app => app) }
-    let(:err) { Fabricate(:problem, :app => app) }
+    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)) }
     let(:comment_user) { Fabricate(:user, :email => 'author@example.com') }
     let(:comment) { Fabricate.build(:comment, :err => err, :user => comment_user) }
 
@@ -29,7 +29,7 @@ describe Comment do
   context 'emailable?' do
     let(:app) { Fabricate(:app, :notify_on_errs => true) }
     let!(:watcher) { Fabricate(:watcher, :app => app) }
-    let(:err) { Fabricate(:problem, :app => app) }
+    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)) }
     let(:comment_user) { Fabricate(:user, :email => 'author@example.com') }
     let(:comment) { Fabricate.build(:comment, :err => err, :user => comment_user) }
 

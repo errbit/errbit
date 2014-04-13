@@ -51,10 +51,10 @@ describe ProblemDestroy do
 
   context "in integration way" do
     let!(:problem) { Fabricate(:problem) }
-    let!(:comment_1) { Fabricate(:comment, :err => problem) }
-    let!(:comment_2) { Fabricate(:comment, :err => problem) }
     let!(:err_1) { Fabricate(:err, :problem => problem) }
     let!(:err_2) { Fabricate(:err, :problem => problem) }
+    let!(:comment_1) { Fabricate(:comment, :err => err_1) }
+    let!(:comment_2) { Fabricate(:comment, :err => err_2) }
     let!(:notice_1_1) { Fabricate(:notice, :err => err_1) }
     let!(:notice_1_2) { Fabricate(:notice, :err => err_1) }
     let!(:notice_2_1) { Fabricate(:notice, :err => err_2) }
