@@ -73,6 +73,16 @@ describe Api::V1::ProblemsController do
         problems = JSON.load response.body
         expect(problems.length).to eq 4
       end
+      
+      
+      
+      it "should present the url for each problem" do
+        get :index, {:auth_token => @user.authentication_token, app_id: @app_1.id}
+        expect(response).to be_success
+        problems = JSON.load response.body
+        problem = problems.first
+        expect(problem["url"]).to eq app_problem_url(@app_1, @app_1.problems.first)
+      end
     end
 
 
