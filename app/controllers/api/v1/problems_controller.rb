@@ -14,7 +14,7 @@ class Api::V1::ProblemsController < ApplicationController
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
       end_date = Time.parse(params[:end_date]).utc
-      problems = problems.where(["first_notice_at <= ? AND (resolved_at IS NULL OR resolved_at >= ?)", end_date, start_date])
+      problems = problems.in_date_range(start_date..end_date)
     end
 
     results = benchmark("[api/v1/problems_controller] query time") { problems.to_a }
