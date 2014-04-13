@@ -17,8 +17,8 @@ class Api::V1::StatsController < ApplicationController
     }
 
     respond_to do |format|
-      format.html { render :json => Yajl.dump(stats) } # render JSON if no extension specified on path
-      format.json { render :json => Yajl.dump(stats) }
+      format.html { render :json => MultiJson.dump(stats) } # render JSON if no extension specified on path
+      format.json { render :json => MultiJson.dump(stats) }
       format.xml  { render :xml  => stats }
     end
   end

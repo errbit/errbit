@@ -20,8 +20,8 @@ class Api::V1::ProblemsController < ApplicationController
     results = benchmark("[api/v1/problems_controller] query time") { problems.to_a }
 
     respond_to do |format|
-      format.html { render :json => Yajl.dump(results) } # render JSON if no extension specified on path
-      format.json { render :json => Yajl.dump(results) }
+      format.html { render :json => MultiJson.dump(results) } # render JSON if no extension specified on path
+      format.json { render :json => MultiJson.dump(results) }
       format.xml  { render :xml  => results }
     end
   end
