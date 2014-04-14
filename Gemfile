@@ -71,7 +71,8 @@ gem 'flowdock'
 gem 'omniauth-github'
 
 gem 'ri_cal'
-gem 'yajl-ruby', :require => "yajl"
+gem 'oj'
+gem 'multi_json'
 
 group :development, :test do
   gem 'rspec-rails'
