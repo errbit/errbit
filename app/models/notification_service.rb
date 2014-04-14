@@ -45,3 +45,7 @@ class NotificationService < ActiveRecord::Base
     "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
   end
 end
+
+if Rails.env.development?
+  Dir[Rails.root.join("app/models/notification_services/*.rb")].each { |file| require_dependency file }
+end

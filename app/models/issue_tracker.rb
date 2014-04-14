@@ -38,3 +38,7 @@ class IssueTracker < ActiveRecord::Base
     IssueTracker.default_url_options[:protocol] = request.scheme
   end
 end
+
+if Rails.env.development?
+  Dir[Rails.root.join("app/models/issue_trackers/*.rb")].each { |file| require_dependency file }
+end
