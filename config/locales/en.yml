@@ -79,7 +79,7 @@ en:
       unresolve: "Unresolve selected issues? They can be resolved again later."
 
   comments:
-    confirm_delete: "Premanently delete this comment?"
+    confirm_delete: "Permanently delete this comment?"
   users:
     confirm_delete: "Permanently delete this user?"
   apps:
