@@ -53,6 +53,11 @@ Errbit::Application.routes.draw do
           put :resolve
           put :unresolve
         end
+        collection do
+          post :merge_several
+          post :unmerge_several
+          post :destroy_several
+        end
       end
       resources :notices,  :only => [:index], :defaults => { :format => 'json' }
       resources :stats, :only => [], :defaults => { :format => 'json' } do

@@ -91,12 +91,12 @@ describe Api::V1::ProblemsController do
       it "should resolve the given problem" do
         controller.stub(:problem).and_return(problem)
         expect(problem).to receive(:resolve!)
-        put :resolve, :id => err.id, :auth_token => @user.authentication_token, :format => "json"
+        put :resolve, :id => err.id, :auth_token => @user.authentication_token
         expect(response).to be_success
       end
       
       it "should respond with 404 if the problem doesn't exist" do
-        put :resolve, :id => 1999, :auth_token => @user.authentication_token, :format => "json"
+        put :resolve, :id => 1999, :auth_token => @user.authentication_token
         expect(response).to be_not_found
       end
     end
@@ -107,13 +107,58 @@ describe Api::V1::ProblemsController do
       it "should unresolve the given problem" do
         controller.stub(:problem).and_return(problem)
         expect(problem).to receive(:unresolve!)
-        put :unresolve, :id => err.id, :auth_token => @user.authentication_token, :format => "json"
+        put :unresolve, :id => err.id, :auth_token => @user.authentication_token
         expect(response).to be_success
       end
       
       it "should respond with 404 if the problem doesn't exist" do
-        put :unresolve, :id => 1999, :auth_token => @user.authentication_token, :format => "json"
+        put :unresolve, :id => 1999, :auth_token => @user.authentication_token
         expect(response).to be_not_found
+      end
+    end
+    
+    
+    
+    describe "Bulk Actions" do
+      before(:each) do
+        @problem1 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem
+        @problem2 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => false)).problem
+      end
+      
+      context "POST api/v1/problems/merge_several" do
+        it "should require at least two problems" do
+          post :merge_several, :problems => [@problem1.id.to_s], :auth_token => @user.authentication_token
+          expect(response.body).to eql I18n.t('controllers.problems.flash.need_two_errors_merge')
+        end
+
+        it "should merge the problems" do
+          expect(ProblemMerge).to receive(:new).and_return(double(:merge => true))
+          post :merge_several, :problems => [@problem1.id.to_s, @problem2.id.to_s], :auth_token => @user.authentication_token
+        end
+      end
+
+      context "POST /problems/unmerge_several" do
+        it "should require at least one problem" do
+          post :unmerge_several, :problems => [], :auth_token => @user.authentication_token
+          expect(response.body).to eql I18n.t('controllers.problems.flash.no_select_problem')
+        end
+
+        it "should unmerge a merged problem" do
+          merged_problem = Problem.merge!(@problem1, @problem2)
+          expect(merged_problem.errs.length).to eq 2
+          expect{
+            post :unmerge_several, :problems => [merged_problem.id.to_s], :auth_token => @user.authentication_token
+            expect(merged_problem.reload.errs.length).to eq 1
+          }.to change(Problem, :count).by(1)
+        end
+      end
+
+      context "POST /problems/destroy_several" do
+        it "should delete the problems" do
+          expect{
+            post :destroy_several, :problems => [@problem1.id.to_s], :auth_token => @user.authentication_token
+          }.to change(Problem, :count).by(-1)
+        end
       end
     end
   end
