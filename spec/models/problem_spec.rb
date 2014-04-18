@@ -64,6 +64,34 @@ describe Problem do
     end
   end
 
+  context '#last_notice_commit' do
+    it "returns the GIT_COMMIT of the latest notice" do
+      err = Fabricate(:err)
+      problem = err.problem
+      expect(problem).to_not be_nil
+
+      notice1 = Fabricate(:notice_with_commit, :err => err)
+      expect(problem.last_notice_commit).to eq notice1.git_commit
+
+      notice2 = Fabricate(:notice_with_commit, :err => err)
+      expect(problem.last_notice_commit).to eq notice2.git_commit
+    end
+  end
+
+  context '#first_notice_commit' do
+    it "returns the GIT_COMMIT of the first notice" do
+      err = Fabricate(:err)
+      problem = err.problem
+      expect(problem).to_not be_nil
+
+      notice1 = Fabricate(:notice_with_commit, :err => err)
+      expect(problem.first_notice_commit).to eq notice1.git_commit
+
+      notice2 = Fabricate(:notice_with_commit, :err => err)
+      expect(problem.first_notice_commit).to eq notice1.git_commit
+    end
+  end
+
   context '#message' do
     it "adding a notice caches its message" do
       err = Fabricate(:err)

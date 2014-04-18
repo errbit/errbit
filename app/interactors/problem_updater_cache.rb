@@ -41,6 +41,8 @@ class ProblemUpdaterCache
     attrs = {}
     attrs[:first_notice_at] = first_notice.created_at if first_notice
     attrs[:last_notice_at] = last_notice.created_at if last_notice
+    attrs[:first_notice_commit] = first_notice.git_commit if first_notice
+    attrs[:last_notice_commit] = last_notice.git_commit if last_notice
     attrs.merge!(
       :message     => notice.message,
       :where       => notice.where,
@@ -52,7 +54,7 @@ class ProblemUpdaterCache
   end
 
   def notices
-    @notices ||= @notice ? [@notice].sort(&:created_at) : problem.notices.order("created_at ASC")
+    @notices ||= problem.notices.order("created_at ASC")
   end
 
   def messages

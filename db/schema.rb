@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140412015552) do
+ActiveRecord::Schema.define(:version => 20140418180750) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -162,8 +162,10 @@ ActiveRecord::Schema.define(:version => 20140412015552) do
     t.text     "user_agents"
     t.text     "messages"
     t.text     "hosts"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "first_notice_commit"
+    t.string   "last_notice_commit"
   end
 
   add_index "problems", ["app_id"], :name => "index_problems_on_app_id"
