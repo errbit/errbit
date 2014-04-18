@@ -39,10 +39,16 @@ class ProblemUpdaterCache
     notice ||= @notice || first_notice
 
     attrs = {}
-    attrs[:first_notice_at] = first_notice.created_at if first_notice
-    attrs[:last_notice_at] = last_notice.created_at if last_notice
-    attrs[:first_notice_commit] = first_notice.git_commit if first_notice
-    attrs[:last_notice_commit] = last_notice.git_commit if last_notice
+    attrs.merge!(
+      :first_notice_at          => first_notice.created_at,
+      :first_notice_commit      => first_notice.git_commit,
+      :first_notice_environment => first_notice.environment_name
+    ) if first_notice
+    attrs.merge!(
+      :last_notice_at           => last_notice.created_at,
+      :last_notice_commit       => last_notice.git_commit,
+      :last_notice_environment  => last_notice.environment_name
+    ) if last_notice
     attrs.merge!(
       :message     => notice.message,
       :where       => notice.where,

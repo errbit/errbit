@@ -92,6 +92,34 @@ describe Problem do
     end
   end
 
+  context '#last_notice_environment' do
+    it "returns the GIT_COMMIT of the latest notice" do
+      err = Fabricate(:err)
+      problem = err.problem
+      expect(problem).to_not be_nil
+
+      notice1 = Fabricate(:notice, :err => err, :server_environment => {'environment-name' => 'staging'})
+      expect(problem.last_notice_environment).to eq notice1.environment_name
+
+      notice2 = Fabricate(:notice, :err => err, :server_environment => {'environment-name' => 'production'})
+      expect(problem.last_notice_environment).to eq notice2.environment_name
+    end
+  end
+
+  context '#first_notice_environment' do
+    it "returns the GIT_COMMIT of the first notice" do
+      err = Fabricate(:err)
+      problem = err.problem
+      expect(problem).to_not be_nil
+
+      notice1 = Fabricate(:notice, :err => err, :server_environment => {'environment-name' => 'staging'})
+      expect(problem.first_notice_environment).to eq notice1.environment_name
+
+      notice2 = Fabricate(:notice, :err => err, :server_environment => {'environment-name' => 'production'})
+      expect(problem.first_notice_environment).to eq notice1.environment_name
+    end
+  end
+
   context '#message' do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
