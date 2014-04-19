@@ -8,7 +8,8 @@ describe NotificationService::SlackService do
     problem = notice.problem
 
     # faraday stubbing
-    expect(HTTParty).to receive(:post).with(notification_service.url, :body => {:payload => {:text => an_instance_of(String), :channel => notification_service.room_id}}).and_return(true)
+    payload = {:text => notification_service.message_for_slack(problem), :channel => notification_service.room_id}.to_json
+    expect(HTTParty).to receive(:post).with(notification_service.url, :body => payload, :headers => {"Content-Type" => "application/json"}).and_return(true)
 
     notification_service.create_notification(problem)
   end
@@ -20,7 +21,8 @@ describe NotificationService::SlackService do
     problem = notice.problem
 
     # faraday stubbing
-    expect(HTTParty).to receive(:post).with(notification_service.url, :body => {:payload => {:text => an_instance_of(String)}}).and_return(true)
+    payload = {:text => notification_service.message_for_slack(problem)}.to_json
+    expect(HTTParty).to receive(:post).with(notification_service.url, :body => payload, :headers => {"Content-Type" => "application/json"}).and_return(true)
 
     notification_service.create_notification(problem)
   end

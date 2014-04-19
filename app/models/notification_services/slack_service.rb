@@ -32,10 +32,10 @@ class NotificationServices::SlackService < NotificationService
   def post_payload(problem)
     payload = {:text => message_for_slack(problem) }
     payload[:channel] = room_id unless room_id.empty?
-    payload
+    payload.to_json
   end
 
   def create_notification(problem)
-    HTTParty.post(url, :body => {:payload => post_payload(problem)})
+    HTTParty.post(url, :body => post_payload(problem), :headers => { 'Content-Type' => 'application/json' })
   end
 end
