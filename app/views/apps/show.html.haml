@@ -93,6 +93,7 @@
       =text_field_tag :env, params[:env], :placeholder => t('.environment')
       =text_field_tag :app_host, params[:app_host], :placeholder => t('.host')
       =text_field_tag :query, params[:query], :placeholder => t('.search_placeholder')
+      =hidden_field_tag :page, '1'
       =submit_tag "Filter errors"
   %br
   %section

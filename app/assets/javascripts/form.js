@@ -21,27 +21,20 @@ $(function(){
 });
 
 function activateAdvancedSearchAPI() {
-  var $form         = $('#advanced-search'),
-      $inputs       = $form.find(':text'),
-      $filledInputs = $inputs.filter('[value!=""]');
-  if ($filledInputs.length > 0) {
-    $form.submit();
-  }
+    $form.submit(function(){
+        var $form = $('#advanced-search'),
+            $filledInputs = $form.find('input').filter('[value!=""]'),
+            newUrl = $form.attr('action');
 
-  $form.submit(function(){
-      var _a      = document.createElement('a'),
-          $form         = $('#advanced-search'),
-          $inputs       = $form.find(':text'),
-          $filledInputs = $inputs.filter('[value!=""]');
-      search = $filledInputs.serialize();
-      if (history && history.pushState) {
-          _a.href = window.location;
-          _a.search = (_a.search.length ? '&' : '?') + search;
+        newUrl += newUrl.search(/\?/) > -1 ? '&' : '?';
+        newUrl += $filledInputs.serialize();
 
-          history.pushState(null, null, _a.href);
-      }
-  });
+        if (history && history.pushState) {
+            history.pushState(null, null, newUrl);
+        }
+    });
 }
+
 
 function activateNestedForms() {
   var wrapper = $('.nested-wrapper')
