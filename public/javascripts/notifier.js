@@ -870,6 +870,12 @@ printStackTrace.implementation.prototype = {
     // Share to global scope as Airbrake ("window.Hoptoad" for backward compatibility)
     Global = window.Airbrake = window.Hoptoad = Util.generatePublicAPI(_publicAPI, Config);
 
+    Global._filters = [];
+
+    Global.addFilter = function (cb) {
+      Global._filters.push(cb);
+    };
+
     function Notifier() {
         this.options = Util.merge({}, Config.options);
         this.xmlData = Util.merge(this.DEF_XML_DATA, Config.xmlData);
@@ -921,7 +927,7 @@ printStackTrace.implementation.prototype = {
             }
             
             return function (error) {
-                var outputData = '',
+                var outputData = '', jsonData,
 					url =  '';
 				    //
                 
@@ -934,9 +940,12 @@ printStackTrace.implementation.prototype = {
 			
                 switch (this.options['outputFormat']) {
                     case 'XML':
-	                   outputData = encodeURIComponent(this.generateXML(this.generateDataJSON(error)));
-					   url = ('https:' == document.location.protocol ? 'https://' : 'http://') + this.options.host + '/notifier_api/v2/notices';
-                        _sendGETRequest(url, outputData);
+                     jsonData = this.generateDataJSON(error);
+                     if (this.shouldSendData(jsonData)){
+                       outputData = encodeURIComponent(this.generateXML(jsonData));
+                       url = ('https:' == document.location.protocol ? 'https://' : 'http://') + this.options.host + '/notifier_api/v2/notices';
+                       _sendGETRequest(url, outputData);
+                     }
 					   break;
 
                     case 'JSON': 
@@ -945,9 +954,12 @@ printStackTrace.implementation.prototype = {
 					*   http://collect.airbrake.io/api/v3/projects/[PROJECT_ID]/notices?key=[API_KEY]
 					* url = window.location.protocol + '://' + this.options.host + '/api/v3/projects' + this.options.projectId + '/notices?key=' + this.options.key;
 					*/
- 						outputData = JSON.stringify(this.generateJSON(this.generateDataJSON(error)));  
-						url = ('https:' == document.location.protocol ? 'https://' : 'http://') + this.options.host + '/api/v3/projects/' + this.options.projectId + '/notices?key=' + this.xmlData.key;
-                        _sendPOSTRequest(url, outputData);
+                        jsonData = this.generateDataJSON(error);
+                        if (this.shouldSendData(jsonData)){
+                          outputData = JSON.stringify(this.generateJSON(jsonData));  
+                          url = ('https:' == document.location.protocol ? 'https://' : 'http://') + this.options.host + '/api/v3/projects/' + this.options.projectId + '/notices?key=' + this.xmlData.key;
+                          _sendPOSTRequest(url, outputData);
+                        }
 						break;
 
                     default:
@@ -1175,6 +1187,18 @@ printStackTrace.implementation.prototype = {
             }
 
             return true;
+        },
+
+        shouldSendData: function (jsonData) {
+          var shouldSend = true, i;
+
+          for ( i = 0; i < Global._filters.length; i++ ) {
+            if ( ! Global._filters[i](jsonData) ){
+              shouldSend = false;
+            }
+          }
+
+          return shouldSend;
         }
     };
 
