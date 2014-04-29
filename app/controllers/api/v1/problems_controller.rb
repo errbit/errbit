@@ -26,13 +26,19 @@ class Api::V1::ProblemsController < ApplicationController
     if params[:open].to_s.downcase == "true"
       problems = problems.where(resolved_at: nil)
     end
-
+    
+    presenter = ProblemPresenter
+    if params[:comments].to_s.downcase == "true"
+      problems = problems.includes(:comments => :user)
+      presenter = ProblemWithCommentsPresenter
+    end
+    
     results = benchmark("[api/v1/problems_controller] query time") { problems.to_a }
-
+    
     respond_to do |format|
-      format.html { render :json => ProblemPresenter.new(self, results) } # render JSON if no extension specified on path
-      format.json { render :json => ProblemPresenter.new(self, results) }
-      format.xml  { render :xml  => results }
+      format.html { render :json => presenter.new(self, results) } # render JSON if no extension specified on path
+      format.json { render :json => presenter.new(self, results) }
+      format.xml  { render :xml  => presenter.new(self, results).as_json }
     end
   end
   
