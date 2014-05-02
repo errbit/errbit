@@ -56,16 +56,24 @@ class NotificationService
   # Each subclass should call form_* in order to call the correct
   # method for the object.  If you do need to override a certain
   # message simply add the deploy_ or problem_ method to the subclass
-  # i.e problem_message deploy_message.  Having said this as each
-  # subclass has a custom method for the problem message formation
-  # I have left it out of this class.
-  def method_missing(method, *args, &block)
-    if method.to_s.start_with?('form')
-      method = method.to_s.split('_').last
-      send_message_type(method, *args)
-    else
-      super
-    end
+  # i.e problem_message deploy_message.  Having said this be aware
+  # each subclass has a custom method for the problem message formation
+  # method so a default in here has been left out.
+  # currently availbale methods for messages are below starting with form_
+  def form_subject(message_info)
+    send_message_type(:subject, message_info)
+  end
+
+  def form_message(message_info)
+    send_message_type(:message, message_info)
+  end
+
+  def form_url(message_info)
+    send_message_type(:url, message_info)
+  end
+
+  def form_description(message_info)
+    send_message_type(:description, message_info)
   end
 
   def send_message_type(method, message_info)
