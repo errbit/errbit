@@ -76,12 +76,23 @@ describe Api::V1::ProblemsController do
       
       
       
-      it "should present the url for each problem" do
-        get :index, {:auth_token => @user.authentication_token, app_id: @app_1.id}
-        expect(response).to be_success
-        problems = JSON.load response.body
-        problem = problems.first
-        expect(problem["url"]).to eq app_problem_url(@app_1, @app_1.problems.first)
+      describe "for each problem" do
+        it "should present the url" do
+          get :index, {:auth_token => @user.authentication_token, app_id: @app_1.id}
+          expect(response).to be_success
+          problems = JSON.load response.body
+          problem = problems.first
+          expect(problem["url"]).to eq app_problem_url(@app_1, @app_1.problems.first)
+        end
+        
+        it "should present all Err ids" do
+          Fabricate(:err, problem: @app_1.problems.first)
+          get :index, {:auth_token => @user.authentication_token, app_id: @app_1.id}
+          expect(response).to be_success
+          problems = JSON.load response.body
+          problem = problems.first
+          expect(problem["err_ids"].length).to eq 2
+        end
       end
     end
 
