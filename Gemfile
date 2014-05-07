@@ -79,8 +79,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webmock', :require => false
   gem 'airbrake', :require => false
-  gem 'ruby-debug', :platform => :mri_18
-  gem 'debugger', :platform => :mri_19
   gem 'pry-rails'
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
