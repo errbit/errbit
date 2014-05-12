@@ -1,20 +1,22 @@
 class Api::V1::ProblemsController < ApplicationController
   respond_to :json, :xml
+  FIELDS = %w{app_id app_name environment message where first_notice_at last_notice_at resolved resolved_at notices_count}
 
   def show
     result = benchmark("[api/v1/problems_controller/show] query time") do
-      Problem.find(params[:id])
+      problem = Problem.only(FIELDS).find(params[:id])
+      problem.as_json(include: {errs: { include: :notices}})
     end
 
+
     respond_to do |format|
-      format.any(:html, :json) { render :json => Yajl.dump(result) } # render JSON if no extension specified on path
+      format.any(:html, :json) { render :json => result } # render JSON if no extension specified on path
       format.xml  { render :xml  => result }
     end
   end
 
   def index
     query = {}
-    fields = %w{app_id app_name environment message where first_notice_at last_notice_at resolved resolved_at notices_count}
 
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
@@ -23,7 +25,7 @@ class Api::V1::ProblemsController < ApplicationController
     end
 
     results = benchmark("[api/v1/problems_controller/index] query time") do
-      Problem.where(query).with(:consistency => :strong).only(fields).to_a
+      Problem.where(query).with(:consistency => :strong).only(FIELDS).to_a
     end
 
     respond_to do |format|

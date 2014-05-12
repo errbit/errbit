@@ -9,7 +9,9 @@ describe Api::V1::ProblemsController do
 
     describe "GET /api/v1/problems/:id" do
       before do
-        Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 02))
+        notice = Fabricate(:notice)
+        err = Fabricate(:err, :notices => [notice])
+        problem = Fabricate(:problem, :errs => [err])
       end
 
       it "returns JSON if JSON is requested" do
@@ -20,7 +22,7 @@ describe Api::V1::ProblemsController do
       it "returns the correct problem" do
         requested_problem = Problem.first
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => requested_problem.id
-        expect( response.body ).to eq(requested_problem.to_json)
+        expect( response.body ).to eq(requested_problem.to_json(include: {errs: { include: :notices}}))
       end
     end
 
