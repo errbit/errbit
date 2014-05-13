@@ -64,8 +64,8 @@ describe Fingerprint do
 
   end
 
-  describe '#unified_message' do
-    subject { Fingerprint.new(double("notice", message: message), app_id).unified_message }
+  describe "#normalized_message" do
+    subject { Fingerprint.new(double("notice", message: message), app_id).normalized_message }
 
     context "given objects with memory addresses" do
       let(:message) { "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess:0x007f6bfe3287e8> #<Object:0x007fa2b33d9458>" }

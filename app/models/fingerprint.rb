@@ -28,12 +28,12 @@ class Fingerprint
   end
 
   def file_or_message
-    @file_or_message ||= unified_message + notice.backtrace.fingerprint
+    @file_or_message ||= normalized_message + notice.backtrace.fingerprint
   end
 
   # filter memory addresses out of object strings
   # example: "#<Object:0x007fa2b33d9458>" becomes "#<Object>"
-  def unified_message
+  def normalized_message
     notice.message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
   end
 
