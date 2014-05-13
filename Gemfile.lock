@@ -83,12 +83,6 @@ GEM
       addressable
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
-    debugger (1.6.6)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.2)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.2)
     decent_exposure (2.3.0)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
@@ -365,7 +359,6 @@ DEPENDENCIES
   capybara
   coveralls
   database_cleaner
-  debugger
   decent_exposure
   devise
   email_spec
