@@ -1,15 +1,13 @@
-require "digest/sha1"
-
 class Fingerprint
-  attr_reader :notice, :api_key
+  attr_reader :notice, :app_id
 
-  def self.generate(notice, api_key)
-    self.new(notice, api_key).to_s
+  def self.generate(notice, app_id)
+    self.new(notice, app_id).to_s
   end
 
-  def initialize(notice, api_key)
+  def initialize(notice, app_id)
     @notice = notice
-    @api_key = api_key
+    @app_id = app_id
   end
 
   def to_s
@@ -17,21 +15,28 @@ class Fingerprint
   end
 
   def fingerprint_source
-    {
-      :file_or_message => file_or_message,
-      :error_class => notice.error_class,
-      :component => notice.component || "unknown",
-      :action => notice.action,
-      :environment => notice.environment_name || "development",
-      :api_key => api_key
-    }
+    { message: normalized_message,
+      backtrace: backtrace_fingerprint,
+      error_class: notice.error_class,
+      component: notice.component || "unknown",
+      action: notice.action,
+      app_id: app_id }
   end
 
-  def file_or_message
-    @file_or_message ||= normalized_message + notice.backtrace.fingerprint
+  # Take all the lines of the backtrace until we
+  # reach an in-app line. From that point onward, take
+  # only in-app lines.
+  def backtrace_fingerprint
+    line_in_fingerprint = ""
+    found_an_in_app_line = false
+    notice.backtrace.lines.each do |line|
+      found_an_in_app_line = true if line.in_app?
+      line_in_fingerprint << line.to_s if !found_an_in_app_line or line.in_app?
+    end
+    Digest::SHA1.hexdigest(line_in_fingerprint)
   end
 
-  # filter memory addresses out of object strings
+  # Filter memory addresses out of object strings
   # example: "#<Object:0x007fa2b33d9458>" becomes "#<Object>"
   def normalized_message
     notice.message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')

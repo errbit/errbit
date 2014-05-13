@@ -75,7 +75,7 @@ class ErrorReport
   private
 
   def fingerprint
-    @fingerprint ||= Fingerprint.generate(notice, api_key)
+    @fingerprint ||= Fingerprint.generate(notice, app.id)
   end
 
 end
