@@ -41,6 +41,8 @@ RSpec.configure do |config|
   config.alias_example_to :fit, :focused => true
   config.use_transactional_fixtures = true
   config.filter_run_excluding :skip => true
+  config.formatter = :documentation
+  config.color_enabled = true
 
   DatabaseCleaner[:active_record].strategy = :truncation
   DatabaseCleaner.clean
