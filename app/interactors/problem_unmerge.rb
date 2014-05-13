@@ -12,13 +12,12 @@ class ProblemUnmerge
       attrs = {error_class: problem.error_class, environment: problem.environment}
       problem_errs = errs.to_a
       problem_errs.shift # one of the Errs will be retained by this problem
-      [problem] + problem_errs.map(&:id).map do |err_id|
+      ([problem] + problem_errs.map(&:id).map do |err_id|
         err = Err.find(err_id)
         app.problems.create(attrs).tap do |new_problem|
           err.update_attribute(:problem_id, new_problem.id)
-          reset_cached_attributes(new_problem)
         end
-      end
+      end).each(&method(:reset_cached_attributes))
     end
   end
 

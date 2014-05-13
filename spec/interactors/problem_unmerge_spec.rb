@@ -15,7 +15,7 @@ describe ProblemUnmerge do
     end
 
     it 'update problem cache' do
-      expect(ProblemUpdaterCache).to receive(:new).with(kind_of(Problem)).and_return(double(:update => true))
+      expect(ProblemUpdaterCache).to receive(:new).with(kind_of(Problem)).and_return(double(:update => true)).twice
       ProblemUnmerge.new(merged_problem).execute
     end
   end
