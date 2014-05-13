@@ -31,11 +31,11 @@ describe ProblemUpdaterCache do
         end
 
         it 'update first_notice_at' do
-          expect(problem.first_notice_at).to eq notice.reload.created_at
+          expect(problem.first_notice_at.to_s).to eq(notice.reload.created_at.to_s)
         end
 
         it 'update last_notice_at' do
-          expect(problem.last_notice_at).to eq notice.reload.created_at
+          expect(problem.last_notice_at.to_s).to eq(notice.reload.created_at.to_s)
         end
 
         it 'update stats messages' do
@@ -118,11 +118,11 @@ describe ProblemUpdaterCache do
       end
 
       it 'update first_notice_at' do
-        expect(problem.first_notice_at).to eq notice.created_at
+        expect(problem.first_notice_at.to_s).to eq notice.created_at.to_s
       end
 
       it 'update last_notice_at' do
-        expect(problem.last_notice_at).to eq notice.created_at
+        expect(problem.last_notice_at.to_s).to eq notice.created_at.to_s
       end
 
       it 'inc stats messages' do

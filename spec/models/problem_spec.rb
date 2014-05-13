@@ -43,10 +43,10 @@ describe Problem do
       expect(problem).to_not be_nil
 
       notice1 = Fabricate(:notice, :err => err)
-      expect(problem.last_notice_at).to eq notice1.created_at
+      expect(problem.last_notice_at.to_s).to eq notice1.created_at.to_s
 
       notice2 = Fabricate(:notice, :err => err)
-      expect(problem.last_notice_at).to eq notice2.created_at
+      expect(problem.last_notice_at.to_s).to eq notice2.created_at.to_s
     end
   end
 
