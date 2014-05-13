@@ -83,16 +83,7 @@ class Problem < ActiveRecord::Base
   end
 
   def unmerge!
-    attrs = {:error_class => error_class, :environment => environment}
-    problem_errs = errs.to_a
-    problem_errs.shift
-    [self] + problem_errs.map(&:id).map do |err_id|
-      err = Err.find(err_id)
-      app.problems.create(attrs).tap do |new_problem|
-        err.update_attribute(:problem_id, new_problem.id)
-        new_problem.reset_cached_attributes
-      end
-    end
+    ProblemUnmerge.new(self).execute
   end
 
 

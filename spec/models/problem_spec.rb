@@ -197,22 +197,6 @@ describe Problem do
     end
   end
 
-  context "#unmerge!" do
-    it "creates a separate problem for each err" do
-      problem1 = Fabricate(:notice).problem
-      problem2 = Fabricate(:notice).problem
-      merged_problem = Problem.merge!(problem1, problem2)
-      expect(merged_problem.errs.length).to eq 2
-
-      expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
-      expect(merged_problem.errs(true).length).to eq 1
-    end
-
-    it "runs smoothly for problem without errs" do
-      expect { Fabricate(:problem).unmerge! }.not_to raise_error
-    end
-  end
-
   context "Scopes" do
     context "resolved" do
       it 'only finds resolved Problems' do
