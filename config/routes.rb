@@ -30,8 +30,6 @@ Errbit::Application.routes.draw do
       resources :comments, :only => [:create, :destroy]
     end
     resources :problems, :except => [:show] do
-      resources :notices
-
       member do
         put :resolve
         put :unresolve
