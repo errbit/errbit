@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DataMigration do
+describe DataMigration, :skip => true do
   before do
     load File.join(Rails.root, 'spec/fixtures/mongodb_data_for_export.rb')
     @apps = MongodbDataStubs.apps
@@ -8,7 +8,7 @@ describe DataMigration do
     db_name = "test_db"
     db = MongodbDataStubs.db(db_name)
     MongoClient.should_receive(:new).and_return(db)
-    
+
     [:apps, :users, :problems, :comments, :errs, :notices, :backtraces].each do |collection|
       records = db[db_name][collection]
       records.stub(:name).and_return(collection)
@@ -18,11 +18,11 @@ describe DataMigration do
       end
       records.stub(:find_one).and_return(records.last)
     end
-    
+
     @migrator = DataMigration::Worker.new({sessions: {default: {database: db_name}}})
     @migrator.prepare
   end
-  
+
   after do
     @migrator.teardown
   end
@@ -85,7 +85,7 @@ describe DataMigration do
       it "should copy all emails" do
         @mongo_app["watchers"].each do |watcher|
           next unless watcher["email"]
-          
+
           @pg_app.watchers.find_by_email(watcher["email"]).should_not be_nil
         end
       end
@@ -93,7 +93,7 @@ describe DataMigration do
       it "should copy all watchers' users" do
         @mongo_app["watchers"].each do |watcher|
           next unless watcher["user_id"]
-          
+
           user = User.find_by_remote_id watcher["user_id"].to_s
           user.should_not be_nil
           @pg_app.watchers.find_by_user_id(user.id).should_not be_nil
@@ -153,28 +153,28 @@ describe DataMigration do
       @pg_problem = Problem.last
       @pg_comment = @pg_problem.comments.last
     end
-  
+
     it "should copy comments" do
       @pg_comment.should_not be_nil
     end
-  
+
     %w(created_at updated_at body).each do |column|
       it "should corrent copy value for '#{column}'" do
         @pg_comment.read_attribute(column).should == @mongo_comment[column]
       end
     end
-  
+
     it "should correct link to problem" do
       @pg_comment.err.should == @pg_problem
     end
-  
+
     it "should correct link to user" do
       user = User.find_by_remote_id @mongo_comment["user_id"].to_s
       user.should_not be_nil
       @pg_comment.user.should == user
     end
   end
-  
+
   describe "migrate errs" do
     before do
       @migrator.copy! :users
@@ -185,18 +185,18 @@ describe DataMigration do
       @pg_problem = Problem.last
       @pg_err = @pg_problem.errs.last
     end
-  
+
     it "should copy errs" do
       Err.count.should == MongodbDataStubs.errs.count
     end
-  
+
     Err.columns.each do |column|
       next if column.name.in? ["id", "problem_id"]
       it "should corrent copy value for '#{column.name}'" do
         @pg_err.read_attribute(column.name).should == @mongo_err[column.name] if @mongo_err.has_key?(column.name)
       end
     end
-  
+
     it "should correct link to problem" do
       @pg_err.problem.should == @pg_problem
     end

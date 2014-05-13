@@ -40,6 +40,7 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   config.alias_example_to :fit, :focused => true
   config.use_transactional_fixtures = true
+  config.filter_run_excluding :skip => true
 
   DatabaseCleaner[:active_record].strategy = :truncation
   DatabaseCleaner.clean
