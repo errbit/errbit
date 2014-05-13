@@ -58,8 +58,9 @@ class Api::V1::ProblemsController < ApplicationController
     if selected_problems.length < 2
       render json: I18n.t('controllers.problems.flash.need_two_errors_merge'), status: 422
     else
+      count = selected_problems.count
       ProblemMerge.new(selected_problems).merge
-      render json: I18n.t('controllers.problems.flash.merge_several.success', :nb => selected_problems.count), status: 200
+      render json: I18n.t('controllers.problems.flash.merge_several.success', :nb => count), status: 200
     end
   end
 

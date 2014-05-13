@@ -107,8 +107,9 @@ class ProblemsController < ApplicationController
     if selected_problems.length < 2
       flash[:notice] = I18n.t('controllers.problems.flash.need_two_errors_merge')
     else
+      count = selected_problems.count
       ProblemMerge.new(selected_problems).merge
-      flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', :nb => selected_problems.count)
+      flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', :nb => count)
     end
     redirect_to :back
   end
