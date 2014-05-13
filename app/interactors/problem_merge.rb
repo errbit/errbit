@@ -1,13 +1,12 @@
-require 'problem_destroy'
-
 class ProblemMerge
+  attr_reader :merged_problem, :child_problems
+
   def initialize(*problems)
     problems = problems.flatten.uniq
     @merged_problem = problems[0]
     @child_problems = problems[1..-1]
     raise ArgumentError.new("need almost 2 uniq different problems") if @child_problems.empty?
   end
-  attr_reader :merged_problem, :child_problems
 
   def merge
     child_problems.each do |problem|
@@ -19,9 +18,10 @@ class ProblemMerge
     merged_problem
   end
 
-  private
+private
 
   def reset_cached_attributes
     ProblemUpdaterCache.new(merged_problem).update
   end
+
 end

@@ -2,8 +2,7 @@ class Backtrace < ActiveRecord::Base
 
   has_many :notices
   has_one :notice
-
-  has_many :lines, class_name: 'BacktraceLine', :order => "created_at ASC"
+  has_many :lines, class_name: "BacktraceLine", :order => "created_at ASC"
 
   after_initialize :generate_fingerprint, :if => :new_record?
 
@@ -23,7 +22,8 @@ class Backtrace < ActiveRecord::Base
     end
   end
 
-  private
+private
+
   def generate_fingerprint
     self.fingerprint = Digest::SHA1.hexdigest(lines.join)
   end

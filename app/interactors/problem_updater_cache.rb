@@ -1,9 +1,10 @@
 class ProblemUpdaterCache
+  attr_reader :problem
+
   def initialize(problem, notice=nil)
     @problem = problem
     @notice = notice
   end
-  attr_reader :problem
 
   ##
   # Update cache information about child associate to this problem
@@ -18,7 +19,7 @@ class ProblemUpdaterCache
     problem
   end
 
-  private
+private
 
   def update_notices_count
     if @notice
@@ -75,22 +76,21 @@ class ProblemUpdaterCache
     @notice ? problem.user_agents : {}
   end
 
-  private
-
-    def attribute_count(value, init)
-      init.tap do |counts|
-        notices.each do |notice|
-          counts[attribute_index(notice.send(value))] ||= {
-            'value' => notice.send(value),
-            'count' => 0
-          }
-          counts[attribute_index(notice.send(value))]['count'] += 1
-        end
+  def attribute_count(value, init)
+    init.tap do |counts|
+      notices.each do |notice|
+        counts[attribute_index(notice.send(value))] ||= {
+          'value' => notice.send(value),
+          'count' => 0
+        }
+        counts[attribute_index(notice.send(value))]['count'] += 1
       end
     end
+  end
 
-    def attribute_index(value)
-      @attributes_index ||= {}
-      @attributes_index[value.to_s] ||= Digest::MD5.hexdigest(value.to_s)
-    end
+  def attribute_index(value)
+    @attributes_index ||= {}
+    @attributes_index[value.to_s] ||= Digest::MD5.hexdigest(value.to_s)
+  end
+
 end

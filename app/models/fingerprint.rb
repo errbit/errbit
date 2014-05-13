@@ -1,7 +1,6 @@
-require 'digest/sha1'
+require "digest/sha1"
 
 class Fingerprint
-
   attr_reader :notice, :api_key
 
   def self.generate(notice, api_key)
@@ -21,9 +20,9 @@ class Fingerprint
     {
       :file_or_message => file_or_message,
       :error_class => notice.error_class,
-      :component => notice.component || 'unknown',
+      :component => notice.component || "unknown",
       :action => notice.action,
-      :environment => notice.environment_name || 'development',
+      :environment => notice.environment_name || "development",
       :api_key => api_key
     }
   end

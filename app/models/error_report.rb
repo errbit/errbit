@@ -1,4 +1,4 @@
-require 'hoptoad_notifier'
+require "hoptoad_notifier"
 
 ##
 # Processes a new error report.
@@ -23,8 +23,8 @@ class ErrorReport
   end
 
   def rails_env
-    rails_env = server_environment['environment-name']
-    rails_env = 'development' if rails_env.blank?
+    rails_env = server_environment["environment-name"]
+    rails_env = "development" if rails_env.blank?
     rails_env
   end
 

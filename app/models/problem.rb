@@ -20,7 +20,7 @@ class Problem < ActiveRecord::Base
   scope :resolved, where(:resolved => true)
   scope :unresolved, where(:resolved => false)
   scope :ordered, order("last_notice_at desc")
-  
+
   def self.for_apps(apps)
     return where(app_id: apps.pluck(:id)) if apps.is_a? ActiveRecord::Relation
     where(app_id: apps.map(&:id))
@@ -147,7 +147,7 @@ class Problem < ActiveRecord::Base
       .or(t[:environment].matches("%#{value}%"))
     )
   end
-  
+
   def to_param
     errs.first.id
   end
@@ -168,4 +168,3 @@ class Problem < ActiveRecord::Base
       Digest::MD5.hexdigest(value.to_s)
     end
 end
-

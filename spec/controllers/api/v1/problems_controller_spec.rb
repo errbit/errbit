@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Api::V1::ProblemsController do
-  
+
   let(:err) { Fabricate(:err) }
   let(:problem) { err.problem }
-  
-  
+
+
   context "when logged in" do
     before do
       @user = Fabricate(:user)
@@ -73,9 +73,9 @@ describe Api::V1::ProblemsController do
         problems = JSON.load response.body
         expect(problems.length).to eq 4
       end
-      
-      
-      
+
+
+
       describe "for each problem" do
         it "should present the url" do
           get :index, {:auth_token => @user.authentication_token, app_id: @app_1.id}
@@ -84,7 +84,7 @@ describe Api::V1::ProblemsController do
           problem = problems.first
           expect(problem["url"]).to eq app_problem_url(@app_1, @app_1.problems.first)
         end
-        
+
         it "should present all Err ids" do
           Fabricate(:err, problem: @app_1.problems.first)
           get :index, {:auth_token => @user.authentication_token, app_id: @app_1.id}
@@ -105,7 +105,7 @@ describe Api::V1::ProblemsController do
         put :resolve, :id => err.id, :auth_token => @user.authentication_token
         expect(response).to be_success
       end
-      
+
       it "should respond with 404 if the problem doesn't exist" do
         put :resolve, :id => 1999, :auth_token => @user.authentication_token
         expect(response).to be_not_found
@@ -121,21 +121,21 @@ describe Api::V1::ProblemsController do
         put :unresolve, :id => err.id, :auth_token => @user.authentication_token
         expect(response).to be_success
       end
-      
+
       it "should respond with 404 if the problem doesn't exist" do
         put :unresolve, :id => 1999, :auth_token => @user.authentication_token
         expect(response).to be_not_found
       end
     end
-    
-    
-    
+
+
+
     describe "Bulk Actions" do
       before(:each) do
         @problem1 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true)).problem
         @problem2 = Fabricate(:err, :problem => Fabricate(:problem, :resolved => false)).problem
       end
-      
+
       context "POST api/v1/problems/merge_several" do
         it "should require at least two problems" do
           post :merge_several, :problems => [@problem1.id.to_s], :auth_token => @user.authentication_token
