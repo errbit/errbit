@@ -10,6 +10,9 @@
       %tr
         %th URL
         %td.nowrap= link_to notice.request['url'], notice.request['url']
+      %tr
+        %th &nbsp;
+        %td= notice.to_curl
     %tr
       %th Where
       %td= notice.where
