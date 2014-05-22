@@ -79,13 +79,14 @@ class Notice
   end
 
   def to_curl
+    return "N/A" if url.blank?
     headers = %w(Accept Accept-Encoding Accept-Language Cookie Referer User-Agent).each_with_object([]) do |name, h|
       if value = env_vars["HTTP_#{name.underscore.upcase}"]
         h << "-H '#{name}: #{value}'"
       end
     end
 
-    "curl -X #{env_vars['REQUEST_METHOD'] || 'GET'} #{headers.join(' ')} #{request['url']}"
+    "curl -X #{env_vars['REQUEST_METHOD'] || 'GET'} #{headers.join(' ')} #{url}"
   end
 
   def env_vars
