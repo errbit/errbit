@@ -15,7 +15,8 @@ require 'hoptoad_notifier'
 # * <tt>:notifier</tt> - information to identify the source of the error report
 #
 class ErrorReport
-  attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :framework
+  attr_reader :error_class, :message, :request, :server_environment, :api_key,
+              :notifier, :user_attributes, :framework, :notice
 
   cattr_accessor :fingerprint_strategy do
     Fingerprint
@@ -56,7 +57,6 @@ class ErrorReport
     error.notices << @notice
     @notice
   end
-  attr_reader :notice
 
   ##
   # Error associate to this error_report
