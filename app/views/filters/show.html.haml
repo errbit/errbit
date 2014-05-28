@@ -1,0 +1,28 @@
+- content_for :title, "Filter"
+
+- content_for :action_bar do
+  %span= link_to('Add a New Filter', new_filter_path, :class => 'add')
+  = link_to 'edit', edit_filter_path(filter), :class => 'button'
+  = link_to 'destroy', filter_path(filter), :method => :delete,
+    :data => { :confirm => t('filters.confirm_delete') }, :class => 'delete button'
+
+%table.single_filter
+  %tr
+    %th= t('.description')
+    %td.main= filter.description
+  %tr
+    %th= t('.message')
+    %td.main= filter.message
+  %tr
+    %th= t('.error_class')
+    %td= filter.error_class
+  %tr
+    %th= t('.url')
+    %td= filter.url
+  %tr
+    %th= t('.where')
+    %td= filter.where
+  - if filter.app
+    %tr
+      %th= t('.app')
+      %td= link_to filter.app_name, filter.app

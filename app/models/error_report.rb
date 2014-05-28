@@ -15,7 +15,8 @@ require 'hoptoad_notifier'
 # * <tt>:notifier</tt> - information to identify the source of the error report
 #
 class ErrorReport
-  attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :framework
+  attr_reader :error_class, :message, :request, :server_environment, :api_key,
+              :notifier, :user_attributes, :framework, :notice
 
   cattr_accessor :fingerprint_strategy do
     Fingerprint
@@ -56,7 +57,6 @@ class ErrorReport
     error.notices << @notice
     @notice
   end
-  attr_reader :notice
 
   ##
   # Error associate to this error_report
@@ -77,15 +77,34 @@ class ErrorReport
   end
 
   def should_keep?
-    app_version = server_environment['app-version'] || ''
-    if self.app.current_app_version.present? && ( app_version.length <= 0 || Gem::Version.new(app_version) < Gem::Version.new(self.app.current_app_version) )
-      false
-    else
-      true
-    end
+    current_version? && passes_filters?
   end
 
   private
+
+  def current_version?
+    app_version = server_environment['app-version'] || ''
+    current_version = app.current_app_version
+    return true unless current_version.present?
+    return false if app_version.length <= 0
+    Gem::Version.new(app_version) >= Gem::Version.new(current_version)
+  end
+
+  def build_notice
+    Notice.new(
+      message:            message,
+      error_class:        error_class,
+      request:            request,
+      server_environment: server_environment,
+      notifier:           notifier,
+      user_attributes:    user_attributes,
+      framework:          framework
+    )
+  end
+
+  def passes_filters?
+    app.keep_notice? build_notice
+  end
 
   def fingerprint
     @fingerprint ||= fingerprint_strategy.generate(notice, api_key)

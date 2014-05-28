@@ -1,0 +1,17 @@
+- content_for :title, 'Filters'
+- content_for :action_bar do
+  %span= link_to('Add a New Filter', new_filter_path, :class => 'add')
+
+%table.filters
+  %thead
+    %tr
+      %th.main= t('.description')
+      %th Global?
+  %tbody
+    = render filters
+    - if filters.none?
+      %tr
+        %td{:colspan => 4}
+          %em
+            = t('.no_filters')
+            = link_to t('.click_to_create'), new_filter_path

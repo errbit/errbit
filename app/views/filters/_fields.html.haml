@@ -1,0 +1,20 @@
+= errors_for filter
+
+.required
+  = f.label :description
+  = f.text_field :description
+
+= f.label :message
+= f.text_field :message
+
+= f.label :error_class
+= f.text_field :error_class
+
+= f.label :url
+= f.text_field :url
+
+= f.label :where
+= f.text_field :where
+
+= f.label :app, 'Scope'
+= f.collection_select :app_id, apps, :id, :name, :include_blank => "Global or select an application below."
