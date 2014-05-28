@@ -91,5 +91,4 @@ class ErrorReport
   def fingerprint
     @fingerprint ||= fingerprint_strategy.generate(notice, api_key)
   end
-
 end
