@@ -36,25 +36,25 @@ class ErrorReport
   end
 
   def app
-    @app ||= App.where(:api_key => api_key).first
+    @app ||= App.where(api_key: api_key).first
   end
 
   def backtrace
-    @normalized_backtrace ||= Backtrace.find_or_create(:raw => @backtrace)
+    @normalized_backtrace ||= Backtrace.find_or_create(raw: @backtrace)
   end
 
   def generate_notice!
     return unless valid?
     return @notice if @notice
     @notice = Notice.new(
-      :message => message,
-      :error_class => error_class,
-      :backtrace_id => backtrace.id,
-      :request => request,
-      :server_environment => server_environment,
-      :notifier => notifier,
-      :user_attributes => user_attributes,
-      :framework => framework
+      message: message,
+      error_class: error_class,
+      backtrace_id: backtrace.id,
+      request: request,
+      server_environment: server_environment,
+      notifier: notifier,
+      user_attributes: user_attributes,
+      framework: framework
     )
     error.notices << @notice
     @notice
@@ -68,9 +68,9 @@ class ErrorReport
   # @return [ Error ]
   def error
     @error ||= app.find_or_create_err!(
-      :error_class => error_class,
-      :environment => rails_env,
-      :fingerprint => fingerprint
+      error_class: error_class,
+      environment: rails_env,
+      fingerprint: fingerprint
     )
   end
 
