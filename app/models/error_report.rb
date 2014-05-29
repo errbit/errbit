@@ -75,7 +75,7 @@ class ErrorReport
   end
 
   def valid?
-    !!app
+    app.present?
   end
 
   def should_keep?
