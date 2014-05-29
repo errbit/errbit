@@ -17,8 +17,6 @@ class NotificationService
 
   validate :check_params
 
-
-
   if Errbit::Config.per_app_notify_at_notices
     Fields = [[:notify_at_notices,
                { :placeholder => 'comma separated numbers or simply 0 for every notice',
