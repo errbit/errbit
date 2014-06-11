@@ -402,4 +402,3 @@ describe AppsController do
   end
 
 end
-
