@@ -7,6 +7,23 @@ describe Api::V1::ProblemsController do
       @user = Fabricate(:user)
     end
 
+    describe "GET /api/v1/problems/:id" do
+      before do
+        Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 02))
+      end
+
+      it "returns JSON if JSON is requested" do
+        get :show, :auth_token => @user.authentication_token, :format => "json", :id => Problem.first.id
+        expect { JSON.load(response.body) }.not_to raise_error()#JSON::ParserError)
+      end
+
+      it "returns the correct problem" do
+        requested_problem = Problem.first
+        get :show, :auth_token => @user.authentication_token, :format => "json", :id => requested_problem.id
+        expect( response.body ).to eq(requested_problem.to_json)
+      end
+    end
+
     describe "GET /api/v1/problems" do
       before do
         Fabricate(:problem, :first_notice_at => Date.new(2012, 8, 01), :resolved_at => Date.new(2012, 8, 02))
