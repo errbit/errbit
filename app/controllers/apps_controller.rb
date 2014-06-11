@@ -36,6 +36,10 @@ class AppsController < ApplicationController
     app.deploys.order_by(:created_at.desc).limit(5)
   }
 
+  expose(:users) {
+    User.all.asc(:name)
+  }
+
   def index; end
   def show
     app
