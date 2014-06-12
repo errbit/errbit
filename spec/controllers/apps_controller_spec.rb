@@ -73,6 +73,16 @@ describe AppsController do
         expect(response).to be_success
       end
 
+      it "should list available watchers by name" do
+        Fabricate(:user, :name => "Carol")
+        Fabricate(:user, :name => "Alice")
+        Fabricate(:user, :name => "Betty")
+
+        get :show, :id => app.id
+
+        expect(controller.users.to_a).to eq(User.all.to_a.sort_by(&:name))
+      end
+
       context "pagination" do
         before(:each) do
           35.times { Fabricate(:err, :problem => Fabricate(:problem, :app => app)) }
@@ -392,4 +402,3 @@ describe AppsController do
   end
 
 end
-
