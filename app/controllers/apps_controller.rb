@@ -37,7 +37,7 @@ class AppsController < ApplicationController
   }
 
   expose(:users) {
-    User.all.asc(:name)
+    User.all.sort_by {|u| u.name.downcase }
   }
 
   def index; end
