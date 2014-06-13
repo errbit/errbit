@@ -49,7 +49,8 @@ namespace :errbit do
           :backtrace => random_backtrace,
           :request => {
             'component' => 'main',
-            'action' => 'error'
+            'action' => 'error',
+            'url' => "http://example.com/post/#{[111, 222, 333].sample}",
           },
           :server_environment => {'environment-name' => Rails.env.to_s},
           :notifier => {:name => "seeds.rb"},

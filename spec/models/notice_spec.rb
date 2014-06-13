@@ -35,6 +35,28 @@ describe Notice do
     end
   end
 
+  describe "to_curl" do
+    let(:notice)  { Fabricate.build(:notice, request: request) }
+
+    context "when it has a request url" do
+      let(:request) { {'url' => "http://example.com/resource/12", 'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0'}} }
+
+      it 'has a curl representation' do
+        cmd = notice.to_curl
+        expect(cmd).to eq(%q[curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12])
+      end
+    end
+
+    context "when it has not a request url" do
+      let(:request) { {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0'}} }
+
+      it 'has a curl representation' do
+        cmd = notice.to_curl
+        expect(cmd).to eq "N/A"
+      end
+    end
+  end
+
   describe "user agent" do
     it "should be parsed and human-readable" do
       notice = Fabricate.build(:notice, :request => {'cgi-data' => {

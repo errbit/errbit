@@ -13,12 +13,30 @@
   use ([@shingara][])
 - [#588][] Change documentation to see Airbrake gem instead of
   hoptoad_nofier ([@ugisozols][])
+- [#592][] Avoid taskmapper dependencies ([@arthurnn][])
+- [#597][] Improve fingerprinting if only change by object memory adress
+  ([@1st8][])
+- [#603][] Improve the page rendering of App list ([@arthurnn][])
+- [#606][] Add ability to deploy on Cloud 66 ([@pkallberg][])
+- [#613][] Improve text about delete thing ([@mildavw][])
+- [#616][] Improvement about our test suite ([@durrantm][])
+- [#620][] Add App version information in email notification
+  ([@soberstadt][])
+- [#624][] Allow configuration of port if errbit not on 80
+  ([@rsutphin][])
+- [#617][] Allow GET request on notice API ([@soberstadt][])
+- [#618][] Improve the stack information in JS notifier ([@soberstadt][])
+- [#619][] Handle the App version information in the API ([@soberstadt][])
 
 ### Bug Fixes
 
 - [#565][] Treat request URL as CDATA so query string params don't
   result in invalid XML ([@mildavw][])
 - [#594][] Dont use ^ and $ on email_regexp([@arthurnn][])
+- [#598][] Fix issue about gitlab integration ([@jozefvaclavik][])
+- [#609][] Fix issue about page system on search error ([@zhekanax][])
+- [#611][] Fix issue about select all error in search page ([@zhekanax][])
+- [#615][] Fix some LDAP information in README ([@felixbuenemann][])
 
 
 [@arthurnn]: https://github.com/arthurnn
@@ -26,13 +44,36 @@
 [@numbata]: https://github.com/numbata
 [@shingara]: https://github.com/shingara
 [@ugisozols]: https://github.com/ugisozols
+[@1st8]: https://github.com/1st8
+[@jozefvaclavik]: https://github.com/jozefvaclavik
+[@zhekanax]: https://github.com/zhekanax
+[@pkallberg]: https://github.com/pkallberg
+[@durrantm]: https://github.com/durrantm
+[@felixbuenemann]: https://github.com/felixbuenemann
+[@soberstadt]: https://github.com/soberstadt
+[@rsutphin]: https://github.com/rsutphin
 
 [#289]: https://github.com/errbit/errbit/issues/289
 [#515]: https://github.com/errbit/errbit/issues/515
 [#547]: https://github.com/errbit/errbit/issues/547
 [#565]: https://github.com/errbit/errbit/issues/565
 [#588]: https://github.com/errbit/errbit/issues/588
+[#592]: https://github.com/errbit/errbit/pull/592
 [#594]: https://github.com/errbit/errbit/pull/594
+[#597]: https://github.com/errbit/errbit/pull/597
+[#598]: https://github.com/errbit/errbit/pull/598
+[#603]: https://github.com/errbit/errbit/pull/603
+[#606]: https://github.com/errbit/errbit/pull/606
+[#609]: https://github.com/errbit/errbit/pull/609
+[#611]: https://github.com/errbit/errbit/pull/611
+[#613]: https://github.com/errbit/errbit/pull/613
+[#616]: https://github.com/errbit/errbit/pull/616
+[#615]: https://github.com/errbit/errbit/pull/615
+[#617]: https://github.com/errbit/errbit/pull/617
+[#618]: https://github.com/errbit/errbit/pull/618
+[#619]: https://github.com/errbit/errbit/pull/619
+[#620]: https://github.com/errbit/errbit/pull/620
+[#624]: https://github.com/errbit/errbit/pull/624
 
 ## 0.2.1 - Not released Yet
 

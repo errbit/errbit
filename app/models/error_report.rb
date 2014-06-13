@@ -17,6 +17,10 @@ require 'hoptoad_notifier'
 class ErrorReport
   attr_reader :error_class, :message, :request, :server_environment, :api_key, :notifier, :user_attributes, :framework
 
+  cattr_accessor :fingerprint_strategy do
+    Fingerprint
+  end
+
   def initialize(xml_or_attributes)
     @attributes = (xml_or_attributes.is_a?(String) ? Hoptoad.parse_xml!(xml_or_attributes) : xml_or_attributes).with_indifferent_access
     @attributes.each{|k, v| instance_variable_set(:"@#{k}", v) }
@@ -84,7 +88,7 @@ class ErrorReport
   private
 
   def fingerprint
-    @fingerprint ||= Fingerprint.generate(notice, api_key)
+    @fingerprint ||= fingerprint_strategy.generate(notice, api_key)
   end
 
 end

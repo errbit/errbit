@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 3.2.15'
+RAILS_VERSION = '~> 3.2.18'
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
@@ -25,7 +25,6 @@ gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
-gem 'draper', :require => false
 
 gem 'errbit_plugin',
   :git => 'https://github.com/errbit/errbit_plugin.git'
@@ -62,7 +61,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webmock', :require => false
   gem 'airbrake', :require => false
-  gem 'debugger', :platform => :mri_19
   gem 'pry-rails'
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
@@ -84,10 +82,9 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', :require => false
-  gem 'poltergeist', :require => false
-  gem 'launchy', :require => false
-  gem 'database_cleaner', :require => false
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', :require => false
@@ -97,6 +94,7 @@ end
 group :heroku, :production do
   gem 'unicorn', :require => false
 end
+
 
 # Gems used only for assets and not required
 # in production environments by default.

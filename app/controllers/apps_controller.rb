@@ -39,6 +39,10 @@ class AppsController < ApplicationController
     app.deploys.order_by(:created_at.desc).limit(5)
   }
 
+  expose(:users) {
+    User.all.sort_by {|u| u.name.downcase }
+  }
+
   def index; end
   def show
     app
@@ -91,8 +95,10 @@ class AppsController < ApplicationController
     def initialize_subclassed_notification_service
       # set the app's notification service
       if params[:app][:notification_service_attributes] && notification_type = params[:app][:notification_service_attributes][:type]
-        if NotificationService.subclasses.map(&:name).concat(["NotificationService"]).include?(notification_type)
-          app.notification_service = notification_type.constantize.new(params[:app][:notification_service_attributes])
+        available_notification_classes = [NotificationService] + NotificationService.subclasses
+        notification_class = available_notification_classes.detect{|c| c.name == notification_type}
+        if !notification_class.nil?
+          app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
         end
       end
     end
