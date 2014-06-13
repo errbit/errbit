@@ -115,25 +115,49 @@ describe "problems/show.html.haml" do
         before do
           with_issue_tracker("PivotalLabsTracker", problem)
         end
-        context "with problem without issue link" do
+
+        context "with app having github_repo" do
+          let(:app) { App.new(:new_record => false, :github_repo => 'foo/bar') }
+          let(:problem){ Problem.new(:new_record => false, :app => app) }
+
           before do
             problem.issue_link = nil
-          end
-          it 'not see link if no issue tracker' do
-            render
-            expect(view.content_for(:action_bar)).to match(/create issue/)
+            user = Fabricate(:user, :github_login => 'test_user', :github_oauth_token => 'abcdef')
+            controller.stub(:current_user) { user }
           end
 
+          it 'links to the associated tracker' do
+            render
+            expect(view.content_for(:action_bar)).to match(".pivotal_create.create-issue")
+          end
+
+          it 'does not link to github' do
+            render
+            expect(view.content_for(:action_bar)).to_not match(".github_create.create-issue")
+          end
         end
 
-        context "with problem with issue link" do
-          before do
-            problem.issue_link = 'http://foo'
+        context "without app having github_repo" do
+          context "with problem without issue link" do
+            before do
+              problem.issue_link = nil
+            end
+            it 'not see link if no issue tracker' do
+              render
+              expect(view.content_for(:action_bar)).to match(/create issue/)
+            end
+
           end
 
-          it 'not see link if no issue tracker' do
-            render
-            expect(view.content_for(:action_bar)).to_not match(/create issue/)
+          context "with problem with issue link" do
+            before do
+              problem.issue_link = 'http://foo'
+            end
+
+            it 'not see link if no issue tracker' do
+              render
+              expect(view.content_for(:action_bar)).to_not match(/create issue/)
+            end
           end
         end
 
