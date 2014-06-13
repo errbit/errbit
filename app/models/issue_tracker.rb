@@ -32,4 +32,5 @@ class IssueTracker
   delegate :create_issue, :to => :tracker
   delegate :label, :to => :tracker
   delegate :comments_allowed?, :to => :tracker
+  delegate :url, :to => :tracker
 end
