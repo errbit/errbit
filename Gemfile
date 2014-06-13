@@ -34,7 +34,6 @@ gem 'errbit_github_plugin',
   :git => 'https://github.com/errbit/errbit_github_plugin.git'
   # :path => 'vendor/gems/errbit_github_plugin'
 
-
 # Notification services
 # ---------------------------------------
 gem 'campy'

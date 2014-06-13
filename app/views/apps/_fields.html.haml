@@ -22,7 +22,10 @@
   = f.label :asset_host
   %em Used to generate links for JavaScript errors
   = f.text_field :asset_host, :placeholder => "e.g. https://assets.example.com"
-
+%div
+  = f.label :current_app_version, 'Latest App Version'
+  %em Mobile apps can set this to ignore any error below this version. ie: 1.4.3
+  = f.text_field :current_app_version, :placeholder => "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
 %fieldset
   %legend Notifications
   %div.checkbox
