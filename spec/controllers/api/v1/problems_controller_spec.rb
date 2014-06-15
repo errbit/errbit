@@ -24,6 +24,11 @@ describe Api::V1::ProblemsController do
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => requested_problem.id
         expect( response.body ).to eq(requested_problem.to_json(include: {errs: { include: :notices}}))
       end
+
+      it "returns a 404 if the problem cannot be found" do
+        get :show, :auth_token => @user.authentication_token, :format => "json", :id => 'IdontExist'
+        expect( response.status ).to eq(404)
+      end
     end
 
     describe "GET /api/v1/problems" do
