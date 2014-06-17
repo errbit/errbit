@@ -5,8 +5,7 @@ class Api::V1::ProblemsController < ApplicationController
   def show
     result = benchmark("[api/v1/problems_controller/show] query time") do
       begin
-        problem = Problem.only(FIELDS).find(params[:id])
-        problem.as_json(include: {errs: { include: :notices}})
+        Problem.only(FIELDS).find(params[:id])
       rescue Mongoid::Errors::DocumentNotFound
         head :not_found
         return false
