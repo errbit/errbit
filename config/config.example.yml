@@ -102,6 +102,9 @@ github_access_scope: ['repo']
 # you want to link local repositories.
 github_url: https://github.com
 
+# Change this to point to your GitLab URL if you want to link local repositories.
+gitlab_url: https://gitlab.example.com
+
 # Configure SMTP settings. If you are running Errbit on Heroku,
 # sendgrid will be configured by default.
 # ------------------------------------------------------------------------
