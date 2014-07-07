@@ -38,7 +38,7 @@ end
 
   it "should create an issue on GitHub Issues with problem params, and set issue link for problem" do
     stub_request(:post,
-                 "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues").
+                 "https://api.github.com/repos/#{repo}/issues").
       to_return(:status => 201,
                 :headers => {
         'Location' => issue_link,
@@ -49,7 +49,7 @@ end
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
-    requested = have_requested(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues")
+    requested = have_requested(:post, "https://api.github.com/repos/#{repo}/issues")
     expect(WebMock).to requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
     expect(WebMock).to requested.with(:body => /See this exception on Errbit/)
 
