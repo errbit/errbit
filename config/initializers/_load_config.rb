@@ -43,7 +43,7 @@ unless defined?(Errbit::Config)
 
   # Load config if config file exists.
   if File.exists?(config_file)
-    config = YAML.load_file(config_file)
+    config = YAML.load(Erubis::Eruby.new(File.read(config_file)).result)
     config.merge!(config.delete(Rails.env)) if config.has_key?(Rails.env)
     config.each do |k,v|
       Errbit::Config.send("#{k}=", v)
