@@ -6,6 +6,7 @@ class App
   field :name, :type => String
   field :api_key
   field :github_repo
+  field :gitlab_repo
   field :bitbucket_repo
   field :asset_host
   field :repository_branch
@@ -33,6 +34,7 @@ class App
 
   before_validation :generate_api_key, :on => :create
   before_save :normalize_github_repo
+  before_save :normalize_gitlab_repo
   after_update :store_cached_attributes_on_problems
 
   validates_presence_of :name, :api_key
@@ -104,6 +106,18 @@ class App
 
   def github_url_to_file(file)
     "#{github_url}/blob/#{repo_branch}/#{file}"
+  end
+
+  def gitlab_repo?
+    self.gitlab_repo.present?
+  end
+
+  def gitlab_url
+    "#{Errbit::Config.gitlab_url}/#{gitlab_repo}" if gitlab_repo?
+  end
+
+  def gitlab_url_to_file(file)
+    "#{gitlab_url}/blob/#{repo_branch}/#{file}"
   end
 
   def bitbucket_repo?
@@ -201,6 +215,15 @@ class App
       github_repo.strip!
       github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
       github_repo.sub!(/\.git$/, '')
+    end
+
+    def normalize_gitlab_repo
+      return if gitlab_repo.blank?
+      gitlab_host = URI.parse(Errbit::Config.gitlab_url).host
+      gitlab_host = Regexp.escape(gitlab_host)
+      gitlab_repo.strip!
+      gitlab_repo.sub!(/(git@|https?:\/\/)#{gitlab_host}(\/|:)/, '')
+      gitlab_repo.sub!(/\.git$/, '')
     end
 end
 

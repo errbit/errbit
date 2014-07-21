@@ -4,7 +4,7 @@ describe App do
   context "Attributes" do
     it { should have_field(:_id).of_type(String) }
     it { should have_field(:name).of_type(String) }
-    it { should have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
+    it { should have_fields(:api_key, :github_repo, :gitlab_repo, :bitbucket_repo, :asset_host, :repository_branch) }
     it { should have_fields(:resolve_errs_on_deploy, :notify_all_users, :notify_on_errs, :notify_on_deploys).of_type(Boolean) }
     it { should have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end
@@ -76,10 +76,22 @@ describe App do
       expect(app.github_repo).to eq ""
     end
 
+    it 'is fine with blank gitlab repos' do
+      app = Fabricate.build(:app, :gitlab_repo => "")
+      app.save
+      expect(app.gitlab_repo).to eq ""
+    end
+
     it 'doesnt touch github user/repo' do
       app = Fabricate.build(:app, :github_repo => "errbit/errbit")
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
+    end
+
+    it 'doesnt touch gitlab user/repo' do
+      app = Fabricate.build(:app, :gitlab_repo => "errbit/errbit")
+      app.save
+      expect(app.gitlab_repo).to eq "errbit/errbit"
     end
 
     it 'removes domain from https github repos' do
@@ -88,10 +100,22 @@ describe App do
       expect(app.github_repo).to eq "errbit/errbit"
     end
 
+    it 'removes domain from https gitlab repos' do
+      app = Fabricate.build(:app, :gitlab_repo => "https://gitlab.example.com/errbit/errbit")
+      app.save
+      expect(app.gitlab_repo).to eq "errbit/errbit"
+    end
+
     it 'normalizes public git repo as a github repo' do
       app = Fabricate.build(:app, :github_repo => "https://github.com/errbit/errbit.git")
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
+    end
+
+    it 'normalizes public git repo as a gitlab repo' do
+      app = Fabricate.build(:app, :gitlab_repo => "https://gitlab.example.com/errbit/errbit.git")
+      app.save
+      expect(app.gitlab_repo).to eq "errbit/errbit"
     end
 
     it 'normalizes private git repo as a github repo' do
@@ -99,12 +123,25 @@ describe App do
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
     end
+
+    it 'normalizes private git repo as a gitlab repo' do
+      app = Fabricate.build(:app, :gitlab_repo => "git@gitlab.example.com:errbit/errbit.git")
+      app.save
+      expect(app.gitlab_repo).to eq "errbit/errbit"
+    end
   end
 
   context '#github_url_to_file' do
     it 'resolves to full path to file' do
       app = Fabricate(:app, :github_repo => "errbit/errbit")
       expect(app.github_url_to_file('path/to/file')).to eq "https://github.com/errbit/errbit/blob/master/path/to/file"
+    end
+  end
+
+  context '#gitlab_url_to_file' do
+    it 'resolves to full path to file' do
+      app = Fabricate(:app, :gitlab_repo => "errbit/errbit")
+      expect(app.gitlab_url_to_file('path/to/file')).to eq "https://gitlab.example.com/errbit/errbit/blob/master/path/to/file"
     end
   end
 
@@ -117,6 +154,18 @@ describe App do
     it 'is false when no github_repo' do
       app = Fabricate(:app)
       expect(app.github_repo?).to be_false
+    end
+  end
+
+  context '#gitlab_repo?' do
+    it 'is true when there is a gitlab_repo' do
+      app = Fabricate(:app, :gitlab_repo => "errbit/errbit")
+      expect(app.gitlab_repo?).to be_true
+    end
+
+    it 'is false when no gitlab_repo' do
+      app = Fabricate(:app)
+      expect(app.gitlab_repo?).to be_false
     end
   end
 
