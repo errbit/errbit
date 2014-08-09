@@ -15,6 +15,7 @@ class App
   field :notify_on_errs, :type => Boolean, :default => true
   field :notify_on_deploys, :type => Boolean, :default => false
   field :email_at_notices, :type => Array, :default => Errbit::Config.email_at_notices
+  field :ignore_duplicate_notices, :type => Boolean, :default => false
 
   # Some legacy apps may have string as key instead of BSON::ObjectID
   # identity :type => String

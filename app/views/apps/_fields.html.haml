@@ -9,6 +9,10 @@
     %label Api Key
     %span= app.api_key
     = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app), :class => 'button', :method => 'post'
+
+%div.checkbox
+  = f.label :ignore_duplicate_notices
+  = f.check_box :ignore_duplicate_notices
 %div
   = f.label :repository_branch
   = f.text_field :repository_branch, :placeholder => "master"

@@ -53,7 +53,9 @@ class ErrorReport
       :user_attributes => user_attributes,
       :framework => framework
     )
-    error.notices << @notice
+    unless app.ignore_duplicate_notices && error.notices.count > 0
+      error.notices << @notice
+    end
     @notice
   end
   attr_reader :notice

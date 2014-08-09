@@ -61,6 +61,56 @@ describe ErrorReport do
     end
 
     describe "#generate_notice!" do
+      context "when app is flagged as ignore_duplicate_notices" do
+        before do
+          app.ignore_duplicate_notices = true
+          app.save
+        end
+        context "when the notice is for a new error" do
+          before do
+            error_report.generate_notice!
+          end
+
+          it "creates the error and the notice" do
+            expect(error_report.error.notices.count).to eq(1)
+          end
+        end
+        context "when the notice is for an exisiting error" do
+          before do
+            ErrorReport.new(xml).generate_notice!
+            error_report.generate_notice!
+          end
+
+          it "does not create an additional notification on the error" do
+            expect(error_report.error.notices.count).to eq(1)
+          end
+        end
+      end
+      context "when app is not flagged as ignore_duplicate_notices" do
+        before do
+          app.ignore_duplicate_notices = false
+          app.save
+        end
+        context "when the notice is for a new error" do
+          before do
+            error_report.generate_notice!
+          end
+
+          it "creates the error and the notice" do
+            expect(error_report.error.notices.count).to eq(1)
+          end
+        end
+        context "when the notice is for an exisiting error" do
+          before do
+            ErrorReport.new(xml).generate_notice!
+            error_report.generate_notice!
+          end
+
+          it "creates an additional notification on the error" do
+            expect(error_report.error.notices.count).to eq(2)
+          end
+        end
+      end
       it "save a notice" do
         expect {
           error_report.generate_notice!
