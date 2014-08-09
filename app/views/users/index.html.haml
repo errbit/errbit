@@ -7,11 +7,12 @@
     %tr
       - if Errbit::Config.use_gravatar
         %th
-      %th Name
+      %th= link_for_user_sort 'Name'
       - if Errbit::Config.user_has_username
-        %th Username
-      %th.main Email
-      %th Admin?
+        %th= link_for_user_sort 'Username'
+      %th.main= link_for_user_sort 'Email'
+      %th= link_for_user_sort 'Admin?', 'admin'
+
   %tbody
     - users.each do |user|
       %tr.user_list

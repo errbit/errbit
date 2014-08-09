@@ -5,6 +5,7 @@ describe "apps/index.html.haml" do
     app = stub_model(App, :deploys => [stub_model(Deploy, :created_at => Time.now, :revision => "123456789abcdef")])
     view.stub(:apps).and_return([app])
     controller.stub(:current_user) { stub_model(User) }
+    view.stub(:app_params_sort).and_return('asc')
   end
 
   describe "deploy column" do

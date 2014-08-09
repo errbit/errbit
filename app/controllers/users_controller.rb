@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersSearcher
+
   respond_to :html
 
   before_filter :require_admin!, :except => [:edit, :update]
@@ -6,7 +8,7 @@ class UsersController < ApplicationController
 
   expose(:user, :attributes => :user_params)
   expose(:users) {
-    User.all.page(params[:page]).per(current_user.per_page)
+    User.ordered_by(user_params_sort, user_params_order).page(params[:page]).per(current_user.per_page)
   }
 
   def index; end

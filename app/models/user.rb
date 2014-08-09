@@ -79,6 +79,16 @@ class User
     self[:github_login] = login
   end
 
+  def self.ordered_by(sort, order)
+    case sort
+    when "name";       order_by(["name", order])
+    when "username";   order_by(["username", order])
+    when "email";      order_by(["email", order])
+    when "admin";      order_by(["admin", order])
+    else raise("\"#{sort}\" is not a recognized sort")
+    end
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token

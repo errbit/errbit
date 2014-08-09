@@ -5,7 +5,7 @@
 %table.apps
   %thead
     %tr
-      %th= t('.name')
+      %th= link_for_app_sort 'Name'
       - if any_github_repos? || any_bitbucket_repos?
         %th= t('.repository')
       - if any_notification_services?
@@ -13,8 +13,8 @@
       - if any_issue_trackers?
         %th= t('.tracker')
       - if any_deploys?
-        %th= t('.last_deploy')
-      %th=t('.errors')
+        %th= link_for_app_sort 'Last Deploy', "last_deploy_at"
+      %th= link_for_app_sort 'Errors', "count"
   %tbody
     - apps.each do |app|
       %tr

@@ -4,6 +4,7 @@ describe 'users/index.html.haml' do
   let(:user) { stub_model(User) }
   before {
     view.stub(:current_user).and_return(user)
+    view.stub(:user_params_sort).and_return('asc')
     view.stub(:users).and_return(
       Kaminari.paginate_array([user], :total_count => 1).page(1)
     )

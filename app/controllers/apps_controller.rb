@@ -1,6 +1,7 @@
 class AppsController < ApplicationController
 
   include ProblemsSearcher
+  include AppsSearcher
 
   before_filter :require_admin!, :except => [:index, :show]
   before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
@@ -12,7 +13,32 @@ class AppsController < ApplicationController
   }
 
   expose(:apps) {
-    app_scope.all.sort.to_a
+    apps = app_scope.all.to_a
+
+    # SORT
+    case app_params_sort
+    when 'name'
+      apps.sort! { |a,b| a.name <=> b.name }
+    when 'last_deploy_at'
+      apps.sort! do |a,b|
+        first = a.last_deploy_at
+        second = b.last_deploy_at
+
+        if (first.nil? && second.nil?) || (first && second)
+          first <=> second
+        else
+          1
+        end
+      end
+    when 'count'
+      apps.sort! { |a,b| a.unresolved_count <=> b.unresolved_count }
+    end
+
+    # Reverse order
+    apps.reverse! if app_params_order == 'desc'
+
+    # Return
+    apps
   }
 
   expose(:app, :ancestor => :app_scope)
