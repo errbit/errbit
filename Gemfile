@@ -7,7 +7,7 @@ gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
 gem 'mongoid'
-
+gem 'jbuilder'
 gem 'mongoid_rails_migrations'
 gem 'devise'
 gem 'haml'
