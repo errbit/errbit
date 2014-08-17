@@ -15,6 +15,7 @@ class Deploy
   after_create :resolve_app_errs, :if => :should_resolve_app_errs?
   after_create :store_cached_attributes_on_problems
   after_create :deliver_email
+  after_create :deliver_notification
 
   validates_presence_of :username, :environment
 
@@ -42,5 +43,10 @@ class Deploy
       end
     end
 
+    def deliver_notification
+      if app.notify_on_deploys? && app.notification_service_configured?
+        app.notification_service.create_notification(self)
+      end
+    end
 end
 

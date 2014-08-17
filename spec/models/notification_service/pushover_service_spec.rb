@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe NotificationService::PushoverService do
-  it "it should send a notification to Pushover" do
-    # setup
-    notice = Fabricate :notice
-    notification_service = Fabricate :pushover_notification_service, :app => notice.app
-    problem = notice.problem
+  let(:service) { Fabricate(:pushover_notification_service) }
+  let(:problem) { Fabricate(:problem_with_errs) }
+  let(:deploy) { Fabricate(:deploy) }
 
-    # hoi stubbing
+
+  it "it should send a notification to Pushover for a problem" do
     notification = double('PushoverService')
     Rushover::Client.stub(:new).and_return(notification)
     notification.stub(:notify) { true }
@@ -15,6 +14,18 @@ describe NotificationService::PushoverService do
     #assert
     expect(notification).to receive(:notify)
 
-    notification_service.create_notification(problem)
+    service.create_notification(problem)
   end
+
+  it "it should send a notification to Pushover for a deploy" do
+    notification = double('PushoverService')
+    Rushover::Client.stub(:new).and_return(notification)
+    notification.stub(:notify) { true }
+
+    #assert
+    expect(notification).to receive(:notify)
+
+    service.create_notification(deploy)
+  end
+
 end

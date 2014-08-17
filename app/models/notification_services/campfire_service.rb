@@ -16,21 +16,27 @@ if defined? Campy
       }]
     ]
 
-    def check_params
-      if Fields.detect {|f| self[f[0]].blank? }
-        errors.add :base, 'You must specify your Campfire Subdomain, API token and Room ID'
-      end
+    def create_notification(message_info)
+      campy = Campy::Room.new(:account => subdomain,
+                              :token => api_token,
+                              :room_id => room_id)
+      campy.speak form_message(message_info)
     end
 
     def url
       "http://#{subdomain}.campfirenow.com/"
     end
 
-    def create_notification(problem)
-      # build the campfire client
-      campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => room_id)
-      # post the issue to the campfire room
-      campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}/problems/#{problem.id.to_s}"
+    def check_params
+      if Fields.detect {|f| self[f[0]].blank? }
+        errors.add :base, 'You must specify your Campfire Subdomain, API token and Room ID'
+      end
+    end
+
+    private
+
+    def problem_message(problem)
+      "[errbit] #{problem.app.name} #{problem_description(problem)} - #{problem_url(problem)}"
     end
   end
 end

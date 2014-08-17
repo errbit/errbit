@@ -18,7 +18,7 @@ class NotificationService
   validate :check_params
 
   if Errbit::Config.per_app_notify_at_notices
-    Fields = [[:notify_at_notices, 
+    Fields = [[:notify_at_notices,
                { :placeholder => 'comma separated numbers or simply 0 for every notice',
                  :label => 'notify on errors (0 for all errors)'
                }
@@ -26,17 +26,13 @@ class NotificationService
   else
     Fields = []
   end
-       
+
   def notify_at_notices
     Errbit::Config.per_app_notify_at_notices ? super : Errbit::Config.notify_at_notices
   end
 
   # Subclasses are responsible for overwriting this method.
   def check_params; true; end
-
-  def notification_description(problem)
-    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
-  end
 
   # Allows us to set the issue tracker class from a single form.
   def type; self._type; end
@@ -53,7 +49,54 @@ class NotificationService
     api_token.present?
   end
 
+  private
+
+  # Each subclass should call form_* in order to call the correct
+  # method for the object.  If you do need to override a certain
+  # message simply add the deploy_ or problem_ method to the subclass
+  # i.e problem_message deploy_message.  Having said this be aware
+  # each subclass has a custom method for the problem message formation
+  # method so a default in here has been left out.
+  # currently availbale methods for messages are below starting with form_
+  def form_subject(message_info)
+    send_message_type(:subject, message_info)
+  end
+
+  def form_message(message_info)
+    send_message_type(:message, message_info)
+  end
+
+  def form_url(message_info)
+    send_message_type(:url, message_info)
+  end
+
+  def form_description(message_info)
+    send_message_type(:description, message_info)
+  end
+
+  def send_message_type(method, message_info)
+    meth = "#{message_info.class.name.underscore}_#{method}".to_sym
+    send(meth, message_info)
+  end
+
+  def deploy_message(deploy)
+    %Q(#{deploy_subject(deploy)} with revision #{deploy.revision})
+  end
+  alias_method :deploy_description, :deploy_message
+
+  def deploy_subject(deploy)
+    %Q(#{deploy.app.name} has been deployed to #{deploy.environment})
+  end
+
+  def deploy_url(deploy)
+    app_url(deploy.app)
+  end
+
   def problem_url(problem)
-    "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
+    app_problem_url(problem.app, problem)
+  end
+
+  def problem_description(problem)
+    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
   end
 end

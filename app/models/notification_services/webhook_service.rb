@@ -13,7 +13,8 @@ class NotificationServices::WebhookService < NotificationService
     end
   end
 
-  def create_notification(problem)
-    HTTParty.post(api_token, :body => {:problem => problem.to_json})
+  def create_notification(message_info)
+    message = message_info.class.name.underscore.to_sym
+    HTTParty.post(api_token, :body => { message => message_info.to_json })
   end
 end

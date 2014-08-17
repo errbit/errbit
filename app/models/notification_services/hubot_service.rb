@@ -11,22 +11,26 @@ class NotificationServices::HubotService < NotificationService
     }]
   ]
 
+  def url
+    api_token
+  end
+
+  def create_notification(message_info)
+    HTTParty.post(url,
+                  :body => { :message => form_message(message_info),
+                    :room => room_id })
+  end
+
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
       errors.add :base, 'You must specify the URL of your hubot'
     end
   end
 
-  def url
-    api_token
-  end
+  private
 
-  def message_for_hubot(problem)
+  def problem_message(problem)
     "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem_url(problem)}"
-  end
-
-  def create_notification(problem)
-    HTTParty.post(url, :body => {:message => message_for_hubot(problem), :room => room_id})
   end
 end
 

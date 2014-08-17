@@ -1,15 +1,33 @@
 require 'spec_helper'
 
 describe NotificationService::HubotService do
-  it "it should send a notification to Hubot" do
-    # setup
-    notice = Fabricate :notice
-    notification_service = Fabricate :hubot_notification_service, :app => notice.app
-    problem = notice.problem
+  let(:service) { Fabricate(:hubot_notification_service) }
+  let(:problem) { Fabricate(:problem_with_errs) }
+  let(:deploy) { Fabricate(:deploy) }
 
-    # faraday stubbing
-    expect(HTTParty).to receive(:post).with(notification_service.api_token, :body => {:message => an_instance_of(String), :room => notification_service.room_id}).and_return(true)
+  it "it should send a notification to Hubot for a deploy" do
+    expect(HTTParty).to receive(:post).
+      with(service.api_token,
+           :body => {
+             :message =>
+             an_instance_of(String),
+             :room => service.room_id }).
+      and_return(true)
 
-    notification_service.create_notification(problem)
+    service.create_notification(problem)
   end
+
+  it "it should send a notification to Hubot for a deploy" do
+    expect(HTTParty).to receive(:post).
+      with(service.api_token,
+           :body => {
+             :message =>
+             an_instance_of(String),
+             :room => service.room_id
+           }).
+      and_return(true)
+
+    service.create_notification(deploy)
+  end
+
 end

@@ -15,28 +15,32 @@ class NotificationServices::HoiioService < NotificationService
       }]
   ]
 
+
+  def url
+    "https://secure.hoiio.com/user/"
+  end
+
+  def create_notification(message_info)
+    sms = Hoi::SMS.new(api_token, subdomain)
+
+    room_id.split(',').each do |number|
+      sms.send :dest => number, :msg => form_message(message_info)
+    end
+  end
+
   def check_params
     if Fields.detect {|f| self[f[0]].blank? }
       errors.add :base, 'You must specify your App ID, Access Token and Recipient\'s phone numbers'
     end
   end
 
-  def url
-    "https://secure.hoiio.com/user/"
+  private
+
+  def problem_description(problem)
+    "[#{problem.environment}]#{problem.message.to_s.truncate(50)}"
   end
 
-  def notification_description(problem)
-    "[#{ problem.environment }]#{problem.message.to_s.truncate(50)}"
-  end
-
-  def create_notification(problem)
-    # build the hoi client
-    sms = Hoi::SMS.new(api_token, subdomain)
-
-    # send sms
-    room_id.split(',').each do |number|
-      sms.send :dest => number, :msg => "http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"
-    end
-
+  def problem_message(problem)
+    "#{problem_url(problem)} #{problem_description(problem)}"
   end
 end
