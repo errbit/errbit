@@ -351,9 +351,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (~> 3.2.18)
+  actionmailer (~> 3.2.19)
   actionmailer_inline_css
-  actionpack (~> 3.2.18)
+  actionpack (~> 3.2.19)
   airbrake
   better_errors
   binding_of_caller
@@ -397,7 +397,7 @@ DEPENDENCIES
   rack-ssl
   rack-ssl-enforcer
   rails_autolink
-  railties (~> 3.2.18)
+  railties (~> 3.2.19)
   ri_cal
   rspec-rails
   ruby-fogbugz
