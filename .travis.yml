@@ -4,6 +4,7 @@ env:
 rvm:
   - 2.0.0
   - 1.9.3
+  - 2.1.2
   - rbx-19mode
   - ruby-head
 services: mongodb
