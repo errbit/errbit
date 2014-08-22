@@ -54,6 +54,6 @@ class NotificationService
   end
 
   def problem_url(problem)
-    "http://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
+    "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
   end
 end

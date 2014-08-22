@@ -30,7 +30,7 @@ if defined? Campy
       # build the campfire client
       campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => room_id)
       # post the issue to the campfire room
-      campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}/problems/#{problem.id.to_s}"
+      campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}/problems/#{problem.id.to_s}"
     end
   end
 end
