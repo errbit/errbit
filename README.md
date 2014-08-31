@@ -86,7 +86,6 @@ The list of requirements to install Errbit are :
  * MongoDB 2.2.0 or higher
 
 Errbit uses Ruby 2.0.0 as a default. However, it is compatible with Ruby 1.9.3 and above.
-To use a different version of ruby, override the `RUBY_VERSION` constant with the version you are using.
 
 Installation
 ------------
@@ -372,7 +371,7 @@ This gives you the ability to ask the user for more information,
 and let them know when you've fixed the bug.
 
 If you are running a Rails application and would like to include information
-about the current user in your error reports, you can replace the `airbrake` 
+about the current user in your error reports, you can replace the `airbrake`
 gem in your Gemfile with `airbrake_user_attributes`.
 This gem is a wrapper around the `airbrake` gem and will automatically
 inject information about the user into any error reports,
@@ -394,7 +393,7 @@ You can log javascript errors that occur in your application by following the di
 
 # Rails Applications
 
-Add the following line to the `<head>` section of your application template. 
+Add the following line to the `<head>` section of your application template.
 
 ```
 <%= airbrake_javascript_notifier %>
@@ -402,7 +401,6 @@ Add the following line to the `<head>` section of your application template.
 
 # Other Platforms
 
- 
 include the following before any javascript is loaded in your application.
 
 ```
@@ -413,7 +411,7 @@ include the following before any javascript is loaded in your application.
 Using custom fingerprinting methods
 -----------------------------------
 
-Errbit allows you to use your own Fingerprinting Strategy. 
+Errbit allows you to use your own Fingerprinting Strategy.
 If you are upgrading from a very old version of errbit, you can use the `LegacyFingerprint` for compatibility. The fingerprint strategy can be changed by adding an initializer to errbit:
 
 ```ruby
@@ -599,7 +597,6 @@ and make **optional** features configurable via `config/config.yml`.
 * Commit, do not mess with Rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself we can ignore when we pull)
 * Send us a pull request. Bonus points for topic branches.
 * Add you on the CONTRIBUTORS.md file on the current release
-* 
 
 # Running tests
 
@@ -609,5 +606,5 @@ More information can be found in the  [**Errbit Advanced Developer Guide**](docs
 Copyright
 ---------
 
-Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
+Copyright (c) 2010-2014 Errbit Team. See LICENSE for details.
 
