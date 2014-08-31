@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Fingerprint do
+describe Fingerprint::Sha1 do
 
   context '#generate' do
     let(:backtrace) {
@@ -16,7 +16,7 @@ describe Fingerprint do
     context "with same backtrace" do
       let(:backtrace_2) { backtrace }
       it 'should create the same fingerprint for two notices' do
-        expect(Fingerprint.generate(notice1, "api key")).to eq  Fingerprint.generate(notice2, "api key")
+        expect(Fingerprint::Sha1.generate(notice1, "api key")).to eq  Fingerprint::Sha1.generate(notice2, "api key")
       end
     end
 
@@ -30,8 +30,8 @@ describe Fingerprint do
       }
       it 'should not same fingerprint' do
         expect(
-          Fingerprint.generate(notice1, "api key")
-        ).not_to eql Fingerprint.generate(notice2, "api key")
+          Fingerprint::Sha1.generate(notice1, "api key")
+        ).not_to eql Fingerprint::Sha1.generate(notice2, "api key")
       end
     end
 
@@ -44,7 +44,7 @@ describe Fingerprint do
       end
 
       its 'fingerprints should be equal' do
-        expect(Fingerprint.generate(notice1, 'api key')).to eq Fingerprint.generate(notice2, 'api key')
+        expect(Fingerprint::Sha1.generate(notice1, 'api key')).to eq Fingerprint::Sha1.generate(notice2, 'api key')
       end
     end
 
@@ -57,13 +57,13 @@ describe Fingerprint do
       end
 
       its 'fingerprints should not be equal' do
-        expect(Fingerprint.generate(notice1, 'api key')).to_not eq Fingerprint.generate(notice2, 'api key')
+        expect(Fingerprint::Sha1.generate(notice1, 'api key')).to_not eq Fingerprint::Sha1.generate(notice2, 'api key')
       end
     end
   end
 
   describe '#unified_message' do
-    subject{ Fingerprint.new(double('notice', message: message), 'api key').unified_message }
+    subject{ Fingerprint::Sha1.new(double('notice', message: message), 'api key').unified_message }
 
     context "full error message" do
       let(:message) { "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess:0x007f6bfe3287e8>" }
