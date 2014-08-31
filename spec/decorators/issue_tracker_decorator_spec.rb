@@ -1,23 +1,28 @@
 require 'spec_helper'
 
 describe IssueTrackerDecorator do
+  let(:fake_tracker) do
+    Class.new(ErrbitPlugin::IssueTracker) do
+      def self.label; 'fake'; end
+      def self.note; 'a note'; end
+      def self.fields
+        {
+          :foo => {:label => 'foo'},
+          :bar => {:label => 'bar'}
+        }
+      end
 
-    let(:none_tracker) do
-      ErrbitPlugin::NoneIssueTracker.new(Object.new, 'none')
+      def configured?; true; end
     end
+  end
 
-    let(:tracker) do
-      ErrbitPlugin::FakeIssueTracker.new(Object.new, 'fake')
-    end
-
-    let(:decorator) do
-      IssueTrackerDecorator.new(tracker, 'fake')
-    end
+  let(:decorator) do
+    IssueTrackerDecorator.new(fake_tracker, 'fake')
+  end
 
   describe "#note" do
-
     it 'return the html_safe of Note' do
-      expect(decorator.note).to eql tracker.note
+      expect(decorator.note).to eql fake_tracker.note
     end
   end
 

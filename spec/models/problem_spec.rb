@@ -391,22 +391,19 @@ describe Problem do
 
       context "with issue_tracker valid associate to app" do
         let(:issue_tracker) do
-          it = IssueTracker.new
-          it.stub(:tracker).and_return(double(:configured? => true, :label => 'foo'))
-          it
+          Fabricate(:issue_tracker)
         end
 
         it 'return the issue_tracker label' do
-          expect(problem.issue_type).to eql 'foo'
+          expect(problem.issue_type).to eql 'fake'
         end
       end
 
       context "with issue_tracker not valid associate to app" do
         let(:issue_tracker) do
-          it = IssueTracker.new
-          it.stub(:tracker).and_return(double(:configured? => false))
-          it
+          IssueTracker.new(:type_tracker => 'fake')
         end
+
         it 'return nil' do
           expect(problem.issue_type).to be_nil
         end

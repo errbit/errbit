@@ -1,22 +1,30 @@
 require 'spec_helper'
 
 describe "problems/show.html.haml" do
-  class PivotalLabsTracker
-    def initialize(app, params); end
-    def label; 'pivotal'; end
-    def configured?; true; end
-    def comments_allowed?; false; end
-  end
-
-  class GithubIssuesTracker
-    def initialize(app, params); end
-    def label; 'github'; end
-    def configured?; true; end
-    def comments_allowed?; false; end
-  end
-
   let(:problem) { Fabricate(:problem) }
   let(:comment) { Fabricate(:comment) }
+  let(:pivotal_tracker) {
+    Class.new(ErrbitPlugin::IssueTracker) do
+      def self.label; 'pivotal'; end
+      def initialize(app, params); end
+      def configured?; true; end
+      def comments_allowed?; false; end
+    end
+  }
+  let(:github_tracker) {
+    Class.new(ErrbitPlugin::IssueTracker) do
+      def initialize(app, params); end
+      def label; 'github'; end
+      def configured?; true; end
+      def comments_allowed?; false; end
+    end
+  }
+  let(:trackers) {
+    {
+      'github' => github_tracker,
+      'pivotal' => pivotal_tracker
+    }
+  }
 
   before do
     view.stub(:app).and_return(problem.app)
@@ -31,7 +39,7 @@ describe "problems/show.html.haml" do
 
   def with_issue_tracker(tracker, problem)
     problem.app.issue_tracker = IssueTracker.new :type_tracker => tracker, :options => {:api_token => "token token token", :project_id => "1234"}
-    ErrbitPlugin::Registry.stub(:issue_tracker).with(tracker).and_return(tracker.constantize)
+    ErrbitPlugin::Registry.stub(:issue_trackers).and_return(trackers)
     view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end
@@ -90,7 +98,7 @@ describe "problems/show.html.haml" do
 
       it 'should allow creating issue for github if application has a github tracker' do
         problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
-        with_issue_tracker("GithubIssuesTracker", problem)
+        with_issue_tracker("github", problem)
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
@@ -113,7 +121,7 @@ describe "problems/show.html.haml" do
 
       context "with tracker associate on app" do
         before do
-          with_issue_tracker("PivotalLabsTracker", problem)
+          with_issue_tracker("pivotal", problem)
         end
 
         context "with app having github_repo" do
@@ -185,7 +193,7 @@ describe "problems/show.html.haml" do
     context "with issue tracker" do
       it 'should not display the comments section' do
         problem = Fabricate(:problem)
-        with_issue_tracker("PivotalLabsTracker", problem)
+        with_issue_tracker("pivotal", problem)
         render
         expect(view.view_flow.get(:comments)).to be_blank
       end
@@ -193,7 +201,7 @@ describe "problems/show.html.haml" do
       it 'should display existing comments' do
         problem = Fabricate(:problem_with_comments)
         problem.reload
-        with_issue_tracker("PivotalLabsTracker", problem)
+        with_issue_tracker("pivotal", problem)
         render
 
         expect(view.content_for(:comments)).to include('Test comment')

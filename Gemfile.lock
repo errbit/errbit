@@ -93,7 +93,7 @@ GEM
     errbit_github_plugin (0.1.0)
       errbit_plugin
       octokit
-    errbit_plugin (0.2.0)
+    errbit_plugin (0.3.0)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)

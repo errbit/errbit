@@ -312,9 +312,8 @@ describe AppsController do
         ErrbitPlugin::Registry.issue_trackers.each do |key, klass|
           context key do
             it "should save tracker params" do
-              issue_tracker_klass = klass.new(@app, {})
               params = {
-                :options => issue_tracker_klass.fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash },
+                :options => klass.fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash },
                 :type_tracker => key.dup.to_s
               }
               put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
@@ -322,8 +321,8 @@ describe AppsController do
               @app.reload
 
               tracker = @app.issue_tracker
-              expect(tracker.tracker).to be_a(ErrbitPlugin::Registry.issue_tracker(key))
-              issue_tracker_klass.fields.each do |field, field_info|
+              expect(tracker.tracker).to be_a(ErrbitPlugin::Registry.issue_trackers[key])
+              klass.fields.each do |field, field_info|
                 case field
                 when :ticket_properties; tracker.send(field.to_sym).should == 'card_type = defect'
                 else tracker.options[field.to_s].should == 'test_value'

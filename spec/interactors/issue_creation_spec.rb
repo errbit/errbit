@@ -1,13 +1,8 @@
 require 'spec_helper'
 
 describe IssueCreation do
-  class FakeIssueTracker
-    def initialize(app, params); end
-    def configured?; true; end
-    def create_issue(problem,user) ; true; end
-  end
   subject(:issue_creation) do
-    IssueCreation.new(problem, user, tracker_name,  request)
+    IssueCreation.new(problem, user, tracker_name, request)
   end
 
   let(:request) do
@@ -29,9 +24,7 @@ describe IssueCreation do
   end
 
   it 'creates an issue if issue tracker is configured' do
-    a = problem.app
-    a.build_issue_tracker
-    expect(ErrbitPlugin::Registry).to receive(:issue_tracker).and_return(FakeIssueTracker)
+    problem.app.issue_tracker = Fabricate(:issue_tracker)
     issue_creation.execute
     expect(errors).to be_empty
   end
