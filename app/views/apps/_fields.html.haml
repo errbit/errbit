@@ -55,7 +55,7 @@
         = w.radio_button :watcher_type, :email
         = label_tag :watcher_type_email, 'Email Address', :for => label_for_attr(w, 'watcher_type_email')
       %div.watcher_params.user{:class => w.object.email.blank? ? 'chosen' : nil}
-        = w.select :user_id, User.all.map{|u| [u.name,u.id.to_s]}, :include_blank => '-- Select a User --'
+        = w.select :user_id, users.map{|u| [u.name,u.id.to_s]}, :include_blank => '-- Select a User --'
       %div.watcher_params.email{:class => w.object.email.present? ? 'chosen' : nil}
         = w.text_field :email
 
@@ -65,4 +65,3 @@
 
 = render "issue_tracker_fields", :f => f
 = render "service_notification_fields", :f => f
-

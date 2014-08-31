@@ -175,9 +175,6 @@ heroku config:add HEROKU=true
 heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
-# This next line is required to access env variables during asset compilation.
-# For more info, go to this link: https://devcenter.heroku.com/articles/labs-user-env-compile
-heroku labs:enable user-env-compile
 git push heroku master
 ```
 

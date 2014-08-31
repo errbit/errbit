@@ -35,7 +35,7 @@ class NotificationServices::HoiioService < NotificationService
 
     # send sms
     room_id.split(',').each do |number|
-      sms.send :dest => number, :msg => "http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"
+      sms.send :dest => number, :msg => "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s} #{notification_description problem}"
     end
 
   end

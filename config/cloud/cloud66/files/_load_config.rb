@@ -17,6 +17,7 @@ unless defined?(Errbit::Config)
     Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
     Errbit::Config.gravatar_default = ENV['ERRBIT_GRAVATAR_DEFAULT']
 
+    Errbit::Config.github_url = ENV['GITHUB_URL']
     Errbit::Config.github_authentication = ENV['GITHUB_AUTHENTICATION']
     Errbit::Config.github_client_id = ENV['GITHUB_CLIENT_ID']
     Errbit::Config.github_secret = ENV['GITHUB_SECRET']
