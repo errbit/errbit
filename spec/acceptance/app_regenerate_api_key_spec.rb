@@ -80,7 +80,7 @@ feature "Create an application" do
     click_on I18n.t('apps.new.add_app')
     expect(page.has_content?(I18n.t('controllers.apps.flash.create.success'))).to eql true
     app = App.where(:name => 'My new app').first
-    expect(app.issue_tracker.type_tracker).to eql 'IssueTrackers::GithubIssuesTracker'
+    expect(app.issue_tracker.type_tracker).to eql 'github'
     expect(app.issue_tracker.options['username']).to eql 'token'
     expect(app.issue_tracker.options['password']).to eql 'pass'
 

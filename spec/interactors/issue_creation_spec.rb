@@ -31,7 +31,7 @@ describe IssueCreation do
   it 'creates an issue if issue tracker is configured' do
     a = problem.app
     a.build_issue_tracker
-    expect(ErrbitPlugin::Register).to receive(:issue_tracker).and_return(FakeIssueTracker)
+    expect(ErrbitPlugin::Registry).to receive(:issue_tracker).and_return(FakeIssueTracker)
     issue_creation.execute
     expect(errors).to be_empty
   end

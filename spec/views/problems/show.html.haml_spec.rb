@@ -31,7 +31,7 @@ describe "problems/show.html.haml" do
 
   def with_issue_tracker(tracker, problem)
     problem.app.issue_tracker = IssueTracker.new :type_tracker => tracker, :options => {:api_token => "token token token", :project_id => "1234"}
-    ErrbitPlugin::Register.stub(:issue_tracker).with(tracker).and_return(tracker.constantize)
+    ErrbitPlugin::Registry.stub(:issue_tracker).with(tracker).and_return(tracker.constantize)
     view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end

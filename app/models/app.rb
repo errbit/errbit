@@ -44,7 +44,7 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !ErrbitPlugin::Register.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
+    :reject_if => proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 

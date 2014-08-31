@@ -309,7 +309,7 @@ describe AppsController do
           end
         end
 
-        ErrbitPlugin::Register.issue_trackers.each do |key, klass|
+        ErrbitPlugin::Registry.issue_trackers.each do |key, klass|
           context key do
             it "should save tracker params" do
               issue_tracker_klass = klass.new(@app, {})
@@ -322,7 +322,7 @@ describe AppsController do
               @app.reload
 
               tracker = @app.issue_tracker
-              expect(tracker.tracker).to be_a(ErrbitPlugin::Register.issue_tracker(key))
+              expect(tracker.tracker).to be_a(ErrbitPlugin::Registry.issue_tracker(key))
               issue_tracker_klass.fields.each do |field, field_info|
                 case field
                 when :ticket_properties; tracker.send(field.to_sym).should == 'card_type = defect'

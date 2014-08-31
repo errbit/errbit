@@ -9,9 +9,8 @@ class IssueTrackerDecorator < Draper::Decorator
   delegate_all
 
   def issue_trackers
-    @issue_trackers ||= ErrbitPlugin::Register.issue_trackers
-    @issue_trackers.each do |key, it|
-      yield IssueTrackerDecorator.new(it.new(app, {}), key)
+    ErrbitPlugin::Registry.issue_trackers.each do |key, object|
+      yield IssueTrackerDecorator.new(object, key)
     end
   end
 
@@ -26,12 +25,12 @@ class IssueTrackerDecorator < Draper::Decorator
   end
 
   def params_class(tracker)
-    [choosen?(tracker), label].join(" ").strip
+    [chosen?(tracker), label].join(" ").strip
   end
 
   private
 
-  def choosen?(issue_tracker)
+  def chosen?(issue_tracker)
     key == issue_tracker.type_tracker.to_s ? 'chosen' : ''
   end
 

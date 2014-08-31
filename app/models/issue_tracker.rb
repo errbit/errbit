@@ -12,6 +12,8 @@ class IssueTracker
   field :type_tracker, :type => String
   field :options, :type => Hash, :default => {}
 
+  validate :validate_tracker
+
   ##
   # Update default_url_option with valid data from the request information
   #
@@ -24,13 +26,21 @@ class IssueTracker
   end
 
   def tracker
-    @tracker ||= ErrbitPlugin::Register.issue_tracker(self.type_tracker).new(app, self.options)
-  rescue NameError
-    ErrbitPlugin::NoneIssueTracker.new(app, {})
+    klass = ErrbitPlugin::Registry.issue_trackers[self.type_tracker]
+    klass = ErrbitPlugin::NoneIssueTracker unless klass
+
+    @tracker = klass.new(app, self.options)
   end
+
+  # Allow the tracker to validate its own params
+  def validate_tracker
+    (tracker.errors || {}).each do |k,v|
+      errors.add k, v
+    end
+  end
+
   delegate :configured?, :to => :tracker
   delegate :create_issue, :to => :tracker
-  delegate :label, :to => :tracker
   delegate :comments_allowed?, :to => :tracker
   delegate :url, :to => :tracker
 end
