@@ -93,7 +93,10 @@ GEM
     errbit_github_plugin (0.1.0)
       errbit_plugin
       octokit
-    errbit_plugin (0.3.0)
+    errbit_lighthouse_plugin (0.1.0)
+      errbit_plugin (~> 0)
+      lighthouse-api (~> 2)
+    errbit_plugin (0.4.0)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)
@@ -138,6 +141,9 @@ GEM
     launchy (2.3.0)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
+    lighthouse-api (2.0)
+      activeresource (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -345,6 +351,7 @@ DEPENDENCIES
   draper
   email_spec
   errbit_github_plugin
+  errbit_lighthouse_plugin
   errbit_plugin
   execjs
   fabrication
