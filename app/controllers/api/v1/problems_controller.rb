@@ -11,7 +11,7 @@ class Api::V1::ProblemsController < ApplicationController
   expose(:selected_problems) { Problem.where(id: params[:problems]) }
 
   def index
-    problems = Problem.select %w{problems.id app_id app_name environment message problems.where first_notice_at first_notice_commit first_notice_environment last_notice_at last_notice_commit last_notice_environment resolved resolved_at notices_count}
+    problems = Problem.scoped
 
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
@@ -33,12 +33,10 @@ class Api::V1::ProblemsController < ApplicationController
       presenter = ProblemWithCommentsPresenter
     end
 
-    results = benchmark("[api/v1/problems_controller] query time") { problems.to_a }
-
     respond_to do |format|
-      format.html { render :json => presenter.new(self, results) } # render JSON if no extension specified on path
-      format.json { render :json => presenter.new(self, results) }
-      format.xml  { render :xml  => presenter.new(self, results).as_json }
+      format.html { render :json => presenter.new(self, problems) } # render JSON if no extension specified on path
+      format.json { render :json => presenter.new(self, problems) }
+      format.xml  { render :xml  => presenter.new(self, problems).as_json }
     end
   end
 
