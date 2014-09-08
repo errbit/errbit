@@ -30,6 +30,7 @@ gem 'draper', :require => false
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
 gem 'errbit_lighthouse_plugin'
+gem 'errbit_redmine_plugin'
 
 # Notification services
 # ---------------------------------------

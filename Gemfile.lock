@@ -97,6 +97,9 @@ GEM
       errbit_plugin (~> 0)
       lighthouse-api (~> 2)
     errbit_plugin (0.4.0)
+    errbit_redmine_plugin (0.1.0)
+      errbit_plugin (~> 0)
+      oruen_redmine_client (~> 0)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)
@@ -200,6 +203,8 @@ GEM
       omniauth (~> 1.0)
     origin (1.1.0)
     orm_adapter (0.4.0)
+    oruen_redmine_client (0.0.1)
+      activeresource (>= 2.3.0)
     pjax_rails (0.3.4)
       jquery-rails
     poltergeist (1.5.1)
@@ -353,6 +358,7 @@ DEPENDENCIES
   errbit_github_plugin
   errbit_lighthouse_plugin
   errbit_plugin
+  errbit_redmine_plugin
   execjs
   fabrication
   flowdock
