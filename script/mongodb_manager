@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+class MongoDbManager
+
+  def start
+    cmd = <<-CMD
+      /usr/local/Cellar/mongodb/2.4.1-x86_64/mongod run --rest --config /usr/local/etc/mongod.conf &
+    CMD
+
+    system cmd
+
+    puts "open http://127.0.01:28017"
+  end
+
+  def stop
+    cmd = <<-CMD
+      mongo --eval "db.getSiblingDB('admin').shutdownServer()"
+    CMD
+
+    system cmd
+  end
+end
+
+if ARGV.length != 1 or !['start', 'stop'].include?(ARGV[0])
+  puts 'HELP: '
+  puts '$ scripts/mongodb_manager {start|stop}'
+  exit 0
+end
+
+mongodb_manager = MongoDbManager.new
+mongodb_manager.send ARGV[0].to_sym
