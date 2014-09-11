@@ -1,0 +1,284 @@
+diff --git a/.gitignore b/.gitignore
+index a619dfd..212bf43 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -19,3 +19,4 @@ bundle
+ coverage
+ *#
+ .ruby-version
++dump/
+diff --git a/Gemfile b/Gemfile
+index 2a489a1..8ad8ab1 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -1,5 +1,7 @@
+ source 'https://rubygems.org'
+ 
++ruby '2.1.2'
++
+ RAILS_VERSION = '~> 3.2.15'
+ 
+ gem 'actionmailer', RAILS_VERSION
+diff --git a/app/assets/stylesheets/errbit.css b/app/assets/stylesheets/errbit.css
+index 064e37b..16b0607 100644
+--- a/app/assets/stylesheets/errbit.css
++++ b/app/assets/stylesheets/errbit.css
+@@ -43,7 +43,7 @@ a.action  { float: right; font-size: 0.9em;}
+ 
+ /* Header */
+ #header {
+-  margin-bottom: 24px;
++  margin-bottom: 0px;
+   height: 71px;
+   border-bottom: 1px solid #fff;
+   position:relative;
+@@ -162,7 +162,7 @@ a.action  { float: right; font-size: 0.9em;}
+ 
+ /* Content Title and Comments */
+ #content-title, #content-comments {
+-  padding: 30px 24px;
++  padding: 20px 24px;
+   border-top: 1px solid #FFF;
+   border-bottom: 1px solid #FFF;
+   background-color: #f2f2f2;
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index f44216a..83b34b9 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -1,6 +1,8 @@
+ - content_for :title, app.name
++
+ - content_for :head do
+   = auto_discovery_link_tag :atom, app_path(app, User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => t('.atom_title', :name => app.name, :host => request.host)
++
+ - content_for :meta do
+   %strong=t('.errors_caught')
+   = app.problems.count
+@@ -8,6 +10,7 @@
+   = app.deploys.count
+   %strong=t('.api_key')
+   = app.api_key
++
+ - content_for :action_bar do
+   - if current_user.admin?
+     = link_to t('.edit'), edit_app_path(app), :class => 'button'
+@@ -18,6 +21,20 @@
+ 
+   - if current_user.watching?(app)
+     = link_to t('.unwatch'),  app_watcher_path({:app_id => app, :id => current_user.id}), :method => :delete, :class => 'button', :confirm => t('.are_you_sure')
++
++- if app.problems.any?
++  %section
++    .problem_table{:id => 'problem_table'}
++      = render 'problems/table', :problems => problems
++  %br
++  %section
++    = form_tag search_problems_path(:all_errs => all_errs, :app_id => app.id), :method => :get, :remote => true do
++      = text_field_tag :search, params[:search], :placeholder => t('.search_placeholder')
++  %br
++- else
++  %h3.clear=t('.no_error_yet')
++  = render 'configuration_instructions', :app => app
++
+ %h3#watchers_toggle
+   =t('.watchers')
+   %span.click_span=t('.show_hide')
+@@ -82,16 +99,4 @@
+   - else
+     %h3=t('.no_deploys')
+ 
+-- if app.problems.any?
+-  %h3.clear=t('.errors')
+-  %section
+-    = form_tag search_problems_path(:all_errs => all_errs, :app_id => app.id), :method => :get, :remote => true do
+-      = text_field_tag :search, params[:search], :placeholder => t('.search_placeholder')
+-  %br
+-  %section
+-    .problem_table{:id => 'problem_table'}
+-      = render 'problems/table', :problems => problems
+-- else
+-  %h3.clear=t('.no_error_yet')
+-  = render 'configuration_instructions', :app => app
+ 
+diff --git a/app/views/problems/_table.html.haml b/app/views/problems/_table.html.haml
+index 37a6225..f584665 100644
+--- a/app/views/problems/_table.html.haml
++++ b/app/views/problems/_table.html.haml
+@@ -52,5 +52,4 @@
+     %ul
+       - %w(merge unmerge resolve unresolve delete).each do |action|
+         %li= submit_tag action.capitalize, :id => "#{action}_problems", :class => 'button',
+-          :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
+-          :confirm => problem_confirm(action) }
++          :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']) }
+diff --git a/dumps/Errbit-Init-Database/finalcloud_erribit_development/apps.bson b/dumps/Errbit-Init-Database/finalcloud_erribit_development/apps.bson
+new file mode 100644
+index 0000000..eadadde
+Binary files /dev/null and b/dumps/Errbit-Init-Database/finalcloud_erribit_development/apps.bson differ
+diff --git a/dumps/Errbit-Init-Database/finalcloud_erribit_development/apps.metadata.json b/dumps/Errbit-Init-Database/finalcloud_erribit_development/apps.metadata.json
+new file mode 100644
+index 0000000..760fca0
+--- /dev/null
++++ b/dumps/Errbit-Init-Database/finalcloud_erribit_development/apps.metadata.json
+@@ -0,0 +1 @@
++{ "indexes" : [ { "v" : 1, "name" : "_id_", "key" : { "_id" : 1 }, "ns" : "finalcloud_erribit_development.apps" } ] }
+\ No newline at end of file
+diff --git a/dumps/Errbit-Init-Database/finalcloud_erribit_development/system.indexes.bson b/dumps/Errbit-Init-Database/finalcloud_erribit_development/system.indexes.bson
+new file mode 100644
+index 0000000..5614987
+Binary files /dev/null and b/dumps/Errbit-Init-Database/finalcloud_erribit_development/system.indexes.bson differ
+diff --git a/dumps/Errbit-Init-Database/finalcloud_erribit_development/users.bson b/dumps/Errbit-Init-Database/finalcloud_erribit_development/users.bson
+new file mode 100644
+index 0000000..335ea25
+Binary files /dev/null and b/dumps/Errbit-Init-Database/finalcloud_erribit_development/users.bson differ
+diff --git a/dumps/Errbit-Init-Database/finalcloud_erribit_development/users.metadata.json b/dumps/Errbit-Init-Database/finalcloud_erribit_development/users.metadata.json
+new file mode 100644
+index 0000000..a19b3dd
+--- /dev/null
++++ b/dumps/Errbit-Init-Database/finalcloud_erribit_development/users.metadata.json
+@@ -0,0 +1 @@
++{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "finalcloud_erribit_development.users", "name" : "_id_" } ] }
+\ No newline at end of file
+diff --git a/lib/tasks/merge.rake b/lib/tasks/merge.rake
+new file mode 100644
+index 0000000..d37220f
+--- /dev/null
++++ b/lib/tasks/merge.rake
+@@ -0,0 +1,20 @@
++namespace :merge do
++
++  desc <<-DESC
++    bundle exec rake merge:problem['message']
++    heroku run rake "merge:problem['message']" --trace -a finalcloud-errbit
++  DESC
++  task :problem, :message do |t, args|
++    args.each { |k, v| puts "#{k} => #{v}" }
++    unless args.message
++      puts 'You must provided an message'
++      exit 1
++    end
++    Rake::Task[:environment].invoke
++    selected_problems = Problem.where(message: Regexp.new(args.message)).to_a
++    merged_problem = selected_problems.flatten.uniq.first
++    ProblemMerge.new(selected_problems).merge
++    merged_problem.unresolve!
++  end
++
++end
+diff --git a/lib/tasks/sync.rake b/lib/tasks/sync.rake
+new file mode 100644
+index 0000000..1c46dc5
+--- /dev/null
++++ b/lib/tasks/sync.rake
+@@ -0,0 +1,40 @@
++namespace :sync do
++
++  desc 'Synchronizes local database with production'
++  task :local => :backup do
++    file_name = "mongodump.#{Time.now.strftime('%Y%m%d')}"
++    ENV['MONGOLAB_URI'] = 'heroku_app8273235'
++    app_name = "#{ENV['MONGOLAB_URI']}"
++    cmd = "mongorestore -v -h localhost " \
++      "--port 27017 " \
++      "--db finalcloud_erribit_development " \
++      "--drop tmp/#{file_name}/#{app_name}"
++    system cmd
++  end
++
++  task :reload do |t, args|
++    file_name = "mongodump.#{Time.now.strftime('%Y%m%d')}"
++    ENV['MONGOLAB_URI'] = 'heroku_app8273235'
++    app_name = "#{ENV['MONGOLAB_URI']}"
++    cmd = "mongorestore -v -h localhost " \
++      "--port 27017 " \
++      "--db finalcloud_erribit_development " \
++      "--drop tmp/#{file_name}/#{app_name}"
++    system cmd
++  end
++
++  task :backup do |t, args|
++    ENV['MONGOHQ_URL']      = 'ds037977.mongolab.com:37977'
++    ENV['MONGOLAB_URI']     = 'heroku_app8273235'
++    ENV['MONGOHQ_USERNAME'] = 'heroku_app8273235_A'
++    ENV['MONGOHQ_PASSWORD'] = 'qkIloLhbqProzmPrmZhNmmMwtWRDvBwf'
++
++    file_name = "mongodump.#{Time.now.strftime('%Y%m%d')}"
++    cmd = "mongodump -h #{ENV['MONGOHQ_URL']} " \
++      "-d #{ENV['MONGOLAB_URI']} -u #{ENV['MONGOHQ_USERNAME']} " \
++      "-p #{ENV['MONGOHQ_PASSWORD']} " \
++      "-o tmp/#{file_name}"
++    system cmd
++  end
++
++end
+diff --git a/script/mongodb_manager b/script/mongodb_manager
+new file mode 100755
+index 0000000..602a38d
+--- /dev/null
++++ b/script/mongodb_manager
+@@ -0,0 +1,31 @@
++#!/usr/bin/env ruby
++
++class MongoDbManager
++
++  def start
++    cmd = <<-CMD
++      /usr/local/Cellar/mongodb/2.4.1-x86_64/mongod run --rest --config /usr/local/etc/mongod.conf &
++    CMD
++
++    system cmd
++
++    puts "open http://127.0.01:28017"
++  end
++
++  def stop
++    cmd = <<-CMD
++      mongo --eval "db.getSiblingDB('admin').shutdownServer()"
++    CMD
++
++    system cmd
++  end
++end
++
++if ARGV.length != 1 or !['start', 'stop'].include?(ARGV[0])
++  puts 'HELP: '
++  puts '$ scripts/mongodb_manager {start|stop}'
++  exit 0
++end
++
++mongodb_manager = MongoDbManager.new
++mongodb_manager.send ARGV[0].to_sym
+diff --git a/script/restore b/script/restore
+new file mode 100755
+index 0000000..c671da8
+--- /dev/null
++++ b/script/restore
+@@ -0,0 +1,28 @@
++#!/usr/bin/env ruby
++
++class Configuration
++
++  def restore!
++    system 'rvm use ruby-2.1.2@errbit --create'
++    system 'bundle install'
++    system 'mongo finalcloud_erribit_development --eval "db.dropDatabase()"'
++    system 'bundle exec rake db:create'
++    system 'bundle exec rake db:seed'
++    dump_file = "dumps/Errbit-Init-Database"
++    cmd = <<-CMD
++      mongodump -v --host 127.0.0.1 --port 27017 --db finalcloud_erribit_development -o #{dump_file}
++    CMD
++    system cmd
++    system 'PORT=4000 foreman start'
++    echo "API KEY 3ae45a762c1a16f2e44217113ecf7f18"
++  end
++end
++
++if ARGV.length != 1 or !['restore!'].include?(ARGV[0])
++  puts 'HELP: '
++  puts '$ scripts/restore restore!'
++  exit 0
++end
++
++configuration = Configuration.new
++configuration.send ARGV[0].to_sym

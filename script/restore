@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+class Configuration
+
+  def restore!
+    system 'rvm use ruby-2.1.2@errbit --create'
+    system 'bundle install'
+    system 'mongo finalcloud_erribit_development --eval "db.dropDatabase()"'
+    system 'bundle exec rake db:create'
+    system 'bundle exec rake db:seed'
+    dump_file = "dumps/Errbit-Init-Database"
+    cmd = <<-CMD
+      mongodump -v --host 127.0.0.1 --port 27017 --db finalcloud_erribit_development -o #{dump_file}
+    CMD
+    system cmd
+    system 'PORT=4000 foreman start'
+    echo "API KEY 3ae45a762c1a16f2e44217113ecf7f18"
+  end
+end
+
+if ARGV.length != 1 or !['restore!'].include?(ARGV[0])
+  puts 'HELP: '
+  puts '$ scripts/restore restore!'
+  exit 0
+end
+
+configuration = Configuration.new
+configuration.send ARGV[0].to_sym
