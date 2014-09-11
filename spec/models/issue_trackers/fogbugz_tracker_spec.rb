@@ -10,14 +10,14 @@ describe IssueTrackers::FogbugzTracker do
     @issue_link = "https://#{tracker.account}.fogbugz.com/default.asp?#{number}"
     response = "<response><token>12345</token><case><ixBug>123</ixBug></case></response>"
     http_mock = double
-    http_mock.should_receive(:new).and_return(http_mock)
-    http_mock.should_receive(:request).twice.and_return(response)
+    expect(http_mock).to receive(:new).and_return(http_mock)
+    expect(http_mock).to receive(:request).twice.and_return(response)
     Fogbugz.adapter[:http] = http_mock
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
-    problem.issue_link.should == @issue_link
+    expect(problem.issue_link).to eq @issue_link
   end
 end
 

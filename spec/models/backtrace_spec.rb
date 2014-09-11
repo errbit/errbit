@@ -35,7 +35,7 @@ describe Backtrace do
     context "no similar backtrace" do
       before { backtrace.stub(:similar => nil) }
       it "create new backtrace" do
-        described_class.should_receive(:create).with(attributes)
+        expect(described_class).to receive(:create).with(attributes)
 
         described_class.find_or_create(attributes)
       end

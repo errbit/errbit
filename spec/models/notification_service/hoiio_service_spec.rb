@@ -13,7 +13,7 @@ describe NotificationService::HoiioService do
     sms.stub(:send) { true }
 
     #assert
-    sms.should_receive(:send)
+    expect(sms).to receive(:send)
 
     notification_service.create_notification(problem)
   end

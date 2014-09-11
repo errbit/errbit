@@ -6,9 +6,13 @@ unless defined?(Errbit::Config)
   Errbit::Config = OpenStruct.new
   use_env = ENV['HEROKU'] || ENV['USE_ENV']
 
+  Errbit::Config.protocol = 'http'
+
   # If Errbit is running on Heroku, config can be set from environment variables.
   if use_env
     Errbit::Config.host = ENV['ERRBIT_HOST']
+    Errbit::Config.protocol = ENV['ERRBIT_PROTOCOL'] || 'http'
+    Errbit::Config.port = ENV['ERRBIT_PORT']
     Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
     #  Not really easy to use like an env because need an array and ENV return a string :(
     # Errbit::Config.email_at_notices = ENV['ERRBIT_EMAIL_AT_NOTICES']
@@ -20,9 +24,11 @@ unless defined?(Errbit::Config)
     Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
     Errbit::Config.gravatar_default = ENV['ERRBIT_GRAVATAR_DEFAULT']
 
+    Errbit::Config.github_url = ENV['GITHUB_URL']
     Errbit::Config.github_authentication = ENV['GITHUB_AUTHENTICATION']
     Errbit::Config.github_client_id = ENV['GITHUB_CLIENT_ID']
     Errbit::Config.github_secret = ENV['GITHUB_SECRET']
+    Errbit::Config.github_org_id = ENV['GITHUB_ORG_ID'] if ENV['GITHUB_ORG_ID']
     Errbit::Config.github_access_scope = ENV['GITHUB_ACCESS_SCOPE'].split(',').map(&:strip) if ENV['GITHUB_ACCESS_SCOPE']
 
     Errbit::Config.smtp_settings = {
@@ -31,7 +37,8 @@ unless defined?(Errbit::Config)
       :authentication => :plain,
       :user_name      => ENV['SMTP_USERNAME']   || ENV['SENDGRID_USERNAME'],
       :password       => ENV['SMTP_PASSWORD']   || ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['SMTP_DOMAIN'] || ENV['SENDGRID_DOMAIN'] || ENV['ERRBIT_EMAIL_FROM'].split('@').last
+      :domain         => ENV['SMTP_DOMAIN'] || ENV['SENDGRID_DOMAIN'] ||
+                           (ENV['ERRBIT_EMAIL_FROM'] ? ENV['ERRBIT_EMAIL_FROM'].split('@').last : nil)
     }
   end
 
@@ -62,6 +69,10 @@ default_config.each do |k,v|
   Errbit::Config.send("#{k}=", v) if Errbit::Config.send(k) === nil
 end
 
+# Make sure the GitHub link doesn't end with a slash, so we don't have to deal
+# with it later on in the code.
+Errbit::Config.github_url.gsub!(/\/*\z/, '')
+
 # Disable GitHub oauth if gem is missing
 Errbit::Config.github_authentication = false unless defined?(OmniAuth::Strategies::GitHub)
 
@@ -78,7 +89,13 @@ end
 
 # Set config specific values
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|
-  default.merge! :host => Errbit::Config.host if default[:host].blank?
+  options_from_config = {
+    host: Errbit::Config.host,
+    port: Errbit::Config.port,
+    protocol: Errbit::Config.protocol
+  }.select { |k, v| v }
+
+  default.reverse_merge!(options_from_config)
 end
 
 if Rails.env.production?

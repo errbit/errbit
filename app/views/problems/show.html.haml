@@ -1,5 +1,5 @@
 - content_for :page_title, problem.message
-- content_for :title_css_class, 'err_show'
+- content_for :title_css_class, "err_show #{'resolved' if problem.resolved?}"
 - content_for :title, problem.error_class || truncate(problem.message, :length => 32)
 - content_for :meta do
   %strong App:

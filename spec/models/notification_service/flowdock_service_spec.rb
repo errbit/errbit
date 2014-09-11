@@ -7,10 +7,10 @@ describe NotificationServices::FlowdockService do
 
   it 'sends message in appropriate format' do
     Flowdock::Flow.any_instance.should_receive(:push_to_team_inbox) do |*args|
-      args.first[:content].should_not include('<3')
-      args.first[:content].should include('&lt;3')
+      expect(args.first[:content]).to_not include('<3')
+      expect(args.first[:content]).to include('&lt;3')
 
-      args.first[:project].should eq('App3')
+      expect(args.first[:project]).to eq('App3')
     end
     service.create_notification(problem)
   end

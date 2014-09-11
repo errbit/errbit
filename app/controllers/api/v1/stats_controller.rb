@@ -12,13 +12,13 @@ class Api::V1::StatsController < ApplicationController
 
     stats = {
       :name => @app.name,
+      :id => @app.id,
       :last_error_time => @last_error_time,
       :unresolved_errors => @app.unresolved_count
     }
 
     respond_to do |format|
-      format.html { render :json => Yajl.dump(stats) } # render JSON if no extension specified on path
-      format.json { render :json => Yajl.dump(stats) }
+      format.any(:html, :json) { render :json => Yajl.dump(stats) } # render JSON if no extension specified on path
       format.xml  { render :xml  => stats }
     end
   end
@@ -37,5 +37,3 @@ class Api::V1::StatsController < ApplicationController
   end
 
 end
-
-

@@ -50,7 +50,6 @@ class Problem
 
   validates_presence_of :last_notice_at, :first_notice_at
 
-
   def self.all_else_unresolved(fetch_all)
     if fetch_all
       all

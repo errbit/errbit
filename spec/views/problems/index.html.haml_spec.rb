@@ -17,7 +17,7 @@ describe "problems/index.html.haml" do
 
     it 'should works' do
       render
-      rendered.should have_selector('div#problem_table.problem_table')
+      expect(rendered).to have_selector('div#problem_table.problem_table')
     end
   end
 

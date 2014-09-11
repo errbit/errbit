@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
-
-RAILS_VERSION = '~> 3.2.15'
+RAILS_VERSION = '~> 3.2.19'
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
@@ -43,7 +41,7 @@ gem 'pivotal-tracker'
 # Fogbugz
 gem 'ruby-fogbugz', :require => 'fogbugz'
 # Github Issues
-gem 'octokit', '~> 1.18'
+gem 'octokit', '~> 2.0'
 # Gitlab
 gem 'gitlab', '~> 3.0.0'
 
@@ -81,8 +79,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webmock', :require => false
   gem 'airbrake', :require => false
-  gem 'ruby-debug', :platform => :mri_18
-  gem 'debugger', :platform => :mri_19
   gem 'pry-rails'
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'

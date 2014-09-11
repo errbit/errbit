@@ -1,5 +1,32 @@
 require 'spec_helper'
 
+shared_examples "a notification email" do
+  it "should have X-Mailer header" do
+    expect(@email).to have_header('X-Mailer', 'Errbit')
+  end
+
+  it "should have X-Errbit-Host header" do
+    expect(@email).to have_header('X-Errbit-Host', Errbit::Config.host)
+  end
+
+  it "should have Precedence header" do
+    expect(@email).to have_header('Precedence', 'bulk')
+  end
+
+  it "should have Auto-Submitted header" do
+    expect(@email).to have_header('Auto-Submitted', 'auto-generated')
+  end
+
+  it "should have X-Auto-Response-Suppress header" do
+    # http://msdn.microsoft.com/en-us/library/ee219609(v=EXCHG.80).aspx
+    expect(@email).to have_header('X-Auto-Response-Suppress', 'OOF, AutoReply')
+  end
+
+  it "should send the email" do
+    expect(ActionMailer::Base.deliveries.size).to eq 1
+  end
+end
+
 describe Mailer do
   context "Err Notification" do
     include EmailSpec::Helpers
@@ -19,30 +46,29 @@ describe Mailer do
       @email = Mailer.err_notification(notice).deliver
     end
 
-    it "should send the email" do
-      ActionMailer::Base.deliveries.size.should == 1
-    end
+    it_should_behave_like "a notification email"
+
 
     it "should html-escape the notice's message for the html part" do
-      @email.should have_body_text("class &lt; ActionController::Base")
+      expect(@email).to have_body_text("class &lt; ActionController::Base")
     end
 
     it "should have inline css" do
-      @email.should have_body_text('<p class="backtrace" style="')
+      expect(@email).to have_body_text('<p class="backtrace" style="')
     end
 
     it "should have links to source files" do
-      @email.should have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
+      expect(@email).to have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
     end
 
     it "should have the error count in the subject" do
-      @email.subject.should =~ /^\(3\) /
+      expect(@email.subject).to match( /^\(3\) / )
     end
 
     context 'with a very long message' do
       let(:notice)  { Fabricate(:notice, :message => 6.times.collect{|a| "0123456789" }.join('')) }
       it "should truncate the long message" do
-        @email.subject.should =~ / \d{47}\.{3}$/
+        expect(@email.subject).to match( / \d{47}\.{3}$/ )
       end
     end
   end
@@ -62,20 +88,16 @@ describe Mailer do
       @email = Mailer.comment_notification(comment).deliver
     end
 
-    it "should send the email" do
-      ActionMailer::Base.deliveries.size.should == 1
-    end
-
     it "should be sent to comment notification recipients" do
-      @email.to.should == recipients
+      expect(@email.to).to eq recipients
     end
 
     it "should have the notices count in the body" do
-      @email.should have_body_text("This err has occurred 2 times")
+      expect(@email).to have_body_text("This err has occurred 2 times")
     end
 
     it "should have the comment body" do
-      @email.should have_body_text(comment.body)
+      expect(@email).to have_body_text(comment.body)
     end
   end
 end

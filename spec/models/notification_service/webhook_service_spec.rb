@@ -6,7 +6,7 @@ describe NotificationService::WebhookService do
     notification_service = Fabricate :webhook_notification_service, :app => notice.app
     problem = notice.problem
     
-    HTTParty.should_receive(:post).with(notification_service.api_token, :body => {:problem => problem.to_json}).and_return(true)
+    expect(HTTParty).to receive(:post).with(notification_service.api_token, :body => {:problem => problem.to_json}).and_return(true)
 
     notification_service.create_notification(problem)
   end

@@ -4,6 +4,7 @@ class IssueTracker
   include HashHelper
   include Rails.application.routes.url_helpers
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
+  default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
 
   embedded_in :app, :inverse_of => :issue_tracker
 

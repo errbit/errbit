@@ -17,7 +17,7 @@
 	text-align: center;
 	line-height: 1.75em;
 	color: #666;
-	background: #CCC url(alerts/title.gif) top repeat-x;
+	background: #CCC url(<%= asset_path "alerts/title.gif" %>) top repeat-x;
 	border: solid 1px #FFF;
 	border-bottom: solid 1px #999;
 	cursor: default;
@@ -26,21 +26,21 @@
 }
 
 #popup_content {
-	background: 16px 16px no-repeat url(alerts/info.gif);
+	background: 16px 16px no-repeat url(<%= asset_path "alerts/info.gif" %>);
 	padding: 1em 1.75em;
 	margin: 0em;
 }
 
 #popup_content.alert {
-	background-image: url(alerts/info.gif);
+	background-image: url(<%= asset_path "alerts/info.gif" %>);
 }
 
 #popup_content.confirm {
-	background-image: url(alerts/important.gif);
+	background-image: url(<%= asset_path "alerts/important.gif" %>);
 }
 
 #popup_content.prompt {
-	background-image: url(alerts/help.gif);
+	background-image: url(<%= asset_path "alerts/help.gif" %>);
 }
 
 #popup_message {

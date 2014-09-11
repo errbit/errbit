@@ -28,26 +28,26 @@ describe "problems/show.html.haml" do
 
     it "should confirm the 'resolve' link by default" do
       render
-      action_bar.should have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
+      expect(action_bar).to have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
     end
 
     it "should confirm the 'resolve' link if configuration is unset" do
       Errbit::Config.stub(:confirm_err_actions).and_return(nil)
       render
-      action_bar.should have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
+      expect(action_bar).to have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
     end
 
     it "should not confirm the 'resolve' link if configured not to" do
       Errbit::Config.stub(:confirm_err_actions).and_return(false)
       render
-      action_bar.should have_selector('a.resolve[data-confirm="null"]')
+      expect(action_bar).to have_selector('a.resolve[data-confirm="null"]')
     end
 
     it "should link 'up' to HTTP_REFERER if is set" do
       url = 'http://localhost:3000/problems'
       controller.request.env['HTTP_REFERER'] = url
       render
-      action_bar.should have_selector("span a.up[href='#{url}']", :text => 'up')
+      expect(action_bar).to have_selector("span a.up[href='#{url}']", :text => 'up')
     end
 
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
@@ -57,7 +57,7 @@ describe "problems/show.html.haml" do
       view.stub(:app).and_return(problem.app)
       render
 
-      action_bar.should have_selector("span a.up[href='#{app_problems_path(problem.app)}']", :text => 'up')
+      expect(action_bar).to have_selector("span a.up[href='#{app_problems_path(problem.app)}']", :text => 'up')
     end
 
     context 'create issue links' do
@@ -70,7 +70,7 @@ describe "problems/show.html.haml" do
         view.stub(:app).and_return(problem.app)
         render
 
-        action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
+        expect(action_bar).to have_selector("span a.github_create.create-issue", :text => 'create issue')
       end
 
       it 'should allow creating issue for github if application has a github tracker' do
@@ -80,7 +80,7 @@ describe "problems/show.html.haml" do
         view.stub(:app).and_return(problem.app)
         render
 
-        action_bar.should have_selector("span a.github_create.create-issue", :text => 'create issue')
+        expect(action_bar).to have_selector("span a.github_create.create-issue", :text => 'create issue')
       end
 
       context "without issue tracker associate on app" do
@@ -139,9 +139,9 @@ describe "problems/show.html.haml" do
       view.stub(:app).and_return(problem.app)
       render
 
-      view.content_for(:comments).should include('Test comment')
-      view.content_for(:comments).should have_selector('img[src^="http://www.gravatar.com/avatar"]')
-      view.content_for(:comments).should include('Add a comment')
+      expect(view.content_for(:comments)).to include('Test comment')
+      expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
+      expect(view.content_for(:comments)).to include('Add a comment')
     end
 
     context "with issue tracker" do
@@ -149,7 +149,7 @@ describe "problems/show.html.haml" do
         problem = Fabricate(:problem)
         with_issue_tracker(PivotalLabsTracker, problem)
         render
-        view.view_flow.get(:comments).should be_blank
+        expect(view.view_flow.get(:comments)).to be_blank
       end
 
       it 'should display existing comments' do
@@ -158,9 +158,9 @@ describe "problems/show.html.haml" do
         with_issue_tracker(PivotalLabsTracker, problem)
         render
 
-        view.content_for(:comments).should include('Test comment')
-        view.content_for(:comments).should have_selector('img[src^="http://www.gravatar.com/avatar"]')
-        view.content_for(:comments).should_not include('Add a comment')
+        expect(view.content_for(:comments)).to include('Test comment')
+        expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
+        expect(view.content_for(:comments)).to_not include('Add a comment')
       end
     end
   end

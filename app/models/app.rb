@@ -9,6 +9,7 @@ class App
   field :bitbucket_repo
   field :asset_host
   field :repository_branch
+  field :current_app_version
   field :resolve_errs_on_deploy, :type => Boolean, :default => false
   field :notify_all_users, :type => Boolean, :default => false
   field :notify_on_errs, :type => Boolean, :default => true
@@ -98,7 +99,7 @@ class App
   end
 
   def github_url
-    "https://github.com/#{github_repo}" if github_repo?
+    "#{Errbit::Config.github_url}/#{github_repo}" if github_repo?
   end
 
   def github_url_to_file(file)
@@ -195,8 +196,10 @@ class App
 
     def normalize_github_repo
       return if github_repo.blank?
+      github_host = URI.parse(Errbit::Config.github_url).host
+      github_host = Regexp.escape(github_host)
       github_repo.strip!
-      github_repo.sub!(/(git@|https?:\/\/)github\.com(\/|:)/, '')
+      github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
       github_repo.sub!(/\.git$/, '')
     end
 end

@@ -1,6 +1,6 @@
 # Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
 
-[travis-img-url]: https://secure.travis-ci.org/errbit/errbit.png?branch=master
+[travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
@@ -78,25 +78,20 @@ There is a demo available at [http://errbit-demo.herokuapp.com/](http://errbit-d
 Email: demo@errbit-demo.herokuapp.com<br/>
 Password: password
 
-# Requirement
+# Requirements
 
-The list of requirement to install Errbit is :
+The list of requirements to install Errbit are :
 
  * Ruby 1.9.3 or higher
  * MongoDB 2.2.0 or higher
 
-By default it's the Ruby 2.0.0 to use. But you can define your own ruby
-version with RUBY_VERSION variable between :
-
- * 1.9.3
- * 2.0.0
- * 2.1.0
+Errbit uses Ruby 2.0.0 as a default. However, it is compatible with Ruby 1.9.3 and above.
 
 Installation
 ------------
 
 *Note*: This app is intended for people with experience deploying and maintaining
-Rails applications. If you're uncomfortable with any step below then Errbit is not
+Rails applications. If you're uncomfortable with any steps below then Errbit is not
 for you.
 
 **Set up your local box or server(Ubuntu):**
@@ -179,9 +174,6 @@ heroku config:add HEROKU=true
 heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
-# This next line is required to access env variables during asset compilation.
-# For more info, go to this link: https://devcenter.heroku.com/articles/labs-user-env-compile
-heroku labs:enable user-env-compile
 git push heroku master
 ```
 
@@ -299,6 +291,13 @@ heroku config:add GITHUB_SECRET=the_secret_provided_by_GitHub
 heroku config:add GITHUB_ACCESS_SCOPE=repo,public_repo
 ```
 
+* GITHUB_ORG_ID [*optional*] - If set, any user of the specified GitHub Organization can login.  If it is their first time, an account will automatically be created for them.
+
+```bash
+heroku config:add GITHUB_ORG_ID=1234567
+```
+
+
 __Note__: To avoid restarting your Heroku app 4 times you can set Heroku variables in a single command, i.e:
 
 ```bash
@@ -323,9 +322,13 @@ Errbit::Config.devise_modules << :ldap_authenticatable
   before authentication. You must add the following lines to `app/models/user.rb`:
 
 ```ruby
-  before_save :set_ldap_email
-  def set_ldap_email
-    self.email = Devise::LdapAdapter.get_ldap_param(self.username, "mail")
+  def ldap_before_save
+    name = Devise::LDAP::Adapter.get_ldap_param(self.username, "givenName")
+    surname = Devise::LDAP::Adapter.get_ldap_param(self.username, "sn")
+    mail = Devise::LDAP::Adapter.get_ldap_param(self.username, "mail")
+
+    self.name = (name + surname).join ' '
+    self.email = mail.first
   end
 ```
 
@@ -349,17 +352,16 @@ rake db:migrate
 rake assets:precompile
 ```
 
-If we change the way that data is stored, this will run any migrations to bring your database up to date.
+This will ensure that your application stays up to date with any schema changes.
 
 
-### Upgrade from errbit 0.2 to 0.3
+### Upgrading errbit from version 0.2 to 0.3
 
-The file of MongoDB connection config/mongoid.yml change between 0.2 to
-0.3. So Check the new config/mongoid.yml.example file and update it in
-good way.
+The MongoDB connection file `config/mongoid.yml` has changed between version 0.2 and
+0.3. We have provided a new example configuration file to use at `config/mongoid.example.yml`.
 
-This change is not need to be done if you use only ENV variable to
-define you access to MongoDB database.
+This change is not needed if you use ENV variables to
+define access to your MongoDB database.
 
 
 ## User information in error reports
@@ -368,11 +370,12 @@ Errbit can now display information about the user who experienced an error.
 This gives you the ability to ask the user for more information,
 and let them know when you've fixed the bug.
 
-If you would like to include information about the current user in your error reports,
-you can replace the `airbrake` gem in your Gemfile with `airbrake_user_attributes`,
-which wraps the `airbrake` gem and injects user information.
-It will inject information about the current user into the error report
-if your Rails app's controller responds to a `#current_user` method.
+If you are running a Rails application and would like to include information
+about the current user in your error reports, you can replace the `airbrake`
+gem in your Gemfile with `airbrake_user_attributes`.
+This gem is a wrapper around the `airbrake` gem and will automatically
+inject information about the user into any error reports,
+so long as your controllers respond to a `#current_user` method.
 The user's attributes are filtered to remove authentication fields.
 
 If user information is received with an error report,
@@ -383,20 +386,40 @@ it will be displayed under the *User Details* tab:
 
 (This tab will be hidden if no user information is available.)
 
-Adding javascript errors notifications
+Javascript error notifications
 --------------------------------------
 
-Errbit easily supports javascript errors notifications. You just need to add `config.js_notifier = true` to the errbit initializer in the rails app.
+You can log javascript errors that occur in your application by following the directions below.
+
+# Rails Applications
+
+Add the following line to the `<head>` section of your application template.
 
 ```
-Errbit.configure do |config|
-  config.host    = 'YOUR-ERRBIT-HOST'
-  config.api_key = 'YOUR-PROJECT-API-KEY'
-  config.js_notifier = true
-end
+<%= airbrake_javascript_notifier %>
 ```
 
-Then get the `notifier.js` from `errbit/public/javascript/notifier.js` and add to `application.js` on your rails app or include `http://YOUR-ERRBIT-HOST/javascripts/notifier.js` on your `application.html.erb.`
+# Other Platforms
+
+include the following before any javascript is loaded in your application.
+
+```
+<script src='http://YOUR-ERRBIT-HOST/javascripts/notifier.js' type='text/javascript'></script>
+```
+
+
+Using custom fingerprinting methods
+-----------------------------------
+
+Errbit allows you to use your own Fingerprinting Strategy.
+If you are upgrading from a very old version of errbit, you can use the `LegacyFingerprint` for compatibility. The fingerprint strategy can be changed by adding an initializer to errbit:
+
+```ruby
+# config/fingerprint.rb
+ErrorReport.fingerprint_strategy = LegacyFingerprint
+```
+
+The easiest way to add custom fingerprint methods is to simply subclass `Fingerprint`
 
 Issue Trackers
 --------------
@@ -521,11 +544,6 @@ Solutions known to work are listed below:
   </tr>
 </table>
 
-Develop on Errbit
------------------
-
-A guide can help on this way on  [**Errbit Advanced Developer Guide**](docs/DEVELOPER-ADVANCED.md)
-
 ## Other documentation
 
 * [All ENV variables availables to configure Errbit](docs/ENV-VARIABLES.md)
@@ -558,7 +576,7 @@ Special Thanks
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for further details. You can see another list of Contributors by release version on [CONTRIBUTORS.md]
 
 
-Contributing
+Contributing to Errbit
 ------------
 
 We welcome any contributions. If you need to tweak Errbit for your organization's needs,
@@ -580,13 +598,13 @@ and make **optional** features configurable via `config/config.yml`.
 * Send us a pull request. Bonus points for topic branches.
 * Add you on the CONTRIBUTORS.md file on the current release
 
+# Running tests
+
+More information can be found in the  [**Errbit Advanced Developer Guide**](docs/DEVELOPER-ADVANCED.md)
+
 
 Copyright
 ---------
 
-Copyright (c) 2010-2013 Errbit Team. See LICENSE for details.
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/errbit/errbit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+Copyright (c) 2010-2014 Errbit Team. See LICENSE for details.
 

@@ -24,8 +24,8 @@ describe IssueTrackers::GitlabTracker do
 
     requested_issue = have_requested(:post, "#{tracker.account}/api/v3/projects/#{tracker.project_id}/issues?private_token=#{tracker.api_token}").with(:body => /.+/, :headers => {'Accept'=>'application/json'})
     requested_note = have_requested(:post, "#{tracker.account}/api/v3/projects/#{tracker.project_id}/issues/#{issue_id}/notes?private_token=#{tracker.api_token}")
-    WebMock.should requested_issue.with(:body => /%5Bproduction%5D%5Bfoo%23bar%5D%20FooError%3A%20Too%20Much%20Bar/)
-    WebMock.should requested_issue.with(:body => /See%20this%20exception%20on%20Errbit/)
+    expect(WebMock).to requested_issue.with(:body => /%5Bproduction%5D%5Bfoo%23bar%5D%20FooError%3A%20Too%20Much%20Bar/)
+    expect(WebMock).to requested_issue.with(:body => /See%20this%20exception%20on%20Errbit/)
 
   end
 end

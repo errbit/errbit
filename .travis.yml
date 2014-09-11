@@ -4,13 +4,14 @@ env:
 rvm:
   - 2.0.0
   - 1.9.3
-  - rbx-19mode
+  - 2.1.2
+  - rbx-2
   - ruby-head
 services: mongodb
 #script: ./script/rspec-queue-mongoid.rb --format progress spec
 matrix:
   allow_failures:
-    - rvm: rbx-19mode
+    - rvm: rbx-2
     - rvm: ruby-head
 
 
