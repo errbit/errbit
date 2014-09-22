@@ -103,10 +103,10 @@ apt-get update
 apt-get install mongodb-10gen
 ```
 
-  * Install libxml and libcurl
+  * Install libxml, libzip, libssl and libcurl
 
 ```bash
-apt-get install libxml2 libxml2-dev libxslt-dev libcurl4-openssl-dev
+apt-get install libxml2 libxml2-dev libxslt-dev libcurl4-openssl-dev libzip-dev libssl-dev
 ```
 
   * Install Bundler
