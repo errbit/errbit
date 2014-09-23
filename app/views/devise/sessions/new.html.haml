@@ -9,7 +9,7 @@
 - if Errbit::Config.google_authentication
   - content_for :action_bar do
     %div.action-bar
-      %span.github= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)
+      %span.google= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)
 
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
