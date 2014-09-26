@@ -31,6 +31,7 @@ gem 'errbit_plugin'
 gem 'errbit_github_plugin'
 gem 'errbit_lighthouse_plugin'
 gem 'errbit_redmine_plugin'
+gem 'errbit_bitbucket_plugin'
 
 # Notification services
 # ---------------------------------------
