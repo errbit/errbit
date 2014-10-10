@@ -33,6 +33,7 @@ gem 'errbit_lighthouse_plugin'
 gem 'errbit_redmine_plugin'
 gem 'errbit_bitbucket_plugin'
 gem 'errbit_pivotal_plugin'
+gem 'errbit_gitlab_plugin'
 
 # Notification services
 # ---------------------------------------

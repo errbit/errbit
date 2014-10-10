@@ -104,6 +104,9 @@ GEM
     errbit_github_plugin (0.1.0)
       errbit_plugin
       octokit
+    errbit_gitlab_plugin (0.1.0)
+      errbit_plugin (~> 0.4, >= 0.4.0)
+      gitlab (~> 3.0.0, >= 3.0.0)
     errbit_lighthouse_plugin (0.1.0)
       errbit_plugin (~> 0)
       lighthouse-api (~> 2)
@@ -127,6 +130,8 @@ GEM
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
+    gitlab (3.0.0)
+      httparty
     haml (4.0.3)
       tilt
     happymapper (0.4.1)
@@ -390,6 +395,7 @@ DEPENDENCIES
   email_spec
   errbit_bitbucket_plugin
   errbit_github_plugin
+  errbit_gitlab_plugin
   errbit_lighthouse_plugin
   errbit_pivotal_plugin
   errbit_plugin
