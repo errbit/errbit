@@ -44,6 +44,13 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bitbucket_rest_api (0.1.5)
+      faraday (~> 0.8.1)
+      faraday_middleware (~> 0.9.0)
+      hashie (~> 2.0.5)
+      multi_json (~> 1.3)
+      nokogiri (>= 1.5.2)
+      simple_oauth
     builder (3.0.4)
     callsite (0.0.11)
     campy (1.0.0)
@@ -90,6 +97,10 @@ GEM
     email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
+    errbit_bitbucket_plugin (0.1.0)
+      bitbucket_rest_api
+      errbit_plugin
+      faraday (~> 0.8.1)
     errbit_github_plugin (0.1.0)
       errbit_plugin
       octokit
@@ -106,8 +117,10 @@ GEM
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)
-    faraday (0.9.0)
-      multipart-post (>= 1.2, < 3)
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     flowdock (0.3.1)
       httparty (~> 0.7)
       multi_json
@@ -180,7 +193,7 @@ GEM
     moped (1.5.1)
     multi_json (1.10.1)
     multi_xml (0.5.5)
-    multipart-post (2.0.0)
+    multipart-post (1.2.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -303,6 +316,7 @@ GEM
     sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
+    simple_oauth (0.3.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -374,6 +388,7 @@ DEPENDENCIES
   devise
   draper
   email_spec
+  errbit_bitbucket_plugin
   errbit_github_plugin
   errbit_lighthouse_plugin
   errbit_pivotal_plugin
