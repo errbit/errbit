@@ -101,6 +101,9 @@ GEM
       bitbucket_rest_api
       errbit_plugin
       faraday (~> 0.8.1)
+    errbit_fogbugz_plugin (0.1.0)
+      errbit_plugin (~> 0.4, >= 0.4.0)
+      ruby-fogbugz (~> 0.1, >= 0.1)
     errbit_github_plugin (0.1.0)
       errbit_plugin
       octokit
@@ -314,6 +317,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-fogbugz (0.1.1)
+      crack
     rushover (0.3.0)
       json
       rest-client
@@ -394,6 +399,7 @@ DEPENDENCIES
   draper
   email_spec
   errbit_bitbucket_plugin
+  errbit_fogbugz_plugin
   errbit_github_plugin
   errbit_gitlab_plugin
   errbit_lighthouse_plugin
