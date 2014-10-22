@@ -93,6 +93,9 @@ GEM
     errbit_github_plugin (0.1.0)
       errbit_plugin
       octokit
+    errbit_jira_plugin (0.2.0)
+      errbit_plugin
+      jira-ruby
     errbit_lighthouse_plugin (0.1.0)
       errbit_plugin (~> 0)
       lighthouse-api (~> 2)
@@ -129,7 +132,10 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
-    i18n (0.6.5)
+    i18n (0.6.11)
+    jira-ruby (0.1.10)
+      activesupport
+      oauth
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -172,7 +178,7 @@ GEM
       rails (>= 3.2.0)
       railties (>= 3.2.0)
     moped (1.5.1)
-    multi_json (1.10.0)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-scp (1.1.2)
@@ -184,6 +190,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -356,6 +363,7 @@ DEPENDENCIES
   draper
   email_spec
   errbit_github_plugin
+  errbit_jira_plugin
   errbit_lighthouse_plugin
   errbit_plugin
   errbit_redmine_plugin
