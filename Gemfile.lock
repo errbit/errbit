@@ -110,6 +110,9 @@ GEM
     errbit_gitlab_plugin (0.1.0)
       errbit_plugin (~> 0.4, >= 0.4.0)
       gitlab (~> 3.0.0, >= 3.0.0)
+    errbit_jira_plugin (0.2.0)
+      errbit_plugin
+      jira-ruby
     errbit_lighthouse_plugin (0.1.0)
       errbit_plugin (~> 0)
       lighthouse-api (~> 2)
@@ -156,6 +159,9 @@ GEM
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.11)
+    jira-ruby (0.1.10)
+      activesupport
+      oauth
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -213,6 +219,7 @@ GEM
       mini_portile (= 0.6.0)
     nokogiri-happymapper (0.5.9)
       nokogiri (~> 1.5)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -402,6 +409,7 @@ DEPENDENCIES
   errbit_fogbugz_plugin
   errbit_github_plugin
   errbit_gitlab_plugin
+  errbit_jira_plugin
   errbit_lighthouse_plugin
   errbit_pivotal_plugin
   errbit_plugin
