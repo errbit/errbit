@@ -49,6 +49,10 @@ class Notice
     server_environment['server-environment'] || server_environment['environment-name']
   end
 
+  def environment_host
+    server_environment['hostname']
+  end
+
   def component
     request['component']
   end

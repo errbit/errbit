@@ -16,7 +16,33 @@ $(function(){
     activateLabelIcons();
   });
   activateLabelIcons();
+
+  activateAdvancedSearchAPI();
 });
+
+function activateAdvancedSearchAPI() {
+    var $form = $('#advanced-search');
+
+    $form.submit(function(){
+        var $filledInputs = $form.find('input').filter('[value!=""]'),
+            newUrl = $form.attr('action'),
+            appId;
+
+        newUrl += newUrl.search(/\?/) > -1 ? '&' : '?';
+        newUrl += 'all_errs=false&';
+
+        if (appId = window.location.href.match(/apps\/([a-f0-9]+)/)) {
+            newUrl += 'app_id=' + appId[1] + '&';
+        }
+
+        newUrl += $filledInputs.serialize();
+
+        if (history && history.pushState) {
+            history.pushState(null, null, newUrl);
+        }
+    });
+}
+
 
 function activateNestedForms() {
   var wrapper = $('.nested-wrapper')
