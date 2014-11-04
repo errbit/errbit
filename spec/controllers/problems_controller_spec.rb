@@ -123,6 +123,31 @@ describe ProblemsController do
     end
   end
 
+  describe "GET /problems/search" do
+    before do
+      sign_in Fabricate(:admin)
+      @app      = Fabricate(:app)
+      @problem1 = Fabricate(:problem, :app=>@app, message: "Most important")
+      @problem2 = Fabricate(:problem, :app=>@app, message: "Very very important")
+    end
+
+    it "renders successfully" do
+      get :search
+      expect(response).to be_success
+    end
+
+    it "renders index template" do
+      get :search
+      expect(response).to render_template('problems/index')
+    end
+
+    it "searches problems for given string" do
+      get :search, :search => "Most important"
+      expect(controller.problems).to include(@problem1)
+      expect(controller.problems).to_not include(@problem2)
+    end
+  end
+
   describe "GET /apps/:app_id/problems/:id" do
     #render_views
 
