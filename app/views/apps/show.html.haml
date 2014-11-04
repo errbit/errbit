@@ -88,8 +88,7 @@
 - if app.problems.any?
   %h3.clear=t('.errors')
   %section
-    = form_tag search_problems_path(:all_errs => all_errs, :app_id => app.id), :method => :get, :remote => true do
-      = text_field_tag :search, params[:search], :placeholder => t('.search_placeholder')
+    = render 'problems/search', :all_errs => @all_errs, :app_id => app.id
   %br
   %section
     .problem_table{:id => 'problem_table'}

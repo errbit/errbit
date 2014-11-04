@@ -77,6 +77,8 @@ en:
       merge: "Merge select issues? They can be unmerged later."
       unmerge: "Unmerge selected issues? They can be re-merged later."
       unresolve: "Unresolve selected issues? They can be resolved again later."
+    search:
+      search_placeholder: 'Search for issues'
 
   comments:
     confirm_delete: "Permanently delete this comment?"
@@ -118,7 +120,6 @@ en:
       no_watcher: "Sadly, no one is watching this app"
       repository: Repository
       revision: Revision
-      search_placeholder: 'Search for issues'
       show_hide: "(show/hide)"
       unresolved_errs: unresolved errs
       unwatch: unwatch
