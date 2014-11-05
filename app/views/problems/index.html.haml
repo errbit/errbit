@@ -9,8 +9,7 @@
     = link_to 'show resolved', problems_path(:all_errs => true), :class => 'button'
 
 %section
-  = form_tag search_problems_path(:all_errs => @all_errs), :method => :get, :remote => true do
-    = text_field_tag :search, params[:search], :placeholder => 'Search for issues'
+  = render 'problems/search', :all_errs => @all_errs, :app_id => nil
 %br
 %section
   #problem_table.problem_table
