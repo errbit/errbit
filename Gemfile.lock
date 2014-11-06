@@ -243,6 +243,8 @@ GEM
     parser (2.5.1.2)
       ast (~> 2.4.0)
     phantomjs (2.1.1.0)
+    pickadate-rails (3.5.6.0)
+      railties (>= 3.1.0)
     pjax_rails (0.4.0)
       jquery-rails
       railties (>= 3.2, < 5.0)
@@ -470,6 +472,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-google-oauth2
   phantomjs
+  pickadate-rails
   pjax_rails
   poltergeist
   pry-byebug
@@ -499,4 +502,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.16.2
+   1.17.3

@@ -42,7 +42,14 @@ class ProblemsController < ApplicationController
       all_else_unresolved(all_errs).
       ordered_by(params_sort, params_order)
 
+    if params[:from].present? && params[:until].present?
+      from_date = Time.parse(params[:from])
+      until_date = Time.parse(params[:until]).end_of_day
+      finder = finder.noticed_within(from_date..until_date)
+    end
+
     finder = finder.search(params[:search]) if params[:search].present?
+
     finder.page(params[:page]).per(current_user.per_page)
   end
 

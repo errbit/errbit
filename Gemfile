@@ -100,6 +100,7 @@ gem 'puma'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'pickadate-rails'
 gem 'pjax_rails'
 gem 'underscore-rails'
 

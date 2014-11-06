@@ -10,6 +10,8 @@ $(function() {
 
     activateSelectableRows();
 
+    initDateSelects('.date_select');
+
     toggleProblemsCheckboxes();
 
     bindRequiredPasswordMarks();
@@ -66,6 +68,12 @@ $(function() {
 
     $('.panel').hide();
     panel.show();
+  }
+
+  function initDateSelects(element) {
+    $(element).pickadate({
+      format: 'yyyy-mm-dd'
+    });
   }
 
   window.toggleProblemsCheckboxes = function() {

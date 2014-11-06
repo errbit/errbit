@@ -62,6 +62,12 @@ class Problem
   scope :ordered, -> { order_by(:last_notice_at.desc) }
   scope :for_apps, ->(apps) { where(:app_id.in => apps.all.map(&:id)) }
   scope :search, ->(value) { where('$text' => { '$search' => value }) }
+  scope :noticed_within, lambda { |date_range|
+    any_of(
+      between(first_notice_at: date_range).selector,
+      between(last_notice_at: date_range).selector
+    )
+  }
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all

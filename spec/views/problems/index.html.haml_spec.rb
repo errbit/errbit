@@ -1,5 +1,5 @@
 describe "problems/index.html.haml", type: 'view' do
-  let(:problem_1) { Fabricate(:problem) }
+  let(:problem_1) { Fabricate(:problem, first_notice_at: Time.parse("2012-10-01 08:23:46")) }
   let(:problem_2) { Fabricate(:problem, app: problem_1.app) }
 
   before do
@@ -11,6 +11,32 @@ describe "problems/index.html.haml", type: 'view' do
     allow(view).to receive(:params_sort).and_return('last_notice_at')
     allow(view).to receive(:params_order).and_return('asc')
     allow(controller).to receive(:current_user).and_return(Fabricate(:user))
+  end
+
+  describe "date filter" do
+    before do
+      allow(Date).to receive(:today).and_return("2019-09-28")
+    end
+
+    it "has 'from' input field with date of first noticed problem" do
+      render
+      expect(rendered).to have_selector('input[name="from"][data-value="2012-10-01"]')
+    end
+
+    it "has 'until' input field with date of today" do
+      render
+      expect(rendered).to have_selector('input[name="until"][data-value="2019-09-28"]')
+    end
+
+    context "without any problems" do
+      before { Problem.destroy_all }
+
+      it "sets both input fields with todays date" do
+        render
+        expect(rendered).to have_selector('input[name="from"][data-value="2019-09-28"]')
+        expect(rendered).to have_selector('input[name="until"][data-value="2019-09-28"]')
+      end
+    end
   end
 
   describe "with problem" do
