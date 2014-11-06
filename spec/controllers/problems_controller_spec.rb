@@ -127,8 +127,8 @@ describe ProblemsController do
     before do
       sign_in Fabricate(:admin)
       @app      = Fabricate(:app)
-      @problem1 = Fabricate(:problem, :app=>@app, message: "Most important")
-      @problem2 = Fabricate(:problem, :app=>@app, message: "Very very important")
+      @problem1 = Fabricate(:problem, :app=>@app, message: "Most important", :first_notice_at => Date.parse("2014-10-01"), :last_notice_at => Date.parse("2014-11-01"))
+      @problem2 = Fabricate(:problem, :app=>@app, message: "Very very important", :first_notice_at => Date.parse("2013-04-02"), :last_notice_at => Date.parse("2013-04-09"))
     end
 
     it "renders successfully" do
@@ -141,10 +141,41 @@ describe ProblemsController do
       expect(response).to render_template('problems/index')
     end
 
-    it "searches problems for given string" do
+    it "finds problems for given string" do
       get :search, :search => "Most important"
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to_not include(@problem2)
+    end
+
+    context "with date params" do
+      it "finds problems for given date range" do
+        get :search, :from => "2013-01-01", :until => "2013-12-31"
+        expect(controller.problems).to include(@problem2)
+        expect(controller.problems).to_not include(@problem1)
+      end
+
+      context "matching with first_notice_at date" do
+        it "finds problems for given date range" do
+          get :search, :from => "2013-03-28", :until => "2013-04-02"
+          expect(controller.problems).to include(@problem2)
+          expect(controller.problems).to_not include(@problem1)
+        end
+      end
+
+      context "matching with last_notice_at date" do
+        it "finds problems for given date range" do
+          get :search, :from => "2013-04-08", :until => "2013-04-10"
+          expect(controller.problems).to include(@problem2)
+          expect(controller.problems).to_not include(@problem1)
+        end
+      end
+
+      context "not matching problems date attributes" do
+        it "finds no problems for given date range" do
+          get :search, :from => "1985-04-09", :until => "2003-04-09"
+          expect(controller.problems.size).to eq 0
+        end
+      end
     end
   end
 

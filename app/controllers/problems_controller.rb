@@ -6,7 +6,6 @@
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
 
-
   include ProblemsSearcher
 
   before_filter :need_selected_problem, :only => [
@@ -133,7 +132,18 @@ class ProblemsController < ApplicationController
   end
 
   def search
-    ps = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
+    if params[:from] || params[:until]
+      ps = Problem.noticed_in_date_range(DateTime.parse(params[:from])..DateTime.parse(params[:until]))
+    else
+      ps = Problem
+    end
+    ps = ps
+      .and(Problem.search(params[:search]).selector)
+      .for_apps(app_scope)
+      .in_env(params[:environment])
+      .all_else_unresolved(params[:all_errs])
+      .ordered_by(params_sort, params_order)
+
     selected_problems = params[:problems] || []
     self.problems = ps.page(params[:page]).per(current_user.per_page)
     respond_to do |format|

@@ -125,5 +125,6 @@ group :assets do
   gem 'jquery-rails', '~> 2.1.4'
   gem 'pjax_rails'
   gem 'underscore-rails'
+  gem 'pickadate-rails'
   gem 'turbo-sprockets-rails3'
 end

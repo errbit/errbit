@@ -62,6 +62,10 @@ class Problem
     env.present? ? where(:environment => env) : scoped
   end
 
+  def self.first_notice_date
+    order_by(:first_notice_at => :asc).pluck(:first_notice_at).first
+  end
+
   def notices
     Notice.for_errs(errs).ordered
   end
@@ -116,8 +120,11 @@ class Problem
     end
   end
 
-  def self.in_date_range(date_range)
-    where(:first_notice_at.lte => date_range.end).where("$or" => [{:resolved_at => nil}, {:resolved_at.gte => date_range.begin}])
+  def self.noticed_in_date_range(date_range)
+    any_of(
+      self.between(:first_notice_at => date_range).selector,
+      self.between(:last_notice_at => date_range).selector
+    )
   end
 
 

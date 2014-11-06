@@ -1,2 +1,8 @@
 = form_tag search_problems_path(:all_errs => all_errs, :app_id => app_id), :method => :get, :remote => true do
+  %p
     = text_field_tag :search, params[:search], :placeholder => t('.search_placeholder')
+  %p
+    = text_field_tag :from, params[:from], "data-value" => Problem.first_notice_date, :class => 'date_select'
+    %span -
+    = text_field_tag :until, params[:until], "data-value" => Date.tomorrow, :class => 'date_select'
+    = submit_tag 'search', :class => 'button'
