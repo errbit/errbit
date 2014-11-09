@@ -1,28 +1,43 @@
-- content_for :title, 'Sign in'
 - auth_key = Devise.authentication_keys.first
 
-- if Errbit::Config.github_authentication
-  - content_for :action_bar do
-    %div.action-bar
-      %span.github= link_to "Sign in with GitHub", user_omniauth_authorize_path(:github)
+.col-sm-5.col-sm-offset-4
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .form-group
+      = f.label auth_key, :class => 'control-label'
+      = f.text_field auth_key,
+        :type => (Errbit::Config.user_has_username ? 'text' : 'email'),
+        :tabindex => 1,
+        :autofocus => true,
+        :class => 'form-control',
+        :placeholder => (Errbit::Config.user_has_username ? 'Username' : 'Email')
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  .required
-    = f.label auth_key
-    = f.text_field auth_key, :type => (Errbit::Config.user_has_username ? 'text' : 'email'), :tabindex => 1, :autofocus => true
+    .form-group
+      = f.label :password, :class => 'control-label'
+      = f.password_field :password,
+        :tabindex => 2,
+        :class => 'form-control',
+        :placeholder => 'Password'
 
-  .required
-    = link_to 'forget it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
-    = f.label :password
-    = f.password_field :password, :tabindex => 2
+    - if devise_mapping.rememberable?
+      .checkbox
+        = f.label :remember_me do
+          = f.check_box :remember_me, :tabindex => 3
+          Remember me
 
-  - if devise_mapping.rememberable?
-    %div.checkbox
-      = f.check_box :remember_me, :tabindex => 3
-      = f.label :remember_me
+    .form-group
+      %button{:type => 'submit', :class => 'btn btn-primary'}
+        %span{ :class => 'glyphicon glyphicon-lock'}
+        = t('.sign_in')
+      = link_to 'Forgot you password?', new_password_path(resource_name),
+        :class => 'btn btn-link',
+        :id => "forgot_password"
 
-  %div.buttons
-    %button{:type => 'submit', :class => 'sign_in'}=t('.sign_in')
+  - if Errbit::Config.github_authentication
+    %hr
+      = link_to user_omniauth_authorize_path(:github), :class => "btn btn-block btn-github btn-social" do
+        %span{:class => 'glyphicon glyphicon-github'}
+        Sign in with GitHub
+
 
 :javascript
   $('a#forgot_password').click(function(){
@@ -30,4 +45,3 @@
     location.href = $(this).attr('href') + "?email=" + $('#user_#{auth_key}').val();
     return false;
   });
-

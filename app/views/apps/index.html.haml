@@ -1,6 +1,10 @@
 - content_for :title, t('.title')
 - content_for :action_bar do
-  %span= link_to(t('.new_app'), new_app_path, :class => 'add') if current_user.admin?
+  - if current_user.admin?
+    = link_to new_app_path, :class => 'btn btn-default btn-lg add' do
+      %span{:class => "glyphicon glyphicon-plus"}
+
+
 
 %table.apps
   %thead
@@ -56,4 +60,3 @@
           %em
             = t('.no_apps')
             = link_to t('.click_to_create'), new_app_path
-
