@@ -1,6 +1,9 @@
 - auth_key = Devise.authentication_keys.first
 
 .col-sm-5.col-sm-offset-4
+  %h1
+    Welcome back!
+  %hr
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
     .form-group
       = f.label auth_key, :class => 'control-label'
