@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def alert_class(name)
+    {
+      :alert  => 'danger',
+      :notice => 'success'
+    }[name]
+  end
+
   def message_graph(problem)
     create_percentage_table_for(problem.messages)
   end
@@ -79,4 +86,3 @@ module ApplicationHelper
     end
 
 end
-

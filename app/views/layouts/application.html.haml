@@ -5,34 +5,48 @@
       = t('.title')
       &mdash;
       = yield(:page_title).present? ? yield(:page_title) : yield(:title)
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
     = favicon_link_tag
     = csrf_meta_tag
+    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css", :rel=>"stylesheet"}
     = stylesheet_link_tag :application
+
     = javascript_include_tag :application
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    #header
-      %div
-        = link_to t('.errbit'), root_path, :id => 'site-name'
-        = render 'shared/navigation' if current_user
-        = render 'shared/session'
-    #content-wrapper
-      #content-title{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-        %h1= yield :title
-        %span.meta= yield :meta
-        - if (action_bar = yield(:action_bar)).present?
-          #action-bar
-            = action_bar
-      #content
-        = render 'shared/flash_messages'
-        = yield
-      - if content_for?(:comments)
-        #content-comments
-          = yield :comments
-    #footer
-      = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
-      %br
-      = Errbit::Version.to_s
+    #wrap
+      %header#header
+        %nav.navbar.navbar-static-top.navbar-inverse{:role => "navigation"}
+          %div.container
+            .navbar-header
+              %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              = link_to image_tag('images/logo.png'), root_path, class: "navbar-brand"
+            .collapse.navbar-collapse.bs-navbar-collapse
+              = render 'shared/navigation' if current_user
+              = render 'shared/session'
+      #content-wrapper.container
+        #content-title.row{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
+          .col-xs-12.col-sm-6.col-md-10
+            %h1= yield :title
+            %span.meta= yield :meta
+          - if (action_bar = yield(:action_bar)).present?
+            #action-bar.col-xs-6.col-md-2
+              = action_bar
+        #content
+          = render 'shared/flash_messages'
+          = yield
+        - if content_for?(:comments)
+          #content-comments
+            = yield :comments
+    %footer#footer
+      .container
+        %p.text-muted
+          = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
+          = Errbit::Version.to_s
     = yield :scripts

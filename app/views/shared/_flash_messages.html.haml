@@ -1,4 +1,3 @@
-- unless flash.keys.empty?
-  %ul#flash-messages
-    - flash.each do |type, message|
-      %li{:class => type}= message
+- if flash.keys.any?
+  - flash.each do |type, message|
+    %div{:class => "alert alert-#{alert_class(type)}", :role => 'alert'}= message
