@@ -16,33 +16,34 @@
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    %header#header
-      %nav.navbar.navbar-static-top.navbar-inverse{:role => "navigation"}
-        %div.container
-          .navbar-header
-            %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-              %span.sr-only Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            = link_to image_tag('images/logo.png'), root_path, class: "navbar-brand"
-          .collapse.navbar-collapse.bs-navbar-collapse
-            = render 'shared/navigation' if current_user
-            = render 'shared/session'
-    #content-wrapper.container
-      #content-title.row{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-        .col-xs-12.col-sm-6.col-md-10
-          %h1= yield :title
-          %span.meta= yield :meta
-        - if (action_bar = yield(:action_bar)).present?
-          #action-bar.col-xs-6.col-md-2
-            = action_bar
-      #content
-        = render 'shared/flash_messages'
-        = yield
-      - if content_for?(:comments)
-        #content-comments
-          = yield :comments
+    #wrap
+      %header#header
+        %nav.navbar.navbar-static-top.navbar-inverse{:role => "navigation"}
+          %div.container
+            .navbar-header
+              %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              = link_to image_tag('images/logo.png'), root_path, class: "navbar-brand"
+            .collapse.navbar-collapse.bs-navbar-collapse
+              = render 'shared/navigation' if current_user
+              = render 'shared/session'
+      #content-wrapper.container
+        #content-title.row{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
+          .col-xs-12.col-sm-6.col-md-10
+            %h1= yield :title
+            %span.meta= yield :meta
+          - if (action_bar = yield(:action_bar)).present?
+            #action-bar.col-xs-6.col-md-2
+              = action_bar
+        #content
+          = render 'shared/flash_messages'
+          = yield
+        - if content_for?(:comments)
+          #content-comments
+            = yield :comments
     %footer#footer
       .container
         %p.text-muted
