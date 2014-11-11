@@ -144,7 +144,7 @@ GEM
     kgio (2.8.1)
     launchy (2.3.0)
       addressable (~> 2.3)
-    libv8 (3.16.14.3)
+    libv8 (3.16.14.7)
     libxml-ruby (2.7.0)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
@@ -312,7 +312,7 @@ GEM
       railties (~> 3.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
-    therubyracer (0.12.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
