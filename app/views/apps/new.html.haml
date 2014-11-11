@@ -3,9 +3,9 @@
   = link_to_copy_attributes_from_other_app
   = link_to('cancel', apps_path, :class => 'button')
 
-= form_for app do |f|
+.col-md-9.col-sm-8.col-xs-4
+  = form_for app do |f|
 
-  = render 'fields', :f => f
+    = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Add App'
-
+    = f.submit 'Add App', :class => "btn btn-success"

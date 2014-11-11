@@ -26,16 +26,18 @@
   = f.label :current_app_version, 'Latest App Version'
   %em Mobile apps can set this to ignore any error below this version. ie: 1.4.3
   = f.text_field :current_app_version, :placeholder => "e.g. 2.0.1 from the Bundle Identifier on an iOS app", :class => 'form-control'
-%fieldset
+%fieldset.well
   %legend Notifications
   .checkbox
     = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
     = f.label :notify_on_errs, 'Notify on errors'
   - if Errbit::Config.per_app_email_at_notices
-    .email_at_notices_nested{:style => f.object.notify_on_errs ? '' : 'display: none;'}
-      .field-helpertext Send a notification every
-      = f.text_field :email_at_notices, :value => f.object.email_at_notices.join(", ")
-      .field-helpertext times an error occurs (comma separated).
+    .form-group
+      .email_at_notices_nested{:style => f.object.notify_on_errs ? '' : 'display: none;'}
+        .field-helpertext Send a notification every
+        = f.text_field :email_at_notices, :value => f.object.email_at_notices.join(", "), :class => 'form-control'
+        .field-helpertext times an error occurs (comma separated).
+
   .checkbox
     = f.check_box :notify_on_deploys
     = f.label :notify_on_deploys, 'Notify on deploys'
@@ -44,8 +46,7 @@
   = f.check_box :notify_all_users
   = f.label :notify_all_users, 'Send notifications to all users'
 
-
-%fieldset.watchers.nested-wrapper{:style => f.object.notify_all_users ? 'display: none;' : ''}
+%fieldset.well.watchers.nested-wrapper{:style => f.object.notify_all_users ? 'display: none;' : ''}
   %legend Watchers
   = f.fields_for :watchers do |w|
     .watcher.nested

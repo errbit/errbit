@@ -1,4 +1,4 @@
-%fieldset
+%fieldset.well
   %legend Notification Service
   = f.fields_for :notification_service do |w|
     %div.notification_service.nested
@@ -15,10 +15,11 @@
       - NotificationService.subclasses.each do |notification_service|
         %div.notification_params{:class => (w.object.is_a?(notification_service) ? 'chosen ' : '') << notification_service.label}
           - notification_service::Fields.each do |field, field_info|
-            = w.label field, field_info[:label] || field.to_s.titleize
-            - field_type = field == :password ? :password_field : :text_field
-            - value = field == :notify_at_notices ? w.object.notify_at_notices.join(", ") : w.object.send(field)
-            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => value
+            .form-group
+              = w.label field, field_info[:label] || field.to_s.titleize
+              - field_type = field == :password ? :password_field : :text_field
+              - value = field == :notify_at_notices ? w.object.notify_at_notices.join(", ") : w.object.send(field)
+              = w.send field_type, field, :placeholder => field_info[:placeholder], :value => value, :class => 'form-control'
 
       .image_preloader
         - (NotificationService.subclasses.map{|t| t.label } << 'none').each do |notification_service|

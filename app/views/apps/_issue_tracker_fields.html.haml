@@ -1,4 +1,4 @@
-%fieldset
+%fieldset.well
   %legend Issue tracker
   = f.fields_for :issue_tracker do |w|
     %div.issue_tracker.nested
@@ -18,12 +18,12 @@
           - if defined?(tracker::Note)
             %p= tracker::Note.html_safe
           - tracker::Fields.each do |field, field_info|
-            = w.label field, field_info[:label] || field.to_s.titleize
-            - field_type = field == :password ? :password_field : :text_field
-            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field)
+            .form-group
+              = w.label field, field_info[:label] || field.to_s.titleize
+              - field_type = field == :password ? :password_field : :text_field
+              = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field), :class => 'form-control'
 
       .image_preloader
         - (IssueTracker.subclasses.map{|t| t.label } << 'none').each do |tracker|
           = image_tag "#{tracker}_inactive.png"
           = image_tag "#{tracker}_create.png"
-
