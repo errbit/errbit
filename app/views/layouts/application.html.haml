@@ -32,12 +32,13 @@
               = render 'shared/session'
       #content-wrapper.container
         #content-title.row{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-          .col-xs-12.col-sm-6.col-md-10
+          .col-sm-9
             %h1= yield :title
             %span.meta= yield :meta
           - if (action_bar = yield(:action_bar)).present?
-            #action-bar.col-xs-6.col-md-2
-              = action_bar
+            #action-bar.col-sm-3
+              .btn-group.btn-group-justified
+                = action_bar
         #content
           = render 'shared/flash_messages'
           = yield
@@ -46,7 +47,7 @@
             = yield :comments
     %footer#footer
       .container
-        %p.text-muted
+        %p.text-muted.center-block
           = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
           = Errbit::Version.to_s
     = yield :scripts

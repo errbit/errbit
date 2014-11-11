@@ -13,77 +13,77 @@
   = app.api_key
 - content_for :action_bar do
   - if current_user.admin?
-    = link_to t('.edit'), edit_app_path(app), :class => 'button'
+    = link_to t('.edit'), edit_app_path(app), :class => 'btn btn-default'
   - if all_errs
-    = link_to t('.unresolved_errs'), app_path(app), :class => 'button'
+    = link_to t('.unresolved_errs'), app_path(app), :class => 'btn btn-default'
   - else
-    = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'button'
+    = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'btn btn-default'
 
   - if current_user.watching?(app)
     = link_to t('.unwatch'),  app_watcher_path({:app_id => app, :id => current_user.id}), :method => :delete, :class => 'button', :confirm => t('.are_you_sure')
-%h3#watchers_toggle
-  =t('.watchers')
-  %span.click_span=t('.show_hide')
-#watchers_div
-  - if app.notify_all_users
-    %table.watchers
-      %thead
-        %tr
-          %th=t('.all_users_notified')
-  - else
-    %table.watchers
-      %thead
-        %tr
-          %th=t('.user_or_email')
-      %tbody
-        - app.watchers.each do |watcher|
+#watchers-container
+  %h4.panel-title
+    = link_to t('.watchers'), '#', "data-toggle" => "collapse", "aria-controls" => "watchers"
+  #watchers.hidden
+    - if app.notify_all_users
+      %table.watchers
+        %thead
           %tr
-            %td= watcher.label
-        - if app.watchers.none?
+            %th=t('.all_users_notified')
+    - else
+      %table.watchers
+        %thead
           %tr
-            %td
-              %em= t('.no_watcher')
+            %th=t('.user_or_email')
+        %tbody
+          - app.watchers.each do |watcher|
+            %tr
+              %td= watcher.label
+          - if app.watchers.none?
+            %tr
+              %td
+                %em= t('.no_watcher')
 
 - if app.github_repo?
-  %h3#repository_toggle
-    =t('.repository')
-    %span.click_span=t('.show_hide')
-  #repository_div
-    %table.repository
-      %thead
-        %tr
-          %th=t('.github_repo')
-      %tbody
-        %tr
-          %td= link_to(app.github_repo, app.github_url, :target => '_blank')
-
-%h3#deploys_toggle
-  =t('.latest_deploys')
-  %span.click_span=t('.show_hide')
-#deploys_div
-  - if deploys.any?
-    %table.deploys
-      %thead
-        %tr
-          %th=t('.when')
-          %th=t('.environment')
-          %th=t('.who')
-          %th=t('.message')
-          %th=t('.repository')
-          %th=t('.revision')
-
-      %tbody
-        - deploys.each do |deploy|
+  #repository-container
+    %h4.panel-title
+      = link_to t('.repository'), '#', "data-toggle" => "collapse", "aria-controls" => "repository"
+    #repository.hidden
+      %table.repository
+        %thead
           %tr
-            %td.when #{deploy.created_at.to_s(:micro)}
-            %td.environment #{deploy.environment}
-            %td.who #{deploy.username}
-            %td.message #{deploy.message}
-            %td.repository #{deploy.repository}
-            %td.revision #{deploy.short_revision}
-    = link_to t('.all_deploys', :count => app.deploys.count), app_deploys_path(app), :class => 'button'
-  - else
-    %h3=t('.no_deploys')
+            %th=t('.github_repo')
+        %tbody
+          %tr
+            %td= link_to(app.github_repo, app.github_url, :target => '_blank')
+
+#deploys-container
+  %h4.panel-title
+    = link_to t('.latest_deploys'), '#', "data-toggle" => "collapse", "aria-controls" => "deploys"
+  #deploys.hidden
+    - if deploys.any?
+      %table.deploys
+        %thead
+          %tr
+            %th=t('.when')
+            %th=t('.environment')
+            %th=t('.who')
+            %th=t('.message')
+            %th=t('.repository')
+            %th=t('.revision')
+
+        %tbody
+          - deploys.each do |deploy|
+            %tr
+              %td.when #{deploy.created_at.to_s(:micro)}
+              %td.environment #{deploy.environment}
+              %td.who #{deploy.username}
+              %td.message #{deploy.message}
+              %td.repository #{deploy.repository}
+              %td.revision #{deploy.short_revision}
+      = link_to t('.all_deploys', :count => app.deploys.count), app_deploys_path(app), :class => 'button'
+    - else
+      = t('.no_deploys')
 
 - if app.problems.any?
   %h3.clear=t('.errors')
@@ -96,4 +96,3 @@
 - else
   %h3.clear=t('.no_error_yet')
   = render 'configuration_instructions', :app => app
-
