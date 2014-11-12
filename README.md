@@ -532,15 +532,15 @@ Solutions known to work are listed below:
 <table>
   <tr>
     <th>PHP (&gt;= 5.3)</th>
-    <td>https://github.com/flippa/errbit-php</td>
+    <td>[flippa/errbit-php](https://github.com/flippa/errbit-php)</td>
   </tr>
   <tr>
     <th>OOP PHP (&gt;= 5.3)</th>
-    <td>https://github.com/emgiezet/errbitPHP</td>
+    <td>[emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP)</td>
   </tr>
   <tr>
     <th>Python</th>
-    <td>https://github.com/mkorenkov/errbit.py , https://github.com/pulseenergy/airbrakepy</td>
+    <td>[mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy)</td>
   </tr>
 </table>
 
