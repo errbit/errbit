@@ -3,7 +3,7 @@
   - if current_user.admin?
     = link_to t('.new_app'), new_app_path, :class => 'btn btn-default add'
 
-%table.apps
+%table.apps.table.table-hover.table-bordered
   %thead
     %tr
       %th= t('.name')

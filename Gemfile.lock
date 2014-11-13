@@ -141,6 +141,9 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     kgio (2.8.1)
     launchy (2.3.0)
       addressable (~> 2.3)
@@ -380,6 +383,7 @@ DEPENDENCIES
   jira-ruby
   jquery-rails (~> 2.1.4)
   kaminari (>= 0.14.1)
+  kaminari-bootstrap (~> 3.0.1)
   launchy
   lighthouse-api
   meta_request

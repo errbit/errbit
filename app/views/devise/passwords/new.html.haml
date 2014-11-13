@@ -1,9 +1,7 @@
 - content_for :title, "Forget your password?"
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = errors_for resource
-  .required
-    = f.label :email
-    = f.text_field :email, :value => params[:email]
-
-  %div.buttons= f.submit "Send me reset password instructions"
-
+.col-sm-6
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = errors_for resource
+    .form-group
+      = f.email_field :email, :value => params[:email], :autofocus => true, :class => "form-control", placeholder: "Email"
+    %div= f.submit "Send me reset password instructions", class: "btn btn-primary"

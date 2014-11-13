@@ -127,3 +127,6 @@ group :assets do
   gem 'underscore-rails'
   gem 'turbo-sprockets-rails3'
 end
+
+# Bootstrap 
+gem 'kaminari-bootstrap', '~> 3.0.1'
