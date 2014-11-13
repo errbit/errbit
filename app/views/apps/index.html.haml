@@ -1,7 +1,7 @@
 - content_for :title, t('.title')
 - content_for :action_bar do
   - if current_user.admin?
-    = link_to t('.new_app'), new_app_path, :class => 'btn btn-default add'
+    = link_to t('.new_app'), new_app_path, :class => 'btn btn-default'
 
 %table.apps.table.table-hover.table-bordered
   %thead
