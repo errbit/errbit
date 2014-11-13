@@ -32,13 +32,14 @@
               = render 'shared/session'
       #content-wrapper.container
         #content-title.row{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-          .col-sm-9
+          .pull-left
             %h1= yield :title
             %span.meta= yield :meta
           - if (action_bar = yield(:action_bar)).present?
-            #action-bar.col-sm-3
-              .btn-group.btn-group-justified
+            .pull-right
+              .btn-group
                 = action_bar
+          .clearfix
         #content
           = render 'shared/flash_messages'
           = yield
