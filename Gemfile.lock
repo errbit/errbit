@@ -123,6 +123,8 @@ GEM
     errbit_redmine_plugin (0.2.0)
       errbit_plugin (~> 0)
       oruen_redmine_client (~> 0)
+    errbit_unfuddle_plugin (0.1.0)
+      errbit_plugin (~> 0.4, >= 0.4.0)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)
@@ -414,6 +416,7 @@ DEPENDENCIES
   errbit_pivotal_plugin
   errbit_plugin
   errbit_redmine_plugin
+  errbit_unfuddle_plugin
   execjs
   fabrication
   flowdock

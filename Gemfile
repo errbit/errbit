@@ -36,6 +36,7 @@ gem 'errbit_jira_plugin'
 gem 'errbit_lighthouse_plugin'
 gem 'errbit_pivotal_plugin'
 gem 'errbit_redmine_plugin'
+gem 'errbit_unfuddle_plugin'
 
 # Notification services
 # ---------------------------------------
