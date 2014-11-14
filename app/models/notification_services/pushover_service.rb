@@ -26,7 +26,7 @@ class NotificationServices::PushoverService < NotificationService
     notification = Rushover::Client.new(subdomain)
 
     # send push notification to pushover
-    notification.notify(api_token, "#{notification_description problem}", :priority => 1, :title => "Errbit Notification", :url => "http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}", :url_title => "Link to error")
+    notification.notify(api_token, "#{notification_description problem}", :priority => 1, :title => "Errbit Notification", :url => "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}", :url_title => "Link to error")
 
   end
 end

@@ -47,7 +47,7 @@ class NotificationServices::GtalkService < NotificationService
 
     #has to look like this to be formatted properly in the client
     message =  """#{problem.app.name.to_s}
-http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
+#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
 #{notification_description problem}"""
 
     # post the issue to the xmpp room(s)

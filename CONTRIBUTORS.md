@@ -42,11 +42,14 @@
 - [@nashby][]
 - [@shingara][]
 - [@tscolari][]
+- [@callumd][]
+
 
 [@anicet]: https://github.com/anicet
 [@nashby]: https://github.com/nashby
 [@shingara]: https://github.com/shingara
 [@tscolari]: https://github.com/tscolari
+[@callumd]: https://github.com/callumd
 
 ## 0.2.0 - 2013-09-11
 

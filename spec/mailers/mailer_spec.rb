@@ -1,5 +1,32 @@
 require 'spec_helper'
 
+shared_examples "a notification email" do
+  it "should have X-Mailer header" do
+    expect(@email).to have_header('X-Mailer', 'Errbit')
+  end
+
+  it "should have X-Errbit-Host header" do
+    expect(@email).to have_header('X-Errbit-Host', Errbit::Config.host)
+  end
+
+  it "should have Precedence header" do
+    expect(@email).to have_header('Precedence', 'bulk')
+  end
+
+  it "should have Auto-Submitted header" do
+    expect(@email).to have_header('Auto-Submitted', 'auto-generated')
+  end
+
+  it "should have X-Auto-Response-Suppress header" do
+    # http://msdn.microsoft.com/en-us/library/ee219609(v=EXCHG.80).aspx
+    expect(@email).to have_header('X-Auto-Response-Suppress', 'OOF, AutoReply')
+  end
+
+  it "should send the email" do
+    expect(ActionMailer::Base.deliveries.size).to eq 1
+  end
+end
+
 describe Mailer do
   context "Err Notification" do
     include EmailSpec::Helpers
@@ -19,9 +46,8 @@ describe Mailer do
       @email = Mailer.err_notification(notice).deliver
     end
 
-    it "should send the email" do
-      expect(ActionMailer::Base.deliveries.size).to eq 1
-    end
+    it_should_behave_like "a notification email"
+
 
     it "should html-escape the notice's message for the html part" do
       expect(@email).to have_body_text("class &lt; ActionController::Base")
@@ -60,10 +86,6 @@ describe Mailer do
       comment.stub(:notification_recipients).and_return(recipients)
       Fabricate(:notice, :err => notice.err)
       @email = Mailer.comment_notification(comment).deliver
-    end
-
-    it "should send the email" do
-      expect(ActionMailer::Base.deliveries.size).to eq 1
     end
 
     it "should be sent to comment notification recipients" do
