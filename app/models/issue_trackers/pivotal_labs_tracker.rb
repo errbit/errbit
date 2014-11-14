@@ -19,8 +19,7 @@ if defined? PivotalTracker
       PivotalTracker::Client.use_ssl = true
       project = PivotalTracker::Project.find project_id.to_i
       story = project.stories.create :name => issue_title(problem),
-        :story_type => 'bug', :description => body_template.result(binding),
-        :requested_by => reported_by.name
+        :story_type => 'bug', :description => body_template.result(binding)
 
       if story.errors.present?
         raise IssueTrackers::IssueTrackerError, story.errors.first
