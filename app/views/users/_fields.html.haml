@@ -1,37 +1,37 @@
 = errors_for user
 
-.required
+.required.form-group
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, :class => 'form-control'
 
 - if Errbit::Config.user_has_username
-  .required
+  .form-group
     = f.label :username
-    = f.text_field :username
+    = f.text_field :username, :class => 'form-control'
 
-.required
+.form-group
   = f.label :email
-  = f.text_field :email
+  = f.text_field :email, :class => 'form-control', type: :email
 
 - if Errbit::Config.github_authentication
   = f.label :github_login
-  = f.text_field :github_login
+  = f.text_field :github_login, :class => 'form-control'
 
-.required
+.form-group
   = f.label :per_page, 'Entries per page'
-  = f.select :per_page, [10, 20, 30, 50, 75, 100]
+  = f.select :per_page, [10, 20, 30, 50, 75, 100], {},:class => 'form-control'
 
-.required
+.form-group
   = f.label :time_zone
-  = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
+  = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control'
 
-.required
+.form-group
   = f.label :password
-  = f.password_field :password, :autocomplete => "off"
+  = f.password_field :password, :autocomplete => "off", :class => 'form-control'
 
-.required
+.form-group
   = f.label :password_confirmation
-  = f.password_field :password_confirmation
+  = f.password_field :password_confirmation, :class => 'form-control'
 
 - if current_user.admin?
   .checkbox

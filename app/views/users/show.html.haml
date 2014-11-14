@@ -7,12 +7,12 @@
 
 - content_for :action_bar do
   = render 'shared/link_github_account'
-  %span= link_to('Add a New User', new_user_path, :class => 'add')
-  = link_to 'edit', edit_user_path(user), :class => 'button'
+  = link_to('Add a New User', new_user_path, :class => 'btn btn-default')
+  = link_to 'edit', edit_user_path(user), :class => 'btn btn-default'
   = link_to 'destroy', user_path(user), :method => :delete,
-    :data => { :confirm => t('users.confirm_delete') }, :class => 'delete button'
-
-%table.single_user
+    :data => { :confirm => t('users.confirm_delete') }, :class => 'btn btn-default'
+%br
+%table.single_user.table
   %tr
     %th Email
     %td.main= user.email
