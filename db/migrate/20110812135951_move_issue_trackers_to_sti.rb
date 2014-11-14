@@ -5,21 +5,27 @@ class MoveIssueTrackersToSti < Mongoid::Migration
       # All issue trackers now subclass the IssueTracker model,
       # and their class is stored in the '_type' field, which is
       # also aliased to 'type'.
-      if app.issue_tracker && app.issue_tracker.attributes["issue_tracker_type"]
-        app.issue_tracker._type = case app.issue_tracker.issue_tracker_type
-        when 'lighthouseapp'; "LighthouseTracker"
-        when 'redmine'; "RedmineTracker"
-        when 'pivotal'; "PivotalLabsTracker"
-        when 'fogbugz'; "FogbugzTracker"
-        when 'mingle'; "MingleTracker"
+      tracker = app.attributes['issue_tracker']
+      if tracker && tracker['issue_tracker_type']
+        tracker['_type'] = case tracker['issue_tracker_type']
+        when 'lighthouseapp'; "IssueTrackers::LighthouseTracker"
+        when 'redmine'; "IssueTrackers::RedmineTracker"
+        when 'pivotal'; "IssueTrackers::PivotalLabsTracker"
+        when 'fogbugz'; "IssueTrackers::FogbugzTracker"
+        when 'mingle'; "IssueTrackers::MingleTracker"
         else; nil
         end
-        if app.issue_tracker.issue_tracker_type == "none"
-          app.issue_tracker = nil
+
+        if tracker['issue_tracker_type'] == "none"
+          App.collection.where({ _id: app.id }).update({
+            "$unset" => { :issue_tracker => 1 }
+          })
         else
-          app.issue_tracker.issue_tracker_type = nil
+          tracker.delete('issue_tracker_type')
+          App.collection.where({ _id: app.id }).update({
+            "$set" => { :issue_tracker => tracker }
+          })
         end
-        app.save
       end
     end
   end
