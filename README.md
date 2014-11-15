@@ -391,16 +391,6 @@ Javascript error notifications
 
 You can log javascript errors that occur in your application by following the directions below.
 
-# Rails Applications
-
-Add the following line to the `<head>` section of your application template.
-
-```
-<%= airbrake_javascript_notifier %>
-```
-
-# Other Platforms
-
 include the following before any javascript is loaded in your application.
 
 ```
