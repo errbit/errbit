@@ -1,5 +1,5 @@
 .window
-  %table.summary
+  %table.summary.table.table-striped
     %tr
       %th Message
       %td.main.nowrap= message_graph(problem)
@@ -43,4 +43,3 @@
     %tr
       %th Rel. Directory
       %td= notice.server_environment && notice.server_environment["project-root"]
-

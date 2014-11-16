@@ -4,4 +4,5 @@
     = errors_for resource
     .form-group
       = f.email_field :email, :value => params[:email], :autofocus => true, :class => "form-control", placeholder: "Email"
-    %div= f.submit "Send me reset password instructions", class: "btn btn-primary"
+
+    = f.submit "Send me reset password instructions", class: "btn btn-primary"

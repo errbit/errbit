@@ -34,7 +34,7 @@ $(function() {
 
       $('#content').pjax('.notice-pagination a').on('pjax:start', function() {
         $('.notice-pagination-loader').css("visibility", "visible");
-        currentTab = $('.tab-bar ul li a.button.active').attr('rel');
+        currentTab = $('.tab-bar ul li.active a').attr('rel');
       }).on('pjax:end', function() {
         activateTabbedPanels();
       });
@@ -53,15 +53,15 @@ $(function() {
       activateTab($(this));
       return(false);
     });
-    activateTab($('.tab-bar ul li a.button[rel=' + currentTab + ']'));
+    activateTab($('.tab-bar ul li a[rel=' + currentTab + ']'));
   }
 
   function activateTab(tab) {
     tab = $(tab);
     var panel = $('#'+tab.attr('rel'));
 
-    tab.closest('.tab-bar').find('a.active').removeClass('active');
-    tab.addClass('active');
+    tab.closest('.tab-bar').find('li.active').removeClass('active');
+    tab.parents('li').addClass('active');
 
     // If clicking into 'backtrace' tab, hide external backtrace
     if (tab.attr('rel') == "backtrace") { hide_external_backtrace(); }
