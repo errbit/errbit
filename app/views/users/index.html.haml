@@ -1,8 +1,8 @@
 - content_for :title, 'Users'
 - content_for :action_bar do
-  %span= link_to('Add a New User', new_user_path, :class => 'add')
+  %span= link_to('Add a New User', new_user_path, :class => 'btn btn-default')
 
-%table.users
+%table.users.table.table-striped
   %thead
     %tr
       - if Errbit::Config.use_gravatar
