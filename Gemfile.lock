@@ -221,6 +221,7 @@ GEM
     premailer (1.7.3)
       css_parser (>= 1.1.9)
       htmlentities (>= 4.0.0)
+    progressbar (0.21.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -379,6 +380,7 @@ DEPENDENCIES
   pg
   pivotal-tracker
   pjax_rails
+  progressbar
   pry-rails
   puma
   quiet_assets

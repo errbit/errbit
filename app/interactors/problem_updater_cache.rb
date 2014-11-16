@@ -25,9 +25,7 @@ private
     if @notice
       problem.inc(:notices_count, 1)
     else
-      problem.update_attribute(
-        :notices_count, problem.notices.count
-      )
+      problem.update_attribute(:notices_count, problem.notices.count)
     end
   end
 

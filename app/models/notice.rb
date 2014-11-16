@@ -145,7 +145,7 @@ class Notice < ActiveRecord::Base
   end
 
   def unresolve_problem
-    problem.update_attributes!(:resolved => false, :resolved_at => nil, :notices_count => 1) if problem.resolved?
+    problem.update_attributes!(resolved: false, resolved_at: nil) if problem.resolved?
   end
 
   def cache_attributes_on_problem
@@ -160,8 +160,8 @@ class Notice < ActiveRecord::Base
 
 
   def sanitize_hash(h)
-    h.recurse do
-      |h| h.inject({}) do |h,(k,v)|
+    h.recurse do |h|
+      h.inject({}) do |h,(k,v)|
         if k.is_a?(String)
           h[k.gsub(/\./,'&#46;').gsub(/^\$/,'&#36;')] = v
         else
