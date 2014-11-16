@@ -15,5 +15,7 @@ class NotificationServices::WebhookService < NotificationService
 
   def create_notification(problem)
     HTTParty.post(api_token, :body => {:problem => problem.to_json})
+  rescue SocketError
+    Rails.logger.error "[notify:webhook] #{$!.class}: #{$!.message}"
   end
 end
