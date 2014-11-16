@@ -20,7 +20,7 @@
     = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'btn btn-default'
 
   - if current_user.watching?(app)
-    = link_to t('.unwatch'),  app_watcher_path({:app_id => app, :id => current_user.id}), :method => :delete, :class => 'button', :confirm => t('.are_you_sure')
+    = link_to t('.unwatch'),  app_watcher_path({:app_id => app, :id => current_user.id}), :method => :delete, :class => 'btn btn-default', :confirm => t('.are_you_sure')
 #watchers-container
   %h4.panel-title
     = link_to t('.watchers'), '#', "data-toggle" => "collapse", "aria-controls" => "watchers"
