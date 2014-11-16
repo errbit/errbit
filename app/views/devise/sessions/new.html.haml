@@ -22,10 +22,9 @@
         :placeholder => 'Password'
 
     - if devise_mapping.rememberable?
-      .checkbox
-        = f.label :remember_me do
-          = f.check_box :remember_me, :tabindex => 3
-          Remember me
+      .checkbox        
+        = f.check_box :remember_me, :tabindex => 3
+        = f.label :remember_me
 
     .form-group
       %button{:type => 'submit', :class => 'btn btn-primary'}
