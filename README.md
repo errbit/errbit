@@ -389,22 +389,11 @@ it will be displayed under the *User Details* tab:
 Javascript error notifications
 --------------------------------------
 
-You can log javascript errors that occur in your application by following the directions below.
-
-# Rails Applications
-
-Add the following line to the `<head>` section of your application template.
+You can log javascript errors that occur in your application by including the
+following script tag before any javascript is loaded in your application.
 
 ```
-<%= airbrake_javascript_notifier %>
-```
-
-# Other Platforms
-
-include the following before any javascript is loaded in your application.
-
-```
-<script src='http://YOUR-ERRBIT-HOST/javascripts/notifier.js' type='text/javascript'></script>
+<script src="//YOUR-ERRBIT-HOST/javascripts/notifier.js" type="text/javascript"></script>
 ```
 
 
