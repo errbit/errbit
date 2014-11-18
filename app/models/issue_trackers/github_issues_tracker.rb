@@ -2,16 +2,13 @@ if defined? Octokit
   class IssueTrackers::GithubIssuesTracker < IssueTracker
     Label = "github"
     Note = 'Please configure your github repository in the <strong>GITHUB REPO</strong> field above.<br/>' <<
-           'Instead of providing your username & password, you can link your Github account ' <<
+           'Instead of providing your Access Token, you can link your Github account ' <<
            'to your user profile, and allow Errbit to create issues using your OAuth token.'
 
     Fields = [
-      [:username, {
-        :placeholder => "Your username on GitHub"
+      [:api_token, {
+        :placeholder => "Access Token for your account"
       }],
-      [:password, {
-        :placeholder => "Password for your account"
-      }]
     ]
 
     attr_accessor :oauth_token
@@ -22,16 +19,16 @@ if defined? Octokit
 
     def check_params
       if Fields.detect {|f| self[f[0]].blank? }
-        errors.add :base, 'You must specify your GitHub username and password'
+        errors.add :base, 'You must specify your GitHub Access Token'
       end
     end
 
     def create_issue(problem, reported_by = nil)
       # Login using OAuth token, if given.
       if oauth_token
-        client = Octokit::Client.new(:login => username, :access_token => oauth_token)
+        client = Octokit::Client.new(:access_token => oauth_token)
       else
-        client = Octokit::Client.new(:login => username, :password => password)
+        client = Octokit::Client.new(:access_token => api_token)
       end
 
       begin
@@ -46,7 +43,7 @@ if defined? Octokit
         )
 
       rescue Octokit::Unauthorized
-        raise IssueTrackers::AuthenticationError, "Could not authenticate with GitHub. Please check your username and password."
+        raise IssueTrackers::AuthenticationError, "Could not authenticate with GitHub. Please check your Access Token."
       end
     end
 
