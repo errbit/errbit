@@ -26,7 +26,7 @@ class App
 
   embeds_many :watchers
   embeds_many :deploys
-  embeds_one :issue_tracker
+  embeds_one :issue_tracker, :class_name => 'IssueTracker'
   embeds_one :notification_service
 
   has_many :problems, :inverse_of => :app, :dependent => :destroy
@@ -44,7 +44,7 @@ class App
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+    :reject_if => proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
@@ -120,7 +120,7 @@ class App
 
 
   def issue_tracker_configured?
-    !!(issue_tracker.class < IssueTracker && issue_tracker.configured?)
+    !!issue_tracker && !!(issue_tracker.configured?)
   end
 
   def notification_service_configured?
@@ -175,6 +175,13 @@ class App
     set(:api_key, SecureRandom.hex)
   end
 
+  ##
+  # Check if comments can be allowed on this application
+  #
+  def comments_allowed?
+    !issue_tracker || issue_tracker.comments_allowed?
+  end
+
   protected
 
     def store_cached_attributes_on_problems
@@ -202,5 +209,6 @@ class App
       github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
       github_repo.sub!(/\.git$/, '')
     end
+
 end
 

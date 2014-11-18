@@ -25,31 +25,18 @@ gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
+gem 'draper', :require => false
 
-
-# Remove / comment out any of the gems below if you want to disable
-# a given issue tracker, notification service, or authentication.
-
-# Issue Trackers
-# ---------------------------------------
-# Lighthouse
-gem 'lighthouse-api'
-# Redmine
-gem 'oruen_redmine_client', :require => 'redmine_client'
-# Pivotal Tracker
-gem 'pivotal-tracker'
-# Fogbugz
-gem 'ruby-fogbugz', :require => 'fogbugz'
-# Github Issues
-gem 'octokit', '~> 2.0'
-# Gitlab
-gem 'gitlab', '~> 3.0.0'
-
-# Bitbucket Issues
-gem 'bitbucket_rest_api', :require => false
-
-# Jira
-gem 'jira-ruby', :require => 'jira'
+gem 'errbit_plugin'
+gem 'errbit_bitbucket_plugin'
+gem 'errbit_fogbugz_plugin'
+gem 'errbit_github_plugin'
+gem 'errbit_gitlab_plugin'
+gem 'errbit_jira_plugin'
+gem 'errbit_lighthouse_plugin'
+gem 'errbit_pivotal_plugin'
+gem 'errbit_redmine_plugin'
+gem 'errbit_unfuddle_plugin'
 
 # Notification services
 # ---------------------------------------
@@ -101,6 +88,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'

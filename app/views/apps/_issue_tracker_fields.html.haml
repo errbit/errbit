@@ -1,29 +1,23 @@
 %fieldset
-  %legend Issue tracker
-  = f.fields_for :issue_tracker do |w|
+  %legend= t('.legend')
+  = f.fields_for :issue_tracker do |issue_tracker_form|
     %div.issue_tracker.nested
       %div.choose
-        = label_tag :type_none, :for => label_for_attr(w, 'type_issuetracker'), :class => "label_radio none" do
-          = w.radio_button :type, "IssueTracker", 'data-section' => 'none'
-          (None)
-        - IssueTracker.subclasses.each do |tracker|
-          = label_tag "type_#{tracker.label}:", :for => label_for_attr(w, "type_#{tracker.name.downcase.gsub(':','')}"), :class => "label_radio #{tracker.label}" do
-            = w.radio_button :type, tracker.name, 'data-section' => tracker.label
-            = tracker.name[/::(.*)Tracker/,1].titleize
+        - issue_tracker_form.object.issue_trackers do |tracker|
+          = issue_tracker_form.label :type_tracker, :class => "label_radio #{tracker.label}", :value => tracker.key do
+            = issue_tracker_form.radio_button :type_tracker, tracker.key, 'data-section' => tracker.label
+            = tracker.label
 
-      %div.tracker_params.none{:class => (w.object && !(w.object.class < IssueTracker)) ? 'chosen' : nil}
-        %p When no issue tracker has been configured, you will be able to leave comments on errors.
-      - IssueTracker.subclasses.each do |tracker|
-        %div.tracker_params{:class => (w.object.is_a?(tracker) ? 'chosen ' : '') << tracker.label}
-          - if defined?(tracker::Note)
-            %p= tracker::Note.html_safe
-          - tracker::Fields.each do |field, field_info|
-            = w.label field, field_info[:label] || field.to_s.titleize
-            - field_type = field == :password ? :password_field : :text_field
-            = w.send field_type, field, :placeholder => field_info[:placeholder], :value => w.object.send(field)
+      - issue_tracker_form.object.issue_trackers do |tracker|
+        %div.tracker_params{:class => tracker.params_class(issue_tracker_form.object)}
+          = issue_tracker_form.fields_for(:options) do |options_form|
+            %p= tracker.note
+            - tracker.fields do |field|
+              = options_form.label field.key, field.label
+              = field.input(options_form, issue_tracker_form.object)
 
       .image_preloader
-        - (IssueTracker.subclasses.map{|t| t.label } << 'none').each do |tracker|
-          = image_tag "#{tracker}_inactive.png"
-          = image_tag "#{tracker}_create.png"
+        - issue_tracker_form.object.issue_trackers do |tracker|
+          = image_tag "#{tracker.label}_inactive.png"
+          = image_tag "#{tracker.label}_create.png"
 

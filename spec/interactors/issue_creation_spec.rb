@@ -1,8 +1,17 @@
 require 'spec_helper'
 
 describe IssueCreation do
-  subject(:issue_creation) { IssueCreation.new(problem, user, tracker_name) }
+  subject(:issue_creation) do
+    IssueCreation.new(problem, user, tracker_name, request)
+  end
 
+  let(:request) do
+    double(:request,
+           :host => 'github.com',
+           :port => '80',
+           :scheme => 'http'
+          )
+  end
   let(:problem) { notice.problem }
   let(:notice)  { Fabricate(:notice) }
   let(:user)    { Fabricate(:admin) }
@@ -15,8 +24,7 @@ describe IssueCreation do
   end
 
   it 'creates an issue if issue tracker is configured' do
-    tracker = Fabricate(:lighthouse_tracker, :app => notice.app)
-    expect(tracker).to receive(:create_issue)
+    problem.app.issue_tracker = Fabricate(:issue_tracker)
     issue_creation.execute
     expect(errors).to be_empty
   end
@@ -44,7 +52,9 @@ describe IssueCreation do
         user.github_oauth_token = 'oauthtoken'
         user.save!
 
-        GithubIssuesTracker.any_instance.should_receive(:create_issue)
+        ErrbitGithubPlugin::IssueTracker.should_receive(:new).and_return(
+          double(:create_issue => true)
+        )
         issue_creation.execute
         expect(errors).to be_empty
       end

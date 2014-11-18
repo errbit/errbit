@@ -62,12 +62,19 @@ class Problem
     env.present? ? where(:environment => env) : scoped
   end
 
+  def url
+    Rails.application.routes.url_helpers.app_problem_url(app, self,
+      :host => Errbit::Config.host,
+      :port => Errbit::Config.port
+    )
+  end
+
   def notices
     Notice.for_errs(errs).ordered
   end
 
   def comments_allowed?
-    Errbit::Config.allow_comments_with_issue_tracker || !app.issue_tracker_configured?
+    Errbit::Config.allow_comments_with_issue_tracker || app.comments_allowed?
   end
 
   def resolve!
@@ -148,7 +155,7 @@ class Problem
   def issue_type
     # Return issue_type if configured, but fall back to detecting app's issue tracker
     attributes['issue_type'] ||=
-    (app.issue_tracker_configured? && app.issue_tracker.label) || nil
+    (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
   end
 
   def self.search(value)
