@@ -66,6 +66,8 @@ gem 'rushover'
 gem 'httparty'
 # Flowdock
 gem 'flowdock'
+# iMessage
+gem 'imessage'
 
 # Authentication
 # ---------------------------------------

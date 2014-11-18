@@ -106,6 +106,7 @@ GEM
       thor (>= 0.13.6)
     gitlab (3.0.0)
       httparty
+    gli (2.8.1)
     haml (4.0.3)
       tilt
     happymapper (0.4.1)
@@ -127,6 +128,8 @@ GEM
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.11)
+    imessage (0.0.2)
+      gli (~> 2.8.1)
     jira-ruby (0.1.2)
       activesupport
       oauth
@@ -377,6 +380,7 @@ DEPENDENCIES
   hoptoad_notifier (~> 2.4)
   htmlentities
   httparty
+  imessage
   jira-ruby
   jquery-rails (~> 2.1.4)
   kaminari (>= 0.14.1)

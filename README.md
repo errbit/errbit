@@ -486,6 +486,10 @@ Notification Service
 Allow notification to [Flowdock](https://www.flowdock.com/). See
 [complete documentation](docs/notifications/flowdock/index.md)
 
+**iMessage Notification**
+
+iMessage notifications Service can be used only from OS X.
+
 
 What if Errbit has an error?
 ----------------------------
@@ -596,4 +600,3 @@ Copyright
 ---------
 
 Copyright (c) 2010-2014 Errbit Team. See LICENSE for details.
-
