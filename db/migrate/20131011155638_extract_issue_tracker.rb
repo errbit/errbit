@@ -15,8 +15,6 @@ class ExtractIssueTracker < Mongoid::Migration
 
   def self.up
     App.all.each do |app|
-      require 'pry'
-      binding.pry
       next unless app.attributes['issue_tracker'].present?
       next unless app.attributes['issue_tracker']['_type'].present?
 
