@@ -20,6 +20,7 @@ class ProblemPresenter
       :last_notice_at,
       :last_notice_commit,
       :last_notice_environment,
+      :opened_at,
       :resolved,
       :resolved_at,
       :notices_count)
@@ -29,7 +30,7 @@ class ProblemPresenter
     problem_attrs.map { |id, app_id, app_name, environment, message, where,
         first_notice_at, first_notice_commit, first_notice_environment,
         last_notice_at, last_notice_commit, last_notice_environment,
-        resolved, resolved_at, notices_count|
+        opened_at, resolved, resolved_at, notices_count|
       err_ids = err_ids_by_problem.fetch(id.to_i, [])
     { id: id.to_i,
       err_ids: err_ids,
@@ -44,6 +45,7 @@ class ProblemPresenter
       last_notice_environment: last_notice_environment,
       message: message,
       notices_count: notices_count.to_i,
+      opened_at: opened_at && Time.zone.parse(opened_at),
       resolved: resolved == "t",
       resolved_at: resolved_at && Time.zone.parse(resolved_at),
       where: where,
@@ -65,6 +67,7 @@ class ProblemPresenter
       last_notice_environment: problem.last_notice_environment,
       message: problem.message,
       notices_count: problem.notices_count,
+      opened_at: problem.opened_at,
       resolved: problem.resolved?,
       resolved_at: problem.resolved_at,
       where: problem.where,
@@ -72,7 +75,6 @@ class ProblemPresenter
   end
   
   def to_json(options={})
-    puts "engine: #{MultiJson.engine}"
     MultiJson.dump(as_json)
   end
   

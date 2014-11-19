@@ -14,7 +14,7 @@ describe Mailer do
         :asset_host => "http://example.com",
         :notify_all_users => true
       )
-      notice.problem.update_attributes :notices_count => 3
+      notice.stub(:similar_count).and_return(3)
 
       @email = Mailer.err_notification(notice).deliver
     end

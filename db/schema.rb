@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141116230248) do
+ActiveRecord::Schema.define(:version => 20141119015613) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20141116230248) do
     t.string   "last_notice_commit"
     t.string   "first_notice_environment"
     t.string   "last_notice_environment"
+    t.datetime "opened_at",                :null => false
   end
 
   add_index "problems", ["app_id"], :name => "index_problems_on_app_id"

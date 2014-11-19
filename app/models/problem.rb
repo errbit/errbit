@@ -26,7 +26,7 @@ class Problem < ActiveRecord::Base
     where(app_id: apps.map(&:id))
   end
 
-  validates_presence_of :last_notice_at, :first_notice_at
+  validates_presence_of :last_notice_at, :first_notice_at, :opened_at
 
   def default_values
     if self.new_record?
@@ -38,6 +38,7 @@ class Problem < ActiveRecord::Base
       self.resolved = false if self.resolved.nil?
       self.first_notice_at ||= Time.new
       self.last_notice_at ||= Time.new
+      self.opened_at ||= 1.second.ago # Time.new
     end
   end
 
@@ -150,6 +151,10 @@ class Problem < ActiveRecord::Base
 
   def to_param
     errs.first.id
+  end
+  
+  def notices_since_reopened
+    notices.after(opened_at).count
   end
 
   private

@@ -45,6 +45,7 @@ describe NoticesController do
         expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
         expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
+
       context "with an invalid API_KEY" do
         let(:error_report) { double(:valid? => false) }
         it 'return 422' do

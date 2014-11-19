@@ -26,6 +26,7 @@ class Notice < ActiveRecord::Base
   scope :reverse_ordered, -> { reorder('created_at desc') }
   scope :for_errs, lambda {|errs| where(:err_id => errs.pluck(:id))}
   scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
+  scope :after, lambda { |time| where(arel_table[:created_at].gteq(time)) }
 
   def default_values
     if self.new_record?
@@ -100,7 +101,7 @@ class Notice < ActiveRecord::Base
   end
 
   def similar_count
-    problem.notices_count
+    problem.notices_since_reopened
   end
 
   def emailable?
@@ -145,7 +146,8 @@ class Notice < ActiveRecord::Base
   end
 
   def unresolve_problem
-    problem.update_attributes!(resolved: false, resolved_at: nil) if problem.resolved?
+    return unless problem.resolved?
+    problem.update_attributes!(resolved: false, resolved_at: nil, opened_at: created_at)
   end
 
   def cache_attributes_on_problem
