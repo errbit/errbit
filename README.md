@@ -142,6 +142,8 @@ Deploying:
 
   * Copy `config/deploy.example.rb` to `config/deploy.rb`
   * Update the `deploy.rb` or `config.yml` file with information about your server
+  * Copy `config/unicorn.example.rb` to `config/unicorn.rb` as necessary
+  * Update the `unicorn.rb` file to suit your configuration and commit if necessary
   * Setup server and deploy
 
 ```bash
