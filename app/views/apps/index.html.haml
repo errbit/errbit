@@ -13,7 +13,13 @@
         - if any_notification_services?
           %th= t('.notify')
         - if any_issue_trackers?
-          %th= t('.tracker')
+          %td.issue_tracker
+            - if app.issue_tracker_configured?
+              - tracker_img = image_tag("#{app.issue_tracker.type_tracker}_goto.png")
+              - if app.issue_tracker.url
+                = link_to( tracker_img, app.issue_tracker.url )
+              - else
+                = tracker_img
         - if any_deploys?
           %th= t('.last_deploy')
         %th=t('.errors')

@@ -62,8 +62,7 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    IssueTracker.update_url_options(request)
-    issue_creation = IssueCreation.new(problem, current_user, params[:tracker])
+    issue_creation = IssueCreation.new(problem, current_user, params[:tracker], request)
 
     unless issue_creation.execute
       flash[:error] = issue_creation.errors.full_messages.join(', ')

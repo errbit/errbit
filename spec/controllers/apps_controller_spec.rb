@@ -299,7 +299,7 @@ describe AppsController do
         context "unknown tracker type" do
           before(:each) do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type => 'unknown', :project_id => '1234', :api_token => '123123', :account => 'myapp'
+              :type_tracker => 'unknown', :options => {:project_id => '1234', :api_token => '123123', :account => 'myapp'}
             } }
             @app.reload
           end
@@ -309,33 +309,35 @@ describe AppsController do
           end
         end
 
-        IssueTracker.subclasses.each do |tracker_klass|
-          context tracker_klass do
+        ErrbitPlugin::Registry.issue_trackers.each do |key, klass|
+          context key do
             it "should save tracker params" do
-              params = tracker_klass::Fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
-              params[:ticket_properties] = "card_type = defect" if tracker_klass == MingleTracker
-              params[:type] = tracker_klass.to_s
+              params = {
+                :options => klass.fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash },
+                :type_tracker => key.dup.to_s
+              }
               put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
 
               @app.reload
 
               tracker = @app.issue_tracker
-              expect(tracker).to be_a(tracker_klass)
-              tracker_klass::Fields.each do |field, field_info|
+              expect(tracker.tracker).to be_a(ErrbitPlugin::Registry.issue_trackers[key])
+              klass.fields.each do |field, field_info|
                 case field
-                when :ticket_properties
-                  expect(tracker.send(field.to_sym)).to eq 'card_type = defect'
-                else
-                  expect(tracker.send(field.to_sym)).to eq 'test_value'
+                when :ticket_properties; tracker.send(field.to_sym).should == 'card_type = defect'
+                else tracker.options[field.to_s].should == 'test_value'
                 end
               end
             end
 
             it "should show validation notice when sufficient params are not present" do
               # Leave out one required param
-              params = tracker_klass::Fields[1..-1].inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
-              params[:type] = tracker_klass.to_s
-              put :update, :id => @app.id, :app => {:issue_tracker_attributes => params}
+              # TODO. previous test was not relevant because one params can be enough. So put noone
+              put :update, :id => @app.id, :app => {
+                :issue_tracker_attributes => {
+                  :type_tracker => key.dup.to_s
+                }
+              }
 
               @app.reload
               expect(@app.issue_tracker_configured?).to eq false

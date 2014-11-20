@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe "apps/new.html.haml" do
   let(:app) { stub_model(App) }
+  let(:app_decorate) { AppDecorator.new(app) }
   before do
     view.stub(:app).and_return(app)
+    view.stub(:app_decorate).and_return(app_decorate)
     controller.stub(:current_user) { stub_model(User) }
   end
 

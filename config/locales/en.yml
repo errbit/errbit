@@ -127,4 +127,16 @@ en:
       watchers: Watchers
       when:  When
       who: Who
+    issue_tracker_fields:
+      legend: Issue Tracker
+    new:
+      add_app: "Add App"
+      cancel: "cancel"
+      title: "Add App"
+    edit:
+      title: 'Edit App'
+      destroy: 'destroy application'
+      cancel: 'cancel'
+      seriously: 'Seriously?'
+      update: 'Update App'
 

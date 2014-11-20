@@ -1,12 +1,14 @@
-- content_for :title, 'Edit App'
+- content_for :title, t('.title')
 - content_for :action_bar do
   = link_to_copy_attributes_from_other_app
   = link_to 'delete all errs', destroy_all_app_problems_path(app), :method => :post,
     :data => { :confirm => t('apps.confirm_destroy_all_problems') }, :class => 'btn btn-default'
   = link_to 'delete application', app_path(app), :method => :delete,
     :data => { :confirm => t('apps.confirm_delete') }, :class => 'btn btn-default'
-  = link_to('cancel', app_path(app), :class => 'btn btn-default')
+  = link_to(t('.cancel'), app_path(app), :class => 'btn btn-default')
 
-= form_for app do |f|
+= form_for app_decorate do |f|
+
   = render 'fields', :f => f
-  = f.submit 'Update App', :class => "btn btn-success"
+
+  = f.submit t('.update'), :class => "btn btn-success"

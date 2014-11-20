@@ -1,54 +1,18 @@
 class IssueTracker
   include Mongoid::Document
   include Mongoid::Timestamps
-  include HashHelper
+
   include Rails.application.routes.url_helpers
+
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
   default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
 
   embedded_in :app, :inverse_of => :issue_tracker
 
-  field :project_id, :type => String
-  field :alt_project_id, :type => String # Specify an alternative project id. e.g. for viewing files
-  field :api_token, :type => String
-  field :account, :type => String
-  field :username, :type => String
-  field :password, :type => String
-  field :ticket_properties, :type => String
-  field :subdomain, :type => String
-  field :milestone_id, :type => String
+  field :type_tracker, :type => String
+  field :options, :type => Hash, :default => {}
 
-  # Is there any better way to enhance the props? Putting them into the subclass leads to
-  # an error while rendering the form fields -.-
-  field :base_url, :type => String
-  field :context_path, :type => String
-  field :issue_type, :type => String
-  field :issue_component, :type => String
-  field :issue_priority, :type => String
-
-  validate :check_params
-
-  # Subclasses are responsible for overwriting this method.
-  def check_params; true; end
-
-  def issue_title(problem)
-    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
-  end
-
-  # Allows us to set the issue tracker class from a single form.
-  def type; self._type; end
-  def type=(t); self._type=t; end
-
-  def url; nil; end
-
-  # Retrieve tracker label from either class or instance.
-  Label = ''
-  def self.label; self::Label; end
-  def label; self.class.label; end
-
-  def configured?
-    project_id.present?
-  end
+  validate :validate_tracker
 
   ##
   # Update default_url_option with valid data from the request information
@@ -60,4 +24,23 @@ class IssueTracker
     IssueTracker.default_url_options[:port] = request.port
     IssueTracker.default_url_options[:protocol] = request.scheme
   end
+
+  def tracker
+    klass = ErrbitPlugin::Registry.issue_trackers[self.type_tracker]
+    klass = ErrbitPlugin::NoneIssueTracker unless klass
+
+    @tracker = klass.new(app, self.options)
+  end
+
+  # Allow the tracker to validate its own params
+  def validate_tracker
+    (tracker.errors || {}).each do |k,v|
+      errors.add k, v
+    end
+  end
+
+  delegate :configured?, :to => :tracker
+  delegate :create_issue, :to => :tracker
+  delegate :comments_allowed?, :to => :tracker
+  delegate :url, :to => :tracker
 end

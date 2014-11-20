@@ -389,22 +389,11 @@ it will be displayed under the *User Details* tab:
 Javascript error notifications
 --------------------------------------
 
-You can log javascript errors that occur in your application by following the directions below.
-
-# Rails Applications
-
-Add the following line to the `<head>` section of your application template.
+You can log javascript errors that occur in your application by including the
+following script tag before any javascript is loaded in your application.
 
 ```
-<%= airbrake_javascript_notifier %>
-```
-
-# Other Platforms
-
-include the following before any javascript is loaded in your application.
-
-```
-<script src='http://YOUR-ERRBIT-HOST/javascripts/notifier.js' type='text/javascript'></script>
+<script src="//YOUR-ERRBIT-HOST/javascripts/notifier.js" type="text/javascript"></script>
 ```
 
 
@@ -532,15 +521,15 @@ Solutions known to work are listed below:
 <table>
   <tr>
     <th>PHP (&gt;= 5.3)</th>
-    <td>https://github.com/flippa/errbit-php</td>
+    <td>[flippa/errbit-php](https://github.com/flippa/errbit-php)</td>
   </tr>
   <tr>
     <th>OOP PHP (&gt;= 5.3)</th>
-    <td>https://github.com/emgiezet/errbitPHP</td>
+    <td>[emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP)</td>
   </tr>
   <tr>
     <th>Python</th>
-    <td>https://github.com/mkorenkov/errbit.py , https://github.com/pulseenergy/airbrakepy</td>
+    <td>[mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy)</td>
   </tr>
 </table>
 
