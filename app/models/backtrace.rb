@@ -22,6 +22,11 @@ class Backtrace < ActiveRecord::Base
     end
   end
 
+  def includes?(file_and_method)
+    filename, methodname = file_and_method.split("#")
+    where(file: "[PROJECT_ROOT]/#{filename}", method: methodname).exists?
+  end
+
 private
 
   def generate_fingerprint

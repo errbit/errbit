@@ -182,6 +182,11 @@ class Notice < ActiveRecord::Base
     return true unless should_email?
     Mailer.err_notification(self).deliver
   rescue => e
+    # Don't send a notice if we fail to send a notice
+    # that we've failed to send a notice.
+    # i.e. Don't make this an infinite loop.
+    return if app.name == "Self.Errbit" &&
+      backtrace.includes?("app/models/notice.rb#email_notification")
     HoptoadNotifier.notify(e)
   end
 
@@ -191,6 +196,11 @@ class Notice < ActiveRecord::Base
     return true unless app.notification_service_configured? and should_notify?
     app.notification_service.create_notification(problem)
   rescue => e
+    # Don't send a notice if we fail to send a notice
+    # that we've failed to send a notice.
+    # i.e. Don't make this an infinite loop.
+    return if app.name == "Self.Errbit" &&
+      backtrace.includes?("app/models/notice.rb#services_notification")
     HoptoadNotifier.notify(e)
   end
 
