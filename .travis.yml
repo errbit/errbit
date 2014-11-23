@@ -1,14 +1,21 @@
 language: ruby
-env:
-  - COVERAGE=true
+
 rvm:
   - 2.0.0
   - 1.9.3
   - 2.1.2
   - rbx-2
   - ruby-head
+
+env:
+  - COVERAGE=true
+
+sudo: false
+
 services: mongodb
+
 #script: ./script/rspec-queue-mongoid.rb --format progress spec
+
 matrix:
   allow_failures:
     - rvm: rbx-2
