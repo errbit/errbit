@@ -19,7 +19,7 @@ describe WatchersController do
         end
 
         it "should delete the watcher" do
-          expect(app.watchers(true).detect{|w| w.id.to_s == watcher.id }).to be nil
+          expect(app.watchers(true).detect { |w| w.id.to_s == watcher.id }).to be nil
         end
 
         it "should redirect to index page" do

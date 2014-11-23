@@ -14,7 +14,7 @@ describe ProblemUpdaterCache do
       it 'update the notice_count' do
         expect {
           ProblemUpdaterCache.new(problem).update
-        }.to change{
+        }.to change {
           problem.notices_count
         }.from(0).to(1)
       end
@@ -107,7 +107,7 @@ describe ProblemUpdaterCache do
       it 'increase notices_count by 1' do
         expect {
           ProblemUpdaterCache.new(problem, notice).update
-        }.to change{
+        }.to change {
           problem.notices_count
         }.by(1)
       end

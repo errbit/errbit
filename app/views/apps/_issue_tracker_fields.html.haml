@@ -23,7 +23,7 @@
             = w.send field_type, field, placeholder: field_info[:placeholder], value: w.object.send(field)
 
       .image_preloader
-        - (IssueTracker.subclasses.map{|t| t.label } << 'none').each do |tracker|
+        - (IssueTracker.subclasses.map { |t| t.label } << 'none').each do |tracker|
           = image_tag "#{tracker}_inactive.png"
           = image_tag "#{tracker}_create.png"
 

@@ -4,9 +4,7 @@ require 'airbrake/backtrace'
 require 'airbrake/notice'
 require 'airbrake/utils/params_cleaner'
 
-# MonkeyPatch to instanciate a Airbrake::Notice without configure
-# Airbrake
-#
+# MonkeyPatch to instantiate a Airbrake::Notice without configuring Airbrake
 module Airbrake
   API_VERSION = '2.4'
 
@@ -19,7 +17,7 @@ end
 
 describe ErrorReport do
   context "with notice without line of backtrace" do
-    let(:xml){
+    let(:xml) {
       Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
     }
 
@@ -175,7 +173,7 @@ describe ErrorReport do
       end
 
       context "with xml without request section" do
-        let(:xml){
+        let(:xml) {
           Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
         }
         it "save a notice" do
@@ -188,7 +186,7 @@ describe ErrorReport do
       end
 
       context "with xml with only a single line of backtrace" do
-        let(:xml){
+        let(:xml) {
           Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
         }
         it "save a notice" do

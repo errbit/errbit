@@ -21,7 +21,7 @@ if defined? Octokit
     end
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank? }
+      if Fields.detect { |f| self[f[0]].blank? }
         errors.add :base, 'You must specify your GitHub username and password'
       end
     end

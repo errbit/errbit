@@ -11,7 +11,9 @@ class Deploy < ActiveRecord::Base
   scope :by_created_at, order("created_at DESC")
 
   def resolve_app_errs
-    app.problems.unresolved.in_env(environment).each {|problem| problem.resolve!}
+    app.problems.unresolved.in_env(environment).each do |problem|
+      problem.resolve!
+    end
   end
 
   def short_revision

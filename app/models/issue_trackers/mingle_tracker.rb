@@ -24,7 +24,7 @@ class IssueTrackers::MingleTracker < IssueTracker
   ]
 
   def check_params
-    if Fields.detect {|f| self[f[0]].blank? } or !ticket_properties_hash["card_type"]
+    if Fields.detect { |f| self[f[0]].blank? } or !ticket_properties_hash["card_type"]
       errors.add :base, 'You must specify your Mingle URL, Project ID, Card Type (in default card properties), Sign-in name, and Password'
     end
   end

@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def watchers
-    apps.map(&:watchers).flatten.select {|w| w.user_id.to_s == id.to_s}
+    apps.map(&:watchers).flatten.select { |w| w.user_id.to_s == id.to_s }
   end
 
   def per_page

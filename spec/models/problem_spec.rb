@@ -13,7 +13,7 @@ describe Problem do
   describe "Fabrication" do
     context "Fabricate(:problem)" do
       it 'should have no comment' do
-        expect{
+        expect {
           Fabricate(:problem)
         }.to_not change(Comment, :count)
       end
@@ -21,7 +21,7 @@ describe Problem do
 
     context "Fabricate(:problem_with_comments)" do
       it 'should have 3 comments' do
-        expect{
+        expect {
           Fabricate(:problem_with_comments)
         }.to change(Comment, :count).by(3)
       end
@@ -29,7 +29,7 @@ describe Problem do
 
     context "Fabricate(:problem_with_errs)" do
       it 'should have 3 errs' do
-        expect{
+        expect {
           Fabricate(:problem_with_errs)
         }.to change(Err, :count).by(3)
       end

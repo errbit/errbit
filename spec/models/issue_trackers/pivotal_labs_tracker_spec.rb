@@ -37,7 +37,7 @@ describe IssueTrackers::PivotalLabsTracker do
     stub_request(:post, "https://www.pivotaltracker.com/services/v3/projects/#{tracker.project_id}/stories").
                  to_return(status: 422, body: story_body )
 
-    expect{
+    expect {
             problem.app.issue_tracker.create_issue(problem, user)
           }.to raise_exception(IssueTrackers::IssueTrackerError, "Requested by can't be blank")
     expect(problem.issue_link).to be_nil

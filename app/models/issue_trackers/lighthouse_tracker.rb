@@ -17,7 +17,7 @@ if defined? Lighthouse
     ]
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank? }
+      if Fields.detect { |f| self[f[0]].blank? }
         errors.add :base, 'You must specify your Lighthouseapp Subdomain, API token and Project ID'
       end
     end

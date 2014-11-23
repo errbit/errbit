@@ -21,13 +21,13 @@ module Hoptoad
         elsif node.has_key?('key')
           {normalize_key(node['key']) => nil}
         else
-          node.inject({}) {|rekeyed, (key, val)| rekeyed.merge(normalize_key(key) => rekey(val))}
+          node.inject({}) { |rekeyed, (key, val)| rekeyed.merge(normalize_key(key) => rekey(val))}
         end
       when Array
         if node.first.has_key?('key')
-          node.inject({}) {|rekeyed, keypair| rekeyed.merge(rekey(keypair))}
+          node.inject({}) { |rekeyed, keypair| rekeyed.merge(rekey(keypair))}
         else
-          node.map {|n| rekey(n)}
+          node.map { |n| rekey(n)}
         end
       else
         node

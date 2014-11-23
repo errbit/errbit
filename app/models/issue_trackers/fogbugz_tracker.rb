@@ -18,7 +18,7 @@ if defined? Fogbugz
     ]
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank? }
+      if Fields.detect { |f| self[f[0]].blank? }
         errors.add :base, 'You must specify your FogBugz Area Name, FogBugz URL, Username, and Password'
       end
     end

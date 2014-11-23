@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   activateNestedForms();
   activateCheckboxHooks();
 
@@ -12,7 +12,7 @@ $(function(){
     activateTypeSelector('notification_service', 'notification_params');
 
   $('body').addClass('has-js');
-  $('.label_radio').click(function(){
+  $('.label_radio').click(function() {
     activateLabelIcons();
   });
   activateLabelIcons();
@@ -20,7 +20,7 @@ $(function(){
 
 function activateNestedForms() {
   var wrapper = $('.nested-wrapper')
-  wrapper.each(function(){
+  wrapper.each(function() {
     var wrapper = $(this);
 
     makeNestedItemsDestroyable(wrapper);
@@ -33,7 +33,7 @@ function activateNestedForms() {
 }
 
 function makeNestedItemsDestroyable(wrapper) {
-  wrapper.find('.nested').each(function(){
+  wrapper.find('.nested').each(function() {
     var nestedItem = $(this);
     var destroyLink = $('<a/>').text('remove').addClass('remove-nested');
     destroyLink.css('float','right');
@@ -47,14 +47,14 @@ function appendNestedItem() {
   var timestamp = new Date();
   timestamp = timestamp.valueOf();
 
-  nestedItem.find('input, select').each(function(){
+  nestedItem.find('input, select').each(function() {
     var input = $(this);
     input.attr('id', input.attr('id').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
     input.attr('name', input.attr('name').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
     if(input.attr('type') != 'radio')
       input.val('');
   });
-  nestedItem.find('label').each(function(){
+  nestedItem.find('label').each(function() {
     var label = $(this);
     label.attr('for', label.attr('for').replace(/([_\[])\d+([\]_])/,'$1'+timestamp+'$2'));
   });
@@ -81,7 +81,7 @@ function activateTypeSelector(field_class, section_class) {
   $('div.'+field_class+' > div.'+section_class).not('.chosen').find('input')
     .attr('disabled','disabled').val('');
 
-  $('div.'+field_class+' input[name*=type]').on('click', function(){
+  $('div.'+field_class+' input[name*=type]').on('click', function() {
     // Look for section in 'data-section', and fall back to 'value'
     var chosen = $(this).data("section") || $(this).val();
     var wrapper = $(this).closest('.nested');
@@ -93,14 +93,14 @@ function activateTypeSelector(field_class, section_class) {
 
 function activateCheckboxHooks() {
   // Hooks to hide/show content when a checkbox is clicked
-  $('input[type="checkbox"][data-hide-when-checked]').each(function(){
-    $(this).change(function(){
+  $('input[type="checkbox"][data-hide-when-checked]').each(function() {
+    $(this).change(function() {
       el = $($(this).data('hide-when-checked'));
       $(this).attr('checked') ? el.hide() : el.show();
     });
   });
-  $('input[type="checkbox"][data-show-when-checked]').each(function(){
-    $(this).change(function(){
+  $('input[type="checkbox"][data-show-when-checked]').each(function() {
+    $(this).change(function() {
       el = $($(this).data('show-when-checked'));
       $(this).attr('checked') ? el.show() : el.hide();
     });
@@ -110,10 +110,10 @@ function activateCheckboxHooks() {
 
 function activateLabelIcons() {
   if ($('.label_radio input').length) {
-    $('.label_radio').each(function(){
+    $('.label_radio').each(function() {
       $(this).removeClass('r_on');
     });
-    $('.label_radio input:checked').each(function(){
+    $('.label_radio input:checked').each(function() {
       $(this).parent('label').addClass('r_on');
     });
   };

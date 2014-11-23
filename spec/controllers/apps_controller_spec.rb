@@ -65,7 +65,7 @@ describe AppsController do
 
       it "should not raise errors for app with err without notices" do
         err
-        expect{ get :show, id: app.id }.to_not raise_error
+        expect { get :show, id: app.id }.to_not raise_error
       end
 
       it "should list atom feed successfully" do
@@ -166,7 +166,7 @@ describe AppsController do
       it 'does not find the app if the user is not watching it' do
         sign_in Fabricate(:user)
         app = Fabricate(:app)
-        expect{
+        expect {
           get :show, id: app.id
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
@@ -302,7 +302,7 @@ describe AppsController do
         IssueTracker.subclasses.each do |tracker_klass|
           context tracker_klass do
             it "should save tracker params" do
-              params = tracker_klass::Fields.inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
+              params = tracker_klass::Fields.inject({}) { |hash,f| hash[f[0]] = "test_value"; hash }
               params[:ticket_properties] = "card_type = defect" if tracker_klass == IssueTrackers::MingleTracker
               params[:type] = tracker_klass.to_s
               put :update, id: @app.id, app: {issue_tracker_attributes: params}
@@ -323,7 +323,7 @@ describe AppsController do
 
             it "should show validation notice when sufficient params are not present" do
               # Leave out one required param
-              params = tracker_klass::Fields[1..-1].inject({}){|hash,f| hash[f[0]] = "test_value"; hash }
+              params = tracker_klass::Fields[1..-1].inject({}) { |hash,f| hash[f[0]] = "test_value"; hash }
               params[:type] = tracker_klass.to_s
               put :update, id: @app.id, app: {issue_tracker_attributes: params}
 

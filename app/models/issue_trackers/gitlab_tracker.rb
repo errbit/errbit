@@ -20,7 +20,7 @@ if defined? Gitlab
     ]
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank?}
+      if Fields.detect { |f| self[f[0]].blank?}
         errors.add :base, 'You must specify your Gitlab URL, API token, Project ID and Project Name'
       end
     end

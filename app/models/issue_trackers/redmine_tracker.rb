@@ -27,7 +27,7 @@ if defined? RedmineClient
     ]
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank? && !f[1][:optional]}
+      if Fields.detect { |f| self[f[0]].blank? && !f[1][:optional]}
         errors.add :base, 'You must specify your Redmine URL, API token, Username, Password and Project ID'
       end
     end

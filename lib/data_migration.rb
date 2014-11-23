@@ -49,7 +49,7 @@ module DataMigration
     # mapping should be a hash {key_to: :key_from}
     # value of this hash can be an object and respond to :call, which returns value for new key
     USER_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
       email: :email,
       github_login: :github_login,
@@ -81,7 +81,7 @@ module DataMigration
     }
 
     APP_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
       name: :name,
       api_key: :api_key,
@@ -112,15 +112,15 @@ module DataMigration
 
     WATCHER_FIELDS_MAPPING = {
       email: :email,
-      user_id: lambda{|v| v["user_id"] ? User.where(remote_id: v["user_id"].to_s).pluck(:id).first : nil  },
+      user_id: lambda { |v| v["user_id"] ? User.where(remote_id: v["user_id"].to_s).pluck(:id).first : nil  },
       created_at: :created_at,
       updated_at: :updated_at
     }
 
     PROBLEM_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
-      app_id: lambda{|v| App.where(remote_id: v["app_id"].to_s).pluck(:id).first},
+      app_id: lambda { |v| App.where(remote_id: v["app_id"].to_s).pluck(:id).first },
       
       last_notice_at: :last_notice_at,
       first_notice_at: :first_notice_at,
@@ -136,9 +136,9 @@ module DataMigration
       environment: :environment,
       error_class: :error_class,
       where: :where,
-      user_agents: lambda{|v| normalize_hash(v["user_agents"])},
-      messages: lambda{|v| normalize_hash(v["messages"])},
-      hosts: lambda{|v| normalize_hash(v["hosts"])},
+      user_agents: lambda { |v| normalize_hash(v["user_agents"]) },
+      messages: lambda { |v| normalize_hash(v["messages"]) },
+      hosts: lambda { |v| normalize_hash(v["hosts"]) },
       comments_count: :comments_count,
       
       created_at: :created_at,
@@ -146,10 +146,10 @@ module DataMigration
     }
 
     COMMENT_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
-      user_id: lambda{|v| User.where(remote_id: v["user_id"].to_s).pluck(:id).first},
-      problem_id: lambda{|v| Problem.where(remote_id: v["err_id"].to_s).pluck(:id).first},
+      user_id: lambda { |v| User.where(remote_id: v["user_id"].to_s).pluck(:id).first },
+      problem_id: lambda { |v| Problem.where(remote_id: v["err_id"].to_s).pluck(:id).first },
       
       body: :body,
       
@@ -158,9 +158,9 @@ module DataMigration
     }
 
     ERR_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
-      problem_id: lambda{|v| Problem.where(remote_id: v["problem_id"].to_s).pluck(:id).first},
+      problem_id: lambda { |v| Problem.where(remote_id: v["problem_id"].to_s).pluck(:id).first },
       
       fingerprint: :fingerprint,
       
@@ -169,7 +169,7 @@ module DataMigration
     }
 
     BACKTRACE_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
       fingerprint: :fingerprint,
       
@@ -188,18 +188,18 @@ module DataMigration
     }
 
     NOTICE_FIELDS_MAPPING = {
-      remote_id: lambda{|v| v["_id"].to_s},
+      remote_id: lambda { |v| v["_id"].to_s },
       
       message: :message,
-      server_environment: lambda{|v| normalize_hash(v["server_environment"])},
-      request: lambda{|v| normalize_hash(v["request"])},
-      notifier: lambda{|v| normalize_hash(v["notifier"])},
-      user_attributes: lambda{|v| normalize_hash(v["user_attributes"])},
+      server_environment: lambda { |v| normalize_hash(v["server_environment"]) },
+      request: lambda { |v| normalize_hash(v["request"]) },
+      notifier: lambda { |v| normalize_hash(v["notifier"]) },
+      user_attributes: lambda { |v| normalize_hash(v["user_attributes"]) },
       framework: :framework,
       error_class: :error_class,
       
-      err_id: lambda{|v| Err.where(remote_id: v["err_id"].to_s).pluck(:id).first},
-      backtrace_id: lambda{|v| Backtrace.where(remote_id: v["backtrace_id"].to_s).pluck(:id).first},
+      err_id: lambda { |v| Err.where(remote_id: v["err_id"].to_s).pluck(:id).first },
+      backtrace_id: lambda { |v| Backtrace.where(remote_id: v["backtrace_id"].to_s).pluck(:id).first },
       
       created_at: :created_at,
       updated_at: :updated_at

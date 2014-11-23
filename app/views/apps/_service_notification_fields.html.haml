@@ -21,6 +21,6 @@
             = w.send field_type, field, placeholder: field_info[:placeholder], value: value
 
       .image_preloader
-        - (NotificationService.subclasses.map{|t| t.label } << 'none').each do |notification_service|
+        - (NotificationService.subclasses.map { |t| t.label } << 'none').each do |notification_service|
           = image_tag "#{notification_service}_inactive.png"
           = image_tag "#{notification_service}_create.png"

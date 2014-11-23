@@ -42,14 +42,14 @@ $(function() {
   }
 
   function activateTabbedPanels() {
-    $('.tab-bar a').each(function(){
+    $('.tab-bar a').each(function() {
       var tab = $(this);
       var panel = $('#'+tab.attr('rel'));
       panel.addClass('panel');
       panel.find('h3').hide();
     });
 
-    $('.tab-bar a').click(function(){
+    $('.tab-bar a').click(function() {
       activateTab($(this));
       return(false);
     });

@@ -4,7 +4,7 @@ class Hash
   # to each sub-hash or +types+.
   #
   #   h = {:a=>1, :b=>{:b1=>1, :b2=>2}}
-  #   g = h.recurse{|h| h.inject({}){|h,(k,v)| h[k.to_s] = v; h} }
+  #   g = h.recurse { |h| h.inject({}) { |h,(k,v)| h[k.to_s] = v; h } }
   #   g  #=> {"a"=>1, "b"=>{"b1"=>1, "b2"=>2}}
   #
   def recurse(*types, &block)

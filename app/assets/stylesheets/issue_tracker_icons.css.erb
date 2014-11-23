@@ -1,5 +1,5 @@
 /* Issue Tracker inactive, select, create and goto icons */
-<% trackers = IssueTracker.subclasses.map{|t| t.label } << 'none' %>
+<% trackers = IssueTracker.subclasses.map(&:label) << 'none' %>
 
 <% trackers.each do |tracker| %>
 div.issue_tracker.nested label.<%= tracker %> {

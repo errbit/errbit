@@ -1,5 +1,5 @@
   /* Notification Service inactive, select, create and goto icons */
-<% notification_services = NotificationService.subclasses.map{|t| t.label } << 'none' %>
+<% notification_services = NotificationService.subclasses.map(&:label) << 'none' %>
 
 <% notification_services.each do |notification_service| %>
 div.notification_service.nested label.<%= notification_service %> {

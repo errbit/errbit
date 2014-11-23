@@ -12,7 +12,7 @@ class NotificationServices::PushoverService < NotificationService
   ]
 
   def check_params
-    if Fields.detect {|f| self[f[0]].blank? }
+    if Fields.detect { |f| self[f[0]].blank? }
       errors.add :base, 'You must specify your User Key and Application API Token.'
     end
   end

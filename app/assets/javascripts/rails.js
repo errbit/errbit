@@ -13,7 +13,7 @@
  * The `ajax:aborted:file` event allows you to bind your own handler to process the form submission however you wish.
  *
  * Ex:
- *     $('form').live('ajax:aborted:file', function(event, elements){
+ *     $('form').live('ajax:aborted:file', function(event, elements) {
  *       // Implement own remote file-transfer handler here for non-blank file inputs passed in `elements`.
  *       // Returning false in this handler tells rails.js to disallow standard form submission
  *       return false;
@@ -36,7 +36,7 @@
  *    get fired in Opera. This event is what causes other browsers to exhibit the same submit-aborting behavior.
  *
  * Ex:
- *     $('form').live('ajax:aborted:required', function(event, elements){
+ *     $('form').live('ajax:aborted:required', function(event, elements) {
  *       // Returning false in this handler tells rails.js to submit the form anyway.
  *       // The blank required inputs are passed to this function in `elements`.
  *       return ! confirm("Would you like to submit the form with missing info?");
@@ -287,7 +287,7 @@
       var events = form.data('events'), continuePropagation = true;
 
       if (events !== undefined && events['submit'] !== undefined) {
-        $.each(events['submit'], function(i, obj){
+        $.each(events['submit'], function(i, obj) {
           if (typeof obj.handler === 'function') return continuePropagation = obj.handler(obj.data);
         });
       }
@@ -295,7 +295,7 @@
     }
   };
 
-  $.ajaxPrefilter(function(options, originalOptions, xhr){ if ( !options.crossDomain ) { rails.CSRFProtection(xhr); }});
+  $.ajaxPrefilter(function(options, originalOptions, xhr) { if ( !options.crossDomain ) { rails.CSRFProtection(xhr); }});
 
   $(rails.linkClickSelector).live('click.rails', function(e) {
     var link = $(this);

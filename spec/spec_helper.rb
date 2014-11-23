@@ -27,7 +27,7 @@ require 'xmpp4r/muc'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 Fabrication.configure do |config|
   fabricator_dir = "spec/fabricators"

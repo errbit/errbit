@@ -157,7 +157,7 @@ describe Api::V1::ProblemsController do
         it "should unmerge a merged problem" do
           merged_problem = Problem.merge!(@problem1, @problem2)
           expect(merged_problem.errs.length).to eq 2
-          expect{
+          expect {
             post :unmerge_several, problems: [merged_problem.id.to_s], auth_token: @user.authentication_token
             expect(merged_problem.reload.errs.length).to eq 1
           }.to change(Problem, :count).by(1)
@@ -166,7 +166,7 @@ describe Api::V1::ProblemsController do
 
       context "POST /problems/destroy_several" do
         it "should delete the problems" do
-          expect{
+          expect {
             post :destroy_several, problems: [@problem1.id.to_s], auth_token: @user.authentication_token
           }.to change(Problem, :count).by(-1)
         end
