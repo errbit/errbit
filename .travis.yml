@@ -12,6 +12,8 @@ env:
 
 sudo: false
 
+cache: bundler
+
 services: mongodb
 
 #script: ./script/rspec-queue-mongoid.rb --format progress spec
