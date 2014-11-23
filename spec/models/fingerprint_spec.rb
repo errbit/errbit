@@ -82,14 +82,40 @@ describe Fingerprint do
   describe "#normalized_message" do
     subject { Fingerprint.new(double("notice", message: message), app_id).normalized_message }
 
-    context "given objects with memory addresses" do
+    context "given messages with Ruby memory addresses" do
       let(:message) { "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess:0x007f6bfe3287e8> #<Object:0x007fa2b33d9458>" }
 
-      it "removes the memory addresses from all object strings" do
+      it "removes the memory addresses" do
         should eq "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess> #<Object>"
       end
     end
+
+    context "given messages with memory addresses " do
+      let(:message) { "Segmentation fault: 11: 0x000465c5 _ZN11ogg_contextC2Ev + 69296" }
+
+      it "replaces the memory addresses with '0x__'" do
+        should eq "Segmentation fault: 11: 0x__ _ZN11ogg_contextC2Ev + 69296"
+      end
+    end
+
+    context "given messages with a number of seconds" do
+      let(:message) { "ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5 seconds (waited 5.681601156 seconds). The max pool size is currently 5; consider increasing it." }
+
+      it "replaces a number of seconds with '__ seconds'" do
+        should eq "ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within __ seconds (waited __ seconds). The max pool size is currently 5; consider increasing it."
+      end
+    end
+
+    context "given a Postgres error message with an ERROR part and a DETAIL part" do
+      let(:message) { "PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint \"index_logins_on_email\"\nDETAIL:  Key (email)=(joe.test@example.com) already exists.\n" }
+
+      it "drops the DETAIL part" do
+        should eq "PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint \"index_logins_on_email\"\n"
+      end
+    end
   end
+
+
 
 private
 

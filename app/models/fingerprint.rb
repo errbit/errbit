@@ -18,8 +18,6 @@ class Fingerprint
     { message: normalized_message,
       backtrace: backtrace_fingerprint,
       error_class: notice.error_class,
-      component: notice.component || "unknown",
-      action: notice.action,
       app_id: app_id }
   end
 
@@ -39,7 +37,11 @@ class Fingerprint
   # Filter memory addresses out of object strings
   # example: "#<Object:0x007fa2b33d9458>" becomes "#<Object>"
   def normalized_message
-    notice.message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
+    notice.message
+      .gsub(/(#<.+?):0x[0-9a-f]+(>)/, '\1\2')
+      .gsub(/\b0x[0-9a-f]+\b/, '0x__')
+      .gsub(/\b[0-9]+(?:\.[0-9]+)? (seconds)/, '__ \1')
+      .gsub(/(ERROR:.*)DETAIL: .*$/m, '\1')
   end
 
 end
