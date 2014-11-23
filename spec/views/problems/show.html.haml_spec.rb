@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "problems/show.html.haml" do
-  let(:problem) { Fabricate(:err, :problem => Fabricate(:problem)).problem }
+  let(:problem) { Fabricate(:err, problem: Fabricate(:problem)).problem }
   let(:comment) { Fabricate(:comment) }
 
   before do
@@ -18,7 +18,7 @@ describe "problems/show.html.haml" do
 
   def with_issue_tracker(tracker, problem)
     # problem with has_one and sti, cause reverse creating
-    tracker.create :api_token => "token token token", :project_id => "1234", :app => problem.app
+    tracker.create api_token: "token token token", project_id: "1234", app: problem.app
     view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end
@@ -49,44 +49,44 @@ describe "problems/show.html.haml" do
       url = 'http://localhost:3000/problems'
       controller.request.env['HTTP_REFERER'] = url
       render
-      expect(action_bar).to have_selector("span a.up[href='#{url}']", :text => 'up')
+      expect(action_bar).to have_selector("span a.up[href='#{url}']", text: 'up')
     end
 
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
       controller.request.env['HTTP_REFERER'] = nil
-      problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments)).problem
+      problem = Fabricate(:err, problem: Fabricate(:problem_with_comments)).problem
       view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
       render
 
-      expect(action_bar).to have_selector("span a.up[href='#{app_problems_path(problem.app)}']", :text => 'up')
+      expect(action_bar).to have_selector("span a.up[href='#{app_problems_path(problem.app)}']", text: 'up')
     end
 
     context 'create issue links' do
       it 'should allow creating issue for github if current user has linked their github account' do
-        user = Fabricate(:user, :github_login => 'test_user', :github_oauth_token => 'abcdef')
+        user = Fabricate(:user, github_login: 'test_user', github_oauth_token: 'abcdef')
         controller.stub(:current_user) { user }
 
-        problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))).problem
+        problem = Fabricate(:err, problem: Fabricate(:problem_with_comments, app: Fabricate(:app, github_repo: "test_user/test_repo"))).problem
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
 
-        expect(action_bar).to have_selector("span a.github_create.create-issue", :text => 'create issue')
+        expect(action_bar).to have_selector("span a.github_create.create-issue", text: 'create issue')
       end
 
       it 'should allow creating issue for github if application has a github tracker' do
-        problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))).problem
+        problem = Fabricate(:err, problem: Fabricate(:problem_with_comments, app: Fabricate(:app, github_repo: "test_user/test_repo"))).problem
         with_issue_tracker(GithubIssuesTracker, problem)
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
 
-        expect(action_bar).to have_selector("span a.github_create.create-issue", :text => 'create issue')
+        expect(action_bar).to have_selector("span a.github_create.create-issue", text: 'create issue')
       end
 
       context "without issue tracker associate on app" do
-        let(:problem) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)).problem }
+        let(:problem) { Fabricate(:err, problem: Fabricate(:problem, app: app)).problem }
         let(:app) { Fabricate :app }
 
         it 'not see link to create issue' do
@@ -99,10 +99,10 @@ describe "problems/show.html.haml" do
       end
 
       context "with lighthouse tracker on app" do
-        let(:app) { Fabricate :app, :issue_tracker => tracker }
+        let(:app) { Fabricate :app, issue_tracker: tracker }
         let(:tracker) { Fabricate :lighthouse_tracker }
         context "with problem without issue link" do
-          let(:problem) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)).problem }
+          let(:problem) { Fabricate(:err, problem: Fabricate(:problem, app: app)).problem }
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
             view.stub(:app).and_return(problem.app)
@@ -113,7 +113,7 @@ describe "problems/show.html.haml" do
         end
 
         context "with problem with issue link" do
-          let(:problem) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :issue_link => 'http://foo')).problem }
+          let(:problem) { Fabricate(:err, problem: Fabricate(:problem, app: app, issue_link: 'http://foo')).problem }
 
           it 'not see link if no issue tracker' do
             view.stub(:problem).and_return(problem)
@@ -134,7 +134,7 @@ describe "problems/show.html.haml" do
     end
 
     it 'should display comments and new comment form when no issue tracker' do
-      problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments)).problem
+      problem = Fabricate(:err, problem: Fabricate(:problem_with_comments)).problem
       view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
       render
@@ -146,14 +146,14 @@ describe "problems/show.html.haml" do
 
     context "with issue tracker" do
       it 'should not display the comments section' do
-        problem = Fabricate(:err, :problem => Fabricate(:problem)).problem
+        problem = Fabricate(:err, problem: Fabricate(:problem)).problem
         with_issue_tracker(PivotalLabsTracker, problem)
         render
         expect(view.view_flow.get(:comments)).to be_blank
       end
 
       it 'should display existing comments' do
-        problem = Fabricate(:err, :problem => Fabricate(:problem_with_comments)).problem
+        problem = Fabricate(:err, problem: Fabricate(:problem_with_comments)).problem
         problem.reload
         with_issue_tracker(PivotalLabsTracker, problem)
         render

@@ -2,18 +2,18 @@ class Backtrace < ActiveRecord::Base
 
   has_many :notices
   has_one :notice
-  has_many :lines, class_name: "BacktraceLine", :order => "created_at ASC"
+  has_many :lines, class_name: "BacktraceLine", order: "created_at ASC"
 
-  after_initialize :generate_fingerprint, :if => :new_record?
+  after_initialize :generate_fingerprint, if: :new_record?
 
-  delegate :app, :to => :notice
+  delegate :app, to: :notice
 
   def self.find_or_create(attributes = {})
     new(attributes).similar || create(attributes)
   end
 
   def similar
-    Backtrace.where(:fingerprint => fingerprint).first
+    Backtrace.where(fingerprint: fingerprint).first
   end
 
   def raw=(raw)

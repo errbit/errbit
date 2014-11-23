@@ -1,7 +1,7 @@
 class Watcher < ActiveRecord::Base
 
 
-  belongs_to :app, :inverse_of => :watchers
+  belongs_to :app, inverse_of: :watchers
   belongs_to :user
 
   validate :ensure_user_or_email

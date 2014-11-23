@@ -16,14 +16,14 @@ set :repository,  config['repository']
 
 role :web, config['hosts']['web']
 role :app, config['hosts']['app']
-role :db,  config['hosts']['db'], :primary => true
+role :db,  config['hosts']['db'], primary: true
 
 set :user, config['user']
 set :use_sudo, false
 if config.has_key?('ssh_key')
-  set :ssh_options,      { :forward_agent => true, :keys => [ config['ssh_key'] ] }
+  set :ssh_options,      { forward_agent: true, keys: [ config['ssh_key'] ] }
 else
-  set :ssh_options,      { :forward_agent => true }
+  set :ssh_options,      { forward_agent: true }
 end
 default_run_options[:pty] = true
 
@@ -44,7 +44,7 @@ before 'deploy:assets:symlink', 'errbit:symlink_configs'
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
+  task :restart, roles: :app, except: { no_release: true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 end
@@ -87,17 +87,17 @@ namespace :unicorn do
   end
 
   desc 'Reload unicorn'
-  task :reload, :roles => :app, :except => { :no_release => true } do
+  task :reload, roles: :app, except: { no_release: true } do
     run "kill -HUP #{unicorn_pid}"
   end
 
   desc 'Stop unicorn'
-  task :stop, :roles => :app, :except => { :no_release => true } do
+  task :stop, roles: :app, except: { no_release: true } do
     run "kill -QUIT #{unicorn_pid}"
   end
 
   desc 'Reexecute unicorn'
-  task :reexec, :roles => :app, :except => { :no_release => true } do
+  task :reexec, roles: :app, except: { no_release: true } do
     run "kill -USR2 #{unicorn_pid}"
   end
 end

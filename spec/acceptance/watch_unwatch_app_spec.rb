@@ -6,7 +6,7 @@ feature 'A user can watch and unwatch an application' do
   let!(:user) do
     user = Fabricate(:user)
     app.watchers.create!(
-      :user_id => user.id
+      user_id: user.id
     )
     user.reload
   end

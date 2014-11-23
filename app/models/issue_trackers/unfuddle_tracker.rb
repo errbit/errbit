@@ -3,27 +3,27 @@ class IssueTrackers::UnfuddleTracker < IssueTracker
   Fields = [
 
             [:account, {
-               :placeholder => "Your domain"
+               placeholder: "Your domain"
              }],
 
 
             [:username, {
-               :placeholder => "Your username"
+               placeholder: "Your username"
              }],
 
             [:password, {
-               :placeholder => "Your password"
+               placeholder: "Your password"
              }],
 
             [:project_id, {
-               :label       => "Ticket Project",
-               :placeholder => "Project where tickets will be created"
+               label:       "Ticket Project",
+               placeholder: "Project where tickets will be created"
              }],
 
             [:milestone_id, {
-               :optional    => true,
-               :label       => "Ticket Milestone",
-               :placeholder => "Milestone where tickets will be created"
+               optional:    true,
+               label:       "Ticket Milestone",
+               placeholder: "Milestone where tickets will be created"
              }]
 
 
@@ -39,19 +39,19 @@ class IssueTrackers::UnfuddleTracker < IssueTracker
 
     Unfuddle.config(account, username, password)
     begin
-      issue_options = {:project_id => project_id,
-        :summary => issue_title(problem),
-        :priority => '5',
-        :status => "new",
-        :description => body_template.result(binding),
+      issue_options = {project_id: project_id,
+        summary: issue_title(problem),
+        priority: '5',
+        status: "new",
+        description: body_template.result(binding),
         'description-format' => 'textile' }
 
       issue_options[:milestone_id] = milestone_id if milestone_id.present?
 
       issue = Unfuddle::Ticket.create(issue_options)
       problem.update_attributes(
-                                :issue_link => File.join("#{url}/tickets/#{issue.id}"),
-                                :issue_type => Label
+                                issue_link: File.join("#{url}/tickets/#{issue.id}"),
+                                issue_type: Label
                                 )
     rescue ActiveResource::UnauthorizedAccess
       raise ActiveResource::UnauthorizedAccess, "Could not authenticate with Unfuddle. Please check your username and password."

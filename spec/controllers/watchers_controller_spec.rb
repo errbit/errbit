@@ -15,7 +15,7 @@ describe WatchersController do
         let(:watcher) { app.watchers.first }
 
         before(:each) do
-          delete :destroy, :app_id => app.id, :id => watcher.user.id.to_s
+          delete :destroy, app_id: app.id, id: watcher.user.id.to_s
         end
 
         it "should delete the watcher" do

@@ -3,11 +3,11 @@ class Comment < ActiveRecord::Base
   after_create :increase_counter_cache
   before_destroy :decrease_counter_cache
 
-  after_create :deliver_email, :if => :emailable?
+  after_create :deliver_email, if: :emailable?
 
   belongs_to :err
   belongs_to :user
-  delegate   :app, :problem, :to => :err
+  delegate   :app, :problem, to: :err
 
   validates_presence_of :body
 

@@ -22,4 +22,4 @@ namespace :spec do
 end
 
 Rake::Task["spec"].prerequisites.push("spec:prepare")
-task :default => ['spec']
+task default: ['spec']

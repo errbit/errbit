@@ -46,188 +46,188 @@ module DataMigration
   end
 
   class Worker
-    # mapping should be a hash {:key_to => :key_from}
+    # mapping should be a hash {key_to: :key_from}
     # value of this hash can be an object and respond to :call, which returns value for new key
     USER_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :email => :email,
-      :github_login => :github_login,
-      :github_oauth_token => :github_oauth_token,
-      :name => :name,
-      :admin => :admin,
-      :per_page => :per_page,
-      :time_zone => :time_zone,
+      email: :email,
+      github_login: :github_login,
+      github_oauth_token: :github_oauth_token,
+      name: :name,
+      admin: :admin,
+      per_page: :per_page,
+      time_zone: :time_zone,
       
-      :encrypted_password => :encrypted_password,
+      encrypted_password: :encrypted_password,
       
-      :reset_password_token => :reset_password_token,
-      :reset_password_sent_at => :reset_password_sent_at,
+      reset_password_token: :reset_password_token,
+      reset_password_sent_at: :reset_password_sent_at,
       
-      :remember_created_at => :remember_created_at,
+      remember_created_at: :remember_created_at,
       
-      :sign_in_count => :sign_in_count,
-      :current_sign_in_at => :current_sign_in_at,
-      :last_sign_in_at => :last_sign_in_at,
-      :current_sign_in_ip => :current_sign_in_ip,
-      :last_sign_in_ip => :last_sign_in_ip,
+      sign_in_count: :sign_in_count,
+      current_sign_in_at: :current_sign_in_at,
+      last_sign_in_at: :last_sign_in_at,
+      current_sign_in_ip: :current_sign_in_ip,
+      last_sign_in_ip: :last_sign_in_ip,
       
-      :authentication_token => :authentication_token,
+      authentication_token: :authentication_token,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at,
+      created_at: :created_at,
+      updated_at: :updated_at,
       
-      :username => :username
+      username: :username
     }
 
     APP_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :name => :name,
-      :api_key => :api_key,
-      :github_repo => :github_repo,
-      :bitbucket_repo => :bitbucket_repo,
-      :asset_host => :asset_host,
-      :repository_branch => :repository_branch,
-      :resolve_errs_on_deploy => :resolve_errs_on_deploy,
-      :notify_all_users => :notify_all_users,
-      :notify_on_errs => :notify_on_errs,
-      :notify_on_deploys => :notify_on_deploys,
-      :email_at_notices => :email_at_notices,
+      name: :name,
+      api_key: :api_key,
+      github_repo: :github_repo,
+      bitbucket_repo: :bitbucket_repo,
+      asset_host: :asset_host,
+      repository_branch: :repository_branch,
+      resolve_errs_on_deploy: :resolve_errs_on_deploy,
+      notify_all_users: :notify_all_users,
+      notify_on_errs: :notify_on_errs,
+      notify_on_deploys: :notify_on_deploys,
+      email_at_notices: :email_at_notices,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     DEPLOY_FIELDS_MAPPING = {
-      :username => :username,
-      :repository => :repository,
-      :environment => :environment,
-      :revision => :revision,
-      :message => :message,
+      username: :username,
+      repository: :repository,
+      environment: :environment,
+      revision: :revision,
+      message: :message,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     WATCHER_FIELDS_MAPPING = {
-      :email => :email,
-      :user_id => lambda{|v| v["user_id"] ? User.where(:remote_id => v["user_id"].to_s).pluck(:id).first : nil  },
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      email: :email,
+      user_id: lambda{|v| v["user_id"] ? User.where(remote_id: v["user_id"].to_s).pluck(:id).first : nil  },
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     PROBLEM_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :app_id => lambda{|v| App.where(:remote_id => v["app_id"].to_s).pluck(:id).first},
+      app_id: lambda{|v| App.where(remote_id: v["app_id"].to_s).pluck(:id).first},
       
-      :last_notice_at => :last_notice_at,
-      :first_notice_at => :first_notice_at,
-      :last_deploy_at => :last_deploy_at,
-      :resolved => :resolved,
-      :resolved_at => :resolved_at,
-      :issue_link => :issue_link,
-      :issue_type => :issue_type,
+      last_notice_at: :last_notice_at,
+      first_notice_at: :first_notice_at,
+      last_deploy_at: :last_deploy_at,
+      resolved: :resolved,
+      resolved_at: :resolved_at,
+      issue_link: :issue_link,
+      issue_type: :issue_type,
       
-      :app_name => :app_name,
-      :notices_count => :notices_count,
-      :message => :message,
-      :environment => :environment,
-      :error_class => :error_class,
-      :where => :where,
-      :user_agents => lambda{|v| normalize_hash(v["user_agents"])},
-      :messages => lambda{|v| normalize_hash(v["messages"])},
-      :hosts => lambda{|v| normalize_hash(v["hosts"])},
-      :comments_count => :comments_count,
+      app_name: :app_name,
+      notices_count: :notices_count,
+      message: :message,
+      environment: :environment,
+      error_class: :error_class,
+      where: :where,
+      user_agents: lambda{|v| normalize_hash(v["user_agents"])},
+      messages: lambda{|v| normalize_hash(v["messages"])},
+      hosts: lambda{|v| normalize_hash(v["hosts"])},
+      comments_count: :comments_count,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     COMMENT_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :user_id => lambda{|v| User.where(:remote_id => v["user_id"].to_s).pluck(:id).first},
-      :problem_id => lambda{|v| Problem.where(:remote_id => v["err_id"].to_s).pluck(:id).first},
+      user_id: lambda{|v| User.where(remote_id: v["user_id"].to_s).pluck(:id).first},
+      problem_id: lambda{|v| Problem.where(remote_id: v["err_id"].to_s).pluck(:id).first},
       
-      :body => :body,
+      body: :body,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     ERR_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :problem_id => lambda{|v| Problem.where(:remote_id => v["problem_id"].to_s).pluck(:id).first},
+      problem_id: lambda{|v| Problem.where(remote_id: v["problem_id"].to_s).pluck(:id).first},
       
-      :fingerprint => :fingerprint,
+      fingerprint: :fingerprint,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     BACKTRACE_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :fingerprint => :fingerprint,
+      fingerprint: :fingerprint,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     BACKTRACE_LINE_FIELDS_MAPPING = {
-      :number => :number,
-      :column => :column,
-      :file => :file,
-      :method => :method,
+      number: :number,
+      column: :column,
+      file: :file,
+      method: :method,
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     NOTICE_FIELDS_MAPPING = {
-      :remote_id => lambda{|v| v["_id"].to_s},
+      remote_id: lambda{|v| v["_id"].to_s},
       
-      :message => :message,
-      :server_environment => lambda{|v| normalize_hash(v["server_environment"])},
-      :request => lambda{|v| normalize_hash(v["request"])},
-      :notifier => lambda{|v| normalize_hash(v["notifier"])},
-      :user_attributes => lambda{|v| normalize_hash(v["user_attributes"])},
-      :framework => :framework,
-      :error_class => :error_class,
+      message: :message,
+      server_environment: lambda{|v| normalize_hash(v["server_environment"])},
+      request: lambda{|v| normalize_hash(v["request"])},
+      notifier: lambda{|v| normalize_hash(v["notifier"])},
+      user_attributes: lambda{|v| normalize_hash(v["user_attributes"])},
+      framework: :framework,
+      error_class: :error_class,
       
-      :err_id => lambda{|v| Err.where(:remote_id => v["err_id"].to_s).pluck(:id).first},
-      :backtrace_id => lambda{|v| Backtrace.where(:remote_id => v["backtrace_id"].to_s).pluck(:id).first},
+      err_id: lambda{|v| Err.where(remote_id: v["err_id"].to_s).pluck(:id).first},
+      backtrace_id: lambda{|v| Backtrace.where(remote_id: v["backtrace_id"].to_s).pluck(:id).first},
       
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     ISSUE_TRACKER_FIELDS_MAPPING = {
-      :project_id => :project_id,
-      :alt_project_id => :alt_project_id,
-      :api_token => :api_token,
-      :account => :account,
-      :username => :username,
-      :password => :password,
-      :ticket_properties => :ticket_properties,
-      :subdomain => :subdomain,
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      project_id: :project_id,
+      alt_project_id: :alt_project_id,
+      api_token: :api_token,
+      account: :account,
+      username: :username,
+      password: :password,
+      ticket_properties: :ticket_properties,
+      subdomain: :subdomain,
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     NOTIFICATION_SERVICE_FIELDS_MAPPING = {
-      :room_id => :room_id,
-      :user_id => :user_id,
-      :service_url => :service_url,
-      :service => :service,
-      :api_token => :api_token,
-      :subdomain => :subdomain,
-      :sender_name => :sender_name,
-      :created_at => :created_at,
-      :updated_at => :updated_at
+      room_id: :room_id,
+      user_id: :user_id,
+      service_url: :service_url,
+      service: :service,
+      api_token: :api_token,
+      subdomain: :subdomain,
+      sender_name: :sender_name,
+      created_at: :created_at,
+      updated_at: :updated_at
     }
 
     # The collections to be copied in the order in which they should copied
@@ -409,7 +409,7 @@ module DataMigration
         app.issue_tracker.type = normalize_issue_tracker_classname(old_app["issue_tracker"]["_type"])
 
         # disable validate because have problem with different schemas in db
-        issue_tracker.save(:validate => false)
+        issue_tracker.save(validate: false)
       end
 
       def copy_notification_service(app, old_app)
@@ -419,7 +419,7 @@ module DataMigration
         app.notification_service.type = normalize_notification_service_classname(old_app["notification_service"]["_type"])
 
         # disable validate because have problem with different schemas in db
-        notification_service.save(:validate => false)
+        notification_service.save(validate: false)
       end
 
       def normalize_issue_tracker_classname(name)
@@ -434,7 +434,7 @@ module DataMigration
 
       def copy_watcher(app, old_watcher)
         # not app.watchers.new, cause it's reason for memory leak (if you has many watchers)
-        watcher = Watcher.new(:app_id => app.id)
+        watcher = Watcher.new(app_id: app.id)
         watcher.email = old_watcher["email"]
         if old_watcher["user_id"]
           watcher.user = User.find_by_remote_id(old_watcher["user_id"].to_s)
@@ -445,7 +445,7 @@ module DataMigration
 
       def copy_deploy(app, old_deploy)
         # not app.deploys.new, cause it's reason for memory leak (if you has many deploys)
-        deploy = Deploy.new(:app_id => app.id)
+        deploy = Deploy.new(app_id: app.id)
         copy_attributes_with_mapping(DEPLOY_FIELDS_MAPPING, old_deploy, deploy)
         deploy
       end
@@ -463,7 +463,7 @@ module DataMigration
         total = collection.find(options).count
         log "Start copy #{collection.name}, total: #{total}"
 
-        collection.find(options, :timeout => false, :sort => ["_id", "asc"]) do |cursor|
+        collection.find(options, timeout: false, sort: ["_id", "asc"]) do |cursor|
           counter = 0
           cursor.each do |item|
             log "  copying [#{collection.name}] ##{counter += 1} of #{total} with id '#{item["_id"]}'"

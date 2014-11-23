@@ -4,13 +4,13 @@
 
 class Err < ActiveRecord::Base
 
-  belongs_to :problem, :inverse_of => :errs
-  has_many :notices, :inverse_of => :err, :dependent => :destroy
+  belongs_to :problem, inverse_of: :errs
+  has_many :notices, inverse_of: :err, dependent: :destroy
   has_one :notice
-  has_many :comments, :dependent => :destroy
+  has_many :comments, dependent: :destroy
 
   validates_presence_of :problem, :fingerprint
 
-  delegate :app, :resolved?, :to => :problem
+  delegate :app, :resolved?, to: :problem
 
 end

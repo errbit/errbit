@@ -4,8 +4,8 @@ describe BacktraceLineHelper do
   describe "in app lines" do
     let(:notice) do
       Fabricate(:notice, :backtrace =>
-        Fabricate(:backtrace, :lines => [
-          Fabricate(:backtrace_line, :file => "[PROJECT_ROOT]/path/to/asset.rb")
+        Fabricate(:backtrace, lines: [
+          Fabricate(:backtrace_line, file: "[PROJECT_ROOT]/path/to/asset.rb")
         ])
       )
     end
@@ -33,9 +33,9 @@ describe BacktraceLineHelper do
         describe "and GIT_COMMIT is present in the environment" do
           let(:sha) { "1234567890" }
           let!(:notice) do
-            Fabricate(:notice, :request => {"cgi-data" => {"GIT_COMMIT" => sha}}, :backtrace =>
-              Fabricate(:backtrace, :lines => [
-                Fabricate(:backtrace_line, :file => "[PROJECT_ROOT]/path/to/asset.rb")
+            Fabricate(:notice, request: {"cgi-data" => {"GIT_COMMIT" => sha}}, :backtrace =>
+              Fabricate(:backtrace, lines: [
+                Fabricate(:backtrace_line, file: "[PROJECT_ROOT]/path/to/asset.rb")
               ])
             )
           end

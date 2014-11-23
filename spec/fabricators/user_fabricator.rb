@@ -5,6 +5,6 @@ Fabricator :user do
   password_confirmation 'password'
 end
 
-Fabricator :admin, :from => :user do
+Fabricator :admin, from: :user do
   admin true
 end

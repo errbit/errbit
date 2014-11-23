@@ -3,22 +3,22 @@ Fabricator(:app) do
   repository_branch 'master'
 end
 
-Fabricator(:app_with_watcher, :from => :app) do
+Fabricator(:app_with_watcher, from: :app) do
   after_create do |parent|
-    parent.watchers.create Fabricate.attributes_for(:watcher, :app => parent)
+    parent.watchers.create Fabricate.attributes_for(:watcher, app: parent)
   end
 end
 
-Fabricator(:app_with_user_watcher, :from => :app) do
+Fabricator(:app_with_user_watcher, from: :app) do
   after_create do |parent|
-    parent.watchers.create Fabricate.attributes_for(:user_watcher, :app => parent)
+    parent.watchers.create Fabricate.attributes_for(:user_watcher, app: parent)
   end
 end
 
-Fabricator(:app_with_deploys, :from => :app) do
+Fabricator(:app_with_deploys, from: :app) do
   after_create { |parent|
     3.times do
-      Fabricate(:deploy, :app => parent)
+      Fabricate(:deploy, app: parent)
     end
   }
 end
@@ -29,7 +29,7 @@ Fabricator(:watcher) do
   email   { sequence(:email){|n| "email#{n}@example.com"} }
 end
 
-Fabricator(:user_watcher, :from => :watcher) do
+Fabricator(:user_watcher, from: :watcher) do
   user
   watcher_type 'user'
 end

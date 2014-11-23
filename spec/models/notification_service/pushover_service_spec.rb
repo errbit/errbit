@@ -4,7 +4,7 @@ describe NotificationServices::PushoverService do
   it "it should send a notification to Pushover" do
     # setup
     notice = Fabricate :notice
-    notification_service = Fabricate :pushover_notification_service, :app => notice.app
+    notification_service = Fabricate :pushover_notification_service, app: notice.app
     problem = notice.problem
 
     # hoi stubbing

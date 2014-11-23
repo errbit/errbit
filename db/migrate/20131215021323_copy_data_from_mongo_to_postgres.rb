@@ -26,10 +26,10 @@ private
         database_name = settings.path.gsub(/^\//, '')
       else
         settings = OpenStruct.new({
-          :host => ENV['MONGOID_HOST'],
-          :port => ENV['MONGOID_PORT'],
-          :user => ENV['MONGOID_USERNAME'],
-          :password => ENV['MONGOID_PASSWORD']
+          host: ENV['MONGOID_HOST'],
+          port: ENV['MONGOID_PORT'],
+          user: ENV['MONGOID_USERNAME'],
+          password: ENV['MONGOID_PASSWORD']
         })
         database_name = ENV['MONGOID_DATABASE']
       end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "apps/show.atom.builder" do
   let(:app) { stub_model(App) }
   let(:problems) { [
-    stub_model(Problem, :message => 'foo', :app => app, :errs => [Fabricate(:err)])
+    stub_model(Problem, message: 'foo', app: app, errs: [Fabricate(:err)])
   ]}
 
   before do

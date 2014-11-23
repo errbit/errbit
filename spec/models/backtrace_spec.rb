@@ -19,7 +19,7 @@ describe Backtrace do
       }
       let(:fingerprint) { "fingerprint" }
 
-      before { subject.stub(:fingerprint => fingerprint) }
+      before { subject.stub(fingerprint: fingerprint) }
 
       its(:similar) { should == similar_backtrace }
     end
@@ -30,10 +30,10 @@ describe Backtrace do
     let(:attributes) { double :attributes }
     let(:backtrace) { double :backtrace }
 
-    before { described_class.stub(:new => backtrace) }
+    before { described_class.stub(new: backtrace) }
 
     context "no similar backtrace" do
-      before { backtrace.stub(:similar => nil) }
+      before { backtrace.stub(similar: nil) }
       it "create new backtrace" do
         expect(described_class).to receive(:create).with(attributes)
 
@@ -43,7 +43,7 @@ describe Backtrace do
 
     context "similar backtrace exist" do
       let(:similar_backtrace) { double :similar_backtrace }
-      before { backtrace.stub(:similar => similar_backtrace) }
+      before { backtrace.stub(similar: similar_backtrace) }
 
       it { should == similar_backtrace }
     end

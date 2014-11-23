@@ -1,6 +1,6 @@
 - content_for :title, 'Users'
 - content_for :action_bar do
-  %span= link_to('Add a New User', new_user_path, :class => 'add')
+  %span= link_to('Add a New User', new_user_path, class: 'add')
 
 %table.users
   %thead
@@ -16,7 +16,7 @@
     - users.each do |user|
       %tr.user_list
         - if Errbit::Config.use_gravatar
-          %td= gravatar_tag user.email, :s => 24
+          %td= gravatar_tag user.email, s: 24
         %td.nowrap= link_to user.name, user_path(user)
         - if Errbit::Config.user_has_username
           %td= user.username

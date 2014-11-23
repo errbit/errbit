@@ -5,7 +5,7 @@ describe NotificationServices::GtalkService do
     # setup
     notice = Fabricate :notice
     problem = notice.problem
-    notification_service = Fabricate :gtalk_notification_service, :app => notice.app
+    notification_service = Fabricate :gtalk_notification_service, app: notice.app
     problem = notice.problem
 
     #gtalk stubbing
@@ -36,7 +36,7 @@ http://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
     before(:each) do
       # setup
       @notice = Fabricate :notice
-      @notification_service = Fabricate :gtalk_notification_service, :app => @notice.app
+      @notification_service = Fabricate :gtalk_notification_service, app: @notice.app
       @problem = @notice.problem
       @error_msg = """#{@problem.app.name.to_s}
 http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
@@ -93,7 +93,7 @@ http://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
     # setup
     notice = Fabricate :notice
     problem = notice.problem
-    notification_service = Fabricate :gtalk_notification_service, :app => notice.app
+    notification_service = Fabricate :gtalk_notification_service, app: notice.app
     problem = notice.problem
 
     #gtalk stubbing

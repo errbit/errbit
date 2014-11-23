@@ -3,26 +3,26 @@ if defined? RedmineClient
     Label = "redmine"
     Fields = [
       [:account, {
-        :label       => "Redmine URL",
-        :placeholder => "http://www.redmine.org/"
+        label:       "Redmine URL",
+        placeholder: "http://www.redmine.org/"
       }],
       [:api_token, {
-        :placeholder => "API Token for your account"
+        placeholder: "API Token for your account"
       }],
       [:username, {
-        :placeholder => "Your username"
+        placeholder: "Your username"
       }],
       [:password, {
-        :placeholder => "Your password"
+        placeholder: "Your password"
       }],
       [:project_id, {
-        :label       => "Ticket Project",
-        :placeholder => "Redmine Project where tickets will be created"
+        label:       "Ticket Project",
+        placeholder: "Redmine Project where tickets will be created"
       }],
       [:alt_project_id, {
-        :optional    => true,
-        :label       => "App Project",
-        :placeholder => "Where app's files & revisions can be viewed. (Leave blank to use the above project by default)"
+        optional:    true,
+        label:       "App Project",
+        placeholder: "Where app's files & revisions can be viewed. (Leave blank to use the above project by default)"
       }]
     ]
 
@@ -44,13 +44,13 @@ if defined? RedmineClient
         self.site = acc
         self.format = :xml
       end
-      issue = RedmineClient::Issue.new(:project_id => project_id.to_s)
+      issue = RedmineClient::Issue.new(project_id: project_id.to_s)
       issue.subject = issue_title problem
       issue.description = body_template.result(binding)
       issue.save!
       problem.update_attributes(
-        :issue_link => "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, :project_id => project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}"),
-        :issue_type => Label
+        issue_link: "#{RedmineClient::Issue.site.to_s.sub(/#{RedmineClient::Issue.site.path}$/, '')}#{RedmineClient::Issue.element_path(issue.id, project_id: project_id)}".sub(/\.xml\?project_id=#{project_id}$/, "\?project_id=#{project_id}"),
+        issue_type: Label
       )
     end
 

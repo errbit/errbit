@@ -6,7 +6,7 @@
           %td.content(valign="top")
             %div
               %p
-                = link_to(@app.name, app_url(@app), :class => "bold")
+                = link_to(@app.name, app_url(@app), class: "bold")
                 was just deployed to
                 %span.bold= @deploy.environment
                 by

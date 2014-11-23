@@ -39,21 +39,21 @@ private
 
     attrs = {}
     attrs.merge!(
-      :first_notice_at          => first_notice.created_at,
-      :first_notice_commit      => first_notice.git_commit,
-      :first_notice_environment => first_notice.environment_name
+      first_notice_at:          first_notice.created_at,
+      first_notice_commit:      first_notice.git_commit,
+      first_notice_environment: first_notice.environment_name
     ) if first_notice
     attrs.merge!(
-      :last_notice_at           => last_notice.created_at,
-      :last_notice_commit       => last_notice.git_commit,
-      :last_notice_environment  => last_notice.environment_name
+      last_notice_at:           last_notice.created_at,
+      last_notice_commit:       last_notice.git_commit,
+      last_notice_environment:  last_notice.environment_name
     ) if last_notice
     attrs.merge!(
-      :message     => notice.message,
-      :where       => notice.where,
-      :messages    => attribute_count(:message, messages),
-      :hosts       => attribute_count(:host, hosts),
-      :user_agents => attribute_count(:user_agent_string, user_agents)
+      message:     notice.message,
+      where:       notice.where,
+      messages:    attribute_count(:message, messages),
+      hosts:       attribute_count(:host, hosts),
+      user_agents: attribute_count(:user_agent_string, user_agents)
     ) if notice
     problem.update_attributes!(attrs)
   end

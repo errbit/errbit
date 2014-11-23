@@ -7,24 +7,24 @@ gem 'pg'
 gem 'devise'
 gem 'haml'
 gem 'htmlentities'
-gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
+gem 'rack-ssl', require: 'rack/ssl'   # force SSL
 
 gem 'useragent'
 gem 'decent_exposure'
 gem 'strong_parameters'
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
-gem 'rack-ssl-enforcer', :require => false
+gem 'rack-ssl-enforcer', require: false
 gem 'fabrication'
 gem 'rails_autolink'
-gem 'progressbar', :require => false
+gem 'progressbar', require: false
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
 
 # Need for mongodb data import
-gem 'mongo', :require => false
-gem 'bson_ext', :require => false
+gem 'mongo', require: false
+gem 'bson_ext', require: false
 
 # Remove / comment out any of the gems below if you want to disable
 # a given issue tracker, notification service, or authentication.
@@ -34,21 +34,21 @@ gem 'bson_ext', :require => false
 # Lighthouse
 gem 'lighthouse-api'
 # Redmine
-gem 'oruen_redmine_client', :require => 'redmine_client'
+gem 'oruen_redmine_client', require: 'redmine_client'
 # Pivotal Tracker
 gem 'pivotal-tracker'
 # Fogbugz
-gem 'ruby-fogbugz', :require => 'fogbugz'
+gem 'ruby-fogbugz', require: 'fogbugz'
 # Github Issues
 gem 'octokit', '~> 1.18'
 # Gitlab
 gem 'gitlab', '~> 3.0.0'
 
 # Bitbucket Issues
-gem 'bitbucket_rest_api', :require => false
+gem 'bitbucket_rest_api', require: false
 
 # Jira
-gem 'jira-ruby', :require => 'jira'
+gem 'jira-ruby', require: 'jira'
 
 # Notification services
 # ---------------------------------------
@@ -56,7 +56,7 @@ gem 'campy'
 # Hipchat
 gem 'hipchat'
 # Google Talk
-gem 'xmpp4r', :require => ["xmpp4r", "xmpp4r/muc"]
+gem 'xmpp4r', require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
 gem 'hoi'
 # Pushover (iOS Push notifications)
@@ -77,8 +77,8 @@ gem 'multi_json'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'webmock', :require => false
-  gem 'airbrake', :require => false
+  gem 'webmock', require: false
+  gem 'airbrake', require: false
   gem 'pry-rails'
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
@@ -86,16 +86,16 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano', '~> 2.0', :require => false
+  gem 'capistrano', '~> 2.0', require: false
 
   # better errors
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'foreman', :require => false
+  gem 'foreman', require: false
 
   # Use puma for development
-  gem 'puma', :require => false
+  gem 'puma', require: false
 
 end
 
@@ -106,11 +106,11 @@ group :test do
   gem 'email_spec'
   gem 'timecop'
   gem 'test_after_commit'
-  gem 'coveralls', :require => false
+  gem 'coveralls', require: false
 end
 
 group :heroku, :production do
-  gem 'unicorn', :require => false
+  gem 'unicorn', require: false
 end
 
 
@@ -118,7 +118,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'execjs'
-  gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'therubyracer', platform: :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
   # We can't upgrade because not compatible to jquery >= 1.9.
   # To do that, we need fix the rails.js

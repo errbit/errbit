@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DataMigration, :skip => true do
+describe DataMigration, skip: true do
   before do
     load File.join(Rails.root, 'spec/fixtures/mongodb_data_for_export.rb')
     @apps = MongodbDataStubs.apps

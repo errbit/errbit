@@ -8,8 +8,8 @@ class Notice < ActiveRecord::Base
   serialize :user_attributes, Hash
   serialize :current_user, Hash
 
-  delegate :lines, :to => :backtrace, :prefix => true
-  delegate :app, :problem, :to => :err
+  delegate :lines, to: :backtrace, prefix: true
+  delegate :app, :problem, to: :err
 
   belongs_to :err
   belongs_to :backtrace
@@ -24,7 +24,7 @@ class Notice < ActiveRecord::Base
 
   scope :ordered, -> { reorder('created_at asc') }
   scope :reverse_ordered, -> { reorder('created_at desc') }
-  scope :for_errs, lambda {|errs| where(:err_id => errs.pluck(:id))}
+  scope :for_errs, lambda {|errs| where(err_id: errs.pluck(:id))}
   scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
   scope :after, lambda { |time| where(arel_table[:created_at].gteq(time)) }
 

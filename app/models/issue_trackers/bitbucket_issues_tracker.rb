@@ -9,12 +9,12 @@ if defined? BitBucket
     Note = 'Please configure your Bitbucket repository in the <strong>BITBUCKET REPO</strong> field above.'
     Fields = [
       [:api_token, {
-        :placeholder => "Your username on Bitbucket account",
-        :label => "Username"
+        placeholder: "Your username on Bitbucket account",
+        label: "Username"
       }],
       [:project_id, {
-        :placeholder => "Password for your Bitbucket account",
-        :label => "Password"
+        placeholder: "Password for your Bitbucket account",
+        label: "Password"
       }]
     ]
 
@@ -29,15 +29,15 @@ if defined? BitBucket
     end
 
     def create_issue(problem, reported_by = nil)
-      bitbucket = BitBucket.new :basic_auth => "#{api_token}:#{project_id}"
+      bitbucket = BitBucket.new basic_auth: "#{api_token}:#{project_id}"
 
       begin
         r_user = repo_name.split('/')[0]
         r_name = repo_name.split('/')[1]
-        issue = bitbucket.issues.create r_user, r_name, :title => issue_title(problem), :content => body_template.result(binding), :priority => 'critical'
+        issue = bitbucket.issues.create r_user, r_name, title: issue_title(problem), content: body_template.result(binding), priority: 'critical'
         problem.update_attributes(
-          :issue_link => "https://bitbucket.org/#{repo_name}/issue/#{issue.local_id}/",
-          :issue_type => Label
+          issue_link: "https://bitbucket.org/#{repo_name}/issue/#{issue.local_id}/",
+          issue_type: Label
         )
       rescue BitBucket::Error::Unauthorized
         raise IssueTrackers::AuthenticationError, "Could not authenticate with BitBucket. Please check your username and password."

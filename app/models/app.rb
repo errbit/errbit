@@ -26,7 +26,7 @@ class App < ActiveRecord::Base
     @tentative_issue_tracker = value
   end
   
-  after_save :commit_issue_tracker, :if => :has_tentative_issue_tracker?
+  after_save :commit_issue_tracker, if: :has_tentative_issue_tracker?
   
   def commit_issue_tracker
     set_issue_tracker @tentative_issue_tracker
@@ -49,7 +49,7 @@ class App < ActiveRecord::Base
     @tentative_notification_service = value
   end
   
-  after_save :commit_notification_service, :if => :has_tentative_notification_service?
+  after_save :commit_notification_service, if: :has_tentative_notification_service?
   
   def commit_notification_service
     set_notification_service @tentative_notification_service
@@ -58,25 +58,25 @@ class App < ActiveRecord::Base
 
 
 
-  has_many :problems, :inverse_of => :app, :dependent => :destroy
+  has_many :problems, inverse_of: :app, dependent: :destroy
 
-  before_validation :generate_api_key, :on => :create
+  before_validation :generate_api_key, on: :create
   before_save :normalize_github_repo
   after_update :store_cached_attributes_on_problems
   after_initialize :default_values
 
   validates_presence_of :name, :api_key
-  validates_uniqueness_of :name, :allow_blank => true
-  validates_uniqueness_of :api_key, :allow_blank => true
+  validates_uniqueness_of :name, allow_blank: true
+  validates_uniqueness_of :api_key, allow_blank: true
   validates_associated :watchers
   validate :check_issue_tracker
 
-  accepts_nested_attributes_for :watchers, :allow_destroy => true,
-    :reject_if => proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
-  accepts_nested_attributes_for :issue_tracker, :allow_destroy => true,
-    :reject_if => proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
-  accepts_nested_attributes_for :notification_service, :allow_destroy => true,
-    :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+  accepts_nested_attributes_for :watchers, allow_destroy: true,
+    reject_if: proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
+  accepts_nested_attributes_for :issue_tracker, allow_destroy: true,
+    reject_if: proc { |attrs| !IssueTracker.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+  accepts_nested_attributes_for :notification_service, allow_destroy: true,
+    reject_if: proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
   # Set default values for new record
   def default_values  
@@ -93,7 +93,7 @@ class App < ActiveRecord::Base
   #
   def find_or_create_err!(attrs)
     Err.where(
-      :fingerprint => attrs[:fingerprint]
+      fingerprint: attrs[:fingerprint]
     ).first ||
       problems.create!(attrs.slice(:error_class, :environment)).errs.create!(attrs.slice(:fingerprint, :problem_id))
   end

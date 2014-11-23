@@ -48,7 +48,7 @@ Errbit::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set default host for ActionMailer links
-  config.action_mailer.default_url_options = { :host => ENV['ERRBIT_HOST'] } if ENV['ERRBIT_HOST']
+  config.action_mailer.default_url_options = { host: ENV['ERRBIT_HOST'] } if ENV['ERRBIT_HOST']
 
   # Enable threaded mode
   # config.threadsafe!

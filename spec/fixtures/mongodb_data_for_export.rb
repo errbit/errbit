@@ -152,13 +152,13 @@ class MongodbDataStubs
     def db(name)
       {
         name => {
-          :apps => apps,
-          :users => users,
-          :problems => problems,
-          :comments => comments,
-          :errs => errs,
-          :notices => notices,
-          :backtraces => backtraces
+          apps: apps,
+          users: users,
+          problems: problems,
+          comments: comments,
+          errs: errs,
+          notices: notices,
+          backtraces: backtraces
         }
       }
     end

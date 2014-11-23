@@ -6,4 +6,4 @@
     - user.each do |key, value|
       %tr
         %th= key
-        %td= auto_link(auto_link(value.to_s, :urls, :target => "_blank"), :email_addresses).html_safe
+        %td= auto_link(auto_link(value.to_s, :urls, target: "_blank"), :email_addresses).html_safe

@@ -5,11 +5,11 @@ module NavigationHelper
   # Or on one of a list of controllers
   # - active_if_here([:users, :blogs, :comments])
   # Or on certain action(s) in a certain controller
-  #  - active_if_here(:users => :index, :blogs => [:create, :update], :comments)
+  #  - active_if_here(users: :index, blogs: [:create, :update], :comments)
   #
   # Useful for navigation elements that have a certain state when your on a given page.
   # Returns nil if there are no matches so when passing:
-  #  link_to 'link', '#', :class => active_if_here(:users)
+  #  link_to 'link', '#', class: active_if_here(:users)
   # will not even set a class attribute if nil is passed back.
   def active_if_here(matches)
     current_controller = controller.controller_name.to_sym

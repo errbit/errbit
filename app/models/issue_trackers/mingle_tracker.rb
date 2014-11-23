@@ -4,22 +4,22 @@ class IssueTrackers::MingleTracker < IssueTracker
 
   Fields = [
     [:account, {
-      :label       => "Mingle URL",
-      :placeholder => "http://mingle.example.com/"
+      label:       "Mingle URL",
+      placeholder: "http://mingle.example.com/"
     }],
     [:project_id, {
-      :placeholder => "Mingle project"
+      placeholder: "Mingle project"
     }],
     [:ticket_properties, {
-      :label       => "Card Properties",
-      :placeholder => "card_type = Defect, defect_status = Open, priority = Essential"
+      label:       "Card Properties",
+      placeholder: "card_type = Defect, defect_status = Open, priority = Essential"
     }],
     [:username, {
-      :label       => "Sign-in name",
-      :placeholder => "Sign-in name for your account"
+      label:       "Sign-in name",
+      placeholder: "Sign-in name for your account"
     }],
     [:password, {
-      :placeholder => "Password for your account"
+      placeholder: "Password for your account"
     }]
   ]
 
@@ -44,8 +44,8 @@ class IssueTrackers::MingleTracker < IssueTracker
 
     card.save!
     problem.update_attributes(
-      :issue_link => URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s,
-      :issue_type => Label
+      issue_link: URI.parse("#{account}/projects/#{project_id}/cards/#{card.id}").to_s,
+      issue_type: Label
     )
   end
 

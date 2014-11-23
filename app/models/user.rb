@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   after_initialize :default_values
 
   validates_presence_of :name
-  validates_uniqueness_of :github_login, :allow_nil => true
+  validates_uniqueness_of :github_login, allow_nil: true
 
   has_many :apps, through: :watchers
   has_many :watchers

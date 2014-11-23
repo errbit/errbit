@@ -5,7 +5,7 @@ describe IssueTrackers::GithubIssuesTracker do
     repo = "test_user/test_repo"
     notice = Fabricate :notice
     notice.app.github_repo = repo
-    tracker = Fabricate :github_issues_tracker, :app => notice.app
+    tracker = Fabricate :github_issues_tracker, app: notice.app
     problem = notice.problem
 
     number = 5
@@ -27,19 +27,19 @@ EOF
 
     stub_request(:post,
                  "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues").
-      to_return(:status => 201,
-                :headers => {
+      to_return(status: 201,
+                headers: {
         'Location' => @issue_link,
         'Content-Type' => 'application/json',
       },
-                :body => body )
+                body: body )
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
     requested = have_requested(:post, "https://#{tracker.username}:#{tracker.password}@api.github.com/repos/#{repo}/issues")
-    expect(WebMock).to requested.with(:body => /[production][foo#bar] FooError: Too Much Bar/)
-    expect(WebMock).to requested.with(:body => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(body: /[production][foo#bar] FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(body: /See this exception on Errbit/)
 
     expect(problem.issue_link).to eq @issue_link
   end

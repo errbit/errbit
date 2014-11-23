@@ -34,8 +34,8 @@ describe ResolvedProblemClearer do
         }.to change {
           Problem.count
         }.by(-2)
-        expect(Problem.where(:id => problems.first.id).first).to be_nil
-        expect(Problem.where(:id => problems.second.id).first).to be_nil
+        expect(Problem.where(id: problems.first.id).first).to be_nil
+        expect(Problem.where(id: problems.second.id).first).to be_nil
       end
     end
   end

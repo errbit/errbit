@@ -6,7 +6,7 @@ class BacktraceLine < ActiveRecord::Base
 
   scope :in_app, where("file ~ '^\\[PROJECT_ROOT\\](?!(/vendor))/?'")
 
-  delegate :app, :to => :backtrace
+  delegate :app, to: :backtrace
 
   def to_s
     "#{file_relative}:#{number}" << (column.present? ? ":#{column}" : "")

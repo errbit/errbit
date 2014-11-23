@@ -4,7 +4,7 @@ feature "Regeneration api_Key" do
   let!(:app) { Fabricate(:app) }
   let!(:admin) { Fabricate(:admin) }
   let(:user) {
-    Fabricate(:user_watcher, :app => app).user
+    Fabricate(:user_watcher, app: app).user
   }
 
   scenario "an admin change api_key" do

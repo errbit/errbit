@@ -25,8 +25,8 @@ describe ProblemMerge do
     let!(:problem_merge) { ProblemMerge.new(problem, problem_1) }
     let(:first_errs) { problem.errs }
     let(:merged_errs) { problem_1.errs }
-    let!(:notice) { Fabricate(:notice, :err => first_errs.first) }
-    let!(:notice_1) { Fabricate(:notice, :err => merged_errs.first) }
+    let!(:notice) { Fabricate(:notice, err: first_errs.first) }
+    let!(:notice_1) { Fabricate(:notice, err: merged_errs.first) }
 
     it 'delete one of problem' do
       expect {
@@ -40,13 +40,13 @@ describe ProblemMerge do
     end
 
     it 'update problem cache' do
-      expect(ProblemUpdaterCache).to receive(:new).with(problem).and_return(double(:update => true))
+      expect(ProblemUpdaterCache).to receive(:new).with(problem).and_return(double(update: true))
       problem_merge.merge
     end
 
     context "with problem with comment" do
-      let!(:comment) { Fabricate(:comment, :err => problem.errs.first ) }
-      let!(:comment_2) { Fabricate(:comment, :err => problem_1.errs.first, :user => comment.user ) }
+      let!(:comment) { Fabricate(:comment, err: problem.errs.first ) }
+      let!(:comment_2) { Fabricate(:comment, err: problem_1.errs.first, user: comment.user ) }
       
       it 'merge comment' do
         problem.comments(true)

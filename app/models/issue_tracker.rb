@@ -5,7 +5,7 @@ class IssueTracker < ActiveRecord::Base
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
   default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
 
-  belongs_to :app, :inverse_of => :issue_tracker
+  belongs_to :app, inverse_of: :issue_tracker
 
   validate :check_params
 

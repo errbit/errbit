@@ -7,7 +7,7 @@
 class ProblemsController < ApplicationController
   include ProblemsSearcher
 
-  before_filter :need_selected_problem, :only => [
+  before_filter :need_selected_problem, only: [
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
@@ -33,7 +33,7 @@ class ProblemsController < ApplicationController
 
   expose(:app_scope) {
     apps = current_user.admin? ? App.scoped : current_user.apps
-    params[:app_id] ? apps.where(:id => params[:app_id]) : apps
+    params[:app_id] ? apps.where(id: params[:app_id]) : apps
   }
 
   expose(:params_environement) {
@@ -88,13 +88,13 @@ class ProblemsController < ApplicationController
 
   def resolve_several
     selected_problems.each(&:resolve!)
-    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, :count => selected_problems.count)} been resolved."
+    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} been resolved."
     redirect_to :back
   end
 
   def unresolve_several
     selected_problems.each(&:unresolve!)
-    flash[:success] = "#{I18n.t(:n_errs_have, :count => selected_problems.count)} been unresolved."
+    flash[:success] = "#{I18n.t(:n_errs_have, count: selected_problems.count)} been unresolved."
     redirect_to :back
   end
 
@@ -109,20 +109,20 @@ class ProblemsController < ApplicationController
     else
       count = selected_problems.count
       ProblemMerge.new(selected_problems).merge
-      flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', :nb => count)
+      flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', nb: count)
     end
     redirect_to :back
   end
 
   def unmerge_several
     all = ProblemUnmerge.execute(selected_problems)
-    flash[:success] = "#{I18n.t(:n_errs_have, :count => all.length)} been unmerged."
+    flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} been unmerged."
     redirect_to :back
   end
 
   def destroy_several
     nb_problem_destroy = ProblemDestroy.execute(selected_problems)
-    flash[:notice] = "#{I18n.t(:n_errs_have, :count => nb_problem_destroy)} been deleted."
+    flash[:notice] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} been deleted."
     redirect_to :back
   end
 

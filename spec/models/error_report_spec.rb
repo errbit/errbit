@@ -30,7 +30,7 @@ describe ErrorReport do
     let!(:app) {
       Fabricate(
         :app,
-        :api_key => 'APIKEY'
+        api_key: 'APIKEY'
       )
     }
 
@@ -41,7 +41,6 @@ describe ErrorReport do
     end
 
     describe "#backtrace" do
-
       it 'should have valid backtrace' do
         expect(error_report.backtrace).to be_valid
       end
@@ -57,9 +56,9 @@ describe ErrorReport do
       end
       context "with notice generate by Airbrake gem" do
         let(:xml) { Airbrake::Notice.new(
-          :exception => Exception.new,
-          :api_key => 'APIKEY',
-          :project_root => Rails.root
+          exception: Exception.new,
+          api_key: 'APIKEY',
+          project_root: Rails.root
         ).to_xml }
         it 'save a notice' do
           expect {
@@ -141,7 +140,7 @@ describe ErrorReport do
       end
 
       it 'find the correct err for the notice' do
-        err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true))
+        err = Fabricate(:err, problem: Fabricate(:problem, resolved: true))
 
         ErrorReport.any_instance.stub(:fingerprint).and_return(err.fingerprint)
 
@@ -156,7 +155,7 @@ describe ErrorReport do
         before do
           app.notify_on_errs = true
           app.email_at_notices = [1]
-          app.watchers.build(:email => 'foo@example.com')
+          app.watchers.build(email: 'foo@example.com')
           app.save!
         end
         
@@ -210,7 +209,7 @@ describe ErrorReport do
       end
       context "with not valid api_key" do
         before do
-          App.where(:api_key => app.api_key).delete_all
+          App.where(api_key: app.api_key).delete_all
         end
         it "return false" do
           expect(error_report.valid?).to be false

@@ -3,17 +3,17 @@ if defined? Fogbugz
     Label = "fogbugz"
     Fields = [
       [:project_id, {
-        :label       => "Area Name"
+        label:       "Area Name"
       }],
       [:account, {
-        :label       => "FogBugz URL",
-        :placeholder => "abc from http://abc.fogbugz.com/"
+        label:       "FogBugz URL",
+        placeholder: "abc from http://abc.fogbugz.com/"
       }],
       [:username, {
-        :placeholder => "Username/Email for your account"
+        placeholder: "Username/Email for your account"
       }],
       [:password, {
-        :placeholder => "Password for your account"
+        placeholder: "Password for your account"
       }]
     ]
 
@@ -24,7 +24,7 @@ if defined? Fogbugz
     end
 
     def create_issue(problem, reported_by = nil)
-      fogbugz = Fogbugz::Interface.new(:email => username, :password => password, :uri => "https://#{account}.fogbugz.com")
+      fogbugz = Fogbugz::Interface.new(email: username, password: password, uri: "https://#{account}.fogbugz.com")
       fogbugz.authenticate
 
       issue = {}
@@ -36,8 +36,8 @@ if defined? Fogbugz
 
       fb_resp = fogbugz.command(:new, issue)
       problem.update_attributes(
-        :issue_link => "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}",
-        :issue_type => Label
+        issue_link: "https://#{account}.fogbugz.com/default.asp?#{fb_resp['case']['ixBug']}",
+        issue_type: Label
       )
 
     end

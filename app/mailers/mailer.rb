@@ -6,7 +6,7 @@ class Mailer < ActionMailer::Base
   helper ApplicationHelper
   helper BacktraceLineHelper
 
-  default :from => Errbit::Config.email_from
+  default from: Errbit::Config.email_from
 
   def err_notification(notice)
     @notice   = notice
@@ -15,16 +15,16 @@ class Mailer < ActionMailer::Base
     count = @notice.similar_count
     count = count > 1 ? "(#{count}) " : ""
 
-    mail :to      => @app.notification_recipients,
-         :subject => "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+    mail to:      @app.notification_recipients,
+         subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
   def deploy_notification(deploy)
     @deploy   = deploy
     @app  = deploy.app
 
-    mail :to       => @app.notification_recipients,
-         :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
+    mail to:       @app.notification_recipients,
+         subject:  "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
   end
 
   def comment_notification(comment)
@@ -36,7 +36,7 @@ class Mailer < ActionMailer::Base
 
     recipients = @comment.notification_recipients
 
-    mail :to      => recipients,
-         :subject => "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+    mail to:      recipients,
+         subject: "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 end

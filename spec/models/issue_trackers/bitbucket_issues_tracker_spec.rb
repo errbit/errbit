@@ -5,7 +5,7 @@ describe IssueTrackers::BitbucketIssuesTracker do
     repo = "test_user/test_repo"
     notice = Fabricate :notice
     notice.app.bitbucket_repo = repo
-    tracker = Fabricate :bitbucket_issues_tracker, :app => notice.app
+    tracker = Fabricate :bitbucket_issues_tracker, app: notice.app
     problem = notice.problem
 
     number = 123
@@ -26,14 +26,14 @@ describe IssueTrackers::BitbucketIssuesTracker do
 }
 EOF
 
-    stub_request(:post, "https://#{tracker.api_token}:#{tracker.project_id}@bitbucket.org/api/1.0/repositories/test_user/test_repo/issues/").to_return(:status => 200, :headers => {}, :body => body )
+    stub_request(:post, "https://#{tracker.api_token}:#{tracker.project_id}@bitbucket.org/api/1.0/repositories/test_user/test_repo/issues/").to_return(status: 200, headers: {}, body: body )
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
     requested = have_requested(:post, "https://#{tracker.api_token}:#{tracker.project_id}@bitbucket.org/api/1.0/repositories/test_user/test_repo/issues/")
-    expect(WebMock).to requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
-    expect(WebMock).to requested.with(:content => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(title: /[production][foo#bar] FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(content: /See this exception on Errbit/)
 
     expect(problem.issue_link).to eq @issue_link
   end

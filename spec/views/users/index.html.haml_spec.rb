@@ -5,7 +5,7 @@ describe 'users/index.html.haml' do
   before {
     view.stub(:current_user).and_return(user)
     view.stub(:users).and_return(
-      Kaminari.paginate_array([user], :total_count => 1).page(1)
+      Kaminari.paginate_array([user], total_count: 1).page(1)
     )
   }
   it 'should see users option' do

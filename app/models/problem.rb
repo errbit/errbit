@@ -9,16 +9,16 @@ class Problem < ActiveRecord::Base
   serialize :hosts, Hash
 
   belongs_to :app, inverse_of: :problems
-  has_many :errs, :inverse_of => :problem, :dependent => :destroy
-  has_many :comments, :through => :errs
+  has_many :errs, inverse_of: :problem, dependent: :destroy
+  has_many :comments, through: :errs
 
   validates_presence_of :environment
 
   before_create :cache_app_attributes
   after_initialize :default_values
 
-  scope :resolved, where(:resolved => true)
-  scope :unresolved, where(:resolved => false)
+  scope :resolved, where(resolved: true)
+  scope :unresolved, where(resolved: false)
   scope :ordered, order("last_notice_at desc")
 
   def self.for_apps(apps)
@@ -46,12 +46,12 @@ class Problem < ActiveRecord::Base
     if fetch_all
       scoped
     else
-      where(:resolved => false)
+      where(resolved: false)
     end
   end
 
   def self.in_env(env)
-    env.present? ? where(:environment => env) : scoped
+    env.present? ? where(environment: env) : scoped
   end
 
   def notices
@@ -63,11 +63,11 @@ class Problem < ActiveRecord::Base
   end
 
   def resolve!
-    self.update_attributes!(:resolved => true, :resolved_at => Time.now)
+    self.update_attributes!(resolved: true, resolved_at: Time.now)
   end
 
   def unresolve!
-    self.update_attributes!(:resolved => false, :resolved_at => nil)
+    self.update_attributes!(resolved: false, resolved_at: nil)
   end
 
   def unresolved?
@@ -111,7 +111,7 @@ class Problem < ActiveRecord::Base
   def cache_app_attributes
     if app
       self.app_name = app.name
-      self.last_deploy_at = if (last_deploy = app.deploys.where(:environment => self.environment).last)
+      self.last_deploy_at = if (last_deploy = app.deploys.where(environment: self.environment).last)
         last_deploy.created_at.utc
       end
       Problem.where(id: self).update_all(
@@ -123,9 +123,9 @@ class Problem < ActiveRecord::Base
 
   def remove_cached_notice_attributes(notice)
     update_attributes!(
-      :messages    => attribute_count_descrease(:messages, notice.message),
-      :hosts       => attribute_count_descrease(:hosts, notice.host),
-      :user_agents => attribute_count_descrease(:user_agents, notice.user_agent_string)
+      messages:    attribute_count_descrease(:messages, notice.message),
+      hosts:       attribute_count_descrease(:hosts, notice.host),
+      user_agents: attribute_count_descrease(:user_agents, notice.user_agent_string)
     )
   end
 

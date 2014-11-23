@@ -4,7 +4,7 @@ describe IssueTrackers::UnfuddleTracker do
 
   let(:issue_link) { "https://test.unfuddle.com/projects/15/tickets/2436" }
   let(:notice) { Fabricate :notice }
-  let(:tracker) { Fabricate :unfuddle_issues_tracker, :app => notice.app }
+  let(:tracker) { Fabricate :unfuddle_issues_tracker, app: notice.app }
   let(:problem) { notice.problem }
 
   it "should create an issue on Unfuddle Issues with problem params, and set issue link for problem" do
@@ -73,18 +73,18 @@ EOF
 EOF
 
     stub_request(:get, "https://#{tracker.username}:#{tracker.password}@test.unfuddle.com/api/v1/projects/#{tracker.project_id}.xml").
-      to_return(:status => 200, :body => project_xml, :headers => {})
+      to_return(status: 200, body: project_xml, headers: {})
 
 
     stub_request(:post, "https://#{tracker.username}:#{tracker.password}@test.unfuddle.com/api/v1/projects/#{tracker.project_id}/tickets.xml").
-      to_return(:status => 200, :body => ticket_xml, :headers => {})
+      to_return(status: 200, body: ticket_xml, headers: {})
 
     problem.app.issue_tracker.create_issue(problem)
     problem.reload
 
     requested = have_requested(:post,"https://#{tracker.username}:#{tracker.password}@test.unfuddle.com/api/v1/projects/#{tracker.project_id}/tickets.xml" )
-    expect(WebMock).to requested.with(:title => /[production][foo#bar] FooError: Too Much Bar/)
-    expect(WebMock).to requested.with(:content => /See this exception on Errbit/)
+    expect(WebMock).to requested.with(title: /[production][foo#bar] FooError: Too Much Bar/)
+    expect(WebMock).to requested.with(content: /See this exception on Errbit/)
 
     expect(problem.issue_link).to eq issue_link
     expect(problem.issue_type).to eq IssueTrackers::UnfuddleTracker::Label

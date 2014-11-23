@@ -3,7 +3,7 @@ class IssueCreation
 
   attr_reader :problem, :user, :tracker_name
 
-  delegate :app, :to => :problem
+  delegate :app, to: :problem
 
   def initialize(problem, user, tracker_name)
     @problem = problem
@@ -22,9 +22,9 @@ class IssueCreation
         errors.add :base, "You haven't linked your Github account."
       else
         @tracker = IssueTrackers::GithubIssuesTracker.new(
-          :app         => app,
-          :username    => user.github_login,
-          :oauth_token => user.github_oauth_token
+          app:         app,
+          username:    user.github_login,
+          oauth_token: user.github_oauth_token
         )
       end
 

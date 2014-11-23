@@ -3,19 +3,19 @@ if defined? Gitlab
     Label = "gitlab"
     Fields = [
       [:account, {
-        :label       => "Gitlab URL",
-        :placeholder => "e.g. https://example.net"
+        label:       "Gitlab URL",
+        placeholder: "e.g. https://example.net"
       }],
       [:api_token, {
-        :placeholder => "API Token for your account"
+        placeholder: "API Token for your account"
       }],
       [:project_id, {
-        :label       => "Ticket Project ID (use Number)",
-        :placeholder => "Gitlab Project where issues will be created"
+        label:       "Ticket Project ID (use Number)",
+        placeholder: "Gitlab Project where issues will be created"
       }],
       [:alt_project_id, {
-        :label       => "Project Name (namespace/project)",
-        :placeholder => "Gitlab Project where issues will be created"
+        label:       "Project Name (namespace/project)",
+        placeholder: "Gitlab Project where issues will be created"
       }]
     ]
 
@@ -34,7 +34,7 @@ if defined? Gitlab
       title = issue_title problem
       description_summary = summary_template.result(binding)
       description_body = body_template.result(binding)
-      ticket = Gitlab.create_issue(project_id, title, { :description => description_summary, :labels => "errbit" } )
+      ticket = Gitlab.create_issue(project_id, title, { description: description_summary, labels: "errbit" } )
       Gitlab.create_issue_note(project_id, ticket.id, description_body)
     end
 

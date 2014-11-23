@@ -6,10 +6,10 @@ class WatchersController < ApplicationController
   end
 
   expose(:watcher) do
-    app.watchers.where(:user_id => params[:id]).first
+    app.watchers.where(user_id: params[:id]).first
   end
 
-  before_filter :require_watcher_edit_priviledges, :only => [:destroy]
+  before_filter :require_watcher_edit_priviledges, only: [:destroy]
 
   def destroy
     app.watchers.delete(watcher)

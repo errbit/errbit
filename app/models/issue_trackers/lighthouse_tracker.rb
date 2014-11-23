@@ -3,16 +3,16 @@ if defined? Lighthouse
     Label = "lighthouseapp"
     Fields = [
       [:account, {
-        :label       => "Subdomain",
-        :placeholder => "subdomain from http://{{subdomain}}.lighthouseapp.com"
+        label:       "Subdomain",
+        placeholder: "subdomain from http://{{subdomain}}.lighthouseapp.com"
       }],
       [:api_token, {
-        :label       => "API Token",
-        :placeholder => "123456789abcdef123456789abcdef"
+        label:       "API Token",
+        placeholder: "123456789abcdef123456789abcdef"
       }],
       [:project_id, {
-        :label       => "Project ID",
-        :placeholder => "123456"
+        label:       "Project ID",
+        placeholder: "123456"
       }]
     ]
 
@@ -28,7 +28,7 @@ if defined? Lighthouse
       # updating lighthouse account
       Lighthouse::Ticket.site
       Lighthouse::Ticket.format = :xml
-      ticket = Lighthouse::Ticket.new(:project_id => project_id)
+      ticket = Lighthouse::Ticket.new(project_id: project_id)
       ticket.title = issue_title problem
 
       ticket.body = body_template.result(binding)
@@ -36,8 +36,8 @@ if defined? Lighthouse
       ticket.tags << "errbit"
       ticket.save!
       problem.update_attributes(
-        :issue_link => "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, :project_id => project_id)}".sub(/\.xml$/, ''),
-        :issue_type => Label
+        issue_link: "#{Lighthouse::Ticket.site.to_s.sub(/#{Lighthouse::Ticket.site.path}$/, '')}#{Lighthouse::Ticket.element_path(ticket.id, project_id: project_id)}".sub(/\.xml$/, ''),
+        issue_type: Label
       )
 
     end

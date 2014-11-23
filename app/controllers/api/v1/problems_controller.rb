@@ -29,14 +29,14 @@ class Api::V1::ProblemsController < ApplicationController
 
     presenter = ProblemPresenter
     if params[:comments].to_s.downcase == "true"
-      problems = problems.includes(:comments => :user)
+      problems = problems.includes(comments: :user)
       presenter = ProblemWithCommentsPresenter
     end
 
     respond_to do |format|
-      format.html { render :json => presenter.new(self, problems) } # render JSON if no extension specified on path
-      format.json { render :json => presenter.new(self, problems) }
-      format.xml  { render :xml  => presenter.new(self, problems).as_json }
+      format.html { render json: presenter.new(self, problems) } # render JSON if no extension specified on path
+      format.json { render json: presenter.new(self, problems) }
+      format.xml  { render xml:  presenter.new(self, problems).as_json }
     end
   end
 
@@ -58,7 +58,7 @@ class Api::V1::ProblemsController < ApplicationController
     else
       count = selected_problems.count
       ProblemMerge.new(selected_problems).merge
-      render json: I18n.t('controllers.problems.flash.merge_several.success', :nb => count), status: 200
+      render json: I18n.t('controllers.problems.flash.merge_several.success', nb: count), status: 200
     end
   end
 
@@ -67,7 +67,7 @@ class Api::V1::ProblemsController < ApplicationController
       render json: I18n.t('controllers.problems.flash.no_select_problem'), status: 422
     else
       all = selected_problems.map(&:unmerge!).flatten
-      render json: "#{I18n.t(:n_errs_have, :count => all.length)} been unmerged.", status: 200
+      render json: "#{I18n.t(:n_errs_have, count: all.length)} been unmerged.", status: 200
     end
   end
 
@@ -76,7 +76,7 @@ class Api::V1::ProblemsController < ApplicationController
       render json: I18n.t('controllers.problems.flash.no_select_problem'), status: 422
     else
       nb_problem_destroy = ProblemDestroy.execute(selected_problems)
-      render json: "#{I18n.t(:n_errs_have, :count => nb_problem_destroy)} been deleted.", status: 200
+      render json: "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} been deleted.", status: 200
     end
   end
 

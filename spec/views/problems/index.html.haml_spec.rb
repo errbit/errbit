@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "problems/index.html.haml" do
-  let(:problem_1) { Fabricate(:err, :problem => Fabricate(:problem)).problem }
-  let(:problem_2) { Fabricate(:err, :problem => Fabricate(:problem, :app => problem_1.app)).problem }
+  let(:problem_1) { Fabricate(:err, problem: Fabricate(:problem)).problem }
+  let(:problem_2) { Fabricate(:err, problem: Fabricate(:problem, app: problem_1.app)).problem }
 
   before do
     # view.stub(:app).and_return(problem.app)

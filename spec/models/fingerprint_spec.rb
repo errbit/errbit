@@ -121,7 +121,7 @@ private
 
   # Backtrace for AirbrakeTestingException on Rails 4.0.4 and Ruby 2.0.0
   def backtrace_with_no_in_app_lines
-    Backtrace.create(:raw => [
+    Backtrace.create(raw: [
       line("activesupport-4.0.4/lib/active_support/callbacks.rb",   377, "_run__FRAGMENT__process_action__callbacks"),
       line("activesupport-4.0.4/lib/active_support/callbacks.rb",    80, "run_callbacks"),
       line("actionpack-4.0.4/lib/abstract_controller/callbacks.r",   17, "process_action"),
@@ -135,7 +135,7 @@ private
   end
 
   def backtrace_with_in_app_lines1
-    Backtrace.create(:raw => [
+    Backtrace.create(raw: [
       line("[GEM_ROOT]/gems/activerecord-4.0.3/lib/active_record/relation/query_methods.rb", 1026),
       line("[GEM_ROOT]/gems/activerecord-4.0.3/lib/active_record/relation/query_methods.rb", 1024),
       line("[GEM_ROOT]/gems/activerecord-4.0.3/lib/active_record/relation/query_methods.rb", 1024),
@@ -150,7 +150,7 @@ private
   end
 
   def backtrace_with_in_app_lines2
-    Backtrace.create(:raw => [
+    Backtrace.create(raw: [
       line("[GEM_ROOT]/gems/activerecord-4.0.3/lib/active_record/relation/query_methods.rb", 1026),
       line("[GEM_ROOT]/gems/activerecord-4.0.3/lib/active_record/relation/query_methods.rb", 1024),
       line("[GEM_ROOT]/gems/activerecord-4.0.3/lib/active_record/relation/query_methods.rb", 1024),

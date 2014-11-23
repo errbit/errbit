@@ -8,14 +8,14 @@
               %p
                 = @user.name
                 has just commented on an error that occurred in
-                = link_to(@app.name, app_url(@app), :class => "bold") << ","
+                = link_to(@app.name, app_url(@app), class: "bold") << ","
                 on the
                 %span.bold= @problem.environment
                 environment.
                 %br
                 This err has occurred #{pluralize @problem.notices_count, 'time'}.
               %p
-                = link_to("Click here to view the error and add a comment on Errbit", app_problem_url(@app, @problem), :class => "bold") << "."
+                = link_to("Click here to view the error and add a comment on Errbit", app_problem_url(@app, @problem), class: "bold") << "."
 
 %tr
   %td.section

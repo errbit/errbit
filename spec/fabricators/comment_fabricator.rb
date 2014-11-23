@@ -1,5 +1,5 @@
 Fabricator :comment do
   user
   body       'Test comment'
-  err(:fabricator => :err)
+  err(fabricator: :err)
 end

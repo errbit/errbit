@@ -3,11 +3,11 @@ if defined? HipChat
     Label = 'hipchat'
     Fields += [
       [:api_token, {
-        :placeholder => "API Token"
+        placeholder: "API Token"
       }],
       [:room_id, {
-        :placeholder => "Room name",
-        :label       => "Room name"
+        placeholder: "Room name",
+        label:       "Room name"
       }],
     ]
 
@@ -30,7 +30,7 @@ if defined? HipChat
       MSG
 
       client = HipChat::Client.new(api_token)
-      client[room_id].send('Errbit', message, :color => 'red')
+      client[room_id].send('Errbit', message, color: 'red')
     end
   end
 end

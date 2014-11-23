@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ProblemUpdaterCache do
   let(:problem) { Fabricate(:problem_with_errs) }
   let(:first_errs) { problem.errs }
-  let!(:notice) { Fabricate(:notice, :err => first_errs.first) }
+  let!(:notice) { Fabricate(:notice, err: first_errs.first) }
 
   describe "#update" do
     context "without notice pass args" do
@@ -21,7 +21,7 @@ describe ProblemUpdaterCache do
 
       context "with only one notice" do
         before do
-          problem.update_attributes!(:messages => {})
+          problem.update_attributes!(messages: {})
           ProblemUpdaterCache.new(problem).update
         end
 
@@ -58,10 +58,10 @@ describe ProblemUpdaterCache do
       end
 
       context "with several notices" do
-        let!(:notice_2) { Fabricate(:notice, :err => first_errs.first) }
-        let!(:notice_3) { Fabricate(:notice, :err => first_errs.first) }
+        let!(:notice_2) { Fabricate(:notice, err: first_errs.first) }
+        let!(:notice_3) { Fabricate(:notice, err: first_errs.first) }
         before do
-          problem.update_attributes!(:messages => {})
+          problem.update_attributes!(messages: {})
           ProblemUpdaterCache.new(problem).update
         end
         it 'update information about this notice' do

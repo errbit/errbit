@@ -11,7 +11,7 @@ class RefingerprintErrs
     errs_with_no_notices = []
     errs_with_mismatched_notices = []
     map = {}
-    Err.includes(:problem, :notices => {:backtrace => :lines}).find_each(batch_size: 300) do |err|
+    Err.includes(:problem, notices: {backtrace: :lines}).find_each(batch_size: 300) do |err|
       fingerprints = err.notices.map { |notice| Fingerprint.generate(notice, err.problem.app_id) }
 
       if fingerprints.empty?
@@ -37,7 +37,7 @@ class RefingerprintErrs
 
   def execute
     pbar = ProgressBar.new("fingerprints", Err.count)
-    Err.includes(:problem, :notice => {:backtrace => :lines}).find_each do |err|
+    Err.includes(:problem, notice: {backtrace: :lines}).find_each do |err|
       next if err.notice.nil?
       err.update_column :fingerprint, Fingerprint.generate(err.notice, err.problem.app_id)
       pbar.inc

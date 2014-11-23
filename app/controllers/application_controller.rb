@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     (location == root_path && current_user.apps.count == 1) ? app_path(current_user.apps.first) : location
   end
 
-  rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
+  rescue_from ActionController::RedirectBackError, with: :redirect_to_root
 
   class StrongParametersWithEagerAttributesStrategy < DecentExposure::StrongParametersStrategy
     def attributes

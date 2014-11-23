@@ -35,12 +35,12 @@ end
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.include Devise::TestHelpers, :type => :controller
-  config.filter_run :focused => true
+  config.include Devise::TestHelpers, type: :controller
+  config.filter_run focused: true
   config.run_all_when_everything_filtered = true
-  config.alias_example_to :fit, :focused => true
+  config.alias_example_to :fit, focused: true
   config.use_transactional_fixtures = true
-  config.filter_run_excluding :skip => true
+  config.filter_run_excluding skip: true
   config.formatter = :documentation
   config.color_enabled = true
 
@@ -48,14 +48,14 @@ RSpec.configure do |config|
   DatabaseCleaner.clean
   config.include WebMock::API
 
-  config.include Haml, :type => :helper
-  config.include Haml::Helpers, :type => :helper
-  config.before(:each, :type => :helper) do |config|
+  config.include Haml, type: :helper
+  config.include Haml::Helpers, type: :helper
+  config.before(:each, type: :helper) do |config|
     init_haml_helpers
   end
 
   config.after(:all) do
-    WebMock.disable_net_connect! :allow => /coveralls\.io/
+    WebMock.disable_net_connect! allow: /coveralls\.io/
   end
 end
 

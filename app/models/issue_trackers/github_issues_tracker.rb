@@ -7,10 +7,10 @@ if defined? Octokit
 
     Fields = [
       [:username, {
-        :placeholder => "Your username on GitHub"
+        placeholder: "Your username on GitHub"
       }],
       [:password, {
-        :placeholder => "Password for your account"
+        placeholder: "Password for your account"
       }]
     ]
 
@@ -29,9 +29,9 @@ if defined? Octokit
     def create_issue(problem, reported_by = nil)
       # Login using OAuth token, if given.
       if oauth_token
-        client = Octokit::Client.new(:login => username, :oauth_token => oauth_token)
+        client = Octokit::Client.new(login: username, oauth_token: oauth_token)
       else
-        client = Octokit::Client.new(:login => username, :password => password)
+        client = Octokit::Client.new(login: username, password: password)
       end
 
       begin
@@ -41,8 +41,8 @@ if defined? Octokit
           body_template.result(binding).unpack('C*').pack('U*')
         )
         problem.update_attributes(
-          :issue_link => issue.html_url,
-          :issue_type => Label
+          issue_link: issue.html_url,
+          issue_type: Label
         )
 
       rescue Octokit::Unauthorized

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Comment do
   context 'validations' do
     it 'should require a body' do
-      comment = Fabricate.build(:comment, :body => nil)
+      comment = Fabricate.build(:comment, body: nil)
       expect(comment).to_not be_valid
       expect(comment.errors[:body]).to include("can't be blank")
     end
@@ -11,13 +11,13 @@ describe Comment do
 
   context 'notification_recipients' do
     let(:app) { Fabricate(:app) }
-    let!(:watcher) { Fabricate(:watcher, :app => app) }
-    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)) }
-    let(:comment_user) { Fabricate(:user, :email => 'author@example.com') }
-    let(:comment) { Fabricate.build(:comment, :err => err, :user => comment_user) }
+    let!(:watcher) { Fabricate(:watcher, app: app) }
+    let(:err) { Fabricate(:err, problem: Fabricate(:problem, app: app)) }
+    let(:comment_user) { Fabricate(:user, email: 'author@example.com') }
+    let(:comment) { Fabricate.build(:comment, err: err, user: comment_user) }
 
     before do
-      Fabricate(:user_watcher, :app => app, :user => comment_user)
+      Fabricate(:user_watcher, app: app, user: comment_user)
       app.watchers(true)
     end
 
@@ -27,14 +27,14 @@ describe Comment do
   end
 
   context 'emailable?' do
-    let(:app) { Fabricate(:app, :notify_on_errs => true) }
-    let!(:watcher) { Fabricate(:watcher, :app => app) }
-    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app)) }
-    let(:comment_user) { Fabricate(:user, :email => 'author@example.com') }
-    let(:comment) { Fabricate.build(:comment, :err => err, :user => comment_user) }
+    let(:app) { Fabricate(:app, notify_on_errs: true) }
+    let!(:watcher) { Fabricate(:watcher, app: app) }
+    let(:err) { Fabricate(:err, problem: Fabricate(:problem, app: app)) }
+    let(:comment_user) { Fabricate(:user, email: 'author@example.com') }
+    let(:comment) { Fabricate.build(:comment, err: err, user: comment_user) }
 
     before do
-      Fabricate(:user_watcher, :app => app, :user => comment_user)
+      Fabricate(:user_watcher, app: app, user: comment_user)
       app.watchers(true)
     end
 

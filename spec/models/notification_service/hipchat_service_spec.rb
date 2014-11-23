@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe NotificationServices::HipchatService do
   let(:service) { Fabricate.build(:hipchat_notification_service) }
-  let(:problem) { Fabricate(:err, :problem => Fabricate(:problem)).problem }
+  let(:problem) { Fabricate(:err, problem: Fabricate(:problem)).problem }
   let(:room) { double }
 
   before do
@@ -15,7 +15,7 @@ describe NotificationServices::HipchatService do
   end
 
   it 'escapes html in message' do
-    problem.stub(:message => '<3')
+    problem.stub(message: '<3')
     expect(room).to receive(:send) do |_, message|
       expect(message).to_not include('<3')
       expect(message).to include('&lt;3')
