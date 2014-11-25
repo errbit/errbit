@@ -238,8 +238,8 @@ Authentication
 If you hosted Errbit at errbit.example.com, you would fill in:
 
 <table>
-  <tr><th>URL:</th><td>http://errbit.example.com/</td></tr>
-  <tr><th>Callback URL:</th><td>http://errbit.example.com/users/auth/github</td></tr>
+  <tr><th>URL:</th><td><a href="http://errbit.example.com/">http://errbit.example.com/</a></td></tr>
+  <tr><th>Callback URL:</th><td><a href="http://errbit.example.com/users/auth/github">http://errbit.example.com/users/auth/github</a></td></tr>
 </table>
 
   * After you have registered your app, set `github_client_id` and `github_secret`
