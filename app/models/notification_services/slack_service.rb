@@ -1,32 +1,24 @@
 class NotificationServices::SlackService < NotificationService
   Label = "slack"
   Fields += [
-    [:subdomain, {
-      :placeholder => 'subdomain',
-      :label => 'Subdomain portion for Slack service'
-    }],
-    [:api_token, {
-      :placeholder => 'Slack Integration Token',
+    [:webhook_url, {
+      :placeholder => 'Slack Webhook URL',
       :label => 'Token'
-    }],
-    [:room_id, {
-      :placeholder => '#general',
-      :label => 'Room where Slack should notify'
     }]
   ]
 
   def check_params
-    if Fields.detect {|f| self[f[0]].blank? unless f[0] == :room_id }
-      errors.add :base, "You must specify your Slack subdomain and token."
+    if Fields.detect {|f| self[f[0]].blank? }
+      errors.add :base, "You must specify your Slack webhook url."
     end
   end
 
   def url
-    "https://#{subdomain}.slack.com/services/hooks/incoming-webhook?token=#{api_token}"
+    webhook_url
   end
 
   def message_for_slack(problem)
-    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem_url(problem)}"
+    "*#{problem.app.name}* (#{problem.environment}) - *#{problem.where}*: `#{problem.error_class}: #{problem.message}` - #{problem.notices_count}) times, <#{problem_url(problem)}|view details>"
   end
 
   def post_payload(problem)
