@@ -41,7 +41,10 @@ class Api::V1::ProblemsController < ApplicationController
   end
 
   def resolve
-    problem.resolve!
+    unless problem.resolved?
+      err.comments.create!(body: params[:message]) if params[:message]
+      problem.resolve!
+    end
     head :ok
   end
 

@@ -110,6 +110,24 @@ describe Api::V1::ProblemsController do
         put :resolve, id: 1999, auth_token: @user.authentication_token
         expect(response).to be_not_found
       end
+
+      describe "when supplied a message" do
+        it "should create a comment and resolve the problem" do
+          controller.stub(:problem).and_return(problem)
+          expect(problem).to receive(:resolve!)
+          put :resolve, id: err.id, auth_token: @user.authentication_token, message: "Resolved by the Test Suite"
+          expect(response).to be_success
+          expect(err.comments.pluck(:body)).to eq(["Resolved by the Test Suite"])
+        end
+
+        it "should not create a comment if the problem is already resolved" do
+          problem.resolve!
+          controller.stub(:problem).and_return(problem)
+          put :resolve, id: err.id, auth_token: @user.authentication_token, message: "Resolved by the Test Suite"
+          expect(response).to be_success
+          expect(err.comments.count).to eq(0)
+        end
+      end
     end
 
 
