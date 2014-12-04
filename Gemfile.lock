@@ -1,52 +1,33 @@
-GIT
-  remote: git://github.com/mongoid/mongoid.git
-  revision: dba1c17b1dba667e50347ab616aaf6f2e1bee094
-  specs:
-    mongoid (4.0.0.beta1)
-      activemodel (>= 4.0.0)
-      moped (~> 2.0.beta6)
-      origin (~> 2.1)
-      tzinfo (>= 0.3.37)
-
-GIT
-  remote: git://github.com/mongoid/moped.git
-  revision: e238b4a757d64d980e3137c5b57a37a1729733a9
-  specs:
-    moped (2.0.0.beta6)
-      bson (~> 2.2)
-      connection_pool (~> 1.2)
-      optionable (~> 0.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.0.4)
-      actionpack (= 4.0.4)
-      mail (~> 2.5.4)
+    actionmailer (4.0.12)
+      actionpack (= 4.0.12)
+      mail (~> 2.5, >= 2.5.4)
     actionmailer_inline_css (1.5.3)
       actionmailer (>= 3.0.0)
       nokogiri (>= 1.4.4)
       premailer (>= 1.7.1)
-    actionpack (4.0.4)
-      activesupport (= 4.0.4)
+    actionpack (4.0.12)
+      activesupport (= 4.0.12)
       builder (~> 3.1.0)
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    activemodel (4.0.4)
-      activesupport (= 4.0.4)
+    activemodel (4.0.12)
+      activesupport (= 4.0.12)
       builder (~> 3.1.0)
-    activerecord (4.0.4)
-      activemodel (= 4.0.4)
+    activerecord (4.0.12)
+      activemodel (= 4.0.12)
       activerecord-deprecated_finders (~> 1.0.2)
-      activesupport (= 4.0.4)
+      activesupport (= 4.0.12)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
     activeresource (4.0.0)
       activemodel (~> 4.0)
       activesupport (~> 4.0)
       rails-observers (~> 0.1.1)
-    activesupport (4.0.4)
+    activesupport (4.0.12)
       i18n (~> 0.6, >= 0.6.9)
       minitest (~> 4.2)
       multi_json (~> 1.3)
@@ -57,7 +38,6 @@ GEM
       builder
       json
     arel (4.0.2)
-    atomic (1.1.16)
     bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
@@ -71,7 +51,7 @@ GEM
       multi_json (~> 1.3)
       nokogiri (>= 1.5.2)
       simple_oauth
-    bson (2.2.1)
+    bson (2.3.0)
     builder (3.1.4)
     callsite (0.0.11)
     campy (1.0.0)
@@ -89,8 +69,7 @@ GEM
       xpath (~> 2.0)
     cliver (0.3.2)
     coderay (1.0.9)
-    columnize (0.3.6)
-    connection_pool (1.2.0)
+    connection_pool (2.1.0)
     coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
@@ -205,16 +184,21 @@ GEM
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
       activesupport (>= 3.0.0)
-    mail (2.5.4)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
+    mail (2.6.3)
+      mime-types (>= 1.16, < 3)
     meta_request (0.2.8)
       callsite
       rack-contrib
       railties
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.1)
     minitest (4.7.5)
+    mongoid (4.0.0)
+      activemodel (~> 4.0)
+      moped (~> 2.0.0)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
     mongoid-rspec (1.9.0)
       mongoid (>= 3.0.1)
       rake
@@ -224,7 +208,11 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.2.0)
       railties (>= 3.2.0)
-    multi_json (1.9.2)
+    moped (2.0.2)
+      bson (~> 2.2)
+      connection_pool (~> 2.0)
+      optionable (~> 0.2.0)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     net-scp (1.1.2)
@@ -257,7 +245,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     optionable (0.2.0)
-    origin (2.1.0)
+    origin (2.1.1)
     orm_adapter (0.4.0)
     oruen_redmine_client (0.0.1)
       activeresource (>= 2.3.0)
@@ -278,7 +266,6 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    polyglot (0.3.5)
     premailer (1.7.3)
       css_parser (>= 1.1.9)
       htmlentities (>= 4.0.0)
@@ -300,26 +287,32 @@ GEM
     rack-ssl-enforcer (0.2.6)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (4.0.4)
-      actionmailer (= 4.0.4)
-      actionpack (= 4.0.4)
-      activerecord (= 4.0.4)
-      activesupport (= 4.0.4)
+    rails (4.0.12)
+      actionmailer (= 4.0.12)
+      actionpack (= 4.0.12)
+      activerecord (= 4.0.12)
+      activesupport (= 4.0.12)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.0.4)
-      sprockets-rails (~> 2.0.0)
+      railties (= 4.0.12)
+      sprockets-rails (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
-    rails_autolink (1.1.4)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_autolink (1.1.6)
       rails (> 3.1)
-    railties (4.0.4)
-      actionpack (= 4.0.4)
-      activesupport (= 4.0.4)
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
+    railties (4.0.12)
+      actionpack (= 4.0.12)
+      activesupport (= 4.0.12)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.12.0)
-    rake (10.1.1)
-    rbx-require-relative (0.0.9)
+    rake (10.4.2)
+    rdoc (4.1.2)
+      json (~> 1.4)
     ref (1.0.5)
     request_store (1.0.6)
     rest-client (1.6.8)
@@ -356,30 +349,26 @@ GEM
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     slop (3.4.6)
-    sprockets (2.12.0)
+    sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.0.1)
+    sprockets-rails (2.2.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
-      sprockets (~> 2.8)
+      sprockets (>= 2.8, < 4.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.1)
-      atomic (>= 1.1.7, < 2)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     timecop (0.6.3)
     tins (0.12.0)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
-    tzinfo (0.3.39)
+    tzinfo (0.3.42)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -404,9 +393,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (~> 4.0.4)
+  actionmailer (~> 4.0.12)
   actionmailer_inline_css
-  actionpack (~> 4.0.4)
+  actionpack (~> 4.0.12)
   airbrake
   better_errors
   binding_of_caller
@@ -443,11 +432,10 @@ DEPENDENCIES
   kaminari (>= 0.14.1)
   launchy
   meta_request
-  mongoid!
+  mongoid (~> 4.0.0)
   mongoid-rspec
   mongoid_rails_migrations
-  moped!
-  octokit (~> 2.0)
+  moped (~> 2.0.2)
   omniauth-github
   pjax_rails
   poltergeist
@@ -457,7 +445,7 @@ DEPENDENCIES
   rack-ssl
   rack-ssl-enforcer
   rails_autolink
-  railties (~> 4.0.4)
+  railties (~> 4.0.12)
   ri_cal
   rspec-rails
   rushover

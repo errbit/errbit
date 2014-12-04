@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.0.4'
+RAILS_VERSION = '~> 4.0.12'
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'moped', github: 'mongoid/moped'
-gem 'mongoid', github: 'mongoid/mongoid'
+gem 'moped', '~> 2.0.2'
+gem 'mongoid', '~> 4.0.0'
 
 gem 'mongoid_rails_migrations'
 gem 'devise'
