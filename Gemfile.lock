@@ -263,6 +263,7 @@ GEM
     rake (10.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (3.2.1)
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -388,6 +389,7 @@ DEPENDENCIES
   rack-ssl-enforcer
   rails (~> 3.2.18)
   rails_autolink
+  redcarpet
   ri_cal
   rspec-rails
   ruby-fogbugz
