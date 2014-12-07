@@ -120,7 +120,7 @@ GEM
       errbit_plugin (~> 0.4, >= 0.4.0)
       pivotal-tracker (~> 0.5, >= 0.5.0)
     errbit_plugin (0.4.0)
-    errbit_redmine_plugin (0.2.0)
+    errbit_redmine_plugin (0.3.0)
       errbit_plugin (~> 0)
       oruen_redmine_client (~> 0)
     errbit_unfuddle_plugin (0.1.0)
