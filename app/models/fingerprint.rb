@@ -37,11 +37,11 @@ class Fingerprint
   # Filter memory addresses out of object strings
   # example: "#<Object:0x007fa2b33d9458>" becomes "#<Object>"
   def normalized_message
-    notice.message
+    message = notice.message
       .gsub(/(#<.+?):0x[0-9a-f]+(>)/, '\1\2')
       .gsub(/\b0x[0-9a-f]+\b/, '0x__')
       .gsub(/\b[0-9]+(?:\.[0-9]+)? (seconds)/, '__ \1')
-      .gsub(/(ERROR:.*)DETAIL: .*$/m, '\1')
+      .gsub(/(PG::[^\n]+ERROR:[^\n]*).*$/m, '\1')
   end
 
 end

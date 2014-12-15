@@ -110,7 +110,15 @@ describe Fingerprint do
       let(:message) { "PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint \"index_logins_on_email\"\nDETAIL:  Key (email)=(joe.test@example.com) already exists.\n" }
 
       it "drops the DETAIL part" do
-        should eq "PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint \"index_logins_on_email\"\n"
+        should eq "PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint \"index_logins_on_email\""
+      end
+    end
+
+    context "given a Postgres error message with an ERROR part and a LINE part" do
+      let(:message) { "PG::UndefinedColumn: ERROR:  column phone_numbers.sequence does not exist\nLINE 1: ...\" = 961720657  ORDER BY \"phone_numbers\".\"id\" ASC, \"phone_num...\n                                                        ^" }
+
+      it "drops the LINE part" do
+        should eq "PG::UndefinedColumn: ERROR:  column phone_numbers.sequence does not exist"
       end
     end
   end
