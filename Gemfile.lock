@@ -291,14 +291,9 @@ GEM
       activeresource (= 3.2.21)
       activesupport (= 3.2.21)
       bundler (~> 1.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
     rails_autolink (1.1.4)
       rails (> 3.1)
       railties (= 3.2.21)
-    rails_serve_static_assets (0.0.2)
-    rails_stdout_logging (0.0.3)
     railties (3.2.21)
       actionpack (= 3.2.21)
       activesupport (= 3.2.21)
@@ -447,7 +442,6 @@ DEPENDENCIES
   quiet_assets
   rack-ssl
   rack-ssl-enforcer
-  rails_12factor
   rails_autolink
   railties (~> 3.2.21)
   ri_cal
