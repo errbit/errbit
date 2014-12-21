@@ -190,7 +190,7 @@ describe UsersController do
         context "with normal params" do
           let(:user_params) { {:name => 'Kermit'} }
           it "sets a message to display" do
-            expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.update.success', :name => user.name)
+            expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.update.success', :name => user.reload.name)
             expect(response).to redirect_to(user_path(user))
           end
         end
