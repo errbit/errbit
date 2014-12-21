@@ -437,7 +437,7 @@ describe ProblemsController do
       end
 
       it "should redirect back to the app page" do
-        request.env["Referer"] = edit_app_path(@app)
+        request.env["HTTP_REFERER"] = edit_app_path(@app)
         put :destroy_all, :app_id => @app.id
         expect(response).to redirect_to(edit_app_path(@app))
       end
