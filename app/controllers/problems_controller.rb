@@ -62,9 +62,10 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    issue_creation = IssueCreation.new(problem, current_user, params[:tracker], request)
-
-    unless issue_creation.execute
+    body = "" # TODO render_issue_body
+    title = "" # TODO generate_title
+    issue = Issue.new(problem: problem, user: current_user, title: title, body: body)
+    unless issue.save
       flash[:error] = issue_creation.errors.full_messages.join(', ')
     end
 
