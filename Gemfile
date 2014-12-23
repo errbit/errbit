@@ -104,13 +104,11 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'execjs'
-  gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
-  gem 'uglifier',     '>= 1.0.3'
-  # We can't upgrade because not compatible to jquery >= 1.9.
-  # To do that, we need fix the rails.js
-  gem 'jquery-rails', '~> 2.1.4'
-  gem 'pjax_rails'
-  gem 'underscore-rails'
-end
+gem 'execjs'
+gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
+gem 'uglifier',     '>= 1.0.3'
+# We can't upgrade because not compatible to jquery >= 1.9.
+# To do that, we need fix the rails.js
+gem 'jquery-rails', '~> 2.1.4'
+gem 'pjax_rails'
+gem 'underscore-rails'
