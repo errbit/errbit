@@ -20,7 +20,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def slack_escape(str)
-    str.gsub('`','\'')
+    str.to_s.gsub('`','\'')
   end
 
   def message_for_slack(problem)
