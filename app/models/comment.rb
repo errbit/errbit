@@ -30,11 +30,11 @@ class Comment
 
   protected
     def increase_counter_cache
-      err.inc(:comments_count, 1)
+      err.inc(comments_count: 1)
     end
 
     def decrease_counter_cache
-      err.inc(:comments_count, -1) if err
+      err.inc(comments_count: -1) if err
     end
 
 end

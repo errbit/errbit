@@ -22,7 +22,7 @@ class ProblemUpdaterCache
 
   def update_notices_count
     if @notice
-      problem.inc(:notices_count, 1)
+      problem.inc(notices_count: 1)
     else
       problem.update_attribute(
         :notices_count, problem.notices.count

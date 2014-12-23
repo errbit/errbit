@@ -21,7 +21,7 @@ class App
   field :_id,
     type: String,
     pre_processed: true,
-    default: ->{ Moped::BSON::ObjectId.new.to_s }
+    default: ->{ BSON::ObjectId.new.to_s }
 
 
   embeds_many :watchers
@@ -172,7 +172,7 @@ class App
   end
 
   def regenerate_api_key!
-    set(:api_key, SecureRandom.hex)
+    update_attribute(:api_key, SecureRandom.hex)
   end
 
   ##

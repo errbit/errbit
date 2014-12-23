@@ -5,6 +5,8 @@ Errbit::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
+  config.eager_load = true
+
   # Shows or hides all error details if something goes wrong inside Errbit
   config.consider_all_requests_local       = false
   # Caching is turned on

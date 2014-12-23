@@ -250,7 +250,7 @@ describe ProblemsController do
     end
 
     it "should redirect back to problems page" do
-      request.env["Referer"] = problems_path
+      request.env["HTTP_REFERER"] = problems_path
       put :resolve, :app_id => @problem.app.id, :id => @problem.problem.id
       expect(response).to redirect_to(problems_path)
     end
@@ -437,7 +437,7 @@ describe ProblemsController do
       end
 
       it "should redirect back to the app page" do
-        request.env["Referer"] = edit_app_path(@app)
+        request.env["HTTP_REFERER"] = edit_app_path(@app)
         put :destroy_all, :app_id => @app.id
         expect(response).to redirect_to(edit_app_path(@app))
       end
@@ -446,4 +446,3 @@ describe ProblemsController do
   end
 
 end
-

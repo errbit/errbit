@@ -33,7 +33,7 @@ describe Api::V1::ProblemsController do
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => @problem.id
 
         returned_problem = JSON.parse(response.body)
-        expect( returned_problem["_id"] ).to eq(@problem.id.to_s)
+        expect(returned_problem["_id"]).to eq(@problem.id.to_s)
       end
 
       it "should return only the correct fields" do
@@ -43,24 +43,14 @@ describe Api::V1::ProblemsController do
         expect( returned_problem.keys ).to match_array([
           "app_name",
           "first_notice_at",
-          "error_class",
-          "messages",
-          "hosts",
-          "created_at",
+          "message",
           "app_id",
           "last_notice_at",
           "_id",
-          "issue_link",
           "resolved",
-          "updated_at",
           "resolved_at",
-          "last_deploy_at",
           "where",
-          "issue_type",
           "notices_count",
-          "user_agents",
-          "comments_count",
-          "message",
           "environment"
         ])
       end

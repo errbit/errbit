@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 3.2.21'
+RAILS_VERSION = '~> 4.0.12'
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'mongoid'
+gem 'moped', '~> 2.0.2'
+gem 'mongoid', '~> 4.0.0'
 
 gem 'mongoid_rails_migrations'
 gem 'devise'
@@ -16,7 +17,6 @@ gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 
 gem 'useragent'
 gem 'decent_exposure'
-gem 'strong_parameters'
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer', :require => false
@@ -113,5 +113,4 @@ group :assets do
   gem 'jquery-rails', '~> 2.1.4'
   gem 'pjax_rails'
   gem 'underscore-rails'
-  gem 'turbo-sprockets-rails3'
 end

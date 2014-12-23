@@ -1,6 +1,6 @@
 class Api::V1::ProblemsController < ApplicationController
   respond_to :json, :xml
-  FIELDS = %w{app_id app_name environment message where first_notice_at last_notice_at resolved resolved_at notices_count}
+  FIELDS = %w{_id app_id app_name environment message where first_notice_at last_notice_at resolved resolved_at notices_count}
 
   def show
     result = benchmark("[api/v1/problems_controller/show] query time") do
