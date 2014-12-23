@@ -20,7 +20,7 @@
     = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'button'
 
   - if current_user.watching?(app)
-    = link_to t('.unwatch'),  app_watcher_path({:app_id => app, :id => current_user.id}), :method => :delete, :class => 'button', :confirm => t('.are_you_sure')
+    = link_to t('.unwatch'), app_watcher_path({app_id: app, id: current_user.id}), method: :delete, class: 'button', data: {confirm: t('.are_you_sure')}
 %h3#watchers_toggle
   =t('.watchers')
   %span.click_span=t('.show_hide')
