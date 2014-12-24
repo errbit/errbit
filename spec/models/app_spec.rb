@@ -220,26 +220,4 @@ describe App do
       }.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
   end
-
-  describe "#comments_allowed?" do
-    context "without issue_tracker" do
-      it 'return true' do
-        expect(App.new.comments_allowed?).to be_true
-      end
-    end
-
-    context "with issue_tracker" do
-      let(:issue_tracker) do
-        ist = IssueTracker.new
-        ist.stub(:comments_allowed?).and_return('foo')
-        ist
-      end
-      it 'delegate to issue_tracker' do
-        expect(App.new(
-          :issue_tracker => issue_tracker
-        ).comments_allowed?).to eql 'foo'
-      end
-    end
-  end
-
 end

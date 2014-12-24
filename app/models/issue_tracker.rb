@@ -41,6 +41,5 @@ class IssueTracker
 
   delegate :configured?, :to => :tracker
   delegate :create_issue, :to => :tracker
-  delegate :comments_allowed?, :to => :tracker
   delegate :url, :to => :tracker
 end

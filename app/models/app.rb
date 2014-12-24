@@ -175,13 +175,6 @@ class App
     update_attribute(:api_key, SecureRandom.hex)
   end
 
-  ##
-  # Check if comments can be allowed on this application
-  #
-  def comments_allowed?
-    !issue_tracker || issue_tracker.comments_allowed?
-  end
-
   protected
 
     def store_cached_attributes_on_problems
