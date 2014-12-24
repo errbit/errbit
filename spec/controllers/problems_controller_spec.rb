@@ -263,39 +263,33 @@ describe ProblemsController do
     end
 
     context "successful issue creation" do
-      context "lighthouseapp tracker" do
-        let(:notice) { Fabricate :notice }
-        let(:problem) { notice.problem }
+      let(:notice) { Fabricate :notice }
+      let(:problem) { notice.problem }
+      let(:issue_tracker) { Fabricate(:issue_tracker) }
 
-        before(:each) do
-          controller.stub(:problem).and_return(problem)
-          controller.stub(:current_user).and_return(admin)
-          IssueCreation.should_receive(:new).with(problem, admin, nil, request).and_return(double(:execute => true))
-          post :create_issue, :app_id => problem.app.id, :id => problem.id
-        end
-
-        it "should redirect to problem page" do
-          expect(response).to redirect_to( app_problem_path(problem.app, problem) )
-          expect(flash[:error]).to be_blank
-        end
-      end
-    end
-
-    context "error during request to a tracker" do
-      before(:each) do
-        IssueCreation.should_receive(:new).with(problem, admin, nil, request).and_return(
-          double(:execute => false, :errors => double(:full_messages => ['not create']))
-        )
-        controller.stub(:problem).and_return(problem)
-        post :create_issue, :app_id => problem.app.id, :id => problem.id
+      before do
+        problem.app.issue_tracker = issue_tracker
+        problem.app.save!
+        controller.stub(:current_user).and_return(admin)
+        post :create_issue, app_id: problem.app.id, id: problem.id
       end
 
       it "should redirect to problem page" do
         expect(response).to redirect_to( app_problem_path(problem.app, problem) )
-        expect(flash[:error]).to eql 'not create'
+        expect(flash[:error]).to be_blank
       end
     end
 
+    context "error during request to a tracker" do
+      before do
+        post :create_issue, app_id: problem.app.id, id: problem.id
+      end
+
+      it "should redirect to problem page" do
+        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(flash[:error]).to eql "This app has no issue tracker setup."
+      end
+    end
   end
 
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do

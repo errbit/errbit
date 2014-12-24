@@ -64,9 +64,9 @@ class ProblemsController < ApplicationController
   def create_issue
     body = "" # TODO render_issue_body
     title = "" # TODO generate_title
-    issue = Issue.new(problem: problem, user: current_user, title: title, body: body)
+    issue = Issue.new(issue_tracker: problem.app.issue_tracker, user: current_user, title: title, body: body)
     unless issue.save
-      flash[:error] = issue_creation.errors.full_messages.join(', ')
+      flash[:error] = issue.errors.full_messages.join(', ')
     end
 
     redirect_to app_problem_path(app, problem)
