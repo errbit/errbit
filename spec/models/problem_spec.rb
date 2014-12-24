@@ -395,7 +395,7 @@ describe Problem do
         end
 
         it 'return the issue_tracker label' do
-          expect(problem.issue_type).to eql 'fake'
+          expect(problem.issue_type).to eql 'mock'
         end
       end
 
