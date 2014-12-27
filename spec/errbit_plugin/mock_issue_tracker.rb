@@ -35,7 +35,7 @@ module ErrbitPlugin
 
     def create_issue(title, body, user)
       @output << [title, body, user]
-      true
+      "http://example.com/mock-errbit"
     end
 
     def url; ''; end

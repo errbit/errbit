@@ -257,35 +257,50 @@ describe ProblemsController do
   end
 
   describe "POST /apps/:app_id/problems/:id/create_issue" do
+    before { sign_in admin }
 
-    before(:each) do
-      sign_in admin
-    end
-
-    context "successful issue creation" do
+    context "when app has a issue tracker" do
       let(:notice) { Fabricate :notice }
       let(:problem) { notice.problem }
-      let(:issue_tracker) { Fabricate(:issue_tracker) }
+      let(:issue_tracker) do
+        Fabricate(:issue_tracker).tap do |t|
+          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
+        end
+      end
 
       before do
         problem.app.issue_tracker = issue_tracker
-        problem.app.save!
+        controller.stub(:problem).and_return(problem)
         controller.stub(:current_user).and_return(admin)
-        post :create_issue, app_id: problem.app.id, id: problem.id
       end
 
       it "should redirect to problem page" do
+        post :create_issue, app_id: problem.app.id, id: problem.id
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to be_blank
       end
-    end
 
-    context "error during request to a tracker" do
-      before do
+      it "should save the right title" do
         post :create_issue, app_id: problem.app.id, id: problem.id
+        title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+        line = issue_tracker.tracker.output.shift
+        expect(line[0]).to eq(title)
       end
 
+      it "should save the right body" do
+        pending
+      end
+
+      it "should update the problem" do
+        post :create_issue, app_id: problem.app.id, id: problem.id
+        expect(problem.issue_link).to eq("http://example.com/mock-errbit")
+        expect(problem.issue_type).to eq("mock")
+      end
+    end
+
+    context "when app has no issue tracker" do
       it "should redirect to problem page" do
+        post :create_issue, app_id: problem.app.id, id: problem.id
         expect(response).to redirect_to( app_problem_path(problem.app, problem) )
         expect(flash[:error]).to eql "This app has no issue tracker setup."
       end
