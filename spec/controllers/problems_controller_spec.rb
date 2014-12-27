@@ -275,7 +275,7 @@ describe ProblemsController do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to be_blank
       end
     end

@@ -7,6 +7,11 @@ describe Issue do
   let(:problem) { notice.problem }
   let(:notice)  { Fabricate(:notice) }
   let(:user)    { Fabricate(:admin) }
+  let(:issue_tracker) do
+    Fabricate(:issue_tracker).tap do |t|
+      t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
+    end
+  end
 
   context "when app has no issue tracker" do
     let(:title) { "Foo" }
@@ -26,7 +31,6 @@ describe Issue do
   end
 
   context "when has no title" do
-    let(:tracker) { Fabricate(:issue_tracker) }
     let(:body) { "barrr" }
 
     pending "returns an error" do
@@ -34,7 +38,6 @@ describe Issue do
   end
 
   context "when has no body" do
-    let(:tracker) { Fabricate(:issue_tracker) }
     let(:title) { "Foo" }
 
     pending "returns an error" do
@@ -42,7 +45,6 @@ describe Issue do
   end
 
   context "when app has a issue tracker" do
-    let(:issue_tracker) { Fabricate(:issue_tracker) }
     let(:title) { "Foo" }
     let(:body) { "barrr" }
 

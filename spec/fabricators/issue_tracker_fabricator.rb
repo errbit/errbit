@@ -4,6 +4,5 @@ Fabricator :issue_tracker do
     :foo => 'one',
     :bar => 'two'
   }}
-
   app
 end

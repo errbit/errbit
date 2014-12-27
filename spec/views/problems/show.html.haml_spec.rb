@@ -4,15 +4,13 @@ describe "problems/show.html.haml" do
   let(:problem) { Fabricate(:problem) }
   let(:comment) { Fabricate(:comment) }
   let(:pivotal_tracker) {
-    Class.new(ErrbitPlugin::IssueTracker) do
+    Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label; 'pivotal'; end
-      def initialize(options); end
       def configured?; true; end
     end
   }
   let(:github_tracker) {
-    Class.new(ErrbitPlugin::IssueTracker) do
-      def initialize(options); end
+    Class.new(ErrbitPlugin::MockIssueTracker) do
       def label; 'github'; end
       def configured?; true; end
     end

@@ -27,10 +27,9 @@ module ErrbitPlugin
     end
 
     def errors
-      errors = {}
-      errors[:foo] = 'foo is required' unless options[:foo]
-      errors[:bar] = 'bar is required' unless options[:bar]
-
+      errors = []
+      errors << [:foo, 'foo is required'] unless options[:foo]
+      errors << [:bar, 'bar is required'] unless options[:bar]
       errors
     end
 
@@ -44,5 +43,3 @@ module ErrbitPlugin
     def comments_allowed?; false; end
   end
 end
-
-ErrbitPlugin::Registry.add_issue_tracker(ErrbitPlugin::MockIssueTracker)
