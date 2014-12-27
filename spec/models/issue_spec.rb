@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Issue do
 
-  subject(:issue) { Issue.new(user: user, title: title, body: body) }
+  subject(:issue) { Issue.new(problem: problem, user: user, title: title, body: body) }
 
   let(:problem) { notice.problem }
   let(:notice)  { Fabricate(:notice) }
@@ -49,7 +49,7 @@ describe Issue do
     let(:body) { "barrr" }
 
     before do
-      issue.issue_tracker = issue_tracker
+      problem.app.issue_tracker = issue_tracker
     end
 
     context "#save" do
