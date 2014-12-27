@@ -73,10 +73,6 @@ class Problem
     Notice.for_errs(errs).ordered
   end
 
-  def comments_allowed?
-    Errbit::Config.allow_comments_with_issue_tracker || app.comments_allowed?
-  end
-
   def resolve!
     self.update_attributes!(:resolved => true, :resolved_at => Time.now)
   end

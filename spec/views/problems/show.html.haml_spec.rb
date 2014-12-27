@@ -8,7 +8,6 @@ describe "problems/show.html.haml" do
       def self.label; 'pivotal'; end
       def initialize(app, params); end
       def configured?; true; end
-      def comments_allowed?; false; end
     end
   }
   let(:github_tracker) {
@@ -16,7 +15,6 @@ describe "problems/show.html.haml" do
       def initialize(app, params); end
       def label; 'github'; end
       def configured?; true; end
-      def comments_allowed?; false; end
     end
   }
   let(:trackers) {
@@ -168,18 +166,16 @@ describe "problems/show.html.haml" do
             end
           end
         end
-
       end
     end
   end
 
-  describe "content_for :comments with comments disabled for configured issue tracker" do
+  describe "content_for :comments" do
     before do
-      Errbit::Config.stub(:allow_comments_with_issue_tracker).and_return(false)
       Errbit::Config.stub(:use_gravatar).and_return(true)
     end
 
-    it 'should display comments and new comment form when no issue tracker' do
+    it 'should display comments and new comment form' do
       problem = Fabricate(:problem_with_comments)
       view.stub(:problem).and_return(problem)
       view.stub(:app).and_return(problem.app)
@@ -190,24 +186,14 @@ describe "problems/show.html.haml" do
       expect(view.content_for(:comments)).to include('Add a comment')
     end
 
-    context "with issue tracker" do
-      it 'should not display the comments section' do
-        problem = Fabricate(:problem)
-        with_issue_tracker("pivotal", problem)
-        render
-        expect(view.view_flow.get(:comments)).to be_blank
-      end
+    it 'should display existing comments' do
+      problem = Fabricate(:problem_with_comments)
+      problem.reload
+      with_issue_tracker("pivotal", problem)
+      render
 
-      it 'should display existing comments' do
-        problem = Fabricate(:problem_with_comments)
-        problem.reload
-        with_issue_tracker("pivotal", problem)
-        render
-
-        expect(view.content_for(:comments)).to include('Test comment')
-        expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
-        expect(view.content_for(:comments)).to_not include('Add a comment')
-      end
+      expect(view.content_for(:comments)).to include('Test comment')
+      expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
     end
   end
 end

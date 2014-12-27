@@ -32,11 +32,6 @@ confirm_resolve_err: true
 # Helpful when you need to plug in a custom authentication strategy, such as LDAP.
 user_has_username: false
 
-# Allow comments while an issue tracker is configured.
-# This is useful if the err is not critical enough to create a ticket,
-# but you want to leave a short comment.
-allow_comments_with_issue_tracker: true
-
 # Display internal errors in production
 # Since this is an internal application, you might like to see what caused Errbit to crash.
 # Pull requests are always welcome!
@@ -44,7 +39,6 @@ allow_comments_with_issue_tracker: true
 display_internal_errors: true
 # The host of your errbit server
 
-allow_comments_with_issue_tracker: true
 # Enable Gravatar.
 use_gravatar: true
 # Default Gravatar image, can be: mm, identicon, monsterid, wavatar, retro.
