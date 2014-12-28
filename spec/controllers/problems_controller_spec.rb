@@ -12,9 +12,7 @@ describe ProblemsController do
   let(:admin) { Fabricate(:admin) }
   let(:problem) { Fabricate(:problem, :app => app, :environment => "production") }
 
-
   describe "GET /problems" do
-    #render_views
     context 'when logged in as an admin' do
       before(:each) do
         sign_in admin
@@ -287,14 +285,26 @@ describe ProblemsController do
         expect(line[0]).to eq(title)
       end
 
-      it "should save the right body" do
-        pending
+      it "should renders the issue body" do
+        post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+        expect(response).to render_template("issue_trackers/issue")
       end
 
       it "should update the problem" do
         post :create_issue, app_id: problem.app.id, id: problem.id
         expect(problem.issue_link).to eq("http://example.com/mock-errbit")
         expect(problem.issue_type).to eq("mock")
+      end
+
+
+      context "when rendering views" do
+        render_views
+
+        it "should save the right body" do
+          post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+          line = issue_tracker.tracker.output.shift
+          expect(line[1]).to include(app_problem_url problem.app, problem)
+        end
       end
     end
 

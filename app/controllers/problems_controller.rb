@@ -6,7 +6,6 @@
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
 
-
   include ProblemsSearcher
 
   before_filter :need_selected_problem, :only => [
@@ -62,7 +61,7 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    body = "" # TODO render_issue_body
+    body = render_to_string "issue_trackers/issue", layout: false, formats: [:txt]
     title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
 
     issue = Issue.new(problem: problem, user: current_user, title: title, body: body)
