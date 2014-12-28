@@ -216,6 +216,7 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
+    power_assert (0.2.2)
     premailer (1.7.3)
       css_parser (>= 1.1.9)
       htmlentities (>= 4.0.0)
@@ -305,6 +306,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
+    test-unit (3.0.8)
+      power_assert
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -381,6 +384,7 @@ DEPENDENCIES
   rspec-rails
   rushover
   sass-rails
+  test-unit
   timecop
   uglifier
   underscore-rails
