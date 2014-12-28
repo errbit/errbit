@@ -12,6 +12,11 @@ class Issue
 
   def save
     if issue_tracker
+      issue_tracker.tracker.errors.each do |k, err|
+        errors.add k, err
+      end
+      return false if errors.present?
+
       url = issue_tracker.create_issue(title, body, user: user.as_document)
       problem.update_attributes(issue_link: url, issue_type: issue_tracker.tracker.class.label)
     else

@@ -12,11 +12,11 @@ describe Issue do
       t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
     end
   end
+  let(:errors) { issue.errors[:base] }
 
   context "when app has no issue tracker" do
     let(:title) { "Foo" }
     let(:body) { "barrr" }
-    let(:errors) { issue.errors[:base] }
 
     context "#save" do
       it "returns false" do
@@ -53,6 +53,19 @@ describe Issue do
     end
 
     context "#save" do
+
+      context "when issue tracker has errors" do
+        before do
+          issue_tracker.tracker.options.clear
+        end
+
+        it("returns false") { expect(issue.save).to be false }
+        it "adds the errors" do
+          issue.save
+          expect(errors).to include("foo is required")
+          expect(errors).to include("bar is required")
+        end
+      end
 
       it "creates the issue" do
         issue.save

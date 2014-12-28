@@ -73,6 +73,8 @@ feature "Create an application" do
     click_on I18n.t('apps.index.new_app')
     fill_in 'app_name', :with => 'My new app'
     find('.label_radio.github').click
+
+    fill_in 'app_github_repo', with: 'foo/bar'
     within ".github.tracker_params" do
       fill_in 'app_issue_tracker_attributes_options_username', :with => 'token'
       fill_in 'app_issue_tracker_attributes_options_password', :with => 'pass'

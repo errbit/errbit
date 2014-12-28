@@ -28,8 +28,8 @@ module ErrbitPlugin
 
     def errors
       errors = []
-      errors << [:foo, 'foo is required'] unless options[:foo]
-      errors << [:bar, 'bar is required'] unless options[:bar]
+      errors << [:base, 'foo is required'] unless options[:foo]
+      errors << [:base, 'bar is required'] unless options[:bar]
       errors
     end
 
