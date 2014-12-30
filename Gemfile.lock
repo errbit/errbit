@@ -1,3 +1,17 @@
+GIT
+  remote: git://github.com/errbit/errbit_github_plugin.git
+  revision: 5900200e6d460fe94feaea3e59824437d54f1029
+  specs:
+    errbit_github_plugin (0.1.0)
+      errbit_plugin
+      octokit
+
+GIT
+  remote: git://github.com/errbit/errbit_plugin.git
+  revision: 6a0b93d71a6b4545198f0c68b99b8e8f9281c17e
+  specs:
+    errbit_plugin (0.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,10 +102,6 @@ GEM
     email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
-    errbit_github_plugin (0.1.0)
-      errbit_plugin
-      octokit
-    errbit_plugin (0.4.0)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)
@@ -181,8 +191,8 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    octokit (3.3.1)
-      sawyer (~> 0.5.3)
+    octokit (3.7.0)
+      sawyer (~> 0.6.0, >= 0.5.3)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -267,7 +277,7 @@ GEM
       json
       rest-client
     safe_yaml (1.0.4)
-    sawyer (0.5.5)
+    sawyer (0.6.0)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     simplecov (0.7.1)
@@ -334,8 +344,8 @@ DEPENDENCIES
   devise
   draper
   email_spec
-  errbit_github_plugin
-  errbit_plugin
+  errbit_github_plugin!
+  errbit_plugin!
   execjs
   fabrication
   flowdock

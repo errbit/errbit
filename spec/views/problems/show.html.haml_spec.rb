@@ -4,15 +4,13 @@ describe "problems/show.html.haml" do
   let(:problem) { Fabricate(:problem) }
   let(:comment) { Fabricate(:comment) }
   let(:pivotal_tracker) {
-    Class.new(ErrbitPlugin::IssueTracker) do
+    Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label; 'pivotal'; end
-      def initialize(app, params); end
       def configured?; true; end
     end
   }
   let(:github_tracker) {
-    Class.new(ErrbitPlugin::IssueTracker) do
-      def initialize(app, params); end
+    Class.new(ErrbitPlugin::MockIssueTracker) do
       def label; 'github'; end
       def configured?; true; end
     end
@@ -36,8 +34,9 @@ describe "problems/show.html.haml" do
   end
 
   def with_issue_tracker(tracker, problem)
-    problem.app.issue_tracker = IssueTracker.new :type_tracker => tracker, :options => {:api_token => "token token token", :project_id => "1234"}
     ErrbitPlugin::Registry.stub(:issue_trackers).and_return(trackers)
+    problem.app.issue_tracker = IssueTracker.new :type_tracker => tracker, :options => {:api_token => "token token token", :project_id => "1234"}
+
     view.stub(:problem).and_return(problem)
     view.stub(:app).and_return(problem.app)
   end
@@ -82,26 +81,16 @@ describe "problems/show.html.haml" do
     end
 
     context 'create issue links' do
-      it 'should allow creating issue for github if current user has linked their github account' do
-        user = Fabricate(:user, :github_login => 'test_user', :github_oauth_token => 'abcdef')
-        controller.stub(:current_user) { user }
-
-        problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
-        view.stub(:problem).and_return(problem)
-        view.stub(:app).and_return(problem.app)
-        render
-
-        expect(action_bar).to have_selector("span a.github_create.create-issue", :text => 'create issue')
-      end
+      let(:app) { Fabricate(:app, :github_repo => "test_user/test_repo") }
 
       it 'should allow creating issue for github if application has a github tracker' do
-        problem = Fabricate(:problem_with_comments, :app => Fabricate(:app, :github_repo => "test_user/test_repo"))
+        problem = Fabricate(:problem_with_comments, app: app)
         with_issue_tracker("github", problem)
         view.stub(:problem).and_return(problem)
         view.stub(:app).and_return(problem.app)
         render
 
-        expect(action_bar).to have_selector("span a.github_create.create-issue", :text => 'create issue')
+        expect(action_bar).to have_selector("span a.github_create.create-issue", text: 'create issue')
       end
 
       context "without issue tracker associate on app" do

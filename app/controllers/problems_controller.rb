@@ -6,7 +6,6 @@
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
 
-
   include ProblemsSearcher
 
   before_filter :need_selected_problem, :only => [
@@ -62,10 +61,12 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    issue_creation = IssueCreation.new(problem, current_user, params[:tracker], request)
+    body = render_to_string "issue_trackers/issue", layout: false, formats: [:txt]
+    title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
 
-    unless issue_creation.execute
-      flash[:error] = issue_creation.errors.full_messages.join(', ')
+    issue = Issue.new(problem: problem, user: current_user, title: title, body: body)
+    unless issue.save
+      flash[:error] = issue.errors.full_messages.join(', ')
     end
 
     redirect_to app_problem_path(app, problem)

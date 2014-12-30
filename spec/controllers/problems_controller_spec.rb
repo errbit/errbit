@@ -12,9 +12,7 @@ describe ProblemsController do
   let(:admin) { Fabricate(:admin) }
   let(:problem) { Fabricate(:problem, :app => app, :environment => "production") }
 
-
   describe "GET /problems" do
-    #render_views
     context 'when logged in as an admin' do
       before(:each) do
         sign_in admin
@@ -257,45 +255,66 @@ describe ProblemsController do
   end
 
   describe "POST /apps/:app_id/problems/:id/create_issue" do
+    before { sign_in admin }
 
-    before(:each) do
-      sign_in admin
-    end
-
-    context "successful issue creation" do
-      context "lighthouseapp tracker" do
-        let(:notice) { Fabricate :notice }
-        let(:problem) { notice.problem }
-
-        before(:each) do
-          controller.stub(:problem).and_return(problem)
-          controller.stub(:current_user).and_return(admin)
-          IssueCreation.should_receive(:new).with(problem, admin, nil, request).and_return(double(:execute => true))
-          post :create_issue, :app_id => problem.app.id, :id => problem.id
-        end
-
-        it "should redirect to problem page" do
-          expect(response).to redirect_to( app_problem_path(problem.app, problem) )
-          expect(flash[:error]).to be_blank
+    context "when app has a issue tracker" do
+      let(:notice) { Fabricate :notice }
+      let(:problem) { notice.problem }
+      let(:issue_tracker) do
+        Fabricate(:issue_tracker).tap do |t|
+          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
-    end
 
-    context "error during request to a tracker" do
-      before(:each) do
-        IssueCreation.should_receive(:new).with(problem, admin, nil, request).and_return(
-          double(:execute => false, :errors => double(:full_messages => ['not create']))
-        )
+      before do
+        problem.app.issue_tracker = issue_tracker
         controller.stub(:problem).and_return(problem)
-        post :create_issue, :app_id => problem.app.id, :id => problem.id
+        controller.stub(:current_user).and_return(admin)
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
-        expect(flash[:error]).to eql 'not create'
+        post :create_issue, app_id: problem.app.id, id: problem.id
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+        expect(flash[:error]).to be_blank
+      end
+
+      it "should save the right title" do
+        post :create_issue, app_id: problem.app.id, id: problem.id
+        title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+        line = issue_tracker.tracker.output.shift
+        expect(line[0]).to eq(title)
+      end
+
+      it "should renders the issue body" do
+        post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+        expect(response).to render_template("issue_trackers/issue")
+      end
+
+      it "should update the problem" do
+        post :create_issue, app_id: problem.app.id, id: problem.id
+        expect(problem.issue_link).to eq("http://example.com/mock-errbit")
+        expect(problem.issue_type).to eq("mock")
+      end
+
+
+      context "when rendering views" do
+        render_views
+
+        it "should save the right body" do
+          post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+          line = issue_tracker.tracker.output.shift
+          expect(line[1]).to include(app_problem_url problem.app, problem)
+        end
       end
     end
 
+    context "when app has no issue tracker" do
+      it "should redirect to problem page" do
+        post :create_issue, app_id: problem.app.id, id: problem.id
+        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(flash[:error]).to eql "This app has no issue tracker setup."
+      end
+    end
   end
 
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do

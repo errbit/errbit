@@ -391,11 +391,13 @@ describe Problem do
 
       context "with issue_tracker valid associate to app" do
         let(:issue_tracker) do
-          Fabricate(:issue_tracker)
+          Fabricate(:issue_tracker).tap do |t|
+            t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
+          end
         end
 
         it 'return the issue_tracker label' do
-          expect(problem.issue_type).to eql 'fake'
+          expect(problem.issue_type).to eql 'mock'
         end
       end
 
