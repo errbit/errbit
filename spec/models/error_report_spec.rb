@@ -49,7 +49,7 @@ describe ErrorReport do
 
     describe "#fingerprint_strategy" do
       after(:all) {
-        error_report.fingerprint_strategy = Fingerprint
+        error_report.fingerprint_strategy = Fingerprint::Sha1
       }
 
       it "should be possible to change how fingerprints are generated" do
