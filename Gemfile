@@ -20,7 +20,6 @@ gem 'decent_exposure'
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer', :require => false
-gem 'fabrication'
 gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -55,7 +54,6 @@ gem 'ri_cal'
 gem 'yajl-ruby', :require => "yajl"
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'webmock', :require => false
   gem 'airbrake', :require => false
   gem 'pry-rails'
@@ -72,21 +70,21 @@ group :development do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'foreman', :require => false
-
   # Use puma for development
   gem 'puma', :require => false
-
 end
 
 group :test do
+  gem 'rspec-rails', require: false
+  gem 'mongoid-rspec', require: false
+  gem 'fabrication'
   gem 'capybara'
   gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
-  gem 'coveralls', :require => false
-  gem 'mongoid-rspec', :require => false
+  gem 'coveralls', require: false
 end
 
 group :heroku, :production do
