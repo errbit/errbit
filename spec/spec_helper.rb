@@ -30,10 +30,6 @@ require 'errbit_plugin/mock_issue_tracker'
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-Fabrication.configure do |config|
-  fabricator_dir = "spec/fabricators"
-end
-
 RSpec.configure do |config|
   config.mock_with :rspec
   config.include Devise::TestHelpers, :type => :controller
@@ -47,9 +43,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.include Haml, :type => :helper
-  config.include Haml::Helpers, :type => :helper
-  config.before(:each, :type => :helper) do |config|
+  config.include Haml, type: :helper
+  config.include Haml::Helpers, type: :helper
+  config.before(:each, type: :helper) do |_|
     init_haml_helpers
   end
 end
