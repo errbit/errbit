@@ -72,6 +72,13 @@ GEM
       xpath (~> 2.0)
     cliver (0.3.2)
     coderay (1.0.9)
+    coffee-rails (4.1.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.3.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.8.0)
     connection_pool (2.1.0)
     coveralls (0.7.0)
       multi_json (~> 1.3)
@@ -144,7 +151,6 @@ GEM
     kgio (2.8.1)
     launchy (2.3.0)
       addressable (~> 2.3)
-    libv8 (3.16.14.7)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     meta_request (0.2.8)
@@ -252,7 +258,6 @@ GEM
     rake (10.4.2)
     rdoc (4.1.2)
       json (~> 1.4)
-    ref (1.0.5)
     request_store (1.0.6)
     rest-client (1.6.8)
       mime-types (~> 1.16)
@@ -277,6 +282,13 @@ GEM
       json
       rest-client
     safe_yaml (1.0.4)
+    sass (3.4.9)
+    sass-rails (5.0.1)
+      railties (>= 4.0.0, < 5.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     sawyer (0.6.0)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -296,9 +308,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
-    therubyracer (0.12.1)
-      libv8 (~> 3.16.14.0)
-      ref
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -338,6 +347,7 @@ DEPENDENCIES
   campy
   capistrano (~> 2.0)
   capybara
+  coffee-rails
   coveralls
   database_cleaner
   decent_exposure
@@ -346,7 +356,6 @@ DEPENDENCIES
   email_spec
   errbit_github_plugin!
   errbit_plugin!
-  execjs
   fabrication
   flowdock
   foreman
@@ -377,9 +386,9 @@ DEPENDENCIES
   ri_cal
   rspec-rails
   rushover
-  therubyracer
+  sass-rails
   timecop
-  uglifier (>= 1.0.3)
+  uglifier
   underscore-rails
   unicorn
   useragent

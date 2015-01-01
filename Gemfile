@@ -93,12 +93,9 @@ group :heroku, :production do
   gem 'unicorn', :require => false
 end
 
-
-# Gems used only for assets and not required
-# in production environments by default.
-gem 'execjs'
-gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
-gem 'uglifier',     '>= 1.0.3'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 # We can't upgrade because not compatible to jquery >= 1.9.
 # To do that, we need fix the rails.js
 gem 'jquery-rails', '~> 2.1.4'
