@@ -14,14 +14,9 @@ cache: bundler
 
 services: mongodb
 
-#script: ./script/rspec-queue-mongoid.rb --format progress spec
+script: bundle exec rake errbit:bootstrap spec
 
 matrix:
   allow_failures:
     - rvm: rbx-2
     - rvm: ruby-head
-
-
-# To stop Travis from running tests for a new commit,
-# add the following to your commit message: [ci skip]
-# You should add this when you edit documentation or comments, etc.
