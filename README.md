@@ -82,10 +82,8 @@ Password: password
 
 The list of requirements to install Errbit are :
 
- * Ruby 1.9.3 or higher
+ * Ruby 2.1.0 or higher
  * MongoDB 2.2.0 or higher
-
-Errbit uses Ruby 2.0.0 as a default. However, it is compatible with Ruby 1.9.3 and above.
 
 Installation
 ------------
