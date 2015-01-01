@@ -21,7 +21,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'email_spec'
 require 'database_cleaner'
-require 'webmock/rspec'
 require 'xmpp4r'
 require 'xmpp4r/muc'
 require 'mongoid-rspec'
@@ -47,16 +46,11 @@ RSpec.configure do |config|
     DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner.clean
   end
-  config.include WebMock::API
 
   config.include Haml, :type => :helper
   config.include Haml::Helpers, :type => :helper
   config.before(:each, :type => :helper) do |config|
     init_haml_helpers
-  end
-
-  config.before(:all) do
-    WebMock.disable_net_connect! :allow => /coveralls\.io|127\.0\.0\.1/
   end
 end
 
