@@ -2,8 +2,8 @@ class Api::V1::StatsController < ApplicationController
   respond_to :json, :xml
 
   # The stats API only requires an api_key for the given app.
-  skip_before_filter :authenticate_user!
-  before_filter :require_api_key_or_authenticate_user!
+  skip_before_action :authenticate_user!
+  before_action :require_api_key_or_authenticate_user!
 
   def app
     if problem = @app.problems.order_by(:last_notice_at.desc).first

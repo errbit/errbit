@@ -2,9 +2,9 @@ class AppsController < ApplicationController
 
   include ProblemsSearcher
 
-  before_filter :require_admin!, :except => [:index, :show]
-  before_filter :parse_email_at_notices_or_set_default, :only => [:create, :update]
-  before_filter :parse_notice_at_notices_or_set_default, :only => [:create, :update]
+  before_action :require_admin!, :except => [:index, :show]
+  before_action :parse_email_at_notices_or_set_default, :only => [:create, :update]
+  before_action :parse_notice_at_notices_or_set_default, :only => [:create, :update]
   respond_to :html
 
   expose(:app_scope) {

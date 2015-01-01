@@ -2,7 +2,7 @@ class NoticesController < ApplicationController
 
   class ParamsError < StandardError; end
 
-  skip_before_filter :authenticate_user!, :only => :create
+  skip_before_action :authenticate_user!, :only => :create
 
   rescue_from ParamsError, :with => :bad_params
 

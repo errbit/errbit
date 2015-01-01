@@ -8,7 +8,7 @@ class ProblemsController < ApplicationController
 
   include ProblemsSearcher
 
-  before_filter :need_selected_problem, :only => [
+  before_action :need_selected_problem, :only => [
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 

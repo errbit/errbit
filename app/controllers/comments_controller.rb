@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_filter :find_app
-  before_filter :find_problem
+  before_action :find_app
+  before_action :find_problem
 
   def create
     @comment = Comment.new(comment_params.merge(:user_id => current_user.id))

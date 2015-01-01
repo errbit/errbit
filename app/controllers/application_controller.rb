@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :authenticate_user_from_token!
-  before_filter :authenticate_user!
-  before_filter :set_time_zone
+  before_action :authenticate_user_from_token!
+  before_action :authenticate_user!
+  before_action :set_time_zone
 
   # Devise override - After login, if there is only one app,
   # redirect to that app's path instead of the root path (apps#index).
