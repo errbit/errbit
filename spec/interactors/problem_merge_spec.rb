@@ -41,6 +41,13 @@ describe ProblemMerge do
       expect(problem.reload.errs.map(&:id).sort).to eq (first_errs | merged_errs).map(&:id).sort
     end
 
+    it 'keeps the issue link' do
+      problem.update_attributes(issue_link: 'http://foo.com', issue_type: 'mock')
+      problem_merge.merge
+      expect(problem.reload.issue_link).to eq 'http://foo.com'
+      expect(problem.reload.issue_type).to eq 'mock'
+    end
+
     it 'update problem cache' do
       expect(ProblemUpdaterCache).to receive(:new).with(problem).and_return(double(:update => true))
       problem_merge.merge
