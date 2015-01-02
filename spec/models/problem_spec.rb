@@ -189,6 +189,56 @@ describe Problem, type: 'model' do
     end
   end
 
+  context "notices grouped by day of incidence" do
+    before do
+      @app = Fabricate(:app)
+      @problem = Fabricate(:problem, :app => @app)
+      @err = Fabricate(:err, :problem => @problem)
+    end
+
+    context "for a plethora of notices inside the date range" do
+      before do
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => 2.days.ago)
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => 5.days.ago)
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => Time.now)
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => Time.now)
+      end
+
+      it "returns a populated list indexed by number of days ago" do
+        result = @problem.notices_grouped_by_day_of_incidence
+
+        result.should eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2]
+      end
+    end
+
+    context "for a plethora of notices both inside and outside the date range" do
+      before do
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => 2.days.ago)
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => 15.days.ago)
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => Time.now)
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => 18.weeks.ago)
+      end
+
+      it "returns a populated list indexed by number of days ago" do
+        result = @problem.notices_grouped_by_day_of_incidence
+
+        result.should eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1]
+      end
+    end
+
+    context "for notices that are at the beginning of the date range" do
+      before do
+        Fabricate(:notice, :err => @err, :message => 'ERR 1', :created_at => 2.weeks.ago + 2.hours)
+      end
+
+      it "returns only those dates whose notices occured inside the date range" do
+        result = @problem.notices_grouped_by_day_of_incidence
+
+        result.should eq [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      end
+    end
+  end
+
   context "notice counter cache" do
     before do
       @app = Fabricate(:app)

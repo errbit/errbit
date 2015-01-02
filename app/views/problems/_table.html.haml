@@ -12,6 +12,7 @@
         - if any_issue_links
           %th Issue
         %th Resolve
+        %th Trend
     %tbody
       - problems.each do |problem|
         %tr{:class => problem.resolved? ? 'resolved' : 'unresolved'}
@@ -43,6 +44,7 @@
           %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_problem_path(problem.app, problem),
             :title => "Resolve", :method => :put, :data => { :confirm => problem_confirm('resolve_one') },
             :class => 'resolve' if problem.unresolved?
+          %td.trends= render 'shared/bar_chart', :problem => problem, :data => problem.notices_grouped_by_day_of_incidence, :width => 150, :height => 55, :show_labels => false
       - if problems.none?
         %tr
           %td{:colspan => (any_issue_links ? 8 : 7)}

@@ -1,0 +1,26 @@
+<%= content_tag :canvas, nil, :id => "chart-for-#{problem.id}", :width => width, :height => height %>
+
+<%= javascript_tag do %>
+  var ctx = $("#chart-for-<%= problem.id %>").get(0).getContext("2d");
+
+  var data = {
+    labels: <%== bar_chart_x_axis_labels(show_labels).to_json %>,
+    datasets : [
+      {
+        data : <%= data %>
+      },
+    ]
+  }
+
+  chart = new Chart(ctx);
+  chart.Bar(data, {
+    scaleShowLabels: <%== show_labels %>,
+    scaleOverride: true,
+    scaleSteps: <%= bar_chart_scale_steps(data.max) %>,
+    scaleStepWidth: 1,
+    scaleStartValue: 0,
+    animation: false,
+    scaleShowGridLines: false,
+    barValueSpacing: 1
+  });
+<% end %>
