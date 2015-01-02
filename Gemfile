@@ -24,7 +24,7 @@ gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
-gem 'draper', :require => false
+gem 'draper'
 
 gem 'errbit_plugin', github: 'errbit/errbit_plugin'
 gem 'errbit_github_plugin', github: 'errbit/errbit_github_plugin'

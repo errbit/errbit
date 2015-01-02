@@ -16,10 +16,6 @@ production:
         destination: <%= ENV['RAILS_STACK_PATH'] %>/config/mongoid.yml
         target: rails
         run_on: all_servers
-      - source: /config/cloud/cloud66/files/secret_token.rb
-        destination: <%= ENV['RAILS_STACK_PATH'] %>/config/initializers/secret_token.rb
-        target: rails
-        run_on: all_servers
       - source: /config/cloud/cloud66/files/seeds.rb
         destination: <%= ENV['RAILS_STACK_PATH'] %>/db/seeds.rb
         target: rails
@@ -57,10 +53,6 @@ staging:
         run_on: all_servers
       - source: /config/cloud/cloud66/files/mongoid.yml
         destination: <%= ENV['RAILS_STACK_PATH'] %>/config/mongoid.yml
-        target: rails
-        run_on: all_servers
-      - source: /config/cloud/cloud66/files/secret_token.rb
-        destination: <%= ENV['RAILS_STACK_PATH'] %>/config/initializers/secret_token.rb
         target: rails
         run_on: all_servers
       - source: /config/cloud/cloud66/files/seeds.rb
@@ -101,10 +93,6 @@ development:
         run_on: all_servers
       - source: /config/cloud/cloud66/files/mongoid.yml
         destination: <%= ENV['RAILS_STACK_PATH'] %>/config/mongoid.yml
-        target: rails
-        run_on: all_servers
-      - source: /config/cloud/cloud66/files/secret_token.rb
-        destination: <%= ENV['RAILS_STACK_PATH'] %>/config/initializers/secret_token.rb
         target: rails
         run_on: all_servers
       - source: /config/cloud/cloud66/files/seeds.rb
