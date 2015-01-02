@@ -90,7 +90,7 @@ GEM
       addressable
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
-    decent_exposure (2.3.0)
+    decent_exposure (2.3.2)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
