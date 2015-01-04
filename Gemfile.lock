@@ -50,7 +50,7 @@ GEM
       builder
       json
     arel (5.0.1.20140414130214)
-    bcrypt-ruby (3.1.2)
+    bcrypt (3.1.9)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -93,10 +93,11 @@ GEM
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     decent_exposure (2.3.2)
-    devise (3.1.1)
-      bcrypt-ruby (~> 3.0)
+    devise (3.4.1)
+      bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
@@ -210,7 +211,7 @@ GEM
       omniauth (~> 1.0)
     optionable (0.2.0)
     origin (2.1.1)
-    orm_adapter (0.4.0)
+    orm_adapter (0.5.0)
     pjax_rails (0.3.4)
       jquery-rails
     poltergeist (1.5.1)
@@ -261,6 +262,8 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     request_store (1.0.6)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rest-client (1.6.8)
       mime-types (~> 1.16)
       rdoc (>= 2.4.2)
