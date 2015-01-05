@@ -69,8 +69,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'foreman', :require => false
-  # Use puma for development
-  gem 'puma', :require => false
 end
 
 group :test do
