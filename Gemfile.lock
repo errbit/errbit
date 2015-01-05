@@ -112,6 +112,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
     dotenv (1.0.2)
+    dotenv-deployment (0.2.0)
+      dotenv (~> 1.0)
     draper (1.3.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -367,6 +369,7 @@ DEPENDENCIES
   database_cleaner
   decent_exposure
   devise
+  dotenv-deployment
   draper
   email_spec
   errbit_github_plugin!
