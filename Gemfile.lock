@@ -134,7 +134,7 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
-    htmlentities (4.3.1)
+    htmlentities (4.3.3)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -149,7 +149,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.8.1)
+    kgio (2.9.2)
     launchy (2.3.0)
       addressable (~> 2.3)
     mail (2.6.3)
@@ -257,7 +257,7 @@ GEM
       activesupport (= 4.1.8)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.12.0)
+    raindrops (0.13.0)
     rake (10.4.2)
     rdoc (4.1.2)
       json (~> 1.4)
