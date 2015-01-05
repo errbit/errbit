@@ -1,0 +1,31 @@
+[Unit]
+Description=Errbit Unicorn Server
+Requires=mongodb.service
+After=mongodb.service network.target
+
+[Service]
+# Change here: user, group and directory to errbit root
+User=errbit
+Group=errbit
+WorkingDirectory=/var/www/apps/errbit
+Environment=RAILS_ENV=production
+SyslogIdentifier=errbit-unicorn
+PIDFile=/run/errbit/errbit.pid
+
+RuntimeDirectory=errbit
+RuntimeDirectoryMode=775
+
+CapabilityBoundingSet=
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+
+# Change here: unicorn.rb path
+ExecStart=/usr/bin/bundle exec "unicorn_rails -c /var/www/apps/errbit/config/unicorn.rb -E production"
+ExecStop=/usr/bin/kill -QUIT $MAINPID
+ExecReload=/usr/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
