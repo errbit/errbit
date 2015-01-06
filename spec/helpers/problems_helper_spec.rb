@@ -8,6 +8,13 @@ describe ProblemsHelper do
       expect(truncated).to be_html_safe
       expect(truncated).to_not include('<', '>')
     end
+
+    it 'does not double escape html' do
+      problem = double('problem', :message => '#<NoMethodError: ...>')
+      truncated = helper.truncated_problem_message(problem)
+      expect(truncated).to be_html_safe
+      expect(truncated).to_not include('&amp;')
+    end
   end
 
   describe "#gravatar_tag" do
