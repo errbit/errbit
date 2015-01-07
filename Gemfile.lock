@@ -60,12 +60,21 @@ GEM
     builder (3.2.2)
     callsite (0.0.11)
     campy (1.0.0)
-    capistrano (2.15.5)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
+    capistrano (3.3.5)
+      capistrano-stats (~> 1.1.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.3)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-rails (1.1.2)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.0.2)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
+    capistrano-stats (1.1.1)
     capybara (2.1.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -81,6 +90,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colorize (0.7.5)
     connection_pool (2.1.0)
     coveralls (0.7.0)
       multi_json (~> 1.3)
@@ -124,7 +134,6 @@ GEM
     haml (4.0.3)
       tilt
     hashie (2.0.5)
-    highline (1.6.20)
     hike (1.2.3)
     hipchat (0.12.0)
       httparty
@@ -183,13 +192,9 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
-    net-scp (1.1.2)
+    net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
+    net-ssh (2.9.1)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     oauth2 (0.8.1)
@@ -309,6 +314,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sshkit (1.6.1)
+      colorize (>= 0.7.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     test-unit (3.0.8)
@@ -348,7 +357,10 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   campy
-  capistrano (~> 2.0)
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rbenv
   capybara
   coffee-rails
   coveralls

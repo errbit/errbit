@@ -6,98 +6,87 @@
 # `cap deploy` whenever you would like to deploy Errbit. Refer
 # to the Readme for more information.
 
-config = YAML.load_file('config/config.yml')['deployment'] || {}
+# config valid only for current version of Capistrano
+lock '3.3.5'
 
-require 'bundler/capistrano'
-load 'deploy/assets'
+set :application, 'errbit'
+set :repo_url, 'https://github.com/errbit/errbit.git'
+set :branch, ENV['branch'] || 'master'
+set :deploy_to, '/var/www/apps/errbit'
+set :keep_releases, 5
 
-set :application, "errbit"
-set :repository,  config['repository']
+set :pty, true
+set :ssh_options, forward_agent: true
 
-role :web, config['hosts']['web']
-role :app, config['hosts']['app']
-role :db,  config['hosts']['db'], :primary => true
+set :linked_files, fetch(:linked_files, []) + %w(
+  .env
+  config/config.yml
+  config/mongoid.yml
+  config/newrelic.yml
+  config/initializers/secret_token.rb
+)
 
-set :user, config['user']
-set :use_sudo, false
-if config.has_key?('ssh_key')
-  set :ssh_options,      { :forward_agent => true, :keys => [ config['ssh_key'] ] }
-else
-  set :ssh_options,      { :forward_agent => true }
-end
-default_run_options[:pty] = true
+set :linked_dirs, fetch(:linked_dirs, []) + %w(
+  log
+  tmp/cache tmp/pids tmp/sockets
+  vendor/bundle
+)
 
-set :deploy_to, config['deploy_to']
-set :deploy_via, :remote_cache
-set :copy_cache, true
-set :copy_exclude, [".git"]
-set :copy_compression, :bz2
-
-set :scm, :git
-set :scm_verbose, true
-set :branch, config['branch'] || 'master'
-
-before 'deploy:assets:symlink', 'errbit:symlink_configs'
-# if unicorn is started through something like runit (the tool which restarts the process when it's stopped)
-# after 'deploy:restart', 'unicorn:stop'
-
-namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-end
+# check out capistrano-rbenv documentation
+# set :rbenv_type, :system
+# set :rbenv_path, '/usr/local/rbenv'
+# set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
+# set :rbenv_roles, :all
 
 namespace :errbit do
   task :setup_configs do
-    shared_configs = File.join(shared_path,'config')
-    run "mkdir -p #{shared_configs}"
-    run "if [ ! -f #{shared_configs}/config.yml ]; then cp #{latest_release}/config/config.example.yml #{shared_configs}/config.yml; fi"
-    run "if [ ! -f #{shared_configs}/mongoid.yml ]; then cp #{latest_release}/config/mongoid.example.yml #{shared_configs}/mongoid.yml; fi"
-
-    # Generate unique secret token
-    run %Q{if [ ! -f #{shared_configs}/secret_token.rb ]; then
-      cd #{current_release};
-      echo "Errbit::Application.config.secret_token = '$(bundle exec rake secret)'" > #{shared_configs}/secret_token.rb;
-    fi}.compact
-  end
-
-  task :symlink_configs do
-    errbit.setup_configs
-    shared_configs = File.join(shared_path,'config')
-    release_configs = File.join(release_path,'config')
-    run("ln -nfs #{shared_configs}/config.yml #{release_configs}/config.yml")
-    run("ln -nfs #{shared_configs}/mongoid.yml #{release_configs}/mongoid.yml")
-    run("ln -nfs #{shared_configs}/secret_token.rb #{release_configs}/initializers/__secret_token.rb")
+    on roles(:app) do
+      execute "mkdir -p #{shared_path}/config"
+      {
+        'config/config.example.yml' => 'config/config.yml',
+        'config/mongoid.example.yml' => 'config/mongoid.yml',
+        'config/newrelic.example.yml' => 'config/newrelic.yml'
+      }.each do |src, target|
+        execute "if [ ! -f #{shared_path}/#{target} ]; then cp #{current_path}/#{src} #{shared_path}/#{target}; fi"
+      end
+    end
   end
 end
 
 namespace :db do
   desc "Create the indexes defined on your mongoid models"
   task :create_mongoid_indexes do
-    run "cd #{current_path} && bundle exec rake db:mongoid:create_indexes"
+    on roles(:db) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'db:mongoid:create_indexes'
+        end
+      end
+    end
   end
 end
 
-namespace :unicorn do
-  set(:unicorn_pid) do
-    path = config['pids'] || "#{deploy_to}/shared/pids"
-    "`cat #{path}/unicorn.pid`"
-  end
+set :unicorn_pid, "`cat #{"#{fetch(:deploy_to)}/shared/pids"}/unicorn.pid`"
 
+namespace :unicorn do
   desc 'Reload unicorn'
-  task :reload, :roles => :app, :except => { :no_release => true } do
-    run "kill -HUP #{unicorn_pid}"
+  task :reload do
+    on roles(:app) do
+      execute :kill, "-HUP #{fetch(:unicorn_pid)}"
+    end
   end
 
   desc 'Stop unicorn'
-  task :stop, :roles => :app, :except => { :no_release => true } do
-    run "kill -QUIT #{unicorn_pid}"
+  task :stop do
+    on roles(:app) do
+      execute :kill, "-QUIT #{fetch(:unicorn_pid)}"
+    end
   end
 
   desc 'Reexecute unicorn'
-  task :reexec, :roles => :app, :except => { :no_release => true } do
-    run "kill -USR2 #{unicorn_pid}"
+  task :reexec do
+    on roles(:app) do
+      execute :kill, "-USR2 #{fetch(:unicorn_pid)}"
+    end
   end
 end
