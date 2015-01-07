@@ -5,14 +5,32 @@ suit your needs, so you should understand how to use capistrano before you
 continue.
 
 ## Clone and prepare the source code repository
+
 ```bash
 git clone git@github.com:errbit/errbit.git
 cd errbit
+
+# Create and edit deploy.rb
+cp config/deploy.example.rb config/deploy.rb
+$EDITOR config/deploy.rb
+
+# Create and edit production.rb
+cp config/deploy/production.example.rb config/deploy/production.rb
+$EDITOR config/deploy/production.rb
+
+# Create required directories.
+# It will print out what files are missing.
+# Create them manually or use errbit:setup_configs task after first deploy
+bundle exec cap production deploy:check
 ```
 
-- Copy `config/deploy.example.rb` to `config/deploy.rb`
-- Update the `deploy.rb` or `config.yml` file with information about your server
-- Setup server and deploy
+### rbenv support
+
+Pass `rbenv` environment when running `cap` to use rbenv.
+
+```bash
+rbenv=1 bundle exec cap production deploy
+```
 
 ## Schedule recurring tasks
 You may want to periodically clear resolved errors to free up space. Schedule
