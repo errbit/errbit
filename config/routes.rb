@@ -48,8 +48,8 @@ Errbit::Application.routes.draw do
     namespace :v1 do
       resources :problems, only: [:index], defaults: { format: 'json' } do
         member do
-          put :resolve
-          put :unresolve
+          put :resolve, constraints: {id: /\d+/}
+          put :unresolve, constraints: {id: /\d+/}
         end
         collection do
           post :merge_several
