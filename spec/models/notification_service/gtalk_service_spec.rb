@@ -28,6 +28,7 @@ describe NotificationService::GtalkService do
 
     #assert
     expect(gtalk).to receive(:send).exactly(2).times.with(message)
+    expect(gtalk).to receive(:close)
 
     notification_service.create_notification(problem)
   end
@@ -57,6 +58,7 @@ describe NotificationService::GtalkService do
       expect(Jabber::Message).to receive(:new).with("fourth@domain.org", @error_msg)
       expect(Jabber::MUC::SimpleMUCClient).to_not receive(:new)
       expect(@gtalk).to receive(:send).exactly(4).times
+      expect(@gtalk).to receive(:close)
 
       @notification_service.user_id = "first@domain.org,second@domain.org, third@domain.org ,   fourth@domain.org  "
       @notification_service.room_id = ""
@@ -69,6 +71,7 @@ describe NotificationService::GtalkService do
       expect(Jabber::Message).to receive(:new).with("fourth@domain.org", @error_msg)
       expect(Jabber::MUC::SimpleMUCClient).to_not receive(:new)
       expect(@gtalk).to receive(:send).exactly(4).times
+      expect(@gtalk).to receive(:close)
 
       @notification_service.user_id = "first@domain.org;second@domain.org; third@domain.org ;   fourth@domain.org  "
       @notification_service.room_id = ""
@@ -81,6 +84,7 @@ describe NotificationService::GtalkService do
       expect(Jabber::Message).to receive(:new).with("fourth@domain.org", @error_msg)
       expect(Jabber::MUC::SimpleMUCClient).to_not receive(:new)
       expect(@gtalk).to receive(:send).exactly(4).times
+      expect(@gtalk).to receive(:close)
 
       @notification_service.user_id = "first@domain.org second@domain.org  third@domain.org     fourth@domain.org  "
       @notification_service.room_id = ""
@@ -117,6 +121,7 @@ describe NotificationService::GtalkService do
 
     #assert
     expect(gtalk).to receive(:send).with(message)
+    expect(gtalk).to receive(:close)
 
     notification_service.create_notification(problem)
   end

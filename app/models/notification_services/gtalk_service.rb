@@ -53,6 +53,8 @@ class NotificationServices::GtalkService < NotificationService
     # post the issue to the xmpp room(s)
     send_to_users(client, message) unless user_id.blank?
     send_to_muc(client, message) unless room_id.blank?
+  ensure
+    client.close unless client.nil?
   end
 
   private
