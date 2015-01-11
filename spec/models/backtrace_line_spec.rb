@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe BacktraceLine do
+describe BacktraceLine, type: 'model' do
   subject { described_class.new(raw_line) }
 
   describe "root at the start of decorated filename" do

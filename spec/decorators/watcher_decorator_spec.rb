@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe WatcherDecorator do
   describe "#email_choosen" do
     context "with email define" do

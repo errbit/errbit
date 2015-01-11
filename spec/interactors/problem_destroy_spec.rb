@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ProblemDestroy do
   let(:problem_destroy) {
     ProblemDestroy.new(problem)
@@ -8,9 +6,9 @@ describe ProblemDestroy do
   context "in unit way" do
     let(:problem) {
       problem = Problem.new
-      problem.stub(:errs).and_return(double(:criteria, :only => [err_1, err_2]))
-      problem.stub(:comments).and_return(double(:criteria, :only => [comment_1, comment_2]))
-      problem.stub(:delete)
+      allow(problem).to receive(:errs).and_return(double(:criteria, :only => [err_1, err_2]))
+      allow(problem).to receive(:comments).and_return(double(:criteria, :only => [comment_1, comment_2]))
+      allow(problem).to receive(:delete)
       problem
     }
     let(:err_1) { Err.new }
@@ -73,5 +71,4 @@ describe ProblemDestroy do
       expect(Notice.where(:_id => notice_2_2.id).entries).to be_empty
     end
   end
-
 end

@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Devise::SessionsController do
+describe Devise::SessionsController, type: 'controller' do
   render_views
 
   describe "POST /users/sign_in" do
@@ -23,4 +21,3 @@ describe Devise::SessionsController do
     end
   end
 end
-

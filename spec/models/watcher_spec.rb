@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Watcher do
-
+describe Watcher, type: 'model' do
   context 'validations' do
     it 'requires an email address or an associated user' do
       watcher = Fabricate.build(:watcher, :email => nil, :user => nil)
@@ -32,6 +29,4 @@ describe Watcher do
       expect(watcher.address).to eq 'widgets@acme.com'
     end
   end
-
 end
-

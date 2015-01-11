@@ -1,12 +1,11 @@
-require 'spec_helper'
-
-describe "apps/edit.html.haml" do
+describe "apps/edit.html.haml", type: 'view' do
   let(:app) { stub_model(App) }
   let(:app_decorate) { AppDecorator.new(app) }
+
   before do
-    view.stub(:app).and_return(app)
-    view.stub(:app_decorate).and_return(app_decorate)
-    controller.stub(:current_user) { stub_model(User) }
+    allow(view).to receive(:app).and_return(app)
+    allow(view).to receive(:app_decorate).and_return(app_decorate)
+    allow(controller).to receive(:current_user).and_return(stub_model(User))
   end
 
   describe "content_for :action_bar" do
@@ -23,7 +22,6 @@ describe "apps/edit.html.haml" do
       render
       expect(action_bar).to have_selector('a.button[data-confirm="%s"]' % I18n.t('apps.confirm_delete'))
     end
-
   end
 
   context "with unvalid app" do
@@ -38,6 +36,4 @@ describe "apps/edit.html.haml" do
       expect(rendered).to match(/You must specify your/)
     end
   end
-
 end
-

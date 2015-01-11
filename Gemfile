@@ -56,8 +56,7 @@ gem 'yajl-ruby', :require => "yajl"
 group :development, :test do
   gem 'airbrake', :require => false
   gem 'pry-rails'
-#  gem 'rpm_contrib'
-#  gem 'newrelic_rpm'
+  gem 'pry-byebug', platforms: [:mri]
   gem 'quiet_assets'
 end
 
@@ -75,7 +74,10 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', require: false
+  gem 'rspec'
+  gem 'rspec-rails', '~> 3.0', require: false
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-its'
   gem 'mongoid-rspec', require: false
   gem 'fabrication'
   gem 'capybara'

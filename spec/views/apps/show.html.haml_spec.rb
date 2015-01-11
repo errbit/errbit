@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe "apps/show.html.haml" do
+describe "apps/show.html.haml", type: 'view' do
   let(:app) { stub_model(App) }
   let(:user) { stub_model(User) }
 
@@ -9,20 +7,18 @@ describe "apps/show.html.haml" do
   end
 
   before do
-    view.stub(:app).and_return(app)
-    view.stub(:all_errs).and_return(false)
-    view.stub(:deploys).and_return([])
-    controller.stub(:current_user) { user }
+    allow(view).to receive(:app).and_return(app)
+    allow(view).to receive(:all_errs).and_return(false)
+    allow(view).to receive(:deploys).and_return([])
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   describe "content_for :action_bar" do
-
     it "should confirm the 'cancel' link" do
       render
 
       expect(action_bar).to have_selector('a.button', :text => 'all errs')
     end
-
   end
 
   context "without errs" do
@@ -34,7 +30,7 @@ describe "apps/show.html.haml" do
 
   context "with user watch application" do
     before do
-      user.stub(:watching?).with(app).and_return(true)
+      allow(user).to receive(:watching?).with(app).and_return(true)
     end
     it 'see the unwatch button' do
       render
@@ -44,13 +40,11 @@ describe "apps/show.html.haml" do
 
   context "with user not watch application" do
     before do
-      user.stub(:watching?).with(app).and_return(false)
+      allow(user).to receive(:watching?).with(app).and_return(false)
     end
     it 'not see the unwatch button' do
       render
       expect(action_bar).to_not include(I18n.t('apps.show.unwatch'))
     end
   end
-
 end
-

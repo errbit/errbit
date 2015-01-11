@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe App do
-
+describe App, type: 'model' do
   context "Attributes" do
     it { should have_field(:_id).of_type(String) }
     it { should have_field(:name).of_type(String) }
@@ -112,12 +109,12 @@ describe App do
   context '#github_repo?' do
     it 'is true when there is a github_repo' do
       app = Fabricate(:app, :github_repo => "errbit/errbit")
-      expect(app.github_repo?).to be_true
+      expect(app.github_repo?).to be(true)
     end
 
     it 'is false when no github_repo' do
       app = Fabricate(:app)
-      expect(app.github_repo?).to be_false
+      expect(app.github_repo?).to be(false)
     end
   end
 
@@ -137,19 +134,19 @@ describe App do
     it "should be true if notify on errs and there are notification recipients" do
       app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
       2.times { Fabricate(:watcher, :app => app) }
-      expect(app.emailable?).to be_true
+      expect(app.emailable?).to be(true)
     end
 
     it "should be false if notify on errs is disabled" do
       app = Fabricate(:app, :notify_on_errs => false, :notify_all_users => false)
       2.times { Fabricate(:watcher, :app => app) }
-      expect(app.emailable?).to be_false
+      expect(app.emailable?).to be(false)
     end
 
     it "should be false if there are no notification recipients" do
       app = Fabricate(:app, :notify_on_errs => true, :notify_all_users => false)
       expect(app.watchers).to be_empty
-      expect(app.emailable?).to be_false
+      expect(app.emailable?).to be(false)
     end
   end
 

@@ -19,11 +19,13 @@ end
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'rspec/its'
 require 'email_spec'
 require 'database_cleaner'
 require 'xmpp4r'
 require 'xmpp4r/muc'
 require 'mongoid-rspec'
+require 'fabrication'
 require 'errbit_plugin/mock_issue_tracker'
 
 # Requires supporting files with custom matchers and macros, etc,
@@ -31,11 +33,8 @@ require 'errbit_plugin/mock_issue_tracker'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  config.mock_with :rspec
   config.include Devise::TestHelpers, :type => :controller
   config.include Mongoid::Matchers, :type => :model
-  config.filter_run :focused => true
-  config.run_all_when_everything_filtered = true
   config.alias_example_to :fit, :focused => true
 
   config.before(:each) do

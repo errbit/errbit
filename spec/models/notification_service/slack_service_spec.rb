@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe NotificationService::SlackService do
+describe NotificationService::SlackService, type: 'model' do
   it "it should send a notification to Slack with channel" do
     # setup
     notice = Fabricate :notice

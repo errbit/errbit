@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ResolvedProblemClearer do
   let(:resolved_problem_clearer) {
     ResolvedProblemClearer.new
@@ -21,7 +19,7 @@ describe ResolvedProblemClearer do
         }
       end
       it 'not repair database' do
-        Mongoid.default_session.stub(:command).and_call_original
+        allow(Mongoid.default_session).to receive(:command).and_call_original
         expect(Mongoid.default_session).to_not receive(:command).with({:repairDatabase => 1})
         resolved_problem_clearer.execute
       end
@@ -29,8 +27,8 @@ describe ResolvedProblemClearer do
 
     context "with problem resolve" do
       before do
-        Mongoid.default_session.stub(:command).and_call_original
-        Mongoid.default_session.stub(:command).with({:repairDatabase => 1})
+        allow(Mongoid.default_session).to receive(:command).and_call_original
+        allow(Mongoid.default_session).to receive(:command).with({:repairDatabase => 1})
         problems.first.resolve!
         problems.second.resolve!
       end
@@ -46,7 +44,6 @@ describe ResolvedProblemClearer do
       end
 
       it 'repair database' do
-        Mongoid.default_session.stub(:command).and_call_original
         expect(Mongoid.default_session).to receive(:command).with({:repairDatabase => 1})
         resolved_problem_clearer.execute
       end

@@ -3,7 +3,7 @@ require 'acceptance/acceptance_helper'
 feature 'Sign in with GitHub' do
 
   background do
-    Errbit::Config.stub(:github_authentication) { true }
+    allow(Errbit::Config).to receive(:github_authentication).and_return(true)
     Fabricate(:user, :github_login => 'nashby')
   end
 

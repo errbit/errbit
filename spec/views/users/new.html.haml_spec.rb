@@ -1,10 +1,8 @@
-require 'spec_helper'
-
-describe 'users/new.html.haml' do
+describe 'users/new.html.haml', type: 'view' do
   let(:user) { stub_model(User) }
   before {
-    view.stub(:current_user).and_return(user)
-    view.stub(:user).and_return(user)
+    allow(view).to receive(:current_user).and_return(user)
+    allow(view).to receive(:user).and_return(user)
   }
   it 'should have per_page option' do
     render

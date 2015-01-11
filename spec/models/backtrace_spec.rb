@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Backtrace do
+describe Backtrace, type: 'model' do
   subject { described_class.new }
 
   its(:fingerprint) { should be_present }
@@ -19,7 +17,7 @@ describe Backtrace do
       }
       let(:fingerprint) { "fingerprint" }
 
-      before { subject.stub(:fingerprint => fingerprint) }
+      before { allow(subject).to receive(:fingerprint).and_return(fingerprint) }
 
       its(:similar) { should == similar_backtrace }
     end
@@ -30,10 +28,10 @@ describe Backtrace do
     let(:attributes) { double :attributes }
     let(:backtrace) { double :backtrace }
 
-    before { described_class.stub(:new => backtrace) }
+    before { allow(described_class).to receive(:new).and_return(backtrace) }
 
     context "no similar backtrace" do
-      before { backtrace.stub(:similar => nil) }
+      before { allow(backtrace).to receive(:similar).and_return(nil) }
       it "create new backtrace" do
         expect(described_class).to receive(:create).with(attributes)
 
@@ -43,7 +41,7 @@ describe Backtrace do
 
     context "similar backtrace exist" do
       let(:similar_backtrace) { double :similar_backtrace }
-      before { backtrace.stub(:similar => similar_backtrace) }
+      before { allow(backtrace).to receive(:similar).and_return(similar_backtrace) }
 
       it { should == similar_backtrace }
     end

@@ -1,14 +1,10 @@
-require 'spec_helper'
-
-describe "problems/index.atom.builder" do
-
+describe "problems/index.atom.builder", type: 'view' do
   it 'display problem message' do
     app = App.new(:new_record => false)
-    view.stub(:problems).and_return([Problem.new(
+    allow(view).to receive(:problems).and_return([Problem.new(
       :message => 'foo',
       :new_record => false, :app => app), Problem.new(:new_record => false, :app => app)])
     render
     expect(rendered).to match('foo')
   end
-
 end

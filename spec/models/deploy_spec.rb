@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Deploy do
-
+describe Deploy, type: 'model' do
   context 'validations' do
     it 'requires a username' do
       deploy = Fabricate.build(:deploy, :username => nil)
@@ -36,7 +33,6 @@ describe Deploy do
         expect(@staging_errs.all?{|problem| problem.reload.resolved?}).to eq false
       end
     end
-
   end
 
   it "should produce a shortened revision with 7 characters" do

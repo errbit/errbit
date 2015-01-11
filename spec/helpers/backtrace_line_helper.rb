@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe BacktraceLineHelper do
   describe "in app lines" do
     let(:notice) do

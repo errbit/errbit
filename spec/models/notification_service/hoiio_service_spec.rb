@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe NotificationService::HoiioService do
+describe NotificationService::HoiioService, type: 'model' do
   it "it should send a notification to hoiio" do
     # setup
     notice = Fabricate :notice
@@ -9,8 +7,8 @@ describe NotificationService::HoiioService do
 
     # hoi stubbing
     sms = double('HoiioService')
-    Hoi::SMS.stub(:new).and_return(sms)
-    sms.stub(:send) { true }
+    allow(Hoi::SMS).to receive(:new).and_return(sms)
+    allow(sms).to receive(:send).and_return(true)
 
     #assert
     expect(sms).to receive(:send)
@@ -18,4 +16,3 @@ describe NotificationService::HoiioService do
     notification_service.create_notification(problem)
   end
 end
-

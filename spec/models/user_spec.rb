@@ -1,7 +1,4 @@
-require 'spec_helper'
-
 describe User do
-
   context 'validations' do
     it 'require that a name is present' do
       user = Fabricate.build(:user, :name => nil)
@@ -41,7 +38,6 @@ describe User do
   end
 
   context 'Watchers' do
-
     it 'has many watchers' do
       user = Fabricate(:user)
       watcher = Fabricate(:user_watcher, :user => user)
@@ -53,23 +49,20 @@ describe User do
       user = Fabricate(:user)
       watched_app  = Fabricate(:app)
       unwatched_app = Fabricate(:app)
-      watcher = Fabricate(:user_watcher, :app => watched_app, :user => user)
+      Fabricate(:user_watcher, :app => watched_app, :user => user)
       expect(user.apps.all).to include(watched_app)
       expect(user.apps.all).to_not include(unwatched_app)
     end
-
   end
 
   context "First user" do
     it "should be created this admin access via db:seed" do
       expect {
-        $stdout.stub(:puts => true)
+        allow($stdout).to receive(:puts).and_return(true)
         require Rails.root.join('db/seeds.rb')
       }.to change {
         User.where(:admin => true).count
       }.from(0).to(1)
     end
   end
-
 end
-

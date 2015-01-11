@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Err do
-
+describe Err, type: 'model' do
   context 'validations' do
     it 'requires a fingerprint' do
       err = Fabricate.build(:err, :fingerprint => nil)
@@ -15,5 +12,4 @@ describe Err do
       expect(err.errors[:problem_id]).to include("can't be blank")
     end
   end
-
 end

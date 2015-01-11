@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe UsersController do
-
+describe UsersController, type: 'controller' do
   it_requires_authentication
   it_requires_admin_privileges :for => {
     :index    => :get,
@@ -16,7 +13,6 @@ describe UsersController do
   let(:other_user) { Fabricate(:user) }
 
   context 'Signed in as a regular user' do
-
     before do
       sign_in user
     end
@@ -104,16 +100,12 @@ describe UsersController do
     end
 
     context "GET /users" do
-
       it 'paginates all users' do
         admin.update_attribute :per_page, 2
-        users = 3.times {
-          Fabricate(:user)
-        }
+        3.times { Fabricate(:user) }
         get :index
         expect(controller.users.to_a.size).to eq 2
       end
-
     end
 
     context "GET /users/:id" do
@@ -140,7 +132,7 @@ describe UsersController do
 
     context "POST /users" do
       context "when the create is successful" do
-        let(:attrs) { {:user => Fabricate.attributes_for(:user)} }
+        let(:attrs) { {:user => Fabricate.to_params(:user)} }
 
         it "sets a message to display" do
           post :create, attrs
@@ -156,7 +148,7 @@ describe UsersController do
           attrs[:user][:admin] = true
           post :create, attrs
           expect(response).to be_redirect
-          expect(User.find(controller.user.to_param).admin).to be_true
+          expect(User.find(controller.user.to_param).admin).to be(true)
         end
 
         it "should has auth token" do
@@ -205,7 +197,6 @@ describe UsersController do
     end
 
     context "DELETE /users/:id" do
-
       context "with a destroy success" do
         let(:user_destroy) { double(:destroy => true) }
 
@@ -236,8 +227,10 @@ describe UsersController do
     describe "#user_params" do
       context "with current user not admin" do
         before {
-          controller.stub(:current_user).and_return(user)
-          controller.stub(:params).and_return(ActionController::Parameters.new(user_param))
+          allow(controller).to receive(:current_user).and_return(user)
+          allow(controller).to receive(:params).and_return(
+            ActionController::Parameters.new(user_param)
+          )
         }
         let(:user_param) { {'user' => { :name => 'foo', :admin => true }} }
         it 'not have admin field' do
@@ -261,7 +254,5 @@ describe UsersController do
         end
       end
     end
-
   end
-
 end
