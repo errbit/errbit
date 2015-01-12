@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe DeploysController do
+describe DeploysController, type: 'controller' do
   render_views
 
   context 'POST #create' do
@@ -21,7 +19,7 @@ describe DeploysController do
     end
 
     it 'creates a deploy' do
-      App.stub(:find_by_api_key!).and_return(@app)
+      expect(App).to receive(:find_by_api_key!).and_return(@app)
       expect(@app.deploys).to receive(:create!).
         with({
           :username     => 'john.doe',
@@ -40,7 +38,6 @@ describe DeploysController do
       expect(email.to).to include(@app.watchers.first.email)
       expect(email.subject).to eq "[#{@app.name}] Deployed to production by john.doe"
     end
-
   end
 
   context "GET #index" do
@@ -59,6 +56,4 @@ describe DeploysController do
       expect(response.body).to match(@deploy.app.name)
     end
   end
-
 end
-

@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'airbrake/version'
 require 'airbrake/backtrace'
 require 'airbrake/notice'
@@ -41,22 +40,22 @@ describe ErrorReport do
     end
 
     describe "#backtrace" do
-
       it 'should have valid backtrace' do
         expect(error_report.backtrace).to be_valid
       end
     end
 
     describe "#fingerprint_strategy" do
-      after(:all) {
-        error_report.fingerprint_strategy = Fingerprint::Sha1
-      }
-
       it "should be possible to change how fingerprints are generated" do
-        strategy = double()
-        strategy.should_receive(:generate){ 'fingerprints' }
-        error_report.fingerprint_strategy = strategy
-        error_report.generate_notice!
+        def error_report.fingerprint_strategy
+          Class.new do
+            def self.generate(*args)
+              'fingerprintzzz'
+            end
+          end
+        end
+
+        expect(error_report.error.fingerprint).to eq('fingerprintzzz')
       end
     end
 
@@ -68,6 +67,7 @@ describe ErrorReport do
           app.reload.problems.count
         }.by(1)
       end
+
       context "with notice generate by Airbrake gem" do
         let(:xml) { Airbrake::Notice.new(
           :exception => Exception.new,
@@ -112,73 +112,74 @@ describe ErrorReport do
           expect(subject.user_attributes['email']).to eq 'mr.bean@example.com'
           expect(subject.user_attributes['username']).to eq 'mrbean'
         end
+
         it 'valid env_vars' do
-        # XML: <var key="SCRIPT_NAME"/>
-        expect(subject.env_vars).to have_key('SCRIPT_NAME')
-        expect(subject.env_vars['SCRIPT_NAME']).to be_nil # blank ends up nil
+          # XML: <var key="SCRIPT_NAME"/>
+          expect(subject.env_vars).to have_key('SCRIPT_NAME')
+          expect(subject.env_vars['SCRIPT_NAME']).to be_nil # blank ends up nil
 
-        # XML representation:
-        # <var key="rack.session.options">
-        #   <var key="secure">false</var>
-        #   <var key="httponly">true</var>
-        #   <var key="path">/</var>
-        #   <var key="expire_after"/>
-        #   <var key="domain"/>
-        #   <var key="id"/>
-        # </var>
-        expected = {
-          'secure'        => 'false',
-          'httponly'      => 'true',
-          'path'          => '/',
-          'expire_after'  => nil,
-          'domain'        => nil,
-          'id'            => nil
-        }
-        expect(subject.env_vars).to have_key('rack_session_options')
-        expect(subject.env_vars['rack_session_options']).to eql(expected)
+          # XML representation:
+          # <var key="rack.session.options">
+          #   <var key="secure">false</var>
+          #   <var key="httponly">true</var>
+          #   <var key="path">/</var>
+          #   <var key="expire_after"/>
+          #   <var key="domain"/>
+          #   <var key="id"/>
+          # </var>
+          expected = {
+            'secure'        => 'false',
+            'httponly'      => 'true',
+            'path'          => '/',
+            'expire_after'  => nil,
+            'domain'        => nil,
+            'id'            => nil
+          }
+          expect(subject.env_vars).to have_key('rack_session_options')
+          expect(subject.env_vars['rack_session_options']).to eql(expected)
+        end
       end
-      end
+    end
 
-      it 'save a notice assignes to err' do
+    it 'save a notice assignes to err' do
+      error_report.generate_notice!
+      expect(error_report.notice.err).to be_a(Err)
+    end
+
+    it 'memoize the notice' do
+      expect {
         error_report.generate_notice!
-        expect(error_report.notice.err).to be_a(Err)
+        error_report.generate_notice!
+      }.to change {
+        Notice.count
+      }.by(1)
+    end
+
+    it 'find the correct err for the notice' do
+      err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true))
+
+      allow(error_report).to receive(:fingerprint).and_return(err.fingerprint)
+
+      expect {
+        error_report.generate_notice!
+      }.to change {
+        error_report.error.resolved?
+      }.from(true).to(false)
+    end
+
+    context "with notification service configured" do
+      before do
+        app.notify_on_errs = true
+        app.watchers.build(:email => 'foo@example.com')
+        app.save
       end
-
-      it 'memoize the notice' do
-        expect {
-          error_report.generate_notice!
-          error_report.generate_notice!
-        }.to change {
-          Notice.count
-        }.by(1)
-      end
-
-      it 'find the correct err for the notice' do
-        err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true))
-
-        ErrorReport.any_instance.stub(:fingerprint).and_return(err.fingerprint)
-
-        expect {
-          error_report.generate_notice!
-        }.to change {
-          error_report.error.resolved?
-        }.from(true).to(false)
-      end
-
-      context "with notification service configured" do
-        before do
-          app.notify_on_errs = true
-          app.watchers.build(:email => 'foo@example.com')
-          app.save
-        end
-        it 'send email' do
-          notice = error_report.generate_notice!
-          email = ActionMailer::Base.deliveries.last
-          expect(email.to).to include(app.watchers.first.email)
-          expect(email.subject).to include(notice.message.truncate(50))
-          expect(email.subject).to include("[#{app.name}]")
-          expect(email.subject).to include("[#{notice.environment_name}]")
-        end
+      it 'send email' do
+        notice = error_report.generate_notice!
+        email = ActionMailer::Base.deliveries.last
+        expect(email.to).to include(app.watchers.first.email)
+        expect(email.subject).to include(notice.message.truncate(50))
+        expect(email.subject).to include("[#{app.name}]")
+        expect(email.subject).to include("[#{notice.environment_name}]")
       end
 
       context "with xml without request section" do
@@ -270,8 +271,6 @@ describe ErrorReport do
           expect(error_report.should_keep?).to be false
         end
       end
-
     end
-
   end
 end

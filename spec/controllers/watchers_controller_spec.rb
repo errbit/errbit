@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe WatchersController do
+describe WatchersController, type: 'controller' do
   let(:app) do
     a = Fabricate(:app)
     Fabricate(:user_watcher, :app => a)
@@ -8,7 +6,6 @@ describe WatchersController do
   end
 
   describe "DELETE /apps/:app_id/watchers/:id/destroy" do
-
     context "with admin user" do
       before(:each) do
         sign_in Fabricate(:admin)

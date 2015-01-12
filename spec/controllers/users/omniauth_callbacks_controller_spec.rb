@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Users::OmniauthCallbacksController do
-
+describe Users::OmniauthCallbacksController, type: 'controller' do
   def stub_env_for_github_omniauth(login, token = nil)
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]
@@ -12,7 +9,7 @@ describe Users::OmniauthCallbacksController do
         :credentials => { :token => token }
       )
     }
-    @controller.stub(:env).and_return(env)
+    allow(@controller).to receive(:env).and_return(env)
   end
 
   context 'Linking a GitHub account to a signed in user' do

@@ -1,10 +1,8 @@
-require 'spec_helper'
-
-describe "apps/index.html.haml" do
+describe "apps/index.html.haml", type: 'view' do
   before do
     app = stub_model(App, :deploys => [stub_model(Deploy, :created_at => Time.now, :revision => "123456789abcdef")])
-    view.stub(:apps).and_return([app])
-    controller.stub(:current_user) { stub_model(User) }
+    allow(view).to receive(:apps).and_return([app])
+    allow(controller).to receive(:current_user).and_return(stub_model(User))
   end
 
   describe "deploy column" do
@@ -14,4 +12,3 @@ describe "apps/index.html.haml" do
     end
   end
 end
-

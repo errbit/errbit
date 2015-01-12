@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe "Callback on Deploy" do
+describe "Callback on Deploy", type: 'model' do
   context 'when a Deploy is saved' do
     context 'and the app should notify on deploys' do
       it 'should send an email notification' do

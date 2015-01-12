@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Problem do
-
+describe Problem, type: 'model' do
   context 'validations' do
     it 'requires an environment' do
       err = Fabricate.build(:problem, :environment => nil)
@@ -59,7 +56,7 @@ describe Problem do
       notice1 = Fabricate(:notice, :err => err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
 
-      notice2 = Fabricate(:notice, :err => err)
+      Fabricate(:notice, :err => err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
     end
   end
@@ -128,12 +125,12 @@ describe Problem do
     it "should throw an err if it's not successful" do
       problem = Fabricate(:problem)
       expect(problem).to_not be_resolved
-      problem.stub(:valid?).and_return(false)
+      allow(problem).to receive(:valid?).and_return(false)
       ## update_attributes not test #valid? but #errors.any?
       # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
       er = ActiveModel::Errors.new(problem)
       er.add_on_blank(:resolved)
-      problem.stub(:errors).and_return(er)
+      allow(problem).to receive(:errors).and_return(er)
       expect(problem).to_not be_valid
       expect {
         problem.resolve!
@@ -210,7 +207,7 @@ describe Problem do
     end
 
     it "removing a notice decreases #notices_count by 1" do
-      notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
+      Fabricate(:notice, :err => @err, :message => 'ERR 1')
       expect {
         @err.notices.first.destroy
         @problem.reload
@@ -240,7 +237,7 @@ describe Problem do
     before do
       @app = Fabricate(:app)
       @last_deploy = Time.at(10.days.ago.localtime.to_i)
-      deploy = Fabricate(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
+      Fabricate(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
     end
 
     it "is set when a problem is created" do
@@ -276,7 +273,7 @@ describe Problem do
     end
 
     it "removing a notice removes string from #messages" do
-      notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
+      Fabricate(:notice, :err => @err, :message => 'ERR 1')
       expect {
         @err.notices.first.destroy
         @problem.reload
@@ -284,7 +281,7 @@ describe Problem do
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
-      notice1 = Fabricate(:notice, :err => @err, :message => 'ERR 1')
+      Fabricate(:notice, :err => @err, :message => 'ERR 1')
       @problem.messages = {}
       @problem.save!
       expect {@err.notices.first.destroy}.not_to raise_error
@@ -309,7 +306,7 @@ describe Problem do
     end
 
     it "removing a notice removes string from #hosts" do
-      notice1 = Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
+      Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
       expect {
         @err.notices.first.destroy
         @problem.reload
@@ -335,7 +332,7 @@ describe Problem do
     end
 
     it "removing a notice removes string from #user_agents" do
-      notice1 = Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
+      Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
       expect {
         @err.notices.first.destroy
         @problem.reload
@@ -362,7 +359,7 @@ describe Problem do
     end
 
     it "removing a comment decreases #comments_count by 1" do
-      comment1 = Fabricate(:comment, :err => @problem)
+      Fabricate(:comment, :err => @problem)
       expect {
         @problem.reload.comments.first.destroy
         @problem.reload
@@ -418,7 +415,4 @@ describe Problem do
       end
     end
   end
-
-
 end
-

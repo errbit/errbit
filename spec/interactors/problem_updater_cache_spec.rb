@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ProblemUpdaterCache do
   let(:problem) { Fabricate(:problem_with_errs) }
   let(:first_errs) { problem.errs }

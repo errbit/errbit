@@ -1,15 +1,12 @@
-require 'spec_helper'
-
-describe 'users/show.html.haml' do
-
+describe 'users/show.html.haml', type: 'view' do
   let(:user) do
     stub_model(User, :created_at => Time.now, :email => "test@example.com")
   end
 
   before do
-    Errbit::Config.stub(:github_authentication) { true }
-    controller.stub(:current_user) { stub_model(User) }
-    view.stub(:user) { user }
+    allow(Errbit::Config).to receive(:github_authentication).and_return(true)
+    allow(controller).to receive(:current_user).and_return(stub_model(User))
+    allow(view).to receive(:user).and_return(user)
   end
 
   context 'with GitHub authentication' do
@@ -38,7 +35,7 @@ describe 'users/show.html.haml' do
 
     context 'viewing own user page' do
       before do
-        controller.stub(:current_user) { user }
+        allow(controller).to receive(:current_user).and_return(user)
       end
 
       it 'shows link github button when no login or token' do

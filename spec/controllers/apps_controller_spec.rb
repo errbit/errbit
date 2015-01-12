@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe AppsController do
-
+describe AppsController, type: 'controller' do
   it_requires_authentication
   it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
 
@@ -218,7 +215,7 @@ describe AppsController do
     describe "POST /apps" do
       before do
         @app = Fabricate(:app)
-        App.stub(:new).and_return(@app)
+        allow(App).to receive(:new).and_return(@app)
       end
 
       context "when the create is successful" do

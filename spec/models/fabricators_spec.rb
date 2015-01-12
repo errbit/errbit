@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 Fabrication::Config.fabricator_path.each do |folder|
   Dir.glob(File.join(Rails.root, folder, '**', '*.rb')).each do |file|
     require file

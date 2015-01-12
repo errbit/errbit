@@ -1,7 +1,4 @@
-require "spec_helper"
-
-describe Issue do
-
+describe Issue, type: 'model' do
   subject(:issue) { Issue.new(problem: problem, user: user, title: title, body: body) }
 
   let(:problem) { notice.problem }
@@ -33,15 +30,13 @@ describe Issue do
   context "when has no title" do
     let(:body) { "barrr" }
 
-    pending "returns an error" do
-    end
+    pending "returns an error"
   end
 
   context "when has no body" do
     let(:title) { "Foo" }
 
-    pending "returns an error" do
-    end
+    pending "returns an error"
   end
 
   context "when app has a issue tracker" do

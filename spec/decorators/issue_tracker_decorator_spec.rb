@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe IssueTrackerDecorator do
   let(:fake_tracker) do
     Class.new(ErrbitPlugin::IssueTracker) do

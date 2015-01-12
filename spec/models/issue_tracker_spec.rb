@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe IssueTracker do
+describe IssueTracker, type: 'model' do
   describe "Association" do
     it { should be_embedded_in(:app) }
   end

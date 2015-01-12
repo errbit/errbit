@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Fingerprint::MD5 do
+describe Fingerprint::MD5, type: 'model' do
   context 'being created' do
     let(:backtrace) do
       Backtrace.create(:raw => [

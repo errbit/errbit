@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Api::V1::NoticesController do
-
+describe Api::V1::NoticesController, type: 'controller' do
   context "when logged in" do
     before do
       @user = Fabricate(:user)
@@ -50,5 +47,4 @@ describe Api::V1::NoticesController do
 
     end
   end
-
 end

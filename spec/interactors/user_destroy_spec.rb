@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe UserDestroy do
   let(:app) { Fabricate(
     :app,

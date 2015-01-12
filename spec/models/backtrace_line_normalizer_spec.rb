@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe BacktraceLineNormalizer do
+describe BacktraceLineNormalizer, type: 'model' do
   subject { described_class.new(raw_line).call }
 
   describe "sanitize" do

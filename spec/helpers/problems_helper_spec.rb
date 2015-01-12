@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ProblemsHelper do
   describe '#truncated_problem_message' do
     it 'is html safe' do
@@ -24,8 +22,8 @@ describe ProblemsHelper do
 
     context "default config" do
       before do
-        Errbit::Config.stub(:use_gravatar).and_return(true)
-        Errbit::Config.stub(:gravatar_default).and_return('identicon')
+        allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
+        allow(Errbit::Config).to receive(:gravatar_default).and_return('identicon')
       end
 
       it "should render image_tag with correct alt and src" do
@@ -69,7 +67,7 @@ describe ProblemsHelper do
       let(:email_hash) { Digest::MD5.hexdigest email }
 
       it "should return the http url" do
-        ActionController::TestRequest.any_instance.stub :ssl? => true
+        allow(controller.request).to receive(:ssl?).and_return(true)
         expect(helper.gravatar_url(email)).to eq("https://secure.gravatar.com/avatar/#{email_hash}?d=identicon")
       end
     end

@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe "notices/_summary.html.haml" do
+describe "notices/_summary.html.haml", type: 'view' do
   let(:notice) { Fabricate(:notice, :framework => 'Rails 3.2.11') }
 
   it "renders application framework" do
@@ -9,4 +7,3 @@ describe "notices/_summary.html.haml" do
     expect(rendered).to have_content('Rails 3.2.11')
   end
 end
-

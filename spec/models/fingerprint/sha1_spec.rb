@@ -1,7 +1,4 @@
-require 'spec_helper'
-
-describe Fingerprint::Sha1 do
-
+describe Fingerprint::Sha1, type: 'model' do
   context '#generate' do
     let(:backtrace) {
       Backtrace.create(:raw => [
@@ -80,8 +77,5 @@ describe Fingerprint::Sha1 do
         should eq "#<ActiveSupport::HashWithIndifferentAccess> #<Object>"
       end
     end
-
   end
-
 end
-
