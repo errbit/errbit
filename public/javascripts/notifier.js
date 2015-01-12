@@ -46,6 +46,13 @@
 // IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 // OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+// Domain Public by Eric Wendelin http://eriwen.com/ (2008)
+//                  Luke Smith http://lucassmith.name/ (2008)
+//                  Loic Dachary <loic@dachary.org> (2008)
+//                  Johan Euphrosine <proppy@aminche.com> (2008)
+//                  Oyvind Sean Kinsey http://kinsey.no/blog (2010)
+//                  Victor Homyakov <victor-homyakov@users.sourceforge.net> (2010)
+
 /**
  * Main function giving a function stack trace with a forced or passed in Error
  *
@@ -58,10 +65,6 @@ function printStackTrace(options) {
     var ex = options.e || null, guess = !!options.guess;
     var p = new printStackTrace.implementation(), result = p.run(ex);
     return (guess) ? p.guessAnonymousFunctions(result) : result;
-}
-
-if (typeof module !== "undefined" && module.exports) {
-    module.exports = printStackTrace;
 }
 
 printStackTrace.implementation = function() {
@@ -103,8 +106,6 @@ printStackTrace.implementation.prototype = {
             return 'chrome';
         } else if (e.stack && e.sourceURL) {
             return 'safari';
-        } else if (e.stack && e.number) {
-            return 'ie';
         } else if (typeof e.message === 'string' && typeof window !== 'undefined' && window.opera) {
             // e.message.indexOf("Backtrace:") > -1 -> opera
             // !e.stacktrace -> opera
@@ -125,10 +126,6 @@ printStackTrace.implementation.prototype = {
             }
             // e.stacktrace && e.stack -> opera11
             return 'opera11'; // use e.stacktrace, format differs from 'opera10a', 'opera10b'
-        } else if (e.stack && !e.fileName) {
-            // Chrome 27 does not have e.arguments as earlier versions,
-            // but still does not have e.fileName as Firefox
-            return 'chrome';
         } else if (e.stack) {
             return 'firefox';
         }
@@ -141,7 +138,7 @@ printStackTrace.implementation.prototype = {
      *
      * @param {Object} context of execution (e.g. window)
      * @param {String} functionName to instrument
-     * @param {Function} callback function to call with a stack trace on invocation
+     * @param {Function} function to call with a stack trace on invocation
      */
     instrumentFunction: function(context, functionName, callback) {
         context = context || window;
@@ -191,24 +188,7 @@ printStackTrace.implementation.prototype = {
      * @return Array<String> of function calls, files and line numbers
      */
     safari: function(e) {
-        return e.stack.replace(/\[native code\]\n/m, '')
-            .replace(/^(?=\w+Error\:).*$\n/m, '')
-            .replace(/^@/gm, '{anonymous}()@')
-            .split('\n');
-    },
-
-    /**
-     * Given an Error object, return a formatted Array based on IE's stack string.
-     *
-     * @param e - Error object to inspect
-     * @return Array<String> of function calls, files and line numbers
-     */
-    ie: function(e) {
-        var lineRE = /^.*at (\w+) \(([^\)]+)\)$/gm;
-        return e.stack.replace(/at Anonymous function /gm, '{anonymous}()@')
-            .replace(/^(?=\w+Error\:).*$\n/m, '')
-            .replace(lineRE, '$1@$2')
-            .split('\n');
+        return e.stack.replace(/\[native code\]\n/m, '').replace(/^@/gm, '{anonymous}()@').split('\n');
     },
 
     /**
@@ -309,10 +289,10 @@ printStackTrace.implementation.prototype = {
     },
 
     /**
-     * Given arguments array as a String, substituting type names for non-string types.
+     * Given arguments array as a String, subsituting type names for non-string types.
      *
-     * @param {Arguments,Array} args
-     * @return {String} stringified arguments
+     * @param {Arguments} args
+     * @return {Array} of Strings with stringified arguments
      */
     stringifyArguments: function(args) {
         var result = [];
@@ -398,7 +378,7 @@ printStackTrace.implementation.prototype = {
      * via Ajax).
      *
      * @param url <String> source url
-     * @return <Boolean> False if we need a cross-domain request
+     * @return False if we need a cross-domain request
      */
     isSameDomain: function(url) {
         return typeof location !== "undefined" && url.indexOf(location.hostname) !== -1; // location may not be defined, e.g. when running from nodejs.
@@ -451,13 +431,14 @@ printStackTrace.implementation.prototype = {
     findFunctionName: function(source, lineNo) {
         // FIXME findFunctionName fails for compressed source
         // (more than one function on the same line)
+        // TODO use captured args
         // function {name}({args}) m[1]=name m[2]=args
         var reFunctionDeclaration = /function\s+([^(]*?)\s*\(([^)]*)\)/;
         // {name} = function ({args}) TODO args capture
         // /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function(?:[^(]*)/
-        var reFunctionExpression = /['"]?([$_A-Za-z][$_A-Za-z0-9]*)['"]?\s*[:=]\s*function\b/;
+        var reFunctionExpression = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function\b/;
         // {name} = eval()
-        var reFunctionEvaluation = /['"]?([$_A-Za-z][$_A-Za-z0-9]*)['"]?\s*[:=]\s*(?:eval|new Function)\b/;
+        var reFunctionEvaluation = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(?:eval|new Function)\b/;
         // Walk backwards in the source lines until we find
         // the line which matches one of the patterns above
         var code = "", line, maxLines = Math.min(lineNo, 20), m, commentPos;
