@@ -1,4 +1,15 @@
-## 0.3.0 - Not released Yet
+## 0.4.0 - Not released Yet
+
+- [#791][] Fix double escaping of problem title in list view.(@felixbuenemann)
+- [#790][] Fix favicon location.(@felixbuenemann)
+- [#716][] FIX inline comments styles.(@oelmekki)
+- [c525612][] Update to rails 4.1.(@arthurnn)
+- [#682][] Namespace fingerprint classes better.(@csaunders)
+- [c807fe4][] Drop ruby support for versions 1.9.x, and 2.0.x.(@arthurnn)
+- [#773][] Only leave GitHub issue tracker on vanila errbit, as the others could be added just using the plugin.(@arthurnn)
+- [#768][] Update to Mongoid 4.0 and rails to 4.0 (@arthurnn)
+
+## 0.3.0
 
 ### Improvements
 
