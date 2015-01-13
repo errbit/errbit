@@ -4,7 +4,7 @@ class RegenerateErrFingerprints < Mongoid::Migration
       if err.notices.any? && err.problem
         err.update_attribute(
           :fingerprint,
-          Fingerprint.generate(err.notices.first, err.app.api_key)
+          Fingerprint::Sha1.generate(err.notices.first, err.app.api_key)
         )
       end
     end
