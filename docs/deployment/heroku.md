@@ -8,6 +8,11 @@ git clone git@github.com:errbit/errbit.git
 cd errbit
 ```
 
+Add [rails_12factor](https://github.com/heroku/rails_12factor) to the `Gemfile`:
+```bash
+gem 'rails_12factor', group: :production
+```
+
 - Update `db/seeds.rb` with admin credentials for your initial login
 
 Commit the results:

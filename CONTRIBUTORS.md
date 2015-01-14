@@ -17,6 +17,7 @@
 - [@felixbuenemann][]
 - [@soberstadt][]
 - [@rsutphin][]
+- [@gabrielhilal][]
 
 [@arthurnn]: https://github.com/arthurnn
 [@emgiezet]: https://github.com/emgiezet
@@ -112,3 +113,4 @@
 [@xenji]: https://github.com/xenji
 [@soberstadt]: https://github.com/soberstadt
 [@rsutphin]: https://github.com/rsutphin
+[@gabrielhilal]: https://github.com/gabrielhilal
