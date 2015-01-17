@@ -1,88 +1,155 @@
-require 'ostruct'
-default_config_file = Rails.root.join("config", "config.example.yml")
+module Errbit
+  class Configurator
+    MAPPING = {
+      :host     => [:string, ENV['ERRBIT_HOST'], 'errbit.example.com'],
+      :protocol => [:string, ENV['ERRBIT_PROTOCOL'], 'http'],
+      :port     => [:string, ENV['ERRBIT_PORT'], nil],
+      :enforce_ssl => [:boolean, ENV['ERRBIT_ENFORCE_SSL'], false],
+      :confirm_resolve_err => [:boolean, ENV['CONFIRM_RESOLVE_ERR'], true],
+      :confirm_err_actions => [:boolean, ENV['ERRBIT_CONFIRM_ERR_ACTIONS'], true],
+      :user_has_username => [:boolean, ENV['ERRBIT_USER_HAS_USERNAME'], false],
+      :use_gravatar => [:boolean, ENV['ERRBIT_USE_GRAVATAR'], true],
+      :gravatar_default => [:string, ENV['ERRBIT_GRAVATAR_DEFAULT'], 'identicon'],
+      :display_internal_errors => [:boolean, ENV['DISPLAY_INTERNAL_ERRORS'], false],
+      :allow_comments_with_issue_tracker => [:boolean, ENV['ALLOW_COMMENTS_WITH_ISSUE_TRACKER'], true],
+      :serve_static_assets => [:boolean, ENV['SERVE_STATIC_ASSETS'], Rails.env == 'development'],
 
-# Allow a Rails Engine to override config by defining it earlier
-unless defined?(Errbit::Config)
-  Errbit::Config = OpenStruct.new
-  use_env = ENV['HEROKU'] || ENV['USE_ENV']
+      :email_from => [:string, ENV['ERRBIT_EMAIL_FROM'], 'errbit@example.com'],
+      :email_at_notices => [:array, ENV['ERRBIT_EMAIL_AT_NOTICES'], '1,10,100'],
+      :per_app_email_at_notices => [:boolean, ENV['PER_APP_EMAIL_AT_NOTICES'], false],
 
-  Errbit::Config.protocol = 'http'
+      :notify_at_notices => [:array, ENV['NOTIFY_AT_NOTICES'], '0'],
+      :per_app_notify_at_notices => [:boolean, ENV['PER_APP_NOTIFY_AT_NOTICES'], false],
 
-  # If Errbit is running on Heroku, config can be set from environment variables.
-  if use_env
-    Errbit::Config.host = ENV['ERRBIT_HOST']
-    Errbit::Config.protocol = ENV['ERRBIT_PROTOCOL'] || 'http'
-    Errbit::Config.port = ENV['ERRBIT_PORT']
-    Errbit::Config.email_from = ENV['ERRBIT_EMAIL_FROM']
-    #  Not really easy to use like an env because need an array and ENV return a string :(
-    # Errbit::Config.email_at_notices = ENV['ERRBIT_EMAIL_AT_NOTICES']
-    Errbit::Config.confirm_err_actions = ENV['ERRBIT_CONFIRM_ERR_ACTIONS'].to_i == 0
-    Errbit::Config.user_has_username = ENV['ERRBIT_USER_HAS_USERNAME'].to_i == 1
-    Errbit::Config.enforce_ssl = ENV['ERRBIT_ENFORCE_SSL']
-    Errbit::Config.use_gravatar = ENV['ERRBIT_USE_GRAVATAR']
-    Errbit::Config.gravatar_default = ENV['ERRBIT_GRAVATAR_DEFAULT']
+      # github
+      :github_url => [:string, ENV['GITHUB_URL'], 'https://github.com'],
+      :github_authentication => [:boolean, ENV['GITHUB_AUTHENTICATION'], true],
+      :github_client_id => [:string, ENV['GITHUB_AUTHENTICATION']],
+      :github_secret => [:string, ENV['GITHUB_SECRET']],
+      :github_org_id => [:string, ENV['GITHUB_ORG_ID']],
+      :github_access_scope => [:array, ENV['GITHUB_ACCESS_SCOPE'], 'repo'],
 
-    Errbit::Config.github_url = ENV['GITHUB_URL']
-    Errbit::Config.github_authentication = ENV['GITHUB_AUTHENTICATION']
-    Errbit::Config.github_client_id = ENV['GITHUB_CLIENT_ID']
-    Errbit::Config.github_secret = ENV['GITHUB_SECRET']
-    Errbit::Config.github_org_id = ENV['GITHUB_ORG_ID'] if ENV['GITHUB_ORG_ID']
-    Errbit::Config.github_access_scope = ENV['GITHUB_ACCESS_SCOPE'].split(',').map(&:strip) if ENV['GITHUB_ACCESS_SCOPE']
+      :email_delivery_method => [:symbol, ENV['EMAIL_DELIVERY_METHOD']],
 
-    Errbit::Config.smtp_settings = {
-      :address        => ENV['SMTP_SERVER'] || 'smtp.sendgrid.net',
-      :port           => ENV['SMTP_PORT']   || 25,
-      :authentication => :plain,
-      :user_name      => ENV['SMTP_USERNAME']   || ENV['SENDGRID_USERNAME'],
-      :password       => ENV['SMTP_PASSWORD']   || ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['SMTP_DOMAIN'] || ENV['SENDGRID_DOMAIN'] ||
-                           (ENV['ERRBIT_EMAIL_FROM'] ? ENV['ERRBIT_EMAIL_FROM'].split('@').last : nil)
+      # smtp
+      :smtp_address        => [:string, ENV['SMTP_SERVER']],
+      :smtp_port           => [:integer, ENV['SMTP_PORT'], 25],
+      :smtp_authentication => [:symbol, ENV['SMTP_AUTHENTICATION'], :plain],
+      :smtp_user_name      => [:string, ENV['SMTP_USERNAME'], ENV['SENDGRID_USERNAME']],
+      :smtp_password       => [:string, ENV['SMTP_PASSWORD'], ENV['SENDGRID_PASSWORD']],
+      :smtp_domain         => [:string, ENV['SMTP_DOMAIN'], ENV['SENDGRID_DOMAIN']],
+
+      # sendmail
+      :sendmail_location   => [:string, ENV['SENDMAIL_LOCATION']],
+      :sendmail_arguments  => [:string, ENV['SENDMAIL_ARGUMENTS']],
+
+      :devise_modules => [:array, ENV['DEVISE_MODULES'], 'database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable'],
     }
-  end
 
-  # Use example config for test environment.
-  config_file = Rails.env == "test" ? default_config_file : Rails.root.join("config", "config.yml")
+    @resolved_data = {}
 
-  # Load config if config file exists.
-  if File.exists?(config_file)
-    config = YAML.load_file(config_file)
-    config.merge!(config.delete(Rails.env)) if config.has_key?(Rails.env)
-    config.each do |k,v|
-      Errbit::Config.send("#{k}=", v)
+    def self.string(v)
+      return nil if v == nil
+
+      v.to_s
     end
-  # Show message if we are not running tests, not running on Heroku, and config.yml doesn't exist.
-  elsif not use_env
-    puts "Please copy 'config/config.example.yml' to 'config/config.yml' and configure your settings. Using default settings."
+
+    def self.array(v)
+      return [] if v == nil
+
+      v.split(',').map(&:strip)
+    end
+
+    def self.boolean(v)
+      return false if v == nil
+      return false if v == 'false'
+      return false if v == 0
+      return true  if v == 'true'
+      return true  if v == 1
+      return true  if v == true
+      return false
+    end
+
+    def self.integer(v)
+      return nil if v == nil
+      v.to_i
+    end
+
+    def self.symbol(v)
+      return nil if v == nil
+      v.to_sym
+    end
+
+    MAPPING.each do |key, _|
+      values    = MAPPING[key].dup
+      type      = values.shift
+
+      @resolved_data[key] = send(type, values.find { |value| value != nil })
+
+      define_method(key.to_s + '=') do |value|
+        self.class.set(key, value)
+      end
+
+      define_method(key) do
+        self.class.get(key)
+      end
+    end
+
+    def self.get(key)
+      @resolved_data[key]
+    end
+
+    def self.set(key, value)
+      @resolved_data[key] = value
+    end
+
+    def smtp_domain
+      self.class.get(:smtp_domain) ||
+      (email_from && email_from.split('@').last) ||
+      nil
+    end
+
+    def github_url
+      self.class.get(:github_url).gsub(/\/*\z/, '')
+    end
+
+    def devise_modules
+      (self.class.get(:devise_modules) || []).map(&:to_sym)
+    end
+
+    def email_at_notices
+      self.class.get(:email_at_notices).map(&:to_i)
+    end
+
+    def notify_at_notices
+      self.class.get(:notify_at_notices).map(&:to_i)
+    end
   end
-
-  # Set default devise modules
-  Errbit::Config.devise_modules = [:database_authenticatable,
-                                   :recoverable, :rememberable, :trackable,
-                                   :validatable, :omniauthable]
 end
 
-# Set default settings from config.example.yml if key is missing from config.yml
-default_config = YAML.load_file(default_config_file)
-default_config.each do |k,v|
-  Errbit::Config.send("#{k}=", v) if Errbit::Config.send(k) === nil
-end
-
-# Make sure the GitHub link doesn't end with a slash, so we don't have to deal
-# with it later on in the code.
-Errbit::Config.github_url.gsub!(/\/*\z/, '')
-
-# Disable GitHub oauth if gem is missing
-Errbit::Config.github_authentication = false unless defined?(OmniAuth::Strategies::GitHub)
+Errbit::Config = Errbit::Configurator.new
 
 # Set SMTP settings if given.
-if smtp = Errbit::Config.smtp_settings
+if Errbit::Config.email_delivery_method == :smtp
   ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = smtp
+  ActionMailer::Base.smtp_settings = {
+    :address        => Errbit::Config.smtp_address,
+    :port           => Errbit::Config.smtp_port,
+    :authentication => Errbit::Config.smtp_authentication,
+    :user_name      => Errbit::Config.smtp_user_name,
+    :password       => Errbit::Config.smtp_password,
+    :domain         => Errbit::Config.smtp_domain,
+  }
 end
 
-if sendmail = Errbit::Config.sendmail_settings
+if Errbit::Config.email_delivery_method == :sendmail
   ActionMailer::Base.delivery_method = :sendmail
-  ActionMailer::Base.sendmail_settings = sendmail
+
+  sendmail_settings = {}
+  sendmail_settings[:location] = Errbit::Config.sendmail_location if Errbit::Config.sendmail_location
+  sendmail_settings[:arguments] = Errbit::Config.sendmail_arguments if Errbit::Config.sendmail_arguments
+
+  ActionMailer::Base.sendmail_settings = sendmail_settings
 end
 
 # Set config specific values
@@ -96,6 +163,5 @@ end
   default.reverse_merge!(options_from_config)
 end
 
-if Rails.env.production?
-  Rails.application.config.consider_all_requests_local = Errbit::Config.display_internal_errors
-end
+Rails.application.config.consider_all_requests_local = Errbit::Config.display_internal_errors
+Rails.application.config.serve_static_assets = Errbit::Config.serve_static_assets
