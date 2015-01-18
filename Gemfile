@@ -93,6 +93,7 @@ group :test do
 end
 
 group :heroku, :production do
+  gem 'rails_12factor', require: !!ENV["HEROKU"]
   gem 'unicorn', :require => false
 end
 
