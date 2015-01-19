@@ -3,58 +3,58 @@ Dotenv.load('.env.default')
 module Errbit
   class Configurator
     MAPPING = {
-      :host     => [:string, ENV['ERRBIT_HOST'], 'errbit.example.com'],
-      :protocol => [:string, ENV['ERRBIT_PROTOCOL'], 'http'],
-      :port     => [:string, ENV['ERRBIT_PORT'], nil],
-      :enforce_ssl => [:boolean, ENV['ERRBIT_ENFORCE_SSL'], false],
-      :confirm_resolve_err => [:boolean, ENV['CONFIRM_RESOLVE_ERR'], true],
-      :confirm_err_actions => [:boolean, ENV['ERRBIT_CONFIRM_ERR_ACTIONS'], true],
-      :user_has_username => [:boolean, ENV['ERRBIT_USER_HAS_USERNAME'], false],
-      :use_gravatar => [:boolean, ENV['ERRBIT_USE_GRAVATAR'], true],
-      :gravatar_default => [:string, ENV['ERRBIT_GRAVATAR_DEFAULT'], 'identicon'],
-      :display_internal_errors => [:boolean, ENV['DISPLAY_INTERNAL_ERRORS'], false],
-      :allow_comments_with_issue_tracker => [:boolean, ENV['ALLOW_COMMENTS_WITH_ISSUE_TRACKER'], true],
-      :serve_static_assets => [:boolean, ENV['SERVE_STATIC_ASSETS'], Rails.env == 'development'],
+      :host     => [:string, ENV['ERRBIT_HOST']],
+      :protocol => [:string, ENV['ERRBIT_PROTOCOL']],
+      :port     => [:string, ENV['ERRBIT_PORT']],
+      :enforce_ssl => [:boolean, ENV['ERRBIT_ENFORCE_SSL']],
+      :confirm_resolve_err => [:boolean, ENV['CONFIRM_RESOLVE_ERR']],
+      :confirm_err_actions => [:boolean, ENV['ERRBIT_CONFIRM_ERR_ACTIONS']],
+      :user_has_username => [:boolean, ENV['ERRBIT_USER_HAS_USERNAME']],
+      :use_gravatar => [:boolean, ENV['ERRBIT_USE_GRAVATAR']],
+      :gravatar_default => [:string, ENV['ERRBIT_GRAVATAR_DEFAULT']],
+      :display_internal_errors => [:boolean, ENV['DISPLAY_INTERNAL_ERRORS']],
+      :allow_comments_with_issue_tracker => [:boolean, ENV['ALLOW_COMMENTS_WITH_ISSUE_TRACKER']],
+      :serve_static_assets => [:boolean, ENV['SERVE_STATIC_ASSETS']],
       :secret_key_base => [:string, ENV['SECRET_KEY_BASE']],
 
       :mongo_url => [:string, ENV['MONGOLAB_URI'], ENV['MONGOHQ_URL'], ENV['MONGODB_URL'], ENV['MONGO_URL']],
 
-      :mongoid_host => [:string, ENV['MONGOID_HOST'], 'localhost'],
-      :mongoid_port => [:string, ENV['MONGOID_PORT'], '27017'],
+      :mongoid_host => [:string, ENV['MONGOID_HOST']],
+      :mongoid_port => [:string, ENV['MONGOID_PORT']],
       :mongoid_username => [:string, ENV['MONGOID_USERNAME']],
       :mongoid_password => [:string, ENV['MONGOID_PASSWORD']],
       :mongoid_database => [:string, ENV['MONGOID_DATABASE']],
 
-      :email_from => [:string, ENV['ERRBIT_EMAIL_FROM'], 'errbit@example.com'],
-      :email_at_notices => [:array, ENV['ERRBIT_EMAIL_AT_NOTICES'], '1,10,100'],
-      :per_app_email_at_notices => [:boolean, ENV['PER_APP_EMAIL_AT_NOTICES'], false],
+      :email_from => [:string, ENV['ERRBIT_EMAIL_FROM']],
+      :email_at_notices => [:array, ENV['ERRBIT_EMAIL_AT_NOTICES']],
+      :per_app_email_at_notices => [:boolean, ENV['PER_APP_EMAIL_AT_NOTICES']],
 
-      :notify_at_notices => [:array, ENV['NOTIFY_AT_NOTICES'], '0'],
-      :per_app_notify_at_notices => [:boolean, ENV['PER_APP_NOTIFY_AT_NOTICES'], false],
+      :notify_at_notices => [:array, ENV['NOTIFY_AT_NOTICES']],
+      :per_app_notify_at_notices => [:boolean, ENV['PER_APP_NOTIFY_AT_NOTICES']],
 
       # github
-      :github_url => [:string, ENV['GITHUB_URL'], 'https://github.com'],
-      :github_authentication => [:boolean, ENV['GITHUB_AUTHENTICATION'], true],
+      :github_url => [:string, ENV['GITHUB_URL']],
+      :github_authentication => [:boolean, ENV['GITHUB_AUTHENTICATION']],
       :github_client_id => [:string, ENV['GITHUB_AUTHENTICATION']],
       :github_secret => [:string, ENV['GITHUB_SECRET']],
       :github_org_id => [:string, ENV['GITHUB_ORG_ID']],
-      :github_access_scope => [:array, ENV['GITHUB_ACCESS_SCOPE'], 'repo'],
+      :github_access_scope => [:array, ENV['GITHUB_ACCESS_SCOPE']],
 
       :email_delivery_method => [:symbol, ENV['EMAIL_DELIVERY_METHOD']],
 
-      # smtp
+      # smtp settings
       :smtp_address        => [:string, ENV['SMTP_SERVER']],
-      :smtp_port           => [:integer, ENV['SMTP_PORT'], 25],
-      :smtp_authentication => [:symbol, ENV['SMTP_AUTHENTICATION'], :plain],
+      :smtp_port           => [:integer, ENV['SMTP_PORT']],
+      :smtp_authentication => [:symbol, ENV['SMTP_AUTHENTICATION']],
       :smtp_user_name      => [:string, ENV['SMTP_USERNAME'], ENV['SENDGRID_USERNAME']],
       :smtp_password       => [:string, ENV['SMTP_PASSWORD'], ENV['SENDGRID_PASSWORD']],
       :smtp_domain         => [:string, ENV['SMTP_DOMAIN'], ENV['SENDGRID_DOMAIN']],
 
-      # sendmail
+      # sendmail settings
       :sendmail_location   => [:string, ENV['SENDMAIL_LOCATION']],
       :sendmail_arguments  => [:string, ENV['SENDMAIL_ARGUMENTS']],
 
-      :devise_modules => [:array, ENV['DEVISE_MODULES'], 'database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable'],
+      :devise_modules => [:array, ENV['DEVISE_MODULES']],
     }
 
     @resolved_data = {}
