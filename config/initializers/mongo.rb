@@ -11,7 +11,6 @@ Mongoid.configure do |config|
   if Errbit::Config.mongoid_password
     mongo_params[:password] = Errbit::Config.mongoid_password
   end
-  binding.pry
 
   config.load_configuration({
     sessions: {

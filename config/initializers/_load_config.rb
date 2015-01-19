@@ -1,3 +1,5 @@
+Dotenv.load('.env.default')
+
 module Errbit
   class Configurator
     MAPPING = {
@@ -13,6 +15,7 @@ module Errbit
       :display_internal_errors => [:boolean, ENV['DISPLAY_INTERNAL_ERRORS'], false],
       :allow_comments_with_issue_tracker => [:boolean, ENV['ALLOW_COMMENTS_WITH_ISSUE_TRACKER'], true],
       :serve_static_assets => [:boolean, ENV['SERVE_STATIC_ASSETS'], Rails.env == 'development'],
+      :secret_key_base => [:string, ENV['SECRET_KEY_BASE']],
 
       :mongo_url => [:string, ENV['MONGOLAB_URI'], ENV['MONGOHQ_URL'], ENV['MONGODB_URL'], ENV['MONGO_URL']],
 
@@ -208,3 +211,4 @@ end
 
 Rails.application.config.consider_all_requests_local = Errbit::Config.display_internal_errors
 Rails.application.config.serve_static_assets = Errbit::Config.serve_static_assets
+Rails.application.config.secret_key_base = Errbit::Config.secret_key_base
