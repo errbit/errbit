@@ -14,6 +14,14 @@ module Errbit
       :allow_comments_with_issue_tracker => [:boolean, ENV['ALLOW_COMMENTS_WITH_ISSUE_TRACKER'], true],
       :serve_static_assets => [:boolean, ENV['SERVE_STATIC_ASSETS'], Rails.env == 'development'],
 
+      :mongo_url => [:string, ENV['MONGOLAB_URI'], ENV['MONGOHQ_URL'], ENV['MONGODB_URL'], ENV['MONGO_URL']],
+
+      :mongoid_host => [:string, ENV['MONGOID_HOST'], 'localhost'],
+      :mongoid_port => [:string, ENV['MONGOID_PORT'], '27017'],
+      :mongoid_username => [:string, ENV['MONGOID_USERNAME']],
+      :mongoid_password => [:string, ENV['MONGOID_PASSWORD']],
+      :mongoid_database => [:string, ENV['MONGOID_DATABASE']],
+
       :email_from => [:string, ENV['ERRBIT_EMAIL_FROM'], 'errbit@example.com'],
       :email_at_notices => [:array, ENV['ERRBIT_EMAIL_AT_NOTICES'], '1,10,100'],
       :per_app_email_at_notices => [:boolean, ENV['PER_APP_EMAIL_AT_NOTICES'], false],
@@ -123,6 +131,41 @@ module Errbit
 
     def notify_at_notices
       self.class.get(:notify_at_notices).map(&:to_i)
+    end
+
+    def mongoid_settings
+      @parsed_mongo_url ||= if mongo_url
+        URI.parse(self.class.get(:mongo_url))
+      else
+        OpenStruct.new(
+          host:     self.class.get(:mongoid_host),
+          port:     self.class.get(:mongoid_port),
+          user:     self.class.get(:mongoid_username),
+          password: self.class.get(:mongoid_password)
+        )
+      end
+    end
+
+    def mongoid_host
+      sprintf("%s:%s", mongoid_settings.host, mongoid_settings.port)
+    end
+
+    def mongoid_user
+      mongoid_settings.user
+    end
+
+    def mongoid_password
+      mongoid_settings.password
+    end
+
+    def mongoid_database
+      if mongoid_settings.path
+        mongoid_settings.path.gsub(/^\//, '')
+      elsif self.class.get(:mongoid_database)
+        self.class.get(:mongoid_database)
+      else
+        sprintf('%s_%s', 'errbit', Rails.env)
+      end
     end
   end
 end
