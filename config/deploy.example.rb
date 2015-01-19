@@ -23,7 +23,6 @@ set :linked_files, fetch(:linked_files, []) + %w(
   config/config.yml
   config/mongoid.yml
   config/newrelic.yml
-  config/initializers/secret_token.rb
 )
 
 set :linked_dirs, fetch(:linked_dirs, []) + %w(

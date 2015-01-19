@@ -135,6 +135,10 @@ rake errbit:bootstrap
 script/rails server
 ```
 
+Deploy Hooks:
+-------------
+Errbit can track your application deploys. See [deploy hoks](docs/deploy-hooks.md)
+
 Deployment:
 ----------
 See [notes on deployment](docs/deployment.md)
