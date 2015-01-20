@@ -3,58 +3,56 @@ Dotenv.load('.env.default')
 module Errbit
   class Configurator
     MAPPING = {
-      :host     => [:string, ENV['ERRBIT_HOST']],
-      :protocol => [:string, ENV['ERRBIT_PROTOCOL']],
-      :port     => [:string, ENV['ERRBIT_PORT']],
-      :enforce_ssl => [:boolean, ENV['ERRBIT_ENFORCE_SSL']],
-      :confirm_resolve_err => [:boolean, ENV['CONFIRM_RESOLVE_ERR']],
-      :confirm_err_actions => [:boolean, ENV['ERRBIT_CONFIRM_ERR_ACTIONS']],
-      :user_has_username => [:boolean, ENV['ERRBIT_USER_HAS_USERNAME']],
-      :use_gravatar => [:boolean, ENV['ERRBIT_USE_GRAVATAR']],
-      :gravatar_default => [:string, ENV['ERRBIT_GRAVATAR_DEFAULT']],
-      :display_internal_errors => [:boolean, ENV['DISPLAY_INTERNAL_ERRORS']],
-      :allow_comments_with_issue_tracker => [:boolean, ENV['ALLOW_COMMENTS_WITH_ISSUE_TRACKER']],
-      :serve_static_assets => [:boolean, ENV['SERVE_STATIC_ASSETS']],
-      :secret_key_base => [:string, ENV['SECRET_KEY_BASE']],
+      :host                => [:string,  'ERRBIT_HOST'],
+      :protocol            => [:string,  'ERRBIT_PROTOCOL'],
+      :port                => [:string,  'ERRBIT_PORT'],
+      :enforce_ssl         => [:boolean, 'ERRBIT_ENFORCE_SSL'],
+      :confirm_resolve_err => [:boolean, 'CONFIRM_RESOLVE_ERR'],
+      :confirm_err_actions => [:boolean, 'ERRBIT_CONFIRM_ERR_ACTIONS'],
+      :user_has_username   => [:boolean, 'ERRBIT_USER_HAS_USERNAME'],
+      :use_gravatar        => [:boolean, 'ERRBIT_USE_GRAVATAR'],
+      :gravatar_default    => [:string,  'ERRBIT_GRAVATAR_DEFAULT'],
+      :serve_static_assets => [:boolean, 'SERVE_STATIC_ASSETS'],
+      :secret_key_base     => [:string,  'SECRET_KEY_BASE'],
+      :display_internal_errors => [:boolean, 'DISPLAY_INTERNAL_ERRORS'],
 
-      :mongo_url => [:string, ENV['MONGOLAB_URI'], ENV['MONGOHQ_URL'], ENV['MONGODB_URL'], ENV['MONGO_URL']],
+      :mongo_url        => [:string, 'MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
+      :mongoid_host     => [:string, 'MONGOID_HOST'],
+      :mongoid_port     => [:string, 'MONGOID_PORT'],
+      :mongoid_username => [:string, 'MONGOID_USERNAME'],
+      :mongoid_password => [:string, 'MONGOID_PASSWORD'],
+      :mongoid_database => [:string, 'MONGOID_DATABASE'],
 
-      :mongoid_host => [:string, ENV['MONGOID_HOST']],
-      :mongoid_port => [:string, ENV['MONGOID_PORT']],
-      :mongoid_username => [:string, ENV['MONGOID_USERNAME']],
-      :mongoid_password => [:string, ENV['MONGOID_PASSWORD']],
-      :mongoid_database => [:string, ENV['MONGOID_DATABASE']],
+      :email_from                => [:string,  'ERRBIT_EMAIL_FROM'],
+      :email_at_notices          => [:array,   'ERRBIT_EMAIL_AT_NOTICES'],
+      :per_app_email_at_notices  => [:boolean, 'PER_APP_EMAIL_AT_NOTICES'],
 
-      :email_from => [:string, ENV['ERRBIT_EMAIL_FROM']],
-      :email_at_notices => [:array, ENV['ERRBIT_EMAIL_AT_NOTICES']],
-      :per_app_email_at_notices => [:boolean, ENV['PER_APP_EMAIL_AT_NOTICES']],
-
-      :notify_at_notices => [:array, ENV['NOTIFY_AT_NOTICES']],
-      :per_app_notify_at_notices => [:boolean, ENV['PER_APP_NOTIFY_AT_NOTICES']],
+      :notify_at_notices         => [:array,   'NOTIFY_AT_NOTICES'],
+      :per_app_notify_at_notices => [:boolean, 'PER_APP_NOTIFY_AT_NOTICES'],
 
       # github
-      :github_url => [:string, ENV['GITHUB_URL']],
-      :github_authentication => [:boolean, ENV['GITHUB_AUTHENTICATION']],
-      :github_client_id => [:string, ENV['GITHUB_AUTHENTICATION']],
-      :github_secret => [:string, ENV['GITHUB_SECRET']],
-      :github_org_id => [:string, ENV['GITHUB_ORG_ID']],
-      :github_access_scope => [:array, ENV['GITHUB_ACCESS_SCOPE']],
+      :github_url            => [:string,  'GITHUB_URL'],
+      :github_authentication => [:boolean, 'GITHUB_AUTHENTICATION'],
+      :github_client_id      => [:string,  'GITHUB_AUTHENTICATION'],
+      :github_secret         => [:string,  'GITHUB_SECRET'],
+      :github_org_id         => [:string,  'GITHUB_ORG_ID'],
+      :github_access_scope   => [:array,   'GITHUB_ACCESS_SCOPE'],
 
-      :email_delivery_method => [:symbol, ENV['EMAIL_DELIVERY_METHOD']],
+      :email_delivery_method => [:symbol,  'EMAIL_DELIVERY_METHOD'],
 
       # smtp settings
-      :smtp_address        => [:string, ENV['SMTP_SERVER']],
-      :smtp_port           => [:integer, ENV['SMTP_PORT']],
-      :smtp_authentication => [:symbol, ENV['SMTP_AUTHENTICATION']],
-      :smtp_user_name      => [:string, ENV['SMTP_USERNAME'], ENV['SENDGRID_USERNAME']],
-      :smtp_password       => [:string, ENV['SMTP_PASSWORD'], ENV['SENDGRID_PASSWORD']],
-      :smtp_domain         => [:string, ENV['SMTP_DOMAIN'], ENV['SENDGRID_DOMAIN']],
+      :smtp_address          => [:string,  'SMTP_SERVER'],
+      :smtp_port             => [:integer, 'SMTP_PORT'],
+      :smtp_authentication   => [:symbol,  'SMTP_AUTHENTICATION'],
+      :smtp_user_name        => [:string,  'SMTP_USERNAME', 'SENDGRID_USERNAME'],
+      :smtp_password         => [:string,  'SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
+      :smtp_domain           => [:string,  'SMTP_DOMAIN', 'SENDGRID_DOMAIN'],
 
       # sendmail settings
-      :sendmail_location   => [:string, ENV['SENDMAIL_LOCATION']],
-      :sendmail_arguments  => [:string, ENV['SENDMAIL_ARGUMENTS']],
+      :sendmail_location     => [:string,  'SENDMAIL_LOCATION'],
+      :sendmail_arguments    => [:string,  'SENDMAIL_ARGUMENTS'],
 
-      :devise_modules => [:array, ENV['DEVISE_MODULES']],
+      :devise_modules        => [:array,   'DEVISE_MODULES'],
     }
 
     @resolved_data = {}
@@ -91,11 +89,13 @@ module Errbit
       v.to_sym
     end
 
-    MAPPING.each do |key, _|
-      values    = MAPPING[key].dup
-      type      = values.shift
+    MAPPING.each do |key, values|
+      type     = values.shift
+      env_name = values.find { |v| ENV[v] }
 
-      @resolved_data[key] = send(type, values.find { |value| value != nil })
+      if env_name
+        @resolved_data[key] = send(type, ENV[env_name])
+      end
 
       define_method(key.to_s + '=') do |value|
         self.class.set(key, value)
