@@ -14,10 +14,9 @@ class JsonParser
       backtrace: backtrace,
       request: request,
       server_environment: server_environment,
-      api_key: params['key'],
+      api_key: params['project_id'] || params['key'],
       notifier: params['notifier'],
-      user_attributes: user_attributes,
-      framework: 'Javascript'
+      user_attributes: user_attributes
     }
 
     ErrorReport.new(attributes)
