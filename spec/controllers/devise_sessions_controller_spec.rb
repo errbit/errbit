@@ -19,5 +19,10 @@ describe Devise::SessionsController, type: 'controller' do
       post :create, { :user => { 'email' => user.email, 'password' => user.password } }
       expect(response).to redirect_to(app_path(app))
     end
+
+    it 'displays a friendly error when credentials are invalid' do
+      post :create, { :user => { 'email' => 'whatever', 'password' => 'somethinginvalid' } }
+      expect(request.flash["alert"]).to eq(I18n.t 'devise.failure.user.email_invalid')
+    end
   end
 end
