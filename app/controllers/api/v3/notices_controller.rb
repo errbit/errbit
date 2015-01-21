@@ -9,7 +9,7 @@ class Api::V3::NoticesController < ApplicationController
     response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
 
     if !request.options?
-      report = JsonParser.new(params).report
+      report = AirbrakeApi::V3::NoticeParser.new(params).report
 
       if report.valid?
         if report.should_keep?
@@ -28,7 +28,7 @@ class Api::V3::NoticesController < ApplicationController
     else
       render nothing: true
     end
-  rescue JsonParser::ParamsError
+  rescue AirbrakeApi::ParamsError
     render text: 'Invalid request'
   end
 end
