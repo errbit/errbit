@@ -305,13 +305,56 @@ it will be displayed under the *User Details* tab:
 Javascript error notifications
 --------------------------------------
 
-You can log javascript errors that occur in your application by including the
-following script tag before any javascript is loaded in your application.
+You can log javascript errors that occur in your application by including
+[airbrake-js](https://github.com/airbrake/airbrake-js) javascript library.
+
+First you need to add airbrake-shim.js to your site and set some basic configuration
+options:
 
 ```
-<script src="//YOUR-ERRBIT-HOST/javascripts/notifier.js" type="text/javascript"></script>
+<script src="airbrake-shim.js" data-airbrake-project-id="ERRBIT API KEY" data-airbrake-project-key="ERRBIT API KEY" data-airbrake-environment-name="production" data-airbrake-host="http://errbit.yourdomain.com"></script>
 ```
 
+Or you can just add shim file and set these options using:
+
+```
+Airbrake.setProject("ERRBIT API KEY", "ERRBIT API KEY");
+Airbrake.setHost("http://errbit.yourdomain.com");
+```
+
+And that's it.
+
+Testing API V3 using ruby airbrake client
+-----------------------------------------
+
+If you want you test standard airbrake ruby gem with API V3. To do that you
+need to change your airbrake initializer file to something like this:
+
+```
+Airbrake.configure do |config|
+  config.api_key = ENV['airbrake_api_key']
+  config.host    = ENV['airbrake_host']
+  config.port    = ENV['airbrake_port'].to_i
+  config.secure  = ENV['airbrake_secure'] == 'true'
+  config.project_id = ENV['airbrake_api_key']
+end
+
+class Airbrake::Sender
+  def json_api_enabled?
+    true
+  end
+end
+```
+
+It is important to set project_id option to the same value as api_key, because
+project_id is required for building url to api endpoint. And airbrake has a bug
+that removes api_key from endpoint url. The only way to get this value is by passing
+it as project_id. This little monkey-patch is required because airbrake gem only
+uses v3 api when host is set to collect.airbrake.io.
+
+V3 request don't have framework option so you won't see this value in your error
+notices in errbit. Besides that everything looks the same. It was tested using
+rake airbrake:test for both v2 and v3.
 
 Using custom fingerprinting methods
 -----------------------------------
