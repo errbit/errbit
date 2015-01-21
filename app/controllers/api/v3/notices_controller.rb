@@ -23,12 +23,12 @@ class Api::V3::NoticesController < ApplicationController
           render text: 'Notice for old app version ignored'
         end
       else
-        render text: 'Your API key is unknown', :status => 422
+        render text: 'Your API key is unknown', status: 422
       end
     else
       render nothing: true
     end
   rescue AirbrakeApi::ParamsError
-    render text: 'Invalid request'
+    render text: 'Invalid request', status: 400
   end
 end
