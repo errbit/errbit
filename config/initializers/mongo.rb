@@ -4,12 +4,12 @@ Mongoid.configure do |config|
     hosts: [ Errbit::Config.mongoid_host ]
   }
 
-  if Errbit::Config.mongoid_user
-    mongo_params[:username] = Errbit::Config.mongoid_user
+  if Errbit::Config.mongoid_settings.user
+    mongo_params[:username] = Errbit::Config.mongoid_settings.user
   end
 
-  if Errbit::Config.mongoid_password
-    mongo_params[:password] = Errbit::Config.mongoid_password
+  if Errbit::Config.mongoid_settings.password
+    mongo_params[:password] = Errbit::Config.mongoid_settings.password
   end
 
   config.load_configuration({

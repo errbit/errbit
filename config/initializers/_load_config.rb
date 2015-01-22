@@ -1,58 +1,58 @@
 # load default ENV values (without overwriting any existing value)
 Dotenv.load('.env.default')
 
-# map config keys to environment variables (with type hint)
+# map config keys to environment variables. values are parsed using YAML.parse
 mapping = {
-  :host                => [:string,  'ERRBIT_HOST'],
-  :protocol            => [:string,  'ERRBIT_PROTOCOL'],
-  :port                => [:string,  'ERRBIT_PORT'],
-  :enforce_ssl         => [:boolean, 'ERRBIT_ENFORCE_SSL'],
-  :confirm_resolve_err => [:boolean, 'CONFIRM_RESOLVE_ERR'],
-  :confirm_err_actions => [:boolean, 'ERRBIT_CONFIRM_ERR_ACTIONS'],
-  :user_has_username   => [:boolean, 'ERRBIT_USER_HAS_USERNAME'],
-  :use_gravatar        => [:boolean, 'ERRBIT_USE_GRAVATAR'],
-  :gravatar_default    => [:string,  'ERRBIT_GRAVATAR_DEFAULT'],
-  :serve_static_assets => [:boolean, 'SERVE_STATIC_ASSETS'],
-  :secret_key_base     => [:string,  'SECRET_KEY_BASE'],
-  :display_internal_errors => [:boolean, 'DISPLAY_INTERNAL_ERRORS'],
+  host:                      ['ERRBIT_HOST'],
+  protocol:                  ['ERRBIT_PROTOCOL'],
+  port:                      ['ERRBIT_PORT'],
+  enforce_ssl:               ['ERRBIT_ENFORCE_SSL'],
+  confirm_resolve_err:       ['CONFIRM_RESOLVE_ERR'],
+  confirm_err_actions:       ['ERRBIT_CONFIRM_ERR_ACTIONS'],
+  user_has_username:         ['ERRBIT_USER_HAS_USERNAME'],
+  use_gravatar:              ['ERRBIT_USE_GRAVATAR'],
+  gravatar_default:          ['ERRBIT_GRAVATAR_DEFAULT'],
+  serve_static_assets:       ['SERVE_STATIC_ASSETS'],
+  secret_key_base:           ['SECRET_KEY_BASE'],
+  display_internal_errors:   ['DISPLAY_INTERNAL_ERRORS'],
 
-  :mongo_url        => [:string, 'MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
-  :mongoid_host     => [:string, 'MONGOID_HOST'],
-  :mongoid_port     => [:string, 'MONGOID_PORT'],
-  :mongoid_username => [:string, 'MONGOID_USERNAME'],
-  :mongoid_password => [:string, 'MONGOID_PASSWORD'],
-  :mongoid_database => [:string, 'MONGOID_DATABASE'],
+  mongo_url:                 ['MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
+  mongoid_host:              ['MONGOID_HOST'],
+  mongoid_port:              ['MONGOID_PORT'],
+  mongoid_username:          ['MONGOID_USERNAME'],
+  mongoid_password:          ['MONGOID_PASSWORD'],
+  mongoid_database:          ['MONGOID_DATABASE'],
 
-  :email_from                => [:string,  'ERRBIT_EMAIL_FROM'],
-  :email_at_notices          => [:array,   'ERRBIT_EMAIL_AT_NOTICES'],
-  :per_app_email_at_notices  => [:boolean, 'PER_APP_EMAIL_AT_NOTICES'],
+  email_from:                ['ERRBIT_EMAIL_FROM'],
+  email_at_notices:          ['ERRBIT_EMAIL_AT_NOTICES'],
+  per_app_email_at_notices:  ['PER_APP_EMAIL_AT_NOTICES'],
 
-  :notify_at_notices         => [:array,   'NOTIFY_AT_NOTICES'],
-  :per_app_notify_at_notices => [:boolean, 'PER_APP_NOTIFY_AT_NOTICES'],
+  notify_at_notices:         ['NOTIFY_AT_NOTICES'],
+  per_app_notify_at_notices: ['PER_APP_NOTIFY_AT_NOTICES'],
 
   # github
-  :github_url            => [:string,  'GITHUB_URL'],
-  :github_authentication => [:boolean, 'GITHUB_AUTHENTICATION'],
-  :github_client_id      => [:string,  'GITHUB_AUTHENTICATION'],
-  :github_secret         => [:string,  'GITHUB_SECRET'],
-  :github_org_id         => [:string,  'GITHUB_ORG_ID'],
-  :github_access_scope   => [:array,   'GITHUB_ACCESS_SCOPE'],
+  github_url:                ['GITHUB_URL'],
+  github_authentication:     ['GITHUB_AUTHENTICATION'],
+  github_client_id:          ['GITHUB_AUTHENTICATION'],
+  github_secret:             ['GITHUB_SECRET'],
+  github_org_id:             ['GITHUB_ORG_ID'],
+  github_access_scope:       ['GITHUB_ACCESS_SCOPE'],
 
-  :email_delivery_method => [:symbol,  'EMAIL_DELIVERY_METHOD'],
+  email_delivery_method:     ['EMAIL_DELIVERY_METHOD'],
 
   # smtp settings
-  :smtp_address          => [:string,  'SMTP_SERVER'],
-  :smtp_port             => [:integer, 'SMTP_PORT'],
-  :smtp_authentication   => [:symbol,  'SMTP_AUTHENTICATION'],
-  :smtp_user_name        => [:string,  'SMTP_USERNAME', 'SENDGRID_USERNAME'],
-  :smtp_password         => [:string,  'SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
-  :smtp_domain           => [:string,  'SMTP_DOMAIN', 'SENDGRID_DOMAIN'],
+  smtp_address:              ['SMTP_SERVER'],
+  smtp_port:                 ['SMTP_PORT'],
+  smtp_authentication:       ['SMTP_AUTHENTICATION'],
+  smtp_user_name:            ['SMTP_USERNAME', 'SENDGRID_USERNAME'],
+  smtp_password:             ['SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
+  smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN'],
 
   # sendmail settings
-  :sendmail_location     => [:string,  'SENDMAIL_LOCATION'],
-  :sendmail_arguments    => [:string,  'SENDMAIL_ARGUMENTS'],
+  sendmail_location:         ['SENDMAIL_LOCATION'],
+  sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
-  :devise_modules        => [:array,   'DEVISE_MODULES'],
+  devise_modules:            ['DEVISE_MODULES'],
 }
 
 # any configuration that can't be simply plucked out of ENV should go here
@@ -63,9 +63,6 @@ overrides = {
     nil
   },
   github_url:        ->(cache) { cache[:github_url].gsub(/\/*\z/, '') },
-  devise_modules:    ->(cache) { (cache[:devise_modules] || []).map(&:to_sym) },
-  email_at_notices:  ->(cache) { cache[:email_at_notices].map(&:to_i) },
-  notify_at_notices: ->(cache) { cache[:notify_at_notices].map(&:to_i) },
   mongoid_settings:  ->(cache) {
     if cache[:mongo_url]
       URI.parse(cache[:mongo_url])
@@ -80,12 +77,6 @@ overrides = {
   },
   mongoid_host: ->(cache) {
     sprintf("%s:%s", cache[:mongoid_settings].host, cache[:mongoid_settings].port)
-  },
-  mongoid_user: ->(cache) {
-    cache[:mongoid_settings].user
-  },
-  mongoid_password: ->(cache) {
-    cache[:mongoid_settings].password
   },
   mongoid_database: ->(cache) {
     if cache[:mongoid_settings].path
