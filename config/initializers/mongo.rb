@@ -1,7 +1,13 @@
 Mongoid.configure do |config|
   mongo_params = {
     database: Errbit::Config.mongoid_database,
-    hosts: [ Errbit::Config.mongoid_host ]
+    hosts: [
+      sprintf(
+        "%s:%s",
+        Errbit::Config.mongoid_settings.host,
+        Errbit::Config.mongoid_settings.port
+      )
+    ]
   }
 
   if Errbit::Config.mongoid_settings.user

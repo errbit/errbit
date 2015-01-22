@@ -1,8 +1,11 @@
 # load default ENV values (without overwriting any existing value)
 Dotenv.load('.env.default')
 
-# map config keys to environment variables. values are parsed using YAML.parse
-mapping = {
+# map config keys to environment variables
+#
+# We use the first non-nil environment variable in the list. If the last array
+# element is a proc, it runs at the end, overriding the config value
+Errbit::Config = Configurator.run({
   host:                      ['ERRBIT_HOST'],
   protocol:                  ['ERRBIT_PROTOCOL'],
   port:                      ['ERRBIT_PORT'],
@@ -22,6 +25,26 @@ mapping = {
   mongoid_username:          ['MONGOID_USERNAME'],
   mongoid_password:          ['MONGOID_PASSWORD'],
   mongoid_database:          ['MONGOID_DATABASE'],
+  mongoid_settings:          [->(values) {
+    if values[:mongo_url]
+      parsed = URI.parse(values[:mongo_url])
+      OpenStruct.new(
+        host:     parsed.host,
+        port:     parsed.port,
+        user:     parsed.user,
+        password: parsed.password,
+        database: parsed.path.sub(/^\//, '')
+      )
+    else
+      OpenStruct.new(
+        host:     values[:mongoid_host],
+        port:     values[:mongoid_port],
+        user:     values[:mongoid_username],
+        password: values[:mongoid_password],
+        database: values[:mongoid_database] || sprintf('errbit_%s', Rails.env)
+      )
+    end
+  }],
 
   email_from:                ['ERRBIT_EMAIL_FROM'],
   email_at_notices:          ['ERRBIT_EMAIL_AT_NOTICES'],
@@ -31,7 +54,9 @@ mapping = {
   per_app_notify_at_notices: ['PER_APP_NOTIFY_AT_NOTICES'],
 
   # github
-  github_url:                ['GITHUB_URL'],
+  github_url:                ['GITHUB_URL', ->(values) {
+    values[:github_url].gsub(/\/*\z/, '')
+  }],
   github_authentication:     ['GITHUB_AUTHENTICATION'],
   github_client_id:          ['GITHUB_AUTHENTICATION'],
   github_secret:             ['GITHUB_SECRET'],
@@ -46,50 +71,17 @@ mapping = {
   smtp_authentication:       ['SMTP_AUTHENTICATION'],
   smtp_user_name:            ['SMTP_USERNAME', 'SENDGRID_USERNAME'],
   smtp_password:             ['SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
-  smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN'],
+  smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', ->(values) {
+    values[:smtp_domain] || (values[:email_from] && values[:email_from].split('@').last) || nil
+  }],
 
   # sendmail settings
   sendmail_location:         ['SENDMAIL_LOCATION'],
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
   devise_modules:            ['DEVISE_MODULES'],
-}
-
-# any configuration that can't be simply plucked out of ENV should go here
-overrides = {
-  smtp_domain: ->(cache) {
-    cache[:smtp_domain] ||
-    (cache[:email_from] && cache[:email_from].split('@').last) ||
-    nil
-  },
-  github_url:        ->(cache) { cache[:github_url].gsub(/\/*\z/, '') },
-  mongoid_settings:  ->(cache) {
-    if cache[:mongo_url]
-      URI.parse(cache[:mongo_url])
-    else
-      OpenStruct.new(
-        host:     cache[:mongoid_host],
-        port:     cache[:mongoid_port],
-        user:     cache[:mongoid_username],
-        password: cache[:mongoid_password]
-      )
-    end
-  },
-  mongoid_host: ->(cache) {
-    sprintf("%s:%s", cache[:mongoid_settings].host, cache[:mongoid_settings].port)
-  },
-  mongoid_database: ->(cache) {
-    if cache[:mongoid_settings].path
-      cache[:mongoid_settings].path.gsub(/^\//, '')
-    elsif cache[:mongoid_database]
-      cache[:mongoid_database]
-    else
-      sprintf('%s_%s', 'errbit', Rails.env)
-    end
-  }
-}
-
-Errbit::Config = Configurator.run(mapping, overrides)
+})
+binding.pry
 
 # Set SMTP settings if given.
 if Errbit::Config.email_delivery_method == :smtp
