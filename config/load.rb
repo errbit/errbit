@@ -16,7 +16,6 @@ Errbit::Config = Configurator.run({
   gravatar_default:          ['ERRBIT_GRAVATAR_DEFAULT'],
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
-  display_internal_errors:   ['DISPLAY_INTERNAL_ERRORS'],
   mongo_url:                 ['MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
 
   email_from:                ['ERRBIT_EMAIL_FROM'],
@@ -56,41 +55,3 @@ Errbit::Config = Configurator.run({
 
   devise_modules:            ['DEVISE_MODULES'],
 })
-
-# Set SMTP settings if given.
-if Errbit::Config.email_delivery_method == :smtp
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address        => Errbit::Config.smtp_address,
-    :port           => Errbit::Config.smtp_port,
-    :authentication => Errbit::Config.smtp_authentication,
-    :user_name      => Errbit::Config.smtp_user_name,
-    :password       => Errbit::Config.smtp_password,
-    :domain         => Errbit::Config.smtp_domain,
-  }
-end
-
-if Errbit::Config.email_delivery_method == :sendmail
-  ActionMailer::Base.delivery_method = :sendmail
-
-  sendmail_settings = {}
-  sendmail_settings[:location] = Errbit::Config.sendmail_location if Errbit::Config.sendmail_location
-  sendmail_settings[:arguments] = Errbit::Config.sendmail_arguments if Errbit::Config.sendmail_arguments
-
-  ActionMailer::Base.sendmail_settings = sendmail_settings
-end
-
-# Set config specific values
-(ActionMailer::Base.default_url_options ||= {}).tap do |default|
-  options_from_config = {
-    host: Errbit::Config.host,
-    port: Errbit::Config.port,
-    protocol: Errbit::Config.protocol
-  }.select { |k, v| v }
-
-  default.reverse_merge!(options_from_config)
-end
-
-Rails.application.config.consider_all_requests_local = Errbit::Config.display_internal_errors
-Rails.application.config.serve_static_assets = Errbit::Config.serve_static_assets
-Rails.application.config.secret_key_base = Errbit::Config.secret_key_base
