@@ -10,7 +10,6 @@ Errbit::Config = Configurator.run({
   protocol:                  ['ERRBIT_PROTOCOL'],
   port:                      ['ERRBIT_PORT'],
   enforce_ssl:               ['ERRBIT_ENFORCE_SSL'],
-  confirm_resolve_err:       ['CONFIRM_RESOLVE_ERR'],
   confirm_err_actions:       ['ERRBIT_CONFIRM_ERR_ACTIONS'],
   user_has_username:         ['ERRBIT_USER_HAS_USERNAME'],
   use_gravatar:              ['ERRBIT_USE_GRAVATAR'],
@@ -18,33 +17,7 @@ Errbit::Config = Configurator.run({
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
   display_internal_errors:   ['DISPLAY_INTERNAL_ERRORS'],
-
   mongo_url:                 ['MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
-  mongoid_host:              ['MONGOID_HOST'],
-  mongoid_port:              ['MONGOID_PORT'],
-  mongoid_username:          ['MONGOID_USERNAME'],
-  mongoid_password:          ['MONGOID_PASSWORD'],
-  mongoid_database:          ['MONGOID_DATABASE'],
-  mongoid_settings:          [->(values) {
-    if values[:mongo_url]
-      parsed = URI.parse(values[:mongo_url])
-      OpenStruct.new(
-        host:     parsed.host,
-        port:     parsed.port,
-        user:     parsed.user,
-        password: parsed.password,
-        database: parsed.path.sub(/^\//, '')
-      )
-    else
-      OpenStruct.new(
-        host:     values[:mongoid_host],
-        port:     values[:mongoid_port],
-        user:     values[:mongoid_username],
-        password: values[:mongoid_password],
-        database: values[:mongoid_database] || sprintf('errbit_%s', Rails.env)
-      )
-    end
-  }],
 
   email_from:                ['ERRBIT_EMAIL_FROM'],
   email_at_notices:          ['ERRBIT_EMAIL_AT_NOTICES'],
@@ -72,7 +45,9 @@ Errbit::Config = Configurator.run({
   smtp_user_name:            ['SMTP_USERNAME', 'SENDGRID_USERNAME'],
   smtp_password:             ['SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
   smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', ->(values) {
-    values[:smtp_domain] || (values[:email_from] && values[:email_from].split('@').last) || nil
+    values[:smtp_domain] ||
+    (values[:email_from] && values[:email_from].split('@').last)||
+    nil
   }],
 
   # sendmail settings
@@ -81,7 +56,6 @@ Errbit::Config = Configurator.run({
 
   devise_modules:            ['DEVISE_MODULES'],
 })
-binding.pry
 
 # Set SMTP settings if given.
 if Errbit::Config.email_delivery_method == :smtp
