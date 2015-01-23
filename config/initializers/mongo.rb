@@ -2,25 +2,16 @@ require 'uri'
 
 Mongoid.configure do |config|
   uri = URI.parse(Errbit::Config.mongo_url)
-
-  params = {
-    hosts: [ uri.port ? sprintf("%s:%s", uri.host, uri.port) : uri.host ]
-  }
-
-  params[:username] = uri.user if uri.user
-  params[:password] = uri.password if uri.password
-
-  if uri.path.empty?
-    params[:database] = "errbit_#{Rails.env}"
-  else
-    params[:database] = uri.path.sub(/^\//, '')
-  end
+  uri.path = "/errbit_#{Rails.env}" if uri.path.empty?
 
   config.load_configuration({
     sessions: {
-      default: params
+      default: {
+        uri: uri.to_s
+      }
+    },
+    options: {
+      use_activesupport_time_zone: true
     }
   })
 end
-
-Mongoid.use_activesupport_time_zone = true
