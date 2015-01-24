@@ -30,7 +30,7 @@ Errbit::Config = Configurator.run({
     values[:github_url].gsub(/\/*\z/, '')
   }],
   github_authentication:     ['GITHUB_AUTHENTICATION'],
-  github_client_id:          ['GITHUB_AUTHENTICATION'],
+  github_client_id:          ['GITHUB_CLIENT_ID'],
   github_secret:             ['GITHUB_SECRET'],
   github_org_id:             ['GITHUB_ORG_ID'],
   github_access_scope:       ['GITHUB_ACCESS_SCOPE'],
