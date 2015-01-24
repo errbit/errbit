@@ -137,7 +137,7 @@ script/rails server
 
 Deploy Hooks:
 -------------
-Errbit can track your application deploys. See [deploy hoks](docs/deploy-hooks.md)
+Errbit can track your application deploys. See [deploy hooks](docs/deploy-hooks.md)
 
 Deployment:
 ----------
