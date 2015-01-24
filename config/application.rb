@@ -26,6 +26,10 @@ module Errbit
       config.serve_static_assets = Errbit::Config.serve_static_assets
     end
 
+    initializer "errbit.mongoid", before: "mongoid.load-config" do
+      require Rails.root.join('config/mongo')
+    end
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'

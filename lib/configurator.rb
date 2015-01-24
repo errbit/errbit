@@ -65,7 +65,7 @@ class Configurator
   # Apply the override functions
   def apply_overrides
     @overrides.each do |key, override|
-      @storage[key] = override.call(storage)
+      @storage[key] = override.call(@storage)
     end
   end
 
