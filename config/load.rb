@@ -14,16 +14,15 @@ Errbit::Config = Configurator.run({
   user_has_username:         ['ERRBIT_USER_HAS_USERNAME'],
   use_gravatar:              ['ERRBIT_USE_GRAVATAR'],
   gravatar_default:          ['ERRBIT_GRAVATAR_DEFAULT'],
+  email_from:                ['ERRBIT_EMAIL_FROM'],
+  email_at_notices:          ['ERRBIT_EMAIL_AT_NOTICES'],
+  per_app_email_at_notices:  ['ERRBIT_PER_APP_EMAIL_AT_NOTICES'],
+  notify_at_notices:         ['ERRBIT_NOTIFY_AT_NOTICES'],
+  per_app_notify_at_notices: ['ERRBIT_PER_APP_NOTIFY_AT_NOTICES'],
+
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
   mongo_url:                 ['MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
-
-  email_from:                ['ERRBIT_EMAIL_FROM'],
-  email_at_notices:          ['ERRBIT_EMAIL_AT_NOTICES'],
-  per_app_email_at_notices:  ['PER_APP_EMAIL_AT_NOTICES'],
-
-  notify_at_notices:         ['NOTIFY_AT_NOTICES'],
-  per_app_notify_at_notices: ['PER_APP_NOTIFY_AT_NOTICES'],
 
   # github
   github_url:                ['GITHUB_URL', ->(values) {
