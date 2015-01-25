@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 RAILS_VERSION = '~> 4.1.8'
 
+ruby ENV['RUBY_VERSION'] if ENV['RUBY_VERSION']
+
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
