@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 RAILS_VERSION = '~> 4.1.8'
 
+ruby ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
+
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
@@ -93,6 +95,7 @@ group :test do
 end
 
 group :heroku, :production do
+  gem 'rails_12factor', require: !!ENV["HEROKU"]
   gem 'unicorn', :require => false
 end
 
