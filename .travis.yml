@@ -5,6 +5,7 @@ rvm:
   - 2.2
   - rbx-2
   - ruby-head
+  - jruby-head
 
 env:
   - RAILS_ENV=test COVERAGE=true
@@ -22,3 +23,4 @@ matrix:
   allow_failures:
     - rvm: rbx-2
     - rvm: ruby-head
+    - rvm: jruby-head
