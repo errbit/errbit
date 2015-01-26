@@ -26,6 +26,9 @@ enforce_ssl: false
 # will be sent from.
 email_from: errbit@example.com
 
+#Configures notice deprecation interval
+notice_deprecation_days : 7
+
 # If you turn on this option, email_at_notices can be
 # configured on a per app basis, at the App edit page
 per_app_email_at_notices: false
