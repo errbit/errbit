@@ -57,6 +57,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.1.0)
+      sass (~> 3.2)
     bson (2.3.0)
     bson (2.3.0-java)
     builder (3.2.2)
@@ -404,6 +406,7 @@ DEPENDENCIES
   airbrake
   better_errors
   binding_of_caller
+  bootstrap-sass
   campy
   capistrano
   capistrano-bundler
