@@ -100,6 +100,7 @@ group :heroku, :production do
   gem 'unicorn', require: false, platform: 'ruby'
 end
 
+gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
