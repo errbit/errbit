@@ -51,12 +51,14 @@ GEM
       json
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9)
+    bcrypt (3.1.9-java)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bson (2.3.0)
+    bson (2.3.0-java)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -132,6 +134,7 @@ GEM
     fabrication (2.9.0)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
+    ffi (1.9.6-java)
     flowdock (0.3.1)
       httparty (~> 0.7)
       multi_json
@@ -160,6 +163,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.2)
+    json (1.8.2-java)
     jwt (0.1.8)
       multi_json (>= 1.5)
     kaminari (0.14.1)
@@ -168,6 +172,9 @@ GEM
     kgio (2.9.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    launchy (2.4.3-java)
+      addressable (~> 2.3)
+      spoon (~> 0.0.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     meta_request (0.2.8)
@@ -204,6 +211,7 @@ GEM
     net-ssh (2.9.1)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
+    nokogiri (1.6.5-java)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -239,6 +247,11 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry (0.9.12.2-java)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+      spoon (~> 0.0)
     pry-byebug (1.3.2)
       byebug (~> 2.7)
       pry (~> 0.9.12)
@@ -332,6 +345,8 @@ GEM
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     slop (3.4.6)
+    spoon (0.0.4)
+      ffi
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -351,6 +366,7 @@ GEM
       power_assert
     thor (0.19.1)
     thread_safe (0.3.4)
+    thread_safe (0.3.4-java)
     tilt (1.4.1)
     timecop (0.6.3)
     tins (0.12.0)
@@ -369,6 +385,8 @@ GEM
       rack (>= 1.0)
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
+    websocket-driver (0.5.1-java)
+      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.1)
     xmpp4r (0.5.5)
     xpath (2.0.0)
@@ -376,6 +394,7 @@ GEM
     yajl-ruby (1.1.0)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
@@ -411,6 +430,7 @@ DEPENDENCIES
   htmlentities
   httparty
   jquery-rails (~> 2.1.4)
+  json
   kaminari (>= 0.14.1)
   launchy
   meta_request

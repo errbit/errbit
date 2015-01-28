@@ -55,7 +55,8 @@ gem 'flowdock'
 gem 'omniauth-github'
 
 gem 'ri_cal'
-gem 'yajl-ruby', :require => "yajl"
+gem 'yajl-ruby', platform: 'ruby'
+gem 'json', platform: 'jruby'
 
 group :development, :test do
   gem 'airbrake', :require => false
@@ -72,7 +73,7 @@ group :development do
 
   # better errors
   gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', platform: 'ruby'
   gem 'meta_request'
   gem 'foreman', :require => false
 end
@@ -96,7 +97,7 @@ end
 
 group :heroku, :production do
   gem 'rails_12factor', require: !!ENV["HEROKU"]
-  gem 'unicorn', :require => false
+  gem 'unicorn', require: false, platform: 'ruby'
 end
 
 gem 'sass-rails'
