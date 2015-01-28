@@ -13,26 +13,23 @@
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    .navbar.navbar-inverse.navbar-fixed-top
-      .container-fluid
-        .navbar-header
-          = link_to t('.errbit'), root_path, :class => 'navbar-brand'
-        #navbar.navbar-collapse.collapse
-          %ul.nav.navbar-nav.navbar-right
-            %li <a href="#">Dashboard</a>
-            %li <a href="#">Settings</a>
-            %li <a href="#">Profile</a>
-            %li <a href="#">Help</a>
-            -# TODO
-            -# = render 'shared/session'
     .row
       .col-sm-3.col-md-2.sidebar
+        %ul.nav.nav-sidebar
+          %li= link_to t('.errbit'), root_path, :class => 'navbar-brand'
         %ul.nav.nav-sidebar
           -# TODO: render from shared/navigation
           -# = render 'shared/navigation' if current_user
           %li.active= link_to t('.apps'), apps_path
           %li= link_to t('.errors'), problems_path
           %li= link_to t('.users'), users_path
+        %hr
+        %ul.nav.nav-sidebar
+          - if current_user
+            %li= link_to t('.sign_out'), destroy_session_path(:user), :id => 'sign-out', :method => :delete
+            %li= link_to t('.edit_profile'), edit_user_path(current_user), :id => 'edit-profile'
+            -# TODO move links here
+            -# = render 'shared/session'
 
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
         .page-header= yield :title
