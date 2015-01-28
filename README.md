@@ -121,13 +121,11 @@ gem install bundler
 bundle install
 ```
 
-  * Bootstrap Errbit. This will copy over config.yml and also seed the database.
+  * Bootstrap Errbit. This will seed the database.
 
 ```bash
 rake errbit:bootstrap
 ```
-
-  * Update the config.yml and mongoid.yml files with information about your environment
 
   * Start Server
 
@@ -135,21 +133,24 @@ rake errbit:bootstrap
 script/rails server
 ```
 
-Deploy Hooks:
+Configuration
+-------------
+Errbit configuration is done entirely through environment variables. See
+[configuration](docs/configuration.md)
+
+Deploy Hooks
 -------------
 Errbit can track your application deploys. See [deploy hooks](docs/deploy-hooks.md)
 
-Deployment:
+Deployment
 ----------
 See [notes on deployment](docs/deployment.md)
 
 Authentication
 --------------
-
 ### Configuring GitHub authentication:
-
-  * In `config/config.yml`, set `github_authentication` to `true`
-  * Register your instance of Errbit at: https://github.com/settings/applications
+* Set GITHUB_AUTHENTICATION to true
+* Register your instance of Errbit at https://github.com/settings/applications
 
 If you hosted Errbit at errbit.example.com, you would fill in:
 
@@ -158,19 +159,22 @@ If you hosted Errbit at errbit.example.com, you would fill in:
   <tr><th>Callback URL:</th><td><a href="http://errbit.example.com/users/auth/github">http://errbit.example.com/users/auth/github</a></td></tr>
 </table>
 
-  * After you have registered your app, set `github_client_id` and `github_secret`
-    in `config/config.yml` with your app's Client ID and Secret key.
+* After you have registered your app, set GITHUB_CLIENT_ID and GITHUB_SECRET
+  with your app's Client ID and Secret key.
 
+When you start your applicatoin, you should see the option to **Sign in with
+GitHub** on the Login page.
 
-After you have followed these instructions, you will be able to **Sign in with GitHub** on the Login page.
+You will also be able to link your GitHub profile to your user account on your
+**Edit profile** page.
 
-You will also be able to link your GitHub profile to your user account on your **Edit profile** page.
+If you have signed in with GitHub, or linked your GitHub profile, and the App
+has a GitHub repo configured, then you will be able to create issues on GitHub.
+You will still be able to create an issue on the App's configured issue
+tracker.
 
-If you have signed in with GitHub, or linked your GitHub profile, and the App has a GitHub repo configured,
-then you will be able to create issues on GitHub.
-You will still be able to create an issue on the App's configured issue tracker.
-
-You can change the requested account permissions by setting `github_access_scope` to:
+You can change the requested account permissions by setting
+`GITHUB_ACCESS_SCOPE` to:
 
 <table>
   <tr><th>['repo'] </th><td>Allow creating issues for public and private repos.</td></tr>
@@ -178,56 +182,16 @@ You can change the requested account permissions by setting `github_access_scope
   <tr><th>[] </th><td>No permission to create issues on any repos.</td></tr>
 </table>
 
-
-### GitHub authentication when served on Heroku
-
-You will need to set up Heroku variables accordingly as described in [Configuring GitHub authentication](#configuring-github-authentication):
-
-* GITHUB_AUTHENTICATION
-
-```bash
-heroku config:add GITHUB_AUTHENTICATION=true
-```
-
-* GITHUB_CLIENT_ID
-
-```bash
-heroku config:add GITHUB_CLIENT_ID=the_client_id_provided_by_GitHub
-```
-
-* GITHUB_SECRET
-
-```bash
-heroku config:add GITHUB_SECRET=the_secret_provided_by_GitHub
-```
-
-* GITHUB_ACCESS_SCOPE - set only one scope `repo` or `public_repo`. If you really need to put more than one, separate them with comma.
-
-```bash
-heroku config:add GITHUB_ACCESS_SCOPE=repo,public_repo
-```
-
-* GITHUB_ORG_ID [*optional*] - If set, any user of the specified GitHub Organization can login.  If it is their first time, an account will automatically be created for them.
-
-```bash
-heroku config:add GITHUB_ORG_ID=1234567
-```
-
-
-__Note__: To avoid restarting your Heroku app 4 times you can set Heroku variables in a single command, i.e:
-
-```bash
-heroku config:add GITHUB_AUTHENTICATION=true \
-GITHUB_CLIENT_ID=the_client_id_provided_by_GitHub \
-GITHUB_SECRET=the_secret_provided_by_GitHub \
-GITHUB_ACCESS_SCOPE=repo,public_repo
-```
+* GITHUB_ORG_ID is an optional environment variable you can set to your own
+  github organization id. If set, any user of the specified GitHub organization
+  can login.  If it is their first time, an account will automatically be
+  created for them.
 
 ### Configuring LDAP authentication:
 
-  * In `config/config.yml`, set `user_has_username` to `true`
+  * Set `USER_HAS_USERNAME` to `true`
   * Follow the instructions at https://github.com/cschiewek/devise_ldap_authenticatable
-  to set up the devise_ldap_authenticatable gem.
+    to set up the devise_ldap_authenticatable gem.
   * Ensure to set ```config.ldap_create_user = true``` in ```config/initializers/devise.rb```, this enables creating the users from LDAP, otherwhise login will not work.
   * Create a new initializer (e.g. ```config/initializers/devise_ldap.rb```) and add the following code to enable ldap authentication in the User-model:
 ```ruby
@@ -492,10 +456,6 @@ Solutions known to work are listed below:
   </tr>
 </table>
 
-## Other documentation
-
-* [All ENV variables availables to configure Errbit](docs/ENV-VARIABLES.md)
-
 TODO
 ----
 
@@ -530,7 +490,7 @@ Contributing to Errbit
 We welcome any contributions. If you need to tweak Errbit for your organization's needs,
 there are probably other users who will appreciate your work.
 Please try to determine whether or not your feature should be **global** or **optional**,
-and make **optional** features configurable via `config/config.yml`.
+and make **optional** features configurable via environment variables.
 
 **Examples of optional features:**
 
