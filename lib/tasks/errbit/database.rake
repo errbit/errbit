@@ -3,6 +3,13 @@ require 'digest/sha1'
 namespace :errbit do
   namespace :db do
 
+    desc 'Resolves problems that didnt occur for 2 weeks'
+    task :cleanup => :environment do
+      offset = 2.weeks.ago
+      Problem.where(:updated_at.lt => offset).map(&:resolve!)
+      Notice.where(:updated_at.lt => offset).destroy_all
+    end
+
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"
