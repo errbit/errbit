@@ -1,6 +1,6 @@
 # Deploy with Docker
-Errbit provides official [docker](https://www.docker.com/) images to
-make docker deployment easy.  You can pass all of [Errbit's
+Errbit provides official [Docker](https://www.docker.com/) images to
+make Docker deployment easy.  You can pass all of [Errbit's
 configuration](docs/configuration.md) to the Docker container using
 `docker run -e`.
 
@@ -25,11 +25,22 @@ docker run -d \
   mongo
 
 docker run -d \
-  --link my-mongo:my-mongo
+  --link my-mongo:my-mongo \
   -e "MONGO_URL=mongodb://my-mongo/mydbname" \
   --name my-errbit \
   -p 5000:5000 \
   stevecrozz/errbit
+```
+
+Now run `rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
+Docker container:
+```bash
+docker run \
+  --rm \
+  --link my-mongo:my-mongo \
+  -e "MONGO_URL=mongodb://my-mongo/mydbname" \
+  stevecrozz/errbit \
+  rake errbit:bootstrap
 ```
 
 Errbit should now be accessible on your Docker host over port 5000.
