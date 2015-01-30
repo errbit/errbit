@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/errbit/errbit_github_plugin.git
-  revision: 5900200e6d460fe94feaea3e59824437d54f1029
+  revision: 7eb48d540b94d2fa4b8f9805ec0148322ae2bffe
   specs:
     errbit_github_plugin (0.1.0)
       errbit_plugin
