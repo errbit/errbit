@@ -2,10 +2,6 @@ class Issue
   include ActiveModel::Model
   attr_accessor :problem, :user, :title, :body
 
-  def intialize(problem: nil, user: nil, title: nil, body: nil)
-    @problem, @user, @title, @body = problem, user, title, body
-  end
-
   def issue_tracker
     problem.app.issue_tracker
   end
