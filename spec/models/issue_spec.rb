@@ -28,15 +28,35 @@ describe Issue, type: 'model' do
   end
 
   context "when has no title" do
+    let(:title) { nil }
     let(:body) { "barrr" }
 
-    pending "returns an error"
+    context "#save" do
+      it "returns false" do
+        expect(issue.save).to be false
+      end
+
+      it "returns an error" do
+        issue.save
+        expect(errors).to include("The issue has no title")
+      end
+    end
   end
 
   context "when has no body" do
     let(:title) { "Foo" }
+    let(:body) { nil }
 
-    pending "returns an error"
+    context "#save" do
+      it "returns false" do
+        expect(issue.save).to be false
+      end
+
+      it "returns an error" do
+        issue.save
+        expect(errors).to include("The issue has no body")
+      end
+    end
   end
 
   context "when app has a issue tracker" do

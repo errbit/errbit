@@ -7,6 +7,16 @@ class Issue
   end
 
   def save
+    unless body
+      errors.add :base, "The issue has no body"
+      return false
+    end
+
+    unless title
+      errors.add :base, "The issue has no title"
+      return false
+    end
+
     if issue_tracker
       issue_tracker.tracker.errors.each do |k, err|
         errors.add k, err
