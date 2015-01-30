@@ -13,6 +13,7 @@ class IssueTracker
     @tracker ||=
       begin
         klass = ErrbitPlugin::Registry.issue_trackers[self.type_tracker] || ErrbitPlugin::NoneIssueTracker
+        # TODO: we need to find out a better way to pass those config to the issue tracker
         klass.new(options.merge(github_repo: app.github_repo, bitbucket_repo: app.bitbucket_repo))
       end
   end
