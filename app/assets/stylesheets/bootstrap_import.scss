@@ -33,8 +33,13 @@
 }
 
 .nav-sidebar > li > a {
+  color: #ccc;
   padding-right: 20px;
   padding-left: 20px;
+
+  &:hover {
+    background-color: #444;
+  }
 }
 
 .main {
@@ -42,4 +47,16 @@
   padding-bottom: 20px;
   padding-right: 40px;
   padding-left: 40px;
+}
+
+// Mixin for generating new styles
+@mixin alert-styles($color) {
+  @include gradient-vertical($start-color: $color, $end-color: darken($color, 7.5%));
+  border-color: darken($color, 15%);
+}
+
+#flash-messages {
+  .alert-success  { @include alert-styles($alert-success-bg); }
+  .alert-notice   { @include alert-styles($alert-info-bg); }
+  .alert-error    { @include alert-styles($alert-danger-bg); }
 }
