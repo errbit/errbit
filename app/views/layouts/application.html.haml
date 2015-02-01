@@ -20,9 +20,9 @@
         %ul.nav.nav-sidebar
           -# TODO: render from shared/navigation
           -# = render 'shared/navigation' if current_user
-          %li.active= link_to t('.apps'), apps_path
-          %li= link_to t('.errors'), problems_path
-          %li= link_to t('.users'), users_path
+          %li.active= link_to t('.apps'), apps_path, "class" => "glyphicon glyphicon-briefcase"
+          %li= link_to t('.errors'), problems_path, "class" => "glyphicon glyphicon-warning-sign"
+          %li= link_to t('.users'), users_path, "class" => "glyphicon glyphicon-user"
         %hr
         %ul.nav.nav-sidebar
           - if current_user
