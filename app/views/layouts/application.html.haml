@@ -15,8 +15,8 @@
   %body{:id => controller.controller_name, :class => controller.action_name}
     .row
       .col-sm-3.col-md-2.sidebar
-        %ul.nav.nav-sidebar
-          %li= link_to t('.errbit'), root_path, :class => 'navbar-brand'
+        %ul.nav
+          %li= link_to t('.errbit'), root_path, :id => 'navbar-brand'
         %ul.nav.nav-sidebar
           -# TODO: render from shared/navigation
           -# = render 'shared/navigation' if current_user
