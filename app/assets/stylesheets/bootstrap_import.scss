@@ -11,8 +11,14 @@
   padding: 20px;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #F5F5F5;
+  background-color: #222;
   border-right: 1px solid #EEE;
+}
+
+#navbar-brand {
+  background: rgba(0, 0, 0, 0) url(images/logo.png) 0 0 no-repeat;
+  text-indent: -5000em;
+  margin-bottom: 10px ;
 }
 
 .nav-sidebar {
