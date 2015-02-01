@@ -40,6 +40,10 @@
   &:hover {
     background-color: #444;
   }
+
+  & > span {
+    padding-left: 10px;
+  }
 }
 
 .main {
