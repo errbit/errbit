@@ -34,4 +34,28 @@ describe Configurator do
     })
     expect(result.one).to eq('zoom')
   end
+
+  it 'extracts symbol values' do
+    allow(ENV).to receive(:[]).with('MYSYMBOL').and_return(':asymbol')
+    result = Configurator.run({ mysymbol: ['MYSYMBOL'] })
+    expect(result.mysymbol).to be(:asymbol)
+  end
+
+  it 'extracts array values' do
+    allow(ENV).to receive(:[]).with('MYARRAY').and_return('[one,two,three]')
+    result = Configurator.run({ myarray: ['MYARRAY'] })
+    expect(result.myarray).to eq(['one', 'two', 'three'])
+  end
+
+  it 'extracts booleans' do
+    allow(ENV).to receive(:[]).with('MYBOOLEAN').and_return('true')
+    result = Configurator.run({ myboolean: ['MYBOOLEAN'] })
+    expect(result.myboolean).to be(true)
+  end
+
+  it 'extracts numbers' do
+    allow(ENV).to receive(:[]).with('MYNUMBER').and_return('0')
+    result = Configurator.run({ mynumber: ['MYNUMBER'] })
+    expect(result.mynumber).to be(0)
+  end
 end

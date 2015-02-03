@@ -75,7 +75,6 @@ In order of precedence Errbit uses:
 <dd>defaults to [repo]
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
-<dd>defaults to :sendmail
 <dt>SMTP_SERVER
 <dd>Server address for outgoing SMTP messages
 <dt>SMTP_PORT
