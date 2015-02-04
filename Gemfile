@@ -101,6 +101,7 @@ group :heroku, :production do
 end
 
 gem 'bootstrap-sass'
+gem 'bootswatch-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
