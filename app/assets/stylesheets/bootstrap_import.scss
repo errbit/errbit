@@ -1,5 +1,7 @@
+@import "bootswatch/flatly/variables";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootswatch/flatly/bootswatch";
 
 .sidebar {
   position: fixed;
@@ -11,14 +13,12 @@
   padding: 20px;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #222;
-  border-right: 1px solid #EEE;
 }
 
 #navbar-brand {
   background: rgba(0, 0, 0, 0) url(images/logo.png) 0 0 no-repeat;
   text-indent: -5000em;
-  margin-bottom: 10px ;
+  margin-bottom: 10px;
 }
 
 .nav-sidebar {
@@ -27,18 +27,26 @@
   margin-left: -20px;
 }
 
+.sidebar-menu {
+  font-size: 110%;
+}
+
+.sidebar-links {
+  font-size: 90%;
+}
+
 .nav > li {
   position: relative;
   display: block;
 }
 
 .nav-sidebar > li > a {
-  color: #ccc;
+  color: #eee;
   padding-right: 20px;
   padding-left: 20px;
 
   &:hover {
-    background-color: #444;
+    background-color: #1A242F;
   }
 
   & > span {
@@ -59,8 +67,22 @@
   border-color: darken($color, 15%);
 }
 
+@mixin alert-variant($background, $border, $text-color) {
+  background-color: $background;
+  border-color: $border;
+  color: $text-color;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+  .alert-link {
+    color: darken($text-color, 10%);
+  }
+}
+
 #flash-messages {
   .alert-success  { @include alert-styles($alert-success-bg); }
   .alert-notice   { @include alert-styles($alert-info-bg); }
+  .alert-alert    { @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text); }
   .alert-error    { @include alert-styles($alert-danger-bg); }
 }
