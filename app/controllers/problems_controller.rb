@@ -61,7 +61,7 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    body = render_to_string "issue_trackers/issue", layout: false, formats: [:txt]
+    body = render_to_string "issue_trackers/issue", layout: false, formats: [:md]
     title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
 
     issue = Issue.new(problem: problem, user: current_user, title: title, body: body)
