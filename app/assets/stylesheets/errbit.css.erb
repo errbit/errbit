@@ -23,7 +23,6 @@ p { margin-bottom: 1em; }
 
 /* Links */
 a         { color: #0069cc; text-decoration: none;}
-a:visited { color: #0069cc;}
 a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
 
@@ -475,21 +474,6 @@ td.count, td.issue_link {
   text-align: center;
 }
 
-.count a {
-  display: inline-block;
-  padding: 0.1em 0.7em;
-  margin-top: 3px;
-  color: #fff;
-  background: #cc0033 url(<%= asset_path "images/error-badge-bg.png" %>) 0 bottom repeat-x;
-  border: 1px solid #900;
-  border-radius: 18px;
-  -moz-border-radius: 18px;
-  -webkit-border-radius: 18px;
-  font-weight: bold;
-  opacity: 0.8;
-  -moz-opacity: 0.8;
-  -webkit-opacity: 0.8
-}
 .count a.resolved {
   background: #05B81d url(<%= asset_path "images/resolved-badge-bg.png" %>) 0 bottom repeat-x;
   border: 1px solid #080;
