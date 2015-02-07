@@ -17,18 +17,18 @@
       .col-sm-3.col-md-2.navbar-default.sidebar
         %ul.nav
           %li= link_to t('.errbit'), root_path, :id => 'navbar-brand'
-        %ul.nav.nav-sidebar.sidebar-menu
+        %ul.nav.nav-sidebar
           -# TODO: render from shared/navigation
           -# = render 'shared/navigation' if current_user
           - if current_user
             %li.active= link_to t('.apps'), apps_path, "class" => "glyphicon glyphicon-briefcase"
             %li= link_to t('.errors'), problems_path, "class" => "glyphicon glyphicon-warning-sign"
             %li= link_to t('.users'), users_path, "class" => "glyphicon glyphicon-user"
-        %ul.nav.nav-sidebar.sidebar-links
+        %ul.nav.nav-sidebar
           - if current_user
             %li= link_to t('.sign_out'), destroy_session_path(:user), :id => 'sign-out', :method => :delete
             %li= link_to t('.edit_profile'), edit_user_path(current_user), :id => 'edit-profile'
-            -# TODO move links here
+            -# TODO move links here && use gravater and sub-menu
             -# = render 'shared/session'
 
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main

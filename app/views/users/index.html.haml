@@ -3,7 +3,7 @@
   = link_to new_user_path, :class => 'btn btn-success' do
     %i.glyphicon.glyphicon-plus-sign
     Add a New User
-%table.users
+%table.table-striped.table-hover
   %thead
     %tr
       - if Errbit::Config.use_gravatar
