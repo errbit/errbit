@@ -14,7 +14,7 @@
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
     .row
-      .col-sm-3.col-md-2.sidebar
+      .col-sm-3.col-md-2.navbar-default.sidebar
         %ul.nav
           %li= link_to t('.errbit'), root_path, :id => 'navbar-brand'
         %ul.nav.nav-sidebar
@@ -24,7 +24,7 @@
           %li= link_to t('.errors'), problems_path, "class" => "glyphicon glyphicon-warning-sign"
           %li= link_to t('.users'), users_path, "class" => "glyphicon glyphicon-user"
         %hr
-        %ul.nav.nav-sidebar
+        %ul.nav.nav-sidebar.sidebar-links
           - if current_user
             %li= link_to t('.sign_out'), destroy_session_path(:user), :id => 'sign-out', :method => :delete
             %li= link_to t('.edit_profile'), edit_user_path(current_user), :id => 'edit-profile'
