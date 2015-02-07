@@ -7,4 +7,4 @@
   = user.errors.full_messages.to_sentence
   = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Update User'
+  .form-group= f.submit 'Update User', :class => 'btn btn-success'
