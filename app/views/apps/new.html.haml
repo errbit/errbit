@@ -4,7 +4,5 @@
   = link_to(t('.cancel'), apps_path, :class => 'btn btn-default')
 
 = form_for app_decorate do |f|
-
   = render 'fields', :f => f
-
-  %div.buttons= f.submit t('.add_app'), :class => 'btn btn-success'
+  %div= f.submit t('.add_app'), :class => 'btn btn-success'
