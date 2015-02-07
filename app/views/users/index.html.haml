@@ -1,7 +1,8 @@
 - content_for :title, 'Users'
 - content_for :action_bar do
-  %span= link_to('Add a New User', new_user_path, :class => 'add')
-
+  = link_to new_user_path, :class => 'btn btn-success' do
+    %i.glyphicon.glyphicon-plus-sign
+    %span= 'Add a New User'
 %table.users
   %thead
     %tr
@@ -23,4 +24,3 @@
         %td= user.email
         %td= user.admin? ? 'Y' : 'N'
 = paginate users
-
