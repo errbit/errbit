@@ -20,10 +20,10 @@
         %ul.nav.nav-sidebar
           -# TODO: render from shared/navigation
           -# = render 'shared/navigation' if current_user
-          %li.active= link_to t('.apps'), apps_path, "class" => "glyphicon glyphicon-briefcase"
-          %li= link_to t('.errors'), problems_path, "class" => "glyphicon glyphicon-warning-sign"
-          %li= link_to t('.users'), users_path, "class" => "glyphicon glyphicon-user"
-        %hr
+          - if current_user
+            %li.active= link_to t('.apps'), apps_path, "class" => "glyphicon glyphicon-briefcase"
+            %li= link_to t('.errors'), problems_path, "class" => "glyphicon glyphicon-warning-sign"
+            %li= link_to t('.users'), users_path, "class" => "glyphicon glyphicon-user"
         %ul.nav.nav-sidebar.sidebar-links
           - if current_user
             %li= link_to t('.sign_out'), destroy_session_path(:user), :id => 'sign-out', :method => :delete
@@ -34,7 +34,7 @@
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
         %h1= yield :title
         - if (action_bar = yield(:action_bar)).present?
-          #action-bar(style="margin-top:20px;")= action_bar
+          #action-bar= action_bar
         = render 'shared/flash_messages'
         = yield
         - if content_for?(:comments)
