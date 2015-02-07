@@ -1,6 +1,6 @@
 - any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
 =form_tag do
-  %table.errs.selectable
+  %table.errs.selectable.table-striped.table-hover
     %thead
       %tr
         %th= check_box_tag "toggle_problems_checkboxes"
