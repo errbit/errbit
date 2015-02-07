@@ -19,18 +19,19 @@
   - else
     = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'btn btn-default'
   - if current_user.watching?(app)
-    = link_to t('.unwatch'), app_watcher_path({app_id: app, id: current_user.id}), method: :delete, class: 'btn btn-default', data: {confirm: t('.are_you_sure')}
+    = link_to t('.unwatch'), app_watcher_path({app_id: app, id: current_user.id}), method: :delete,
+      class: 'btn btn-warning', data: {confirm: t('.are_you_sure')}
 %h3#watchers_toggle
   =t('.watchers')
   %span.click_span=t('.show_hide')
 #watchers_div
   - if app.notify_all_users
-    %table.table
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.all_users_notified')
   - else
-    %table.table
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.user_or_email')
@@ -48,7 +49,7 @@
     =t('.repository')
     %span.click_span=t('.show_hide')
   #repository_div
-    %table.repository
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.github_repo')
@@ -61,7 +62,7 @@
   %span.click_span=t('.show_hide')
 #deploys_div
   - if deploys.any?
-    %table.deploys
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.when')

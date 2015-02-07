@@ -4,12 +4,37 @@ form legend { margin: 0; }
 .tab-bar { margin-top: 30px; }
 .tab-bar li { display: inline-block; }
 
-table th, table td {
-  padding: 8px;
-  text-align: left;
-}
-table th { background-color: #ececec; white-space: nowrap; }
+/* Tables */
+table th, table td { padding: 12px; }
+table th { background-color: #ECECEC; white-space: nowrap; }
 table .main-column { width: 100%; }
+/*table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }*/
+td.count { text-align: center; }
+
+form .error-messages {
+  padding: 0 13px;
+  background: #fcc;
+  border: 1px solid #f99;
+}
+form .error-messages h2 {
+  font-size: 1.2em;
+}
+form .error-messages ul {
+  margin-left: 2em;
+  list-style-type: square;
+}
+#content-comments a.destroy-comment {
+  color: #EE0000;
+  margin-right: 5px;
+  margin-top: 2px;
+  font-size: 21px;
+  line-height: 1;
+  float: right;
+}
+#content-comments a.destroy-comment:hover {
+  text-decoration: none;
+  color: #AA0000;
+}
 
 /* Convenience Classes */
 .float-left   { float: left; }
@@ -256,21 +281,6 @@ form legend + .nested {
   padding-top: 0;
 }
 
-form .error-messages {
-  padding: 13px;
-  background: #fcc;
-  border: 1px solid #f99;
-}
-
-form .error-messages h2 {
-  font-size: 1.2em;
-  border-color: #F99;
-}
-form .error-messages ul {
-  margin-left: 2em;
-  list-style-type: square;
-}
-
 form .field-helpertext {
   display: inline;
 }
@@ -281,14 +291,6 @@ form input#app_email_at_notices {
 }
 
 
-/* Tables */
-table tbody tr:first-child th, table tbody tr:first-child td {
-  border-top: none;
-}
-table thead + tbody tr:first-child td {
-  border-top: 1px solid #C6C6C6;
-}
-table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
 
 /* Code */
 pre {
@@ -367,9 +369,6 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, 
 .image_preloader { display: none; }
 
 /* Apps Table */
-table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
-
-table.apps td.name, table.errs td.message { width: 100%; }
 table.apps td { padding: 16px 20px; }
 table.apps th { padding: 10px 20px; }
 
@@ -390,9 +389,6 @@ td.deploy {
 }
 td.latest {
   white-space: nowrap;
-}
-td.count, td.issue_link {
-  text-align: center;
 }
 
 
@@ -573,18 +569,6 @@ span.click_span {
 /* Comments */
 table.comment tbody td {
   background-color: #F9F9F9;
-}
-#content-comments a.destroy-comment {
-  color: #EE0000;
-  margin-right: 5px;
-  margin-top: 2px;
-  font-size: 21px;
-  line-height: 1;
-  float: right;
-}
-#content-comments a.destroy-comment:hover {
-  text-decoration: none;
-  color: #AA0000;
 }
 #content-comments #comment_submit {
   margin-top: 15px;
