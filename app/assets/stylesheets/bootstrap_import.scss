@@ -3,6 +3,10 @@
 @import "bootstrap";
 @import "bootswatch/flatly/bootswatch";
 
+.field_with_errors {
+  @extend .has-error;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -61,28 +65,21 @@
   padding-left: 40px;
 }
 
-// Mixin for generating new styles
-@mixin alert-styles($color) {
-  @include gradient-vertical($start-color: $color, $end-color: darken($color, 7.5%));
-  border-color: darken($color, 15%);
-}
-
-@mixin alert-variant($background, $border, $text-color) {
-  background-color: $background;
-  border-color: $border;
-  color: $text-color;
-
-  hr {
-    border-top-color: darken($border, 5%);
-  }
-  .alert-link {
-    color: darken($text-color, 10%);
-  }
-}
-
 #flash-messages {
-  .alert-success  { @include alert-styles($alert-success-bg); }
-  .alert-notice   { @include alert-styles($alert-info-bg); }
+  .alert-success  { @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text); }
+  .alert-notice   { @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text); }
   .alert-alert    { @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text); }
-  .alert-error    { @include alert-styles($alert-danger-bg); }
+  .alert-error    { @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text); }
+}
+
+#action-bar {
+  a:visited { color: white; }
+}
+
+// bootstrap override
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-left: 0px;
 }

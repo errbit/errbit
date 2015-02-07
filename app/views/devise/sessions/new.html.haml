@@ -18,9 +18,8 @@
 
   - if devise_mapping.rememberable?
     .checkbox.form-group
-      = f.label :remember_me do
-        = f.check_box :remember_me, :tabindex => 3
-        Remember me
+      = f.check_box :remember_me, :tabindex => 3
+      = f.label :remember_me
 
   .buttons
     %button{:type => 'submit', :class => 'btn btn-primary'}=t('.sign_in')

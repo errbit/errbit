@@ -1,4 +1,5 @@
 form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
+form legend { margin: 0; }
 
 /* Convenience Classes */
 .float-left   { float: left; }
@@ -189,20 +190,7 @@ a.action  { float: right; font-size: 0.9em;}
 /* Action Bar */
 #action-bar {
   position: absolute;
-  text-align: right;
   top: 22px; right: 24px;
-}
-#action-bar span {
-  display: inline-block;
-  margin-left: 18px;
-  margin-bottom: 16px;
-  text-decoration: none;
-  color: #666;
-  background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 bottom repeat-x;
-  border-radius: 50px;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border: 1px solid #bbb;
 }
 #action-bar span a {
   color: #666;
@@ -212,7 +200,6 @@ a.action  { float: right; font-size: 0.9em;}
   text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
   background: transparent 10px 8px no-repeat;
 }
-#action-bar a:hover { text-decoration: none;}
 #action-bar span:hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
@@ -258,15 +245,10 @@ form.edit_app {
 }
 form > div, form fieldset > div { margin: 1em 0;}
 form fieldset {
-  padding: 0.8em; margin-bottom: 1em;
-  background-color: #F0F0F0; border: 1px solid #C6C6C6; border-left: none; border-right: none;
-}
-form fieldset legend {
-  font-size: 1.2em; font-weight: bold; text-transform: uppercase;
-  color: #555;
+  padding: 0.8em;
+  background-color: #F0F0F0;
 }
 form label.inline { display: inline; }
-form .field_with_errors label { color: #900; }
 form textarea {
   width: 100%; padding: 0.8em;
   font-size: inherit; font-family: inherit;
@@ -278,31 +260,6 @@ form input[type=text]:focus, form input[type=password]:focus, form input[type=em
   box-shadow: 0px 0px 4px #69C;
   -moz-box-shadow: 0px 0px 4px #69C;
   -webkit-box-shadow: 0px 0px 4px #69C
-}
-form input[type=submit] {
-  display:block; width: auto; padding: 0.5em;
-  font-size: 1.2em; line-height: 1em; text-transform: uppercase;
-  border: none; color: #FFF; background-color: #387fc1;
-  cursor: pointer;
-}
-form input[type=submit].button {
-  font-size: 1em;
-  text-transform: none;
-}
-form div.buttons {
-  color: #666;
-  background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 bottom repeat-x;
-  border-radius: 50px;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border: 1px solid #bbb;
-  display: inline-block;
-}
-form div.buttons:hover {
-  color: #666;
-  box-shadow: 0 0 3px #69c;
-  -moz-box-shadow: 0 0 3px #69c;
-  -webkit-box-shadow: 0 0 3px #69c;
 }
 form strong.option {
   display: block;
@@ -349,9 +306,7 @@ form input#app_email_at_notices {
 
 /* Tables */
 table {
-  width: 100%;
   border: 1px solid #C6C6C6;
-  margin-bottom: 1.5em;
   border-collapse: separate;
 }
 table thead th {
@@ -412,37 +367,6 @@ pre {
   font-weight: bold;
 }
 
-
-/* Buttons */
-input[type="submit"].button,
-a.button {
-  display: inline-block;
-  padding: 0 0.8em;
-  margin-left: 0.5em;
-  color: #666;
-  background-color: #dadada;
-  border: 1px solid #BBB;
-  border-radius: 30px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  line-height: 30px;
-  min-width: 54px;
-  text-align: center;
-  text-shadow: 0 1px 0 #fff;
-}
-input[type="submit"]:hover.button,
-a:hover.button {
-  box-shadow: 0px 0px 4px #bfbfbf;
-  -moz-box-shadow: 0px 0px 4px #bfbfbf;
-  -webkit-box-shadow: 0px 0px 4px #bfbfbf;
-  text-decoration: none;
-  background-color: #e5e5e5;
-}
-a.button.active {
-  border-color: #fff;
-  background-color: #CCC;
-  background-image: none;
-}
 
 
 /* Tab Bar */
