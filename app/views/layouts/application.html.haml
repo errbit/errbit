@@ -17,7 +17,7 @@
       .col-sm-3.col-md-2.navbar-default.sidebar
         %ul.nav
           %li= link_to t('.errbit'), root_path, :id => 'navbar-brand'
-        %ul.nav.nav-sidebar
+        %ul.nav.nav-sidebar.sidebar-menu
           -# TODO: render from shared/navigation
           -# = render 'shared/navigation' if current_user
           - if current_user

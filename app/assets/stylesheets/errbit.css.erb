@@ -192,14 +192,6 @@ a.action  { float: right; font-size: 0.9em;}
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
-#action-bar a.add {
-  background-image: url(<%= asset_path "images/icons/add.png" %>);
-}
-
-#action-bar .calendar_link {
-  background: url(<%= asset_path "images/icons/ical.png" %>) no-repeat scroll 12px 6px transparent;
-  padding-left: 47px;
-}
 
 #action-bar span.github a { background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px; }
 #action-bar span.unlink_github a { background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px; }
@@ -462,16 +454,6 @@ td.count, td.issue_link {
   text-align: center;
 }
 
-.count a.resolved {
-  background: #05B81d url(<%= asset_path "images/resolved-badge-bg.png" %>) 0 bottom repeat-x;
-  border: 1px solid #080;
-}
-.count a:hover {
-  text-decoration: none;
-  opacity: 1;
-  -moz-opacity: 1;
-  -webkit-opacity: 1;
-}
 
 /* Err Tables */
 table.errs td.app {
@@ -528,16 +510,6 @@ table.tally th.value {
 /* Deploys table */
 table.deploys td.when {
   width: 102px;
-}
-
-/* Resolve Errs */
-#action-bar a.resolve {
-  background: transparent url(<%= asset_path "images/icons/thumbs-up.png" %>) 6px 5px no-repeat;
-}
-
-/* Go Up */
-#action-bar a.up {
-  background: transparent url(<%= asset_path "images/icons/up.png" %>) 6px 5px no-repeat;
 }
 
 /* Notices Pagination */
