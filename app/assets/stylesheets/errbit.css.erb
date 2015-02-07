@@ -1,7 +1,15 @@
 form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
 form legend { margin: 0; }
+
 .tab-bar { margin-top: 30px; }
 .tab-bar li { display: inline-block; }
+
+table th, table td {
+  padding: 8px;
+  text-align: left;
+}
+table th { background-color: #ececec; white-space: nowrap; }
+table .main-column { width: 100%; }
 
 /* Convenience Classes */
 .float-left   { float: left; }
@@ -9,7 +17,6 @@ form legend { margin: 0; }
 .clear        { clear: both; }
 .clear-left   { clear: left; }
 .clear-right  { clear: right; }
-.nowrap       { white-space: nowrap; }
 
 #header > div, #content-wrapper, #footer {
   width: 930px;
@@ -275,24 +282,13 @@ form input#app_email_at_notices {
 
 
 /* Tables */
-table th, table td {
-  border-top: 1px solid #C6C6C6;
-  padding: 10px 8px;
-  text-align: left;
-}
 table tbody tr:first-child th, table tbody tr:first-child td {
   border-top: none;
 }
 table thead + tbody tr:first-child td {
   border-top: 1px solid #C6C6C6;
 }
-table th { background-color: #ececec; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
-table .main { width: 100%; }
-
-table.single_user {
-  border-top: none;
-}
 
 /* Code */
 pre {

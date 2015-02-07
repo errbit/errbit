@@ -2,14 +2,14 @@
   %table.summary
     %tr
       %th Message
-      %td.main.nowrap= message_graph(problem)
+      %td.main-column.text-nowrap= message_graph(problem)
     %tr
       %th Error Class
       %td= notice.error_class
     - if notice.request['url'].present?
       %tr
         %th URL
-        %td.nowrap= link_to notice.request['url'], notice.request['url']
+        %td.text-nowrap= link_to notice.request['url'], notice.request['url']
       %tr
         %th &nbsp;
         %td= notice.to_curl
@@ -43,4 +43,3 @@
     %tr
       %th Rel. Directory
       %td= notice.server_environment && notice.server_environment["project-root"]
-
