@@ -1,3 +1,5 @@
+form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
+
 /* Convenience Classes */
 .float-left   { float: left; }
 .float-right  { float: right; }
@@ -263,19 +265,8 @@ form fieldset legend {
   font-size: 1.2em; font-weight: bold; text-transform: uppercase;
   color: #555;
 }
-form label {
-  font-weight: bold; text-transform: uppercase; line-height: 1.6em;
-  display: inline-block;
-}
 form label.inline { display: inline; }
-form .checkbox label { display: inline; }
-form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
 form .field_with_errors label { color: #900; }
-form input[type=text], form input[type=password], form input[type=email] {
-  width: 96%; padding: 0.8em;
-  font-size: 1em;
-  color: #787878; border: 1px solid #C6C6C6;
-}
 form textarea {
   width: 100%; padding: 0.8em;
   font-size: inherit; font-family: inherit;
@@ -287,9 +278,6 @@ form input[type=text]:focus, form input[type=password]:focus, form input[type=em
   box-shadow: 0px 0px 4px #69C;
   -moz-box-shadow: 0px 0px 4px #69C;
   -webkit-box-shadow: 0px 0px 4px #69C
-}
-form input[type=checkbox]:focus + label{
-  color: #69C;
 }
 form input[type=submit] {
   display:block; width: auto; padding: 0.5em;
@@ -315,22 +303,6 @@ form div.buttons:hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
-}
-form div.buttons input, form div.buttons button {
-  padding: 0 20px;
-  color: #666;
-  background: none;
-  display: inline-block;
-  height: 36px;
-  font-size: 14px; font-weight: bold; line-height: 36px; text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF;
-  -moz-text-shadow: 1px 1px 0px #FFF;
-  -webkit-text-shadow: 1px 1px 0px #FFF;
-  border: none;
-}
-form div.buttons button.sign_in {
-  padding-left: 40px;
-  background: transparent url(<%= asset_path "images/icons/right-arrow.png" %>) 3px 3px no-repeat;
 }
 form strong.option {
   display: block;
