@@ -49,7 +49,7 @@
         %td.count
           - if app.problem_count > 0
             - unresolved = app.unresolved_count
-            = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
+            = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : "btn btn-danger")
     - if apps.none?
       %tr
         %td{:colspan => 3}
