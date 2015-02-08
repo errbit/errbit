@@ -1,7 +1,7 @@
 module AppsHelper
   def link_to_copy_attributes_from_other_app
     if App.count > 1
-      html =  link_to('copy settings from another app', '#', :class => 'btn btn-primary')
+      html = link_to('copy settings from another app', '#', :class => 'btn btn-primary copy_config')
       # TODO: re-design
       html << select("duplicate", "app",
                      App.all.asc(:name).reject{|a| a == @app }.

@@ -10,11 +10,14 @@
   = link_to new_user_path, :class => 'btn btn-success' do
     %i.glyphicon.glyphicon-plus-sign
     Add a New User
-  = link_to 'edit', edit_user_path(user), :class => 'btn btn-primary'
-  = link_to 'destroy', user_path(user), :method => :delete,
-    :data => { :confirm => t('users.confirm_delete') }, :class => 'btn btn-danger'
+  = link_to edit_user_path(user), :class => 'btn btn-primary' do
+    %i.glyphicon.glyphicon-edit
+    edit
+  = link_to user_path(user), :method => :delete, :data => { :confirm => t('users.confirm_delete') }, :class => 'btn btn-danger' do
+    %i.glyphicon.glyphicon.glyphicon-remove
+    destroy
 
-%table.table
+%table.table.table-striped
   %tr
     %th Email
     %td.main-column= user.email
