@@ -4,12 +4,10 @@ form legend { margin: 0; }
 .tab-bar { margin-top: 30px; }
 .tab-bar li { display: inline-block; }
 
-/* Tables */
-table th, table td { padding: 12px; }
-table th { background-color: #ECECEC; white-space: nowrap; }
-table .main-column { width: 100%; }
-/*table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }*/
-td.count { text-align: center; }
+#action-bar {
+  position: absolute;
+  top: 18px; right: 40px;
+}
 
 form .error-messages {
   padding: 0 13px;
@@ -22,6 +20,14 @@ form .error-messages h2 {
 form .error-messages ul {
   margin-left: 2em;
   list-style-type: square;
+}
+#content-title {
+  padding-bottom: 25px;
+}
+#content-title h1 {
+  margin-top: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ccc;
 }
 #content-comments a.destroy-comment {
   color: #EE0000;
@@ -60,17 +66,6 @@ form .error-messages ul {
 #header > div {
   height: 71px;
 }
-#header #site-name {
-  display: block;
-  width: 88px;
-  height: 31px;
-  position: absolute;
-  top: 22px;
-  left: 2px;
-  background: transparent url(<%= asset_path 'images/logo.png' %>) 0 0 no-repeat;
-  text-indent: -5000em;
-}
-
 #header #session-links {
   position: absolute;
   top: 20px;
@@ -168,11 +163,6 @@ form .error-messages ul {
   border: 1px solid #C6C6C6;
 }
 
-/* Content Title and Comments */
-#content-title, #content-comments {
-  padding: 15px 0 34px;
-}
-
 /* Make err title bar bigger to fit more buttons */
 #content-title.err_show {
   padding: 43px 24px 37px;
@@ -182,40 +172,9 @@ form .error-messages ul {
   background-color: #90EE90;
 }
 
-#content-title h1, #content-comments h3 {
-  padding: 0; margin: 0;
-  width: 85%;
-  border: none;
-  color: #636363;
-  font-size: 2em; line-height: 1em; font-weight: bold; font-family: arial, sans-serif;
-  word-wrap: break-word;
-}
-#content-comments h3 {
-  font-size: 1.5em;
-  margin-bottom: 14px;
-}
-
 #content-title .meta { font-size: 0.9em; color: #787878; }
 
 /* Action Bar */
-#action-bar {
-  position: absolute;
-  top: 20px; right: 40px;
-}
-#action-bar span a {
-  color: #666;
-  display: block;
-  padding: 0 20px 0 40px;
-  font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
-  background: transparent 10px 8px no-repeat;
-}
-#action-bar span:hover {
-  box-shadow: 0 0 3px #69c;
-  -moz-box-shadow: 0 0 3px #69c;
-  -webkit-box-shadow: 0 0 3px #69c;
-}
-
 #action-bar span.github a { background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px; }
 #action-bar span.unlink_github a { background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px; }
 

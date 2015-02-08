@@ -3,6 +3,16 @@
 @import "bootstrap";
 @import "bootswatch/flatly/bootswatch";
 
+$sidebar-hover-bg: darken($navbar-default-bg, 5%);
+
+// from errbit.css
+
+/* Tables */
+table th, table td { padding: 12px; }
+table th { background-color: darken($gray-lighter, 5%); white-space: nowrap; }
+table .main-column { width: 100%; }
+td.count { text-align: center; }
+
 .field_with_errors {
   @extend .has-error;
 }
@@ -14,20 +24,24 @@
   left: 0;
   z-index: 1000;
   display: block;
-  padding: 20px;
+  padding: 0 20px;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 #navbar-brand {
-  background: rgba(0, 0, 0, 0) url(images/logo.png) 0 0 no-repeat;
+  background: rgba(0, 0, 0, 0) url(images/logo.png) 18px 15px no-repeat;
   text-indent: -5000em;
-  margin-bottom: 10px;
+  padding: 20px;
+}
+
+.nav-site-name {
+  margin-right: -20px;
+  margin-left: -20px;
 }
 
 .nav-sidebar {
-  margin-right: -21px;
-  margin-bottom: 20px;
+  margin-right: -20px;
   margin-left: -20px;
 }
 
@@ -37,16 +51,35 @@
 }
 
 .nav-sidebar > li > a {
-  color: #eee;
-  padding-right: 20px;
-  padding-left: 20px;
+  color: #BBB;
+  font-weight: bold;
+  padding: 17px 20px;
 
   &:hover {
-    background-color: #1A242F;
+    background-color: $sidebar-hover-bg;
+    color: #FFF;
   }
 
   & > span {
-    padding-left: 10px;
+    margin-left: 11px;
+  }
+}
+
+.nav.nav-user {
+  a {
+    font-size: 90%;
+    font-weight: normal;
+  }
+  img.gravatar {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .open > a {
+    background-color: $sidebar-hover-bg;
+    color: #FFF ;
+  }
+  .dropdown-menu {
+    left: 20px;
   }
 }
 
@@ -62,10 +95,6 @@
   .alert-notice   { @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text); }
   .alert-alert    { @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text); }
   .alert-error    { @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text); }
-}
-
-#action-bar {
-  a:visited { color: white; }
 }
 
 // bootstrap override
