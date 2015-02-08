@@ -55,7 +55,7 @@ td.count { text-align: center; }
   font-weight: bold;
   padding: 17px 20px;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: $sidebar-hover-bg;
     color: #FFF;
   }

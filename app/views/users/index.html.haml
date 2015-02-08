@@ -23,4 +23,4 @@
           %td= user.username
         %td= user.email
         %td= user.admin? ? 'Y' : 'N'
-= paginate users
+= paginate users, :theme => 'twitter-bootstrap-3'

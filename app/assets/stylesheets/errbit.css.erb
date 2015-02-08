@@ -1,7 +1,6 @@
 form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
 form legend { margin: 0; }
 
-.tab-bar { margin-top: 30px; }
 .tab-bar li { display: inline-block; }
 
 #action-bar {
@@ -268,18 +267,6 @@ pre {
 .html ul li   { margin-bottom: 0.5em; list-style: disc; }
 .html ol li   { margin-bottom: 0.5em; list-style: decimal; }
 
-/* Pagination */
-.pagination {
-  margin: 0 0 25px;
-  font-size: 17px;
-  text-align: center;
-}
-.pagination em {
-  font-style: normal;
-  font-weight: bold;
-}
-
-
 /* Watchers / Issue Tracker / Notification Forms */
 div.watcher.nested .watcher_params, div.issue_tracker.nested .tracker_params, div.notification_service.nested .notification_params {
   display: none;
@@ -410,21 +397,20 @@ table.deploys td.when {
 
 /* Notices Pagination */
 .notice-pagination {
-  float: left;
-  margin-right: 10px;
+  margin-bottom: 14px;
 }
-
+.notice-pagination nav {
+  float: left;
+}
+.notice-pagination .pager {
+  margin: 0;
+}
 .notice-pagination-loader {
   visibility: hidden;
-  float: left;
-  width: 16px;
-  height: 16px;
-  margin-right: 1em;
 }
 .notice-pagination-loader img {
   vertical-align: middle
 }
-
 
 /* Backtrace */
 

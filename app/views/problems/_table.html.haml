@@ -49,7 +49,7 @@
         %tr
           %td{:colspan => (any_issue_links ? 8 : 7)}
             %em No errs here
-  = paginate problems
+  = paginate problems, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm"
   .tab-bar
     %ul
       - %w(merge unmerge resolve unresolve delete).each do |action|

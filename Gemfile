@@ -21,6 +21,7 @@ gem 'useragent'
 gem 'decent_exposure'
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
+gem 'bootstrap-kaminari-views'
 gem 'rack-ssl-enforcer', :require => false
 gem 'rails_autolink'
 # Please don't update hoptoad_notifier to airbrake.
