@@ -1,9 +1,8 @@
-.window
-  %table.user_attributes
+%table.user_attributes
+  %tr
+    %td
+      %strong The user who experienced the error:
+  - user.each do |key, value|
     %tr
-      %td
-        %strong The user who experienced the error:
-    - user.each do |key, value|
-      %tr
-        %th= key
-        %td= auto_link(auto_link(value.to_s, :urls, :target => "_blank"), :email_addresses).html_safe
+      %th= key
+      %td= auto_link(auto_link(value.to_s, :urls, :target => "_blank"), :email_addresses).html_safe
