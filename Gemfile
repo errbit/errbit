@@ -49,6 +49,13 @@ gem 'httparty'
 # Flowdock
 gem 'flowdock'
 
+# Asynchronous JOB
+# ---------------------------------------
+gem 'sidekiq', '~> 3.2.6'
+gem 'sinatra', require: false
+gem 'slim'
+gem 'sidekiq-failures'
+
 # Authentication
 # ---------------------------------------
 # GitHub OAuth

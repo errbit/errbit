@@ -86,6 +86,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
     cliver (0.3.2)
     coderay (1.0.9)
     coffee-rails (4.1.0)
@@ -262,6 +264,8 @@ GEM
     rack (1.5.2)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
+    rack-protection (1.5.3)
+      rack
     rack-ssl (1.4.0)
       rack
     rack-ssl-enforcer (0.2.6)
@@ -293,6 +297,9 @@ GEM
     rake (10.4.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    redis (3.2.0)
+    redis-namespace (1.5.1)
+      redis (~> 3.0, >= 3.0.4)
     request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
@@ -340,10 +347,25 @@ GEM
     sawyer (0.6.0)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
+    sidekiq (3.2.6)
+      celluloid (= 0.15.2)
+      connection_pool (>= 2.0.0)
+      json
+      redis (>= 3.0.6)
+      redis-namespace (>= 1.3.1)
+    sidekiq-failures (0.4.3)
+      sidekiq (>= 2.16.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    slim (3.0.1)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
     slop (3.4.6)
     spoon (0.0.4)
       ffi
@@ -360,6 +382,7 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    temple (0.7.5)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     test-unit (3.0.8)
@@ -369,6 +392,7 @@ GEM
     thread_safe (0.3.4-java)
     tilt (1.4.1)
     timecop (0.6.3)
+    timers (1.1.0)
     tins (0.12.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -456,6 +480,10 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   rushover
   sass-rails
+  sidekiq (~> 3.2.6)
+  sidekiq-failures
+  sinatra
+  slim
   test-unit
   timecop
   uglifier

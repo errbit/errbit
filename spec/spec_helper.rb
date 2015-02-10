@@ -27,6 +27,10 @@ require 'xmpp4r/muc'
 require 'mongoid-rspec'
 require 'fabrication'
 require 'errbit_plugin/mock_issue_tracker'
+require 'sidekiq/testing'
+
+# Starts faking sidekiq jobs
+Sidekiq::Testing.fake!
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -40,6 +44,7 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner.clean
+    Sidekiq::Worker.clear_all
   end
 
   config.include Haml, type: :helper

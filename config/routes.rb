@@ -1,6 +1,15 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  # Sidekiq authorization
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == Errbit::Config.sidekiq_username && password == Errbit::Config.sidekiq_password
+  end if Rails.env.production?
+
+  mount Sidekiq::Web, at: "/sidekiq"
 
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
