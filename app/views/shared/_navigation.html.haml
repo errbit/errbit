@@ -1,4 +1,14 @@
 %ul.nav.nav-sidebar.nav-menu
-  %li.active= link_to t('.apps'), apps_path, "class" => "glyphicon glyphicon-briefcase"
-  %li= link_to t('.errors'), problems_path, "class" => "glyphicon glyphicon-warning-sign"
-  %li= link_to t('.users'), users_path, "class" => "glyphicon glyphicon-user"
+  %li{:class => active_if_here(:apps)}
+    = link_to apps_path do
+      %i.glyphicon.glyphicon-briefcase
+      = t('.apps')
+  %li{:class => active_if_here(:problems)}
+    = link_to problems_path do
+      %i.glyphicon.glyphicon-warning-sign
+      = t('.errors')
+  - if user_signed_in? && current_user.admin?
+    %li{:class => active_if_here(:users)}
+      = link_to users_path do
+        %i.glyphicon.glyphicon-user
+        = t('.users')
