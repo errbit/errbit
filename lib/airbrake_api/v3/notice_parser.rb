@@ -32,7 +32,7 @@ module AirbrakeApi
       end
 
       def backtrace
-        error['backtrace'].map do |backtrace_line|
+        (error['backtrace'] || []).map do |backtrace_line|
           {
             method: backtrace_line['function'],
             file: backtrace_line['file'],

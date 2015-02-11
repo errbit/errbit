@@ -1,0 +1,28 @@
+{
+  "notifier":{"name":"airbrake-js-v8","version":"0.3.10","url":"https://github.com/airbrake/airbrake-js"},
+  "errors":[
+    {
+      "type":"Error",
+      "message":"Error: TestError",
+      "backtrace":null
+    }
+  ],
+  "context":{
+    "language":"JavaScript",
+    "sourceMapEnabled":true,
+    "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36",
+    "url":"http://localhost:3000/kontakt",
+    "userId":1,"userUsername":"john",
+    "userName":"John Doe",
+    "userUsername": "john",
+    "userEmail":"john.doe@example.org",
+    "version":"1.0",
+    "component":"ContactsController",
+    "action":"show"
+  },
+  "params":{"returnTo":"dashboard"},
+  "environment":{"navigator_vendor":"Google Inc."},
+  "session":{"isAdmin":true},
+  "key":"a3969bfbf65f073921e",
+  "project_id":"a3969bfbf65f073921e"
+}
