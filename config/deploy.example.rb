@@ -20,8 +20,6 @@ set :ssh_options, forward_agent: true
 
 set :linked_files, fetch(:linked_files, []) + %w(
   .env
-  config/config.yml
-  config/mongoid.yml
   config/newrelic.yml
 )
 
@@ -42,8 +40,6 @@ namespace :errbit do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
       {
-        'config/config.example.yml' => 'config/config.yml',
-        'config/mongoid.example.yml' => 'config/mongoid.yml',
         'config/newrelic.example.yml' => 'config/newrelic.yml'
       }.each do |src, target|
         execute "if [ ! -f #{shared_path}/#{target} ]; then cp #{current_path}/#{src} #{shared_path}/#{target}; fi"
