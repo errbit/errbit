@@ -1,45 +1,21 @@
-[See this exception on Errbit](<%= app_problem_url problem.app, problem %> "See this exception on Errbit")
+Errbit link: <%= app_problem_url problem.app, problem %>
 <% if notice = problem.notices.first %>
-# <%= notice.message %> #
-## Summary ##
+<% notice.message %>
+
+Summary
+-------
 <% if notice.request['url'].present? %>
-### URL ###
-[<%= notice.request['url'] %>](<%= notice.request['url'] %>)"
+URL:     <%= notice.request['url'] %>
 <% end %>
-### Where ###
-<%= notice.where %>
+Where:   <%= notice.where %>
+Occured: <%= notice.created_at.to_s(:micro) %>
+Similar: <%= (notice.problem.notices_count - 1).to_s %>
+Params:  <%= pretty_hash notice.params %>
+Session: <%= pretty_hash notice.session %>
+Env:     <%= pretty_hash notice.env_vars %>
 
-### Occured ###
-<%= notice.created_at.to_s(:micro) %>
-
-### Similar ###
-<%= (notice.problem.notices_count - 1).to_s %>
-
-## Params ##
-```
-<%= pretty_hash(notice.params) %>
-```
-
-## Session ##
-```
-<%= pretty_hash(notice.session) %>
-```
-
-## Backtrace ##
-```
-<% notice.backtrace_lines.each do |line| %><%= line.number %>:  <%= line.file_relative %> -> **<%= line.method %>**
+Backtrace
+---------
+<% notice.backtrace_lines.each do |line| %><%= sprintf('%5d: %s **%s', line.number, line.file_relative, line.method) %>
 <% end %>
-```
-
-## Environment ##
-
-<table>
-<% for key, val in notice.env_vars %>
-  <tr>
-    <td><%= key %>:</td>
-    <td><%= val %></td>
-  </tr>
 <% end %>
-</table>
-<% end %>
-
