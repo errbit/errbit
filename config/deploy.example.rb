@@ -69,7 +69,7 @@ namespace :db do
   end
 end
 
-set :unicorn_pidfile, "#{fetch(:deploy_to)}/shared/pids/unicorn.pid"
+set :unicorn_pidfile, "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid"
 set :unicorn_pid, "`cat #{fetch(:unicorn_pidfile)}`"
 
 namespace :unicorn do
@@ -77,7 +77,13 @@ namespace :unicorn do
   task :start do
     on roles(:app) do
       within current_path do
-        execute "UNICORN_PID=\"#{fetch(:unicorn_pidfile)}\"", "bundle exec unicorn -D -c ./config/unicorn.rb"
+        if test " [ -s #{fetch(:unicorn_pidfile)} ] "
+          warn "Unicorn is already running."
+        else
+          with "UNICORN_PID" => fetch(:unicorn_pidfile) do
+            execute :bundle, :exec, :unicorn, "-D -c ./config/unicorn.rb"
+          end
+        end
       end
     end
   end
@@ -85,21 +91,25 @@ namespace :unicorn do
   desc 'Reload unicorn'
   task :reload do
     on roles(:app) do
-      execute :kill, "-HUP #{fetch(:unicorn_pid)}"
+      execute :kill, "-HUP", fetch(:unicorn_pid)
     end
   end
 
   desc 'Stop unicorn'
   task :stop do
     on roles(:app) do
-      execute :kill, "-QUIT #{fetch(:unicorn_pid)}"
+      if test " [ -s #{fetch(:unicorn_pidfile)} ] "
+        execute :kill, "-QUIT", fetch(:unicorn_pid)
+      else
+        warn "Unicorn is not running."
+      end
     end
   end
 
   desc 'Reexecute unicorn'
   task :reexec do
     on roles(:app) do
-      execute :kill, "-USR2 #{fetch(:unicorn_pid)}"
+      execute :kill, "-USR2", fetch(:unicorn_pid)
     end
   end
 end
