@@ -2,15 +2,21 @@ class Issue
   include ActiveModel::Model
   attr_accessor :problem, :user, :title, :body
 
-  def intialize(problem: nil, user: nil, title: nil, body: nil)
-    @problem, @user, @title, @body = problem, user, title, body
-  end
-
   def issue_tracker
     problem.app.issue_tracker
   end
 
   def save
+    unless body
+      errors.add :base, "The issue has no body"
+      return false
+    end
+
+    unless title
+      errors.add :base, "The issue has no title"
+      return false
+    end
+
     if issue_tracker
       issue_tracker.tracker.errors.each do |k, err|
         errors.add k, err

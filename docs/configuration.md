@@ -74,8 +74,7 @@ In order of precedence Errbit uses:
 <dd>OAuth scope to request from users when they sign-in through github
 <dd>defaults to [repo]
 <dt>EMAIL_DELIVERY_METHOD
-<dd>SMTP or sendmail, depending on how you want Errbit to send email
-<dd>defaults to sendmail
+<dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER
 <dd>Server address for outgoing SMTP messages
 <dt>SMTP_PORT
