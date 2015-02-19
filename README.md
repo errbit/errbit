@@ -121,7 +121,10 @@ gem install bundler
 bundle install
 ```
 
-  * Bootstrap Errbit. This will seed the database.
+  * Install MongoDB. Follow the directions [here](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages), then:
+
+  * Bootstrap Errbit. This will seed the database.  Make sure you copy the
+    username and password down someplace safe.
 
 ```bash
 rake errbit:bootstrap
@@ -130,7 +133,7 @@ rake errbit:bootstrap
   * Start Server
 
 ```bash
-script/rails server
+rails s
 ```
 
 Configuration
