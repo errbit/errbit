@@ -1,33 +1,41 @@
 class Issue
   include ActiveModel::Model
-  attr_accessor :problem, :user, :title, :body
+  attr_accessor :problem, :user, :body
 
   def issue_tracker
-    problem.app.issue_tracker
+    @issue_tracker ||= problem.app.issue_tracker
+  end
+
+  def tracker
+    @tracker ||= issue_tracker && issue_tracker.tracker
+  end
+
+  def render_body_args
+    if tracker.respond_to?(:render_body_args)
+      tracker.render_body_args
+    else
+      [ 'issue_trackers/issue', formats: [:md] ]
+    end
+  end
+
+  def title
+    if tracker.respond_to?(:title)
+      tracker.title
+    else
+      "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+    end
   end
 
   def save
-    unless body
-      errors.add :base, "The issue has no body"
-      return false
-    end
+    errors.add :base, "The issue has no body" unless body
+    errors.add :base, "This app has no issue tracker" unless issue_tracker
+    return false if errors.present?
 
-    unless title
-      errors.add :base, "The issue has no title"
-      return false
-    end
+    tracker.errors.each { |k, err| errors.add k, err }
+    return false if errors.present?
 
-    if issue_tracker
-      issue_tracker.tracker.errors.each do |k, err|
-        errors.add k, err
-      end
-      return false if errors.present?
-
-      url = issue_tracker.create_issue(title, body, user: user.as_document)
-      problem.update_attributes(issue_link: url, issue_type: issue_tracker.tracker.class.label)
-    else
-      errors.add :base, "This app has no issue tracker setup."
-    end
+    url = issue_tracker.create_issue(title, body, user: user.as_document)
+    problem.update_attributes(issue_link: url, issue_type: tracker.class.label)
 
     errors.empty?
   rescue => ex
