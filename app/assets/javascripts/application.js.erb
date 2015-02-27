@@ -11,6 +11,7 @@
 //= require errbit
 //= require apps.show
 //= require Chart
+//= require trend
 //= require_self
 
 // Allow any gems named 'errbit_*' to require their own assets
@@ -18,30 +19,3 @@
   require_asset(plugin) rescue Sprockets::FileNotFound
 end %>
 
-$(document).ready(function(){
-  $('canvas.bar-chart').each(function(){
-    var canvas = $(this);
-    var ctx = canvas.get(0).getContext("2d");
-
-    var data = {
-      labels: canvas.data('labels'),
-      datasets : [
-        {
-          data : canvas.data('notice-count')
-        },
-      ]
-    }
-
-    chart = new Chart(ctx);
-    chart.Bar(data, {
-      scaleShowLabels: canvas.data('show-labels'),
-      scaleOverride: true,
-      scaleSteps: canvas.data('scale-steps'),
-      scaleStepWidth: 1,
-      scaleStartValue: 0,
-      animation: false,
-      scaleShowGridLines: false,
-      barValueSpacing: 1
-    });
-  });
-});
