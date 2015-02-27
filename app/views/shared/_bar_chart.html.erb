@@ -1,22 +1,23 @@
-<%= content_tag :canvas, nil, :id => "chart-for-#{problem.id}", :width => width, :height => height %>
+<%= content_tag :canvas, nil, id: "chart-for-#{problem.id}", width: width, height: height, data: { labels: bar_chart_x_axis_labels(show_labels).to_json, notice_count: data, show_labels: show_labels, scale_steps: bar_chart_scale_steps(data.max) } %>
 
 <%= javascript_tag do %>
-  var ctx = $("#chart-for-<%= problem.id %>").get(0).getContext("2d");
+  var canvas = $("#chart-for-<%= problem.id %>")
+  var ctx = canvas.get(0).getContext("2d");
 
   var data = {
-    labels: <%== bar_chart_x_axis_labels(show_labels).to_json %>,
+    labels: canvas.data('labels'),
     datasets : [
       {
-        data : <%= data %>
+        data : canvas.data('notice-count')
       },
     ]
   }
 
   chart = new Chart(ctx);
   chart.Bar(data, {
-    scaleShowLabels: <%== show_labels %>,
+    scaleShowLabels: canvas.data('show-labels'),
     scaleOverride: true,
-    scaleSteps: <%= bar_chart_scale_steps(data.max) %>,
+    scaleSteps: canvas.data('scale-steps'),
     scaleStepWidth: 1,
     scaleStartValue: 0,
     animation: false,
