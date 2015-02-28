@@ -1,5 +1,5 @@
 .window
-  %table.environment.table.table-striped
+  %table.environment.table.table-striped.table-responsive
     - html_entities = HTMLEntities.new
     - notice.env_vars.sort_by {|pair| pair[0]}.each do |key, value|
       %tr
