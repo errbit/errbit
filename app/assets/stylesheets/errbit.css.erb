@@ -174,8 +174,14 @@ form .error-messages ul {
 #content-title .meta { font-size: 0.9em; color: #787878; }
 
 /* Action Bar */
-#action-bar span.github a { background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px; }
-#action-bar span.unlink_github a { background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px; }
+#action-bar .github a {
+  background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px #95a5a6;
+  padding-left: 40px;
+}
+#action-bar .unlink_github a {
+  background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px #95a5a6;
+  padding-left: 40px;
+}
 
 /* Content */
 #content {

@@ -3,8 +3,8 @@
 
 - if Errbit::Config.github_authentication
   - content_for :action_bar do
-    .action-bar
-      %span.github= link_to "Sign in with GitHub", user_omniauth_authorize_path(:github)
+    .github
+      = link_to 'Sign in with GitHub', user_omniauth_authorize_path(:github), :class => 'btn btn-default'
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .required.form-group
