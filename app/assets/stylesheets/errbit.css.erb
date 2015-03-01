@@ -103,60 +103,6 @@ form .error-messages ul {
   text-decoration: none;
 }
 
-/* Navigation */
-#nav-bar {
-  position: absolute;
-  bottom: 0;
-  left: 172px;
-}
-#nav-bar li {
-  float: left;
-  height: 34px;
-  margin-right: 12px;
-  color: #666;
-  background-color: #d0d0d0;
-  background-image: none;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  -moz-border-top-left-radius: 12px;
-  -moz-border-top-right-radius: 12px;
-  -webkit-border-top-left-radius: 12px;
-  -webkit-border-top-right-radius: 12px;
-  border: 1px solid #bbb;
-}
-#nav-bar li.active {
-  border-color: #fff;
-  background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 -2px repeat-x;
-  border-width:1px 1px 0;
-  margin-bottom:-2px;
-  height: 37px;
-}
-#nav-bar li.active a {
-  color: #333;
-}
-
-#nav-bar li a {
-  color: #666;
-  display: block;
-  padding: 0 20px 0 40px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 37px;
-  text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF;
-  -webkit-text-shadow: 1px 1px 0px #FFF;
-  background: transparent 10px 6px no-repeat;
-}
-#nav-bar li a:hover { color: #666;}
-#nav-bar li.apps a { background-image: url(<%= asset_path "images/icons/briefcase.png" %>); }
-#nav-bar li.errs a { background-image: url(<%= asset_path "images/icons/error.png" %>); }
-#nav-bar li.users a { background-image: url(<%= asset_path "images/icons/user.png" %>); }
-#nav-bar li:not(.active):hover {
-  box-shadow: 0 0 3px #69c;
-  -moz-box-shadow: 0 0 3px #69c;
-  -webkit-box-shadow: 0 0 3px #69c;
-}
-
 /* Content Wrapper */
 #content-wrapper {
   border: 1px solid #C6C6C6;
