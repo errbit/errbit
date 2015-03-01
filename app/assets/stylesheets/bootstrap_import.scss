@@ -29,6 +29,13 @@ $sidebar-hover-bg: darken($navbar-default-bg, 5%);
   color: #AA0000;
 }
 
+/* Footer */
+#footer {
+  padding: 15px 0;
+  font-size: 0.8em; text-align: center;
+  color: #929292;
+}
+
 /* Tables */
 table th, table td { padding: 12px; }
 table th { background-color: darken($gray-lighter, 5%); white-space: nowrap; }

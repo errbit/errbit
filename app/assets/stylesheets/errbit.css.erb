@@ -1,4 +1,7 @@
-
+#action-bar {
+  position: absolute;
+  top: 18px; right: 40px;
+}
 #action-bar .github a {
   background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px #95a5a6;
   padding-left: 40px;
@@ -8,35 +11,9 @@
   padding-left: 40px;
 }
 
-form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
-form legend { margin: 0; }
-
 .tab-bar li { display: inline-block; }
 
-#action-bar {
-  position: absolute;
-  top: 18px; right: 40px;
-}
-
-form .error-messages {
-  padding: 0 13px;
-  background: #fcc;
-  border: 1px solid #f99;
-}
-form .error-messages h2 {
-  font-size: 1.2em;
-}
-form .error-messages ul {
-  margin-left: 2em;
-  list-style-type: square;
-}
-
-/* Convenience Classes */
-.float-left   { float: left; }
 .float-right  { float: right; }
-.clear        { clear: both; }
-.clear-left   { clear: left; }
-.clear-right  { clear: right; }
 
 /* Content */
 #content {
@@ -50,14 +27,21 @@ form .error-messages ul {
   margin-bottom: 10px;
 }
 
-/* Footer */
-#footer {
-  padding: 20px 0;
-  font-size: 0.8em; text-align: center;
-  color: #929292;
-}
-
 /* Forms */
+form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
+form legend { margin: 0; }
+form .error-messages {
+  padding: 0 13px;
+  background: #fcc;
+  border: 1px solid #f99;
+}
+form .error-messages h2 {
+  font-size: 1.2em;
+}
+form .error-messages ul {
+  margin-left: 2em;
+  list-style-type: square;
+}
 form#new_user,
 form.edit_user,
 form#new_app,
@@ -87,29 +71,23 @@ form strong.option {
   margin: 0.7em 0;
   color: #999;
 }
-
 form .nested {
   border-top: 1px dotted #BBB;
   margin-top: 1.5em;
   padding-top: 1.5em;
 }
-
 form legend + .nested {
   border: none;
   margin-top: 0;
   padding-top: 0;
 }
-
 form .field-helpertext {
   display: inline;
 }
-
 form input#app_email_at_notices {
   width: 130px;
   margin: 0 5px;
 }
-
-
 
 /* Code */
 pre {
@@ -118,15 +96,6 @@ pre {
   font-family: monaco, courier, monospace;
   font-size: 1.1em;
 }
-
-/* HTML Styling */
-.html { padding-left: 1em; border-left: 2px solid #C6C6C6;}
-.html h1, .html h2, .html h3, .html h4, .html h5, .html h6 {
-  border: none;
-}
-.html ul, .html ol  { margin-left: 2em; margin-bottom: 1em; }
-.html ul li   { margin-bottom: 0.5em; list-style: disc; }
-.html ol li   { margin-bottom: 0.5em; list-style: decimal; }
 
 /* Watchers / Issue Tracker / Notification Forms */
 div.watcher.nested .watcher_params, div.issue_tracker.nested .tracker_params, div.notification_service.nested .notification_params {
@@ -197,7 +166,6 @@ td.deploy {
 td.latest {
   white-space: nowrap;
 }
-
 
 /* Err Tables */
 table.errs td.app {
@@ -351,8 +319,6 @@ table.backtrace td.backtrace_separator span:hover {
   border: 1px solid #777777;
 }
 
-
-
 /* Extra empty rows at top and bottom of table */
 table.backtrace tr.padding th, table.backtrace tr.padding td {
   height: 10px;
@@ -406,7 +372,6 @@ table.errs tr td.message .inline_comment em.commenter {
 
 .current.asc:after { content: ' ↑'; }
 .current.desc:after { content: ' ↓'; }
-
 
 table.users td {
   vertical-align: middle;
