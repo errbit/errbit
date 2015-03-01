@@ -1,3 +1,13 @@
+
+#action-bar .github a {
+  background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px #95a5a6;
+  padding-left: 40px;
+}
+#action-bar .unlink_github a {
+  background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px #95a5a6;
+  padding-left: 40px;
+}
+
 form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
 form legend { margin: 0; }
 
@@ -20,26 +30,6 @@ form .error-messages ul {
   margin-left: 2em;
   list-style-type: square;
 }
-#content-title {
-  padding-bottom: 25px;
-}
-#content-title h1 {
-  margin-top: 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ccc;
-}
-#content-comments a.destroy-comment {
-  color: #EE0000;
-  margin-right: 5px;
-  margin-top: 2px;
-  font-size: 21px;
-  line-height: 1;
-  float: right;
-}
-#content-comments a.destroy-comment:hover {
-  text-decoration: none;
-  color: #AA0000;
-}
 
 /* Convenience Classes */
 .float-left   { float: left; }
@@ -47,87 +37,6 @@ form .error-messages ul {
 .clear        { clear: both; }
 .clear-left   { clear: left; }
 .clear-right  { clear: right; }
-
-#header > div, #content-wrapper, #footer {
-  width: 930px;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* Header */
-#header {
-  margin-bottom: 24px;
-  height: 71px;
-  border-bottom: 1px solid #fff;
-  position:relative;
-  background: #000000;
-}
-#header > div {
-  height: 71px;
-}
-#header #session-links {
-  position: absolute;
-  top: 20px;
-  right: 0;
-  font-size: 0.9em;
-}
-#header #session-links li {
-  float: right;
-  margin-left: 10px;
-  color: #ccc;
-  background-color: #1e1e1e;
-  border-radius: 30px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  border: 1px solid #484B4F;
-  font-size: 14px;
-}
-#header #session-links li:hover {
-  box-shadow: 0 0 3px #69c;
-  -moz-box-shadow: 0 0 3px #69c;
-  -webkit-box-shadow: 0 0 3px #69c;
-}
-#header #session-links li:hover a {
-  color: white;
-}
-#header #session-links a {
-  color: #ccc;
-  padding: 0 14px;
-  line-height: 30px;
-}
-#header #session-links #sign-out {
-  background: transparent url(<%= asset_path "images/icons/bullet-red-sm.png" %>) 12px 50% no-repeat;
-  padding-left: 29px;
-}
-#header #session-links a:hover {
-  text-decoration: none;
-}
-
-/* Content Wrapper */
-#content-wrapper {
-  border: 1px solid #C6C6C6;
-}
-
-/* Make err title bar bigger to fit more buttons */
-#content-title.err_show {
-  padding: 43px 24px 37px;
-}
-
-#content-title.err_show.resolved{
-  background-color: #90EE90;
-}
-
-#content-title .meta { font-size: 0.9em; color: #787878; }
-
-/* Action Bar */
-#action-bar .github a {
-  background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px #95a5a6;
-  padding-left: 40px;
-}
-#action-bar .unlink_github a {
-  background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px #95a5a6;
-  padding-left: 40px;
-}
 
 /* Content */
 #content {

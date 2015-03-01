@@ -6,6 +6,28 @@
 $sidebar-hover-bg: darken($navbar-default-bg, 5%);
 
 // from errbit.css
+#content-title {
+  padding-bottom: 25px;
+}
+#content-title h1 {
+  margin-top: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+}
+#content-title .meta { font-size: 0.9em; color: #787878; }
+
+#content-comments a.destroy-comment {
+  color: #EE0000;
+  margin-right: 5px;
+  margin-top: 2px;
+  font-size: 21px;
+  line-height: 1;
+  float: right;
+}
+#content-comments a.destroy-comment:hover {
+  text-decoration: none;
+  color: #AA0000;
+}
 
 /* Tables */
 table th, table td { padding: 12px; }
