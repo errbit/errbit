@@ -2,9 +2,9 @@
 # =============
 #
 # Copy this file to config/deploy.rb and customize it as needed.
-# Then run `cap deploy:setup` to set up your server and finally
+# Then run `cap errbit:setup` to set up your server and finally
 # `cap deploy` whenever you would like to deploy Errbit. Refer
-# to the Readme for more information.
+# to ./docs/deployment/capistrano.md for more info
 
 # config valid only for current version of Capistrano
 lock '3.3.5'
@@ -20,9 +20,8 @@ set :ssh_options, forward_agent: true
 
 set :linked_files, fetch(:linked_files, []) + %w(
   .env
-  config/config.yml
-  config/mongoid.yml
   config/newrelic.yml
+  config/unicorn.rb
 )
 
 set :linked_dirs, fetch(:linked_dirs, []) + %w(
@@ -38,54 +37,79 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
 # set :rbenv_roles, :all
 
 namespace :errbit do
-  task :setup_configs do
+  desc "Setup config files (first time setup)"
+  task :setup do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
-      {
-        'config/config.example.yml' => 'config/config.yml',
-        'config/mongoid.example.yml' => 'config/mongoid.yml',
-        'config/newrelic.example.yml' => 'config/newrelic.yml'
-      }.each do |src, target|
-        execute "if [ ! -f #{shared_path}/#{target} ]; then cp #{current_path}/#{src} #{shared_path}/#{target}; fi"
-      end
-    end
-  end
-end
+      execute "mkdir -p #{shared_path}/pids"
+      execute "touch #{shared_path}/.env"
 
-namespace :db do
-  desc "Create the indexes defined on your mongoid models"
-  task :create_mongoid_indexes do
-    on roles(:db) do
-      within current_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'db:mongoid:create_indexes'
+      {
+        'config/newrelic.example.yml' => 'config/newrelic.yml',
+        'config/unicorn.default.rb' => 'config/unicorn.rb',
+      }.each do |src, target|
+        unless test("[ -f #{shared_path}/#{target} ]")
+          upload! src, "#{shared_path}/#{target}"
         end
       end
     end
   end
 end
 
-set :unicorn_pid, "`cat #{"#{fetch(:deploy_to)}/shared/pids"}/unicorn.pid`"
+namespace :db do
+  desc "Create and setup the mongo db"
+  task :setup do
+    on roles(:db) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'errbit:bootstrap'
+        end
+      end
+    end
+  end
+end
+
+set :unicorn_pidfile, "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid"
+set :unicorn_pid, "`cat #{fetch(:unicorn_pidfile)}`"
 
 namespace :unicorn do
+  desc 'Start unicorn'
+  task :start do
+    on roles(:app) do
+      within current_path do
+        if test " [ -s #{fetch(:unicorn_pidfile)} ] "
+          warn "Unicorn is already running."
+        else
+          with "UNICORN_PID" => fetch(:unicorn_pidfile) do
+            execute :bundle, :exec, :unicorn, "-D -c ./config/unicorn.rb"
+          end
+        end
+      end
+    end
+  end
+
   desc 'Reload unicorn'
   task :reload do
     on roles(:app) do
-      execute :kill, "-HUP #{fetch(:unicorn_pid)}"
+      execute :kill, "-HUP", fetch(:unicorn_pid)
     end
   end
 
   desc 'Stop unicorn'
   task :stop do
     on roles(:app) do
-      execute :kill, "-QUIT #{fetch(:unicorn_pid)}"
+      if test " [ -s #{fetch(:unicorn_pidfile)} ] "
+        execute :kill, "-QUIT", fetch(:unicorn_pid)
+      else
+        warn "Unicorn is not running."
+      end
     end
   end
 
   desc 'Reexecute unicorn'
   task :reexec do
     on roles(:app) do
-      execute :kill, "-USR2 #{fetch(:unicorn_pid)}"
+      execute :kill, "-USR2", fetch(:unicorn_pid)
     end
   end
 end

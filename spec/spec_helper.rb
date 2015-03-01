@@ -47,6 +47,8 @@ RSpec.configure do |config|
   config.before(:each, type: :helper) do |_|
     init_haml_helpers
   end
+
+  config.infer_spec_type_from_file_location!
 end
 
 OmniAuth.config.test_mode = true

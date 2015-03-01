@@ -23,19 +23,17 @@ git commit -m "Update db/seeds.rb with initial login"
 heroku apps:create
 heroku addons:add mongolab:sandbox
 heroku addons:add sendgrid:starter
-heroku config:add HEROKU=true
-heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
+heroku config:add GEMFILE_RUBY_VERSION=2.2.0
+heroku config:add SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master
 ```
 
 ## Prepare the DB
-No bootstrap task is used on Heroku!
 
 ```bash
-heroku run rake db:seed
-heroku run rake db:mongoid:create_indexes
+heroku run rake errbit:bootstrap
 ```
 
 ## Schedule recurring tasks
