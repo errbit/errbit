@@ -5,7 +5,7 @@
     :data => { :confirm => t('apps.confirm_destroy_all_problems') }, :class => 'btn btn-warning'
   = link_to 'delete application', app_path(app), :method => :delete,
     :data => { :confirm => t('apps.confirm_delete') }, :class => 'btn btn-danger'
-  = link_to(t('.cancel'), app_path(app), :class => 'btn btn-default')
+  = link_to t('.cancel'), app_path(app), :class => 'btn btn-default'
 
 = form_for app_decorate do |f|
 

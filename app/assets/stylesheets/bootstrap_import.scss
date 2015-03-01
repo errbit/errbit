@@ -79,6 +79,10 @@ td.count { text-align: center; }
     font-size: 90%;
     font-weight: normal;
   }
+  img.gravatar {
+    display: block;
+    margin-bottom: 10px;
+  }
   .open > a {
     background-color: $sidebar-hover-bg;
     color: #FFF ;
@@ -93,11 +97,6 @@ td.count { text-align: center; }
   padding-bottom: 20px;
   padding-right: 40px;
   padding-left: 40px;
-}
-
-img.gravatar {
-  display: block;
-  margin-bottom: 10px;
 }
 
 #flash-messages {

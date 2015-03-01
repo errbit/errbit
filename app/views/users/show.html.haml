@@ -12,7 +12,7 @@
     %i.glyphicon.glyphicon.glyphicon-remove
     destroy
 
-= gravatar_tag user.email, :s => 86 if Errbit::Config.use_gravatar
+%p= gravatar_tag user.email, :s => 86 if Errbit::Config.use_gravatar
 
 %table.table.table-striped
   %tr
