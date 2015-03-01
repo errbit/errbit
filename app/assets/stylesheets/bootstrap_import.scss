@@ -48,6 +48,11 @@ td.count { text-align: center; }
 .nav > li {
   position: relative;
   display: block;
+
+  // TODO: margin-right for menu
+  & > i {
+    margin-right: 11px;
+  }
 }
 
 .nav-sidebar > li > a {
@@ -59,9 +64,13 @@ td.count { text-align: center; }
     background-color: $sidebar-hover-bg;
     color: #FFF;
   }
+}
 
-  & > span {
-    margin-left: 11px;
+.nav-menu .active {
+  background-color: $sidebar-hover-bg;
+
+  a {
+    color: #FFF;
   }
 }
 
@@ -69,10 +78,6 @@ td.count { text-align: center; }
   a {
     font-size: 90%;
     font-weight: normal;
-  }
-  img.gravatar {
-    display: block;
-    margin-bottom: 10px;
   }
   .open > a {
     background-color: $sidebar-hover-bg;
@@ -88,6 +93,11 @@ td.count { text-align: center; }
   padding-bottom: 20px;
   padding-right: 40px;
   padding-left: 40px;
+}
+
+img.gravatar {
+  display: block;
+  margin-bottom: 10px;
 }
 
 #flash-messages {

@@ -26,16 +26,13 @@
           - if (action_bar = yield(:action_bar)).present?
             #action-bar= action_bar
           %span.meta= yield :meta
+        -# TODO: add #content
         = render 'shared/flash_messages'
         = yield
         - if content_for?(:comments)
           #content-comments
             = yield :comments
 
-    -# #content-wrapper
-    -#   #content-title{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-    -#     %span.meta= yield :meta
-    -#   #content
     -# TODO: footer
     #footer
       = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))

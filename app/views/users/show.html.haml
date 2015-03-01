@@ -1,10 +1,5 @@
 - content_for :title, user.name
 
-- if Errbit::Config.use_gravatar && gravatar = gravatar_url(user.email, :s => 86)
-  - content_for :title_style do
-    background: url('#{gravatar}') no-repeat;
-    padding-left: 106px;
-
 - content_for :action_bar do
   = render 'shared/link_github_account'
   = link_to new_user_path, :class => 'btn btn-success' do
@@ -16,6 +11,8 @@
   = link_to user_path(user), :method => :delete, :data => { :confirm => t('users.confirm_delete') }, :class => 'btn btn-danger' do
     %i.glyphicon.glyphicon.glyphicon-remove
     destroy
+
+= gravatar_tag user.email, :s => 86 if Errbit::Config.use_gravatar
 
 %table.table.table-striped
   %tr
