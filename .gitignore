@@ -21,4 +21,3 @@ bundle
 coverage
 *#
 .ruby-version
-.capistrano/metrics
