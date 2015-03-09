@@ -136,9 +136,6 @@ GEM
     flowdock (0.3.1)
       httparty (~> 0.7)
       multi_json
-    foreman (0.77.0)
-      dotenv (~> 1.0.2)
-      thor (~> 0.19.1)
     haml (4.0.3)
       tilt
     hashie (2.0.5)
@@ -420,7 +417,6 @@ DEPENDENCIES
   errbit_plugin!
   fabrication
   flowdock
-  foreman
   haml
   hipchat
   hoi
