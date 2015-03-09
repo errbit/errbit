@@ -3,7 +3,7 @@
 worker_processes 3 # amount of unicorn workers to spin up
 timeout 30         # restarts workers that hang for 30 seconds
 preload_app true
-listen 8080
+listen ENV['PORT'] || 8080
 pid ENV['UNICORN_PID'] if ENV['UNICORN_PID']
 
 # Taken from github: https://github.com/blog/517-unicorn
