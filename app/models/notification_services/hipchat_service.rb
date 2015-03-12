@@ -30,7 +30,7 @@ if defined? HipChat
       MSG
 
       client = HipChat::Client.new(api_token)
-      client[room_id].send('Errbit', message, :color => 'red')
+      client[room_id].send('Errbit', message, :color => 'red', :notify => true)
     end
   end
 end
