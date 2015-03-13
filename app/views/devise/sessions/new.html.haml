@@ -12,7 +12,7 @@
     = f.text_field auth_key, :type => (Errbit::Config.user_has_username ? 'text' : 'email'), :tabindex => 1, :autofocus => true
 
   .required
-    = link_to 'forget it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
+    = link_to 'forgot it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
     = f.label :password
     = f.password_field :password, :tabindex => 2
 
