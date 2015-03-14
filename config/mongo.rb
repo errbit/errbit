@@ -1,9 +1,9 @@
 Mongoid.configure do |config|
-  if Errbit::Config.mongo_url == 'mongodb://localhost'
-    uri = "mongodb://localhost/errbit_#{Rails.env}"
-  else
-    uri = Errbit::Config.mongo_uri
-  end
+  uri = if Errbit::Config.mongo_url == 'mongodb://localhost'
+          "mongodb://localhost/errbit_#{Rails.env}"
+        else
+          Errbit::Config.mongo_url
+        end
 
   config.load_configuration({
     sessions: {
