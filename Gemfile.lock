@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/errbit/errbit_github_plugin.git
-  revision: 7eb48d540b94d2fa4b8f9805ec0148322ae2bffe
+  revision: 3597f2d2c6aa75e014251747a30eeb5d19f641dd
   specs:
     errbit_github_plugin (0.1.0)
       errbit_plugin
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/errbit/errbit_plugin.git
-  revision: 6a0b93d71a6b4545198f0c68b99b8e8f9281c17e
+  revision: 9cfe43119be46bfa36cbf4b940b80d39229595ef
   specs:
     errbit_plugin (0.4.0)
 

@@ -5,6 +5,7 @@
       %div.choose
         - issue_tracker_form.object.issue_trackers do |tracker|
           = issue_tracker_form.label :type_tracker, :class => "label_radio #{tracker.label}", :value => tracker.key do
+            %img.icon{"src" => tracker.icons[:inactive], "data-icon" => tracker.icons}
             = issue_tracker_form.radio_button :type_tracker, tracker.key, 'data-section' => tracker.label
             = tracker.label
 
@@ -15,9 +16,3 @@
             - tracker.fields do |field|
               = options_form.label field.key, field.label
               = field.input(options_form, issue_tracker_form.object)
-
-      .image_preloader
-        - issue_tracker_form.object.issue_trackers do |tracker|
-          = image_tag "#{tracker.label}_inactive.png"
-          = image_tag "#{tracker.label}_create.png"
-

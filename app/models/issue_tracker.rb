@@ -18,6 +18,10 @@ class IssueTracker
       end
   end
 
+  def type_tracker
+    self.attributes['type_tracker'] ?  self.attributes['type_tracker'] : 'none'
+  end
+
   # Allow the tracker to validate its own params
   def validate_tracker
     (tracker.errors || {}).each do |k,v|

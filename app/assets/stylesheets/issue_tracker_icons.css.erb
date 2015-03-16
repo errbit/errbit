@@ -1,9 +1,0 @@
-/* Issue Tracker inactive, select, create and goto icons */
-
-<% ErrbitPlugin::Registry.issue_trackers.keys.each do |label| %>
-div.issue_tracker.nested label.<%= label %> { background: url(<%= asset_path "#{ label }_inactive.png" %>) no-repeat; }
-div.issue_tracker.nested label.r_on.<%= label %> { background: url(<%= asset_path "#{ label }_create.png" %>) no-repeat; }
-#action-bar a.<%= label %>_create { background: transparent url(<%= asset_path "#{ label }_create.png" %>) 6px 5px no-repeat; }
-#action-bar a.<%= label %>_goto { background: transparent url(<%= asset_path "#{ label }_goto.png" %>) 6px 5px no-repeat; }
-<% end %>
-

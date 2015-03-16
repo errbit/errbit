@@ -79,4 +79,3 @@ module ApplicationHelper
     end
 
 end
-

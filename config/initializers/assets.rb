@@ -6,6 +6,3 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-
-# Need to initialize Rails environment for issue_tracker_icons.css.erb
-Rails.application.config.assets.initialize_on_precompile = true

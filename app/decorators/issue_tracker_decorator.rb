@@ -14,6 +14,15 @@ class IssueTrackerDecorator < Draper::Decorator
     end
   end
 
+  def icons
+    tracker_icons = object.icons
+    return unless tracker_icons
+
+    tracker_icons.reduce({}) do |c, (k,v)|
+      c[k] = "data:#{v[0]};base64,#{Base64.encode64(v[1])}"; c
+    end
+  end
+
   def note
     object.note.html_safe
   end

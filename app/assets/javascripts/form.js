@@ -82,11 +82,17 @@ function activateTypeSelector(field_class, section_class) {
     .attr('disabled','disabled').val('');
 
   $('div.'+field_class).find('.choose input[name*=type]').on('click', function(){
+    var input = $(this);
     // Look for section in 'data-section', and fall back to 'value'
-    var chosen = $(this).data("section") || $(this).val();
-    var wrapper = $(this).closest('.nested');
+    var chosen = input.data("section") || input.val();
+    var wrapper = input.closest('.nested');
+    var allLabels = wrapper.find('.label_radio');
+
     wrapper.find('div.chosen.'+section_class).removeClass('chosen').find('input').attr('disabled','disabled');
     wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen').find('input').removeAttr('disabled');
+
+    wrapper.find('.icon').each(function(){ $(this).attr('src', $(this).data('iconInactive')) });
+    input.siblings('.icon').each(function(){ $(this).attr('src', $(this).data('iconCreate')) });
   });
 }
 
