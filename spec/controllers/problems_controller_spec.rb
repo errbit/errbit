@@ -218,9 +218,7 @@ describe ProblemsController, type: 'controller' do
       @err = Fabricate(:err)
     end
 
-    it 'finds the app and the err' do
-      expect(App).to receive(:find).with(@err.app.id.to_s).and_return(@err.app)
-      expect(@err.app.problems).to receive(:find).and_return(@err.problem)
+    it 'finds the app and the problem' do
       put :resolve, :app_id => @err.app.id, :id => @err.problem.id
       expect(controller.app).to eq @err.app
       expect(controller.problem).to eq @err.problem

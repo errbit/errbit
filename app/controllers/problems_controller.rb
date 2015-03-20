@@ -12,26 +12,21 @@ class ProblemsController < ApplicationController
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
+  expose(:app_scope) {
+    apps = current_user.admin? ? App.all : current_user.apps
+    params[:app_id] ? apps.where(:_id => params[:app_id]) : apps
+  }
+
   expose(:app) {
-    if current_user.admin?
-      App.find(params[:app_id])
-    else
-      current_user.apps.find(params[:app_id])
-    end
+    AppDecorator.new app_scope.find(params[:app_id])
   }
 
   expose(:problem) {
     app.problems.find(params[:id])
   }
 
-
   expose(:all_errs) {
     params[:all_errs]
-  }
-
-  expose(:app_scope) {
-    apps = current_user.admin? ? App.all : current_user.apps
-    params[:app_id] ? apps.where(:_id => params[:app_id]) : apps
   }
 
   expose(:params_environement) {

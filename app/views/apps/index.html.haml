@@ -36,7 +36,7 @@
         - if any_issue_trackers?
           %td.issue_tracker
             - if app.issue_tracker_configured?
-              - tracker_img = image_tag("#{app.issue_tracker.type_tracker}_goto.png")
+              - tracker_img = image_tag(app.issue_tracker.type.icons[:goto])
               - if app.issue_tracker.url
                 = link_to( tracker_img, app.issue_tracker.url )
               - else

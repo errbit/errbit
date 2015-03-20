@@ -1,7 +1,7 @@
 namespace :errbit do
-
   desc "Add a demo app & errors to your database (for testing)"
   task :demo => :environment do
+    require 'fabrication'
 
     app = Fabricate(:app, :name => "Demo App #{Time.now.strftime("%N")}")
 
@@ -68,5 +68,4 @@ namespace :errbit do
     Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => app)))
     puts "=== Created demo app: '#{app.name}', with example errors."
   end
-
 end

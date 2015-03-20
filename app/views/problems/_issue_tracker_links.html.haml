@@ -1,9 +1,17 @@
 - if app.issue_tracker_configured?
+  - tracker = app.issue_tracker
+  - tracker_type = tracker.type
   - if problem.issue_link.present?
-    %span= link_to 'go to issue', problem.issue_link, :class => "#{problem.issue_type}_goto goto-issue"
+    %span
+      %img.button-icon{"src" => tracker_type.icons[:create]}
+      = link_to 'go to issue', problem.issue_link, :class => "goto-issue"
     = link_to 'unlink issue', unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue"
   - elsif problem.issue_link == "pending"
-    %span.disabled= link_to 'creating...', '#', :class => "#{problem.issue_type}_inactive create-issue"
+    %span.disabled
+      %img.button-icon{"src" => tracker_type.icons[:inactive]}
+      = link_to 'creating...', '#', :class => "create-issue"
     = link_to 'retry', create_issue_app_problem_path(app, problem), :method => :post
   - else
-    %span= link_to 'create issue', create_issue_app_problem_path(app, problem), method: :post, class: "#{app.issue_tracker.type_tracker}_create create-issue"
+    %span
+      %img.button-icon{"src" => tracker_type.icons[:goto]}
+      = link_to 'create issue', create_issue_app_problem_path(app, problem), method: :post, :class => "create-issue"
