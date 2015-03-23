@@ -12,8 +12,8 @@ en:
         success: "'%{app_name}' was successfully destroyed."
 
   n_errs_have:
-    one:   "%{count} err has"
-    other: "%{count} errs have"
+    one:   "%{count} error has"
+    other: "%{count} errors have"
 
   layouts:
     application:
@@ -102,7 +102,7 @@ en:
       regenerate_api_key: "Regenerate API key"
     show:
       all_deploys: "All Deploys (%{count})"
-      all_errs: all errs
+      all_errs: all errors
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
       are_you_sure: 'Are you sure?'
@@ -116,12 +116,12 @@ en:
       latest_deploys: Latest Deploys
       message: Message
       no_deploys:  No deploys
-      no_error_yet: "No errs have been caught yet, make sure you setup your app"
+      no_error_yet: "No errors have been caught yet, make sure you setup your app"
       no_watcher: "Sadly, no one is watching this app"
       repository: Repository
       revision: Revision
       show_hide: "(show/hide)"
-      unresolved_errs: unresolved errs
+      unresolved_errs: unresolved errors
       unwatch: unwatch
       user_or_email: User or Email
       watchers: Watchers
