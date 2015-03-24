@@ -405,12 +405,12 @@ describe ProblemsController, type: 'controller' do
 
       it "should display a message about 1 err" do
         post :resolve_several, :problems => [@problem2.id.to_s]
-        expect(flash[:success]).to match(/1 err has been resolved/)
+        expect(flash[:success]).to match(/1 error has been resolved/)
       end
 
       it "should display a message about 2 errs" do
         post :resolve_several, :problems => [@problem1.id.to_s, @problem2.id.to_s]
-        expect(flash[:success]).to match(/2 errs have been resolved/)
+        expect(flash[:success]).to match(/2 errors have been resolved/)
         expect(controller.selected_problems).to eq [@problem1, @problem2]
       end
     end

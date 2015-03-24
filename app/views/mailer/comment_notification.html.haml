@@ -13,7 +13,7 @@
                 %span.bold= @problem.environment
                 environment.
                 %br
-                This err has occurred #{pluralize @problem.notices_count, 'time'}.
+                This error has occurred #{pluralize @problem.notices_count, 'time'}.
               %p
                 = link_to("Click here to view the error and add a comment on Errbit", app_problem_url(@app, @problem), :class => "bold") << "."
 

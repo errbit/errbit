@@ -6,13 +6,13 @@
           %td.content(valign="top")
             %div
               %p
-                An err has just occurred in
+                An error has just occurred in
                 = link_to(@app.name, app_url(@app), :class => "bold") << ","
                 on the
                 %span.bold= @notice.environment_name
                 environment.
                 %br
-                This err has occurred #{pluralize @notice.problem.notices_count, 'time'}.
+                This error has occurred #{pluralize @notice.problem.notices_count, 'time'}.
               %p
                 = link_to("Click here to view the error on Errbit", app_problem_url(@app, @notice.problem), :class => "bold") << "."
 %tr
