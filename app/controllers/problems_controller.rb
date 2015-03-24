@@ -78,7 +78,7 @@ class ProblemsController < ApplicationController
 
   def resolve
     problem.resolve!
-    flash[:success] = 'Great news everyone! The err has been resolved.'
+    flash[:success] = 'Great news everyone! The error has been resolved.'
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to app_path(app)
