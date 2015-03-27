@@ -207,8 +207,15 @@ class Problem
 
     # recache each new problem
     new_problems.each(&:recache)
-
     new_problems
+  end
+
+  # Returns an array of unix epoc timestamps for the created_at field of
+  # all notices sincethe since parameter
+  def timestamps_since(since)
+    notices.where(:created_at.gte => since).
+    pluck(:created_at).
+    map {|created_at| created_at.to_time.to_i }
   end
 
   def self.ordered_by(sort, order)
