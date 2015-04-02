@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 RAILS_VERSION = '~> 4.1.8'
 
-ruby ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
+send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
@@ -31,7 +31,7 @@ gem 'draper'
 gem 'errbit_plugin', github: 'errbit/errbit_plugin'
 gem 'errbit_github_plugin', github: 'errbit/errbit_github_plugin'
 
-gem 'dotenv-deployment'
+gem 'dotenv-rails'
 
 # Notification services
 # ---------------------------------------
@@ -75,7 +75,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
   gem 'meta_request'
-  gem 'foreman', :require => false
 end
 
 group :test do

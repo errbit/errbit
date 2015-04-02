@@ -21,9 +21,9 @@ $EDITOR config/deploy/production.rb
 # Check to make sure configs exist
 bundle exec cap production deploy:check
 
-# Create the configs yourself, or run errbit:setup_configs to upload the
+# Create the configs yourself, or run errbit:setup to upload the
 # defaults
-bundle exec cap production errbit:setup_configs
+bundle exec cap production errbit:setup
 
 # Deploy
 bundle exec cap production deploy

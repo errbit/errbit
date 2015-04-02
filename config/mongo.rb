@@ -1,13 +1,14 @@
-require 'uri'
-
 Mongoid.configure do |config|
-  uri = URI.parse(Errbit::Config.mongo_url)
-  uri.path = "/errbit_#{Rails.env}" if uri.path.empty?
+  uri = if Errbit::Config.mongo_url == 'mongodb://localhost'
+          "mongodb://localhost/errbit_#{Rails.env}"
+        else
+          Errbit::Config.mongo_url
+        end
 
   config.load_configuration({
     sessions: {
       default: {
-        uri: uri.to_s
+        uri: uri
       }
     },
     options: {

@@ -72,21 +72,19 @@ GEM
       debugger-linecache (~> 1.2)
     callsite (0.0.11)
     campy (1.0.0)
-    capistrano (3.3.5)
-      capistrano-stats (~> 1.1.0)
+    capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
-    capistrano-bundler (1.1.3)
+    capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-rbenv (2.0.2)
+    capistrano-rbenv (2.0.3)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capistrano-stats (1.1.1)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -125,9 +123,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    dotenv (1.0.2)
-    dotenv-deployment (0.2.0)
-      dotenv (~> 1.0)
+    dotenv (2.0.0)
+    dotenv-rails (2.0.0)
+      dotenv (= 2.0.0)
     draper (1.4.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -145,9 +143,6 @@ GEM
     flowdock (0.3.1)
       httparty (~> 0.7)
       multi_json
-    foreman (0.77.0)
-      dotenv (~> 1.0.2)
-      thor (~> 0.19.1)
     haml (4.0.3)
       tilt
     hashie (2.0.5)
@@ -215,7 +210,7 @@ GEM
     multipart-post (1.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
+    net-ssh (2.9.2)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     nokogiri (1.6.5-java)
@@ -363,7 +358,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sshkit (1.6.1)
+    sshkit (1.7.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -425,14 +420,13 @@ DEPENDENCIES
   database_cleaner
   decent_exposure
   devise
-  dotenv-deployment
+  dotenv-rails
   draper
   email_spec
   errbit_github_plugin!
   errbit_plugin!
   fabrication
   flowdock
-  foreman
   haml
   hipchat
   hoi

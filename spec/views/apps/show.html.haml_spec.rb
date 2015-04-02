@@ -17,14 +17,14 @@ describe "apps/show.html.haml", type: 'view' do
     it "should confirm the 'cancel' link" do
       render
 
-      expect(action_bar).to have_selector('a.button', :text => 'all errs')
+      expect(action_bar).to have_selector('a.button', :text => 'all errors')
     end
   end
 
   context "without errs" do
     it 'see no errs' do
       render
-      expect(rendered).to match(/No errs have been/)
+      expect(rendered).to match(/No errors have been/)
     end
   end
 

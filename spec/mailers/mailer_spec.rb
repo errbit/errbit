@@ -92,7 +92,7 @@ describe Mailer do
     end
 
     it "should have the notices count in the body" do
-      expect(@email).to have_body_text("This err has occurred 2 times")
+      expect(@email).to have_body_text("This error has occurred 2 times")
     end
 
     it "should have the comment body" do
