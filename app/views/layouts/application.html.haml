@@ -26,7 +26,6 @@
           - if (action_bar = yield(:action_bar)).present?
             #action-bar= action_bar
           %span.meta= yield :meta
-        -# TODO: add #content
         = render 'shared/flash_messages'
         = yield
         - if content_for?(:comments)

@@ -78,8 +78,7 @@ td.count { text-align: center; }
   position: relative;
   display: block;
 
-  // TODO: margin-right for menu
-  & > i {
+  i {
     margin-right: 11px;
   }
 }
