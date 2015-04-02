@@ -53,7 +53,7 @@ describe 'users/show.html.haml', type: 'view' do
 
       it "should confirm the 'resolve' link by default" do
         render
-        expect(view.content_for(:action_bar)).to have_selector('a.delete[data-confirm="%s"]' % I18n.t('.users.confirm_delete'))
+        expect(view.content_for(:action_bar)).to have_selector('a.btn[data-confirm="%s"]' % I18n.t('.users.confirm_delete'))
       end
 
     end
