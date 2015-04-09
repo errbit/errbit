@@ -1,5 +1,8 @@
+# Get the email delivery method and transform it to symbol
+delivery_method = Errbit::Config.email_delivery_method.to_sym
+
 # Set SMTP settings if given.
-if Errbit::Config.email_delivery_method == :smtp
+if delivery_method == :smtp
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => Errbit::Config.smtp_address,
@@ -11,7 +14,7 @@ if Errbit::Config.email_delivery_method == :smtp
   }
 end
 
-if Errbit::Config.email_delivery_method == :sendmail
+if delivery_method == :sendmail
   sendmail_settings = {}
   sendmail_settings[:location] = Errbit::Config.sendmail_location if Errbit::Config.sendmail_location
   sendmail_settings[:arguments] = Errbit::Config.sendmail_arguments if Errbit::Config.sendmail_arguments
