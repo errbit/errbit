@@ -1,5 +1,6 @@
 # Get the email delivery method and transform it to symbol
-delivery_method = Errbit::Config.email_delivery_method.to_sym
+delivery_method = nil
+delivery_method = Errbit::Config.email_delivery_method.to_sym if Errbit::Config.email_delivery_method.present?
 
 # Set SMTP settings if given.
 if delivery_method == :smtp
