@@ -8,9 +8,9 @@ class Deploy
   field :revision
   field :message
 
-  index(:created_at => -1)
+  belongs_to :app
 
-  embedded_in :app, :inverse_of => :deploys
+  index(:created_at => -1)
 
   after_create :resolve_app_errs, :if => :should_resolve_app_errs?
   after_create :store_cached_attributes_on_problems
