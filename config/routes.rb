@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       end
     end
     resources :deploys, :only => [:index]
-    resources :watchers, :only => [:destroy]
+    resources :watchers, :only => [:update, :destroy]
     member do
       post :regenerate_api_key
     end

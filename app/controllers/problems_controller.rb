@@ -12,13 +12,7 @@ class ProblemsController < ApplicationController
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
-  expose(:app) {
-    if current_user.admin?
-      App.find(params[:app_id])
-    else
-      current_user.apps.find(params[:app_id])
-    end
-  }
+  expose(:app)
 
   expose(:problem) {
     app.problems.find(params[:id])

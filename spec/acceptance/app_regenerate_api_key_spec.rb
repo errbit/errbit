@@ -53,7 +53,7 @@ feature "Create an application" do
   scenario "create an apps without issue tracker and edit it" do
     visit '/'
     log_in admin
-    click_on I18n.t('apps.index.new_app')
+    click_on I18n.t('apps.index.click_to_create')
     fill_in 'app_name', :with => 'My new app'
     click_on I18n.t('apps.new.add_app')
     page.has_content?(I18n.t('controllers.apps.flash.create.success'))

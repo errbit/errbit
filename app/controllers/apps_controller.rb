@@ -8,11 +8,15 @@ class AppsController < ApplicationController
   respond_to :html
 
   expose(:app_scope) {
-    (current_user.admin? ? App : current_user.apps)
+    if params[:apps]
+      App.in(name: params[:apps])
+    else
+      App
+    end
   }
 
   expose(:apps) {
-    app_scope.all.sort.to_a
+    filter_apps(app_scope.asc('name').to_a)
   }
 
   expose(:app, ancestor: :app_scope, attributes: :app_params)
@@ -141,6 +145,23 @@ class AppsController < ApplicationController
           flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
         end
       end
+    end
+
+    def filter_apps(apps)
+      filter_by_active_problems!(apps) if params[:errors] == 'true'
+      filter_by_problem_dates!(apps) if params[:from]
+      apps
+    end
+
+    def filter_by_active_problems!(apps)
+      apps.select!{ |app| app.unresolved_count > 0 }
+    end
+
+    def filter_by_problem_dates!(apps)
+      from = Date.parse(params[:from])
+      to = params.has_key?(:to) ? Date.parse(params[:to]) : Date.tomorrow
+      problems_in_range = Problem.unresolved.where(:first_notice_at.gte => from, :first_notice_at.lte => to)
+      apps.select!{ |app| problems_in_range.map(&:app).include?(app) }
     end
 
   private
