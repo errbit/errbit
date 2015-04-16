@@ -41,9 +41,6 @@ end
 feature "Create an application" do
 
   let(:admin) { Fabricate(:admin) }
-  let(:user) {
-    Fabricate(:user_watcher, :app => app).user
-  }
 
   before do
     admin
@@ -75,7 +72,7 @@ feature "Create an application" do
 
   end
 
-  scenario "create an apps with issue tracker and edit it", :js => true do
+  scenario "create an apps with issue tracker and edit it", :js => true, :pending => "We've disabled integration with issue trackers, see db5a2332" do
     visit '/'
     log_in admin
     click_on I18n.t('apps.index.new_app')
