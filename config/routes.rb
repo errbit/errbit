@@ -64,6 +64,8 @@ Rails.application.routes.draw do
 
   root :to => 'apps#index'
 
+  get "/healthcheck", :to => proc {|env| [200, {}, ["OK"]] }
+
   # GDS Signon callbacks
   put  '/auth/gds/api/users/:uid',        to: "users/gds_signon_callbacks#update"
   post '/auth/gds/api/users/:uid/reauth', to: "users/gds_signon_callbacks#reauth"
