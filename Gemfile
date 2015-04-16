@@ -59,6 +59,8 @@ gem 'omniauth-github'
 gem 'omniauth-gds', '~> 3.1'
 gem 'plek', '1.7.0'
 gem 'warden-oauth2', '0.0.1'
+
+gem 'logstasher', '0.4.8'
 #### End GDS additions ####
 
 gem 'ri_cal'

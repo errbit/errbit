@@ -172,6 +172,9 @@ GEM
     launchy (2.4.3-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
+    logstash-event (1.1.5)
+    logstasher (0.4.8)
+      logstash-event (~> 1.1.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     meta_request (0.2.8)
@@ -439,6 +442,7 @@ DEPENDENCIES
   json
   kaminari (>= 0.14.1)
   launchy
+  logstasher (= 0.4.8)
   meta_request
   mongoid (~> 4.0.0)
   mongoid-rspec
