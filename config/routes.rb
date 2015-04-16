@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :sessions => "users/sessions", :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
@@ -63,5 +63,10 @@ Rails.application.routes.draw do
   match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post, :options]
 
   root :to => 'apps#index'
+
+  # GDS Signon callbacks
+  put  '/auth/gds/api/users/:uid',        to: "users/gds_signon_callbacks#update"
+  post '/auth/gds/api/users/:uid/reauth', to: "users/gds_signon_callbacks#reauth"
+
 end
 

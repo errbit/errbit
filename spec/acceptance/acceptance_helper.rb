@@ -20,9 +20,20 @@ def mock_auth(user = "test_user", token = "abcdef")
   )
 end
 
+def mock_gds_sso_auth(uid, details = {})
+  OmniAuth.config.mock_auth[:gds] = gds_omniauth_hash_stub(uid, details)
+end
+
+def clear_gds_sso_auth_mock!
+  OmniAuth.config.mock_auth[:gds] = nil
+end
+
 def log_in(user)
+  user.update_attributes!(:uid => Devise.friendly_token) if user.uid.blank?
+  mock_gds_sso_auth(user.uid,
+                   :email => user.email,
+                   :name => user.name,
+                   :permissions => user.admin? ? %w(signin admin) : %w(signin)
+                   )
   visit '/'
-  fill_in :user_email, :with => user.email
-  fill_in :user_password, :with => 'password'
-  click_on I18n.t('devise.sessions.new.sign_in')
 end

@@ -11,6 +11,10 @@ feature "Regeneration api_Key" do
     app && admin
   end
 
+  after do
+    clear_gds_sso_auth_mock!
+  end
+
   scenario "an admin change api_key" do
     visit '/'
     log_in admin
@@ -43,6 +47,10 @@ feature "Create an application" do
 
   before do
     admin
+  end
+
+  after do
+    clear_gds_sso_auth_mock!
   end
 
   scenario "create an apps without issue tracker and edit it" do
