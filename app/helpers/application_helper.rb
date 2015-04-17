@@ -69,6 +69,12 @@ module ApplicationHelper
     collection.to_a[head_size..-1].to_a
   end
 
+  def issue_tracker_types
+    ErrbitPlugin::Registry.issue_trackers.map do |_, object|
+      IssueTrackerTypeDecorator.new(object)
+    end
+  end
+
   private
     def total_from_tallies(tallies)
       tallies.values.inject(0) {|sum, n| sum + n}
@@ -79,4 +85,3 @@ module ApplicationHelper
     end
 
 end
-

@@ -552,32 +552,61 @@ div.nested .choose {
   margin-bottom: 0.5em;
 }
 
-div.issue_tracker.nested .choose, div.notification_service.nested .choose  {
+div.issue_tracker.nested .choose {
   background-color: #ebebeb;
   border: 1px solid #dddddd;
   margin: 0 0 15px;
   padding: 12px;
 }
-div.issue_tracker.nested img, div.notification_service.nested img {
+
+div.notification_service.nested .choose  {
+  background-color: #ebebeb;
+  border: 1px solid #dddddd;
+  margin: 0 0 15px;
+  padding: 12px;
+
+}
+div.issue_tracker.nested img {
+  vertical-align: middle;
+}
+
+div.notification_service.nested img {
   vertical-align: middle;
 }
 
 /* Icons for Issue Tracker Radio Buttons */
-div.issue_tracker.nested label.label_radio, div.notification_service.nested label.label_radio  {
+div.issue_tracker.nested label.label_radio {
+  color: #929292;
+  margin-right: 8px;
+}
+
+div.notification_service.nested label.label_radio  {
   color: #929292;
   padding-left: 33px;
   margin-bottom: 6px;
   margin-right: 8px;
   line-height: 30px;
 }
-div.issue_tracker.nested .choose, div.notification_service.nested .choose {
+
+div.notification_service.nested .choose {
   padding-bottom: 6px;
 }
+
 div.issue_tracker.nested label.label_radio:hover, div.notification_service.nested label.label_radio:hover {
   color: #696969;
 }
-div.issue_tracker.nested .label_radio input, div.notification_service.nested .label_radio input {
+
+div.issue_tracker.nested .label_radio input {
+  display: none;
+}
+
+div.notification_service.nested .label_radio input {
   position: absolute; left: -9999px;
+}
+
+.button-icon {
+  float: left;
+  margin: 5px 0 0 6px;
 }
 
 div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, div.notification_service.nested label.r_on, div.notification_service.nested label.r_on:hover {

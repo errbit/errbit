@@ -12,7 +12,7 @@ class AppsController < ApplicationController
   }
 
   expose(:apps) {
-    app_scope.all.sort.to_a
+    app_scope.all.sort.map { |app| AppDecorator.new(app) }
   }
 
   expose(:app, ancestor: :app_scope, attributes: :app_params)

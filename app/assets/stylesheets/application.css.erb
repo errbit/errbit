@@ -2,12 +2,6 @@
  *= require reset
  *= require jquery.alerts
  *= require errbit
- *= require issue_tracker_icons
  *= require notification_service_icons
  *= require_self
  */
-
-// Allow any gems named 'errbit_*' to require their own assets
-<% Gem.loaded_specs.keys.grep(/^errbit_/).each do |plugin|
-  require_asset(plugin) rescue Sprockets::FileNotFound
-end %>

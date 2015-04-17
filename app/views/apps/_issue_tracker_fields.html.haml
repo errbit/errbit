@@ -3,21 +3,17 @@
   = f.fields_for :issue_tracker do |issue_tracker_form|
     %div.issue_tracker.nested
       %div.choose
-        - issue_tracker_form.object.issue_trackers do |tracker|
-          = issue_tracker_form.label :type_tracker, :class => "label_radio #{tracker.label}", :value => tracker.key do
-            = issue_tracker_form.radio_button :type_tracker, tracker.key, 'data-section' => tracker.label
-            = tracker.label
+        - issue_tracker_types.each do |tracker_type|
+          = issue_tracker_form.label :type_tracker, :class => "label_radio #{tracker_type.label}", :value => tracker_type.label do
+            - icon = tracker_type == issue_tracker_form.object.type ? :create : :inactive
+            %img.icon{"src" => tracker_type.icons[icon], "data-icon" => tracker_type.icons}
+            = issue_tracker_form.radio_button :type_tracker, tracker_type.label, 'data-section' => tracker_type.label
+            = tracker_type.label
 
-      - issue_tracker_form.object.issue_trackers do |tracker|
-        %div.tracker_params{:class => tracker.params_class(issue_tracker_form.object)}
+      - issue_tracker_types.each do |tracker_type|
+        %div.tracker_params{:class => tracker_type.params_class(issue_tracker_form.object)}
           = issue_tracker_form.fields_for(:options) do |options_form|
-            %p= tracker.note
-            - tracker.fields do |field|
+            %p= tracker_type.note
+            - tracker_type.fields do |field|
               = options_form.label field.key, field.label
               = field.input(options_form, issue_tracker_form.object)
-
-      .image_preloader
-        - issue_tracker_form.object.issue_trackers do |tracker|
-          = image_tag "#{tracker.label}_inactive.png"
-          = image_tag "#{tracker.label}_create.png"
-

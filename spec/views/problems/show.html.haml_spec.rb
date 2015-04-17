@@ -4,12 +4,14 @@ describe "problems/show.html.haml", type: 'view' do
   let(:pivotal_tracker) {
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label; 'pivotal'; end
+      def self.icons; {}; end
       def configured?; true; end
     end
   }
   let(:github_tracker) {
     Class.new(ErrbitPlugin::MockIssueTracker) do
-      def label; 'github'; end
+      def self.label; 'github'; end
+      def self.icons; {}; end
       def configured?; true; end
     end
   }
@@ -19,9 +21,10 @@ describe "problems/show.html.haml", type: 'view' do
       'pivotal' => pivotal_tracker
     }
   }
+  let(:app) { AppDecorator.new(problem.app) }
 
   before do
-    allow(view).to receive(:app).and_return(problem.app)
+    allow(view).to receive(:app).and_return(app)
     allow(view).to receive(:problem).and_return(problem)
 
     assign :comment, comment
@@ -33,7 +36,11 @@ describe "problems/show.html.haml", type: 'view' do
 
   def with_issue_tracker(tracker, problem)
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(trackers)
-    problem.app.issue_tracker = IssueTracker.new :type_tracker => tracker, :options => {:api_token => "token token token", :project_id => "1234"}
+    app.issue_tracker = IssueTrackerDecorator.new(
+      IssueTracker.new :type_tracker => tracker, :options => {
+        :api_token => "token token token",
+        :project_id => "1234"
+      })
   end
 
   describe "content_for :action_bar" do
@@ -86,7 +93,7 @@ describe "problems/show.html.haml", type: 'view' do
         allow(view).to receive(:app).and_return(problem.app)
         render
 
-        expect(action_bar).to have_selector("span a.github_create.create-issue", text: 'create issue')
+        expect(action_bar).to have_selector("span a.create-issue", text: 'create issue')
       end
 
       context "without issue tracker associate on app" do
@@ -118,12 +125,7 @@ describe "problems/show.html.haml", type: 'view' do
 
           it 'links to the associated tracker' do
             render
-            expect(view.content_for(:action_bar)).to match(".pivotal_create.create-issue")
-          end
-
-          it 'does not link to github' do
-            render
-            expect(view.content_for(:action_bar)).to_not match(".github_create.create-issue")
+            expect(view.content_for(:action_bar)).to match(".create-issue")
           end
         end
 
@@ -179,4 +181,3 @@ describe "problems/show.html.haml", type: 'view' do
     end
   end
 end
-
