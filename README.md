@@ -336,77 +336,33 @@ ErrorReport.fingerprint_strategy = Fingerprint::MD5
 
 The easiest way to add custom fingerprint methods is to simply subclass `Fingerprint`
 
+Plugins and Integrations
+------------------------
+You can extend Errbit by adding Ruby gems and plugins which are generally also
+gems. It's nice to keep track of which gems are core Errbit dependencies and
+which gems are your own dependencies. If you want to add gems to your own
+Errbit, place them in a new file called `UserGemfile`. If you want to use a
+file with a different name, you can pass the name of that file in an
+environment variable named `USER_GEMFILE`. For example, if you wanted to use
+errbit_jira_plugin, you could:
+
+```bash
+echo "gem 'errbit_jira_plugin'" > UserGemfile
+bundle install
+```
+
 Issue Trackers
 --------------
+Each issue tracker integration is implemented as a gem that depends on
+[errbit_plugin](https://github.com/errbit/errbit_plugin). The only officially
+supported issue tracker plugin is
+[errbit_github_plugin](https://github.com/errbit/errbit_github_plugin).
 
-**Lighthouseapp Integration**
-
-* Account is the name of your subdomain, i.e. **litcafe** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
-* Errbit uses token-based authentication. Get your API Token or visit [http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token](http://help.lighthouseapp.com/kb/api/how-do-i-get-an-api-token) to learn how to get it.
-* Project id is number identifier of your project, i.e. **73466** for project at http://litcafe.lighthouseapp.com/projects/73466-face/overview
-
-**Redmine Integration**
-
-* Account is the host of your redmine installation, i.e. **http://redmine.org**
-* Errbit uses token-based authentication. Get your API Key or visit [http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication) to learn how to get it.
-* Project id is an identifier of your project, i.e. **chilliproject** for project at http://www.redmine.org/projects/chilliproject
-
-**Pivotal Tracker Integration**
-
-* Errbit uses token-based authentication. Get your API Key or visit [http://www.pivotaltracker.com/help/api](http://www.pivotaltracker.com/help/api) to learn how to get it.
-* Project id is an identifier of your project, i.e. **24324** for project at http://www.pivotaltracker.com/projects/24324
-
-**Thoughtworks Mingle Integration**
-
-* Account is the host of your mingle installation. i.e. **https://mingle.example.com**  *note*: You should use SSL if possible.
-* Errbit uses 'sign-in name' & password authentication. You may want to set up an **errbit** user with limited rights.
-* Project id is the identifier of your project, i.e. **awesomeapp** for project at https://mingle.example.com/projects/awesomeapp
-* Card properties are comma separated key value pairs. You must specify a 'card_type', but anything else is optional, e.g.:
-
-```
-card_type = Defect, status = Open, priority = Essential
-```
-
-**GitHub Issues Integration**
-
-* For 'Account/Repository', the account will either be a username or organization. i.e. **errbit/errbit**
-* You will also need to provide your username and password for your GitHub account.
-  * (We'd really appreciate it if you wanted to help us implement OAuth instead!)
-
-**Bitbucket Issues Integration**
-
-* For 'BITBUCKET REPO' field, the account will either be a username or organization. i.e. **errbit/errbit**
-* You will also need to provide your username and password for your Bitbucket account.
-
-**Gitlab Issues Integration**
-
-* Account is the host of your gitlab installation. i.e. **http://gitlab.example.com**
-* To authenticate, Errbit uses token-based authentication. Get your API Key in your user settings (or create special user for this purpose)
-* You also need to provide project ID (it needs to be Number) for issues to be created
-
-**Unfuddle Issues Integration**
-
-* Account is your unfuddle domain
-* Username your unfuddle username
-* Password your unfuddle password
-* Project id the id of your project where your ticket is create
-* Milestone id the id of your milestone where your ticket is create
-
-**Jira Issue Integration**
-
-* base_url the jira URL
-* context_path Context Path (Just "/" if empty otherwise with leading slash)
-* username HTTP Basic Auth User
-* password HTTP Basic Auth Password
-* project_id The project Key where the issue will be created
-* account Assign to this user. If empty, Jira takes the project default.
-* issue_component Website - Other
-* issue_type Issue type
-* issue_priority Priority
+If you want to implement your own issue tracker plugin, read the README.md file
+at [errbit_plugin](https://github.com/errbit/errbit_plugin).
 
 Notification Service
 --------------------
-
 **Flowdock Notification**
 
 Allow notification to [Flowdock](https://www.flowdock.com/). See
