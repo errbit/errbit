@@ -30,11 +30,12 @@ describe AppsController, type: 'controller' do
 
   describe "GET /apps" do
     context 'when logged in as an admin' do
-      it 'finds all apps' do
+      it 'finds all apps sorted by descending unresolved count' do
         sign_in admin
-        unwatched_app && watched_app1 && watched_app2
+        unwatched_app && watched_app1 && watched_app2 && problem
         get :index
-        expect(controller.apps.entries).to eq App.all.sort.entries
+        apps_in_expected_order = App.all.entries.sort_by { |a| -a.unresolved_count }
+        expect(controller.apps.entries).to eq apps_in_expected_order
       end
     end
 
