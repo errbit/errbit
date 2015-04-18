@@ -12,7 +12,7 @@ Example:
 
 ```sh
 
-curl 'http://localhost:8080/api/v1/stats/app?api_key=6423d563e5285b34cb117f757b2bc7b1'
+curl 'http://myerrbit.com/api/v1/stats/app?api_key=6423d563e5285b34cb117f757b2bc7b1'
 
 ```
 
