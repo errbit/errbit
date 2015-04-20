@@ -56,6 +56,10 @@ en:
         need_two_errors_merge: "You must select at least two errors to merge"
         merge_several:
           success: "%{nb} errors have been merged."
+    watchers:
+      flash:
+        create:
+          success: "You are now watching %{app_name}."
 
   devise:
     registrations:
@@ -124,6 +128,7 @@ en:
       unresolved_errs: unresolved errors
       unwatch: unwatch
       user_or_email: User or Email
+      watch: watch
       watchers: Watchers
       when:  When
       who: Who

@@ -5,7 +5,7 @@ describe AppsController, type: 'controller' do
   let(:admin) { Fabricate(:admin) }
   let(:user) { Fabricate(:user) }
   let(:watcher) { Fabricate(:user_watcher, :app => app, :user => user) }
-  let(:unwatched_app) { Fabricate(:app) }
+  let(:unwatched_app) { Fabricate(:app, :name => "Zulu app") }
   let(:app) { unwatched_app }
   let(:watched_app1) do
     a = Fabricate(:app)
@@ -26,25 +26,57 @@ describe AppsController, type: 'controller' do
   let(:problem) do
     Fabricate(:problem, :app => app)
   end
+  let(:old_problem) do
+    Fabricate(:problem, :app => watched_app1,
+              :first_notice_at => Date.today - 3)
+  end
   let(:problem_resolved) { Fabricate(:problem_resolved, :app => app) }
 
   describe "GET /apps" do
     context 'when logged in as an admin' do
-      it 'finds all apps' do
+      it 'finds all apps ordered by name' do
         sign_in admin
         unwatched_app && watched_app1 && watched_app2
         get :index
-        expect(controller.apps.entries).to eq App.all.sort.entries
+        expect(controller.apps.entries).to eq App.asc('name').entries
       end
     end
 
     context 'when logged in as a regular user' do
-      it 'finds apps the user is watching' do
+      it 'still finds all apps ordered by name' do
         sign_in(user)
         watched_app1 && watched_app2 && unwatched_app
         get :index
-        expect(controller.apps).to include(watched_app1, watched_app2)
-        expect(controller.apps).to_not include(unwatched_app)
+        expect(controller.apps.entries).to eq App.asc('name').entries
+      end
+    end
+
+    context 'when filtering apps' do
+      context 'by app name' do
+        it 'finds specified apps ordered by name' do
+          sign_in admin
+          watched_app1 && watched_app2 && unwatched_app
+          get :index, apps: [watched_app1.name, unwatched_app.name]
+          expect(controller.apps.entries).to eq [watched_app1, unwatched_app]
+        end
+      end
+
+      context 'by active problem date range' do
+        it 'finds specified apps ordered by name' do
+          sign_in admin
+          watched_app1 && watched_app2 && unwatched_app && problem && old_problem
+          get :index, from: Date.yesterday
+          expect(controller.apps.entries).to eq [unwatched_app]
+        end
+      end
+
+      context 'by active problems' do
+        it 'finds specified apps ordered by name' do
+          sign_in admin
+          watched_app1 && watched_app2 && unwatched_app && problem && old_problem
+          get :index, errors: 'true'
+          expect(controller.apps.entries).to eq [watched_app1, unwatched_app]
+        end
       end
     end
   end
@@ -170,12 +202,11 @@ describe AppsController, type: 'controller' do
         expect(controller.app).to eq app
       end
 
-      it 'does not find the app if the user is not watching it' do
+      it 'still finds the app if the user is not watching it' do
         sign_in Fabricate(:user)
         app = Fabricate(:app)
-        expect{
-          get :show, :id => app.id
-        }.to raise_error(Mongoid::Errors::DocumentNotFound)
+        get :show, :id => app.id
+        expect(controller.app).to eq app
       end
     end
   end
@@ -333,6 +364,70 @@ describe AppsController, type: 'controller' do
       it "should redirect to the apps page" do
         delete :destroy, :id => @app.id
         expect(response).to redirect_to(apps_path)
+      end
+    end
+  end
+
+  context "logged in as an ordinary user" do
+    before :each do
+      sign_in user
+    end
+
+    def expect_action_to_be_rejected
+      expect(response).to redirect_to("/")
+      expect(flash[:error]).to eq("Sorry, you don't have permission to do that")
+    end
+
+    describe "GET /apps/new" do
+      it "should redirect to root with an error" do
+        get :new
+        expect_action_to_be_rejected
+      end
+    end
+
+    describe "GET /apps/:id/edit" do
+      it "should redirect to root with an error" do
+        get :edit, :id => app.id
+        expect_action_to_be_rejected
+      end
+    end
+
+    describe "POST /apps" do
+      it "should redirect to root with an error" do
+        post :create, :app => {}
+        expect_action_to_be_rejected
+      end
+
+      it "should not create an app" do
+        expect(App).not_to receive(:new)
+        post :create, :app => {}
+      end
+    end
+
+    describe "PUT /apps/:id" do
+      it "should redirect to root with an error" do
+        put :update, :id => app.id, :app => {:name => "new name"}
+        expect_action_to_be_rejected
+      end
+
+      it "should not update the app" do
+        expect {
+          put :update, :id => app.id, :app => {:name => "new name"}
+        }.not_to change { app.name }
+      end
+    end
+
+    describe "DELETE /apps/:id" do
+      it "should redirect to root with an error" do
+        delete :destroy, :id => app.id
+        expect_action_to_be_rejected
+      end
+
+      it "should not delete the app" do
+        app # Ensure app is created before entering expect block
+        expect {
+          delete :destroy, :id => app.id
+        }.not_to change { App.count }
       end
     end
   end

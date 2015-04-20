@@ -102,6 +102,8 @@ GEM
       simplecov (>= 0.7)
       term-ansicolor
       thor
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     css_parser (1.3.5)
       addressable
     database_cleaner (1.2.0)
@@ -170,6 +172,9 @@ GEM
     launchy (2.4.3-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
+    logstash-event (1.1.5)
+    logstasher (0.4.8)
+      logstash-event (~> 1.1.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     meta_request (0.2.8)
@@ -218,6 +223,9 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
+    omniauth-gds (3.1.0)
+      multi_json (~> 1.10)
+      omniauth-oauth2 (~> 1.0)
     omniauth-github (1.1.1)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
@@ -229,6 +237,7 @@ GEM
     orm_adapter (0.5.0)
     pjax_rails (0.3.4)
       jquery-rails
+    plek (1.7.0)
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -325,6 +334,7 @@ GEM
     rushover (0.3.0)
       json
       rest-client
+    safe_yaml (1.0.4)
     sass (3.4.9)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -378,6 +388,11 @@ GEM
     useragent (0.9.0)
     warden (1.2.3)
       rack (>= 1.0)
+    warden-oauth2 (0.0.1)
+      warden
+    webmock (1.20.4)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
     websocket-driver (0.5.1-java)
@@ -427,13 +442,16 @@ DEPENDENCIES
   json
   kaminari (>= 0.14.1)
   launchy
+  logstasher (= 0.4.8)
   meta_request
   mongoid (~> 4.0.0)
   mongoid-rspec
   mongoid_rails_migrations
   moped (~> 2.0.2)
+  omniauth-gds (~> 3.1)
   omniauth-github
   pjax_rails
+  plek (= 1.7.0)
   poltergeist
   pry-byebug
   pry-rails
@@ -456,5 +474,7 @@ DEPENDENCIES
   underscore-rails
   unicorn
   useragent
+  warden-oauth2 (= 0.0.1)
+  webmock
   xmpp4r
   yajl-ruby

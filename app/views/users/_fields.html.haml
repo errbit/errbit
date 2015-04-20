@@ -2,7 +2,7 @@
 
 .required
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, :disabled => true
 
 - if Errbit::Config.user_has_username
   .required
@@ -11,7 +11,7 @@
 
 .required
   = f.label :email
-  = f.text_field :email
+  = f.text_field :email, :disabled => true
 
 - if Errbit::Config.github_authentication
   = f.label :github_login
@@ -25,16 +25,8 @@
   = f.label :time_zone
   = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
 
-.required
-  = f.label :password
-  = f.password_field :password, :autocomplete => "off"
-
-.required
-  = f.label :password_confirmation
-  = f.password_field :password_confirmation
-
 - if current_user.admin?
   .checkbox
-    = f.check_box :admin
+    = f.check_box :admin, :disabled => true
     = f.label :admin, 'Admin?'
 

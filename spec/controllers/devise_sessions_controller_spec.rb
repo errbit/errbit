@@ -1,4 +1,4 @@
-describe Devise::SessionsController, type: 'controller' do
+describe Devise::SessionsController, type: 'controller', pending: "No longer applicable due to GDS SSO" do
   render_views
 
   describe "POST /users/sign_in" do

@@ -54,6 +54,15 @@ gem 'flowdock'
 # GitHub OAuth
 gem 'omniauth-github'
 
+#### GDS additions ####
+# GDS Signon
+gem 'omniauth-gds', '~> 3.1'
+gem 'plek', '1.7.0'
+gem 'warden-oauth2', '0.0.1'
+
+gem 'logstasher', '0.4.8'
+#### End GDS additions ####
+
 gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
@@ -92,6 +101,9 @@ group :test do
   gem 'timecop'
   gem 'test-unit', require: 'test/unit'
   gem 'coveralls', require: false
+  #### GDS additions ####
+  gem 'webmock'
+  #### End GDS additions ####
 end
 
 group :heroku, :production do
