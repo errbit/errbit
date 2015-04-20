@@ -15,12 +15,7 @@ The main changes in the GDS fork are as follows:
   In upstream errbit you can only see apps which you're watching. We want
   users to see all apps in the web interface but only watch some of them.
 
-* Various boilerplate/small integrations
-  * Testing support
-  * Add jenkins script for ci
-  * Configure cache-control header used for static files
-  * Add logstasher for json-formatted log output
-  * Add healthcheck route
+* Various boilerplate/small integrations (several commits)
 
 ## How to keep up-to-date with upstream
 
