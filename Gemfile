@@ -99,7 +99,8 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
-  gem 'test-unit', require: 'test/unit'
+  ## GDS change: don't require test-unit as it triggers auto-running which breaks CI
+  gem 'test-unit', require: false
   gem 'coveralls', require: false
   #### GDS additions ####
   gem 'webmock'
