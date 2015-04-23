@@ -14,7 +14,7 @@ describe "Callback on Notice", type: 'model' do
 
     custom_thresholds.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
-        @err.problem.stub(:notices_count).and_return(threshold)
+        allow(@err.problem).to receive(:notices_count).and_return(threshold)
         expect(Mailer).to receive(:err_notification).
           and_return(double('email', :deliver => true))
         Fabricate(:notice, :err => @err)
