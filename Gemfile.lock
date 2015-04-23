@@ -1,17 +1,3 @@
-GIT
-  remote: git://github.com/errbit/errbit_github_plugin.git
-  revision: 3597f2d2c6aa75e014251747a30eeb5d19f641dd
-  specs:
-    errbit_github_plugin (0.1.0)
-      errbit_plugin
-      octokit
-
-GIT
-  remote: git://github.com/errbit/errbit_plugin.git
-  revision: 9cfe43119be46bfa36cbf4b940b80d39229595ef
-  specs:
-    errbit_plugin (0.4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,7 +31,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
+    addressable (2.3.8)
     airbrake (3.1.14)
       builder
       json
@@ -127,11 +113,15 @@ GEM
     email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
+    errbit_github_plugin (0.2.0)
+      errbit_plugin
+      octokit
+    errbit_plugin (0.5.0)
     erubis (2.7.0)
     execjs (2.0.2)
     fabrication (2.9.0)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.6-java)
     flowdock (0.3.1)
       httparty (~> 0.7)
@@ -200,7 +190,7 @@ GEM
       optionable (~> 0.2.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
-    multipart-post (1.2.0)
+    multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -213,7 +203,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    octokit (3.7.0)
+    octokit (3.8.0)
       sawyer (~> 0.6.0, >= 0.5.3)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
@@ -413,8 +403,8 @@ DEPENDENCIES
   dotenv-rails
   draper
   email_spec
-  errbit_github_plugin!
-  errbit_plugin!
+  errbit_github_plugin
+  errbit_plugin
   fabrication
   flowdock
   haml
