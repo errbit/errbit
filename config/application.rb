@@ -1,9 +1,9 @@
 require File.expand_path('../boot', __FILE__)
 
-require "action_controller/railtie"
-require "action_mailer/railtie"
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
 require 'mongoid/railtie'
-require "sprockets/railtie"
+require 'sprockets/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -26,7 +26,7 @@ module Errbit
       config.serve_static_assets = Errbit::Config.serve_static_assets
     end
 
-    initializer "errbit.mongoid", before: "mongoid.load-config" do
+    initializer 'errbit.mongoid', before: 'mongoid.load-config' do
       require Rails.root.join('config/mongo')
     end
 
@@ -50,6 +50,6 @@ module Errbit
     config.mongoid.preload_models = true
 
     # Configure Devise mailer to use our mailer layout.
-    config.to_prepare { Devise::Mailer.layout "mailer" }
+    config.to_prepare { Devise::Mailer.layout 'mailer' }
   end
 end
