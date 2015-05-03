@@ -203,6 +203,21 @@ This will ensure that your application stays up to date with any schema changes.
   another issue tracker integration, you may need to maintain it yourself. See
   (issue trackers)[#issue-trackers]
 
+## User information in error reports
+
+Errbit can now display information about the user who experienced an error.
+This gives you the ability to ask the user for more information,
+and let them know when you've fixed the bug.
+
+The Airbrake gem will look for ```current_user``` or ```current_member```. By defailt it will only send the ```id``` of the user, to specify other attributes you can set ```config.user_attributes```. See [the Airbrake wiki for more information](https://github.com/airbrake/airbrake/wiki/Sending-current-user-information).
+
+If user information is received with an error report,
+it will be displayed under the *User Details* tab:
+
+![User details tab](http://errbit.github.com/errbit/images/error_user_information.png)
+
+This tab will be hidden if no user information is available.
+
 Javascript error notifications
 --------------------------------------
 
