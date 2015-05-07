@@ -1,5 +1,4 @@
 require 'securerandom'
-require 'pry'
 
 puts "Seeding database"
 puts "-------------------------------"
