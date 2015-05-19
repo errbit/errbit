@@ -72,4 +72,4 @@ heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?ap
 
 ## Or Just be lazy
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/3zcurdia/errbit/tree/heroku-button)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
