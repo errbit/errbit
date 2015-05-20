@@ -1,11 +1,8 @@
 {
   "name": "errbit",
   "description": "The open source error catcher that's Airbrake API compliant",
-  "keywords": ["productivity", "tools","error tracking"],
-  "repository": "https://github.com/3zcurdia/errbit",
-  "scripts": {
-    "postdeploy": "bundle exec rake errbit:bootstrap"
-  },
+  "keywords": ["productivity", "tools", "error tracking"],
+  "repository": "https://github.com/errbit/errbit",
   "env": {
     "GEMFILE_RUBY_VERSION": "2.2.0",
     "SECRET_KEY_BASE": {
