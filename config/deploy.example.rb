@@ -41,7 +41,7 @@ namespace :errbit do
   task :setup do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
-      execute "mkdir -p #{shared_path}/pids"
+      execute "mkdir -p #{shared_path}/tmp/pids"
       execute "touch #{shared_path}/.env"
 
       {
