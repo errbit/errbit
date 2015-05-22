@@ -10,7 +10,7 @@
         %tbody
           %tr
             %td.header
-              = link_to image_tag(URI.join(root_url,"assets/images/logo.png").to_s, :alt => "Errbit"), root_url
+              = link_to image_tag(URI.join(root_url, ActionController::Base.helpers.asset_path("images/logo.png")).to_s, :alt => "Errbit"), root_url
 
           = yield
 
