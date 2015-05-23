@@ -38,6 +38,11 @@ Errbit::Config = Configurator.run({
     values[:email_delivery_method] && values[:email_delivery_method].to_sym
   }],
 
+  # Sidekiq authorization
+  notify_async:              ['NOTIFY_ASYNC'],
+  sidekiq_username:          ['SIDEKIQ_USERNAME'],
+  sidekiq_password:          ['SIDEKIQ_PASSWORD'],
+
   # smtp settings
   smtp_address:              ['SMTP_SERVER'],
   smtp_port:                 ['SMTP_PORT'],

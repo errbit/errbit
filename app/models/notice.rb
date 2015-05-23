@@ -193,7 +193,16 @@ class Notice
   # Launch all notification define on the app associate to this notice
   def services_notification
     return true unless app.notification_service_configured? and should_notify?
-    app.notification_service.create_notification(problem)
+
+    # Decide from configuration what happend with problem notification
+    if Errbit::Config.notify_async
+      # Enque a job into sidekiq queue
+      ProblemWorker.perform_async(problem.id)
+    else
+      # Send notification immediately
+      app.notification_service.create_notification(problem)
+    end
+
   rescue => e
     HoptoadNotifier.notify(e)
   end

@@ -48,6 +48,28 @@ describe "Callback on Notice", type: 'model' do
     end
   end
 
+  describe "should enqueue job into sidekiq if async seding and notification service are configured" do
+    let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
+    let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
+    let(:backtrace) { Fabricate(:backtrace) }
+
+    before do
+      # Change configuration to asynchronous sending!
+      Errbit::Config.notify_async = true
+    end
+
+    after do
+      Errbit::Config.notify_async = false
+    end
+
+    it 'should enqueue a job for campfire notification instead send a notification' do
+      expect do
+        Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
+                     :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })
+      end.to change(ProblemWorker.jobs, :size).by(1)
+    end
+  end
+
   describe "should send a notification if a notification service is configured with defaults" do
     let(:app) { Fabricate(:app, :email_at_notices => [1], :notification_service => Fabricate(:campfire_notification_service))}
     let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :notices_count => 100)) }
