@@ -130,8 +130,9 @@ GEM
       tilt
     hashie (2.0.5)
     hike (1.2.3)
-    hipchat (0.12.0)
+    hipchat (1.5.1)
       httparty
+      mimemagic
     hoi (0.0.6)
       httparty (> 0.6.0)
       json (> 1.4.0)
@@ -139,7 +140,7 @@ GEM
       activesupport
       builder
     htmlentities (4.3.3)
-    httparty (0.13.3)
+    httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
@@ -168,6 +169,7 @@ GEM
       railties
     method_source (0.8.2)
     mime-types (1.25.1)
+    mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.5.1)
     mongoid (4.0.2)
