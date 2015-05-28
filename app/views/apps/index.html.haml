@@ -1,11 +1,14 @@
 - content_for :title, t('.title')
 - content_for :action_bar do
-  %span= link_to(t('.new_app'), new_app_path, :class => 'add') if current_user.admin?
+  - if current_user.admin?
+    = link_to new_app_path, :class => 'btn btn-success' do
+      %i.glyphicon.glyphicon-plus-sign
+      %span= t('.new_app')
 
-%table.apps
+%table.table-striped.table-hover.apps
   %thead
     %tr
-      %th= t('.name')
+      %th.main-column= t('.name')
       - if any_github_repos? || any_bitbucket_repos?
         %th= t('.repository')
       - if any_notification_services?
@@ -49,11 +52,10 @@
         %td.count
           - if app.problem_count > 0
             - unresolved = app.unresolved_count
-            = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
+            = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : "btn btn-danger")
     - if apps.none?
       %tr
         %td{:colspan => 3}
           %em
             = t('.no_apps')
             = link_to t('.click_to_create'), new_app_path
-

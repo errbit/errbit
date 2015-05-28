@@ -13,26 +13,28 @@
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    #header
-      %div
-        = link_to t('.errbit'), root_path, :id => 'site-name'
-        = render 'shared/navigation' if current_user
-        = render 'shared/session'
-    #content-wrapper
-      #content-title{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-        %h1= yield :title
-        %span.meta= yield :meta
-        - if (action_bar = yield(:action_bar)).present?
-          #action-bar
-            = action_bar
-      #content
+    .row
+      .col-sm-3.col-md-2.navbar-default.sidebar
+        %ul.nav.nav-site-name
+          %li= link_to t('.errbit'), root_path, :id => 'navbar-brand'
+        - if current_user
+          = render 'shared/session'
+          = render 'shared/navigation'
+      .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+        #content-title
+          %h1= yield :title
+          - if (action_bar = yield(:action_bar)).present?
+            #action-bar= action_bar
+          %span.meta= yield :meta
         = render 'shared/flash_messages'
         = yield
-      - if content_for?(:comments)
-        #content-comments
-          = yield :comments
+        - if content_for?(:comments)
+          #content-comments
+            = yield :comments
+
     #footer
       = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
       %br
       = Errbit::Version.to_s
+
     = yield :scripts

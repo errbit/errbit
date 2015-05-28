@@ -3,10 +3,10 @@
   = auto_discovery_link_tag :atom, problems_path(User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => "Errbit notices at #{request.host}"
 
 - content_for :action_bar do
-  - if @all_errs
-    = link_to 'hide resolved', problems_path, :class => 'button'
+  - if params[:all_errs]
+    = link_to 'hide resolved', problems_path, :class => 'btn btn-default'
   - else
-    = link_to 'show resolved', problems_path(:all_errs => true), :class => 'button'
+    = link_to 'show resolved', problems_path(:all_errs => true), :class => 'btn btn-default'
 
 %section
   = render 'problems/search', :all_errs => @all_errs, :app_id => nil

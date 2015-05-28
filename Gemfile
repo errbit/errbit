@@ -99,6 +99,9 @@ group :heroku, :production do
   gem 'unicorn', require: false, platform: 'ruby'
 end
 
+gem 'bootstrap-sass'
+gem 'bootstrap-kaminari-views'
+gem 'bootswatch-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'

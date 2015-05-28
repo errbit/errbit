@@ -1,0 +1,143 @@
+@import "bootswatch/flatly/variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootswatch/flatly/bootswatch";
+
+$sidebar-hover-bg: darken($navbar-default-bg, 5%);
+
+// from errbit.css
+#content-title {
+  padding-bottom: 25px;
+}
+#content-title h1 {
+  margin-top: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+}
+#content-title .meta { font-size: 0.9em; color: #787878; }
+
+#content-comments a.destroy-comment {
+  color: #EE0000;
+  margin-right: 5px;
+  margin-top: 2px;
+  font-size: 21px;
+  line-height: 1;
+  float: right;
+}
+#content-comments a.destroy-comment:hover {
+  text-decoration: none;
+  color: #AA0000;
+}
+
+/* Footer */
+#footer {
+  padding: 15px 0;
+  font-size: 0.8em; text-align: center;
+  color: #929292;
+}
+
+/* Tables */
+table th, table td { padding: 12px; }
+table th { background-color: darken($gray-lighter, 5%); white-space: nowrap; }
+table .main-column { width: 100%; }
+td.count { text-align: center; }
+
+.field_with_errors {
+  @extend .has-error;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 0 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#navbar-brand {
+  background: rgba(0, 0, 0, 0) url(images/logo.png) 18px 15px no-repeat;
+  text-indent: -5000em;
+  padding: 20px;
+}
+
+.nav-site-name {
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+.nav-sidebar {
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+.nav > li {
+  position: relative;
+  display: block;
+
+  i {
+    margin-right: 11px;
+  }
+}
+
+.nav-sidebar > li > a {
+  color: #BBB;
+  font-weight: bold;
+  padding: 17px 20px;
+
+  &:hover, &:focus {
+    background-color: $sidebar-hover-bg;
+    color: #FFF;
+  }
+}
+
+.nav-menu .active {
+  background-color: $sidebar-hover-bg;
+
+  a {
+    color: #FFF;
+  }
+}
+
+.nav.nav-user {
+  a {
+    font-size: 90%;
+    font-weight: normal;
+  }
+  img.gravatar {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .open > a {
+    background-color: $sidebar-hover-bg;
+    color: #FFF ;
+  }
+  .dropdown-menu {
+    left: 20px;
+  }
+}
+
+.main {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+#flash-messages {
+  .alert-success  { @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text); }
+  .alert-notice   { @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text); }
+  .alert-alert    { @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text); }
+  .alert-error    { @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text); }
+}
+
+// bootstrap override
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-left: 0px;
+}

@@ -1,40 +1,40 @@
 = errors_for user
 
-.required
-  = f.label :name
-  = f.text_field :name
+.form-group.required
+  = f.label :name, :class => 'control-label'
+  = f.text_field :name, :class => "form-control"
 
 - if Errbit::Config.user_has_username
-  .required
-    = f.label :username
-    = f.text_field :username
+  .form-group.required
+    = f.label :username, :class => 'control-label'
+    = f.text_field :username, :class => "form-control"
 
-.required
-  = f.label :email
-  = f.text_field :email
+.form-group.required
+  = f.label :email, :class => 'control-label'
+  = f.text_field :email, :class => "form-control"
 
-- if Errbit::Config.github_authentication
-  = f.label :github_login
-  = f.text_field :github_login
+.form-group
+  - if Errbit::Config.github_authentication
+    = f.label :github_login
+    = f.text_field :github_login, :class => "form-control"
 
-.required
-  = f.label :per_page, 'Entries per page'
-  = f.select :per_page, [10, 20, 30, 50, 75, 100]
+.form-group.required
+  = f.label :per_page, 'Entries per page', :class => 'control-label'
+  = f.select :per_page, [10, 20, 30, 50, 75, 100], {}, :class => "form-control"
 
-.required
-  = f.label :time_zone
-  = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
+.form-group.required
+  = f.label :time_zone, :class => 'control-label'
+  = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, :class => "form-control"
 
-.required
-  = f.label :password
-  = f.password_field :password, :autocomplete => "off"
+.form-group.required
+  = f.label :password, :class => 'control-label'
+  = f.password_field :password, :autocomplete => "off", :class => "form-control"
 
-.required
-  = f.label :password_confirmation
-  = f.password_field :password_confirmation
+.form-group.required
+  = f.label :password_confirmation, :class => 'control-label'
+  = f.password_field :password_confirmation, :class => "form-control"
 
 - if current_user.admin?
   .checkbox
     = f.check_box :admin
     = f.label :admin, 'Admin?'
-

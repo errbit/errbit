@@ -13,25 +13,29 @@
   = app.api_key
 - content_for :action_bar do
   - if current_user.admin?
-    = link_to t('.edit'), edit_app_path(app), :class => 'button'
+    = link_to edit_app_path(app), :class => 'btn btn-primary' do
+      %i.glyphicon.glyphicon-edit
+      = t('.edit')
   - if all_errs
-    = link_to t('.unresolved_errs'), app_path(app), :class => 'button'
+    = link_to t('.unresolved_errs'), app_path(app), :class => 'btn btn-default'
   - else
-    = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'button'
-
+    = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'btn btn-default'
   - if current_user.watching?(app)
-    = link_to t('.unwatch'), app_watcher_path({app_id: app, id: current_user.id}), method: :delete, class: 'button', data: {confirm: t('.are_you_sure')}
+    = link_to app_watcher_path({app_id: app, id: current_user.id}), method: :delete,
+      class: 'btn btn-warning', data: {confirm: t('.are_you_sure')} do
+      %i.glyphicon.glyphicon-eye-close
+      = t('.unwatch')
 %h3#watchers_toggle
   =t('.watchers')
   %span.click_span=t('.show_hide')
 #watchers_div
   - if app.notify_all_users
-    %table.watchers
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.all_users_notified')
   - else
-    %table.watchers
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.user_or_email')
@@ -49,7 +53,7 @@
     =t('.repository')
     %span.click_span=t('.show_hide')
   #repository_div
-    %table.repository
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.github_repo')
@@ -62,7 +66,7 @@
   %span.click_span=t('.show_hide')
 #deploys_div
   - if deploys.any?
-    %table.deploys
+    %table.table.table-striped
       %thead
         %tr
           %th=t('.when')
@@ -86,7 +90,7 @@
     %h3=t('.no_deploys')
 
 - if app.problems.any?
-  %h3.clear=t('.errors')
+  %h3=t('.errors')
   %section
     = render 'problems/search', :all_errs => @all_errs, :app_id => app.id
   %br
@@ -94,6 +98,5 @@
     .problem_table{:id => 'problem_table'}
       = render 'problems/table', :problems => problems
 - else
-  %h3.clear=t('.no_error_yet')
+  %h3=t('.no_error_yet')
   = render 'configuration_instructions', :app => app
-

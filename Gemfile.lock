@@ -43,6 +43,13 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
+    bootstrap-sass (3.3.1.0)
+      sass (~> 3.2)
+    bootswatch-rails (3.2.4)
+      railties (>= 3.1)
     bson (2.3.0)
     bson (2.3.0-java)
     builder (3.2.2)
@@ -391,6 +398,9 @@ DEPENDENCIES
   airbrake
   better_errors
   binding_of_caller
+  bootstrap-kaminari-views
+  bootstrap-sass
+  bootswatch-rails
   campy
   capistrano
   capistrano-bundler

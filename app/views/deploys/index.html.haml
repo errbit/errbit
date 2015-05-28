@@ -3,5 +3,4 @@
   - if current_user.authentication_token
     %span= link_to 'iCal', app_deploys_path(@app, :format => "ics", :auth_token => current_user.authentication_token), :class => "calendar_link"
 = render 'table', :deploys => @deploys
-= paginate @deploys
-
+= paginate @deploys, :theme => 'twitter-bootstrap-3'
