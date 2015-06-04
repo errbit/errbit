@@ -6,6 +6,11 @@ REVISION:
 <%= @deploy.revision %>
 
 
+MESSAGE:
+
+<%= @deploy.message.blank? ? 'n/a' : @deploy.message %>
+
+
 WHEN:
 
 <%= @deploy.created_at.to_s(:rfc822) %>
