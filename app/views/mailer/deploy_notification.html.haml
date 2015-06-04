@@ -21,6 +21,8 @@
             %div
               %p.heading REVISION:
               %p= @deploy.revision
+              %p.heading MESSAGE:
+              %p= @deploy.message.blank? ? 'n/a' : @deploy.message
               %p.heading WHEN:
               %p= @deploy.created_at.to_s(:rfc822)
               %p.heading REPOSITORY:
