@@ -19,9 +19,6 @@ module Errbit
     config.autoload_paths += [Rails.root.join('lib')]
 
     config.before_initialize do
-      # Load up Errbit::Config with values from the environment
-      require Rails.root.join('config/load')
-
       config.secret_key_base = Errbit::Config.secret_key_base
       config.serve_static_assets = Errbit::Config.serve_static_assets
     end

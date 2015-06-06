@@ -15,11 +15,11 @@ class Backtrace
   delegate :app, :to => :notice
 
   def self.find_or_create(attributes = {})
-    new(attributes).similar || create(attributes)
+    new(attributes).similar.find_and_modify({ '$setOnInsert' => attributes })
   end
 
   def similar
-    Backtrace.where(:fingerprint => fingerprint).first
+    Backtrace.where(:fingerprint => fingerprint)
   end
 
   def raw=(raw)
@@ -32,5 +32,4 @@ class Backtrace
   def generate_fingerprint
     self.fingerprint = Digest::SHA1.hexdigest(lines.map(&:to_s).join)
   end
-
 end
