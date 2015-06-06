@@ -8,7 +8,7 @@ Mongoid.configure do |config|
         end
 
   config.load_configuration({
-    sessions: {
+    clients: {
       default: {
         uri: uri
       }

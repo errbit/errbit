@@ -135,9 +135,12 @@ class Problem
       self.last_deploy_at = if (last_deploy = app.deploys.where(:environment => self.environment).last)
         last_deploy.created_at.utc
       end
-      collection.find('_id' => self.id)
-                .update({'$set' => {'app_name' => self.app_name,
-                          'last_deploy_at' => self.last_deploy_at.try(:utc)}})
+      collection.
+        find('_id' => self.id).
+        update_one({'$set' => {
+          'app_name' => self.app_name,
+          'last_deploy_at' => self.last_deploy_at.try(:utc)
+        }})
     end
   end
 

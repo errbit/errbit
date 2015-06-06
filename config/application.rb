@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
-require 'mongoid/railtie'
+# require 'mongoid/railtie'
 require 'sprockets/railtie'
 
 # Require the gems listed in Gemfile, including any gems

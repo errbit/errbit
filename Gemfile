@@ -8,10 +8,8 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'moped', '~> 2.0.2'
-gem 'mongoid', '~> 4.0.0'
+gem 'mongoid', git: 'git@github.com:mongoid/mongoid.git'
 
-gem 'mongoid_rails_migrations'
 gem 'devise'
 gem 'haml'
 gem 'htmlentities'
@@ -78,7 +76,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '~> 3.3'
   gem 'rspec-rails', '~> 3.0', require: false
   gem 'rspec-activemodel-mocks'
   gem 'rspec-its'

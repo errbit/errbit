@@ -1,3 +1,13 @@
+GIT
+  remote: git@github.com:mongoid/mongoid.git
+  revision: f56b96b75eef6d71102c1ef89f3600d35d277e69
+  specs:
+    mongoid (5.0.0)
+      activemodel (~> 4.0)
+      mongo (~> 2.0)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,7 +91,6 @@ GEM
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
     columnize (0.9.0)
-    connection_pool (2.2.0)
     coveralls (0.8.2)
       json (~> 1.8)
       rest-client (>= 1.6.8, < 2)
@@ -175,25 +184,13 @@ GEM
     mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.7.0)
-    mongoid (4.0.2)
-      activemodel (~> 4.0)
-      moped (~> 2.0.0)
-      origin (~> 2.1)
-      tzinfo (>= 0.3.37)
-    mongoid-rspec (2.2.0)
-      mongoid (~> 4.0.0)
-      rake
-      rspec (~> 3.1)
-    mongoid_rails_migrations (1.0.1)
-      activesupport (>= 3.2.0)
-      bundler (>= 1.0.0)
-      rails (>= 3.2.0)
-      railties (>= 3.2.0)
-    moped (2.0.6)
+    mongo (2.0.5)
       bson (~> 3.0)
-      connection_pool (~> 2.0)
-      optionable (~> 0.2.0)
-    multi_json (1.11.1)
+    mongoid-rspec (1.10.0)
+      mongoid (>= 3.0.1)
+      rake
+      rspec (>= 2.14)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-scp (1.2.1)
@@ -363,7 +360,7 @@ GEM
     thread_safe (0.3.5-java)
     tilt (1.4.1)
     timecop (0.7.4)
-    tins (1.5.4)
+    tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -431,10 +428,8 @@ DEPENDENCIES
   kaminari (>= 0.14.1)
   launchy
   meta_request
-  mongoid (~> 4.0.0)
+  mongoid!
   mongoid-rspec
-  mongoid_rails_migrations
-  moped (~> 2.0.2)
   omniauth-github
   pjax_rails
   poltergeist
@@ -447,7 +442,7 @@ DEPENDENCIES
   rails_autolink
   railties (~> 4.1.11)
   ri_cal
-  rspec
+  rspec (~> 3.3)
   rspec-activemodel-mocks
   rspec-its
   rspec-rails (~> 3.0)
