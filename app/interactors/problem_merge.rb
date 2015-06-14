@@ -2,7 +2,7 @@ class ProblemMerge
   attr_reader :problems, :merged_problem, :child_problems
 
   def initialize(*problems)
-    @problems = problems.flatten.uniq
+    @problems = problems.flatten.uniq.sort_by(&:opened_at)
     @merged_problem = @problems[0]
     @child_problems = @problems[1..-1]
     raise ArgumentError.new("need almost 2 uniq different problems") if @child_problems.empty?
@@ -14,7 +14,7 @@ class ProblemMerge
       problem.reload # deference all associate objet to avoid delete him after
       ProblemDestroy.execute(problem)
     end
-    attributes = {opened_at: @problems.map(&:opened_at).min}
+    attributes = {}
     attributes[:resolved] = false unless @problems.all?(&:resolved?)
     merged_problem.update_attributes(attributes)
     reset_cached_attributes

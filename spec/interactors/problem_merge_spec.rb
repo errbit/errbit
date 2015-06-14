@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe ProblemMerge do
-  let(:problem) { Fabricate(:problem_with_errs, opened_at: 4.weeks.ago) }
+  let(:problem) { Fabricate(:problem_with_errs, opened_at: 5.weeks.ago) }
   let(:problem_1) { Fabricate(:problem_with_errs, opened_at: 1.weeks.ago) }
-  let(:problem_2) { Fabricate(:problem_with_errs, opened_at: 5.week.ago) }
-  let(:problems) { [problem, problem_1, problem_2] }
+  let(:problem_2) { Fabricate(:problem_with_errs, opened_at: 4.week.ago) }
+  let(:problems) { [problem_2, problem, problem_1] }
 
   describe "#initialize" do
     it "requires at least 2 unique problems" do
@@ -13,13 +13,14 @@ describe ProblemMerge do
       }.to raise_error(ArgumentError)
     end
 
-    it "extracts the first problem as merged_problem" do
+    it "extracts the earliest problem as merged_problem" do
       problem_merge = ProblemMerge.new(problems)
       expect(problem_merge.merged_problem).to eql problem
     end
+
     it "extracts the other problems as child_problems" do
       problem_merge = ProblemMerge.new(problems)
-      expect(problem_merge.child_problems).to eql [problem_1, problem_2]
+      expect(problem_merge.child_problems).to eql [problem_2, problem_1]
     end
   end
 
@@ -53,12 +54,6 @@ describe ProblemMerge do
         problem.comments.count
       }.from(1).to(2)
       expect(comment_2.reload.problem).to eq problem
-    end
-
-    it "sets the remaining problem's `opened_at` to the earliest value of all the given problems" do
-      expect {
-        problem_merge.merge
-      }.to change(problem, :opened_at).to(problem_2.opened_at)
     end
 
     it "reopens the remaining problem if any of the problems is unresolved" do
