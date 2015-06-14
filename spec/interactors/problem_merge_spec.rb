@@ -56,6 +56,13 @@ describe ProblemMerge do
       expect(comment_2.reload.problem).to eq problem
     end
 
+    it "sets the remaining problem's `opened_at` to the earliest value of all the open problems" do
+      problem.resolve!
+      expect {
+        problem_merge.merge
+      }.to change(problem, :opened_at).to(problem_2.opened_at)
+    end
+
     it "reopens the remaining problem if any of the problems is unresolved" do
       problem.resolve!
       expect {

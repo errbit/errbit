@@ -14,9 +14,14 @@ class ProblemMerge
       problem.reload # deference all associate objet to avoid delete him after
       ProblemDestroy.execute(problem)
     end
-    attributes = {}
-    attributes[:resolved] = false unless @problems.all?(&:resolved?)
-    merged_problem.update_attributes(attributes)
+
+    if problems.any?(&:unresolved?)
+      merged_problem.update_attributes({
+        resolved: false,
+        opened_at: problems.select(&:unresolved?).first.opened_at
+      })
+    end
+
     reset_cached_attributes
     merged_problem
   end
