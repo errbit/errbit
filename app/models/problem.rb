@@ -132,15 +132,7 @@ class Problem
   def cache_app_attributes
     if app
       self.app_name = app.name
-      self.last_deploy_at = if (last_deploy = app.deploys.where(:environment => self.environment).last)
-        last_deploy.created_at.utc
-      end
-      collection.
-        find('_id' => self.id).
-        update_one({'$set' => {
-          'app_name' => self.app_name,
-          'last_deploy_at' => self.last_deploy_at.try(:utc)
-        }})
+      self.last_deploy_at = app.last_deploy_at
     end
   end
 

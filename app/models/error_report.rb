@@ -40,24 +40,88 @@ class ErrorReport
   end
 
   def backtrace
-    @normalized_backtrace ||= Backtrace.find_or_create(raw: @backtrace)
+    @normalized_backtrace ||= Backtrace.find_or_create(@backtrace)
   end
 
   def generate_notice!
     return unless valid?
     return @notice if @notice
+
+    make_notice
+    error.notices << @notice
+    cache_attributes_on_problem
+    email_notification
+    services_notification
+    @notice
+  end
+
+  def make_notice
     @notice = Notice.new(
       message: message,
       error_class: error_class,
-      backtrace_id: backtrace.id,
+      backtrace: backtrace,
       request: request,
       server_environment: server_environment,
       notifier: notifier,
       user_attributes: user_attributes,
       framework: framework
     )
-    error.notices << @notice
-    @notice
+  end
+
+  # Update problem cache with information about this notice
+  def cache_attributes_on_problem
+    # increment notice count
+    message_digest = Digest::MD5.hexdigest(@notice.message)
+    host_digest = Digest::MD5.hexdigest(@notice.host)
+    user_agent_digest = Digest::MD5.hexdigest(@notice.user_agent_string)
+
+    @problem = Problem.where("_id" => @error.problem_id).find_one_and_update(
+      '$set' => {
+        'app_name' => app.name,
+        'environment' => @notice.environment_name,
+        'error_class' => @notice.error_class,
+        'last_notice_at' => @notice.created_at,
+        'message' => @notice.message,
+        'resolved' => false,
+        'resolved_at' => nil,
+        'where' => @notice.where,
+        "messages.#{message_digest}.value" => @notice.message,
+        "hosts.#{host_digest}.value" => @notice.host,
+        "user_agents.#{user_agent_digest}.value" => @notice.user_agent_string,
+      },
+      '$inc' => {
+        'notices_count' => 1,
+        "messages.#{message_digest}.count" => 1,
+        "hosts.#{host_digest}.count" => 1,
+        "user_agents.#{user_agent_digest}.count" => 1,
+      }
+    )
+  end
+
+  def similar_count
+    @similar_count ||= @problem.notices_count
+  end
+
+  # Send email notification if needed
+  def email_notification
+    return false unless app.emailable?
+    return false unless app.email_at_notices.include?(similar_count)
+    Mailer.err_notification(@notice).deliver
+  rescue => e
+    HoptoadNotifier.notify(e)
+  end
+
+  def should_notify?
+    app.notification_service.notify_at_notices.include?(0) ||
+      app.notification_service.notify_at_notices.include?(similar_count)
+  end
+
+  # Launch all notification define on the app associate to this notice
+  def services_notification
+    return true unless app.notification_service_configured? and should_notify?
+    app.notification_service.create_notification(problem)
+  rescue => e
+    HoptoadNotifier.notify(e)
   end
 
   ##
