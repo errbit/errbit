@@ -1,6 +1,7 @@
 # This file is copied to ~/spec when you run 'ruby script/generate rspec'
 # from the project root directory.
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] = 'test'
+ENV["ERRBIT_LOG_LEVEL"] = 'error'
 
 if ENV['COVERAGE']
   require 'coveralls'
@@ -21,7 +22,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/its'
 require 'email_spec'
-require 'database_cleaner'
 require 'xmpp4r'
 require 'xmpp4r/muc'
 require 'mongoid-rspec'

@@ -15,8 +15,16 @@ require 'hoptoad_notifier'
 # * <tt>:notifier</tt> - information to identify the source of the error report
 #
 class ErrorReport
-  attr_reader :error_class, :message, :request, :server_environment, :api_key,
-              :notifier, :user_attributes, :framework, :notice
+  attr_reader :api_key
+  attr_reader :error_class
+  attr_reader :framework
+  attr_reader :message
+  attr_reader :notice
+  attr_reader :notifier
+  attr_reader :problem
+  attr_reader :request
+  attr_reader :server_environment
+  attr_reader :user_attributes
 
   cattr_accessor :fingerprint_strategy do
     Fingerprint::Sha1
@@ -70,42 +78,16 @@ class ErrorReport
 
   # Update problem cache with information about this notice
   def cache_attributes_on_problem
-    # increment notice count
-    message_digest = Digest::MD5.hexdigest(@notice.message)
-    host_digest = Digest::MD5.hexdigest(@notice.host)
-    user_agent_digest = Digest::MD5.hexdigest(@notice.user_agent_string)
+    @problem = Problem.cache_notice(@error.problem_id, @notice)
 
-    @problem = Problem.where("_id" => @error.problem_id).find_one_and_update(
-      '$set' => {
-        'app_name' => app.name,
-        'environment' => @notice.environment_name,
-        'error_class' => @notice.error_class,
-        'last_notice_at' => @notice.created_at,
-        'message' => @notice.message,
-        'resolved' => false,
-        'resolved_at' => nil,
-        'where' => @notice.where,
-        "messages.#{message_digest}.value" => @notice.message,
-        "hosts.#{host_digest}.value" => @notice.host,
-        "user_agents.#{user_agent_digest}.value" => @notice.user_agent_string,
-      },
-      '$inc' => {
-        'notices_count' => 1,
-        "messages.#{message_digest}.count" => 1,
-        "hosts.#{host_digest}.count" => 1,
-        "user_agents.#{user_agent_digest}.count" => 1,
-      }
-    )
-  end
-
-  def similar_count
-    @similar_count ||= @problem.notices_count
+    # cache_notice returns the old problem, so the count is one higher
+    @similar_count = @problem.notices_count + 1
   end
 
   # Send email notification if needed
   def email_notification
     return false unless app.emailable?
-    return false unless app.email_at_notices.include?(similar_count)
+    return false unless app.email_at_notices.include?(@similar_count)
     Mailer.err_notification(@notice).deliver
   rescue => e
     HoptoadNotifier.notify(e)
@@ -113,7 +95,7 @@ class ErrorReport
 
   def should_notify?
     app.notification_service.notify_at_notices.include?(0) ||
-      app.notification_service.notify_at_notices.include?(similar_count)
+      app.notification_service.notify_at_notices.include?(@similar_count)
   end
 
   # Launch all notification define on the app associate to this notice

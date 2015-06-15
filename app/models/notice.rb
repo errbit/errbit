@@ -21,7 +21,7 @@ class Notice
   index(:err_id => 1, :created_at => 1, :_id => 1)
 
   before_save :sanitize
-  before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
+  before_destroy :problem_recache
 
   validates_presence_of :backtrace_id, :server_environment, :notifier
 
@@ -124,12 +124,8 @@ class Notice
 
   protected
 
-  def decrease_counter_cache
-    problem.inc(notices_count: -1) if err
-  end
-
-  def remove_cached_attributes_from_problem
-    problem.remove_cached_notice_attributes(self) if err
+  def problem_recache
+    problem.uncache_notice(self)
   end
 
   def sanitize

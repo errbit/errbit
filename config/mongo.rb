@@ -1,4 +1,7 @@
-Mongoid.logger.level = Logger.const_get Errbit::Config.log_level.upcase
+log_level = Logger.const_get Errbit::Config.log_level.upcase
+
+Mongoid.logger.level = log_level
+Mongo::Logger.level = log_level
 
 Mongoid.configure do |config|
   uri = if Errbit::Config.mongo_url == 'mongodb://localhost'

@@ -58,7 +58,11 @@ class App
     Err.where(
       :fingerprint => attrs[:fingerprint]
     ).first || (
-      problem = problems.create!(attrs.slice(:error_class, :environment))
+      problem = problems.create!(
+        error_class: attrs[:error_class],
+        environment: attrs[:environment],
+        app_name: name
+      )
       problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
     )
   end
@@ -180,7 +184,9 @@ class App
   protected
 
     def store_cached_attributes_on_problems
-      problems.each(&:cache_app_attributes)
+      Problem.where(:app_id => id).update_all(
+        app_name: name
+      )
     end
 
     def generate_api_key

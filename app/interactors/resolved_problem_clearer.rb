@@ -27,6 +27,6 @@ class ResolvedProblemClearer
   end
 
   def repair_database
-    Mongoid.default_session.command :repairDatabase => 1
+    Mongoid.default_client.command :repairDatabase => 1
   end
 end
