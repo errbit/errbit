@@ -38,8 +38,7 @@ RSpec.configure do |config|
   config.alias_example_to :fit, :focused => true
 
   config.before(:each) do
-    DatabaseCleaner[:mongoid].strategy = :truncation
-    DatabaseCleaner.clean
+    Mongoid.default_client.database.collections.each(&:drop)
   end
 
   config.include Haml, type: :helper

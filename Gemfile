@@ -85,7 +85,6 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'launchy'
-  gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
   gem 'test-unit', require: 'test/unit'
