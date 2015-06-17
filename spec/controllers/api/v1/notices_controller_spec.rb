@@ -49,7 +49,7 @@ describe Api::V1::NoticesController do
       it "should return the right fields for each notice" do
         get :index, {auth_token: @user.authentication_token}
         expect(response).to be_success
-        notice = JSON.load(response.body).first.fetch("notice")
+        notice = JSON.load(response.body).first
         expect(notice.keys).to match_array(%w{id created_at message error_class app_id app_name})
       end
 

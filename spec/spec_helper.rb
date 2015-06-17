@@ -34,6 +34,8 @@ Fabrication.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.infer_spec_type_from_file_location!
+
   config.mock_with :rspec
   config.include Devise::TestHelpers, type: :controller
   config.filter_run focused: true

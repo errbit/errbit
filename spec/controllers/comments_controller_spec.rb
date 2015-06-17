@@ -54,7 +54,7 @@ describe CommentsController do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_err_path(problem.app, problem) )
+        expect(response).to redirect_to( app_err_path(problem.app, err) )
       end
     end
   end

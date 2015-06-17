@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
 
   before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
@@ -17,7 +19,7 @@ class ApplicationController < ActionController::Base
   class StrongParametersWithEagerAttributesStrategy < DecentExposure::StrongParametersStrategy
     def attributes
       super
-      @attributes ||= params[inflector.param_key] || {}
+      @attributes ||= params[inflector.param_key] ? params[inflector.param_key].permit! : {}
     end
   end
 
@@ -54,4 +56,5 @@ protected
       sign_in user, store: false
     end
   end
+
 end

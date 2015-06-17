@@ -17,9 +17,17 @@ class Problem < ActiveRecord::Base
   before_create :cache_app_attributes
   after_initialize :default_values
 
-  scope :resolved, where(resolved: true)
-  scope :unresolved, where(resolved: false)
-  scope :ordered, order("last_notice_at desc")
+  def self.resolved
+    where(resolved: true)
+  end
+
+  def self.unresolved
+    where(resolved: false)
+  end
+
+  def self.ordered
+    order("last_notice_at desc")
+  end
 
   def self.for_apps(apps)
     return where(app_id: apps.pluck(:id)) if apps.is_a? ActiveRecord::Relation
@@ -44,14 +52,14 @@ class Problem < ActiveRecord::Base
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all
-      scoped
+      all
     else
       where(resolved: false)
     end
   end
 
   def self.in_env(env)
-    env.present? ? where(environment: env) : scoped
+    env.present? ? where(environment: env) : all
   end
 
   def notices
@@ -150,7 +158,7 @@ class Problem < ActiveRecord::Base
   end
 
   def to_param
-    errs.first.id
+    errs.first.to_param
   end
   
   def notices_since_reopened

@@ -232,7 +232,7 @@ describe ProblemsController do
     end
 
     it "should redirect back to problems page" do
-      request.env["Referer"] = problems_path
+      @request.env['HTTP_REFERER'] = problems_path
       put :resolve, app_id: @err.app.id, id: @err.id
       expect(response).to redirect_to(problems_path)
     end

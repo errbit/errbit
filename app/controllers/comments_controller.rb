@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_filter :find_err
 
   def create
-    @comment = Comment.new(params[:comment].merge(user_id: current_user.id))
+    @comment = Comment.new(params.require(:comment).permit!.merge(user_id: current_user.id))
     if @comment.valid?
       @err.comments << @comment
       @err.save

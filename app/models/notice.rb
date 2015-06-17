@@ -22,11 +22,25 @@ class Notice < ActiveRecord::Base
 
   validates_presence_of :backtrace, :server_environment, :notifier
 
-  scope :ordered, -> { reorder('created_at asc') }
-  scope :reverse_ordered, -> { reorder('created_at desc') }
-  scope :for_errs, lambda { |errs| where(err_id: errs.pluck(:id))}
-  scope :created_between, lambda { |start_date, end_date| where(created_at: start_date..end_date)}
-  scope :after, lambda { |time| where(arel_table[:created_at].gteq(time)) }
+  def self.ordered
+    reorder('created_at asc')
+  end
+
+  def self.reverse_ordered
+    reorder('created_at desc')
+  end
+
+  def self.for_errs(errs)
+    where(err_id: errs.pluck(:id))
+  end
+
+  def self.created_between(start_date, end_date)
+    where(created_at: start_date..end_date)
+  end
+
+  def self.after(time)
+    where(arel_table[:created_at].gteq(time))
+  end
 
   def default_values
     if self.new_record?

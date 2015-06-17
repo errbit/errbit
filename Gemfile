@@ -1,8 +1,25 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.18'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.1.11'
 
 gem 'pg'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.3'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
+# We can't upgrade because not compatible to jquery >= 1.9.
+# To do that, we need fix the rails.js
+gem 'jquery-rails', '~> 2.1.4'
+gem 'pjax_rails'
+gem 'underscore-rails'
+
+# See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'therubyracer', platform: :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
 
 gem 'devise'
 gem 'haml'
@@ -11,7 +28,6 @@ gem 'rack-ssl', require: 'rack/ssl'   # force SSL
 
 gem 'useragent'
 gem 'decent_exposure'
-gem 'strong_parameters'
 gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer', require: false
@@ -77,7 +93,7 @@ gem 'oj'
 gem 'multi_json'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.0'
   gem 'webmock', require: false
   gem 'airbrake', require: false
   gem 'pry-rails'
@@ -112,19 +128,4 @@ end
 
 group :heroku, :production do
   gem 'unicorn', require: false
-end
-
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'execjs'
-  gem 'therubyracer', platform: :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
-  gem 'uglifier',     '>= 1.0.3'
-  # We can't upgrade because not compatible to jquery >= 1.9.
-  # To do that, we need fix the rails.js
-  gem 'jquery-rails', '~> 2.1.4'
-  gem 'pjax_rails'
-  gem 'underscore-rails'
-  gem 'turbo-sprockets-rails3'
 end

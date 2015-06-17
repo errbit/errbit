@@ -129,6 +129,14 @@ describe "When a Notice is created" do
     describe "should send a notification at desired intervals" do
       let(:app) { Fabricate(:app, email_at_notices: [1], notification_service: Fabricate(:campfire_notification_service, notify_at_notices: [1,2]))}
 
+      before do
+        Errbit::Config.per_app_notify_at_notices = true
+      end
+
+      after do
+        Errbit::Config.per_app_notify_at_notices = false
+      end
+
       it "should create a campfire notification on first notice" do
         err = Fabricate(:err, problem: Fabricate(:problem, app: app))
         expect(app.notification_service).to receive(:create_notification)
@@ -137,12 +145,17 @@ describe "When a Notice is created" do
 
       it "should create a campfire notification on second notice" do
         err = Fabricate(:err, problem: Fabricate(:problem, app: app))
+        app.notification_service.stub(:create_notification)
+        Fabricate(:notice, err: err)
         expect(app.notification_service).to receive(:create_notification)
         Fabricate(:notice, err: err)
       end
 
       it "should not create a campfire notification on third notice" do
         err = Fabricate(:err, problem: Fabricate(:problem, app: app))
+        app.notification_service.stub(:create_notification)
+        Fabricate(:notice, err: err)
+        Fabricate(:notice, err: err)
         expect(app.notification_service).not_to receive(:create_notification)
         Fabricate(:notice, err: err)
       end

@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   has_many :apps, through: :watchers
   has_many :watchers
 
-  scope :with_not_blank_email, -> { where("email IS NOT NULL AND email != ''") }
+  def self.with_not_blank_email
+    where("email IS NOT NULL AND email != ''")
+  end
 
   if Errbit::Config.user_has_username
     validates_presence_of :username

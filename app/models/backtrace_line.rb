@@ -4,7 +4,9 @@ class BacktraceLine < ActiveRecord::Base
 
   belongs_to :backtrace
 
-  scope :in_app, where("file ~ '^\\[PROJECT_ROOT\\](?!(/vendor))/?'")
+  def self.in_app
+    where("file ~ '^\\[PROJECT_ROOT\\](?!(/vendor))/?'")
+  end
 
   delegate :app, to: :backtrace
 

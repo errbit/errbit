@@ -2,7 +2,7 @@ class Backtrace < ActiveRecord::Base
 
   has_many :notices
   has_one :notice
-  has_many :lines, class_name: "BacktraceLine", order: "created_at ASC"
+  has_many :lines, -> { order("created_at ASC") }, class_name: "BacktraceLine"
 
   after_initialize :generate_fingerprint, if: :new_record?
 

@@ -4,7 +4,7 @@ class DeduplicateErrs
     delegate :execute, to: "self.new"
   end
 
-  def execute(errs=Err.scoped)
+  def execute(errs=Err.all)
     Err.transaction do
       dedup_errs!(errs)
       destroy_errs_with_no_notices!

@@ -11,7 +11,7 @@ class Api::V1::ProblemsController < ApplicationController
   expose(:selected_problems) { Problem.where(id: params[:problems]) }
 
   def index
-    problems = Problem.scoped
+    problems = Problem.all
 
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
