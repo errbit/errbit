@@ -22,7 +22,7 @@ class ProblemsController < ApplicationController
   }
 
   expose(:problem) {
-    app.problems.find(params[:id])
+    ProblemDecorator.new app.problems.find(params[:id])
   }
 
   expose(:all_errs) {
@@ -50,7 +50,8 @@ class ProblemsController < ApplicationController
   def index; end
 
   def show
-    @notices  = problem.notices.reverse_ordered.page(params[:notice]).per(1)
+    @notices  = problem.object.notices.reverse_ordered
+      .page(params[:notice]).per(1)
     @notice   = @notices.first
     @comment = Comment.new
   end

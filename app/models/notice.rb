@@ -103,10 +103,6 @@ class Notice
     request['session'] || {}
   end
 
-  def in_app_backtrace_lines
-    backtrace_lines.in_app
-  end
-
   ##
   # TODO: Move on decorator maybe
   #

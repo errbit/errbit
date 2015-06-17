@@ -2,31 +2,23 @@ class Backtrace
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  IN_APP_PATH = %r{^\[PROJECT_ROOT\](?!(\/vendor))/?}
+
   field :fingerprint
+  field :lines
+
   index :fingerprint => 1
-
-  has_many :notices
-  has_one :notice
-
-  embeds_many :lines, :class_name => "BacktraceLine"
-
-  after_initialize :generate_fingerprint
-
-  delegate :app, :to => :notice
 
   def self.find_or_create(lines)
     fingerprint = generate_fingerprint(lines)
 
-    where(fingerprint: generate_fingerprint(lines)).
-      find_one_and_update(
-        { '$setOnInsert' => { fingerprint: fingerprint, lines: lines } },
-        { return_document: :after, upsert: true })
+    where(fingerprint: fingerprint).find_one_and_update(
+      { '$setOnInsert' => { fingerprint: fingerprint, lines: lines } },
+      { return_document: :after, upsert: true })
   end
 
-  def raw=(raw)
-    raw.compact.each do |raw_line|
-      lines << BacktraceLine.new(BacktraceLineNormalizer.new(raw_line).call)
-    end
+  def self.generate_fingerprint(lines)
+    Digest::SHA1.hexdigest(lines.map(&:to_s).join)
   end
 
   private

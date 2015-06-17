@@ -1,7 +1,7 @@
 # This file is copied to ~/spec when you run 'ruby script/generate rspec'
 # from the project root directory.
 ENV["RAILS_ENV"] = 'test'
-ENV["ERRBIT_LOG_LEVEL"] = 'error'
+ENV["ERRBIT_LOG_LEVEL"] = 'info'
 
 if ENV['COVERAGE']
   require 'coveralls'

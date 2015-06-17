@@ -76,7 +76,7 @@ class Problem
     host_digest = Digest::MD5.hexdigest(notice.host)
     user_agent_digest = Digest::MD5.hexdigest(notice.user_agent_string)
 
-    Problem.where('_id' => id).find_one_and_update(
+    Problem.where('_id' => id).find_one_and_update({
       '$set' => {
         'environment' => notice.environment_name,
         'error_class' => notice.error_class,
@@ -95,7 +95,7 @@ class Problem
         "hosts.#{host_digest}.count" => 1,
         "user_agents.#{user_agent_digest}.count" => 1,
       }
-    )
+    }, return_document: :after)
   end
 
   def uncache_notice(notice)

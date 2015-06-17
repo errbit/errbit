@@ -79,23 +79,20 @@ class ErrorReport
   # Update problem cache with information about this notice
   def cache_attributes_on_problem
     @problem = Problem.cache_notice(@error.problem_id, @notice)
-
-    # cache_notice returns the old problem, so the count is one higher
-    @similar_count = @problem.notices_count + 1
   end
 
   # Send email notification if needed
   def email_notification
     return false unless app.emailable?
-    return false unless app.email_at_notices.include?(@similar_count)
-    Mailer.err_notification(@notice).deliver
+    return false unless app.email_at_notices.include?(@problem.notices_count)
+    Mailer.err_notification(self).deliver
   rescue => e
     HoptoadNotifier.notify(e)
   end
 
   def should_notify?
     app.notification_service.notify_at_notices.include?(0) ||
-      app.notification_service.notify_at_notices.include?(@similar_count)
+      app.notification_service.notify_at_notices.include?(@problem.notices_count)
   end
 
   # Launch all notification define on the app associate to this notice

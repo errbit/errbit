@@ -52,8 +52,8 @@ feature "Create an application" do
     fill_in 'app_name', :with => 'My new app'
     click_on I18n.t('apps.new.add_app')
     page.has_content?(I18n.t('controllers.apps.flash.create.success'))
-    expect(App.where(:name => 'My new app').count).to eql 1
-    expect(App.where(:name => 'My new app 2').count).to eql 0
+    expect(App.where(:name => 'My new app').count).to eq 1
+    expect(App.where(:name => 'My new app 2').count).to eq 0
 
 
     click_on I18n.t('shared.navigation.apps')
@@ -62,8 +62,8 @@ feature "Create an application" do
     fill_in 'app_name', :with => 'My new app 2'
     click_on I18n.t('apps.edit.update')
     page.has_content?(I18n.t('controllers.apps.flash.update.success'))
-    expect(App.where(:name => 'My new app').count).to eql 0
-    expect(App.where(:name => 'My new app 2').count).to eql 1
+    expect(App.where(:name => 'My new app').count).to eq 0
+    expect(App.where(:name => 'My new app 2').count).to eq 1
 
   end
 

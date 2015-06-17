@@ -13,11 +13,11 @@ class Mailer < ActionMailer::Base
           'Precedence' => 'bulk',
           'Auto-Submitted' => 'auto-generated'
 
-  def err_notification(notice)
-    @notice   = notice
-    @app      = notice.app
+  def err_notification(error_report)
+    @notice   = NoticeDecorator.new error_report.notice
+    @app      = AppDecorator.new error_report.app
 
-    count = @notice.similar_count
+    count = error_report.problem.notices_count
     count = count > 1 ? "(#{count}) " : ""
 
     errbit_headers 'App' => @app.name,
@@ -30,7 +30,7 @@ class Mailer < ActionMailer::Base
 
   def deploy_notification(deploy)
     @deploy   = deploy
-    @app  = deploy.app
+    @app  = AppDecorator.new deploy.app
 
     errbit_headers 'App' => @app.name,
                    'Environment' => @deploy.environment,
@@ -44,7 +44,7 @@ class Mailer < ActionMailer::Base
   def comment_notification(comment)
     @comment  = comment
     @user     = comment.user
-    @problem  = comment.err
+    @problem  = ProblemDecorator.new comment.err
     @notice   = @problem.notices.first
     @app      = @problem.app
 

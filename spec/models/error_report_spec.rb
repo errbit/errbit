@@ -21,9 +21,7 @@ describe ErrorReport do
     Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
   }
 
-  let(:error_report) {
-    ErrorReport.new(xml)
-  }
+  let(:error_report) { ErrorReport.new(xml) }
 
   let!(:app) {
     Fabricate(
@@ -210,14 +208,13 @@ describe ErrorReport do
   end
 
   it 'find the correct err for the notice' do
-    err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true))
-
-    allow(error_report).to receive(:fingerprint).and_return(err.fingerprint)
+    error_report.generate_notice!
+    error_report.problem.resolve!
 
     expect {
-      error_report.generate_notice!
+      ErrorReport.new(xml).generate_notice!
     }.to change {
-      error_report.error.resolved?
+      error_report.problem.reload.resolved?
     }.from(true).to(false)
   end
 
@@ -227,6 +224,7 @@ describe ErrorReport do
       app.watchers.build(:email => 'foo@example.com')
       app.save
     end
+
     it 'send email' do
       notice = error_report.generate_notice!
       email = ActionMailer::Base.deliveries.last
