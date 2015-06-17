@@ -208,7 +208,7 @@ GEM
     orm_adapter (0.4.0)
     oruen_redmine_client (0.0.1)
       activeresource (>= 2.3.0)
-    pg (0.17.1)
+    pg (0.18.2)
     pivotal-tracker (0.5.13)
       builder
       crack
