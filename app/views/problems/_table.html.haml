@@ -4,7 +4,7 @@
     %thead
       %tr
         %th= check_box_tag "toggle_problems_checkboxes"
-        %th= link_for_sort "App"
+        %th.main-column= link_for_sort "App"
         %th= link_for_sort "What &amp; Where".html_safe, "message"
         %th= link_for_sort "Latest", "last_notice_at"
         %th= link_for_sort "Deploy", "last_deploy_at"

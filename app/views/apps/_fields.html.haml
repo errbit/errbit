@@ -5,7 +5,7 @@
   = f.text_field :name, :class => "form-control"
 - unless app.new_record?
   .form-group
-    %label.control-label Api Key
+    %label.control-label API Key: 
     %span= app.api_key
     = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app), :class => 'button', :method => 'post'
 .form-group

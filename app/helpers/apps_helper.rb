@@ -2,11 +2,10 @@ module AppsHelper
   def link_to_copy_attributes_from_other_app
     if App.count > 1
       html = link_to('copy settings from another app', '#', :class => 'btn btn-primary copy_config')
-      # TODO: re-design
       html << select("duplicate", "app",
                      App.all.asc(:name).reject{|a| a == @app }.
-                     collect{|p| [ p.name, p.id ] }, {:include_blank => "[choose app]"},
-                     {:class => "choose_other_app", :style => "display: none;"})
+                     collect{|p| [ p.name, p.id ] }, {:include_blank => "Choose App"},
+                     {:class => "choose_other_app form-control", :style => "display: none;"})
       return html
     end
   end
