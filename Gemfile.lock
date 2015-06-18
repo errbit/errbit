@@ -130,7 +130,7 @@ GEM
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
-    execjs (2.0.2)
+    execjs (2.5.2)
     fabrication (2.9.0)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
@@ -373,7 +373,7 @@ GEM
     tins (0.12.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.2.1)
+    uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     underscore-rails (1.5.2)
@@ -463,6 +463,7 @@ DEPENDENCIES
   rspec-its
   rspec-rails (~> 3.0)
   rushover
+  sass
   sass-rails
   test-unit
   timecop
