@@ -112,9 +112,10 @@ group :heroku, :production do
   gem 'unicorn', require: false, platform: 'ruby'
 end
 
+gem 'uglifier'
+gem 'sass'
 gem 'sass-rails'
 gem 'coffee-rails'
-gem 'uglifier'
 # We can't upgrade because not compatible to jquery >= 1.9.
 # To do that, we need fix the rails.js
 gem 'jquery-rails', '~> 2.1.4'
