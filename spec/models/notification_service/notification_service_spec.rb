@@ -1,4 +1,4 @@
-describe NotificationService, type: 'model' do
+describe NotificationServices, type: 'model' do
 
   let(:notice) { Fabricate :notice }
   let(:notification_service) { Fabricate :notification_service, :app => notice.app }

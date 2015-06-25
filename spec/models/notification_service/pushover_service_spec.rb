@@ -1,4 +1,4 @@
-describe NotificationService::PushoverService, type: 'model' do
+describe NotificationServices::PushoverService, type: 'model' do
   it "it should send a notification to Pushover" do
     # setup
     notice = Fabricate :notice

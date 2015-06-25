@@ -1,4 +1,4 @@
-describe NotificationService::SlackService, type: 'model' do
+describe NotificationServices::SlackService, type: 'model' do
   it "it should send a notification to Slack with hook url" do
     # setup
     notice = Fabricate :notice

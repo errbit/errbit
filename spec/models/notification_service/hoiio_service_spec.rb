@@ -1,4 +1,4 @@
-describe NotificationService::HoiioService, type: 'model' do
+describe NotificationServices::HoiioService, type: 'model' do
   it "it should send a notification to hoiio" do
     # setup
     notice = Fabricate :notice

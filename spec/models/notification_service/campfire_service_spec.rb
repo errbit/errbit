@@ -1,4 +1,4 @@
-describe NotificationService::CampfireService, type: 'model' do
+describe NotificationServices::CampfireService, type: 'model' do
   it "it should send a notification to campfire" do
     # setup
     notice = Fabricate :notice

@@ -1,4 +1,4 @@
-describe NotificationService::GtalkService, type: 'model' do
+describe NotificationServices::GtalkService, type: 'model' do
   it "it should send a notification to gtalk" do
     # setup
     notice = Fabricate :notice
