@@ -37,6 +37,12 @@
                 %p.monospace
                   = @notice.app_version
                 %br
+              %br
+              - if @notice.server_environment.present? && @notice.server_environment["hostname"].present?
+                %p.heading APP SERVER:
+                %p.monospace
+                  = @notice.server_environment["hostname"]
+                %br
               %p.heading URL:
               %p.monospace
                 - if @notice.request['url'].present?

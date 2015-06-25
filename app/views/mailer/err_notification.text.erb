@@ -24,6 +24,12 @@ APP VERSION:
 <%= @notice.app_version %>
 <%- end %>
 
+<%- if @notice.server_environment.present? && @notice.server_environment["hostname"].present? %>
+APP SERVER:
+
+<%= @notice.server_environment["hostname"] %>
+<%- end %>
+
 URL:
 
 <%= @notice.request['url'] %>
