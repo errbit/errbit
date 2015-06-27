@@ -1,6 +1,6 @@
 %ul.nav.nav-sidebar.nav-user
   %li.dropdown
-    %a(class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false")
+    %a(class="dropdown-toggle username" data-toggle="dropdown" role="button" aria-expanded="false")
       = gravatar_tag current_user.email, :s => 38 if Errbit::Config.use_gravatar
       = current_user.email
       %i.caret

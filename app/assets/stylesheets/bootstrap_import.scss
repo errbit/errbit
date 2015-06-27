@@ -53,9 +53,33 @@ td.count { text-align: center; }
   left: 0;
   z-index: 1000;
   display: block;
-  padding: 0 20px;
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media (max-width: 991px) {
+    position: relative;
+    top: inherit;
+    bottom: inherit;
+    left: inherit;
+
+    padding: 0 20px;
+  }
+}
+
+
+@media (max-width: 1274px) and (min-width: 991px) {
+  .username {
+    padding: 17px 5px !important;
+    text-align: center;
+
+    .gravatar {
+      margin: 0 auto;
+    }
+
+    .caret {
+      display: none;
+    }
+  }
 }
 
 #navbar-brand {
@@ -125,6 +149,11 @@ td.count { text-align: center; }
   padding-bottom: 20px;
   padding-right: 40px;
   padding-left: 40px;
+
+  @media (max-width: 991px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 #flash-messages {
