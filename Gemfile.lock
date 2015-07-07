@@ -239,6 +239,8 @@ GEM
     rack-ssl-enforcer (0.2.6)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-utf8_sanitizer (1.3.0)
+      rack (~> 1.0)
     rails (4.1.11)
       actionmailer (= 4.1.11)
       actionpack (= 4.1.11)
@@ -396,6 +398,7 @@ DEPENDENCIES
   quiet_assets
   rack-ssl
   rack-ssl-enforcer
+  rack-utf8_sanitizer
   rails (= 4.1.11)
   rails_autolink
   redcarpet

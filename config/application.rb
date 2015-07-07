@@ -33,5 +33,9 @@ module Errbit
 
     # Configure Devise mailer to use our mailer layout.
     config.to_prepare { Devise::Mailer.layout "mailer" }
+
+    # Respond with a 400 when requests are malformed
+    # http://stackoverflow.com/a/24727310/731300
+    config.middleware.insert 0, Rack::UTF8Sanitizer
   end
 end

@@ -25,6 +25,7 @@ gem 'devise'
 gem 'haml'
 gem 'htmlentities'
 gem 'rack-ssl', require: 'rack/ssl'   # force SSL
+gem 'rack-utf8_sanitizer', require: 'rack/utf8_sanitizer'
 
 gem 'useragent'
 gem 'decent_exposure'
