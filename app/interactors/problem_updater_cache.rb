@@ -56,6 +56,9 @@ private
       user_agents: attribute_count(:user_agent_string, user_agents)
     ) if notice
     problem.update_attributes!(attrs)
+  rescue Exception
+    $!.additional_information["attrs"] = attrs
+    raise
   end
 
   def notices
