@@ -66,7 +66,7 @@ class Notice < ActiveRecord::Base
   end
 
   def environment_name
-    server_environment['server-environment'] || server_environment['environment-name']
+    String(server_environment['server-environment'] || server_environment['environment-name'])
   end
 
   def component
