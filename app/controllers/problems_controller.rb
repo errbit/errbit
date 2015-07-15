@@ -50,9 +50,9 @@ class ProblemsController < ApplicationController
   def index; end
 
   def show
-    @notices  = problem.object.notices.reverse_ordered
+    @notices = problem.object.notices.reverse_ordered
       .page(params[:notice]).per(1)
-    @notice   = @notices.first
+    @notice  = NoticeDecorator.new @notices.first
     @comment = Comment.new
   end
 

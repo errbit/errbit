@@ -3,6 +3,7 @@ class Backtrace
   include Mongoid::Timestamps
 
   IN_APP_PATH = %r{^\[PROJECT_ROOT\](?!(\/vendor))/?}
+  GEMS_PATH = %r{\[GEM_ROOT\]\/gems\/([^\/]+)}
 
   field :fingerprint
   field :lines
