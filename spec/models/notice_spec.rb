@@ -105,4 +105,18 @@ describe Notice, type: 'model' do
       expect(notice.request).to eq ({})
     end
   end
+
+  describe "env_vars" do
+    it "returns the cgi-data" do
+      notice = Notice.new
+      notice.request = { 'cgi-data' => { 'ONE' => 'TWO' } }
+      expect(notice.env_vars).to eq({ 'ONE' => 'TWO' })
+    end
+
+    it "always returns a hash" do
+      notice = Notice.new
+      notice.request = { 'cgi-data' => [] }
+      expect(notice.env_vars).to eq({})
+    end
+  end
 end

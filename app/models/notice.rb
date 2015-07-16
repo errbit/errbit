@@ -94,7 +94,8 @@ class Notice
   end
 
   def env_vars
-    request['cgi-data'] || {}
+    vars = request['cgi-data']
+    vars.is_a?(Hash) ? vars : {}
   end
 
   def params
