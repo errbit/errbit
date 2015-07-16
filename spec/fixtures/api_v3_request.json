@@ -32,7 +32,5 @@
   },
   "params":{"returnTo":"dashboard"},
   "environment":{"navigator_vendor":"Google Inc."},
-  "session":{"isAdmin":true},
-  "key":"a3969bfbf65f073921e",
-  "project_id":"a3969bfbf65f073921e"
+  "session":{"isAdmin":true}
 }

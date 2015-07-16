@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     end
   end
 
-  match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post, :options]
+  match '/api/v3/projects/:project_id/create-notice' => 'api/v3/notices#create', via: [:post]
 
   root :to => 'apps#index'
 end

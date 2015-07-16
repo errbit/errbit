@@ -5,28 +5,24 @@ class Api::V3::NoticesController < ApplicationController
   respond_to :json
 
   def create
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
+    params.merge!(JSON.parse(request.raw_post) || {})
+    report = AirbrakeApi::V3::NoticeParser.new(params).report
 
-    if !request.options?
-      report = AirbrakeApi::V3::NoticeParser.new(params).report
-
-      if report.valid?
-        if report.should_keep?
-          report.generate_notice!
-          render json: {
-            notice: {
-              id: report.notice.id
-            }
-          }
-        else
-          render text: 'Notice for old app version ignored'
-        end
+    if report.valid?
+      if report.should_keep?
+        report.generate_notice!
+        render json: {
+          id: report.notice.id,
+          url: app_problem_path(
+            report.app,
+            report.error.problem_id,
+            only_path: false)
+        }
       else
-        render text: 'Your API key is unknown', status: 422
+        render text: 'Notice for old app version ignored'
       end
     else
-      render nothing: true
+      render text: 'Your API key is unknown', status: 422
     end
   rescue AirbrakeApi::ParamsError
     render text: 'Invalid request', status: 400
