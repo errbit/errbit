@@ -39,6 +39,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Mongoid.default_client.database.collections.each(&:drop)
+    Mongoid::Tasks::Database.create_indexes
   end
 
   config.include Haml, type: :helper

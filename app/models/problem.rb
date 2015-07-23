@@ -42,6 +42,14 @@ class Problem
   index :resolved_at => 1
   index :notices_count => 1
 
+  index({
+    error_class: "text",
+    where: "text",
+    message: "text",
+    app_name: "text",
+    environment: "text"
+  }, default_language: "english")
+
   belongs_to :app
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
   has_many :comments, :inverse_of => :err, :dependent => :destroy
@@ -231,13 +239,7 @@ class Problem
   end
 
   def self.search(value)
-    any_of(
-      {:error_class => /#{value}/i},
-      {:where => /#{value}/i},
-      {:message => /#{value}/i},
-      {:app_name => /#{value}/i},
-      {:environment => /#{value}/i}
-    )
+    Problem.where({'$text' => {'$search' => value}})
   end
 
   private

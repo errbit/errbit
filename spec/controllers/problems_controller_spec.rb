@@ -138,7 +138,7 @@ describe ProblemsController, type: 'controller' do
     end
 
     it "searches problems for given string" do
-      get :search, :search => "Most important"
+      get :search, :search => "\"Most important\""
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to_not include(@problem2)
     end
