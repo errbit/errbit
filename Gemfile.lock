@@ -1,13 +1,3 @@
-GIT
-  remote: git@github.com:mongoid/mongoid.git
-  revision: f56b96b75eef6d71102c1ef89f3600d35d277e69
-  specs:
-    mongoid (5.0.0)
-      activemodel (~> 4.0)
-      mongo (~> 2.0)
-      origin (~> 2.1)
-      tzinfo (>= 0.3.37)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,8 +44,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (3.1.1)
-    bson (3.1.1-java)
+    bson (3.2.0)
+    bson (3.2.0-java)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -183,8 +173,13 @@ GEM
     mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.7.0)
-    mongo (2.0.5)
+    mongo (2.1.0.beta)
       bson (~> 3.0)
+    mongoid (5.0.0.beta)
+      activemodel (~> 4.0)
+      mongo (= 2.1.0.beta)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
     mongoid-rspec (1.10.0)
       mongoid (>= 3.0.1)
       rake
@@ -426,7 +421,7 @@ DEPENDENCIES
   kaminari (>= 0.14.1)
   launchy
   meta_request
-  mongoid!
+  mongoid (= 5.0.0.beta)
   mongoid-rspec
   omniauth-github
   pjax_rails

@@ -8,7 +8,7 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'mongoid', git: 'git@github.com:mongoid/mongoid.git'
+gem 'mongoid', '5.0.0.beta'
 
 gem 'devise'
 gem 'haml'
