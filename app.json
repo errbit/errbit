@@ -1,0 +1,17 @@
+{
+  "name": "errbit",
+  "description": "The open source error catcher that's Airbrake API compliant",
+  "keywords": ["productivity", "tools", "error tracking"],
+  "repository": "https://github.com/errbit/errbit",
+  "env": {
+    "GEMFILE_RUBY_VERSION": "2.2.0",
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    }
+  },
+  "addons": [
+    "mongolab:sandbox",
+    "scheduler:standard",
+    "sendgrid:starter"
+  ]
+}
