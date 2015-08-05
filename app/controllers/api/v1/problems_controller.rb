@@ -24,7 +24,7 @@ class Api::V1::ProblemsController < ApplicationController
     end
 
     if params[:open].to_s.downcase == "true"
-      problems = problems.where(resolved_at: nil)
+      problems = problems.unresolved
     end
 
     presenter = ProblemPresenter

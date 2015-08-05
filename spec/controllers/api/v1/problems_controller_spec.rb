@@ -15,8 +15,8 @@ describe Api::V1::ProblemsController do
       before do
         @app_1 = Fabricate(:app)
         @app_2 = Fabricate(:app)
-        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), resolved_at: Date.new(2012, 8, 02))
-        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), resolved_at: Date.new(2012, 8, 21))
+        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), resolved_at: Date.new(2012, 8, 02), resolved: true)
+        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), resolved_at: Date.new(2012, 8, 21), resolved: true)
         Fabricate(:problem_with_err, app: @app_1, first_notice_at: Date.new(2012, 8, 21))
         Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 30))
       end
