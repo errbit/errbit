@@ -47,7 +47,7 @@ class ProblemPresenter
       notices_count: notices_count.to_i,
       opened_at: opened_at && Time.zone.parse(opened_at),
       resolved: resolved == "t",
-      resolved_at: resolved_at && Time.zone.parse(resolved_at),
+      resolved_at: resolved == "t" ? (resolved_at && Time.zone.parse(resolved_at)) : nil,
       where: where,
       url: err_ids.any? && controller.app_err_url(app_id: app_id, id: err_ids.first)
     } }
@@ -69,7 +69,7 @@ class ProblemPresenter
       notices_count: problem.notices_count,
       opened_at: problem.opened_at,
       resolved: problem.resolved?,
-      resolved_at: problem.resolved_at,
+      resolved_at: problem.resolved? ? problem.resolved_at : nil,
       where: problem.where,
       url: controller.app_problem_url(problem.app, problem) }
   end
