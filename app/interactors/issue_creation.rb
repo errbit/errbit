@@ -5,11 +5,11 @@ class IssueCreation
 
   delegate :app, :to => :problem
 
-  def initialize(problem, user, tracker_name, request)
+  def initialize(problem, user, tracker_name, request = nil)
     @problem = problem
     @user    = user
     @tracker_name = tracker_name
-    IssueTracker.update_url_options(request)
+    IssueTracker.update_url_options(request) if request.present?
   end
 
   def execute
