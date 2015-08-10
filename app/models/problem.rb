@@ -42,6 +42,7 @@ class Problem
   validates_presence_of :environment
 
   before_create :cache_app_attributes
+  before_save :truncate_message
 
   scope :resolved, ->{ where(:resolved => true) }
   scope :unresolved, ->{ where(:resolved => false) }
@@ -138,6 +139,10 @@ class Problem
                 .update({'$set' => {'app_name' => self.app_name,
                           'last_deploy_at' => self.last_deploy_at.try(:utc)}})
     end
+  end
+
+  def truncate_message
+    self.message = self.message[0, 1000] if self.message
   end
 
   def remove_cached_notice_attributes(notice)
