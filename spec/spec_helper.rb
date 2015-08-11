@@ -31,6 +31,8 @@ require 'errbit_plugin/mock_issue_tracker'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+Mongoid::Config.truncate!
+Mongoid::Tasks::Database.create_indexes
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
@@ -38,8 +40,7 @@ RSpec.configure do |config|
   config.alias_example_to :fit, :focused => true
 
   config.before(:each) do
-    Mongoid.default_client.database.collections.each(&:drop)
-    Mongoid::Tasks::Database.create_indexes
+    Mongoid::Config.truncate!
   end
 
   config.include Haml, type: :helper
