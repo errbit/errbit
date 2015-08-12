@@ -19,3 +19,4 @@ bundle
 coverage
 *#
 .ruby-version
+.rbenv-gemsets

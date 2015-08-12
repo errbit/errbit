@@ -23,6 +23,7 @@ class Notice
   after_create :cache_attributes_on_problem, :unresolve_problem
   after_create :email_notification
   after_create :services_notification
+  after_create :issue_creation
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -194,5 +195,9 @@ class Notice
     HoptoadNotifier.notify(e)
   end
 
+  def issue_creation
+    return true unless app.auto_issue_creation && problem.notices_count < 2
+    issue_creation = IssueCreation.new(problem, User.first, app.issue_tracker)
+    issue_creation.execute
+  end
 end
-
