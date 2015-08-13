@@ -14,7 +14,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def message_for_slack(problem)
-    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem_url(problem)}"
+    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem.url}"
   end
 
   def post_payload(problem)
