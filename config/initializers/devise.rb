@@ -243,6 +243,13 @@ Devise.setup do |config|
       :skip_info => true
   end
 
+  if Errbit::Config.google_authentication || Rails.env.test?
+    config.omniauth :google_oauth2,
+      Errbit::Config.google_client_id,
+      Errbit::Config.google_client_secret,
+      { }
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

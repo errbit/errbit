@@ -53,6 +53,8 @@ gem 'flowdock'
 # ---------------------------------------
 # GitHub OAuth
 gem 'omniauth-github'
+# Google OAuth
+gem 'omniauth-google-oauth2'
 
 gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'
