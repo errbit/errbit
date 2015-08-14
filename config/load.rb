@@ -34,6 +34,12 @@ Errbit::Config = Configurator.run({
   github_org_id:             ['GITHUB_ORG_ID'],
   github_access_scope:       ['GITHUB_ACCESS_SCOPE'],
 
+  # google
+  google_authentication:     ['GOOGLE_AUTHENTICATION'],
+  google_client_id:          ['GOOGLE_CLIENT_ID'],
+  google_client_secret:      ['GOOGLE_SECRET'],
+  google_domain_scope:       ['GOOGLE_DOMAIN_SCOPE'],
+
   email_delivery_method:     ['EMAIL_DELIVERY_METHOD', -> (values) {
     values[:email_delivery_method] && values[:email_delivery_method].to_sym
   }],

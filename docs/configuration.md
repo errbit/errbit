@@ -73,6 +73,15 @@ In order of precedence Errbit uses:
 <dt>GITHUB_ACCESS_SCOPE
 <dd>OAuth scope to request from users when they sign-in through github
 <dd>defaults to [repo]
+<dt>GOOGLE_AUTHENTICATION
+<dd>Allow Google sign-in via OAuth
+<dd>defaults to false
+<dt>GOOGLE_CLIENT_ID
+<dd>Client id of your Google application
+<dt>GOOGLE_SECRET
+<dd>Secret key for your Google application
+<dt>GOOGLE_DOMAIN_SCOPE
+<dd>OAuth user domain scope to request from users when they sign-in through Google
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER
