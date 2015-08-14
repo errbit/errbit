@@ -33,7 +33,9 @@ class Deploy
     end
 
     def store_cached_attributes_on_problems
-      Problem.where(:app_id => app.id).each(&:cache_app_attributes)
+      Problem.where(:app_id => app.id).update_all(
+        last_deploy_at: created_at
+      )
     end
 
     def deliver_email

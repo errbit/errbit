@@ -26,7 +26,7 @@ class NotificationService
   else
     Fields = []
   end
-       
+
   def notify_at_notices
     Errbit::Config.per_app_notify_at_notices ? super : Errbit::Config.notify_at_notices
   end

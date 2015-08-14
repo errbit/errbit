@@ -6,7 +6,7 @@ describe "issue_trackers/issue.md.erb", type: 'view' do
   }
 
   before do
-    allow(view).to receive(:problem).and_return(problem)
+    allow(view).to receive(:problem).and_return(ProblemDecorator.new(problem))
   end
 
   it "has the problem url" do

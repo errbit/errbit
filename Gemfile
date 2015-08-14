@@ -8,10 +8,8 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'moped', '~> 2.0.2'
-gem 'mongoid', '~> 4.0.0'
+gem 'mongoid', '5.0.0.beta'
 
-gem 'mongoid_rails_migrations'
 gem 'devise'
 gem 'haml'
 gem 'htmlentities'
@@ -78,7 +76,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '~> 3.3'
   gem 'rspec-rails', '~> 3.0', require: false
   gem 'rspec-activemodel-mocks'
   gem 'rspec-its'
@@ -87,7 +85,6 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'launchy'
-  gem 'database_cleaner'
   gem 'email_spec'
   gem 'timecop'
   gem 'test-unit', require: 'test/unit'

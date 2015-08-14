@@ -1,6 +1,8 @@
 # load default ENV values (without overwriting any existing value)
 Dotenv.load('.env.default')
 
+require_relative '../lib/configurator'
+
 # map config keys to environment variables
 #
 # We use the first non-nil environment variable in the list. If the last array
@@ -19,6 +21,8 @@ Errbit::Config = Configurator.run({
   per_app_email_at_notices:  ['ERRBIT_PER_APP_EMAIL_AT_NOTICES'],
   notify_at_notices:         ['ERRBIT_NOTIFY_AT_NOTICES'],
   per_app_notify_at_notices: ['ERRBIT_PER_APP_NOTIFY_AT_NOTICES'],
+  log_location:              ['ERRBIT_LOG_LOCATION'],
+  log_level:                 ['ERRBIT_LOG_LEVEL'],
 
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],

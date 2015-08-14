@@ -15,8 +15,16 @@ require 'hoptoad_notifier'
 # * <tt>:notifier</tt> - information to identify the source of the error report
 #
 class ErrorReport
-  attr_reader :error_class, :message, :request, :server_environment, :api_key,
-              :notifier, :user_attributes, :framework, :notice
+  attr_reader :api_key
+  attr_reader :error_class
+  attr_reader :framework
+  attr_reader :message
+  attr_reader :notice
+  attr_reader :notifier
+  attr_reader :problem
+  attr_reader :request
+  attr_reader :server_environment
+  attr_reader :user_attributes
 
   cattr_accessor :fingerprint_strategy do
     Fingerprint::Sha1
@@ -40,24 +48,59 @@ class ErrorReport
   end
 
   def backtrace
-    @normalized_backtrace ||= Backtrace.find_or_create(raw: @backtrace)
+    @normalized_backtrace ||= Backtrace.find_or_create(@backtrace)
   end
 
   def generate_notice!
     return unless valid?
     return @notice if @notice
+
+    make_notice
+    error.notices << @notice
+    cache_attributes_on_problem
+    email_notification
+    services_notification
+    @notice
+  end
+
+  def make_notice
     @notice = Notice.new(
       message: message,
       error_class: error_class,
-      backtrace_id: backtrace.id,
+      backtrace: backtrace,
       request: request,
       server_environment: server_environment,
       notifier: notifier,
       user_attributes: user_attributes,
       framework: framework
     )
-    error.notices << @notice
-    @notice
+  end
+
+  # Update problem cache with information about this notice
+  def cache_attributes_on_problem
+    @problem = Problem.cache_notice(@error.problem_id, @notice)
+  end
+
+  # Send email notification if needed
+  def email_notification
+    return false unless app.emailable?
+    return false unless app.email_at_notices.include?(@problem.notices_count)
+    Mailer.err_notification(self).deliver
+  rescue => e
+    HoptoadNotifier.notify(e)
+  end
+
+  def should_notify?
+    app.notification_service.notify_at_notices.include?(0) ||
+      app.notification_service.notify_at_notices.include?(@problem.notices_count)
+  end
+
+  # Launch all notification define on the app associate to this notice
+  def services_notification
+    return true unless app.notification_service_configured? and should_notify?
+    app.notification_service.create_notification(problem)
+  rescue => e
+    HoptoadNotifier.notify(e)
   end
 
   ##

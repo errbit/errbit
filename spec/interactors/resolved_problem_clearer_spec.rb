@@ -19,16 +19,16 @@ describe ResolvedProblemClearer do
         }
       end
       it 'not repair database' do
-        allow(Mongoid.default_session).to receive(:command).and_call_original
-        expect(Mongoid.default_session).to_not receive(:command).with({:repairDatabase => 1})
+        allow(Mongoid.default_client).to receive(:command).and_call_original
+        expect(Mongoid.default_client).to_not receive(:command).with({:repairDatabase => 1})
         resolved_problem_clearer.execute
       end
     end
 
     context "with problem resolve" do
       before do
-        allow(Mongoid.default_session).to receive(:command).and_call_original
-        allow(Mongoid.default_session).to receive(:command).with({:repairDatabase => 1})
+        allow(Mongoid.default_client).to receive(:command).and_call_original
+        allow(Mongoid.default_client).to receive(:command).with({:repairDatabase => 1})
         problems.first.resolve!
         problems.second.resolve!
       end
@@ -44,7 +44,7 @@ describe ResolvedProblemClearer do
       end
 
       it 'repair database' do
-        expect(Mongoid.default_session).to receive(:command).with({:repairDatabase => 1})
+        expect(Mongoid.default_client).to receive(:command).with({:repairDatabase => 1})
         resolved_problem_clearer.execute
       end
     end

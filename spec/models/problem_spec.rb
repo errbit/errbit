@@ -40,10 +40,10 @@ describe Problem, type: 'model' do
       expect(problem).to_not be_nil
 
       notice1 = Fabricate(:notice, :err => err)
-      expect(problem.last_notice_at).to eq notice1.created_at
+      expect(problem.last_notice_at).to eq notice1.reload.created_at
 
       notice2 = Fabricate(:notice, :err => err)
-      expect(problem.last_notice_at).to eq notice2.created_at
+      expect(problem.last_notice_at).to eq notice2.reload.created_at
     end
   end
 
@@ -266,12 +266,6 @@ describe Problem, type: 'model' do
       expect(@problem.messages).to eq ({})
     end
 
-    it "adding a notice adds a string to #messages" do
-      expect {
-        Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.to change(@problem, :messages).from({}).to({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}})
-    end
-
     it "removing a notice removes string from #messages" do
       Fabricate(:notice, :err => @err, :message => 'ERR 1')
       expect {
@@ -299,12 +293,6 @@ describe Problem, type: 'model' do
       expect(@problem.hosts).to eq ({})
     end
 
-    it "adding a notice adds a string to #hosts" do
-      expect {
-        Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
-      }.to change(@problem, :hosts).from({}).to({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}})
-    end
-
     it "removing a notice removes string from #hosts" do
       Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
       expect {
@@ -323,12 +311,6 @@ describe Problem, type: 'model' do
 
     it "#user_agents should be empty by default" do
       expect(@problem.user_agents).to eq ({})
-    end
-
-    it "adding a notice adds a string to #user_agents" do
-      expect {
-        Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      }.to change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}})
     end
 
     it "removing a notice removes string from #user_agents" do

@@ -1,7 +1,7 @@
 describe Fingerprint::Sha1, type: 'model' do
   context '#generate' do
     let(:backtrace) {
-      Backtrace.create(:raw => [
+      Backtrace.find_or_create([
         {"number"=>"425", "file"=>"[GEM_ROOT]/gems/activesupport-3.0.0.rc/lib/active_support/callbacks.rb", "method"=>"_run__2115867319__process_action__262109504__callbacks"},
         {"number"=>"404", "file"=>"[GEM_ROOT]/gems/activesupport-3.0.0.rc/lib/active_support/callbacks.rb", "method"=>"send"},
         {"number"=>"404", "file"=>"[GEM_ROOT]/gems/activesupport-3.0.0.rc/lib/active_support/callbacks.rb", "method"=>"_run_process_action_callbacks"}
@@ -19,11 +19,9 @@ describe Fingerprint::Sha1, type: 'model' do
 
     context "with different backtrace with only last line change" do
       let(:backtrace_2) {
-        backtrace
-        backtrace.lines.last.number = 401
-        backtrace.send(:generate_fingerprint)
-        backtrace.save
-        backtrace
+        new_lines = backtrace.lines.dup
+        new_lines.last[:number] = 401
+        Backtrace.find_or_create backtrace.lines
       }
       it 'should not same fingerprint' do
         expect(

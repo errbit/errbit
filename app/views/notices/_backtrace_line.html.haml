@@ -1,6 +1,6 @@
 %tr{:class => defined?(row_class) && row_class}
   %td.line{:class => line.in_app? && 'in-app' }
-    = link_to_source_file(line) do
+    = line.link_to_source_file(app) do
       %span.path>= raw line.decorated_path
       %span.file>= line.file_name
       - if line.number.present?

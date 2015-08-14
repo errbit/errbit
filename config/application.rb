@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
-require 'mongoid/railtie'
+# require 'mongoid/railtie'
 require 'sprockets/railtie'
 
 # Require the gems listed in Gemfile, including any gems
@@ -19,9 +19,6 @@ module Errbit
     config.autoload_paths += [Rails.root.join('lib')]
 
     config.before_initialize do
-      # Load up Errbit::Config with values from the environment
-      require Rails.root.join('config/load')
-
       config.secret_key_base = Errbit::Config.secret_key_base
       config.serve_static_assets = Errbit::Config.serve_static_assets
     end

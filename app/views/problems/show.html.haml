@@ -68,7 +68,7 @@
 
   #backtrace
     %h3 Backtrace
-    = render 'notices/backtrace', :lines => @notice.backtrace_lines
+    = render 'notices/backtrace', :lines => @notice.backtrace.lines
 
   - if @notice.user_attributes.present?
     #user_attributes

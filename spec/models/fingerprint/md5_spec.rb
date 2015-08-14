@@ -1,7 +1,7 @@
 describe Fingerprint::MD5, type: 'model' do
   context 'being created' do
     let(:backtrace) do
-      Backtrace.create(:raw => [
+      Backtrace.find_or_create([
         {
           "number"=>"17",
           "file"=>"[GEM_ROOT]/gems/activesupport/lib/active_support/callbacks.rb",
@@ -14,10 +14,9 @@ describe Fingerprint::MD5, type: 'model' do
 
     context "with same backtrace" do
       let(:backtrace_2) do
-        backtrace
-        backtrace.lines.last.method =  '_run__FRAGMENT__process_action__FRAGMENT__callbacks'
-        backtrace.save
-        backtrace
+        new_lines = backtrace.lines.dup
+        new_lines.last[:method] = '_run__FRAGMENT__process_action__FRAGMENT__callbacks'
+        Backtrace.find_or_create(new_lines)
       end
 
       it "normalizes the fingerprint of generated methods" do
@@ -27,10 +26,9 @@ describe Fingerprint::MD5, type: 'model' do
 
     context "with same backtrace where FRAGMENT has not been extracted" do
       let(:backtrace_2) do
-        backtrace
-        backtrace.lines.last.method =  '_run__998857585768765__process_action__1231231312321313__callbacks'
-        backtrace.save
-        backtrace
+        new_lines = backtrace.lines.dup
+        new_lines.last[:method] =  '_run__998857585768765__process_action__1231231312321313__callbacks'
+        Backtrace.find_or_create(new_lines)
       end
 
       it "normalizes the fingerprint of generated methods" do

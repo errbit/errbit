@@ -3,7 +3,7 @@ describe Notice, type: 'model' do
     it 'requires a backtrace' do
       notice = Fabricate.build(:notice, :backtrace => nil)
       expect(notice).to_not be_valid
-      expect(notice.errors[:backtrace]).to include("can't be blank")
+      expect(notice.errors[:backtrace_id]).to include("can't be blank")
     end
 
     it 'requires the server_environment' do

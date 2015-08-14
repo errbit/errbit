@@ -14,7 +14,8 @@ WHERE:
 
 <%= @notice.where %>
 
-<% @notice.in_app_backtrace_lines.each do |line| %>
+<% @notice.backtrace.lines.each do |line| %>
+  <% next unless line.in_app? %>
   <%= line %>
 <% end %>
 
@@ -51,7 +52,7 @@ USER:
 
 BACKTRACE:
 
-<% @notice.backtrace_lines.each do |line| %>
+<% @notice.backtrace.lines.each do |line| %>
   <%= line %>
 <% end %>
 
