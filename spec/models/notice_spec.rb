@@ -89,6 +89,11 @@ describe Notice, type: 'model' do
     end
 
     it "returns 'N/A' when url is not valid" do
+      notice = Fabricate.build(:notice, :request => {'url' => "file:///path/to/some/resource/12"})
+      expect(notice.host).to eq 'N/A'
+    end
+
+    it "returns 'N/A' when url is not valid" do
       notice = Fabricate.build(:notice, :request => {'url' => "some string"})
       expect(notice.host).to eq 'N/A'
     end
