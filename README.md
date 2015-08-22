@@ -195,7 +195,13 @@ rake assets:precompile
 
 This will ensure that your application stays up to date with any schema changes.
 
-### Upgrading errbit from version 0.3 to 0.4
+### Upgrading errbit beyond v0.4.0
+
+* You must have already run migrations at least up to v0.3.0. Check to
+  make sure you're schema version is at least 20131011155638 by running rake
+  db:version before you upgrade beyond v0.4.0
+
+### Upgrading errbit from v0.3.0 to v0.4.0
 
 * All configuration is now done through the environment. See
   [configuration](docs/configuration.md)

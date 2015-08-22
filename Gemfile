@@ -9,6 +9,7 @@ gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
 gem 'mongoid', '5.0.0.beta'
+gem 'mongoid_rails_migrations'
 
 gem 'devise'
 gem 'haml'
