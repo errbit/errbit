@@ -106,7 +106,7 @@ GEM
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
-    execjs (2.0.2)
+    execjs (2.6.0)
     fabrication (2.8.1)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
@@ -172,7 +172,7 @@ GEM
     minitest (5.7.0)
     mongo (1.9.2)
       bson (~> 1.9.2)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     net-scp (1.1.2)
@@ -327,9 +327,9 @@ GEM
     tins (0.12.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.2.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
-      multi_json (~> 1.0, >= 1.0.2)
+      json (>= 1.8.0)
     underscore-rails (1.5.2)
     unf (0.1.4)
       unf_ext
@@ -416,3 +416,6 @@ DEPENDENCIES
   useragent
   webmock
   xmpp4r
+
+BUNDLED WITH
+   1.10.6
