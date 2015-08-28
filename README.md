@@ -1,4 +1,4 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
 [travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
@@ -8,6 +8,7 @@
 [coveralls-url]:https://coveralls.io/r/errbit/errbit
 [gemnasium-img-url]:https://gemnasium.com/errbit/errbit.png
 [gemnasium-url]:https://gemnasium.com/errbit/errbit
+[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master
 
 ### The open source, self-hosted error catcher
 
@@ -47,18 +48,6 @@ Airbrake, you can just point the `airbrake` gem to your Errbit server.
     </td>
   </tr>
 </table>
-
-Errbit may be a good fit for you if:
-
-* Your exceptions may contain sensitive data that you don't want sitting on
-  someone else's server
-* Your application is behind a firewall
-* You'd like to brand your error catcher
-* You want to add customer features to your error catcher
-* You're crazy and love managing servers
-
-If this doesn't sound like you, you should probably stick with a hosted service such as
-[Airbrake](http://airbrake.io).
 
 Mailing List
 ------------
