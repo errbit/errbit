@@ -1,8 +1,18 @@
 # Deploy to Heroku
+
+## The Easy Way
+
+If you just want to get started with Errbit and you're not sure how to proceed,
+you can use this deploy button to get a basic deployment running on Heroku.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
+
+## The Hard Way
+
 We designed Errbit to work well with Heroku. These instructions should result
 in a working deploy, but you should modify them to suit your needs:
 
-## Clone and prepare the source code repository
+### Clone and prepare the source code repository
 ```bash
 git clone git@github.com:errbit/errbit.git
 cd errbit
@@ -15,10 +25,10 @@ Commit the results:
 git commit -m "Update db/seeds.rb with initial login"
 ```
 
-## Install the heroku toolbelt
+### Install the heroku toolbelt
 [toolbelt.heroku.com](https://toolbelt.heroku.com/)
 
-## Create an app on Heroku and push the source code
+### Create an app on Heroku and push the source code
 ```bash
 heroku apps:create
 heroku addons:add mongolab:sandbox
@@ -30,13 +40,13 @@ heroku config:add ERRBIT_EMAIL_FROM=example@example.com
 git push heroku master
 ```
 
-## Prepare the DB
+### Prepare the DB
 
 ```bash
 heroku run rake errbit:bootstrap
 ```
 
-## Schedule recurring tasks
+### Schedule recurring tasks
 You may want to periodically clear resolved errors to free up space. For that
 you have a few options:
 
@@ -65,11 +75,7 @@ Option 3. Clear resolved errors manually:
 heroku run rake errbit:db:clear_resolved
 ```
 
-## Add the deployment hook
+### Add the deployment hook
 ```bash
 heroku addons:add deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
 ```
-
-## Or Just be lazy
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
