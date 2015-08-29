@@ -20,7 +20,7 @@ module Errbit
 
     config.before_initialize do
       config.secret_key_base = Errbit::Config.secret_key_base
-      config.serve_static_assets = Errbit::Config.serve_static_assets
+      config.serve_static_files = Errbit::Config.serve_static_assets
     end
 
     initializer 'errbit.mongoid', before: 'mongoid.load-config' do

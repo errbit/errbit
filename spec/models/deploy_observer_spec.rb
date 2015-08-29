@@ -3,7 +3,7 @@ describe "Callback on Deploy", type: 'model' do
     context 'and the app should notify on deploys' do
       it 'should send an email notification' do
         expect(Mailer).to receive(:deploy_notification).
-          and_return(double('email', :deliver => true))
+          and_return(double('email', :deliver_now => true))
         Fabricate(:deploy, :app => Fabricate(:app_with_watcher, :notify_on_deploys => true))
       end
     end

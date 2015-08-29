@@ -40,7 +40,7 @@ class Deploy
 
     def deliver_email
       if app.notify_on_deploys? && app.notification_recipients.any?
-        Mailer.deploy_notification(self).deliver
+        Mailer.deploy_notification(self).deliver_now
       end
     end
 
