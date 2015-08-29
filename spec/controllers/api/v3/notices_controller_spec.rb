@@ -11,7 +11,7 @@ describe Api::V3::NoticesController, type: :controller do
     notice = Notice.last
     expect(JSON.parse(response.body)).to eq({
       'id' => notice.id.to_s,
-      'url' => app_problem_path(app, notice.problem, only_path: false)
+      'url' => app_problem_url(app, notice.problem)
     })
   end
 

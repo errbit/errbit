@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.1.11'
+RAILS_VERSION = '~> 4.2.0'
 
 send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
@@ -81,7 +81,7 @@ group :test do
   gem 'rspec-rails', '~> 3.0', require: false
   gem 'rspec-activemodel-mocks'
   gem 'rspec-its'
-  gem 'mongoid-rspec', require: false
+  gem 'mongoid-rspec', '~> 2.3.0.beta', require: false
   gem 'fabrication'
   gem 'capybara'
   gem 'poltergeist'

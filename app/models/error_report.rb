@@ -85,7 +85,7 @@ class ErrorReport
   def email_notification
     return false unless app.emailable?
     return false unless app.email_at_notices.include?(@problem.notices_count)
-    Mailer.err_notification(self).deliver
+    Mailer.err_notification(self).deliver_now
   rescue => e
     HoptoadNotifier.notify(e)
   end
