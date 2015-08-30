@@ -6,7 +6,7 @@ rvm:
   - ruby-head
   - jruby-head
 env:
-  - RAILS_ENV=test COVERAGE=true JRUBY_OPTS=--debug
+  - COVERAGE=true JRUBY_OPTS=--debug
 sudo: false
 cache: bundler
 before_script:

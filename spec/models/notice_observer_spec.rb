@@ -49,7 +49,7 @@ describe "Callback on Notice", type: 'model' do
         @problem.update_attributes notices_count: threshold - 1
 
         expect(Mailer).to receive(:err_notification).
-          and_return(double('email', :deliver => true))
+          and_return(double('email', :deliver_now => true))
 
         error_report = ErrorReport.new(notice_attrs)
         error_report.generate_notice!
@@ -95,7 +95,7 @@ describe "Callback on Notice", type: 'model' do
       err.problem.resolve!
 
       expect(Mailer).to receive(:err_notification)
-        .and_return(double('email', :deliver => true))
+        .and_return(double('email', :deliver_now => true))
 
       ErrorReport.new(notice_attrs).generate_notice!
     end
@@ -121,7 +121,7 @@ describe "Callback on Notice", type: 'model' do
       expect(error_report.app.notification_service)
         .to receive(:create_notification).and_raise(ArgumentError)
       expect(Mailer)
-        .to receive(:err_notification).and_return(double(:deliver => true))
+        .to receive(:err_notification).and_return(double(:deliver_now => true))
 
       error_report.generate_notice!
     end

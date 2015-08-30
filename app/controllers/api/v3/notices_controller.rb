@@ -13,10 +13,9 @@ class Api::V3::NoticesController < ApplicationController
         report.generate_notice!
         render json: {
           id: report.notice.id,
-          url: app_problem_path(
+          url: app_problem_url(
             report.app,
-            report.error.problem_id,
-            only_path: false)
+            report.error.problem_id)
         }
       else
         render text: 'Notice for old app version ignored'
