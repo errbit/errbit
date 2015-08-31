@@ -33,7 +33,7 @@ module BacktraceLineHelper
 
   def link_to_bitbucket(line, app, text = nil)
     return unless app.bitbucket_repo?
-    href = "%s#cl-%s" % [app.bitbucket_url_to_file(line.decorated_path + line.file_name), line.number]
+    href = "%s#%s-%s" % [app.bitbucket_url_to_file(line.decorated_path + line.file_name), line.file_name, line.number]
     link_to(text || line.file_name, href, :target => '_blank')
   end
 
