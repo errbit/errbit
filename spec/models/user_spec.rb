@@ -37,24 +37,6 @@ describe User do
     end
   end
 
-  context 'Watchers' do
-    it 'has many watchers' do
-      user = Fabricate(:user)
-      watcher = Fabricate(:user_watcher, :user => user)
-      expect(user.watchers).to_not be_empty
-      expect(user.watchers).to include(watcher)
-    end
-
-    it "has many apps through watchers" do
-      user = Fabricate(:user)
-      watched_app  = Fabricate(:app)
-      unwatched_app = Fabricate(:app)
-      Fabricate(:user_watcher, :app => watched_app, :user => user)
-      expect(user.apps.all).to include(watched_app)
-      expect(user.apps.all).to_not include(unwatched_app)
-    end
-  end
-
   context "First user" do
     it "should be created this admin access via db:seed" do
       expect {

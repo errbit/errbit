@@ -7,9 +7,7 @@ class AppsController < ApplicationController
   before_action :parse_notice_at_notices_or_set_default, :only => [:create, :update]
   respond_to :html
 
-  expose(:app_scope) {
-    (current_user.admin? ? App : current_user.apps)
-  }
+  expose(:app_scope) { App }
 
   expose(:apps) {
     app_scope.asc(:name).map { |app| AppDecorator.new(app) }

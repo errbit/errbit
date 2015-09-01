@@ -1,32 +1,50 @@
 describe WatchersController, type: 'controller' do
-  let(:app) do
-    a = Fabricate(:app)
-    Fabricate(:user_watcher, :app => a)
-    a
-  end
+  let(:user) { Fabricate(:user) }
+  let(:problem) { Fabricate(:problem) }
 
-  describe "DELETE /apps/:app_id/watchers/:id/destroy" do
-    context "with admin user" do
+  before(:each) { sign_in user }
+
+  describe "#destroy" do
+    let(:app) do
+      a = Fabricate(:app)
+      Fabricate(:user_watcher, app: a, user: user)
+      a
+    end
+
+    context "successful watcher deletion" do
+      let(:watcher) { app.watchers.first }
+
       before(:each) do
-        sign_in Fabricate(:admin)
+        delete :destroy, :app_id => app.id, :id => watcher.user.id.to_s
+        problem.reload
       end
 
-      context "successful watcher deletion" do
-        let(:problem) { Fabricate(:problem_with_comments) }
-        let(:watcher) { app.watchers.first }
+      it "should delete the watcher" do
+        expect(app.watchers.detect{|w| w.id.to_s == watcher.id }).to be nil
+      end
 
-        before(:each) do
-          delete :destroy, :app_id => app.id, :id => watcher.user.id.to_s
-          problem.reload
-        end
+      it "should redirect to app page" do
+        expect(response).to redirect_to(app_path(app))
+      end
+    end
+  end
 
-        it "should delete the watcher" do
-          expect(app.watchers.detect{|w| w.id.to_s == watcher.id }).to be nil
-        end
+  describe "#update" do
+    let(:app) { Fabricate(:app) }
 
-        it "should redirect to index page" do
-          expect(response).to redirect_to(root_path)
-        end
+    context "successful watcher update" do
+      before(:each) do
+        put :update, :app_id => app.id, :id => user.id.to_s
+        problem.reload
+      end
+
+      it "should be watching" do
+        app.reload
+        expect(app.watchers.first.user_id).to eq user.id
+      end
+
+      it "should redirect to app page" do
+        expect(response).to redirect_to(app_path(app))
       end
     end
   end
