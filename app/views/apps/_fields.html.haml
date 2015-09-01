@@ -44,21 +44,6 @@
   = f.check_box :notify_all_users
   = f.label :notify_all_users, 'Send notifications to all users'
 
-
-%fieldset.watchers.nested-wrapper{:style => app_decorate.notify_user_display}
-  %legend Watchers
-  = f.fields_for :watchers do |w|
-    %div.watcher.nested
-      %div.choose
-        = w.radio_button :watcher_type, :user
-        = w.label :watcher_type_user, 'User'
-        = w.radio_button :watcher_type, :email
-        = label_tag :watcher_type_email, 'Email Address', :for => label_for_attr(w, 'watcher_type_email')
-      %div.watcher_params.user{:class => w.object.email.blank? ? 'chosen' : nil}
-        = w.select :user_id, users.map{|u| [u.name,u.id.to_s]}, :include_blank => '-- Select a User --'
-      %div.watcher_params.email{:class => w.object.email.present? ? 'chosen' : nil}
-        = w.text_field :email
-
 %div.checkbox
   = f.check_box :resolve_errs_on_deploy
   = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'

@@ -23,7 +23,6 @@ class App
     pre_processed: true,
     default: ->{ BSON::ObjectId.new.to_s }
 
-
   embeds_many :watchers
   embeds_many :deploys
   embeds_one :issue_tracker, :class_name => 'IssueTracker'
@@ -47,6 +46,14 @@ class App
     :reject_if => proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+
+  scope :watched_by, ->(user) do
+    where watchers: { "$elemMatch" => { "user_id" => user.id } }
+  end
+
+  def watched_by?(user)
+    watchers.pluck("user_id").include? user.id
+  end
 
   # Acceps a hash with the following attributes:
   #

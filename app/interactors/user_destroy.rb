@@ -4,8 +4,11 @@ class UserDestroy
   end
 
   def destroy
-    @user.destroy
-    @user.watchers.each(&:destroy)
-  end
+    App.watched_by(@user).each do |app|
+      watcher = app.watchers.where(user_id: @user.id).first
+      app.watchers.delete(watcher)
+    end
 
+    @user.destroy
+  end
 end
