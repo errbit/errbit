@@ -16,7 +16,6 @@ config/unicorn.rb
 *.rbc
 .DS_Store
 *.rbx
-bin
 bundle
 coverage
 *#
