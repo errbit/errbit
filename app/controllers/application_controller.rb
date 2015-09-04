@@ -5,13 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
-  # Devise override - After login, if there is only one app,
-  # redirect to that app's path instead of the root path (apps#index).
-  def stored_location_for(resource)
-    location = super || root_path
-    (location == root_path && current_user.apps.count == 1) ? app_path(current_user.apps.first) : location
-  end
-
   rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
 
   class StrongParametersWithEagerAttributesStrategy < DecentExposure::StrongParametersStrategy

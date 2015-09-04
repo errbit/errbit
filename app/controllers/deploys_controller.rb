@@ -12,13 +12,9 @@ class DeploysController < ApplicationController
   end
 
   def index
-    # See AppsController#find_app for the reasoning behind this code.
-    app = App.find(params[:app_id])
-    raise Mongoid::Errors::DocumentNotFound.new(App, app.id) unless current_user.admin? || current_user.watching?(app)
-
-    @deploys = Kaminari.paginate_array(app.deploys.order_by(:created_at.desc)).
+    @app = App.find(params[:app_id])
+    @deploys = Kaminari.paginate_array(@app.deploys.order_by(:created_at.desc)).
       page(params[:page]).per(10)
-    @app = app
   end
 
   private

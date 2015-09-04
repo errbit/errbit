@@ -13,8 +13,7 @@ class ProblemsController < ApplicationController
   ]
 
   expose(:app_scope) {
-    apps = current_user.admin? ? App.all : current_user.apps
-    params[:app_id] ? apps.where(:_id => params[:app_id]) : apps
+    params[:app_id] ? App.where(:_id => params[:app_id]) : App.all
   }
 
   expose(:app) {
@@ -34,11 +33,11 @@ class ProblemsController < ApplicationController
   }
 
   expose(:problems) {
-    pro = Problem.for_apps(
-      app_scope
-    ).in_env(
-      params_environement
-    ).all_else_unresolved(all_errs).ordered_by(params_sort, params_order)
+    pro = Problem
+      .for_apps(app_scope)
+      .in_env(params_environement)
+      .all_else_unresolved(all_errs)
+      .ordered_by(params_sort, params_order)
 
     if request.format == :html
       pro.page(params[:page]).per(current_user.per_page)

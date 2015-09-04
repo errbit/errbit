@@ -27,10 +27,6 @@ class CommentsController < ApplicationController
   protected
     def find_app
       @app = App.find(params[:app_id])
-
-      # Mongoid Bug: could not chain: current_user.apps.find_by_id!
-      # apparently finding by 'watchers.email' and 'id' is broken
-      raise(Mongoid::Errors::DocumentNotFound.new(App,@app.id)) unless current_user.admin? || current_user.watching?(@app)
     end
 
     def find_problem
