@@ -25,7 +25,7 @@ class App
 
 
   embeds_many :watchers
-  embeds_many :deploys
+  has_many :deploys
   embeds_one :issue_tracker, :class_name => 'IssueTracker'
   embeds_one :notification_service
 
