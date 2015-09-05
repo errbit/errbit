@@ -198,7 +198,7 @@ This will ensure that your application stays up to date with any schema changes.
   2.1+
 * Errbit now maintains an issue tracker only for github. If you're using
   another issue tracker integration, you may need to maintain it yourself. See
-  (issue trackers)[#issue-trackers]
+  [Issue Trackers](#issue-trackers)
 
 ## User information in error reports
 
