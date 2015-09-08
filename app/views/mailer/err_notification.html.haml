@@ -65,6 +65,6 @@
                 %p.heading FULL BACKTRACE:
                 - @notice.backtrace.lines.each do |line|
                   %p.backtrace
-                    = link_to_source_file(line, @app) do
+                    = line.link_to_source_file(@app) do
                       = line.to_s
                 %br
