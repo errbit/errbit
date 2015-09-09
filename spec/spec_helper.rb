@@ -50,6 +50,11 @@ RSpec.configure do |config|
     init_haml_helpers
   end
 
+  config.before(:each, type: :decorator) do |_|
+    Draper::ViewContext.current.class_eval { include Haml::Helpers }
+    Draper::ViewContext.current.instance_eval { init_haml_helpers }
+  end
+
   config.infer_spec_type_from_file_location!
 end
 

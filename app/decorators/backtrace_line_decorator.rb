@@ -44,7 +44,9 @@ class BacktraceLineDecorator < Draper::Decorator
   end
 
   def decorated_path
-    file_relative.sub(Backtrace::GEMS_PATH, "<strong>\\1</strong>")
+    path
+      .sub(Backtrace::IN_APP_PATH, '')
+      .sub(Backtrace::GEMS_PATH, "<strong>\\1</strong>")
   end
 
   private
