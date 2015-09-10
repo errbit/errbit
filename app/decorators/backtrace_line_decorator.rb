@@ -78,7 +78,7 @@ class BacktraceLineDecorator < Draper::Decorator
 
   def link_to_bitbucket(app, text = nil)
     return unless app.bitbucket_repo?
-    href = "%s#cl-%s" % [app.bitbucket_url_to_file(decorated_path + file_name), number]
+    href = "%s#%s-%s" % [app.bitbucket_url_to_file(decorated_path + file_name), file_name , number]
     h.link_to(text || file_name, href, :target => '_blank')
   end
 
