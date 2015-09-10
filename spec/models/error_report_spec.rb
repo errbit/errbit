@@ -42,20 +42,6 @@ describe ErrorReport do
     end
   end
 
-  describe "#fingerprint_strategy" do
-    it "should be possible to change how fingerprints are generated" do
-      def error_report.fingerprint_strategy
-        Class.new do
-          def self.generate(*args)
-            'fingerprintzzz'
-          end
-        end
-      end
-
-      expect(error_report.error.fingerprint).to eq('fingerprintzzz')
-    end
-  end
-
   describe "#generate_notice!" do
     it "save a notice" do
       expect {

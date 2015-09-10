@@ -13,4 +13,8 @@
         = link_to users_path do
           %i.fa.fa-users
           = t('.users')
+      %li{:class => active_if_here(:site_config)}
+        = link_to site_config_index_path do
+          %i.fa.fa-wrench
+          = t('.config')
   %div.clear
