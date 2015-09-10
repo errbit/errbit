@@ -6,7 +6,8 @@ end
 Fabricator :notice do
   app
   err
-  message             'FooError: Too Much Bar'
+  error_class         'FooError'
+  message             'Too Much Bar'
   backtrace
   server_environment  { {'environment-name' => 'production'} }
   request             {{ 'component' => 'foo', 'action' => 'bar' }}

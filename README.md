@@ -230,21 +230,6 @@ Airbrake.setProject("ERRBIT API KEY", "ERRBIT API KEY");
 Airbrake.setHost("http://errbit.yourdomain.com");
 ```
 
-Using custom fingerprinting methods
------------------------------------
-
-Errbit collates errors into groups using a fingerprinting strategy. If you find
-your errors are not getting grouped the way you would expect, you may need to
-implement your own strategy. A fingerprinting strategy is just a class that
-implements a ::generate class method. See the classes in
-`app/models/fingerprint/` if you need some inspiration. You can install it with
-an initializer like:
-
-```ruby
-# config/initializers/fingerprint.rb
-ErrorReport.fingerprint_strategy = MyStrategy
-```
-
 Plugins and Integrations
 ------------------------
 You can extend Errbit by adding Ruby gems and plugins which are typically gems.

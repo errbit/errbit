@@ -26,10 +26,6 @@ class ErrorReport
   attr_reader :server_environment
   attr_reader :user_attributes
 
-  cattr_accessor :fingerprint_strategy do
-    Fingerprint::Sha1
-  end
-
   def initialize(xml_or_attributes)
     @attributes = xml_or_attributes
     @attributes = Hoptoad.parse_xml!(@attributes) if @attributes.is_a? String
@@ -130,9 +126,7 @@ class ErrorReport
     Gem::Version.new(app_version) >= Gem::Version.new(current_version)
   end
 
-  private
-
   def fingerprint
-    @fingerprint ||= fingerprint_strategy.generate(notice, api_key)
+    app.notice_fingerprinter.generate(api_key, notice, backtrace)
   end
 end

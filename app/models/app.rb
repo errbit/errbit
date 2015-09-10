@@ -27,6 +27,7 @@ class App
   embeds_many :deploys
   embeds_one :issue_tracker, :class_name => 'IssueTracker'
   embeds_one :notification_service
+  embeds_one :notice_fingerprinter, autobuild: true
 
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
@@ -38,6 +39,7 @@ class App
   validates_uniqueness_of :name, :allow_blank => true
   validates_uniqueness_of :api_key, :allow_blank => true
   validates_associated :watchers
+  validates_associated :notice_fingerprinter
   validate :check_issue_tracker
 
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
@@ -46,6 +48,7 @@ class App
     :reject_if => proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+  accepts_nested_attributes_for :notice_fingerprinter
 
   scope :watched_by, ->(user) do
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
