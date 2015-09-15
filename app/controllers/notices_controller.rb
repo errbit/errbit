@@ -24,6 +24,8 @@ class NoticesController < ApplicationController
     else
       render :text => "Your API key is unknown", :status => 422
     end
+  rescue Nokogiri::XML::SyntaxError
+    render :text => 'The provided XML was not well-formed', :status => 422
   end
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
