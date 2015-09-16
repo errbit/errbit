@@ -29,8 +29,10 @@ class App < ActiveRecord::Base
   after_save :commit_issue_tracker, if: :has_tentative_issue_tracker?
   
   def commit_issue_tracker
-    set_issue_tracker @tentative_issue_tracker
+    temp = @tentative_issue_tracker
     remove_instance_variable :@tentative_issue_tracker
+    issue_tracker.delete if issue_tracker
+    set_issue_tracker temp
   end
 
 
@@ -52,8 +54,10 @@ class App < ActiveRecord::Base
   after_save :commit_notification_service, if: :has_tentative_notification_service?
   
   def commit_notification_service
-    set_notification_service @tentative_notification_service
+    temp = @tentative_notification_service
     remove_instance_variable :@tentative_notification_service
+    notification_service.delete if notification_service
+    set_notification_service temp
   end
 
 
