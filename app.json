@@ -8,7 +8,9 @@
     "GEMFILE_RUBY_VERSION": "2.2.3",
     "SECRET_KEY_BASE": {
       "generator": "secret"
-    }
+    },
+    "EMAIL_DELIVERY_METHOD": "smtp",
+    "SMTP_SERVER": "smtp.sendgrid.net"
   },
   "addons": [
     "mongolab:sandbox",
