@@ -16,7 +16,7 @@ class NoticeFingerprinter
   def generate(api_key, notice, backtrace)
     material = []
     material << notice.error_class if error_class
-    material << notice.message if message
+    material << notice.filtered_message if message
     material << notice.component if component
     material << notice.action if action
     material << notice.environment_name if environment_name

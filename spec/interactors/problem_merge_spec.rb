@@ -47,7 +47,7 @@ describe ProblemMerge do
     end
 
     it 'update problem cache' do
-      expect(ProblemUpdaterCache).to receive(:new).with(problem).and_return(double(:update => true))
+      expect(problem).to receive(:recache)
       problem_merge.merge
     end
 
