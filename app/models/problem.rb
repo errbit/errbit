@@ -217,10 +217,6 @@ class Problem
     end
   end
 
-  def self.in_date_range(date_range)
-    where(:first_notice_at.lte => date_range.end).where("$or" => [{:resolved_at => nil}, {:resolved_at.gte => date_range.begin}])
-  end
-
   def cache_app_attributes
     if app
       self.app_name = app.name
