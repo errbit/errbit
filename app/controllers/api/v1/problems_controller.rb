@@ -40,6 +40,27 @@ class Api::V1::ProblemsController < ApplicationController
     end
   end
 
+  def changed
+    begin
+      since = Time.parse(params.fetch(:since)).utc
+    rescue KeyError
+      render json: { ok: false, message: "'since' is a required parameter" }, status: 400
+      return
+    rescue ArgumentError
+      render json: { ok: false, message: "'since' must be an ISO8601 formatted timestamp" }, status: 400
+      return
+    end
+
+    problems = Problem.with_deleted.changed_since(since)
+    presenter = ProblemWithDeletedPresenter
+
+    respond_to do |format|
+      format.html { render json: presenter.new(self, problems) } # render JSON if no extension specified on path
+      format.json { render json: presenter.new(self, problems) }
+      format.xml  { render xml:  presenter.new(self, problems).as_json }
+    end
+  end
+
   def resolve
     unless problem.resolved?
       err.comments.create!(body: params[:message]) if params[:message]

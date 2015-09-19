@@ -26,7 +26,7 @@ describe ProblemDestroy do
     end
 
     describe "#execute" do
-      it 'destroy the problem himself' do
+      it 'destroy the problem itself' do
         expect(problem).to receive(:delete).and_return(true)
         problem_destroy.execute
       end
@@ -46,7 +46,6 @@ describe ProblemDestroy do
         problem_destroy.execute
       end
     end
-
   end
 
   context "in integration way" do
@@ -61,8 +60,14 @@ describe ProblemDestroy do
     let!(:notice_2_2) { Fabricate(:notice, err: err_2) }
 
     it 'should all destroy' do
-      problem_destroy.execute
+      expected_timestamp = Time.new(2029, 11, 4, 14, 29, 13)
+      Timecop.freeze(expected_timestamp) do
+        problem_destroy.execute
+      end
       expect(Problem.where(id: problem.id).entries).to be_empty
+      expect(Problem.with_deleted.where(id: problem.id).count).to eq(1)
+      expect(Problem.with_deleted.find(problem.id).deleted_at).to eq(expected_timestamp)
+      expect(Problem.with_deleted.find(problem.id).updated_at).to eq(expected_timestamp)
       expect(Err.where(id: err_1.id).entries).to be_empty
       expect(Err.where(id: err_2.id).entries).to be_empty
       expect(Comment.where(id: comment_1.id).entries).to be_empty

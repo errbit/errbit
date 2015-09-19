@@ -27,6 +27,7 @@ gem 'htmlentities'
 gem 'rack-ssl', require: 'rack/ssl'   # force SSL
 gem 'rack-utf8_sanitizer', require: 'rack/utf8_sanitizer'
 
+gem "paranoia", "~> 2.0"
 gem 'useragent'
 gem 'decent_exposure'
 gem 'actionmailer_inline_css'

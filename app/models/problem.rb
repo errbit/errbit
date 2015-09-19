@@ -3,6 +3,7 @@
 # Errs together as belonging to the same problem.
 
 class Problem < ActiveRecord::Base
+  acts_as_paranoid
 
   serialize :messages, Hash
   serialize :user_agents, Hash
@@ -109,6 +110,10 @@ class Problem < ActiveRecord::Base
 
   def self.in_date_range(date_range)
     where(["first_notice_at <= ? AND (resolved_at IS NULL OR resolved_at >= ?)", date_range.end, date_range.begin])
+  end
+
+  def self.changed_since(timestamp)
+    where arel_table[:updated_at].gteq(timestamp)
   end
 
 

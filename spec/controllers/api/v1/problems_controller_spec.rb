@@ -98,6 +98,42 @@ describe Api::V1::ProblemsController do
 
 
 
+    describe "GET /api/v1/problems/changed" do
+      before do
+        @before = Time.new(2012, 10, 1, 8, 30)
+        @after = Time.new(2012, 10, 1, 11, 30)
+        @since = Time.new(2012, 10, 1, 11, 00)
+        @app_1 = Fabricate(:app)
+        @app_2 = Fabricate(:app)
+        Fabricate(:problem_with_err, app: @app_2, deleted_at: @before, updated_at: @before)
+        Fabricate(:problem_with_err, app: @app_2, deleted_at: @after, updated_at: @after)
+        Fabricate(:problem_with_err, app: @app_1, updated_at: @after)
+        Fabricate(:problem_with_err, app: @app_2, updated_at: @after)
+      end
+
+      it "should return only problems that have been changed" do
+        get :changed, {auth_token: @user.authentication_token, since: @since}
+        expect(response).to be_success
+        problems = JSON.load response.body
+        expect(problems.length).to eq 3
+      end
+
+      it "should require 'since' to be supplied" do
+        get :changed, {auth_token: @user.authentication_token}
+        expect(response.status).to eq 400
+      end
+
+      it "should present deleted_at" do
+        get :changed, {auth_token: @user.authentication_token, since: @since}
+        expect(response).to be_success
+        problems = JSON.load response.body
+        problem = problems.first
+        expect(problem["deleted_at"]).to eq(@after.utc.as_json)
+      end
+    end
+
+
+
     describe "PUT /api/v1/problems/:id/resolve" do
       it "should resolve the given problem" do
         controller.stub(:problem).and_return(problem)

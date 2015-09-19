@@ -52,6 +52,7 @@ Errbit::Application.routes.draw do
           put :unresolve, constraints: {id: /\d+/}
         end
         collection do
+          get :changed
           post :merge_several
           post :unmerge_several
           post :destroy_several
