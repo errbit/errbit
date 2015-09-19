@@ -52,6 +52,7 @@ class Api::V1::ProblemsController < ApplicationController
     end
 
     problems = Problem.with_deleted.changed_since(since)
+    problems = problems.where(app_id: params[:app_id]) if params.key?(:app_id)
     presenter = ProblemWithDeletedPresenter
 
     respond_to do |format|
