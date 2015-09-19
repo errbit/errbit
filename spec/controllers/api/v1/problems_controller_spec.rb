@@ -15,10 +15,10 @@ describe Api::V1::ProblemsController do
       before do
         @app_1 = Fabricate(:app)
         @app_2 = Fabricate(:app)
-        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), resolved_at: Date.new(2012, 8, 02), resolved: true)
-        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), resolved_at: Date.new(2012, 8, 21), resolved: true)
-        Fabricate(:problem_with_err, app: @app_1, first_notice_at: Date.new(2012, 8, 21))
-        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 30))
+        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), last_notice_at: Date.new(2012, 8, 27), resolved_at: Date.new(2012, 8, 02), resolved: true)
+        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 01), last_notice_at: Date.new(2012, 8, 27), resolved_at: Date.new(2012, 8, 21), resolved: true)
+        Fabricate(:problem_with_err, app: @app_1, first_notice_at: Date.new(2012, 8, 21), last_notice_at: Date.new(2012, 8, 27))
+        Fabricate(:problem_with_err, app: @app_2, first_notice_at: Date.new(2012, 8, 30), last_notice_at: Date.new(2012, 8, 30))
       end
 
 
@@ -64,6 +64,15 @@ describe Api::V1::ProblemsController do
           expect(response).to be_success
           problems = JSON.load response.body
           expect(problems.length).to eq 2
+        end
+      end
+
+      describe "when only open problems since ___ are requested" do
+        it "should return only the problems have occurred since a date" do
+          get :index, {auth_token: @user.authentication_token, since: Time.new(2012, 8, 28)}
+          expect(response).to be_success
+          problems = JSON.load response.body
+          expect(problems.length).to eq 1
         end
       end
 

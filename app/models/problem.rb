@@ -116,6 +116,10 @@ class Problem < ActiveRecord::Base
     where arel_table[:updated_at].gteq(timestamp)
   end
 
+  def self.occurred_since(timestamp)
+    where arel_table[:last_notice_at].gteq(timestamp)
+  end
+
 
   def reset_cached_attributes
     ProblemUpdaterCache.new(self).update

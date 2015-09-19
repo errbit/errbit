@@ -19,6 +19,11 @@ class Api::V1::ProblemsController < ApplicationController
       problems = problems.in_date_range(start_date..end_date)
     end
 
+    if params.key?(:since)
+      since = Time.parse(params[:since]).utc
+      problems = problems.occurred_since(since)
+    end
+
     if params.key?(:app_id)
       problems = problems.where(app_id: params[:app_id])
     end
