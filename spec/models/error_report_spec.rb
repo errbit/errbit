@@ -65,6 +65,20 @@ describe ErrorReport do
       }.by(1)
     end
 
+    context "with a minimal notice" do
+      let(:xml){
+        Rails.root.join('spec','fixtures','minimal_test_notice.xml').read
+      }
+
+      it 'save a notice' do
+        expect {
+          error_report.generate_notice!
+        }.to change {
+          app.reload.problems.count
+        }.by(1)
+      end
+    end
+
     context "with notice generate by Airbrake gem" do
       let(:xml) { Airbrake::Notice.new(
         :exception => Exception.new,
