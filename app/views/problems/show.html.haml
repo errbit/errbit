@@ -37,7 +37,7 @@
                 = link_to comment.user.email, comment.user
             - else
               %span.comment-info
-                = time_ago_in_words(comment.created_at, true) << " ago by [Unknown User]"
+                = time_ago_in_words(comment.created_at, include_seconds: true) << " ago by [Unknown User]"
             %span.delete= link_to '&#10008;'.html_safe, [app, problem, comment], :method => :delete,
               :data => { :confirm => t("comments.confirm_delete") }, :class => "destroy-comment"
         %tr
