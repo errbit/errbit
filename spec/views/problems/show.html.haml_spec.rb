@@ -164,7 +164,7 @@ describe "problems/show.html.haml", type: 'view' do
       allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
     end
 
-    it 'should display comments and new comment form' do
+    it 'displays comments and new comment form' do
       render
 
       expect(view.content_for(:comments)).to include('Test comment')
@@ -172,11 +172,25 @@ describe "problems/show.html.haml", type: 'view' do
       expect(view.content_for(:comments)).to include('Add a comment')
     end
 
-    it 'should display existing comments with configured tracker' do
+    it 'displays existing comments with configured tracker' do
       with_issue_tracker("pivotal", problem)
       render
 
       expect(view.content_for(:comments)).to include('Test comment')
+      expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
+    end
+
+    it 'displays comment when comment has no user' do
+      with_issue_tracker("pivotal", problem)
+
+      first_comment = view.problem.comments.first
+      first_comment.user.destroy
+      first_comment.reload
+
+      render
+
+      expect(view.content_for(:comments)).to include('Test comment')
+      expect(view.content_for(:comments)).to include('Unknown User')
       expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
     end
   end
