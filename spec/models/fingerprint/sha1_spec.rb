@@ -64,7 +64,7 @@ describe Fingerprint::Sha1, type: 'model' do
       let(:message) { "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess:0x007f6bfe3287e8>" }
 
       it 'removes memory address from object strings' do
-        should eq "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess>"
+        is_expected.to eq "NoMethodError: undefined method `foo' for #<ActiveSupport::HashWithIndifferentAccess>"
       end
     end
 
@@ -72,7 +72,7 @@ describe Fingerprint::Sha1, type: 'model' do
       let(:message) { "#<ActiveSupport::HashWithIndifferentAccess:0x007f6bfe3287e8> #<Object:0x007fa2b33d9458>" }
 
       it 'removes memory addresses globally' do
-        should eq "#<ActiveSupport::HashWithIndifferentAccess> #<Object>"
+        is_expected.to eq "#<ActiveSupport::HashWithIndifferentAccess> #<Object>"
       end
     end
   end
