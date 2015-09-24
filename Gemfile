@@ -8,7 +8,7 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'mongoid', '5.0.0.beta'
+gem 'mongoid', '5.0.0'
 gem 'mongoid_rails_migrations'
 
 gem 'devise'
@@ -81,7 +81,7 @@ group :test do
   gem 'rspec-rails', '~> 3.0', require: false
   gem 'rspec-activemodel-mocks'
   gem 'rspec-its'
-  gem 'mongoid-rspec', '~> 2.3.0.beta', require: false
+  gem 'mongoid-rspec', '~> 3.0.0', require: false
   gem 'fabrication'
   gem 'capybara'
   gem 'poltergeist'
