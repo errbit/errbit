@@ -1,11 +1,11 @@
 describe IssueTracker, type: 'model' do
   describe "Association" do
-    it { should be_embedded_in(:app) }
+    it { is_expected.to be_embedded_in(:app) }
   end
 
   describe "Attributes" do
-    it { should have_field(:type_tracker).of_type(String) }
-    it { should have_field(:options).of_type(Hash).with_default_value_of({}) }
+    it { is_expected.to have_field(:type_tracker).of_type(String) }
+    it { is_expected.to have_field(:options).of_type(Hash).with_default_value_of({}) }
   end
 
   describe "#tracker" do
