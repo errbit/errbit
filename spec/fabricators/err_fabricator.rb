@@ -4,6 +4,7 @@ Fabricator :err do
 end
 
 Fabricator :notice do
+  app
   err
   message             'FooError: Too Much Bar'
   backtrace
