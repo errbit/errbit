@@ -12,8 +12,9 @@ class Notice
   field :framework
   field :error_class
   delegate :lines, :to => :backtrace, :prefix => true
-  delegate :app, :problem, :to => :err
+  delegate :problem, :to => :err
 
+  belongs_to :app
   belongs_to :err
   belongs_to :backtrace, :index => true
 
