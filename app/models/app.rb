@@ -65,16 +65,15 @@ class App
   # * <tt>:fingerprint</tt> - a unique value identifying the notice
   #
   def find_or_create_err!(attrs)
-    Err.where(
-      :fingerprint => attrs[:fingerprint]
-    ).first || (
-      problem = problems.create!(
-        error_class: attrs[:error_class],
-        environment: attrs[:environment],
-        app_name: name
-      )
-      problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
+    err = Err.where(fingerprint: attrs[:fingerprint]).first
+    return err if err
+
+    problem = problems.create!(
+      error_class: attrs[:error_class],
+      environment: attrs[:environment],
+      app_name: name
     )
+    problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator

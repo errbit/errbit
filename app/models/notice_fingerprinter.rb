@@ -14,7 +14,7 @@ class NoticeFingerprinter
   embedded_in :site_config
 
   def generate(api_key, notice, backtrace)
-    material = []
+    material = [ api_key ]
     material << notice.error_class if error_class
     material << notice.filtered_message if message
     material << notice.component if component

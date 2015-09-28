@@ -15,19 +15,21 @@ class NoticeRefingerprinter
     end
 
     puts 'Finished generating notice fingerprints'
-  end
+    puts 'Destroying orphaned err records'
 
-  def self.apps
-    @apps ||= App.all.index_by(&:id)
+    Err.each { |e| e.destroy if e.notices.size == 0 }
+
+    puts 'Finished destroying orphaned err records'
   end
 
   def self.refingerprint(notice)
-    app = apps[notice.try(:err).try(:problem).try(:app_id)]
-    app.find_or_create_err!(
+    app = notice.app
+    notice.err = app.find_or_create_err!(
       error_class: notice.error_class,
       environment: notice.environment_name,
       fingerprint: app.notice_fingerprinter.generate(app.api_key, notice, notice.backtrace)
     )
+    notice.save!
   end
 
   def self.puts(*args)

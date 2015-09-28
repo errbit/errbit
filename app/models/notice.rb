@@ -29,9 +29,7 @@ class Notice
   scope :ordered, ->{ order_by(:created_at.asc) }
   scope :reverse_ordered, ->{ order_by(:created_at.desc) }
   scope :for_errs, Proc.new { |errs|
-    if (ids = errs.all.map(&:id)) && ids.present?
-      where(:err_id.in => ids)
-    end
+    where(:err_id.in => errs.all.map(&:id))
   }
 
   def user_agent
