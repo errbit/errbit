@@ -1,4 +1,5 @@
 Fabricator :notice do
+  app
   err
   error_class         'FooError'
   message             'Too Much Bar'
