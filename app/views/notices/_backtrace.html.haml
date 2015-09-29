@@ -3,7 +3,7 @@
     -# Group lines into internal / external so we can toggle the external backtrace
     -# Includes a margin of x lines that are not toggled.
     - em = 4 # (external backtrace margin)
-    - grouped_lines(lines).each do |in_app, line_group|
+    - backtrace.grouped_lines.each do |in_app, line_group|
       - if !in_app && line_group.size > (em * 3)
         = render :partial => 'notices/backtrace_line', :collection => line_group[0, em], :as => :line
         = render :partial => 'notices/backtrace_line', :collection => line_group[em, line_group.size - (em * 2)], :as => :line, :locals => {:row_class => 'toggle_external_backtrace'}
