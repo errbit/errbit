@@ -3,6 +3,26 @@ require 'digest/sha1'
 namespace :errbit do
   namespace :db do
 
+    def cleanup_defunct_errs_and_problems
+      puts "Cleaning up defunct Errs"
+      Err.create_indexes
+      Err.all.no_timeout.each do |err|
+        err.delete if err.notices.count <= 0
+      end
+      puts
+
+      puts "Cleaning up defunct Problems"
+      Problem.create_indexes
+      Problem.all.no_timeout.each do |prob|
+        prob.delete if prob.errs.count <= 0
+      end
+      puts
+
+      Rake::Task["errbit:db:update_problem_attrs"].execute
+      Rake::Task["errbit:db:update_notices_count"].execute
+      puts
+    end
+
     desc "Updates cached attributes on Problem"
     task :update_problem_attrs => :environment do
       puts "Updating problems"
@@ -27,31 +47,63 @@ namespace :errbit do
 
     desc "Regenerate fingerprints"
     task :regenerate_fingerprints => :environment do
+      total = Notice.count
+      done  = 0
+      last_report = 0.0
 
-      def normalize_backtrace(backtrace)
-        backtrace[0...3].map do |trace|
-          trace.merge 'method' => trace['method'].to_s.gsub(/[0-9_]{10,}+/, "__FRAGMENT__")
+      puts "Regenerating err fingerprints for %d notices..." % [total]
+      Err.create_indexes
+      Notice.all.no_timeout.each do |notice|
+        done += 1
+        pct = 100.0 * done / total
+        if pct - last_report > 1
+          last_report = pct
+          puts "%.0f%%" % [pct]
+        end
+
+        next unless notice.err.present? && notice.err.problem.present?
+
+        fingerprint = ErrorReport.fingerprint_strategy.generate(notice, notice.app.api_key)
+        notice.err = notice.app.find_or_create_err!(error_class: notice.error_class,
+                                                    environment: notice.problem.environment,
+                                                    fingerprint: fingerprint)
+        notice.save
+      end
+      puts
+
+      cleanup_defunct_errs_and_problems
+
+      puts "All done!"
+    end
+
+    desc "Discard duplicate notices, keeping only N examples of each err"
+    task :notices_cull, [ :n ] => :environment do |_, args|
+      n = args[:n].to_i
+      raise ArgumentError, "Please specify how many notices to keep" unless n > 0
+
+      total = Err.count
+      done  = 0
+      last_report = 0.0
+
+      puts "Culling redundant notices for %d errs..." % [total]
+      Err.all.no_timeout.each do |err|
+        done += 1
+        pct = 100.0 * done / total
+        if pct - last_report > 1
+          last_report = pct
+          puts "%.0f%%" % [pct]
+        end
+
+        if err.notices.count > n
+          to_delete = err.notices.count - n
+          puts "  cleaning up Err/#{err.id} (#{to_delete} notices)" if to_delete > 1000
+          (err.notices.to_a[n..-1] || []).each { |notice| notice.destroy }
         end
       end
 
-      def fingerprint(source)
-        Digest::SHA1.hexdigest(source.to_s)
-      end
+      cleanup_defunct_errs_and_problems
 
-      puts "Regenerating Err fingerprints"
-      Err.create_indexes
-      Err.all.each do |err|
-        next if err.notices.count == 0
-        source = {
-          :backtrace => normalize_backtrace(err.notices.first.backtrace).to_s,
-          :error_class => err.error_class,
-          :component => err.component,
-          :action => err.action,
-          :environment => err.environment,
-          :api_key => err.app.api_key
-        }
-        err.update_attributes(:fingerprint => fingerprint(source))
-      end
+      puts "All done!"
     end
 
     desc "Remove notices in batch"
