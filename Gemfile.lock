@@ -340,7 +340,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    useragent (0.8.3)
+    useragent (0.15.2)
     warden (1.2.3)
       rack (>= 1.0)
     webmock (1.15.0)

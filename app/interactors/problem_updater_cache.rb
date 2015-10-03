@@ -79,12 +79,11 @@ private
 
   def attribute_count(value, init)
     init.tap do |counts|
-      notices.each do |notice|
-        counts[attribute_index(notice.send(value))] ||= {
-          'value' => notice.send(value),
-          'count' => 0
-        }
-        counts[attribute_index(notice.send(value))]['count'] += 1
+      notices.pluck(value).each do |value|
+        counts[attribute_index(value)] ||= {
+          'value' => value,
+          'count' => 0 }
+        counts[attribute_index(value)]['count'] += 1
       end
     end
   end

@@ -16,7 +16,7 @@ class Notice < ActiveRecord::Base
 
   after_create :cache_attributes_on_problem, :unresolve_problem
   after_commit :email_notification, :services_notification, on: :create
-  before_save :sanitize
+  before_save :sanitize, :set_host, :set_user_agent_string
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
   after_initialize :default_values
 
@@ -57,14 +57,6 @@ class Notice < ActiveRecord::Base
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
 
-  def user_agent_string
-    if user_agent.nil? || user_agent.none?
-      "N/A"
-    else
-      "#{user_agent.browser} #{user_agent.version} (#{user_agent.os})"
-    end
-  end
-
   def environment_name
     String(server_environment['server-environment'] || server_environment['environment-name'])
   end
@@ -89,13 +81,6 @@ class Notice < ActiveRecord::Base
 
   def url
     request['url']
-  end
-
-  def host
-    uri = url && URI.parse(url)
-    uri.blank? ? "N/A" : uri.host
-  rescue URI::InvalidURIError
-    "N/A"
   end
 
   def env_vars
@@ -188,7 +173,26 @@ class Notice < ActiveRecord::Base
     end
   end
 
-  private
+private
+
+  def set_host
+    self.host = begin
+      uri = url && URI.parse(url)
+      uri.blank? ? "N/A" : uri.host
+    rescue URI::InvalidURIError
+      "N/A"
+    end
+  end
+
+  def set_user_agent_string
+    self.user_agent_string = begin
+      if user_agent.nil? || user_agent.none?
+        "N/A"
+      else
+        "#{user_agent.browser} #{user_agent.version} (#{user_agent.os})"
+      end
+    end
+  end
 
   ##
   # Send email notification if needed
