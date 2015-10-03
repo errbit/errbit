@@ -60,7 +60,9 @@ describe ProblemMerge do
       problem.resolve!
       expect {
         problem_merge.merge
-      }.to change(problem, :opened_at).to(problem_2.opened_at)
+      }.to change {
+        problem.opened_at.to_s
+      }.to(problem_2.opened_at.to_s)
     end
 
     it "reopens the remaining problem if any of the problems is unresolved" do
