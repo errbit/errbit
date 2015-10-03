@@ -8,29 +8,27 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'mongoid', '5.0.0'
-gem 'mongoid_rails_migrations'
-
+gem 'actionmailer_inline_css'
+gem 'decent_exposure'
 gem 'devise'
+gem 'dotenv-rails'
+gem 'draper'
+gem 'errbit_plugin'
+gem 'errbit_github_plugin'
+gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
-gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
-
-gem 'useragent'
-gem 'decent_exposure'
-gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
+gem 'mongoid', '5.0.0'
+gem 'mongoid_rails_migrations'
+gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 gem 'rack-ssl-enforcer', :require => false
 gem 'rails_autolink'
+gem 'useragent'
+
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
-gem 'draper'
-
-gem 'errbit_plugin'
-gem 'errbit_github_plugin'
-
-gem 'dotenv-rails'
 
 # Notification services
 # ---------------------------------------

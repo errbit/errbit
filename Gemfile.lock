@@ -136,6 +136,8 @@ GEM
     flowdock (0.6.0)
       httparty (~> 0.7)
       multi_json
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.6)
@@ -436,6 +438,7 @@ DEPENDENCIES
   errbit_plugin
   fabrication
   flowdock
+  font-awesome-rails
   haml
   hipchat
   hoi
