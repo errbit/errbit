@@ -2,20 +2,13 @@ language: ruby
 env:
   - COVERAGE=true
 rvm:
-  - 2.0.0
-  - 1.9.3
-  - rbx-19mode
-  - ruby-head
+  - 2.1.2
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database errbit_test;' -U postgres
 script: 
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - RAILS_ENV=test bundle exec rake db:test:prepare --trace
   - bundle exec rake spec
-matrix:
-  allow_failures:
-    - rvm: rbx-19mode
-    - rvm: ruby-head
 
 
 # To stop Travis from running tests for a new commit,
