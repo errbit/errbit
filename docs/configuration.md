@@ -61,6 +61,9 @@ In order of precedence Errbit uses:
 <dt>GITHUB_URL
 <dd>Use this URL for interacting github. This is useful if you have a github enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com
+<dt>GITHUB_API_URL</dt>
+<dd>For github enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
+<dd>defaults to https://api.github.com</dd>
 <dt>GITHUB_AUTHENTICATION
 <dd>Allow github sign-in via OAuth
 <dd>defaults to true
@@ -73,6 +76,9 @@ In order of precedence Errbit uses:
 <dt>GITHUB_ACCESS_SCOPE
 <dd>OAuth scope to request from users when they sign-in through github
 <dd>defaults to [repo]
+<dt>GITHUB_SITE_TITLE</dt>
+<dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
+<dd>defaults to GitHub</dd>
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER
