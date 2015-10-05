@@ -142,16 +142,22 @@ class Problem
         { "$match" => { err_id: { "$in" => err_ids } } },
         { "$group" => { _id: "$#{v}", count: {"$sum" => 1} } }
       ]).each do |agg|
-        next if agg[:_id] == nil
-
-        send(k)[Digest::MD5.hexdigest(agg[:_id])] = {
-          value: agg[:_id],
-          count: agg[:count]
+        send(k)[Digest::MD5.hexdigest(agg[:_id] || 'N/A')] = {
+          'value' => agg[:_id] || 'N/A',
+          'count' => agg[:count]
         }
       end
     end
 
-    self.notices_count = Notice.where({ err_id: { "$in" => err_ids }}).count
+    first_notice = notices.order_by([:created_at, :asc]).first
+    last_notice = notices.order_by([:created_at, :desc]).first
+
+    self.notices_count = notices.count
+    self.first_notice_at = first_notice.created_at if first_notice
+    self.message = first_notice.message if first_notice
+    self.where = first_notice.where if first_notice
+    self.last_notice_at = last_notice.created_at if last_notice
+
     save
   end
 

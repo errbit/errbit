@@ -16,13 +16,7 @@ class ProblemMerge
       problem.reload # deference all associate objet to avoid delete him after
       ProblemDestroy.execute(problem)
     end
-    reset_cached_attributes
+    merged_problem.recache
     merged_problem
-  end
-
-  private
-
-  def reset_cached_attributes
-    ProblemUpdaterCache.new(merged_problem).update
   end
 end

@@ -14,7 +14,14 @@ Rails.application.routes.draw do
       delete :unlink_github
     end
   end
-  resources :problems,      :only => [:index] do
+
+  resources :site_config, :only => [:index] do
+    collection do
+      put :update
+    end
+  end
+
+  resources :problems,    :only => [:index] do
     collection do
       post :destroy_several
       post :resolve_several
