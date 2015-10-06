@@ -1,5 +1,5 @@
 - if Errbit::Config.github_authentication && user == current_user
   - if user.github_account?
-    %span.github= link_to "Unlink GitHub account", unlink_github_user_path(user), :method => :delete, :data => { :confirm => "Are you sure?" }
+    %span.github= link_to "Unlink #{Errbit::Config.github_site_title} account", unlink_github_user_path(user), :method => :delete, :data => { :confirm => "Are you sure?" }
   - else
-    %span.github= link_to "Link GitHub account", user_omniauth_authorize_path(:github)
+    %span.github= link_to "Link #{Errbit::Config.github_site_title} account", user_omniauth_authorize_path(:github)
