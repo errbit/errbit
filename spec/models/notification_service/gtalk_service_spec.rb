@@ -2,7 +2,7 @@ describe NotificationServices::GtalkService, type: 'model' do
   it "it should send a notification to gtalk" do
     # setup
     notice = Fabricate :notice
-    problem = notice.problem
+    notice.problem
     notification_service = Fabricate :gtalk_notification_service, :app => notice.app
     problem = notice.problem
 
@@ -94,7 +94,7 @@ describe NotificationServices::GtalkService, type: 'model' do
   it "it should send a notification to room only" do
     # setup
     notice = Fabricate :notice
-    problem = notice.problem
+    notice.problem
     notification_service = Fabricate :gtalk_notification_service, :app => notice.app
     problem = notice.problem
 
