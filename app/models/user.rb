@@ -3,7 +3,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise *Errbit::Config.devise_modules
+  devise(*Errbit::Config.devise_modules)
 
   field :email
   field :github_login
