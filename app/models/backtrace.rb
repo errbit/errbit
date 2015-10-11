@@ -23,6 +23,7 @@ class Backtrace
   end
 
   private
+
   def generate_fingerprint
     self.fingerprint = self.class.generate_fingerprint(lines)
   end

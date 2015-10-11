@@ -15,7 +15,7 @@ class NoticesController < ApplicationController
       if report.should_keep?
         report.generate_notice!
         api_xml = report.notice.to_xml(:only => false, :methods => [:id]) do |xml|
-         xml.url locate_url(report.notice.id, :host => Errbit::Config.host)
+          xml.url locate_url(report.notice.id, :host => Errbit::Config.host)
         end
         render :xml => api_xml
       else
