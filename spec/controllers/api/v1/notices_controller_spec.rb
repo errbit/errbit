@@ -6,10 +6,10 @@ describe Api::V1::NoticesController, type: 'controller' do
 
     describe "GET /api/v1/notices" do
       before do
-        Fabricate(:notice, :created_at => Time.new(2012, 8, 01))
-        Fabricate(:notice, :created_at => Time.new(2012, 8, 01))
-        Fabricate(:notice, :created_at => Time.new(2012, 8, 21))
-        Fabricate(:notice, :created_at => Time.new(2012, 8, 30))
+        Fabricate(:notice, :created_at => Time.zone.parse('2012-08-01'))
+        Fabricate(:notice, :created_at => Time.zone.parse('2012-08-01'))
+        Fabricate(:notice, :created_at => Time.zone.parse('2012-08-21'))
+        Fabricate(:notice, :created_at => Time.zone.parse('2012-08-30'))
       end
 
       it "should return JSON if JSON is requested" do

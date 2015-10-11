@@ -236,7 +236,7 @@ describe Problem, type: 'model' do
   context "#last_deploy_at" do
     before do
       @app = Fabricate(:app)
-      @last_deploy = Time.at(10.days.ago.localtime.to_i)
+      @last_deploy = 10.days.ago
       Fabricate(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
     end
 
@@ -247,11 +247,13 @@ describe Problem, type: 'model' do
 
     it "is updated when a deploy is created" do
       problem = Fabricate(:problem, :app => @app, :environment => "production")
-      next_deploy = Time.at(5.minutes.ago.localtime.to_i)
+      next_deploy = 5.minutes.ago
       expect {
         @deploy = Fabricate(:deploy, :app => @app, :created_at => next_deploy)
         problem.reload
-      }.to change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
+      }.to change { problem.last_deploy_at.iso8601 }.
+        from(@last_deploy.iso8601).
+        to(next_deploy.iso8601)
     end
   end
 

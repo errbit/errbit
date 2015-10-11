@@ -139,7 +139,7 @@ describe ProblemsController, type: 'controller' do
     context 'pagination' do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|
-          coll << Fabricate(:notice, :err => err, :created_at => (Time.now + i))
+          coll << Fabricate(:notice, :err => err, :created_at => (i.seconds.from_now))
         end
       end
 
