@@ -40,13 +40,6 @@ Performance/StringReplacement:
     - 'app/models/notification_services/gtalk_service.rb'
     - 'lib/hoptoad/v2.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, Include.
-Rails/ActionFilter:
-  Exclude:
-    - 'app/controllers/notices_controller.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: Include.
