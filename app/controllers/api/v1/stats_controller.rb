@@ -6,7 +6,7 @@ class Api::V1::StatsController < ApplicationController
   before_action :require_api_key_or_authenticate_user!
 
   def app
-    if problem = @app.problems.order_by(:last_notice_at.desc).first
+    if (problem = @app.problems.order_by(:last_notice_at.desc).first)
       @last_error_time = problem.last_notice_at
     end
 
@@ -28,7 +28,7 @@ class Api::V1::StatsController < ApplicationController
 
   def require_api_key_or_authenticate_user!
     if params[:api_key].present?
-      if @app = App.where(:api_key => params[:api_key]).first
+      if (@app = App.where(:api_key => params[:api_key]).first)
         return true
       end
     end
