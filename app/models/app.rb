@@ -94,7 +94,7 @@ class App
   def notify_on_errs
     !(super == false)
   end
-  alias :notify_on_errs? :notify_on_errs
+  alias_method :notify_on_errs?, :notify_on_errs
 
   def emailable?
     notify_on_errs? && notification_recipients.any?
@@ -103,7 +103,7 @@ class App
   def notify_on_deploys
     !(super == false)
   end
-  alias :notify_on_deploys? :notify_on_deploys
+  alias_method :notify_on_deploys?, :notify_on_deploys
 
   def repo_branch
     self.repository_branch.present? ? self.repository_branch : 'master'

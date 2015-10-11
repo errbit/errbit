@@ -88,13 +88,6 @@ Rails/Validation:
 Style/AccessModifierIndentation:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/Alias:
-  Exclude:
-    - 'app/decorators/issue_tracker_field_decorator.rb'
-    - 'app/models/app.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.
