@@ -35,7 +35,7 @@ namespace :errbit do
       99.times {|t| backtrace << {
         'number'  => t.hash % 1000,
         'file'    => "/path/to/file.rb",
-        'method'  => RANDOM_METHODS.shuffle.first.to_s
+        'method'  => RANDOM_METHODS.sample.to_s
       }}
       backtrace
     end

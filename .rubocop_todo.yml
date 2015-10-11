@@ -35,13 +35,6 @@ Metrics/PerceivedComplexity:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Performance/Sample:
-  Exclude:
-    - 'lib/tasks/errbit/demo.rake'
-    - 'spec/fabricators/backtrace_fabricator.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
 Performance/StringReplacement:
   Exclude:
     - 'app/models/notification_services/gtalk_service.rb'
