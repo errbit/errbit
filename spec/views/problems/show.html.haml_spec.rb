@@ -34,7 +34,7 @@ describe "problems/show.html.haml", type: 'view' do
     allow(controller).to receive(:current_user).and_return(Fabricate(:user))
   end
 
-  def with_issue_tracker(tracker, problem)
+  def with_issue_tracker(tracker, _problem)
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(trackers)
     app.issue_tracker = IssueTrackerDecorator.new(
       IssueTracker.new :type_tracker => tracker, :options => {
