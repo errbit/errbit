@@ -5,7 +5,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     github_user  = User.where(:github_login => github_login).first
     github_site_title = Errbit::Config.github_site_title
 
-    if github_user.nil? && github_org_id = Errbit::Config.github_org_id
+    if github_user.nil? && (github_org_id = Errbit::Config.github_org_id)
       # See if they are a member of the organization that we have access for
       # If they are, automatically create an account
       client = Octokit::Client.new(access_token: github_token)
