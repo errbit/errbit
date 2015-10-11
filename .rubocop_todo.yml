@@ -341,13 +341,6 @@ Style/LeadingCommentSpace:
     - 'spec/models/notification_service/hoiio_service_spec.rb'
     - 'spec/models/notification_service/pushover_service_spec.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/MethodCallParentheses:
-  Exclude:
-    - 'spec/controllers/api/v1/notices_controller_spec.rb'
-    - 'spec/controllers/api/v1/problems_controller_spec.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
