@@ -33,13 +33,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 12
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Performance/StringReplacement:
-  Exclude:
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'lib/hoptoad/v2.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: Include.
