@@ -31,7 +31,7 @@ if defined? Flowdock
 
     # can only contain alphanumeric characters and underscores
     def project_name(problem)
-      problem.app.name.gsub /[^0-9a-z_]/i, ''
+      problem.app.name.gsub(/[^0-9a-z_]/i, '')
     end
 
     def content(problem, url)
