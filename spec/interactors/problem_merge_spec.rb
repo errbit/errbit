@@ -36,7 +36,7 @@ describe ProblemMerge do
 
     it 'move all err in one problem' do
       problem_merge.merge
-      expect(problem.reload.errs.map(&:id).sort).to eq (first_errs | merged_errs).map(&:id).sort
+      expect(problem.reload.errs.map(&:id).sort).to eq((first_errs | merged_errs).map(&:id).sort)
     end
 
     it 'keeps the issue link' do

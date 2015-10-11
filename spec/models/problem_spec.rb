@@ -263,7 +263,7 @@ describe Problem, type: 'model' do
     end
 
     it "#messages should be empty by default" do
-      expect(@problem.messages).to eq ({})
+      expect(@problem.messages).to eq({})
     end
 
     it "removing a notice removes string from #messages" do
@@ -290,7 +290,7 @@ describe Problem, type: 'model' do
     end
 
     it "#hosts should be empty by default" do
-      expect(@problem.hosts).to eq ({})
+      expect(@problem.hosts).to eq({})
     end
 
     it "removing a notice removes string from #hosts" do
@@ -310,7 +310,7 @@ describe Problem, type: 'model' do
     end
 
     it "#user_agents should be empty by default" do
-      expect(@problem.user_agents).to eq ({})
+      expect(@problem.user_agents).to eq({})
     end
 
     it "removing a notice removes string from #user_agents" do

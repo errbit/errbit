@@ -107,7 +107,7 @@ describe Notice, type: 'model' do
   describe "request" do
     it "returns empty hash if not set" do
       notice = Notice.new
-      expect(notice.request).to eq ({})
+      expect(notice.request).to eq({})
     end
   end
 
