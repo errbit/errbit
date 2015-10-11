@@ -3,3 +3,8 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   RunRailsCops: true
+
+# Caveat: .find_by raises exception in mongoid, unlike ActiveRecord which
+# returns nil
+Rails/FindBy:
+  Enabled: false
