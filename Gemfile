@@ -60,6 +60,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug', platforms: [:mri]
   gem 'quiet_assets'
+  gem 'rubocop', require: false
 end
 
 group :development do
