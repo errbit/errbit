@@ -36,7 +36,7 @@ module Hoptoad
     end
 
     def self.normalize_key(key)
-      key.gsub('.', '_')
+      key.tr('.', '_')
     end
 
     def self.normalize(notice)
