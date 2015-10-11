@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
     def require_user_edit_priviledges
       can_edit = current_user == user || current_user.admin?
-      redirect_to(root_path) and return(false) unless can_edit
+      redirect_to(root_path) unless can_edit
     end
 
   def user_params

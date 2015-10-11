@@ -104,14 +104,6 @@ Style/AlignParameters:
     - 'app/models/problem.rb'
     - 'config/initializers/devise.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/AndOr:
-  Exclude:
-    - 'app/controllers/users_controller.rb'
-    - 'app/models/error_report.rb'
-
 # Offense count: 105
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
