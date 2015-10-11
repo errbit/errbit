@@ -42,7 +42,7 @@ describe AirbrakeApi::V3::NoticeParser do
     params['key'] = app.api_key
 
     report = AirbrakeApi::V3::NoticeParser.new(params).report
-    notice = report.generate_notice!
+    report.generate_notice!
 
     expect(report.error_class).to eq('Error')
     expect(report.message).to eq('Error: TestError')
