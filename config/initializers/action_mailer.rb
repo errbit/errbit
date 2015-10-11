@@ -26,7 +26,7 @@ end
     host: Errbit::Config.host,
     port: Errbit::Config.port,
     protocol: Errbit::Config.protocol
-  }.select { |k, v| v }
+  }.select { |_k, v| v }
 
   default.reverse_merge!(options_from_config)
 end

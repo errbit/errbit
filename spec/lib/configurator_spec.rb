@@ -22,7 +22,7 @@ describe Configurator do
 
   it 'overrides existing variables' do
     result = Configurator.run({
-      one: ['VARONE', ->(values) { 'oveRIIIDE' } ]
+      one: ['VARONE', ->(_values) { 'oveRIIIDE' } ]
     })
     expect(result.one).to eq('oveRIIIDE')
   end
