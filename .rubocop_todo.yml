@@ -50,19 +50,6 @@ Rails/Output:
     - 'app/interactors/problem_recacher.rb'
     - 'db/seeds.rb'
 
-# Offense count: 14
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Rails/TimeZone:
-  Exclude:
-    - 'app/models/problem.rb'
-    - 'lib/tasks/errbit/demo.rake'
-    - 'spec/controllers/api/v1/notices_controller_spec.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-    - 'spec/models/error_report_spec.rb'
-    - 'spec/models/problem_spec.rb'
-    - 'spec/views/apps/index.html.haml_spec.rb'
-    - 'spec/views/users/show.html.haml_spec.rb'
-
 # Offense count: 12
 # Configuration parameters: Include.
 Rails/Validation:

@@ -13,8 +13,8 @@ class Problem
   }.freeze
 
 
-  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.now }
-  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.now }
+  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
+  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :resolved_at, :type => Time
@@ -173,7 +173,7 @@ class Problem
   end
 
   def resolve!
-    self.update_attributes!(:resolved => true, :resolved_at => Time.now)
+    self.update_attributes!(:resolved => true, :resolved_at => Time.zone.now)
   end
 
   def unresolve!
