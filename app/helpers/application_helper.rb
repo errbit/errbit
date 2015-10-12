@@ -7,7 +7,7 @@ module ApplicationHelper
     RiCal.Calendar do |cal|
       notices.each_with_index do |notice,idx|
         cal.event do |event|
-          event.summary     = "#{idx+1} #{notice.message.to_s}"
+          event.summary     = "#{idx+1} #{notice.message}"
           event.description = notice.url if notice.url
           event.dtstart     = notice.created_at.utc
           event.dtend       = notice.created_at.utc + 60.minutes
@@ -23,7 +23,7 @@ module ApplicationHelper
     RiCal.Calendar { |cal|
       deploys.each_with_index do |deploy,idx|
         cal.event do |event|
-          event.summary     = "#{idx+1} #{deploy.repository.to_s}"
+          event.summary     = "#{idx+1} #{deploy.repository}"
           event.description = deploy.revision.to_s
           event.dtstart     = deploy.created_at.utc
           event.dtend       = deploy.created_at.utc + 60.minutes

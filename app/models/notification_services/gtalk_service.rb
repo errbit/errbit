@@ -46,8 +46,8 @@ class NotificationServices::GtalkService < NotificationService
     client.auth(api_token)
 
     #has to look like this to be formatted properly in the client
-    message =  """#{problem.app.name.to_s}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
+    message =  """#{problem.app.name}
+#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_description problem}"""
 
     # post the issue to the xmpp room(s)

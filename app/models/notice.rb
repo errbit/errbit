@@ -82,7 +82,7 @@ class Notice
   def to_curl
     return "N/A" if url.blank?
     headers = %w(Accept Accept-Encoding Accept-Language Cookie Referer User-Agent).each_with_object([]) do |name, h|
-      if value = env_vars["HTTP_#{name.underscore.upcase}"]
+      if (value = env_vars["HTTP_#{name.underscore.upcase}"])
         h << "-H '#{name}: #{value}'"
       end
     end
@@ -136,9 +136,9 @@ class Notice
     end
   end
 
-  def sanitize_hash(h)
-    h.recurse do |h|
-      h.inject({}) do |h,(k,v)|
+  def sanitize_hash(hash)
+    hash.recurse do |recurse_hash|
+      recurse_hash.inject({}) do |h,(k,v)|
         if k.is_a?(String)
           h[k.gsub(/\./,'&#46;').gsub(/^\$/,'&#36;')] = v
         else

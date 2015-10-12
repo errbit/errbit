@@ -4,7 +4,7 @@ Fabricator(:app) do
 end
 
 Fabricator(:app_with_watcher, :from => :app) do
-  watchers(:count => 1) { |parent, i|
+  watchers(:count => 1) { |parent, _i|
     Fabricate.build(:watcher, :app => parent)
   }
 end

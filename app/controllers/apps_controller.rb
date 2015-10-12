@@ -94,7 +94,7 @@ class AppsController < ApplicationController
 
     def initialize_subclassed_notification_service
       # set the app's notification service
-      if params[:app][:notification_service_attributes] && notification_type = params[:app][:notification_service_attributes][:type]
+      if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
         available_notification_classes = [NotificationService] + NotificationService.subclasses
         notification_class = available_notification_classes.detect{|c| c.name == notification_type}
         if !notification_class.nil?
@@ -112,7 +112,7 @@ class AppsController < ApplicationController
 
     # email_at_notices is edited as a string, and stored as an array.
     def parse_email_at_notices_or_set_default
-      if params[:app] && val = params[:app][:email_at_notices]
+      if params[:app] && (val = params[:app][:email_at_notices])
         # Sanitize negative values, split on comma,
         # strip, parse as integer, remove all '0's.
         # If empty, set as default and show an error message.
@@ -127,7 +127,7 @@ class AppsController < ApplicationController
     end
 
     def parse_notice_at_notices_or_set_default
-      if params[:app][:notification_service_attributes] && val = params[:app][:notification_service_attributes][:notify_at_notices]
+      if params[:app][:notification_service_attributes] && (val = params[:app][:notification_service_attributes][:notify_at_notices])
         # Sanitize negative values, split on comma,
         # strip, parse as integer, remove all '0's.
         # If empty, set as default and show an error message.

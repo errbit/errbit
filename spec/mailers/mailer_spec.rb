@@ -85,7 +85,7 @@ describe Mailer do
     end
 
     context 'with a very long message' do
-      let(:notice)  { Fabricate(:notice, :message => 6.times.collect{|a| "0123456789" }.join('')) }
+      let(:notice)  { Fabricate(:notice, :message => 6.times.collect{|_a| "0123456789" }.join('')) }
       it "should truncate the long message" do
         expect(email.subject).to match( / \d{47}\.{3}$/ )
       end
