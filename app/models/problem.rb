@@ -162,7 +162,9 @@ class Problem
   end
 
   def url
-    Rails.application.routes.url_helpers.app_problem_url(app, self,
+    Rails.application.routes.url_helpers.app_problem_url(
+      app,
+      self,
       :host => Errbit::Config.host,
       :port => Errbit::Config.port
     )

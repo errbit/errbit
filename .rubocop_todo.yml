@@ -121,12 +121,6 @@ Style/ClassCheck:
   Exclude:
     - 'app/helpers/navigation_helper.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/ClosingParenthesisIndentation:
-  Exclude:
-    - 'app/models/problem.rb'
-
 # Offense count: 23
 Style/ConstantName:
   Exclude:
@@ -140,14 +134,6 @@ Style/ConstantName:
     - 'app/models/notification_services/pushover_service.rb'
     - 'app/models/notification_services/slack_service.rb'
     - 'app/models/notification_services/webhook_service.rb'
-
-# Offense count: 11
-# Cop supports --auto-correct.
-Style/DeprecatedHashMethods:
-  Exclude:
-    - 'lib/airbrake_api/v3/notice_parser.rb'
-    - 'lib/hoptoad/v2.rb'
-    - 'spec/lib/airbrake_api/v3/notice_parser_spec.rb'
 
 # Offense count: 70
 # Configuration parameters: Exclude.
