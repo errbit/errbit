@@ -233,7 +233,7 @@ class Problem
   end
 
   def truncate_message
-    self.message = self.message[0, 1000] if self.message
+    self.message = message[0, 1000] if message
   end
 
   def issue_type
