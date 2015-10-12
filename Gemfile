@@ -100,7 +100,7 @@ group :test do
 end
 
 group :heroku, :production do
-  gem 'rails_12factor', require: !!ENV["HEROKU"]
+  gem 'rails_12factor', require: ENV.key?("HEROKU")
   gem 'unicorn', require: false, platform: 'ruby'
 end
 

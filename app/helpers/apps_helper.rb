@@ -45,7 +45,7 @@ module AppsHelper
       @any_github_repos   ||= app.github_repo?
       @any_bitbucket_repos   ||= app.bitbucket_repo?
       @any_issue_trackers ||= app.issue_tracker_configured?
-      @any_deploys        ||= !!app.last_deploy_at
+      @any_deploys        ||= app.last_deploy_at.present?
       @any_notification_services ||= app.notification_service_configured?
     end
   end
