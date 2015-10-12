@@ -570,9 +570,3 @@ Style/TrailingWhitespace:
 Style/UnlessElse:
   Exclude:
     - 'app/controllers/problems_searcher.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/UnneededPercentQ:
-  Exclude:
-    - 'spec/models/notice_spec.rb'

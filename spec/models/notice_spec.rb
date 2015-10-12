@@ -41,7 +41,7 @@ describe Notice, type: 'model' do
 
       it 'has a curl representation' do
         cmd = notice.to_curl
-        expect(cmd).to eq(%q[curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12])
+        expect(cmd).to eq("curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12")
       end
     end
 
