@@ -577,13 +577,6 @@ Style/UnneededPercentQ:
   Exclude:
     - 'spec/models/notice_spec.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/WhenThen:
-  Exclude:
-    - 'app/models/problem.rb'
-    - 'lib/hoptoad.rb'
-
 # Offense count: 10
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.
