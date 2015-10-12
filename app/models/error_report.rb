@@ -94,7 +94,7 @@ class ErrorReport
 
   # Launch all notification define on the app associate to this notice
   def services_notification
-    return true unless app.notification_service_configured? and should_notify?
+    return true unless app.notification_service_configured? && should_notify?
     app.notification_service.create_notification(problem)
   rescue => e
     HoptoadNotifier.notify(e)

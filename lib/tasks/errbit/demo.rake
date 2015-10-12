@@ -3,7 +3,7 @@ namespace :errbit do
   task :demo => :environment do
     require 'fabrication'
 
-    app = Fabricate(:app, :name => "Demo App #{Time.now.strftime("%N")}")
+    app = Fabricate(:app, :name => "Demo App #{Time.zone.now.strftime("%N")}")
 
     # Report a number of errors for the application
     app.problems.delete_all
@@ -35,7 +35,7 @@ namespace :errbit do
       99.times {|t| backtrace << {
         'number'  => t.hash % 1000,
         'file'    => "/path/to/file.rb",
-        'method'  => RANDOM_METHODS.shuffle.first.to_s
+        'method'  => RANDOM_METHODS.sample.to_s
       }}
       backtrace
     end

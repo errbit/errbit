@@ -34,7 +34,7 @@ describe ProblemsController, type: 'controller' do
 
     context 'with environment filters' do
       before(:each) do
-        environments = ['production', 'test', 'development', 'staging']
+        environments = %w(production test development staging)
         20.times do |i|
           Fabricate(:problem, :environment => environments[i % environments.length])
         end
@@ -139,7 +139,7 @@ describe ProblemsController, type: 'controller' do
     context 'pagination' do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|
-          coll << Fabricate(:notice, :err => err, :created_at => (Time.now + i))
+          coll << Fabricate(:notice, :err => err, :created_at => (i.seconds.from_now))
         end
       end
 

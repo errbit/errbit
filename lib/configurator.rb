@@ -39,7 +39,7 @@ class Configurator
   #   a list of environment variables to scan for configuration
   # @return OpenStruct configuration object
   def self.run(mapping)
-    reader = self.new(mapping)
+    reader = new(mapping)
     reader.read
   end
 

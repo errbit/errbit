@@ -3,7 +3,7 @@ Fabricator :backtrace do
     {
       number: rand(999),
       file: "/path/to/file/#{SecureRandom.hex(4)}.rb",
-      method: ActiveSupport.methods.shuffle.first
+      method: ActiveSupport.methods.sample
     }
   end
 end

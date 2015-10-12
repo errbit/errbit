@@ -6,7 +6,7 @@ class IssueTrackerFieldDecorator < Draper::Decorator
   end
   attr_reader :object, :field_info
 
-  alias :key :object
+  alias_method :key, :object
 
   def label
     field_info[:label] || object.to_s.titleize

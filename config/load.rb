@@ -26,7 +26,7 @@ Errbit::Config = Configurator.run({
 
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
-  mongo_url:                 ['MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
+  mongo_url:                 %w(MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
 
   # github
   github_url:                ['GITHUB_URL', ->(values) {
@@ -48,8 +48,8 @@ Errbit::Config = Configurator.run({
   smtp_address:              ['SMTP_SERVER'],
   smtp_port:                 ['SMTP_PORT'],
   smtp_authentication:       ['SMTP_AUTHENTICATION'],
-  smtp_user_name:            ['SMTP_USERNAME', 'SENDGRID_USERNAME'],
-  smtp_password:             ['SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
+  smtp_user_name:            %w(SMTP_USERNAME SENDGRID_USERNAME),
+  smtp_password:             %w(SMTP_PASSWORD SENDGRID_PASSWORD),
   smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', ->(values) {
     values[:smtp_domain] ||
     (values[:email_from] && values[:email_from].split('@').last)||

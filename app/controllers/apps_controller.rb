@@ -20,7 +20,7 @@ class AppsController < ApplicationController
   end
 
   expose(:all_errs) {
-    !!params[:all_errs]
+    params[:all_errs].present?
   }
 
   expose(:problems) {
@@ -97,13 +97,13 @@ class AppsController < ApplicationController
       if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
         available_notification_classes = [NotificationService] + NotificationService.subclasses
         notification_class = available_notification_classes.detect{|c| c.name == notification_type}
-        if !notification_class.nil?
+        if notification_class.present?
           app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
         end
       end
     end
 
-    def plug_params app
+    def plug_params(app)
       app.watchers.build if app.watchers.none?
       app.issue_tracker ||= IssueTracker.new
       app.notification_service = NotificationService.new unless app.notification_service_configured?
@@ -142,6 +142,7 @@ class AppsController < ApplicationController
     end
 
   private
+
     def app_params
       params.require(:app).permit!
     end

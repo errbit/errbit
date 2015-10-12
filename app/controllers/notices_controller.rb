@@ -3,7 +3,7 @@ class NoticesController < ApplicationController
   class ParamsError < StandardError; end
 
   skip_before_action :authenticate_user!, only: :create
-  skip_before_filter :verify_authenticity_token, only: :create
+  skip_before_action :verify_authenticity_token, only: :create
 
   rescue_from ParamsError, :with => :bad_params
 
@@ -15,7 +15,7 @@ class NoticesController < ApplicationController
       if report.should_keep?
         report.generate_notice!
         api_xml = report.notice.to_xml(:only => false, :methods => [:id]) do |xml|
-         xml.url locate_url(report.notice.id, :host => Errbit::Config.host)
+          xml.url locate_url(report.notice.id, :host => Errbit::Config.host)
         end
         render :xml => api_xml
       else

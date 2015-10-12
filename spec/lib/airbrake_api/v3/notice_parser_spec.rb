@@ -53,8 +53,8 @@ describe AirbrakeApi::V3::NoticeParser do
     json = Rails.root.join('spec', 'fixtures', 'api_v3_request.json').read
     data = JSON.parse(json)
 
-    data['key'] = options[:key] if options.has_key?(:key)
-    data['project_id'] = options[:project_id] if options.has_key?(:project_id)
+    data['key'] = options[:key] if options.key?(:key)
+    data['project_id'] = options[:project_id] if options.key?(:project_id)
 
     data
   end

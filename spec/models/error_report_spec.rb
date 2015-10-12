@@ -156,7 +156,7 @@ describe ErrorReport do
       error_report.generate_notice!
       problem = error_report.problem
       problem.update(
-        resolved_at: Time.now,
+        resolved_at: Time.zone.now,
         resolved: true
       )
 

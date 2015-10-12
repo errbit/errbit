@@ -13,8 +13,8 @@ class Problem
   }.freeze
 
 
-  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.now }
-  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.now }
+  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
+  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :resolved_at, :type => Time
@@ -162,7 +162,9 @@ class Problem
   end
 
   def url
-    Rails.application.routes.url_helpers.app_problem_url(app, self,
+    Rails.application.routes.url_helpers.app_problem_url(
+      app,
+      self,
       :host => Errbit::Config.host,
       :port => Errbit::Config.port
     )
@@ -173,7 +175,7 @@ class Problem
   end
 
   def resolve!
-    self.update_attributes!(:resolved => true, :resolved_at => Time.now)
+    self.update_attributes!(:resolved => true, :resolved_at => Time.zone.now)
   end
 
   def unresolve!
@@ -214,11 +216,11 @@ class Problem
 
   def self.ordered_by(sort, order)
     case sort
-    when "app";            order_by(["app_name", order])
-    when "message";        order_by(["message", order])
-    when "last_notice_at"; order_by(["last_notice_at", order])
-    when "last_deploy_at"; order_by(["last_deploy_at", order])
-    when "count";          order_by(["notices_count", order])
+    when "app" then            order_by(["app_name", order])
+    when "message" then        order_by(["message", order])
+    when "last_notice_at" then order_by(["last_notice_at", order])
+    when "last_deploy_at" then order_by(["last_deploy_at", order])
+    when "count" then          order_by(["notices_count", order])
     else raise("\"#{sort}\" is not a recognized sort")
     end
   end
@@ -231,7 +233,7 @@ class Problem
   end
 
   def truncate_message
-    self.message = self.message[0, 1000] if self.message
+    self.message = message[0, 1000] if message
   end
 
   def issue_type
@@ -247,7 +249,8 @@ class Problem
   private
 
     def attribute_count_descrease(name, value)
-      counter, index = send(name), attribute_index(value)
+      counter = send(name)
+      index = attribute_index(value)
       if counter[index] && counter[index]['count'] > 1
         counter[index]['count'] -= 1
       else
