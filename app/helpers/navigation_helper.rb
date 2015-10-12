@@ -28,7 +28,7 @@ module NavigationHelper
 
     active = nil
     sections.each do |controller, actions|
-      actions = ([] << actions) unless actions.kind_of?(Array)
+      actions = Array(actions)
       active = ' active' if current_controller == controller && (actions.include?(:all) || actions.include?(current_action))
     end
     active
