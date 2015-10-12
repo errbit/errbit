@@ -576,9 +576,3 @@ Style/UnlessElse:
 Style/UnneededPercentQ:
   Exclude:
     - 'spec/models/notice_spec.rb'
-
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: WordRegex.
-Style/WordArray:
-  MinSize: 11
