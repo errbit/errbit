@@ -335,12 +335,6 @@ Style/MultilineBlockLayout:
 Style/MultilineOperationIndentation:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/NegatedIf:
-  Exclude:
-    - 'app/controllers/apps_controller.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/ParallelAssignment:

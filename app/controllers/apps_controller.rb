@@ -97,7 +97,7 @@ class AppsController < ApplicationController
       if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
         available_notification_classes = [NotificationService] + NotificationService.subclasses
         notification_class = available_notification_classes.detect{|c| c.name == notification_type}
-        if !notification_class.nil?
+        if notification_class.present?
           app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
         end
       end
