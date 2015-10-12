@@ -20,7 +20,7 @@ class AppsController < ApplicationController
   end
 
   expose(:all_errs) {
-    !!params[:all_errs]
+    params[:all_errs].present?
   }
 
   expose(:problems) {

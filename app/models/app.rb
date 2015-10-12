@@ -135,11 +135,12 @@ class App
 
 
   def issue_tracker_configured?
-    !!issue_tracker && !!(issue_tracker.configured?)
+    issue_tracker.present? && issue_tracker.configured?
   end
 
   def notification_service_configured?
-    !!(notification_service.class < NotificationService && notification_service.configured?)
+    (notification_service.class < NotificationService) &&
+      notification_service.configured?
   end
 
 
