@@ -13,7 +13,7 @@ Metrics/AbcSize:
 # Offense count: 5
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
-  Max: 205
+  Max: 206
 
 # Offense count: 5
 Metrics/CyclomaticComplexity:
@@ -362,16 +362,6 @@ Style/Proc:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/RaiseArgs:
   Enabled: false
-
-# Offense count: 13
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Exclude:
-    - 'app/models/app.rb'
-    - 'app/models/issue_tracker.rb'
-    - 'app/models/notification_service.rb'
-    - 'app/models/problem.rb'
-    - 'lib/configurator.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.

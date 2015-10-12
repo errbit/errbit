@@ -106,11 +106,11 @@ class App
   alias_method :notify_on_deploys?, :notify_on_deploys
 
   def repo_branch
-    self.repository_branch.present? ? self.repository_branch : 'master'
+    repository_branch.present? ? repository_branch : 'master'
   end
 
   def github_repo?
-    self.github_repo.present?
+    github_repo.present?
   end
 
   def github_url
@@ -122,7 +122,7 @@ class App
   end
 
   def bitbucket_repo?
-    self.bitbucket_repo.present?
+    bitbucket_repo.present?
   end
 
   def bitbucket_url
@@ -157,12 +157,12 @@ class App
     if (copy_app = App.where(:_id => app_id).first)
       # Copy fields
       (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
-        self.send("#{k}=", copy_app.send(k))
+        send("#{k}=", copy_app.send(k))
       end
       # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
       %w(watchers issue_tracker notification_service).each do |relation|
         if (obj = copy_app.send(relation))
-          self.send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
+          send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
         end
       end
     end
