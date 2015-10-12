@@ -8,8 +8,8 @@ detected_ruby_version = Gem::Version.new(RUBY_VERSION.dup)
 required_ruby_version = Gem::Version.new('2.1.0') # minimum supported version
 
 if detected_ruby_version < required_ruby_version
-  fail RuntimeError, "RUBY_VERSION must be at least #{required_ruby_version}" \
-                     ", detected RUBY_VERSION #{RUBY_VERSION}"
+  fail "RUBY_VERSION must be at least #{required_ruby_version}, " \
+       "detected RUBY_VERSION #{RUBY_VERSION}"
 end
 
 gem 'actionmailer', RAILS_VERSION
