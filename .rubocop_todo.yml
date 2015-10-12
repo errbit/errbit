@@ -335,13 +335,6 @@ Style/MultilineBlockLayout:
 Style/MultilineOperationIndentation:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/ParallelAssignment:
-  Exclude:
-    - 'app/models/problem.rb'
-    - 'spec/models/app_spec.rb'
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.

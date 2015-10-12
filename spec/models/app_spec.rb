@@ -152,8 +152,8 @@ describe App, type: 'model' do
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do
-      @app, @copy_app = Fabricate(:app, :name => "app", :github_repo => "url"),
-                        Fabricate(:app, :name => "copy_app", :github_repo => "copy url")
+      @app = Fabricate(:app, :name => "app", :github_repo => "url")
+      @copy_app = Fabricate(:app, :name => "copy_app", :github_repo => "copy url")
       @copy_watcher = Fabricate(:watcher, :email => "copywatcher@example.com", :app => @copy_app)
       @app.copy_attributes_from(@copy_app.id)
       expect(@app.name).to eq "app"
