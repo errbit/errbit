@@ -363,12 +363,6 @@ Style/Proc:
 Style/RaiseArgs:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/RedundantException:
-  Exclude:
-    - 'Gemfile'
-
 # Offense count: 13
 # Cop supports --auto-correct.
 Style/RedundantSelf:
