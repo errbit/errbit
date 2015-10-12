@@ -11,21 +11,21 @@ module Hoptoad
     def self.rekey(node)
       case node
       when Hash
-        if node.has_key?('var') && node.has_key?('key')
+        if node.key?('var') && node.key?('key')
           {normalize_key(node['key']) => rekey(node['var'])}
-        elsif node.has_key?('var')
+        elsif node.key?('var')
           rekey(node['var'])
-        elsif node.has_key?('__content__') && node.has_key?('key')
+        elsif node.key?('__content__') && node.key?('key')
           {normalize_key(node['key']) => rekey(node['__content__'])}
-        elsif node.has_key?('__content__')
+        elsif node.key?('__content__')
           rekey(node['__content__'])
-        elsif node.has_key?('key')
+        elsif node.key?('key')
           {normalize_key(node['key']) => nil}
         else
           node.inject({}) {|rekeyed, (key, val)| rekeyed.merge(normalize_key(key) => rekey(val))}
         end
       when Array
-        if node.first.has_key?('key')
+        if node.first.key?('key')
           node.inject({}) {|rekeyed, keypair| rekeyed.merge(rekey(keypair))}
         else
           node.map {|n| rekey(n)}
