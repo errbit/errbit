@@ -318,12 +318,6 @@ Style/LeadingCommentSpace:
     - 'spec/models/notification_service/hoiio_service_spec.rb'
     - 'spec/models/notification_service/pushover_service_spec.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MethodDefParentheses:
-  Enabled: false
-
 # Offense count: 7
 # Cop supports --auto-correct.
 Style/MultilineBlockLayout:

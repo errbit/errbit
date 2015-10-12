@@ -59,13 +59,13 @@ class NotificationServices::GtalkService < NotificationService
 
   private
  
-  def send_to_users client, message
+  def send_to_users(client, message)
     user_id.tr(' ', ",").tr(';', ",").split(",").map(&:strip).reject(&:empty?).each do |user|
       client.send(Jabber::Message.new(user, message))
     end
   end
 
-  def send_to_muc client, message
+  def send_to_muc(client, message)
     #TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment 
     muc = Jabber::MUC::SimpleMUCClient.new(client)
     muc.join(room_id + "/errbit") 

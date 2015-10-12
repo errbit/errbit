@@ -103,7 +103,7 @@ class AppsController < ApplicationController
       end
     end
 
-    def plug_params app
+    def plug_params(app)
       app.watchers.build if app.watchers.none?
       app.issue_tracker ||= IssueTracker.new
       app.notification_service = NotificationService.new unless app.notification_service_configured?
