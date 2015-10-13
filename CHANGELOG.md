@@ -1,3 +1,7 @@
+## 0.5.0
+
+https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=is%3Aclosed+milestone%3A0.5.0
+
 ## 0.4.0
 
 - #791 Fix double escaping of problem title in list view.(@felixbuenemann)
