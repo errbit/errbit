@@ -37,7 +37,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => @problem.id
         returned_problem = JSON.parse(response.body)
 
-        expect( returned_problem.keys ).to match_array(%w(
+        expect(returned_problem.keys).to match_array(%w(
           app_name
           first_notice_at
           message
@@ -53,7 +53,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
 
       it "returns a 404 if the problem cannot be found" do
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => 'IdontExist'
-        expect( response.status ).to eq(404)
+        expect(response.status).to eq(404)
       end
     end
 

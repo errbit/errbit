@@ -256,7 +256,7 @@ describe ProblemsController, type: 'controller' do
     context "when app has no issue tracker" do
       it "should redirect to problem page" do
         post :create_issue, app_id: problem.app.id, id: problem.id
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to eql "This app has no issue tracker"
       end
     end
@@ -276,7 +276,7 @@ describe ProblemsController, type: 'controller' do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+        expect(response).to redirect_to(app_problem_path(err.app, err.problem))
       end
 
       it "should clear issue link" do
@@ -293,7 +293,7 @@ describe ProblemsController, type: 'controller' do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+        expect(response).to redirect_to(app_problem_path(err.app, err.problem))
       end
     end
   end
