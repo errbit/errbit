@@ -57,7 +57,7 @@ private
       link_to_hosted_javascript(app, text)
     else
       link_to_repo_source_file(app, text) ||
-      link_to_issue_tracker_file(app, text)
+        link_to_issue_tracker_file(app, text)
     end
   end
 

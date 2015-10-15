@@ -209,12 +209,6 @@ Style/MultilineBlockLayout:
     - 'spec/models/error_report_spec.rb'
     - 'spec/views/apps/show.atom.builder_spec.rb'
 
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MultilineOperationIndentation:
-  Enabled: false
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.
