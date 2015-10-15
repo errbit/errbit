@@ -6,9 +6,9 @@ describe "Callback on Notice", type: 'model' do
         message: "some message",
         backtrace: [
           {
-            "number"=>"425",
-            "file"=>"[GEM_ROOT]/callbacks.rb",
-            "method"=>"__callbacks"
+            "number" => "425",
+            "file" => "[GEM_ROOT]/callbacks.rb",
+            "method" => "__callbacks"
           }
         ],
         request: { "component" => "application" },
@@ -18,9 +18,9 @@ describe "Callback on Notice", type: 'model' do
         },
         api_key: api_key,
         notifier: {
-          "name"=>"Hoptoad Notifier",
-          "version"=>"2.3.2",
-          "url"=>"http://hoptoadapp.com"
+          "name" => "Hoptoad Notifier",
+          "version" => "2.3.2",
+          "url" => "http://hoptoadapp.com"
         },
         framework: "Rails: 3.2.11"
       }

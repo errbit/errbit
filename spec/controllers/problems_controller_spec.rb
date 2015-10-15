@@ -95,8 +95,8 @@ describe ProblemsController, type: 'controller' do
     before do
       sign_in user
       @app      = Fabricate(:app)
-      @problem1 = Fabricate(:problem, :app=>@app, message: "Most important")
-      @problem2 = Fabricate(:problem, :app=>@app, message: "Very very important")
+      @problem1 = Fabricate(:problem, :app => @app, message: "Most important")
+      @problem2 = Fabricate(:problem, :app => @app, message: "Very very important")
     end
 
     it "renders successfully" do
@@ -380,8 +380,8 @@ describe ProblemsController, type: 'controller' do
       before do
         sign_in user
         @app      = Fabricate(:app)
-        @problem1 = Fabricate(:problem, :app=>@app)
-        @problem2 = Fabricate(:problem, :app=>@app)
+        @problem1 = Fabricate(:problem, :app => @app)
+        @problem2 = Fabricate(:problem, :app => @app)
       end
 
       it "destroys all problems" do
