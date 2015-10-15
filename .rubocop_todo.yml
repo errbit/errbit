@@ -290,12 +290,6 @@ Style/SingleLineMethods:
 Style/SpaceAfterComma:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
 # Offense count: 28
 # Cop supports --auto-correct.
 # Configuration parameters: MultiSpaceAllowedForOperators.
