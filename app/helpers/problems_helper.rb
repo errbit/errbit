@@ -29,4 +29,3 @@ module ProblemsHelper
     "#{url}/avatar/#{email_hash}?#{params.to_query}"
   end
 end
-

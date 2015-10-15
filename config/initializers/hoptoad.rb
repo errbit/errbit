@@ -6,4 +6,3 @@ HoptoadNotifier.configure do |config|
   # Don't log error that causes 404 page
   config.ignore << "Mongoid::Errors::DocumentNotFound"
 end
-

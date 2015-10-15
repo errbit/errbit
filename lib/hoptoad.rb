@@ -22,4 +22,3 @@ private
     end
   end
 end
-
