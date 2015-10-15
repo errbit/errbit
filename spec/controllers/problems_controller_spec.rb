@@ -318,7 +318,6 @@ describe ProblemsController, type: 'controller' do
     end
 
     context "POST /problems/unmerge_several" do
-
       it "should require at least one problem" do
         post :unmerge_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -332,11 +331,9 @@ describe ProblemsController, type: 'controller' do
           expect(merged_problem.reload.errs.length).to eq 1
         }.to change(Problem, :count).by(1)
       end
-
     end
 
     context "POST /problems/resolve_several" do
-
       it "should require at least one problem" do
         post :resolve_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -360,7 +357,6 @@ describe ProblemsController, type: 'controller' do
     end
 
     context "POST /problems/unresolve_several" do
-
       it "should require at least one problem" do
         post :unresolve_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')

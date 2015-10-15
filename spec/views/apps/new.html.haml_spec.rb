@@ -18,7 +18,6 @@ describe "apps/new.html.haml", type: 'view' do
 
       expect(action_bar).to have_selector('a.button', :text => 'cancel')
     end
-
   end
 
   context "with unvalid app" do

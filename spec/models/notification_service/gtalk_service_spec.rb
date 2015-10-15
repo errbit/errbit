@@ -88,7 +88,6 @@ describe NotificationServices::GtalkService, type: 'model' do
       @notification_service.room_id = ""
       @notification_service.create_notification(@problem)
     end
-
   end
 
   it "it should send a notification to room only" do

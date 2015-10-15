@@ -35,7 +35,6 @@ feature "Regeneration api_Key" do
 end
 
 feature "Create an application" do
-
   let(:admin) { Fabricate(:admin) }
   let(:user) {
     Fabricate(:user_watcher, :app => app).user
@@ -63,7 +62,6 @@ feature "Create an application" do
     page.has_content?(I18n.t('controllers.apps.flash.update.success'))
     expect(App.where(:name => 'My new app').count).to eq 0
     expect(App.where(:name => 'My new app 2').count).to eq 1
-
   end
 
   scenario "create an apps with issue tracker and edit it", :js => true do

@@ -44,7 +44,6 @@ describe ProblemDestroy do
         problem_destroy.execute
       end
     end
-
   end
 
   context "in integration way" do

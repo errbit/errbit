@@ -13,7 +13,6 @@ module HashHelper
       pretty += "\n#{' '*nesting*tab_size}"
       pretty += "#{key.inspect} => #{val}"
       pretty += "," unless key == sorted_keys.last
-
     end
     nesting -= 1
     pretty += "\n#{' '*nesting*tab_size}}"
