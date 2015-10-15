@@ -147,12 +147,6 @@ Style/EachWithObject:
     - 'app/models/notice_fingerprinter.rb'
     - 'lib/recurse.rb'
 
-# Offense count: 22
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment.
-Style/ExtraSpacing:
-  Enabled: false
-
 # Offense count: 2
 # Configuration parameters: Exclude.
 Style/FileName:

@@ -22,7 +22,7 @@ class IssueTracker
   end
 
   def type_tracker
-    attributes['type_tracker'] ?  attributes['type_tracker'] : 'none'
+    attributes['type_tracker'] ? attributes['type_tracker'] : 'none'
   end
 
   # Allow the tracker to validate its own params

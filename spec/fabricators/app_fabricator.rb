@@ -12,7 +12,7 @@ end
 Fabricator(:watcher) do
   app
   watcher_type 'email'
-  email   { sequence(:email){|n| "email#{n}@example.com"} }
+  email { sequence(:email){|n| "email#{n}@example.com"} }
 end
 
 Fabricator(:user_watcher, :from => :watcher) do

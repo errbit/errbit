@@ -11,3 +11,6 @@ Rails/FindBy:
 
 Style/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: true
+
+Style/ExtraSpacing:
+  AllowForAlignment: true

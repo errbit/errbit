@@ -14,7 +14,7 @@ class Api::V1::ProblemsController < ApplicationController
 
     respond_to do |format|
       format.any(:html, :json) { render :json => result } # render JSON if no extension specified on path
-      format.xml  { render :xml  => result }
+      format.xml { render :xml => result }
     end
   end
 
@@ -33,7 +33,7 @@ class Api::V1::ProblemsController < ApplicationController
 
     respond_to do |format|
       format.any(:html, :json) { render :json => JSON.dump(results) } # render JSON if no extension specified on path
-      format.xml  { render :xml  => results }
+      format.xml { render :xml => results }
     end
   end
 end

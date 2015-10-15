@@ -1,4 +1,4 @@
-Fabricator :notification_service  do
+Fabricator :notification_service do
   app
   room_id { sequence :word }
   api_token { sequence :word }
