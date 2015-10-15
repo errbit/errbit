@@ -1,5 +1,4 @@
 module FormHelper
-
   def errors_for(document)
     return unless document.errors.any?
 
@@ -14,5 +13,4 @@ module FormHelper
   def label_for_attr(builder, field)
     (builder.object_name + field).gsub(/[\[\]]/,'_').squeeze('_')
   end
-
 end

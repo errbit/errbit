@@ -84,5 +84,4 @@ module ApplicationHelper
     def head_size
       4
     end
-
 end

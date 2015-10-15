@@ -1,5 +1,4 @@
 module NavigationHelper
-
   # Returns ' active' if you are on a given controller
   #  - active_if_here(:users) => ' active' if users controller
   # Or on one of a list of controllers
@@ -44,5 +43,4 @@ module NavigationHelper
   def page_count_from_end(current_page, total_pages)
     (total_pages.to_i - current_page.to_i) + 1
   end
-
 end

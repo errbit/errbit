@@ -159,17 +159,6 @@ Style/EmptyLineBetweenDefs:
     - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
     - 'spec/views/problems/show.html.haml_spec.rb'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/form_helper.rb'
-    - 'app/helpers/hash_helper.rb'
-    - 'app/helpers/navigation_helper.rb'
-    - 'app/helpers/sort_helper.rb'
-
 # Offense count: 22
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment.

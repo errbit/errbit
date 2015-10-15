@@ -1,5 +1,4 @@
 module HashHelper
-
   def pretty_hash(hash, nesting = 0)
     return '{}' if hash.empty?
 
@@ -17,5 +16,4 @@ module HashHelper
     nesting -= 1
     pretty += "\n#{' '*nesting*tab_size}}"
   end
-
 end
