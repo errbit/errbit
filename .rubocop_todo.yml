@@ -147,18 +147,6 @@ Style/EachWithObject:
     - 'app/models/notice_fingerprinter.rb'
     - 'lib/recurse.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAdjacentOneLineDefs.
-Style/EmptyLineBetweenDefs:
-  Exclude:
-    - 'app/controllers/apps_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/models/notification_service.rb'
-    - 'spec/decorators/issue_tracker_decorator_spec.rb'
-    - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
-    - 'spec/views/problems/show.html.haml_spec.rb'
-
 # Offense count: 22
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment.

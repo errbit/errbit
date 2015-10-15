@@ -8,3 +8,6 @@ AllCops:
 # returns nil
 Rails/FindBy:
   Enabled: false
+
+Style/EmptyLineBetweenDefs:
+  AllowAdjacentOneLineDefs: true
