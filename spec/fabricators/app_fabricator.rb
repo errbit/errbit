@@ -22,9 +22,9 @@ end
 
 Fabricator(:deploy) do
   app
-  username      'clyde.frog'
-  repository    'git@github.com/errbit/errbit.git'
-  environment   'production'
-  revision      { SecureRandom.hex(10) }
+  username 'clyde.frog'
+  repository 'git@github.com/errbit/errbit.git'
+  environment 'production'
+  revision { SecureRandom.hex(10) }
 end
 

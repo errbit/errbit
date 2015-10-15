@@ -12,7 +12,7 @@ class Comment
 
   belongs_to :err, :class_name => "Problem"
   belongs_to :user
-  delegate   :app, :to => :err
+  delegate :app, :to => :err
 
   validates_presence_of :body
 

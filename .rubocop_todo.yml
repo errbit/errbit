@@ -285,17 +285,6 @@ Style/SingleLineMethods:
     - 'spec/errbit_plugin/mock_issue_tracker.rb'
     - 'spec/views/problems/show.html.haml_spec.rb'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Exclude:
-    - 'app/models/comment.rb'
-    - 'config/application.rb'
-    - 'spec/fabricators/app_fabricator.rb'
-    - 'spec/fabricators/comment_fabricator.rb'
-    - 'spec/fabricators/notice_fabricator.rb'
-    - 'spec/fabricators/user_fabricator.rb'
-
 # Offense count: 43
 # Cop supports --auto-correct.
 Style/SpaceAfterComma:
