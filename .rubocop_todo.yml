@@ -159,19 +159,6 @@ Style/EmptyLineBetweenDefs:
     - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
     - 'spec/views/problems/show.html.haml_spec.rb'
 
-# Offense count: 12
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Exclude:
-    - 'app/controllers/api/v1/stats_controller.rb'
-    - 'app/decorators/issue_tracker_field_decorator.rb'
-    - 'app/models/app.rb'
-    - 'app/models/problem.rb'
-    - 'config/deploy/production.example.rb'
-    - 'lib/tasks/errbit/demo.rake'
-    - 'script/rspec-queue-mongoid.rb'
-    - 'spec/acceptance/app_regenerate_api_key_spec.rb'
-
 # Offense count: 28
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

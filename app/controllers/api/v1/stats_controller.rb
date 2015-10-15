@@ -23,7 +23,6 @@ class Api::V1::StatsController < ApplicationController
     end
   end
 
-
   protected
 
   def require_api_key_or_authenticate_user!

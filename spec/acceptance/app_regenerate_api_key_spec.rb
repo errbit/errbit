@@ -55,7 +55,6 @@ feature "Create an application" do
     expect(App.where(:name => 'My new app').count).to eq 1
     expect(App.where(:name => 'My new app 2').count).to eq 0
 
-
     click_on I18n.t('shared.navigation.apps')
     click_on 'My new app'
     click_link I18n.t('apps.show.edit')
