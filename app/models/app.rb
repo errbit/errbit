@@ -19,9 +19,9 @@ class App
   # Some legacy apps may have string as key instead of BSON::ObjectID
   # identity :type => String
   field :_id,
-    type: String,
-    pre_processed: true,
-    default: ->{ BSON::ObjectId.new.to_s }
+        type: String,
+        pre_processed: true,
+        default: ->{ BSON::ObjectId.new.to_s }
 
   embeds_many :watchers
   embeds_many :deploys

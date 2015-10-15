@@ -247,9 +247,9 @@ Devise.setup do |config|
     }
 
     config.omniauth :github,
-      Errbit::Config.github_client_id,
-      Errbit::Config.github_secret,
-      github_options
+                    Errbit::Config.github_client_id,
+                    Errbit::Config.github_secret,
+                    github_options
   end
 
   # ==> Warden configuration
