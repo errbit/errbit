@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
   end
 
   protected
+
     def find_app
       @app = App.find(params[:app_id])
     end

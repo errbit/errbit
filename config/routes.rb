@@ -14,7 +14,14 @@ Rails.application.routes.draw do
       delete :unlink_github
     end
   end
-  resources :problems,      :only => [:index] do
+
+  resources :site_config, :only => [:index] do
+    collection do
+      put :update
+    end
+  end
+
+  resources :problems,    :only => [:index] do
     collection do
       post :destroy_several
       post :resolve_several
@@ -61,6 +68,7 @@ Rails.application.routes.draw do
   end
 
   match '/api/v3/projects/:project_id/create-notice' => 'api/v3/notices#create', via: [:post]
+  match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post]
 
   root :to => 'apps#index'
 end

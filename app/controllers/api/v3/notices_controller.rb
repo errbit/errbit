@@ -5,6 +5,9 @@ class Api::V3::NoticesController < ApplicationController
   respond_to :json
 
   def create
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
+
     params.merge!(JSON.parse(request.raw_post) || {})
     report = AirbrakeApi::V3::NoticeParser.new(params).report
 

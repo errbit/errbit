@@ -50,6 +50,7 @@ class BacktraceLineDecorator < Draper::Decorator
   end
 
   private
+
   def link_to_in_app_source_file(app, text)
     return unless in_app?
     if file_name =~ /\.js$/

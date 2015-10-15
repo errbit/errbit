@@ -236,7 +236,7 @@ describe Problem, type: 'model' do
   context "#last_deploy_at" do
     before do
       @app = Fabricate(:app)
-      @last_deploy = Time.at(10.days.ago.localtime.to_i)
+      @last_deploy = 10.days.ago
       Fabricate(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
     end
 
@@ -247,11 +247,13 @@ describe Problem, type: 'model' do
 
     it "is updated when a deploy is created" do
       problem = Fabricate(:problem, :app => @app, :environment => "production")
-      next_deploy = Time.at(5.minutes.ago.localtime.to_i)
+      next_deploy = 5.minutes.ago
       expect {
         @deploy = Fabricate(:deploy, :app => @app, :created_at => next_deploy)
         problem.reload
-      }.to change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
+      }.to change { problem.last_deploy_at.iso8601 }.
+        from(@last_deploy.iso8601).
+        to(next_deploy.iso8601)
     end
   end
 
@@ -263,7 +265,7 @@ describe Problem, type: 'model' do
     end
 
     it "#messages should be empty by default" do
-      expect(@problem.messages).to eq ({})
+      expect(@problem.messages).to eq({})
     end
 
     it "removing a notice removes string from #messages" do
@@ -290,7 +292,7 @@ describe Problem, type: 'model' do
     end
 
     it "#hosts should be empty by default" do
-      expect(@problem.hosts).to eq ({})
+      expect(@problem.hosts).to eq({})
     end
 
     it "removing a notice removes string from #hosts" do
@@ -310,7 +312,7 @@ describe Problem, type: 'model' do
     end
 
     it "#user_agents should be empty by default" do
-      expect(@problem.user_agents).to eq ({})
+      expect(@problem.user_agents).to eq({})
     end
 
     it "removing a notice removes string from #user_agents" do
@@ -394,6 +396,102 @@ describe Problem, type: 'model' do
     context "with issue_type fill in Problem" do
       it 'return the value associate' do
         expect(Problem.new(:issue_type => 'foo').issue_type).to eql 'foo'
+      end
+    end
+  end
+
+  describe '#recache' do
+    let(:problem) { Fabricate(:problem_with_errs) }
+    let(:first_errs) { problem.errs }
+    let!(:notice) { Fabricate(:notice, :err => first_errs.first) }
+
+    before do
+      problem.update_attribute(:notices_count, 0)
+    end
+
+    it 'update the notice_count' do
+      expect {
+        problem.recache
+      }.to change{
+        problem.notices_count
+      }.from(0).to(1)
+    end
+
+    context "with only one notice" do
+      before do
+        problem.update_attributes!(:messages => {})
+        problem.recache
+      end
+
+      it 'update information about this notice' do
+        expect(problem.message).to eq notice.message
+        expect(problem.where).to eq notice.where
+      end
+
+      it 'update first_notice_at' do
+        expect(problem.first_notice_at).to eq notice.reload.created_at
+      end
+
+      it 'update last_notice_at' do
+        expect(problem.last_notice_at).to eq notice.reload.created_at
+      end
+
+      it 'update stats messages' do
+        expect(problem.messages).to eq({
+          Digest::MD5.hexdigest(notice.message) => {'value' => notice.message, 'count' => 1}
+        })
+      end
+
+      it 'update stats hosts' do
+        expect(problem.hosts).to eq({
+          Digest::MD5.hexdigest(notice.host) => {'value' => notice.host, 'count' => 1}
+        })
+      end
+
+      it 'update stats user_agents' do
+        expect(problem.user_agents).to eq({
+          Digest::MD5.hexdigest(notice.user_agent_string) => {'value' => notice.user_agent_string, 'count' => 1}
+        })
+      end
+    end
+
+    context "with several notices" do
+      let!(:notice_2) { Fabricate(:notice, :err => first_errs.first) }
+      let!(:notice_3) { Fabricate(:notice, :err => first_errs.first) }
+      before do
+        problem.update_attributes!(:messages => {})
+        problem.recache
+      end
+
+      it 'update information about this notice' do
+        expect(problem.message).to eq notice.message
+        expect(problem.where).to eq notice.where
+      end
+
+      it 'update first_notice_at' do
+        expect(problem.first_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
+      end
+
+      it 'update last_notice_at' do
+        expect(problem.last_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
+      end
+
+      it 'update stats messages' do
+        expect(problem.messages).to eq({
+          Digest::MD5.hexdigest(notice.message) => {'value' => notice.message, 'count' => 3}
+        })
+      end
+
+      it 'update stats hosts' do
+        expect(problem.hosts).to eq({
+          Digest::MD5.hexdigest(notice.host) => {'value' => notice.host, 'count' => 3}
+        })
+      end
+
+      it 'update stats user_agents' do
+        expect(problem.user_agents).to eq({
+          Digest::MD5.hexdigest(notice.user_agent_string) => {'value' => notice.user_agent_string, 'count' => 3}
+        })
       end
     end
   end

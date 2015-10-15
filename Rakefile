@@ -10,5 +10,5 @@ begin
   RSpec::Core::RakeTask.new(:spec)
   task :default => :spec
 rescue LoadError
-  # no rspec available
+  warn "Notice: no rspec tasks available in this environment"
 end

@@ -42,20 +42,6 @@ describe ErrorReport do
     end
   end
 
-  describe "#fingerprint_strategy" do
-    it "should be possible to change how fingerprints are generated" do
-      def error_report.fingerprint_strategy
-        Class.new do
-          def self.generate(*args)
-            'fingerprintzzz'
-          end
-        end
-      end
-
-      expect(error_report.error.fingerprint).to eq('fingerprintzzz')
-    end
-  end
-
   describe "#generate_notice!" do
     it "save a notice" do
       expect {
@@ -63,6 +49,20 @@ describe ErrorReport do
       }.to change {
         app.reload.problems.count
       }.by(1)
+    end
+
+    context "with a minimal notice" do
+      let(:xml){
+        Rails.root.join('spec','fixtures','minimal_test_notice.xml').read
+      }
+
+      it 'save a notice' do
+        expect {
+          error_report.generate_notice!
+        }.to change {
+          app.reload.problems.count
+        }.by(1)
+      end
     end
 
     context "with notice generate by Airbrake gem" do
@@ -156,7 +156,7 @@ describe ErrorReport do
       error_report.generate_notice!
       problem = error_report.problem
       problem.update(
-        resolved_at: Time.now,
+        resolved_at: Time.zone.now,
         resolved: true
       )
 

@@ -88,6 +88,19 @@ Deployment
 ----------
 See [notes on deployment](docs/deployment.md)
 
+Notice Grouping
+---------------
+The way Errbit arranges notices into error groups is configurable. By default,
+Errbit uses the notice's error class, error message, complete backtrace,
+component (or controller), action and environment name to generate a unique
+fingerprint for every notice. Notices with identical fingerprints appear in the
+UI as different occurences of the same error and notices with differing
+fingerprints are displayed as separate errors.
+
+Changing the fingerprinter (under the 'config' menu) applies to all apps and
+the change affects only notices that arrive after the change. If you want to
+refingerprint old notices, you can run `rake errbit:notice_refingerprint`.
+
 Authentication
 --------------
 ### Configuring GitHub authentication:
@@ -189,6 +202,16 @@ This will ensure that your application stays up to date with any schema changes.
 * You must have already run migrations at least up to v0.3.0. Check to
   make sure you're schema version is at least 20131011155638 by running rake
   db:version before you upgrade beyond v0.4.0
+* Notice fingerprinting has changed and is now easy to configure. But this
+  means you'll have to regenerate fingerprints on old notices in order to for
+  them to be properly grouped with new notices. To do this run: `rake
+  errbit:notice_refingerprint`. If you were using a custom fingerprinter class
+  in a previous version, be aware that it will no longer have any effect.
+  Fingerprinting is now configurable within the Errbit UI.
+* Prior to v0.4.0, users were only able to see apps they were watching.  All
+  users can now see all apps and they can watch or unwatch any app. If you were
+  using the watch feature to hide secret apps, you should not upgrade beyond
+  v0.4.0.
 
 ### Upgrading errbit from v0.3.0 to v0.4.0
 
@@ -228,21 +251,6 @@ host as early as possible:
 ```javascript
 Airbrake.setProject("ERRBIT API KEY", "ERRBIT API KEY");
 Airbrake.setHost("http://errbit.yourdomain.com");
-```
-
-Using custom fingerprinting methods
------------------------------------
-
-Errbit collates errors into groups using a fingerprinting strategy. If you find
-your errors are not getting grouped the way you would expect, you may need to
-implement your own strategy. A fingerprinting strategy is just a class that
-implements a ::generate class method. See the classes in
-`app/models/fingerprint/` if you need some inspiration. You can install it with
-an initializer like:
-
-```ruby
-# config/initializers/fingerprint.rb
-ErrorReport.fingerprint_strategy = MyStrategy
 ```
 
 Plugins and Integrations

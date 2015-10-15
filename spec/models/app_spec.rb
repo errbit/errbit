@@ -1,10 +1,10 @@
 describe App, type: 'model' do
   context "Attributes" do
-    it { should have_field(:_id).of_type(String) }
-    it { should have_field(:name).of_type(String) }
-    it { should have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
-    it { should have_fields(:resolve_errs_on_deploy, :notify_all_users, :notify_on_errs, :notify_on_deploys).of_type(Mongoid::Boolean) }
-    it { should have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
+    it { is_expected.to have_field(:_id).of_type(String) }
+    it { is_expected.to have_field(:name).of_type(String) }
+    it { is_expected.to have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
+    it { is_expected.to have_fields(:resolve_errs_on_deploy, :notify_all_users, :notify_on_errs, :notify_on_deploys).of_type(Mongoid::Boolean) }
+    it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end
 
   context 'validations' do
@@ -152,8 +152,8 @@ describe App, type: 'model' do
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do
-      @app, @copy_app = Fabricate(:app, :name => "app", :github_repo => "url"),
-                        Fabricate(:app, :name => "copy_app", :github_repo => "copy url")
+      @app = Fabricate(:app, :name => "app", :github_repo => "url")
+      @copy_app = Fabricate(:app, :name => "copy_app", :github_repo => "copy url")
       @copy_watcher = Fabricate(:watcher, :email => "copywatcher@example.com", :app => @copy_app)
       @app.copy_attributes_from(@copy_app.id)
       expect(@app.name).to eq "app"

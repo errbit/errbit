@@ -31,11 +31,11 @@ if defined? Flowdock
 
     # can only contain alphanumeric characters and underscores
     def project_name(problem)
-      problem.app.name.gsub /[^0-9a-z_]/i, ''
+      problem.app.name.gsub(/[^0-9a-z_]/i, '')
     end
 
     def content(problem, url)
-      full_description = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s}"
+      full_description = "[#{ problem.environment }][#{ problem.where }] #{problem.message}"
       <<-MSG.strip_heredoc
         #{ERB::Util.html_escape full_description}<br>
         <a href="#{url}">#{url}</a>

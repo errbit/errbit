@@ -4,33 +4,39 @@ RAILS_VERSION = '~> 4.2.0'
 
 send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
+detected_ruby_version = Gem::Version.new(RUBY_VERSION.dup)
+required_ruby_version = Gem::Version.new('2.1.0') # minimum supported version
+
+if detected_ruby_version < required_ruby_version
+  fail "RUBY_VERSION must be at least #{required_ruby_version}, " \
+       "detected RUBY_VERSION #{RUBY_VERSION}"
+end
+
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
-gem 'mongoid', '5.0.0.beta'
-gem 'mongoid_rails_migrations'
-
+gem 'actionmailer_inline_css'
+gem 'decent_exposure'
 gem 'devise'
+gem 'dotenv-rails'
+gem 'draper'
+gem 'errbit_plugin'
+gem 'errbit_github_plugin'
+gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
-gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
-
-gem 'useragent'
-gem 'decent_exposure'
-gem 'actionmailer_inline_css'
 gem 'kaminari', '>= 0.14.1'
+gem 'mongoid', '5.0.0'
+gem 'mongoid_rails_migrations'
+gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
 gem 'rack-ssl-enforcer', :require => false
 gem 'rails_autolink'
+gem 'useragent'
+
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
-gem 'draper'
-
-gem 'errbit_plugin'
-gem 'errbit_github_plugin'
-
-gem 'dotenv-rails'
 
 # Notification services
 # ---------------------------------------
@@ -62,6 +68,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug', platforms: [:mri]
   gem 'quiet_assets'
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -81,7 +88,7 @@ group :test do
   gem 'rspec-rails', '~> 3.0', require: false
   gem 'rspec-activemodel-mocks'
   gem 'rspec-its'
-  gem 'mongoid-rspec', '~> 2.3.0.beta', require: false
+  gem 'mongoid-rspec', '~> 3.0.0', require: false
   gem 'fabrication'
   gem 'capybara'
   gem 'poltergeist'
@@ -93,13 +100,12 @@ group :test do
 end
 
 group :heroku, :production do
-  gem 'rails_12factor', require: !!ENV["HEROKU"]
+  gem 'rails_12factor', require: ENV.key?("HEROKU")
   gem 'unicorn', require: false, platform: 'ruby'
 end
 
 gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
 gem 'sass-rails'
-gem 'coffee-rails'
 gem 'uglifier'
 # We can't upgrade because not compatible to jquery >= 1.9.
 # To do that, we need fix the rails.js

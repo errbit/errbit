@@ -13,7 +13,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
 
       it "should return JSON if JSON is requested" do
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => Problem.first.id
-        expect { JSON.load(response.body) }.not_to raise_error() #JSON::ParserError
+        expect { JSON.load(response.body) }.not_to raise_error #JSON::ParserError
       end
 
       it "should return XML if XML is requested" do
@@ -23,7 +23,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
 
       it "should return JSON by default" do
         get :show, :auth_token => @user.authentication_token, :id => @problem.id
-        expect { JSON.load(response.body) }.not_to raise_error()#JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error#JSON::ParserError)
       end
 
       it "should return the correct problem" do
@@ -37,19 +37,18 @@ describe Api::V1::ProblemsController, type: 'controller' do
         get :show, :auth_token => @user.authentication_token, :format => "json", :id => @problem.id
         returned_problem = JSON.parse(response.body)
 
-        expect( returned_problem.keys ).to match_array([
-          "app_name",
-          "first_notice_at",
-          "message",
-          "app_id",
-          "last_notice_at",
-          "_id",
-          "resolved",
-          "resolved_at",
-          "where",
-          "notices_count",
-          "environment"
-        ])
+        expect( returned_problem.keys ).to match_array(%w(
+          app_name
+          first_notice_at
+          message
+          app_id
+          last_notice_at
+          _id
+          resolved
+          resolved_at
+          where
+          notices_count
+          environment))
       end
 
       it "returns a 404 if the problem cannot be found" do
@@ -68,7 +67,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
 
       it "should return JSON if JSON is requested" do
         get :index, :auth_token => @user.authentication_token, :format => "json"
-        expect { JSON.load(response.body) }.not_to raise_error()#JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error#JSON::ParserError)
       end
 
       it "should return XML if XML is requested" do
@@ -78,7 +77,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
 
       it "should return JSON by default" do
         get :index, :auth_token => @user.authentication_token
-        expect { JSON.load(response.body) }.not_to raise_error()#JSON::ParserError)
+        expect { JSON.load(response.body) }.not_to raise_error#JSON::ParserError)
       end
 
       describe "given a date range" do

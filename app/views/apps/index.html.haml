@@ -1,6 +1,10 @@
 - content_for :title, t('.title')
 - content_for :action_bar do
-  %span= link_to(t('.new_app'), new_app_path, :class => 'add') if current_user.admin?
+  - if current_user.admin?
+    %span
+      = link_to(new_app_path) do
+        %i.fa.fa-plus-circle
+        = t('.new_app')
 
 %table.apps
   %thead

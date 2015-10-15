@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notice version="2.4">
+  <api-key>APIKEY</api-key>
+  <notifier>
+    <name>MINIMAL</name>
+  </notifier>
+  <error>
+    <class>OneClass</class>
+    <message>Some message</message>
+    <backtrace>
+      <line number="425" file="afile.rb" method="amethod"/>
+    </backtrace>
+  </error>
+  <server-environment>
+    <environment-name>development</environment-name>
+  </server-environment>
+</notice>

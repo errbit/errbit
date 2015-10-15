@@ -20,7 +20,7 @@ if defined? HipChat
       }],
     ]
     Mandatory_fields = [:service, :api_token, :room_id]
-    API_versions = ['v1', 'v2']
+    API_versions = %w(v1 v2)
 
     def check_params
       Fields.each do |field, hash|

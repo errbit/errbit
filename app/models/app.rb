@@ -27,6 +27,7 @@ class App
   embeds_many :deploys
   embeds_one :issue_tracker, :class_name => 'IssueTracker'
   embeds_one :notification_service
+  embeds_one :notice_fingerprinter, autobuild: true
 
   has_many :problems, :inverse_of => :app, :dependent => :destroy
 
@@ -38,6 +39,7 @@ class App
   validates_uniqueness_of :name, :allow_blank => true
   validates_uniqueness_of :api_key, :allow_blank => true
   validates_associated :watchers
+  validates_associated :notice_fingerprinter
   validate :check_issue_tracker
 
   accepts_nested_attributes_for :watchers, :allow_destroy => true,
@@ -46,6 +48,15 @@ class App
     :reject_if => proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service, :allow_destroy => true,
     :reject_if => proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+  accepts_nested_attributes_for :notice_fingerprinter
+
+  scope :watched_by, ->(user) do
+    where watchers: { "$elemMatch" => { "user_id" => user.id } }
+  end
+
+  def watched_by?(user)
+    watchers.pluck("user_id").include? user.id
+  end
 
   scope :watched_by, ->(user) do
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
@@ -62,16 +73,15 @@ class App
   # * <tt>:fingerprint</tt> - a unique value identifying the notice
   #
   def find_or_create_err!(attrs)
-    Err.where(
-      :fingerprint => attrs[:fingerprint]
-    ).first || (
-      problem = problems.create!(
-        error_class: attrs[:error_class],
-        environment: attrs[:environment],
-        app_name: name
-      )
-      problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
+    err = Err.where(fingerprint: attrs[:fingerprint]).first
+    return err if err
+
+    problem = problems.create!(
+      error_class: attrs[:error_class],
+      environment: attrs[:environment],
+      app_name: name
     )
+    problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
   end
 
   # Mongoid Bug: find(id) on association proxies returns an Enumerator
@@ -92,7 +102,7 @@ class App
   def notify_on_errs
     !(super == false)
   end
-  alias :notify_on_errs? :notify_on_errs
+  alias_method :notify_on_errs?, :notify_on_errs
 
   def emailable?
     notify_on_errs? && notification_recipients.any?
@@ -101,14 +111,14 @@ class App
   def notify_on_deploys
     !(super == false)
   end
-  alias :notify_on_deploys? :notify_on_deploys
+  alias_method :notify_on_deploys?, :notify_on_deploys
 
   def repo_branch
-    self.repository_branch.present? ? self.repository_branch : 'master'
+    repository_branch.present? ? repository_branch : 'master'
   end
 
   def github_repo?
-    self.github_repo.present?
+    github_repo.present?
   end
 
   def github_url
@@ -120,7 +130,7 @@ class App
   end
 
   def bitbucket_repo?
-    self.bitbucket_repo.present?
+    bitbucket_repo.present?
   end
 
   def bitbucket_url
@@ -133,11 +143,12 @@ class App
 
 
   def issue_tracker_configured?
-    !!issue_tracker && !!(issue_tracker.configured?)
+    issue_tracker.present? && issue_tracker.configured?
   end
 
   def notification_service_configured?
-    !!(notification_service.class < NotificationService && notification_service.configured?)
+    (notification_service.class < NotificationService) &&
+      notification_service.configured?
   end
 
 
@@ -151,15 +162,15 @@ class App
 
   # Copy app attributes from another app.
   def copy_attributes_from(app_id)
-    if copy_app = App.where(:_id => app_id).first
+    if (copy_app = App.where(:_id => app_id).first)
       # Copy fields
       (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
-        self.send("#{k}=", copy_app.send(k))
+        send("#{k}=", copy_app.send(k))
       end
       # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
       %w(watchers issue_tracker notification_service).each do |relation|
-        if obj = copy_app.send(relation)
-          self.send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
+        if (obj = copy_app.send(relation))
+          send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
         end
       end
     end

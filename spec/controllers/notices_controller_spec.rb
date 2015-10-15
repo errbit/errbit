@@ -7,6 +7,15 @@ describe NoticesController, type: 'controller' do
   let(:error_report) { double(:valid? => true, :generate_notice! => true, :notice => notice, :should_keep? => true) }
 
   context 'notices API' do
+    context "with bogus xml" do
+      it "returns an error" do
+        expect(request).to receive(:raw_post).and_return('<r><b>notxml</r>')
+        post :create, :format => :xml
+        expect(response.status).to eq(422)
+        expect(response.body).to eq('The provided XML was not well-formed')
+      end
+    end
+
     context "with all params" do
       before do
         expect(ErrorReport).to receive(:new).with(xml).and_return(error_report)

@@ -12,8 +12,9 @@ class Notice
   field :framework
   field :error_class
   delegate :lines, :to => :backtrace, :prefix => true
-  delegate :app, :problem, :to => :err
+  delegate :problem, :to => :err
 
+  belongs_to :app
   belongs_to :err
   belongs_to :backtrace, :index => true
 
@@ -28,9 +29,7 @@ class Notice
   scope :ordered, ->{ order_by(:created_at.asc) }
   scope :reverse_ordered, ->{ order_by(:created_at.desc) }
   scope :for_errs, Proc.new { |errs|
-    if (ids = errs.all.map(&:id)) && ids.present?
-      where(:err_id.in => ids)
-    end
+    where(:err_id.in => errs.all.map(&:id))
   }
 
   def user_agent
@@ -47,7 +46,8 @@ class Notice
   end
 
   def environment_name
-    server_environment['server-environment'] || server_environment['environment-name']
+    n = server_environment['server-environment'] || server_environment['environment-name']
+    n.blank? ? 'development' : n
   end
 
   def component
@@ -82,7 +82,7 @@ class Notice
   def to_curl
     return "N/A" if url.blank?
     headers = %w(Accept Accept-Encoding Accept-Language Cookie Referer User-Agent).each_with_object([]) do |name, h|
-      if value = env_vars["HTTP_#{name.underscore.upcase}"]
+      if (value = env_vars["HTTP_#{name.underscore.upcase}"])
         h << "-H '#{name}: #{value}'"
       end
     end
@@ -118,6 +118,12 @@ class Notice
     end
   end
 
+  # filter memory addresses out of object strings
+  # example: "#<Object:0x007fa2b33d9458>" becomes "#<Object>"
+  def filtered_message
+    message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
+  end
+
   protected
 
   def problem_recache
@@ -130,9 +136,9 @@ class Notice
     end
   end
 
-  def sanitize_hash(h)
-    h.recurse do |h|
-      h.inject({}) do |h,(k,v)|
+  def sanitize_hash(hash)
+    hash.recurse do |recurse_hash|
+      recurse_hash.inject({}) do |h,(k,v)|
         if k.is_a?(String)
           h[k.gsub(/\./,'&#46;').gsub(/^\$/,'&#36;')] = v
         else

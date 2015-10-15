@@ -41,7 +41,7 @@ describe Notice, type: 'model' do
 
       it 'has a curl representation' do
         cmd = notice.to_curl
-        expect(cmd).to eq(%q[curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12])
+        expect(cmd).to eq("curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12")
       end
     end
 
@@ -107,7 +107,7 @@ describe Notice, type: 'model' do
   describe "request" do
     it "returns empty hash if not set" do
       notice = Notice.new
-      expect(notice.request).to eq ({})
+      expect(notice.request).to eq({})
     end
   end
 
