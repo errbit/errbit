@@ -6,6 +6,12 @@ describe Api::V3::NoticesController, type: :controller do
     Rails.root.join('spec', 'fixtures', 'api_v3_request.json').read
   end
 
+  it 'sets CORS headers on POST request' do
+    post :create, project_id: 'invalid id'
+    expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
+    expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
+  end
+
   it 'returns created notice id in json format' do
     post :create, legit_body, legit_params
     notice = Notice.last
