@@ -165,17 +165,17 @@ describe App, type: 'model' do
   context '#find_or_create_err!' do
     let(:app) { Fabricate(:app) }
     let(:conditions) { {
-        :error_class  => 'Whoops',
-        :environment  => 'production',
-        :fingerprint  => 'some-finger-print'
-      }
+      :error_class  => 'Whoops',
+      :environment  => 'production',
+      :fingerprint  => 'some-finger-print'
+    }
     }
 
     it 'returns the correct err if one already exists' do
       existing = Fabricate(:err, {
-        :problem => Fabricate(:problem, :app => app),
-        :fingerprint => conditions[:fingerprint]
-      })
+                             :problem => Fabricate(:problem, :app => app),
+                             :fingerprint => conditions[:fingerprint]
+                           })
       expect(Err.where(:fingerprint => conditions[:fingerprint]).first).to eq existing
       expect(app.find_or_create_err!(conditions)).to eq existing
     end

@@ -2,12 +2,12 @@ class NotificationServices::PushoverService < NotificationService
   Label = "pushover"
   Fields += [
       [:api_token, {
-          :placeholder => "User Key",
-          :label => "User Key"
+        :placeholder => "User Key",
+        :label => "User Key"
       }],
       [:subdomain, {
-          :placeholder => "Application API Token",
-          :label => "Application API Token"
+        :placeholder => "Application API Token",
+        :label => "Application API Token"
       }]
   ]
 

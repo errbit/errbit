@@ -20,8 +20,8 @@ describe IssueTrackerDecorator do
     end
 
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return({
-      fake: klass
-    })
+                                                                           fake: klass
+                                                                         })
 
     klass
   end

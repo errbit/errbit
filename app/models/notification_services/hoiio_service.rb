@@ -2,16 +2,16 @@ class NotificationServices::HoiioService < NotificationService
   Label = "hoiio"
   Fields += [
       [:api_token, {
-          :placeholder => "App ID",
-          :label => "App ID"
+        :placeholder => "App ID",
+        :label => "App ID"
       }],
       [:subdomain, {
-          :placeholder => "Access Token",
-          :label => "Access Token"
+        :placeholder => "Access Token",
+        :label => "Access Token"
       }],
       [:room_id, {
-          :placeholder => "+6511111111, +6511111111",
-          :label       => "Recipient's phone numbers seperated by comma. Phone numbers should start with a \"+\" and country code."
+        :placeholder => "+6511111111, +6511111111",
+        :label       => "Recipient's phone numbers seperated by comma. Phone numbers should start with a \"+\" and country code."
       }]
   ]
 

@@ -42,12 +42,12 @@ class Problem
   index :notices_count => 1
 
   index({
-    error_class: "text",
-    where: "text",
-    message: "text",
-    app_name: "text",
-    environment: "text"
-  }, default_language: "english")
+          error_class: "text",
+          where: "text",
+          message: "text",
+          app_name: "text",
+          environment: "text"
+        }, default_language: "english")
 
   belongs_to :app
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
@@ -84,25 +84,25 @@ class Problem
     user_agent_digest = Digest::MD5.hexdigest(notice.user_agent_string)
 
     Problem.where('_id' => id).find_one_and_update({
-      '$set' => {
-        'environment' => notice.environment_name,
-        'error_class' => notice.error_class,
-        'last_notice_at' => notice.created_at.utc,
-        'message' => notice.message,
-        'resolved' => false,
-        'resolved_at' => nil,
-        'where' => notice.where,
-        "messages.#{message_digest}.value" => notice.message,
-        "hosts.#{host_digest}.value" => notice.host,
-        "user_agents.#{user_agent_digest}.value" => notice.user_agent_string,
-      },
-      '$inc' => {
-        'notices_count' => 1,
-        "messages.#{message_digest}.count" => 1,
-        "hosts.#{host_digest}.count" => 1,
-        "user_agents.#{user_agent_digest}.count" => 1,
-      }
-    }, return_document: :after)
+                                                     '$set' => {
+                                                       'environment' => notice.environment_name,
+                                                       'error_class' => notice.error_class,
+                                                       'last_notice_at' => notice.created_at.utc,
+                                                       'message' => notice.message,
+                                                       'resolved' => false,
+                                                       'resolved_at' => nil,
+                                                       'where' => notice.where,
+                                                       "messages.#{message_digest}.value" => notice.message,
+                                                       "hosts.#{host_digest}.value" => notice.host,
+                                                       "user_agents.#{user_agent_digest}.value" => notice.user_agent_string,
+                                                     },
+                                                     '$inc' => {
+                                                       'notices_count' => 1,
+                                                       "messages.#{message_digest}.count" => 1,
+                                                       "hosts.#{host_digest}.count" => 1,
+                                                       "user_agents.#{user_agent_digest}.count" => 1,
+                                                     }
+                                                   }, return_document: :after)
   end
 
   def uncache_notice(notice)

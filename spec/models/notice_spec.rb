@@ -58,8 +58,8 @@ describe Notice, type: 'model' do
   describe "user agent" do
     it "should be parsed and human-readable" do
       notice = Fabricate.build(:notice, :request => {'cgi-data' => {
-        'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
-      }})
+                                 'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
+                               }})
       expect(notice.user_agent.browser).to eq 'Chrome'
       expect(notice.user_agent.version.to_s).to match( /^10\.0/ )
     end

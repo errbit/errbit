@@ -321,8 +321,8 @@ describe Problem, type: 'model' do
         @err.notices.first.destroy
         @problem.reload
       }.to change(@problem, :user_agents).from({
-        Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}
-      }).to({})
+                                                 Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}
+                                               }).to({})
     end
   end
 
@@ -438,20 +438,20 @@ describe Problem, type: 'model' do
 
       it 'update stats messages' do
         expect(problem.messages).to eq({
-          Digest::MD5.hexdigest(notice.message) => {'value' => notice.message, 'count' => 1}
-        })
+                                         Digest::MD5.hexdigest(notice.message) => {'value' => notice.message, 'count' => 1}
+                                       })
       end
 
       it 'update stats hosts' do
         expect(problem.hosts).to eq({
-          Digest::MD5.hexdigest(notice.host) => {'value' => notice.host, 'count' => 1}
-        })
+                                      Digest::MD5.hexdigest(notice.host) => {'value' => notice.host, 'count' => 1}
+                                    })
       end
 
       it 'update stats user_agents' do
         expect(problem.user_agents).to eq({
-          Digest::MD5.hexdigest(notice.user_agent_string) => {'value' => notice.user_agent_string, 'count' => 1}
-        })
+                                            Digest::MD5.hexdigest(notice.user_agent_string) => {'value' => notice.user_agent_string, 'count' => 1}
+                                          })
       end
     end
 
@@ -478,20 +478,20 @@ describe Problem, type: 'model' do
 
       it 'update stats messages' do
         expect(problem.messages).to eq({
-          Digest::MD5.hexdigest(notice.message) => {'value' => notice.message, 'count' => 3}
-        })
+                                         Digest::MD5.hexdigest(notice.message) => {'value' => notice.message, 'count' => 3}
+                                       })
       end
 
       it 'update stats hosts' do
         expect(problem.hosts).to eq({
-          Digest::MD5.hexdigest(notice.host) => {'value' => notice.host, 'count' => 3}
-        })
+                                      Digest::MD5.hexdigest(notice.host) => {'value' => notice.host, 'count' => 3}
+                                    })
       end
 
       it 'update stats user_agents' do
         expect(problem.user_agents).to eq({
-          Digest::MD5.hexdigest(notice.user_agent_string) => {'value' => notice.user_agent_string, 'count' => 3}
-        })
+                                            Digest::MD5.hexdigest(notice.user_agent_string) => {'value' => notice.user_agent_string, 'count' => 3}
+                                          })
       end
     end
   end

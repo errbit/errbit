@@ -16,9 +16,9 @@ describe Api::V3::NoticesController, type: :controller do
     post :create, legit_body, legit_params
     notice = Notice.last
     expect(JSON.parse(response.body)).to eq({
-      'id' => notice.id.to_s,
-      'url' => app_problem_url(app, notice.problem)
-    })
+                                              'id' => notice.id.to_s,
+                                              'url' => app_problem_url(app, notice.problem)
+                                            })
   end
 
   it 'responds with 400 when request attributes are not valid' do
