@@ -1,7 +1,6 @@
 require 'problem_destroy'
 
 class ResolvedProblemClearer
-
   ##
   # Clear all problem already resolved
   #

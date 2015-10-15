@@ -217,6 +217,5 @@ class App
       github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
       github_repo.sub!(/\.git$/, '')
     end
-
 end
 

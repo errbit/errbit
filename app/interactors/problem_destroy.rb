@@ -1,5 +1,4 @@
 class ProblemDestroy
-
   attr_reader :problem
 
   def initialize(problem)
@@ -44,5 +43,4 @@ class ProblemDestroy
   def delete_comments
     Comment.delete_all(:_id => { '$in' => comments_id })
   end
-
 end

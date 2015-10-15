@@ -34,5 +34,4 @@ class Api::V1::StatsController < ApplicationController
 
     authenticate_user!
   end
-
 end

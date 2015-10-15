@@ -17,5 +17,4 @@ class Err
   validates_presence_of :problem_id, :fingerprint
 
   delegate :app, :resolved?, :to => :problem
-
 end

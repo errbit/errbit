@@ -43,6 +43,5 @@ class Deploy
         Mailer.deploy_notification(self).deliver_now
       end
     end
-
 end
 

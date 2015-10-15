@@ -20,5 +20,4 @@ class Api::V1::NoticesController < ApplicationController
       format.xml  { render :xml  => results }
     end
   end
-
 end
