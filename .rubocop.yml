@@ -14,3 +14,14 @@ Style/EmptyLineBetweenDefs:
 
 Style/ExtraSpacing:
   AllowForAlignment: true
+
+Style/IndentationConsistency:
+  # `rails` style:
+  # prescribes that in classes and modules the `protected` and `private`
+  # modifier keywords shall be indented the same as public methods and that
+  # protected and private members shall be indented one step more than the
+  # modifiers.
+   EnforcedStyle: rails
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: outdent

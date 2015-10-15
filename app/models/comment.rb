@@ -28,13 +28,13 @@ class Comment
     app.emailable? && notification_recipients.any?
   end
 
-  protected
+protected
 
-    def increase_counter_cache
-      err.inc(comments_count: 1)
-    end
+  def increase_counter_cache
+    err.inc(comments_count: 1)
+  end
 
-    def decrease_counter_cache
-      err.inc(comments_count: -1) if err
-    end
+  def decrease_counter_cache
+    err.inc(comments_count: -1) if err
+  end
 end

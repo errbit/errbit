@@ -134,7 +134,7 @@ class ProblemsController < ApplicationController
     end
   end
 
-  protected
+protected
 
   ##
   # Redirect :back if no errors selected

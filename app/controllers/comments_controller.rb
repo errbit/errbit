@@ -24,17 +24,17 @@ class CommentsController < ApplicationController
     redirect_to app_problem_path(@app, @problem)
   end
 
-  protected
+protected
 
-    def find_app
-      @app = App.find(params[:app_id])
-    end
+  def find_app
+    @app = App.find(params[:app_id])
+  end
 
-    def find_problem
-      @problem = @app.problems.find(params[:problem_id])
-    end
+  def find_problem
+    @problem = @app.problems.find(params[:problem_id])
+  end
 
-    def comment_params
-      params.require(:comment).permit!
-    end
+  def comment_params
+    params.require(:comment).permit!
+  end
 end

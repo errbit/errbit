@@ -57,7 +57,7 @@ class NotificationServices::GtalkService < NotificationService
     client.close unless client.nil?
   end
 
-  private
+private
  
   def send_to_users(client, message)
     user_id.tr(' ', ",").tr(';', ",").split(",").map(&:strip).reject(&:empty?).each do |user|

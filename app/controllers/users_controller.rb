@@ -51,12 +51,12 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   end
 
-  protected
+protected
 
-    def require_user_edit_priviledges
-      can_edit = current_user == user || current_user.admin?
-      redirect_to(root_path) unless can_edit
-    end
+  def require_user_edit_priviledges
+    can_edit = current_user == user || current_user.admin?
+    redirect_to(root_path) unless can_edit
+  end
 
   def user_params
     @user_params ||= params[:user] ? params.require(:user).permit(*user_permit_params) : {}

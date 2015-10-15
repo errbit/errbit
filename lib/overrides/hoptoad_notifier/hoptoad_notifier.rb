@@ -4,7 +4,7 @@
 
 HoptoadNotifier.module_eval do
   class << self
-    private
+  private
 
       def send_notice(notice)
         # Log the error internally if we are not in a development environment.

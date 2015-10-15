@@ -83,7 +83,7 @@ class User
     :auth_token
   end
 
-  private
+private
 
   def generate_authentication_token
     loop do

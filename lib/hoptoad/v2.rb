@@ -6,7 +6,7 @@ module Hoptoad
           rekey(parsed)))
     end
 
-    private
+  private
 
     def self.rekey(node)
       case node
