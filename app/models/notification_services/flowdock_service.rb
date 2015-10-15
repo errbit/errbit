@@ -35,7 +35,7 @@ if defined? Flowdock
     end
 
     def content(problem, url)
-      full_description = "[#{ problem.environment }][#{ problem.where }] #{problem.message}"
+      full_description = "[#{problem.environment}][#{problem.where}] #{problem.message}"
       <<-MSG.strip_heredoc
         #{ERB::Util.html_escape full_description}<br>
         <a href="#{url}">#{url}</a>

@@ -218,7 +218,7 @@ describe ProblemsController, type: 'controller' do
 
       it "should save the right title" do
         post :create_issue, app_id: problem.app.id, id: problem.id
-        title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+        title = "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
         line = issue_tracker.tracker.output.shift
         expect(line[0]).to eq(title)
       end
