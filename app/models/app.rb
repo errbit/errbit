@@ -62,10 +62,6 @@ class App
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
   end
 
-  def watched_by?(user)
-    watchers.pluck("user_id").include? user.id
-  end
-
   # Acceps a hash with the following attributes:
   #
   # * <tt>:error_class</tt> - the class of error (required to create a new Problem)
@@ -230,4 +226,3 @@ class App
     end
 
 end
-
