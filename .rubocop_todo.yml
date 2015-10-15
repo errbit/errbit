@@ -285,11 +285,6 @@ Style/SingleLineMethods:
     - 'spec/errbit_plugin/mock_issue_tracker.rb'
     - 'spec/views/problems/show.html.haml_spec.rb'
 
-# Offense count: 43
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Enabled: false
-
 # Offense count: 28
 # Cop supports --auto-correct.
 # Configuration parameters: MultiSpaceAllowedForOperators.

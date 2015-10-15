@@ -132,15 +132,15 @@ protected
 
   def sanitize
     [:server_environment, :request, :notifier].each do |h|
-      send("#{h}=",sanitize_hash(send(h)))
+      send("#{h}=", sanitize_hash(send(h)))
     end
   end
 
   def sanitize_hash(hash)
     hash.recurse do |recurse_hash|
-      recurse_hash.inject({}) do |h,(k,v)|
+      recurse_hash.inject({}) do |h, (k, v)|
         if k.is_a?(String)
-          h[k.gsub(/\./,'&#46;').gsub(/^\$/,'&#36;')] = v
+          h[k.gsub(/\./, '&#46;').gsub(/^\$/, '&#36;')] = v
         else
           h[k] = v
         end

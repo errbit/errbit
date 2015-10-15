@@ -27,7 +27,7 @@ class IssueTracker
 
   # Allow the tracker to validate its own params
   def validate_tracker
-    (tracker.errors || {}).each do |k,v|
+    (tracker.errors || {}).each do |k, v|
       errors.add k, v
     end
   end
