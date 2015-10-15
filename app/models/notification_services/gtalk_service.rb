@@ -47,15 +47,14 @@ class NotificationServices::GtalkService < NotificationService
       client.connect(service)
       client.auth(api_token)
 
-      #has to look like this to be formatted properly in the client
-      message =  """#{problem.app.name}
+    #has to look like this to be formatted properly in the client
+    message =  """#{problem.app.name}
 #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_description problem}"""
 
-        # post the issue to the xmpp room(s)
-        send_to_users(client, message) unless user_id.blank?
-        send_to_muc(client, message) unless room_id.blank?
-      end
+      # post the issue to the xmpp room(s)
+      send_to_users(client, message) unless user_id.blank?
+      send_to_muc(client, message) unless room_id.blank?
     end
   ensure
     client.close unless client.nil?
