@@ -1,14 +1,14 @@
 class NotificationServices::PushoverService < NotificationService
   Label = "pushover"
   Fields += [
-      [:api_token, {
-        :placeholder => "User Key",
-        :label => "User Key"
-      }],
-      [:subdomain, {
-        :placeholder => "Application API Token",
-        :label => "Application API Token"
-      }]
+    [:api_token, {
+      :placeholder => "User Key",
+      :label => "User Key"
+    }],
+    [:subdomain, {
+      :placeholder => "Application API Token",
+      :label => "Application API Token"
+    }]
   ]
 
   def check_params
