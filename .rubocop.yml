@@ -26,3 +26,5 @@ Style/AccessModifierIndentation:
 Style/MultilineOperationIndentation:
   EnforcedStyle: indented
 
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
