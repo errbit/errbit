@@ -95,7 +95,6 @@ group :test do
   gem 'launchy'
   gem 'email_spec'
   gem 'timecop'
-  gem 'test-unit', require: 'test/unit'
   gem 'coveralls', require: false
 end
 
