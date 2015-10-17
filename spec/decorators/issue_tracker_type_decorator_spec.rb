@@ -3,12 +3,14 @@ describe IssueTrackerDecorator do
     klass = Class.new(ErrbitPlugin::IssueTracker) do
       def self.label; 'fake'; end
       def self.note; 'a note'; end
+
       def self.fields
         {
           :foo => {:label => 'foo'},
           :bar => {:label => 'bar'}
         }
       end
+
       def self.icons
         {
           one: ['text/plain', 'all your base are belong to us'],
@@ -18,8 +20,8 @@ describe IssueTrackerDecorator do
     end
 
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return({
-      fake: klass
-    })
+                                                                           fake: klass
+                                                                         })
 
     klass
   end
@@ -46,13 +48,13 @@ describe IssueTrackerDecorator do
   describe "#params_class" do
     it 'adds the label in class' do
       tracker = IssueTrackerDecorator.new(IssueTracker.new(
-        type_tracker: 'none'))
+                                            type_tracker: 'none'))
       expect(decorator.params_class(tracker)).to eql 'fake'
     end
 
     it 'adds chosen class if type is same' do
       expect(decorator.params_class(
-        IssueTracker.new(type_tracker: 'fake').decorate
+               IssueTracker.new(type_tracker: 'fake').decorate
       )).to eql 'chosen fake'
     end
   end

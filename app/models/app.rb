@@ -89,7 +89,6 @@ class App
     (last_deploy = deploys.last) && last_deploy.created_at
   end
 
-
   # Legacy apps don't have notify_on_errs and notify_on_deploys params
   def notify_on_errs
     !(super == false)
@@ -133,7 +132,6 @@ class App
     "#{bitbucket_url}/src/#{repo_branch}/#{file}"
   end
 
-
   def issue_tracker_configured?
     issue_tracker.present? && issue_tracker.configured?
   end
@@ -142,7 +140,6 @@ class App
     (notification_service.class < NotificationService) &&
       notification_service.configured?
   end
-
 
   def notification_recipients
     if notify_all_users
@@ -179,8 +176,8 @@ class App
   # Compare by number of unresolved errs, then problem counts.
   def <=>(other)
     (other.unresolved_count <=> unresolved_count).nonzero? ||
-    (other.problem_count <=> problem_count).nonzero? ||
-    name <=> other.name
+      (other.problem_count <=> problem_count).nonzero? ||
+      name <=> other.name
   end
 
   def email_at_notices
@@ -191,35 +188,33 @@ class App
     update_attribute(:api_key, SecureRandom.hex)
   end
 
-  protected
+protected
 
-    def store_cached_attributes_on_problems
-      Problem.where(:app_id => id).update_all(
-        app_name: name
-      )
+  def store_cached_attributes_on_problems
+    Problem.where(:app_id => id).update_all(
+      app_name: name
+    )
+  end
+
+  def generate_api_key
+    self.api_key ||= SecureRandom.hex
+  end
+
+  def check_issue_tracker
+    if issue_tracker.present?
+      issue_tracker.valid?
+      issue_tracker.errors.full_messages.each do |error|
+        errors[:base] << error
+      end if issue_tracker.errors
     end
+  end
 
-    def generate_api_key
-      self.api_key ||= SecureRandom.hex
-    end
-
-    def check_issue_tracker
-      if issue_tracker.present?
-        issue_tracker.valid?
-        issue_tracker.errors.full_messages.each do |error|
-          errors[:base] << error
-        end if issue_tracker.errors
-      end
-    end
-
-    def normalize_github_repo
-      return if github_repo.blank?
-      github_host = URI.parse(Errbit::Config.github_url).host
-      github_host = Regexp.escape(github_host)
-      github_repo.strip!
-      github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
-      github_repo.sub!(/\.git$/, '')
-    end
-
+  def normalize_github_repo
+    return if github_repo.blank?
+    github_host = URI.parse(Errbit::Config.github_url).host
+    github_host = Regexp.escape(github_host)
+    github_repo.strip!
+    github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
+    github_repo.sub!(/\.git$/, '')
+  end
 end
-

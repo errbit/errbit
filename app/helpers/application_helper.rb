@@ -5,9 +5,9 @@ module ApplicationHelper
 
   def generate_problem_ical(notices)
     RiCal.Calendar do |cal|
-      notices.each_with_index do |notice,idx|
+      notices.each_with_index do |notice, idx|
         cal.event do |event|
-          event.summary     = "#{idx+1} #{notice.message}"
+          event.summary     = "#{idx + 1} #{notice.message}"
           event.description = notice.url if notice.url
           event.dtstart     = notice.created_at.utc
           event.dtend       = notice.created_at.utc + 60.minutes
@@ -21,9 +21,9 @@ module ApplicationHelper
 
   def generate_ical(deploys)
     RiCal.Calendar { |cal|
-      deploys.each_with_index do |deploy,idx|
+      deploys.each_with_index do |deploy, idx|
         cal.event do |event|
-          event.summary     = "#{idx+1} #{deploy.repository}"
+          event.summary     = "#{idx + 1} #{deploy.repository}"
           event.description = deploy.revision.to_s
           event.dtstart     = deploy.created_at.utc
           event.dtend       = deploy.created_at.utc + 60.minutes
@@ -53,11 +53,11 @@ module ApplicationHelper
     end
   end
 
-  def create_percentage_table_from_tallies(tallies, options={})
+  def create_percentage_table_from_tallies(tallies, options = {})
     total   = (options[:total] || total_from_tallies(tallies))
     percent = 100.0 / total.to_f
     rows    = tallies.map {|value, count| [(count.to_f * percent), value]} \
-                     .sort {|a, b| b[0] <=> a[0]}
+      .sort {|a, b| b[0] <=> a[0]}
     render "problems/tally_table", :rows => rows
   end
 
@@ -75,14 +75,13 @@ module ApplicationHelper
     end
   end
 
-  private
+private
 
-    def total_from_tallies(tallies)
-      tallies.values.inject(0) {|sum, n| sum + n}
-    end
+  def total_from_tallies(tallies)
+    tallies.values.inject(0) {|sum, n| sum + n}
+  end
 
-    def head_size
-      4
-    end
-
+  def head_size
+    4
+  end
 end

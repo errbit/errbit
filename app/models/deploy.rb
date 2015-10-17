@@ -23,26 +23,24 @@ class Deploy
   end
 
   def short_revision
-    revision.to_s[0,7]
+    revision.to_s[0, 7]
   end
 
-  protected
+protected
 
-    def should_resolve_app_errs?
-      app.resolve_errs_on_deploy?
+  def should_resolve_app_errs?
+    app.resolve_errs_on_deploy?
+  end
+
+  def store_cached_attributes_on_problems
+    Problem.where(:app_id => app.id).update_all(
+      last_deploy_at: created_at
+    )
+  end
+
+  def deliver_email
+    if app.notify_on_deploys? && app.notification_recipients.any?
+      Mailer.deploy_notification(self).deliver_now
     end
-
-    def store_cached_attributes_on_problems
-      Problem.where(:app_id => app.id).update_all(
-        last_deploy_at: created_at
-      )
-    end
-
-    def deliver_email
-      if app.notify_on_deploys? && app.notification_recipients.any?
-        Mailer.deploy_notification(self).deliver_now
-      end
-    end
-
+  end
 end
-

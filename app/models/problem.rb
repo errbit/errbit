@@ -12,7 +12,6 @@ class Problem
     user_agents: :user_agent_string
   }.freeze
 
-
   field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
   field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
   field :last_deploy_at, :type => Time
@@ -43,12 +42,12 @@ class Problem
   index :notices_count => 1
 
   index({
-    error_class: "text",
-    where: "text",
-    message: "text",
-    app_name: "text",
-    environment: "text"
-  }, default_language: "english")
+          error_class: "text",
+          where: "text",
+          message: "text",
+          app_name: "text",
+          environment: "text"
+        }, default_language: "english")
 
   belongs_to :app
   has_many :errs, :inverse_of => :problem, :dependent => :destroy
@@ -84,26 +83,29 @@ class Problem
     host_digest = Digest::MD5.hexdigest(notice.host)
     user_agent_digest = Digest::MD5.hexdigest(notice.user_agent_string)
 
-    Problem.where('_id' => id).find_one_and_update({
-      '$set' => {
-        'environment' => notice.environment_name,
-        'error_class' => notice.error_class,
-        'last_notice_at' => notice.created_at.utc,
-        'message' => notice.message,
-        'resolved' => false,
-        'resolved_at' => nil,
-        'where' => notice.where,
-        "messages.#{message_digest}.value" => notice.message,
-        "hosts.#{host_digest}.value" => notice.host,
-        "user_agents.#{user_agent_digest}.value" => notice.user_agent_string,
+    Problem.where('_id' => id).find_one_and_update(
+      {
+        '$set' => {
+          'environment' => notice.environment_name,
+          'error_class' => notice.error_class,
+          'last_notice_at' => notice.created_at.utc,
+          'message' => notice.message,
+          'resolved' => false,
+          'resolved_at' => nil,
+          'where' => notice.where,
+          "messages.#{message_digest}.value" => notice.message,
+          "hosts.#{host_digest}.value" => notice.host,
+          "user_agents.#{user_agent_digest}.value" => notice.user_agent_string,
+        },
+        '$inc' => {
+          'notices_count' => 1,
+          "messages.#{message_digest}.count" => 1,
+          "hosts.#{host_digest}.count" => 1,
+          "user_agents.#{user_agent_digest}.count" => 1,
+        }
       },
-      '$inc' => {
-        'notices_count' => 1,
-        "messages.#{message_digest}.count" => 1,
-        "hosts.#{host_digest}.count" => 1,
-        "user_agents.#{user_agent_digest}.count" => 1,
-      }
-    }, return_document: :after)
+      return_document: :after
+    )
   end
 
   def uncache_notice(notice)
@@ -119,7 +121,7 @@ class Problem
         'notices_count' => notices_count.to_i > 1 ? notices_count - 1 : 0
       )
 
-      CACHED_NOTICE_ATTRIBUTES.each do |k,v|
+      CACHED_NOTICE_ATTRIBUTES.each do |k, v|
         digest = Digest::MD5.hexdigest(notice.send(v))
         field = "#{k}.#{digest}"
 
@@ -133,7 +135,7 @@ class Problem
   end
 
   def recache
-    CACHED_NOTICE_ATTRIBUTES.each do |k,v|
+    CACHED_NOTICE_ATTRIBUTES.each do |k, v|
       # clear all cached attributes
       send("#{k}=", {})
 
@@ -185,7 +187,6 @@ class Problem
   def unresolved?
     !resolved?
   end
-
 
   def self.merge!(*problems)
     ProblemMerge.new(problems).merge
@@ -246,20 +247,20 @@ class Problem
     Problem.where({'$text' => {'$search' => value}})
   end
 
-  private
+private
 
-    def attribute_count_descrease(name, value)
-      counter = send(name)
-      index = attribute_index(value)
-      if counter[index] && counter[index]['count'] > 1
-        counter[index]['count'] -= 1
-      else
-        counter.delete(index)
-      end
-      counter
+  def attribute_count_descrease(name, value)
+    counter = send(name)
+    index = attribute_index(value)
+    if counter[index] && counter[index]['count'] > 1
+      counter[index]['count'] -= 1
+    else
+      counter.delete(index)
     end
+    counter
+  end
 
-    def attribute_index(value)
-      Digest::MD5.hexdigest(value.to_s)
-    end
+  def attribute_index(value)
+    Digest::MD5.hexdigest(value.to_s)
+  end
 end

@@ -1,14 +1,14 @@
 class NotificationServices::PushoverService < NotificationService
   Label = "pushover"
   Fields += [
-      [:api_token, {
-          :placeholder => "User Key",
-          :label => "User Key"
-      }],
-      [:subdomain, {
-          :placeholder => "Application API Token",
-          :label => "Application API Token"
-      }]
+    [:api_token, {
+      :placeholder => "User Key",
+      :label => "User Key"
+    }],
+    [:subdomain, {
+      :placeholder => "Application API Token",
+      :label => "Application API Token"
+    }]
   ]
 
   def check_params
@@ -27,6 +27,5 @@ class NotificationServices::PushoverService < NotificationService
 
     # send push notification to pushover
     notification.notify(api_token, "#{notification_description problem}", :priority => 1, :title => "Errbit Notification", :url => "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}", :url_title => "Link to error")
-
   end
 end

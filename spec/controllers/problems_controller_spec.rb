@@ -95,8 +95,8 @@ describe ProblemsController, type: 'controller' do
     before do
       sign_in user
       @app      = Fabricate(:app)
-      @problem1 = Fabricate(:problem, :app=>@app, message: "Most important")
-      @problem2 = Fabricate(:problem, :app=>@app, message: "Very very important")
+      @problem1 = Fabricate(:problem, :app => @app, message: "Most important")
+      @problem2 = Fabricate(:problem, :app => @app, message: "Very very important")
     end
 
     it "renders successfully" do
@@ -218,7 +218,7 @@ describe ProblemsController, type: 'controller' do
 
       it "should save the right title" do
         post :create_issue, app_id: problem.app.id, id: problem.id
-        title = "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+        title = "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
         line = issue_tracker.tracker.output.shift
         expect(line[0]).to eq(title)
       end
@@ -256,7 +256,7 @@ describe ProblemsController, type: 'controller' do
     context "when app has no issue tracker" do
       it "should redirect to problem page" do
         post :create_issue, app_id: problem.app.id, id: problem.id
-        expect(response).to redirect_to( app_problem_path(problem.app, problem) )
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to eql "This app has no issue tracker"
       end
     end
@@ -276,7 +276,7 @@ describe ProblemsController, type: 'controller' do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+        expect(response).to redirect_to(app_problem_path(err.app, err.problem))
       end
 
       it "should clear issue link" do
@@ -293,7 +293,7 @@ describe ProblemsController, type: 'controller' do
       end
 
       it "should redirect to problem page" do
-        expect(response).to redirect_to( app_problem_path(err.app, err.problem) )
+        expect(response).to redirect_to(app_problem_path(err.app, err.problem))
       end
     end
   end
@@ -318,7 +318,6 @@ describe ProblemsController, type: 'controller' do
     end
 
     context "POST /problems/unmerge_several" do
-
       it "should require at least one problem" do
         post :unmerge_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -332,11 +331,9 @@ describe ProblemsController, type: 'controller' do
           expect(merged_problem.reload.errs.length).to eq 1
         }.to change(Problem, :count).by(1)
       end
-
     end
 
     context "POST /problems/resolve_several" do
-
       it "should require at least one problem" do
         post :resolve_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -360,7 +357,6 @@ describe ProblemsController, type: 'controller' do
     end
 
     context "POST /problems/unresolve_several" do
-
       it "should require at least one problem" do
         post :unresolve_several, :problems => []
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
@@ -384,8 +380,8 @@ describe ProblemsController, type: 'controller' do
       before do
         sign_in user
         @app      = Fabricate(:app)
-        @problem1 = Fabricate(:problem, :app=>@app)
-        @problem2 = Fabricate(:problem, :app=>@app)
+        @problem1 = Fabricate(:problem, :app => @app)
+        @problem2 = Fabricate(:problem, :app => @app)
       end
 
       it "destroys all problems" do

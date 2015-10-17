@@ -51,19 +51,19 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   end
 
-  protected
+protected
 
-    def require_user_edit_priviledges
-      can_edit = current_user == user || current_user.admin?
-      redirect_to(root_path) unless can_edit
-    end
+  def require_user_edit_priviledges
+    can_edit = current_user == user || current_user.admin?
+    redirect_to(root_path) unless can_edit
+  end
 
   def user_params
     @user_params ||= params[:user] ? params.require(:user).permit(*user_permit_params) : {}
   end
 
   def user_permit_params
-    @user_permit_params ||= [:name,:username, :email, :github_login, :per_page, :time_zone]
+    @user_permit_params ||= [:name, :username, :email, :github_login, :per_page, :time_zone]
     @user_permit_params << :admin if current_user.admin? && current_user.id != params[:id]
     @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all?{|pa| !pa.blank? }
     @user_permit_params
@@ -72,6 +72,4 @@ class UsersController < ApplicationController
   def user_password_params
     @user_password_params ||= params[:user] ? params.require(:user).permit(:password, :password_confirmation) : {}
   end
-
 end
-

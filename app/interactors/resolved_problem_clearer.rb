@@ -1,7 +1,6 @@
 require 'problem_destroy'
 
 class ResolvedProblemClearer
-
   ##
   # Clear all problem already resolved
   #
@@ -16,7 +15,7 @@ class ResolvedProblemClearer
     }
   end
 
-  private
+private
 
   def nb_problem_resolved
     @count ||= criteria.count

@@ -1,5 +1,4 @@
 class NoticesController < ApplicationController
-
   class ParamsError < StandardError; end
 
   skip_before_action :authenticate_user!, only: :create
@@ -34,7 +33,7 @@ class NoticesController < ApplicationController
     redirect_to app_problem_path(problem.app, problem)
   end
 
-  private
+private
 
   def notice_params
     return @notice_params if @notice_params
@@ -48,5 +47,4 @@ class NoticesController < ApplicationController
   def bad_params(exception)
     render :text => exception.message, :status => :bad_request
   end
-
 end

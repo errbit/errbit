@@ -1,37 +1,37 @@
 class NotificationServices::GtalkService < NotificationService
   Label = "gtalk"
   Fields += [
-      [:subdomain, {
-          :placeholder => "username@example.com",
-          :label       => "Username"
-      }],
-      [:api_token, {
-          :placeholder => "password",
-          :label       => "Password"
-      }],
-      [:user_id, {
-           :placeholder => "touser@example.com, anotheruser@example.com",
-           :label => "Send To User(s)"
-       }, :room_id],
-      [:room_id, {
-          :placeholder => "toroom@conference.example.com",
-          :label       =>  "Send To Room (one only)"
-      }, :user_id],
-      [ :service, {
-          :placeholder => "talk.google.com",
-          :label => "Jabber Service"
-      }],
-      [ :service_url, {
-          :placeholder => "http://www.google.com/talk/",
-          :label => "Link To Jabber Service"
-      }]
+    [:subdomain, {
+      :placeholder => "username@example.com",
+      :label       => "Username"
+    }],
+    [:api_token, {
+      :placeholder => "password",
+      :label       => "Password"
+    }],
+    [:user_id, {
+      :placeholder => "touser@example.com, anotheruser@example.com",
+      :label => "Send To User(s)"
+    }, :room_id],
+    [:room_id, {
+      :placeholder => "toroom@conference.example.com",
+      :label       =>  "Send To Room (one only)"
+    }, :user_id],
+    [ :service, {
+      :placeholder => "talk.google.com",
+      :label => "Jabber Service"
+    }],
+    [ :service_url, {
+      :placeholder => "http://www.google.com/talk/",
+      :label => "Link To Jabber Service"
+    }]
   ]
 
   def check_params
-    if Fields.detect { |f| self[f[0]].blank? && self[f[2]].blank? } 
-      errors.add :base, 
-      """You must specify your Username, Password, service, service_url 
-         and either rooms or users to send to or both"""
+    if Fields.detect { |f| self[f[0]].blank? && self[f[2]].blank? }
+      errors.add :base,
+        """You must specify your Username, Password, service, service_url
+           and either rooms or users to send to or both"""
     end
   end
 
@@ -46,7 +46,7 @@ class NotificationServices::GtalkService < NotificationService
     client.auth(api_token)
 
     #has to look like this to be formatted properly in the client
-    message =  """#{problem.app.name}
+    message = """#{problem.app.name}
 #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_description problem}"""
 
@@ -57,8 +57,8 @@ class NotificationServices::GtalkService < NotificationService
     client.close unless client.nil?
   end
 
-  private
- 
+private
+
   def send_to_users(client, message)
     user_id.tr(' ', ",").tr(';', ",").split(",").map(&:strip).reject(&:empty?).each do |user|
       client.send(Jabber::Message.new(user, message))
@@ -66,9 +66,9 @@ class NotificationServices::GtalkService < NotificationService
   end
 
   def send_to_muc(client, message)
-    #TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment 
+    #TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment
     muc = Jabber::MUC::SimpleMUCClient.new(client)
-    muc.join(room_id + "/errbit") 
+    muc.join(room_id + "/errbit")
     muc.send(Jabber::Message.new(room_id, message))
   end
 end

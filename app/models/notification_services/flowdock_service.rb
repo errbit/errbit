@@ -27,7 +27,7 @@ if defined? Flowdock
       flow.push_to_team_inbox(:subject => subject, :content => content(problem, url), :project => project_name(problem), :link => url)
     end
 
-    private
+  private
 
     # can only contain alphanumeric characters and underscores
     def project_name(problem)
@@ -35,7 +35,7 @@ if defined? Flowdock
     end
 
     def content(problem, url)
-      full_description = "[#{ problem.environment }][#{ problem.where }] #{problem.message}"
+      full_description = "[#{problem.environment}][#{problem.where}] #{problem.message}"
       <<-MSG.strip_heredoc
         #{ERB::Util.html_escape full_description}<br>
         <a href="#{url}">#{url}</a>

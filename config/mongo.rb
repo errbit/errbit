@@ -11,13 +11,13 @@ Mongoid.configure do |config|
         end
 
   config.load_configuration({
-    clients: {
-      default: {
-        uri: uri
-      }
-    },
-    options: {
-      use_activesupport_time_zone: true
-    }
-  })
+                              clients: {
+                                default: {
+                                  uri: uri
+                                }
+                              },
+                              options: {
+                                use_activesupport_time_zone: true
+                              }
+                            })
 end

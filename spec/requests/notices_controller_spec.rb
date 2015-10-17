@@ -3,7 +3,7 @@ describe "Notices management", type: 'request' do
 
   describe "create a new notice" do
     context "with valide notice" do
-      let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read }
+      let(:xml) { Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read }
       it 'save a new notice' do
         expect {
           post '/notifier_api/v2/notices', :data => xml
@@ -15,7 +15,7 @@ describe "Notices management", type: 'request' do
     end
 
     context "with notice with empty backtrace" do
-      let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice_without_line_of_backtrace.xml').read }
+      let(:xml) { Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_without_line_of_backtrace.xml').read }
       it 'save a new notice' do
         expect {
           post '/notifier_api/v2/notices', :data => xml
@@ -28,7 +28,7 @@ describe "Notices management", type: 'request' do
 
     context "with notice with bad api_key" do
       let(:errbit_app) { Fabricate(:app) }
-      let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read }
+      let(:xml) { Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read }
       it 'not save a new notice and return 422' do
         expect {
           post '/notifier_api/v2/notices', :data => xml
@@ -39,7 +39,7 @@ describe "Notices management", type: 'request' do
     end
 
     context "with GET request" do
-      let(:xml) { Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read }
+      let(:xml) { Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read }
       it 'save a new notice' do
         expect {
           get '/notifier_api/v2/notices', :data => xml

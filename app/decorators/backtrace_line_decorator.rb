@@ -49,7 +49,7 @@ class BacktraceLineDecorator < Draper::Decorator
       .sub(Backtrace::GEMS_PATH, "<strong>\\1</strong>")
   end
 
-  private
+private
 
   def link_to_in_app_source_file(app, text)
     return unless in_app?
@@ -57,7 +57,7 @@ class BacktraceLineDecorator < Draper::Decorator
       link_to_hosted_javascript(app, text)
     else
       link_to_repo_source_file(app, text) ||
-      link_to_issue_tracker_file(app, text)
+        link_to_issue_tracker_file(app, text)
     end
   end
 

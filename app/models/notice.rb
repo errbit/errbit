@@ -124,7 +124,7 @@ class Notice
     message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
   end
 
-  protected
+protected
 
   def problem_recache
     problem.uncache_notice(self)
@@ -132,15 +132,15 @@ class Notice
 
   def sanitize
     [:server_environment, :request, :notifier].each do |h|
-      send("#{h}=",sanitize_hash(send(h)))
+      send("#{h}=", sanitize_hash(send(h)))
     end
   end
 
   def sanitize_hash(hash)
     hash.recurse do |recurse_hash|
-      recurse_hash.inject({}) do |h,(k,v)|
+      recurse_hash.inject({}) do |h, (k, v)|
         if k.is_a?(String)
-          h[k.gsub(/\./,'&#46;').gsub(/^\$/,'&#36;')] = v
+          h[k.gsub(/\./, '&#46;').gsub(/^\$/, '&#36;')] = v
         else
           h[k] = v
         end

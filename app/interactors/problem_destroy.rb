@@ -1,5 +1,4 @@
 class ProblemDestroy
-
   attr_reader :problem
 
   def initialize(problem)
@@ -26,7 +25,7 @@ class ProblemDestroy
     }.count
   end
 
-  private
+private
 
   def errs_id
     problem.errs.only(:id).map(&:id)
@@ -44,5 +43,4 @@ class ProblemDestroy
   def delete_comments
     Comment.delete_all(:_id => { '$in' => comments_id })
   end
-
 end

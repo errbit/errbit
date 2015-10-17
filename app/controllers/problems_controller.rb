@@ -5,7 +5,6 @@
 # MEMBER => :show, :edit, :update, :create, :destroy, :resolve, :unresolve, :create_issue, :unlink_issue
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
-
   include ProblemsSearcher
 
   before_action :need_selected_problem, :only => [
@@ -135,12 +134,10 @@ class ProblemsController < ApplicationController
     end
   end
 
-  protected
-
   ##
   # Redirect :back if no errors selected
   #
-  def need_selected_problem
+  protected def need_selected_problem
     if err_ids.empty?
       flash[:notice] = I18n.t('controllers.problems.flash.no_select_problem')
       redirect_to :back

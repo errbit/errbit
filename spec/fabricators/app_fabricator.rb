@@ -12,7 +12,7 @@ end
 Fabricator(:watcher) do
   app
   watcher_type 'email'
-  email   { sequence(:email){|n| "email#{n}@example.com"} }
+  email { sequence(:email){|n| "email#{n}@example.com"} }
 end
 
 Fabricator(:user_watcher, :from => :watcher) do
@@ -22,9 +22,8 @@ end
 
 Fabricator(:deploy) do
   app
-  username      'clyde.frog'
-  repository    'git@github.com/errbit/errbit.git'
-  environment   'production'
-  revision      { SecureRandom.hex(10) }
+  username 'clyde.frog'
+  repository 'git@github.com/errbit/errbit.git'
+  environment 'production'
+  revision { SecureRandom.hex(10) }
 end
-

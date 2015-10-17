@@ -19,14 +19,11 @@ class Api::V1::StatsController < ApplicationController
 
     respond_to do |format|
       format.any(:html, :json) { render :json => JSON.dump(stats) } # render JSON if no extension specified on path
-      format.xml  { render :xml  => stats }
+      format.xml { render :xml => stats }
     end
   end
 
-
-  protected
-
-  def require_api_key_or_authenticate_user!
+  protected def require_api_key_or_authenticate_user!
     if params[:api_key].present?
       if (@app = App.where(:api_key => params[:api_key]).first)
         return true
@@ -35,5 +32,4 @@ class Api::V1::StatsController < ApplicationController
 
     authenticate_user!
   end
-
 end

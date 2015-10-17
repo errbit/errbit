@@ -1,5 +1,4 @@
 class DeploysController < ApplicationController
-
   protect_from_forgery :except => :create
 
   skip_before_action :verify_authenticity_token, :only => :create
@@ -17,29 +16,27 @@ class DeploysController < ApplicationController
       page(params[:page]).per(10)
   end
 
-  private
+private
 
-    def default_deploy
-      if params[:deploy]
-        {
-          :username     => params[:deploy][:local_username],
-          :environment  => params[:deploy][:rails_env],
-          :repository   => params[:deploy][:scm_repository],
-          :revision     => params[:deploy][:scm_revision],
-          :message      => params[:deploy][:message]
-        }
-      end
-    end
-
-    # handle Heroku's HTTP post deployhook format
-    def heroku_deploy
+  def default_deploy
+    if params[:deploy]
       {
-        :username     => params[:user],
-        :environment  => params[:rack_env].try(:downcase) || params[:app],
-        :repository   => "git@heroku.com:#{params[:app]}.git",
-        :revision     => params[:head],
+        :username     => params[:deploy][:local_username],
+        :environment  => params[:deploy][:rails_env],
+        :repository   => params[:deploy][:scm_repository],
+        :revision     => params[:deploy][:scm_revision],
+        :message      => params[:deploy][:message]
       }
     end
+  end
 
+  # handle Heroku's HTTP post deployhook format
+  def heroku_deploy
+    {
+      :username     => params[:user],
+      :environment  => params[:rack_env].try(:downcase) || params[:app],
+      :repository   => "git@heroku.com:#{params[:app]}.git",
+      :revision     => params[:head],
+    }
+  end
 end
-

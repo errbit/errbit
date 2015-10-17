@@ -13,7 +13,7 @@ Metrics/AbcSize:
 # Offense count: 5
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
-  Max: 206
+  Max: 209
 
 # Offense count: 5
 Metrics/CyclomaticComplexity:
@@ -63,16 +63,6 @@ Style/AlignHash:
     - 'spec/controllers/comments_controller_spec.rb'
     - 'spec/controllers/problems_controller_spec.rb'
     - 'spec/models/problem_spec.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/AlignParameters:
-  Exclude:
-    - 'app/helpers/apps_helper.rb'
-    - 'app/models/app.rb'
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'config/initializers/devise.rb'
 
 # Offense count: 105
 # Cop supports --auto-correct.
@@ -147,82 +137,12 @@ Style/EachWithObject:
     - 'app/models/notice_fingerprinter.rb'
     - 'lib/recurse.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAdjacentOneLineDefs.
-Style/EmptyLineBetweenDefs:
-  Exclude:
-    - 'app/controllers/apps_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/models/notification_service.rb'
-    - 'spec/decorators/issue_tracker_decorator_spec.rb'
-    - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
-    - 'spec/views/problems/show.html.haml_spec.rb'
-
-# Offense count: 12
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Exclude:
-    - 'app/controllers/api/v1/stats_controller.rb'
-    - 'app/decorators/issue_tracker_field_decorator.rb'
-    - 'app/models/app.rb'
-    - 'app/models/problem.rb'
-    - 'config/deploy/production.example.rb'
-    - 'lib/tasks/errbit/demo.rake'
-    - 'script/rspec-queue-mongoid.rb'
-    - 'spec/acceptance/app_regenerate_api_key_spec.rb'
-
-# Offense count: 28
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundBlockBody:
-  Enabled: false
-
-# Offense count: 26
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundClassBody:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundMethodBody:
-  Exclude:
-    - 'app/models/notification_services/hoiio_service.rb'
-    - 'app/models/notification_services/pushover_service.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/form_helper.rb'
-    - 'app/helpers/hash_helper.rb'
-    - 'app/helpers/navigation_helper.rb'
-    - 'app/helpers/sort_helper.rb'
-
-# Offense count: 22
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment.
-Style/ExtraSpacing:
-  Enabled: false
-
 # Offense count: 2
 # Configuration parameters: Exclude.
 Style/FileName:
   Exclude:
     - 'config/initializers/cve-2013-0156.rb'
     - 'script/rspec-queue-mongoid.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/FirstParameterIndentation:
-  Exclude:
-    - 'app/models/issue_tracker.rb'
-    - 'spec/decorators/backtrace_decorator_spec.rb'
-    - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
 
 # Offense count: 8
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -256,39 +176,6 @@ Style/IfUnlessModifier:
     - 'app/models/notice.rb'
     - 'app/models/user.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/IndentArray:
-  Exclude:
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'app/models/notification_services/hoiio_service.rb'
-    - 'app/models/notification_services/pushover_service.rb'
-    - 'app/models/notification_services/slack_service.rb'
-    - 'spec/models/notification_service/slack_service_spec.rb'
-
-# Offense count: 72
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/IndentHash:
-  Enabled: false
-
-# Offense count: 27
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/IndentationConsistency:
-  Exclude:
-    - 'app/controllers/apps_controller.rb'
-    - 'app/controllers/comments_controller.rb'
-    - 'app/controllers/deploys_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/app.rb'
-    - 'app/models/comment.rb'
-    - 'app/models/deploy.rb'
-    - 'app/models/problem.rb'
-    - 'app/models/watcher.rb'
-    - 'lib/hoptoad.rb'
-
 # Offense count: 6
 # Cop supports --auto-correct.
 Style/Lambda:
@@ -321,12 +208,6 @@ Style/MultilineBlockLayout:
     - 'spec/models/app_spec.rb'
     - 'spec/models/error_report_spec.rb'
     - 'spec/views/apps/show.atom.builder_spec.rb'
-
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MultilineOperationIndentation:
-  Enabled: false
 
 # Offense count: 5
 # Cop supports --auto-correct.
@@ -404,43 +285,6 @@ Style/SingleLineMethods:
     - 'spec/errbit_plugin/mock_issue_tracker.rb'
     - 'spec/views/problems/show.html.haml_spec.rb'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Exclude:
-    - 'app/models/comment.rb'
-    - 'config/application.rb'
-    - 'spec/fabricators/app_fabricator.rb'
-    - 'spec/fabricators/comment_fabricator.rb'
-    - 'spec/fabricators/notice_fabricator.rb'
-    - 'spec/fabricators/user_fabricator.rb'
-
-# Offense count: 43
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
-# Offense count: 28
-# Cop supports --auto-correct.
-# Configuration parameters: MultiSpaceAllowedForOperators.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'app/controllers/api/v1/problems_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/apps_helper.rb'
-    - 'app/helpers/hash_helper.rb'
-    - 'app/models/issue_tracker.rb'
-    - 'app/models/notification_service.rb'
-    - 'config/load.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-    - 'spec/models/notice_observer_spec.rb'
-
 # Offense count: 27
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -484,29 +328,6 @@ Style/SpaceInsideBrackets:
 Style/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-# Offense count: 23
-# Cop supports --auto-correct.
-Style/SpaceInsideParens:
-  Exclude:
-    - 'spec/controllers/api/v1/problems_controller_spec.rb'
-    - 'spec/controllers/comments_controller_spec.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-    - 'spec/interactors/problem_merge_spec.rb'
-    - 'spec/mailers/mailer_spec.rb'
-    - 'spec/models/notice_observer_spec.rb'
-    - 'spec/models/notice_spec.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceInsideStringInterpolation:
-  Exclude:
-    - 'app/models/issue.rb'
-    - 'app/models/notification_service.rb'
-    - 'app/models/notification_services/flowdock_service.rb'
-    - 'app/models/notification_services/hoiio_service.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -528,12 +349,6 @@ Style/SymbolProc:
     - 'app/models/deploy.rb'
     - 'spec/models/deploy_spec.rb'
 
-# Offense count: 21
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Enabled: false
-
 # Offense count: 13
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline, SupportedStyles.
@@ -550,14 +365,6 @@ Style/TrailingComma:
     - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
     - 'spec/initializers/action_mailer_spec.rb'
     - 'spec/initializers/devise_spec.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'app/models/notification_service.rb'
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'config/initializers/cve-2013-0156.rb'
 
 # Offense count: 2
 Style/UnlessElse:
