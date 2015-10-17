@@ -49,6 +49,12 @@ In order of precedence Errbit uses:
 <dt>ERRBIT_PER_APP_NOTIFY_AT_NOTICES
 <dd>Let every application have it's own configuration rather than using ERRBIT_NOTIFY_AT_NOTICES. If this value is set to true, you can configure each app using the web UI.
 <dd>defaults to false
+<dt>ERROR_TREND_CHART_ENABLE
+<dd>This value sets whether or not to show a bar graph outlining exception notices over time.
+<dd>Defaults to false
+<dt>ERROR_TREND_CHART_DAYS
+<dd>This value sets the default number of days to show before the most recent exception notice in the graph enabled by ERROR_TREND_CHART_ENABLE.
+<dd>Defaults to 14
 <dt>SERVE_STATIC_ASSETS
 <dd>Allow Rails to serve static assets. For most production environments, this should be false because your web server should be configured to serve static assets for you. But some environments like Heroku require this to be true.
 <dd>defaults to true

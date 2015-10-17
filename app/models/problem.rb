@@ -186,6 +186,17 @@ class Problem
     !resolved?
   end
 
+  def notices_grouped_by_day_of_incidence
+    data = Array.new(TrendLines::NO_OF_DAYS_TO_CHART + 1, 0)
+    notices_in_range = Notice.for_errs(errs).where(:created_at.gte => TrendLines.beginning_of_range).only(:created_at)
+
+    notices_in_range.each do |notice|
+      no_of_days_since_notice = Time.now.to_date - notice.created_at.to_date
+      data[no_of_days_since_notice] += 1
+    end
+
+    data.reverse
+  end
 
   def self.merge!(*problems)
     ProblemMerge.new(problems).merge

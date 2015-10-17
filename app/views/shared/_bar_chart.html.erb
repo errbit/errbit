@@ -1,0 +1,3 @@
+<div class="window">
+  <%= content_tag :canvas, nil, class: "bar-chart", width: width, height: height, data: { labels: bar_chart_x_axis_labels(show_labels).to_json, notice_count: data, show_labels: show_labels, scale_steps: bar_chart_scale_steps(data.max) } %>
+</div>
