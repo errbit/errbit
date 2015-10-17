@@ -9,6 +9,9 @@ AllCops:
 Rails/FindBy:
   Enabled: false
 
+Lint/DefEndAlignment:
+  AlignWith: start_of_line
+
 Style/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: true
 
