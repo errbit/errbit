@@ -75,11 +75,11 @@ module ApplicationHelper
     end
   end
 
-  private
+private
 
-    def total_from_tallies(tallies)
-      tallies.values.inject(0) {|sum, n| sum + n}
-    end
+  def total_from_tallies(tallies)
+    tallies.values.inject(0) {|sum, n| sum + n}
+  end
 
     def head_size
       4

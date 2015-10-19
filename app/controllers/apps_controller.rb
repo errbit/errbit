@@ -90,18 +90,18 @@ class AppsController < ApplicationController
     redirect_to edit_app_path(app)
   end
 
-  protected
+protected
 
-    def initialize_subclassed_notification_service
-      # set the app's notification service
-      if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
-        available_notification_classes = [NotificationService] + NotificationService.subclasses
-        notification_class = available_notification_classes.detect{|c| c.name == notification_type}
-        if notification_class.present?
-          app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
-        end
+  def initialize_subclassed_notification_service
+    # set the app's notification service
+    if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
+      available_notification_classes = [NotificationService] + NotificationService.subclasses
+      notification_class = available_notification_classes.detect{|c| c.name == notification_type}
+      if notification_class.present?
+        app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
       end
     end
+  end
 
     def plug_params(app)
       app.watchers.build if app.watchers.none?
@@ -141,9 +141,7 @@ class AppsController < ApplicationController
       end
     end
 
-  private
-
-    def app_params
-      params.require(:app).permit!
-    end
+  private def app_params
+    params.require(:app).permit!
+  end
 end

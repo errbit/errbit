@@ -13,13 +13,11 @@ module Hoptoad
     processor.process_notice(parsed)
   end
 
-  private
-
-    def self.get_version_processor(version)
-      case version
-      when /2\.[01234]/ then Hoptoad::V2
-      else; raise ApiVersionError
-      end
+  private def self.get_version_processor(version)
+    case version
+    when /2\.[01234]/ then Hoptoad::V2
+    else; raise ApiVersionError
     end
+  end
 end
 

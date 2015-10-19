@@ -27,7 +27,7 @@ if defined? Flowdock
       flow.push_to_team_inbox(:subject => subject, :content => content(problem, url), :project => project_name(problem), :link => url)
     end
 
-    private
+  private
 
     # can only contain alphanumeric characters and underscores
     def project_name(problem)
