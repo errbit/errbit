@@ -7,6 +7,28 @@ you can use this deploy button to get a basic deployment running on Heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
 
+### Initial setup
+
+First, clone the repo from Heroku:
+
+```bash
+heroku git:clone -a your-app-name
+cd your-app-name
+```
+
+To prepare the database:
+
+```bash
+heroku run rake errbit:bootstrap
+```
+
+Optionally, to set your host and email:
+
+```bash
+heroku config:set ERRBIT_HOST=some-hostname.example.com
+heroku config:set ERRBIT_EMAIL_FROM=example@example.com
+```
+
 ## The Hard Way
 
 We designed Errbit to work well with Heroku. These instructions should result
