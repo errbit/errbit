@@ -3,12 +3,14 @@ describe IssueTrackerDecorator do
     klass = Class.new(ErrbitPlugin::IssueTracker) do
       def self.label; 'fake'; end
       def self.note; 'a note'; end
+
       def self.fields
         {
           :foo => {:label => 'foo'},
           :bar => {:label => 'bar'}
         }
       end
+
       def self.icons
         {
           one: ['text/plain', 'all your base are belong to us'],

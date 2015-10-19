@@ -330,7 +330,6 @@ describe AppsController, type: 'controller' do
   end
 
   describe "POST /apps/:id/regenerate_api_key" do
-
     context "like watcher" do
       before do
         sign_in watcher.user
@@ -340,7 +339,6 @@ describe AppsController, type: 'controller' do
         post :regenerate_api_key, :id => 'foo'
         expect(request).to redirect_to root_path
       end
-
     end
 
     context "like admin" do

@@ -104,7 +104,6 @@ describe "problems/show.html.haml", type: 'view' do
           render
           expect(view.content_for(:action_bar)).to_not match(/create issue/)
         end
-
       end
 
       context "with tracker associate on app" do
@@ -138,7 +137,6 @@ describe "problems/show.html.haml", type: 'view' do
               render
               expect(view.content_for(:action_bar)).to match(/create issue/)
             end
-
           end
 
           context "with problem with issue link" do

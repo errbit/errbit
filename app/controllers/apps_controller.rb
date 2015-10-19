@@ -1,5 +1,4 @@
 class AppsController < ApplicationController
-
   include ProblemsSearcher
 
   before_action :require_admin!, :except => [:index, :show]
@@ -44,6 +43,7 @@ class AppsController < ApplicationController
   }
 
   def index; end
+
   def show
     app
   end

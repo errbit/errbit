@@ -42,10 +42,10 @@ module AppsHelper
     @any_github_repos = @any_issue_trackers = @any_deploys = @any_bitbucket_repos = @any_notification_services = false
 
     apps.each do |app|
-      @any_github_repos   ||= app.github_repo?
-      @any_bitbucket_repos   ||= app.bitbucket_repo?
-      @any_issue_trackers ||= app.issue_tracker_configured?
-      @any_deploys        ||= app.last_deploy_at.present?
+      @any_github_repos          ||= app.github_repo?
+      @any_bitbucket_repos       ||= app.bitbucket_repo?
+      @any_issue_trackers        ||= app.issue_tracker_configured?
+      @any_deploys               ||= app.last_deploy_at.present?
       @any_notification_services ||= app.notification_service_configured?
     end
   end

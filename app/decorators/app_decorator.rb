@@ -1,5 +1,4 @@
 class AppDecorator < Draper::Decorator
-
   decorates_association :watchers
   decorates_association :issue_tracker, :with => IssueTrackerDecorator
   delegate_all
@@ -15,5 +14,4 @@ class AppDecorator < Draper::Decorator
   def notify_err_display
     object.notify_on_errs ? '' : 'display: none;'
   end
-
 end

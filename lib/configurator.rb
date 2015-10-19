@@ -4,7 +4,6 @@ require 'ostruct'
 # order to provide a consistent way to use configuration throughout your
 # application
 class Configurator
-
   # Run the configurator and return the processed values
   #
   # @example Simple mapping

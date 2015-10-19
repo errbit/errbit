@@ -19,10 +19,9 @@ class Api::V1::StatsController < ApplicationController
 
     respond_to do |format|
       format.any(:html, :json) { render :json => JSON.dump(stats) } # render JSON if no extension specified on path
-      format.xml  { render :xml  => stats }
+      format.xml { render :xml => stats }
     end
   end
-
 
   protected
 
@@ -35,5 +34,4 @@ class Api::V1::StatsController < ApplicationController
 
     authenticate_user!
   end
-
 end

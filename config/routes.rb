@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
@@ -21,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :problems,    :only => [:index] do
+  resources :problems, :only => [:index] do
     collection do
       post :destroy_several
       post :resolve_several
