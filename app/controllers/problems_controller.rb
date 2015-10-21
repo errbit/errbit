@@ -5,7 +5,6 @@
 # MEMBER => :show, :edit, :update, :create, :destroy, :resolve, :unresolve, :create_issue, :unlink_issue
 # COLLECTION => :index, :all, :destroy_several, :resolve_several, :unresolve_several, :merge_several, :unmerge_several, :search
 class ProblemsController < ApplicationController
-
   include ProblemsSearcher
 
   before_action :need_selected_problem, :only => [

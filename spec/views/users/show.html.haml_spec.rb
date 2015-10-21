@@ -55,7 +55,6 @@ describe 'users/show.html.haml', type: 'view' do
         render
         expect(view.content_for(:action_bar)).to have_selector('a.delete[data-confirm="%s"]' % I18n.t('.users.confirm_delete'))
       end
-
     end
   end
 end

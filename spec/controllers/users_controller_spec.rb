@@ -34,7 +34,6 @@ describe UsersController, type: 'controller' do
         expect(controller.user).to eq(user)
         expect(response).to render_template 'edit'
       end
-
     end
 
     context "PUT /users/:other_id" do
@@ -188,7 +187,6 @@ describe UsersController, type: 'controller' do
         end
       end
       context "when the update is unsuccessful" do
-
         it "renders the edit page" do
           put :update, :id => user.to_param, :user => {:name => nil}
           expect(response).to render_template(:edit)

@@ -292,7 +292,6 @@ describe ErrorReport do
       it 'return the notice' do
         expect(error_report.notice).to be_a Notice
       end
-
     end
   end
 

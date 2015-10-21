@@ -93,7 +93,6 @@ class App
     (last_deploy = deploys.last) && last_deploy.created_at
   end
 
-
   # Legacy apps don't have notify_on_errs and notify_on_deploys params
   def notify_on_errs
     !(super == false)
@@ -137,7 +136,6 @@ class App
     "#{bitbucket_url}/src/#{repo_branch}/#{file}"
   end
 
-
   def issue_tracker_configured?
     issue_tracker.present? && issue_tracker.configured?
   end
@@ -146,7 +144,6 @@ class App
     (notification_service.class < NotificationService) &&
       notification_service.configured?
   end
-
 
   def notification_recipients
     if notify_all_users
@@ -224,5 +221,4 @@ class App
       github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
       github_repo.sub!(/\.git$/, '')
     end
-
 end

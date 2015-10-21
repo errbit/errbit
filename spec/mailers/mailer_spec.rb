@@ -51,7 +51,7 @@ describe Mailer do
       p.notices_count = 3
       p
     end
-    let!(:user)   { Fabricate(:admin) }
+    let!(:user) { Fabricate(:admin) }
     let(:error_report) do
       instance_double(
         'ErrorReport',

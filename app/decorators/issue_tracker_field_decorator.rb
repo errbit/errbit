@@ -1,5 +1,4 @@
 class IssueTrackerFieldDecorator < Draper::Decorator
-
   def initialize(field, field_info)
     @object = field
     @field_info = field_info
@@ -11,7 +10,6 @@ class IssueTrackerFieldDecorator < Draper::Decorator
   def label
     field_info[:label] || object.to_s.titleize
   end
-
 
   def input(form, issue_tracker)
     form.send(input_field, key.to_s,

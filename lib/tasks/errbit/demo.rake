@@ -64,7 +64,6 @@ namespace :errbit do
       end
     end
 
-
     Fabricate(:notice, :err => Fabricate(:err, :problem => Fabricate(:problem, :app => app)))
     puts "=== Created demo app: '#{app.name}', with example errors."
   end
