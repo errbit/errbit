@@ -37,5 +37,4 @@ class Comment
     def decrease_counter_cache
       err.inc(comments_count: -1) if err
     end
-
 end

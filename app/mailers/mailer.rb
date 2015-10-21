@@ -28,8 +28,8 @@ class Mailer < ActionMailer::Base
   end
 
   def deploy_notification(deploy)
-    @deploy   = deploy
-    @app  = AppDecorator.new deploy.app
+    @deploy = deploy
+    @app = AppDecorator.new deploy.app
 
     errbit_headers 'App' => @app.name,
                    'Environment' => @deploy.environment,

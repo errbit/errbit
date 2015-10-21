@@ -39,6 +39,5 @@ class Watcher
         self.user = self.user_id = nil
       end
     end
-
 end
 

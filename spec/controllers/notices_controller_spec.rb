@@ -34,7 +34,6 @@ describe NoticesController, type: 'controller' do
           expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
           expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
         end
-
       end
 
       it "generates a notice from xml in a data param [POST]" do

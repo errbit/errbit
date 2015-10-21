@@ -12,7 +12,6 @@ class Problem
     user_agents: :user_agent_string
   }.freeze
 
-
   field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
   field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
   field :last_deploy_at, :type => Time
@@ -185,7 +184,6 @@ class Problem
   def unresolved?
     !resolved?
   end
-
 
   def self.merge!(*problems)
     ProblemMerge.new(problems).merge

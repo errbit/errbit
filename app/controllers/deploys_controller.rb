@@ -1,5 +1,4 @@
 class DeploysController < ApplicationController
-
   protect_from_forgery :except => :create
 
   skip_before_action :verify_authenticity_token, :only => :create
@@ -40,6 +39,5 @@ class DeploysController < ApplicationController
         :revision     => params[:head],
       }
     end
-
 end
 

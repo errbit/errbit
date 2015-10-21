@@ -5,7 +5,6 @@ module ProblemsSearcher
   extend ActiveSupport::Concern
 
   included do
-
     expose(:params_sort) {
       unless %w{app message last_notice_at last_deploy_at count}.member?(params[:sort])
         "last_notice_at"
@@ -29,6 +28,5 @@ module ProblemsSearcher
     expose(:err_ids) {
       (params[:problems] || []).compact
     }
-
   end
 end
