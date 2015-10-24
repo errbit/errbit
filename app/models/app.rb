@@ -188,13 +188,13 @@ class App
     update_attribute(:api_key, SecureRandom.hex)
   end
 
-  protected
+protected
 
-    def store_cached_attributes_on_problems
-      Problem.where(:app_id => id).update_all(
-        app_name: name
-      )
-    end
+  def store_cached_attributes_on_problems
+    Problem.where(:app_id => id).update_all(
+      app_name: name
+    )
+  end
 
     def generate_api_key
       self.api_key ||= SecureRandom.hex

@@ -244,18 +244,18 @@ class Problem
     Problem.where({'$text' => {'$search' => value}})
   end
 
-  private
+private
 
-    def attribute_count_descrease(name, value)
-      counter = send(name)
-      index = attribute_index(value)
-      if counter[index] && counter[index]['count'] > 1
-        counter[index]['count'] -= 1
-      else
-        counter.delete(index)
-      end
-      counter
+  def attribute_count_descrease(name, value)
+    counter = send(name)
+    index = attribute_index(value)
+    if counter[index] && counter[index]['count'] > 1
+      counter[index]['count'] -= 1
+    else
+      counter.delete(index)
     end
+    counter
+  end
 
     def attribute_index(value)
       Digest::MD5.hexdigest(value.to_s)

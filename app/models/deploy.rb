@@ -26,11 +26,11 @@ class Deploy
     revision.to_s[0,7]
   end
 
-  protected
+protected
 
-    def should_resolve_app_errs?
-      app.resolve_errs_on_deploy?
-    end
+  def should_resolve_app_errs?
+    app.resolve_errs_on_deploy?
+  end
 
     def store_cached_attributes_on_problems
       Problem.where(:app_id => app.id).update_all(

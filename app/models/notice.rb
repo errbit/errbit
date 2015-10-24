@@ -124,7 +124,7 @@ class Notice
     message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
   end
 
-  protected
+protected
 
   def problem_recache
     problem.uncache_notice(self)

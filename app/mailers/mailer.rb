@@ -58,9 +58,7 @@ class Mailer < ActionMailer::Base
          :subject => "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
-  private
-
-  def errbit_headers(header)
+  private def errbit_headers(header)
     header.each { |key,value| headers["X-Errbit-#{key}"] = value.to_s }
   end
 end

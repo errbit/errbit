@@ -25,7 +25,7 @@ class ProblemDestroy
     }.count
   end
 
-  private
+private
 
   def errs_id
     problem.errs.only(:id).map(&:id)
