@@ -51,6 +51,11 @@ describe ErrorReport do
       }.by(1)
     end
 
+    it "has the same notices_count" do
+      error_report.generate_notice!
+      expect(error_report.notice.problem.notices_count).to eq error_report.problem.notices_count
+    end
+
     context "with a minimal notice" do
       let(:xml){
         Rails.root.join('spec','fixtures','minimal_test_notice.xml').read
