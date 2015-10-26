@@ -1,8 +1,8 @@
 An error has just occurred in <%= @notice.environment_name %>: <%= raw(@notice.message) %>
 
-This error has occurred <%= pluralize @notice.problem.notices_count, 'time' %>. You should really look into it here:
+This error has occurred <%= pluralize @problem.notices_count, 'time' %>. You should really look into it here:
 
-  <%= app_problem_url(@app, @notice.problem) %>
+  <%= app_problem_url(@app, @problem) %>
 
 
 ERROR MESSAGE:
