@@ -122,9 +122,6 @@ GEM
     errbit_github_plugin (0.2.0)
       errbit_plugin
       octokit
-    errbit_jira_plugin (0.2.0)
-      errbit_plugin
-      jira-ruby
     errbit_plugin (0.5.0)
     erubis (2.7.0)
     execjs (2.5.2)
@@ -158,9 +155,6 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
-    jira-ruby (0.1.16)
-      activesupport
-      oauth (~> 0.4.7)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -216,7 +210,6 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     nokogiri (1.6.6.2-java)
-    oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -445,7 +438,6 @@ DEPENDENCIES
   draper
   email_spec
   errbit_github_plugin
-  errbit_jira_plugin
   errbit_plugin
   fabrication
   flowdock
