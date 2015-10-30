@@ -22,13 +22,13 @@ class ExtractIssueTracker < Mongoid::Migration
       options.delete('_type')
       options.delete('_id')
 
-      _type = app.attributes['issue_tracker']['_type']
+      type = app.attributes['issue_tracker']['_type']
       updated_at = options.delete('updated_at')
       created_at = options.delete('created_at')
 
-      if TRACKER_MAPPING.include?(_type)
+      if TRACKER_MAPPING.include?(type)
         tracker = {
-          'type_tracker' => TRACKER_MAPPING[_type],
+          'type_tracker' => TRACKER_MAPPING[type],
           'options' => options,
           'updated_at' => updated_at,
           'created_at' => created_at
