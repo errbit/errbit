@@ -91,7 +91,7 @@
 - if app.problems.any?
   %h3.clear=t('.errors')
   %section
-    = render 'problems/search', :all_errs => @all_errs, :app_id => app.id
+    = render 'problems/search', :all_errs => all_errs, :app_id => app.id
   %br
   %section
     .problem_table{:id => 'problem_table'}
