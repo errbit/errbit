@@ -25,3 +25,6 @@ Style/IndentationConsistency:
 
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
