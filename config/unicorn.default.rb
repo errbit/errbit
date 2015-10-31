@@ -29,4 +29,3 @@ before_fork do |server, _worker|
     end
   end
 end
-

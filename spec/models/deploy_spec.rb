@@ -39,4 +39,3 @@ describe Deploy, type: 'model' do
     expect(Deploy.new(:revision => "1234567890abcdef").short_revision).to eq "1234567"
   end
 end
-

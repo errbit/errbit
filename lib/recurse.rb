@@ -20,4 +20,3 @@ class Hash
     yield h
   end
 end
-

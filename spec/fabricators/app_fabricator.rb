@@ -27,4 +27,3 @@ Fabricator(:deploy) do
   environment   'production'
   revision      { SecureRandom.hex(10) }
 end
-

@@ -218,4 +218,3 @@ protected
     github_repo.sub!(/\.git$/, '')
   end
 end
-
