@@ -354,18 +354,6 @@ Style/SpaceInsideBrackets:
 Style/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-# Offense count: 23
-# Cop supports --auto-correct.
-Style/SpaceInsideParens:
-  Exclude:
-    - 'spec/controllers/api/v1/problems_controller_spec.rb'
-    - 'spec/controllers/comments_controller_spec.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-    - 'spec/interactors/problem_merge_spec.rb'
-    - 'spec/mailers/mailer_spec.rb'
-    - 'spec/models/notice_observer_spec.rb'
-    - 'spec/models/notice_spec.rb'
-
 # Offense count: 9
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

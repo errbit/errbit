@@ -130,7 +130,7 @@ describe "Callback on Notice", type: 'model' do
   describe 'should not send a notification if a notification service is not' \
            'configured' do
     let(:notification_service) { Fabricate(:notification_service) }
-    let(:app) { Fabricate(:app, notification_service: notification_service )}
+    let(:app) { Fabricate(:app, notification_service: notification_service)}
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
     before { Errbit::Config.per_app_notify_at_notices = true }
