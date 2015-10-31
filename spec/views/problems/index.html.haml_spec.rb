@@ -22,7 +22,6 @@ describe "problems/index.html.haml", type: 'view' do
   end
 
   describe "show/hide resolved button behavior" do
-
     it "displays unresolved errors title and button" do
       allow(view).to receive(:all_errs).and_return(false)
       render
@@ -36,6 +35,5 @@ describe "problems/index.html.haml", type: 'view' do
       expect(view.content_for :title).to match 'All Errors'
       expect(view.content_for :action_bar).to have_link 'hide resolved'
     end
-
   end
 end
