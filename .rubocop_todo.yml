@@ -317,21 +317,6 @@ Style/SingleSpaceBeforeFirstArg:
 Style/SpaceAroundEqualsInParameterDefault:
   Enabled: false
 
-# Offense count: 28
-# Cop supports --auto-correct.
-# Configuration parameters: MultiSpaceAllowedForOperators.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'app/controllers/api/v1/problems_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/apps_helper.rb'
-    - 'app/helpers/hash_helper.rb'
-    - 'app/models/issue_tracker.rb'
-    - 'app/models/notification_service.rb'
-    - 'config/load.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-    - 'spec/models/notice_observer_spec.rb'
-
 # Offense count: 27
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

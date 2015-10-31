@@ -31,3 +31,9 @@ Style/AlignParameters:
 
 Style/IndentHash:
   EnforcedStyle: consistent
+
+Style/SpaceAroundOperators:
+  MultiSpaceAllowedForOperators:
+    - '='
+    - '=>'
+    - '||='
