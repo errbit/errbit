@@ -165,10 +165,10 @@ describe App, type: 'model' do
   context '#find_or_create_err!' do
     let(:app) { Fabricate(:app) }
     let(:conditions) { {
-        :error_class  => 'Whoops',
-        :environment  => 'production',
-        :fingerprint  => 'some-finger-print'
-      }
+      :error_class  => 'Whoops',
+      :environment  => 'production',
+      :fingerprint  => 'some-finger-print'
+    }
     }
 
     it 'returns the correct err if one already exists' do

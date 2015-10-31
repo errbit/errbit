@@ -195,12 +195,6 @@ Style/IndentArray:
     - 'app/models/notification_services/slack_service.rb'
     - 'spec/models/notification_service/slack_service_spec.rb'
 
-# Offense count: 72
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/IndentHash:
-  Enabled: false
-
 # Offense count: 27
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

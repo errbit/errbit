@@ -28,3 +28,6 @@ Style/AccessModifierIndentation:
 
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
+
+Style/IndentHash:
+  EnforcedStyle: consistent
