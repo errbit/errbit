@@ -185,16 +185,6 @@ Style/IfUnlessModifier:
     - 'app/models/notice.rb'
     - 'app/models/user.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/IndentArray:
-  Exclude:
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'app/models/notification_services/hoiio_service.rb'
-    - 'app/models/notification_services/pushover_service.rb'
-    - 'app/models/notification_services/slack_service.rb'
-    - 'spec/models/notification_service/slack_service_spec.rb'
-
 # Offense count: 27
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
