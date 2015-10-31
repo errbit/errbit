@@ -22,7 +22,7 @@ class Issue
     if tracker.respond_to?(:title)
       tracker.title
     else
-      "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+      "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
     end
   end
 

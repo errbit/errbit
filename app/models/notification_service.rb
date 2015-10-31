@@ -35,7 +35,7 @@ class NotificationService
   def check_params; true; end
 
   def notification_description(problem)
-    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+    "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
   end
 
   # Allows us to set the issue tracker class from a single form.

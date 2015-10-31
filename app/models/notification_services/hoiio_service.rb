@@ -26,7 +26,7 @@ class NotificationServices::HoiioService < NotificationService
   end
 
   def notification_description(problem)
-    "[#{ problem.environment }]#{problem.message.to_s.truncate(50)}"
+    "[#{problem.environment}]#{problem.message.to_s.truncate(50)}"
   end
 
   def create_notification(problem)

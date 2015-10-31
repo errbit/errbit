@@ -354,17 +354,6 @@ Style/SpaceInsideBrackets:
 Style/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceInsideStringInterpolation:
-  Exclude:
-    - 'app/models/issue.rb'
-    - 'app/models/notification_service.rb'
-    - 'app/models/notification_services/flowdock_service.rb'
-    - 'app/models/notification_services/hoiio_service.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
