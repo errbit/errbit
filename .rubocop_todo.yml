@@ -311,11 +311,6 @@ Style/SingleSpaceBeforeFirstArg:
     - 'spec/fabricators/notice_fabricator.rb'
     - 'spec/fabricators/user_fabricator.rb'
 
-# Offense count: 43
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Enabled: false
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

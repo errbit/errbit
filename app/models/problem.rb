@@ -118,7 +118,7 @@ class Problem
         'notices_count' => notices_count.to_i > 1 ? notices_count - 1 : 0
       )
 
-      CACHED_NOTICE_ATTRIBUTES.each do |k,v|
+      CACHED_NOTICE_ATTRIBUTES.each do |k, v|
         digest = Digest::MD5.hexdigest(notice.send(v))
         field = "#{k}.#{digest}"
 
@@ -132,7 +132,7 @@ class Problem
   end
 
   def recache
-    CACHED_NOTICE_ATTRIBUTES.each do |k,v|
+    CACHED_NOTICE_ATTRIBUTES.each do |k, v|
       # clear all cached attributes
       send("#{k}=", {})
 

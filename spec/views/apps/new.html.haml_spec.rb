@@ -23,7 +23,7 @@ describe "apps/new.html.haml", type: 'view' do
   context "with unvalid app" do
     let(:app) {
       app = stub_model(App)
-      app.errors.add(:base,'You must specify your')
+      app.errors.add(:base, 'You must specify your')
       app
     }
 

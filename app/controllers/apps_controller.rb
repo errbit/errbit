@@ -116,7 +116,7 @@ protected
       # Sanitize negative values, split on comma,
       # strip, parse as integer, remove all '0's.
       # If empty, set as default and show an error message.
-      email_at_notices = val.gsub(/-\d+/,"").split(",").map{|v| v.strip.to_i }.reject{|v| v == 0}
+      email_at_notices = val.gsub(/-\d+/, "").split(",").map{|v| v.strip.to_i }.reject{|v| v == 0}
       if email_at_notices.any?
         params[:app][:email_at_notices] = email_at_notices
       else
@@ -131,7 +131,7 @@ protected
       # Sanitize negative values, split on comma,
       # strip, parse as integer, remove all '0's.
       # If empty, set as default and show an error message.
-      notify_at_notices = val.gsub(/-\d+/,"").split(",").map{|v| v.strip.to_i }
+      notify_at_notices = val.gsub(/-\d+/, "").split(",").map{|v| v.strip.to_i }
       if notify_at_notices.any?
         params[:app][:notification_service_attributes][:notify_at_notices] = notify_at_notices
       else

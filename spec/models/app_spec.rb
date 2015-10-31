@@ -188,7 +188,7 @@ describe App, type: 'model' do
       expect(Err.where(conditions).first).to be_nil
       expect {
         app.find_or_create_err!(conditions)
-      }.to change(Problem,:count).by(1)
+      }.to change(Problem, :count).by(1)
     end
 
     context "without error_class" do
@@ -201,7 +201,7 @@ describe App, type: 'model' do
         expect(Err.where(conditions).first).to be_nil
         expect {
           app.find_or_create_err!(conditions)
-        }.to change(Problem,:count).by(1)
+        }.to change(Problem, :count).by(1)
       end
     end
   end

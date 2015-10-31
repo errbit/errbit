@@ -23,7 +23,7 @@ class Deploy
   end
 
   def short_revision
-    revision.to_s[0,7]
+    revision.to_s[0, 7]
   end
 
 protected

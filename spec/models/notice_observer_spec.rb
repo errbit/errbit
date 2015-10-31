@@ -78,7 +78,7 @@ describe "Callback on Notice", type: 'model' do
       Fabricate(
         :app_with_watcher,
         notify_on_errs: true,
-        email_at_notices: [1,100]
+        email_at_notices: [1, 100]
       )
     end
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
@@ -161,7 +161,7 @@ describe "Callback on Notice", type: 'model' do
 
   describe "should send a notification at desired intervals" do
     let(:notification_service) do
-      Fabricate(:campfire_notification_service, notify_at_notices: [1,2])
+      Fabricate(:campfire_notification_service, notify_at_notices: [1, 2])
     end
     let(:app) { Fabricate(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }

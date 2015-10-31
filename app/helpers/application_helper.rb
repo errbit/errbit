@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def generate_problem_ical(notices)
     RiCal.Calendar do |cal|
-      notices.each_with_index do |notice,idx|
+      notices.each_with_index do |notice, idx|
         cal.event do |event|
           event.summary     = "#{idx+1} #{notice.message}"
           event.description = notice.url if notice.url
@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def generate_ical(deploys)
     RiCal.Calendar { |cal|
-      deploys.each_with_index do |deploy,idx|
+      deploys.each_with_index do |deploy, idx|
         cal.event do |event|
           event.summary     = "#{idx+1} #{deploy.repository}"
           event.description = deploy.revision.to_s
