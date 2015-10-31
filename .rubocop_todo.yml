@@ -323,12 +323,6 @@ Style/SpaceAroundEqualsInParameterDefault:
 Style/SpaceBeforeBlockBraces:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/SpaceBeforeComma:
-  Exclude:
-    - 'app/decorators/backtrace_line_decorator.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 Style/SpaceBeforeComment:
