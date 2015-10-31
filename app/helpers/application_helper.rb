@@ -81,7 +81,7 @@ private
     tallies.values.inject(0) {|sum, n| sum + n}
   end
 
-    def head_size
-      4
-    end
+  def head_size
+    4
+  end
 end

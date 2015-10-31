@@ -30,14 +30,14 @@ private
     end
   end
 
-    # handle Heroku's HTTP post deployhook format
-    def heroku_deploy
-      {
-        :username     => params[:user],
-        :environment  => params[:rack_env].try(:downcase) || params[:app],
-        :repository   => "git@heroku.com:#{params[:app]}.git",
-        :revision     => params[:head],
-      }
-    end
+  # handle Heroku's HTTP post deployhook format
+  def heroku_deploy
+    {
+      :username     => params[:user],
+      :environment  => params[:rack_env].try(:downcase) || params[:app],
+      :repository   => "git@heroku.com:#{params[:app]}.git",
+      :revision     => params[:head],
+    }
+  end
 end
 

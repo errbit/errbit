@@ -185,23 +185,6 @@ Style/IfUnlessModifier:
     - 'app/models/notice.rb'
     - 'app/models/user.rb'
 
-# Offense count: 27
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/IndentationConsistency:
-  Exclude:
-    - 'app/controllers/apps_controller.rb'
-    - 'app/controllers/comments_controller.rb'
-    - 'app/controllers/deploys_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/app.rb'
-    - 'app/models/comment.rb'
-    - 'app/models/deploy.rb'
-    - 'app/models/problem.rb'
-    - 'app/models/watcher.rb'
-    - 'lib/hoptoad.rb'
-
 # Offense count: 6
 # Cop supports --auto-correct.
 Style/Lambda:

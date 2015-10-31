@@ -30,11 +30,11 @@ protected
     @app = App.find(params[:app_id])
   end
 
-    def find_problem
-      @problem = @app.problems.find(params[:problem_id])
-    end
+  def find_problem
+    @problem = @app.problems.find(params[:problem_id])
+  end
 
-    def comment_params
-      params.require(:comment).permit!
-    end
+  def comment_params
+    params.require(:comment).permit!
+  end
 end

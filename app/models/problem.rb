@@ -257,7 +257,7 @@ private
     counter
   end
 
-    def attribute_index(value)
-      Digest::MD5.hexdigest(value.to_s)
-    end
+  def attribute_index(value)
+    Digest::MD5.hexdigest(value.to_s)
+  end
 end

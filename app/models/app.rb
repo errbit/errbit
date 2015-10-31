@@ -196,26 +196,26 @@ protected
     )
   end
 
-    def generate_api_key
-      self.api_key ||= SecureRandom.hex
-    end
+  def generate_api_key
+    self.api_key ||= SecureRandom.hex
+  end
 
-    def check_issue_tracker
-      if issue_tracker.present?
-        issue_tracker.valid?
-        issue_tracker.errors.full_messages.each do |error|
-          errors[:base] << error
-        end if issue_tracker.errors
-      end
+  def check_issue_tracker
+    if issue_tracker.present?
+      issue_tracker.valid?
+      issue_tracker.errors.full_messages.each do |error|
+        errors[:base] << error
+      end if issue_tracker.errors
     end
+  end
 
-    def normalize_github_repo
-      return if github_repo.blank?
-      github_host = URI.parse(Errbit::Config.github_url).host
-      github_host = Regexp.escape(github_host)
-      github_repo.strip!
-      github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
-      github_repo.sub!(/\.git$/, '')
-    end
+  def normalize_github_repo
+    return if github_repo.blank?
+    github_host = URI.parse(Errbit::Config.github_url).host
+    github_host = Regexp.escape(github_host)
+    github_repo.strip!
+    github_repo.sub!(/(git@|https?:\/\/)#{github_host}(\/|:)/, '')
+    github_repo.sub!(/\.git$/, '')
+  end
 end
 

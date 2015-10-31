@@ -21,7 +21,7 @@ Style/IndentationConsistency:
   # modifier keywords shall be indented the same as public methods and that
   # protected and private members shall be indented one step more than the
   # modifiers.
-   EnforcedStyle: rails
+  EnforcedStyle: rails
 
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent

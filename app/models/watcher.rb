@@ -31,13 +31,13 @@ protected
     errors.add(:base, "You must specify either a user or an email address") unless user.present? || email.present?
   end
 
-    def clear_unused_watcher_type
-      case watcher_type
-      when 'user'
-        self.email = nil
-      when 'email'
-        self.user = self.user_id = nil
-      end
+  def clear_unused_watcher_type
+    case watcher_type
+    when 'user'
+      self.email = nil
+    when 'email'
+      self.user = self.user_id = nil
     end
+  end
 end
 
