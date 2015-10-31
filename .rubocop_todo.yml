@@ -70,13 +70,6 @@ Style/AlignHash:
 Style/BlockDelimiters:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/BlockEndNewline:
-  Exclude:
-    - 'spec/models/error_report_spec.rb'
-    - 'spec/views/apps/show.atom.builder_spec.rb'
-
 # Offense count: 49
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

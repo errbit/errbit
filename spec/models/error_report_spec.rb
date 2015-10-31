@@ -66,11 +66,13 @@ describe ErrorReport do
     end
 
     context "with notice generate by Airbrake gem" do
-      let(:xml) { Airbrake::Notice.new(
-        :exception => Exception.new,
-        :api_key => 'APIKEY',
-        :project_root => Rails.root
-      ).to_xml }
+      let(:xml) {
+        Airbrake::Notice.new(
+          :exception => Exception.new,
+          :api_key => 'APIKEY',
+          :project_root => Rails.root
+        ).to_xml
+      }
       it 'save a notice' do
         expect {
           error_report.generate_notice!
