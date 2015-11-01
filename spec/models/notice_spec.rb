@@ -61,7 +61,7 @@ describe Notice, type: 'model' do
         'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
       }})
       expect(notice.user_agent.browser).to eq 'Chrome'
-      expect(notice.user_agent.version.to_s).to match( /^10\.0/ )
+      expect(notice.user_agent.version.to_s).to match(/^10\.0/)
     end
 
     it "should be nil if HTTP_USER_AGENT is blank" do

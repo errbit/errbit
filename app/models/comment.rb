@@ -34,7 +34,7 @@ protected
     err.inc(comments_count: 1)
   end
 
-    def decrease_counter_cache
-      err.inc(comments_count: -1) if err
-    end
+  def decrease_counter_cache
+    err.inc(comments_count: -1) if err
+  end
 end

@@ -52,8 +52,7 @@ Errbit::Config = Configurator.run({
   smtp_password:             %w(SMTP_PASSWORD SENDGRID_PASSWORD),
   smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', ->(values) {
     values[:smtp_domain] ||
-    (values[:email_from] && values[:email_from].split('@').last)||
-    nil
+    (values[:email_from] && values[:email_from].split('@').last) || nil
   }],
 
   # sendmail settings

@@ -29,4 +29,3 @@ class NotificationServices::HubotService < NotificationService
     HTTParty.post(url, :body => {:message => message_for_hubot(problem), :room => room_id})
   end
 end
-

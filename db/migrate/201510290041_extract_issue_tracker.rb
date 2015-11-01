@@ -1,5 +1,4 @@
 class ExtractIssueTracker < Mongoid::Migration
-
   TRACKER_MAPPING = {
     'ErrbitTracPlugin::IssueTracker' => 'trac',
     'IssueTrackers::BitbucketIssuesTracker' => 'bitbucket',
@@ -26,18 +25,18 @@ class ExtractIssueTracker < Mongoid::Migration
       updated_at = options.delete('updated_at')
       created_at = options.delete('created_at')
 
-      if TRACKER_MAPPING.include?(type)
-        tracker = {
-          'type_tracker' => TRACKER_MAPPING[type],
-          'options' => options,
-          'updated_at' => updated_at,
-          'created_at' => created_at
-        }
+      next unless TRACKER_MAPPING.include?(type)
 
-        App.where({ _id: app.id }).update({
-          "$set" => { :issue_tracker => tracker }
-        })
-      end
+      tracker = {
+        'type_tracker' => TRACKER_MAPPING[type],
+        'options' => options,
+        'updated_at' => updated_at,
+        'created_at' => created_at
+      }
+
+      App.where({ _id: app.id }).update({
+        "$set" => { :issue_tracker => tracker }
+      })
     end
   end
 

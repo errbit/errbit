@@ -1,37 +1,37 @@
 class NotificationServices::GtalkService < NotificationService
   Label = "gtalk"
   Fields += [
-      [:subdomain, {
-          :placeholder => "username@example.com",
-          :label       => "Username"
-      }],
-      [:api_token, {
-          :placeholder => "password",
-          :label       => "Password"
-      }],
-      [:user_id, {
-           :placeholder => "touser@example.com, anotheruser@example.com",
-           :label => "Send To User(s)"
-       }, :room_id],
-      [:room_id, {
-          :placeholder => "toroom@conference.example.com",
-          :label       =>  "Send To Room (one only)"
-      }, :user_id],
-      [ :service, {
-          :placeholder => "talk.google.com",
-          :label => "Jabber Service"
-      }],
-      [ :service_url, {
-          :placeholder => "http://www.google.com/talk/",
-          :label => "Link To Jabber Service"
-      }]
+    [:subdomain, {
+      :placeholder => "username@example.com",
+      :label       => "Username"
+    }],
+    [:api_token, {
+      :placeholder => "password",
+      :label       => "Password"
+    }],
+    [:user_id, {
+      :placeholder => "touser@example.com, anotheruser@example.com",
+      :label => "Send To User(s)"
+    }, :room_id],
+    [:room_id, {
+      :placeholder => "toroom@conference.example.com",
+      :label       =>  "Send To Room (one only)"
+    }, :user_id],
+    [ :service, {
+      :placeholder => "talk.google.com",
+      :label => "Jabber Service"
+    }],
+    [ :service_url, {
+      :placeholder => "http://www.google.com/talk/",
+      :label => "Link To Jabber Service"
+    }]
   ]
 
   def check_params
     if Fields.detect { |f| self[f[0]].blank? && self[f[2]].blank? } 
       errors.add :base, 
-      """You must specify your Username, Password, service, service_url 
-         and either rooms or users to send to or both"""
+        """You must specify your Username, Password, service, service_url 
+           and either rooms or users to send to or both"""
     end
   end
 

@@ -1,18 +1,18 @@
 class NotificationServices::HoiioService < NotificationService
   Label = "hoiio"
   Fields += [
-      [:api_token, {
-          :placeholder => "App ID",
-          :label => "App ID"
-      }],
-      [:subdomain, {
-          :placeholder => "Access Token",
-          :label => "Access Token"
-      }],
-      [:room_id, {
-          :placeholder => "+6511111111, +6511111111",
-          :label       => "Recipient's phone numbers seperated by comma. Phone numbers should start with a \"+\" and country code."
-      }]
+    [:api_token, {
+      :placeholder => "App ID",
+      :label => "App ID"
+    }],
+    [:subdomain, {
+      :placeholder => "Access Token",
+      :label => "Access Token"
+    }],
+    [:room_id, {
+      :placeholder => "+6511111111, +6511111111",
+      :label       => "Recipient's phone numbers seperated by comma. Phone numbers should start with a \"+\" and country code."
+    }]
   ]
 
   def check_params
@@ -26,7 +26,7 @@ class NotificationServices::HoiioService < NotificationService
   end
 
   def notification_description(problem)
-    "[#{ problem.environment }]#{problem.message.to_s.truncate(50)}"
+    "[#{problem.environment}]#{problem.message.to_s.truncate(50)}"
   end
 
   def create_notification(problem)

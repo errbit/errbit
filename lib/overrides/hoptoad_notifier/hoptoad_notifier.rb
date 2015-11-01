@@ -21,4 +21,3 @@ HoptoadNotifier.module_eval do
     end
   end
 end
-

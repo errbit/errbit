@@ -22,4 +22,3 @@ module Hoptoad
     end
   end
 end
-

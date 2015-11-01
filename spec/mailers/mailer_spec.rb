@@ -81,13 +81,13 @@ describe Mailer do
     end
 
     it "should have the error count in the subject" do
-      expect(email.subject).to match( /^\(3\) / )
+      expect(email.subject).to match(/^\(3\) /)
     end
 
     context 'with a very long message' do
       let(:notice)  { Fabricate(:notice, :message => 6.times.collect{|_a| "0123456789" }.join('')) }
       it "should truncate the long message" do
-        expect(email.subject).to match( / \d{47}\.{3}$/ )
+        expect(email.subject).to match(/ \d{47}\.{3}$/)
       end
     end
   end

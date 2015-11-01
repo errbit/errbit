@@ -52,8 +52,8 @@ describe ProblemMerge do
     end
 
     context "with problem with comment" do
-      let!(:comment) { Fabricate(:comment, :err => problem ) }
-      let!(:comment_2) { Fabricate(:comment, :err => problem_1, :user => comment.user ) }
+      let!(:comment) { Fabricate(:comment, :err => problem) }
+      let!(:comment_2) { Fabricate(:comment, :err => problem_1, :user => comment.user) }
       it 'merge comment' do
         expect {
           problem_merge.merge

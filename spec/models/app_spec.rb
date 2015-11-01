@@ -165,10 +165,10 @@ describe App, type: 'model' do
   context '#find_or_create_err!' do
     let(:app) { Fabricate(:app) }
     let(:conditions) { {
-        :error_class  => 'Whoops',
-        :environment  => 'production',
-        :fingerprint  => 'some-finger-print'
-      }
+      :error_class  => 'Whoops',
+      :environment  => 'production',
+      :fingerprint  => 'some-finger-print'
+    }
     }
 
     it 'returns the correct err if one already exists' do
@@ -188,7 +188,7 @@ describe App, type: 'model' do
       expect(Err.where(conditions).first).to be_nil
       expect {
         app.find_or_create_err!(conditions)
-      }.to change(Problem,:count).by(1)
+      }.to change(Problem, :count).by(1)
     end
 
     context "without error_class" do
@@ -201,7 +201,7 @@ describe App, type: 'model' do
         expect(Err.where(conditions).first).to be_nil
         expect {
           app.find_or_create_err!(conditions)
-        }.to change(Problem,:count).by(1)
+        }.to change(Problem, :count).by(1)
       end
     end
   end

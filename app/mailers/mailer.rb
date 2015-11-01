@@ -59,6 +59,6 @@ class Mailer < ActionMailer::Base
   end
 
   private def errbit_headers(header)
-    header.each { |key,value| headers["X-Errbit-#{key}"] = value.to_s }
+    header.each { |key, value| headers["X-Errbit-#{key}"] = value.to_s }
   end
 end

@@ -3,7 +3,7 @@ namespace :errbit do
   task :demo => :environment do
     require 'fabrication'
 
-    app = Fabricate(:app, :name => "Demo App #{Time.zone.now.strftime("%N")}")
+    app = Fabricate(:app, :name => "Demo App #{Time.zone.now.strftime('%N')}")
 
     # Report a number of errors for the application
     app.problems.delete_all
