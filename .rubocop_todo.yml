@@ -229,14 +229,6 @@ Style/RegexpLiteral:
     - 'config/initializers/ssl_enforcer.rb'
     - 'config/load.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAsExpressionSeparator.
-Style/Semicolon:
-  Exclude:
-    - 'app/decorators/issue_tracker_type_decorator.rb'
-    - 'app/models/notice_fingerprinter.rb'
-
 # Offense count: 1
 # Configuration parameters: Methods.
 Style/SingleLineBlockParams:
