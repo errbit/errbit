@@ -1,6 +1,6 @@
 describe AppsController, type: 'controller' do
   it_requires_authentication
-  it_requires_admin_privileges :for => {:new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete}
+  it_requires_admin_privileges :for => { :new => :get, :edit => :get, :create => :post, :update => :put, :destroy => :delete }
 
   let(:admin) { Fabricate(:admin) }
   let(:user) { Fabricate(:user) }
@@ -247,7 +247,7 @@ describe AppsController, type: 'controller' do
       context "changing name" do
         it "should redirect to app page" do
           id = @app.id
-          put :update, :id => id, :app => {:name => "new name"}
+          put :update, :id => id, :app => { :name => "new name" }
           expect(response).to redirect_to(app_path(id))
         end
       end
@@ -288,7 +288,7 @@ describe AppsController, type: 'controller' do
         context "unknown tracker type" do
           before(:each) do
             put :update, :id => @app.id, :app => { :issue_tracker_attributes => {
-              :type_tracker => 'unknown', :options => {:project_id => '1234', :api_token => '123123', :account => 'myapp'}
+              :type_tracker => 'unknown', :options => { :project_id => '1234', :api_token => '123123', :account => 'myapp' }
             } }
             @app.reload
           end

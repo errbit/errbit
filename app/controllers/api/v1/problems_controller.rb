@@ -24,7 +24,7 @@ class Api::V1::ProblemsController < ApplicationController
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.parse(params[:start_date]).utc
       end_date = Time.parse(params[:end_date]).utc
-      query = {:first_notice_at => {"$lte" => end_date}, "$or" => [{:resolved_at => nil}, {:resolved_at => {"$gte" => start_date}}]}
+      query = { :first_notice_at => { "$lte" => end_date }, "$or" => [{ :resolved_at => nil }, { :resolved_at => { "$gte" => start_date } }] }
     end
 
     results = benchmark("[api/v1/problems_controller/index] query time") do

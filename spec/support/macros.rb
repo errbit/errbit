@@ -9,7 +9,7 @@ def it_requires_authentication(options = {})
       :update   => :put,
       :destroy  => :delete
     },
-    :params => {:id => '4c6c760494df2a18cc000015'}
+    :params => { :id => '4c6c760494df2a18cc000015' }
   }
   options.reverse_merge!(default_options)
 
@@ -38,7 +38,7 @@ def it_requires_admin_privileges(options = {})
       :update   => :put,
       :destroy  => :delete
     },
-    :params => {:id => 'dummyid'}
+    :params => { :id => 'dummyid' }
   }
   options.reverse_merge!(default_options)
 

@@ -82,7 +82,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
 
       describe "given a date range" do
         it "should return only the problems open during the date range" do
-          get :index, {:auth_token => @user.authentication_token, :start_date => "2012-08-20", :end_date => "2012-08-27"}
+          get :index, { :auth_token => @user.authentication_token, :start_date => "2012-08-20", :end_date => "2012-08-27" }
           expect(response).to be_success
           problems = JSON.load response.body
           expect(problems.length).to eq 2
@@ -90,7 +90,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
       end
 
       it "should return all problems" do
-        get :index, {:auth_token => @user.authentication_token}
+        get :index, { :auth_token => @user.authentication_token }
         expect(response).to be_success
         problems = JSON.load response.body
         expect(problems.length).to eq 4

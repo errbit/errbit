@@ -12,15 +12,15 @@ module Hoptoad
       case node
       when Hash
         if node.key?('var') && node.key?('key')
-          {normalize_key(node['key']) => rekey(node['var'])}
+          { normalize_key(node['key']) => rekey(node['var']) }
         elsif node.key?('var')
           rekey(node['var'])
         elsif node.key?('__content__') && node.key?('key')
-          {normalize_key(node['key']) => rekey(node['__content__'])}
+          { normalize_key(node['key']) => rekey(node['__content__']) }
         elsif node.key?('__content__')
           rekey(node['__content__'])
         elsif node.key?('key')
-          {normalize_key(node['key']) => nil}
+          { normalize_key(node['key']) => nil }
         else
           node.inject({}) {|rekeyed, (key, val)| rekeyed.merge(normalize_key(key) => rekey(val))}
         end

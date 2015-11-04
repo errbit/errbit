@@ -295,12 +295,6 @@ Style/SpaceInsideBrackets:
     - 'spec/lib/configurator_spec.rb'
     - 'spec/models/issue_spec.rb'
 
-# Offense count: 189
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
-Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

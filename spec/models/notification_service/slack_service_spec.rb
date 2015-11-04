@@ -47,7 +47,7 @@ describe NotificationServices::SlackService, type: 'model' do
         }
       ]
     }.to_json
-    expect(HTTParty).to receive(:post).with(notification_service.service_url, :body => payload, :headers => {"Content-Type" => "application/json"}).and_return(true)
+    expect(HTTParty).to receive(:post).with(notification_service.service_url, :body => payload, :headers => { "Content-Type" => "application/json" }).and_return(true)
 
     notification_service.create_notification(problem)
   end

@@ -5,7 +5,7 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
     env = {
       "omniauth.auth" => Hashie::Mash.new(
         :provider => 'github',
-        :extra => { :raw_info => { :login => login }},
+        :extra => { :raw_info => { :login => login } },
         :credentials => { :token => token }
       )
     }

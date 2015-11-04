@@ -8,7 +8,7 @@ class Api::V1::NoticesController < ApplicationController
     if params.key?(:start_date) && params.key?(:end_date)
       start_date = Time.zone.parse(params[:start_date]).utc
       end_date = Time.zone.parse(params[:end_date]).utc
-      query = {:created_at => {"$lte" => end_date, "$gte" => start_date}}
+      query = { :created_at => { "$lte" => end_date, "$gte" => start_date } }
     end
 
     results = benchmark("[api/v1/notices_controller] query time") do

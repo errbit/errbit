@@ -139,7 +139,7 @@ class Problem
       # find only notices related to this problem
       Notice.collection.find.aggregate([
         { "$match" => { err_id: { "$in" => err_ids } } },
-        { "$group" => { _id: "$#{v}", count: {"$sum" => 1} } }
+        { "$group" => { _id: "$#{v}", count: { "$sum" => 1 } } }
       ]).each do |agg|
         send(k)[Digest::MD5.hexdigest(agg[:_id] || 'N/A')] = {
           'value' => agg[:_id] || 'N/A',
@@ -194,7 +194,7 @@ class Problem
   end
 
   def unmerge!
-    attrs = {:error_class => error_class, :environment => environment}
+    attrs = { :error_class => error_class, :environment => environment }
     problem_errs = errs.to_a
 
     # associate and return all the problems
@@ -241,7 +241,7 @@ class Problem
   end
 
   def self.search(value)
-    Problem.where({'$text' => {'$search' => value}})
+    Problem.where({ '$text' => { '$search' => value } })
   end
 
 private

@@ -52,8 +52,8 @@ namespace :errbit do
             'action' => 'error',
             'url' => "http://example.com/post/#{[111, 222, 333].sample}"
           },
-          :server_environment => {'environment-name' => Rails.env.to_s},
-          :notifier => {:name => "seeds.rb"},
+          :server_environment => { 'environment-name' => Rails.env.to_s },
+          :notifier => { :name => "seeds.rb" },
           :app_user => {
             :id => "1234",
             :username => "jsmith",

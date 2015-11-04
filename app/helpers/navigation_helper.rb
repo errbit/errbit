@@ -22,7 +22,7 @@ module NavigationHelper
                   matches.each {|c| s[c] = :all}
                   s
                 else
-                  {matches => :all}
+                  { matches => :all }
                 end
 
     active = nil
