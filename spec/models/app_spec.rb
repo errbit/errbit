@@ -164,11 +164,12 @@ describe App, type: 'model' do
 
   context '#find_or_create_err!' do
     let(:app) { Fabricate(:app) }
-    let(:conditions) { {
-      :error_class  => 'Whoops',
-      :environment  => 'production',
-      :fingerprint  => 'some-finger-print'
-    }
+    let(:conditions) {
+      {
+        :error_class  => 'Whoops',
+        :environment  => 'production',
+        :fingerprint  => 'some-finger-print'
+      }
     }
 
     it 'returns the correct err if one already exists' do
@@ -192,10 +193,11 @@ describe App, type: 'model' do
     end
 
     context "without error_class" do
-      let(:conditions) { {
-        :environment  => 'production',
-        :fingerprint  => 'some-finger-print'
-      }
+      let(:conditions) {
+        {
+          :environment  => 'production',
+          :fingerprint  => 'some-finger-print'
+        }
       }
       it 'save the err' do
         expect(Err.where(conditions).first).to be_nil

@@ -180,17 +180,6 @@ Style/LeadingCommentSpace:
     - 'spec/models/notification_service/hoiio_service_spec.rb'
     - 'spec/models/notification_service/pushover_service_spec.rb'
 
-# Offense count: 7
-# Cop supports --auto-correct.
-Style/MultilineBlockLayout:
-  Exclude:
-    - 'lib/tasks/errbit/demo.rake'
-    - 'spec/fabricators/issue_tracker_fabricator.rb'
-    - 'spec/interactors/user_destroy_spec.rb'
-    - 'spec/models/app_spec.rb'
-    - 'spec/models/error_report_spec.rb'
-    - 'spec/views/apps/show.atom.builder_spec.rb'
-
 # Offense count: 10
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

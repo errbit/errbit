@@ -1,9 +1,10 @@
 describe UserDestroy do
-  let(:app) { Fabricate(
-    :app,
-    :watchers => [
-      Fabricate.build(:user_watcher, :user => user)
-    ])
+  let(:app) {
+    Fabricate(
+      :app,
+      :watchers => [
+        Fabricate.build(:user_watcher, :user => user)
+      ])
   }
 
   describe "#destroy" do

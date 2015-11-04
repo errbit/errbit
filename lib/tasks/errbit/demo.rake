@@ -32,11 +32,12 @@ namespace :errbit do
 
     def random_backtrace
       backtrace = []
-      99.times {|t| backtrace << {
-        'number'  => t.hash % 1000,
-        'file'    => "/path/to/file.rb",
-        'method'  => RANDOM_METHODS.sample.to_s
-      }}
+      99.times {|t|
+        backtrace << {
+          'number'  => t.hash % 1000,
+          'file'    => "/path/to/file.rb",
+          'method'  => RANDOM_METHODS.sample.to_s
+        }}
       backtrace
     end
 
