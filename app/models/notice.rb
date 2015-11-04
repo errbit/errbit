@@ -28,7 +28,7 @@ class Notice
 
   scope :ordered, -> { order_by(:created_at.asc) }
   scope :reverse_ordered, -> { order_by(:created_at.desc) }
-  scope :for_errs, Proc.new { |errs|
+  scope :for_errs, -> (errs) {
     where(:err_id.in => errs.all.map(&:id))
   }
 

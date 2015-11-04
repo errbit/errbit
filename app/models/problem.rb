@@ -12,8 +12,8 @@ class Problem
     user_agents: :user_agent_string
   }.freeze
 
-  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
-  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => Proc.new { Time.zone.now }
+  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => proc { Time.zone.now }
+  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => proc { Time.zone.now }
   field :last_deploy_at, :type => Time
   field :resolved, :type => Boolean, :default => false
   field :resolved_at, :type => Time

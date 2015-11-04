@@ -207,13 +207,6 @@ Style/PercentLiteralDelimiters:
     - 'app/controllers/problems_searcher.rb'
     - 'spec/models/notice_spec.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/Proc:
-  Exclude:
-    - 'app/models/notice.rb'
-    - 'app/models/problem.rb'
-
 # Offense count: 1
 # Configuration parameters: Methods.
 Style/SingleLineBlockParams:
