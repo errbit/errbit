@@ -2,16 +2,16 @@ class NotificationServices::HoiioService < NotificationService
   LABEL = "hoiio"
   FIELDS += [
     [:api_token, {
-      :placeholder => "App ID",
-      :label => "App ID"
+      placeholder: "App ID",
+      label:       "App ID"
     }],
     [:subdomain, {
-      :placeholder => "Access Token",
-      :label => "Access Token"
+      placeholder: "Access Token",
+      label:       "Access Token"
     }],
     [:room_id, {
-      :placeholder => "+6511111111, +6511111111",
-      :label       => "Recipient's phone numbers seperated by comma. Phone numbers should start with a \"+\" and country code."
+      placeholder: "+6511111111, +6511111111",
+      label:       "Recipient's phone numbers seperated by comma. Phone numbers should start with a \"+\" and country code."
     }]
   ]
 
@@ -35,7 +35,7 @@ class NotificationServices::HoiioService < NotificationService
 
     # send sms
     room_id.split(',').each do |number|
-      sms.send :dest => number, :msg => "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id} #{notification_description problem}"
+      sms.send dest: number, msg: "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id} #{notification_description problem}"
     end
   end
 end

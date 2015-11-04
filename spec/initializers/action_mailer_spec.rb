@@ -35,12 +35,12 @@ describe 'initializers/action_mailer' do
       load_initializer
 
       expect(ActionMailer::Base.smtp_settings).to eq({
-        address: 'smtp.somedomain.com',
-        port: 998,
+        address:        'smtp.somedomain.com',
+        port:           998,
         authentication: :login,
-        user_name: 'my-username',
-        password: 'my-password',
-        domain: 'someotherdomain.com'
+        user_name:      'my-username',
+        password:       'my-password',
+        domain:         'someotherdomain.com'
       })
     end
   end

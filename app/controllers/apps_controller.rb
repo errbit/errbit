@@ -1,9 +1,9 @@
 class AppsController < ApplicationController
   include ProblemsSearcher
 
-  before_action :require_admin!, :except => [:index, :show]
-  before_action :parse_email_at_notices_or_set_default, :only => [:create, :update]
-  before_action :parse_notice_at_notices_or_set_default, :only => [:create, :update]
+  before_action :require_admin!, except: [:index, :show]
+  before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
+  before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
   respond_to :html
 
   expose(:app_scope) { App }
@@ -55,7 +55,7 @@ class AppsController < ApplicationController
   def create
     initialize_subclassed_notification_service
     if app.save
-      redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.create.success') }
+      redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
     else
       flash[:error] = I18n.t('controllers.apps.flash.create.error')
       render :new
@@ -65,7 +65,7 @@ class AppsController < ApplicationController
   def update
     initialize_subclassed_notification_service
     if app.save
-      redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.update.success') }
+      redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
     else
       flash[:error] = I18n.t('controllers.apps.flash.update.error')
       render :edit
@@ -78,7 +78,7 @@ class AppsController < ApplicationController
 
   def destroy
     if app.destroy
-      redirect_to apps_url, :flash => { :success => I18n.t('controllers.apps.flash.destroy.success') }
+      redirect_to apps_url, flash: { success: I18n.t('controllers.apps.flash.destroy.success') }
     else
       flash[:error] = I18n.t('controllers.apps.flash.destroy.error')
       render :show

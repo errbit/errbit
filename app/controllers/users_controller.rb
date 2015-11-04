@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   respond_to :html
 
-  before_action :require_admin!, :except => [:edit, :update]
-  before_action :require_user_edit_priviledges, :only => [:edit, :update]
+  before_action :require_admin!, except: [:edit, :update]
+  before_action :require_user_edit_priviledges, only: [:edit, :update]
 
-  expose(:user, :attributes => :user_params)
+  expose(:user, attributes: :user_params)
   expose(:users) {
     User.all.page(params[:page]).per(current_user.per_page)
   }
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     if user.update_attributes(user_params)
-      flash[:success] = I18n.t('controllers.users.flash.update.success', :name => user.name)
+      flash[:success] = I18n.t('controllers.users.flash.update.success', name: user.name)
       redirect_to user_path(user)
     else
       render :edit
@@ -41,13 +41,13 @@ class UsersController < ApplicationController
       flash[:error] = I18n.t('controllers.users.flash.destroy.error')
     else
       UserDestroy.new(user).destroy
-      flash[:success] = I18n.t('controllers.users.flash.destroy.success', :name => user.name)
+      flash[:success] = I18n.t('controllers.users.flash.destroy.success', name: user.name)
     end
     redirect_to users_path
   end
 
   def unlink_github
-    user.update_attributes :github_login => nil, :github_oauth_token => nil
+    user.update_attributes github_login: nil, github_oauth_token: nil
     redirect_to user_path(user)
   end
 

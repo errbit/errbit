@@ -1,17 +1,17 @@
 namespace :errbit do
   desc "Updates cached attributes on Problem"
-  task :problem_recache => :environment do
+  task problem_recache: :environment do
     ProblemRecacher.run
   end
 
   desc "Delete resolved errors from the database. (Useful for limited heroku databases)"
-  task :clear_resolved => :environment do
+  task clear_resolved: :environment do
     require 'resolved_problem_clearer'
     puts "=== Cleared #{ResolvedProblemClearer.new.execute} resolved errors from the database."
   end
 
   desc "Regenerate fingerprints"
-  task :notice_refingerprint => :environment do
+  task notice_refingerprint: :environment do
     NoticeRefingerprinter.run
     ProblemRecacher.run
   end

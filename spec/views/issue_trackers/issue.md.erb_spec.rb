@@ -1,7 +1,7 @@
 describe "issue_trackers/issue.md.erb", type: 'view' do
   let(:problem) {
     problem = Fabricate(:problem)
-    Fabricate(:notice, :err => Fabricate(:err, :problem => problem))
+    Fabricate(:notice, err: Fabricate(:err, problem: problem))
     problem
   }
 

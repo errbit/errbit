@@ -8,11 +8,11 @@ class Deploy
   field :revision
   field :message
 
-  index(:created_at => -1)
+  index(created_at: -1)
 
-  embedded_in :app, :inverse_of => :deploys
+  embedded_in :app, inverse_of: :deploys
 
-  after_create :resolve_app_errs, :if => :should_resolve_app_errs?
+  after_create :resolve_app_errs, if: :should_resolve_app_errs?
   after_create :store_cached_attributes_on_problems
   after_create :deliver_email
 
@@ -33,7 +33,7 @@ protected
   end
 
   def store_cached_attributes_on_problems
-    Problem.where(:app_id => app.id).update_all(
+    Problem.where(app_id: app.id).update_all(
       last_deploy_at: created_at
     )
   end

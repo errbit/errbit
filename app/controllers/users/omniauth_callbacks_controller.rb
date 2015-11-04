@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     github_login = env["omniauth.auth"].extra.raw_info.login
     github_token = env["omniauth.auth"].credentials.token
-    github_user  = User.where(:github_login => github_login).first
+    github_user  = User.where(github_login: github_login).first
     github_site_title = Errbit::Config.github_site_title
 
     if github_user.nil? && (github_org_id = Errbit::Config.github_org_id)
@@ -31,8 +31,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif github_user
       # Store OAuth token
       update_user_with_github_attributes(github_user, github_login, github_token)
-      flash[:success] = I18n.t "devise.omniauth_callbacks.success", :kind => github_site_title
-      sign_in_and_redirect github_user, :event => :authentication
+      flash[:success] = I18n.t "devise.omniauth_callbacks.success", kind: github_site_title
+      sign_in_and_redirect github_user, event: :authentication
     else
       flash[:error] = "There are no authorized users with #{github_site_title} login '#{github_login}'. Please ask an administrator to register your user account."
       redirect_to new_user_session_path
@@ -41,8 +41,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private def update_user_with_github_attributes(user, login, token)
     user.update_attributes(
-      :github_login        => login,
-      :github_oauth_token  => token
+      github_login:       login,
+      github_oauth_token: token
     )
   end
 end

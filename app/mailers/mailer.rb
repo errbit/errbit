@@ -23,8 +23,8 @@ class Mailer < ActionMailer::Base
                    'Environment' => @notice.environment_name,
                    'Error-Id' => @notice.err_id
 
-    mail :to      => @app.notification_recipients,
-         :subject => "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+    mail to:      @app.notification_recipients,
+         subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
   def deploy_notification(deploy)
@@ -36,8 +36,8 @@ class Mailer < ActionMailer::Base
                    'Deploy-Revision' => @deploy.revision,
                    'Deploy-User' => @deploy.username
 
-    mail :to       => @app.notification_recipients,
-         :subject  => "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
+    mail to:      @app.notification_recipients,
+         subject: "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
   end
 
   def comment_notification(comment)
@@ -54,8 +54,8 @@ class Mailer < ActionMailer::Base
                    'Problem-Id' => @problem.id,
                    'Comment-Author' => @user.name
 
-    mail :to      => recipients,
-         :subject => "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+    mail to:      recipients,
+         subject: "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
   private def errbit_headers(header)

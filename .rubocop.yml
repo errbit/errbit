@@ -36,6 +36,9 @@ Style/DotPosition:
 Style/IndentHash:
   EnforcedStyle: consistent
 
+Style/AlignHash:
+  EnforcedColonStyle: table
+
 Style/SpaceAroundOperators:
   MultiSpaceAllowedForOperators:
     - '='

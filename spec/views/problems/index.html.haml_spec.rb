@@ -1,6 +1,6 @@
 describe "problems/index.html.haml", type: 'view' do
   let(:problem_1) { Fabricate(:problem) }
-  let(:problem_2) { Fabricate(:problem, :app => problem_1.app) }
+  let(:problem_2) { Fabricate(:problem, app: problem_1.app) }
 
   before do
     allow(view).to receive(:selected_problems).and_return([])

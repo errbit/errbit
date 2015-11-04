@@ -17,7 +17,7 @@ describe "apps/show.html.haml", type: 'view' do
     it "should confirm the 'cancel' link" do
       render
 
-      expect(action_bar).to have_selector('a.button', :text => 'all errors')
+      expect(action_bar).to have_selector('a.button', text: 'all errors')
     end
   end
 

@@ -1,6 +1,6 @@
 describe NotificationServices, type: 'model' do
   let(:notice) { Fabricate :notice }
-  let(:notification_service) { Fabricate :notification_service, :app => notice.app }
+  let(:notification_service) { Fabricate :notification_service, app: notice.app }
   let(:problem) { notice.problem }
 
   it "it should use http by default in #problem_url" do

@@ -6,6 +6,6 @@ describe "problems/show.html.ics", type: 'view' do
   end
 
   it 'works' do
-    render :template => 'problems/show', :formats => [:ics], :handlers => [:haml]
+    render template: 'problems/show', formats: [:ics], handlers: [:haml]
   end
 end

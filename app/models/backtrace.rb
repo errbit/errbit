@@ -8,7 +8,7 @@ class Backtrace
   field :fingerprint
   field :lines
 
-  index :fingerprint => 1
+  index fingerprint: 1
 
   def self.find_or_create(lines)
     fingerprint = generate_fingerprint(lines)

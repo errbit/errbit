@@ -25,8 +25,8 @@ describe ProblemMerge do
     }
     let(:first_errs) { problem.errs }
     let(:merged_errs) { problem_1.errs }
-    let!(:notice) { Fabricate(:notice, :err => first_errs.first) }
-    let!(:notice_1) { Fabricate(:notice, :err => merged_errs.first) }
+    let!(:notice) { Fabricate(:notice, err: first_errs.first) }
+    let!(:notice_1) { Fabricate(:notice, err: merged_errs.first) }
 
     it 'delete one of problem' do
       expect {
@@ -52,8 +52,8 @@ describe ProblemMerge do
     end
 
     context "with problem with comment" do
-      let!(:comment) { Fabricate(:comment, :err => problem) }
-      let!(:comment_2) { Fabricate(:comment, :err => problem_1, :user => comment.user) }
+      let!(:comment) { Fabricate(:comment, err: problem) }
+      let!(:comment_2) { Fabricate(:comment, err: problem_1, user: comment.user) }
       it 'merge comment' do
         expect {
           problem_merge.merge

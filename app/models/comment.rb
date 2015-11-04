@@ -5,14 +5,14 @@ class Comment
   after_create :increase_counter_cache
   before_destroy :decrease_counter_cache
 
-  after_create :deliver_email, :if => :emailable?
+  after_create :deliver_email, if: :emailable?
 
-  field :body, :type => String
-  index(:user_id => 1)
+  field :body, type: String
+  index(user_id: 1)
 
-  belongs_to :err, :class_name => "Problem"
+  belongs_to :err, class_name: "Problem"
   belongs_to :user
-  delegate   :app, :to => :err
+  delegate   :app, to: :err
 
   validates_presence_of :body
 

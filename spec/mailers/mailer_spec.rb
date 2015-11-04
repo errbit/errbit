@@ -41,8 +41,8 @@ describe Mailer do
     let(:app) do
       a = notice.app
       a.update_attributes(
-        :asset_host => "http://example.com",
-        :notify_all_users => true
+        asset_host:       "http://example.com",
+        notify_all_users: true
       )
       a
     end
@@ -55,8 +55,8 @@ describe Mailer do
     let(:error_report) do
       instance_double(
         'ErrorReport',
-        notice: notice,
-        app: app,
+        notice:  notice,
+        app:     app,
         problem: problem
       )
     end
@@ -85,7 +85,7 @@ describe Mailer do
     end
 
     context 'with a very long message' do
-      let(:notice)  { Fabricate(:notice, :message => 6.times.collect { |_a| "0123456789" }.join('')) }
+      let(:notice)  { Fabricate(:notice, message: 6.times.collect { |_a| "0123456789" }.join('')) }
       it "should truncate the long message" do
         expect(email.subject).to match(/ \d{47}\.{3}$/)
       end
@@ -97,13 +97,13 @@ describe Mailer do
     include EmailSpec::Matchers
 
     let!(:notice) { Fabricate(:notice) }
-    let!(:comment) { Fabricate(:comment, :err => notice.problem) }
-    let!(:watcher) { Fabricate(:watcher, :app => comment.app) }
+    let!(:comment) { Fabricate(:comment, err: notice.problem) }
+    let!(:watcher) { Fabricate(:watcher, app: comment.app) }
     let(:recipients) { ['recipient@example.com', 'another@example.com'] }
 
     before do
       expect(comment).to receive(:notification_recipients).and_return(recipients)
-      Fabricate(:notice, :err => notice.err)
+      Fabricate(:notice, err: notice.err)
       @email = Mailer.comment_notification(comment).deliver_now
     end
 

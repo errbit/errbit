@@ -5,22 +5,22 @@ class NotificationService
   default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
   default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
 
-  field :room_id, :type => String
-  field :user_id, :type => String
-  field :service_url, :type => String
-  field :service, :type => String
-  field :api_token, :type => String
-  field :subdomain, :type => String
-  field :sender_name, :type => String
-  field :notify_at_notices, :type => Array, :default => Errbit::Config.notify_at_notices
-  embedded_in :app, :inverse_of => :notification_service
+  field :room_id, type: String
+  field :user_id, type: String
+  field :service_url, type: String
+  field :service, type: String
+  field :api_token, type: String
+  field :subdomain, type: String
+  field :sender_name, type: String
+  field :notify_at_notices, type: Array, default: Errbit::Config.notify_at_notices
+  embedded_in :app, inverse_of: :notification_service
 
   validate :check_params
 
   if Errbit::Config.per_app_notify_at_notices
     FIELDS = [[:notify_at_notices,
-               { :placeholder => 'comma separated numbers or simply 0 for every notice',
-                 :label => 'notify on errors (0 for all errors)'
+               { placeholder: 'comma separated numbers or simply 0 for every notice',
+                 label:       'notify on errors (0 for all errors)'
                }
               ]]
   else

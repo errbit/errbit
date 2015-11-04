@@ -3,20 +3,20 @@ if defined? HipChat
     LABEL = 'hipchat'
     FIELDS += [
       [:service, {
-        :placeholder => "'v1' (admin API token) or 'v2' (account API token)",
-        :label       => "HipChat API version"
+        placeholder: "'v1' (admin API token) or 'v2' (account API token)",
+        label:       "HipChat API version"
       }],
       [:service_url, {
-        :placeholder => "Optional, leave empty for HipChat.com",
-        :label       => "Custom HipChat Server URL"
+        placeholder: "Optional, leave empty for HipChat.com",
+        label:       "Custom HipChat Server URL"
       }],
       [:api_token, {
-        :placeholder => "API token",
-        :label       => "API token"
+        placeholder: "API token",
+        label:       "API token"
       }],
       [:room_id, {
-        :placeholder => "Room name",
-        :label       => "Room name"
+        placeholder: "Room name",
+        label:       "Room name"
       }]
     ]
     MANDATORY_FIELDS = [:service, :api_token, :room_id]
@@ -45,11 +45,11 @@ if defined? HipChat
         &nbsp;&nbsp;Times occurred: #{problem.notices_count}
       MSG
 
-      options = { :api_version => self[:service] }
+      options = { api_version: self[:service] }
       options[:server_url] = self[:service_url] if service_url.present?
 
       client = HipChat::Client.new(api_token, options)
-      client[room_id].send('Errbit', message, :color => 'red', :notify => true)
+      client[room_id].send('Errbit', message, color: 'red', notify: true)
     end
   end
 end

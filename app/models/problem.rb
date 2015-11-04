@@ -7,59 +7,59 @@ class Problem
   include Mongoid::Timestamps
 
   CACHED_NOTICE_ATTRIBUTES = {
-    messages: :message,
-    hosts: :host,
+    messages:    :message,
+    hosts:       :host,
     user_agents: :user_agent_string
   }.freeze
 
-  field :last_notice_at, :type => ActiveSupport::TimeWithZone, :default => proc { Time.zone.now }
-  field :first_notice_at, :type => ActiveSupport::TimeWithZone, :default => proc { Time.zone.now }
-  field :last_deploy_at, :type => Time
-  field :resolved, :type => Boolean, :default => false
-  field :resolved_at, :type => Time
-  field :issue_link, :type => String
-  field :issue_type, :type => String
+  field :last_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
+  field :first_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
+  field :last_deploy_at, type: Time
+  field :resolved, type: Boolean, default: false
+  field :resolved_at, type: Time
+  field :issue_link, type: String
+  field :issue_type, type: String
 
   # Cached fields
-  field :app_name, :type => String
-  field :notices_count, :type => Integer, :default => 0
+  field :app_name, type: String
+  field :notices_count, type: Integer, default: 0
   field :message
   field :environment
   field :error_class
   field :where
-  field :user_agents, :type => Hash, :default => {}
-  field :messages,    :type => Hash, :default => {}
-  field :hosts,       :type => Hash, :default => {}
-  field :comments_count, :type => Integer, :default => 0
+  field :user_agents, type: Hash, default: {}
+  field :messages,    type: Hash, default: {}
+  field :hosts,       type: Hash, default: {}
+  field :comments_count, type: Integer, default: 0
 
-  index :app_id => 1
-  index :app_name => 1
-  index :message => 1
-  index :last_notice_at => 1
-  index :first_notice_at => 1
-  index :last_deploy_at => 1
-  index :resolved_at => 1
-  index :notices_count => 1
+  index app_id: 1
+  index app_name: 1
+  index message: 1
+  index last_notice_at: 1
+  index first_notice_at: 1
+  index last_deploy_at: 1
+  index resolved_at: 1
+  index notices_count: 1
 
   index({
     error_class: "text",
-    where: "text",
-    message: "text",
-    app_name: "text",
+    where:       "text",
+    message:     "text",
+    app_name:    "text",
     environment: "text"
   }, default_language: "english")
 
   belongs_to :app
-  has_many :errs, :inverse_of => :problem, :dependent => :destroy
-  has_many :comments, :inverse_of => :err, :dependent => :destroy
+  has_many :errs, inverse_of: :problem, dependent: :destroy
+  has_many :comments, inverse_of: :err, dependent: :destroy
 
   validates_presence_of :environment
 
   before_create :cache_app_attributes
   before_save :truncate_message
 
-  scope :resolved, -> { where(:resolved => true) }
-  scope :unresolved, -> { where(:resolved => false) }
+  scope :resolved, -> { where(resolved: true) }
+  scope :unresolved, -> { where(resolved: false) }
   scope :ordered, -> { order_by(:last_notice_at.desc) }
   scope :for_apps, ->(apps) { where(:app_id.in => apps.all.map(&:id)) }
 
@@ -69,12 +69,12 @@ class Problem
     if fetch_all
       all
     else
-      where(:resolved => false)
+      where(resolved: false)
     end
   end
 
   def self.in_env(env)
-    env.present? ? where(:environment => env) : scoped
+    env.present? ? where(environment: env) : scoped
   end
 
   def self.cache_notice(id, notice)
@@ -164,8 +164,8 @@ class Problem
     Rails.application.routes.url_helpers.app_problem_url(
       app,
       self,
-      :host => Errbit::Config.host,
-      :port => Errbit::Config.port
+      host: Errbit::Config.host,
+      port: Errbit::Config.port
     )
   end
 
@@ -174,11 +174,11 @@ class Problem
   end
 
   def resolve!
-    self.update_attributes!(:resolved => true, :resolved_at => Time.zone.now)
+    self.update_attributes!(resolved: true, resolved_at: Time.zone.now)
   end
 
   def unresolve!
-    self.update_attributes!(:resolved => false, :resolved_at => nil)
+    self.update_attributes!(resolved: false, resolved_at: nil)
   end
 
   def unresolved?
@@ -194,7 +194,7 @@ class Problem
   end
 
   def unmerge!
-    attrs = { :error_class => error_class, :environment => environment }
+    attrs = { error_class: error_class, environment: environment }
     problem_errs = errs.to_a
 
     # associate and return all the problems

@@ -53,17 +53,6 @@ Rails/Validation:
     - 'app/models/problem.rb'
     - 'app/models/user.rb'
 
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.
-Style/AlignHash:
-  Exclude:
-    - 'app/models/app.rb'
-    - 'spec/controllers/apps_controller_spec.rb'
-    - 'spec/controllers/comments_controller_spec.rb'
-    - 'spec/controllers/problems_controller_spec.rb'
-    - 'spec/models/problem_spec.rb'
-
 # Offense count: 105
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
@@ -139,12 +128,6 @@ Style/FormatString:
 # Offense count: 27
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
-  Enabled: false
-
-# Offense count: 1168
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
-Style/HashSyntax:
   Enabled: false
 
 # Offense count: 6

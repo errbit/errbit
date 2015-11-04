@@ -53,18 +53,18 @@ module Hoptoad
 
     def self.for_errbit_api(notice)
       {
-        :error_class        => notice['error']['class'] || notice['error']['key'],
-        :message            => notice['error']['message'],
-        :backtrace          => notice['error']['backtrace']['line'],
+        error_class:        notice['error']['class'] || notice['error']['key'],
+        message:            notice['error']['message'],
+        backtrace:          notice['error']['backtrace']['line'],
 
-        :request            => notice['request'],
-        :server_environment => notice['server-environment'],
+        request:            notice['request'],
+        server_environment: notice['server-environment'],
 
-        :api_key            => notice['api-key'],
-        :notifier           => notice['notifier'],
+        api_key:            notice['api-key'],
+        notifier:           notice['notifier'],
         # 'current-user' from airbrake, 'user-attributes' from airbrake_user_attributes gem
-        :user_attributes    => notice['current-user'] || notice['user-attributes'] || {},
-        :framework          => notice['framework']
+        user_attributes:    notice['current-user'] || notice['user-attributes'] || {},
+        framework:          notice['framework']
       }
     end
   end

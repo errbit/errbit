@@ -11,14 +11,14 @@ module AirbrakeApi
 
       def report
         attributes = {
-          error_class: error['type'],
-          message: error['message'],
-          backtrace: backtrace,
-          request: request,
+          error_class:        error['type'],
+          message:            error['message'],
+          backtrace:          backtrace,
+          request:            request,
           server_environment: server_environment,
-          api_key: params['key'].present? ? params['key'] : params['project_id'],
-          notifier: params['notifier'],
-          user_attributes: user_attributes
+          api_key:            params['key'].present? ? params['key'] : params['project_id'],
+          notifier:           params['notifier'],
+          user_attributes:    user_attributes
         }
 
         ErrorReport.new(attributes)
@@ -35,7 +35,7 @@ module AirbrakeApi
         (error['backtrace'] || []).map do |backtrace_line|
           {
             method: backtrace_line['function'],
-            file: backtrace_line['file'],
+            file:   backtrace_line['file'],
             number: backtrace_line['line'],
             column: backtrace_line['column']
           }

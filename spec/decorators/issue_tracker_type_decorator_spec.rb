@@ -11,8 +11,8 @@ describe IssueTrackerDecorator do
 
       def self.fields
         {
-          :foo => { :label => 'foo' },
-          :bar => { :label => 'bar' }
+          foo: { label: 'foo' },
+          bar: { label: 'bar' }
         }
       end
 
@@ -45,7 +45,7 @@ describe IssueTrackerDecorator do
       decorator.fields do |itf|
         expect(itf).to be_a(IssueTrackerFieldDecorator)
         expect([:foo, :bar]).to be_include(itf.object)
-        expect([{ :label => 'foo' }, { :label => 'bar' }]).to be_include(itf.field_info)
+        expect([{ label: 'foo' }, { label: 'bar' }]).to be_include(itf.field_info)
       end
     end
   end

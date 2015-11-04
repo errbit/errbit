@@ -29,8 +29,8 @@ gem 'htmlentities'
 gem 'kaminari', '>= 0.14.1'
 gem 'mongoid', '5.0.0'
 gem 'mongoid_rails_migrations'
-gem 'rack-ssl', :require => 'rack/ssl' # force SSL
-gem 'rack-ssl-enforcer', :require => false
+gem 'rack-ssl', require: 'rack/ssl' # force SSL
+gem 'rack-ssl-enforcer', require: false
 gem 'rails_autolink'
 gem 'useragent'
 
@@ -44,7 +44,7 @@ gem 'campy'
 # Hipchat
 gem 'hipchat'
 # Google Talk
-gem 'xmpp4r', :require => ["xmpp4r", "xmpp4r/muc"]
+gem 'xmpp4r', require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
 gem 'hoi'
 # Pushover (iOS Push notifications)
@@ -64,7 +64,7 @@ gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
 
 group :development, :test do
-  gem 'airbrake', :require => false
+  gem 'airbrake', require: false
   gem 'pry-rails'
   gem 'pry-byebug', platforms: [:mri]
   gem 'quiet_assets'
@@ -103,7 +103,7 @@ group :heroku, :production do
   gem 'unicorn', require: false, platform: 'ruby'
 end
 
-gem 'therubyracer', :platform => :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 gem 'sass-rails'
 gem 'uglifier'
 # We can't upgrade because not compatible to jquery >= 1.9.

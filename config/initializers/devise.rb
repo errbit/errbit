@@ -237,12 +237,12 @@ Devise.setup do |config|
 
   if Errbit::Config.github_authentication || Rails.env.test?
     github_options = {
-      :scope => Errbit::Config.github_access_scope.join(','),
-      :skip_info => true,
-      :client_options => {
-        :site => Errbit::Config.github_api_url,
-        :authorize_url => "#{Errbit::Config.github_url}/login/oauth/authorize",
-        :token_url => "#{Errbit::Config.github_url}/login/oauth/access_token"
+      scope:          Errbit::Config.github_access_scope.join(','),
+      skip_info:      true,
+      client_options: {
+        site:          Errbit::Config.github_api_url,
+        authorize_url: "#{Errbit::Config.github_url}/login/oauth/authorize",
+        token_url:     "#{Errbit::Config.github_url}/login/oauth/access_token"
       }
     }
 

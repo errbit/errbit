@@ -1,6 +1,6 @@
 describe CommentsController, type: 'controller' do
   let(:app) { Fabricate(:app) }
-  let(:err) { Fabricate(:err, :problem => Fabricate(:problem, :app => app, :environment => "production")) }
+  let(:err) { Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production")) }
 
   describe "POST /apps/:app_id/errs/:id/comments/create" do
     render_views
@@ -14,8 +14,8 @@ describe CommentsController, type: 'controller' do
       let(:user) { Fabricate(:user) }
 
       before(:each) do
-        post :create, :app_id => problem.app.id, :problem_id => problem.id,
-             :comment => { :body => "One test comment", :user_id => user.id }
+        post :create, app_id: problem.app.id, problem_id: problem.id,
+             comment: { body: "One test comment", user_id: user.id }
         problem.reload
       end
 
@@ -41,7 +41,7 @@ describe CommentsController, type: 'controller' do
       let(:comment) { problem.reload.comments.first }
 
       before(:each) do
-        delete :destroy, :app_id => problem.app.id, :problem_id => problem.id, :id => comment.id.to_s
+        delete :destroy, app_id: problem.app.id, problem_id: problem.id, id: comment.id.to_s
         problem.reload
       end
 

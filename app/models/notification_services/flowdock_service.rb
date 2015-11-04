@@ -4,8 +4,8 @@ if defined? Flowdock
     FIELDS += [
       [
         :api_token, {
-          :label       => 'Flow API Token',
-          :placeholder => '123456789abcdef123456789abcdefgh'
+          label:       'Flow API Token',
+          placeholder: '123456789abcdef123456789abcdefgh'
         }
       ]
     ]
@@ -21,10 +21,10 @@ if defined? Flowdock
     end
 
     def create_notification(problem)
-      flow = Flowdock::Flow.new(:api_token => api_token, :source => "Errbit", :from => { :name => "Errbit", :address => ENV['ERRBIT_EMAIL_FROM'] || 'support@flowdock.com' })
+      flow = Flowdock::Flow.new(api_token: api_token, source: "Errbit", from: { name: "Errbit", address: ENV['ERRBIT_EMAIL_FROM'] || 'support@flowdock.com' })
       subject = "[#{problem.environment}] #{problem.message.to_s.truncate(100)}"
       url = app_problem_url problem.app, problem
-      flow.push_to_team_inbox(:subject => subject, :content => content(problem, url), :project => project_name(problem), :link => url)
+      flow.push_to_team_inbox(subject: subject, content: content(problem, url), project: project_name(problem), link: url)
     end
 
   private

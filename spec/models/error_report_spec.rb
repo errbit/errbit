@@ -26,7 +26,7 @@ describe ErrorReport do
   let!(:app) {
     Fabricate(
       :app,
-      :api_key => 'APIKEY'
+      api_key: 'APIKEY'
     )
   }
 
@@ -68,9 +68,9 @@ describe ErrorReport do
     context "with notice generate by Airbrake gem" do
       let(:xml) {
         Airbrake::Notice.new(
-          :exception => Exception.new,
-          :api_key => 'APIKEY',
-          :project_root => Rails.root
+          exception:    Exception.new,
+          api_key:      'APIKEY',
+          project_root: Rails.root
         ).to_xml
       }
       it 'save a notice' do
@@ -159,7 +159,7 @@ describe ErrorReport do
       problem = error_report.problem
       problem.update(
         resolved_at: Time.zone.now,
-        resolved: true
+        resolved:    true
       )
 
       error_report = ErrorReport.new(xml)
@@ -223,7 +223,7 @@ describe ErrorReport do
   context "with notification service configured" do
     before do
       app.notify_on_errs = true
-      app.watchers.build(:email => 'foo@example.com')
+      app.watchers.build(email: 'foo@example.com')
       app.save
     end
 
@@ -271,7 +271,7 @@ describe ErrorReport do
     end
     context "with not valid api_key" do
       before do
-        App.where(:api_key => app.api_key).delete_all
+        App.where(api_key: app.api_key).delete_all
       end
       it "return false" do
         expect(error_report.valid?).to be false
