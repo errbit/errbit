@@ -273,13 +273,10 @@ Style/SignalException:
     - 'lib/airbrake_api/v3/notice_parser.rb'
     - 'lib/hoptoad.rb'
 
-# Offense count: 4
+# Offense count: 1
 # Configuration parameters: Methods.
 Style/SingleLineBlockParams:
   Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/form_helper.rb'
-    - 'app/models/notice_fingerprinter.rb'
     - 'lib/hoptoad/v2.rb'
 
 # Offense count: 11

@@ -27,6 +27,6 @@ class NoticeFingerprinter
       material << backtrace.lines.slice(0, backtrace_lines)
     end
 
-    Digest::MD5.hexdigest(material.reduce('') { |c, m| c << m.to_s; c })
+    Digest::MD5.hexdigest(material.map(&:to_s).join)
   end
 end
