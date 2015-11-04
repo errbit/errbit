@@ -128,12 +128,12 @@ describe ErrorReport do
         #   <var key="id"/>
         # </var>
         expected = {
-          'secure'        => 'false',
-          'httponly'      => 'true',
-          'path'          => '/',
-          'expire_after'  => nil,
-          'domain'        => nil,
-          'id'            => nil
+          'secure'       => 'false',
+          'httponly'     => 'true',
+          'path'         => '/',
+          'expire_after' => nil,
+          'domain'       => nil,
+          'id'           => nil
         }
         expect(subject.env_vars).to have_key('rack_session_options')
         expect(subject.env_vars['rack_session_options']).to eql(expected)

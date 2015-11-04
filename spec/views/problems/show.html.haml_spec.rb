@@ -33,7 +33,7 @@ describe "problems/show.html.haml", type: 'view' do
   }
   let(:trackers) {
     {
-      'github' => github_tracker,
+      'github'  => github_tracker,
       'pivotal' => pivotal_tracker
     }
   }

@@ -34,9 +34,9 @@ namespace :errbit do
       backtrace = []
       99.times {|t|
         backtrace << {
-          'number'  => t.hash % 1000,
-          'file'    => "/path/to/file.rb",
-          'method'  => RANDOM_METHODS.sample.to_s
+          'number' => t.hash % 1000,
+          'file'   => "/path/to/file.rb",
+          'method' => RANDOM_METHODS.sample.to_s
         }}
       backtrace
     end
@@ -51,8 +51,8 @@ namespace :errbit do
             backtrace:          random_backtrace,
             request:            {
               'component' => 'main',
-              'action' => 'error',
-              'url' => "http://example.com/post/#{[111, 222, 333].sample}"
+              'action'    => 'error',
+              'url'       => "http://example.com/post/#{[111, 222, 333].sample}"
             },
             server_environment: { 'environment-name' => Rails.env.to_s },
             notifier:           { name: "seeds.rb" },

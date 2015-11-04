@@ -45,9 +45,9 @@ module AirbrakeApi
       def server_environment
         {
           'environment-name' => context['environment'],
-          'hostname' => hostname,
-          'project-root' => context['rootDirectory'],
-          'app-version' => context['version']
+          'hostname'         => hostname,
+          'project-root'     => context['rootDirectory'],
+          'app-version'      => context['version']
         }
       end
 
@@ -57,12 +57,12 @@ module AirbrakeApi
         )
 
         {
-          'cgi-data' => environment,
-          'session' => params['session'],
-          'params' => params['params'],
-          'url' => url,
+          'cgi-data'  => environment,
+          'session'   => params['session'],
+          'params'    => params['params'],
+          'url'       => url,
           'component' => context['component'],
-          'action' => context['action']
+          'action'    => context['action']
         }
       end
 
