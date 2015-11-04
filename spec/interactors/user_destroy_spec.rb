@@ -17,7 +17,7 @@ describe UserDestroy do
     it 'should delete watcher' do
       expect {
         UserDestroy.new(user).destroy
-      }.to change{
+      }.to change {
         app.reload.watchers.where(:user_id => user.id).count
       }.from(1).to(0)
     end

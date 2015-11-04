@@ -16,7 +16,7 @@ class NotificationServices::HoiioService < NotificationService
   ]
 
   def check_params
-    if FIELDS.detect {|f| self[f[0]].blank? }
+    if FIELDS.detect { |f| self[f[0]].blank? }
       errors.add :base, 'You must specify your App ID, Access Token and Recipient\'s phone numbers'
     end
   end

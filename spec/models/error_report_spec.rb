@@ -17,7 +17,7 @@ module Airbrake
 end
 
 describe ErrorReport do
-  let(:xml){
+  let(:xml) {
     Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read
   }
 
@@ -52,7 +52,7 @@ describe ErrorReport do
     end
 
     context "with a minimal notice" do
-      let(:xml){
+      let(:xml) {
         Rails.root.join('spec', 'fixtures', 'minimal_test_notice.xml').read
       }
 
@@ -237,7 +237,7 @@ describe ErrorReport do
     end
 
     context "with xml without request section" do
-      let(:xml){
+      let(:xml) {
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_without_request_section.xml').read
       }
       it "save a notice" do
@@ -250,7 +250,7 @@ describe ErrorReport do
     end
 
     context "with xml with only a single line of backtrace" do
-      let(:xml){
+      let(:xml) {
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_one_line_of_backtrace.xml').read
       }
       it "save a notice" do

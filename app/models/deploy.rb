@@ -19,7 +19,7 @@ class Deploy
   validates_presence_of :username, :environment
 
   def resolve_app_errs
-    app.problems.unresolved.in_env(environment).each {|problem| problem.resolve!}
+    app.problems.unresolved.in_env(environment).each { |problem| problem.resolve! }
   end
 
   def short_revision

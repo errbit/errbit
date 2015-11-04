@@ -13,7 +13,7 @@ module ProblemsSearcher
       end
     }
 
-    expose(:params_order){
+    expose(:params_order) {
       unless %w{asc desc}.member?(params[:order])
         'desc'
       else

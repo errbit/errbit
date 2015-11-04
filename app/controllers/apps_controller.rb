@@ -39,7 +39,7 @@ class AppsController < ApplicationController
   }
 
   expose(:users) {
-    User.all.sort_by {|u| u.name.downcase }
+    User.all.sort_by { |u| u.name.downcase }
   }
 
   def index; end
@@ -96,7 +96,7 @@ protected
     # set the app's notification service
     if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
       available_notification_classes = [NotificationService] + NotificationService.subclasses
-      notification_class = available_notification_classes.detect{|c| c.name == notification_type}
+      notification_class = available_notification_classes.detect { |c| c.name == notification_type }
       if notification_class.present?
         app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
       end
@@ -116,7 +116,7 @@ protected
       # Sanitize negative values, split on comma,
       # strip, parse as integer, remove all '0's.
       # If empty, set as default and show an error message.
-      email_at_notices = val.gsub(/-\d+/, "").split(",").map{|v| v.strip.to_i }.reject{|v| v == 0}
+      email_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }.reject { |v| v == 0 }
       if email_at_notices.any?
         params[:app][:email_at_notices] = email_at_notices
       else
@@ -131,7 +131,7 @@ protected
       # Sanitize negative values, split on comma,
       # strip, parse as integer, remove all '0's.
       # If empty, set as default and show an error message.
-      notify_at_notices = val.gsub(/-\d+/, "").split(",").map{|v| v.strip.to_i }
+      notify_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }
       if notify_at_notices.any?
         params[:app][:notification_service_attributes][:notify_at_notices] = notify_at_notices
       else

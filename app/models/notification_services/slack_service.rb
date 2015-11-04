@@ -8,7 +8,7 @@ class NotificationServices::SlackService < NotificationService
   ]
 
   def check_params
-    if FIELDS.detect {|f| self[f[0]].blank? }
+    if FIELDS.detect { |f| self[f[0]].blank? }
       errors.add :base, "You must specify your Slack Hook url."
     end
   end

@@ -113,7 +113,7 @@ describe "problems/show.html.haml", type: 'view' do
       end
 
       context "without issue tracker associate on app" do
-        let(:problem){ Problem.new(:new_record => false, :app => app) }
+        let(:problem) { Problem.new(:new_record => false, :app => app) }
         let(:app) { App.new(:new_record => false) }
 
         it 'not see link to create issue' do
@@ -129,7 +129,7 @@ describe "problems/show.html.haml", type: 'view' do
 
         context "with app having github_repo" do
           let(:app) { App.new(:new_record => false, :github_repo => 'foo/bar') }
-          let(:problem){ Problem.new(:new_record => false, :app => app) }
+          let(:problem) { Problem.new(:new_record => false, :app => app) }
 
           before do
             problem.issue_link = nil

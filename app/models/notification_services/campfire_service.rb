@@ -17,7 +17,7 @@ if defined? Campy
     ]
 
     def check_params
-      if FIELDS.detect {|f| self[f[0]].blank? }
+      if FIELDS.detect { |f| self[f[0]].blank? }
         errors.add :base, 'You must specify your Campfire Subdomain, API token and Room ID'
       end
     end

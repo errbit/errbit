@@ -3,7 +3,7 @@ Fabricator :notification_service do
   room_id { sequence :word }
   api_token { sequence :word }
   subdomain { sequence :word }
-  notify_at_notices { sequence { |_a| [0]} }
+  notify_at_notices { sequence { |_a| [0] } }
 end
 
 Fabricator :gtalk_notification_service, :from => :notification_service, :class_name => "NotificationServices::GtalkService" do

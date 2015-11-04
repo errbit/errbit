@@ -19,7 +19,7 @@ module NavigationHelper
                   matches
                 when Array
                   s = {}
-                  matches.each {|c| s[c] = :all}
+                  matches.each { |c| s[c] = :all }
                   s
                 else
                   { matches => :all }

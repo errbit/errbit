@@ -46,7 +46,7 @@ describe CommentsController, type: 'controller' do
       end
 
       it "should delete the comment" do
-        expect(problem.comments.detect{|c| c.id.to_s == comment.id }).to be nil
+        expect(problem.comments.detect { |c| c.id.to_s == comment.id }).to be nil
       end
 
       it "should redirect to problem page" do

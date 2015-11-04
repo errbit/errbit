@@ -26,8 +26,8 @@ class Notice
 
   validates_presence_of :backtrace_id, :server_environment, :notifier
 
-  scope :ordered, ->{ order_by(:created_at.asc) }
-  scope :reverse_ordered, ->{ order_by(:created_at.desc) }
+  scope :ordered, -> { order_by(:created_at.asc) }
+  scope :reverse_ordered, -> { order_by(:created_at.desc) }
   scope :for_errs, Proc.new { |errs|
     where(:err_id.in => errs.all.map(&:id))
   }

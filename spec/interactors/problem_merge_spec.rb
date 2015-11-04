@@ -57,7 +57,7 @@ describe ProblemMerge do
       it 'merge comment' do
         expect {
           problem_merge.merge
-        }.to change{
+        }.to change {
           problem.comments.size
         }.from(1).to(2)
         expect(comment_2.reload.err).to eq problem

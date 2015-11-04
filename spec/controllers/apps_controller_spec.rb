@@ -61,7 +61,7 @@ describe AppsController, type: 'controller' do
 
       it "should not raise errors for app with err without notices" do
         err
-        expect{ get :show, :id => app.id }.to_not raise_error
+        expect { get :show, :id => app.id }.to_not raise_error
       end
 
       it "should list atom feed successfully" do
