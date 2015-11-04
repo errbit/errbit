@@ -284,8 +284,3 @@ Style/SymbolProc:
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
     - 'app/models/deploy.rb'
     - 'spec/models/deploy_spec.rb'
-
-# Offense count: 2
-Style/UnlessElse:
-  Exclude:
-    - 'app/controllers/problems_searcher.rb'
