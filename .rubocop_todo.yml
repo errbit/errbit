@@ -242,17 +242,6 @@ Style/Semicolon:
     - 'app/decorators/issue_tracker_type_decorator.rb'
     - 'app/models/notice_fingerprinter.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SignalException:
-  Exclude:
-    - 'app/controllers/notices_controller.rb'
-    - 'app/interactors/problem_merge.rb'
-    - 'app/models/problem.rb'
-    - 'lib/airbrake_api/v3/notice_parser.rb'
-    - 'lib/hoptoad.rb'
-
 # Offense count: 1
 # Configuration parameters: Methods.
 Style/SingleLineBlockParams:

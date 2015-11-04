@@ -219,7 +219,7 @@ class Problem
     when "last_notice_at" then order_by(["last_notice_at", order])
     when "last_deploy_at" then order_by(["last_deploy_at", order])
     when "count"          then order_by(["notices_count", order])
-    else raise("\"#{sort}\" is not a recognized sort")
+    else fail("\"#{sort}\" is not a recognized sort")
     end
   end
 
