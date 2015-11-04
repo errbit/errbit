@@ -96,20 +96,6 @@ Style/ClassAndModuleChildren:
     - 'app/models/notification_services/webhook_service.rb'
     - 'config/initializers/overrides.rb'
 
-# Offense count: 23
-Style/ConstantName:
-  Exclude:
-    - 'app/models/notification_service.rb'
-    - 'app/models/notification_services/campfire_service.rb'
-    - 'app/models/notification_services/flowdock_service.rb'
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'app/models/notification_services/hipchat_service.rb'
-    - 'app/models/notification_services/hoiio_service.rb'
-    - 'app/models/notification_services/hubot_service.rb'
-    - 'app/models/notification_services/pushover_service.rb'
-    - 'app/models/notification_services/slack_service.rb'
-    - 'app/models/notification_services/webhook_service.rb'
-
 # Offense count: 70
 # Configuration parameters: Exclude.
 Style/Documentation:

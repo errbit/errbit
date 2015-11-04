@@ -1,6 +1,6 @@
 class NotificationServices::SlackService < NotificationService
-  Label = "slack"
-  Fields += [
+  LABEL = "slack"
+  FIELDS += [
     [:service_url, {
       :placeholder => 'Slack Hook URL (https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX)',
       :label => 'Hook URL'
@@ -8,7 +8,7 @@ class NotificationServices::SlackService < NotificationService
   ]
 
   def check_params
-    if Fields.detect {|f| self[f[0]].blank? }
+    if FIELDS.detect {|f| self[f[0]].blank? }
       errors.add :base, "You must specify your Slack Hook url."
     end
   end

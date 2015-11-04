@@ -1,7 +1,7 @@
 if defined? Campy
   class NotificationServices::CampfireService < NotificationService
-    Label = "campfire"
-    Fields += [
+    LABEL = "campfire"
+    FIELDS += [
       [:subdomain, {
         :label       => "Subdomain",
         :placeholder => "subdomain from http://{{subdomain}}.campfirenow.com"
@@ -17,7 +17,7 @@ if defined? Campy
     ]
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank? }
+      if FIELDS.detect {|f| self[f[0]].blank? }
         errors.add :base, 'You must specify your Campfire Subdomain, API token and Room ID'
       end
     end

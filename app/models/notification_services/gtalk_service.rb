@@ -1,6 +1,6 @@
 class NotificationServices::GtalkService < NotificationService
-  Label = "gtalk"
-  Fields += [
+  LABEL = "gtalk"
+  FIELDS += [
     [:subdomain, {
       :placeholder => "username@example.com",
       :label       => "Username"
@@ -28,7 +28,7 @@ class NotificationServices::GtalkService < NotificationService
   ]
 
   def check_params
-    if Fields.detect { |f| self[f[0]].blank? && self[f[2]].blank? }
+    if FIELDS.detect { |f| self[f[0]].blank? && self[f[2]].blank? }
       errors.add :base,
         """You must specify your Username, Password, service, service_url
            and either rooms or users to send to or both"""

@@ -41,7 +41,7 @@ describe IssueTrackerDecorator do
   end
 
   describe "#fields" do
-    it 'return all Fields define decorate' do
+    it 'return all FIELDS define decorate' do
       decorator.fields do |itf|
         expect(itf).to be_a(IssueTrackerFieldDecorator)
         expect([:foo, :bar]).to be_include(itf.object)

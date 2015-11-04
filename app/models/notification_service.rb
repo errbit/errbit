@@ -18,13 +18,13 @@ class NotificationService
   validate :check_params
 
   if Errbit::Config.per_app_notify_at_notices
-    Fields = [[:notify_at_notices,
+    FIELDS = [[:notify_at_notices,
                { :placeholder => 'comma separated numbers or simply 0 for every notice',
                  :label => 'notify on errors (0 for all errors)'
                }
               ]]
   else
-    Fields = []
+    FIELDS = []
   end
 
   def notify_at_notices
@@ -54,9 +54,9 @@ class NotificationService
   end
 
   # Retrieve tracker label from either class or instance.
-  Label = ''
+  LABEL = ''
   def self.label
-    self::Label
+    self::LABEL
   end
 
   def label

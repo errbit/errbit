@@ -1,6 +1,6 @@
 class NotificationServices::HoiioService < NotificationService
-  Label = "hoiio"
-  Fields += [
+  LABEL = "hoiio"
+  FIELDS += [
     [:api_token, {
       :placeholder => "App ID",
       :label => "App ID"
@@ -16,7 +16,7 @@ class NotificationServices::HoiioService < NotificationService
   ]
 
   def check_params
-    if Fields.detect {|f| self[f[0]].blank? }
+    if FIELDS.detect {|f| self[f[0]].blank? }
       errors.add :base, 'You must specify your App ID, Access Token and Recipient\'s phone numbers'
     end
   end

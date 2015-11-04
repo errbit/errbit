@@ -1,7 +1,7 @@
 if defined? Flowdock
   class NotificationServices::FlowdockService < NotificationService
-    Label = 'flowdock'
-    Fields += [
+    LABEL = 'flowdock'
+    FIELDS += [
       [
         :api_token, {
           :label       => 'Flow API Token',
@@ -11,7 +11,7 @@ if defined? Flowdock
     ]
 
     def check_params
-      if Fields.any? { |f, _| self[f].blank? }
+      if FIELDS.any? { |f, _| self[f].blank? }
         errors.add :base, 'You must specify your Flowdock(Flow) API token'
       end
     end
