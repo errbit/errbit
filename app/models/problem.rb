@@ -94,13 +94,13 @@ class Problem
         'where' => notice.where,
         "messages.#{message_digest}.value" => notice.message,
         "hosts.#{host_digest}.value" => notice.host,
-        "user_agents.#{user_agent_digest}.value" => notice.user_agent_string,
+        "user_agents.#{user_agent_digest}.value" => notice.user_agent_string
       },
       '$inc' => {
         'notices_count' => 1,
         "messages.#{message_digest}.count" => 1,
         "hosts.#{host_digest}.count" => 1,
-        "user_agents.#{user_agent_digest}.count" => 1,
+        "user_agents.#{user_agent_digest}.count" => 1
       }
     }, return_document: :after)
   end

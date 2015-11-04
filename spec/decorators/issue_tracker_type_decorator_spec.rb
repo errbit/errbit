@@ -14,7 +14,7 @@ describe IssueTrackerDecorator do
       def self.icons
         {
           one: ['text/plain', 'all your base are belong to us'],
-          two: ['application/xml', '<root></root>'],
+          two: ['application/xml', '<root></root>']
         }
       end
     end

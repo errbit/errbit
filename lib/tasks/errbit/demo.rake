@@ -50,7 +50,7 @@ namespace :errbit do
           :request => {
             'component' => 'main',
             'action' => 'error',
-            'url' => "http://example.com/post/#{[111, 222, 333].sample}",
+            'url' => "http://example.com/post/#{[111, 222, 333].sample}"
           },
           :server_environment => {'environment-name' => Rails.env.to_s},
           :notifier => {:name => "seeds.rb"},

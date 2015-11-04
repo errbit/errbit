@@ -17,7 +17,7 @@ describe 'initializers/devise' do
       expect(options[:client_options]).to eq({
         site: 'https://api.github.com',
         authorize_url: 'https://github.com/login/oauth/authorize',
-        token_url: 'https://github.com/login/oauth/access_token',
+        token_url: 'https://github.com/login/oauth/access_token'
       })
     end
 
@@ -31,7 +31,7 @@ describe 'initializers/devise' do
       expect(options[:client_options]).to eq({
         site: 'https://github.example.com/api/v3',
         authorize_url: 'https://github.example.com/login/oauth/authorize',
-        token_url: 'https://github.example.com/login/oauth/access_token',
+        token_url: 'https://github.example.com/login/oauth/access_token'
       })
     end
   end

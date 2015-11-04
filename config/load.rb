@@ -59,5 +59,5 @@ Errbit::Config = Configurator.run({
   sendmail_location:         ['SENDMAIL_LOCATION'],
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
-  devise_modules:            ['DEVISE_MODULES'],
+  devise_modules:            ['DEVISE_MODULES']
 })

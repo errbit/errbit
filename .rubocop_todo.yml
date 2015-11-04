@@ -362,23 +362,6 @@ Style/SymbolProc:
     - 'app/models/deploy.rb'
     - 'spec/models/deploy_spec.rb'
 
-# Offense count: 13
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline, SupportedStyles.
-Style/TrailingComma:
-  Exclude:
-    - 'app/controllers/deploys_controller.rb'
-    - 'app/helpers/problems_helper.rb'
-    - 'app/models/notification_services/hipchat_service.rb'
-    - 'app/models/problem.rb'
-    - 'config/deploy.example.rb'
-    - 'config/initializers/action_mailer.rb'
-    - 'config/load.rb'
-    - 'lib/tasks/errbit/demo.rake'
-    - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
-    - 'spec/initializers/action_mailer_spec.rb'
-    - 'spec/initializers/devise_spec.rb'
-
 # Offense count: 2
 Style/UnlessElse:
   Exclude:

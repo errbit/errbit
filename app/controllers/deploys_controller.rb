@@ -36,7 +36,7 @@ private
       :username     => params[:user],
       :environment  => params[:rack_env].try(:downcase) || params[:app],
       :repository   => "git@heroku.com:#{params[:app]}.git",
-      :revision     => params[:head],
+      :revision     => params[:head]
     }
   end
 end

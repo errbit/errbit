@@ -17,7 +17,7 @@ if defined? HipChat
       [:room_id, {
         :placeholder => "Room name",
         :label       => "Room name"
-      }],
+      }]
     ]
     Mandatory_fields = [:service, :api_token, :room_id]
     API_versions = %w(v1 v2)

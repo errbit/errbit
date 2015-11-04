@@ -20,7 +20,7 @@ module ProblemsHelper
     return nil unless email.present?
 
     default_options = {
-      :d => Errbit::Config.gravatar_default,
+      :d => Errbit::Config.gravatar_default
     }
     options.reverse_merge! default_options
     params = options.extract!(:s, :d).delete_if { |_k, v| v.blank? }

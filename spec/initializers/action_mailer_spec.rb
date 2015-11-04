@@ -40,7 +40,7 @@ describe 'initializers/action_mailer' do
         authentication: :login,
         user_name: 'my-username',
         password: 'my-password',
-        domain: 'someotherdomain.com',
+        domain: 'someotherdomain.com'
       })
     end
   end

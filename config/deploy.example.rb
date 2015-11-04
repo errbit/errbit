@@ -46,7 +46,7 @@ namespace :errbit do
 
       {
         'config/newrelic.example.yml' => 'config/newrelic.yml',
-        'config/unicorn.default.rb' => 'config/unicorn.rb',
+        'config/unicorn.default.rb' => 'config/unicorn.rb'
       }.each do |src, target|
         unless test("[ -f #{shared_path}/#{target} ]")
           upload! src, "#{shared_path}/#{target}"
