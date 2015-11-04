@@ -62,7 +62,13 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def create_notification(problem)
-    HTTParty.post(service_url, body: post_payload(problem), headers: { 'Content-Type' => 'application/json' })
+    HTTParty.post(
+      service_url,
+      body:    post_payload(problem),
+      headers: {
+        'Content-Type' => 'application/json'
+      }
+    )
   end
 
   def configured?
