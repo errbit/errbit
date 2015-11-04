@@ -78,7 +78,7 @@ module ApplicationHelper
 private
 
   def total_from_tallies(tallies)
-    tallies.values.inject(0) {|sum, n| sum + n}
+    tallies.values.sum
   end
 
   def head_size
