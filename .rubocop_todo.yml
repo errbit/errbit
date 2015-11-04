@@ -304,12 +304,6 @@ Style/SingleSpaceBeforeFirstArg:
     - 'spec/fabricators/notice_fabricator.rb'
     - 'spec/fabricators/user_fabricator.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
 # Offense count: 27
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
