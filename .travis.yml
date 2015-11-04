@@ -17,7 +17,7 @@ before_script:
   - bundle exec rake errbit:bootstrap
 script:
   - bundle exec rspec
-  - bundle exec rubocop --lint
+  - bundle exec rubocop
 matrix:
   allow_failures:
     - rvm: rbx-2
