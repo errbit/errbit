@@ -37,3 +37,4 @@ Style/SpaceAroundOperators:
     - '='
     - '=>'
     - '||='
+    - 'then'
