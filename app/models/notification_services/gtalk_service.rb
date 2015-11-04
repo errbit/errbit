@@ -17,11 +17,11 @@ class NotificationServices::GtalkService < NotificationService
       :placeholder => "toroom@conference.example.com",
       :label       =>  "Send To Room (one only)"
     }, :user_id],
-    [ :service, {
+    [:service, {
       :placeholder => "talk.google.com",
       :label => "Jabber Service"
     }],
-    [ :service_url, {
+    [:service_url, {
       :placeholder => "http://www.google.com/talk/",
       :label => "Link To Jabber Service"
     }]

@@ -282,19 +282,6 @@ Style/SpaceBeforeBlockBraces:
 Style/SpaceInsideBlockBraces:
   Enabled: false
 
-# Offense count: 26
-# Cop supports --auto-correct.
-Style/SpaceInsideBrackets:
-  Exclude:
-    - 'app/helpers/apps_helper.rb'
-    - 'app/models/issue.rb'
-    - 'app/models/notice_fingerprinter.rb'
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'config/initializers/devise.rb'
-    - 'lib/tasks/errbit/database.rake'
-    - 'spec/lib/configurator_spec.rb'
-    - 'spec/models/issue_spec.rb'
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

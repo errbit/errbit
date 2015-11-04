@@ -17,7 +17,7 @@ namespace :errbit do
   end
 
   desc "Remove notices in batch"
-  task :notices_delete, [ :problem_id ] => [ :environment ] do
+  task :notices_delete, [:problem_id] => [:environment] do
     BATCH_SIZE = 1000
     if args[:problem_id]
       item_count = Problem.find(args[:problem_id]).notices.count

@@ -22,15 +22,15 @@ describe Configurator do
 
   it 'overrides existing variables' do
     result = Configurator.run({
-      one: ['VARONE', ->(_values) { 'oveRIIIDE' } ]
+      one: ['VARONE', ->(_values) { 'oveRIIIDE' }]
     })
     expect(result.one).to eq('oveRIIIDE')
   end
 
   it 'overrides can refer to other values' do
     result = Configurator.run({
-      one: ['VARONE', ->(values) { values[:one] } ],
-      three: ['VARTHREE' ]
+      one: ['VARONE', ->(values) { values[:one] }],
+      three: ['VARTHREE']
     })
     expect(result.one).to eq('zoom')
   end
