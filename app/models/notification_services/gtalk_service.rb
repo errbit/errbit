@@ -28,9 +28,9 @@ class NotificationServices::GtalkService < NotificationService
   ]
 
   def check_params
-    if Fields.detect { |f| self[f[0]].blank? && self[f[2]].blank? } 
-      errors.add :base, 
-        """You must specify your Username, Password, service, service_url 
+    if Fields.detect { |f| self[f[0]].blank? && self[f[2]].blank? }
+      errors.add :base,
+        """You must specify your Username, Password, service, service_url
            and either rooms or users to send to or both"""
     end
   end
@@ -58,7 +58,7 @@ class NotificationServices::GtalkService < NotificationService
   end
 
 private
- 
+
   def send_to_users(client, message)
     user_id.tr(' ', ",").tr(';', ",").split(",").map(&:strip).reject(&:empty?).each do |user|
       client.send(Jabber::Message.new(user, message))
@@ -66,9 +66,9 @@ private
   end
 
   def send_to_muc(client, message)
-    #TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment 
+    #TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment
     muc = Jabber::MUC::SimpleMUCClient.new(client)
-    muc.join(room_id + "/errbit") 
+    muc.join(room_id + "/errbit")
     muc.send(Jabber::Message.new(room_id, message))
   end
 end

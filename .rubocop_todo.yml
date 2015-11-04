@@ -379,14 +379,6 @@ Style/TrailingComma:
     - 'spec/initializers/action_mailer_spec.rb'
     - 'spec/initializers/devise_spec.rb'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'app/models/notification_service.rb'
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'config/initializers/cve-2013-0156.rb'
-
 # Offense count: 2
 Style/UnlessElse:
   Exclude:
