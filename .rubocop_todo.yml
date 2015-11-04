@@ -316,12 +316,6 @@ Style/SpaceAroundEqualsInParameterDefault:
 Style/SpaceBeforeBlockBraces:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/SpaceBeforeComment:
-  Exclude:
-    - 'spec/controllers/api/v1/problems_controller_spec.rb'
-
 # Offense count: 75
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
