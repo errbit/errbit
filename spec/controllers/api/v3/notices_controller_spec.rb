@@ -22,8 +22,8 @@ describe Api::V3::NoticesController, type: :controller do
   end
 
   it 'responds with 400 when request attributes are not valid' do
-    allow_any_instance_of(AirbrakeApi::V3::NoticeParser)
-      .to receive(:report).and_raise(AirbrakeApi::ParamsError)
+    allow_any_instance_of(AirbrakeApi::V3::NoticeParser).
+      to receive(:report).and_raise(AirbrakeApi::ParamsError)
     post :create, project_id: 'ID'
     expect(response.status).to eq(400)
     expect(response.body).to eq('Invalid request')

@@ -29,6 +29,10 @@ Style/AccessModifierIndentation:
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
+Style/DotPosition:
+  # Support code copy/paste into console
+  EnforcedStyle: trailing
+
 Style/IndentHash:
   EnforcedStyle: consistent
 

@@ -32,11 +32,11 @@ class ProblemsController < ApplicationController
   }
 
   expose(:problems) {
-    pro = Problem
-      .for_apps(app_scope)
-      .in_env(params_environement)
-      .all_else_unresolved(all_errs)
-      .ordered_by(params_sort, params_order)
+    pro = Problem.
+      for_apps(app_scope).
+      in_env(params_environement).
+      all_else_unresolved(all_errs).
+      ordered_by(params_sort, params_order)
 
     if request.format == :html
       pro.page(params[:page]).per(current_user.per_page)
@@ -48,8 +48,8 @@ class ProblemsController < ApplicationController
   def index; end
 
   def show
-    @notices = problem.object.notices.reverse_ordered
-      .page(params[:notice]).per(1)
+    @notices = problem.object.notices.reverse_ordered.
+      page(params[:notice]).per(1)
     @notice  = NoticeDecorator.new @notices.first
     @comment = Comment.new
   end
