@@ -39,7 +39,7 @@ private
     return @notice_params if @notice_params
     @notice_params = params[:data] || request.raw_post
     if @notice_params.blank?
-      fail ParamsError.new('Need a data params in GET or raw post data')
+      fail ParamsError, 'Need a data params in GET or raw post data'
     end
     @notice_params
   end

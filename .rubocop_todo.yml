@@ -220,11 +220,6 @@ Style/Proc:
     - 'app/models/notice.rb'
     - 'app/models/problem.rb'
 
-# Offense count: 2
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/RaiseArgs:
-  Enabled: false
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
