@@ -1,6 +1,6 @@
 describe "Callback on Notice", type: 'model' do
   let(:notice_attrs_for) do
-    ->(api_key) do
+    lambda do |api_key|
       {
         error_class: "HoptoadTestingException",
         message: "some message",

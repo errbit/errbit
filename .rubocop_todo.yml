@@ -158,15 +158,6 @@ Style/IfUnlessModifier:
     - 'app/models/notice.rb'
     - 'app/models/user.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/Lambda:
-  Exclude:
-    - 'app/models/app.rb'
-    - 'app/models/problem.rb'
-    - 'config/load.rb'
-    - 'spec/models/notice_observer_spec.rb'
-
 # Offense count: 17
 # Cop supports --auto-correct.
 Style/LeadingCommentSpace:
