@@ -53,9 +53,9 @@ class App
     reject_if:     proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
   accepts_nested_attributes_for :notice_fingerprinter
 
-  scope :watched_by, ->(user) do
+  scope :watched_by, lambda { |user|
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
-  end
+  }
 
   def watched_by?(user)
     watchers.pluck("user_id").include? user.id
