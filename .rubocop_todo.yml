@@ -207,12 +207,6 @@ Style/PercentLiteralDelimiters:
     - 'app/controllers/problems_searcher.rb'
     - 'spec/models/notice_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/PerlBackrefs:
-  Exclude:
-    - 'spec/acceptance/reset_password_token.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 Style/Proc:
