@@ -282,17 +282,6 @@ Style/SingleLineBlockParams:
     - 'app/models/notice_fingerprinter.rb'
     - 'lib/hoptoad/v2.rb'
 
-# Offense count: 19
-# Cop supports --auto-correct.
-# Configuration parameters: AllowIfMethodIsEmpty.
-Style/SingleLineMethods:
-  Exclude:
-    - 'app/models/notification_service.rb'
-    - 'spec/decorators/issue_tracker_decorator_spec.rb'
-    - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
-    - 'spec/errbit_plugin/mock_issue_tracker.rb'
-    - 'spec/views/problems/show.html.haml_spec.rb'
-
 # Offense count: 11
 # Cop supports --auto-correct.
 Style/SingleSpaceBeforeFirstArg:

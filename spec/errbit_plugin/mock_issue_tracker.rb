@@ -38,8 +38,12 @@ module ErrbitPlugin
       "http://example.com/mock-errbit"
     end
 
-    def url; ''; end
+    def url
+      ''
+    end
 
-    def comments_allowed?; false; end
+    def comments_allowed?
+      false
+    end
   end
 end

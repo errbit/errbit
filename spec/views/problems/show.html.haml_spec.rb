@@ -3,16 +3,32 @@ describe "problems/show.html.haml", type: 'view' do
   let(:comment) { Fabricate(:comment) }
   let(:pivotal_tracker) {
     Class.new(ErrbitPlugin::MockIssueTracker) do
-      def self.label; 'pivotal'; end
-      def self.icons; {}; end
-      def configured?; true; end
+      def self.label
+        'pivotal'
+      end
+
+      def self.icons
+        {}
+      end
+
+      def configured?
+        true
+      end
     end
   }
   let(:github_tracker) {
     Class.new(ErrbitPlugin::MockIssueTracker) do
-      def self.label; 'github'; end
-      def self.icons; {}; end
-      def configured?; true; end
+      def self.label
+        'github'
+      end
+
+      def self.icons
+        {}
+      end
+
+      def configured?
+        true
+      end
     end
   }
   let(:trackers) {

@@ -32,22 +32,36 @@ class NotificationService
   end
 
   # Subclasses are responsible for overwriting this method.
-  def check_params; true; end
+  def check_params
+    true
+  end
 
   def notification_description(problem)
     "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
   end
 
   # Allows us to set the issue tracker class from a single form.
-  def type; _type; end
-  def type=(t); self._type = t; end
+  def type
+    _type
+  end
 
-  def url; nil; end
+  def type=(t)
+    self._type = t
+  end
+
+  def url
+    nil
+  end
 
   # Retrieve tracker label from either class or instance.
   Label = ''
-  def self.label; self::Label; end
-  def label; self.class.label; end
+  def self.label
+    self::Label
+  end
+
+  def label
+    self.class.label
+  end
 
   def configured?
     api_token.present?
