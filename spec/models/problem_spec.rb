@@ -273,7 +273,7 @@ describe Problem, type: 'model' do
       expect {
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :messages).from({ Digest::MD5.hexdigest('ERR 1') => { 'value' => 'ERR 1', 'count' => 1 } }).to({})
+      }.to change(@problem, :messages).from(Digest::MD5.hexdigest('ERR 1') => { 'value' => 'ERR 1', 'count' => 1 }).to({})
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
@@ -300,7 +300,7 @@ describe Problem, type: 'model' do
       expect {
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :hosts).from({ Digest::MD5.hexdigest('example.com') => { 'value' => 'example.com', 'count' => 1 } }).to({})
+      }.to change(@problem, :hosts).from(Digest::MD5.hexdigest('example.com') => { 'value' => 'example.com', 'count' => 1 }).to({})
     end
   end
 
@@ -316,13 +316,23 @@ describe Problem, type: 'model' do
     end
 
     it "removing a notice removes string from #user_agents" do
-      Fabricate(:notice, err: @err, request: { 'cgi-data' => { 'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16' } })
+      Fabricate(
+        :notice,
+        err:     @err,
+        request: {
+          'cgi-data' => {
+            'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
+          }
+        }
+      )
       expect {
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :user_agents).from({
-        Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => { 'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1 }
-      }).to({})
+      }.to change(@problem, :user_agents).
+        from(
+          Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {
+            'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1 }
+        ).to({})
     end
   end
 
@@ -437,21 +447,21 @@ describe Problem, type: 'model' do
       end
 
       it 'update stats messages' do
-        expect(problem.messages).to eq({
+        expect(problem.messages).to eq(
           Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 1 }
-        })
+        )
       end
 
       it 'update stats hosts' do
-        expect(problem.hosts).to eq({
+        expect(problem.hosts).to eq(
           Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 1 }
-        })
+        )
       end
 
       it 'update stats user_agents' do
-        expect(problem.user_agents).to eq({
+        expect(problem.user_agents).to eq(
           Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 1 }
-        })
+        )
       end
     end
 
@@ -477,21 +487,15 @@ describe Problem, type: 'model' do
       end
 
       it 'update stats messages' do
-        expect(problem.messages).to eq({
-          Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 3 }
-        })
+        expect(problem.messages).to eq(Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 3 })
       end
 
       it 'update stats hosts' do
-        expect(problem.hosts).to eq({
-          Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 3 }
-        })
+        expect(problem.hosts).to eq(Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 3 })
       end
 
       it 'update stats user_agents' do
-        expect(problem.user_agents).to eq({
-          Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 3 }
-        })
+        expect(problem.user_agents).to eq(Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 3 })
       end
     end
   end

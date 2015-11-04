@@ -7,7 +7,7 @@ require_relative '../lib/configurator'
 #
 # We use the first non-nil environment variable in the list. If the last array
 # element is a proc, it runs at the end, overriding the config value
-Errbit::Config = Configurator.run({
+Errbit::Config = Configurator.run(
   host:                      ['ERRBIT_HOST'],
   protocol:                  ['ERRBIT_PROTOCOL'],
   port:                      ['ERRBIT_PORT'],
@@ -60,4 +60,4 @@ Errbit::Config = Configurator.run({
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
   devise_modules:            ['DEVISE_MODULES']
-})
+)

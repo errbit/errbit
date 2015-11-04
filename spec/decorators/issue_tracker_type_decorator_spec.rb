@@ -24,9 +24,7 @@ describe IssueTrackerDecorator do
       end
     end
 
-    allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return({
-      fake: klass
-    })
+    allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(fake: klass)
 
     klass
   end

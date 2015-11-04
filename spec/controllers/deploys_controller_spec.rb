@@ -21,14 +21,12 @@ describe DeploysController, type: 'controller' do
     it 'creates a deploy' do
       expect(App).to receive(:find_by_api_key!).and_return(@app)
       expect(@app.deploys).to receive(:create!).
-        with({
+        with(
           username:    'john.doe',
           environment: 'production',
           repository:  'git@github.com/errbit/errbit.git',
           revision:    '19d77837eef37902cf5df7e4445c85f392a8d0d5',
-          message:     'johns first deploy'
-
-        }).and_return(Fabricate(:deploy))
+          message:     'johns first deploy').and_return(Fabricate(:deploy))
       post :create, deploy: @params, api_key: 'APIKEY'
     end
 

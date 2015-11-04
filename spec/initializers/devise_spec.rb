@@ -14,11 +14,10 @@ describe 'initializers/devise' do
 
       options = Devise.omniauth_configs[:github].options
       expect(options).to have_key(:client_options)
-      expect(options[:client_options]).to eq({
+      expect(options[:client_options]).to eq(
         site:          'https://api.github.com',
         authorize_url: 'https://github.com/login/oauth/authorize',
-        token_url:     'https://github.com/login/oauth/access_token'
-      })
+        token_url:     'https://github.com/login/oauth/access_token')
     end
 
     it 'sets the client options correctly for the a GitHub Enterprise github_url' do
@@ -28,11 +27,10 @@ describe 'initializers/devise' do
 
       options = Devise.omniauth_configs[:github].options
       expect(options).to have_key(:client_options)
-      expect(options[:client_options]).to eq({
+      expect(options[:client_options]).to eq(
         site:          'https://github.example.com/api/v3',
         authorize_url: 'https://github.example.com/login/oauth/authorize',
-        token_url:     'https://github.example.com/login/oauth/access_token'
-      })
+        token_url:     'https://github.example.com/login/oauth/access_token')
     end
   end
 end

@@ -10,7 +10,7 @@ Mongoid.configure do |config|
           Errbit::Config.mongo_url
         end
 
-  config.load_configuration({
+  config.load_configuration(
     clients: {
       default: {
         uri: uri
@@ -19,5 +19,5 @@ Mongoid.configure do |config|
     options: {
       use_activesupport_time_zone: true
     }
-  })
+  )
 end

@@ -232,12 +232,12 @@ describe UsersController, type: 'controller' do
         }
         let(:user_param) { { 'user' => { name: 'foo', admin: true } } }
         it 'not have admin field' do
-          expect(controller.send(:user_params)).to eq({ 'name' => 'foo' })
+          expect(controller.send(:user_params)).to eq('name' => 'foo')
         end
         context "with password and password_confirmation empty?" do
           let(:user_param) { { 'user' => { :name => 'foo', 'password' => '', 'password_confirmation' => '' } } }
           it 'not have password and password_confirmation field' do
-            expect(controller.send(:user_params)).to eq({ 'name' => 'foo' })
+            expect(controller.send(:user_params)).to eq('name' => 'foo')
           end
         end
       end

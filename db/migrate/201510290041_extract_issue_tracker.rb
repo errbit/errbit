@@ -34,9 +34,7 @@ class ExtractIssueTracker < Mongoid::Migration
         'created_at' => created_at
       }
 
-      App.where({ _id: app.id }).update({
-        "$set" => { issue_tracker: tracker }
-      })
+      App.where(_id: app.id).update("$set" => { issue_tracker: tracker })
     end
   end
 

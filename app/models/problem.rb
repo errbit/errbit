@@ -241,7 +241,7 @@ class Problem
   end
 
   def self.search(value)
-    Problem.where({ '$text' => { '$search' => value } })
+    Problem.where('$text' => { '$search' => value })
   end
 
 private

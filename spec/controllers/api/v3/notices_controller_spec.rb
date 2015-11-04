@@ -15,10 +15,10 @@ describe Api::V3::NoticesController, type: :controller do
   it 'returns created notice id in json format' do
     post :create, legit_body, legit_params
     notice = Notice.last
-    expect(JSON.parse(response.body)).to eq({
+    expect(JSON.parse(response.body)).to eq(
       'id' => notice.id.to_s,
       'url' => app_problem_url(app, notice.problem)
-    })
+    )
   end
 
   it 'responds with 400 when request attributes are not valid' do
@@ -30,7 +30,7 @@ describe Api::V3::NoticesController, type: :controller do
   end
 
   it 'responds with 422 when project_id is invalid' do
-    post :create, legit_body, { project_id: 'hm?', key: 'wha?' }
+    post :create, legit_body, project_id: 'hm?', key: 'wha?'
 
     expect(response.status).to eq(422)
     expect(response.body).to eq('Your API key is unknown')
@@ -38,7 +38,7 @@ describe Api::V3::NoticesController, type: :controller do
 
   it 'ignores notices for older api' do
     app = Fabricate(:app, current_app_version: '2.0')
-    post :create, legit_body, { project_id: app.api_key, key: app.api_key }
+    post :create, legit_body, project_id: app.api_key, key: app.api_key
     expect(response.body).to eq('Notice for old app version ignored')
     expect(Notice.count).to eq(0)
   end
