@@ -275,12 +275,3 @@ Style/SingleSpaceBeforeFirstArg:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiterals:
   Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: IgnoredMethods.
-Style/SymbolProc:
-  Exclude:
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/models/deploy.rb'
-    - 'spec/models/deploy_spec.rb'

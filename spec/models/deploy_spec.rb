@@ -19,7 +19,7 @@ describe Deploy, type: 'model' do
         app = Fabricate(:app, :resolve_errs_on_deploy => false)
         @problems = 3.times.map { Fabricate(:err, :problem => Fabricate(:problem, :resolved => false, :app => app)) }
         Fabricate(:deploy, :app => app)
-        expect(app.reload.problems.none? { |problem| problem.resolved? }).to eq true
+        expect(app.reload.problems.none?(&:resolved?)).to eq true
       end
     end
 
