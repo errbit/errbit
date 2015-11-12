@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :find_problem
 
   def create
-    @comment = Comment.new(comment_params.merge(:user_id => current_user.id))
+    @comment = Comment.new(comment_params.merge(user_id: current_user.id))
     if @comment.valid?
       @problem.comments << @comment
       @problem.save

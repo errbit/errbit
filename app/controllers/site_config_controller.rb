@@ -13,10 +13,10 @@ class SiteConfigController < ApplicationController
   end
 
   private def filtered_update_params
-    params
-      .require(:site_config)
-      .require(:notice_fingerprinter_attributes)
-      .permit(
+    params.
+      require(:site_config).
+      require(:notice_fingerprinter_attributes).
+      permit(
         :error_class,
         :message,
         :backtrace_lines,

@@ -15,7 +15,7 @@ puts "-- password: #{admin_pass}"
 puts ""
 puts "Be sure to note down these credentials now!"
 
-user = User.find_or_initialize_by(:email => admin_email)
+user = User.find_or_initialize_by(email: admin_email)
 
 user.name = 'Errbit Admin'
 user.password = admin_pass

@@ -20,7 +20,7 @@ feature 'password reset token' do
     expect(mail.body.encoded).to match(/change your password/)
     expect(mail.body.encoded).to match(regex)
     if mail.body.encoded =~ regex
-      visit "/users/password/edit?reset_password_token=#{$1}"
+      visit "/users/password/edit?reset_password_token=#{Regexp.last_match(1)}"
       expect(page).to have_content 'Change your password'
       fill_in 'New password', with: 'test12345'
       fill_in 'Type your new password again', with: 'test12345'

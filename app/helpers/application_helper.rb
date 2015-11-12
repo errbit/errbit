@@ -13,7 +13,7 @@ module ApplicationHelper
           event.dtend       = notice.created_at.utc + 60.minutes
           event.organizer   = notice.server_environment && notice.server_environment["hostname"]
           event.location    = notice.project_root
-          event.url         = app_problem_url(:app_id => notice.problem.app.id, :id => notice.problem)
+          event.url         = app_problem_url(app_id: notice.problem.app.id, id: notice.problem)
         end
       end
     end.to_s
@@ -53,12 +53,12 @@ module ApplicationHelper
     end
   end
 
-  def create_percentage_table_from_tallies(tallies, options={})
+  def create_percentage_table_from_tallies(tallies, options = {})
     total   = (options[:total] || total_from_tallies(tallies))
     percent = 100.0 / total.to_f
-    rows    = tallies.map {|value, count| [(count.to_f * percent), value]} \
-                     .sort {|a, b| b[0] <=> a[0]}
-    render "problems/tally_table", :rows => rows
+    rows    = tallies.map { |value, count| [(count.to_f * percent), value] }. \
+                     sort { |a, b| b[0] <=> a[0] }
+    render "problems/tally_table", rows: rows
   end
 
   def head(collection)
@@ -78,7 +78,7 @@ module ApplicationHelper
 private
 
   def total_from_tallies(tallies)
-    tallies.values.inject(0) {|sum, n| sum + n}
+    tallies.values.sum
   end
 
   def head_size

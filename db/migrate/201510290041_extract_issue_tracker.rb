@@ -1,15 +1,15 @@
 class ExtractIssueTracker < Mongoid::Migration
   TRACKER_MAPPING = {
-    'ErrbitTracPlugin::IssueTracker' => 'trac',
+    'ErrbitTracPlugin::IssueTracker'        => 'trac',
     'IssueTrackers::BitbucketIssuesTracker' => 'bitbucket',
-    'IssueTrackers::FogbugzTracker' => 'fogbugz',
-    'IssueTrackers::GithubIssuesTracker' => 'github',
-    'IssueTrackers::GitlabTracker' => 'gitlab',
-    'IssueTrackers::JiraTracker' => 'jira',
-    'IssueTrackers::LighthouseTracker' => 'lighthouse',
-    'IssueTrackers::PivotalLabsTracker' => 'pivotal',
-    'IssueTrackers::RedmineTracker' => 'redmine',
-    'IssueTrackers::UnfuddleTracker' => 'unfuddle'
+    'IssueTrackers::FogbugzTracker'         => 'fogbugz',
+    'IssueTrackers::GithubIssuesTracker'    => 'github',
+    'IssueTrackers::GitlabTracker'          => 'gitlab',
+    'IssueTrackers::JiraTracker'            => 'jira',
+    'IssueTrackers::LighthouseTracker'      => 'lighthouse',
+    'IssueTrackers::PivotalLabsTracker'     => 'pivotal',
+    'IssueTrackers::RedmineTracker'         => 'redmine',
+    'IssueTrackers::UnfuddleTracker'        => 'unfuddle'
   }
 
   def self.up
@@ -29,14 +29,12 @@ class ExtractIssueTracker < Mongoid::Migration
 
       tracker = {
         'type_tracker' => TRACKER_MAPPING[type],
-        'options' => options,
-        'updated_at' => updated_at,
-        'created_at' => created_at
+        'options'      => options,
+        'updated_at'   => updated_at,
+        'created_at'   => created_at
       }
 
-      App.where({ _id: app.id }).update({
-        "$set" => { :issue_tracker => tracker }
-      })
+      App.where(_id: app.id).update("$set" => { issue_tracker: tracker })
     end
   end
 

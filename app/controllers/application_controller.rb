@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
-  rescue_from ActionController::RedirectBackError, :with => :redirect_to_root
+  rescue_from ActionController::RedirectBackError, with: :redirect_to_root
 
   class StrongParametersWithEagerAttributesStrategy < DecentExposure::StrongParametersStrategy
     def assign_attributes?

@@ -4,7 +4,7 @@ feature "Regeneration api_Key" do
   let(:app) { Fabricate(:app) }
   let(:admin) { Fabricate(:admin) }
   let(:user) {
-    Fabricate(:user_watcher, :app => app).user
+    Fabricate(:user_watcher, app: app).user
   }
 
   before do
@@ -37,7 +37,7 @@ end
 feature "Create an application" do
   let(:admin) { Fabricate(:admin) }
   let(:user) {
-    Fabricate(:user_watcher, :app => app).user
+    Fabricate(:user_watcher, app: app).user
   }
 
   before do
@@ -48,37 +48,37 @@ feature "Create an application" do
     visit '/'
     log_in admin
     click_on I18n.t('apps.index.new_app')
-    fill_in 'app_name', :with => 'My new app'
+    fill_in 'app_name', with: 'My new app'
     click_on I18n.t('apps.new.add_app')
     page.has_content?(I18n.t('controllers.apps.flash.create.success'))
-    expect(App.where(:name => 'My new app').count).to eq 1
-    expect(App.where(:name => 'My new app 2').count).to eq 0
+    expect(App.where(name: 'My new app').count).to eq 1
+    expect(App.where(name: 'My new app 2').count).to eq 0
 
     click_on I18n.t('shared.navigation.apps')
     click_on 'My new app'
     click_link I18n.t('apps.show.edit')
-    fill_in 'app_name', :with => 'My new app 2'
+    fill_in 'app_name', with: 'My new app 2'
     click_on I18n.t('apps.edit.update')
     page.has_content?(I18n.t('controllers.apps.flash.update.success'))
-    expect(App.where(:name => 'My new app').count).to eq 0
-    expect(App.where(:name => 'My new app 2').count).to eq 1
+    expect(App.where(name: 'My new app').count).to eq 0
+    expect(App.where(name: 'My new app 2').count).to eq 1
   end
 
-  scenario "create an apps with issue tracker and edit it", :js => true do
+  scenario "create an apps with issue tracker and edit it", js: true do
     visit '/'
     log_in admin
     click_on I18n.t('apps.index.new_app')
-    fill_in 'app_name', :with => 'My new app'
+    fill_in 'app_name', with: 'My new app'
     find('.label_radio.github').click
 
     fill_in 'app_github_repo', with: 'foo/bar'
     within ".github.tracker_params" do
-      fill_in 'app_issue_tracker_attributes_options_username', :with => 'token'
-      fill_in 'app_issue_tracker_attributes_options_password', :with => 'pass'
+      fill_in 'app_issue_tracker_attributes_options_username', with: 'token'
+      fill_in 'app_issue_tracker_attributes_options_password', with: 'pass'
     end
     click_on I18n.t('apps.new.add_app')
     expect(page.has_content?(I18n.t('controllers.apps.flash.create.success'))).to eql true
-    app = App.where(:name => 'My new app').first
+    app = App.where(name: 'My new app').first
     expect(app.issue_tracker.type_tracker).to eql 'github'
     expect(app.issue_tracker.options['username']).to eql 'token'
     expect(app.issue_tracker.options['password']).to eql 'pass'
@@ -89,7 +89,7 @@ feature "Create an application" do
     find('.issue_tracker .label_radio.none').click
     click_on I18n.t('apps.edit.update')
     expect(page.has_content?(I18n.t('controllers.apps.flash.update.success'))).to eql true
-    app = App.where(:name => 'My new app').first
+    app = App.where(name: 'My new app').first
     expect(app.issue_tracker.tracker).to be_a ErrbitPlugin::NoneIssueTracker
   end
 end

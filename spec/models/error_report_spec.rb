@@ -17,7 +17,7 @@ module Airbrake
 end
 
 describe ErrorReport do
-  let(:xml){
+  let(:xml) {
     Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read
   }
 
@@ -26,7 +26,7 @@ describe ErrorReport do
   let!(:app) {
     Fabricate(
       :app,
-      :api_key => 'APIKEY'
+      api_key: 'APIKEY'
     )
   }
 
@@ -52,7 +52,7 @@ describe ErrorReport do
     end
 
     context "with a minimal notice" do
-      let(:xml){
+      let(:xml) {
         Rails.root.join('spec', 'fixtures', 'minimal_test_notice.xml').read
       }
 
@@ -68,9 +68,9 @@ describe ErrorReport do
     context "with notice generate by Airbrake gem" do
       let(:xml) {
         Airbrake::Notice.new(
-          :exception => Exception.new,
-          :api_key => 'APIKEY',
-          :project_root => Rails.root
+          exception:    Exception.new,
+          api_key:      'APIKEY',
+          project_root: Rails.root
         ).to_xml
       }
       it 'save a notice' do
@@ -128,12 +128,12 @@ describe ErrorReport do
         #   <var key="id"/>
         # </var>
         expected = {
-          'secure'        => 'false',
-          'httponly'      => 'true',
-          'path'          => '/',
-          'expire_after'  => nil,
-          'domain'        => nil,
-          'id'            => nil
+          'secure'       => 'false',
+          'httponly'     => 'true',
+          'path'         => '/',
+          'expire_after' => nil,
+          'domain'       => nil,
+          'id'           => nil
         }
         expect(subject.env_vars).to have_key('rack_session_options')
         expect(subject.env_vars['rack_session_options']).to eql(expected)
@@ -159,7 +159,7 @@ describe ErrorReport do
       problem = error_report.problem
       problem.update(
         resolved_at: Time.zone.now,
-        resolved: true
+        resolved:    true
       )
 
       error_report = ErrorReport.new(xml)
@@ -223,7 +223,7 @@ describe ErrorReport do
   context "with notification service configured" do
     before do
       app.notify_on_errs = true
-      app.watchers.build(:email => 'foo@example.com')
+      app.watchers.build(email: 'foo@example.com')
       app.save
     end
 
@@ -237,7 +237,7 @@ describe ErrorReport do
     end
 
     context "with xml without request section" do
-      let(:xml){
+      let(:xml) {
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_without_request_section.xml').read
       }
       it "save a notice" do
@@ -250,7 +250,7 @@ describe ErrorReport do
     end
 
     context "with xml with only a single line of backtrace" do
-      let(:xml){
+      let(:xml) {
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_one_line_of_backtrace.xml').read
       }
       it "save a notice" do
@@ -271,7 +271,7 @@ describe ErrorReport do
     end
     context "with not valid api_key" do
       before do
-        App.where(:api_key => app.api_key).delete_all
+        App.where(api_key: app.api_key).delete_all
       end
       it "return false" do
         expect(error_report.valid?).to be false

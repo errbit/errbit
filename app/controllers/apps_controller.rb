@@ -1,9 +1,9 @@
 class AppsController < ApplicationController
   include ProblemsSearcher
 
-  before_action :require_admin!, :except => [:index, :show]
-  before_action :parse_email_at_notices_or_set_default, :only => [:create, :update]
-  before_action :parse_notice_at_notices_or_set_default, :only => [:create, :update]
+  before_action :require_admin!, except: [:index, :show]
+  before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
+  before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
   respond_to :html
 
   expose(:app_scope) { App }
@@ -39,7 +39,7 @@ class AppsController < ApplicationController
   }
 
   expose(:users) {
-    User.all.sort_by {|u| u.name.downcase }
+    User.all.sort_by { |u| u.name.downcase }
   }
 
   def index; end
@@ -55,7 +55,7 @@ class AppsController < ApplicationController
   def create
     initialize_subclassed_notification_service
     if app.save
-      redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.create.success') }
+      redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
     else
       flash[:error] = I18n.t('controllers.apps.flash.create.error')
       render :new
@@ -65,7 +65,7 @@ class AppsController < ApplicationController
   def update
     initialize_subclassed_notification_service
     if app.save
-      redirect_to app_url(app), :flash => { :success => I18n.t('controllers.apps.flash.update.success') }
+      redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
     else
       flash[:error] = I18n.t('controllers.apps.flash.update.error')
       render :edit
@@ -78,7 +78,7 @@ class AppsController < ApplicationController
 
   def destroy
     if app.destroy
-      redirect_to apps_url, :flash => { :success => I18n.t('controllers.apps.flash.destroy.success') }
+      redirect_to apps_url, flash: { success: I18n.t('controllers.apps.flash.destroy.success') }
     else
       flash[:error] = I18n.t('controllers.apps.flash.destroy.error')
       render :show
@@ -96,7 +96,7 @@ protected
     # set the app's notification service
     if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
       available_notification_classes = [NotificationService] + NotificationService.subclasses
-      notification_class = available_notification_classes.detect{|c| c.name == notification_type}
+      notification_class = available_notification_classes.detect { |c| c.name == notification_type }
       if notification_class.present?
         app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
       end
@@ -116,7 +116,7 @@ protected
       # Sanitize negative values, split on comma,
       # strip, parse as integer, remove all '0's.
       # If empty, set as default and show an error message.
-      email_at_notices = val.gsub(/-\d+/, "").split(",").map{|v| v.strip.to_i }.reject{|v| v == 0}
+      email_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }.reject { |v| v == 0 }
       if email_at_notices.any?
         params[:app][:email_at_notices] = email_at_notices
       else
@@ -131,7 +131,7 @@ protected
       # Sanitize negative values, split on comma,
       # strip, parse as integer, remove all '0's.
       # If empty, set as default and show an error message.
-      notify_at_notices = val.gsub(/-\d+/, "").split(",").map{|v| v.strip.to_i }
+      notify_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }
       if notify_at_notices.any?
         params[:app][:notification_service_attributes][:notify_at_notices] = notify_at_notices
       else

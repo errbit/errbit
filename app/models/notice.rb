@@ -5,30 +5,30 @@ class Notice
   include Mongoid::Timestamps
 
   field :message
-  field :server_environment, :type => Hash
-  field :request, :type => Hash
-  field :notifier, :type => Hash
-  field :user_attributes, :type => Hash
+  field :server_environment, type: Hash
+  field :request, type: Hash
+  field :notifier, type: Hash
+  field :user_attributes, type: Hash
   field :framework
   field :error_class
-  delegate :lines, :to => :backtrace, :prefix => true
-  delegate :problem, :to => :err
+  delegate :lines, to: :backtrace, prefix: true
+  delegate :problem, to: :err
 
   belongs_to :app
   belongs_to :err
-  belongs_to :backtrace, :index => true
+  belongs_to :backtrace, index: true
 
-  index(:created_at => 1)
-  index(:err_id => 1, :created_at => 1, :_id => 1)
+  index(created_at: 1)
+  index(err_id: 1, created_at: 1, _id: 1)
 
   before_save :sanitize
   before_destroy :problem_recache
 
   validates_presence_of :backtrace_id, :server_environment, :notifier
 
-  scope :ordered, ->{ order_by(:created_at.asc) }
-  scope :reverse_ordered, ->{ order_by(:created_at.desc) }
-  scope :for_errs, Proc.new { |errs|
+  scope :ordered, -> { order_by(:created_at.asc) }
+  scope :reverse_ordered, -> { order_by(:created_at.desc) }
+  scope :for_errs, lambda { |errs|
     where(:err_id.in => errs.all.map(&:id))
   }
 

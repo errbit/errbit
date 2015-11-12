@@ -1,26 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
   get '/locate/:id' => 'notices#locate', :as => :locate
   post '/deploys.txt' => 'deploys#create'
 
-  resources :notices,   :only => [:show]
-  resources :deploys,   :only => [:show]
+  resources :notices,   only: [:show]
+  resources :deploys,   only: [:show]
   resources :users do
     member do
       delete :unlink_github
     end
   end
 
-  resources :site_config, :only => [:index] do
+  resources :site_config, only: [:index] do
     collection do
       put :update
     end
   end
 
-  resources :problems, :only => [:index] do
+  resources :problems, only: [:index] do
     collection do
       post :destroy_several
       post :resolve_several
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :apps do
     resources :problems do
       resources :notices
-      resources :comments, :only => [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
 
       collection do
         post :destroy_all
@@ -47,8 +47,8 @@ Rails.application.routes.draw do
         delete :unlink_issue
       end
     end
-    resources :deploys, :only => [:index]
-    resources :watchers, :only => [:destroy, :update]
+    resources :deploys, only: [:index]
+    resources :watchers, only: [:destroy, :update]
     member do
       post :regenerate_api_key
     end
@@ -56,9 +56,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :problems, :only => [:index, :show], :defaults => { :format => 'json' }
-      resources :notices,  :only => [:index], :defaults => { :format => 'json' }
-      resources :stats, :only => [], :defaults => { :format => 'json' } do
+      resources :problems, only: [:index, :show], defaults: { format: 'json' }
+      resources :notices,  only: [:index], defaults: { format: 'json' }
+      resources :stats, only: [], defaults: { format: 'json' } do
         collection do
           get :app
         end
@@ -69,5 +69,5 @@ Rails.application.routes.draw do
   match '/api/v3/projects/:project_id/create-notice' => 'api/v3/notices#create', via: [:post]
   match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post]
 
-  root :to => 'apps#index'
+  root to: 'apps#index'
 end

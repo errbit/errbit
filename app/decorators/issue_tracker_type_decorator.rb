@@ -7,7 +7,8 @@ class IssueTrackerTypeDecorator < Draper::Decorator
     return unless object.icons
 
     object.icons.reduce({}) do |c, (k, v)|
-      c[k] = "data:#{v[0]};base64,#{Base64.encode64(v[1])}"; c
+      c[k] = "data:#{v[0]};base64,#{Base64.encode64(v[1])}"
+      c
     end
   end
 

@@ -4,7 +4,7 @@ class Watcher
 
   field :email
 
-  embedded_in :app, :inverse_of => :watchers
+  embedded_in :app, inverse_of: :watchers
   belongs_to :user
 
   validate :ensure_user_or_email

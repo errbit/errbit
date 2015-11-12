@@ -1,9 +1,10 @@
 describe UserDestroy do
-  let(:app) { Fabricate(
-    :app,
-    :watchers => [
-      Fabricate.build(:user_watcher, :user => user)
-    ])
+  let(:app) {
+    Fabricate(
+      :app,
+      watchers: [
+        Fabricate.build(:user_watcher, user: user)
+      ])
   }
 
   describe "#destroy" do
@@ -17,8 +18,8 @@ describe UserDestroy do
     it 'should delete watcher' do
       expect {
         UserDestroy.new(user).destroy
-      }.to change{
-        app.reload.watchers.where(:user_id => user.id).count
+      }.to change {
+        app.reload.watchers.where(user_id: user.id).count
       }.from(1).to(0)
     end
   end

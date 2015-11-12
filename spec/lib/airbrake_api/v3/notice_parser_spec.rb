@@ -7,7 +7,7 @@ describe AirbrakeApi::V3::NoticeParser do
     }.to raise_error(AirbrakeApi::ParamsError)
 
     expect {
-      AirbrakeApi::V3::NoticeParser.new({'errors' => []}).report
+      AirbrakeApi::V3::NoticeParser.new('errors' => []).report
     }.to raise_error(AirbrakeApi::ParamsError)
   end
 
@@ -20,12 +20,17 @@ describe AirbrakeApi::V3::NoticeParser do
     expect(report.error_class).to eq('Error')
     expect(report.message).to eq('Error: TestError')
     expect(report.backtrace.lines.size).to eq(9)
-    expect(notice.user_attributes).to include({'Id' => 1, 'Name' => 'John Doe', 'Email' => 'john.doe@example.org', 'Username' => 'john'})
+    expect(notice.user_attributes).to include(
+      'Id'       => 1,
+      'Name'     => 'John Doe',
+      'Email'    => 'john.doe@example.org',
+      'Username' => 'john'
+    )
     expect(notice.session).to include('isAdmin' => true)
     expect(notice.params).to include('returnTo' => 'dashboard')
     expect(notice.env_vars).to include(
       'navigator_vendor' => 'Google Inc.',
-      'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'
+      'HTTP_USER_AGENT'  => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'
     )
   end
 

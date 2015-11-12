@@ -61,15 +61,15 @@ class ErrorReport
 
   def make_notice
     @notice = Notice.new(
-      app: app,
-      message: message,
-      error_class: error_class,
-      backtrace: backtrace,
-      request: request,
+      app:                app,
+      message:            message,
+      error_class:        error_class,
+      backtrace:          backtrace,
+      request:            request,
       server_environment: server_environment,
-      notifier: notifier,
-      user_attributes: user_attributes,
-      framework: framework
+      notifier:           notifier,
+      user_attributes:    user_attributes,
+      framework:          framework
     )
   end
 

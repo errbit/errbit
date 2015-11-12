@@ -34,14 +34,14 @@ describe 'initializers/action_mailer' do
       allow(Errbit::Config).to receive(:smtp_domain).and_return('someotherdomain.com')
       load_initializer
 
-      expect(ActionMailer::Base.smtp_settings).to eq({
-        address: 'smtp.somedomain.com',
-        port: 998,
+      expect(ActionMailer::Base.smtp_settings).to eq(
+        address:        'smtp.somedomain.com',
+        port:           998,
         authentication: :login,
-        user_name: 'my-username',
-        password: 'my-password',
-        domain: 'someotherdomain.com',
-      })
+        user_name:      'my-username',
+        password:       'my-password',
+        domain:         'someotherdomain.com'
+      )
     end
   end
 end

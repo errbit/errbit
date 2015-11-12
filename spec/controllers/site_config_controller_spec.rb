@@ -1,6 +1,6 @@
 describe SiteConfigController, type: 'controller' do
   it_requires_admin_privileges for: {
-    index: :get,
+    index:  :get,
     update: :put
   }
 
@@ -18,7 +18,7 @@ describe SiteConfigController, type: 'controller' do
     it 'updates' do
       put :update, site_config: {
         notice_fingerprinter_attributes: {
-          backtrace_lines: 3,
+          backtrace_lines:  3,
           environment_name: false
         }
       }
