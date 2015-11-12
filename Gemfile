@@ -33,6 +33,7 @@ gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
 gem 'rails_autolink'
 gem 'useragent'
+gem 'unicorn'
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -71,12 +72,14 @@ group :development, :test do
   gem 'rubocop', require: false
 end
 
-group :development do
-  gem 'capistrano',         require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails',   require: false
-  gem 'capistrano-rbenv',   require: false
+group :capistrano do
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rvm', '~> 0.1.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+end
 
+group :development do
   # better errors
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
@@ -100,7 +103,6 @@ end
 
 group :heroku, :production do
   gem 'rails_12factor', require: ENV.key?("HEROKU")
-  gem 'unicorn', require: false, platform: 'ruby'
 end
 
 gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
