@@ -88,16 +88,6 @@ Style/FileName:
     - 'config/initializers/cve-2013-0156.rb'
     - 'script/rspec-queue-mongoid.rb'
 
-# Offense count: 8
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/FormatString:
-  Exclude:
-    - 'app/decorators/backtrace_line_decorator.rb'
-    - 'app/helpers/problems_helper.rb'
-    - 'spec/views/apps/edit.html.haml_spec.rb'
-    - 'spec/views/problems/show.html.haml_spec.rb'
-    - 'spec/views/users/show.html.haml_spec.rb'
-
 # Offense count: 27
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:

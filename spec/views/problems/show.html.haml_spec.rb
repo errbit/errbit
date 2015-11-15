@@ -66,13 +66,23 @@ describe "problems/show.html.haml", type: 'view' do
 
     it "should confirm the 'resolve' link by default" do
       render
-      expect(action_bar).to have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
+      expect(action_bar).to have_selector(
+        format(
+          'a.resolve[data-confirm="%s"]',
+          I18n.t('problems.confirm.resolve_one')
+        )
+      )
     end
 
     it "should confirm the 'resolve' link if configuration is unset" do
       allow(Errbit::Config).to receive(:confirm_err_actions).and_return(nil)
       render
-      expect(action_bar).to have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
+      expect(action_bar).to have_selector(
+        format(
+          'a.resolve[data-confirm="%s"]',
+          I18n.t('problems.confirm.resolve_one')
+        )
+      )
     end
 
     it "should not confirm the 'resolve' link if configured not to" do

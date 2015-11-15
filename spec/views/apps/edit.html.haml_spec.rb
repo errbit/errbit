@@ -15,12 +15,22 @@ describe "apps/edit.html.haml", type: 'view' do
 
     it "should confirm the 'reset' link" do
       render
-      expect(action_bar).to have_selector('a.button[data-confirm="%s"]' % I18n.t('apps.confirm_destroy_all_problems'))
+      expect(action_bar).to have_selector(
+        format(
+          'a.button[data-confirm="%s"]',
+          I18n.t('apps.confirm_destroy_all_problems')
+        )
+      )
     end
 
     it "should confirm the 'destroy' link" do
       render
-      expect(action_bar).to have_selector('a.button[data-confirm="%s"]' % I18n.t('apps.confirm_delete'))
+      expect(action_bar).to have_selector(
+        format(
+          'a.button[data-confirm="%s"]',
+          I18n.t('apps.confirm_delete')
+        )
+      )
     end
   end
 

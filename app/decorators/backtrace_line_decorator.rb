@@ -73,13 +73,13 @@ private
 
   def link_to_github(app, text = nil)
     return unless app.github_repo?
-    href = "%s#L%s" % [app.github_url_to_file(decorated_path + file_name), number]
+    href = format("%s#L%s", app.github_url_to_file(decorated_path + file_name), number)
     h.link_to(text || file_name, href, target: '_blank')
   end
 
   def link_to_bitbucket(app, text = nil)
     return unless app.bitbucket_repo?
-    href = "%s#%s-%s" % [app.bitbucket_url_to_file(decorated_path + file_name), file_name, number]
+    href = format("%s#%s-%s", app.bitbucket_url_to_file(decorated_path + file_name), file_name, number)
     h.link_to(text || file_name, href, target: '_blank')
   end
 
