@@ -177,8 +177,8 @@ class App
   # Compare by number of unresolved errs, then problem counts.
   def <=>(other)
     (other.unresolved_count <=> unresolved_count).nonzero? ||
-    (other.problem_count <=> problem_count).nonzero? ||
-    name <=> other.name
+      (other.problem_count <=> problem_count).nonzero? ||
+      name <=> other.name
   end
 
   def email_at_notices

@@ -33,6 +33,9 @@ Style/DotPosition:
   # Support code copy/paste into console
   EnforcedStyle: trailing
 
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
 Style/IndentHash:
   EnforcedStyle: consistent
 

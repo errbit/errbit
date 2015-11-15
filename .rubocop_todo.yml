@@ -104,12 +104,6 @@ Style/IfUnlessModifier:
     - 'app/models/notice.rb'
     - 'app/models/user.rb'
 
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MultilineOperationIndentation:
-  Enabled: false
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
