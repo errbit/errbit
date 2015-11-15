@@ -41,12 +41,6 @@ Rails/Output:
     - 'app/interactors/problem_recacher.rb'
     - 'db/seeds.rb'
 
-# Offense count: 105
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
-Style/BlockDelimiters:
-  Enabled: false
-
 # Offense count: 15
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/ClassAndModuleChildren:

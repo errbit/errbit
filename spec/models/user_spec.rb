@@ -39,10 +39,10 @@ describe User do
 
   context "First user" do
     it "should be created this admin access via db:seed" do
-      expect {
+      expect do
         allow($stdout).to receive(:puts).and_return(true)
         require Rails.root.join('db/seeds.rb')
-      }.to change {
+      end.to change {
         User.where(admin: true).count
       }.from(0).to(1)
     end

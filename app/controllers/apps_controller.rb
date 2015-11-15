@@ -8,9 +8,9 @@ class AppsController < ApplicationController
 
   expose(:app_scope) { App }
 
-  expose(:apps) {
+  expose(:apps) do
     app_scope.all.sort.map { |app| AppDecorator.new(app) }
-  }
+  end
 
   expose(:app, ancestor: :app_scope, attributes: :app_params)
 
@@ -18,11 +18,11 @@ class AppsController < ApplicationController
     AppDecorator.new(app)
   end
 
-  expose(:all_errs) {
+  expose(:all_errs) do
     params[:all_errs].present?
-  }
+  end
 
-  expose(:problems) {
+  expose(:problems) do
     if request.format == :atom
       app.problems.unresolved.ordered
     else
@@ -32,15 +32,15 @@ class AppsController < ApplicationController
         params[:environment]
       ).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
     end
-  }
+  end
 
-  expose(:deploys) {
+  expose(:deploys) do
     app.deploys.order_by(:created_at.desc).limit(5)
-  }
+  end
 
-  expose(:users) {
+  expose(:users) do
     User.all.sort_by { |u| u.name.downcase }
-  }
+  end
 
   def index; end
 

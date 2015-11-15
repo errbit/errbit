@@ -3,9 +3,9 @@ require 'acceptance/acceptance_helper'
 feature "Regeneration api_Key" do
   let(:app) { Fabricate(:app) }
   let(:admin) { Fabricate(:admin) }
-  let(:user) {
+  let(:user) do
     Fabricate(:user_watcher, app: app).user
-  }
+  end
 
   before do
     app && admin
@@ -16,9 +16,9 @@ feature "Regeneration api_Key" do
     log_in admin
     click_link app.name
     click_link I18n.t('apps.show.edit')
-    expect {
+    expect do
       click_link I18n.t('apps.fields.regenerate_api_key')
-    }.to change {
+    end.to change {
       app.reload.api_key
     }
     click_link I18n.t('shared.navigation.apps')
@@ -36,9 +36,9 @@ end
 
 feature "Create an application" do
   let(:admin) { Fabricate(:admin) }
-  let(:user) {
+  let(:user) do
     Fabricate(:user_watcher, app: app).user
-  }
+  end
 
   before do
     admin

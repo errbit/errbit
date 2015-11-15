@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def generate_ical(deploys)
-    RiCal.Calendar { |cal|
+    RiCal.Calendar do |cal|
       deploys.each_with_index do |deploy, idx|
         cal.event do |event|
           event.summary     = "#{idx + 1} #{deploy.repository}"
@@ -31,7 +31,7 @@ module ApplicationHelper
           event.organizer   = deploy.username.to_s
         end
       end
-    }.to_s
+    end.to_s
   end
 
   def user_agent_graph(problem)

@@ -1,20 +1,20 @@
 describe ResolvedProblemClearer do
-  let(:resolved_problem_clearer) {
+  let(:resolved_problem_clearer) do
     ResolvedProblemClearer.new
-  }
+  end
   describe "#execute" do
-    let!(:problems) {
+    let!(:problems) do
       [
         Fabricate(:problem),
         Fabricate(:problem),
         Fabricate(:problem)
       ]
-    }
+    end
     context 'without problem resolved' do
       it 'do nothing' do
-        expect {
+        expect do
           expect(resolved_problem_clearer.execute).to eq 0
-        }.to_not change {
+        end.to_not change {
           Problem.count
         }
       end
@@ -34,9 +34,9 @@ describe ResolvedProblemClearer do
       end
 
       it 'delete problem resolve' do
-        expect {
+        expect do
           expect(resolved_problem_clearer.execute).to eq 2
-        }.to change {
+        end.to change {
           Problem.count
         }.by(-2)
         expect(Problem.where(_id: problems.first.id).first).to be_nil

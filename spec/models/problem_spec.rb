@@ -10,25 +10,25 @@ describe Problem, type: 'model' do
   describe "Fabrication" do
     context "Fabricate(:problem)" do
       it 'should have no comment' do
-        expect {
+        expect do
           Fabricate(:problem)
-        }.to_not change(Comment, :count)
+        end.to_not change(Comment, :count)
       end
     end
 
     context "Fabricate(:problem_with_comments)" do
       it 'should have 3 comments' do
-        expect {
+        expect do
           Fabricate(:problem_with_comments)
-        }.to change(Comment, :count).by(3)
+        end.to change(Comment, :count).by(3)
       end
     end
 
     context "Fabricate(:problem_with_errs)" do
       it 'should have 3 errs' do
-        expect {
+        expect do
           Fabricate(:problem_with_errs)
-        }.to change(Err, :count).by(3)
+        end.to change(Err, :count).by(3)
       end
     end
   end
@@ -65,9 +65,9 @@ describe Problem, type: 'model' do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
       problem = err.problem
-      expect {
+      expect do
         Fabricate(:notice, err: err, message: 'ERR 1')
-      }.to change(problem, :message).from(nil).to('ERR 1')
+      end.to change(problem, :message).from(nil).to('ERR 1')
     end
   end
 
@@ -132,9 +132,9 @@ describe Problem, type: 'model' do
       er.add_on_blank(:resolved)
       allow(problem).to receive(:errors).and_return(er)
       expect(problem).to_not be_valid
-      expect {
+      expect do
         problem.resolve!
-      }.to raise_error(Mongoid::Errors::Validations)
+      end.to raise_error(Mongoid::Errors::Validations)
     end
   end
 
@@ -201,17 +201,17 @@ describe Problem, type: 'model' do
     end
 
     it "adding a notice increases #notices_count by 1" do
-      expect {
+      expect do
         Fabricate(:notice, err: @err, message: 'ERR 1')
-      }.to change(@problem.reload, :notices_count).from(0).to(1)
+      end.to change(@problem.reload, :notices_count).from(0).to(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
       Fabricate(:notice, err: @err, message: 'ERR 1')
-      expect {
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :notices_count).from(1).to(0)
+      end.to change(@problem, :notices_count).from(1).to(0)
     end
   end
 
@@ -226,10 +226,10 @@ describe Problem, type: 'model' do
     end
 
     it "is updated when an app is updated" do
-      expect {
+      expect do
         app.update_attributes!(name: "Bar App")
         problem.reload
-      }.to change(problem, :app_name).to("Bar App")
+      end.to change(problem, :app_name).to("Bar App")
     end
   end
 
@@ -248,10 +248,10 @@ describe Problem, type: 'model' do
     it "is updated when a deploy is created" do
       problem = Fabricate(:problem, app: @app, environment: "production")
       next_deploy = 5.minutes.ago
-      expect {
+      expect do
         @deploy = Fabricate(:deploy, app: @app, created_at: next_deploy)
         problem.reload
-      }.to change { problem.last_deploy_at.iso8601 }.
+      end.to change { problem.last_deploy_at.iso8601 }.
         from(@last_deploy.iso8601).
         to(next_deploy.iso8601)
     end
@@ -270,10 +270,10 @@ describe Problem, type: 'model' do
 
     it "removing a notice removes string from #messages" do
       Fabricate(:notice, err: @err, message: 'ERR 1')
-      expect {
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :messages).from(Digest::MD5.hexdigest('ERR 1') => { 'value' => 'ERR 1', 'count' => 1 }).to({})
+      end.to change(@problem, :messages).from(Digest::MD5.hexdigest('ERR 1') => { 'value' => 'ERR 1', 'count' => 1 }).to({})
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
@@ -297,10 +297,10 @@ describe Problem, type: 'model' do
 
     it "removing a notice removes string from #hosts" do
       Fabricate(:notice, err: @err, request: { 'url' => "http://example.com/resource/12" })
-      expect {
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :hosts).from(Digest::MD5.hexdigest('example.com') => { 'value' => 'example.com', 'count' => 1 }).to({})
+      end.to change(@problem, :hosts).from(Digest::MD5.hexdigest('example.com') => { 'value' => 'example.com', 'count' => 1 }).to({})
     end
   end
 
@@ -325,10 +325,10 @@ describe Problem, type: 'model' do
           }
         }
       )
-      expect {
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :user_agents).
+      end.to change(@problem, :user_agents).
         from(
           Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {
             'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1 }
@@ -347,17 +347,17 @@ describe Problem, type: 'model' do
     end
 
     it "adding a comment increases #comments_count by 1" do
-      expect {
+      expect do
         Fabricate(:comment, err: @problem)
-      }.to change(@problem, :comments_count).from(0).to(1)
+      end.to change(@problem, :comments_count).from(0).to(1)
     end
 
     it "removing a comment decreases #comments_count by 1" do
       Fabricate(:comment, err: @problem)
-      expect {
+      expect do
         @problem.reload.comments.first.destroy
         @problem.reload
-      }.to change(@problem, :comments_count).from(1).to(0)
+      end.to change(@problem, :comments_count).from(1).to(0)
     end
   end
 
@@ -420,9 +420,9 @@ describe Problem, type: 'model' do
     end
 
     it 'update the notice_count' do
-      expect {
+      expect do
         problem.recache
-      }.to change {
+      end.to change {
         problem.notices_count
       }.from(0).to(1)
     end

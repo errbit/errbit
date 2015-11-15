@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   before_action :require_user_edit_priviledges, only: [:edit, :update]
 
   expose(:user, attributes: :user_params)
-  expose(:users) {
+  expose(:users) do
     User.all.page(params[:page]).per(current_user.per_page)
-  }
+  end
 
   def index; end
   def new; end

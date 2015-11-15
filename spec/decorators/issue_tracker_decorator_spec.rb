@@ -1,6 +1,6 @@
 describe IssueTrackerDecorator do
   let(:fake_tracker) do
-    klass = Class.new(ErrbitPlugin::IssueTracker) {
+    klass = Class.new(ErrbitPlugin::IssueTracker) do
       def self.label
         'fake'
       end
@@ -19,7 +19,7 @@ describe IssueTrackerDecorator do
       def configured?
         true
       end
-    }
+    end
     klass.new 'nothing special'
   end
 

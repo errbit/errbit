@@ -11,27 +11,27 @@ class ProblemsController < ApplicationController
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
-  expose(:app_scope) {
+  expose(:app_scope) do
     params[:app_id] ? App.where(_id: params[:app_id]) : App.all
-  }
+  end
 
-  expose(:app) {
+  expose(:app) do
     AppDecorator.new app_scope.find(params[:app_id])
-  }
+  end
 
-  expose(:problem) {
+  expose(:problem) do
     ProblemDecorator.new app.problems.find(params[:id])
-  }
+  end
 
-  expose(:all_errs) {
+  expose(:all_errs) do
     params[:all_errs]
-  }
+  end
 
-  expose(:params_environement) {
+  expose(:params_environement) do
     params[:environment]
-  }
+  end
 
-  expose(:problems) {
+  expose(:problems) do
     pro = Problem.
       for_apps(app_scope).
       in_env(params_environement).
@@ -43,7 +43,7 @@ class ProblemsController < ApplicationController
     else
       pro
     end
-  }
+  end
 
   def index; end
 

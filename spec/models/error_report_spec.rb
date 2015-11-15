@@ -17,18 +17,18 @@ module Airbrake
 end
 
 describe ErrorReport do
-  let(:xml) {
+  let(:xml) do
     Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read
-  }
+  end
 
   let(:error_report) { ErrorReport.new(xml) }
 
-  let!(:app) {
+  let!(:app) do
     Fabricate(
       :app,
       api_key: 'APIKEY'
     )
-  }
+  end
 
   describe "#app" do
     it 'find the good app' do
@@ -44,39 +44,39 @@ describe ErrorReport do
 
   describe "#generate_notice!" do
     it "save a notice" do
-      expect {
+      expect do
         error_report.generate_notice!
-      }.to change {
+      end.to change {
         app.reload.problems.count
       }.by(1)
     end
 
     context "with a minimal notice" do
-      let(:xml) {
+      let(:xml) do
         Rails.root.join('spec', 'fixtures', 'minimal_test_notice.xml').read
-      }
+      end
 
       it 'save a notice' do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
     end
 
     context "with notice generate by Airbrake gem" do
-      let(:xml) {
+      let(:xml) do
         Airbrake::Notice.new(
           exception:    Exception.new,
           api_key:      'APIKEY',
           project_root: Rails.root
         ).to_xml
-      }
+      end
       it 'save a notice' do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
@@ -201,10 +201,10 @@ describe ErrorReport do
   end
 
   it 'memoize the notice' do
-    expect {
+    expect do
       error_report.generate_notice!
       error_report.generate_notice!
-    }.to change {
+    end.to change {
       Notice.count
     }.by(1)
   end
@@ -213,9 +213,9 @@ describe ErrorReport do
     error_report.generate_notice!
     error_report.problem.resolve!
 
-    expect {
+    expect do
       ErrorReport.new(xml).generate_notice!
-    }.to change {
+    end.to change {
       error_report.problem.reload.resolved?
     }.from(true).to(false)
   end
@@ -237,26 +237,26 @@ describe ErrorReport do
     end
 
     context "with xml without request section" do
-      let(:xml) {
+      let(:xml) do
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_without_request_section.xml').read
-      }
+      end
       it "save a notice" do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
     end
 
     context "with xml with only a single line of backtrace" do
-      let(:xml) {
+      let(:xml) do
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_one_line_of_backtrace.xml').read
-      }
+      end
       it "save a notice" do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end

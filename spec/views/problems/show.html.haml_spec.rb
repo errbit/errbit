@@ -1,7 +1,7 @@
 describe "problems/show.html.haml", type: 'view' do
   let(:problem) { Fabricate(:problem) }
   let(:comment) { Fabricate(:comment) }
-  let(:pivotal_tracker) {
+  let(:pivotal_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label
         'pivotal'
@@ -15,8 +15,8 @@ describe "problems/show.html.haml", type: 'view' do
         true
       end
     end
-  }
-  let(:github_tracker) {
+  end
+  let(:github_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label
         'github'
@@ -30,13 +30,13 @@ describe "problems/show.html.haml", type: 'view' do
         true
       end
     end
-  }
-  let(:trackers) {
+  end
+  let(:trackers) do
     {
       'github'  => github_tracker,
       'pivotal' => pivotal_tracker
     }
-  }
+  end
   let(:app) { AppDecorator.new(problem.app) }
 
   before do

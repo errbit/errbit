@@ -20,9 +20,9 @@ class ProblemDestroy
   #   the number of problem destroy
   #
   def self.execute(problems)
-    Array(problems).each { |problem|
+    Array(problems).each do |problem|
       ProblemDestroy.new(problem).execute
-    }.count
+    end.count
   end
 
 private
