@@ -104,19 +104,6 @@ Style/IfUnlessModifier:
     - 'app/models/notice.rb'
     - 'app/models/user.rb'
 
-# Offense count: 17
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Exclude:
-    - 'app/models/notification_services/gtalk_service.rb'
-    - 'spec/controllers/api/v1/notices_controller_spec.rb'
-    - 'spec/controllers/api/v1/problems_controller_spec.rb'
-    - 'spec/models/fabricators_spec.rb'
-    - 'spec/models/notification_service/campfire_service_spec.rb'
-    - 'spec/models/notification_service/gtalk_service_spec.rb'
-    - 'spec/models/notification_service/hoiio_service_spec.rb'
-    - 'spec/models/notification_service/pushover_service_spec.rb'
-
 # Offense count: 10
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

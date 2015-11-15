@@ -66,7 +66,7 @@ private
   end
 
   def send_to_muc(client, message)
-    #TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment
+    # TODO: set this so that it can send to multiple rooms like users, nb multiple room joins in one send fail randomly so leave as one room for the moment
     muc = Jabber::MUC::SimpleMUCClient.new(client)
     muc.join(room_id + "/errbit")
     muc.send(Jabber::Message.new(room_id, message))

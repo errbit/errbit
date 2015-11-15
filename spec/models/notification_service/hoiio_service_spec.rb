@@ -10,7 +10,7 @@ describe NotificationServices::HoiioService, type: 'model' do
     allow(Hoi::SMS).to receive(:new).and_return(sms)
     allow(sms).to receive(:send).and_return(true)
 
-    #assert
+    # assert
     expect(sms).to receive(:send)
 
     notification_service.create_notification(problem)

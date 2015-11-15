@@ -6,7 +6,7 @@ describe NotificationServices::GtalkService, type: 'model' do
     notification_service = Fabricate :gtalk_notification_service, app: notice.app
     problem = notice.problem
 
-    #gtalk stubbing
+    # gtalk stubbing
     gtalk = double('GtalkService')
     jid = double("jid")
     message = double("message")
@@ -24,7 +24,7 @@ describe NotificationServices::GtalkService, type: 'model' do
     expect(Jabber::MUC::SimpleMUCClient).to receive(:new).and_return(gtalk)
     expect(gtalk).to receive(:join).with(notification_service.room_id + "/errbit")
 
-    #assert
+    # assert
     expect(gtalk).to receive(:send).exactly(2).times.with(message)
     expect(gtalk).to receive(:close)
 
@@ -97,7 +97,7 @@ describe NotificationServices::GtalkService, type: 'model' do
     notification_service = Fabricate :gtalk_notification_service, app: notice.app
     problem = notice.problem
 
-    #gtalk stubbing
+    # gtalk stubbing
     gtalk = double('GtalkService')
     jid = double("jid")
     message = double("message")
@@ -116,7 +116,7 @@ describe NotificationServices::GtalkService, type: 'model' do
 
     notification_service.user_id = ""
 
-    #assert
+    # assert
     expect(gtalk).to receive(:send).with(message)
     expect(gtalk).to receive(:close)
 

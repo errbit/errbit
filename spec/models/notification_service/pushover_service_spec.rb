@@ -10,7 +10,7 @@ describe NotificationServices::PushoverService, type: 'model' do
     allow(Rushover::Client).to receive(:new).and_return(notification)
     allow(notification).to receive(:notify).and_return(true)
 
-    #assert
+    # assert
     expect(notification).to receive(:notify)
 
     notification_service.create_notification(problem)
