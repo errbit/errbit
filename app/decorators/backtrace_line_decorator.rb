@@ -66,9 +66,8 @@ private
   end
 
   def link_to_hosted_javascript(app, text)
-    if app.asset_host?
-      h.link_to(text, "#{app.asset_host}/#{file_relative}", target: '_blank')
-    end
+    return unless app.asset_host?
+    h.link_to(text, "#{app.asset_host}/#{file_relative}", target: '_blank')
   end
 
   def link_to_github(app, text = nil)

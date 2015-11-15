@@ -136,9 +136,9 @@ class ProblemsController < ApplicationController
   # Redirect :back if no errors selected
   #
   protected def need_selected_problem
-    if err_ids.empty?
-      flash[:notice] = I18n.t('controllers.problems.flash.no_select_problem')
-      redirect_to :back
-    end
+    return if err_ids.any?
+
+    flash[:notice] = I18n.t('controllers.problems.flash.no_select_problem')
+    redirect_to :back
   end
 end

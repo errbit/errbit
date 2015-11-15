@@ -203,12 +203,12 @@ protected
   end
 
   def check_issue_tracker
-    if issue_tracker.present?
-      issue_tracker.valid?
-      issue_tracker.errors.full_messages.each do |error|
-        errors[:base] << error
-      end if issue_tracker.errors
-    end
+    return if issue_tracker.blank?
+
+    issue_tracker.valid?
+    issue_tracker.errors.full_messages.each do |error|
+      errors[:base] << error
+    end if issue_tracker.errors
   end
 
   def normalize_github_repo
