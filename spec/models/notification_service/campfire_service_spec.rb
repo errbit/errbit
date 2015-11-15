@@ -5,12 +5,12 @@ describe NotificationServices::CampfireService, type: 'model' do
     notification_service = Fabricate :campfire_notification_service, app: notice.app
     problem = notice.problem
 
-    #campy stubbing
+    # campy stubbing
     campy = double('CampfireService')
     allow(Campy::Room).to receive(:new).and_return(campy)
     allow(campy).to receive(:speak).and_return(true)
 
-    #assert
+    # assert
     expect(campy).to receive(:speak)
 
     notification_service.create_notification(problem)

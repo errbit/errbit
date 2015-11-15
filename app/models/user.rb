@@ -38,12 +38,12 @@ class User
 
   before_save :ensure_authentication_token
 
-  validates_presence_of :name
-  validates_uniqueness_of :github_login, allow_nil: true
+  validates :name, presence: true
+  validates :github_login, uniqueness: { allow_nil: true }
 
   if Errbit::Config.user_has_username
     field :username
-    validates_presence_of :username
+    validates :username, presence: true
   end
 
   def per_page
@@ -67,9 +67,7 @@ class User
   end
 
   def github_login=(login)
-    if login.is_a?(String) && login.strip.empty?
-      login = nil
-    end
+    login = nil if login.is_a?(String) && login.strip.empty?
     self[:github_login] = login
   end
 

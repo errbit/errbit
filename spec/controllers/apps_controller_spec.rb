@@ -312,9 +312,9 @@ describe AppsController, type: 'controller' do
 
       it "should destroy the app" do
         delete :destroy, id: @app.id
-        expect {
+        expect do
           @app.reload
-        }.to raise_error(Mongoid::Errors::DocumentNotFound)
+        end.to raise_error(Mongoid::Errors::DocumentNotFound)
       end
 
       it "should display a message" do

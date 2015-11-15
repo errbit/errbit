@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def generate_ical(deploys)
-    RiCal.Calendar { |cal|
+    RiCal.Calendar do |cal|
       deploys.each_with_index do |deploy, idx|
         cal.event do |event|
           event.summary     = "#{idx + 1} #{deploy.repository}"
@@ -31,7 +31,7 @@ module ApplicationHelper
           event.organizer   = deploy.username.to_s
         end
       end
-    }.to_s
+    end.to_s
   end
 
   def user_agent_graph(problem)
@@ -57,7 +57,7 @@ module ApplicationHelper
     total   = (options[:total] || total_from_tallies(tallies))
     percent = 100.0 / total.to_f
     rows    = tallies.map { |value, count| [(count.to_f * percent), value] }. \
-                     sort { |a, b| b[0] <=> a[0] }
+      sort { |a, b| b[0] <=> a[0] }
     render "problems/tally_table", rows: rows
   end
 

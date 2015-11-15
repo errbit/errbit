@@ -164,13 +164,13 @@ describe App, type: 'model' do
 
   context '#find_or_create_err!' do
     let(:app) { Fabricate(:app) }
-    let(:conditions) {
+    let(:conditions) do
       {
         error_class: 'Whoops',
         environment: 'production',
         fingerprint: 'some-finger-print'
       }
-    }
+    end
 
     it 'returns the correct err if one already exists' do
       existing = Fabricate(
@@ -188,23 +188,23 @@ describe App, type: 'model' do
 
     it 'creates a new problem if a matching one does not already exist' do
       expect(Err.where(conditions).first).to be_nil
-      expect {
+      expect do
         app.find_or_create_err!(conditions)
-      }.to change(Problem, :count).by(1)
+      end.to change(Problem, :count).by(1)
     end
 
     context "without error_class" do
-      let(:conditions) {
+      let(:conditions) do
         {
           environment: 'production',
           fingerprint: 'some-finger-print'
         }
-      }
+      end
       it 'save the err' do
         expect(Err.where(conditions).first).to be_nil
-        expect {
+        expect do
           app.find_or_create_err!(conditions)
-        }.to change(Problem, :count).by(1)
+        end.to change(Problem, :count).by(1)
       end
     end
   end
@@ -215,9 +215,9 @@ describe App, type: 'model' do
       expect(App.find_by_api_key!(app.api_key)).to eq app
     end
     it 'raise Mongoid::Errors::DocumentNotFound if not found' do
-      expect {
+      expect do
         App.find_by_api_key!('foo')
-      }.to raise_error(Mongoid::Errors::DocumentNotFound)
+      end.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
   end
 end

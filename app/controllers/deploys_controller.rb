@@ -19,15 +19,15 @@ class DeploysController < ApplicationController
 private
 
   def default_deploy
-    if params[:deploy]
-      {
-        username:    params[:deploy][:local_username],
-        environment: params[:deploy][:rails_env],
-        repository:  params[:deploy][:scm_repository],
-        revision:    params[:deploy][:scm_revision],
-        message:     params[:deploy][:message]
-      }
-    end
+    return if params[:deploy].blank?
+
+    {
+      username:    params[:deploy][:local_username],
+      environment: params[:deploy][:rails_env],
+      repository:  params[:deploy][:scm_repository],
+      revision:    params[:deploy][:scm_revision],
+      message:     params[:deploy][:message]
+    }
   end
 
   # handle Heroku's HTTP post deployhook format

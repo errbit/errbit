@@ -1,27 +1,29 @@
 describe BacktraceDecorator, type: :decorator do
   let(:backtrace) do
-    described_class.new(Backtrace.new(
-      lines: [
-        { number: 131,
-          file:   '[PROJECT_ROOT]app/controllers/accounts_controller.rb',
-          method: :update_preferences },
-        { number: 61,
-          file:   '[PROJECT_ROOT]app/controllers/application_controller.rb',
-          method: :call },
-        { number: 182,
-          file:   '[GEM_ROOT]activesupport-2.3.18/lib/active_support/callbacks.rb',
-          method: :call },
-        { number: 384,
-          file:   '[PROJECT_ROOT]app/models/account.rb',
-          method: :update_server_tag_scope },
-        { number: 182,
-          file:   '[GEM_ROOT]activesupport-2.3.18/lib/active_support/callbacks.rb',
-          method: :evaluate_method },
-        { number: 23,
-          file:   '/home/rails/library/current/vendor/bundle/ruby/2.1.0/bin/rainbows',
-          method: '<main>' }
-      ]
-    ))
+    described_class.new(
+      Backtrace.new(
+        lines: [
+          { number: 131,
+            file:   '[PROJECT_ROOT]app/controllers/accounts_controller.rb',
+            method: :update_preferences },
+          { number: 61,
+            file:   '[PROJECT_ROOT]app/controllers/application_controller.rb',
+            method: :call },
+          { number: 182,
+            file:   '[GEM_ROOT]activesupport-2.3.18/lib/active_support/callbacks.rb',
+            method: :call },
+          { number: 384,
+            file:   '[PROJECT_ROOT]app/models/account.rb',
+            method: :update_server_tag_scope },
+          { number: 182,
+            file:   '[GEM_ROOT]activesupport-2.3.18/lib/active_support/callbacks.rb',
+            method: :evaluate_method },
+          { number: 23,
+            file:   '/home/rails/library/current/vendor/bundle/ruby/2.1.0/bin/rainbows',
+            method: '<main>' }
+        ]
+      )
+    )
   end
 
   describe '#grouped_lines' do

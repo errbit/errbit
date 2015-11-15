@@ -12,9 +12,10 @@ class Comment
 
   belongs_to :err, class_name: "Problem"
   belongs_to :user
-  delegate   :app, to: :err
 
-  validates_presence_of :body
+  delegate :app, to: :err
+
+  validates :body, presence: true
 
   def deliver_email
     Mailer.comment_notification(self).deliver_now

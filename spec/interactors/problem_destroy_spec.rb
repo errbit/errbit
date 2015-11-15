@@ -1,16 +1,16 @@
 describe ProblemDestroy do
-  let(:problem_destroy) {
+  let(:problem_destroy) do
     ProblemDestroy.new(problem)
-  }
+  end
 
   context "in unit way" do
-    let(:problem) {
+    let(:problem) do
       problem = Problem.new
       allow(problem).to receive(:errs).and_return(double(:criteria, only: [err_1, err_2]))
       allow(problem).to receive(:comments).and_return(double(:criteria, only: [comment_1, comment_2]))
       allow(problem).to receive(:delete)
       problem
-    }
+    end
     let(:err_1) { Err.new }
     let(:err_2) { Err.new }
 

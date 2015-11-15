@@ -29,9 +29,9 @@ Errbit::Config = Configurator.run(
   mongo_url:                 %w(MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
 
   # github
-  github_url:                ['GITHUB_URL', lambda { |values|
+  github_url:                ['GITHUB_URL', lambda do |values|
     values[:github_url].gsub(%r{/*\z}, '')
-  }],
+  end],
   github_authentication:     ['GITHUB_AUTHENTICATION'],
   github_client_id:          ['GITHUB_CLIENT_ID'],
   github_secret:             ['GITHUB_SECRET'],
@@ -40,9 +40,9 @@ Errbit::Config = Configurator.run(
   github_api_url:            ['GITHUB_API_URL'],
   github_site_title:         ['GITHUB_SITE_TITLE'],
 
-  email_delivery_method:     ['EMAIL_DELIVERY_METHOD', lambda { |values|
+  email_delivery_method:     ['EMAIL_DELIVERY_METHOD', lambda do |values|
     values[:email_delivery_method] && values[:email_delivery_method].to_sym
-  }],
+  end],
 
   # smtp settings
   smtp_address:              ['SMTP_SERVER'],
@@ -50,10 +50,10 @@ Errbit::Config = Configurator.run(
   smtp_authentication:       ['SMTP_AUTHENTICATION'],
   smtp_user_name:            %w(SMTP_USERNAME SENDGRID_USERNAME),
   smtp_password:             %w(SMTP_PASSWORD SENDGRID_PASSWORD),
-  smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', lambda { |values|
+  smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', lambda do |values|
     values[:smtp_domain] ||
     (values[:email_from] && values[:email_from].split('@').last) || nil
-  }],
+  end],
 
   # sendmail settings
   sendmail_location:         ['SENDMAIL_LOCATION'],

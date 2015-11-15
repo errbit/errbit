@@ -6,19 +6,19 @@ Fabricator(:problem) do
 end
 
 Fabricator(:problem_with_comments, from: :problem) do
-  after_create { |parent|
+  after_create do |parent|
     3.times do
       Fabricate(:comment, err: parent)
     end
-  }
+  end
 end
 
 Fabricator(:problem_with_errs, from: :problem) do
-  after_create { |parent|
+  after_create do |parent|
     3.times do
       Fabricate(:err, problem: parent)
     end
-  }
+  end
 end
 
 Fabricator(:problem_resolved, from: :problem) do

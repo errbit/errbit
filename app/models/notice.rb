@@ -24,7 +24,7 @@ class Notice
   before_save :sanitize
   before_destroy :problem_recache
 
-  validates_presence_of :backtrace_id, :server_environment, :notifier
+  validates :backtrace_id, :server_environment, :notifier, presence: true
 
   scope :ordered, -> { order_by(:created_at.asc) }
   scope :reverse_ordered, -> { order_by(:created_at.desc) }
@@ -107,15 +107,11 @@ class Notice
   # TODO: Move on decorator maybe
   #
   def project_root
-    if server_environment
-      server_environment['project-root'] || ''
-    end
+    server_environment['project-root'] || '' if server_environment
   end
 
   def app_version
-    if server_environment
-      server_environment['app-version'] || ''
-    end
+    server_environment['app-version'] || '' if server_environment
   end
 
   # filter memory addresses out of object strings

@@ -56,9 +56,9 @@ describe UsersController, type: 'controller' do
         end
 
         it "should not be able to become an admin" do
-          expect {
+          expect do
             put :update, id: user.to_param, user: { admin: true }
-          }.to_not change {
+          end.to_not change {
             user.reload.admin
           }.from(false)
         end
@@ -157,9 +157,9 @@ describe UsersController, type: 'controller' do
       end
 
       context "when the create is unsuccessful" do
-        let(:user) {
+        let(:user) do
           Struct.new(:admin, :attributes).new(true, {})
-        }
+        end
         before do
           expect(User).to receive(:new).and_return(user)
           expect(user).to receive(:save).and_return(false)
@@ -174,9 +174,9 @@ describe UsersController, type: 'controller' do
 
     context "PUT /users/:id" do
       context "when the update is successful" do
-        before {
+        before do
           put :update, id: user.to_param, user: user_params
-        }
+        end
 
         context "with normal params" do
           let(:user_params) { { name: 'Kermit' } }
@@ -198,10 +198,10 @@ describe UsersController, type: 'controller' do
       context "with a destroy success" do
         let(:user_destroy) { double(destroy: true) }
 
-        before {
+        before do
           expect(UserDestroy).to receive(:new).with(user).and_return(user_destroy)
           delete :destroy, id: user.id
-        }
+        end
 
         it 'should destroy user' do
           expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.destroy.success', name: user.name)
@@ -210,10 +210,10 @@ describe UsersController, type: 'controller' do
       end
 
       context "with trying destroy himself" do
-        before {
+        before do
           expect(UserDestroy).to_not receive(:new)
           delete :destroy, id: admin.id
-        }
+        end
 
         it 'should not destroy user' do
           expect(response).to redirect_to(users_path)
@@ -224,12 +224,12 @@ describe UsersController, type: 'controller' do
 
     describe "#user_params" do
       context "with current user not admin" do
-        before {
+        before do
           allow(controller).to receive(:current_user).and_return(user)
           allow(controller).to receive(:params).and_return(
             ActionController::Parameters.new(user_param)
           )
-        }
+        end
         let(:user_param) { { 'user' => { name: 'foo', admin: true } } }
         it 'not have admin field' do
           expect(controller.send(:user_params)).to eq('name' => 'foo')

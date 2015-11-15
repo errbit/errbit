@@ -35,9 +35,7 @@ class App
   before_save :normalize_github_repo
   after_update :store_cached_attributes_on_problems
 
-  validates_presence_of :name, :api_key
-  validates_uniqueness_of :name, allow_blank: true
-  validates_uniqueness_of :api_key, allow_blank: true
+  validates :name, :api_key, presence: true, uniqueness: { allow_blank: true }
   validates_associated :watchers
   validates_associated :notice_fingerprinter
   validate :check_issue_tracker
@@ -154,16 +152,17 @@ class App
 
   # Copy app attributes from another app.
   def copy_attributes_from(app_id)
-    if (copy_app = App.where(_id: app_id).first)
-      # Copy fields
-      (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
-        send("#{k}=", copy_app.send(k))
-      end
-      # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
-      %w(watchers issue_tracker notification_service).each do |relation|
-        if (obj = copy_app.send(relation))
-          send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
-        end
+    copy_app = App.where(_id: app_id).first
+    return if copy_app.blank?
+
+    # Copy fields
+    (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
+      send("#{k}=", copy_app.send(k))
+    end
+    # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
+    %w(watchers issue_tracker notification_service).each do |relation|
+      if (obj = copy_app.send(relation))
+        send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
       end
     end
   end
@@ -179,8 +178,8 @@ class App
   # Compare by number of unresolved errs, then problem counts.
   def <=>(other)
     (other.unresolved_count <=> unresolved_count).nonzero? ||
-    (other.problem_count <=> problem_count).nonzero? ||
-    name <=> other.name
+      (other.problem_count <=> problem_count).nonzero? ||
+      name <=> other.name
   end
 
   def email_at_notices
@@ -204,12 +203,12 @@ protected
   end
 
   def check_issue_tracker
-    if issue_tracker.present?
-      issue_tracker.valid?
-      issue_tracker.errors.full_messages.each do |error|
-        errors[:base] << error
-      end if issue_tracker.errors
-    end
+    return if issue_tracker.blank?
+
+    issue_tracker.valid?
+    issue_tracker.errors.full_messages.each do |error|
+      errors[:base] << error
+    end if issue_tracker.errors
   end
 
   def normalize_github_repo

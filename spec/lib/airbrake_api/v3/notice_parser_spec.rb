@@ -2,13 +2,13 @@ describe AirbrakeApi::V3::NoticeParser do
   let(:app) { Fabricate(:app) }
 
   it 'raises error when errors attribute is missing' do
-    expect {
+    expect do
       AirbrakeApi::V3::NoticeParser.new({}).report
-    }.to raise_error(AirbrakeApi::ParamsError)
+    end.to raise_error(AirbrakeApi::ParamsError)
 
-    expect {
+    expect do
       AirbrakeApi::V3::NoticeParser.new('errors' => []).report
-    }.to raise_error(AirbrakeApi::ParamsError)
+    end.to raise_error(AirbrakeApi::ParamsError)
   end
 
   it 'parses JSON payload and returns ErrorReport' do

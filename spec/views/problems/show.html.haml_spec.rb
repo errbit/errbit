@@ -1,7 +1,7 @@
 describe "problems/show.html.haml", type: 'view' do
   let(:problem) { Fabricate(:problem) }
   let(:comment) { Fabricate(:comment) }
-  let(:pivotal_tracker) {
+  let(:pivotal_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label
         'pivotal'
@@ -15,8 +15,8 @@ describe "problems/show.html.haml", type: 'view' do
         true
       end
     end
-  }
-  let(:github_tracker) {
+  end
+  let(:github_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label
         'github'
@@ -30,13 +30,13 @@ describe "problems/show.html.haml", type: 'view' do
         true
       end
     end
-  }
-  let(:trackers) {
+  end
+  let(:trackers) do
     {
       'github'  => github_tracker,
       'pivotal' => pivotal_tracker
     }
-  }
+  end
   let(:app) { AppDecorator.new(problem.app) }
 
   before do
@@ -66,13 +66,23 @@ describe "problems/show.html.haml", type: 'view' do
 
     it "should confirm the 'resolve' link by default" do
       render
-      expect(action_bar).to have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
+      expect(action_bar).to have_selector(
+        format(
+          'a.resolve[data-confirm="%s"]',
+          I18n.t('problems.confirm.resolve_one')
+        )
+      )
     end
 
     it "should confirm the 'resolve' link if configuration is unset" do
       allow(Errbit::Config).to receive(:confirm_err_actions).and_return(nil)
       render
-      expect(action_bar).to have_selector('a.resolve[data-confirm="%s"]' % I18n.t('problems.confirm.resolve_one'))
+      expect(action_bar).to have_selector(
+        format(
+          'a.resolve[data-confirm="%s"]',
+          I18n.t('problems.confirm.resolve_one')
+        )
+      )
     end
 
     it "should not confirm the 'resolve' link if configured not to" do

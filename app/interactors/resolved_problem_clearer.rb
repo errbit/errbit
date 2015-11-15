@@ -5,14 +5,14 @@ class ResolvedProblemClearer
   # Clear all problem already resolved
   #
   def execute
-    nb_problem_resolved.tap { |nb|
+    nb_problem_resolved.tap do |nb|
       if nb > 0
         criteria.each do |problem|
           ProblemDestroy.new(problem).execute
         end
         repair_database
       end
-    }
+    end
   end
 
 private

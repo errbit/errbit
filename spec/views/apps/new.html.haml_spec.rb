@@ -21,11 +21,11 @@ describe "apps/new.html.haml", type: 'view' do
   end
 
   context "with unvalid app" do
-    let(:app) {
+    let(:app) do
       app = stub_model(App)
       app.errors.add(:base, 'You must specify your')
       app
-    }
+    end
 
     it 'see the error' do
       render

@@ -50,15 +50,21 @@ describe IssueTrackerDecorator do
 
   describe "#params_class" do
     it 'adds the label in class' do
-      tracker = IssueTrackerDecorator.new(IssueTracker.new(
-        type_tracker: 'none'))
+      tracker = IssueTrackerDecorator.new(
+        IssueTracker.new(type_tracker: 'none')
+      )
       expect(decorator.params_class(tracker)).to eql 'fake'
     end
 
     it 'adds chosen class if type is same' do
-      expect(decorator.params_class(
-        IssueTracker.new(type_tracker: 'fake').decorate
-      )).to eql 'chosen fake'
+      expect(
+        decorator.
+          params_class(
+            IssueTracker.new(
+              type_tracker: 'fake'
+            ).decorate
+          )
+      ).to eql 'chosen fake'
     end
   end
 end

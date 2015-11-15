@@ -22,11 +22,15 @@ module Hoptoad
         elsif node.key?('key')
           { normalize_key(node['key']) => nil }
         else
-          node.inject({}) { |rekeyed, (key, val)| rekeyed.merge(normalize_key(key) => rekey(val)) }
+          node.inject({}) do |rekeyed, (key, val)|
+            rekeyed.merge(normalize_key(key) => rekey(val))
+          end
         end
       when Array
         if node.first.key?('key')
-          node.inject({}) { |rekeyed, keypair| rekeyed.merge(rekey(keypair)) }
+          node.inject({}) do |rekeyed, keypair|
+            rekeyed.merge(rekey(keypair))
+          end
         else
           node.map { |n| rekey(n) }
         end

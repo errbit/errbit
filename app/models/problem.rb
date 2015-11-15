@@ -53,7 +53,8 @@ class Problem
   has_many :errs, inverse_of: :problem, dependent: :destroy
   has_many :comments, inverse_of: :err, dependent: :destroy
 
-  validates_presence_of :environment
+  validates :environment, presence: true
+  validates :last_notice_at, :first_notice_at, presence: true
 
   before_create :cache_app_attributes
   before_save :truncate_message
@@ -62,8 +63,6 @@ class Problem
   scope :unresolved, -> { where(resolved: false) }
   scope :ordered, -> { order_by(:last_notice_at.desc) }
   scope :for_apps, ->(apps) { where(:app_id.in => apps.all.map(&:id)) }
-
-  validates_presence_of :last_notice_at, :first_notice_at
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all

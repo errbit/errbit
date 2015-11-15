@@ -4,9 +4,9 @@ Fabricator(:app) do
 end
 
 Fabricator(:app_with_watcher, from: :app) do
-  watchers(count: 1) { |parent, _i|
+  watchers(count: 1) do |parent, _i|
     Fabricate.build(:watcher, app: parent)
-  }
+  end
 end
 
 Fabricator(:watcher) do
@@ -22,8 +22,8 @@ end
 
 Fabricator(:deploy) do
   app
-  username      'clyde.frog'
-  repository    'git@github.com/errbit/errbit.git'
-  environment   'production'
-  revision      { SecureRandom.hex(10) }
+  username 'clyde.frog'
+  repository 'git@github.com/errbit/errbit.git'
+  environment 'production'
+  revision { SecureRandom.hex(10) }
 end

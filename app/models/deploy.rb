@@ -16,7 +16,7 @@ class Deploy
   after_create :store_cached_attributes_on_problems
   after_create :deliver_email
 
-  validates_presence_of :username, :environment
+  validates :username, :environment, presence: true
 
   def resolve_app_errs
     app.problems.unresolved.in_env(environment).each(&:resolve!)
