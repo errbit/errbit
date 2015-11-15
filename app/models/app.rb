@@ -35,9 +35,7 @@ class App
   before_save :normalize_github_repo
   after_update :store_cached_attributes_on_problems
 
-  validates_presence_of :name, :api_key
-  validates_uniqueness_of :name, allow_blank: true
-  validates_uniqueness_of :api_key, allow_blank: true
+  validates :name, :api_key, presence: true, uniqueness: { allow_blank: true }
   validates_associated :watchers
   validates_associated :notice_fingerprinter
   validate :check_issue_tracker

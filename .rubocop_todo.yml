@@ -41,18 +41,6 @@ Rails/Output:
     - 'app/interactors/problem_recacher.rb'
     - 'db/seeds.rb'
 
-# Offense count: 12
-# Configuration parameters: Include.
-Rails/Validation:
-  Exclude:
-    - 'app/models/app.rb'
-    - 'app/models/comment.rb'
-    - 'app/models/deploy.rb'
-    - 'app/models/err.rb'
-    - 'app/models/notice.rb'
-    - 'app/models/problem.rb'
-    - 'app/models/user.rb'
-
 # Offense count: 105
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.

@@ -14,7 +14,7 @@ class Comment
   belongs_to :user
   delegate   :app, to: :err
 
-  validates_presence_of :body
+  validates :body, presence: true
 
   def deliver_email
     Mailer.comment_notification(self).deliver_now
