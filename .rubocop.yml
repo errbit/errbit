@@ -49,3 +49,7 @@ Style/SpaceAroundOperators:
     - '=>'
     - '||='
     - 'then'
+
+Style/FileName:
+  Exclude:
+    - 'config/initializers/cve-*.rb'
