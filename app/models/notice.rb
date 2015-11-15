@@ -107,15 +107,11 @@ class Notice
   # TODO: Move on decorator maybe
   #
   def project_root
-    if server_environment
-      server_environment['project-root'] || ''
-    end
+    server_environment['project-root'] || '' if server_environment
   end
 
   def app_version
-    if server_environment
-      server_environment['app-version'] || ''
-    end
+    server_environment['app-version'] || '' if server_environment
   end
 
   # filter memory addresses out of object strings

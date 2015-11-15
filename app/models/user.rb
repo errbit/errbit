@@ -67,9 +67,7 @@ class User
   end
 
   def github_login=(login)
-    if login.is_a?(String) && login.strip.empty?
-      login = nil
-    end
+    login = nil if login.is_a?(String) && login.strip.empty?
     self[:github_login] = login
   end
 

@@ -93,17 +93,6 @@ Style/FileName:
 Style/GuardClause:
   Enabled: false
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: MaxLineLength.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'app/controllers/api/v1/stats_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/problems_controller.rb'
-    - 'app/models/notice.rb'
-    - 'app/models/user.rb'
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
