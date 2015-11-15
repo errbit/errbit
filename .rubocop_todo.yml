@@ -116,17 +116,6 @@ Style/SingleLineBlockParams:
   Exclude:
     - 'lib/hoptoad/v2.rb'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Exclude:
-    - 'app/models/comment.rb'
-    - 'config/application.rb'
-    - 'spec/fabricators/app_fabricator.rb'
-    - 'spec/fabricators/comment_fabricator.rb'
-    - 'spec/fabricators/notice_fabricator.rb'
-    - 'spec/fabricators/user_fabricator.rb'
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
