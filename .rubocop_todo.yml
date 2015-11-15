@@ -88,15 +88,6 @@ Style/FileName:
     - 'config/initializers/cve-2013-0156.rb'
     - 'script/rspec-queue-mongoid.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/FirstParameterIndentation:
-  Exclude:
-    - 'app/models/issue_tracker.rb'
-    - 'spec/decorators/backtrace_decorator_spec.rb'
-    - 'spec/decorators/issue_tracker_type_decorator_spec.rb'
-
 # Offense count: 8
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/FormatString:
