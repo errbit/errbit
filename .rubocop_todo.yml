@@ -110,16 +110,6 @@ Style/IfUnlessModifier:
 Style/MultilineOperationIndentation:
   Enabled: false
 
-# Offense count: 5
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'app/controllers/api/v1/notices_controller.rb'
-    - 'app/controllers/api/v1/problems_controller.rb'
-    - 'app/controllers/problems_searcher.rb'
-    - 'spec/models/notice_spec.rb'
-
 # Offense count: 1
 # Configuration parameters: Methods.
 Style/SingleLineBlockParams:

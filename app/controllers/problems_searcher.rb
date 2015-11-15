@@ -6,7 +6,7 @@ module ProblemsSearcher
 
   included do
     expose(:params_sort) {
-      if %w{app message last_notice_at last_deploy_at count}.member?(params[:sort])
+      if %w(app message last_notice_at last_deploy_at count).member?(params[:sort])
         params[:sort]
       else
         "last_notice_at"
@@ -14,7 +14,7 @@ module ProblemsSearcher
     }
 
     expose(:params_order) {
-      if %w{asc desc}.member?(params[:order])
+      if %w(asc desc).member?(params[:order])
         params[:order]
       else
         'desc'
