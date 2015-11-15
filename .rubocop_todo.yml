@@ -75,11 +75,6 @@ Style/EachWithObject:
     - 'app/models/notice_fingerprinter.rb'
     - 'lib/recurse.rb'
 
-# Offense count: 27
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Enabled: false
-
 # Offense count: 873
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

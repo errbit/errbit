@@ -152,16 +152,17 @@ class App
 
   # Copy app attributes from another app.
   def copy_attributes_from(app_id)
-    if (copy_app = App.where(_id: app_id).first)
-      # Copy fields
-      (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
-        send("#{k}=", copy_app.send(k))
-      end
-      # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
-      %w(watchers issue_tracker notification_service).each do |relation|
-        if (obj = copy_app.send(relation))
-          send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
-        end
+    copy_app = App.where(_id: app_id).first
+    return if copy_app.blank?
+
+    # Copy fields
+    (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
+      send("#{k}=", copy_app.send(k))
+    end
+    # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
+    %w(watchers issue_tracker notification_service).each do |relation|
+      if (obj = copy_app.send(relation))
+        send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
       end
     end
   end

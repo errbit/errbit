@@ -93,13 +93,16 @@ class AppsController < ApplicationController
 protected
 
   def initialize_subclassed_notification_service
+    notification_type = params[:app].
+      fetch(:notification_service_attributes, {}).
+      fetch(:type, nil)
+    return if notification_type.blank?
+
     # set the app's notification service
-    if params[:app][:notification_service_attributes] && (notification_type = params[:app][:notification_service_attributes][:type])
-      available_notification_classes = [NotificationService] + NotificationService.subclasses
-      notification_class = available_notification_classes.detect { |c| c.name == notification_type }
-      if notification_class.present?
-        app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
-      end
+    available_notification_classes = [NotificationService] + NotificationService.subclasses
+    notification_class = available_notification_classes.detect { |c| c.name == notification_type }
+    if notification_class.present?
+      app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
     end
   end
 
@@ -112,32 +115,38 @@ protected
 
   # email_at_notices is edited as a string, and stored as an array.
   def parse_email_at_notices_or_set_default
-    if params[:app] && (val = params[:app][:email_at_notices])
-      # Sanitize negative values, split on comma,
-      # strip, parse as integer, remove all '0's.
-      # If empty, set as default and show an error message.
-      email_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }.reject { |v| v == 0 }
-      if email_at_notices.any?
-        params[:app][:email_at_notices] = email_at_notices
-      else
-        default_array = params[:app][:email_at_notices] = Errbit::Config.email_at_notices
-        flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
-      end
+    return if params[:app].blank?
+
+    val = params[:app][:email_at_notices]
+    return if val.blank?
+
+    # Sanitize negative values, split on comma,
+    # strip, parse as integer, remove all '0's.
+    # If empty, set as default and show an error message.
+    email_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }.reject { |v| v == 0 }
+    if email_at_notices.any?
+      params[:app][:email_at_notices] = email_at_notices
+    else
+      default_array = params[:app][:email_at_notices] = Errbit::Config.email_at_notices
+      flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
     end
   end
 
   def parse_notice_at_notices_or_set_default
-    if params[:app][:notification_service_attributes] && (val = params[:app][:notification_service_attributes][:notify_at_notices])
-      # Sanitize negative values, split on comma,
-      # strip, parse as integer, remove all '0's.
-      # If empty, set as default and show an error message.
-      notify_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }
-      if notify_at_notices.any?
-        params[:app][:notification_service_attributes][:notify_at_notices] = notify_at_notices
-      else
-        default_array = params[:app][:notification_service_attributes][:notify_at_notices] = Errbit::Config.notify_at_notices
-        flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
-      end
+    return if params[:app][:notification_service_attributes].blank?
+
+    val = params[:app][:notification_service_attributes][:notify_at_notices]
+    return if val.blank?
+
+    # Sanitize negative values, split on comma,
+    # strip, parse as integer, remove all '0's.
+    # If empty, set as default and show an error message.
+    notify_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }
+    if notify_at_notices.any?
+      params[:app][:notification_service_attributes][:notify_at_notices] = notify_at_notices
+    else
+      default_array = params[:app][:notification_service_attributes][:notify_at_notices] = Errbit::Config.notify_at_notices
+      flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
     end
   end
 

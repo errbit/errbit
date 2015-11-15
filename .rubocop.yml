@@ -23,6 +23,9 @@ Style/IndentationConsistency:
   # modifiers.
   EnforcedStyle: rails
 
+Style/GuardClause:
+  MinBodyLength: 10
+
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent
 
