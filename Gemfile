@@ -30,7 +30,7 @@ gem 'draper'
 
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
-gem 'errbit_redmine_plugin', github: 'jesenko/errbit_redmine_plugin'
+gem 'errbit_redmine_plugin'
 
 gem 'dotenv-rails'
 

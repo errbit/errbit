@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/jesenko/errbit_redmine_plugin.git
-  revision: c55550eb31dff963ebfab0faff56d4f765591f2c
-  specs:
-    errbit_redmine_plugin (0.3.0)
-      errbit_plugin (~> 0)
-      oruen_redmine_client (~> 0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -132,6 +124,9 @@ GEM
       errbit_plugin
       octokit
     errbit_plugin (0.5.0)
+    errbit_redmine_plugin (0.4.0)
+      errbit_plugin (~> 0)
+      oruen_redmine_client (~> 0)
     erubis (2.7.0)
     execjs (2.5.2)
     fabrication (2.13.2)
@@ -186,7 +181,7 @@ GEM
     mime-types (2.6.1)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.7.0)
+    minitest (5.8.3)
     mongoid (4.0.2)
       activemodel (~> 4.0)
       moped (~> 2.0.0)
@@ -434,7 +429,7 @@ DEPENDENCIES
   email_spec
   errbit_github_plugin
   errbit_plugin
-  errbit_redmine_plugin!
+  errbit_redmine_plugin
   fabrication
   flowdock
   haml
@@ -479,3 +474,6 @@ DEPENDENCIES
   useragent
   xmpp4r
   yajl-ruby
+
+BUNDLED WITH
+   1.10.6
