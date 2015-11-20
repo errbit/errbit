@@ -6,34 +6,28 @@ class Api::V1::StatsController < ApplicationController
   before_action :require_api_key_or_authenticate_user!
 
   def app
-    if problem = @app.problems.order_by(:last_notice_at.desc).first
+    if (problem = @app.problems.order_by(:last_notice_at.desc).first)
       @last_error_time = problem.last_notice_at
     end
 
     stats = {
-      :name => @app.name,
-      :id => @app.id,
-      :last_error_time => @last_error_time,
-      :unresolved_errors => @app.unresolved_count
+      name:              @app.name,
+      id:                @app.id,
+      last_error_time:   @last_error_time,
+      unresolved_errors: @app.unresolved_count
     }
 
     respond_to do |format|
-      format.any(:html, :json) { render :json => JSON.dump(stats) } # render JSON if no extension specified on path
-      format.xml  { render :xml  => stats }
+      format.any(:html, :json) { render json: JSON.dump(stats) } # render JSON if no extension specified on path
+      format.xml { render xml: stats }
     end
   end
 
-
-  protected
-
-  def require_api_key_or_authenticate_user!
+  protected def require_api_key_or_authenticate_user!
     if params[:api_key].present?
-      if @app = App.where(:api_key => params[:api_key]).first
-        return true
-      end
+      return true if (@app = App.where(api_key: params[:api_key]).first)
     end
 
     authenticate_user!
   end
-
 end

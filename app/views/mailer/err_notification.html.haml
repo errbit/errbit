@@ -27,9 +27,10 @@
               %p.heading WHERE:
               %p.monospace
                 = @notice.where
-              - @notice.in_app_backtrace_lines.each do |line|
+              - @notice.backtrace.lines.each do |line|
+                - next unless line.in_app?
                 %p.backtrace
-                  = link_to_source_file(line) do
+                  = line.link_to_source_file(@app) do
                     = line.to_s
               %br
               - if @notice.app_version.present?
@@ -59,11 +60,11 @@
                       %td(style="text-align: right; padding-right: 10px; color: #6a6a6a;")= key.to_s.titleize + ":"
                       %td= auto_link(value.to_s)
                 %br
-              - if @notice.backtrace_lines.any?
+              - if @notice.backtrace.lines.any?
                 %br
                 %p.heading FULL BACKTRACE:
-                - @notice.backtrace_lines.each do |line|
+                - @notice.backtrace.lines.each do |line|
                   %p.backtrace
-                    = link_to_source_file(line) do
+                    = line.link_to_source_file(@app) do
                       = line.to_s
                 %br

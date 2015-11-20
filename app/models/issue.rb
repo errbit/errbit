@@ -14,7 +14,7 @@ class Issue
     if tracker.respond_to?(:render_body_args)
       tracker.render_body_args
     else
-      [ 'issue_trackers/issue', formats: [:md] ]
+      ['issue_trackers/issue', formats: [:md]]
     end
   end
 
@@ -22,7 +22,7 @@ class Issue
     if tracker.respond_to?(:title)
       tracker.title
     else
-      "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+      "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
     end
   end
 

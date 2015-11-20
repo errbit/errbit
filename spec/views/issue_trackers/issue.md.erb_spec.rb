@@ -1,12 +1,12 @@
 describe "issue_trackers/issue.md.erb", type: 'view' do
-  let(:problem) {
+  let(:problem) do
     problem = Fabricate(:problem)
-    Fabricate(:notice, :err => Fabricate(:err, :problem => problem))
+    Fabricate(:notice, err: Fabricate(:err, problem: problem))
     problem
-  }
+  end
 
   before do
-    allow(view).to receive(:problem).and_return(problem)
+    allow(view).to receive(:problem).and_return(ProblemDecorator.new(problem))
   end
 
   it "has the problem url" do

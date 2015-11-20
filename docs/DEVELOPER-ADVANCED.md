@@ -15,7 +15,7 @@ gem install test-queue
 After you just need launch the script with adapting runner of mongoid.
 
 ```
-./script/rspec-queue-mongoid.rb spec
+./script/rspec_queue_mongoid.rb spec
 ```
 
 In my case, the complete test suite down to 2min after a 16min long

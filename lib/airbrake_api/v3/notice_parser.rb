@@ -11,23 +11,23 @@ module AirbrakeApi
 
       def report
         attributes = {
-          error_class: error['type'],
-          message: error['message'],
-          backtrace: backtrace,
-          request: request,
+          error_class:        error['type'],
+          message:            error['message'],
+          backtrace:          backtrace,
+          request:            request,
           server_environment: server_environment,
-          api_key: params['key'].present? ? params['key'] : params['project_id'],
-          notifier: params['notifier'],
-          user_attributes: user_attributes
+          api_key:            params['key'].present? ? params['key'] : params['project_id'],
+          notifier:           params['notifier'],
+          user_attributes:    user_attributes
         }
 
         ErrorReport.new(attributes)
       end
 
-      private
+    private
 
       def error
-        raise AirbrakeApi::ParamsError unless params.has_key?('errors') && params['errors'].any?
+        fail AirbrakeApi::ParamsError unless params.key?('errors') && params['errors'].any?
         @error ||= params['errors'].first
       end
 
@@ -35,7 +35,7 @@ module AirbrakeApi
         (error['backtrace'] || []).map do |backtrace_line|
           {
             method: backtrace_line['function'],
-            file: backtrace_line['file'],
+            file:   backtrace_line['file'],
             number: backtrace_line['line'],
             column: backtrace_line['column']
           }
@@ -45,9 +45,9 @@ module AirbrakeApi
       def server_environment
         {
           'environment-name' => context['environment'],
-          'hostname' => hostname,
-          'project-root' => context['rootDirectory'],
-          'app-version' => context['version']
+          'hostname'         => hostname,
+          'project-root'     => context['rootDirectory'],
+          'app-version'      => context['version']
         }
       end
 
@@ -57,12 +57,12 @@ module AirbrakeApi
         )
 
         {
-          'cgi-data' => environment,
-          'session' => params['session'],
-          'params' => params['params'],
-          'url' => url,
+          'cgi-data'  => environment,
+          'session'   => params['session'],
+          'params'    => params['params'],
+          'url'       => url,
           'component' => context['component'],
-          'action' => context['action']
+          'action'    => context['action']
         }
       end
 

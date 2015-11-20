@@ -2,13 +2,13 @@ describe AirbrakeApi::V3::NoticeParser do
   let(:app) { Fabricate(:app) }
 
   it 'raises error when errors attribute is missing' do
-    expect {
+    expect do
       AirbrakeApi::V3::NoticeParser.new({}).report
-    }.to raise_error(AirbrakeApi::ParamsError)
+    end.to raise_error(AirbrakeApi::ParamsError)
 
-    expect {
-      AirbrakeApi::V3::NoticeParser.new({'errors' => []}).report
-    }.to raise_error(AirbrakeApi::ParamsError)
+    expect do
+      AirbrakeApi::V3::NoticeParser.new('errors' => []).report
+    end.to raise_error(AirbrakeApi::ParamsError)
   end
 
   it 'parses JSON payload and returns ErrorReport' do
@@ -20,12 +20,17 @@ describe AirbrakeApi::V3::NoticeParser do
     expect(report.error_class).to eq('Error')
     expect(report.message).to eq('Error: TestError')
     expect(report.backtrace.lines.size).to eq(9)
-    expect(notice.user_attributes).to include({'Id' => 1, 'Name' => 'John Doe', 'Email' => 'john.doe@example.org', 'Username' => 'john'})
+    expect(notice.user_attributes).to include(
+      'Id'       => 1,
+      'Name'     => 'John Doe',
+      'Email'    => 'john.doe@example.org',
+      'Username' => 'john'
+    )
     expect(notice.session).to include('isAdmin' => true)
     expect(notice.params).to include('returnTo' => 'dashboard')
     expect(notice.env_vars).to include(
       'navigator_vendor' => 'Google Inc.',
-      'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'
+      'HTTP_USER_AGENT'  => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'
     )
   end
 
@@ -42,7 +47,7 @@ describe AirbrakeApi::V3::NoticeParser do
     params['key'] = app.api_key
 
     report = AirbrakeApi::V3::NoticeParser.new(params).report
-    notice = report.generate_notice!
+    report.generate_notice!
 
     expect(report.error_class).to eq('Error')
     expect(report.message).to eq('Error: TestError')
@@ -53,8 +58,8 @@ describe AirbrakeApi::V3::NoticeParser do
     json = Rails.root.join('spec', 'fixtures', 'api_v3_request.json').read
     data = JSON.parse(json)
 
-    data['key'] = options[:key] if options.has_key?(:key)
-    data['project_id'] = options[:project_id] if options.has_key?(:project_id)
+    data['key'] = options[:key] if options.key?(:key)
+    data['project_id'] = options[:project_id] if options.key?(:project_id)
 
     data
   end

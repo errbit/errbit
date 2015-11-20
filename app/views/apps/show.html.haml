@@ -19,8 +19,11 @@
   - else
     = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'button'
 
-  - if current_user.watching?(app)
-    = link_to t('.unwatch'), app_watcher_path({app_id: app, id: current_user.id}), method: :delete, class: 'button', data: {confirm: t('.are_you_sure')}
+  - if app.watched_by?(current_user)
+    = link_to t('.unwatch'), app_watcher_path(app_id: app, id: current_user.id), method: :delete, class: 'button'
+  - else
+    = link_to t('.watch'), app_watcher_path(app_id: app, id: current_user.id), method: :put, class: 'button'
+
 %h3#watchers_toggle
   =t('.watchers')
   %span.click_span=t('.show_hide')
@@ -88,7 +91,7 @@
 - if app.problems.any?
   %h3.clear=t('.errors')
   %section
-    = render 'problems/search', :all_errs => @all_errs, :app_id => app.id
+    = render 'problems/search', :all_errs => all_errs, :app_id => app.id
   %br
   %section
     .problem_table{:id => 'problem_table'}

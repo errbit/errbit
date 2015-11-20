@@ -4,9 +4,9 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
     request.env["devise.mapping"] = Devise.mappings[:user]
     env = {
       "omniauth.auth" => Hashie::Mash.new(
-        :provider => 'github',
-        :extra => { :raw_info => { :login => login }},
-        :credentials => { :token => token }
+        provider:    'github',
+        extra:       { raw_info: { login: login } },
+        credentials: { token: token }
       )
     }
     allow(@controller).to receive(:env).and_return(env)
@@ -18,7 +18,7 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
     end
 
     it "should show an error if another user already has that github login" do
-      Fabricate(:user, :github_login => "existing_user")
+      Fabricate(:user, github_login: "existing_user")
       stub_env_for_github_omniauth("existing_user")
       get :github
 

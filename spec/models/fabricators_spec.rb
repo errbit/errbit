@@ -5,12 +5,12 @@ Fabrication::Config.fabricator_path.each do |folder|
 end
 
 describe "Fabrication" do
-  #TODO : when 1.8.7 drop support se directly Symbol#sort
+  # TODO : when 1.8.7 drop support se directly Symbol#sort
   Fabrication.manager.schematics.keys.sort.each do |fabricator_name|
     context "Fabricate(:#{fabricator_name})" do
       subject { Fabricate.build(fabricator_name) }
 
-      it { should be_valid }
+      it { is_expected.to be_valid }
     end
   end
 end

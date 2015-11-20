@@ -16,6 +16,6 @@ Env:     <%= pretty_hash notice.env_vars %>
 
 Backtrace
 ---------
-<% notice.backtrace_lines.each do |line| %><%= sprintf('%5d: %s **%s', line.number, line.file_relative, line.method) %>
+<% notice.backtrace.lines.each do |line| %><%= sprintf('%5d: %s **%s', line.number, line.file_relative, line.method) %>
 <% end %>
 <% end %>

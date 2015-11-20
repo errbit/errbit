@@ -1,3 +1,8 @@
+log_level = Logger.const_get Errbit::Config.log_level.upcase
+
+Mongoid.logger.level = log_level
+Mongo::Logger.level = log_level
+
 Mongoid.configure do |config|
   uri = if Errbit::Config.mongo_url == 'mongodb://localhost'
           "mongodb://localhost/errbit_#{Rails.env}"
@@ -5,8 +10,8 @@ Mongoid.configure do |config|
           Errbit::Config.mongo_url
         end
 
-  config.load_configuration({
-    sessions: {
+  config.load_configuration(
+    clients: {
       default: {
         uri: uri
       }
@@ -14,5 +19,5 @@ Mongoid.configure do |config|
     options: {
       use_activesupport_time_zone: true
     }
-  })
+  )
 end

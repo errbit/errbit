@@ -84,6 +84,8 @@ en:
     confirm_delete: "Permanently delete this comment?"
   users:
     confirm_delete: "Permanently delete this user?"
+    index:
+      new: Add a New User
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
@@ -124,6 +126,7 @@ en:
       unresolved_errs: unresolved errors
       unwatch: unwatch
       user_or_email: User or Email
+      watch: watch
       watchers: Watchers
       when:  When
       who: Who
@@ -139,4 +142,8 @@ en:
       cancel: 'cancel'
       seriously: 'Seriously?'
       update: 'Update App'
-
+  watchers:
+    destroy:
+      success: "You are no longer watching %{app}"
+    update:
+      success: "You are now watching %{app}"

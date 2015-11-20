@@ -4,7 +4,6 @@ require 'ostruct'
 # order to provide a consistent way to use configuration throughout your
 # application
 class Configurator
-
   # Run the configurator and return the processed values
   #
   # @example Simple mapping
@@ -39,7 +38,7 @@ class Configurator
   #   a list of environment variables to scan for configuration
   # @return OpenStruct configuration object
   def self.run(mapping)
-    reader = self.new(mapping)
+    reader = new(mapping)
     reader.read
   end
 

@@ -5,26 +5,25 @@ Fabricator(:problem) do
   environment 'production'
 end
 
-Fabricator(:problem_with_comments, :from => :problem) do
-  after_create { |parent|
+Fabricator(:problem_with_comments, from: :problem) do
+  after_create do |parent|
     3.times do
-      Fabricate(:comment, :err => parent)
+      Fabricate(:comment, err: parent)
     end
-  }
+  end
 end
 
-Fabricator(:problem_with_errs, :from => :problem) do
-  after_create { |parent|
+Fabricator(:problem_with_errs, from: :problem) do
+  after_create do |parent|
     3.times do
-      Fabricate(:err, :problem => parent)
+      Fabricate(:err, problem: parent)
     end
-  }
+  end
 end
 
-Fabricator(:problem_resolved, :from => :problem) do
+Fabricator(:problem_resolved, from: :problem) do
   after_create do |pr|
-    Fabricate(:notice,
-              :err => Fabricate(:err, :problem => pr))
+    Fabricate(:notice, err: Fabricate(:err, problem: pr))
     pr.resolve!
   end
 end

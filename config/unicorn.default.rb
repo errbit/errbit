@@ -8,7 +8,7 @@ pid ENV['UNICORN_PID'] if ENV['UNICORN_PID']
 
 # Taken from github: https://github.com/blog/517-unicorn
 # Though everyone uses pretty miuch the same code
-before_fork do |server, worker|
+before_fork do |server, _worker|
   ##
   # When sent a USR2, Unicorn will suffix its pidfile with .oldbin and
   # immediately start loading up a new version of itself (loaded with a new
@@ -21,12 +21,11 @@ before_fork do |server, worker|
   # Using this method we get 0 downtime deploys.
 
   old_pid = "#{server.config[:pid]}.oldbin"
-  if File.exists?(old_pid) && server.pid != old_pid
+  if File.exist?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
-      # someone else did our job for us
+      warn "Unicorn: master process already killed, no problem"
     end
   end
 end
-

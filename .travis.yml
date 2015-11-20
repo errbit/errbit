@@ -6,12 +6,18 @@ rvm:
   - ruby-head
   - jruby-head
 env:
-  - RAILS_ENV=test COVERAGE=true JRUBY_OPTS=--debug
+  - COVERAGE=true JRUBY_OPTS=--debug
 sudo: false
 cache: bundler
-services: mongodb
-before_script: bundle exec rake errbit:bootstrap
-script: bundle exec rspec
+before_script:
+  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.10.tgz -O /tmp/mongodb.tgz
+  - tar -xvf /tmp/mongodb.tgz
+  - mkdir /tmp/data
+  - ${PWD}/mongodb-linux-x86_64-2.6.10/bin/mongod --dbpath /tmp/data --bind_ip 127.0.0.1 --auth &> /dev/null &
+  - bundle exec rake errbit:bootstrap
+script:
+  - bundle exec rspec
+  - bundle exec rubocop --lint
 matrix:
   allow_failures:
     - rvm: rbx-2

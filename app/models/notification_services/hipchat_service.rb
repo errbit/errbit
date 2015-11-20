@@ -1,35 +1,35 @@
 if defined? HipChat
   class NotificationServices::HipchatService < NotificationService
-    Label = 'hipchat'
-    Fields += [
+    LABEL = 'hipchat'
+    FIELDS += [
       [:service, {
-        :placeholder => "'v1' (admin API token) or 'v2' (account API token)",
-        :label       => "HipChat API version"
+        placeholder: "'v1' (admin API token) or 'v2' (account API token)",
+        label:       "HipChat API version"
       }],
       [:service_url, {
-        :placeholder => "Optional, leave empty for HipChat.com",
-        :label       => "Custom HipChat Server URL"
+        placeholder: "Optional, leave empty for HipChat.com",
+        label:       "Custom HipChat Server URL"
       }],
       [:api_token, {
-        :placeholder => "API token",
-        :label       => "API token"
+        placeholder: "API token",
+        label:       "API token"
       }],
       [:room_id, {
-        :placeholder => "Room name",
-        :label       => "Room name"
-      }],
+        placeholder: "Room name",
+        label:       "Room name"
+      }]
     ]
-    Mandatory_fields = [:service, :api_token, :room_id]
-    API_versions = ['v1', 'v2']
+    MANDATORY_FIELDS = [:service, :api_token, :room_id]
+    API_VERSIONS = %w(v1 v2)
 
     def check_params
-      Fields.each do |field, hash|
-        if Mandatory_fields.include?(field) && self[field].blank?
+      FIELDS.each do |field, hash|
+        if MANDATORY_FIELDS.include?(field) && self[field].blank?
           errors.add field, "You must specify #{hash[:label]}"
         end
       end
-      unless API_versions.include?(self[:service])
-        errors.add :service, "API version must be #{API_versions.join(' or ')}"
+      unless API_VERSIONS.include?(self[:service])
+        errors.add :service, "API version must be #{API_VERSIONS.join(' or ')}"
       end
     end
 
@@ -45,11 +45,11 @@ if defined? HipChat
         &nbsp;&nbsp;Times occurred: #{problem.notices_count}
       MSG
 
-      options = { :api_version => self[:service] }
+      options = { api_version: self[:service] }
       options[:server_url] = self[:service_url] if service_url.present?
 
       client = HipChat::Client.new(api_token, options)
-      client[room_id].send('Errbit', message, :color => 'red', :notify => true)
+      client[room_id].send('Errbit', message, color: 'red', notify: true)
     end
   end
 end

@@ -2,11 +2,11 @@ describe NotificationServices::GtalkService, type: 'model' do
   it "it should send a notification to gtalk" do
     # setup
     notice = Fabricate :notice
-    problem = notice.problem
-    notification_service = Fabricate :gtalk_notification_service, :app => notice.app
+    notice.problem
+    notification_service = Fabricate :gtalk_notification_service, app: notice.app
     problem = notice.problem
 
-    #gtalk stubbing
+    # gtalk stubbing
     gtalk = double('GtalkService')
     jid = double("jid")
     message = double("message")
@@ -14,8 +14,8 @@ describe NotificationServices::GtalkService, type: 'model' do
     expect(Jabber::Client).to receive(:new).with(jid).and_return(gtalk)
     expect(gtalk).to receive(:connect).with(notification_service.service)
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
-    message_value = """#{problem.app.name.to_s}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
+    message_value = """#{problem.app.name}
+#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_service.notification_description problem}"""
 
     expect(Jabber::Message).to receive(:new).with(notification_service.user_id, message_value).and_return(message)
@@ -24,7 +24,7 @@ describe NotificationServices::GtalkService, type: 'model' do
     expect(Jabber::MUC::SimpleMUCClient).to receive(:new).and_return(gtalk)
     expect(gtalk).to receive(:join).with(notification_service.room_id + "/errbit")
 
-    #assert
+    # assert
     expect(gtalk).to receive(:send).exactly(2).times.with(message)
     expect(gtalk).to receive(:close)
 
@@ -35,10 +35,10 @@ describe NotificationServices::GtalkService, type: 'model' do
     before(:each) do
       # setup
       @notice = Fabricate :notice
-      @notification_service = Fabricate :gtalk_notification_service, :app => @notice.app
+      @notification_service = Fabricate :gtalk_notification_service, app: @notice.app
       @problem = @notice.problem
-      @error_msg = """#{@problem.app.name.to_s}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{@problem.app.id.to_s}
+      @error_msg = """#{@problem.app.name}
+#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{@problem.app.id}
 #{@notification_service.notification_description @problem}"""
 
       # gtalk stubbing
@@ -88,17 +88,16 @@ describe NotificationServices::GtalkService, type: 'model' do
       @notification_service.room_id = ""
       @notification_service.create_notification(@problem)
     end
-
   end
 
   it "it should send a notification to room only" do
     # setup
     notice = Fabricate :notice
-    problem = notice.problem
-    notification_service = Fabricate :gtalk_notification_service, :app => notice.app
+    notice.problem
+    notification_service = Fabricate :gtalk_notification_service, app: notice.app
     problem = notice.problem
 
-    #gtalk stubbing
+    # gtalk stubbing
     gtalk = double('GtalkService')
     jid = double("jid")
     message = double("message")
@@ -106,8 +105,8 @@ describe NotificationServices::GtalkService, type: 'model' do
     expect(Jabber::Client).to receive(:new).with(jid).and_return(gtalk)
     expect(gtalk).to receive(:connect)
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
-    message_value = """#{problem.app.name.to_s}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}
+    message_value = """#{problem.app.name}
+#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_service.notification_description problem}"""
 
     expect(Jabber::Message).to receive(:new).with(notification_service.room_id, message_value).and_return(message)
@@ -117,7 +116,7 @@ describe NotificationServices::GtalkService, type: 'model' do
 
     notification_service.user_id = ""
 
-    #assert
+    # assert
     expect(gtalk).to receive(:send).with(message)
     expect(gtalk).to receive(:close)
 

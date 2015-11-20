@@ -4,7 +4,7 @@ class Watcher
 
   field :email
 
-  embedded_in :app, :inverse_of => :watchers
+  embedded_in :app, inverse_of: :watchers
   belongs_to :user
 
   validate :ensure_user_or_email
@@ -25,20 +25,18 @@ class Watcher
     user.try(:email) || email
   end
 
-  protected
+protected
 
-    def ensure_user_or_email
-      errors.add(:base, "You must specify either a user or an email address") unless user.present? || email.present?
+  def ensure_user_or_email
+    errors.add(:base, "You must specify either a user or an email address") unless user.present? || email.present?
+  end
+
+  def clear_unused_watcher_type
+    case watcher_type
+    when 'user'
+      self.email = nil
+    when 'email'
+      self.user = self.user_id = nil
     end
-
-    def clear_unused_watcher_type
-      case watcher_type
-      when 'user'
-        self.email = nil
-      when 'email'
-        self.user = self.user_id = nil
-      end
-    end
-
+  end
 end
-

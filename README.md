@@ -1,4 +1,4 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
 [travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
@@ -8,6 +8,7 @@
 [coveralls-url]:https://coveralls.io/r/errbit/errbit
 [gemnasium-img-url]:https://gemnasium.com/errbit/errbit.png
 [gemnasium-url]:https://gemnasium.com/errbit/errbit
+[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master
 
 ### The open source, self-hosted error catcher
 
@@ -48,18 +49,6 @@ Airbrake, you can just point the `airbrake` gem to your Errbit server.
   </tr>
 </table>
 
-Errbit may be a good fit for you if:
-
-* Your exceptions may contain sensitive data that you don't want sitting on
-  someone else's server
-* Your application is behind a firewall
-* You'd like to brand your error catcher
-* You want to add customer features to your error catcher
-* You're crazy and love managing servers
-
-If this doesn't sound like you, you should probably stick with a hosted service such as
-[Airbrake](http://airbrake.io).
-
 Mailing List
 ------------
 
@@ -71,7 +60,7 @@ updates and notifications.
 The list of requirements to install Errbit are:
 
 * Ruby 2.1.0 or higher
-* MongoDB 2.2.0 or higher
+* MongoDB 2.6.0 or higher
 
 Installation
 ------------
@@ -98,6 +87,19 @@ Errbit can track your application deploys. See [deploy hooks](docs/deploy-hooks.
 Deployment
 ----------
 See [notes on deployment](docs/deployment.md)
+
+Notice Grouping
+---------------
+The way Errbit arranges notices into error groups is configurable. By default,
+Errbit uses the notice's error class, error message, complete backtrace,
+component (or controller), action and environment name to generate a unique
+fingerprint for every notice. Notices with identical fingerprints appear in the
+UI as different occurences of the same error and notices with differing
+fingerprints are displayed as separate errors.
+
+Changing the fingerprinter (under the 'config' menu) applies to all apps and
+the change affects only notices that arrive after the change. If you want to
+refingerprint old notices, you can run `rake errbit:notice_refingerprint`.
 
 Authentication
 --------------
@@ -188,12 +190,30 @@ When upgrading Errbit, please run:
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
 bundle install
 rake db:migrate
+rake db:mongoid:create_indexes
+rake db:mongoid:remove_undefined_indexes
 rake assets:precompile
 ```
 
 This will ensure that your application stays up to date with any schema changes.
 
-### Upgrading errbit from version 0.3 to 0.4
+### Upgrading errbit beyond v0.4.0
+
+* You must have already run migrations at least up to v0.3.0. Check to
+  make sure you're schema version is at least 20131011155638 by running rake
+  db:version before you upgrade beyond v0.4.0
+* Notice fingerprinting has changed and is now easy to configure. But this
+  means you'll have to regenerate fingerprints on old notices in order to for
+  them to be properly grouped with new notices. To do this run: `rake
+  errbit:notice_refingerprint`. If you were using a custom fingerprinter class
+  in a previous version, be aware that it will no longer have any effect.
+  Fingerprinting is now configurable within the Errbit UI.
+* Prior to v0.4.0, users were only able to see apps they were watching.  All
+  users can now see all apps and they can watch or unwatch any app. If you were
+  using the watch feature to hide secret apps, you should not upgrade beyond
+  v0.4.0.
+
+### Upgrading errbit from v0.3.0 to v0.4.0
 
 * All configuration is now done through the environment. See
   [configuration](docs/configuration.md)
@@ -201,7 +221,7 @@ This will ensure that your application stays up to date with any schema changes.
   2.1+
 * Errbit now maintains an issue tracker only for github. If you're using
   another issue tracker integration, you may need to maintain it yourself. See
-  (issue trackers)[#issue-trackers]
+  [Issue Trackers](#issue-trackers)
 
 ## User information in error reports
 
@@ -231,21 +251,6 @@ host as early as possible:
 ```javascript
 Airbrake.setProject("ERRBIT API KEY", "ERRBIT API KEY");
 Airbrake.setHost("http://errbit.yourdomain.com");
-```
-
-Using custom fingerprinting methods
------------------------------------
-
-Errbit collates errors into groups using a fingerprinting strategy. If you find
-your errors are not getting grouped the way you would expect, you may need to
-implement your own strategy. A fingerprinting strategy is just a class that
-implements a ::generate class method. See the classes in
-`app/models/fingerprint/` if you need some inspiration. You can install it with
-an initializer like:
-
-```ruby
-# config/initializers/fingerprint.rb
-ErrorReport.fingerprint_strategy = MyStrategy
 ```
 
 Plugins and Integrations

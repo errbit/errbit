@@ -93,9 +93,10 @@ a.action  { float: right; font-size: 0.9em;}
   padding: 0 14px;
   line-height: 30px;
 }
-#header #session-links #sign-out {
-  background: transparent url(<%= asset_path "images/icons/bullet-red-sm.png" %>) 12px 50% no-repeat;
-  padding-left: 29px;
+#header #session-links #sign-out i {
+  color: #cc0033;
+  font-size: 11px;
+  margin-right: 3px;
 }
 #header #session-links a:hover {
   text-decoration: none;
@@ -133,10 +134,12 @@ a.action  { float: right; font-size: 0.9em;}
   color: #333;
 }
 
+#nav-bar li i {
+  margin-right: 5px;
+}
 #nav-bar li a {
   color: #666;
-  display: block;
-  padding: 0 20px 0 40px;
+  padding: 0 20px;
   font-size: 14px;
   font-weight: bold;
   line-height: 37px;
@@ -146,9 +149,6 @@ a.action  { float: right; font-size: 0.9em;}
   background: transparent 10px 6px no-repeat;
 }
 #nav-bar li a:hover { color: #666;}
-#nav-bar li.apps a { background-image: url(<%= asset_path "images/icons/briefcase.png" %>); }
-#nav-bar li.errs a { background-image: url(<%= asset_path "images/icons/error.png" %>); }
-#nav-bar li.users a { background-image: url(<%= asset_path "images/icons/user.png" %>); }
 #nav-bar li:not(.active):hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
@@ -215,8 +215,7 @@ a.action  { float: right; font-size: 0.9em;}
 }
 #action-bar span a {
   color: #666;
-  display: block;
-  padding: 0 20px 0 40px;
+  padding: 0 20px;
   font-size: 14px; font-weight: bold; line-height: 39px; text-decoration: none;
   text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
   background: transparent 10px 8px no-repeat;
@@ -227,17 +226,11 @@ a.action  { float: right; font-size: 0.9em;}
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
-#action-bar a.add {
-  background-image: url(<%= asset_path "images/icons/add.png" %>);
+#action-bar a i {
+  margin-right: 5px;
 }
 
-#action-bar .calendar_link {
-  background: url(<%= asset_path "images/icons/ical.png" %>) no-repeat scroll 12px 6px transparent;
-  padding-left: 47px;
-}
-
-#action-bar span.github a { background: url(<%= asset_path "images/icons/github.png" %>) no-repeat 6px 5px; }
-#action-bar span.unlink_github a { background: url(<%= asset_path "images/icons/unlink_github.png" %>) no-repeat 6px 5px; }
+#action-bar span.github a:before { font-family: FontAwesome; content: "\f09b"; margin-right: 8px; position: relative; top: 4px; font-size: 26px; }
 
 /* Content */
 #content {
@@ -306,7 +299,7 @@ form label {
 }
 form label.inline { display: inline; }
 form .checkbox label { display: inline; }
-form .required label { padding-right: 20px; background: transparent url(<%= asset_path "images/icons/required.png" %>) right 50% no-repeat; }
+form .required label:after { font-family: FontAwesome; content: "\f069"; color: #cc0033; margin-left: 5px; font-weight: normal; }
 form .field_with_errors label { color: #900; }
 form input[type=text], form input[type=password], form input[type=email] {
   width: 96%; padding: 0.8em;
@@ -365,10 +358,13 @@ form div.buttons input, form div.buttons button {
   -webkit-text-shadow: 1px 1px 0px #FFF;
   border: none;
 }
-form div.buttons button.sign_in {
-  padding-left: 40px;
-  background: transparent url(<%= asset_path "images/icons/right-arrow.png" %>) 3px 3px no-repeat;
+
+.sign_in:before {
+  font-family: FontAwesome;
+  content: "\f061";
+  margin-right: 8px;
 }
+
 form strong.option {
   display: block;
   margin: 0.7em 0;
@@ -540,8 +536,8 @@ a.button.active {
   display: inline-block;
 }
 
-/* Watchers / Issue Tracker / Notification Forms */
-div.watcher.nested .watcher_params, div.issue_tracker.nested .tracker_params, div.notification_service.nested .notification_params {
+/* Issue Tracker / Notification Forms */
+div.issue_tracker.nested .tracker_params, div.notification_service.nested .notification_params {
   display: none;
 }
 
@@ -650,7 +646,7 @@ td.count, td.issue_link {
   padding: 0.1em 0.7em;
   margin-top: 3px;
   color: #fff;
-  background: #cc0033 url(<%= asset_path "images/error-badge-bg.png" %>) 0 bottom repeat-x;
+  background-color: #cc0033;
   border: 1px solid #900;
   border-radius: 18px;
   -moz-border-radius: 18px;
@@ -661,7 +657,7 @@ td.count, td.issue_link {
   -webkit-opacity: 0.8
 }
 .count a.resolved {
-  background: #05B81d url(<%= asset_path "images/resolved-badge-bg.png" %>) 0 bottom repeat-x;
+  background-color: #05B81d;
   border: 1px solid #080;
 }
 .count a:hover {
@@ -729,13 +725,17 @@ table.deploys td.when {
 }
 
 /* Resolve Errs */
-#action-bar a.resolve {
-  background: transparent url(<%= asset_path "images/icons/thumbs-up.png" %>) 6px 5px no-repeat;
+#action-bar .resolve:before {
+  font-family: FontAwesome;
+  content: "\f087";
+  margin-right: 5px;
 }
 
 /* Go Up */
-#action-bar a.up {
-  background: transparent url(<%= asset_path "images/icons/up.png" %>) 6px 5px no-repeat;
+#action-bar a.up:before {
+  font-family: FontAwesome;
+  content: "\f077";
+  margin-right: 5px;
 }
 
 /* Notices Pagination */

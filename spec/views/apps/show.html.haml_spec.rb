@@ -17,7 +17,7 @@ describe "apps/show.html.haml", type: 'view' do
     it "should confirm the 'cancel' link" do
       render
 
-      expect(action_bar).to have_selector('a.button', :text => 'all errors')
+      expect(action_bar).to have_selector('a.button', text: 'all errors')
     end
   end
 
@@ -30,7 +30,7 @@ describe "apps/show.html.haml", type: 'view' do
 
   context "with user watch application" do
     before do
-      allow(user).to receive(:watching?).with(app).and_return(true)
+      allow(app).to receive(:watched_by?).with(user).and_return(true)
     end
     it 'see the unwatch button' do
       render
@@ -40,7 +40,7 @@ describe "apps/show.html.haml", type: 'view' do
 
   context "with user not watch application" do
     before do
-      allow(user).to receive(:watching?).with(app).and_return(false)
+      allow(app).to receive(:watched_by?).with(user).and_return(false)
     end
     it 'not see the unwatch button' do
       render

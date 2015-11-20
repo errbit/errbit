@@ -1,7 +1,7 @@
 describe Problem, type: 'model' do
   context 'validations' do
     it 'requires an environment' do
-      err = Fabricate.build(:problem, :environment => nil)
+      err = Fabricate.build(:problem, environment: nil)
       expect(err).to_not be_valid
       expect(err.errors[:environment]).to include("can't be blank")
     end
@@ -10,25 +10,25 @@ describe Problem, type: 'model' do
   describe "Fabrication" do
     context "Fabricate(:problem)" do
       it 'should have no comment' do
-        expect{
+        expect do
           Fabricate(:problem)
-        }.to_not change(Comment, :count)
+        end.to_not change(Comment, :count)
       end
     end
 
     context "Fabricate(:problem_with_comments)" do
       it 'should have 3 comments' do
-        expect{
+        expect do
           Fabricate(:problem_with_comments)
-        }.to change(Comment, :count).by(3)
+        end.to change(Comment, :count).by(3)
       end
     end
 
     context "Fabricate(:problem_with_errs)" do
       it 'should have 3 errs' do
-        expect{
+        expect do
           Fabricate(:problem_with_errs)
-        }.to change(Err, :count).by(3)
+        end.to change(Err, :count).by(3)
       end
     end
   end
@@ -39,11 +39,11 @@ describe Problem, type: 'model' do
       problem = err.problem
       expect(problem).to_not be_nil
 
-      notice1 = Fabricate(:notice, :err => err)
-      expect(problem.last_notice_at).to eq notice1.created_at
+      notice1 = Fabricate(:notice, err: err)
+      expect(problem.last_notice_at).to eq notice1.reload.created_at
 
-      notice2 = Fabricate(:notice, :err => err)
-      expect(problem.last_notice_at).to eq notice2.created_at
+      notice2 = Fabricate(:notice, err: err)
+      expect(problem.last_notice_at).to eq notice2.reload.created_at
     end
   end
 
@@ -53,10 +53,10 @@ describe Problem, type: 'model' do
       problem = err.problem
       expect(problem).to_not be_nil
 
-      notice1 = Fabricate(:notice, :err => err)
+      notice1 = Fabricate(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
 
-      Fabricate(:notice, :err => err)
+      Fabricate(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
     end
   end
@@ -65,18 +65,18 @@ describe Problem, type: 'model' do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
       problem = err.problem
-      expect {
-        Fabricate(:notice, :err => err, :message => 'ERR 1')
-      }.to change(problem, :message).from(nil).to('ERR 1')
+      expect do
+        Fabricate(:notice, err: err, message: 'ERR 1')
+      end.to change(problem, :message).from(nil).to('ERR 1')
     end
   end
 
   context 'being created' do
     context 'when the app has err notifications set to false' do
       it 'should not send an email notification' do
-        app = Fabricate(:app_with_watcher, :notify_on_errs => false)
+        app = Fabricate(:app_with_watcher, notify_on_errs: false)
         expect(Mailer).to_not receive(:err_notification)
-        Fabricate(:problem, :app => app)
+        Fabricate(:problem, app: app)
       end
     end
   end
@@ -114,7 +114,7 @@ describe Problem, type: 'model' do
     end
 
     it "should not reset notice count" do
-      problem = Fabricate(:problem, :notices_count => 1)
+      problem = Fabricate(:problem, notices_count: 1)
       original_notices_count = problem.notices_count
       expect(original_notices_count).to be > 0
 
@@ -132,9 +132,9 @@ describe Problem, type: 'model' do
       er.add_on_blank(:resolved)
       allow(problem).to receive(:errors).and_return(er)
       expect(problem).to_not be_valid
-      expect {
+      expect do
         problem.resolve!
-      }.to raise_error(Mongoid::Errors::Validations)
+      end.to raise_error(Mongoid::Errors::Validations)
     end
   end
 
@@ -157,8 +157,8 @@ describe Problem, type: 'model' do
   context "Scopes" do
     context "resolved" do
       it 'only finds resolved Problems' do
-        resolved = Fabricate(:problem, :resolved => true)
-        unresolved = Fabricate(:problem, :resolved => false)
+        resolved = Fabricate(:problem, resolved: true)
+        unresolved = Fabricate(:problem, resolved: false)
         expect(Problem.resolved.all).to include(resolved)
         expect(Problem.resolved.all).to_not include(unresolved)
       end
@@ -166,8 +166,8 @@ describe Problem, type: 'model' do
 
     context "unresolved" do
       it 'only finds unresolved Problems' do
-        resolved = Fabricate(:problem, :resolved => true)
-        unresolved = Fabricate(:problem, :resolved => false)
+        resolved = Fabricate(:problem, resolved: true)
+        unresolved = Fabricate(:problem, resolved: false)
         expect(Problem.unresolved.all).to_not include(resolved)
         expect(Problem.unresolved.all).to include(unresolved)
       end
@@ -175,15 +175,15 @@ describe Problem, type: 'model' do
 
     context "searching" do
       it 'finds the correct record' do
-        find = Fabricate(:problem, :resolved => false, :error_class => 'theErrorclass::other',
-                         :message => "other", :where => 'errorclass', :environment => 'development', :app_name => 'other')
-        dont_find = Fabricate(:problem, :resolved => false, :error_class => "Batman",
-                              :message => 'todo', :where => 'classerror', :environment => 'development', :app_name => 'other')
+        find = Fabricate(:problem, resolved: false, error_class: 'theErrorclass::other',
+                         message: "other", where: 'errorclass', environment: 'development', app_name: 'other')
+        dont_find = Fabricate(:problem, resolved: false, error_class: "Batman",
+                              message: 'todo', where: 'classerror', environment: 'development', app_name: 'other')
         expect(Problem.search("theErrorClass").unresolved).to include(find)
         expect(Problem.search("theErrorClass").unresolved).to_not include(dont_find)
       end
       it 'find on where message' do
-        problem = Fabricate(:problem, :where => 'cyril')
+        problem = Fabricate(:problem, where: 'cyril')
         expect(Problem.search('cyril').entries).to eq [problem]
       end
     end
@@ -192,8 +192,8 @@ describe Problem, type: 'model' do
   context "notice counter cache" do
     before do
       @app = Fabricate(:app)
-      @problem = Fabricate(:problem, :app => @app)
-      @err = Fabricate(:err, :problem => @problem)
+      @problem = Fabricate(:problem, app: @app)
+      @err = Fabricate(:err, problem: @problem)
     end
 
     it "#notices_count returns 0 by default" do
@@ -201,23 +201,23 @@ describe Problem, type: 'model' do
     end
 
     it "adding a notice increases #notices_count by 1" do
-      expect {
-        Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.to change(@problem.reload, :notices_count).from(0).to(1)
+      expect do
+        Fabricate(:notice, err: @err, message: 'ERR 1')
+      end.to change(@problem.reload, :notices_count).from(0).to(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
-      Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      expect {
+      Fabricate(:notice, err: @err, message: 'ERR 1')
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :notices_count).from(1).to(0)
+      end.to change(@problem, :notices_count).from(1).to(0)
     end
   end
 
   context "#app_name" do
     let!(:app) { Fabricate(:app) }
-    let!(:problem) { Fabricate(:problem, :app => app) }
+    let!(:problem) { Fabricate(:problem, app: app) }
 
     before { app.reload }
 
@@ -226,126 +226,120 @@ describe Problem, type: 'model' do
     end
 
     it "is updated when an app is updated" do
-      expect {
-        app.update_attributes!(:name => "Bar App")
+      expect do
+        app.update_attributes!(name: "Bar App")
         problem.reload
-      }.to change(problem, :app_name).to("Bar App")
+      end.to change(problem, :app_name).to("Bar App")
     end
   end
 
   context "#last_deploy_at" do
     before do
       @app = Fabricate(:app)
-      @last_deploy = Time.at(10.days.ago.localtime.to_i)
-      Fabricate(:deploy, :app => @app, :created_at => @last_deploy, :environment => "production")
+      @last_deploy = 10.days.ago
+      Fabricate(:deploy, app: @app, created_at: @last_deploy, environment: "production")
     end
 
     it "is set when a problem is created" do
-      problem = Fabricate(:problem, :app => @app, :environment => "production")
+      problem = Fabricate(:problem, app: @app, environment: "production")
       assert_equal @last_deploy, problem.last_deploy_at
     end
 
     it "is updated when a deploy is created" do
-      problem = Fabricate(:problem, :app => @app, :environment => "production")
-      next_deploy = Time.at(5.minutes.ago.localtime.to_i)
-      expect {
-        @deploy = Fabricate(:deploy, :app => @app, :created_at => next_deploy)
+      problem = Fabricate(:problem, app: @app, environment: "production")
+      next_deploy = 5.minutes.ago
+      expect do
+        @deploy = Fabricate(:deploy, app: @app, created_at: next_deploy)
         problem.reload
-      }.to change(problem, :last_deploy_at).from(@last_deploy).to(next_deploy)
+      end.to change { problem.last_deploy_at.iso8601 }.
+        from(@last_deploy.iso8601).
+        to(next_deploy.iso8601)
     end
   end
 
   context "notice messages cache" do
     before do
       @app = Fabricate(:app)
-      @problem = Fabricate(:problem, :app => @app)
-      @err = Fabricate(:err, :problem => @problem)
+      @problem = Fabricate(:problem, app: @app)
+      @err = Fabricate(:err, problem: @problem)
     end
 
     it "#messages should be empty by default" do
-      expect(@problem.messages).to eq ({})
-    end
-
-    it "adding a notice adds a string to #messages" do
-      expect {
-        Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      }.to change(@problem, :messages).from({}).to({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}})
+      expect(@problem.messages).to eq({})
     end
 
     it "removing a notice removes string from #messages" do
-      Fabricate(:notice, :err => @err, :message => 'ERR 1')
-      expect {
+      Fabricate(:notice, err: @err, message: 'ERR 1')
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :messages).from({Digest::MD5.hexdigest('ERR 1') => {'value' => 'ERR 1', 'count' => 1}}).to({})
+      end.to change(@problem, :messages).from(Digest::MD5.hexdigest('ERR 1') => { 'value' => 'ERR 1', 'count' => 1 }).to({})
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
-      Fabricate(:notice, :err => @err, :message => 'ERR 1')
+      Fabricate(:notice, err: @err, message: 'ERR 1')
       @problem.messages = {}
       @problem.save!
-      expect {@err.notices.first.destroy}.not_to raise_error
+      expect { @err.notices.first.destroy }.not_to raise_error
     end
   end
 
   context "notice hosts cache" do
     before do
       @app = Fabricate(:app)
-      @problem = Fabricate(:problem, :app => @app)
-      @err = Fabricate(:err, :problem => @problem)
+      @problem = Fabricate(:problem, app: @app)
+      @err = Fabricate(:err, problem: @problem)
     end
 
     it "#hosts should be empty by default" do
-      expect(@problem.hosts).to eq ({})
-    end
-
-    it "adding a notice adds a string to #hosts" do
-      expect {
-        Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
-      }.to change(@problem, :hosts).from({}).to({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}})
+      expect(@problem.hosts).to eq({})
     end
 
     it "removing a notice removes string from #hosts" do
-      Fabricate(:notice, :err => @err, :request => {'url' => "http://example.com/resource/12"})
-      expect {
+      Fabricate(:notice, err: @err, request: { 'url' => "http://example.com/resource/12" })
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :hosts).from({Digest::MD5.hexdigest('example.com') => {'value' => 'example.com', 'count' => 1}}).to({})
+      end.to change(@problem, :hosts).from(Digest::MD5.hexdigest('example.com') => { 'value' => 'example.com', 'count' => 1 }).to({})
     end
   end
 
   context "notice user_agents cache" do
     before do
       @app = Fabricate(:app)
-      @problem = Fabricate(:problem, :app => @app)
-      @err = Fabricate(:err, :problem => @problem)
+      @problem = Fabricate(:problem, app: @app)
+      @err = Fabricate(:err, problem: @problem)
     end
 
     it "#user_agents should be empty by default" do
-      expect(@problem.user_agents).to eq ({})
-    end
-
-    it "adding a notice adds a string to #user_agents" do
-      expect {
-        Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      }.to change(@problem, :user_agents).from({}).to({Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}})
+      expect(@problem.user_agents).to eq({})
     end
 
     it "removing a notice removes string from #user_agents" do
-      Fabricate(:notice, :err => @err, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
-      expect {
+      Fabricate(
+        :notice,
+        err:     @err,
+        request: {
+          'cgi-data' => {
+            'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
+          }
+        }
+      )
+      expect do
         @err.notices.first.destroy
         @problem.reload
-      }.to change(@problem, :user_agents).from({
-        Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1}
-      }).to({})
+      end.to change(@problem, :user_agents).
+        from(
+          Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {
+            'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1 }
+        ).to({})
     end
   end
 
   context "comment counter cache" do
     before do
       @app = Fabricate(:app)
-      @problem = Fabricate(:problem, :app => @app)
+      @problem = Fabricate(:problem, app: @app)
     end
 
     it "#comments_count returns 0 by default" do
@@ -353,28 +347,28 @@ describe Problem, type: 'model' do
     end
 
     it "adding a comment increases #comments_count by 1" do
-      expect {
-        Fabricate(:comment, :err => @problem)
-      }.to change(@problem, :comments_count).from(0).to(1)
+      expect do
+        Fabricate(:comment, err: @problem)
+      end.to change(@problem, :comments_count).from(0).to(1)
     end
 
     it "removing a comment decreases #comments_count by 1" do
-      Fabricate(:comment, :err => @problem)
-      expect {
+      Fabricate(:comment, err: @problem)
+      expect do
         @problem.reload.comments.first.destroy
         @problem.reload
-      }.to change(@problem, :comments_count).from(1).to(0)
+      end.to change(@problem, :comments_count).from(1).to(0)
     end
   end
 
   describe "#issue_type" do
     context "without issue_type fill in Problem" do
       let(:problem) do
-        Problem.new(:app => app)
+        Problem.new(app: app)
       end
 
       let(:app) do
-        App.new(:issue_tracker => issue_tracker)
+        App.new(issue_tracker: issue_tracker)
       end
 
       context "without issue_tracker associate to app" do
@@ -400,7 +394,7 @@ describe Problem, type: 'model' do
 
       context "with issue_tracker not valid associate to app" do
         let(:issue_tracker) do
-          IssueTracker.new(:type_tracker => 'fake')
+          IssueTracker.new(type_tracker: 'fake')
         end
 
         it 'return nil' do
@@ -411,7 +405,97 @@ describe Problem, type: 'model' do
 
     context "with issue_type fill in Problem" do
       it 'return the value associate' do
-        expect(Problem.new(:issue_type => 'foo').issue_type).to eql 'foo'
+        expect(Problem.new(issue_type: 'foo').issue_type).to eql 'foo'
+      end
+    end
+  end
+
+  describe '#recache' do
+    let(:problem) { Fabricate(:problem_with_errs) }
+    let(:first_errs) { problem.errs }
+    let!(:notice) { Fabricate(:notice, err: first_errs.first) }
+
+    before do
+      problem.update_attribute(:notices_count, 0)
+    end
+
+    it 'update the notice_count' do
+      expect do
+        problem.recache
+      end.to change {
+        problem.notices_count
+      }.from(0).to(1)
+    end
+
+    context "with only one notice" do
+      before do
+        problem.update_attributes!(messages: {})
+        problem.recache
+      end
+
+      it 'update information about this notice' do
+        expect(problem.message).to eq notice.message
+        expect(problem.where).to eq notice.where
+      end
+
+      it 'update first_notice_at' do
+        expect(problem.first_notice_at).to eq notice.reload.created_at
+      end
+
+      it 'update last_notice_at' do
+        expect(problem.last_notice_at).to eq notice.reload.created_at
+      end
+
+      it 'update stats messages' do
+        expect(problem.messages).to eq(
+          Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 1 }
+        )
+      end
+
+      it 'update stats hosts' do
+        expect(problem.hosts).to eq(
+          Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 1 }
+        )
+      end
+
+      it 'update stats user_agents' do
+        expect(problem.user_agents).to eq(
+          Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 1 }
+        )
+      end
+    end
+
+    context "with several notices" do
+      let!(:notice_2) { Fabricate(:notice, err: first_errs.first) }
+      let!(:notice_3) { Fabricate(:notice, err: first_errs.first) }
+      before do
+        problem.update_attributes!(messages: {})
+        problem.recache
+      end
+
+      it 'update information about this notice' do
+        expect(problem.message).to eq notice.message
+        expect(problem.where).to eq notice.where
+      end
+
+      it 'update first_notice_at' do
+        expect(problem.first_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
+      end
+
+      it 'update last_notice_at' do
+        expect(problem.last_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
+      end
+
+      it 'update stats messages' do
+        expect(problem.messages).to eq(Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 3 })
+      end
+
+      it 'update stats hosts' do
+        expect(problem.hosts).to eq(Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 3 })
+      end
+
+      it 'update stats user_agents' do
+        expect(problem.user_agents).to eq(Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 3 })
       end
     end
   end

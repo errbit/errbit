@@ -1,23 +1,23 @@
 if defined? Campy
   class NotificationServices::CampfireService < NotificationService
-    Label = "campfire"
-    Fields += [
+    LABEL = "campfire"
+    FIELDS += [
       [:subdomain, {
-        :label       => "Subdomain",
-        :placeholder => "subdomain from http://{{subdomain}}.campfirenow.com"
+        label:       "Subdomain",
+        placeholder: "subdomain from http://{{subdomain}}.campfirenow.com"
       }],
       [:api_token, {
-        :label       => "API Token",
-        :placeholder => "123456789abcdef123456789abcdef"
+        label:       "API Token",
+        placeholder: "123456789abcdef123456789abcdef"
       }],
       [:room_id, {
-        :label       => "Room ID",
-        :placeholder => "123456"
+        label:       "Room ID",
+        placeholder: "123456"
       }]
     ]
 
     def check_params
-      if Fields.detect {|f| self[f[0]].blank? }
+      if FIELDS.detect { |f| self[f[0]].blank? }
         errors.add :base, 'You must specify your Campfire Subdomain, API token and Room ID'
       end
     end
@@ -28,9 +28,9 @@ if defined? Campy
 
     def create_notification(problem)
       # build the campfire client
-      campy = Campy::Room.new(:account => subdomain, :token => api_token, :room_id => room_id)
+      campy = Campy::Room.new(account: subdomain, token: api_token, room_id: room_id)
       # post the issue to the campfire room
-      campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id.to_s}/problems/#{problem.id.to_s}"
+      campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
     end
   end
 end

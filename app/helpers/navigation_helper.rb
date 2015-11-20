@@ -1,5 +1,4 @@
 module NavigationHelper
-
   # Returns ' active' if you are on a given controller
   #  - active_if_here(:users) => ' active' if users controller
   # Or on one of a list of controllers
@@ -20,15 +19,15 @@ module NavigationHelper
                   matches
                 when Array
                   s = {}
-                  matches.each {|c| s[c] = :all}
+                  matches.each { |c| s[c] = :all }
                   s
                 else
-                  {matches => :all}
+                  { matches => :all }
                 end
 
     active = nil
     sections.each do |controller, actions|
-      actions = ([] << actions) unless actions.kind_of?(Array)
+      actions = Array(actions)
       active = ' active' if current_controller == controller && (actions.include?(:all) || actions.include?(current_action))
     end
     active
@@ -44,5 +43,4 @@ module NavigationHelper
   def page_count_from_end(current_page, total_pages)
     (total_pages.to_i - current_page.to_i) + 1
   end
-
 end

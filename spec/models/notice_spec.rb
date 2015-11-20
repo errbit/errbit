@@ -1,19 +1,19 @@
 describe Notice, type: 'model' do
   context 'validations' do
     it 'requires a backtrace' do
-      notice = Fabricate.build(:notice, :backtrace => nil)
+      notice = Fabricate.build(:notice, backtrace: nil)
       expect(notice).to_not be_valid
-      expect(notice.errors[:backtrace]).to include("can't be blank")
+      expect(notice.errors[:backtrace_id]).to include("can't be blank")
     end
 
     it 'requires the server_environment' do
-      notice = Fabricate.build(:notice, :server_environment => nil)
+      notice = Fabricate.build(:notice, server_environment: nil)
       expect(notice).to_not be_valid
       expect(notice.errors[:server_environment]).to include("can't be blank")
     end
 
     it 'requires the notifier' do
-      notice = Fabricate.build(:notice, :notifier => nil)
+      notice = Fabricate.build(:notice, notifier: nil)
       expect(notice).to_not be_valid
       expect(notice.errors[:notifier]).to include("can't be blank")
     end
@@ -21,8 +21,8 @@ describe Notice, type: 'model' do
 
   describe "key sanitization" do
     before do
-      @hash = { "some.key" => { "$nested.key" => {"$Path" => "/", "some$key" => "key"}}}
-      @hash_sanitized = { "some&#46;key" => { "&#36;nested&#46;key" => {"&#36;Path" => "/", "some$key" => "key"}}}
+      @hash = { "some.key" => { "$nested.key" => { "$Path" => "/", "some$key" => "key" } } }
+      @hash_sanitized = { "some&#46;key" => { "&#36;nested&#46;key" => { "&#36;Path" => "/", "some$key" => "key" } } }
     end
     [:server_environment, :request, :notifier].each do |key|
       it "replaces . with &#46; and $ with &#36; in keys used in #{key}" do
@@ -37,16 +37,16 @@ describe Notice, type: 'model' do
     let(:notice)  { Fabricate.build(:notice, request: request) }
 
     context "when it has a request url" do
-      let(:request) { {'url' => "http://example.com/resource/12", 'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0'}} }
+      let(:request) { { 'url' => "http://example.com/resource/12", 'cgi-data' => { 'HTTP_USER_AGENT' => 'Mozilla/5.0' } } }
 
       it 'has a curl representation' do
         cmd = notice.to_curl
-        expect(cmd).to eq(%q[curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12])
+        expect(cmd).to eq("curl -X GET -H 'User-Agent: Mozilla/5.0' http://example.com/resource/12")
       end
     end
 
     context "when it has not a request url" do
-      let(:request) { {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0'}} }
+      let(:request) { { 'cgi-data' => { 'HTTP_USER_AGENT' => 'Mozilla/5.0' } } }
 
       it 'has a curl representation' do
         cmd = notice.to_curl
@@ -57,11 +57,11 @@ describe Notice, type: 'model' do
 
   describe "user agent" do
     it "should be parsed and human-readable" do
-      notice = Fabricate.build(:notice, :request => {'cgi-data' => {
+      notice = Fabricate.build(:notice, request: { 'cgi-data' => {
         'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
-      }})
+      } })
       expect(notice.user_agent.browser).to eq 'Chrome'
-      expect(notice.user_agent.version.to_s).to match( /^10\.0/ )
+      expect(notice.user_agent.version.to_s).to match(/^10\.0/)
     end
 
     it "should be nil if HTTP_USER_AGENT is blank" do
@@ -72,7 +72,7 @@ describe Notice, type: 'model' do
 
   describe "user agent string" do
     it "should be parsed and human-readable" do
-      notice = Fabricate.build(:notice, :request => {'cgi-data' => {'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'}})
+      notice = Fabricate.build(:notice, request: { 'cgi-data' => { 'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16' } })
       expect(notice.user_agent_string).to eq 'Chrome 10.0.648.204 (OS X 10.6.7)'
     end
 
@@ -84,17 +84,22 @@ describe Notice, type: 'model' do
 
   describe "host" do
     it "returns host if url is valid" do
-      notice = Fabricate.build(:notice, :request => {'url' => "http://example.com/resource/12"})
+      notice = Fabricate.build(:notice, request: { 'url' => "http://example.com/resource/12" })
       expect(notice.host).to eq 'example.com'
     end
 
     it "returns 'N/A' when url is not valid" do
-      notice = Fabricate.build(:notice, :request => {'url' => "some string"})
+      notice = Fabricate.build(:notice, request: { 'url' => "file:///path/to/some/resource/12" })
+      expect(notice.host).to eq 'N/A'
+    end
+
+    it "returns 'N/A' when url is not valid" do
+      notice = Fabricate.build(:notice, request: { 'url' => "some string" })
       expect(notice.host).to eq 'N/A'
     end
 
     it "returns 'N/A' when url is empty" do
-      notice = Fabricate.build(:notice, :request => {})
+      notice = Fabricate.build(:notice, request: {})
       expect(notice.host).to eq 'N/A'
     end
   end
@@ -102,7 +107,21 @@ describe Notice, type: 'model' do
   describe "request" do
     it "returns empty hash if not set" do
       notice = Notice.new
-      expect(notice.request).to eq ({})
+      expect(notice.request).to eq({})
+    end
+  end
+
+  describe "env_vars" do
+    it "returns the cgi-data" do
+      notice = Notice.new
+      notice.request = { 'cgi-data' => { 'ONE' => 'TWO' } }
+      expect(notice.env_vars).to eq('ONE' => 'TWO')
+    end
+
+    it "always returns a hash" do
+      notice = Notice.new
+      notice.request = { 'cgi-data' => [] }
+      expect(notice.env_vars).to eq({})
     end
   end
 end
