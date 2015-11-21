@@ -100,4 +100,7 @@ In order of precedence Errbit uses:
 <dt>DEVISE_MODULES
 <dd>Devise modules to enable
 <dd>defaults to [database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]
+<dt>USE_UNICORN_WORKER_KILLER</dt>
+<dd>unicorn-worker-killer modules to enable</dd>
+<dd>defaults to false</dd>
 </dl>
