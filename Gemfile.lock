@@ -134,6 +134,7 @@ GEM
       multi_json
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
+    get_process_mem (0.2.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.6)
@@ -401,6 +402,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    unicorn-worker-killer (0.4.3)
+      get_process_mem (~> 0)
+      unicorn (~> 4)
     useragent (0.14.0)
     warden (1.2.3)
       rack (>= 1.0)
@@ -480,6 +484,7 @@ DEPENDENCIES
   uglifier
   underscore-rails
   unicorn
+  unicorn-worker-killer
   useragent
   xmpp4r
   yajl-ruby
