@@ -619,7 +619,7 @@ table.apps td.name, table.errs td.message { width: 100%; }
 table.apps td { padding: 16px 20px; }
 table.apps th { padding: 10px 20px; }
 
-table.apps td.issue_tracker, table.apps td.count, table.apps td.deploy {
+table.apps td.issue_tracker, table.apps td.count {
   text-align: center;
 }
 table.apps td.issue_tracker, table.apps td.count {
@@ -630,9 +630,6 @@ table.apps td.issue_tracker img { vertical-align: top; }
 td.message .line {
   display:inline-block;
   margin-left:1em;
-}
-td.deploy {
-  white-space: nowrap;
 }
 td.latest {
   white-space: nowrap;
@@ -717,11 +714,6 @@ table.tally td.percent {
 table.tally th.value {
   width: 100%;
   text-transform: none;
-}
-
-/* Deploys table */
-table.deploys td.when {
-  width: 102px;
 }
 
 /* Resolve Errs */
@@ -854,7 +846,7 @@ table.backtrace tr.padding th, table.backtrace tr.padding td {
   padding: 0;
 }
 
-h3#watchers_toggle, h3#repository_toggle, h3#deploys_toggle {
+h3#watchers_toggle, h3#repository_toggle {
   cursor: pointer;
 }
 
@@ -862,7 +854,7 @@ span.click_span {
   font-size: 0.7em;
 }
 
-#deploys_div, #repository_div, #watchers_div {
+#repository_div, #watchers_div {
   display: none;
 }
 

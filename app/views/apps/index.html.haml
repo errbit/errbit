@@ -16,8 +16,6 @@
         %th= t('.notify')
       - if any_issue_trackers?
         %th= t('.tracker')
-      - if any_deploys?
-        %th= t('.last_deploy')
       %th=t('.errors')
   %tbody
     - apps.each do |app|
@@ -45,11 +43,6 @@
                 = link_to( tracker_img, app.issue_tracker.url )
               - else
                 = tracker_img
-        - if any_deploys?
-          %td.deploy
-            - if app.last_deploy_at
-              - revision = app.deploys.last.short_revision
-              = link_to( app.last_deploy_at.to_s(:micro) << (revision.present? ? " (#{revision})" : ""), app_deploys_path(app))
         %td.count
           - if app.problem_count > 0
             - unresolved = app.unresolved_count

@@ -34,10 +34,6 @@ class AppsController < ApplicationController
     end
   end
 
-  expose(:deploys) do
-    app.deploys.order_by(:created_at.desc).limit(5)
-  end
-
   expose(:users) do
     User.all.sort_by { |u| u.name.downcase }
   end

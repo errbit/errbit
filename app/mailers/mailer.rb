@@ -27,19 +27,6 @@ class Mailer < ActionMailer::Base
          subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
-  def deploy_notification(deploy)
-    @deploy = deploy
-    @app = AppDecorator.new deploy.app
-
-    errbit_headers 'App'             => @app.name,
-                   'Environment'     => @deploy.environment,
-                   'Deploy-Revision' => @deploy.revision,
-                   'Deploy-User'     => @deploy.username
-
-    mail to:      @app.notification_recipients,
-         subject: "[#{@app.name}] Deployed to #{@deploy.environment} by #{@deploy.username}"
-  end
-
   def comment_notification(comment)
     @comment  = comment
     @user     = comment.user

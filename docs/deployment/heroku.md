@@ -75,8 +75,3 @@ Option 3. Clear resolved errors manually:
 ```bash
 heroku run rake errbit:db:clear_resolved
 ```
-
-### Add the deployment hook
-```bash
-heroku addons:create deployhooks:http --url="http://YOUR_ERRBIT_HOST/deploys.txt?api_key=YOUR_API_KEY"
-```

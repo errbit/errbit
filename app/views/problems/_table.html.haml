@@ -7,7 +7,6 @@
         %th= link_for_sort "App"
         %th= link_for_sort "What &amp; Where".html_safe, "message"
         %th= link_for_sort "Latest", "last_notice_at"
-        %th= link_for_sort "Deploy", "last_deploy_at"
         %th= link_for_sort "Count"
         - if any_issue_links
           %th Issue
@@ -34,7 +33,6 @@
                   %em.commenter= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s << ":"
                 %em= truncate(comment.body, :length => 100, :separator => ' ')
           %td.latest #{time_ago_in_words(problem.last_notice_at)} ago
-          %td.deploy= problem.last_deploy_at ? problem.last_deploy_at.to_s(:micro) : 'n/a'
           %td.count= link_to problem.notices_count, app_problem_path(problem.app, problem)
           - if any_issue_links
             %td.issue_link

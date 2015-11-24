@@ -19,21 +19,6 @@ module ApplicationHelper
     end.to_s
   end
 
-  def generate_ical(deploys)
-    RiCal.Calendar do |cal|
-      deploys.each_with_index do |deploy, idx|
-        cal.event do |event|
-          event.summary     = "#{idx + 1} #{deploy.repository}"
-          event.description = deploy.revision.to_s
-          event.dtstart     = deploy.created_at.utc
-          event.dtend       = deploy.created_at.utc + 60.minutes
-          event.location    = deploy.environment.to_s
-          event.organizer   = deploy.username.to_s
-        end
-      end
-    end.to_s
-  end
-
   def user_agent_graph(problem)
     create_percentage_table_for(problem.user_agents)
   end

@@ -233,30 +233,6 @@ describe Problem, type: 'model' do
     end
   end
 
-  context "#last_deploy_at" do
-    before do
-      @app = Fabricate(:app)
-      @last_deploy = 10.days.ago
-      Fabricate(:deploy, app: @app, created_at: @last_deploy, environment: "production")
-    end
-
-    it "is set when a problem is created" do
-      problem = Fabricate(:problem, app: @app, environment: "production")
-      assert_equal @last_deploy, problem.last_deploy_at
-    end
-
-    it "is updated when a deploy is created" do
-      problem = Fabricate(:problem, app: @app, environment: "production")
-      next_deploy = 5.minutes.ago
-      expect do
-        @deploy = Fabricate(:deploy, app: @app, created_at: next_deploy)
-        problem.reload
-      end.to change { problem.last_deploy_at.iso8601 }.
-        from(@last_deploy.iso8601).
-        to(next_deploy.iso8601)
-    end
-  end
-
   context "notice messages cache" do
     before do
       @app = Fabricate(:app)

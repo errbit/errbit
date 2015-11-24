@@ -14,7 +14,6 @@ class Problem
 
   field :last_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
   field :first_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
-  field :last_deploy_at, type: Time
   field :resolved, type: Boolean, default: false
   field :resolved_at, type: Time
   field :issue_link, type: String
@@ -37,7 +36,6 @@ class Problem
   index message: 1
   index last_notice_at: 1
   index first_notice_at: 1
-  index last_deploy_at: 1
   index resolved_at: 1
   index notices_count: 1
 
@@ -216,17 +214,13 @@ class Problem
     when "app"            then order_by(["app_name", order])
     when "message"        then order_by(["message", order])
     when "last_notice_at" then order_by(["last_notice_at", order])
-    when "last_deploy_at" then order_by(["last_deploy_at", order])
     when "count"          then order_by(["notices_count", order])
     else fail("\"#{sort}\" is not a recognized sort")
     end
   end
 
   def cache_app_attributes
-    if app
-      self.app_name = app.name
-      self.last_deploy_at = app.last_deploy_at
-    end
+    self.app_name = app.name if app
   end
 
   def truncate_message

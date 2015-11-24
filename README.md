@@ -80,10 +80,6 @@ Configuration
 Errbit configuration is done entirely through environment variables. See
 [configuration](docs/configuration.md)
 
-Deploy Hooks
--------------
-Errbit can track your application deploys. See [deploy hooks](docs/deploy-hooks.md)
-
 Deployment
 ----------
 See [notes on deployment](docs/deployment.md)
