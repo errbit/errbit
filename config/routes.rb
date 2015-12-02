@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
   get '/locate/:id' => 'notices#locate', :as => :locate
 
-  resources :notices,   only: [:show]
+  resources :notices, only: [:show]
   resources :users do
     member do
       delete :unlink_github

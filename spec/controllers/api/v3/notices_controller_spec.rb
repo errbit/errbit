@@ -21,6 +21,11 @@ describe Api::V3::NoticesController, type: :controller do
     )
   end
 
+  it 'responds with 201 created on success' do
+    post :create, legit_body, legit_params
+    expect(response.status).to be(201)
+  end
+
   it 'responds with 400 when request attributes are not valid' do
     allow_any_instance_of(AirbrakeApi::V3::NoticeParser).
       to receive(:report).and_raise(AirbrakeApi::ParamsError)

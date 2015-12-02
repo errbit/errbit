@@ -14,7 +14,7 @@ class Api::V3::NoticesController < ApplicationController
     if report.valid?
       if report.should_keep?
         report.generate_notice!
-        render json: {
+        render status: 201, json: {
           id:  report.notice.id,
           url: app_problem_url(
             report.app,
