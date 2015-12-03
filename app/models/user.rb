@@ -81,6 +81,15 @@ class User
     :auth_token
   end
 
+  def reset_password(new_password, new_password_confirmation)
+    self.password = new_password
+    self.password_confirmation = new_password_confirmation
+
+    self.class.validators_on(:password).map { |v| v.validate_each(self, :password, password) }
+    return false if errors.any?
+    save(validate: false)
+  end
+
   private def generate_authentication_token
     loop do
       token = Devise.friendly_token
