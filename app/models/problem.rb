@@ -55,7 +55,6 @@ class Problem
   validates :last_notice_at, :first_notice_at, presence: true
 
   before_create :cache_app_attributes
-  before_save :truncate_message
 
   scope :resolved, -> { where(resolved: true) }
   scope :unresolved, -> { where(resolved: false) }
@@ -221,10 +220,6 @@ class Problem
 
   def cache_app_attributes
     self.app_name = app.name if app
-  end
-
-  def truncate_message
-    self.message = message[0, 1000] if message
   end
 
   def issue_type

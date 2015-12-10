@@ -1,6 +1,8 @@
 require 'recurse'
 
 class Notice
+  MESSAGE_LENGTH_LIMIT = 1000
+
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -31,6 +33,12 @@ class Notice
   scope :for_errs, lambda { |errs|
     where(:err_id.in => errs.all.map(&:id))
   }
+
+  # Overwrite the default setter to make sure the message length is no longer
+  # than the limit we impose
+  def message=(m)
+    super(m.is_a?(String) ? m[0, MESSAGE_LENGTH_LIMIT] : m)
+  end
 
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
