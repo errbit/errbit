@@ -5,7 +5,7 @@ Errbit takes all of its configuration from environment variables. You can use
 to fill in any values that you can't or won't supply through the environment.
 
 In order of precedence Errbit uses:
-1. Environment variables (for example MY_VALUE=abc bundle exec unicorn)
+1. Environment variables (for example MY_VALUE=abc bundle exec puma)
 2. Values provided in a .env file
 3. Default values from .env.default
 
