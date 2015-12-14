@@ -21,7 +21,7 @@ set :ssh_options, forward_agent: true
 set :linked_files, fetch(:linked_files, []) + %w(
   .env
   config/newrelic.yml
-  config/unicorn.rb
+  config/puma.rb
 )
 
 set :linked_dirs, fetch(:linked_dirs, []) + %w(
@@ -46,7 +46,7 @@ namespace :errbit do
 
       {
         'config/newrelic.example.yml' => 'config/newrelic.yml',
-        'config/unicorn.default.rb'   => 'config/unicorn.rb'
+        'config/puma.default.rb'   => 'config/puma.rb'
       }.each do |src, target|
         unless test("[ -f #{shared_path}/#{target} ]")
           upload! src, "#{shared_path}/#{target}"
@@ -69,47 +69,5 @@ namespace :db do
   end
 end
 
-set :unicorn_pidfile, "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid"
-set :unicorn_pid, "`cat #{fetch(:unicorn_pidfile)}`"
-
-namespace :unicorn do
-  desc 'Start unicorn'
-  task :start do
-    on roles(:app) do
-      within current_path do
-        if test " [ -s #{fetch(:unicorn_pidfile)} ] "
-          warn "Unicorn is already running."
-        else
-          with "UNICORN_PID" => fetch(:unicorn_pidfile) do
-            execute :bundle, :exec, :unicorn, "-D -c ./config/unicorn.rb"
-          end
-        end
-      end
-    end
-  end
-
-  desc 'Reload unicorn'
-  task :reload do
-    on roles(:app) do
-      execute :kill, "-HUP", fetch(:unicorn_pid)
-    end
-  end
-
-  desc 'Stop unicorn'
-  task :stop do
-    on roles(:app) do
-      if test " [ -s #{fetch(:unicorn_pidfile)} ] "
-        execute :kill, "-QUIT", fetch(:unicorn_pid)
-      else
-        warn "Unicorn is not running."
-      end
-    end
-  end
-
-  desc 'Reexecute unicorn'
-  task :reexec do
-    on roles(:app) do
-      execute :kill, "-USR2", fetch(:unicorn_pid)
-    end
-  end
-end
+set :puma_pid, "#{fetch(:deploy_to)}/shared/tmp/pids/puma.pid"
+set :puma_conf, "#{shared_path}/config/puma.rb"
