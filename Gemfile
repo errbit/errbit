@@ -100,8 +100,7 @@ end
 
 group :heroku, :production do
   gem 'rails_12factor', require: ENV.key?("HEROKU")
-  gem 'unicorn', require: false, platform: 'ruby'
-  gem 'unicorn-worker-killer'
+  gem 'puma'
 end
 
 gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
