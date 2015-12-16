@@ -249,6 +249,10 @@ Airbrake.setProject("ERRBIT API KEY", "ERRBIT API KEY");
 Airbrake.setHost("http://errbit.yourdomain.com");
 ```
 
+NOTE: Errbit is known to work with airbrake-js v0.5.2. Newer versions of
+will not work until we figure out how to deal with:
+https://github.com/airbrake/airbrake-js/pull/174#issuecomment-164918928
+
 Plugins and Integrations
 ------------------------
 You can extend Errbit by adding Ruby gems and plugins which are typically gems.
