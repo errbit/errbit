@@ -9,18 +9,20 @@ module AirbrakeApi
         @params = params || {}
       end
 
-      def report
-        attributes = {
+      def attributes
+        {
           error_class:        error['type'],
           message:            error['message'],
           backtrace:          backtrace,
           request:            request,
           server_environment: server_environment,
           api_key:            params['key'].present? ? params['key'] : params['project_id'],
-          notifier:           params['notifier'],
+          notifier:           context['notifier'] || params['notifier'],
           user_attributes:    user_attributes
         }
+      end
 
+      def report
         ErrorReport.new(attributes)
       end
 

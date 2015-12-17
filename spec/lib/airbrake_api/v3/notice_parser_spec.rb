@@ -1,20 +1,27 @@
 describe AirbrakeApi::V3::NoticeParser do
   let(:app) { Fabricate(:app) }
+  let(:notifier_params) do
+    {
+      'name'    => 'notifiername',
+      'version' => 'notifierversion',
+      'url'     => 'notifierurl'
+    }
+  end
 
   it 'raises error when errors attribute is missing' do
     expect do
-      AirbrakeApi::V3::NoticeParser.new({}).report
+      described_class.new({}).report
     end.to raise_error(AirbrakeApi::ParamsError)
 
     expect do
-      AirbrakeApi::V3::NoticeParser.new('errors' => []).report
+      described_class.new('errors' => []).report
     end.to raise_error(AirbrakeApi::ParamsError)
   end
 
   it 'parses JSON payload and returns ErrorReport' do
     params = build_params(key: app.api_key)
 
-    report = AirbrakeApi::V3::NoticeParser.new(params).report
+    report = described_class.new(params).report
     notice = report.generate_notice!
 
     expect(report.error_class).to eq('Error')
@@ -37,7 +44,7 @@ describe AirbrakeApi::V3::NoticeParser do
   it 'parses JSON payload when api_key is missing but project_id is present' do
     params = build_params(key: nil, project_id: app.api_key)
 
-    report = AirbrakeApi::V3::NoticeParser.new(params).report
+    report = described_class.new(params).report
     expect(report).to be_valid
   end
 
@@ -46,12 +53,28 @@ describe AirbrakeApi::V3::NoticeParser do
     params = JSON.parse(json)
     params['key'] = app.api_key
 
-    report = AirbrakeApi::V3::NoticeParser.new(params).report
+    report = described_class.new(params).report
     report.generate_notice!
 
     expect(report.error_class).to eq('Error')
     expect(report.message).to eq('Error: TestError')
     expect(report.backtrace.lines.size).to eq(0)
+  end
+
+  it 'takes the notifier from root' do
+    parser = described_class.new(
+      'errors'      => ['MyError'],
+      'notifier'    => notifier_params,
+      'environment' => {})
+    expect(parser.attributes[:notifier]).to eq(notifier_params)
+  end
+
+  it 'takes the notifier from the context' do
+    parser = described_class.new(
+      'errors'      => ['MyError'],
+      'context'     => { 'notifier' => notifier_params },
+      'environment' => {})
+    expect(parser.attributes[:notifier]).to eq(notifier_params)
   end
 
   def build_params(options = {})
