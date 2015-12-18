@@ -124,7 +124,7 @@ GEM
       octokit
     errbit_plugin (0.5.0)
     erubis (2.7.0)
-    execjs (2.5.2)
+    execjs (2.6.0)
     fabrication (2.13.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
@@ -390,7 +390,7 @@ GEM
     tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     underscore-rails (1.8.3)
