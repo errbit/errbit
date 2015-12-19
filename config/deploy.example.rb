@@ -68,6 +68,3 @@ namespace :db do
     end
   end
 end
-
-set :puma_pid, "#{fetch(:deploy_to)}/shared/tmp/pids/puma.pid"
-set :puma_conf, "#{shared_path}/config/puma.rb"
