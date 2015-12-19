@@ -46,6 +46,19 @@ To start Errbit, you can run:
 bundle exec cap production puma:start
 ```
 
+## Status of Errbit
+To check if the Errbit server is running you can run:
+```bash
+bundle exec cap production puma:status
+```
+
+## Stopping Errbit
+To stop Errbit run
+
+```bash
+bundle exec cap production puma:stop
+```
+
 Supervising and monitoring Errbit is beyond the scope of this
 documentation.
 
