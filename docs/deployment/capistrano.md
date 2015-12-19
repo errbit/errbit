@@ -43,7 +43,7 @@ Errbit comes with some capistrano tasks to manage running Errbit under
 unicorn.
 To start Errbit, you can run:
 ```bash
-bundle exec cap production unicorn:start
+bundle exec cap production puma:start
 ```
 
 Supervising and monitoring Errbit is beyond the scope of this
