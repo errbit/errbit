@@ -68,3 +68,5 @@ namespace :db do
     end
   end
 end
+
+set :puma_bind, 'tcp://0.0.0.0:3000'
