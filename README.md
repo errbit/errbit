@@ -186,8 +186,8 @@ When upgrading Errbit, please run:
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
 bundle install
 rake db:migrate
-rake db:mongoid:create_indexes
 rake db:mongoid:remove_undefined_indexes
+rake db:mongoid:create_indexes
 rake assets:precompile
 ```
 
