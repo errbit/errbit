@@ -101,9 +101,9 @@ end
 
 group :heroku, :production do
   gem 'rails_12factor', require: ENV.key?("HEROKU")
-  gem 'puma'
 end
 
+gem 'puma'
 gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 gem 'sass-rails'
 gem 'uglifier'
