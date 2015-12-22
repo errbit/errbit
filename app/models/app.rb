@@ -31,6 +31,7 @@ class App
   before_validation :generate_api_key, on: :create
   before_save :normalize_github_repo
   before_create :build_notice_fingerprinter
+  after_find :build_notice_fingerprinter
   after_update :store_cached_attributes_on_problems
 
   validates :name, :api_key, presence: true, uniqueness: { allow_blank: true }
@@ -54,6 +55,9 @@ class App
   }
 
   def build_notice_fingerprinter
+    # no need to build a notice_fingerprinter if we already have one
+    return if notice_fingerprinter.present?
+
     attrs = SiteConfig.document.notice_fingerprinter_attributes
     self.notice_fingerprinter = attrs
   end
