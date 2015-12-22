@@ -45,13 +45,14 @@ namespace :errbit do
       execute "touch #{shared_path}/.env"
 
       {
-        'config/newrelic.example.yml' => 'config/newrelic.yml',
-        'config/puma.default.rb'   => 'config/puma.rb'
+        'config/newrelic.example.yml' => 'config/newrelic.yml'
       }.each do |src, target|
         unless test("[ -f #{shared_path}/#{target} ]")
           upload! src, "#{shared_path}/#{target}"
         end
       end
+
+      invoke 'puma:config'
     end
   end
 end
@@ -69,4 +70,5 @@ namespace :db do
   end
 end
 
+set :puma_conf, "#{shared_path}/config/puma.rb"
 set :puma_bind, 'tcp://0.0.0.0:8080'
