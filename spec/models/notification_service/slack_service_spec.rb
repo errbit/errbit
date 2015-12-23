@@ -10,7 +10,7 @@ describe NotificationServices::SlackService, type: 'model' do
       attachments: [
         {
           fallback: notification_service.message_for_slack(problem),
-          pretext:  "<#{notification_service.problem_url(problem)}|Errbit - #{problem.app.name}: #{problem.error_class}>",
+          pretext:  "<#{problem.url}|Errbit - #{problem.app.name}: #{problem.error_class}>",
           color:    "#D00000",
           fields:   [
             {

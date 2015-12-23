@@ -22,7 +22,7 @@ class NotificationServices::SlackService < NotificationService
       attachments: [
         {
           fallback: message_for_slack(problem),
-          pretext:  "<#{problem_url(problem)}|Errbit - #{problem.app.name}: #{problem.error_class}>",
+          pretext:  "<#{problem.url}|Errbit - #{problem.app.name}: #{problem.error_class}>",
           color:    "#D00000",
           fields:   [
             {
