@@ -615,7 +615,7 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, 
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
-table.apps td.name, table.errs td.message { width: 100%; }
+table.apps td.name { width: 100%; }
 table.apps td { padding: 16px 20px; }
 table.apps th { padding: 10px 20px; }
 
@@ -665,9 +665,12 @@ td.count, td.issue_link {
 }
 
 /* Err Tables */
-table.errs td.app {
-  padding-right: 2em;
-  width: 20%;
+table.errs td.app .name {
+  display: block;
+  width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 table.errs td.app .environment {
   font-size: 0.8em;
@@ -676,12 +679,10 @@ table.errs td.app .environment {
 table.errs td.message a {
   display: block;
   word-wrap: break-word;
-  /* PjpG - configuration in WHAT & WHERE table's columns using ellipsis to avoid oversizing table's width */
-    width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-  /* ------ */
+  width: 440px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 table.errs td.message em {
   color: #727272;

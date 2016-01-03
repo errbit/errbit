@@ -17,13 +17,13 @@
           %td.select
             = check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s)
           %td.app
-            = link_to problem.app.name, app_path(problem.app)
+            = link_to problem.app.name, app_path(problem.app), class: 'name', title: problem.app.name
             - if current_page?(:controller => 'problems')
               %span.environment= link_to problem.environment, problems_path(:environment => problem.environment)
             - else
               %span.environment= link_to problem.environment, app_path(problem.app, :environment => problem.environment)
           %td.message
-            = link_to truncated_problem_message(problem), app_problem_path(problem.app, problem)
+            = link_to problem.message, app_problem_path(problem.app, problem), title: problem.message
             %em= problem.where
             - if problem.comments_count > 0
               - comment = problem.comments.last
