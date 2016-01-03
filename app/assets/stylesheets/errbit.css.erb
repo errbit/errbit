@@ -615,7 +615,10 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, 
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
-table.apps td.name, table.errs td.message { width: 100%; }
+table.apps td.name, table.errs td.message {
+  width: 100%;
+  word-break: break-all;
+}
 table.apps td { padding: 16px 20px; }
 table.apps th { padding: 10px 20px; }
 
@@ -668,6 +671,7 @@ td.count, td.issue_link {
 table.errs td.app {
   padding-right: 2em;
   width: 20%;
+  word-break: break-all;
 }
 table.errs td.app .environment {
   font-size: 0.8em;
