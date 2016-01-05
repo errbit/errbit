@@ -5,7 +5,7 @@ class SiteConfig
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  before_save :denormalize
+  after_save :denormalize
 
   embeds_one :notice_fingerprinter, autobuild: true
   validates_associated :notice_fingerprinter
