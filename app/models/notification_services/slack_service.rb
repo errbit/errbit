@@ -19,6 +19,8 @@ class NotificationServices::SlackService < NotificationService
 
   def post_payload(problem)
     {
+      username: "Errbit",
+      icon_emoji: ":exclamation:",
       attachments: [
         {
           fallback: message_for_slack(problem),
