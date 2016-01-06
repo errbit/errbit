@@ -475,4 +475,26 @@ describe Problem, type: 'model' do
       end
     end
   end
+
+  context "#url" do
+    subject { Fabricate(:problem) }
+
+    it "uses the configured protocol" do
+      allow(Errbit::Config).to receive(:protocol).and_return("https")
+
+      expect(subject.url).to eq "https://errbit.example.com/apps/#{subject.app.id}/problems/#{subject.id}"
+    end
+
+    it "uses the configured host" do
+      allow(Errbit::Config).to receive(:host).and_return("memyselfandi.com")
+
+      expect(subject.url).to eq "http://memyselfandi.com/apps/#{subject.app.id}/problems/#{subject.id}"
+    end
+
+    it "uses the configured port" do
+      allow(Errbit::Config).to receive(:port).and_return(8123)
+
+      expect(subject.url).to eq "http://errbit.example.com:8123/apps/#{subject.app.id}/problems/#{subject.id}"
+    end
+  end
 end
