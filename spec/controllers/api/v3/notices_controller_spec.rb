@@ -17,13 +17,13 @@ describe Api::V3::NoticesController, type: :controller do
     notice = Notice.last
     expect(JSON.parse(response.body)).to eq(
       'id'  => notice.id.to_s,
-      'url' => app_problem_url(app, notice.problem)
+      'url' => notice.problem.url
     )
   end
 
-  it 'responds with 201 created on success' do
+  it 'responds with 200 created on success' do
     post :create, legit_body, legit_params
-    expect(response.status).to be(201)
+    expect(response.status).to be(200)
   end
 
   it 'responds with 400 when request attributes are not valid' do
@@ -32,6 +32,13 @@ describe Api::V3::NoticesController, type: :controller do
     post :create, project_id: 'ID'
     expect(response.status).to eq(400)
     expect(response.body).to eq('Invalid request')
+  end
+
+  it 'responds with 422 when notice comes from an old app' do
+    app.current_app_version = '1.1.0'
+    app.save!
+    post :create, legit_body, legit_params
+    expect(response.status).to eq(422)
   end
 
   it 'responds with 422 when project_id is invalid' do

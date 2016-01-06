@@ -97,6 +97,13 @@ Changing the fingerprinter (under the 'config' menu) applies to all apps and
 the change affects only notices that arrive after the change. If you want to
 refingerprint old notices, you can run `rake errbit:notice_refingerprint`.
 
+Managing apps
+---------------------
+An Errbit app is a place to collect error notifications from your external
+application deployments.
+
+See [apps](docs/apps.md)
+
 Authentication
 --------------
 ### Configuring GitHub authentication:
