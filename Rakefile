@@ -3,7 +3,7 @@
 
 # These rake tasks should always be run in the 'test' environment and the
 # environment name must be set before loading the Rails application
-test_env_tasks = %w(spec)
+test_env_tasks = %w(default spec)
 if Rake.application.top_level_tasks.any? { |t| test_env_tasks.include?(t) }
   ENV['RAILS_ENV'] = 'test'
 end
