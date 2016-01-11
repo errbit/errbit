@@ -105,5 +105,5 @@ In order of precedence Errbit uses:
 <dd>defaults to false</dd>
 <dt>ERRBIT_LOG_LOCATION</dt>
 <dd>Path to use to store the log. Specify <em>STDOUT</em> for stdout output, <em>Syslog::Logger</em> to send logs to syslog (uses local0 facility).
-<dd>defaults to no logging
+<dd>defaults to STDOUT
 </dl>
