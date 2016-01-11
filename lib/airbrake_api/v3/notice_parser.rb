@@ -69,8 +69,14 @@ module AirbrakeApi
       end
 
       def user_attributes
-        hash = context.slice('userId', 'userUsername', 'userName', 'userEmail')
-        Hash[hash.map { |key, value| [key.sub(/^user/, ''), value] }]
+        return context['user'] if context['user']
+
+        {
+          'id' => context['userId'],
+          'name' => context['userName'],
+          'email' => context['userEmail'],
+          'username' => context['userUsername']
+        }.compact
       end
 
       def url
