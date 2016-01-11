@@ -103,4 +103,7 @@ In order of precedence Errbit uses:
 <dt>USE_UNICORN_WORKER_KILLER</dt>
 <dd>unicorn-worker-killer modules to enable</dd>
 <dd>defaults to false</dd>
+<dt>ERRBIT_LOG_LOCATION</dt>
+<dd>Path to use to store the log. Specify <em>STDOUT</em> for stdout output, <em>Syslog::Logger</em> to send logs to syslog (uses local0 facility).
+<dd>defaults to STDOUT
 </dl>
