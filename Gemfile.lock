@@ -56,8 +56,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (3.2.4)
-    bson (3.2.4-java)
+    bson (4.0.0)
+    bson (4.0.0-java)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -184,10 +184,10 @@ GEM
     mime-types (2.6.1)
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
-    minitest (5.8.1)
-    mongo (2.1.1)
-      bson (~> 3.0)
-    mongoid (5.0.0)
+    minitest (5.8.3)
+    mongo (2.2.1)
+      bson (~> 4.0)
+    mongoid (5.0.2)
       activemodel (~> 4.0)
       mongo (~> 2.1)
       origin (~> 2.1)
@@ -457,7 +457,7 @@ DEPENDENCIES
   kaminari (>= 0.14.1)
   launchy
   meta_request
-  mongoid (= 5.0.0)
+  mongoid (= 5.0.2)
   mongoid-rspec (~> 3.0.0)
   mongoid_rails_migrations
   omniauth-github
@@ -488,3 +488,6 @@ DEPENDENCIES
   useragent
   xmpp4r
   yajl-ruby
+
+BUNDLED WITH
+   1.11.2
