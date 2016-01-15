@@ -40,7 +40,7 @@ route, just map all requests for /assets/.\* to
 
 ## Starting Errbit
 Errbit comes with some capistrano tasks to manage running Errbit under
-unicorn.
+puma.
 To start Errbit, you can run:
 ```bash
 bundle exec cap production puma:start
