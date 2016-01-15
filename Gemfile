@@ -76,6 +76,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-rbenv',   require: false
+  gem 'capistrano3-puma',   require: false
 
   # better errors
   gem 'better_errors'
@@ -100,10 +101,9 @@ end
 
 group :heroku, :production do
   gem 'rails_12factor', require: ENV.key?("HEROKU")
-  gem 'unicorn', require: false, platform: 'ruby'
-  gem 'unicorn-worker-killer'
 end
 
+gem 'puma'
 gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 gem 'sass-rails'
 gem 'uglifier'

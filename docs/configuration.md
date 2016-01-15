@@ -5,7 +5,7 @@ Errbit takes all of its configuration from environment variables. You can use
 to fill in any values that you can't or won't supply through the environment.
 
 In order of precedence Errbit uses:
-1. Environment variables (for example MY_VALUE=abc bundle exec unicorn)
+1. Environment variables (for example MY_VALUE=abc bundle exec puma)
 2. Values provided in a .env file
 3. Default values from .env.default
 
@@ -100,10 +100,4 @@ In order of precedence Errbit uses:
 <dt>DEVISE_MODULES
 <dd>Devise modules to enable
 <dd>defaults to [database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]
-<dt>USE_UNICORN_WORKER_KILLER</dt>
-<dd>unicorn-worker-killer modules to enable</dd>
-<dd>defaults to false</dd>
-<dt>ERRBIT_LOG_LOCATION</dt>
-<dd>Path to use to store the log. Specify <em>STDOUT</em> for stdout output, <em>Syslog::Logger</em> to send logs to syslog (uses local0 facility).
-<dd>defaults to STDOUT
 </dl>
