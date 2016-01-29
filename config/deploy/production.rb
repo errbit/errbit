@@ -1,3 +1,3 @@
 set :stage, 'production'
-server '127.0.0.1', user: 'haystak', roles: %w(web app db), port: 10022
+server 'errbit.hs.stackbuilders.net', user: 'haystak', roles: %w(web app db)
 set :deploy_to, '/var/projects/errbit'
