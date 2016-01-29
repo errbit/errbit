@@ -71,4 +71,4 @@ namespace :db do
 end
 
 set :puma_conf, "#{shared_path}/config/puma.rb"
-set :puma_bind, 'tcp://0.0.0.0:8080'
+set :puma_bind, 'unix:///var/projects/errbit/shared/tmp/sockets/puma.sock;'
