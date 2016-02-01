@@ -11,7 +11,7 @@ lock '3.4.0'
 
 set :application, 'errbit'
 set :repo_url, 'https://github.com/stackbuilders/errbit.git'
-set :branch, ENV['branch'] || 'master'
+set :branch, ENV['branch'] || 'production'
 set :deploy_to, '/var/projects/errbit'
 set :keep_releases, 5
 
@@ -63,4 +63,4 @@ namespace :db do
 end
 
 set :puma_conf, "#{shared_path}/config/puma.rb"
-set :puma_bind, 'unix:///var/projects/errbit/shared/tmp/sockets/puma.sock;'
+set :puma_bind, 'unix:///var/projects/errbit/shared/tmp/sockets/puma.sock'
