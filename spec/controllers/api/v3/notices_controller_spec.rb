@@ -21,9 +21,9 @@ describe Api::V3::NoticesController, type: :controller do
     )
   end
 
-  it 'responds with 200 created on success' do
+  it 'responds with 201 created on success' do
     post :create, legit_body, legit_params
-    expect(response.status).to be(200)
+    expect(response.status).to be(201)
   end
 
   it 'responds with 400 when request attributes are not valid' do
