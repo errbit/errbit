@@ -18,7 +18,7 @@ class Api::V3::NoticesController < ApplicationController
     return render text: VERSION_TOO_OLD, status: 422 unless report.should_keep?
 
     report.generate_notice!
-    render status: 200, json: {
+    render status: 201, json: {
       id:  report.notice.id,
       url: report.problem.url
     }
