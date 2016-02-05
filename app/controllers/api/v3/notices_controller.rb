@@ -10,6 +10,7 @@ class Api::V3::NoticesController < ApplicationController
   def create
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
+    return render(status: 200, text: '') if request.method == 'OPTIONS'
 
     report = AirbrakeApi::V3::NoticeParser.new(
       params.merge(JSON.parse(request.raw_post) || {})).report

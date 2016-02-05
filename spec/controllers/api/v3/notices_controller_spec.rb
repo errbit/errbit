@@ -12,6 +12,12 @@ describe Api::V3::NoticesController, type: :controller do
     expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
   end
 
+  it 'responds to an OPTIONS request' do
+    process :create, 'OPTIONS', project_id: 'nothingspecial'
+    expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
+    expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
+  end
+
   it 'returns created notice id in json format' do
     post :create, legit_body, legit_params
     notice = Notice.last
