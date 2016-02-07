@@ -13,7 +13,10 @@ Mongoid.configure do |config|
   config.load_configuration(
     clients: {
       default: {
-        uri: uri
+        uri: uri,
+        options: {
+          auth_mech: Errbit::Config.mongo_auth_mechanism
+        }
       }
     },
     options: {

@@ -28,6 +28,11 @@ Errbit::Config = Configurator.run(
   secret_key_base:           ['SECRET_KEY_BASE'],
   mongo_url:                 %w(MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
 
+  # Change the default authentication mechanism. Valid options are: :scram,
+  # :mongodb_cr, :mongodb_x509, and :plain. (default on 3.0 is :scram, default
+  # on 2.4 and 2.6 is :plain)
+  mongo_auth_mechanism:      ['MONGO_AUTH_MECH'],
+
   # github
   github_url:                ['GITHUB_URL', lambda do |values|
     values[:github_url].gsub(%r{/*\z}, '')
