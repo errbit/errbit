@@ -3,11 +3,11 @@
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
   = errors_for resource
   = f.hidden_field :reset_password_token
-  .required
+  .required.form-group
     = f.label :password, 'New password'
-    = f.password_field :password
-  .required
+    = f.password_field :password, class: 'form-control'
+  .required.form-group
     = f.label :password_confirmation, 'Type your new password again'
-    = f.password_field :password_confirmation
-  %div.buttons= f.submit "Change my password"
+    = f.password_field :password_confirmation, class: 'form-control'
+  %div.buttons= f.submit "Change my password", class: 'btn btn-primary'
 

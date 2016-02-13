@@ -1,0 +1,35 @@
+div.users-list {
+  a {
+  }
+
+  .mug {
+    vertical-align: top;
+    margin-right: 1em;
+    display: inline-block;
+  }
+
+  img.gravatar {
+    @extend .img-rounded;
+  }
+
+  div.info {
+    display: inline-block;
+
+    .name {
+      font-weight: bold;
+    }
+  }
+
+  .admin {
+    float: right;
+    color: $alert-warning-text;
+    background-color: $alert-warning-bg;
+    font-weight: bold;
+  }
+}
+
+table.single_user {
+  th {
+    padding-right: 2em;
+  }
+}

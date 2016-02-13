@@ -1,3 +1,10 @@
+## 0.6.?
+
+- update ui to use bootstrap v3 for responsive/mobile devices, includes refactoring
+  js and css and adding a couple gems to provide functionality
+- fixed issue tracker icons (:goto and :create were swapped)
+- added several more translation strings and changed several tests to use them
+
 ## 0.6.0
 https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.6.0
 

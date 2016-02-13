@@ -2,21 +2,16 @@
 
 $(function() {
 
-  var currentTab = "summary";
+  var currentTab = $('ul.nav-tabs li.active').find('a').attr('rel');
 
   function init() {
-
-    activateTabbedPanels();
-
     activateSelectableRows();
 
     toggleProblemsCheckboxes();
 
-    bindRequiredPasswordMarks();
-
     // On page apps/:app_id/edit
     $('a.copy_config').on("click", function() {
-      $('select.choose_other_app').show().focus();
+      $('select.choose_other_app').removeClass("hidden").focus();
     });
 
     $('select.choose_other_app').on("change", function() {
@@ -25,50 +20,43 @@ $(function() {
                              "?copy_attributes_from=" + $(this).val();
     });
 
-    $('input[type=submit][data-action]').live('click', function() {
+
+    // On page users/new
+    // On page users/:user_id/edit
+    // mark the password fields as not required if a github username is specified
+    bindRequiredPasswordMarks('#user_github_login');
+
+
+
+    $('input[type=submit][data-action]').on('click', function() {
       $(this).closest('form').attr('action', $(this).attr('data-action'));
     });
+
+
+    // collapse the backtrace each time we view that tab
+    $('ul.nav-tabs').on('click', 'a[rel=backtrace]', function () {
+      hide_external_backtrace();
+    })
+
 
     $('.notice-pagination').each(function() {
       $.pjax.defaults = {timeout: 2000};
 
       $('#content').pjax('.notice-pagination a').on('pjax:start', function() {
-        $('.notice-pagination-loader').css("visibility", "visible");
-        currentTab = $('.tab-bar ul li a.button.active').attr('rel');
+        // show the spinner and remember what tab is current so we can reselect it
+        $('.notice-pagination-loader').removeClass("hidden");
+        currentTab = $('ul.nav-tabs li.active a').attr('rel');
       }).on('pjax:end', function() {
-        activateTabbedPanels();
+        // reselect the tab that was current before the content was reloaded
+        $('ul.nav-tabs li').removeClass('active');
+        $('div.tab-content div').removeClass('active');
+        $('ul.nav-tabs li > a[rel=' + currentTab + ']').parent().addClass("active");
+        $('div#' + currentTab).addClass("active");
       });
     });
+
   }
 
-  function activateTabbedPanels() {
-    $('.tab-bar a').each(function(){
-      var tab = $(this);
-      var panel = $('#'+tab.attr('rel'));
-      panel.addClass('panel');
-      panel.find('h3').hide();
-    });
-
-    $('.tab-bar a').click(function(){
-      activateTab($(this));
-      return(false);
-    });
-    activateTab($('.tab-bar ul li a.button[rel=' + currentTab + ']'));
-  }
-
-  function activateTab(tab) {
-    tab = $(tab);
-    var panel = $('#'+tab.attr('rel'));
-
-    tab.closest('.tab-bar').find('a.active').removeClass('active');
-    tab.addClass('active');
-
-    // If clicking into 'backtrace' tab, hide external backtrace
-    if (tab.attr('rel') == "backtrace") { hide_external_backtrace(); }
-
-    $('.panel').hide();
-    panel.show();
-  }
 
   window.toggleProblemsCheckboxes = function() {
     var checkboxToggler = $('#toggle_problems_checkboxes');
@@ -81,44 +69,48 @@ $(function() {
   }
 
   function activateSelectableRows() {
-    $('.selectable tr').click(function(event) {
+    $('div.problems-list').on('click', 'div.content.row', function(event) {
       if(!_.include(['A', 'INPUT', 'BUTTON', 'TEXTAREA'], event.target.nodeName)) {
         var checkbox = $(this).find('input[name="problems[]"]');
-        checkbox.attr('checked', !checkbox.is(':checked'));
+        checkbox.prop('checked', !checkbox.prop('checked'));
       }
     });
   }
 
-  function bindRequiredPasswordMarks() {
-    $('#user_github_login').keyup(function(event) {
-      toggleRequiredPasswordMarks(this)
+
+  function bindRequiredPasswordMarks(username_el) {
+    $(username_el).keyup(function(event) {
+      toggleRequiredPasswordMarks(this);
     });
+
+    // set initial state before user interaction
+    toggleRequiredPasswordMarks(username_el);
   }
 
   function toggleRequiredPasswordMarks(input) {
-      if($(input).val() == "") {
-        $('#user_password').parent().attr('class', 'required')
-        $('#user_password_confirmation').parent().attr('class', 'required')
-      } else {
-        $('#user_password').parent().attr('class', '')
-        $('#user_password_confirmation').parent().attr('class', '')
-      }
+    if ($(input).val() == "") {
+      $('#user_password').parent().addClass('required');
+      $('#user_password_confirmation').parent().addClass('required');
+    } else {
+      $('#user_password').parent().removeClass('required');
+      $('#user_password_confirmation').parent().removeClass('required');
+    }
   }
 
-  toggleRequiredPasswordMarks();
 
   function hide_external_backtrace() {
-    $('tr.toggle_external_backtrace').hide();
-    $('td.backtrace_separator').show();
+    $('.toggle_external_backtrace').hide();
+    $('.backtrace_separator').show();
   }
   function show_external_backtrace() {
-    $('tr.toggle_external_backtrace').show();
-    $('td.backtrace_separator').hide();
+    $('.toggle_external_backtrace').show();
+    $('.backtrace_separator').hide();
   }
   // Show external backtrace lines when clicking separator
-  $('td.backtrace_separator span').on('click', show_external_backtrace);
+  $('.backtrace_separator').on('click', show_external_backtrace);
   // Hide external backtrace on page load
   hide_external_backtrace();
+
 
   $('.head a.show_tail').click(function(e) {
     $(this).hide().closest('.head_and_tail').find('.tail').show();

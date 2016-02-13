@@ -1,0 +1,51 @@
+
+.apps-list {
+  .row.header {
+    background-color: $gray-lighter;
+    padding: .25em;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: solid 1px $table-border-color;
+  }
+
+  .row.content {
+    padding: .25em;
+    border-bottom: solid 1px $table-border-color;
+
+    .name {
+      font-weight: bold;
+    }
+
+    .github_repo {
+      font-style: italic;
+    }
+
+    a.resolved.badge {
+      background-color: $brand-success;
+    }
+  }
+
+  margin-bottom: 1em;
+
+  div.row.content:nth-child(2n) {
+    background-color: $fieldset-color;
+  }
+}
+
+div.radio label.r_on {
+  font-weight: bold;
+}
+
+a.badge.unresolved { 
+  background-color: $brand-danger;
+}
+
+select.choose_other_app {
+  width: auto;
+  display: inline-block;
+}
+
+div.email_at_notices_nested {
+  padding-left: 2em;
+}
+

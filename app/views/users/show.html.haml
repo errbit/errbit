@@ -4,29 +4,34 @@
   - content_for :title_style do
     background: url('#{gravatar}') no-repeat;
     padding-left: 106px;
+    min-height: 86px;
 
 - content_for :action_bar do
   = render 'shared/link_github_account'
-  = link_to 'edit', edit_user_path(user), :class => 'button'
-  = link_to 'destroy', user_path(user), :method => :delete,
-    :data => { :confirm => t('users.confirm_delete') }, :class => 'delete button'
+  = link_to edit_user_path(user), :class => 'btn btn-default' do
+    %i.fa.fa-edit
+    = t('edit')
+  = link_to user_path(user), :method => :delete, 
+    :data => { :confirm => t('users.confirm_delete') }, :class => 'delete btn btn-danger' do
+    %i.fa.fa-remove
+    = t('destroy')
 
-%table.single_user
+%table.single_user.table.table-striped.table-vertical.table-bordered
   %tr
-    %th Email
+    %th= t('users.email')
     %td.main= user.email
   - if Errbit::Config.user_has_username
     %tr
-      %th Username
+      %th= t('users.username')
       %td.main= user.username
   - if Errbit::Config.github_authentication && user.github_login.present?
     %tr
       %th= "#{Errbit::Config.github_site_title} Login"
       %td.main= link_to user.github_login, "#{Errbit::Config.github_url}/#{user.github_login}"
   %tr
-    %th Admin?
+    %th= t('users.admin')
     %td= user.admin? ? 'Y' : 'N'
   %tr
-    %th Created
+    %th= t('created')
     %td= user.created_at.to_s(:micro)
 

@@ -25,15 +25,15 @@ describe "problems/index.html.haml", type: 'view' do
     it "displays unresolved errors title and button" do
       allow(view).to receive(:all_errs).and_return(false)
       render
-      expect(view.content_for(:title)).to match 'Unresolved Errors'
-      expect(view.content_for(:action_bar)).to have_link 'show resolved'
+      expect(view.content_for(:title)).to match I18n.t('problems.index.unresolved_errs')
+      expect(view.content_for(:action_bar)).to have_link I18n.t('problems.index.all_errs')
     end
 
     it "displays all errors title and button" do
       allow(view).to receive(:all_errs).and_return(true)
       render
-      expect(view.content_for :title).to match 'All Errors'
-      expect(view.content_for :action_bar).to have_link 'hide resolved'
+      expect(view.content_for :title).to match I18n.t('problems.index.all_errs')
+      expect(view.content_for :action_bar).to have_link I18n.t('problems.index.unresolved_errs')
     end
   end
 end

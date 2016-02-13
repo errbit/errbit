@@ -3,26 +3,28 @@
 
 - if Errbit::Config.github_authentication
   - content_for :action_bar do
-    %div.action-bar
-      %span.github= link_to "Sign in with #{Errbit::Config.github_site_title}", user_omniauth_authorize_path(:github)
+    %span.github= link_to "Sign in with #{Errbit::Config.github_site_title}", user_omniauth_authorize_path(:github), class: 'btn btn-default'
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  .required
-    = f.label auth_key
-    = f.text_field auth_key, :type => (Errbit::Config.user_has_username ? 'text' : 'email'), :tabindex => 1, :autofocus => true
+.row
+  .col-xs-12.col-sm-6
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .required.form-group
+        = f.label auth_key
+        = f.text_field auth_key, :type => (Errbit::Config.user_has_username ? 'text' : 'email'), :tabindex => 1, :autofocus => true, class: 'form-control'
 
-  .required
-    = link_to 'forgot it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
-    = f.label :password
-    = f.password_field :password, :tabindex => 2
+      .required.form-group
+        = link_to t('.forgot_password'), new_password_path(resource_name), :class => 'pull-right', :id => "forgot_password"
+        = f.label :password
+        = f.password_field :password, :tabindex => 2, class: 'form-control'
 
-  - if devise_mapping.rememberable?
-    %div.checkbox
-      = f.check_box :remember_me, :tabindex => 3
-      = f.label :remember_me
+      - if devise_mapping.rememberable?
+        %div.checkbox
+          %label
+            = f.check_box :remember_me, :tabindex => 3
+            = t('.remember_me')
 
-  %div.buttons
-    %button{:type => 'submit', :class => 'sign_in'}=t('.sign_in')
+      %div.buttons
+        %button{:type => 'submit', :class => 'sign_in btn btn-primary'}=t('.sign_in')
 
 :javascript
   $('a#forgot_password').click(function(){

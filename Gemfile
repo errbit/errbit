@@ -99,11 +99,13 @@ gem 'puma'
 gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 gem 'sass-rails'
 gem 'uglifier'
-# We can't upgrade because not compatible to jquery >= 1.9.
-# To do that, we need fix the rails.js
-gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-rails', '~> 4.1'
 gem 'pjax_rails'
 gem 'underscore-rails'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'coffee-rails'
+gem 'twitter-bootstrap-rails-confirm', '~> 1.0.4'
 
 ENV['USER_GEMFILE'] ||= './UserGemfile'
 eval_gemfile ENV['USER_GEMFILE'] if File.exist?(ENV['USER_GEMFILE'])

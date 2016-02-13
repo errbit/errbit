@@ -27,6 +27,7 @@ class UsersController < ApplicationController
       flash[:success] = I18n.t('controllers.users.flash.update.success', name: user.name)
       redirect_to user_path(user)
     else
+      flash.now[:error] = I18n.t('controllers.users.flash.update.error')
       render :edit
     end
   end

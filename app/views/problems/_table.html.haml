@@ -1,54 +1,64 @@
 - any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
 =form_tag do
-  %table.errs.selectable
-    %thead
-      %tr
-        %th= check_box_tag "toggle_problems_checkboxes"
-        %th= link_for_sort "App"
-        %th= link_for_sort "What &amp; Where".html_safe, "message"
-        %th= link_for_sort "Latest", "last_notice_at"
-        %th= link_for_sort "Count"
-        - if any_issue_links
-          %th Issue
-        %th Resolve
-    %tbody
-      - problems.each do |problem|
-        %tr{:class => problem.resolved? ? 'resolved' : 'unresolved'}
-          %td.select
-            = check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s)
-          %td.app
-            = link_to problem.app.name, app_path(problem.app), class: 'name', title: problem.app.name
-            - if current_page?(:controller => 'problems')
-              %span.environment= link_to problem.environment, problems_path(:environment => problem.environment)
-            - else
-              %span.environment= link_to problem.environment, app_path(problem.app, :environment => problem.environment)
-          %td.message
-            = link_to problem.message, app_problem_path(problem.app, problem), title: problem.message
-            %em= problem.where
-            - if problem.comments_count > 0
-              - comment = problem.comments.last
-              %br
-              .inline_comment
-                - if comment.user
-                  %em.commenter= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s << ":"
-                %em= truncate(comment.body, :length => 100, :separator => ' ')
-          %td.latest #{time_ago_in_words(problem.last_notice_at)} ago
-          %td.count= link_to problem.notices_count, app_problem_path(problem.app, problem)
+  .problems-list.container-fluid
+    .row.header
+      .col-xs-8.col-sm-9
+        .row
+          .col-xs-12.col-sm-3
+            = check_box_tag "toggle_problems_checkboxes"
+            = link_for_sort "App"
+          .col-xs-12.col-sm-9
+            = link_for_sort "What &amp; Where".html_safe, "message"
+      .col-xs-4.col-sm-3
+        .row
+          .text-right.col-xs-12.col-sm-3= link_for_sort "Count"
+          .text-right.col-xs-12.col-sm-4= link_for_sort "Latest", "last_notice_at"
           - if any_issue_links
-            %td.issue_link
-              - if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending'
-                = link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, :target => "_blank"
-          %td.resolve= link_to image_tag("thumbs-up.png"), resolve_app_problem_path(problem.app, problem),
-            :title => "Resolve", :method => :put, :data => { :confirm => problem_confirm('resolve_one') },
-            :class => 'resolve' if problem.unresolved?
-      - if problems.none?
-        %tr
-          %td{:colspan => (any_issue_links ? 8 : 7)}
-            %em No errs here
+            .text-right.col-xs-12.col-sm-2 Issue
+          .text-right.col-xs-12.col-sm-2 Resolve
+    - problems.each do |problem|
+      .row.content{:class => problem.resolved? ? 'resolved' : 'unresolved'}
+        .col-xs-9.col-sm-9
+          .row
+            .app.col-xs-12.col-sm-3
+              = check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s)
+              = link_to problem.app.name, app_path(problem.app), class: 'name', title: problem.app.name
+              - if current_page?(:controller => 'problems')
+                %span.environment= link_to problem.environment, problems_path(:environment => problem.environment)
+              - else
+                %span.environment= link_to problem.environment, app_path(problem.app, :environment => problem.environment)
+            .message.col-xs-12.col-sm-9
+              = link_to problem.message, app_problem_path(problem.app, problem), title: problem.message, class: 'problem'
+              %em.where= problem.where
+              - if problem.comments_count > 0
+                - comment = problem.comments.last
+                .inline-comment
+                  - if comment.user
+                    %em.commenter= comment.user.name << ":"
+                  %em= truncate(comment.body, :length => 100, :separator => ' ')
+        .col-xs-3.col-sm-3
+          .row
+            .count.text-right.col-xs-12.col-sm-3
+              = link_to problem.notices_count, app_problem_path(problem.app, problem), class: 'badge'
+            .latest.text-right.col-xs-12.col-sm-4 #{time_ago_in_words(problem.last_notice_at)} ago
+            - if any_issue_links
+              .issue_link.text-right.col-xs-12.col-sm-2
+                - if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending'
+                  = link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, :target => "_blank"
+            - if problem.unresolved?
+              .resolve.text-right.col-xs-12.col-sm-2= link_to image_tag("thumbs-up.png"), resolve_app_problem_path(problem.app, problem),
+                :title => "Resolve", :method => :put, :data => { :confirm => problem_confirm('resolve_one') },
+                :class => 'resolve'
+    - if problems.none?
+      %div.row
+        %div.col-xs-12
+          %em= t('.no_errs_here')
+
   = paginate problems
-  .tab-bar
-    %ul
-      - %w(merge unmerge resolve unresolve delete).each do |action|
-        %li= submit_tag action.capitalize, :id => "#{action}_problems", :class => 'button',
-          :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
-          :confirm => problem_confirm(action) }
+
+  .buttons
+    - %w(merge unmerge resolve unresolve delete).each do |action|
+      %input{type: 'submit', name: 'commit', :id => "#{action}_problems", :class => "btn btn-#{action == 'delete' ? 'danger' : 'default'}",
+        :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
+        :confirm => problem_confirm(action) }, value: action.capitalize }
+

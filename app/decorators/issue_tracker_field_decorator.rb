@@ -11,10 +11,11 @@ class IssueTrackerFieldDecorator < Draper::Decorator
     field_info[:label] || object.to_s.titleize
   end
 
-  def input(form, issue_tracker)
+  def input(form, issue_tracker, opts = {})
     form.send(input_field, key.to_s,
       placeholder: field_info[:placeholder],
-      value:       issue_tracker.options[key.to_s])
+      value:       issue_tracker.options[key.to_s],
+      **opts)
   end
 
   private def input_field

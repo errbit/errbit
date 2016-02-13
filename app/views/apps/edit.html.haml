@@ -1,15 +1,19 @@
 - content_for :title, t('.title')
 - content_for :action_bar do
   = link_to_copy_attributes_from_other_app
-  = link_to 'delete all errs', destroy_all_app_problems_path(app), :method => :post,
-    :data => { :confirm => t('apps.confirm_destroy_all_problems') }, :class => 'button'
-  = link_to 'delete application', app_path(app), :method => :delete,
-    :data => { :confirm => t('apps.confirm_delete') }, :class => 'button'
-  = link_to(t('.cancel'), app_path(app), :class => 'button')
+  = link_to destroy_all_app_problems_path(app), :method => :post,
+    :data => { :confirm => t('apps.confirm_destroy_all_problems') }, :class => 'btn btn-danger' do
+    %i.fa.fa-trash
+    = t('.delete_all_errs')
+  = link_to app_path(app), :method => :delete,
+    :data => { :confirm => t('apps.confirm_delete') }, :class => 'btn btn-danger' do
+    %i.fa.fa-remove
+    = t('.delete_application')
+  = link_to(t('.cancel'), app_path(app), :class => 'btn btn-default')
 
 = form_for app_decorate do |f|
 
   = render 'fields', :f => f
 
-  %div.buttons= f.submit t('.update')
+  %div.buttons= f.submit t('.update'), class: 'btn btn-default'
 

@@ -13,10 +13,10 @@ describe "apps/show.html.haml", type: 'view' do
   end
 
   describe "content_for :action_bar" do
-    it "should confirm the 'cancel' link" do
+    it "should confirm the 'all errors' link" do
       render
 
-      expect(action_bar).to have_selector('a.button', text: 'all errors')
+      expect(action_bar).to have_selector('a.btn', text: I18n.t('apps.show.all_errs'))
     end
   end
 

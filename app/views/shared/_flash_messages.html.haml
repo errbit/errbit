@@ -1,4 +1,5 @@
 - unless flash.keys.empty?
-  %ul#flash-messages
-    - flash.each do |type, message|
-      %li{:class => type}= message
+  - flash.each do |type, message|
+    - alert_type = { 'alert' => 'warning', 'error' => 'danger', 'success' => 'success'}[type.to_s] || 'info'
+    %div{ class: "alert alert-#{alert_type}"}
+      = message

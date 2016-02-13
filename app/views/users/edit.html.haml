@@ -1,10 +1,9 @@
-- content_for :title, "Edit #{user.name}"
+- content_for :title, "#{t('edit')} #{user.name}"
 - content_for :action_bar do
   = render 'shared/link_github_account', :user => user
-  = link_to('cancel', user_path(user), :class => 'button')
+  = link_to(t('cancel'), user_path(user), :class => 'btn btn-default')
 
 = form_for user, :html => {:autocomplete => "off"} do |f|
-  = user.errors.full_messages.to_sentence
   = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Update User'
+  %div.buttons= f.submit t('.update_user'), class: 'btn btn-primary'

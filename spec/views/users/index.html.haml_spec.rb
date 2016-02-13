@@ -6,8 +6,8 @@ describe 'users/index.html.haml', type: 'view' do
       Kaminari.paginate_array([user], total_count: 1).page(1)
     )
   end
-  it 'should see users option' do
+  it 'should see users listed' do
     render
-    expect(rendered).to match(/class='user_list'/)
+    expect(rendered).to match(/class="list-group-item"/)
   end
 end

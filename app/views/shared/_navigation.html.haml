@@ -1,20 +1,18 @@
-#nav-bar
-  %ul
-    %li{:class => active_if_here(:apps)}
-      = link_to apps_path do
-        %i.fa.fa-briefcase
-        = t('.apps')
-    %li{:class => active_if_here(:problems)}
-      = link_to problems_path do
-        %i.fa.fa-warning
-        = t('.errors')
-    - if user_signed_in? && current_user.admin?
-      %li{:class => active_if_here(:users)}
-        = link_to users_path do
-          %i.fa.fa-users
-          = t('.users')
-      %li{:class => active_if_here(:site_config)}
-        = link_to site_config_index_path do
-          %i.fa.fa-wrench
-          = t('.config')
-  %div.clear
+%ul.nav.navbar-nav
+  %li{:class => active_if_here(:apps)}
+    = link_to apps_path do
+      %i.fa.fa-briefcase
+      = t('.apps')
+  %li{:class => active_if_here(:problems)}
+    = link_to problems_path do
+      %i.fa.fa-warning
+      = t('.errors')
+  - if user_signed_in? && current_user.admin?
+    %li{:class => active_if_here(:users)}
+      = link_to users_path do
+        %i.fa.fa-users
+        = t('.users')
+    %li{:class => active_if_here(:site_config)}
+      = link_to site_config_index_path do
+        %i.fa.fa-cog
+        = t('.config')

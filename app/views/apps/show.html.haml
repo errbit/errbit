@@ -3,7 +3,7 @@
   = auto_discovery_link_tag :atom, app_path(app, User.token_authentication_key => current_user.authentication_token, :format => "atom"), :title => t('.atom_title', :name => app.name, :host => request.host)
 - content_for :meta do
   - if app.current_app_version.present?
-    %strong="Latest App Version:"
+    %strong= t('.latest_app_version')
     = app.current_app_version
   %strong=t('.errors_caught')
   = app.problems.count
@@ -11,55 +11,74 @@
   = app.api_key
 - content_for :action_bar do
   - if current_user.admin?
-    = link_to t('.edit'), edit_app_path(app), :class => 'button'
+    = link_to edit_app_path(app), :class => 'btn btn-default' do
+      %i.fa.fa-edit
+      = t('.edit')
   - if all_errs
-    = link_to t('.unresolved_errs'), app_path(app), :class => 'button'
+    = link_to app_path(app), :class => 'btn btn-default' do
+      %i.fa.fa-circle-o-notch
+      = t('.unresolved_errs')
   - else
-    = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'button'
+    = link_to app_path(app, :all_errs => true), :class => 'btn btn-default' do
+      %i.fa.fa-circle-o
+      = t('.all_errs')
 
   - if app.watched_by?(current_user)
-    = link_to t('.unwatch'), app_watcher_path(app_id: app, id: current_user.id), method: :delete, class: 'button'
+    = link_to app_watcher_path(app_id: app, id: current_user.id), method: :delete, class: 'btn btn-default' do
+      %i.fa.fa-eye-slash
+      = t('.unwatch')
   - else
-    = link_to t('.watch'), app_watcher_path(app_id: app, id: current_user.id), method: :put, class: 'button'
+    = link_to app_watcher_path(app_id: app, id: current_user.id), method: :put, class: 'btn btn-default' do
+      %i.fa.fa-eye
+      = t('.watch')
 
-%h3#watchers_toggle
-  =t('.watchers')
-  %span.click_span=t('.show_hide')
-#watchers_div
-  - if app.notify_all_users
-    %table.watchers
-      %thead
-        %tr
-          %th=t('.all_users_notified')
-  - else
-    %table.watchers
-      %thead
-        %tr
-          %th=t('.user_or_email')
-      %tbody
-        - app.watchers.each do |watcher|
-          %tr
-            %td= watcher.label
-        - if app.watchers.none?
-          %tr
-            %td
-              %em= t('.no_watcher')
+.panel-group
+  .panel.panel-default
+    .panel-heading
+      %h4.panel-title
+        %a{ "data-toggle" => "collapse", href: "#watchers_panel" }
+          = t('.watchers')
+          - if app.watchers.size > 0
+            %span.badge= app.watchers.size
+    .panel-collapse.collapse#watchers_panel
+      .panel-body
+        - if app.notify_all_users
+          %table.watchers.table.table-striped.table-condensed
+            %thead
+              %tr
+                %th=t('.all_users_notified')
+        - else
+          %table.watchers.table.table-striped.table-condensed
+            %thead
+              %tr
+                %th=t('.user_or_email')
+            %tbody
+              - app.watchers.each do |watcher|
+                %tr
+                  %td= watcher.label
+              - if app.watchers.none?
+                %tr
+                  %td
+                    %em= t('.no_watcher')
 
-- if app.github_repo?
-  %h3#repository_toggle
-    =t('.repository')
-    %span.click_span=t('.show_hide')
-  #repository_div
-    %table.repository
-      %thead
-        %tr
-          %th=t('.github_repo')
-      %tbody
-        %tr
-          %td= link_to(app.github_repo, app.github_url, :target => '_blank')
+  - if app.github_repo?
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title
+          %a{ "data-toggle" => "collapse", href: "#repo_panel" }
+            = t('.repository')
+      .panel-collapse.collapse#repo_panel
+        .panel-body
+          %table.repository.table.table-striped.table-condensed
+            %thead
+              %tr
+                %th=t('.github_repo')
+            %tbody
+              %tr
+                %td= link_to(app.github_repo, app.github_url, :target => '_blank')
 
 - if app.problems.any?
-  %h3.clear=t('.errors')
+  %h4.clear=t('.errors')
   %section
     = render 'problems/search', :all_errs => all_errs, :app_id => app.id
   %br
@@ -67,6 +86,5 @@
     .problem_table{:id => 'problem_table'}
       = render 'problems/table', :problems => problems
 - else
-  %h3.clear=t('.no_error_yet')
+  %h4.clear=t('.no_error_yet')
   = render 'configuration_instructions', :app => app
-

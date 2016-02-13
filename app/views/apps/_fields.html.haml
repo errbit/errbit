@@ -1,45 +1,50 @@
 = errors_for app
 
-%div.required
+%div.required.form-group
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, class: 'form-control'
 
 - unless app.new_record?
-  %div
+  %div.api-key
     %label Api Key
     %span= app.api_key
-    = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app), :class => 'button', :method => 'post'
-%div
+    = link_to regenerate_api_key_app_path(app), :class => 'btn btn-warning', :method => 'post' do
+      %i.fa.fa-refresh
+      = t('.regenerate_api_key')
+%div.form-group
   = f.label :repository_branch
-  = f.text_field :repository_branch, :placeholder => "master"
-%div
+  = f.text_field :repository_branch, :placeholder => "master", class: 'form-control'
+%div.form-group
   = f.label :github_repo
-  = f.text_field :github_repo, :placeholder => "errbit/errbit from https://github.com/errbit/errbit"
-%div
+  = f.text_field :github_repo, :placeholder => "errbit/errbit from https://github.com/errbit/errbit", class: 'form-control'
+%div.form-group
   = f.label :bitbucket_repo
-  = f.text_field :bitbucket_repo, :placeholder => "errbit/errbit from https://bitbucket.org/errbit/errbit"
-%div
+  = f.text_field :bitbucket_repo, :placeholder => "errbit/errbit from https://bitbucket.org/errbit/errbit", class: 'form-control'
+%div.form-group
   = f.label :asset_host
   %em Used to generate links for JavaScript errors
-  = f.text_field :asset_host, :placeholder => "e.g. https://assets.example.com"
-%div
-  = f.label :current_app_version, 'Latest App Version'
+  = f.text_field :asset_host, :placeholder => "e.g. https://assets.example.com", class: 'form-control'
+%div.form-group
+  = f.label :current_app_version, t('.latest_app_version')
   %em Mobile apps can set this to ignore any error below this version. ie: 1.4.3
-  = f.text_field :current_app_version, :placeholder => "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
+  = f.text_field :current_app_version, :placeholder => "e.g. 2.0.1 from the Bundle Identifier on an iOS app", class: 'form-control'
+
 %fieldset
-  %legend Notifications
+  %legend= t('.notifications')
   %div.checkbox
-    = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
-    = f.label :notify_on_errs, 'Notify on errors'
+    %label
+      = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
+      Notify on errors
   - if Errbit::Config.per_app_email_at_notices
-    %div.email_at_notices_nested{:style => app_decorate.notify_err_display}
+    %div.email_at_notices_nested.form-group{:style => app_decorate.notify_err_display}
       .field-helpertext Send a notification every
-      = f.text_field :email_at_notices, :value => app_decorate.email_at_notices
+      = f.text_field :email_at_notices, :value => app_decorate.email_at_notices, class: 'form-control'
       .field-helpertext times an error occurs (comma separated).
 
 %div.checkbox
-  = f.check_box :notify_all_users
-  = f.label :notify_all_users, 'Send notifications to all users'
+  %label
+    = f.check_box :notify_all_users
+    Send notifications to all users
 
 = render "issue_tracker_fields", :f => f
 = render "service_notification_fields", :f => f

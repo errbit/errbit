@@ -17,7 +17,7 @@ describe "apps/edit.html.haml", type: 'view' do
       render
       expect(action_bar).to have_selector(
         format(
-          'a.button[data-confirm="%s"]',
+          'a.btn[data-confirm="%s"]',
           I18n.t('apps.confirm_destroy_all_problems')
         )
       )
@@ -27,7 +27,7 @@ describe "apps/edit.html.haml", type: 'view' do
       render
       expect(action_bar).to have_selector(
         format(
-          'a.button[data-confirm="%s"]',
+          'a.btn[data-confirm="%s"]',
           I18n.t('apps.confirm_delete')
         )
       )

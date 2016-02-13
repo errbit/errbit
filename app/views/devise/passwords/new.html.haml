@@ -1,9 +1,11 @@
 - content_for :title, "Forgot your password?"
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = errors_for resource
-  .required
-    = f.label :email
-    = f.text_field :email, :value => params[:email]
+.row
+  .col-xs-12.col-sm-6
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+      = errors_for resource
+      .required.form-group
+        = f.label :email
+        = f.text_field :email, :value => params[:email], class: 'form-control'
 
-  %div.buttons= f.submit "Send me reset password instructions"
+      %div.buttons= f.submit "Send me reset password instructions", class: 'btn btn-primary'
 

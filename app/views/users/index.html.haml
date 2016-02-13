@@ -1,29 +1,23 @@
-- content_for :title, 'Users'
+- content_for :title, t('.users')
 - content_for :action_bar do
   %span
-    = link_to(new_user_path) do
+    = link_to(new_user_path, class: 'btn btn-success') do
       %i.fa.fa-plus-circle
       = t('.new')
 
-%table.users
-  %thead
-    %tr
+.users-list.list-group
+  - users.each do |user|
+    = link_to user_path(user), class: 'list-group-item' do
       - if Errbit::Config.use_gravatar
-        %th
-      %th Name
-      - if Errbit::Config.user_has_username
-        %th Username
-      %th.main Email
-      %th Admin?
-  %tbody
-    - users.each do |user|
-      %tr.user_list
-        - if Errbit::Config.use_gravatar
-          %td= gravatar_tag user.email, :s => 24
-        %td.nowrap= link_to user.name, user_path(user)
+        .mug
+          = gravatar_tag user.email, :s => 48
+      - if user.admin?
+        %div.admin= t('.admin')
+      .info
+        .name= user.name
         - if Errbit::Config.user_has_username
-          %td= user.username
-        %td= user.email
-        %td= user.admin? ? 'Y' : 'N'
+          .username= user.username
+        .email= user.email
+
 = paginate users
 

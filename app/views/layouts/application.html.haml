@@ -6,6 +6,7 @@
       &mdash;
       = yield(:page_title).present? ? yield(:page_title) : yield(:title)
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1" }/
     = favicon_link_tag
     = csrf_meta_tag
     = stylesheet_link_tag :application
@@ -13,26 +14,37 @@
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
-    #header
-      %div
-        = link_to t('.errbit'), root_path, :id => 'site-name'
-        = render 'shared/navigation' if current_user
-        = render 'shared/session'
-    #content-wrapper
-      #content-title{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
-        %h1= yield :title
-        %span.meta= yield :meta
-        - if (action_bar = yield(:action_bar)).present?
-          #action-bar
-            = action_bar
-      #content
-        = render 'shared/flash_messages'
-        = yield
-      - if content_for?(:comments)
-        #content-comments
-          = yield :comments
-    #footer
-      = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
-      %br
-      = Errbit::VERSION
-    = yield :scripts
+    %nav.navbar.navbar-default.navbar-static-top.navbar-inverse
+      .container-fluid
+        .navbar-header
+          - if current_user
+            %button{ type: 'button', class: 'navbar-toggle collapsed', 'data-toggle' => 'collapse', 'data-target' => '#navbar1', 'aria-expanded' => 'false', 'aria-controls' => 'navbar' }
+              %span.sr-only= t('.toggle_navigation')
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          = link_to root_path, :id => 'site-name', class: 'navbar-brand' do
+            %img{src: asset_path('images/logo.png'), alt: t('.errbit') }
+        #navbar1.navbar-collapse.collapse
+          = render 'shared/navigation' if current_user
+          = render 'shared/session'
+    
+    .container-fluid
+      #content-wrapper
+        #content-title.clearfix{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
+          - if (action_bar = yield(:action_bar)).present?
+            #action-bar
+              = action_bar
+          %h1= yield :title
+          %span.meta= yield :meta
+        #content
+          = render 'shared/flash_messages'
+          = yield
+        - if content_for?(:comments)
+          #content-comments
+            = yield :comments
+      #footer
+        = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
+        %br
+        = Errbit::VERSION
+      = yield :scripts

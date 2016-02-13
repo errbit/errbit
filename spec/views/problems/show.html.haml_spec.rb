@@ -95,7 +95,7 @@ describe "problems/show.html.haml", type: 'view' do
       url = 'http://localhost:3000/problems'
       controller.request.env['HTTP_REFERER'] = url
       render
-      expect(action_bar).to have_selector("span a.up[href='#{url}']", text: 'up')
+      expect(action_bar).to have_selector("span a.up[href='#{url}']", text: I18n.t('problems.show.up'))
     end
 
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
@@ -106,7 +106,7 @@ describe "problems/show.html.haml", type: 'view' do
       allow(view).to receive(:app).and_return(problem.app)
       render
 
-      expect(action_bar).to have_selector("span a.up[href='#{app_problems_path(problem.app)}']", text: 'up')
+      expect(action_bar).to have_selector("span a.up[href='#{app_problems_path(problem.app)}']", text: I18n.t('problems.show.up'))
     end
 
     context 'create issue links' do
@@ -119,7 +119,7 @@ describe "problems/show.html.haml", type: 'view' do
         allow(view).to receive(:app).and_return(problem.app)
         render
 
-        expect(action_bar).to have_selector("span a.create-issue", text: 'create issue')
+        expect(view.content_for(:action_bar)).to match(".create-issue")
       end
 
       context "without issue tracker associate on app" do
@@ -128,7 +128,7 @@ describe "problems/show.html.haml", type: 'view' do
 
         it 'not see link to create issue' do
           render
-          expect(view.content_for(:action_bar)).to_not match(/create issue/)
+          expect(view.content_for(:action_bar)).to_not match(/.create-issue/)
         end
       end
 
@@ -161,7 +161,7 @@ describe "problems/show.html.haml", type: 'view' do
             end
             it 'not see link if no issue tracker' do
               render
-              expect(view.content_for(:action_bar)).to match(/create issue/)
+              expect(view.content_for(:action_bar)).to match(".create-issue")
             end
           end
 
@@ -172,7 +172,7 @@ describe "problems/show.html.haml", type: 'view' do
 
             it 'not see link if no issue tracker' do
               render
-              expect(view.content_for(:action_bar)).to_not match(/create issue/)
+              expect(view.content_for(:action_bar)).to_not match(/.create-issue/)
             end
           end
         end
@@ -193,7 +193,7 @@ describe "problems/show.html.haml", type: 'view' do
 
       expect(view.content_for(:comments)).to include('Test comment')
       expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
-      expect(view.content_for(:comments)).to include('Add a comment')
+      expect(view.content_for(:comments)).to include(I18n.t('problems.show.add_a_comment'))
     end
 
     it 'displays existing comments with configured tracker' do

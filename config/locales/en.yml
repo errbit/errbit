@@ -2,6 +2,13 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  edit: Edit
+  destroy: Delete
+  new: Add
+  cancel: Cancel
+  created: Created
+  following_errors_prevent_action: 'Dang. The following errors are keeping this from being a success.'
+
   flash:
     apps:
       create:
@@ -20,12 +27,14 @@ en:
       title: 'Errbit'
       errbit: 'Errbit'
       powered_html: "Powered by %{link} : the open source error catcher."
+      toggle_navigation: 'Toggle Navigation'
 
   shared:
     navigation:
       apps: 'Apps'
       errors: 'Errors'
       users: 'Users'
+      config: 'Config'
     session:
       sign_out: 'Sign out'
       edit_profile: 'Edit profile'
@@ -50,6 +59,7 @@ en:
           error: "You can't delete yourself"
         update:
           success: "%{name}'s information was successfully updated."
+          error: "The user could not be updated."
     problems:
       flash:
         no_select_problem: "You have not selected any errors"
@@ -68,6 +78,8 @@ en:
     sessions:
       new:
         sign_in: "Sign in"
+        forgot_password: 'forgot password?'
+        remember_me: 'Remember Me'
 
   problems:
     confirm:
@@ -77,18 +89,50 @@ en:
       merge: "Merge select issues? They can be unmerged later."
       unmerge: "Unmerge selected issues? They can be re-merged later."
       unresolve: "Unresolve selected issues? They can be resolved again later."
+    index:
+      all_errs: All Errors
+      unresolved_errs: Unresolved Errors
+    issue_tracker_links:
+      create_issue: Create Issue
+      creating: Creating...
+      go_to_issue: View Issue
+      retry: Retry
+      unlink_issue: Unlink Issue
+      unlink_err_issues: Unlink issue associated with this error?
     search:
       search_placeholder: 'Search for issues'
+    show:
+      add_a_comment: Add a Comment
+      up: Back
+    table:
+      no_errs_here: No errors here.
 
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:
+    admin: Admin?
+    email: Email
+    name: Name
+    username: Username
     confirm_delete: "Permanently delete this user?"
+    fields:
+      entries_per_page: Entries Per Page
     index:
+      admin: Admin
       new: Add a New User
+      users: Users
+    new:
+      add_user: Add User
+      new_user: New User
+    edit:
+      update_user: Update User
+    show:
+      link_account: "Link %{account} Account"
+      unlink_account: "Unlink %{account} Account"
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
+    copy_settings_from_another_app: Copy Settings from Another App
     index:
       notify: Notification Service
       tracker: Tracker
@@ -100,28 +144,33 @@ en:
       no_apps: 'No apps here.'
       click_to_create: 'Click here to create your first one'
     fields:
+      notifications: Notifications
       regenerate_api_key: "Regenerate API key"
+      latest_app_version: 'Latest App Version'
+    service_notification_fields:
+      notification_service: Notification Service
     show:
-      all_errs: all errors
+      all_errs: All Errors
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
       are_you_sure: 'Are you sure?'
       atom_title: "Errbit notices for %{name} at %{host}"
-      edit: edit
+      edit: Edit
       environment: Environment
       errors: Errors
       errors_caught: "Errors Caught:"
       github_repo: GitHub Repo
+      latest_app_version: "Latest App Version:"
       message: Message
       no_error_yet: "No errors have been caught yet, make sure you setup your app"
       no_watcher: "Sadly, no one is watching this app"
       repository: Repository
       revision: Revision
       show_hide: "(show/hide)"
-      unresolved_errs: unresolved errors
-      unwatch: unwatch
+      unresolved_errs: Unresolved Errors
+      unwatch: Unwatch
       user_or_email: User or Email
-      watch: watch
+      watch: Watch
       watchers: Watchers
       when:  When
       who: Who
@@ -129,16 +178,38 @@ en:
       legend: Issue Tracker
     new:
       add_app: "Add App"
-      cancel: "cancel"
+      cancel: "Cancel"
       title: "Add App"
     edit:
       title: 'Edit App'
+      delete_all_errs: Clear All Errors
+      delete_application: Delete Application
       destroy: 'destroy application'
-      cancel: 'cancel'
+      cancel: 'Cancel'
       seriously: 'Seriously?'
       update: 'Update App'
+  site_config:
+    index:
+      action: Action
+      cancel: Cancel
+      component_or_controller: Component (Or Controller)
+      config: Config
+      determines_how_notifications_are_grouped: "The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled."
+      environment_name: Environment Name
+      error_class: Error Class
+      error_message: Error Message
+      notice_fingerprinter: Notice Fingerprinter
+      number_of_backtrace_lines: Number of Backtrace Lines  (-1 for unlimited)
+      update_config: Update Config
   watchers:
     destroy:
       success: "You are no longer watching %{app}"
     update:
       success: "You are now watching %{app}"
+  views:
+    pagination:
+      first: "<i class='fa fa-chevron-left'></i><i class='fa fa-chevron-left'></i> First"
+      last: "Last <i class='fa fa-chevron-right'></i><i class='fa fa-chevron-right'></i>"
+      previous: "<i class='fa fa-chevron-left'></i> Prev"
+      next: "Next <i class='fa fa-chevron-right'></i>"
+      truncate: "&hellip;"

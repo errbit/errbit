@@ -28,8 +28,8 @@ describe 'users/show.html.haml', type: 'view' do
     context 'viewing another user page' do
       it "doesn't show and github linking buttons if user is not current user" do
         render
-        expect(view.content_for(:action_bar)).to_not include('Link GitHub account')
-        expect(view.content_for(:action_bar)).to_not include('Unlink GitHub account')
+        expect(view.content_for(:action_bar)).to_not include(I18n.t('users.show.link_account', account: 'GitHub'))
+        expect(view.content_for(:action_bar)).to_not include(I18n.t('users.show.unlink_account', account: 'GitHub'))
       end
     end
 
@@ -40,7 +40,7 @@ describe 'users/show.html.haml', type: 'view' do
 
       it 'shows link github button when no login or token' do
         render
-        expect(view.content_for(:action_bar)).to include('Link GitHub account')
+        expect(view.content_for(:action_bar)).to include(I18n.t('users.show.link_account', account: 'GitHub'))
       end
 
       it 'shows unlink github button when login and token' do
@@ -48,7 +48,7 @@ describe 'users/show.html.haml', type: 'view' do
         user.github_oauth_token = 'abcdef'
 
         render
-        expect(view.content_for(:action_bar)).to include('Unlink GitHub account')
+        expect(view.content_for(:action_bar)).to include(I18n.t('users.show.unlink_account', account: 'GitHub'))
       end
 
       it "should confirm the 'resolve' link by default" do

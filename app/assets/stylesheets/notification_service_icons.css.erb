@@ -2,10 +2,10 @@
 <% notification_services = NotificationService.subclasses.map{|t| t.label } << 'none' %>
 
 <% notification_services.each do |notification_service| %>
-div.notification_service.nested label.<%= notification_service %> {
+div.notification_service.nested label.<%= notification_service %> span {
   background: url(<%= asset_path "#{ notification_service }_inactive.png" %>) no-repeat;
 }
-div.notification_service.nested label.r_on.<%= notification_service %> {
+div.notification_service.nested label.r_on.<%= notification_service %> span {
   background: url(<%= asset_path "#{ notification_service }_create.png" %>) no-repeat;
 }
 #action-bar a.<%= notification_service %>_create {
@@ -16,3 +16,14 @@ div.notification_service.nested label.r_on.<%= notification_service %> {
 }
 <% end %>
 
+div.notification_service.nested label {
+  min-height: 30px;
+  vertical-align: middle;
+}
+div.notification_service.nested label span {
+  padding-left: 3em;
+  display: inline-block;
+  min-height: 30px;
+  vertical-align: middle;
+  line-height: 30px;
+}

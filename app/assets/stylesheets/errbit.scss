@@ -1,0 +1,131 @@
+.navbar-brand {
+  -ms-transform: rotate(-7deg); /* IE 9 */
+  -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
+  transform: rotate(-7deg);
+}
+
+#site-name img {
+  position: relative;
+  top: -5px;
+}
+
+.error-messages {
+  @extend .alert;
+  @extend .alert-danger;
+
+  p {
+    font-weight: bold;
+    margin-bottom: .5em;
+  }
+}
+
+#footer {
+  font-size: .8em;
+  color: $gray-light;
+  margin-top: 1em;
+  text-align: center;
+
+  a {
+    color: $gray-light;
+  }
+}
+
+div#content-wrapper {
+
+  div#content-title {
+    position: relative;
+    margin-bottom: 1em;
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 0;
+      text-shadow: 2px 2px $gray-lighter; 
+      color: $gray;
+      font-size: $font-size-h3;
+    }
+
+    span.meta {
+      display: block;
+      font-size: .9em;
+    }
+
+    div#action-bar {
+      float: right;
+    }
+  }
+
+  div#content-title.resolved {
+    background-color: $alert-success-bg;
+    padding: .5em;
+  }
+
+}
+
+#action-bar span.github a:before { 
+  font-family: FontAwesome; 
+  content: "\f09b"; 
+  margin-right: .5em; 
+}
+
+form {
+  label, div.checkbox label {
+    font-weight: bold; 
+    text-transform: uppercase;
+  }
+
+  .required label:after { 
+    font-family: FontAwesome; 
+    content: "\f069"; 
+    color: $brand-danger; 
+    margin-left: .5em; 
+    font-weight: normal; 
+  }
+}
+
+#action-bar {
+  .btn, select {
+    margin-bottom: .5em;
+    margin-left: .5em;
+  }
+}
+
+legend {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: .5em;
+}
+
+div.buttons {
+  margin-top: 1em;
+
+  .btn {
+    margin-bottom: .5em;
+  }
+}
+
+.current.asc:after { content: ' ↑'; }
+.current.desc:after { content: ' ↓'; }
+
+div.tab-content {
+  padding-top: 1em;
+}
+
+/* Issue Tracker / Notification Forms */
+div.issue_tracker.nested .tracker_params, div.notification_service.nested .notification_params {
+  display: none;
+}
+
+div.nested .chosen {
+  display: block !important;
+}
+
+fieldset {
+  background-color: $fieldset-color;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+ul.nav-tabs {
+  margin-top: 1em;
+}

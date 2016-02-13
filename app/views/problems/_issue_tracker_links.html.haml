@@ -3,15 +3,21 @@
   - tracker_type = tracker.type
   - if problem.issue_link.present?
     %span
-      %img.button-icon{"src" => tracker_type.icons[:create]}
-      = link_to 'go to issue', problem.issue_link, :class => "goto-issue"
-    = link_to 'unlink issue', unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue"
+      = link_to problem.issue_link, :class => "goto-issue btn btn-default", target: '_blank' do
+        %img.button-icon{"src" => tracker_type.icons[:goto]}
+        = t('.go_to_issue')
+    = link_to unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => t('.unlink_err_issues') }, :class => "unlink-issue btn btn-default" do
+      %img.button-icon{"src" => tracker_type.icons[:destroy] || tracker_type.icons[:create] }
+      = t('.unlink_issue')
   - elsif problem.issue_link == "pending"
     %span.disabled
-      %img.button-icon{"src" => tracker_type.icons[:inactive]}
-      = link_to 'creating...', '#', :class => "create-issue"
-    = link_to 'retry', create_issue_app_problem_path(app, problem), :method => :post
+      = link_to '#', :class => "create-issue btn btn-default disabled" do
+        %img.button-icon{"src" => tracker_type.icons[:inactive]}
+        = t('.creating')
+    = link_to create_issue_app_problem_path(app, problem), :method => :post do
+      = t('.retry')
   - else
     %span
-      %img.button-icon{"src" => tracker_type.icons[:goto]}
-      = link_to 'create issue', create_issue_app_problem_path(app, problem), method: :post, :class => "create-issue"
+      = link_to create_issue_app_problem_path(app, problem), method: :post, :class => "create-issue btn btn-default" do
+        %img.button-icon{"src" => tracker_type.icons[:create]}
+        = t('.create_issue')

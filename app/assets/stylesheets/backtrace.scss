@@ -1,0 +1,43 @@
+div.backtrace {
+  padding: 1em;
+  border: solid 1px $gray-lighter;
+  background-color: #000;
+  color: #C7C7C7;
+  word-wrap: break-word;
+
+  p.line {
+    text-indent: -1em;
+    margin-bottom: 0;
+    margin-left: 1em;
+
+    .file {
+      font-weight: bold;
+    }
+    
+    .method {
+      color: #aaa;
+      font-weight: bold;
+    }
+
+    .in-app {
+      color: #2adb2e;
+      background-color: #2f2f2f;
+    }
+
+    .in-app .path,
+    .in-app .number { color: #2ACB2E; }
+    .in-app .file   { color: #3AFB3E; }
+    .in-app .method { color: #2ACB2E; }
+
+    .in-app a .path,
+    .in-app a .number,
+    .in-app a:hover { color: #21B4FF; }
+    .in-app a .file { color: #31C4FF; }
+  }
+
+  .backtrace_separator {
+    font-weight: bold;
+    background-color: #111;
+    cursor: pointer;
+  }
+}
