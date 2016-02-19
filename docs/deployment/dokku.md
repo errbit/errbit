@@ -20,3 +20,9 @@ dokku config:set errbit EMAIL_DELIVERY_METHOD=smtp SMTP_SERVER=172.17.42.1
 git remote add dokku dokku@<host>:errbit
 git push dokku master
 ```
+
+### Prepare the DB
+
+```bash
+dokku run errbit rake errbit:bootstrap
+```
