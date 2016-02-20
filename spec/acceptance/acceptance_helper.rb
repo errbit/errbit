@@ -22,7 +22,13 @@ end
 
 def log_in(user)
   visit '/'
-  fill_in :user_email, with: user.email
+
+  if Errbit::Config.user_has_username
+    fill_in :user_username, with: user.username
+  else
+    fill_in :user_email, with: user.email
+  end
+
   fill_in :user_password, with: 'password'
   click_on I18n.t('devise.sessions.new.sign_in')
 end
