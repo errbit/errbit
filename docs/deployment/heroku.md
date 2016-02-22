@@ -73,5 +73,5 @@ heroku addons:create cron:daily
 Option 3. Clear resolved errors manually:
 
 ```bash
-heroku run rake errbit:db:clear_resolved
+heroku run rake errbit:clear_resolved
 ```
