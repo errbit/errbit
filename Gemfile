@@ -4,14 +4,6 @@ RAILS_VERSION = '~> 4.2.5.1'
 
 send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
-detected_ruby_version = Gem::Version.new(RUBY_VERSION.dup)
-required_ruby_version = Gem::Version.new('2.1.0') # minimum supported version
-
-if detected_ruby_version < required_ruby_version
-  fail "RUBY_VERSION must be at least #{required_ruby_version}, " \
-       "detected RUBY_VERSION #{RUBY_VERSION}"
-end
-
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
