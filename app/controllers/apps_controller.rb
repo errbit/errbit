@@ -53,7 +53,7 @@ class AppsController < ApplicationController
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
     else
-      flash[:error] = I18n.t('controllers.apps.flash.create.error')
+      flash.now[:error] = I18n.t('controllers.apps.flash.create.error')
       render :new
     end
   end
@@ -63,7 +63,7 @@ class AppsController < ApplicationController
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
     else
-      flash[:error] = I18n.t('controllers.apps.flash.update.error')
+      flash.now[:error] = I18n.t('controllers.apps.flash.update.error')
       render :edit
     end
   end
@@ -76,7 +76,7 @@ class AppsController < ApplicationController
     if app.destroy
       redirect_to apps_url, flash: { success: I18n.t('controllers.apps.flash.destroy.success') }
     else
-      flash[:error] = I18n.t('controllers.apps.flash.destroy.error')
+      flash.now[:error] = I18n.t('controllers.apps.flash.destroy.error')
       render :show
     end
   end
