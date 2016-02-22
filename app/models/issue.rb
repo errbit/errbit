@@ -26,6 +26,23 @@ class Issue
     end
   end
 
+  def close
+    errors.add :base, "This app has no issue tracker" unless issue_tracker
+    return false if errors.present?
+
+    tracker.errors.each { |k, err| errors.add k, err }
+    return false if errors.present?
+
+    if issue_tracker.respond_to? :close_issue
+      url = issue_tracker.close_issue(problem.issue_link, user: user.as_document)
+    end
+    
+    errors.empty?
+  rescue => ex
+    errors.add :base, "There was an error during issue closing: #{ex.message}"
+    false
+  end
+
   def save
     errors.add :base, "The issue has no body" unless body
     errors.add :base, "This app has no issue tracker" unless issue_tracker

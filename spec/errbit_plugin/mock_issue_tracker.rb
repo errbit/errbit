@@ -38,6 +38,11 @@ module ErrbitPlugin
       "http://example.com/mock-errbit"
     end
 
+    def close_issue(url, user)
+      @output << [url, user]
+      "http://example.com/mock-errbit"
+    end
+
     def url
       ''
     end

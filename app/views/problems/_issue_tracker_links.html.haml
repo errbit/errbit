@@ -6,6 +6,11 @@
       %img.button-icon{"src" => tracker_type.icons[:create]}
       = link_to 'go to issue', problem.issue_link, :class => "goto-issue"
     = link_to 'unlink issue', unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue"
+    - if tracker.tracker.respond_to? :close_issue
+      %span
+        = link_to close_issue_app_problem_path(app, problem), method: :post, :class => "close-issue" do
+          %img.button-icon{"src" => tracker_type.icons[:create]}
+          close issue
   - elsif problem.issue_link == "pending"
     %span.disabled
       %img.button-icon{"src" => tracker_type.icons[:inactive]}
