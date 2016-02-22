@@ -34,7 +34,7 @@ class Issue
     return false if errors.present?
 
     if issue_tracker.respond_to? :close_issue
-      url = issue_tracker.close_issue(problem.issue_link, user: user.as_document)
+      issue_tracker.close_issue(problem.issue_link, user: user.as_document)
     end
     
     errors.empty?
