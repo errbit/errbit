@@ -72,9 +72,9 @@ module AirbrakeApi
         return context['user'] if context['user']
 
         {
-          'id' => context['userId'],
-          'name' => context['userName'],
-          'email' => context['userEmail'],
+          'id'       => context['userId'],
+          'name'     => context['userName'],
+          'email'    => context['userEmail'],
           'username' => context['userUsername']
         }.compact
       end

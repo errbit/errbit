@@ -97,7 +97,7 @@ protected
     # set the app's notification service
     available_notification_classes = [NotificationService] + NotificationService.subclasses
     notification_class = available_notification_classes.detect { |c| c.name == notification_type }
-    if !notification_class.nil?
+    unless notification_class.nil?
       app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
     end
   end
