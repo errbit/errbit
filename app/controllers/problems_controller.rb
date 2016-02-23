@@ -124,7 +124,11 @@ class ProblemsController < ApplicationController
   end
 
   def search
-    ps = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
+    if params[:search].blank?
+      ps = Problem.for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
+    else
+      ps = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
+    end
     self.problems = ps.page(params[:page]).per(current_user.per_page)
     respond_to do |format|
       format.html { render :index }
