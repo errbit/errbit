@@ -2,12 +2,13 @@ language: ruby
 env:
   - COVERAGE=true
 rvm:
-  - 2.1.2
+  - 2.1
+  - 2.2
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database errbit_test;' -U postgres
-script: 
-  - RAILS_ENV=test bundle exec rake db:test:prepare --trace
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake spec
 
 
