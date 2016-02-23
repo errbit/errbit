@@ -1,20 +1,20 @@
 # Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url]
 
-[travis-img-url]: https://secure.travis-ci.org/concordia-publishing-house/errbit.png?branch=master
-[travis-ci-url]: http://travis-ci.org/concordia-publishing-house/errbit
+[travis-img-url]: https://secure.travis-ci.org/cph/errbit.png?branch=master
+[travis-ci-url]: http://travis-ci.org/cph/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/concordia-publishing-house/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/concordia-publishing-house/errbit
 [coveralls-img-url]: https://coveralls.io/repos/concordia-publishing-house/errbit/badge.png?branch=master
 [coveralls-url]:https://coveralls.io/r/concordia-publishing-house/errbit
-[gemnasium-img-url]:https://gemnasium.com/concordia-publishing-house/errbit.png
-[gemnasium-url]:https://gemnasium.com/concordia-publishing-house/errbit
+[gemnasium-img-url]:https://gemnasium.com/cph/errbit.png
+[gemnasium-url]:https://gemnasium.com/cph/errbit
 
 
 
 ### The open source, self-hosted error catcher
 
 
-**This is a fork of Errbit that runs on Postgres rather than MongoDB. For the official Errbit, go to errbit/errbit.** 
+**This is a fork of Errbit that runs on Postgres rather than MongoDB. For the official Errbit, go to errbit/errbit.**
 
 
 Errbit is a tool for collecting and managing errors from other applications.
