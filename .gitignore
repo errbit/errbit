@@ -12,10 +12,19 @@
 /tmp
 
 # Configuration
-config/config.yml
-config/deploy.rb
-config/deploy
-config/mongoid.yml
-config/newrelic.yml
+/config/database.yml
+/config/config.yml
+/config/deploy.rb
+/config/deploy
+/config/mongoid.yml
+/config/newrelic.yml
 
-coverage
+/coverage
+
+# Ignore ruby version managers
+/.rvmrc
+/.ruby-version
+/.ruby-gemset
+
+# Ignore pow.cx
+/.powrc
