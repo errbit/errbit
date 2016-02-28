@@ -19,8 +19,8 @@ class NotificationServices::SlackService < NotificationService
 
   def post_payload(problem)
     {
-      username: "Errbit",
-      icon_emoji: ":collision:",
+      username:    "Errbit",
+      icon_emoji:  ":collision:",
       attachments: [
         {
           fallback:   message_for_slack(problem),
@@ -28,7 +28,7 @@ class NotificationServices::SlackService < NotificationService
           title_link: problem.url,
           text:       problem.where,
           color:      "#D00000",
-          fields: [
+          fields:     [
             {
               title: "Application",
               value: problem.app.name,
