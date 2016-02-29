@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003182011) do
+ActiveRecord::Schema.define(version: 20160229202205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,7 +182,6 @@ ActiveRecord::Schema.define(version: 20151003182011) do
   add_index "problems", ["comments_count"], name: "index_problems_on_comments_count", using: :btree
   add_index "problems", ["first_notice_at"], name: "index_problems_on_first_notice_at", using: :btree
   add_index "problems", ["last_notice_at"], name: "index_problems_on_last_notice_at", using: :btree
-  add_index "problems", ["message"], name: "index_problems_on_message", using: :btree
   add_index "problems", ["notices_count"], name: "index_problems_on_notices_count", using: :btree
   add_index "problems", ["resolved_at"], name: "index_problems_on_resolved_at", using: :btree
 
