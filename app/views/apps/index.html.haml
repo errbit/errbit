@@ -6,25 +6,40 @@
         %i.fa.fa-plus-circle
         = t('.new_app')
 
+-# Layout is two main columns: first main column contains two columns, one for name and one for repo.
+-# Second main column contains two columns one for notification service, and one for tracker.
+-# Since most columns only show if data exists in any app for them, then sets the sizes dynamically.
+-# We include a size for xs devices, and sm devices so it folds nicely as needed.
+-any_notification_services? || any_issue_trackers?  # for some reason this needs called before it's actually needed
+-main1    = (any_notification_services? || any_issue_trackers? ? [ 'col-xs-8', 'col-sm-7' ] : [ 'col-xs-12', 'col-sm-12' ])
+-main1_1  = (any_github_repos? || any_bitbucket_repos? ? [ 'col-xs-12', 'col-sm-7' ] : [ 'col-xs-12', 'col-sm-12' ])
+-main1_2  = [ 'col-xs-12', 'col-sm-5' ]
+-main2    = [ 'col-xs-4', 'col-sm-5' ]
+-main2_1  = (any_notification_services? && any_issue_trackers? ? [ 'col-xs-12', 'col-sm-6' ] : [ 'col-xs-12', 'col-sm-12' ])
+-main2_2  = (any_notification_services? && any_issue_trackers? ? [ 'col-xs-12', 'col-sm-6' ] : [ 'col-xs-12', 'col-sm-12' ])
 .apps-list.container-fluid
   .row.header
-    .col-xs-8.col-sm-6
+    %div.main1{class: main1}
       .row
-        .col-xs-12.col-sm-7= t('.name')
+        %div{class: main1_1}
+          = t('.name')
         - if any_github_repos? || any_bitbucket_repos?
-          .col-xs-12.col-sm-5
+          %div{class: main1_2}
             = t('.repository')
-    .col-xs-4.col-sm-6
-      .row
-        - if any_notification_services?
-          .text-right.col-xs-12.col-sm-6= t('.notify')
-        - if any_issue_trackers?
-          .text-right.col-xs-12.col-sm-6= t('.tracker')
+    - if any_notification_services? || any_issue_trackers?
+      %div.main2{class: main2}
+        .row
+          - if any_notification_services?
+            .text-right{class: main2_1}
+              = t('.notify')
+          - if any_issue_trackers?
+            .text-right{class: main2_2}
+              = t('.tracker')
   - apps.each do |app|
     .row.content
-      .col-xs-8.col-sm-6
+      %div{class: main1}
         .row
-          .name.col-xs-12.col-sm-6
+          .name.main1{class: main1_1}
             = link_to app.name, app_path(app)
             - if app.problem_count > 0
               - unresolved = app.unresolved_count
@@ -32,29 +47,30 @@
                 = link_to unresolved, app_path(app), class: "unresolved badge"
 
           - if any_github_repos? or any_bitbucket_repos?
-            .github_repo.col-xs-12.col-sm-6
+            .github_repo{class: main1_2}
               - if app.github_repo?
                 = link_to(app.github_repo, app.github_url, :target => '_blank')
               - if app.bitbucket_repo?
                 = link_to(app.bitbucket_repo, app.bitbucket_url, :target => '_blank')
-      .col-xs-4.col-sm-6
-        .row
-          - if any_notification_services?
-            .notification_service.text-right.col-xs-12.col-sm-6
-              - if app.notification_service_configured?
-                - notification_service_img = image_tag("#{app.notification_service.label}_goto.png")
-                - if app.notification_service.url
-                  = link_to( notification_service_img, app.notification_service.url, :target => "_blank" )
-                - else
-                  = notification_service_img
-          - if any_issue_trackers?
-            .issue_tracker.text-right.col-xs-12.col-sm-6
-              - if app.issue_tracker_configured?
-                - tracker_img = image_tag(app.issue_tracker.type.icons[:goto])
-                - if app.issue_tracker.url
-                  = link_to( tracker_img, app.issue_tracker.url )
-                - else
-                  = tracker_img
+      - if any_notification_services? || any_issue_trackers?
+        %div.main2{class: main2}
+          .row
+            - if any_notification_services?
+              .notification_service.text-right{class: main2_1}
+                - if app.notification_service_configured?
+                  - notification_service_img = image_tag("#{app.notification_service.label}_goto.png")
+                  - if app.notification_service.url
+                    = link_to( notification_service_img, app.notification_service.url, :target => "_blank" )
+                  - else
+                    = notification_service_img
+            - if any_issue_trackers?
+              .issue_tracker.text-right{class: main2_2}
+                - if app.issue_tracker_configured?
+                  - tracker_img = image_tag(app.issue_tracker.type.icons[:goto])
+                  - if app.issue_tracker.url
+                    = link_to( tracker_img, app.issue_tracker.url )
+                  - else
+                    = tracker_img
 
   - if apps.none?
     .row.content
