@@ -122,7 +122,7 @@ If you host Errbit at errbit.example.com, you would fill in:
 * After you have registered your app, set GITHUB_CLIENT_ID and GITHUB_SECRET
   with your app's Client ID and Secret key.
 
-When you start your applicatoin, you should see the option to **Sign in with
+When you start your application, you should see the option to **Sign in with
 GitHub** on the Login page. You will also be able to link your GitHub profile
 to your user account on your **Edit profile** page.
 
