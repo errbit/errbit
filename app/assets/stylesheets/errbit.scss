@@ -129,3 +129,10 @@ fieldset {
 ul.nav-tabs {
   margin-top: 1em;
 }
+
+/* break all superlong words */
+div.row.content {
+  div [class*='col-'] {
+    word-break: break-all;
+  }
+}
