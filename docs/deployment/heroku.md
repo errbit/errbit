@@ -58,7 +58,7 @@ Option 1. With the heroku-scheduler add-on (replacement for cron):
 heroku addons:create scheduler:standard
 
 # Go open the dashboard to schedule the job.  You should use
-# 'rake errbit:db:clear_resolved' as the task command, and schedule it
+# 'rake errbit:clear_resolved' as the task command, and schedule it
 # at whatever frequency you like (once/day should work great).
 heroku addons:create scheduler
 ```
@@ -73,5 +73,5 @@ heroku addons:create cron:daily
 Option 3. Clear resolved errors manually:
 
 ```bash
-heroku run rake errbit:db:clear_resolved
+heroku run rake errbit:clear_resolved
 ```

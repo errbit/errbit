@@ -75,7 +75,7 @@ rbenv=1 bundle exec cap production deploy
 
 ## Schedule recurring tasks
 You may want to periodically clear resolved errors to free up space.
-Schedule ```rake errbit:db:clear_resolved``` to run every day or so.
+Schedule ```rake errbit:clear_resolved``` to run every day or so.
 
 
 ## Monit
