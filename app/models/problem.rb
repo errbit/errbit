@@ -161,8 +161,8 @@ class Problem
       app,
       self,
       protocol: Errbit::Config.protocol,
-      host: Errbit::Config.host,
-      port: Errbit::Config.port
+      host:     Errbit::Config.host,
+      port:     Errbit::Config.port
     )
   end
 
