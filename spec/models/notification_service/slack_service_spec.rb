@@ -9,14 +9,18 @@ describe NotificationServices::SlackService, type: 'model' do
                                            service_url: service_url
   end
 
-  it "it should send a notification to Slack with hook url" do
+  it "should have icon for slack" do
+    expect(Rails.root.join("docs/notifications/slack/errbit.png")).to exist
+  end
+
+  it "should send a notification to Slack with hook url" do
     # setup
     problem = notice.problem
 
     # faraday stubbing
     payload = {
       username:    "Errbit",
-      icon_emoji:  ":collision:",
+      icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
       attachments: [
         {
           fallback:   service.message_for_slack(problem),

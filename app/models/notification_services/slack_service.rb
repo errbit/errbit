@@ -20,7 +20,7 @@ class NotificationServices::SlackService < NotificationService
   def post_payload(problem)
     {
       username:    "Errbit",
-      icon_emoji:  ":collision:",
+      icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
       attachments: [
         {
           fallback:   message_for_slack(problem),
