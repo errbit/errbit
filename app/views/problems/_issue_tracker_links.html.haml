@@ -10,6 +10,11 @@
       = link_to unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue issue-tracker-button" do
         %img.button-icon{"src" => tracker_type.icons[:create]}
         unlink issue
+    - if tracker.tracker.respond_to? :close_issue
+      %span
+        = link_to close_issue_app_problem_path(app, problem), method: :post, :class => "close-issue" do
+          %img.button-icon{"src" => tracker_type.icons[:create]}
+          close issue
   - elsif problem.issue_link == "pending"
     %span.disabled
       = link_to '#', :class => "create-issue issue-tracker-button" do

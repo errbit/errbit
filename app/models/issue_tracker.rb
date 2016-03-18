@@ -36,5 +36,6 @@ class IssueTracker
 
   delegate :configured?, to: :tracker
   delegate :create_issue, to: :tracker
+  delegate :close_issue, to: :tracker
   delegate :url, to: :tracker
 end

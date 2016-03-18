@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         put :resolve
         put :unresolve
         post :create_issue
+        post :close_issue
         delete :unlink_issue
       end
     end
