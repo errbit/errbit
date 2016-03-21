@@ -91,6 +91,14 @@ describe AirbrakeApi::V3::NoticeParser do
     expect(parser.attributes[:notifier]).to eq(notifier_params)
   end
 
+  it 'takes the hostname from the context' do
+    parser = described_class.new(
+        'errors'      => ['MyError'],
+        'context'     => { 'hostname' => 'app01.infra.example.com', 'url' => 'http://example.com/some-page' },
+        'environment' => {})
+    expect(parser.attributes[:server_environment]['hostname']).to eq('app01.infra.example.com')
+  end
+
   def build_params_for(fixture, options = {})
     json = Rails.root.join('spec', 'fixtures', fixture).read
     data = JSON.parse(json)
