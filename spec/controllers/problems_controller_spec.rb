@@ -262,6 +262,40 @@ describe ProblemsController, type: 'controller' do
     end
   end
 
+  describe "POST /apps/:app_id/problems/:id/close_issue" do
+    before { sign_in user }
+
+    context "when app has a issue tracker" do
+      let(:notice) { NoticeDecorator.new(Fabricate :notice) }
+      let(:problem) { ProblemDecorator.new(notice.problem) }
+      let(:issue_tracker) do
+        Fabricate(:issue_tracker).tap do |t|
+          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
+        end
+      end
+
+      before do
+        problem.app.issue_tracker = issue_tracker
+        allow(controller).to receive(:problem).and_return(problem)
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it "should redirect to problem page" do
+        post :close_issue, app_id: problem.app.id, id: problem.id
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+        expect(flash[:error]).to be_blank
+      end
+    end
+
+    context "when app has no issue tracker" do
+      it "should redirect to problem page" do
+        post :close_issue, app_id: problem.app.id, id: problem.id
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+        expect(flash[:error]).to eql "This app has no issue tracker"
+      end
+    end
+  end
+
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
     before(:each) do
       sign_in user

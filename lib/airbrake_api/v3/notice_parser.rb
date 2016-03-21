@@ -84,7 +84,7 @@ module AirbrakeApi
       end
 
       def hostname
-        URI.parse(url).hostname
+        context['hostname'] || URI.parse(url).hostname
       rescue URI::InvalidURIError
         ''
       end
