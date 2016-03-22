@@ -36,6 +36,7 @@ gem 'rack-ssl-enforcer', require: false
 gem 'fabrication'
 gem 'rails_autolink'
 gem 'redcarpet', '~> 3.3.4'
+gem 'gemoji', '~> 2.1.0'
 gem 'progressbar', require: false
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods

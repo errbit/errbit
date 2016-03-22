@@ -5,6 +5,8 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
+load 'tasks/emoji.rake'
+
 Rake::Task[:default].clear if Rake::Task.task_defined?(:default)
 
 namespace :spec do
