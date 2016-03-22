@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 { padding: 0.2em 0; margin-bottom: 1em; border-bottom: 1p
 h1 { font-size: 2.0em; line-height: 1.2em; text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;}
 h2 { font-size: 1.7em; line-height: 1.2em; }
 h3 { font-size: 1.5em; line-height: 1.2em; }
-h4 { font-size: 1.3em; line-height: 1.2em; }
+h4 { font-size: 1.3em; line-height: 1.2em; margin-top: 0; }
 h5 { font-size: 1.1em; line-height: 1.2em; }
 h6 { font-size: 0.9em; line-height: 1.2em; }
 
@@ -102,6 +102,11 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 /* Navigation */
+#header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 #nav-bar {
   position: absolute;
   bottom: 0;
@@ -255,6 +260,11 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 /* Flash Messages */
+#flash-messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 #flash-messages li {
   padding: 13px 45px;
   margin-bottom:25px;
@@ -413,6 +423,7 @@ table {
   border: 1px solid #C6C6C6;
   margin-bottom: 1.5em;
   border-collapse: separate;
+  border-spacing: 0;
 }
 table thead th {
   border-top: 1px solid #FFF;
@@ -548,6 +559,7 @@ a.button.active {
 .tab-bar ul {
   padding: 9px 0 0;
   line-height:0;
+  margin: 0;
 }
 .tab-bar li {
   display: inline-block;
