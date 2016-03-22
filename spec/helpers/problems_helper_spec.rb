@@ -22,12 +22,12 @@ describe ProblemsHelper do
       end
 
       it "should render image_tag with correct alt and src" do
-        expected = "<img alt=\"#{email}\" class=\"gravatar\" src=\"#{base_url}?d=identicon&amp;s=48\" />"
+        expected = "<img alt=\"#{email}\" class=\"gravatar\" height=\"48\" src=\"#{base_url}?d=identicon&amp;s=96\" width=\"48\" />"
         expect(helper.gravatar_tag(email, s: 48)).to eq(expected)
       end
 
       it "should override :d" do
-        expected = "<img alt=\"#{email}\" class=\"gravatar\" src=\"#{base_url}?d=retro&amp;s=48\" />"
+        expected = "<img alt=\"#{email}\" class=\"gravatar\" height=\"48\" src=\"#{base_url}?d=retro&amp;s=96\" width=\"48\" />"
         expect(helper.gravatar_tag(email, d: 'retro', s: 48)).to eq(expected)
       end
     end

@@ -13,7 +13,11 @@ module ProblemsHelper
   def gravatar_tag(email, options = {})
     return nil unless email.present?
 
-    image_tag gravatar_url(email, options), alt: email, class: 'gravatar'
+    options.reverse_merge!(s: 24)
+
+    size = options[:s]
+    options[:s] = options[:s] * 2 # for retina displays
+    image_tag gravatar_url(email, options), alt: email, class: 'gravatar', width: size, height: size
   end
 
   def gravatar_url(email, options = {})
