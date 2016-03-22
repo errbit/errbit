@@ -266,7 +266,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.15.0)
     rake (10.5.0)
-    redcarpet (3.3.2)
+    redcarpet (3.3.4)
     ref (1.0.5)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
@@ -408,7 +408,7 @@ DEPENDENCIES
   rack-utf8_sanitizer
   rails (~> 4.1.14.1)
   rails_autolink
-  redcarpet
+  redcarpet (~> 3.3.4)
   ri_cal
   rspec-rails (~> 2.0)
   ruby-fogbugz
