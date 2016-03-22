@@ -32,7 +32,7 @@
             %th
               - if comment.user
                 - if Errbit::Config.use_gravatar
-                  = gravatar_tag comment.user.email, s: 24
+                  = gravatar_tag comment.user.email, s: 20
                 %span.comment-info
                   = time_ago_in_words(comment.created_at, include_seconds: true) << " ago by "
                   = link_to comment.user.email, comment.user
