@@ -445,11 +445,29 @@ table.single_user {
 }
 
 /* Code */
+pre, code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 0.95em;
+}
+
 pre {
   padding: 0.8em;
   margin-bottom: 1em;
-  font-family: monaco, courier, monospace;
-  font-size: 1.1em;
+}
+
+.mdown pre {
+  background-color: rgba(0,0,0,0.04);
+}
+
+.mdown code {
+  margin: 0;
+  padding: 0.2em 0.4em;
+  background-color: rgba(0,0,0,0.04);
+}
+
+.mdown pre > code {
+  padding: 0;
+  background-color: transparent;
 }
 
 /* HTML Styling */
