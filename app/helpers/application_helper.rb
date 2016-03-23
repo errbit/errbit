@@ -38,7 +38,7 @@ module ApplicationHelper
     create_percentage_table_for(problem.user_agents)
   end
 
-  def tenant_graph(problem)
+  def host_graph(problem)
     create_percentage_table_for(problem.hosts)
   end
 

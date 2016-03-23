@@ -23,8 +23,8 @@
       %th Browser
       %td= user_agent_graph(problem)
     %tr
-      %th Tenant
-      %td= tenant_graph(problem)
+      %th Host
+      %td= host_graph(problem)
     - if notice.server_environment && notice.server_environment["hostname"]
       %tr
         %th App Server
