@@ -16,6 +16,19 @@ class CommentsController < ApplicationController
     redirect_to app_err_path(@app, @err)
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    @comment.update_attributes(params.require(:comment).permit!)
+    if @comment.valid?
+      @err.comments << @comment
+      @err.save
+      flash[:success] = "Comment saved!"
+    else
+      flash[:error] = "I'm sorry, your comment was blank! Try again?"
+    end
+    redirect_to app_err_path(@app, @err)
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy

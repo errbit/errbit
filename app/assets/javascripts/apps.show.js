@@ -23,4 +23,25 @@ $(function() {
       }
     }
   });
+
+  autosize(document.querySelectorAll('textarea'));
+
+  $(document.body).on("click", ".edit-comment", function(e) {
+    e.preventDefault();
+    var textarea = $(this).closest(".editable")
+      .toggleClass("in-edit")
+      .find("textarea")[0];
+    if(textarea) {
+      var e = document.createEvent('Event');
+      e.initEvent('autosize:update', true, false);
+      textarea.dispatchEvent(e);
+    }
+  });
+
+  $(document.body).on("click", ".cancel-edit-comment", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    $(this).closest(".editable").removeClass("in-edit");
+  });
+
 });

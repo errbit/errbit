@@ -27,7 +27,7 @@
     %h3 Comments
     - problem.comments.each do |comment|
       .window
-        %table.comment
+        %table.comment.editable
           %tr
             %th
               - if comment.user
@@ -39,15 +39,28 @@
               - else
                 %span.comment-info
                   = time_ago_in_words(comment.created_at, include_seconds: true) << " ago by [Unknown User]"
-              %span.delete= link_to '&times;'.html_safe, [app, err, comment], method: :delete,
+              %span.comment-actions
+                %a.edit-comment{href: "#"}
+                  %i.fa.fa-pencil
+                = link_to '&times;'.html_safe, [app, err, comment], method: :delete,
                 data: { confirm: t("comments.confirm_delete") }, class: "destroy-comment"
           %tr
-            %td.mdown= preserve mdown comment.body
+            %td
+              %div.editable-show.mdown= preserve mdown comment.body
+              %div.editable-edit
+                = form_for [app, err, comment] do |comment_form|
+                  = comment_form.text_area :body
+                  %div.form-buttons
+                    %button.cancel-edit-comment
+                      Cancel
+                    = comment_form.submit "Save Comment"
+
     - if problem.comments_allowed?
       = form_for [app, err, @comment] do |comment_form|
         %p Add a comment
         = comment_form.text_area :body
-        = comment_form.submit "Save Comment"
+        %div.form-buttons
+          = comment_form.submit "Save Comment"
 
 %h4= @notice.try(:message)
 

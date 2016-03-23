@@ -334,10 +334,20 @@ form input[type=text]:focus, form input[type=password]:focus, form input[type=em
 form input[type=checkbox]:focus + label{
   color: #69C;
 }
-form input[type=submit] {
-  display:block; width: auto; padding: 0.5em;
-  font-size: 1.2em; line-height: 1em; text-transform: uppercase;
-  border: none; color: #FFF; background-color: #387fc1;
+form input[type=submit],
+form button {
+  display: inline-block;
+  width: auto;
+  padding: 0.5em;
+  font-size: 1.2em;
+  line-height: 1em;
+  text-transform: uppercase;
+  border: none;
+  color: #FFF;
+  background-color: #387fc1;
+}
+form button.cancel-edit-comment {
+  background-color: #999;
 }
 form input[type=submit].button {
   font-size: 1em;
@@ -890,15 +900,29 @@ table.comment tbody td {
   padding: 4px 16px;
 }
 
-#content-comments a.destroy-comment {
-  color: #aaa;
-  font-size: 21px;
+#content-comments .comment-actions {
   float: right;
 }
-#content-comments a.destroy-comment:hover {
-  text-decoration: none;
-  color: #AA0000;
+#content-comments .comment-actions > a {
+  color: #aaa;
+  height: 30px;
+  display: inline-block;
+  padding: 0 4px;
 }
+#content-comments .comment-actions > a:hover {
+  text-decoration: none;
+}
+
+.editable .editable-edit { display: none; }
+.editable.in-edit .editable-show { display: none; }
+.editable.in-edit .editable-edit { display: block; }
+.editable.in-edit .comment-actions { display: none; }
+
+#content-comments a.destroy-comment { font-size: 21px; }
+#content-comments a.destroy-comment:hover { color: #AA0000; }
+#content-comments a.edit-comment { font-size: 14px; }
+#content-comments a.edit-comment:hover { color: #0069cc; }
+
 #content-comments #comment_submit {
   margin-top: 15px;
 }
@@ -926,8 +950,21 @@ table.errs tr td.message .inline_comment em.commenter {
 }
 
 textarea#comment_body {
-  width: 420px;
-  height: 80px;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.editable-edit textarea#comment_body {
+  margin: -5px -17px 0;
+  padding: 16px;
+  box-sizing: content-box;
+}
+
+
+
+.form-buttons {
+  text-align: right;
 }
 
 .current.asc:after { content: ' ↑'; }

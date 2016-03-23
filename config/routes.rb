@@ -27,7 +27,7 @@ Errbit::Application.routes.draw do
 
   resources :apps do
     resources :problems, as: "errs", only: [:show] do
-      resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy, :update]
     end
     resources :problems, except: [:show] do
       member do
