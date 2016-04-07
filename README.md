@@ -149,6 +149,26 @@ few others that could make sense for your needs:
   organization can log in to Errbit through GitHub. Errbit will provision
   accounts for new users.
 
+### Configuring Google authentication:
+* Set GOOGLE_AUTHENTICATION=true
+* Register your instance of Errbit at https://console.developers.google.com/apis/api/plus/overview
+
+If you host Errbit at errbit.example.com, you would fill in:
+
+<dl>
+<dt>URL
+<dd>http://errbit.example.com
+<dt>Callback URL
+<dd>http://errbit.example.com/users/auth/github
+</dl>
+
+* After you have registered your app, set GOOGLE_CLIENT_ID and GOOGLE_SECRET
+  with your app's Client ID and Secret key.
+
+When you start your application, you should see the option to **Sign in with
+Google** on the Login page. You will also be able to link your Google profile
+to your user account on your **Edit profile** page.
+
 ### Configuring LDAP authentication:
 
 * Set USER_HAS_USERNAME=true
