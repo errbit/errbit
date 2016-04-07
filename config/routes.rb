@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       delete :unlink_github
+      delete :unlink_google
     end
   end
 

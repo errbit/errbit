@@ -39,6 +39,32 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def google_oauth2
+    google_uid = env['omniauth.auth'].uid
+    google_email = env['omniauth.auth'].info.email
+    google_user = User.where(google_uid: google_uid).first
+    google_site_title = Errbit::Config.google_site_title
+    # If user is already signed in, link google details to their account
+    if current_user
+      # ... unless a user is already registered with same google login
+      if google_user && google_user != current_user
+        flash[:error] = "User already registered with #{google_site_title} login '#{google_email}'!"
+      else
+        # Add github details to current user
+        current_user.update(google_uid: google_uid)
+        flash[:success] = "Successfully linked #{google_email} account!"
+      end
+      # User must have clicked 'link account' from their user page, so redirect there.
+      redirect_to user_path(current_user)
+    elsif google_user
+      flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: google_site_title
+      sign_in_and_redirect google_user, event: :authentication
+    else
+      flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
+      redirect_to new_user_session_path
+    end
+  end
+
   private def update_user_with_github_attributes(user, login, token)
     user.update_attributes(
       github_login:       login,
