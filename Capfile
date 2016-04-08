@@ -2,6 +2,7 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 
 require 'capistrano/rbenv' if ENV['rbenv']
+require 'capistrano/rvm' if ENV['rvm']
 require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/puma'
