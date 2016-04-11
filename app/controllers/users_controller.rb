@@ -51,6 +51,11 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   end
 
+  def unlink_google
+    user.update(google_uid: nil)
+    redirect_to user_path(user)
+  end
+
 protected
 
   def require_user_edit_priviledges
