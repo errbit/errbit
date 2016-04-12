@@ -116,7 +116,7 @@ If you host Errbit at errbit.example.com, you would fill in:
 <dt>URL
 <dd>http://errbit.example.com
 <dt>Callback URL
-<dd>http://errbit.example.com/users/auth/github
+<dd>http://errbit.example.com/users/auth/github/callback
 </dl>
 
 * After you have registered your app, set GITHUB_CLIENT_ID and GITHUB_SECRET
@@ -159,7 +159,7 @@ If you host Errbit at errbit.example.com, you would fill in:
 <dt>URL
 <dd>http://errbit.example.com
 <dt>Callback URL
-<dd>http://errbit.example.com/users/auth/github
+<dd>http://errbit.example.com/users/auth/google_oauth2/callback
 </dl>
 
 * After you have registered your app, set GOOGLE_CLIENT_ID and GOOGLE_SECRET
