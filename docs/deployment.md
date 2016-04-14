@@ -4,6 +4,7 @@ to heroku and capistrano.
 
 See specific notes on deployment via:
 - [heroku](deployment/heroku.md)
+- [dokku](deployment/dokku.md)
 - [capistrano](deployment/capistrano.md)
 
 You can use a process manager to deploy Errbit, but Errbit doesn't maintain

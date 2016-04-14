@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   expose(:user, attributes: :user_params)
   expose(:users) do
-    User.all.page(params[:page]).per(current_user.per_page)
+    User.order_by(name: :asc).page(params[:page]).per(current_user.per_page)
   end
 
   def index; end
@@ -48,6 +48,11 @@ class UsersController < ApplicationController
 
   def unlink_github
     user.update_attributes github_login: nil, github_oauth_token: nil
+    redirect_to user_path(user)
+  end
+
+  def unlink_google
+    user.update(google_uid: nil)
     redirect_to user_path(user)
   end
 

@@ -1,0 +1,5 @@
+- if Errbit::Config.google_authentication && user == current_user
+  - if user.google_account?
+    %span.google= link_to "Unlink #{Errbit::Config.google_site_title} account", unlink_google_user_path, method: :delete, data: { confirm: 'Are you sure?' }
+  - else
+    %span.google= link_to "Link #{Errbit::Config.google_site_title} account", user_omniauth_authorize_path(:google_oauth2)

@@ -2,6 +2,7 @@
 # from the project root directory.
 ENV["RAILS_ENV"] = 'test'
 ENV["ERRBIT_LOG_LEVEL"] = 'fatal'
+ENV["ERRBIT_USER_HAS_USERNAME"] = 'false'
 
 if ENV['COVERAGE']
   require 'coveralls'

@@ -19,11 +19,3 @@ Fabricator(:user_watcher, from: :watcher) do
   user
   watcher_type 'user'
 end
-
-Fabricator(:deploy) do
-  app
-  username 'clyde.frog'
-  repository 'git@github.com/errbit/errbit.git'
-  environment 'production'
-  revision { SecureRandom.hex(10) }
-end

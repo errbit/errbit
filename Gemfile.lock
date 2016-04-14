@@ -1,51 +1,51 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.2.5)
-      actionpack (= 4.2.5)
-      actionview (= 4.2.5)
-      activejob (= 4.2.5)
+    actionmailer (4.2.5.2)
+      actionpack (= 4.2.5.2)
+      actionview (= 4.2.5.2)
+      activejob (= 4.2.5.2)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
     actionmailer_inline_css (1.5.3)
       actionmailer (>= 3.0.0)
       nokogiri (>= 1.4.4)
       premailer (>= 1.7.1)
-    actionpack (4.2.5)
-      actionview (= 4.2.5)
-      activesupport (= 4.2.5)
+    actionpack (4.2.5.2)
+      actionview (= 4.2.5.2)
+      activesupport (= 4.2.5.2)
       rack (~> 1.6)
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (4.2.5)
-      activesupport (= 4.2.5)
+    actionview (4.2.5.2)
+      activesupport (= 4.2.5.2)
       builder (~> 3.1)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    activejob (4.2.5)
-      activesupport (= 4.2.5)
+    activejob (4.2.5.2)
+      activesupport (= 4.2.5.2)
       globalid (>= 0.3.0)
-    activemodel (4.2.5)
-      activesupport (= 4.2.5)
+    activemodel (4.2.5.2)
+      activesupport (= 4.2.5.2)
       builder (~> 3.1)
-    activerecord (4.2.5)
-      activemodel (= 4.2.5)
-      activesupport (= 4.2.5)
+    activerecord (4.2.5.2)
+      activemodel (= 4.2.5.2)
+      activesupport (= 4.2.5.2)
       arel (~> 6.0)
     activeresource (4.0.0)
       activemodel (~> 4.0)
       activesupport (~> 4.0)
       rails-observers (~> 0.1.1)
-    activesupport (4.2.5)
+    activesupport (4.2.5.2)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.8)
-    airbrake (4.3.0)
+    addressable (2.4.0)
+    airbrake (4.3.5)
       builder
       multi_json
     arel (6.0.3)
@@ -60,8 +60,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (3.2.4)
-    bson (3.2.4-java)
+    bson (4.0.0)
+    bson (4.0.0-java)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -80,6 +80,9 @@ GEM
     capistrano-rbenv (2.0.3)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -90,6 +93,8 @@ GEM
     coderay (1.1.0)
     colorize (0.7.7)
     columnize (0.9.0)
+    concurrent-ruby (1.0.1)
+    concurrent-ruby (1.0.1-java)
     coveralls (0.8.2)
       json (~> 1.8)
       rest-client (>= 1.6.8, < 2)
@@ -100,7 +105,7 @@ GEM
       addressable
     debug_inspector (0.0.2)
     decent_exposure (2.3.2)
-    devise (3.5.1)
+    devise (3.5.5)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -123,17 +128,17 @@ GEM
     email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
-    errbit_github_plugin (0.2.0)
+    errbit_github_plugin (0.3.0)
       errbit_plugin
       octokit
-    errbit_plugin (0.5.0)
+    errbit_plugin (0.6.0)
     errbit_redmine_plugin (0.4.0)
       errbit_plugin (~> 0)
       oruen_redmine_client (~> 0)
     erubis (2.7.0)
-    execjs (2.5.2)
+    execjs (2.6.0)
     fabrication (2.13.2)
-    faraday (0.9.1)
+    faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.8-java)
     flowdock (0.6.0)
@@ -143,7 +148,7 @@ GEM
       railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    haml (4.0.6)
+    haml (4.0.7)
       tilt
     hashie (3.4.2)
     hipchat (1.5.1)
@@ -171,13 +176,12 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
     launchy (2.4.3-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -187,13 +191,13 @@ GEM
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
-    mime-types (2.6.2)
+    mime-types (2.99.1)
     mimemagic (0.3.0)
-    mini_portile (0.6.2)
-    minitest (5.8.3)
-    mongo (2.1.1)
-      bson (~> 3.0)
-    mongoid (5.0.0)
+    mini_portile2 (2.0.0)
+    minitest (5.8.4)
+    mongo (2.2.1)
+      bson (~> 4.0)
+    mongoid (5.0.2)
       activemodel (~> 4.0)
       mongo (~> 2.1)
       origin (~> 2.1)
@@ -214,23 +218,28 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     netrc (0.10.3)
-    nokogiri (1.6.6.4)
-      mini_portile (~> 0.6.0)
-    nokogiri (1.6.6.4-java)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.7.2-java)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    octokit (3.8.0)
-      sawyer (~> 0.6.0, >= 0.5.3)
+    octokit (4.3.0)
+      sawyer (~> 0.7.0, >= 0.5.3)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
+    omniauth-google-oauth2 (0.4.0)
+      jwt (~> 1.5.0)
+      multi_json (~> 1.3)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.3.1)
     omniauth-oauth2 (1.3.1)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
@@ -266,6 +275,8 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    puma (3.1.0)
+    puma (3.1.0-java)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -276,16 +287,16 @@ GEM
     rack-ssl-enforcer (0.2.8)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.2.5)
-      actionmailer (= 4.2.5)
-      actionpack (= 4.2.5)
-      actionview (= 4.2.5)
-      activejob (= 4.2.5)
-      activemodel (= 4.2.5)
-      activerecord (= 4.2.5)
-      activesupport (= 4.2.5)
+    rails (4.2.5.2)
+      actionmailer (= 4.2.5.2)
+      actionpack (= 4.2.5.2)
+      actionview (= 4.2.5.2)
+      activejob (= 4.2.5.2)
+      activemodel (= 4.2.5.2)
+      activerecord (= 4.2.5.2)
+      activesupport (= 4.2.5.2)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.5)
+      railties (= 4.2.5.2)
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -293,7 +304,7 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.2)
+    rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
@@ -304,18 +315,17 @@ GEM
       rails (> 3.1)
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.3)
-    railties (4.2.5)
-      actionpack (= 4.2.5)
-      activesupport (= 4.2.5)
+    railties (4.2.5.2)
+      actionpack (= 4.2.5.2)
+      activesupport (= 4.2.5.2)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
-    raindrops (0.13.0)
-    rake (10.4.2)
+    rake (10.5.0)
     ref (1.0.5)
     request_store (1.1.0)
-    responders (2.1.0)
-      railties (>= 4.2.0, < 5)
+    responders (2.1.1)
+      railties (>= 4.2.0, < 5.1)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -366,8 +376,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    sawyer (0.6.0)
-      addressable (~> 2.3.5)
+    sawyer (0.7.0)
+      addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
     simplecov (0.10.0)
       docile (~> 1.1.0)
@@ -377,12 +387,13 @@ GEM
     slop (3.6.0)
     spoon (0.0.4)
       ffi
-    sprockets (3.4.0)
+    sprockets (3.5.2)
+      concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (2.3.3)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      sprockets (>= 2.8, < 4.0)
+    sprockets-rails (3.0.3)
+      actionpack (>= 4.0)
+      activesupport (>= 4.0)
+      sprockets (>= 3.0.0)
     sshkit (1.7.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
@@ -400,7 +411,7 @@ GEM
     tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     underscore-rails (1.8.3)
@@ -408,12 +419,8 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.7.1)
-    unicorn (4.9.0)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     useragent (0.14.0)
-    warden (1.2.3)
+    warden (1.2.4)
       rack (>= 1.0)
     websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
@@ -430,10 +437,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (~> 4.2.0)
+  actionmailer (~> 4.2.5.2)
   actionmailer_inline_css
-  actionpack (~> 4.2.0)
-  airbrake
+  actionpack (~> 4.2.5.2)
+  airbrake (~> 4.3.5)
   better_errors
   binding_of_caller
   campy
@@ -441,10 +448,11 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rbenv
+  capistrano3-puma
   capybara
   coveralls
   decent_exposure
-  devise
+  devise (~> 3.5.5)
   dotenv-rails
   draper
   email_spec
@@ -462,23 +470,25 @@ DEPENDENCIES
   httparty
   jquery-rails (~> 2.1.4)
   json
-  kaminari (>= 0.14.1)
+  kaminari (>= 0.16.3)
   launchy
   meta_request
-  mongoid (= 5.0.0)
+  mongoid (= 5.0.2)
   mongoid-rspec (~> 3.0.0)
   mongoid_rails_migrations
   omniauth-github
+  omniauth-google-oauth2
   pjax_rails
   poltergeist
   pry-byebug
   pry-rails
+  puma
   quiet_assets
   rack-ssl
   rack-ssl-enforcer
   rails_12factor
   rails_autolink
-  railties (~> 4.2.0)
+  railties (~> 4.2.5.2)
   ri_cal
   rspec (~> 3.3)
   rspec-activemodel-mocks
@@ -491,10 +501,9 @@ DEPENDENCIES
   timecop
   uglifier
   underscore-rails
-  unicorn
   useragent
   xmpp4r
   yajl-ruby
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

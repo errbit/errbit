@@ -9,7 +9,7 @@ class AppsController < ApplicationController
   expose(:app_scope) { App }
 
   expose(:apps) do
-    app_scope.all.sort.map { |app| AppDecorator.new(app) }
+    app_scope.all.to_a.sort.map { |app| AppDecorator.new(app) }
   end
 
   expose(:app, ancestor: :app_scope, attributes: :app_params)
@@ -34,10 +34,6 @@ class AppsController < ApplicationController
     end
   end
 
-  expose(:deploys) do
-    app.deploys.order_by(:created_at.desc).limit(5)
-  end
-
   expose(:users) do
     User.all.sort_by { |u| u.name.downcase }
   end
@@ -57,7 +53,7 @@ class AppsController < ApplicationController
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
     else
-      flash[:error] = I18n.t('controllers.apps.flash.create.error')
+      flash.now[:error] = I18n.t('controllers.apps.flash.create.error')
       render :new
     end
   end
@@ -67,7 +63,7 @@ class AppsController < ApplicationController
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
     else
-      flash[:error] = I18n.t('controllers.apps.flash.update.error')
+      flash.now[:error] = I18n.t('controllers.apps.flash.update.error')
       render :edit
     end
   end
@@ -80,7 +76,7 @@ class AppsController < ApplicationController
     if app.destroy
       redirect_to apps_url, flash: { success: I18n.t('controllers.apps.flash.destroy.success') }
     else
-      flash[:error] = I18n.t('controllers.apps.flash.destroy.error')
+      flash.now[:error] = I18n.t('controllers.apps.flash.destroy.error')
       render :show
     end
   end
@@ -101,7 +97,7 @@ protected
     # set the app's notification service
     available_notification_classes = [NotificationService] + NotificationService.subclasses
     notification_class = available_notification_classes.detect { |c| c.name == notification_type }
-    if notification_class.present?
+    unless notification_class.nil?
       app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
     end
   end

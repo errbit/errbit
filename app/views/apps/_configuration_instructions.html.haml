@@ -4,18 +4,14 @@
       # Require the airbrake gem in your App.
       # ---------------------------------------------
       #
-      # Rails 3 - In your Gemfile
-      # gem 'airbrake'
-      #
-      # Rails 2 - In environment.rb
-      # config.gem 'airbrake'
+      # Ruby - In your Gemfile
+      # gem 'airbrake', '~> 5.0'
       #
       # Then add the following to config/initializers/errbit.rb
       # -------------------------------------------------------
 
       Airbrake.configure do |config|
-        config.api_key = '#{app.api_key}'
-        config.host    = '#{request.host}'
-        config.port    = #{request.port}
-        config.secure  = config.port == 443
+        config.host = '#{request.base_url}'
+        config.project_id = true
+        config.project_key = '#{app.api_key}'
       end
