@@ -106,6 +106,9 @@ gem 'uglifier'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'pjax_rails'
 gem 'underscore-rails'
+gem 'render_anywhere', '~> 0.0.12'
+gem 'sidekiq', '~> 4.1', '>= 4.1.1'
+gem 'sinatra', :require => nil
 
 ENV['USER_GEMFILE'] ||= './UserGemfile'
 eval_gemfile ENV['USER_GEMFILE'] if File.exist?(ENV['USER_GEMFILE'])

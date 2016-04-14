@@ -21,6 +21,8 @@ Errbit::Config = Configurator.run(
   per_app_email_at_notices:  ['ERRBIT_PER_APP_EMAIL_AT_NOTICES'],
   notify_at_notices:         ['ERRBIT_NOTIFY_AT_NOTICES'],
   per_app_notify_at_notices: ['ERRBIT_PER_APP_NOTIFY_AT_NOTICES'],
+  issue_at_notices:          ['ERRBIT_ISSUE_AT_NOTICES'],
+  per_app_issue_at_notices:  ['ERRBIT_PER_APP_ISSUE_AT_NOTICES'],
   log_location:              ['ERRBIT_LOG_LOCATION'],
   log_level:                 ['ERRBIT_LOG_LEVEL'],
 

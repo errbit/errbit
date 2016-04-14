@@ -7,6 +7,10 @@ class AppDecorator < Draper::Decorator
     object.email_at_notices.join(', ')
   end
 
+  def issue_at_notices
+    object.issue_at_notices
+  end
+
   def notify_user_display
     object.notify_all_users ? 'display: none;' : ''
   end

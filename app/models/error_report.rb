@@ -58,6 +58,7 @@ class ErrorReport
     cache_attributes_on_problem
     email_notification
     services_notification
+    issue_tracker_notification
     @notice
   end
 
@@ -94,10 +95,25 @@ class ErrorReport
       app.notification_service.notify_at_notices.include?(@problem.notices_count)
   end
 
+  def should_create_issue?
+    return false unless app.issue_at_notices?
+    return false unless app.issue_tracker_configured?
+    return true unless problem.issue_link?
+  end
+
+
   # Launch all notification define on the app associate to this notice
   def services_notification
-    return true unless app.notification_service_configured? && should_notify?
-    app.notification_service.create_notification(problem)
+    return false unless app.notification_service_configured? && should_notify?
+    ServicesNotificationJob.perform_later(problem.id)
+  rescue => e
+    HoptoadNotifier.notify(e)
+  end
+
+  # Send new issue if there is need
+  def issue_tracker_notification
+    return false unless should_create_issue?
+    CreateIssueJob.perform_later(problem.id)
   rescue => e
     HoptoadNotifier.notify(e)
   end
