@@ -8,6 +8,7 @@ class User
   field :email
   field :github_login
   field :github_oauth_token
+  field :google_uid
   field :name
   field :admin, type: Boolean, default: false
   field :per_page, type: Fixnum, default: PER_PAGE
@@ -71,6 +72,10 @@ class User
     self[:github_login] = login
   end
 
+  def google_account?
+    google_uid.present?
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
@@ -79,6 +84,15 @@ class User
 
   def self.token_authentication_key
     :auth_token
+  end
+
+  def reset_password(new_password, new_password_confirmation)
+    self.password = new_password
+    self.password_confirmation = new_password_confirmation
+
+    self.class.validators_on(:password).map { |v| v.validate_each(self, :password, password) }
+    return false if errors.any?
+    save(validate: false)
   end
 
   private def generate_authentication_token

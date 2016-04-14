@@ -4,13 +4,12 @@ Rails.application.routes.draw do
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
   get '/locate/:id' => 'notices#locate', :as => :locate
-  post '/deploys.txt' => 'deploys#create'
 
-  resources :notices,   only: [:show]
-  resources :deploys,   only: [:show]
+  resources :notices, only: [:show]
   resources :users do
     member do
       delete :unlink_github
+      delete :unlink_google
     end
   end
 
@@ -44,10 +43,10 @@ Rails.application.routes.draw do
         put :resolve
         put :unresolve
         post :create_issue
+        post :close_issue
         delete :unlink_issue
       end
     end
-    resources :deploys, only: [:index]
     resources :watchers, only: [:destroy, :update]
     member do
       post :regenerate_api_key
@@ -67,7 +66,7 @@ Rails.application.routes.draw do
   end
 
   match '/api/v3/projects/:project_id/create-notice' => 'api/v3/notices#create', via: [:post]
-  match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post]
+  match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post, :options]
 
   root to: 'apps#index'
 end

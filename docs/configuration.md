@@ -5,7 +5,7 @@ Errbit takes all of its configuration from environment variables. You can use
 to fill in any values that you can't or won't supply through the environment.
 
 In order of precedence Errbit uses:
-1. Environment variables (for example MY_VALUE=abc bundle exec unicorn)
+1. Environment variables (for example MY_VALUE=abc bundle exec puma)
 2. Values provided in a .env file
 3. Default values from .env.default
 
@@ -79,6 +79,16 @@ In order of precedence Errbit uses:
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
 <dd>defaults to GitHub</dd>
+<dt>GOOGLE_AUTHENTICATION
+<dd>Allow google sign-in via OAuth
+<dd>defaults to true
+<dt>GOOGLE_CLIENT_ID
+<dd>Client id of your google application
+<dt>GOOGLE_SECRET
+<dd>Secret key for your google application
+<dt>GOOGLE_SITE_TITLE</dt>
+<dd>The title to use for Google. This value is whatever you want displayed in the Errbit UI when referring to Google.</dd>
+<dd>defaults to Google</dd>
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER

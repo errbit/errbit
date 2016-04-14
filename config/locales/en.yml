@@ -92,7 +92,6 @@ en:
     index:
       notify: Notification Service
       tracker: Tracker
-      last_deploy: Last Deploy
       errors: Errors
       name: Name
       repository: Repository
@@ -103,21 +102,17 @@ en:
     fields:
       regenerate_api_key: "Regenerate API key"
     show:
-      all_deploys: "All Deploys (%{count})"
       all_errs: all errors
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
       are_you_sure: 'Are you sure?'
       atom_title: "Errbit notices for %{name} at %{host}"
-      deploy_count: "Deploy Count:"
       edit: edit
       environment: Environment
       errors: Errors
       errors_caught: "Errors Caught:"
       github_repo: GitHub Repo
-      latest_deploys: Latest Deploys
       message: Message
-      no_deploys:  No deploys
       no_error_yet: "No errors have been caught yet, make sure you setup your app"
       no_watcher: "Sadly, no one is watching this app"
       repository: Repository

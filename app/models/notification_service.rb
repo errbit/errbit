@@ -66,8 +66,4 @@ class NotificationService
   def configured?
     api_token.present?
   end
-
-  def problem_url(problem)
-    "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
-  end
 end

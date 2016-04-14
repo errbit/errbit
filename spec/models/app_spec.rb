@@ -3,7 +3,7 @@ describe App, type: 'model' do
     it { is_expected.to have_field(:_id).of_type(String) }
     it { is_expected.to have_field(:name).of_type(String) }
     it { is_expected.to have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
-    it { is_expected.to have_fields(:resolve_errs_on_deploy, :notify_all_users, :notify_on_errs, :notify_on_deploys).of_type(Mongoid::Boolean) }
+    it { is_expected.to have_fields(:notify_all_users, :notify_on_errs).of_type(Mongoid::Boolean) }
     it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end
 
@@ -218,6 +218,21 @@ describe App, type: 'model' do
       expect do
         App.find_by_api_key!('foo')
       end.to raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  end
+
+  describe '#notice_fingerprinter' do
+    it 'app acquires a notice_fingerprinter when it doesn\'t have one' do
+      app = Fabricate(:app, name: 'Errbit')
+      app.notice_fingerprinter.delete
+
+      # has a notice_fingerprinter because it's been accessed when blank
+      expect(app.reload.notice_fingerprinter).to be_a(NoticeFingerprinter)
+    end
+
+    it 'brand new app has a notice_fingerprinter' do
+      app = Fabricate(:app, name: 'Errbit')
+      expect(app.notice_fingerprinter).to be_a(NoticeFingerprinter)
     end
   end
 end

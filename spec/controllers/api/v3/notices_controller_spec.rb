@@ -12,13 +12,24 @@ describe Api::V3::NoticesController, type: :controller do
     expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
   end
 
+  it 'responds to an OPTIONS request' do
+    process :create, 'OPTIONS', project_id: 'nothingspecial'
+    expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
+    expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
+  end
+
   it 'returns created notice id in json format' do
     post :create, legit_body, legit_params
     notice = Notice.last
     expect(JSON.parse(response.body)).to eq(
       'id'  => notice.id.to_s,
-      'url' => app_problem_url(app, notice.problem)
+      'url' => notice.problem.url
     )
+  end
+
+  it 'responds with 201 created on success' do
+    post :create, legit_body, legit_params
+    expect(response.status).to be(201)
   end
 
   it 'responds with 400 when request attributes are not valid' do
@@ -27,6 +38,13 @@ describe Api::V3::NoticesController, type: :controller do
     post :create, project_id: 'ID'
     expect(response.status).to eq(400)
     expect(response.body).to eq('Invalid request')
+  end
+
+  it 'responds with 422 when notice comes from an old app' do
+    app.current_app_version = '1.1.0'
+    app.save!
+    post :create, legit_body, legit_params
+    expect(response.status).to eq(422)
   end
 
   it 'responds with 422 when project_id is invalid' do

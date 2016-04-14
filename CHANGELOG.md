@@ -1,6 +1,8 @@
-## 0.5.0
+## 0.6.0
+https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.6.0
 
-https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=is%3Aclosed+milestone%3A0.5.0
+## 0.5.0
+https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.5.0
 
 ## 0.4.0
 

@@ -9,7 +9,6 @@ describe "apps/show.html.haml", type: 'view' do
   before do
     allow(view).to receive(:app).and_return(app)
     allow(view).to receive(:all_errs).and_return(false)
-    allow(view).to receive(:deploys).and_return([])
     allow(controller).to receive(:current_user).and_return(user)
   end
 

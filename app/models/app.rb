@@ -10,10 +10,8 @@ class App
   field :asset_host
   field :repository_branch
   field :current_app_version
-  field :resolve_errs_on_deploy, type: Boolean, default: false
   field :notify_all_users, type: Boolean, default: false
   field :notify_on_errs, type: Boolean, default: true
-  field :notify_on_deploys, type: Boolean, default: false
   field :email_at_notices, type: Array, default: Errbit::Config.email_at_notices
 
   # Some legacy apps may have string as key instead of BSON::ObjectID
@@ -24,15 +22,16 @@ class App
     default:       -> { BSON::ObjectId.new.to_s }
 
   embeds_many :watchers
-  embeds_many :deploys
   embeds_one :issue_tracker, class_name: 'IssueTracker'
   embeds_one :notification_service
-  embeds_one :notice_fingerprinter, autobuild: true
+  embeds_one :notice_fingerprinter
 
   has_many :problems, inverse_of: :app, dependent: :destroy
 
   before_validation :generate_api_key, on: :create
   before_save :normalize_github_repo
+  before_create :build_notice_fingerprinter
+  after_find :build_notice_fingerprinter
   after_update :store_cached_attributes_on_problems
 
   validates :name, :api_key, presence: true, uniqueness: { allow_blank: true }
@@ -54,6 +53,14 @@ class App
   scope :watched_by, lambda { |user|
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
   }
+
+  def build_notice_fingerprinter
+    # no need to build a notice_fingerprinter if we already have one
+    return if notice_fingerprinter.present?
+
+    attrs = SiteConfig.document.notice_fingerprinter_attributes
+    self.notice_fingerprinter = attrs
+  end
 
   def watched_by?(user)
     watchers.pluck("user_id").include? user.id
@@ -86,11 +93,7 @@ class App
     find_by(api_key: key)
   end
 
-  def last_deploy_at
-    (last_deploy = deploys.last) && last_deploy.created_at
-  end
-
-  # Legacy apps don't have notify_on_errs and notify_on_deploys params
+  # Legacy apps don't have notify_on_errs param
   def notify_on_errs
     !(super == false)
   end
@@ -99,11 +102,6 @@ class App
   def emailable?
     notify_on_errs? && notification_recipients.any?
   end
-
-  def notify_on_deploys
-    !(super == false)
-  end
-  alias_method :notify_on_deploys?, :notify_on_deploys
 
   def repo_branch
     repository_branch.present? ? repository_branch : 'master'
@@ -159,7 +157,7 @@ class App
     (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
       send("#{k}=", copy_app.send(k))
     end
-    # Clone the embedded objects that can be changed via apps/edit (ignore errs & deploys, etc.)
+    # Clone the embedded objects that can be changed via apps/edit (ignore errs, etc.)
     %w(watchers issue_tracker notification_service).each do |relation|
       if (obj = copy_app.send(relation))
         send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)

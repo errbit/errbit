@@ -8,7 +8,4 @@ $(function() {
     $("#repository_div").slideToggle("slow");
   });
 
-  $("#deploys_toggle").click(function() {
-    $("#deploys_div").slideToggle("slow");
-  });
 });

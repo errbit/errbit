@@ -1,20 +1,4 @@
 describe ProblemsHelper do
-  describe '#truncated_problem_message' do
-    it 'is html safe' do
-      problem = double('problem', message: '#<NoMethodError: ...>')
-      truncated = helper.truncated_problem_message(problem)
-      expect(truncated).to be_html_safe
-      expect(truncated).to_not include('<', '>')
-    end
-
-    it 'does not double escape html' do
-      problem = double('problem', message: '#<NoMethodError: ...>')
-      truncated = helper.truncated_problem_message(problem)
-      expect(truncated).to be_html_safe
-      expect(truncated).to_not include('&amp;')
-    end
-  end
-
   describe "#gravatar_tag" do
     let(:email) { "gravatar@example.com" }
     let(:email_hash) { Digest::MD5.hexdigest email }

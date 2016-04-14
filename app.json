@@ -5,7 +5,7 @@
   "repository": "https://github.com/errbit/errbit",
   "env": {
     "ERRBIT_ENFORCE_SSL": "true",
-    "GEMFILE_RUBY_VERSION": "2.2.3",
+    "GEMFILE_RUBY_VERSION": "2.2.4",
     "SECRET_KEY_BASE": {
       "generator": "secret"
     },

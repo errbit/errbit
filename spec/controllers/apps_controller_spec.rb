@@ -34,7 +34,7 @@ describe AppsController, type: 'controller' do
         sign_in admin
         unwatched_app && watched_app1 && watched_app2
         get :index
-        expect(controller.apps.entries).to eq App.all.sort.entries
+        expect(controller.apps.entries).to eq App.all.to_a.sort.entries
       end
     end
 
@@ -43,7 +43,7 @@ describe AppsController, type: 'controller' do
         sign_in user
         unwatched_app && watched_app1 && watched_app2
         get :index
-        expect(controller.apps.entries).to eq App.all.sort.entries
+        expect(controller.apps.entries).to eq App.all.to_a.sort.entries
       end
     end
   end
