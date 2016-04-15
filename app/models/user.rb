@@ -8,6 +8,7 @@ class User
   field :email
   field :github_login
   field :github_oauth_token
+  field :google_uid
   field :name
   field :admin, type: Boolean, default: false
   field :per_page, type: Fixnum, default: PER_PAGE
@@ -69,6 +70,10 @@ class User
   def github_login=(login)
     login = nil if login.is_a?(String) && login.strip.empty?
     self[:github_login] = login
+  end
+
+  def google_account?
+    google_uid.present?
   end
 
   def ensure_authentication_token

@@ -8,10 +8,11 @@
 
 - content_for :action_bar do
   = render 'shared/link_github_account'
+  = render 'shared/link_google_account'
   = link_to edit_user_path(user), :class => 'btn btn-default' do
     %i.fa.fa-edit
     = t('edit')
-  = link_to user_path(user), :method => :delete, 
+  = link_to user_path(user), :method => :delete,
     :data => { :confirm => t('users.confirm_delete') }, :class => 'delete btn btn-danger' do
     %i.fa.fa-remove
     = t('destroy')
@@ -34,4 +35,3 @@
   %tr
     %th= t('created')
     %td= user.created_at.to_s(:micro)
-

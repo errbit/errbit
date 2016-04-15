@@ -39,7 +39,7 @@ div#content-wrapper {
     h1 {
       margin-top: 0;
       margin-bottom: 0;
-      text-shadow: 2px 2px $gray-lighter; 
+      text-shadow: 2px 2px $gray-lighter;
       color: $gray;
       font-size: $font-size-h3;
     }
@@ -61,24 +61,33 @@ div#content-wrapper {
 
 }
 
-#action-bar span.github a:before { 
-  font-family: FontAwesome; 
-  content: "\f09b"; 
-  margin-right: .5em; 
+#action-bar span.github a:before {
+  font-family: FontAwesome;
+  content: "\f09b";
+  margin-right: .5em;
+}
+
+#action-bar span.google a:before {
+  font-family: FontAwesome;
+  content: "\f1a0";
+  margin-right: 8px;
+  position: relative;
+  top: 4px;
+  font-size: 26px;
 }
 
 form {
   label, div.checkbox label {
-    font-weight: bold; 
+    font-weight: bold;
     text-transform: uppercase;
   }
 
-  .required label:after { 
-    font-family: FontAwesome; 
-    content: "\f069"; 
-    color: $brand-danger; 
-    margin-left: .5em; 
-    font-weight: normal; 
+  .required label:after {
+    font-family: FontAwesome;
+    content: "\f069";
+    color: $brand-danger;
+    margin-left: .5em;
+    font-weight: normal;
   }
 }
 
