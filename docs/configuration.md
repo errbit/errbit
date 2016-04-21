@@ -56,7 +56,7 @@ In order of precedence Errbit uses:
 <dd>For production environments, you should run `rake secret` to generate a secret, unique key for this parameter
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
 <dt>MONGO_URL
-<dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
+<dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
 <dd>defaults to mongodb://localhost/errbit_&lt;Rails.env&gt;
 <dt>GITHUB_URL
 <dd>Use this URL for interacting github. This is useful if you have a github enterprise account and you're using a URL other than https://github.com
