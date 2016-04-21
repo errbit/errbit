@@ -26,7 +26,7 @@ Errbit::Config = Configurator.run(
 
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
-  mongo_url:                 %w(MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
+  mongo_url:                 %w(MONGODB_URI MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
 
   # github
   github_url:                ['GITHUB_URL', lambda do |values|
