@@ -25,7 +25,7 @@ class NotificationServices::SlackService < NotificationService
     {
       username:    "Errbit",
       icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
-      channel:     room_id,
+      channel:     "#{room_id}",
       attachments: [
         {
           fallback:   message_for_slack(problem),

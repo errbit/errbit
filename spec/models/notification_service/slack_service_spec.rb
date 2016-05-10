@@ -25,7 +25,7 @@ describe NotificationServices::SlackService, type: 'model' do
     payload = {
       username:    "Errbit",
       icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
-      channel:     "#general",
+      channel:     "#{room_id}",
       attachments: [
         {
           fallback:   service.message_for_slack(problem),
