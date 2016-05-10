@@ -4,12 +4,16 @@ class NotificationServices::SlackService < NotificationService
     [:service_url, {
       placeholder: 'Slack Hook URL (https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX)',
       label:       'Hook URL'
+    }],
+    [:room_id, {
+      placeholder: '#general',
+      label:       'Room where slack should notify'
     }]
   ]
 
   def check_params
     if FIELDS.detect { |f| self[f[0]].blank? }
-      errors.add :base, "You must specify your Slack Hook url."
+      errors.add :base, "You must specify your Slack Hook url and channel"
     end
   end
 
@@ -21,6 +25,7 @@ class NotificationServices::SlackService < NotificationService
     {
       username:    "Errbit",
       icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+      channel:     room_id,
       attachments: [
         {
           fallback:   message_for_slack(problem),
