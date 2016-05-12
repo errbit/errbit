@@ -171,7 +171,7 @@ to your user account on your **Edit profile** page.
 
 ### Configuring LDAP authentication:
 
-* Set USER_HAS_USERNAME=true
+* Set ERRBIT_USER_HAS_USERNAME=true
 * Follow the instructions at
   https://github.com/cschiewek/devise_ldap_authenticatable to set up the
   devise_ldap_authenticatable gem.
