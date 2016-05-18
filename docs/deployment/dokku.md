@@ -6,7 +6,7 @@ For more details see [Heroku](heroku.md) guide.
 ## Create an app on dokku and push the source code
 
 ```bash
-dokku apps:create errrbit
+dokku apps:create errbit
 dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
 dokku mongo:create errbit errbit
 dokku mongo:link errbit errbit
