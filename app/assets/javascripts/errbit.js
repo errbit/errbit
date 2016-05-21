@@ -32,12 +32,25 @@ $(function() {
     $('.notice-pagination').each(function() {
       $.pjax.defaults = {timeout: 2000};
 
-      $('#content').pjax('.notice-pagination a').on('pjax:start', function() {
+      $('#content').pjax('.notice-pagination a').on('pjax:start', function(e) {
+        if(window.history.pushState) {
+          window.history.pushState({}, '', $(arguments[0].relatedTarget).attr('href'));
+        }
         $('.notice-pagination-loader').css("visibility", "visible");
         currentTab = $('.tab-bar ul li a.button.active').attr('rel');
       }).on('pjax:end', function() {
         activateTabbedPanels();
       });
+    });
+
+    $('#content').pjax('.backtrace_separator a').on('pjax:start', function(e) {
+      if(window.history.pushState) {
+        window.history.pushState({}, '', $(arguments[0].relatedTarget).attr('href'));
+      }
+      $('.notice-pagination-loader').css("visibility", "visible");
+      currentTab = $('.tab-bar ul li a.button.active').attr('rel');
+    }).on('pjax:end', function() {
+      activateTabbedPanels();
     });
   }
 
@@ -111,12 +124,6 @@ $(function() {
     $('tr.toggle_external_backtrace').hide();
     $('td.backtrace_separator').show();
   }
-  function show_external_backtrace() {
-    $('tr.toggle_external_backtrace').show();
-    $('td.backtrace_separator').hide();
-  }
-  // Show external backtrace lines when clicking separator
-  $('td.backtrace_separator span').on('click', show_external_backtrace);
   // Hide external backtrace on page load
   hide_external_backtrace();
 
