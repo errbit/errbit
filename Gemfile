@@ -33,6 +33,8 @@ gem 'rack-ssl', :require => 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', :require => false
 gem 'rails_autolink'
 gem 'useragent'
+gem 'foreman'
+
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -77,6 +79,7 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-rbenv',   require: false
 
+
   # better errors
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
@@ -103,7 +106,10 @@ group :heroku, :production do
   gem 'unicorn', require: false, platform: 'ruby'
 end
 
-gem 'therubyracer', :platform => :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+group :no_docker, :test, :development do
+ gem 'therubyracer', :platform => :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+end
+
 gem 'sass-rails'
 gem 'uglifier'
 # We can't upgrade because not compatible to jquery >= 1.9.
