@@ -231,6 +231,15 @@ a.action  { float: right; font-size: 0.9em;}
 }
 
 #action-bar span.github a:before { font-family: FontAwesome; content: "\f09b"; margin-right: 8px; position: relative; top: 4px; font-size: 26px; }
+#action-bar span.google a:before { font-family: FontAwesome; content: "\f1a0"; margin-right: 8px; position: relative; top: 4px; font-size: 26px; }
+
+#action-bar span a.issue-tracker-button {
+  padding-left: 5px;
+}
+
+#action-bar span a.issue-tracker-button img {
+  padding-left: 10px;
+}
 
 /* Content */
 #content {
@@ -615,11 +624,11 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, 
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
 
-table.apps td.name, table.errs td.message { width: 100%; }
+table.apps td.name { width: 100%; }
 table.apps td { padding: 16px 20px; }
 table.apps th { padding: 10px 20px; }
 
-table.apps td.issue_tracker, table.apps td.count, table.apps td.deploy {
+table.apps td.issue_tracker, table.apps td.count {
   text-align: center;
 }
 table.apps td.issue_tracker, table.apps td.count {
@@ -630,9 +639,6 @@ table.apps td.issue_tracker img { vertical-align: top; }
 td.message .line {
   display:inline-block;
   margin-left:1em;
-}
-td.deploy {
-  white-space: nowrap;
 }
 td.latest {
   white-space: nowrap;
@@ -668,9 +674,12 @@ td.count, td.issue_link {
 }
 
 /* Err Tables */
-table.errs td.app {
-  padding-right: 2em;
-  width: 20%;
+table.errs td.app .name {
+  display: block;
+  width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 table.errs td.app .environment {
   font-size: 0.8em;
@@ -679,12 +688,10 @@ table.errs td.app .environment {
 table.errs td.message a {
   display: block;
   word-wrap: break-word;
-  /* PjpG - configuration in WHAT & WHERE table's columns using ellipsis to avoid oversizing table's width */
-    width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-  /* ------ */
+  width: 440px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 table.errs td.message em {
   color: #727272;
@@ -717,11 +724,6 @@ table.tally td.percent {
 table.tally th.value {
   width: 100%;
   text-transform: none;
-}
-
-/* Deploys table */
-table.deploys td.when {
-  width: 102px;
 }
 
 /* Resolve Errs */
@@ -854,7 +856,7 @@ table.backtrace tr.padding th, table.backtrace tr.padding td {
   padding: 0;
 }
 
-h3#watchers_toggle, h3#repository_toggle, h3#deploys_toggle {
+h3#watchers_toggle, h3#repository_toggle {
   cursor: pointer;
 }
 
@@ -862,7 +864,7 @@ span.click_span {
   font-size: 0.7em;
 }
 
-#deploys_div, #repository_div, #watchers_div {
+#repository_div, #watchers_div {
   display: none;
 }
 

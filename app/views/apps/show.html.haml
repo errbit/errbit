@@ -7,8 +7,6 @@
     = app.current_app_version
   %strong=t('.errors_caught')
   = app.problems.count
-  %strong=t('.deploy_count')
-  = app.deploys.count
   %strong=t('.api_key')
   = app.api_key
 - content_for :action_bar do
@@ -60,38 +58,10 @@
         %tr
           %td= link_to(app.github_repo, app.github_url, :target => '_blank')
 
-%h3#deploys_toggle
-  =t('.latest_deploys')
-  %span.click_span=t('.show_hide')
-#deploys_div
-  - if deploys.any?
-    %table.deploys
-      %thead
-        %tr
-          %th=t('.when')
-          %th=t('.environment')
-          %th=t('.who')
-          %th=t('.message')
-          %th=t('.repository')
-          %th=t('.revision')
-
-      %tbody
-        - deploys.each do |deploy|
-          %tr
-            %td.when #{deploy.created_at.to_s(:micro)}
-            %td.environment #{deploy.environment}
-            %td.who #{deploy.username}
-            %td.message #{deploy.message}
-            %td.repository #{deploy.repository}
-            %td.revision #{deploy.short_revision}
-    = link_to t('.all_deploys', :count => app.deploys.count), app_deploys_path(app), :class => 'button'
-  - else
-    %h3=t('.no_deploys')
-
 - if app.problems.any?
   %h3.clear=t('.errors')
   %section
-    = render 'problems/search', :all_errs => @all_errs, :app_id => app.id
+    = render 'problems/search', :all_errs => all_errs, :app_id => app.id
   %br
   %section
     .problem_table{:id => 'problem_table'}

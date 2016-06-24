@@ -10,8 +10,8 @@ module ErrbitPlugin
 
     def self.fields
       {
-        :foo => {:label => 'foo'},
-        :bar => {:label => 'bar'}
+        foo: { label: 'foo' },
+        bar: { label: 'bar' }
       }
     end
 
@@ -38,8 +38,17 @@ module ErrbitPlugin
       "http://example.com/mock-errbit"
     end
 
-    def url; ''; end
+    def close_issue(url, user)
+      @output << [url, user]
+      "http://example.com/mock-errbit"
+    end
 
-    def comments_allowed?; false; end
+    def url
+      ''
+    end
+
+    def comments_allowed?
+      false
+    end
   end
 end

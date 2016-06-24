@@ -5,7 +5,7 @@ class SiteConfig
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  before_save :denormalize
+  after_save :denormalize
 
   embeds_one :notice_fingerprinter, autobuild: true
   validates_associated :notice_fingerprinter
@@ -19,18 +19,19 @@ class SiteConfig
   # Denormalize SiteConfig onto individual apps so that this record doesn't
   # need to be accessed when inserting new error notices
   def denormalize
-    notice_fingerprinter_attributes = notice_fingerprinter.attributes.tap do |attrs|
-      attrs.delete('_id')
-      attrs[:source] = :site
-    end
-
     App.each do |app|
       f = app.notice_fingerprinter
+      next if f.source && f.source != CONFIG_SOURCE_SITE
 
-      if !f || f.source == CONFIG_SOURCE_SITE
-        app.update_attributes(
-          notice_fingerprinter: notice_fingerprinter_attributes)
-      end
+      app.update_attributes(
+        notice_fingerprinter: notice_fingerprinter_attributes)
+    end
+  end
+
+  def notice_fingerprinter_attributes
+    notice_fingerprinter.attributes.tap do |attrs|
+      attrs.delete('_id')
+      attrs[:source] = :site
     end
   end
 end

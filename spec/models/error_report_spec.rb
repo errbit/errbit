@@ -17,18 +17,18 @@ module Airbrake
 end
 
 describe ErrorReport do
-  let(:xml){
-    Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-  }
+  let(:xml) do
+    Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read
+  end
 
   let(:error_report) { ErrorReport.new(xml) }
 
-  let!(:app) {
+  let!(:app) do
     Fabricate(
       :app,
-      :api_key => 'APIKEY'
+      api_key: 'APIKEY'
     )
-  }
+  end
 
   describe "#app" do
     it 'find the good app' do
@@ -44,37 +44,39 @@ describe ErrorReport do
 
   describe "#generate_notice!" do
     it "save a notice" do
-      expect {
+      expect do
         error_report.generate_notice!
-      }.to change {
+      end.to change {
         app.reload.problems.count
       }.by(1)
     end
 
     context "with a minimal notice" do
-      let(:xml){
-        Rails.root.join('spec','fixtures','minimal_test_notice.xml').read
-      }
+      let(:xml) do
+        Rails.root.join('spec', 'fixtures', 'minimal_test_notice.xml').read
+      end
 
       it 'save a notice' do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
     end
 
     context "with notice generate by Airbrake gem" do
-      let(:xml) { Airbrake::Notice.new(
-        :exception => Exception.new,
-        :api_key => 'APIKEY',
-        :project_root => Rails.root
-      ).to_xml }
+      let(:xml) do
+        Airbrake::Notice.new(
+          exception:    Exception.new,
+          api_key:      'APIKEY',
+          project_root: Rails.root
+        ).to_xml
+      end
       it 'save a notice' do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
@@ -126,12 +128,12 @@ describe ErrorReport do
         #   <var key="id"/>
         # </var>
         expected = {
-          'secure'        => 'false',
-          'httponly'      => 'true',
-          'path'          => '/',
-          'expire_after'  => nil,
-          'domain'        => nil,
-          'id'            => nil
+          'secure'       => 'false',
+          'httponly'     => 'true',
+          'path'         => '/',
+          'expire_after' => nil,
+          'domain'       => nil,
+          'id'           => nil
         }
         expect(subject.env_vars).to have_key('rack_session_options')
         expect(subject.env_vars['rack_session_options']).to eql(expected)
@@ -157,7 +159,7 @@ describe ErrorReport do
       problem = error_report.problem
       problem.update(
         resolved_at: Time.zone.now,
-        resolved: true
+        resolved:    true
       )
 
       error_report = ErrorReport.new(xml)
@@ -199,10 +201,10 @@ describe ErrorReport do
   end
 
   it 'memoize the notice' do
-    expect {
+    expect do
       error_report.generate_notice!
       error_report.generate_notice!
-    }.to change {
+    end.to change {
       Notice.count
     }.by(1)
   end
@@ -211,9 +213,9 @@ describe ErrorReport do
     error_report.generate_notice!
     error_report.problem.resolve!
 
-    expect {
+    expect do
       ErrorReport.new(xml).generate_notice!
-    }.to change {
+    end.to change {
       error_report.problem.reload.resolved?
     }.from(true).to(false)
   end
@@ -221,7 +223,7 @@ describe ErrorReport do
   context "with notification service configured" do
     before do
       app.notify_on_errs = true
-      app.watchers.build(:email => 'foo@example.com')
+      app.watchers.build(email: 'foo@example.com')
       app.save
     end
 
@@ -235,26 +237,26 @@ describe ErrorReport do
     end
 
     context "with xml without request section" do
-      let(:xml){
-        Rails.root.join('spec','fixtures','hoptoad_test_notice_without_request_section.xml').read
-      }
+      let(:xml) do
+        Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_without_request_section.xml').read
+      end
       it "save a notice" do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
     end
 
     context "with xml with only a single line of backtrace" do
-      let(:xml){
-        Rails.root.join('spec','fixtures','hoptoad_test_notice_with_one_line_of_backtrace.xml').read
-      }
+      let(:xml) do
+        Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_with_one_line_of_backtrace.xml').read
+      end
       it "save a notice" do
-        expect {
+        expect do
           error_report.generate_notice!
-        }.to change {
+        end.to change {
           app.reload.problems.count
         }.by(1)
       end
@@ -269,7 +271,7 @@ describe ErrorReport do
     end
     context "with not valid api_key" do
       before do
-        App.where(:api_key => app.api_key).delete_all
+        App.where(api_key: app.api_key).delete_all
       end
       it "return false" do
         expect(error_report.valid?).to be false

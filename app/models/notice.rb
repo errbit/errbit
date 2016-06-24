@@ -1,36 +1,44 @@
 require 'recurse'
 
 class Notice
+  MESSAGE_LENGTH_LIMIT = 1000
+
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :message
-  field :server_environment, :type => Hash
-  field :request, :type => Hash
-  field :notifier, :type => Hash
-  field :user_attributes, :type => Hash
+  field :server_environment, type: Hash
+  field :request, type: Hash
+  field :notifier, type: Hash
+  field :user_attributes, type: Hash
   field :framework
   field :error_class
-  delegate :lines, :to => :backtrace, :prefix => true
-  delegate :problem, :to => :err
+  delegate :lines, to: :backtrace, prefix: true
+  delegate :problem, to: :err
 
   belongs_to :app
   belongs_to :err
-  belongs_to :backtrace, :index => true
+  belongs_to :backtrace, index: true
 
-  index(:created_at => 1)
-  index(:err_id => 1, :created_at => 1, :_id => 1)
+  index(created_at: 1)
+  index(err_id: 1, created_at: 1, _id: 1)
 
   before_save :sanitize
   before_destroy :problem_recache
 
-  validates_presence_of :backtrace_id, :server_environment, :notifier
+  validates :backtrace_id, :server_environment, :notifier, presence: true
 
-  scope :ordered, ->{ order_by(:created_at.asc) }
-  scope :reverse_ordered, ->{ order_by(:created_at.desc) }
-  scope :for_errs, Proc.new { |errs|
+  scope :ordered, -> { order_by(:created_at.asc) }
+  scope :reverse_ordered, -> { order_by(:created_at.desc) }
+  scope :for_errs, lambda { |errs|
     where(:err_id.in => errs.all.map(&:id))
   }
+
+  # Overwrite the default setter to make sure the message length is no longer
+  # than the limit we impose
+  def message=(m)
+    super(m.is_a?(String) ? m[0, MESSAGE_LENGTH_LIMIT] : m)
+  end
 
   def user_agent
     agent_string = env_vars['HTTP_USER_AGENT']
@@ -107,15 +115,11 @@ class Notice
   # TODO: Move on decorator maybe
   #
   def project_root
-    if server_environment
-      server_environment['project-root'] || ''
-    end
+    server_environment['project-root'] || '' if server_environment
   end
 
   def app_version
-    if server_environment
-      server_environment['app-version'] || ''
-    end
+    server_environment['app-version'] || '' if server_environment
   end
 
   # filter memory addresses out of object strings
@@ -132,15 +136,15 @@ protected
 
   def sanitize
     [:server_environment, :request, :notifier].each do |h|
-      send("#{h}=",sanitize_hash(send(h)))
+      send("#{h}=", sanitize_hash(send(h)))
     end
   end
 
   def sanitize_hash(hash)
     hash.recurse do |recurse_hash|
-      recurse_hash.inject({}) do |h,(k,v)|
+      recurse_hash.inject({}) do |h, (k, v)|
         if k.is_a?(String)
-          h[k.gsub(/\./,'&#46;').gsub(/^\$/,'&#36;')] = v
+          h[k.gsub(/\./, '&#46;').gsub(/^\$/, '&#36;')] = v
         else
           h[k] = v
         end

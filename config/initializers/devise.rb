@@ -29,7 +29,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [ Errbit::Config.user_has_username ? :username : :email ]
+  config.authentication_keys = [Errbit::Config.user_has_username ? :username : :email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -41,12 +41,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ Errbit::Config.user_has_username ? :username : :email ]
+  config.case_insensitive_keys = [Errbit::Config.user_has_username ? :username : :email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ Errbit::Config.user_has_username ? :username : :email ]
+  config.strip_whitespace_keys = [Errbit::Config.user_has_username ? :username : :email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -237,12 +237,12 @@ Devise.setup do |config|
 
   if Errbit::Config.github_authentication || Rails.env.test?
     github_options = {
-      :scope => Errbit::Config.github_access_scope.join(','),
-      :skip_info => true,
-      :client_options => {
-        :site => Errbit::Config.github_api_url,
-        :authorize_url => "#{Errbit::Config.github_url}/login/oauth/authorize",
-        :token_url => "#{Errbit::Config.github_url}/login/oauth/access_token"
+      scope:          Errbit::Config.github_access_scope.join(','),
+      skip_info:      true,
+      client_options: {
+        site:          Errbit::Config.github_api_url,
+        authorize_url: "#{Errbit::Config.github_url}/login/oauth/authorize",
+        token_url:     "#{Errbit::Config.github_url}/login/oauth/access_token"
       }
     }
 
@@ -250,6 +250,12 @@ Devise.setup do |config|
       Errbit::Config.github_client_id,
       Errbit::Config.github_secret,
       github_options
+  end
+
+  if Errbit::Config.google_authentication || Rails.env.test?
+    config.omniauth :google_oauth2,
+      Errbit::Config.google_client_id,
+      Errbit::Config.google_secret
   end
 
   # ==> Warden configuration

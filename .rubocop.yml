@@ -21,7 +21,38 @@ Style/IndentationConsistency:
   # modifier keywords shall be indented the same as public methods and that
   # protected and private members shall be indented one step more than the
   # modifiers.
-   EnforcedStyle: rails
+  EnforcedStyle: rails
+
+Style/GuardClause:
+  MinBodyLength: 4
 
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/DotPosition:
+  # Support code copy/paste into console
+  EnforcedStyle: trailing
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/IndentHash:
+  EnforcedStyle: consistent
+
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Style/SpaceAroundOperators:
+  MultiSpaceAllowedForOperators:
+    - '='
+    - '=>'
+    - '||='
+    - 'then'
+
+Style/FileName:
+  Exclude:
+    - 'config/initializers/cve-*.rb'

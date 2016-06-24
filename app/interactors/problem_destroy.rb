@@ -20,9 +20,9 @@ class ProblemDestroy
   #   the number of problem destroy
   #
   def self.execute(problems)
-    Array(problems).each{ |problem|
+    Array(problems).each do |problem|
       ProblemDestroy.new(problem).execute
-    }.count
+    end.count
   end
 
 private
@@ -36,11 +36,11 @@ private
   end
 
   def delete_errs
-    Notice.delete_all(:err_id => { '$in' => errs_id })
-    Err.delete_all(:_id => { '$in' => errs_id })
+    Notice.delete_all(err_id: { '$in' => errs_id })
+    Err.delete_all(_id: { '$in' => errs_id })
   end
 
   def delete_comments
-    Comment.delete_all(:_id => { '$in' => comments_id })
+    Comment.delete_all(_id: { '$in' => comments_id })
   end
 end

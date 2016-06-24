@@ -1,6 +1,6 @@
 describe 'users/show.html.haml', type: 'view' do
   let(:user) do
-    stub_model(User, :created_at => Time.zone.now, :email => "test@example.com")
+    stub_model(User, created_at: Time.zone.now, email: "test@example.com")
   end
 
   before do
@@ -53,7 +53,12 @@ describe 'users/show.html.haml', type: 'view' do
 
       it "should confirm the 'resolve' link by default" do
         render
-        expect(view.content_for(:action_bar)).to have_selector('a.delete[data-confirm="%s"]' % I18n.t('.users.confirm_delete'))
+        expect(view.content_for(:action_bar)).to have_selector(
+          format(
+            'a.delete[data-confirm="%s"]',
+            I18n.t('.users.confirm_delete')
+          )
+        )
       end
     end
   end

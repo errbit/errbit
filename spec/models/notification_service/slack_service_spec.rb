@@ -1,54 +1,60 @@
 describe NotificationServices::SlackService, type: 'model' do
-  it "it should send a notification to Slack with hook url" do
+  let(:notice) { Fabricate :notice }
+  let(:service_url) do
+    "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
+  end
+
+  let(:service) do
+    Fabricate :slack_notification_service, app:         notice.app,
+                                           service_url: service_url
+  end
+
+  it "should have icon for slack" do
+    expect(Rails.root.join("docs/notifications/slack/errbit.png")).to exist
+  end
+
+  it "should send a notification to Slack with hook url" do
     # setup
-    notice = Fabricate :notice
-    notification_service = Fabricate :slack_notification_service, :app => notice.app, :service_url => "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
     problem = notice.problem
 
     # faraday stubbing
     payload = {
-      :attachments => [
+      username:    "Errbit",
+      icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+      attachments: [
         {
-           :fallback => notification_service.message_for_slack(problem),
-           :pretext => "<#{notification_service.problem_url(problem)}|Errbit - #{problem.app.name}: #{problem.error_class}>",
-           :color => "#D00000",
-           :fields => [
-              {
-                 :title => "Environment",
-                 :value => problem.environment,
-                 :short => false
-              },
-              {
-                 :title => "Location",
-                 :value => problem.where,
-                 :short => false
-              },
-              {
-                 :title => "Message",
-                 :value => problem.message.to_s,
-                 :short => false
-              },
-              {
-                 :title => "First Noticed",
-                 :value => problem.first_notice_at,
-                 :short => false
-              },
-              {
-                 :title => "Last Noticed",
-                 :value => problem.last_notice_at,
-                 :short => false
-              },
-              {
-                 :title => "Times Occurred",
-                 :value => problem.notices_count,
-                 :short => false
-              }
-           ]
+          fallback:   service.message_for_slack(problem),
+          title:      problem.message.to_s.truncate(100),
+          title_link: problem.url,
+          text:       problem.where,
+          color:      "#D00000",
+          fields:     [
+            {
+              title: "Application",
+              value: problem.app.name,
+              short: true
+            },
+            {
+              title: "Environment",
+              value: problem.environment,
+              short: true
+            },
+            {
+              title: "Times Occurred",
+              value: problem.notices_count,
+              short: true
+            },
+            {
+              title: "First Noticed",
+              value: problem.first_notice_at.try(:to_s, :db),
+              short: true
+            }
+          ]
         }
       ]
     }.to_json
-    expect(HTTParty).to receive(:post).with(notification_service.service_url, :body => payload, :headers => {"Content-Type" => "application/json"}).and_return(true)
+    expect(HTTParty).to receive(:post).with(service.service_url, body: payload, headers: { "Content-Type" => "application/json" }).and_return(true)
 
-    notification_service.create_notification(problem)
+    service.create_notification(problem)
   end
 end

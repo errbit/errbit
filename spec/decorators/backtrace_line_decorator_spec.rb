@@ -2,13 +2,13 @@ describe BacktraceLineDecorator, type: :decorator do
   let(:backtrace_line) do
     described_class.new(
       number: 884,
-      file: '/path/to/file/ea315ea4.rb',
+      file:   '/path/to/file/ea315ea4.rb',
       method: :instance_eval)
   end
   let(:backtrace_line_in_app) do
     described_class.new(
       number: 884,
-      file: '[PROJECT_ROOT]/path/to/file/ea315ea4.rb',
+      file:   '[PROJECT_ROOT]/path/to/file/ea315ea4.rb',
       method: :instance_eval)
   end
   let(:app) { Fabricate(:app, github_repo: 'foo/bar') }

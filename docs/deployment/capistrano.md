@@ -18,12 +18,12 @@ $EDITOR config/deploy.rb
 cp config/deploy/production.example.rb config/deploy/production.rb
 $EDITOR config/deploy/production.rb
 
-# Check to make sure configs exist
-bundle exec cap production deploy:check
-
 # Create the configs yourself, or run errbit:setup to upload the
 # defaults
 bundle exec cap production errbit:setup
+
+# Check to make sure configs exist
+bundle exec cap production deploy:check
 
 # Deploy
 bundle exec cap production deploy
@@ -40,10 +40,23 @@ route, just map all requests for /assets/.\* to
 
 ## Starting Errbit
 Errbit comes with some capistrano tasks to manage running Errbit under
-unicorn.
+puma.
 To start Errbit, you can run:
 ```bash
-bundle exec cap production unicorn:start
+bundle exec cap production puma:start
+```
+
+## Status of Errbit
+To check if the Errbit server is running you can run:
+```bash
+bundle exec cap production puma:status
+```
+
+## Stopping Errbit
+To stop Errbit run
+
+```bash
+bundle exec cap production puma:stop
 ```
 
 Supervising and monitoring Errbit is beyond the scope of this
@@ -62,4 +75,48 @@ rbenv=1 bundle exec cap production deploy
 
 ## Schedule recurring tasks
 You may want to periodically clear resolved errors to free up space.
-Schedule ```rake errbit:db:clear_resolved``` to run every day or so.
+Schedule ```rake errbit:clear_resolved``` to run every day or so.
+
+
+## Monit
+If you like errbit to be monitored by monit, you'll have to install and start monit
+with http support before deploying errbit.
+In order to enable http support you have to edit the monit config file which you can
+find in `/etc/monit/monitrc` for Ubuntu and set these lines:
+```
+set httpd port 2812 and
+   use address localhost  # only accept connection from localhost
+   allow localhost
+```
+
+Next you have to add the following line to the Capfile:
+```
+require 'capistrano/puma/monit'
+```
+
+And you have to deploy the monit config with the command:
+```bash
+bundle exec cap production puma:monit:config
+```
+
+The configuration file (depending on the distro) will be generated at: `/etc/monit/conf.d/puma_errbit_production.conf`
+
+### Controlling memory usage with monit
+If you like to limit memory usage for puma and restart it in case the usage gets
+over a 2GB limit, for example, you can add at the end of the monit config file the line
+```
+if totalmem is greater than 2048 MB for 3 cycles then restart
+```
+
+The config file will look like:
+
+```
+# Monit configuration for Puma
+# Service name: puma_errbit_production
+#
+check process puma_errbit_production
+  with pidfile "/var/www/apps/errbit/shared/tmp/pids/puma.pid"
+  start program = "/usr/bin/sudo -u root /bin/bash -c 'cd /var/www/apps/errbit/current && /usr/bin/env bundle exec puma -C /var/www/apps/errbit/shared/puma.rb --daemon'"
+  stop program = "/usr/bin/sudo -u root /bin/bash -c 'cd /var/www/apps/errbit/current && /usr/bin/env bundle exec pumactl -S /var/www/apps/errbit/shared/tmp/pids/puma.state stop'"
+  if totalmem is greater than 2048 MB for 3 cycles then restart
+```

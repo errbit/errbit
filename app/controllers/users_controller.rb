@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
   respond_to :html
 
-  before_action :require_admin!, :except => [:edit, :update]
-  before_action :require_user_edit_priviledges, :only => [:edit, :update]
+  before_action :require_admin!, except: [:edit, :update]
+  before_action :require_user_edit_priviledges, only: [:edit, :update]
 
-  expose(:user, :attributes => :user_params)
-  expose(:users) {
-    User.all.page(params[:page]).per(current_user.per_page)
-  }
+  expose(:user, attributes: :user_params)
+  expose(:users) do
+    User.order_by(name: :asc).page(params[:page]).per(current_user.per_page)
+  end
 
   def index; end
   def new; end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     if user.update_attributes(user_params)
-      flash[:success] = I18n.t('controllers.users.flash.update.success', :name => user.name)
+      flash[:success] = I18n.t('controllers.users.flash.update.success', name: user.name)
       redirect_to user_path(user)
     else
       render :edit
@@ -41,13 +41,18 @@ class UsersController < ApplicationController
       flash[:error] = I18n.t('controllers.users.flash.destroy.error')
     else
       UserDestroy.new(user).destroy
-      flash[:success] = I18n.t('controllers.users.flash.destroy.success', :name => user.name)
+      flash[:success] = I18n.t('controllers.users.flash.destroy.success', name: user.name)
     end
     redirect_to users_path
   end
 
   def unlink_github
-    user.update_attributes :github_login => nil, :github_oauth_token => nil
+    user.update_attributes github_login: nil, github_oauth_token: nil
+    redirect_to user_path(user)
+  end
+
+  def unlink_google
+    user.update(google_uid: nil)
     redirect_to user_path(user)
   end
 
@@ -63,9 +68,9 @@ protected
   end
 
   def user_permit_params
-    @user_permit_params ||= [:name,:username, :email, :github_login, :per_page, :time_zone]
+    @user_permit_params ||= [:name, :username, :email, :github_login, :per_page, :time_zone]
     @user_permit_params << :admin if current_user.admin? && current_user.id != params[:id]
-    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all?{|pa| !pa.blank? }
+    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all? { |pa| !pa.blank? }
     @user_permit_params
   end
 
@@ -73,4 +78,3 @@ protected
     @user_password_params ||= params[:user] ? params.require(:user).permit(:password, :password_confirmation) : {}
   end
 end
-

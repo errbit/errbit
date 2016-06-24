@@ -6,7 +6,7 @@ class WatchersController < ApplicationController
   end
 
   def destroy
-    watcher = app.watchers.where(:user_id => params[:id]).first
+    watcher = app.watchers.where(user_id: params[:id]).first
     app.watchers.delete(watcher)
     flash[:success] = t('.success', app: app.name)
     redirect_to app_path(app)

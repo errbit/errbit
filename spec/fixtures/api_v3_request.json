@@ -22,10 +22,12 @@
     "sourceMapEnabled":true,
     "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36",
     "url":"http://localhost:3000/kontakt",
-    "userId":1,"userUsername":"john",
-    "userName":"John Doe",
-    "userUsername": "john",
-    "userEmail":"john.doe@example.org",
+    "user": {
+      "id":1,"userUsername":"john",
+      "name":"John Doe",
+      "username": "john",
+      "email":"john.doe@example.org"
+    },
     "version":"1.0",
     "component":"ContactsController",
     "action":"show"

@@ -1,6 +1,5 @@
 Fabricator :comment do
   user
   body 'Test comment'
-  err(:fabricator => :problem)
+  err(fabricator: :problem)
 end
-

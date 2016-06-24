@@ -15,12 +15,12 @@ describe WatchersController, type: 'controller' do
       let(:watcher) { app.watchers.first }
 
       before(:each) do
-        delete :destroy, :app_id => app.id, :id => watcher.user.id.to_s
+        delete :destroy, app_id: app.id, id: watcher.user.id.to_s
         problem.reload
       end
 
       it "should delete the watcher" do
-        expect(app.watchers.detect{|w| w.id.to_s == watcher.id }).to be nil
+        expect(app.watchers.detect { |w| w.id.to_s == watcher.id }).to be nil
       end
 
       it "should redirect to app page" do
@@ -34,7 +34,7 @@ describe WatchersController, type: 'controller' do
 
     context "successful watcher update" do
       before(:each) do
-        put :update, :app_id => app.id, :id => user.id.to_s
+        put :update, app_id: app.id, id: user.id.to_s
         problem.reload
       end
 

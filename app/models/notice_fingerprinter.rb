@@ -14,7 +14,7 @@ class NoticeFingerprinter
   embedded_in :site_config
 
   def generate(api_key, notice, backtrace)
-    material = [ api_key ]
+    material = [api_key]
     material << notice.error_class if error_class
     material << notice.filtered_message if message
     material << notice.component if component
@@ -27,6 +27,6 @@ class NoticeFingerprinter
       material << backtrace.lines.slice(0, backtrace_lines)
     end
 
-    Digest::MD5.hexdigest(material.reduce('') { |c, m| c << m.to_s; c })
+    Digest::MD5.hexdigest(material.map(&:to_s).join)
   end
 end

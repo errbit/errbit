@@ -36,17 +36,10 @@
       .field-helpertext Send a notification every
       = f.text_field :email_at_notices, :value => app_decorate.email_at_notices
       .field-helpertext times an error occurs (comma separated).
-  %div.checkbox
-    = f.check_box :notify_on_deploys
-    = f.label :notify_on_deploys, 'Notify on deploys'
 
 %div.checkbox
   = f.check_box :notify_all_users
   = f.label :notify_all_users, 'Send notifications to all users'
-
-%div.checkbox
-  = f.check_box :resolve_errs_on_deploy
-  = f.label :resolve_errs_on_deploy, 'Resolve errs on deploy'
 
 = render "issue_tracker_fields", :f => f
 = render "service_notification_fields", :f => f

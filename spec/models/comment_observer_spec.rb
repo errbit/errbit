@@ -8,7 +8,7 @@ describe "Callback on Comment", type: 'model' do
       it 'should send an email notification' do
         expect(Mailer).to receive(:comment_notification).
           with(comment).
-          and_return(double('email', :deliver_now => true))
+          and_return(double('email', deliver_now: true))
         comment.save
       end
     end

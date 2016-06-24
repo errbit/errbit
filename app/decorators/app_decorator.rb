@@ -1,6 +1,6 @@
 class AppDecorator < Draper::Decorator
   decorates_association :watchers
-  decorates_association :issue_tracker, :with => IssueTrackerDecorator
+  decorates_association :issue_tracker, with: IssueTrackerDecorator
   delegate_all
 
   def email_at_notices
