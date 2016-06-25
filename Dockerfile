@@ -21,7 +21,6 @@ RUN apk --update add --virtual build_deps \
     openssl-dev postgresql-dev libxml2-dev libxslt-dev
 RUN cd app && \
 bundle config build.nokogiri --use-system-libraries && \
-bundle config build.therubyracer --use-system-libraries && \
 bundle install --without test development no_docker
 
 CMD ["/usr/bin/foreman","start","web","-d","app"]

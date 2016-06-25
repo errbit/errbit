@@ -104,7 +104,6 @@ group :no_docker, :test, :development do
  gem 'therubyracer', :platform => :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
-=======
 gem 'puma'
 gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 gem 'sass-rails'
