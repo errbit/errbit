@@ -20,6 +20,7 @@ RUN apk --update add --virtual build_deps \
     build-base ruby-dev libc-dev linux-headers \
     openssl-dev postgresql-dev libxml2-dev libxslt-dev
 RUN cd app && \
+gem install foreman && \
 bundle config build.nokogiri --use-system-libraries && \
 bundle install --without test development no_docker && \
 bundle exec rake assets:precompile
