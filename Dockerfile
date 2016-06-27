@@ -10,6 +10,8 @@ RUN apk --update add \
   ruby-bundler \
   ruby-io-console \
   ruby-bigdecimal \
+  ruby-rdoc \
+  ruby-irb \
   bash \
   nodejs \
   tzdata \
