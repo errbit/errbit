@@ -15,7 +15,12 @@ RUN apk --update add \
   nodejs \
   tzdata \
   ruby-dev && \
-  rm -fr /usr/share/ri
+  rm -fr /usr/share/ri && \
+  curl -O https://bin.equinox.io/c/ekMN3bCZFUn/forego-stable-linux-amd64.tgz && \
+  tar xzvf forego-stable-linux-amd64.tgz -C /usr/local/bin && \
+  chmod +x /usr/local/bin/forego && \
+  rm -f forego-stable-linux-amd64.tgz
+
 COPY . /app
 RUN apk --update add --virtual build_deps \
     build-base ruby-dev libc-dev linux-headers \
@@ -27,4 +32,4 @@ bundle exec rake assets:precompile
 
 WORKDIR /app
 
-CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
+CMD ["/usr/local/bin/forego","start","web"]
