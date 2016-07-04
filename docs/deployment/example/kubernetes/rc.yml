@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: errbit
+  name: errbit
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    name: errbit
+  template:
+    metadata:
+      labels:
+        name: errbit
+    spec:
+      containers:
+      - image: quay.io/ghostmonitor/errbit:latest
+        name: errbit
+        ports:
+        - containerPort: 8080
+          name: http
+        livenessProbe:
+          httpGet:
+            path: /robots.txt
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 60
+          failureThreshold: 6
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "25m"
+          limits:
+            memory: "512Mi"
+            cpu: "50m"
+        env:
+         - name: PORT
+           value: '8080'
+         - name: MONGO_URL
+           value: ''
+         - name: GOOGLE_AUTHENTICATION
+           value: 'true'
+         - name: GOOGLE_CLIENT_ID
+           value: ''
+         - name: GOOGLE_SECRET
+           value: ''
+         - name: RACK_ENV
+           value: production
+         - name: ERRBIT_USE_GRAVATAR
+           value: 'true'
+         - name: GITHUB_AUTHENTICATION
+           value: 'true'
+         - name: ERRBIT_EMAIL_FROM
+           value: 'alarm@example.com'
+         - name: SMTP_SERVER
+           value: smtp.mailgun.org
+         - name: SMTP_PORT
+           value: '587'
+         - name: SMTP_USERNAME
+           value: 'postmaster@example.com'
+         - name: SMTP_PASSWORD
+           value: ''
+         - name: SMTP_DOMAIN
+           value: 'example.com'
+         - name: ERRBIT_HOST
+           value: 'errbit.example.com'
+         - name: ERRBIT_PROTOCOL
+           value: 'https'
+         - name: ERRBIT_PORT
+           value: '443'
