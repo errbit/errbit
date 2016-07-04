@@ -1,4 +1,4 @@
-# Deploy to Kubernetes
+# Deploy to Kubernetes (experimental)
 
 ### Clone and prepare the source code repository
 ```bash
@@ -15,5 +15,3 @@ kubectl create -f docs/deployment/example/kubernetes/rc.yaml
 ```bash
 kubectl create -f docs/deployment/example/kubernetes/svc.yaml
 ```
-
-

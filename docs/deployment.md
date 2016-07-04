@@ -7,7 +7,7 @@ See specific notes on deployment via:
 - [dokku](deployment/dokku.md)
 - [capistrano](deployment/capistrano.md)
 - [docker](deployment/docker.md)
-- [kubernetes](deployment/kubernetes.md)
+- [kubernetes (experimental)](deployment/kubernetes.md)
 
 You can use a process manager to deploy Errbit, but Errbit doesn't maintain
 support for any specific process manager. But if you use systemd, @nofxx has

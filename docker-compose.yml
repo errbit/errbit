@@ -1,18 +1,16 @@
 errbit:
-  build: .
+  image: errbit/errbit:latest
   ports:
     - "8080:8080"
   links:
     - mongo
   environment:
     - PORT=8080
-    - SECRET_KEY_BASE=f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
     - RACK_ENV=production
-    - ERRBIT_USE_GRAVATAR=true
     - MONGO_URL=mongodb://mongo:27017/errbit
 mongo:
   image: mongo:3.0
   ports:
-    - "27017:27017"
+    - "27017"
   command: -smallfiles
 
