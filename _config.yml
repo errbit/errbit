@@ -1,0 +1,13 @@
+---
+encoding: utf-8
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - bin
+  - s3_website.yml
+  - CNAME
+  - lib
+defaults:
+  -
+    values:
+      layout: "default"

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    .hg,
+    .hg-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hg-nav {
+      order: -1;
+    }
+
+    @media (min-width: 768px) {
+      .hg-body {
+        flex-direction: row;
+        flex: 1;
+      }
+      .hg-content {
+        flex: 1;
+      }
+      .hg-nav {
+        /* 12em is the width of the columns */
+        flex: 0 0 12em;
+      }
+    }
+
+    body {
+      font-family: sans;
+    }
+    </style>
+  </head>
+  <body class="hg">
+    <header></header>
+    <div class="hg-body">
+      <main class="hg-content">{{ content }}</main>
+      <nav class="hg-nav">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/docs/master">Docs</a>
+            <ol>
+              {% for version in site.docs.versions %}
+                <li><a href="/docs/{{ version }}">{{ version }}</a></li>
+              {% endfor %}
+            </ol>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <footer></footer>
+  </body>
+</html>
