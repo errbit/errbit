@@ -62,7 +62,7 @@ class DocBuilder
   end
 
   def write_file_if_changed(path, content)
-    if File.read(path) != content
+    if !File.exist?(path) || File.read(path) != content
       puts "Writing #{path}"
       File.write(path, content)
     end
