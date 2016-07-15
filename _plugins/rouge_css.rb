@@ -1,3 +1,11 @@
+# Liquid tag for rendering Rouge CSS
+#
+# Usage:
+# {% rouge_css <theme> [mode] %}
+#
+# Examples:
+# {% rouge_css github %}
+# {% rouge_css base16 light %}
 class RougeCss < Liquid::Tag
   def initialize(tag_name, args, tokens)
     super
