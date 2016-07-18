@@ -1,35 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-    .hg,
-    .hg-body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hg-nav {
-      order: -1;
-    }
-
-    @media (min-width: 768px) {
-      .hg-body {
-        flex-direction: row;
-        flex: 1;
-      }
-      .hg-content {
-        flex: 1;
-      }
-      .hg-nav {
-        /* 12em is the width of the columns */
-        flex: 0 0 12em;
-      }
-    }
-
-    body {
-      font-family: sans;
-    }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   </head>
   <body class="hg">
     <header></header>
