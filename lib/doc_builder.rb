@@ -38,6 +38,7 @@ class DocBuilder
     end
 
     delete_entries(Dir["#{path}/**/*"] - paths_to_keep)
+    sort_versions
   end
 
   def path_for_node(root, entry, path)
@@ -72,6 +73,20 @@ class DocBuilder
     entries.each do |path|
       puts "Deleting #{path}"
       File.delete(path)
+    end
+  end
+
+  def sort_versions
+    @versions.sort! do |a,b|
+      if a == 'master'
+        -1
+      elsif b == 'master'
+        1
+      else
+        va = a.sub(/^v/, '')
+        vb = b.sub(/^v/, '')
+        0 - (Gem::Version.new(va) <=> Gem::Version.new(vb))
+      end
     end
   end
 end
