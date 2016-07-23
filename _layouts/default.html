@@ -7,23 +7,35 @@
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   </head>
-  <body class="hg">
-    <header></header>
-    <div class="hg-body">
-      <main class="hg-content">{{ content }}</main>
-      <nav class="hg-nav">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li><a href="/docs/master">Docs</a>
-            <ol>
-              {% for version in site.docs.versions %}
-                <li><a href="/docs/{{ version }}">{{ version }}</a></li>
-              {% endfor %}
-            </ol>
-          </li>
-        </ol>
-      </nav>
+  <body class="wide">
+    <header>
+      <div class="container">
+        <h1><a href="/">Errbit</a></h1>
+      </div>
+    </header>
+    <div class="body">
+      <div class="container">
+        <main class="content">
+          {{ content }}
+        </main>
+        <nav class="nav">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/docs/master">Docs</a>
+              <ul>
+                {% for version in site.docs.versions %}
+                  <li><a href="/docs/{{ version }}">{{ version }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    <footer></footer>
+    <footer>
+      <div class="container">
+        <p><small>something...</small></p>
+      </div>
+    </footer>
   </body>
 </html>

@@ -6,38 +6,124 @@
   outline: 0;
 }
 
-.hg,
-.hg-body {
-  display: flex;
-  flex-direction: column;
+html, body {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
-.hg-nav {
-  order: -1;
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  font-weight: 400;
+  line-height: 1.5em;
+
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (min-width: 768px) {
-  .hg-body {
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  @media screen and (min-width: 768px) {
+    width: 750px;
+  }
+  @media screen and (min-width: 992px) {
+    width: 970px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 1170px;
+  }
+}
+
+header {
+  height: 50px;
+  padding: 1rem 0;
+  background: lighten($heading, 75);
+  border-bottom: 1px solid lighten($heading, 70);
+  h1 {
+    margin: 0;
+  }
+}
+
+.body {
+  > .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav {
+    order: -1;
+  }
+}
+
+.body > .container {
+  @media screen and (min-width: 992px) {
     flex-direction: row;
 
     flex: 1;
-  }
-  .hg-content {
-    padding-right: 420px;
-    overflow: hidden;
+    .content {
+      overflow: hidden;
 
-    flex: 1;
-  }
-  .hg-nav {
-    padding: 16px;
-    margin-top: 20px;
-    /* 12em is the width of the columns */
-
-    flex: 0 0 12em;
+      flex: 1;
+    }
+    .nav {
+      flex: 0 0 12em;
+    }
   }
 }
 
-.hg .content {
-  width: 80%;
-  margin: 0 auto;
+.nav {
+  > ul {
+    margin: 1.75rem 0;;
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    li {
+      a {
+        display: block;
+      }
+    }
+  }
+  ul li > ul {
+    padding-left: 0.85rem;
+  }
 }
+
+// .hg,
+// .hg-body {
+//   display: flex;
+//   flex-direction: column;
+// }
+//d
+// .hg-nav {
+//   order: -1;
+// }
+//
+// @media (min-width: 768px) {
+//   .hg-body {
+//     flex-direction: row;
+//
+//     flex: 1;
+//   }
+//   .hg-content {
+//     padding-right: 420px;
+//     overflow: hidden;
+//
+//     flex: 1;
+//   }
+//   .hg-nav {
+//     padding: 16px;
+//     margin-top: 20px;
+//     /* 12em is the width of the columns */
+//
+//     flex: 0 0 12em;
+//   }
+// }
+//
+// .hg .content {
+//   width: 80%;
+//   margin: 0 auto;
+// }

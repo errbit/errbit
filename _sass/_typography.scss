@@ -1,13 +1,15 @@
+// Default
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   line-height: 1.5;
-  color: rgba(0, 0, 0, .8);
+  color: $text;
   background-color: #fff;
 }
 
 a {
-  color: #357edd;
+  color: #5f50c7;
   text-decoration: none;
   opacity: 1;
   transition: opacity .15s ease-in;
@@ -24,6 +26,7 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.5;
+  color: $heading;
 }
 
 h1 {
@@ -109,15 +112,67 @@ pre > code {
   }
 }
 
-.highlight {
-  padding: 16px;
-  margin-bottom: 16px;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  word-break: normal;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(black, .05);
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  td, th {
+    padding: 0;
+  }
+}
+
+// Wide
+
+.wide {
+  font-family: 'Open Sans', sans-serif;
+}
+
+// Body
+
+.body {
+  p, blockquote, ul, ol, dl, table, pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+}
+
+.body {
+  .highlight {
+    max-width: 560px;
+    padding: 16px;
+    margin-bottom: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    word-break: normal;
+    background-color: lighten($heading, 75);
+    border-left: 4px solid #7371B7;
+    border-radius: 2px;
+  }
+}
+
+.body {
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    thead {
+      display: table-header-group;
+      vertical-align: middle;
+      border-color: inherit;
+    }
+  }
+  table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+  }
+  table th,
+  table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+  }
+  table th {
+    font-weight: bold;
+  }
 }
