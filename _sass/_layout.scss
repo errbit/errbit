@@ -38,14 +38,13 @@ body {
   }
 }
 
-header {
-  height: 50px;
-  padding: 1rem 0;
-  background: lighten($heading, 75);
-  border-bottom: 1px solid lighten($heading, 70);
-  h1 {
-    margin: 0;
-  }
+header > a {
+  width: 100%;
+  display: block;
+  height: 0.8rem;
+  padding: 0;
+  background: lighten(#6455C9, 1);
+  border-bottom: 0.4rem solid lighten(#6455C9, 35);
 }
 
 .body {
