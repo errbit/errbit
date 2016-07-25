@@ -141,11 +141,12 @@ table {
     padding: 16px;
     margin-bottom: 16px;
     overflow: auto;
+    overflow-x: auto;
     font-size: 85%;
     line-height: 1.45;
     word-break: normal;
     background-color: lighten($heading, 75);
-    border-left: 4px solid #7371B7;
+    border-left: 4px solid #7371b7;
     border-radius: 2px;
   }
 }
