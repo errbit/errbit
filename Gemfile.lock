@@ -174,7 +174,7 @@ GEM
     launchy (2.4.3-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
-    libv8 (3.16.14.13)
+    libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
