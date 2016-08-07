@@ -1,0 +1,11 @@
+<script src="{{ "/js/vendor/jquery-2.2.3.min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/vendor/sticky-kit.min.js" | prepend: site.baseurl }}"></script>
+<script type="text/javascript">
+  $(function() {
+    console.log("jQuery is ready!");
+    // jQuery add class
+    $("body").addClass("hero");
+    // Sticky-Kit
+    $(".is-stuck").stick_in_parent();
+  });
+</script>
