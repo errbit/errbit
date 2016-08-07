@@ -14,21 +14,23 @@
     </header>
     <div class="body">
       <div class="container">
-        <main class="content">
+        <div>
+          <div id="pinned" class="nav">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/docs/master">Docs</a>
+                <ul>
+                  {% for version in site.docs.versions %}
+                    <li><a href="/docs/{{ version }}">{{ version }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="content">
           {{ content }}
-        </main>
-        <nav class="nav">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/docs/master">Docs</a>
-              <ul>
-                {% for version in site.docs.versions %}
-                  <li><a href="/docs/{{ version }}">{{ version }}</a></li>
-                {% endfor %}
-              </ul>
-            </li>
-          </ul>
-        </nav>
+        </div>
       </div>
     </div>
     <footer>

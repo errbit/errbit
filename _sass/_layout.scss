@@ -27,6 +27,9 @@ body {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+
+  @include clearfix;
+
   @media screen and (min-width: 768px) {
     width: 750px;
   }
@@ -39,36 +42,37 @@ body {
 }
 
 header > a {
-  width: 100%;
   display: block;
-  height: 0.8rem;
+  width: 100%;
+  height: .8rem;
   padding: 0;
-  background: lighten(#6455C9, 1);
-  border-bottom: 0.4rem solid lighten(#6455C9, 35);
+  background: lighten(#6455c9, 1);
+  border-bottom: .4rem solid lighten(#6455c9, 35);
 }
 
 .body {
   > .container {
-    display: flex;
-    flex-direction: column;
+    display: block;
   }
   .nav {
-    order: -1;
+    float: none;
+    width: 100%;
+  }
+  .content {
+    float: none;
+    width: 100%;
   }
 }
 
 .body > .container {
   @media screen and (min-width: 992px) {
-    flex-direction: row;
-
-    flex: 1;
-    .content {
-      overflow: hidden;
-
-      flex: 1;
-    }
     .nav {
-      flex: 0 0 12em;
+      float: left;
+      width: 200px;
+    }
+    .content {
+      float: left;
+      width: 65%;
     }
   }
 }
@@ -87,42 +91,6 @@ header > a {
     }
   }
   ul li > ul {
-    padding-left: 0.85rem;
+    padding-left: .85rem;
   }
 }
-
-// .hg,
-// .hg-body {
-//   display: flex;
-//   flex-direction: column;
-// }
-//d
-// .hg-nav {
-//   order: -1;
-// }
-//
-// @media (min-width: 768px) {
-//   .hg-body {
-//     flex-direction: row;
-//
-//     flex: 1;
-//   }
-//   .hg-content {
-//     padding-right: 420px;
-//     overflow: hidden;
-//
-//     flex: 1;
-//   }
-//   .hg-nav {
-//     padding: 16px;
-//     margin-top: 20px;
-//     /* 12em is the width of the columns */
-//
-//     flex: 0 0 12em;
-//   }
-// }
-//
-// .hg .content {
-//   width: 80%;
-//   margin: 0 auto;
-// }
