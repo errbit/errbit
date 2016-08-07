@@ -9,35 +9,28 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
   <body class="wide">
-    <header>
-      <a href="/"></a>
-    </header>
+    {% include header.html %}
     <div class="body">
       <div class="container">
-        <div>
-          <div id="pinned" class="nav">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/docs/master">Docs</a>
-                <ul>
-                  {% for version in site.docs.versions %}
-                    <li><a href="/docs/{{ version }}">{{ version }}</a></li>
-                  {% endfor %}
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div id="pinned" class="nav">
+          {% include nav.html %}
         </div>
         <div class="content">
           {{ content }}
         </div>
       </div>
     </div>
-    <footer>
-      <div class="container">
-        <p><small>something...</small></p>
-      </div>
-    </footer>
-    {% include scripts.html %}
+    {% include footer.html %}
+    <script src="{{ "/js/vendor/jquery-2.2.3.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/vendor/sticky-kit.min.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript">
+      $(function() {
+        console.log("jQuery is ready!");
+        // jQuery add class
+        $("body").addClass("hero");
+        // Sticky-Kit
+        $("#pinned").stick_in_parent();
+      });
+    </script>
   </body>
 </html>

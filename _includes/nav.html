@@ -1,0 +1,10 @@
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/docs/master">Docs</a>
+    <ul>
+      {% for version in site.docs.versions %}
+        <li><a href="/docs/{{ version }}">{{ version }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>
