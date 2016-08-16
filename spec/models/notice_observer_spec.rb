@@ -16,7 +16,7 @@ describe "Callback on Notice", type: 'model' do
       it "sends an email notification after #{threshold} notice(s)" do
         @err.problem.stub(:notices_count).and_return(threshold)
         expect(Mailer).to receive(:err_notification).
-          and_return(double('email', :deliver => true))
+          and_return(double('email', :deliver_now => true))
         Fabricate(:notice, :err => @err)
       end
     end
@@ -36,7 +36,7 @@ describe "Callback on Notice", type: 'model' do
     it "should send email notification after 1 notice since an error has been resolved" do
       @err.problem.resolve!
       expect(Mailer).to receive(:err_notification).
-        and_return(double('email', :deliver => true))
+        and_return(double('email', :deliver_now => true))
       Fabricate(:notice, :err => @err)
     end
     it 'self notify if mailer failed' do
@@ -86,7 +86,7 @@ describe "Callback on Notice", type: 'model' do
 
     it "send email" do
       expect(app.notification_service).to receive(:create_notification).and_raise(ArgumentError)
-      expect(Mailer).to receive(:err_notification).and_return(double(:deliver => true))
+      expect(Mailer).to receive(:err_notification).and_return(double(:deliver_now => true))
 
       Notice.create!(:err => err, :message => 'FooError: Too Much Bar', :server_environment => {'environment-name' => 'production'},
                      :backtrace => backtrace, :notifier => { 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' })

@@ -184,7 +184,7 @@ class Notice
   # Send email notification if needed
   def email_notification
     return true unless should_email?
-    Mailer.err_notification(self).deliver
+    Mailer.err_notification(self).deliver_now
   rescue => e
     HoptoadNotifier.notify(e)
   end

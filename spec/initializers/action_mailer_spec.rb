@@ -3,6 +3,18 @@ describe 'initializers/action_mailer' do
     load File.join(Rails.root, 'config', 'initializers', 'action_mailer.rb')
   end
 
+  before do
+    @delivery_method = ActionMailer::Base.delivery_method
+    @sendmail_settings = ActionMailer::Base.sendmail_settings
+    @smtp_settings = ActionMailer::Base.smtp_settings
+  end
+
+  after do
+    ActionMailer::Base.delivery_method = @delivery_method
+    ActionMailer::Base.sendmail_settings = @sendmail_settings
+    ActionMailer::Base.smtp_settings = @smtp_settings
+  end
+
   describe 'delivery method' do
     it 'sets the delivery method to :smtp' do
       allow(Errbit::Config).to receive(:email_delivery_method).and_return(:smtp)
