@@ -42,7 +42,7 @@ describe Mailer do
       )
       notice.problem.update_attributes :notices_count => 3
 
-      @email = Mailer.err_notification(notice).deliver
+      @email = Mailer.err_notification(notice).deliver_now
     end
 
     it_should_behave_like "a notification email"
@@ -84,7 +84,7 @@ describe Mailer do
     before do
       expect(comment).to receive(:notification_recipients).and_return(recipients)
       Fabricate(:notice, :err => notice.err)
-      @email = Mailer.comment_notification(comment).deliver
+      @email = Mailer.comment_notification(comment).deliver_now
     end
 
     it "should be sent to comment notification recipients" do
