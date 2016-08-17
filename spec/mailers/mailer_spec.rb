@@ -16,7 +16,7 @@ describe Mailer do
       )
       notice.stub(:similar_count).and_return(3)
 
-      @email = Mailer.err_notification(notice).deliver
+      @email = Mailer.err_notification(notice).deliver_now
     end
 
     it "should send the email" do
@@ -32,7 +32,7 @@ describe Mailer do
     end
 
     it "should have links to source files" do
-      expect(@email).to have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
+      expect(@email).to have_body_text('<a target="_blank" href="http://example.com/path/to/file.js">path/to/file.js')
     end
 
     it "should have the error count in the subject" do
@@ -40,7 +40,7 @@ describe Mailer do
     end
 
     context 'with a very long message' do
-      let(:notice)  { Fabricate(:notice, message: 6.times.collect { |a| "0123456789" }.join('')) }
+      let(:notice) { Fabricate(:notice, message: 6.times.collect { |a| "0123456789" }.join('')) }
       it "should truncate the long message" do
         expect(@email.subject).to match( / \d{47}\.{3}$/ )
       end
@@ -54,12 +54,12 @@ describe Mailer do
     let!(:notice) { Fabricate(:notice) }
     let!(:comment) { Fabricate.build(:comment, err: notice.err) }
     let!(:watcher) { Fabricate(:watcher, app: comment.app) }
-    let(:recipients) { ['recipient@example.com', 'another@example.com']}
+    let(:recipients) { ['recipient@example.com', 'another@example.com'] }
 
     before do
       comment.stub(:notification_recipients).and_return(recipients)
       Fabricate(:notice, err: notice.err)
-      @email = Mailer.comment_notification(comment).deliver
+      @email = Mailer.comment_notification(comment).deliver_now
     end
 
     it "should send the email" do
