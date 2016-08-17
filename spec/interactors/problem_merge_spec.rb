@@ -47,7 +47,7 @@ describe ProblemMerge do
     it "associates all comments with the remaining problem" do
       problem.comments(true)
       problem_1.comments(true)
-      
+
       expect {
         problem_merge.merge
       }.to change {

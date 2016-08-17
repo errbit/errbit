@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
   end
 
   protected
-    
+
     def increase_counter_cache
       problem.inc(:comments_count, 1)
     end

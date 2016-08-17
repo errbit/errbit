@@ -12,7 +12,7 @@ class CreateIssueTrackers < ActiveRecord::Migration
       t.string :ticket_properties
       t.string :subdomain
       t.string :milestone_id
-      
+
       t.string :base_url
       t.string :context_path
       t.string :issue_type

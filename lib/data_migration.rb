@@ -17,7 +17,7 @@ class ActiveRecord::Base
 end
 
 module DataMigration
-  
+
   def self.start(configuration)
     worker = Worker.new(configuration)
     worker.start
@@ -25,7 +25,7 @@ module DataMigration
 
   class DBPrepareMigration < ActiveRecord::Migration
     self.verbose = false
-    
+
     def change
       add_column :users, :remote_id, :string
       add_column :apps, :remote_id, :string
@@ -50,7 +50,7 @@ module DataMigration
     # value of this hash can be an object and respond to :call, which returns value for new key
     USER_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       email: :email,
       github_login: :github_login,
       github_oauth_token: :github_oauth_token,
@@ -58,31 +58,31 @@ module DataMigration
       admin: :admin,
       per_page: :per_page,
       time_zone: :time_zone,
-      
+
       encrypted_password: :encrypted_password,
-      
+
       reset_password_token: :reset_password_token,
       reset_password_sent_at: :reset_password_sent_at,
-      
+
       remember_created_at: :remember_created_at,
-      
+
       sign_in_count: :sign_in_count,
       current_sign_in_at: :current_sign_in_at,
       last_sign_in_at: :last_sign_in_at,
       current_sign_in_ip: :current_sign_in_ip,
       last_sign_in_ip: :last_sign_in_ip,
-      
+
       authentication_token: :authentication_token,
-      
+
       created_at: :created_at,
       updated_at: :updated_at,
-      
+
       username: :username
     }
 
     APP_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       name: :name,
       api_key: :api_key,
       github_repo: :github_repo,
@@ -94,7 +94,7 @@ module DataMigration
       notify_on_errs: :notify_on_errs,
       notify_on_deploys: :notify_on_deploys,
       email_at_notices: :email_at_notices,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
@@ -105,7 +105,7 @@ module DataMigration
       environment: :environment,
       revision: :revision,
       message: :message,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
@@ -119,9 +119,9 @@ module DataMigration
 
     PROBLEM_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       app_id: lambda { |v| App.where(remote_id: v["app_id"].to_s).pluck(:id).first },
-      
+
       last_notice_at: :last_notice_at,
       first_notice_at: :first_notice_at,
       last_deploy_at: :last_deploy_at,
@@ -129,7 +129,7 @@ module DataMigration
       resolved_at: :resolved_at,
       issue_link: :issue_link,
       issue_type: :issue_type,
-      
+
       app_name: :app_name,
       notices_count: :notices_count,
       message: :message,
@@ -140,39 +140,39 @@ module DataMigration
       messages: lambda { |v| normalize_hash(v["messages"]) },
       hosts: lambda { |v| normalize_hash(v["hosts"]) },
       comments_count: :comments_count,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
 
     COMMENT_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       user_id: lambda { |v| User.where(remote_id: v["user_id"].to_s).pluck(:id).first },
       problem_id: lambda { |v| Problem.where(remote_id: v["err_id"].to_s).pluck(:id).first },
-      
+
       body: :body,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
 
     ERR_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       problem_id: lambda { |v| Problem.where(remote_id: v["problem_id"].to_s).pluck(:id).first },
-      
+
       fingerprint: :fingerprint,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
 
     BACKTRACE_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       fingerprint: :fingerprint,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
@@ -182,14 +182,14 @@ module DataMigration
       column: :column,
       file: :file,
       method: :method,
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
 
     NOTICE_FIELDS_MAPPING = {
       remote_id: lambda { |v| v["_id"].to_s },
-      
+
       message: :message,
       server_environment: lambda { |v| normalize_hash(v["server_environment"]) },
       request: lambda { |v| normalize_hash(v["request"]) },
@@ -197,10 +197,10 @@ module DataMigration
       user_attributes: lambda { |v| normalize_hash(v["user_attributes"]) },
       framework: :framework,
       error_class: :error_class,
-      
+
       err_id: lambda { |v| Err.where(remote_id: v["err_id"].to_s).pluck(:id).first },
       backtrace_id: lambda { |v| Backtrace.where(remote_id: v["backtrace_id"].to_s).pluck(:id).first },
-      
+
       created_at: :created_at,
       updated_at: :updated_at
     }
@@ -242,16 +242,16 @@ module DataMigration
 
     def initialize(configuration)
       session = configuration.with_indifferent_access[:sessions][:default]
-      
+
       database = session[:database].to_s
       host = session.fetch(:hosts, []).first
       host, port = host.split(":") if host
       @mongo_client = MongoClient.new(host, port)
-      
+
       username = session[:username]
       password = session[:password]
       mongo_client.add_auth(database, username, password, nil) if username && password
-      
+
       @db = mongo_client[database]
     end
 
@@ -266,7 +266,7 @@ module DataMigration
       db_prepare
       app_prepare
     end
-    
+
     def teardown
       db_teardown
       app_teardown
@@ -287,12 +287,12 @@ module DataMigration
       DBPrepareMigration.migrate :down
       [User, App, Deploy, Comment, Problem, Err, Notice, Backtrace].each(&:reset_column_information)
     end
-    
+
     def app_teardown
       Notice.observers.enable :all
       Deploy.observers.enable :all
     end
-    
+
     def copy_all!
       ActiveRecord::Base.transaction do
         COLLECTIONS.each(&method(:copy!))
@@ -303,7 +303,7 @@ module DataMigration
       singular = collection.to_s.singularize
       mapping = self.class.const_get "#{singular.upcase}_FIELDS_MAPPING"
       save_method = method :"save_#{singular}!"
-      
+
       without_callbacks do
         find_each(db[collection]) do |old_record|
           new_record = build_record_for_collection(collection)
@@ -312,7 +312,7 @@ module DataMigration
         end
       end
     end
-    
+
     def without_callbacks(&block)
       callbacks = %w{
         Comment#deliver_email
@@ -327,30 +327,30 @@ module DataMigration
       }
       without_callbacks_recursive(callbacks, &block)
     end
-    
+
     def without_callbacks_recursive(callbacks, &block)
       callback = callbacks.shift
       return yield unless callback
-      
+
       model, method = callback.split("#")
       model.constantize.without_callback(method.to_sym) do
         without_callbacks_recursive(callbacks, &block)
       end
     end
-    
+
     def build_record_for_collection(collection)
       model = collection.to_s.classify.constantize
       model.new
     end
-    
-    
-    
+
+
+
     def save_user!(user, _)
       # so that Devise doesn't fail validation due to missing password
       def user.password_required?; false; end
       user.save!
     end
-    
+
     def save_app!(app, old_app)
       app.save!
       copy_issue_tracker(app, old_app)
@@ -358,34 +358,34 @@ module DataMigration
       copy_deploys(old_app, app)
       copy_watchers(old_app, app)
     end
-    
+
     def save_problem!(problem, _)
       problem.save!
     end
-    
+
     def save_comment!(comment, _)
       comment.save!
     end
-    
+
     def save_err!(err, _)
       err.save!
     end
-    
+
     def save_backtrace!(backtrace, old_backtrace)
       copy_backtrace_lines(backtrace, old_backtrace)
       backtrace.save!
     end
-    
+
     def save_notice!(notice, _)
       notice.save!
     end
-    
-    
-    
-    
+
+
+
+
     def copy_deploys(old_app, app)
       return unless old_app["deploys"]
-      
+
       old_app["deploys"].each do |deploy|
         deploy = copy_deploy(app, deploy)
         deploy.save!
@@ -394,7 +394,7 @@ module DataMigration
 
     def copy_watchers(old_app, app)
       return unless old_app["watchers"]
-      
+
       old_app["watchers"].each do |watcher|
         copy_watcher(app, watcher)
       end

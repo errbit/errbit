@@ -17,7 +17,7 @@ before_fork do |server, worker|
   # we send it a QUIT.
   #
   # Using this method we get 0 downtime deploys.
- 
+
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin

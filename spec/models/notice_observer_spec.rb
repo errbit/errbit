@@ -125,7 +125,7 @@ describe "When a Notice is created" do
         Fabricate(:notice, err: err)
       end
     end
-    
+
     describe "should send a notification at desired intervals" do
       let(:app) { Fabricate(:app, email_at_notices: [1], notification_service: Fabricate(:campfire_notification_service, notify_at_notices: [1,2]))}
 
@@ -160,7 +160,7 @@ describe "When a Notice is created" do
         Fabricate(:notice, err: err)
       end
     end
-    
+
     describe "that raise an exception during delivery" do
       before do
         @app = Fabricate(:app, email_at_notices: [1], notification_service: Fabricate(:campfire_notification_service))

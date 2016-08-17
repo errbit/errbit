@@ -20,7 +20,7 @@ class DeduplicateErrs
       .select { |fingerprint, err_ids| err_ids.length > 1 }
 
     puts "\e[33;1m#{errs_by_fingerprint.values.flatten.count}\e[0;33m Errs share \e[1m#{errs_by_fingerprint.keys.count}\e[0;33m fingerprints. Orphaning \e[1m#{errs_by_fingerprint.values.flatten.count - errs_by_fingerprint.keys.count}\e[0;33m Errs.\e[0m"
-    
+
     errs_by_fingerprint.each do |fingerprint, err_ids|
       Notice.where(err_id: err_ids).update_all(err_id: err_ids.first)
     end

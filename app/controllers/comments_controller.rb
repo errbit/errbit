@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   include UrlHelper
-  
+
   before_filter :find_app
   before_filter :find_err
 
@@ -52,5 +52,5 @@ class CommentsController < ApplicationController
     def find_err
       @err = @app.errs.find(params[:err_id])
     end
-  
+
 end

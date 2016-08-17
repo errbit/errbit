@@ -1,11 +1,11 @@
 class ProblemPresenter
   attr_reader :problems, :problem_ids
-  
+
   def initialize(controller, problems)
     @controller = controller
     @problems = problems
   end
-  
+
   def as_json(options={})
     problem_attrs = pluck(problems,
       :id,
@@ -24,9 +24,9 @@ class ProblemPresenter
       :resolved,
       :resolved_at,
       :notices_count)
-    
+
     @problem_ids = problem_attrs.map(&:first)
-    
+
     problem_attrs.map do |id, app_id, app_name, environment, message, where,
         first_notice_at, first_notice_commit, first_notice_environment,
         last_notice_at, last_notice_commit, last_notice_environment,
@@ -54,7 +54,7 @@ class ProblemPresenter
       attrs
     end
   end
-  
+
   def problem_as_json(problem)
     attrs = {
       id: problem.id,
@@ -77,17 +77,17 @@ class ProblemPresenter
     attrs[:url] = controller.app_err_url(app_id: problem.app_id, id: problem.err_ids.first) if problem.err_ids.any?
     attrs
   end
-  
+
   def to_json(options={})
     MultiJson.dump(as_json)
   end
-  
+
 private
-  
+
   def problem_ids
     @problem_ids ||= problems.map(&:id)
   end
-  
+
   def err_ids_by_problem
     @err_ids_by_problem ||= pluck(
         Err.where(problem_id: problem_ids),
@@ -95,11 +95,11 @@ private
       .each_with_object({}) { |(problem_id, err_id), map|
         (map[problem_id.to_i] ||= []).push(err_id.to_i) }
   end
-  
+
   attr_reader :controller
-  
+
   def pluck(relation, *args)
     ActiveRecord::Base.connection.select_rows(relation.select(args).to_sql)
   end
-  
+
 end

@@ -16,18 +16,18 @@ class App < ActiveRecord::Base
     return @tentative_issue_tracker if has_tentative_issue_tracker?
     super
   end
-  
+
   def has_tentative_issue_tracker?
     !!defined?(@tentative_issue_tracker)
   end
-  
+
   alias_method :set_issue_tracker, :issue_tracker=
   def issue_tracker=(value)
     @tentative_issue_tracker = value
   end
-  
+
   after_save :commit_issue_tracker, if: :has_tentative_issue_tracker?
-  
+
   def commit_issue_tracker
     temp = @tentative_issue_tracker
     remove_instance_variable :@tentative_issue_tracker
@@ -41,18 +41,18 @@ class App < ActiveRecord::Base
     return @tentative_notification_service if has_tentative_notification_service?
     super
   end
-  
+
   def has_tentative_notification_service?
     !!defined?(@tentative_notification_service)
   end
-  
+
   alias_method :set_notification_service, :notification_service=
   def notification_service=(value)
     @tentative_notification_service = value
   end
-  
+
   after_save :commit_notification_service, if: :has_tentative_notification_service?
-  
+
   def commit_notification_service
     temp = @tentative_notification_service
     remove_instance_variable :@tentative_notification_service
@@ -83,7 +83,7 @@ class App < ActiveRecord::Base
     reject_if: proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
 
   # Set default values for new record
-  def default_values  
+  def default_values
     if self.new_record?
       self.email_at_notices ||= Errbit::Config.email_at_notices
     end

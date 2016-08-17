@@ -129,7 +129,7 @@ class Notice < ActiveRecord::Base
       server_environment['app-version'] || ''
     end
   end
-  
+
   def git_commit
     env_vars["GIT_COMMIT"]
   end

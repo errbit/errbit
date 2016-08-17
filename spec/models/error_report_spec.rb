@@ -156,7 +156,7 @@ describe ErrorReport do
           app.watchers.build(email: 'foo@example.com')
           app.save!
         end
-        
+
         it 'send email' do
           notice = nil
           expect {

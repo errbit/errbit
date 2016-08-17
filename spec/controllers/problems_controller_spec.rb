@@ -88,7 +88,7 @@ describe ProblemsController do
         unwatched_err = Fabricate(:err)
         Fabricate(:user_watcher, user: user, app: app)
         app.watchers(true)
-        
+
         watched_unresolved_err = Fabricate(:err, problem: Fabricate(:problem, app: app, resolved: false))
         watched_resolved_err = Fabricate(:err, problem: Fabricate(:problem, app: app, resolved: true))
         get :index

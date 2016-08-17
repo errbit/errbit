@@ -169,7 +169,7 @@ class Problem < ActiveRecord::Base
   def to_param
     errs.first.to_param
   end
-  
+
   def notices_since_reopened
     notices.after(opened_at).count
   end
