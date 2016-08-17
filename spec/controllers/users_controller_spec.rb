@@ -156,7 +156,7 @@ describe UsersController do
           attrs[:user][:admin] = true
           post :create, attrs
           expect(response).to be_redirect
-          expect(User.find(controller.user.to_param).admin).to be_true
+          expect(User.find(controller.user.to_param).admin).to be_truthy
         end
 
         it "should has auth token" do
