@@ -44,7 +44,7 @@ describe "When a Notice is created" do
         it "should be sent after #{threshold} notice(s)" do
           @err.problem.stub(:notices_since_reopened).and_return(threshold)
           expect(Mailer).to receive(:err_notification).
-            and_return(double('email', deliver: true))
+            and_return(double('email', deliver_now: true))
           Fabricate(:notice, err: @err)
         end
       end
@@ -57,7 +57,7 @@ describe "When a Notice is created" do
 
       it "should be sent after (n) notices since the problem was reopened" do
         expect(Mailer).to receive(:err_notification).
-          and_return(double('email', deliver: true))
+          and_return(double('email', deliver_now: true))
         Fabricate(:notice, err: @err)
       end
     end
@@ -112,7 +112,7 @@ describe "When a Notice is created" do
 
       it "send email" do
         expect(app.notification_service).to receive(:create_notification).and_raise(ArgumentError)
-        expect(Mailer).to receive(:err_notification).and_return(double(deliver: true))
+        expect(Mailer).to receive(:err_notification).and_return(double(deliver_now: true))
         Fabricate(:notice, err: err)
       end
     end

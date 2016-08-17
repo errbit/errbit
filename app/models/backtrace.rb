@@ -24,7 +24,7 @@ class Backtrace < ActiveRecord::Base
 
   def includes?(file_and_method)
     filename, methodname = file_and_method.split("#")
-    where(file: "[PROJECT_ROOT]/#{filename}", method: methodname).exists?
+    lines.where(file: "[PROJECT_ROOT]/#{filename}", method: methodname).exists?
   end
 
 private

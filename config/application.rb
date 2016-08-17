@@ -37,5 +37,8 @@ module Errbit
     # Respond with a 400 when requests are malformed
     # http://stackoverflow.com/a/24727310/731300
     config.middleware.insert 0, Rack::UTF8Sanitizer
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

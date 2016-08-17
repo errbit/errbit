@@ -12,7 +12,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
 
   def deliver_email
-    Mailer.comment_notification(self).deliver
+    Mailer.comment_notification(self).deliver_now
   end
 
   def notification_recipients
