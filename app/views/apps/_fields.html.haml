@@ -31,11 +31,18 @@
   %div.checkbox
     = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
     = f.label :notify_on_errs, 'Notify on errors'
+    
   - if Errbit::Config.per_app_email_at_notices
     %div.email_at_notices_nested{:style => app_decorate.notify_err_display}
       .field-helpertext Send a notification every
       = f.text_field :email_at_notices, :value => app_decorate.email_at_notices
       .field-helpertext times an error occurs (comma separated).
+
+  - if Errbit::Config.per_app_issue_at_notices
+    %div.issue_at_notices_nested
+      = f.check_box :issue_at_notices, :value => app_decorate.issue_at_notices
+      = f.label :issue_at_notices, 'Create issue on first error occurs'
+      .field-helpertext (require configured issue tracker)
 
 %div.checkbox
   = f.check_box :notify_all_users
