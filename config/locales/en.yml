@@ -75,8 +75,8 @@ en:
 
   problems:
     index:
-      all_errors: "All errors"
-      unresolved_errors: "unresolved errors"
+      all_errors: "All Errors"
+      unresolved_errors: "Unresolved Errors"
       hide_resolved: "hide resolved"
       show_resolved: "show resolved"
     table:
@@ -117,7 +117,7 @@ en:
       environment: Environment
       app: App
       where: Where
-      up: Up
+      up: up
       resolve: resolve
   comments:
     confirm_delete: "Permanently delete this comment?"
