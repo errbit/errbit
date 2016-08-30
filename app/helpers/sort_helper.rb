@@ -5,6 +5,7 @@ module SortHelper
     current = (params_sort == field)
     order   = (current && (params_order == "asc")) ? "desc" : "asc"
     url     = request.path + "?sort=#{field}&order=#{order}"
+    url    += "&all_errs=true" if all_errs
     options = {}
     options.merge!(class: "current #{order}") if current
     link_to(name, url, options)

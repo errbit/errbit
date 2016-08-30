@@ -9,6 +9,8 @@ describe "apps/show.html.haml", type: 'view' do
   before do
     allow(view).to receive(:app).and_return(app)
     allow(view).to receive(:all_errs).and_return(false)
+    allow(view).to receive(:params_order).and_return('asc')
+    allow(view).to receive(:params_sort).and_return('latest_notice_at')
     allow(controller).to receive(:current_user).and_return(user)
   end
 
