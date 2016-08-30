@@ -14,7 +14,10 @@ en:
   n_errs_have:
     one:   "%{count} error has"
     other: "%{count} errors have"
-
+    been_resolved: been resolved
+    been_unresolved: been unresolved
+    been_unmerged: been unmerged
+    been_deleted: been deleted
   layouts:
     application:
       title: 'Errbit'
@@ -26,6 +29,7 @@ en:
       apps: 'Apps'
       errors: 'Errors'
       users: 'Users'
+      config: 'Config'
     session:
       sign_out: 'Sign out'
       edit_profile: 'Edit profile'
@@ -70,6 +74,22 @@ en:
         sign_in: "Sign in"
 
   problems:
+    index:
+      all_errors: "All errors"
+      unresolved_errors: "unresolved errors"
+      hide_resolved: "hide resolved"
+      show_resolved: "show resolved"
+    table:
+        app: App
+        what_&_where: 'Where & What'
+        latest: Latest
+        count: Count
+        merge: Merge
+        unmerge: Unmerge
+        resolve: Resolve
+        unresolve: Unresolve
+        delete: Delete
+        ago: ago
     confirm:
       delete: "Permanently delete selected issues?"
       resolve: "Resolve selected issues? They can be unresolved later."
@@ -79,13 +99,62 @@ en:
       unresolve: "Unresolve selected issues? They can be resolved again later."
     search:
       search_placeholder: 'Search for issues'
-
+    resolve:
+      the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
+    show:
+      comments: Comments
+      add_a_comment: Add a comment
+      save_comment: Save comment
+      summary: Summary
+      backtrace: Backtrace
+      user: User
+      environment: Environment
+      parameters: Parameters
+      session: Session
+      ago_by: ago by
+      ago_by_unkown_user: ago by [Unkown User]
+      last_notice: Last Notice
+      environment: Environment
+      app: App
+      where: Where
+      up: Up
+      resolve: resolve
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:
     confirm_delete: "Permanently delete this user?"
     index:
       new: Add a New User
+      title: Users
+      name: Name
+      username: Username
+      email: Email
+      admin: Admin?
+      admin_yes: Yes
+      admin_no: No
+    edit:
+      title: Edit
+      cancel: cancel
+      update_user: Update User
+    fields:
+      name: Name
+      email: Email
+      entries: Entries per page
+      time_zone: Time Zone 
+      password: Password
+      password_confirmation: Password Confirmation
+      admin: Admin?
+    new:
+      title: New User
+      cancel: cancel
+      add_user: Adicionar usuário
+    show:
+      name: Name
+      email: Email
+      admin: Admin?
+      created: Created
+      edit: edit
+      destroy: destroy
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
@@ -100,7 +169,21 @@ en:
       no_apps: 'No apps here.'
       click_to_create: 'Click here to create your first one'
     fields:
-      regenerate_api_key: "Regenerate API key"
+      name: Name
+      api_key: API Key
+      repository_branch: Repo Branch
+      github_repo: GitHub Repo
+      bitbucket_repo: BitBucket Repo
+      asset_host: Asset Host
+      asset_host_help: Used to generate links for JavaScript errors
+      asset_host_placeholder: "e.g. https://assets.example.com"
+      latest_app_version: Latest App Version
+      latest_app_version_help: "Mobile apps can set this to ignore any error below this version. ie: 1.4.3"
+      latest_app_version_placeholder: "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
+      notifications: Notifications
+      notify_on_errors: Notify on errors
+      notify_all_users: Send notifications to all users
+      regenerate_api_key: "Regenerate API Key"
     show:
       all_errs: all errors
       all_users_notified: "All users will be notified when something happens."
@@ -142,3 +225,33 @@ en:
       success: "You are no longer watching %{app}"
     update:
       success: "You are now watching %{app}"
+  site_config:
+    index:
+      title: Config
+      cancel: cancel
+      notice_fingerprinter: Notice Fingerprinter
+      notice_fingerprinter_text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
+      error_class: Error Class
+      message: Error Message
+      backtrace_lines: Number of backtrace lines (-1 for unlimited)
+      component: Component (or controller)
+      action: Action
+      environment_name: Environment name
+      update_config: Update Config
+  notices:
+    summary:
+      message: Message
+      error_class: Error Class
+      url: URL
+      where: Where
+      occurred: Occurred
+      similar: Similar
+      browser: Browser
+      tenant: Origem
+      app_server: App Server
+      app_version: App Version
+      framework: Framework
+      relative_directory: Rel. Directory
+  paginator:
+    viewing_occurrence: viewing occurrence
+    of: of

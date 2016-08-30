@@ -1,16 +1,16 @@
 = errors_for user
 
 .required
-  = f.label :name
+  = f.label :name, t('.name')
   = f.text_field :name
 
 - if Errbit::Config.user_has_username
   .required
-    = f.label :username
+    = f.label :username, t('.username')
     = f.text_field :username
 
 .required
-  = f.label :email
+  = f.label :email, t('.email')
   = f.text_field :email
 
 - if Errbit::Config.github_authentication
@@ -18,23 +18,23 @@
   = f.text_field :github_login
 
 .required
-  = f.label :per_page, 'Entries per page'
+  = f.label :per_page, t('.entries')
   = f.select :per_page, [10, 20, 30, 50, 75, 100]
 
 .required
-  = f.label :time_zone
+  = f.label :time_zone, t('.time_zone')
   = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
 
 .required
-  = f.label :password
+  = f.label :password, t('.password')
   = f.password_field :password, :autocomplete => "off"
 
 .required
-  = f.label :password_confirmation
+  = f.label :password_confirmation, t('.password_confirmation')
   = f.password_field :password_confirmation
 
 - if current_user.admin?
   .checkbox
     = f.check_box :admin
-    = f.label :admin, 'Admin?'
+    = f.label :admin, t('.admin')
 

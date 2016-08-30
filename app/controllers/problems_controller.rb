@@ -77,7 +77,7 @@ class ProblemsController < ApplicationController
 
   def resolve
     problem.resolve!
-    flash[:success] = 'Great news everyone! The error has been resolved.'
+    flash[:success] = t('.the_error_has_been_resolved')
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to app_path(app)
@@ -85,13 +85,13 @@ class ProblemsController < ApplicationController
 
   def resolve_several
     selected_problems.each(&:resolve!)
-    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} been resolved."
+    flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t('n_errs_have.been_resolved')}."
     redirect_to :back
   end
 
   def unresolve_several
     selected_problems.each(&:unresolve!)
-    flash[:success] = "#{I18n.t(:n_errs_have, count: selected_problems.count)} been unresolved."
+    flash[:success] = "#{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t('n_errs_have.been_unresolved')}."
     redirect_to :back
   end
 
@@ -112,19 +112,19 @@ class ProblemsController < ApplicationController
 
   def unmerge_several
     all = selected_problems.map(&:unmerge!).flatten
-    flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} been unmerged."
+    flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} #{I18n.t('n_errs_have.been_unmerged')}."
     redirect_to :back
   end
 
   def destroy_several
     nb_problem_destroy = ProblemDestroy.execute(selected_problems)
-    flash[:notice] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} been deleted."
+    flash[:notice] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} #{I18n.t('n_errs_have.been_deleted')}."
     redirect_to :back
   end
 
   def destroy_all
     nb_problem_destroy = ProblemDestroy.execute(app.problems)
-    flash[:success] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} been deleted."
+    flash[:success] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} #{I18n.t('n_errs_have.been_deleted')}."
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to app_path(app)

@@ -4,13 +4,13 @@
     %thead
       %tr
         %th= check_box_tag "toggle_problems_checkboxes"
-        %th= link_for_sort "App"
-        %th= link_for_sort "What &amp; Where".html_safe, "message"
-        %th= link_for_sort "Latest", "last_notice_at"
-        %th= link_for_sort "Count"
+        %th= link_for_sort t('.app')
+        %th= link_for_sort t('.what_&_where').html_safe, "message"
+        %th= link_for_sort t('.latest'), "last_notice_at"
+        %th= link_for_sort t('.count')
         - if any_issue_links
           %th Issue
-        %th Resolve
+        %th= t('.resolve')
     %tbody
       - problems.each do |problem|
         %tr{:class => problem.resolved? ? 'resolved' : 'unresolved'}
@@ -32,7 +32,7 @@
                 - if comment.user
                   %em.commenter= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s << ":"
                 %em= truncate(comment.body, :length => 100, :separator => ' ')
-          %td.latest #{time_ago_in_words(problem.last_notice_at)} ago
+          %td.latest #{time_ago_in_words(problem.last_notice_at)} #{I18n.t('problems.table.ago')}
           %td.count= link_to problem.notices_count, app_problem_path(problem.app, problem)
           - if any_issue_links
             %td.issue_link
@@ -49,6 +49,6 @@
   .tab-bar
     %ul
       - %w(merge unmerge resolve unresolve delete).each do |action|
-        %li= submit_tag action.capitalize, :id => "#{action}_problems", :class => 'button',
+        %li= submit_tag t(".#{action}").capitalize, :id => "#{action}_problems", :class => 'button',
           :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
           :confirm => problem_confirm(action) }

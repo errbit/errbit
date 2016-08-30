@@ -1,8 +1,8 @@
-- content_for :title, 'New User'
-- content_for :action_bar, link_to('cancel', users_path, :class => 'button')
+- content_for :title, t('.title')
+- content_for :action_bar, link_to(t('.cancel'), users_path, :class => 'button')
 
 = form_for user do |f|
 
   = render 'fields', :f => f
 
-  %div.buttons= f.submit 'Add User'
+  %div.buttons= f.submit t('.add_user')

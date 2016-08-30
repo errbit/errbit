@@ -2,30 +2,30 @@
 - content_for :title_css_class, "err_show #{'resolved' if problem.resolved?}"
 - content_for :title, problem.error_class || truncate(problem.message, :length => 32)
 - content_for :meta do
-  %strong App:
+  %strong= t('.app') + ':'
   = link_to app.name, app
-  %strong Where:
+  %strong= t('.where') + ':'
   = problem.where
   %br
-  %strong Environment:
+  %strong= t('.environment') + ':'
   = problem.environment
-  %strong Last Notice:
+  %strong= t('.last_notice') + ':'
   = problem.last_notice_at.to_s(:precise)
 - content_for :action_bar do
   - if problem.unresolved?
-    %span= link_to 'resolve', [:resolve, app, problem], :method => :put,
+    %span= link_to t('.resolve'), [:resolve, app, problem], :method => :put,
       :data => { :confirm => problem_confirm('resolve_one') }, :class => 'resolve'
   - if current_user.authentication_token
     %span
       = link_to polymorphic_path([app, problem], :format => "ics", :auth_token => current_user.authentication_token) do
         %i.fa.fa-calendar
         iCal
-  %span>= link_to 'up', (request.env['HTTP_REFERER'] ? :back : app_problems_path(app)), :class => 'up'
+  %span>= link_to t('.up'), (request.env['HTTP_REFERER'] ? :back : app_problems_path(app)), :class => 'up'
   %br
   = render "issue_tracker_links"
 
 - content_for :comments do
-  %h3 Comments
+  %h3= t('.comments')
   - problem.comments.each do |comment|
     .window
       %table.comment
@@ -35,19 +35,19 @@
               - if Errbit::Config.use_gravatar
                 = gravatar_tag comment.user.email, :s => 24
               %span.comment-info
-                = time_ago_in_words(comment.created_at, include_seconds: true) << " ago by "
+                = time_ago_in_words(comment.created_at, include_seconds: true) << " " + t('.ago_by')
                 = link_to comment.user.email, comment.user
             - else
               %span.comment-info
-                = time_ago_in_words(comment.created_at, include_seconds: true) << " ago by [Unknown User]"
+                = time_ago_in_words(comment.created_at, include_seconds: true) << " " + t('.ago_by_unknown_user')
             %span.delete= link_to '&#10008;'.html_safe, [app, problem, comment], :method => :delete,
               :data => { :confirm => t("comments.confirm_delete") }, :class => "destroy-comment"
         %tr
           %td= simple_format comment.body
   = form_for [app, problem, @comment] do |comment_form|
-    %p Add a comment
+    %p= t('.add_a_comment')
     = comment_form.text_area :body
-    = comment_form.submit "Save Comment"
+    = comment_form.submit t('.save_comment')
 
 %h4= @notice.try(:message)
 
@@ -55,17 +55,17 @@
 
 .tab-bar
   %ul
-    %li= link_to 'Summary', '#summary', :rel => 'summary', :class => 'button'
-    %li= link_to 'Backtrace', '#backtrace', :rel => 'backtrace', :class => 'button'
+    %li= link_to t('.summary'), '#summary', :rel => 'summary', :class => 'button'
+    %li= link_to t('.backtrace'), '#backtrace', :rel => 'backtrace', :class => 'button'
     - if @notice && @notice.user_attributes.present?
-      %li= link_to 'User', '#user_attributes', :rel => 'user_attributes', :class => 'button'
-    %li= link_to 'Environment', '#environment', :rel => 'environment', :class => 'button'
-    %li= link_to 'Parameters', '#params', :rel => 'params', :class => 'button'
-    %li= link_to 'Session', '#session', :rel => 'session', :class => 'button'
+      %li= link_to t('.user'), '#user_attributes', :rel => 'user_attributes', :class => 'button'
+    %li= link_to t('.environment'), '#environment', :rel => 'environment', :class => 'button'
+    %li= link_to t('.parameters'), '#params', :rel => 'params', :class => 'button'
+    %li= link_to t('.session'), '#session', :rel => 'session', :class => 'button'
 
 - if @notice
   #summary
-    %h3 Summary
+    %h3= t('.summary')
     = render 'notices/summary', :notice => @notice
 
   #backtrace

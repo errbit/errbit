@@ -1,4 +1,4 @@
-- content_for :title, 'Users'
+- content_for :title, t('.title')
 - content_for :action_bar do
   %span
     = link_to(new_user_path) do
@@ -10,11 +10,11 @@
     %tr
       - if Errbit::Config.use_gravatar
         %th
-      %th Name
+      %th= t('.name')
       - if Errbit::Config.user_has_username
-        %th Username
-      %th.main Email
-      %th Admin?
+        %th= t('.username')
+      %th.main= t('.email')
+      %th= t('.admin')
   %tbody
     - users.each do |user|
       %tr.user_list
@@ -24,6 +24,6 @@
         - if Errbit::Config.user_has_username
           %td= user.username
         %td= user.email
-        %td= user.admin? ? 'Y' : 'N'
+        %td= user.admin? ? t('.admin_yes') : t('.admin_no')
 = paginate users
 
