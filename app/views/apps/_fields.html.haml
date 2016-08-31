@@ -1,36 +1,36 @@
 = errors_for app
 
 %div.required
-  = f.label :name
+  = f.label :name, t('.name')
   = f.text_field :name
 
 - unless app.new_record?
   %div
-    %label Api Key
+    %label= t('.api_key')
     %span= app.api_key
     = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app), :class => 'button', :method => 'post'
 %div
-  = f.label :repository_branch
+  = f.label :repository_branch, t('.repository_branch')
   = f.text_field :repository_branch, :placeholder => "master"
 %div
-  = f.label :github_repo
+  = f.label :github_repo, t('.github_repo')
   = f.text_field :github_repo, :placeholder => "errbit/errbit from https://github.com/errbit/errbit"
 %div
-  = f.label :bitbucket_repo
+  = f.label :bitbucket_repo, t('.bitbucket_repo')
   = f.text_field :bitbucket_repo, :placeholder => "errbit/errbit from https://bitbucket.org/errbit/errbit"
 %div
-  = f.label :asset_host
-  %em Used to generate links for JavaScript errors
-  = f.text_field :asset_host, :placeholder => "e.g. https://assets.example.com"
+  = f.label :asset_host, t('.asset_host')
+  %em= t('.asset_host_help')
+  = f.text_field :asset_host, :placeholder => t('.asset_host_placeholder')
 %div
-  = f.label :current_app_version, 'Latest App Version'
-  %em Mobile apps can set this to ignore any error below this version. ie: 1.4.3
-  = f.text_field :current_app_version, :placeholder => "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
+  = f.label :current_app_version, t('.latest_app_version')
+  %em= t('.latest_app_version_help')
+  = f.text_field :current_app_version, :placeholder => t('.latest_app_version_placeholder')
 %fieldset
-  %legend Notifications
+  %legend= t('.notifications')
   %div.checkbox
     = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
-    = f.label :notify_on_errs, 'Notify on errors'
+    = f.label :notify_on_errs, t('.notify_on_errors')
   - if Errbit::Config.per_app_email_at_notices
     %div.email_at_notices_nested{:style => app_decorate.notify_err_display}
       .field-helpertext Send a notification every
@@ -39,7 +39,7 @@
 
 %div.checkbox
   = f.check_box :notify_all_users
-  = f.label :notify_all_users, 'Send notifications to all users'
+  = f.label :notify_all_users, t('.notify_all_users')
 
 = render "issue_tracker_fields", :f => f
 = render "service_notification_fields", :f => f

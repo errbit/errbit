@@ -8,26 +8,26 @@
 - content_for :action_bar do
   = render 'shared/link_github_account'
   = render 'shared/link_google_account'
-  = link_to 'edit', edit_user_path(user), :class => 'button'
-  = link_to 'destroy', user_path(user), :method => :delete,
+  = link_to t('.edit'), edit_user_path(user), :class => 'button'
+  = link_to t('.destroy'), user_path(user), :method => :delete,
     :data => { :confirm => t('users.confirm_delete') }, :class => 'delete button'
 
 %table.single_user
   %tr
-    %th Email
+    %th= t('.email')
     %td.main= user.email
   - if Errbit::Config.user_has_username
     %tr
-      %th Username
+      %th= t('.username')
       %td.main= user.username
   - if Errbit::Config.github_authentication && user.github_login.present?
     %tr
       %th= "#{Errbit::Config.github_site_title} Login"
       %td.main= link_to user.github_login, "#{Errbit::Config.github_url}/#{user.github_login}"
   %tr
-    %th Admin?
+    %th= t('.admin')
     %td= user.admin? ? 'Y' : 'N'
   %tr
-    %th Created
+    %th= t('.created')
     %td= user.created_at.to_s(:micro)
 

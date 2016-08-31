@@ -1,39 +1,37 @@
-- content_for :title, 'Config'
+- content_for :title, t('.title')
 
-- content_for :action_bar, link_to('cancel', users_path, :class => 'button')
+- content_for :action_bar, link_to(t('.cancel'), users_path, :class => 'button')
 
 = form_for @config, url: site_config_index_path, method: 'put' do |f|
   = errors_for @config
 
   %fieldset
-    %legend Notice Fingerprinter
-    %p
-      The notice fingerprinter governs how error notifications are grouped.
-      Each item counts toward an error's uniqueness if enabled.
+    %legend= t('.notice_fingerprinter')
+    %p= t('.notice_fingerprinter_text')
 
     = f.fields_for :notice_fingerprinter do |g|
       .checkbox
         = g.check_box :error_class
-        = g.label :error_class, 'Error class'
+        = g.label :error_class, t('.error_class')
 
       .checkbox
         = g.check_box :message
-        = g.label :message, 'Error message'
+        = g.label :message, t('.message')
 
       %div
-        = g.label :backtrace_lines, 'Number of backtrace lines (-1 for unlimited)'
+        = g.label :backtrace_lines, t('.backtrace_lines')
         = g.text_field :backtrace_lines
 
       .checkbox
         = g.check_box :component
-        = g.label :component, 'Component (or controller)'
+        = g.label :component, t('.component')
 
       .checkbox
         = g.check_box :action
-        = g.label :action, 'Action'
+        = g.label :action, t('.action')
 
       .checkbox
         = g.check_box :environment_name
-        = g.label :environment_name, 'Environment name'
+        = g.label :environment_name, t('.environment_name')
 
-  %div.buttons= f.submit 'Update Config'
+  %div.buttons= f.submit t('.update_config')
