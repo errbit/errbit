@@ -12,7 +12,7 @@
 
       Airbrake.configure do |config|
         config.host = '#{request.base_url}'
-        config.project_id = -1
+        config.project_id = 1 # required, but any positive integer works
         config.project_key = '#{app.api_key}'
 
         # Uncomment for Rails apps
