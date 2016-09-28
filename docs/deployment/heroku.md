@@ -7,6 +7,9 @@ you can use this deploy button to get a basic deployment running on Heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
 
+After deploying the application, you still need to run `heroku run rake errbit:bootstrap` 
+to create indexes and get your admin user set up.
+
 ## The Hard Way
 
 We designed Errbit to work well with Heroku. These instructions should result
