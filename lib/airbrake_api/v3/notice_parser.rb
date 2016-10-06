@@ -54,7 +54,7 @@ module AirbrakeApi
       end
 
       def request
-        environment = params['environment'].merge(
+        environment = (params['environment'] || {}).merge(
           'HTTP_USER_AGENT' => context['userAgent']
         )
 
