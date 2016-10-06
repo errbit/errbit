@@ -18,6 +18,12 @@ describe AirbrakeApi::V3::NoticeParser do
     end.to raise_error(AirbrakeApi::ParamsError)
   end
 
+  it 'does not raise an error for the optional environment field' do
+    expect do
+      described_class.new('errors' => ['MyError']).report
+    end.not_to raise_error
+  end
+
   it 'parses JSON payload and returns ErrorReport' do
     params = build_params_for('api_v3_request.json', key: app.api_key)
 
