@@ -46,4 +46,14 @@ describe BacktraceDecorator, type: :decorator do
       expect(grouped[4][1]).to eq [backtrace.lines[4], backtrace.lines[5]]
     end
   end
+
+  describe '#lines' do
+    context 'when empty' do
+      let(:backtrace) { described_class.new(Backtrace.new) }
+
+      it 'does not raise an NoMethodError' do
+        expect { backtrace.lines }.not_to raise_error
+      end
+    end
+  end
 end
