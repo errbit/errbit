@@ -108,7 +108,7 @@ protected
     app.watchers.build if app.watchers.none?
     app.issue_tracker ||= IssueTracker.new
     app.notification_service = NotificationService.new unless app.notification_service_configured?
-    app.notice_fingerprinter = NoticeFingerprinter.new if app.notice_fingerprinter.nil?
+    app.notice_fingerprinter = SiteConfig.document.notice_fingerprinter.dup if app.notice_fingerprinter.nil?
     app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
   end
 
