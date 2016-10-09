@@ -88,7 +88,7 @@ group :test do
   gem 'fabrication'
   gem 'capybara'
   gem 'poltergeist'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'phantomjs'
   gem 'launchy'
   gem 'email_spec'
   gem 'timecop'
