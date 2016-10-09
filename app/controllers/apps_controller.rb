@@ -49,6 +49,7 @@ class AppsController < ApplicationController
   end
 
   def create
+    process_fingerprinter_choice
     initialize_subclassed_notification_service
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
@@ -59,12 +60,7 @@ class AppsController < ApplicationController
   end
 
   def update
-    fingerprinter_source = params['app'].delete('use_site_wide')
-    app.notice_fingerprinter.source = fingerprinter_source
-    if fingerprinter_source == SiteConfig::CONFIG_SOURCE_SITE
-      app.update_attributes(
-          notice_fingerprinter: SiteConfig.document.notice_fingerprinter_attributes)
-    end
+    process_fingerprinter_choice
     initialize_subclassed_notification_service
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
@@ -112,6 +108,7 @@ protected
     app.watchers.build if app.watchers.none?
     app.issue_tracker ||= IssueTracker.new
     app.notification_service = NotificationService.new unless app.notification_service_configured?
+    app.notice_fingerprinter = NoticeFingerprinter.new if app.notice_fingerprinter.nil?
     app.copy_attributes_from(params[:copy_attributes_from]) if params[:copy_attributes_from]
   end
 
@@ -149,6 +146,19 @@ protected
     else
       default_array = params[:app][:notification_service_attributes][:notify_at_notices] = Errbit::Config.notify_at_notices
       flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(', ')})."
+    end
+  end
+
+  def process_fingerprinter_choice
+    if params['other'] && params['other']['use_site_fingerprinter']
+      fingerprinter = params['other']['use_site_fingerprinter']
+      if fingerprinter == SiteConfig::CONFIG_SOURCE_SITE
+        app.update_attributes(
+            notice_fingerprinter: SiteConfig.document.notice_fingerprinter_attributes)
+        app.notice_fingerprinter.source = SiteConfig::CONFIG_SOURCE_SITE
+      else
+        app.notice_fingerprinter.source = SiteConfig::CONFIG_SOURCE_APP
+      end
     end
   end
 
