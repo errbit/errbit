@@ -15,6 +15,10 @@ class AppDecorator < Draper::Decorator
     end
   end
 
+  def custom_notice_fingerprinter_style
+    use_site_fingerprinter ? 'display: none' : 'display: inline'
+  end
+
   def notify_user_display
     object.notify_all_users ? 'display: none;' : ''
   end

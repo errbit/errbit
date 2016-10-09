@@ -183,6 +183,7 @@ en:
       notifications: Notifications
       notify_on_errors: Notify on errors
       notify_all_users: Send notifications to all users
+      notice_fingerprinter_text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
       regenerate_api_key: "Regenerate API Key"
     show:
       all_errs: all errors
