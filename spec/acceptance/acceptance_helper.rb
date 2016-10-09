@@ -1,3 +1,4 @@
+require 'phantomjs/poltergeist'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
