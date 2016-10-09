@@ -59,6 +59,12 @@ class AppsController < ApplicationController
   end
 
   def update
+    fingerprinter_source = params['app'].delete('use_site_wide')
+    app.notice_fingerprinter.source = fingerprinter_source
+    if fingerprinter_source == SiteConfig::CONFIG_SOURCE_SITE
+      app.update_attributes(
+          notice_fingerprinter: SiteConfig.document.notice_fingerprinter_attributes)
+    end
     initialize_subclassed_notification_service
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }

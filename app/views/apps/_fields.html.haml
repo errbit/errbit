@@ -40,6 +40,9 @@
 %fieldset
   %legend= t('.notice_fingerprinter')
   %p= t('.notice_fingerprinter_text')
+  .checkbox
+    = f.check_box :use_site_wide, {}, SiteConfig::CONFIG_SOURCE_SITE, SiteConfig::CONFIG_SOURCE_APP
+    = f.label :use_site_wide, t('.use_site_fingerprinter')
 
   = f.fields_for :notice_fingerprinter do |g|
     .checkbox

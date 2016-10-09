@@ -7,6 +7,10 @@ class AppDecorator < Draper::Decorator
     object.email_at_notices.join(', ')
   end
 
+  def use_site_wide
+    object.notice_fingerprinter.attributes['source'] == SiteConfig::CONFIG_SOURCE_SITE
+  end
+
   def notify_user_display
     object.notify_all_users ? 'display: none;' : ''
   end
