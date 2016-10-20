@@ -2,8 +2,7 @@ language: ruby
 rvm:
   - 2.1
   - 2.2
-  - 2.3.0
-  - rbx-2
+  - 2.3.1
   - ruby-head
   - jruby-head
 env:
@@ -21,6 +20,5 @@ script:
   - bundle exec rubocop --lint
 matrix:
   allow_failures:
-    - rvm: rbx-2
     - rvm: ruby-head
     - rvm: jruby-head
