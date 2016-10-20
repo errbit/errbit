@@ -114,6 +114,13 @@ describe ProblemsController, type: 'controller' do
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to_not include(@problem2)
     end
+
+    it "works when given string is empty" do
+      get :search, search: ""
+      expect(controller.problems).to include(@problem1)
+      expect(controller.problems).to include(@problem2)
+    end
+
   end
 
   describe "GET /apps/:app_id/problems/:id" do
