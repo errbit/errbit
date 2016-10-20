@@ -11,7 +11,7 @@ dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
 dokku mongo:create errbit errbit
 dokku mongo:link errbit errbit
 dokku config:set errbit HEROKU=1
-dokku config:set errbit GEMFILE_RUBY_VERSION=2.2.4
+dokku config:set errbit GEMFILE_RUBY_VERSION=2.3.1
 dokku config:set errbit SECRET_KEY_BASE="$(bundle exec rake secret)"
 dokku config:set errbit ERRBIT_HOST=some-hostname.example.com
 dokku config:set errbit ERRBIT_EMAIL_FROM=example@example.com
