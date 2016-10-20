@@ -60,6 +60,7 @@ class Problem
   scope :unresolved, -> { where(resolved: false) }
   scope :ordered, -> { order_by(:last_notice_at.desc) }
   scope :for_apps, ->(apps) { where(:app_id.in => apps.all.map(&:id)) }
+  scope :search, ->(value) { where('$text' => { '$search' => value }) }
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all
@@ -227,10 +228,6 @@ class Problem
     # Return issue_type if configured, but fall back to detecting app's issue tracker
     attributes['issue_type'] ||=
     (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
-  end
-
-  def self.search(value)
-    Problem.where('$text' => { '$search' => value })
   end
 
 private
