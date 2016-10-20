@@ -32,17 +32,14 @@ class ProblemsController < ApplicationController
   end
 
   expose(:problems) do
-    pro = Problem.
+    finder = Problem.
       for_apps(app_scope).
       in_env(params_environement).
       all_else_unresolved(all_errs).
       ordered_by(params_sort, params_order)
 
-    if request.format == :html
-      pro.page(params[:page]).per(current_user.per_page)
-    else
-      pro
-    end
+    finder = finder.search(params[:search]) if params[:search].present?
+    finder.page(params[:page]).per(current_user.per_page)
   end
 
   def index; end
@@ -131,8 +128,6 @@ class ProblemsController < ApplicationController
   end
 
   def search
-    ps = Problem.search(params[:search]).for_apps(app_scope).in_env(params[:environment]).all_else_unresolved(params[:all_errs]).ordered_by(params_sort, params_order)
-    self.problems = ps.page(params[:page]).per(current_user.per_page)
     respond_to do |format|
       format.html { render :index }
       format.js
