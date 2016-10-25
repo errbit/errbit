@@ -23,6 +23,7 @@ class Notice
   after_create :cache_attributes_on_problem, :unresolve_problem
   after_create :email_notification
   after_create :services_notification
+  after_create :update_statsd
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -195,6 +196,17 @@ class Notice
     return true unless app.notification_service_configured? and should_notify?
     app.notification_service.create_notification(problem)
   rescue => e
+    HoptoadNotifier.notify(e)
+  end
+
+  ##
+  # Update Statsd metrics
+  def update_statsd
+    ::StatsdClient.increment(
+      "govuk.app.#{self.app.name.parameterize}.errbit.errors_occurred"
+    )
+  rescue => e
+    puts e
     HoptoadNotifier.notify(e)
   end
 

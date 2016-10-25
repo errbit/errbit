@@ -1,0 +1,1 @@
+::StatsdClient = Statsd.new 'localhost'
