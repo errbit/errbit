@@ -387,6 +387,7 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    statsd-ruby (1.3.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     test-unit (3.0.8)
@@ -491,6 +492,7 @@ DEPENDENCIES
   rushover
   sass
   sass-rails
+  statsd-ruby (= 1.3.0)
   test-unit
   timecop
   uglifier

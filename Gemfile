@@ -61,6 +61,7 @@ gem 'plek', '1.7.0'
 gem 'warden-oauth2', '0.0.1'
 
 gem 'logstasher', '0.4.8'
+gem 'statsd-ruby', '1.3.0'
 #### End GDS additions ####
 
 gem 'ri_cal'
