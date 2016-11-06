@@ -8,11 +8,9 @@ class AppDecorator < Draper::Decorator
   end
 
   def use_site_fingerprinter
-    if object.notice_fingerprinter.nil? || object.notice_fingerprinter.attributes['source'].nil?
-      true
-    else
-      object.notice_fingerprinter.attributes['source'] == SiteConfig::CONFIG_SOURCE_SITE
-    end
+    return true if object.notice_fingerprinter.nil?
+    return true if object.notice_fingerprinter.attributes['source'].nil?
+    object.notice_fingerprinter.attributes['source'] == SiteConfig::CONFIG_SOURCE_SITE
   end
 
   def custom_notice_fingerprinter_style

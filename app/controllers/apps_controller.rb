@@ -153,9 +153,8 @@ protected
     if params['other'] && params['other']['use_site_fingerprinter']
       fingerprinter = params['other']['use_site_fingerprinter']
       if fingerprinter == SiteConfig::CONFIG_SOURCE_SITE
-        app.update_attributes(
+        app.write_attributes(
             notice_fingerprinter: SiteConfig.document.notice_fingerprinter_attributes)
-        app.notice_fingerprinter.source = SiteConfig::CONFIG_SOURCE_SITE
       else
         app.notice_fingerprinter.source = SiteConfig::CONFIG_SOURCE_APP
       end

@@ -5,10 +5,6 @@
 
 $(function() {
     $('#other_use_site_fingerprinter').change(function() {
-        if (this.checked) {
-            $('.custom_notice_fingerprinter').hide();
-        } else {
-            $('.custom_notice_fingerprinter').show();
-        }
+        $('.custom_notice_fingerprinter').toggle(!this.checked);
     });
 });
