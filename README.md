@@ -20,28 +20,28 @@ Airbrake, you can just point the `airbrake` gem to your Errbit server.
   <tr>
     <td align="center">
       <a href="http://errbit.github.com/errbit/images/apps.png" target="_blank" title="Apps">
-        <img src="http://errbit.github.com/errbit/images/apps_thumb.png" alt="Apps">
+        <img src="https://github.com/errbit/errbit/raw/gh-pages/images/apps_thumb.png" alt="Apps">
       </a>
       <br />
       <em>Apps</em>
     </td>
     <td align="center">
       <a href="http://errbit.github.com/errbit/images/app_errors.png" target="_blank" title="Errors">
-        <img src="http://errbit.github.com/errbit/images/app_errors_thumb.png" alt="Errors">
+        <img src="https://github.com/errbit/errbit/raw/gh-pages/images/app_errors_thumb.png" alt="Errors">
       </a>
       <br />
       <em>Errors</em>
     </td>
     <td align="center">
       <a href="http://errbit.github.com/errbit/images/error_summary.png" target="_blank" title="Error Summary">
-        <img src="http://errbit.github.com/errbit/images/error_summary_thumb.png" alt="Error Summary">
+        <img src="https://github.com/errbit/errbit/raw/gh-pages/images/error_summary_thumb.png" alt="Error Summary">
       </a>
       <br />
       <em>Error Summary</em>
     </td>
     <td align="center">
       <a href="http://errbit.github.com/errbit/images/error_backtrace.png" target="_blank" title="Error Backtraces">
-        <img src="http://errbit.github.com/errbit/images/error_backtrace_thumb.png" alt="Error Backtraces">
+        <img src="https://github.com/errbit/errbit/raw/gh-pages/images/error_backtrace_thumb.png" alt="Error Backtraces">
       </a>
       <br />
       <em>Error Backtraces</em>
