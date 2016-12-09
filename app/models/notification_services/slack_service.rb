@@ -60,7 +60,7 @@ class NotificationServices::SlackService < NotificationService
           ]
         }
       ]
-    }.contact.to_json # compact to remove empty channel in case it wasn't selected by user
+    }.compact.to_json # compact to remove empty channel in case it wasn't selected by user
   end
 
   def create_notification(problem)
