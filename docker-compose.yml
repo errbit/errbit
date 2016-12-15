@@ -9,8 +9,6 @@ errbit:
     - RACK_ENV=production
     - MONGO_URL=mongodb://mongo:27017/errbit
 mongo:
-  image: mongo:3.0
+  image: mongo:3.2
   ports:
     - "27017"
-  command: -smallfiles
-
