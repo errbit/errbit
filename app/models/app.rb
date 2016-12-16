@@ -165,12 +165,12 @@ class App
     end
   end
 
-  def unresolved_count
-    @unresolved_count ||= problems.unresolved.count
+  def unresolved_count(query = {})
+    @unresolved_count ||= problems.unresolved.where(query).count
   end
 
-  def problem_count
-    @problem_count ||= problems.count
+  def problem_count(query = {})
+    @problem_count ||= problems.where(query).count
   end
 
   # Compare by number of unresolved errs, then problem counts.
