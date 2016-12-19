@@ -103,6 +103,10 @@ In order of precedence Errbit uses:
 <dd>Password for SMTP auth, you could also set SENDGRID_PASSWORD
 <dt>SMTP_DOMAIN
 <dd>HELO domain to set for outgoing SMTP messages, you can also use SENDGRID_DOMAIN
+<dt>SMTP_ENABLE_STARTTLS_AUTO
+<dd>Detects if STARTTLS is enabled in your SMTP server and starts to use it
+<dt>SMTP_OPENSSL_VERIFY_MODE
+<dd>When using TLS, you can set how OpenSSL checks the certificate. This is really useful if you need to validate a self-signed and/or a wildcard certificate. You can use the name of an OpenSSL verify constant ('none', 'peer', 'client_once', 'fail_if_no_peer_cert').
 <dt>SENDMAIL_LOCATION
 <dd>Path to sendmail
 <dt>SENDMAIL_ARGUMENTS

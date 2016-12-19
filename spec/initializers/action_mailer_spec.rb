@@ -32,15 +32,19 @@ describe 'initializers/action_mailer' do
       allow(Errbit::Config).to receive(:smtp_user_name).and_return('my-username')
       allow(Errbit::Config).to receive(:smtp_password).and_return('my-password')
       allow(Errbit::Config).to receive(:smtp_domain).and_return('someotherdomain.com')
+      allow(Errbit::Config).to receive(:smtp_enable_starttls_auto).and_return(true)
+      allow(Errbit::Config).to receive(:smtp_openssl_verify_mode).and_return('peer')
       load_initializer
 
       expect(ActionMailer::Base.smtp_settings).to eq(
-        address:        'smtp.somedomain.com',
-        port:           998,
-        authentication: :login,
-        user_name:      'my-username',
-        password:       'my-password',
-        domain:         'someotherdomain.com'
+        address:              'smtp.somedomain.com',
+        port:                 998,
+        authentication:       :login,
+        user_name:            'my-username',
+        password:             'my-password',
+        domain:               'someotherdomain.com',
+        enable_starttls_auto: true,
+        openssl_verify_mode:  'peer'
       )
     end
   end
