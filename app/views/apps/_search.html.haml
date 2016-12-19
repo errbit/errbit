@@ -1,0 +1,2 @@
+= form_tag search_apps_path, :method => :get, :remote => true do
+    = text_field_tag :search, params[:search], :placeholder => t('.search_placeholder')

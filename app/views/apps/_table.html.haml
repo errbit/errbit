@@ -1,0 +1,47 @@
+%table.apps
+  %thead
+    %tr
+      %th= t('.name')
+      - if any_github_repos? || any_bitbucket_repos?
+        %th= t('.repository')
+      - if any_notification_services?
+        %th= t('.notify')
+      - if any_issue_trackers?
+        %th= t('.tracker')
+      %th=t('.errors')
+  %tbody
+    - apps.each do |app|
+      %tr
+        %td.name= link_to app.name, app_path(app)
+        - if any_github_repos? or any_bitbucket_repos?
+          %td.github_repo
+            - if app.github_repo?
+              = link_to(app.github_repo, app.github_url, :target => '_blank')
+            - if app.bitbucket_repo?
+              = link_to(app.bitbucket_repo, app.bitbucket_url, :target => '_blank')
+        - if any_notification_services?
+          %td.notification_service
+            - if app.notification_service_configured?
+              - notification_service_img = image_tag("#{app.notification_service.label}_goto.png")
+              - if app.notification_service.url
+                = link_to( notification_service_img, app.notification_service.url, :target => "_blank" )
+              - else
+                = notification_service_img
+        - if any_issue_trackers?
+          %td.issue_tracker
+            - if app.issue_tracker_configured?
+              - tracker_img = image_tag(app.issue_tracker.type.icons[:goto])
+              - if app.issue_tracker.url
+                = link_to( tracker_img, app.issue_tracker.url )
+              - else
+                = tracker_img
+        %td.count
+          - if app.problem_count > 0
+            - unresolved = app.unresolved_count
+            = link_to unresolved, app_path(app), :class => (unresolved == 0 ? "resolved" : nil)
+    - if apps.none?
+      %tr
+        %td{:colspan => 3}
+          %em
+            = t('.no_apps')
+            = link_to t('.click_to_create'), new_app_path

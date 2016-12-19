@@ -6,10 +6,12 @@ class AppsController < ApplicationController
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
   respond_to :html
 
-  expose(:app_scope) { App }
+  expose(:app_scope) {
+    params[:search] ? App.search(params[:search]) : App.all
+  }
 
   expose(:apps) do
-    app_scope.all.to_a.sort.map { |app| AppDecorator.new(app) }
+    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
   end
 
   expose(:app, ancestor: :app_scope, attributes: :app_params)
@@ -84,6 +86,13 @@ class AppsController < ApplicationController
   def regenerate_api_key
     app.regenerate_api_key!
     redirect_to edit_app_path(app)
+  end
+
+  def search
+    respond_to do |format|
+      format.html { render :index }
+      format.js
+    end
   end
 
 protected
