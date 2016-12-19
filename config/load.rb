@@ -53,6 +53,8 @@ Errbit::Config = Configurator.run(
   smtp_address:              ['SMTP_SERVER'],
   smtp_port:                 ['SMTP_PORT'],
   smtp_authentication:       ['SMTP_AUTHENTICATION'],
+  smtp_enable_starttls_auto: ['SMTP_ENABLE_STARTTLS_AUTO'],
+  smtp_openssl_verify_mode:  ['SMTP_OPENSSL_VERIFY_MODE'],
   smtp_user_name:            %w(SMTP_USERNAME SENDGRID_USERNAME),
   smtp_password:             %w(SMTP_PASSWORD SENDGRID_PASSWORD),
   smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', lambda do |values|
