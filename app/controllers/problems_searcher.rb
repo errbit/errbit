@@ -25,6 +25,10 @@ module ProblemsSearcher
       Array(Problem.find(err_ids))
     end
 
+    expose(:selected_problems_ids) do
+      selected_problems.map(&:id).map(&:to_s)
+    end
+
     expose(:err_ids) do
       (params[:problems] || []).compact
     end

@@ -11,6 +11,10 @@ pt-BR:
       destroy:
         success: "'%{app_name}' foi destruído com sucesso."
 
+  n_errs:
+    one:   "%{count} erro"
+    other: "%{count} erros"
+    will_be_deleted: serà excluído(s)
   n_errs_have:
     one:   "%{count} erro foi"
     other: "%{count} erros foram"
