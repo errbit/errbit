@@ -1,4 +1,4 @@
-class CleanSeveralProblemsJob < ActiveJob::Base
+class DestroyProblemsByIdJob < ActiveJob::Base
   queue_as :default
 
   def perform(problem_ids)

@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-RSpec.describe CleanAllProblemsJob, type: :job do
+RSpec.describe DestroyProblemsByAppJob, type: :job do
   before do
     @app      = Fabricate(:app)
     @problem1 = Fabricate(:problem, app: @app)
@@ -9,7 +7,7 @@ RSpec.describe CleanAllProblemsJob, type: :job do
 
   it "destroys all problems" do
     expect do
-      CleanAllProblemsJob.perform_later(@app.id)
+      DestroyProblemsByAppJob.perform_later(@app.id)
     end.to change(Problem, :count).by(-2)
     expect(@app.problems.count).to eq 0
   end
@@ -20,7 +18,7 @@ RSpec.describe CleanAllProblemsJob, type: :job do
       Fabricate(:problem, app: app2)
     end
     expect do
-      CleanAllProblemsJob.perform_later(app2.id)
+      DestroyProblemsByAppJob.perform_later(app2.id)
     end.to change(Problem, :count).by(-500)
     expect(app2.problems.count).to eq 0
   end
@@ -28,7 +26,7 @@ RSpec.describe CleanAllProblemsJob, type: :job do
   it "should work with a fresh new application" do
     app2 = Fabricate(:app)
     expect do
-      CleanAllProblemsJob.perform_later(app2.id)
+      DestroyProblemsByAppJob.perform_later(app2.id)
     end.to change(Problem, :count).by(0)
     expect(app2.problems.count).to eq 0
   end
