@@ -3,10 +3,14 @@ describe NotificationServices::SlackService, type: 'model' do
   let(:service_url) do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
   end
+  let(:room_id) do
+    "#general"
+  end
 
   let(:service) do
     Fabricate :slack_notification_service, app:         notice.app,
-                                           service_url: service_url
+                                           service_url: service_url,
+                                           room_id: room_id
   end
 
   it "should have icon for slack" do
@@ -21,6 +25,7 @@ describe NotificationServices::SlackService, type: 'model' do
     payload = {
       username:    "Errbit",
       icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+      channel:     "#{room_id}",
       attachments: [
         {
           fallback:   service.message_for_slack(problem),
