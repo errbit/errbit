@@ -10,7 +10,10 @@ en:
         success: "Good news everyone! '%{app_name}' was successfully updated."
       destroy:
         success: "'%{app_name}' was successfully destroyed."
-
+  n_errs:
+    one:   "%{count} error"
+    other: "%{count} errors"
+    will_be_deleted: will be deleted
   n_errs_have:
     one:   "%{count} error has"
     other: "%{count} errors have"

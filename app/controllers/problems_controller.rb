@@ -114,14 +114,14 @@ class ProblemsController < ApplicationController
   end
 
   def destroy_several
-    nb_problem_destroy = ProblemDestroy.execute(selected_problems)
-    flash[:notice] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} #{I18n.t('n_errs_have.been_deleted')}."
+    DestroyProblemsByIdJob.perform_later(selected_problems_ids)
+    flash[:notice] = "#{I18n.t(:n_errs, count: selected_problems.size)} #{I18n.t('n_errs.will_be_deleted')}."
     redirect_to :back
   end
 
   def destroy_all
-    nb_problem_destroy = ProblemDestroy.execute(app.problems)
-    flash[:success] = "#{I18n.t(:n_errs_have, count: nb_problem_destroy)} #{I18n.t('n_errs_have.been_deleted')}."
+    DestroyProblemsByAppJob.perform_later(app.id)
+    flash[:success] = "#{I18n.t(:n_errs, count: app.problems.count)} #{I18n.t('n_errs.will_be_deleted')}."
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to app_path(app)

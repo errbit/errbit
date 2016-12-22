@@ -48,5 +48,7 @@ module Errbit
 
     # Configure Devise mailer to use our mailer layout.
     config.to_prepare { Devise::Mailer.layout 'mailer' }
+
+    config.active_job.queue_adapter = :sucker_punch
   end
 end

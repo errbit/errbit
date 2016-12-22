@@ -388,6 +388,8 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    sucker_punch (2.0.2)
+      concurrent-ruby (~> 1.0.0)
     term-ansicolor (1.3.2)
       tins (~> 1.0)
     therubyracer (0.12.2)
@@ -487,6 +489,7 @@ DEPENDENCIES
   rubocop
   rushover
   sass-rails
+  sucker_punch
   therubyracer
   timecop
   uglifier

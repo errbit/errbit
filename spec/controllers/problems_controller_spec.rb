@@ -434,7 +434,7 @@ describe ProblemsController, type: 'controller' do
 
       it "should display a message" do
         put :destroy_all, app_id: @app.id
-        expect(request.flash[:success]).to match(/been deleted/)
+        expect(request.flash[:success]).to match(/be deleted/)
       end
 
       it "should redirect back to the app page" do
