@@ -4,7 +4,6 @@ class AppsController < ApplicationController
   before_action :require_admin!, except: [:index, :show]
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
-  respond_to :html
 
   expose(:app_scope) { App }
 
@@ -12,7 +11,7 @@ class AppsController < ApplicationController
     app_scope.all.to_a.sort.map { |app| AppDecorator.new(app) }
   end
 
-  expose(:app, ancestor: :app_scope, attributes: :app_params)
+  expose(:app)
 
   expose(:app_decorate) do
     AppDecorator.new(app)
@@ -50,6 +49,7 @@ class AppsController < ApplicationController
 
   def create
     initialize_subclassed_notification_service
+
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
     else
@@ -60,6 +60,8 @@ class AppsController < ApplicationController
 
   def update
     initialize_subclassed_notification_service
+    app.update_attributes(app_params)
+
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
     else
@@ -89,7 +91,7 @@ class AppsController < ApplicationController
 protected
 
   def initialize_subclassed_notification_service
-    notification_type = params[:app].
+    notification_type = app_params.
       fetch(:notification_service_attributes, {}).
       fetch(:type, nil)
     return if notification_type.blank?
@@ -119,7 +121,12 @@ protected
     # Sanitize negative values, split on comma,
     # strip, parse as integer, remove all '0's.
     # If empty, set as default and show an error message.
-    email_at_notices = val.gsub(/-\d+/, "").split(",").map { |v| v.strip.to_i }.reject { |v| v == 0 }
+    email_at_notices = val
+      .gsub(/-\d+/, "")
+      .split(",")
+      .map { |v| v.strip.to_i }
+      .reject { |v| v == 0 }
+
     if email_at_notices.any?
       params[:app][:email_at_notices] = email_at_notices
     else

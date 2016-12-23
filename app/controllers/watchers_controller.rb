@@ -1,19 +1,16 @@
 class WatchersController < ApplicationController
-  respond_to :html
-
-  expose(:app) do
-    App.find(params[:app_id])
-  end
+  expose :app
+  expose :watchers, -> { app.watchers }
 
   def destroy
-    watcher = app.watchers.where(user_id: params[:id]).first
-    app.watchers.delete(watcher)
+    watcher = watchers.where(user_id: params[:id]).first
+    watchers.delete(watcher)
     flash[:success] = t('.success', app: app.name)
     redirect_to app_path(app)
   end
 
   def update
-    app.watchers.create(user_id: current_user.id)
+    watchers.create(user_id: current_user.id)
     flash[:success] = t('.success', app: app.name)
     redirect_to app_path(app)
   end
