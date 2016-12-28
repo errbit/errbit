@@ -173,6 +173,10 @@ class App
     @problem_count ||= problems.where(query).count
   end
 
+  def problems_notices(query = {})
+    @notices_count ||= problems.where(query).map(&:notices_count).sum
+  end
+
   # Compare by number of unresolved errs, then problem counts.
   def <=>(other)
     (other.unresolved_count <=> unresolved_count).nonzero? ||

@@ -21,7 +21,7 @@ class Api::V1::StatsController < ApplicationController
       id:                @app.id,
       last_error_time:   @last_error_time,
       unresolved_errors: @app.unresolved_count(query),
-      all_problems:      @app.problem_count(query)
+      all_problems:      @app.problems_notices(query)
     }
 
     respond_to do |format|
