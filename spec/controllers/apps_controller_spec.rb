@@ -1,5 +1,5 @@
 describe AppsController, type: 'controller' do
-  it_requires_authentication for: { search: :get }
+  it_requires_authentication
   it_requires_admin_privileges for: { new: :get, edit: :get, create: :post, update: :put, destroy: :delete }
 
   let(:admin) { Fabricate(:admin) }
@@ -364,7 +364,6 @@ describe AppsController, type: 'controller' do
 
     it "renders successfully" do
       get :search
-      puts response.code
       expect(response).to be_success
     end
 
