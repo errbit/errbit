@@ -108,7 +108,7 @@ Authentication
 --------------
 ### Configuring GitHub authentication:
 * Set GITHUB_AUTHENTICATION=true
-* Register your instance of Errbit at https://github.com/settings/applications
+* Register your instance of Errbit at https://github.com/settings/applications/new
 
 If you host Errbit at errbit.example.com, you would fill in:
 
