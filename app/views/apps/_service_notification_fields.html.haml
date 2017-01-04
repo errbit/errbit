@@ -16,6 +16,8 @@
         %div.notification_params{:class => (w.object.is_a?(notification_service) ? 'chosen ' : '') << notification_service.label}
           - notification_service::FIELDS.each do |field, field_info|
             = w.label field, field_info[:label] || field.to_s.titleize
+            - if field_info[:hint].present?
+              %em= field_info[:hint]
             - field_type = field == :password ? :password_field : :text_field
             - value = field == :notify_at_notices ? w.object.notify_at_notices.join(", ") : w.object.send(field)
             = w.send field_type, field, :placeholder => field_info[:placeholder], :value => value
