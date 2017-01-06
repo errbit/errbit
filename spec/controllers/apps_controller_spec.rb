@@ -354,4 +354,34 @@ describe AppsController, type: 'controller' do
       end
     end
   end
+
+  describe "GET /apps/search" do
+    before do
+      sign_in user
+      @app1 = Fabricate(:app, name: 'Foo')
+      @app2 = Fabricate(:app, name: 'Bar')
+    end
+
+    it "renders successfully" do
+      get :search
+      expect(response).to be_success
+    end
+
+    it "renders index template" do
+      get :search
+      expect(response).to render_template('apps/index')
+    end
+
+    it "searches problems for given string" do
+      get :search, search: "\"Foo\""
+      expect(controller.apps).to include(@app1)
+      expect(controller.apps).to_not include(@app2)
+    end
+
+    it "works when given string is empty" do
+      get :search, search: ""
+      expect(controller.apps).to include(@app1)
+      expect(controller.apps).to include(@app2)
+    end
+  end
 end

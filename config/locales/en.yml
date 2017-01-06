@@ -223,6 +223,8 @@ en:
       cancel: 'cancel'
       seriously: 'Seriously?'
       update: 'Update App'
+    search:
+      search_placeholder: 'Search for application'
   watchers:
     destroy:
       success: "You are no longer watching %{app}"

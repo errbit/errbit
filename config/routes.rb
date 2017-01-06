@@ -51,6 +51,9 @@ Rails.application.routes.draw do
     member do
       post :regenerate_api_key
     end
+    collection do
+      get :search
+    end
   end
 
   namespace :api do

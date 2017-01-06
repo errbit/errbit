@@ -235,4 +235,13 @@ describe App, type: 'model' do
       expect(app.notice_fingerprinter).to be_a(NoticeFingerprinter)
     end
   end
+
+  context "searching" do
+    it 'finds the correct record' do
+      found = Fabricate(:app, name: 'Foo')
+      not_found = Fabricate(:app, name: 'Brr')
+      expect(App.search("Foo").to_a).to include(found)
+      expect(App.search("Foo").to_a).to_not include(not_found)
+    end
+  end
 end
