@@ -37,6 +37,17 @@
       = f.text_field :email_at_notices, :value => app_decorate.email_at_notices
       .field-helpertext times an error occurs (comma separated).
 
+%fieldset
+  %legend= t('notice_fingerprinter.title')
+  %p= t('notice_fingerprinter.text')
+  .checkbox
+    = check_box 'other', 'use_site_fingerprinter', {:checked => app_decorate.use_site_fingerprinter}, SiteConfig::CONFIG_SOURCE_SITE, SiteConfig::CONFIG_SOURCE_APP
+    = f.label :use_site_fingerprinter, t('.use_site_fingerprinter')
+
+    %div.custom_notice_fingerprinter{:style => app_decorate.custom_notice_fingerprinter_style}
+      = render 'shared/notice_fingerprinter', :f => f
+
+
 %div.checkbox
   = f.check_box :notify_all_users
   = f.label :notify_all_users, t('.notify_all_users')

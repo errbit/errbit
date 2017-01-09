@@ -27,6 +27,11 @@ describe AppsController, type: 'controller' do
     Fabricate(:problem, app: app)
   end
   let(:problem_resolved) { Fabricate(:problem_resolved, app: app) }
+  let(:notice_fingerprinter) do
+    nf = SiteConfig.document.notice_fingerprinter
+    nf.backtrace_lines = 10
+    nf
+  end
 
   describe "GET /apps" do
     context 'when logged in as an admin' do
@@ -296,6 +301,44 @@ describe AppsController, type: 'controller' do
           it "should not create issue tracker" do
             expect(@app.issue_tracker_configured?).to eq false
           end
+        end
+      end
+
+      context "selecting 'use site fingerprinter'" do
+        before(:each) do
+          SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
+          put :update, id: @app.id, \
+              app: {
+                notice_fingerprinter: {backtrace_lines: 42}},
+              other: { use_site_fingerprinter: 'site'}
+          @app.reload
+        end
+
+        it "should copy site fingerprinter into app fingerprinter" do
+          expect(
+            @app.notice_fingerprinter.attributes.except('_id', 'source') ==
+              SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source')
+          ).to eq true
+          expect(@app.notice_fingerprinter.backtrace_lines).to be 10
+        end
+      end
+
+      context "not selecting 'use site fingerprinter'" do
+        before(:each) do
+          SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
+          put :update, id: @app.id, \
+              app: {
+              notice_fingerprinter: {backtrace_lines: 42}},
+              other: { use_site_fingerprinter: 'app'}
+          @app.reload
+        end
+
+        it "shouldn't copy site fingerprinter into app fingerprinter" do
+          expect(
+            @app.notice_fingerprinter.attributes.except('_id', 'source') ==
+              SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source')
+          ).to eq false
+          expect(@app.notice_fingerprinter.backtrace_lines).to be 42
         end
       end
     end

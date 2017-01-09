@@ -234,8 +234,6 @@ en:
     index:
       title: Config
       cancel: cancel
-      notice_fingerprinter: Notice Fingerprinter
-      notice_fingerprinter_text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
       error_class: Error Class
       message: Error Message
       backtrace_lines: Number of backtrace lines (-1 for unlimited)
@@ -257,6 +255,9 @@ en:
       app_version: App Version
       framework: Framework
       relative_directory: Rel. Directory
+  notice_fingerprinter:
+    title: Notice Fingerprinter
+    text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
   paginator:
     viewing_occurrence: viewing occurrence
     of: of

@@ -6,32 +6,9 @@
   = errors_for @config
 
   %fieldset
-    %legend= t('.notice_fingerprinter')
-    %p= t('.notice_fingerprinter_text')
+    %legend= t('notice_fingerprinter.title')
+    %p= t('notice_fingerprinter.text')
 
-    = f.fields_for :notice_fingerprinter do |g|
-      .checkbox
-        = g.check_box :error_class
-        = g.label :error_class, t('.error_class')
-
-      .checkbox
-        = g.check_box :message
-        = g.label :message, t('.message')
-
-      %div
-        = g.label :backtrace_lines, t('.backtrace_lines')
-        = g.text_field :backtrace_lines
-
-      .checkbox
-        = g.check_box :component
-        = g.label :component, t('.component')
-
-      .checkbox
-        = g.check_box :action
-        = g.label :action, t('.action')
-
-      .checkbox
-        = g.check_box :environment_name
-        = g.label :environment_name, t('.environment_name')
+    = render 'shared/notice_fingerprinter', :f => f
 
   %div.buttons= f.submit t('.update_config')
