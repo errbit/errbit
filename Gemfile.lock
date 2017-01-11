@@ -22,13 +22,18 @@ GEM
       sass (~> 3.4)
     jekyll-watch (1.4.0)
       listen (~> 3.0, < 3.1)
-    kramdown (1.11.1)
+    kramdown (1.13.1)
     liquid (3.0.6)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     mercenary (0.3.6)
     method_source (0.8.2)
+    mini_portile2 (2.1.0)
+    nokogiri (1.7.0)
+      mini_portile2 (~> 2.1.0)
+    nokogumbo (1.4.10)
+      nokogiri
     oga (2.2)
       ast
       ruby-ll (~> 2.1)
@@ -59,9 +64,10 @@ PLATFORMS
 DEPENDENCIES
   jekyll (= 3.2.0.pre.beta1)
   kramdown
+  nokogumbo
   oga
   pry-byebug
   rugged
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

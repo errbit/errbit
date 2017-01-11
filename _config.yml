@@ -8,7 +8,9 @@ exclude:
   - CNAME
   - lib
 kramdown:
-  input: GFM
+  input: DocParser
+  gfm_quirks: paragraph_end
+  parse_block_html: true
 defaults:
   -
     values:

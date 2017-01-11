@@ -13,4 +13,11 @@ module Kramdown
       alias_method :add_link, :add_link_with_rel_parse
     end
   end
+
+  class Element
+    # CATEGORY[:dd] = :span
+    # CATEGORY[:dt] = :span
+    # CATEGORY[:li] = :span
+    # CATEGORY[:ul] = :span
+  end
 end
