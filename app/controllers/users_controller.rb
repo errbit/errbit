@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
-  respond_to :html
-
   before_action :require_admin!, except: [:edit, :update]
   before_action :require_user_edit_priviledges, only: [:edit, :update]
 
-  expose(:user, attributes: :user_params)
+  expose(:user)
   expose(:users) do
     User.order_by(name: :asc).page(params[:page]).per(current_user.per_page)
   end

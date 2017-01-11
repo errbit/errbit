@@ -1,6 +1,3 @@
-# Include to do a Search
-# TODO: Need to be in a Dedicated Object ProblemsSearch with params like input
-#
 module ProblemsSearcher
   extend ActiveSupport::Concern
 
