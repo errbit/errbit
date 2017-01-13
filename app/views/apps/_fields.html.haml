@@ -28,7 +28,7 @@
   = f.text_field :current_app_version, :placeholder => t('.latest_app_version_placeholder')
 %fieldset
   %legend= t('.notifications')
-  %div.checkbox
+  .checkbox
     = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
     = f.label :notify_on_errs, t('.notify_on_errors')
   - if Errbit::Config.per_app_email_at_notices
@@ -41,7 +41,7 @@
   %legend= t('notice_fingerprinter.title')
   %p= t('notice_fingerprinter.text')
   .checkbox
-    = check_box 'other', 'use_site_fingerprinter', {:checked => app_decorate.use_site_fingerprinter}, SiteConfig::CONFIG_SOURCE_SITE, SiteConfig::CONFIG_SOURCE_APP
+    = f.check_box :use_site_fingerprinter, 'data-hide-when-checked' => '.custom_notice_fingerprinter'
     = f.label :use_site_fingerprinter, t('.use_site_fingerprinter')
 
     %div.custom_notice_fingerprinter{:style => app_decorate.custom_notice_fingerprinter_style}

@@ -166,14 +166,10 @@ protected
   end
 
   def process_fingerprinter_choice
-    if params['other'] && params['other']['use_site_fingerprinter']
-      fingerprinter = params['other']['use_site_fingerprinter']
-      if fingerprinter == SiteConfig::CONFIG_SOURCE_SITE
-        app.write_attributes(
-            notice_fingerprinter: SiteConfig.document.notice_fingerprinter_attributes)
-      else
-        app.notice_fingerprinter.source = SiteConfig::CONFIG_SOURCE_APP
-      end
+    if params[:app].delete(:use_site_fingerprinter) == '0'
+      params[:app][:notice_fingerprinter_attributes][:source] = SiteConfig::CONFIG_SOURCE_APP
+    else
+      params[:app][:notice_fingerprinter_attributes] = SiteConfig.document.notice_fingerprinter_attributes
     end
   end
 

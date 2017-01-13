@@ -310,37 +310,34 @@ describe AppsController, type: 'controller' do
       context "selecting 'use site fingerprinter'" do
         before(:each) do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-          put :update, id: @app.id, \
-              app: {
-                notice_fingerprinter: {backtrace_lines: 42}},
-              other: { use_site_fingerprinter: 'site'}
+          put :update, id: @app.id, app: {
+            notice_fingerprinter_attributes: { backtrace_lines: 42 },
+            use_site_fingerprinter: '1'
+          }
           @app.reload
         end
 
         it "should copy site fingerprinter into app fingerprinter" do
-          expect(
-            @app.notice_fingerprinter.attributes.except('_id', 'source') ==
-              SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source')
-          ).to eq true
-          expect(@app.notice_fingerprinter.backtrace_lines).to be 10
+          fingerprinter_attrs = @app.notice_fingerprinter.attributes.except('_id', 'source').to_h
+          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source').to_h
+          expect(fingerprinter_attrs).to eq(expected_attrs)
         end
       end
 
       context "not selecting 'use site fingerprinter'" do
         before(:each) do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-          put :update, id: @app.id, \
-              app: {
-              notice_fingerprinter: {backtrace_lines: 42}},
-              other: { use_site_fingerprinter: 'app'}
+          put :update, id: @app.id, app: {
+            notice_fingerprinter_attributes: { backtrace_lines: 42 },
+            use_site_fingerprinter: '0'
+          }
           @app.reload
         end
 
         it "shouldn't copy site fingerprinter into app fingerprinter" do
-          expect(
-            @app.notice_fingerprinter.attributes.except('_id', 'source') ==
-              SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source')
-          ).to eq false
+          fingerprinter_attrs = @app.notice_fingerprinter.attributes.except('_id', 'source').to_h
+          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source').to_h
+          expect(fingerprinter_attrs).to_not eq(expected_attrs)
           expect(@app.notice_fingerprinter.backtrace_lines).to be 42
         end
       end

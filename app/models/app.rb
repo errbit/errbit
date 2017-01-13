@@ -193,6 +193,10 @@ class App
     update_attribute(:api_key, SecureRandom.hex)
   end
 
+  def use_site_fingerprinter
+    notice_fingerprinter.source == 'site'
+  end
+
 protected
 
   def store_cached_attributes_on_problems
