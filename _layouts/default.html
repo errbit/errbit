@@ -1,53 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-    .hg,
-    .hg-body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hg-nav {
-      order: -1;
-    }
-
-    @media (min-width: 768px) {
-      .hg-body {
-        flex-direction: row;
-        flex: 1;
-      }
-      .hg-content {
-        flex: 1;
-      }
-      .hg-nav {
-        /* 12em is the width of the columns */
-        flex: 0 0 12em;
-      }
-    }
-
-    body {
-      font-family: sans;
-    }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Errbit</title>
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
-  <body class="hg">
-    <header></header>
-    <div class="hg-body">
-      <main class="hg-content">{{ content }}</main>
-      <nav class="hg-nav">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li><a href="/docs/master">Docs</a>
-            <ol>
-              {% for version in site.docs.versions %}
-                <li><a href="/docs/{{ version }}">{{ version }}</a></li>
-              {% endfor %}
-            </ol>
-          </li>
-        </ol>
-      </nav>
+  <body class="wide">
+    {% include header.html %}
+    <div class="body">
+      <div class="container">
+        <div id="pinned" class="nav">
+          {% include nav.html %}
+        </div>
+        <div class="content">
+          {{ content }}
+        </div>
+      </div>
     </div>
-    <footer></footer>
+    {% include footer.html %}
+    <script src="{{ "/js/vendor/jquery-2.2.3.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/vendor/sticky-kit.min.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript">
+      $(function() {
+        console.log("jQuery is ready!");
+        // jQuery add class
+        $("body").addClass("hero");
+        // Sticky-Kit
+        $("#pinned").stick_in_parent();
+      });
+    </script>
   </body>
 </html>

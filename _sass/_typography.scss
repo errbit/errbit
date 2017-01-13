@@ -1,0 +1,179 @@
+// Default
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text;
+  background-color: #fff;
+}
+
+a {
+  color: #5f50c7;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity .15s ease-in;
+}
+
+a:active, a:hover {
+  outline-width: 0;
+}
+
+a:hover {
+  opacity: .5;
+  transition: opacity .15s ease-in;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+  color: $heading;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+ul, ol, dl, table, pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+ul, ol {
+  padding-left: 2em;
+}
+
+code, tt {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+code, tt {
+  padding: 0;
+  padding-top: .2em;
+  padding-bottom: .2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,.04);
+  border-radius: 3px;
+  &:before, &:after {
+    letter-spacing: -.2em;
+    content: "\00a0";
+  }
+}
+
+pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+  &:before, &:after {
+    display: none;
+  }
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  td, th {
+    padding: 0;
+  }
+}
+
+// Wide
+
+.wide {
+  font-family: 'Open Sans', sans-serif;
+}
+
+// Body
+
+.body {
+  p, blockquote, ul, ol, dl, table, pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+}
+
+.body {
+  .highlight {
+    max-width: 560px;
+    padding: 16px;
+    margin-bottom: 16px;
+    overflow: auto;
+    overflow-x: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    word-break: normal;
+    background-color: lighten($heading, 75);
+    border-left: 4px solid #7371b7;
+    border-radius: 2px;
+  }
+}
+
+.body {
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    thead {
+      display: table-header-group;
+      vertical-align: middle;
+      border-color: inherit;
+    }
+  }
+  table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+  }
+  table th,
+  table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+  }
+  table th {
+    font-weight: bold;
+  }
+}
