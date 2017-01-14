@@ -1,6 +1,9 @@
 FROM ruby:2.3.3-alpine
 MAINTAINER David Papp <david@ghostmonitor.com>
 
+RUN addgroup -S errbit \
+  && adduser -S -D -s /bin/false -G errbit -g errbit errbit
+
 WORKDIR /app
 
 RUN gem update --system && gem install bundler && apk add --update --no-cache build-base less libxml2-dev libxslt-dev nodejs tzdata
@@ -14,5 +17,7 @@ RUN bundle config build.nokogiri --use-system-libraries && \
 
 COPY . /app
 RUN RAILS_ENV=production bundle exec rake assets:precompile
+
+USER errbit
 
 CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
