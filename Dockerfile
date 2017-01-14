@@ -18,6 +18,7 @@ WORKDIR /app
 RUN gem update --system \
   && gem install bundler \
   && apk add --no-cache \
+    curl \
     less \
     libxml2-dev \
     libxslt-dev \
@@ -42,5 +43,7 @@ RUN chown -R errbit:errbit /app
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 USER errbit
+
+HEALTHCHECK CMD curl --fail http://localhost:$PORT/users/sign_in || exit 1
 
 CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
