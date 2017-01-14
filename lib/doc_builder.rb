@@ -3,6 +3,8 @@ require 'rugged'
 require 'fileutils'
 require 'oga'
 
+# Walk the github refs looking for all release tags and gathering up all the
+# files from the docs/ folder for each release (plus master).
 class DocBuilder
   attr_reader :versions
 
@@ -58,17 +60,36 @@ class DocBuilder
     content = @repo.lookup(entry[:oid]).text
 
     # stuff the front of the md files with front-matter
-    content = "---\n---\n" << content if entry_path =~ /\.md$/
+    if entry_path =~ /.md$/
+      content = "---\n---\n" << content
+      rewrite_image_hrefs(content)
+      remove_target_attributes(content)
+    end
+
     write_file_if_changed(entry_path, content)
   end
 
+  # use local path to images rather than routing them through github sites
+  def rewrite_image_hrefs(content)
+    content.gsub!(%r(https?://errbit.github.com/errbit([^"]+))) do
+      $1
+    end
+  end
+
+  # get rid of any annoying target=_blank links
+  def remove_target_attributes(content)
+    content.gsub!(%r(target="_blank"), '')
+  end
+
+  # only write the file if necessary
   def write_file_if_changed(path, content)
-    if !File.exist?(path) || File.read(path) != content
+    unless File.exist?(path) && File.read(path) == content
       puts "Writing #{path}"
       File.write(path, content)
     end
   end
 
+  # delete whatever files we don't need
   def delete_entries(entries)
     entries.each do |path|
       puts "Deleting #{path}"
@@ -76,6 +97,7 @@ class DocBuilder
     end
   end
 
+  # master first, then descending numerically (by semver semantics)
   def sort_versions
     @versions.sort! do |a,b|
       if a == 'master'
