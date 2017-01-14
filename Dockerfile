@@ -10,6 +10,9 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
   && bundle config --global clean true \
   && bundle config --global disable_shared_gems false
 
+RUN mkdir -p /app \
+  && chown -R errbit:errbit /app \
+  && chmod 700 /app/
 WORKDIR /app
 
 RUN gem update --system && gem install bundler && apk add --update --no-cache build-base less libxml2-dev libxslt-dev nodejs tzdata
