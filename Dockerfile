@@ -4,6 +4,12 @@ MAINTAINER David Papp <david@ghostmonitor.com>
 RUN addgroup -S errbit \
   && adduser -S -D -s /bin/false -G errbit -g errbit errbit
 
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN echo "gem: --no-document" >> /etc/gemrc \
+  && bundle config --global frozen 1 \
+  && bundle config --global clean true \
+  && bundle config --global disable_shared_gems false
+
 WORKDIR /app
 
 RUN gem update --system && gem install bundler && apk add --update --no-cache build-base less libxml2-dev libxslt-dev nodejs tzdata
