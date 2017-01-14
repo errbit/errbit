@@ -30,7 +30,6 @@ COPY ["Gemfile", "Gemfile.lock", "/app/"]
 
 RUN apk add --no-cache --virtual build-dependencies \
       build-base \
-  && bundle config build.nokogiri --use-system-libraries \
   && bundle install \
       -j "$(getconf _NPROCESSORS_ONLN)" \
       --retry 5 \
