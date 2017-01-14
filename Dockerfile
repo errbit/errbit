@@ -15,11 +15,19 @@ RUN mkdir -p /app \
   && chmod 700 /app/
 WORKDIR /app
 
-RUN gem update --system && gem install bundler && apk add --update --no-cache build-base less libxml2-dev libxslt-dev nodejs tzdata
+RUN gem update --system \
+  && gem install bundler \
+  && apk add --no-cache \
+    build-base \
+    less \
+    libxml2-dev \
+    libxslt-dev \
+    nodejs \
+    tzdata
 
 EXPOSE 8080
 
-COPY Gemfile Gemfile.lock /app/
+COPY ["Gemfile", "Gemfile.lock", "/app/"]
 
 RUN bundle config build.nokogiri --use-system-libraries && \
     bundle install --jobs 8 --retry 5 --without test development no_docker
