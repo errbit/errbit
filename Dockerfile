@@ -18,7 +18,6 @@ WORKDIR /app
 RUN gem update --system \
   && gem install bundler \
   && apk add --no-cache \
-    build-base \
     less \
     libxml2-dev \
     libxslt-dev \
@@ -29,8 +28,14 @@ EXPOSE 8080
 
 COPY ["Gemfile", "Gemfile.lock", "/app/"]
 
-RUN bundle config build.nokogiri --use-system-libraries && \
-    bundle install --jobs 8 --retry 5 --without test development no_docker
+RUN apk add --no-cache --virtual build-dependencies \
+      build-base \
+  && bundle config build.nokogiri --use-system-libraries \
+  && bundle install \
+      -j "$(getconf _NPROCESSORS_ONLN)" \
+      --retry 5 \
+      --without test development no_docker \
+  && apk del build-dependencies
 
 COPY . /app
 RUN RAILS_ENV=production bundle exec rake assets:precompile
