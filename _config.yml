@@ -15,3 +15,11 @@ defaults:
   -
     values:
       layout: "default"
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - s3_website.yml
+  - tmp
+  - lib
+  - bin
