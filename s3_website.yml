@@ -1,6 +1,9 @@
 s3_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
 s3_secret: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
 s3_bucket: errbit.com
+cloudfront_distribution_id: <%= ENV['AWS_CLOUDFRONT_DISTRIBUTION_ID'] %>
+cloudfront_distribution_config:
+  http_version: http2
 gzip:
   - .html
   - .css
