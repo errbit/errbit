@@ -13,9 +13,9 @@
   - if current_user.admin?
     = link_to t('.edit'), edit_app_path(app), :class => 'button'
   - if all_errs
-    = link_to t('.unresolved_errs'), app_path(app), :class => 'button'
+    = link_to t('.unresolved_errs'), app_path(app, sort: params_sort, order: params_order), :class => 'button'
   - else
-    = link_to t('.all_errs'), app_path(app, :all_errs => true), :class => 'button'
+    = link_to t('.all_errs'), app_path(app, all_errs: true, sort: params_sort, order: params_order), :class => 'button'
 
   - if app.watched_by?(current_user)
     = link_to t('.unwatch'), app_watcher_path(app_id: app, id: current_user.id), method: :delete, class: 'button'

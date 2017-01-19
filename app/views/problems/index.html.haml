@@ -4,9 +4,9 @@
 
 - content_for :action_bar do
   - if all_errs
-    = link_to t('.hide_resolved'), problems_path, :class => 'button'
+    = link_to t('.hide_resolved'), problems_path(sort: params_sort, order: params_order), :class => 'button'
   - else
-    = link_to t('.show_resolved'), problems_path(:all_errs => true), :class => 'button'
+    = link_to t('.show_resolved'), problems_path(all_errs: true, sort: params_sort, order: params_order), :class => 'button'
 
 %section
   = render 'problems/search', :all_errs => all_errs, :app_id => nil
