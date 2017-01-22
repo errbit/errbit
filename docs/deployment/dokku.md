@@ -10,6 +10,8 @@ dokku apps:create errbit
 dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
 dokku mongo:create errbit errbit
 dokku mongo:link errbit errbit
+# Override the automatic Dockerfile deployment detection
+dokku config:set errbit BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-ruby.git
 dokku config:set errbit HEROKU=1
 dokku config:set errbit GEMFILE_RUBY_VERSION=2.3.3
 dokku config:set errbit SECRET_KEY_BASE="$(bundle exec rake secret)"
