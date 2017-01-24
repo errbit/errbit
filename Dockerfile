@@ -39,9 +39,9 @@ RUN apk add --no-cache --virtual build-dependencies \
   && apk del build-dependencies
 
 COPY . /app
-RUN chown -R errbit:errbit /app
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN chown -R errbit:errbit /app
 
 USER errbit
 
