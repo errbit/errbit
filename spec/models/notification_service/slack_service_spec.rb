@@ -1,13 +1,15 @@
 describe NotificationServices::SlackService, type: 'model' do
   let(:notice) { Fabricate :notice }
   let(:problem) { notice.problem }
+  let(:production_only) { false }
   let(:service_url) do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
   end
   let(:service) do
-    Fabricate :slack_notification_service, app:         notice.app,
-                                           service_url: service_url,
-                                           room_id:     room_id
+    Fabricate :slack_notification_service, app:             notice.app,
+                                           service_url:     service_url,
+                                           room_id:         room_id,
+                                           production_only: production_only
   end
   let(:room_id) do
     "#general"
@@ -106,6 +108,17 @@ describe NotificationServices::SlackService, type: 'model' do
       expect(HTTParty).to receive(:post).
         with(service.service_url, body: payload, headers: { "Content-Type" => "application/json" }).
         and_return(true)
+
+      service.create_notification(problem)
+    end
+  end
+
+  context 'with only_production' do
+    let(:production_only) { true }
+    let(:notice) { Fabricate :notice, server_environment: { 'environment-name' => 'development' } }
+
+    it "should ignore a notification to Slack" do
+      expect(HTTParty).to_not receive(:post)
 
       service.create_notification(problem)
     end

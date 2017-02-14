@@ -10,6 +10,10 @@ class NotificationServices::SlackService < NotificationService
       placeholder: '#general',
       label:       'Notification channel',
       hint:        'If empty Errbit will use the default channel for the webook'
+    }],
+    [:production_only, {
+      label: 'Production environment notifications only',
+      type:  :check_box
     }]
   ]
 
@@ -69,6 +73,8 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def create_notification(problem)
+    return if production_only && problem.environment != 'production'
+
     HTTParty.post(
       service_url,
       body:    post_payload(problem),
