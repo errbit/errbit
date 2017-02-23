@@ -13,6 +13,8 @@ class NotificationService
   field :api_token, type: String
   field :subdomain, type: String
   field :sender_name, type: String
+  field :bot_token, type: String
+  field :chat_ids_raw, type: String
   field :notify_at_notices, type: Array, default: Errbit::Config.notify_at_notices
   embedded_in :app, inverse_of: :notification_service
 

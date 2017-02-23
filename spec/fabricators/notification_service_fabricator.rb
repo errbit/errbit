@@ -21,6 +21,11 @@ Fabricator :hipchat_notification_service, from: :notification_service, class_nam
   service { 'v2' }
 end
 
+Fabricator :telegram_notification_service, from: :notification_service, class_name: "NotificationServices::TelegramService" do
+  bot_token { sequence :word }
+  chat_ids_raw { "#{sequence :chat_ids_raw}" }
+end
+
 %w(campfire flowdock hoiio hubot pushover webhook).each do |t|
   Fabricator "#{t}_notification_service".to_sym, from: :notification_service, class_name: "NotificationServices::#{t.camelcase}Service"
 end
