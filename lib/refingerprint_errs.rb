@@ -7,6 +7,7 @@ class RefingerprintErrs
   end
 
   def analyze
+    start = Time.now
     errs = Err.count
     errs_with_no_notices = []
     errs_with_mismatched_notices = []
@@ -27,12 +28,14 @@ class RefingerprintErrs
     err_collisions_before = errs - map.keys.uniq.count
     err_collisions_after = errs - map.values.uniq.count
 
+    elapsed = "#{(Time.now - start).to_i}s"
     puts "\n" * 4
-    puts "Errs\e[90m......................................\e[34;1m#{errs.to_s.rjust(5)}\e[0m"
-    puts "Errs with no notices\e[90m......................\e[34m#{errs_with_no_notices.count.to_s.rjust(5)}\e[0m"
-    puts "Errs with mismatched notices\e[90m..............\e[34m#{errs_with_mismatched_notices.count.to_s.rjust(5)}\e[0m"
-    puts "Errs with the same fingerprint (before)\e[90m...\e[34m#{err_collisions_before.to_s.rjust(5)}\e[0m"
-    puts "Errs with the same fingerprint (after)\e[90m....\e[34m#{err_collisions_after.to_s.rjust(5)}\e[0m"
+    puts "Elapsed\e[90m................................#{"." * (8 - elapsed.length)}\e[34;1m#{elapsed}\e[0m"
+    puts "Errs\e[90m...................................#{"." * (8 - errs.to_s.length)}\e[34;1m#{errs}\e[0m"
+    puts "Errs with no notices\e[90m...................#{"." * (8 - errs_with_no_notices.count.to_s.length)}\e[34m#{errs_with_no_notices.count}\e[0m"
+    puts "Errs with mismatched notices\e[90m...........#{"." * (8 - errs_with_mismatched_notices.count.to_s.length)}\e[34m#{errs_with_mismatched_notices.count}\e[0m"
+    puts "Errs with the same fingerprint (before)\e[90m#{"." * (8 - err_collisions_before.to_s.length)}\e[34m#{err_collisions_before}\e[0m"
+    puts "Errs with the same fingerprint (after)\e[90m.#{"." * (8 - err_collisions_after.to_s.length)}\e[34m#{err_collisions_after}\e[0m"
   end
 
   def execute
