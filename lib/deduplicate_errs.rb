@@ -4,18 +4,17 @@ class DeduplicateErrs
     delegate :execute, to: "self.new"
   end
 
-  def execute(errs=Err.all)
+  def execute(errs=Err.all, options={})
     Err.transaction do
       dedup_errs!(errs)
       destroy_errs_with_no_notices!
       destroy_problems_with_no_errs!
+      raise ActiveRecord::Rollback if options.fetch(:dry_run, false)
     end
   end
 
   def dedup_errs!(errs)
-    query = errs.select("errs.id, errs.fingerprint").to_sql
-
-    errs_by_fingerprint =  Err.connection.select_rows(query) \
+    errs_by_fingerprint =  errs.pluck(:id, :fingerprint)
       .each_with_object({}) { |(id, fingerprint), map| (map[fingerprint] ||= []).push(id.to_i) }
       .select { |fingerprint, err_ids| err_ids.length > 1 }
 
