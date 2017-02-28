@@ -170,7 +170,7 @@ GEM
     kgio (2.10.0)
     launchy (2.3.0)
       addressable (~> 2.3)
-    libv8 (3.16.14.13)
+    libv8 (3.16.14.17)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
       activesupport (>= 3.0.0)
