@@ -121,6 +121,14 @@ describe Fingerprint do
         should eq "PG::UndefinedColumn: ERROR:  column phone_numbers.sequence does not exist"
       end
     end
+
+    context "given an Excon error message" do
+      let(:message) { "Excon::Errors::InternalServerError: Expected(200) <=> Actual(500 InternalServerError)\n excon.error.response\n:body          => \"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>InternalError</Code><Message>We encountered an internal error. Please try again.</Message><RequestId>5F4CA759863D00A7</RequestId><HostId>V7FxQ/B4rzjo3Ela27OUP3+ThRpMuxZJ397NCv/G7C7eirAMaadhdLdDsdXgd/qTSPUWFP7ZQok=</HostId></Error>\"" }
+
+      it "takes only the first line" do
+        should eq "Excon::Errors::InternalServerError: Expected(200) <=> Actual(500 InternalServerError)"
+      end
+    end
   end
 
 

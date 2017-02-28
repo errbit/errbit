@@ -42,6 +42,7 @@ class Fingerprint
       .gsub(/\b0x[0-9a-f]+\b/, '0x__')
       .gsub(/\b[0-9]+(?:\.[0-9]+)? (seconds)/, '__ \1')
       .gsub(/(PG::[^\n]+ERROR:[^\n]*).*$/m, '\1')
+      .gsub(/^(Excon::[^\n]+).*$/m, '\1')
   end
 
 end
