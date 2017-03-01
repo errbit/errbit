@@ -60,5 +60,14 @@ describe NoticeFingerprinter, type: 'model' do
         expect(f1).to_not eq(f2)
       end
     end
+
+    context "two notices with no backtrace" do
+      it "has the same fingerprint" do
+        f1 = fingerprinter.generate('123', notice, nil)
+        f2 = fingerprinter.generate('123', notice, nil)
+
+        expect(f1).to eq(f2)
+      end
+    end
   end
 end
