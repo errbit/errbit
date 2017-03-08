@@ -56,6 +56,7 @@ class ErrorReport
     notice.save!
 
     cache_attributes_on_problem
+    puts "***************************** generate_notice! xlu"
     email_notification
     services_notification
     @notice
@@ -83,7 +84,10 @@ class ErrorReport
   # Send email notification if needed
   def email_notification
     return false unless app.emailable?
-    return false unless app.email_at_notices.include?(@problem.notices_count)
+    if app.email_at_notices != [0]
+      return false unless app.email_at_notices.include?(@problem.notices_count)
+    end
+
     Mailer.err_notification(self).deliver_now
   rescue => e
     HoptoadNotifier.notify(e)
