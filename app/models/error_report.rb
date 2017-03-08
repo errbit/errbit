@@ -56,7 +56,6 @@ class ErrorReport
     notice.save!
 
     cache_attributes_on_problem
-    puts "***************************** generate_notice! xlu"
     email_notification
     services_notification
     @notice
