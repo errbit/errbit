@@ -30,6 +30,8 @@ gem 'useragent'
 # It's for internal use only, and we monkeypatch certain methods
 gem 'hoptoad_notifier', "~> 2.4"
 
+gem 'errbit_redmine_plugin'
+
 # Notification services
 # ---------------------------------------
 gem 'campy'
