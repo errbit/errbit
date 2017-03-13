@@ -134,6 +134,7 @@ GEM
     fabrication (2.13.2)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.8)
     ffi (1.9.8-java)
     flowdock (0.6.0)
       httparty (~> 0.7)
@@ -499,5 +500,8 @@ DEPENDENCIES
   xmpp4r
   yajl-ruby
 
+RUBY VERSION
+   ruby 2.3.3p222
+
 BUNDLED WITH
-   1.14.5
+   1.14.6
