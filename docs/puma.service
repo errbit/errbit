@@ -1,0 +1,31 @@
+# based on https://github.com/puma/puma/blob/master/docs/systemd.md
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+
+# Uncomment for socket activation (see below)
+# Requires=puma.socket
+
+[Service]
+# Foreground process (do not use --daemon in ExecStart or config.rb)
+Type=simple
+
+# Preferably configure a non-privileged user
+User=ubuntu
+
+# Specify the path to your puma application root
+WorkingDirectory=/home/ubuntu/errbit
+
+# Helpful for debugging socket activation, etc.
+# Environment=PUMA_DEBUG=1
+
+# The command to start Puma
+ExecStart=/home/ubuntu/.rbenv/shims/puma -C /home/ubuntu/errbit/config/puma.default.rb config.ru PORT=8080
+
+# The command to stop Puma
+ExecStop=/home/ubuntu/.rbenv/shims/pumactl -S /home/ubuntu/errbit/tmp/pids/puma.pid stop
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
