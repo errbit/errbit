@@ -150,7 +150,7 @@ en:
     new:
       title: New User
       cancel: cancel
-      add_user: Adicionar usuário
+      add_user: Add User
     show:
       name: Name
       email: Email
