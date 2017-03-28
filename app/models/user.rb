@@ -11,7 +11,7 @@ class User
   field :google_uid
   field :name
   field :admin, type: Boolean, default: false
-  field :per_page, type: Fixnum, default: PER_PAGE
+  field :per_page, type: Integer, default: PER_PAGE
   field :time_zone, default: "UTC"
 
   ## Devise field
