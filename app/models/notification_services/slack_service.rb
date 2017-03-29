@@ -41,6 +41,7 @@ class NotificationServices::SlackService < NotificationService
           title_link: problem.url,
           text:       problem.where,
           color:      "#D00000",
+          mrkdwn_in:  ["fields"],
           fields:     [
             {
               title: "Application",
@@ -61,6 +62,11 @@ class NotificationServices::SlackService < NotificationService
               title: "First Noticed",
               value: problem.first_notice_at.try(:to_s, :db),
               short: true
+            },
+            {
+              title: "Backtrace",
+              value: backtrace_lines(problem),
+              short:false
             }
           ]
         }
@@ -81,4 +87,22 @@ class NotificationServices::SlackService < NotificationService
   def configured?
     service_url.present?
   end
+
+  private
+
+    def backtrace_line(line)
+      path = line.decorated_path.gsub(%r{</?strong>}, '')
+      "#{path}#{line.number} → #{line.method}\n"
+    end
+
+    def backtrace_lines(problem)
+      notice = NoticeDecorator.new problem.notices.last
+      return unless notice
+      backtrace = notice.backtrace
+      return unless backtrace
+
+      output = ''
+      backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
+      "```#{output}```"
+    end
 end

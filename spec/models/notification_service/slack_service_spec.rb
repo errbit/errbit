@@ -12,6 +12,15 @@ describe NotificationServices::SlackService, type: 'model' do
   let(:room_id) do
     "#general"
   end
+  let(:backtrace_lines) do
+    backtrace = BacktraceDecorator.new problem.notices.last.backtrace
+    backtrace_lines = ''
+    backtrace.lines[0..4].each do |line|
+      path = line.decorated_path.gsub(%r{</?strong>}, '')
+      backtrace_lines << "#{path}#{line.number} → #{line.method}\n"
+    end
+    "```#{backtrace_lines}```"
+  end
 
   # faraday stubbing
   let(:payload_hash) do
@@ -26,6 +35,7 @@ describe NotificationServices::SlackService, type: 'model' do
           title_link: problem.url,
           text:       problem.where,
           color:      "#D00000",
+          mrkdwn_in:  ["fields"],
           fields:     [
             {
               title: "Application",
@@ -46,6 +56,11 @@ describe NotificationServices::SlackService, type: 'model' do
               title: "First Noticed",
               value: problem.first_notice_at.try(:to_s, :db),
               short: true
+            },
+            {
+              title: "Backtrace",
+              value: backtrace_lines,
+              short: false
             }
           ]
         }
