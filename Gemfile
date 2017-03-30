@@ -95,6 +95,9 @@ gem 'ri_cal'
 gem 'oj'
 gem 'multi_json'
 
+# Required as long as we're using rspec <= 3.4
+gem 'rake', '~> 11.2'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'webmock', require: false
@@ -116,7 +119,6 @@ group :development do
 
   # Use puma for development
   gem 'puma', require: false
-
 end
 
 group :test do
