@@ -6,6 +6,7 @@ class NotificationService
   default_url_options[:port] = ActionMailer::Base.default_url_options[:port]
 
   field :room_id, type: String
+  field :mentions, type: String
   field :user_id, type: String
   field :service_url, type: String
   field :service, type: String
