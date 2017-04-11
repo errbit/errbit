@@ -42,13 +42,8 @@ if defined? HipChat
     end
 
     def create_notification(problem)
-      url = app_problem_url problem.app, problem
       format = self[:mentions].present? ? "text" : "html"
-      message = if self[:mentions].present?
-                  message_text(problem)
-                else
-                  message_html(problem)
-                end
+      message = (format == "text") ? message_text(problem) : message_html(problem)
 
       options = { api_version: self[:service] }
       options[:server_url] = self[:service_url] if service_url.present?
@@ -60,6 +55,7 @@ if defined? HipChat
     private
 
     def message_html(problem)
+      url = app_problem_url(problem.app, problem)
       <<-MSG.strip_heredoc
         <strong>#{ERB::Util.html_escape problem.app.name}</strong> error in <strong>#{ERB::Util.html_escape problem.environment}</strong> at <strong>#{ERB::Util.html_escape problem.where}</strong> (<a href="#{url}">details</a>)<br>
         &nbsp;&nbsp;#{ERB::Util.html_escape problem.message.to_s.truncate(100)}<br>
@@ -68,6 +64,7 @@ if defined? HipChat
     end
 
     def message_text(problem)
+      url = app_problem_url(problem.app, problem)
       <<-MSG
 #{self[:mentions]} #{problem.app.name} error in #{problem.environment}: #{problem.message.to_s.truncate(100)}
   Error at: #{problem.where} (#{url})
