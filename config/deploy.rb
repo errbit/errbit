@@ -11,7 +11,7 @@
 
 set :application, 'errbit'
 set :repo_url, 'https://github.com/cognoa/errbit'
-set :branch, ENV['branch'] || 'master'
+set :branch, $1 if `git branch` =~ /\* (\S+)/m # ENV['branch'] || 'master'
 set :deploy_to, '/home/ubuntu/errbit'
 set :keep_releases, 5
 
@@ -32,8 +32,9 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
 
 # check out capistrano-rbenv documentation
 set :rbenv_type, :user
-set :rbenv_path, '/home/ubuntu/.rbenv/'
-set :rbenv_ruby, '2.3.3p222'
+set :rbenv_path, '/home/ubuntu/.rbenv'
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_ruby, '2.3.3'
 set :rbenv_roles, :all
 
 namespace :errbit do
