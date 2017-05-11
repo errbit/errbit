@@ -51,6 +51,39 @@ describe ErrorReport do
       }.by(1)
     end
 
+    context "when email_at_notices is [0]" do
+      it "sends email" do
+        allow(app).to receive(:emailable?).and_return(true)
+        allow(error_report.app).to receive(:emailable?).and_return(true)
+        allow(error_report.app).to receive(:email_at_notices).and_return([0])
+
+        expect(Mailer).to receive(:err_notification)
+        error_report.generate_notice!
+      end
+    end
+
+    context "when email_at_notices includes problem notice_count" do
+      it "sends email" do
+        allow(app).to receive(:emailable?).and_return(true)
+        allow(error_report.app).to receive(:emailable?).and_return(true)
+        allow(error_report.app).to receive(:email_at_notices).and_return([1])
+
+        expect(Mailer).to receive(:err_notification)
+        error_report.generate_notice!
+      end
+    end
+
+    context "when email_at_notices does not includes problem notice_count" do
+      it "sends email" do
+        allow(app).to receive(:emailable?).and_return(true)
+        allow(error_report.app).to receive(:emailable?).and_return(true)
+        allow(error_report.app).to receive(:email_at_notices).and_return([2])
+
+        expect(Mailer).not_to receive(:err_notification)
+        error_report.generate_notice!
+      end
+    end
+
     context "with a minimal notice" do
       let(:xml) do
         Rails.root.join('spec', 'fixtures', 'minimal_test_notice.xml').read
