@@ -175,7 +175,7 @@ GEM
       activesupport (>= 3.0.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
+    mail (2.6.5)
       mime-types (>= 1.16, < 4)
     meta_request (0.2.8)
       callsite
@@ -448,6 +448,3 @@ DEPENDENCIES
   useragent
   webmock
   xmpp4r
-
-BUNDLED WITH
-   1.13.6
