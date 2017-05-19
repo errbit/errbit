@@ -683,6 +683,9 @@ td.count, td.issue_link {
 }
 
 /* Err Tables */
+table.errs th, table.errs td {
+  word-break: break-all;
+}
 table.errs td.app .name {
   display: block;
   width: 150px;
@@ -696,11 +699,6 @@ table.errs td.app .environment {
 }
 table.errs td.message a {
   display: block;
-  word-wrap: break-word;
-  width: 440px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 table.errs td.message em {
   color: #727272;
