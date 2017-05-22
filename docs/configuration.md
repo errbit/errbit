@@ -38,7 +38,7 @@ In order of precedence Errbit uses:
 <dd>The value that should be set in the 'from' field for outgoing emails
 <dd>defaults to errbit@example.com
 <dt>ERRBIT_EMAIL_AT_NOTICES
-<dd>Errbit notifies watchers via email after the set number of occurances of the same error
+<dd>Errbit notifies watchers via email after the set number of occurances of the same error. [0] means notify on every occurance.
 <dd>defaults to [1,10,100]
 <dt>ERRBIT_PER_APP_EMAIL_AT_NOTICES
 <dd>Let every application have it's own configuration rather than using ERRBIT_EMAIL_AT_NOTICES. If this value is true, you can configure each app using the web UI.

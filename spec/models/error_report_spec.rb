@@ -236,6 +236,50 @@ describe ErrorReport do
       expect(email.subject).to include("[#{notice.environment_name}]")
     end
 
+    context 'when email_at_notices config is specified', type: :mailer do
+      before do
+        allow(Errbit::Config).to receive(:email_at_notices).and_return(email_at_notices)
+      end
+
+      context 'as [0]' do
+        let(:email_at_notices) { [0] }
+
+        it "sends email on 1st occurrence" do
+          1.times { described_class.new(xml).generate_notice! }
+          expect(ActionMailer::Base.deliveries.length).to eq(1)
+        end
+
+        it "sends email on 2nd occurrence" do
+          2.times { described_class.new(xml).generate_notice! }
+          expect(ActionMailer::Base.deliveries.length).to eq(2)
+        end
+
+        it "sends email on 3rd occurrence" do
+          3.times { described_class.new(xml).generate_notice! }
+          expect(ActionMailer::Base.deliveries.length).to eq(3)
+        end
+      end
+
+      context "as [1,3]" do
+        let(:email_at_notices) { [1,3] }
+
+        it "sends email on 1st occurrence" do
+          1.times { described_class.new(xml).generate_notice! }
+          expect(ActionMailer::Base.deliveries.length).to eq(1)
+        end
+
+        it "does not send email on 2nd occurrence" do
+          2.times { described_class.new(xml).generate_notice! }
+          expect(ActionMailer::Base.deliveries.length).to eq(1)
+        end
+
+        it "sends email on 3rd occurrence" do
+          3.times { described_class.new(xml).generate_notice! }
+          expect(ActionMailer::Base.deliveries.length).to eq(2)
+        end
+      end
+    end
+
     context "with xml without request section" do
       let(:xml) do
         Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice_without_request_section.xml').read
