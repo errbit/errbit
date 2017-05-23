@@ -80,10 +80,14 @@ class ErrorReport
     @problem = Problem.cache_notice(@error.problem_id, @notice)
   end
 
+  def should_email?
+    app.email_at_notices.include?(0) ||
+      app.email_at_notices.include?(@problem.notices_count)
+  end
+
   # Send email notification if needed
   def email_notification
-    return false unless app.emailable?
-    return false unless app.email_at_notices.include?(@problem.notices_count)
+    return unless app.emailable? && should_email?
     Mailer.err_notification(self).deliver_now
   rescue => e
     HoptoadNotifier.notify(e)
@@ -96,7 +100,7 @@ class ErrorReport
 
   # Launch all notification define on the app associate to this notice
   def services_notification
-    return true unless app.notification_service_configured? && should_notify?
+    return unless app.notification_service_configured? && should_notify?
     app.notification_service.create_notification(problem)
   rescue => e
     HoptoadNotifier.notify(e)
