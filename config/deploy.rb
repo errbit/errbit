@@ -10,19 +10,14 @@
 lock '3.4.0'
 
 set :application, 'errbit'
-set :repo_url, 'https://github.com/errbit/errbit.git'
-set :branch, ENV['branch'] || 'master'
-set :deploy_to, '/var/www/apps/errbit'
+set :repo_url, 'https://github.com/stackbuilders/errbit.git'
+set :branch, ENV['branch'] || 'production'
+set :deploy_to, '/var/projects/errbit'
 set :keep_releases, 5
 
 set :pty, true
 set :ssh_options, forward_agent: true
 
-set :linked_files, fetch(:linked_files, []) + %w(
-  .env
-  config/newrelic.yml
-  config/puma.rb
-)
 
 set :linked_dirs, fetch(:linked_dirs, []) + %w(
   log
@@ -31,18 +26,15 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
 )
 
 # check out capistrano-rbenv documentation
-# set :rbenv_type, :system
-# set :rbenv_path, '/usr/local/rbenv'
-# set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
-# set :rbenv_roles, :all
+set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
+set :rbenv_roles, :all
 
 namespace :errbit do
-  desc "Set up config files (first time setup)"
+  desc "Setup config files (first time setup)"
   task :setup do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
       execute "mkdir -p #{shared_path}/tmp/pids"
-      execute "touch #{shared_path}/.env"
 
       {
         'config/newrelic.example.yml' => 'config/newrelic.yml'
@@ -58,7 +50,7 @@ namespace :errbit do
 end
 
 namespace :db do
-  desc "Create and set up the mongo db"
+  desc "Create and setup the mongo db"
   task :setup do
     on roles(:db) do
       within current_path do
@@ -71,4 +63,4 @@ namespace :db do
 end
 
 set :puma_conf, "#{shared_path}/config/puma.rb"
-set :puma_bind, 'unix:///var/projects/errbit/shared/tmp/sockets/puma.sock;'
+set :puma_bind, 'unix:///var/projects/errbit/shared/tmp/sockets/puma.sock'
