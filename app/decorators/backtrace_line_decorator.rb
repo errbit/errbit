@@ -2,6 +2,8 @@ class BacktraceLineDecorator < Draper::Decorator
   EMPTY_STRING = ''.freeze
 
   def in_app?
+    file = object[:file]
+    return false unless file
     object[:file].match Backtrace::IN_APP_PATH
   end
 
