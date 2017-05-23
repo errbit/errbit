@@ -78,6 +78,7 @@ class ErrorReport
   # Update problem cache with information about this notice
   def cache_attributes_on_problem
     @problem = Problem.cache_notice(@error.problem_id, @notice)
+    @notice.problem.reload
   end
 
   def should_email?

@@ -15,8 +15,9 @@ class Mailer < ActionMailer::Base
   def err_notification(error_report)
     @notice   = NoticeDecorator.new error_report.notice
     @app      = AppDecorator.new error_report.app
+    @problem  = ProblemDecorator.new error_report.problem
 
-    count = error_report.problem.notices_count
+    count = @problem.notices_count
     count = count > 1 ? "(#{count}) " : ""
 
     errbit_headers 'App'         => @app.name,
