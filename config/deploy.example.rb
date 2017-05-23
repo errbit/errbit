@@ -30,6 +30,11 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
   vendor/bundle
 )
 
+# check out capistrano-rvm documentation
+# set :rvm_type, :user
+# set :rvm_ruby_version, "2.3.0@errbit"
+
+
 # check out capistrano-rbenv documentation
 # set :rbenv_type, :system
 # set :rbenv_path, '/usr/local/rbenv'
