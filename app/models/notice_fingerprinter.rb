@@ -4,6 +4,7 @@ class NoticeFingerprinter
 
   field :error_class, default: true, type: Boolean
   field :message, default: true, type: Boolean
+  field :message_patterns, type: String
   field :backtrace_lines, default: -1, type: Integer
   field :component, default: true, type: Boolean
   field :action, default: true, type: Boolean
@@ -16,7 +17,7 @@ class NoticeFingerprinter
   def generate(api_key, notice, backtrace)
     material = [api_key]
     material << notice.error_class if error_class
-    material << notice.filtered_message if message
+    material << replace_by_patterns(notice.filtered_message, message_patterns) if message
     material << notice.component if component
     material << notice.action if action
     material << notice.environment_name if environment_name
@@ -31,5 +32,14 @@ class NoticeFingerprinter
     end
 
     Digest::MD5.hexdigest(material.map(&:to_s).join)
+  end
+
+  private
+
+  def replace_by_patterns(input, message_patterns)
+    message_patterns.split("\n").each do |pattern|
+      input = input.gsub(Regexp.new(pattern.strip), pattern.strip)
+    end unless message_patterns.nil?
+    input
   end
 end

@@ -10,6 +10,13 @@ describe NoticeFingerprinter, type: 'model' do
       expect(f1).to eq(f2)
     end
 
+    it 'generates the same fingerprint for the same notice messages after replacing with message patterns' do
+      fingerprinter = described_class.new(message_patterns: "order:(.*)\n")
+      f1 = fingerprinter.generate('123', Fabricate(:notice, message: 'failed to do order:123'), backtrace)
+      f2 = fingerprinter.generate('123', Fabricate(:notice, message: 'failed to do order:456'), backtrace)
+      expect(f1).to eq(f2)
+    end
+
     %w(error_class message component action environment_name).each do |i|
       it "affects the fingerprint when #{i} is false" do
         f1 = fingerprinter.generate('123', notice, backtrace)

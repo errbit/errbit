@@ -6,6 +6,9 @@
   .checkbox
     = g.check_box :message
     = g.label :message, t('.message')
+  %div{:class => 'message_patterns'}
+    = g.label :message_patterns, t('.message_patterns')
+    = g.text_area :message_patterns
 
   %div
     = g.label :backtrace_lines, t('.backtrace_lines')
