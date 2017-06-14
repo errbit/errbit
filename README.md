@@ -82,7 +82,7 @@ Errbit configuration is done entirely through environment variables. See
 
 Deployment
 ----------
-See [notes on deployment](docs/deployment.md)
+See [deployment via capistrano](docs/deployment/capistrano.md)
 
 Notice Grouping
 ---------------
@@ -121,6 +121,14 @@ If you host Errbit at errbit.example.com, you would fill in:
 
 * After you have registered your app, set GITHUB_CLIENT_ID and GITHUB_SECRET
   with your app's Client ID and Secret key.
+
+```bash
+$ $EDITOR ~/.bashrc
+
+export
+GITHUB_CLIENT_ID = ''
+GITHUB_SECRET = ''
+```
 
 When you start your application, you should see the option to **Sign in with
 GitHub** on the Login page. You will also be able to link your GitHub profile

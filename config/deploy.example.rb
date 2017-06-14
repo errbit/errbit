@@ -7,12 +7,12 @@
 # to ./docs/deployment/capistrano.md for more info
 
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.8.1'
 
 set :application, 'errbit'
-set :repo_url, 'https://github.com/errbit/errbit.git'
+set :repo_url, 'https://github.com/MultiAgent24/errbit.git'
 set :branch, ENV['branch'] || 'master'
-set :deploy_to, '/var/www/apps/errbit'
+set :deploy_to, '/srv/www/apps/errbit'
 set :keep_releases, 5
 
 set :pty, true
@@ -35,6 +35,8 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
 # set :rbenv_path, '/usr/local/rbenv'
 # set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
 # set :rbenv_roles, :all
+set :puma_conf, "#{shared_path}/config/puma.rb"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 
 namespace :errbit do
   desc "Set up config files (first time setup)"
@@ -70,5 +72,14 @@ namespace :db do
   end
 end
 
-set :puma_conf, "#{shared_path}/config/puma.rb"
-set :puma_bind, 'tcp://0.0.0.0:8080'
+after "puma:restart", "deploy:chmod_puma_sock"
+after "puma:start", "deploy:chmod_puma_sock"
+
+namespace :deploy do
+  desc "Chmod puma socket"
+  task :chmod_puma_sock do
+    on roles (:app) do 
+      execute "chmod 777 /#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock" 
+    end
+  end
+end
