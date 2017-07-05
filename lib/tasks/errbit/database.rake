@@ -11,7 +11,7 @@ namespace :errbit do
   end
 
   desc "Delete old errors from the database. (Useful for limited heroku databases)"
-  task :clear_outdated => :environment do
+  task clear_outdated: :environment do
     require 'outdated_problem_clearer'
     if Errbit.config.errbit_problem_destroy_after_days.present?
       puts "=== Cleared #{OutdatedProblemClearer.new.execute} outdated errors from the database."
