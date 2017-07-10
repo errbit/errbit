@@ -42,6 +42,8 @@ if defined? HipChat
     end
 
     def create_notification(problem)
+      # @mentions can only be used when format == "text".  See hipchat
+      # api for more info: https://www.hipchat.com/docs/apiv2/method/send_room_notification
       format = self[:mentions].present? ? "text" : "html"
       message = (format == "text") ? message_text(problem) : message_html(problem)
 
