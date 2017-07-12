@@ -44,6 +44,8 @@ Errbit::Config = Configurator.run(
   google_site_title:         ['GOOGLE_SITE_TITLE'],
   google_client_id:          ['GOOGLE_CLIENT_ID'],
   google_secret:             ['GOOGLE_SECRET'],
+  google_auto_register:      ['GOOGLE_AUTO_REGISTER'],
+  google_domain:             ['GOOGLE_DOMAIN'],
 
   email_delivery_method:     ['EMAIL_DELIVERY_METHOD', lambda do |values|
     values[:email_delivery_method] && values[:email_delivery_method].to_sym

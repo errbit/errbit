@@ -56,7 +56,7 @@ class User
   end
 
   def password_required?
-    github_login.present? ? false : super
+    github_login.present? || google_uid.present? ? false : super
   end
 
   def github_account?

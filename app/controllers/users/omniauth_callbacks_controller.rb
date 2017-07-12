@@ -40,17 +40,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
+    google_auto_register = Errbit::Config.google_auto_register
+    google_domain = Errbit::Config.google_domain
     google_uid = env['omniauth.auth'].uid
     google_email = env['omniauth.auth'].info.email
     google_user = User.where(google_uid: google_uid).first
     google_site_title = Errbit::Config.google_site_title
+
+    if google_domain && !google_email.end_with?("@#{google_domain}")
+      # Fail if the email does not match our domain
+      flash[:error] = "'#{google_email}' is unauthorized. Only #{google_domain} email addresses are allowed."
+      return redirect_to new_user_session_path
+    end
+
+    # binding.pry
+
     # If user is already signed in, link google details to their account
     if current_user
       # ... unless a user is already registered with same google login
       if google_user && google_user != current_user
         flash[:error] = "User already registered with #{google_site_title} login '#{google_email}'!"
       else
-        # Add github details to current user
+        # Add Google details to current user
         current_user.update(google_uid: google_uid)
         flash[:success] = "Successfully linked #{google_email} account!"
       end
@@ -60,8 +71,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: google_site_title
       sign_in_and_redirect google_user, event: :authentication
     else
-      flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
-      redirect_to new_user_session_path
+      if google_auto_register
+        # Automatically create the account
+        google_user = User.create(name: env['omniauth.auth'].info.name,
+                                  email: google_email,
+                                  google_uid: google_uid)
+        flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: google_site_title
+        sign_in_and_redirect google_user, event: :authentication
+      else
+        flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
+        redirect_to new_user_session_path
+      end
     end
   end
 

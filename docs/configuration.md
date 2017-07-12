@@ -79,11 +79,15 @@ In order of precedence Errbit uses:
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
 <dd>defaults to GitHub</dd>
+<dt>GOOGLE_AUTO_REGISTER
+<dd>Automatically create accounts when users sign in with google. Using GOOGLE_DOMAIN is strongly advised in this mode.
 <dt>GOOGLE_AUTHENTICATION
 <dd>Allow google sign-in via OAuth
 <dd>defaults to true
 <dt>GOOGLE_CLIENT_ID
 <dd>Client id of your google application
+<dt>GOOGLE_DOMAIN
+<dd>Require Google account emails to end with this domain
 <dt>GOOGLE_SECRET
 <dd>Secret key for your google application
 <dt>GOOGLE_SITE_TITLE</dt>
