@@ -1,5 +1,7 @@
+version: '2.1'
 errbit:
-  image: errbit/errbit:latest
+  build: .
+  image: 127.0.0.1:30000/formlabs/formerrbit
   ports:
     - "8080:8080"
   links:
