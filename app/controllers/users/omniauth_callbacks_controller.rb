@@ -53,8 +53,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       return redirect_to new_user_session_path
     end
 
-    # binding.pry
-
     # If user is already signed in, link google details to their account
     if current_user
       # ... unless a user is already registered with same google login
