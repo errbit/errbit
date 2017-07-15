@@ -14,7 +14,7 @@ end
 
 Fabricator :slack_notification_service, from: :notification_service, class_name: "NotificationServices::SlackService" do
   service_url { sequence :word }
-  room_id { sequence(:room_id)  { |i| "#room-#{i}" } }
+  room_id { sequence(:room_id) { |i| "#room-#{i}" } }
 end
 
 Fabricator :hipchat_notification_service, from: :notification_service, class_name: "NotificationServices::HipchatService" do

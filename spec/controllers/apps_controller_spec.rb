@@ -2,7 +2,7 @@ describe AppsController, type: 'controller' do
   it_requires_authentication
   it_requires_admin_privileges for: { new: :get, edit: :get, create: :post, update: :put, destroy: :delete }
 
-  let(:app_params) {{ name: 'BestApp' }}
+  let(:app_params) { { name: 'BestApp' } }
   let(:admin) { Fabricate(:admin) }
   let(:user) { Fabricate(:user) }
   let(:watcher) { Fabricate(:user_watcher, app: app, user: user) }
@@ -267,8 +267,8 @@ describe AppsController, type: 'controller' do
 
       context "changing email_at_notices" do
         before do
-          allow(Errbit::Config)
-            .to receive(:per_app_email_at_notices).and_return(true)
+          allow(Errbit::Config).
+            to receive(:per_app_email_at_notices).and_return(true)
         end
 
         it "should parse legal csv values" do
@@ -312,7 +312,7 @@ describe AppsController, type: 'controller' do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
           put :update, id: @app.id, app: {
             notice_fingerprinter_attributes: { backtrace_lines: 42 },
-            use_site_fingerprinter: '1'
+            use_site_fingerprinter:          '1'
           }
           @app.reload
         end
@@ -329,7 +329,7 @@ describe AppsController, type: 'controller' do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
           put :update, id: @app.id, app: {
             notice_fingerprinter_attributes: { backtrace_lines: 42 },
-            use_site_fingerprinter: '0'
+            use_site_fingerprinter:          '0'
           }
           @app.reload
         end

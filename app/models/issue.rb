@@ -36,7 +36,7 @@ class Issue
     if issue_tracker.respond_to? :close_issue
       issue_tracker.close_issue(problem.issue_link, user: user.as_document)
     end
-    
+
     errors.empty?
   rescue => ex
     errors.add :base, "There was an error during issue closing: #{ex.message}"

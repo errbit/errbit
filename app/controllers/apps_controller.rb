@@ -5,9 +5,9 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  expose(:app_scope) {
+  expose(:app_scope) do
     params[:search].present? ? App.search(params[:search]) : App.all
-  }
+  end
 
   expose(:apps) do
     app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
@@ -133,11 +133,11 @@ protected
     # Sanitize negative values, split on comma,
     # strip, parse as integer, remove all '0's.
     # If empty, set as default and show an error message.
-    email_at_notices = val
-      .gsub(/-\d+/, "")
-      .split(",")
-      .map { |v| v.strip.to_i }
-      .reject { |v| v == 0 }
+    email_at_notices = val.
+      gsub(/-\d+/, "").
+      split(",").
+      map { |v| v.strip.to_i }.
+      reject { |v| v == 0 }
 
     if email_at_notices.any?
       params[:app][:email_at_notices] = email_at_notices

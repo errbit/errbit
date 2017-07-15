@@ -54,9 +54,7 @@ if defined? HipChat
       client[room_id].send('Errbit', message, color: 'red', notify: true, message_format: format)
     end
 
-    private
-
-    def message_html(problem)
+    private def message_html(problem)
       url = app_problem_url(problem.app, problem)
       <<-MSG.strip_heredoc
         <strong>#{ERB::Util.html_escape problem.app.name}</strong> error in <strong>#{ERB::Util.html_escape problem.environment}</strong> at <strong>#{ERB::Util.html_escape problem.where}</strong> (<a href="#{url}">details</a>)<br>
@@ -65,7 +63,7 @@ if defined? HipChat
       MSG
     end
 
-    def message_text(problem)
+    private def message_text(problem)
       url = app_problem_url(problem.app, problem)
       <<-MSG
 #{self[:mentions]} #{problem.app.name} error in #{problem.environment}: #{problem.message.to_s.truncate(100)}

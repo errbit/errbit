@@ -120,7 +120,6 @@ describe ProblemsController, type: 'controller' do
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to include(@problem2)
     end
-
   end
 
   describe "GET /apps/:app_id/problems/:id" do

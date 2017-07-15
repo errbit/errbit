@@ -50,9 +50,7 @@ class App
     reject_if:     proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
   accepts_nested_attributes_for :notice_fingerprinter
 
-  index({
-          name: "text"
-        }, default_language: "english")
+  index({ name: "text" }, default_language: "english")
 
   scope :search, ->(value) { where('$text' => { '$search' => value }) }
   scope :watched_by, lambda { |user|
