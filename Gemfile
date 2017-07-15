@@ -71,9 +71,6 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-rbenv',   require: false
   gem 'capistrano3-puma',   require: false
-
-
-  # better errors
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
   gem 'meta_request'
@@ -100,7 +97,7 @@ group :heroku, :production do
 end
 
 group :no_docker, :test, :development do
- gem 'therubyracer', :platform => :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
 gem 'puma'

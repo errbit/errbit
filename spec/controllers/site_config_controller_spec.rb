@@ -47,24 +47,24 @@ describe SiteConfigController, type: 'controller' do
 
     it 'updates apps that are using site wide notice fingerprinter' do
       put :update, site_config: {
-          notice_fingerprinter_attributes: {
-              backtrace_lines:  10,
-              environment_name: false
-          }
+        notice_fingerprinter_attributes: {
+          backtrace_lines:  10,
+          environment_name: false
+        }
       }
       app = App.new(name: 'my_app')
       app.save
-      expect(app.notice_fingerprinter.backtrace_lines).to  be 10
+      expect(app.notice_fingerprinter.backtrace_lines).to be 10
       expect(app.notice_fingerprinter.environment_name).to be false
 
       put :update, site_config: {
-          notice_fingerprinter_attributes: {
-              backtrace_lines:  11,
-              environment_name: true
-          }
+        notice_fingerprinter_attributes: {
+          backtrace_lines:  11,
+          environment_name: true
+        }
       }
       app.reload
-      expect(app.notice_fingerprinter.backtrace_lines).to  be 11
+      expect(app.notice_fingerprinter.backtrace_lines).to be 11
       expect(app.notice_fingerprinter.environment_name).to be true
     end
   end

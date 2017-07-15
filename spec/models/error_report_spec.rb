@@ -261,7 +261,7 @@ describe ErrorReport do
       end
 
       context "as [1,3]" do
-        let(:email_at_notices) { [1,3] }
+        let(:email_at_notices) { [1, 3] }
 
         it "sends email on 1st occurrence" do
           1.times { described_class.new(xml).generate_notice! }
