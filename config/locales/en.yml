@@ -10,6 +10,7 @@ en:
         success: "Good news everyone! '%{app_name}' was successfully updated."
       destroy:
         success: "'%{app_name}' was successfully destroyed."
+    no_permission: "Sorry, you don't have permission to do that!"
   n_errs:
     one:   "%{count} error"
     other: "%{count} errors"
@@ -83,16 +84,17 @@ en:
       hide_resolved: "hide resolved"
       show_resolved: "show resolved"
     table:
-        app: App
-        what_&_where: 'Where & What'
-        latest: Latest
-        count: Count
-        merge: Merge
-        unmerge: Unmerge
-        resolve: Resolve
-        unresolve: Unresolve
-        delete: Delete
-        ago: ago
+      app: App
+      what_&_where: 'Where & What'
+      latest: Latest
+      count: Count
+      merge: Merge
+      unmerge: Unmerge
+      resolve: Resolve
+      unresolve: Unresolve
+      delete: Delete
+      ago: ago
+      no_errors: No errors here
     confirm:
       delete: "Permanently delete selected issues?"
       resolve: "Resolve selected issues? They can be unresolved later."
@@ -188,6 +190,7 @@ en:
       notify_all_users: Send notifications to all users
       regenerate_api_key: "Regenerate API Key"
     show:
+      add_watcher: add watcher
       all_errs: all errors
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
@@ -225,11 +228,22 @@ en:
       update: 'Update App'
     search:
       search_placeholder: 'Search for application'
+    table:
+      click_to_create: 'Click here to create your first one'
+      no_apps: 'No apps here.'
   watchers:
+    new:
+      add_watcher: Add Watcher
+      cancel: cancel
+      no_more_users: No more users available
+      title: Add Watcher
+    create:
+      error_exist: Watcher already added
+      success: Watcher successfully added
     destroy:
-      success: "You are no longer watching %{app}"
+      success: "Successfully no longer watching %{app}"
     update:
-      success: "You are now watching %{app}"
+      success: "Successfully now watching %{app}"
   site_config:
     index:
       title: Config

@@ -1,0 +1,19 @@
+- content_for :title, t('.title')
+- content_for :action_bar do
+  = link_to(t('.cancel'), app_path(app), :class => 'button')
+
+= form_for ([:app, watcher]) do |f|
+
+  = errors_for watcher
+
+  - user_ids = User.all.pluck(:id)-app.watchers.collect{|w|w.user.id}
+
+  %div.required
+    - if user_ids.present?
+      = f.collection_select(:user_id, User.find(user_ids), :id, :name)
+    - else
+      = t('.no_more_users')
+
+  - if user_ids.present?
+    %div.buttons
+      = f.submit t('.add_watcher')

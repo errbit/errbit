@@ -6,7 +6,11 @@ class ProblemsController < ApplicationController
   ]
 
   expose(:app_scope) do
-    params[:app_id] ? App.where(_id: params[:app_id]) : App.all
+    if (current_user.present? && current_user.admin?) || Errbit::Config.restricted_access_mode.eql?(false)
+      params[:app_id] ? App.where(_id: params[:app_id]) : App.all
+    else
+      params[:app_id] ? App.watched_by(current_user).where(_id: params[:app_id]) : App.watched_by(current_user).all
+    end
   end
 
   expose(:app) do

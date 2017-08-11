@@ -23,6 +23,7 @@ Errbit::Config = Configurator.run(
   per_app_notify_at_notices: ['ERRBIT_PER_APP_NOTIFY_AT_NOTICES'],
   log_location:              ['ERRBIT_LOG_LOCATION'],
   log_level:                 ['ERRBIT_LOG_LEVEL'],
+  restricted_access_mode:    ['ERRBIT_RESTRICTED_ACCESS_MODE'],
 
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],

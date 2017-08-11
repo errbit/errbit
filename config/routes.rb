@@ -47,7 +47,7 @@ Rails.application.routes.draw do
         delete :unlink_issue
       end
     end
-    resources :watchers, only: [:destroy, :update]
+    resources :watchers, only: [:new, :create, :destroy, :update]
     member do
       post :regenerate_api_key
     end

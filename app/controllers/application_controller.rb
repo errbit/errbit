@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user_from_token!
   before_action :authenticate_user!
+  before_action :require_right!
   before_action :set_time_zone
 
   rescue_from ActionController::RedirectBackError, with: :redirect_to_root
@@ -15,8 +16,25 @@ protected
   def require_admin!
     return if user_signed_in? && current_user.admin?
 
-    flash[:error] = "Sorry, you don't have permission to do that"
+    flash[:error] = t('flash.no_permission')
     redirect_to_root
+  end
+
+  def require_right!
+    return if (current_user.present? && current_user.admin?) || Errbit::Config.restricted_access_mode.eql?(false)
+
+    app_id = params[:id] if params[:controller].present? && params[:controller] == 'apps'
+    app_id ||= params[:app_id] if params[:controller].present? && %w(notices comments problems watchers).include?(params[:controller])
+
+    return if app_id.blank?
+    return if app_right?(app_id)
+
+    flash[:error] = t('flash.no_permission')
+    redirect_to_root
+  end
+
+  def app_right?(app_id)
+    App.find(app_id).watchers.map { |x| x.user == current_user }.include? true
   end
 
   def redirect_to_root
