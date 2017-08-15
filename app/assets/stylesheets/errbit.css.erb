@@ -683,9 +683,13 @@ td.count, td.issue_link {
 }
 
 /* Err Tables */
+table.errs {
+  width: 100%;
+}
+
 table.errs td.app .name {
   display: block;
-  width: 150px;
+/*  width: 150px;*/
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -697,7 +701,7 @@ table.errs td.app .environment {
 table.errs td.message a {
   display: block;
   word-wrap: break-word;
-  width: 440px;
+/*  width: 440px;*/
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -705,6 +709,10 @@ table.errs td.message a {
 table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
+}
+
+table.errs td.resolve {
+  text-align: center;
 }
 
 table.errs tr.resolved td > * {
