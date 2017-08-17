@@ -34,7 +34,8 @@ protected
   end
 
   def app_right?(app_id)
-    App.find(app_id).watchers.map { |x| x.user == current_user }.include? true
+    app = App.find(app_id)
+    app.watched_by?(current_user) || app.notify_all_users
   end
 
   def redirect_to_root

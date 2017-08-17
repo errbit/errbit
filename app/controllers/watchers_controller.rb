@@ -25,7 +25,11 @@ class WatchersController < ApplicationController
     else
       flash[:error] = t('flash.no_permission')
     end
-    redirect_to app_path(app)
+    if current_user.admin? || Errbit::Config.restricted_access_mode.eql?(false)
+      redirect_to app_path(app)
+    else
+      redirect_to_root
+    end
   end
 
   def update

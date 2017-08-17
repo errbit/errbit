@@ -40,7 +40,7 @@
         %tr
           %th=t('.user_or_email')
       %tbody
-        - app.watchers.each do |watcher|
+        - app.watchers.sort_by{|w| w.user[:name]}.each do |watcher|
           %tr
             %td
               = watcher.label

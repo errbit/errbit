@@ -10,7 +10,7 @@
 
   %div.required
     - if user_ids.present?
-      = f.collection_select(:user_id, User.find(user_ids), :id, :name)
+      = f.collection_select(:user_id, User.find(user_ids).sort_by{|u| u[:name]}, :id, :name)
     - else
       = t('.no_more_users')
 
