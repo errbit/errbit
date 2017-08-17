@@ -44,7 +44,7 @@
       - if problems.none?
         %tr
           %td{:colspan => (any_issue_links ? 8 : 7)}
-            %em No errs here
+            %em= t('.no_errors')
   = paginate problems
   .tab-bar
     %ul

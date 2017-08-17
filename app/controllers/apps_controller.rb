@@ -6,7 +6,11 @@ class AppsController < ApplicationController
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
   expose(:app_scope) do
-    params[:search].present? ? App.search(params[:search]) : App.all
+    if (current_user.present? && current_user.admin?) || Errbit::Config.restricted_access_mode.eql?(false)
+      params[:search].present? ? App.search(params[:search]) : App.all
+    else
+      params[:search].present? ? App.has_right(current_user).search(params[:search]) : App.has_right(current_user).all
+    end
   end
 
   expose(:apps) do

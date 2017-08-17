@@ -22,6 +22,9 @@
   - else
     = link_to t('.watch'), app_watcher_path(app_id: app, id: current_user.id), method: :put, class: 'button'
 
+  - if current_user.admin?
+    = link_to t('.add_watcher'), new_app_watcher_path(app), :class => 'button'
+
 %h3#watchers_toggle
   =t('.watchers')
   %span.click_span=t('.show_hide')
@@ -37,9 +40,12 @@
         %tr
           %th=t('.user_or_email')
       %tbody
-        - app.watchers.each do |watcher|
+        - app.watchers.sort_by{|w| w.user[:name]}.each do |watcher|
           %tr
-            %td= watcher.label
+            %td
+              = watcher.label
+              - if current_user.admin?
+                = link_to t('.unwatch'), app_watcher_path(app_id: app, id: watcher.user_id), method: :delete, class: 'button'
         - if app.watchers.none?
           %tr
             %td

@@ -56,6 +56,12 @@ class App
   scope :watched_by, lambda { |user|
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
   }
+  scope :has_right, lambda { |user|
+    any_of(
+      { watchers: { "$elemMatch" => { "user_id" => user.id } }},
+      { notify_all_users: true }
+    )
+  }
 
   def build_notice_fingerprinter
     # no need to build a notice_fingerprinter if we already have one

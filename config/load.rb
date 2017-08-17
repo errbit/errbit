@@ -24,6 +24,7 @@ Errbit::Config = Configurator.run(
   log_location:              ['ERRBIT_LOG_LOCATION'],
   log_level:                 ['ERRBIT_LOG_LEVEL'],
   notice_deprecation_days:   ['ERRBIT_PROBLEM_DESTROY_AFTER_DAYS'],
+  restricted_access_mode:    ['ERRBIT_RESTRICTED_ACCESS_MODE'],
 
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
