@@ -74,6 +74,22 @@ class ProblemsController < ApplicationController
     redirect_to app_path(app)
   end
 
+  def snooze
+    problem.snooze!
+    flash[:success] = t('.the_error_has_been_snoozed')
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to app_path(app)
+  end
+
+  def unsnooze
+    problem.unsnooze!
+    flash[:success] = t('.the_error_has_been_unsnoozed')
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to app_path(app)
+  end
+
   def resolve_several
     selected_problems.each(&:resolve!)
     flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t('n_errs_have.been_resolved')}."

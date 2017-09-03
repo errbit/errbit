@@ -56,8 +56,11 @@ class ErrorReport
     notice.save!
 
     cache_attributes_on_problem
-    email_notification
-    services_notification
+
+    if !error.problem.snoozed
+      email_notification
+      services_notification
+    end
     @notice
   end
 
@@ -77,7 +80,7 @@ class ErrorReport
 
   # Update problem cache with information about this notice
   def cache_attributes_on_problem
-    @problem = Problem.cache_notice(@error.problem_id, @notice)
+    @problem = Problem.cache_notice(error.problem_id, @notice)
   end
 
   def should_email?

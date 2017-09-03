@@ -97,6 +97,8 @@ en:
       delete: "Permanently delete selected issues?"
       resolve: "Resolve selected issues? They can be unresolved later."
       resolve_one: "Resolve this issue? It can be unresolved later."
+      snooze: "Snooze this issue? It can be unsnoozed later."
+      unsnooze: "Unsnooze this issue? It can be snoozed again later."
       merge: "Merge select issues? They can be unmerged later."
       unmerge: "Unmerge selected issues? They can be re-merged later."
       unresolve: "Unresolve selected issues? They can be resolved again later."
@@ -104,6 +106,10 @@ en:
       search_placeholder: 'Search for issues'
     resolve:
       the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
+    snooze:
+      the_error_has_been_snoozed: 'You are no longer notified when this issue happens again.'
+    unsnooze:
+      the_error_has_been_unsnoozed: 'You will be notified when this issue happens again.'
     show:
       comments: Comments
       add_a_comment: Add a comment
@@ -122,6 +128,8 @@ en:
       where: Where
       up: up
       resolve: resolve
+      snooze: snooze
+      unsnooze: unsnooze
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:
@@ -189,7 +197,7 @@ en:
       regenerate_api_key: "Regenerate API Key"
     show:
       all_errs: all errors
-      all_users_notified: "All users will be notified when something happens."
+      all_users_notified: "All users will be notified when when something happens."
       api_key: "API Key:"
       are_you_sure: 'Are you sure?'
       atom_title: "Errbit notices for %{name} at %{host}"
