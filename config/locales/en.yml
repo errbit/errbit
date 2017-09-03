@@ -250,7 +250,7 @@ en:
       occurred: Occurred
       similar: Similar
       browser: Browser
-      tenant: Origem
+      tenant: Origin
       app_server: App Server
       app_version: App Version
       framework: Framework
