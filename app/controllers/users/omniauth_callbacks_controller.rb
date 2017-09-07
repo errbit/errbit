@@ -62,8 +62,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif Errbit::Config.google_auto_provision
       user = User.create_from_google_oauth2(request.env['omniauth.auth'])
       if user.persisted?
-        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => google_site_title
-        sign_in_and_redirect user, :event => :authentication
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
+        sign_in_and_redirect user, event: :authentication
       else
         session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
         redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")

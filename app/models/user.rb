@@ -49,14 +49,14 @@ class User
 
   def self.create_from_google_oauth2(access_token)
     data = access_token.info
-    user = User.where(:email => data['email']).first
+    user = User.where(email: data['email']).first
 
     unless user
-      user = User.create(name: data['name'],
-        email: data['email'],
-        google_uid: access_token.uid,
-        password: Devise.friendly_token[0,20]
-      )
+      user = User.create(name:       data['name'],
+                         email:      data['email'],
+                         google_uid: access_token.uid,
+                         password:   Devise.friendly_token[0, 20]
+                        )
     end
     user
   end
