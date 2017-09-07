@@ -42,9 +42,11 @@ Errbit::Config = Configurator.run(
   github_site_title:         ['GITHUB_SITE_TITLE'],
   # google
   google_authentication:     ['GOOGLE_AUTHENTICATION'],
+  google_auto_provision:     ['GOOGLE_AUTO_PROVISION'],
   google_site_title:         ['GOOGLE_SITE_TITLE'],
   google_client_id:          ['GOOGLE_CLIENT_ID'],
   google_secret:             ['GOOGLE_SECRET'],
+  google_redirect_uri:       ['GOOGLE_REDIRECT_URI'],
 
   email_delivery_method:     ['EMAIL_DELIVERY_METHOD', lambda do |values|
     values[:email_delivery_method] && values[:email_delivery_method].to_sym
