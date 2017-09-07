@@ -1,8 +1,11 @@
 FROM ruby:2.3.3-alpine
-MAINTAINER David Papp <david@ghostmonitor.com>
+LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
-RUN addgroup -S errbit \
-  && adduser -S -D -s /bin/false -G errbit -g errbit errbit
+ARG UID=101
+ARG GID=101
+
+RUN addgroup -g $GID -S errbit \
+  && adduser -u $UID -S -D -s /bin/false -G errbit -g errbit errbit
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN echo "gem: --no-document" >> /etc/gemrc \
@@ -45,6 +48,6 @@ RUN chown -R errbit:errbit /app
 
 USER errbit
 
-HEALTHCHECK CMD curl --fail http://localhost:$PORT/users/sign_in || exit 1
+HEALTHCHECK CMD curl --fail "http://$(/sbin/ip route | /usr/bin/awk '/src/{print $NF}'):8080/users/sign_in" ||  exit 1
 
 CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
