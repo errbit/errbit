@@ -9,6 +9,7 @@ class User
   field :github_login
   field :github_oauth_token
   field :google_uid
+  field :saml_uid
   field :name
   field :admin, type: Boolean, default: false
   field :per_page, type: Integer, default: PER_PAGE
@@ -56,7 +57,11 @@ class User
   end
 
   def password_required?
-    github_login.present? ? false : super
+    if github_login.present? || saml_uid.present?
+      false
+    else
+      super
+    end
   end
 
   def github_account?

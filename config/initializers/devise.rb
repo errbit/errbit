@@ -258,6 +258,15 @@ Devise.setup do |config|
       Errbit::Config.google_secret
   end
 
+  if Errbit::Config.saml_authentication || Rails.env.test?
+    config.omniauth :saml,
+      issuer:                 Errbit::Config.saml_issuer,
+      idp_sso_target_url:     Errbit::Config.saml_idp_sso_target_url,
+      idp_cert:               Errbit::Config.saml_idp_cert,
+      idp_cert_fingerprint:   Errbit::Config.saml_idp_cert_fingerprint,
+      name_identifier_format: Errbit::Config.saml_name_identifier_format
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

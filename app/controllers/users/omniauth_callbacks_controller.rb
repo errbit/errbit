@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token, only: :saml
+
   def github
     github_login = env["omniauth.auth"].extra.raw_info.login
     github_token = env["omniauth.auth"].credentials.token
@@ -61,6 +63,25 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect google_user, event: :authentication
     else
       flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
+      redirect_to new_user_session_path
+    end
+  end
+
+  def saml
+    saml_uid = env['omniauth.auth'].uid
+    saml_user = User.where(email: saml_uid).first
+    saml_site_title = Errbit::Config.saml_site_title
+
+    if saml_user.nil?
+      # Automatically create an account
+      saml_user = User.create(name: saml_uid, email: saml_uid, saml_uid: saml_uid)
+    end
+
+    if saml_user
+      flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: saml_site_title
+      sign_in_and_redirect saml_user, event: :authentication
+    else
+      flash[:error] = "Failed to login via #{saml_site_title}. Please ask an administrator."
       redirect_to new_user_session_path
     end
   end

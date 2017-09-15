@@ -61,6 +61,9 @@ In order of precedence Errbit uses:
 <dt>MONGO_URL
 <dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
 <dd>defaults to mongodb://localhost/errbit_&lt;Rails.env&gt;
+<dt>DATABASE_AUTHENTICATION
+<dd>Show the login form (username/password) on sign-in page.
+<dd>defaults to true. Only hides the form, does NOT prevent any direct POST requests.
 <dt>GITHUB_URL
 <dd>Use this URL for interacting github. This is useful if you have a github enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com
@@ -92,6 +95,20 @@ In order of precedence Errbit uses:
 <dt>GOOGLE_SITE_TITLE</dt>
 <dd>The title to use for Google. This value is whatever you want displayed in the Errbit UI when referring to Google.</dd>
 <dd>defaults to Google</dd>
+<dt>SAML_AUTHENTICATION
+<dd>Allow SAML sign-in
+<dt>SAML_SITE_TITLE
+<dd>The title to use for SAML. This value is whatever you want displayed in the Errbit UI when referring to SAML.
+<dt>SAML_ISSUER
+<dd>Your application issuer name, could be something like 'errbit'
+<dt>SAML_NAME_IDENTIFIER_FORMAT
+<dd>Should be 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress'
+<dt>SAML_IDP_SSO_TARGET_URL
+<dd>URL of your identity provider
+<dt>SAML_IDP_CERT
+<dd>Public certificate of your identity provider as one base64 encoded string
+<dt>SAML_IDP_CERT_FINGERPRINT
+<dd>Fingerprint of the given IDP_CERT
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER
