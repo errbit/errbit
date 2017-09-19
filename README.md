@@ -150,6 +150,7 @@ few others that could make sense for your needs:
   accounts for new users.
 
 ### Configuring Google authentication:
+
 * Set GOOGLE_AUTHENTICATION=true
 * Register your instance of Errbit at https://console.developers.google.com/apis/api/plus/overview
 
@@ -168,6 +169,15 @@ If you host Errbit at errbit.example.com, you would fill in:
 When you start your application, you should see the option to **Sign in with
 Google** on the Login page. You will also be able to link your Google profile
 to your user account on your **Edit profile** page.
+
+You can optionally have Google logins automatically create user accounts. If you
+set GOOGLE_AUTO_REGISTER, any Google login will create an account. You are
+strongly encouraged to limit logins to a single Google domain by setting
+GOOGLE_DOMAIN to your Google apps domain if you enable this feature. To only
+allow automatic user registration from example.com accounts:
+
+* Set GOOGLE_AUTO_REGISTER=true
+* Set GOOGLE_DOMAIN=example.com
 
 ### Configuring LDAP authentication:
 
