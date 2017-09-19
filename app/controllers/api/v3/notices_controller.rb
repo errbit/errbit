@@ -12,8 +12,9 @@ class Api::V3::NoticesController < ApplicationController
     response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
     return render(status: 200, text: '') if request.method == 'OPTIONS'
 
-    report = AirbrakeApi::V3::NoticeParser.new(
-      params.merge(JSON.parse(request.raw_post) || {})).report
+    merged_params = params.merge(JSON.parse(request.raw_post) || {})
+    merged_params = merged_params.merge('key' => request.headers['X-Airbrake-Token']) if request.headers['X-Airbrake-Token']
+    report = AirbrakeApi::V3::NoticeParser.new(merged_params).report
 
     return render text: UNKNOWN_API_KEY, status: 422 unless report.valid?
     return render text: VERSION_TOO_OLD, status: 422 unless report.should_keep?
