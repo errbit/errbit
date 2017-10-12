@@ -49,9 +49,9 @@ class User
 
   def self.valid_google_domain?(email)
     return true if Errbit::Config.google_authorized_domains.nil?
-    match_data = /.+@(?<domain>.+)/.match(email)
+    match_data = /.+@(?<domain>.+)$/.match(email)
     return false if match_data.nil?
-    Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain]) ? true : false
+    Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
   end
 
   def self.create_from_google_oauth2(access_token)

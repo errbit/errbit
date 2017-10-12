@@ -70,7 +70,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
         end
       else
-        flash[:error] = "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
+        flash[:error] = I18n.t "devise.google_login.domain_unauthorized"
         redirect_to new_user_session_path
       end
     else
