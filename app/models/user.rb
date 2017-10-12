@@ -47,6 +47,13 @@ class User
     validates :username, presence: true
   end
 
+  def self.valid_google_domain?(email)
+    return true if Errbit::Config.google_authorized_domains.nil?
+    match_data = /.+@(?<domain>.+)/.match(email)
+    return false if match_data.nil?
+    Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain]) ? true : false
+  end
+
   def self.create_from_google_oauth2(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first

@@ -60,13 +60,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: google_site_title
       sign_in_and_redirect google_user, event: :authentication
     elsif Errbit::Config.google_auto_provision
-      user = User.create_from_google_oauth2(request.env['omniauth.auth'])
-      if user.persisted?
-        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
-        sign_in_and_redirect user, event: :authentication
+      if User.valid_google_domain?(google_email)
+        user = User.create_from_google_oauth2(request.env['omniauth.auth'])
+        if user.persisted?
+          flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
+          sign_in_and_redirect user, event: :authentication
+        else
+          session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
+          redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
+        end
       else
-        session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
-        redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
+        flash[:error] = "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
+        redirect_to new_user_session_path
       end
     else
       flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
