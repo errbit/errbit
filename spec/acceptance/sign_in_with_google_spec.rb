@@ -38,7 +38,6 @@ feature 'Sign in with Google with auto provision' do
   end
 end
 
-
 feature 'Sign in with Google with domain validation' do
   background do
     allow(Errbit::Config).to receive(:google_authentication).and_return(true)
@@ -63,4 +62,3 @@ feature 'Sign in with Google with domain validation' do
     expect(page).to have_content "Sign in with GitHub Sign in with Google Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
   end
 end
-

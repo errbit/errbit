@@ -35,7 +35,7 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
     end
   end
 
-  def stub_env_for_google_omniauth(login, token = nil)
+  def stub_env_for_google_omniauth(login, _token = nil)
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]
     env = {
@@ -43,8 +43,8 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
         credentials: {
           provider:    'google_oauth2'
         },
-        info: { email: "#{login}@example.com", name: "John Smith" },
-        uid: login
+        info:        { email: "#{login}@example.com", name: "John Smith" },
+        uid:         login
       )
     }
     allow(@controller).to receive(:env).and_return(env)
@@ -72,7 +72,6 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
       expect(response).to redirect_to(user_path(@user))
     end
   end
-
 
   # See spec/acceptance/sign_in_with_github_spec.rb for 'Signing in with github' integration tests.
 end
