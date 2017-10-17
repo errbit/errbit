@@ -253,9 +253,14 @@ Devise.setup do |config|
   end
 
   if Errbit::Config.google_authentication || Rails.env.test?
+    google_options = {
+      redirect_uri: Errbit::Config.google_redirect_uri
+    }.compact
+
     config.omniauth :google_oauth2,
       Errbit::Config.google_client_id,
-      Errbit::Config.google_secret
+      Errbit::Config.google_secret,
+      google_options
   end
 
   # ==> Warden configuration
