@@ -15,7 +15,7 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
 
 RUN mkdir -p /app \
   && chown -R errbit:errbit /app \
-  && chmod 700 /app/
+  && chmod 705 /app/
 WORKDIR /app
 
 RUN gem update --system \
