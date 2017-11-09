@@ -29,7 +29,7 @@ class Api::V3::NoticesController < ApplicationController
     render text: 'Invalid request', status: 400
   end
 
-  private
+private
 
   def authorization_token
     request.headers['Authorization'].to_s[/Bearer (.+)/, 1]
