@@ -14,7 +14,7 @@ class Api::V3::NoticesController < ApplicationController
 
     merged_params = params.merge(JSON.parse(request.raw_post) || {})
     merged_params = merged_params.merge('key' => request.headers['X-Airbrake-Token']) if request.headers['X-Airbrake-Token']
-    merged_params = merged_params.merge('key' => authorization_token) if request.headers['Authorization']
+    merged_params = merged_params.merge('key' => authorization_token) if authorization_token
     report = AirbrakeApi::V3::NoticeParser.new(merged_params).report
 
     return render text: UNKNOWN_API_KEY, status: 422 unless report.valid?
@@ -32,7 +32,6 @@ class Api::V3::NoticesController < ApplicationController
   private
 
   def authorization_token
-    matches = request.headers['Authorization'].match /Bearer (.+)/
-    matches[1]
+    request.headers['Authorization'].to_s[/Bearer (.+)/, 1]
   end
 end
