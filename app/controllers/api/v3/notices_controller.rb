@@ -12,7 +12,7 @@ class Api::V3::NoticesController < ApplicationController
     response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
     return render(status: 200, text: '') if request.method == 'OPTIONS'
 
-    merged_params = params.merge(JSON.parse(request.raw_post) || {})
+    merged_params = params.merge!(JSON.parse(request.raw_post) || {})
     # merge makes a copy, merge! edits in place
     merged_params = merged_params.merge!('key' => request.headers['X-Airbrake-Token']) if request.headers['X-Airbrake-Token']
     merged_params = merged_params.merge!('key' => authorization_token) if authorization_token
