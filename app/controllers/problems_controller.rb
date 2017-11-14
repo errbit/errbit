@@ -95,14 +95,14 @@ class ProblemsController < ApplicationController
     if selected_problems.length < 2
       flash[:notice] = I18n.t('controllers.problems.flash.need_two_errors_merge')
     else
-      ProblemMerge.new(selected_problems).merge!
+      ProblemMerge.new(selected_problems).merge
       flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', nb: selected_problems.count)
     end
     redirect_to :back
   end
 
   def unmerge_several
-    all = selected_problems.flat_map(&:unmerge!)
+    all = selected_problems.map(&:unmerge!).flatten
     flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} #{I18n.t('n_errs_have.been_unmerged')}."
     redirect_to :back
   end
