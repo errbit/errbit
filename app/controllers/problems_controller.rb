@@ -102,7 +102,7 @@ class ProblemsController < ApplicationController
   end
 
   def unmerge_several
-    all = selected_problems.map(&:unmerge!).flatten
+    all = selected_problems.flat_map(&:unmerge!)
     flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} #{I18n.t('n_errs_have.been_unmerged')}."
     redirect_to :back
   end
