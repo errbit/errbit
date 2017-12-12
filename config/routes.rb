@@ -56,6 +56,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'health/readiness' => 'health#readiness'
+  get 'health/liveness' => 'health#liveness'
+
   namespace :api do
     namespace :v1 do
       resources :problems, only: [:index, :show], defaults: { format: 'json' }
