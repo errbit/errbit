@@ -63,7 +63,7 @@ class User
                          email:      data['email'],
                          google_uid: access_token.uid,
                          password:   Devise.friendly_token[0, 20]
-                        )
+      )
     end
     user
   end

@@ -41,7 +41,7 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
     env = {
       "omniauth.auth" => Hashie::Mash.new(
         credentials: {
-          provider:    'google_oauth2'
+          provider: 'google_oauth2'
         },
         info:        { email: "#{login}@example.com", name: "John Smith" },
         uid:         login
