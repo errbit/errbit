@@ -30,6 +30,9 @@ describe ErrorReport do
     )
   end
 
+  let(:problem) { Fabricate(:problem, app: app, environment: "production") }
+  let(:err) { Fabricate(:err, problem: problem) }
+
   describe "#app" do
     it 'find the good app' do
       expect(error_report.app).to eq app
@@ -234,6 +237,30 @@ describe ErrorReport do
       expect(email.subject).to include(notice.message.truncate(50))
       expect(email.subject).to include("[#{app.name}]")
       expect(email.subject).to include("[#{notice.environment_name}]")
+    end
+
+    context 'when problem is snoozed' do
+      it 'dosent send email' do
+        allow(error_report).to receive(:email_notification)
+        allow(error_report).to receive(:error).and_return(err)
+        
+        err.problem.snoozed = true
+        error_report.generate_notice!
+
+        expect(error_report).not_to have_received(:email_notification)
+      end 
+    end
+
+    context 'when problem is unsnoozed' do
+      it 'send email' do
+        allow(error_report).to receive(:email_notification)
+        allow(error_report).to receive(:error).and_return(err)
+        
+        err.problem.snoozed = false
+        error_report.generate_notice!
+
+        expect(error_report).to have_received(:email_notification)
+      end 
     end
 
     context 'when email_at_notices config is specified', type: :mailer do

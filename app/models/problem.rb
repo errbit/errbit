@@ -16,6 +16,7 @@ class Problem
   field :first_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
   field :resolved, type: Boolean, default: false
   field :resolved_at, type: Time
+  field :snoozed, type: Boolean, default: false
   field :issue_link, type: String
   field :issue_type, type: String
 
@@ -177,6 +178,14 @@ class Problem
 
   def unresolve!
     self.update_attributes!(resolved: false, resolved_at: nil)
+  end
+
+  def snooze!
+    self.update_attributes!(snoozed: true)
+  end
+
+  def unsnooze!
+    self.update_attributes!(snoozed: false)
   end
 
   def unresolved?

@@ -1,6 +1,6 @@
 describe ProblemsController, type: 'controller' do
   it_requires_authentication for:    {
-    index: :get, show: :get, resolve: :put, search: :get
+    index: :get, show: :get, resolve: :put, snooze: :put, search: :get
   },
                              params: { app_id: 'dummyid', id: 'dummyid' }
 
@@ -195,6 +195,19 @@ describe ProblemsController, type: 'controller' do
       request.env["HTTP_REFERER"] = problems_path
       put :resolve, app_id: @err.app.id, id: @err.problem.id
       expect(response).to redirect_to(problems_path)
+    end
+  end
+
+  describe "PUT /apps/:app_id/problems/:id/snooze" do
+    before do
+      sign_in user
+
+      @err = Fabricate(:err)
+    end
+
+    it "should snooze the issue" do
+      put :snooze, app_id: @err.app.id, id: @err.problem.id
+      expect(@err.problem.reload.snoozed).to be(true)
     end
   end
 

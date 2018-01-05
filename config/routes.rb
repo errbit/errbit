@@ -42,6 +42,8 @@ Rails.application.routes.draw do
       member do
         put :resolve
         put :unresolve
+        put :snooze
+        put :unsnooze
         post :create_issue
         post :close_issue
         delete :unlink_issue
