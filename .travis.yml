@@ -3,6 +3,7 @@ language: ruby
 rvm:
   - 2.3
   - 2.4
+  - 2.5
 
 env:
   global:
@@ -17,6 +18,9 @@ env:
 sudo: false
 
 cache: bundler
+
+before_install:
+  - gem update --system
 
 before_script:
   - wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
@@ -34,3 +38,7 @@ before_script:
 script:
   - bundle exec rspec
   - bundle exec rubocop
+
+matrix:
+  allow_failures:
+    - rvm: 2.5
