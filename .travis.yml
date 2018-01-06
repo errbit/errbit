@@ -3,8 +3,6 @@ language: ruby
 rvm:
   - 2.3
   - 2.4
-  - ruby-head
-  - jruby-head
 
 env:
   global:
@@ -35,8 +33,3 @@ before_script:
 script:
   - bundle exec rspec
   - bundle exec rubocop
-
-matrix:
-  allow_failures:
-    - rvm: ruby-head
-    - rvm: jruby-head
