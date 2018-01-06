@@ -26,7 +26,7 @@ before_script:
     ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod
     --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
     --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log
-    --auth --fork
+    --fork
   - until nc -z localhost 27017; do echo "waiting for mongodb ${MONGODB}"; sleep 1; done
   - bundle exec rake errbit:bootstrap
 
