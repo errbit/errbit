@@ -15,12 +15,10 @@ sudo: false
 
 cache: bundler
 
-install:
+before_script:
   - wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
   - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
-
-before_script:
   - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
   - >
     ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod
