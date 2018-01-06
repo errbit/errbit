@@ -77,6 +77,7 @@ group :development do
 end
 
 group :test do
+  gem 'rake'
   gem 'rspec', '~> 3.5'
   gem 'rspec-rails', '~> 3.5', require: false
   gem 'rspec-activemodel-mocks'

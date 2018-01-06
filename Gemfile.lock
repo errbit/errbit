@@ -483,6 +483,7 @@ DEPENDENCIES
   rails_12factor
   rails_autolink
   railties (~> 4.2.9)
+  rake
   ri_cal
   rspec (~> 3.5)
   rspec-activemodel-mocks
