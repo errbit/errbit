@@ -7,7 +7,8 @@ rvm:
   - jruby-head
 
 env:
-  - COVERAGE=true JRUBY_OPTS=--debug
+  global:
+    - COVERAGE=true JRUBY_OPTS=--debug
   matrix:
     - MONGODB=2.6.10
     - MONGODB=3.6.1
