@@ -5,18 +5,22 @@ rvm:
   - 2.4
   - ruby-head
   - jruby-head
+
 env:
   - COVERAGE=true JRUBY_OPTS=--debug
 sudo: false
 cache: bundler
 services:
   - mongodb
+
 before_script:
   - until nc -z localhost 27017; do echo "waiting for mongodb"; sleep 1; done
   - bundle exec rake errbit:bootstrap
+
 script:
   - bundle exec rspec
   - bundle exec rubocop
+
 matrix:
   allow_failures:
     - rvm: ruby-head
