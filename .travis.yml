@@ -12,7 +12,7 @@ env:
     - MONGODB=3.0.15
     - MONGODB=3.2.18
     - MONGODB=3.4.10
-    - MONGODB=3.6.1
+    # TODO: - MONGODB=3.6.1 - needs a newer version of the mongoid gem, it seems
 
 sudo: false
 
