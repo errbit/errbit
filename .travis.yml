@@ -11,7 +11,7 @@ env:
   matrix:
     - MONGODB=3.2.18
     - MONGODB=3.4.10
-    # TODO: - MONGODB=3.6.1 - needs a newer version of the mongoid gem, it seems
+    - MONGODB=3.6.1
 
 sudo: false
 
@@ -40,3 +40,4 @@ script:
 matrix:
   allow_failures:
     - rvm: 2.5
+    - env: MONGODB=3.6.1
