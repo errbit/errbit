@@ -5,9 +5,9 @@
   - content_for :action_bar do
     %div.action-bar
       - if Errbit::Config.github_authentication
-        %span.github= link_to "Sign in with #{Errbit::Config.github_site_title}", user_omniauth_authorize_path(:github)
+        %span.github= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path
       - if Errbit::Config.google_authentication
-        %span.google= link_to "Sign in with #{Errbit::Config.google_site_title}", user_omniauth_authorize_path(:google_oauth2)
+        %span.google= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .required
