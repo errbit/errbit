@@ -18,8 +18,8 @@ RUN mkdir -p /app \
   && chmod 705 /app/
 WORKDIR /app
 
-RUN gem update --system \
-  && gem install bundler \
+RUN gem update --system 2.7.4 \
+  && gem install bundler --version 1.16.1 \
   && apk add --no-cache \
     curl \
     less \
