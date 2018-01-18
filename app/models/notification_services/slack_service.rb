@@ -66,7 +66,7 @@ class NotificationServices::SlackService < NotificationService
             {
               title: "Backtrace",
               value: backtrace_lines(problem),
-              short:false
+              short: false
             }
           ]
         }
@@ -88,21 +88,21 @@ class NotificationServices::SlackService < NotificationService
     service_url.present?
   end
 
-  private
+private
 
-    def backtrace_line(line)
-      path = line.decorated_path.gsub(%r{</?strong>}, '')
-      "#{path}#{line.file_name}:#{line.number} → #{line.method}\n"
-    end
+  def backtrace_line(line)
+    path = line.decorated_path.gsub(%r{</?strong>}, '')
+    "#{path}#{line.file_name}:#{line.number} → #{line.method}\n"
+  end
 
-    def backtrace_lines(problem)
-      notice = NoticeDecorator.new problem.notices.last
-      return unless notice
-      backtrace = notice.backtrace
-      return unless backtrace
+  def backtrace_lines(problem)
+    notice = NoticeDecorator.new problem.notices.last
+    return unless notice
+    backtrace = notice.backtrace
+    return unless backtrace
 
-      output = ''
-      backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
-      "```#{output}```"
-    end
+    output = ''
+    backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
+    "```#{output}```"
+  end
 end
