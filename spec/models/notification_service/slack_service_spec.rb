@@ -1,5 +1,15 @@
 describe NotificationServices::SlackService, type: 'model' do
-  let(:notice) { Fabricate :notice }
+  let(:backtrace) do
+    Fabricate :backtrace, lines: [
+      { number: 22, file: "/path/to/file/1.rb", method: 'first_method' },
+      { number: 44, file: "/path/to/file/2.rb", method: 'second_method' },
+      { number: 11, file: "/path/to/file/3.rb", method: 'third_method' },
+      { number: 103, file: "/path/to/file/4.rb", method: 'fourth_method' },
+      { number: 923, file: "/path/to/file/5.rb", method: 'fifth_method' },
+      { number: 8, file: "/path/to/file/6.rb", method: 'sixth_method' }
+    ]
+  end
+  let(:notice) { Fabricate :notice, backtrace: backtrace }
   let(:problem) { notice.problem }
   let(:service_url) do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
@@ -13,13 +23,12 @@ describe NotificationServices::SlackService, type: 'model' do
     "#general"
   end
   let(:backtrace_lines) do
-    backtrace = BacktraceDecorator.new problem.notices.last.backtrace
-    backtrace_lines = ''
-    backtrace.lines[0..4].each do |line|
-      path = line.decorated_path.gsub(%r{</?strong>}, '')
-      backtrace_lines << "#{path}#{line.number} → #{line.method}\n"
-    end
-    "```#{backtrace_lines}```"
+    lines = "/path/to/file/1.rb:22 → first_method\n" \
+            "/path/to/file/2.rb:44 → second_method\n" \
+            "/path/to/file/3.rb:11 → third_method\n" \
+            "/path/to/file/4.rb:103 → fourth_method\n" \
+            "/path/to/file/5.rb:923 → fifth_method\n"
+    "```#{lines}```"
   end
 
   # faraday stubbing

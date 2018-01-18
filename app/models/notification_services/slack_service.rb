@@ -92,7 +92,7 @@ class NotificationServices::SlackService < NotificationService
 
     def backtrace_line(line)
       path = line.decorated_path.gsub(%r{</?strong>}, '')
-      "#{path}#{line.number} → #{line.method}\n"
+      "#{path}#{line.file_name}:#{line.number} → #{line.method}\n"
     end
 
     def backtrace_lines(problem)
