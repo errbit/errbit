@@ -1,6 +1,6 @@
 describe OutdatedProblemClearer do
   before do
-    allow(Errbit::Config).to receive(:errbit_problem_destroy_after_days).and_return(7)
+    allow(Errbit::Config).to receive(:notice_deprecation_days).and_return(7)
   end
 
   let(:outdated_problem_clearer) do

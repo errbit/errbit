@@ -22,7 +22,7 @@ private
   end
 
   def criteria
-    @criteria ||= Problem.where(:last_notice_at.lt => Errbit::Config.errbit_problem_destroy_after_days.to_f.days.ago)
+    @criteria ||= Problem.where(:last_notice_at.lt => Errbit::Config.notice_deprecation_days.to_f.days.ago)
   end
 
   def repair_database
