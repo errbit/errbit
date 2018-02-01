@@ -48,6 +48,6 @@ RUN chown -R errbit:errbit /app
 
 USER errbit
 
-HEALTHCHECK CMD curl --fail "http://$(/sbin/ip route | /usr/bin/awk '/src/{print $NF}'):8080/users/sign_in" ||  exit 1
+HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):8080/users/sign_in" ||  exit 1
 
 CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
