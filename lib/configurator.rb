@@ -57,11 +57,9 @@ class Configurator
     @mapping.each do |key, values|
       @overrides[key] = values.pop if values.last.is_a? Proc
       env_name = values.find { |v| ENV[v] }
-      if env_name
-        @storage[key] = ENV[env_name].empty? ? '' : YAML.parse(ENV[env_name]).to_ruby
-      else
-        @storage[key] = nil
-      end
+      @storage[key] = if env_name
+                        ENV[env_name].empty? ? '' : YAML.parse(ENV[env_name]).to_ruby
+                      end
     end
   end
 
