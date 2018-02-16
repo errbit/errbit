@@ -58,6 +58,6 @@ describe Configurator do
   it 'parses empty variables' do
     allow(ENV).to receive(:[]).with('EMPTYVAR').and_return('')
     result = Configurator.run(emptyvar: ['EMPTYVAR'])
-    expect(result.emptyvar).to be('')
+    expect(result.emptyvar).to eq('')
   end
 end
