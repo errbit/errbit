@@ -54,4 +54,10 @@ describe Configurator do
     result = Configurator.run(mynumber: ['MYNUMBER'])
     expect(result.mynumber).to be(0)
   end
+
+  it 'parses empty variables' do
+    allow(ENV).to receive(:[]).with('EMPTYVAR').and_return('')
+    result = Configurator.run(emptyvar: ['EMPTYVAR'])
+    expect(result.emptyvar).to eq('')
+  end
 end
