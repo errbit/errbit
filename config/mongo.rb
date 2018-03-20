@@ -1,4 +1,4 @@
-log_level = Logger.const_get Errbit::Config.log_level.upcase
+log_level = Logger.const_get 'info'
 
 Mongoid.logger.level = log_level
 Mongo::Logger.level = log_level
