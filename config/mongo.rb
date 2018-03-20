@@ -1,4 +1,4 @@
-log_level = Logger.const_get 'info'
+log_level = Logger::INFO
 
 Mongoid.logger.level = log_level
 Mongo::Logger.level = log_level
