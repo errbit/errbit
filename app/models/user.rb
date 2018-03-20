@@ -47,6 +47,14 @@ class User
     validates :username, presence: true
   end
 
+  def ldap_before_save
+    name = Devise::LDAP::Adapter.get_ldap_param(self.username, "givenName")
+    surname = Devise::LDAP::Adapter.get_ldap_param(self.username, "sn")
+    mail = Devise::LDAP::Adapter.get_ldap_param(self.username, "mail")
+    self.name = (name + surname).join ' '
+    self.email = mail.first
+  end
+
   def self.valid_google_domain?(email)
     return true if Errbit::Config.google_authorized_domains.nil?
     match_data = /.+@(?<domain>.+)$/.match(email)

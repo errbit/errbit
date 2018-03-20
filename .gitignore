@@ -20,3 +20,4 @@ coverage
 *#
 .ruby-version
 NOTES
+.docker-development-vars

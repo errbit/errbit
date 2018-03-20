@@ -11,7 +11,7 @@ gem 'railties', RAILS_VERSION
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
 gem 'devise', '~> 4.4.0'
-gem 'dotenv-rails'
+  gem "devise_ldap_authenticatable"
 gem 'draper'
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
@@ -66,11 +66,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano',         require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails',   require: false
-  gem 'capistrano-rbenv',   require: false
-  gem 'capistrano3-puma',   require: false
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
   gem 'meta_request'
@@ -98,10 +93,10 @@ group :heroku, :production do
 end
 
 group :no_docker, :test, :development do
-  gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+  # gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
-gem 'puma'
+gem 'puma', '3.9.0'
 gem 'sass-rails'
 gem 'uglifier'
 # We can't upgrade because not compatible to jquery >= 1.9.

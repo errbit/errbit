@@ -1,0 +1,59 @@
+## Authorizations
+# Uncomment out the merging for each environment that you'd like to include.
+# You can also just copy and paste the tree (do not include the "authorizations") to each
+# environment if you need something different per environment.
+authorizations: &AUTHORIZATIONS
+  allow_unauthenticated_bind: false
+  group_base: ou=groups,dc=test,dc=com
+  ## Requires config.ldap_check_group_membership in devise.rb be true
+  # Can have multiple values, must match all to be authorized
+  required_groups:
+    # If only a group name is given, membership will be checked against "uniqueMember"
+    - cn=admins,ou=groups,dc=test,dc=com
+    - cn=users,ou=groups,dc=test,dc=com
+    # If an array is given, the first element will be the attribute to check against, the second the group name
+    - ["moreMembers", "cn=users,ou=groups,dc=test,dc=com"]
+  ## Requires config.ldap_check_attributes in devise.rb to be true
+  ## Can have multiple attributes and values, must match all to be authorized
+  require_attribute:
+    objectClass: inetOrgPerson
+    authorizationRole: postsAdmin
+  ## Requires config.ldap_check_attributes_presence in devise.rb to be true
+  ## Can have multiple attributes set to true or false to check presence, all must match all to be authorized
+  require_attribute_presence:
+    mail: true
+    telephoneNumber: false
+    serviceAccount: false
+
+## Environment
+
+development:
+  host: <%= ENV["AUTH_LDAP_SERVER_HOST"] %>
+  port: <%= ENV["AUTH_LDAP_SERVER_PORT"] %>
+  attribute: <%= ENV["AUTH_LDAP_USER_ATTRIBUTE"] %>
+  base: <%= ENV["AUTH_LDAP_USER_SEARCH"] %>
+  admin_user: <%= ENV["AUTH_LDAP_BIND_DN"] %>
+  admin_password: <%= ENV["AUTH_LDAP_BIND_PASSWORD"] %>
+  ssl: false
+  # <<: *AUTHORIZATIONS
+
+test:
+  host: localhost
+  port: 3389
+  attribute: cn
+  base: ou=people,dc=test,dc=com
+  admin_user: cn=admin,dc=test,dc=com
+  admin_password: admin_password
+  ssl: simple_tls
+  # <<: *AUTHORIZATIONS
+
+production:
+  host: <%= ENV["AUTH_LDAP_SERVER_HOST"] %>
+  port: <%= ENV["AUTH_LDAP_SERVER_PORT"] %>
+  attribute: <%= ENV["AUTH_LDAP_USER_ATTRIBUTE"] %>
+  base: <%= ENV["AUTH_LDAP_USER_SEARCH"] %>
+  admin_user: <%= ENV["AUTH_LDAP_BIND_DN"] %>
+  admin_password: <%= ENV["AUTH_LDAP_BIND_PASSWORD"] %>
+  ssl: false
+  # ssl: start_tls
+  # <<: *AUTHORIZATIONS

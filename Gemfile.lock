@@ -60,22 +60,6 @@ GEM
       columnize (= 0.9.0)
     callsite (0.0.11)
     campy (1.0.0)
-    capistrano (3.4.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (~> 1.3)
-    capistrano-bundler (1.1.4)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2)
-    capistrano-rails (1.1.3)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    capistrano-rbenv (2.0.3)
-      capistrano (~> 3.1)
-      sshkit (~> 1.3)
-    capistrano3-puma (1.2.1)
-      capistrano (~> 3.0)
-      puma (>= 2.6)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -104,14 +88,13 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_ldap_authenticatable (0.8.6)
+      devise (>= 3.4.1)
+      net-ldap (>= 0.16.0)
     diff-lcs (1.3)
     docile (1.1.5)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.0.2)
-    dotenv-rails (2.0.2)
-      dotenv (= 2.0.2)
-      railties (~> 4.0)
     draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -171,7 +154,6 @@ GEM
     launchy (2.4.3-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
-    libv8 (3.16.14.19)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
@@ -205,9 +187,7 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (4.2.0)
+    net-ldap (0.16.1)
     netrc (0.10.3)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -266,8 +246,8 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.8.2)
-    puma (3.8.2-java)
+    puma (3.9.0)
+    puma (3.9.0-java)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.8)
@@ -311,7 +291,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
     rake (12.0.0)
-    ref (2.0.0)
     request_store (1.1.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -385,16 +364,10 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.14.0)
-      net-scp (>= 1.1.2)
-      net-ssh (>= 2.8.0)
     sucker_punch (2.0.2)
       concurrent-ruby (~> 1.0.0)
     term-ansicolor (1.3.2)
       tins (~> 1.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.19.4)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
@@ -437,16 +410,11 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   campy
-  capistrano
-  capistrano-bundler
-  capistrano-rails
-  capistrano-rbenv
-  capistrano3-puma
   capybara
   coveralls
   decent_exposure
   devise (~> 4.4.0)
-  dotenv-rails
+  devise_ldap_authenticatable
   draper
   email_spec
   errbit_github_plugin
@@ -475,7 +443,7 @@ DEPENDENCIES
   poltergeist
   pry-byebug
   pry-rails
-  puma
+  puma (= 3.9.0)
   quiet_assets
   rack-ssl
   rack-ssl-enforcer
@@ -492,7 +460,6 @@ DEPENDENCIES
   rushover
   sass-rails
   sucker_punch
-  therubyracer
   timecop
   uglifier
   underscore-rails
