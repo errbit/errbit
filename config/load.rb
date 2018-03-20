@@ -34,7 +34,7 @@ mongo_url:                 %w(MONGODB_URI MONGOLAB_URI MONGOHQ_URL MONGODB_URL M
 # github_url:                ['GITHUB_URL', lambda do |values|
 #   values[:github_url].gsub(%r{/*\z}, '')
 # end],
-github_authentication:     [false],
+github_authentication:     ['GITHUB_AUTHENTICATION'],
 # github_client_id:          ['GITHUB_CLIENT_ID'],
 # github_secret:             ['GITHUB_SECRET'],
 # github_org_id:             ['GITHUB_ORG_ID'],
@@ -42,7 +42,7 @@ github_authentication:     [false],
 # github_api_url:            ['GITHUB_API_URL'],
 # github_site_title:         ['GITHUB_SITE_TITLE'],
 # google
-google_authentication:     [false],
+google_authentication:     ['GOOGLE_AUTHENTICATION'],
 # google_auto_provision:     ['GOOGLE_AUTO_PROVISION'],
 # google_site_title:         ['GOOGLE_SITE_TITLE'],
 # google_client_id:          ['GOOGLE_CLIENT_ID'],
