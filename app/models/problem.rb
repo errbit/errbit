@@ -232,7 +232,7 @@ class Problem
 
 private
 
-  def attribute_count_descrease(name, value)
+  def attribute_count_decrease(name, value)
     counter = send(name)
     index = attribute_index(value)
     if counter[index] && counter[index]['count'] > 1
