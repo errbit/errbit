@@ -7,7 +7,7 @@
         - if current_page?(:controller => 'problems')
           %th= link_for_sort t('.app')
         - else
-          %th= link_for_sort t('.env')
+          %th= link_for_sort t('.env'), 'environment'
         %th= link_for_sort t('.what_&_where').html_safe, "message"
         %th= link_for_sort t('.latest'), "last_notice_at"
         %th= link_for_sort t('.count')
