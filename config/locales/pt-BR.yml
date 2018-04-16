@@ -116,6 +116,7 @@ pt-BR:
       session: Sessão
       ago_by: atrás por
       ago_by_unkown_user: atrás por [Usuário Desconhecido]
+      first_notice: Primeiro notificação
       last_notice: Última notificação
       environment: Ambiente
       app: Aplicação
@@ -143,7 +144,7 @@ pt-BR:
       name: Nome
       email: E-mail
       entries: Registros por página
-      time_zone: Fuso horário 
+      time_zone: Fuso horário
       password: Senha
       password_confirmation: Confirmação de Senha
       admin: Adminstrador?
