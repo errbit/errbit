@@ -7,7 +7,7 @@
         %th= link_for_sort t('.app')
         %th= link_for_sort t('.what_&_where').html_safe, "message"
         %th= link_for_sort t('.latest'), "last_notice_at"
-        %th= link_for_sort t('.count')
+        %th.count-header= link_for_sort t('.count')
         - if any_issue_links
           %th Issue
         %th= t('.resolve')
