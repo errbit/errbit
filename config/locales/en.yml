@@ -86,6 +86,7 @@ en:
       show_resolved: "show resolved"
     table:
         app: App
+        env: Env
         what_&_where: 'Where & What'
         latest: Latest
         count: Count
@@ -113,7 +114,6 @@ en:
       summary: Summary
       backtrace: Backtrace
       user: User
-      environment: Environment
       parameters: Parameters
       session: Session
       ago_by: ago by
