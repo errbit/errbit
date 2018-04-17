@@ -4,7 +4,8 @@ class HealthController < ActionController::Base
     all_ok = check_results.all? do |check|
       check[:ok]
     end
-    render json: { ok: all_ok, details: check_results }, status: :ok
+    response_status = all_ok ? :ok : :error
+    render json: { ok: all_ok, details: check_results }, status: response_status
   end
 
   def liveness
@@ -14,8 +15,10 @@ class HealthController < ActionController::Base
 private
 
   def run_mongo_check
-    Timeout.timeout(3) do
-      Mongoid.default_client.database_names.present?
+    Timeout.timeout(0.75) do
+      # collections might be empty which is ok but it will raise an exception if
+      # database cannot be contacted
+      Mongoid.default_client.collections
     end
     { check_name: 'mongo', ok: true }
   rescue StandardError => e
