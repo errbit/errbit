@@ -29,7 +29,7 @@ describe "Health", type: 'request' do
   describe "api_key_tester" do
     it 'will let you know when the api_key is not valid' do
       get "/health/api-key-tester?api_key=garbagekey"
-      expect(response).to be_error
+      expect(response).to be_forbidden
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['ok']).to eq false
     end

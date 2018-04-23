@@ -15,7 +15,7 @@ class HealthController < ActionController::Base
   def api_key_tester
     app = App.where(api_key: params[:api_key]).first
     is_good_result = app ? true : false
-    response_status = is_good_result ? :ok : :error
+    response_status = is_good_result ? :ok : :forbidden
     render json: { ok: is_good_result }, status: response_status
   end
 
