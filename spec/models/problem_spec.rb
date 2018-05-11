@@ -215,6 +215,21 @@ describe Problem, type: 'model' do
     end
   end
 
+  context "with_app_exclusions" do
+    before do
+      @app1 = Fabricate(:app)
+      @problem1 = Fabricate(:problem, app: @app1)
+
+      @app2 = Fabricate(:app)
+      @problem2 = Fabricate(:problem, app: @app2)
+    end
+
+    it "#with_app_exclusions returns problems but excludes those attached to the specified apps" do
+      expect(Problem.with_app_exclusions(@app1.name)).to include(@problem2)
+      expect(Problem.with_app_exclusions(@app1.name)).to_not include(@problem1)
+    end
+  end
+
   context "#app_name" do
     let!(:app) { Fabricate(:app) }
     let!(:problem) { Fabricate(:problem, app: app) }

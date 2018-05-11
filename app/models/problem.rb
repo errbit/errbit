@@ -75,6 +75,15 @@ class Problem
     env.present? ? where(environment: env) : scoped
   end
 
+  def self.with_app_exclusions(exclude_apps)
+    app_names_to_exclude = exclude_apps&.split(',')
+    if app_names_to_exclude.is_a?(Array) && app_names_to_exclude.any?
+      where(:app_name.nin => app_names_to_exclude)
+    else
+      scoped
+    end
+  end
+
   def self.cache_notice(id, notice)
     # increment notice count
     message_digest = Digest::MD5.hexdigest(notice.message)
