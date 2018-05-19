@@ -12,10 +12,11 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
     allow(@controller).to receive(:env).and_return(env)
   end
 
-  def stub_client_for_github_omniauth
+  def stub_client_for_github_omniauth(emails = [])
     mock_gh_client = double
     expect(mock_gh_client).to receive(:organizations) { [OpenStruct.new(id: 42), OpenStruct.new(id: 43)] }
     expect(mock_gh_client).to receive(:api_endpoint=)
+    allow(mock_gh_client).to receive(:emails) { emails }
     expect(Octokit::Client).to receive(:new) { mock_gh_client }
   end
 
@@ -50,10 +51,10 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
       Errbit::Config.github_org_id = nil
     end
 
-    context 'User has an email defined and selected in GitHub profile' do
+    context 'User has valid emails defined' do
       it "should log in the user" do
-        stub_env_for_github_omniauth("new_user_with_proper_email", nil, "email@example.com")
-        stub_client_for_github_omniauth
+        stub_env_for_github_omniauth("new_user_with_no_profile_email", nil, nil)
+        stub_client_for_github_omniauth([OpenStruct.new(email: "user@example.com", primary: true)])
 
         get :github
 
@@ -62,14 +63,14 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
       end
     end
 
-    context 'User has no email defined and selected in GitHub profile' do
+    context 'User has no email defined' do
       it 'should return an error' do
-        stub_env_for_github_omniauth("new_user_with_no_email", nil, nil)
+        stub_env_for_github_omniauth("new_user_with_no_profile_email", nil, nil)
         stub_client_for_github_omniauth
 
         get :github
 
-        expect(request.flash[:error]).to include('You need to define and select a valid email in your Github profile')
+        expect(request.flash[:error]).to include("Could not retrieve user's email from GitHub")
         expect(response).to redirect_to(user_session_path)
       end
     end

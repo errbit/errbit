@@ -9,11 +9,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     org_ids = client.organizations.map(&:id)
     return nil unless org_ids.include?(Errbit::Config.github_org_id)
 
-    if env["omniauth.auth"].extra.raw_info.email.nil? || env["omniauth.auth"].extra.raw_info.email == ""
-      flash[:error] = "You need to define and select a valid email in your Github profile"
+    user_email = github_get_user_email(client)
+    if user_email.nil?
+      flash[:error] = "Could not retrieve user's email from GitHub"
       nil
     else
-      User.create(name: env["omniauth.auth"].extra.raw_info.name, email: env["omniauth.auth"].extra.raw_info.email)
+      User.create(name: env["omniauth.auth"].extra.raw_info.name, email: user_email)
     end
   end
 
@@ -88,10 +89,32 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  private def update_user_with_github_attributes(user, login, token)
+private
+
+  def update_user_with_github_attributes(user, login, token)
     user.update_attributes(
       github_login:       login,
       github_oauth_token: token
     )
+  end
+
+  def github_get_user_email(client)
+    email = nil
+    begin
+      email = client.emails.select(&:primary).first
+      return email.email unless email.nil?
+
+      email = client.emails.first
+      return email.email unless email.nil?
+    rescue Octokit::ClientError => e
+      Rails.logger.warn "Octokit:ClientError exception while retrieving user's emails. We probably lack user:email permission. Will try to extract email from user's public profile. Error message: #{e}"
+    end
+
+    # Try to get email from public profile
+    if !env["omniauth.auth"].extra.raw_info.email.nil? && env["omniauth.auth"].extra.raw_info.email != ""
+      return env["omniauth.auth"].extra.raw_info.email
+    end
+
+    nil
   end
 end
