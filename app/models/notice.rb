@@ -2,7 +2,8 @@ require 'recurse'
 
 class Notice
   UNAVAILABLE = 'N/A'
-  MESSAGE_LENGTH_LIMIT = 1000
+
+  MESSAGE_LENGTH_LIMIT = 964
 
   include Mongoid::Document
   include Mongoid::Timestamps
