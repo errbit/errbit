@@ -1,3 +1,3 @@
 module Errbit
-  VERSION = '0.7.0-dev'
+  VERSION = '0.7.0'
 end
