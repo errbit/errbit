@@ -72,6 +72,8 @@ en:
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
+    google_login:
+      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
         sign_in: "Sign in"
@@ -84,6 +86,7 @@ en:
       show_resolved: "show resolved"
     table:
         app: App
+        env: Env
         what_&_where: 'Where & What'
         latest: Latest
         count: Count
@@ -111,11 +114,11 @@ en:
       summary: Summary
       backtrace: Backtrace
       user: User
-      environment: Environment
       parameters: Parameters
       session: Session
       ago_by: ago by
       ago_by_unkown_user: ago by [Unkown User]
+      first_notice: First Notice
       last_notice: Last Notice
       environment: Environment
       app: App
@@ -143,7 +146,7 @@ en:
       name: Name
       email: Email
       entries: Entries per page
-      time_zone: Time Zone 
+      time_zone: Time Zone
       password: Password
       password_confirmation: Password Confirmation
       admin: Admin?
@@ -250,7 +253,7 @@ en:
       occurred: Occurred
       similar: Similar
       browser: Browser
-      tenant: Origem
+      tenant: Origin
       app_server: App Server
       app_version: App Version
       framework: Framework

@@ -1,25 +1,41 @@
 language: ruby
+
 rvm:
-  - 2.1
-  - 2.2.6
-  - 2.3.3
-  - 2.4.1
-  - ruby-head
-  - jruby-head
+  - 2.3
+  - 2.4
+  - 2.5
+
 env:
-  - COVERAGE=true JRUBY_OPTS=--debug
+  global:
+    - COVERAGE=true JRUBY_OPTS=--debug
+  matrix:
+    - MONGODB=3.2.18
+    - MONGODB=3.4.10
+
 sudo: false
+
 cache: bundler
+
+before_install:
+  - gem update --system
+
 before_script:
-  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.10.tgz -O /tmp/mongodb.tgz
-  - tar -xvf /tmp/mongodb.tgz
-  - mkdir /tmp/data
-  - ${PWD}/mongodb-linux-x86_64-2.6.10/bin/mongod --dbpath /tmp/data --bind_ip 127.0.0.1 --auth &> /dev/null &
+  - wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
+  - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
+  - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
+  - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
+  - >
+    ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod
+    --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
+    --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log
+    --fork
+  - until nc -z localhost 27017; do echo "waiting for mongodb ${MONGODB}"; sleep 1; done
   - bundle exec rake errbit:bootstrap
+
 script:
   - bundle exec rspec
   - bundle exec rubocop
+
 matrix:
   allow_failures:
-    - rvm: ruby-head
-    - rvm: jruby-head
+    - rvm: 2.5

@@ -16,7 +16,7 @@ module Errbit
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += [Rails.root.join('lib')]
+    config.autoload_paths << Rails.root.join('lib').to_s
 
     config.before_initialize do
       config.secret_key_base = Errbit::Config.secret_key_base

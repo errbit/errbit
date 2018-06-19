@@ -32,6 +32,24 @@ describe Api::V3::NoticesController, type: :controller do
     expect(response.status).to be(201)
   end
 
+  it 'responds with 201 created on success with token in Airbrake Token header' do
+    request.headers['X-Airbrake-Token'] = project_id
+    post :create, legit_body, project_id: 123
+    expect(response.status).to be(201)
+  end
+
+  it 'responds with 201 created on success with token in Authorization header' do
+    request.headers['Authorization'] = "Bearer #{project_id}"
+    post :create, legit_body, project_id: 123
+    expect(response.status).to be(201)
+  end
+
+  it 'responds with 422 when Authorization header is not valid' do
+    request.headers['Authorization'] = "incorrect"
+    post :create, legit_body, project_id: 123
+    expect(response.status).to be(422)
+  end
+
   it 'responds with 400 when request attributes are not valid' do
     allow_any_instance_of(AirbrakeApi::V3::NoticeParser).
       to receive(:report).and_raise(AirbrakeApi::ParamsError)

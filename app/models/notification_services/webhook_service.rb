@@ -15,7 +15,7 @@ class NotificationServices::WebhookService < NotificationService
 
   def message_for_webhook(problem)
     {
-      problem: { url: problem.url }.merge(problem.as_json).to_json
+      problem: { url: problem.url }.merge!(problem.as_json)
     }
   end
 
