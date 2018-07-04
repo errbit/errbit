@@ -11,6 +11,7 @@ env:
   matrix:
     - MONGODB=3.2.18
     - MONGODB=3.4.10
+    - MONGODB=3.6.2
 
 sudo: false
 
