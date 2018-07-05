@@ -63,7 +63,7 @@ describe NotificationServices::SlackService, type: 'model' do
             },
             {
               title: "First Noticed",
-              value: problem.first_notice_at.try(:to_s, :db),
+              value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
               short: true
             },
             {
