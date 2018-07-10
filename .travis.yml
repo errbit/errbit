@@ -13,7 +13,6 @@ env:
   matrix:
     - MONGODB=3.6.6
     - MONGODB=3.4.15
-    - MONGODB=3.2.20
     # not yet working:
     - MONGODB=4.0.0
 
