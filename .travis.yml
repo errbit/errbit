@@ -13,6 +13,7 @@ env:
     - MONGODB=3.2.20
     - MONGODB=3.4.15
     - MONGODB=3.6.6
+    - MONGODB=4.0.0
 
 sudo: false
 
@@ -41,3 +42,4 @@ script:
 matrix:
   allow_failures:
     - rvm: ruby-head
+    - env: MONGODB=4.0.0
