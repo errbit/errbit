@@ -4,6 +4,7 @@ rvm:
   - 2.3
   - 2.4
   - 2.5
+  - ruby-head
 
 env:
   global:
@@ -39,4 +40,4 @@ script:
 
 matrix:
   allow_failures:
-    - rvm: 2.5
+    - rvm: ruby-head
