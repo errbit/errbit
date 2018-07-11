@@ -46,9 +46,12 @@ Errbit::Config = Configurator.run(
   github_site_title:           ['GITHUB_SITE_TITLE'],
   # google
   google_authentication:       ['GOOGLE_AUTHENTICATION'],
+  google_auto_provision:       ['GOOGLE_AUTO_PROVISION'],
   google_site_title:           ['GOOGLE_SITE_TITLE'],
   google_client_id:            ['GOOGLE_CLIENT_ID'],
   google_secret:               ['GOOGLE_SECRET'],
+  google_redirect_uri:         ['GOOGLE_REDIRECT_URI'],
+  google_authorized_domains:   ['GOOGLE_AUTHORIZED_DOMAINS'],
   # saml
   saml_authentication:         ['SAML_AUTHENTICATION'],
   saml_site_title:             ['SAML_SITE_TITLE'],

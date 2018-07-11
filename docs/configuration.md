@@ -88,10 +88,17 @@ In order of precedence Errbit uses:
 <dt>GOOGLE_AUTHENTICATION
 <dd>Allow google sign-in via OAuth
 <dd>defaults to true
+<dt>GOOGLE_AUTO_PROVISION
+<dd>Allow automatic account creation after sign-in via OAuth
 <dt>GOOGLE_CLIENT_ID
 <dd>Client id of your google application
 <dt>GOOGLE_SECRET
 <dd>Secret key for your google application
+<dt>GOOGLE_REDIRECT_URI
+<dd>The redirect URI for your application (useful if you want to redirect using HTTPS)
+<dd>defaults to the HTTP location of ERRBIT_HOST
+<dt>GOOGLE_AUTHORIZED_DOMAINS
+<dd>A comma-delimited list of account domains that are permitted to sign-in (recommended to set when GOOGLE_AUTO_PROVISION is set to true)
 <dt>GOOGLE_SITE_TITLE</dt>
 <dd>The title to use for Google. This value is whatever you want displayed in the Errbit UI when referring to Google.</dd>
 <dd>defaults to Google</dd>

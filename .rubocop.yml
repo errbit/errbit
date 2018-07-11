@@ -1,21 +1,17 @@
----
 inherit_from: .rubocop_todo.yml
-
-AllCops:
-  RunRailsCops: true
 
 # Caveat: .find_by raises exception in mongoid, unlike ActiveRecord which
 # returns nil
 Rails/FindBy:
   Enabled: false
 
-Style/EmptyLineBetweenDefs:
+Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: true
 
-Style/ExtraSpacing:
+Layout/ExtraSpacing:
   AllowForAlignment: true
 
-Style/IndentationConsistency:
+Layout/IndentationConsistency:
   # `rails` style:
   # prescribes that in classes and modules the `protected` and `private`
   # modifier keywords shall be indented the same as public methods and that
@@ -26,33 +22,29 @@ Style/IndentationConsistency:
 Style/GuardClause:
   MinBodyLength: 4
 
-Style/AccessModifierIndentation:
+Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
 
-Style/AlignParameters:
+Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
-Style/DotPosition:
+Layout/DotPosition:
   # Support code copy/paste into console
   EnforcedStyle: trailing
 
-Style/MultilineOperationIndentation:
+Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 
-Style/IndentHash:
+Layout/IndentHash:
   EnforcedStyle: consistent
 
-Style/AlignHash:
+Layout/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
 
-Style/SpaceAroundOperators:
-  MultiSpaceAllowedForOperators:
-    - '='
-    - '=>'
-    - '||='
-    - 'then'
+Layout/SpaceAroundOperators:
+  AllowForAlignment: true
 
-Style/FileName:
+Naming/FileName:
   Exclude:
     - 'config/initializers/cve-*.rb'

@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
   end
 
   private def comment_params
-    params.require(:comment).permit!.merge(user_id: current_user.id)
+    # merge makes a copy, merge! edits in place
+    params.require(:comment).permit!.merge!(user_id: current_user.id)
   end
 end

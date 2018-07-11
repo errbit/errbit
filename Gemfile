@@ -10,7 +10,7 @@ gem 'railties', RAILS_VERSION
 
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
-gem 'devise', '~> 3.5.5'
+gem 'devise', '~> 4.4.0'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
@@ -19,7 +19,7 @@ gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
 gem 'kaminari', '>= 0.16.3'
-gem 'mongoid', '5.0.2'
+gem 'mongoid', '~> 5.4'
 gem 'mongoid_rails_migrations'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
@@ -79,6 +79,7 @@ group :development do
 end
 
 group :test do
+  gem 'rake'
   gem 'rspec', '~> 3.5'
   gem 'rspec-rails', '~> 3.5', require: false
   gem 'rspec-activemodel-mocks'

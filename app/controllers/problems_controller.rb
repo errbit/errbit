@@ -41,7 +41,8 @@ class ProblemsController < ApplicationController
   def show
     @notices = problem.object.notices.reverse_ordered.
       page(params[:notice]).per(1)
-    @notice  = NoticeDecorator.new @notices.first
+    first_notice = @notices.first
+    @notice  = first_notice ? NoticeDecorator.new(first_notice) : nil
     @comment = Comment.new
   end
 
@@ -102,7 +103,7 @@ class ProblemsController < ApplicationController
   end
 
   def unmerge_several
-    all = selected_problems.map(&:unmerge!).flatten
+    all = selected_problems.flat_map(&:unmerge!)
     flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} #{I18n.t('n_errs_have.been_unmerged')}."
     redirect_to :back
   end

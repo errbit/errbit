@@ -8,10 +8,10 @@ cd errbit
 
 ### Create replication controller
 ```bash
-kubectl create -f docs/deployment/example/kubernetes/rc.yaml
+kubectl create -f docs/deployment/example/kubernetes/rc.yml
 ```
 
 ### Create svc
 ```bash
-kubectl create -f docs/deployment/example/kubernetes/svc.yaml
+kubectl create -f docs/deployment/example/kubernetes/svc.yml
 ```

@@ -44,19 +44,17 @@ GEM
       builder
       multi_json
     arel (6.0.4)
-    ast (2.1.0)
-    astrolabe (1.3.1)
-      parser (~> 2.2)
-    bcrypt (3.1.10)
-    bcrypt (3.1.10-java)
+    ast (2.3.0)
+    bcrypt (3.1.11)
+    bcrypt (3.1.11-java)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (4.2.2)
-    bson (4.2.2-java)
+    bson (4.3.0)
+    bson (4.3.0-java)
     builder (3.2.3)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -100,12 +98,11 @@ GEM
     debug_inspector (0.0.2)
     decent_exposure (3.0.2)
       activesupport (>= 4.0)
-    devise (3.5.5)
+    devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.2)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.3)
     docile (1.1.5)
@@ -159,7 +156,8 @@ GEM
     httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    i18n (0.8.6)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -186,14 +184,14 @@ GEM
     method_source (0.8.2)
     mime-types (2.99.3)
     mimemagic (0.3.0)
-    mini_portile2 (2.2.0)
-    minitest (5.10.3)
-    mongo (2.4.3)
-      bson (>= 4.2.1, < 5.0.0)
-    mongoid (5.0.2)
+    mini_portile2 (2.3.0)
+    minitest (5.11.3)
+    mongo (2.6.0)
+      bson (>= 4.3.0, < 5.0.0)
+    mongoid (5.4.0)
       activemodel (~> 4.0)
-      mongo (~> 2.1)
-      origin (~> 2.1)
+      mongo (>= 2.5.1, < 3.0.0)
+      origin (~> 2.3)
       tzinfo (>= 0.3.37)
     mongoid-rspec (3.0.0)
       mongoid (~> 5.0)
@@ -212,9 +210,9 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     netrc (0.10.3)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
-    nokogiri (1.8.0-java)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.1-java)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -242,8 +240,9 @@ GEM
       ruby-saml (~> 1.1, >= 1.1.1)
     origin (2.3.1)
     orm_adapter (0.5.0)
-    parser (2.2.3.0)
-      ast (>= 1.1, < 3.0)
+    parallel (1.12.1)
+    parser (2.4.0.2)
+      ast (~> 2.3)
     phantomjs (2.1.1.0)
     pjax_rails (0.4.0)
       jquery-rails
@@ -314,12 +313,13 @@ GEM
       activesupport (= 4.2.9)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.0.0)
+    rainbow (3.0.0)
     rake (12.0.0)
     ref (2.0.0)
     request_store (1.1.0)
-    responders (2.1.1)
-      railties (>= 4.2.0, < 5.1)
+    responders (2.4.0)
+      actionpack (>= 4.2.0, < 5.3)
+      railties (>= 4.2.0, < 5.3)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -353,13 +353,14 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.34.2)
-      astrolabe (~> 1.3)
-      parser (>= 2.2.2.5, < 3.0)
+    rubocop (0.52.1)
+      parallel (~> 1.10)
+      parser (>= 2.4.0.2, < 3.0)
       powerpack (~> 0.1)
-      rainbow (>= 1.99.1, < 3.0)
-      ruby-progressbar (~> 1.4)
-    ruby-progressbar (1.7.5)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-progressbar (1.9.0)
     ruby-saml (1.5.0)
       nokogiri (>= 1.5.10)
     rushover (0.3.0)
@@ -406,7 +407,7 @@ GEM
     tilt (2.0.7)
     timecop (0.7.4)
     tins (1.6.0)
-    tzinfo (1.2.3)
+    tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
@@ -416,8 +417,9 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.7.1)
+    unicode-display_width (1.3.0)
     useragent (0.14.0)
-    warden (1.2.4)
+    warden (1.2.7)
       rack (>= 1.0)
     websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
@@ -427,7 +429,7 @@ GEM
     xmpp4r (0.5.6)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    yajl-ruby (1.3.0)
+    yajl-ruby (1.3.1)
 
 PLATFORMS
   java
@@ -449,7 +451,7 @@ DEPENDENCIES
   capybara
   coveralls
   decent_exposure
-  devise (~> 3.5.5)
+  devise (~> 4.4.0)
   dotenv-rails
   draper
   email_spec
@@ -469,7 +471,7 @@ DEPENDENCIES
   kaminari (>= 0.16.3)
   launchy
   meta_request
-  mongoid (= 5.0.2)
+  mongoid (~> 5.4)
   mongoid-rspec (~> 3.0.0)
   mongoid_rails_migrations
   omniauth-github
@@ -487,6 +489,7 @@ DEPENDENCIES
   rails_12factor
   rails_autolink
   railties (~> 4.2.9)
+  rake
   ri_cal
   rspec (~> 3.5)
   rspec-activemodel-mocks
@@ -505,4 +508,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.14.6
+   1.16.1

@@ -142,6 +142,16 @@ describe ProblemsController, type: 'controller' do
       expect(response).to be_success
     end
 
+    context "when rendering views" do
+      render_views
+
+      it "successfully renders the view even when there are no notices attached to the problem" do
+        expect(err.problem.notices).to be_empty
+        get :show, app_id: app.id, id: err.problem.id
+        expect(response).to be_success
+      end
+    end
+
     context 'pagination' do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|

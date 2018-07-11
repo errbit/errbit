@@ -1,5 +1,15 @@
 describe NotificationServices::SlackService, type: 'model' do
-  let(:notice) { Fabricate :notice }
+  let(:backtrace) do
+    Fabricate :backtrace, lines: [
+      { number: 22, file: "/path/to/file/1.rb", method: 'first_method' },
+      { number: 44, file: "/path/to/file/2.rb", method: 'second_method' },
+      { number: 11, file: "/path/to/file/3.rb", method: 'third_method' },
+      { number: 103, file: "/path/to/file/4.rb", method: 'fourth_method' },
+      { number: 923, file: "/path/to/file/5.rb", method: 'fifth_method' },
+      { number: 8, file: "/path/to/file/6.rb", method: 'sixth_method' }
+    ]
+  end
+  let(:notice) { Fabricate :notice, backtrace: backtrace }
   let(:problem) { notice.problem }
   let(:service_url) do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
@@ -11,6 +21,14 @@ describe NotificationServices::SlackService, type: 'model' do
   end
   let(:room_id) do
     "#general"
+  end
+  let(:backtrace_lines) do
+    lines = "/path/to/file/1.rb:22 → first_method\n" \
+            "/path/to/file/2.rb:44 → second_method\n" \
+            "/path/to/file/3.rb:11 → third_method\n" \
+            "/path/to/file/4.rb:103 → fourth_method\n" \
+            "/path/to/file/5.rb:923 → fifth_method\n"
+    "```#{lines}```"
   end
 
   # faraday stubbing
@@ -26,6 +44,7 @@ describe NotificationServices::SlackService, type: 'model' do
           title_link: problem.url,
           text:       problem.where,
           color:      "#D00000",
+          mrkdwn_in:  ["fields"],
           fields:     [
             {
               title: "Application",
@@ -44,8 +63,13 @@ describe NotificationServices::SlackService, type: 'model' do
             },
             {
               title: "First Noticed",
-              value: problem.first_notice_at.try(:to_s, :db),
+              value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
               short: true
+            },
+            {
+              title: "Backtrace",
+              value: backtrace_lines,
+              short: false
             }
           ]
         }

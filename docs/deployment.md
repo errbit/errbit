@@ -35,3 +35,13 @@ bundle exec puma -b "ssl://0.0.0.0:443?key=server.key&cert=server.crt" -C config
 ```
 Where `server.key` is a path to the TLS private key and `server.crt` is the path
 to the TLS certificate.
+
+## Health Checks
+
+If deploying with a system that can check if the app is running as expected then
+there are two endpoints that can be used:
+- `/health/readiness` - suitable for checking if app is ready to receive
+  requests. If response status is 200 and body contains `{ "ok": true,
+"details": [etc...] }` then the app is ready.
+- `/health/liveness` - suitable for pinging periodically to check if app is still
+  alive. Expected result is `{ "ok": true }`.

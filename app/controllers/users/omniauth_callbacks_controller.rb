@@ -52,7 +52,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if google_user && google_user != current_user
         flash[:error] = "User already registered with #{google_site_title} login '#{google_email}'!"
       else
-        # Add github details to current user
+        # Add google details to current user
         current_user.update(google_uid: google_uid)
         flash[:success] = "Successfully linked #{google_email} account!"
       end
@@ -61,6 +61,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif google_user
       flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: google_site_title
       sign_in_and_redirect google_user, event: :authentication
+    elsif Errbit::Config.google_auto_provision
+      if User.valid_google_domain?(google_email)
+        user = User.create_from_google_oauth2(request.env['omniauth.auth'])
+        if user.persisted?
+          flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
+          sign_in_and_redirect user, event: :authentication
+        else
+          session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
+          redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
+        end
+      else
+        flash[:error] = I18n.t "devise.google_login.domain_unauthorized"
+        redirect_to new_user_session_path
+      end
     else
       flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
       redirect_to new_user_session_path

@@ -7,7 +7,7 @@ module SortHelper
     url = request.path + "?sort=#{field}&order=#{order}"
     url += "&all_errs=true" if all_errs
     options = {}
-    options.merge!(class: "current #{order}") if current
+    options[:class] = "current #{order}" if current
     link_to(name, url, options)
   end
 end

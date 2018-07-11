@@ -3,7 +3,7 @@ module ProblemsSearcher
 
   included do
     expose(:params_sort) do
-      if %w(app message last_notice_at count).member?(params[:sort])
+      if %w(environment app message last_notice_at count).member?(params[:sort])
         params[:sort]
       else
         "last_notice_at"

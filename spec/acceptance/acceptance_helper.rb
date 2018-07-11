@@ -21,9 +21,9 @@ def mock_auth(user = "test_user", token = "abcdef")
   )
 
   OmniAuth.config.mock_auth[:google_oauth2] = Hashie::Mash.new(
-    provider: 'google',
+    provider: 'google_oauth2',
     uid:      user,
-    info:     { email: 'errbit@errbit.example.com' }
+    info:     { email: 'errbit@errbit.example.com', name: "Existing User" }
   )
 
   OmniAuth.config.mock_auth[:saml] = Hashie::Mash.new(
