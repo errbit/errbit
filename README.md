@@ -218,7 +218,7 @@ rake assets:precompile
 
 This will ensure that your application stays up to date with any schema changes.
 
-There are additional steps if you are [upgrading from a version prior to v0.4.0](doc/upgrading.md)
+There are additional steps if you are [upgrading from a version prior to v0.4.0](docs/upgrading.md).
 
 ## User information in error reports
 
