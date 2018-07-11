@@ -231,7 +231,7 @@ The Airbrake gem will look for ```current_user``` or ```current_member```. By de
 If user information is received with an error report,
 it will be displayed under the *User Details* tab:
 
-![User details tab](http://errbit.github.com/errbit/images/error_user_information.png)
+![User details tab](https://errbit.com/images/error_user_information.png)
 
 This tab will be hidden if no user information is available.
 
