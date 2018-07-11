@@ -11,9 +11,9 @@ env:
   global:
     - COVERAGE=true JRUBY_OPTS=--debug
   matrix:
+    - MONGODB=4.0.0
     - MONGODB=3.6.6
     - MONGODB=3.4.15
-    - MONGODB=4.0.0
 
 sudo: false
 
