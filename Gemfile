@@ -52,6 +52,8 @@ gem 'flowdock'
 gem 'omniauth-github'
 # Google OAuth
 gem 'omniauth-google-oauth2'
+# SAML
+gem 'omniauth-saml'
 
 gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'

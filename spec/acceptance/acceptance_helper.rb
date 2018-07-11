@@ -25,6 +25,11 @@ def mock_auth(user = "test_user", token = "abcdef")
     uid:      user,
     info:     { email: 'errbit@errbit.example.com', name: "Existing User" }
   )
+
+  OmniAuth.config.mock_auth[:saml] = Hashie::Mash.new(
+    provider: 'saml',
+    uid:      user
+  )
 end
 
 def log_in(user)
