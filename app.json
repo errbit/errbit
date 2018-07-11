@@ -34,7 +34,7 @@
         }
       },
       "scripts": {
-        "postdeploy": "rake errbit:bootstrap"
+        "postdeploy": "bundle exec rake errbit:bootstrap"
       }
     }
   },
