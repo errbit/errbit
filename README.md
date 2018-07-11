@@ -355,7 +355,7 @@ See the [contribution guidelines](CONTRIBUTING.md)
 Running tests
 -------------
 
-Check the .travis.yml file to see how tests are run
+Check the [.travis.yml](.travis.yml) file to see how tests are run
 
 Copyright
 ---------
