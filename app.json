@@ -32,6 +32,9 @@
           "description": "Set the demo admin password for ease of PR review",
           "value": "demo-admin"
         }
+      },
+      "scripts": {
+        "postdeploy": "rake errbit:bootstrap"
       }
     }
   },
