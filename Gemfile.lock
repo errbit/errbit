@@ -140,7 +140,7 @@ GEM
       activesupport (>= 4.2.0)
     haml (4.0.7)
       tilt
-    hashie (3.4.2)
+    hashie (3.5.7)
     hipchat (1.5.1)
       httparty
       mimemagic
@@ -221,9 +221,9 @@ GEM
       rack (~> 1.2)
     octokit (4.3.0)
       sawyer (~> 0.7.0, >= 0.5.3)
-    omniauth (1.2.2)
-      hashie (>= 1.2, < 4)
-      rack (~> 1.0)
+    omniauth (1.8.1)
+      hashie (>= 3.4.6, < 3.6.0)
+      rack (>= 1.6.2, < 3)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
@@ -271,7 +271,7 @@ GEM
     puma (3.8.2-java)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.6.8)
+    rack (1.6.10)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-ssl (1.4.1)
