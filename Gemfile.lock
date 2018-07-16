@@ -151,7 +151,7 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
-    htmlentities (4.3.3)
+    htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httparty (0.13.5)
