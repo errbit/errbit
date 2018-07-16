@@ -381,7 +381,7 @@ GEM
     slop (3.6.0)
     spoon (0.0.4)
       ffi
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
