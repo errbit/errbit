@@ -391,7 +391,7 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    sucker_punch (2.0.2)
+    sucker_punch (2.0.4)
       concurrent-ruby (~> 1.0.0)
     term-ansicolor (1.3.2)
       tins (~> 1.0)
