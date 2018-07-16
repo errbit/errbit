@@ -13,8 +13,7 @@ All code change contributions should be made through the following steps:
 1. Fork errbit/errbit on GitHub
 2. Create a branch with a descriptive name
 3. Make your changes
-4. If your change is non-trivial, add it to the CHANGELOG.md file
-5. Submit a pull request with a clear explanation of what you have
+4. Submit a pull request with a clear explanation of what you have
    changed and why
 
 For code changes:
@@ -27,8 +26,8 @@ For code changes:
 
 If you'd like to add a feature to Errbit, please start by opening an
 issue on GitHub with a description of what you'd like to add and why. If
-your feature requires a deeper level of discussion, join the #errbit IRC
-channel on freenode to talk it over with the other maintainers.
+your feature requires a deeper level of discussion, talk it over with
+the other maintainers.
 
 In general, new features should add value without detracting
 significantly from usability, security, performance, ease of deployment

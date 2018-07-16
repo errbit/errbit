@@ -64,8 +64,7 @@ Installation
 ------------
 
 *Note*: This app is intended for people with experience deploying and maintaining
-Rails applications. If you're uncomfortable with any steps below then Errbit is not
-for you.
+Rails applications.
 
 * [Install MongoDB](https://www.mongodb.org/downloads)
 * git clone https://github.com/errbit/errbit.git
@@ -301,6 +300,13 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
   * Save the settings by clicking **Update App** (or **Add App**)
   * You can now easily post bug reports to GitHub Issues by clicking the
     **Create Issue** button on a **Self.Errbit** error.
+
+Getting Help
+------------
+
+If you need help, try asking your question on StackOverflow using the
+tag errbit:
+https://stackoverflow.com/questions/tagged/errbit
 
 Use Errbit with applications written in other languages
 -------------------------------------------------------
