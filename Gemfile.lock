@@ -47,9 +47,9 @@ GEM
     ast (2.3.0)
     bcrypt (3.1.11)
     bcrypt (3.1.11-java)
-    better_errors (2.1.1)
+    better_errors (2.4.0)
       coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
+      erubi (>= 1.0.0)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -83,7 +83,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     cliver (0.3.2)
-    coderay (1.1.0)
+    coderay (1.1.2)
     columnize (0.9.0)
     concurrent-ruby (1.0.5)
     concurrent-ruby (1.0.5-java)
@@ -125,6 +125,7 @@ GEM
       errbit_plugin
       octokit
     errbit_plugin (0.6.0)
+    erubi (1.7.1)
     erubis (2.7.0)
     execjs (2.6.0)
     fabrication (2.13.2)
