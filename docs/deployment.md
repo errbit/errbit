@@ -1,6 +1,6 @@
 # Deployment Notes
 There are any number of ways to deploy Errbit, but official support is limited
-to heroku and docker.
+to Heroku.
 
 See specific notes on deployment via:
 - [heroku](deployment/heroku.md)
