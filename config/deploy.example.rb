@@ -7,7 +7,7 @@
 # to ./docs/deployment/capistrano.md for more info
 
 # config valid only for current version of Capistrano
-lock '3.4.1'
+lock '3.11.0'
 
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
