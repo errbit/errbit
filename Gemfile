@@ -104,9 +104,7 @@ end
 gem 'puma'
 gem 'sass-rails'
 gem 'uglifier'
-# We can't upgrade because not compatible to jquery >= 1.9.
-# To do that, we need fix the rails.js
-gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-rails'
 gem 'pjax_rails'
 gem 'underscore-rails'
 
