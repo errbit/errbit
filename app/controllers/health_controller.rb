@@ -27,7 +27,7 @@ private
     impatient_mongoid_client.collections
     { check_name: 'mongo', ok: true }
   rescue StandardError => e
-    { check_name: 'mongo', ok: false, error_details: "#{e.class}" }
+    { check_name: 'mongo', ok: false, error_details: e.class.to_s }
   end
 
   def impatient_mongoid_client
