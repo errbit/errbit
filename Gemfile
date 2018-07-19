@@ -25,6 +25,7 @@ gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
 gem 'rails_autolink'
 gem 'useragent'
+gem 'bootsnap', require: false # faster application boot
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
