@@ -1,6 +1,6 @@
 feed.updated(problems.first.try(:created_at) || Time.now)
 
-for problem in problems
+problems.each do |problem|
   notice = problem.notices.first
 
   feed.entry(problem, :url => app_problem_url(problem.app.to_param, problem.to_param)) do |entry|
