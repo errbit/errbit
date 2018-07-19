@@ -14,26 +14,6 @@ Bundler/OrderedGems:
   Exclude:
     - 'Gemfile'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: outdent, indent
-Layout/AccessModifierIndentation:
-  Exclude:
-    - 'app/controllers/api/v1/stats_controller.rb'
-    - 'app/controllers/apps_controller.rb'
-    - 'app/controllers/comments_controller.rb'
-    - 'app/controllers/problems_controller.rb'
-    - 'app/controllers/site_config_controller.rb'
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/decorators/issue_tracker_field_decorator.rb'
-    - 'app/helpers/apps_helper.rb'
-    - 'app/mailers/mailer.rb'
-    - 'app/models/backtrace.rb'
-    - 'app/models/notification_services/hipchat_service.rb'
-    - 'app/models/user.rb'
-    - 'lib/hoptoad.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Layout/ClosingParenthesisIndentation:
