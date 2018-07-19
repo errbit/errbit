@@ -23,7 +23,9 @@ class CommentsController < ApplicationController
     redirect_to app_problem_path(app, problem)
   end
 
-  private def comment_params
+private
+
+  def comment_params
     # merge makes a copy, merge! edits in place
     params.require(:comment).permit!.merge!(user_id: current_user.id)
   end
