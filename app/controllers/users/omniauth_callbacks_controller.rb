@@ -111,7 +111,7 @@ private
     end
 
     # Try to get email from public profile
-    if !env["omniauth.auth"].extra.raw_info.email.nil? && env["omniauth.auth"].extra.raw_info.email != ""
+    if env["omniauth.auth"].extra.raw_info.email.present?
       return env["omniauth.auth"].extra.raw_info.email
     end
 
