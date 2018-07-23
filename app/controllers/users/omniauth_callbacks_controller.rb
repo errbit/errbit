@@ -1,14 +1,10 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
-    github_user  = User.where(github_login: github_login).first
+    github_user = lookup_github_user
 
-    if github_user.nil? && (github_org_id = Errbit::Config.github_org_id)
-      # See if they are a member of the organization that we have access for
+    if github_user.blank? && github_org_id.present?
+      if member_of_supported_github_organization?
       # If they are, automatically create an account
-      client = Octokit::Client.new(access_token: github_token)
-      client.api_endpoint = Errbit::Config.github_api_url
-      org_ids = client.organizations.map(&:id)
-      if org_ids.include?(github_org_id)
         github_user = User.create(name: env["omniauth.auth"].extra.raw_info.name, email: env["omniauth.auth"].extra.raw_info.email)
       end
     end
@@ -77,6 +73,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
 private
+
+  def member_of_supported_github_organization?
+    client = Octokit::Client.new(access_token: github_token)
+    client.api_endpoint = Errbit::Config.github_api_url
+    client.organizations.map(&:id).include?(github_org_id)
+  end
+
+  def lookup_github_user
+    User.where(github_login: github_login).first
+  end
+
+  def github_org_id
+    Errbit::Config.github_org_id
+  end
 
   def github_login
     env["omniauth.auth"].extra.raw_info.login
