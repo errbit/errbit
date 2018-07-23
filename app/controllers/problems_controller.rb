@@ -46,6 +46,10 @@ class ProblemsController < ApplicationController
     @comment = Comment.new
   end
 
+  def xhr_sparkline
+    render partial: 'problems/sparkline', layout: false
+  end
+
   def close_issue
     issue = Issue.new(problem: problem, user: current_user)
     flash[:error] = issue.errors.full_messages.join(', ') unless issue.close

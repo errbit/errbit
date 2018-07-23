@@ -55,17 +55,17 @@ module ApplicationHelper
   end
 
   def sparkline(times, start_time, num_buckets = 10)
-    times = times.select {|time| time >= start_time }
+    times = times.select { |time| time >= start_time }
     buckets = bucketize(times, start_time, Time.now.to_i, num_buckets)
     bars = buckets.map do |val|
-      percent = (val * 100.0).round(2).to_s + "%";
+      percent = (val * 100.0).round(2).to_s + "%"
       "<i style='height:#{percent}'></i>"
-    end.join()
+    end.join
     "<div class='spark'>#{bars}</div>".html_safe
   end
 
   def bucketize(values, min, max, num_buckets)
-    get_min = lambda { |a,b| a > b ? b : a }
+    get_min = ->(a, b) { a > b ? b : a }
     range = max - min
     buckets = Array.new(num_buckets, 0)
     values.each do |val|
@@ -73,11 +73,11 @@ module ApplicationHelper
 
       # Use get_min() here because there will inevitably be one value == max
       # which means normalized = 1 and bucket[1 * num_buckets] doesn't exist
-      bucket_index = get_min.call((normalized * num_buckets).floor, num_buckets-1)
+      bucket_index = get_min.call((normalized * num_buckets).floor, num_buckets - 1)
       buckets[bucket_index] += 1
     end
     max = buckets.max.to_f
-    return buckets.map {|count| count / max}
+    buckets.map { |count| count / max }
   end
 
   def issue_tracker_types

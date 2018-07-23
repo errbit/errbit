@@ -214,8 +214,8 @@ class Problem
   # all notices sincethe since parameter
   def timestamps_since(since)
     notices.where(:created_at.gte => since).
-    pluck(:created_at).
-    map {|created_at| created_at.to_time.to_i }
+      pluck(:created_at).
+      map { |created_at| created_at.to_time.to_i }
   end
 
   def self.ordered_by(sort, order)
