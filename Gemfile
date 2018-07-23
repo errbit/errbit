@@ -19,7 +19,7 @@ gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
 gem 'kaminari', '>= 0.16.3'
-gem 'mongoid', '5.0.2'
+gem 'mongoid', '~> 5.4'
 gem 'mongoid_rails_migrations'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
@@ -104,9 +104,7 @@ end
 gem 'puma'
 gem 'sass-rails'
 gem 'uglifier'
-# We can't upgrade because not compatible to jquery >= 1.9.
-# To do that, we need fix the rails.js
-gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-rails'
 gem 'pjax_rails'
 gem 'underscore-rails'
 

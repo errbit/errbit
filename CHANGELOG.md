@@ -1,3 +1,6 @@
+## 0.7.0
+https://github.com/errbit/errbit/issues?q=milestone%3A0.7.0
+
 ## 0.6.1
 https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.6.1
 

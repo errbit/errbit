@@ -116,7 +116,9 @@ class User
     save(validate: false)
   end
 
-  private def generate_authentication_token
+private
+
+  def generate_authentication_token
     loop do
       token = Devise.friendly_token
       break token unless User.where(authentication_token: token).first

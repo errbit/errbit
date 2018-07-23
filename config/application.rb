@@ -15,8 +15,8 @@ module Errbit
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths << Rails.root.join('lib').to_s
+    # Custom directories with classes and modules you want to eager load.
+    config.eager_load_paths << Rails.root.join('lib').to_s
 
     config.before_initialize do
       config.secret_key_base = Errbit::Config.secret_key_base

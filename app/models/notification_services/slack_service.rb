@@ -70,7 +70,8 @@ private
       { title: "Environment", value: problem.environment, short: true },
       { title: "Times Occurred", value: problem.notices_count.try(:to_s),
         short: true },
-      { title: "First Noticed", value: problem.first_notice_at.try(:to_s, :db),
+      { title: "First Noticed",
+        value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
         short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]

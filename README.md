@@ -1,13 +1,11 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Dependency Status][gemnasium-img-url]][gemnasium-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
 [travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
-[coveralls-img-url]: https://coveralls.io/repos/errbit/errbit/badge.png?branch=master
-[coveralls-url]:https://coveralls.io/r/errbit/errbit
-[gemnasium-img-url]:https://gemnasium.com/errbit/errbit.png
-[gemnasium-url]:https://gemnasium.com/errbit/errbit
+[coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=master
+[coveralls-url]: https://coveralls.io/github/errbit/errbit?branch=master
 [heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master
 
 ### The open source, self-hosted error catcher
@@ -59,15 +57,14 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby 2.3.x-2.4.x (>= 2.5.x not yet supported)
-* MongoDB 3.2.x-3.4.x (>= 3.6.x not yet supported)
+* Ruby >= 2.3.x
+* MongoDB 3.4.x-4.0.x
 
 Installation
 ------------
 
 *Note*: This app is intended for people with experience deploying and maintaining
-Rails applications. If you're uncomfortable with any steps below then Errbit is not
-for you.
+Rails applications.
 
 * [Install MongoDB](https://www.mongodb.org/downloads)
 * git clone https://github.com/errbit/errbit.git
@@ -220,31 +217,7 @@ rake assets:precompile
 
 This will ensure that your application stays up to date with any schema changes.
 
-### Upgrading errbit beyond v0.4.0
-
-* You must have already run migrations at least up to v0.3.0. Check to
-  make sure you're schema version is at least 20131011155638 by running rake
-  db:version before you upgrade beyond v0.4.0
-* Notice fingerprinting has changed and is now easy to configure. But this
-  means you'll have to regenerate fingerprints on old notices in order to for
-  them to be properly grouped with new notices. To do this run: `rake
-  errbit:notice_refingerprint`. If you were using a custom fingerprinter class
-  in a previous version, be aware that it will no longer have any effect.
-  Fingerprinting is now configurable within the Errbit UI.
-* Prior to v0.4.0, users were only able to see apps they were watching.  All
-  users can now see all apps and they can watch or unwatch any app. If you were
-  using the watch feature to hide secret apps, you should not upgrade beyond
-  v0.4.0.
-
-### Upgrading errbit from v0.3.0 to v0.4.0
-
-* All configuration is now done through the environment. See
-  [configuration](docs/configuration.md)
-* Ruby 1.9 and 2.0 are no longer offically supported. Please upgrade to Ruby
-  2.1+
-* Errbit now maintains an issue tracker only for github. If you're using
-  another issue tracker integration, you may need to maintain it yourself. See
-  [Issue Trackers](#issue-trackers)
+There are additional steps if you are [upgrading from a version prior to v0.4.0](docs/upgrading.md).
 
 ## User information in error reports
 
@@ -257,7 +230,7 @@ The Airbrake gem will look for ```current_user``` or ```current_member```. By de
 If user information is received with an error report,
 it will be displayed under the *User Details* tab:
 
-![User details tab](http://errbit.github.com/errbit/images/error_user_information.png)
+![User details tab](https://errbit.com/images/error_user_information.png)
 
 This tab will be hidden if no user information is available.
 
@@ -328,6 +301,13 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
   * You can now easily post bug reports to GitHub Issues by clicking the
     **Create Issue** button on a **Self.Errbit** error.
 
+Getting Help
+------------
+
+If you need help, try asking your question on StackOverflow using the
+tag errbit:
+https://stackoverflow.com/questions/tagged/errbit
+
 Use Errbit with applications written in other languages
 -------------------------------------------------------
 
@@ -381,7 +361,7 @@ See the [contribution guidelines](CONTRIBUTING.md)
 Running tests
 -------------
 
-Check the .travis.yml file to see how tests are run
+Check the [.travis.yml](.travis.yml) file to see how tests are run
 
 Copyright
 ---------
