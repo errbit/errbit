@@ -1,7 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     github_login = env["omniauth.auth"].extra.raw_info.login
-    github_token = env["omniauth.auth"].credentials.token
     github_user  = User.where(github_login: github_login).first
 
     if github_user.nil? && (github_org_id = Errbit::Config.github_org_id)
@@ -79,6 +78,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
 private
+
+  def github_token
+    env["omniauth.auth"].credentials.token
+  end
 
   def github_site_title
     Errbit::Config.github_site_title
