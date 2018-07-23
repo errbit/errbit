@@ -76,7 +76,7 @@ class Problem
 
   def self.with_app_exclusions(exclude_apps)
     app_names_to_exclude = exclude_apps && exclude_apps.split(',')
-    if app_names_to_exclude.is_a?(Array) && app_names_to_exclude.any?
+    if app_names_to_exclude.present?
       where(:app_name.nin => app_names_to_exclude)
     else
       scoped
