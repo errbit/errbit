@@ -1,6 +1,7 @@
 require 'recurse'
 
 class Notice
+  UNAVAILABLE = 'N/A'
   MESSAGE_LENGTH_LIMIT = 1000
 
   include Mongoid::Document
@@ -47,7 +48,7 @@ class Notice
 
   def user_agent_string
     if user_agent.nil? || user_agent.none?
-      "N/A"
+      UNAVAILABLE
     else
       "#{user_agent.browser} #{user_agent.version} (#{user_agent.os})"
     end
@@ -83,9 +84,9 @@ class Notice
   def host
     uri = url && URI.parse(url)
     return uri.host if uri && uri.host.present?
-    "N/A"
+    UNAVAILABLE
   rescue URI::InvalidURIError
-    "N/A"
+    UNAVAILABLE
   end
 
   def env_vars
