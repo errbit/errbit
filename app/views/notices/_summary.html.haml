@@ -20,6 +20,13 @@
       %th= t('.similar')
       %td= problem.notices_count - 1
     %tr
+      - two_weeks = problem.timestamps_since(Time.now.to_i - 86400 * 14)
+      %th= t('.graph-2-weeks')
+      %td= sparkline(two_weeks, Time.now.to_i - 86400*14, 28)
+    %tr
+      %th= t('.graph (24 hours)')
+      %td= sparkline(two_weeks, Time.now.to_i - 86400, 24)
+    %tr
       %th= t('.browser')
       %td= user_agent_graph(problem)
     %tr
