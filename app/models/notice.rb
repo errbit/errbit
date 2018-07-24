@@ -82,7 +82,8 @@ class Notice
 
   def host
     uri = url && URI.parse(url)
-    uri && uri.host || "N/A"
+    return uri.host if uri && uri.host.present?
+    "N/A"
   rescue URI::InvalidURIError
     "N/A"
   end
