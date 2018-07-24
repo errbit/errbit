@@ -21,6 +21,7 @@ cache:
   bundler: true
   directories:
     - /home/travis/.rvm/
+    - /home/travis/mongodb-linux-x86_64-${MONGODB}/
 
 before_install:
   - gem update --system
@@ -29,11 +30,11 @@ before_script:
   - wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
   - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
-  - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
+  - mkdir /tmp/mongodb-data
   - >
     ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod
-    --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
-    --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log
+    --dbpath /tmp/mongodb-data
+    --logpath /tmp/mongodb.log
     --fork
   - until nc -z localhost 27017; do echo "waiting for mongodb ${MONGODB}"; sleep 1; done
   - bundle exec rake errbit:bootstrap
