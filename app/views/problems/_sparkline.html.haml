@@ -1,5 +1,4 @@
 = now_as_seconds_since_epoch = Time.current.to_i
-= now_as_seconds_since_epoch = 8.weeks.ago.to_i
 %tr
   - two_weeks = problem.timestamps_since(now_as_seconds_since_epoch - 86400 * 14)
   %th= t('.graph-2-weeks')
