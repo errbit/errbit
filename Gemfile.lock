@@ -261,7 +261,7 @@ GEM
       rack (>= 0.9.1)
     rack-ssl (1.4.1)
       rack
-    rack-ssl-enforcer (0.2.8)
+    rack-ssl-enforcer (0.2.9)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.10)
