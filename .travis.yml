@@ -20,7 +20,6 @@ sudo: false
 cache:
   bundler: true
   directories:
-    - /home/travis/.rvm/
     - /home/travis/.cache/rubocop_cache
     - /home/travis/mongodb-install
 
