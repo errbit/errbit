@@ -22,6 +22,7 @@ cache:
   directories:
     - /home/travis/.rvm/
     - /home/travis/mongodb-linux-x86_64-${MONGODB}.tgz
+    - /home/travis/.cache/rubocop_cache
 
 before_install:
   - gem update --system
