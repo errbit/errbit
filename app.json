@@ -23,20 +23,12 @@
           "generator": "secret"
         },
         "EMAIL_DELIVERY_METHOD": "smtp",
-        "SMTP_SERVER": "smtp.sendgrid.net",
-        "ERRBIT_ADMIN_EMAIL": {
-          "description": "Set the demo admin login for ease of PR review",
-          "value":"admin@example.com"
-        },
-        "ERRBIT_ADMIN_PASSWORD": {
-          "description": "Set the demo admin password for ease of PR review",
-          "value": "demo-admin"
-        }
-      },
-      "scripts": {
-        "postdeploy": "bundle exec rake errbit:bootstrap"
+        "SMTP_SERVER": "smtp.sendgrid.net"
       }
     }
+  },
+  "scripts": {
+    "postdeploy": "env ERRBIT_ADMIN_EMAIL=admin@example.com ERRBIT_ADMIN_PASSWORD=demo-admin bundle exec rake errbit:bootstrap errbit:demo"
   },
   "addons": [
     "mongolab:sandbox",
