@@ -104,7 +104,7 @@ See [apps](docs/apps.md)
 Authentication
 --------------
 ### Configuring GitHub authentication:
-* Set GITHUB_AUTHENTICATION=true
+* Set `GITHUB_AUTHENTICATION=true`
 * Register your instance of Errbit at https://github.com/settings/applications/new
 
 If you host Errbit at errbit.example.com, you would fill in:
@@ -116,7 +116,7 @@ If you host Errbit at errbit.example.com, you would fill in:
 <dd>http://errbit.example.com/users/auth/github/callback
 </dl>
 
-* After you have registered your app, set GITHUB_CLIENT_ID and GITHUB_SECRET
+* After you have registered your app, set `GITHUB_CLIENT_ID` and `GITHUB_SECRET`
   with your app's Client ID and Secret key.
 
 When you start your application, you should see the option to **Sign in with
@@ -141,7 +141,7 @@ few others that could make sense for your needs:
 <dd>No permissions at all, but allows errbit login through github</dd>
 </dl>
 
-* GITHUB_ORG_ID is an optional environment variable you can set to your own
+* `GITHUB_ORG_ID` is an optional environment variable you can set to your own
   github organization id. If set, only users of the specified GitHub
   organization can log in to Errbit through GitHub. Errbit will provision
   accounts for new users.
@@ -159,7 +159,7 @@ If you host Errbit at errbit.example.com, you would fill in:
 <dd>http://errbit.example.com/users/auth/google_oauth2/callback
 </dl>
 
-* After you have registered your app, set GOOGLE_CLIENT_ID and GOOGLE_SECRET
+* After you have registered your app, set `GOOGLE_CLIENT_ID` and `GOOGLE_SECRET`
   with your app's Client ID and Secret key.
 
 When you start your application, you should see the option to **Sign in with
@@ -168,10 +168,8 @@ to your user account on your **Edit profile** page.
 
 ### Configuring LDAP authentication:
 
-* Set ERRBIT_USER_HAS_USERNAME=true
-* Follow the instructions at
-  https://github.com/cschiewek/devise_ldap_authenticatable to set up the
-  devise_ldap_authenticatable gem.
+* Set `ERRBIT_USER_HAS_USERNAME=true`
+* Follow the [devise_ldap_authenticatable setup instructions](https://github.com/cschiewek/devise_ldap_authenticatable).
 * Set ```config.ldap_create_user = true``` in ```config/initializers/devise.rb```, this enables creating the users from LDAP, otherwhise login will not work.
 * Create a new initializer (e.g. ```config/initializers/devise_ldap.rb```) and add the following code to enable ldap authentication in the User-model:
 
