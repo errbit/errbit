@@ -21,15 +21,15 @@ cache:
   bundler: true
   directories:
     - /home/travis/.rvm/
-    - /home/travis/mongodb-linux-x86_64-${MONGODB}.tgz
     - /home/travis/.cache/rubocop_cache
+    - /home/travis/mongodb-install
 
 before_install:
   - gem update --system
 
 before_script:
-  - test -f mongodb-linux-x86_64-${MONGODB}.tgz || wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
-  - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
+  - test -f mongodb-install/mongodb-linux-x86_64-${MONGODB}.tgz || wget --directory-prefix=mongodb-install/ https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
+  - tar xzf mongodb-install/mongodb-linux-x86_64-${MONGODB}.tgz
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
   - mkdir /tmp/mongodb-data
   - >
