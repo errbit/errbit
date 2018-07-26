@@ -451,7 +451,7 @@ DEPENDENCIES
   launchy
   meta_request
   mongoid (~> 5.4)
-  mongoid-rspec (~> 3.0.0)
+  mongoid-rspec
   mongoid_rails_migrations
   omniauth-github
   omniauth-google-oauth2
@@ -469,10 +469,10 @@ DEPENDENCIES
   railties (~> 4.2.10)
   rake
   ri_cal
-  rspec (~> 3.5)
+  rspec
   rspec-activemodel-mocks
   rspec-its
-  rspec-rails (~> 3.5)
+  rspec-rails
   rubocop
   rushover
   sass-rails
