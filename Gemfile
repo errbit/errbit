@@ -73,11 +73,11 @@ end
 
 group :test do
   gem 'rake'
-  gem 'rspec', '~> 3.5'
-  gem 'rspec-rails', '~> 3.5', require: false
+  gem 'rspec'
+  gem 'rspec-rails', require: false
   gem 'rspec-activemodel-mocks'
   gem 'rspec-its'
-  gem 'mongoid-rspec', '~> 3.0.0', require: false
+  gem 'mongoid-rspec', require: false
   gem 'fabrication'
   gem 'capybara'
   gem 'poltergeist'
