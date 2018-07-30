@@ -28,10 +28,12 @@ private
     { check_name: 'mongo', ok: true }
   rescue StandardError => e
     { check_name: 'mongo', ok: false, error_details: e.class.to_s }
+  ensure
+    impatient_mongoid_client.close
   end
 
   def impatient_mongoid_client
-    Mongo::Client.new(
+    @impatient_mongoid_client ||= Mongo::Client.new(
       Errbit::Config.mongo_url,
       server_selection_timeout: 0.5,
       connect_timeout:          0.5,
