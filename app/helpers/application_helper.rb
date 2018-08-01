@@ -54,32 +54,6 @@ module ApplicationHelper
     collection.to_a[head_size..-1].to_a
   end
 
-  def sparkline(times, start_time, num_buckets = 10)
-    times = times.select { |time| time >= start_time }
-    buckets = bucketize(times, start_time, Time.now.to_i, num_buckets)
-    bars = buckets.map do |val|
-      percent = (val * 100.0).round(2).to_s + "%"
-      "<i style='height:#{percent}'></i>"
-    end.join
-    "<div class='spark'>#{bars}</div>".html_safe
-  end
-
-  def bucketize(values, min, max, num_buckets)
-    get_min = ->(a, b) { a > b ? b : a }
-    range = max - min
-    buckets = Array.new(num_buckets, 0)
-    values.each do |val|
-      normalized = (val - min) / range.to_f
-
-      # Use get_min() here because there will inevitably be one value == max
-      # which means normalized = 1 and bucket[1 * num_buckets] doesn't exist
-      bucket_index = get_min.call((normalized * num_buckets).floor, num_buckets - 1)
-      buckets[bucket_index] += 1
-    end
-    max = buckets.max.to_f
-    buckets.map { |count| count / max }
-  end
-
   def issue_tracker_types
     ErrbitPlugin::Registry.issue_trackers.map do |_, object|
       IssueTrackerTypeDecorator.new(object)

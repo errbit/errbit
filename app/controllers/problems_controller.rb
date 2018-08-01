@@ -1,3 +1,5 @@
+require 'sparklines'
+
 class ProblemsController < ApplicationController
   include ProblemsSearcher
 
