@@ -210,14 +210,6 @@ class Problem
     new_problems
   end
 
-  # Returns an array of unix epoc timestamps for the created_at field of
-  # all notices sincethe since parameter
-  def timestamps_since(since)
-    notices.where(:created_at.gte => since).
-      pluck(:created_at).
-      map { |created_at| created_at.to_time.to_i }
-  end
-
   def grouped_notice_counts(since, group_by = 'day')
     key_op = [['year', '$year'], ['day', '$dayOfYear'], ['hour', '$hour']]
     key_op = key_op.take(1 + key_op.find_index { |key, _op| group_by == key })
