@@ -10,6 +10,10 @@
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
     },
+    "HEROKU_APP_NAME": {
+      "description": "Have Heroku export the current app name for review apps, see https://devcenter.heroku.com/articles/github-integration-review-apps#heroku_app_name-and-heroku_parent_app_name",
+      "required": true
+    },
     "EMAIL_DELIVERY_METHOD": "smtp",
     "SMTP_SERVER": "smtp.sendgrid.net"
   },
@@ -21,6 +25,10 @@
         "SECRET_KEY_BASE": {
           "description": "A secret key for verifying the integrity of signed cookies.",
           "generator": "secret"
+        },
+        "HEROKU_APP_NAME": {
+          "description": "Have Heroku export the current app name for review apps, see https://devcenter.heroku.com/articles/github-integration-review-apps#heroku_app_name-and-heroku_parent_app_name",
+          "required": true
         },
         "EMAIL_DELIVERY_METHOD": "smtp",
         "SMTP_SERVER": "smtp.sendgrid.net"
