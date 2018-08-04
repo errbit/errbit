@@ -36,7 +36,7 @@
     }
   },
   "scripts": {
-    "postdeploy": "env ERRBIT_ADMIN_EMAIL=admin@example.com ERRBIT_ADMIN_PASSWORD=demo-admin bundle exec rake errbit:bootstrap errbit:demo"
+    "postdeploy": "bundle exec rake errbit:bootstrap errbit:demo"
   },
   "addons": [
     "mongolab:sandbox",
