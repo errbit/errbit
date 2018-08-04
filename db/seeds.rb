@@ -5,8 +5,14 @@ puts "-------------------------------"
 
 # Create an initial Admin User
 admin_username = ENV['ERRBIT_ADMIN_USER'] || "errbit"
-admin_email    = ENV['ERRBIT_ADMIN_EMAIL'] || "errbit@#{Errbit::Config.host}"
-admin_pass     = ENV['ERRBIT_ADMIN_PASSWORD'] || SecureRandom.urlsafe_base64(12)[0, 12]
+
+def admin_email
+  ENV['ERRBIT_ADMIN_EMAIL'] || "errbit@#{Errbit::Config.host}"
+end
+
+def admin_pass
+  @admin_pass ||= ENV['ERRBIT_ADMIN_PASSWORD'] || SecureRandom.urlsafe_base64(12)[0, 12]
+end
 
 puts "Creating an initial admin user:"
 puts "-- username: #{admin_username}" if Errbit::Config.user_has_username
