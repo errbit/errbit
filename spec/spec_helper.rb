@@ -21,7 +21,6 @@ end
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/its'
 require 'email_spec'
 require 'xmpp4r'
 require 'xmpp4r/muc'
