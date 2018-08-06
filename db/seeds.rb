@@ -29,6 +29,7 @@ puts "-- email:    #{admin_email}"
 puts "-- password: #{admin_pass}"
 puts ""
 puts "Be sure to note down these credentials now!"
+puts "\nNOTE: DEMO instance, not for production use!" if heroku_pr_review_app?
 
 user = User.find_or_initialize_by(email: admin_email)
 
