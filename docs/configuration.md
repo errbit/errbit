@@ -24,7 +24,7 @@ In order of precedence Errbit uses:
 <dd>defaults to false
 <dt>ERRBIT_ADMIN_EMAIL
 <dd>E-Mail address of initial admin user
-<dd>defaults to `errbit@example.com`
+<dd>defaults to `errbit@errbit.example.com`
 <dt>ERRBIT_ADMIN_PASSWORD
 <dd>Password of initial admin user
 <dd>defaults to some random string (see output of `$ rake db:seed`)
