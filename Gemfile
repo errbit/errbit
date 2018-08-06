@@ -18,7 +18,7 @@ gem 'errbit_github_plugin'
 gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
-gem 'kaminari', '>= 0.16.3'
+gem 'kaminari'
 gem 'mongoid', '~> 5.4'
 gem 'mongoid_rails_migrations'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL

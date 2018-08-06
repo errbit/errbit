@@ -444,7 +444,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   json
-  kaminari (>= 0.16.3)
+  kaminari
   launchy
   meta_request
   mongoid (~> 5.4)
