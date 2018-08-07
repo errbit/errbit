@@ -1,3 +1,5 @@
+require 'sparklines'
+
 class ProblemsController < ApplicationController
   include ProblemsSearcher
 
@@ -44,6 +46,10 @@ class ProblemsController < ApplicationController
     first_notice = @notices.first
     @notice  = first_notice ? NoticeDecorator.new(first_notice) : nil
     @comment = Comment.new
+  end
+
+  def xhr_sparkline
+    render partial: 'problems/sparkline', layout: false
   end
 
   def close_issue
