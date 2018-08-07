@@ -1,10 +1,11 @@
 - any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
+- on_page_that_can_include_multiple_different_apps = params[:controller] == 'problems'
 =form_tag do
   %table.errs.selectable
     %thead
       %tr
         %th= check_box_tag "toggle_problems_checkboxes"
-        - if current_page?(:controller => 'problems')
+        - if on_page_that_can_include_multiple_different_apps
           %th= link_for_sort t('.app')
         - else
           %th= link_for_sort t('.env'), 'environment'
@@ -22,7 +23,7 @@
               = check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s)
           %td.app
             %div.td-container
-              - if current_page?(:controller => 'problems')
+              - if on_page_that_can_include_multiple_different_apps
                 = link_to problem.app.name, app_path(problem.app), class: 'name nowrap', title: problem.app.name
                 %span.environment{class: 'nowrap', title: problem.environment}
                   = link_to problem.environment, problems_path(:environment => problem.environment)

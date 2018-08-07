@@ -153,11 +153,13 @@ Metrics/AbcSize:
 # ExcludedMethods: refine
 Metrics/BlockLength:
   Max: 418
+  Exclude:
+    - 'spec/**/*.rb'
 
 # Offense count: 4
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
-  Max: 168
+  Max: 204
 
 # Offense count: 6
 Metrics/CyclomaticComplexity:
@@ -465,6 +467,7 @@ Style/SafeNavigation:
     - 'app/models/comment.rb'
     - 'app/models/issue.rb'
     - 'app/models/notice.rb'
+    - 'app/models/problem.rb'
     - 'app/models/notification_services/gtalk_service.rb'
     - 'config/load.rb'
 
