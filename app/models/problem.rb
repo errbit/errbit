@@ -2,7 +2,6 @@
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.
 
-# rubocop:disable Metrics/ClassLength. At some point we need to break up this class, but I think it doesn't have to be right now.
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -73,6 +72,15 @@ class Problem
 
   def self.in_env(env)
     env.present? ? where(environment: env) : scoped
+  end
+
+  def self.with_app_exclusions(exclude_apps)
+    app_names_to_exclude = exclude_apps&.split(',')
+    if app_names_to_exclude.present?
+      where(:app_name.nin => app_names_to_exclude)
+    else
+      scoped
+    end
   end
 
   def self.cache_notice(id, notice)
@@ -293,4 +301,3 @@ private
     Digest::MD5.hexdigest(value.to_s)
   end
 end
-# rubocop:enable Metrics/ClassLength

@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 describe Problem, type: 'model' do
   context 'validations' do
     it 'requires an environment' do
@@ -269,6 +268,21 @@ describe Problem, type: 'model' do
       two_weeks_ago = 13.days.ago
       relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, 'day')
       expect(relative_percentages).to eq(([0] * 14))
+    end
+  end
+
+  context "with_app_exclusions" do
+    before do
+      @app1 = Fabricate(:app)
+      @problem1 = Fabricate(:problem, app: @app1)
+
+      @app2 = Fabricate(:app)
+      @problem2 = Fabricate(:problem, app: @app2)
+    end
+
+    it "#with_app_exclusions returns problems but excludes those attached to the specified apps" do
+      expect(Problem.with_app_exclusions(@app1.name)).to include(@problem2)
+      expect(Problem.with_app_exclusions(@app1.name)).to_not include(@problem1)
     end
   end
 
@@ -555,4 +569,3 @@ describe Problem, type: 'model' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
