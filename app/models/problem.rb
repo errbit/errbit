@@ -75,7 +75,7 @@ class Problem
   end
 
   def self.with_app_exclusions(exclude_apps)
-    app_names_to_exclude = exclude_apps&.split(',')
+    app_names_to_exclude = exclude_apps && exclude_apps.split(',')
     if app_names_to_exclude.present?
       where(:app_name.nin => app_names_to_exclude)
     else
@@ -242,9 +242,7 @@ class Problem
     buckets = group_by == 'day' ? 14 : 24
 
     ruby_time_method = group_by == 'day' ? :yday : :hour
-    # rubocop:disable Performance/TimesMap
     bucket_times = buckets.times.map { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
-    # rubocop:enable Performance/TimesMap
     bucket_times.to_a.map do |bucket_time|
       count = if (data_for_day = non_zero_filled.detect { |item| item.dig('_id', group_by) == bucket_time })
                 data_for_day['count']
