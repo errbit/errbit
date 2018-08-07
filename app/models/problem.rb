@@ -242,7 +242,7 @@ class Problem
     buckets = group_by == 'day' ? 14 : 24
 
     ruby_time_method = group_by == 'day' ? :yday : :hour
-    bucket_times = buckets.times.map { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
+    bucket_times = Array.new(buckets) { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
     bucket_times.to_a.map do |bucket_time|
       count = if (data_for_day = non_zero_filled.detect { |item| item.dig('_id', group_by) == bucket_time })
                 data_for_day['count']
