@@ -90,9 +90,12 @@ fingerprint for every notice. Notices with identical fingerprints appear in the
 UI as different occurences of the same error and notices with differing
 fingerprints are displayed as separate errors.
 
-Changing the fingerprinter (under the 'config' menu) applies to all apps and
+Changing the fingerprinter (under the "Config" menu) applies to all apps and
 the change affects only notices that arrive after the change. If you want to
 refingerprint old notices, you can run `rake errbit:notice_refingerprint`.
+
+Since version 0.7.0, the notice grouping can be separately configured for each
+app (under the "edit" menu).
 
 Managing apps
 ---------------------
