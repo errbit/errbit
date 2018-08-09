@@ -8,6 +8,8 @@ class NoticesController < ApplicationController
 
   def create
     # params[:data] if the notice came from a GET request, raw_post if it came via POST
+    pp "Notice params:"
+    pp notice_params
     report = ErrorReport.new(notice_params)
 
     if report.valid?
@@ -33,13 +35,13 @@ class NoticesController < ApplicationController
     redirect_to app_problem_path(problem.app, problem)
   end
 
-private
+  private
 
   def notice_params
     return @notice_params if @notice_params
     @notice_params = params[:data] || request.raw_post
     if @notice_params.blank?
-      fail ParamsError, 'Need a data params in GET or raw post data'
+      raise ParamsError, 'Need a data params in GET or raw post data'
     end
     @notice_params
   end
