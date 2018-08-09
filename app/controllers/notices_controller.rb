@@ -8,6 +8,8 @@ class NoticesController < ApplicationController
 
   def create
     # params[:data] if the notice came from a GET request, raw_post if it came via POST
+    pp "Notice params:"
+    pp notice_params
     report = ErrorReport.new(notice_params)
 
     if report.valid?

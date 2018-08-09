@@ -85,8 +85,14 @@ describe ErrorReport do
     describe "notice create" do
       before { error_report.generate_notice! }
       subject { error_report.notice }
-      its(:message) { 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.' }
-      its(:framework) { should == 'Rails: 3.2.11' }
+
+      it 'has correct message' do
+        expect(subject.message).to include('HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works')
+      end
+
+      it 'has correct framework' do
+        expect(subject.framework).to eq('Rails: 3.2.11')
+      end
 
       it 'has complete backtrace' do
         expect(subject.backtrace_lines.size).to eq 73

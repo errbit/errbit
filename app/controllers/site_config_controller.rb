@@ -12,7 +12,9 @@ class SiteConfigController < ApplicationController
     redirect_to action: :index
   end
 
-  private def filtered_update_params
+private
+
+  def filtered_update_params
     params.
       require(:site_config).
       require(:notice_fingerprinter_attributes).

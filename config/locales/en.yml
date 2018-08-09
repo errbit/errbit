@@ -254,6 +254,8 @@ en:
       similar: Similar
       browser: Browser
       tenant: Origin
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
       app_server: App Server
       app_version: App Version
       framework: Framework
