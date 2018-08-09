@@ -22,13 +22,22 @@ class HealthController < ActionController::Base
 private
 
   def run_mongo_check
-    Timeout.timeout(0.75) do
-      # collections might be empty which is ok but it will raise an exception if
-      # database cannot be contacted
-      Mongoid.default_client.collections
-    end
+    # collections might be empty which is ok but it will raise an exception if
+    # database cannot be contacted
+    impatient_mongoid_client.collections
     { check_name: 'mongo', ok: true }
   rescue StandardError => e
-    { check_name: 'mongo', ok: false, error_details: "#{e.class}: #{e.message}" }
+    { check_name: 'mongo', ok: false, error_details: e.class.to_s }
+  ensure
+    impatient_mongoid_client.close
+  end
+
+  def impatient_mongoid_client
+    @impatient_mongoid_client ||= Mongo::Client.new(
+      Errbit::Config.mongo_url,
+      server_selection_timeout: 0.5,
+      connect_timeout:          0.5,
+      socket_timeout:           0.5
+    )
   end
 end

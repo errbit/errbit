@@ -59,6 +59,6 @@ feature 'Sign in with Google with domain validation' do
     mock_auth('unknown_but_invalid_user')
 
     click_link 'Sign in with Google'
-    expect(page).to have_content "Sign in with GitHub Sign in with Google Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
+    expect(page).to have_text I18n.t('devise.google_login.domain_unauthorized')
   end
 end

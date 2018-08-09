@@ -173,6 +173,17 @@ describe ProblemsController, type: 'controller' do
     end
   end
 
+  describe "GET /apps/:app_id/problems/:id/xhr_sparkline" do
+    before do
+      sign_in user
+    end
+
+    it "renders without error" do
+      get :xhr_sparkline, app_id: app.id, id: err.problem.id
+      expect(response).to be_success
+    end
+  end
+
   describe "PUT /apps/:app_id/problems/:id/resolve" do
     before do
       sign_in user

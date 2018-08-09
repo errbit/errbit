@@ -8,7 +8,9 @@ describe "Health", type: 'request' do
     end
 
     it 'can indicate if a check fails' do
-      expect(Mongoid.default_client).to receive(:collections).and_raise(Mongo::Error::NoServerAvailable)
+      expect(Errbit::Config).to receive(:mongo_url) {
+        'mongodb://localhost:27000'
+      }
       get '/health/readiness'
       expect(response).to be_error
       parsed_response = JSON.parse(response.body)

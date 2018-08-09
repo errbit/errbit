@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 describe Problem, type: 'model' do
   context 'validations' do
     it 'requires an environment' do
@@ -212,6 +213,62 @@ describe Problem, type: 'model' do
         @err.notices.first.destroy
         @problem.reload
       end.to change(@problem, :notices_count).from(1).to(0)
+    end
+  end
+
+  context "sparklines-related methods" do
+    before do
+      @app = Fabricate(:app)
+      @problem = Fabricate(:problem, app: @app)
+      @err = Fabricate(:err, problem: @problem)
+    end
+
+    it "gets correct notice counts when grouping by day" do
+      now = Time.current
+      two_weeks_ago = 13.days.ago
+      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.days.ago)
+      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.days.ago)
+      three_days_ago_yday = (now - 3.days).yday
+      three_days_ago = @problem.grouped_notice_counts(two_weeks_ago, 'day').detect { |grouping| grouping['_id']['day'] == three_days_ago_yday }
+      expect(three_days_ago['count']).to eq(2)
+      count_by_day_for_last_two_weeks = @problem.zero_filled_grouped_noticed_counts(two_weeks_ago, 'day').map { |h| h.values.first }
+      expect(count_by_day_for_last_two_weeks.size).to eq(14)
+      expect(count_by_day_for_last_two_weeks).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1])
+    end
+
+    it "gets correct notice counts when grouping by hour" do
+      twenty_four_hours_ago = 23.hours.ago
+      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.hours.ago)
+      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.hours.ago)
+      count_by_hour_for_last_24_hours = @problem.zero_filled_grouped_noticed_counts(twenty_four_hours_ago, 'hour').map { |h| h.values.first }
+      expect(count_by_hour_for_last_24_hours.size).to eq(24)
+      expect(count_by_hour_for_last_24_hours).to eq(([0] * 20) + [2, 0, 0, 1])
+    end
+
+    it "gets correct relative percentages when grouping by hour" do
+      two_weeks_ago = 13.days.ago
+      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.days.ago)
+      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.days.ago)
+      relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, 'day')
+      expect(relative_percentages).to eq(([0] * 10) + [100, 0, 0, 50])
+    end
+
+    it "gets correct relative percentages when grouping by hour" do
+      twenty_four_hours_ago = 23.hours.ago
+      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.hours.ago)
+      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.hours.ago)
+      relative_percentages = @problem.grouped_notice_count_relative_percentages(twenty_four_hours_ago, 'hour')
+      expect(relative_percentages).to eq(([0] * 20) + [100, 0, 0, 50])
+    end
+
+    it "gets correct relative percentages when all zeros for data" do
+      two_weeks_ago = 13.days.ago
+      relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, 'day')
+      expect(relative_percentages).to eq(([0] * 14))
     end
   end
 
@@ -498,3 +555,4 @@ describe Problem, type: 'model' do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

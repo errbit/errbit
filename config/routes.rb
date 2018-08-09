@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       end
 
       member do
+        get :xhr_sparkline
         put :resolve
         put :unresolve
         post :create_issue
