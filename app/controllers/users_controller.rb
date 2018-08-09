@@ -8,7 +8,9 @@ class UsersController < ApplicationController
   end
 
   def index; end
+
   def new; end
+
   def show; end
 
   def create
@@ -54,7 +56,7 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   end
 
-protected
+  protected
 
   def require_user_edit_priviledges
     can_edit = current_user == user || current_user.admin?
