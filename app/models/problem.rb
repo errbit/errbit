@@ -273,10 +273,29 @@ class Problem
   def issue_type
     # Return issue_type if configured, but fall back to detecting app's issue tracker
     attributes['issue_type'] ||=
-    (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
+      (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
   end
 
-private
+  def branch
+    if environment == 'production'
+      branch = 'prod'
+    else
+      branch = 'master'
+    end
+  end
+
+  def whodunnit
+    whodunnits = []
+    backtrace = BacktraceDecorator.new(notices.first.backtrace)
+    relevant_backtrace_lines_to_line_numbers = backtrace.non_gem_numbers_to_relative_file_paths
+    relevant_backtrace_lines_to_line_numbers.each do |file_path, line_number|
+      whodunnits << Blamer.blame_line(app.repo_name, app.repo_owner, branch, file_path, line_number)
+    end
+    whodunnits = whodunnits.uniq
+    whodunnit = whodunnits.one? ? whodunnits.first : whodunnits
+  end
+
+  private
 
   def attribute_count_decrease(name, value)
     counter = send(name)
