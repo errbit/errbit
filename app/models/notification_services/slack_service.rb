@@ -12,6 +12,14 @@ class NotificationServices::SlackService < NotificationService
       hint:        'If empty Errbit will use the default channel for the webook'
     }]
   ]
+  GITHUB_TO_SLACK_HANDLES = {
+    'Ahmed Ossama' => 'Ahmed Ossama',
+    'Lara Aasem' => 'lara',
+    'MohamedBassem' => 'MohamedBassem',
+    'renad.shaaban' => 'Renad',
+    'Saher El-Neklawy' => 'saher.neklawy'
+  }
+  private_constant :GITHUB_TO_SLACK_HANDLES
 
   # Make room_id optional in case users want to use the default channel
   # setup on Slack when creating the webhook
@@ -26,7 +34,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def message_for_slack(problem)
-    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem.url}"
+    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem.url} #{authors_to_mention(problem).split("\n").join(', ')}"
   end
 
   def post_payload(problem)
@@ -73,8 +81,15 @@ private
       { title: "First Noticed",
         value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
         short: true },
+      { title: "Whodunnit", value: authors_to_mention(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
+  end
+
+  def authors_to_mention(problem)
+    output = ""
+    problem.whodunnit.each { |author| output += "@#{GITHUB_TO_SLACK_HANDLES[author]}\n" }
+    output
   end
 
   def backtrace_line(line)

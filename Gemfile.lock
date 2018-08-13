@@ -123,6 +123,10 @@ GEM
       railties (>= 3.2, < 5.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    graphql (1.8.7)
+    graphql-client (0.13.0)
+      activesupport (>= 3.0, < 6.0)
+      graphql (~> 1.6)
     haml (4.0.7)
       tilt
     hashie (3.5.7)
@@ -448,6 +452,7 @@ DEPENDENCIES
   fabrication
   flowdock
   font-awesome-rails
+  graphql-client
   haml
   hipchat
   hoi
