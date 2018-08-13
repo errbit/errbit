@@ -114,6 +114,14 @@ class App
     github_repo.present?
   end
 
+  def repo_name
+    github_repo.split('/').second if github_repo?
+  end
+
+  def repo_owner
+    github_repo.split('/').first if github_repo?
+  end
+
   def github_url
     "#{Errbit::Config.github_url}/#{github_repo}" if github_repo?
   end
