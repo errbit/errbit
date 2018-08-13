@@ -2,7 +2,7 @@ require 'graphql/client'
 require 'graphql/client/http'
 
 GITHUB_GRAPHQL_API_URL = Errbit::Config.github_api_url + '/graphql'
-GITHUB_ACCESS_TOKEN = Errbit::Config.github_access_token || '63e83c36ce1f2a58c0b7d938aae7fdd712ac302e'
+GITHUB_ACCESS_TOKEN = Errbit::Config.github_access_token
 
 HTTP = GraphQL::Client::HTTP.new(GITHUB_GRAPHQL_API_URL) do
   def headers(context)
