@@ -88,7 +88,7 @@ private
 
   def authors_to_mention(problem)
     output = ""
-    problem.whodunnit.each { |author| output += "@#{GITHUB_TO_SLACK_HANDLES[author]}\n" }
+    problem.whodunnit.each { |author| output += "<@#{GITHUB_TO_SLACK_HANDLES[author]}>\n" }
     output
   end
 
