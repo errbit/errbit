@@ -2,6 +2,7 @@
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.
 
+# rubocop:disable Metrics/ClassLength. At some point we need to break up this class, but I think it doesn't have to be right now.
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -74,9 +75,24 @@ class Problem
     env.present? ? where(environment: env) : scoped
   end
 
-  def self.with_app_exclusions(exclude_apps)
-    app_names_to_exclude = exclude_apps && exclude_apps.split(',')
-    if app_names_to_exclude.present?
+  def self.filtered(filter)
+    if filter
+      filter_components = filter.scan(/(-app):(['"][^'"]+['"]|[^ ]+)/)
+      app_names_to_exclude = filter_components.map do |filter_component_tuple|
+        filter_type, filter_value = filter_component_tuple
+
+        # get rid of quotes that we pulled in from the regex matcher above
+        filter_value.gsub!(/^['"]/, '')
+        filter_value.gsub!(/['"]$/, '')
+
+        # this is the only supported filter_type at this time
+        if filter_type == '-app'
+          filter_value
+        end
+      end
+    end
+
+    if filter && app_names_to_exclude.present?
       where(:app_name.nin => app_names_to_exclude)
     else
       scoped
@@ -299,3 +315,4 @@ private
     Digest::MD5.hexdigest(value.to_s)
   end
 end
+# rubocop:enable Metrics/ClassLength

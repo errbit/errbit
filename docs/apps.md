@@ -12,7 +12,7 @@ application versions. Be sure your notifier is setting the
 context.version field in its notifications (see
 [https://airbrake.io/docs/](https://airbrake.io/docs/)).
 
-## Excluding some apps when viewing problems
+## Excluding some apps when viewing problems (plus other awesome filtering in future)
 Normally when you visit the /problems page, you see the most recently
 received problems from all apps. Let's say you have a situation where
 you have three apps in the system: awesomeapp, noisy_app, and
@@ -20,6 +20,6 @@ another_noisy_app. Further, let's assume that 99% of the problems
 come from noisy_app and another_noisy_app, and that you don't care
 about these apps for whatever reason. In this case, you could surf
 to the problems page and exclude the noisy apps from view like this:
-/problems?exclude_apps=noisy_app,another_noisy_app
+/problems?filter=-app:noisy_app%20-app:another_noisy_app
 
 There is no UI for this feature, just the query param.
