@@ -80,7 +80,7 @@ class NotificationServices::SlackService < NotificationService
 
   def authors_to_mention(problem)
     output = ""
-    problem.whodunnit.each { |author| output += "<@#{Errbit::Config.github_to_slack_users[author]}>\n" }
+    problem.whodunnit.each { |author| output += "<@#{Errbit::Config.slack_user_id_map[author]}>\n" }
     output
   end
 
