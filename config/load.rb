@@ -39,6 +39,7 @@ Errbit::Config = Configurator.run(
   github_org_id:             ['GITHUB_ORG_ID'],
   github_access_scope:       ['GITHUB_ACCESS_SCOPE'],
   github_access_token:       ['GITHUB_ACCESS_TOKEN'],
+  github_to_slack_users:       ['GITHUB_TO_SLACK_USERS'],
   github_api_url:            ['GITHUB_API_URL'],
   github_site_title:         ['GITHUB_SITE_TITLE'],
   # google
