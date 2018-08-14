@@ -10,10 +10,10 @@ class BacktraceDecorator < Draper::Decorator
     end
   end
 
-  def non_gem_numbers_to_relative_file_paths
+  def in_app_numbers_to_relative_file_paths
     new_map = {}
     lines.each do |line|
-      new_map[line.file_relative] = line.number if line.not_in_gem?
+      new_map[line.file_relative] = line.number if line.in_app?
     end
     new_map
   end

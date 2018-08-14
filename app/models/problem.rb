@@ -277,7 +277,7 @@ class Problem
   end
 
   def branch
-    if environment == 'production'
+    if app.github_repo == 'BulkWhiz/Bulkwhiz' && environment == 'production'
       branch = 'prod'
     else
       branch = 'master'
@@ -287,11 +287,11 @@ class Problem
   def whodunnit
     whodunnits = []
     backtrace = BacktraceDecorator.new(notices.first.backtrace)
-    relevant_backtrace_lines_to_line_numbers = backtrace.non_gem_numbers_to_relative_file_paths
+    relevant_backtrace_lines_to_line_numbers = backtrace.in_app_numbers_to_relative_file_paths
     relevant_backtrace_lines_to_line_numbers.each do |file_path, line_number|
       whodunnits << Blamer.blame_line(app.repo_name, app.repo_owner, branch, file_path, line_number)
     end
-    whodunnits = whodunnits.uniq
+    whodunnits = whodunnits.uniq.reject!(&:blank?)
   end
 
   private

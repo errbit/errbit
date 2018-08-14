@@ -4,13 +4,13 @@ require 'graphql/client/http'
 GITHUB_GRAPHQL_API_URL = Errbit::Config.github_api_url + '/graphql'
 GITHUB_ACCESS_TOKEN = Errbit::Config.github_access_token
 
-HTTP = GraphQL::Client::HTTP.new(GITHUB_GRAPHQL_API_URL) do
+GraphQLHTTP = GraphQL::Client::HTTP.new(GITHUB_GRAPHQL_API_URL) do
   def headers(context)
     { "Authorization": "Bearer #{GITHUB_ACCESS_TOKEN}" }
   end
 end
-Schema = GraphQL::Client.load_schema(HTTP)
-Client = GraphQL::Client.new(schema: Schema, execute: HTTP)
+Schema = GraphQL::Client.load_schema(GraphQLHTTP)
+Client = GraphQL::Client.new(schema: Schema, execute: GraphQLHTTP)
 Query = Client.parse <<-'GRAPHQL'
       query($name: String!, $owner: String!, $qualifiedName: String!, $path: String!) {
         repository(name: $name, owner: $owner) {

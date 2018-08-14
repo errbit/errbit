@@ -78,9 +78,19 @@ class NotificationServices::SlackService < NotificationService
     ]
   end
 
+  def slack_user_id_map
+    HashWithIndifferentAccess.new(JSON.parse(Errbit::Config.slack_user_id_map))
+  end
+
   def authors_to_mention(problem)
     output = ""
-    problem.whodunnit.each { |author| output += "<@#{Errbit::Config.slack_user_id_map[author]}>\n" }
+    problem.whodunnit.each do |author|
+      if author == 'MohamedBassem'
+        output += "<@#{slack_user_id_map['Backend Group']}> (mohamedbassem legacy)>\n"
+      else
+        output += "<@#{slack_user_id_map[author]}>\n"
+      end
+    end
     output
   end
 

@@ -6,11 +6,6 @@ class BacktraceLineDecorator < Draper::Decorator
     file.match Backtrace::IN_APP_PATH
   end
 
-  def not_in_gem?
-    return false if file.blank?
-    !file.match Backtrace::GEMS_PATH
-  end
-
   def number
     object[:number]
   end
