@@ -12,14 +12,6 @@ class NotificationServices::SlackService < NotificationService
       hint:        'If empty Errbit will use the default channel for the webook'
     }]
   ]
-  GITHUB_TO_SLACK_USERS = {
-    'Ahmed Ossama' => 'U9P92U1AB',
-    'Lara Aasem' => 'U92CKFBBN',
-    'MohamedBassem' => 'U0AE3ACS0',
-    'renad.shaaban' => 'U6AVDGGCF',
-    'Saher El-Neklawy' => 'U04KSEPH6'
-  }
-  private_constant :GITHUB_TO_SLACK_HANDLES
 
   # Make room_id optional in case users want to use the default channel
   # setup on Slack when creating the webhook
@@ -88,7 +80,7 @@ class NotificationServices::SlackService < NotificationService
 
   def authors_to_mention(problem)
     output = ""
-    problem.whodunnit.each { |author| output += "<@#{GITHUB_TO_SLACK_HANDLES[author]}>\n" }
+    problem.whodunnit.each { |author| output += "<@#{Errbit::Config.github_to_slack_users[author]}>\n" }
     output
   end
 
