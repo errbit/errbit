@@ -291,7 +291,7 @@ class Problem
     relevant_backtrace_lines_to_line_numbers.each do |file_path, line_number|
       whodunnits << Blamer.blame_line(app.repo_name, app.repo_owner, branch, file_path, line_number)
     end
-    whodunnits = whodunnits.uniq.reject!(&:blank?)
+    whodunnits = whodunnits.uniq.reject(&:blank?)
   end
 
   private
