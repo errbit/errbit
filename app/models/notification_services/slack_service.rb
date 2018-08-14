@@ -12,12 +12,12 @@ class NotificationServices::SlackService < NotificationService
       hint:        'If empty Errbit will use the default channel for the webook'
     }]
   ]
-  GITHUB_TO_SLACK_HANDLES = {
-    'Ahmed Ossama' => 'Ahmed Ossama',
-    'Lara Aasem' => 'lara',
-    'MohamedBassem' => 'MohamedBassem',
-    'renad.shaaban' => 'Renad',
-    'Saher El-Neklawy' => 'saher.neklawy'
+  GITHUB_TO_SLACK_USERS = {
+    'Ahmed Ossama' => 'U9P92U1AB',
+    'Lara Aasem' => 'U92CKFBBN',
+    'MohamedBassem' => 'U0AE3ACS0',
+    'renad.shaaban' => 'U6AVDGGCF',
+    'Saher El-Neklawy' => 'U04KSEPH6'
   }
   private_constant :GITHUB_TO_SLACK_HANDLES
 
@@ -70,7 +70,7 @@ class NotificationServices::SlackService < NotificationService
     service_url.present?
   end
 
-private
+  private
 
   def post_payload_fields(problem)
     [
