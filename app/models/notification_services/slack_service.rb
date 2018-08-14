@@ -83,6 +83,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def authors_to_mention(problem)
+    return 'N/A' if problem.whodunnit.nil?
     output = ""
     problem.whodunnit.each do |author|
       if author == 'MohamedBassem'
