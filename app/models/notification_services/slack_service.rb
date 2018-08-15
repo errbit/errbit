@@ -85,10 +85,9 @@ class NotificationServices::SlackService < NotificationService
   def authors_to_mention(problem)
     output = ""
     problem.whodunnit.each do |author|
-      if author == 'MohamedBassem'
-        output += "<!subteam^#{slack_user_id_map['Backend Group']}|be> (mohamedbassem legacy)\n"
-      else
-        output += "<@#{slack_user_id_map[author]}>\n"
+      slack_user_id = slack_user_id_map[author]
+      next unless slack_user_id.present?
+      output += "<@#{slack_user_id}>\n"
       end
     end
     output
