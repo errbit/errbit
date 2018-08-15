@@ -86,7 +86,7 @@ class NotificationServices::SlackService < NotificationService
     output = ""
     problem.whodunnit.each do |author|
       if author == 'MohamedBassem'
-        output += "<@#{slack_user_id_map['Backend Group']}> (mohamedbassem legacy)>\n"
+        output += "<!subteam^#{slack_user_id_map['Backend Group']}|be> (mohamedbassem legacy)\n"
       else
         output += "<@#{slack_user_id_map[author]}>\n"
       end
