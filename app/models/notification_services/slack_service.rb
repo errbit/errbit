@@ -88,7 +88,6 @@ class NotificationServices::SlackService < NotificationService
       slack_user_id = slack_user_id_map[author]
       next unless slack_user_id.present?
       output += "<@#{slack_user_id}>\n"
-      end
     end
     output
   end
