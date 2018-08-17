@@ -108,14 +108,14 @@ describe AirbrakeApi::V3::NoticeParser do
   describe '#user_attributes' do
     it 'returns a user context hash' do
       user_hash = { id: 1, name: 'John Doe' }
-      parser = described_class.new({ 'context' => { 'user' => user_hash } })
+      parser = described_class.new('context' => { 'user' => user_hash })
       expect(parser.send(:user_attributes)).to eq(user_hash)
     end
 
     it 'returns a hash for a user context string' do
       user_string = '[Filtered]'
-      parser = described_class.new({ 'context' => { 'user' => user_string } })
-      expect(parser.send(:user_attributes)).to eq({ user: user_string })
+      parser = described_class.new('context' => { 'user' => user_string })
+      expect(parser.send(:user_attributes)).to eq(user: user_string)
     end
   end
 
