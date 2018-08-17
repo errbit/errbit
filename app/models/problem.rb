@@ -75,6 +75,30 @@ class Problem
     env.present? ? where(environment: env) : scoped
   end
 
+  def self.filtered(filter)
+    if filter
+      filter_components = filter.scan(/(-app):(['"][^'"]+['"]|[^ ]+)/)
+      app_names_to_exclude = filter_components.map do |filter_component_tuple|
+        filter_type, filter_value = filter_component_tuple
+
+        # get rid of quotes that we pulled in from the regex matcher above
+        filter_value.gsub!(/^['"]/, '')
+        filter_value.gsub!(/['"]$/, '')
+
+        # this is the only supported filter_type at this time
+        if filter_type == '-app'
+          filter_value
+        end
+      end
+    end
+
+    if filter && app_names_to_exclude.present?
+      where(:app_name.nin => app_names_to_exclude)
+    else
+      scoped
+    end
+  end
+
   def self.cache_notice(id, notice)
     # increment notice count
     message_digest = Digest::MD5.hexdigest(notice.message)
@@ -234,9 +258,7 @@ class Problem
     buckets = group_by == 'day' ? 14 : 24
 
     ruby_time_method = group_by == 'day' ? :yday : :hour
-    # rubocop:disable Performance/TimesMap
-    bucket_times = buckets.times.map { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
-    # rubocop:enable Performance/TimesMap
+    bucket_times = Array.new(buckets) { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
     bucket_times.to_a.map do |bucket_time|
       count = if (data_for_day = non_zero_filled.detect { |item| item.dig('_id', group_by) == bucket_time })
                 data_for_day['count']

@@ -23,14 +23,22 @@ class ProblemsController < ApplicationController
     params[:all_errs]
   end
 
+  expose(:filter) do
+    params[:filter]
+  end
+
   expose(:params_environement) do
     params[:environment]
   end
 
+  # to use with_app_exclusions, hit a path like /problems?filter=-app:noisy_app%20-app:another_noisy_app
+  # it would be possible to add a really fancy UI for it at some point, but for now, it's really
+  # useful if there are noisy apps that you want to ignore.
   expose(:problems) do
     finder = Problem.
       for_apps(app_scope).
       in_env(params_environement).
+      filtered(filter).
       all_else_unresolved(all_errs).
       ordered_by(params_sort, params_order)
 
