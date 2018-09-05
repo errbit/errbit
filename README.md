@@ -1,4 +1,4 @@
-# Errbit-custom
+# Errbit
 
 [travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
