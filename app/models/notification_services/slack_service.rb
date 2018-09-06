@@ -79,7 +79,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def slack_user_id_map
-    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map)
+    Errbit::Config.slack_user_id_map[app.name]
   end
 
   def authors_to_mention(problem)
