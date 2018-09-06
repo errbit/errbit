@@ -90,7 +90,7 @@ class NotificationServices::SlackService < NotificationService
     if problem.is_notification_not_exception?
       'warning'
     else
-      'danger'
+      'd00000'
     end
   end
 
