@@ -83,13 +83,14 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def authors_to_mention(problem)
-    output = ""
+    return 'N/A' if problem.whodunnit.nil?
+    whodunnit_lines = ""
     problem.whodunnit.each do |author|
       slack_user_id = slack_user_id_map[author]
       next unless slack_user_id.present?
-      output += "<@#{slack_user_id}>\n"
+      whodunnit_lines += "<@#{slack_user_id}>\n"
     end
-    output
+    whodunnit_lines
   end
 
   def backtrace_line(line)

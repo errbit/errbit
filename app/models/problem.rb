@@ -299,10 +299,15 @@ class Problem
   end
 
   def branch
-    app.env_to_branch_map[environment] || 'master'
+    app.env_to_branch_map.try(:[], environment) || 'master'
+  end
+
+  def is_notification_not_exception?
+    app.notification_error_class_names.include?(error_class)
   end
 
   def whodunnit
+    return nil if is_notification_not_exception?
     whodunnits = []
     backtrace = BacktraceDecorator.new(notices.first.backtrace)
     relevant_backtrace_lines_to_line_numbers = backtrace.in_app_numbers_to_relative_file_paths
