@@ -151,7 +151,7 @@ class App
   end
 
   def notification_error_class_names
-    HashWithIndifferentAccess.new(Errbit::Config.notification_error_class_names[name])
+    Errbit::Config.notification_error_class_names[name]
   end
 
   def notification_service_configured?
