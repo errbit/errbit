@@ -82,7 +82,7 @@ class NotificationServices::SlackService < NotificationService
     if problem.is_notification_not_exception?
       ':bell:'
     else
-      ':heavy_exclamation_mark:'
+      ':rotating_light:'
     end
   end
 
