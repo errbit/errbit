@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 describe Problem, type: 'model' do
   context 'validations' do
     it 'requires an environment' do
@@ -269,6 +268,45 @@ describe Problem, type: 'model' do
       two_weeks_ago = 13.days.ago
       relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, 'day')
       expect(relative_percentages).to eq(([0] * 14))
+    end
+  end
+
+  context "filtered" do
+    before do
+      @app1 = Fabricate(:app)
+      @problem1 = Fabricate(:problem, app: @app1)
+
+      @app2 = Fabricate(:app)
+      @problem2 = Fabricate(:problem, app: @app2)
+
+      @app3 = Fabricate(:app)
+      @app3.update_attribute(:name, 'app3')
+
+      @problem3 = Fabricate(:problem, app: @app3)
+    end
+
+    it "#filtered returns problems but excludes those attached to the specified apps" do
+      expect(Problem.filtered("-app:'#{@app1.name}'")).to include(@problem2)
+      expect(Problem.filtered("-app:'#{@app1.name}'")).to_not include(@problem1)
+
+      filtered_results_with_two_exclusions = Problem.filtered("-app:'#{@app1.name}' -app:app3")
+      expect(filtered_results_with_two_exclusions).to_not include(@problem1)
+      expect(filtered_results_with_two_exclusions).to include(@problem2)
+      expect(filtered_results_with_two_exclusions).to_not include(@problem3)
+    end
+
+    it "#filtered does not explode if given a nil filter" do
+      filtered_results = Problem.filtered(nil)
+      expect(filtered_results).to include(@problem1)
+      expect(filtered_results).to include(@problem2)
+      expect(filtered_results).to include(@problem3)
+    end
+
+    it "#filtered does nothing for unimplemented filter types" do
+      filtered_results = Problem.filtered("filterthatdoesnotexist:hotapp")
+      expect(filtered_results).to include(@problem1)
+      expect(filtered_results).to include(@problem2)
+      expect(filtered_results).to include(@problem3)
     end
   end
 
@@ -555,4 +593,3 @@ describe Problem, type: 'model' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

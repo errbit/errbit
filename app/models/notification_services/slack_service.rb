@@ -37,10 +37,10 @@ class NotificationServices::SlackService < NotificationService
       attachments: [
         {
           fallback:   message_for_slack(problem),
-          title:      problem.message.to_s.truncate(100),
+          title:      notification_or_exception_emoji(problem) + ' ' + problem.message.to_s.truncate(100),
           title_link: problem.url,
           text:       problem.where,
-          color:      "#D00000",
+          color:      notification_or_exception_color(problem),
           mrkdwn_in:  ["fields"],
           fields:     post_payload_fields(problem)
         }
@@ -78,18 +78,35 @@ class NotificationServices::SlackService < NotificationService
     ]
   end
 
+  def notification_or_exception_emoji(problem)
+    if problem.is_notification_not_exception?
+      ':bell:'
+    else
+      ':rotating_light:'
+    end
+  end
+
+  def notification_or_exception_color(problem)
+    if problem.is_notification_not_exception?
+      'warning'
+    else
+      'd00000'
+    end
+  end
+
   def slack_user_id_map
-    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map)
+    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map[app.name])
   end
 
   def authors_to_mention(problem)
-    output = ""
+    return 'N/A' if problem.whodunnit.nil?
+    whodunnit_lines = ""
     problem.whodunnit.each do |author|
       slack_user_id = slack_user_id_map[author]
       next unless slack_user_id.present?
-      output += "<@#{slack_user_id}>\n"
+      whodunnit_lines += "<@#{slack_user_id}>\n"
     end
-    output
+    whodunnit_lines
   end
 
   def backtrace_line(line)

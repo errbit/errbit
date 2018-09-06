@@ -110,6 +110,10 @@ class App
     repository_branch.present? ? repository_branch : 'master'
   end
 
+  def env_to_branch_map
+    HashWithIndifferentAccess.new(Errbit::Config.env_to_branch_map[name])
+  end
+
   def github_repo?
     github_repo.present?
   end
@@ -144,6 +148,10 @@ class App
 
   def issue_tracker_configured?
     issue_tracker.present? && issue_tracker.configured?
+  end
+
+  def notification_error_class_names
+    Errbit::Config.notification_error_class_names[name]
   end
 
   def notification_service_configured?
