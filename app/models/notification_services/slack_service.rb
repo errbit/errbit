@@ -37,10 +37,10 @@ class NotificationServices::SlackService < NotificationService
       attachments: [
         {
           fallback:   message_for_slack(problem),
-          title:      problem.message.to_s.truncate(100),
+          title:      notification_or_exception_emoji(problem) + ' ' + problem.message.to_s.truncate(100),
           title_link: problem.url,
           text:       problem.where,
-          color:      "#D00000",
+          color:      notification_or_exception_color(problem),
           mrkdwn_in:  ["fields"],
           fields:     post_payload_fields(problem)
         }
@@ -76,6 +76,22 @@ class NotificationServices::SlackService < NotificationService
       { title: "Whodunnit", value: authors_to_mention(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
+  end
+
+  def notification_or_exception_emoji(problem)
+    if problem.is_notification_not_exception?
+      ':bell:'
+    else
+      ':heavy_exclamation_mark:'
+    end
+  end
+
+  def notification_or_exception_color(problem)
+    if problem.is_notification_not_exception?
+      'warning'
+    else
+      'danger'
+    end
   end
 
   def slack_user_id_map
