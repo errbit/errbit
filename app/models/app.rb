@@ -150,6 +150,10 @@ class App
     issue_tracker.present? && issue_tracker.configured?
   end
 
+  def notification_error_class_names
+    HashWithIndifferentAccess.new(Errbit::Config.notification_error_class_names[name])
+  end
+
   def notification_service_configured?
     (notification_service.class < NotificationService) &&
       notification_service.configured?
