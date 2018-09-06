@@ -299,11 +299,7 @@ class Problem
   end
 
   def branch
-    if app.github_repo == 'BulkWhiz/Bulkwhiz' && environment == 'production'
-      branch = 'prod'
-    else
-      branch = 'master'
-    end
+    app.env_to_branch_map[environment] || 'master'
   end
 
   def whodunnit

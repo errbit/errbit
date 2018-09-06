@@ -110,6 +110,10 @@ class App
     repository_branch.present? ? repository_branch : 'master'
   end
 
+  def env_to_branch_map
+    HashWithIndifferentAccess.new(Errbit::Config.env_to_branch_map)
+  end
+
   def github_repo?
     github_repo.present?
   end
