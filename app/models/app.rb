@@ -111,7 +111,7 @@ class App
   end
 
   def env_to_branch_map
-    Errbit::Config.env_to_branch_map[name]
+    HashWithIndifferentAccess.new(Errbit::Config.env_to_branch_map[name])
   end
 
   def github_repo?
