@@ -302,12 +302,8 @@ class Problem
     app.env_to_branch_map[environment] || 'master'
   end
 
-  def cause
-    notices.last.params['cause']
-  end
-
   def cause_class
-    cause&.class
+    notices.last.params['cause_class']
   end
 
   def is_notification_not_exception?
