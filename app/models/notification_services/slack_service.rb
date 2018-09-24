@@ -73,7 +73,7 @@ class NotificationServices::SlackService < NotificationService
       { title: "First Noticed",
         value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
         short: true },
-      { title: "Whodunnit", value: authors_to_mention(problem), short: true },
+      { title: "Assigned To", value: authors_to_mention(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
   end
@@ -95,14 +95,14 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def authors_to_mention(problem)
-    return 'N/A' if problem.whodunnit.nil?
-    whodunnit_lines = ""
-    problem.whodunnit.each do |author|
-      slack_user_id = slack_user_id_map[author]
+    return 'N/A' if problem.assigned_to.nil?
+    assigned_to_lines = ""
+    problem.assigned_to.each do |assignee|
+      slack_user_id = problem.app.slack_user_id_map[assignee]
       next unless slack_user_id.present?
-      whodunnit_lines += "<@#{slack_user_id}>\n"
+      assigned_to_lines += "<@#{slack_user_id}>\n"
     end
-    whodunnit_lines
+    assigned_to_lines
   end
 
   def backtrace_line(line)

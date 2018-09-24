@@ -307,7 +307,6 @@ class Problem
   end
 
   def whodunnit
-    return nil if is_notification_not_exception?
     whodunnits = []
     backtrace = BacktraceDecorator.new(notices.first.backtrace)
     relevant_backtrace_lines_to_line_numbers = backtrace.in_app_numbers_to_relative_file_paths
@@ -315,6 +314,20 @@ class Problem
       whodunnits << Blamer.blame_line(app.repo_name, app.repo_owner, branch, file_path, line_number)
     end
     whodunnits = whodunnits.uniq.reject(&:blank?)
+  end
+
+  def force_assignment_array
+    app.error_to_user_force_assignment_map[error_class]
+  end
+
+  def force_assign?
+    force_assignment_array.present? && force_assignment_array.size > 0
+  end
+
+  def assigned_to
+    return nil if is_notification_not_exception?
+    return force_assignment_array if force_assign?
+    whodunnit
   end
 
   private
