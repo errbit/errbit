@@ -321,7 +321,7 @@ class Problem
   end
 
   def force_assignment_array
-    [app.error_to_user_force_assignment_map[error_class], app.error_to_user_force_assignment_map[cause_class]].flatten.uniq.reject(&:blank)
+    [app.error_to_user_force_assignment_map[error_class], app.error_to_user_force_assignment_map[cause_class]].flatten.uniq.reject(&:blank?)
   end
 
   def force_assign?
