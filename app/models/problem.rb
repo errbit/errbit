@@ -306,7 +306,7 @@ class Problem
     notices.last.params['cause_class']
   end
 
-  def is_notification_not_exception?
+  def notification_not_exception?
     !(app.notification_error_class_names & [error_class, cause_class]).empty?
   end
 
@@ -325,11 +325,11 @@ class Problem
   end
 
   def force_assign?
-    force_assignment_array.present? && force_assignment_array.size > 0
+    force_assignment_array.present? && !force_assignment_array.empty?
   end
 
   def assigned_to
-    return nil if is_notification_not_exception?
+    return nil if notification_not_exception?
     return force_assignment_array if force_assign?
     whodunnit
   end

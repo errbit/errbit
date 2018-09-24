@@ -79,7 +79,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def notification_or_exception_emoji(problem)
-    if problem.is_notification_not_exception?
+    if problem.notification_not_exception?
       ':bell:'
     else
       ':rotating_light:'
@@ -87,7 +87,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def notification_or_exception_color(problem)
-    if problem.is_notification_not_exception?
+    if problem.notification_not_exception?
       'warning'
     else
       'd00000'

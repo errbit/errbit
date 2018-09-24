@@ -39,7 +39,7 @@ GRAPHQL
 class Blamer
   def self.blame_line(repo_name, repo_owner, branch, file_path, line_number)
     whodunnit = ''
-    parsed_blame_hash = self.blame_file(repo_name, repo_owner, branch, file_path, { parse_result: true })
+    parsed_blame_hash = blame_file(repo_name, repo_owner, branch, file_path, parse_result: true)
     parsed_blame_hash.each do |range, author|
       range_array = range.split('-').map(&:to_i)
       if line_number.between?(range_array.first, range_array.second)
@@ -52,7 +52,7 @@ class Blamer
   def self.blame_file(repo_name, repo_owner, branch, file_path, options = {})
     result = Client.query Query, variables: { name: repo_name, owner: repo_owner, qualifiedName: branch, path: file_path }
     if options[:parse_result] == true
-      result = self.map_line_ranges_to_author(result)
+      result = map_line_ranges_to_author(result)
     end
     result
   end
