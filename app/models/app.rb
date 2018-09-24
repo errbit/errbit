@@ -111,7 +111,7 @@ class App
   end
 
   def env_to_branch_map
-    HashWithIndifferentAccess.new(Errbit::Config.env_to_branch_map[name])
+    HashWithIndifferentAccess.new(Errbit::Config.env_to_branch_map.try(:[], name))
   end
 
   def github_repo?
@@ -151,7 +151,7 @@ class App
   end
 
   def notification_error_class_names
-    Errbit::Config.notification_error_class_names[name]
+    Errbit::Config.notification_error_class_names.try(:[], name) || []
   end
 
   def notification_service_configured?
@@ -165,6 +165,14 @@ class App
     else
       watchers.map(&:address)
     end
+  end
+
+  def slack_user_id_map
+    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map.try(:[], name))
+  end
+
+  def error_to_user_force_assignment_map
+    HashWithIndifferentAccess.new(Errbit::Config.error_to_user_force_assignment_map.try(:[], name))
   end
 
   # Copy app attributes from another app.

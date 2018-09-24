@@ -299,22 +299,45 @@ class Problem
   end
 
   def branch
-    app.env_to_branch_map.try(:[], environment) || 'master'
+    app.env_to_branch_map[environment] || 'master'
   end
 
-  def is_notification_not_exception?
-    app.notification_error_class_names.include?(error_class)
+  def cause_class
+    notices.last.params['cause_class']
+  end
+
+  def notification_not_exception?
+    !(app.notification_error_class_names & [error_class, cause_class]).empty?
   end
 
   def whodunnit
-    return nil if is_notification_not_exception?
     whodunnits = []
-    backtrace = BacktraceDecorator.new(notices.first.backtrace)
+    backtrace = BacktraceDecorator.new(notices.last.backtrace)
     relevant_backtrace_lines_to_line_numbers = backtrace.in_app_numbers_to_relative_file_paths
     relevant_backtrace_lines_to_line_numbers.each do |file_path, line_number|
       whodunnits << Blamer.blame_line(app.repo_name, app.repo_owner, branch, file_path, line_number)
     end
     whodunnits = whodunnits.uniq.reject(&:blank?)
+  end
+
+  def force_assignment_array
+    [app.error_to_user_force_assignment_map[error_class], app.error_to_user_force_assignment_map[cause_class]].flatten.uniq.reject(&:blank?)
+  end
+
+  def force_assign?
+    force_assignment_array.present? && !force_assignment_array.empty?
+  end
+
+  def assigned_to
+    if notification_not_exception?
+      if force_assign?
+        force_assignment_array
+      else
+        nil
+      end
+    else
+      whodunnit
+    end
   end
 
   private
