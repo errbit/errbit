@@ -167,6 +167,10 @@ class App
     end
   end
 
+  def error_to_user_force_assignment_map
+    HashWithIndifferentAccess.new(Errbit::Config.error_to_user_force_assignment_map.try(:[], name))
+  end
+
   # Copy app attributes from another app.
   def copy_attributes_from(app_id)
     copy_app = App.where(_id: app_id).first

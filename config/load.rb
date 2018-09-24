@@ -42,6 +42,9 @@ Errbit::Config = Configurator.run(
   slack_user_id_map:       ['SLACK_USER_ID_MAP', lambda do |values|
     HashWithIndifferentAccess.new(values[:slack_user_id_map])
   end],
+  error_to_user_force_assignment_map:       ['ERROR_TO_USER_FORCE_ASSIGNMENT_MAP', lambda do |values|
+    HashWithIndifferentAccess.new(values[:error_to_user_force_assignment_map])
+  end],
   notification_error_class_names: ['NOTIFICATION_ERROR_CLASS_NAMES', lambda do |values|
     HashWithIndifferentAccess.new(values[:notification_error_class_names])
   end],
