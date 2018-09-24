@@ -94,10 +94,6 @@ class NotificationServices::SlackService < NotificationService
     end
   end
 
-  def slack_user_id_map
-    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map[app.name])
-  end
-
   def authors_to_mention(problem)
     return 'N/A' if problem.whodunnit.nil?
     whodunnit_lines = ""

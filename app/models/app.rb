@@ -167,6 +167,10 @@ class App
     end
   end
 
+  def slack_user_id_map
+    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map.try(:[], name))
+  end
+
   def error_to_user_force_assignment_map
     HashWithIndifferentAccess.new(Errbit::Config.error_to_user_force_assignment_map.try(:[], name))
   end
