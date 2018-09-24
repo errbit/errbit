@@ -299,7 +299,7 @@ class Problem
   end
 
   def branch
-    app.env_to_branch_map.try(:[], environment) || 'master'
+    app.env_to_branch_map[environment] || 'master'
   end
 
   def is_notification_not_exception?
