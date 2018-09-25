@@ -329,12 +329,9 @@ class Problem
   end
 
   def assigned_to
+    return force_assignment_array if force_assign?
     if notification_not_exception?
-      if force_assign?
-        force_assignment_array
-      else
-        nil
-      end
+      nil
     else
       whodunnit
     end
