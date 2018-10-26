@@ -33,7 +33,7 @@ private
   end
 
   def impatient_mongoid_client
-    @impatient_mongoid_client ||= Mongo::Client.new(
+    @@impatient_mongoid_client ||= Mongo::Client.new(
       Errbit::Config.mongo_url,
       server_selection_timeout: 0.5,
       connect_timeout:          0.5,
