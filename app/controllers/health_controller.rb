@@ -32,6 +32,7 @@ private
     impatient_mongoid_client.close
   end
 
+  # rubocop:disable Style/ClassVars
   def impatient_mongoid_client
     @@impatient_mongoid_client ||= Mongo::Client.new(
       Errbit::Config.mongo_url,
@@ -40,4 +41,5 @@ private
       socket_timeout:           0.5
     )
   end
+  # rubocop:enable Style/ClassVars
 end
