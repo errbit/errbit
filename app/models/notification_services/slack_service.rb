@@ -74,6 +74,7 @@ class NotificationServices::SlackService < NotificationService
         value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
         short: true },
       { title: "Assigned To", value: authors_to_mention(problem), short: true },
+      { title: "User", value: user_affected(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
   end
@@ -103,6 +104,13 @@ class NotificationServices::SlackService < NotificationService
       assigned_to_lines += "<@#{slack_user_id}>\n"
     end
     assigned_to_lines
+  end
+
+  def user_affected(problem)
+    notice = problem.notices.last
+    user_attributes = notice.user_attributes
+    return 'N/A' unless user_attributes['id'].present?
+    return "#{user_attributes['email']} (#{user_attributes['id']})"
   end
 
   def backtrace_line(line)
