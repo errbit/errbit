@@ -26,7 +26,10 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def message_for_slack(problem)
-    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem.url}"
+    recent = problem.notices.where(:created_at.gte => 5.minutes.ago).count
+    message = problem.message.gsub(/\s+/," ").truncate(100)
+    app = problem.app.name
+    "#{app} - total:#{problem.notices_count}  5min:#{recent}"
   end
 
   def post_payload(problem)
@@ -36,13 +39,10 @@ class NotificationServices::SlackService < NotificationService
       channel:     room_id,
       attachments: [
         {
-          fallback:   message_for_slack(problem),
           title:      problem.message.to_s.truncate(100),
           title_link: problem.url,
-          text:       problem.where,
+          text:       message_for_slack(problem),
           color:      "#D00000",
-          mrkdwn_in:  ["fields"],
-          fields:     post_payload_fields(problem)
         }
       ]
     }.compact.to_json # compact to remove empty channel in case it wasn't selected by user
