@@ -29,7 +29,13 @@ class NotificationServices::SlackService < NotificationService
     recent = problem.notices.where(:created_at.gte => 5.minutes.ago).count
     message = problem.message.gsub(/\s+/," ").truncate(100)
     app = problem.app.name
-    "#{app} - total:#{problem.notices_count}  5min:#{recent}"
+    "#{app} - total:#{problem.notices_count}  5min:#{recent} <#{problem.url}|#{encode(message)}>"
+  end
+
+  def encode(str)
+    str.gsub("&", "&amp;")
+    .gsub("<", "&lt;")
+    .gsub(">", "&gt;")
   end
 
   def post_payload(problem)
@@ -37,14 +43,7 @@ class NotificationServices::SlackService < NotificationService
       username:    "Errbit",
       icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
       channel:     room_id,
-      attachments: [
-        {
-          title:      problem.message.to_s.truncate(100),
-          title_link: problem.url,
-          text:       message_for_slack(problem),
-          color:      "#D00000",
-        }
-      ]
+      text:        message_for_slack(problem),
     }.compact.to_json # compact to remove empty channel in case it wasn't selected by user
   end
 
