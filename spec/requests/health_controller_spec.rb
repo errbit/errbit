@@ -3,8 +3,8 @@ describe "Health", type: 'request' do
 
   describe "readiness" do
     before do
-      HealthController.class_variables.each do |name|
-        HealthController.remove_class_variable name
+      if HealthController.instance_variable_defined? :@impatient_mongoid_client
+        HealthController.remove_instance_variable :@impatient_mongoid_client
       end
     end
 

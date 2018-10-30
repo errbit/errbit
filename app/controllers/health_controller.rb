@@ -19,7 +19,18 @@ class HealthController < ActionController::Base
     render json: { ok: is_good_result }, status: response_status
   end
 
+  def self.impatient_mongoid_client
+    @impatient_mongoid_client ||= Mongo::Client.new(
+      Errbit::Config.mongo_url,
+      server_selection_timeout: 0.5,
+      connect_timeout:          0.5,
+      socket_timeout:           0.5
+    )
+  end
+
 private
+
+  delegate :impatient_mongoid_client, to: :class
 
   def run_mongo_check
     # collections might be empty which is ok but it will raise an exception if
@@ -31,15 +42,4 @@ private
   ensure
     impatient_mongoid_client.close
   end
-
-  # rubocop:disable Style/ClassVars
-  def impatient_mongoid_client
-    @@impatient_mongoid_client ||= Mongo::Client.new(
-      Errbit::Config.mongo_url,
-      server_selection_timeout: 0.5,
-      connect_timeout:          0.5,
-      socket_timeout:           0.5
-    )
-  end
-  # rubocop:enable Style/ClassVars
 end
