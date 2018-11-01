@@ -116,7 +116,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     ffi (1.9.25-java)
-    flowdock (0.6.0)
+    flowdock (0.7.1)
       httparty (~> 0.7)
       multi_json
     font-awesome-rails (4.2.0.0)
