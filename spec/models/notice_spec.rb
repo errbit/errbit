@@ -50,7 +50,7 @@ describe Notice, type: 'model' do
       expect(notice.message.length).to eq Notice::MESSAGE_LENGTH_LIMIT
     end
 
-    let(:long_es_message) do
+    let(:long_mb_message) do
       'Elasticsearch::Transport::Transport::Errors::InternalServerError: ' \
       '[500] {"error":"SearchPhaseExecutionException[Failed to execute phase ' \
       '[query_fetch], all shards failed; shardFailures {[abc][test][0]: ' \
@@ -69,10 +69,10 @@ describe Notice, type: 'model' do
       'states.]; }]","status":500}'
     end
 
-    it 'truncates the long es message' do
-      notice = Fabricate(:notice, message: long_es_message)
-      expect(long_es_message.length).to be > Notice::MESSAGE_LENGTH_LIMIT
-      expect(notice.message.length).to eq Notice::MESSAGE_LENGTH_LIMIT
+    it 'truncates the long multibyte string message' do
+      notice = Fabricate(:notice, message: long_mb_message)
+      expect(long_mb_message.bytesize).to be > Notice::MESSAGE_LENGTH_LIMIT
+      expect(notice.message.bytesize).to eq Notice::MESSAGE_LENGTH_LIMIT
     end
   end
 
