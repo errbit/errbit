@@ -413,7 +413,7 @@ GEM
     unf (0.1.4-java)
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
-    useragent (0.14.0)
+    useragent (0.16.10)
     warden (1.2.7)
       rack (>= 1.0)
     websocket-driver (0.7.0)
