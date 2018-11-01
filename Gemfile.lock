@@ -400,7 +400,7 @@ GEM
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
     tilt (2.0.8)
-    timecop (0.7.4)
+    timecop (0.9.1)
     tins (1.16.3)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
