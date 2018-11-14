@@ -115,8 +115,7 @@ class NotificationServices::SlackService < NotificationService
     notice = problem.notices.last
     user_attributes = notice.user_attributes
     return 'N/A' unless user_attributes['id'].present?
-    order_id_string = user_attributes['order_id'].present? ? " [Order ID #{user_attributes['order_id']}]" : ''
-    return "#{user_attributes['email']} (#{user_attributes['id']})#{order_id_string}"
+    return "#{user_attributes['email']} (#{user_attributes['id']})"
   end
 
   def backtrace_line(line)
