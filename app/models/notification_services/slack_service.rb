@@ -101,7 +101,12 @@ class NotificationServices::SlackService < NotificationService
     problem.assigned_to.each do |assignee|
       slack_user_id = problem.app.slack_user_id_map[assignee]
       next unless slack_user_id.present?
-      assigned_to_lines += "<@#{slack_user_id}>\n"
+      new_assigned_to_line = if slack_user_id.start_with?("S")
+        "<!subteam^#{slack_user_id}|#{assignee}>\n"
+      else
+        "<@#{slack_user_id}>\n"
+      end
+      assigned_to_lines += new_assigned_to_line
     end
     assigned_to_lines
   end
@@ -110,7 +115,8 @@ class NotificationServices::SlackService < NotificationService
     notice = problem.notices.last
     user_attributes = notice.user_attributes
     return 'N/A' unless user_attributes['id'].present?
-    return "#{user_attributes['email']} (#{user_attributes['id']})"
+    order_id_string = user_attributes['order_id'].present? ? " [Order ID #{user_attributes['order_id']}]" : ''
+    return "#{user_attributes['email']} (#{user_attributes['id']})#{order_id_string}"
   end
 
   def backtrace_line(line)
