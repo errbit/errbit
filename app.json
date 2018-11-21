@@ -4,6 +4,7 @@
   "keywords": ["productivity", "tools", "error tracking"],
   "repository": "https://github.com/errbit/errbit",
   "env": {
+    "BUNDLE_WITHOUT": "development",
     "ERRBIT_ENFORCE_SSL": "true",
     "GEMFILE_RUBY_VERSION": "2.5.1",
     "SECRET_KEY_BASE": {
