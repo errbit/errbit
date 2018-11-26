@@ -75,6 +75,7 @@ class NotificationServices::SlackService < NotificationService
         short: true },
       { title: "Assigned To", value: authors_to_mention(problem), short: true },
       { title: "User", value: user_affected(problem), short: true },
+      { title: "Host", value: hostname(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
   end
@@ -116,6 +117,12 @@ class NotificationServices::SlackService < NotificationService
     user_attributes = notice.user_attributes
     return 'N/A' unless user_attributes['id'].present?
     return "#{user_attributes['email']} (#{user_attributes['id']})"
+  end
+
+  def hostname(problem)
+    notice = problem.notices.last
+    env = notice.try(:server_environment) || {}
+    return env['hostname']
   end
 
   def backtrace_line(line)
