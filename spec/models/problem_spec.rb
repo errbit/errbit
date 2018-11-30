@@ -186,6 +186,16 @@ describe Problem, type: 'model' do
         problem = Fabricate(:problem, where: 'cyril')
         expect(Problem.search('cyril').entries).to eq [problem]
       end
+      it 'finds with notice_id as argument' do
+        app = Fabricate(:app)
+        problem = Fabricate(:problem, app: app)
+        err = Fabricate(:err, problem: problem)
+        notice = Fabricate(:notice, err: err, message: 'ERR 1')
+
+        problem2 = Fabricate(:problem, where: 'cyril')
+        expect(problem2).to_not eq(problem)
+        expect(Problem.search(notice.id).entries).to eq [problem]
+      end
     end
   end
 
