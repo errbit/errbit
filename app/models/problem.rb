@@ -66,10 +66,10 @@ class Problem
   # the scope for chaining. i'm assuming that the indexed Notice lookup is not
   # costly (it is not for me with 10,000,000 notices), especially with how
   # infrequently searches happen
-  scope :search, lambda(value) do
+  scope :search, lambda { |value|
     notice = Notice.where(id: value).first
     notice ? where(id: notice.err.problem_id) : where('$text' => { '$search' => value })
-  end
+  }
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all
