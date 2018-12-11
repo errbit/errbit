@@ -14,6 +14,8 @@ $(function() {
 
     bindRequiredPasswordMarks();
 
+    formatJsons();
+
     // On page apps/:app_id/edit
     $('a.copy_config').on("click", function() {
       $('select.choose_other_app').show().focus();
@@ -124,6 +126,16 @@ $(function() {
     $(this).hide().closest('.head_and_tail').find('.tail').show();
     e.preventDefault();
   });
+
+  // Format JSON params and Metadata when available
+  function formatJsons() {
+    for(var tab of ["params", "metadata"]) {
+      if($("#json_" + tab).length > 0) {
+        var formatter = new JSONFormatter(JSON.parse($("#json_" + tab).val()), Infinity, { theme: "dark", hoverPreviewEnabled: true });
+        document.querySelector("pre.json#" + tab).appendChild(formatter.render());
+      }
+    }
+  }
 
   init();
 });

@@ -1,4 +1,6 @@
 .window
   .raw_data
-    %pre.hash= pretty_hash notice.params
-
+    %pre.json#params
+    %input{ id: :json_params, type: :hidden, value: notice.params.except(:metadata).to_json}/
+    %h4 &nbsp;Raw Ruby Hash
+    %pre.hash= pretty_hash notice.params.except(:metadata)
