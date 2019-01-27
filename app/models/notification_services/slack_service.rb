@@ -103,9 +103,9 @@ class NotificationServices::SlackService < NotificationService
       slack_user_id = problem.app.slack_user_id_map[assignee]
       next unless slack_user_id.present?
       new_assigned_to_line = if slack_user_id.start_with?("S")
-        "<!subteam^#{slack_user_id}|#{assignee}>\n"
-      else
-        "<@#{slack_user_id}>\n"
+                               "<!subteam^#{slack_user_id}|#{assignee}>\n"
+                             else
+                               "<@#{slack_user_id}>\n"
       end
       assigned_to_lines += new_assigned_to_line
     end

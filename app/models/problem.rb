@@ -337,7 +337,7 @@ class Problem
     end
   end
 
-  private
+private
 
   def attribute_count_decrease(name, value)
     counter = send(name)

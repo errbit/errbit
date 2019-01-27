@@ -17,9 +17,9 @@ class App
   # Some legacy apps may have string as key instead of BSON::ObjectID
   # identity :type => String
   field :_id,
-        type:          String,
-        pre_processed: true,
-        default:       -> { BSON::ObjectId.new.to_s }
+    type:          String,
+    pre_processed: true,
+    default:       -> { BSON::ObjectId.new.to_s }
 
   embeds_many :watchers
   embeds_one :issue_tracker, class_name: 'IssueTracker'
@@ -40,14 +40,14 @@ class App
   validate :check_issue_tracker
 
   accepts_nested_attributes_for :watchers,
-                                allow_destroy: true,
-                                reject_if:     proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
+    allow_destroy: true,
+    reject_if:     proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker,
-                                allow_destroy: true,
-                                reject_if:     proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
+    allow_destroy: true,
+    reject_if:     proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service,
-                                allow_destroy: true,
-                                reject_if:     proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+    allow_destroy: true,
+    reject_if:     proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
   accepts_nested_attributes_for :notice_fingerprinter
 
   index({ name: "text" }, default_language: "english")
@@ -219,7 +219,7 @@ class App
     notice_fingerprinter.source == 'site'
   end
 
-  protected
+protected
 
   def store_cached_attributes_on_problems
     Problem.where(app_id: id).update_all(

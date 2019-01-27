@@ -5,7 +5,7 @@ GITHUB_GRAPHQL_API_URL = Errbit::Config.github_api_url + '/graphql'
 GITHUB_ACCESS_TOKEN = Errbit::Config.github_access_token
 
 GraphQLHTTP = GraphQL::Client::HTTP.new(GITHUB_GRAPHQL_API_URL) do
-  def headers(context)
+  def headers(_context)
     { "Authorization": "Bearer #{GITHUB_ACCESS_TOKEN}" }
   end
 end
