@@ -1,6 +1,6 @@
 # Features added to original Errbit in this fork:
 1. Slack mentions, either based on on code authorship or forced assignment
-2. Color coding and visual differentiation of alerts based on their error class (notifications vs exceptions)
+2. Color coding and visual differentiation of Slack alerts based on their error class (notifications vs exceptions)
 3. Sending affected user and hostname in Slack alerts
 
 **Docker image available here:** https://cloud.docker.com/u/laasem/repository/docker/laasem/errbit
