@@ -2,7 +2,11 @@ require 'recurse'
 
 class Notice
   UNAVAILABLE = 'N/A'
-  MESSAGE_LENGTH_LIMIT = 1000
+
+  # Mongo will not accept index keys larger than 1,024 bytes and that includes
+  # some amount of BSON encoding overhead, so keep it under 1,000 bytes to be
+  # safe.
+  MESSAGE_LENGTH_LIMIT = 1_000
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -35,10 +39,11 @@ class Notice
     where(:err_id.in => errs.all.map(&:id))
   }
 
-  # Overwrite the default setter to make sure the message length is no longer
-  # than the limit we impose
+  # Overwrite the default setter to make sure the message length is no larger
+  # than the limit we impose.
   def message=(m)
-    super(m.is_a?(String) ? m[0, MESSAGE_LENGTH_LIMIT] : m)
+    truncated_m = m.mb_chars.compose.limit(MESSAGE_LENGTH_LIMIT).to_s
+    super(m.is_a?(String) ? truncated_m : m)
   end
 
   def user_agent

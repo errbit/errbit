@@ -283,6 +283,14 @@ describe ErrorReport do
           3.times { described_class.new(xml).generate_notice! }
           expect(ActionMailer::Base.deliveries.length).to eq(2)
         end
+
+        it "sends email on all occurrences when problem was resolved" do
+          3.times do
+            notice = described_class.new(xml).generate_notice!
+            notice.problem.resolve!
+          end
+          expect(ActionMailer::Base.deliveries.length).to eq(3)
+        end
       end
     end
 

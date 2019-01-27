@@ -192,5 +192,15 @@ describe "Callback on Notice", type: 'model' do
         to_not receive(:create_notification)
       error_report.generate_notice! # three
     end
+
+    it "should create a campfire notification when problem was resolved" do
+      ErrorReport.new(notice_attrs).generate_notice! # one
+      notice = ErrorReport.new(notice_attrs).generate_notice! # two
+      notice.problem.resolve!
+      error_report = ErrorReport.new(notice_attrs)
+      expect(error_report.app.notification_service).
+        to receive(:create_notification)
+      error_report.generate_notice! # three
+    end
   end
 end

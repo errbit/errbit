@@ -1,4 +1,4 @@
-FROM ruby:2.3.3-alpine
+FROM ruby:2.5.1-alpine
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
 WORKDIR /app

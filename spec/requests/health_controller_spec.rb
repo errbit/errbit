@@ -2,6 +2,12 @@ describe "Health", type: 'request' do
   let(:errbit_app) { Fabricate(:app, api_key: 'APIKEY') }
 
   describe "readiness" do
+    before do
+      if HealthController.instance_variable_defined? :@impatient_mongoid_client
+        HealthController.remove_instance_variable :@impatient_mongoid_client
+      end
+    end
+
     it 'can let you know when the app is ready to receive requests' do
       get '/health/readiness'
       expect(response).to be_success
