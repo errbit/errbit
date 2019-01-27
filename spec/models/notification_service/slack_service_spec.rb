@@ -40,10 +40,10 @@ describe NotificationServices::SlackService, type: 'model' do
       attachments: [
         {
           fallback:   service.message_for_slack(problem),
-          title:      problem.message.to_s.truncate(100),
+          title:      service.notification_or_exception_emoji(problem) + ' ' + problem.message.to_s.truncate(100),
           title_link: problem.url,
           text:       problem.where,
-          color:      "#D00000",
+          color:      service.notification_or_exception_color(problem),
           mrkdwn_in:  ["fields"],
           fields:     [
             {
@@ -64,6 +64,21 @@ describe NotificationServices::SlackService, type: 'model' do
             {
               title: "First Noticed",
               value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
+              short: true
+            },
+            {
+              title: "Assigned To",
+              value: service.authors_to_mention(problem),
+              short: true
+            },
+            {
+              title: "User",
+              value: service.user_affected(problem),
+              short: true
+            },
+            {
+              title: "Host",
+              value: service.hostname(problem),
               short: true
             },
             {
