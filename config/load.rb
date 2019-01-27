@@ -24,6 +24,12 @@ Errbit::Config = Configurator.run(
   log_location:              ['ERRBIT_LOG_LOCATION'],
   log_level:                 ['ERRBIT_LOG_LEVEL'],
   notice_deprecation_days:   ['ERRBIT_PROBLEM_DESTROY_AFTER_DAYS'],
+  error_to_user_force_assignment_map:       ['ERROR_TO_USER_FORCE_ASSIGNMENT_MAP', lambda do |values|
+    HashWithIndifferentAccess.new(values[:error_to_user_force_assignment_map])
+  end],
+  notification_error_class_names: ['NOTIFICATION_ERROR_CLASS_NAMES', lambda do |values|
+    HashWithIndifferentAccess.new(values[:notification_error_class_names])
+  end],
 
   serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
@@ -39,20 +45,11 @@ Errbit::Config = Configurator.run(
   github_org_id:             ['GITHUB_ORG_ID'],
   github_access_scope:       ['GITHUB_ACCESS_SCOPE'],
   github_access_token:       ['GITHUB_ACCESS_TOKEN'],
-  slack_user_id_map:       ['SLACK_USER_ID_MAP', lambda do |values|
-    HashWithIndifferentAccess.new(values[:slack_user_id_map])
-  end],
-  error_to_user_force_assignment_map:       ['ERROR_TO_USER_FORCE_ASSIGNMENT_MAP', lambda do |values|
-    HashWithIndifferentAccess.new(values[:error_to_user_force_assignment_map])
-  end],
-  notification_error_class_names: ['NOTIFICATION_ERROR_CLASS_NAMES', lambda do |values|
-    HashWithIndifferentAccess.new(values[:notification_error_class_names])
-  end],
+  github_api_url:            ['GITHUB_API_URL'],
+  github_site_title:         ['GITHUB_SITE_TITLE'],
   env_to_branch_map: ['ENV_TO_BRANCH_MAP', lambda do |values|
     HashWithIndifferentAccess.new(values[:env_to_branch_map])
   end],
-  github_api_url:            ['GITHUB_API_URL'],
-  github_site_title:         ['GITHUB_SITE_TITLE'],
   # google
   google_authentication:     ['GOOGLE_AUTHENTICATION'],
   google_auto_provision:     ['GOOGLE_AUTO_PROVISION'],
@@ -83,5 +80,10 @@ Errbit::Config = Configurator.run(
   sendmail_location:         ['SENDMAIL_LOCATION'],
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
-  devise_modules:            ['DEVISE_MODULES']
+  devise_modules:            ['DEVISE_MODULES'],
+
+  # slack
+  slack_user_id_map:       ['SLACK_USER_ID_MAP', lambda do |values|
+    HashWithIndifferentAccess.new(values[:slack_user_id_map])
+  end]
 )

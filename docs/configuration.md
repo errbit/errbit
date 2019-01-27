@@ -61,6 +61,14 @@ In order of precedence Errbit uses:
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
 <dd>Number of days to keep errors in the database when running rake errbit:clear_outdated
 <dd>defaults to nil (off)
+<dt>ERROR_TO_USER_FORCE_ASSIGNMENT_MAP
+<dd>Force-assign certain error classes to certain Slack users per Errbit app. Make sure usernames are spelled the same as in `SLACK_USER_ID_MAP`.
+<dd>Structure: `{"Errbit App Name": {"Error Class Name String": ["Slack User 1", "Slack User 2"]}}`
+<dd>defaults to `{}`
+<dt>NOTIFICATION_ERROR_CLASS_NAMES
+<dd>Treat certain error classes as notifications not exceptions. Will affect styling of Slack alert and remove mentions unless error class is force-assigned as per `ERROR_TO_USER_FORCE_ASSIGNMENT_MAP`.
+<dd>Structure: `{"Errbit App Name": ["Notification Error Class 1", "Notification Error Class 2"]}`
+<dd>defaults to `{}`
 <dt>SERVE_STATIC_ASSETS
 <dd>Allow Rails to serve static assets. For most production environments, this should be false because your web server should be configured to serve static assets for you. But some environments like Heroku require this to be true.
 <dd>defaults to true
@@ -88,9 +96,15 @@ In order of precedence Errbit uses:
 <dt>GITHUB_ACCESS_SCOPE
 <dd>OAuth scope to request from users when they sign-in through github
 <dd>defaults to [repo]
+<dt>GITHUB_ACCESS_TOKEN
+<dd>GitHub account-specific personal access token you have generated that can be used to access the GitHub API
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
 <dd>defaults to GitHub</dd>
+<dt>ENV_TO_BRANCH_MAP
+<dd>Map environment to GitHub branch name. Assumes one branch per environment. If map is supplied for an app but environment can't be found, branch name will default to `master`.
+<dd>Structure: `{"Errbit App Name": {"environment": "branch-name"}}`
+<dd>defaults to `{}`
 <dt>GOOGLE_AUTHENTICATION
 <dd>Allow google sign-in via OAuth
 <dd>defaults to true
@@ -133,4 +147,8 @@ In order of precedence Errbit uses:
 <dt>DEVISE_MODULES
 <dd>Devise modules to enable
 <dd>defaults to [database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]
+<dt>SLACK_USER_ID_MAP
+<dd>Map Slack users' usernames (as they're spelled in Git commit/blame information for code-writing Slack users, and as their `real_name` is spelled in the Slack user list for non-code-writing Slack users) to their Slack user IDs. Works for individual Slack users as well as Slack user groups.
+<dd>Structure: `{"Errbit App Name": {"Username": "slack_user_id"}}`
+<dd>defaults to `{}`
 </dl>
