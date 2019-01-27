@@ -1,4 +1,4 @@
-# Errbit
+# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
 [travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/errbit/errbit
