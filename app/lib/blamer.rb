@@ -39,6 +39,7 @@ GRAPHQL
 class Blamer
   def self.blame_line(repo_name, repo_owner, branch, file_path, line_number)
     whodunnit = ''
+    return whodunnit unless GITHUB_ACCESS_TOKEN.present?
     parsed_blame_hash = blame_file(repo_name, repo_owner, branch, file_path, parse_result: true)
     parsed_blame_hash.each do |range, author|
       range_array = range.split('-').map(&:to_i)
