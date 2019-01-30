@@ -1,5 +1,4 @@
 # load default ENV values (without overwriting any existing value)
-# rubocop:disable Layout/AlignHash,Lint/MissingCopEnableDirective
 Dotenv.load('.env.default')
 
 require_relative '../lib/configurator'
