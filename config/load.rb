@@ -1,4 +1,5 @@
 # load default ENV values (without overwriting any existing value)
+# rubocop:disable Layout/AlignHash,Lint/MissingCopEnableDirective
 Dotenv.load('.env.default')
 
 require_relative '../lib/configurator'
@@ -70,5 +71,11 @@ Errbit::Config = Configurator.run(
   sendmail_location:         ['SENDMAIL_LOCATION'],
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
-  devise_modules:            ['DEVISE_MODULES']
+  devise_modules:            ['DEVISE_MODULES'],
+
+  # badges
+  badge_public:              ['BADGE_PUBLIC'],
+  badge_last_error_steps:    ['BADGE_LAST_ERROR_STEPS'],
+  badge_recent_error_steps:  ['BADGE_RECENT_ERROR_STEPS'],
+  badge_recent_error_hours:  ['BADGE_RECENT_ERROR_HOURS']
 )

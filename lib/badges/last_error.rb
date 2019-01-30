@@ -11,12 +11,13 @@ module Badges
     end
 
     def value_color
+      from, to = Errbit::Config.badge_last_error_steps.presence || [24, 48]
       if last_notice.blank?
         Base::COLORS[:grey]
       else
         case hours_till_last_notice
-        when 0..6 then Base::COLORS[:red]
-        when 6..24 then Base::COLORS[:yellow]
+        when 0..from then Base::COLORS[:red]
+        when from..to then Base::COLORS[:yellow]
         else Base::COLORS[:green]
         end
       end
@@ -30,7 +31,7 @@ module Badges
       elsif hours_till_last_notice < 24
         "#{hours_till_last_notice.round}h"
       elsif hours_till_last_notice < (30.days / 1.hour)
-        "#{(hours_till_last_notice / 24.hours).round}d"
+        "#{(hours_till_last_notice / 24).round}d"
       else
         ">30d"
       end
@@ -48,7 +49,7 @@ module Badges
     end
 
     def last_notice
-      @last_notice ||= @app.problems.unresolved.order_by(%w[last_notice_at desc]).first.try(:last_notice_at)
+      @last_notice ||= @app.problems.unresolved.max('last_notice_at')
     end
   end
 end

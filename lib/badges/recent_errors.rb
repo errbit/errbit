@@ -11,9 +11,10 @@ module Badges
     end
 
     def value_color
+      from, to = Errbit::Config.badge_last_error_steps.presence || [1, 10]
       case problem_count
-      when 0..1 then COLORS[:green]
-      when 2..10 then COLORS[:yellow]
+      when 0..from then COLORS[:green]
+      when from..to then COLORS[:yellow]
       else COLORS[:red]
       end
     end
@@ -23,13 +24,17 @@ module Badges
     end
 
     def key_text
-      "# in 24h"
+      "# Err/#{hours}"
     end
 
   private
 
+    def hours
+      (Errbit::Config.badge_recent_error_hours || 24).to_i
+    end
+
     def problem_count
-      @problem_count ||= @app.problems.unresolved.where(:last_notice_at.gte => 24.hours.ago).count
+      @problem_count ||= @app.problems.unresolved.where(:last_notice_at.gte => hours.hours.ago).count
     end
   end
 end

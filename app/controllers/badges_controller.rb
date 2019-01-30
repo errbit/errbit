@@ -5,6 +5,8 @@ require_dependency 'badges/recent_errors'
 class BadgesController < ApplicationController
   expose(:app)
 
+  skip_before_action :authenticate_user!, only: :show, if: :badges_public?
+
   def index
     @badges = Badges::Base.descendants
   end
@@ -17,4 +19,12 @@ class BadgesController < ApplicationController
       head :not_found
     end
   end
+
+private
+
+  def badges_public?
+    Errbit::Config.badge_public
+  end
+
+  helper_method :badges_public?
 end

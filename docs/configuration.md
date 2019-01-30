@@ -133,4 +133,12 @@ In order of precedence Errbit uses:
 <dt>DEVISE_MODULES
 <dd>Devise modules to enable
 <dd>defaults to [database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]
+<dt>BADGE_PUBLIC
+<dd>defaults to false. When true, the badge urls are accessible by any user on /apps/:id/badge/:badge_type.svg. Otherwise, the user that views a badge must be either signed in or the personal authentication key of the user must be provided as url parameters.
+<dt>BADGE_LAST_ERROR_STEPS
+<dd>defaults to [24,48], are the intervals when to make the last error badge green, yellow, red (e.g. last unresolved problem < 24h -> red, from 24 to 48h yellow, else green)
+<dt>BADGE_RECENT_ERROR_STEPS
+<dd>defaults to [1,10], are the intervals when to make the recent error badge green, yellow, red (e.g. less than or equal 1 problem in last 24h -> green, 2 to 10 problems in the last 24h -> yellow, else red)
+<dt>BADGE_RECENT_ERROR_HOURS
+<dd>defaults to 24, the sliding window in hours, e.g. number of errors in the last 24h
 </dl>
