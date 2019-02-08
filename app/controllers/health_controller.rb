@@ -33,13 +33,18 @@ private
   delegate :impatient_mongoid_client, to: :class
 
   def run_mongo_check
+    # remember this client in a local variable so we can clear the cached
+    # client if it fails, but still always close the connection
+    local_mongoid_client = impatient_mongoid_client
+
     # collections might be empty which is ok but it will raise an exception if
     # database cannot be contacted
-    impatient_mongoid_client.collections
+    local_mongoid_client.collections
     { check_name: 'mongo', ok: true }
   rescue StandardError => e
+    @impatient_mongoid_client = nil
     { check_name: 'mongo', ok: false, error_details: e.class.to_s }
   ensure
-    impatient_mongoid_client.close
+    local_mongoid_client.close
   end
 end
