@@ -30,7 +30,7 @@ class HealthController < ActionController::Base
 
 private
 
-  delegate :impatient_mongoid_client, to: :class
+  delegate :impatient_mongoid_client, :clear_mongoid_client_cache, to: :class
 
   def run_mongo_check
     # remember this client in a local variable so we can clear the cached
@@ -42,9 +42,13 @@ private
     local_mongoid_client.collections
     { check_name: 'mongo', ok: true }
   rescue StandardError => e
-    @impatient_mongoid_client = nil
+    clear_mongoid_client_cache
     { check_name: 'mongo', ok: false, error_details: e.class.to_s }
   ensure
     local_mongoid_client.close
+  end
+
+  def self.clear_mongoid_client_cache
+    @impatient_mongoid_client = nil
   end
 end
