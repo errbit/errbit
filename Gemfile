@@ -10,7 +10,7 @@ gem 'railties', RAILS_VERSION
 
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
-gem 'devise', '~> 4.4.0'
+gem 'devise', '~> 4.6.1'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
