@@ -39,7 +39,7 @@ class NotificationServices::SlackService < NotificationService
           fallback:   message_for_slack(problem),
           title:      problem.message.to_s.truncate(100),
           title_link: problem.url,
-          text:       problem.where,
+          text:       text_for_slack(problem),
           color:      "#D00000",
           mrkdwn_in:  ["fields"],
           fields:     post_payload_fields(problem)
@@ -90,5 +90,10 @@ private
     output = ''
     backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
     "```#{output}```"
+  end
+
+  def text_for_slack(problem)
+    watcher_slack_ids = problem.app.watchers.map(&:user).compact.map(&:slack_user_id).compact.map { |user_id| "<@#{user_id}>" }
+    [problem.where, *watcher_slack_ids].join(" ")
   end
 end

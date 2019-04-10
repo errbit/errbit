@@ -20,6 +20,9 @@
     %tr
       %th= t('.username')
       %td.main= user.username
+  %tr
+    %th Slack User ID
+    %td= user.slack_user_id
   - if Errbit::Config.github_authentication && user.github_login.present?
     %tr
       %th= "#{Errbit::Config.github_site_title} Login"

@@ -42,7 +42,7 @@ describe NotificationServices::SlackService, type: 'model' do
           fallback:   service.message_for_slack(problem),
           title:      problem.message.to_s.truncate(100),
           title_link: problem.url,
-          text:       problem.where,
+          text:       "#{problem.where}",
           color:      "#D00000",
           mrkdwn_in:  ["fields"],
           fields:     [
@@ -129,6 +129,22 @@ describe NotificationServices::SlackService, type: 'model' do
 
       expect(HTTParty).to receive(:post).
         with(service.service_url, body: payload, headers: { "Content-Type" => "application/json" }).
+        and_return(true)
+
+      service.create_notification(problem)
+    end
+  end
+
+  context 'with watcher slack ids' do
+    let!(:user) { Fabricate.build(:user, slack_user_id: "UXXTESTXX") }
+    let!(:watcher) { Fabricate.build(:user_watcher, app: problem.app, user: user) }
+
+    it "should send slack id for watcher in message" do
+      payload = payload_hash
+      payload[:attachments].first[:text] = "#{problem.where} <@UXXTESTXX>"
+
+      expect(HTTParty).to receive(:post).
+        with(service.service_url, body: payload.to_json, headers: { "Content-Type" => "application/json" }).
         and_return(true)
 
       service.create_notification(problem)

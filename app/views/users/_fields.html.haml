@@ -13,6 +13,9 @@
   = f.label :email, t('.email')
   = f.text_field :email
 
+= f.label :slack_user_id, "Slack User ID"
+= f.text_field :slack_user_id
+
 - if Errbit::Config.github_authentication
   = f.label :github_login, "#{Errbit::Config.github_site_title} login"
   = f.text_field :github_login

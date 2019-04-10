@@ -9,6 +9,7 @@ class User
   field :github_login
   field :github_oauth_token
   field :google_uid
+  field :slack_user_id
   field :name
   field :admin, type: Boolean, default: false
   field :per_page, type: Integer, default: PER_PAGE
