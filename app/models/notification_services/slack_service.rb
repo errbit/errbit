@@ -107,6 +107,11 @@ class NotificationServices::SlackService < NotificationService
     env['hostname']
   end
 
+  def url(problem)
+    notice = problem.notices.last
+    env = notice.try(:url) || 'N/A'
+  end
+
 private
 
   def post_payload_fields(problem)
@@ -121,6 +126,7 @@ private
       { title: "Assigned To", value: authors_to_mention(problem), short: true },
       { title: "User", value: user_affected(problem), short: true },
       { title: "Host", value: hostname(problem), short: true },
+      { title: "URL", value: url(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
   end
