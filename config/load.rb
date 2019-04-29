@@ -31,9 +31,9 @@ secret_key_base:           ['SECRET_KEY_BASE'],
 mongo_url:                 %w(MONGODB_URI MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
 
 # github
-# github_url:                ['GITHUB_URL', lambda do |values|
-#   values[:github_url].gsub(%r{/*\z}, '')
-# end],
+github_url:                ['GITHUB_URL', lambda do |values|
+  values[:github_url].gsub(%r{/*\z}, '')
+end],
 github_authentication:     ['GITHUB_AUTHENTICATION'],
 # github_client_id:          ['GITHUB_CLIENT_ID'],
 # github_secret:             ['GITHUB_SECRET'],
