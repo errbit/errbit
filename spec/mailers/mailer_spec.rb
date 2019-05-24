@@ -11,10 +11,6 @@ shared_examples "a notification email" do
     expect(email).to have_header('Precedence', 'bulk')
   end
 
-  it "should have Auto-Submitted header" do
-    expect(email).to have_header('Auto-Submitted', 'auto-generated')
-  end
-
   it "should have X-Auto-Response-Suppress header" do
     # http://msdn.microsoft.com/en-us/library/ee219609(v=EXCHG.80).aspx
     expect(email).to have_header('X-Auto-Response-Suppress', 'OOF, AutoReply')
