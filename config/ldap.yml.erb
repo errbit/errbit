@@ -1,0 +1,63 @@
+## Authorizations
+# Uncomment out the merging for each environment that you'd like to include.
+# You can also just copy and paste the tree (do not include the "authorizations") to each
+# environment if you need something different per environment.
+
+# authorizations: &AUTHORIZATIONS
+#   allow_unauthenticated_bind: false
+#   group_base: ou=groups,dc=test,dc=com
+#   ## Requires config.ldap_check_group_membership in devise.rb be true
+#   # Can have multiple values, must match all to be authorized
+#   required_groups:
+#     # If only a group name is given, membership will be checked against "uniqueMember"
+#     - cn=admins,ou=groups,dc=test,dc=com
+#     - cn=users,ou=groups,dc=test,dc=com
+#     # If an array is given, the first element will be the attribute to check against, the second the group name
+#     - ["moreMembers", "cn=users,ou=groups,dc=test,dc=com"]
+#   ## Requires config.ldap_check_attributes in devise.rb to be true
+#   ## Can have multiple attributes and values, must match all to be authorized
+#   require_attribute:
+#     objectClass: inetOrgPerson
+#     authorizationRole: postsAdmin
+#   ## Requires config.ldap_check_attributes_presence in devise.rb to be true
+#   ## Can have multiple attributes set to true or false to check presence, all must match all to be authorized
+#   require_attribute_presence:
+#     mail: true
+#     telephoneNumber: true
+#     serviceAccount: false
+
+authorizations: &AUTHORIZATIONS
+  ## Requires config.ldap_check_attributes in devise.rb to be true
+  ## Can have multiple attributes and values, must match all to be authorized
+  <% if ENV.has_key?('LDAP_REQUIRE_OBJECT_CLASS') %>
+  require_attribute:
+    objectClass: <%= ENV['LDAP_REQUIRE_OBJECT_CLASS'] %>
+  <% end %>
+  ## Requires config.ldap_check_attributes_presence in devise.rb to be true
+  ## Can have multiple attributes set to true or false to check presence, all must match all to be authorized
+  require_attribute_presence:
+    mail: true
+    name: true
+
+## Environment
+
+base: &base
+  host: <%= ENV['LDAP_HOST'] %>
+  port: <%= ENV['LDAP_TLS_PORT'].to_i %>
+  attribute: <%= ENV['LDAP_ATTRIBUTE'] %>
+  base: <%= ENV['LDAP_SEARCH_BASE'] %>
+  admin_user: <%= ENV['LDAP_MANAGER_USER'] %>
+  admin_password: <%= ENV['LDAP_MANAGER_PASSWORD'] %>
+  <% encryption_method = ENV.has_key?('LDAP_TLS_METHOD') ? ENV['LDAP_TLS_METHOD'].gsub(/^:/,'').to_sym : nil %>
+  <% if [ :simple_tls, :start_tls ].include?(encryption_method) %>
+  encryption:
+    method: <%= ":#{encryption_method.to_s}" %>
+    <% if ENV.has_key?('LDAP_TLS_OPTIONS_VERIFY_MODE') %>
+    tls_options: 
+      verify_mode: <%= ENV['LDAP_TLS_OPTIONS_VERIFY_MODE'].to_i %>
+    <% end %>
+  <% end %>
+  <<: *AUTHORIZATIONS
+
+<%= Rails.env %>:
+  <<: *base

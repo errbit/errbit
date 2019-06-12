@@ -116,6 +116,14 @@ class User
     save(validate: false)
   end
 
+  def ldap_before_save
+    name = Devise::LDAP::Adapter.get_ldap_param(self.username, "name")
+    mail = Devise::LDAP::Adapter.get_ldap_param(self.username, "mail")
+
+    self.name = name
+    self.email = mail.first
+  end
+
 private
 
   def generate_authentication_token

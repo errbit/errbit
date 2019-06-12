@@ -11,6 +11,7 @@ gem 'railties', RAILS_VERSION
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
 gem 'devise', '~> 4.4.0'
+gem "devise_ldap_authenticatable", git: 'https://github.com/thomasf1234/devise_ldap_authenticatable', ref: '1924cf22624fa032e85151f00fa6f58ccd2448b1'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'

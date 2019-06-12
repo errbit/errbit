@@ -2,14 +2,17 @@ version: "3"
 
 services:
   errbit:
-    image: errbit/errbit:latest
+    build: .
+    image: local_errbit
     ports:
       - "8080:8080"
     depends_on:
       - mongo
+    env_file:
+      - docker/development.env
     environment:
       - PORT=8080
-      - RACK_ENV=production
+      - RACK_ENV=development
       - MONGO_URL=mongodb://mongo:27017/errbit
   mongo:
     image: mongo:4.1

@@ -15,7 +15,8 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
     libxml2-dev \
     libxslt-dev \
     nodejs \
-    tzdata
+    tzdata \
+    git
 
 
 COPY ["Gemfile", "Gemfile.lock", "/app/"]
