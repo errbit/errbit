@@ -70,5 +70,24 @@ Errbit::Config = Configurator.run(
   sendmail_location:         ['SENDMAIL_LOCATION'],
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
-  devise_modules:            ['DEVISE_MODULES']
+  devise_modules:            ['DEVISE_MODULES'],
+
+  # START of custom extensions
+  ldap_host: ['LDAP_HOST'],
+  ldap_tls_port: ['LDAP_TLS_PORT'],
+  ldap_attribute: ['LDAP_ATTRIBUTE'],
+  ldap_search_base: ['LDAP_SEARCH_BASE'],
+  ldap_manager_user: ['LDAP_MANAGER_USER'],
+  ldap_manager_password: ['LDAP_MANAGER_PASSWORD'],
+  ldap_require_object_class: ['LDAP_REQUIRE_OBJECT_CLASS'],
+  ldap_tls_method: ['LDAP_TLS_METHOD'],
+  ldap_tls_options_verify_mode: ['LDAP_TLS_OPTIONS_VERIFY_MODE'],
+ 
+  feature_api_problem_clear_outdated_resolved: ['FEATURE_API_PROBLEM_CLEAR_OUTDATED_RESOLVED'],
+  feature_api_problem_clear_outdated: ['FEATURE_API_PROBLEM_CLEAR_OUTDATED'],
+  feature_api_notice_clear_outdated: ['FEATURE_API_NOTICE_CLEAR_OUTDATED'],
+
+  notice_destroy_after_days:   ['ERRBIT_NOTICE_DESTROY_AFTER_DAYS'],
+  resolved_problem_destroy_after_days:   ['ERRBIT_RESOLVED_PROBLEM_DESTROY_AFTER_DAYS']
+  # END of custom extensions
 )

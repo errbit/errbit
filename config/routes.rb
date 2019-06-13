@@ -76,5 +76,10 @@ Rails.application.routes.draw do
   match '/api/v3/projects/:project_id/create-notice' => 'api/v3/notices#create', via: [:post]
   match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post, :options]
 
+  # Extensions
+  match '/api/v3/extensions/clear_outdated_resolved_problems' => 'api/v3/extensions#clear_outdated_resolved_problems', via: [:delete]
+  match '/api/v3/extensions/clear_outdated_problems' => 'api/v3/extensions#clear_outdated_problems', via: [:delete]
+  match '/api/v3/extensions/clear_outdated_notices' => 'api/v3/extensions#clear_outdated_notices', via: [:delete]
+
   root to: 'apps#index'
 end

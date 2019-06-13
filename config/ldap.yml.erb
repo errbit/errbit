@@ -29,9 +29,9 @@
 authorizations: &AUTHORIZATIONS
   ## Requires config.ldap_check_attributes in devise.rb to be true
   ## Can have multiple attributes and values, must match all to be authorized
-  <% if ENV.has_key?('LDAP_REQUIRE_OBJECT_CLASS') %>
+  <% if Errbit::Config.ldap_require_object_class.present? %>
   require_attribute:
-    objectClass: <%= ENV['LDAP_REQUIRE_OBJECT_CLASS'] %>
+    objectClass: <%= Errbit::Config.ldap_require_object_class %>
   <% end %>
   ## Requires config.ldap_check_attributes_presence in devise.rb to be true
   ## Can have multiple attributes set to true or false to check presence, all must match all to be authorized
@@ -42,19 +42,19 @@ authorizations: &AUTHORIZATIONS
 ## Environment
 
 base: &base
-  host: <%= ENV['LDAP_HOST'] %>
-  port: <%= ENV['LDAP_TLS_PORT'].to_i %>
-  attribute: <%= ENV['LDAP_ATTRIBUTE'] %>
-  base: <%= ENV['LDAP_SEARCH_BASE'] %>
-  admin_user: <%= ENV['LDAP_MANAGER_USER'] %>
-  admin_password: <%= ENV['LDAP_MANAGER_PASSWORD'] %>
-  <% encryption_method = ENV.has_key?('LDAP_TLS_METHOD') ? ENV['LDAP_TLS_METHOD'].gsub(/^:/,'').to_sym : nil %>
+  host: <%= Errbit::Config.ldap_host %>
+  port: <%= Errbit::Config.ldap_tls_port.to_i %>
+  attribute: <%= Errbit::Config.ldap_attribute %>
+  base: <%= Errbit::Config.ldap_search_base %>
+  admin_user: <%= Errbit::Config.ldap_manager_user %>
+  admin_password: <%= Errbit::Config.ldap_manager_password %>
+  <% encryption_method = Errbit::Config.ldap_tls_method.present? ? Errbit::Config.ldap_tls_method.gsub(/^:/,'').to_sym : nil %>
   <% if [ :simple_tls, :start_tls ].include?(encryption_method) %>
   encryption:
     method: <%= ":#{encryption_method.to_s}" %>
-    <% if ENV.has_key?('LDAP_TLS_OPTIONS_VERIFY_MODE') %>
+    <% if Errbit::Config.ldap_tls_options_verify_mode.present? %>
     tls_options: 
-      verify_mode: <%= ENV['LDAP_TLS_OPTIONS_VERIFY_MODE'].to_i %>
+      verify_mode: <%= Errbit::Config.ldap_tls_options_verify_mode.to_i %>
     <% end %>
   <% end %>
   <<: *AUTHORIZATIONS
