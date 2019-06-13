@@ -77,7 +77,6 @@ class Api::V3::ExtensionsController < ApplicationController
         notices = Notice.where(:created_at.lt => Errbit::Config.notice_destroy_after_days.to_f.days.ago)
 
         if notices.count > 0
-          Rails.logger.debug("Clea object: #{@some_object.inspect}")
           deleted_count = notices.delete_all
 
           message = "Cleared #{deleted_count} outdated notices from the database."
