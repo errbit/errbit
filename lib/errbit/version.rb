@@ -3,7 +3,11 @@
 module Errbit
   class Version
     def full_version
-      '0.8.0'
+      [
+        '0.9.0',
+        'dev',
+        source_version
+      ].compact.join('-')
     end
 
     def source_version
