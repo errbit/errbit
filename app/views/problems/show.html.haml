@@ -11,7 +11,7 @@
   = problem.environment
   %strong= t('.first_notice') + ':'
   = problem.first_notice_at.to_s(:precise)
-  %strong= t('.last_notice') + '::'
+  %strong= t('.last_notice') + ':'
   = problem.last_notice_at.to_s(:precise)
 - content_for :action_bar do
   - if problem.unresolved?
