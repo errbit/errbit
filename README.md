@@ -317,7 +317,7 @@ Solutions known to work are listed below:
 
 | Language | Project |
 |----------|---------|
-| PHP (&gt;= 5.3) | [flippa/errbit-php](https://github.com/flippa/errbit-php) |
+| PHP (&gt;= 5.3) | [wasilak/errbit-php](https://github.com/wasilak/errbit-php) |
 | OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP) |
 | Python | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
 
