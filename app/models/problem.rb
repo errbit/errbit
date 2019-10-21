@@ -295,7 +295,46 @@ class Problem
   def issue_type
     # Return issue_type if configured, but fall back to detecting app's issue tracker
     attributes['issue_type'] ||=
-    (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
+      (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
+  end
+
+  def branch
+    app.env_to_branch_map[environment] || 'master'
+  end
+
+  def cause_class
+    notices.last.params['cause_class']
+  end
+
+  def notification_not_exception?
+    !(app.notification_error_class_names & [error_class, cause_class]).empty?
+  end
+
+  def whodunnit
+    whodunnits = []
+    backtrace = BacktraceDecorator.new(notices.last.backtrace)
+    relevant_backtrace_lines_to_line_numbers = backtrace.in_app_numbers_to_relative_file_paths
+    relevant_backtrace_lines_to_line_numbers.each do |file_path, line_number|
+      whodunnits << Blamer.blame_line(app.repo_name, app.repo_owner, branch, file_path, line_number)
+    end
+    whodunnits = whodunnits.uniq.reject(&:blank?)
+  end
+
+  def force_assignment_array
+    [app.error_to_user_force_assignment_map[error_class], app.error_to_user_force_assignment_map[cause_class]].flatten.uniq.reject(&:blank?)
+  end
+
+  def force_assign?
+    force_assignment_array.present? && !force_assignment_array.empty?
+  end
+
+  def assigned_to
+    return force_assignment_array if force_assign?
+    if notification_not_exception?
+      nil
+    else
+      whodunnit
+    end
   end
 
 private

@@ -6,6 +6,10 @@ The slack notification sends to [Slack](https://www.slack.com/).
 
 ### Add the Airbrake Notification Integration on Slack
 
+### To configure Slack user mentions, please supply the environmental variables `ERROR_TO_USER_FORCE_ASSIGNMENT_MAP`, `ENV_TO_BRANCH_MAP`, and `SLACK_USER_ID_MAP` as detailed in `/docs/configuration.md`.
+
+### To treat certain Slack alerts as notifications rather than exceptions, please supply the environmental variable `NOTIFICATION_ERROR_CLASS_NAMES` as detailed in `/docs/configuration.md`.
+
 ![Airbrake Notification](airbrake_notification.png)
 
 ### Hook URL

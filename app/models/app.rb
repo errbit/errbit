@@ -100,7 +100,7 @@ class App
   def notify_on_errs
     !(super == false)
   end
-  alias_method :notify_on_errs?, :notify_on_errs
+  alias notify_on_errs? notify_on_errs
 
   def emailable?
     notify_on_errs? && notification_recipients.any?
@@ -110,8 +110,20 @@ class App
     repository_branch.present? ? repository_branch : 'master'
   end
 
+  def env_to_branch_map
+    HashWithIndifferentAccess.new(Errbit::Config.env_to_branch_map.try(:[], name))
+  end
+
   def github_repo?
     github_repo.present?
+  end
+
+  def repo_name
+    github_repo.split('/').second if github_repo?
+  end
+
+  def repo_owner
+    github_repo.split('/').first if github_repo?
   end
 
   def github_url
@@ -138,6 +150,10 @@ class App
     issue_tracker.present? && issue_tracker.configured?
   end
 
+  def notification_error_class_names
+    Errbit::Config.notification_error_class_names.try(:[], name) || []
+  end
+
   def notification_service_configured?
     (notification_service.class < NotificationService) &&
       notification_service.configured?
@@ -149,6 +165,14 @@ class App
     else
       watchers.map(&:address)
     end
+  end
+
+  def slack_user_id_map
+    HashWithIndifferentAccess.new(Errbit::Config.slack_user_id_map.try(:[], name))
+  end
+
+  def error_to_user_force_assignment_map
+    HashWithIndifferentAccess.new(Errbit::Config.error_to_user_force_assignment_map.try(:[], name))
   end
 
   # Copy app attributes from another app.

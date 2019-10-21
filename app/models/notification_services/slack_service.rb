@@ -26,7 +26,7 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def message_for_slack(problem)
-    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem.url}"
+    "[#{problem.app.name}][#{problem.environment}][#{problem.where}]: #{problem.error_class} #{problem.url} #{authors_to_mention(problem).split("\n").join(', ')}"
   end
 
   def post_payload(problem)
@@ -37,10 +37,10 @@ class NotificationServices::SlackService < NotificationService
       attachments: [
         {
           fallback:   message_for_slack(problem),
-          title:      problem.message.to_s.truncate(100),
+          title:      notification_or_exception_emoji(problem) + ' ' + problem.message.to_s.truncate(100),
           title_link: problem.url,
           text:       problem.where,
-          color:      "#D00000",
+          color:      notification_or_exception_color(problem),
           mrkdwn_in:  ["fields"],
           fields:     post_payload_fields(problem)
         }
@@ -62,6 +62,56 @@ class NotificationServices::SlackService < NotificationService
     service_url.present?
   end
 
+  def notification_or_exception_emoji(problem)
+    if problem.notification_not_exception?
+      ':bell:'
+    else
+      ':rotating_light:'
+    end
+  end
+
+  def notification_or_exception_color(problem)
+    if problem.notification_not_exception?
+      'warning'
+    else
+      'd00000'
+    end
+  end
+
+  def authors_to_mention(problem)
+    return 'N/A' if problem.assigned_to.nil?
+    assigned_to_lines = ""
+    problem.assigned_to.each do |assignee|
+      slack_user_id = problem.app.slack_user_id_map[assignee]
+      next unless slack_user_id.present?
+      new_assigned_to_line = if slack_user_id.start_with?("S")
+                               "<!subteam^#{slack_user_id}|#{assignee}>\n"
+                             else
+                               "<@#{slack_user_id}>\n"
+      end
+      assigned_to_lines += new_assigned_to_line
+    end
+    assigned_to_lines
+  end
+
+  def user_affected(problem)
+    notice = problem.notices.last
+    user_attributes = notice.user_attributes
+    return 'N/A' unless user_attributes.present? && user_attributes['id'].present?
+    "#{user_attributes['email']} (#{user_attributes['id']})"
+  end
+
+  def hostname(problem)
+    notice = problem.notices.last
+    env = notice.try(:server_environment) || {}
+    env['hostname']
+  end
+
+  def request_url(problem)
+    notice = problem.notices.last
+    env = notice.try(:url) || 'N/A'
+  end
+
 private
 
   def post_payload_fields(problem)
@@ -73,6 +123,10 @@ private
       { title: "First Noticed",
         value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
         short: true },
+      { title: "Assigned To", value: authors_to_mention(problem), short: true },
+      { title: "User", value: user_affected(problem), short: true },
+      { title: "Host", value: hostname(problem), short: true },
+      { title: "Request URL", value: request_url(problem), short: true },
       { title: "Backtrace", value: backtrace_lines(problem), short: false }
     ]
   end
