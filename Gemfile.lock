@@ -124,7 +124,7 @@ GEM
       railties (>= 3.2, < 5.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    haml (5.0.4)
+    haml (5.1.2)
       temple (>= 0.8.0)
       tilt
     hashie (3.5.7)
@@ -393,7 +393,7 @@ GEM
       sprockets (>= 3.0.0)
     sucker_punch (2.1.1)
       concurrent-ruby (~> 1.0)
-    temple (0.8.0)
+    temple (0.8.2)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
     therubyracer (0.12.3)
@@ -402,7 +402,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
-    tilt (2.0.8)
+    tilt (2.0.10)
     timecop (0.9.1)
     tins (1.16.3)
     tzinfo (1.2.5)
@@ -452,7 +452,7 @@ DEPENDENCIES
   fabrication
   flowdock
   font-awesome-rails
-  haml
+  haml (~> 5.1)
   hipchat
   hoi
   hoptoad_notifier (~> 2.4)
@@ -499,4 +499,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
