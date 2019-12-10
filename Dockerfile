@@ -37,6 +37,6 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile \
 
 EXPOSE 8080
 
-HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT}/users/sign_in" || exit 1
+HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT:-8080}/users/sign_in" || exit 1
 
 CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
