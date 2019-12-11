@@ -95,8 +95,8 @@ describe ProblemsController, type: 'controller' do
     before do
       sign_in user
       @app      = Fabricate(:app)
-      @problem1 = Fabricate(:problem, app: @app, message: "Most important")
-      @problem2 = Fabricate(:problem, app: @app, message: "Very very important")
+      @problem1 = Fabricate(:problem, app: @app, message: "Most important", first_notice_at: Time.parse("2014-10-01 12:37:10"), last_notice_at: Time.parse("2014-11-01 10:31:16"))
+      @problem2 = Fabricate(:problem, app: @app, message: "Very very important", first_notice_at: Time.parse("2013-04-02 06:28:53"), last_notice_at: Time.parse("2013-04-09 09:06:43"))
     end
 
     it "renders successfully" do
@@ -109,7 +109,7 @@ describe ProblemsController, type: 'controller' do
       expect(response).to render_template('problems/index')
     end
 
-    it "searches problems for given string" do
+    it "finds problems for given string" do
       get :search, search: "\"Most important\""
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to_not include(@problem2)
@@ -119,6 +119,37 @@ describe ProblemsController, type: 'controller' do
       get :search, search: ""
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to include(@problem2)
+    end
+
+    context "with date range params" do
+      it "finds problems for given string and date" do
+        get :search, search: "\"important\"", from: "2014-10-01", until: "2014-10-01"
+        expect(controller.problems).to include(@problem1)
+        expect(controller.problems).to_not include(@problem2)
+      end
+
+      it "finds problems by their first_notice_at date" do
+        get :search, from: "2013-04-01", until: "2013-04-03"
+        expect(controller.problems).to include(@problem2)
+        expect(controller.problems).to_not include(@problem1)
+      end
+
+      it "finds problems by their last_notice_at date" do
+        get :search, from: "2013-04-08", until: "2013-04-10"
+        expect(controller.problems).to include(@problem2)
+        expect(controller.problems).to_not include(@problem1)
+      end
+
+      it "finds problems for a one day date range" do
+        get :search, from: "2014-11-01", until: "2014-11-01"
+        expect(controller.problems).to include(@problem1)
+        expect(controller.problems).to_not include(@problem2)
+      end
+
+      it "finds no problems if no problems noticed in given date range" do
+        get :search, from: "1985-04-09", until: "2003-04-09"
+        expect(controller.problems.size).to eq 0
+      end
     end
   end
 
