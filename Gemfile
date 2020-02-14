@@ -21,10 +21,9 @@ gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 5.4'
-gem 'mongoid_rails_migrations'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
-gem 'rails_autolink'
+gem 'rinku'
 gem 'useragent'
 
 # Please don't update hoptoad_notifier to airbrake.
