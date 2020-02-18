@@ -301,16 +301,6 @@ Style/EachWithObject:
     - 'app/models/notice.rb'
     - 'lib/recurse.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Exclude:
-    - 'db/migrate/20150527202629_add_v1_to_hipchat_notification_services.rb'
-    - 'db/migrate/20150926035420_cache_app_on_notice.rb'
-    - 'db/migrate/201510290041_extract_issue_tracker.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/Encoding:
