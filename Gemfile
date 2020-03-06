@@ -21,6 +21,9 @@ gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 5.4'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
 gem 'rinku'
@@ -45,13 +48,6 @@ gem 'rushover'
 gem 'httparty'
 # Flowdock
 gem 'flowdock'
-
-# Authentication
-# ---------------------------------------
-# GitHub OAuth
-gem 'omniauth-github'
-# Google OAuth
-gem 'omniauth-google-oauth2'
 
 gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'

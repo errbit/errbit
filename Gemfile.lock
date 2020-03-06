@@ -127,7 +127,7 @@ GEM
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
-    hashie (3.5.7)
+    hashie (4.1.0)
     hipchat (1.6.0)
       httparty
       mimemagic
@@ -219,8 +219,8 @@ GEM
     octokit (4.16.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
-    omniauth (1.8.1)
-      hashie (>= 3.4.6, < 3.6.0)
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
     omniauth-github (1.4.0)
       omniauth (~> 1.5)
@@ -449,6 +449,7 @@ DEPENDENCIES
   meta_request
   mongoid (~> 5.4)
   mongoid-rspec
+  omniauth
   omniauth-github
   omniauth-google-oauth2
   phantomjs
