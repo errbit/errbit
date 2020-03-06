@@ -1,5 +1,10 @@
 inherit_from: .rubocop_todo.yml
 
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'vendor/**/*'
+
 # Caveat: .find_by raises exception in mongoid, unlike ActiveRecord which
 # returns nil
 Rails/FindBy:
