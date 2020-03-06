@@ -1,7 +1,6 @@
 language: ruby
 
 rvm:
-  - 2.7
   - 2.6
   - 2.5
   - ruby-head
@@ -10,9 +9,8 @@ env:
   global:
     - COVERAGE=true JRUBY_OPTS=--debug
   matrix:
-    - MONGODB=4.0.0
-    - MONGODB=3.6.6
-    - MONGODB=3.4.15
+    - MONGODB=ubuntu1604-4.2.3
+    - MONGODB=ubuntu1604-4.0.16
 
 sudo: false
 
@@ -26,7 +24,7 @@ before_install:
   - gem update --system
 
 before_script:
-  - test -f mongodb-install/mongodb-linux-x86_64-${MONGODB}.tgz || wget --directory-prefix=mongodb-install/ https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
+  - wget --directory-prefix=mongodb-install/ https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
   - tar xzf mongodb-install/mongodb-linux-x86_64-${MONGODB}.tgz
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
   - mkdir /tmp/mongodb-data
