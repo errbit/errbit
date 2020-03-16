@@ -22,5 +22,5 @@ module Errbit
     end
   end
 
-  VERSION = Version.new('0.9.0').full_version
+  VERSION = Version.new('0.10.0', true).full_version
 end
