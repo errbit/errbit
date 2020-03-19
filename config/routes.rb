@@ -57,6 +57,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'problems/:id' => 'problems#show_by_id'
+
   get 'health/readiness' => 'health#readiness'
   get 'health/liveness' => 'health#liveness'
   get 'health/api-key-tester' => 'health#api_key_tester'

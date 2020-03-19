@@ -56,6 +56,11 @@ class ProblemsController < ApplicationController
     @comment = Comment.new
   end
 
+  def show_by_id
+    problem = Problem.find(params[:id])
+    redirect_to app_problem_path(problem.app, problem)
+  end
+
   def xhr_sparkline
     render partial: 'problems/sparkline', layout: false
   end
