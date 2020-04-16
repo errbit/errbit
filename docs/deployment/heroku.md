@@ -12,11 +12,11 @@ Free clusters up to 512MB are available with MongoDB Atlas [Here](https://cloud.
 
 Upon creating an account, you will be greeted with this page. Make sure you select Starter Cluster.
 
-![Cluster selection](https://user-images.githubusercontent.com/44692189/64170897-1297a600-ce73-11e9-910e-38b78c3ac315.jpg)
+![Cluster selection](./example/atlas1.jpg)
 
 After this, you will be taken to the below screen:
 
-![Server selection](http://pomf.thegamingcorner.net/files/lppqok.png)
+![Server selection](./example/atlas2.png)
 
 Select one of the servers marked with `FREE TIER AVAILABLE` and click on `Create Cluster`. It will only take a couple of minutes to configure everything for you.
 
@@ -28,26 +28,26 @@ Go to the `Database Access` section in the `security` tab. Click on `+ Add New U
 
 Finally, click `Add User` to finish the creation.
 
-![Create User](https://i.imgur.com/pdo8GLg.png)
+![Create User](./example/atlas3.png)
 
 ### Whitelist all IP's
 
 Go to the `Network Access` section in the `security` tab. Click on `+ Add IP Address` to add an IP address, whereupon a new screen will pop up. Click the `Allow Access From Everywhere` button and `0.0.0.0/0` should appear in the `Whitelist Entry`. Otherwise, make sure to put input that manually. Finally, click `Confirm` to confirm your changes.
 
-![Whitelisting IPs](https://i.imgur.com/hMEZw4Q.png)
+![Whitelisting IPs](./example/atlas4.png)
 
 ### Obtain a connection string
 
 The last part is to generate a Mongo URI. Go to the `Clusters` section in the `Atlas` tab. Click on `Connect` on the left side of your Cluster dashboard. This will open up a new screen where you have three options. For our purposes, select the middle option `Connect Your Application`.
 
-![Connection String](https://i.imgur.com/RlvSgmh.png)
+![Connection String](./example/atlas5.png)
 
 Be sure to select Ruby and Version 5.0 and Above.
 You need to copy the connection string, which can be easily done by clicking the `Copy` button. Then replace `<password>` with the password for your user, which you set earlier. Paste the URI in your notepad.
 
 The final URI looks similar to this: `mongodb+srv://Username:MyPassword@modmail-kjvn21.mongodb.net/`.
 
-![Connection String - 2](https://i.imgur.com/UIAhrZ1.png)
+![Connection String - 2](./example/atlas6.png)
 
 Now that you have your connection URI, click the deploy button below and start your app deployment. Paste the entire URI you obtained from above into the MONGODB_URI Text box.
 
@@ -56,7 +56,7 @@ Now that you have your connection URI, click the deploy button below and start y
 After deploying the application, you still need to run `rake errbit:bootstrap` 
 to create indexes and get your admin user set up. You can do this by clicking the `Run Console` button in the More dropdown button of your new Heroku app. Then paste the rake command above and be sure to copy your admin credentials!
 
-![Run Console](http://pomf.thegamingcorner.net/files/vcgekg.png)
+![Run Console](./example/atlas7.png)
 
 ## The Hard Way
 
