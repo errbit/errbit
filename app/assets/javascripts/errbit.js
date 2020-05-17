@@ -120,7 +120,7 @@ $(function() {
     $('td.backtrace_separator').hide();
   }
   // Show external backtrace lines when clicking separator
-  $('td.backtrace_separator span').on('click', show_external_backtrace);
+  $(document).on('click', 'td.backtrace_separator span', show_external_backtrace);
   // Hide external backtrace on page load
   hide_external_backtrace();
 
