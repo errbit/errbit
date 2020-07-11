@@ -42,7 +42,7 @@ The last part is to generate a Mongo URI. Go to the `Clusters` section in the `A
 
 ![Connection String](./example/atlas5.png)
 
-Be sure to select Ruby and Version 5.0 and Above.
+Be sure to select Ruby and Version 2.5 or later.
 You need to copy the connection string, which can be easily done by clicking the `Copy` button. Then replace `<password>` with the password for your user, which you set earlier. Paste the URI in your notepad.
 
 The final URI looks similar to this: `mongodb+srv://Username:MyPassword@modmail-kjvn21.mongodb.net/`.
@@ -53,7 +53,7 @@ Now that you have your connection URI, click the deploy button below and start y
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
 
-After deploying the application, you still need to run `rake errbit:bootstrap` 
+After deploying the application, you still need to run `rake errbit:bootstrap`
 to create indexes and get your admin user set up. You can do this by clicking the `Run Console` button in the More dropdown button of your new Heroku app. Then paste the rake command above and be sure to copy your admin credentials!
 
 ![Run Console](./example/atlas7.png)
