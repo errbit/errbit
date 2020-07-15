@@ -21,6 +21,6 @@ Fabricator :hipchat_notification_service, from: :notification_service, class_nam
   service { 'v2' }
 end
 
-%w(campfire flowdock hoiio hubot pushover webhook).each do |t|
+%w(campfire flowdock hoiio hubot pushover teams webhook).each do |t|
   Fabricator "#{t}_notification_service".to_sym, from: :notification_service, class_name: "NotificationServices::#{t.camelcase}Service"
 end
