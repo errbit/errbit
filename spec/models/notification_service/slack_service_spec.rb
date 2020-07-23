@@ -150,4 +150,17 @@ describe NotificationServices::SlackService, type: 'model' do
       service.create_notification(problem)
     end
   end
+
+  context "with comma separate service url" do
+    let(:service_url) { "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX, https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXYYY"}
+
+    it "parses the service urls correctly" do
+      expect(service.service_urls).to eq ["https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX", "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXYYY"]
+    end
+
+    it "should send the notification to multiple slack urls" do
+      expect(HTTParty).to receive(:post).twice
+      service.create_notification(problem)
+    end
+  end
 end

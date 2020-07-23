@@ -49,17 +49,23 @@ class NotificationServices::SlackService < NotificationService
   end
 
   def create_notification(problem)
-    HTTParty.post(
-      service_url,
-      body:    post_payload(problem),
-      headers: {
-        'Content-Type' => 'application/json'
-      }
-    )
+    service_urls.each do |service_url|
+      HTTParty.post(
+        service_url,
+        body:    post_payload(problem),
+        headers: {
+          'Content-Type' => 'application/json'
+        }
+      )
+    end
   end
 
   def configured?
     service_url.present?
+  end
+
+  def service_urls
+    service_url.split(",").map(&:strip).reject(&:blank?)
   end
 
 private
