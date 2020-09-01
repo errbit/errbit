@@ -3,6 +3,8 @@ module AirbrakeApi
     class NoticeParser
       class ParamsError < StandardError; end
 
+      BACKTRACE_MAPPING = { 'JavaScript' => JavaScriptBacktrace }.freeze
+
       attr_reader :params, :error
 
       def initialize(params)
@@ -34,14 +36,7 @@ module AirbrakeApi
       end
 
       def backtrace
-        (error['backtrace'] || []).map do |backtrace_line|
-          {
-            method: backtrace_line['function'],
-            file:   backtrace_line['file'],
-            number: backtrace_line['line'],
-            column: backtrace_line['column']
-          }
-        end
+        BACKTRACE_MAPPING.fetch(context['language'], DefaultBacktrace).new(error['backtrace'] || []).normalized_lines
       end
 
       def server_environment

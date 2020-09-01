@@ -12,6 +12,7 @@ gem 'actionmailer_inline_css'
 gem 'decent_exposure'
 gem 'devise', '~> 4.7'
 gem 'dotenv-rails'
+gem 'down', '~> 5.0'
 gem 'draper'
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
@@ -27,6 +28,7 @@ gem 'omniauth-google-oauth2'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
 gem 'rinku'
+gem 'sourcemap'
 gem 'useragent'
 
 # Please don't update hoptoad_notifier to airbrake.

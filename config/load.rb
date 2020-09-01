@@ -70,5 +70,8 @@ Errbit::Config = Configurator.run(
   sendmail_location:         ['SENDMAIL_LOCATION'],
   sendmail_arguments:        ['SENDMAIL_ARGUMENTS'],
 
-  devise_modules:            ['DEVISE_MODULES']
+  devise_modules:            ['DEVISE_MODULES'],
+
+  enable_source_maps:   ['ENABLE_SOURCE_MAPS'],
+  remote_content_limit: ['REMOTE_CONTENT_LIMIT']
 )
