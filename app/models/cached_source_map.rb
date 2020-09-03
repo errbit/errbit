@@ -8,7 +8,7 @@ class CachedSourceMap
     AirbrakeApi::V3::SourceMapLine.new(source_map, generated_line).original_line
   end
 
-  private
+private
 
   def source_map
     @source_map ||= SourceMap::Map.from_hash(data)

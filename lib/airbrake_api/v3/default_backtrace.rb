@@ -9,14 +9,14 @@ module AirbrakeApi
         lines.map do |backtrace_line|
           {
             method: backtrace_line['function'],
-            file: backtrace_line['file'],
+            file:   backtrace_line['file'],
             number: backtrace_line['line'],
             column: backtrace_line['column']
           }
         end
       end
 
-      private
+    private
 
       attr_reader :lines
     end

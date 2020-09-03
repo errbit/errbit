@@ -14,7 +14,7 @@ module AirbrakeApi
         lines.map { |backtrace_line| source_map(backtrace_line['file']).original_line(backtrace_line) }
       end
 
-      private
+    private
 
       attr_reader :lines, :source_map_cache
 

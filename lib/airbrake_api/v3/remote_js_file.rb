@@ -24,7 +24,7 @@ module AirbrakeApi
         DummySourceMap.new
       end
 
-      private
+    private
 
       attr_reader :remote_file_url, :downloaded
 
@@ -32,7 +32,7 @@ module AirbrakeApi
         js_source = RemoteContent.new(remote_file_url).data
 
         last_js_line = StringIO.new(js_source).readlines.last
-        return unless last_js_line&.include?(SOURCE_MAP_COMMENT_IDENTIFIER)
+        return unless last_js_line && last_js_line.include?(SOURCE_MAP_COMMENT_IDENTIFIER)
 
         source_map_name = last_js_line.sub(SOURCE_MAP_COMMENT_IDENTIFIER, '')
 
@@ -41,11 +41,11 @@ module AirbrakeApi
         return source_map_name if URI(source_map_name).scheme
 
         URI::Generic.build(scheme: uri.scheme,
-                           host: uri.host,
-                           port: uri.port,
-                           path: (uri.path.split('/')[0..-2] + [source_map_name]).join('/')).to_s
+                           host:   uri.host,
+                           port:   uri.port,
+                           path:   (uri.path.split('/')[0..-2] + [source_map_name]).join('/')).to_s
       rescue RemoteContent::Error
-        # noop
+        nil
       end
 
       def fetch_cached_source_map

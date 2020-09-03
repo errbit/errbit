@@ -17,10 +17,10 @@ module AirbrakeApi
       rescue Down::Error
         raise Error
       ensure
-        file&.close
+        file.close if file
       end
 
-      private
+    private
 
       attr_reader :url
     end

@@ -17,7 +17,7 @@ module AirbrakeApi
         @data = nil
       end
 
-      private
+    private
 
       attr_reader :remote_file, :downloaded
 

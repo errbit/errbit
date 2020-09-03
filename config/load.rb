@@ -72,6 +72,6 @@ Errbit::Config = Configurator.run(
 
   devise_modules:            ['DEVISE_MODULES'],
 
-  enable_source_maps:   ['ENABLE_SOURCE_MAPS'],
-  remote_content_limit: ['REMOTE_CONTENT_LIMIT']
+  enable_source_maps:        ['ENABLE_SOURCE_MAPS'],
+  remote_content_limit:      ['REMOTE_CONTENT_LIMIT']
 )
