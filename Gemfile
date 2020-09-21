@@ -97,6 +97,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'pjax_rails'
 gem 'underscore-rails'
+gem 'rack-attack'
 
 gem 'sucker_punch'
 
