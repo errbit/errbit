@@ -28,7 +28,7 @@
 
 - content_for :comments do
   %h3= t('.comments')
-  - problem.comments.each do |comment|
+  - problem.comments.ordered.each do |comment|
     .window
       %table.comment
         %tr
