@@ -4,6 +4,7 @@ services:
   errbit:
     build:
       context: .
+      dockerfile: dev.Dockerfile
     ports:
       - "8080:8080"
     depends_on:
