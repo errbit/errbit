@@ -86,6 +86,7 @@ en:
       show_resolved: "show resolved"
     table:
         app: App
+        env: Env
         what_&_where: 'Where & What'
         latest: Latest
         count: Count
@@ -113,11 +114,11 @@ en:
       summary: Summary
       backtrace: Backtrace
       user: User
-      environment: Environment
       parameters: Parameters
       session: Session
       ago_by: ago by
       ago_by_unkown_user: ago by [Unkown User]
+      first_notice: First Notice
       last_notice: Last Notice
       environment: Environment
       app: App
@@ -253,6 +254,8 @@ en:
       similar: Similar
       browser: Browser
       tenant: Origin
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
       app_server: App Server
       app_version: App Version
       framework: Framework

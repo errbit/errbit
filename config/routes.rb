@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       end
 
       member do
+        get :xhr_sparkline
         put :resolve
         put :unresolve
         post :create_issue
@@ -56,8 +57,11 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'problems/:id' => 'problems#show_by_id'
+
   get 'health/readiness' => 'health#readiness'
   get 'health/liveness' => 'health#liveness'
+  get 'health/api-key-tester' => 'health#api_key_tester'
 
   namespace :api do
     namespace :v1 do

@@ -15,7 +15,7 @@ class BacktraceLineDecorator < Draper::Decorator
   end
 
   def file
-    object[:file].to_s
+    object.try(:[], :file).to_s
   end
 
   def method

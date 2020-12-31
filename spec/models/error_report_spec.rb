@@ -85,8 +85,14 @@ describe ErrorReport do
     describe "notice create" do
       before { error_report.generate_notice! }
       subject { error_report.notice }
-      its(:message) { 'HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works.' }
-      its(:framework) { should == 'Rails: 3.2.11' }
+
+      it 'has correct message' do
+        expect(subject.message).to include('HoptoadTestingException: Testing hoptoad via "rake hoptoad:test". If you can see this, it works')
+      end
+
+      it 'has correct framework' do
+        expect(subject.framework).to eq('Rails: 3.2.11')
+      end
 
       it 'has complete backtrace' do
         expect(subject.backtrace_lines.size).to eq 73
@@ -276,6 +282,14 @@ describe ErrorReport do
         it "sends email on 3rd occurrence" do
           3.times { described_class.new(xml).generate_notice! }
           expect(ActionMailer::Base.deliveries.length).to eq(2)
+        end
+
+        it "sends email on all occurrences when problem was resolved" do
+          3.times do
+            notice = described_class.new(xml).generate_notice!
+            notice.problem.resolve!
+          end
+          expect(ActionMailer::Base.deliveries.length).to eq(3)
         end
       end
     end

@@ -17,7 +17,9 @@ class IssueTrackerFieldDecorator < Draper::Decorator
       value:       issue_tracker.options[key.to_s])
   end
 
-  private def input_field
+private
+
+  def input_field
     object == :password ? :password_field : :text_field
   end
 end

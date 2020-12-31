@@ -173,7 +173,9 @@ protected
     end
   end
 
-  private def app_params
+private
+
+  def app_params
     params.require(:app).permit!
   end
 end

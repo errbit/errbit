@@ -10,10 +10,10 @@ if ENV['COVERAGE']
   Coveralls.wear!('rails') do
     add_filter 'bundle'
   end
-  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
     Coveralls::SimpleCov::Formatter
-  ]
+  ])
   SimpleCov.start('rails') do
     add_filter 'bundle'
   end
@@ -21,7 +21,6 @@ end
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/its'
 require 'email_spec'
 require 'xmpp4r'
 require 'xmpp4r/muc'
@@ -29,6 +28,23 @@ require 'mongoid-rspec'
 require 'fabrication'
 require 'sucker_punch/testing/inline'
 require 'errbit_plugin/mock_issue_tracker'
+
+if RUBY_VERSION >= '2.6.0'
+  if Rails.version < '5'
+    module ActionController
+      class TestResponse < ActionDispatch::TestResponse
+        def recycle!
+          # HACK: to avoid MonitorMixin double-initialize error:
+          @mon_mutex_owner_object_id = nil
+          @mon_mutex = nil
+          initialize
+        end
+      end
+    end
+  else
+    puts "Monkeypatch for ActionController::TestResponse no longer needed"
+  end
+end
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.

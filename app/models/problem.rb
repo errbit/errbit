@@ -2,6 +2,7 @@
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.
 
+# rubocop:disable Metrics/ClassLength. At some point we need to break up this class, but I think it doesn't have to be right now.
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -72,6 +73,30 @@ class Problem
 
   def self.in_env(env)
     env.present? ? where(environment: env) : scoped
+  end
+
+  def self.filtered(filter)
+    if filter
+      filter_components = filter.scan(/(-app):(['"][^'"]+['"]|[^ ]+)/)
+      app_names_to_exclude = filter_components.map do |filter_component_tuple|
+        filter_type, filter_value = filter_component_tuple
+
+        # get rid of quotes that we pulled in from the regex matcher above
+        filter_value.gsub!(/^['"]/, '')
+        filter_value.gsub!(/['"]$/, '')
+
+        # this is the only supported filter_type at this time
+        if filter_type == '-app'
+          filter_value
+        end
+      end
+    end
+
+    if filter && app_names_to_exclude.present?
+      where(:app_name.nin => app_names_to_exclude)
+    else
+      scoped
+    end
   end
 
   def self.cache_notice(id, notice)
@@ -206,13 +231,56 @@ class Problem
 
     # recache each new problem
     new_problems.each(&:recache)
-
     new_problems
+  end
+
+  def grouped_notice_counts(since, group_by = 'day')
+    key_op = [['year', '$year'], ['day', '$dayOfYear'], ['hour', '$hour']]
+    key_op = key_op.take(1 + key_op.find_index { |key, _op| group_by == key })
+    project_date_fields = Hash[*key_op.collect { |key, op| [key, { op => "$created_at" }] }.flatten]
+    group_id_fields = Hash[*key_op.collect { |key, _op| [key, "$#{key}"] }.flatten]
+    pipeline = [
+      {
+        "$match" => {
+          "err_id"     => { '$in' => errs.map(&:id) },
+          "created_at" => { "$gt" => since }
+        }
+      },
+      { "$project" => project_date_fields },
+      { "$group" => { "_id" => group_id_fields, "count" => { "$sum" => 1 } } },
+      { "$sort" => { "_id" => 1 } }
+    ]
+    Notice.collection.aggregate(pipeline).find.to_a
+  end
+
+  def zero_filled_grouped_noticed_counts(since, group_by = 'day')
+    non_zero_filled = grouped_notice_counts(since, group_by)
+    buckets = group_by == 'day' ? 14 : 24
+
+    ruby_time_method = group_by == 'day' ? :yday : :hour
+    bucket_times = Array.new(buckets) { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
+    bucket_times.to_a.map do |bucket_time|
+      count = if (data_for_day = non_zero_filled.detect { |item| item.dig('_id', group_by) == bucket_time })
+                data_for_day['count']
+              else
+                0
+              end
+      { bucket_time => count }
+    end
+  end
+
+  def grouped_notice_count_relative_percentages(since, group_by = 'day')
+    zero_filled = zero_filled_grouped_noticed_counts(since, group_by).map { |h| h.values.first }
+    max = zero_filled.max
+    zero_filled.map do |number|
+      max.zero? ? 0 : number.to_f / max.to_f * 100.0
+    end
   end
 
   def self.ordered_by(sort, order)
     case sort
     when "app"            then order_by(["app_name", order])
+    when "environment"    then order_by(["environment", order])
     when "message"        then order_by(["message", order])
     when "last_notice_at" then order_by(["last_notice_at", order])
     when "count"          then order_by(["notices_count", order])
@@ -232,7 +300,7 @@ class Problem
 
 private
 
-  def attribute_count_descrease(name, value)
+  def attribute_count_decrease(name, value)
     counter = send(name)
     index = attribute_index(value)
     if counter[index] && counter[index]['count'] > 1
@@ -247,3 +315,4 @@ private
     Digest::MD5.hexdigest(value.to_s)
   end
 end
+# rubocop:enable Metrics/ClassLength
