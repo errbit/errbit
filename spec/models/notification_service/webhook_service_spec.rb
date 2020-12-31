@@ -5,7 +5,7 @@ describe NotificationServices::WebhookService, type: 'model' do
     problem = notice.problem
 
     payload = notification_service.message_for_webhook(problem)
-    expect(HTTParty).to receive(:post).with(notification_service.api_token, body: payload).and_return(true)
+    expect(HTTParty).to receive(:post).with(notification_service.api_token, headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Errbit' }, body: payload.to_json).and_return(true)
 
     notification_service.create_notification(problem)
   end

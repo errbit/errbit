@@ -5,7 +5,6 @@
   = link_to(t('.cancel'), user_path(user), :class => 'button')
 
 = form_for user, :html => {:autocomplete => "off"} do |f|
-  = user.errors.full_messages.to_sentence
   = render 'fields', :f => f
 
   %div.buttons= f.submit t('.update_user')

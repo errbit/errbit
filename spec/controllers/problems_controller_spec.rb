@@ -122,6 +122,21 @@ describe ProblemsController, type: 'controller' do
     end
   end
 
+  # you do not need an app id, strictly speaking, to find
+  # a problem, and if your metrics system does not happen
+  # to know the app id, but does know the problem id,
+  # it can be handy to have a way to link in to errbit.
+  describe "GET /problems/:id" do
+    before do
+      sign_in user
+    end
+
+    it "should redirect to the standard problems page" do
+      get :show_by_id, id: err.problem.id
+      expect(response).to redirect_to(app_problem_path(app, err.problem.id))
+    end
+  end
+
   describe "GET /apps/:app_id/problems/:id" do
     before do
       sign_in user
@@ -142,6 +157,16 @@ describe ProblemsController, type: 'controller' do
       expect(response).to be_success
     end
 
+    context "when rendering views" do
+      render_views
+
+      it "successfully renders the view even when there are no notices attached to the problem" do
+        expect(err.problem.notices).to be_empty
+        get :show, app_id: app.id, id: err.problem.id
+        expect(response).to be_success
+      end
+    end
+
     context 'pagination' do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|
@@ -160,6 +185,17 @@ describe ProblemsController, type: 'controller' do
         expect(assigns(:notices).entries.count).to eq 1
         expect(assigns(:notices)).to include(notices.first)
       end
+    end
+  end
+
+  describe "GET /apps/:app_id/problems/:id/xhr_sparkline" do
+    before do
+      sign_in user
+    end
+
+    it "renders without error" do
+      get :xhr_sparkline, app_id: app.id, id: err.problem.id
+      expect(response).to be_success
     end
   end
 

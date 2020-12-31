@@ -25,9 +25,7 @@ $(function() {
                              "?copy_attributes_from=" + $(this).val();
     });
 
-    $('input[type=submit][data-action]').live('click', function() {
-      $(this).closest('form').attr('action', $(this).attr('data-action'));
-    });
+    bindProblemButtonsActions();
 
     $('.notice-pagination').each(function() {
       $.pjax.defaults = {timeout: 2000};
@@ -80,11 +78,17 @@ $(function() {
     });
   }
 
-  function activateSelectableRows() {
+  window.bindProblemButtonsActions = function() {
+      $('input[type=submit][data-action]').on('click', function() {
+          $(this).closest('form').attr('action', $(this).attr('data-action'));
+      });
+  };
+
+    function activateSelectableRows() {
     $('.selectable tr').click(function(event) {
       if(!_.include(['A', 'INPUT', 'BUTTON', 'TEXTAREA'], event.target.nodeName)) {
-        var checkbox = $(this).find('input[name="problems[]"]');
-        checkbox.attr('checked', !checkbox.is(':checked'));
+        var checkbox = $(this).find('input[name="problems[]"]').get(0);
+        checkbox.checked = !checkbox.checked;
       }
     });
   }
@@ -116,7 +120,7 @@ $(function() {
     $('td.backtrace_separator').hide();
   }
   // Show external backtrace lines when clicking separator
-  $('td.backtrace_separator span').on('click', show_external_backtrace);
+  $(document).on('click', 'td.backtrace_separator span', show_external_backtrace);
   // Hide external backtrace on page load
   hide_external_backtrace();
 

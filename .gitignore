@@ -19,5 +19,7 @@ bundle
 coverage
 *#
 .ruby-version
+.tool-versions
 NOTES
+*.swp
 .docker-development-vars

@@ -101,14 +101,14 @@ function activateCheckboxHooks() {
   // Hooks to hide/show content when a checkbox is clicked
   $('input[type="checkbox"][data-hide-when-checked]').each(function(){
     $(this).change(function(){
-      el = $($(this).data('hide-when-checked'));
-      $(this).attr('checked') ? el.hide() : el.show();
+      var el = $($(this).data('hide-when-checked'));
+      el.toggle(!$(this).is(':checked'));
     });
   });
   $('input[type="checkbox"][data-show-when-checked]').each(function(){
     $(this).change(function(){
-      el = $($(this).data('show-when-checked'));
-      $(this).attr('checked') ? el.show() : el.hide();
+      var el = $($(this).data('show-when-checked'));
+      el.toggle($(this).is(':checked'));
     });
   });
 }

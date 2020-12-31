@@ -1,11 +1,10 @@
 # Deployment Notes
 There are any number of ways to deploy Errbit, but official support is limited
-to heroku and capistrano.
+to Heroku.
 
 See specific notes on deployment via:
 - [heroku](deployment/heroku.md)
 - [dokku](deployment/dokku.md)
-- [capistrano](deployment/capistrano.md)
 - [docker](deployment/docker.md)
 - [kubernetes (experimental)](deployment/kubernetes.md)
 
@@ -41,6 +40,7 @@ to the TLS certificate.
 If deploying with a system that can check if the app is running as expected then
 there are two endpoints that can be used:
 - `/health/readiness` - suitable for checking if app is ready to receive
-  requests. If response body contains `{ "ok": true, "details": [etc...] }` then app is ready.
+  requests. If response status is 200 and body contains `{ "ok": true,
+"details": [etc...] }` then the app is ready.
 - `/health/liveness` - suitable for pinging periodically to check if app is still
-  alive. Expected result is `{ "ok": true }`
+  alive. Expected result is `{ "ok": true }`.

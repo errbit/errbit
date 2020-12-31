@@ -20,6 +20,6 @@ class NotificationServices::WebhookService < NotificationService
   end
 
   def create_notification(problem)
-    HTTParty.post(api_token, body: message_for_webhook(problem))
+    HTTParty.post(api_token, headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Errbit' }, body: message_for_webhook(problem).to_json)
   end
 end

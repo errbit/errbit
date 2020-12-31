@@ -708,6 +708,12 @@ table.errs .td-container {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+table.errs .count .td-container {
+  width: auto;
+}
+table.errs .count-header {
+  text-align: center;
+}
 table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
@@ -738,6 +744,31 @@ table.tally td.percent {
 table.tally th.value {
   width: 100%;
   text-transform: none;
+}
+
+/* Sparklines */
+
+#sparkline-placeholder {
+  display: none;
+}
+
+.spark {
+  position: relative;
+  border: 1px solid #ddd;
+  float: left;
+  padding: 1px;
+  margin: 0;
+  height: 30px;
+}
+
+.spark > i {
+  display: inline-block;
+  position: relative;
+  width: 10px;
+  background: black;
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
 }
 
 /* Resolve Errs */

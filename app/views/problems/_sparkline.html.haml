@@ -1,0 +1,9 @@
+= now = Time.current
+%tr
+  - two_week_percentages = problem.grouped_notice_count_relative_percentages((now - 13.days).at_beginning_of_day, 'day')
+  - twenty_four_hour_percentages = problem.grouped_notice_count_relative_percentages((now - 23.hours).at_beginning_of_hour, 'hour')
+  %th= t('.graph-2-weeks')
+  %td= Sparklines.for_relative_percentages(two_week_percentages)
+%tr
+  %th= t('.graph (24 hours)')
+  %td= Sparklines.for_relative_percentages(twenty_four_hour_percentages)

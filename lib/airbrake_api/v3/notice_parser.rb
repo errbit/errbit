@@ -69,7 +69,8 @@ module AirbrakeApi
       end
 
       def user_attributes
-        return context['user'] if context['user']
+        user = context['user']
+        return user.is_a?(Hash) ? user : { user: user } if user
 
         {
           'id'       => context['userId'],

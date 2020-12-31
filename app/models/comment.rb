@@ -17,6 +17,8 @@ class Comment
 
   validates :body, presence: true
 
+  scope :ordered, -> { order_by(:created_at.asc) }
+
   def deliver_email
     Mailer.comment_notification(self).deliver_now
   end

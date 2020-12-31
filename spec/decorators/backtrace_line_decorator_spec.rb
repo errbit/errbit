@@ -14,6 +14,9 @@ describe BacktraceLineDecorator, type: :decorator do
   let(:backtrace_line_no_file) do
     described_class.new(number: 884, method: :instance_eval)
   end
+  let(:backtrace_line_no_object) do
+    described_class.new(nil)
+  end
   let(:app) { Fabricate(:app, github_repo: 'foo/bar') }
 
   describe '#to_s' do
@@ -25,6 +28,10 @@ describe BacktraceLineDecorator, type: :decorator do
   describe '#file' do
     it 'returns "" when there is no file' do
       expect(backtrace_line_no_file.file).to eq('')
+    end
+
+    it 'returns "" when there is no object' do
+      expect(backtrace_line_no_object.file).to eq('')
     end
   end
 

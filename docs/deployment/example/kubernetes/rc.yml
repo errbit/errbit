@@ -4,7 +4,6 @@ metadata:
   labels:
     name: errbit
   name: errbit
-  namespace: default
 spec:
   replicas: 1
   selector:
@@ -15,7 +14,7 @@ spec:
         name: errbit
     spec:
       containers:
-      - image: quay.io/ghostmonitor/errbit:latest
+      - image: errbit/errbit:latest
         name: errbit
         ports:
         - containerPort: 8080
@@ -53,6 +52,8 @@ spec:
            value: 'true'
          - name: GITHUB_AUTHENTICATION
            value: 'true'
+         - name: EMAIL_DELIVERY_METHOD
+           value: smtp
          - name: ERRBIT_EMAIL_FROM
            value: 'alarm@example.com'
          - name: SMTP_SERVER

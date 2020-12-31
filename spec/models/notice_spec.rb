@@ -46,8 +46,33 @@ describe Notice, type: 'model' do
 
     it 'truncates the message' do
       notice = Fabricate(:notice, message: long_message)
-      expect(long_message.length).to be > 1000
-      expect(notice.message.length).to eq 1000
+      expect(long_message.length).to be > Notice::MESSAGE_LENGTH_LIMIT
+      expect(notice.message.length).to eq Notice::MESSAGE_LENGTH_LIMIT
+    end
+
+    let(:long_mb_message) do
+      'Elasticsearch::Transport::Transport::Errors::InternalServerError: ' \
+      '[500] {"error":"SearchPhaseExecutionException[Failed to execute phase ' \
+      '[query_fetch], all shards failed; shardFailures {[abc][test][0]: ' \
+      'QueryPhaseExecutionException[[test][0]: query[function score ' \
+      '(_all:t4t44äöäöäööäöäöäöäöäälüöläpläfdälfäpdlsfaäpldspsadpfäsdkfasdö' \
+      'äkfadsökfjaädsfjsdaäfjadsklfldslsäfjkläsdajfläaslhfldskhfasljdhfl444' \
+      '44t44t4t4t4t44t4444tt444tt4þt444t4gt4t444t44t444g4444t4g44g4tt444g44' \
+      '44tgt444ggþ444þ4t4þ4t44444t4444g4444t44gþt4t4tþg4t44t4t4444gt44t444t' \
+      '4t4t444tt44t44þt4t4þt4444444þgþ4tt4t4g444gt4t4t444þ44g4t44g4tgþ4t4t4' \
+      '44t4þþ444t44t4t44~2,function=script[_score * _source.boost], params ' \
+      '[null])],from[0],size[10]: Query Failed [Failed to execute main ' \
+      'query]]; nested: RuntimeException[org.apache.lucene.util.automaton.' \
+      'TooComplexToDeterminizeException: Determinizing automaton would ' \
+      'result in more than 10000 states.]; nested: TooComplexToDeterminize' \
+      'Exception[Determinizing automaton would result in more than 10000 ' \
+      'states.]; }]","status":500}'
+    end
+
+    it 'truncates the long multibyte string message' do
+      notice = Fabricate(:notice, message: long_mb_message)
+      expect(long_mb_message.bytesize).to be > Notice::MESSAGE_LENGTH_LIMIT
+      expect(notice.message.bytesize).to eq Notice::MESSAGE_LENGTH_LIMIT
     end
   end
 

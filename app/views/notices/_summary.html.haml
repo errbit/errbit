@@ -19,6 +19,7 @@
     %tr
       %th= t('.similar')
       %td= problem.notices_count - 1
+    %tr#sparkline-placeholder
     %tr
       %th= t('.browser')
       %td= user_agent_graph(problem)
@@ -41,3 +42,7 @@
       %th= t('.relative_directory')
       %td= notice.server_environment && notice.server_environment["project-root"]
 
+:javascript
+  $.ajax({url: '/apps/#{notice.app.id}/problems/#{problem.id}/xhr_sparkline'}).then(function(resp) {
+    $("#sparkline-placeholder").replaceWith(resp);
+  });
