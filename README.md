@@ -249,6 +249,7 @@ var airbrake = new airbrakeJs.Client({
   projectId: 'ERRBIT API KEY',
   projectKey: 'ERRBIT API KEY (again)',
   reporter: 'xhr',
+  remoteConfig: false,
   host: 'https://myerrbit.com'
 });
 ```
