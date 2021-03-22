@@ -171,7 +171,7 @@ GEM
     launchy (2.4.3-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
-    libv8 (3.16.14.19)
+    libv8 (8.4.255.0)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -187,6 +187,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_mime (1.0.1)
     mini_portile2 (2.5.0)
+    mini_racer (0.3.1)
+      libv8 (~> 8.4.255)
     minitest (5.14.0)
     mongo (2.11.3)
       bson (>= 4.4.2, < 5.0.0)
@@ -301,7 +303,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    ref (2.0.0)
     regexp_parser (1.3.0)
     request_store (1.1.0)
     responders (2.4.1)
@@ -383,9 +384,6 @@ GEM
     temple (0.8.2)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.19.4)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
@@ -450,6 +448,7 @@ DEPENDENCIES
   kaminari-mongoid
   launchy
   meta_request
+  mini_racer
   mongoid (~> 5.4)
   mongoid-rspec
   omniauth
@@ -476,7 +475,6 @@ DEPENDENCIES
   rushover
   sass-rails
   sucker_punch
-  therubyracer
   timecop
   uglifier
   underscore-rails
