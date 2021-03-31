@@ -36,8 +36,6 @@ gem 'hoptoad_notifier', "~> 2.4"
 # Notification services
 # ---------------------------------------
 gem 'campy'
-# Hipchat
-gem 'hipchat'
 # Google Talk
 gem 'xmpp4r', require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
