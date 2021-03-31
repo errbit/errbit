@@ -210,7 +210,13 @@ GEM
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    nokogiri (1.11.1-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.11.1-java)
+      racc (~> 1.4)
+    nokogiri (1.11.1-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.1)
       faraday (>= 0.8, < 0.16.0)
@@ -414,8 +420,13 @@ GEM
     yajl-ruby (1.4.1)
 
 PLATFORMS
+  arm64-darwin-20
   java
   ruby
+  x86_64-darwin-18
+  x86_64-darwin-19
+  x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   actionmailer (~> 4.2.10)
