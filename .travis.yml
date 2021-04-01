@@ -8,6 +8,7 @@ rvm:
 env:
   global:
     - COVERAGE=true JRUBY_OPTS=--debug
+    - BUNDLER_VERSION=2.1.4
   matrix:
     - MONGODB=ubuntu1604-4.2.3
     - MONGODB=ubuntu1604-4.0.16
@@ -22,6 +23,7 @@ cache:
 
 before_install:
   - gem update --system
+  - gem install bundler --version 2.1.4
 
 before_script:
   - wget --directory-prefix=mongodb-install/ https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
