@@ -102,9 +102,10 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0)
-    email_spec (1.6.0)
+    email_spec (2.2.0)
+      htmlentities (~> 4.3.3)
       launchy (~> 2.1)
-      mail (~> 2.2)
+      mail (~> 2.7)
     errbit_github_plugin (0.3.0)
       errbit_plugin
       octokit
