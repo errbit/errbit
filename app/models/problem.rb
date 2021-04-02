@@ -61,7 +61,15 @@ class Problem
   scope :unresolved, -> { where(resolved: false) }
   scope :ordered, -> { order_by(:last_notice_at.desc) }
   scope :for_apps, ->(apps) { where(:app_id.in => apps.all.map(&:id)) }
-  scope :search, ->(value) { where('$text' => { '$search' => value }) }
+
+  # looking up the Notice inside the scope is a hack, but it's handy to have
+  # the scope for chaining. i'm assuming that the indexed Notice lookup is not
+  # costly (it is not for me with 10,000,000 notices), especially with how
+  # infrequently searches happen
+  scope :search, lambda { |value|
+    notice = Notice.where(id: value).first
+    notice ? where(id: notice.err.problem_id) : where('$text' => { '$search' => value })
+  }
 
   def self.all_else_unresolved(fetch_all)
     if fetch_all

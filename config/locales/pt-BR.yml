@@ -123,6 +123,7 @@ pt-BR:
       where: Onde
       up: subir
       resolve: resolver
+      notice_by_id: "notificação: %{notice_id}"
   comments:
     confirm_delete: "Excluir permanentemente este comentário?"
   users:

@@ -125,6 +125,7 @@ en:
       where: Where
       up: up
       resolve: resolve
+      notice_by_id: "Notice: %{notice_id}"
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:

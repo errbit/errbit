@@ -84,4 +84,20 @@ describe NoticesController, type: 'controller' do
       end
     end
   end
+
+  describe "GET /notices/:id" do
+    context 'when logged in as an admin' do
+      before(:each) do
+        @user = Fabricate(:admin)
+        sign_in @user
+      end
+
+      it "should locate notice and redirect to problem with notice_id" do
+        problem = Fabricate(:problem, app: app, environment: "production")
+        notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
+        get :show_by_id, id: notice.id
+        expect(response).to redirect_to(app_problem_path(problem.app, problem, notice_id: notice.id))
+      end
+    end
+  end
 end

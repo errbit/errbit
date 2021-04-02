@@ -33,6 +33,12 @@ class NoticesController < ApplicationController
     redirect_to app_problem_path(problem.app, problem)
   end
 
+  def show_by_id
+    notice = Notice.find(params[:id])
+    problem = notice.problem
+    redirect_to app_problem_path(problem.app, problem, notice_id: notice.id)
+  end
+
 private
 
   def notice_params
