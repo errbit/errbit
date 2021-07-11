@@ -21,6 +21,7 @@
     = link_to t('.unwatch'), app_watcher_path(app_id: app, id: current_user.id), method: :delete, class: 'button'
   - else
     = link_to t('.watch'), app_watcher_path(app_id: app, id: current_user.id), method: :put, class: 'button'
+  = link_to t('.badges'), badges_app_path(app), class: 'button'
 
 %h3#watchers_toggle
   =t('.watchers')

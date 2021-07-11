@@ -1,6 +1,6 @@
 Fabricator :notice do
-  app
   err
+  app { |attr, _| attr[:err].problem.app }
   error_class 'FooError'
   message 'FooError: Too Much Bar'
   backtrace

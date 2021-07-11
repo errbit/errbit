@@ -1,0 +1,28 @@
+- content_for :title, app.name + " - Badges"
+
+- @badges.each do |badge_class|
+  %h3= badge_class.title
+  - path = badge_path(app, badge_class.key)
+  = link_to path do
+    = image_tag path
+
+  %div.badge-code-block
+    %strong Markdown
+    %pre
+      %code
+        [![#{badge_class.title}](#{path})](#{app_url(app)})
+
+  %div.badge-code-block
+    %strong HTML
+    %pre
+      %code
+        :escaped
+          <a href="#{app_url(app)}"><img src="#{path}" alt="#{badge_class.title}" height="18"></a>
+
+:css
+  .badge-code-block {
+    margin-top: 15px;
+  }
+  .badge-code-block pre {
+    white-space: pre-wrap;
+  }
