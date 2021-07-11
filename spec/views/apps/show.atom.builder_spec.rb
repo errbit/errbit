@@ -1,6 +1,7 @@
 describe "apps/show.atom.builder", type: 'view' do
-  let(:app) { stub_model(App) }
-  let(:problems) { [stub_model(Problem, message: 'foo', app: app)] }
+  let(:notice) { Fabricate(:notice) }
+  let(:app) { notice.app }
+  let(:problems) { [notice.problem] }
 
   before do
     allow(view).to receive(:app).and_return(app)
