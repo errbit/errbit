@@ -215,6 +215,7 @@ describe ProblemsController, type: 'controller' do
     it "should resolve the issue" do
       put :resolve, app_id: @err.app.id, id: @err.problem.id
       expect(@err.problem.reload.resolved).to be(true)
+      expect(@err.problem.reload.resolved_by).to eq user
     end
 
     it "should display a message" do
@@ -418,6 +419,7 @@ describe ProblemsController, type: 'controller' do
       it "should resolve the issue" do
         post :resolve_several, problems: [@problem2.id.to_s]
         expect(@problem2.reload.resolved?).to eq true
+        expect(@problem2.resolved_by).to eq user
       end
 
       it "should display a message about 1 err" do

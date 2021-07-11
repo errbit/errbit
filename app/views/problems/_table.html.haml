@@ -43,7 +43,11 @@
                   %em= truncate(comment.body, :length => 100, :separator => ' ')
           %td.latest
             - value = "#{time_ago_in_words(problem.last_notice_at)} #{I18n.t('problems.table.ago')}"
-            %div.td-container{class: 'nowrap', title: value}= value
+            %div.td-container{class: 'nowrap', title: value}
+              = value
+              %br
+              - if problem.resolved_by
+                = problem.resolved_by.display_name
           %td.count.narrow-as-possible
             %div.td-container= link_to problem.notices_count, app_problem_path(problem.app, problem)
             - if any_issue_links

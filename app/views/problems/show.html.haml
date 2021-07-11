@@ -13,6 +13,10 @@
   = problem.first_notice_at.to_s(:precise)
   %strong= t('.last_notice') + ':'
   = problem.last_notice_at.to_s(:precise)
+  - if problem.resolved_by
+    %br
+    %strong= t('.resolved_by') + ':'
+    = problem.resolved_by.display_name
 - content_for :action_bar do
   - if problem.unresolved?
     %span= link_to t('.resolve'), [:resolve, app, problem], :method => :put,

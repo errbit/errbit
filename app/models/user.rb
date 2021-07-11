@@ -47,6 +47,8 @@ class User
     validates :username, presence: true
   end
 
+  has_many :resolved_problems, class_name: "Problem", inverse_of: :resolved_by
+
   def self.valid_google_domain?(email)
     return true if Errbit::Config.google_authorized_domains.nil?
     match_data = /.+@(?<domain>.+)$/.match(email)
@@ -114,6 +116,14 @@ class User
     self.class.validators_on(:password).map { |v| v.validate_each(self, :password, password) }
     return false if errors.any?
     save(validate: false)
+  end
+
+  def display_name
+    if Errbit::Config.user_has_username
+      username
+    else
+      email
+    end
   end
 
 private
