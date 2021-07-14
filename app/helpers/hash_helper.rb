@@ -1,6 +1,6 @@
 module HashHelper
   def pretty_hash(hash, nesting = 0)
-    return '{}' if hash.empty?
+    return hash.to_s unless hash.is_a?(Hash)
 
     tab_size = 2
     nesting += 1
