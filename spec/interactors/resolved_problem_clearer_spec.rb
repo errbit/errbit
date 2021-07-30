@@ -18,9 +18,9 @@ describe ResolvedProblemClearer do
           Problem.count
         }
       end
-      it 'not repair database' do
+      it 'not compact database' do
         allow(Mongoid.default_client).to receive(:command).and_call_original
-        expect(Mongoid.default_client).to_not receive(:command).with(repairDatabase: 1)
+        expect(Mongoid.default_client).to_not receive(:command).with(compact: an_instance_of(String))
         resolved_problem_clearer.execute
       end
     end
@@ -28,7 +28,7 @@ describe ResolvedProblemClearer do
     context "with problem resolve" do
       before do
         allow(Mongoid.default_client).to receive(:command).and_call_original
-        allow(Mongoid.default_client).to receive(:command).with(repairDatabase: 1)
+        allow(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
         problems.first.resolve!
         problems.second.resolve!
       end
@@ -43,8 +43,8 @@ describe ResolvedProblemClearer do
         expect(Problem.where(_id: problems.second.id).first).to be_nil
       end
 
-      it 'repair database' do
-        expect(Mongoid.default_client).to receive(:command).with(repairDatabase: 1)
+      it 'compact database' do
+        expect(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
         resolved_problem_clearer.execute
       end
     end
