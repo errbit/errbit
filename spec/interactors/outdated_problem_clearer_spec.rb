@@ -22,9 +22,9 @@ describe OutdatedProblemClearer do
           Problem.count
         }
       end
-      it 'not repair database' do
+      it 'not compact database' do
         allow(Mongoid.default_client).to receive(:command).and_call_original
-        expect(Mongoid.default_client).to_not receive(:command).with(repairDatabase: 1)
+        expect(Mongoid.default_client).to_not receive(:command).with(compact: an_instance_of(String))
         outdated_problem_clearer.execute
       end
     end
@@ -32,7 +32,7 @@ describe OutdatedProblemClearer do
     context "with old problems" do
       before do
         allow(Mongoid.default_client).to receive(:command).and_call_original
-        allow(Mongoid.default_client).to receive(:command).with(repairDatabase: 1)
+        allow(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
         problems.first.update(last_notice_at: Time.zone.at(946_684_800.0))
         problems.second.update(last_notice_at: Time.zone.at(946_684_800.0))
       end
@@ -47,8 +47,8 @@ describe OutdatedProblemClearer do
         expect(Problem.where(_id: problems.second.id).first).to be_nil
       end
 
-      it 'repair database' do
-        expect(Mongoid.default_client).to receive(:command).with(repairDatabase: 1)
+      it 'compact database' do
+        expect(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
         outdated_problem_clearer.execute
       end
     end
