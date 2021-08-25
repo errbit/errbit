@@ -51,6 +51,7 @@ jobs:
       - save_caches
       - run: ruby -v
       - run: bundle -v
+      - run: bundle exec rake errbit:bootstrap
       - run: bundle exec rspec
       - run: bundle exec rubocop
 workflows:
