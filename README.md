@@ -1,7 +1,7 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
+# Errbit [![CircleCI][circleci-img-url]][circleci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
-[travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
-[travis-ci-url]: http://travis-ci.org/errbit/errbit
+[circleci-img-url]: https://circleci.com/gh/errbit/errbit.svg?style=shield
+[circleci-url]: https://circleci.com/gh/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
 [coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=master
@@ -354,9 +354,9 @@ See the [contribution guidelines](CONTRIBUTING.md)
 Running tests
 -------------
 
-Check the [.travis.yml](.travis.yml) file to see how tests are run
+Check the [.circleci/config.yml](.circleci/config.yml) file to see how tests are run
 
 Copyright
 ---------
 
-Copyright (c) 2010-2015 Errbit Team
+Copyright (c) 2010-2021 Errbit Team
