@@ -49,6 +49,9 @@ jobs:
       - restore_caches
       - install_gems
       - save_caches
+      # NOTE: Add .ruby-version for rubocop
+      - run: echo << parameters.ruby_version >> > .ruby-version
+      - run: cat .ruby-version
       - run: ruby -v
       - run: bundle -v
       - run: bundle exec rake errbit:bootstrap
