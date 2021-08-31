@@ -31,7 +31,7 @@ Layout/EmptyLineAfterMagicComment:
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/IndentArray:
+Layout/IndentFirstArrayElement:
   EnforcedStyle: consistent
 
 # Offense count: 1

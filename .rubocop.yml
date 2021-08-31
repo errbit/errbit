@@ -44,7 +44,7 @@ Layout/DotPosition:
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
 
 Layout/AlignHash:
