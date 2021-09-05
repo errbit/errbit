@@ -65,5 +65,5 @@ workflows:
       - mongo-ruby:
           matrix:
             parameters:
-              ruby_version: ["2.5", "2.6"]
+              ruby_version: ["2.5", "2.6", "2.7"]
               mongo_version: ["4.0", "4.2", "4.4", "5.0"]
