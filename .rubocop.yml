@@ -1,4 +1,7 @@
-require: rubocop-performance
+require:
+  - rubocop-rails
+  - rubocop-performance
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:
