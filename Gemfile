@@ -51,6 +51,9 @@ gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
 
+# For Ruby 2.7
+gem 'bigdecimal', '~> 1.4.4'
+
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
   gem 'pry-rails'

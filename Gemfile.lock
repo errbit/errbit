@@ -52,7 +52,8 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    binding_of_caller (0.8.0)
+    bigdecimal (1.4.4)
+    binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bson (4.12.1)
     bson (4.12.1-java)
@@ -445,6 +446,7 @@ DEPENDENCIES
   actionpack (~> 4.2.11)
   airbrake (~> 4.3.5)
   better_errors
+  bigdecimal (~> 1.4.4)
   binding_of_caller
   campy
   capybara
