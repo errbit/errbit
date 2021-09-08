@@ -360,6 +360,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-performance (1.6.1)
       rubocop (>= 0.71.0)
+    rubocop-rails (2.0.1)
+      rack (>= 1.1)
+      rubocop (>= 0.70.0)
     ruby-progressbar (1.11.0)
     rushover (0.3.0)
       json
@@ -492,6 +495,7 @@ DEPENDENCIES
   rspec-rails
   rubocop (~> 0.71.0)
   rubocop-performance
+  rubocop-rails
   rushover
   sass-rails
   sucker_punch

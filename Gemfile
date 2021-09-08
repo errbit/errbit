@@ -58,6 +58,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'rubocop', '~> 0.71.0', require: false
   gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
