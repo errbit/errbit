@@ -1,4 +1,4 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.5.9-alpine
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
 ENV BUNDLER_VERSION=2.1.4
