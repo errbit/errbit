@@ -11,7 +11,6 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
   && bundle config --global disable_shared_gems false \
   && gem update --system 2.7.4 \
   && gem install bundler --version $BUNDLER_VERSION \
-  && apk upgrade \
   && apk add --no-cache \
     curl \
     less \
