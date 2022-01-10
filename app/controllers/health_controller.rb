@@ -1,4 +1,20 @@
 class HealthController < ActionController::Base
+
+  class << self
+    def impatient_mongoid_client
+      @impatient_mongoid_client ||= Mongo::Client.new(
+        Errbit::Config.mongo_url,
+        server_selection_timeout: 0.5,
+        connect_timeout:          0.5,
+        socket_timeout:           0.5
+      )
+    end
+
+    def clear_mongoid_client_cache
+      @impatient_mongoid_client = nil
+    end
+  end
+
   def readiness
     check_results = [run_mongo_check]
     all_ok = check_results.all? do |check|
@@ -19,15 +35,6 @@ class HealthController < ActionController::Base
     render json: { ok: is_good_result }, status: response_status
   end
 
-  def self.impatient_mongoid_client
-    @impatient_mongoid_client ||= Mongo::Client.new(
-      Errbit::Config.mongo_url,
-      server_selection_timeout: 0.5,
-      connect_timeout:          0.5,
-      socket_timeout:           0.5
-    )
-  end
-
 private
 
   delegate :impatient_mongoid_client, :clear_mongoid_client_cache, to: :class
@@ -46,9 +53,5 @@ private
     { check_name: 'mongo', ok: false, error_details: e.class.to_s }
   ensure
     local_mongoid_client.close
-  end
-
-  def self.clear_mongoid_client_cache
-    @impatient_mongoid_client = nil
   end
 end
