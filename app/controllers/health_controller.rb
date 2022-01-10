@@ -1,5 +1,4 @@
 class HealthController < ActionController::Base
-
   class << self
     def impatient_mongoid_client
       @impatient_mongoid_client ||= Mongo::Client.new(
