@@ -143,22 +143,6 @@ describe "Callback on Notice", type: 'model' do
     end
   end
 
-  describe 'hipcat notifications' do
-    let(:notification_service) { Fabricate(:hipchat_notification_service) }
-    let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
-    let(:app) { Fabricate(:app, notification_service: notification_service) }
-
-    before { Errbit::Config.per_app_notify_at_notices = true }
-    after { Errbit::Config.per_app_notify_at_notices = false }
-
-    it 'creates a hipchat notification' do
-      error_report = ErrorReport.new(notice_attrs)
-      expect(error_report.app.notification_service).
-        to receive(:create_notification)
-      error_report.generate_notice!
-    end
-  end
-
   describe "should send a notification at desired intervals" do
     let(:notification_service) do
       Fabricate(:campfire_notification_service, notify_at_notices: [1, 2])

@@ -11,6 +11,12 @@ describe BacktraceLineDecorator, type: :decorator do
       file:   '[PROJECT_ROOT]/path/to/file/ea315ea4.rb',
       method: :instance_eval)
   end
+  let(:backtrace_line_in_app_slashes) do
+    described_class.new(
+      number: 884,
+      file:   '/PROJECT_ROOT/path/to/file/ea315ea4.rb',
+      method: :instance_eval)
+  end
   let(:backtrace_line_no_file) do
     described_class.new(number: 884, method: :instance_eval)
   end
@@ -44,6 +50,16 @@ describe BacktraceLineDecorator, type: :decorator do
   describe '#path' do
     it 'returns "" when there is no file' do
       expect(backtrace_line_no_file.path).to eq ''
+    end
+  end
+
+  describe '#decorated_path' do
+    it 'parses old backtrace format with square brackets' do
+      expect(backtrace_line_in_app.decorated_path).to eq 'path/to/file/'
+    end
+
+    it 'parses new backtrace format with slashes' do
+      expect(backtrace_line_in_app_slashes.decorated_path).to eq 'path/to/file/'
     end
   end
 

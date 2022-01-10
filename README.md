@@ -1,7 +1,7 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
+# Errbit [![CircleCI][circleci-img-url]][circleci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
-[travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
-[travis-ci-url]: http://travis-ci.org/errbit/errbit
+[circleci-img-url]: https://circleci.com/gh/errbit/errbit.svg?style=shield
+[circleci-url]: https://circleci.com/gh/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
 [coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=master
@@ -57,8 +57,8 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby >= 2.3.x
-* MongoDB 3.4.x-4.0.x
+* Ruby >= 2.5.x
+* MongoDB >= 4.0.x
 
 Installation
 ------------
@@ -249,6 +249,7 @@ var airbrake = new airbrakeJs.Client({
   projectId: 'ERRBIT API KEY',
   projectKey: 'ERRBIT API KEY (again)',
   reporter: 'xhr',
+  remoteConfig: false,
   host: 'https://myerrbit.com'
 });
 ```
@@ -317,7 +318,7 @@ Solutions known to work are listed below:
 
 | Language | Project |
 |----------|---------|
-| PHP (&gt;= 5.3) | [flippa/errbit-php](https://github.com/flippa/errbit-php) |
+| PHP (&gt;= 5.3) | [wasilak/errbit-php](https://github.com/wasilak/errbit-php) |
 | OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP) |
 | Python | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
 
@@ -353,9 +354,9 @@ See the [contribution guidelines](CONTRIBUTING.md)
 Running tests
 -------------
 
-Check the [.travis.yml](.travis.yml) file to see how tests are run
+Check the [.circleci/config.yml](.circleci/config.yml) file to see how tests are run
 
 Copyright
 ---------
 
-Copyright (c) 2010-2015 Errbit Team
+Copyright (c) 2010-2021 Errbit Team

@@ -49,11 +49,21 @@ class ProblemsController < ApplicationController
   def index; end
 
   def show
-    @notices = problem.object.notices.reverse_ordered.
-      page(params[:notice]).per(1)
-    first_notice = @notices.first
-    @notice  = first_notice ? NoticeDecorator.new(first_notice) : nil
+    notice =
+      if params[:notice_id]
+        Notice.find(params[:notice_id])
+      else
+        @notices = problem.object.notices.reverse_ordered.
+          page(params[:notice]).per(1)
+        @notices.first
+      end
+    @notice  = notice ? NoticeDecorator.new(notice) : nil
     @comment = Comment.new
+  end
+
+  def show_by_id
+    problem = Problem.find(params[:id])
+    redirect_to app_problem_path(problem.app, problem)
   end
 
   def xhr_sparkline

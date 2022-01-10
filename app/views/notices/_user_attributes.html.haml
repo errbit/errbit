@@ -6,4 +6,5 @@
     - user.each do |key, value|
       %tr
         %th= key
-        %td= auto_link(auto_link(value.to_s, :urls, :target => "_blank"), :email_addresses).html_safe
+        - value = pretty_hash(value) if value.is_a?(Hash)
+        %td= Rinku.auto_link(ERB::Util.h(value)).html_safe

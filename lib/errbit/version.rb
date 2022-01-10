@@ -2,12 +2,18 @@
 
 module Errbit
   class Version
+    def initialize(ver, dev = false)
+      @version = ver
+      @dev = dev
+    end
+
     def full_version
-      [
-        '0.8.0',
-        'dev',
-        source_version
-      ].compact.join('-')
+      full = [@version]
+      if @dev
+        full << "dev"
+        full << source_version
+      end
+      full.compact.join('-')
     end
 
     def source_version
@@ -16,5 +22,5 @@ module Errbit
     end
   end
 
-  VERSION = Version.new.full_version
+  VERSION = Version.new('0.10.0', true).full_version
 end

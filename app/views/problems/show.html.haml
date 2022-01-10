@@ -11,7 +11,7 @@
   = problem.environment
   %strong= t('.first_notice') + ':'
   = problem.first_notice_at.to_s(:precise)
-  %strong= t('.last_notice') + '::'
+  %strong= t('.last_notice') + ':'
   = problem.last_notice_at.to_s(:precise)
 - content_for :action_bar do
   - if problem.unresolved?
@@ -28,7 +28,7 @@
 
 - content_for :comments do
   %h3= t('.comments')
-  - problem.comments.each do |comment|
+  - problem.comments.ordered.each do |comment|
     .window
       %table.comment
         %tr
@@ -53,7 +53,10 @@
 
 %h4= @notice.try(:message)
 
-= paginate @notices, :param_name => :notice, :theme => :notices
+- if params[:notice_id]
+  %p= t('.notice_by_id', notice_id: params[:notice_id])
+- else
+  = paginate @notices, :param_name => :notice, :theme => :notices
 
 .tab-bar
   %ul

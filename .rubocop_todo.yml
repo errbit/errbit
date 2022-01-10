@@ -41,14 +41,6 @@ Layout/IndentAssignment:
   Exclude:
     - 'app/models/problem.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: auto_detection, squiggly, active_support, powerpack, unindent
-Layout/IndentHeredoc:
-  Exclude:
-    - 'app/models/notification_services/hipchat_service.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
@@ -242,7 +234,6 @@ Style/AccessModifierDeclarations:
     - 'app/helpers/apps_helper.rb'
     - 'app/mailers/mailer.rb'
     - 'app/models/backtrace.rb'
-    - 'app/models/notification_services/hipchat_service.rb'
     - 'app/models/user.rb'
     - 'lib/hoptoad.rb'
     - 'lib/overrides/hoptoad_notifier/hoptoad_notifier.rb'
@@ -270,7 +261,6 @@ Style/ClassAndModuleChildren:
     - 'app/models/notification_services/campfire_service.rb'
     - 'app/models/notification_services/flowdock_service.rb'
     - 'app/models/notification_services/gtalk_service.rb'
-    - 'app/models/notification_services/hipchat_service.rb'
     - 'app/models/notification_services/hoiio_service.rb'
     - 'app/models/notification_services/hubot_service.rb'
     - 'app/models/notification_services/pushover_service.rb'
@@ -300,16 +290,6 @@ Style/EachWithObject:
     - 'app/helpers/application_helper.rb'
     - 'app/models/notice.rb'
     - 'lib/recurse.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Exclude:
-    - 'db/migrate/20150527202629_add_v1_to_hipchat_notification_services.rb'
-    - 'db/migrate/20150926035420_cache_app_on_notice.rb'
-    - 'db/migrate/201510290041_extract_issue_tracker.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -504,7 +484,6 @@ Style/SymbolArray:
 Style/TernaryParentheses:
   Exclude:
     - 'app/helpers/sort_helper.rb'
-    - 'app/models/notification_services/hipchat_service.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

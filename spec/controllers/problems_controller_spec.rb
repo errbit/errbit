@@ -122,6 +122,21 @@ describe ProblemsController, type: 'controller' do
     end
   end
 
+  # you do not need an app id, strictly speaking, to find
+  # a problem, and if your metrics system does not happen
+  # to know the app id, but does know the problem id,
+  # it can be handy to have a way to link in to errbit.
+  describe "GET /problems/:id" do
+    before do
+      sign_in user
+    end
+
+    it "should redirect to the standard problems page" do
+      get :show_by_id, id: err.problem.id
+      expect(response).to redirect_to(app_problem_path(app, err.problem.id))
+    end
+  end
+
   describe "GET /apps/:app_id/problems/:id" do
     before do
       sign_in user

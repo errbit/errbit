@@ -52,6 +52,8 @@ spec:
            value: 'true'
          - name: GITHUB_AUTHENTICATION
            value: 'true'
+         - name: EMAIL_DELIVERY_METHOD
+           value: smtp
          - name: ERRBIT_EMAIL_FROM
            value: 'alarm@example.com'
          - name: SMTP_SERVER
