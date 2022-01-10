@@ -10,21 +10,23 @@ gem 'railties', RAILS_VERSION
 
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
-gem 'devise', '~> 4.4.0'
+gem 'devise', '~> 4.7'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
 gem 'font-awesome-rails'
-gem 'haml'
+gem 'haml', '~> 5.1'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 5.4'
-gem 'mongoid_rails_migrations'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
-gem 'rails_autolink'
+gem 'rinku'
 gem 'useragent'
 
 # Please don't update hoptoad_notifier to airbrake.
@@ -34,8 +36,6 @@ gem 'hoptoad_notifier', "~> 2.4"
 # Notification services
 # ---------------------------------------
 gem 'campy'
-# Hipchat
-gem 'hipchat'
 # Google Talk
 gem 'xmpp4r', require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
@@ -46,13 +46,6 @@ gem 'rushover'
 gem 'httparty'
 # Flowdock
 gem 'flowdock'
-
-# Authentication
-# ---------------------------------------
-# GitHub OAuth
-gem 'omniauth-github'
-# Google OAuth
-gem 'omniauth-google-oauth2'
 
 gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'
@@ -93,7 +86,7 @@ group :heroku, :production do
 end
 
 group :no_docker, :test, :development do
-  gem 'therubyracer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'mini_racer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
 gem 'puma'

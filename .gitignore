@@ -21,3 +21,4 @@ coverage
 .ruby-version
 .tool-versions
 NOTES
+*.swp

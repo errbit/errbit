@@ -29,6 +29,23 @@ require 'fabrication'
 require 'sucker_punch/testing/inline'
 require 'errbit_plugin/mock_issue_tracker'
 
+if RUBY_VERSION >= '2.6.0'
+  if Rails.version < '5'
+    module ActionController
+      class TestResponse < ActionDispatch::TestResponse
+        def recycle!
+          # HACK: to avoid MonitorMixin double-initialize error:
+          @mon_mutex_owner_object_id = nil
+          @mon_mutex = nil
+          initialize
+        end
+      end
+    end
+  else
+    puts "Monkeypatch for ActionController::TestResponse no longer needed"
+  end
+end
+
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

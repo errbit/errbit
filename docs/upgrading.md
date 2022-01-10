@@ -1,4 +1,9 @@
-### Upgrading errbit beyond v0.4.0
+### Upgrading errbit beyond v0.8.0
+
+* Note: There are no migrations to run and the rake task for running migrations
+  has been removed.
+
+### Upgrading errbit from v0.4.0 up to v0.8.0
 
 * You must have already run migrations at least up to v0.3.0. Check to
   make sure you're schema version is at least 20131011155638 by running rake
