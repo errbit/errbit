@@ -46,6 +46,7 @@ jobs:
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-browsers-legacy
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
+    resource_class: medium+
     steps:
       - checkout
       - create_cache_key_files
@@ -69,4 +70,6 @@ workflows:
           matrix:
             parameters:
               ruby_version: ["2.7"]
-              mongo_version: ["4.0", "4.2", "4.4", "5.0"]
+              mongo_version: ["5.0"]
+              # temporarily remove some mongo builds while debugging bundle install issue.
+              # mongo_version: ["4.0", "4.2", "4.4", "5.0"]
