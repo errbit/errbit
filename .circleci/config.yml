@@ -46,7 +46,7 @@ jobs:
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-browsers-legacy
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
-    resource_class: large
+    resource_class: xlarge
     steps:
       - checkout
       - create_cache_key_files
