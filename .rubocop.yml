@@ -54,6 +54,10 @@ Layout/AlignHash:
 Layout/SpaceAroundOperators:
   AllowForAlignment: true
 
+# long spec blocks are probably fine
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+
 Naming/FileName:
   Exclude:
     - 'config/initializers/cve-*.rb'
