@@ -26,10 +26,13 @@ commands:
       - run: gem update --system
       - run: gem install bundler -v $BUNDLER_VERSION
       - run: bundle config set clean true --local
-      - run: bundle config set jobs 4 --local
+      - run: bundle config set jobs 1 --local
       - run: bundle config set path vendor/bundle --local
       - run: bundle config set retry 3 --local
       - run: bundle install
+      - run:
+          command: cat /sys/fs/cgroup/memory/memory.max_usage_in_bytes
+          when: always
 jobs:
   mongo-ruby:
     environment:
