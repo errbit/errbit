@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.2.10'
+RAILS_VERSION = '~> 4.2.11'
 
 send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
@@ -51,12 +51,17 @@ gem 'ri_cal'
 gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
 
+# For Ruby 2.7
+gem 'bigdecimal', '~> 1.4.4'
+
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
   gem 'pry-rails'
   gem 'pry-byebug', platforms: [:mri]
   gem 'quiet_assets'
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 0.71.0', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
@@ -86,10 +91,10 @@ group :heroku, :production do
 end
 
 group :no_docker, :test, :development do
-  gem 'mini_racer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'mini_racer', '~> 0.3.1', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
-gem 'puma'
+gem 'puma', '~> 4.3.8'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'

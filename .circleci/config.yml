@@ -49,8 +49,13 @@ jobs:
       - restore_caches
       - install_gems
       - save_caches
+      # NOTE: Add .ruby-version for rubocop
+      - run: echo << parameters.ruby_version >> > .ruby-version
+      - run: cat .ruby-version
       - run: ruby -v
+      - run: gem -v
       - run: bundle -v
+      - run: bundle exec rubocop -v
       - run: bundle exec rake errbit:bootstrap
       - run: bundle exec rspec
       - run: bundle exec rubocop
@@ -60,5 +65,5 @@ workflows:
       - mongo-ruby:
           matrix:
             parameters:
-              ruby_version: ["2.5", "2.6"]
+              ruby_version: ["2.7"]
               mongo_version: ["4.0", "4.2", "4.4", "5.0"]
