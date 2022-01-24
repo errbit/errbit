@@ -26,18 +26,15 @@ commands:
       - run: gem update --system
       - run: gem install bundler -v $BUNDLER_VERSION
       - run: bundle config set clean true --local
-      - run: bundle config set jobs 1 --local
+      - run: bundle config set jobs 4 --local
       - run: bundle config set path vendor/bundle --local
       - run: bundle config set retry 3 --local
       - run: bundle install
-      - run:
-          command: cat /sys/fs/cgroup/memory/memory.max_usage_in_bytes
-          when: always
 jobs:
   mongo-ruby:
     environment:
       CIRCLECI_RUBYGEMS_CACHE_KEY: '2021082301'
-      BUNDLER_VERSION: 2.3.5
+      BUNDLER_VERSION: 2.1.4
     parameters:
       ruby_version:
         type: string
@@ -46,7 +43,6 @@ jobs:
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-browsers-legacy
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
-    resource_class: xlarge
     steps:
       - checkout
       - create_cache_key_files
@@ -70,6 +66,4 @@ workflows:
           matrix:
             parameters:
               ruby_version: ["2.7"]
-              mongo_version: ["5.0"]
-              # temporarily remove some mongo builds while debugging bundle install issue.
-              # mongo_version: ["4.0", "4.2", "4.4", "5.0"]
+              mongo_version: ["4.0", "4.2", "4.4", "5.0"]
