@@ -69,7 +69,8 @@ describe Mailer do
     it_should_behave_like "a notification email"
 
     it "should html-escape the notice's message for the html part" do
-      expect(email).to have_body_text("class &lt; ActionController::Base")
+      email_html_body = email.body.parts.detect { |p| p.content_type.match(/html/) }.body.raw_source
+      expect(email_html_body).to match("class &lt; ActionController::Base")
     end
 
     it "should have inline css" do
