@@ -1,7 +1,8 @@
-FROM ruby:2.5.9-alpine
+FROM ruby:2.7.5-alpine
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
-ENV BUNDLER_VERSION=2.1.4
+ENV BUNDLER_VERSION=2.3.5
+ENV RUBYGEMS_VERSION=3.3.5
 
 WORKDIR /app
 
@@ -9,7 +10,7 @@ WORKDIR /app
 RUN echo "gem: --no-document" >> /etc/gemrc \
   && bundle config --global frozen 1 \
   && bundle config --global disable_shared_gems false \
-  && gem update --system 2.7.4 \
+  && gem update --system $RUBYGEMS_VERSION \
   && gem install bundler --version $BUNDLER_VERSION \
   && apk add --no-cache \
     curl \
