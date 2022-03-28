@@ -11,8 +11,7 @@
 ### The open source, self-hosted error catcher
 
 Errbit is a tool for collecting and managing errors from other applications.
-It is [Airbrake](http://airbrake.io) API compliant, so if you are already using
-Airbrake, you can just point the `airbrake` gem to your Errbit server (see [howto](#configure-airbrake-gem)).
+It is [Airbrake](http://airbrake.io) API compliant, so you can just point the `airbrake` gem to your Errbit server (see [howto](app/views/apps/_configuration_instructions.html.erb)).
 
 <table>
   <tr>
@@ -234,41 +233,6 @@ it will be displayed under the *User Details* tab:
 ![User details tab](https://errbit.com/images/error_user_information.png)
 
 This tab will be hidden if no user information is available.
-
-Configure Airbrake gem
---------------------------
-
-## Bundler
-
-Add the Airbrake gem to your Gemfile:
-
-```ruby
-gem 'airbrake'
-```
-
-## Manual
-
-Invoke the following command from your terminal:
-
-```bash
-gem install airbrake
-```
-
-### Configuration
-
-```bash
-rails g airbrake
-```
-
-This command will generate a configuration file under
-`config/initializers/airbrake.rb`.
-
-Airbrake supports polling a remote config from airbrake.io, enabled by default. However, since you are using Errbit and not Airbrake, this request will fail and generate an XML error message on stdout. To disable polling the remote config, add the following flag to `config/initializers/airbrake.rb`.
-
-```ruby
-c.remote_config = false
-```
-
 
 Configuration
 -------------
