@@ -23,7 +23,8 @@ class NotificationServices::LarkService < NotificationService
         },
         header: {
           title: {
-            content: problem.message.to_s.truncate(100)
+            content: problem.message.to_s.truncate(100),
+            tag: 'plain_text'
           }
         },
         elements: [
@@ -34,6 +35,21 @@ class NotificationServices::LarkService < NotificationService
               content: problem.where
             },
             fields: post_payload_fields(problem)
+          },
+          {
+            tag: "action",
+            actions: [
+              {
+                tag: "button",
+                text: {
+                  content: "view",
+                  tag: "plain_text"
+                },
+                url: problem.url,
+                type: "default",
+                value: {}
+              }
+            ]
           }
         ]
       }
@@ -41,6 +57,7 @@ class NotificationServices::LarkService < NotificationService
   end
 
   def create_notification(problem)
+    p post_payload(problem)
     HTTParty.post(api_token, headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Errbit' }, body: post_payload(problem))
   end
 
@@ -49,24 +66,24 @@ class NotificationServices::LarkService < NotificationService
   def post_payload_fields(problem)
     [
       {
-        "is_short": true,
-        "text": {
-          "tag": "lark_md",
-          "content": "**Application:**\n#{problem.app.name}"
+        is_short: true,
+        text: {
+          tag: "lark_md",
+          content: "**Application:**\n#{problem.app.name}"
         }
       },
       {
-        "is_short": true,
-        "text": {
-          "tag": "lark_md",
-          "content": "**Environment:**\n#{problem.environment}"
+        is_short: true,
+        text: {
+          tag: "lark_md",
+          content: "**Environment:**\n#{problem.environment}"
         }
       },
       {
-        "is_short": false,
-        "text": {
-          "tag": "lark_md",
-          "content": "**Backtrace:**\n#{backtrace_lines(problem)}"
+        is_short: false,
+        text: {
+          tag: "lark_md",
+          content: "**Backtrace:**\n#{backtrace_lines(problem)}"
         }
       }
     ]
@@ -75,5 +92,16 @@ class NotificationServices::LarkService < NotificationService
   def backtrace_line(line)
     path = line.decorated_path.gsub(%r{</?strong>}, '')
     "#{path}#{line.file_name}:#{line.number} → #{line.method}\n"
+  end
+
+  def backtrace_lines(problem)
+    notice = NoticeDecorator.new problem.notices.last
+    return unless notice
+    backtrace = notice.backtrace
+    return unless backtrace
+
+    output = ''
+    backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
+    "#{output}"
   end
 end
