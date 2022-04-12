@@ -11,8 +11,7 @@
 ### The open source, self-hosted error catcher
 
 Errbit is a tool for collecting and managing errors from other applications.
-It is [Airbrake](http://airbrake.io) API compliant, so if you are already using
-Airbrake, you can just point the `airbrake` gem to your Errbit server.
+It is [Airbrake](http://airbrake.io) API compliant, so you can just point the `airbrake` gem to your Errbit server (see [howto](app/views/apps/_configuration_instructions.html.erb)).
 
 <table>
   <tr>
@@ -234,6 +233,11 @@ it will be displayed under the *User Details* tab:
 ![User details tab](https://errbit.com/images/error_user_information.png)
 
 This tab will be hidden if no user information is available.
+
+Configuration
+-------------
+
+https://github.com/airbrake/airbrake
 
 Javascript error notifications
 --------------------------------------
