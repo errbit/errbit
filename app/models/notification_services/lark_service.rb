@@ -18,7 +18,7 @@ class NotificationServices::WebhookService < NotificationService
       msg_type: 'interactive',
       card: {
         config: {
-          wide_screen_mode: true
+          wide_screen_mode: true,
           enable_forward: true
         },
         header: {
@@ -33,7 +33,7 @@ class NotificationServices::WebhookService < NotificationService
               tag: 'plain_text',
               content: problem.where
             },
-            fields: post_payload_fields(problem),
+            fields: post_payload_fields(problem)
           }
         ]
       }
