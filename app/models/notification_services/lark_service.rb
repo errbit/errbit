@@ -1,5 +1,5 @@
-class NotificationServices::WebhookService < NotificationService
-  LABEL = "LARK"
+class NotificationServices::LarkService < NotificationService
+  LABEL = "lark"
   FIELDS = [
     [:api_token, {
       placeholder: 'URL to receive a POST request when an error occurs',
