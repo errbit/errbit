@@ -2,6 +2,8 @@ name: build-and-publish
 
 on:
   push:
+    branches:
+      - main
     tags:
       - '*'
 
@@ -25,6 +27,7 @@ jobs:
         with:
           images: ${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}
           tags: |
+            type=raw,value=latest
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
