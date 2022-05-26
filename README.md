@@ -112,10 +112,10 @@ Authentication
 If you host Errbit at errbit.example.com, you would fill in:
 
 <dl>
-<dt>URL
-<dd>http://errbit.example.com
-<dt>Callback URL
-<dd>http://errbit.example.com/users/auth/github/callback
+  <dt>URL</dt>
+  <dd>http://errbit.example.com</dd>
+  <dt>Callback URL</dt>
+  <dd>http://errbit.example.com/users/auth/github/callback</dd>
 </dl>
 
 * After you have registered your app, set `GITHUB_CLIENT_ID` and `GITHUB_SECRET`
