@@ -394,7 +394,7 @@ GEM
     temple (0.8.2)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    thor (1.1.0)
+    thor (1.2.1)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
     tilt (2.0.10)
