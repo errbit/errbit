@@ -116,8 +116,8 @@ GEM
     fabrication (2.22.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
-    ffi (1.15.3)
-    ffi (1.15.3-java)
+    ffi (1.15.5)
+    ffi (1.15.5-java)
     flowdock (0.7.1)
       httparty (~> 0.7)
       multi_json
