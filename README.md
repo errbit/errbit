@@ -320,11 +320,11 @@ Use Errbit with applications written in other languages
 In theory, any Airbrake-compatible error catcher for other languages should work with Errbit.
 Solutions known to work are listed below:
 
-| Language | Project |
-|----------|---------|
-| PHP (&gt;= 5.3) | [wasilak/errbit-php](https://github.com/wasilak/errbit-php) |
-| OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP) |
-| Python | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
+| Language            | Project                                                                                                                             |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| PHP (&gt;= 5.3)     | [wasilak/errbit-php](https://github.com/wasilak/errbit-php)                                                                         |
+| OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP)                                                                         |
+| Python              | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
 
 People using Errbit
 -------------------
