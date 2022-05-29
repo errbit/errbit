@@ -61,10 +61,11 @@ gem 'hoptoad_notifier', "~> 2.4", require: false
 
 group :development, :test do
   gem 'rspec-rails'
+  # TODO: update???
+  gem 'airbrake', '~> 4.3.5', require: false
 end
 
 # group :development, :test do
-#   gem 'airbrake', '~> 4.3.5', require: false
 #   gem 'pry-rails'
 #   gem 'pry-byebug', platforms: [:mri]
 #   gem 'quiet_assets'

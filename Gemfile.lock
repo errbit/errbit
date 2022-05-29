@@ -43,6 +43,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake (4.3.8)
+      builder
+      multi_json
     bcrypt (3.1.18)
     bcrypt (3.1.18-java)
     bootsnap (1.11.1)
@@ -288,6 +291,7 @@ PLATFORMS
 DEPENDENCIES
   actionmailer (~> 7.0.0)
   actionpack (~> 7.0.0)
+  airbrake (~> 4.3.5)
   bootsnap
   decent_exposure
   devise (~> 4.7)
