@@ -1,4 +1,4 @@
-if defined? Flowdock
+# if defined? Flowdock
   class NotificationServices::FlowdockService < NotificationService
     LABEL = 'flowdock'
     FIELDS += [
@@ -54,4 +54,4 @@ if defined? Flowdock
       MSG
     end
   end
-end
+# end

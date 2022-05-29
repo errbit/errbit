@@ -1,4 +1,4 @@
-if defined? Campy
+# if defined? Campy
   class NotificationServices::CampfireService < NotificationService
     LABEL = "campfire"
     FIELDS += [
@@ -33,4 +33,4 @@ if defined? Campy
       campy.speak "[errbit] #{problem.app.name} #{notification_description problem} - #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}/problems/#{problem.id}"
     end
   end
-end
+# end
