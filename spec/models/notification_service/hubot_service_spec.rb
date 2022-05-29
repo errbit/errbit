@@ -1,4 +1,6 @@
-describe NotificationServices::HubotService, type: 'model' do
+require "rails_helper"
+
+describe NotificationServices::HubotService do
   it "it should send a notification to Hubot" do
     # setup
     notice = Fabricate :notice

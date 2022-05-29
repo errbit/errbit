@@ -1,4 +1,6 @@
-describe NotificationServices::FlowdockService, type: 'model' do
+require "rails_helper"
+
+describe NotificationServices::FlowdockService do
   let(:service) { Fabricate.build(:flowdock_notification_service) }
   let(:app) { Fabricate(:app, name: 'App #3') }
   let(:problem) { Fabricate(:problem, app: app, message: '<3') }
