@@ -53,6 +53,7 @@ GEM
     bson (4.15.0)
     bson (4.15.0-java)
     builder (3.2.4)
+    campy (1.0.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     decent_exposure (3.0.4)
@@ -299,6 +300,7 @@ DEPENDENCIES
   actionpack (~> 7.0.0)
   airbrake (~> 4.3.5)
   bootsnap
+  campy
   decent_exposure
   devise (~> 4.7)
   dotenv-rails

@@ -38,9 +38,10 @@ gem 'omniauth-google-oauth2'
 # TODO: Make something with this gem, it's 11 years old
 gem 'hoptoad_notifier', "~> 2.4", require: false
 
-# # Notification services
-# # ---------------------------------------
-# gem 'campy'
+# Notification services
+# ---------------------------------------
+# TODO: campy looks like dead. 9 years without release???
+gem 'campy'
 # # Google Talk
 # gem 'xmpp4r', require: ["xmpp4r", "xmpp4r/muc"]
 # # Hoiio (SMS)
