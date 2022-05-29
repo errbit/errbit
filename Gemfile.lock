@@ -79,6 +79,7 @@ GEM
       octokit
     errbit_plugin (0.6.0)
     erubi (1.10.0)
+    fabrication (2.28.0)
     faraday (2.3.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
@@ -290,6 +291,7 @@ DEPENDENCIES
   draper
   errbit_github_plugin
   errbit_plugin
+  fabrication
   font-awesome-rails
   hoptoad_notifier (~> 2.4)
   kaminari

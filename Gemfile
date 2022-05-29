@@ -83,7 +83,7 @@ group :test do
 #   gem 'rake'
 #   gem 'rspec-activemodel-mocks'
   gem 'mongoid-rspec'
-#   gem 'fabrication'
+  gem 'fabrication'
 #   gem 'capybara'
 #   gem 'poltergeist'
 #   gem 'phantomjs'
