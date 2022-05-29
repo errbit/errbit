@@ -49,6 +49,8 @@ gem 'hoptoad_notifier', "~> 2.4", require: false
 # gem 'rushover'
 # # Hubot
 # gem 'httparty'
+# Slack
+gem 'httparty'
 # # Flowdock
 # gem 'flowdock'
 #
