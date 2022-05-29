@@ -52,9 +52,10 @@ gem 'campy'
 # gem 'httparty'
 # Slack
 gem 'httparty'
-# # Flowdock
-# gem 'flowdock'
-#
+# Flowdock
+# TODO: flowdock looks like dead. 6 years without release???
+gem 'flowdock'
+
 # gem 'ri_cal'
 # gem 'yajl-ruby', platform: 'ruby'
 # gem 'json', platform: 'jruby'
