@@ -82,8 +82,7 @@ end
 group :test do
 #   gem 'rake'
 #   gem 'rspec-activemodel-mocks'
-  # TODO: check, why require false?
-  gem 'mongoid-rspec', require: false
+  gem 'mongoid-rspec'
 #   gem 'fabrication'
 #   gem 'capybara'
 #   gem 'poltergeist'
