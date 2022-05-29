@@ -31,6 +31,8 @@ gem 'omniauth-google-oauth2'
 # gem 'rack-ssl-enforcer', require: false
 # gem 'rinku'
 # gem 'useragent'
+# TODO: check, where rexml gem used and how.
+gem "rexml"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
