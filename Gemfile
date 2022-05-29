@@ -8,6 +8,9 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
+
 # gem 'actionmailer_inline_css'
 gem 'decent_exposure'
 gem 'devise', '~> 4.7'
@@ -31,7 +34,9 @@ gem 'omniauth-google-oauth2'
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
-gem 'hoptoad_notifier', "~> 2.4"
+# TODO: Added require: false to ignore start problem.
+# TODO: Make something with this gem, it's 11 years old
+gem 'hoptoad_notifier', "~> 2.4", require: false
 
 # # Notification services
 # # ---------------------------------------
@@ -53,7 +58,11 @@ gem 'hoptoad_notifier', "~> 2.4"
 #
 # # For Ruby 2.7
 # gem 'bigdecimal', '~> 1.4.4'
-#
+
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 # group :development, :test do
 #   gem 'airbrake', '~> 4.3.5', require: false
 #   gem 'pry-rails'
@@ -72,9 +81,6 @@ gem 'hoptoad_notifier', "~> 2.4"
 
 group :test do
 #   gem 'rake'
-  gem 'rspec'
-  # TODO: check, why require false?
-  gem 'rspec-rails', require: false
 #   gem 'rspec-activemodel-mocks'
   # TODO: check, why require false?
   gem 'mongoid-rspec', require: false
