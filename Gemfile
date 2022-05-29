@@ -81,7 +81,7 @@ end
 
 group :test do
 #   gem 'rake'
-#   gem 'rspec-activemodel-mocks'
+  gem 'rspec-activemodel-mocks'
   gem 'mongoid-rspec'
   gem 'fabrication'
 #   gem 'capybara'

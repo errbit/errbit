@@ -223,6 +223,10 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-activemodel-mocks (1.1.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -303,6 +307,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   puma
   railties (~> 7.0.0)
+  rspec-activemodel-mocks
   rspec-rails
   sassc-rails
   sucker_punch
