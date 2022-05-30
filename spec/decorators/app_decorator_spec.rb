@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe AppDecorator do
   describe "#email_at_notices" do
     it 'return the list separate by comma' do
