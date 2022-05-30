@@ -82,8 +82,8 @@ en:
 #        update:
 #          success: "Your app was successfully updated."
 #          error: "Your app could not be updated."
-#        destroy:
-#          success: "Your app was successfully destroyed."
+        destroy:
+          success: "Your app was successfully destroyed."
 #          error: "Your app could not be destroyed."
 #
 #    users:
@@ -199,8 +199,8 @@ en:
 #      edit: edit
 #      destroy: destroy
   apps:
-#    confirm_delete: "Permanently delete this app?"
-#    confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
+    confirm_delete: "Permanently delete this app?"
+    confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
     table:
       name: "Name"
       errors: "Errors"
@@ -218,7 +218,7 @@ en:
       # click_to_create: 'Click here to create your first one' # TODO: check???
     fields:
       name: "Name"
-#      api_key: API Key
+      api_key: "API Key"
       repository_branch: "Repo Branch"
       github_repo: "GitHub Repo"
       bitbucket_repo: "BitBucket Repo"
@@ -232,7 +232,7 @@ en:
       notify_on_errors: "Notify on errors"
       use_site_fingerprinter: "Use site fingerprinter" # TODO: this is new key, add everywhere!!!
       notify_all_users: "Send notifications to all users"
-#      regenerate_api_key: "Regenerate API Key"
+      regenerate_api_key: "Regenerate API Key"
     show:
       all_errs: "all errors"
 #      all_users_notified: "All users will be notified when something happens."
@@ -263,12 +263,12 @@ en:
       add_app: "Add App"
       cancel: "cancel"
       title: "Add App"
-#    edit:
-#      title: 'Edit App'
+    edit:
+      title: "Edit App"
 #      destroy: 'destroy application'
-#      cancel: 'cancel'
+      cancel: "cancel"
 #      seriously: 'Seriously?'
-#      update: 'Update App'
+      update: "Update App"
     search:
       search_placeholder: 'Search for application'
 #  watchers:
