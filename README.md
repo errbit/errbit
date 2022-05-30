@@ -56,7 +56,7 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby >= 2.7.x
+* Ruby 3.1
 * MongoDB >= 4.0.x
 
 Installation
@@ -73,15 +73,18 @@ Rails applications.
 
 Configuration
 -------------
+
 Errbit configuration is done entirely through environment variables. See
 [configuration](docs/configuration.md)
 
 Deployment
 ----------
+
 See [notes on deployment](docs/deployment.md)
 
 Notice Grouping
 ---------------
+
 The way Errbit arranges notices into error groups is configurable. By default,
 Errbit uses the notice's error class, error message, complete backtrace,
 component (or controller), action and environment name to generate a unique
@@ -98,6 +101,7 @@ app (under the "edit" menu).
 
 Managing apps
 ---------------------
+
 An Errbit app is a place to collect error notifications from your external
 application deployments.
 
@@ -105,7 +109,9 @@ See [apps](docs/apps.md)
 
 Authentication
 --------------
+
 ### Configuring GitHub authentication:
+
 * Set `GITHUB_AUTHENTICATION=true`
 * Register your instance of Errbit at https://github.com/settings/applications/new
 
@@ -149,6 +155,7 @@ few others that could make sense for your needs:
   accounts for new users.
 
 ### Configuring Google authentication:
+
 * Set GOOGLE_AUTHENTICATION=true
 * Register your instance of Errbit at https://console.developers.google.com/apis/api/plus/overview
 
@@ -209,10 +216,10 @@ When upgrading Errbit, please run:
 ```bash
 git pull origin master # assuming origin is the github.com/errbit/errbit repo
 bundle install
-rake db:migrate
-rake db:mongoid:remove_undefined_indexes
-rake db:mongoid:create_indexes
-rake assets:precompile
+bundle exec rake db:migrate
+bundle exec rake db:mongoid:remove_undefined_indexes
+bundle exec rake db:mongoid:create_indexes
+bundle exec rake assets:precompile
 ```
 
 This will ensure that your application stays up to date with any schema changes.
@@ -241,6 +248,7 @@ https://github.com/airbrake/airbrake
 
 Javascript error notifications
 --------------------------------------
+
 You can log javascript errors that occur in your application by including the
 [airbrake-js](https://github.com/airbrake/airbrake-js) javascript library.
 
@@ -260,6 +268,7 @@ var airbrake = new airbrakeJs.Client({
 
 Plugins and Integrations
 ------------------------
+
 You can extend Errbit by adding Ruby gems and plugins which are typically gems.
 It's nice to keep track of which gems are core Errbit dependencies and which
 gems are your own dependencies. If you want to add gems to your own Errbit,
@@ -275,6 +284,7 @@ bundle install
 
 Issue Trackers
 --------------
+
 Each issue tracker integration is implemented as a gem that depends on
 [errbit_plugin](https://github.com/errbit/errbit_plugin). The only officially
 supported issue tracker plugin is
@@ -351,7 +361,7 @@ Special Thanks
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for more details.
 
 Contributing to Errbit
-------------
+----------------------
 
 See the [contribution guidelines](CONTRIBUTING.md)
 
