@@ -1,269 +1,304 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  flash:
-    apps:
-      create:
-        success: Great success! Configure your app with the API key below
-      update:
-        success: "Good news everyone! '%{app_name}' was successfully updated."
-      destroy:
-        success: "'%{app_name}' was successfully destroyed."
-  n_errs:
-    one:   "%{count} error"
-    other: "%{count} errors"
-    will_be_deleted: will be deleted
-  n_errs_have:
-    one:   "%{count} error has"
-    other: "%{count} errors have"
-    been_resolved: been resolved
-    been_unresolved: been unresolved
-    been_unmerged: been unmerged
-    been_deleted: been deleted
+#  flash:
+#    apps:
+#      create:
+#        success: Great success! Configure your app with the API key below
+#      update:
+#        success: "Good news everyone! '%{app_name}' was successfully updated."
+#      destroy:
+#        success: "'%{app_name}' was successfully destroyed."
+#  n_errs:
+#    one:   "%{count} error"
+#    other: "%{count} errors"
+#    will_be_deleted: will be deleted
+#  n_errs_have:
+#    one:   "%{count} error has"
+#    other: "%{count} errors have"
+#    been_resolved: been resolved
+#    been_unresolved: been unresolved
+#    been_unmerged: been unmerged
+#    been_deleted: been deleted
+
   layouts:
     application:
-      title: 'Errbit'
-      errbit: 'Errbit'
+      title: "Errbit"
+      errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
     navigation:
-      apps: 'Apps'
-      errors: 'Errors'
-      users: 'Users'
-      config: 'Config'
+      apps: "Apps"
+      errors: "Errors"
+      users: "Users"
+      config: "Config"
     session:
-      sign_out: 'Sign out'
-      edit_profile: 'Edit profile'
+      sign_out: "Sign out"
+      edit_profile: "Edit profile"
 
-  controllers:
-    apps:
-      flash:
-        create:
-          success: "Your app was successfully created."
-          error:  "Your app could not be created."
-        update:
-          success: "Your app was successfully updated."
-          error: "Your app could not be updated."
-        destroy:
-          success: "Your app was successfully destroyed."
-          error: "Your app could not be destroyed."
-
-    users:
-      flash:
-        destroy:
-          success: "That's sad. %{name} is no longer part of your team."
-          error: "You can't delete yourself"
-        update:
-          success: "%{name}'s information was successfully updated."
-    problems:
-      flash:
-        no_select_problem: "You have not selected any errors"
-        need_two_errors_merge: "You must select at least two errors to merge"
-        merge_several:
-          success: "%{nb} errors have been merged."
-
+#  controllers:
+#    apps:
+#      flash:
+#        create:
+#          success: "Your app was successfully created."
+#          error:  "Your app could not be created."
+#        update:
+#          success: "Your app was successfully updated."
+#          error: "Your app could not be updated."
+#        destroy:
+#          success: "Your app was successfully destroyed."
+#          error: "Your app could not be destroyed."
+#
+#    users:
+#      flash:
+#        destroy:
+#          success: "That's sad. %{name} is no longer part of your team."
+#          error: "You can't delete yourself"
+#        update:
+#          success: "%{name}'s information was successfully updated."
+#    problems:
+#      flash:
+#        no_select_problem: "You have not selected any errors"
+#        need_two_errors_merge: "You must select at least two errors to merge"
+#        merge_several:
+#          success: "%{nb} errors have been merged."
+#
   devise:
-    registrations:
-      signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
-      signed_up_but_inactive: 'You have signed up successfully. However, we could not sign you in because your account is not yet activated.'
-      signed_up_but_locked: 'You have signed up successfully. However, we could not sign you in because your account is locked.'
-    omniauth_callbacks:
-      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Successfully authenticated from %{kind} account."
-    google_login:
-      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
+#    registrations:
+#      signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
+#      signed_up_but_inactive: 'You have signed up successfully. However, we could not sign you in because your account is not yet activated.'
+#      signed_up_but_locked: 'You have signed up successfully. However, we could not sign you in because your account is locked.'
+#    omniauth_callbacks:
+#      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+#      success: "Successfully authenticated from %{kind} account."
+#    google_login:
+#      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
         sign_in: "Sign in"
 
-  problems:
-    index:
-      all_errors: "All Errors"
-      unresolved_errors: "Unresolved Errors"
-      hide_resolved: "hide resolved"
-      show_resolved: "show resolved"
-    table:
-        app: App
-        env: Env
-        what_&_where: 'Where & What'
-        latest: Latest
-        count: Count
-        merge: Merge
-        unmerge: Unmerge
-        resolve: Resolve
-        unresolve: Unresolve
-        delete: Delete
-        ago: ago
-    confirm:
-      delete: "Permanently delete selected issues?"
-      resolve: "Resolve selected issues? They can be unresolved later."
-      resolve_one: "Resolve this issue? It can be unresolved later."
-      merge: "Merge select issues? They can be unmerged later."
-      unmerge: "Unmerge selected issues? They can be re-merged later."
-      unresolve: "Unresolve selected issues? They can be resolved again later."
-    search:
-      search_placeholder: 'Search for issues'
-    resolve:
-      the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
-    show:
-      comments: Comments
-      add_a_comment: Add a comment
-      save_comment: Save comment
-      summary: Summary
-      backtrace: Backtrace
-      user: User
-      parameters: Parameters
-      session: Session
-      ago_by: ago by
-      ago_by_unkown_user: ago by [Unkown User]
-      first_notice: First Notice
-      last_notice: Last Notice
-      environment: Environment
-      app: App
-      where: Where
-      up: up
-      resolve: resolve
-      notice_by_id: "Notice: %{notice_id}"
-  comments:
-    confirm_delete: "Permanently delete this comment?"
-  users:
-    confirm_delete: "Permanently delete this user?"
-    index:
-      new: Add a New User
-      title: Users
-      name: Name
-      username: Username
-      email: Email
-      admin: Admin?
-      admin_yes: Yes
-      admin_no: No
-    edit:
-      title: Edit
-      cancel: cancel
-      update_user: Update User
-    fields:
-      name: Name
-      email: Email
-      entries: Entries per page
-      time_zone: Time Zone
-      password: Password
-      password_confirmation: Password Confirmation
-      admin: Admin?
-    new:
-      title: New User
-      cancel: cancel
-      add_user: Add User
-    show:
-      name: Name
-      email: Email
-      admin: Admin?
-      created: Created
-      edit: edit
-      destroy: destroy
+#  problems:
+#    index:
+#      all_errors: "All Errors"
+#      unresolved_errors: "Unresolved Errors"
+#      hide_resolved: "hide resolved"
+#      show_resolved: "show resolved"
+#    table:
+#      app: App
+#      env: Env
+#      what_&_where: 'Where & What'
+#      latest: Latest
+#      count: Count
+#      merge: Merge
+#      unmerge: Unmerge
+#      resolve: Resolve
+#      unresolve: Unresolve
+#      delete: Delete
+#      ago: ago
+#    confirm:
+#      delete: "Permanently delete selected issues?"
+#      resolve: "Resolve selected issues? They can be unresolved later."
+#      resolve_one: "Resolve this issue? It can be unresolved later."
+#      merge: "Merge select issues? They can be unmerged later."
+#      unmerge: "Unmerge selected issues? They can be re-merged later."
+#      unresolve: "Unresolve selected issues? They can be resolved again later."
+#    search:
+#      search_placeholder: 'Search for issues'
+#    resolve:
+#      the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
+#    show:
+#      comments: Comments
+#      add_a_comment: Add a comment
+#      save_comment: Save comment
+#      summary: Summary
+#      backtrace: Backtrace
+#      user: User
+#      parameters: Parameters
+#      session: Session
+#      ago_by: ago by
+#      ago_by_unkown_user: ago by [Unkown User]
+#      first_notice: First Notice
+#      last_notice: Last Notice
+#      environment: Environment
+#      app: App
+#      where: Where
+#      up: up
+#      resolve: resolve
+#      notice_by_id: "Notice: %{notice_id}"
+#  comments:
+#    confirm_delete: "Permanently delete this comment?"
+#  users:
+#    confirm_delete: "Permanently delete this user?"
+#    index:
+#      new: Add a New User
+#      title: Users
+#      name: Name
+#      username: Username
+#      email: Email
+#      admin: Admin?
+#      admin_yes: Yes
+#      admin_no: No
+#    edit:
+#      title: Edit
+#      cancel: cancel
+#      update_user: Update User
+#    fields:
+#      name: Name
+#      email: Email
+#      entries: Entries per page
+#      time_zone: Time Zone
+#      password: Password
+#      password_confirmation: Password Confirmation
+#      admin: Admin?
+#    new:
+#      title: New User
+#      cancel: cancel
+#      add_user: Add User
+#    show:
+#      name: Name
+#      email: Email
+#      admin: Admin?
+#      created: Created
+#      edit: edit
+#      destroy: destroy
   apps:
-    confirm_delete: "Permanently delete this app?"
-    confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
+#    confirm_delete: "Permanently delete this app?"
+#    confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
+    table:
+      name: "Name"
+      errors: "Errors"
+      no_apps: "No apps here."
+      click_to_create: "Click here to create your first one"
     index:
-      notify: Notification Service
-      tracker: Tracker
-      errors: Errors
-      name: Name
-      repository: Repository
-      title: Apps
-      new_app: Add a New App
-      no_apps: 'No apps here.'
-      click_to_create: 'Click here to create your first one'
+#      notify: Notification Service
+#      tracker: Tracker
+      # errors: Errors # TODO: check???
+      # name: Name # TODO: check???
+#      repository: Repository
+      title: "Apps"
+      new_app: "Add a New App"
+      # no_apps: 'No apps here.' # TODO: check???
+      # click_to_create: 'Click here to create your first one' # TODO: check???
     fields:
-      name: Name
-      api_key: API Key
-      repository_branch: Repo Branch
-      github_repo: GitHub Repo
-      bitbucket_repo: BitBucket Repo
-      asset_host: Asset Host
-      asset_host_help: Used to generate links for JavaScript errors
+      name: "Name"
+#      api_key: API Key
+      repository_branch: "Repo Branch"
+      github_repo: "GitHub Repo"
+      bitbucket_repo: "BitBucket Repo"
+      asset_host: "Asset Host"
+      asset_host_help: "Used to generate links for JavaScript errors"
       asset_host_placeholder: "e.g. https://assets.example.com"
-      latest_app_version: Latest App Version
+      latest_app_version: "Latest App Version"
       latest_app_version_help: "Mobile apps can set this to ignore any error below this version. ie: 1.4.3"
       latest_app_version_placeholder: "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
-      notifications: Notifications
-      notify_on_errors: Notify on errors
-      notify_all_users: Send notifications to all users
-      regenerate_api_key: "Regenerate API Key"
-    show:
-      all_errs: all errors
-      all_users_notified: "All users will be notified when something happens."
-      api_key: "API Key:"
-      are_you_sure: 'Are you sure?'
-      atom_title: "Errbit notices for %{name} at %{host}"
-      edit: edit
-      environment: Environment
-      errors: Errors
-      errors_caught: "Errors Caught:"
-      github_repo: GitHub Repo
-      message: Message
-      no_error_yet: "No errors have been caught yet, make sure you set up your app"
-      no_watcher: "Sadly, no one is watching this app"
-      repository: Repository
-      revision: Revision
-      show_hide: "(show/hide)"
-      unresolved_errs: unresolved errors
-      unwatch: unwatch
-      user_or_email: User or Email
-      watch: watch
-      watchers: Watchers
-      when:  When
-      who: Who
-    issue_tracker_fields:
-      legend: Issue Tracker
+      notifications: "Notifications"
+      notify_on_errors: "Notify on errors"
+      use_site_fingerprinter: "Use site fingerprinter" # TODO: this is new key, add everywhere!!!
+#      notify_all_users: Send notifications to all users
+#      regenerate_api_key: "Regenerate API Key"
+#    show:
+#      all_errs: all errors
+#      all_users_notified: "All users will be notified when something happens."
+#      api_key: "API Key:"
+#      are_you_sure: 'Are you sure?'
+#      atom_title: "Errbit notices for %{name} at %{host}"
+#      edit: edit
+#      environment: Environment
+#      errors: Errors
+#      errors_caught: "Errors Caught:"
+#      github_repo: GitHub Repo
+#      message: Message
+#      no_error_yet: "No errors have been caught yet, make sure you set up your app"
+#      no_watcher: "Sadly, no one is watching this app"
+#      repository: Repository
+#      revision: Revision
+#      show_hide: "(show/hide)"
+#      unresolved_errs: unresolved errors
+#      unwatch: unwatch
+#      user_or_email: User or Email
+#      watch: watch
+#      watchers: Watchers
+#      when:  When
+#      who: Who
+#    issue_tracker_fields:
+#      legend: Issue Tracker
     new:
-      add_app: "Add App"
+#      add_app: "Add App"
       cancel: "cancel"
       title: "Add App"
-    edit:
-      title: 'Edit App'
-      destroy: 'destroy application'
-      cancel: 'cancel'
-      seriously: 'Seriously?'
-      update: 'Update App'
+#    edit:
+#      title: 'Edit App'
+#      destroy: 'destroy application'
+#      cancel: 'cancel'
+#      seriously: 'Seriously?'
+#      update: 'Update App'
     search:
       search_placeholder: 'Search for application'
-  watchers:
-    destroy:
-      success: "You are no longer watching %{app}"
-    update:
-      success: "You are now watching %{app}"
-  site_config:
-    index:
-      title: Config
-      cancel: cancel
-      error_class: Error Class
-      message: Error Message
-      backtrace_lines: Number of backtrace lines (-1 for unlimited)
-      component: Component (or controller)
-      action: Action
-      environment_name: Environment name
-      update_config: Update Config
-  notices:
-    summary:
-      message: Message
-      error_class: Error Class
-      url: URL
-      where: Where
-      occurred: Occurred
-      similar: Similar
-      browser: Browser
-      tenant: Origin
-      graph-2-weeks: Graph (2 weeks)
-      graph-24-hours: Graph (24 hours)
-      app_server: App Server
-      app_version: App Version
-      framework: Framework
-      relative_directory: Rel. Directory
+#  watchers:
+#    destroy:
+#      success: "You are no longer watching %{app}"
+#    update:
+#      success: "You are now watching %{app}"
+#  site_config:
+#    index:
+#      title: Config
+#      cancel: cancel
+#      error_class: Error Class
+#      message: Error Message
+#      backtrace_lines: Number of backtrace lines (-1 for unlimited)
+#      component: Component (or controller)
+#      action: Action
+#      environment_name: Environment name
+#      update_config: Update Config
+#  notices:
+#    summary:
+#      message: Message
+#      error_class: Error Class
+#      url: URL
+#      where: Where
+#      occurred: Occurred
+#      similar: Similar
+#      browser: Browser
+#      tenant: Origin
+#      graph-2-weeks: Graph (2 weeks)
+#      graph-24-hours: Graph (24 hours)
+#      app_server: App Server
+#      app_version: App Version
+#      framework: Framework
+#      relative_directory: Rel. Directory
   notice_fingerprinter:
-    title: Notice Fingerprinter
-    text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
-  paginator:
-    viewing_occurrence: viewing occurrence
-    of: of
+    title: "Notice Fingerprinter"
+    text: "The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled."
+#  paginator:
+#    viewing_occurrence: viewing occurrence
+#    of: of
