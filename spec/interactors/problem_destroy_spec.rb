@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe ProblemDestroy do
   let(:problem_destroy) do
     ProblemDestroy.new(problem)

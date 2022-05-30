@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe UserDestroy do
   let(:app) do
     Fabricate(

@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe ResolvedProblemClearer do
   let(:resolved_problem_clearer) do
     ResolvedProblemClearer.new
