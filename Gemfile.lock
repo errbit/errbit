@@ -103,6 +103,9 @@ GEM
       railties (>= 3.2, < 8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    haml (5.2.2)
+      temple (>= 0.8.0)
+      tilt
     hashie (5.0.0)
     hoptoad_notifier (2.4.11)
       activesupport
@@ -326,6 +329,7 @@ GEM
     strscan (3.0.3-java)
     sucker_punch (3.0.1)
       concurrent-ruby (~> 1.0)
+    temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.3.0)
@@ -362,6 +366,7 @@ DEPENDENCIES
   fabrication
   flowdock
   font-awesome-rails
+  haml
   hoptoad_notifier (~> 2.4)
   httparty
   kaminari
