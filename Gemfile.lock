@@ -260,6 +260,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    ri_cal (0.8.8)
     rspec-activemodel-mocks (1.1.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -374,6 +375,7 @@ DEPENDENCIES
   puma
   railties (~> 7.0.0)
   rexml
+  ri_cal
   rspec-activemodel-mocks
   rspec-rails
   rubocop

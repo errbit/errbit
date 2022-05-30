@@ -60,7 +60,8 @@ gem 'httparty'
 # TODO: flowdock looks like dead. 6 years without release???
 gem 'flowdock'
 
-# gem 'ri_cal'
+# TODO: looks like dead. 10 years without releases
+gem 'ri_cal'
 # gem 'yajl-ruby', platform: 'ruby'
 # gem 'json', platform: 'jruby'
 #
