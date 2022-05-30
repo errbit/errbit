@@ -114,33 +114,34 @@ en:
       new:
         sign_in: "Sign in"
 
-#  problems:
+  problems:
 #    index:
 #      all_errors: "All Errors"
 #      unresolved_errors: "Unresolved Errors"
 #      hide_resolved: "hide resolved"
 #      show_resolved: "show resolved"
-#    table:
+    table:
 #      app: App
-#      env: Env
-#      what_&_where: 'Where & What'
-#      latest: Latest
-#      count: Count
-#      merge: Merge
-#      unmerge: Unmerge
-#      resolve: Resolve
-#      unresolve: Unresolve
-#      delete: Delete
-#      ago: ago
-#    confirm:
-#      delete: "Permanently delete selected issues?"
-#      resolve: "Resolve selected issues? They can be unresolved later."
-#      resolve_one: "Resolve this issue? It can be unresolved later."
-#      merge: "Merge select issues? They can be unmerged later."
-#      unmerge: "Unmerge selected issues? They can be re-merged later."
-#      unresolve: "Unresolve selected issues? They can be resolved again later."
-#    search:
-#      search_placeholder: 'Search for issues'
+      env: "Env"
+      # TODO: rename "what_&_where" to "what_and_where"
+      what_&_where: "Where & What"
+      latest: "Latest"
+      count: "Count"
+      merge: "Merge"
+      unmerge: "Unmerge"
+      resolve: "Resolve"
+      unresolve: "Unresolve"
+      delete: "Delete"
+      ago: "ago"
+    confirm:
+      delete: "Permanently delete selected issues?"
+      resolve: "Resolve selected issues? They can be unresolved later."
+      resolve_one: "Resolve this issue? It can be unresolved later."
+      merge: "Merge select issues? They can be unmerged later."
+      unmerge: "Unmerge selected issues? They can be re-merged later."
+      unresolve: "Unresolve selected issues? They can be resolved again later."
+    search:
+      search_placeholder: "Search for issues"
 #    resolve:
 #      the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
 #    show:
@@ -241,7 +242,7 @@ en:
       atom_title: "Errbit notices for %{name} at %{host}"
       edit: "edit"
 #      environment: Environment
-#      errors: Errors
+      errors: "Errors"
       errors_caught: "Errors Caught:"
 #      github_repo: GitHub Repo
 #      message: Message
