@@ -252,7 +252,7 @@ en:
 #      repository: Repository
 #      revision: Revision
       show_hide: "(show/hide)"
-#      unresolved_errs: unresolved errors
+      unresolved_errs: "unresolved errors"
       unwatch: "unwatch"
       user_or_email: "User or Email"
       watch: "watch"
