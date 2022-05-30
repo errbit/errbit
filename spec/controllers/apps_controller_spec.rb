@@ -148,7 +148,7 @@ describe AppsController do
 
         context 'environment staging' do
           it 'shows errs for just staging' do
-            get :show, id: app.id, environment: 'staging'
+            get :show, params: { id: app.id, environment: 'staging' }
             expect(controller.problems.size).to eq 5
           end
         end
@@ -242,7 +242,7 @@ describe AppsController do
 
       context "when the update is successful" do
         it "should redirect to the app page" do
-          put :update, id: @app.id, app: app_params
+          put :update, params: { id: @app.id, app: app_params }
           expect(response).to redirect_to(app_path(@app))
         end
 
@@ -329,10 +329,10 @@ describe AppsController do
       context "not selecting 'use site fingerprinter'" do
         before(:each) do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-          put :update, id: @app.id, app: {
+          put :update, params: { id: @app.id, app: {
             notice_fingerprinter_attributes: { backtrace_lines: 42 },
             use_site_fingerprinter:          '0'
-          }
+          } }
           @app.reload
         end
 
