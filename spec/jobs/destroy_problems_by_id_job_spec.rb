@@ -1,4 +1,6 @@
-RSpec.describe DestroyProblemsByIdJob, type: :job do
+require "rails_helper"
+
+describe DestroyProblemsByIdJob do
   before do
     @app      = Fabricate(:app)
     @problem1 = Fabricate(:problem, app: @app)
