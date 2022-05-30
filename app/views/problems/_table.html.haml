@@ -63,5 +63,5 @@
     %ul
       - %w(merge unmerge resolve unresolve delete).each do |action|
         %li= submit_tag t(".#{action}").capitalize, :id => "#{action}_problems", :class => 'button',
-          :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
+          :data => { :action => polymorphic_path([action == 'delete' ? :destroy : action.to_sym, :several_problems]),
           :confirm => problem_confirm(action) }
