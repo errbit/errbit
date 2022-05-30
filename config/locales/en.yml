@@ -117,9 +117,9 @@ en:
 
   problems:
     index:
-#      all_errors: "All Errors"
+      all_errors: "All Errors"
       unresolved_errors: "Unresolved Errors"
-#      hide_resolved: "hide resolved"
+      hide_resolved: "hide resolved"
       show_resolved: "show resolved"
     table:
       app: "App"
