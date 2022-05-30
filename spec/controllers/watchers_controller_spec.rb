@@ -1,4 +1,6 @@
-describe WatchersController, type: 'controller' do
+require "rails_helper"
+
+describe WatchersController do
   let(:user) { Fabricate(:user) }
   let(:problem) { Fabricate(:problem) }
 

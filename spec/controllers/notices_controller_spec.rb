@@ -1,4 +1,6 @@
-describe NoticesController, type: 'controller' do
+require "rails_helper"
+
+describe NoticesController do
   it_requires_authentication for: { locate: :get }
 
   let(:notice) { Fabricate(:notice) }

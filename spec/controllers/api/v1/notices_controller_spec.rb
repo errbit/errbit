@@ -1,4 +1,6 @@
-describe Api::V1::NoticesController, type: 'controller' do
+require "rails_helper"
+
+describe Api::V1::NoticesController do
   context "when logged in" do
     before do
       @user = Fabricate(:user)
