@@ -85,21 +85,22 @@ en:
         destroy:
           success: "Your app was successfully destroyed."
 #          error: "Your app could not be destroyed."
-#
-#    users:
-#      flash:
-#        destroy:
-#          success: "That's sad. %{name} is no longer part of your team."
-#          error: "You can't delete yourself"
-#        update:
-#          success: "%{name}'s information was successfully updated."
+
+    users:
+      flash:
+        destroy:
+          success: "That's sad. %{name} is no longer part of your team."
+          error: "You can't delete yourself"
+        update:
+          success: "%{name}'s information was successfully updated."
+
 #    problems:
 #      flash:
 #        no_select_problem: "You have not selected any errors"
 #        need_two_errors_merge: "You must select at least two errors to merge"
 #        merge_several:
 #          success: "%{nb} errors have been merged."
-#
+
   devise:
 #    registrations:
 #      signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
@@ -166,7 +167,7 @@ en:
 #  comments:
 #    confirm_delete: "Permanently delete this comment?"
   users:
-#    confirm_delete: "Permanently delete this user?"
+    confirm_delete: "Permanently delete this user?"
     index:
       new: "Add a New User"
       title: "Users"
@@ -176,29 +177,29 @@ en:
       admin: "Admin?"
       admin_yes: "Yes"
 #      admin_no: No
-#    edit:
-#      title: Edit
-#      cancel: cancel
-#      update_user: Update User
-#    fields:
+    edit:
+      title: "Edit"
+      cancel: "cancel"
+      update_user: "Update User"
+    fields:
+      name: "Name"
+      email: "Email"
+      entries: "Entries per page"
+      time_zone: "Time Zone"
+      password: "Password"
+      password_confirmation: "Password Confirmation"
+      admin: "Admin?"
+    new:
+      title: "New User"
+      cancel: "cancel"
+      add_user: "Add User"
+    show:
 #      name: Name
-#      email: Email
-#      entries: Entries per page
-#      time_zone: Time Zone
-#      password: Password
-#      password_confirmation: Password Confirmation
-#      admin: Admin?
-#    new:
-#      title: New User
-#      cancel: cancel
-#      add_user: Add User
-#    show:
-#      name: Name
-#      email: Email
-#      admin: Admin?
-#      created: Created
-#      edit: edit
-#      destroy: destroy
+      email: "Email"
+      admin: "Admin?"
+      created: "Created"
+      edit: "edit"
+      destroy: "destroy"
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
