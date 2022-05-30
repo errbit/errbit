@@ -41,7 +41,7 @@ jobs:
       mongo_version:
         type: string
     docker:
-      - image: cimg/ruby:<< parameters.ruby_version >>-browsers-legacy
+      - image: cimg/ruby:<< parameters.ruby_version >>-browsers
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
     steps:
       - checkout
