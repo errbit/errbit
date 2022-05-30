@@ -30,7 +30,7 @@ gem 'omniauth-google-oauth2'
 # gem 'rack-ssl', require: 'rack/ssl' # force SSL
 # gem 'rack-ssl-enforcer', require: false
 # gem 'rinku'
-# gem 'useragent'
+gem 'useragent'
 # TODO: check, where rexml gem used and how.
 gem "rexml"
 
