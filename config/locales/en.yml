@@ -253,7 +253,7 @@ en:
 #      revision: Revision
       show_hide: "(show/hide)"
 #      unresolved_errs: unresolved errors
-#      unwatch: unwatch
+      unwatch: "unwatch"
       user_or_email: "User or Email"
       watch: "watch"
       watchers: "Watchers"
@@ -273,22 +273,22 @@ en:
       update: "Update App"
     search:
       search_placeholder: 'Search for application'
-#  watchers:
-#    destroy:
-#      success: "You are no longer watching %{app}"
-#    update:
-#      success: "You are now watching %{app}"
-#  site_config:
-#    index:
-#      title: Config
-#      cancel: cancel
+  watchers:
+    destroy:
+      success: "You are no longer watching %{app}"
+    update:
+      success: "You are now watching %{app}"
+  site_config:
+    index:
+      title: "Config"
+      cancel: "cancel"
 #      error_class: Error Class
 #      message: Error Message
 #      backtrace_lines: Number of backtrace lines (-1 for unlimited)
 #      component: Component (or controller)
 #      action: Action
 #      environment_name: Environment name
-#      update_config: Update Config
+      update_config: "Update Config"
 #  notices:
 #    summary:
 #      message: Message
