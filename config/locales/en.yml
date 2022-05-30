@@ -73,12 +73,12 @@ en:
       action: "Action" # TODO: add to other translations
       environment_name: "Environment name" # TODO: add to other translations
 
-#  controllers:
-#    apps:
-#      flash:
-#        create:
-#          success: "Your app was successfully created."
-#          error:  "Your app could not be created."
+  controllers:
+    apps:
+      flash:
+        create:
+          success: "Your app was successfully created."
+          error:  "Your app could not be created."
 #        update:
 #          success: "Your app was successfully updated."
 #          error: "Your app could not be updated."
@@ -233,28 +233,28 @@ en:
       use_site_fingerprinter: "Use site fingerprinter" # TODO: this is new key, add everywhere!!!
       notify_all_users: "Send notifications to all users"
 #      regenerate_api_key: "Regenerate API Key"
-#    show:
-#      all_errs: all errors
+    show:
+      all_errs: "all errors"
 #      all_users_notified: "All users will be notified when something happens."
-#      api_key: "API Key:"
+      api_key: "API Key:"
 #      are_you_sure: 'Are you sure?'
-#      atom_title: "Errbit notices for %{name} at %{host}"
-#      edit: edit
+      atom_title: "Errbit notices for %{name} at %{host}"
+      edit: "edit"
 #      environment: Environment
 #      errors: Errors
-#      errors_caught: "Errors Caught:"
+      errors_caught: "Errors Caught:"
 #      github_repo: GitHub Repo
 #      message: Message
-#      no_error_yet: "No errors have been caught yet, make sure you set up your app"
-#      no_watcher: "Sadly, no one is watching this app"
+      no_error_yet: "No errors have been caught yet, make sure you set up your app"
+      no_watcher: "Sadly, no one is watching this app"
 #      repository: Repository
 #      revision: Revision
-#      show_hide: "(show/hide)"
+      show_hide: "(show/hide)"
 #      unresolved_errs: unresolved errors
 #      unwatch: unwatch
-#      user_or_email: User or Email
-#      watch: watch
-#      watchers: Watchers
+      user_or_email: "User or Email"
+      watch: "watch"
+      watchers: "Watchers"
 #      when:  When
 #      who: Who
     issue_tracker_fields:
