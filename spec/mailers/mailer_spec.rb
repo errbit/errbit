@@ -1,3 +1,5 @@
+require "rails_helper"
+
 shared_examples "a notification email" do
   it "should have X-Mailer header" do
     expect(email).to have_header('X-Mailer', 'Errbit')
