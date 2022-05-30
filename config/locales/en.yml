@@ -65,6 +65,13 @@ en:
     session:
       sign_out: "Sign out"
       edit_profile: "Edit profile"
+    notice_fingerprinter: # TODO: add to other translations
+      error_class: "Error Class" # TODO: add to other translations
+      message: "Error Message" # TODO: add to other translations
+      backtrace_lines: "Number of backtrace lines (-1 for unlimited)" # TODO: add to other translations
+      component: "Component (or controller)" # TODO: add to other translations
+      action: "Action" # TODO: add to other translations
+      environment_name: "Environment name" # TODO: add to other translations
 
 #  controllers:
 #    apps:
@@ -224,7 +231,7 @@ en:
       notifications: "Notifications"
       notify_on_errors: "Notify on errors"
       use_site_fingerprinter: "Use site fingerprinter" # TODO: this is new key, add everywhere!!!
-#      notify_all_users: Send notifications to all users
+      notify_all_users: "Send notifications to all users"
 #      regenerate_api_key: "Regenerate API Key"
 #    show:
 #      all_errs: all errors
@@ -250,10 +257,10 @@ en:
 #      watchers: Watchers
 #      when:  When
 #      who: Who
-#    issue_tracker_fields:
-#      legend: Issue Tracker
+    issue_tracker_fields:
+      legend: "Issue Tracker"
     new:
-#      add_app: "Add App"
+      add_app: "Add App"
       cancel: "cancel"
       title: "Add App"
 #    edit:
