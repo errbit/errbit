@@ -29,11 +29,6 @@ class UsersController < ApplicationController
     end
   end
 
-  ##
-  # Destroy the user pass in args
-  #
-  # @param [ String ] id the id of user we want delete
-  #
   def destroy
     if user == current_user
       flash[:error] = I18n.t('controllers.users.flash.destroy.error')
