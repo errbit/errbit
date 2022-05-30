@@ -115,13 +115,13 @@ en:
         sign_in: "Sign in"
 
   problems:
-#    index:
+    index:
 #      all_errors: "All Errors"
-#      unresolved_errors: "Unresolved Errors"
+      unresolved_errors: "Unresolved Errors"
 #      hide_resolved: "hide resolved"
-#      show_resolved: "show resolved"
+      show_resolved: "show resolved"
     table:
-#      app: App
+      app: "App"
       env: "Env"
       # TODO: rename "what_&_where" to "what_and_where"
       what_&_where: "Where & What"
@@ -165,16 +165,16 @@ en:
 #      notice_by_id: "Notice: %{notice_id}"
 #  comments:
 #    confirm_delete: "Permanently delete this comment?"
-#  users:
+  users:
 #    confirm_delete: "Permanently delete this user?"
-#    index:
-#      new: Add a New User
-#      title: Users
-#      name: Name
+    index:
+      new: "Add a New User"
+      title: "Users"
+      name: "Name"
 #      username: Username
-#      email: Email
-#      admin: Admin?
-#      admin_yes: Yes
+      email: "Email"
+      admin: "Admin?"
+      admin_yes: "Yes"
 #      admin_no: No
 #    edit:
 #      title: Edit
