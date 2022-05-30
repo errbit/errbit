@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Configurator do
   before(:each) do
     allow(ENV).to receive(:[]).and_return(nil)
