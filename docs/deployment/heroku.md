@@ -64,6 +64,7 @@ We designed Errbit to work well with Heroku. These instructions should result
 in a working deploy, but you should modify them to suit your needs:
 
 ### Clone and prepare the source code repository
+
 ```bash
 git clone git@github.com:errbit/errbit.git
 cd errbit
@@ -72,18 +73,21 @@ cd errbit
 - Update `db/seeds.rb` with admin credentials for your initial login
 
 Commit the results:
+
 ```bash
 git commit -m "Update db/seeds.rb with initial login"
 ```
 
 ### Install the heroku toolbelt
+
 [toolbelt.heroku.com](https://toolbelt.heroku.com/)
 
 ### Create an app on Heroku and push the source code. Use the above documentation to obtain a MongoDB URI from MongoDB Atlas if you don't have one.
+
 ```bash
 heroku apps:create
 heroku addons:create sendgrid:starter
-heroku config:set GEMFILE_RUBY_VERSION=2.7.6
+heroku config:set GEMFILE_RUBY_VERSION=3.1.2
 heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:set MONGODB_URI="<URI HERE>"
 heroku config:set ERRBIT_HOST=some-hostname.example.com
@@ -99,6 +103,7 @@ heroku run rake errbit:bootstrap
 ```
 
 ### Schedule recurring tasks
+
 You may want to periodically clear resolved errors to free up space. For that
 you have a few options:
 
