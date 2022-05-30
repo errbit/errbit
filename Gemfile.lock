@@ -343,6 +343,7 @@ GEM
     timeout (0.3.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    underscore-rails (1.8.3)
     unicode-display_width (2.1.0)
     useragent (0.16.10)
     warden (1.2.9)
@@ -398,6 +399,7 @@ DEPENDENCIES
   rubocop-rails
   sassc-rails
   sucker_punch
+  underscore-rails
   useragent
 
 BUNDLED WITH

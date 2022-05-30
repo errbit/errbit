@@ -118,7 +118,7 @@ gem 'sassc-rails'
 # gem 'uglifier'
 gem 'jquery-rails'
 # gem 'pjax_rails'
-# gem 'underscore-rails'
+gem 'underscore-rails'
 
 gem 'sucker_punch'
 
