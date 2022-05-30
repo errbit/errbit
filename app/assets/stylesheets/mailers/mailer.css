@@ -5,22 +5,24 @@ td.header {
   text-align: left;
   border-bottom: 1px solid #ccccee;
 }
-  td.header a {
-    display: block;
-    height: 31px;
-    width: 88px;
-    margin-top: 4px;
-  }
-    /* Style 'Errbit' logo alt text if image cannot be loaded. */
-    td.header a img {
-      border: none;
-      color: #E3E3E3;
-      font-family: helvetica;
-      font-size: 30px;
-      font-weight: bold;
-      min-height: 31px;
-      text-shadow: 0 1px 0 #EEEEFF;
-    }
+
+td.header a {
+  display: block;
+  height: 31px;
+  width: 88px;
+  margin-top: 4px;
+}
+
+/* Style 'Errbit' logo alt text if image cannot be loaded. */
+td.header a img {
+  border: none;
+  color: #E3E3E3;
+  font-family: helvetica;
+  font-size: 30px;
+  font-weight: bold;
+  min-height: 31px;
+  text-shadow: 0 1px 0 #EEEEFF;
+}
 
 td.section, td.content, td.footer {
   font-family: Helvetica,Arial,sans-serif;
@@ -28,14 +30,17 @@ td.section, td.content, td.footer {
   background-color: #ffffff;
   text-align: left;
 }
+
 td.section {
   padding: 0;
   border-bottom: 1px solid #dddddd;
 }
+
 td.content {
   padding: 20px 20px 10px 20px;
   line-height: 1.3em;
 }
+
 td.footer {
   padding: 10px 20px 20px 20px;
   font-size: 11px;
@@ -46,10 +51,12 @@ td.footer {
 a.bold, span.bold { font-weight: bold; }
 
 p { margin: 0 0 15px 0; }
+
 p.heading {
   color: #6a6a6a;
   margin-bottom: 4px;
 }
-p.monospace, p.backtrace { font-family: monospace; }
-p.backtrace { margin-bottom: 2px; }
 
+p.monospace, p.backtrace { font-family: monospace; }
+
+p.backtrace { margin-bottom: 2px; }
