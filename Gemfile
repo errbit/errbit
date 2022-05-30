@@ -95,7 +95,8 @@ group :test do
 #   gem 'poltergeist'
 #   gem 'phantomjs'
 #   gem 'launchy'
-#   gem 'email_spec'
+  # TODO: remove later???
+  gem 'email_spec'
 #   gem 'timecop'
 #   gem 'coveralls', require: false
 end
