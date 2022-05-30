@@ -34,6 +34,8 @@ gem 'omniauth-google-oauth2'
 # TODO: check, where rexml gem used and how.
 gem "rexml"
 
+gem "pry-rails"
+
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 # TODO: Added require: false to ignore start problem.
