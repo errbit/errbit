@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe "Callback on Notice", type: 'model' do
   let(:notice_attrs_for) do
     lambda do |api_key|

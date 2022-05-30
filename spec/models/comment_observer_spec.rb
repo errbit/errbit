@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe "Callback on Comment", type: 'model' do
   context 'when a Comment is saved' do
     let(:comment) { Fabricate.build(:comment) }

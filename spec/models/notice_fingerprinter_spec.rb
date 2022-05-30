@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe NoticeFingerprinter, type: 'model' do
   let(:fingerprinter) { described_class.new }
   let(:notice) { Fabricate(:notice) }
