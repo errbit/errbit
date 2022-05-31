@@ -255,25 +255,25 @@ describe ProblemsController do
       end
 
       it "should redirect to problem page" do
-        post :create_issue, app_id: problem.app.id, id: problem.id
+        post :create_issue, params: { app_id: problem.app.id, id: problem.id }
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to be_blank
       end
 
       it "should save the right title" do
-        post :create_issue, app_id: problem.app.id, id: problem.id
+        post :create_issue, params: { app_id: problem.app.id, id: problem.id }
         title = "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
         line = issue_tracker.tracker.output.shift
         expect(line[0]).to eq(title)
       end
 
       it "should renders the issue body" do
-        post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+        post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: 'html' }
         expect(response).to render_template("issue_trackers/issue")
       end
 
       it "should update the problem" do
-        post :create_issue, app_id: problem.app.id, id: problem.id
+        post :create_issue, params: { app_id: problem.app.id, id: problem.id }
         expect(problem.issue_link).to eq("http://example.com/mock-errbit")
         expect(problem.issue_type).to eq("mock")
       end
@@ -282,7 +282,7 @@ describe ProblemsController do
         render_views
 
         it "should save the right body" do
-          post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+          post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: 'html' }
           line = issue_tracker.tracker.output.shift
           expect(line[1]).to include(app_problem_url problem.app, problem)
         end
@@ -290,7 +290,7 @@ describe ProblemsController do
         it "should render whatever the issue tracker says" do
           allow_any_instance_of(Issue).to receive(:render_body_args).and_return(
             [{ inline: 'one <%= problem.id %> two' }])
-          post :create_issue, app_id: problem.app.id, id: problem.id, format: 'html'
+          post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: 'html' }
           line = issue_tracker.tracker.output.shift
           expect(line[1]).to eq("one #{problem.id} two")
         end
@@ -299,7 +299,7 @@ describe ProblemsController do
 
     context "when app has no issue tracker" do
       it "should redirect to problem page" do
-        post :create_issue, app_id: problem.app.id, id: problem.id
+        post :create_issue, params: { app_id: problem.app.id, id: problem.id }
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to eql "This app has no issue tracker"
       end
@@ -325,7 +325,7 @@ describe ProblemsController do
       end
 
       it "should redirect to problem page" do
-        post :close_issue, app_id: problem.app.id, id: problem.id
+        post :close_issue, params: { app_id: problem.app.id, id: problem.id }
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to be_blank
       end
@@ -333,7 +333,7 @@ describe ProblemsController do
 
     context "when app has no issue tracker" do
       it "should redirect to problem page" do
-        post :close_issue, app_id: problem.app.id, id: problem.id
+        post :close_issue, params: { app_id: problem.app.id, id: problem.id }
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to eql "This app has no issue tracker"
       end
@@ -349,7 +349,7 @@ describe ProblemsController do
       let(:err) { Fabricate(:err, problem: Fabricate(:problem, issue_link: "http://some.host")) }
 
       before(:each) do
-        delete :unlink_issue, app_id: err.app.id, id: err.problem.id
+        delete :unlink_issue, params: { app_id: err.app.id, id: err.problem.id }
         err.problem.reload
       end
 
@@ -366,7 +366,7 @@ describe ProblemsController do
       let(:err) { Fabricate :err }
 
       before(:each) do
-        delete :unlink_issue, app_id: err.app.id, id: err.problem.id
+        delete :unlink_issue, params: { app_id: err.app.id, id: err.problem.id }
         err.problem.reload
       end
 
@@ -385,7 +385,7 @@ describe ProblemsController do
 
     context "POST /problems/merge_several" do
       it "should require at least two problems" do
-        post :merge_several, problems: [@problem1.id.to_s]
+        post :merge_several, params: { problems: [@problem1.id.to_s] }
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.need_two_errors_merge')
       end
 
@@ -397,7 +397,7 @@ describe ProblemsController do
 
     context "POST /problems/unmerge_several" do
       it "should require at least one problem" do
-        post :unmerge_several, problems: []
+        post :unmerge_several, params: { problems: [] }
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
       end
 
@@ -405,7 +405,7 @@ describe ProblemsController do
         merged_problem = Problem.merge!(@problem1, @problem2)
         expect(merged_problem.errs.length).to eq 2
         expect do
-          post :unmerge_several, problems: [merged_problem.id.to_s]
+          post :unmerge_several, params: { problems: [merged_problem.id.to_s] }
           expect(merged_problem.reload.errs.length).to eq 1
         end.to change(Problem, :count).by(1)
       end
@@ -413,22 +413,22 @@ describe ProblemsController do
 
     context "POST /problems/resolve_several" do
       it "should require at least one problem" do
-        post :resolve_several, problems: []
+        post :resolve_several, params: { problems: [] }
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
       end
 
       it "should resolve the issue" do
-        post :resolve_several, problems: [@problem2.id.to_s]
+        post :resolve_several, params: { problems: [@problem2.id.to_s] }
         expect(@problem2.reload.resolved?).to eq true
       end
 
       it "should display a message about 1 err" do
-        post :resolve_several, problems: [@problem2.id.to_s]
+        post :resolve_several, params: { problems: [@problem2.id.to_s] }
         expect(flash[:success]).to match(/1 error has been resolved/)
       end
 
       it "should display a message about 2 errs" do
-        post :resolve_several, problems: [@problem1.id.to_s, @problem2.id.to_s]
+        post :resolve_several, params: { problems: [@problem1.id.to_s, @problem2.id.to_s] }
         expect(flash[:success]).to match(/2 errors have been resolved/)
         expect(controller.selected_problems).to eq [@problem1, @problem2]
       end
@@ -436,12 +436,12 @@ describe ProblemsController do
 
     context "POST /problems/unresolve_several" do
       it "should require at least one problem" do
-        post :unresolve_several, problems: []
+        post :unresolve_several, params: { problems: [] }
         expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
       end
 
       it "should unresolve the issue" do
-        post :unresolve_several, problems: [@problem1.id.to_s]
+        post :unresolve_several, params: { problems: [@problem1.id.to_s] }
         expect(@problem1.reload.resolved?).to eq false
       end
     end
@@ -449,7 +449,7 @@ describe ProblemsController do
     context "POST /problems/destroy_several" do
       it "should delete the problems" do
         expect do
-          post :destroy_several, problems: [@problem1.id.to_s]
+          post :destroy_several, params: { problems: [@problem1.id.to_s] }
         end.to change(Problem, :count).by(-1)
       end
     end
@@ -464,19 +464,19 @@ describe ProblemsController do
 
       it "destroys all problems" do
         expect do
-          post :destroy_all, app_id: @app.id
+          post :destroy_all, params: { app_id: @app.id }
         end.to change(Problem, :count).by(-2)
         expect(controller.app).to eq @app
       end
 
       it "should display a message" do
-        put :destroy_all, app_id: @app.id
+        put :destroy_all, params: { app_id: @app.id }
         expect(request.flash[:success]).to match(/be deleted/)
       end
 
       it "should redirect back to the app page" do
         request.env["HTTP_REFERER"] = edit_app_path(@app)
-        put :destroy_all, app_id: @app.id
+        put :destroy_all, params: { app_id: @app.id }
         expect(response).to redirect_to(edit_app_path(@app))
       end
     end
