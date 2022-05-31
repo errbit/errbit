@@ -9,7 +9,7 @@ describe Api::V3::NoticesController do
   end
 
   it 'sets CORS headers on POST request' do
-    post :create, project_id: 'invalid id'
+    post :create, params: { project_id: 'invalid id' }
     expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
     expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
   end
