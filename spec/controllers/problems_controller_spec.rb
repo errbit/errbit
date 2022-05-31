@@ -183,7 +183,7 @@ describe ProblemsController do
       end
 
       it "paginates the notices 1 at a time, based on then notice param" do
-        get :show, app_id: app.id, id: err.problem.id, notice: 3
+        get :show, params: { app_id: app.id, id: err.problem.id, notice: 3 }
         expect(assigns(:notices).entries.count).to eq 1
         expect(assigns(:notices)).to include(notices.first)
       end
@@ -196,7 +196,7 @@ describe ProblemsController do
     end
 
     it "renders without error" do
-      get :xhr_sparkline, app_id: app.id, id: err.problem.id
+      get :xhr_sparkline, params: { app_id: app.id, id: err.problem.id }
       expect(response).to be_success
     end
   end
@@ -209,29 +209,29 @@ describe ProblemsController do
     end
 
     it 'finds the app and the problem' do
-      put :resolve, app_id: @err.app.id, id: @err.problem.id
+      put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(controller.app).to eq @err.app
       expect(controller.problem).to eq @err.problem
     end
 
     it "should resolve the issue" do
-      put :resolve, app_id: @err.app.id, id: @err.problem.id
+      put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(@err.problem.reload.resolved).to be(true)
     end
 
     it "should display a message" do
-      put :resolve, app_id: @err.app.id, id: @err.problem.id
+      put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(request.flash[:success]).to match(/Great news/)
     end
 
     it "should redirect to the app page" do
-      put :resolve, app_id: @err.app.id, id: @err.problem.id
+      put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(response).to redirect_to(app_path(@err.app))
     end
 
     it "should redirect back to problems page" do
       request.env["HTTP_REFERER"] = problems_path
-      put :resolve, app_id: @err.app.id, id: @err.problem.id
+      put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(response).to redirect_to(problems_path)
     end
   end
