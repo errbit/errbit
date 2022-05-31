@@ -143,8 +143,8 @@ en:
       unresolve: "Unresolve selected issues? They can be resolved again later."
     search:
       search_placeholder: "Search for issues"
-#    resolve:
-#      the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
+    resolve:
+      the_error_has_been_resolved: "Great news everyone! The error has been resolved."
     show:
       comments: "Comments"
       add_a_comment: "Add a comment"
@@ -164,6 +164,9 @@ en:
       up: "up"
       resolve: "resolve"
 #      notice_by_id: "Notice: %{notice_id}"
+    sparkline:
+      graph_2_weeks: "Graph (2 weeks)" # TODO: new key. add to other locales
+      graph_24_hours: "Graph (24 hours)" # TODO: new key. add to other locales
 #  comments:
 #    confirm_delete: "Permanently delete this comment?"
   users:
@@ -293,14 +296,14 @@ en:
     summary:
       message: "Message"
       error_class: "Error Class"
-#      url: URL
+      url: "URL"
       where: "Where"
       occurred: "Occurred"
       similar: "Similar"
       browser: "Browser"
       tenant: "Origin"
-#      graph-2-weeks: Graph (2 weeks)
-#      graph-24-hours: Graph (24 hours)
+#      graph-2-weeks: Graph (2 weeks) # TODO: moved. Rename everywhere.
+#      graph-24-hours: Graph (24 hours) # TODO: moved. Rename everywhere.
 #      app_server: App Server
 #      app_version: App Version
 #      framework: Framework
@@ -308,6 +311,6 @@ en:
   notice_fingerprinter:
     title: "Notice Fingerprinter"
     text: "The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled."
-#  paginator:
-#    viewing_occurrence: viewing occurrence
-#    of: of
+  paginator:
+    viewing_occurrence: "viewing occurrence"
+    of: "of"

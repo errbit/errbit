@@ -287,12 +287,18 @@ class Problem
 
   def self.ordered_by(sort, order)
     case sort
-    when "app"            then order_by(["app_name", order])
-    when "environment"    then order_by(["environment", order])
-    when "message"        then order_by(["message", order])
-    when "last_notice_at" then order_by(["last_notice_at", order])
-    when "count"          then order_by(["notices_count", order])
-    else fail("\"#{sort}\" is not a recognized sort")
+    when "app"
+      order_by(["app_name", order])
+    when "environment"
+      order_by(["environment", order])
+    when "message"
+      order_by(["message", order])
+    when "last_notice_at"
+      order_by(["last_notice_at", order])
+    when "count"
+      order_by(["notices_count", order])
+    else
+      fail("\"#{sort}\" is not a recognized sort")
     end
   end
 
