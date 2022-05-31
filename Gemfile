@@ -18,6 +18,8 @@ gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
+# TODO: workaround for octokit gem
+gem "faraday-retry"
 gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'

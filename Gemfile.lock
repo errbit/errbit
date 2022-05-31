@@ -94,6 +94,7 @@ GEM
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.3)
+    faraday-retry (1.0.3)
     ffi (1.15.5)
     ffi (1.15.5-java)
     flowdock (0.7.1)
@@ -376,6 +377,7 @@ DEPENDENCIES
   errbit_github_plugin
   errbit_plugin
   fabrication
+  faraday-retry
   flowdock
   font-awesome-rails
   haml
