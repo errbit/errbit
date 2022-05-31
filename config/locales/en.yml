@@ -145,24 +145,24 @@ en:
       search_placeholder: "Search for issues"
 #    resolve:
 #      the_error_has_been_resolved: 'Great news everyone! The error has been resolved.'
-#    show:
-#      comments: Comments
-#      add_a_comment: Add a comment
-#      save_comment: Save comment
-#      summary: Summary
-#      backtrace: Backtrace
+    show:
+      comments: "Comments"
+      add_a_comment: "Add a comment"
+      save_comment: "Save comment"
+      summary: "Summary"
+      backtrace: "Backtrace"
 #      user: User
-#      parameters: Parameters
-#      session: Session
+      parameters: "Parameters"
+      session: "Session"
 #      ago_by: ago by
 #      ago_by_unkown_user: ago by [Unkown User]
-#      first_notice: First Notice
-#      last_notice: Last Notice
-#      environment: Environment
-#      app: App
-#      where: Where
-#      up: up
-#      resolve: resolve
+      first_notice: "First Notice"
+      last_notice: "Last Notice"
+      environment: "Environment"
+      app: "App"
+      where: "Where"
+      up: "up"
+      resolve: "resolve"
 #      notice_by_id: "Notice: %{notice_id}"
 #  comments:
 #    confirm_delete: "Permanently delete this comment?"
@@ -289,22 +289,22 @@ en:
 #      action: Action
 #      environment_name: Environment name
       update_config: "Update Config"
-#  notices:
-#    summary:
-#      message: Message
-#      error_class: Error Class
+  notices:
+    summary:
+      message: "Message"
+      error_class: "Error Class"
 #      url: URL
-#      where: Where
-#      occurred: Occurred
-#      similar: Similar
-#      browser: Browser
-#      tenant: Origin
+      where: "Where"
+      occurred: "Occurred"
+      similar: "Similar"
+      browser: "Browser"
+      tenant: "Origin"
 #      graph-2-weeks: Graph (2 weeks)
 #      graph-24-hours: Graph (24 hours)
 #      app_server: App Server
 #      app_version: App Version
 #      framework: Framework
-#      relative_directory: Rel. Directory
+      relative_directory: "Rel. Directory"
   notice_fingerprinter:
     title: "Notice Fingerprinter"
     text: "The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled."
