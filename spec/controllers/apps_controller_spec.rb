@@ -73,7 +73,7 @@ describe AppsController do
       end
 
       it "should list atom feed successfully" do
-        get :show, params: { id: app.id, format: :atom }
+        get :show, params: { id: app.id, format: "atom" }
         expect(response).to be_success
       end
 
