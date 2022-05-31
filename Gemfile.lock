@@ -380,6 +380,7 @@ DEPENDENCIES
   font-awesome-rails
   haml
   hoptoad_notifier (~> 2.4)
+  htmlentities
   httparty
   jquery-rails
   kaminari
