@@ -51,28 +51,28 @@ describe ProblemsController do
 
       context 'environment production' do
         it 'shows problems for just production' do
-          get :index, environment: 'production'
+          get :index, params: { environment: 'production' }
           expect(controller.problems.size).to eq 6
         end
       end
 
       context 'environment staging' do
         it 'shows problems for just staging' do
-          get :index, environment: 'staging'
+          get :index, params: { environment: 'staging' }
           expect(controller.problems.size).to eq 5
         end
       end
 
       context 'environment development' do
         it 'shows problems for just development' do
-          get :index, environment: 'development'
+          get :index, params: { environment: 'development' }
           expect(controller.problems.size).to eq 5
         end
       end
 
       context 'environment test' do
         it 'shows problems for just test' do
-          get :index, environment: 'test'
+          get :index, params: { environment: 'test' }
           expect(controller.problems.size).to eq 5
         end
       end
@@ -88,7 +88,7 @@ describe ProblemsController do
       expect(Problem).to receive(:ordered_by).and_return(
         double('proxy', page: double('other_proxy', per: problems))
       )
-      get :index, all_errs: true
+      get :index, params: { all_errs: true }
       expect(controller.problems).to eq problems
     end
   end
@@ -112,13 +112,13 @@ describe ProblemsController do
     end
 
     it "searches problems for given string" do
-      get :search, search: "\"Most important\""
+      get :search, params: { search: "\"Most important\"" }
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to_not include(@problem2)
     end
 
     it "works when given string is empty" do
-      get :search, search: ""
+      get :search, params: { search: "" }
       expect(controller.problems).to include(@problem1)
       expect(controller.problems).to include(@problem2)
     end
@@ -134,7 +134,7 @@ describe ProblemsController do
     end
 
     it "should redirect to the standard problems page" do
-      get :show_by_id, id: err.problem.id
+      get :show_by_id, params: { id: err.problem.id }
       expect(response).to redirect_to(app_problem_path(app, err.problem.id))
     end
   end
@@ -145,17 +145,17 @@ describe ProblemsController do
     end
 
     it "finds the app" do
-      get :show, app_id: app.id, id: err.problem.id
+      get :show, params: { app_id: app.id, id: err.problem.id }
       expect(controller.app).to eq app
     end
 
     it "finds the problem" do
-      get :show, app_id: app.id, id: err.problem.id
+      get :show, params: { app_id: app.id, id: err.problem.id }
       expect(controller.problem).to eq err.problem
     end
 
     it "successfully render page" do
-      get :show, app_id: app.id, id: err.problem.id
+      get :show, params: { app_id: app.id, id: err.problem.id }
       expect(response).to be_success
     end
 
@@ -164,7 +164,7 @@ describe ProblemsController do
 
       it "successfully renders the view even when there are no notices attached to the problem" do
         expect(err.problem.notices).to be_empty
-        get :show, app_id: app.id, id: err.problem.id
+        get :show, params: { app_id: app.id, id: err.problem.id }
         expect(response).to be_success
       end
     end
@@ -177,7 +177,7 @@ describe ProblemsController do
       end
 
       it "paginates the notices 1 at a time, starting with the most recent" do
-        get :show, app_id: app.id, id: err.problem.id
+        get :show, params: { app_id: app.id, id: err.problem.id }
         expect(assigns(:notices).entries.count).to eq 1
         expect(assigns(:notices)).to include(notices.last)
       end
