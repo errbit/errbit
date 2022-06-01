@@ -370,7 +370,7 @@ DEPENDENCIES
   bootsnap
   campy
   decent_exposure
-  devise (~> 4.7)
+  devise
   dotenv-rails
   draper
   email_spec

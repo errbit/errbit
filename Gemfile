@@ -13,7 +13,7 @@ gem "bootsnap", require: false
 
 # gem 'actionmailer_inline_css'
 gem 'decent_exposure'
-gem 'devise', '~> 4.7'
+gem 'devise'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
