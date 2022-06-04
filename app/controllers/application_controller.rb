@@ -1,3 +1,5 @@
+require "errbit/version"
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -5,7 +7,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
-  rescue_from ActionController::RedirectBackError, with: :redirect_to_root
+  # TODO: https://github.com/rails/rails/commit/333bfd896e87862cece95deb1ef88132d5f54ba8
+  # https://github.com/rails/rails/pull/26907
+  # https://github.com/rails/rails/search?q=RedirectBackError&type=issues
+  # rescue_from ActionController::RedirectBackError, with: :redirect_to_root
 
 protected
 

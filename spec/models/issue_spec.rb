@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Issue, type: 'model' do
   subject(:issue) { Issue.new(problem: problem, user: user, body: body) }
 

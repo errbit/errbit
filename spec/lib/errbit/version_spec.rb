@@ -1,8 +1,10 @@
-describe Errbit::VERSION do
+require "rails_helper"
+
+describe Errbit::Version do
   let(:version) { '0.0.0' }
 
   context "release version" do
-    subject { Errbit::Version.new(version).full_version }
+    subject { described_class.new(version).full_version }
 
     it 'generates a release version' do
       expect(subject).to eq(version)
@@ -15,7 +17,7 @@ describe Errbit::VERSION do
   end
 
   context "dev version" do
-    subject { Errbit::Version.new(version, true).full_version }
+    subject { described_class.new(version, true).full_version }
 
     it 'generates a dev version' do
       expect(subject).to end_with('dev')

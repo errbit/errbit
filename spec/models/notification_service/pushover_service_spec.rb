@@ -1,4 +1,6 @@
-describe NotificationServices::PushoverService, type: 'model' do
+require "rails_helper"
+
+describe NotificationServices::PushoverService do
   it "it should send a notification to Pushover" do
     # setup
     notice = Fabricate :notice

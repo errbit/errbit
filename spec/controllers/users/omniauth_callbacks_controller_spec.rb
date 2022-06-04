@@ -1,4 +1,6 @@
-describe Users::OmniauthCallbacksController, type: 'controller' do
+require "rails_helper"
+
+describe Users::OmniauthCallbacksController do
   def stub_env_for_github_omniauth(login, token = nil, email = "user@example.com")
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]

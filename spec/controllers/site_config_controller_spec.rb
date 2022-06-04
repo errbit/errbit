@@ -1,4 +1,6 @@
-describe SiteConfigController, type: 'controller' do
+require "rails_helper"
+
+describe SiteConfigController do
   it_requires_admin_privileges for: {
     index:  :get,
     update: :put

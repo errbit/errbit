@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Comment, type: 'model' do
   context 'validations' do
     it 'should require a body' do

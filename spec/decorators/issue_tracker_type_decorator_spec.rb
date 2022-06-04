@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe IssueTrackerDecorator do
   let(:fake_tracker_class) do
     klass = Class.new(ErrbitPlugin::IssueTracker) do

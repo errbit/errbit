@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Sparklines do
   it 'includes each percentage and adds a percent sign' do
     percentages = [33, 75, 100]

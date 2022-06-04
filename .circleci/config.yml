@@ -41,7 +41,7 @@ jobs:
       mongo_version:
         type: string
     docker:
-      - image: circleci/ruby:<< parameters.ruby_version >>-browsers-legacy
+      - image: cimg/ruby:<< parameters.ruby_version >>-browsers
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
     steps:
       - checkout
@@ -65,5 +65,5 @@ workflows:
       - mongo-ruby:
           matrix:
             parameters:
-              ruby_version: ["2.7"]
+              ruby_version: ["3.1.2"]
               mongo_version: ["4.0", "4.2", "4.4", "5.0"]

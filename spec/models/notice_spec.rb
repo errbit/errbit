@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Notice, type: 'model' do
   context 'validations' do
     it 'requires a backtrace' do

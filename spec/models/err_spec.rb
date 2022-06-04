@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Err, type: 'model' do
   context 'validations' do
     it 'requires a fingerprint' do

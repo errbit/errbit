@@ -1,4 +1,6 @@
-describe NotificationServices::HoiioService, type: 'model' do
+require "rails_helper"
+
+describe NotificationServices::HoiioService do
   it "it should send a notification to hoiio" do
     # setup
     notice = Fabricate :notice

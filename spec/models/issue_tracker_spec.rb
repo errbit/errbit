@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe IssueTracker, type: 'model' do
   describe "Association" do
     it { is_expected.to be_embedded_in(:app) }

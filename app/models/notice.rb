@@ -1,5 +1,3 @@
-require 'recurse'
-
 class Notice
   UNAVAILABLE = 'N/A'
 

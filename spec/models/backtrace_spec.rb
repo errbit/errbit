@@ -1,4 +1,6 @@
-describe Backtrace, type: 'model' do
+require "rails_helper"
+
+describe Backtrace do
   describe '.find_or_create' do
     let(:lines) do
       [

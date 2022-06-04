@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe NoticeRefingerprinter do
   let(:app) { Fabricate(:app) }
   let(:backtrace) do

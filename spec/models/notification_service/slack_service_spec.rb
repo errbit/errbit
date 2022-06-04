@@ -1,4 +1,6 @@
-describe NotificationServices::SlackService, type: 'model' do
+require "rails_helper"
+
+describe NotificationServices::SlackService do
   let(:backtrace) do
     Fabricate :backtrace, lines: [
       { number: 22, file: "/path/to/file/1.rb", method: 'first_method' },

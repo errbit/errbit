@@ -1,4 +1,6 @@
-describe Api::V3::NoticesController, type: :controller do
+require "rails_helper"
+
+describe Api::V3::NoticesController do
   let(:app) { Fabricate(:app) }
   let(:project_id) { app.api_key }
   let(:legit_params) { { project_id: project_id, key: project_id } }
@@ -7,7 +9,7 @@ describe Api::V3::NoticesController, type: :controller do
   end
 
   it 'sets CORS headers on POST request' do
-    post :create, project_id: 'invalid id'
+    post :create, params: { project_id: 'invalid id' }
     expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
     expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
   end

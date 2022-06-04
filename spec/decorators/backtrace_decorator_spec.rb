@@ -1,4 +1,6 @@
-describe BacktraceDecorator, type: :decorator do
+require "rails_helper"
+
+describe BacktraceDecorator do
   let(:backtrace) do
     described_class.new(
       Backtrace.new(

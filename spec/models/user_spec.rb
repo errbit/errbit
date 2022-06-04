@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe User do
   context 'validations' do
     it 'require that a name is present' do

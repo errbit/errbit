@@ -1,4 +1,6 @@
-describe NoticesController, type: 'controller' do
+require "rails_helper"
+
+describe NoticesController do
   it_requires_authentication for: { locate: :get }
 
   let(:notice) { Fabricate(:notice) }
@@ -10,7 +12,7 @@ describe NoticesController, type: 'controller' do
     context "with bogus xml" do
       it "returns an error" do
         expect(request).to receive(:raw_post).and_return('<r><b>notxml</r>')
-        post :create, format: :xml
+        post :create, params: { format: :xml }
         expect(response.status).to eq(422)
         expect(response.body).to eq('The provided XML was not well-formed')
       end
@@ -24,7 +26,7 @@ describe NoticesController, type: 'controller' do
       context "with xml pass in raw_port" do
         before do
           expect(request).to receive(:raw_post).and_return(xml)
-          post :create, format: :xml
+          post :create, params: { format: :xml }
         end
 
         it "generates a notice from raw xml [POST]" do
@@ -37,7 +39,7 @@ describe NoticesController, type: 'controller' do
       end
 
       it "generates a notice from xml in a data param [POST]" do
-        post :create, data: xml, format: :xml
+        post :create, params: { data: xml, format: :xml }
         expect(response).to be_success
         # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
         # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
@@ -46,15 +48,16 @@ describe NoticesController, type: 'controller' do
       end
 
       it "generates a notice from xml [GET]" do
-        get :create, data: xml, format: :xml
+        get :create, params: { data: xml, format: :xml }
         expect(response).to be_success
         expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
         expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end
+
       context "with an invalid API_KEY" do
         let(:error_report) { double(valid?: false) }
         it 'return 422' do
-          post :create, format: :xml, data: xml
+          post :create, params: { data: xml, format: :xml }
           expect(response.status).to eq 422
         end
       end
@@ -62,7 +65,7 @@ describe NoticesController, type: 'controller' do
 
     context "without params needed" do
       it 'return 400' do
-        post :create, format: :xml
+        post :create, params: { format: :xml }
         expect(response.status).to eq 400
         expect(response.body).to eq 'Need a data params in GET or raw post data'
       end
@@ -79,7 +82,7 @@ describe NoticesController, type: 'controller' do
       it "should locate notice and redirect to problem" do
         problem = Fabricate(:problem, app: app, environment: "production")
         notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
-        get :locate, id: notice.id
+        get :locate, params: { id: notice.id }
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
       end
     end
@@ -95,7 +98,7 @@ describe NoticesController, type: 'controller' do
       it "should locate notice and redirect to problem with notice_id" do
         problem = Fabricate(:problem, app: app, environment: "production")
         notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
-        get :show_by_id, id: notice.id
+        get :show_by_id, params: { id: notice.id }
         expect(response).to redirect_to(app_problem_path(problem.app, problem, notice_id: notice.id))
       end
     end

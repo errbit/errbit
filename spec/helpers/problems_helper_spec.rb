@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe ProblemsHelper do
   describe "#gravatar_tag" do
     let(:email) { "gravatar@example.com" }
