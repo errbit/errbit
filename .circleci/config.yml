@@ -33,7 +33,7 @@ commands:
 jobs:
   mongo-ruby:
     environment:
-      CIRCLECI_RUBYGEMS_CACHE_KEY: '2021082301'
+      CIRCLECI_RUBYGEMS_CACHE_KEY: '2022060523'
       RUBYGEMS_VERSION: 3.3.15
       BUNDLER_VERSION: 2.3.15
     parameters:
