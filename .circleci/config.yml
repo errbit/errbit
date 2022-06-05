@@ -6,7 +6,6 @@ commands:
           keys:
             - rubygems-{{ checksum "_rubygems_cache_key" }}-{{ checksum "Gemfile.lock" }}
             - rubygems-{{ checksum "_rubygems_cache_key" }}-
-            - rubygems-
   create_cache_key_files:
     steps:
       - run: echo $CIRCLECI_RUBYGEMS_CACHE_KEY
@@ -33,7 +32,7 @@ commands:
 jobs:
   mongo-ruby:
     environment:
-      CIRCLECI_RUBYGEMS_CACHE_KEY: '2022060523'
+      CIRCLECI_RUBYGEMS_CACHE_KEY: '2022060600'
       RUBYGEMS_VERSION: 3.3.15
       BUNDLER_VERSION: 2.3.15
     parameters:
