@@ -78,7 +78,7 @@ GEM
       thor (>= 0.19.4, < 2.0)
       tins (~> 1.6)
     crass (1.0.6)
-    css_parser (1.10.0)
+    css_parser (1.11.0)
       addressable
     debug_inspector (1.1.0)
     decent_exposure (3.0.4)
