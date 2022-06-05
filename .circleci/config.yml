@@ -23,8 +23,8 @@ commands:
           key: rubygems-{{ checksum "_rubygems_cache_key" }}-{{ checksum "Gemfile.lock" }}
   install_gems:
     steps:
-      - run: gem update --system
-      - run: gem install bundler -v $BUNDLER_VERSION
+      - run: gem update --system "$RUBYGEMS_VERSION"
+      - run: gem install bundler --version "$BUNDLER_VERSION" --force
       - run: bundle config set clean true --local
       - run: bundle config set jobs 4 --local
       - run: bundle config set path vendor/bundle --local
@@ -34,14 +34,15 @@ jobs:
   mongo-ruby:
     environment:
       CIRCLECI_RUBYGEMS_CACHE_KEY: '2021082301'
-      BUNDLER_VERSION: 2.1.4
+      RUBYGEMS_VERSION: 3.3.15
+      BUNDLER_VERSION: 2.3.15
     parameters:
       ruby_version:
         type: string
       mongo_version:
         type: string
     docker:
-      - image: circleci/ruby:<< parameters.ruby_version >>-browsers-legacy
+      - image: cimg/ruby:<< parameters.ruby_version >>-browsers
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
     steps:
       - checkout
@@ -65,5 +66,5 @@ workflows:
       - mongo-ruby:
           matrix:
             parameters:
-              ruby_version: ["2.7"]
+              ruby_version: ["2.7.6"]
               mongo_version: ["4.0", "4.2", "4.4", "5.0"]
