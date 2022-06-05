@@ -170,12 +170,11 @@ GEM
       mongoid
     launchy (2.5.0)
       addressable (~> 2.7)
-    libv8 (8.4.255.0)
-    libv8 (8.4.255.0-universal-darwin-20)
-    libv8 (8.4.255.0-x86_64-darwin-18)
-    libv8 (8.4.255.0-x86_64-darwin-19)
-    libv8 (8.4.255.0-x86_64-darwin-20)
-    libv8 (8.4.255.0-x86_64-linux)
+    libv8-node (16.10.0.0)
+    libv8-node (16.10.0.0-arm64-darwin)
+    libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-darwin-19)
+    libv8-node (16.10.0.0-x86_64-linux)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -190,8 +189,8 @@ GEM
     mime-types-data (3.2021.0704)
     mini_mime (1.1.1)
     mini_portile2 (2.8.0)
-    mini_racer (0.3.1)
-      libv8 (~> 8.4.255)
+    mini_racer (0.6.2)
+      libv8-node (~> 16.10.0.0)
     minitest (5.15.0)
     mongo (2.15.0)
       bson (>= 4.8.2, < 5.0.0)
@@ -473,7 +472,7 @@ DEPENDENCIES
   kaminari-mongoid
   launchy
   meta_request
-  mini_racer (~> 0.3.1)
+  mini_racer
   mongoid (~> 5.4)
   mongoid-rspec
   omniauth
