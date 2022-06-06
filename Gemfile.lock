@@ -260,7 +260,7 @@ GEM
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    premailer (1.15.0)
+    premailer (1.16.0)
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
