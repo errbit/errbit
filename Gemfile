@@ -58,7 +58,6 @@ group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
   gem 'pry-rails'
   gem 'pry-byebug', platforms: [:mri]
-  gem 'quiet_assets'
   gem 'rubocop', '~> 0.71.0', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false

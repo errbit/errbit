@@ -282,8 +282,6 @@ GEM
       nio4r (~> 2.0)
     puma (5.6.4-java)
       nio4r (~> 2.0)
-    quiet_assets (1.1.0)
-      railties (>= 3.1, < 5.0)
     racc (1.6.0)
     racc (1.6.0-java)
     rack (1.6.13)
@@ -484,7 +482,6 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma
-  quiet_assets
   rack-ssl
   rack-ssl-enforcer
   rails_12factor
