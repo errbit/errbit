@@ -82,7 +82,7 @@ GEM
     debug_inspector (1.1.0)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
-    devise (4.8.0)
+    devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
