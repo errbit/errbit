@@ -1,6 +1,6 @@
 # Deploy to Dokku
 
-Deployment to Dokku is very similiar to Heroku.
+Deployment to Dokku is very similar to Heroku.
 For more details see [Heroku](heroku.md) guide.
 
 ## Create an app on dokku and push the source code
