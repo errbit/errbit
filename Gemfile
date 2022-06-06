@@ -57,7 +57,6 @@ gem 'bigdecimal', '~> 1.4.4'
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
   gem 'pry-rails'
-  gem 'pry-byebug', platforms: [:mri]
   gem 'rubocop', '~> 0.71.0', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
