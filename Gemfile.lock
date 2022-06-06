@@ -264,10 +264,10 @@ GEM
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
-    pry (0.13.1)
+    pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry (0.13.1-java)
+    pry (0.14.1-java)
       coderay (~> 1.1)
       method_source (~> 1.0)
       spoon (~> 0.0)
