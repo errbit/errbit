@@ -164,7 +164,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    kaminari-mongoid (1.0.1)
+    kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
     launchy (2.5.0)
