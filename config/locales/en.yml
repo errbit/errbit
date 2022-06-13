@@ -181,6 +181,7 @@ en:
       repository_branch: Repo Branch
       github_repo: GitHub Repo
       bitbucket_repo: BitBucket Repo
+      custom_backtrace_url: Custom Backtrace URL
       asset_host: Asset Host
       asset_host_help: Used to generate links for JavaScript errors
       asset_host_placeholder: "e.g. https://assets.example.com"

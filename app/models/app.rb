@@ -7,6 +7,7 @@ class App
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :custom_backtrace_url
   field :asset_host
   field :repository_branch
   field :current_app_version
@@ -124,6 +125,15 @@ class App
 
   def bitbucket_repo?
     bitbucket_repo.present?
+  end
+
+  def build_custom_backtrace_url(file, line)
+    format(custom_backtrace_url, branch: repo_branch, file: file, line: line,
+                                 ebranch: CGI.escape(repo_branch), efile: CGI.escape(file))
+  end
+
+  def custom_backtrace_url?
+    custom_backtrace_url.present?
   end
 
   def bitbucket_url
