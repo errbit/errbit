@@ -118,26 +118,6 @@ describe App, type: 'model' do
     end
   end
 
-  context '#build_custom_backtrace_url' do
-    it 'should correctly replace the unescaped fields' do
-      app = Fabricate(:app,
-                      repository_branch:    'feature/branch',
-                      custom_backtrace_url: 'https://example.com/repo/name/src/branch/%{branch}/%{file}#L%{line}')
-
-      expect(app.build_custom_backtrace_url("test/file.rb", 42)).to \
-        eq 'https://example.com/repo/name/src/branch/feature/branch/test/file.rb#L42'
-    end
-
-    it 'should correctly replace the escaped fields' do
-      app = Fabricate(:app,
-                      repository_branch:    'feature/branch',
-                      custom_backtrace_url: 'https://example.com/repo/name/src/branch/%{ebranch}/%{efile}#L%{line}')
-
-      expect(app.build_custom_backtrace_url("test/file.rb", 42)).to \
-        eq 'https://example.com/repo/name/src/branch/feature%2Fbranch/test%2Ffile.rb#L42'
-    end
-  end
-
   context "notification recipients" do
     it "should send notices to either all users plus watchers, or the configured watchers" do
       @app = Fabricate(:app)

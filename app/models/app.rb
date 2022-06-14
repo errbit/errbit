@@ -127,15 +127,6 @@ class App
     bitbucket_repo.present?
   end
 
-  def build_custom_backtrace_url(file, line)
-    format(custom_backtrace_url, branch: repo_branch, file: file, line: line,
-                                 ebranch: CGI.escape(repo_branch), efile: CGI.escape(file))
-  end
-
-  def custom_backtrace_url?
-    custom_backtrace_url.present?
-  end
-
   def bitbucket_url
     "https://bitbucket.org/#{bitbucket_repo}" if bitbucket_repo?
   end

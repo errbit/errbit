@@ -24,4 +24,13 @@ class AppDecorator < Draper::Decorator
   def notify_err_display
     object.notify_on_errs ? '' : 'display: none;'
   end
+
+  def custom_backtrace_url?
+    object.custom_backtrace_url.present?
+  end
+
+  def build_custom_backtrace_url(file, line)
+    format(custom_backtrace_url, branch: object.repo_branch, file: file, line: line,
+                                 ebranch: CGI.escape(object.repo_branch), efile: CGI.escape(file))
+  end
 end

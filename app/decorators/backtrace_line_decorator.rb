@@ -64,7 +64,7 @@ private
   end
 
   def link_to_repo_source_file(app, text)
-    link_to_github(app, text) || link_to_bitbucket(app, text) || link_to_custom_backtrace_url(app, text)
+    link_to_custom_backtrace_url(app, text) || link_to_github(app, text) || link_to_bitbucket(app, text)
   end
 
   def link_to_hosted_javascript(app, text)
