@@ -153,7 +153,7 @@ class ProblemsController < ApplicationController
     end
   end
 
-protected
+private
 
   ##
   # Redirect :back if no errors selected

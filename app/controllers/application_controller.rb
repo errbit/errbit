@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::RedirectBackError, with: :redirect_to_root
 
-protected
+private
 
   ##
   # Check if the current_user is admin or not and redirect to root url if not

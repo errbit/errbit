@@ -23,7 +23,7 @@ class Api::V1::StatsController < ApplicationController
     end
   end
 
-protected
+private
 
   def require_api_key_or_authenticate_user!
     if params[:api_key].present?
