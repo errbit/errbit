@@ -25,7 +25,7 @@ class Watcher
     user.try(:email) || email
   end
 
-protected
+private
 
   def ensure_user_or_email
     errors.add(:base, "You must specify either a user or an email address") unless user.present? || email.present?

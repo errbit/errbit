@@ -10,7 +10,7 @@ class Api::V3::NoticesController < ApplicationController
   def create
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept'
-    return render(status: 200, text: '') if request.method == 'OPTIONS'
+    return render(status: :ok, text: '') if request.method == 'OPTIONS'
 
     merged_params = params.merge!(JSON.parse(request.raw_post) || {})
     # merge makes a copy, merge! edits in place
@@ -18,16 +18,16 @@ class Api::V3::NoticesController < ApplicationController
     merged_params = merged_params.merge!('key' => authorization_token) if authorization_token
     report = AirbrakeApi::V3::NoticeParser.new(merged_params).report
 
-    return render text: UNKNOWN_API_KEY, status: 422 unless report.valid?
-    return render text: VERSION_TOO_OLD, status: 422 unless report.should_keep?
+    return render text: UNKNOWN_API_KEY, status: :unprocessable_entity unless report.valid?
+    return render text: VERSION_TOO_OLD, status: :unprocessable_entity unless report.should_keep?
 
     report.generate_notice!
-    render status: 201, json: {
+    render status: :created, json: {
       id:  report.notice.id,
       url: report.problem.url
     }
   rescue AirbrakeApi::ParamsError
-    render text: 'Invalid request', status: 400
+    render text: 'Invalid request', status: :bad_request
   end
 
 private

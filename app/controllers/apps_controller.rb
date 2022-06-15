@@ -99,7 +99,7 @@ class AppsController < ApplicationController
     end
   end
 
-protected
+private
 
   def initialize_subclassed_notification_service
     notification_type = app_params.
@@ -172,8 +172,6 @@ protected
       params[:app][:notice_fingerprinter_attributes] = SiteConfig.document.notice_fingerprinter_attributes
     end
   end
-
-private
 
   def app_params
     params.require(:app).permit!
