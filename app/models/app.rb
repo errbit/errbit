@@ -7,6 +7,7 @@ class App
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :custom_backtrace_url_template
   field :asset_host
   field :repository_branch
   field :current_app_version
