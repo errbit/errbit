@@ -26,11 +26,10 @@ There is no UI for this feature, just the query param.
 
 ## Linking backtraces to custom repositories
 
-Errbit builds backtraces with clickable links to Github and bitbucket repositories.
+Errbit builds backtraces with clickable links to Github and Bitbucket repositories.
 The entry 'custom backtrace URL template' can be used to support clickable backtraces with other repositories.
-It's possible to build a template URL to link to a certain repository.
 
-You can use the following fields in this template:
+The following fields are available for this template:
 
 - %{branch}: The repo branch name
 - %{file}: The relative file/path name of the backtrace file
