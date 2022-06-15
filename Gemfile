@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 RAILS_VERSION = '~> 4.2.11'
+# RAILS_VERSION = '5.0.7.2'
 
 send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
@@ -10,17 +11,18 @@ gem 'railties', RAILS_VERSION
 
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
-gem 'devise', '~> 4.7'
+gem 'devise'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
 gem 'font-awesome-rails'
-gem 'haml', '~> 5.1'
+gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 5.4'
+# gem 'mongoid', '6.0.3'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
@@ -54,11 +56,10 @@ gem 'json', platform: 'jruby'
 # For Ruby 2.7
 gem 'bigdecimal', '~> 1.4.4'
 
+gem 'pry-rails'
+
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
-  gem 'pry-rails'
-  gem 'pry-byebug', platforms: [:mri]
-  gem 'quiet_assets'
   gem 'rubocop', '~> 0.71.0', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
