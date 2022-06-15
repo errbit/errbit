@@ -85,8 +85,8 @@ private
   end
 
   def link_to_custom_backtrace_url(app, text = nil)
-    return unless app.custom_backtrace_url?
-    href = app.build_custom_backtrace_url(decorated_path + file_name, number)
+    return unless app.custom_backtrace_url_template?
+    href = app.custom_backtrace_url(decorated_path + file_name, number)
     h.link_to(text || file_name, href, target: '_blank')
   end
 
