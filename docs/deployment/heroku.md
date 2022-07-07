@@ -83,7 +83,6 @@ git commit -m "Update db/seeds.rb with initial login"
 ```bash
 heroku apps:create
 heroku addons:create sendgrid:starter
-heroku config:set GEMFILE_RUBY_VERSION=2.7.6
 heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:set MONGODB_URI="<URI HERE>"
 heroku config:set ERRBIT_HOST=some-hostname.example.com

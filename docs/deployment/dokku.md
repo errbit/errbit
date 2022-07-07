@@ -13,7 +13,6 @@ dokku mongo:link errbit errbit
 # Override the automatic Dockerfile deployment detection
 dokku config:set errbit BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-ruby.git
 dokku config:set errbit HEROKU=1
-dokku config:set errbit GEMFILE_RUBY_VERSION=2.7.6
 dokku config:set errbit SECRET_KEY_BASE="$(bundle exec rake secret)"
 dokku config:set errbit ERRBIT_HOST=some-hostname.example.com
 dokku config:set errbit ERRBIT_EMAIL_FROM=example@example.com
