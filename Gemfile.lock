@@ -137,7 +137,7 @@ GEM
       builder
     htmlentities (4.3.4)
     http-accept (1.7.0)
-    http-cookie (1.0.4)
+    http-cookie (1.0.5)
       domain_name (~> 0.5)
     httparty (0.20.0)
       mime-types (~> 3.0)
