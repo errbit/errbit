@@ -113,7 +113,7 @@ GEM
     erubi (1.10.0)
     erubis (2.7.0)
     execjs (2.8.1)
-    fabrication (2.28.0)
+    fabrication (2.30.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.15.5)
