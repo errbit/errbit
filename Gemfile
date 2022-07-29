@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.2.11'
-# RAILS_VERSION = '5.0.7.2'
+RAILS_VERSION = '5.0.7.2'
 
 ruby File.read(".ruby-version")
 
@@ -21,8 +20,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '~> 5.4'
-# gem 'mongoid', '6.0.3'
+gem 'mongoid', '6.0.3'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
