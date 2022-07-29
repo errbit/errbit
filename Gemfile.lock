@@ -402,7 +402,7 @@ GEM
     thread_safe (0.3.6-java)
     tilt (2.0.10)
     timecop (0.9.5)
-    tins (1.29.1)
+    tins (1.31.1)
       sync
     tzinfo (1.2.10)
       thread_safe (~> 0.1)
