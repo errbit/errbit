@@ -92,7 +92,7 @@ class ProblemsController < ApplicationController
   end
 
   def resolve
-    problem.resolve!
+    problem.resolve!(current_user)
     flash[:success] = t('.the_error_has_been_resolved')
     redirect_to :back
   rescue ActionController::RedirectBackError
@@ -100,7 +100,7 @@ class ProblemsController < ApplicationController
   end
 
   def resolve_several
-    selected_problems.each(&:resolve!)
+    selected_problems.each { |problem| problem.resolve!(current_user) }
     flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t('n_errs_have.been_resolved')}."
     redirect_to :back
   end

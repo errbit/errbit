@@ -49,6 +49,7 @@ class Problem
   }, default_language: "english")
 
   belongs_to :app
+  belongs_to :resolved_by, class_name: "User"
   has_many :errs, inverse_of: :problem, dependent: :destroy
   has_many :comments, inverse_of: :err, dependent: :destroy
 
@@ -204,12 +205,12 @@ class Problem
     Notice.for_errs(errs).ordered
   end
 
-  def resolve!
-    self.update_attributes!(resolved: true, resolved_at: Time.zone.now)
+  def resolve!(resolved_by = nil)
+    self.update_attributes!(resolved: true, resolved_at: Time.zone.now, resolved_by: resolved_by)
   end
 
   def unresolve!
-    self.update_attributes!(resolved: false, resolved_at: nil)
+    self.update_attributes!(resolved: false, resolved_at: nil, resolved_by: nil)
   end
 
   def unresolved?
