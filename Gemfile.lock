@@ -128,7 +128,7 @@ GEM
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
-    hashie (4.1.0)
+    hashie (5.0.0)
     hoi (0.0.7)
       httparty
       json
