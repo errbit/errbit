@@ -292,6 +292,10 @@ GEM
     rack-ssl-enforcer (0.2.9)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -483,6 +487,7 @@ DEPENDENCIES
   puma
   rack-ssl
   rack-ssl-enforcer
+  rails-controller-testing
   rails_12factor
   railties (= 5.0.7.2)
   rake

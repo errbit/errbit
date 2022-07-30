@@ -70,6 +70,7 @@ group :development do
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'rake'
   gem 'rspec'
   gem 'rspec-rails', require: false
