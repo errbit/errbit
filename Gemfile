@@ -49,7 +49,6 @@ gem 'httparty'
 gem 'flowdock'
 
 gem 'ri_cal'
-gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
 
 # For Ruby 2.7
