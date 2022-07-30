@@ -8,6 +8,7 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
+gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
 gem 'devise'

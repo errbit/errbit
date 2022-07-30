@@ -446,6 +446,7 @@ DEPENDENCIES
   actionmailer (= 5.0.7.2)
   actionmailer_inline_css
   actionpack (= 5.0.7.2)
+  activemodel-serializers-xml
   airbrake (~> 4.3.5)
   better_errors
   bigdecimal (~> 1.4.4)
