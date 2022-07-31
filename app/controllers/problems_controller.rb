@@ -95,6 +95,8 @@ class ProblemsController < ApplicationController
     problem.resolve!
     flash[:success] = t('.the_error_has_been_resolved')
     redirect_to :back
+
+    # TODO: remove this
   rescue ActionController::RedirectBackError
     redirect_to app_path(app)
   end
@@ -140,10 +142,10 @@ class ProblemsController < ApplicationController
 
   def destroy_all
     DestroyProblemsByAppJob.perform_later(app.id)
+
     flash[:success] = "#{I18n.t(:n_errs, count: app.problems.count)} #{I18n.t('n_errs.will_be_deleted')}."
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    redirect_to app_path(app)
+
+    redirect_to edit_app_path(app)
   end
 
   def search
