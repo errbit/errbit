@@ -310,11 +310,18 @@ describe AppsController, type: 'controller' do
 
       context "selecting 'use site fingerprinter'" do
         before(:each) do
-          SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-          put :update, params: { id: @app.id, app: {
-            notice_fingerprinter_attributes: { backtrace_lines: 42 },
-            use_site_fingerprinter:          '1'
-          } }
+          SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
+
+          put :update, params: {
+            id: @app.id,
+            app: {
+              notice_fingerprinter_attributes: {
+                backtrace_lines: 42
+              },
+              use_site_fingerprinter: '1'
+            }
+          }
+
           @app.reload
         end
 

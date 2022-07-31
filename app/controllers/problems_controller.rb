@@ -87,7 +87,7 @@ class ProblemsController < ApplicationController
   end
 
   def unlink_issue
-    problem.update_attribute :issue_link, nil
+    problem.update_attribute(:issue_link, nil)
 
     redirect_to app_problem_path(app, problem)
   end

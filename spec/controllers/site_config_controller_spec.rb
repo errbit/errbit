@@ -27,8 +27,8 @@ describe SiteConfigController, type: 'controller' do
 
       fingerprinter = SiteConfig.document.notice_fingerprinter
 
-      expect(fingerprinter.environment_name).to be false
-      expect(fingerprinter.backtrace_lines).to be 3
+      expect(fingerprinter.environment_name).to eq(false)
+      expect(fingerprinter.backtrace_lines).to eq(3)
     end
 
     it 'redirects to the index' do
@@ -64,10 +64,12 @@ describe SiteConfigController, type: 'controller' do
           }
         }
       }
+
       app = App.new(name: 'my_app')
       app.save
-      expect(app.notice_fingerprinter.backtrace_lines).to be 10
-      expect(app.notice_fingerprinter.environment_name).to be false
+
+      expect(app.notice_fingerprinter.backtrace_lines).to eq(10)
+      expect(app.notice_fingerprinter.environment_name).to eq(false)
 
       put :update, params: {
         site_config: {
@@ -77,9 +79,11 @@ describe SiteConfigController, type: 'controller' do
           }
         }
       }
+
       app.reload
-      expect(app.notice_fingerprinter.backtrace_lines).to be 11
-      expect(app.notice_fingerprinter.environment_name).to be true
+
+      expect(app.notice_fingerprinter.backtrace_lines).to eq(11)
+      expect(app.notice_fingerprinter.environment_name).to eq(true)
     end
   end
 end
