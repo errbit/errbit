@@ -1,8 +1,8 @@
 FROM ruby:2.7.6-alpine
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
-ENV BUNDLER_VERSION=2.3.15
-ENV RUBYGEMS_VERSION=3.3.15
+ENV BUNDLER_VERSION=2.3.19
+ENV RUBYGEMS_VERSION=3.3.19
 
 WORKDIR /app
 
