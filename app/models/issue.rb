@@ -52,7 +52,7 @@ class Issue
     return false if errors.present?
 
     url = issue_tracker.create_issue(title, body, user: user.as_document)
-    problem.update_attributes(issue_link: url, issue_type: tracker.class.label)
+    problem.update(issue_link: url, issue_type: tracker.class.label)
 
     errors.empty?
   rescue => ex
