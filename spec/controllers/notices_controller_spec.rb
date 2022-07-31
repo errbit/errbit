@@ -9,8 +9,7 @@ describe NoticesController, type: 'controller' do
   context 'notices API' do
     context "with bogus xml" do
       it "returns an error" do
-        expect(request).to receive(:raw_post).and_return('<r><b>notxml</r>')
-        post :create, format: :xml
+        post :create, body: '<r><b>notxml</r>', format: :xml
         expect(response.status).to eq(422)
         expect(response.body).to eq('The provided XML was not well-formed')
       end
@@ -23,8 +22,7 @@ describe NoticesController, type: 'controller' do
 
       context "with xml pass in raw_port" do
         before do
-          expect(request).to receive(:raw_post).and_return(xml)
-          post :create, format: :xml
+          post :create, body: xml, format: :xml
         end
 
         it "generates a notice from raw xml [POST]" do
