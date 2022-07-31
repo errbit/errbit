@@ -313,12 +313,12 @@ describe AppsController, type: 'controller' do
           SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
 
           put :update, params: {
-            id: @app.id,
+            id:  @app.id,
             app: {
               notice_fingerprinter_attributes: {
                 backtrace_lines: 42
               },
-              use_site_fingerprinter: '1'
+              use_site_fingerprinter:          '1'
             }
           }
 
