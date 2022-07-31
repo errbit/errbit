@@ -223,6 +223,7 @@ describe ProblemsController, type: 'controller' do
     end
 
     it "should redirect to the app page" do
+      request.env["HTTP_REFERER"] = app_path(@err.app)
       put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(response).to redirect_to(app_path(@err.app))
     end
