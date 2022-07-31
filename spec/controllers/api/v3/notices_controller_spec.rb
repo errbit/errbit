@@ -13,7 +13,7 @@ describe Api::V3::NoticesController, type: :controller do
   end
 
   it 'responds to an OPTIONS request' do
-    process :create, 'OPTIONS', project_id: 'nothingspecial'
+    process :create, method: 'OPTIONS', params: { project_id: 'nothingspecial' }
     expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
     expect(response.headers['Access-Control-Allow-Headers']).to eq('origin, content-type, accept')
   end
