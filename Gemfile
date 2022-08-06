@@ -87,9 +87,6 @@ group :test do
   gem 'coveralls', require: false
 end
 
-group :heroku, :production do
-end
-
 group :no_docker, :test, :development do
   gem 'mini_racer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
