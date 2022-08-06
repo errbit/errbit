@@ -36,8 +36,6 @@ jobs:
       RUBYGEMS_VERSION: 3.3.19
       BUNDLER_VERSION: 2.3.19
     parameters:
-      ruby_version:
-        type: string
       mongo_version:
         type: string
     docker:
