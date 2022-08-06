@@ -33,15 +33,15 @@ jobs:
   mongo-ruby:
     environment:
       CIRCLECI_RUBYGEMS_CACHE_KEY: '2022060600'
-      RUBYGEMS_VERSION: 3.3.15
-      BUNDLER_VERSION: 2.3.15
+      RUBYGEMS_VERSION: 3.3.19
+      BUNDLER_VERSION: 2.3.19
     parameters:
       ruby_version:
         type: string
       mongo_version:
         type: string
     docker:
-      - image: cimg/ruby:<< parameters.ruby_version >>-browsers
+      - image: cimg/ruby:2.7.6-browsers
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
     steps:
       - checkout
@@ -49,9 +49,6 @@ jobs:
       - restore_caches
       - install_gems
       - save_caches
-      # NOTE: Add .ruby-version for rubocop
-      - run: echo << parameters.ruby_version >> > .ruby-version
-      - run: cat .ruby-version
       - run: ruby -v
       - run: gem -v
       - run: bundle -v
@@ -65,5 +62,4 @@ workflows:
       - mongo-ruby:
           matrix:
             parameters:
-              ruby_version: ["2.7.6"]
               mongo_version: ["4.0", "4.2", "4.4", "5.0"]
