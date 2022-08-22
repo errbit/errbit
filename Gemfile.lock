@@ -200,7 +200,7 @@ GEM
     mini_portile2 (2.8.0)
     mini_racer (0.6.3)
       libv8-node (~> 16.10.0.0)
-    minitest (5.16.2)
+    minitest (5.16.3)
     mongo (2.18.0)
       bson (>= 4.14.1, < 5.0.0)
     mongoid (6.0.3)
