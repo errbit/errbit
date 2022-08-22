@@ -257,7 +257,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     parallel (1.22.1)
-    parser (3.1.2.0)
+    parser (3.1.2.1)
       ast (~> 2.4.1)
     phantomjs (2.1.1.0)
     pjax_rails (0.5.1)
