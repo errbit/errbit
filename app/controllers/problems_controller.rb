@@ -87,63 +87,69 @@ class ProblemsController < ApplicationController
   end
 
   def unlink_issue
-    problem.update_attribute :issue_link, nil
+    problem.update_attribute(:issue_link, nil)
+
     redirect_to app_problem_path(app, problem)
   end
 
   def resolve
     problem.resolve!
+
     flash[:success] = t('.the_error_has_been_resolved')
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    redirect_to app_path(app)
+
+    redirect_back fallback_location: root_path
   end
 
   def resolve_several
     selected_problems.each(&:resolve!)
+
     flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t('n_errs_have.been_resolved')}."
-    redirect_to :back
+
+    redirect_back fallback_location: root_path
   end
 
   def unresolve_several
     selected_problems.each(&:unresolve!)
+
     flash[:success] = "#{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t('n_errs_have.been_unresolved')}."
-    redirect_to :back
+
+    redirect_back fallback_location: root_path
   end
 
-  ##
-  # Action to merge several Problem in One problem
-  #
-  # @param [ Array<String> ] :problems the list of problem ids
-  #
   def merge_several
     if selected_problems.length < 2
       flash[:notice] = I18n.t('controllers.problems.flash.need_two_errors_merge')
     else
       ProblemMerge.new(selected_problems).merge
+
       flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', nb: selected_problems.count)
     end
-    redirect_to :back
+
+    redirect_back fallback_location: root_path
   end
 
   def unmerge_several
     all = selected_problems.flat_map(&:unmerge!)
+
     flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} #{I18n.t('n_errs_have.been_unmerged')}."
-    redirect_to :back
+
+    redirect_back fallback_location: root_path
   end
 
   def destroy_several
     DestroyProblemsByIdJob.perform_later(selected_problems_ids)
+
     flash[:notice] = "#{I18n.t(:n_errs, count: selected_problems.size)} #{I18n.t('n_errs.will_be_deleted')}."
-    redirect_to :back
+
+    redirect_back fallback_location: root_path
   end
 
   def destroy_all
     DestroyProblemsByAppJob.perform_later(app.id)
+
     flash[:success] = "#{I18n.t(:n_errs, count: app.problems.count)} #{I18n.t('n_errs.will_be_deleted')}."
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    redirect_to app_path(app)
+
+    redirect_back fallback_location: root_path
   end
 
   def search
@@ -155,13 +161,11 @@ class ProblemsController < ApplicationController
 
 private
 
-  ##
-  # Redirect :back if no errors selected
-  #
   def need_selected_problem
     return if err_ids.any?
 
     flash[:notice] = I18n.t('controllers.problems.flash.no_select_problem')
-    redirect_to :back
+
+    redirect_back fallback_location: root_path
   end
 end

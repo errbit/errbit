@@ -1,5 +1,5 @@
 # Load the Rails application.
-require File.expand_path('../application', __FILE__)
+require_relative 'application'
 
 # Load up Errbit::Config with values from the environment
 require Rails.root.join('config/load')

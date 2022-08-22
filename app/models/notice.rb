@@ -1,6 +1,8 @@
 require 'recurse'
 
 class Notice
+  include ActiveModel::Serializers::Xml
+
   UNAVAILABLE = 'N/A'
 
   # Mongo will not accept index keys larger than 1,024 bytes and that includes

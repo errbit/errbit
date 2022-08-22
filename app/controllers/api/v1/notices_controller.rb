@@ -12,7 +12,7 @@ class Api::V1::NoticesController < ApplicationController
     end
 
     results = benchmark("[api/v1/notices_controller] query time") do
-      Notice.where(query).with(consistency: :strong).only(fields).to_a
+      Notice.where(query).only(fields).to_a
     end
 
     respond_to do |format|

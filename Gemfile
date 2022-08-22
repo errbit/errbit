@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.2.11'
-# RAILS_VERSION = '5.0.7.2'
+RAILS_VERSION = '5.0.7.2'
 
 ruby File.read(".ruby-version")
 
@@ -9,6 +8,7 @@ gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
+gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
 gem 'devise'
@@ -21,8 +21,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '~> 5.4'
-# gem 'mongoid', '6.0.3'
+gem 'mongoid', '6.0.3'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
@@ -50,7 +49,6 @@ gem 'httparty'
 gem 'flowdock'
 
 gem 'ri_cal'
-gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
 
 # For Ruby 2.7
@@ -66,12 +64,14 @@ group :development, :test do
 end
 
 group :development do
+  gem 'listen', '~> 3.0.5'
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
   gem 'meta_request'
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'rake'
   gem 'rspec'
   gem 'rspec-rails', require: false
@@ -85,10 +85,6 @@ group :test do
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', require: false
-end
-
-group :heroku, :production do
-  gem 'rails_12factor', require: ENV.key?("HEROKU")
 end
 
 group :no_docker, :test, :development do

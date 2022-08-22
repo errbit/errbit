@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
-  rescue_from ActionController::RedirectBackError, with: :redirect_to_root
-
 private
 
   ##
@@ -16,11 +14,8 @@ private
     return if user_signed_in? && current_user.admin?
 
     flash[:error] = "Sorry, you don't have permission to do that"
-    redirect_to_root
-  end
 
-  def redirect_to_root
-    redirect_to(root_path)
+    redirect_to root_path
   end
 
   def set_time_zone

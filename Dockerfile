@@ -1,8 +1,8 @@
 FROM ruby:2.7.6-alpine
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
-ENV BUNDLER_VERSION=2.3.15
-ENV RUBYGEMS_VERSION=3.3.15
+ENV RUBYGEMS_VERSION=3.3.19
+ENV BUNDLER_VERSION=2.3.19
 
 WORKDIR /app
 
@@ -35,9 +35,15 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile \
   && rm -rf /app/tmp/* \
   && chmod 777 /app/tmp
 
+ENV RAILS_ENV production
+
+ENV RAILS_LOG_TO_STDOUT true
+
+ENV RAILS_SERVE_STATIC_FILES true
+
 EXPOSE 8080
 
 HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT:-8080}/users/sign_in" || exit 1
 
-CMD ["bundle","exec","puma","-C","config/puma.default.rb"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.default.rb"]
 

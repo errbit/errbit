@@ -19,7 +19,7 @@ class HealthController < ActionController::Base
     all_ok = check_results.all? do |check|
       check[:ok]
     end
-    response_status = all_ok ? :ok : :error
+    response_status = all_ok ? :ok : :internal_server_error
     render json: { ok: all_ok, details: check_results }, status: response_status
   end
 
