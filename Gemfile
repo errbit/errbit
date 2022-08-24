@@ -24,6 +24,7 @@ gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mongoid', '6.0.3'
 gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
