@@ -363,4 +363,4 @@ Check the [.circleci/config.yml](.circleci/config.yml) file to see how tests are
 Copyright
 ---------
 
-Copyright (c) 2010-2021 Errbit Team
+Copyright (c) 2010-2022 Errbit Team
