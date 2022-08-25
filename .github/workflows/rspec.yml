@@ -1,0 +1,29 @@
+name: RSpec
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 21 * * 6"
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: ruby -v
+      - run: gem -v
+      - run: bundle -v
+      - run: bundle exec rubocop -v
+      - run: bundle exec rake errbit:bootstrap
+      - run: bundle exec rspec
+      - run: bundle exec rubocop
