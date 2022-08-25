@@ -13,6 +13,9 @@ on:
 jobs:
   rspec:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mongodb-version: ["4.0", "4.2", "4.4", "5.0"]
 
     steps:
       - uses: actions/checkout@v3
@@ -20,6 +23,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - run: ruby -v
       - run: gem -v
       - run: bundle -v
