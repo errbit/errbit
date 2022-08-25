@@ -24,4 +24,5 @@ jobs:
       - run: ruby -v
       - run: gem -v
       - run: bundle -v
+      - run: bundle exec rubocop -v
       - run: bundle exec rubocop --parallel
