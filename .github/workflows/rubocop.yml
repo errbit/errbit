@@ -20,4 +20,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - run: gem update --system "3.3.21"
+      - run: ruby -v
+      - run: gem -v
+      - run: bundle -v
       - run: bundle exec rubocop --parallel
