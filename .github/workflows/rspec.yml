@@ -14,6 +14,7 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         mongodb-version: ["4.0", "4.2", "4.4", "5.0", "6.0"]
 
