@@ -227,7 +227,7 @@ GEM
     mongoid (6.0.3)
       activemodel (~> 5.0)
       mongo (~> 2.3)
-    mongoid-compatibility (0.5.1)
+    mongoid-compatibility (0.6.0)
       activesupport
       mongoid (>= 2.0)
     mongoid-rspec (4.1.0)
