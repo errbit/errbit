@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:error] = "Could not retrieve user's email from GitHub"
       nil
     else
-      User.create(name: request.env['omniauth.auth'].extra.raw_info.name, email: user_email)
+      User.create(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
     end
   end
 

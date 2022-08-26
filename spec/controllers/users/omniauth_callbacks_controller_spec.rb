@@ -2,14 +2,11 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
   def stub_env_for_github_omniauth(login, token = nil, email = "user@example.com")
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]
-    env = {
-      "omniauth.auth" => Hashie::Mash.new(
-        provider:    'github',
-        extra:       { raw_info: { login: login, email: email } },
-        credentials: { token: token }
-      )
-    }
-    allow(@controller).to receive(:env).and_return(env)
+    request.env["omniauth.auth"] = Hashie::Mash.new(
+      provider:    "github",
+      extra:       { raw_info: { login: login, email: email } },
+      credentials: { token: token }
+    )
   end
 
   def stub_client_for_github_omniauth(emails = [])
