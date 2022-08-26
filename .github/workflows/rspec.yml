@@ -28,9 +28,5 @@ jobs:
         uses: supercharge/mongodb-github-action@1.7.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      - run: gem update --system "3.3.21"
-      - run: ruby -v
-      - run: gem -v
-      - run: bundle -v
       - run: bundle exec rake errbit:bootstrap
       - run: bundle exec rspec
