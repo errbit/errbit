@@ -71,12 +71,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect google_user, event: :authentication
     elsif Errbit::Config.google_auto_provision
       if User.valid_google_domain?(google_email)
-        user = User.create_from_google_oauth2(request.env['omniauth.auth'])
+        user = User.create_from_google_oauth2(request.env["omniauth.auth"])
         if user.persisted?
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
           sign_in_and_redirect user, event: :authentication
         else
-          session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
+          session["devise.google_data"] = request.env["omniauth.auth"].except(:extra)
           redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
         end
       else
@@ -111,8 +111,8 @@ private
     end
 
     # Try to get email from public profile
-    if env["omniauth.auth"].extra.raw_info.email.present?
-      return env["omniauth.auth"].extra.raw_info.email
+    if request.env["omniauth.auth"].extra.raw_info.email.present?
+      return request.env["omniauth.auth"].extra.raw_info.email
     end
 
     nil
