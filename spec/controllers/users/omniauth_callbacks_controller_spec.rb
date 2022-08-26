@@ -76,16 +76,13 @@ describe Users::OmniauthCallbacksController, type: 'controller' do
   def stub_env_for_google_omniauth(login, _token = nil)
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]
-    env = {
-      "omniauth.auth" => Hashie::Mash.new(
-        credentials: {
-          provider: 'google_oauth2'
-        },
-        info:        { email: "#{login}@example.com", name: "John Smith" },
-        uid:         login
-      )
-    }
-    allow(@controller).to receive(:env).and_return(env)
+    request.env["omniauth.auth"] = Hashie::Mash.new(
+      credentials: {
+        provider: "google_oauth2"
+      },
+      info:        { email: "#{login}@example.com", name: "John Smith" },
+      uid:         login
+    )
   end
 
   context 'Linking a Google account to a signed in user' do
