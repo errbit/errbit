@@ -50,8 +50,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    google_uid = env['omniauth.auth'].uid
-    google_email = env['omniauth.auth'].info.email
+    google_uid = request.env["omniauth.auth"].uid
+    google_email = request.env["omniauth.auth"].info.email
     google_user = User.where(google_uid: google_uid).first
     google_site_title = Errbit::Config.google_site_title
     # If user is already signed in, link google details to their account
