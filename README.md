@@ -4,9 +4,9 @@
 [circleci-url]: https://circleci.com/gh/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
-[coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=master
+[coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=main
 [coveralls-url]: https://coveralls.io/github/errbit/errbit?branch=master
-[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master
+[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main
 
 ### The open source, self-hosted error catcher
 
