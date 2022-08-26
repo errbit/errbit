@@ -14,13 +14,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:error] = "Could not retrieve user's email from GitHub"
       nil
     else
-      User.create(name: env["omniauth.auth"].extra.raw_info.name, email: user_email)
+      User.create(name: request.env['omniauth.auth'].extra.raw_info.name, email: user_email)
     end
   end
 
   def github
-    github_login = env["omniauth.auth"].extra.raw_info.login
-    github_token = env["omniauth.auth"].credentials.token
+    github_login = request.env["omniauth.auth"].extra.raw_info.login
+    github_token = request.env["omniauth.auth"].credentials.token
     github_site_title = Errbit::Config.github_site_title
     github_user = User.where(github_login: github_login).first || github_auto_sign_up(github_token)
 
