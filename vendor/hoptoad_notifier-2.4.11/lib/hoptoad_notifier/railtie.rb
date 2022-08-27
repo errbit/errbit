@@ -8,8 +8,8 @@ module HoptoadNotifier
     end
 
     initializer "hoptoad.use_rack_middleware" do |app|
-      app.config.middleware.use "HoptoadNotifier::Rack"
-      app.config.middleware.insert 0, "HoptoadNotifier::UserInformer"
+      app.config.middleware.use HoptoadNotifier::Rack
+      app.config.middleware.insert 0, HoptoadNotifier::UserInformer
     end
 
     config.after_initialize do
