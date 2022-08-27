@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-# RAILS_VERSION = '5.1.7'
-RAILS_VERSION = '5.2.8.1'
+# RAILS_VERSION = '5.2.8.1'
+RAILS_VERSION = '6.0.5.1'
 
 ruby File.read(".ruby-version")
 
