@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '5.0.7.2'
-# RAILS_VERSION = '5.1.7'
+RAILS_VERSION = '5.1.7'
 
 ruby File.read(".ruby-version")
 
@@ -101,6 +100,12 @@ gem 'pjax_rails'
 gem 'underscore-rails'
 
 gem 'sucker_punch'
+
+# rollback
+# TODO: remove after upgrade
+gem 'sawyer', '0.8.2'
+gem 'octokit', '4.21.0'
+gem 'faraday', '1.10.1'
 
 ENV['USER_GEMFILE'] ||= './UserGemfile'
 eval_gemfile ENV['USER_GEMFILE'] if File.exist?(ENV['USER_GEMFILE'])
