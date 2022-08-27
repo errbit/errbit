@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 RAILS_VERSION = '5.1.7'
+# RAILS_VERSION = '5.2.8.1'
 
 ruby File.read(".ruby-version")
 
@@ -21,7 +22,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '6.0.3'
+gem 'mongoid'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
