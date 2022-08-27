@@ -1,6 +1,6 @@
 - any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
 - on_page_that_can_include_multiple_different_apps = params[:controller] == 'problems'
-=form_tag do
+= form_tag do
   %table.errs.selectable
     %thead
       %tr
@@ -61,7 +61,7 @@
   = paginate problems
   .tab-bar
     %ul
-      - %w(merge unmerge resolve unresolve delete).each do |action|
+      - [:merge, :unmerge, :resolve, :unresolve, :delete].each do |action|
         %li= submit_tag t(".#{action}").capitalize, :id => "#{action}_problems", :class => 'button',
-          :data => { :action => polymorphic_path([action == 'delete' ? 'destroy' : action, 'several_problems']),
+          :data => { :action => polymorphic_path([action == :delete ? :destroy : action, :several_problems]),
           :confirm => problem_confirm(action) }
