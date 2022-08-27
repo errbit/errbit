@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-# RAILS_VERSION = '6.0.5.1'
 RAILS_VERSION = '6.1.6.1'
+# RAILS_VERSION = '7.0.3.1'
 
 ruby File.read(".ruby-version")
 
@@ -54,7 +54,11 @@ gem 'ri_cal'
 gem 'json', platform: 'jruby'
 
 # For Ruby 2.7
-gem 'bigdecimal', '~> 1.4.4'
+# gem 'bigdecimal', '~> 1.4.4'
+
+# For Ruby 3.1
+gem 'net-smtp'
+gem 'rexml'
 
 gem 'pry-rails'
 

@@ -62,7 +62,6 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    bigdecimal (1.4.4)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bson (4.15.0)
@@ -100,6 +99,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    digest (3.1.0)
+    digest (3.1.0-java)
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -244,6 +245,12 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
+    net-protocol (0.1.3)
+      timeout
+    net-smtp (0.3.1)
+      digest
+      net-protocol
+      timeout
     netrc (0.11.0)
     nio4r (2.5.8)
     nio4r (2.5.8-java)
@@ -358,6 +365,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rexml (3.2.5)
     ri_cal (0.8.8)
     rinku (2.0.6)
     rspec (3.11.0)
@@ -438,6 +446,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.11)
     timecop (0.9.5)
+    timeout (0.3.0)
     tins (1.31.1)
       sync
     tzinfo (2.0.5)
@@ -480,7 +489,6 @@ DEPENDENCIES
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
   better_errors
-  bigdecimal (~> 1.4.4)
   binding_of_caller
   campy
   capybara
@@ -511,6 +519,7 @@ DEPENDENCIES
   mini_racer
   mongoid
   mongoid-rspec
+  net-smtp
   octokit (= 4.21.0)
   omniauth
   omniauth-github
@@ -526,6 +535,7 @@ DEPENDENCIES
   rails-controller-testing
   railties (= 6.1.6.1)
   rake
+  rexml
   ri_cal
   rinku
   rspec
@@ -545,7 +555,7 @@ DEPENDENCIES
   xmpp4r
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.21
