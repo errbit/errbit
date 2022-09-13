@@ -115,7 +115,7 @@ GEM
       activesupport (>= 5.0)
       request_store (>= 1.0)
       ruby2_keywords
-    email_spec (2.2.0)
+    email_spec (2.2.1)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
       mail (~> 2.7)
