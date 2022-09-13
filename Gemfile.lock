@@ -126,7 +126,7 @@ GEM
     erubi (1.11.0)
     execjs (2.8.1)
     fabrication (2.30.0)
-    faraday (1.10.1)
+    faraday (1.10.2)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -501,7 +501,7 @@ DEPENDENCIES
   errbit_github_plugin
   errbit_plugin
   fabrication
-  faraday (= 1.10.1)
+  faraday (= 1.10.2)
   flowdock
   font-awesome-rails
   haml

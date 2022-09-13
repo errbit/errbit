@@ -110,7 +110,7 @@ gem 'sucker_punch'
 # TODO: remove after upgrade
 gem 'sawyer', '0.8.2'
 gem 'octokit', '4.21.0'
-gem 'faraday', '1.10.1'
+gem 'faraday', '1.10.2'
 
 ENV['USER_GEMFILE'] ||= './UserGemfile'
 eval_gemfile ENV['USER_GEMFILE'] if File.exist?(ENV['USER_GEMFILE'])
