@@ -392,7 +392,7 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
-    rspec-support (3.11.0)
+    rspec-support (3.11.1)
     rubocop (0.71.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
