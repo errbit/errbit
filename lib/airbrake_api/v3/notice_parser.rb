@@ -33,15 +33,28 @@ module AirbrakeApi
         @error ||= params['errors'].first
       end
 
-      def backtrace
-        (error['backtrace'] || []).map do |backtrace_line|
-          {
-            method: backtrace_line['function'],
-            file:   backtrace_line['file'],
-            number: backtrace_line['line'],
-            column: backtrace_line['column']
-          }
+      def header(err, top_level: false)
+        if top_level
+          { file: nil, number: nil, method: "(#{err['type']}) #{err['message']}", column: nil }
+        else
+          { file: nil, number: nil, method: "Caused by: (#{err['type']}) #{err['message']}", column: nil }
         end
+      end
+
+      def backtrace
+        (params['errors'] || []).map.with_index do |err, idx|
+          trace_header = header(err, top_level: idx == 0)
+          trace_lines = err['backtrace'].map do |backtrace_line|
+            {
+              method: backtrace_line['function'],
+              file:   backtrace_line['file'],
+              number: backtrace_line['line'],
+              column: backtrace_line['column']
+            }
+          end
+
+          [trace_header] + trace_lines
+        end.flatten
       end
 
       def server_environment
