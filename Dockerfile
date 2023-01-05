@@ -1,4 +1,4 @@
-FROM ruby:2.7.6-alpine
+FROM ruby:3.1.3-alpine
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
 ENV RUBYGEMS_VERSION=3.4.2
