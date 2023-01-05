@@ -22,6 +22,8 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
 
 COPY [".ruby-version", "Gemfile", "Gemfile.lock", "/app/"]
 
+COPY ["vendor/", "/app/vendor/"]
+
 RUN apk add --no-cache --virtual build-dependencies build-base \
   && bundle config build.nokogiri --use-system-libraries \
   && bundle config set without 'test development no_docker' \
