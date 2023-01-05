@@ -59,6 +59,7 @@ gem 'json'
 # For Ruby 3.1
 gem 'net-smtp'
 gem 'net-pop'
+gem 'net-imap'
 gem 'rexml'
 
 gem 'pry-rails'
