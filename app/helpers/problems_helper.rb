@@ -4,7 +4,7 @@ module ProblemsHelper
   end
 
   def auto_link_format(body)
-    Rinku.auto_link(simple_format(body), :all, 'target="_blank"')
+    Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe
   end
 
   def gravatar_tag(email, options = {})
