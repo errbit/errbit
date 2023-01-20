@@ -1,11 +1,11 @@
 %ul
   %li{:class => active_if_here(:apps)}
     = link_to apps_path do
-      %i.fa.fa-briefcase
+      %i.fa.fa-rocket
       = t('.apps')
   %li{:class => active_if_here(:problems)}
     = link_to problems_path do
-      %i.fa.fa-warning
+      %i.fa.fa-bug
       = t('.errors')
   - if user_signed_in? && current_user.admin?
     %li{:class => active_if_here(:users)}
