@@ -5,6 +5,10 @@ describe ProblemsHelper do
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
       ).to eq "<p>Goto <a href=\"https://errbit.com/\" target=\"_blank\">https://errbit.com/</a> and say hello to <a href=\"mailto:team@errbit.invalid\" target=\"_blank\">team@errbit.invalid</a></p>"
     end
+
+    it 'sanitizes body of html tags' do
+      expect(helper.auto_link_format('Hello, <b>World!</b>')).to eq '<p>Hello, World!</p>'
+    end
   end
 
   describe "#gravatar_tag" do

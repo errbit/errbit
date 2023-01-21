@@ -4,7 +4,11 @@ module ProblemsHelper
   end
 
   def auto_link_format(body)
-    Rinku.auto_link(simple_format(body), :all, 'target="_blank"')
+    sanitize(
+      Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe, # rubocop:disable Rails/OutputSafety
+      tags:       %w[a p],
+      attributes: %w[href target]
+    )
   end
 
   def gravatar_tag(email, options = {})
