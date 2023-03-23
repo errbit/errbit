@@ -129,7 +129,7 @@ describe Problem, type: 'model' do
       ## update_attributes not test #valid? but #errors.any?
       # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
       er = ActiveModel::Errors.new(problem)
-      er.add_on_blank(:resolved)
+      er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
       expect(problem).to_not be_valid
       expect do
@@ -185,6 +185,16 @@ describe Problem, type: 'model' do
       it 'find on where message' do
         problem = Fabricate(:problem, where: 'cyril')
         expect(Problem.search('cyril').entries).to eq [problem]
+      end
+      it 'finds with notice_id as argument' do
+        app = Fabricate(:app)
+        problem = Fabricate(:problem, app: app)
+        err = Fabricate(:err, problem: problem)
+        notice = Fabricate(:notice, err: err, message: 'ERR 1')
+
+        problem2 = Fabricate(:problem, where: 'cyril')
+        expect(problem2).to_not eq(problem)
+        expect(Problem.search(notice.id).entries).to eq [problem]
       end
     end
   end

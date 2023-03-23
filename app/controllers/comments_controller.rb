@@ -4,9 +4,9 @@ class CommentsController < ApplicationController
   expose :comment
 
   def create
-    if comment.valid?
-      problem.comments << comment
-      problem.save
+    problem.comments << comment
+
+    if problem.save
       flash[:success] = "Comment saved!"
     else
       flash[:error] = "I'm sorry, your comment was blank! Try again?"

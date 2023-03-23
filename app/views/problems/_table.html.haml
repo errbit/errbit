@@ -16,7 +16,7 @@
           %th Issue
         %th= t('.resolve')
     %tbody
-      - problems.each do |problem|
+      - ProblemDecorator.decorate_collection(problems).each do |problem|
         %tr{:class => problem.resolved? ? 'resolved' : 'unresolved'}
           %td.select.narrow-as-possible
             %div.td-container
@@ -32,7 +32,7 @@
                   = link_to problem.environment, app_path(problem.app, :environment => problem.environment)
           %td.message
             %div.td-container
-              = link_to problem.message, app_problem_path(problem.app, problem), class: 'nowrap', title: problem.message
+              = link_to problem.link_text, app_problem_path(problem.app, problem), class: 'nowrap', title: problem.message
               %em{class: 'nowrap', title: problem.where}= problem.where
               - if problem.comments_count > 0
                 - comment = problem.comments.last

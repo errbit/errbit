@@ -31,7 +31,7 @@ class Comment
     app.emailable? && notification_recipients.any?
   end
 
-protected
+private
 
   def increase_counter_cache
     err.inc(comments_count: 1)

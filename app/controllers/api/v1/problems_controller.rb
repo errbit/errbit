@@ -28,7 +28,7 @@ class Api::V1::ProblemsController < ApplicationController
     end
 
     results = benchmark("[api/v1/problems_controller/index] query time") do
-      Problem.where(query).with(consistency: :strong).only(FIELDS).to_a
+      Problem.where(query).only(FIELDS).to_a
     end
 
     respond_to do |format|

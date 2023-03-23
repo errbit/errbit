@@ -1,6 +1,8 @@
 require 'recurse'
 
 class Notice
+  include ActiveModel::Serializers::Xml
+
   UNAVAILABLE = 'N/A'
 
   # Mongo will not accept index keys larger than 1,024 bytes and that includes
@@ -124,7 +126,7 @@ class Notice
     message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
   end
 
-protected
+private
 
   def problem_recache
     problem.uncache_notice(self)

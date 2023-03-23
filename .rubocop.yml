@@ -1,3 +1,7 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:
@@ -40,7 +44,7 @@ Layout/DotPosition:
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
 
 Layout/AlignHash:
@@ -49,6 +53,10 @@ Layout/AlignHash:
 
 Layout/SpaceAroundOperators:
   AllowForAlignment: true
+
+# long spec blocks are probably fine
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
 
 Naming/FileName:
   Exclude:

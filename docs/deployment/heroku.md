@@ -42,7 +42,7 @@ The last part is to generate a Mongo URI. Go to the `Clusters` section in the `A
 
 ![Connection String](./example/atlas5.png)
 
-Be sure to select Ruby and Version 2.5 or later.
+Be sure to select Ruby and Version 2.7 or later.
 You need to copy the connection string, which can be easily done by clicking the `Copy` button. Then replace `<password>` with the password for your user, which you set earlier. Paste the URI in your notepad.
 
 The final URI looks similar to this: `mongodb+srv://Username:MyPassword@modmail-kjvn21.mongodb.net/`.
@@ -83,7 +83,6 @@ git commit -m "Update db/seeds.rb with initial login"
 ```bash
 heroku apps:create
 heroku addons:create sendgrid:starter
-heroku config:set GEMFILE_RUBY_VERSION=2.5.1
 heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:set MONGODB_URI="<URI HERE>"
 heroku config:set ERRBIT_HOST=some-hostname.example.com

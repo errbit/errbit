@@ -18,19 +18,25 @@ class NoticesController < ApplicationController
         end
         render xml: api_xml
       else
-        render text: "Notice for old app version ignored"
+        render body: "Notice for old app version ignored"
       end
     else
-      render text: "Your API key is unknown", status: 422
+      render body: "Your API key is unknown", status: :unprocessable_entity
     end
   rescue Nokogiri::XML::SyntaxError
-    render text: 'The provided XML was not well-formed', status: 422
+    render body: 'The provided XML was not well-formed', status: :unprocessable_entity
   end
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
   def locate
     problem = Notice.find(params[:id]).problem
     redirect_to app_problem_path(problem.app, problem)
+  end
+
+  def show_by_id
+    notice = Notice.find(params[:id])
+    problem = notice.problem
+    redirect_to app_problem_path(problem.app, problem, notice_id: notice.id)
   end
 
 private
@@ -45,6 +51,6 @@ private
   end
 
   def bad_params(exception)
-    render text: exception.message, status: :bad_request
+    render body: exception.message, status: :bad_request
   end
 end

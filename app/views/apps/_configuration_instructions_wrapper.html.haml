@@ -1,0 +1,6 @@
+%strong Require the airbrake gem in your App.
+%pre
+  %code
+    = render partial: 'configuration_instructions',
+             locals: { errbit_url: request.base_url,
+                       api_key: app.api_key }

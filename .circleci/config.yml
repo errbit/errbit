@@ -1,0 +1,63 @@
+version: 2.1
+commands:
+  restore_caches:
+    steps:
+      - restore_cache:
+          keys:
+            - rubygems-{{ checksum "_rubygems_cache_key" }}-{{ checksum "Gemfile.lock" }}
+            - rubygems-{{ checksum "_rubygems_cache_key" }}-
+  create_cache_key_files:
+    steps:
+      - run: echo $CIRCLECI_RUBYGEMS_CACHE_KEY
+      - run:
+          name: Write the rubygems cache key to a file
+          command: |
+            echo $CIRCLECI_RUBYGEMS_CACHE_KEY > _rubygems_cache_key
+            cat _rubygems_cache_key
+  save_caches:
+    steps:
+      - save_cache:
+          paths:
+            - vendor
+          key: rubygems-{{ checksum "_rubygems_cache_key" }}-{{ checksum "Gemfile.lock" }}
+  install_gems:
+    steps:
+      - run: gem update --system "$RUBYGEMS_VERSION"
+      - run: gem install bundler --version "$BUNDLER_VERSION" --force
+      - run: bundle config set clean true --local
+      - run: bundle config set jobs 4 --local
+      - run: bundle config set path vendor/bundle --local
+      - run: bundle config set retry 3 --local
+      - run: bundle install
+jobs:
+  mongo-ruby:
+    environment:
+      CIRCLECI_RUBYGEMS_CACHE_KEY: '2022060600'
+      RUBYGEMS_VERSION: 3.3.21
+      BUNDLER_VERSION: 2.3.21
+    parameters:
+      mongo_version:
+        type: string
+    docker:
+      - image: cimg/ruby:2.7.6-browsers
+      - image: circleci/mongo:<< parameters.mongo_version >>-ram
+    steps:
+      - checkout
+      - create_cache_key_files
+      - restore_caches
+      - install_gems
+      - save_caches
+      - run: ruby -v
+      - run: gem -v
+      - run: bundle -v
+      - run: bundle exec rubocop -v
+      - run: bundle exec rake errbit:bootstrap
+      - run: bundle exec rspec
+      - run: bundle exec rubocop
+workflows:
+  workflow:
+    jobs:
+      - mongo-ruby:
+          matrix:
+            parameters:
+              mongo_version: ["4.0", "4.2", "4.4", "5.0"]

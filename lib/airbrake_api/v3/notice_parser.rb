@@ -5,8 +5,8 @@ module AirbrakeApi
 
       attr_reader :params, :error
 
-      def initialize(params)
-        @params = params || {}
+      def initialize(params = {})
+        @params = params.is_a?(ActionController::Parameters) ? params.to_unsafe_h : params
       end
 
       def attributes

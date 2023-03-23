@@ -10,7 +10,7 @@ describe "issue_trackers/issue.md.erb", type: 'view' do
   end
 
   it "has the problem url" do
-    render
+    render template: "issue_trackers/issue.md.erb"
     expect(rendered).to match(app_problem_url problem.app, problem)
   end
 end

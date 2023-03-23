@@ -14,13 +14,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:error] = "Could not retrieve user's email from GitHub"
       nil
     else
-      User.create(name: env["omniauth.auth"].extra.raw_info.name, email: user_email)
+      User.create(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
     end
   end
 
   def github
-    github_login = env["omniauth.auth"].extra.raw_info.login
-    github_token = env["omniauth.auth"].credentials.token
+    github_login = request.env["omniauth.auth"].extra.raw_info.login
+    github_token = request.env["omniauth.auth"].credentials.token
     github_site_title = Errbit::Config.github_site_title
     github_user = User.where(github_login: github_login).first || github_auto_sign_up(github_token)
 
@@ -50,8 +50,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    google_uid = env['omniauth.auth'].uid
-    google_email = env['omniauth.auth'].info.email
+    google_uid = request.env["omniauth.auth"].uid
+    google_email = request.env["omniauth.auth"].info.email
     google_user = User.where(google_uid: google_uid).first
     google_site_title = Errbit::Config.google_site_title
     # If user is already signed in, link google details to their account
@@ -71,12 +71,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect google_user, event: :authentication
     elsif Errbit::Config.google_auto_provision
       if User.valid_google_domain?(google_email)
-        user = User.create_from_google_oauth2(request.env['omniauth.auth'])
+        user = User.create_from_google_oauth2(request.env["omniauth.auth"])
         if user.persisted?
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
           sign_in_and_redirect user, event: :authentication
         else
-          session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
+          session["devise.google_data"] = request.env["omniauth.auth"].except(:extra)
           redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
         end
       else
@@ -92,7 +92,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 private
 
   def update_user_with_github_attributes(user, login, token)
-    user.update_attributes(
+    user.update(
       github_login:       login,
       github_oauth_token: token
     )
@@ -111,8 +111,8 @@ private
     end
 
     # Try to get email from public profile
-    if env["omniauth.auth"].extra.raw_info.email.present?
-      return env["omniauth.auth"].extra.raw_info.email
+    if request.env["omniauth.auth"].extra.raw_info.email.present?
+      return request.env["omniauth.auth"].extra.raw_info.email
     end
 
     nil

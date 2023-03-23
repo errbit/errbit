@@ -1,0 +1,21 @@
+# Add the Airbrake gem to your Gemfile:
+# gem 'airbrake', '~> 13.0'
+
+# Invoke the following command from your terminal:
+# rails g airbrake
+#
+# Then modify the following the generated file
+# config/initializers/errbit.rb with the following flags:
+
+Airbrake.configure do |config|
+  config.host = '<%= errbit_url %>'
+  config.project_id = 1 # required, but any positive integer works
+  config.project_key = '<%= api_key %>'
+
+  # airbrake.io supports various features that are out of scope for
+  # Errbit. Disable them:
+  config.job_stats           = false
+  config.query_stats         = false
+  config.performance_stats   = false
+  config.remote_config       = false
+end

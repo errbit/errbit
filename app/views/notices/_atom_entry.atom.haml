@@ -25,10 +25,10 @@
   - for line in notice.backtrace_lines
     %tr
       %td
-        = "#{line.number}:"
+        = "#{line['number']}:"
         &nbsp;&nbsp;
       %td
-        = raw "#{h line.file_relative} -> #{content_tag :strong, h(line.method)}"
+        = raw "#{h line['file_relative']} -> #{content_tag :strong, h(line['method'])}"
 
 %h3 Environment
 %table

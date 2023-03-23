@@ -1,18 +1,17 @@
-# Errbit [![TravisCI][travis-img-url]][travis-ci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
+# Errbit [![CircleCI][circleci-img-url]][circleci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
-[travis-img-url]: https://travis-ci.org/errbit/errbit.svg?branch=master
-[travis-ci-url]: http://travis-ci.org/errbit/errbit
+[circleci-img-url]: https://circleci.com/gh/errbit/errbit.svg?style=shield
+[circleci-url]: https://circleci.com/gh/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
-[coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=master
+[coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=main
 [coveralls-url]: https://coveralls.io/github/errbit/errbit?branch=master
-[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master
+[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main
 
 ### The open source, self-hosted error catcher
 
 Errbit is a tool for collecting and managing errors from other applications.
-It is [Airbrake](http://airbrake.io) API compliant, so if you are already using
-Airbrake, you can just point the `airbrake` gem to your Errbit server.
+It is [Airbrake](http://airbrake.io) API compliant, so you can just point the `airbrake` gem to your Errbit server (see [howto](app/views/apps/_configuration_instructions.html.erb)).
 
 <table>
   <tr>
@@ -57,7 +56,7 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby >= 2.5.x
+* Ruby 2.7
 * MongoDB >= 4.0.x
 
 Installation
@@ -113,10 +112,10 @@ Authentication
 If you host Errbit at errbit.example.com, you would fill in:
 
 <dl>
-<dt>URL
-<dd>http://errbit.example.com
-<dt>Callback URL
-<dd>http://errbit.example.com/users/auth/github/callback
+  <dt>URL</dt>
+  <dd>http://errbit.example.com</dd>
+  <dt>Callback URL</dt>
+  <dd>http://errbit.example.com/users/auth/github/callback</dd>
 </dl>
 
 * After you have registered your app, set `GITHUB_CLIENT_ID` and `GITHUB_SECRET`
@@ -208,7 +207,7 @@ user.save!
 When upgrading Errbit, please run:
 
 ```bash
-git pull origin master # assuming origin is the github.com/errbit/errbit repo
+git pull origin main # assuming origin is the github.com/errbit/errbit repo
 bundle install
 rake db:migrate
 rake db:mongoid:remove_undefined_indexes
@@ -235,6 +234,11 @@ it will be displayed under the *User Details* tab:
 
 This tab will be hidden if no user information is available.
 
+Configuration
+-------------
+
+https://github.com/airbrake/airbrake
+
 Javascript error notifications
 --------------------------------------
 You can log javascript errors that occur in your application by including the
@@ -249,6 +253,7 @@ var airbrake = new airbrakeJs.Client({
   projectId: 'ERRBIT API KEY',
   projectKey: 'ERRBIT API KEY (again)',
   reporter: 'xhr',
+  remoteConfig: false,
   host: 'https://myerrbit.com'
 });
 ```
@@ -315,11 +320,11 @@ Use Errbit with applications written in other languages
 In theory, any Airbrake-compatible error catcher for other languages should work with Errbit.
 Solutions known to work are listed below:
 
-| Language | Project |
-|----------|---------|
-| PHP (&gt;= 5.3) | [wasilak/errbit-php](https://github.com/wasilak/errbit-php) |
-| OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP) |
-| Python | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
+| Language            | Project                                                                                                                             |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| PHP (&gt;= 5.3)     | [wasilak/errbit-php](https://github.com/wasilak/errbit-php)                                                                         |
+| OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP)                                                                         |
+| Python              | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
 
 People using Errbit
 -------------------
@@ -353,9 +358,9 @@ See the [contribution guidelines](CONTRIBUTING.md)
 Running tests
 -------------
 
-Check the [.travis.yml](.travis.yml) file to see how tests are run
+Check the [.circleci/config.yml](.circleci/config.yml) file to see how tests are run
 
 Copyright
 ---------
 
-Copyright (c) 2010-2015 Errbit Team
+Copyright (c) 2010-2022 Errbit Team
