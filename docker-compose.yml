@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:    
-    image: brandnewbox/bnb-ruby:2.4-postgresql
+    image: brandnewbox/bnb-ruby:2.7-postgresql
     command: bundle exec puma -C config/puma.rb
     env_file: .docker-development-vars
     volumes:
@@ -13,5 +13,10 @@ services:
     image: djfarrelly/maildev
     ports:
       - "3001:80"
+  mongodb:
+    image: mongo
+    volumes:
+      - mongo_data:/data/db
 volumes:
   bundle_cache:
+  mongo_data:

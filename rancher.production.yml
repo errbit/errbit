@@ -3,7 +3,7 @@ rancher:
   service_names:
     - app/web
 s2i:
-  builder_image: brandnewbox/bnb-ruby:2.4-postgresql
+  builder_image: brandnewbox/bnb-ruby:2.7-postgresql
   target_image: brandnewops/errbit
   flags: -e RAILS_ENV=production -e SKIP_MIGRATION=1 -e DEVISE_MODULES=[omniauthable] -e GITHUB_URL="https://github.com"
   registry_host: 596395833517.dkr.ecr.us-east-1.amazonaws.com
