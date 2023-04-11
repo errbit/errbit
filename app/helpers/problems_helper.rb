@@ -3,6 +3,14 @@ module ProblemsHelper
     t(format('problems.confirm.%s', action)) unless Errbit::Config.confirm_err_actions.eql? false
   end
 
+  def auto_link_format(body)
+    sanitize(
+      Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe, # rubocop:disable Rails/OutputSafety
+      tags:       %w[a p],
+      attributes: %w[href target]
+    )
+  end
+
   def gravatar_tag(email, options = {})
     return nil unless email.present?
 
