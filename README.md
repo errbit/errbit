@@ -53,6 +53,7 @@ Join the Google Group at https://groups.google.com/group/errbit to receive
 updates and notifications.
 
 # Requirements
+pepe
 
 The list of requirements to install Errbit are:
 
