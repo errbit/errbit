@@ -94,7 +94,9 @@ en:
       domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
-        sign_in: "Sign in"
+        login: "Login"
+        forgot_password: "Forgot password?"
+        or_continue_with: "Or continue with"
 
   problems:
     index:

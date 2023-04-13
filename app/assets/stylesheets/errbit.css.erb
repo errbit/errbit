@@ -17,6 +17,20 @@ body {
 .clear-right  { clear: right; }
 .nowrap       { white-space: nowrap; }
 
+.btn {
+  display: inline-block;
+  text-align: center;
+  padding: 0.6rem 1.3rem;
+  text-decoration: none;
+  border: none;
+  color: #4D4D4D;
+  font-size: 1.5rem
+}
+.btn-green {
+  color: #fff;
+  background-color: #4CAF50;
+}
+
 /* Headings */
 h1, h2, h3, h4, h5, h6 { padding: 0.2em 0; margin-bottom: 1em; border-bottom: 1px solid #dedede;}
 h1 { font-size: 2.0em; line-height: 1.2em; text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;}
@@ -30,10 +44,12 @@ h6 { font-size: 0.9em; line-height: 1.2em; }
 p { margin-bottom: 1em; }
 
 /* Links */
+/*
 a         { color: #0069cc; text-decoration: none;}
 a:visited { color: #0069cc;}
 a:hover   { color: #0069cc; text-decoration: underline; }
 a.action  { float: right; font-size: 0.9em;}
+*/
 
 #header > div, #content-wrapper, #footer {
   width: 930px;
@@ -84,6 +100,31 @@ a.action  { float: right; font-size: 0.9em;}
 #header .active {
   color: #fff;
   font-weight: 1000;
+}
+
+/* Device oauth services */
+#oauth-services {
+  display: flex;
+}
+
+.brand-badge {
+  font-size: 2.5rem;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 0.5rem;
+  text-decoration: none;
+}
+#github {
+  color: #fff;
+  background-color: #24292F;
+}
+#google {
+  color: #fff;
+  background-color: #DB4437;
 }
 
 /* Content Wrapper */
@@ -268,16 +309,6 @@ form input[type=text]:focus, form input[type=password]:focus, form input[type=em
 form input[type=checkbox]:focus + label{
   color: #69C;
 }
-form input[type=submit] {
-  display:block; width: auto; padding: 0.5em;
-  font-size: 1.2em; line-height: 1em; text-transform: uppercase;
-  border: none; color: #FFF; background-color: #387fc1;
-  cursor: pointer;
-}
-form input[type=submit].button {
-  font-size: 1em;
-  text-transform: none;
-}
 form div.buttons {
   color: #666;
   background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 bottom repeat-x;
@@ -418,38 +449,6 @@ pre {
 .pagination em {
   font-style: normal;
   font-weight: bold;
-}
-
-
-/* Buttons */
-input[type="submit"].button,
-a.button {
-  display: inline-block;
-  padding: 0 0.8em;
-  margin-left: 0.5em;
-  color: #666;
-  background-color: #dadada;
-  border: 1px solid #BBB;
-  border-radius: 30px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  line-height: 30px;
-  min-width: 54px;
-  text-align: center;
-  text-shadow: 0 1px 0 #fff;
-}
-input[type="submit"]:hover.button,
-a:hover.button {
-  box-shadow: 0px 0px 4px #bfbfbf;
-  -moz-box-shadow: 0px 0px 4px #bfbfbf;
-  -webkit-box-shadow: 0px 0px 4px #bfbfbf;
-  text-decoration: none;
-  background-color: #e5e5e5;
-}
-a.button.active {
-  border-color: #fff;
-  background-color: #CCC;
-  background-image: none;
 }
 
 
