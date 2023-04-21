@@ -15,6 +15,12 @@ with:
 docker run --rm errbit/errbit bundle exec rake secret
 ```
 
+## Which image version should I use?
+
+As of 2023, we are not releasing non-latest tags to docker hub (last release was v0.9.0 in 2020).
+Please use [errbit/errbit:latest](https://hub.docker.com/r/errbit/errbit/tags), which is updated on main builds.
+If you are interested in using official release tags of errbit, contributions to the CI process and shipping stable releases would be welcome.
+
 ## Standalone Errbit App
 
 Assuming you have a mongo host available, you can run errbit using `docker
