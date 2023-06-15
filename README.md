@@ -101,6 +101,12 @@ application deployments.
 
 See [apps](docs/apps.md)
 
+## Issue Status Management
+
+Problems in Errbit can be in one of the following states:
+* **Unresolved**: The problem requires attention.
+* **Resolved**: The problem has been fixed. If the same error is reported again, Errbit will automatically reopen it and change its status back to Unresolved.
+
 ## Authentication
 
 ### Configuring GitHub authentication
@@ -250,11 +256,11 @@ documentation at https://github.com/airbrake/airbrake-js/blob/master/README.md
 
 ```javascript
 var airbrake = new airbrakeJs.Client({
-  projectId: 'ERRBIT API KEY',
-  projectKey: 'ERRBIT API KEY (again)',
-  reporter: 'xhr',
+  projectId: "ERRBIT API KEY",
+  projectKey: "ERRBIT API KEY (again)",
+  reporter: "xhr",
   remoteConfig: false,
-  host: 'https://myerrbit.com'
+  host: "https://errbit.example.com"
 });
 ```
 

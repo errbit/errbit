@@ -8,6 +8,7 @@ We release patches for security vulnerabilities against the following versions:
 |---------|--------------------|
 | main    | :white_check_mark: |
 | v0.10.x | :white_check_mark: |
+| v0.11.x | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
