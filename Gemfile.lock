@@ -90,6 +90,7 @@ GEM
     css_parser (1.11.0)
       addressable
     date (3.3.3)
+    date (3.3.3-java)
     debug_inspector (1.1.0)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
@@ -329,7 +330,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     racc (1.6.2-java)
-    rack (2.2.4)
+    rack (2.2.7)
     rack-contrib (2.3.0)
       rack (~> 2.0)
     rack-protection (2.2.2)
