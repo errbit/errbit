@@ -6,7 +6,6 @@ commands:
           keys:
             - rubygems-{{ checksum "_rubygems_cache_key" }}-{{ checksum "Gemfile.lock" }}
             - rubygems-{{ checksum "_rubygems_cache_key" }}-
-            - rubygems-
   create_cache_key_files:
     steps:
       - run: echo $CIRCLECI_RUBYGEMS_CACHE_KEY
@@ -23,8 +22,8 @@ commands:
           key: rubygems-{{ checksum "_rubygems_cache_key" }}-{{ checksum "Gemfile.lock" }}
   install_gems:
     steps:
-      - run: gem update --system
-      - run: gem install bundler -v $BUNDLER_VERSION
+      - run: gem update --system "$RUBYGEMS_VERSION"
+      - run: gem install bundler --version "$BUNDLER_VERSION" --force
       - run: bundle config set clean true --local
       - run: bundle config set jobs 4 --local
       - run: bundle config set path vendor/bundle --local
@@ -33,15 +32,14 @@ commands:
 jobs:
   mongo-ruby:
     environment:
-      CIRCLECI_RUBYGEMS_CACHE_KEY: '2021082301'
-      BUNDLER_VERSION: 2.1.4
+      CIRCLECI_RUBYGEMS_CACHE_KEY: '2022060600'
+      RUBYGEMS_VERSION: 3.3.21
+      BUNDLER_VERSION: 2.3.21
     parameters:
-      ruby_version:
-        type: string
       mongo_version:
         type: string
     docker:
-      - image: circleci/ruby:<< parameters.ruby_version >>-browsers-legacy
+      - image: cimg/ruby:2.7.6-browsers
       - image: circleci/mongo:<< parameters.mongo_version >>-ram
     steps:
       - checkout
@@ -49,9 +47,6 @@ jobs:
       - restore_caches
       - install_gems
       - save_caches
-      # NOTE: Add .ruby-version for rubocop
-      - run: echo << parameters.ruby_version >> > .ruby-version
-      - run: cat .ruby-version
       - run: ruby -v
       - run: gem -v
       - run: bundle -v
@@ -65,5 +60,4 @@ workflows:
       - mongo-ruby:
           matrix:
             parameters:
-              ruby_version: ["2.7"]
               mongo_version: ["4.0", "4.2", "4.4", "5.0"]

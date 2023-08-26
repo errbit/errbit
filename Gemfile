@@ -1,27 +1,30 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.2.11'
+RAILS_VERSION = '5.0.7.2'
+# RAILS_VERSION = '5.1.7'
 
-send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
+ruby File.read(".ruby-version")
 
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
 
+gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
 gem 'decent_exposure'
-gem 'devise', '~> 4.7'
+gem 'devise'
 gem 'dotenv-rails'
 gem 'draper'
 gem 'errbit_plugin'
 gem 'errbit_github_plugin'
 gem 'font-awesome-rails'
-gem 'haml', '~> 5.1'
+gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '~> 5.4'
+gem 'mongoid', '6.0.3'
 gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
@@ -48,29 +51,29 @@ gem 'httparty'
 gem 'flowdock'
 
 gem 'ri_cal'
-gem 'yajl-ruby', platform: 'ruby'
 gem 'json', platform: 'jruby'
 
 # For Ruby 2.7
 gem 'bigdecimal', '~> 1.4.4'
 
+gem 'pry-rails'
+
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
-  gem 'pry-rails'
-  gem 'pry-byebug', platforms: [:mri]
-  gem 'quiet_assets'
   gem 'rubocop', '~> 0.71.0', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
 end
 
 group :development do
+  gem 'listen', '~> 3.0.5'
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
   gem 'meta_request'
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'rake'
   gem 'rspec'
   gem 'rspec-rails', require: false
@@ -86,15 +89,11 @@ group :test do
   gem 'coveralls', require: false
 end
 
-group :heroku, :production do
-  gem 'rails_12factor', require: ENV.key?("HEROKU")
-end
-
 group :no_docker, :test, :development do
-  gem 'mini_racer', '~> 0.3.1', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'mini_racer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
-gem 'puma', '~> 4.3.8'
+gem 'puma'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'

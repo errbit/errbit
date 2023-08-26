@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
@@ -66,8 +66,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :problems, only: [:index, :show], defaults: { format: 'json' }
-      resources :notices,  only: [:index], defaults: { format: 'json' }
+      resources :problems, only: [:index, :show], defaults: { format: 'json' } do
+        resources :comments, only: [:index, :create], defaults: { format: 'json' }
+      end
+      resources :notices, only: [:index], defaults: { format: 'json' }
       resources :stats, only: [], defaults: { format: 'json' } do
         collection do
           get :app

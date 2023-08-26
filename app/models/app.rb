@@ -7,6 +7,7 @@ class App
   field :api_key
   field :github_repo
   field :bitbucket_repo
+  field :custom_backtrace_url_template
   field :asset_host
   field :repository_branch
   field :current_app_version
@@ -195,7 +196,7 @@ class App
     notice_fingerprinter.source == 'site'
   end
 
-protected
+private
 
   def store_cached_attributes_on_problems
     Problem.where(app_id: id).update_all(

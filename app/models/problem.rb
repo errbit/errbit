@@ -205,11 +205,11 @@ class Problem
   end
 
   def resolve!
-    self.update_attributes!(resolved: true, resolved_at: Time.zone.now)
+    self.update!(resolved: true, resolved_at: Time.zone.now)
   end
 
   def unresolve!
-    self.update_attributes!(resolved: false, resolved_at: nil)
+    self.update!(resolved: false, resolved_at: nil)
   end
 
   def unresolved?

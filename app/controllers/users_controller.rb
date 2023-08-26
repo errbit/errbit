@@ -21,8 +21,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    if user.update_attributes(user_params)
+    if user.update(user_params)
       flash[:success] = I18n.t('controllers.users.flash.update.success', name: user.name)
+
       redirect_to user_path(user)
     else
       render :edit
@@ -45,16 +46,18 @@ class UsersController < ApplicationController
   end
 
   def unlink_github
-    user.update_attributes github_login: nil, github_oauth_token: nil
+    user.update(github_login: nil, github_oauth_token: nil)
+
     redirect_to user_path(user)
   end
 
   def unlink_google
     user.update(google_uid: nil)
+
     redirect_to user_path(user)
   end
 
-protected
+private
 
   def require_user_edit_priviledges
     can_edit = current_user == user || current_user.admin?

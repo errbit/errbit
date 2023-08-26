@@ -24,4 +24,20 @@ describe AppDecorator do
       expect(AppDecorator.new(double(notify_on_errs: true)).notify_err_display).to eql ''
     end
   end
+
+  context '#custom_backtrace_url' do
+    it 'should correctly replace the unescaped fields' do
+      dbl = double(repo_branch:                   'feature/branch',
+                   custom_backtrace_url_template: 'https://example.com/repo/name/src/branch/%{branch}/%{file}#L%{line}')
+      expect(AppDecorator.new(dbl).custom_backtrace_url("test/file.rb", 42)).to \
+        eq 'https://example.com/repo/name/src/branch/feature/branch/test/file.rb#L42'
+    end
+
+    it 'should correctly replace the escaped fields' do
+      dbl = double(repo_branch:                   'feature/branch',
+                   custom_backtrace_url_template: 'https://example.com/repo/name/src/branch/%{ebranch}/%{efile}#L%{line}')
+      expect(AppDecorator.new(dbl).custom_backtrace_url("test/file.rb", 42)).to \
+        eq 'https://example.com/repo/name/src/branch/feature%2Fbranch/test%2Ffile.rb#L42'
+    end
+  end
 end

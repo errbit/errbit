@@ -129,7 +129,7 @@ describe Problem, type: 'model' do
       ## update_attributes not test #valid? but #errors.any?
       # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
       er = ActiveModel::Errors.new(problem)
-      er.add_on_blank(:resolved)
+      er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
       expect(problem).to_not be_valid
       expect do

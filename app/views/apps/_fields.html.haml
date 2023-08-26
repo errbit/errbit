@@ -19,6 +19,9 @@
   = f.label :bitbucket_repo, t('.bitbucket_repo')
   = f.text_field :bitbucket_repo, :placeholder => "errbit/errbit from https://bitbucket.org/errbit/errbit"
 %div
+  = f.label :custom_backtrace_url_template, t('.custom_backtrace_url_template')
+  = f.text_field :custom_backtrace_url_template, :placeholder => "https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}"
+%div
   = f.label :asset_host, t('.asset_host')
   %em= t('.asset_host_help')
   = f.text_field :asset_host, :placeholder => t('.asset_host_placeholder')

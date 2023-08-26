@@ -23,8 +23,7 @@ class SiteConfig
       f = app.notice_fingerprinter
       next if f.source && f.source != CONFIG_SOURCE_SITE
 
-      app.update_attributes(
-        notice_fingerprinter: notice_fingerprinter_attributes)
+      app.update(notice_fingerprinter: notice_fingerprinter_attributes)
     end
   end
 

@@ -45,7 +45,7 @@
             %span.delete= link_to '&#10008;'.html_safe, [app, problem, comment], :method => :delete,
               :data => { :confirm => t("comments.confirm_delete") }, :class => "destroy-comment"
         %tr
-          %td= simple_format comment.body
+          %td= auto_link_format(comment.body)
   = form_for [app, problem, @comment] do |comment_form|
     %p= t('.add_a_comment')
     = comment_form.text_area :body

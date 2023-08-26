@@ -64,7 +64,7 @@ class AppsController < ApplicationController
   def update
     process_fingerprinter_choice
     initialize_subclassed_notification_service
-    app.update_attributes(app_params)
+    app.update(app_params)
 
     if app.save
       redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
@@ -99,7 +99,7 @@ class AppsController < ApplicationController
     end
   end
 
-protected
+private
 
   def initialize_subclassed_notification_service
     notification_type = app_params.
@@ -172,8 +172,6 @@ protected
       params[:app][:notice_fingerprinter_attributes] = SiteConfig.document.notice_fingerprinter_attributes
     end
   end
-
-private
 
   def app_params
     params.require(:app).permit!
