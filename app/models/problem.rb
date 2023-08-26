@@ -6,7 +6,6 @@
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Attributes::Dynamic
 
   CACHED_NOTICE_ATTRIBUTES = {
     messages:    :message,
@@ -156,7 +155,9 @@ class Problem
         if (doc[k].try(:[], digest).try(:[], :count)).to_i > 1
           doc.inc("#{field}.count" => -1)
         else
-          doc.unset(field)
+          h = doc[k]
+          h.delete(digest)
+          doc.set("#{k}": h)
         end
       end
     end
