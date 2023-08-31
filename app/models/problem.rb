@@ -155,7 +155,7 @@ class Problem
         if (doc[k].try(:[], digest).try(:[], :count)).to_i > 1
           doc.inc("#{field}.count" => -1)
         else
-          h = doc[k]
+          h = doc[k] || {}
           h.delete(digest)
           doc.set("#{k}": h)
         end
