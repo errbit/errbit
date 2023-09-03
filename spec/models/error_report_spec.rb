@@ -257,11 +257,11 @@ describe ErrorReport do
       problem.mute(hours: 2)
       expect(problem.muted?).to be_truthy
       error_report2 = ErrorReport.new(xml)
-      expect {
+      expect do 
         error_report2.generate_notice!
-      }.to change {
+      end.to change do
         ActionMailer::Base.deliveries.length
-      }.by(0)
+      end.by(0)
     end
     
     context 'when email_at_notices config is specified', type: :mailer do

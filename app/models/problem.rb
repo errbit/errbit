@@ -137,7 +137,7 @@ class Problem
   end
 
   def muted?
-    mute_until_ts && mute_until_ts >= Time.now
+    mute_until_ts && mute_until_ts >= Time.zone.now
   end
 
   def toggle_mute(hours: 1)
