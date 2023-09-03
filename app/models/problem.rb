@@ -19,6 +19,7 @@ class Problem
   field :resolved_at, type: Time
   field :issue_link, type: String
   field :issue_type, type: String
+  field :mute_until_ts, type: Time
 
   # Cached fields
   field :app_name, type: String
@@ -133,6 +134,23 @@ class Problem
         "user_agents.#{user_agent_digest}.count" => 1
       }
     }, return_document: :after)
+  end
+
+  def muted?
+    mute_until_ts && mute_until_ts >= Time.now
+  end
+
+  def toggle_mute(hours: 1)
+    muted? ? unmute : mute(hours: hours)
+  end
+
+  def mute(hours:)
+    n = hours.to_i
+    update_attribute(:mute_until_ts, n.hours.from_now)
+  end
+
+  def unmute
+    update_attribute(:mute_until_ts, nil)
   end
 
   def uncache_notice(notice)

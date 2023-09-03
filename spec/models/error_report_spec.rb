@@ -246,6 +246,24 @@ describe ErrorReport do
       expect(email.subject).to include("[#{notice.environment_name}]")
     end
 
+    it 'does not perform email notification when muted' do
+      allow(app).to receive(:email_at_notices).and_return([0])
+
+      error_report.generate_notice!
+      problem = app.problems.first
+      expect(problem.muted?).to be_falsey
+      expect(ActionMailer::Base.deliveries.length).to eql(1)
+
+      problem.mute(hours: 2)
+      expect(problem.muted?).to be_truthy
+      error_report2 = ErrorReport.new(xml)
+      expect {
+        error_report2.generate_notice!
+      }.to change {
+        ActionMailer::Base.deliveries.length
+      }.by(0)
+    end
+    
     context 'when email_at_notices config is specified', type: :mailer do
       before do
         allow(Errbit::Config).to receive(:email_at_notices).and_return(email_at_notices)

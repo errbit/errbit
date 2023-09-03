@@ -339,6 +339,26 @@ describe ProblemsController, type: 'controller' do
     end
   end
 
+  describe "PUTS /apps/:app_id/problems/:id/toggle_mute" do
+    before(:each) do
+      sign_in user
+    end
+
+    it "should mute the problem" do
+      put :toggle_mute, params: { app_id: problem.app.id, id: problem.id, hours: 1 }
+      expect(response).to redirect_to(app_problem_path(problem.app, problem))
+      expect(flash[:success]).to eql(I18n.t("controllers.problems.mute", hours: 1))
+    end
+
+    it "should unmute the problem" do
+      problem.mute(hours: 1)
+
+      put :toggle_mute, params: { app_id: problem.app.id, id: problem.id }
+      expect(response).to redirect_to(app_problem_path(problem.app, problem))
+      expect(flash[:success]).to eql(I18n.t("controllers.problems.unmute"))
+    end
+  end
+  
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
     before(:each) do
       sign_in user
