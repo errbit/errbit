@@ -257,11 +257,7 @@ describe ErrorReport do
       problem.mute(hours: 2)
       expect(problem.muted?).to be_truthy
       error_report2 = ErrorReport.new(xml)
-      expect do 
-        error_report2.generate_notice!
-      end.to change do
-        ActionMailer::Base.deliveries.length
-      end.by(0)
+      expect { error_report2.generate_notice! }.to change { ActionMailer::Base.deliveries.length }.by(0)
     end
     
     context 'when email_at_notices config is specified', type: :mailer do
