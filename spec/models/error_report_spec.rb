@@ -259,7 +259,7 @@ describe ErrorReport do
       error_report2 = ErrorReport.new(xml)
       expect { error_report2.generate_notice! }.to change { ActionMailer::Base.deliveries.length }.by(0)
     end
-    
+
     context 'when email_at_notices config is specified', type: :mailer do
       before do
         allow(Errbit::Config).to receive(:email_at_notices).and_return(email_at_notices)

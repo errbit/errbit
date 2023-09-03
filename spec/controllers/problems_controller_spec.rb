@@ -358,7 +358,7 @@ describe ProblemsController, type: 'controller' do
       expect(flash[:success]).to eql(I18n.t("controllers.problems.unmute"))
     end
   end
-  
+
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
     before(:each) do
       sign_in user
