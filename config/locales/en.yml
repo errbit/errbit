@@ -135,7 +135,7 @@ en:
       parameters: Parameters
       session: Session
       ago_by: ago by
-      ago_by_unkown_user: ago by [Unkown User]
+      ago_by_unknown_user: ago by [Unknown User]
       first_notice: First Notice
       last_notice: Last Notice
       environment: Environment
