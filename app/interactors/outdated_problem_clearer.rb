@@ -30,11 +30,9 @@ private
     collections.map(&:name).map do |collection|
       Mongoid.default_client.command compact: collection
     rescue Mongo::Error::OperationFailure => e
-      if e.message =~ /CMD_NOT_ALLOWED: compact/
-        next
-      else
-        raise e
-      end
+      next if /CMD_NOT_ALLOWED: compact/.match?(e.message)
+
+      raise e
     end
   end
 end
