@@ -52,6 +52,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :watchers, only: [:destroy, :update]
     member do
       post :regenerate_api_key
+      get 'badges', as: :badges, to: 'badges#index'
+      get 'badges/:badge_type', format: :svg, as: :badge, to: 'badges#show'
     end
     collection do
       get :search

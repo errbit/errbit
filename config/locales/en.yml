@@ -216,6 +216,7 @@ en:
       api_key: "API Key:"
       are_you_sure: 'Are you sure?'
       atom_title: "Errbit notices for %{name} at %{host}"
+      badges: badges
       edit: edit
       environment: Environment
       errors: Errors
