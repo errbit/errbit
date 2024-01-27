@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '5.0.7.2'
-# RAILS_VERSION = '5.1.7'
+RAILS_VERSION = '6.1.7.4'
+# RAILS_VERSION = '7.0.3.1'
 
 ruby File.read(".ruby-version")
 
@@ -22,7 +22,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '6.0.3'
+gem 'mongoid'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
@@ -34,7 +34,7 @@ gem 'useragent'
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
-gem 'hoptoad_notifier', "~> 2.4"
+gem 'hoptoad_notifier', path: "vendor/hoptoad_notifier-2.4.11"
 
 # Notification services
 # ---------------------------------------
@@ -51,10 +51,16 @@ gem 'httparty'
 gem 'flowdock'
 
 gem 'ri_cal'
-gem 'json', platform: 'jruby'
+gem 'json'
 
 # For Ruby 2.7
-gem 'bigdecimal', '~> 1.4.4'
+# gem 'bigdecimal', '~> 1.4.4'
+
+# For Ruby 3.1
+gem 'net-smtp'
+gem 'net-pop'
+gem 'net-imap'
+gem 'rexml'
 
 gem 'pry-rails'
 
@@ -101,6 +107,12 @@ gem 'pjax_rails'
 gem 'underscore-rails'
 
 gem 'sucker_punch'
+
+# rollback
+# TODO: remove after upgrade
+gem 'sawyer', '0.8.2'
+gem 'octokit', '4.21.0'
+gem 'faraday', '1.10.2'
 
 ENV['USER_GEMFILE'] ||= './UserGemfile'
 eval_gemfile ENV['USER_GEMFILE'] if File.exist?(ENV['USER_GEMFILE'])
