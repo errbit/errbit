@@ -26,7 +26,7 @@ describe NoticesController, type: 'controller' do
         end
 
         it "generates a notice from raw xml [POST]" do
-          expect(response).to be_success
+          expect(response).to be_successful
           # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
           # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
           expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
@@ -36,7 +36,7 @@ describe NoticesController, type: 'controller' do
 
       it "generates a notice from xml in a data param [POST]" do
         post :create, params: { data: xml, format: :xml }
-        expect(response).to be_success
+        expect(response).to be_successful
         # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
         # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
         expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
@@ -45,7 +45,7 @@ describe NoticesController, type: 'controller' do
 
       it "generates a notice from xml [GET]" do
         get :create, params: { data: xml, format: :xml }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
         expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
       end

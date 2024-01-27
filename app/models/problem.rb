@@ -6,6 +6,7 @@
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Attributes::Dynamic
 
   CACHED_NOTICE_ATTRIBUTES = {
     messages:    :message,

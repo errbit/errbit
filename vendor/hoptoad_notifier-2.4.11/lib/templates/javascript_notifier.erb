@@ -1,0 +1,13 @@
+<%= javascript_tag %Q{
+    var notifierJsScheme = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cscript src='" + notifierJsScheme + "#{host}/javascripts/notifier.js' type='text/javascript'%3E%3C/script%3E"));
+  }
+%>
+
+<%= javascript_tag %Q{
+    Hoptoad.setKey('#{api_key}');
+    Hoptoad.setHost('#{host}');
+    Hoptoad.setEnvironment('#{environment}');
+    Hoptoad.setErrorDefaults({ url: "#{escape_javascript url}", component: "#{controller_name}", action: "#{action_name}" });
+  } 
+%>
