@@ -1,31 +1,33 @@
-- content_for :title, 'Sign in'
+- content_for :title, t('.login')
 - auth_key = Devise.authentication_keys.first
 
-- if Errbit::Config.github_authentication || Errbit::Config.google_authentication
-  - content_for :action_bar do
-    %div.action-bar
-      - if Errbit::Config.github_authentication
-        %span.github= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, method: :post
-      - if Errbit::Config.google_authentication
-        %span.google= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post
-
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  .required
+  #email
     = f.label auth_key
-    = f.text_field auth_key, :type => (Errbit::Config.user_has_username ? 'text' : 'email'), :tabindex => 1, :autofocus => true
+    = f.text_field auth_key, type: (Errbit::Config.user_has_username ? 'text' : 'email'), tabindex: 1, autofocus: true
 
-  .required
-    = link_to 'forgot it?', new_password_path(resource_name), :class => 'float-right', :id => "forgot_password"
+  #password
     = f.label :password
-    = f.password_field :password, :tabindex => 2
+    = f.password_field :password, tabindex: 2
+    %small
+      = link_to t('.forgot_password'), new_password_path(resource_name), class: 'float-right'
 
   - if devise_mapping.rememberable?
-    %div.checkbox
-      = f.check_box :remember_me, :tabindex => 3
+    #remember-me
+      = f.check_box :remember_me, tabindex: 3
       = f.label :remember_me
+    = f.submit t('.login'), class: 'btn btn-green'
 
-  %div.buttons
-    %button{:type => 'submit', :class => 'sign_in'}=t('.sign_in')
+- if Errbit::Config.github_authentication || Errbit::Config.google_authentication
+  = t('.or_continue_with')
+
+  #oauth-services
+    - if Errbit::Config.github_authentication
+      = link_to user_github_omniauth_authorize_path, method: :post, id: 'github', class: 'brand-badge' do
+        %i.fa.fa-github
+    - if Errbit::Config.google_authentication
+      = link_to user_google_oauth2_omniauth_authorize_path, method: :post, id: 'google', class: 'brand-badge' do
+        %i.fa.fa-google
 
 :javascript
   $('a#forgot_password').click(function(){
@@ -33,4 +35,3 @@
     location.href = $(this).attr('href') + "?email=" + $('#user_#{auth_key}').val();
     return false;
   });
-

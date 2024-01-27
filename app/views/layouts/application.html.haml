@@ -14,7 +14,7 @@
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}
     #header
-      %div
+      %nav
         = link_to t('.errbit'), root_path, :id => 'site-name'
         = render 'shared/navigation' if current_user
         = render 'shared/session'
