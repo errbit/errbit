@@ -3,6 +3,10 @@ module ProblemsHelper
     t(format('problems.confirm.%s', action)) unless Errbit::Config.confirm_err_actions.eql? false
   end
 
+  def problem_toggle_mute(problem)
+    problem.muted? ? "Unmute" : "Mute"
+  end
+
   def auto_link_format(body)
     sanitize(
       Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe, # rubocop:disable Rails/OutputSafety

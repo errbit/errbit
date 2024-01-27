@@ -138,6 +138,39 @@ describe Problem, type: 'model' do
     end
   end
 
+  context "muting notifications" do
+    it "#mute mutes for n hours" do
+      problem = Fabricate(:problem)
+      expect(problem).to_not be_muted
+      problem.mute(hours: 1)
+      expect(problem).to be_muted
+      expect(problem.mute_until_ts).to be_present
+    end
+
+    it "#umute removes mute" do
+      problem = Fabricate(:problem)
+      problem.mute(hours: 1)
+      expect(problem).to be_muted
+      problem.unmute
+      expect(problem).to_not be_muted
+      expect(problem.mute_until_ts).to be_nil
+    end
+
+    it "#toggle_mute toggles mute status" do
+      problem = Fabricate(:problem)
+      problem.toggle_mute(hours: 1)
+      expect(problem).to be_muted
+      problem.toggle_mute
+      expect(problem).to_not be_muted
+    end
+
+    it "#muted? knows when mute has expired" do
+      problem = Fabricate(:problem)
+      problem.mute_until_ts = 1.minute.ago
+      expect(problem).to_not be_muted
+    end
+  end
+
   context "#unmerge!" do
     it "creates a separate problem for each err" do
       problem1 = Fabricate(:notice).problem

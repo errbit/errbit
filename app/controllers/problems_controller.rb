@@ -70,6 +70,18 @@ class ProblemsController < ApplicationController
     render partial: 'problems/sparkline', layout: false
   end
 
+  def toggle_mute
+    problem.toggle_mute(hours: params[:hours])
+
+    flash[:success] = if problem.muted?
+                        I18n.t("controllers.problems.mute", hours: params[:hours])
+                      else
+                        I18n.t("controllers.problems.unmute")
+                      end
+
+    redirect_to app_problem_path(app, problem)
+  end
+
   def close_issue
     issue = Issue.new(problem: problem, user: current_user)
     flash[:error] = issue.errors.full_messages.join(', ') unless issue.close

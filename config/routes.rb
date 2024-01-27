@@ -44,6 +44,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         get :xhr_sparkline
         put :resolve
         put :unresolve
+        put :toggle_mute
         post :create_issue
         post :close_issue
         delete :unlink_issue

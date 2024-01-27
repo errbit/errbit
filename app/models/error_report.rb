@@ -87,6 +87,8 @@ class ErrorReport
   end
 
   def should_email?
+    return false if @problem.muted?
+
     problem_was_resolved ||
       app.email_at_notices.include?(0) ||
       app.email_at_notices.include?(@problem.notices_count)
@@ -101,6 +103,8 @@ class ErrorReport
   end
 
   def should_notify?
+    return false if @problem.muted?
+
     problem_was_resolved ||
       app.notification_service.notify_at_notices.include?(0) ||
       app.notification_service.notify_at_notices.include?(@problem.notices_count)
