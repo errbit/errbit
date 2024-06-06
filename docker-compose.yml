@@ -9,3 +9,16 @@ services:
       - "27017:27017"
     volumes:
       - "errbit_mongodb_data:/data/db:rw"
+
+  errbit:
+    image: "errbit/errbit:latest"
+    ports:
+      - "3000:3000"
+    read_only: true
+    environment:
+      RAILS_ENV: "production"
+      MONGO_URL: "mongodb://mongo:27017/errbit"
+    tmpfs:
+      - /app/tmp
+    depends_on:
+      - mongo
