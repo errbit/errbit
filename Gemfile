@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby File.read(".ruby-version")
 
-gem 'rails', '5.1.7'
+gem 'rails', '5.2.8.1'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -17,7 +17,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '6.2.1'
+gem 'mongoid', '6.4.8'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'

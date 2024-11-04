@@ -29,7 +29,7 @@ describe Api::V1::CommentsController, type: 'controller' do
 
       it "should return all comments of a problem" do
         get :index, params: { problem_id: @problem.id, auth_token: @user.authentication_token }
-        expect(response).to be_success
+        expect(response).to be_successful
         comments = JSON.parse response.body
         expect(comments.length).to eq 2
       end
@@ -45,7 +45,7 @@ describe Api::V1::CommentsController, type: 'controller' do
           expect do
             post :create, params: { problem_id: @problem.id, auth_token: @user.authentication_token, comment: { body: "I'll take a look at it." } }
           end.to change(Comment, :count)
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
 
@@ -54,7 +54,7 @@ describe Api::V1::CommentsController, type: 'controller' do
           expect do
             post :create, params: { problem_id: @problem.id, auth_token: @user.authentication_token, comment: { body: nil } }
           end.not_to change(Comment, :count)
-          expect(response).not_to be_success
+          expect(response).not_to be_successful
           errors = JSON.parse response.body
           expect(errors).to eq("errors" => ["Body can't be blank"])
         end
