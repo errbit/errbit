@@ -10,7 +10,7 @@ describe HealthController, type: 'request' do
 
     it 'can let you know when the app is ready to receive requests' do
       get '/health/readiness'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'can indicate if a check fails' do
@@ -30,7 +30,7 @@ describe HealthController, type: 'request' do
   describe "liveness" do
     it 'can let you know that the app is still alive' do
       get '/health/liveness'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -44,7 +44,7 @@ describe HealthController, type: 'request' do
 
     it 'can let you know that the api_key is valid' do
       get "/health/api-key-tester?api_key=#{errbit_app.api_key}"
-      expect(response).to be_success
+      expect(response).to be_successful
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['ok']).to eq true
     end
