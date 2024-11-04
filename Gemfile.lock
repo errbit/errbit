@@ -73,6 +73,8 @@ GEM
     bigdecimal (1.4.4)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
+    bootsnap (1.18.4)
+      msgpack (~> 1.2)
     bson (5.0.1)
     bson (5.0.1-java)
     builder (3.3.0)
@@ -251,6 +253,7 @@ GEM
       rspec-core (~> 3.3)
       rspec-expectations (~> 3.3)
       rspec-mocks (~> 3.3)
+    msgpack (1.7.3)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
@@ -512,6 +515,7 @@ DEPENDENCIES
   better_errors
   bigdecimal (~> 1.4.4)
   binding_of_caller
+  bootsnap (>= 1.1.0)
   campy
   capybara
   coveralls
