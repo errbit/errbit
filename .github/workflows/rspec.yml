@@ -19,13 +19,15 @@ jobs:
         mongodb-version: ["4.0", "4.2", "4.4", "5.0", "6.0"]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          rubygems: "3.4.22"
+          bundler: "2.4.22"
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.7.0
+        uses: supercharge/mongodb-github-action@1.11.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
       - run: bundle exec rake errbit:bootstrap

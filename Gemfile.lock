@@ -1,6 +1,17 @@
+PATH
+  remote: vendor/hoptoad_notifier-2.4.11
+  specs:
+    hoptoad_notifier (2.4.11)
+      activesupport
+      builder
+
 GEM
   remote: https://rubygems.org/
   specs:
+    actioncable (5.0.7.2)
+      actionpack (= 5.0.7.2)
+      nio4r (>= 1.2, < 3.0)
+      websocket-driver (~> 0.6.1)
     actionmailer (5.0.7.2)
       actionpack (= 5.0.7.2)
       actionview (= 5.0.7.2)
@@ -142,8 +153,11 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
-    ffi (1.15.5)
-    ffi (1.15.5-java)
+    ffi (1.17.0)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-java)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     flowdock (0.7.1)
       httparty (~> 0.7)
       multi_json
@@ -158,9 +172,6 @@ GEM
     hoi (0.0.7)
       httparty
       json
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -170,8 +181,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    jaro_winkler (1.5.4)
-    jaro_winkler (1.5.4-java)
     jquery-rails (4.5.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -194,6 +203,7 @@ GEM
     kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
+    language_server-protocol (3.17.0.3)
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (16.10.0.0)
@@ -213,7 +223,7 @@ GEM
     meta_request (0.7.3)
       rack-contrib (>= 1.1, < 3)
       railties (>= 3.0.0, < 7)
-    method_source (1.0.0)
+    method_source (1.1.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
@@ -241,8 +251,8 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.2.3)
     netrc (0.11.0)
-    nio4r (2.5.8)
-    nio4r (2.5.8-java)
+    nio4r (2.7.4)
+    nio4r (2.7.4-java)
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -282,9 +292,10 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
-    parallel (1.22.1)
-    parser (3.1.2.1)
+    parallel (1.26.3)
+    parser (3.3.5.1)
       ast (~> 2.4.1)
+      racc
     phantomjs (2.1.1.0)
     pjax_rails (0.5.1)
       jquery-rails
@@ -297,15 +308,15 @@ GEM
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
-    pry (0.14.1)
+    pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry (0.14.1-java)
+    pry (0.14.2-java)
       coderay (~> 1.1)
       method_source (~> 1.0)
       spoon (~> 0.0)
-    pry-rails (0.3.9)
-      pry (>= 0.10.4)
+    pry-rails (0.3.11)
+      pry (>= 0.13.0)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -323,6 +334,18 @@ GEM
     rack-ssl-enforcer (0.2.9)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails (5.0.7.2)
+      actioncable (= 5.0.7.2)
+      actionmailer (= 5.0.7.2)
+      actionpack (= 5.0.7.2)
+      actionview (= 5.0.7.2)
+      activejob (= 5.0.7.2)
+      activemodel (= 5.0.7.2)
+      activerecord (= 5.0.7.2)
+      activesupport (= 5.0.7.2)
+      bundler (>= 1.3.0)
+      railties (= 5.0.7.2)
+      sprockets-rails (>= 2.0.0)
     rails-controller-testing (1.0.5)
       actionpack (>= 5.0.1.rc1)
       actionview (>= 5.0.1.rc1)
@@ -381,19 +404,24 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
-    rubocop (0.71.0)
-      jaro_winkler (~> 1.5.1)
+    rubocop (1.68.0)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
-      parser (>= 2.6)
+      parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.4, < 3.0)
+      rubocop-ast (>= 1.32.2, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.34.0)
+      parser (>= 3.3.1.0)
     rubocop-performance (1.6.1)
       rubocop (>= 0.71.0)
     rubocop-rails (2.0.1)
       rack (>= 1.1)
       rubocop (>= 0.70.0)
-    ruby-progressbar (1.11.0)
+    ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rushover (0.3.0)
       json
@@ -447,13 +475,13 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.8.2)
-    unicode-display_width (1.6.1)
+    unicode-display_width (2.6.0)
     useragent (0.16.10)
     warden (1.2.9)
       rack (>= 2.0.9)
-    websocket-driver (0.7.5)
+    websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
-    websocket-driver (0.7.5-java)
+    websocket-driver (0.6.5-java)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xmpp4r (0.5.6)
@@ -471,9 +499,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  actionmailer (= 5.0.7.2)
   actionmailer_inline_css
-  actionpack (= 5.0.7.2)
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
   better_errors
@@ -494,7 +520,7 @@ DEPENDENCIES
   font-awesome-rails
   haml
   hoi
-  hoptoad_notifier (~> 2.4)
+  hoptoad_notifier!
   htmlentities
   httparty
   jquery-rails
@@ -518,15 +544,15 @@ DEPENDENCIES
   puma
   rack-ssl
   rack-ssl-enforcer
+  rails (= 5.0.7.2)
   rails-controller-testing
-  railties (= 5.0.7.2)
   rake
   ri_cal
   rinku
   rspec
   rspec-activemodel-mocks
   rspec-rails
-  rubocop (~> 0.71.0)
+  rubocop
   rubocop-performance
   rubocop-rails
   rushover
@@ -539,7 +565,7 @@ DEPENDENCIES
   xmpp4r
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 2.7.8p225
 
 BUNDLED WITH
-   2.3.21
+   2.4.22
