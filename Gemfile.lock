@@ -1,3 +1,10 @@
+PATH
+  remote: vendor/hoptoad_notifier-2.4.11
+  specs:
+    hoptoad_notifier (2.4.11)
+      activesupport
+      builder
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -165,9 +172,6 @@ GEM
     hoi (0.0.7)
       httparty
       json
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -516,7 +520,7 @@ DEPENDENCIES
   font-awesome-rails
   haml
   hoi
-  hoptoad_notifier (~> 2.4)
+  hoptoad_notifier!
   htmlentities
   httparty
   jquery-rails
