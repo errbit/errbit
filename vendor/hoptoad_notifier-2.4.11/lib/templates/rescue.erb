@@ -1,0 +1,91 @@
+<script type="text/javascript">
+var Hoptoad = {
+  host    : <%= host.to_json %>,
+  api_key : <%= api_key.to_json %>,
+  notice  : <%= notice.to_json %>,
+  message : 'This error exists in production!',
+
+  initialize: function() {
+    if (this.initialized) {
+      return;
+    } else {
+      this.initialized = true;
+    }
+
+    var data = [];
+
+    for (var key in this.notice) {
+      data[data.length] = 'notice[' + key + ']=' + this.notice[key];
+    }
+
+    data[data.length] = 'notice[api_key]=' + this.api_key;
+    data[data.length] = 'callback=Hoptoad.onSuccess';
+    data[data.length] = '_=' + (new Date()).getTime();
+
+    var head = document.getElementsByTagName('head')[0];
+    var done = false;
+
+    var
+    script = document.createElement('script');
+    script.src  = 'http://' + this.host + '/notices_api/v1/notices/exist?' +
+                  data.join('&');
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function(){
+      if (!done && (!this.readyState ||
+          this.readyState == 'loaded' || this.readyState == 'complete')) {
+
+        done = true;
+
+        // Handle memory leak in IE. (via jQuery)
+        script.onload = script.onreadystatechange = null;
+        head.removeChild(script);
+      }
+    };
+
+    head.appendChild(script);
+  },
+
+  onSuccess: function(error) {
+    var body    = document.getElementsByTagName('body')[0];
+    var text    = document.createTextNode(this.message);
+    var element = document.createElement('a');
+
+    element.id   = 'hoptoad';
+    element.href = 'http://' + error.subdomain + '.' + this.host +
+                   '/projects/' + error.project_id + '/errors/' + error.id;
+    element.appendChild(text);
+
+    body.insertBefore(element, body.firstChild);
+
+    var h1      = document.getElementsByTagName('h1')[0];
+    var pre     = document.getElementsByTagName('pre')[0];
+    var wrapper = document.createElement('div');
+
+    wrapper.id = 'wrapper';
+    wrapper.appendChild(h1);
+    wrapper.appendChild(pre);
+
+    body.insertBefore(wrapper, body.children[1]);
+  }
+};
+
+window.onload = function() {
+  Hoptoad.initialize.apply(Hoptoad);
+};
+</script>
+
+<style type="text/css">
+#hoptoad {
+  background: #FFF url(http://hoptoadapp.com/images/fell-off-the-toad.gif) no-repeat top right;
+  color: #F00;
+  padding: 45px 101px 45px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  float: right;
+}
+
+#wrapper {
+  padding-right: 360px;
+}
+</style>
