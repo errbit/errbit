@@ -53,6 +53,9 @@ gem 'bigdecimal', '~> 1.4.4'
 
 gem 'pry-rails'
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
   gem 'rubocop', require: false
@@ -62,9 +65,6 @@ end
 
 group :development do
   gem 'listen', '~> 3.0.5'
-  gem 'better_errors'
-  gem 'binding_of_caller', platform: 'ruby'
-  gem 'meta_request'
 end
 
 group :test do
