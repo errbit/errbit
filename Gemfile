@@ -67,7 +67,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'better_errors'
   gem 'binding_of_caller', platform: 'ruby'
-  gem 'meta_request'
 end
 
 group :test do
