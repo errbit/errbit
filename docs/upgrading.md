@@ -23,7 +23,7 @@
 
 * All configuration is now done through the environment. See
   [configuration](docs/configuration.md)
-* Ruby 1.9 and 2.0 are no longer offically supported. Please upgrade to Ruby
+* Ruby 1.9 and 2.0 are no longer officially supported. Please upgrade to Ruby
   2.1+
 * Errbit now maintains an issue tracker only for github. If you're using
   another issue tracker integration, you may need to maintain it yourself. See
