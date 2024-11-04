@@ -5,9 +5,7 @@ RAILS_VERSION = '5.0.7.2'
 
 ruby File.read(".ruby-version")
 
-gem 'actionmailer', RAILS_VERSION
-gem 'actionpack', RAILS_VERSION
-gem 'railties', RAILS_VERSION
+gem 'rails', '5.0.7.2'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -51,7 +49,8 @@ gem 'httparty'
 gem 'flowdock'
 
 gem 'ri_cal'
-gem 'json', platform: 'jruby'
+# gem 'json', platform: 'jruby'
+gem 'json'
 
 # For Ruby 2.7
 gem 'bigdecimal', '~> 1.4.4'
