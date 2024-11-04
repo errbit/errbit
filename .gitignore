@@ -1,4 +1,4 @@
-.bundle
+/.bundle
 .env
 db/*.sqlite3
 log/*.log
@@ -15,7 +15,6 @@ config/newrelic.yml
 *.rbc
 .DS_Store
 *.rbx
-bundle
 coverage
 *#
 .tool-versions
