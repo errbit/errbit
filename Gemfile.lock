@@ -238,9 +238,9 @@ GEM
     minitest (5.25.1)
     mongo (2.21.0)
       bson (>= 4.14.1, < 6.0.0)
-    mongoid (6.2.1)
-      activemodel (~> 5.1)
-      mongo (>= 2.4.1, < 3.0.0)
+    mongoid (6.4.8)
+      activemodel (>= 5.1, < 6.0.0)
+      mongo (>= 2.5.1, < 3.0.0)
     mongoid-compatibility (0.6.0)
       activesupport
       mongoid (>= 2.0)
@@ -538,7 +538,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   meta_request
   mini_racer
-  mongoid (= 6.2.1)
+  mongoid (= 6.4.8)
   mongoid-rspec
   omniauth
   omniauth-github
