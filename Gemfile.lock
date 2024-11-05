@@ -77,8 +77,8 @@ GEM
       builder
       multi_json
     ast (2.4.2)
-    bcrypt (3.1.18)
-    bcrypt (3.1.18-java)
+    bcrypt (3.1.20)
+    bcrypt (3.1.20-java)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
     bson (5.0.1)
