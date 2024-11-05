@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module Errbit
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     # TODO: Migrate to new loader: zeitwerk
     config.autoloader = :classic
