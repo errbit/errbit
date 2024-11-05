@@ -251,8 +251,8 @@ GEM
     minitest (5.25.1)
     mongo (2.21.0)
       bson (>= 4.14.1, < 6.0.0)
-    mongoid (7.2.6)
-      activemodel (>= 5.1, < 6.2)
+    mongoid (7.3.5)
+      activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.10.5, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
     mongoid-compatibility (1.0.0)
@@ -551,7 +551,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   mini_racer
-  mongoid (= 7.2.6)
+  mongoid (= 7.3.5)
   mongoid-rspec
   net-smtp
   omniauth
