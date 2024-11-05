@@ -164,7 +164,6 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.17.0)
-    ffi (1.17.0-arm-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-java)
     ffi (1.17.0-x86_64-darwin)
@@ -266,8 +265,6 @@ GEM
     nio4r (2.7.4-java)
     nokogiri (1.16.7)
       mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
-    nokogiri (1.16.7-arm-linux)
       racc (~> 1.4)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
@@ -584,4 +581,4 @@ RUBY VERSION
    ruby 3.1.6p260
 
 BUNDLED WITH
-   2.4.22
+   2.5.22

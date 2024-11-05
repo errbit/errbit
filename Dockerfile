@@ -1,8 +1,7 @@
-FROM ruby:2.7.8-alpine
-LABEL maintainer="David Papp <david@ghostmonitor.com>"
+FROM ruby:3.1.6-alpine
 
-ENV RUBYGEMS_VERSION=3.4.22
-ENV BUNDLER_VERSION=2.4.22
+ENV RUBYGEMS_VERSION=3.5.22
+ENV BUNDLER_VERSION=2.5.22
 
 WORKDIR /app
 
@@ -22,6 +21,8 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
 
 COPY [".ruby-version", "Gemfile", "Gemfile.lock", "/app/"]
 
+COPY ["vendor/", "/app/vendor/"]
+
 RUN apk add --no-cache --virtual build-dependencies build-base \
   && bundle config build.nokogiri --use-system-libraries \
   && bundle config set without 'test development no_docker' \
@@ -35,15 +36,14 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile \
   && rm -rf /app/tmp/* \
   && chmod 777 /app/tmp
 
-ENV RAILS_ENV production
+ENV RAILS_ENV=production
 
-ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_LOG_TO_STDOUT=true
 
-ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_SERVE_STATIC_FILES=true
 
-EXPOSE 8080
+EXPOSE 8080/tcp
 
 HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT:-8080}/users/sign_in" || exit 1
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.default.rb"]
-
