@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby File.read(".ruby-version")
 
-gem 'rails', '5.2.8.1'
+gem 'rails', '6.0.6.1'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -17,7 +17,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '6.4.8'
+gem 'mongoid', '7.1.11'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
@@ -48,10 +48,11 @@ gem 'flowdock'
 gem 'ri_cal'
 gem 'json'
 
-# For Ruby 2.7
-gem 'bigdecimal', '~> 1.4.4'
-
 gem 'pry-rails'
+
+# Ruby 3.1 + Rails 6.0
+gem "net-smtp"
+gem "rexml"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
