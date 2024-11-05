@@ -1,5 +1,6 @@
 # main
 
+* Update RubyGems to 3.5.22 & Bundler to 2.5.22
 * Update Ruby to 3.1.6 & Rails to 6.0.6.1
 * Enable bootsnap
 * Update Rails to 5.2.8.1

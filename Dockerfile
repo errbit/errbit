@@ -1,8 +1,7 @@
-FROM ruby:2.7.8-alpine
-LABEL maintainer="David Papp <david@ghostmonitor.com>"
+FROM ruby:3.1.6-alpine
 
-ENV RUBYGEMS_VERSION=3.4.22
-ENV BUNDLER_VERSION=2.4.22
+ENV RUBYGEMS_VERSION=3.5.22
+ENV BUNDLER_VERSION=2.5.22
 
 WORKDIR /app
 
@@ -41,7 +40,7 @@ ENV RAILS_LOG_TO_STDOUT true
 
 ENV RAILS_SERVE_STATIC_FILES true
 
-EXPOSE 8080
+EXPOSE 8080/tcp
 
 HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT:-8080}/users/sign_in" || exit 1
 
