@@ -1,4 +1,4 @@
-describe Errbit::VERSION do
+describe Errbit::Version do
   let(:version) { '0.0.0' }
 
   context "release version" do
