@@ -1,5 +1,6 @@
 # main
 
+* Bundler: enable CHECKSUMS
 * Update RubyGems to 3.5.23 & Bundler to 2.5.23
 * Update Rails to 6.1.7.10
 * Update RubyGems to 3.5.22 & Bundler to 2.5.22
