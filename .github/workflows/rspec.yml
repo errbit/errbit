@@ -24,8 +24,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          rubygems: "3.5.22"
-          bundler: "2.5.22"
+          rubygems: "3.5.23"
+          bundler: "2.5.23"
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.11.0
         with:
