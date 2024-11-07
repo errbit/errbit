@@ -491,9 +491,9 @@ GEM
     useragent (0.16.10)
     warden (1.2.9)
       rack (>= 2.0.9)
-    websocket-driver (0.6.5)
+    websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
-    websocket-driver (0.6.5-java)
+    websocket-driver (0.7.6-java)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xmpp4r (0.5.6)
@@ -775,8 +775,8 @@ CHECKSUMS
   unicode-display_width (2.6.0) sha256=12279874bba6d5e4d2728cef814b19197dbb10d7a7837a869bab65da943b7f5a
   useragent (0.16.10) sha256=1794380d9ea5c087d687bbfe14752f81839293f238c1132ef05c9344f09e65bb
   warden (1.2.9) sha256=46684f885d35a69dbb883deabf85a222c8e427a957804719e143005df7a1efd0
-  websocket-driver (0.6.5) sha256=b4a4e0c75eae9e85ceb248d4dc13519da581452767dcd5126c1452ea052183a4
-  websocket-driver (0.6.5-java) sha256=6fca5032edc01c5bfc767034dd3ee0c6ca86dc00ba4785d689f01ccdf24fc9cd
+  websocket-driver (0.7.6) sha256=f69400be7bc197879726ad8e6f5869a61823147372fd8928836a53c2c741d0db
+  websocket-driver (0.7.6-java) sha256=bc894b9e9d5aee55ac04b61003e1957c4ef411a5a048199587d0499785b505c3
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
   xmpp4r (0.5.6) sha256=2bff083e07896f7e3c629e1c3fb574e9862b6063b76cc810cb9dba2db1179a96
   xpath (3.2.0) sha256=6dfda79d91bb3b949b947ecc5919f042ef2f399b904013eb3ef6d20dd3a4082e
