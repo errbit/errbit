@@ -1,6 +1,5 @@
-describe NotificationServices::HubotService, type: 'model' do
+RSpec.describe NotificationServices::HubotService do
   it "it should send a notification to Hubot" do
-    # setup
     notice = Fabricate :notice
     notification_service = Fabricate :hubot_notification_service, app: notice.app
     problem = notice.problem
