@@ -223,9 +223,9 @@ GEM
     libv8-node (16.10.0.0-arm64-darwin)
     libv8-node (16.10.0.0-x86_64-darwin)
     libv8-node (16.10.0.0-x86_64-linux)
-    listen (3.0.8)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.1)
     loofah (2.23.1)
       crass (~> 1.0.2)
@@ -520,7 +520,7 @@ DEPENDENCIES
   actionmailer_inline_css
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
-  bootsnap (>= 1.1.0)
+  bootsnap (>= 1.4.4)
   campy
   capybara
   decent_exposure
@@ -543,7 +543,7 @@ DEPENDENCIES
   kaminari
   kaminari-mongoid
   launchy
-  listen (~> 3.0.5)
+  listen (~> 3.3)
   mini_racer
   mongoid (= 7.5.4)
   mongoid-rspec
@@ -675,7 +675,7 @@ CHECKSUMS
   libv8-node (16.10.0.0-arm64-darwin) sha256=39919e55cb6a33582ab34531d53960a4ebf0ae4dde51474aacc134724a4f4936
   libv8-node (16.10.0.0-x86_64-darwin) sha256=63330579945cf7994da48f7b5e091c37cf58f05c274120b333c5d9d3353af29d
   libv8-node (16.10.0.0-x86_64-linux) sha256=7658defc810d96fe719afc46d93e2cbfee3632e4d9569a7b5763d37c398ea988
-  listen (3.0.8) sha256=91845635a094f81de2af4ec334340dd8458d9b86486471c2dc9747e7173c1ed0
+  listen (3.9.0) sha256=db9e4424e0e5834480385197c139cb6b0ae0ef28cc13310cfd1ca78377d59c67
   logger (1.6.1) sha256=3ad9587ed3940bf7897ea64a673971415523f4f7d6b22c5e3af5219705669653
   loofah (2.23.1) sha256=d0a07422cb3b69272e124afa914ef6d517e30d5496b7f1c1fc5b95481f13f75e
   mail (2.7.1) sha256=ec2a3d489f7510b90d8eaa3f6abaad7038cf1d663cdf8ee66d0214a0bdf99c03
