@@ -184,7 +184,7 @@ GEM
       json
     htmlentities (4.3.4)
     http-accept (1.7.0)
-    http-cookie (1.0.5)
+    http-cookie (1.0.7)
       domain_name (~> 0.5)
     httparty (0.22.0)
       csv
@@ -646,7 +646,7 @@ CHECKSUMS
   hoptoad_notifier (2.4.11)
   htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
   http-accept (1.7.0) sha256=c626860682bfbb3b46462f8c39cd470fd7b0584f61b3cc9df5b2e9eb9972a126
-  http-cookie (1.0.5) sha256=73756d46c7dbdc7023deecdb8a171348ea95a1b99810b31cfe8b4fb4e9a6318f
+  http-cookie (1.0.7) sha256=cb7a399f3344f720b8a0f3b0765f29b62608ebb9c3ce4abf4d6eeff2caf42253
   httparty (0.22.0) sha256=78652a5c9471cf0093d3b2083c2295c9c8f12b44c65112f1846af2b71430fa6c
   i18n (1.14.6) sha256=dc229a74f5d181f09942dd60ab5d6e667f7392c4ee826f35096db36d1fe3614c
   jquery-rails (4.5.0) sha256=a4b89d7c9dbe016921b817f10d459baff928c0e0a656c8a758c20ec281a5ab39
