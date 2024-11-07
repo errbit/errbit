@@ -123,8 +123,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
     docile (1.4.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
+    domain_name (0.6.20240107)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -498,10 +497,6 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
-    unf (0.1.4)
-      unf_ext
-    unf (0.1.4-java)
-    unf_ext (0.0.8.2)
     unicode-display_width (2.6.0)
     useragent (0.16.10)
     warden (1.2.9)
@@ -627,7 +622,7 @@ CHECKSUMS
   devise (4.8.1) sha256=fdd48bbe79a89e7c1152236a70479842ede48bea4fa7f4f2d8da1f872559803e
   diff-lcs (1.5.1) sha256=273223dfb40685548436d32b4733aa67351769c7dea621da7d9dd4813e63ddfe
   docile (1.4.0) sha256=5f1734bde23721245c20c3d723e76c104208e1aa01277a69901ce770f0ebb8d3
-  domain_name (0.5.20190701) sha256=000a600454cb4a344769b2f10b531765ea7bd3a304fe47ed12e5ca1eab969851
+  domain_name (0.6.20240107) sha256=5f693b2215708476517479bf2b3802e49068ad82167bcd2286f899536a17d933
   dotenv (2.8.1) sha256=c5944793349ae03c432e1780a2ca929d60b88c7d14d52d630db0508c3a8a17d8
   dotenv-rails (2.8.1) sha256=b05b81b7f4e51d1359e218d92279db1d84b12440f7118c9df19b5dfffb620f6c
   draper (4.0.2) sha256=5ce3e11ee31808a55cfc6bfbdbb81bf36730984176b5c865bcfd1f4987e8e1af
@@ -790,9 +785,6 @@ CHECKSUMS
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   uglifier (4.2.0) sha256=ae68f286bf78a23938f8ff2b8d3cab4aa3d65228c1006476da7023e3ff3af071
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
-  unf (0.1.4) sha256=4999517a531f2a955750f8831941891f6158498ec9b6cb1c81ce89388e63022e
-  unf (0.1.4-java) sha256=49a5972ec0b3d091d3b0b2e00113f2f342b9b212f0db855eb30a629637f6d302
-  unf_ext (0.0.8.2) sha256=90b9623ee359cc4878461c5d2eab7d3d3ce5801a680a9e7ac83b8040c5b742fa
   unicode-display_width (2.6.0) sha256=12279874bba6d5e4d2728cef814b19197dbb10d7a7837a869bab65da943b7f5a
   useragent (0.16.10) sha256=1794380d9ea5c087d687bbfe14752f81839293f238c1132ef05c9344f09e65bb
   warden (1.2.9) sha256=46684f885d35a69dbb883deabf85a222c8e427a957804719e143005df7a1efd0
