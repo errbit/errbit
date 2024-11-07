@@ -18,7 +18,7 @@ Bundler/OrderedGems:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: with_first_argument, with_fixed_indentation
-Layout/AlignArguments:
+Layout/ArgumentAlignment:
   Exclude:
     - 'app/decorators/issue_tracker_field_decorator.rb'
     - 'app/helpers/apps_helper.rb'
@@ -58,7 +58,7 @@ Layout/EmptyLineAfterMagicComment:
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
-Layout/IndentAssignment:
+Layout/AssignmentIndentation:
   Exclude:
     - 'app/models/problem.rb'
 
@@ -66,7 +66,7 @@ Layout/IndentAssignment:
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
 # Offense count: 3
@@ -210,7 +210,7 @@ Naming/RescuedExceptionsVariableName:
 # Offense count: 2
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
 # AllowedNames: io, id, to, by, on, in, at, ip, db
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Exclude:
     - 'app/models/notice.rb'
     - 'app/models/notification_service.rb'
@@ -657,13 +657,13 @@ Style/TernaryParentheses:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/UnneededCondition:
+Style/RedundantCondition:
   Exclude:
     - 'app/models/issue_tracker.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/UnneededInterpolation:
+Style/RedundantInterpolation:
   Exclude:
     - 'app/models/notification_services/pushover_service.rb'
 
@@ -677,5 +677,5 @@ Style/ZeroLengthPredicate:
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
-Metrics/LineLength:
+Layout/LineLength:
   Max: 227
