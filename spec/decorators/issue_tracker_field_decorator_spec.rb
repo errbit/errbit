@@ -5,7 +5,7 @@ describe IssueTrackerFieldDecorator do
     end
 
     it 'return the key of field if no label define' do
-      expect(IssueTrackerFieldDecorator.new(:foo, {}).label).to eq 'foo'
+      expect(IssueTrackerFieldDecorator.new(:foo, {}).label).to eq 'Foo'
     end
   end
 end

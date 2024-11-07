@@ -82,7 +82,7 @@ group :test do
   gem 'launchy'
   gem 'email_spec'
   gem 'timecop'
-  gem 'coveralls', require: false
+  gem 'simplecov', require: false
 end
 
 group :no_docker, :test, :development do

@@ -602,4 +602,22 @@ describe Problem, type: 'model' do
       expect(subject.url).to eq "http://errbit.example.com:8123/apps/#{subject.app.id}/problems/#{subject.id}"
     end
   end
+
+  describe "#link_text" do
+    context "when message is present" do
+      subject { Fabricate(:problem, message: "message") }
+
+      it "show message as link_text" do
+        expect(subject.link_text).to eq("message")
+      end
+    end
+
+    context "when message is not present" do
+      subject { Fabricate(:problem, message: nil, error_class: "error_class") }
+
+      it "show error_class as link_text" do
+        expect(subject.link_text).to eq("error_class")
+      end
+    end
+  end
 end
