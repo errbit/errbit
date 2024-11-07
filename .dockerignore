@@ -1,1 +1,3 @@
 .envrc
+/.bundle
+/coverage
