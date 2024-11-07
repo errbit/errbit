@@ -324,9 +324,9 @@ GEM
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    premailer (1.16.0)
+    premailer (1.27.0)
       addressable
-      css_parser (>= 1.6.0)
+      css_parser (>= 1.19.0)
       htmlentities (>= 4.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -720,7 +720,7 @@ CHECKSUMS
   phantomjs (2.1.1.0) sha256=b392cfba33d374285d022c905c714948fc1a69d162cd17cfea39b684fd5a1779
   pjax_rails (0.5.1) sha256=3cb4b53d874de1349014aaae2cb879c8924ec86d68f3054a0d958c995b0c8ddb
   poltergeist (1.18.1) sha256=25a9d7140e697794fd376d6fea89e6f3ec1706c0f901cab4d1b0ea7bd2058846
-  premailer (1.16.0) sha256=03e4402c448e6bae13fb5f6301a8bde4f3508e1bff90ae7c0972c7be94694786
+  premailer (1.27.0) sha256=0fe2348cd82738855c482b31c915a06ecb1d3ad004578c19042905196ddbd1e7
   pry (0.14.2) sha256=c4fe54efedaca1d351280b45b8849af363184696fcac1c72e0415f9bdac4334d
   pry (0.14.2-java) sha256=fd780670977ba04ff7ee32dabd4d02fe4bf02e977afe8809832d5dca1412862e
   pry-rails (0.3.11) sha256=a69e28e24a34d75d1f60bcf241192a54253f8f7ef8a62cba1e75750a9653593d
