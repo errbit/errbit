@@ -50,8 +50,10 @@ gem 'json'
 
 gem 'pry-rails'
 
-# Ruby 3.1 + Rails 6.0
+# Ruby 3.1 + Rails 6.1
 gem "net-smtp"
+gem "net-pop"
+gem "net-imap"
 gem "rexml"
 
 # Reduces boot times through caching; required in config/boot.rb
