@@ -2,14 +2,13 @@ services:
   errbit:
     image: errbit/errbit:latest
     ports:
-      - "8080:8080"
+      - "3000:3000"
     depends_on:
       - mongo
     environment:
-      - PORT=8080
-      - RACK_ENV=production
-      - MONGO_URL=mongodb://mongo:27017/errbit
+      RAILS_ENV: "production"
+      MONGO_URL: "mongodb://mongo:27017/errbit"
   mongo:
-    image: mongo:4.1
+    image: mongo:4.0.28
     ports:
-      - "27017"
+      - "27017:27017"
