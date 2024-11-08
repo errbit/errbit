@@ -1,5 +1,6 @@
 # main
 
+* Default port was changed from 8080 to 3000 (sync with rails defaults)
 * Bundler: enable CHECKSUMS
 * Update RubyGems to 3.5.23 & Bundler to 2.5.23
 * Update Rails to 6.1.7.10
