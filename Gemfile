@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby File.read(".ruby-version")
+ruby file: ".ruby-version"
 
 gem 'rails', '6.1.7.10'
 
