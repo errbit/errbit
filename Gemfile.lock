@@ -550,9 +550,6 @@ DEPENDENCIES
   mini_racer
   mongoid (= 7.5.4)
   mongoid-rspec
-  net-imap
-  net-pop
-  net-smtp
   omniauth
   omniauth-github
   omniauth-google-oauth2
