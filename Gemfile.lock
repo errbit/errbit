@@ -475,9 +475,9 @@ GEM
     simplecov_json_formatter (0.1.4)
     spoon (0.0.6)
       ffi
-    sprockets (4.1.1)
+    sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.2.2)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
@@ -774,7 +774,7 @@ CHECKSUMS
   simplecov-html (0.13.1) sha256=5dab0b7ee612e60e9887ad57693832fdf4695b4c0c859eaea5f95c18791ef10b
   simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
   spoon (0.0.6) sha256=3ad18e28f6d36f7379c3085b2e96b6160f1ef55397ca1ed0d39b26fc5bbab3f4
-  sprockets (4.1.1) sha256=68b10b0e574fc2a080e4779d025bf39bc7a20bc8659e32f827cccce9581348e2
+  sprockets (4.2.1) sha256=951b13dd2f2fcae840a7184722689a803e0ff9d2702d902bd844b196da773f97
   sprockets-rails (3.2.2) sha256=62862bce136e31d7497eededde5f7730d4096bc8ef33ef7037c41423ccf89557
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   temple (0.8.2) sha256=c12071214346c606dbd219b4117276d04a9f2c20d65e66a66b2c4ec18efc1f18
