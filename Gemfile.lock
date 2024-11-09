@@ -262,7 +262,7 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.2.3)
-    net-imap (0.5.0)
+    net-imap (0.5.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -697,7 +697,7 @@ CHECKSUMS
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
   multipart-post (2.2.3) sha256=462979de2971b8df33c2ee797fd497731617241f9dcd93960cc3caccb2dd13d8
-  net-imap (0.5.0) sha256=b8281598f3c1860679a88de19287673c6835bed6cf0fe1710fb96a5ffcb94aa0
+  net-imap (0.5.1) sha256=c0ceb85d8459f7081d5ed1ac86159f8e80d25e704eb52dbf0d9f703b7bc838d7
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.5.0) sha256=5fc0415e6ea1cc0b3dfea7270438ec22b278ca8d524986a3ae4e5ae8d087b42a
