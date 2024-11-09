@@ -294,7 +294,7 @@ GEM
     octokit (4.21.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
-    omniauth (2.1.0)
+    omniauth (2.1.2)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
@@ -711,7 +711,7 @@ CHECKSUMS
   nokogiri (1.16.7-x86_64-linux) sha256=9e1e428641d5942af877c60b418c71163560e9feb4a5c4015f3230a8b86a40f6
   oauth2 (1.4.10) sha256=8e50fcdcada64d668f79ad3e74adeec1bd24ee0309c2ac803ff394c9d4c2a66d
   octokit (4.21.0) sha256=4758eb7048241d5ab40644511c83d93b8e08a2c9e060c32d4a1f35445626662a
-  omniauth (2.1.0) sha256=bff7234f5ec9323622b217c7f26d52f850de0b0e2b8c807c3358fc79fe572300
+  omniauth (2.1.2) sha256=def03277298b8f8a5d3ff16cdb2eb5edb9bffed60ee7dda24cc0c89b3ae6a0ce
   omniauth-github (2.0.0) sha256=1ca26576125a97e27d3f8dc39cd98853d7382dd0fc04a40d3b9ec345ee378649
   omniauth-google-oauth2 (1.0.1) sha256=2ed7a4ac8d98ab824c95e0d6760784abf1248262b3ba2ab56ec7ebd7074d12a6
   omniauth-oauth2 (1.7.3) sha256=3f5a8f99fa72e0f91d2abd7475ceb972a4ae67ed59e049f314c0c1bad81f4745
