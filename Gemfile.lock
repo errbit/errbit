@@ -140,7 +140,7 @@ GEM
       octokit
     errbit_plugin (0.6.0)
     erubi (1.13.0)
-    execjs (2.8.1)
+    execjs (2.10.0)
     fabrication (2.30.0)
     faraday (1.10.1)
       faraday-em_http (~> 1.0)
@@ -630,7 +630,7 @@ CHECKSUMS
   errbit_github_plugin (0.3.0) sha256=96391948fae85fe3aaed78efa598791a8f16187e39e7038ca00bc137a266cc92
   errbit_plugin (0.6.0) sha256=ec4a7567333e3771802805e6c8e901fdfdbb9d576bbcc2af91573694cea89b15
   erubi (1.13.0) sha256=fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
-  execjs (2.8.1) sha256=6d939919cfd81bcc4d6556f322c3995a70cfe4289ea0bd3b1f999b489c323088
+  execjs (2.10.0) sha256=6bcb8be8f0052ff9d370b65d1c080f2406656e150452a0abdb185a133048450d
   fabrication (2.30.0) sha256=b838236df6fc45bf806a3bb4ce78546d5a925f28879ffd05fe90277265d5ba2f
   faraday (1.10.1) sha256=38e5d43359ad0e8579af549fcc6083c03ffbeb0dd6fd78dee359263fde2cfc0c
   faraday-em_http (1.0.0) sha256=7a3d4c7079789121054f57e08cd4ef7e40ad1549b63101f38c7093a9d6c59689
