@@ -131,9 +131,9 @@ GEM
       activesupport (>= 5.0)
       request_store (>= 1.0)
       ruby2_keywords
-    email_spec (2.2.0)
+    email_spec (2.3.0)
       htmlentities (~> 4.3.3)
-      launchy (~> 2.1)
+      launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
     errbit_github_plugin (0.3.0)
       errbit_plugin
@@ -626,7 +626,7 @@ CHECKSUMS
   dotenv (2.8.1) sha256=c5944793349ae03c432e1780a2ca929d60b88c7d14d52d630db0508c3a8a17d8
   dotenv-rails (2.8.1) sha256=b05b81b7f4e51d1359e218d92279db1d84b12440f7118c9df19b5dfffb620f6c
   draper (4.0.2) sha256=5ce3e11ee31808a55cfc6bfbdbb81bf36730984176b5c865bcfd1f4987e8e1af
-  email_spec (2.2.0) sha256=60b7980580a835e7f676db60667f17a2d60e8e0e39c26d81cfc231805c544d79
+  email_spec (2.3.0) sha256=df23be7a131186f7a3d5be3b35eaac9196f9ac13bd26c9c3d59341e13d852d11
   errbit_github_plugin (0.3.0) sha256=96391948fae85fe3aaed78efa598791a8f16187e39e7038ca00bc137a266cc92
   errbit_plugin (0.6.0) sha256=ec4a7567333e3771802805e6c8e901fdfdbb9d576bbcc2af91573694cea89b15
   erubi (1.13.0) sha256=fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
