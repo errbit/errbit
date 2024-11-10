@@ -222,10 +222,10 @@ GEM
     launchy (3.0.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
-    libv8-node (16.10.0.0)
-    libv8-node (16.10.0.0-arm64-darwin)
-    libv8-node (16.10.0.0-x86_64-darwin)
-    libv8-node (16.10.0.0-x86_64-linux)
+    libv8-node (18.19.0.0)
+    libv8-node (18.19.0.0-arm64-darwin)
+    libv8-node (18.19.0.0-x86_64-darwin)
+    libv8-node (18.19.0.0-x86_64-linux)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -247,8 +247,8 @@ GEM
     mime-types-data (3.2024.1105)
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
-    mini_racer (0.6.3)
-      libv8-node (~> 16.10.0.0)
+    mini_racer (0.16.0)
+      libv8-node (~> 18.19.0.0)
     minitest (5.25.1)
     mongo (2.21.0)
       bson (>= 4.14.1, < 6.0.0)
@@ -675,10 +675,10 @@ CHECKSUMS
   kaminari-mongoid (1.0.2) sha256=7d28be9a8322d82bca36e6b4983f2f91e1149eee84755b52ce26c0cd0f040ebc
   language_server-protocol (3.17.0.3) sha256=3d5c58c02f44a20d972957a9febe386d7e7468ab3900ce6bd2b563dd910c6b3f
   launchy (3.0.1) sha256=b7fa60bda0197cf57614e271a250a8ca1f6a34ab889a3c73f67ec5d57c8a7f2c
-  libv8-node (16.10.0.0) sha256=1ce8c30ec9b83fe7c2f21c8d2fe39bab69b039ec724094a0fc641961c2ed5180
-  libv8-node (16.10.0.0-arm64-darwin) sha256=39919e55cb6a33582ab34531d53960a4ebf0ae4dde51474aacc134724a4f4936
-  libv8-node (16.10.0.0-x86_64-darwin) sha256=63330579945cf7994da48f7b5e091c37cf58f05c274120b333c5d9d3353af29d
-  libv8-node (16.10.0.0-x86_64-linux) sha256=7658defc810d96fe719afc46d93e2cbfee3632e4d9569a7b5763d37c398ea988
+  libv8-node (18.19.0.0) sha256=7793fbba02ce889d8044c81a7d04cf502a0d458bb66c736cbb2e074c09cdf58d
+  libv8-node (18.19.0.0-arm64-darwin) sha256=9303a710ef171e031fa58d44b4ab060d080c98f0b20570ff240d4e68eb11e52a
+  libv8-node (18.19.0.0-x86_64-darwin) sha256=5ddd71c5159f72bf004f66f7f05732ceeedee6536eda11f9c0dd7c224b1b9708
+  libv8-node (18.19.0.0-x86_64-linux) sha256=6c95337db699924958ac391c9043e971e85393adad0a296a5da336e92e4e7f39
   listen (3.9.0) sha256=db9e4424e0e5834480385197c139cb6b0ae0ef28cc13310cfd1ca78377d59c67
   logger (1.6.1) sha256=3ad9587ed3940bf7897ea64a673971415523f4f7d6b22c5e3af5219705669653
   loofah (2.23.1) sha256=d0a07422cb3b69272e124afa914ef6d517e30d5496b7f1c1fc5b95481f13f75e
@@ -690,7 +690,7 @@ CHECKSUMS
   mime-types-data (3.2024.1105) sha256=1f6fc1b0744205c0ec6d4cdda207b748b4d28879fa51a35ac73203daa884c4c1
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.7) sha256=13eef5ab459bbfd33d61e539564ec25a9c2cf593b0a5ea6d4d7ef8c19b162ee0
-  mini_racer (0.6.3) sha256=289b3b9e4fa18f5f4bcc9cd5e257b748c035dd8fca97a1105d3d2752c25a9b44
+  mini_racer (0.16.0) sha256=b40a76605322b8296a0530b7836e63f47c7766e33c8c8071eded895d23047d09
   minitest (5.25.1) sha256=3db6795a80634def1cf86fda79d2d83b59b25ce5e186fa675f73c565589d2ad8
   mongo (2.21.0) sha256=38c4743733dbb918d8feb197a8f8b9af8ad922dadba8e03f5117c3cabc79339b
   mongoid (7.5.4) sha256=d3664aa7bf119154f545f99ce9041d9912f203a5afa21f5229a2431c4e929432
