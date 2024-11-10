@@ -354,8 +354,9 @@ GEM
     racc (1.8.1)
     racc (1.8.1-java)
     rack (2.2.10)
-    rack-protection (2.2.2)
-      rack
+    rack-protection (3.2.0)
+      base64 (>= 0.1.0)
+      rack (~> 2.2, >= 2.2.4)
     rack-ssl (1.4.1)
       rack
     rack-ssl-enforcer (0.2.9)
@@ -739,7 +740,7 @@ CHECKSUMS
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   racc (1.8.1-java) sha256=54f2e6d1e1b91c154013277d986f52a90e5ececbe91465d29172e49342732b98
   rack (2.2.10) sha256=e4a5ee3f8f2ba45614a4498114d6dc7da1c51a0f0dd810d891906ea71d3aa72b
-  rack-protection (2.2.2) sha256=fd41414dbabbec274af0bdb1f72a48504449de4d979782c9af38cbb5dfff3299
+  rack-protection (3.2.0) sha256=3c74ba7fc59066453d61af9bcba5b6fe7a9b3dab6f445418d3b391d5ea8efbff
   rack-ssl (1.4.1) sha256=f7f9d359c13d563fd0fe3e4eced0b357d8ba0502c837839f7520502f27ee4130
   rack-ssl-enforcer (0.2.9) sha256=99ef4051d1d1e8ca46bbeecb824506798db03e51db3028cb0acf9c18971b1108
   rack-test (2.1.0) sha256=0c61fc61904049d691922ea4bb99e28004ed3f43aa5cfd495024cc345f125dfb
