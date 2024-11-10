@@ -35,12 +35,7 @@ Mongoid::Tasks::Database.create_indexes
 ActionMailer::Base.delivery_method = :test
 
 RSpec.configure do |config|
-  config.include Mongoid::Matchers, type: :model
   config.alias_example_to :fit, focused: true
-
-  config.before(:each) do
-    Mongoid::Config.truncate!
-  end
 
   config.include Haml, type: :helper
   config.include Haml::Helpers, type: :helper
@@ -51,5 +46,3 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 end
-
-OmniAuth.config.test_mode = true
