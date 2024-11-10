@@ -163,8 +163,9 @@ GEM
       railties (>= 3.2, < 8.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.3.0)
+      temple (>= 0.8.2)
+      thor
       tilt
     hashie (5.0.0)
     hoi (0.0.7)
@@ -641,7 +642,7 @@ CHECKSUMS
   flowdock (0.7.1) sha256=cfa95b2ac96e5f883f6e419d7a891f76cfcc17a28c416b6b714bbdffc8dbd912
   font-awesome-rails (4.7.0.8) sha256=c26183d5f902858289692d3a173c3d8d0f769c3b0930259ae4181ddfd74d496c
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
-  haml (5.2.2) sha256=6e759246556145642ef832d670fc06f9bd8539159a0e600847a00291dd7aae0c
+  haml (6.3.0) sha256=8e6eb87d869639e348852009e74a2a1663d79663ed7e7dbcb38beb1f12bcdd97
   hashie (5.0.0) sha256=9d6c4e51f2a36d4616cbc8a322d619a162d8f42815a792596039fc95595603da
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   hoptoad_notifier (2.4.11)
