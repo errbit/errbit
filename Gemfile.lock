@@ -504,6 +504,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
     unicode-display_width (2.6.0)
+    uri (1.0.1)
     useragent (0.16.10)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -586,6 +587,7 @@ DEPENDENCIES
   timecop
   uglifier
   underscore-rails
+  uri
   useragent
   xmpp4r
 
@@ -794,6 +796,7 @@ CHECKSUMS
   uglifier (4.2.1) sha256=75d42b81b10bfd21e7a427fabb1d49ff5ea7bda3c4a5039ddb2a78d194c6f5aa
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
   unicode-display_width (2.6.0) sha256=12279874bba6d5e4d2728cef814b19197dbb10d7a7837a869bab65da943b7f5a
+  uri (1.0.1) sha256=3970958370c64d325f715e10fe7af77215d1a33a8a80cc7829e5309cf9c342f2
   useragent (0.16.10) sha256=1794380d9ea5c087d687bbfe14752f81839293f238c1132ef05c9344f09e65bb
   warden (1.2.9) sha256=46684f885d35a69dbb883deabf85a222c8e427a957804719e143005df7a1efd0
   websocket-driver (0.7.6) sha256=f69400be7bc197879726ad8e6f5869a61823147372fd8928836a53c2c741d0db
