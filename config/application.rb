@@ -13,9 +13,7 @@ module Errbit
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
-    # TODO: Migrate to new loader: zeitwerk
-    config.autoloader = :classic
-    # config.autoloader = :zeitwerk
+    config.autoloader = :zeitwerk
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

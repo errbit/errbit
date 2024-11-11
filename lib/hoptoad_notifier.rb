@@ -2,6 +2,8 @@
 # Find or create a 'Self.Errbit' app, and save the error internally
 # unless errors should be sent to a different Errbit instance.
 
+require_relative "../vendor/hoptoad_notifier-2.4.11/lib/hoptoad_notifier"
+
 HoptoadNotifier.module_eval do
   class << self
     private def send_notice(notice)
