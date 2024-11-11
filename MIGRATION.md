@@ -7,3 +7,4 @@ With few exceptions:
 2. Default port in docker image is changed to 3000 (sync with rails defaults).
 3. It should be safe just remove `PORT` env from any configurations.
 4. You should not set `RACK_ENV` env if you don't know for what. It should be removed from any configurations.
+5. `MAX_THREADS` env was removed. Use default rails `RAILS_MAX_THREADS` and `RAILS_MIN_THREADS`.
