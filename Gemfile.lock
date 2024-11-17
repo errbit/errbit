@@ -324,10 +324,10 @@ GEM
       addressable
       css_parser (>= 1.19.0)
       htmlentities (>= 4.0.0)
-    pry (0.14.2)
+    pry (0.15.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry (0.14.2-java)
+    pry (0.15.0-java)
       coderay (~> 1.1)
       method_source (~> 1.0)
       spoon (~> 0.0)
@@ -729,8 +729,8 @@ CHECKSUMS
   pjax_rails (0.5.1) sha256=3cb4b53d874de1349014aaae2cb879c8924ec86d68f3054a0d958c995b0c8ddb
   poltergeist (1.18.1) sha256=25a9d7140e697794fd376d6fea89e6f3ec1706c0f901cab4d1b0ea7bd2058846
   premailer (1.27.0) sha256=0fe2348cd82738855c482b31c915a06ecb1d3ad004578c19042905196ddbd1e7
-  pry (0.14.2) sha256=c4fe54efedaca1d351280b45b8849af363184696fcac1c72e0415f9bdac4334d
-  pry (0.14.2-java) sha256=fd780670977ba04ff7ee32dabd4d02fe4bf02e977afe8809832d5dca1412862e
+  pry (0.15.0) sha256=91e7925ea58c88e671b058a3a939bb529016de5ec57084b000057b2a1fec1930
+  pry (0.15.0-java) sha256=86f6edfb1c5eb32ed75e0f699822f56138f88ee093a7b39e0bab2ed78e28dad2
   pry-rails (0.3.11) sha256=a69e28e24a34d75d1f60bcf241192a54253f8f7ef8a62cba1e75750a9653593d
   public_suffix (6.0.1) sha256=61d44e1cab5cbbbe5b31068481cf16976dd0dc1b6b07bd95617ef8c5e3e00c6f
   puma (6.4.3) sha256=24a4645c006811d83f2480057d1f54a96e7627b6b90e1c99b260b9dc630eb43e
