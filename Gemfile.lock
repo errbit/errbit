@@ -481,7 +481,7 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    standard (1.42.0)
+    standard (1.42.1)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
       rubocop (~> 1.68.0)
@@ -586,7 +586,7 @@ DEPENDENCIES
   rushover
   sass-rails
   simplecov
-  standard (= 1.42.0)
+  standard (= 1.42.1)
   sucker_punch
   timecop
   uglifier
@@ -783,7 +783,7 @@ CHECKSUMS
   spoon (0.0.6) sha256=3ad18e28f6d36f7379c3085b2e96b6160f1ef55397ca1ed0d39b26fc5bbab3f4
   sprockets (4.2.1) sha256=951b13dd2f2fcae840a7184722689a803e0ff9d2702d902bd844b196da773f97
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
-  standard (1.42.0) sha256=ed59d1f07d878bb30ae77b68273efdea8067ea5bfb398bd9a83afedfa37a1a88
+  standard (1.42.1) sha256=5ae80bb45d56b71d225ff086cd894af05db228c8b6efce73549cefe90b329a2e
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.5.0) sha256=0a97ecf30af7f1148cb71b668f2fcda6ea5fc0a64f48011ac653d1eceb9faf31
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
