@@ -236,7 +236,7 @@ GEM
     mini_portile2 (2.8.8)
     mini_racer (0.16.0)
       libv8-node (~> 18.19.0.0)
-    minitest (5.25.1)
+    minitest (5.25.2)
     mongo (2.21.0)
       bson (>= 4.14.1, < 6.0.0)
     mongoid (7.5.4)
@@ -693,7 +693,7 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.8) sha256=8e47136cdac04ce81750bb6c09733b37895bf06962554e4b4056d78168d70a75
   mini_racer (0.16.0) sha256=b40a76605322b8296a0530b7836e63f47c7766e33c8c8071eded895d23047d09
-  minitest (5.25.1) sha256=3db6795a80634def1cf86fda79d2d83b59b25ce5e186fa675f73c565589d2ad8
+  minitest (5.25.2) sha256=59b379d63e0058159127b545c4725d3106624c9be2b3e030ddaee825d59e83eb
   mongo (2.21.0) sha256=38c4743733dbb918d8feb197a8f8b9af8ad922dadba8e03f5117c3cabc79339b
   mongoid (7.5.4) sha256=d3664aa7bf119154f545f99ce9041d9912f203a5afa21f5229a2431c4e929432
   mongoid-compatibility (1.0.0) sha256=08e5770d102258a3b8f39443057de42cde61d465980f182954b1b70d965465e8
