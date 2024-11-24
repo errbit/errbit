@@ -334,9 +334,9 @@ GEM
     pry-rails (0.3.11)
       pry (>= 0.13.0)
     public_suffix (6.0.1)
-    puma (6.4.3)
+    puma (6.5.0)
       nio4r (~> 2.0)
-    puma (6.4.3-java)
+    puma (6.5.0-java)
       nio4r (~> 2.0)
     racc (1.8.1)
     racc (1.8.1-java)
@@ -733,8 +733,8 @@ CHECKSUMS
   pry (0.15.0-java) sha256=86f6edfb1c5eb32ed75e0f699822f56138f88ee093a7b39e0bab2ed78e28dad2
   pry-rails (0.3.11) sha256=a69e28e24a34d75d1f60bcf241192a54253f8f7ef8a62cba1e75750a9653593d
   public_suffix (6.0.1) sha256=61d44e1cab5cbbbe5b31068481cf16976dd0dc1b6b07bd95617ef8c5e3e00c6f
-  puma (6.4.3) sha256=24a4645c006811d83f2480057d1f54a96e7627b6b90e1c99b260b9dc630eb43e
-  puma (6.4.3-java) sha256=373fcfacacaafd0f5a24db18cb99b3f2decb5c5316470169852559aa80adc8ab
+  puma (6.5.0) sha256=94d1b75cab7f356d52e4f1b17b9040a090889b341dbeee6ee3703f441dc189f2
+  puma (6.5.0-java) sha256=a58eea585d291aa33796add9884208bc1591da5d8e61886f8ac74d080b298c40
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   racc (1.8.1-java) sha256=54f2e6d1e1b91c154013277d986f52a90e5ececbe91465d29172e49342732b98
   rack (2.2.10) sha256=e4a5ee3f8f2ba45614a4498114d6dc7da1c51a0f0dd810d891906ea71d3aa72b
