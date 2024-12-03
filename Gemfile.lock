@@ -372,9 +372,9 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.6.0)
+    rails-html-sanitizer (1.6.1)
       loofah (~> 2.21)
-      nokogiri (~> 1.14)
+      nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     railties (6.1.7.10)
       actionpack (= 6.1.7.10)
       activesupport (= 6.1.7.10)
@@ -745,7 +745,7 @@ CHECKSUMS
   rails (6.1.7.10) sha256=809692b3ec91fe1407b160e65203ef41c0b19b27bc5b836a515d6f4b969188d1
   rails-controller-testing (1.0.5) sha256=741448db59366073e86fc965ba403f881c636b79a2c39a48d0486f2607182e94
   rails-dom-testing (2.2.0) sha256=e515712e48df1f687a1d7c380fd7b07b8558faa26464474da64183a7426fa93b
-  rails-html-sanitizer (1.6.0) sha256=86e9f19d2e6748890dcc2633c8945ca45baa08a1df9d8c215ce17b3b0afaa4de
+  rails-html-sanitizer (1.6.1) sha256=e3d2fb10339f03b802e39c7f6cac28c54fd404d3f65ae39c31cca9d150c5cbf0
   railties (6.1.7.10) sha256=de6e7a18a16a172c741020dac2e06c068a6a40bd493a4ec5244303171d6e5f0b
   rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
   rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
