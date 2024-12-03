@@ -110,8 +110,8 @@ GEM
     css_parser (1.19.1)
       addressable
     csv (3.3.0)
-    date (3.4.0)
-    date (3.4.0-java)
+    date (3.4.1)
+    date (3.4.1-java)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
     devise (4.8.1)
@@ -630,8 +630,8 @@ CHECKSUMS
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   css_parser (1.19.1) sha256=1940dce01e3b9be18d6880e6d65162d984cc04ff28998cf4759beb999275209e
   csv (3.3.0) sha256=0bbd1defdc31134abefed027a639b3723c2753862150f4c3ee61cab71b20d67d
-  date (3.4.0) sha256=2e7fadaded625c9b3e35e254e42068d4bd8b8646ceab0744cbcbcfdafaa0a711
-  date (3.4.0-java) sha256=f7951ea2b7008aebd9cd293008edbd7dd23a928112399ae191f05a42321fc100
+  date (3.4.1) sha256=bf268e14ef7158009bfeaec40b5fa3c7271906e88b196d958a89d4b408abe64f
+  date (3.4.1-java) sha256=74740d914c65a922a15657c25ff0e203c16f1d0f7aa910a9ebed712afe9819c4
   decent_exposure (3.0.4) sha256=5ce9e3df24f8d77f094b2e612d1c43a78a2de879847ccbb57c0e596e6c303cf1
   devise (4.8.1) sha256=fdd48bbe79a89e7c1152236a70479842ede48bea4fa7f4f2d8da1f872559803e
   diff-lcs (1.5.1) sha256=273223dfb40685548436d32b4733aa67351769c7dea621da7d9dd4813e63ddfe
