@@ -231,7 +231,7 @@ GEM
     mime-types (3.6.0)
       logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.1105)
+    mime-types-data (3.2024.1203)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     mini_racer (0.16.0)
@@ -689,7 +689,7 @@ CHECKSUMS
   matrix (0.4.2) sha256=71083ccbd67a14a43bfa78d3e4dc0f4b503b9cc18e5b4b1d686dc0f9ef7c4cc0
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
   mime-types (3.6.0) sha256=6f71db957840ceae44211531eff3e2f7e0dd4645fefb5f535dbaeb6307ab6464
-  mime-types-data (3.2024.1105) sha256=1f6fc1b0744205c0ec6d4cdda207b748b4d28879fa51a35ac73203daa884c4c1
+  mime-types-data (3.2024.1203) sha256=2ffe0af6d084c6542d61e37d304d81f97628f5f7b2baaedb29bb396139c0ee28
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.8) sha256=8e47136cdac04ce81750bb6c09733b37895bf06962554e4b4056d78168d70a75
   mini_racer (0.16.0) sha256=b40a76605322b8296a0530b7836e63f47c7766e33c8c8071eded895d23047d09
