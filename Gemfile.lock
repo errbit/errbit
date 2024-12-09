@@ -152,8 +152,11 @@ GEM
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
     ffi (1.17.0)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-arm-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-java)
+    ffi (1.17.0-x86-linux-gnu)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     flowdock (0.7.1)
@@ -209,6 +212,7 @@ GEM
       addressable (~> 2.8)
       childprocess (~> 5.0)
     libv8-node (18.19.0.0)
+    libv8-node (18.19.0.0-aarch64-linux)
     libv8-node (18.19.0.0-arm64-darwin)
     libv8-node (18.19.0.0-x86_64-darwin)
     libv8-node (18.19.0.0-x86_64-linux)
@@ -271,9 +275,15 @@ GEM
     nokogiri (1.17.0)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.17.0-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.17.0-arm-linux)
+      racc (~> 1.4)
     nokogiri (1.17.0-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.17.0-java)
+      racc (~> 1.4)
+    nokogiri (1.17.0-x86-linux)
       racc (~> 1.4)
     nokogiri (1.17.0-x86_64-darwin)
       racc (~> 1.4)
@@ -522,10 +532,13 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
+  aarch64-linux
+  arm-linux
   arm64-darwin
   arm64-linux
   java
   ruby
+  x86-linux
   x86_64-darwin
   x86_64-linux
 
@@ -649,8 +662,11 @@ CHECKSUMS
   faraday (2.12.2) sha256=157339c25c7b8bcb739f5cf1207cb0cefe8fa1c65027266bcbc34c90c84b9ad6
   faraday-net_http (3.4.0) sha256=a1f1e4cd6a2cf21599c8221595e27582d9936819977bbd4089a601f24c64e54a
   ffi (1.17.0) sha256=51630e43425078311c056ca75f961bb3bda1641ab36e44ad4c455e0b0e4a231c
+  ffi (1.17.0-aarch64-linux-gnu) sha256=228c8fb79e6b018a31c75414115a75ca65f74e8138b2c9c97d22041e4e12f2c1
+  ffi (1.17.0-arm-linux-gnu) sha256=ae3b5bf4701c84263002f13eadfde35fe1e6f88720e7c6f15f1f08f46d745857
   ffi (1.17.0-arm64-darwin) sha256=609c874e76614542c6d485b0576e42a7a38ffcdf086612f9a300c4ec3fcd0d12
   ffi (1.17.0-java) sha256=f65f022616970fcde83fe176393eb873a7b959ef2703f94931cf0af6ab55ec7a
+  ffi (1.17.0-x86-linux-gnu) sha256=81b80d24392be2b8ec6bd66da6b488fd05242af5c0868b59c8b716e5a633c8b5
   ffi (1.17.0-x86_64-darwin) sha256=fdcd48c69db3303ef95aec5c64d6275fcf9878a02c0bec0afddc506ceca0f56b
   ffi (1.17.0-x86_64-linux-gnu) sha256=1015e59d5919dd6bbcb0704325b0bd639be664a79b1e2189943ceb18faa34198
   flowdock (0.7.1) sha256=cfa95b2ac96e5f883f6e419d7a891f76cfcc17a28c416b6b714bbdffc8dbd912
@@ -677,6 +693,7 @@ CHECKSUMS
   language_server-protocol (3.17.0.3) sha256=3d5c58c02f44a20d972957a9febe386d7e7468ab3900ce6bd2b563dd910c6b3f
   launchy (3.0.1) sha256=b7fa60bda0197cf57614e271a250a8ca1f6a34ab889a3c73f67ec5d57c8a7f2c
   libv8-node (18.19.0.0) sha256=7793fbba02ce889d8044c81a7d04cf502a0d458bb66c736cbb2e074c09cdf58d
+  libv8-node (18.19.0.0-aarch64-linux) sha256=db9594000b3b1e2a9a524f7c565ab0898a71f59b296867f44a5a25dcc65ae9d1
   libv8-node (18.19.0.0-arm64-darwin) sha256=9303a710ef171e031fa58d44b4ab060d080c98f0b20570ff240d4e68eb11e52a
   libv8-node (18.19.0.0-x86_64-darwin) sha256=5ddd71c5159f72bf004f66f7f05732ceeedee6536eda11f9c0dd7c224b1b9708
   libv8-node (18.19.0.0-x86_64-linux) sha256=6c95337db699924958ac391c9043e971e85393adad0a296a5da336e92e4e7f39
@@ -711,8 +728,11 @@ CHECKSUMS
   nio4r (2.7.4) sha256=d95dee68e0bb251b8ff90ac3423a511e3b784124e5db7ff5f4813a220ae73ca9
   nio4r (2.7.4-java) sha256=eaa37458dc182a075ea3ad48cddd27823f2e306498acceab17062069d0f387d3
   nokogiri (1.17.0) sha256=4200f1c9525ad91b7226d35849f2c7909b20a5e4571ab1204cc3cda1debe59ef
+  nokogiri (1.17.0-aarch64-linux) sha256=95cdf0d33fe29dd2478d6a34656c9dd909e4b7dae9467b24721af67e1944d6e6
+  nokogiri (1.17.0-arm-linux) sha256=f0c1e71e6f4cd64a6efea4761c85e280318a450968262d02bb917c13874c1c48
   nokogiri (1.17.0-arm64-darwin) sha256=a0364ad985eb4c0a235e95896324969c20795be941a621fe753734bdee8cfa73
   nokogiri (1.17.0-java) sha256=21b8f5022c018a72d97bc1841bb67a8a391456491c08c744141bb6a8f39b3d04
+  nokogiri (1.17.0-x86-linux) sha256=ac2a4eff755d00d8e8534f2af51cd5622321f3b2481cc4277df4e2cd32fabfc2
   nokogiri (1.17.0-x86_64-darwin) sha256=8d9d5bd2db1aa6b41b4ed9c0b890a9e76c33cb031008971b1fd34a35b1f525a5
   nokogiri (1.17.0-x86_64-linux) sha256=fd34467481d6c50f800a516e5db029ca3ad3fb8fcdec032bae581a2d80a4a74b
   oauth2 (2.0.9) sha256=b21f9defcf52dc1610e0dfab4c868342173dcd707fd15c777d9f4f04e153f7fb
