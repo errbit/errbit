@@ -268,16 +268,16 @@ GEM
     netrc (0.11.0)
     nio4r (2.7.4)
     nio4r (2.7.4-java)
-    nokogiri (1.16.8)
+    nokogiri (1.17.0)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.16.8-arm64-darwin)
+    nokogiri (1.17.0-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.8-java)
+    nokogiri (1.17.0-java)
       racc (~> 1.4)
-    nokogiri (1.16.8-x86_64-darwin)
+    nokogiri (1.17.0-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.8-x86_64-linux)
+    nokogiri (1.17.0-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -710,11 +710,11 @@ CHECKSUMS
   netrc (0.11.0) sha256=de1ce33da8c99ab1d97871726cba75151113f117146becbe45aa85cb3dabee3f
   nio4r (2.7.4) sha256=d95dee68e0bb251b8ff90ac3423a511e3b784124e5db7ff5f4813a220ae73ca9
   nio4r (2.7.4-java) sha256=eaa37458dc182a075ea3ad48cddd27823f2e306498acceab17062069d0f387d3
-  nokogiri (1.16.8) sha256=dece4bf9a663b2d6b6e874716297ad414c95be694656972d54049bd088f752a1
-  nokogiri (1.16.8-arm64-darwin) sha256=b7aa4e8533a720e432d09b52a2ec089b55cf3ee66c916b44a0d9b6608df7bf8c
-  nokogiri (1.16.8-java) sha256=8652028e72a38f2221c810550d03c91682b414e06f6271149139a9042cf727e6
-  nokogiri (1.16.8-x86_64-darwin) sha256=6c40d7dc444f752634bf6ee8b53a55c3cfca3f9df52be46b8abcc559ccd49e47
-  nokogiri (1.16.8-x86_64-linux) sha256=ed7b1f80713ac968dd93fe2b96fc3df6e448b73bd02dd77d5fc89ba92a1ed6d9
+  nokogiri (1.17.0) sha256=4200f1c9525ad91b7226d35849f2c7909b20a5e4571ab1204cc3cda1debe59ef
+  nokogiri (1.17.0-arm64-darwin) sha256=a0364ad985eb4c0a235e95896324969c20795be941a621fe753734bdee8cfa73
+  nokogiri (1.17.0-java) sha256=21b8f5022c018a72d97bc1841bb67a8a391456491c08c744141bb6a8f39b3d04
+  nokogiri (1.17.0-x86_64-darwin) sha256=8d9d5bd2db1aa6b41b4ed9c0b890a9e76c33cb031008971b1fd34a35b1f525a5
+  nokogiri (1.17.0-x86_64-linux) sha256=fd34467481d6c50f800a516e5db029ca3ad3fb8fcdec032bae581a2d80a4a74b
   oauth2 (2.0.9) sha256=b21f9defcf52dc1610e0dfab4c868342173dcd707fd15c777d9f4f04e153f7fb
   octokit (9.2.0) sha256=4fa47ff35ce654127edf2c836ab9269bcc8829f5542dc1e86871f697ce7f4316
   omniauth (2.1.2) sha256=def03277298b8f8a5d3ff16cdb2eb5edb9bffed60ee7dda24cc0c89b3ae6a0ce
