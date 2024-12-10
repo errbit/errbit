@@ -272,22 +272,22 @@ GEM
     netrc (0.11.0)
     nio4r (2.7.4)
     nio4r (2.7.4-java)
-    nokogiri (1.17.0)
+    nokogiri (1.17.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.17.0-aarch64-linux)
+    nokogiri (1.17.1-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.17.0-arm-linux)
+    nokogiri (1.17.1-arm-linux)
       racc (~> 1.4)
-    nokogiri (1.17.0-arm64-darwin)
+    nokogiri (1.17.1-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.17.0-java)
+    nokogiri (1.17.1-java)
       racc (~> 1.4)
-    nokogiri (1.17.0-x86-linux)
+    nokogiri (1.17.1-x86-linux)
       racc (~> 1.4)
-    nokogiri (1.17.0-x86_64-darwin)
+    nokogiri (1.17.1-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.17.0-x86_64-linux)
+    nokogiri (1.17.1-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -727,14 +727,14 @@ CHECKSUMS
   netrc (0.11.0) sha256=de1ce33da8c99ab1d97871726cba75151113f117146becbe45aa85cb3dabee3f
   nio4r (2.7.4) sha256=d95dee68e0bb251b8ff90ac3423a511e3b784124e5db7ff5f4813a220ae73ca9
   nio4r (2.7.4-java) sha256=eaa37458dc182a075ea3ad48cddd27823f2e306498acceab17062069d0f387d3
-  nokogiri (1.17.0) sha256=4200f1c9525ad91b7226d35849f2c7909b20a5e4571ab1204cc3cda1debe59ef
-  nokogiri (1.17.0-aarch64-linux) sha256=95cdf0d33fe29dd2478d6a34656c9dd909e4b7dae9467b24721af67e1944d6e6
-  nokogiri (1.17.0-arm-linux) sha256=f0c1e71e6f4cd64a6efea4761c85e280318a450968262d02bb917c13874c1c48
-  nokogiri (1.17.0-arm64-darwin) sha256=a0364ad985eb4c0a235e95896324969c20795be941a621fe753734bdee8cfa73
-  nokogiri (1.17.0-java) sha256=21b8f5022c018a72d97bc1841bb67a8a391456491c08c744141bb6a8f39b3d04
-  nokogiri (1.17.0-x86-linux) sha256=ac2a4eff755d00d8e8534f2af51cd5622321f3b2481cc4277df4e2cd32fabfc2
-  nokogiri (1.17.0-x86_64-darwin) sha256=8d9d5bd2db1aa6b41b4ed9c0b890a9e76c33cb031008971b1fd34a35b1f525a5
-  nokogiri (1.17.0-x86_64-linux) sha256=fd34467481d6c50f800a516e5db029ca3ad3fb8fcdec032bae581a2d80a4a74b
+  nokogiri (1.17.1) sha256=910fe0f194db99677f7ddb21b19a1d071ceffc4a0e39d44c08736d9b1e558cfc
+  nokogiri (1.17.1-aarch64-linux) sha256=b3fce09bddfab61ae587f83af97bf0d0834352bcd23ad99831f2993d978627bd
+  nokogiri (1.17.1-arm-linux) sha256=b8e9909ff893b257a58066e6bfc39456be18b87f4af1e22ca18d7c0dbc9925e5
+  nokogiri (1.17.1-arm64-darwin) sha256=0e79badf832783e81439c3211562ed904a5c8eaaa0038c8fdfdb3778e873f3d0
+  nokogiri (1.17.1-java) sha256=baf2cf6785f83c8cb3cdc427d0eb8b7f91d76748bfeb6c2612ce639e82c1ecee
+  nokogiri (1.17.1-x86-linux) sha256=d09565316ffc8f8bb522bd6d1b460dec2a57d23d6e479c2d0d49d9ccbb11076c
+  nokogiri (1.17.1-x86_64-darwin) sha256=94bcacacd123379229a8ece0d31c38af36d0ef6f86f399d5813be5ca0f566c88
+  nokogiri (1.17.1-x86_64-linux) sha256=2234250605b03433747e8d21de947b38b79f33a4280930e58bec179fd95d415d
   oauth2 (2.0.9) sha256=b21f9defcf52dc1610e0dfab4c868342173dcd707fd15c777d9f4f04e153f7fb
   octokit (9.2.0) sha256=4fa47ff35ce654127edf2c836ab9269bcc8829f5542dc1e86871f697ce7f4316
   omniauth (2.1.2) sha256=def03277298b8f8a5d3ff16cdb2eb5edb9bffed60ee7dda24cc0c89b3ae6a0ce
