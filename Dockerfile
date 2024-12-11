@@ -1,4 +1,4 @@
-FROM ruby:3.1.6-alpine
+FROM ruby:3.2.6-alpine
 
 ENV RUBYGEMS_VERSION=3.5.23
 ENV BUNDLER_VERSION=2.5.23
@@ -12,6 +12,7 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
   && gem update --system "$RUBYGEMS_VERSION" \
   && gem install bundler --version "$BUNDLER_VERSION" \
   && apk add --no-cache \
+    gcompat \
     curl \
     less \
     libxml2-dev \

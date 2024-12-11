@@ -831,7 +831,7 @@ CHECKSUMS
   zeitwerk (2.6.18) sha256=bd2d213996ff7b3b364cd342a585fbee9797dbc1c0c6d868dc4150cc75739781
 
 RUBY VERSION
-   ruby 3.1.6p260
+   ruby 3.2.6p234
 
 BUNDLED WITH
    2.5.23
