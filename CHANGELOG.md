@@ -1,5 +1,6 @@
 # main
 
+* Improve bundler platforms support (for faster docker image builds)
 * Migrate to zeitwerk
 * Default port was changed from 8080 to 3000 (sync with rails defaults)
 * Bundler: enable CHECKSUMS
