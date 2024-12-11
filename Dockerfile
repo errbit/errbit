@@ -1,4 +1,4 @@
-FROM ruby:3.2.6-alpine
+FROM ruby:3.3.6-alpine
 
 ENV RUBYGEMS_VERSION=3.5.23
 ENV BUNDLER_VERSION=2.5.23

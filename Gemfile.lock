@@ -134,6 +134,7 @@ GEM
       activesupport (>= 5.0)
       request_store (>= 1.0)
       ruby2_keywords
+    drb (2.2.1)
     email_spec (2.3.0)
       htmlentities (~> 4.3.3)
       launchy (>= 2.1, < 4.0)
@@ -258,6 +259,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
+    mutex_m (0.3.0)
     net-http (0.6.0)
       uri
     net-imap (0.5.1)
@@ -555,6 +557,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   draper
+  drb
   email_spec
   errbit_github_plugin
   errbit_plugin
@@ -575,6 +578,7 @@ DEPENDENCIES
   mini_racer
   mongoid (= 7.5.4)
   mongoid-rspec
+  mutex_m
   omniauth
   omniauth-github
   omniauth-google-oauth2
@@ -655,6 +659,7 @@ CHECKSUMS
   dotenv (2.8.1) sha256=c5944793349ae03c432e1780a2ca929d60b88c7d14d52d630db0508c3a8a17d8
   dotenv-rails (2.8.1) sha256=b05b81b7f4e51d1359e218d92279db1d84b12440f7118c9df19b5dfffb620f6c
   draper (4.0.2) sha256=5ce3e11ee31808a55cfc6bfbdbb81bf36730984176b5c865bcfd1f4987e8e1af
+  drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   email_spec (2.3.0) sha256=df23be7a131186f7a3d5be3b35eaac9196f9ac13bd26c9c3d59341e13d852d11
   errbit_github_plugin (0.3.0) sha256=96391948fae85fe3aaed78efa598791a8f16187e39e7038ca00bc137a266cc92
   errbit_plugin (0.6.0) sha256=ec4a7567333e3771802805e6c8e901fdfdbb9d576bbcc2af91573694cea89b15
@@ -721,6 +726,7 @@ CHECKSUMS
   msgpack (1.7.5-java) sha256=aedf91b12ee51e5275c97e01e7903f139db0d400be8137359b8f7fc57d25dca8
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
+  mutex_m (0.3.0) sha256=cfcb04ac16b69c4813777022fdceda24e9f798e48092a2b817eb4c0a782b0751
   net-http (0.6.0) sha256=9621b20c137898af9d890556848c93603716cab516dc2c89b01a38b894e259fb
   net-imap (0.5.1) sha256=c0ceb85d8459f7081d5ed1ac86159f8e80d25e704eb52dbf0d9f703b7bc838d7
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
@@ -831,7 +837,7 @@ CHECKSUMS
   zeitwerk (2.7.1) sha256=0945986050e4907140895378e74df1fe882a2271ed087cc6c6d6b00d415a2756
 
 RUBY VERSION
-   ruby 3.2.6p234
+   ruby 3.3.6p108
 
 BUNDLED WITH
    2.5.23
