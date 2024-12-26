@@ -57,9 +57,14 @@ class ProblemsController < ApplicationController
           page(params[:notice]).per(1)
         @notices.first
       end
-    @notice  = notice ? NoticeDecorator.new(notice) : nil
-    @all_notices = problem.object.notices.reverse_ordered
+    @notice = notice ? NoticeDecorator.new(notice) : nil
+    @all_notices = problem.object.notices.reverse_ordered.page(params[:page]).per(5)
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show_by_id

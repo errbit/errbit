@@ -1,0 +1,2 @@
+$('#occurrences').html("<%= j render partial: 'notices_table', locals: { notices: @all_notices } %>");
+$('.pagination').html("<%= j paginate @all_notices, remote: true %>");

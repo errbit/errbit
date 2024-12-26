@@ -1,4 +1,3 @@
-
 class Rule
   include Mongoid::Document
   include Mongoid::Timestamps
