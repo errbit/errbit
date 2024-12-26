@@ -1,0 +1,30 @@
+
+- content_for :title, t('.rules')
+- content_for :action_bar do
+  - if current_user.admin?
+    %span
+      = link_to(new_rule_path) do
+        %i.fa.fa-plus-circle
+        = t('.add_new_rule')
+
+
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Condition
+      %th App
+      %th Actions
+  %tbody
+    - rules.each do |rule|
+      %tr
+        %td= rule.name
+        %td= rule.condition
+        %td= rule.app.name
+        %td
+          = link_to 'Show', rule_path(rule)
+          = link_to 'Edit', edit_rule_path(rule)
+          = link_to 'Delete', rule_path(rule), method: :delete, data: { confirm: 'Are you sure?' }
+
+

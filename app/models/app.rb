@@ -28,6 +28,7 @@ class App
   embeds_one :notice_fingerprinter
 
   has_many :problems, inverse_of: :app, dependent: :destroy
+  has_many :rules, inverse_of: :app, dependent: :destroy
 
   before_validation :generate_api_key, on: :create
   before_save :normalize_github_repo

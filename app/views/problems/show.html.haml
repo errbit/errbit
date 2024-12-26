@@ -67,6 +67,7 @@
     %li= link_to t('.environment'), '#environment', :rel => 'environment', :class => 'button'
     %li= link_to t('.parameters'), '#params', :rel => 'params', :class => 'button'
     %li= link_to t('.session'), '#session', :rel => 'session', :class => 'button'
+    %li= link_to t('.occurrences'), '#occurrences', :rel => 'occurrences', :class => 'button'
 
 - if @notice
   #summary
@@ -93,3 +94,21 @@
   #session
     %h3 Session
     = render 'notices/session', :notice => @notice
+
+  #occurrences
+    %table.rules
+      %thead
+        %tr
+          %th Timestamp
+          %th Error Class
+          %th User Agent
+          %th request.url
+          %th Message
+      %tbody
+        - @all_notices.each do |notice|
+          %tr
+            %td= notice.created_at.strftime('%B %d, %Y %H:%M:%S')
+            %td= notice.error_class
+            %td= user_agent_graph(notice.problem)
+            %td= notice.request['url']
+            %td= link_to notice.message, app_problem_path(notice.problem.app, notice.problem), class: 'nowrap', title: notice.problem.message

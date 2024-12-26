@@ -58,6 +58,7 @@ class ErrorReport
 
     retrieve_problem_was_resolved
     cache_attributes_on_problem
+    merge_problem
     email_notification
     services_notification
     @notice
@@ -79,6 +80,17 @@ class ErrorReport
 
   def retrieve_problem_was_resolved
     @problem_was_resolved = Problem.where('_id' => @error.problem_id, resolved: true).exists?
+  end
+
+  def merge_problem
+    merge_rules = app.rules
+    merge_rules.each do |rule|
+      problems = find_problems_matching_rule(rule)
+      next if problems.empty?
+
+      ProblemMerge.new(problems).merge
+      break
+    end
   end
 
   # Update problem cache with information about this notice
@@ -142,5 +154,13 @@ class ErrorReport
 
   def fingerprint
     app.notice_fingerprinter.generate(api_key, notice, backtrace)
+  end
+
+  def find_problems_matching_rule(rule)
+    primary_problem = Problem.where(id: @error.problem_id, message: /#{Regexp.escape(rule.condition)}/i).first
+    return [] unless primary_problem
+
+    other_problems = Problem.where(:id.ne => @error.problem_id, message: /#{Regexp.escape(rule.condition)}/i)
+    other_problems.present? ? [primary_problem, *other_problems] : []
   end
 end

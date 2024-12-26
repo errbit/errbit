@@ -1,0 +1,18 @@
+= form_for rule_decorate do |f|
+  %div
+    = f.label :name
+    = f.text_field :name, required: true
+
+  %div
+    = f.label :condition
+    = f.text_area :condition, required: true, class: 'rule-text-area'
+
+    %small Note: Error are merged using Error.message.include?(condition) Case-insensitive.
+
+
+  %div
+    = f.label :app
+    = f.collection_select :app_id, apps, :id, :name, include_blank: true, required: true
+
+  %div
+    = f.submit "Save"

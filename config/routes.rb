@@ -58,6 +58,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  resources :rules
+
   get 'problems/:id' => 'problems#show_by_id'
 
   get 'health/readiness' => 'health#readiness'

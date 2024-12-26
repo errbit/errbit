@@ -58,6 +58,7 @@ class ProblemsController < ApplicationController
         @notices.first
       end
     @notice  = notice ? NoticeDecorator.new(notice) : nil
+    @all_notices = problem.object.notices.reverse_ordered
     @comment = Comment.new
   end
 

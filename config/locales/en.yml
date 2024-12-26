@@ -81,6 +81,11 @@ en:
         need_two_errors_merge: "You must select at least two errors to merge"
         merge_several:
           success: "%{nb} errors have been merged."
+    rules:
+      flash:
+        rule_creation_success: "Rule was successfully created"
+        rule_update_success: "Rule was successfully updated"
+        rule_delete_success: "Rule was successfully deleted"
 
   devise:
     registrations:
@@ -280,6 +285,16 @@ en:
       app_version: App Version
       framework: Framework
       relative_directory: Rel. Directory
+  rules:
+    index:
+      add_new_rule: Add a New Rule
+      add_rule: Add Rule
+      cancel: Cancel
+    show:
+      edit: Edit
+      back: Back
+      condition: Condition
+      app: App
   notice_fingerprinter:
     title: Notice Fingerprinter
     text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.

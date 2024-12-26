@@ -1,0 +1,13 @@
+- content_for :title, rule.name
+
+- content_for :action_bar do
+  = link_to t('.back'), rules_path, :class => 'button'
+  = link_to t('.edit'), edit_rule_path(rule), :class => 'button'
+
+%table.single_user
+  %tr
+    %th= t('.condition')
+    %td= rule.condition
+  %tr
+    %th= t('.app')
+    %td= rule.app.name
