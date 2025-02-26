@@ -72,7 +72,7 @@ describe AppsController, type: 'controller' do
 
       it "should list atom feed successfully" do
         get :show, params: { id: app.id, format: "atom" }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "should list available watchers by name" do
@@ -415,7 +415,7 @@ describe AppsController, type: 'controller' do
 
     it "renders successfully" do
       get :search
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "renders index template" do

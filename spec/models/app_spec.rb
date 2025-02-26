@@ -18,14 +18,14 @@ describe App, type: 'model' do
       Fabricate(:app, name: 'Errbit')
       app = Fabricate.build(:app, name: 'Errbit')
       expect(app).to_not be_valid
-      expect(app.errors[:name]).to include('is already taken')
+      expect(app.errors[:name]).to include("has already been taken")
     end
 
     it 'requires unique api_keys' do
       Fabricate(:app, api_key: 'APIKEY')
       app = Fabricate.build(:app, api_key: 'APIKEY')
       expect(app).to_not be_valid
-      expect(app.errors[:api_key]).to include('is already taken')
+      expect(app.errors[:api_key]).to include("has already been taken")
     end
   end
 
