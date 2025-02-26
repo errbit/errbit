@@ -81,8 +81,7 @@ group :test do
   gem 'mongoid-rspec', require: false
   gem 'fabrication'
   gem 'capybara'
-  gem 'poltergeist'
-  gem 'phantomjs'
+  gem 'selenium-webdriver'
   gem 'launchy'
   gem 'email_spec'
   gem 'timecop'
