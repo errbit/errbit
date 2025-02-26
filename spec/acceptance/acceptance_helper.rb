@@ -1,8 +1,6 @@
-require 'phantomjs/poltergeist'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :selenium_chrome_headless
 
 OmniAuth.config.test_mode = true
 
