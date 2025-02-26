@@ -7,7 +7,7 @@ describe "Notices management", type: 'request' do
       it 'save a new notice' do
         expect do
           post '/notifier_api/v2/notices', params: { data: xml }
-          expect(response).to be_success
+          expect(response).to be_successful
         end.to change {
           errbit_app.problems.count
         }.by(1)
@@ -19,7 +19,7 @@ describe "Notices management", type: 'request' do
       it 'save a new notice' do
         expect do
           post '/notifier_api/v2/notices', params: { data: xml }
-          expect(response).to be_success
+          expect(response).to be_successful
         end.to change {
           errbit_app.problems.count
         }.by(1)
@@ -43,7 +43,7 @@ describe "Notices management", type: 'request' do
       it 'save a new notice' do
         expect do
           get '/notifier_api/v2/notices', params: { data: xml }
-          expect(response).to be_success
+          expect(response).to be_successful
         end.to change {
           errbit_app.problems.count
         }.by(1)
