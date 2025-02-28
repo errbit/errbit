@@ -11,7 +11,6 @@ Errbit::Config = Configurator.run(
   host:                      ['ERRBIT_HOST'],
   protocol:                  ['ERRBIT_PROTOCOL'],
   port:                      ['ERRBIT_PORT'],
-  enforce_ssl:               ['ERRBIT_ENFORCE_SSL'],
   confirm_err_actions:       ['ERRBIT_CONFIRM_ERR_ACTIONS'],
   user_has_username:         ['ERRBIT_USER_HAS_USERNAME'],
   use_gravatar:              ['ERRBIT_USE_GRAVATAR'],
