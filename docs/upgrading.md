@@ -1,3 +1,10 @@
+### Upgrading errbit from v0.9.0 to current main (v0.10.0)
+
+* From now, errbit should be run behind reverse proxy with HTTPS support.
+  Like: nginx or traefik.
+* `ERRBIT_ENFORCE_SSL` env support was removed (rails already have
+  `config.force_ssl = true` in `config/environments/production`).
+
 ### Upgrading errbit beyond v0.8.0
 
 * Note: There are no migrations to run and the rake task for running migrations
