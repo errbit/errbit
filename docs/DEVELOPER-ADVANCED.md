@@ -3,7 +3,7 @@
 ## Running spec on multi-threaded mode
 
 Running the complete test suite can be really long. You can running it
-on multi-fork system with the wonderfull gem of
+on multi-fork system with the wonderful gem of
 [@tmm1](http://github.com/tmm1), [test-queue](http://github.com/tmm1/test-queue)
 
 If you want do it, you need install in first the gem 'test-queue'
