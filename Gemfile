@@ -49,7 +49,7 @@ gem 'httparty'
 gem 'flowdock'
 
 gem 'ri_cal'
-gem 'json', platform: 'jruby'
+gem 'json'
 
 # For Ruby 2.7
 gem 'bigdecimal', '~> 1.4.4'
