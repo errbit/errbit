@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    - cron: "0 21 * * 6"
+
 jobs:
   rspec:
     runs-on: ubuntu-latest
