@@ -5,7 +5,6 @@
   "repository": "https://github.com/errbit/errbit",
   "env": {
     "BUNDLE_WITHOUT": "development",
-    "ERRBIT_ENFORCE_SSL": "true",
     "MONGODB_URI": {
       "description": "The connection URI to your MongoDB Cluster. If you don't have one, you can create a free plan at https://cloud.mongodb.com . Follow the Heroky deployment docs on the Errbit repo for more information on obtaining this string.",
       "required": true

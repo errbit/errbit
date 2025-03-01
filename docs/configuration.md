@@ -1,27 +1,22 @@
 # Configuring Errbit
+
 Following the recommendation of [12factor.net](http://12factor.net/config),
 Errbit takes all of its configuration from environment variables. You can use
 [dotenv](https://github.com/bkeepers/dotenv), which is included in the Gemfile,
 to fill in any values that you can't or won't supply through the environment.
 
 In order of precedence Errbit uses:
+
 1. Environment variables (for example MY_VALUE=abc bundle exec puma)
 2. Values provided in a .env file
 3. Default values from .env.default
 
 ## Configuration Parameters
+
 <dl>
 <dt>ERRBIT_HOST
 <dd>Hostname to use when building links back to Errbit
 <dd>defaults to errbit.example.com
-<dt>ERRBIT_PROTOCOL
-<dd>Protocol to use when building links back to Errbit (http or https)
-<dd>defaults to http
-<dt>ERRBIT_PORT
-<dd>TCP port to use when building links back to Errbit
-<dt>ERRBIT_ENFORCE_SSL
-<dd>When enabled, Errbit forces all traffic over https
-<dd>defaults to false
 <dt>ERRBIT_ADMIN_EMAIL
 <dd>E-Mail address of initial admin user
 <dd>defaults to `errbit@errbit.example.com`
