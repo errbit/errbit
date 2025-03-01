@@ -585,9 +585,9 @@ describe Problem, type: 'model' do
     subject { Fabricate(:problem) }
 
     it "uses the configured host" do
-      allow(Errbit::Config).to receive(:host).and_return("example.com")
+      allow(Errbit::Config).to receive(:host).and_return("errbit.example.com")
 
-      expect(subject.url).to eq("http://example.com/apps/#{subject.app.id}/problems/#{subject.id}")
+      expect(subject.url).to eq("http://errbit.example.com/apps/#{subject.app.id}/problems/#{subject.id}")
     end
   end
 end
