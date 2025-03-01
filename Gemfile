@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 RAILS_VERSION = '5.0.7.2'
 # RAILS_VERSION = '5.1.7'
 
-ruby File.read(".ruby-version")
-
 gem 'actionmailer', RAILS_VERSION
 gem 'actionpack', RAILS_VERSION
 gem 'railties', RAILS_VERSION
@@ -49,7 +47,7 @@ gem 'rushover'
 gem 'httparty'
 
 gem 'ri_cal'
-gem 'json', platform: 'jruby'
+gem 'json'
 
 # For Ruby 2.7
 gem 'bigdecimal', '~> 1.4.4'
