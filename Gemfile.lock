@@ -143,9 +143,6 @@ GEM
     faraday-retry (1.0.3)
     ffi (1.15.5)
     ffi (1.15.5-java)
-    flowdock (0.7.1)
-      httparty (~> 0.7)
-      multi_json
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
     globalid (1.0.0)
@@ -486,7 +483,6 @@ DEPENDENCIES
   errbit_github_plugin
   errbit_plugin
   fabrication
-  flowdock
   font-awesome-rails
   haml
   hoi

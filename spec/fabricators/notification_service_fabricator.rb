@@ -17,6 +17,6 @@ Fabricator :slack_notification_service, from: :notification_service, class_name:
   room_id { sequence(:room_id) { |i| "#room-#{i}" } }
 end
 
-%w(campfire flowdock hoiio hubot pushover webhook).each do |t|
+%w(campfire hoiio hubot pushover webhook).each do |t|
   Fabricator "#{t}_notification_service".to_sym, from: :notification_service, class_name: "NotificationServices::#{t.camelcase}Service"
 end
