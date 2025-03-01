@@ -47,8 +47,6 @@ gem 'hoi'
 gem 'rushover'
 # Hubot
 gem 'httparty'
-# Flowdock
-gem 'flowdock'
 
 gem 'ri_cal'
 gem 'json', platform: 'jruby'
