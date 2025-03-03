@@ -1,3 +1,10 @@
+### Upgrading errbit from v0.9.0 to v0.10.0
+
+* MongoDB 4.0 is reached EOL at 21 Jun 2018. 4.0 support will be removed after v0.10.0 release.
+* MongoDB 4.2 is reached EOL at 09 Aug 2019. 4.2 support will be removed after v0.10.0 release.
+* MongoDB 4.4 is reached EOL at 25 Jul 2020. 4.4 support will be removed after v0.10.0 release.
+* MongoDB 5.0 is reached EOL at 08 Jul 2021. 5.0 support will be removed after v0.10.0 release.
+
 ### Upgrading errbit beyond v0.8.0
 
 * Note: There are no migrations to run and the rake task for running migrations
