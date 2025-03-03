@@ -1,9 +1,11 @@
-### Upgrading errbit beyond v0.8.0
+# Upgrading errbit
+
+## Upgrading errbit beyond v0.8.0
 
 * Note: There are no migrations to run and the rake task for running migrations
   has been removed.
 
-### Upgrading errbit from v0.4.0 up to v0.8.0
+## Upgrading errbit from v0.4.0 up to v0.8.0
 
 * You must have already run migrations at least up to v0.3.0. Check to
   make sure you're schema version is at least 20131011155638 by running rake
@@ -19,11 +21,11 @@
   using the watch feature to hide secret apps, you should not upgrade beyond
   v0.4.0.
 
-### Upgrading errbit from v0.3.0 to v0.4.0
+## Upgrading errbit from v0.3.0 to v0.4.0
 
 * All configuration is now done through the environment. See
   [configuration](docs/configuration.md)
-* Ruby 1.9 and 2.0 are no longer offically supported. Please upgrade to Ruby
+* Ruby 1.9 and 2.0 are no longer officially supported. Please upgrade to Ruby
   2.1+
 * Errbit now maintains an issue tracker only for github. If you're using
   another issue tracker integration, you may need to maintain it yourself. See
