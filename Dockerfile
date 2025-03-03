@@ -20,7 +20,7 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
     nodejs \
     tzdata
 
-COPY [".ruby-version", "Gemfile", "Gemfile.lock", "/app/"]
+COPY [".ruby-version", "Gemfile", "Gemfile.lock", "UserGemfile", "/app/"]
 
 RUN apk add --no-cache --virtual build-dependencies build-base \
   && bundle config build.nokogiri --use-system-libraries \
