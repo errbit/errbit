@@ -1,3 +1,8 @@
+### Upgrading errbit from v0.9.0 to v0.10.0
+
+* Remove `USER_GEMFILE` env support. From now, only `UserGemfile` is
+  supported.
+
 ### Upgrading errbit beyond v0.8.0
 
 * Note: There are no migrations to run and the rake task for running migrations
