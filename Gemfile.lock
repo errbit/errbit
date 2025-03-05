@@ -49,6 +49,7 @@ GEM
       multi_json
     arel (7.1.4)
     ast (2.4.2)
+    base64 (0.2.0)
     bcrypt (3.1.20)
     bcrypt (3.1.20-java)
     bigdecimal (1.4.4)
@@ -166,7 +167,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.10.1)
     json (2.10.1-java)
-    jwt (2.5.0)
+    jwt (2.10.1)
+      base64
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
