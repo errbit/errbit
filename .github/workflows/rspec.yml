@@ -23,10 +23,14 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
+          rubygems: "3.4.22"
+          bundler: "2.4.22"
           bundler-cache: true
+
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.7.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
+
       - run: bundle exec rake errbit:bootstrap
       - run: bundle exec rspec
