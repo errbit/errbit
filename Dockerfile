@@ -21,7 +21,7 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
     nodejs \
     tzdata
 
-COPY ["Gemfile", "Gemfile.lock", "/app/"]
+COPY ["Gemfile", "Gemfile.lock", "UserGemfile", "/app/"]
 
 RUN apk add --no-cache --virtual build-dependencies build-base \
   && bundle config build.nokogiri --use-system-libraries \
@@ -47,4 +47,3 @@ EXPOSE 8080
 HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT:-8080}/users/sign_in" || exit 1
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.default.rb"]
-
