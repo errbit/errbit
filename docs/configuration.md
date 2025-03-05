@@ -13,23 +13,16 @@ In order of precedence Errbit uses:
 
 ## Configuration Parameters
 
-| Environment variable | Description                                                         | Default              | Default in container |
-|----------------------|---------------------------------------------------------------------|----------------------|----------------------|
-| `ERRBIT_HOST`        | Hostname to use when building links back to Errbit                  | `errbit.example.com` | `errbit.example.com` |
-| `ERRBIT_PROTOCOL`    | Protocol to use when building links back to Errbit (http or https)  | `http`               | `http`               |
+| Environment variable    | Description                                                        | Default                                                         | Default in container                                          |
+|-------------------------|--------------------------------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------|
+| `ERRBIT_HOST`           | Hostname to use when building links back to Errbit                 | `errbit.example.com`                                            | `errbit.example.com`                                          |
+| `ERRBIT_PROTOCOL`       | Protocol to use when building links back to Errbit (http or https) | `http`                                                          | `http`                                                        |
+| `ERRBIT_PORT`           | TCP port to use when building links back to Errbit                 | not set                                                         | not set                                                       |
+| `ERRBIT_ENFORCE_SSL`    | When enabled, Errbit forces all traffic over https                 | `false`                                                         | `false`                                                       |
+| `ERRBIT_ADMIN_EMAIL`    | E-Mail address of initial admin user                               | `errbit@errbit.example.com`                                     | `errbit@errbit.example.com`                                   |
+| `ERRBIT_ADMIN_PASSWORD` | Password of initial admin user                                     | defaults to some random string (see output of `$ rake db:seed`) | defaults to some random string (see output of `rake db:seed`) |
 
 <dl>
-<dt>ERRBIT_PORT
-<dd>TCP port to use when building links back to Errbit
-<dt>ERRBIT_ENFORCE_SSL
-<dd>When enabled, Errbit forces all traffic over https
-<dd>defaults to false
-<dt>ERRBIT_ADMIN_EMAIL
-<dd>E-Mail address of initial admin user
-<dd>defaults to `errbit@errbit.example.com`
-<dt>ERRBIT_ADMIN_PASSWORD
-<dd>Password of initial admin user
-<dd>defaults to some random string (see output of `$ rake db:seed`)
 <dt>ERRBIT_ADMIN_USER
 <dd>Username of initial admin user
 <dd>defaults to `errbit`
@@ -71,12 +64,12 @@ In order of precedence Errbit uses:
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
 <dt>MONGO_URL
 <dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
-<dd>defaults to mongodb://localhost/errbit_&lt;Rails.env&gt;
+<dd>defaults to `mongodb://localhost/errbit_&lt;Rails.env&gt;`
 <dt>GITHUB_URL
 <dd>Use this URL for interacting github. This is useful if you have a github enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com
 <dt>GITHUB_API_URL</dt>
-<dd>For github enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
+<dd>For GitHub enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
 <dd>defaults to https://api.github.com</dd>
 <dt>GITHUB_AUTHENTICATION
 <dd>Allow github sign-in via OAuth
