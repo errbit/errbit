@@ -1,8 +1,9 @@
-FROM ruby:2.7.6-alpine
+FROM ruby:2.7.8-alpine
+
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
-ENV RUBYGEMS_VERSION=3.3.21
-ENV BUNDLER_VERSION=2.3.21
+ENV RUBYGEMS_VERSION=3.4.22
+ENV BUNDLER_VERSION=2.4.22
 
 WORKDIR /app
 
@@ -20,7 +21,7 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
     nodejs \
     tzdata
 
-COPY [".ruby-version", "Gemfile", "Gemfile.lock", "/app/"]
+COPY ["Gemfile", "Gemfile.lock", "/app/"]
 
 RUN apk add --no-cache --virtual build-dependencies build-base \
   && bundle config build.nokogiri --use-system-libraries \

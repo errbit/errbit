@@ -529,8 +529,5 @@ DEPENDENCIES
   useragent
   xmpp4r
 
-RUBY VERSION
-   ruby 2.7.6p219
-
 BUNDLED WITH
-   2.3.21
+   2.4.22
