@@ -267,7 +267,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
-    parallel (1.22.1)
+    parallel (1.26.3)
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
