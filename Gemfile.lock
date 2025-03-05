@@ -51,10 +51,6 @@ GEM
     ast (2.4.2)
     bcrypt (3.1.18)
     bcrypt (3.1.18-java)
-    better_errors (2.9.1)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
     bigdecimal (1.4.4)
     bson (4.15.0)
     bson (4.15.0-java)
@@ -111,7 +107,6 @@ GEM
       errbit_plugin
       octokit
     errbit_plugin (0.6.0)
-    erubi (1.11.0)
     erubis (2.7.0)
     execjs (2.8.1)
     fabrication (2.30.0)
@@ -461,7 +456,6 @@ DEPENDENCIES
   actionpack (= 5.0.7.2)
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
-  better_errors
   bigdecimal (~> 1.4.4)
   campy
   capybara

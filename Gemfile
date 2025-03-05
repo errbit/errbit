@@ -63,7 +63,6 @@ end
 
 group :development do
   gem 'listen', '~> 3.0.5'
-  gem 'better_errors'
 end
 
 group :test do
