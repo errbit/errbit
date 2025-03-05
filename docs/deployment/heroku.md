@@ -5,12 +5,14 @@
 If you just want to get started with Errbit and you're not sure how to proceed,
 you can use this deploy button to get a basic deployment running on Heroku.
 
-You will need to spin up a MongoDB server if you don't have one at your disposal already.
-Free clusters up to 512MB are available with MongoDB Atlas [Here](https://cloud.mongodb.com)
+You will need to spin up a MongoDB server if you don't have one at your
+disposal already. Free clusters up to 512MB are available with MongoDB Atlas
+[Here](https://cloud.mongodb.com)
 
 ## MongoDB Atlas Setup for Quick Deployment
 
-Upon creating an account, you will be greeted with this page. Make sure you select Starter Cluster.
+Upon creating an account, you will be greeted with this page. Make sure you
+select Starter Cluster.
 
 ![Cluster selection](./example/atlas1.jpg)
 
@@ -18,13 +20,20 @@ After this, you will be taken to the below screen:
 
 ![Server selection](./example/atlas2.png)
 
-Select one of the servers marked with `FREE TIER AVAILABLE` and click on `Create Cluster`. It will only take a couple of minutes to configure everything for you.
+Select one of the servers marked with `FREE TIER AVAILABLE` and click on
+`Create Cluster`. It will only take a couple of minutes to configure
+everything for you.
 
 Follow the "Getting Started" tutorial on the bottom left.
 
 ### Create a database user
 
-Go to the `Database Access` section in the `security` tab. Click on `+ Add New User` to create a new user, whereupon a new screen will pop up. Select `Read and write to any database`, so the bot can properly store the data. Choose a username and password, but make sure they both **don't contain any special character** like `!`, `-`, `?`. Copy the password into your notepad.
+Go to the `Database Access` section in the `security` tab. Click on
+`+ Add New User` to create a new user, whereupon a new screen will pop up.
+Select `Read and write to any database`, so the bot can properly store the
+data. Choose a username and password, but make sure they both **don't contain
+any special character** like `!`, `-`, `?`. Copy the password into your
+notepad.
 
 Finally, click `Add User` to finish the creation.
 
@@ -32,29 +41,43 @@ Finally, click `Add User` to finish the creation.
 
 ### Whitelist all IP's
 
-Go to the `Network Access` section in the `security` tab. Click on `+ Add IP Address` to add an IP address, whereupon a new screen will pop up. Click the `Allow Access From Everywhere` button and `0.0.0.0/0` should appear in the `Whitelist Entry`. Otherwise, make sure to put input that manually. Finally, click `Confirm` to confirm your changes.
+Go to the `Network Access` section in the `security` tab. Click on
+`+ Add IP Address` to add an IP address, whereupon a new screen will pop up.
+Click the `Allow Access From Everywhere` button and `0.0.0.0/0` should appear
+in the `Whitelist Entry`. Otherwise, make sure to put input that manually.
+Finally, click `Confirm` to confirm your changes.
 
 ![Whitelisting IPs](./example/atlas4.png)
 
 ### Obtain a connection string
 
-The last part is to generate a Mongo URI. Go to the `Clusters` section in the `Atlas` tab. Click on `Connect` on the left side of your Cluster dashboard. This will open up a new screen where you have three options. For our purposes, select the middle option `Connect Your Application`.
+The last part is to generate a Mongo URI. Go to the `Clusters` section in the
+`Atlas` tab. Click on `Connect` on the left side of your Cluster dashboard.
+This will open up a new screen where you have three options. For our purposes,
+select the middle option `Connect Your Application`.
 
 ![Connection String](./example/atlas5.png)
 
 Be sure to select Ruby and Version 2.7 or later.
-You need to copy the connection string, which can be easily done by clicking the `Copy` button. Then replace `<password>` with the password for your user, which you set earlier. Paste the URI in your notepad.
+
+You need to copy the connection string, which can be easily done by clicking
+the `Copy` button. Then replace `<password>` with the password for your user,
+which you set earlier. Paste the URI in your notepad.
 
 The final URI looks similar to this: `mongodb+srv://Username:MyPassword@modmail-kjvn21.mongodb.net/`.
 
 ![Connection String - 2](./example/atlas6.png)
 
-Now that you have your connection URI, click the deploy button below and start your app deployment. Paste the entire URI you obtained from above into the MONGODB_URI Text box.
+Now that you have your connection URI, click the deploy button below and
+start your app deployment. Paste the entire URI you obtained from above into
+the MONGODB_URI Text box.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
 
 After deploying the application, you still need to run `rake errbit:bootstrap`
-to create indexes and get your admin user set up. You can do this by clicking the `Run Console` button in the More dropdown button of your new Heroku app. Then paste the rake command above and be sure to copy your admin credentials!
+to create indexes and get your admin user set up. You can do this by clicking
+the `Run Console` button in the More dropdown button of your new Heroku app.
+Then paste the rake command above and be sure to copy your admin credentials!
 
 ![Run Console](./example/atlas7.png)
 
@@ -64,7 +87,8 @@ We designed Errbit to work well with Heroku. These instructions should result
 in a working deploy, but you should modify them to suit your needs:
 
 ### Clone and prepare the source code repository
-```bash
+
+```shell
 git clone git@github.com:errbit/errbit.git
 cd errbit
 ```
@@ -72,15 +96,21 @@ cd errbit
 - Update `db/seeds.rb` with admin credentials for your initial login
 
 Commit the results:
-```bash
+
+```shell
 git commit -m "Update db/seeds.rb with initial login"
 ```
 
 ### Install the heroku toolbelt
+
 [toolbelt.heroku.com](https://toolbelt.heroku.com/)
 
-### Create an app on Heroku and push the source code. Use the above documentation to obtain a MongoDB URI from MongoDB Atlas if you don't have one.
-```bash
+### Create an app on Heroku and push the source code
+
+Use the above documentation to obtain a MongoDB URI from MongoDB Atlas if you
+don't have one.
+
+```shell
 heroku apps:create
 heroku addons:create sendgrid:starter
 heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
@@ -93,17 +123,18 @@ git push heroku master
 
 ### Prepare the DB
 
-```bash
+```shell
 heroku run rake errbit:bootstrap
 ```
 
 ### Schedule recurring tasks
+
 You may want to periodically clear resolved errors to free up space. For that
 you have a few options:
 
 Option 1. With the heroku-scheduler add-on (replacement for cron):
 
-```bash
+```shell
 # Install the heroku scheduler add-on
 heroku addons:create scheduler:standard
 
@@ -115,13 +146,13 @@ heroku addons:create scheduler
 
 Option 2. With the cron add-on:
 
-```bash
+```shell
 # Install the heroku cron addon, to clear resolved errors daily:
 heroku addons:create cron:daily
 ```
 
 Option 3. Clear resolved errors manually:
 
-```bash
+```shell
 heroku run rake errbit:clear_resolved
 ```

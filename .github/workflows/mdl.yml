@@ -1,0 +1,27 @@
+name: "Markdown Lint"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 21 * * 6"
+
+permissions:
+  contents: read
+
+jobs:
+  mdl:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: bewuethr/mdl-action@873ce74f9649c6b68918743507c9b0be2df5723b # v1.2.1

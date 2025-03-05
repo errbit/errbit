@@ -1,13 +1,19 @@
+# Changelog
+
 ## 0.7.0
+
 https://github.com/errbit/errbit/issues?q=milestone%3A0.7.0
 
 ## 0.6.1
+
 https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.6.1
 
 ## 0.6.0
+
 https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.6.0
 
 ## 0.5.0
+
 https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.5.0
 
 ## 0.4.0
@@ -37,9 +43,9 @@ https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.5.0
 - Add environement variable configuration to change the ruby version to
   use ([@shingara][])
 - [#588][] Change documentation to see Airbrake gem instead of
-  hoptoad_nofier ([@ugisozols][])
+  hoptoad_notifier ([@ugisozols][])
 - [#592][] Avoid taskmapper dependencies ([@arthurnn][])
-- [#597][] Improve fingerprinting if only change by object memory adress
+- [#597][] Improve fingerprinting if only change by object memory address
   ([@1st8][])
 - [#603][] Improve the page rendering of App list ([@arthurnn][])
 - [#606][] Add ability to deploy on Cloud 66 ([@pkallberg][])
@@ -62,7 +68,6 @@ https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.5.0
 - [#609][] Fix issue about page system on search error ([@zhekanax][])
 - [#611][] Fix issue about select all error in search page ([@zhekanax][])
 - [#615][] Fix some LDAP information in README ([@felixbuenemann][])
-
 
 [@arthurnn]: https://github.com/arthurnn
 [@mildavw]: https://github.com/mildavw
@@ -100,7 +105,7 @@ https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.5.0
 [#620]: https://github.com/errbit/errbit/pull/620
 [#624]: https://github.com/errbit/errbit/pull/624
 
-## 0.2.1 - Not released Yet
+## 0.2.1
 
 ### Improvements
 
