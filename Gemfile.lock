@@ -440,10 +440,8 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
-    unf (0.1.4)
-      unf_ext
-    unf (0.1.4-java)
-    unf_ext (0.0.8.2)
+    unf (0.2.0)
+    unf (0.2.0-java)
     unicode-display_width (1.6.1)
     useragent (0.16.10)
     warden (1.2.9)
