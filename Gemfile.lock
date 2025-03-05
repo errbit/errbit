@@ -304,7 +304,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     racc (1.6.0-java)
-    rack (2.2.4)
+    rack (2.2.12)
     rack-contrib (2.3.0)
       rack (~> 2.0)
     rack-protection (2.2.2)
