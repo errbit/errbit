@@ -49,6 +49,7 @@ GEM
       multi_json
     arel (7.1.4)
     ast (2.4.2)
+    base64 (0.2.0)
     bcrypt (3.1.20)
     bcrypt (3.1.20-java)
     bigdecimal (1.4.4)
@@ -295,8 +296,9 @@ GEM
     racc (1.8.1)
     racc (1.8.1-java)
     rack (2.2.12)
-    rack-protection (2.2.2)
-      rack
+    rack-protection (3.2.0)
+      base64 (>= 0.1.0)
+      rack (~> 2.2, >= 2.2.4)
     rack-ssl (1.4.1)
       rack
     rack-ssl-enforcer (0.2.9)
