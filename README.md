@@ -264,9 +264,8 @@ You can extend Errbit by adding Ruby gems and plugins which are typically gems.
 It's nice to keep track of which gems are core Errbit dependencies and which
 gems are your own dependencies. If you want to add gems to your own Errbit,
 place them in a new file called `UserGemfile` and Errbit will treat that file
-as an additional Gemfile. If you want to use a file with a different name, you
-can pass the name of that file in an environment variable named `USER_GEMFILE`.
-If you want to use errbit_jira_plugin, just add it to UserGemfile:
+as an additional Gemfile. If you want to use `errbit_jira_plugin`, just add it
+to `UserGemfile`:
 
 ```bash
 echo "gem 'errbit_jira_plugin'" > UserGemfile

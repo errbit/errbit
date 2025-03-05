@@ -97,5 +97,4 @@ gem 'underscore-rails'
 
 gem 'sucker_punch'
 
-ENV['USER_GEMFILE'] ||= './UserGemfile'
-eval_gemfile ENV['USER_GEMFILE'] if File.exist?(ENV['USER_GEMFILE'])
+eval_gemfile "./UserGemfile"
