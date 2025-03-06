@@ -54,7 +54,7 @@ GEM
     bigdecimal (1.4.4)
     bson (4.15.0)
     bson (4.15.0-java)
-    builder (3.2.4)
+    builder (3.3.0)
     campy (1.0.0)
     capybara (3.37.1)
       addressable
