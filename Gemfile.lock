@@ -84,7 +84,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    diff-lcs (1.5.0)
+    diff-lcs (1.6.0)
     docile (1.4.1)
     domain_name (0.6.20240107)
     dotenv (2.8.1)
