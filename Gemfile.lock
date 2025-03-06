@@ -425,7 +425,7 @@ GEM
     timecop (0.9.5)
     tins (1.31.1)
       sync
-    tzinfo (1.2.10)
+    tzinfo (1.2.11)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
