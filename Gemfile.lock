@@ -44,9 +44,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    airbrake (4.3.8)
-      builder
-      multi_json
+    airbrake (13.0.5)
+      airbrake-ruby (~> 6.0)
+    airbrake-ruby (6.2.2)
+      rbtree3 (~> 0.6)
     arel (7.1.4)
     ast (2.4.2)
     base64 (0.2.0)
@@ -326,6 +327,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
+    rbtree3 (0.7.1)
     regexp_parser (2.10.0)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -457,7 +459,7 @@ DEPENDENCIES
   actionmailer_inline_css
   actionpack (= 5.0.7.2)
   activemodel-serializers-xml
-  airbrake (~> 4.3.5)
+  airbrake (~> 13.0.5)
   bigdecimal (~> 1.4.4)
   campy
   capybara
