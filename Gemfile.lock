@@ -57,7 +57,7 @@ GEM
     bson (4.15.0-java)
     builder (3.3.0)
     campy (1.0.0)
-    capybara (3.37.1)
+    capybara (3.39.2)
       addressable
       matrix
       mini_mime (>= 0.1.3)
