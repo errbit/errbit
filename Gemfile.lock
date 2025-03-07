@@ -442,7 +442,7 @@ GEM
     thor (1.3.2)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
-    tilt (2.0.11)
+    tilt (2.6.0)
     timecop (0.9.10)
     timeout (0.4.3)
     tins (1.38.0)
