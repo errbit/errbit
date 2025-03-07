@@ -92,4 +92,7 @@ gem 'sucker_punch'
 # lock concurrent-ruby gem to 1.1.10
 gem 'concurrent-ruby', '1.1.10'
 
+# lock i18n gem to 1.14.1
+gem 'i18n', '1.14.1'
+
 eval_gemfile "./UserGemfile"
