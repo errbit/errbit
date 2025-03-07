@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.7.2'
+gem 'rails', '5.1.7'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -15,7 +15,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '6.0.3'
+gem 'mongoid'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
@@ -27,7 +27,9 @@ gem 'useragent'
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
-gem 'hoptoad_notifier', "~> 2.4"
+gem 'hoptoad_notifier',
+  git: 'https://github.com/errbit/hoptoad_notifier',
+  branch: 'errbit'
 
 # Notification services
 # ---------------------------------------

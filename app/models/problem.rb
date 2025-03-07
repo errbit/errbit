@@ -155,7 +155,12 @@ class Problem
         if (doc[k].try(:[], digest).try(:[], :count)).to_i > 1
           doc.inc("#{field}.count" => -1)
         else
-          doc.unset(field)
+          # TODO: check why?
+          # doc.unset(field)
+
+          h = doc[k] || {}
+          h.delete(digest)
+          doc.set("#{k}": h)
         end
       end
     end
