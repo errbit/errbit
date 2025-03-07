@@ -229,7 +229,7 @@ GEM
       rspec-mocks (~> 3.3)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.2.3)
+    multipart-post (2.4.1)
     netrc (0.11.0)
     nio4r (2.7.4)
     nio4r (2.7.4-java)
