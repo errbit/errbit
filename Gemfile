@@ -50,7 +50,7 @@ gem 'ri_cal'
 gem 'json'
 
 # For Ruby 2.7
-gem 'bigdecimal', '~> 1.4.4'
+gem 'bigdecimal', '~> 3.1.9'
 
 gem 'pry-rails'
 
