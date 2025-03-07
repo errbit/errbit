@@ -499,6 +499,7 @@ DEPENDENCIES
   bigdecimal (~> 1.4.4)
   campy
   capybara
+  concurrent-ruby (= 1.1.10)
   coveralls
   decent_exposure
   devise
