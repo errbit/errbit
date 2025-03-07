@@ -102,9 +102,9 @@ GEM
       activesupport (>= 5.0)
       request_store (>= 1.0)
       ruby2_keywords
-    email_spec (2.2.0)
+    email_spec (2.3.0)
       htmlentities (~> 4.3.3)
-      launchy (~> 2.1)
+      launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
     errbit_github_plugin (0.3.0)
       errbit_plugin
