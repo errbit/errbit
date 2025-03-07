@@ -3,6 +3,6 @@ if ENV["USER_GEMFILE"].present?
   ActiveSupport::Deprecation.warn(
     "ENV['USER_GEMFILE'] support is and has no effect in Errbit v0.10.0. " \
     "Remove it from configuration. " \
-    "In Errbit v0.10.0+ it's always 'UserGemfile'."
+    "From Errbit v0.10.0+ it's always 'UserGemfile'."
   )
 end
