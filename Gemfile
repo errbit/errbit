@@ -3,9 +3,7 @@ source 'https://rubygems.org'
 RAILS_VERSION = '5.0.7.2'
 # RAILS_VERSION = '5.1.7'
 
-gem 'actionmailer', RAILS_VERSION
-gem 'actionpack', RAILS_VERSION
-gem 'railties', RAILS_VERSION
+gem 'rails', RAILS_VERSION
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
