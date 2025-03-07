@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '5.0.7.2'
-# RAILS_VERSION = '5.1.7'
-
-gem 'rails', RAILS_VERSION
+gem 'rails', '5.0.7.2'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -91,5 +88,11 @@ gem 'pjax_rails'
 gem 'underscore-rails'
 
 gem 'sucker_punch'
+
+# lock concurrent-ruby gem to 1.1.10
+gem 'concurrent-ruby', '1.1.10'
+
+# lock i18n gem to 1.14.1
+gem 'i18n', '1.14.1'
 
 eval_gemfile "./UserGemfile"
