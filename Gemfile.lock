@@ -147,7 +147,7 @@ GEM
     ffi (1.17.1-x86_64-linux-gnu)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
-    globalid (1.0.0)
+    globalid (1.1.0)
       activesupport (>= 5.0)
     haml (5.2.2)
       temple (>= 0.8.0)
