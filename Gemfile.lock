@@ -1,5 +1,7 @@
-PATH
-  remote: ../hoptoad_notifier
+GIT
+  remote: https://github.com/errbit/hoptoad_notifier
+  revision: e0e37105aa2aff579d1ff80fcbd9e42add28fcdf
+  branch: errbit
   specs:
     hoptoad_notifier (2.4.11)
       activesupport
