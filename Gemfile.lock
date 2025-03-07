@@ -177,7 +177,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.10.1)
     json (2.10.1-java)
-    jwt (2.5.0)
+    jwt (2.10.1)
+      base64
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
