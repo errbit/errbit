@@ -417,7 +417,7 @@ GEM
     sucker_punch (3.0.1)
       concurrent-ruby (~> 1.0)
     sync (0.5.0)
-    temple (0.8.2)
+    temple (0.10.3)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
     thor (1.2.1)
