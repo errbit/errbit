@@ -195,9 +195,9 @@ GEM
     libv8-node (16.19.0.1-arm64-darwin)
     libv8-node (16.19.0.1-x86_64-darwin)
     libv8-node (16.19.0.1-x86_64-linux)
-    listen (3.0.8)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.6)
     loofah (2.24.0)
       crass (~> 1.0.2)
@@ -500,7 +500,7 @@ DEPENDENCIES
   kaminari
   kaminari-mongoid
   launchy
-  listen (~> 3.0.5)
+  listen (~> 3.9.0)
   mini_racer
   mongoid (= 6.0.3)
   mongoid-rspec
