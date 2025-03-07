@@ -64,8 +64,8 @@ GEM
     bcrypt (3.1.20)
     bcrypt (3.1.20-java)
     bigdecimal (1.4.4)
-    bson (4.15.0)
-    bson (4.15.0-java)
+    bson (5.0.2)
+    bson (5.0.2-java)
     builder (3.3.0)
     campy (1.0.0)
     capybara (3.39.2)
@@ -226,11 +226,12 @@ GEM
     mini_racer (0.6.4)
       libv8-node (~> 16.19.0.0)
     minitest (5.25.4)
-    mongo (2.18.1)
-      bson (>= 4.14.1, < 5.0.0)
-    mongoid (6.0.3)
-      activemodel (~> 5.0)
-      mongo (~> 2.3)
+    mongo (2.21.0)
+      bson (>= 4.14.1, < 6.0.0)
+    mongoid (8.0.2)
+      activemodel (>= 5.1, < 7.1, != 7.0.0)
+      mongo (>= 2.18.0, < 3.0.0)
+      ruby2_keywords (~> 0.0.5)
     mongoid-compatibility (0.6.0)
       activesupport
       mongoid (>= 2.0)
@@ -528,7 +529,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   mini_racer
-  mongoid (= 6.0.3)
+  mongoid
   mongoid-rspec
   omniauth
   omniauth-github
