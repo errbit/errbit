@@ -234,7 +234,7 @@ GEM
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.18.0, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
-    mongoid-compatibility (0.6.0)
+    mongoid-compatibility (1.0.0)
       activesupport
       mongoid (>= 2.0)
     mongoid-rspec (4.1.0)
