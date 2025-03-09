@@ -2,6 +2,9 @@
 
 * Remove `USER_GEMFILE` env support. From now, only `UserGemfile` is
   supported.
+* Remove `SERVE_STATIC_ASSETS` env support. Use build-in Ruby on Rails
+  `RAILS_SERVE_STATIC_FILES` env. This option is enabled on official
+  docker image.
 
 ### Upgrading errbit beyond v0.8.0
 
