@@ -1,4 +1,5 @@
 # Configuring Errbit
+
 Following the recommendation of [12factor.net](http://12factor.net/config),
 Errbit takes all of its configuration from environment variables. You can use
 [dotenv](https://github.com/bkeepers/dotenv), which is included in the Gemfile,
@@ -10,6 +11,15 @@ In order of precedence Errbit uses:
 3. Default values from .env.default
 
 ## Configuration Parameters
+
+### Build-in Ruby on Rails parameters
+
+| Environment variable       | Description                         | Default | Default in container |
+|----------------------------|-------------------------------------|---------|----------------------|
+| `RAILS_SERVE_STATIC_FILES` | Allow Rails to serve static assets. | `false` | `true`               |
+
+### Application parameters
+
 <dl>
 <dt>ERRBIT_HOST
 <dd>Hostname to use when building links back to Errbit
@@ -61,9 +71,6 @@ In order of precedence Errbit uses:
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
 <dd>Number of days to keep errors in the database when running rake errbit:clear_outdated
 <dd>defaults to nil (off)
-<dt>SERVE_STATIC_ASSETS
-<dd>Allow Rails to serve static assets. For most production environments, this should be false because your web server should be configured to serve static assets for you. But some environments like Heroku require this to be true.
-<dd>defaults to true
 <dt>SECRET_KEY_BASE
 <dd>For production environments, you should run `rake secret` to generate a secret, unique key for this parameter
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
