@@ -237,13 +237,9 @@ GEM
     mongoid-compatibility (1.0.0)
       activesupport
       mongoid (>= 2.0)
-    mongoid-rspec (4.1.0)
-      activesupport (>= 3.0.0)
-      mongoid (>= 3.1)
+    mongoid-rspec (4.2.0)
+      mongoid (>= 3.0, < 10.0)
       mongoid-compatibility (>= 0.5.1)
-      rspec-core (~> 3.3)
-      rspec-expectations (~> 3.3)
-      rspec-mocks (~> 3.3)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.4.1)
@@ -531,7 +527,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   mini_racer
-  mongoid
+  mongoid (= 8.0.2)
   mongoid-rspec
   omniauth
   omniauth-github
