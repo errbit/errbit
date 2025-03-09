@@ -154,7 +154,7 @@ describe ProblemsController, type: 'controller' do
 
     it "successfully render page" do
       get :show, params: { app_id: app.id, id: err.problem.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context "when rendering views" do
@@ -163,7 +163,7 @@ describe ProblemsController, type: 'controller' do
       it "successfully renders the view even when there are no notices attached to the problem" do
         expect(err.problem.notices).to be_empty
         get :show, params: { app_id: app.id, id: err.problem.id }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
