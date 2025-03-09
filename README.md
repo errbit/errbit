@@ -1,7 +1,5 @@
-# Errbit [![CircleCI][circleci-img-url]][circleci-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
+# Errbit [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Coveralls][coveralls-img-url]][coveralls-url] [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
 
-[circleci-img-url]: https://circleci.com/gh/errbit/errbit.svg?style=shield
-[circleci-url]: https://circleci.com/gh/errbit/errbit
 [codeclimate-img-url]: https://codeclimate.com/github/errbit/errbit.png
 [codeclimate-url]: https://codeclimate.com/github/errbit/errbit
 [coveralls-img-url]: https://coveralls.io/repos/github/errbit/errbit/badge.png?branch=main
