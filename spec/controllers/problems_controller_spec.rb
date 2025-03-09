@@ -101,7 +101,7 @@ describe ProblemsController, type: 'controller' do
 
     it "renders successfully" do
       get :search
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "renders index template" do
@@ -195,7 +195,7 @@ describe ProblemsController, type: 'controller' do
 
     it "renders without error" do
       get :xhr_sparkline, params: { app_id: app.id, id: err.problem.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
