@@ -25,7 +25,6 @@ Errbit::Config = Configurator.run(
   log_level:                 ['ERRBIT_LOG_LEVEL'],
   notice_deprecation_days:   ['ERRBIT_PROBLEM_DESTROY_AFTER_DAYS'],
 
-  serve_static_assets:       ['SERVE_STATIC_ASSETS'],
   secret_key_base:           ['SECRET_KEY_BASE'],
   mongo_url:                 %w(MONGODB_URI MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL),
 

@@ -321,13 +321,11 @@ describe AppsController, type: 'controller' do
               use_site_fingerprinter:          '1'
             }
           }
-
-          @app.reload
         end
 
         it "should copy site fingerprinter into app fingerprinter" do
-          fingerprinter_attrs = @app.notice_fingerprinter.attributes.except('_id', 'source').to_h
-          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source').to_h
+          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except('_id', 'source')
+          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source')
           expect(fingerprinter_attrs).to eq(expected_attrs)
         end
       end
@@ -339,12 +337,11 @@ describe AppsController, type: 'controller' do
             notice_fingerprinter_attributes: { backtrace_lines: 42 },
             use_site_fingerprinter:          '0'
           } }
-          @app.reload
         end
 
         it "shouldn't copy site fingerprinter into app fingerprinter" do
-          fingerprinter_attrs = @app.notice_fingerprinter.attributes.except('_id', 'source').to_h
-          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source').to_h
+          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except('_id', 'source')
+          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except('_id', 'source')
           expect(fingerprinter_attrs).to_not eq(expected_attrs)
           expect(@app.notice_fingerprinter.backtrace_lines).to be 42
         end

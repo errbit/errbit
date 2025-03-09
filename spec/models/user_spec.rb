@@ -24,7 +24,7 @@ describe User do
       user2 = Fabricate.build(:user, github_login: 'nashby')
       user2.save
       expect(user2).to_not be_valid
-      expect(user2.errors[:github_login]).to include("is already taken")
+      expect(user2.errors[:github_login]).to eq(["has already been taken"])
     end
 
     it 'allows blank / null github_login' do

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.7.2'
+gem 'rails', '5.1.7'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -15,7 +15,7 @@ gem 'haml'
 gem 'htmlentities'
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '6.0.3'
+gem 'mongoid', '8.0.2'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
@@ -76,10 +76,6 @@ group :test do
   gem 'email_spec'
   gem 'timecop'
   gem 'coveralls', require: false
-end
-
-group :no_docker, :test, :development do
-  gem 'mini_racer', platform: :ruby # C Ruby (MRI) or Rubinius, but NOT Windows
 end
 
 gem 'puma'
