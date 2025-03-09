@@ -11,6 +11,6 @@ if ENV["SERVE_STATIC_ASSETS"].present?
   # Make it error in v0.11.0 release and remove in v0.12.0
   ActiveSupport::Deprecation.warn(
     "ENV['SERVE_STATIC_ASSETS'] support is removed and has no effect in Errbit v0.10.0. " \
-    "Replace it with Ruby on Rails ENV['RAILS_SERVE_STATIC_FILES']. "
+    "Replace it with build-in Ruby on Rails ENV['RAILS_SERVE_STATIC_FILES']."
   )
 end
