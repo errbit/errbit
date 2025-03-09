@@ -160,8 +160,9 @@ GEM
       railties (>= 3.2, < 9.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.3.0)
+      temple (>= 0.8.2)
+      thor
       tilt
     hashie (5.0.0)
     hoi (0.0.7)
