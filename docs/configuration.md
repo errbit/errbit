@@ -1,14 +1,15 @@
 # Configuring Errbit
 
-Following the recommendation of [12factor.net](http://12factor.net/config),
+Following the recommendation of [12factor.net](https://12factor.net/config),
 Errbit takes all of its configuration from environment variables. You can use
-[dotenv](https://github.com/bkeepers/dotenv), which is included in the Gemfile,
+[dotenv](https://github.com/bkeepers/dotenv), which is included in the `Gemfile`,
 to fill in any values that you can't or won't supply through the environment.
 
 In order of precedence Errbit uses:
+
 1. Environment variables (for example MY_VALUE=abc bundle exec puma)
-2. Values provided in a .env file
-3. Default values from .env.default
+2. Values provided in a `.env` file
+3. Default values from `.env.default`
 
 ## Configuration Parameters
 
