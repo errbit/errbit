@@ -28,7 +28,7 @@ class SiteConfig
   end
 
   def notice_fingerprinter_attributes
-    notice_fingerprinter.attributes.tap do |attrs|
+    notice_fingerprinter.attributes.dup.tap do |attrs|
       attrs.delete('_id')
       attrs[:source] = CONFIG_SOURCE_SITE
     end
