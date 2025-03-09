@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/errbit/hoptoad_notifier
-  revision: e0e37105aa2aff579d1ff80fcbd9e42add28fcdf
+  revision: 9b6a6f5017c5ca52b07b8d5c64c79b6d44c121d3
   branch: errbit
   specs:
     hoptoad_notifier (2.4.11)
