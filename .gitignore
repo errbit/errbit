@@ -8,14 +8,12 @@ config/config.yml
 config/deploy.rb
 config/deploy
 config/mongoid.yml
-config/newrelic.yml
 .rvmrc
 .idea
 *~
 *.rbc
 .DS_Store
 *.rbx
-bundle
 coverage
 *#
 .tool-versions
