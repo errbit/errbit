@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.8.1'
+gem 'rails', '6.0.6.1'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
