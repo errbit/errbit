@@ -1,4 +1,4 @@
-FROM ruby:2.7.8-alpine
+FROM ruby:3.1.6-alpine
 
 LABEL maintainer="David Papp <david@ghostmonitor.com>"
 
