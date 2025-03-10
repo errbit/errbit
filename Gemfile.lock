@@ -573,6 +573,7 @@ DEPENDENCIES
   underscore-rails
   useragent
   xmpp4r
+  zeitwerk (= 2.6.18)
 
 BUNDLED WITH
    2.4.22

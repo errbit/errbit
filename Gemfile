@@ -92,4 +92,7 @@ gem 'concurrent-ruby', '1.1.10'
 # lock i18n gem to 1.14.1
 gem 'i18n', '1.14.1'
 
+# Lock zeitwerk gem for support JRuby 9.4
+gem "zeitwerk", "2.6.18"
+
 eval_gemfile "./UserGemfile"
