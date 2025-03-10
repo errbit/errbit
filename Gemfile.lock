@@ -142,7 +142,6 @@ GEM
       octokit
     errbit_plugin (0.6.0)
     erubi (1.13.1)
-    execjs (2.10.0)
     fabrication (2.30.0)
     faraday (1.10.1)
       faraday-em_http (~> 1.0)
@@ -486,8 +485,6 @@ GEM
       sync
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
     unicode-display_width (1.6.1)
     useragent (0.16.11)
@@ -573,7 +570,6 @@ DEPENDENCIES
   selenium-webdriver
   sucker_punch
   timecop
-  uglifier
   underscore-rails
   useragent
   xmpp4r
