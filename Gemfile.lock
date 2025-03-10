@@ -69,7 +69,8 @@ GEM
     base64 (0.2.0)
     bcrypt (3.1.20)
     bcrypt (3.1.20-java)
-    bigdecimal (1.4.4)
+    bigdecimal (3.1.9)
+    bigdecimal (3.1.9-java)
     bson (5.0.2)
     bson (5.0.2-java)
     builder (3.3.0)
@@ -503,7 +504,7 @@ DEPENDENCIES
   actionmailer_inline_css
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
-  bigdecimal (~> 1.4.4)
+  bigdecimal (= 3.1.9)
   campy
   capybara
   concurrent-ruby (= 1.1.10)
