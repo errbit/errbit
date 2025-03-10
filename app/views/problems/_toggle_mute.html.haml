@@ -1,0 +1,11 @@
+- if problem.muted?
+  %span
+    = link_to("Unmute", toggle_mute_app_problem_url(app, problem), method: :put, class: "unmute")
+- else
+  %span{class: "dropdown"}
+    %a{class: "dropdown-button mute"}
+      = problem_toggle_mute(problem)
+    %ul{class: "dropdown-content"}
+      %li= link_to("1 Hour", toggle_mute_app_problem_url(app, problem, hours: 1), method: :put)
+      %li= link_to("12 Hours", toggle_mute_app_problem_url(app, problem, hours: 12), method: :put)
+      %li= link_to("48 Hours", toggle_mute_app_problem_url(app, problem, hours: 48), method: :put)
