@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.8.1'
+gem 'rails', '6.0.6.1'
 
 gem 'activemodel-serializers-xml'
 gem 'actionmailer_inline_css'
@@ -47,7 +47,7 @@ gem 'ri_cal'
 gem 'json'
 
 # For Ruby 2.7
-gem 'bigdecimal', '~> 1.4.4'
+gem 'bigdecimal', '3.1.9'
 
 gem 'pry-rails'
 
@@ -80,7 +80,6 @@ end
 
 gem 'puma'
 gem 'sass-rails'
-gem 'uglifier'
 gem 'jquery-rails'
 gem 'pjax_rails'
 gem 'underscore-rails'
