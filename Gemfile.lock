@@ -97,6 +97,8 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     coveralls (0.8.23)
@@ -224,8 +226,10 @@ GEM
     kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
-    launchy (2.5.0)
-      addressable (~> 2.7)
+    launchy (3.1.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+      logger (~> 1.6)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -627,6 +631,7 @@ CHECKSUMS
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   campy (1.0.0) sha256=fc353b535c448afad5acfc972264b609a9a461335b09cda151d3e7bbf9504ef6
   capybara (3.40.0) sha256=42dba720578ea1ca65fd7a41d163dd368502c191804558f6e0f71b391054aeef
+  childprocess (5.1.0) sha256=9a8d484be2fd4096a0e90a0cd3e449a05bc3aa33f8ac9e4d6dcef6ac1455b6ec
   coderay (1.1.3) sha256=dc530018a4684512f8f38143cd2a096c9f02a1fc2459edcfe534787a7fc77d4b
   concurrent-ruby (1.1.10) sha256=244cb1ca0d91ec2c15ca2209507c39fb163336994428e16fbd3f465c87bd8e68
   coveralls (0.8.23) sha256=ac63872cc7ace7274f26f29caf4edabba6eb0bb3970627d83a1e76478b7564d7
@@ -693,7 +698,7 @@ CHECKSUMS
   kaminari-activerecord (1.2.2) sha256=0dd3a67bab356a356f36b3b7236bcb81cef313095365befe8e98057dd2472430
   kaminari-core (1.2.2) sha256=3bd26fec7370645af40ca73b9426a448d09b8a8ba7afa9ba3c3e0d39cdbb83ff
   kaminari-mongoid (1.0.2) sha256=7d28be9a8322d82bca36e6b4983f2f91e1149eee84755b52ce26c0cd0f040ebc
-  launchy (2.5.0) sha256=954243c4255920982ce682f89a42e76372dba94770bf09c23a523e204bdebef5
+  launchy (3.1.1) sha256=72b847b5cc961589dde2c395af0108c86ff0119f42d4648d25b5440ebb10059e
   listen (3.0.8) sha256=91845635a094f81de2af4ec334340dd8458d9b86486471c2dc9747e7173c1ed0
   logger (1.6.6) sha256=dd618d24e637715472732e7eed02e33cfbdf56deaad225edd0f1f89d38024017
   loofah (2.24.0) sha256=61e6a710883abb8210887f3dc868cf3ed66594c509d9ff6987621efa6651ee1e
