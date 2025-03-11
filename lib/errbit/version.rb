@@ -20,7 +20,13 @@ module Errbit
       source_version = ENV['SOURCE_VERSION']
       source_version[0...8] if source_version.present?
     end
+
+    class << self
+      def to_s
+        new('0.10.0', true).full_version
+      end
+    end
   end
 
-  VERSION = Version.new('0.10.0', true).full_version
+  # VERSION = Version.new('0.10.0', true).full_version
 end

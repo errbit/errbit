@@ -1,5 +1,3 @@
-require 'recurse'
-
 class Notice
   include ActiveModel::Serializers::Xml
 
