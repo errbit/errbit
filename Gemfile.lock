@@ -571,7 +571,7 @@ DEPENDENCIES
   kaminari-mongoid
   launchy
   listen (~> 3.0.5)
-  mongoid (= 8.0.2)
+  mongoid
   mongoid-rspec
   omniauth
   omniauth-github
