@@ -46,8 +46,11 @@ gem 'httparty'
 gem 'ri_cal'
 gem 'json'
 
-# For Ruby 2.7
+# For Ruby 2.7+
 gem 'bigdecimal', '3.1.9'
+
+# Ruby 3.1 + Rails 6.1
+gem "rexml"
 
 gem 'pry-rails'
 
@@ -91,5 +94,8 @@ gem 'concurrent-ruby', '1.1.10'
 
 # lock i18n gem to 1.14.1
 gem 'i18n', '1.14.1'
+
+# Lock zeitwerk gem for support JRuby 9.4
+gem "zeitwerk", "2.6.18"
 
 eval_gemfile "./UserGemfile"
