@@ -565,7 +565,6 @@ DEPENDENCIES
   hoptoad_notifier!
   htmlentities
   httparty
-  i18n (= 1.14.1)
   jquery-rails
   json
   kaminari
