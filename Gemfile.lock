@@ -167,10 +167,17 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.17.1)
+    ffi (1.17.1-aarch64-linux-gnu)
+    ffi (1.17.1-aarch64-linux-musl)
+    ffi (1.17.1-arm-linux-gnu)
+    ffi (1.17.1-arm-linux-musl)
     ffi (1.17.1-arm64-darwin)
     ffi (1.17.1-java)
+    ffi (1.17.1-x86-linux-gnu)
+    ffi (1.17.1-x86-linux-musl)
     ffi (1.17.1-x86_64-darwin)
     ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1-x86_64-linux-musl)
     font-awesome-rails (4.7.0.9)
       railties (>= 3.2, < 9.0)
     globalid (1.1.0)
@@ -271,6 +278,14 @@ GEM
     nokogiri (1.18.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.18.3-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.3-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.3-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.3-arm-linux-musl)
+      racc (~> 1.4)
     nokogiri (1.18.3-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.3-java)
@@ -278,6 +293,8 @@ GEM
     nokogiri (1.18.3-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.3-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.3-x86_64-linux-musl)
       racc (~> 1.4)
     oauth2 (1.4.10)
       faraday (>= 0.17.3, < 3.0)
@@ -506,14 +523,19 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
-  arm64-darwin-20
-  arm64-darwin-21
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
   java
   ruby
-  x86_64-darwin-18
-  x86_64-darwin-19
-  x86_64-darwin-20
+  x86-linux-gnu
+  x86-linux-musl
+  x86_64-darwin
   x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   actionmailer_inline_css
