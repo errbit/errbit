@@ -1,0 +1,2 @@
+module Errbit
+end
