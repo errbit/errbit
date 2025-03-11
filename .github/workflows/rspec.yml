@@ -23,8 +23,8 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          rubygems: "3.4.22"
-          bundler: "2.4.22"
+          rubygems: "latest"
+          bundler: "latest"
           bundler-cache: true
 
       - name: Start MongoDB
