@@ -27,6 +27,4 @@ module Errbit
       end
     end
   end
-
-  # VERSION = Version.new('0.10.0', true).full_version
 end
