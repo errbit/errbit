@@ -581,6 +581,7 @@ DEPENDENCIES
   rails (= 6.0.6.1)
   rails-controller-testing
   rake
+  rexml
   ri_cal
   rinku
   rspec
