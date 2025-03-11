@@ -15,9 +15,6 @@ Mongoid.configure do |config|
       default: {
         uri: uri
       }
-    },
-    options: {
-      use_activesupport_time_zone: true
     }
   )
 end
