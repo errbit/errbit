@@ -70,7 +70,7 @@ describe BacktraceLineDecorator, type: :decorator do
     it "adds a link to the source file" do
       link = backtrace_line_in_app.link_to_source_file(app) { "mytext" }
       expect(link).to eq(
-        '<a target="_blank" href="https://github.com/foo/bar/blob/master/pat' \
+        '<a target="_blank" href="https://github.com/foo/bar/blob/main/pat' \
         'h/to/file/ea315ea4.rb#L884">mytext</a>'
       )
     end

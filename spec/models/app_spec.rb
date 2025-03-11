@@ -102,7 +102,7 @@ describe App, type: "model" do
   context "#github_url_to_file" do
     it "resolves to full path to file" do
       app = Fabricate(:app, github_repo: "errbit/errbit")
-      expect(app.github_url_to_file("path/to/file")).to eq "https://github.com/errbit/errbit/blob/master/path/to/file"
+      expect(app.github_url_to_file("path/to/file")).to eq "https://github.com/errbit/errbit/blob/main/path/to/file"
     end
   end
 
