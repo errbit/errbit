@@ -1,4 +1,4 @@
-# describe Errbit::VERSION do
+describe Errbit::Version do
 #   let(:version) { '0.0.0' }
 #
 #   context "release version" do
@@ -31,4 +31,4 @@
 #       expect(subject).to end_with('dev-abcd1234')
 #     end
 #   end
-# end
+end
