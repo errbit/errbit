@@ -212,8 +212,8 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (2.10.1)
-    json (2.10.1-java)
+    json (2.10.2)
+    json (2.10.2-java)
     jwt (2.5.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
@@ -692,8 +692,8 @@ CHECKSUMS
   jaro_winkler (1.5.6) sha256=007db7805527ada1cc12f2547676181d63b0a504ec4dd7a9a2eb2424521ccd81
   jaro_winkler (1.5.6-java) sha256=3262aea433861fec3179184e9adc1933cca8bc15665957a143b56816f1a22f74
   jquery-rails (4.6.0) sha256=3c4e6bf47274340b44d836b8aa1b5472c6d451e2739af5ec094421f39025a7e2
-  json (2.10.1) sha256=ddc88ad91a1baf3f0038c174f253af3b086d30dc74db17ca4259bbde982f94dc
-  json (2.10.1-java) sha256=de07233fb74113af2186eb9342f8207c9be0faf289a1e2623c9b0acb8b0b0ee1
+  json (2.10.2) sha256=34e0eada93022b2a0a3345bb0b5efddb6e9ff5be7c48e409cfb54ff8a36a8b06
+  json (2.10.2-java) sha256=fe31faac61ea21ea1448c35450183f84e85c2b94cc6522c241959ba9d1362006
   jwt (2.5.0) sha256=b835fe55287572e1f65128d6c12d3ff7402bb4652c4565bf3ecdcb974db7954d
   kaminari (1.2.2) sha256=c4076ff9adccc6109408333f87b5c4abbda5e39dc464bd4c66d06d9f73442a3e
   kaminari-actionview (1.2.2) sha256=1330f6fc8b59a4a4ef6a549ff8a224797289ebf7a3a503e8c1652535287cc909
