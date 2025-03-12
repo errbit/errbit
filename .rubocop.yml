@@ -1,3 +1,10 @@
+plugins:
+  - rubocop-capybara
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
 AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
