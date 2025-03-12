@@ -612,6 +612,7 @@ DEPENDENCIES
   rspec
   rspec-activemodel-mocks
   rspec-rails
+  rubocop
   rushover
   sass-rails
   selenium-webdriver
