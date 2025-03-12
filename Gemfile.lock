@@ -622,6 +622,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails
   rubocop
+  rubocop-performance
   rubocop-rails
   rubocop-rake
   rushover
