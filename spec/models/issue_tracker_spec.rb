@@ -10,7 +10,7 @@ describe IssueTracker, type: "model" do
 
   describe "#tracker" do
     context "with type_tracker class not exist" do
-      let(:app)  { Fabricate(:app) }
+      let(:app) { Fabricate(:app) }
 
       it "return NoneIssueTracker" do
         issue_tracker = IssueTracker.new(type_tracker: "Foo", app: app)

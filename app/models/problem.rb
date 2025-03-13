@@ -28,8 +28,8 @@ class Problem
   field :error_class
   field :where
   field :user_agents, type: Hash, default: {}
-  field :messages,    type: Hash, default: {}
-  field :hosts,       type: Hash, default: {}
+  field :messages, type: Hash, default: {}
+  field :hosts, type: Hash, default: {}
   field :comments_count, type: Integer, default: 0
 
   index app_id: 1
@@ -290,11 +290,11 @@ class Problem
 
   def self.ordered_by(sort, order)
     case sort
-    when "app"            then order_by(["app_name", order])
-    when "environment"    then order_by(["environment", order])
-    when "message"        then order_by(["message", order])
+    when "app" then order_by(["app_name", order])
+    when "environment" then order_by(["environment", order])
+    when "message" then order_by(["message", order])
     when "last_notice_at" then order_by(["last_notice_at", order])
-    when "count"          then order_by(["notices_count", order])
+    when "count" then order_by(["notices_count", order])
     else fail("\"#{sort}\" is not a recognized sort")
     end
   end
