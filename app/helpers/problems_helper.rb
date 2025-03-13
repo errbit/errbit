@@ -5,20 +5,20 @@ module ProblemsHelper
 
   def auto_link_format(body)
     sanitize(
-      Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe, # rubocop:disable Rails/OutputSafety
+      Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe,
       tags: ["a", "p"],
       attributes: ["href", "target"]
     )
   end
 
   def gravatar_tag(email, options = {})
-    return nil unless email.present?
+    return unless email.present?
 
     image_tag gravatar_url(email, options), alt: email, class: "gravatar"
   end
 
   def gravatar_url(email, options = {})
-    return nil unless email.present?
+    return unless email.present?
 
     default_options = {
       d: Errbit::Config.gravatar_default
