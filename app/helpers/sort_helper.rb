@@ -1,4 +1,3 @@
-# encoding: utf-8
 module SortHelper
   def link_for_sort(name, field = nil)
     field ||= name.underscore
