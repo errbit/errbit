@@ -161,3 +161,83 @@ Style/TernaryParentheses:
 # Enforced by standard. Disable.
 Lint/ConstantDefinitionInBlock:
   Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineHashBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/UselessTimes:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineArrayBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/ConditionalAssignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ArrayAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/AssignmentIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/ItAssignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/EachWithObject:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantLineContinuation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SlicingWithRange:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/MultilineIfModifier:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantCondition:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantInterpolation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/OrAssignment:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/RegexpMatch:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/GlobalStdStream:
+  Enabled: false
