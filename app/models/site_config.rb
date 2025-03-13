@@ -28,9 +28,7 @@ class SiteConfig
   end
 
   def notice_fingerprinter_attributes
-    # WHY: something, notice_fingerprinter is frozen.
-    notice_fingerprinter.attributes.dup.tap do |attrs|
-      attrs.delete("_id")
+    notice_fingerprinter.attributes.except("_id").tap do |attrs|
       attrs[:source] = CONFIG_SOURCE_SITE
     end
   end
