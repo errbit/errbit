@@ -288,7 +288,8 @@ describe ProblemsController, type: "controller" do
 
         it "should render whatever the issue tracker says" do
           allow_any_instance_of(Issue).to receive(:render_body_args).and_return(
-            [{inline: "one <%= problem.id %> two"}])
+            [{inline: "one <%= problem.id %> two"}]
+)
           post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
           line = issue_tracker.tracker.output.shift
           expect(line[1]).to eq("one #{problem.id} two")

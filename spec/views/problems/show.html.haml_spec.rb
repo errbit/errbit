@@ -56,7 +56,8 @@ describe "problems/show.html.haml", type: "view" do
       IssueTracker.new(type_tracker: tracker, options: {
         api_token: "token token token",
         project_id: "1234"
-      }))
+      })
+)
   end
 
   describe "content_for :action_bar" do

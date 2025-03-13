@@ -3,7 +3,9 @@ module Hoptoad
     def self.process_notice(parsed)
       for_errbit_api(
         normalize(
-          rekey(parsed)))
+          rekey(parsed)
+)
+)
     end
 
     private

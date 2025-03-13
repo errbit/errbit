@@ -3,19 +3,22 @@ describe BacktraceLineDecorator, type: :decorator do
     described_class.new(
       number: 884,
       file: "/path/to/file/ea315ea4.rb",
-      method: :instance_eval)
+      method: :instance_eval
+)
   end
   let(:backtrace_line_in_app) do
     described_class.new(
       number: 884,
       file: "[PROJECT_ROOT]/path/to/file/ea315ea4.rb",
-      method: :instance_eval)
+      method: :instance_eval
+)
   end
   let(:backtrace_line_in_app_slashes) do
     described_class.new(
       number: 884,
       file: "/PROJECT_ROOT/path/to/file/ea315ea4.rb",
-      method: :instance_eval)
+      method: :instance_eval
+)
   end
   let(:backtrace_line_no_file) do
     described_class.new(number: 884, method: :instance_eval)
@@ -68,7 +71,8 @@ describe BacktraceLineDecorator, type: :decorator do
       link = backtrace_line_in_app.link_to_source_file(app) { "mytext" }
       expect(link).to eq(
         '<a target="_blank" href="https://github.com/foo/bar/blob/master/pat' \
-        'h/to/file/ea315ea4.rb#L884">mytext</a>')
+        'h/to/file/ea315ea4.rb#L884">mytext</a>'
+)
     end
   end
 end
