@@ -68,7 +68,7 @@ class Problem
   # infrequently searches happen
   scope :search, lambda { |value|
     notice = Notice.where(id: value).first
-    notice ? where(id: notice.err.problem_id) : where("$text" => { "$search" => value })
+    notice ? where(id: notice.err.problem_id) : where("$text" => {"$search" => value})
   }
 
   def self.all_else_unresolved(fetch_all)
@@ -171,8 +171,8 @@ class Problem
 
       # find only notices related to this problem
       Notice.collection.find.aggregate([
-        { "$match" => { err_id: { "$in" => err_ids } } },
-        { "$group" => { _id: "$#{v}", count: { "$sum" => 1 } } }
+        {"$match" => {err_id: {"$in" => err_ids}}},
+        {"$group" => {_id: "$#{v}", count: {"$sum" => 1}}}
       ]).each do |agg|
         send(k)[Digest::MD5.hexdigest(agg[:_id] || "N/A")] = {
           "value" => agg[:_id] || "N/A",
@@ -228,7 +228,7 @@ class Problem
   end
 
   def unmerge!
-    attrs = { error_class: error_class, environment: environment }
+    attrs = {error_class: error_class, environment: environment}
     problem_errs = errs.to_a
 
     # associate and return all the problems
@@ -248,18 +248,18 @@ class Problem
   def grouped_notice_counts(since, group_by = "day")
     key_op = [["year", "$year"], ["day", "$dayOfYear"], ["hour", "$hour"]]
     key_op = key_op.take(1 + key_op.find_index { |key, _op| group_by == key })
-    project_date_fields = Hash[*key_op.collect { |key, op| [key, { op => "$created_at" }] }.flatten]
+    project_date_fields = Hash[*key_op.collect { |key, op| [key, {op => "$created_at"}] }.flatten]
     group_id_fields = Hash[*key_op.collect { |key, _op| [key, "$#{key}"] }.flatten]
     pipeline = [
       {
         "$match" => {
-          "err_id"     => { "$in" => errs.map(&:id) },
-          "created_at" => { "$gt" => since }
+          "err_id"     => {"$in" => errs.map(&:id)},
+          "created_at" => {"$gt" => since}
         }
       },
-      { "$project" => project_date_fields },
-      { "$group" => { "_id" => group_id_fields, "count" => { "$sum" => 1 } } },
-      { "$sort" => { "_id" => 1 } }
+      {"$project" => project_date_fields},
+      {"$group" => {"_id" => group_id_fields, "count" => {"$sum" => 1}}},
+      {"$sort" => {"_id" => 1}}
     ]
     Notice.collection.aggregate(pipeline).find.to_a
   end
@@ -276,7 +276,7 @@ class Problem
               else
                 0
               end
-      { bucket_time => count }
+      {bucket_time => count}
     end
   end
 

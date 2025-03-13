@@ -1,5 +1,5 @@
 describe NoticesController, type: "controller" do
-  it_requires_authentication for: { locate: :get }
+  it_requires_authentication for: {locate: :get}
 
   let(:notice) { Fabricate(:notice) }
   let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
@@ -35,7 +35,7 @@ describe NoticesController, type: "controller" do
       end
 
       it "generates a notice from xml in a data param [POST]" do
-        post :create, params: { data: xml, format: :xml }
+        post :create, params: {data: xml, format: :xml}
         expect(response).to be_successful
         # Same RegExp from Airbrake::Sender#send_to_airbrake (https://github.com/airbrake/airbrake/blob/master/lib/airbrake/sender.rb#L53)
         # Inspired by https://github.com/airbrake/airbrake/blob/master/test/sender_test.rb
@@ -44,7 +44,7 @@ describe NoticesController, type: "controller" do
       end
 
       it "generates a notice from xml [GET]" do
-        get :create, params: { data: xml, format: :xml }
+        get :create, params: {data: xml, format: :xml}
         expect(response).to be_successful
         expect(response.body).to match(%r{<id[^>]*>#{notice.id}</id>})
         expect(response.body).to match(%r{<url[^>]*>(.+)#{locate_path(notice.id)}</url>})
@@ -52,7 +52,7 @@ describe NoticesController, type: "controller" do
       context "with an invalid API_KEY" do
         let(:error_report) { double(valid?: false) }
         it "return 422" do
-          post :create, params: { format: :xml, data: xml }
+          post :create, params: {format: :xml, data: xml}
           expect(response.status).to eq 422
         end
       end
@@ -77,7 +77,7 @@ describe NoticesController, type: "controller" do
       it "should locate notice and redirect to problem" do
         problem = Fabricate(:problem, app: app, environment: "production")
         notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
-        get :locate, params: { id: notice.id }
+        get :locate, params: {id: notice.id}
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
       end
     end
@@ -93,7 +93,7 @@ describe NoticesController, type: "controller" do
       it "should locate notice and redirect to problem with notice_id" do
         problem = Fabricate(:problem, app: app, environment: "production")
         notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
-        get :show_by_id, params: { id: notice.id }
+        get :show_by_id, params: {id: notice.id}
         expect(response).to redirect_to(app_problem_path(problem.app, problem, notice_id: notice.id))
       end
     end

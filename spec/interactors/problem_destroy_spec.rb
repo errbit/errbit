@@ -30,17 +30,17 @@ describe ProblemDestroy do
       end
 
       it "delete all errs associate" do
-        expect(Err).to receive(:delete_all).with(_id: { "$in" => [err_1.id, err_2.id] })
+        expect(Err).to receive(:delete_all).with(_id: {"$in" => [err_1.id, err_2.id]})
         problem_destroy.execute
       end
 
       it "delete all comments associate" do
-        expect(Comment).to receive(:delete_all).with(_id: { "$in" => [comment_1.id, comment_2.id] })
+        expect(Comment).to receive(:delete_all).with(_id: {"$in" => [comment_1.id, comment_2.id]})
         problem_destroy.execute
       end
 
       it "delete all notice of associate to this errs" do
-        expect(Notice).to receive(:delete_all).with(err_id: { "$in" => [err_1.id, err_2.id] })
+        expect(Notice).to receive(:delete_all).with(err_id: {"$in" => [err_1.id, err_2.id]})
         problem_destroy.execute
       end
     end

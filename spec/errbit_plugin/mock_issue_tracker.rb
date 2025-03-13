@@ -10,8 +10,8 @@ module ErrbitPlugin
 
     def self.fields
       {
-        foo: { label: "foo" },
-        bar: { label: "bar" }
+        foo: {label: "foo"},
+        bar: {label: "bar"}
       }
     end
 

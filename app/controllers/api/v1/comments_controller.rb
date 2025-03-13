@@ -25,7 +25,7 @@ module Api
           render status: :created, json: comment
         else
           render(
-            body:   { errors: comment.errors.full_messages }.to_json,
+            body:   {errors: comment.errors.full_messages}.to_json,
             status: :unprocessable_entity
           )
         end

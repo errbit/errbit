@@ -40,7 +40,7 @@ class User
   before_save :ensure_authentication_token
 
   validates :name, presence: true
-  validates :github_login, uniqueness: { allow_nil: true }
+  validates :github_login, uniqueness: {allow_nil: true}
 
   if Errbit::Config.user_has_username
     field :username

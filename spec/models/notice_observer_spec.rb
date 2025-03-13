@@ -11,7 +11,7 @@ describe "Callback on Notice", type: "model" do
             "method" => "__callbacks"
           }
         ],
-        request:            { "component" => "application" },
+        request:            {"component" => "application"},
         server_environment: {
           "project-root"     => "/path/to/sample/project",
           "environment-name" => "development"
