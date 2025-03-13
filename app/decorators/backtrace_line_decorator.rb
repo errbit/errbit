@@ -32,7 +32,7 @@ class BacktraceLineDecorator < Draper::Decorator
 
   def to_s
     column = object.try(:[], :column)
-    "#{file_relative}:#{number}#{column.present? ? ":#{column}" : ''}"
+    "#{file_relative}:#{number}#{column.present? ? ":#{column}" : ""}"
   end
 
   def link_to_source_file(app, &block)

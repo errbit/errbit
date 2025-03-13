@@ -120,6 +120,10 @@ Style/EachWithObject:
 Style/GlobalStdStream:
   Enabled: false
 
+# Enforced by standard. Disable.
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
 # Standard rules. Layout:
 
 # Enforced by standard. Disable.
