@@ -9,7 +9,7 @@ class SiteConfigController < ApplicationController
     SiteConfig.document.
       update(notice_fingerprinter: filtered_update_params.to_h)
 
-    flash[:success] = 'Updated site config'
+    flash[:success] = "Updated site config"
 
     redirect_to action: :index
   end

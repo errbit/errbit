@@ -14,7 +14,7 @@ module ProblemsSearcher
       if %w(asc desc).member?(params[:order])
         params[:order]
       else
-        'desc'
+        "desc"
       end
     end
 

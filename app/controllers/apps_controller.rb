@@ -54,9 +54,9 @@ class AppsController < ApplicationController
     initialize_subclassed_notification_service
 
     if app.save
-      redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.create.success') }
+      redirect_to app_url(app), flash: { success: I18n.t("controllers.apps.flash.create.success") }
     else
-      flash.now[:error] = I18n.t('controllers.apps.flash.create.error')
+      flash.now[:error] = I18n.t("controllers.apps.flash.create.error")
       render :new
     end
   end
@@ -67,9 +67,9 @@ class AppsController < ApplicationController
     app.update(app_params)
 
     if app.save
-      redirect_to app_url(app), flash: { success: I18n.t('controllers.apps.flash.update.success') }
+      redirect_to app_url(app), flash: { success: I18n.t("controllers.apps.flash.update.success") }
     else
-      flash.now[:error] = I18n.t('controllers.apps.flash.update.error')
+      flash.now[:error] = I18n.t("controllers.apps.flash.update.error")
       render :edit
     end
   end
@@ -80,9 +80,9 @@ class AppsController < ApplicationController
 
   def destroy
     if app.destroy
-      redirect_to apps_url, flash: { success: I18n.t('controllers.apps.flash.destroy.success') }
+      redirect_to apps_url, flash: { success: I18n.t("controllers.apps.flash.destroy.success") }
     else
-      flash.now[:error] = I18n.t('controllers.apps.flash.destroy.error')
+      flash.now[:error] = I18n.t("controllers.apps.flash.destroy.error")
       render :show
     end
   end
@@ -166,7 +166,7 @@ private
   end
 
   def process_fingerprinter_choice
-    if params[:app].delete(:use_site_fingerprinter) == '0'
+    if params[:app].delete(:use_site_fingerprinter) == "0"
       params[:app][:notice_fingerprinter_attributes][:source] = SiteConfig::CONFIG_SOURCE_APP
     else
       params[:app][:notice_fingerprinter_attributes] = SiteConfig.document.notice_fingerprinter_attributes

@@ -1,4 +1,4 @@
-require 'sparklines'
+require "sparklines"
 
 class ProblemsController < ApplicationController
   include ProblemsSearcher
@@ -67,12 +67,12 @@ class ProblemsController < ApplicationController
   end
 
   def xhr_sparkline
-    render partial: 'problems/sparkline', layout: false
+    render partial: "problems/sparkline", layout: false
   end
 
   def close_issue
     issue = Issue.new(problem: problem, user: current_user)
-    flash[:error] = issue.errors.full_messages.join(', ') unless issue.close
+    flash[:error] = issue.errors.full_messages.join(", ") unless issue.close
 
     redirect_to app_problem_path(app, problem)
   end
@@ -81,7 +81,7 @@ class ProblemsController < ApplicationController
     issue = Issue.new(problem: problem, user: current_user)
     issue.body = render_to_string(*issue.render_body_args)
 
-    flash[:error] = issue.errors.full_messages.join(', ') unless issue.save
+    flash[:error] = issue.errors.full_messages.join(", ") unless issue.save
 
     redirect_to app_problem_path(app, problem)
   end
@@ -95,7 +95,7 @@ class ProblemsController < ApplicationController
   def resolve
     problem.resolve!
 
-    flash[:success] = t('.the_error_has_been_resolved')
+    flash[:success] = t(".the_error_has_been_resolved")
 
     redirect_back fallback_location: root_path
   end
@@ -118,11 +118,11 @@ class ProblemsController < ApplicationController
 
   def merge_several
     if selected_problems.length < 2
-      flash[:notice] = I18n.t('controllers.problems.flash.need_two_errors_merge')
+      flash[:notice] = I18n.t("controllers.problems.flash.need_two_errors_merge")
     else
       ProblemMerge.new(selected_problems).merge
 
-      flash[:notice] = I18n.t('controllers.problems.flash.merge_several.success', nb: selected_problems.count)
+      flash[:notice] = I18n.t("controllers.problems.flash.merge_several.success", nb: selected_problems.count)
     end
 
     redirect_back fallback_location: root_path
@@ -164,7 +164,7 @@ private
   def need_selected_problem
     return if err_ids.any?
 
-    flash[:notice] = I18n.t('controllers.problems.flash.no_select_problem')
+    flash[:notice] = I18n.t("controllers.problems.flash.no_select_problem")
 
     redirect_back fallback_location: root_path
   end

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     if user.update(user_params)
-      flash[:success] = I18n.t('controllers.users.flash.update.success', name: user.name)
+      flash[:success] = I18n.t("controllers.users.flash.update.success", name: user.name)
 
       redirect_to user_path(user)
     else
@@ -37,10 +37,10 @@ class UsersController < ApplicationController
   #
   def destroy
     if user == current_user
-      flash[:error] = I18n.t('controllers.users.flash.destroy.error')
+      flash[:error] = I18n.t("controllers.users.flash.destroy.error")
     else
       UserDestroy.new(user).destroy
-      flash[:success] = I18n.t('controllers.users.flash.destroy.success', name: user.name)
+      flash[:success] = I18n.t("controllers.users.flash.destroy.success", name: user.name)
     end
     redirect_to users_path
   end
