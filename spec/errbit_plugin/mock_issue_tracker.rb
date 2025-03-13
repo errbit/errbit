@@ -1,17 +1,17 @@
 module ErrbitPlugin
   class MockIssueTracker < IssueTracker
     def self.label
-      'mock'
+      "mock"
     end
 
     def self.note
-      'A fake issue tracker to help in testing purpose'
+      "A fake issue tracker to help in testing purpose"
     end
 
     def self.fields
       {
-        foo: { label: 'foo' },
-        bar: { label: 'bar' }
+        foo: { label: "foo" },
+        bar: { label: "bar" }
       }
     end
 
@@ -28,8 +28,8 @@ module ErrbitPlugin
 
     def errors
       errors = []
-      errors << [:base, 'foo is required'] unless options[:foo]
-      errors << [:base, 'bar is required'] unless options[:bar]
+      errors << [:base, "foo is required"] unless options[:foo]
+      errors << [:base, "bar is required"] unless options[:bar]
       errors
     end
 
@@ -44,7 +44,7 @@ module ErrbitPlugin
     end
 
     def url
-      ''
+      ""
     end
 
     def comments_allowed?
