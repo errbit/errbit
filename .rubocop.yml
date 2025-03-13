@@ -10,20 +10,14 @@ AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
 
+# We use standard as a linter and formatter instead Rubocop.
+# Also, we are explicitly disable all rubocop rules what
+# already enabled in standard. And standard-performance.
+
+# Standard rules. Style:
+
 # Enforced by standard. Disable.
 Style/StringLiterals:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/HashAlignment:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/SpaceInsideStringInterpolation:
   Enabled: false
 
 # Enforced by standard. Disable.
@@ -35,67 +29,11 @@ Style/NestedParenthesizedCalls:
   Enabled: false
 
 # Enforced by standard. Disable.
-Layout/DotPosition:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/ExtraSpacing:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/ArgumentAlignment:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/ImplicitStringConcatenation:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/TripleQuotes:
-  Enabled: false
-
-# Enforced by rubocop and standard
-Security/JSONLoad:
-  Enabled: true
-
-# Enforced by standard. Disable.
 Style/RedundantRegexpArgument:
   Enabled: false
 
 # Enforced by standard. Disable.
 Style/PercentLiteralDelimiters:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/MultilineMethodCallBraceLayout:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Style/Encoding:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Style/NumericLiteralPrefix:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/AccessModifierIndentation:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Style/RedundantParentheses:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/IneffectiveAccessModifier:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/FirstHashElementIndentation:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/SymbolConversion:
   Enabled: false
 
 # Enforced by standard. Disable.
@@ -107,20 +45,16 @@ Style/SuperWithArgsParentheses:
   Enabled: false
 
 # Enforced by standard. Disable.
-Layout/IndentationWidth:
+Style/Encoding:
   Enabled: false
 
 # Enforced by standard. Disable.
-Style/SafeNavigation:
+Style/NumericLiteralPrefix:
   Enabled: false
 
 # Enforced by standard. Disable.
-Layout/ElseAlignment:
+Style/RedundantParentheses:
   Enabled: false
-
-# Enforced by rubocop and standard
-Lint/CopDirectiveSyntax:
-  Enabled: true
 
 # Enforced by standard. Disable.
 Style/EmptyMethod:
@@ -131,23 +65,11 @@ Style/SingleLineMethods:
   Enabled: false
 
 # Enforced by standard. Disable.
-Layout/EndAlignment:
+Style/SafeNavigation:
   Enabled: false
 
 # Enforced by standard. Disable.
 Style/RescueStandardError:
-  Enabled: false
-
-# Enforced by standard-performance. Disable.
-Performance/Detect:
-  Enabled: false
-
-# Enforced by standard-performance. Disable.
-Performance/StringIdentifierArgument:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/DuplicateMethods:
   Enabled: false
 
 # Enforced by standard. Disable.
@@ -156,58 +78,6 @@ Style/RedundantSelf:
 
 # Enforced by standard. Disable.
 Style/TernaryParentheses:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/ConstantDefinitionInBlock:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/MultilineHashBraceLayout:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/EmptyLineBetweenDefs:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Lint/UselessTimes:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/MultilineArrayBraceLayout:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Style/ConditionalAssignment:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/EmptyLineAfterMagicComment:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/SpaceAroundOperators:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/ArrayAlignment:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/AssignmentIndentation:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Style/ItAssignment:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Style/EachWithObject:
-  Enabled: false
-
-# Enforced by standard. Disable.
-Layout/ClosingParenthesisIndentation:
   Enabled: false
 
 # Enforced by standard. Disable.
@@ -234,10 +104,155 @@ Style/RedundantInterpolation:
 Style/OrAssignment:
   Enabled: false
 
-# Enforced by standard-performance. Disable.
-Performance/RegexpMatch:
+# Enforced by standard. Disable.
+Style/ConditionalAssignment:
   Enabled: false
+
+# Enforced by standard. Disable.
+Style/ItAssignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/EachWithObject:
+  Enabled: false
+
 
 # Enforced by standard. Disable.
 Style/GlobalStdStream:
   Enabled: false
+
+# Standard rules. Layout:
+
+# Enforced by standard. Disable.
+Layout/HashAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/DotPosition:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ExtraSpacing:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ArgumentAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/AccessModifierIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/IndentationWidth:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ElseAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EndAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineHashBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineArrayBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ArrayAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/AssignmentIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+# Standard rules. Lint:
+
+# Enforced by standard. Disable.
+Lint/ImplicitStringConcatenation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/TripleQuotes:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/SymbolConversion:
+  Enabled: false
+
+# Enforced by rubocop and standard
+Lint/CopDirectiveSyntax:
+  Enabled: true
+
+# Enforced by standard. Disable.
+Lint/DuplicateMethods:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/UselessTimes:
+  Enabled: false
+
+# Standard-performance rules.
+
+# Enforced by standard-performance. Disable.
+Performance/Detect:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/StringIdentifierArgument:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/RegexpMatch:
+  Enabled: false
+
+# Always enable rubocop Security:
+
+# Enforced by rubocop and standard
+Security/JSONLoad:
+  Enabled: true
