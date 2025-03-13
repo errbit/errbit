@@ -274,3 +274,7 @@ Style/SymbolArray:
 Style/WordArray:
   Enabled: true
   EnforcedStyle: brackets
+
+# Disable warnings like "Missing top-level documentation comment for"
+Style/Documentation:
+  Enabled: false
