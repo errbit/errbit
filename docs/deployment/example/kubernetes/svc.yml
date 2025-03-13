@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
       - port: 80
-        targetPort: 8080
+        targetPort: 3000
         protocol: TCP
   selector:
     name: errbit
