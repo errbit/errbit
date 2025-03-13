@@ -1,4 +1,6 @@
-describe NotificationServices::GtalkService, type: "model" do
+require "rails_helper"
+
+RSpec.describe NotificationServices::GtalkService, type: :model do
   it "it should send a notification to gtalk" do
     # setup
     notice = Fabricate :notice

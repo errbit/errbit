@@ -1,4 +1,6 @@
-describe NotificationServices::CampfireService, type: "model" do
+require "rails_helper"
+
+RSpec.describe NotificationServices::CampfireService, type: :model do
   it "it should send a notification to campfire" do
     # setup
     notice = Fabricate :notice
