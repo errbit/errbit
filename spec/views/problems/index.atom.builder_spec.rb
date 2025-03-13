@@ -4,7 +4,7 @@ describe "problems/index.atom.builder", type: "view" do
     allow(view).to receive(:problems).and_return([Problem.new(
       message: "foo",
       new_record: false, app: app
-), Problem.new(new_record: false, app: app)])
+    ), Problem.new(new_record: false, app: app)])
     render
     expect(rendered).to match("foo")
   end

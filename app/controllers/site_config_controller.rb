@@ -27,6 +27,6 @@ class SiteConfigController < ApplicationController
         :component,
         :action,
         :environment_name
-)
+      )
   end
 end

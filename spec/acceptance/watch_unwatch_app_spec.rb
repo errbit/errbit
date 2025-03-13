@@ -13,7 +13,7 @@ feature "A user can watch and unwatch an application" do
     click_on I18n.t("apps.show.unwatch")
     expect(page).to have_content(
       I18n.t("watchers.destroy.success", app: app.name)
-)
+    )
   end
 
   scenario "log in and watch a project" do
@@ -22,6 +22,6 @@ feature "A user can watch and unwatch an application" do
     click_on I18n.t("apps.show.watch")
     expect(page).to have_content(
       I18n.t("watchers.update.success", app: app.name)
-)
+    )
   end
 end
