@@ -29,3 +29,31 @@ Layout/SpaceInsideStringInterpolation:
 # Enforced by standard. Disable.
 Style/HashSyntax:
   Enabled: false
+
+# Enforced by standard. Disable.
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/DotPosition:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ExtraSpacing:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ArgumentAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/ImplicitStringConcatenation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/TripleQuotes:
+  Enabled: false
+
+# Enforced by rubocop and standard
+Security/JSONLoad:
+  Enabled: true
