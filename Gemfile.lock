@@ -149,7 +149,7 @@ GEM
     errbit_plugin (0.6.0)
     erubi (1.13.1)
     fabrication (2.31.0)
-    faraday (1.10.1)
+    faraday (1.10.4)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -698,7 +698,7 @@ CHECKSUMS
   errbit_plugin (0.6.0) sha256=ec4a7567333e3771802805e6c8e901fdfdbb9d576bbcc2af91573694cea89b15
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (2.31.0) sha256=2c79f10d1b88034a2ebd47ce77acba66847fc4636581c8282b3408adc68e85aa
-  faraday (1.10.1) sha256=38e5d43359ad0e8579af549fcc6083c03ffbeb0dd6fd78dee359263fde2cfc0c
+  faraday (1.10.4) sha256=a384c541cde688d68bf85055723aecb4100c3fa41b53beb2011b245960ab2f19
   faraday-em_http (1.0.0) sha256=7a3d4c7079789121054f57e08cd4ef7e40ad1549b63101f38c7093a9d6c59689
   faraday-em_synchrony (1.0.0) sha256=460dad1c30cc692d6e77d4c391ccadb4eca4854b315632cd7e560f74275cf9ed
   faraday-excon (1.1.0) sha256=b055c842376734d7f74350fe8611542ae2000c5387348d9ba9708109d6e40940
