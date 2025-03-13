@@ -58,8 +58,8 @@ class Configurator
       @overrides[key] = values.pop if values.last.is_a? Proc
       env_name = values.find { |v| ENV[v] }
       @storage[key] = if env_name
-                        ENV[env_name].empty? ? "" : YAML.parse(ENV[env_name]).to_ruby
-                      end
+        ENV[env_name].empty? ? "" : YAML.parse(ENV[env_name]).to_ruby
+      end
     end
   end
 
