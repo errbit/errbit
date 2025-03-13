@@ -255,3 +255,8 @@ Performance/RegexpMatch:
 # Enforced by rubocop and standard
 Security/JSONLoad:
   Enabled: true
+
+# Our rubocop rules
+
+Bundler/OrderedGems:
+  Enabled: false
