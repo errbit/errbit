@@ -28,7 +28,7 @@ class Api::V3::NoticesController < ApplicationController
 
     report.generate_notice!
     render status: :created, json: {
-      id:  report.notice.id,
+      id: report.notice.id,
       url: report.problem.url
     }
   rescue AirbrakeApi::ParamsError

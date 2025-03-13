@@ -3,27 +3,27 @@ class NotificationServices::GtalkService < NotificationService
   FIELDS += [
     [:subdomain, {
       placeholder: "username@example.com",
-      label:       "Username"
+      label: "Username"
     }],
     [:api_token, {
       placeholder: "password",
-      label:       "Password"
+      label: "Password"
     }],
     [:user_id, {
       placeholder: "touser@example.com, anotheruser@example.com",
-      label:       "Send To User(s)"
+      label: "Send To User(s)"
     }, :room_id],
     [:room_id, {
       placeholder: "toroom@conference.example.com",
-      label:       "Send To Room (one only)"
+      label: "Send To Room (one only)"
     }, :user_id],
     [:service, {
       placeholder: "talk.google.com",
-      label:       "Jabber Service"
+      label: "Jabber Service"
     }],
     [:service_url, {
       placeholder: "http://www.google.com/talk/",
-      label:       "Link To Jabber Service"
+      label: "Link To Jabber Service"
     }]
   ]
 

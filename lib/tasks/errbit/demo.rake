@@ -10,22 +10,22 @@ namespace :errbit do
 
     errors = [{
       error_class: "ArgumentError",
-      message:     "wrong number of arguments (3 for 0)"
+      message: "wrong number of arguments (3 for 0)"
     }, {
       error_class: "RuntimeError",
-      message:     "Could not find Red October"
+      message: "Could not find Red October"
     }, {
       error_class: "TypeError",
-      message:     "can't convert Symbol into Integer"
+      message: "can't convert Symbol into Integer"
     }, {
       error_class: "ActiveRecord::RecordNotFound",
-      message:     "could not find a record with the id 5"
+      message: "could not find a record with the id 5"
     }, {
       error_class: "NameError",
-      message:     "uninitialized constant Tag"
+      message: "uninitialized constant Tag"
     }, {
       error_class: "SyntaxError",
-      message:     "unexpected tSTRING_BEG, expecting keyword_do or '{' or '('"
+      message: "unexpected tSTRING_BEG, expecting keyword_do or '{' or '('"
     }]
 
     RANDOM_METHODS = ActiveSupport.methods.shuffle[1..8]
@@ -35,7 +35,7 @@ namespace :errbit do
       99.times do |t|
         backtrace << {
           "number" => t.hash % 1000,
-          "file"   => "/path/to/file.rb",
+          "file" => "/path/to/file.rb",
           "method" => RANDOM_METHODS.sample.to_s
         }
       end
@@ -46,22 +46,22 @@ namespace :errbit do
       rand(34).times do
         ErrorReport.new(
           error_template.reverse_merge(
-            api_key:            app.api_key,
-            error_class:        "StandardError",
-            message:            "Oops. Something went wrong!",
-            backtrace:          random_backtrace,
-            request:            {
+            api_key: app.api_key,
+            error_class: "StandardError",
+            message: "Oops. Something went wrong!",
+            backtrace: random_backtrace,
+            request: {
               "component" => "main",
-              "action"    => "error",
-              "url"       => "http://example.com/post/#{[111, 222, 333].sample}"
+              "action" => "error",
+              "url" => "http://example.com/post/#{[111, 222, 333].sample}"
             },
             server_environment: {"environment-name" => Rails.env.to_s},
-            notifier:           {name: "seeds.rb"},
-            app_user:           {
-              id:       "1234",
+            notifier: {name: "seeds.rb"},
+            app_user: {
+              id: "1234",
               username: "jsmith",
-              name:     "John Smith",
-              url:      "http://www.example.com/users/jsmith"
+              name: "John Smith",
+              url: "http://www.example.com/users/jsmith"
             }
           )
         ).generate_notice!

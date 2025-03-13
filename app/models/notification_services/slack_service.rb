@@ -4,12 +4,12 @@ class NotificationServices::SlackService < NotificationService
   FIELDS += [
     [:service_url, {
       placeholder: "Slack Hook URL (https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX)",
-      label:       "Hook URL"
+      label: "Hook URL"
     }],
     [:room_id, {
       placeholder: "#general",
-      label:       "Notification channel",
-      hint:        "If empty Errbit will use the default channel for the webook"
+      label: "Notification channel",
+      hint: "If empty Errbit will use the default channel for the webook"
     }]
   ]
 
@@ -31,18 +31,18 @@ class NotificationServices::SlackService < NotificationService
 
   def post_payload(problem)
     {
-      username:    "Errbit",
-      icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
-      channel:     room_id,
+      username: "Errbit",
+      icon_url: "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+      channel: room_id,
       attachments: [
         {
-          fallback:   message_for_slack(problem),
-          title:      problem.message.to_s.truncate(100),
+          fallback: message_for_slack(problem),
+          title: problem.message.to_s.truncate(100),
           title_link: problem.url,
-          text:       problem.where,
-          color:      "#D00000",
-          mrkdwn_in:  ["fields"],
-          fields:     post_payload_fields(problem)
+          text: problem.where,
+          color: "#D00000",
+          mrkdwn_in: ["fields"],
+          fields: post_payload_fields(problem)
         }
       ]
     }.compact.to_json # compact to remove empty channel in case it wasn't selected by user
@@ -51,7 +51,7 @@ class NotificationServices::SlackService < NotificationService
   def create_notification(problem)
     HTTParty.post(
       service_url,
-      body:    post_payload(problem),
+      body: post_payload(problem),
       headers: {
         "Content-Type" => "application/json"
       }
@@ -69,10 +69,10 @@ class NotificationServices::SlackService < NotificationService
       {title: "Application", value: problem.app.name, short: true},
       {title: "Environment", value: problem.environment, short: true},
       {title: "Times Occurred", value: problem.notices_count.try(:to_s),
-        short: true},
+       short: true},
       {title: "First Noticed",
-        value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
-        short: true},
+       value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
+       short: true},
       {title: "Backtrace", value: backtrace_lines(problem), short: false}
     ]
   end

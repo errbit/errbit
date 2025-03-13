@@ -4,8 +4,8 @@ class HealthController < ActionController::Base
       @impatient_mongoid_client ||= Mongo::Client.new(
         Errbit::Config.mongo_url,
         server_selection_timeout: 0.5,
-        connect_timeout:          0.5,
-        socket_timeout:           0.5
+        connect_timeout: 0.5,
+        socket_timeout: 0.5
       )
     end
 

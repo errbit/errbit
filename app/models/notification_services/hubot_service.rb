@@ -3,11 +3,11 @@ class NotificationServices::HubotService < NotificationService
   FIELDS += [
     [:api_token, {
       placeholder: "http://hubot.example.org:8080/hubot/say",
-      label:       "Hubot URL"
+      label: "Hubot URL"
     }],
     [:room_id, {
       placeholder: "#dev",
-      label:       "Room where Hubot should notify"
+      label: "Room where Hubot should notify"
     }]
   ]
 
