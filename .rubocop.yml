@@ -121,3 +121,11 @@ Layout/ElseAlignment:
 # Enforced by rubocop and standard
 Lint/CopDirectiveSyntax:
   Enabled: true
+
+# Enforced by standard. Disable.
+Style/EmptyMethod:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SingleLineMethods:
+  Enabled: false
