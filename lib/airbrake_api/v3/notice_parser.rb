@@ -11,14 +11,14 @@ module AirbrakeApi
 
       def attributes
         {
-          error_class:        error["type"],
-          message:            error["message"],
-          backtrace:          backtrace,
-          request:            request,
+          error_class: error["type"],
+          message: error["message"],
+          backtrace: backtrace,
+          request: request,
           server_environment: server_environment,
-          api_key:            params["key"].present? ? params["key"] : params["project_id"],
-          notifier:           context["notifier"] || params["notifier"],
-          user_attributes:    user_attributes
+          api_key: params["key"].present? ? params["key"] : params["project_id"],
+          notifier: context["notifier"] || params["notifier"],
+          user_attributes: user_attributes
         }
       end
 
@@ -37,7 +37,7 @@ module AirbrakeApi
         (error["backtrace"] || []).map do |backtrace_line|
           {
             method: backtrace_line["function"],
-            file:   backtrace_line["file"],
+            file: backtrace_line["file"],
             number: backtrace_line["line"],
             column: backtrace_line["column"]
           }
@@ -47,9 +47,9 @@ module AirbrakeApi
       def server_environment
         {
           "environment-name" => context["environment"],
-          "hostname"         => hostname,
-          "project-root"     => context["rootDirectory"],
-          "app-version"      => context["version"]
+          "hostname" => hostname,
+          "project-root" => context["rootDirectory"],
+          "app-version" => context["version"]
         }
       end
 
@@ -59,12 +59,12 @@ module AirbrakeApi
         )
 
         {
-          "cgi-data"  => environment,
-          "session"   => params["session"],
-          "params"    => params["params"],
-          "url"       => url,
+          "cgi-data" => environment,
+          "session" => params["session"],
+          "params" => params["params"],
+          "url" => url,
           "component" => context["component"],
-          "action"    => context["action"]
+          "action" => context["action"]
         }
       end
 
@@ -73,9 +73,9 @@ module AirbrakeApi
         return user.is_a?(Hash) ? user : {user: user} if user
 
         {
-          "id"       => context["userId"],
-          "name"     => context["userName"],
-          "email"    => context["userEmail"],
+          "id" => context["userId"],
+          "name" => context["userName"],
+          "email" => context["userEmail"],
           "username" => context["userUsername"]
         }.compact
       end
