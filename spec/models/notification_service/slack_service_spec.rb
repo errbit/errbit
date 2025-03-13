@@ -86,8 +86,8 @@ describe NotificationServices::SlackService, type: "model" do
       service.service_url = ""
       service.valid?
 
-      expect(service.errors[:service_url]).
-        to include("You must specify your Slack Hook url")
+      expect(service.errors[:service_url])
+        .to include("You must specify your Slack Hook url")
 
       service.service_url = service_url
       service.valid?
@@ -99,8 +99,8 @@ describe NotificationServices::SlackService, type: "model" do
       service.room_id = "INVALID NAME"
       service.valid?
 
-      expect(service.errors[:room_id]).
-        to include("Slack channel name must be lowercase, with no space, special character, or periods.")
+      expect(service.errors[:room_id])
+        .to include("Slack channel name must be lowercase, with no space, special character, or periods.")
 
       service.room_id = "#valid-room-name"
       service.valid?
@@ -113,9 +113,9 @@ describe NotificationServices::SlackService, type: "model" do
     it "should send a notification to Slack with hook url and channel" do
       payload = payload_hash.to_json
 
-      expect(HTTParty).to receive(:post).
-        with(service.service_url, body: payload, headers: {"Content-Type" => "application/json"}).
-        and_return(true)
+      expect(HTTParty).to receive(:post)
+        .with(service.service_url, body: payload, headers: {"Content-Type" => "application/json"})
+        .and_return(true)
 
       service.create_notification(problem)
     end
@@ -127,9 +127,9 @@ describe NotificationServices::SlackService, type: "model" do
     it "should send a notification to Slack with hook url and without channel" do
       payload = payload_hash.except(:channel).to_json
 
-      expect(HTTParty).to receive(:post).
-        with(service.service_url, body: payload, headers: {"Content-Type" => "application/json"}).
-        and_return(true)
+      expect(HTTParty).to receive(:post)
+        .with(service.service_url, body: payload, headers: {"Content-Type" => "application/json"})
+        .and_return(true)
 
       service.create_notification(problem)
     end

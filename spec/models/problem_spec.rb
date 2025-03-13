@@ -409,8 +409,8 @@ describe Problem, type: "model" do
       expect do
         @err.notices.first.destroy
         @problem.reload
-      end.to change(@problem, :user_agents).
-        from(
+      end.to change(@problem, :user_agents)
+        .from(
           Digest::MD5.hexdigest("Chrome 10.0.648.204 (OS X 10.6.7)") => {
             "value" => "Chrome 10.0.648.204 (OS X 10.6.7)", "count" => 1}
         ).to({})

@@ -35,12 +35,12 @@ class ProblemsController < ApplicationController
   # it would be possible to add a really fancy UI for it at some point, but for now, it's really
   # useful if there are noisy apps that you want to ignore.
   expose(:problems) do
-    finder = Problem.
-      for_apps(app_scope).
-      in_env(params_environement).
-      filtered(filter).
-      all_else_unresolved(all_errs).
-      ordered_by(params_sort, params_order)
+    finder = Problem
+      .for_apps(app_scope)
+      .in_env(params_environement)
+      .filtered(filter)
+      .all_else_unresolved(all_errs)
+      .ordered_by(params_sort, params_order)
 
     finder = finder.search(params[:search]) if params[:search].present?
     finder.page(params[:page]).per(current_user.per_page)
@@ -53,8 +53,8 @@ class ProblemsController < ApplicationController
       if params[:notice_id]
         Notice.find(params[:notice_id])
       else
-        @notices = problem.object.notices.reverse_ordered.
-          page(params[:notice]).per(1)
+        @notices = problem.object.notices.reverse_ordered
+          .page(params[:notice]).per(1)
         @notices.first
       end
     @notice = notice ? NoticeDecorator.new(notice) : nil
