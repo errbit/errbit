@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   end
 
-private
+  private
 
   def require_user_edit_priviledges
     can_edit = current_user == user || current_user.admin?

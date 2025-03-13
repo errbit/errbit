@@ -31,7 +31,7 @@ module AppsHelper
     @any_issue_trackers
   end
 
-private
+  private
 
   def detect_any_apps_with_attributes
     @any_github_repos = @any_issue_trackers = @any_bitbucket_repos = @any_notification_services = false

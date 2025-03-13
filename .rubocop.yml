@@ -116,7 +116,6 @@ Style/ItAssignment:
 Style/EachWithObject:
   Enabled: false
 
-
 # Enforced by standard. Disable.
 Style/GlobalStdStream:
   Enabled: false

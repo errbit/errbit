@@ -34,7 +34,7 @@ class HealthController < ActionController::Base
     render json: { ok: is_good_result }, status: response_status
   end
 
-private
+  private
 
   delegate :impatient_mongoid_client, :clear_mongoid_client_cache, to: :class
 

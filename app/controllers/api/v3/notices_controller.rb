@@ -35,7 +35,7 @@ class Api::V3::NoticesController < ApplicationController
     render body: "Invalid request", status: :bad_request
   end
 
-private
+  private
 
   def authorization_token
     request.headers["Authorization"].to_s[/Bearer (.+)/, 1]

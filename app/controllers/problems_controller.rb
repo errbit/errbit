@@ -159,7 +159,7 @@ class ProblemsController < ApplicationController
     end
   end
 
-private
+  private
 
   def need_selected_problem
     return if err_ids.any?

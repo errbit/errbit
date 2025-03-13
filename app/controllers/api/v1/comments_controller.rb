@@ -31,7 +31,7 @@ module Api
         end
       end
 
-    private
+      private
 
       def comment_params
         # merge makes a copy, merge! edits in place

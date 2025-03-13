@@ -15,7 +15,7 @@ class OutdatedProblemClearer
     end
   end
 
-private
+  private
 
   def nb_problem_outdated
     @count ||= criteria.count
