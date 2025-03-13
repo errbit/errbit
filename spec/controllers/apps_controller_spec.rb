@@ -124,7 +124,7 @@ describe AppsController, type: "controller" do
 
       context "with environment filters" do
         before(:each) do
-          environments = ['production', 'test', 'development', 'staging']
+          environments = ["production", "test", "development", "staging"]
           20.times do |i|
             Fabricate(:problem, app: app, environment: environments[i % environments.length])
           end

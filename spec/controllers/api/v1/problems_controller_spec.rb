@@ -38,17 +38,17 @@ describe Api::V1::ProblemsController, type: "controller" do
         returned_problem = JSON.parse(response.body)
 
         expect(returned_problem.keys).to match_array([
-          'app_name',
-          'first_notice_at',
-          'message',
-          'app_id',
-          'last_notice_at',
-          '_id',
-          'resolved',
-          'resolved_at',
-          'where',
-          'notices_count',
-          'environment'])
+          "app_name",
+          "first_notice_at",
+          "message",
+          "app_id",
+          "last_notice_at",
+          "_id",
+          "resolved",
+          "resolved_at",
+          "where",
+          "notices_count",
+          "environment"])
       end
 
       it "returns a 404 if the problem cannot be found" do

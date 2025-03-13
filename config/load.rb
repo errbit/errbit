@@ -26,7 +26,7 @@ Errbit::Config = Configurator.run(
   notice_deprecation_days: ["ERRBIT_PROBLEM_DESTROY_AFTER_DAYS"],
 
   secret_key_base: ["SECRET_KEY_BASE"],
-  mongo_url: ['MONGODB_URI', 'MONGOLAB_URI', 'MONGOHQ_URL', 'MONGODB_URL', 'MONGO_URL'],
+  mongo_url: ["MONGODB_URI", "MONGOLAB_URI", "MONGOHQ_URL", "MONGODB_URL", "MONGO_URL"],
 
   # github
   github_url: ["GITHUB_URL", lambda do |values|
@@ -58,8 +58,8 @@ Errbit::Config = Configurator.run(
   smtp_authentication: ["SMTP_AUTHENTICATION"],
   smtp_enable_starttls_auto: ["SMTP_ENABLE_STARTTLS_AUTO"],
   smtp_openssl_verify_mode: ["SMTP_OPENSSL_VERIFY_MODE"],
-  smtp_user_name: ['SMTP_USERNAME', 'SENDGRID_USERNAME'],
-  smtp_password: ['SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
+  smtp_user_name: ["SMTP_USERNAME", "SENDGRID_USERNAME"],
+  smtp_password: ["SMTP_PASSWORD", "SENDGRID_PASSWORD"],
   smtp_domain: ["SMTP_DOMAIN", "SENDGRID_DOMAIN", lambda do |values|
     values[:smtp_domain] ||
     (values[:email_from] && values[:email_from].split("@").last) || nil
