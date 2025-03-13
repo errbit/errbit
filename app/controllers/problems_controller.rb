@@ -46,7 +46,8 @@ class ProblemsController < ApplicationController
     finder.page(params[:page]).per(current_user.per_page)
   end
 
-  def index; end
+  def index
+  end
 
   def show
     notice =

@@ -39,7 +39,8 @@ class AppsController < ApplicationController
     User.all.sort_by { |u| u.name.downcase }
   end
 
-  def index; end
+  def index
+  end
 
   def show
     app
