@@ -2,8 +2,8 @@ describe Issue, type: "model" do
   subject(:issue) { Issue.new(problem: problem, user: user, body: body) }
 
   let(:problem) { notice.problem }
-  let(:notice)  { Fabricate(:notice) }
-  let(:user)    { Fabricate(:admin) }
+  let(:notice) { Fabricate(:notice) }
+  let(:user) { Fabricate(:admin) }
   let(:issue_tracker) do
     Fabricate(:issue_tracker).tap do |t|
       t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))

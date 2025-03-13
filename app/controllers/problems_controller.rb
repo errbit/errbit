@@ -57,7 +57,7 @@ class ProblemsController < ApplicationController
           page(params[:notice]).per(1)
         @notices.first
       end
-    @notice  = notice ? NoticeDecorator.new(notice) : nil
+    @notice = notice ? NoticeDecorator.new(notice) : nil
     @comment = Comment.new
   end
 

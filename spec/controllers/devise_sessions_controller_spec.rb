@@ -6,7 +6,7 @@ describe Devise::SessionsController, type: "controller" do
       @request.env["devise.mapping"] = Devise.mappings[:user]
     end
 
-    let(:app)  { Fabricate(:app) }
+    let(:app) { Fabricate(:app) }
     let(:user) { Fabricate(:user) }
 
     it "redirects to app index page if there are no apps for the user" do

@@ -49,8 +49,8 @@ module Hoptoad
       backtrace["line"] = [backtrace["line"]] unless backtrace["line"].is_a?(Array)
 
       notice["request"] ||= {}
-      notice["request"]["component"]  = "unknown" if notice["request"]["component"].blank?
-      notice["request"]["action"]     = nil       if notice["request"]["action"].blank?
+      notice["request"]["component"] = "unknown" if notice["request"]["component"].blank?
+      notice["request"]["action"] = nil if notice["request"]["action"].blank?
 
       notice
     end

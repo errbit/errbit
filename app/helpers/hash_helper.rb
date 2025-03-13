@@ -5,7 +5,7 @@ module HashHelper
     tab_size = 2
     nesting += 1
 
-    pretty  = "{"
+    pretty = "{"
     sorted_keys = hash.keys.sort
     sorted_keys.each do |key|
       val = hash[key].is_a?(Hash) ? pretty_hash(hash[key], nesting) : hash[key].inspect

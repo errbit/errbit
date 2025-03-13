@@ -12,9 +12,9 @@ module NavigationHelper
   # will not even set a class attribute if nil is passed back.
   def active_if_here(matches)
     current_controller = controller.controller_name.to_sym
-    current_action     = controller.action_name.to_sym
+    current_action = controller.action_name.to_sym
 
-    sections =  case matches
+    sections = case matches
                 when Hash
                   matches
                 when Array
