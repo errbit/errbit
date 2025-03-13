@@ -78,7 +78,7 @@ class ErrorReport
   end
 
   def retrieve_problem_was_resolved
-    @problem_was_resolved = Problem.where("_id" => @error.problem_id, resolved: true).exists?
+    @problem_was_resolved = Problem.where("_id" => @error.problem_id, :resolved => true).exists?
   end
 
   # Update problem cache with information about this notice

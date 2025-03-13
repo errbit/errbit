@@ -2,7 +2,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
-  match "/notifier_api/v2/notices" => "notices#create", via: [:get, :post]
+  match "/notifier_api/v2/notices" => "notices#create", :via => [:get, :post]
   get "/locate/:id" => "notices#locate", :as => :locate
   get "/notices/:id" => "notices#show_by_id", :as => :show_notice_by_id
 
@@ -78,8 +78,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  match "/api/v3/projects/:project_id/create-notice" => "api/v3/notices#create", via: [:post]
-  match "/api/v3/projects/:project_id/notices" => "api/v3/notices#create", via: [:post, :options]
+  match "/api/v3/projects/:project_id/create-notice" => "api/v3/notices#create", :via => [:post]
+  match "/api/v3/projects/:project_id/notices" => "api/v3/notices#create", :via => [:post, :options]
 
   root to: "apps#index"
 end

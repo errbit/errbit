@@ -1,4 +1,4 @@
 atom_feed do |feed|
   feed.title("Errbit notices at #{root_url}")
-  render "problems/list", :feed => feed
+  render "problems/list", feed: feed
 end
