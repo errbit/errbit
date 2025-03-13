@@ -57,3 +57,35 @@ Lint/TripleQuotes:
 # Enforced by rubocop and standard
 Security/JSONLoad:
   Enabled: true
+
+# Enforced by standard. Disable.
+Style/RedundantRegexpArgument:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/Encoding:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/NumericLiteralPrefix:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/AccessModifierIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantParentheses:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/IneffectiveAccessModifier:
+  Enabled: false
