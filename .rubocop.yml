@@ -89,3 +89,35 @@ Style/RedundantParentheses:
 # Enforced by standard. Disable.
 Lint/IneffectiveAccessModifier:
   Enabled: false
+
+# Enforced by standard. Disable.
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/SymbolConversion:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantBegin:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SuperWithArgsParentheses:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/IndentationWidth:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SafeNavigation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ElseAlignment:
+  Enabled: false
+
+# Enforced by rubocop and standard
+Lint/CopDirectiveSyntax:
+  Enabled: true
