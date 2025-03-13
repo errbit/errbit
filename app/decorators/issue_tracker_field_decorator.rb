@@ -20,6 +20,6 @@ class IssueTrackerFieldDecorator < Draper::Decorator
   private
 
   def input_field
-    object == :password ? :password_field : :text_field
+    (object == :password) ? :password_field : :text_field
   end
 end

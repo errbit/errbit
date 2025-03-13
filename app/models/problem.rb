@@ -144,7 +144,7 @@ class Problem
         "last_notice_at" => last_notice.created_at,
         "message" => last_notice.message,
         "where" => last_notice.where,
-        "notices_count" => notices_count.to_i > 1 ? notices_count - 1 : 0
+        "notices_count" => (notices_count.to_i > 1) ? notices_count - 1 : 0
       )
 
       CACHED_NOTICE_ATTRIBUTES.each do |k, v|
@@ -265,9 +265,9 @@ class Problem
 
   def zero_filled_grouped_noticed_counts(since, group_by = "day")
     non_zero_filled = grouped_notice_counts(since, group_by)
-    buckets = group_by == "day" ? 14 : 24
+    buckets = (group_by == "day") ? 14 : 24
 
-    ruby_time_method = group_by == "day" ? :yday : :hour
+    ruby_time_method = (group_by == "day") ? :yday : :hour
     bucket_times = Array.new(buckets) { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
     bucket_times.to_a.map do |bucket_time|
       count = if (data_for_day = non_zero_filled.detect { |item| item.dig("_id", group_by) == bucket_time })
