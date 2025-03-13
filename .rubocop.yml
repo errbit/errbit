@@ -133,3 +133,31 @@ Style/SingleLineMethods:
 # Enforced by standard. Disable.
 Layout/EndAlignment:
   Enabled: false
+
+# Enforced by standard. Disable.
+Style/RescueStandardError:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/Detect:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/StringIdentifierArgument:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/DuplicateMethods:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantSelf:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/TernaryParentheses:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
