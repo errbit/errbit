@@ -85,7 +85,8 @@ describe AirbrakeApi::V3::NoticeParser do
     parser = described_class.new(
       "errors" => ["MyError"],
       "notifier" => notifier_params,
-      "environment" => {})
+      "environment" => {}
+)
     expect(parser.attributes[:notifier]).to eq(notifier_params)
   end
 
@@ -93,7 +94,8 @@ describe AirbrakeApi::V3::NoticeParser do
     parser = described_class.new(
       "errors" => ["MyError"],
       "context" => {"notifier" => notifier_params},
-      "environment" => {})
+      "environment" => {}
+)
     expect(parser.attributes[:notifier]).to eq(notifier_params)
   end
 
@@ -101,7 +103,8 @@ describe AirbrakeApi::V3::NoticeParser do
     parser = described_class.new(
       "errors" => ["MyError"],
       "context" => {"hostname" => "app01.infra.example.com", "url" => "http://example.com/some-page"},
-      "environment" => {})
+      "environment" => {}
+)
     expect(parser.attributes[:server_environment]["hostname"]).to eq("app01.infra.example.com")
   end
 

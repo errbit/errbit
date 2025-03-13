@@ -4,7 +4,8 @@ describe UserDestroy do
       :app,
       watchers: [
         Fabricate.build(:user_watcher, user: user)
-      ])
+      ]
+)
   end
 
   describe "#destroy" do

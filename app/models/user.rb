@@ -62,8 +62,7 @@ class User
       user = User.create(name: data["name"],
         email: data["email"],
         google_uid: access_token.uid,
-        password: Devise.friendly_token[0, 20]
-      )
+        password: Devise.friendly_token[0, 20])
     end
     user
   end
