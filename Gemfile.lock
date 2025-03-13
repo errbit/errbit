@@ -105,12 +105,6 @@ GEM
       logger (~> 1.5)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
-    coveralls (0.8.23)
-      json (>= 1.8, < 3)
-      simplecov (~> 0.16.1)
-      term-ansicolor (~> 1.3)
-      thor (>= 0.19.4, < 2.0)
-      tins (~> 1.6)
     crass (1.0.6)
     css_parser (1.21.1)
       addressable
@@ -126,7 +120,6 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.6.0)
-    docile (1.4.1)
     domain_name (0.6.20240107)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
@@ -506,11 +499,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    simplecov (0.16.1)
-      docile (~> 1.1)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
     spoon (0.0.6)
       ffi
     sprockets (4.2.1)
@@ -534,17 +522,11 @@ GEM
       rubocop-performance (~> 1.24.0)
     sucker_punch (3.2.0)
       concurrent-ruby (~> 1.0)
-    sync (0.5.0)
     temple (0.10.3)
-    term-ansicolor (1.11.2)
-      tins (~> 1.0)
     thor (1.3.2)
     tilt (2.6.0)
     timecop (0.9.10)
     timeout (0.4.3)
-    tins (1.38.0)
-      bigdecimal
-      sync
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     underscore-rails (1.8.3)
@@ -590,7 +572,6 @@ DEPENDENCIES
   campy
   capybara
   concurrent-ruby (= 1.1.10)
-  coveralls
   decent_exposure
   devise
   dotenv-rails
@@ -679,7 +660,6 @@ CHECKSUMS
   childprocess (5.1.0) sha256=9a8d484be2fd4096a0e90a0cd3e449a05bc3aa33f8ac9e4d6dcef6ac1455b6ec
   coderay (1.1.3) sha256=dc530018a4684512f8f38143cd2a096c9f02a1fc2459edcfe534787a7fc77d4b
   concurrent-ruby (1.1.10) sha256=244cb1ca0d91ec2c15ca2209507c39fb163336994428e16fbd3f465c87bd8e68
-  coveralls (0.8.23) sha256=ac63872cc7ace7274f26f29caf4edabba6eb0bb3970627d83a1e76478b7564d7
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   css_parser (1.21.1) sha256=6cfd3ffc0a97333b39d2b1b49c95397b05e0e3b684d68f77ec471ba4ec2ef7c7
   csv (3.3.2) sha256=6ff0c135e65e485d1864dde6c1703b60d34cc9e19bed8452834a0b28a519bd4e
@@ -688,7 +668,6 @@ CHECKSUMS
   decent_exposure (3.0.4) sha256=5ce9e3df24f8d77f094b2e612d1c43a78a2de879847ccbb57c0e596e6c303cf1
   devise (4.9.4) sha256=920042fe5e704c548aa4eb65ebdd65980b83ffae67feb32c697206bfd975a7f8
   diff-lcs (1.6.0) sha256=a1e7f7b272962f8fc769358ad00001b87cdcf32ba349d6c70c6b544613d2da2e
-  docile (1.4.1) sha256=96159be799bfa73cdb721b840e9802126e4e03dfc26863db73647204c727f21e
   domain_name (0.6.20240107) sha256=5f693b2215708476517479bf2b3802e49068ad82167bcd2286f899536a17d933
   dotenv (2.8.1) sha256=c5944793349ae03c432e1780a2ca929d60b88c7d14d52d630db0508c3a8a17d8
   dotenv-rails (2.8.1) sha256=b05b81b7f4e51d1359e218d92279db1d84b12440f7118c9df19b5dfffb620f6c
@@ -845,8 +824,6 @@ CHECKSUMS
   sassc-rails (2.1.2) sha256=5f4fdf3881fc9bdc8e856ffbd9850d70a2878866feae8114aa45996179952db5
   sawyer (0.8.2) sha256=9f0d3988956cb22667f393a764f17b3b3649eb187b5e25f34005ea3b34642d7b
   selenium-webdriver (4.29.1) sha256=0a7fe53cc4d2c515adbb89e115c6e786c64e9b98f85939d21071c6e32883a146
-  simplecov (0.16.1) sha256=8724f0911bbb2b7a3c11155e6d57987cad311f9e5ce7b305b1e2e67fdc73dee9
-  simplecov-html (0.10.2) sha256=f65306e2695913c007ddc8d31d6318f37ae074f2ee1cea1647b3bf4c94ca30d2
   spoon (0.0.6) sha256=3ad18e28f6d36f7379c3085b2e96b6160f1ef55397ca1ed0d39b26fc5bbab3f4
   sprockets (4.2.1) sha256=951b13dd2f2fcae840a7184722689a803e0ff9d2702d902bd844b196da773f97
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
@@ -854,14 +831,11 @@ CHECKSUMS
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.7.0) sha256=c46a9aef3348c0cfc03053ed9a1c1f73b967f7e4edcdf30dac0101b143897314
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
-  sync (0.5.0) sha256=668356cc07c59ac7ed9ecf34fec3929831f179c07adb1f3e1c3b7a1609a638fd
   temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b
-  term-ansicolor (1.11.2) sha256=4b00c63f21d496055045240907da30de077e8c6502b2ba7e8638509d689e5083
   thor (1.3.2) sha256=eef0293b9e24158ccad7ab383ae83534b7ad4ed99c09f96f1a6b036550abbeda
   tilt (2.6.0) sha256=263d748466e0d83e510aa1a2e2281eff547937f0ef06be33d3632721e255f76b
   timecop (0.9.10) sha256=12ba45ce57cdcf6b1043cb6cdffa6381fd89ce10d369c28a7f6f04dc1b0cd8eb
   timeout (0.4.3) sha256=9509f079b2b55fe4236d79633bd75e34c1c1e7e3fb4b56cb5fda61f80a0fe30e
-  tins (1.38.0) sha256=99acd138b73d5b1b2dd8e72f1707ac0905c8f63f729ddd7c746d2d3c3803886d
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
   unicode-display_width (3.1.4) sha256=8caf2af1c0f2f07ec89ef9e18c7d88c2790e217c482bfc78aaa65eadd5415ac1
