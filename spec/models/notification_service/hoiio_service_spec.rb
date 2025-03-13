@@ -1,4 +1,4 @@
-describe NotificationServices::HoiioService, type: 'model' do
+describe NotificationServices::HoiioService, type: "model" do
   it "it should send a notification to hoiio" do
     # setup
     notice = Fabricate :notice
@@ -6,7 +6,7 @@ describe NotificationServices::HoiioService, type: 'model' do
     problem = notice.problem
 
     # hoi stubbing
-    sms = double('HoiioService')
+    sms = double("HoiioService")
     allow(Hoi::SMS).to receive(:new).and_return(sms)
     allow(sms).to receive(:send).and_return(true)
 
