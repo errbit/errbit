@@ -4,12 +4,10 @@ class Api::V1::ProblemsController < ApplicationController
 
   def show
     result = benchmark("[api/v1/problems_controller/show] query time") do
-      begin
-        Problem.only(FIELDS).find(params[:id])
-      rescue Mongoid::Errors::DocumentNotFound
-        head :not_found
-        return false
-      end
+      Problem.only(FIELDS).find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      head :not_found
+      return false
     end
 
     respond_to do |format|

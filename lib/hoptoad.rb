@@ -3,7 +3,7 @@ require "hoptoad/v2"
 module Hoptoad
   class ApiVersionError < StandardError
     def initialize
-      super "Wrong API Version: Expecting 2.0, 2.1, 2.2, 2.3 or 2.4"
+      super("Wrong API Version: Expecting 2.0, 2.1, 2.2, 2.3 or 2.4")
     end
   end
 

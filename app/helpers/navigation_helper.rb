@@ -15,15 +15,15 @@ module NavigationHelper
     current_action = controller.action_name.to_sym
 
     sections = case matches
-                when Hash
-                  matches
-                when Array
-                  s = {}
-                  matches.each { |c| s[c] = :all }
-                  s
-                else
-                  {matches => :all}
-                end
+    when Hash
+      matches
+    when Array
+      s = {}
+      matches.each { |c| s[c] = :all }
+      s
+    else
+      {matches => :all}
+    end
 
     active = nil
     sections.each do |controller, actions|
