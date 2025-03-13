@@ -9,13 +9,13 @@ describe UserDestroy do
 
   describe "#destroy" do
     let!(:user) { Fabricate(:user) }
-    it 'should delete user' do
+    it "should delete user" do
       expect do
         UserDestroy.new(user).destroy
       end.to change(User, :count)
     end
 
-    it 'should delete watcher' do
+    it "should delete watcher" do
       expect do
         UserDestroy.new(user).destroy
       end.to change {
