@@ -6,7 +6,7 @@ describe "Notices management", type: "request" do
       let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
       it "save a new notice" do
         expect do
-          post "/notifier_api/v2/notices", params: { data: xml }
+          post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
         end.to change {
           errbit_app.problems.count
@@ -18,7 +18,7 @@ describe "Notices management", type: "request" do
       let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice_without_line_of_backtrace.xml").read }
       it "save a new notice" do
         expect do
-          post "/notifier_api/v2/notices", params: { data: xml }
+          post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
         end.to change {
           errbit_app.problems.count
@@ -31,7 +31,7 @@ describe "Notices management", type: "request" do
       let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
       it "not save a new notice and return 422" do
         expect do
-          post "/notifier_api/v2/notices", params: { data: xml }
+          post "/notifier_api/v2/notices", params: {data: xml}
           expect(response.status).to eq 422
           expect(response.body).to eq "Your API key is unknown"
         end.to_not change(errbit_app.problems, :count)
@@ -42,7 +42,7 @@ describe "Notices management", type: "request" do
       let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
       it "save a new notice" do
         expect do
-          get "/notifier_api/v2/notices", params: { data: xml }
+          get "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
         end.to change {
           errbit_app.problems.count

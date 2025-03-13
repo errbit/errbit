@@ -20,18 +20,18 @@ class HealthController < ActionController::Base
       check[:ok]
     end
     response_status = all_ok ? :ok : :internal_server_error
-    render json: { ok: all_ok, details: check_results }, status: response_status
+    render json: {ok: all_ok, details: check_results}, status: response_status
   end
 
   def liveness
-    render json: { ok: true }, status: :ok
+    render json: {ok: true}, status: :ok
   end
 
   def api_key_tester
     app = App.where(api_key: params[:api_key]).first
     is_good_result = app ? true : false
     response_status = is_good_result ? :ok : :forbidden
-    render json: { ok: is_good_result }, status: response_status
+    render json: {ok: is_good_result}, status: response_status
   end
 
   private
@@ -46,10 +46,10 @@ class HealthController < ActionController::Base
     # collections might be empty which is ok but it will raise an exception if
     # database cannot be contacted
     local_mongoid_client.collections
-    { check_name: "mongo", ok: true }
+    {check_name: "mongo", ok: true}
   rescue StandardError => e
     clear_mongoid_client_cache
-    { check_name: "mongo", ok: false, error_details: e.class.to_s }
+    {check_name: "mongo", ok: false, error_details: e.class.to_s}
   ensure
     local_mongoid_client.close
   end

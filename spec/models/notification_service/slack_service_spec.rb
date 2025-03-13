@@ -1,12 +1,12 @@
 describe NotificationServices::SlackService, type: "model" do
   let(:backtrace) do
     Fabricate :backtrace, lines: [
-      { number: 22, file: "/path/to/file/1.rb", method: "first_method" },
-      { number: 44, file: "/path/to/file/2.rb", method: "second_method" },
-      { number: 11, file: "/path/to/file/3.rb", method: "third_method" },
-      { number: 103, file: "/path/to/file/4.rb", method: "fourth_method" },
-      { number: 923, file: "/path/to/file/5.rb", method: "fifth_method" },
-      { number: 8, file: "/path/to/file/6.rb", method: "sixth_method" }
+      {number: 22, file: "/path/to/file/1.rb", method: "first_method"},
+      {number: 44, file: "/path/to/file/2.rb", method: "second_method"},
+      {number: 11, file: "/path/to/file/3.rb", method: "third_method"},
+      {number: 103, file: "/path/to/file/4.rb", method: "fourth_method"},
+      {number: 923, file: "/path/to/file/5.rb", method: "fifth_method"},
+      {number: 8, file: "/path/to/file/6.rb", method: "sixth_method"}
     ]
   end
   let(:notice) { Fabricate :notice, backtrace: backtrace }
@@ -114,7 +114,7 @@ describe NotificationServices::SlackService, type: "model" do
       payload = payload_hash.to_json
 
       expect(HTTParty).to receive(:post).
-        with(service.service_url, body: payload, headers: { "Content-Type" => "application/json" }).
+        with(service.service_url, body: payload, headers: {"Content-Type" => "application/json"}).
         and_return(true)
 
       service.create_notification(problem)
@@ -128,7 +128,7 @@ describe NotificationServices::SlackService, type: "model" do
       payload = payload_hash.except(:channel).to_json
 
       expect(HTTParty).to receive(:post).
-        with(service.service_url, body: payload, headers: { "Content-Type" => "application/json" }).
+        with(service.service_url, body: payload, headers: {"Content-Type" => "application/json"}).
         and_return(true)
 
       service.create_notification(problem)

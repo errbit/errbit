@@ -15,7 +15,7 @@ describe WatchersController, type: "controller" do
       let(:watcher) { app.watchers.first }
 
       before(:each) do
-        delete :destroy, params: { app_id: app.id, id: watcher.user.id.to_s }
+        delete :destroy, params: {app_id: app.id, id: watcher.user.id.to_s}
         problem.reload
       end
 
@@ -34,7 +34,7 @@ describe WatchersController, type: "controller" do
 
     context "successful watcher update" do
       before(:each) do
-        put :update, params: { app_id: app.id, id: user.id.to_s }
+        put :update, params: {app_id: app.id, id: user.id.to_s}
         problem.reload
       end
 

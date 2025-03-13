@@ -92,7 +92,7 @@ describe AirbrakeApi::V3::NoticeParser do
   it "takes the notifier from the context" do
     parser = described_class.new(
       "errors"      => ["MyError"],
-      "context"     => { "notifier" => notifier_params },
+      "context"     => {"notifier" => notifier_params},
       "environment" => {})
     expect(parser.attributes[:notifier]).to eq(notifier_params)
   end
@@ -100,21 +100,21 @@ describe AirbrakeApi::V3::NoticeParser do
   it "takes the hostname from the context" do
     parser = described_class.new(
       "errors"      => ["MyError"],
-      "context"     => { "hostname" => "app01.infra.example.com", "url" => "http://example.com/some-page" },
+      "context"     => {"hostname" => "app01.infra.example.com", "url" => "http://example.com/some-page"},
       "environment" => {})
     expect(parser.attributes[:server_environment]["hostname"]).to eq("app01.infra.example.com")
   end
 
   describe "#user_attributes" do
     it "returns a user context hash" do
-      user_hash = { id: 1, name: "John Doe" }
-      parser = described_class.new("context" => { "user" => user_hash })
+      user_hash = {id: 1, name: "John Doe"}
+      parser = described_class.new("context" => {"user" => user_hash})
       expect(parser.send(:user_attributes)).to eq(user_hash)
     end
 
     it "returns a hash for a user context string" do
       user_string = "[Filtered]"
-      parser = described_class.new("context" => { "user" => user_string })
+      parser = described_class.new("context" => {"user" => user_string})
       expect(parser.send(:user_attributes)).to eq(user: user_string)
     end
   end

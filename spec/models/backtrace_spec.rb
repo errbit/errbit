@@ -2,8 +2,8 @@ describe Backtrace, type: "model" do
   describe ".find_or_create" do
     let(:lines) do
       [
-        { "number" => "123", "file" => "/some/path/to.rb", "method" => "abc" },
-        { "number" => "345", "file" => "/path/to.rb", "method" => "dowhat" }
+        {"number" => "123", "file" => "/some/path/to.rb", "method" => "abc"},
+        {"number" => "345", "file" => "/path/to.rb", "method" => "dowhat"}
       ]
     end
     let(:fingerprint) { Backtrace.generate_fingerprint(lines) }

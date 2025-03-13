@@ -9,7 +9,7 @@ def it_requires_authentication(options = {})
       update:  :put,
       destroy: :delete
     },
-    params: { id: "4c6c760494df2a18cc000015" }
+    params: {id: "4c6c760494df2a18cc000015"}
   }
   options.reverse_merge!(default_options)
 
@@ -20,7 +20,7 @@ def it_requires_authentication(options = {})
 
     options[:for].each do |action, method|
       it "#{method.to_s.upcase} #{action} redirects to the sign in page" do
-        send(method, action, params: { **options[:params] })
+        send(method, action, params: {**options[:params]})
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -38,7 +38,7 @@ def it_requires_admin_privileges(options = {})
       update:  :put,
       destroy: :delete
     },
-    params: { id: "dummyid" }
+    params: {id: "dummyid"}
   }
   options.reverse_merge!(default_options)
 
@@ -50,7 +50,7 @@ def it_requires_admin_privileges(options = {})
 
     options[:for].each do |action, method|
       it "#{method.to_s.upcase} #{action} redirects to the root path" do
-        send(method, action, params: { **options[:params] })
+        send(method, action, params: {**options[:params]})
         expect(response).to redirect_to(root_path)
       end
     end

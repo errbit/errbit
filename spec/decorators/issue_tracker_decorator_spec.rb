@@ -11,8 +11,8 @@ describe IssueTrackerDecorator do
 
       def self.fields
         {
-          foo: { label: "foo" },
-          bar: { label: "bar" }
+          foo: {label: "foo"},
+          bar: {label: "bar"}
         }
       end
 

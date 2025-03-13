@@ -6,7 +6,7 @@ module AppsHelper
       class: "button copy_config")
     html << select("duplicate", "app",
       App.all.asc(:name).reject { |a| a == @app }.
-      collect { |p| [p.name, p.id] }, { include_blank: "[choose app]" },
+      collect { |p| [p.name, p.id] }, {include_blank: "[choose app]"},
       class: "choose_other_app", style: "display: none;")
     html
   end

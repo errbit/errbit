@@ -15,11 +15,11 @@ class NotificationServices::WebhookService < NotificationService
 
   def message_for_webhook(problem)
     {
-      problem: { url: problem.url }.merge!(problem.as_json)
+      problem: {url: problem.url}.merge!(problem.as_json)
     }
   end
 
   def create_notification(problem)
-    HTTParty.post(api_token, headers: { "Content-Type" => "application/json", "User-Agent" => "Errbit" }, body: message_for_webhook(problem).to_json)
+    HTTParty.post(api_token, headers: {"Content-Type" => "application/json", "User-Agent" => "Errbit"}, body: message_for_webhook(problem).to_json)
   end
 end

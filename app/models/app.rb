@@ -35,7 +35,7 @@ class App
   after_find :build_notice_fingerprinter
   after_update :store_cached_attributes_on_problems
 
-  validates :name, :api_key, presence: true, uniqueness: { allow_blank: true }
+  validates :name, :api_key, presence: true, uniqueness: {allow_blank: true}
   validates_associated :watchers
   validates_associated :notice_fingerprinter
   validate :check_issue_tracker
@@ -51,11 +51,11 @@ class App
     reject_if:     proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
   accepts_nested_attributes_for :notice_fingerprinter
 
-  index({ name: "text" }, default_language: "english")
+  index({name: "text"}, default_language: "english")
 
-  scope :search, ->(value) { where("$text" => { "$search" => value }) }
+  scope :search, ->(value) { where("$text" => {"$search" => value}) }
   scope :watched_by, lambda { |user|
-    where watchers: { "$elemMatch" => { "user_id" => user.id } }
+    where watchers: {"$elemMatch" => {"user_id" => user.id}}
   }
 
   def build_notice_fingerprinter

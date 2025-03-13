@@ -41,7 +41,7 @@ describe NoticeFingerprinter, type: "model" do
       before do
         backtrace1.lines[0] = backtrace2.lines[0]
         backtrace1.lines[1] = backtrace2.lines[1]
-        backtrace1.lines[2] = { number: 1, file: "a", method: :b }
+        backtrace1.lines[2] = {number: 1, file: "a", method: :b}
       end
 
       it "has the same fingerprint when only considering two lines" do
