@@ -176,9 +176,9 @@ describe Problem, type: "model" do
     context "searching" do
       it "finds the correct record" do
         find = Fabricate(:problem, resolved: false, error_class: "theErrorclass::other",
-                                   message: "other", where: "errorclass", environment: "development", app_name: "other")
+          message: "other", where: "errorclass", environment: "development", app_name: "other")
         dont_find = Fabricate(:problem, resolved: false, error_class: "Batman",
-                                        message: "todo", where: "classerror", environment: "development", app_name: "other")
+          message: "todo", where: "classerror", environment: "development", app_name: "other")
         expect(Problem.search("theErrorClass").unresolved).to include(find)
         expect(Problem.search("theErrorClass").unresolved).to_not include(dont_find)
       end

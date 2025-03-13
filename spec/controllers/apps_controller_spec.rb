@@ -193,7 +193,7 @@ describe AppsController, type: "controller" do
 
       it "should copy attributes from an existing app" do
         @app = Fabricate(:app, name: "do not copy",
-                               github_repo: "test/example")
+          github_repo: "test/example")
         get :new, params: {copy_attributes_from: @app.id}
         expect(controller.app).to be_a(App)
         expect(controller.app).to be_new_record
