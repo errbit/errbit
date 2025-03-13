@@ -7,9 +7,12 @@ class UsersController < ApplicationController
     User.order_by(name: :asc).page(params[:page]).per(current_user.per_page)
   end
 
-  def index; end
-  def new; end
-  def show; end
+  def index
+  end
+  def new
+  end
+  def show
+  end
 
   def create
     if user.save
