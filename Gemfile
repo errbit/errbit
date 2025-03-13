@@ -56,9 +56,14 @@ gem 'pry-rails'
 
 group :development, :test do
   gem 'airbrake', '~> 4.3.5', require: false
-  gem 'rubocop', '~> 0.71.0', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rake", require: false
+  gem "rubocop-capybara", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
+  gem "rubocop-performance", require: false
+  gem "standard", "1.47.0", require: false
 end
 
 group :development do

@@ -1,63 +1,258 @@
-require:
+plugins:
+  - rubocop-capybara
   - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-rspec_rails
   - rubocop-performance
 
-inherit_from: .rubocop_todo.yml
-
 AllCops:
-  Exclude:
-    - 'bin/*'
-    - 'vendor/**/*'
+  TargetRubyVersion: 3.1
+  NewCops: enable
 
-# Caveat: .find_by raises exception in mongoid, unlike ActiveRecord which
-# returns nil
-Rails/FindBy:
+# We use standard as a linter and formatter instead Rubocop.
+# Also, we are explicitly disable all rubocop rules what
+# already enabled in standard. And standard-performance.
+
+# Standard rules. Style:
+
+# Enforced by standard. Disable.
+Style/StringLiterals:
   Enabled: false
 
-Layout/EmptyLineBetweenDefs:
-  AllowAdjacentOneLineDefs: true
+# Enforced by standard. Disable.
+Style/HashSyntax:
+  Enabled: false
 
-Layout/ExtraSpacing:
-  AllowForAlignment: true
+# Enforced by standard. Disable.
+Style/NestedParenthesizedCalls:
+  Enabled: false
 
-Layout/IndentationConsistency:
-  # `rails` style:
-  # prescribes that in classes and modules the `protected` and `private`
-  # modifier keywords shall be indented the same as public methods and that
-  # protected and private members shall be indented one step more than the
-  # modifiers.
-  EnforcedStyle: rails
+# Enforced by standard. Disable.
+Style/RedundantRegexpArgument:
+  Enabled: false
 
-Style/GuardClause:
-  MinBodyLength: 4
+# Enforced by standard. Disable.
+Style/PercentLiteralDelimiters:
+  Enabled: false
 
-Layout/AccessModifierIndentation:
-  EnforcedStyle: outdent
+# Enforced by standard. Disable.
+Style/RedundantBegin:
+  Enabled: false
 
-Layout/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
+# Enforced by standard. Disable.
+Style/SuperWithArgsParentheses:
+  Enabled: false
 
+# Enforced by standard. Disable.
+Style/Encoding:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/NumericLiteralPrefix:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantParentheses:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/EmptyMethod:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SingleLineMethods:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SafeNavigation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RescueStandardError:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantSelf:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/TernaryParentheses:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantLineContinuation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/SlicingWithRange:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/MultilineIfModifier:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantCondition:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/RedundantInterpolation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/OrAssignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/ConditionalAssignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/ItAssignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/EachWithObject:
+  Enabled: false
+
+
+# Enforced by standard. Disable.
+Style/GlobalStdStream:
+  Enabled: false
+
+# Standard rules. Layout:
+
+# Enforced by standard. Disable.
+Layout/HashAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+
+# Enforced by standard. Disable.
 Layout/DotPosition:
-  # Support code copy/paste into console
-  EnforcedStyle: trailing
+  Enabled: false
 
-Layout/MultilineOperationIndentation:
-  EnforcedStyle: indented
+# Enforced by standard. Disable.
+Layout/ExtraSpacing:
+  Enabled: false
 
-Layout/IndentFirstHashElement:
-  EnforcedStyle: consistent
+# Enforced by standard. Disable.
+Layout/ArgumentAlignment:
+  Enabled: false
 
-Layout/AlignHash:
-  EnforcedHashRocketStyle: table
-  EnforcedColonStyle: table
+# Enforced by standard. Disable.
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
 
+# Enforced by standard. Disable.
+Layout/AccessModifierIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/IndentationWidth:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ElseAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EndAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineHashBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineArrayBraceLayout:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+# Enforced by standard. Disable.
 Layout/SpaceAroundOperators:
-  AllowForAlignment: true
+  Enabled: false
 
-# long spec blocks are probably fine
-Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context']
+# Enforced by standard. Disable.
+Layout/ArrayAlignment:
+  Enabled: false
 
-Naming/FileName:
-  Exclude:
-    - 'config/initializers/cve-*.rb'
+# Enforced by standard. Disable.
+Layout/AssignmentIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+# Standard rules. Lint:
+
+# Enforced by standard. Disable.
+Lint/ImplicitStringConcatenation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/TripleQuotes:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/SymbolConversion:
+  Enabled: false
+
+# Enforced by rubocop and standard
+Lint/CopDirectiveSyntax:
+  Enabled: true
+
+# Enforced by standard. Disable.
+Lint/DuplicateMethods:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Lint/UselessTimes:
+  Enabled: false
+
+# Standard-performance rules.
+
+# Enforced by standard-performance. Disable.
+Performance/Detect:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/StringIdentifierArgument:
+  Enabled: false
+
+# Enforced by standard-performance. Disable.
+Performance/RegexpMatch:
+  Enabled: false
+
+# Always enable rubocop Security:
+
+# Enforced by rubocop and standard
+Security/JSONLoad:
+  Enabled: true
