@@ -58,7 +58,8 @@ describe Issue, type: "model" do
 
       it "returns default args if none exist" do
         expect(issue.render_body_args).to eq [
-          "issue_trackers/issue", formats: [:md]]
+          "issue_trackers/issue", formats: [:md]
+        ]
       end
     end
 

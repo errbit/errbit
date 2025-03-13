@@ -18,14 +18,12 @@ class NotificationService
 
   validate :check_params
 
-  if Errbit::Config.per_app_notify_at_notices
-    FIELDS = [[:notify_at_notices,
-               {placeholder: "comma separated numbers or simply 0 for every notice",
-                label: "notify on errors (0 for all errors)"
-               }
-              ]]
+  FIELDS = if Errbit::Config.per_app_notify_at_notices
+    [[:notify_at_notices,
+      {placeholder: "comma separated numbers or simply 0 for every notice",
+       label: "notify on errors (0 for all errors)"}]]
   else
-    FIELDS = []
+    []
   end
 
   def notify_at_notices
