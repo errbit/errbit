@@ -1,4 +1,4 @@
-describe NotificationServices::CampfireService, type: 'model' do
+describe NotificationServices::CampfireService, type: "model" do
   it "it should send a notification to campfire" do
     # setup
     notice = Fabricate :notice
@@ -6,7 +6,7 @@ describe NotificationServices::CampfireService, type: 'model' do
     problem = notice.problem
 
     # campy stubbing
-    campy = double('CampfireService')
+    campy = double("CampfireService")
     allow(Campy::Room).to receive(:new).and_return(campy)
     allow(campy).to receive(:speak).and_return(true)
 
