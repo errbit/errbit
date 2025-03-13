@@ -2,9 +2,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   # Hoptoad Notifier Routes
-  match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
-  get '/locate/:id' => 'notices#locate', :as => :locate
-  get '/notices/:id' => 'notices#show_by_id', :as => :show_notice_by_id
+  match "/notifier_api/v2/notices" => "notices#create", via: [:get, :post]
+  get "/locate/:id" => "notices#locate", :as => :locate
+  get "/notices/:id" => "notices#show_by_id", :as => :show_notice_by_id
 
   resources :notices, only: [:show]
   resources :users do
@@ -58,19 +58,19 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  get 'problems/:id' => 'problems#show_by_id'
+  get "problems/:id" => "problems#show_by_id"
 
-  get 'health/readiness' => 'health#readiness'
-  get 'health/liveness' => 'health#liveness'
-  get 'health/api-key-tester' => 'health#api_key_tester'
+  get "health/readiness" => "health#readiness"
+  get "health/liveness" => "health#liveness"
+  get "health/api-key-tester" => "health#api_key_tester"
 
   namespace :api do
     namespace :v1 do
-      resources :problems, only: [:index, :show], defaults: { format: 'json' } do
-        resources :comments, only: [:index, :create], defaults: { format: 'json' }
+      resources :problems, only: [:index, :show], defaults: { format: "json" } do
+        resources :comments, only: [:index, :create], defaults: { format: "json" }
       end
-      resources :notices, only: [:index], defaults: { format: 'json' }
-      resources :stats, only: [], defaults: { format: 'json' } do
+      resources :notices, only: [:index], defaults: { format: "json" }
+      resources :stats, only: [], defaults: { format: "json" } do
         collection do
           get :app
         end
@@ -78,8 +78,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  match '/api/v3/projects/:project_id/create-notice' => 'api/v3/notices#create', via: [:post]
-  match '/api/v3/projects/:project_id/notices' => 'api/v3/notices#create', via: [:post, :options]
+  match "/api/v3/projects/:project_id/create-notice" => "api/v3/notices#create", via: [:post]
+  match "/api/v3/projects/:project_id/notices" => "api/v3/notices#create", via: [:post, :options]
 
-  root to: 'apps#index'
+  root to: "apps#index"
 end

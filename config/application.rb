@@ -1,9 +1,9 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
+require "action_controller/railtie"
+require "action_mailer/railtie"
 # require 'mongoid/railtie'
-require 'sprockets/railtie'
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -19,14 +19,14 @@ module Errbit
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to eager load.
-    config.eager_load_paths << Rails.root.join('lib').to_s
+    config.eager_load_paths << Rails.root.join("lib").to_s
 
     config.before_initialize do
       config.secret_key_base = Errbit::Config.secret_key_base
     end
 
-    initializer 'errbit.mongoid', before: 'mongoid.load-config' do
-      require Rails.root.join('config/mongo')
+    initializer "errbit.mongoid", before: "mongoid.load-config" do
+      require Rails.root.join("config/mongo")
     end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
@@ -49,7 +49,7 @@ module Errbit
     config.mongoid.preload_models = true
 
     # Configure Devise mailer to use our mailer layout.
-    config.to_prepare { Devise::Mailer.layout 'mailer' }
+    config.to_prepare { Devise::Mailer.layout "mailer" }
 
     config.active_job.queue_adapter = :sucker_punch
   end
