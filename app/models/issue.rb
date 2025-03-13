@@ -14,7 +14,7 @@ class Issue
     if tracker.respond_to?(:render_body_args)
       tracker.render_body_args
     else
-      ['issue_trackers/issue', formats: [:md]]
+      ["issue_trackers/issue", formats: [:md]]
     end
   end
 

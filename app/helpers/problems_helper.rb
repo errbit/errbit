@@ -1,6 +1,6 @@
 module ProblemsHelper
   def problem_confirm(action)
-    t(format('problems.confirm.%s', action)) unless Errbit::Config.confirm_err_actions.eql? false
+    t(format("problems.confirm.%s", action)) unless Errbit::Config.confirm_err_actions.eql? false
   end
 
   def auto_link_format(body)
@@ -14,7 +14,7 @@ module ProblemsHelper
   def gravatar_tag(email, options = {})
     return nil unless email.present?
 
-    image_tag gravatar_url(email, options), alt: email, class: 'gravatar'
+    image_tag gravatar_url(email, options), alt: email, class: "gravatar"
   end
 
   def gravatar_url(email, options = {})

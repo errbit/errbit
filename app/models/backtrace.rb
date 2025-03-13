@@ -14,7 +14,7 @@ class Backtrace
     fingerprint = generate_fingerprint(lines)
 
     where(fingerprint: fingerprint).find_one_and_update(
-      { '$setOnInsert' => { fingerprint: fingerprint, lines: lines } },
+      { "$setOnInsert" => { fingerprint: fingerprint, lines: lines } },
       return_document: :after, upsert: true)
   end
 

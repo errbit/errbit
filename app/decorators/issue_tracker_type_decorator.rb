@@ -16,7 +16,7 @@ class IssueTrackerTypeDecorator < Draper::Decorator
   #
   # 'chosen github' or 'bitbucket' for example
   def params_class(tracker)
-    [object.label == tracker.type_tracker ? 'chosen' : '', label].join(" ").strip
+    [object.label == tracker.type_tracker ? "chosen" : "", label].join(" ").strip
   end
 
   def note

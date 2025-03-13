@@ -1,7 +1,7 @@
 class ProblemRecacher
   LOG_EVERY = 100
-  LOG_ITR = '%.1f%% complete, %i problem(s) remaining'
-  LOG_START = 'Re-caching problem attributes for %i problems'
+  LOG_ITR = "%.1f%% complete, %i problem(s) remaining"
+  LOG_START = "Re-caching problem attributes for %i problems"
 
   def self.run
     count = Problem.count
