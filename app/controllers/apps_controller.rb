@@ -102,9 +102,9 @@ class AppsController < ApplicationController
   private
 
   def initialize_subclassed_notification_service
-    notification_type = app_params.
-      fetch(:notification_service_attributes, {}).
-      fetch(:type, nil)
+    notification_type = app_params
+      .fetch(:notification_service_attributes, {})
+      .fetch(:type, nil)
     return if notification_type.blank?
 
     # set the app's notification service
@@ -133,11 +133,11 @@ class AppsController < ApplicationController
     # Sanitize negative values, split on comma,
     # strip, parse as integer, remove all '0's.
     # If empty, set as default and show an error message.
-    email_at_notices = val.
-      gsub(/-\d+/, "").
-      split(",").
-      map { |v| v.strip.to_i }.
-      reject { |v| v == 0 }
+    email_at_notices = val
+      .gsub(/-\d+/, "")
+      .split(",")
+      .map { |v| v.strip.to_i }
+      .reject { |v| v == 0 }
 
     if email_at_notices.any?
       params[:app][:email_at_notices] = email_at_notices

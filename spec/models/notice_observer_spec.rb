@@ -48,8 +48,8 @@ describe "Callback on Notice", type: "model" do
         # set to just before the threshold
         @problem.update_attributes notices_count: threshold - 1
 
-        expect(Mailer).to receive(:err_notification).
-          and_return(double("email", deliver_now: true))
+        expect(Mailer).to receive(:err_notification)
+          .and_return(double("email", deliver_now: true))
 
         error_report = ErrorReport.new(notice_attrs)
         error_report.generate_notice!
@@ -94,8 +94,8 @@ describe "Callback on Notice", type: "model" do
       err.problem.update_attributes notices_count: 99
       err.problem.resolve!
 
-      expect(Mailer).to receive(:err_notification).
-        and_return(double("email", deliver_now: true))
+      expect(Mailer).to receive(:err_notification)
+        .and_return(double("email", deliver_now: true))
 
       ErrorReport.new(notice_attrs).generate_notice!
     end
@@ -118,10 +118,10 @@ describe "Callback on Notice", type: "model" do
     it "sends email" do
       error_report = ErrorReport.new(notice_attrs)
 
-      expect(error_report.app.notification_service).
-        to receive(:create_notification).and_raise(ArgumentError)
-      expect(Mailer).
-        to receive(:err_notification).and_return(double(deliver_now: true))
+      expect(error_report.app.notification_service)
+        .to receive(:create_notification).and_raise(ArgumentError)
+      expect(Mailer)
+        .to receive(:err_notification).and_return(double(deliver_now: true))
 
       error_report.generate_notice!
     end
@@ -155,16 +155,16 @@ describe "Callback on Notice", type: "model" do
 
     it "should create a campfire notification on first notice" do
       error_report = ErrorReport.new(notice_attrs)
-      expect(error_report.app.notification_service).
-        to receive(:create_notification)
+      expect(error_report.app.notification_service)
+        .to receive(:create_notification)
       error_report.generate_notice! # one
     end
 
     it "should create a campfire notification on second notice" do
       ErrorReport.new(notice_attrs).generate_notice! # one
       error_report = ErrorReport.new(notice_attrs)
-      expect(error_report.app.notification_service).
-        to receive(:create_notification)
+      expect(error_report.app.notification_service)
+        .to receive(:create_notification)
       error_report.generate_notice! # two
     end
 
@@ -172,8 +172,8 @@ describe "Callback on Notice", type: "model" do
       ErrorReport.new(notice_attrs).generate_notice! # one
       ErrorReport.new(notice_attrs).generate_notice! # two
       error_report = ErrorReport.new(notice_attrs)
-      expect(error_report.app.notification_service).
-        to_not receive(:create_notification)
+      expect(error_report.app.notification_service)
+        .to_not receive(:create_notification)
       error_report.generate_notice! # three
     end
 
@@ -182,8 +182,8 @@ describe "Callback on Notice", type: "model" do
       notice = ErrorReport.new(notice_attrs).generate_notice! # two
       notice.problem.resolve!
       error_report = ErrorReport.new(notice_attrs)
-      expect(error_report.app.notification_service).
-        to receive(:create_notification)
+      expect(error_report.app.notification_service)
+        .to receive(:create_notification)
       error_report.generate_notice! # three
     end
   end

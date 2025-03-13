@@ -58,8 +58,8 @@ describe IssueTrackerDecorator do
 
     it "adds chosen class if type is same" do
       expect(
-        decorator.
-          params_class(
+        decorator
+          .params_class(
             IssueTracker.new(
               type_tracker: "fake"
             ).decorate
