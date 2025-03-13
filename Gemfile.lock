@@ -206,8 +206,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    jaro_winkler (1.5.6)
-    jaro_winkler (1.5.6-java)
     jquery-rails (4.6.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -230,10 +228,12 @@ GEM
     kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
+    language_server-protocol (3.17.0.4)
     launchy (3.1.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
       logger (~> 1.6)
+    lint_roller (1.1.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -445,13 +445,19 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.2)
-    rubocop (0.71.0)
-      jaro_winkler (~> 1.5.1)
+    rubocop (1.74.0)
+      json (~> 2.3)
+      language_server-protocol (~> 3.17.0.2)
+      lint_roller (~> 1.1.0)
       parallel (~> 1.10)
-      parser (>= 2.6)
+      parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.9.3, < 3.0)
+      rubocop-ast (>= 1.38.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.7)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.38.1)
+      parser (>= 3.3.1.0)
     rubocop-performance (1.6.1)
       rubocop (>= 0.71.0)
     rubocop-rails (2.0.1)
@@ -512,7 +518,9 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     underscore-rails (1.8.3)
-    unicode-display_width (1.6.1)
+    unicode-display_width (3.1.4)
+      unicode-emoji (~> 4.0, >= 4.0.4)
+    unicode-emoji (4.0.4)
     useragent (0.16.11)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -593,7 +601,7 @@ DEPENDENCIES
   rspec
   rspec-activemodel-mocks
   rspec-rails
-  rubocop (~> 0.71.0)
+  rubocop (~> 1.74.0)
   rubocop-performance
   rubocop-rails
   rushover
@@ -689,8 +697,6 @@ CHECKSUMS
   http-cookie (1.0.8) sha256=b14fe0445cf24bf9ae098633e9b8d42e4c07c3c1f700672b09fbfe32ffd41aa6
   httparty (0.22.0) sha256=78652a5c9471cf0093d3b2083c2295c9c8f12b44c65112f1846af2b71430fa6c
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
-  jaro_winkler (1.5.6) sha256=007db7805527ada1cc12f2547676181d63b0a504ec4dd7a9a2eb2424521ccd81
-  jaro_winkler (1.5.6-java) sha256=3262aea433861fec3179184e9adc1933cca8bc15665957a143b56816f1a22f74
   jquery-rails (4.6.0) sha256=3c4e6bf47274340b44d836b8aa1b5472c6d451e2739af5ec094421f39025a7e2
   json (2.10.2) sha256=34e0eada93022b2a0a3345bb0b5efddb6e9ff5be7c48e409cfb54ff8a36a8b06
   json (2.10.2-java) sha256=fe31faac61ea21ea1448c35450183f84e85c2b94cc6522c241959ba9d1362006
@@ -700,7 +706,9 @@ CHECKSUMS
   kaminari-activerecord (1.2.2) sha256=0dd3a67bab356a356f36b3b7236bcb81cef313095365befe8e98057dd2472430
   kaminari-core (1.2.2) sha256=3bd26fec7370645af40ca73b9426a448d09b8a8ba7afa9ba3c3e0d39cdbb83ff
   kaminari-mongoid (1.0.2) sha256=7d28be9a8322d82bca36e6b4983f2f91e1149eee84755b52ce26c0cd0f040ebc
+  language_server-protocol (3.17.0.4) sha256=c484626478664fd13482d8180947c50a8590484b1258b99b7aedb3b69df89669
   launchy (3.1.1) sha256=72b847b5cc961589dde2c395af0108c86ff0119f42d4648d25b5440ebb10059e
+  lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   listen (3.0.8) sha256=91845635a094f81de2af4ec334340dd8458d9b86486471c2dc9747e7173c1ed0
   logger (1.6.6) sha256=dd618d24e637715472732e7eed02e33cfbdf56deaad225edd0f1f89d38024017
   loofah (2.24.0) sha256=61e6a710883abb8210887f3dc868cf3ed66594c509d9ff6987621efa6651ee1e
@@ -785,7 +793,8 @@ CHECKSUMS
   rspec-mocks (3.13.2) sha256=2327335def0e1665325a9b617e3af9ae20272741d80ac550336309a7c59abdef
   rspec-rails (6.1.5) sha256=d11afce893ceb6e2c3c11db280f83dee6d0120d150228cef6b989d37c7394c4b
   rspec-support (3.13.2) sha256=cea3a2463fd9b84b9dcc9685efd80ea701aa8f7b3decb3b3ce795ed67737dbec
-  rubocop (0.71.0) sha256=cb40a9fb646368c867dd3a41753169dee24aa4b819e91f0189a8b8da82cb5e56
+  rubocop (1.74.0) sha256=06138a35d7d11c963d5abc0148b355e3999007cb0225a619940db0e75521379b
+  rubocop-ast (1.38.1) sha256=80ecbe2ac9bb26693cab9405bf72b41b85a1f909f20f021b983c32c2e7d857fe
   rubocop-performance (1.6.1) sha256=e6b34bcbaa6a4b91806208a4dbebf92f30d5bd2e964b7af1e226f471938961a5
   rubocop-rails (2.0.1) sha256=5a8328cb1e16a1eb26866a146e22b90b33f2e728355de455dbaf0dc0fe71738c
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
@@ -813,7 +822,8 @@ CHECKSUMS
   tins (1.38.0) sha256=99acd138b73d5b1b2dd8e72f1707ac0905c8f63f729ddd7c746d2d3c3803886d
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
-  unicode-display_width (1.6.1) sha256=3d011d8ae44d35ddf1148bdf4de9fb4331dc53b5a39420c6336261823f65f7de
+  unicode-display_width (3.1.4) sha256=8caf2af1c0f2f07ec89ef9e18c7d88c2790e217c482bfc78aaa65eadd5415ac1
+  unicode-emoji (4.0.4) sha256=2c2c4ef7f353e5809497126285a50b23056cc6e61b64433764a35eff6c36532a
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
   warden (1.2.9) sha256=46684f885d35a69dbb883deabf85a222c8e427a957804719e143005df7a1efd0
   websocket (1.2.11) sha256=b7e7a74e2410b5e85c25858b26b3322f29161e300935f70a0e0d3c35e0462737
