@@ -1,7 +1,5 @@
 FROM ruby:3.1.6-alpine
 
-LABEL maintainer="David Papp <david@ghostmonitor.com>"
-
 ENV RUBYGEMS_VERSION=3.6.5
 ENV BUNDLER_VERSION=2.6.5
 
@@ -37,11 +35,11 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile \
   && rm -rf /app/tmp/* \
   && chmod 777 /app/tmp
 
-ENV RAILS_ENV production
+ENV RAILS_ENV=production
 
-ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_LOG_TO_STDOUT=true
 
-ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_SERVE_STATIC_FILES=true
 
 EXPOSE 8080
 
