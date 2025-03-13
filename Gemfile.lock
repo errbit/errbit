@@ -83,6 +83,7 @@ GEM
       builder
       multi_json
     ast (2.4.2)
+    attr_extras (7.1.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bcrypt (3.1.20-java)
@@ -326,11 +327,14 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
+    optimist (3.2.0)
     orm_adapter (0.5.0)
     parallel (1.26.3)
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
+    patience_diff (1.2.0)
+      optimist (~> 3.0)
     pjax_rails (0.5.1)
       jquery-rails
       railties (>= 4.0)
@@ -529,6 +533,10 @@ GEM
       rubocop-performance (~> 1.24.0)
     sucker_punch (3.2.0)
       concurrent-ruby (~> 1.0)
+    super_diff (0.15.0)
+      attr_extras (>= 6.2.4)
+      diff-lcs
+      patience_diff
     temple (0.10.3)
     thor (1.3.2)
     tilt (2.6.0)
@@ -632,6 +640,7 @@ DEPENDENCIES
   simplecov
   standard (= 1.47.0)
   sucker_punch
+  super_diff
   timecop
   underscore-rails
   useragent
@@ -655,6 +664,7 @@ CHECKSUMS
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
   airbrake (4.3.8) sha256=d06947194f5dcd7e192c28067f2c47728511d75326c17045094c3a0b84f68c2d
   ast (2.4.2) sha256=1e280232e6a33754cde542bc5ef85520b74db2aac73ec14acef453784447cc12
+  attr_extras (7.1.0) sha256=d96fc9a9dd5d85ba2d37762440a816f840093959ae26bb90da994c2d9f1fc827
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   bcrypt (3.1.20) sha256=8410f8c7b3ed54a3c00cd2456bf13917d695117f033218e2483b2e40b0784099
   bcrypt (3.1.20-java) sha256=8236dff31f6f36cffe334939e4ea59c41e1c94e2e246c01783575fa6df40373f
@@ -775,9 +785,11 @@ CHECKSUMS
   omniauth-google-oauth2 (1.0.1) sha256=2ed7a4ac8d98ab824c95e0d6760784abf1248262b3ba2ab56ec7ebd7074d12a6
   omniauth-oauth2 (1.7.3) sha256=3f5a8f99fa72e0f91d2abd7475ceb972a4ae67ed59e049f314c0c1bad81f4745
   omniauth-rails_csrf_protection (1.0.2) sha256=1170fd672aff092b9b7ebebc1453559f073ed001e3ce62a1df616e32f8dc5fe0
+  optimist (3.2.0) sha256=01c9e4826bbcae048f96ce079eef662564829016b08f1f1bdc024b0fb398771c
   orm_adapter (0.5.0) sha256=aa5d0be5d540cbb46d3a93e88061f4ece6a25f6e97d6a47122beb84fe595e9b9
   parallel (1.26.3) sha256=d86babb7a2b814be9f4b81587bf0b6ce2da7d45969fab24d8ae4bf2bb4d4c7ef
   parser (3.3.7.1) sha256=7dbe61618025519024ac72402a6677ead02099587a5538e84371b76659e6aca1
+  patience_diff (1.2.0) sha256=f492094486af02fff4a80070fa6b4d0ebbcf4d42fb38bba29d095eef43f6822c
   pjax_rails (0.5.1) sha256=3cb4b53d874de1349014aaae2cb879c8924ec86d68f3054a0d958c995b0c8ddb
   premailer (1.27.0) sha256=0fe2348cd82738855c482b31c915a06ecb1d3ad004578c19042905196ddbd1e7
   pry (0.15.2) sha256=12d54b8640d3fa29c9211dd4ffb08f3fd8bf7a4fd9b5a73ce5b59c8709385b6b
@@ -843,6 +855,7 @@ CHECKSUMS
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.7.0) sha256=c46a9aef3348c0cfc03053ed9a1c1f73b967f7e4edcdf30dac0101b143897314
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
+  super_diff (0.15.0) sha256=1c857c27ea49ed57685ce05897efc35839d169e74a30fca1a97e7a401f0cb914
   temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b
   thor (1.3.2) sha256=eef0293b9e24158ccad7ab383ae83534b7ad4ed99c09f96f1a6b036550abbeda
   tilt (2.6.0) sha256=263d748466e0d83e510aa1a2e2281eff547937f0ef06be33d3632721e255f76b

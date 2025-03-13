@@ -84,6 +84,7 @@ group :test do
   gem "email_spec"
   gem "timecop"
   gem "simplecov", require: false
+  gem "super_diff"
 end
 
 gem "puma"
