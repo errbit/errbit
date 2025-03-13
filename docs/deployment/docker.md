@@ -5,13 +5,14 @@ make Docker deployment easy. You can pass all of [Errbit's
 configuration](/docs/configuration.md) to the Docker container using
 `docker run -e`.
 
-When running Errbit using `docker run` you must specify a MONGO_URL. If you're
-running in a production environment, you should also specify
-RACK_ENV=production and SECRET_KEY_BASE=some-secret-key.
+When running Errbit using `docker run` you must specify a `MONGO_URL`. If
+you're running in a production environment, you should also specify
+`RAILS_ENV=production` and `SECRET_KEY_BASE=some-secret-key`.
 
-If you don't already have one, you can generate a suitable SECRET_KEY_BASE
+If you don't already have one, you can generate a suitable `SECRET_KEY_BASE`
 with:
-```bash
+
+```console
 docker run --rm errbit/errbit bundle exec rake secret
 ```
 
@@ -24,23 +25,24 @@ If you are interested in using official release tags of errbit, contributions to
 ## Standalone Errbit App
 
 Assuming you have a mongo host available, you can run errbit using `docker
-run`, exposing its HTTP interface on port 8080:
-```bash
+run`, exposing its HTTP interface on port 3000:
+
+```console
 docker run \
-  -e "RACK_ENV=production" \
+  -e "RAILS_ENV=production" \
   -e "MONGO_URL=mongodb://my-mongo-host" \
   -e "SECRET_KEY_BASE=my$ecre7key123" \
-  -p 8080:8080 \
+  -p 3000:3000 \
   errbit/errbit:latest
 ```
 
 Now run `bundle exec rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
 Docker container:
 
-```bash
+```console
 docker run \
   --rm \
-  -e "RACK_ENV=production" \
+  -e "RAILS_ENV=production" \
   -e "MONGO_URL=mongodb://my-mongo-host" \
   errbit/errbit:latest \
   bundle exec rake errbit:bootstrap
@@ -51,13 +53,13 @@ docker run \
 Docker compose can take care of starting up a mongo container along with the
 Errbit application container and linking the two containers together:
 
-```bash
+```console
 docker-compose up -e "SECRET_KEY_BASE=my$ecre7key123"
 ```
 
 Now run `bundle exec rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
 Docker container:
 
-```bash
+```console
 docker exec errbit_errbit_1 bundle exec rake errbit:bootstrap
 ```

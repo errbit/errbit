@@ -2,10 +2,9 @@ services:
   errbit:
     image: "errbit/errbit:latest"
     ports:
-      - "8080:8080"
+      - "3000:3000"
     environment:
-      PORT: "8080"
-      RACK_ENV: "production"
+      RAILS_ENV: "production"
       MONGO_URL: "mongodb://mongo:27017/errbit"
 
   mongo:

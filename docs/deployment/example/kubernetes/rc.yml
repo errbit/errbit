@@ -36,8 +36,8 @@ spec:
             memory: "512Mi"
             cpu: "50m"
         env:
-         - name: PORT
-           value: '3000'
+         - name: "PORT"
+           value: "3000"
          - name: MONGO_URL
            value: ''
          - name: GOOGLE_AUTHENTICATION
@@ -46,8 +46,8 @@ spec:
            value: ''
          - name: GOOGLE_SECRET
            value: ''
-         - name: RACK_ENV
-           value: production
+         - name: "RAILS_ENV"
+           value: "production"
          - name: ERRBIT_USE_GRAVATAR
            value: 'true'
          - name: GITHUB_AUTHENTICATION
