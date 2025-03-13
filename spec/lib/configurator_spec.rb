@@ -27,7 +27,7 @@ describe Configurator do
 
   it "overrides can refer to other values" do
     result = Configurator.run(one: ["VARONE", ->(values) { values[:one] }],
-                              three: ["VARTHREE"])
+      three: ["VARTHREE"])
     expect(result.one).to eq("zoom")
   end
 

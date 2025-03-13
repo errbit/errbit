@@ -6,11 +6,11 @@ class Mailer < ActionMailer::Base
   helper ApplicationHelper
 
   default :from => Errbit::Config.email_from,
-          "X-Errbit-Host" => Errbit::Config.host,
-          "X-Mailer" => "Errbit",
-          "X-Auto-Response-Suppress" => "OOF, AutoReply",
-          "Precedence" => "bulk",
-          "Auto-Submitted" => "auto-generated"
+    "X-Errbit-Host" => Errbit::Config.host,
+    "X-Mailer" => "Errbit",
+    "X-Auto-Response-Suppress" => "OOF, AutoReply",
+    "Precedence" => "bulk",
+    "Auto-Submitted" => "auto-generated"
 
   def err_notification(error_report)
     @notice = NoticeDecorator.new error_report.notice
@@ -20,11 +20,11 @@ class Mailer < ActionMailer::Base
     count = count > 1 ? "(#{count}) " : ""
 
     errbit_headers "App" => @app.name,
-                   "Environment" => @notice.environment_name,
-                   "Error-Id" => @notice.err_id
+      "Environment" => @notice.environment_name,
+      "Error-Id" => @notice.err_id
 
     mail to: @app.notification_recipients,
-         subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+      subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
   def comment_notification(comment)
@@ -37,12 +37,12 @@ class Mailer < ActionMailer::Base
     recipients = @comment.notification_recipients
 
     errbit_headers "App" => @app.name,
-                   "Environment" => @notice.environment_name,
-                   "Problem-Id" => @problem.id,
-                   "Comment-Author" => @user.name
+      "Environment" => @notice.environment_name,
+      "Problem-Id" => @problem.id,
+      "Comment-Author" => @user.name
 
     mail to: recipients,
-         subject: "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
+      subject: "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
   private
