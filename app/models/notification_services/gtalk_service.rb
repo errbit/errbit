@@ -30,8 +30,8 @@ class NotificationServices::GtalkService < NotificationService
   def check_params
     if FIELDS.detect { |f| self[f[0]].blank? && self[f[2]].blank? }
       errors.add :base,
-        """You must specify your Username, Password, service, service_url
-           and either rooms or users to send to or both"""
+        "You must specify your Username, Password, service, service_url
+           and either rooms or users to send to or both"
     end
   end
 
@@ -48,9 +48,9 @@ class NotificationServices::GtalkService < NotificationService
       client.auth(api_token)
 
       # has to look like this to be formatted properly in the client
-      message = """#{problem.app.name}\n" \
+      message = "#{problem.app.name}\n" \
         "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}\n" \
-        "#{notification_description problem}"""
+        "#{notification_description problem}"
 
       # post the issue to the xmpp room(s)
       send_to_users(client, message) unless user_id.blank?
