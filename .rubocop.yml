@@ -4,7 +4,28 @@ plugins:
   - rubocop-rake
   - rubocop-rspec
   - rubocop-rspec_rails
+  - rubocop-performance
 
 AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
+
+# Enforced by standard. Disable.
+Style/StringLiterals:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/HashAlignment:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Style/HashSyntax:
+  Enabled: false
