@@ -6,8 +6,8 @@ module ProblemsHelper
   def auto_link_format(body)
     sanitize(
       Rinku.auto_link(simple_format(body), :all, 'target="_blank"').html_safe, # rubocop:disable Rails/OutputSafety
-      tags: %w[a p],
-      attributes: %w[href target]
+      tags: ['a', 'p'],
+      attributes: ['href', 'target']
     )
   end
 

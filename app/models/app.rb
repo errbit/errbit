@@ -158,11 +158,11 @@ class App
     return if copy_app.blank?
 
     # Copy fields
-    (copy_app.fields.keys - %w(_id name created_at updated_at)).each do |k|
+    (copy_app.fields.keys - ['_id', 'name', 'created_at', 'updated_at']).each do |k|
       send("#{k}=", copy_app.send(k))
     end
     # Clone the embedded objects that can be changed via apps/edit (ignore errs, etc.)
-    %w(watchers issue_tracker notification_service).each do |relation|
+    ['watchers', 'issue_tracker', 'notification_service'].each do |relation|
       if (obj = copy_app.send(relation))
         send("#{relation}=", obj.is_a?(Array) ? obj.map(&:clone) : obj.clone)
       end

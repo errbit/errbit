@@ -264,3 +264,13 @@ Security/JSONLoad:
 
 Bundler/OrderedGems:
   Enabled: false
+
+# Don't allow %i[foo bar baz]
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+# Don't allow %w[foo bar baz]
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: brackets

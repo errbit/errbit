@@ -10,7 +10,7 @@ describe NoticeFingerprinter, type: "model" do
       expect(f1).to eq(f2)
     end
 
-    %w(error_class message component action environment_name).each do |i|
+    ['error_class', 'message', 'component', 'action', 'environment_name'].each do |i|
       it "affects the fingerprint when #{i} is false" do
         f1 = fingerprinter.generate("123", notice, backtrace)
         f2 = fingerprinter.generate("123", notice, backtrace)
