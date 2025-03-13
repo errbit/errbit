@@ -2,18 +2,18 @@ class NotificationServices::HubotService < NotificationService
   LABEL = "hubot"
   FIELDS += [
     [:api_token, {
-      placeholder: 'http://hubot.example.org:8080/hubot/say',
-      label:       'Hubot URL'
+      placeholder: "http://hubot.example.org:8080/hubot/say",
+      label:       "Hubot URL"
     }],
     [:room_id, {
-      placeholder: '#dev',
-      label:       'Room where Hubot should notify'
+      placeholder: "#dev",
+      label:       "Room where Hubot should notify"
     }]
   ]
 
   def check_params
     if FIELDS.detect { |f| self[f[0]].blank? }
-      errors.add :base, 'You must specify the URL of your hubot'
+      errors.add :base, "You must specify the URL of your hubot"
     end
   end
 
