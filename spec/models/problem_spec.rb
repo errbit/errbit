@@ -176,9 +176,9 @@ describe Problem, type: "model" do
     context "searching" do
       it "finds the correct record" do
         find = Fabricate(:problem, resolved: false, error_class: "theErrorclass::other",
-                         message: "other", where: "errorclass", environment: "development", app_name: "other")
+                                   message: "other", where: "errorclass", environment: "development", app_name: "other")
         dont_find = Fabricate(:problem, resolved: false, error_class: "Batman",
-                              message: "todo", where: "classerror", environment: "development", app_name: "other")
+                                        message: "todo", where: "classerror", environment: "development", app_name: "other")
         expect(Problem.search("theErrorClass").unresolved).to include(find)
         expect(Problem.search("theErrorClass").unresolved).to_not include(dont_find)
       end
@@ -399,7 +399,7 @@ describe Problem, type: "model" do
     it "removing a notice removes string from #user_agents" do
       Fabricate(
         :notice,
-        err:     @err,
+        err: @err,
         request: {
           "cgi-data" => {
             "HTTP_USER_AGENT" => "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16"

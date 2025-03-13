@@ -41,7 +41,7 @@ describe Mailer do
     let(:app) do
       a = notice.app
       a.update_attributes(
-        asset_host:       "http://example.com",
+        asset_host: "http://example.com",
         notify_all_users: true
       )
       a
@@ -55,8 +55,8 @@ describe Mailer do
     let(:error_report) do
       instance_double(
         "ErrorReport",
-        notice:  notice,
-        app:     app,
+        notice: notice,
+        app: app,
         problem: problem
       )
     end

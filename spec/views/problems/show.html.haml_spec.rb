@@ -33,7 +33,7 @@ describe "problems/show.html.haml", type: "view" do
   end
   let(:trackers) do
     {
-      "github"  => github_tracker,
+      "github" => github_tracker,
       "pivotal" => pivotal_tracker
     }
   end
@@ -54,7 +54,7 @@ describe "problems/show.html.haml", type: "view" do
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(trackers)
     app.issue_tracker = IssueTrackerDecorator.new(
       IssueTracker.new(type_tracker: tracker, options: {
-        api_token:  "token token token",
+        api_token: "token token token",
         project_id: "1234"
       }))
   end
