@@ -108,7 +108,7 @@ class App
   end
 
   def repo_branch
-    repository_branch.present? ? repository_branch : "master"
+    repository_branch.present? ? repository_branch : "main"
   end
 
   def github_repo?

@@ -1,6 +1,6 @@
 Fabricator(:app) do
   name { sequence(:app_name) { |n| "App ##{n}" } }
-  repository_branch "master"
+  repository_branch "main"
 end
 
 Fabricator(:app_with_watcher, from: :app) do
