@@ -1,4 +1,4 @@
-describe Issue, type: 'model' do
+describe Issue, type: "model" do
   subject(:issue) { Issue.new(problem: problem, user: user, body: body) }
 
   let(:problem) { notice.problem }
@@ -51,21 +51,21 @@ describe Issue, type: 'model' do
     context "#render_body_args" do
       it "returns custom args if they exist" do
         allow(issue.tracker).to receive(:render_body_args).and_return(
-          ['my', { custom: 'args' }]
+          ["my", { custom: "args" }]
         )
-        expect(issue.render_body_args).to eq ['my', { custom: 'args' }]
+        expect(issue.render_body_args).to eq ["my", { custom: "args" }]
       end
 
       it "returns default args if none exist" do
         expect(issue.render_body_args).to eq [
-          'issue_trackers/issue', formats: [:md]]
+          "issue_trackers/issue", formats: [:md]]
       end
     end
 
     context "#title" do
       it "returns custom title if it exists" do
-        allow(issue.tracker).to receive(:title).and_return('kustomtitle')
-        expect(issue.title).to eq('kustomtitle')
+        allow(issue.tracker).to receive(:title).and_return("kustomtitle")
+        expect(issue.title).to eq("kustomtitle")
       end
 
       it "returns default title when tracker has none" do
