@@ -83,7 +83,8 @@ group :test do
   gem "launchy"
   gem "email_spec"
   gem "timecop"
-  gem "coveralls", require: false
+  gem "simplecov", require: false
+  gem "super_diff"
 end
 
 gem "puma"
