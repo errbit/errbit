@@ -239,7 +239,7 @@ describe ProblemsController, type: "controller" do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(Fabricate :notice) }
+      let(:notice) { NoticeDecorator.new(Fabricate(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
         Fabricate(:issue_tracker).tap do |t|
@@ -283,7 +283,7 @@ describe ProblemsController, type: "controller" do
         it "should save the right body" do
           post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: "html" }
           line = issue_tracker.tracker.output.shift
-          expect(line[1]).to include(app_problem_url problem.app, problem)
+          expect(line[1]).to include(app_problem_url(problem.app, problem))
         end
 
         it "should render whatever the issue tracker says" do
@@ -309,7 +309,7 @@ describe ProblemsController, type: "controller" do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(Fabricate :notice) }
+      let(:notice) { NoticeDecorator.new(Fabricate(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
         Fabricate(:issue_tracker).tap do |t|
