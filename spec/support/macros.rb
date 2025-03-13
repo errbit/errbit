@@ -9,11 +9,11 @@ def it_requires_authentication(options = {})
       update:  :put,
       destroy: :delete
     },
-    params: { id: '4c6c760494df2a18cc000015' }
+    params: { id: "4c6c760494df2a18cc000015" }
   }
   options.reverse_merge!(default_options)
 
-  context 'when signed out' do
+  context "when signed out" do
     before do
       sign_out :user
     end
@@ -38,11 +38,11 @@ def it_requires_admin_privileges(options = {})
       update:  :put,
       destroy: :delete
     },
-    params: { id: 'dummyid' }
+    params: { id: "dummyid" }
   }
   options.reverse_merge!(default_options)
 
-  context 'when signed in as a regular user' do
+  context "when signed in as a regular user" do
     before do
       sign_out :user
       sign_in Fabricate(:user)
