@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 # Configurator maps lists of environment variables to names that you define in
 # order to provide a consistent way to use configuration throughout your
@@ -58,7 +58,7 @@ class Configurator
       @overrides[key] = values.pop if values.last.is_a? Proc
       env_name = values.find { |v| ENV[v] }
       @storage[key] = if env_name
-                        ENV[env_name].empty? ? '' : YAML.parse(ENV[env_name]).to_ruby
+                        ENV[env_name].empty? ? "" : YAML.parse(ENV[env_name]).to_ruby
                       end
     end
   end

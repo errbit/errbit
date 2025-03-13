@@ -3,13 +3,13 @@ class NotificationServices::SlackService < NotificationService
   LABEL = "slack"
   FIELDS += [
     [:service_url, {
-      placeholder: 'Slack Hook URL (https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX)',
-      label:       'Hook URL'
+      placeholder: "Slack Hook URL (https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX)",
+      label:       "Hook URL"
     }],
     [:room_id, {
-      placeholder: '#general',
-      label:       'Notification channel',
-      hint:        'If empty Errbit will use the default channel for the webook'
+      placeholder: "#general",
+      label:       "Notification channel",
+      hint:        "If empty Errbit will use the default channel for the webook"
     }]
   ]
 
@@ -53,7 +53,7 @@ class NotificationServices::SlackService < NotificationService
       service_url,
       body:    post_payload(problem),
       headers: {
-        'Content-Type' => 'application/json'
+        "Content-Type" => "application/json"
       }
     )
   end
@@ -78,7 +78,7 @@ private
   end
 
   def backtrace_line(line)
-    path = line.decorated_path.gsub(%r{</?strong>}, '')
+    path = line.decorated_path.gsub(%r{</?strong>}, "")
     "#{path}#{line.file_name}:#{line.number} → #{line.method}\n"
   end
 
@@ -88,7 +88,7 @@ private
     backtrace = notice.backtrace
     return unless backtrace
 
-    output = ''
+    output = ""
     backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
     "```#{output}```"
   end

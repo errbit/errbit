@@ -1,4 +1,4 @@
-describe Api::V1::CommentsController, type: 'controller' do
+describe Api::V1::CommentsController, type: "controller" do
   context "when logged in" do
     before do
       @user = Fabricate(:user)

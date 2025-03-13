@@ -33,7 +33,7 @@ module ApplicationHelper
 
   def tally(collection)
     collection.values.inject({}) do |tallies, tally|
-      tallies[tally['value']] = tally['count']
+      tallies[tally["value"]] = tally["count"]
       tallies
     end
   end

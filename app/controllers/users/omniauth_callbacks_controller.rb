@@ -67,7 +67,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # User must have clicked 'link account' from their user page, so redirect there.
       redirect_to user_path(current_user)
     elsif google_user
-      flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: google_site_title
+      flash[:success] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title
       sign_in_and_redirect google_user, event: :authentication
     elsif Errbit::Config.google_auto_provision
       if User.valid_google_domain?(google_email)

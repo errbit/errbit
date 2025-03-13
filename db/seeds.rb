@@ -1,21 +1,21 @@
-require 'securerandom'
+require "securerandom"
 
 puts "Seeding database"
 puts "-------------------------------"
 
 # Create an initial Admin User
-admin_username = ENV['ERRBIT_ADMIN_USER'] || "errbit"
+admin_username = ENV["ERRBIT_ADMIN_USER"] || "errbit"
 
 def admin_email
-  return 'admin@example.com' if heroku_pr_review_app?
+  return "admin@example.com" if heroku_pr_review_app?
 
-  ENV['ERRBIT_ADMIN_EMAIL'] || "errbit@#{Errbit::Config.host}"
+  ENV["ERRBIT_ADMIN_EMAIL"] || "errbit@#{Errbit::Config.host}"
 end
 
 def admin_pass
-  return 'demo-admin' if heroku_pr_review_app?
+  return "demo-admin" if heroku_pr_review_app?
 
-  @admin_pass ||= ENV['ERRBIT_ADMIN_PASSWORD'] || SecureRandom.urlsafe_base64(12)[0, 12]
+  @admin_pass ||= ENV["ERRBIT_ADMIN_PASSWORD"] || SecureRandom.urlsafe_base64(12)[0, 12]
 end
 
 def heroku_pr_review_app?
@@ -33,7 +33,7 @@ puts "\nNOTE: DEMO instance, not for production use!" if heroku_pr_review_app?
 
 user = User.find_or_initialize_by(email: admin_email)
 
-user.name = 'Errbit Admin'
+user.name = "Errbit Admin"
 user.password = admin_pass
 user.password_confirmation = admin_pass
 user.username = admin_username if Errbit::Config.user_has_username

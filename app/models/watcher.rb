@@ -14,7 +14,7 @@ class Watcher
   attr_accessor :watcher_type
 
   def watcher_type
-    @watcher_type ||= email.present? ? 'email' : 'user'
+    @watcher_type ||= email.present? ? "email" : "user"
   end
 
   def label
@@ -33,9 +33,9 @@ private
 
   def clear_unused_watcher_type
     case watcher_type
-    when 'user'
+    when "user"
       self.email = nil
-    when 'email'
+    when "email"
       self.user = self.user_id = nil
     end
   end

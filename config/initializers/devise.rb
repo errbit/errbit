@@ -26,7 +26,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/mongoid'
+  require "devise/orm/mongoid"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -257,7 +257,7 @@ Devise.setup do |config|
 
   if Errbit::Config.github_authentication || Rails.env.test?
     github_options = {
-      scope:          Errbit::Config.github_access_scope.join(','),
+      scope:          Errbit::Config.github_access_scope.join(","),
       skip_info:      true,
       client_options: {
         site:          Errbit::Config.github_api_url,

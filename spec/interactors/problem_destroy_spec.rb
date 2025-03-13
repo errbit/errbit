@@ -18,29 +18,29 @@ describe ProblemDestroy do
     let(:comment_2) { Comment.new }
 
     describe "#initialize" do
-      it 'take a problem like args' do
+      it "take a problem like args" do
         expect(problem_destroy.problem).to eq problem
       end
     end
 
     describe "#execute" do
-      it 'destroy the problem himself' do
+      it "destroy the problem himself" do
         expect(problem).to receive(:delete).and_return(true)
         problem_destroy.execute
       end
 
-      it 'delete all errs associate' do
-        expect(Err).to receive(:delete_all).with(_id: { '$in' => [err_1.id, err_2.id] })
+      it "delete all errs associate" do
+        expect(Err).to receive(:delete_all).with(_id: { "$in" => [err_1.id, err_2.id] })
         problem_destroy.execute
       end
 
-      it 'delete all comments associate' do
-        expect(Comment).to receive(:delete_all).with(_id: { '$in' => [comment_1.id, comment_2.id] })
+      it "delete all comments associate" do
+        expect(Comment).to receive(:delete_all).with(_id: { "$in" => [comment_1.id, comment_2.id] })
         problem_destroy.execute
       end
 
-      it 'delete all notice of associate to this errs' do
-        expect(Notice).to receive(:delete_all).with(err_id: { '$in' => [err_1.id, err_2.id] })
+      it "delete all notice of associate to this errs" do
+        expect(Notice).to receive(:delete_all).with(err_id: { "$in" => [err_1.id, err_2.id] })
         problem_destroy.execute
       end
     end
@@ -57,7 +57,7 @@ describe ProblemDestroy do
     let!(:notice_2_1) { Fabricate(:notice, err: err_2) }
     let!(:notice_2_2) { Fabricate(:notice, err: err_2) }
 
-    it 'should all destroy' do
+    it "should all destroy" do
       problem_destroy.execute
       expect(Problem.where(_id: problem.id).entries).to be_empty
       expect(Err.where(_id: err_1.id).entries).to be_empty

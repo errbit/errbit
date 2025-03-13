@@ -1,33 +1,33 @@
 # This file is copied to ~/spec when you run 'ruby script/generate rspec'
 # from the project root directory.
-ENV["RAILS_ENV"] = 'test'
-ENV["ERRBIT_LOG_LEVEL"] = 'fatal'
-ENV["ERRBIT_USER_HAS_USERNAME"] = 'false'
+ENV["RAILS_ENV"] = "test"
+ENV["ERRBIT_LOG_LEVEL"] = "fatal"
+ENV["ERRBIT_USER_HAS_USERNAME"] = "false"
 
-if ENV['COVERAGE']
-  require 'coveralls'
-  require 'simplecov'
-  Coveralls.wear!('rails') do
-    add_filter 'bundle'
+if ENV["COVERAGE"]
+  require "coveralls"
+  require "simplecov"
+  Coveralls.wear!("rails") do
+    add_filter "bundle"
   end
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
     Coveralls::SimpleCov::Formatter
   ])
-  SimpleCov.start('rails') do
-    add_filter 'bundle'
+  SimpleCov.start("rails") do
+    add_filter "bundle"
   end
 end
 
 require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'email_spec'
-require 'xmpp4r'
-require 'xmpp4r/muc'
-require 'mongoid-rspec'
-require 'fabrication'
-require 'sucker_punch/testing/inline'
-require 'errbit_plugin/mock_issue_tracker'
+require "rspec/rails"
+require "email_spec"
+require "xmpp4r"
+require "xmpp4r/muc"
+require "mongoid-rspec"
+require "fabrication"
+require "sucker_punch/testing/inline"
+require "errbit_plugin/mock_issue_tracker"
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.

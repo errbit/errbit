@@ -1,13 +1,13 @@
 describe ProblemsHelper do
   describe "#auto_link_format" do
-    it 'handles links with target and wraps paragraph' do
+    it "handles links with target and wraps paragraph" do
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
       ).to eq "<p>Goto <a href=\"https://errbit.com/\" target=\"_blank\">https://errbit.com/</a> and say hello to <a href=\"mailto:team@errbit.invalid\" target=\"_blank\">team@errbit.invalid</a></p>"
     end
 
-    it 'sanitizes body of html tags' do
-      expect(helper.auto_link_format('Hello, <b>World!</b>')).to eq '<p>Hello, World!</p>'
+    it "sanitizes body of html tags" do
+      expect(helper.auto_link_format("Hello, <b>World!</b>")).to eq "<p>Hello, World!</p>"
     end
   end
 
@@ -19,7 +19,7 @@ describe ProblemsHelper do
     context "default config" do
       before do
         allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
-        allow(Errbit::Config).to receive(:gravatar_default).and_return('identicon')
+        allow(Errbit::Config).to receive(:gravatar_default).and_return("identicon")
       end
 
       it "should render image_tag with correct alt and src" do
@@ -29,7 +29,7 @@ describe ProblemsHelper do
 
       it "should override :d" do
         expected = "<img alt=\"#{email}\" class=\"gravatar\" src=\"#{base_url}?d=retro&amp;s=48\" />"
-        expect(helper.gravatar_tag(email, d: 'retro', s: 48)).to eq(expected)
+        expect(helper.gravatar_tag(email, d: "retro", s: 48)).to eq(expected)
       end
     end
 

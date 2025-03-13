@@ -23,7 +23,7 @@ class App
     default:       -> { BSON::ObjectId.new.to_s }
 
   embeds_many :watchers
-  embeds_one :issue_tracker, class_name: 'IssueTracker'
+  embeds_one :issue_tracker, class_name: "IssueTracker"
   embeds_one :notification_service
   embeds_one :notice_fingerprinter
 
@@ -53,7 +53,7 @@ class App
 
   index({ name: "text" }, default_language: "english")
 
-  scope :search, ->(value) { where('$text' => { '$search' => value }) }
+  scope :search, ->(value) { where("$text" => { "$search" => value }) }
   scope :watched_by, lambda { |user|
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
   }
@@ -108,7 +108,7 @@ class App
   end
 
   def repo_branch
-    repository_branch.present? ? repository_branch : 'master'
+    repository_branch.present? ? repository_branch : "master"
   end
 
   def github_repo?
@@ -193,7 +193,7 @@ class App
   end
 
   def use_site_fingerprinter
-    notice_fingerprinter.source == 'site'
+    notice_fingerprinter.source == "site"
   end
 
 private
@@ -222,7 +222,7 @@ private
     github_host = URI.parse(Errbit::Config.github_url).host
     github_host = ::Regexp.escape(github_host)
     github_repo.strip!
-    github_repo.sub!(%r{(git@|https?://)#{github_host}(/|:)}, '')
-    github_repo.sub!(/\.git$/, '')
+    github_repo.sub!(%r{(git@|https?://)#{github_host}(/|:)}, "")
+    github_repo.sub!(/\.git$/, "")
   end
 end

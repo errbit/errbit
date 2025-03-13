@@ -1,4 +1,4 @@
-require 'hoptoad/v2'
+require "hoptoad/v2"
 
 module Hoptoad
   class ApiVersionError < StandardError
@@ -9,8 +9,8 @@ module Hoptoad
 
   class << self
     def parse_xml!(xml)
-      parsed = ActiveSupport::XmlMini.backend.parse(xml)['notice'] || fail(ApiVersionError)
-      processor = get_version_processor(parsed['version'])
+      parsed = ActiveSupport::XmlMini.backend.parse(xml)["notice"] || fail(ApiVersionError)
+      processor = get_version_processor(parsed["version"])
       processor.process_notice(parsed)
     end
 

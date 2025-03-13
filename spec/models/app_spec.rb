@@ -1,4 +1,4 @@
-describe App, type: 'model' do
+describe App, type: "model" do
   context "Attributes" do
     it { is_expected.to have_field(:_id).of_type(String) }
     it { is_expected.to have_field(:name).of_type(String) }
@@ -7,112 +7,112 @@ describe App, type: 'model' do
     it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end
 
-  context 'validations' do
-    it 'requires a name' do
+  context "validations" do
+    it "requires a name" do
       app = Fabricate.build(:app, name: nil)
       expect(app).to_not be_valid
       expect(app.errors[:name]).to include("can't be blank")
     end
 
-    it 'requires unique names' do
-      Fabricate(:app, name: 'Errbit')
-      app = Fabricate.build(:app, name: 'Errbit')
+    it "requires unique names" do
+      Fabricate(:app, name: "Errbit")
+      app = Fabricate.build(:app, name: "Errbit")
       expect(app).to_not be_valid
       expect(app.errors[:name]).to eq(["has already been taken"])
     end
 
-    it 'requires unique api_keys' do
-      Fabricate(:app, api_key: 'APIKEY')
-      app = Fabricate.build(:app, api_key: 'APIKEY')
+    it "requires unique api_keys" do
+      Fabricate(:app, api_key: "APIKEY")
+      app = Fabricate.build(:app, api_key: "APIKEY")
       expect(app).to_not be_valid
       expect(app.errors[:api_key]).to eq(["has already been taken"])
     end
   end
 
-  describe '<=>' do
-    it 'is compared by unresolved count' do
-      app_0 = stub_model(App, name: 'app', unresolved_count: 1, problem_count: 1)
-      app_1 = stub_model(App, name: 'app', unresolved_count: 0, problem_count: 1)
+  describe "<=>" do
+    it "is compared by unresolved count" do
+      app_0 = stub_model(App, name: "app", unresolved_count: 1, problem_count: 1)
+      app_1 = stub_model(App, name: "app", unresolved_count: 0, problem_count: 1)
 
       expect(app_0).to be < app_1
       expect(app_1).to be > app_0
     end
 
-    it 'is compared by problem count' do
-      app_0 = stub_model(App, name: 'app', unresolved_count: 0, problem_count: 1)
-      app_1 = stub_model(App, name: 'app', unresolved_count: 0, problem_count: 0)
+    it "is compared by problem count" do
+      app_0 = stub_model(App, name: "app", unresolved_count: 0, problem_count: 1)
+      app_1 = stub_model(App, name: "app", unresolved_count: 0, problem_count: 0)
 
       expect(app_0).to be < app_1
       expect(app_1).to be > app_0
     end
 
-    it 'is compared by name' do
-      app_0 = stub_model(App, name: 'app_0', unresolved_count: 0, problem_count: 0)
-      app_1 = stub_model(App, name: 'app_1', unresolved_count: 0, problem_count: 0)
+    it "is compared by name" do
+      app_0 = stub_model(App, name: "app_0", unresolved_count: 0, problem_count: 0)
+      app_1 = stub_model(App, name: "app_1", unresolved_count: 0, problem_count: 0)
 
       expect(app_0).to be < app_1
       expect(app_1).to be > app_0
     end
   end
 
-  context 'being created' do
-    it 'generates a new api-key' do
+  context "being created" do
+    it "generates a new api-key" do
       app = Fabricate.build(:app)
       expect(app.api_key).to be_nil
       app.save
       expect(app.api_key).to_not be_nil
     end
 
-    it 'generates a correct api-key' do
+    it "generates a correct api-key" do
       app = Fabricate(:app)
       expect(app.api_key).to match(/^[a-f0-9]{32}$/)
     end
 
-    it 'is fine with blank github repos' do
+    it "is fine with blank github repos" do
       app = Fabricate.build(:app, github_repo: "")
       app.save
       expect(app.github_repo).to eq ""
     end
 
-    it 'doesnt touch github user/repo' do
+    it "doesnt touch github user/repo" do
       app = Fabricate.build(:app, github_repo: "errbit/errbit")
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
     end
 
-    it 'removes domain from https github repos' do
+    it "removes domain from https github repos" do
       app = Fabricate.build(:app, github_repo: "https://github.com/errbit/errbit")
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
     end
 
-    it 'normalizes public git repo as a github repo' do
+    it "normalizes public git repo as a github repo" do
       app = Fabricate.build(:app, github_repo: "https://github.com/errbit/errbit.git")
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
     end
 
-    it 'normalizes private git repo as a github repo' do
+    it "normalizes private git repo as a github repo" do
       app = Fabricate.build(:app, github_repo: "git@github.com:errbit/errbit.git")
       app.save
       expect(app.github_repo).to eq "errbit/errbit"
     end
   end
 
-  context '#github_url_to_file' do
-    it 'resolves to full path to file' do
+  context "#github_url_to_file" do
+    it "resolves to full path to file" do
       app = Fabricate(:app, github_repo: "errbit/errbit")
-      expect(app.github_url_to_file('path/to/file')).to eq "https://github.com/errbit/errbit/blob/master/path/to/file"
+      expect(app.github_url_to_file("path/to/file")).to eq "https://github.com/errbit/errbit/blob/master/path/to/file"
     end
   end
 
-  context '#github_repo?' do
-    it 'is true when there is a github_repo' do
+  context "#github_repo?" do
+    it "is true when there is a github_repo" do
       app = Fabricate(:app, github_repo: "errbit/errbit")
       expect(app.github_repo?).to be(true)
     end
 
-    it 'is false when no github_repo' do
+    it "is false when no github_repo" do
       app = Fabricate(:app)
       expect(app.github_repo?).to be(false)
     end
@@ -162,17 +162,17 @@ describe App, type: 'model' do
     end
   end
 
-  context '#find_or_create_err!' do
+  context "#find_or_create_err!" do
     let(:app) { Fabricate(:app) }
     let(:conditions) do
       {
-        error_class: 'Whoops',
-        environment: 'production',
-        fingerprint: 'some-finger-print'
+        error_class: "Whoops",
+        environment: "production",
+        fingerprint: "some-finger-print"
       }
     end
 
-    it 'returns the correct err if one already exists' do
+    it "returns the correct err if one already exists" do
       existing = Fabricate(
         :err,
         problem:     Fabricate(:problem, app: app),
@@ -182,11 +182,11 @@ describe App, type: 'model' do
       expect(app.find_or_create_err!(conditions)).to eq existing
     end
 
-    it 'assigns the returned err to the given app' do
+    it "assigns the returned err to the given app" do
       expect(app.find_or_create_err!(conditions).app).to eq app
     end
 
-    it 'creates a new problem if a matching one does not already exist' do
+    it "creates a new problem if a matching one does not already exist" do
       expect(Err.where(conditions).first).to be_nil
       expect do
         app.find_or_create_err!(conditions)
@@ -196,11 +196,11 @@ describe App, type: 'model' do
     context "without error_class" do
       let(:conditions) do
         {
-          environment: 'production',
-          fingerprint: 'some-finger-print'
+          environment: "production",
+          fingerprint: "some-finger-print"
         }
       end
-      it 'save the err' do
+      it "save the err" do
         expect(Err.where(conditions).first).to be_nil
         expect do
           app.find_or_create_err!(conditions)
@@ -210,36 +210,36 @@ describe App, type: 'model' do
   end
 
   describe ".find_by_api_key!" do
-    it 'return the app with api_key' do
+    it "return the app with api_key" do
       app = Fabricate(:app)
       expect(App.find_by_api_key!(app.api_key)).to eq app
     end
-    it 'raise Mongoid::Errors::DocumentNotFound if not found' do
+    it "raise Mongoid::Errors::DocumentNotFound if not found" do
       expect do
-        App.find_by_api_key!('foo')
+        App.find_by_api_key!("foo")
       end.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
   end
 
-  describe '#notice_fingerprinter' do
-    it 'app acquires a notice_fingerprinter when it doesn\'t have one' do
-      app = Fabricate(:app, name: 'Errbit')
+  describe "#notice_fingerprinter" do
+    it "app acquires a notice_fingerprinter when it doesn't have one" do
+      app = Fabricate(:app, name: "Errbit")
       app.notice_fingerprinter.delete
 
       # has a notice_fingerprinter because it's been accessed when blank
       expect(app.reload.notice_fingerprinter).to be_a(NoticeFingerprinter)
     end
 
-    it 'brand new app has a notice_fingerprinter' do
-      app = Fabricate(:app, name: 'Errbit')
+    it "brand new app has a notice_fingerprinter" do
+      app = Fabricate(:app, name: "Errbit")
       expect(app.notice_fingerprinter).to be_a(NoticeFingerprinter)
     end
   end
 
   context "searching" do
-    it 'finds the correct record' do
-      found = Fabricate(:app, name: 'Foo')
-      not_found = Fabricate(:app, name: 'Brr')
+    it "finds the correct record" do
+      found = Fabricate(:app, name: "Foo")
+      not_found = Fabricate(:app, name: "Brr")
       expect(App.search("Foo").to_a).to include(found)
       expect(App.search("Foo").to_a).to_not include(not_found)
     end

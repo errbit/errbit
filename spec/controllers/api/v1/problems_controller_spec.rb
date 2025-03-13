@@ -1,4 +1,4 @@
-describe Api::V1::ProblemsController, type: 'controller' do
+describe Api::V1::ProblemsController, type: "controller" do
   context "when logged in" do
     before do
       @user = Fabricate(:user)
@@ -52,7 +52,7 @@ describe Api::V1::ProblemsController, type: 'controller' do
       end
 
       it "returns a 404 if the problem cannot be found" do
-        get :show, params: { auth_token: @user.authentication_token, format: "json", id: 'IdontExist' }
+        get :show, params: { auth_token: @user.authentication_token, format: "json", id: "IdontExist" }
         expect(response.status).to eq(404)
       end
     end

@@ -1,4 +1,4 @@
-describe "apps/edit.html.haml", type: 'view' do
+describe "apps/edit.html.haml", type: "view" do
   let(:app) { stub_model(App) }
   let(:app_decorate) { AppDecorator.new(app) }
 
@@ -18,7 +18,7 @@ describe "apps/edit.html.haml", type: 'view' do
       expect(action_bar).to have_selector(
         format(
           'a.button[data-confirm="%s"]',
-          I18n.t('apps.confirm_destroy_all_problems')
+          I18n.t("apps.confirm_destroy_all_problems")
         )
       )
     end
@@ -28,7 +28,7 @@ describe "apps/edit.html.haml", type: 'view' do
       expect(action_bar).to have_selector(
         format(
           'a.button[data-confirm="%s"]',
-          I18n.t('apps.confirm_delete')
+          I18n.t("apps.confirm_delete")
         )
       )
     end
@@ -37,11 +37,11 @@ describe "apps/edit.html.haml", type: 'view' do
   context "with invalid app" do
     let(:app) do
       app = stub_model(App)
-      app.errors.add(:base, 'You must specify your')
+      app.errors.add(:base, "You must specify your")
       app
     end
 
-    it 'see the error' do
+    it "see the error" do
       render
       expect(rendered).to match(/You must specify your/)
     end

@@ -46,10 +46,10 @@ private
     # collections might be empty which is ok but it will raise an exception if
     # database cannot be contacted
     local_mongoid_client.collections
-    { check_name: 'mongo', ok: true }
+    { check_name: "mongo", ok: true }
   rescue StandardError => e
     clear_mongoid_client_cache
-    { check_name: 'mongo', ok: false, error_details: e.class.to_s }
+    { check_name: "mongo", ok: false, error_details: e.class.to_s }
   ensure
     local_mongoid_client.close
   end

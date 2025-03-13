@@ -1,7 +1,7 @@
 class NoticeRefingerprinter
   LOG_EVERY = 100
-  LOG_ITR = '%.1f%% complete, %i notice(s) remaining'
-  LOG_START = 'Regenerating notice fingerprints for %i notices'
+  LOG_ITR = "%.1f%% complete, %i notice(s) remaining"
+  LOG_START = "Regenerating notice fingerprints for %i notices"
 
   def self.run
     count = Notice.count
@@ -14,12 +14,12 @@ class NoticeRefingerprinter
       puts format(LOG_ITR, (index * 100 / count), count - index)
     end
 
-    puts 'Finished generating notice fingerprints'
-    puts 'Destroying orphaned err records'
+    puts "Finished generating notice fingerprints"
+    puts "Destroying orphaned err records"
 
     Err.each { |e| e.destroy if e.notices.size == 0 }
 
-    puts 'Finished destroying orphaned err records'
+    puts "Finished destroying orphaned err records"
   end
 
   def self.refingerprint(notice)

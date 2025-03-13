@@ -1,8 +1,8 @@
-describe ProblemsController, type: 'controller' do
+describe ProblemsController, type: "controller" do
   it_requires_authentication for:    {
     index: :get, show: :get, resolve: :put, search: :get
   },
-                             params: { app_id: 'dummyid', id: 'dummyid' }
+                             params: { app_id: "dummyid", id: "dummyid" }
 
   let(:app) { Fabricate(:app) }
   let(:err) { Fabricate(:err, problem: problem) }
@@ -32,7 +32,7 @@ describe ProblemsController, type: 'controller' do
       end
     end
 
-    context 'with environment filters' do
+    context "with environment filters" do
       before(:each) do
         environments = %w(production test development staging)
         20.times do |i|
@@ -40,37 +40,37 @@ describe ProblemsController, type: 'controller' do
         end
       end
 
-      context 'no params' do
-        it 'shows problems for all environments' do
+      context "no params" do
+        it "shows problems for all environments" do
           get :index
           expect(controller.problems.size).to eq 21
         end
       end
 
-      context 'environment production' do
-        it 'shows problems for just production' do
-          get :index, params: { environment: 'production' }
+      context "environment production" do
+        it "shows problems for just production" do
+          get :index, params: { environment: "production" }
           expect(controller.problems.size).to eq 6
         end
       end
 
-      context 'environment staging' do
-        it 'shows problems for just staging' do
-          get :index, params: { environment: 'staging' }
+      context "environment staging" do
+        it "shows problems for just staging" do
+          get :index, params: { environment: "staging" }
           expect(controller.problems.size).to eq 5
         end
       end
 
-      context 'environment development' do
-        it 'shows problems for just development' do
-          get :index, params: { environment: 'development' }
+      context "environment development" do
+        it "shows problems for just development" do
+          get :index, params: { environment: "development" }
           expect(controller.problems.size).to eq 5
         end
       end
 
-      context 'environment test' do
-        it 'shows problems for just test' do
-          get :index, params: { environment: 'test' }
+      context "environment test" do
+        it "shows problems for just test" do
+          get :index, params: { environment: "test" }
           expect(controller.problems.size).to eq 5
         end
       end
@@ -84,7 +84,7 @@ describe ProblemsController, type: 'controller' do
       3.times { problems << Fabricate(:err).problem }
       3.times { problems << Fabricate(:err, problem: Fabricate(:problem, resolved: true)).problem }
       expect(Problem).to receive(:ordered_by).and_return(
-        double('proxy', page: double('other_proxy', per: problems))
+        double("proxy", page: double("other_proxy", per: problems))
       )
       get :index, params: { all_errs: true }
       expect(controller.problems).to eq problems
@@ -106,7 +106,7 @@ describe ProblemsController, type: 'controller' do
 
     it "renders index template" do
       get :search
-      expect(response).to render_template('problems/index')
+      expect(response).to render_template("problems/index")
     end
 
     it "searches problems for given string" do
@@ -167,7 +167,7 @@ describe ProblemsController, type: 'controller' do
       end
     end
 
-    context 'pagination' do
+    context "pagination" do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|
           coll << Fabricate(:notice, err: err, created_at: (i.seconds.from_now))
@@ -206,7 +206,7 @@ describe ProblemsController, type: 'controller' do
       @err = Fabricate(:err)
     end
 
-    it 'finds the app and the problem' do
+    it "finds the app and the problem" do
       put :resolve, params: { app_id: @err.app.id, id: @err.problem.id }
       expect(controller.app).to eq @err.app
       expect(controller.problem).to eq @err.problem
@@ -267,7 +267,7 @@ describe ProblemsController, type: 'controller' do
       end
 
       it "should renders the issue body" do
-        post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: 'html' }
+        post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: "html" }
         expect(response).to render_template("issue_trackers/issue")
       end
 
@@ -281,15 +281,15 @@ describe ProblemsController, type: 'controller' do
         render_views
 
         it "should save the right body" do
-          post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: 'html' }
+          post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: "html" }
           line = issue_tracker.tracker.output.shift
           expect(line[1]).to include(app_problem_url problem.app, problem)
         end
 
         it "should render whatever the issue tracker says" do
           allow_any_instance_of(Issue).to receive(:render_body_args).and_return(
-            [{ inline: 'one <%= problem.id %> two' }])
-          post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: 'html' }
+            [{ inline: "one <%= problem.id %> two" }])
+          post :create_issue, params: { app_id: problem.app.id, id: problem.id, format: "html" }
           line = issue_tracker.tracker.output.shift
           expect(line[1]).to eq("one #{problem.id} two")
         end
@@ -385,7 +385,7 @@ describe ProblemsController, type: 'controller' do
     context "POST /problems/merge_several" do
       it "should require at least two problems" do
         post :merge_several, params: { problems: [@problem1.id.to_s] }
-        expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.need_two_errors_merge')
+        expect(request.flash[:notice]).to eql I18n.t("controllers.problems.flash.need_two_errors_merge")
       end
 
       it "should merge the problems" do
@@ -397,7 +397,7 @@ describe ProblemsController, type: 'controller' do
     context "POST /problems/unmerge_several" do
       it "should require at least one problem" do
         post :unmerge_several, params: { problems: [] }
-        expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
+        expect(request.flash[:notice]).to eql I18n.t("controllers.problems.flash.no_select_problem")
       end
 
       it "should unmerge a merged problem" do
@@ -413,7 +413,7 @@ describe ProblemsController, type: 'controller' do
     context "POST /problems/resolve_several" do
       it "should require at least one problem" do
         post :resolve_several, params: { problems: [] }
-        expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
+        expect(request.flash[:notice]).to eql I18n.t("controllers.problems.flash.no_select_problem")
       end
 
       it "should resolve the issue" do
@@ -436,7 +436,7 @@ describe ProblemsController, type: 'controller' do
     context "POST /problems/unresolve_several" do
       it "should require at least one problem" do
         post :unresolve_several, params: { problems: [] }
-        expect(request.flash[:notice]).to eql I18n.t('controllers.problems.flash.no_select_problem')
+        expect(request.flash[:notice]).to eql I18n.t("controllers.problems.flash.no_select_problem")
       end
 
       it "should unresolve the issue" do

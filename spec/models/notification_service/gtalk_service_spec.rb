@@ -1,4 +1,4 @@
-describe NotificationServices::GtalkService, type: 'model' do
+describe NotificationServices::GtalkService, type: "model" do
   it "it should send a notification to gtalk" do
     # setup
     notice = Fabricate :notice
@@ -7,7 +7,7 @@ describe NotificationServices::GtalkService, type: 'model' do
     problem = notice.problem
 
     # gtalk stubbing
-    gtalk = double('GtalkService')
+    gtalk = double("GtalkService")
     jid = double("jid")
     message = double("message")
     expect(Jabber::JID).to receive(:new).with(notification_service.subdomain).and_return(jid)
@@ -42,7 +42,7 @@ describe NotificationServices::GtalkService, type: 'model' do
 #{@notification_service.notification_description @problem}"""
 
       # gtalk stubbing
-      @gtalk = double('GtalkService')
+      @gtalk = double("GtalkService")
       expect(@gtalk).to receive(:connect)
       expect(@gtalk).to receive(:auth)
       jid = double("jid")
@@ -98,7 +98,7 @@ describe NotificationServices::GtalkService, type: 'model' do
     problem = notice.problem
 
     # gtalk stubbing
-    gtalk = double('GtalkService')
+    gtalk = double("GtalkService")
     jid = double("jid")
     message = double("message")
     expect(Jabber::JID).to receive(:new).with(notification_service.subdomain).and_return(jid)

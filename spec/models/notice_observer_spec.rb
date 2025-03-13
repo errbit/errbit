@@ -1,4 +1,4 @@
-describe "Callback on Notice", type: 'model' do
+describe "Callback on Notice", type: "model" do
   let(:notice_attrs_for) do
     lambda do |api_key|
       {
@@ -27,7 +27,7 @@ describe "Callback on Notice", type: 'model' do
     end
   end
 
-  describe 'email notifications (configured individually for each app)' do
+  describe "email notifications (configured individually for each app)" do
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
     custom_thresholds = [2, 4, 8, 16, 32, 64]
     let(:app) do
@@ -49,7 +49,7 @@ describe "Callback on Notice", type: 'model' do
         @problem.update_attributes notices_count: threshold - 1
 
         expect(Mailer).to receive(:err_notification).
-          and_return(double('email', deliver_now: true))
+          and_return(double("email", deliver_now: true))
 
         error_report = ErrorReport.new(notice_attrs)
         error_report.generate_notice!
@@ -65,14 +65,14 @@ describe "Callback on Notice", type: 'model' do
       error_report.generate_notice!
     end
 
-    it 'notify self if mailer fails' do
+    it "notify self if mailer fails" do
       expect(Mailer).to receive(:err_notification).and_raise(ArgumentError)
       expect(HoptoadNotifier).to receive(:notify)
       ErrorReport.new(notice_attrs).generate_notice!
     end
   end
 
-  describe 'email notifications for resolved issues' do
+  describe "email notifications for resolved issues" do
     let(:notification_service) { Fabricate(:campfire_notification_service) }
     let(:app) do
       Fabricate(
@@ -86,7 +86,7 @@ describe "Callback on Notice", type: 'model' do
     before { Errbit::Config.per_app_email_at_notices = true }
     after { Errbit::Config.per_app_email_at_notices = false }
 
-    it 'sends email the first time after the error is resolved' do
+    it "sends email the first time after the error is resolved" do
       error_report = ErrorReport.new(notice_attrs)
       error_report.generate_notice!
       err = error_report.notice.err
@@ -95,13 +95,13 @@ describe "Callback on Notice", type: 'model' do
       err.problem.resolve!
 
       expect(Mailer).to receive(:err_notification).
-        and_return(double('email', deliver_now: true))
+        and_return(double("email", deliver_now: true))
 
       ErrorReport.new(notice_attrs).generate_notice!
     end
   end
 
-  describe 'send email when notification service is configured but fails' do
+  describe "send email when notification service is configured but fails" do
     let(:notification_service) { Fabricate(:campfire_notification_service) }
     let(:app) do
       Fabricate(
@@ -115,7 +115,7 @@ describe "Callback on Notice", type: 'model' do
     before { Errbit::Config.per_app_notify_at_notices = true }
     after { Errbit::Config.per_app_notify_at_notices = false }
 
-    it 'sends email' do
+    it "sends email" do
       error_report = ErrorReport.new(notice_attrs)
 
       expect(error_report.app.notification_service).
@@ -127,8 +127,8 @@ describe "Callback on Notice", type: 'model' do
     end
   end
 
-  describe 'should not send a notification if a notification service is not' \
-           'configured' do
+  describe "should not send a notification if a notification service is not" \
+           "configured" do
     let(:notification_service) { Fabricate(:notification_service) }
     let(:app) { Fabricate(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }

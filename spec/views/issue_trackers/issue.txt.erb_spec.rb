@@ -1,4 +1,4 @@
-describe "issue_trackers/issue.txt.erb", type: 'view' do
+describe "issue_trackers/issue.txt.erb", type: "view" do
   let(:problem) do
     problem = Fabricate(:problem)
     Fabricate(:notice, err: Fabricate(:err, problem: problem))

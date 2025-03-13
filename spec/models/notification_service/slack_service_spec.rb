@@ -1,12 +1,12 @@
-describe NotificationServices::SlackService, type: 'model' do
+describe NotificationServices::SlackService, type: "model" do
   let(:backtrace) do
     Fabricate :backtrace, lines: [
-      { number: 22, file: "/path/to/file/1.rb", method: 'first_method' },
-      { number: 44, file: "/path/to/file/2.rb", method: 'second_method' },
-      { number: 11, file: "/path/to/file/3.rb", method: 'third_method' },
-      { number: 103, file: "/path/to/file/4.rb", method: 'fourth_method' },
-      { number: 923, file: "/path/to/file/5.rb", method: 'fifth_method' },
-      { number: 8, file: "/path/to/file/6.rb", method: 'sixth_method' }
+      { number: 22, file: "/path/to/file/1.rb", method: "first_method" },
+      { number: 44, file: "/path/to/file/2.rb", method: "second_method" },
+      { number: 11, file: "/path/to/file/3.rb", method: "third_method" },
+      { number: 103, file: "/path/to/file/4.rb", method: "fourth_method" },
+      { number: 923, file: "/path/to/file/5.rb", method: "fifth_method" },
+      { number: 8, file: "/path/to/file/6.rb", method: "sixth_method" }
     ]
   end
   let(:notice) { Fabricate :notice, backtrace: backtrace }
@@ -81,8 +81,8 @@ describe NotificationServices::SlackService, type: 'model' do
     expect(Rails.root.join("docs/notifications/slack/errbit.png")).to exist
   end
 
-  context 'Validations' do
-    it 'validates presence of service_url' do
+  context "Validations" do
+    it "validates presence of service_url" do
       service.service_url = ""
       service.valid?
 
@@ -95,7 +95,7 @@ describe NotificationServices::SlackService, type: 'model' do
       expect(service.errors[:service_url]).to be_blank
     end
 
-    it 'validates format of room_id' do
+    it "validates format of room_id" do
       service.room_id = "INVALID NAME"
       service.valid?
 
@@ -109,7 +109,7 @@ describe NotificationServices::SlackService, type: 'model' do
     end
   end
 
-  context 'with room_id' do
+  context "with room_id" do
     it "should send a notification to Slack with hook url and channel" do
       payload = payload_hash.to_json
 
@@ -121,7 +121,7 @@ describe NotificationServices::SlackService, type: 'model' do
     end
   end
 
-  context 'without room_id' do
+  context "without room_id" do
     let(:room_id) { nil }
 
     it "should send a notification to Slack with hook url and without channel" do

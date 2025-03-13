@@ -1,4 +1,4 @@
-describe UsersController, type: 'controller' do
+describe UsersController, type: "controller" do
   it_requires_authentication
   it_requires_admin_privileges for: {
     index:   :get,
@@ -12,7 +12,7 @@ describe UsersController, type: 'controller' do
   let(:user) { Fabricate(:user) }
   let(:other_user) { Fabricate(:user) }
 
-  context 'Signed in as a regular user' do
+  context "Signed in as a regular user" do
     before do
       sign_in user
     end
@@ -29,10 +29,10 @@ describe UsersController, type: 'controller' do
     end
 
     context "GET /users/:my_id/edit" do
-      it 'finds the user' do
+      it "finds the user" do
         get :edit, params: { id: user.id }
         expect(controller.user).to eq(user)
-        expect(response).to render_template 'edit'
+        expect(response).to render_template "edit"
       end
     end
 
@@ -46,12 +46,12 @@ describe UsersController, type: 'controller' do
     context "PUT /users/:my_id/id" do
       context "when the update is successful" do
         it "sets a message to display" do
-          put :update, params: { id: user.to_param, user: { name: 'Kermit' } }
-          expect(request.flash[:success]).to include('updated')
+          put :update, params: { id: user.to_param, user: { name: "Kermit" } }
+          expect(request.flash[:success]).to include("updated")
         end
 
         it "redirects to the user's page" do
-          put :update, params: { id: user.to_param, user: { name: 'Kermit' } }
+          put :update, params: { id: user.to_param, user: { name: "Kermit" } }
           expect(response).to redirect_to(user_path(user))
         end
 
@@ -93,13 +93,13 @@ describe UsersController, type: 'controller' do
     end
   end
 
-  context 'Signed in as an admin' do
+  context "Signed in as an admin" do
     before do
       sign_in admin
     end
 
     context "GET /users" do
-      it 'paginates all users' do
+      it "paginates all users" do
         admin.update_attribute :per_page, 2
         3.times { Fabricate(:user) }
         get :index
@@ -108,14 +108,14 @@ describe UsersController, type: 'controller' do
     end
 
     context "GET /users/:id" do
-      it 'finds the user' do
+      it "finds the user" do
         get :show, params: { id: user.id }
         expect(controller.user).to eq user
       end
     end
 
     context "GET /users/new" do
-      it 'assigns a new user' do
+      it "assigns a new user" do
         get :new
         expect(controller.user).to be_a(User)
         expect(controller.user).to be_new_record
@@ -123,7 +123,7 @@ describe UsersController, type: 'controller' do
     end
 
     context "GET /users/:id/edit" do
-      it 'finds the user' do
+      it "finds the user" do
         get :edit, params: { id: user.id }
         expect(controller.user).to eq user
       end
@@ -135,7 +135,7 @@ describe UsersController, type: 'controller' do
 
         it "sets a message to display" do
           post :create, params: { **attrs }
-          expect(request.flash[:success]).to include('part of the team')
+          expect(request.flash[:success]).to include("part of the team")
         end
 
         it "redirects to the user's page" do
@@ -167,7 +167,7 @@ describe UsersController, type: 'controller' do
         end
 
         it "renders the new page" do
-          post :create, params: { user: { username: 'foo' } }
+          post :create, params: { user: { username: "foo" } }
           expect(response).to render_template(:new)
         end
       end
@@ -180,9 +180,9 @@ describe UsersController, type: 'controller' do
         end
 
         context "with normal params" do
-          let(:user_params) { { name: 'Kermit' } }
+          let(:user_params) { { name: "Kermit" } }
           it "sets a message to display" do
-            expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.update.success', name: user.reload.name)
+            expect(request.flash[:success]).to eq I18n.t("controllers.users.flash.update.success", name: user.reload.name)
             expect(response).to redirect_to(user_path(user))
           end
         end
@@ -204,8 +204,8 @@ describe UsersController, type: 'controller' do
           delete :destroy, params: { id: user.id }
         end
 
-        it 'should destroy user' do
-          expect(request.flash[:success]).to eq I18n.t('controllers.users.flash.destroy.success', name: user.name)
+        it "should destroy user" do
+          expect(request.flash[:success]).to eq I18n.t("controllers.users.flash.destroy.success", name: user.name)
           expect(response).to redirect_to(users_path)
         end
       end
@@ -216,9 +216,9 @@ describe UsersController, type: 'controller' do
           delete :destroy, params: { id: admin.id }
         end
 
-        it 'should not destroy user' do
+        it "should not destroy user" do
           expect(response).to redirect_to(users_path)
-          expect(request.flash[:error]).to eq I18n.t('controllers.users.flash.destroy.error')
+          expect(request.flash[:error]).to eq I18n.t("controllers.users.flash.destroy.error")
         end
       end
     end
@@ -231,25 +231,25 @@ describe UsersController, type: 'controller' do
             ActionController::Parameters.new(user_param)
           )
         end
-        let(:user_param) { { 'user' => { name: 'foo', admin: true } } }
-        it 'not have admin field' do
-          expect(controller.send(:user_params).to_hash).to eq('name' => 'foo')
+        let(:user_param) { { "user" => { name: "foo", admin: true } } }
+        it "not have admin field" do
+          expect(controller.send(:user_params).to_hash).to eq("name" => "foo")
         end
         context "with password and password_confirmation empty?" do
-          let(:user_param) { { 'user' => { :name => 'foo', 'password' => '', 'password_confirmation' => '' } } }
-          it 'not have password and password_confirmation field' do
-            expect(controller.send(:user_params).to_hash).to eq('name' => 'foo')
+          let(:user_param) { { "user" => { :name => "foo", "password" => "", "password_confirmation" => "" } } }
+          it "not have password and password_confirmation field" do
+            expect(controller.send(:user_params).to_hash).to eq("name" => "foo")
           end
         end
       end
 
       context "with current user admin" do
-        it 'have admin field'
+        it "have admin field"
         context "with password and password_confirmation empty?" do
-          it 'not have password and password_confirmation field'
+          it "not have password and password_confirmation field"
         end
         context "on his own user" do
-          it 'not have admin field'
+          it "not have admin field"
         end
       end
     end

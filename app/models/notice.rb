@@ -1,7 +1,7 @@
 class Notice
   include ActiveModel::Serializers::Xml
 
-  UNAVAILABLE = 'N/A'
+  UNAVAILABLE = "N/A"
 
   # Mongo will not accept index keys larger than 1,024 bytes and that includes
   # some amount of BSON encoding overhead, so keep it under 1,000 bytes to be
@@ -47,7 +47,7 @@ class Notice
   end
 
   def user_agent
-    agent_string = env_vars['HTTP_USER_AGENT']
+    agent_string = env_vars["HTTP_USER_AGENT"]
     agent_string.blank? ? nil : UserAgent.parse(agent_string)
   end
 
@@ -60,16 +60,16 @@ class Notice
   end
 
   def environment_name
-    n = server_environment['server-environment'] || server_environment['environment-name']
-    n.blank? ? 'development' : n
+    n = server_environment["server-environment"] || server_environment["environment-name"]
+    n.blank? ? "development" : n
   end
 
   def component
-    request['component']
+    request["component"]
   end
 
   def action
-    request['action']
+    request["action"]
   end
 
   def where
@@ -83,7 +83,7 @@ class Notice
   end
 
   def url
-    request['url']
+    request["url"]
   end
 
   def host
@@ -95,27 +95,27 @@ class Notice
   end
 
   def env_vars
-    vars = request['cgi-data']
+    vars = request["cgi-data"]
     vars.is_a?(Hash) ? vars : {}
   end
 
   def params
-    request['params'] || {}
+    request["params"] || {}
   end
 
   def session
-    request['session'] || {}
+    request["session"] || {}
   end
 
   ##
   # TODO: Move on decorator maybe
   #
   def project_root
-    server_environment['project-root'] || '' if server_environment
+    server_environment["project-root"] || "" if server_environment
   end
 
   def app_version
-    server_environment['app-version'] || '' if server_environment
+    server_environment["app-version"] || "" if server_environment
   end
 
   # filter memory addresses out of object strings
@@ -140,7 +140,7 @@ private
     hash.recurse do |recurse_hash|
       recurse_hash.inject({}) do |h, (k, v)|
         if k.is_a?(String)
-          h[k.gsub(/\./, '&#46;').gsub(/^\$/, '&#36;')] = v
+          h[k.gsub(/\./, "&#46;").gsub(/^\$/, "&#36;")] = v
         else
           h[k] = v
         end

@@ -1,4 +1,4 @@
-describe "apps/new.html.haml", type: 'view' do
+describe "apps/new.html.haml", type: "view" do
   let(:app) { stub_model(App) }
   let(:app_decorate) { AppDecorator.new(app) }
 
@@ -16,18 +16,18 @@ describe "apps/new.html.haml", type: 'view' do
     it "should confirm the 'cancel' link" do
       render
 
-      expect(action_bar).to have_selector('a.button', text: 'cancel')
+      expect(action_bar).to have_selector("a.button", text: "cancel")
     end
   end
 
   context "with unvalid app" do
     let(:app) do
       app = stub_model(App)
-      app.errors.add(:base, 'You must specify your')
+      app.errors.add(:base, "You must specify your")
       app
     end
 
-    it 'see the error' do
+    it "see the error" do
       render
       expect(rendered).to match(/You must specify your/)
     end

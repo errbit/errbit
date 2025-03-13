@@ -1,6 +1,6 @@
-describe Problem, type: 'model' do
-  context 'validations' do
-    it 'requires an environment' do
+describe Problem, type: "model" do
+  context "validations" do
+    it "requires an environment" do
       err = Fabricate.build(:problem, environment: nil)
       expect(err).to_not be_valid
       expect(err.errors[:environment]).to include("can't be blank")
@@ -9,7 +9,7 @@ describe Problem, type: 'model' do
 
   describe "Fabrication" do
     context "Fabricate(:problem)" do
-      it 'should have no comment' do
+      it "should have no comment" do
         expect do
           Fabricate(:problem)
         end.to_not change(Comment, :count)
@@ -17,7 +17,7 @@ describe Problem, type: 'model' do
     end
 
     context "Fabricate(:problem_with_comments)" do
-      it 'should have 3 comments' do
+      it "should have 3 comments" do
         expect do
           Fabricate(:problem_with_comments)
         end.to change(Comment, :count).by(3)
@@ -25,7 +25,7 @@ describe Problem, type: 'model' do
     end
 
     context "Fabricate(:problem_with_errs)" do
-      it 'should have 3 errs' do
+      it "should have 3 errs" do
         expect do
           Fabricate(:problem_with_errs)
         end.to change(Err, :count).by(3)
@@ -33,7 +33,7 @@ describe Problem, type: 'model' do
     end
   end
 
-  context '#last_notice_at' do
+  context "#last_notice_at" do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
@@ -47,7 +47,7 @@ describe Problem, type: 'model' do
     end
   end
 
-  context '#first_notice_at' do
+  context "#first_notice_at" do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
@@ -61,19 +61,19 @@ describe Problem, type: 'model' do
     end
   end
 
-  context '#message' do
+  context "#message" do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
       problem = err.problem
       expect do
-        Fabricate(:notice, err: err, message: 'ERR 1')
-      end.to change(problem, :message).from(nil).to('ERR 1')
+        Fabricate(:notice, err: err, message: "ERR 1")
+      end.to change(problem, :message).from(nil).to("ERR 1")
     end
   end
 
-  context 'being created' do
-    context 'when the app has err notifications set to false' do
-      it 'should not send an email notification' do
+  context "being created" do
+    context "when the app has err notifications set to false" do
+      it "should not send an email notification" do
         app = Fabricate(:app_with_watcher, notify_on_errs: false)
         expect(Mailer).to_not receive(:err_notification)
         Fabricate(:problem, app: app)
@@ -156,7 +156,7 @@ describe Problem, type: 'model' do
 
   context "Scopes" do
     context "resolved" do
-      it 'only finds resolved Problems' do
+      it "only finds resolved Problems" do
         resolved = Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
         expect(Problem.resolved.all).to include(resolved)
@@ -165,7 +165,7 @@ describe Problem, type: 'model' do
     end
 
     context "unresolved" do
-      it 'only finds unresolved Problems' do
+      it "only finds unresolved Problems" do
         resolved = Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
         expect(Problem.unresolved.all).to_not include(resolved)
@@ -174,25 +174,25 @@ describe Problem, type: 'model' do
     end
 
     context "searching" do
-      it 'finds the correct record' do
-        find = Fabricate(:problem, resolved: false, error_class: 'theErrorclass::other',
-                         message: "other", where: 'errorclass', environment: 'development', app_name: 'other')
+      it "finds the correct record" do
+        find = Fabricate(:problem, resolved: false, error_class: "theErrorclass::other",
+                         message: "other", where: "errorclass", environment: "development", app_name: "other")
         dont_find = Fabricate(:problem, resolved: false, error_class: "Batman",
-                              message: 'todo', where: 'classerror', environment: 'development', app_name: 'other')
+                              message: "todo", where: "classerror", environment: "development", app_name: "other")
         expect(Problem.search("theErrorClass").unresolved).to include(find)
         expect(Problem.search("theErrorClass").unresolved).to_not include(dont_find)
       end
-      it 'find on where message' do
-        problem = Fabricate(:problem, where: 'cyril')
-        expect(Problem.search('cyril').entries).to eq [problem]
+      it "find on where message" do
+        problem = Fabricate(:problem, where: "cyril")
+        expect(Problem.search("cyril").entries).to eq [problem]
       end
-      it 'finds with notice_id as argument' do
+      it "finds with notice_id as argument" do
         app = Fabricate(:app)
         problem = Fabricate(:problem, app: app)
         err = Fabricate(:err, problem: problem)
-        notice = Fabricate(:notice, err: err, message: 'ERR 1')
+        notice = Fabricate(:notice, err: err, message: "ERR 1")
 
-        problem2 = Fabricate(:problem, where: 'cyril')
+        problem2 = Fabricate(:problem, where: "cyril")
         expect(problem2).to_not eq(problem)
         expect(Problem.search(notice.id).entries).to eq [problem]
       end
@@ -212,12 +212,12 @@ describe Problem, type: 'model' do
 
     it "adding a notice increases #notices_count by 1" do
       expect do
-        Fabricate(:notice, err: @err, message: 'ERR 1')
+        Fabricate(:notice, err: @err, message: "ERR 1")
       end.to change(@problem.reload, :notices_count).from(0).to(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
-      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: "ERR 1")
       expect do
         @err.notices.first.destroy
         @problem.reload
@@ -235,48 +235,48 @@ describe Problem, type: 'model' do
     it "gets correct notice counts when grouping by day" do
       now = Time.current
       two_weeks_ago = 13.days.ago
-      Fabricate(:notice, err: @err, message: 'ERR 1')
-      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.days.ago)
-      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.days.ago)
+      Fabricate(:notice, err: @err, message: "ERR 1")
+      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.days.ago)
+      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.days.ago)
       three_days_ago_yday = (now - 3.days).yday
-      three_days_ago = @problem.grouped_notice_counts(two_weeks_ago, 'day').detect { |grouping| grouping['_id']['day'] == three_days_ago_yday }
-      expect(three_days_ago['count']).to eq(2)
-      count_by_day_for_last_two_weeks = @problem.zero_filled_grouped_noticed_counts(two_weeks_ago, 'day').map { |h| h.values.first }
+      three_days_ago = @problem.grouped_notice_counts(two_weeks_ago, "day").detect { |grouping| grouping["_id"]["day"] == three_days_ago_yday }
+      expect(three_days_ago["count"]).to eq(2)
+      count_by_day_for_last_two_weeks = @problem.zero_filled_grouped_noticed_counts(two_weeks_ago, "day").map { |h| h.values.first }
       expect(count_by_day_for_last_two_weeks.size).to eq(14)
       expect(count_by_day_for_last_two_weeks).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1])
     end
 
     it "gets correct notice counts when grouping by hour" do
       twenty_four_hours_ago = 23.hours.ago
-      Fabricate(:notice, err: @err, message: 'ERR 1')
-      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.hours.ago)
-      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.hours.ago)
-      count_by_hour_for_last_24_hours = @problem.zero_filled_grouped_noticed_counts(twenty_four_hours_ago, 'hour').map { |h| h.values.first }
+      Fabricate(:notice, err: @err, message: "ERR 1")
+      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.hours.ago)
+      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.hours.ago)
+      count_by_hour_for_last_24_hours = @problem.zero_filled_grouped_noticed_counts(twenty_four_hours_ago, "hour").map { |h| h.values.first }
       expect(count_by_hour_for_last_24_hours.size).to eq(24)
       expect(count_by_hour_for_last_24_hours).to eq(([0] * 20) + [2, 0, 0, 1])
     end
 
     it "gets correct relative percentages when grouping by hour" do
       two_weeks_ago = 13.days.ago
-      Fabricate(:notice, err: @err, message: 'ERR 1')
-      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.days.ago)
-      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.days.ago)
-      relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, 'day')
+      Fabricate(:notice, err: @err, message: "ERR 1")
+      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.days.ago)
+      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.days.ago)
+      relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, "day")
       expect(relative_percentages).to eq(([0] * 10) + [100, 0, 0, 50])
     end
 
     it "gets correct relative percentages when grouping by hour" do
       twenty_four_hours_ago = 23.hours.ago
-      Fabricate(:notice, err: @err, message: 'ERR 1')
-      Fabricate(:notice, err: @err, message: 'ERR 2', created_at: 3.hours.ago)
-      Fabricate(:notice, err: @err, message: 'ERR 3', created_at: 3.hours.ago)
-      relative_percentages = @problem.grouped_notice_count_relative_percentages(twenty_four_hours_ago, 'hour')
+      Fabricate(:notice, err: @err, message: "ERR 1")
+      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.hours.ago)
+      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.hours.ago)
+      relative_percentages = @problem.grouped_notice_count_relative_percentages(twenty_four_hours_ago, "hour")
       expect(relative_percentages).to eq(([0] * 20) + [100, 0, 0, 50])
     end
 
     it "gets correct relative percentages when all zeros for data" do
       two_weeks_ago = 13.days.ago
-      relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, 'day')
+      relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, "day")
       expect(relative_percentages).to eq(([0] * 14))
     end
   end
@@ -290,7 +290,7 @@ describe Problem, type: 'model' do
       @problem2 = Fabricate(:problem, app: @app2)
 
       @app3 = Fabricate(:app)
-      @app3.update_attribute(:name, 'app3')
+      @app3.update_attribute(:name, "app3")
 
       @problem3 = Fabricate(:problem, app: @app3)
     end
@@ -350,15 +350,15 @@ describe Problem, type: 'model' do
     end
 
     it "removing a notice removes string from #messages" do
-      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: "ERR 1")
       expect do
         @err.notices.first.destroy
         @problem.reload
-      end.to change(@problem, :messages).from(Digest::MD5.hexdigest('ERR 1') => { 'value' => 'ERR 1', 'count' => 1 }).to({})
+      end.to change(@problem, :messages).from(Digest::MD5.hexdigest("ERR 1") => { "value" => "ERR 1", "count" => 1 }).to({})
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
-      Fabricate(:notice, err: @err, message: 'ERR 1')
+      Fabricate(:notice, err: @err, message: "ERR 1")
       @problem.messages = {}
       @problem.save!
       expect { @err.notices.first.destroy }.not_to raise_error
@@ -377,11 +377,11 @@ describe Problem, type: 'model' do
     end
 
     it "removing a notice removes string from #hosts" do
-      Fabricate(:notice, err: @err, request: { 'url' => "http://example.com/resource/12" })
+      Fabricate(:notice, err: @err, request: { "url" => "http://example.com/resource/12" })
       expect do
         @err.notices.first.destroy
         @problem.reload
-      end.to change(@problem, :hosts).from(Digest::MD5.hexdigest('example.com') => { 'value' => 'example.com', 'count' => 1 }).to({})
+      end.to change(@problem, :hosts).from(Digest::MD5.hexdigest("example.com") => { "value" => "example.com", "count" => 1 }).to({})
     end
   end
 
@@ -401,8 +401,8 @@ describe Problem, type: 'model' do
         :notice,
         err:     @err,
         request: {
-          'cgi-data' => {
-            'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16'
+          "cgi-data" => {
+            "HTTP_USER_AGENT" => "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16"
           }
         }
       )
@@ -411,8 +411,8 @@ describe Problem, type: 'model' do
         @problem.reload
       end.to change(@problem, :user_agents).
         from(
-          Digest::MD5.hexdigest('Chrome 10.0.648.204 (OS X 10.6.7)') => {
-            'value' => 'Chrome 10.0.648.204 (OS X 10.6.7)', 'count' => 1 }
+          Digest::MD5.hexdigest("Chrome 10.0.648.204 (OS X 10.6.7)") => {
+            "value" => "Chrome 10.0.648.204 (OS X 10.6.7)", "count" => 1 }
         ).to({})
     end
   end
@@ -456,7 +456,7 @@ describe Problem, type: 'model' do
         let(:issue_tracker) do
           nil
         end
-        it 'return nil' do
+        it "return nil" do
           expect(problem.issue_type).to be_nil
         end
       end
@@ -468,30 +468,30 @@ describe Problem, type: 'model' do
           end
         end
 
-        it 'return the issue_tracker label' do
-          expect(problem.issue_type).to eql 'mock'
+        it "return the issue_tracker label" do
+          expect(problem.issue_type).to eql "mock"
         end
       end
 
       context "with issue_tracker not valid associate to app" do
         let(:issue_tracker) do
-          IssueTracker.new(type_tracker: 'fake')
+          IssueTracker.new(type_tracker: "fake")
         end
 
-        it 'return nil' do
+        it "return nil" do
           expect(problem.issue_type).to be_nil
         end
       end
     end
 
     context "with issue_type fill in Problem" do
-      it 'return the value associate' do
-        expect(Problem.new(issue_type: 'foo').issue_type).to eql 'foo'
+      it "return the value associate" do
+        expect(Problem.new(issue_type: "foo").issue_type).to eql "foo"
       end
     end
   end
 
-  describe '#recache' do
+  describe "#recache" do
     let(:problem) { Fabricate(:problem_with_errs) }
     let(:first_errs) { problem.errs }
     let!(:notice) { Fabricate(:notice, err: first_errs.first) }
@@ -500,7 +500,7 @@ describe Problem, type: 'model' do
       problem.update_attribute(:notices_count, 0)
     end
 
-    it 'update the notice_count' do
+    it "update the notice_count" do
       expect do
         problem.recache
       end.to change {
@@ -514,34 +514,34 @@ describe Problem, type: 'model' do
         problem.recache
       end
 
-      it 'update information about this notice' do
+      it "update information about this notice" do
         expect(problem.message).to eq notice.message
         expect(problem.where).to eq notice.where
       end
 
-      it 'update first_notice_at' do
+      it "update first_notice_at" do
         expect(problem.first_notice_at).to eq notice.reload.created_at
       end
 
-      it 'update last_notice_at' do
+      it "update last_notice_at" do
         expect(problem.last_notice_at).to eq notice.reload.created_at
       end
 
-      it 'update stats messages' do
+      it "update stats messages" do
         expect(problem.messages).to eq(
-          Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 1 }
+          Digest::MD5.hexdigest(notice.message) => { "value" => notice.message, "count" => 1 }
         )
       end
 
-      it 'update stats hosts' do
+      it "update stats hosts" do
         expect(problem.hosts).to eq(
-          Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 1 }
+          Digest::MD5.hexdigest(notice.host) => { "value" => notice.host, "count" => 1 }
         )
       end
 
-      it 'update stats user_agents' do
+      it "update stats user_agents" do
         expect(problem.user_agents).to eq(
-          Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 1 }
+          Digest::MD5.hexdigest(notice.user_agent_string) => { "value" => notice.user_agent_string, "count" => 1 }
         )
       end
     end
@@ -554,29 +554,29 @@ describe Problem, type: 'model' do
         problem.recache
       end
 
-      it 'update information about this notice' do
+      it "update information about this notice" do
         expect(problem.message).to eq notice.message
         expect(problem.where).to eq notice.where
       end
 
-      it 'update first_notice_at' do
+      it "update first_notice_at" do
         expect(problem.first_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
       end
 
-      it 'update last_notice_at' do
+      it "update last_notice_at" do
         expect(problem.last_notice_at.to_i).to be_within(2).of(notice.created_at.to_i)
       end
 
-      it 'update stats messages' do
-        expect(problem.messages).to eq(Digest::MD5.hexdigest(notice.message) => { 'value' => notice.message, 'count' => 3 })
+      it "update stats messages" do
+        expect(problem.messages).to eq(Digest::MD5.hexdigest(notice.message) => { "value" => notice.message, "count" => 3 })
       end
 
-      it 'update stats hosts' do
-        expect(problem.hosts).to eq(Digest::MD5.hexdigest(notice.host) => { 'value' => notice.host, 'count' => 3 })
+      it "update stats hosts" do
+        expect(problem.hosts).to eq(Digest::MD5.hexdigest(notice.host) => { "value" => notice.host, "count" => 3 })
       end
 
-      it 'update stats user_agents' do
-        expect(problem.user_agents).to eq(Digest::MD5.hexdigest(notice.user_agent_string) => { 'value' => notice.user_agent_string, 'count' => 3 })
+      it "update stats user_agents" do
+        expect(problem.user_agents).to eq(Digest::MD5.hexdigest(notice.user_agent_string) => { "value" => notice.user_agent_string, "count" => 3 })
       end
     end
   end

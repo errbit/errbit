@@ -1,4 +1,4 @@
-require 'fileutils'
+require "fileutils"
 
 namespace :errbit do
   desc "Seed and index the DB"

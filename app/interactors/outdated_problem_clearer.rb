@@ -1,4 +1,4 @@
-require 'problem_destroy'
+require "problem_destroy"
 
 class OutdatedProblemClearer
   ##
