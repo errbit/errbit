@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     client = Octokit::Client.new(access_token: github_token)
     client.api_endpoint = Errbit::Config.github_api_url
     org_ids = client.organizations.map(&:id)
-    return nil unless org_ids.include?(Errbit::Config.github_org_id)
+    return unless org_ids.include?(Errbit::Config.github_org_id)
 
     user_email = github_get_user_email(client)
     if user_email.nil?
