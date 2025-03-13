@@ -1,6 +1,6 @@
 services:
   errbit:
-    image: errbit/errbit:latest
+    image: "errbit/errbit:latest"
     ports:
       - "8080:8080"
     environment:
@@ -9,6 +9,6 @@ services:
       MONGO_URL: "mongodb://mongo:27017/errbit"
 
   mongo:
-    image: mongo:4.1
+    image: "mongo:4.0.28"
     ports:
       - "27017:27017"
