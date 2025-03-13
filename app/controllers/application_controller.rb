@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
-private
+  private
 
   ##
   # Check if the current_user is admin or not and redirect to root url if not

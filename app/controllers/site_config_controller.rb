@@ -14,7 +14,7 @@ class SiteConfigController < ApplicationController
     redirect_to action: :index
   end
 
-private
+  private
 
   def filtered_update_params
     params.

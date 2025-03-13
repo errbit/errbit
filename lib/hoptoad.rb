@@ -14,7 +14,7 @@ module Hoptoad
       processor.process_notice(parsed)
     end
 
-  private
+    private
 
     def get_version_processor(version)
       case version

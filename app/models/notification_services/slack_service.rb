@@ -62,7 +62,7 @@ class NotificationServices::SlackService < NotificationService
     service_url.present?
   end
 
-private
+  private
 
   def post_payload_fields(problem)
     [

@@ -60,7 +60,7 @@ module ApplicationHelper
     end
   end
 
-private
+  private
 
   def total_from_tallies(tallies)
     tallies.values.sum

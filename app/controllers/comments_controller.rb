@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     redirect_to app_problem_path(app, problem)
   end
 
-private
+  private
 
   def comment_params
     # merge makes a copy, merge! edits in place

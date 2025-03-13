@@ -116,7 +116,7 @@ class User
     save(validate: false)
   end
 
-private
+  private
 
   def generate_authentication_token
     loop do

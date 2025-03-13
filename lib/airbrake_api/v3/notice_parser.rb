@@ -26,7 +26,7 @@ module AirbrakeApi
         ErrorReport.new(attributes)
       end
 
-    private
+      private
 
       def error
         fail AirbrakeApi::ParamsError unless params.key?("errors") && params["errors"].any?

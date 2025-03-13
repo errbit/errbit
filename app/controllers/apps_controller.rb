@@ -99,7 +99,7 @@ class AppsController < ApplicationController
     end
   end
 
-private
+  private
 
   def initialize_subclassed_notification_service
     notification_type = app_params.

@@ -39,7 +39,7 @@ class NoticesController < ApplicationController
     redirect_to app_problem_path(problem.app, problem, notice_id: notice.id)
   end
 
-private
+  private
 
   def notice_params
     return @notice_params if @notice_params
