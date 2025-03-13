@@ -15,10 +15,10 @@ describe CommentsController, type: "controller" do
 
       before(:each) do
         post :create, params: {
-          app_id:     problem.app.id,
+          app_id: problem.app.id,
           problem_id: problem.id,
-          comment:    {
-            body:    "One test comment",
+          comment: {
+            body: "One test comment",
             user_id: user.id
           }
         }
@@ -48,9 +48,9 @@ describe CommentsController, type: "controller" do
 
       before(:each) do
         delete :destroy, params: {
-          app_id:     problem.app.id,
+          app_id: problem.app.id,
           problem_id: problem.id,
-          id:         comment.id.to_s
+          id: comment.id.to_s
         }
         problem.reload
       end

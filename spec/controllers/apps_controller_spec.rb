@@ -192,7 +192,7 @@ describe AppsController, type: "controller" do
       end
 
       it "should copy attributes from an existing app" do
-        @app = Fabricate(:app, name:        "do not copy",
+        @app = Fabricate(:app, name: "do not copy",
                                github_repo: "test/example")
         get :new, params: {copy_attributes_from: @app.id}
         expect(controller.app).to be_a(App)
@@ -313,12 +313,12 @@ describe AppsController, type: "controller" do
           SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
 
           put :update, params: {
-            id:  @app.id,
+            id: @app.id,
             app: {
               notice_fingerprinter_attributes: {
                 backtrace_lines: 42
               },
-              use_site_fingerprinter:          "1"
+              use_site_fingerprinter: "1"
             }
           }
         end
@@ -335,7 +335,7 @@ describe AppsController, type: "controller" do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
           put :update, params: {id: @app.id, app: {
             notice_fingerprinter_attributes: {backtrace_lines: 42},
-            use_site_fingerprinter:          "0"
+            use_site_fingerprinter: "0"
           }}
         end
 
