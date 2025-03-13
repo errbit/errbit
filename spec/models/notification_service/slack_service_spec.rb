@@ -15,9 +15,9 @@ describe NotificationServices::SlackService, type: "model" do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
   end
   let(:service) do
-    Fabricate :slack_notification_service, app:         notice.app,
+    Fabricate :slack_notification_service, app: notice.app,
                                            service_url: service_url,
-                                           room_id:     room_id
+                                           room_id: room_id
   end
   let(:room_id) do
     "#general"
@@ -34,18 +34,18 @@ describe NotificationServices::SlackService, type: "model" do
   # faraday stubbing
   let(:payload_hash) do
     {
-      username:    "Errbit",
-      icon_url:    "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
-      channel:     room_id,
+      username: "Errbit",
+      icon_url: "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+      channel: room_id,
       attachments: [
         {
-          fallback:   service.message_for_slack(problem),
-          title:      problem.message.to_s.truncate(100),
+          fallback: service.message_for_slack(problem),
+          title: problem.message.to_s.truncate(100),
           title_link: problem.url,
-          text:       problem.where,
-          color:      "#D00000",
-          mrkdwn_in:  ["fields"],
-          fields:     [
+          text: problem.where,
+          color: "#D00000",
+          mrkdwn_in: ["fields"],
+          fields: [
             {
               title: "Application",
               value: problem.app.name,

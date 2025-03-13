@@ -5,12 +5,12 @@ require Rails.root.join("config/routes.rb")
 class Mailer < ActionMailer::Base
   helper ApplicationHelper
 
-  default :from                      => Errbit::Config.email_from,
-          "X-Errbit-Host"            => Errbit::Config.host,
-          "X-Mailer"                 => "Errbit",
+  default :from => Errbit::Config.email_from,
+          "X-Errbit-Host" => Errbit::Config.host,
+          "X-Mailer" => "Errbit",
           "X-Auto-Response-Suppress" => "OOF, AutoReply",
-          "Precedence"               => "bulk",
-          "Auto-Submitted"           => "auto-generated"
+          "Precedence" => "bulk",
+          "Auto-Submitted" => "auto-generated"
 
   def err_notification(error_report)
     @notice   = NoticeDecorator.new error_report.notice
@@ -19,11 +19,11 @@ class Mailer < ActionMailer::Base
     count = error_report.problem.notices_count
     count = count > 1 ? "(#{count}) " : ""
 
-    errbit_headers "App"         => @app.name,
+    errbit_headers "App" => @app.name,
                    "Environment" => @notice.environment_name,
-                   "Error-Id"    => @notice.err_id
+                   "Error-Id" => @notice.err_id
 
-    mail to:      @app.notification_recipients,
+    mail to: @app.notification_recipients,
          subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
@@ -36,12 +36,12 @@ class Mailer < ActionMailer::Base
 
     recipients = @comment.notification_recipients
 
-    errbit_headers "App"            => @app.name,
-                   "Environment"    => @notice.environment_name,
-                   "Problem-Id"     => @problem.id,
+    errbit_headers "App" => @app.name,
+                   "Environment" => @notice.environment_name,
+                   "Problem-Id" => @problem.id,
                    "Comment-Author" => @user.name
 
-    mail to:      recipients,
+    mail to: recipients,
          subject: "#{@user.name} commented on [#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 

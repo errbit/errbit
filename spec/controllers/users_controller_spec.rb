@@ -1,10 +1,10 @@
 describe UsersController, type: "controller" do
   it_requires_authentication
   it_requires_admin_privileges for: {
-    index:   :get,
-    show:    :get,
-    new:     :get,
-    create:  :post,
+    index: :get,
+    show: :get,
+    new: :get,
+    create: :post,
     destroy: :delete
   }
 

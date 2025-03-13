@@ -2,27 +2,27 @@ describe "Callback on Notice", type: "model" do
   let(:notice_attrs_for) do
     lambda do |api_key|
       {
-        error_class:        "HoptoadTestingException",
-        message:            "some message",
-        backtrace:          [
+        error_class: "HoptoadTestingException",
+        message: "some message",
+        backtrace: [
           {
             "number" => "425",
-            "file"   => "[GEM_ROOT]/callbacks.rb",
+            "file" => "[GEM_ROOT]/callbacks.rb",
             "method" => "__callbacks"
           }
         ],
-        request:            {"component" => "application"},
+        request: {"component" => "application"},
         server_environment: {
-          "project-root"     => "/path/to/sample/project",
+          "project-root" => "/path/to/sample/project",
           "environment-name" => "development"
         },
-        api_key:            api_key,
-        notifier:           {
-          "name"    => "Hoptoad Notifier",
+        api_key: api_key,
+        notifier: {
+          "name" => "Hoptoad Notifier",
           "version" => "2.3.2",
-          "url"     => "http://hoptoadapp.com"
+          "url" => "http://hoptoadapp.com"
         },
-        framework:          "Rails: 3.2.11"
+        framework: "Rails: 3.2.11"
       }
     end
   end
@@ -77,7 +77,7 @@ describe "Callback on Notice", type: "model" do
     let(:app) do
       Fabricate(
         :app_with_watcher,
-        notify_on_errs:   true,
+        notify_on_errs: true,
         email_at_notices: [1, 100]
       )
     end
@@ -106,7 +106,7 @@ describe "Callback on Notice", type: "model" do
     let(:app) do
       Fabricate(
         :app_with_watcher,
-        notify_on_errs:       true,
+        notify_on_errs: true,
         notification_service: notification_service
       )
     end

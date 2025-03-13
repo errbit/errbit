@@ -1,12 +1,12 @@
 def it_requires_authentication(options = {})
   default_options = {
-    for:    {
-      index:   :get,
-      show:    :get,
-      new:     :get,
-      create:  :post,
-      edit:    :get,
-      update:  :put,
+    for: {
+      index: :get,
+      show: :get,
+      new: :get,
+      create: :post,
+      edit: :get,
+      update: :put,
       destroy: :delete
     },
     params: {id: "4c6c760494df2a18cc000015"}
@@ -29,13 +29,13 @@ end
 
 def it_requires_admin_privileges(options = {})
   default_options = {
-    for:    {
-      index:   :get,
-      show:    :get,
-      new:     :get,
-      create:  :post,
-      edit:    :get,
-      update:  :put,
+    for: {
+      index: :get,
+      show: :get,
+      new: :get,
+      create: :post,
+      edit: :get,
+      update: :put,
       destroy: :delete
     },
     params: {id: "dummyid"}

@@ -3,7 +3,7 @@ class NotificationServices::WebhookService < NotificationService
   FIELDS = [
     [:api_token, {
       placeholder: "URL to receive a POST request when an error occurs",
-      label:       "URL"
+      label: "URL"
     }]
   ]
 

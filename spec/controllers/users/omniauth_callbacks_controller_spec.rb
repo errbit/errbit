@@ -3,8 +3,8 @@ describe Users::OmniauthCallbacksController, type: "controller" do
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]
     request.env["omniauth.auth"] = Hashie::Mash.new(
-      provider:    "github",
-      extra:       {raw_info: {login: login, email: email}},
+      provider: "github",
+      extra: {raw_info: {login: login, email: email}},
       credentials: {token: token}
     )
   end
@@ -80,8 +80,8 @@ describe Users::OmniauthCallbacksController, type: "controller" do
       credentials: {
         provider: "google_oauth2"
       },
-      info:        {email: "#{login}@example.com", name: "John Smith"},
-      uid:         login
+      info: {email: "#{login}@example.com", name: "John Smith"},
+      uid: login
     )
   end
 

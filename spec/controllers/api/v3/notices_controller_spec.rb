@@ -22,7 +22,7 @@ describe Api::V3::NoticesController, type: :controller do
     post :create, body: legit_body, params: {**legit_params}
     notice = Notice.last
     expect(JSON.parse(response.body)).to eq(
-      "id"  => notice.id.to_s,
+      "id" => notice.id.to_s,
       "url" => notice.problem.url
     )
   end

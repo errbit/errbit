@@ -2,14 +2,14 @@
 if Errbit::Config.email_delivery_method == :smtp
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    address:              Errbit::Config.smtp_address,
-    port:                 Errbit::Config.smtp_port,
-    authentication:       Errbit::Config.smtp_authentication,
-    user_name:            Errbit::Config.smtp_user_name,
-    password:             Errbit::Config.smtp_password,
-    domain:               Errbit::Config.smtp_domain,
+    address: Errbit::Config.smtp_address,
+    port: Errbit::Config.smtp_port,
+    authentication: Errbit::Config.smtp_authentication,
+    user_name: Errbit::Config.smtp_user_name,
+    password: Errbit::Config.smtp_password,
+    domain: Errbit::Config.smtp_domain,
     enable_starttls_auto: Errbit::Config.smtp_enable_starttls_auto,
-    openssl_verify_mode:  Errbit::Config.smtp_openssl_verify_mode
+    openssl_verify_mode: Errbit::Config.smtp_openssl_verify_mode
   }
 end
 
@@ -25,8 +25,8 @@ end
 # Set config specific values
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|
   options_from_config = {
-    host:     Errbit::Config.host,
-    port:     Errbit::Config.port,
+    host: Errbit::Config.host,
+    port: Errbit::Config.port,
     protocol: Errbit::Config.protocol
   }.select { |_k, v| v }
 

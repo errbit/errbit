@@ -8,8 +8,8 @@ class Problem
   include Mongoid::Timestamps
 
   CACHED_NOTICE_ATTRIBUTES = {
-    messages:    :message,
-    hosts:       :host,
+    messages: :message,
+    hosts: :host,
     user_agents: :user_agent_string
   }.freeze
 
@@ -42,9 +42,9 @@ class Problem
 
   index({
     error_class: "text",
-    where:       "text",
-    message:     "text",
-    app_name:    "text",
+    where: "text",
+    message: "text",
+    app_name: "text",
     environment: "text"
   }, default_language: "english")
 
@@ -115,21 +115,21 @@ class Problem
 
     Problem.where("_id" => id).find_one_and_update({
       "$set" => {
-        "environment"                            => notice.environment_name,
-        "error_class"                            => notice.error_class,
-        "last_notice_at"                         => notice.created_at.utc,
-        "message"                                => notice.message,
-        "resolved"                               => false,
-        "resolved_at"                            => nil,
-        "where"                                  => notice.where,
-        "messages.#{message_digest}.value"       => notice.message,
-        "hosts.#{host_digest}.value"             => notice.host,
+        "environment" => notice.environment_name,
+        "error_class" => notice.error_class,
+        "last_notice_at" => notice.created_at.utc,
+        "message" => notice.message,
+        "resolved" => false,
+        "resolved_at" => nil,
+        "where" => notice.where,
+        "messages.#{message_digest}.value" => notice.message,
+        "hosts.#{host_digest}.value" => notice.host,
         "user_agents.#{user_agent_digest}.value" => notice.user_agent_string
       },
       "$inc" => {
-        "notices_count"                          => 1,
-        "messages.#{message_digest}.count"       => 1,
-        "hosts.#{host_digest}.count"             => 1,
+        "notices_count" => 1,
+        "messages.#{message_digest}.count" => 1,
+        "hosts.#{host_digest}.count" => 1,
         "user_agents.#{user_agent_digest}.count" => 1
       }
     }, return_document: :after)
@@ -140,12 +140,12 @@ class Problem
 
     atomically do |doc|
       doc.set(
-        "environment"    => last_notice.environment_name,
-        "error_class"    => last_notice.error_class,
+        "environment" => last_notice.environment_name,
+        "error_class" => last_notice.error_class,
         "last_notice_at" => last_notice.created_at,
-        "message"        => last_notice.message,
-        "where"          => last_notice.where,
-        "notices_count"  => notices_count.to_i > 1 ? notices_count - 1 : 0
+        "message" => last_notice.message,
+        "where" => last_notice.where,
+        "notices_count" => notices_count.to_i > 1 ? notices_count - 1 : 0
       )
 
       CACHED_NOTICE_ATTRIBUTES.each do |k, v|
@@ -198,8 +198,8 @@ class Problem
       app,
       self,
       protocol: Errbit::Config.protocol,
-      host:     Errbit::Config.host,
-      port:     Errbit::Config.port
+      host: Errbit::Config.host,
+      port: Errbit::Config.port
     )
   end
 
@@ -253,7 +253,7 @@ class Problem
     pipeline = [
       {
         "$match" => {
-          "err_id"     => {"$in" => errs.map(&:id)},
+          "err_id" => {"$in" => errs.map(&:id)},
           "created_at" => {"$gt" => since}
         }
       },

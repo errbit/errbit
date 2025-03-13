@@ -68,8 +68,8 @@ describe ErrorReport do
     context "with notice generate by Airbrake gem" do
       let(:xml) do
         Airbrake::Notice.new(
-          exception:    Exception.new,
-          api_key:      "APIKEY",
+          exception: Exception.new,
+          api_key: "APIKEY",
           project_root: Rails.root
         ).to_xml
       end
@@ -134,12 +134,12 @@ describe ErrorReport do
         #   <var key="id"/>
         # </var>
         expected = {
-          "secure"       => "false",
-          "httponly"     => "true",
-          "path"         => "/",
+          "secure" => "false",
+          "httponly" => "true",
+          "path" => "/",
           "expire_after" => nil,
-          "domain"       => nil,
-          "id"           => nil
+          "domain" => nil,
+          "id" => nil
         }
         expect(subject.env_vars).to have_key("rack_session_options")
         expect(subject.env_vars["rack_session_options"]).to eql(expected)
@@ -165,7 +165,7 @@ describe ErrorReport do
       problem = error_report.problem
       problem.update(
         resolved_at: Time.zone.now,
-        resolved:    true
+        resolved: true
       )
 
       error_report = ErrorReport.new(xml)

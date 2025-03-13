@@ -3,15 +3,15 @@ if defined? Campy
     LABEL = "campfire"
     FIELDS += [
       [:subdomain, {
-        label:       "Subdomain",
+        label: "Subdomain",
         placeholder: "subdomain from http://{{subdomain}}.campfirenow.com"
       }],
       [:api_token, {
-        label:       "API Token",
+        label: "API Token",
         placeholder: "123456789abcdef123456789abcdef"
       }],
       [:room_id, {
-        label:       "Room ID",
+        label: "Room ID",
         placeholder: "123456"
       }]
     ]

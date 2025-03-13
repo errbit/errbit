@@ -18,9 +18,9 @@ class App
   # Some legacy apps may have string as key instead of BSON::ObjectID
   # identity :type => String
   field :_id,
-    type:          String,
+    type: String,
     pre_processed: true,
-    default:       -> { BSON::ObjectId.new.to_s }
+    default: -> { BSON::ObjectId.new.to_s }
 
   embeds_many :watchers
   embeds_one :issue_tracker, class_name: "IssueTracker"
@@ -42,13 +42,13 @@ class App
 
   accepts_nested_attributes_for :watchers,
     allow_destroy: true,
-    reject_if:     proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
+    reject_if: proc { |attrs| attrs[:user_id].blank? && attrs[:email].blank? }
   accepts_nested_attributes_for :issue_tracker,
     allow_destroy: true,
-    reject_if:     proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
+    reject_if: proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
   accepts_nested_attributes_for :notification_service,
     allow_destroy: true,
-    reject_if:     proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+    reject_if: proc { |attrs| !NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
   accepts_nested_attributes_for :notice_fingerprinter
 
   index({name: "text"}, default_language: "english")
@@ -83,7 +83,7 @@ class App
     problem = problems.create!(
       error_class: attrs[:error_class],
       environment: attrs[:environment],
-      app_name:    name
+      app_name: name
     )
     problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
   end

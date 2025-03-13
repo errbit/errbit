@@ -1,5 +1,5 @@
 describe ProblemsController, type: "controller" do
-  it_requires_authentication for:    {
+  it_requires_authentication for: {
     index: :get, show: :get, resolve: :put, search: :get
   },
                              params: {app_id: "dummyid", id: "dummyid"}

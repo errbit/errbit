@@ -59,10 +59,10 @@ class User
     user = User.where(email: data["email"]).first
 
     unless user
-      user = User.create(name:       data["name"],
-                         email:      data["email"],
+      user = User.create(name: data["name"],
+                         email: data["email"],
                          google_uid: access_token.uid,
-                         password:   Devise.friendly_token[0, 20]
+                         password: Devise.friendly_token[0, 20]
       )
     end
     user

@@ -3,11 +3,11 @@ class NotificationServices::PushoverService < NotificationService
   FIELDS += [
     [:api_token, {
       placeholder: "User Key",
-      label:       "User Key"
+      label: "User Key"
     }],
     [:subdomain, {
       placeholder: "Application API Token",
-      label:       "Application API Token"
+      label: "Application API Token"
     }]
   ]
 

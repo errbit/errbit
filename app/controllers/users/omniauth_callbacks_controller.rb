@@ -93,7 +93,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def update_user_with_github_attributes(user, login, token)
     user.update(
-      github_login:       login,
+      github_login: login,
       github_oauth_token: token
     )
   end
