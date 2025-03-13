@@ -33,5 +33,6 @@ jobs:
           mongodb-version: ${{ matrix.mongodb-version }}
 
       - run: bundle exec rails zeitwerk:check
+      - run: bundle exec rails assets:precompile
       - run: bundle exec rake errbit:bootstrap
       - run: bundle exec rspec
