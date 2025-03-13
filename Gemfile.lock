@@ -120,6 +120,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.6.0)
+    docile (1.4.1)
     domain_name (0.6.20240107)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
@@ -499,6 +500,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
     spoon (0.0.6)
       ffi
     sprockets (4.2.1)
@@ -622,6 +629,7 @@ DEPENDENCIES
   rushover
   sass-rails
   selenium-webdriver
+  simplecov
   standard (= 1.47.0)
   sucker_punch
   timecop
@@ -668,6 +676,7 @@ CHECKSUMS
   decent_exposure (3.0.4) sha256=5ce9e3df24f8d77f094b2e612d1c43a78a2de879847ccbb57c0e596e6c303cf1
   devise (4.9.4) sha256=920042fe5e704c548aa4eb65ebdd65980b83ffae67feb32c697206bfd975a7f8
   diff-lcs (1.6.0) sha256=a1e7f7b272962f8fc769358ad00001b87cdcf32ba349d6c70c6b544613d2da2e
+  docile (1.4.1) sha256=96159be799bfa73cdb721b840e9802126e4e03dfc26863db73647204c727f21e
   domain_name (0.6.20240107) sha256=5f693b2215708476517479bf2b3802e49068ad82167bcd2286f899536a17d933
   dotenv (2.8.1) sha256=c5944793349ae03c432e1780a2ca929d60b88c7d14d52d630db0508c3a8a17d8
   dotenv-rails (2.8.1) sha256=b05b81b7f4e51d1359e218d92279db1d84b12440f7118c9df19b5dfffb620f6c
@@ -824,6 +833,9 @@ CHECKSUMS
   sassc-rails (2.1.2) sha256=5f4fdf3881fc9bdc8e856ffbd9850d70a2878866feae8114aa45996179952db5
   sawyer (0.8.2) sha256=9f0d3988956cb22667f393a764f17b3b3649eb187b5e25f34005ea3b34642d7b
   selenium-webdriver (4.29.1) sha256=0a7fe53cc4d2c515adbb89e115c6e786c64e9b98f85939d21071c6e32883a146
+  simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
+  simplecov-html (0.13.1) sha256=5dab0b7ee612e60e9887ad57693832fdf4695b4c0c859eaea5f95c18791ef10b
+  simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
   spoon (0.0.6) sha256=3ad18e28f6d36f7379c3085b2e96b6160f1ef55397ca1ed0d39b26fc5bbab3f4
   sprockets (4.2.1) sha256=951b13dd2f2fcae840a7184722689a803e0ff9d2702d902bd844b196da773f97
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e

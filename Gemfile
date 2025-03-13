@@ -83,6 +83,7 @@ group :test do
   gem "launchy"
   gem "email_spec"
   gem "timecop"
+  gem "simplecov", require: false
 end
 
 gem "puma"
