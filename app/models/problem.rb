@@ -2,7 +2,6 @@
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.
 
-# rubocop:disable Metrics/ClassLength. At some point we need to break up this class, but I think it doesn't have to be right now.
 class Problem
   include Mongoid::Document
   include Mongoid::Timestamps
