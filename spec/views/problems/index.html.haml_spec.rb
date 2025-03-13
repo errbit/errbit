@@ -33,8 +33,8 @@ describe "problems/index.html.haml", type: "view" do
     it "displays all errors title and button" do
       allow(view).to receive(:all_errs).and_return(true)
       render
-      expect(view.content_for :title).to match "All Errors"
-      expect(view.content_for :action_bar).to have_link "hide resolved"
+      expect(view.content_for(:title)).to match "All Errors"
+      expect(view.content_for(:action_bar)).to have_link "hide resolved"
     end
   end
 end
