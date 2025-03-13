@@ -4,8 +4,8 @@ module Hoptoad
       for_errbit_api(
         normalize(
           rekey(parsed)
-)
-)
+        )
+      )
     end
 
     private
