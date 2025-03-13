@@ -1,17 +1,17 @@
-describe NoticesController, type: 'controller' do
+describe NoticesController, type: "controller" do
   it_requires_authentication for: { locate: :get }
 
   let(:notice) { Fabricate(:notice) }
-  let(:xml) { Rails.root.join('spec', 'fixtures', 'hoptoad_test_notice.xml').read }
+  let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
   let(:app) { Fabricate(:app) }
   let(:error_report) { double(valid?: true, generate_notice!: true, notice: notice, should_keep?: true) }
 
-  context 'notices API' do
+  context "notices API" do
     context "with bogus xml" do
       it "returns an error" do
-        post :create, body: '<r><b>notxml</r>', format: :xml
+        post :create, body: "<r><b>notxml</r>", format: :xml
         expect(response.status).to eq(422)
-        expect(response.body).to eq('The provided XML was not well-formed')
+        expect(response.body).to eq("The provided XML was not well-formed")
       end
     end
 
@@ -51,7 +51,7 @@ describe NoticesController, type: 'controller' do
       end
       context "with an invalid API_KEY" do
         let(:error_report) { double(valid?: false) }
-        it 'return 422' do
+        it "return 422" do
           post :create, params: { format: :xml, data: xml }
           expect(response.status).to eq 422
         end
@@ -59,16 +59,16 @@ describe NoticesController, type: 'controller' do
     end
 
     context "without params needed" do
-      it 'return 400' do
+      it "return 400" do
         post :create, format: :xml
         expect(response.status).to eq 400
-        expect(response.body).to eq 'Need a data params in GET or raw post data'
+        expect(response.body).to eq "Need a data params in GET or raw post data"
       end
     end
   end
 
   describe "GET /locate/:id" do
-    context 'when logged in as an admin' do
+    context "when logged in as an admin" do
       before(:each) do
         @user = Fabricate(:admin)
         sign_in @user
@@ -84,7 +84,7 @@ describe NoticesController, type: 'controller' do
   end
 
   describe "GET /notices/:id" do
-    context 'when logged in as an admin' do
+    context "when logged in as an admin" do
       before(:each) do
         @user = Fabricate(:admin)
         sign_in @user
