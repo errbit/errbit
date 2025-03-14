@@ -1,4 +1,6 @@
-describe Devise::SessionsController, type: "controller" do
+require "rails_helper"
+
+RSpec.describe Devise::SessionsController, type: :controller do
   render_views
 
   describe "POST /users/sign_in" do

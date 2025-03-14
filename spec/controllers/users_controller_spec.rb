@@ -1,4 +1,6 @@
-describe UsersController, type: "controller" do
+require "rails_helper"
+
+RSpec.describe UsersController, type: :controller do
   it_requires_authentication
   it_requires_admin_privileges for: {
     index: :get,

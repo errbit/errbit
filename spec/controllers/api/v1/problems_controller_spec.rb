@@ -1,4 +1,6 @@
-describe Api::V1::ProblemsController, type: "controller" do
+require "rails_helper"
+
+RSpec.describe Api::V1::ProblemsController, type: :controller do
   context "when logged in" do
     before do
       @user = Fabricate(:user)

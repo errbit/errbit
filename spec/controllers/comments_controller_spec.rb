@@ -1,4 +1,6 @@
-describe CommentsController, type: "controller" do
+require "rails_helper"
+
+RSpec.describe CommentsController, type: :controller do
   let(:app) { Fabricate(:app) }
   let(:err) { Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production")) }
 
