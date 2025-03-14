@@ -1,4 +1,6 @@
-describe Err, type: "model" do
+require "rails_helper"
+
+RSpec.describe Err, type: :model do
   context "validations" do
     it "requires a fingerprint" do
       err = Fabricate.build(:err, fingerprint: nil)

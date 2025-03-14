@@ -1,4 +1,6 @@
-describe Comment, type: "model" do
+require "rails_helper"
+
+RSpec.describe Comment, type: :model do
   context "validations" do
     it "should require a body" do
       comment = Fabricate.build(:comment, body: nil)
