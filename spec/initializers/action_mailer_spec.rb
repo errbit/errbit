@@ -1,4 +1,6 @@
-describe "initializers/action_mailer" do
+require "rails_helper"
+
+RSpec.describe "initializers/action_mailer" do
   def load_initializer
     load File.join(Rails.root, "config", "initializers", "action_mailer.rb")
   end

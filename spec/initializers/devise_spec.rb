@@ -1,4 +1,6 @@
-describe "initializers/devise" do
+require "rails_helper"
+
+RSpec.describe "initializers/devise" do
   def load_initializer
     load File.join(Rails.root, "config", "initializers", "devise.rb")
   end
