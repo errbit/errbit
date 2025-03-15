@@ -1,4 +1,6 @@
-describe ProblemsHelper do
+require "rails_helper"
+
+RSpec.describe ProblemsHelper, type: :helper do
   describe "#auto_link_format" do
     it "handles links with target and wraps paragraph" do
       expect(

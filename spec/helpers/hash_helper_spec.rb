@@ -1,4 +1,6 @@
-describe HashHelper do
+require "rails_helper"
+
+RSpec.describe HashHelper, type: :helper do
   describe ".pretty_hash" do
     let(:expected_pretty_hash) do
       <<~HASH.chomp
