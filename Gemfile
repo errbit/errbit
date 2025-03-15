@@ -24,6 +24,7 @@ gem "rack-ssl", require: "rack/ssl" # force SSL
 gem "rack-ssl-enforcer", require: false
 gem "rinku"
 gem "useragent"
+gem "uri"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
