@@ -1,4 +1,6 @@
-shared_examples "a notification email" do
+require "rails_helper"
+
+RSpec.shared_examples "a notification email" do
   it "should have X-Mailer header" do
     expect(email).to have_header("X-Mailer", "Errbit")
   end
@@ -26,7 +28,7 @@ shared_examples "a notification email" do
   end
 end
 
-describe Mailer do
+RSpec.describe Mailer do
   context "Err Notification" do
     include EmailSpec::Helpers
     include EmailSpec::Matchers
