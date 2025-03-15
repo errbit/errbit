@@ -1,6 +1,6 @@
 - any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
 - on_page_that_can_include_multiple_different_apps = params[:controller] == 'problems'
-=form_tag do
+= form_tag do
   %table.errs.selectable
     %thead
       %tr

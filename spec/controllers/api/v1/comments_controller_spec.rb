@@ -16,7 +16,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
       it "should return JSON if JSON is requested" do
         get :index, params: {problem_id: @problem.id, auth_token: @user.authentication_token, format: "json"}
-        expect { JSON.parse(response.body) }.not_to raise_error # JSON::ParserError
+        expect { JSON.parse(response.body) }.not_to raise_error
       end
 
       it "should return XML if XML is requested" do
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
       it "should return JSON by default" do
         get :index, params: {problem_id: @problem.id, auth_token: @user.authentication_token}
-        expect { JSON.parse(response.body) }.not_to raise_error # JSON::ParserError)
+        expect { JSON.parse(response.body) }.not_to raise_error
       end
 
       it "should return all comments of a problem" do
