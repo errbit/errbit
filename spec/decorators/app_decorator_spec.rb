@@ -1,4 +1,6 @@
-describe AppDecorator do
+require "rails_helper"
+
+RSpec.describe AppDecorator, type: :decorator do
   describe "#email_at_notices" do
     it "return the list separate by comma" do
       expect(AppDecorator.new(double(email_at_notices: [2, 3])).email_at_notices).to eql "2, 3"
