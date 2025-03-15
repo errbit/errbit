@@ -96,7 +96,7 @@ gem "underscore-rails"
 gem "sucker_punch"
 
 # lock concurrent-ruby gem to 1.1.10
-gem "concurrent-ruby", "1.1.10"
+gem "concurrent-ruby", "1.3.5"
 
 # Lock zeitwerk gem for support JRuby 9.4
 gem "zeitwerk", "2.6.18"
