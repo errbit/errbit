@@ -4,7 +4,9 @@ RSpec.describe Problem, type: :model do
   context "validations" do
     it "requires an environment" do
       err = Fabricate.build(:problem, environment: nil)
-      expect(err).not_to be_valid
+
+      expect(err).to_not be_valid
+
       expect(err.errors[:environment]).to include("can't be blank")
     end
   end
@@ -109,7 +111,7 @@ RSpec.describe Problem, type: :model do
     it "should record the time when it was resolved" do
       problem = Fabricate(:problem)
       expected_resolved_at = Time.zone.now
-      Timecop.freeze(expected_resolved_at) do
+      travel_to(expected_resolved_at) do
         problem.resolve!
       end
       expect(problem.resolved_at.to_s).to eq expected_resolved_at.to_s

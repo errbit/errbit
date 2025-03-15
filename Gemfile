@@ -83,7 +83,6 @@ group :test do
   gem "selenium-webdriver"
   gem "launchy"
   gem "email_spec"
-  gem "timecop"
   gem "simplecov", require: false
   gem "super_diff"
 end

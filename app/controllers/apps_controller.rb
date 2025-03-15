@@ -50,6 +50,10 @@ class AppsController < ApplicationController
     plug_params(app)
   end
 
+  def edit
+    plug_params(app)
+  end
+
   def create
     process_fingerprinter_choice
     initialize_subclassed_notification_service
@@ -58,6 +62,7 @@ class AppsController < ApplicationController
       redirect_to app_url(app), flash: {success: I18n.t("controllers.apps.flash.create.success")}
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.create.error")
+
       render :new
     end
   end
@@ -71,12 +76,9 @@ class AppsController < ApplicationController
       redirect_to app_url(app), flash: {success: I18n.t("controllers.apps.flash.update.success")}
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.update.error")
+
       render :edit
     end
-  end
-
-  def edit
-    plug_params(app)
   end
 
   def destroy
