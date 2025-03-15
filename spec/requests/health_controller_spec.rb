@@ -1,4 +1,6 @@
-describe HealthController, type: "request" do
+require "rails_helper"
+
+RSpec.describe HealthController, type: :request do
   let(:errbit_app) { Fabricate(:app, api_key: "APIKEY") }
 
   describe "readiness" do

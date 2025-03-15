@@ -1,4 +1,6 @@
-describe UserDestroy do
+require "rails_helper"
+
+RSpec.describe UserDestroy do
   let(:app) do
     Fabricate(
       :app,

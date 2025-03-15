@@ -21,6 +21,7 @@ def it_requires_authentication(options = {})
     options[:for].each do |action, method|
       it "#{method.to_s.upcase} #{action} redirects to the sign in page" do
         send(method, action, params: {**options[:params]})
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -45,12 +46,14 @@ def it_requires_admin_privileges(options = {})
   context "when signed in as a regular user" do
     before do
       sign_out :user
+
       sign_in Fabricate(:user)
     end
 
     options[:for].each do |action, method|
       it "#{method.to_s.upcase} #{action} redirects to the root path" do
         send(method, action, params: {**options[:params]})
+
         expect(response).to redirect_to(root_path)
       end
     end

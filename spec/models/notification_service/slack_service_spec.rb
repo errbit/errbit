@@ -1,4 +1,6 @@
-describe NotificationServices::SlackService, type: "model" do
+require "rails_helper"
+
+RSpec.describe NotificationServices::SlackService, type: :model do
   let(:backtrace) do
     Fabricate :backtrace, lines: [
       {number: 22, file: "/path/to/file/1.rb", method: "first_method"},
@@ -31,7 +33,6 @@ describe NotificationServices::SlackService, type: "model" do
     "```#{lines}```"
   end
 
-  # faraday stubbing
   let(:payload_hash) do
     {
       username: "Errbit",

@@ -1,3 +1,5 @@
+require "rails_helper"
+
 require "airbrake/version"
 require "airbrake/backtrace"
 require "airbrake/notice"
@@ -16,7 +18,7 @@ module Airbrake
   end
 end
 
-describe ErrorReport do
+RSpec.describe ErrorReport, type: :model do
   let(:xml) do
     Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read
   end

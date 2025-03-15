@@ -1,4 +1,6 @@
-describe NavigationHelper do
+require "rails_helper"
+
+RSpec.describe NavigationHelper, type: :helper do
   describe "#page_count_from_end" do
     it "returns the page number when counting from the last occurrence of a notice" do
       expect(page_count_from_end(1, 6)).to eq 6

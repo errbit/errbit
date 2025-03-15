@@ -1,4 +1,6 @@
-describe BacktraceLineDecorator, type: :decorator do
+require "rails_helper"
+
+RSpec.describe BacktraceLineDecorator, type: :decorator do
   let(:backtrace_line) do
     described_class.new(
       number: 884,

@@ -1,4 +1,6 @@
-describe Errbit::Version do
+require "rails_helper"
+
+RSpec.describe Errbit::Version do
   let(:version) { "0.0.0" }
 
   context "release version" do

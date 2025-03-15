@@ -1,4 +1,6 @@
-describe App, type: "model" do
+require "rails_helper"
+
+RSpec.describe App, type: :model do
   context "Attributes" do
     it { is_expected.to have_field(:_id).of_type(String) }
     it { is_expected.to have_field(:name).of_type(String) }

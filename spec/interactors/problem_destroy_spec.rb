@@ -1,4 +1,6 @@
-describe ProblemDestroy do
+require "rails_helper"
+
+RSpec.describe ProblemDestroy do
   let(:problem_destroy) do
     ProblemDestroy.new(problem)
   end

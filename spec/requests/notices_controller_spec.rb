@@ -1,4 +1,6 @@
-describe "Notices management", type: "request" do
+require "rails_helper"
+
+RSpec.describe "Notices management", type: :request do
   let(:errbit_app) { Fabricate(:app, api_key: "APIKEY") }
 
   describe "create a new notice" do

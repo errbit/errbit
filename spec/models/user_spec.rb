@@ -1,4 +1,6 @@
-describe User do
+require "rails_helper"
+
+RSpec.describe User, type: :model do
   context "validations" do
     it "require that a name is present" do
       user = Fabricate.build(:user, name: nil)
