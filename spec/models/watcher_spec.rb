@@ -4,14 +4,14 @@ RSpec.describe Watcher, type: :model do
   context "validations" do
     it "requires an email address or an associated user" do
       watcher = Fabricate.build(:watcher, email: nil, user: nil)
-      expect(watcher).to_not be_valid
+      expect(watcher).not_to be_valid
       expect(watcher.errors[:base]).to include("You must specify either a user or an email address")
 
       watcher.email = "watcher@example.com"
       expect(watcher).to be_valid
 
       watcher.email = nil
-      expect(watcher).to_not be_valid
+      expect(watcher).not_to be_valid
 
       watcher.user = Fabricate(:user)
       watcher.watcher_type = "user"

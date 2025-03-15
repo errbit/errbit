@@ -16,13 +16,13 @@ RSpec.describe ResolvedProblemClearer do
       it "do nothing" do
         expect do
           expect(resolved_problem_clearer.execute).to eq 0
-        end.to_not change {
+        end.not_to change {
           Problem.count
         }
       end
       it "not compact database" do
         allow(Mongoid.default_client).to receive(:command).and_call_original
-        expect(Mongoid.default_client).to_not receive(:command).with(compact: an_instance_of(String))
+        expect(Mongoid.default_client).not_to receive(:command).with(compact: an_instance_of(String))
         resolved_problem_clearer.execute
       end
     end

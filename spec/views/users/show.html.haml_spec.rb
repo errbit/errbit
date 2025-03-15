@@ -22,7 +22,7 @@ RSpec.describe "users/show.html.haml", type: :view do
     it "does not show github if blank" do
       user.github_login = " "
       render
-      expect(rendered).to_not match(/GitHub/)
+      expect(rendered).not_to match(/GitHub/)
     end
   end
 
@@ -30,8 +30,8 @@ RSpec.describe "users/show.html.haml", type: :view do
     context "viewing another user page" do
       it "doesn't show and github linking buttons if user is not current user" do
         render
-        expect(view.content_for(:action_bar)).to_not include("Link GitHub account")
-        expect(view.content_for(:action_bar)).to_not include("Unlink GitHub account")
+        expect(view.content_for(:action_bar)).not_to include("Link GitHub account")
+        expect(view.content_for(:action_bar)).not_to include("Unlink GitHub account")
       end
     end
 

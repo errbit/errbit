@@ -4,13 +4,13 @@ RSpec.describe User, type: :model do
   context "validations" do
     it "require that a name is present" do
       user = Fabricate.build(:user, name: nil)
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:name]).to include("can't be blank")
     end
 
     it "requires password without github login" do
       user = Fabricate.build(:user, password: nil)
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:password]).to include("can't be blank")
     end
 
@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
 
       user2 = Fabricate.build(:user, github_login: "nashby")
       user2.save
-      expect(user2).to_not be_valid
+      expect(user2).not_to be_valid
       expect(user2.errors[:github_login]).to eq(["has already been taken"])
     end
 

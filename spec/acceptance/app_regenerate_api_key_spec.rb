@@ -23,14 +23,14 @@ RSpec.feature "Regeneration api_Key" do
     }
     click_link I18n.t("shared.navigation.apps")
     click_link I18n.t("apps.index.new_app")
-    expect(page).to_not have_button I18n.t("apps.fields.regenerate_api_key")
+    expect(page).not_to have_button I18n.t("apps.fields.regenerate_api_key")
   end
 
   scenario "a user cannot access to edit page" do
     visit "/"
     log_in user
     click_link app.name if page.current_url != app_url(app)
-    expect(page).to_not have_button I18n.t("apps.show.edit")
+    expect(page).not_to have_button I18n.t("apps.show.edit")
   end
 end
 

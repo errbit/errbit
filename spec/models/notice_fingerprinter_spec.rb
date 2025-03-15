@@ -21,7 +21,7 @@ RSpec.describe NoticeFingerprinter, type: :model do
         f3 = fingerprinter.generate("123", notice, backtrace)
 
         expect(f1).to eq(f2)
-        expect(f1).to_not eq(f3)
+        expect(f1).not_to eq(f3)
       end
     end
 
@@ -33,7 +33,7 @@ RSpec.describe NoticeFingerprinter, type: :model do
       f3 = fingerprinter.generate("123", notice, backtrace)
 
       expect(f1).to eq(f2)
-      expect(f1).to_not eq(f3)
+      expect(f1).not_to eq(f3)
     end
 
     context "two backtraces have the same first two lines" do
@@ -59,7 +59,7 @@ RSpec.describe NoticeFingerprinter, type: :model do
         f1 = fingerprinter.generate("123", notice, backtrace1)
         f2 = fingerprinter.generate("123", notice, backtrace2)
 
-        expect(f1).to_not eq(f2)
+        expect(f1).not_to eq(f2)
       end
     end
 

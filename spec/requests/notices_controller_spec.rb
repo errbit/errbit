@@ -36,7 +36,7 @@ RSpec.describe "Notices management", type: :request do
           post "/notifier_api/v2/notices", params: {data: xml}
           expect(response.status).to eq 422
           expect(response.body).to eq "Your API key is unknown"
-        end.to_not change(errbit_app.problems, :count)
+        end.not_to change(errbit_app.problems, :count)
       end
     end
 

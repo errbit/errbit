@@ -16,7 +16,7 @@ RSpec.feature "password reset token" do
 
     mail = ActionMailer::Base.deliveries.last
     expect(mail.subject).to match(/Reset password instructions/)
-    expect(mail.body.encoded).to_not be_empty
+    expect(mail.body.encoded).not_to be_empty
     expect(mail.body.encoded).to match(/change your password/)
     expect(mail.body.encoded).to match(regex)
     if mail.body.encoded =~ regex
@@ -25,7 +25,7 @@ RSpec.feature "password reset token" do
       fill_in "New password", with: "test12345"
       fill_in "Type your new password again", with: "test12345"
       click_button "Change my password"
-      expect(page).to_not have_content "Reset password token is invalid"
+      expect(page).not_to have_content "Reset password token is invalid"
     end
   end
 end

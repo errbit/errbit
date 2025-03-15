@@ -131,7 +131,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
         it "not see link to create issue" do
           render
-          expect(view.content_for(:action_bar)).to_not match(/create issue/)
+          expect(view.content_for(:action_bar)).not_to match(/create issue/)
         end
       end
 
@@ -175,7 +175,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
             it "not see link if no issue tracker" do
               render
-              expect(view.content_for(:action_bar)).to_not match(/create issue/)
+              expect(view.content_for(:action_bar)).not_to match(/create issue/)
             end
           end
         end

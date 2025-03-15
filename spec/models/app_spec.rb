@@ -12,21 +12,21 @@ RSpec.describe App, type: :model do
   context "validations" do
     it "requires a name" do
       app = Fabricate.build(:app, name: nil)
-      expect(app).to_not be_valid
+      expect(app).not_to be_valid
       expect(app.errors[:name]).to include("can't be blank")
     end
 
     it "requires unique names" do
       Fabricate(:app, name: "Errbit")
       app = Fabricate.build(:app, name: "Errbit")
-      expect(app).to_not be_valid
+      expect(app).not_to be_valid
       expect(app.errors[:name]).to eq(["has already been taken"])
     end
 
     it "requires unique api_keys" do
       Fabricate(:app, api_key: "APIKEY")
       app = Fabricate.build(:app, api_key: "APIKEY")
-      expect(app).to_not be_valid
+      expect(app).not_to be_valid
       expect(app.errors[:api_key]).to eq(["has already been taken"])
     end
   end
@@ -62,7 +62,7 @@ RSpec.describe App, type: :model do
       app = Fabricate.build(:app)
       expect(app.api_key).to be_nil
       app.save
-      expect(app.api_key).to_not be_nil
+      expect(app.api_key).not_to be_nil
     end
 
     it "generates a correct api-key" do
@@ -243,7 +243,7 @@ RSpec.describe App, type: :model do
       found = Fabricate(:app, name: "Foo")
       not_found = Fabricate(:app, name: "Brr")
       expect(App.search("Foo").to_a).to include(found)
-      expect(App.search("Foo").to_a).to_not include(not_found)
+      expect(App.search("Foo").to_a).not_to include(not_found)
     end
   end
 end

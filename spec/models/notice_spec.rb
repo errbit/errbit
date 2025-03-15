@@ -4,19 +4,19 @@ RSpec.describe Notice, type: :model do
   context "validations" do
     it "requires a backtrace" do
       notice = Fabricate.build(:notice, backtrace: nil)
-      expect(notice).to_not be_valid
+      expect(notice).not_to be_valid
       expect(notice.errors[:backtrace_id]).to include("can't be blank")
     end
 
     it "requires the server_environment" do
       notice = Fabricate.build(:notice, server_environment: nil)
-      expect(notice).to_not be_valid
+      expect(notice).not_to be_valid
       expect(notice.errors[:server_environment]).to include("can't be blank")
     end
 
     it "requires the notifier" do
       notice = Fabricate.build(:notice, notifier: nil)
-      expect(notice).to_not be_valid
+      expect(notice).not_to be_valid
       expect(notice.errors[:notifier]).to include("can't be blank")
     end
   end

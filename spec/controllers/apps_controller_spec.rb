@@ -69,7 +69,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "should not raise errors for app with err without notices" do
         err
-        expect { get :show, params: {id: app.id} }.to_not raise_error
+        expect { get :show, params: {id: app.id} }.not_to raise_error
       end
 
       it "should list atom feed successfully" do
@@ -190,7 +190,7 @@ RSpec.describe AppsController, type: :controller do
         get :new
         expect(controller.app).to be_a(App)
         expect(controller.app).to be_new_record
-        expect(controller.app.watchers).to_not be_empty
+        expect(controller.app.watchers).not_to be_empty
       end
 
       it "should copy attributes from an existing app" do
@@ -344,7 +344,7 @@ RSpec.describe AppsController, type: :controller do
         it "shouldn't copy site fingerprinter into app fingerprinter" do
           fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except("_id", "source")
           expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except("_id", "source")
-          expect(fingerprinter_attrs).to_not eq(expected_attrs)
+          expect(fingerprinter_attrs).not_to eq(expected_attrs)
           expect(@app.notice_fingerprinter.backtrace_lines).to be 42
         end
       end
@@ -425,7 +425,7 @@ RSpec.describe AppsController, type: :controller do
     it "searches problems for given string" do
       get :search, params: {search: "\"Foo\""}
       expect(controller.apps).to include(@app1)
-      expect(controller.apps).to_not include(@app2)
+      expect(controller.apps).not_to include(@app2)
     end
 
     it "works when given string is empty" do
