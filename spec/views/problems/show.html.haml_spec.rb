@@ -1,4 +1,6 @@
-describe "problems/show.html.haml", type: "view" do
+require "rails_helper"
+
+RSpec.describe "problems/show.html.haml", type: :view do
   let(:problem) { Fabricate(:problem) }
   let(:comment) { Fabricate(:comment) }
   let(:pivotal_tracker) do

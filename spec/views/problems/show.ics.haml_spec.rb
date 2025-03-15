@@ -1,4 +1,6 @@
-describe "problems/show.html.ics", type: "view" do
+require "rails_helper"
+
+RSpec.describe "problems/show.html.ics", type: :view do
   let(:problem) { ProblemDecorator.new(Fabricate(:problem)) }
 
   before do
