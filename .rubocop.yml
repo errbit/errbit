@@ -278,3 +278,7 @@ Style/WordArray:
 # Disable warnings like "Missing top-level documentation comment for"
 Style/Documentation:
   Enabled: false
+
+# This is new RSpec default. Disable.
+RSpecRails/InferredSpecType:
+  Enabled: false
