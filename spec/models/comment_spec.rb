@@ -4,7 +4,7 @@ RSpec.describe Comment, type: :model do
   context "validations" do
     it "should require a body" do
       comment = Fabricate.build(:comment, body: nil)
-      expect(comment).to_not be_valid
+      expect(comment).not_to be_valid
       expect(comment.errors[:body]).to include("can't be blank")
     end
   end

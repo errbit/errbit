@@ -61,7 +61,7 @@ RSpec.describe "Callback on Notice", type: :model do
     it "doesn't email after 5 notices" do
       @problem.update_attributes notices_count: 5
 
-      expect(Mailer).to_not receive(:err_notification)
+      expect(Mailer).not_to receive(:err_notification)
 
       error_report = ErrorReport.new(notice_attrs)
       error_report.generate_notice!
@@ -140,7 +140,7 @@ RSpec.describe "Callback on Notice", type: :model do
 
     it "should not create a campfire notification" do
       error_report = ErrorReport.new(notice_attrs)
-      expect(error_report.app.notification_service).to_not receive(:create_notification)
+      expect(error_report.app.notification_service).not_to receive(:create_notification)
       error_report.generate_notice!
     end
   end
@@ -175,7 +175,7 @@ RSpec.describe "Callback on Notice", type: :model do
       ErrorReport.new(notice_attrs).generate_notice! # two
       error_report = ErrorReport.new(notice_attrs)
       expect(error_report.app.notification_service)
-        .to_not receive(:create_notification)
+        .not_to receive(:create_notification)
       error_report.generate_notice! # three
     end
 

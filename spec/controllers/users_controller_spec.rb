@@ -60,7 +60,7 @@ RSpec.describe UsersController, type: :controller do
         it "should not be able to become an admin" do
           expect do
             put :update, params: {id: user.to_param, user: {admin: true}}
-          end.to_not change {
+          end.not_to change {
             user.reload.admin
           }.from(false)
         end
@@ -154,7 +154,7 @@ RSpec.describe UsersController, type: :controller do
 
         it "should has auth token" do
           post :create, params: {**attrs}
-          expect(User.last.authentication_token).to_not be_blank
+          expect(User.last.authentication_token).not_to be_blank
         end
       end
 
@@ -214,7 +214,7 @@ RSpec.describe UsersController, type: :controller do
 
       context "with trying destroy himself" do
         before do
-          expect(UserDestroy).to_not receive(:new)
+          expect(UserDestroy).not_to receive(:new)
           delete :destroy, params: {id: admin.id}
         end
 

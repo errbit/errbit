@@ -19,7 +19,7 @@ RSpec.describe "Callback on Comment", type: :model do
       before { allow(comment).to receive(:emailable?).and_return(false) }
 
       it "should not send an email notification" do
-        expect(Mailer).to_not receive(:comment_notification)
+        expect(Mailer).not_to receive(:comment_notification)
         comment.save
       end
     end

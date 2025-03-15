@@ -47,7 +47,7 @@ RSpec.describe "apps/show.html.haml", type: :view do
     end
     it "not see the unwatch button" do
       render
-      expect(action_bar).to_not include(I18n.t("apps.show.unwatch"))
+      expect(action_bar).not_to include(I18n.t("apps.show.unwatch"))
     end
   end
 end

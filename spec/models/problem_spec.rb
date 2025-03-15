@@ -16,7 +16,7 @@ RSpec.describe Problem, type: :model do
       it "should have no comment" do
         expect do
           Fabricate(:problem)
-        end.to_not change(Comment, :count)
+        end.not_to change(Comment, :count)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).to_not be_nil
+      expect(problem).not_to be_nil
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.last_notice_at).to eq notice1.reload.created_at
@@ -55,7 +55,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).to_not be_nil
+      expect(problem).not_to be_nil
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
@@ -79,7 +79,7 @@ RSpec.describe Problem, type: :model do
     context "when the app has err notifications set to false" do
       it "should not send an email notification" do
         app = Fabricate(:app_with_watcher, notify_on_errs: false)
-        expect(Mailer).to_not receive(:err_notification)
+        expect(Mailer).not_to receive(:err_notification)
         Fabricate(:problem, app: app)
       end
     end
@@ -88,13 +88,13 @@ RSpec.describe Problem, type: :model do
   context "#resolved?" do
     it "should start out as unresolved" do
       problem = Problem.new
-      expect(problem).to_not be_resolved
+      expect(problem).not_to be_resolved
       expect(problem).to be_unresolved
     end
 
     it "should be able to be resolved" do
       problem = Fabricate(:problem)
-      expect(problem).to_not be_resolved
+      expect(problem).not_to be_resolved
       problem.resolve!
       expect(problem.reload).to be_resolved
     end
@@ -103,7 +103,7 @@ RSpec.describe Problem, type: :model do
   context "resolve!" do
     it "marks the problem as resolved" do
       problem = Fabricate(:problem)
-      expect(problem).to_not be_resolved
+      expect(problem).not_to be_resolved
       problem.resolve!
       expect(problem).to be_resolved
     end
@@ -128,14 +128,14 @@ RSpec.describe Problem, type: :model do
 
     it "should throw an err if it's not successful" do
       problem = Fabricate(:problem)
-      expect(problem).to_not be_resolved
+      expect(problem).not_to be_resolved
       allow(problem).to receive(:valid?).and_return(false)
       ## update_attributes not test #valid? but #errors.any?
       # https://github.com/mongoid/mongoid/blob/master/lib/mongoid/persistence.rb#L137
       er = ActiveModel::Errors.new(problem)
       er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
-      expect(problem).to_not be_valid
+      expect(problem).not_to be_valid
       expect do
         problem.resolve!
       end.to raise_error(Mongoid::Errors::Validations)
@@ -164,7 +164,7 @@ RSpec.describe Problem, type: :model do
         resolved = Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
         expect(Problem.resolved.all).to include(resolved)
-        expect(Problem.resolved.all).to_not include(unresolved)
+        expect(Problem.resolved.all).not_to include(unresolved)
       end
     end
 
@@ -172,7 +172,7 @@ RSpec.describe Problem, type: :model do
       it "only finds unresolved Problems" do
         resolved = Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
-        expect(Problem.unresolved.all).to_not include(resolved)
+        expect(Problem.unresolved.all).not_to include(resolved)
         expect(Problem.unresolved.all).to include(unresolved)
       end
     end
@@ -184,7 +184,7 @@ RSpec.describe Problem, type: :model do
         dont_find = Fabricate(:problem, resolved: false, error_class: "Batman",
           message: "todo", where: "classerror", environment: "development", app_name: "other")
         expect(Problem.search("theErrorClass").unresolved).to include(find)
-        expect(Problem.search("theErrorClass").unresolved).to_not include(dont_find)
+        expect(Problem.search("theErrorClass").unresolved).not_to include(dont_find)
       end
       it "find on where message" do
         problem = Fabricate(:problem, where: "cyril")
@@ -197,7 +197,7 @@ RSpec.describe Problem, type: :model do
         notice = Fabricate(:notice, err: err, message: "ERR 1")
 
         problem2 = Fabricate(:problem, where: "cyril")
-        expect(problem2).to_not eq(problem)
+        expect(problem2).not_to eq(problem)
         expect(Problem.search(notice.id).entries).to eq [problem]
       end
     end
@@ -301,12 +301,12 @@ RSpec.describe Problem, type: :model do
 
     it "#filtered returns problems but excludes those attached to the specified apps" do
       expect(Problem.filtered("-app:'#{@app1.name}'")).to include(@problem2)
-      expect(Problem.filtered("-app:'#{@app1.name}'")).to_not include(@problem1)
+      expect(Problem.filtered("-app:'#{@app1.name}'")).not_to include(@problem1)
 
       filtered_results_with_two_exclusions = Problem.filtered("-app:'#{@app1.name}' -app:app3")
-      expect(filtered_results_with_two_exclusions).to_not include(@problem1)
+      expect(filtered_results_with_two_exclusions).not_to include(@problem1)
       expect(filtered_results_with_two_exclusions).to include(@problem2)
-      expect(filtered_results_with_two_exclusions).to_not include(@problem3)
+      expect(filtered_results_with_two_exclusions).not_to include(@problem3)
     end
 
     it "#filtered does not explode if given a nil filter" do

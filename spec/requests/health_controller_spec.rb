@@ -25,7 +25,7 @@ RSpec.describe HealthController, type: :request do
       expect(parsed_response["ok"]).to eq false
       expect(parsed_response["details"].first["check_name"]).to eq "mongo"
       expect(parsed_response["details"].first["ok"]).to eq false
-      expect(parsed_response["details"].first["error_details"]).to_not be_nil
+      expect(parsed_response["details"].first["error_details"]).not_to be_nil
     end
   end
 

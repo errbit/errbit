@@ -53,7 +53,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
       expect(Jabber::Message).to receive(:new).with("second@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("third@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("fourth@domain.org", @error_msg)
-      expect(Jabber::MUC::SimpleMUCClient).to_not receive(:new)
+      expect(Jabber::MUC::SimpleMUCClient).not_to receive(:new)
       expect(@gtalk).to receive(:send).exactly(4).times
       expect(@gtalk).to receive(:close)
 
@@ -67,7 +67,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
       expect(Jabber::Message).to receive(:new).with("second@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("third@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("fourth@domain.org", @error_msg)
-      expect(Jabber::MUC::SimpleMUCClient).to_not receive(:new)
+      expect(Jabber::MUC::SimpleMUCClient).not_to receive(:new)
       expect(@gtalk).to receive(:send).exactly(4).times
       expect(@gtalk).to receive(:close)
 
@@ -81,7 +81,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
       expect(Jabber::Message).to receive(:new).with("second@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("third@domain.org", @error_msg)
       expect(Jabber::Message).to receive(:new).with("fourth@domain.org", @error_msg)
-      expect(Jabber::MUC::SimpleMUCClient).to_not receive(:new)
+      expect(Jabber::MUC::SimpleMUCClient).not_to receive(:new)
       expect(@gtalk).to receive(:send).exactly(4).times
       expect(@gtalk).to receive(:close)
 
