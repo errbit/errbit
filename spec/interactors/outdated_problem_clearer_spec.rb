@@ -1,4 +1,6 @@
-describe OutdatedProblemClearer do
+require "rails_helper"
+
+RSpec.describe OutdatedProblemClearer do
   before do
     allow(Errbit::Config).to receive(:notice_deprecation_days).and_return(7)
   end
