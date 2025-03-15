@@ -1,4 +1,6 @@
-describe Sparklines do
+require "rails_helper"
+
+RSpec.describe Sparklines do
   it "includes each percentage and adds a percent sign" do
     percentages = [33, 75, 100]
     sparklines_html = Sparklines.for_relative_percentages(percentages)

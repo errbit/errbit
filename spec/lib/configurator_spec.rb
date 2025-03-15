@@ -1,4 +1,6 @@
-describe Configurator do
+require "rails_helper"
+
+RSpec.describe Configurator do
   before(:each) do
     allow(ENV).to receive(:[]).and_return(nil)
     allow(ENV).to receive(:[]).with("VARONE").and_return("zoom")

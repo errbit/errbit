@@ -1,4 +1,6 @@
-describe AirbrakeApi::V3::NoticeParser do
+require "rails_helper"
+
+RSpec.describe AirbrakeApi::V3::NoticeParser do
   let(:app) { Fabricate(:app) }
   let(:notifier_params) do
     {
