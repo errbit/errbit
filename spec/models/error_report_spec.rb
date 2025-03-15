@@ -101,7 +101,7 @@ RSpec.describe ErrorReport, type: :model do
         expect(subject.backtrace_lines.last["file"]).to eq "[GEM_ROOT]/bin/rake"
       end
 
-      it "has server_environement" do
+      it "has server_environment" do
         expect(subject.server_environment["environment-name"]).to eq "development"
       end
 
@@ -257,17 +257,20 @@ RSpec.describe ErrorReport, type: :model do
         let(:email_at_notices) { [0] }
 
         it "sends email on 1st occurrence" do
-          1.times { described_class.new(xml).generate_notice! }
+          described_class.new(xml).generate_notice!
+
           expect(ActionMailer::Base.deliveries.length).to eq(1)
         end
 
         it "sends email on 2nd occurrence" do
           2.times { described_class.new(xml).generate_notice! }
+
           expect(ActionMailer::Base.deliveries.length).to eq(2)
         end
 
         it "sends email on 3rd occurrence" do
           3.times { described_class.new(xml).generate_notice! }
+
           expect(ActionMailer::Base.deliveries.length).to eq(3)
         end
       end
@@ -276,17 +279,20 @@ RSpec.describe ErrorReport, type: :model do
         let(:email_at_notices) { [1, 3] }
 
         it "sends email on 1st occurrence" do
-          1.times { described_class.new(xml).generate_notice! }
+          described_class.new(xml).generate_notice!
+
           expect(ActionMailer::Base.deliveries.length).to eq(1)
         end
 
         it "does not send email on 2nd occurrence" do
           2.times { described_class.new(xml).generate_notice! }
+
           expect(ActionMailer::Base.deliveries.length).to eq(1)
         end
 
         it "sends email on 3rd occurrence" do
           3.times { described_class.new(xml).generate_notice! }
+
           expect(ActionMailer::Base.deliveries.length).to eq(2)
         end
 
@@ -295,6 +301,7 @@ RSpec.describe ErrorReport, type: :model do
             notice = described_class.new(xml).generate_notice!
             notice.problem.resolve!
           end
+
           expect(ActionMailer::Base.deliveries.length).to eq(3)
         end
       end
@@ -333,10 +340,12 @@ RSpec.describe ErrorReport, type: :model do
         expect(error_report.valid?).to be true
       end
     end
+
     context "with not valid api_key" do
       before do
         App.where(api_key: app.api_key).delete_all
       end
+
       it "return false" do
         expect(error_report.valid?).to be false
       end
@@ -365,6 +374,7 @@ RSpec.describe ErrorReport, type: :model do
     context "with current app version not set" do
       before do
         error_report.app.current_app_version = nil
+
         error_report.server_environment["app-version"] = "1.0"
       end
 
@@ -380,11 +390,13 @@ RSpec.describe ErrorReport, type: :model do
 
       it "return true if current or newer" do
         error_report.server_environment["app-version"] = "1.0"
+
         expect(error_report.should_keep?).to be true
       end
 
       it "return false if older" do
         error_report.server_environment["app-version"] = "0.9"
+
         expect(error_report.should_keep?).to be false
       end
     end
