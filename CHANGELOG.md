@@ -34,12 +34,12 @@ https://github.com/errbit/errbit/issues?utf8=%E2%9C%93&q=milestone%3A0.5.0
 - Update Gem ([@arthurnn][], [@shingara][])
 - [#547][] Add capabilities to admin to regenerate the API key of his
   app ([@shingara][])
-- Add environement variable configuration to change the ruby version to
+- Add environment variable configuration to change the ruby version to
   use ([@shingara][])
 - [#588][] Change documentation to see Airbrake gem instead of
-  hoptoad_nofier ([@ugisozols][])
+  hoptoad_notifier ([@ugisozols][])
 - [#592][] Avoid taskmapper dependencies ([@arthurnn][])
-- [#597][] Improve fingerprinting if only change by object memory adress
+- [#597][] Improve fingerprinting if only change by object memory address
   ([@1st8][])
 - [#603][] Improve the page rendering of App list ([@arthurnn][])
 - [#606][] Add ability to deploy on Cloud 66 ([@pkallberg][])

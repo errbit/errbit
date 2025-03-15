@@ -12,11 +12,11 @@ class ProblemsController < ApplicationController
   end
 
   expose(:app) do
-    AppDecorator.new app_scope.find(params[:app_id])
+    AppDecorator.new(app_scope.find(params[:app_id]))
   end
 
   expose(:problem) do
-    ProblemDecorator.new app.problems.find(params[:id])
+    ProblemDecorator.new(app.problems.find(params[:id]))
   end
 
   expose(:all_errs) do
@@ -27,7 +27,7 @@ class ProblemsController < ApplicationController
     params[:filter]
   end
 
-  expose(:params_environement) do
+  expose(:params_environment) do
     params[:environment]
   end
 
@@ -37,7 +37,7 @@ class ProblemsController < ApplicationController
   expose(:problems) do
     finder = Problem
       .for_apps(app_scope)
-      .in_env(params_environement)
+      .in_env(params_environment)
       .filtered(filter)
       .all_else_unresolved(all_errs)
       .ordered_by(params_sort, params_order)
