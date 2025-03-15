@@ -1,0 +1,8 @@
+{
+  "name": "errbit",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "prettier": ">= 3.5.3"
+  }
+}
