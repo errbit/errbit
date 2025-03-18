@@ -88,7 +88,6 @@ group :test do
 end
 
 gem "puma"
-gem "sassc-rails"
 gem "jquery-rails"
 gem "pjax_rails"
 gem "underscore-rails"
