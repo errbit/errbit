@@ -89,7 +89,8 @@ fingerprints are displayed as separate errors.
 
 Changing the fingerprinter (under the "Config" menu) applies to all apps and
 the change affects only notices that arrive after the change. If you want to
-refingerprint old notices, you can run `rake errbit:notice_refingerprint`.
+refingerprint old notices, you can run
+`bundle exec rake errbit:notice_refingerprint`.
 
 Since version 0.7.0, the notice grouping can be separately configured for each
 app (under the "edit" menu).
@@ -207,10 +208,10 @@ When upgrading Errbit, please run:
 ```bash
 git pull origin main # assuming origin is the github.com/errbit/errbit repo
 bundle install
-rake db:migrate
-rake db:mongoid:remove_undefined_indexes
-rake db:mongoid:create_indexes
-rake assets:precompile
+bundle exec rake db:migrate
+bundle exec rake db:mongoid:remove_undefined_indexes
+bundle exec rake db:mongoid:create_indexes
+bundle exec rake assets:precompile
 ```
 
 This will ensure that your application stays up to date with any schema changes.
@@ -293,7 +294,7 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
 
   * Go to the **Self.Errbit** app's edit page. If that app does not exist yet,
     go to the apps page and click **Add a new App** to create it. (You can also
-    create it by running `rake airbrake:test`.)
+    create it by running `bundle exec rake airbrake:test`.)
   * In the **Issue Tracker** section, click **GitHub Issues**.
   * Fill in the **Account/Repository** field with **errbit/errbit**.
   * Fill in the **Username** field with your github username.
