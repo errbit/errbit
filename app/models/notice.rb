@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notice
   include ActiveModel::Serializers::Xml
 
@@ -107,9 +109,6 @@ class Notice
     request["session"] || {}
   end
 
-  ##
-  # TODO: Move on decorator maybe
-  #
   def project_root
     server_environment["project-root"] || "" if server_environment
   end
@@ -132,7 +131,7 @@ class Notice
 
   def sanitize
     [:server_environment, :request, :notifier].each do |h|
-      send("#{h}=", sanitize_hash(send(h)))
+      send(:"#{h}=", sanitize_hash(send(h)))
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NoticeRefingerprinter
   LOG_EVERY = 100
   LOG_ITR = "%.1f%% complete, %i notice(s) remaining"

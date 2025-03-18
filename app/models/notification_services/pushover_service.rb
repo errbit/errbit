@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NotificationServices
   class PushoverService < NotificationService
     LABEL = "pushover"

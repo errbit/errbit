@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HealthController < ActionController::Base
   class << self
     def impatient_mongoid_client

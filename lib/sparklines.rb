@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sparklines
   class << self
     def for_relative_percentages(array_of_relative_percentages)

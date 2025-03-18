@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NotificationServices
   class HoiioService < NotificationService
     LABEL = "hoiio"

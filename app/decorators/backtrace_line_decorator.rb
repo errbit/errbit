@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BacktraceLineDecorator < Draper::Decorator
   EMPTY_STRING = "".freeze
 

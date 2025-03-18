@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IssueTrackerFieldDecorator < Draper::Decorator
   def initialize(field, field_info)
     @object = field

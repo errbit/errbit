@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormHelper
   def errors_for(document)
     return unless document.errors.any?

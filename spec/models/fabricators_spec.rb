@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 Fabrication::Config.fabricator_path.each do |folder|

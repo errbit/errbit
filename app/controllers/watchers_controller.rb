@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WatchersController < ApplicationController
   expose :app
   expose :watchers, -> { app.watchers }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Set SMTP settings if given.
 if Errbit::Config.email_delivery_method == :smtp
   ActionMailer::Base.delivery_method = :smtp

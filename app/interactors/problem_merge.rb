@@ -1,4 +1,4 @@
-require "problem_destroy"
+# frozen_string_literal: true
 
 class ProblemMerge
   def initialize(*problems)

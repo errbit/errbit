@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Represents a single Problem. The problem may have been
 # reported as various Errs, but the user has grouped the
 # Errs together as belonging to the same problem.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NotificationServices
   class SlackService < NotificationService
     CHANNEL_NAME_REGEXP = /^#[a-z\d_-]+$/
@@ -10,7 +12,7 @@ module NotificationServices
       [:room_id, {
         placeholder: "#general",
         label: "Notification channel",
-        hint: "If empty Errbit will use the default channel for the webook"
+        hint: "If empty Errbit will use the default channel for the webhook"
       }]
     ]
 
@@ -33,7 +35,7 @@ module NotificationServices
     def post_payload(problem)
       {
         username: "Errbit",
-        icon_url: "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+        icon_url: "https://raw.githubusercontent.com/errbit/errbit/main/docs/notifications/slack/errbit.png",
         channel: room_id,
         attachments: [
           {
@@ -89,7 +91,7 @@ module NotificationServices
       backtrace = notice.backtrace
       return unless backtrace
 
-      output = ""
+      output = +""
       backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
       "```#{output}```"
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Decorates an instance of IssueTracker
 class IssueTrackerDecorator < Draper::Decorator
   delegate_all

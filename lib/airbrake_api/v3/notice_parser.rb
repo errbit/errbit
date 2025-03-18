@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AirbrakeApi
   module V3
     class NoticeParser

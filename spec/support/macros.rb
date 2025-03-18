@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def it_requires_authentication(options = {})
   default_options = {
     for: {

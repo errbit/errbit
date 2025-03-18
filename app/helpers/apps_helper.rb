@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AppsHelper
   def link_to_copy_attributes_from_other_app
     return if App.count <= 1

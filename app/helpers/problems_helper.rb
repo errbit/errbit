@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProblemsHelper
   def problem_confirm(action)
     t(format("problems.confirm.%s", action)) unless Errbit::Config.confirm_err_actions.eql? false

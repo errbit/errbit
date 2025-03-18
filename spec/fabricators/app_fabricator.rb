@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Fabricator(:app) do
   name { sequence(:app_name) { |n| "App ##{n}" } }
 

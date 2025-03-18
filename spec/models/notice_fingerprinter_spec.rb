@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe NoticeFingerprinter, type: :model do
@@ -17,7 +19,7 @@ RSpec.describe NoticeFingerprinter, type: :model do
         f1 = fingerprinter.generate("123", notice, backtrace)
         f2 = fingerprinter.generate("123", notice, backtrace)
 
-        fingerprinter.send((i << "=").to_sym, false)
+        fingerprinter.send((:"#{i}="), false)
         f3 = fingerprinter.generate("123", notice, backtrace)
 
         expect(f1).to eq(f2)

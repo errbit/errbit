@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # load default ENV values (without overwriting any existing value)
 Dotenv.load(".env.default")
 

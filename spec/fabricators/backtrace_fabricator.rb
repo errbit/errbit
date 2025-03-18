@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Fabricator :backtrace do
   lines(count: 99) do
     {

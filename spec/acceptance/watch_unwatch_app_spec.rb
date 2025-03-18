@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "acceptance/acceptance_helper"
 
 RSpec.feature "A user can watch and unwatch an application" do
