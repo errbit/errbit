@@ -12,7 +12,7 @@ module NotificationServices
       [:room_id, {
         placeholder: "#general",
         label: "Notification channel",
-        hint: "If empty Errbit will use the default channel for the webook"
+        hint: "If empty Errbit will use the default channel for the webhook"
       }]
     ]
 
