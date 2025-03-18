@@ -91,7 +91,7 @@ module NotificationServices
       backtrace = notice.backtrace
       return unless backtrace
 
-      output = ""
+      output = +""
       backtrace.lines[0..4].each { |line| output << backtrace_line(line) }
       "```#{output}```"
     end
