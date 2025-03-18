@@ -109,9 +109,6 @@ class Notice
     request["session"] || {}
   end
 
-  ##
-  # TODO: Move on decorator maybe
-  #
   def project_root
     server_environment["project-root"] || "" if server_environment
   end
