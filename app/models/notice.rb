@@ -131,7 +131,7 @@ class Notice
 
   def sanitize
     [:server_environment, :request, :notifier].each do |h|
-      send("#{h}=", sanitize_hash(send(h)))
+      send(:"#{h}=", sanitize_hash(send(h)))
     end
   end
 
