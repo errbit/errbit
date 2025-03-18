@@ -9,7 +9,7 @@ Represent error statistics. Render JSON if no extension specified on path.
 Example:
 
 ```console
-curl 'http://myerrbit.com/api/v1/stats/app?api_key=6423d563e5285b34cb117f757b2bc7b1'
+curl 'https://myerrbit.com/api/v1/stats/app?api_key=6423d563e5285b34cb117f757b2bc7b1'
 ```
 
 Parameters:

@@ -1,17 +1,20 @@
 # Deployment Notes
+
 There are any number of ways to deploy Errbit, but official support is limited
 to Heroku.
 
 See specific notes on deployment via:
-- [heroku](deployment/heroku.md)
-- [dokku](deployment/dokku.md)
-- [docker](deployment/docker.md)
-- [kubernetes (experimental)](deployment/kubernetes.md)
+
+* [heroku](deployment/heroku.md)
+* [dokku](deployment/dokku.md)
+* [docker](deployment/docker.md)
+* [kubernetes (experimental)](deployment/kubernetes.md)
 
 You can use a process manager to deploy Errbit, but Errbit doesn't maintain
 support for any specific process manager. But if you use systemd, @nofxx has
 been kind enough to share:
-- [systemd config](https://gist.github.com/nofxx/f01dcfe3e9d504181d76)
+
+* [systemd config](https://gist.github.com/nofxx/f01dcfe3e9d504181d76)
 
 ## HTTPS
 
@@ -25,6 +28,7 @@ HTTP.
 
 Alternatively, Errbit's Puma can be configured to serve HTTPS directly.
 Instead of starting Errbit with the command:
+
 ```bash
 bundle exec puma -C config/puma.default.rb
 ```
