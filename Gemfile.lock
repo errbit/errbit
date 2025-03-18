@@ -348,9 +348,6 @@ GEM
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
       rack (~> 2.2, >= 2.2.4)
-    rack-ssl (1.4.1)
-      rack
-    rack-ssl-enforcer (0.2.9)
     rack-test (2.2.0)
       rack (>= 1.3)
     rails (6.1.7.10)
@@ -596,8 +593,6 @@ DEPENDENCIES
   pjax_rails
   pry-rails
   puma
-  rack-ssl
-  rack-ssl-enforcer
   rails (= 6.1.7.10)
   rails-controller-testing
   rake
@@ -772,8 +767,6 @@ CHECKSUMS
   racc (1.8.1-java) sha256=54f2e6d1e1b91c154013277d986f52a90e5ececbe91465d29172e49342732b98
   rack (2.2.13) sha256=ccee101719696a5da12ee9da6fb3b1d20cb329939e089e0e458be6e93667f0fb
   rack-protection (3.2.0) sha256=3c74ba7fc59066453d61af9bcba5b6fe7a9b3dab6f445418d3b391d5ea8efbff
-  rack-ssl (1.4.1) sha256=f7f9d359c13d563fd0fe3e4eced0b357d8ba0502c837839f7520502f27ee4130
-  rack-ssl-enforcer (0.2.9) sha256=99ef4051d1d1e8ca46bbeecb824506798db03e51db3028cb0acf9c18971b1108
   rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
   rails (6.1.7.10) sha256=809692b3ec91fe1407b160e65203ef41c0b19b27bc5b836a515d6f4b969188d1
   rails-controller-testing (1.0.5) sha256=741448db59366073e86fc965ba403f881c636b79a2c39a48d0486f2607182e94
