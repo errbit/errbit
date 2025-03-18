@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_string_literal: true`
-
 class Hash
   # Apply a block to hash, and recursively apply that block
   # to each sub-hash or +types+.
