@@ -19,9 +19,10 @@ RSpec.describe NotificationServices::SlackService, type: :model do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
   end
   let(:service) do
-    Fabricate :slack_notification_service, app: notice.app,
+    Fabricate(:slack_notification_service,
+      app: notice.app,
       service_url: service_url,
-      room_id: room_id
+      room_id: room_id)
   end
   let(:room_id) do
     "#general"
