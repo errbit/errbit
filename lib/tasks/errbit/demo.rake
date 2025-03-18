@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :errbit do
   desc "Add a demo app & errors to your database (for testing)"
   task demo: :environment do

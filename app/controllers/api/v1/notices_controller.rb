@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::NoticesController < ApplicationController
   respond_to :json, :xml
 

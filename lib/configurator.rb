@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "ostruct"
 
 # Configurator maps lists of environment variables to names that you define in

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Enforce SSL connections, if configured
 if Errbit::Config.enforce_ssl
   require "rack/ssl-enforcer"

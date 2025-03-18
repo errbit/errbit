@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hoptoad
   module V2
     def self.process_notice(parsed)

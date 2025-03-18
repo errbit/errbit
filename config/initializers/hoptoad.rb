@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Override the 'hoptoad_notifier' gem's 'send_notice' method for internal errors.
 # Find or create a 'Self.Errbit' app, and save the error internally
 # unless errors should be sent to a different Errbit instance.

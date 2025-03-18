@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if ENV["USER_GEMFILE"].present?
   # Make it error in v0.11.0 release and remove in v0.12.0
   ActiveSupport::Deprecation.warn(

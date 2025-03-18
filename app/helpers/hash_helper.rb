@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HashHelper
   def pretty_hash(hash, nesting = 0)
     return "{}" if hash.empty? || hash.is_a?(String)

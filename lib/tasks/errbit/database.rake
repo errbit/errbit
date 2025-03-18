@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :errbit do
   desc "Updates cached attributes on Problem"
   task problem_recache: :environment do

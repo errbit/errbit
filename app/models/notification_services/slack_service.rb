@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NotificationServices
   class SlackService < NotificationService
     CHANNEL_NAME_REGEXP = /^#[a-z\d_-]+$/

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Haml doesn't load routes automatically when called via a rake task.
 # This is only necessary when sending test emails (i.e. from rake hoptoad:test)
 require Rails.root.join("config/routes.rb")

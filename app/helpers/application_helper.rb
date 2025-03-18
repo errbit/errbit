@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def message_graph(problem)
     create_percentage_table_for(problem.messages)

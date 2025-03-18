@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Fabricator :issue_tracker do
   type_tracker "mock"
 

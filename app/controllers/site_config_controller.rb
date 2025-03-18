@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SiteConfigController < ApplicationController
   before_action :require_admin!
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "acceptance/acceptance_helper"
 
 RSpec.feature "Regeneration api_Key" do

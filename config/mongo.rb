@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 log_level = Logger.const_get Errbit::Config.log_level.upcase
 
 Mongoid.logger.level = log_level

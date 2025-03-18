@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::StatsController < ApplicationController
   respond_to :json, :xml
 

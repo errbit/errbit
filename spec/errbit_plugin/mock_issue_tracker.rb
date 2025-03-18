@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ErrbitPlugin
   class MockIssueTracker < IssueTracker
     def self.label

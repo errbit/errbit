@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github_auto_sign_up(github_token)
     return if Errbit::Config.github_org_id.nil?

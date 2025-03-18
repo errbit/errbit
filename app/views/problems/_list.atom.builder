@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feed.updated(problems.first.try(:created_at) || Time.now)
 
 problems.each do |problem|

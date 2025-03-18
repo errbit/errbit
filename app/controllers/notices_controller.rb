@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NoticesController < ApplicationController
   class ParamsError < StandardError; end
 

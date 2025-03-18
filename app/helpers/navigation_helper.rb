@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NavigationHelper
   # Returns ' active' if you are on a given controller
   #  - active_if_here(:users) => ' active' if users controller
