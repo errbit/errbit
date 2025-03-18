@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "problem_destroy"
-
 class ProblemMerge
   def initialize(*problems)
     problems = problems.flatten.uniq

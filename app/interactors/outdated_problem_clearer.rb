@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "problem_destroy"
-
 class OutdatedProblemClearer
   ##
   # Clear all problem not present for more than one week.

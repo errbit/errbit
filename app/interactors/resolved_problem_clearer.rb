@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "problem_destroy"
-
 class ResolvedProblemClearer
   ##
   # Clear all problem already resolved
