@@ -87,7 +87,8 @@ heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:set MONGODB_URI="<URI HERE>"
 heroku config:set ERRBIT_HOST=some-hostname.example.com
 heroku config:set ERRBIT_EMAIL_FROM=example@example.com
-heroku config:set EMAIL_DELIVERY_METHOD=smtp SMTP_SERVER=smtp.sendgrid.net
+heroku config:set EMAIL_DELIVERY_METHOD=smtp
+heroku config:set SMTP_SERVER=smtp.sendgrid.net
 git push heroku master
 ```
 
