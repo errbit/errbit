@@ -38,7 +38,7 @@ RSpec.describe NotificationServices::SlackService, type: :model do
   let(:payload_hash) do
     {
       username: "Errbit",
-      icon_url: "https://raw.githubusercontent.com/errbit/errbit/master/docs/notifications/slack/errbit.png",
+      icon_url: "https://raw.githubusercontent.com/errbit/errbit/main/docs/notifications/slack/errbit.png",
       channel: room_id,
       attachments: [
         {
