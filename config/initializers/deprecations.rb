@@ -26,9 +26,18 @@ if ENV["RACK_ENV"].present?
 end
 
 if ENV["ERRBIT_ENFORCE_SSL"].present?
+  # Make it error in v0.11.0 release and remove in v0.12.0
   ActiveSupport::Deprecation.warn(
     "ENV['ERRBIT_ENFORCE_SSL'] support is removed and has no effect in Errbit v0.10.0. " \
     "You should run Errbit behind reverse proxy with HTTPS support. " \
     "e.g. Traefik."
+  )
+end
+
+if ENV["ERRBIT_PORT"].present?
+  # Make it error in v0.11.0 release and remove in v0.12.0
+  ActiveSupport::Deprecation.warn(
+    "ENV['ERRBIT_PORT'] support is removed and has no effect in Errbit v0.10.0. " \
+    "When you are running Errbit behind reverse proxy with HTTPS support, port is already set to 443."
   )
 end
