@@ -30,9 +30,6 @@ In order of precedence Errbit uses:
 | `ERRBIT_HOST`        | Hostname to use when building links back to Errbit  | errbit.example.com | as default           |
 
 <dl>
-<dt>ERRBIT_PROTOCOL
-<dd>Protocol to use when building links back to Errbit (http or https)
-<dd>defaults to http
 <dt>ERRBIT_PORT
 <dd>TCP port to use when building links back to Errbit
 <dt>ERRBIT_ADMIN_EMAIL
