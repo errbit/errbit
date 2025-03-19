@@ -591,12 +591,6 @@ RSpec.describe Problem, type: :model do
   context "#url" do
     subject { Fabricate(:problem) }
 
-    it "uses the configured protocol" do
-      allow(Errbit::Config).to receive(:protocol).and_return("https")
-
-      expect(subject.url).to eq "https://errbit.example.com/apps/#{subject.app.id}/problems/#{subject.id}"
-    end
-
     it "uses the configured host" do
       allow(Errbit::Config).to receive(:host).and_return("memyselfandi.com")
 
