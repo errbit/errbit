@@ -25,10 +25,11 @@ In order of precedence Errbit uses:
 
 ### Application parameters
 
+| Environment variable | Description                                         | Default            | Default in container |
+|----------------------|-----------------------------------------------------|--------------------|----------------------|
+| `ERRBIT_HOST`        | Hostname to use when building links back to Errbit  | errbit.example.com | as default           |
+
 <dl>
-<dt>ERRBIT_HOST
-<dd>Hostname to use when building links back to Errbit
-<dd>defaults to errbit.example.com
 <dt>ERRBIT_PROTOCOL
 <dd>Protocol to use when building links back to Errbit (http or https)
 <dd>defaults to http
