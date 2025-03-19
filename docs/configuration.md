@@ -34,9 +34,6 @@ In order of precedence Errbit uses:
 <dd>defaults to http
 <dt>ERRBIT_PORT
 <dd>TCP port to use when building links back to Errbit
-<dt>ERRBIT_ENFORCE_SSL
-<dd>When enabled, Errbit forces all traffic over https
-<dd>defaults to false
 <dt>ERRBIT_ADMIN_EMAIL
 <dd>E-Mail address of initial admin user
 <dd>defaults to `errbit@errbit.example.com`
