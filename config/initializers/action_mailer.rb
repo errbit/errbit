@@ -28,7 +28,7 @@ end
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|
   options_from_config = {
     host: Errbit::Config.host
-  }.select { |_k, v| v }
+  }.select { |_, v| v }
 
   default.reverse_merge!(options_from_config)
 end
