@@ -52,7 +52,7 @@ module NotificationServices
 
         # has to look like this to be formatted properly in the client
         message = "#{problem.app.name}\n" \
-          "#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}\n" \
+          "https://#{Errbit::Config.host}/apps/#{problem.app.id}\n" \
           "#{notification_description problem}"
 
         # post the issue to the xmpp room(s)

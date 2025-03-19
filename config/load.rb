@@ -11,7 +11,6 @@ require_relative "../lib/configurator"
 # element is a proc, it runs at the end, overriding the config value
 Errbit::Config = Configurator.run(
   host: ["ERRBIT_HOST"],
-  protocol: ["ERRBIT_PROTOCOL"],
   port: ["ERRBIT_PORT"],
   confirm_err_actions: ["ERRBIT_CONFIRM_ERR_ACTIONS"],
   user_has_username: ["ERRBIT_USER_HAS_USERNAME"],
