@@ -24,3 +24,11 @@ if ENV["RACK_ENV"].present?
     "Replace it with build-in Ruby on Rails ENV['RAILS_ENV']."
   )
 end
+
+if ENV["ERRBIT_ENFORCE_SSL"].present?
+  ActiveSupport::Deprecation.warn(
+    "ENV['ERRBIT_ENFORCE_SSL'] support is removed and has no effect in Errbit v0.10.0. " \
+    "You should run Errbit behind reverse proxy with HTTPS support. " \
+    "e.g. Traefik."
+  )
+end
