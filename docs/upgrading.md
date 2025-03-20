@@ -7,6 +7,13 @@
 * Remove `SERVE_STATIC_ASSETS` env support. Use build-in Ruby on Rails
   `RAILS_SERVE_STATIC_FILES` env. This option is enabled in official
   docker image.
+* Remove `RACK_ENV` env support. Use `RAILS_ENV` env for this. Official
+  docker image set `RAILS_ENV` to `production`.
+* Remove `ERRBIT_ENFORCE_SSL` env support. From now, Errbit always
+  should be behind reverse proxy with HTTPS support (ACME). Like, e.g.,
+  Traefik.
+* Remove `ERRBIT_PROTOCOL` env support.
+* Remove `ERRBIT_PORT` env support.
 
 ## Upgrading Errbit beyond v0.8.0
 
