@@ -173,7 +173,7 @@ to your user account on your **Edit profile** page.
 * Set `ERRBIT_USER_HAS_USERNAME=true`
 * Follow the [devise_ldap_authenticatable setup instructions](https://github.com/cschiewek/devise_ldap_authenticatable).
 * Set `config.ldap_create_user = true` in `config/initializers/devise.rb`, this enables creating the users from LDAP, otherwise login will not work.
-* Create a new initializer (e.g. ```config/initializers/devise_ldap.rb```) and add the following code to enable ldap authentication in the User-model:
+* Create a new initializer (e.g. `config/initializers/devise_ldap.rb`) and add the following code to enable ldap authentication in the User-model:
 
 ```ruby
 Errbit::Config.devise_modules << :ldap_authenticatable
@@ -183,18 +183,18 @@ Errbit::Config.devise_modules << :ldap_authenticatable
 before authentication. You must add the following lines to `app/models/user.rb`:
 
 ```ruby
-  def ldap_before_save
-    name = Devise::LDAP::Adapter.get_ldap_param(self.username, "givenName")
-    surname = Devise::LDAP::Adapter.get_ldap_param(self.username, "sn")
-    mail = Devise::LDAP::Adapter.get_ldap_param(self.username, "mail")
+def ldap_before_save
+  name = Devise::LDAP::Adapter.get_ldap_param(self.username, "givenName")
+  surname = Devise::LDAP::Adapter.get_ldap_param(self.username, "sn")
+  mail = Devise::LDAP::Adapter.get_ldap_param(self.username, "mail")
 
-    self.name = (name + surname).join ' '
-    self.email = mail.first
-  end
+  self.name = (name + surname).join(" ")
+  self.email = mail.first
+end
 ```
 
 * Now login with your user from LDAP, this will create a user in the database
-* Open a rails console and set the admin flag for your user:
+* Open a `bundle exec rails console` and set the admin flag for your user:
 
 ```ruby
 user = User.first
@@ -225,7 +225,7 @@ Errbit can now display information about the user who experienced an error.
 This gives you the ability to ask the user for more information,
 and let them know when you've fixed the bug.
 
-The Airbrake gem will look for ```current_user``` or ```current_member```. By default it will only send the ```id``` of the user, to specify other attributes you can set ```config.user_attributes```. See [the Airbrake wiki for more information](https://github.com/airbrake/airbrake/wiki/Sending-current-user-information).
+The Airbrake gem will look for `current_user` or `current_member`. By default, it will only send the `id` of the user, to specify other attributes you can set `config.user_attributes`. See [the Airbrake wiki for more information](https://github.com/airbrake/airbrake/wiki/Sending-current-user-information).
 
 If user information is received with an error report,
 it will be displayed under the *User Details* tab:
@@ -267,7 +267,7 @@ place them in a new file called `UserGemfile` and Errbit will treat that file
 as an additional Gemfile. If you want to use `errbit_jira_plugin`, just add it
 to `UserGemfile`:
 
-```bash
+```shell
 echo "gem 'errbit_jira_plugin'" > UserGemfile
 bundle install
 ```
