@@ -109,7 +109,7 @@ GEM
     crass (1.0.6)
     css_parser (1.21.1)
       addressable
-    csv (3.3.2)
+    csv (3.3.3)
     date (3.4.1)
     date (3.4.1-java)
     decent_exposure (3.0.4)
@@ -654,7 +654,7 @@ CHECKSUMS
   concurrent-ruby (1.1.10) sha256=244cb1ca0d91ec2c15ca2209507c39fb163336994428e16fbd3f465c87bd8e68
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   css_parser (1.21.1) sha256=6cfd3ffc0a97333b39d2b1b49c95397b05e0e3b684d68f77ec471ba4ec2ef7c7
-  csv (3.3.2) sha256=6ff0c135e65e485d1864dde6c1703b60d34cc9e19bed8452834a0b28a519bd4e
+  csv (3.3.3) sha256=7e2966befb7bdaf7d5e9b36e1de73e6a5e7a72f584f180a1726aec88a1b0a900
   date (3.4.1) sha256=bf268e14ef7158009bfeaec40b5fa3c7271906e88b196d958a89d4b408abe64f
   date (3.4.1-java) sha256=74740d914c65a922a15657c25ff0e203c16f1d0f7aa910a9ebed712afe9819c4
   decent_exposure (3.0.4) sha256=5ce9e3df24f8d77f094b2e612d1c43a78a2de879847ccbb57c0e596e6c303cf1
