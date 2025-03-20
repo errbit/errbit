@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "sparklines"
-
 class ProblemsController < ApplicationController
   include ProblemsSearcher
 
