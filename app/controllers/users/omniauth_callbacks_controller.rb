@@ -14,6 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user_email = github_get_user_email(client)
     if user_email.nil?
       flash[:error] = "Could not retrieve user's email from GitHub"
+
       nil
     else
       User.create(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
@@ -26,14 +27,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     github_site_title = Errbit::Config.github_site_title
     github_user = User.where(github_login: github_login).first || github_auto_sign_up(github_token)
 
-    # If user is already signed in, link github details to their account
+    # If user is already signed in, link GitHub details to their account
     if current_user
-      # ... unless a user is already registered with same github login
+      # ... unless a user is already registered with same GitHub login
       if github_user && github_user != current_user
         flash[:error] = "User already registered with #{github_site_title} login '#{github_login}'!"
       else
-        # Add github details to current user
+        # Add GitHub details to current user
         update_user_with_github_attributes(current_user, github_login, github_token)
+
         flash[:success] = "Successfully linked #{github_site_title} account!"
       end
       # User must have clicked 'link account' from their user page, so redirect there.
@@ -47,6 +49,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_session_path
     else
       flash[:error] = "There are no authorized users with #{github_site_title} login '#{github_login}'. Please ask an administrator to register your user account."
+
       redirect_to new_user_session_path
     end
   end

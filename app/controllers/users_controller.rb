@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :require_admin!, except: [:edit, :update]
-  before_action :require_user_edit_priviledges, only: [:edit, :update]
+  before_action :require_user_edit_privileges, only: [:edit, :update]
 
   expose(:user)
   expose(:users) do
@@ -16,6 +16,9 @@ class UsersController < ApplicationController
   end
 
   def new
+  end
+
+  def edit
   end
 
   def create
@@ -61,7 +64,7 @@ class UsersController < ApplicationController
 
   private
 
-  def require_user_edit_priviledges
+  def require_user_edit_privileges
     can_edit = current_user == user || current_user.admin?
     redirect_to(root_path) unless can_edit
   end
@@ -73,7 +76,7 @@ class UsersController < ApplicationController
   def user_permit_params
     @user_permit_params ||= [:name, :username, :email, :github_login, :per_page, :time_zone]
     @user_permit_params << :admin if current_user.admin? && current_user.id != params[:id]
-    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all? { |pa| !pa.blank? }
+    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all?(&:present?)
     @user_permit_params
   end
 

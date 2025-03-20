@@ -18,7 +18,7 @@ RSpec.describe ProblemsHelper, type: :helper do
   describe "#gravatar_tag" do
     let(:email) { "gravatar@example.com" }
     let(:email_hash) { Digest::MD5.hexdigest email }
-    let(:base_url) { "http://www.gravatar.com/avatar/#{email_hash}" }
+    let(:base_url) { "https://secure.gravatar.com/avatar/#{email_hash}" }
 
     context "default config" do
       before do
@@ -49,25 +49,15 @@ RSpec.describe ProblemsHelper, type: :helper do
       let(:email) { nil }
 
       it "should return nil" do
-        expect(helper.gravatar_url(email)).to be_nil
+        expect(helper.gravatar_url(email)).to eq(nil)
       end
     end
 
-    context "without ssl" do
+    context "with email" do
       let(:email) { "gravatar@example.com" }
       let(:email_hash) { Digest::MD5.hexdigest email }
 
-      it "should return the http url" do
-        expect(helper.gravatar_url(email)).to eq("http://www.gravatar.com/avatar/#{email_hash}?d=identicon")
-      end
-    end
-
-    context "with ssl" do
-      let(:email) { "gravatar@example.com" }
-      let(:email_hash) { Digest::MD5.hexdigest email }
-
-      it "should return the http url" do
-        allow(controller.request).to receive(:ssl?).and_return(true)
+      it "should return the https url" do
         expect(helper.gravatar_url(email)).to eq("https://secure.gravatar.com/avatar/#{email_hash}?d=identicon")
       end
     end

@@ -9,9 +9,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  ##
-  # Check if the current_user is admin or not and redirect to root url if not
-  #
   def require_admin!
     return if user_signed_in? && current_user.admin?
 

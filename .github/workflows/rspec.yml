@@ -16,13 +16,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mongodb-version: ["4.0", "4.2", "4.4", "5.0", "6.0"]
+        ruby: ["3.1"]
+        mongodb-version: ["4.0", "4.2", "4.4", "5.0", "6.0", "7.0", "8.0"]
 
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: ${{ matrix.ruby }}
           rubygems: "latest"
           bundler: "latest"
           bundler-cache: true

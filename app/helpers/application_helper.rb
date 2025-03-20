@@ -41,9 +41,9 @@ module ApplicationHelper
   end
 
   def create_percentage_table_from_tallies(tallies, options = {})
-    total = (options[:total] || total_from_tallies(tallies))
+    total = options[:total] || total_from_tallies(tallies)
     percent = 100.0 / total.to_f
-    rows = tallies.map { |value, count| [(count.to_f * percent), value] } \
+    rows = tallies.map { |value, count| [(count.to_f * percent), value] }
       .sort { |a, b| b[0] <=> a[0] }
     render "problems/tally_table", rows: rows
   end

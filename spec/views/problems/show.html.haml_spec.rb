@@ -197,7 +197,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
       render
 
       expect(view.content_for(:comments)).to include("Test comment")
-      expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
+      expect(view.content_for(:comments)).to have_selector('img[src^="https://secure.gravatar.com/avatar"]')
       expect(view.content_for(:comments)).to include("Add a comment")
     end
 
@@ -206,7 +206,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
       render
 
       expect(view.content_for(:comments)).to include("Test comment")
-      expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
+      expect(view.content_for(:comments)).to have_selector('img[src^="https://secure.gravatar.com/avatar"]')
     end
 
     it "displays comment when comment has no user" do
@@ -220,7 +220,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
       expect(view.content_for(:comments)).to include("Test comment")
       expect(view.content_for(:comments)).to include("Unknown User")
-      expect(view.content_for(:comments)).to have_selector('img[src^="http://www.gravatar.com/avatar"]')
+      expect(view.content_for(:comments)).to have_selector('img[src^="https://secure.gravatar.com/avatar"]')
     end
   end
 end

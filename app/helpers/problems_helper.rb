@@ -28,8 +28,7 @@ module ProblemsHelper
     options.reverse_merge! default_options
     params = options.extract!(:s, :d).delete_if { |_, v| v.blank? }
     email_hash = Digest::MD5.hexdigest(email)
-    # TODO: remove request.ssl? and related code
-    url = request.ssl? ? "https://secure.gravatar.com" : "http://www.gravatar.com"
+    url = "https://secure.gravatar.com"
     "#{url}/avatar/#{email_hash}?#{params.to_query}"
   end
 end
