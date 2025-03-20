@@ -69,6 +69,7 @@ Rails applications.
 
 Configuration
 -------------
+
 Errbit configuration is done entirely through environment variables. See
 [configuration](docs/configuration.md)
 
@@ -205,7 +206,7 @@ user.save!
 
 When upgrading Errbit, please run:
 
-```bash
+```shell
 git pull origin main # assuming origin is the github.com/errbit/errbit repo
 bundle install
 bundle exec rake db:migrate
@@ -242,6 +243,7 @@ https://github.com/airbrake/airbrake
 
 Javascript error notifications
 --------------------------------------
+
 You can log javascript errors that occur in your application by including the
 [airbrake-js](https://github.com/airbrake/airbrake-js) javascript library.
 
