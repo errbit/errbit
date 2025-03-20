@@ -26,7 +26,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       sign_in @user = Fabricate(:user)
     end
 
-    it "should show an error if another user already has that github login" do
+    it "should show an error if another user already has that GitHub login" do
       Fabricate(:user, github_login: "existing_user")
       stub_env_for_github_omniauth("existing_user")
       get :github
@@ -44,7 +44,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
   end
 
-  context "Creating a new user via Github authentication" do
+  context "Creating a new user via GitHub authentication" do
     before do
       Errbit::Config.github_org_id = 42
     end
@@ -112,5 +112,5 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
   end
 
-  # See spec/acceptance/sign_in_with_github_spec.rb for 'Signing in with github' integration tests.
+  # See spec/acceptance/sign_in_with_github_spec.rb for 'Signing in with GitHub' integration tests.
 end
