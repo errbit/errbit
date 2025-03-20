@@ -172,7 +172,7 @@ to your user account on your **Edit profile** page.
 
 * Set `ERRBIT_USER_HAS_USERNAME=true`
 * Follow the [devise_ldap_authenticatable setup instructions](https://github.com/cschiewek/devise_ldap_authenticatable).
-* Set `config.ldap_create_user = true` in `config/initializers/devise.rb`, this enables creating the users from LDAP, otherwhise login will not work.
+* Set `config.ldap_create_user = true` in `config/initializers/devise.rb`, this enables creating the users from LDAP, otherwise login will not work.
 * Create a new initializer (e.g. ```config/initializers/devise_ldap.rb```) and add the following code to enable ldap authentication in the User-model:
 
 ```ruby
