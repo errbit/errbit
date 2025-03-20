@@ -20,8 +20,10 @@ module Hoptoad
 
     def get_version_processor(version)
       case version
-      when /2\.[01234]/ then Hoptoad::V2
-      else; fail ApiVersionError
+      when /2\.[01234]/
+        Hoptoad::V2
+      else
+        fail ApiVersionError
       end
     end
   end
