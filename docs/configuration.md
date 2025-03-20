@@ -25,9 +25,9 @@ In order of precedence Errbit uses:
 
 ### Application parameters
 
-| Environment variable | Description                                         | Default            | Default in container |
-|----------------------|-----------------------------------------------------|--------------------|----------------------|
-| `ERRBIT_HOST`        | Hostname to use when building links back to Errbit  | errbit.example.com | as default           |
+| Environment variable | Description                                         | Default              | Default in container |
+|----------------------|-----------------------------------------------------|----------------------|----------------------|
+| `ERRBIT_HOST`        | Hostname to use when building links back to Errbit  | `errbit.example.com` | as default           |
 
 <dl>
 <dt>ERRBIT_ADMIN_EMAIL
