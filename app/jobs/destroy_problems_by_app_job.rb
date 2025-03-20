@@ -5,6 +5,7 @@ class DestroyProblemsByAppJob < ActiveJob::Base
 
   def perform(app_id)
     app = App.find_by(id: app_id)
-    ::ProblemDestroy.execute(app.problems)
+
+    ProblemDestroy.execute(app.problems)
   end
 end
