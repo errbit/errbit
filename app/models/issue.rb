@@ -57,8 +57,8 @@ class Issue
     problem.update(issue_link: url, issue_type: tracker.class.label)
 
     errors.empty?
-  rescue => ex
-    errors.add :base, "There was an error during issue creation: #{ex.message}"
+  rescue => e
+    errors.add :base, "There was an error during issue creation: #{e.message}"
     false
   end
 end
