@@ -5,16 +5,10 @@ to Heroku.
 
 See specific notes on deployment via:
 
-* [heroku](deployment/heroku.md)
-* [dokku](deployment/dokku.md)
-* [docker](deployment/docker.md)
-* [kubernetes (experimental)](deployment/kubernetes.md)
-
-You can use a process manager to deploy Errbit, but Errbit doesn't maintain
-support for any specific process manager. But if you use systemd, @nofxx has
-been kind enough to share:
-
-* [systemd config](https://gist.github.com/nofxx/f01dcfe3e9d504181d76)
+* [Heroku](deployment/heroku.md)
+* [Dokku](deployment/dokku.md)
+* [Docker](deployment/docker.md)
+* [Kubernetes (experimental)](deployment/kubernetes.md)
 
 ## HTTPS
 
@@ -29,13 +23,16 @@ HTTP.
 Alternatively, Errbit's Puma can be configured to serve HTTPS directly.
 Instead of starting Errbit with the command:
 
-```bash
-bundle exec puma -C config/puma.default.rb
+```shell
+bundle exec puma -C config/puma.rb
 ```
+
 start it with:
-```bash
-bundle exec puma -b "ssl://0.0.0.0:443?key=server.key&cert=server.crt" -C config/puma.default.rb
+
+```shell
+bundle exec puma -b "ssl://0.0.0.0:443?key=server.key&cert=server.crt" -C config/puma.rb
 ```
+
 Where `server.key` is a path to the TLS private key and `server.crt` is the path
 to the TLS certificate.
 
@@ -43,8 +40,10 @@ to the TLS certificate.
 
 If deploying with a system that can check if the app is running as expected then
 there are two endpoints that can be used:
-- `/health/readiness` - suitable for checking if app is ready to receive
+
+* `/health/readiness` - suitable for checking if app is ready to receive
   requests. If response status is 200 and body contains `{ "ok": true,
 "details": [etc...] }` then the app is ready.
-- `/health/liveness` - suitable for pinging periodically to check if app is still
+
+* `/health/liveness` - suitable for pinging periodically to check if app is still
   alive. Expected result is `{ "ok": true }`.

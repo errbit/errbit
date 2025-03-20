@@ -5,11 +5,34 @@
 [direnv](https://github.com/direnv/direnv) awesome tool. We recommend
 install and use it for development.
 
-## Avoid running acceptance test with phantomjs
+## Configure HTTPS for localhost
 
-Some acceptance test use phantomjs to interpret the Javascript in page.
-To avoid this test you can launch your test by skipping js tag
+### Install software
+
+[mkcert](https://github.com/FiloSottile/mkcert)
 
 ```shell
-bundle exec rspec spec --tag="~js"
+brew install mkcert nss
 ```
+
+### Install root cert
+
+```shell
+mkcert -install
+```
+
+### Generate certificates
+
+```shell
+mkcert errbit.lvh.me localhost 127.0.0.1 ::1
+```
+
+Rename the two generated files to `errbit.lvh.me.pem` and `errbit.lvh.me.key.pem` respectively.
+
+### Update Procfile.dev
+
+Uncomment `web-https` and comment `web`.
+
+### Run
+
+TODO

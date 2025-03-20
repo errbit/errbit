@@ -3,8 +3,8 @@
 module Api
   module V3
     class NoticesController < ApplicationController
-      VERSION_TOO_OLD = "Notice for old app version ignored".freeze
-      UNKNOWN_API_KEY = "Your API key is unknown".freeze
+      VERSION_TOO_OLD = "Notice for old app version ignored"
+      UNKNOWN_API_KEY = "Your API key is unknown"
 
       skip_before_action :verify_authenticity_token
       skip_before_action :authenticate_user!

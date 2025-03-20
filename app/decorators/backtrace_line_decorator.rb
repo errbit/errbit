@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BacktraceLineDecorator < Draper::Decorator
-  EMPTY_STRING = "".freeze
+  EMPTY_STRING = ""
 
   def in_app?
     return false if file.blank?

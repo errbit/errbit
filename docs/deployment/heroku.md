@@ -49,9 +49,9 @@ The final URI looks similar to this: `mongodb+srv://Username:MyPassword@modmail-
 
 ![Connection String - 2](./example/atlas6.png)
 
-Now that you have your connection URI, click the deploy button below and start your app deployment. Paste the entire URI you obtained from above into the MONGODB_URI Text box.
+Now that you have your connection URI, click the deploy button below and start your app deployment. Paste the entire URI you obtained from above into the `MONGODB_URI` Text box.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
 
 After deploying the application, you still need to run `rake errbit:bootstrap`
 to create indexes and get your admin user set up. You can do this by clicking the `Run Console` button in the More dropdown button of your new Heroku app. Then paste the rake command above and be sure to copy your admin credentials!
@@ -64,7 +64,8 @@ We designed Errbit to work well with Heroku. These instructions should result
 in a working deploy, but you should modify them to suit your needs:
 
 ### Clone and prepare the source code repository
-```bash
+
+```shell
 git clone git@github.com:errbit/errbit.git
 cd errbit
 ```
@@ -72,15 +73,18 @@ cd errbit
 - Update `db/seeds.rb` with admin credentials for your initial login
 
 Commit the results:
-```bash
+
+```shell
 git commit -m "Update db/seeds.rb with initial login"
 ```
 
 ### Install the heroku toolbelt
+
 [toolbelt.heroku.com](https://toolbelt.heroku.com/)
 
 ### Create an app on Heroku and push the source code. Use the above documentation to obtain a MongoDB URI from MongoDB Atlas if you don't have one.
-```bash
+
+```shell
 heroku apps:create
 heroku addons:create sendgrid:starter
 heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
@@ -89,22 +93,23 @@ heroku config:set ERRBIT_HOST=some-hostname.example.com
 heroku config:set ERRBIT_EMAIL_FROM=example@example.com
 heroku config:set EMAIL_DELIVERY_METHOD=smtp
 heroku config:set SMTP_SERVER=smtp.sendgrid.net
-git push heroku master
+git push heroku main
 ```
 
 ### Prepare the DB
 
-```bash
+```shell
 heroku run rake errbit:bootstrap
 ```
 
 ### Schedule recurring tasks
+
 You may want to periodically clear resolved errors to free up space. For that
 you have a few options:
 
 Option 1. With the heroku-scheduler add-on (replacement for cron):
 
-```bash
+```shell
 # Install the heroku scheduler add-on
 heroku addons:create scheduler:standard
 
@@ -116,13 +121,13 @@ heroku addons:create scheduler
 
 Option 2. With the cron add-on:
 
-```bash
+```shell
 # Install the heroku cron addon, to clear resolved errors daily:
 heroku addons:create cron:daily
 ```
 
 Option 3. Clear resolved errors manually:
 
-```bash
+```shell
 heroku run rake errbit:clear_resolved
 ```

@@ -12,7 +12,7 @@ you're running in a production environment, you should also specify
 If you don't already have one, you can generate a suitable `SECRET_KEY_BASE`
 with:
 
-```console
+```shell
 docker run --rm errbit/errbit bundle exec rake secret
 ```
 
@@ -27,7 +27,7 @@ If you are interested in using official release tags of errbit, contributions to
 Assuming you have a mongo host available, you can run errbit using `docker
 run`, exposing its HTTP interface on port 3000:
 
-```console
+```shell
 docker run \
   -e "RAILS_ENV=production" \
   -e "MONGO_URL=mongodb://my-mongo-host" \
@@ -39,7 +39,7 @@ docker run \
 Now run `bundle exec rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
 Docker container:
 
-```console
+```shell
 docker run \
   --rm \
   -e "RAILS_ENV=production" \
@@ -53,13 +53,13 @@ docker run \
 Docker compose can take care of starting up a mongo container along with the
 Errbit application container and linking the two containers together:
 
-```console
+```shell
 docker-compose up -e "SECRET_KEY_BASE=my$ecre7key123"
 ```
 
 Now run `bundle exec rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
 Docker container:
 
-```console
+```shell
 docker exec errbit_errbit_1 bundle exec rake errbit:bootstrap
 ```

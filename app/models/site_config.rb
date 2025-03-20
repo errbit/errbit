@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class SiteConfig
-  CONFIG_SOURCE_SITE = "site".freeze
-  CONFIG_SOURCE_APP = "app".freeze
+  CONFIG_SOURCE_SITE = "site"
+  CONFIG_SOURCE_APP = "app"
 
   include Mongoid::Document
   include Mongoid::Timestamps

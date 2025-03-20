@@ -5,7 +5,7 @@ For more details see [Heroku](heroku.md) guide.
 
 ## Create an app on dokku and push the source code
 
-```console
+```shell
 dokku apps:create errbit
 dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
 dokku mongo:create errbit errbit
@@ -25,6 +25,6 @@ git push dokku main
 
 ## Prepare the DB
 
-```console
+```shell
 dokku run errbit rake errbit:bootstrap
 ```

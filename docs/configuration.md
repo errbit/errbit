@@ -2,8 +2,9 @@
 
 Following the recommendation of [12factor.net](https://12factor.net/config),
 Errbit takes all of its configuration from environment variables. You can use
-[dotenv](https://github.com/bkeepers/dotenv), which is included in the `Gemfile`,
-to fill in any values that you can't or won't supply through the environment.
+[dotenv](https://github.com/bkeepers/dotenv), which is included in the
+`Gemfile`, to fill in any values that you can't or won't supply through the
+environment.
 
 In order of precedence Errbit uses:
 
@@ -55,19 +56,19 @@ In order of precedence Errbit uses:
 <dd>The value that should be set in the 'from' field for outgoing emails
 <dd>defaults to errbit@example.com
 <dt>ERRBIT_EMAIL_AT_NOTICES
-<dd>Errbit notifies watchers via email after the set number of occurances of the same error. [0] means notify on every occurance.
+<dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [1,10,100]
 <dt>ERRBIT_PER_APP_EMAIL_AT_NOTICES
-<dd>Let every application have it's own configuration rather than using ERRBIT_EMAIL_AT_NOTICES. If this value is true, you can configure each app using the web UI.
+<dd>Let every application have it's own configuration rather than using `ERRBIT_EMAIL_AT_NOTICES`. If this value is true, you can configure each app using the web UI.
 <dd>defaults to false
 <dt>ERRBIT_NOTIFY_AT_NOTICES
-<dd>Notify each application's configured notification service after the set number of occurances of the same error. [0] means notify on every occurance.
+<dd>Notify each application's configured notification service after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [0]
 <dt>ERRBIT_PER_APP_NOTIFY_AT_NOTICES
-<dd>Let every application have it's own configuration rather than using ERRBIT_NOTIFY_AT_NOTICES. If this value is set to true, you can configure each app using the web UI.
+<dd>Let every application have its own configuration rather than using `ERRBIT_NOTIFY_AT_NOTICES`. If this value is set to true, you can configure each app using the web UI.
 <dd>defaults to false
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
-<dd>Number of days to keep errors in the database when running rake errbit:clear_outdated
+<dd>Number of days to keep errors in the database when running `rake errbit:clear_outdated`
 <dd>defaults to nil (off)
 <dt>SECRET_KEY_BASE
 <dd>For production environments, you should run `rake secret` to generate a secret, unique key for this parameter
@@ -76,22 +77,22 @@ In order of precedence Errbit uses:
 <dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
 <dd>defaults to mongodb://localhost/errbit_&lt;Rails.env&gt;
 <dt>GITHUB_URL
-<dd>Use this URL for interacting github. This is useful if you have a github enterprise account and you're using a URL other than https://github.com
+<dd>Use this URL for interacting GitHub. This is useful if you have a GitHub enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com
 <dt>GITHUB_API_URL</dt>
-<dd>For github enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
+<dd>For GitHub enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
 <dd>defaults to https://api.github.com</dd>
 <dt>GITHUB_AUTHENTICATION
-<dd>Allow github sign-in via OAuth
+<dd>Allow GitHub sign-in via OAuth
 <dd>defaults to true
 <dt>GITHUB_CLIENT_ID
-<dd>Client id of your github application
+<dd>Client id of your GitHub application
 <dt>GITHUB_SECRET
-<dd>Secret key for your github application
+<dd>Secret key for your GitHub application
 <dt>GITHUB_ORG_ID
-<dd>ID of your github organization. If set, Errbit will create user accounts for users in your github organization who sign into Errbit without having a user account
+<dd>ID of your GitHub organization. If set, Errbit will create user accounts for users in your GitHub organization who sign into Errbit without having a user account
 <dt>GITHUB_ACCESS_SCOPE
-<dd>OAuth scope to request from users when they sign-in through github
+<dd>OAuth scope to request from users when they sign in through GitHub
 <dd>defaults to [repo]
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>

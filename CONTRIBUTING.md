@@ -10,7 +10,7 @@ follow the guidelines under 'All Contributions' below.
 
 All code change contributions should be made through the following steps:
 
-1. Fork errbit/errbit on GitHub
+1. Fork `errbit/errbit` on GitHub
 2. Create a branch with a descriptive name
 3. Make your changes
 4. Submit a pull request with a clear explanation of what you have
