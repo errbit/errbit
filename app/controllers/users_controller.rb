@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :require_admin!, except: [:edit, :update]
-  before_action :require_user_edit_priviledges, only: [:edit, :update]
+  before_action :require_user_edit_privileges, only: [:edit, :update]
 
   expose(:user)
   expose(:users) do
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
   private
 
-  def require_user_edit_priviledges
+  def require_user_edit_privileges
     can_edit = current_user == user || current_user.admin?
     redirect_to(root_path) unless can_edit
   end
