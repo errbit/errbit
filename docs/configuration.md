@@ -56,16 +56,16 @@ In order of precedence Errbit uses:
 <dd>The value that should be set in the 'from' field for outgoing emails
 <dd>defaults to errbit@example.com
 <dt>ERRBIT_EMAIL_AT_NOTICES
-<dd>Errbit notifies watchers via email after the set number of occurances of the same error. [0] means notify on every occurance.
+<dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [1,10,100]
 <dt>ERRBIT_PER_APP_EMAIL_AT_NOTICES
-<dd>Let every application have it's own configuration rather than using ERRBIT_EMAIL_AT_NOTICES. If this value is true, you can configure each app using the web UI.
+<dd>Let every application have it's own configuration rather than using `ERRBIT_EMAIL_AT_NOTICES`. If this value is true, you can configure each app using the web UI.
 <dd>defaults to false
 <dt>ERRBIT_NOTIFY_AT_NOTICES
-<dd>Notify each application's configured notification service after the set number of occurances of the same error. [0] means notify on every occurance.
+<dd>Notify each application's configured notification service after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [0]
 <dt>ERRBIT_PER_APP_NOTIFY_AT_NOTICES
-<dd>Let every application have it's own configuration rather than using ERRBIT_NOTIFY_AT_NOTICES. If this value is set to true, you can configure each app using the web UI.
+<dd>Let every application have its own configuration rather than using `ERRBIT_NOTIFY_AT_NOTICES`. If this value is set to true, you can configure each app using the web UI.
 <dd>defaults to false
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
 <dd>Number of days to keep errors in the database when running `rake errbit:clear_outdated`
@@ -92,7 +92,7 @@ In order of precedence Errbit uses:
 <dt>GITHUB_ORG_ID
 <dd>ID of your GitHub organization. If set, Errbit will create user accounts for users in your GitHub organization who sign into Errbit without having a user account
 <dt>GITHUB_ACCESS_SCOPE
-<dd>OAuth scope to request from users when they sign-in through GitHub
+<dd>OAuth scope to request from users when they sign in through GitHub
 <dd>defaults to [repo]
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
