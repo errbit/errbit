@@ -16,6 +16,6 @@ module HashHelper
       pretty += "," unless key == sorted_keys.last
     end
     nesting -= 1
-    pretty += "\n#{" " * nesting * tab_size}}"
+    pretty + "\n#{" " * nesting * tab_size}}"
   end
 end
