@@ -335,7 +335,6 @@ Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit). You may
 page](https://github.com/errbit/errbit/wiki/People-using-Errbit/_edit), and add
 your name and country to the list if you are using Errbit.
 
-
 Special Thanks
 --------------
 
