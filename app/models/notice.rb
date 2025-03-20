@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Notice
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
   include ActiveModel::Serializers::Xml
 
   UNAVAILABLE = "N/A"
@@ -9,9 +12,6 @@ class Notice
   # some amount of BSON encoding overhead, so keep it under 1,000 bytes to be
   # safe.
   MESSAGE_LENGTH_LIMIT = 1_000
-
-  include Mongoid::Document
-  include Mongoid::Timestamps
 
   field :message
   field :server_environment, type: Hash
@@ -91,6 +91,7 @@ class Notice
   def host
     uri = url && URI.parse(url)
     return uri.host if uri && uri.host.present?
+
     UNAVAILABLE
   rescue URI::InvalidURIError
     UNAVAILABLE
