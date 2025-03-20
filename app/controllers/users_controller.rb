@@ -18,6 +18,9 @@ class UsersController < ApplicationController
   def new
   end
 
+  def edit
+  end
+
   def create
     if user.save
       flash[:success] = "#{user.name} is now part of the team. Be sure to add them as a project watcher."
@@ -73,7 +76,7 @@ class UsersController < ApplicationController
   def user_permit_params
     @user_permit_params ||= [:name, :username, :email, :github_login, :per_page, :time_zone]
     @user_permit_params << :admin if current_user.admin? && current_user.id != params[:id]
-    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all? { |pa| !pa.blank? }
+    @user_permit_params |= [:password, :password_confirmation] if user_password_params.values.all?(&:present?)
     @user_permit_params
   end
 
