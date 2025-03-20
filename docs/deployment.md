@@ -23,13 +23,13 @@ HTTP.
 Alternatively, Errbit's Puma can be configured to serve HTTPS directly.
 Instead of starting Errbit with the command:
 
-```console
+```shell
 bundle exec puma -C config/puma.rb
 ```
 
 start it with:
 
-```console
+```shell
 bundle exec puma -b "ssl://0.0.0.0:443?key=server.key&cert=server.crt" -C config/puma.rb
 ```
 
