@@ -38,7 +38,8 @@ class Watcher
     when "user"
       self.email = nil
     when "email"
-      self.user = self.user_id = nil
+      self.user = nil
+      self.user_id = nil
     end
   end
 end

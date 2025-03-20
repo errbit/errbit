@@ -2,6 +2,7 @@
 
 class User
   PER_PAGE = 30
+
   include Mongoid::Document
   include Mongoid::Timestamps
 
