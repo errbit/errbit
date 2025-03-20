@@ -81,8 +81,8 @@ Notice Grouping
 The way Errbit arranges notices into error groups is configurable. By default,
 Errbit uses the notice's error class, error message, complete backtrace,
 component (or controller), action and environment name to generate a unique
-fingerprint for every notice. Notices with identical fingerprints appear in the
-UI as different occurences of the same error and notices with differing
+fingerprint for every notice. Notices with identical fingerprints appear in
+the UI as different occurrences of the same error and notices with differing
 fingerprints are displayed as separate errors.
 
 Changing the fingerprinter (under the "Config" menu) applies to all apps and
