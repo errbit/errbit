@@ -34,10 +34,20 @@ if ENV["ERRBIT_ENFORCE_SSL"].present?
   )
 end
 
+if ENV["ERRBIT_PROTOCOL"].present?
+  # Make it error in v0.11.0 release and remove in v0.12.0
+  ActiveSupport::Deprecation.warn(
+    "ENV['ERRBIT_PROTOCOL'] support is removed and has no effect in Errbit v0.10.0. " \
+    "When you are running Errbit behind reverse proxy with HTTPS support, protocol is already set to https " \
+    "and can't be changed."
+  )
+end
+
 if ENV["ERRBIT_PORT"].present?
   # Make it error in v0.11.0 release and remove in v0.12.0
   ActiveSupport::Deprecation.warn(
     "ENV['ERRBIT_PORT'] support is removed and has no effect in Errbit v0.10.0. " \
-    "When you are running Errbit behind reverse proxy with HTTPS support, port is already set to 443."
+    "When you are running Errbit behind reverse proxy with HTTPS support, port is already set to 443 " \
+    "and can't be changed."
   )
 end
