@@ -3,7 +3,8 @@
 module AirbrakeApi
   module V3
     class NoticeParser
-      class ParamsError < StandardError; end
+      class ParamsError < StandardError
+      end
 
       attr_reader :params, :error
 
