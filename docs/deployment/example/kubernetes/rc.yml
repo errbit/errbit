@@ -68,7 +68,3 @@ spec:
            value: 'example.com'
          - name: ERRBIT_HOST
            value: 'errbit.example.com'
-         - name: ERRBIT_PROTOCOL
-           value: 'https'
-         - name: ERRBIT_PORT
-           value: '443'

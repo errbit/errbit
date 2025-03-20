@@ -198,9 +198,7 @@ class Problem
     Rails.application.routes.url_helpers.app_problem_url(
       app,
       self,
-      protocol: Errbit::Config.protocol,
-      host: Errbit::Config.host,
-      port: Errbit::Config.port
+      host: Errbit::Config.host
     )
   end
 

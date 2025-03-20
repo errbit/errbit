@@ -17,7 +17,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
     expect(gtalk).to receive(:connect).with(notification_service.service)
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
     message_value = "#{problem.app.name}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
+https://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_service.notification_description problem}"
 
     expect(Jabber::Message).to receive(:new).with(notification_service.user_id, message_value).and_return(message)
@@ -39,7 +39,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
       @notification_service = Fabricate :gtalk_notification_service, app: @notice.app
       @problem = @notice.problem
       @error_msg = "#{@problem.app.name}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{@problem.app.id}
+https://#{Errbit::Config.host}/apps/#{@problem.app.id}
 #{@notification_service.notification_description @problem}"
 
       @gtalk = double("GtalkService")
@@ -107,7 +107,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
     expect(gtalk).to receive(:connect)
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
     message_value = "#{problem.app.name}
-#{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
+https://#{Errbit::Config.host}/apps/#{problem.app.id}
 #{notification_service.notification_description problem}"
 
     expect(Jabber::Message).to receive(:new).with(notification_service.room_id, message_value).and_return(message)
