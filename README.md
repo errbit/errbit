@@ -139,7 +139,7 @@ few others that could make sense for your needs:
 <dt>GITHUB_ACCESS_SCOPE="['public_repo']"</dt>
 <dd>Allow creating issues for public repos only</dd>
 <dt>GITHUB_ACCESS_SCOPE="[]"</dt>
-<dd>No permissions at all, but allows Errbit login through github</dd>
+<dd>No permissions at all, but allows Errbit login through GitHub</dd>
 </dl>
 
 * `GITHUB_ORG_ID` is an optional environment variable you can set to your own
@@ -148,16 +148,17 @@ few others that could make sense for your needs:
   accounts for new users.
 
 ### Configuring Google authentication:
-* Set GOOGLE_AUTHENTICATION=true
+
+* Set `GOOGLE_AUTHENTICATION=true`
 * Register your instance of Errbit at https://console.developers.google.com/apis/api/plus/overview
 
 If you host Errbit at errbit.example.com, you would fill in:
 
 <dl>
 <dt>URL
-<dd>http://errbit.example.com
+<dd>https://errbit.example.com
 <dt>Callback URL
-<dd>http://errbit.example.com/users/auth/google_oauth2/callback
+<dd>https://errbit.example.com/users/auth/google_oauth2/callback
 </dl>
 
 * After you have registered your app, set `GOOGLE_CLIENT_ID` and `GOOGLE_SECRET`
@@ -171,7 +172,7 @@ to your user account on your **Edit profile** page.
 
 * Set `ERRBIT_USER_HAS_USERNAME=true`
 * Follow the [devise_ldap_authenticatable setup instructions](https://github.com/cschiewek/devise_ldap_authenticatable).
-* Set ```config.ldap_create_user = true``` in ```config/initializers/devise.rb```, this enables creating the users from LDAP, otherwhise login will not work.
+* Set `config.ldap_create_user = true` in `config/initializers/devise.rb`, this enables creating the users from LDAP, otherwhise login will not work.
 * Create a new initializer (e.g. ```config/initializers/devise_ldap.rb```) and add the following code to enable ldap authentication in the User-model:
 
 ```ruby
