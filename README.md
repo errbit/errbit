@@ -128,7 +128,7 @@ create issues on GitHub. If you use another issue tracker, see [Issue
 Trackers](#issue-trackers).
 
 You can change the OAuth scope Errbit requests from GitHub by setting
-`GITHUB_ACCESS_SCOPE`. The default ['repo'] is very permissive, but there are a
+`GITHUB_ACCESS_SCOPE`. The default `['repo']` is very permissive, but there are a
 few others that could make sense for your needs:
 
 <dl>
@@ -150,7 +150,7 @@ few others that could make sense for your needs:
 * Set `GOOGLE_AUTHENTICATION=true`
 * Register your instance of Errbit at https://console.developers.google.com/apis/api/plus/overview
 
-If you host Errbit at errbit.example.com, you would fill in:
+If you host Errbit at `errbit.example.com`, you would fill in:
 
 <dl>
 <dt>URL
@@ -177,8 +177,9 @@ to your user account on your **Edit profile** page.
 Errbit::Config.devise_modules << :ldap_authenticatable
 ```
 
-* If you are authenticating by `username`, you will need to set the user's email manually
-before authentication. You must add the following lines to `app/models/user.rb`:
+* If you are authenticating by `username`, you will need to set the user's
+email manually before authentication. You must add the following lines to
+`app/models/user.rb`:
 
 ```ruby
 def ldap_before_save
@@ -223,7 +224,9 @@ Errbit can now display information about the user who experienced an error.
 This gives you the ability to ask the user for more information,
 and let them know when you've fixed the bug.
 
-The Airbrake gem will look for `current_user` or `current_member`. By default, it will only send the `id` of the user, to specify other attributes you can set `config.user_attributes`. See [the Airbrake wiki for more information](https://github.com/airbrake/airbrake/wiki/Sending-current-user-information).
+The Airbrake gem will look for `current_user` or `current_member`. By default,
+it will only send the `id` of the user, to specify other attributes you can
+set `config.user_attributes`. See [the Airbrake wiki for more information](https://github.com/airbrake/airbrake/wiki/Sending-current-user-information).
 
 If user information is received with an error report,
 it will be displayed under the *User Details* tab:
@@ -343,7 +346,7 @@ Special Thanks
 * [Marcin Ciunelis (@martinciu)](https://github.com/martinciu) - Helping to improve Errbit's architecture
 * [Cyril Mougel (@shingara)](https://github.com/shingara) - Maintaining Errbit and contributing many features
 * [Relevance](http://thinkrelevance.com) - For giving me Open-source Fridays to work on Errbit and all my awesome co-workers for giving feedback and inspiration.
-* [Thoughtbot](http://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](http://airbrake.io).
+* [Thoughtbot](https://thoughtbot.com) - For being great open-source advocates and setting the bar with [Airbrake](https://www.airbrake.io).
 
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for more details.
 
