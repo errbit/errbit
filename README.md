@@ -108,13 +108,13 @@ Authentication
 * Set `GITHUB_AUTHENTICATION=true`
 * Register your instance of Errbit at https://github.com/settings/applications/new
 
-If you host Errbit at errbit.example.com, you would fill in:
+If you host Errbit at `errbit.example.com`, you would fill in:
 
 <dl>
   <dt>URL</dt>
-  <dd>http://errbit.example.com</dd>
+  <dd>https://errbit.example.com</dd>
   <dt>Callback URL</dt>
-  <dd>http://errbit.example.com/users/auth/github/callback</dd>
+  <dd>https://errbit.example.com/users/auth/github/callback</dd>
 </dl>
 
 * After you have registered your app, set `GITHUB_CLIENT_ID` and `GITHUB_SECRET`
@@ -139,7 +139,7 @@ few others that could make sense for your needs:
 <dt>GITHUB_ACCESS_SCOPE="['public_repo']"</dt>
 <dd>Allow creating issues for public repos only</dd>
 <dt>GITHUB_ACCESS_SCOPE="[]"</dt>
-<dd>No permissions at all, but allows errbit login through github</dd>
+<dd>No permissions at all, but allows Errbit login through github</dd>
 </dl>
 
 * `GITHUB_ORG_ID` is an optional environment variable you can set to your own
