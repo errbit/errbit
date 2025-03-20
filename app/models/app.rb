@@ -72,7 +72,7 @@ class App
     watchers.pluck("user_id").include? user.id
   end
 
-  # Acceps a hash with the following attributes:
+  # Accepts a hash with the following attributes:
   #
   # * <tt>:error_class</tt> - the class of error (required to create a new Problem)
   # * <tt>:environment</tt> - the environment the source app was running in (required to create a new Problem)
