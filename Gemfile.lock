@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/errbit/errbit_plugin
-  revision: afb150983623d5403299c021dfff3e495b56e394
-  branch: modernize
-  specs:
-    errbit_plugin (0.7.0)
-
-GIT
   remote: https://github.com/errbit/hoptoad_notifier
   revision: 9b6a6f5017c5ca52b07b8d5c64c79b6d44c121d3
   branch: errbit
@@ -13,6 +6,20 @@ GIT
     hoptoad_notifier (2.4.11)
       activesupport
       builder
+
+PATH
+  remote: ../errbit_github_plugin
+  specs:
+    errbit_github_plugin (0.4.0)
+      errbit_plugin
+      octokit
+      railties (>= 6.1.0)
+
+PATH
+  remote: ../errbit_plugin
+  specs:
+    errbit_plugin (0.7.0)
+      railties (>= 6.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -145,9 +152,6 @@ GEM
       htmlentities (~> 4.3.3)
       launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
-    errbit_github_plugin (0.3.0)
-      errbit_plugin
-      octokit
     erubi (1.13.1)
     fabrication (2.31.0)
     faraday (2.12.2)
@@ -190,6 +194,10 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    importmap-rails (2.1.0)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
     jquery-rails (4.6.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -513,6 +521,8 @@ GEM
     standard-performance (1.7.0)
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.24.0)
+    stimulus-rails (1.3.4)
+      railties (>= 6.0.0)
     sucker_punch (3.2.0)
       concurrent-ruby (~> 1.0)
     super_diff (0.15.0)
@@ -575,7 +585,7 @@ DEPENDENCIES
   dotenv-rails
   draper
   email_spec
-  errbit_github_plugin
+  errbit_github_plugin!
   errbit_plugin!
   fabrication
   font-awesome-rails
@@ -584,6 +594,7 @@ DEPENDENCIES
   hoptoad_notifier!
   htmlentities
   httparty
+  importmap-rails
   jquery-rails
   json
   kaminari
@@ -619,6 +630,7 @@ DEPENDENCIES
   selenium-webdriver
   simplecov
   standard (= 1.47.0)
+  stimulus-rails
   sucker_punch
   super_diff
   underscore-rails
@@ -672,7 +684,7 @@ CHECKSUMS
   dotenv-rails (2.8.1) sha256=b05b81b7f4e51d1359e218d92279db1d84b12440f7118c9df19b5dfffb620f6c
   draper (4.0.4) sha256=acf3d7f4d5b28fd0e3b9fad9a0692f9a990e119362b802b92852362f9535b85e
   email_spec (2.3.0) sha256=df23be7a131186f7a3d5be3b35eaac9196f9ac13bd26c9c3d59341e13d852d11
-  errbit_github_plugin (0.3.0) sha256=96391948fae85fe3aaed78efa598791a8f16187e39e7038ca00bc137a266cc92
+  errbit_github_plugin (0.4.0)
   errbit_plugin (0.7.0)
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (2.31.0) sha256=2c79f10d1b88034a2ebd47ce77acba66847fc4636581c8282b3408adc68e85aa
@@ -701,6 +713,7 @@ CHECKSUMS
   http-cookie (1.0.8) sha256=b14fe0445cf24bf9ae098633e9b8d42e4c07c3c1f700672b09fbfe32ffd41aa6
   httparty (0.22.0) sha256=78652a5c9471cf0093d3b2083c2295c9c8f12b44c65112f1846af2b71430fa6c
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
+  importmap-rails (2.1.0) sha256=9f10c67d60651a547579f448100d033df311c5d5db578301374aeb774faae741
   jquery-rails (4.6.0) sha256=3c4e6bf47274340b44d836b8aa1b5472c6d451e2739af5ec094421f39025a7e2
   json (2.10.2) sha256=34e0eada93022b2a0a3345bb0b5efddb6e9ff5be7c48e409cfb54ff8a36a8b06
   json (2.10.2-java) sha256=fe31faac61ea21ea1448c35450183f84e85c2b94cc6522c241959ba9d1362006
@@ -821,6 +834,7 @@ CHECKSUMS
   standard (1.47.0) sha256=b0da6b71d8dec53e760c7216b723e3507ebdcd6962f7ce7c37c016a36c7cc190
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.7.0) sha256=c46a9aef3348c0cfc03053ed9a1c1f73b967f7e4edcdf30dac0101b143897314
+  stimulus-rails (1.3.4) sha256=765676ffa1f33af64ce026d26b48e8ffb2e0b94e0f50e9119e11d6107d67cb06
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   super_diff (0.15.0) sha256=1c857c27ea49ed57685ce05897efc35839d169e74a30fca1a97e7a401f0cb914
   temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b
