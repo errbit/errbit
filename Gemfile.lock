@@ -231,7 +231,7 @@ GEM
     mime-types (3.6.1)
       logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2025.0318)
+    mime-types-data (3.2025.0325)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     minitest (5.25.5)
@@ -715,7 +715,7 @@ CHECKSUMS
   matrix (0.4.2) sha256=71083ccbd67a14a43bfa78d3e4dc0f4b503b9cc18e5b4b1d686dc0f9ef7c4cc0
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
   mime-types (3.6.1) sha256=484326a50ebacc3f21a7993a201fda8beefb7efd1ba623dbea2bbb3113bf5d0b
-  mime-types-data (3.2025.0318) sha256=9f6689f5e21d5bc10a9777c9130d4166ca01c4598f5a47d471a9bd0cc9018e51
+  mime-types-data (3.2025.0325) sha256=8557e0e43b0b3216c2a518290039c1b65ffdbd6639db241142f7459eeba3c668
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.8) sha256=8e47136cdac04ce81750bb6c09733b37895bf06962554e4b4056d78168d70a75
   minitest (5.25.5) sha256=391b6c6cb43a4802bfb7c93af1ebe2ac66a210293f4a3fb7db36f2fc7dc2c756
