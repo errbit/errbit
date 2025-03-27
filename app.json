@@ -9,7 +9,7 @@
       "description": "The connection URI to your MongoDB Cluster. If you don't have one, you can create a free plan at https://cloud.mongodb.com . Follow the Heroky deployment docs on the Errbit repo for more information on obtaining this string.",
       "required": true
     },
-    "GEMFILE_RUBY_VERSION": "3.2.8",
+    "GEMFILE_RUBY_VERSION": "3.3.7",
     "SECRET_KEY_BASE": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
