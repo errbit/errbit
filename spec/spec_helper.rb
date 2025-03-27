@@ -53,5 +53,3 @@ RSpec.configure do |config|
     Draper::ViewContext.current.class_eval { include Haml::Helpers }
   end
 end
-
-OmniAuth.config.test_mode = true
