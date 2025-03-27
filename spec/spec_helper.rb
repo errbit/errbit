@@ -23,7 +23,6 @@ require "rspec/rails"
 require "email_spec"
 require "xmpp4r"
 require "xmpp4r/muc"
-require "mongoid-rspec"
 require "fabrication"
 require "sucker_punch/testing/inline"
 require "errbit_plugin/mock_issue_tracker"
@@ -38,8 +37,6 @@ ActionMailer::Base.delivery_method = :test
 RSpec.configure do |config|
   config.disable_monkey_patching!
 
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Mongoid::Matchers, type: :model
   config.alias_example_to :fit, focused: true
 
   config.before(:each) do
@@ -53,5 +50,3 @@ RSpec.configure do |config|
     Draper::ViewContext.current.class_eval { include Haml::Helpers }
   end
 end
-
-OmniAuth.config.test_mode = true

@@ -33,7 +33,9 @@ class Notice
   before_save :sanitize
   before_destroy :problem_recache
 
-  validates :backtrace_id, :server_environment, :notifier, presence: true
+  validates :backtrace_id, presence: true
+  validates :server_environment, presence: true
+  validates :notifier, presence: true
 
   scope :ordered, -> { order_by(:created_at.asc) }
   scope :reverse_ordered, -> { order_by(:created_at.desc) }

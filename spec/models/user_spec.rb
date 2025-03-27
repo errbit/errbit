@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
         require Rails.root.join("db/seeds.rb")
       end.to change {
         User.where(admin: true).count
-      }.from(0).to(1)
+      }.by(1)
     end
   end
 end

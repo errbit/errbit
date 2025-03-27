@@ -52,7 +52,7 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby 3.2
+* Ruby 3.3
 * MongoDB >= 4.0.x
 
 Installation

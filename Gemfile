@@ -85,7 +85,7 @@ group :test do
   gem "rspec"
   gem "rspec-rails", require: false
   gem "rspec-activemodel-mocks"
-  gem "mongoid-rspec", require: false
+  gem "mongoid-rspec"
   gem "fabrication"
   gem "capybara"
   gem "selenium-webdriver"
