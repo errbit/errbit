@@ -26,6 +26,14 @@ gem "rinku"
 gem "useragent"
 gem "uri"
 
+# ~/.rbenv/versions/3.3.7/lib/ruby/gems/3.3.0/gems/activesupport-6.1.7.10/lib/active_support/dependencies.rb:299: warning: mutex_m was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.4.0.
+# You can add mutex_m to your Gemfile or gemspec to silence this warning.
+# Also please contact the author of activesupport-6.1.7.10 to request adding mutex_m into its gemspec.
+# ~/.rbenv/versions/3.3.7/lib/ruby/gems/3.3.0/gems/activesupport-6.1.7.10/lib/active_support/testing/parallelization.rb:3: warning: drb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.4.0.
+# You can add drb to your Gemfile or gemspec to silence this warning.
+gem "mutex_m"
+gem "drb"
+
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem "hoptoad_notifier",
