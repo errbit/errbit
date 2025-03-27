@@ -219,7 +219,7 @@ RSpec.describe Problem, type: :model do
     it "adding a notice increases #notices_count by 1" do
       expect do
         Fabricate(:notice, err: @err, message: "ERR 1")
-      end.to change(@problem.reload, :notices_count).from(0).to(1)
+      end.to change(@problem.reload, :notices_count).by(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
@@ -227,7 +227,7 @@ RSpec.describe Problem, type: :model do
       expect do
         @err.notices.first.destroy
         @problem.reload
-      end.to change(@problem, :notices_count).from(1).to(0)
+      end.to change(@problem, :notices_count).by(-1)
     end
   end
 
@@ -437,7 +437,7 @@ RSpec.describe Problem, type: :model do
     it "adding a comment increases #comments_count by 1" do
       expect do
         Fabricate(:comment, err: @problem)
-      end.to change(@problem, :comments_count).from(0).to(1)
+      end.to change(@problem, :comments_count).by(1)
     end
 
     it "removing a comment decreases #comments_count by 1" do
@@ -445,7 +445,7 @@ RSpec.describe Problem, type: :model do
       expect do
         @problem.reload.comments.first.destroy
         @problem.reload
-      end.to change(@problem, :comments_count).from(1).to(0)
+      end.to change(@problem, :comments_count).by(-1)
     end
   end
 
