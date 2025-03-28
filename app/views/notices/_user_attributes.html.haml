@@ -7,4 +7,4 @@
       %tr
         %th= key
         - value = pretty_hash(value) if value.is_a?(Hash)
-        %td= Rinku.auto_link(ERB::Util.h(value)).html_safe
+        %td= auto_link(ERB::Util.h(value)).html_safe
