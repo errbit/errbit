@@ -7,7 +7,7 @@ RSpec.describe ProblemsHelper, type: :helper do
     it "handles links with target and wraps paragraph" do
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
-      ).to eq "<p>Goto <a href=\"https://errbit.com/\" target=\"_blank\">https://errbit.com/</a> and say hello to <a href=\"mailto:team@errbit.invalid\" target=\"_blank\">team@errbit.invalid</a></p>"
+      ).to eq "<p>Goto <a target=\"_blank\" href=\"https://errbit.com/\">https://errbit.com/</a> and say hello to <a target=\"_blank\" href=\"mailto:team@errbit.invalid\">team@errbit.invalid</a></p>"
     end
 
     it "sanitizes body of html tags" do
