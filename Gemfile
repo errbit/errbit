@@ -106,6 +106,6 @@ gem "sucker_punch"
 gem "concurrent-ruby", "1.3.4"
 
 # Lock zeitwerk gem for support JRuby 9.4
-gem "zeitwerk", "2.6.18"
+gem "zeitwerk", "2.7.2"
 
 eval_gemfile "./UserGemfile"
