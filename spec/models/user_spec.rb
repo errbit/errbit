@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
       expect(user.reset_password("Password123", "Password123")).to eq(true)
     end
 
-    it "should require a password with minimum of 6 characters" do
+    it "should require a password with minimum of 8 characters" do
       user = Fabricate.build(:user)
 
       user.reset_password("1234567", "1234578")

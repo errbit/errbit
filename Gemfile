@@ -22,7 +22,7 @@ gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
-gem "rinku"
+gem "rails_autolink"
 gem "useragent"
 gem "uri"
 
@@ -33,6 +33,15 @@ gem "uri"
 # You can add drb to your Gemfile or gemspec to silence this warning.
 gem "mutex_m"
 gem "drb"
+
+# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/activesupport-6.1.7.10/lib/active_support/dependencies.rb:299: warning: benchmark was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
+# You can add benchmark to your Gemfile or gemspec to silence this warning.
+# Also please contact the author of activesupport-6.1.7.10 to request adding benchmark into its gemspec.
+# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/activesupport-6.1.7.10/lib/active_support/dependencies.rb:299: warning: ostruct was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
+# You can add ostruct to your Gemfile or gemspec to silence this warning.
+# Also please contact the author of mongoid-9.0.6 to request adding ostruct into its gemspec.
+gem "benchmark"
+gem "ostruct"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods

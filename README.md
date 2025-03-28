@@ -1,6 +1,9 @@
-# Errbit [![Deploy](https://www.herokucdn.com/deploy/button.svg)][heroku-deploy-url]
+# Errbit
 
-[heroku-deploy-url]:https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main
+[![RSpec](https://github.com/errbit/errbit/actions/workflows/rspec.yml/badge.svg)](https://github.com/errbit/errbit/actions/workflows/rspec.yml)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
 
 ### The open source, self-hosted error catcher
 
@@ -52,7 +55,7 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby 3.3
+* Ruby 3.4
 * MongoDB >= 4.0.x
 
 Installation
