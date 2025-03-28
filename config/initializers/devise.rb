@@ -112,7 +112,7 @@ Devise.setup do |config|
   # config.reload_routes = true
 
   # ==> Configuration for :database_authenticatable
-  # For bcrypt, this is the cost for hashing the password and defaults to 11. If
+  # For bcrypt, this is the cost for hashing the password and defaults to 12. If
   # using other algorithms, it sets how many times you want the password to be hashed.
   # The number of stretches used for generating the hashed password are stored
   # with the hashed password. This allows you to change the stretches without
@@ -123,7 +123,7 @@ Devise.setup do |config|
   # a value less than 10 in other environments. Note that, for bcrypt (the default
   # algorithm), the cost increases exponentially with the number of stretches (e.g.
   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
-  config.stretches = Rails.env.test? ? 1 : 11
+  config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
   # config.pepper = 'b4ea5c51c5d1b3dfd9601cdfc6ef6f281744d90fac9e68a8247fc732bad2113b8074fd45da01dbc910392a66fcf9d2bb3374c2ae3f8192108496392b94fdfeb7'
