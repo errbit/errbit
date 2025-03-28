@@ -50,13 +50,16 @@ RSpec.describe User, type: :model do
     it "disables validations when reset password" do
       user = Fabricate.build(:user, email: "")
       user.save(validate: false)
-      expect(user.reset_password("Password123", "Password123")).to be_truthy
+
+      expect(user.reset_password("Password123", "Password123")).to eq(true)
     end
 
     it "should require a password with minimum of 6 characters" do
       user = Fabricate.build(:user)
-      user.reset_password("12345", "12345")
-      expect(user.errors[:password]).to include("is too short (minimum is 6 characters)", "is too short (minimum is 6 characters)")
+
+      user.reset_password("1234567", "1234578")
+
+      expect(user.errors[:password]).to eq(["is too short (minimum is 8 characters)"])
     end
   end
 
