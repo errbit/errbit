@@ -22,7 +22,7 @@ gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
-gem "rinku"
+gem "rails_autolink"
 gem "useragent"
 gem "uri"
 
