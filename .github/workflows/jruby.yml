@@ -1,4 +1,4 @@
-name: RSpec
+name: JRuby
 
 on:
   push:
@@ -10,14 +10,21 @@ on:
   schedule:
     - cron: "0 21 * * 6"
 
+permissions:
+  contents: read
+
+env:
+  JRUBY_OPTS: "--debug"
+
 jobs:
   rspec:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["3.4"]
+        ruby: ["jruby-9.4"]
         mongodb-version: ["4.0", "4.2", "4.4", "5.0", "6.0", "7.0", "8.0"]
 
     steps:
