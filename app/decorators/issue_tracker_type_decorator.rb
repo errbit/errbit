@@ -5,14 +5,16 @@ class IssueTrackerTypeDecorator < Draper::Decorator
   delegate_all
 
   # return hash of icons as data URIs
-  def icons
-    return unless object.icons
+  # def icons
+  #   return unless object.icons
+  #
+  #   object.icons.reduce({}) do |c, (k, v)|
+  #     c[k] = "data:#{v[0]};base64,#{Base64.encode64(File.read(v[1]))}"
+  #     c
+  #   end
 
-    object.icons.reduce({}) do |c, (k, v)|
-      c[k] = "data:#{v[0]};base64,#{Base64.encode64(v[1])}"
-      c
-    end
-  end
+    # raise "Fuck"
+  # end
 
   # class name for tracker type form fields
   #

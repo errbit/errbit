@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class IssueTrackerFieldDecorator < Draper::Decorator
+  attr_reader :object, :field_info
+
   def initialize(field, field_info)
     @object = field
     @field_info = field_info
   end
-  attr_reader :object, :field_info
 
   alias_method :key, :object
 
