@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "rails", "6.1.7.10"
+gem "rails", "8.0.2"
 
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
