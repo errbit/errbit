@@ -6,12 +6,19 @@ gem "rails", "6.1.7.10"
 
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
+gem "stimulus-rails"
+gem "importmap-rails"
 gem "decent_exposure"
 gem "devise"
 gem "dotenv-rails"
 gem "draper"
-gem "errbit_plugin"
-gem "errbit_github_plugin"
+# gem "errbit_plugin",
+#   git: "https://github.com/errbit/errbit_plugin",
+#   branch: "modernize"
+gem "errbit_plugin",
+  path: "../errbit_plugin"
+gem "errbit_github_plugin",
+  path: "../errbit_github_plugin"
 gem "font-awesome-rails"
 gem "haml"
 gem "htmlentities"
