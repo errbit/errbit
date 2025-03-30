@@ -209,6 +209,14 @@ Layout/AssignmentIndentation:
 Layout/ClosingParenthesisIndentation:
   Enabled: false
 
+# Enforced by standard. Disable.
+Layout/LineLength:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
 # Standard rules. Lint:
 
 # Enforced by standard. Disable.
@@ -292,6 +300,14 @@ RSpec/BeEq:
 
 # Prefer eq over eql.
 RSpec/BeEql:
+  Enabled: false
+
+# We don't use ActiveRecord.
+Rails/ActiveRecordAliases:
+  Enabled: false
+
+# We don't use ActiveRecord.
+Rails/SkipsModelValidations:
   Enabled: false
 
 # Disable shorthand hash syntax like: ({ x:, y: })
