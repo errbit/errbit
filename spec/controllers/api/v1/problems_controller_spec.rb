@@ -17,28 +17,33 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
       it "should return JSON if JSON is requested" do
         get :show, params: {auth_token: @user.authentication_token, format: "json", id: Problem.first.id}
-        expect { JSON.load(response.body) }.not_to raise_error # JSON::ParserError
+
+        expect { JSON.parse(response.body) }.not_to raise_error
       end
 
       it "should return XML if XML is requested" do
         get :index, params: {auth_token: @user.authentication_token, format: "xml", id: @problem.id}
+
         expect(Nokogiri::XML(response.body).errors).to be_empty
       end
 
       it "should return JSON by default" do
         get :show, params: {auth_token: @user.authentication_token, id: @problem.id}
-        expect { JSON.load(response.body) }.not_to raise_error # JSON::ParserError)
+
+        expect { JSON.parse(response.body) }.not_to raise_error
       end
 
       it "should return the correct problem" do
         get :show, params: {auth_token: @user.authentication_token, format: "json", id: @problem.id}
 
         returned_problem = JSON.parse(response.body)
+
         expect(returned_problem["_id"]).to eq(@problem.id.to_s)
       end
 
       it "should return only the correct fields" do
         get :show, params: {auth_token: @user.authentication_token, format: "json", id: @problem.id}
+
         returned_problem = JSON.parse(response.body)
 
         expect(returned_problem.keys).to match_array([
@@ -58,6 +63,7 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
       it "returns a 404 if the problem cannot be found" do
         get :show, params: {auth_token: @user.authentication_token, format: "json", id: "IdontExist"}
+
         expect(response.status).to eq(404)
       end
     end
@@ -72,33 +78,42 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
       it "should return JSON if JSON is requested" do
         get :index, params: {auth_token: @user.authentication_token, format: "json"}
-        expect { JSON.load(response.body) }.not_to raise_error # JSON::ParserError)
+
+        expect { JSON.parse(response.body) }.not_to raise_error
       end
 
       it "should return XML if XML is requested" do
         get :index, params: {auth_token: @user.authentication_token, format: "xml"}
+
         expect(Nokogiri::XML(response.body).errors).to be_empty
       end
 
       it "should return JSON by default" do
         get :index, params: {auth_token: @user.authentication_token}
-        expect { JSON.load(response.body) }.not_to raise_error # JSON::ParserError)
+
+        expect { JSON.parse(response.body) }.not_to raise_error
       end
 
       describe "given a date range" do
         it "should return only the problems open during the date range" do
           get :index, params: {auth_token: @user.authentication_token, start_date: "2012-08-20", end_date: "2012-08-27"}
+
           expect(response).to be_successful
-          problems = JSON.load response.body
-          expect(problems.length).to eq 2
+
+          problems = JSON.parse(response.body)
+
+          expect(problems.length).to eq(2)
         end
       end
 
       it "should return all problems" do
         get :index, params: {auth_token: @user.authentication_token}
+
         expect(response).to be_successful
-        problems = JSON.load response.body
-        expect(problems.length).to eq 4
+
+        problems = JSON.parse(response.body)
+
+        expect(problems.length).to eq(4)
       end
     end
   end
