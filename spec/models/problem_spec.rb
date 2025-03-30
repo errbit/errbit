@@ -188,10 +188,12 @@ RSpec.describe Problem, type: :model do
         expect(Problem.search("theErrorClass").unresolved).to include(find)
         expect(Problem.search("theErrorClass").unresolved).not_to include(dont_find)
       end
+
       it "find on where message" do
         problem = Fabricate(:problem, where: "cyril")
         expect(Problem.search("cyril").entries).to eq [problem]
       end
+
       it "finds with notice_id as argument" do
         app = Fabricate(:app)
         problem = Fabricate(:problem, app: app)
@@ -328,6 +330,7 @@ RSpec.describe Problem, type: :model do
 
   describe "#app_name" do
     let!(:app) { Fabricate(:app) }
+
     let!(:problem) { Fabricate(:problem, app: app) }
 
     before { app.reload }
@@ -460,9 +463,8 @@ RSpec.describe Problem, type: :model do
       end
 
       context "without issue_tracker associate to app" do
-        let(:issue_tracker) do
-          nil
-        end
+        let(:issue_tracker) { nil }
+
         it "return nil" do
           expect(problem.issue_type).to be_nil
         end
@@ -500,7 +502,9 @@ RSpec.describe Problem, type: :model do
 
   describe "#recache" do
     let(:problem) { Fabricate(:problem_with_errs) }
+
     let(:first_errs) { problem.errs }
+
     let!(:notice) { Fabricate(:notice, err: first_errs.first) }
 
     before do
@@ -555,7 +559,9 @@ RSpec.describe Problem, type: :model do
 
     context "with several notices" do
       let!(:notice_2) { Fabricate(:notice, err: first_errs.first) }
+
       let!(:notice_3) { Fabricate(:notice, err: first_errs.first) }
+
       before do
         problem.update_attributes!(messages: {})
         problem.recache

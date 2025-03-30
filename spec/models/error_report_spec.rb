@@ -77,6 +77,7 @@ RSpec.describe ErrorReport, type: :model do
           project_root: Rails.root
         ).to_xml
       end
+
       it "save a notice" do
         expect do
           error_report.generate_notice!
@@ -88,6 +89,7 @@ RSpec.describe ErrorReport, type: :model do
 
     describe "notice create" do
       before { error_report.generate_notice! }
+
       subject { error_report.notice }
 
       it "has correct message" do
@@ -313,6 +315,7 @@ RSpec.describe ErrorReport, type: :model do
       let(:xml) do
         Rails.root.join("spec", "fixtures", "hoptoad_test_notice_without_request_section.xml").read
       end
+
       it "save a notice" do
         expect do
           error_report.generate_notice!
@@ -326,6 +329,7 @@ RSpec.describe ErrorReport, type: :model do
       let(:xml) do
         Rails.root.join("spec", "fixtures", "hoptoad_test_notice_with_one_line_of_backtrace.xml").read
       end
+
       it "save a notice" do
         expect do
           error_report.generate_notice!
