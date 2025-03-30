@@ -39,7 +39,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#last_notice_at" do
+  describe "#last_notice_at" do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
@@ -53,7 +53,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#first_notice_at" do
+  describe "#first_notice_at" do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
@@ -67,7 +67,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#message" do
+  describe "#message" do
     it "adding a notice caches its message" do
       err = Fabricate(:err)
       problem = err.problem
@@ -87,7 +87,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#resolved?" do
+  describe "#resolved?" do
     it "should start out as unresolved" do
       problem = Problem.new
       expect(problem).not_to be_resolved
@@ -102,7 +102,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "resolve!" do
+  describe "#resolve!" do
     it "marks the problem as resolved" do
       problem = Fabricate(:problem)
       expect(problem).not_to be_resolved
@@ -144,7 +144,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#unmerge!" do
+  describe "#unmerge!" do
     it "creates a separate problem for each err" do
       problem1 = Fabricate(:notice).problem
       problem2 = Fabricate(:notice).problem
@@ -326,7 +326,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#app_name" do
+  describe "#app_name" do
     let!(:app) { Fabricate(:app) }
     let!(:problem) { Fabricate(:problem, app: app) }
 
@@ -588,7 +588,7 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  context "#url" do
+  describe "#url" do
     subject { Fabricate(:problem) }
 
     before { expect(Errbit::Config).to receive(:host).and_return("memyselfandi.com") }

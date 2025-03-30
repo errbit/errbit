@@ -29,7 +29,7 @@ RSpec.describe AppDecorator, type: :decorator do
     end
   end
 
-  context "#custom_backtrace_url" do
+  describe "#custom_backtrace_url" do
     it "should correctly replace the unescaped fields" do
       dbl = double(repo_branch: "feature/branch",
         custom_backtrace_url_template: "https://example.com/repo/name/src/branch/%{branch}/%{file}#L%{line}")

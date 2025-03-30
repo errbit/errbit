@@ -18,7 +18,7 @@ RSpec.describe Issue, type: :model do
   context "when app has no issue tracker" do
     let(:body) { "barrr" }
 
-    context "#save" do
+    describe "#save" do
       it "returns false" do
         expect(issue.save).to be false
       end
@@ -33,7 +33,7 @@ RSpec.describe Issue, type: :model do
   context "when has no body" do
     let(:body) { nil }
 
-    context "#save" do
+    describe "#save" do
       it "returns false" do
         expect(issue.save).to be false
       end
@@ -52,7 +52,7 @@ RSpec.describe Issue, type: :model do
       problem.app.issue_tracker = issue_tracker
     end
 
-    context "#render_body_args" do
+    describe "#render_body_args" do
       it "returns custom args if they exist" do
         allow(issue.tracker).to receive(:render_body_args).and_return(
           ["my", {custom: "args"}]
@@ -67,7 +67,7 @@ RSpec.describe Issue, type: :model do
       end
     end
 
-    context "#title" do
+    describe "#title" do
       it "returns custom title if it exists" do
         allow(issue.tracker).to receive(:title).and_return("kustomtitle")
         expect(issue.title).to eq("kustomtitle")
@@ -78,7 +78,7 @@ RSpec.describe Issue, type: :model do
       end
     end
 
-    context "#save" do
+    describe "#save" do
       context "when issue tracker has errors" do
         before do
           issue_tracker.tracker.options.clear
