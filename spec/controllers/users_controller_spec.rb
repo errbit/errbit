@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   it_requires_authentication
+
   it_requires_admin_privileges for: {
     index: :get,
     show: :get,
@@ -13,7 +14,9 @@ RSpec.describe UsersController, type: :controller do
   }
 
   let(:admin) { Fabricate(:admin) }
+
   let(:user) { Fabricate(:user) }
+
   let(:other_user) { Fabricate(:user) }
 
   context "Signed in as a regular user" do
@@ -185,12 +188,14 @@ RSpec.describe UsersController, type: :controller do
 
         context "with normal params" do
           let(:user_params) { {name: "Kermit"} }
+
           it "sets a message to display" do
             expect(request.flash[:success]).to eq I18n.t("controllers.users.flash.update.success", name: user.reload.name)
             expect(response).to redirect_to(user_path(user))
           end
         end
       end
+
       context "when the update is unsuccessful" do
         it "renders the edit page" do
           put :update, params: {id: user.to_param, user: {name: nil}}
@@ -235,12 +240,16 @@ RSpec.describe UsersController, type: :controller do
             ActionController::Parameters.new(user_param)
           )
         end
+
         let(:user_param) { {"user" => {name: "foo", admin: true}} }
+
         it "not have admin field" do
           expect(controller.send(:user_params).to_hash).to eq("name" => "foo")
         end
+
         context "with password and password_confirmation empty?" do
           let(:user_param) { {"user" => {:name => "foo", "password" => "", "password_confirmation" => ""}} }
+
           it "not have password and password_confirmation field" do
             expect(controller.send(:user_params).to_hash).to eq("name" => "foo")
           end
@@ -249,9 +258,11 @@ RSpec.describe UsersController, type: :controller do
 
       context "with current user admin" do
         it "have admin field"
+
         context "with password and password_confirmation empty?" do
           it "not have password and password_confirmation field"
         end
+
         context "on his own user" do
           it "not have admin field"
         end

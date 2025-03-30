@@ -5,9 +5,13 @@ require "rails_helper"
 RSpec.describe App, type: :model do
   context "Attributes" do
     it { is_expected.to have_field(:_id).of_type(String) }
+
     it { is_expected.to have_field(:name).of_type(String) }
+
     it { is_expected.to have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
+
     it { is_expected.to have_fields(:notify_all_users, :notify_on_errs).of_type(Mongoid::Boolean) }
+
     it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end
 
@@ -103,22 +107,22 @@ RSpec.describe App, type: :model do
     end
   end
 
-  context "#github_url_to_file" do
+  describe "#github_url_to_file" do
     it "resolves to full path to file" do
       app = Fabricate(:app, github_repo: "errbit/errbit")
       expect(app.github_url_to_file("path/to/file")).to eq "https://github.com/errbit/errbit/blob/main/path/to/file"
     end
   end
 
-  context "#github_repo?" do
+  describe "#github_repo?" do
     it "is true when there is a github_repo" do
       app = Fabricate(:app, github_repo: "errbit/errbit")
-      expect(app.github_repo?).to be(true)
+      expect(app.github_repo?).to eq(true)
     end
 
     it "is false when no github_repo" do
       app = Fabricate(:app)
-      expect(app.github_repo?).to be(false)
+      expect(app.github_repo?).to eq(false)
     end
   end
 
@@ -134,23 +138,23 @@ RSpec.describe App, type: :model do
     end
   end
 
-  context "emailable?" do
+  describe "#emailable?" do
     it "should be true if notify on errs and there are notification recipients" do
       app = Fabricate(:app, notify_on_errs: true, notify_all_users: false)
       2.times { Fabricate(:watcher, app: app) }
-      expect(app.emailable?).to be(true)
+      expect(app.emailable?).to eq(true)
     end
 
     it "should be false if notify on errs is disabled" do
       app = Fabricate(:app, notify_on_errs: false, notify_all_users: false)
       2.times { Fabricate(:watcher, app: app) }
-      expect(app.emailable?).to be(false)
+      expect(app.emailable?).to eq(false)
     end
 
     it "should be false if there are no notification recipients" do
       app = Fabricate(:app, notify_on_errs: true, notify_all_users: false)
       expect(app.watchers).to be_empty
-      expect(app.emailable?).to be(false)
+      expect(app.emailable?).to eq(false)
     end
   end
 
@@ -166,8 +170,9 @@ RSpec.describe App, type: :model do
     end
   end
 
-  context "#find_or_create_err!" do
+  describe "#find_or_create_err!" do
     let(:app) { Fabricate(:app) }
+
     let(:conditions) do
       {
         error_class: "Whoops",
@@ -204,6 +209,7 @@ RSpec.describe App, type: :model do
           fingerprint: "some-finger-print"
         }
       end
+
       it "save the err" do
         expect(Err.where(conditions).first).to be_nil
         expect do
@@ -218,6 +224,7 @@ RSpec.describe App, type: :model do
       app = Fabricate(:app)
       expect(App.find_by_api_key!(app.api_key)).to eq app
     end
+
     it "raise Mongoid::Errors::DocumentNotFound if not found" do
       expect do
         App.find_by_api_key!("foo")

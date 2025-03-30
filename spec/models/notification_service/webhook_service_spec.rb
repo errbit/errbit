@@ -14,7 +14,7 @@ RSpec.describe NotificationServices::WebhookService, type: :model do
     notification_service.create_notification(problem)
   end
 
-  context "#message_for_webhook" do
+  describe "#message_for_webhook" do
     it "should return an hash with all the keys nested inside 'problem' key" do
       notice = Fabricate :notice
       notification_service = Fabricate :webhook_notification_service, app: notice.app

@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe ProblemMerge do
   let(:problem) { Fabricate(:problem_with_errs) }
+
   let(:problem_1) { Fabricate(:problem_with_errs) }
 
   describe "#initialize" do
@@ -17,6 +18,7 @@ RSpec.describe ProblemMerge do
       problem_merge = ProblemMerge.new(problem, problem, problem_1)
       expect(problem_merge.merged_problem).to eql problem
     end
+
     it "extract other problem like child_problems" do
       problem_merge = ProblemMerge.new(problem, problem, problem_1)
       expect(problem_merge.child_problems).to eql [problem_1]
@@ -27,9 +29,13 @@ RSpec.describe ProblemMerge do
     let!(:problem_merge) do
       ProblemMerge.new(problem, problem_1)
     end
+
     let(:first_errs) { problem.errs }
+
     let(:merged_errs) { problem_1.errs }
+
     let!(:notice) { Fabricate(:notice, err: first_errs.first) }
+
     let!(:notice_1) { Fabricate(:notice, err: merged_errs.first) }
 
     it "delete one of problem" do
@@ -57,7 +63,9 @@ RSpec.describe ProblemMerge do
 
     context "with problem with comment" do
       let!(:comment) { Fabricate(:comment, err: problem) }
+
       let!(:comment_2) { Fabricate(:comment, err: problem_1, user: comment.user) }
+
       it "merge comment" do
         expect do
           problem_merge.merge

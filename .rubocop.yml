@@ -1,3 +1,6 @@
+require:
+  - rubocop-disable_syntax
+
 plugins:
   - rubocop-capybara
   - rubocop-rails
@@ -124,6 +127,10 @@ Style/GlobalStdStream:
 Style/StringLiteralsInInterpolation:
   Enabled: false
 
+# Disabled as in standard.
+Style/HashAsLastArrayItem:
+  Enabled: false
+
 # Standard rules. Layout:
 
 # Enforced by standard. Disable.
@@ -206,6 +213,14 @@ Layout/AssignmentIndentation:
 Layout/ClosingParenthesisIndentation:
   Enabled: false
 
+# Enforced by standard. Disable.
+Layout/LineLength:
+  Enabled: false
+
+# Enforced by standard. Disable.
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
 # Standard rules. Lint:
 
 # Enforced by standard. Disable.
@@ -282,3 +297,30 @@ Style/Documentation:
 # This is new RSpec default. Disable.
 RSpecRails/InferredSpecType:
   Enabled: false
+
+# Prefer eq over be.
+RSpec/BeEq:
+  Enabled: false
+
+# Prefer eq over eql.
+RSpec/BeEql:
+  Enabled: false
+
+# We prefer to use `expect` over `allow`.
+RSpec/StubbedMock:
+  Enabled: false
+
+# We don't use ActiveRecord.
+Rails/ActiveRecordAliases:
+  Enabled: false
+
+# We don't use ActiveRecord.
+Rails/SkipsModelValidations:
+  Enabled: false
+
+# Disable shorthand hash syntax like: ({ x:, y: })
+# Disable % style literals
+Style/DisableSyntax:
+  DisableSyntax:
+    - shorthand_hash_syntax
+    - percent_literals

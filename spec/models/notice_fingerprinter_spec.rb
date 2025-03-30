@@ -7,7 +7,7 @@ RSpec.describe NoticeFingerprinter, type: :model do
   let(:notice) { Fabricate(:notice) }
   let(:backtrace) { Fabricate(:backtrace) }
 
-  context "#generate" do
+  describe "#generate" do
     it "generates the same fingerprint for the same notice" do
       f1 = fingerprinter.generate("123", notice, backtrace)
       f2 = fingerprinter.generate("123", notice, backtrace)

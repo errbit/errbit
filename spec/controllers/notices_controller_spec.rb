@@ -6,8 +6,11 @@ RSpec.describe NoticesController, type: :controller do
   it_requires_authentication for: {locate: :get}
 
   let(:notice) { Fabricate(:notice) }
+
   let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
+
   let(:app) { Fabricate(:app) }
+
   let(:error_report) { double(valid?: true, generate_notice!: true, notice: notice, should_keep?: true) }
 
   context "notices API" do
@@ -55,6 +58,7 @@ RSpec.describe NoticesController, type: :controller do
       end
       context "with an invalid API_KEY" do
         let(:error_report) { double(valid?: false) }
+
         it "return 422" do
           post :create, params: {format: :xml, data: xml}
           expect(response.status).to eq 422

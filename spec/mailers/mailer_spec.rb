@@ -49,12 +49,15 @@ RSpec.describe Mailer do
       )
       a
     end
+
     let(:problem) do
       p = notice.problem
       p.notices_count = 3
       p
     end
+
     let!(:user) { Fabricate(:admin) }
+
     let(:error_report) do
       instance_double(
         "ErrorReport",
@@ -63,6 +66,7 @@ RSpec.describe Mailer do
         problem: problem
       )
     end
+
     let(:email) do
       Mailer.err_notification(error_report).deliver_now
     end
@@ -98,6 +102,7 @@ RSpec.describe Mailer do
 
     context "with a very long message" do
       let(:notice) { Fabricate(:notice, message: 6.times.collect { |_a| "0123456789" }.join("")) }
+
       it "should truncate the long message" do
         expect(email.subject).to match(/ \d{47}\.{3}$/)
       end
@@ -109,8 +114,11 @@ RSpec.describe Mailer do
     include EmailSpec::Matchers
 
     let!(:notice) { Fabricate(:notice) }
+
     let!(:comment) { Fabricate(:comment, err: notice.problem) }
+
     let!(:watcher) { Fabricate(:watcher, app: comment.app) }
+
     let(:recipients) { ["recipient@example.com", "another@example.com"] }
 
     before do
