@@ -34,7 +34,7 @@ RSpec.describe IssueTrackerDecorator, type: :decorator do
   end
 
   let(:decorator) do
-    IssueTrackerDecorator.new(issue_tracker)
+    described_class.new(issue_tracker)
   end
 
   describe "#type" do
