@@ -15,17 +15,9 @@
 # * <tt>:notifier</tt> - information to identify the source of the error report
 #
 class ErrorReport
-  attr_reader :api_key
-  attr_reader :error_class
-  attr_reader :framework
-  attr_reader :message
-  attr_reader :notice
-  attr_reader :notifier
-  attr_reader :problem
-  attr_reader :problem_was_resolved
-  attr_reader :request
-  attr_reader :server_environment
-  attr_reader :user_attributes
+  attr_reader :api_key, :error_class, :framework, :message, :notice,
+    :notifier, :problem, :problem_was_resolved, :request, :server_environment,
+    :user_attributes
 
   def initialize(xml_or_attributes)
     @attributes = xml_or_attributes
