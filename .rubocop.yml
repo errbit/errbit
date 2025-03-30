@@ -284,8 +284,8 @@ Style/Documentation:
 RSpecRails/InferredSpecType:
   Enabled: false
 
-# rubocop-disable_syntax rules
-
+# Disable shorthand hash syntax like: ({ x:, y: })
+# Disable % style literals
 Style/DisableSyntax:
   DisableSyntax:
     - shorthand_hash_syntax
