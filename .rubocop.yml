@@ -5,6 +5,7 @@ plugins:
   - rubocop-rspec
   - rubocop-rspec_rails
   - rubocop-performance
+  - rubocop-disable_syntax
 
 AllCops:
   TargetRubyVersion: 3.1
@@ -282,3 +283,10 @@ Style/Documentation:
 # This is new RSpec default. Disable.
 RSpecRails/InferredSpecType:
   Enabled: false
+
+# rubocop-disable_syntax rules
+
+Style/DisableSyntax:
+  DisableSyntax:
+    - shorthand_hash_syntax
+    - percent_literals

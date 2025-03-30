@@ -81,6 +81,7 @@ group :development, :test do
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
   gem "rubocop-performance", require: false
+  gem "rubocop-disable_syntax", require: false
   gem "standard", "1.47.0", require: false
 end
 
