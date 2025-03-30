@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HealthController < ActionController::Base
+class HealthController < ActionController::Base # rubocop:disable Rails/ApplicationController
   class << self
     def impatient_mongoid_client
       @impatient_mongoid_client ||= Mongo::Client.new(
