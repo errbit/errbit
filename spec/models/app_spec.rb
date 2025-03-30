@@ -5,9 +5,13 @@ require "rails_helper"
 RSpec.describe App, type: :model do
   context "Attributes" do
     it { is_expected.to have_field(:_id).of_type(String) }
+
     it { is_expected.to have_field(:name).of_type(String) }
+
     it { is_expected.to have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
+
     it { is_expected.to have_fields(:notify_all_users, :notify_on_errs).of_type(Mongoid::Boolean) }
+
     it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end
 
@@ -168,6 +172,7 @@ RSpec.describe App, type: :model do
 
   describe "#find_or_create_err!" do
     let(:app) { Fabricate(:app) }
+
     let(:conditions) do
       {
         error_class: "Whoops",
@@ -204,6 +209,7 @@ RSpec.describe App, type: :model do
           fingerprint: "some-finger-print"
         }
       end
+
       it "save the err" do
         expect(Err.where(conditions).first).to be_nil
         expect do

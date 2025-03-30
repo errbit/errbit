@@ -10,6 +10,7 @@ RSpec.describe OutdatedProblemClearer do
   let(:outdated_problem_clearer) do
     OutdatedProblemClearer.new
   end
+
   describe "#execute" do
     let!(:problems) do
       [
@@ -18,6 +19,7 @@ RSpec.describe OutdatedProblemClearer do
         Fabricate(:problem)
       ]
     end
+
     context "without old problems" do
       it "do nothing" do
         expect do
@@ -26,6 +28,7 @@ RSpec.describe OutdatedProblemClearer do
           Problem.count
         }
       end
+
       it "not compact database" do
         allow(Mongoid.default_client).to receive(:command).and_call_original
         expect(Mongoid.default_client).not_to receive(:command).with(compact: an_instance_of(String))
