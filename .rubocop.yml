@@ -127,6 +127,10 @@ Style/GlobalStdStream:
 Style/StringLiteralsInInterpolation:
   Enabled: false
 
+# Disabled as in standard.
+Style/HashAsLastArrayItem:
+  Enabled: false
+
 # Standard rules. Layout:
 
 # Enforced by standard. Disable.
