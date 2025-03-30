@@ -290,6 +290,10 @@ RSpecRails/InferredSpecType:
 RSpec/BeEq:
   Enabled: false
 
+# Prefer eq over eql.
+RSpec/BeEql:
+  Enabled: false
+
 # Disable shorthand hash syntax like: ({ x:, y: })
 # Disable % style literals
 Style/DisableSyntax:
