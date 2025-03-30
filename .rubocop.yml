@@ -306,6 +306,10 @@ RSpec/BeEq:
 RSpec/BeEql:
   Enabled: false
 
+# We prefer to use `expect` over `allow`.
+RSpec/StubbedMock:
+  Enabled: false
+
 # We don't use ActiveRecord.
 Rails/ActiveRecordAliases:
   Enabled: false
