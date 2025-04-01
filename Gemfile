@@ -104,6 +104,7 @@ group :test do
   gem "email_spec"
   gem "simplecov", require: false
   gem "super_diff"
+  gem "webmock"
 end
 
 gem "puma"
