@@ -11,7 +11,7 @@ on:
   schedule:
     - cron: "0 21 * * 6"
 
-permissions: ""
+permissions: {}
 
 jobs:
   actionlint:
