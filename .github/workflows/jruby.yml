@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["jruby-9.4"]
+        ruby: ["jruby-head"]
         mongodb-version: ["4.0", "4.2", "4.4", "5.0", "6.0", "7.0", "8.0"]
 
     steps:
