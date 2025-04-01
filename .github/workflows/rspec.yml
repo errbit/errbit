@@ -10,6 +10,9 @@ on:
   schedule:
     - cron: "0 21 * * 6"
 
+env:
+  SE_AVOID_STATS: "true"
+
 jobs:
   rspec:
     runs-on: ubuntu-24.04

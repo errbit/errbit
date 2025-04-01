@@ -15,6 +15,7 @@ permissions:
 
 env:
   JRUBY_OPTS: "--debug"
+  SE_AVOID_STATS: "true"
 
 jobs:
   rspec:
