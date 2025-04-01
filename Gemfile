@@ -105,6 +105,7 @@ group :test do
   gem "simplecov", require: false
   gem "super_diff"
   gem "webmock"
+  gem "vcr"
 end
 
 gem "puma"
