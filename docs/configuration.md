@@ -26,9 +26,20 @@ In order of precedence Errbit uses:
 
 ### Application parameters
 
-| Environment variable | Description                                         | Default              | Default in container |
-|----------------------|-----------------------------------------------------|----------------------|----------------------|
-| `ERRBIT_HOST`        | Hostname to use when building links back to Errbit  | `errbit.example.com` | as default           |
+| Environment variable         | Description                                        | Default              | Default in container |
+|------------------------------|----------------------------------------------------|----------------------|----------------------|
+| `MONGO_URL`                  |                                                    |                      |                      |
+| `SECRET_KEY_BASE`            |                                                    |                      |                      |
+| `ERRBIT_HOST`                | Hostname to use when building links back to Errbit | `errbit.example.com` | as default           |
+| `ERRBIT_ADMIN_EMAIL`         |                                                    |                      |                      |
+| `ERRBIT_ADMIN_PASSWORD`      |                                                    |                      |                      |
+| `ERRBIT_ADMIN_USER`          |                                                    |                      |                      |
+| `ERRBIT_CONFIRM_ERR_ACTIONS` |                                                    |                      |                      |
+| `ERRBIT_USER_HAS_USERNAME`   |                                                    |                      |                      |
+| `ERRBIT_USE_GRAVATAR`        |                                                    |                      |                      |
+| `ERRBIT_GRAVATAR_DEFAULT`    |                                                    |                      |                      |
+| `ERRBIT_EMAIL_FROM`          |                                                    |                      |                      |
+
 
 <dl>
 <dt>ERRBIT_ADMIN_EMAIL
