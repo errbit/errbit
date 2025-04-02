@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with Google", type: :system do
-  # before { driven_by(:selenium_chrome_headless) }
+  before { driven_by(:selenium_chrome_headless) }
 
   context "sign in via Google with recognized user" do
     let!(:user) { Fabricate(:user, google_uid: "123456789") }
