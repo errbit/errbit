@@ -5,13 +5,13 @@ require "rails_helper"
 RSpec.describe "Sign in with Google with domain validation", type: :system do
   before { driven_by(:selenium_chrome_headless) }
 
+  before { expect(Errbit::Config).to receive(:google_authentication).and_return(true).at_least(1).times }
+
+  before { expect(Errbit::Config).to receive(:google_auto_provision).and_return(true) }
+
+  before { expect(Errbit::Config).to receive(:google_authorized_domains).and_return("example.com").twice }
+
   context "create an account for recognized user if their account email is from a trusted domain" do
-    before { expect(Errbit::Config).to receive(:google_authentication).and_return(true) }
-
-    before { expect(Errbit::Config).to receive(:google_auto_provision).and_return(true) }
-
-    before { expect(Errbit::Config).to receive(:google_authorized_domains).and_return("example.com").twice }
-
     before { OmniAuth.config.mock_auth[:google_oauth2] = Faker::Omniauth.google(email: "me@example.com", uid: "123456789") }
 
     after { OmniAuth.config.mock_auth[:google_oauth2] = nil }
@@ -26,12 +26,6 @@ RSpec.describe "Sign in with Google with domain validation", type: :system do
   end
 
   context "don't create an account for user if their account email is from an unauthorized domain" do
-    before { expect(Errbit::Config).to receive(:google_authentication).and_return(true).twice }
-
-    before { expect(Errbit::Config).to receive(:google_auto_provision).and_return(true) }
-
-    before { expect(Errbit::Config).to receive(:google_authorized_domains).and_return("example.com").twice }
-
     before { OmniAuth.config.mock_auth[:google_oauth2] = Faker::Omniauth.google(email: "me@mail.example.com", uid: "123456789") }
 
     after { OmniAuth.config.mock_auth[:google_oauth2] = nil }
