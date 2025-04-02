@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require "capybara/rspec"
+# require "capybara/rspec"
 
-Capybara.javascript_driver = :selenium_chrome_headless
-
-OmniAuth.config.test_mode = true
+# Capybara.javascript_driver = :selenium_chrome_headless
+#
+# OmniAuth.config.test_mode = true
 
 def mock_auth(user = "test_user", token = "abcdef")
-  OmniAuth.config.mock_auth[:github] = Hashie::Mash.new(
-    "provider" => "github",
-    "uid" => "1763",
-    "extra" => {
-      "raw_info" => {
-        "login" => user
-      }
-    },
-    "credentials" => {
-      "token" => token
-    }
-  )
+  # OmniAuth.config.mock_auth[:github] = Hashie::Mash.new(
+  #   "provider" => "github",
+  #   "uid" => "1763",
+  #   "extra" => {
+  #     "raw_info" => {
+  #       "login" => user
+  #     }
+  #   },
+  #   "credentials" => {
+  #     "token" => token
+  #   }
+  # )
 
   OmniAuth.config.mock_auth[:google_oauth2] = Hashie::Mash.new(
     provider: "google_oauth2",
