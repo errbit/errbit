@@ -490,6 +490,9 @@ GEM
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
       rubocop-rspec (~> 3.5)
+    rubocop-thread_safety (0.7.2)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     ruby_engine (2.0.3)
@@ -655,6 +658,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   rubocop-rspec_rails
+  rubocop-thread_safety
   rushover
   selenium-webdriver
   simplecov
@@ -861,6 +865,7 @@ CHECKSUMS
   rubocop-rake (0.7.1) sha256=3797f2b6810c3e9df7376c26d5f44f3475eda59eb1adc38e6f62ecf027cbae4d
   rubocop-rspec (3.5.0) sha256=710c942fe1af884ba8eea75cbb8bdbb051929a2208880a6fc2e2dce1eed5304c
   rubocop-rspec_rails (2.31.0) sha256=775375e18a26a1184a812ef3054b79d218e85601b9ae897f38f8be24dddf1f45
+  rubocop-thread_safety (0.7.2) sha256=bd51449c420b1ddda5672b71a39706367402beb55aaf19fc020c1868717f31f6
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   ruby2_keywords (0.0.5) sha256=ffd13740c573b7301cf7a2e61fc857b2a8e3d3aff32545d6f8300d8bae10e3ef
   ruby_engine (2.0.3) sha256=ca2ae7def8cfcdc2bfb6a186d36d5d59c8b403245dc0256c3802b767fa278aaa

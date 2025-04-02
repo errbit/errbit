@@ -87,6 +87,7 @@ group :development, :test do
   gem "rubocop-rspec_rails", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-disable_syntax", require: false
+  gem "rubocop-thread_safety", require: false
   gem "standard", "1.47.0", require: false
   gem "faker"
 end
