@@ -310,6 +310,14 @@ RSpec/BeEql:
 RSpec/StubbedMock:
   Enabled: false
 
+# We prefer multiple before blocks in tests.
+RSpec/ScatteredSetup:
+  Enabled: false
+
+# We use `expect` in before hooks.
+RSpec/ExpectInHook:
+  Enabled: false
+
 # We don't use ActiveRecord.
 Rails/ActiveRecordAliases:
   Enabled: false
