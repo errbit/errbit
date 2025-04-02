@@ -22,8 +22,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def github
-    github_login = request.env["omniauth.auth"].extra.raw_info.login
-    github_token = request.env["omniauth.auth"].credentials.token
+    github_login = request.env["omniauth.auth"].dig(:extra, :raw_info, :login)
+    github_token = request.env["omniauth.auth"].dig(:credentials, :token)
     github_site_title = Errbit::Config.github_site_title
     github_user = User.where(github_login: github_login).first || github_auto_sign_up(github_token)
 
