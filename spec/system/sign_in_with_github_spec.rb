@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.feature "Sign in with GitHub", type: :system do
+RSpec.describe "Sign in with GitHub", type: :system do
   before { driven_by(:selenium_chrome_headless) }
 
   context "sign in via GitHub with recognized user" do
