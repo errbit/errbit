@@ -8,6 +8,7 @@ plugins:
   - rubocop-rspec
   - rubocop-rspec_rails
   - rubocop-performance
+  - rubocop-thread_safety
 
 AllCops:
   TargetRubyVersion: 3.1
@@ -308,6 +309,14 @@ RSpec/BeEql:
 
 # We prefer to use `expect` over `allow`.
 RSpec/StubbedMock:
+  Enabled: false
+
+# We prefer multiple before blocks in tests.
+RSpec/ScatteredSetup:
+  Enabled: false
+
+# We use `expect` in before hooks.
+RSpec/ExpectInHook:
   Enabled: false
 
 # We don't use ActiveRecord.

@@ -18,6 +18,8 @@ gem "htmlentities"
 gem "kaminari"
 gem "kaminari-mongoid"
 gem "mongoid"
+gem "faraday-retry"
+gem "octokit"
 gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-github"
@@ -42,6 +44,9 @@ gem "drb"
 # Also please contact the author of mongoid-9.0.6 to request adding ostruct into its gemspec.
 gem "benchmark"
 gem "ostruct"
+
+# ~/.rbenv/versions/3.4.2/lib/ruby/3.4.0/readline.rb:4: warning: reline was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
+gem "reline"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -82,7 +87,9 @@ group :development, :test do
   gem "rubocop-rspec_rails", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-disable_syntax", require: false
+  gem "rubocop-thread_safety", require: false
   gem "standard", "1.47.0", require: false
+  gem "faker"
 end
 
 group :development do
@@ -104,6 +111,8 @@ group :test do
   gem "email_spec"
   gem "simplecov", require: false
   gem "super_diff"
+  gem "webmock"
+  gem "vcr"
 end
 
 gem "puma"

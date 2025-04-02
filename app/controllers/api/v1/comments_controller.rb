@@ -7,7 +7,7 @@ module Api
       skip_before_action :authenticate_user!
 
       respond_to :json, :xml
-      FIELDS = ["_id", "err_id", "user_id", "body"]
+      FIELDS = ["_id", "err_id", "user_id", "body"].freeze
 
       def index
         results = benchmark("[api/v1/comments_controller/index] query time") do
