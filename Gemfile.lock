@@ -624,6 +624,7 @@ DEPENDENCIES
   mongoid
   mongoid-rspec
   mutex_m
+  octokit
   omniauth
   omniauth-github
   omniauth-google-oauth2
