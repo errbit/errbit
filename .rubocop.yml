@@ -8,6 +8,7 @@ plugins:
   - rubocop-rspec
   - rubocop-rspec_rails
   - rubocop-performance
+  - rubocop-thread_safety
 
 AllCops:
   TargetRubyVersion: 3.1
