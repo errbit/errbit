@@ -149,6 +149,8 @@ GEM
     errbit_plugin (0.6.0)
     erubi (1.13.1)
     fabrication (2.31.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -602,6 +604,7 @@ DEPENDENCIES
   errbit_github_plugin
   errbit_plugin
   fabrication
+  faker
   font-awesome-rails
   haml
   hoi
@@ -709,6 +712,7 @@ CHECKSUMS
   errbit_plugin (0.6.0) sha256=ec4a7567333e3771802805e6c8e901fdfdbb9d576bbcc2af91573694cea89b15
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (2.31.0) sha256=2c79f10d1b88034a2ebd47ce77acba66847fc4636581c8282b3408adc68e85aa
+  faker (3.5.1) sha256=1ad1fbea279d882f486059c23fe3ddb816ccd1d7052c05a45014b4450d859bfc
   faraday (2.12.2) sha256=157339c25c7b8bcb739f5cf1207cb0cefe8fa1c65027266bcbc34c90c84b9ad6
   faraday-net_http (3.4.0) sha256=a1f1e4cd6a2cf21599c8221595e27582d9936819977bbd4089a601f24c64e54a
   ffi (1.17.1) sha256=26f6b0dbd1101e6ffc09d3ca640b2a21840cc52731ad8a7ded9fb89e5fb0fc39
