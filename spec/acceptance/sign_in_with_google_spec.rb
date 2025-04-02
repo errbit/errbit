@@ -7,7 +7,6 @@ RSpec.feature "Sign in with Google with domain validation" do
     allow(Errbit::Config).to receive(:google_authentication).and_return(true)
     allow(Errbit::Config).to receive(:google_auto_provision).and_return(true)
     allow(Errbit::Config).to receive(:google_authorized_domains).and_return("errbit.example.com")
-    Fabricate(:user, google_uid: "nashby")
     visit root_path
   end
 
