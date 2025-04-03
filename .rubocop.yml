@@ -319,6 +319,10 @@ RSpec/ScatteredSetup:
 RSpec/ExpectInHook:
   Enabled: false
 
+# We use item_1, item_2, etc. Disable.
+RSpec/IndexedLet:
+  Enabled: false
+
 # We don't use ActiveRecord.
 Rails/ActiveRecordAliases:
   Enabled: false
