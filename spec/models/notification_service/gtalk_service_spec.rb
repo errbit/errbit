@@ -26,7 +26,7 @@ https://#{Errbit::Config.host}/apps/#{problem.app.id}
     expect(Jabber::MUC::SimpleMUCClient).to receive(:new).and_return(gtalk)
     expect(gtalk).to receive(:join).with(notification_service.room_id + "/errbit")
 
-    expect(gtalk).to receive(:send).exactly(2).times.with(message)
+    expect(gtalk).to receive(:send).twice.with(message)
     expect(gtalk).to receive(:close)
 
     notification_service.create_notification(problem)
