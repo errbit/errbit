@@ -327,6 +327,15 @@ Rails/ActiveRecordAliases:
 Rails/SkipsModelValidations:
   Enabled: false
 
+# Disable as in standard.
+Style/ArgumentsForwarding:
+  Enabled: false
+
+# Disable anonymous block forwarding.
+Naming/BlockForwarding:
+  Enabled: true
+  EnforcedStyle: explicit
+
 # Disable shorthand hash syntax like: ({ x:, y: })
 # Disable % style literals
 Style/DisableSyntax:
