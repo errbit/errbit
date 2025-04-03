@@ -7,7 +7,7 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
   let(:project_id) { app.api_key }
   let(:legit_params) { {project_id: project_id, key: project_id} }
   let(:legit_body) do
-    Rails.root.join("spec", "fixtures", "api_v3_request.json").read
+    Rails.root.join("spec/fixtures/api_v3_request.json").read
   end
 
   it "sets CORS headers on POST request" do

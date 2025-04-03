@@ -7,7 +7,7 @@ RSpec.describe NoticesController, type: :controller do
 
   let(:notice) { Fabricate(:notice) }
 
-  let(:xml) { Rails.root.join("spec", "fixtures", "hoptoad_test_notice.xml").read }
+  let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
   let(:app) { Fabricate(:app) }
 

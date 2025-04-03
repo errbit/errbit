@@ -59,7 +59,7 @@ RSpec.describe AirbrakeApi::V3::NoticeParser do
   end
 
   it "parses JSON payload with missing backtrace" do
-    json = Rails.root.join("spec", "fixtures", "api_v3_request_without_backtrace.json").read
+    json = Rails.root.join("spec/fixtures/api_v3_request_without_backtrace.json").read
     params = JSON.parse(json)
     params["key"] = app.api_key
 
