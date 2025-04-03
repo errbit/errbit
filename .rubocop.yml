@@ -336,6 +336,12 @@ Naming/BlockForwarding:
   Enabled: true
   EnforcedStyle: explicit
 
+# Enable and exclude specific files.
+Naming/FileName:
+  Enabled: true
+  Exclude:
+    - "spec/support/mongoid-rspec.rb"
+
 # Disable shorthand hash syntax like: ({ x:, y: })
 # Disable % style literals
 Style/DisableSyntax:
