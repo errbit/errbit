@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe "apps/new.html.haml", type: :view do
   let(:app) { stub_model(App) }
+
   let(:app_decorate) { AppDecorator.new(app) }
 
   before do
@@ -33,6 +34,7 @@ RSpec.describe "apps/new.html.haml", type: :view do
 
     it "see the error" do
       render
+
       expect(rendered).to match(/You must specify your/)
     end
   end

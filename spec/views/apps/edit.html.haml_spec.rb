@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe "apps/edit.html.haml", type: :view do
   let(:app) { stub_model(App) }
+
   let(:app_decorate) { AppDecorator.new(app) }
 
   before do
@@ -19,6 +20,7 @@ RSpec.describe "apps/edit.html.haml", type: :view do
 
     it "should confirm the 'reset' link" do
       render
+
       expect(action_bar).to have_selector(
         format(
           'a.button[data-confirm="%s"]',
@@ -29,6 +31,7 @@ RSpec.describe "apps/edit.html.haml", type: :view do
 
     it "should confirm the 'destroy' link" do
       render
+
       expect(action_bar).to have_selector(
         format(
           'a.button[data-confirm="%s"]',
@@ -47,6 +50,7 @@ RSpec.describe "apps/edit.html.haml", type: :view do
 
     it "see the error" do
       render
+
       expect(rendered).to match(/You must specify your/)
     end
   end

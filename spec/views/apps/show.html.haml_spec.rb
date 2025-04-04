@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe "apps/show.html.haml", type: :view do
   let(:app) { stub_model(App) }
+
   let(:user) { stub_model(User) }
 
   let(:action_bar) do
@@ -29,6 +30,7 @@ RSpec.describe "apps/show.html.haml", type: :view do
   context "without errs" do
     it "see no errs" do
       render
+
       expect(rendered).to match(/No errors have been/)
     end
   end
@@ -40,6 +42,7 @@ RSpec.describe "apps/show.html.haml", type: :view do
 
     it "see the unwatch button" do
       render
+
       expect(action_bar).to include(I18n.t("apps.show.unwatch"))
     end
   end
@@ -51,6 +54,7 @@ RSpec.describe "apps/show.html.haml", type: :view do
 
     it "not see the unwatch button" do
       render
+
       expect(action_bar).not_to include(I18n.t("apps.show.unwatch"))
     end
   end

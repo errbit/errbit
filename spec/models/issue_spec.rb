@@ -61,9 +61,8 @@ RSpec.describe Issue, type: :model do
       end
 
       it "returns default args if none exist" do
-        expect(issue.render_body_args).to eq [
-          "issue_trackers/issue", formats: [:md]
-        ]
+        expect(issue.render_body_args)
+          .to eq([template: "issue_trackers/markdown"])
       end
     end
 

@@ -5,7 +5,8 @@ require "rails_helper"
 RSpec.describe "notices/_user_attributes.html.haml", type: :view do
   describe "autolink" do
     let(:notice) do
-      user_attributes = {"foo" => {"bar" => "http://example.com"}}
+      user_attributes = {"foo" => {"bar" => "https://example.com"}}
+
       Fabricate(:notice, user_attributes: user_attributes)
     end
 
@@ -13,7 +14,8 @@ RSpec.describe "notices/_user_attributes.html.haml", type: :view do
       assign :app, notice.err.app
 
       render "notices/user_attributes", user: notice.user_attributes
-      expect(rendered).to have_link("http://example.com")
+
+      expect(rendered).to have_link("https://example.com")
     end
   end
 end
