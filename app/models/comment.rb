@@ -5,9 +5,9 @@ class Comment
   include Mongoid::Timestamps
 
   after_create :increase_counter_cache
+  after_create :deliver_email, if: :emailable?
   before_destroy :decrease_counter_cache
 
-  after_create :deliver_email, if: :emailable?
 
   field :body, type: String
   index(user_id: 1)

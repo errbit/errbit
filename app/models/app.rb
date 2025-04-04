@@ -34,8 +34,8 @@ class App
   before_validation :generate_api_key, on: :create
   before_save :normalize_github_repo
   before_create :build_notice_fingerprinter
-  after_find :build_notice_fingerprinter
   after_update :store_cached_attributes_on_problems
+  after_find :build_notice_fingerprinter
 
   validates :name, :api_key, presence: true, uniqueness: {allow_blank: true}
   validates_associated :watchers
