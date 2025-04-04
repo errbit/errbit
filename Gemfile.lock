@@ -669,6 +669,7 @@ DEPENDENCIES
   rushover
   selenium-webdriver
   simplecov
+  sprockets-rails
   standard (= 1.47.0)
   sucker_punch
   super_diff

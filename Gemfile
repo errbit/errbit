@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "rails", "6.1.7.10"
 
+gem "sprockets-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"
