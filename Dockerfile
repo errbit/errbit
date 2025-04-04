@@ -27,9 +27,13 @@ RUN apk add --no-cache --virtual build-dependencies build-base \
   && bundle config set without 'test development' \
   && bundle install -j "$(getconf _NPROCESSORS_ONLN)" --retry 5 \
   && bundle clean --force \
+  && bundle exec bootsnap precompile --gemfile \
   && apk del build-dependencies
 
 COPY . /app
+
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/ config/ Rakefile
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile \
   && rm -rf /app/tmp/* \
@@ -40,6 +44,10 @@ ENV RAILS_ENV=production
 ENV RAILS_LOG_TO_STDOUT=true
 
 ENV RAILS_SERVE_STATIC_FILES=true
+
+ENV BOOTSNAP_LOG=true
+
+ENV BOOTSNAP_READONLY=true
 
 EXPOSE 3000/tcp
 

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class NoticesController < ApplicationController
-  class ParamsError < StandardError; end
+  class ParamsError < StandardError
+  end
 
   skip_before_action :authenticate_user!, only: :create
   skip_before_action :verify_authenticity_token, only: :create

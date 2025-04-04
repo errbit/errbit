@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "rails", "6.1.7.10"
 
+gem "sprockets-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"
@@ -77,6 +78,9 @@ gem "rexml"
 
 gem "pry-rails"
 
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", ">= 1.4.4", require: false
+
 group :development, :test do
   gem "airbrake", "~> 4.3.5", require: false
   gem "rubocop", require: false
@@ -129,5 +133,8 @@ gem "concurrent-ruby", "1.3.4"
 
 # Lock zeitwerk gem for support JRuby 9.4
 gem "zeitwerk", "2.6.18"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 eval_gemfile "./UserGemfile"
