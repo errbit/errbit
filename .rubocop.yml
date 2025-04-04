@@ -222,6 +222,10 @@ Layout/LineLength:
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 
+# Enforced by standard. Disable.
+Layout/CaseIndentation:
+  Enabled: false
+
 # Standard rules. Lint:
 
 # Enforced by standard. Disable.
