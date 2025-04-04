@@ -17,6 +17,7 @@ RUN echo "gem: --no-document" >> /etc/gemrc \
     less \
     libxml2-dev \
     libxslt-dev \
+    yaml-dev \
     nodejs \
     tzdata
 
