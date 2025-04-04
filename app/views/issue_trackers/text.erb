@@ -8,7 +8,7 @@ Summary
 URL:     <%= notice.request['url'] %>
 <% end %>
 Where:   <%= notice.where %>
-Occured: <%= notice.created_at.to_s(:micro) %>
+Occured: <%= notice.created_at.to_fs(:micro) %>
 Similar: <%= (notice.problem.notices_count - 1).to_s %>
 Params:  <%= pretty_hash notice.params %>
 Session: <%= pretty_hash notice.session %>
