@@ -16,7 +16,7 @@ class Issue
     if tracker.respond_to?(:render_body_args)
       tracker.render_body_args
     else
-      ["issue_trackers/issue", formats: [:md]]
+      [{template: "issue_trackers/markdown"}]
     end
   end
 
@@ -30,9 +30,11 @@ class Issue
 
   def close
     errors.add :base, "This app has no issue tracker" unless issue_tracker
+
     return false if errors.present?
 
     tracker.errors.each { |k, err| errors.add k, err }
+
     return false if errors.present?
 
     if issue_tracker.respond_to? :close_issue
@@ -42,15 +44,18 @@ class Issue
     errors.empty?
   rescue => e
     errors.add :base, "There was an error during issue closing: #{e.message}"
+
     false
   end
 
   def save
     errors.add :base, "The issue has no body" unless body
     errors.add :base, "This app has no issue tracker" unless issue_tracker
+
     return false if errors.present?
 
     tracker.errors.each { |k, err| errors.add k, err }
+
     return false if errors.present?
 
     url = issue_tracker.create_issue(title, body, user: user.as_document)
@@ -59,6 +64,7 @@ class Issue
     errors.empty?
   rescue => e
     errors.add :base, "There was an error during issue creation: #{e.message}"
+
     false
   end
 end
