@@ -8,7 +8,6 @@ class Comment
   after_create :deliver_email, if: :emailable?
   before_destroy :decrease_counter_cache
 
-
   field :body, type: String
   index(user_id: 1)
 
