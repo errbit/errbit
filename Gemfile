@@ -78,6 +78,9 @@ gem "rexml"
 
 gem "pry-rails"
 
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", ">= 1.4.4", require: false
+
 group :development, :test do
   gem "airbrake", "~> 4.3.5", require: false
   gem "rubocop", require: false
