@@ -132,6 +132,10 @@ Style/StringLiteralsInInterpolation:
 Style/HashAsLastArrayItem:
   Enabled: false
 
+# Enforced by standard. Disable.
+Style/Alias:
+  Enabled: false
+
 # Standard rules. Layout:
 
 # Enforced by standard. Disable.
