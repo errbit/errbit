@@ -4,7 +4,9 @@ require "rails_helper"
 
 RSpec.describe "problems/show.html.haml", type: :view do
   let(:problem) { Fabricate(:problem) }
+
   let(:comment) { Fabricate(:comment) }
+
   let(:pivotal_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label
@@ -20,6 +22,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
       end
     end
   end
+
   let(:github_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
       def self.label
@@ -35,12 +38,14 @@ RSpec.describe "problems/show.html.haml", type: :view do
       end
     end
   end
+
   let(:trackers) do
     {
       "github" => github_tracker,
       "pivotal" => pivotal_tracker
     }
   end
+
   let(:app) { AppDecorator.new(problem.app) }
 
   before do
@@ -56,6 +61,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
   def with_issue_tracker(tracker, _problem)
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(trackers)
+
     app.issue_tracker = IssueTrackerDecorator.new(
       IssueTracker.new(type_tracker: tracker, options: {
         api_token: "token token token",
@@ -71,6 +77,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
     it "should confirm the 'resolve' link by default" do
       render
+
       expect(action_bar).to have_selector(
         format(
           'a.resolve[data-confirm="%s"]',
@@ -81,7 +88,9 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
     it "should confirm the 'resolve' link if configuration is unset" do
       allow(Errbit::Config).to receive(:confirm_err_actions).and_return(nil)
+
       render
+
       expect(action_bar).to have_selector(
         format(
           'a.resolve[data-confirm="%s"]',
@@ -92,14 +101,18 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
     it "should not confirm the 'resolve' link if configured not to" do
       allow(Errbit::Config).to receive(:confirm_err_actions).and_return(false)
+
       render
+
       expect(action_bar).not_to have_selector('a.resolve[data-confirm=""]')
     end
 
     it "should link 'up' to HTTP_REFERER if is set" do
       url = "http://localhost:3000/problems"
       controller.request.env["HTTP_REFERER"] = url
+
       render
+
       expect(action_bar).to have_selector("span a.up[href='#{url}']", text: "up")
     end
 
@@ -109,6 +122,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
+
       render
 
       expect(action_bar).to have_selector("span a.up[href='#{app_problems_path(problem.app)}']", text: "up")
@@ -119,9 +133,12 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
       it "should allow creating issue for github if application has a github tracker" do
         problem = Fabricate(:problem_with_comments, app: app)
+
         with_issue_tracker("github", problem)
+
         allow(view).to receive(:problem).and_return(problem)
         allow(view).to receive(:app).and_return(problem.app)
+
         render
 
         expect(action_bar).to have_selector("span a.create-issue", text: "create issue")
@@ -129,10 +146,12 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
       context "without issue tracker associate on app" do
         let(:problem) { Problem.new(new_record: false, app: app) }
+
         let(:app) { App.new(new_record: false) }
 
         it "not see link to create issue" do
           render
+
           expect(view.content_for(:action_bar)).not_to match(/create issue/)
         end
       end
@@ -144,10 +163,12 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
         context "with app having github_repo" do
           let(:app) { App.new(new_record: false, github_repo: "foo/bar") }
+
           let(:problem) { Problem.new(new_record: false, app: app) }
 
           before do
             problem.issue_link = nil
+
             user = Fabricate(:user, github_login: "test_user", github_oauth_token: "abcdef")
 
             allow(controller).to receive(:current_user).and_return(user)
@@ -155,6 +176,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
           it "links to the associated tracker" do
             render
+
             expect(view.content_for(:action_bar)).to match(".create-issue")
           end
         end
@@ -167,6 +189,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
             it "not see link if no issue tracker" do
               render
+
               expect(view.content_for(:action_bar)).to match(/create issue/)
             end
           end
@@ -178,6 +201,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
             it "not see link if no issue tracker" do
               render
+
               expect(view.content_for(:action_bar)).not_to match(/create issue/)
             end
           end
@@ -204,6 +228,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
 
     it "displays existing comments with configured tracker" do
       with_issue_tracker("pivotal", problem)
+
       render
 
       expect(view.content_for(:comments)).to include("Test comment")
