@@ -3,14 +3,19 @@
 require "rails_helper"
 
 RSpec.describe ProblemsController, type: :controller do
-  it_requires_authentication for: {
-                               index: :get, show: :get, resolve: :put, search: :get
-                             },
+  it_requires_authentication(
+    for: {
+      index: :get, show: :get, resolve: :put, search: :get
+    },
     params: {app_id: "dummyid", id: "dummyid"}
+  )
 
   let(:app) { Fabricate(:app) }
+
   let(:err) { Fabricate(:err, problem: problem) }
+
   let(:user) { Fabricate(:user) }
+
   let(:problem) { Fabricate(:problem, app: app, environment: "production") }
 
   describe "GET /problems" do
@@ -272,7 +277,8 @@ RSpec.describe ProblemsController, type: :controller do
 
       it "should renders the issue body" do
         post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
-        expect(response).to render_template("issue_trackers/issue")
+
+        expect(response).to render_template("issue_trackers/markdown")
       end
 
       it "should update the problem" do

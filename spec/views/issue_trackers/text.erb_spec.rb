@@ -10,9 +10,7 @@ RSpec.describe "issue_trackers/text.erb", type: :view do
   end
 
   before do
-    allow(view).to receive(:problem).and_return(
-      ProblemDecorator.new(problem)
-    )
+    allow(view).to receive(:problem).and_return(ProblemDecorator.new(problem))
   end
 
   it "has the problem url" do
