@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   def create
     if user.save
       flash[:success] = "#{user.name} is now part of the team. Be sure to add them as a project watcher."
+
       redirect_to user_path(user)
     else
       render :new
