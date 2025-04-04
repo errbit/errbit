@@ -164,6 +164,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
             before do
               problem.issue_link = nil
             end
+
             it "not see link if no issue tracker" do
               render
               expect(view.content_for(:action_bar)).to match(/create issue/)
