@@ -40,8 +40,8 @@ class Issue
     end
 
     errors.empty?
-  rescue => ex
-    errors.add :base, "There was an error during issue closing: #{ex.message}"
+  rescue => e
+    errors.add :base, "There was an error during issue closing: #{e.message}"
     false
   end
 
