@@ -46,6 +46,10 @@ gem "drb"
 gem "benchmark"
 gem "ostruct"
 
+# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/railties-7.0.8.7/lib/rails/commands/console/console_command.rb:3: warning: /Users/biow0lf/.rbenv/versions/3.4.2/lib/ruby/3.4.0/irb.rb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
+# You can add irb to your Gemfile or gemspec to silence this warning.
+gem "irb"
+
 # ~/.rbenv/versions/3.4.2/lib/ruby/3.4.0/readline.rb:4: warning: reline was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
 gem "reline"
 
