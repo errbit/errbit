@@ -16,6 +16,7 @@ permissions:
 
 env:
   JRUBY_OPTS: "--debug"
+  CI: "true"
   SE_AVOID_STATS: "true"
 
 jobs:
