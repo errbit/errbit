@@ -10,9 +10,9 @@
   %strong= t('.environment') + ':'
   = problem.environment
   %strong= t('.first_notice') + ':'
-  = problem.first_notice_at.to_s(:precise)
+  = problem.first_notice_at.to_fs(:precise)
   %strong= t('.last_notice') + ':'
-  = problem.last_notice_at.to_s(:precise)
+  = problem.last_notice_at.to_fs(:precise)
 - content_for :action_bar do
   - if problem.unresolved?
     %span= link_to t('.resolve'), [:resolve, app, problem], :method => :put,
