@@ -29,5 +29,5 @@
     %td= user.admin? ? 'Y' : 'N'
   %tr
     %th= t('.created')
-    %td= user.created_at.to_s(:micro)
+    %td= user.created_at.to_fs(:micro)
 
