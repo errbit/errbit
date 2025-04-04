@@ -13,20 +13,26 @@ RSpec.describe NotificationServices::SlackService, type: :model do
       {number: 8, file: "/path/to/file/6.rb", method: "sixth_method"}
     ]
   end
+
   let(:notice) { Fabricate :notice, backtrace: backtrace }
+
   let(:problem) { notice.problem }
+
   let(:service_url) do
     "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXX"
   end
+
   let(:service) do
     Fabricate(:slack_notification_service,
       app: notice.app,
       service_url: service_url,
       room_id: room_id)
   end
+
   let(:room_id) do
     "#general"
   end
+
   let(:backtrace_lines) do
     lines = "/path/to/file/1.rb:22 → first_method\n" \
             "/path/to/file/2.rb:44 → second_method\n" \
@@ -67,7 +73,7 @@ RSpec.describe NotificationServices::SlackService, type: :model do
             },
             {
               title: "First Noticed",
-              value: problem.first_notice_at.try(:localtime).try(:to_s, :db),
+              value: problem.first_notice_at.try(:localtime).try(:to_fs, :db),
               short: true
             },
             {

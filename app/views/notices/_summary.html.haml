@@ -15,7 +15,7 @@
       %td= notice.where
     %tr
       %th= t('.occurred')
-      %td= notice.created_at.to_s(:precise)
+      %td= notice.created_at.to_fs(:precise)
     %tr
       %th= t('.similar')
       %td= problem.notices_count - 1

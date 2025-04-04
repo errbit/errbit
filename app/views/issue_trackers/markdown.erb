@@ -9,8 +9,8 @@
 ### Where ###
 <%= notice.where %>
 
-### Occured ###
-<%= notice.created_at.to_s(:micro) %>
+### Occurred ###
+<%= notice.created_at.to_fs(:micro) %>
 
 ### Similar ###
 <%= (notice.problem.notices_count - 1).to_s %>
