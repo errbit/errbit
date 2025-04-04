@@ -9,7 +9,7 @@
   = notice.where
 %p
   %strong Occured:
-  = notice.created_at.to_s(:micro)
+  = notice.created_at.to_fs(:micro)
 %p
   %strong Similar:
   = notice.problem.notices_count - 1
