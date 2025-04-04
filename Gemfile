@@ -50,9 +50,6 @@ gem "ostruct"
 # You can add irb to your Gemfile or gemspec to silence this warning.
 gem "irb"
 
-# ~/.rbenv/versions/3.4.2/lib/ruby/3.4.0/readline.rb:4: warning: reline was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
-gem "reline"
-
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
 gem "hoptoad_notifier",

@@ -681,7 +681,6 @@ DEPENDENCIES
   rails-controller-testing
   rails_autolink
   rake
-  reline
   rexml
   ri_cal
   rspec
