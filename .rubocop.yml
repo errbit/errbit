@@ -143,6 +143,10 @@ Layout/HashAlignment:
   Enabled: false
 
 # Enforced by standard. Disable.
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+# Enforced by standard. Disable.
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
