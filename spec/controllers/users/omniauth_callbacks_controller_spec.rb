@@ -48,6 +48,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     before do
       Errbit::Config.github_org_id = 42
     end
+
     after do
       Errbit::Config.github_org_id = nil
     end

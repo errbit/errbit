@@ -90,10 +90,12 @@ group :development, :test do
   gem "rubocop-thread_safety", require: false
   gem "standard", "1.47.0", require: false
   gem "faker"
+  gem "brakeman", require: false
 end
 
 group :development do
   gem "listen", "~> 3.5"
+  gem "bundler-audit", require: false
 end
 
 group :test do

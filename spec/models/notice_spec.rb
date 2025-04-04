@@ -85,6 +85,7 @@ RSpec.describe Notice, type: :model do
       @hash = {"some.key" => {"$nested.key" => {"$Path" => "/", "some$key" => "key"}}}
       @hash_sanitized = {"some&#46;key" => {"&#36;nested&#46;key" => {"&#36;Path" => "/", "some$key" => "key"}}}
     end
+
     [:server_environment, :request, :notifier].each do |key|
       it "replaces . with &#46; and $ with &#36; in keys used in #{key}" do
         err = Fabricate(:err)

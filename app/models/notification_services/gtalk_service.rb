@@ -56,8 +56,8 @@ module NotificationServices
           "#{notification_description problem}"
 
         # post the issue to the xmpp room(s)
-        send_to_users(client, message) unless user_id.blank?
-        send_to_muc(client, message) unless room_id.blank?
+        send_to_users(client, message) if user_id.present?
+        send_to_muc(client, message) if room_id.present?
       end
     ensure
       client.close unless client.nil?

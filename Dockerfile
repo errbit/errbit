@@ -43,6 +43,4 @@ ENV RAILS_SERVE_STATIC_FILES=true
 
 EXPOSE 3000/tcp
 
-HEALTHCHECK CMD curl --fail "http://$(/bin/hostname -i | /usr/bin/awk '{ print $1 }'):${PORT:-3000}/users/sign_in" || exit 1
-
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

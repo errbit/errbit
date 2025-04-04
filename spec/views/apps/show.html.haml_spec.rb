@@ -37,6 +37,7 @@ RSpec.describe "apps/show.html.haml", type: :view do
     before do
       allow(app).to receive(:watched_by?).with(user).and_return(true)
     end
+
     it "see the unwatch button" do
       render
       expect(action_bar).to include(I18n.t("apps.show.unwatch"))
@@ -47,6 +48,7 @@ RSpec.describe "apps/show.html.haml", type: :view do
     before do
       allow(app).to receive(:watched_by?).with(user).and_return(false)
     end
+
     it "not see the unwatch button" do
       render
       expect(action_bar).not_to include(I18n.t("apps.show.unwatch"))

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get "/locate/:id" => "notices#locate", :as => :locate
   get "/notices/:id" => "notices#show_by_id", :as => :show_notice_by_id
 
-  resources :notices, only: [:show]
+  resources :notices, only: :show
+
   resources :users do
     member do
       delete :unlink_github
@@ -16,13 +17,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :site_config, only: [:index] do
+  resources :site_config, only: :index do
     collection do
       put :update
     end
   end
 
-  resources :problems, only: [:index] do
+  resources :problems, only: :index do
     collection do
       post :destroy_several
       post :resolve_several
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   resources :apps do
     resources :problems do
       resources :notices
+
       resources :comments, only: [:create, :destroy]
 
       collection do
@@ -51,10 +53,13 @@ Rails.application.routes.draw do
         delete :unlink_issue
       end
     end
+
     resources :watchers, only: [:destroy, :update]
+
     member do
       post :regenerate_api_key
     end
+
     collection do
       get :search
     end
@@ -62,8 +67,6 @@ Rails.application.routes.draw do
 
   get "problems/:id" => "problems#show_by_id"
 
-  get "health/readiness" => "health#readiness"
-  get "health/liveness" => "health#liveness"
   get "health/api-key-tester" => "health#api_key_tester"
 
   namespace :api do
@@ -71,7 +74,7 @@ Rails.application.routes.draw do
       resources :problems, only: [:index, :show], defaults: {format: "json"} do
         resources :comments, only: [:index, :create], defaults: {format: "json"}
       end
-      resources :notices, only: [:index], defaults: {format: "json"}
+      resources :notices, only: :index, defaults: {format: "json"}
       resources :stats, only: [], defaults: {format: "json"} do
         collection do
           get :app
@@ -80,7 +83,8 @@ Rails.application.routes.draw do
     end
   end
 
-  match "/api/v3/projects/:project_id/create-notice" => "api/v3/notices#create", :via => [:post]
+  post "/api/v3/projects/:project_id/create-notice" => "api/v3/notices#create"
+
   match "/api/v3/projects/:project_id/notices" => "api/v3/notices#create", :via => [:post, :options]
 
   root to: "apps#index"

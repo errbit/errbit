@@ -7,7 +7,7 @@ RSpec.describe Problem, type: :model do
     it "requires an environment" do
       err = Fabricate.build(:problem, environment: nil)
 
-      expect(err).to_not be_valid
+      expect(err).not_to be_valid
 
       expect(err.errors[:environment]).to include("can't be blank")
     end
