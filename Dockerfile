@@ -18,7 +18,7 @@ FROM base AS build
 RUN set -eux ; \
     apt-get update -qq ; \
     apt-get dist-upgrade -qq ; \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
+    apt-get install --no-install-recommends -y build-essential git libvips pkg-config shared-mime-info
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
