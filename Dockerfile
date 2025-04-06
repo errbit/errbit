@@ -1,56 +1,77 @@
-FROM ruby:3.4.2-alpine
+# syntax = docker/dockerfile:1
 
-ENV RUBYGEMS_VERSION=3.6.6
-ENV BUNDLER_VERSION=2.6.6
+FROM registry.docker.com/library/ruby:3.4.2-slim AS base
 
-WORKDIR /app
+# Rails app lives here
+WORKDIR /rails
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN echo "gem: --no-document" >> /etc/gemrc \
-  && bundle config --global frozen 1 \
-  && bundle config --global disable_shared_gems false \
-  && gem update --system "$RUBYGEMS_VERSION" \
-  && gem install bundler --version "$BUNDLER_VERSION" \
-  && apk add --no-cache \
-    git \
-    curl \
-    less \
-    libxml2-dev \
-    libxslt-dev \
-    yaml-dev \
-    nodejs \
-    tzdata
+# Install base packages
+RUN set -eux ; \
+    apt-get update -qq ; \
+    apt-get dist-upgrade -qq ; \
+    apt-get install --no-install-recommends -y curl libjemalloc2 shared-mime-info ; \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-COPY ["Gemfile", "Gemfile.lock", "UserGemfile", "/app/"]
+# Set production environment
+# https://github.com/rails/rails/pull/46981
+# https://github.com/rails/rails/commit/1a7e88323e6e92bf2d3ddf397b3023529b505e86#commitcomment-96003108
+# We don't use this image for testing on CI, so: add "test" to BUNDLE_WITHOUT
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development:test" \
+    RUBY_YJIT_ENABLE="1" \
+    BOOTSNAP_LOG="true" \
+    BOOTSNAP_READONLY="true"
 
-RUN apk add --no-cache --virtual build-dependencies build-base \
-  && bundle config build.nokogiri --use-system-libraries \
-  && bundle config set without 'test development' \
-  && bundle install -j "$(getconf _NPROCESSORS_ONLN)" --retry 5 \
-  && bundle clean --force \
-  && apk del build-dependencies
+RUN set -eux ; \
+    gem update --system "3.6.6" ; \
+    gem install bundler --version "2.6.6" --force
 
-COPY . /app
+# Throw-away build stage to reduce size of final image
+FROM base AS build
 
-RUN RAILS_ENV=production bundle exec rake assets:precompile \
-  && rm -rf /app/tmp/* \
-  && chmod 777 /app/tmp
+# Install packages needed to build gems
+RUN set -eux ; \
+    apt-get update -qq ; \
+    apt-get dist-upgrade -qq ; \
+    apt-get install --no-install-recommends -y build-essential git pkg-config libyaml-dev
 
-RUN bundle exec bootsnap precompile --gemfile
+# Install application gems
+COPY Gemfile Gemfile.lock UserGemfile ./
+RUN set -eux ; \
+    bundle install ; \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git ; \
+    bundle exec bootsnap precompile --gemfile
+
+# Copy application code
+COPY . .
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/ config/ Rakefile
 
-ENV RAILS_ENV=production
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-ENV RAILS_LOG_TO_STDOUT=true
+# Final stage for app image
+FROM base
 
-ENV RAILS_SERVE_STATIC_FILES=true
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
 
-ENV BOOTSNAP_LOG=true
+# Run and own only the runtime files as a non-root user for security
+RUN set -eux ; \
+    groupadd --system --gid 1000 rails ; \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash ; \
+    chown -R rails:rails db log storage tmp
 
-ENV BOOTSNAP_READONLY=true
+USER 1000:1000
 
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000/tcp
 
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["./bin/rails", "server"]
