@@ -24,7 +24,7 @@ FROM base AS build
 RUN set -eux ; \
     apt-get update -qq ; \
     apt-get dist-upgrade -qq ; \
-    apt-get install --no-install-recommends -y build-essential git pkg-config shared-mime-info
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config shared-mime-info
 
 # Install application gems
 COPY Gemfile Gemfile.lock UserGemfile ./
