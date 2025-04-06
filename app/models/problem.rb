@@ -168,7 +168,7 @@ class Problem
   def recache
     CACHED_NOTICE_ATTRIBUTES.each do |k, v|
       # clear all cached attributes
-      send("#{k}=", {})
+      send(:"#{k}=", {})
 
       # find only notices related to this problem
       Notice.collection.find.aggregate([
@@ -207,11 +207,11 @@ class Problem
   end
 
   def resolve!
-    self.update!(resolved: true, resolved_at: Time.zone.now)
+    update!(resolved: true, resolved_at: Time.zone.now)
   end
 
   def unresolve!
-    self.update!(resolved: false, resolved_at: nil)
+    update!(resolved: false, resolved_at: nil)
   end
 
   def unresolved?
@@ -271,10 +271,10 @@ class Problem
     bucket_times = Array.new(buckets) { |ii| (since + ii.send(group_by)).send(ruby_time_method) }
     bucket_times.to_a.map do |bucket_time|
       count = if (data_for_day = non_zero_filled.detect { |item| item.dig("_id", group_by) == bucket_time })
-                data_for_day["count"]
-              else
-                0
-              end
+        data_for_day["count"]
+      else
+        0
+      end
       {bucket_time => count}
     end
   end
@@ -311,7 +311,7 @@ class Problem
   def issue_type
     # Return issue_type if configured, but fall back to detecting app's issue tracker
     attributes["issue_type"] ||=
-    (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
+      (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
   end
 
   private
