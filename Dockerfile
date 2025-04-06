@@ -6,10 +6,12 @@ FROM registry.docker.com/library/ruby:3.4.2-slim AS base
 WORKDIR /rails
 
 # Set production environment
+# https://github.com/rails/rails/commit/1a7e88323e6e92bf2d3ddf397b3023529b505e86#commitcomment-96003108
+# We don't use this image for testing on CI, so: add "test" to BUNDLE_WITHOUT
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development" \
+    BUNDLE_WITHOUT="development:test" \
     BOOTSNAP_LOG="true" \
     BOOTSNAP_READONLY="true"
 
