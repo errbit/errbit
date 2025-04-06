@@ -17,6 +17,7 @@ FROM base AS build
 # Install packages needed to build gems
 RUN set -eux ; \
     apt-get update -qq ; \
+    apt-get dist-upgrade -qq ; \
     apt-get install --no-install-recommends -y build-essential git libvips pkg-config
 
 # Install application gems
