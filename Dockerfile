@@ -20,7 +20,6 @@ ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
-    RUBY_YJIT_ENABLE="1" \
     BOOTSNAP_LOG="true" \
     BOOTSNAP_READONLY="true"
 
