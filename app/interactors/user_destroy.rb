@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UserDestroy
+  # @param user [User] User to destroy
   def initialize(user)
     @user = user
   end
