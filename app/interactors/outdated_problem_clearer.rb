@@ -10,6 +10,7 @@ class OutdatedProblemClearer
         criteria.each do |problem|
           ProblemDestroy.new(problem).execute
         end
+
         compact_database
       end
     end
