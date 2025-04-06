@@ -21,7 +21,6 @@ Errbit::Config = Configurator.run(
   notify_at_notices: ["ERRBIT_NOTIFY_AT_NOTICES"],
   per_app_notify_at_notices: ["ERRBIT_PER_APP_NOTIFY_AT_NOTICES"],
   log_location: ["ERRBIT_LOG_LOCATION"],
-  log_level: ["ERRBIT_LOG_LEVEL"],
   notice_deprecation_days: ["ERRBIT_PROBLEM_DESTROY_AFTER_DAYS"],
 
   secret_key_base: ["SECRET_KEY_BASE"],

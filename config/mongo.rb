@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-log_level = Logger.const_get Errbit::Config.log_level.upcase
-
-Mongoid.logger.level = log_level
-Mongo::Logger.level = log_level
+# log_level = Logger.const_get Errbit::Config.log_level.upcase
+#
+# Mongoid.logger.level = log_level
+# Mongo::Logger.level = log_level
 
 Mongoid.configure do |config|
   uri = if Errbit::Config.mongo_url == "mongodb://localhost"

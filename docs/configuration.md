@@ -23,6 +23,7 @@ In order of precedence Errbit uses:
 | `RAILS_MAX_THREADS`        | Rails max threads                   | `3`           | as default           |
 | `WEB_CONCURRENCY`          | Number of CPU                       | not set       | not set              |
 | `RAILS_SERVE_STATIC_FILES` | Allow Rails to serve static assets. | `false`       | `true`               |
+| `RAILS_LOG_LEVEL`          | Log level                           | `info`        | `info`               |
 
 ### Application parameters
 
