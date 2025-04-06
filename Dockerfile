@@ -9,7 +9,13 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    BOOTSNAP_LOG="true" \
+    BOOTSNAP_READONLY="true"
+
+RUN set -eux ; \
+    gem update --system "3.6.6" ; \
+    gem install bundler --version "2.6.6" --force
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -18,10 +24,10 @@ FROM base AS build
 RUN set -eux ; \
     apt-get update -qq ; \
     apt-get dist-upgrade -qq ; \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config shared-mime-info
+    apt-get install --no-install-recommends -y build-essential git pkg-config shared-mime-info
 
 # Install application gems
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock UserGemfile ./
 RUN set -eux ; \
     bundle install ; \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git ; \
@@ -42,7 +48,7 @@ FROM base
 # Install packages needed for deployment
 RUN set -eux ; \
     apt-get update -qq ; \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips ; \
+    apt-get install --no-install-recommends -y curl ; \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
