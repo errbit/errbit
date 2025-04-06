@@ -46,51 +46,6 @@
 # Rails.application.config.active_support.use_message_serializer_for_metadata = true
 
 ###
-# Set the maximum size for Rails log files.
-#
-# `config.load_defaults 7.1` does not set this value for environments other than
-# development and test.
-#++
-# if Rails.env.local?
-#   Rails.application.config.log_file_size = 100 * 1024 * 1024
-# end
-
-###
-# Enable raising on assignment to attr_readonly attributes. The previous
-# behavior would allow assignment but silently not persist changes to the
-# database.
-#++
-# Rails.application.config.active_record.raise_on_assign_to_attr_readonly = true
-
-###
-# Enable validating only parent-related columns for presence when the parent is mandatory.
-# The previous behavior was to validate the presence of the parent record, which performed an extra query
-# to get the parent every time the child record was updated, even when parent has not changed.
-#++
-# Rails.application.config.active_record.belongs_to_required_validates_foreign_key = false
-
-###
-# Enable precompilation of `config.filter_parameters`. Precompilation can
-# improve filtering performance, depending on the quantity and types of filters.
-#++
-# Rails.application.config.precompile_filter_parameters = true
-
-###
-# Enable before_committed! callbacks on all enrolled records in a transaction.
-# The previous behavior was to only run the callbacks on the first copy of a record
-# if there were multiple copies of the same record enrolled in the transaction.
-#++
-# Rails.application.config.active_record.before_committed_on_all_records = true
-
-###
-# Disable automatic column serialization into YAML.
-# To keep the historic behavior, you can set it to `YAML`, however it is
-# recommended to explicitly define the serialization method for each column
-# rather than to rely on a global default.
-#++
-# Rails.application.config.active_record.default_column_serializer = nil
-
-###
 # Enable a performance optimization that serializes Active Record models
 # in a faster and more compact way.
 #
