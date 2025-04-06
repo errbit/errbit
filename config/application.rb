@@ -23,7 +23,7 @@ Bundler.require(*Rails.groups)
 module Errbit
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -37,6 +37,9 @@ module Errbit
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil
 
     # Custom directories with classes and modules you want to eager load.
     config.eager_load_paths << Rails.root.join("lib").to_s
