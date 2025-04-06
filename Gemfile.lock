@@ -654,7 +654,6 @@ DEPENDENCIES
   actionmailer_inline_css
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
-  benchmark
   bigdecimal (= 3.1.9)
   bootsnap (>= 1.4.4)
   brakeman
@@ -677,7 +676,6 @@ DEPENDENCIES
   hoptoad_notifier!
   htmlentities
   httparty
-  irb
   jquery-rails
   json
   kaminari
