@@ -38,6 +38,9 @@ module Errbit
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # Don't generate system test files.
+    config.generators.system_tests = nil
+
     # Custom directories with classes and modules you want to eager load.
     config.eager_load_paths << Rails.root.join("lib").to_s
 
