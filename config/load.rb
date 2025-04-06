@@ -3,7 +3,7 @@
 # load default ENV values (without overwriting any existing value)
 Dotenv.load(".env.default")
 
-require_relative "../lib/configurator"
+require_relative "../app/lib/configurator"
 
 # map config keys to environment variables
 #
