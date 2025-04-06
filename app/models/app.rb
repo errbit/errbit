@@ -56,6 +56,7 @@ class App
   index({name: "text"}, default_language: "english")
 
   scope :search, ->(value) { where("$text" => {"$search" => value}) }
+
   scope :watched_by, lambda { |user|
     where watchers: {"$elemMatch" => {"user_id" => user.id}}
   }
@@ -68,8 +69,9 @@ class App
     self.notice_fingerprinter = attrs
   end
 
+  # @param user [User]
   def watched_by?(user)
-    watchers.pluck("user_id").include? user.id
+    watchers.pluck("user_id").include?(user.id)
   end
 
   # Accepts a hash with the following attributes:
