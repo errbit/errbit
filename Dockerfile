@@ -5,6 +5,13 @@ FROM registry.docker.com/library/ruby:3.4.2-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
+# Install base packages
+RUN set -eux ; \
+    apt-get update -qq ; \
+    apt-get dist-upgrade -qq ; \
+    apt-get install --no-install-recommends -y curl libjemalloc2 shared-mime-info ; \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
 # Set production environment
 # https://github.com/rails/rails/pull/46981
 # https://github.com/rails/rails/commit/1a7e88323e6e92bf2d3ddf397b3023529b505e86#commitcomment-96003108
@@ -13,6 +20,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
+    RUBY_YJIT_ENABLE="1" \
     BOOTSNAP_LOG="true" \
     BOOTSNAP_READONLY="true"
 
@@ -27,7 +35,7 @@ FROM base AS build
 RUN set -eux ; \
     apt-get update -qq ; \
     apt-get dist-upgrade -qq ; \
-    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config shared-mime-info
+    apt-get install --no-install-recommends -y build-essential git pkg-config libyaml-dev
 
 # Install application gems
 COPY Gemfile Gemfile.lock UserGemfile ./
@@ -40,7 +48,7 @@ RUN set -eux ; \
 COPY . .
 
 # Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+RUN bundle exec bootsnap precompile app/ lib/ config/ Rakefile
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
@@ -69,6 +77,6 @@ USER rails:rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE 3000/tcp
 
 CMD ["./bin/rails", "server"]
