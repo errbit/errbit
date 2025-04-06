@@ -4,9 +4,7 @@
 
 * Remove `USER_GEMFILE` env support. From now, only `UserGemfile` is
   supported.
-* Remove `SERVE_STATIC_ASSETS` env support. Use build-in Ruby on Rails
-  `RAILS_SERVE_STATIC_FILES` env. This option is enabled in official
-  docker image.
+* Remove `SERVE_STATIC_ASSETS` env support. Just remove it.
 * Remove `RACK_ENV` env support. Use `RAILS_ENV` env for this. Official
   docker image set `RAILS_ENV` to `production`.
 * Remove `ERRBIT_ENFORCE_SSL` env support. From now, Errbit always
