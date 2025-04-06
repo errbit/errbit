@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "rails", "7.0.8.7"
+gem "rails", "7.1.5.1"
 
 gem "sprockets-rails"
 gem "activemodel-serializers-xml"
@@ -29,26 +29,9 @@ gem "rails_autolink"
 gem "useragent"
 gem "uri"
 
-# ~/.rbenv/versions/3.3.7/lib/ruby/gems/3.3.0/gems/activesupport-6.1.7.10/lib/active_support/dependencies.rb:299: warning: mutex_m was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.4.0.
-# You can add mutex_m to your Gemfile or gemspec to silence this warning.
-# Also please contact the author of activesupport-6.1.7.10 to request adding mutex_m into its gemspec.
-# ~/.rbenv/versions/3.3.7/lib/ruby/gems/3.3.0/gems/activesupport-6.1.7.10/lib/active_support/testing/parallelization.rb:3: warning: drb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.4.0.
-# You can add drb to your Gemfile or gemspec to silence this warning.
-gem "mutex_m"
-gem "drb"
-
-# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/activesupport-6.1.7.10/lib/active_support/dependencies.rb:299: warning: benchmark was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
-# You can add benchmark to your Gemfile or gemspec to silence this warning.
-# Also please contact the author of activesupport-6.1.7.10 to request adding benchmark into its gemspec.
-# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/activesupport-6.1.7.10/lib/active_support/dependencies.rb:299: warning: ostruct was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
+# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/mongoid-9.0.6/lib/mongoid/indexable.rb:6: warning: ~/.rbenv/versions/3.4.2/lib/ruby/3.4.0/ostruct.rb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
 # You can add ostruct to your Gemfile or gemspec to silence this warning.
-# Also please contact the author of mongoid-9.0.6 to request adding ostruct into its gemspec.
-gem "benchmark"
 gem "ostruct"
-
-# ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/railties-7.0.8.7/lib/rails/commands/console/console_command.rb:3: warning: /Users/biow0lf/.rbenv/versions/3.4.2/lib/ruby/3.4.0/irb.rb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
-# You can add irb to your Gemfile or gemspec to silence this warning.
-gem "irb"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -128,9 +111,6 @@ gem "pjax_rails"
 gem "underscore-rails"
 
 gem "sucker_punch"
-
-# https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
-gem "concurrent-ruby", "1.3.4"
 
 # Lock zeitwerk gem for support JRuby 9.4
 gem "zeitwerk", "2.6.18"
