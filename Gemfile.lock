@@ -666,7 +666,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   draper
-  drb
   email_spec
   errbit_github_plugin
   errbit_plugin
@@ -688,7 +687,6 @@ DEPENDENCIES
   listen (~> 3.5)
   mongoid
   mongoid-rspec
-  mutex_m
   octokit
   omniauth
   omniauth-github
