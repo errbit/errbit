@@ -46,34 +46,6 @@
 # Rails.application.config.active_support.use_message_serializer_for_metadata = true
 
 ###
-# Enable a performance optimization that serializes Active Record models
-# in a faster and more compact way.
-#
-# To perform a rolling deploy of a Rails 7.1 upgrade, wherein servers that have
-# not yet been upgraded must be able to read caches from upgraded servers,
-# leave this optimization off on the first deploy, then enable it on a
-# subsequent deploy.
-#++
-# Rails.application.config.active_record.marshalling_format_version = 7.1
-
-###
-# Run `after_commit` and `after_*_commit` callbacks in the order they are defined in a model.
-# This matches the behaviour of all other callbacks.
-# In previous versions of Rails, they ran in the inverse order.
-#++
-# Rails.application.config.active_record.run_after_transaction_callbacks_in_order_defined = true
-
-###
-# Whether a `transaction` block is committed or rolled back when exited via `return`, `break` or `throw`.
-#++
-# Rails.application.config.active_record.commit_transaction_on_non_local_return = true
-
-###
-# Controls when to generate a value for <tt>has_secure_token</tt> declarations.
-#++
-# Rails.application.config.active_record.generate_secure_token_on = :initialize
-
-###
 # ** Please read carefully, this must be configured in config/application.rb **
 #
 # Change the format of the cache entry.
@@ -114,7 +86,7 @@
 # Configure the log level used by the DebugExceptions middleware when logging
 # uncaught exceptions during requests.
 #++
-# Rails.application.config.action_dispatch.debug_exception_log_level = :error
+Rails.application.config.action_dispatch.debug_exception_log_level = :error
 
 ###
 # Configure the test helpers in Action View, Action Dispatch, and rails-dom-testing to use HTML5
