@@ -121,9 +121,6 @@ gem "underscore-rails"
 
 gem "sucker_punch"
 
-# https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
-gem "concurrent-ruby", "1.3.4"
-
 # Lock zeitwerk gem for support JRuby 9.4
 gem "zeitwerk", "2.6.18"
 
