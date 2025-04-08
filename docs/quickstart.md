@@ -19,7 +19,19 @@ This is a quickstart guide to get you up and running with the Errbit.
 
 ### Option 1: Rails native with Thruster (and without reverse proxy)
 
-
+```yaml
+services:
+  errbit:
+    image: "docker.io/errbit/errbit:latest" # TODO: change to release tag!
+    container_name: "errbit"
+    restart: "unless-stopped"
+    environment:
+      MONGO_URL: "mongodb://host:27017/errbit_production" # Replace with URL to your MongoDB instance
+      SECRET_KEY_BASE: "secret-key-base" # Replace with a secure secret key. You can generate new one with `rails secret`
+      RAILS_MAX_THREADS: "2"
+      ERRBIT_HOST: "errbit.example.com"
+      THRUSTER_TLS_DOMAIN: "errbit.example.com"
+```
 
 ### Option 2: with Traefik as reverse proxy
 
@@ -56,7 +68,7 @@ services:
       - "./acme.json:/acme.json"
 
   errbit:
-    image: "docker.io/errbit/errbit:latest"
+    image: "docker.io/errbit/errbit:latest" # TODO: change to release tag!
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
