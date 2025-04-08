@@ -47,6 +47,7 @@ ENV BOOTSNAP_LOG=true
 
 ENV BOOTSNAP_READONLY=true
 
-EXPOSE 3000/tcp
+# Start server via Thruster by default, this can be overwritten at runtime
+EXPOSE 80/tcp
 
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["./bin/thrust", "./bin/rails", "server"]
