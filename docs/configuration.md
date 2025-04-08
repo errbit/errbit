@@ -24,6 +24,8 @@ In order of precedence Errbit uses:
 | `WEB_CONCURRENCY`          | Number of CPU     | not set       | not set              |
 | `RAILS_LOG_LEVEL`          | Log level         | `info`        | `info`               |
 
+You can look on thruster [here](https://github.com/basecamp/thruster).
+
 ### Application parameters
 
 | Environment variable         | Description                                        | Default              | Default in container |
