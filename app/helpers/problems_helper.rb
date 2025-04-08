@@ -13,10 +13,11 @@ module ProblemsHelper
     )
   end
 
+  # @param email [String]
   def gravatar_tag(email, options = {})
     return if email.blank?
 
-    image_tag gravatar_url(email, options), alt: email, class: "gravatar"
+    image_tag(gravatar_url(email, options), alt: email, class: "gravatar")
   end
 
   def gravatar_url(email, options = {})

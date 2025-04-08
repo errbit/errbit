@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "hoptoad/v2"
+require_relative "hoptoad/v2"
 
 module Hoptoad
   class ApiVersionError < StandardError

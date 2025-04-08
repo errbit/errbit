@@ -13,9 +13,7 @@ RSpec.describe "Notices management", type: :request do
         expect do
           post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
-        end.to change {
-          errbit_app.problems.count
-        }.by(1)
+        end.to change(errbit_app.problems, :count).by(1)
       end
     end
 
@@ -26,9 +24,7 @@ RSpec.describe "Notices management", type: :request do
         expect do
           post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
-        end.to change {
-          errbit_app.problems.count
-        }.by(1)
+        end.to change(errbit_app.problems, :count).by(1)
       end
     end
 
@@ -53,9 +49,7 @@ RSpec.describe "Notices management", type: :request do
         expect do
           get "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
-        end.to change {
-          errbit_app.problems.count
-        }.by(1)
+        end.to change(errbit_app.problems, :count).by(1)
       end
     end
   end

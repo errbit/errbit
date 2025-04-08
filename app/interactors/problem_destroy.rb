@@ -16,7 +16,7 @@ class ProblemDestroy
   ##
   # Destroy all problem pass in args
   #
-  # @params [ Array[Problem] ] problems the list of problem need to be delete
+  # @params [ Array[Problem] ] problems the list of problem need to be deleted
   #   can be a single Problem
   # @return [ Integer ]
   #   the number of problem destroy

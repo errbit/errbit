@@ -43,10 +43,6 @@ RUN bundle exec bootsnap precompile app/ lib/ config/ Rakefile
 
 ENV RAILS_ENV=production
 
-ENV RAILS_LOG_TO_STDOUT=true
-
-ENV RAILS_SERVE_STATIC_FILES=true
-
 ENV BOOTSNAP_LOG=true
 
 ENV BOOTSNAP_READONLY=true

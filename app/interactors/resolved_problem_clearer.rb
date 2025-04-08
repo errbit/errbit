@@ -29,6 +29,8 @@ class ResolvedProblemClearer
     collections = Mongoid.default_client.collections
     collections.map(&:name).map do |collection|
       Mongoid.default_client.command compact: collection
+
+      # TODO: fix me. Compact can fail.
     end
   end
 end

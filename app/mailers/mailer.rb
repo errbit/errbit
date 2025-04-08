@@ -15,8 +15,8 @@ class Mailer < ActionMailer::Base
     "Auto-Submitted" => "auto-generated"
 
   def err_notification(error_report)
-    @notice = NoticeDecorator.new error_report.notice
-    @app = AppDecorator.new error_report.app
+    @notice = NoticeDecorator.new(error_report.notice)
+    @app = AppDecorator.new(error_report.app)
 
     count = error_report.problem.notices_count
     count = (count > 1) ? "(#{count}) " : ""

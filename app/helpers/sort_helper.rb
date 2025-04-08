@@ -9,6 +9,7 @@ module SortHelper
     url += "&all_errs=true" if all_errs
     options = {}
     options[:class] = "current #{order}" if current
+
     link_to(name, url, options)
   end
 end

@@ -56,7 +56,7 @@ module Users
     end
 
     def google_oauth2
-      google_uid = request.env["omniauth.auth"].dig(:uid)
+      google_uid = request.env["omniauth.auth"][:uid]
       google_email = request.env["omniauth.auth"].dig(:info, :email)
       google_user = User.where(google_uid: google_uid).first
       google_site_title = Errbit::Config.google_site_title

@@ -33,6 +33,7 @@ module AirbrakeApi
 
       def error
         fail AirbrakeApi::ParamsError unless params.key?("errors") && params["errors"].any?
+
         @error ||= params["errors"].first
       end
 

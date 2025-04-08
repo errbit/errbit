@@ -29,8 +29,7 @@ class NotificationService
         {
           placeholder: "comma separated numbers or simply 0 for every notice",
           label: "notify on errors (0 for all errors)"
-        }
-      ]
+        }]
     ]
   else
     []

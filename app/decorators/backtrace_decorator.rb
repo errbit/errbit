@@ -2,7 +2,7 @@
 
 class BacktraceDecorator < Draper::Decorator
   def lines
-    @lines ||= (object.lines || []).map { |line| BacktraceLineDecorator.new line }
+    @lines ||= (object.lines || []).map { |line| BacktraceLineDecorator.new(line) }
   end
 
   # Group lines into sections of in-app files and external files

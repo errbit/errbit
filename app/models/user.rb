@@ -60,7 +60,7 @@ class User
   def self.create_from_google_oauth2(access_token)
     email = access_token.dig(:info, :email)
     name = access_token.dig(:info, :name)
-    uid = access_token.dig(:uid)
+    uid = access_token[:uid]
 
     user = User.where(email: email).first
 

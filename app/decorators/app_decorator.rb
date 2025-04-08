@@ -11,7 +11,9 @@ class AppDecorator < Draper::Decorator
 
   def use_site_fingerprinter
     return true if object.notice_fingerprinter.nil?
+
     return true if object.notice_fingerprinter.attributes["source"].nil?
+
     object.notice_fingerprinter.attributes["source"] == SiteConfig::CONFIG_SOURCE_SITE
   end
 
