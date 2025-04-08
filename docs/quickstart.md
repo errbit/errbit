@@ -14,3 +14,48 @@ This is a quickstart guide to get you up and running with the Errbit.
 
 * [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
 * [Install the Docker Compose plugin](https://docs.docker.com/compose/install/)
+
+## Run Errbit with Docker
+
+### Option 1: with Traefik
+
+```shell
+# mkdir errbit
+# cd errbit
+# touch docker-compose.yml
+```
+
+Fill `docker-compose.yml` with the following content:
+
+```yaml
+services:
+  traefik:
+    image: "docker.io/library/traefik:3.3.5"
+    container_name: "traefik"
+    restart: "unless-stopped"
+    command:
+      - "--accesslog=true"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedByDefault=false"
+      - "--certificatesresolvers.letsencrypt.acme.email=me@example.com" # Replace `me@example.com` with your email address
+      - "--certificatesresolvers.letsencrypt.acme.storage=/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
+    ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./acme.json:/acme.json"
+
+  errbit:
+    image: "docker.io/errbit/errbit:latest"
+    container_name: "errbit"
+    restart: "unless-stopped"
+```
+
+### Option 2: Rails native with Thruster
+
