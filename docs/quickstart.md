@@ -17,7 +17,11 @@ This is a quickstart guide to get you up and running with the Errbit.
 
 ## Run Errbit with Docker
 
-### Option 1: with Traefik
+### Option 1: Rails native with Thruster (and without reverse proxy)
+
+
+
+### Option 2: with Traefik as reverse proxy
 
 ```shell
 # mkdir errbit
@@ -88,6 +92,3 @@ docker compose down
 docker compose pull
 docker compose up -d
 ```
-
-### Option 2: Rails native with Thruster
-
