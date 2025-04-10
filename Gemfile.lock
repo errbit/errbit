@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/errbit/errbit_plugin
+  revision: a904ef1c89c5c5cf56480e43fa8d08a891ecebc5
+  branch: master
+  specs:
+    errbit_plugin (0.7.0)
+
+GIT
   remote: https://github.com/errbit/hoptoad_notifier
   revision: 9b6a6f5017c5ca52b07b8d5c64c79b6d44c121d3
   branch: errbit
@@ -166,7 +173,6 @@ GEM
     errbit_github_plugin (0.3.0)
       errbit_plugin
       octokit
-    errbit_plugin (0.6.0)
     erubi (1.13.1)
     fabrication (2.31.0)
     faker (3.5.1)
@@ -664,7 +670,7 @@ DEPENDENCIES
   draper
   email_spec
   errbit_github_plugin
-  errbit_plugin
+  errbit_plugin!
   fabrication
   faker
   faraday-retry
@@ -780,7 +786,7 @@ CHECKSUMS
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   email_spec (2.3.0) sha256=df23be7a131186f7a3d5be3b35eaac9196f9ac13bd26c9c3d59341e13d852d11
   errbit_github_plugin (0.3.0) sha256=96391948fae85fe3aaed78efa598791a8f16187e39e7038ca00bc137a266cc92
-  errbit_plugin (0.6.0) sha256=ec4a7567333e3771802805e6c8e901fdfdbb9d576bbcc2af91573694cea89b15
+  errbit_plugin (0.7.0)
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (2.31.0) sha256=2c79f10d1b88034a2ebd47ce77acba66847fc4636581c8282b3408adc68e85aa
   faker (3.5.1) sha256=1ad1fbea279d882f486059c23fe3ddb816ccd1d7052c05a45014b4450d859bfc
