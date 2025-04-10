@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/errbit/errbit_github_plugin
+  revision: 033b0e760f3db5355805fb9b13decebca5c993f2
+  branch: master
+  specs:
+    errbit_github_plugin (0.4.0)
+      errbit_plugin
+      octokit
+
+GIT
   remote: https://github.com/errbit/errbit_plugin
   revision: 3914b7ac8434dff11177223336ad94778d3aa70e
   branch: master
@@ -170,9 +179,6 @@ GEM
       htmlentities (~> 4.3.3)
       launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
-    errbit_github_plugin (0.3.0)
-      errbit_plugin
-      octokit
     erubi (1.13.1)
     fabrication (2.31.0)
     faker (3.5.1)
@@ -669,7 +675,7 @@ DEPENDENCIES
   dotenv-rails
   draper
   email_spec
-  errbit_github_plugin
+  errbit_github_plugin!
   errbit_plugin!
   fabrication
   faker
@@ -785,7 +791,7 @@ CHECKSUMS
   draper (4.0.4) sha256=acf3d7f4d5b28fd0e3b9fad9a0692f9a990e119362b802b92852362f9535b85e
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   email_spec (2.3.0) sha256=df23be7a131186f7a3d5be3b35eaac9196f9ac13bd26c9c3d59341e13d852d11
-  errbit_github_plugin (0.3.0) sha256=96391948fae85fe3aaed78efa598791a8f16187e39e7038ca00bc137a266cc92
+  errbit_github_plugin (0.4.0)
   errbit_plugin (0.7.0)
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (2.31.0) sha256=2c79f10d1b88034a2ebd47ce77acba66847fc4636581c8282b3408adc68e85aa
