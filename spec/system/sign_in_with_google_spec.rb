@@ -3,7 +3,27 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with Google", type: :system do
-  before { driven_by(:selenium_chrome_headless) }
+  # before { driven_by(:selenium_chrome_headless) }
+
+  before { driven_by(:my_headless_chrome) }
+
+  # https://bibwild.wordpress.com/2024/10/08/getting-rspec-capybara-browser-console-output-for-failed-tests/
+  # hacky way to inject browser logs into failure message for failed ones
+  after(:each) do |example|
+    if example.exception
+      browser_logs = page.driver.browser.logs.get(:browser).collect { |log| "#{log.level}: #{log.message}" }
+
+      if browser_logs.present?
+        # pretty hacky internal way to get browser logs into
+        # existing long-form failure message, when that is
+        # stored in exception associated with assertion failure
+        new_exception = example.exception.class.new("#{example.exception.message}\n\nBrowser console:\n\n#{browser_logs.join("\n")}\n")
+        new_exception.set_backtrace(example.exception.backtrace)
+
+        example.display_exception = new_exception
+      end
+    end
+  end
 
   context "sign in via Google with recognized user" do
     let!(:user) { Fabricate(:user, google_uid: "123456789") }
