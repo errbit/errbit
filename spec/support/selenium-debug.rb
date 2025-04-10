@@ -25,12 +25,12 @@ Capybara.javascript_driver = :my_headless_chrome
 Capybara.register_driver :my_headless_chrome do |app|
   Capybara::Selenium::Driver.load_selenium
   browser_options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
-    opts.args << '--headless'
-    opts.args << '--disable-gpu'
-    opts.args << '--no-sandbox'
-    opts.args << '--window-size=1280,1696'
+    opts.args << "--headless"
+    opts.args << "--disable-gpu"
+    opts.args << "--no-sandbox"
+    opts.args << "--window-size=1280,1696"
 
-    opts.add_option('goog:loggingPrefs', browser: 'ALL')
+    opts.add_option("goog:loggingPrefs", browser: "ALL")
   end
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
 end
