@@ -26,9 +26,9 @@ In order of precedence Errbit uses:
 
 ### Thruster parameters
 
-| Environment variable  | Description                    |
-|-----------------------|--------------------------------|
-| `THRUSTER_TLS_DOMAIN` | Domain name to get certificate |
+| Environment variable  | Description                                              |
+|-----------------------|----------------------------------------------------------|
+| `THRUSTER_TLS_DOMAIN` | Domain name to get certificate e.g. `errbit.example.com` |
 
 You can look more about thruster env's [here](https://github.com/basecamp/thruster).
 
