@@ -31,6 +31,8 @@ services:
       RAILS_MAX_THREADS: "2"
       ERRBIT_HOST: "errbit.example.com"
       THRUSTER_TLS_DOMAIN: "errbit.example.com"
+    volumes:
+      - "./thruster:/rails/storage/thruster:rw" # Volume for storing ACME certificate
 ```
 
 ### Option 2: with Traefik as reverse proxy
@@ -65,7 +67,7 @@ services:
       - "443:443" # HTTPS
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./acme.json:/acme.json"
+      - "./acme.json:/acme.json" # Here we store ACME certificates
 
   errbit:
     image: "docker.io/errbit/errbit:latest" # TODO: change to release tag!
