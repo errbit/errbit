@@ -290,8 +290,17 @@ Security/JSONLoad:
 
 # Our rubocop rules
 
+# Bundler rules.
+
 Bundler/OrderedGems:
   Enabled: false
+
+# Gemspec rules
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+# Style rules
 
 # Don't allow %i[foo bar baz]
 Style/SymbolArray:
@@ -307,9 +316,11 @@ Style/WordArray:
 Style/Documentation:
   Enabled: false
 
-# This is new RSpec default. Disable.
-RSpecRails/InferredSpecType:
+# Disable as in standard.
+Style/ArgumentsForwarding:
   Enabled: false
+
+# RSpec rules
 
 # Prefer eq over be.
 RSpec/BeEq:
@@ -335,17 +346,11 @@ RSpec/ExpectInHook:
 RSpec/IndexedLet:
   Enabled: false
 
-# We don't use ActiveRecord.
-Rails/ActiveRecordAliases:
+# We don't use named subject's
+RSpec/NamedSubject:
   Enabled: false
 
-# We don't use ActiveRecord.
-Rails/SkipsModelValidations:
-  Enabled: false
-
-# Disable as in standard.
-Style/ArgumentsForwarding:
-  Enabled: false
+# Naming rules:
 
 # Disable anonymous block forwarding.
 Naming/BlockForwarding:
@@ -358,9 +363,27 @@ Naming/FileName:
   Exclude:
     - "spec/support/mongoid-rspec.rb"
 
+# Disabled syntax:
+
 # Disable shorthand hash syntax like: ({ x:, y: })
 # Disable % style literals
 Style/DisableSyntax:
   DisableSyntax:
     - shorthand_hash_syntax
     - percent_literals
+
+# RSpec Rails rules:
+
+# This is new RSpec default. Disable.
+RSpecRails/InferredSpecType:
+  Enabled: false
+
+# Rails rules:
+
+# We don't use ActiveRecord.
+Rails/ActiveRecordAliases:
+  Enabled: false
+
+# We don't use ActiveRecord.
+Rails/SkipsModelValidations:
+  Enabled: false
