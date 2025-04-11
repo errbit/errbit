@@ -63,10 +63,10 @@ services:
       - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
       - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
     ports:
-      - "80:80" # HTTP
-      - "443:443" # HTTPS
+      - "80:80" # Listen HTTP traffic
+      - "443:443" # Listen HTTPS traffic
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/run/docker.sock:/var/run/docker.sock" # Traefik needs access to Docker socket to discover containers
       - "./acme.json:/acme.json" # Here we store ACME certificates
 
   errbit:
@@ -77,7 +77,7 @@ services:
       MONGO_URL: "mongodb://host:27017/errbit_production" # Replace with URL to your MongoDB instance
       SECRET_KEY_BASE: "secret-key-base" # Replace with a secure secret key. You can generate new one with `rails secret`
       RAILS_MAX_THREADS: "2"
-      ERRBIT_HOST: "errbit.example.com"
+      ERRBIT_HOST: "errbit.example.com" # Replace with your domain name
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.errbit.rule=Host(`errbit.example.com`)" # Replace `errbit.example.com` with your domain name
