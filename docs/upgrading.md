@@ -12,6 +12,10 @@
   Traefik.
 * Remove `ERRBIT_PROTOCOL` env support.
 * Remove `ERRBIT_PORT` env support.
+* MongoDB 4.0 is reached EOL on 21 Jun 2018. 4.0 support will be removed after v0.10.0 release.
+* MongoDB 4.2 is reached EOL on 09 Aug 2019. 4.2 support will be removed after v0.10.0 release.
+* MongoDB 4.4 is reached EOL an 25 Jul 2020. 4.4 support will be removed after v0.10.0 release.
+* MongoDB 5.0 is reached EOL on 08 Jul 2021. 5.0 support will be removed after v0.10.0 release.
 
 ## Upgrading Errbit beyond v0.8.0
 
