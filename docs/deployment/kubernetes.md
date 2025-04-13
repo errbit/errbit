@@ -13,8 +13,8 @@ cd errbit
 kubectl create -f docs/deployment/example/kubernetes/rc.yml
 ```
 
-## Create svc
+## Create service
 
 ```shell
-kubectl create -f docs/deployment/example/kubernetes/svc.yml
+kubectl create -f docs/deployment/example/kubernetes/service.yml
 ```
