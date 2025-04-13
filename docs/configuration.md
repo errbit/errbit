@@ -10,7 +10,7 @@ In order of precedence Errbit uses:
 
 1. Environment variables (for example MY_VALUE=abc bundle exec puma)
 2. Values provided in a `.env` file
-3. Default values from `.env.default`
+3. Default values from `.env.default` file
 
 ## Configuration Parameters
 

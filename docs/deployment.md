@@ -38,4 +38,4 @@ to the TLS certificate.
 
 ## Health Checks
 
-TODO
+Default Rails health check at `/up`. If you need.
