@@ -157,12 +157,10 @@ few others that could make sense for your needs:
 
 If you host Errbit at `errbit.example.com`, you would fill in:
 
-<dl>
-<dt>URL
-<dd>https://errbit.example.com
-<dt>Callback URL
-<dd>https://errbit.example.com/users/auth/google_oauth2/callback
-</dl>
+| Parameter    | Value                                                          |
+|--------------|----------------------------------------------------------------|
+| URL          | `https://errbit.example.com`                                   |
+| Callback URL | `https://errbit.example.com/users/auth/google_oauth2/callback` |
 
 * After you have registered your app, set `GOOGLE_CLIENT_ID` and `GOOGLE_SECRET`
   with your app's Client ID and Secret key.
