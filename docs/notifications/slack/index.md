@@ -1,6 +1,6 @@
 # Slack
 
-The slack notification sends to [Slack](https://www.slack.com/).
+The Slack notification sends to [Slack](https://www.slack.com/).
 
 ## Configuration
 

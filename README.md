@@ -56,8 +56,8 @@ updates and notifications.
 
 The list of requirements to install Errbit are:
 
-* Ruby 3.4 or JRuby 9.4.12.0
-* MongoDB >= 4.0.x
+* Ruby 3.4 or JRuby 9.4
+* MongoDB >= 4.0
 
 Installation
 ------------
@@ -146,7 +146,7 @@ few others that could make sense for your needs:
 </dl>
 
 * `GITHUB_ORG_ID` is an optional environment variable you can set to your own
-  github organization id. If set, only users of the specified GitHub
+  GitHub organization id. If set, only users of the specified GitHub
   organization can log in to Errbit through GitHub. Errbit will provision
   accounts for new users.
 
@@ -157,12 +157,10 @@ few others that could make sense for your needs:
 
 If you host Errbit at `errbit.example.com`, you would fill in:
 
-<dl>
-<dt>URL
-<dd>https://errbit.example.com
-<dt>Callback URL
-<dd>https://errbit.example.com/users/auth/google_oauth2/callback
-</dl>
+| Parameter    | Value                                                          |
+|--------------|----------------------------------------------------------------|
+| URL          | `https://errbit.example.com`                                   |
+| Callback URL | `https://errbit.example.com/users/auth/google_oauth2/callback` |
 
 * After you have registered your app, set `GOOGLE_CLIENT_ID` and `GOOGLE_SECRET`
   with your app's Client ID and Secret key.
@@ -292,7 +290,7 @@ at [errbit_plugin](https://github.com/errbit/errbit_plugin).
 What if Errbit has an error?
 ----------------------------
 
-Errbit will log it's own errors to an internal app named **Self.Errbit**.  The
+Errbit will log its own errors to an internal app named **Self.Errbit**.  The
 **Self.Errbit** app is automatically created when the first error happens.
 
 If your Errbit instance has logged an error, we would appreciate a bug report
@@ -305,7 +303,7 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
     create it by running `bundle exec rake airbrake:test`.)
   * In the **Issue Tracker** section, click **GitHub Issues**.
   * Fill in the **Account/Repository** field with **errbit/errbit**.
-  * Fill in the **Username** field with your github username.
+  * Fill in the **Username** field with your GitHub username.
   * If you are logged in on [GitHub](https://github.com), you can find your
     **API Token** on this page:
     [https://github.com/account/admin](https://github.com/account/admin).
