@@ -1,3 +1,4 @@
+<%# locals: (errbit_url:, api_key:) %>
 # frozen_string_literal: true
 
 # Add the Airbrake gem to your Gemfile:
@@ -10,6 +11,7 @@
 # config/initializers/errbit.rb with the following flags:
 
 Airbrake.configure do |config|
+  # FIXME: `.host` deprecated.
   config.host = "<%= errbit_url %>"
   config.project_id = 1 # required, but any positive integer works
   config.project_key = "<%= api_key %>"
