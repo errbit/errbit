@@ -9,7 +9,7 @@
     = link_to t('.show_resolved'), problems_path(all_errs: true, sort: params_sort, order: params_order), :class => 'button'
 
 %section
-  = render 'problems/search', :all_errs => all_errs, :app_id => nil
+  = render "problems/search", all_errs: all_errs, app_id: nil, params_sort: params_sort, params_order: params_order
 %br
 %section
   #problem_table.problem_table
