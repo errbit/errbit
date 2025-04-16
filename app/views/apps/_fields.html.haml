@@ -1,23 +1,23 @@
 = errors_for app
 
 %div.required
-  = f.label :name, t('.name')
+  = f.label :name, t(".name")
   = f.text_field :name
 
 - unless app.new_record?
   %div
-    %label= t('.api_key')
+    %label= t(".api_key")
     %span= app.api_key
-    = link_to t('.regenerate_api_key'), regenerate_api_key_app_path(app), :class => 'button', :method => 'post'
+    = link_to(t(".regenerate_api_key"), regenerate_api_key_app_path(app), class: "button", method: "post")
 %div
-  = f.label :repository_branch, t('.repository_branch')
-  = f.text_field :repository_branch, :placeholder => "e.g. main"
+  = f.label :repository_branch, t(".repository_branch")
+  = f.text_field :repository_branch, placeholder: "e.g. main"
 %div
-  = f.label :github_repo, t('.github_repo')
-  = f.text_field :github_repo, :placeholder => "errbit/errbit from https://github.com/errbit/errbit"
+  = f.label :github_repo, t(".github_repo")
+  = f.text_field :github_repo, :placeholder => "e.g. errbit/errbit from https://github.com/errbit/errbit"
 %div
   = f.label :bitbucket_repo, t('.bitbucket_repo')
-  = f.text_field :bitbucket_repo, :placeholder => "errbit/errbit from https://bitbucket.org/errbit/errbit"
+  = f.text_field :bitbucket_repo, :placeholder => "e.g. errbit/errbit from https://bitbucket.org/errbit/errbit"
 %div
   = f.label :custom_backtrace_url_template, t('.custom_backtrace_url_template')
   = f.text_field :custom_backtrace_url_template, :placeholder => "https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}"
