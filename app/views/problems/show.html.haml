@@ -24,7 +24,7 @@
         iCal
   %span>= link_to t('.up'), (request.env['HTTP_REFERER'] ? :back : app_problems_path(app)), :class => 'up'
   %br
-  = render "issue_tracker_links"
+  = render "issue_tracker_links", app: app
 
 - content_for :comments do
   %h3= t('.comments')
