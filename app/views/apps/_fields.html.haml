@@ -49,12 +49,11 @@
     = f.label :use_site_fingerprinter, t('.use_site_fingerprinter')
 
     %div.custom_notice_fingerprinter{:style => app_decorate.custom_notice_fingerprinter_style}
-      = render 'shared/notice_fingerprinter', :f => f
-
+      = render 'shared/notice_fingerprinter', f: f
 
 %div.checkbox
   = f.check_box :notify_all_users
   = f.label :notify_all_users, t('.notify_all_users')
 
-= render "issue_tracker_fields", :f => f
-= render "service_notification_fields", :f => f
+= render "issue_tracker_fields", f: f
+= render "service_notification_fields", f: f
