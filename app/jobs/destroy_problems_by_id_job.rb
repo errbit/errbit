@@ -3,6 +3,7 @@
 class DestroyProblemsByIdJob < ActiveJob::Base
   queue_as :default
 
+  # @param problem_ids [Array<String>]
   def perform(problem_ids)
     bson_problem_ids = []
 
