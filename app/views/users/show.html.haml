@@ -1,33 +1,33 @@
 - content_for :title, user.name
 
-- if Errbit::Config.use_gravatar && gravatar = gravatar_url(user.email, :s => 86)
+- if Errbit::Config.use_gravatar && gravatar = gravatar_url(user.email, s: 86)
   - content_for :title_style do
     background: url('#{gravatar}') no-repeat;
     padding-left: 106px;
 
 - content_for :action_bar do
-  = render 'shared/link_github_account'
-  = render 'shared/link_google_account'
-  = link_to t('.edit'), edit_user_path(user), :class => 'button'
-  = link_to t('.destroy'), user_path(user), :method => :delete,
-    :data => { :confirm => t('users.confirm_delete') }, :class => 'delete button'
+  = render "shared/link_github_account", user: user
+  = render "shared/link_google_account", user: user
+  = link_to t(".edit"), edit_user_path(user), class: "button"
+  = link_to t(".destroy"), user_path(user), method: :delete,
+    data: { confirm: t("users.confirm_delete") }, class: 'delete button'
 
 %table.single_user
   %tr
-    %th= t('.email')
+    %th= t(".email")
     %td.main= user.email
   - if Errbit::Config.user_has_username
     %tr
-      %th= t('.username')
+      %th= t(".username")
       %td.main= user.username
   - if Errbit::Config.github_authentication && user.github_login.present?
     %tr
       %th= "#{Errbit::Config.github_site_title} Login"
-      %td.main= link_to user.github_login, "#{Errbit::Config.github_url}/#{user.github_login}"
+      %td.main= link_to(user.github_login, "#{Errbit::Config.github_url}/#{user.github_login}")
   %tr
-    %th= t('.admin')
-    %td= user.admin? ? 'Y' : 'N'
+    %th= t(".admin")
+    %td= user.admin? ? "Y" : "N"
   %tr
-    %th= t('.created')
+    %th= t(".created")
     %td= user.created_at.to_fs(:micro)
 
