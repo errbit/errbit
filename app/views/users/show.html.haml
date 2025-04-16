@@ -10,7 +10,7 @@
   = render "shared/link_google_account", user: user
   = link_to t(".edit"), edit_user_path(user), class: "button"
   = link_to t(".destroy"), user_path(user), method: :delete,
-    data: { confirm: t("users.confirm_delete") }, class: 'delete button'
+    data: { confirm: t("users.confirm_delete") }, class: "delete button"
 
 %table.single_user
   %tr
