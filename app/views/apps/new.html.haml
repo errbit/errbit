@@ -5,6 +5,6 @@
 
 = form_for app_decorate do |f|
 
-  = render "fields", f: f
+  = render "fields", f: f, app: app
 
   %div.buttons= f.submit t(".add_app")
