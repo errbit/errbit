@@ -1,4 +1,5 @@
-- any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
+-# <%# locals: (problems:) -%>
+- any_issue_links = problems.any? {|e| e.issue_link.present? && e.issue_link != 'pending' }
 - on_page_that_can_include_multiple_different_apps = params[:controller] == 'problems'
 = form_tag do
   %table.errs.selectable
@@ -58,7 +59,9 @@
         %tr
           %td{:colspan => 100}
             %em No errs here
+
   = paginate problems
+
   .tab-bar
     %ul
       - [:merge, :unmerge, :resolve, :unresolve, :delete].each do |action|
