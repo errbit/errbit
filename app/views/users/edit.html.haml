@@ -5,6 +5,6 @@
   = link_to(t(".cancel"), user_path(user), class: "button")
 
 = form_for user, html: {autocomplete: "off"} do |f|
-  = render "fields", f: f
+  = render "fields", f: f, user: user
 
   %div.buttons= f.submit t(".update_user")

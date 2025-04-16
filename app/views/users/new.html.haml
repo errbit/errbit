@@ -3,6 +3,6 @@
 
 = form_for user do |f|
 
-  = render "fields", f: f
+  = render "fields", f: f, user: user
 
   %div.buttons= f.submit t(".add_user")
