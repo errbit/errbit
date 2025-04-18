@@ -9,32 +9,32 @@
   %div
     %label= t(".api_key")
     %span= app.api_key
-    = link_to(t(".regenerate_api_key"), regenerate_api_key_app_path(app), class: "button", method: "post")
+    = link_to(t(".regenerate_api_key"), regenerate_api_key_app_path(app), class: "button", method: :post)
 %div
   = f.label :repository_branch, t(".repository_branch")
   = f.text_field :repository_branch, placeholder: "e.g. main"
 %div
   = f.label :github_repo, t(".github_repo")
-  = f.text_field :github_repo, :placeholder => "e.g. errbit/errbit from https://github.com/errbit/errbit"
+  = f.text_field :github_repo, placeholder: "e.g. errbit/errbit from https://github.com/errbit/errbit"
 %div
-  = f.label :bitbucket_repo, t('.bitbucket_repo')
-  = f.text_field :bitbucket_repo, :placeholder => "e.g. errbit/errbit from https://bitbucket.org/errbit/errbit"
+  = f.label :bitbucket_repo, t(".bitbucket_repo")
+  = f.text_field :bitbucket_repo, placeholder: "e.g. errbit/errbit from https://bitbucket.org/errbit/errbit"
 %div
-  = f.label :custom_backtrace_url_template, t('.custom_backtrace_url_template')
-  = f.text_field :custom_backtrace_url_template, :placeholder => "https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}"
+  = f.label :custom_backtrace_url_template, t(".custom_backtrace_url_template")
+  = f.text_field :custom_backtrace_url_template, placeholder: "https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}"
 %div
-  = f.label :asset_host, t('.asset_host')
-  %em= t('.asset_host_help')
-  = f.text_field :asset_host, :placeholder => t('.asset_host_placeholder')
+  = f.label :asset_host, t(".asset_host")
+  %em= t(".asset_host_help")
+  = f.text_field :asset_host, placeholder: t(".asset_host_placeholder")
 %div
-  = f.label :current_app_version, t('.latest_app_version')
-  %em= t('.latest_app_version_help')
-  = f.text_field :current_app_version, :placeholder => t('.latest_app_version_placeholder')
+  = f.label :current_app_version, t(".latest_app_version")
+  %em= t(".latest_app_version_help")
+  = f.text_field :current_app_version, placeholder: t(".latest_app_version_placeholder")
 %fieldset
-  %legend= t('.notifications')
+  %legend= t(".notifications")
   .checkbox
-    = f.check_box :notify_on_errs, 'data-show-when-checked' => '.email_at_notices_nested'
-    = f.label :notify_on_errs, t('.notify_on_errors')
+    = f.check_box :notify_on_errs, "data-show-when-checked" => ".email_at_notices_nested"
+    = f.label :notify_on_errs, t(".notify_on_errors")
   - if Errbit::Config.per_app_email_at_notices
     %div.email_at_notices_nested{:style => app_decorate.notify_err_display}
       .field-helpertext Send a notification every
