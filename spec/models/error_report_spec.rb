@@ -4,11 +4,6 @@ require "rails_helper"
 
 require "airbrake"
 
-# require "airbrake/version"
-# require "airbrake/backtrace"
-# require "airbrake/notice"
-# require "airbrake/utils/params_cleaner"
-
 # MonkeyPatch to instanciate a Airbrake::Notice without configure
 # Airbrake
 #
@@ -38,7 +33,7 @@ RSpec.describe ErrorReport, type: :model do
 
   describe "#app" do
     it "find the good app" do
-      expect(error_report.app).to eq app
+      expect(error_report.app).to eq(app)
     end
   end
 
@@ -52,9 +47,7 @@ RSpec.describe ErrorReport, type: :model do
     it "save a notice" do
       expect do
         error_report.generate_notice!
-      end.to change {
-        app.reload.problems.count
-      }.by(1)
+      end.to change(app.reload.problems, :count).by(1)
     end
 
     context "with a minimal notice" do
@@ -65,9 +58,7 @@ RSpec.describe ErrorReport, type: :model do
       it "save a notice" do
         expect do
           error_report.generate_notice!
-        end.to change {
-          app.reload.problems.count
-        }.by(1)
+        end.to change(app.reload.problems, :count).by(1)
       end
     end
 
@@ -83,9 +74,7 @@ RSpec.describe ErrorReport, type: :model do
       it "save a notice" do
         expect do
           error_report.generate_notice!
-        end.to change {
-          app.reload.problems.count
-        }.by(1)
+        end.to change(app.reload.problems, :count).by(1)
       end
     end
 
@@ -103,34 +92,34 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "has complete backtrace" do
-        expect(subject.backtrace_lines.size).to eq 73
-        expect(subject.backtrace_lines.last["file"]).to eq "[GEM_ROOT]/bin/rake"
+        expect(subject.backtrace_lines.size).to eq(73)
+        expect(subject.backtrace_lines.last["file"]).to eq("[GEM_ROOT]/bin/rake")
       end
 
       it "has server_environment" do
-        expect(subject.server_environment["environment-name"]).to eq "development"
+        expect(subject.server_environment["environment-name"]).to eq("development")
       end
 
       it "has request" do
-        expect(subject.request["url"]).to eq "http://example.org/verify/cupcake=fistfight&lovebird=doomsayer"
-        expect(subject.request["params"]["controller"]).to eq "application"
+        expect(subject.request["url"]).to eq("http://example.org/verify/cupcake=fistfight&lovebird=doomsayer")
+        expect(subject.request["params"]["controller"]).to eq("application")
       end
 
       it "has notifier" do
-        expect(subject.notifier["name"]).to eq "Hoptoad Notifier"
+        expect(subject.notifier["name"]).to eq("Hoptoad Notifier")
       end
 
       it "get user_attributes" do
-        expect(subject.user_attributes["id"]).to eq "123"
-        expect(subject.user_attributes["name"]).to eq "Mr. Bean"
-        expect(subject.user_attributes["email"]).to eq "mr.bean@example.com"
-        expect(subject.user_attributes["username"]).to eq "mrbean"
+        expect(subject.user_attributes["id"]).to eq("123")
+        expect(subject.user_attributes["name"]).to eq("Mr. Bean")
+        expect(subject.user_attributes["email"]).to eq("mr.bean@example.com")
+        expect(subject.user_attributes["username"]).to eq("mrbean")
       end
 
       it "valid env_vars" do
         # XML: <var key="SCRIPT_NAME"/>
         expect(subject.env_vars).to have_key("SCRIPT_NAME")
-        expect(subject.env_vars["SCRIPT_NAME"]).to be_nil # blank ends up nil
+        expect(subject.env_vars["SCRIPT_NAME"]).to eq(nil) # blank ends up nil
 
         # XML representation:
         # <var key="rack.session.options">
@@ -150,7 +139,7 @@ RSpec.describe ErrorReport, type: :model do
           "id" => nil
         }
         expect(subject.env_vars).to have_key("rack_session_options")
-        expect(subject.env_vars["rack_session_options"]).to eql(expected)
+        expect(subject.env_vars["rack_session_options"]).to eq(expected)
       end
     end
   end
@@ -171,7 +160,7 @@ RSpec.describe ErrorReport, type: :model do
     it "unresolves the problem" do
       error_report.generate_notice!
       problem = error_report.problem
-      problem.update(
+      problem.update!(
         resolved_at: Time.zone.now,
         resolved: true
       )
@@ -180,8 +169,8 @@ RSpec.describe ErrorReport, type: :model do
       error_report.generate_notice!
       problem.reload
 
-      expect(problem.resolved_at).to be(nil)
-      expect(problem.resolved).to be(false)
+      expect(problem.resolved_at).to eq(nil)
+      expect(problem.resolved).to eq(false)
     end
 
     it "caches notice counts" do
@@ -190,9 +179,9 @@ RSpec.describe ErrorReport, type: :model do
       problem.reload
 
       expect(problem.notices_count).to be(1)
-      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to be(1)
-      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to be(1)
-      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to be(1)
+      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(1)
+      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(1)
+      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(1)
     end
 
     it "increments notice counts" do
