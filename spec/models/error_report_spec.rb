@@ -2,10 +2,12 @@
 
 require "rails_helper"
 
-require "airbrake/version"
-require "airbrake/backtrace"
-require "airbrake/notice"
-require "airbrake/utils/params_cleaner"
+require "airbrake"
+
+# require "airbrake/version"
+# require "airbrake/backtrace"
+# require "airbrake/notice"
+# require "airbrake/utils/params_cleaner"
 
 # MonkeyPatch to instanciate a Airbrake::Notice without configure
 # Airbrake
