@@ -68,7 +68,7 @@ class ProblemsController < ApplicationController
   end
 
   def xhr_sparkline
-    render partial: "problems/sparkline", layout: false
+    render partial: "problems/sparkline", locals: {problem: problem}, layout: false
   end
 
   def close_issue

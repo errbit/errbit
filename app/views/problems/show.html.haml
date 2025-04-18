@@ -60,13 +60,13 @@
 
 .tab-bar
   %ul
-    %li= link_to t(".summary"), "#summary", rel: "summary", class: "button"
-    %li= link_to t(".backtrace"), "#backtrace", rel: "backtrace", class: "button"
+    %li= link_to(t(".summary"), "#summary", rel: "summary", class: "button")
+    %li= link_to(t(".backtrace"), "#backtrace", rel: "backtrace", class: "button")
     - if @notice && @notice.user_attributes.present?
-      %li= link_to t(".user"), "#user_attributes", rel: "user_attributes", class: "button"
-    %li= link_to t(".environment"), "#environment", rel: "environment", class: "button"
-    %li= link_to t(".parameters"), "#params", rel: "params", class: "button"
-    %li= link_to t(".session"), "#session", rel: "session", class: "button"
+      %li= link_to(t(".user"), "#user_attributes", rel: "user_attributes", class: "button")
+    %li= link_to(t(".environment"), "#environment", rel: "environment", class: "button")
+    %li= link_to(t(".parameters"), "#params", rel: "params", class: "button")
+    %li= link_to(t(".session"), "#session", rel: "session", class: "button")
 
 - if @notice
   #summary
@@ -75,20 +75,20 @@
 
   #backtrace
     %h3 Backtrace
-    = render 'notices/backtrace', :backtrace => @notice.backtrace
+    = render "notices/backtrace", backtrace: @notice.backtrace
 
   - if @notice.user_attributes.present?
     #user_attributes
       %h3 User
-      = render 'notices/user_attributes', user: @notice.user_attributes
+      = render "notices/user_attributes", user_attributes: @notice.user_attributes
 
   #environment
     %h3 Environment
-    = render 'notices/environment', :notice => @notice
+    = render "notices/environment", notice: @notice
 
   #params
     %h3 Parameters
-    = render 'notices/params', :notice => @notice
+    = render "notices/params", notice: @notice
 
   #session
     %h3 Session

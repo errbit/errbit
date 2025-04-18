@@ -1,3 +1,4 @@
+-# <%# locals: (backtrace:) -%>
 .window
   %table.backtrace
     -# Group lines into internal / external so we can toggle the external backtrace
@@ -5,12 +6,12 @@
     - em = 4 # (external backtrace margin)
     - backtrace.grouped_lines.each do |in_app, line_group|
       - if !in_app && line_group.size > (em * 3)
-        = render :partial => 'notices/backtrace_line', :collection => line_group[0, em], :as => :line
-        = render :partial => 'notices/backtrace_line', :collection => line_group[em, line_group.size - (em * 2)], :as => :line, :locals => {:row_class => 'toggle_external_backtrace'}
+        = render partial: "notices/backtrace_line", collection: line_group[0, em], as: :line
+        = render partial: "notices/backtrace_line", collection: line_group[em, line_group.size - (em * 2)], as: :line, locals: {row_class: "toggle_external_backtrace"}
         %tr
           %td.line.backtrace_separator
             %span ...
-        = render :partial => 'notices/backtrace_line', :collection => line_group[em * -1, em], :as => :line
+        = render partial: "notices/backtrace_line", collection: line_group[em * -1, em], as: :line
 
       - else
-        = render :partial => "notices/backtrace_line", :collection => line_group, :as => :line
+        = render partial: "notices/backtrace_line", collection: line_group, as: :line

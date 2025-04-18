@@ -13,7 +13,7 @@ RSpec.describe "notices/_user_attributes.html.haml", type: :view do
     it "renders table with user attributes" do
       assign :app, notice.err.app
 
-      render "notices/user_attributes", user: notice.user_attributes
+      render "notices/user_attributes", user_attributes: notice.user_attributes
 
       expect(rendered).to have_link("https://example.com")
     end
