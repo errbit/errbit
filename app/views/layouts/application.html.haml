@@ -2,7 +2,7 @@
 %html
   %head
     %title
-      = t('.title')
+      = t(".title")
       &mdash;
       = yield(:page_title).present? ? yield(:page_title) : yield(:title)
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
@@ -15,9 +15,9 @@
   %body{:id => controller.controller_name, :class => controller.action_name}
     #header
       %div
-        = link_to t('.errbit'), root_path, :id => 'site-name'
-        = render 'shared/navigation' if current_user
-        = render 'shared/session'
+        = link_to t(".errbit"), root_path, id: "site-name"
+        = render "shared/navigation" if current_user
+        = render "shared/session"
     #content-wrapper
       #content-title{ :class => (yield :title_css_class).to_s, :style => (yield :title_style) }
         %h1= yield :title
@@ -26,13 +26,13 @@
           #action-bar
             = action_bar
       #content
-        = render 'shared/flash_messages'
+        = render "shared/flash_messages"
         = yield
       - if content_for?(:comments)
         #content-comments
           = yield :comments
     #footer
-      = t('.powered_html', :link => link_to(t('.errbit'), 'https://github.com/errbit/errbit', :target => '_blank'))
+      = t(".powered_html", link: link_to(t(".errbit"), "https://github.com/errbit/errbit", target: "_blank"))
       %br
       = Errbit::Version
     = yield :scripts
