@@ -653,7 +653,7 @@ PLATFORMS
 DEPENDENCIES
   actionmailer_inline_css
   activemodel-serializers-xml
-  airbrake (~> 4.3.5)
+  airbrake
   bigdecimal (= 3.1.9)
   bootsnap (>= 1.4.4)
   brakeman
