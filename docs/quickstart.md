@@ -22,7 +22,7 @@ This is a quickstart guide to get you up and running with the Errbit.
 ```yaml
 services:
   errbit:
-    image: "docker.io/errbit/errbit:latest" # TODO: change to release tag!
+    image: "docker.io/errbit/errbit:0.10.0"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
@@ -70,7 +70,7 @@ services:
       - "./acme.json:/acme.json" # Here we store ACME certificates
 
   errbit:
-    image: "docker.io/errbit/errbit:latest" # TODO: change to release tag!
+    image: "docker.io/errbit/errbit:0.10.0"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
