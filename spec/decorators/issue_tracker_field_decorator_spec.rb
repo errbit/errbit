@@ -13,7 +13,7 @@ RSpec.describe IssueTrackerFieldDecorator, type: :decorator do
     end
 
     it "return the key of field if no label define" do
-      expect(described_class.new(:foo, {}).label).to eq("foo")
+      expect(described_class.new(:foo, {}).label).to eq("Foo")
     end
   end
 end
