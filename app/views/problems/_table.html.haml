@@ -1,4 +1,5 @@
-- any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
+-# <%# locals: (problems:) -%>
+- any_issue_links = problems.any? {|e| e.issue_link.present? && e.issue_link != 'pending' }
 - on_page_that_can_include_multiple_different_apps = params[:controller] == 'problems'
 = form_tag do
   %table.errs.selectable
@@ -42,7 +43,7 @@
                     %em.commenter= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s << ":"
                   %em= truncate(comment.body, :length => 100, :separator => ' ')
           %td.latest
-            - value = "#{time_ago_in_words(problem.last_notice_at)} #{I18n.t('problems.table.ago')}"
+            - value = "#{time_ago_in_words(problem.last_notice_at)} #{t('problems.table.ago')}"
             %div.td-container{class: 'nowrap', title: value}= value
           %td.count.narrow-as-possible
             %div.td-container= link_to problem.notices_count, app_problem_path(problem.app, problem)
@@ -56,9 +57,11 @@
               :class => 'resolve' if problem.unresolved?
       - if problems.none?
         %tr
-          %td{:colspan => 100}
+          %td{colspan: 100}
             %em No errs here
+
   = paginate problems
+
   .tab-bar
     %ul
       - [:merge, :unmerge, :resolve, :unresolve, :delete].each do |action|

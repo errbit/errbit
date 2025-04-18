@@ -1,10 +1,10 @@
-- content_for :title, "#{I18n.t('users.edit.title')} #{user.name}"
+- content_for :title, "#{t("users.edit.title")} #{user.name}"
 - content_for :action_bar do
-  = render 'shared/link_github_account', :user => user
-  = render 'shared/link_google_account'
-  = link_to(t('.cancel'), user_path(user), :class => 'button')
+  = render "shared/link_github_account", user: user
+  = render "shared/link_google_account", user: user
+  = link_to(t(".cancel"), user_path(user), class: "button")
 
-= form_for user, :html => {:autocomplete => "off"} do |f|
-  = render 'fields', :f => f
+= form_for user, html: {autocomplete: "off"} do |f|
+  = render "fields", f: f, user: user
 
-  %div.buttons= f.submit t('.update_user')
+  %div.buttons= f.submit t(".update_user")

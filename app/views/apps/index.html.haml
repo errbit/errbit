@@ -1,14 +1,14 @@
-- content_for :title, t('.title')
+- content_for :title, t(".title")
 - content_for :action_bar do
   - if current_user.admin?
     %span
       = link_to(new_app_path) do
         %i.fa.fa-plus-circle
-        = t('.new_app')
+        = t(".new_app")
 
 %section
-  = render 'apps/search'
+  = render "apps/search"
 %br
 %section
   #app_table.app_table
-    = render 'apps/table'
+    = render "apps/table", apps: apps

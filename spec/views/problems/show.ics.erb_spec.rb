@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "problems/show.html.ics", type: :view do
+RSpec.describe "problems/show.ics.erb", type: :view do
   let(:problem) { ProblemDecorator.new(Fabricate(:problem)) }
 
   before do
@@ -10,6 +10,6 @@ RSpec.describe "problems/show.html.ics", type: :view do
   end
 
   it "works" do
-    render template: "problems/show", formats: [:ics], handlers: [:haml]
+    render template: "problems/show", formats: [:ics]
   end
 end

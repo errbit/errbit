@@ -7,14 +7,14 @@
             %div
               %p
                 An error has just occurred in
-                = link_to(@app.name, app_url(@app), :class => "bold") << ","
+                = link_to(@app.name, app_url(@app), class: "bold") << ","
                 on the
                 %span.bold= @notice.environment_name
                 environment.
                 %br
-                This error has occurred #{pluralize @notice.problem.notices_count, 'time'}.
+                This error has occurred #{pluralize @notice.problem.notices_count, "time"}.
               %p
-                = link_to("Click here to view the error on Errbit", app_problem_url(@app, @notice.problem), :class => "bold") << "."
+                = link_to("Click here to view the error on Errbit", app_problem_url(@app, @notice.problem), class: "bold") << "."
 %tr
   %td.section
     %table(cellpadding="0" cellspacing="0" border="0" align="left")
@@ -46,8 +46,8 @@
                 %br
               %p.heading URL:
               %p.monospace
-                - if @notice.request['url'].present?
-                  = link_to @notice.request['url'], @notice.request['url']
+                - if @notice.request["url"].present?
+                  = link_to @notice.request["url"], @notice.request["url"]
               %p.heading BROWSER:
               %p.monospace
                 = user_agent_graph(@notice.problem)
