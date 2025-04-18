@@ -48,7 +48,7 @@ Fill `docker-compose.yml` with the following content:
 ```yaml
 services:
   traefik:
-    image: "docker.io/library/traefik:3.3.5"
+    image: "docker.io/library/traefik:3.3.6"
     container_name: "traefik"
     restart: "unless-stopped"
     command:
