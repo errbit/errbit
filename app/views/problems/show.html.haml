@@ -60,17 +60,17 @@
 
 .tab-bar
   %ul
-    %li= link_to t('.summary'), '#summary', :rel => 'summary', :class => 'button'
-    %li= link_to t('.backtrace'), '#backtrace', :rel => 'backtrace', :class => 'button'
+    %li= link_to t(".summary"), "#summary", rel: "summary", class: "button"
+    %li= link_to t(".backtrace"), "#backtrace", rel: "backtrace", class: "button"
     - if @notice && @notice.user_attributes.present?
-      %li= link_to t('.user'), '#user_attributes', :rel => 'user_attributes', :class => 'button'
-    %li= link_to t('.environment'), '#environment', :rel => 'environment', :class => 'button'
-    %li= link_to t('.parameters'), '#params', :rel => 'params', :class => 'button'
-    %li= link_to t('.session'), '#session', :rel => 'session', :class => 'button'
+      %li= link_to t(".user"), "#user_attributes", rel: "user_attributes", class: "button"
+    %li= link_to t(".environment"), "#environment", rel: "environment", class: "button"
+    %li= link_to t(".parameters"), "#params", rel: "params", class: "button"
+    %li= link_to t(".session"), "#session", rel: "session", class: "button"
 
 - if @notice
   #summary
-    %h3= t('.summary')
+    %h3= t(".summary")
     = render 'notices/summary', :notice => @notice
 
   #backtrace
