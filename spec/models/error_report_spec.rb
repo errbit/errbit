@@ -4,19 +4,6 @@ require "rails_helper"
 
 require "airbrake"
 
-# MonkeyPatch to instanciate a Airbrake::Notice without configure
-# Airbrake
-#
-module Airbrake
-  API_VERSION = "2.4"
-
-  class Notice
-    def framework
-      "rails"
-    end
-  end
-end
-
 RSpec.describe ErrorReport, type: :model do
   let(:xml) do
     Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read
@@ -39,15 +26,14 @@ RSpec.describe ErrorReport, type: :model do
 
   describe "#backtrace" do
     it "should have valid backtrace" do
-      expect(error_report.backtrace).to be_valid
+      expect(error_report.backtrace.valid?).to eq(true)
     end
   end
 
   describe "#generate_notice!" do
     it "save a notice" do
-      expect do
-        error_report.generate_notice!
-      end.to change(app.reload.problems, :count).by(1)
+      expect { error_report.generate_notice! }
+        .to change(app.reload.problems, :count).by(1)
     end
 
     context "with a minimal notice" do
@@ -56,25 +42,23 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "save a notice" do
-        expect do
-          error_report.generate_notice!
-        end.to change(app.reload.problems, :count).by(1)
+        expect { error_report.generate_notice! }
+          .to change(app.reload.problems, :count).by(1)
       end
     end
 
     context "with notice generate by Airbrake gem" do
       let(:xml) do
         Airbrake::Notice.new(
-          exception: Exception.new,
+          Exception.new,
           api_key: "APIKEY",
           project_root: Rails.root
         ).to_xml
       end
 
       it "save a notice" do
-        expect do
-          error_report.generate_notice!
-        end.to change(app.reload.problems, :count).by(1)
+        expect { error_report.generate_notice! }
+          .to change(app.reload.problems, :count).by(1)
       end
     end
 
@@ -178,7 +162,7 @@ RSpec.describe ErrorReport, type: :model do
       problem = error_report.problem
       problem.reload
 
-      expect(problem.notices_count).to be(1)
+      expect(problem.notices_count).to eq(1)
       expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(1)
       expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(1)
       expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(1)
@@ -191,10 +175,10 @@ RSpec.describe ErrorReport, type: :model do
       problem = error_report.problem
       problem.reload
 
-      expect(problem.notices_count).to be(2)
-      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to be(2)
-      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to be(2)
-      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to be(2)
+      expect(problem.notices_count).to eq(2)
+      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(2)
+      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(2)
+      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(2)
     end
   end
 
@@ -207,9 +191,7 @@ RSpec.describe ErrorReport, type: :model do
     expect do
       error_report.generate_notice!
       error_report.generate_notice!
-    end.to change {
-      Notice.count
-    }.by(1)
+    end.to change(Notice, :count).by(1)
   end
 
   it "find the correct err for the notice" do
@@ -218,9 +200,7 @@ RSpec.describe ErrorReport, type: :model do
 
     expect do
       ErrorReport.new(xml).generate_notice!
-    end.to change {
-      error_report.problem.reload.resolved?
-    }.from(true).to(false)
+    end.to change(error_report.problem.reload, :resolved?).from(true).to(false)
   end
 
   context "with notification service configured" do
@@ -308,11 +288,8 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "save a notice" do
-        expect do
-          error_report.generate_notice!
-        end.to change {
-          app.reload.problems.count
-        }.by(1)
+        expect { error_report.generate_notice! }
+          .to change(app.reload.problems, :count).by(1)
       end
     end
 
@@ -322,11 +299,8 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "save a notice" do
-        expect do
-          error_report.generate_notice!
-        end.to change {
-          app.reload.problems.count
-        }.by(1)
+        expect { error_report.generate_notice! }
+          .to change(app.reload.problems, :count).by(1)
       end
     end
   end
@@ -334,7 +308,7 @@ RSpec.describe ErrorReport, type: :model do
   describe "#valid?" do
     context "with valid error report" do
       it "return true" do
-        expect(error_report.valid?).to be true
+        expect(error_report.valid?).to eq(true)
       end
     end
 
@@ -344,7 +318,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "return false" do
-        expect(error_report.valid?).to be false
+        expect(error_report.valid?).to eq(false)
       end
     end
   end
@@ -352,7 +326,7 @@ RSpec.describe ErrorReport, type: :model do
   describe "#notice" do
     context "before generate_notice!" do
       it "return nil" do
-        expect(error_report.notice).to be nil
+        expect(error_report.notice).to eq(nil)
       end
     end
 
@@ -362,7 +336,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "return the notice" do
-        expect(error_report.notice).to be_a Notice
+        expect(error_report.notice).to be_a(Notice)
       end
     end
   end
@@ -376,7 +350,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "return true" do
-        expect(error_report.should_keep?).to be true
+        expect(error_report.should_keep?).to eq(true)
       end
     end
 
@@ -388,13 +362,13 @@ RSpec.describe ErrorReport, type: :model do
       it "return true if current or newer" do
         error_report.server_environment["app-version"] = "1.0"
 
-        expect(error_report.should_keep?).to be true
+        expect(error_report.should_keep?).to eq(true)
       end
 
       it "return false if older" do
         error_report.server_environment["app-version"] = "0.9"
 
-        expect(error_report.should_keep?).to be false
+        expect(error_report.should_keep?).to eq(false)
       end
     end
   end
