@@ -71,7 +71,7 @@
 - if @notice
   #summary
     %h3= t(".summary")
-    = render 'notices/summary', :notice => @notice
+    = render "notices/summary", notice: @notice, problem: problem
 
   #backtrace
     %h3 Backtrace
