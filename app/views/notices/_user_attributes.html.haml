@@ -1,10 +1,10 @@
--# <%# locals: (user:) -%>
+-# <%# locals: (user_attributes:) -%>
 .window
   %table.user_attributes
     %tr
       %td
         %strong The user who experienced the error:
-    - user.each do |key, value|
+    - user_attributes.each do |key, value|
       %tr
         %th= key
         - value = pretty_hash(value) if value.is_a?(Hash)
