@@ -228,6 +228,8 @@ pt-BR:
       cancel: 'cancelar'
       seriously: 'Sério?'
       update: 'Atualizar Aplicação'
+    search:
+      search_placeholder: 'Search for application'
   watchers:
     destroy:
       success: "Você não está mais observando %{app}"
