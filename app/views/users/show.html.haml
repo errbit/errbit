@@ -1,6 +1,6 @@
 - content_for :title, user.name
 
-- if Errbit::Config.use_gravatar && gravatar = gravatar_url(user.email, s: 86)
+- if Errbit::Config.use_gravatar && (gravatar = gravatar_url(user.email, s: 86))
   - content_for :title_style do
     background: url('#{gravatar}') no-repeat;
     padding-left: 106px;
@@ -10,7 +10,7 @@
   = render "shared/link_google_account", user: user
   = link_to t(".edit"), edit_user_path(user), class: "button"
   = link_to t(".destroy"), user_path(user), method: :delete,
-    data: { confirm: t("users.confirm_delete") }, class: "delete button"
+    data: { confirm: t(".confirm_delete") }, class: "delete button"
 
 %table.single_user
   %tr
@@ -26,7 +26,7 @@
       %td.main= link_to(user.github_login, "#{Errbit::Config.github_url}/#{user.github_login}")
   %tr
     %th= t(".admin")
-    %td= user.admin? ? "Y" : "N"
+    %td= user.admin? ? t(".admin_yes") : t(".admin_no")
   %tr
     %th= t(".created")
     %td= user.created_at.to_fs(:micro)

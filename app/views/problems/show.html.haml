@@ -19,7 +19,7 @@
       data: { confirm: problem_confirm("resolve_one") }, class: "resolve"
   - if current_user.authentication_token
     %span
-      = link_to polymorphic_path([app, problem], format: "ics", :auth_token => current_user.authentication_token) do
+      = link_to polymorphic_path([app, problem], format: :ics, auth_token: current_user.authentication_token) do
         %i.fa.fa-calendar
         iCal
   %span>= link_to t(".up"), (request.env["HTTP_REFERER"] ? :back : app_problems_path(app)), class: "up"

@@ -10,7 +10,6 @@ pt-BR:
         success: "Boas notícias! '%{app_name}' foi atualizado com sucesso."
       destroy:
         success: "'%{app_name}' foi destruído com sucesso."
-
   n_errs:
     one:   "%{count} erro"
     other: "%{count} erros"
@@ -37,6 +36,13 @@ pt-BR:
     session:
       sign_out: 'Sair'
       edit_profile: 'Editar conta'
+    notice_fingerprinter:
+      error_class: Classe do erro
+      message: Mensagem de erro
+      backtrace_lines: Número de linhas do 'backtrace' (-1 para ilimitado)
+      component: Componente (ou Controlador)
+      action: Ação
+      environment_name: Nome do Ambiente
 
   controllers:
     apps:
@@ -50,7 +56,6 @@ pt-BR:
         destroy:
           success: "Sua aplicação foi destruída com sucesso."
           error: "Sua aplicação não pôde ser destruída."
-
     users:
       flash:
         destroy:
@@ -72,10 +77,11 @@ pt-BR:
     omniauth_callbacks:
       failure: "Não foi possível autenticá-lo a partir da conta %{kind} porque \"%{reason}\"."
       success: "Autenticado com sucesso a partir da conta %{kind}."
+    google_login:
+      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
         sign_in: "Entrar"
-
   problems:
     index:
       all_errors: "Todos os erros"
@@ -85,7 +91,7 @@ pt-BR:
     table:
         app: Aplicação
         env: Ambiente
-        what_&_where: 'O quê & onde'
+        what_and_where_html: 'O quê &amp; onde'
         latest: Último
         count: Total
         merge: Mesclar
@@ -115,7 +121,7 @@ pt-BR:
       parameters: Parâmetros
       session: Sessão
       ago_by: atrás por
-      ago_by_unkown_user: atrás por [Usuário Desconhecido]
+      ago_by_unknown_user: atrás por [Usuário Desconhecido]
       first_notice: Primeiro notificação
       last_notice: Última notificação
       environment: Ambiente
@@ -124,10 +130,12 @@ pt-BR:
       up: subir
       resolve: resolver
       notice_by_id: "notificação: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
   comments:
     confirm_delete: "Excluir permanentemente este comentário?"
   users:
-    confirm_delete: "Excluir permanentemente este usuário?"
     index:
       new: Adicionar novo usuário
       title: Usuários
@@ -143,6 +151,7 @@ pt-BR:
       update_user: Atualizar usuário
     fields:
       name: Nome
+      username: Usuário
       email: E-mail
       entries: Registros por página
       time_zone: Fuso horário
@@ -156,21 +165,26 @@ pt-BR:
     show:
       name: Nome
       email: E-mail
+      username: Usuário
       admin: Adminstrador?
+      admin_yes: Sim
+      admin_no: Não
       created: Criado em
       edit: editar
       destroy: excluir
+      confirm_delete: "Excluir permanentemente este usuário?"
   apps:
     confirm_delete: "Excluir permanentemente esta aplicação?"
     confirm_destroy_all_problems: "Excluir permanentemente todos os erros desta aplicação?"
     index:
+      title: Aplicações
+      new_app: Adicionar nova aplicação
+    table:
+      name: Nome
+      repository: Repositório
       notify: Serviços de Notificação
       tracker: Rastreador
       errors: Erros
-      name: Nome
-      repository: Repositório
-      title: Aplicações
-      new_app: Adicionar nova aplicação
       no_apps: 'Nenhuma aplicação aqui.'
       click_to_create: 'Clique aqui para criar a sua primeira'
     fields:
@@ -189,6 +203,7 @@ pt-BR:
       notify_on_errors: Notificar em caso de erros
       notify_all_users: Enviar notificações para todos os usuários
       regenerate_api_key: "Re-gerar chave de acesso"
+      use_site_fingerprinter: "Use Site Fingerprinter"
     show:
       all_errs: todos os errors
       all_users_notified: "Todos os usuários serão notificados quando algo acontecer."
@@ -225,6 +240,8 @@ pt-BR:
       cancel: 'cancelar'
       seriously: 'Sério?'
       update: 'Atualizar Aplicação'
+    search:
+      search_placeholder: 'Search for application'
   watchers:
     destroy:
       success: "Você não está mais observando %{app}"
@@ -234,8 +251,6 @@ pt-BR:
     index:
       title: Configurações
       cancel: cancelar
-      notice_fingerprinter: Impressão digital da notificação
-      notice_fingerprinter_text: A impressão digital da notificação determina como as notificações serão agrupadas. Quando habilitado, cada item compõe a unicidade do erro.
       error_class: Classe do erro
       message: Mensagem de erro
       backtrace_lines: Número de linhas do 'backtrace' (-1 para ilimitado)
@@ -257,6 +272,9 @@ pt-BR:
       app_version: Versão da Aplicação
       framework: Framework
       relative_directory: Diretório relativo
+  notice_fingerprinter:
+    title: Notice Fingerprinter
+    text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
   paginator:
     viewing_occurrence: visualizando ocorrência
     of: de

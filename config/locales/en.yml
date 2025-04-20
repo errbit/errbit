@@ -64,6 +64,13 @@ en:
     session:
       sign_out: 'Sign out'
       edit_profile: 'Edit profile'
+    notice_fingerprinter:
+      error_class: Error Class
+      message: Error Message
+      backtrace_lines: Number of backtrace lines (-1 for unlimited)
+      component: Component (or controller)
+      action: Action
+      environment_name: Environment name
 
   controllers:
     apps:
@@ -77,7 +84,6 @@ en:
         destroy:
           success: "Your app was successfully destroyed."
           error: "Your app could not be destroyed."
-
     users:
       flash:
         destroy:
@@ -91,7 +97,6 @@ en:
         need_two_errors_merge: "You must select at least two errors to merge"
         merge_several:
           success: "%{nb} errors have been merged."
-
   devise:
     registrations:
       signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
@@ -105,7 +110,6 @@ en:
     sessions:
       new:
         sign_in: "Sign in"
-
   problems:
     index:
       all_errors: "All Errors"
@@ -115,7 +119,7 @@ en:
     table:
         app: App
         env: Env
-        what_&_where: 'Where & What'
+        what_and_where_html: 'Where &amp; What'
         latest: Latest
         count: Count
         merge: Merge
@@ -154,10 +158,12 @@ en:
       up: up
       resolve: resolve
       notice_by_id: "Notice: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:
-    confirm_delete: "Permanently delete this user?"
     index:
       new: Add a New User
       title: Users
@@ -165,14 +171,15 @@ en:
       username: Username
       email: Email
       admin: Admin?
-      admin_yes: Yes
-      admin_no: No
+      admin_yes: "Yes"
+      admin_no: "No"
     edit:
       title: Edit
       cancel: cancel
       update_user: Update User
     fields:
       name: Name
+      username: Username
       email: Email
       entries: Entries per page
       time_zone: Time Zone
@@ -186,21 +193,26 @@ en:
     show:
       name: Name
       email: Email
+      username: Username
       admin: Admin?
+      admin_yes: "Yes"
+      admin_no: "No"
       created: Created
       edit: edit
       destroy: destroy
+      confirm_delete: "Permanently delete this user?"
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
     index:
+      title: Apps
+      new_app: Add a New App
+    table:
+      name: Name
+      repository: Repository
       notify: Notification Service
       tracker: Tracker
       errors: Errors
-      name: Name
-      repository: Repository
-      title: Apps
-      new_app: Add a New App
       no_apps: 'No apps here.'
       click_to_create: 'Click here to create your first one'
     fields:
@@ -220,6 +232,7 @@ en:
       notify_on_errors: Notify on errors
       notify_all_users: Send notifications to all users
       regenerate_api_key: "Regenerate API Key"
+      use_site_fingerprinter: "Use Site Fingerprinter"
     show:
       all_errs: all errors
       all_users_notified: "All users will be notified when something happens."
@@ -284,8 +297,6 @@ en:
       similar: Similar
       browser: Browser
       tenant: Origin
-      graph-2-weeks: Graph (2 weeks)
-      graph-24-hours: Graph (24 hours)
       app_server: App Server
       app_version: App Version
       framework: Framework
