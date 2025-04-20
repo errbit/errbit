@@ -387,3 +387,6 @@ Rails/ActiveRecordAliases:
 # We don't use ActiveRecord.
 Rails/SkipsModelValidations:
   Enabled: false
+
+Capybara/AmbiguousClick:
+  Enabled: true
