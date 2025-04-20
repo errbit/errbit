@@ -4,16 +4,16 @@ require "rails_helper"
 
 RSpec.describe ProblemsHelper, type: :helper do
   describe "#auto_link_format" do
-    it "handles links with target and wraps paragraph (JRuby)" do
-      skip "In MRI, output is different" if defined?(JRUBY_VERSION)
+    it "handles links with target and wraps paragraph (on MRI)" do
+      skip "On JRuby, output is different. Skip." if RUBY_ENGINE == "jruby"
 
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
       ).to eq("<p>Goto <a target=\"_blank\" href=\"https://errbit.com/\">https://errbit.com/</a> and say hello to <a target=\"_blank\" href=\"mailto:team@errbit.invalid\">team@errbit.invalid</a></p>")
     end
 
-    it "handles links with target and wraps paragraph (MRI)" do
-      skip "In JRuby, output is different" if !defined?(JRUBY_VERSION)
+    it "handles links with target and wraps paragraph (on JRuby)" do
+      skip "On MRI, output is different. Skip." if RUBY_ENGINE == "ruby"
 
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
