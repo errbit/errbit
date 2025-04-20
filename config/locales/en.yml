@@ -112,7 +112,7 @@ en:
     table:
         app: App
         env: Env
-        what_&_where: 'Where & What'
+        what_and_where_html: 'Where &amp; What'
         latest: Latest
         count: Count
         merge: Merge

@@ -10,7 +10,7 @@
           %th= link_for_sort t('.app')
         - else
           %th= link_for_sort t('.env'), 'environment'
-        %th= link_for_sort t('.what_&_where').html_safe, "message"
+        %th= link_for_sort t('.what_and_where_html'), "message"
         %th= link_for_sort t('.latest'), "last_notice_at"
         %th.count-header= link_for_sort t('.count')
         - if any_issue_links

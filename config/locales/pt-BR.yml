@@ -84,7 +84,7 @@ pt-BR:
     table:
         app: Aplicação
         env: Ambiente
-        what_&_where: 'O quê & onde'
+        what_and_where_html: 'O quê &amp; onde'
         latest: Último
         count: Total
         merge: Mesclar
