@@ -13,7 +13,7 @@ module ProblemsHelper
     )
   end
 
-  # @param email [String]
+  # @param email [String, NilClass]
   def gravatar_tag(email, options = {})
     return if email.blank?
 
