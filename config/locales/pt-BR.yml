@@ -126,7 +126,6 @@ pt-BR:
   comments:
     confirm_delete: "Excluir permanentemente este comentário?"
   users:
-    confirm_delete: "Excluir permanentemente este usuário?"
     index:
       new: Adicionar novo usuário
       title: Usuários
@@ -142,6 +141,7 @@ pt-BR:
       update_user: Atualizar usuário
     fields:
       name: Nome
+      username: Usuário
       email: E-mail
       entries: Registros por página
       time_zone: Fuso horário
@@ -155,10 +155,14 @@ pt-BR:
     show:
       name: Nome
       email: E-mail
+      username: Usuário
       admin: Adminstrador?
+      admin_yes: Sim
+      admin_no: Não
       created: Criado em
       edit: editar
       destroy: excluir
+      confirm_delete: "Excluir permanentemente este usuário?"
   apps:
     confirm_delete: "Excluir permanentemente esta aplicação?"
     confirm_destroy_all_problems: "Excluir permanentemente todos os erros desta aplicação?"
