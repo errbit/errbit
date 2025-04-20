@@ -14,8 +14,9 @@ RSpec.describe "A user can watch and unwatch an application", type: :system do
 
       visit root_path
 
-      click_on app.name
-      click_on I18n.t("apps.show.watch")
+      click_link app.name
+      click_link I18n.t("apps.show.watch")
+
       expect(page).to have_content(I18n.t("watchers.update.success", app: app.name))
     end
   end
@@ -31,9 +32,9 @@ RSpec.describe "A user can watch and unwatch an application", type: :system do
 
       visit root_path
 
-      click_on app.name
+      click_link app.name
+      click_link I18n.t("apps.show.unwatch")
 
-      click_on I18n.t("apps.show.unwatch")
       expect(page).to have_content(I18n.t("watchers.destroy.success", app: app.name))
     end
   end
