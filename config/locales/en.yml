@@ -64,6 +64,13 @@ en:
     session:
       sign_out: 'Sign out'
       edit_profile: 'Edit profile'
+    notice_fingerprinter:
+      error_class: Error Class
+      message: Error Message
+      backtrace_lines: Number of backtrace lines (-1 for unlimited)
+      component: Component (or controller)
+      action: Action
+      environment_name: Environment name
 
   controllers:
     apps:

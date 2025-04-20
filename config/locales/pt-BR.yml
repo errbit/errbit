@@ -36,6 +36,13 @@ pt-BR:
     session:
       sign_out: 'Sair'
       edit_profile: 'Editar conta'
+    notice_fingerprinter:
+      error_class: Classe do erro
+      message: Mensagem de erro
+      backtrace_lines: Número de linhas do 'backtrace' (-1 para ilimitado)
+      component: Componente (ou Controlador)
+      action: Ação
+      environment_name: Nome do Ambiente
 
   controllers:
     apps:
