@@ -114,7 +114,7 @@ pt-BR:
       parameters: Parâmetros
       session: Sessão
       ago_by: atrás por
-      ago_by_unkown_user: atrás por [Usuário Desconhecido]
+      ago_by_unknown_user: atrás por [Usuário Desconhecido]
       first_notice: Primeiro notificação
       last_notice: Última notificação
       environment: Ambiente
