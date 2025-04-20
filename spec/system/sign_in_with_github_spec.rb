@@ -3,8 +3,6 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with GitHub", type: :system do
-  before { driven_by(:selenium_chrome_headless) }
-
   context "sign in via GitHub with recognized user" do
     let!(:user) { Fabricate(:user, github_login: "nashby") }
 
