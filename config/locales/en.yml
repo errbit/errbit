@@ -165,8 +165,8 @@ en:
       username: Username
       email: Email
       admin: Admin?
-      admin_yes: Yes
-      admin_no: No
+      admin_yes: "Yes"
+      admin_no: "No"
     edit:
       title: Edit
       cancel: cancel
