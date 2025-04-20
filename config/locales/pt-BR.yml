@@ -167,13 +167,14 @@ pt-BR:
     confirm_delete: "Excluir permanentemente esta aplicação?"
     confirm_destroy_all_problems: "Excluir permanentemente todos os erros desta aplicação?"
     index:
+      title: Aplicações
+      new_app: Adicionar nova aplicação
+    table:
+      name: Nome
+      repository: Repositório
       notify: Serviços de Notificação
       tracker: Rastreador
       errors: Erros
-      name: Nome
-      repository: Repositório
-      title: Aplicações
-      new_app: Adicionar nova aplicação
       no_apps: 'Nenhuma aplicação aqui.'
       click_to_create: 'Clique aqui para criar a sua primeira'
     fields:

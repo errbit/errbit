@@ -195,13 +195,14 @@ en:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
     index:
+      title: Apps
+      new_app: Add a New App
+    table:
+      name: Name
+      repository: Repository
       notify: Notification Service
       tracker: Tracker
       errors: Errors
-      name: Name
-      repository: Repository
-      title: Apps
-      new_app: Add a New App
       no_apps: 'No apps here.'
       click_to_create: 'Click here to create your first one'
     fields:
