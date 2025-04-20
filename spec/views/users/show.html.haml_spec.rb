@@ -60,7 +60,7 @@ RSpec.describe "users/show.html.haml", type: :view do
         expect(view.content_for(:action_bar)).to have_selector(
           format(
             'a.delete[data-confirm="%s"]',
-            I18n.t(".users.confirm_delete")
+            t("users.show.confirm_delete")
           )
         )
       end

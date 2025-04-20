@@ -157,7 +157,6 @@ en:
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:
-    confirm_delete: "Permanently delete this user?"
     index:
       new: Add a New User
       title: Users
@@ -194,6 +193,7 @@ en:
       created: Created
       edit: edit
       destroy: destroy
+      confirm_delete: "Permanently delete this user?"
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
