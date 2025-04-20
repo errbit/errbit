@@ -173,6 +173,7 @@ en:
       update_user: Update User
     fields:
       name: Name
+      username: Username
       email: Email
       entries: Entries per page
       time_zone: Time Zone
@@ -186,6 +187,7 @@ en:
     show:
       name: Name
       email: Email
+      username: Username
       admin: Admin?
       created: Created
       edit: edit
