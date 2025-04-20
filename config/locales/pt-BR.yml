@@ -256,6 +256,8 @@ pt-BR:
       similar: Similares
       browser: Navegador
       tenant: Origem
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
       app_server: Servidor da Aplicação
       app_version: Versão da Aplicação
       framework: Framework
