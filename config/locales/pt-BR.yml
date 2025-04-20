@@ -11,11 +11,11 @@ pt-BR:
       destroy:
         success: "'%{app_name}' foi destruído com sucesso."
   n_errs:
-    one:   "%{count} erro"
+    one: "%{count} erro"
     other: "%{count} erros"
     will_be_deleted: serà excluído(s)
   n_errs_have:
-    one:   "%{count} erro foi"
+    one: "%{count} erro foi"
     other: "%{count} erros foram"
     been_resolved: resolvido(s)
     been_unresolved: tornado(s) não resolvido(s)
@@ -23,19 +23,19 @@ pt-BR:
     been_deleted: excluído(s)
   layouts:
     application:
-      title: 'Errbit'
-      errbit: 'Errbit'
+      title: "Errbit"
+      errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
     navigation:
-      apps: 'Aplicações'
-      errors: 'Erros'
-      users: 'Usuários'
-      config: 'Configurações'
+      apps: "Aplicações"
+      errors: "Erros"
+      users: "Usuários"
+      config: "Configurações"
     session:
-      sign_out: 'Sair'
-      edit_profile: 'Editar conta'
+      sign_out: "Sair"
+      edit_profile: "Editar conta"
     notice_fingerprinter:
       error_class: Classe do erro
       message: Mensagem de erro
@@ -49,7 +49,7 @@ pt-BR:
       flash:
         create:
           success: "Sua aplicação foi criado com sucesso."
-          error:  "Sua aplicação não pôde ser criada."
+          error: "Sua aplicação não pôde ser criada."
         update:
           success: "Sua aplicação foi atualizada com sucesso."
           error: "Sua aplicação não pôde ser atualizada."
@@ -71,11 +71,11 @@ pt-BR:
           success: "%{nb} erros foram mesclados."
   devise:
     registrations:
-      signed_up_but_unconfirmed: 'Uma mensagem foi enviada para o seu e-mail com um link de confirmação. Acesse o link para ativar sua conta.'
-      signed_up_but_inactive: 'Você se registrou com sucesso. Entretanto, só será possível entrar no sistema quando sua conta for ativada.'
-      signed_up_but_locked: 'Você se registrou com sucesso. Entratanto, não será possível entrar no sistema porque sua conta está bloqueada.'
+      signed_up_but_unconfirmed: "Uma mensagem foi enviada para o seu e-mail com um link de confirmação. Acesse o link para ativar sua conta."
+      signed_up_but_inactive: "Você se registrou com sucesso. Entretanto, só será possível entrar no sistema quando sua conta for ativada."
+      signed_up_but_locked: "Você se registrou com sucesso. Entratanto, não será possível entrar no sistema porque sua conta está bloqueada."
     omniauth_callbacks:
-      failure: "Não foi possível autenticá-lo a partir da conta %{kind} porque \"%{reason}\"."
+      failure: 'Não foi possível autenticá-lo a partir da conta %{kind} porque "%{reason}".'
       success: "Autenticado com sucesso a partir da conta %{kind}."
     google_login:
       domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
@@ -89,17 +89,17 @@ pt-BR:
       hide_resolved: "ocultar resolvidos"
       show_resolved: "exibir resolvidos"
     table:
-        app: Aplicação
-        env: Ambiente
-        what_and_where_html: 'O quê &amp; onde'
-        latest: Último
-        count: Total
-        merge: Mesclar
-        unmerge: Separar
-        resolve: Resolver
-        unresolve: Tornar não resolvido
-        delete: Excluir
-        ago: atrás
+      app: Aplicação
+      env: Ambiente
+      what_and_where_html: "O quê &amp; onde"
+      latest: Último
+      count: Total
+      merge: Mesclar
+      unmerge: Separar
+      resolve: Resolver
+      unresolve: Tornar não resolvido
+      delete: Excluir
+      ago: atrás
     confirm:
       delete: "Excluir permanentemente os itens selecionados?"
       resolve: "Resolver os itens selecionados? Isto não poderá ser alterado depois."
@@ -108,9 +108,9 @@ pt-BR:
       unmerge: "Separar os itens selecionados? Isto não poderá ser alterado depois."
       unresolve: "Tornar não resolvidos os itens selecionados? Isto não poderá ser alterado depois."
     search:
-      search_placeholder: 'Pesquisar por itens'
+      search_placeholder: "Pesquisar por itens"
     resolve:
-      the_error_has_been_resolved: 'Boas notícias! O erro foi resolvido.'
+      the_error_has_been_resolved: "Boas notícias! O erro foi resolvido."
     show:
       comments: Comentários
       add_a_comment: Adicionar um comentário
@@ -185,8 +185,8 @@ pt-BR:
       notify: Serviços de Notificação
       tracker: Rastreador
       errors: Erros
-      no_apps: 'Nenhuma aplicação aqui.'
-      click_to_create: 'Clique aqui para criar a sua primeira'
+      no_apps: "Nenhuma aplicação aqui."
+      click_to_create: "Clique aqui para criar a sua primeira"
     fields:
       name: Name
       api_key: Chave de Acesso
@@ -208,7 +208,7 @@ pt-BR:
       all_errs: todos os errors
       all_users_notified: "Todos os usuários serão notificados quando algo acontecer."
       api_key: "Chave de Acesso da API:"
-      are_you_sure: 'Está certo disto?'
+      are_you_sure: "Está certo disto?"
       atom_title: "Notificações do Errbit para %{name} em %{host}"
       edit: editar
       environment: Ambiente
@@ -226,7 +226,7 @@ pt-BR:
       user_or_email: Usuário ou E-mail
       watch: observar
       watchers: Observadores
-      when:  Quando
+      when: Quando
       who: Quem
     issue_tracker_fields:
       legend: Rastreador de defeitos
@@ -235,13 +235,13 @@ pt-BR:
       cancel: "cancelar"
       title: "Adicionar Aplicação"
     edit:
-      title: 'Editar Aplicação'
-      destroy: 'destruir aplicação'
-      cancel: 'cancelar'
-      seriously: 'Sério?'
-      update: 'Atualizar Aplicação'
+      title: "Editar Aplicação"
+      destroy: "destruir aplicação"
+      cancel: "cancelar"
+      seriously: "Sério?"
+      update: "Atualizar Aplicação"
     search:
-      search_placeholder: 'Search for application'
+      search_placeholder: "Search for application"
   watchers:
     destroy:
       success: "Você não está mais observando %{app}"
