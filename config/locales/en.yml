@@ -158,6 +158,9 @@ en:
       up: up
       resolve: resolve
       notice_by_id: "Notice: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
   comments:
     confirm_delete: "Permanently delete this comment?"
   users:
@@ -294,8 +297,6 @@ en:
       similar: Similar
       browser: Browser
       tenant: Origin
-      graph-2-weeks: Graph (2 weeks)
-      graph-24-hours: Graph (24 hours)
       app_server: App Server
       app_version: App Version
       framework: Framework

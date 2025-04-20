@@ -130,6 +130,9 @@ pt-BR:
       up: subir
       resolve: resolver
       notice_by_id: "notificação: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
   comments:
     confirm_delete: "Excluir permanentemente este comentário?"
   users:
@@ -265,8 +268,6 @@ pt-BR:
       similar: Similares
       browser: Navegador
       tenant: Origem
-      graph-2-weeks: Graph (2 weeks)
-      graph-24-hours: Graph (24 hours)
       app_server: Servidor da Aplicação
       app_version: Versão da Aplicação
       framework: Framework
