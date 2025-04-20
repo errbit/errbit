@@ -3,15 +3,16 @@
 require "rails_helper"
 
 RSpec.describe "A user can watch and unwatch an application", type: :system do
-  let!(:app) { Fabricate(:app) }
-
-  let!(:user) { Fabricate(:user) }
+  before { driven_by(:selenium_chrome_headless) }
 
   context "log in and watch a project" do
     it "is expected to log in and watch a project" do
+      app = Fabricate(:app)
+      user = Fabricate(:user)
+
       sign_in(user)
 
-      visit "/"
+      visit root_path
 
       click_on app.name
       click_on I18n.t("apps.show.watch")
@@ -21,11 +22,14 @@ RSpec.describe "A user can watch and unwatch an application", type: :system do
 
   context "log in and unwatch a project" do
     it "is expected to log in and unwatch a project" do
+      app = Fabricate(:app)
+      user = Fabricate(:user)
+
       app.watchers.create!(user: user)
 
       sign_in(user)
 
-      visit "/"
+      visit root_path
 
       click_on app.name
 
