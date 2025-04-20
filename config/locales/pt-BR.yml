@@ -239,8 +239,6 @@ pt-BR:
     index:
       title: Configurações
       cancel: cancelar
-      notice_fingerprinter: Impressão digital da notificação
-      notice_fingerprinter_text: A impressão digital da notificação determina como as notificações serão agrupadas. Quando habilitado, cada item compõe a unicidade do erro.
       error_class: Classe do erro
       message: Mensagem de erro
       backtrace_lines: Número de linhas do 'backtrace' (-1 para ilimitado)
