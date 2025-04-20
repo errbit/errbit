@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe ProblemsHelper, type: :helper do
   describe "#auto_link_format" do
     it "handles links with target and wraps paragraph (JRuby)" do
-      skip "In JRuby, output is different" if defined?(JRUBY_VERSION)
+      skip "In MRI, output is different" if defined?(JRUBY_VERSION)
 
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
@@ -13,7 +13,7 @@ RSpec.describe ProblemsHelper, type: :helper do
     end
 
     it "handles links with target and wraps paragraph (MRI)" do
-      skip "In MRI, output is different" if !defined?(JRUBY_VERSION)
+      skip "In JRuby, output is different" if !defined?(JRUBY_VERSION)
 
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
