@@ -193,6 +193,7 @@ pt-BR:
       notify_on_errors: Notificar em caso de erros
       notify_all_users: Enviar notificações para todos os usuários
       regenerate_api_key: "Re-gerar chave de acesso"
+      use_site_fingerprinter: "Use Site Fingerprinter"
     show:
       all_errs: todos os errors
       all_users_notified: "Todos os usuários serão notificados quando algo acontecer."

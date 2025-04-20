@@ -222,6 +222,7 @@ en:
       notify_on_errors: Notify on errors
       notify_all_users: Send notifications to all users
       regenerate_api_key: "Regenerate API Key"
+      use_site_fingerprinter: "Use Site Fingerprinter"
     show:
       all_errs: all errors
       all_users_notified: "All users will be notified when something happens."
