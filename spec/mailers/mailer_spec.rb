@@ -84,16 +84,16 @@ RSpec.describe Mailer do
       expect(email).to have_body_text('<p class="backtrace" style="')
     end
 
-    it "should have links to source files (on MRI)" do
-      skip "On JRuby, output is different. Skip." if RUBY_ENGINE == "jruby"
-
-      expect(email).to have_body_text('<a target="_blank" href="http://example.com/path/to/file.js">path/to/file.js')
+    if RUBY_ENGINE == "ruby"
+      it "should have links to source files (on MRI)" do
+        expect(email).to have_body_text('<a target="_blank" href="http://example.com/path/to/file.js">path/to/file.js')
+      end
     end
 
-    it "should have links to source files (on JRuby)" do
-      skip "On MRI, output is different. Skip." if RUBY_ENGINE == "ruby"
-
-      expect(email).to have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
+    if RUBY_ENGINE == "jruby"
+      it "should have links to source files (on JRuby)" do
+        expect(email).to have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
+      end
     end
 
     it "should have the error count in the subject" do
