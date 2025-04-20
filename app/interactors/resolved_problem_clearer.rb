@@ -29,8 +29,10 @@ class ResolvedProblemClearer
     collections = Mongoid.default_client.collections
     collections.map(&:name).map do |collection|
       Mongoid.default_client.command compact: collection
+    rescue Mongo::Error::OperationFailure => e
+      next if /CMD_NOT_ALLOWED: compact/.match?(e.message)
 
-      # TODO: fix me. Compact can fail.
+      raise e
     end
   end
 end
