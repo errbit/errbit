@@ -1,3 +1,5 @@
 .envrc
 /.bundle
 /coverage
+/node_modules
+/.idea

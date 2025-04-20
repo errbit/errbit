@@ -18,3 +18,4 @@ coverage
 *#
 NOTES
 *.swp
+/node_modules

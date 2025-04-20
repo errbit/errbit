@@ -1,4 +1,5 @@
 - content_for :title, t(".title")
+
 - content_for :action_bar do
   = link_to_copy_attributes_from_other_app
   = link_to "delete all errs", destroy_all_app_problems_path(app), method: :post,
