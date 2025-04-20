@@ -16,6 +16,5 @@ config/mongoid.yml
 *.rbx
 coverage
 *#
-.tool-versions
 NOTES
 *.swp
