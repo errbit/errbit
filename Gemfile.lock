@@ -697,7 +697,6 @@ DEPENDENCIES
   rails (= 7.2.2.1)
   rails-controller-testing
   rails_autolink
-  rake
   rexml
   ri_cal
   rspec
