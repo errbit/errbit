@@ -1,0 +1,8 @@
+#! /bin/bash
+
+set -eux
+
+yarn prettier --write "*.{yml,yaml}" \
+                      ".github/*.{yml,yaml}" \
+                      ".github/**/*.{yml,yaml}" \
+                      "config/**/*.{yml,yaml}"
