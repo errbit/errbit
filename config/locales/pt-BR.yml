@@ -10,7 +10,6 @@ pt-BR:
         success: "Boas notícias! '%{app_name}' foi atualizado com sucesso."
       destroy:
         success: "'%{app_name}' foi destruído com sucesso."
-
   n_errs:
     one:   "%{count} erro"
     other: "%{count} erros"
@@ -50,7 +49,6 @@ pt-BR:
         destroy:
           success: "Sua aplicação foi destruída com sucesso."
           error: "Sua aplicação não pôde ser destruída."
-
     users:
       flash:
         destroy:
@@ -72,10 +70,11 @@ pt-BR:
     omniauth_callbacks:
       failure: "Não foi possível autenticá-lo a partir da conta %{kind} porque \"%{reason}\"."
       success: "Autenticado com sucesso a partir da conta %{kind}."
+    google_login:
+      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
         sign_in: "Entrar"
-
   problems:
     index:
       all_errors: "Todos os erros"
