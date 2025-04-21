@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "A user can watch and unwatch an application", type: :system do
-  context "log in and watch a project" do
+  context "when user log in and watch a project" do
     it "is expected to log in and watch a project" do
       user = create(:user)
       app = create(:app)
@@ -19,7 +19,7 @@ RSpec.describe "A user can watch and unwatch an application", type: :system do
     end
   end
 
-  context "log in and unwatch a project" do
+  context "when user log in and unwatch a project" do
     it "is expected to log in and unwatch a project" do
       user = create(:user)
       app = create(:app)
