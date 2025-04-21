@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
+  # @param user [User] The user making the request
+  # @param record [User] The record being accessed
+  def initialize(user, record)
+    super
+  end
+
   def index?
     false
   end
