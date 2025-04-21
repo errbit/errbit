@@ -33,7 +33,7 @@ RSpec.describe ApplicationPolicy::Scope do
     context "when user is not present" do
       let(:user) { nil }
 
-      let(:scope) { instance_double(Mongoid::Criteria) }
+      let(:scope) { User }
 
       it { expect { described_class.new(user, scope) }.to raise_error(Pundit::NotAuthorizedError) }
     end
@@ -41,7 +41,7 @@ RSpec.describe ApplicationPolicy::Scope do
     context "when user is present" do
       let(:user) { Fabricate(:user) }
 
-      let(:scope) { instance_double(Mongoid::Criteria) }
+      let(:scope) { double }
 
       it { expect { described_class.new(user, scope) }.not_to raise_error }
     end
@@ -50,7 +50,7 @@ RSpec.describe ApplicationPolicy::Scope do
   describe "#resolve" do
     let(:user) { Fabricate(:user) }
 
-    let(:scope) { instance_double(Mongoid::Criteria) }
+    let(:scope) { double }
 
     subject { described_class.new(user, scope) }
 
