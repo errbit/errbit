@@ -350,6 +350,12 @@ RSpec/IndexedLet:
 RSpec/NamedSubject:
   Enabled: false
 
+# Ignore system specs.
+RSpec/ExampleLength:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*"
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
