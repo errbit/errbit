@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "Sign in and sign out with email and password", type: :system do
-  context "when user successful sign in and sign out" do
-    let!(:user) { create(:user, password: "password") }
+  let!(:user) { create(:user, password: "password") }
 
+  context "when user successful sign in and sign out" do
     it "is expected to sign in user and sign out" do
       visit root_path
 
@@ -29,8 +29,6 @@ RSpec.describe "Sign in and sign out with email and password", type: :system do
   end
 
   context "when user exists but password is wrong" do
-    let!(:user) { create(:user, password: "password") }
-
     it "is expected to reject user with wrong password" do
       visit root_path
 
