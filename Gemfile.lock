@@ -171,6 +171,11 @@ GEM
     errbit_plugin (0.7.0)
     erubi (1.13.1)
     fabrication (2.31.0)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.13.0)
@@ -585,7 +590,6 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.25.0)
     stringio (3.1.7)
-    stringio (3.1.7-java)
     sucker_punch (3.2.0)
       concurrent-ruby (~> 1.0)
     super_diff (0.15.0)
@@ -634,11 +638,13 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
+  aarch64-linux
   aarch64-linux-gnu
   aarch64-linux-musl
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
+  java
   ruby
   universal-java
   x86-linux-gnu
@@ -666,6 +672,7 @@ DEPENDENCIES
   errbit_github_plugin
   errbit_plugin
   fabrication
+  factory_bot_rails
   faker
   faraday-retry
   font-awesome-rails
@@ -782,6 +789,8 @@ CHECKSUMS
   errbit_plugin (0.7.0) sha256=2deec87f62dbc953ff86a69b46bb4d339678a9a9439342b85f3dfb909621d94d
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (2.31.0) sha256=2c79f10d1b88034a2ebd47ce77acba66847fc4636581c8282b3408adc68e85aa
+  factory_bot (6.5.1) sha256=40581ea7bec0aee05514b8f4f99ed477274bdf1884c1372de5209e60322d6ca9
+  factory_bot_rails (6.4.4) sha256=139e17caa2c50f098fddf5e5e1f29e8067352024e91ca1186d018b36589e5c88
   faker (3.5.1) sha256=1ad1fbea279d882f486059c23fe3ddb816ccd1d7052c05a45014b4450d859bfc
   faraday (2.13.0) sha256=f2697cd61a434dc446ee035f0370de654c2ad64707c4fc2541eb2338702e9614
   faraday-net_http (3.4.0) sha256=a1f1e4cd6a2cf21599c8221595e27582d9936819977bbd4089a601f24c64e54a
@@ -951,7 +960,6 @@ CHECKSUMS
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.8.0) sha256=ed17b7d0e061b2a19a91dd434bef629439e2f32310f22f26acb451addc92b788
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
-  stringio (3.1.7-java) sha256=167bdd3d60a002ee94bc289cc3259638aaadc36a47b3086a44a694b5dc72a499
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   super_diff (0.15.0) sha256=1c857c27ea49ed57685ce05897efc35839d169e74a30fca1a97e7a401f0cb914
   temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b

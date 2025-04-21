@@ -82,6 +82,7 @@ group :development, :test do
   gem "rubocop-thread_safety", require: false
   gem "standard", "1.49.0", require: false
   gem "faker"
+  gem "factory_bot_rails"
   gem "brakeman", require: false
 end
 
