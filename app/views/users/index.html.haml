@@ -17,7 +17,7 @@
       %th.main= t(".email")
       %th= t(".admin")
   %tbody
-    - users.each do |user|
+    - @users.each do |user|
       %tr.user_list
         - if Errbit::Config.use_gravatar
           %td= gravatar_tag(user.email, s: 24)
@@ -27,4 +27,4 @@
         %td= user.email
         %td= user.admin? ? t(".admin_yes") : t(".admin_no")
 
-= paginate users
+= paginate @users
