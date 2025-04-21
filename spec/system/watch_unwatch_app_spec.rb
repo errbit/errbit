@@ -6,7 +6,7 @@ RSpec.describe "A user can watch and unwatch an application", type: :system do
   context "log in and watch a project" do
     it "is expected to log in and watch a project" do
       app = Fabricate(:app)
-      user = Fabricate(:user)
+      user = create(:user)
 
       sign_in(user)
 
@@ -22,7 +22,7 @@ RSpec.describe "A user can watch and unwatch an application", type: :system do
   context "log in and unwatch a project" do
     it "is expected to log in and unwatch a project" do
       app = Fabricate(:app)
-      user = Fabricate(:user)
+      user = create(:user)
 
       app.watchers.create!(user: user)
 
