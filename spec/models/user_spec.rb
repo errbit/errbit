@@ -73,4 +73,10 @@ RSpec.describe User, type: :model do
       }.by(1)
     end
   end
+
+  describe "#attributes_for_super_diff" do
+    subject { Fabricate(:user) }
+
+    it { expect(subject.attributes_for_super_diff).to eq(id: subject.id.to_s, name: subject.name) }
+  end
 end

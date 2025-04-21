@@ -9,6 +9,7 @@ gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"
 gem "devise"
+gem "pundit"
 gem "dotenv-rails"
 gem "draper"
 gem "errbit_plugin"
@@ -91,10 +92,10 @@ end
 
 group :test do
   gem "rails-controller-testing"
-  gem "rspec"
   gem "rspec-rails", require: false
   gem "rspec-activemodel-mocks"
   gem "mongoid-rspec"
+  gem "pundit-matchers"
   gem "fabrication"
   gem "capybara"
   gem "selenium-webdriver"

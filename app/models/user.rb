@@ -120,6 +120,13 @@ class User
     save(validate: false)
   end
 
+  def attributes_for_super_diff
+    {
+      id: id.to_s,
+      name: name
+    }
+  end
+
   private
 
   def generate_authentication_token
