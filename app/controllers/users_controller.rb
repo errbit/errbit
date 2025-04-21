@@ -4,16 +4,16 @@ class UsersController < ApplicationController
   before_action :require_admin!, except: [:edit, :update]
   before_action :require_user_edit_privileges, only: [:edit, :update]
 
-  expose(:user)
-
   def index
     @users = User.order_by(name: :asc).page(params[:page]).per(current_user.per_page)
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def new
+    @user = User.new
   end
 
   def edit
