@@ -356,6 +356,12 @@ RSpec/ExampleLength:
   Exclude:
     - "spec/system/**/*"
 
+# Ignore multiple expectations in system specs.
+RSpec/MultipleExpectations:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*"
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
