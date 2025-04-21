@@ -48,7 +48,7 @@ class ApplicationPolicy
     attr_reader :user, :scope
 
     # @param user [User]
-    # @param scope [Class] The scope of records being accessed
+    # @param scope [Object] The scope of records being accessed
     def initialize(user, scope)
       raise Pundit::NotAuthorizedError, "must be logged in" if user.blank?
 

@@ -171,3 +171,29 @@ RSpec.describe UserPolicy do
     end
   end
 end
+
+RSpec.describe UserPolicy::Scope do
+  describe "#resolve" do
+    context "when user is an admin" do
+      let(:admin) { Fabricate(:admin) }
+
+      let(:user) { Fabricate(:user) }
+
+      let(:scope) { User }
+
+      subject { described_class.new(admin, scope) }
+
+      it { expect(subject.resolve).to eq([admin, user]) }
+    end
+
+    context "when user is not an admin" do
+      context "when user see himself" do
+
+      end
+
+      context "when user see another user" do
+
+      end
+    end
+  end
+end

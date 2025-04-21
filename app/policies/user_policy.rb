@@ -32,6 +32,12 @@ class UserPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     attr_reader :user, :scope
 
+    # @param user [User]
+    # @param scope [User, Object] The scope of records being accessed
+    def initialize(user, scope)
+      super
+    end
+
     def resolve
       if user.admin?
         scope.all
