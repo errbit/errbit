@@ -293,7 +293,7 @@ GEM
       bigdecimal (~> 3.1)
     net-http (0.6.0)
       uri
-    net-imap (0.5.6)
+    net-imap (0.5.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -585,7 +585,6 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.25.0)
     stringio (3.1.7)
-    stringio (3.1.7-java)
     sucker_punch (3.2.0)
       concurrent-ruby (~> 1.0)
     super_diff (0.15.0)
@@ -847,7 +846,7 @@ CHECKSUMS
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
   net-http (0.6.0) sha256=9621b20c137898af9d890556848c93603716cab516dc2c89b01a38b894e259fb
-  net-imap (0.5.6) sha256=1ede8048ee688a14206060bf37a716d18cb6ea00855f6c9b15daee97ee51fbe5
+  net-imap (0.5.7) sha256=d5c0247832439b62298c0935ba67d8bc02fdb476d7a3e099d6f75b3daf498b91
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.5.1) sha256=ed96a0af63c524fceb4b29b0d352195c30d82dd916a42f03c62a3a70e5b70736
@@ -951,7 +950,6 @@ CHECKSUMS
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.8.0) sha256=ed17b7d0e061b2a19a91dd434bef629439e2f32310f22f26acb451addc92b788
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
-  stringio (3.1.7-java) sha256=167bdd3d60a002ee94bc289cc3259638aaadc36a47b3086a44a694b5dc72a499
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   super_diff (0.15.0) sha256=1c857c27ea49ed57685ce05897efc35839d169e74a30fca1a97e7a401f0cb914
   temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b
