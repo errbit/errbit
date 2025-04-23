@@ -277,11 +277,11 @@ RSpec.describe UsersController, type: :request do
     context "when user is logged in" do
       context "when user is an admin" do
         context "when admin removes himself" do
-          let(:user) { create(:user, admin: true) }
+          let(:current_user) { create(:user, admin: true) }
 
-          before { sign_in(user) }
+          before { sign_in(current_user) }
 
-          before { delete user_path(user) }
+          before { delete user_path(current_user) }
 
           it "is expected to redirect to root path with status found" do
             expect(UserDestroy).not_to receive(:new)
