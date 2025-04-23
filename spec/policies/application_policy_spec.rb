@@ -26,6 +26,12 @@ RSpec.describe ApplicationPolicy do
 
     it { expect { subject }.to raise_error(Pundit::NotAuthorizedError) }
   end
+
+  describe "#permitted_attributes" do
+    let(:user) { create(:user, admin: false) }
+
+    it { expect { subject.permitted_attributes }.to raise_error(NotImplementedError, "You must define #permitted_attributes in ApplicationPolicy") }
+  end
 end
 
 RSpec.describe ApplicationPolicy::Scope do
