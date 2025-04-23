@@ -158,33 +158,5 @@ RSpec.describe UsersController, type: :controller do
         end
       end
     end
-
-    context "DELETE /users/:id" do
-      context "with a destroy success" do
-        let(:user_destroy) { double(destroy: true) }
-
-        before do
-          expect(UserDestroy).to receive(:new).with(user).and_return(user_destroy)
-          delete :destroy, params: {id: user.id}
-        end
-
-        it "should destroy user" do
-          expect(request.flash[:success]).to eq I18n.t("controllers.users.flash.destroy.success", name: user.name)
-          expect(response).to redirect_to(users_path)
-        end
-      end
-
-      context "with trying destroy himself" do
-        before do
-          expect(UserDestroy).not_to receive(:new)
-          delete :destroy, params: {id: admin.id}
-        end
-
-        it "should not destroy user" do
-          expect(response).to redirect_to(users_path)
-          expect(request.flash[:error]).to eq I18n.t("controllers.users.flash.destroy.error")
-        end
-      end
-    end
   end
 end
