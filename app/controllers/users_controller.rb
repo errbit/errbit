@@ -27,10 +27,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    if user.save
-      flash[:success] = "#{user.name} is now part of the team. Be sure to add them as a project watcher."
+    @user = User.new(user_params)
 
-      redirect_to user_path(user)
+    if @user.save
+      flash[:success] = "#{@user.name} is now part of the team. Be sure to add them as a project watcher."
+
+      redirect_to user_path(@user)
     else
       render :new
     end
@@ -51,12 +53,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if user == current_user
+    @user = User.find(params[:id])
+
+    authorize @user
+
+    if @user == current_user
       flash[:error] = I18n.t("controllers.users.flash.destroy.error")
     else
-      UserDestroy.new(user).destroy
+      UserDestroy.new(@user).destroy
 
-      flash[:success] = I18n.t("controllers.users.flash.destroy.success", name: user.name)
+      flash[:success] = I18n.t("controllers.users.flash.destroy.success", name: @user.name)
     end
 
     redirect_to users_path

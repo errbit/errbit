@@ -102,4 +102,24 @@ RSpec.describe UsersController, type: :request do
       end
     end
   end
+
+  describe "#create" do
+    context "when user is logged in" do
+      # TODO: write
+    end
+
+    context "when user is not logged in" do
+      # TODO: write
+    end
+  end
+
+  describe "#update" do
+    context "when user is logged in" do
+      # TODO: write
+    end
+
+    context "when user is not logged in" do
+      # TODO: write
+    end
+  end
 end
