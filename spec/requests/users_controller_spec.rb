@@ -6,9 +6,11 @@ RSpec.describe UsersController, type: :request do
   describe "#index" do
     context "when user is logged in" do
       context "when user is an admin" do
-        let(:user) { create(:user, admin: true) }
+        let!(:user_1) { create(:user, name: "Jon Snow", admin: true) }
 
-        before { sign_in(user) }
+        let!(:user_2) { create(:user, name: "Tyrion Lannister") }
+
+        before { sign_in(user_1) }
 
         before { get users_path }
 
@@ -16,6 +18,8 @@ RSpec.describe UsersController, type: :request do
           expect(response).to render_template(:index)
 
           expect(response).to have_http_status(:ok)
+
+          expect(assigns(:users)).to eq([user_1, user_2])
         end
       end
 
