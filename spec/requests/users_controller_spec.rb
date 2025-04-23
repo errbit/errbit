@@ -24,7 +24,19 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user is not an admin" do
+        let(:user) { create(:user, name: "Tyrion Lannister", admin: false) }
 
+        before { sign_in(user) }
+
+        before { get users_path }
+
+        it "is expected to render template index with status ok" do
+          expect(response).to render_template(:index)
+
+          expect(response).to have_http_status(:ok)
+
+          expect(assigns(:users)).to eq([user])
+        end
       end
     end
 
