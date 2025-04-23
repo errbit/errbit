@@ -257,7 +257,21 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when admin editing user" do
+          let(:current_user) { create(:user, admin: true) }
 
+          let!(:another_user) { create(:user, admin: false) }
+
+          before { sign_in(current_user) }
+
+          before { get edit_user_path(another_user) }
+
+          it "is expected to render template edit with status ok" do
+            expect(response).to render_template(:edit)
+
+            expect(response).to have_http_status(:ok)
+
+            expect(assigns(:user)).to eq(another_user)
+          end
         end
       end
 
