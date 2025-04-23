@@ -445,7 +445,23 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when user is removing another user" do
+          let(:current_user) { create(:user, admin: false) }
 
+          let!(:another_user) { create(:user, admin: false) }
+
+          before { sign_in(current_user) }
+
+          before { expect(UserDestroy).not_to receive(:new) }
+
+          before { expect { delete user_path(another_user) }.not_to change(User, :count) }
+
+          it "is expected to redirect to users path with status found" do
+            expect(response).to redirect_to(root_path)
+
+            expect(response).to have_http_status(:found)
+
+            expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+          end
         end
 
         context "when user is removing admin" do
