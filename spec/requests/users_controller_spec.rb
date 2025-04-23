@@ -113,7 +113,7 @@ RSpec.describe UsersController, type: :request do
 
           before { get user_path(another_user) }
 
-          it "is expected to redirect to root url  with status found" do
+          it "is expected to redirect to root url with status found" do
             expect(response).to redirect_to(root_url)
 
             expect(response).to have_http_status(:found)
