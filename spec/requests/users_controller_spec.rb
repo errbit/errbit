@@ -139,6 +139,24 @@ RSpec.describe UsersController, type: :request do
             expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
           end
         end
+
+        context "when user looking on admin" do
+          let(:current_user) { create(:user, admin: false) }
+
+          let(:user) { create(:user, admin: true) }
+
+          before { sign_in(current_user) }
+
+          before { get user_path(user) }
+
+          it "is expected to redirect to root path with status found" do
+            expect(response).to redirect_to(root_path)
+
+            expect(response).to have_http_status(:found)
+
+            expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+          end
+        end
       end
     end
 
