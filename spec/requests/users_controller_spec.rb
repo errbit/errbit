@@ -293,11 +293,39 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when user editing another user" do
+          let(:current_user) { create(:user, admin: false) }
 
+          let(:another_user) { create(:user, admin: false) }
+
+          before { sign_in(current_user) }
+
+          before { get edit_user_path(another_user) }
+
+          it "is expected to redirect to root path with status found" do
+            expect(response).to redirect_to(root_path)
+
+            expect(response).to have_http_status(:found)
+
+            expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+          end
         end
 
         context "when user editing admin" do
+          let(:current_user) { create(:user, admin: false) }
 
+          let(:admin) { create(:user, admin: true) }
+
+          before { sign_in(current_user) }
+
+          before { get edit_user_path(admin) }
+
+          it "is expected to redirect to root path with status found" do
+            expect(response).to redirect_to(root_path)
+
+            expect(response).to have_http_status(:found)
+
+            expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+          end
         end
       end
     end
