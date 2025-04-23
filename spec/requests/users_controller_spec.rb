@@ -71,7 +71,19 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when admin looking on another user" do
+          let(:user) { create(:user, admin: true) }
 
+          before { sign_in(user) }
+
+          before { get user_path(user) }
+
+          it "is expected to render template show with status ok" do
+            expect(response).to render_template(:show)
+
+            expect(response).to have_http_status(:ok)
+
+            expect(assigns(:user)).to eq(user)
+          end
         end
       end
 
