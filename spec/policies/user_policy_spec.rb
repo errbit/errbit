@@ -5,6 +5,11 @@ require "rails_helper"
 RSpec.describe UserPolicy do
   subject { described_class.new(user, record) }
 
+  it do
+    expect(described_class::FIELDS)
+      .to eq([:name, :username, :email, :password, :github_login, :per_page, :time_zone, :password, :password_confirmation])
+  end
+
   describe "#initialize" do
     context "when user not present" do
       let(:record) { create(:user) }
