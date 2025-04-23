@@ -7,7 +7,7 @@ RSpec.describe UserPolicy do
 
   describe "#initialize" do
     context "when user not present" do
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user) }
 
       let(:user) { nil }
 
@@ -19,13 +19,13 @@ RSpec.describe UserPolicy do
     let(:record) { Fabricate(:user) }
 
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       it { is_expected.to forbid_action(:index) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:index) }
     end
@@ -33,23 +33,23 @@ RSpec.describe UserPolicy do
 
   describe "#show?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:show) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:show) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -59,7 +59,7 @@ RSpec.describe UserPolicy do
 
   describe "#create?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       let(:record) { User.new }
 
@@ -67,7 +67,7 @@ RSpec.describe UserPolicy do
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { User.new }
 
@@ -77,7 +77,7 @@ RSpec.describe UserPolicy do
 
   describe "#new?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       let(:record) { User.new }
 
@@ -85,7 +85,7 @@ RSpec.describe UserPolicy do
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { User.new }
 
@@ -95,23 +95,23 @@ RSpec.describe UserPolicy do
 
   describe "#update?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:update) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:update) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -121,23 +121,23 @@ RSpec.describe UserPolicy do
 
   describe "#edit?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:edit) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:edit) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -147,23 +147,23 @@ RSpec.describe UserPolicy do
 
   describe "#destroy?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:destroy) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:destroy) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -175,9 +175,9 @@ end
 RSpec.describe UserPolicy::Scope do
   describe "#resolve" do
     context "when user is an admin" do
-      let(:admin) { Fabricate(:admin) }
+      let(:admin) { create(:user, admin: true) }
 
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:scope) { User }
 
@@ -187,9 +187,9 @@ RSpec.describe UserPolicy::Scope do
     end
 
     context "when user is not an admin" do
-      let!(:admin) { Fabricate(:admin) }
+      let!(:admin) { create(:user, admin: true) }
 
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:scope) { User }
 
