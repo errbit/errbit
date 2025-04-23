@@ -3,19 +3,19 @@
 require "rails_helper"
 
 RSpec.describe ApplicationPolicy do
-  let(:record) { Fabricate(:user) }
+  let(:record) { create(:user, admin: false) }
 
   subject { described_class.new(user, record) }
 
   context "when user present" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       it { is_expected.to forbid_all_actions }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       it { is_expected.to forbid_all_actions }
     end
@@ -39,7 +39,7 @@ RSpec.describe ApplicationPolicy::Scope do
     end
 
     context "when user is present" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:scope) { double }
 
@@ -48,7 +48,7 @@ RSpec.describe ApplicationPolicy::Scope do
   end
 
   describe "#resolve" do
-    let(:user) { Fabricate(:user) }
+    let(:user) { create(:user, admin: false) }
 
     let(:scope) { double }
 
