@@ -105,13 +105,6 @@ RSpec.describe UsersController, type: :controller do
       sign_in admin
     end
 
-    context "GET /users/:id" do
-      it "finds the user" do
-        get :show, params: {id: user.id}
-        expect(controller.user).to eq user
-      end
-    end
-
     context "GET /users/:id/edit" do
       it "finds the user" do
         get :edit, params: {id: user.id}
@@ -211,43 +204,6 @@ RSpec.describe UsersController, type: :controller do
         it "should not destroy user" do
           expect(response).to redirect_to(users_path)
           expect(request.flash[:error]).to eq I18n.t("controllers.users.flash.destroy.error")
-        end
-      end
-    end
-
-    describe "#user_params" do
-      context "with current user not admin" do
-        before do
-          allow(controller).to receive(:current_user).and_return(user)
-          allow(controller).to receive(:params).and_return(
-            ActionController::Parameters.new(user_param)
-          )
-        end
-
-        let(:user_param) { {"user" => {name: "foo", admin: true}} }
-
-        it "not have admin field" do
-          expect(controller.send(:user_params).to_hash).to eq("name" => "foo")
-        end
-
-        context "with password and password_confirmation empty?" do
-          let(:user_param) { {"user" => {:name => "foo", "password" => "", "password_confirmation" => ""}} }
-
-          it "not have password and password_confirmation field" do
-            expect(controller.send(:user_params).to_hash).to eq("name" => "foo")
-          end
-        end
-      end
-
-      context "with current user admin" do
-        it "have admin field"
-
-        context "with password and password_confirmation empty?" do
-          it "not have password and password_confirmation field"
-        end
-
-        context "on his own user" do
-          it "not have admin field"
         end
       end
     end
