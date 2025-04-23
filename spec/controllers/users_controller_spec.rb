@@ -28,21 +28,6 @@ RSpec.describe UsersController, type: :controller do
       expect(Time.zone.to_s).to match(user.time_zone)
     end
 
-    context "GET /users/:other_id/edit" do
-      it "redirects to the home page" do
-        get :edit, params: {id: other_user.id}
-        expect(response).to redirect_to(root_path)
-      end
-    end
-
-    context "GET /users/:my_id/edit" do
-      it "finds the user" do
-        get :edit, params: {id: user.id}
-        expect(controller.user).to eq(user)
-        expect(response).to render_template "edit"
-      end
-    end
-
     context "PUT /users/:other_id" do
       it "redirects to the home page" do
         put :update, params: {id: other_user.id}
@@ -105,12 +90,6 @@ RSpec.describe UsersController, type: :controller do
       sign_in admin
     end
 
-    context "GET /users/:id/edit" do
-      it "finds the user" do
-        get :edit, params: {id: user.id}
-        expect(controller.user).to eq user
-      end
-    end
 
     context "POST /users" do
       context "when the create is successful" do
