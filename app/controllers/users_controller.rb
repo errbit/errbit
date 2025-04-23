@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :require_admin!, except: [:edit, :update]
-  before_action :require_user_edit_privileges, only: [:edit, :update]
+  # before_action :require_admin!, except: [:edit, :update]
+  # before_action :require_user_edit_privileges, only: [:edit, :update]
 
   def index
     @users = policy_scope(User).order_by(name: :asc).page(params[:page]).per(current_user.per_page)
