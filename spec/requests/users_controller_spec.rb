@@ -282,7 +282,27 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when admin removes user" do
+        let(:user) { create(:user, admin: true) }
 
+        let!(:user_2) { create(:user, admin: false) }
+
+        before { sign_in(user) }
+
+        before { expect(UserDestroy).to receive(:new).with(user_2).and_call_original }
+
+        before do
+          expect do
+            delete user_path(user_2)
+          end.to change(User, :count).by(-1)
+        end
+
+        it "is expected to redirect to users path with status found" do
+          expect(response).to redirect_to(users_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user_2.name))
+        end
       end
     end
 
