@@ -173,11 +173,21 @@ RSpec.describe UserPolicy do
 
   describe "#permitted_attributes" do
     context "when user is an admin" do
-      let(:user) { create(:user, admin: true) }
+      context "when user is an admin and record is the same user as admin" do
+        let(:user) { create(:user, admin: true) }
 
-      let(:record) { create(:user, admin: false) }
+        let(:record) { user }
 
-      it { expect(subject.permitted_attributes).to eq(described_class::FIELDS + [:admin]) }
+        it { expect(subject.permitted_attributes).to eq(described_class::FIELDS) }
+      end
+
+      context "when user is an admin and record is not the same user as admin" do
+        let(:user) { create(:user, admin: true) }
+
+        let(:record) { create(:user, admin: false) }
+
+        it { expect(subject.permitted_attributes).to eq(described_class::FIELDS + [:admin]) }
+      end
     end
 
     context "when user is not an admin" do
