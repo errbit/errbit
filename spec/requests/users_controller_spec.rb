@@ -6,11 +6,11 @@ RSpec.describe UsersController, type: :request do
   describe "#index" do
     context "when user is logged in" do
       context "when user is an admin" do
-        let!(:user_1) { create(:user, name: "Jon Snow", admin: true) }
+        let!(:current_user) { create(:user, name: "Jon Snow", admin: true) }
 
-        let!(:user_2) { create(:user, name: "Tyrion Lannister") }
+        let!(:user) { create(:user, name: "Tyrion Lannister") }
 
-        before { sign_in(user_1) }
+        before { sign_in(current_user) }
 
         before { get users_path }
 
@@ -19,7 +19,7 @@ RSpec.describe UsersController, type: :request do
 
           expect(response).to have_http_status(:ok)
 
-          expect(assigns(:users)).to eq([user_1, user_2])
+          expect(assigns(:users)).to eq([current_user, user])
         end
       end
 
@@ -291,11 +291,7 @@ RSpec.describe UsersController, type: :request do
 
           before { expect(UserDestroy).to receive(:new).with(user_2).and_call_original }
 
-          before do
-            expect do
-              delete user_path(user_2)
-            end.to change(User, :count).by(-1)
-          end
+          before { expect { delete user_path(user_2) }.to change(User, :count).by(-1) }
 
           it "is expected to redirect to users path with status found" do
             expect(response).to redirect_to(users_path)
@@ -308,7 +304,17 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user is not an admin" do
-        # TODO: write
+        context "when user is removing himself" do
+
+        end
+
+        context "when user is removing another user" do
+
+        end
+
+        context "when user is removing admin" do
+
+        end
       end
     end
 
