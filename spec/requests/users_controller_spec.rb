@@ -55,18 +55,18 @@ RSpec.describe UsersController, type: :request do
     context "when user is logged in" do
       context "when user is an admin" do
         context "when admin looking on himself" do
-          let(:user) { create(:user, admin: true) }
+          let(:current_user) { create(:user, admin: true) }
 
-          before { sign_in(user) }
+          before { sign_in(current_user) }
 
-          before { get user_path(user) }
+          before { get user_path(current_user) }
 
           it "is expected to render template show with status ok" do
             expect(response).to render_template(:show)
 
             expect(response).to have_http_status(:ok)
 
-            expect(assigns(:user)).to eq(user)
+            expect(assigns(:user)).to eq(current_user)
           end
         end
 
