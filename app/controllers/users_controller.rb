@@ -102,7 +102,7 @@ class UsersController < ApplicationController
   #   @user_permit_params
   # end
 
-  def user_password_params
-    @user_password_params ||= params[:user] ? params.require(:user).permit(:password, :password_confirmation) : {}
-  end
+  # def user_password_params
+  #   @user_password_params ||= params[:user] ? params.require(:user).permit(:password, :password_confirmation) : {}
+  # end
 end
