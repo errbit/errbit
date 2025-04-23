@@ -57,13 +57,9 @@ class UsersController < ApplicationController
 
     authorize @user
 
-    if @user == current_user
-      flash[:error] = I18n.t("controllers.users.flash.destroy.error")
-    else
-      UserDestroy.new(@user).destroy
+    UserDestroy.new(@user).destroy
 
-      flash[:success] = I18n.t("controllers.users.flash.destroy.success", name: @user.name)
-    end
+    flash[:success] = I18n.t("controllers.users.flash.destroy.success", name: @user.name)
 
     redirect_to users_path
   end
