@@ -88,7 +88,6 @@ en:
       flash:
         destroy:
           success: "That's sad. %{name} is no longer part of your team."
-          error: "You can't delete yourself"
         update:
           success: "%{name}'s information was successfully updated."
     problems:

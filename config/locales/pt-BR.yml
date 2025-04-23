@@ -60,7 +60,6 @@ pt-BR:
       flash:
         destroy:
           success: "Isto é triste. %{name} não faz mais parte do seu time."
-          error: "Você não pode excluir a si mesmo"
         update:
           success: "As informações de %{name} foram atualizadas com sucesso."
     problems:
