@@ -170,6 +170,24 @@ RSpec.describe UserPolicy do
       it { is_expected.to forbid_action(:destroy) }
     end
   end
+
+  describe "#permitted_attributes" do
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      let(:record) { create(:user, admin: false) }
+
+      it { expect(subject.permitted_attributes).to eq(described_class::FIELDS + [:admin]) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      let(:record) { create(:user, admin: false) }
+
+      it { expect(subject.permitted_attributes).to eq(described_class::FIELDS) }
+    end
+  end
 end
 
 RSpec.describe UserPolicy::Scope do
