@@ -295,11 +295,11 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when admin removes another admin" do
-          let(:user) { create(:user, admin: true) }
+          let(:current_user) { create(:user, admin: true) }
 
           let!(:admin) { create(:user, admin: true) }
 
-          before { sign_in(user) }
+          before { sign_in(current_user) }
 
           before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
 
