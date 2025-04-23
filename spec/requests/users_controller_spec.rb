@@ -89,7 +89,19 @@ RSpec.describe UsersController, type: :request do
 
       context "when user is not an admin" do
         context "when user is looking in himself" do
+          let(:user) { create(:user, admin: false) }
 
+          before { sign_in(user) }
+
+          before { get user_path(user) }
+
+          it "is expected to render template show with status ok" do
+            expect(response).to render_template(:show)
+
+            expect(response).to have_http_status(:ok)
+
+            expect(assigns(:user)).to eq(user)
+          end
         end
 
         context "when user is looking on another user" do
