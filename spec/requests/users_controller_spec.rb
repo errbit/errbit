@@ -276,7 +276,29 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user is not an admin" do
+        context "when user editing himself" do
+          let(:current_user) { create(:user, admin: false) }
 
+          before { sign_in(current_user) }
+
+          before { get edit_user_path(current_user) }
+
+          it "is expected to render template edit with status ok" do
+            expect(response).to render_template(:edit)
+
+            expect(response).to have_http_status(:ok)
+
+            expect(assigns(:user)).to eq(current_user)
+          end
+        end
+
+        context "when user editing another user" do
+
+        end
+
+        context "when user editing admin" do
+
+        end
       end
     end
 
