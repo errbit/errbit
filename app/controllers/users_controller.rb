@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(permitted_attributes(@user))
 
     if @user.save
       flash[:success] = "#{@user.name} is now part of the team. Be sure to add them as a project watcher."
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
 
     authorize @user
 
-    if @user.update(user_params)
+    if @user.update(permitted_attributes(@user))
       flash[:success] = I18n.t("controllers.users.flash.update.success", name: @user.name)
 
       redirect_to user_path(@user)
@@ -87,9 +87,9 @@ class UsersController < ApplicationController
     redirect_to(root_path) unless can_edit
   end
 
-  def user_params
-    params.require(:user).permit(policy(@user).permitted_attributes)
-  end
+  # def user_params
+  #   params.require(:user).permit(policy(@user).permitted_attributes)
+  # end
 
   # def user_params
   #   @user_params ||= params[:user] ? params.require(:user).permit(*user_permit_params) : {}
