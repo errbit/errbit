@@ -139,7 +139,37 @@ RSpec.describe UsersController, type: :request do
 
   describe "#new" do
     context "when user is logged in" do
-      # TODO: write
+      context "when user is an admin" do
+        let(:user) { create(:user, admin: true) }
+
+        before { sign_in(user) }
+
+        before { get new_user_path }
+
+        it "is expected to render template new with status ok" do
+          expect(response).to render_template(:new)
+
+          expect(response).to have_http_status(:ok)
+
+          expect(assigns(:user).new_record?).to eq(true)
+        end
+      end
+
+      context "when user is not an admin" do
+        let(:user) { create(:user, admin: false) }
+
+        before { sign_in(user) }
+
+        before { get new_user_path }
+
+        it "is expected to redirect to root url with status found" do
+          expect(response).to redirect_to(root_url)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+        end
+      end
     end
 
     context "when user is not logged in" do
