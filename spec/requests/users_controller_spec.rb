@@ -307,14 +307,9 @@ RSpec.describe UsersController, type: :request do
         end
       end
 
-
-
-
-      context "when user removes himself" do
-
+      context "when user is not an admin" do
+        # TODO: write
       end
-
-
     end
 
     context "when user is not logged in" do
