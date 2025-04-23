@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "users/index.html.haml", type: :view do
-  let(:user) { stub_model(User) }
+  let(:user) { create(:user) }
 
   before do
     allow(view).to receive(:current_user).and_return(user)
