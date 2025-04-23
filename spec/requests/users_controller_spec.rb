@@ -303,11 +303,7 @@ RSpec.describe UsersController, type: :request do
 
           before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
 
-          before do
-            expect do
-              delete user_path(admin)
-            end.to change(User, :count).by(-1)
-          end
+          before { expect { delete user_path(admin) }.to change(User, :count).by(-1) }
 
           it "is expected to redirect to users path with status found" do
             expect(response).to redirect_to(users_path)
