@@ -43,8 +43,8 @@ RSpec.describe UsersController, type: :request do
     context "when user is not logged in" do
       before { get users_path }
 
-      it "is expected to redirect to new user session url with status found" do
-        expect(response).to redirect_to(new_user_session_url)
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
       end
@@ -113,8 +113,8 @@ RSpec.describe UsersController, type: :request do
 
           before { get user_path(another_user) }
 
-          it "is expected to redirect to root url with status found" do
-            expect(response).to redirect_to(root_url)
+          it "is expected to redirect to root path with status found" do
+            expect(response).to redirect_to(root_path)
 
             expect(response).to have_http_status(:found)
 
@@ -129,8 +129,8 @@ RSpec.describe UsersController, type: :request do
 
       before { get user_path(user) }
 
-      it "is expected to redirect to new user session url with status found" do
-        expect(response).to redirect_to(new_user_session_url)
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
       end
@@ -162,8 +162,8 @@ RSpec.describe UsersController, type: :request do
 
         before { get new_user_path }
 
-        it "is expected to redirect to root url with status found" do
-          expect(response).to redirect_to(root_url)
+        it "is expected to redirect to root path with status found" do
+          expect(response).to redirect_to(root_path)
 
           expect(response).to have_http_status(:found)
 
@@ -175,8 +175,8 @@ RSpec.describe UsersController, type: :request do
     context "when user is not logged in" do
       before { get new_user_path }
 
-      it "is expected to redirect to new user session url with status found" do
-        expect(response).to redirect_to(new_user_session_url)
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
       end
@@ -185,7 +185,23 @@ RSpec.describe UsersController, type: :request do
 
   describe "#edit" do
     context "when user is logged in" do
-      # TODO: write
+      context "when user is an admin" do
+        context "when admin editing himself" do
+
+        end
+
+        context "when admin editing another admin" do
+
+        end
+
+        context "when admin editing user" do
+
+        end
+      end
+
+      context "when user is not an admin" do
+
+      end
     end
 
     context "when user is not logged in" do
@@ -193,8 +209,8 @@ RSpec.describe UsersController, type: :request do
 
       before { get edit_user_path(user) }
 
-      it "is expected to redirect to new user session url with status found" do
-        expect(response).to redirect_to(new_user_session_url)
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
       end
@@ -223,7 +239,31 @@ RSpec.describe UsersController, type: :request do
 
   describe "#destroy" do
     context "when user is logged in" do
-      # TODO: write
+      context "when admin removes himself" do
+        let(:user) { create(:user, admin: true) }
+
+        before { sign_in(user) }
+
+        before { delete user_path(user) }
+
+        it "is expected to render template index with status ok" do
+          expect(UserDestroy).not_to receive(:new)
+
+          expect(response).to redirect_to(root_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+        end
+      end
+
+      context "when admin removes another admin" do
+
+      end
+
+      context "when admin removes user" do
+
+      end
     end
 
     context "when user is not logged in" do
@@ -231,8 +271,8 @@ RSpec.describe UsersController, type: :request do
 
       before { delete user_path(user) }
 
-      it "is expected to redirect to new user session url with status found" do
-        expect(response).to redirect_to(new_user_session_url)
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
       end
