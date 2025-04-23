@@ -246,7 +246,7 @@ RSpec.describe UsersController, type: :request do
 
         before { delete user_path(user) }
 
-        it "is expected to render template index with status ok" do
+        it "is expected to redirect to root path with status found" do
           expect(UserDestroy).not_to receive(:new)
 
           expect(response).to redirect_to(root_path)
@@ -258,7 +258,27 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when admin removes another admin" do
+        let(:user) { create(:user, admin: true) }
 
+        let!(:admin) { create(:user, admin: true) }
+
+        before { sign_in(user) }
+
+        before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
+
+        before do
+          expect do
+            delete user_path(admin)
+          end.to change(User, :count).by(-1)
+        end
+
+        it "is expected to redirect to users path with status found" do
+          expect(response).to redirect_to(users_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: admin.name))
+        end
       end
 
       context "when admin removes user" do
