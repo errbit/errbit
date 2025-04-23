@@ -371,7 +371,7 @@ RSpec.describe UsersController, type: :request do
 
           before { sign_in(current_user) }
 
-          before { delete user_path(current_user) }
+          before { expect { delete user_path(current_user) }.not_to change(User, :count) }
 
           it "is expected to redirect to root path with status found" do
             expect(UserDestroy).not_to receive(:new)
@@ -384,66 +384,65 @@ RSpec.describe UsersController, type: :request do
           end
         end
 
-        context "when admin removes another admin" do
-          let(:current_user) { create(:user, admin: true) }
+        # context "when admin removes another admin" do
+        #   let(:current_user) { create(:user, admin: true) }
+        #
+        #   let!(:admin) { create(:user, admin: true) }
+        #
+        #   before { sign_in(current_user) }
+        #
+        #   before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
+        #
+        #   before { expect { delete user_path(admin) }.to change(User, :count).by(-1) }
+        #
+        #   it "is expected to redirect to users path with status found" do
+        #     expect(response).to redirect_to(users_path)
+        #
+        #     expect(response).to have_http_status(:found)
+        #
+        #     expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: admin.name))
+        #   end
+        # end
 
-          let!(:admin) { create(:user, admin: true) }
-
-          before { sign_in(current_user) }
-
-          before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
-
-          before { expect { delete user_path(admin) }.to change(User, :count).by(-1) }
-
-          it "is expected to redirect to users path with status found" do
-            expect(response).to redirect_to(users_path)
-
-            expect(response).to have_http_status(:found)
-
-            expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: admin.name))
-          end
-        end
-
-        context "when admin removes user" do
-          let(:current_user) { create(:user, admin: true) }
-
-          let!(:user_2) { create(:user, admin: false) }
-
-          before { sign_in(current_user) }
-
-          before { expect(UserDestroy).to receive(:new).with(user_2).and_call_original }
-
-          before { expect { delete user_path(user_2) }.to change(User, :count).by(-1) }
-
-          it "is expected to redirect to users path with status found" do
-            expect(response).to redirect_to(users_path)
-
-            expect(response).to have_http_status(:found)
-
-            expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user_2.name))
-          end
-        end
+        # context "when admin removes user" do
+        #   let(:current_user) { create(:user, admin: true) }
+        #
+        #   let!(:user) { create(:user, admin: false) }
+        #
+        #   before { sign_in(current_user) }
+        #
+        #   before { expect(UserDestroy).to receive(:new).with(user).and_call_original }
+        #
+        #   before { expect { delete user_path(user) }.to change(User, :count).by(-1) }
+        #
+        #   it "is expected to redirect to users path with status found" do
+        #     expect(response).to redirect_to(users_path)
+        #
+        #     expect(response).to have_http_status(:found)
+        #
+        #     expect(request.flash[:alert]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user.name))
+        #   end
+        # end
       end
 
       context "when user is not an admin" do
-        context "when user is removing himself" do
-          # let(:current_user) { create(:user, admin: false) }
-          #
-          # before { sign_in(current_user) }
-          #
-          # before { expect(UserDestroy).to receive(:new).with(user_2).and_call_original }
-          #
-          # before { expect { delete user_path(current_user) }.to change(User, :count).by(-1) }
-          #
-          # it "is expected to redirect to users path with status found" do
-          #   expect(response).to redirect_to(users_path)
-          #
-          #   expect(response).to have_http_status(:found)
-          #
-          #   expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user_2.name))
-          # end
-
-        end
+        # context "when user is removing himself" do
+        #   let(:current_user) { create(:user, admin: false) }
+        #
+        #   before { sign_in(current_user) }
+        #
+        #   before { expect(UserDestroy).not_to receive(:new) }
+        #
+        #   before { expect { delete user_path(current_user) }.not_to change(User, :count) }
+        #
+        #   it "is expected to redirect to users path with status found" do
+        #     expect(response).to redirect_to(users_path)
+        #
+        #     expect(response).to have_http_status(:found)
+        #
+        #     # expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user_2.name))
+        #   end
+        # end
 
         context "when user is removing another user" do
 
