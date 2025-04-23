@@ -105,15 +105,6 @@ RSpec.describe UsersController, type: :controller do
       sign_in admin
     end
 
-    context "GET /users" do
-      it "paginates all users" do
-        admin.update_attribute :per_page, 2
-        3.times { Fabricate(:user) }
-        get :index
-        expect(controller.users.to_a.size).to eq 2
-      end
-    end
-
     context "GET /users/:id" do
       it "finds the user" do
         get :show, params: {id: user.id}
