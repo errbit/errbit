@@ -362,6 +362,7 @@ RSpec/MultipleExpectations:
   Enabled: true
   Exclude:
     - "spec/system/**/*"
+    - "spec/requests/**/*"
 
 # Naming rules:
 
