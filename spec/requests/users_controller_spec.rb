@@ -384,25 +384,25 @@ RSpec.describe UsersController, type: :request do
           end
         end
 
-        # context "when admin removes another admin" do
-        #   let(:current_user) { create(:user, admin: true) }
-        #
-        #   let!(:admin) { create(:user, admin: true) }
-        #
-        #   before { sign_in(current_user) }
-        #
-        #   before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
-        #
-        #   before { expect { delete user_path(admin) }.to change(User, :count).by(-1) }
-        #
-        #   it "is expected to redirect to users path with status found" do
-        #     expect(response).to redirect_to(users_path)
-        #
-        #     expect(response).to have_http_status(:found)
-        #
-        #     expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: admin.name))
-        #   end
-        # end
+        context "when admin removes another admin" do
+          let(:current_user) { create(:user, admin: true) }
+
+          let!(:admin) { create(:user, admin: true) }
+
+          before { sign_in(current_user) }
+
+          before { expect(UserDestroy).to receive(:new).with(admin).and_call_original }
+
+          before { expect { delete user_path(admin) }.to change(User, :count).by(-1) }
+
+          it "is expected to redirect to users path with status found" do
+            expect(response).to redirect_to(users_path)
+
+            expect(response).to have_http_status(:found)
+
+            expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: admin.name))
+          end
+        end
 
         # context "when admin removes user" do
         #   let(:current_user) { create(:user, admin: true) }
