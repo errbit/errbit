@@ -118,7 +118,7 @@ RSpec.describe UsersController, type: :request do
 
             expect(response).to have_http_status(:found)
 
-            # TODO: flash message check
+            expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
           end
         end
       end
