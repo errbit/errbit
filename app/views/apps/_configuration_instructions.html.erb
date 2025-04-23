@@ -11,8 +11,7 @@
 # config/initializers/errbit.rb with the following flags:
 
 Airbrake.configure do |config|
-  # FIXME: `.host` deprecated.
-  config.host = "<%= errbit_url %>"
+  config.error_host = "<%= errbit_url %>"
   config.project_id = 1 # required, but any positive integer works
   config.project_key = "<%= api_key %>"
 
