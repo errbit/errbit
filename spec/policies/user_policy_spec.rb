@@ -16,7 +16,7 @@ RSpec.describe UserPolicy do
   end
 
   describe "#index" do
-    let(:record) { Fabricate(:user) }
+    let(:record) { create(:user, admin: false) }
 
     context "when user is an admin" do
       let(:user) { create(:user, admin: true) }
