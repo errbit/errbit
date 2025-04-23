@@ -24,9 +24,9 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user is not an admin" do
-        let(:user) { create(:user, name: "Tyrion Lannister", admin: false) }
+        let(:current_user) { create(:user, admin: false) }
 
-        before { sign_in(user) }
+        before { sign_in(current_user) }
 
         before { get users_path }
 
@@ -35,7 +35,7 @@ RSpec.describe UsersController, type: :request do
 
           expect(response).to have_http_status(:ok)
 
-          expect(assigns(:users)).to eq([user])
+          expect(assigns(:users)).to eq([current_user])
         end
       end
     end
