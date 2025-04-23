@@ -4,7 +4,7 @@ class UserPolicy < ApplicationPolicy
   FIELDS = [
     :name, :username, :email, :password, :github_login, :per_page, :time_zone,
     :password, :password_confirmation
-  ]
+  ].freeze
 
   # @param user [User] The user making the request
   # @param record [User] The record being accessed
@@ -42,7 +42,7 @@ class UserPolicy < ApplicationPolicy
 
   def permitted_attributes
     if user.admin? && user.id != record.id
-      FIELDS.append(:admin)
+      FIELDS + [:admin]
     else
       FIELDS
     end
