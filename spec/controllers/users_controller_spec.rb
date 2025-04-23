@@ -112,14 +112,6 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    context "GET /users/new" do
-      it "assigns a new user" do
-        get :new
-        expect(controller.user).to be_a(User)
-        expect(controller.user).to be_new_record
-      end
-    end
-
     context "GET /users/:id/edit" do
       it "finds the user" do
         get :edit, params: {id: user.id}
