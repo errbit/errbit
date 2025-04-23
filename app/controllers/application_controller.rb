@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
 
   def require_admin!
@@ -28,5 +30,11 @@ class ApplicationController < ActionController::Base
     user = user_token && User.find_by(authentication_token: user_token)
 
     sign_in user, store: false if user
+  end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+
+    redirect_to root_path
   end
 end
