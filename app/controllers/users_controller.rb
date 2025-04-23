@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :require_user_edit_privileges, only: [:edit, :update]
 
   def index
-    @users = apply_scope(User).order_by(name: :asc).page(params[:page]).per(current_user.per_page)
+    @users = policy_scope(User).order_by(name: :asc).page(params[:page]).per(current_user.per_page)
   end
 
   def show
@@ -37,10 +37,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    if user.update(user_params)
-      flash[:success] = I18n.t("controllers.users.flash.update.success", name: user.name)
+    @user = User.find(params[:id])
 
-      redirect_to user_path(user)
+    authorize @user
+
+    if @user.update(user_params)
+      flash[:success] = I18n.t("controllers.users.flash.update.success", name: @user.name)
+
+      redirect_to user_path(@user)
     else
       render :edit
     end
@@ -51,8 +55,10 @@ class UsersController < ApplicationController
       flash[:error] = I18n.t("controllers.users.flash.destroy.error")
     else
       UserDestroy.new(user).destroy
+
       flash[:success] = I18n.t("controllers.users.flash.destroy.success", name: user.name)
     end
+
     redirect_to users_path
   end
 
