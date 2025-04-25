@@ -345,7 +345,50 @@ RSpec.describe UsersController, type: :request do
 
   describe "#create" do
     context "when user is logged in" do
-      # TODO: write
+      context "when user is an admin" do
+        let(:current_user) { create(:user, admin: true) }
+
+        let(:email) { Faker::Internet.unique.email }
+
+        let(:password) { Faker::Internet.password }
+
+        let(:name) { Faker::Name.unique.name }
+
+        before { sign_in(current_user) }
+
+        before do
+          expect do
+            post users_path,
+              params: {
+                user: {
+                  email: email,
+                  name: name,
+                  password: password,
+                  password_confirmation: password,
+                  admin: true
+                }
+              }
+          end.to change(User, :count).by(1)
+        end
+
+        it "is expected to create a new user with status found" do
+          expect(response).to redirect_to(user_path(assigns(:user)))
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:success]).to eq("#{name} is now part of the team. Be sure to add them as a project watcher.")
+
+          expect(assigns(:user).email).to eq(email)
+
+          expect(assigns(:user).name).to eq(name)
+
+          expect(assigns(:user).admin).to eq(true)
+        end
+      end
+
+      context "when user is not an admin" do
+
+      end
     end
 
     context "when user is not logged in" do
