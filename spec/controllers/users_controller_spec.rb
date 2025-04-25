@@ -90,7 +90,6 @@ RSpec.describe UsersController, type: :controller do
       sign_in admin
     end
 
-
     context "POST /users" do
       context "when the create is successful" do
         let(:attrs) { {user: Fabricate.to_params(:user)} }
