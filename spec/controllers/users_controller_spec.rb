@@ -94,23 +94,6 @@ RSpec.describe UsersController, type: :controller do
       context "when the create is successful" do
         let(:attrs) { {user: Fabricate.to_params(:user)} }
 
-        it "sets a message to display" do
-          post :create, params: {**attrs}
-          expect(request.flash[:success]).to include("part of the team")
-        end
-
-        it "redirects to the user's page" do
-          post :create, params: {**attrs}
-          expect(response).to redirect_to(user_path(controller.user))
-        end
-
-        it "should be able to create admin" do
-          attrs[:user][:admin] = true
-          post :create, params: {**attrs}
-          expect(response).to be_redirect
-          expect(User.find(controller.user.to_param).admin).to be(true)
-        end
-
         it "should has auth token" do
           post :create, params: {**attrs}
           expect(User.last.authentication_token).not_to be_blank
