@@ -423,7 +423,32 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when user is not logged in" do
-      # TODO: write
+      let(:email) { Faker::Internet.unique.email }
+
+      let(:password) { Faker::Internet.password }
+
+      let(:name) { Faker::Name.unique.name }
+
+      before do
+        expect do
+          post users_path,
+            params: {
+              user: {
+                email: email,
+                name: name,
+                password: password,
+                password_confirmation: password,
+                admin: true
+              }
+            }
+        end.not_to change(User, :count)
+      end
+
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
+
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
