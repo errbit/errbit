@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(permitted_attributes(@user))
+    @user = User.new(permitted_attributes(User.new))
 
     if @user.save
       flash[:success] = "#{@user.name} is now part of the team. Be sure to add them as a project watcher."
