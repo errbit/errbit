@@ -125,13 +125,13 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when user is looking on another user" do
+          let(:current_user) { create(:user, admin: false) }
+
+          before { sign_in(current_user) }
+
           let(:user) { create(:user, admin: false) }
 
-          before { sign_in(user) }
-
-          let(:another_user) { create(:user, admin: false) }
-
-          before { get user_path(another_user) }
+          before { get user_path(user) }
 
           it "is expected to redirect to root path with status found" do
             expect(response).to redirect_to(root_path)
