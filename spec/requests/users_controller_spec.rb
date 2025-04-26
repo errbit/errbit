@@ -222,24 +222,24 @@ RSpec.describe UsersController, type: :request do
   end
 
   describe "#edit" do
-  #   context "when user is logged in" do
-  #     context "when user is an admin" do
-  #       context "when admin editing himself" do
-  #         let(:current_user) { create(:user, admin: true) }
-  #
-  #         before { sign_in(current_user) }
-  #
-  #         before { get edit_user_path(current_user) }
-  #
-  #         it "is expected to render template edit with status ok" do
-  #           expect(response).to render_template(:edit)
-  #
-  #           expect(response).to have_http_status(:ok)
-  #
-  #           expect(assigns(:user)).to eq(current_user)
-  #         end
-  #       end
-  #
+    context "when user is logged in" do
+      context "when user is an admin" do
+        context "when admin editing himself" do
+          let(:current_user) { create(:user, admin: true) }
+
+          before { sign_in(current_user) }
+
+          before { get edit_user_path(current_user) }
+
+          it "is expected to render template edit with status ok" do
+            expect(response).to render_template(:edit)
+
+            expect(response).to have_http_status(:ok)
+
+            expect(assigns(:user)).to eq(current_user)
+          end
+        end
+
   #       context "when admin editing another admin" do
   #         let(:current_user) { create(:user, admin: true) }
   #
@@ -275,8 +275,8 @@ RSpec.describe UsersController, type: :request do
   #           expect(assigns(:user)).to eq(another_user)
   #         end
   #       end
-  #     end
-  #
+      end
+
   #     context "when user is not an admin" do
   #       context "when user editing himself" do
   #         let(:current_user) { create(:user, admin: false) }
@@ -330,7 +330,7 @@ RSpec.describe UsersController, type: :request do
   #         end
   #       end
   #     end
-  #   end
+    end
 
     context "when user is not logged in" do
       let(:user) { create(:user) }
@@ -484,26 +484,26 @@ RSpec.describe UsersController, type: :request do
   #       end
   #     end
   #   end
-  #
-  #   context "when user is not logged in" do
-  #     let(:user) { create(:user) }
-  #
-  #     before do
-  #       patch user_path(user),
-  #         params: {
-  #           user: {
-  #             name: "New Name",
-  #             email: "me@example.com"
-  #           }
-  #         }
-  #     end
-  #
-  #     it "is expected to redirect to new user session path with status found" do
-  #       expect(response).to redirect_to(new_user_session_path)
-  #
-  #       expect(response).to have_http_status(:found)
-  #     end
-  #   end
+
+    # context "when user is not logged in" do
+    #   let(:user) { create(:user) }
+    #
+    #   before do
+    #     patch user_path(user),
+    #       params: {
+    #         user: {
+    #           name: "New Name",
+    #           email: "me@example.com"
+    #         }
+    #       }
+    #   end
+    #
+    #   it "is expected to redirect to new user session path with status found" do
+    #     expect(response).to redirect_to(new_user_session_path)
+    #
+    #     expect(response).to have_http_status(:found)
+    #   end
+    # end
   end
 
   describe "#destroy" do
