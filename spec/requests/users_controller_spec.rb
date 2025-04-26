@@ -348,28 +348,34 @@ RSpec.describe UsersController, type: :request do
   describe "#update" do
     context "when user is logged in" do
       context "when user has access" do
-        let(:current_user) { create(:user, admin: true) }
+        context "when record is valid" do
+          let(:current_user) { create(:user, admin: true) }
 
-        before { sign_in(current_user) }
+          before { sign_in(current_user) }
 
-        let(:user) { create(:user, admin: true, name: "Jon Snow") }
+          let(:user) { create(:user, admin: true, name: "Jon Snow") }
 
-        before do
-          patch user_path(user),
-            params: {
-              user: {
-                name: "Tyrion Lannister",
-                admin: false
+          before do
+            patch user_path(user),
+              params: {
+                user: {
+                  name: "Tyrion Lannister",
+                  admin: false
+                }
               }
-            }
+          end
+
+          it "is expected to redirect to user path user with status ok" do
+            expect(response).to redirect_to(user_path(user))
+
+            expect(response).to have_http_status(:found)
+
+            expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.update.success", name: user.reload.name))
+          end
         end
 
-        it "is expected to redirect to user path user with status ok" do
-          expect(response).to redirect_to(user_path(user))
+        context "when record is not valid" do
 
-          expect(response).to have_http_status(:found)
-
-          expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.update.success", name: user.reload.name))
         end
       end
 
@@ -379,7 +385,22 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when user is not logged in" do
+      let(:user) { create(:user) }
 
+      before do
+        patch user_path(user),
+          params: {
+            user: {
+              name: Faker::Name.unique.name
+            }
+          }
+      end
+
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
+
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
