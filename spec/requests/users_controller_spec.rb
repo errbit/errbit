@@ -271,7 +271,7 @@ RSpec.describe UsersController, type: :request do
             end.not_to change(User, :count)
           end
 
-          it "is expected to create a new user with status found" do
+          it "is expected to render template new  with status ok" do
             expect(response).to render_template(:new)
 
             expect(response).to have_http_status(:ok)
@@ -280,12 +280,68 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
+        let(:current_user) { create(:user, admin: false) }
 
+        before { sign_in(current_user) }
+
+        let(:email) { Faker::Internet.unique.email }
+
+        let(:password) { Faker::Internet.password }
+
+        let(:name) { Faker::Name.unique.name }
+
+        before do
+          expect do
+            post users_path,
+              params: {
+                user: {
+                  email: email,
+                  name: name,
+                  password: password,
+                  password_confirmation: password,
+                  admin: true
+                }
+              }
+          end.not_to change(User, :count)
+        end
+
+        it "is expected to redirect to root path with status found" do
+          expect(response).to redirect_to(root_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+        end
       end
     end
 
     context "when user is not logged in" do
+      let(:email) { Faker::Internet.unique.email }
 
+      let(:password) { Faker::Internet.password }
+
+      let(:name) { Faker::Name.unique.name }
+
+      before do
+        expect do
+          post users_path,
+            params: {
+              user: {
+                email: email,
+                name: name,
+                password: password,
+                password_confirmation: password,
+                admin: true
+              }
+            }
+        end.not_to change(User, :count)
+      end
+
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
+
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
