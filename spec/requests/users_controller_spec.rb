@@ -375,7 +375,26 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when record is not valid" do
+          let(:current_user) { create(:user, admin: true) }
 
+          before { sign_in(current_user) }
+
+          let(:user) { create(:user) }
+
+          before do
+            patch user_path(user),
+              params: {
+                user: {
+                  name: ""
+                }
+              }
+          end
+
+          it "is expected to render template new  with status ok" do
+            expect(response).to render_template(:edit)
+
+            expect(response).to have_http_status(:ok)
+          end
         end
       end
 
