@@ -348,7 +348,29 @@ RSpec.describe UsersController, type: :request do
   describe "#update" do
     context "when user is logged in" do
       context "when user has access" do
+        let(:current_user) { create(:user, admin: true) }
 
+        before { sign_in(current_user) }
+
+        let(:user) { create(:user, admin: true, name: "Jon Snow") }
+
+        before do
+          patch user_path(user),
+            params: {
+              user: {
+                name: "Tyrion Lannister",
+                admin: false
+              }
+            }
+        end
+
+        it "is expected to redirect to user path user with status ok" do
+          expect(response).to redirect_to(user_path(user))
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.update.success", name: user.reload.name))
+        end
       end
 
       context "when user has not access" do
