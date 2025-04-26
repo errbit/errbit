@@ -52,115 +52,43 @@ RSpec.describe UsersController, type: :request do
   end
 
   describe "#show" do
-#     context "when user is logged in" do
-#       context "when user is an admin" do
-#         context "when admin looking on himself" do
-#           let(:current_user) { create(:user, admin: true) }
-#
-#           before { sign_in(current_user) }
-#
-#           before { get user_path(current_user) }
-#
-#           it "is expected to render template show with status ok" do
-#             expect(response).to render_template(:show)
-#
-#             expect(response).to have_http_status(:ok)
-#
-#             expect(assigns(:user)).to eq(current_user)
-#           end
-#         end
-#
-#         context "when admin looking on another admin" do
-#           let(:current_user) { create(:user, admin: true) }
-#
-#           let(:user) { create(:user, admin: false) }
-#
-#           before { sign_in(current_user) }
-#
-#           before { get user_path(user) }
-#
-#           it "is expected to render template show with status ok" do
-#             expect(response).to render_template(:show)
-#
-#             expect(response).to have_http_status(:ok)
-#
-#             expect(assigns(:user)).to eq(user)
-#           end
-#         end
-#
-#         context "when admin looking on another user" do
-#           let(:current_user) { create(:user, admin: true) }
-#
-#           before { sign_in(current_user) }
-#
-#           let(:user) { create(:user, admin: false) }
-#
-#           before { get user_path(user) }
-#
-#           it "is expected to render template show with status ok" do
-#             expect(response).to render_template(:show)
-#
-#             expect(response).to have_http_status(:ok)
-#
-#             expect(assigns(:user)).to eq(user)
-#           end
-#         end
-#       end
-#
-#       context "when user is not an admin" do
-#         context "when user is looking in himself" do
-#           let(:current_user) { create(:user, admin: false) }
-#
-#           before { sign_in(current_user) }
-#
-#           before { get user_path(current_user) }
-#
-#           it "is expected to render template show with status ok" do
-#             expect(response).to render_template(:show)
-#
-#             expect(response).to have_http_status(:ok)
-#
-#             expect(assigns(:user)).to eq(current_user)
-#           end
-#         end
-#
-#         context "when user is looking on another user" do
-#           let(:current_user) { create(:user, admin: false) }
-#
-#           before { sign_in(current_user) }
-#
-#           let(:user) { create(:user, admin: false) }
-#
-#           before { get user_path(user) }
-#
-#           it "is expected to redirect to root path with status found" do
-#             expect(response).to redirect_to(root_path)
-#
-#             expect(response).to have_http_status(:found)
-#
-#             expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
-#           end
-#         end
-#
-#         context "when user looking on admin" do
-#           let(:current_user) { create(:user, admin: false) }
-#
-#           let(:user) { create(:user, admin: true) }
-#
-#           before { sign_in(current_user) }
-#
-#           before { get user_path(user) }
-#
-#           it "is expected to redirect to root path with status found" do
-#             expect(response).to redirect_to(root_path)
-#
-#             expect(response).to have_http_status(:found)
-#
-#             expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
-#           end
-#         end
-#       end
-#     end
+    context "when user is logged in" do
+      context "when user has access" do
+        let(:current_user) { create(:user, admin: true) }
+
+        let(:user) { create(:user, admin: false) }
+
+        before { sign_in(current_user) }
+
+        before { get user_path(user) }
+
+        it "is expected to render template show with status ok" do
+          expect(response).to render_template(:show)
+
+          expect(response).to have_http_status(:ok)
+
+          expect(assigns(:user)).to eq(user)
+        end
+      end
+
+      context "when user has not access" do
+        let(:current_user) { create(:user, admin: false) }
+
+        before { sign_in(current_user) }
+
+        let(:user) { create(:user, admin: false) }
+
+        before { get user_path(user) }
+
+        it "is expected to redirect to root path with status found" do
+          expect(response).to redirect_to(root_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+        end
+      end
+    end
 
     context "when user is not logged in" do
       let!(:user) { create(:user) }
