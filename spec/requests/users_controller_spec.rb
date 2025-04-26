@@ -433,8 +433,8 @@ RSpec.describe UsersController, type: :request do
 #     #   end
 #     # end
 #   end
-#
-#   describe "#destroy" do
+
+  describe "#destroy" do
 #     context "when user is logged in" do
 #       context "when user is an admin" do
 #         context "when admin removes himself" do
@@ -556,17 +556,17 @@ RSpec.describe UsersController, type: :request do
 #         end
 #       end
 #     end
-#
-#     context "when user is not logged in" do
-#       let(:user) { create(:user) }
-#
-#       before { delete user_path(user) }
-#
-#       it "is expected to redirect to new user session path with status found" do
-#         expect(response).to redirect_to(new_user_session_path)
-#
-#         expect(response).to have_http_status(:found)
-#       end
-#     end
-#   end
+
+    context "when user is not logged in" do
+      let(:user) { create(:user) }
+
+      before { delete user_path(user) }
+
+      it "is expected to redirect to new user session path with status found" do
+        expect(response).to redirect_to(new_user_session_path)
+
+        expect(response).to have_http_status(:found)
+      end
+    end
+  end
 end
