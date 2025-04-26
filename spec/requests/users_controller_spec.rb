@@ -246,7 +246,36 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when new record is not valid" do
+          let(:current_user) { create(:user, admin: true) }
 
+          before { sign_in(current_user) }
+
+          let(:email) { "" }
+
+          let(:password) { Faker::Internet.password }
+
+          let(:name) { Faker::Name.unique.name }
+
+          before do
+            expect do
+              post users_path,
+                params: {
+                  user: {
+                    email: email,
+                    name: name,
+                    password: password,
+                    password_confirmation: password,
+                    admin: true
+                  }
+                }
+            end.not_to change(User, :count)
+          end
+
+          it "is expected to create a new user with status found" do
+            expect(response).to render_template(:new)
+
+            expect(response).to have_http_status(:ok)
+          end
         end
       end
 
