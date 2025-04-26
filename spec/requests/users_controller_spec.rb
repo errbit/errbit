@@ -201,6 +201,38 @@ RSpec.describe UsersController, type: :request do
     end
   end
 
+  describe "#create" do
+    context "when user is logged in" do
+      context "when user has access" do
+
+      end
+
+      context "when user has not access" do
+
+      end
+    end
+
+    context "when user is not logged in" do
+
+    end
+  end
+
+  describe "#update" do
+    context "when user is logged in" do
+      context "when user has access" do
+
+      end
+
+      context "when user has not access" do
+        
+      end
+    end
+
+    context "when user is not logged in" do
+
+    end
+  end
+
 #   describe "#create" do
 #   #   context "when user is logged in" do
 #   #     context "when user is an admin" do
