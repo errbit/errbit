@@ -445,58 +445,6 @@ RSpec.describe UsersController, type: :request do
     end
   end
 
-#   # describe "#update" do
-#   #   context "when user is logged in" do
-#   #     context "when user is an admin" do
-#   #       context "when admin updating himself" do
-#   #         let(:current_user) { create(:user, admin: true) }
-#   #
-#   #         before { sign_in(current_user) }
-#   #
-#   #         before do
-#   #           patch user_path(current_user),
-#   #             params: {
-#   #               user: {
-#   #                 name: "New Name",
-#   #                 email: ""
-#   #               }
-#   #             }
-#   #         end
-#   #
-#   #
-#   #       end
-#   #
-#   #       context "when admin updating another admin" do
-#   #
-#   #       end
-#   #
-#   #       context "when admin updating user" do
-#   #
-#   #       end
-#   #     end
-#   #   end
-#
-#     # context "when user is not logged in" do
-#     #   let(:user) { create(:user) }
-#     #
-#     #   before do
-#     #     patch user_path(user),
-#     #       params: {
-#     #         user: {
-#     #           name: "New Name",
-#     #           email: "me@example.com"
-#     #         }
-#     #       }
-#     #   end
-#     #
-#     #   it "is expected to redirect to new user session path with status found" do
-#     #     expect(response).to redirect_to(new_user_session_path)
-#     #
-#     #     expect(response).to have_http_status(:found)
-#     #   end
-#     # end
-#   end
-
   describe "#destroy" do
     context "when user is logged in" do
       context "when user has access" do
