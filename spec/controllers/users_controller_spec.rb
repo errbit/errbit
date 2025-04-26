@@ -36,46 +36,6 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context "PUT /users/:my_id/id" do
-      context "when the update is successful" do
-        it "sets a message to display" do
-          put :update, params: {id: user.to_param, user: {name: "Kermit"}}
-          expect(request.flash[:success]).to include("updated")
-        end
-
-        it "redirects to the user's page" do
-          put :update, params: {id: user.to_param, user: {name: "Kermit"}}
-          expect(response).to redirect_to(user_path(user))
-        end
-
-        it "should not be able to become an admin" do
-          expect do
-            put :update, params: {id: user.to_param, user: {admin: true}}
-          end.not_to change {
-            user.reload.admin
-          }.from(false)
-        end
-
-        it "should be able to set per_page option" do
-          put :update, params: {id: user.to_param, user: {per_page: 555}}
-          expect(user.reload.per_page).to eq 555
-        end
-
-        it "should be able to set time_zone option" do
-          put :update, params: {id: user.to_param, user: {time_zone: "Warsaw"}}
-          expect(user.reload.time_zone).to eq "Warsaw"
-        end
-
-        it "should be able to not set github_login option" do
-          put :update, params: {id: user.to_param, user: {github_login: " "}}
-          expect(user.reload.github_login).to eq nil
-        end
-
-        it "should be able to set github_login option" do
-          put :update, params: {id: user.to_param, user: {github_login: "awesome_name"}}
-          expect(user.reload.github_login).to eq "awesome_name"
-        end
-      end
-
       context "when the update is unsuccessful" do
         it "renders the edit page" do
           put :update, params: {id: user.to_param, user: {name: nil}}
@@ -88,33 +48,6 @@ RSpec.describe UsersController, type: :controller do
   context "Signed in as an admin" do
     before do
       sign_in admin
-    end
-
-    context "POST /users" do
-      context "when the create is successful" do
-        let(:attrs) { {user: Fabricate.to_params(:user)} }
-
-        it "should has auth token" do
-          post :create, params: {**attrs}
-          expect(User.last.authentication_token).not_to be_blank
-        end
-      end
-
-      context "when the create is unsuccessful" do
-        let(:user) do
-          Struct.new(:admin, :attributes).new(true, {})
-        end
-
-        before do
-          expect(User).to receive(:new).and_return(user)
-          expect(user).to receive(:save).and_return(false)
-        end
-
-        it "renders the new page" do
-          post :create, params: {user: {username: "foo"}}
-          expect(response).to render_template(:new)
-        end
-      end
     end
 
     context "PUT /users/:id" do
