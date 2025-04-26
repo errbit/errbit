@@ -435,6 +435,48 @@ RSpec.describe UsersController, type: :request do
 #   end
 
   describe "#destroy" do
+    context "when user is logged in" do
+      context "when user has access" do
+        let(:current_user) { create(:user, admin: true) }
+
+        let!(:user) { create(:user, admin: false) }
+
+        before { sign_in(current_user) }
+
+        before { expect(UserDestroy).to receive(:new).with(user).and_call_original }
+
+        before { expect { delete user_path(user) }.to change(User, :count).by(-1) }
+
+        it "is expected to redirect to users path with status found" do
+          expect(response).to redirect_to(users_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user.name))
+        end
+      end
+
+      context "when user has not access" do
+        let(:current_user) { create(:user, admin: false) }
+
+        let!(:user) { create(:user, admin: true) }
+
+        before { sign_in(current_user) }
+
+        before { expect(UserDestroy).not_to receive(:new) }
+
+        before { expect { delete user_path(user) }.not_to change(User, :count) }
+
+        it "is expected to redirect to users path with status found" do
+          expect(response).to redirect_to(root_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+        end
+      end
+    end
+
 #     context "when user is logged in" do
 #       context "when user is an admin" do
 #         context "when admin removes himself" do
