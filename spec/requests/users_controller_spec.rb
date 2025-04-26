@@ -89,9 +89,9 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when admin looking on another user" do
-          let(:user) { create(:user, admin: true) }
+          let(:current_user) { create(:user, admin: true) }
 
-          before { sign_in(user) }
+          before { sign_in(current_user) }
 
           before { get user_path(user) }
 
@@ -107,11 +107,11 @@ RSpec.describe UsersController, type: :request do
 
       context "when user is not an admin" do
         context "when user is looking in himself" do
-          let(:user) { create(:user, admin: false) }
+          let(:current_user) { create(:user, admin: false) }
 
-          before { sign_in(user) }
+          before { sign_in(current_user) }
 
-          before { get user_path(user) }
+          before { get user_path(current_user) }
 
           it "is expected to render template show with status ok" do
             expect(response).to render_template(:show)
@@ -456,6 +456,20 @@ RSpec.describe UsersController, type: :request do
     context "when user is logged in" do
       context "when user is an admin" do
         context "when admin updating himself" do
+          let(:current_user) { create(:user, admin: true) }
+
+          before { sign_in(current_user) }
+
+          before do
+            patch user_path(current_user),
+              params: {
+                user: {
+                  name: "New Name",
+                  email: ""
+                }
+              }
+          end
+
 
         end
 
