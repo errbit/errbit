@@ -489,7 +489,7 @@ GEM
     rspec-expectations (3.13.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.2)
+    rspec-mocks (3.13.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-rails (8.0.0)
@@ -934,7 +934,7 @@ CHECKSUMS
   rspec-activemodel-mocks (1.2.1) sha256=a2c1a8abb68b42b412bdd0bfc975145d1a950d50176c0b65eca5369bed44a2bb
   rspec-core (3.13.3) sha256=25136507f4f9cf2e8977a2851e64e438b4331646054e345998714108745cdfe4
   rspec-expectations (3.13.4) sha256=4e43459765dfee900b25aa1361e106ab0799895ede65fc57872069feb559ecd8
-  rspec-mocks (3.13.2) sha256=2327335def0e1665325a9b617e3af9ae20272741d80ac550336309a7c59abdef
+  rspec-mocks (3.13.3) sha256=be08abadfe28e932d03b8e70215cd5972bd7693e0f1a45c7479b11e9a773c3c2
   rspec-rails (8.0.0) sha256=977a508cd94d152db2068c6585470db5d0cd47eef56d5410b9531034fb9d97bf
   rspec-support (3.13.3) sha256=2a61e393f6e18b7228726e0c6869c5d5a1419d37206116c4d917d145276b3f43
   rubocop (1.75.4) sha256=e0656af44d0811bb40f6d0bd4ed6c8d80c0f05f3444f0e8f0839833dd46d18c6
