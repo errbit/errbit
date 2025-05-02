@@ -384,10 +384,10 @@ GEM
       spoon (~> 0.0)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
-    psych (5.2.3)
+    psych (5.2.4)
       date
       stringio
-    psych (5.2.3-java)
+    psych (5.2.4-java)
       date
       jar-dependencies (>= 0.1.7)
     public_suffix (6.0.2)
@@ -886,8 +886,8 @@ CHECKSUMS
   pry (0.15.2) sha256=12d54b8640d3fa29c9211dd4ffb08f3fd8bf7a4fd9b5a73ce5b59c8709385b6b
   pry (0.15.2-java) sha256=855f3b57563bacac46d49f58ecc9650a3d7f798dffafbdf392ff1b26a3fa180c
   pry-rails (0.3.11) sha256=a69e28e24a34d75d1f60bcf241192a54253f8f7ef8a62cba1e75750a9653593d
-  psych (5.2.3) sha256=84a54bb952d14604fea22d99938348814678782f58b12648fcdfa4d2fce859ee
-  psych (5.2.3-java) sha256=3e5425b9e8a2f41cc2707d5ef14fdc1ae908abbafb12fe45727bd63900056585
+  psych (5.2.4) sha256=f2d9810f7f383a6b0fbc705202851e1a55b236bcb8e168ab5dfa5741842ec7c5
+  psych (5.2.4-java) sha256=a3ae584e85e11fd069f17a563ef18f204d3df0fde0c093d35ae494fd64164664
   public_suffix (6.0.2) sha256=bfa7cd5108066f8c9602e0d6d4114999a5df5839a63149d3e8b0f9c1d3558394
   puma (6.6.0) sha256=f25c06873eb3d5de5f0a4ebc783acc81a4ccfe580c760cfe323497798018ad87
   puma (6.6.0-java) sha256=707623ea7a5e4cfb8badb60f192fed6ae66d8c25d28737ebc684437d6fda08ce
