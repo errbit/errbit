@@ -71,7 +71,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "thruster", require: false
 
 group :development, :test do
-  gem "airbrake", "~> 4.3.5", require: false
+  gem "airbrake", "~> 13.0.5", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
