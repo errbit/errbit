@@ -8,7 +8,7 @@ RSpec.describe "users/edit.html.haml", type: :view do
   before do
     allow(view).to receive(:current_user).and_return(user)
 
-    allow(view).to receive(:user).and_return(user)
+    assign(:user, user)
   end
 
   it "should have per_page option" do
