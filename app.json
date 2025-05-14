@@ -2,14 +2,15 @@
   "name": "errbit",
   "description": "The open source error catcher that's Airbrake API compliant",
   "keywords": ["productivity", "tools", "error tracking"],
+  "website": "https://errbit.com",
   "repository": "https://github.com/errbit/errbit",
   "env": {
-    "BUNDLE_WITHOUT": "development",
+    "BUNDLE_WITHOUT": "development:test",
     "MONGODB_URI": {
       "description": "The connection URI to your MongoDB Cluster. If you don't have one, you can create a free plan at https://cloud.mongodb.com . Follow the Heroky deployment docs on the Errbit repo for more information on obtaining this string.",
       "required": true
     },
-    "GEMFILE_RUBY_VERSION": "3.4.2",
+    "GEMFILE_RUBY_VERSION": "3.4.3",
     "SECRET_KEY_BASE": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
@@ -24,8 +25,5 @@
   "scripts": {
     "postdeploy": "bundle exec rake errbit:bootstrap"
   },
-  "addons": [
-    "scheduler:standard",
-    "sendgrid:starter"
-  ]
+  "addons": ["scheduler:standard", "sendgrid:starter"]
 }
