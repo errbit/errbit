@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - 0-10-stable
+  workflow_dispatch: {}
   schedule:
     - cron: "0 21 * * 6"
 
