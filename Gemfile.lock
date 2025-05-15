@@ -102,7 +102,7 @@ GEM
     benchmark (0.4.0)
     bigdecimal (3.1.9)
     bigdecimal (3.1.9-java)
-    bootsnap (1.18.4)
+    bootsnap (1.18.6)
       msgpack (~> 1.2)
     brakeman (7.0.2)
       racc
@@ -753,7 +753,7 @@ CHECKSUMS
   benchmark (0.4.0) sha256=0f12f8c495545e3710c3e4f0480f63f06b4c842cc94cec7f33a956f5180e874a
   bigdecimal (3.1.9) sha256=2ffc742031521ad69c2dfc815a98e426a230a3d22aeac1995826a75dabfad8cc
   bigdecimal (3.1.9-java) sha256=dd9b8f7c870664cd9538a1325ce385ba57a6627969177258c4f0e661a7be4456
-  bootsnap (1.18.4) sha256=ac4c42af397f7ee15521820198daeff545e4c360d2772c601fbdc2c07d92af55
+  bootsnap (1.18.6) sha256=0ae2393c1e911e38be0f24e9173e7be570c3650128251bf06240046f84a07d00
   brakeman (7.0.2) sha256=b602d91bcec6c5ce4d4bc9e081e01f621c304b7a69f227d1e58784135f333786
   bson (5.0.2) sha256=eeac55a357c3103bdf3f903954ded8eb2dab15ae29f10d8bc62afb359971d523
   bson (5.0.2-java) sha256=f73e7b37d2c6d297580e74b905a11749a0b4d6c776fd095688180c56bda0affd
