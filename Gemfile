@@ -29,6 +29,7 @@ gem "omniauth-google-oauth2"
 gem "rails_autolink"
 gem "useragent"
 gem "uri"
+gem "rack-timeout"
 
 # ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/mongoid-9.0.6/lib/mongoid/indexable.rb:6: warning: ~/.rbenv/versions/3.4.2/lib/ruby/3.4.0/ostruct.rb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
 # You can add ostruct to your Gemfile or gemspec to silence this warning.
@@ -81,7 +82,7 @@ group :development, :test do
   gem "rubocop-disable_syntax", require: false
   gem "rubocop-thread_safety", require: false
   gem "rubocop-factory_bot", require: false
-  gem "standard", "1.49.0", require: false
+  gem "standard", "1.50.0", require: false
   gem "faker"
   gem "factory_bot_rails"
   gem "brakeman", require: false

@@ -32,6 +32,10 @@ In order of precedence Errbit uses:
 
 You can look more about thruster env's [here](https://github.com/basecamp/thruster).
 
+### rack-timeout parameters
+
+[Here](./rack-timeout.md).
+
 ### Application parameters
 
 | Environment variable         | Description                                        | Default              | Default in container |
