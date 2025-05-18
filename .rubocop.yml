@@ -355,14 +355,14 @@ RSpec/NamedSubject:
 RSpec/ExampleLength:
   Enabled: true
   Exclude:
-    - "spec/system/**/*"
+    - "spec/system/**/*.rb"
 
 # Ignore multiple expectations in system specs.
 RSpec/MultipleExpectations:
   Enabled: true
   Exclude:
-    - "spec/system/**/*"
-    - "spec/requests/**/*"
+    - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
 
 # Naming rules:
 
