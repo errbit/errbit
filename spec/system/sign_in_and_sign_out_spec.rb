@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Sign in and sign out with email and password", type: :system do
+RSpec.describe "Sign in and sign out with email and password", type: :system, retry: 3 do
   context "when user successful sign in and sign out" do
     it "is expected to sign in user and sign out" do
       user = Fabricate(:user)

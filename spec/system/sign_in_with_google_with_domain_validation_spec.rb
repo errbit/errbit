@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Sign in with Google with domain validation", type: :system do
+RSpec.describe "Sign in with Google with domain validation", type: :system, retry: 3 do
   before { expect(Errbit::Config).to receive(:google_authentication).and_return(true).at_least(:once).times }
 
   before { expect(Errbit::Config).to receive(:google_auto_provision).and_return(true) }

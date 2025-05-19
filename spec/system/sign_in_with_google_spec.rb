@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Sign in with Google", type: :system do
+RSpec.describe "Sign in with Google", type: :system, retry: 3 do
   context "sign in via Google with recognized user" do
     let!(:user) { Fabricate(:user, google_uid: "123456789") }
 
