@@ -25,6 +25,8 @@ RSpec.describe "Sign in and sign out with email and password", type: :system do
       expect(page).to have_current_path(new_user_session_path)
 
       expect(page).to have_content(I18n.t("devise.failure.unauthenticated"))
+
+      raise ArgumentError, "Cool"
     end
   end
 
