@@ -19,7 +19,7 @@ RSpec.configure do |config|
     # run some additional clean up task - can be filtered by example metadata
     # Reset the session (i.e. remove cookies and navigate to blank page).
     if ex.metadata[:system]
-      Capybara.reset!
+      Capybara.reset_session!
     end
   end
 end
