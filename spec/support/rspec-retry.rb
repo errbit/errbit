@@ -17,7 +17,8 @@ RSpec.configure do |config|
   # callback to be run between retries
   config.retry_callback = proc do |ex|
     # run some additional clean up task - can be filtered by example metadata
-    # Reset the session (i.e. remove cookies and navigate to blank page).
+    # Reset sessions, cleaning out the pool of sessions. This will remove any
+    # session information such as cookies.
     if ex.metadata[:system]
       Capybara.reset_session!
     end
