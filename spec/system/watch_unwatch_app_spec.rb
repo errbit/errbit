@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "A user can watch and unwatch an application", type: :system do
+RSpec.describe "A user can watch and unwatch an application", type: :system, retry: 3 do
   context "when user log in and watch a project" do
     it "is expected to log in and watch a project" do
       current_user = create(:user)

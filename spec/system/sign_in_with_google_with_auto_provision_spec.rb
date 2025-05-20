@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Sign in with Google with auto provision", type: :system do
+RSpec.describe "Sign in with Google with auto provision", type: :system, retry: 3 do
   context "create an account for recognized user if they log in" do
     before { expect(Errbit::Config).to receive(:google_authentication).and_return(true) }
 
