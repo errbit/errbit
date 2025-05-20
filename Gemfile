@@ -94,6 +94,7 @@ end
 group :test do
   gem "rails-controller-testing"
   gem "rspec-rails", require: false
+  gem "rspec-retry", require: false
   gem "rspec-activemodel-mocks"
   gem "mongoid-rspec"
   gem "pundit-matchers"
