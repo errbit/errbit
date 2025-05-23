@@ -9,6 +9,7 @@ plugins:
   - rubocop-rspec_rails
   - rubocop-performance
   - rubocop-thread_safety
+  - rubocop-factory_bot
 
 AllCops:
   TargetRubyVersion: 3.1
@@ -349,6 +350,19 @@ RSpec/IndexedLet:
 # We don't use named subject's
 RSpec/NamedSubject:
   Enabled: false
+
+# Ignore system specs.
+RSpec/ExampleLength:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*.rb"
+
+# Ignore multiple expectations in system specs.
+RSpec/MultipleExpectations:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
 
 # Naming rules:
 

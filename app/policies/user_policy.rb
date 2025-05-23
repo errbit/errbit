@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
+  FIELDS = [
+    :name, :username, :email, :password, :github_login, :per_page, :time_zone,
+    :password, :password_confirmation
+  ].freeze
+
   # @param user [User] The user making the request
   # @param record [User] The record being accessed
   def initialize(user, record)
@@ -33,6 +38,14 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     scope.where(id: record.id).exists? && user.id != record.id
+  end
+
+  def permitted_attributes
+    if user.admin? && user.id != record.id
+      FIELDS + [:admin]
+    else
+      FIELDS
+    end
   end
 
   class Scope < ApplicationPolicy::Scope
