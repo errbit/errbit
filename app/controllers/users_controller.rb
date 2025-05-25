@@ -66,15 +66,15 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def unlink_github
-    user.update(github_login: nil, github_oauth_token: nil)
+  # def unlink_github
+  #   user.update(github_login: nil, github_oauth_token: nil)
+  #
+  #   redirect_to user_path(user)
+  # end
 
-    redirect_to user_path(user)
-  end
-
-  def unlink_google
-    user.update(google_uid: nil)
-
-    redirect_to user_path(user)
-  end
+  # def unlink_google
+  #   user.update(google_uid: nil)
+  #
+  #   redirect_to user_path(user)
+  # end
 end
