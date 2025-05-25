@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  # before_action :require_admin!, except: [:edit, :update]
-  # before_action :require_user_edit_privileges, only: [:edit, :update]
-
   def index
-    @users = policy_scope(User).order_by(name: :asc).page(params[:page]).per(current_user.per_page)
+    @users = policy_scope(User)
+      .order_by(name: :asc)
+      .page(params[:page])
+      .per(current_user.per_page)
   end
 
   def show
@@ -76,12 +76,5 @@ class UsersController < ApplicationController
     user.update(google_uid: nil)
 
     redirect_to user_path(user)
-  end
-
-  private
-
-  def require_user_edit_privileges
-    can_edit = current_user == user || current_user.admin?
-    redirect_to(root_path) unless can_edit
   end
 end
