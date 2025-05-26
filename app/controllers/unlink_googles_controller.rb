@@ -8,6 +8,8 @@ class UnlinkGooglesController < ApplicationController
 
     @user.update!(google_uid: nil)
 
+    flash[:success] = "Successfully unlinked #{@user.email} account!"
+
     redirect_to user_path(@user)
   end
 end
