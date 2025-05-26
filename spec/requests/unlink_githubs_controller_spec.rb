@@ -24,6 +24,21 @@ RSpec.describe UnlinkGithubsController, type: :request do
       end
 
       context "when user has not access" do
+        let!(:current_user) { create(:user, admin: false) }
+
+        let!(:user) { create(:user) }
+
+        before { sign_in(current_user) }
+
+        before { patch user_unlink_github_path(user) }
+
+        it "is expected to redirect to root path with status found" do
+          expect(response).to redirect_to(root_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:alert]).to eq("You are not authorized to perform this action.")
+        end
       end
     end
 
