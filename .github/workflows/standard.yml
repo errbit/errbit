@@ -1,0 +1,45 @@
+name: Standard
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 21 * * 6"
+
+permissions:
+  contents: read
+
+jobs:
+  standard:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          disable-sudo-and-containers: true
+          egress-policy: audit
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@13e7a03dc3ac6c3798f4570bfead2aed4d96abfb # v1.244.0
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          rubygems: "latest"
+          bundler: "latest"
+          bundler-cache: true
+
+      - run: |
+          bin/standardrb \
+            app/controllers/users_controller.rb \
+            app/controllers/unlink_githubs_controller.rb \
+            app/controllers/unlink_googles_controller.rb \
+            spec/requests/unlink_githubs_controller_spec.rb \
+            spec/requests/unlink_googles_controller_spec.rb \
+            spec/requests/users_controller_spec.rb
