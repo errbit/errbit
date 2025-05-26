@@ -30,7 +30,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@13e7a03dc3ac6c3798f4570bfead2aed4d96abfb # v1.244.0
         with:
-          ruby-version: ${{ matrix.ruby }}
           rubygems: "latest"
           bundler: "latest"
           bundler-cache: true
