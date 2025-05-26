@@ -271,7 +271,7 @@ RSpec.describe UsersController, type: :request do
             end.not_to change(User, :count)
           end
 
-          it "is expected to render template new  with status ok" do
+          it "is expected to render template new with status ok" do
             expect(response).to render_template(:new)
 
             expect(response).to have_http_status(:ok)
@@ -390,7 +390,7 @@ RSpec.describe UsersController, type: :request do
               }
           end
 
-          it "is expected to render template new  with status ok" do
+          it "is expected to render template new with status ok" do
             expect(response).to render_template(:edit)
 
             expect(response).to have_http_status(:ok)
