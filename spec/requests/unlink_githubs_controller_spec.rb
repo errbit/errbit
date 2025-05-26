@@ -6,11 +6,24 @@ RSpec.describe UnlinkGithubsController, type: :request do
   describe "#update" do
     context "when user is logged in" do
       context "when user has access" do
+        let!(:current_user) { create(:user, github_login: "biow0lf", github_oauth_token: "token123") }
 
+        before { sign_in(current_user) }
+
+        before { patch user_unlink_github_path(current_user) }
+
+        it "is expected to unlink github for a user with status found" do
+          expect(response).to redirect_to(user_path(assigns(:user)))
+
+          expect(response).to have_http_status(:found)
+
+          expect(assigns(:user).github_login).to eq(nil)
+
+          expect(assigns(:user).github_oauth_token).to eq(nil)
+        end
       end
 
       context "when user has not access" do
-
       end
     end
 
