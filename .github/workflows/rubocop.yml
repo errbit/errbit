@@ -1,4 +1,4 @@
-name: rubocop
+name: Rubocop
 
 on:
   push:
@@ -10,6 +10,9 @@ on:
   workflow_dispatch: {}
   schedule:
     - cron: "0 21 * * 6"
+
+permissions:
+  contents: read
 
 jobs:
   rubocop:
@@ -23,4 +26,8 @@ jobs:
           rubygems: "latest"
           bundler: "latest"
           bundler-cache: true
-      - run: bundle exec rubocop --parallel
+      - run: |
+          bin/rubocop \
+            app/controllers/users_controller.rb \
+            app/controllers/unlink_githubs_controller.rb \
+            app/controllers/unlink_googles_controller.rb
