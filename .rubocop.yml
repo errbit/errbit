@@ -364,6 +364,11 @@ RSpec/MultipleExpectations:
     - "spec/system/**/*.rb"
     - "spec/requests/**/*.rb"
 
+# Extend maximum example group nesting from 3 to 4.
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 4
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
