@@ -3,10 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "Sign in and sign out with email and password", type: :system, retry: 3 do
+  let!(:user) { create(:user, password: "password") }
+
   context "when user successful sign in and sign out" do
     it "is expected to sign in user and sign out" do
-      user = Fabricate(:user)
-
       visit root_path
 
       expect(page).to have_content(I18n.t("devise.failure.unauthenticated"))
@@ -30,8 +30,6 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
 
   context "when user exists but password is wrong" do
     it "is expected to reject user with wrong password" do
-      user = Fabricate(:user)
-
       visit root_path
 
       expect(page).to have_content(I18n.t("devise.failure.unauthenticated"))
