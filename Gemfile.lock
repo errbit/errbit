@@ -731,7 +731,6 @@ DEPENDENCIES
   vcr
   webmock
   xmpp4r
-  zeitwerk (= 2.6.18)
 
 CHECKSUMS
   actioncable (7.2.2.1) sha256=5b3b885075a80767d63cbf2b586cbf82466a241675b7985233f957abb01bffb4
