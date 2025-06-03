@@ -11,7 +11,7 @@ plugins:
   - rubocop-thread_safety
 
 AllCops:
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.4
   NewCops: enable
 
 # We use standard as a linter and formatter instead Rubocop.
