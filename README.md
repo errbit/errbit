@@ -1,7 +1,6 @@
 # Errbit
 
 [![RSpec](https://github.com/errbit/errbit/actions/workflows/rspec.yml/badge.svg)](https://github.com/errbit/errbit/actions/workflows/rspec.yml)
-[![JRuby](https://github.com/errbit/errbit/actions/workflows/jruby.yml/badge.svg)](https://github.com/errbit/errbit/actions/workflows/jruby.yml)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
