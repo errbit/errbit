@@ -116,9 +116,6 @@ gem "underscore-rails"
 
 gem "sucker_punch"
 
-# Lock zeitwerk gem for support JRuby 9.4
-gem "zeitwerk", "2.6.18"
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
