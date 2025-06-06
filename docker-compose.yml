@@ -8,6 +8,6 @@ services:
       MONGO_URL: "mongodb://mongo:27017/errbit"
 
   mongo:
-    image: "mongo:4.0.28"
+    image: "mongo:6.0.23"
     ports:
       - "27017:27017"
