@@ -349,11 +349,12 @@ RSpec/IndexedLet:
 RSpec/NamedSubject:
   Enabled: false
 
-# Ignore system specs.
+# Ignore system and requests specs.
 RSpec/ExampleLength:
   Enabled: true
   Exclude:
     - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
 
 # Ignore multiple expectations in system specs.
 RSpec/MultipleExpectations:
@@ -362,10 +363,14 @@ RSpec/MultipleExpectations:
     - "spec/system/**/*.rb"
     - "spec/requests/**/*.rb"
 
-# Extend maximum example group nesting from 3 to 4.
+# Extend maximum example group nesting from 3 to 5.
 RSpec/NestedGroups:
   Enabled: true
-  Max: 4
+  Max: 5
+
+# Just ignore
+RSpec/ScatteredLet:
+  Enabled: false
 
 # Naming rules:
 
