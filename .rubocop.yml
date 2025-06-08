@@ -393,6 +393,8 @@ Naming/FileName:
   Enabled: true
   Exclude:
     - "spec/support/mongoid-rspec.rb"
+    - "spec/support/rspec-retry.rb"
+    - "spec/support/selenium-webdriver.rb"
 
 # Disabled syntax:
 
