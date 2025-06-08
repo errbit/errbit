@@ -626,7 +626,6 @@ PLATFORMS
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
-  java
   ruby
   x86-linux-gnu
   x86-linux-musl
