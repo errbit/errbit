@@ -372,6 +372,11 @@ RSpec/NestedGroups:
 RSpec/ScatteredLet:
   Enabled: false
 
+# Enforce receive style
+RSpec/MessageSpies:
+  Enabled: true
+  EnforcedStyle: receive
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
