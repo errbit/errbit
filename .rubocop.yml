@@ -377,6 +377,10 @@ RSpec/MessageSpies:
   Enabled: true
   EnforcedStyle: receive
 
+# We prefer `type: :system, retry: 3` instead of sorted `retry: 3, type: :system`
+RSpec/SortMetadata:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
