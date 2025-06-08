@@ -381,6 +381,10 @@ RSpec/MessageSpies:
 RSpec/SortMetadata:
   Enabled: false
 
+# We prefer `let() { } and then subject {}`
+RSpec/LeadingSubject:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
