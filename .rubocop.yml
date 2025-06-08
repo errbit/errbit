@@ -1,6 +1,3 @@
-require:
-  - rubocop-disable_syntax
-
 plugins:
   - rubocop-capybara
   - rubocop-rails
@@ -10,6 +7,7 @@ plugins:
   - rubocop-performance
   - rubocop-thread_safety
   - rubocop-factory_bot
+  - rubocop-disable_syntax
 
 AllCops:
   TargetRubyVersion: 3.4
