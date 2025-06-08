@@ -40,5 +40,6 @@ jobs:
             app/controllers/unlink_googles_controller.rb \
             spec/factories/app_factory.rb \
             spec/factories/user_factory.rb \
+            spec/requests/users_controller_spec.rb \
             spec/requests/unlink_githubs_controller_spec.rb \
             spec/requests/unlink_googles_controller_spec.rb
