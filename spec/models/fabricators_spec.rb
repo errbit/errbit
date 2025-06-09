@@ -2,13 +2,13 @@
 
 require "rails_helper"
 
-RSpec.describe "Fabrication", type: :model do
-  Fabrication::Config.fabricator_path.each do |folder|
-    Dir.glob(File.join(Rails.root, folder, "**", "*.rb")).each do |file|
-      require file
-    end
+Fabrication::Config.fabricator_path.each do |folder|
+  Dir.glob(File.join(Rails.root, folder, "**", "*.rb")).each do |file|
+    require file
   end
+end
 
+RSpec.describe "Fabrication", type: :model do
   # TODO : when 1.8.7 drop support se directly Symbol#sort
   Fabrication.manager.schematics.keys.sort.each do |fabricator_name|
     context "Fabricate(:#{fabricator_name})" do
