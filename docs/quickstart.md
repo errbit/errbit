@@ -7,7 +7,7 @@ This is a quickstart guide to get you up and running with the Errbit.
 * Linux server. We will use Debian 12.
 * Docker with Docker Compose plugin
 * Public IPv4 address
-* (Optional) public IPv6 address
+* (Optional) Public IPv6 address
 * Domain name for errbit. E.g. `errbit.example.com`
 
 ## Installing dependencies
@@ -18,6 +18,8 @@ This is a quickstart guide to get you up and running with the Errbit.
 ## Run Errbit with Docker
 
 ### Option 1: Rails native with Thruster (and without reverse proxy)
+
+Create `docker-compose.yml` with the following content:
 
 ```yaml
 services:
@@ -37,13 +39,7 @@ services:
 
 ### Option 2: with Traefik as reverse proxy
 
-```shell
-# mkdir errbit
-# cd errbit
-# touch docker-compose.yml
-```
-
-Fill `docker-compose.yml` with the following content:
+Create `docker-compose.yml` with the following content:
 
 ```yaml
 services:
