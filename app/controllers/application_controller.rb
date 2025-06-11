@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   def require_admin!
     return if user_signed_in? && current_user.admin?
 
+    # TODO: translate
     flash[:error] = "Sorry, you don't have permission to do that"
 
     redirect_to root_path
@@ -33,6 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
+    # TODO: translate
     flash[:alert] = "You are not authorized to perform this action."
 
     redirect_to root_path
