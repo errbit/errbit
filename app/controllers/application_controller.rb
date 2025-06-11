@@ -34,8 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    # TODO: translate
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = t("controllers.application.user_not_authorized")
 
     redirect_to root_path
   end

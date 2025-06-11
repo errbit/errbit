@@ -73,6 +73,9 @@ en:
       environment_name: Environment name
 
   controllers:
+    application:
+      require_admin: "Sorry, you don't have permission to do that"
+      user_not_authorized: "You are not authorized to perform this action."
     apps:
       flash:
         create:
