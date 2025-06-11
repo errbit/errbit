@@ -22,7 +22,7 @@ This is a quickstart guide to get you up and running with the Errbit.
 ```yaml
 services:
   errbit:
-    image: "docker.io/errbit/errbit:0.10.0"
+    image: "docker.io/errbit/errbit:0.10.4"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
@@ -48,7 +48,7 @@ Fill `docker-compose.yml` with the following content:
 ```yaml
 services:
   traefik:
-    image: "docker.io/library/traefik:3.3.6"
+    image: "docker.io/library/traefik:3.4.1"
     container_name: "traefik"
     restart: "unless-stopped"
     command:
@@ -70,7 +70,7 @@ services:
       - "./acme.json:/acme.json" # Here we store ACME certificates
 
   errbit:
-    image: "docker.io/errbit/errbit:0.10.0"
+    image: "docker.io/errbit/errbit:0.10.4"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
@@ -99,7 +99,7 @@ Stop with:
 docker compose down
 ```
 
-If you are updating Errbit
+If you are updating Errbit:
 
 ```shell
 docker compose down
