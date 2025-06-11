@@ -101,6 +101,8 @@ RSpec.describe UsersController, type: :request do
         expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
+
+        expect(request.flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
   end
@@ -147,6 +149,8 @@ RSpec.describe UsersController, type: :request do
         expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
+
+        expect(request.flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
   end
@@ -199,6 +203,8 @@ RSpec.describe UsersController, type: :request do
         expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
+
+        expect(request.flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
   end
@@ -343,6 +349,8 @@ RSpec.describe UsersController, type: :request do
         expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
+
+        expect(request.flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
   end
@@ -443,6 +451,8 @@ RSpec.describe UsersController, type: :request do
         expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
+
+        expect(request.flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
   end
@@ -499,6 +509,8 @@ RSpec.describe UsersController, type: :request do
         expect(response).to redirect_to(new_user_session_path)
 
         expect(response).to have_http_status(:found)
+
+        expect(request.flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
   end
