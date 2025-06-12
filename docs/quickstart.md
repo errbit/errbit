@@ -7,7 +7,7 @@ This is a quickstart guide to get you up and running with the Errbit.
 * Linux server. We will use Debian 12.
 * Docker with Docker Compose plugin
 * Public IPv4 address
-* (Optional) public IPv6 address
+* (Optional) Public IPv6 address
 * Domain name for errbit. E.g. `errbit.example.com`
 
 ## Installing dependencies
@@ -19,10 +19,12 @@ This is a quickstart guide to get you up and running with the Errbit.
 
 ### Option 1: Rails native with Thruster (and without reverse proxy)
 
+Create `docker-compose.yml` with the following content:
+
 ```yaml
 services:
   errbit:
-    image: "docker.io/errbit/errbit:0.10.0"
+    image: "docker.io/errbit/errbit:0.10.4"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
@@ -37,18 +39,12 @@ services:
 
 ### Option 2: with Traefik as reverse proxy
 
-```shell
-# mkdir errbit
-# cd errbit
-# touch docker-compose.yml
-```
-
-Fill `docker-compose.yml` with the following content:
+Create `docker-compose.yml` with the following content:
 
 ```yaml
 services:
   traefik:
-    image: "docker.io/library/traefik:3.3.6"
+    image: "docker.io/library/traefik:3.4.1"
     container_name: "traefik"
     restart: "unless-stopped"
     command:
@@ -70,7 +66,7 @@ services:
       - "./acme.json:/acme.json" # Here we store ACME certificates
 
   errbit:
-    image: "docker.io/errbit/errbit:0.10.0"
+    image: "docker.io/errbit/errbit:0.10.4"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
@@ -99,7 +95,7 @@ Stop with:
 docker compose down
 ```
 
-If you are updating Errbit
+If you are updating Errbit:
 
 ```shell
 docker compose down

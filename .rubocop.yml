@@ -1,6 +1,3 @@
-require:
-  - rubocop-disable_syntax
-
 plugins:
   - rubocop-capybara
   - rubocop-rails
@@ -9,6 +6,8 @@ plugins:
   - rubocop-rspec_rails
   - rubocop-performance
   - rubocop-thread_safety
+  - rubocop-factory_bot
+  - rubocop-disable_syntax
 
 AllCops:
   TargetRubyVersion: 3.4
@@ -350,6 +349,42 @@ RSpec/IndexedLet:
 RSpec/NamedSubject:
   Enabled: false
 
+# Ignore system and requests specs.
+RSpec/ExampleLength:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
+
+# Ignore multiple expectations in system specs.
+RSpec/MultipleExpectations:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
+
+# Extend maximum example group nesting from 3 to 5.
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 5
+
+# Just ignore
+RSpec/ScatteredLet:
+  Enabled: false
+
+# Enforce receive style
+RSpec/MessageSpies:
+  Enabled: true
+  EnforcedStyle: receive
+
+# We prefer `type: :system, retry: 3` instead of sorted `retry: 3, type: :system`
+RSpec/SortMetadata:
+  Enabled: false
+
+# We prefer `let() { } and then subject {}`
+RSpec/LeadingSubject:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
@@ -362,6 +397,8 @@ Naming/FileName:
   Enabled: true
   Exclude:
     - "spec/support/mongoid-rspec.rb"
+    - "spec/support/rspec-retry.rb"
+    - "spec/support/selenium-webdriver.rb"
 
 # Disabled syntax:
 
