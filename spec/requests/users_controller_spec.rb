@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
-  before { I18n.locale = "pt-BR" }
+  # before { I18n.locale = "pt-BR" }
 
   describe "#index" do
     context "when user is logged in" do
@@ -498,6 +498,24 @@ RSpec.describe UsersController, type: :request do
           expect(response).to have_http_status(:found)
 
           expect(request.flash[:alert]).to eq(I18n.t("controllers.application.user_not_authorized"))
+        end
+      end
+
+      context "when user try to destroy himself" do
+        let(:current_user) { create(:user) }
+
+        before { sign_in(current_user) }
+
+        before { expect(UserDestroy).not_to receive(:new) }
+
+        before { expect { delete user_path(current_user) }.not_to change(User, :count) }
+
+        it "is expected to redirect to users path with status found" do
+          expect(response).to redirect_to(users_path)
+
+          expect(response).to have_http_status(:found)
+
+          expect(request.flash[:error]).to eq(I18n.t("users.destroy.error"))
         end
       end
     end

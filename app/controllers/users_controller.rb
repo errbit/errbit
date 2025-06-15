@@ -57,12 +57,18 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
 
-    authorize @user
+    if @user == current_user
+      flash[:error] = t(".error")
 
-    UserDestroy.new(@user).destroy
+      redirect_to users_path
+    else
+      authorize @user
 
-    flash[:success] = t(".success", name: @user.name)
+      UserDestroy.new(@user).destroy
 
-    redirect_to users_path
+      flash[:success] = t(".success", name: @user.name)
+
+      redirect_to users_path
+    end
   end
 end

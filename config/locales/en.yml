@@ -194,6 +194,7 @@ en:
       success: "%{name}'s information was successfully updated."
     destroy:
       success: "That's sad. %{name} is no longer part of your team."
+      error: "You can't delete yourself"
     fields:
       name: Name
       username: Username

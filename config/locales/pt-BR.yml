@@ -166,6 +166,7 @@ pt-BR:
       success: "As informações de %{name} foram atualizadas com sucesso."
     destroy:
       success: "Isto é triste. %{name} não faz mais parte do seu time."
+      error: "Você não pode excluir a si mesmo"
     fields:
       name: Nome
       username: Usuário
