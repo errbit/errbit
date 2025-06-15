@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     authorize @user
 
     if @user.update(permitted_attributes(@user))
-      flash[:success] = t("controllers.users.flash.update.success", name: @user.name)
+      flash[:success] = t(".success", name: @user.name)
 
       redirect_to user_path(@user)
     else

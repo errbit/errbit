@@ -382,7 +382,7 @@ RSpec.describe UsersController, type: :request do
 
             expect(response).to have_http_status(:found)
 
-            expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.update.success", name: user.reload.name))
+            expect(request.flash[:success]).to eq(I18n.t("users.update.success", name: user.reload.name))
           end
         end
 
