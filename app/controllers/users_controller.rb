@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     authorize @user
 
     if @user.save
-      flash[:success] = "#{@user.name} is now part of the team. Be sure to add them as a project watcher."
+      flash[:success] = t(".success", name: @user.name)
 
       redirect_to user_path(@user)
     else

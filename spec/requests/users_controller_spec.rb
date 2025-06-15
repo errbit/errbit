@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
-  # before { I18n.locale = "pt-BR" }
+  before { I18n.locale = "pt-BR" }
 
   describe "#index" do
     context "when user is logged in" do
@@ -245,7 +245,7 @@ RSpec.describe UsersController, type: :request do
 
             expect(response).to have_http_status(:found)
 
-            expect(request.flash[:success]).to eq("#{name} is now part of the team. Be sure to add them as a project watcher.")
+            expect(request.flash[:success]).to eq(I18n.t("users.create.success", name: name))
 
             expect(assigns(:user).email).to eq(email)
 
