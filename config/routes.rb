@@ -15,10 +15,9 @@ Rails.application.routes.draw do
   resources :notices, only: :show
 
   resources :users do
-    member do
-      delete :unlink_github
-      delete :unlink_google
-    end
+    resource :unlink_github, only: :update
+
+    resource :unlink_google, only: :update
   end
 
   resources :site_config, only: :index do

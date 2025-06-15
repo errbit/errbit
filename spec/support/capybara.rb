@@ -16,5 +16,5 @@ Capybara.register_driver :selenium_chrome_headless do |app|
     opts.add_preference("profile.password_manager_leak_detection", false)
   end
 
-  Capybara::Selenium::Driver.new(app, **{ :browser => :chrome, options_key => browser_options })
+  Capybara::Selenium::Driver.new(app, **{:browser => :chrome, options_key => browser_options})
 end

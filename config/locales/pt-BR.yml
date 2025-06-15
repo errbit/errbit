@@ -45,6 +45,9 @@ pt-BR:
       environment_name: Nome do Ambiente
 
   controllers:
+    application:
+      require_admin: "Sorry, you don't have permission to do that"
+      user_not_authorized: "You are not authorized to perform this action."
     apps:
       flash:
         create:
@@ -56,13 +59,6 @@ pt-BR:
         destroy:
           success: "Sua aplicação foi destruída com sucesso."
           error: "Sua aplicação não pôde ser destruída."
-    users:
-      flash:
-        destroy:
-          success: "Isto é triste. %{name} não faz mais parte do seu time."
-          error: "Você não pode excluir a si mesmo"
-        update:
-          success: "As informações de %{name} foram atualizadas com sucesso."
     problems:
       flash:
         no_select_problem: "Você não selecionou nenhum erro"
@@ -145,23 +141,6 @@ pt-BR:
       admin: Administrador?
       admin_yes: Sim
       admin_no: Não
-    edit:
-      title: Editar
-      cancel: cancelar
-      update_user: Atualizar usuário
-    fields:
-      name: Nome
-      username: Usuário
-      email: E-mail
-      entries: Registros por página
-      time_zone: Fuso horário
-      password: Senha
-      password_confirmation: Confirmação de Senha
-      admin: Adminstrador?
-    new:
-      title: Novo Usuário
-      cancel: cancelar
-      add_user: Adicionar usuário
     show:
       name: Nome
       email: E-mail
@@ -173,6 +152,30 @@ pt-BR:
       edit: editar
       destroy: excluir
       confirm_delete: "Excluir permanentemente este usuário?"
+    new:
+      title: Novo Usuário
+      cancel: cancelar
+      add_user: Adicionar usuário
+    edit:
+      title: Editar
+      cancel: cancelar
+      update_user: Atualizar usuário
+    create:
+      success: "%{name} is now part of the team. Be sure to add them as a project watcher."
+    update:
+      success: "As informações de %{name} foram atualizadas com sucesso."
+    destroy:
+      success: "Isto é triste. %{name} não faz mais parte do seu time."
+      error: "Você não pode excluir a si mesmo"
+    fields:
+      name: Nome
+      username: Usuário
+      email: E-mail
+      entries: Registros por página
+      time_zone: Fuso horário
+      password: Senha
+      password_confirmation: Confirmação de Senha
+      admin: Adminstrador?
   apps:
     confirm_delete: "Excluir permanentemente esta aplicação?"
     confirm_destroy_all_problems: "Excluir permanentemente todos os erros desta aplicação?"
