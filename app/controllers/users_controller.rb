@@ -59,16 +59,14 @@ class UsersController < ApplicationController
 
     if @user == current_user
       flash[:error] = t(".error")
-
-      redirect_to users_path
     else
       authorize @user
 
       UserDestroy.new(@user).destroy
 
       flash[:success] = t(".success", name: @user.name)
-
-      redirect_to users_path
     end
+
+    redirect_to users_path
   end
 end
