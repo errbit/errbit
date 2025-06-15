@@ -147,23 +147,6 @@ pt-BR:
       admin: Administrador?
       admin_yes: Sim
       admin_no: Não
-    edit:
-      title: Editar
-      cancel: cancelar
-      update_user: Atualizar usuário
-    fields:
-      name: Nome
-      username: Usuário
-      email: E-mail
-      entries: Registros por página
-      time_zone: Fuso horário
-      password: Senha
-      password_confirmation: Confirmação de Senha
-      admin: Adminstrador?
-    new:
-      title: Novo Usuário
-      cancel: cancelar
-      add_user: Adicionar usuário
     show:
       name: Nome
       email: E-mail
@@ -175,6 +158,25 @@ pt-BR:
       edit: editar
       destroy: excluir
       confirm_delete: "Excluir permanentemente este usuário?"
+    new:
+      title: Novo Usuário
+      cancel: cancelar
+      add_user: Adicionar usuário
+    edit:
+      title: Editar
+      cancel: cancelar
+      update_user: Atualizar usuário
+    create:
+      success: "%{name} is now part of the team. Be sure to add them as a project watcher."
+    fields:
+      name: Nome
+      username: Usuário
+      email: E-mail
+      entries: Registros por página
+      time_zone: Fuso horário
+      password: Senha
+      password_confirmation: Confirmação de Senha
+      admin: Adminstrador?
   apps:
     confirm_delete: "Excluir permanentemente esta aplicação?"
     confirm_destroy_all_problems: "Excluir permanentemente todos os erros desta aplicação?"

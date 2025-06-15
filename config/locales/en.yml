@@ -175,23 +175,6 @@ en:
       admin: Admin?
       admin_yes: "Yes"
       admin_no: "No"
-    edit:
-      title: Edit
-      cancel: cancel
-      update_user: Update User
-    fields:
-      name: Name
-      username: Username
-      email: Email
-      entries: Entries per page
-      time_zone: Time Zone
-      password: Password
-      password_confirmation: Password Confirmation
-      admin: Admin?
-    new:
-      title: New User
-      cancel: cancel
-      add_user: Add User
     show:
       name: Name
       email: Email
@@ -203,6 +186,25 @@ en:
       edit: edit
       destroy: destroy
       confirm_delete: "Permanently delete this user?"
+    new:
+      title: New User
+      cancel: cancel
+      add_user: Add User
+    edit:
+      title: Edit
+      cancel: cancel
+      update_user: Update User
+    create:
+      success: "%{name} is now part of the team. Be sure to add them as a project watcher."
+    fields:
+      name: Name
+      username: Username
+      email: Email
+      entries: Entries per page
+      time_zone: Time Zone
+      password: Password
+      password_confirmation: Password Confirmation
+      admin: Admin?
   apps:
     confirm_delete: "Permanently delete this app?"
     confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
