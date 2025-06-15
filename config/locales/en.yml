@@ -87,10 +87,6 @@ en:
         destroy:
           success: "Your app was successfully destroyed."
           error: "Your app could not be destroyed."
-    users:
-      flash:
-        destroy:
-          success: "That's sad. %{name} is no longer part of your team."
     problems:
       flash:
         no_select_problem: "You have not selected any errors"
@@ -196,6 +192,8 @@ en:
       success: "%{name} is now part of the team. Be sure to add them as a project watcher."
     update:
       success: "%{name}'s information was successfully updated."
+    destroy:
+      success: "That's sad. %{name} is no longer part of your team."
     fields:
       name: Name
       username: Username

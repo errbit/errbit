@@ -477,7 +477,7 @@ RSpec.describe UsersController, type: :request do
 
           expect(response).to have_http_status(:found)
 
-          expect(request.flash[:success]).to eq(I18n.t("controllers.users.flash.destroy.success", name: user.name))
+          expect(request.flash[:success]).to eq(I18n.t("users.destroy.success", name: user.name))
         end
       end
 

@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
     UserDestroy.new(@user).destroy
 
-    flash[:success] = t("controllers.users.flash.destroy.success", name: @user.name)
+    flash[:success] = t(".success", name: @user.name)
 
     redirect_to users_path
   end

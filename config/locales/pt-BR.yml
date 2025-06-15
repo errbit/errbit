@@ -59,10 +59,6 @@ pt-BR:
         destroy:
           success: "Sua aplicação foi destruída com sucesso."
           error: "Sua aplicação não pôde ser destruída."
-    users:
-      flash:
-        destroy:
-          success: "Isto é triste. %{name} não faz mais parte do seu time."
     problems:
       flash:
         no_select_problem: "Você não selecionou nenhum erro"
@@ -168,6 +164,8 @@ pt-BR:
       success: "%{name} is now part of the team. Be sure to add them as a project watcher."
     update:
       success: "As informações de %{name} foram atualizadas com sucesso."
+    destroy:
+      success: "Isto é triste. %{name} não faz mais parte do seu time."
     fields:
       name: Nome
       username: Usuário
