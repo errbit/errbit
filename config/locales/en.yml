@@ -91,8 +91,6 @@ en:
       flash:
         destroy:
           success: "That's sad. %{name} is no longer part of your team."
-        update:
-          success: "%{name}'s information was successfully updated."
     problems:
       flash:
         no_select_problem: "You have not selected any errors"
@@ -196,6 +194,8 @@ en:
       update_user: Update User
     create:
       success: "%{name} is now part of the team. Be sure to add them as a project watcher."
+    update:
+      success: "%{name}'s information was successfully updated."
     fields:
       name: Name
       username: Username
