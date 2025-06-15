@@ -16,8 +16,7 @@ class ApplicationController < ActionController::Base
   def require_admin!
     return if user_signed_in? && current_user.admin?
 
-    # TODO: translate
-    flash[:error] = "Sorry, you don't have permission to do that"
+    flash[:error] = t("controllers.application.require_admin")
 
     redirect_to root_path
   end
