@@ -11,7 +11,7 @@ class App
   field :bitbucket_repo
   field :custom_backtrace_url_template
   field :asset_host
-  field :repository_branch
+  field :repository_branch, type: String
   field :current_app_version
   field :notify_all_users, type: Boolean, default: false
   field :notify_on_errs, type: Boolean, default: true

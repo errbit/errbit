@@ -2,8 +2,8 @@
 
 - content_for :action_bar, link_to(t(".cancel"), users_path, class: "button")
 
-= form_for user do |f|
+= form_for @user do |f|
 
-  = render "fields", f: f, user: user
+  = render "fields", f: f, user: @user
 
   %div.buttons= f.submit t(".add_user")

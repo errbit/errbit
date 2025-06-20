@@ -10,7 +10,7 @@ RSpec.describe "users/show.html.haml", type: :view do
   before do
     allow(Errbit::Config).to receive(:github_authentication).and_return(true)
     allow(controller).to receive(:current_user).and_return(stub_model(User))
-    allow(view).to receive(:user).and_return(user)
+    assign(:user, user)
   end
 
   context "with GitHub authentication" do

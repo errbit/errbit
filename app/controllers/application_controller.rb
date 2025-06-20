@@ -1,18 +1,22 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   protect_from_forgery
 
   before_action :authenticate_user_from_token!
   before_action :authenticate_user!
   before_action :set_time_zone
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
 
   def require_admin!
     return if user_signed_in? && current_user.admin?
 
-    flash[:error] = "Sorry, you don't have permission to do that"
+    flash[:error] = t("controllers.application.require_admin")
 
     redirect_to root_path
   end
@@ -26,5 +30,11 @@ class ApplicationController < ActionController::Base
     user = user_token && User.find_by(authentication_token: user_token)
 
     sign_in user, store: false if user
+  end
+
+  def user_not_authorized
+    flash[:alert] = t("controllers.application.user_not_authorized")
+
+    redirect_to root_path
   end
 end

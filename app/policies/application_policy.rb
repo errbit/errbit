@@ -44,6 +44,10 @@ class ApplicationPolicy
     Pundit.policy_scope!(user, record.class)
   end
 
+  def permitted_attributes
+    raise NotImplementedError, "You must define #permitted_attributes in #{self.class}"
+  end
+
   class Scope
     attr_reader :user, :scope
 

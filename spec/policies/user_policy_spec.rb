@@ -5,9 +5,14 @@ require "rails_helper"
 RSpec.describe UserPolicy do
   subject { described_class.new(user, record) }
 
+  it do
+    expect(described_class::FIELDS)
+      .to eq([:name, :username, :email, :password, :github_login, :per_page, :time_zone, :password, :password_confirmation])
+  end
+
   describe "#initialize" do
     context "when user not present" do
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user) }
 
       let(:user) { nil }
 
@@ -16,16 +21,16 @@ RSpec.describe UserPolicy do
   end
 
   describe "#index" do
-    let(:record) { Fabricate(:user) }
+    let(:record) { create(:user, admin: false) }
 
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       it { is_expected.to forbid_action(:index) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:index) }
     end
@@ -33,23 +38,23 @@ RSpec.describe UserPolicy do
 
   describe "#show?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:show) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:show) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -59,7 +64,7 @@ RSpec.describe UserPolicy do
 
   describe "#create?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       let(:record) { User.new }
 
@@ -67,7 +72,7 @@ RSpec.describe UserPolicy do
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { User.new }
 
@@ -77,7 +82,7 @@ RSpec.describe UserPolicy do
 
   describe "#new?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
       let(:record) { User.new }
 
@@ -85,7 +90,7 @@ RSpec.describe UserPolicy do
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { User.new }
 
@@ -95,23 +100,23 @@ RSpec.describe UserPolicy do
 
   describe "#update?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:update) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:update) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -121,23 +126,23 @@ RSpec.describe UserPolicy do
 
   describe "#edit?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:edit) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:edit) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
@@ -147,27 +152,55 @@ RSpec.describe UserPolicy do
 
   describe "#destroy?" do
     context "when user is an admin" do
-      let(:user) { Fabricate(:admin) }
+      let(:user) { create(:user, admin: true) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to permit_action(:destroy) }
     end
 
     context "when user is not an admin" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
-      let(:record) { Fabricate(:user) }
+      let(:record) { create(:user, admin: false) }
 
       it { is_expected.to forbid_action(:destroy) }
     end
 
     context "when user is an owner" do
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:record) { user }
 
       it { is_expected.to forbid_action(:destroy) }
+    end
+  end
+
+  describe "#permitted_attributes" do
+    context "when user is an admin" do
+      context "when user is an admin and record is the same user as admin" do
+        let(:user) { create(:user, admin: true) }
+
+        let(:record) { user }
+
+        it { expect(subject.permitted_attributes).to eq(described_class::FIELDS) }
+      end
+
+      context "when user is an admin and record is not the same user as admin" do
+        let(:user) { create(:user, admin: true) }
+
+        let(:record) { create(:user, admin: false) }
+
+        it { expect(subject.permitted_attributes).to eq(described_class::FIELDS + [:admin]) }
+      end
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      let(:record) { create(:user, admin: false) }
+
+      it { expect(subject.permitted_attributes).to eq(described_class::FIELDS) }
     end
   end
 end
@@ -175,9 +208,9 @@ end
 RSpec.describe UserPolicy::Scope do
   describe "#resolve" do
     context "when user is an admin" do
-      let(:admin) { Fabricate(:admin) }
+      let(:admin) { create(:user, admin: true) }
 
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:scope) { User }
 
@@ -187,9 +220,9 @@ RSpec.describe UserPolicy::Scope do
     end
 
     context "when user is not an admin" do
-      let!(:admin) { Fabricate(:admin) }
+      let!(:admin) { create(:user, admin: true) }
 
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user, admin: false) }
 
       let(:scope) { User }
 
