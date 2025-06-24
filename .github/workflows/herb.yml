@@ -34,4 +34,4 @@ jobs:
           bundler: "latest"
           bundler-cache: true
 
-      - run: bin/herb analyze . --json
+      - run: bin/herb analyze .
