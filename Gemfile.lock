@@ -204,6 +204,16 @@ GEM
       tilt
     hashdiff (1.2.0)
     hashie (5.0.0)
+    herb (0.3.1)
+    herb (0.3.1-aarch64-linux-gnu)
+    herb (0.3.1-aarch64-linux-musl)
+    herb (0.3.1-arm-linux-gnu)
+    herb (0.3.1-arm-linux-musl)
+    herb (0.3.1-arm64-darwin)
+    herb (0.3.1-x86-linux-gnu)
+    herb (0.3.1-x86_64-darwin)
+    herb (0.3.1-x86_64-linux-gnu)
+    herb (0.3.1-x86_64-linux-musl)
     hoi (0.0.7)
       httparty
       json
@@ -661,6 +671,7 @@ DEPENDENCIES
   faraday-retry
   font-awesome-rails
   haml
+  herb
   hoi
   hoptoad_notifier!
   htmlentities
@@ -794,6 +805,16 @@ CHECKSUMS
   haml (6.3.0) sha256=8e6eb87d869639e348852009e74a2a1663d79663ed7e7dbcb38beb1f12bcdd97
   hashdiff (1.2.0) sha256=c984f13e115bfc9953332e8e83bd9d769cfde9944e2d54e07eb9df7b76e140b5
   hashie (5.0.0) sha256=9d6c4e51f2a36d4616cbc8a322d619a162d8f42815a792596039fc95595603da
+  herb (0.3.1) sha256=93fbd856a657bdc83df15d0adf0d1b0e4a11bdafd323e83e11dc1569884c8bf8
+  herb (0.3.1-aarch64-linux-gnu) sha256=de310c01838983c756b76db0b5bf342f064bd878ba5544a754b6beb26f5e8d41
+  herb (0.3.1-aarch64-linux-musl) sha256=61f987a5118563a4f72863269509759e7c37f683b781181a375d9f121cecf264
+  herb (0.3.1-arm-linux-gnu) sha256=d55ece588e1edfcd1478c7bfbda289f5eafce166301493ec5cff651b7b393fb1
+  herb (0.3.1-arm-linux-musl) sha256=99a4d1c3e12322eb264408e9ab54f7b3025731be0a6a4e6cbd3f0d89b3b26dbf
+  herb (0.3.1-arm64-darwin) sha256=4e2da5ae68191bef5bb249a3f5b2550af2439aad023599bfb896e23543c3f972
+  herb (0.3.1-x86-linux-gnu) sha256=fa964fcca95c2cce41b0aae418857f369031bb874ea9606661ee0e3d877e85f3
+  herb (0.3.1-x86_64-darwin) sha256=0d15f69a40b6868e7389bab62a5615f3d38735fcc62f4cb636d110b2e5c86abc
+  herb (0.3.1-x86_64-linux-gnu) sha256=f451d92b9df72ea860f54a721353806c2d616e8c9e770a52afae0ccb382601c6
+  herb (0.3.1-x86_64-linux-musl) sha256=98fc969aff334cfd0f5427ee37790356df158b532cc795ea6a31b3e5bc27921d
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   hoptoad_notifier (2.4.11)
   htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
