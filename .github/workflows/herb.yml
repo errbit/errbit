@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  standard:
+  run:
     runs-on: ubuntu-24.04
 
     steps:
@@ -34,4 +34,4 @@ jobs:
           bundler: "latest"
           bundler-cache: true
 
-      - run: bin/herb analyze .
+      - run: bin/herb analyze . --json
