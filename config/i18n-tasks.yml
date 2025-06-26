@@ -33,6 +33,8 @@ data:
   external:
     ## Example (replace %#= with %=):
     # - "<%#= %x[bundle info vagrant --path].chomp %>/templates/locales/%{locale}.yml"
+    - "<%= %x[bundle info kaminari-core --path].chomp %>/config/locales/*.yml"
+    - "<%= %x[bundle info kaminari-i18n --path].chomp %>/config/locales/*.yml"
 
   ## Specify the router (see Readme for details). Valid values: conservative_router, pattern_router, isolating_router, or a custom class.
   # router: conservative_router
