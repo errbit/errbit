@@ -18,10 +18,8 @@ en:
       custom_backtrace_url_template: Custom Backtrace URL Template
       github_repo: GitHub Repo
       latest_app_version: Latest App Version
-      latest_app_version_help: 'Mobile apps can set this to ignore any error below
-        this version. ie: 1.4.3'
-      latest_app_version_placeholder: e.g. 2.0.1 from the Bundle Identifier on an
-        iOS app
+      latest_app_version_help: 'Mobile apps can set this to ignore any error below this version. ie: 1.4.3'
+      latest_app_version_placeholder: e.g. 2.0.1 from the Bundle Identifier on an iOS app
       name: Name
       notifications: Notifications
       notify_all_users: Send notifications to all users
@@ -97,18 +95,14 @@ en:
         no_select_problem: You have not selected any errors
   devise:
     google_login:
-      domain_unauthorized: Account's email domain is not authorized for login. Please
-        log in with an account from a trusted domain.
+      domain_unauthorized: Account's email domain is not authorized for login. Please log in with an account from a trusted domain.
     omniauth_callbacks:
       failure: Could not authenticate you from %{kind} because "%{reason}".
       success: Successfully authenticated from %{kind} account.
     registrations:
-      signed_up_but_inactive: You have signed up successfully. However, we could not
-        sign you in because your account is not yet activated.
-      signed_up_but_locked: You have signed up successfully. However, we could not
-        sign you in because your account is locked.
-      signed_up_but_unconfirmed: A message with a confirmation link has been sent
-        to your email address. Please open the link to activate your account.
+      signed_up_but_inactive: You have signed up successfully. However, we could not sign you in because your account is not yet activated.
+      signed_up_but_locked: You have signed up successfully. However, we could not sign you in because your account is locked.
+      signed_up_but_unconfirmed: A message with a confirmation link has been sent to your email address. Please open the link to activate your account.
     sessions:
       new:
         sign_in: Sign in
@@ -137,8 +131,7 @@ en:
     one: "%{count} error has"
     other: "%{count} errors have"
   notice_fingerprinter:
-    text: The notice fingerprinter governs how error notifications are grouped. Each
-      item counts toward an error's uniqueness if enabled.
+    text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
     title: Notice Fingerprinter
   notices:
     summary:
@@ -237,8 +230,7 @@ en:
       update_config: Update Config
   users:
     create:
-      success: "%{name} is now part of the team. Be sure to add them as a project
-        watcher."
+      success: "%{name} is now part of the team. Be sure to add them as a project watcher."
     destroy:
       error: You can't delete yourself
       success: That's sad. %{name} is no longer part of your team.
