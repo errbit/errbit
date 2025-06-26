@@ -1,255 +1,59 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  flash:
-    apps:
-      create:
-        success: Great success! Configure your app with the API key below
-      update:
-        success: "Good news everyone! '%{app_name}' was successfully updated."
-      destroy:
-        success: "'%{app_name}' was successfully destroyed."
-  n_errs:
-    one: "%{count} error"
-    other: "%{count} errors"
-    will_be_deleted: will be deleted
-  n_errs_have:
-    one: "%{count} error has"
-    other: "%{count} errors have"
-    been_resolved: been resolved
-    been_unresolved: been unresolved
-    been_unmerged: been unmerged
-    been_deleted: been deleted
-  layouts:
-    application:
-      title: "Errbit"
-      errbit: "Errbit"
-      powered_html: "Powered by %{link} : the open source error catcher."
-
-  shared:
-    navigation:
-      apps: "Apps"
-      errors: "Errors"
-      users: "Users"
-      config: "Config"
-    session:
-      sign_out: "Sign out"
-      edit_profile: "Edit profile"
-    notice_fingerprinter:
-      error_class: Error Class
-      message: Error Message
-      backtrace_lines: Number of backtrace lines (-1 for unlimited)
-      component: Component (or controller)
-      action: Action
-      environment_name: Environment name
-
-  controllers:
-    application:
-      require_admin: "Sorry, you don't have permission to do that"
-      user_not_authorized: "You are not authorized to perform this action."
-    apps:
-      flash:
-        create:
-          success: "Your app was successfully created."
-          error: "Your app could not be created."
-        update:
-          success: "Your app was successfully updated."
-          error: "Your app could not be updated."
-        destroy:
-          success: "Your app was successfully destroyed."
-          error: "Your app could not be destroyed."
-    problems:
-      flash:
-        no_select_problem: "You have not selected any errors"
-        need_two_errors_merge: "You must select at least two errors to merge"
-        merge_several:
-          success: "%{nb} errors have been merged."
-  devise:
-    registrations:
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
-      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
-      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-    omniauth_callbacks:
-      failure: 'Could not authenticate you from %{kind} because "%{reason}".'
-      success: "Successfully authenticated from %{kind} account."
-    google_login:
-      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
-    sessions:
-      new:
-        sign_in: "Sign in"
-  problems:
-    index:
-      all_errors: "All Errors"
-      unresolved_errors: "Unresolved Errors"
-      hide_resolved: "hide resolved"
-      show_resolved: "show resolved"
-    table:
-      app: App
-      env: Env
-      what_and_where_html: "Where &amp; What"
-      latest: Latest
-      count: Count
-      merge: Merge
-      unmerge: Unmerge
-      resolve: Resolve
-      unresolve: Unresolve
-      delete: Delete
-      ago: ago
-    confirm:
-      delete: "Permanently delete selected issues?"
-      resolve: "Resolve selected issues? They can be unresolved later."
-      resolve_one: "Resolve this issue? It can be unresolved later."
-      merge: "Merge select issues? They can be unmerged later."
-      unmerge: "Unmerge selected issues? They can be re-merged later."
-      unresolve: "Unresolve selected issues? They can be resolved again later."
-    search:
-      search_placeholder: "Search for issues"
-    resolve:
-      the_error_has_been_resolved: "Great news everyone! The error has been resolved."
-    show:
-      comments: Comments
-      add_a_comment: Add a comment
-      save_comment: Save comment
-      summary: Summary
-      backtrace: Backtrace
-      user: User
-      parameters: Parameters
-      session: Session
-      ago_by: ago by
-      ago_by_unknown_user: ago by [Unknown User]
-      first_notice: First Notice
-      last_notice: Last Notice
-      environment: Environment
-      app: App
-      where: Where
-      up: up
-      resolve: resolve
-      notice_by_id: "Notice: %{notice_id}"
-    sparkline:
-      graph-2-weeks: Graph (2 weeks)
-      graph-24-hours: Graph (24 hours)
-  comments:
-    confirm_delete: "Permanently delete this comment?"
-  users:
-    index:
-      new: Add a New User
-      title: Users
-      name: Name
-      username: Username
-      email: Email
-      admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
-    show:
-      name: Name
-      email: Email
-      username: Username
-      admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
-      created: Created
-      edit: edit
-      destroy: destroy
-      confirm_delete: "Permanently delete this user?"
-    new:
-      title: New User
-      cancel: cancel
-      add_user: Add User
-    edit:
-      title: Edit
-      cancel: cancel
-      update_user: Update User
-    create:
-      success: "%{name} is now part of the team. Be sure to add them as a project watcher."
-    update:
-      success: "%{name}'s information was successfully updated."
-    destroy:
-      success: "That's sad. %{name} is no longer part of your team."
-      error: "You can't delete yourself"
-    fields:
-      name: Name
-      username: Username
-      email: Email
-      entries: Entries per page
-      time_zone: Time Zone
-      password: Password
-      password_confirmation: Password Confirmation
-      admin: Admin?
   apps:
-    confirm_delete: "Permanently delete this app?"
-    confirm_destroy_all_problems: "Permanently delete all of this app's errors?"
-    index:
-      title: Apps
-      new_app: Add a New App
-    table:
-      name: Name
-      repository: Repository
-      notify: Notification Service
-      tracker: Tracker
-      errors: Errors
-      no_apps: "No apps here."
-      click_to_create: "Click here to create your first one"
+    confirm_delete: Permanently delete this app?
+    confirm_destroy_all_problems: Permanently delete all of this app's errors?
+    edit:
+      cancel: cancel
+      destroy: destroy application
+      seriously: Seriously?
+      title: Edit App
+      update: Update App
     fields:
-      name: Name
       api_key: API Key
-      repository_branch: Repo Branch
-      github_repo: GitHub Repo
-      bitbucket_repo: BitBucket Repo
-      custom_backtrace_url_template: Custom Backtrace URL Template
       asset_host: Asset Host
       asset_host_help: Used to generate links for JavaScript errors
-      asset_host_placeholder: "e.g. https://assets.example.com"
+      asset_host_placeholder: e.g. https://assets.example.com
+      bitbucket_repo: BitBucket Repo
+      custom_backtrace_url_template: Custom Backtrace URL Template
+      github_repo: GitHub Repo
       latest_app_version: Latest App Version
-      latest_app_version_help: "Mobile apps can set this to ignore any error below this version. ie: 1.4.3"
-      latest_app_version_placeholder: "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
+      latest_app_version_help: 'Mobile apps can set this to ignore any error below
+        this version. ie: 1.4.3'
+      latest_app_version_placeholder: e.g. 2.0.1 from the Bundle Identifier on an
+        iOS app
+      name: Name
       notifications: Notifications
-      notify_on_errors: Notify on errors
       notify_all_users: Send notifications to all users
-      regenerate_api_key: "Regenerate API Key"
-      use_site_fingerprinter: "Use Site Fingerprinter"
+      notify_on_errors: Notify on errors
+      regenerate_api_key: Regenerate API Key
+      repository_branch: Repo Branch
+      use_site_fingerprinter: Use Site Fingerprinter
+    index:
+      new_app: Add a New App
+      title: Apps
+    issue_tracker_fields:
+      legend: Issue Tracker
+    new:
+      add_app: Add App
+      cancel: cancel
+      title: Add App
+    search:
+      search_placeholder: Search for application
     show:
       all_errs: all errors
-      all_users_notified: "All users will be notified when something happens."
-      api_key: "API Key:"
-      are_you_sure: "Are you sure?"
-      atom_title: "Errbit notices for %{name} at %{host}"
+      all_users_notified: All users will be notified when something happens.
+      api_key: 'API Key:'
+      are_you_sure: Are you sure?
+      atom_title: Errbit notices for %{name} at %{host}
       edit: edit
       environment: Environment
       errors: Errors
-      errors_caught: "Errors Caught:"
+      errors_caught: 'Errors Caught:'
       github_repo: GitHub Repo
       message: Message
-      no_error_yet: "No errors have been caught yet, make sure you set up your app"
-      no_watcher: "Sadly, no one is watching this app"
+      no_error_yet: No errors have been caught yet, make sure you set up your app
+      no_watcher: Sadly, no one is watching this app
       repository: Repository
       revision: Revision
       show_hide: "(show/hide)"
@@ -260,53 +64,225 @@ en:
       watchers: Watchers
       when: When
       who: Who
-    issue_tracker_fields:
-      legend: Issue Tracker
-    new:
-      add_app: "Add App"
-      cancel: "cancel"
-      title: "Add App"
-    edit:
-      title: "Edit App"
-      destroy: "destroy application"
-      cancel: "cancel"
-      seriously: "Seriously?"
-      update: "Update App"
-    search:
-      search_placeholder: "Search for application"
-  watchers:
-    destroy:
-      success: "You are no longer watching %{app}"
-    update:
-      success: "You are now watching %{app}"
-  site_config:
-    index:
-      title: Config
-      cancel: cancel
-      error_class: Error Class
-      message: Error Message
-      backtrace_lines: Number of backtrace lines (-1 for unlimited)
-      component: Component (or controller)
-      action: Action
-      environment_name: Environment name
-      update_config: Update Config
+    table:
+      click_to_create: Click here to create your first one
+      errors: Errors
+      name: Name
+      no_apps: No apps here.
+      notify: Notification Service
+      repository: Repository
+      tracker: Tracker
+  comments:
+    confirm_delete: Permanently delete this comment?
+  controllers:
+    application:
+      require_admin: Sorry, you don't have permission to do that
+      user_not_authorized: You are not authorized to perform this action.
+    apps:
+      flash:
+        create:
+          error: Your app could not be created.
+          success: Your app was successfully created.
+        destroy:
+          error: Your app could not be destroyed.
+          success: Your app was successfully destroyed.
+        update:
+          error: Your app could not be updated.
+          success: Your app was successfully updated.
+    problems:
+      flash:
+        merge_several:
+          success: "%{nb} errors have been merged."
+        need_two_errors_merge: You must select at least two errors to merge
+        no_select_problem: You have not selected any errors
+  devise:
+    google_login:
+      domain_unauthorized: Account's email domain is not authorized for login. Please
+        log in with an account from a trusted domain.
+    omniauth_callbacks:
+      failure: Could not authenticate you from %{kind} because "%{reason}".
+      success: Successfully authenticated from %{kind} account.
+    registrations:
+      signed_up_but_inactive: You have signed up successfully. However, we could not
+        sign you in because your account is not yet activated.
+      signed_up_but_locked: You have signed up successfully. However, we could not
+        sign you in because your account is locked.
+      signed_up_but_unconfirmed: A message with a confirmation link has been sent
+        to your email address. Please open the link to activate your account.
+    sessions:
+      new:
+        sign_in: Sign in
+  flash:
+    apps:
+      create:
+        success: Great success! Configure your app with the API key below
+      destroy:
+        success: "'%{app_name}' was successfully destroyed."
+      update:
+        success: Good news everyone! '%{app_name}' was successfully updated.
+  layouts:
+    application:
+      errbit: Errbit
+      powered_html: 'Powered by %{link} : the open source error catcher.'
+      title: Errbit
+  n_errs:
+    one: "%{count} error"
+    other: "%{count} errors"
+    will_be_deleted: will be deleted
+  n_errs_have:
+    been_deleted: been deleted
+    been_resolved: been resolved
+    been_unmerged: been unmerged
+    been_unresolved: been unresolved
+    one: "%{count} error has"
+    other: "%{count} errors have"
+  notice_fingerprinter:
+    text: The notice fingerprinter governs how error notifications are grouped. Each
+      item counts toward an error's uniqueness if enabled.
+    title: Notice Fingerprinter
   notices:
     summary:
-      message: Message
-      error_class: Error Class
-      url: URL
-      where: Where
-      occurred: Occurred
-      similar: Similar
-      browser: Browser
-      tenant: Origin
       app_server: App Server
       app_version: App Version
+      browser: Browser
+      error_class: Error Class
       framework: Framework
+      message: Message
+      occurred: Occurred
       relative_directory: Rel. Directory
-  notice_fingerprinter:
-    title: Notice Fingerprinter
-    text: The notice fingerprinter governs how error notifications are grouped. Each item counts toward an error's uniqueness if enabled.
+      similar: Similar
+      tenant: Origin
+      url: URL
+      where: Where
   paginator:
-    viewing_occurrence: viewing occurrence
     of: of
+    viewing_occurrence: viewing occurrence
+  problems:
+    confirm:
+      delete: Permanently delete selected issues?
+      merge: Merge select issues? They can be unmerged later.
+      resolve: Resolve selected issues? They can be unresolved later.
+      resolve_one: Resolve this issue? It can be unresolved later.
+      unmerge: Unmerge selected issues? They can be re-merged later.
+      unresolve: Unresolve selected issues? They can be resolved again later.
+    index:
+      all_errors: All Errors
+      hide_resolved: hide resolved
+      show_resolved: show resolved
+      unresolved_errors: Unresolved Errors
+    resolve:
+      the_error_has_been_resolved: Great news everyone! The error has been resolved.
+    search:
+      search_placeholder: Search for issues
+    show:
+      add_a_comment: Add a comment
+      ago_by: ago by
+      ago_by_unknown_user: ago by [Unknown User]
+      app: App
+      backtrace: Backtrace
+      comments: Comments
+      environment: Environment
+      first_notice: First Notice
+      last_notice: Last Notice
+      notice_by_id: 'Notice: %{notice_id}'
+      parameters: Parameters
+      resolve: resolve
+      save_comment: Save comment
+      session: Session
+      summary: Summary
+      up: up
+      user: User
+      where: Where
+    sparkline:
+      graph-2-weeks: Graph (2 weeks)
+      graph-24-hours: Graph (24 hours)
+    table:
+      ago: ago
+      app: App
+      count: Count
+      delete: Delete
+      env: Env
+      latest: Latest
+      merge: Merge
+      resolve: Resolve
+      unmerge: Unmerge
+      unresolve: Unresolve
+      what_and_where_html: Where &amp; What
+  shared:
+    navigation:
+      apps: Apps
+      config: Config
+      errors: Errors
+      users: Users
+    notice_fingerprinter:
+      action: Action
+      backtrace_lines: Number of backtrace lines (-1 for unlimited)
+      component: Component (or controller)
+      environment_name: Environment name
+      error_class: Error Class
+      message: Error Message
+    session:
+      edit_profile: Edit profile
+      sign_out: Sign out
+  site_config:
+    index:
+      action: Action
+      backtrace_lines: Number of backtrace lines (-1 for unlimited)
+      cancel: cancel
+      component: Component (or controller)
+      environment_name: Environment name
+      error_class: Error Class
+      message: Error Message
+      title: Config
+      update_config: Update Config
+  users:
+    create:
+      success: "%{name} is now part of the team. Be sure to add them as a project
+        watcher."
+    destroy:
+      error: You can't delete yourself
+      success: That's sad. %{name} is no longer part of your team.
+    edit:
+      cancel: cancel
+      title: Edit
+      update_user: Update User
+    fields:
+      admin: Admin?
+      email: Email
+      entries: Entries per page
+      name: Name
+      password: Password
+      password_confirmation: Password Confirmation
+      time_zone: Time Zone
+      username: Username
+    index:
+      admin: Admin?
+      admin_no: 'No'
+      admin_yes: 'Yes'
+      email: Email
+      name: Name
+      new: Add a New User
+      title: Users
+      username: Username
+    new:
+      add_user: Add User
+      cancel: cancel
+      title: New User
+    show:
+      admin: Admin?
+      admin_no: 'No'
+      admin_yes: 'Yes'
+      confirm_delete: Permanently delete this user?
+      created: Created
+      destroy: destroy
+      edit: edit
+      email: Email
+      name: Name
+      username: Username
+    update:
+      success: "%{name}'s information was successfully updated."
+  watchers:
+    destroy:
+      success: You are no longer watching %{app}
+    update:
+      success: You are now watching %{app}
