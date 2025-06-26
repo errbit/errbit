@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "rails", "8.0.2"
 
+gem "rails-i18n"
 gem "sprockets-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
@@ -19,6 +20,7 @@ gem "haml"
 gem "htmlentities"
 gem "kaminari"
 gem "kaminari-mongoid"
+gem "kaminari-i18n"
 gem "mongoid"
 gem "faraday-retry"
 gem "octokit"
@@ -89,6 +91,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "i18n-tasks", require: false
   gem "listen", "~> 3.5"
   gem "bundler-audit", require: false
 end
