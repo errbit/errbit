@@ -18,7 +18,7 @@ en:
       custom_backtrace_url_template: Custom Backtrace URL Template
       github_repo: GitHub Repo
       latest_app_version: Latest App Version
-      latest_app_version_help: 'Mobile apps can set this to ignore any error below this version. ie: 1.4.3'
+      latest_app_version_help: "Mobile apps can set this to ignore any error below this version. ie: 1.4.3"
       latest_app_version_placeholder: e.g. 2.0.1 from the Bundle Identifier on an iOS app
       name: Name
       notifications: Notifications
@@ -41,13 +41,13 @@ en:
     show:
       all_errs: all errors
       all_users_notified: All users will be notified when something happens.
-      api_key: 'API Key:'
+      api_key: "API Key:"
       are_you_sure: Are you sure?
       atom_title: Errbit notices for %{name} at %{host}
       edit: edit
       environment: Environment
       errors: Errors
-      errors_caught: 'Errors Caught:'
+      errors_caught: "Errors Caught:"
       github_repo: GitHub Repo
       message: Message
       no_error_yet: No errors have been caught yet, make sure you set up your app
@@ -117,7 +117,7 @@ en:
   layouts:
     application:
       errbit: Errbit
-      powered_html: 'Powered by %{link} : the open source error catcher.'
+      powered_html: "Powered by %{link} : the open source error catcher."
       title: Errbit
   n_errs:
     one: "%{count} error"
@@ -177,7 +177,7 @@ en:
       environment: Environment
       first_notice: First Notice
       last_notice: Last Notice
-      notice_by_id: 'Notice: %{notice_id}'
+      notice_by_id: "Notice: %{notice_id}"
       parameters: Parameters
       resolve: resolve
       save_comment: Save comment
@@ -249,8 +249,8 @@ en:
       username: Username
     index:
       admin: Admin?
-      admin_no: 'No'
-      admin_yes: 'Yes'
+      admin_no: "No"
+      admin_yes: "Yes"
       email: Email
       name: Name
       new: Add a New User
@@ -262,8 +262,8 @@ en:
       title: New User
     show:
       admin: Admin?
-      admin_no: 'No'
-      admin_yes: 'Yes'
+      admin_no: "No"
+      admin_yes: "Yes"
       confirm_delete: Permanently delete this user?
       created: Created
       destroy: destroy

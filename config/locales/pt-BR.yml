@@ -13,12 +13,12 @@ pt-BR:
       api_key: Chave de Acesso
       asset_host: Servidor de 'Assets'
       asset_host_help: Usado para gerar links dos erros JavaScript
-      asset_host_placeholder: 'ex.: https://assets.example.com'
+      asset_host_placeholder: "ex.: https://assets.example.com"
       bitbucket_repo: Repositório do BitBucket
       github_repo: Repositório do GitHub
       latest_app_version: Última versão da aplicação
-      latest_app_version_help: 'Aplicações móveis podem atribuir valor a este campo afim de ignorar qualquer erro abaixo desta versão. ex: 1.4.3'
-      latest_app_version_placeholder: 'ex: 2.0.1 do identificador de pacote em um app IOS'
+      latest_app_version_help: "Aplicações móveis podem atribuir valor a este campo afim de ignorar qualquer erro abaixo desta versão. ex: 1.4.3"
+      latest_app_version_placeholder: "ex: 2.0.1 do identificador de pacote em um app IOS"
       name: Name
       notifications: Notificações
       notify_all_users: Enviar notificações para todos os usuários
@@ -40,13 +40,13 @@ pt-BR:
     show:
       all_errs: todos os errors
       all_users_notified: Todos os usuários serão notificados quando algo acontecer.
-      api_key: 'Chave de Acesso da API:'
+      api_key: "Chave de Acesso da API:"
       are_you_sure: Está certo disto?
       atom_title: Notificações do Errbit para %{name} em %{host}
       edit: editar
       environment: Ambiente
       errors: Erros
-      errors_caught: 'Erros Capturados:'
+      errors_caught: "Erros Capturados:"
       github_repo: Repositório GitHub
       message: Mensagem
       no_error_yet: Nenhum erro foi capturado até então, certifique-se de que sua aplicação está configurada
@@ -116,7 +116,7 @@ pt-BR:
   layouts:
     application:
       errbit: Errbit
-      powered_html: 'Powered by %{link} : the open source error catcher.'
+      powered_html: "Powered by %{link} : the open source error catcher."
       title: Errbit
   n_errs:
     one: "%{count} erro"
@@ -176,7 +176,7 @@ pt-BR:
       environment: Ambiente
       first_notice: Primeiro notificação
       last_notice: Última notificação
-      notice_by_id: 'notificação: %{notice_id}'
+      notice_by_id: "notificação: %{notice_id}"
       parameters: Parâmetros
       resolve: resolver
       save_comment: Salvar comentário

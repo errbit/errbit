@@ -103,7 +103,6 @@ search:
   ## Multiple scanners can be used. Their results are merged.
   ## The options specified above are passed down to each scanner. Per-scanner options can be specified as well.
   ## See this example of a custom scanner: https://github.com/glebm/i18n-tasks/wiki/A-custom-scanner-example
-
 ## Translation Services
 # translation:
 #   # Google Translate
