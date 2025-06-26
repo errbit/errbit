@@ -703,6 +703,7 @@ DEPENDENCIES
   rack-timeout
   rails (= 8.0.2)
   rails-controller-testing
+  rails-i18n
   rails_autolink
   rexml
   ri_cal
