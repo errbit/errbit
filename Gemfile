@@ -86,6 +86,7 @@ group :development, :test do
   gem "faker"
   gem "factory_bot_rails"
   gem "brakeman", require: false
+  gem "herb", require: false
 end
 
 group :development do
