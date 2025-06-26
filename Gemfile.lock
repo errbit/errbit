@@ -204,6 +204,8 @@ GEM
       tilt
     hashdiff (1.2.0)
     hashie (5.0.0)
+    highline (3.1.2)
+      reline
     hoi (0.0.7)
       httparty
       json
@@ -217,6 +219,17 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    i18n-tasks (1.0.15)
+      activesupport (>= 4.0.2)
+      ast (>= 2.1.0)
+      erubi
+      highline (>= 2.0.0)
+      i18n
+      parser (>= 3.2.2.1)
+      rails-i18n
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.8, >= 1.8.1)
+      terminal-table (>= 1.5.1)
     io-console (0.8.0)
     irb (1.15.2)
       pp (>= 0.6.0)
@@ -427,6 +440,9 @@ GEM
     rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
+    rails-i18n (8.0.1)
+      i18n (>= 0.7, < 2)
+      railties (>= 8.0.0, < 9)
     rails_autolink (1.1.8)
       actionview (> 3.1)
       activesupport (> 3.1)
@@ -585,6 +601,8 @@ GEM
       diff-lcs
       patience_diff
     temple (0.10.3)
+    terminal-table (4.0.0)
+      unicode-display_width (>= 1.1.1, < 4)
     thor (1.3.2)
     thruster (0.1.14)
     thruster (0.1.14-aarch64-linux)
@@ -662,6 +680,7 @@ DEPENDENCIES
   hoptoad_notifier!
   htmlentities
   httparty
+  i18n-tasks
   jquery-rails
   json
   kaminari
@@ -790,6 +809,7 @@ CHECKSUMS
   haml (6.3.0) sha256=8e6eb87d869639e348852009e74a2a1663d79663ed7e7dbcb38beb1f12bcdd97
   hashdiff (1.2.0) sha256=c984f13e115bfc9953332e8e83bd9d769cfde9944e2d54e07eb9df7b76e140b5
   hashie (5.0.0) sha256=9d6c4e51f2a36d4616cbc8a322d619a162d8f42815a792596039fc95595603da
+  highline (3.1.2) sha256=67cbd34d19f6ef11a7ee1d82ffab5d36dfd5b3be861f450fc1716c7125f4bb4a
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   hoptoad_notifier (2.4.11)
   htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
@@ -797,6 +817,7 @@ CHECKSUMS
   http-cookie (1.0.8) sha256=b14fe0445cf24bf9ae098633e9b8d42e4c07c3c1f700672b09fbfe32ffd41aa6
   httparty (0.23.1) sha256=3ac1dd62f2010f6ece551716f5ceec2b2012011d89f1751917ab7f724e966b55
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
+  i18n-tasks (1.0.15) sha256=74f3e9e0e2db5d757c58e659f4269ee698c7a7532ed29066a2aaffc9efbdfb56
   io-console (0.8.0) sha256=cd6a9facbc69871d69b2cb8b926fc6ea7ef06f06e505e81a64f14a470fddefa2
   irb (1.15.2) sha256=222f32952e278da34b58ffe45e8634bf4afc2dc7aa9da23fed67e581aa50fdba
   jquery-rails (4.6.0) sha256=3c4e6bf47274340b44d836b8aa1b5472c6d451e2739af5ec094421f39025a7e2
@@ -881,6 +902,7 @@ CHECKSUMS
   rails-controller-testing (1.0.5) sha256=741448db59366073e86fc965ba403f881c636b79a2c39a48d0486f2607182e94
   rails-dom-testing (2.3.0) sha256=8acc7953a7b911ca44588bf08737bc16719f431a1cc3091a292bca7317925c1d
   rails-html-sanitizer (1.6.2) sha256=35fce2ca8242da8775c83b6ba9c1bcaad6751d9eb73c1abaa8403475ab89a560
+  rails-i18n (8.0.1) sha256=15303195450bdac9a80636cf14c7e5ada2f43907cc60fcd19bbb3f81ab45be0d
   rails_autolink (1.1.8) sha256=fbcb9d2e5f2cea9435a32e5f12556c7a9b7ed6867889fb9cf5eac405049bfc3a
   railties (8.0.2) sha256=0d7c3f40c49ba74980f1bac1d4bb153a9331c5ee8a9631d89c7bf79db82e5cf9
   rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
@@ -933,6 +955,7 @@ CHECKSUMS
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   super_diff (0.16.0) sha256=be915d5fcf13a50595cfb473ed07c2c3c5cb28e9e96424365108d77fdd47cad9
   temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b
+  terminal-table (4.0.0) sha256=f504793203f8251b2ea7c7068333053f0beeea26093ec9962e62ea79f94301d2
   thor (1.3.2) sha256=eef0293b9e24158ccad7ab383ae83534b7ad4ed99c09f96f1a6b036550abbeda
   thruster (0.1.14) sha256=3457167768ef1ad5e5872859a91ed44cedad226a4265f9bd281aad0aafe99074
   thruster (0.1.14-aarch64-linux) sha256=b9d5d6909953402478b7b0ea143d5293aa98ed7dd1649fb2e57f886b7512d452
