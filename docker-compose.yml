@@ -1,12 +1,4 @@
 services:
-  errbit:
-    image: "errbit/errbit:latest"
-    ports:
-      - "3000:3000"
-    environment:
-      RAILS_ENV: "production"
-      MONGO_URL: "mongodb://mongo:27017/errbit"
-
   mongo:
     image: "mongo:6.0.23"
     ports:
