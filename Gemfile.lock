@@ -466,7 +466,7 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
-    rspec-core (3.13.4)
+    rspec-core (3.13.5)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -896,7 +896,7 @@ CHECKSUMS
   rexml (3.4.1) sha256=c74527a9a0a04b4ec31dbe0dc4ed6004b960af943d8db42e539edde3a871abca
   ri_cal (0.8.8) sha256=200d7709e693e661b87230c2530e96bbe276591cf552f379bbee3aab86518fba
   rspec-activemodel-mocks (1.2.1) sha256=a2c1a8abb68b42b412bdd0bfc975145d1a950d50176c0b65eca5369bed44a2bb
-  rspec-core (3.13.4) sha256=f9da156b7b775c82610a7b580624df51a55102f8c8e4a103b98f5d7a9fa23958
+  rspec-core (3.13.5) sha256=ab3f682897c6131c67f9a17cfee5022a597f283aebe654d329a565f9937a4fa3
   rspec-expectations (3.13.5) sha256=33a4d3a1d95060aea4c94e9f237030a8f9eae5615e9bd85718fe3a09e4b58836
   rspec-mocks (3.13.5) sha256=e4338a6f285ada9fe56f5893f5457783af8194f5d08884d17a87321d5195ea81
   rspec-rails (8.0.1) sha256=0c3700b10ab6d7c648c4cd554023d8c2b5b07e7f01205f7608f0c511cf686505
