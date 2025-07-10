@@ -8,10 +8,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
-  # Eager load code on boot. This eager loads most of Rails and
-  # your application in memory, allowing both threaded web servers
-  # and those relying on copy on write to perform better.
-  # Rake tasks automatically ignore this option for performance.
+  # Eager load code on boot for better performance and memory savings (ignored by Rake tasks).
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
@@ -80,14 +77,12 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
 
-  # Don't log any deprecations.
-  config.active_support.report_deprecations = false
-
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]
+  #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
