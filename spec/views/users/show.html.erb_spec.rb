@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "users/show.html.erb", type: :view do
   let(:user) do
-    stub_model(User, created_at: Time.zone.now, email: "test@example.com")
+    stub_model(Errbit::User, created_at: Time.zone.now, email: "test@example.com")
   end
 
   before do
     allow(Errbit::Config).to receive(:github_authentication).and_return(true)
+
     allow(controller).to receive(:current_user).and_return(stub_model(User))
+
     assign(:user, user)
   end
 
@@ -33,6 +35,7 @@ RSpec.describe "users/show.html.erb", type: :view do
       it "doesn't show and github linking buttons if user is not current user" do
         render
         expect(view.content_for(:action_bar)).not_to include("Link GitHub account")
+
         expect(view.content_for(:action_bar)).not_to include("Unlink GitHub account")
       end
     end

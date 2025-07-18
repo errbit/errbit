@@ -125,7 +125,7 @@ RSpec.describe Problem, type: :model do
       expect(original_notices_count).to be > 0
 
       problem.resolve!
-      expect(problem.notices_count).to eq original_notices_count
+      expect(problem.notices_count).to eq(original_notices_count)
     end
 
     it "should throw an err if it's not successful" do
@@ -149,7 +149,7 @@ RSpec.describe Problem, type: :model do
       problem1 = create(:notice).problem
       problem2 = create(:notice).problem
       merged_problem = Problem.merge!(problem1, problem2)
-      expect(merged_problem.errs.length).to eq 2
+      expect(merged_problem.errs.length).to eq(2)
 
       expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
       expect(merged_problem.errs(true).length).to eq(1)

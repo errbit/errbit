@@ -31,6 +31,15 @@ class Watcher
     email.blank? ? "chosen" : ""
   end
 
+  # For migration from MongoDB to SQL store.
+  # TODO: remove after migration
+  def attributes_for_migration
+    # TODO: check for missing fields
+    {
+      bson_id: id
+    }
+  end
+
   private
 
   def ensure_user_or_email
