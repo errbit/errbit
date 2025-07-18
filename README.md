@@ -56,7 +56,9 @@ updates and notifications.
 The list of requirements to install Errbit are:
 
 * Ruby 3.4
-* MongoDB >= 7.0
+* PostgreSQL 18
+* MySQL / MariaDB (experimental)
+* SQLite (experimental)
 
 Installation
 ------------
@@ -64,7 +66,6 @@ Installation
 *Note*: This app is intended for people with experience deploying and maintaining
 Rails applications.
 
-* [Install MongoDB](https://www.mongodb.org/downloads)
 * `git clone https://github.com/errbit/errbit.git`
 * `bundle install`
 * `bundle exec rake errbit:bootstrap`
@@ -198,7 +199,7 @@ end
 * Open a `bundle exec rails console` and set the admin flag for your user:
 
 ```ruby
-user = User.first
+user = Errbit::User.first
 user.admin = true
 user.save!
 ```
@@ -365,4 +366,4 @@ Check the [.github/workflows/rspec.yml](.github/workflows/rspec.yml) file to see
 Copyright
 ---------
 
-Copyright (c) 2010-2025 Errbit Team
+Copyright (&copy;) 2010-2025 Errbit Team

@@ -6,7 +6,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise(*Errbit::Config.devise_modules)
+  # devise(*Errbit::Config.devise_modules)
 
   field :email
   field :github_login
@@ -50,28 +50,33 @@ class User
     validates :username, presence: true
   end
 
-  def self.valid_google_domain?(email)
-    return true if Errbit::Config.google_authorized_domains.nil?
+  class << self
+    # @param email [String]
+    def valid_google_domain?(email)
+      return true if Errbit::Config.google_authorized_domains.blank?
 
-    match_data = /.+@(?<domain>.+)$/.match(email)
-    return false if match_data.nil?
+      match_data = /.+@(?<domain>.+)$/.match(email)
 
-    Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
-  end
+      return false if match_data.blank?
 
-  def self.create_from_google_oauth2(access_token)
-    email = access_token.dig(:info, :email)
-    name = access_token.dig(:info, :name)
-    uid = access_token[:uid]
+      Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
+    end
 
-    user = User.where(email: email).first
+    # @param access_token [String]
+    def create_from_google_oauth2(access_token)
+      email = access_token.dig(:info, :email)
+      name = access_token.dig(:info, :name)
+      uid = access_token[:uid]
 
-    user ||= User.create(name: name,
-      email: email,
-      google_uid: uid,
-      password: Devise.friendly_token[0, 20])
+      user = User.where(email: email).first
 
-    user
+      user ||= User.create(name: name,
+        email: email,
+        google_uid: uid,
+        password: Devise.friendly_token[0, 20])
+
+      user
+    end
   end
 
   def per_page
@@ -127,6 +132,34 @@ class User
     {
       id: id.to_s,
       name: name
+    }
+  end
+
+  # For migration from MongoDB to SQL store.
+  # TODO: remove after migration
+  def attributes_for_migration
+    {
+      bson_id: id,
+      email: email,
+      github_login: github_login,
+      github_oauth_token: github_oauth_token,
+      google_uid: google_uid,
+      name: name,
+      admin: admin,
+      per_page: per_page,
+      time_zone: time_zone,
+      encrypted_password: encrypted_password,
+      reset_password_token: reset_password_token,
+      reset_password_sent_at: reset_password_sent_at,
+      remember_created_at: remember_created_at,
+      sign_in_count: sign_in_count,
+      current_sign_in_at: current_sign_in_at,
+      last_sign_in_at: last_sign_in_at,
+      current_sign_in_ip: current_sign_in_ip,
+      last_sign_in_ip: last_sign_in_ip,
+      authentication_token: authentication_token,
+      created_at: created_at,
+      updated_at: updated_at
     }
   end
 
