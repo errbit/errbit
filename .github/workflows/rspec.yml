@@ -16,6 +16,7 @@ permissions:
 
 env:
   CI: "true"
+  RAILS_ENV: "test"
   SE_AVOID_STATS: "true"
 
 jobs:
@@ -54,5 +55,6 @@ jobs:
       - run: bundle exec bootsnap precompile app/ lib/ config/ Rakefile
       - run: bundle exec rails zeitwerk:check
       - run: bundle exec rails assets:precompile
+      - run: bundle exec rails db:create db:migrate
       - run: bundle exec rake errbit:bootstrap
       - run: bundle exec rspec

@@ -4,11 +4,11 @@ class SiteConfigController < ApplicationController
   before_action :require_admin!
 
   def index
-    @config = SiteConfig.document
+    @config = Errbit::SiteConfig.document
   end
 
   def update
-    SiteConfig.document
+    Errbit::SiteConfig.document
       .update(notice_fingerprinter: filtered_update_params.to_h)
 
     flash[:success] = I18n.t("site_config.update.success")
@@ -20,7 +20,7 @@ class SiteConfigController < ApplicationController
 
   def filtered_update_params
     params
-      .require(:site_config)
+      .require(:errbit_site_config)
       .require(:notice_fingerprinter_attributes)
       .permit(
         :error_class,

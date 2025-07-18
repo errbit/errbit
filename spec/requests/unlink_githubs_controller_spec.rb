@@ -6,7 +6,7 @@ RSpec.describe UnlinkGithubsController, type: :request do
   describe "#update" do
     context "when user is logged in" do
       context "when user has access" do
-        let!(:current_user) { create(:user, github_login: "biow0lf", github_oauth_token: "token123") }
+        let!(:current_user) { create(:errbit_user, github_login: "biow0lf", github_oauth_token: "token123") }
 
         before { sign_in(current_user) }
 
@@ -24,9 +24,9 @@ RSpec.describe UnlinkGithubsController, type: :request do
       end
 
       context "when user has not access" do
-        let!(:current_user) { create(:user, admin: false) }
+        let!(:current_user) { create(:errbit_user, admin: false) }
 
-        let!(:user) { create(:user) }
+        let!(:user) { create(:errbit_user) }
 
         before { sign_in(current_user) }
 
@@ -43,7 +43,7 @@ RSpec.describe UnlinkGithubsController, type: :request do
     end
 
     context "when user is not logged in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:errbit_user) }
 
       before { patch user_unlink_github_path(user) }
 

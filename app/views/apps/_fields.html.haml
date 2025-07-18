@@ -36,9 +36,9 @@
     = f.check_box :notify_on_errs, "data-show-when-checked" => ".email_at_notices_nested"
     = f.label :notify_on_errs, t(".notify_on_errors")
   - if Errbit::Config.per_app_email_at_notices
-    %div.email_at_notices_nested{style: app_decorate.notify_err_display}
+    %div.email_at_notices_nested{style: app.notify_err_display}
       .field-helpertext Send a notification every
-      = f.text_field :email_at_notices, value: app_decorate.email_at_notices
+      = f.text_field :email_at_notices, value: app.email_at_notices
       .field-helpertext times an error occurs (comma separated).
 
 %fieldset
@@ -48,7 +48,7 @@
     = f.check_box :use_site_fingerprinter, "data-hide-when-checked" => ".custom_notice_fingerprinter"
     = f.label :use_site_fingerprinter, t(".use_site_fingerprinter")
 
-    %div.custom_notice_fingerprinter{style: app_decorate.custom_notice_fingerprinter_style}
+    %div.custom_notice_fingerprinter{style: app.custom_notice_fingerprinter_style}
       = render "shared/notice_fingerprinter", f: f
 
 %div.checkbox

@@ -4,7 +4,7 @@ module ProblemsSearcher
   extend ActiveSupport::Concern
 
   included do
-    expose(:params_sort) do
+    def params_sort
       if ["environment", "app", "message", "last_notice_at", "count"].member?(params[:sort])
         params[:sort]
       else
@@ -12,7 +12,7 @@ module ProblemsSearcher
       end
     end
 
-    expose(:params_order) do
+    def params_order
       if ["asc", "desc"].member?(params[:order])
         params[:order]
       else
@@ -20,16 +20,16 @@ module ProblemsSearcher
       end
     end
 
-    expose(:selected_problems) do
-      Array(Problem.find(err_ids))
-    end
+    # expose(:selected_problems) do
+    #   Array(Problem.find(err_ids))
+    # end
 
-    expose(:selected_problems_ids) do
-      selected_problems.map(&:id).map(&:to_s)
-    end
+    # expose(:selected_problems_ids) do
+    #   selected_problems.map(&:id).map(&:to_s)
+    # end
 
-    expose(:err_ids) do
-      (params[:problems] || []).compact
-    end
+    # expose(:err_ids) do
+    #   (params[:problems] || []).compact
+    # end
   end
 end

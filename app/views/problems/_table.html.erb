@@ -1,4 +1,4 @@
-<%# locals: (problems:) %>
+<%# locals: (problems:, params_sort:, params_order:, all_errs:) %>
 
 <% any_issue_links = problems.any? { |e| e.issue_link.present? && e.issue_link != "pending" } %>
 
@@ -10,13 +10,13 @@
       <tr>
         <th><%= check_box_tag "toggle_problems_checkboxes" %></th>
         <% if on_page_that_can_include_multiple_different_apps %>
-          <th><%= link_for_sort t(".app") %></th>
+          <th><%= link_for_sort t(".app"), params_sort, params_order, all_errs %></th>
         <% else %>
-          <th><%= link_for_sort t(".env"), "environment" %></th>
+          <th><%= link_for_sort t(".env"), params_sort, params_order, all_errs, "environment" %></th>
         <% end %>
-        <th><%= link_for_sort t(".what_and_where_html"), "message" %></th>
-        <th><%= link_for_sort t(".latest"), "last_notice_at" %></th>
-        <th class="count-header"><%= link_for_sort t(".count") %></th>
+        <th><%= link_for_sort t(".what_and_where_html"), params_sort, params_order, all_errs, "message" %></th>
+        <th><%= link_for_sort t(".latest"), params_sort, params_order, all_errs, "last_notice_at" %></th>
+        <th class="count-header"><%= link_for_sort t(".count"), params_sort, params_order, all_errs %></th>
         <% if any_issue_links %>
           <th>Issue</th>
         <% end %>

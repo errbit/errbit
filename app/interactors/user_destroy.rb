@@ -3,7 +3,7 @@
 class UserDestroy
   attr_reader :user
 
-  # @param user [User] User to destroy
+  # @param user [Errbit::User] User to destroy
   def initialize(user)
     @user = user
   end
@@ -15,6 +15,6 @@ class UserDestroy
       app.watchers.delete(watcher)
     end
 
-    user.destroy
+    user.destroy!
   end
 end

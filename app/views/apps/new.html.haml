@@ -4,8 +4,9 @@
   = link_to_copy_attributes_from_other_app
   = link_to(t(".cancel"), apps_path, class: "button")
 
-= form_for app_decorate do |f|
+-# TODO: remove `url: apps_path` after migration
+= form_for @app, url: apps_path do |f|
 
-  = render "fields", f: f, app: app
+  = render "fields", f: f, app: @app
 
   %div.buttons= f.submit t(".add_app")
