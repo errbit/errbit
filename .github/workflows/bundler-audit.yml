@@ -31,8 +31,8 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@472790540115ce5bd69d399a020189a8c87d641f # v1.247.0
         with:
-          rubygems: latest
-          bundler: latest
+          rubygems: "3.6.9"
+          bundler: "2.6.9"
           bundler-cache: true
       - run: bin/bundle-audit update
       - run: bin/bundle-audit

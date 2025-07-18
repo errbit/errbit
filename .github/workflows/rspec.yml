@@ -43,8 +43,8 @@ jobs:
         uses: ruby/setup-ruby@472790540115ce5bd69d399a020189a8c87d641f # v1.247.0
         with:
           ruby-version: ${{ matrix.ruby }}
-          rubygems: "latest"
-          bundler: "latest"
+          rubygems: "3.6.9"
+          bundler: "2.6.9"
           bundler-cache: true
 
       - name: Start MongoDB
