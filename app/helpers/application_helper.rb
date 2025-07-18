@@ -7,9 +7,9 @@ module ApplicationHelper
 
   def generate_problem_ical(notices)
     RiCal.Calendar do |cal|
-      notices.each_with_index do |notice, idx|
+      notices.each_with_index do |notice, index|
         cal.event do |event|
-          event.summary = "#{idx + 1} #{notice.message}"
+          event.summary = "#{index + 1} #{notice.message}"
           event.description = notice.url if notice.url
           event.dtstart = notice.created_at.utc
           event.dtend = notice.created_at.utc + 60.minutes

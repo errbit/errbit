@@ -52,8 +52,11 @@ class User
 
   def self.valid_google_domain?(email)
     return true if Errbit::Config.google_authorized_domains.nil?
+
     match_data = /.+@(?<domain>.+)$/.match(email)
-    return false if match_data.nil?
+
+    return false if match_data.blank?
+
     Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
   end
 
