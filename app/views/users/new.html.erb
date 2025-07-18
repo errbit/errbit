@@ -2,7 +2,8 @@
 
 <% content_for :action_bar, link_to(t(".cancel"), users_path, class: "button") %>
 
-<%= form_for @user do |f| %>
+<%# TODO: remove `url: users_path` after migration %>
+<%= form_for @user, url: users_path do |f| %>
   <%= render "fields", f: f, user: @user %>
 
   <div class="buttons">
