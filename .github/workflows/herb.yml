@@ -34,4 +34,4 @@ jobs:
           bundler: "latest"
           bundler-cache: true
 
-      - run: bin/herb analyze . --non-interactive
+      - run: bin/herb analyze app --non-interactive
