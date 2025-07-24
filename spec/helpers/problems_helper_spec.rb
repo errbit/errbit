@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe ProblemsHelper, type: :helper do
   describe "#auto_link_format" do
-    it "handles links with target and wraps paragraph (on MRI)" do
+    it "handles links with target and wraps paragraph" do
       expect(
         helper.auto_link_format("Goto https://errbit.com/ and say hello to team@errbit.invalid")
       ).to eq("<p>Goto <a target=\"_blank\" href=\"https://errbit.com/\">https://errbit.com/</a> and say hello to <a target=\"_blank\" href=\"mailto:team@errbit.invalid\">team@errbit.invalid</a></p>")
