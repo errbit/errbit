@@ -1,4 +1,4 @@
-name: RSpec
+name: Zeitwerk
 
 on:
   push:
@@ -15,8 +15,7 @@ permissions:
   contents: read
 
 env:
-  CI: "true"
-  SE_AVOID_STATS: "true"
+  ERRBIT_SQL_PORT: "true"
 
 jobs:
   rspec:
@@ -26,7 +25,6 @@ jobs:
       fail-fast: false
       matrix:
         ruby: ["3.4"]
-        mongodb-version: ["6.0", "7.0", "8.0"]
 
     steps:
       - name: Harden the runner (Audit all outbound calls)
@@ -38,20 +36,11 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Ruby
-        uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # v1.254.0
+        uses: ruby/setup-ruby@65937904bcddfb93f8130882d9afa8597c45f3b5 # v1.249.0
         with:
           ruby-version: ${{ matrix.ruby }}
           rubygems: "latest"
           bundler: "latest"
           bundler-cache: true
 
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@90004df786821b6308fb02299e5835d0dae05d0d # 1.12.0
-        with:
-          mongodb-version: ${{ matrix.mongodb-version }}
-
-      - run: bundle exec bootsnap precompile --gemfile
-      - run: bundle exec bootsnap precompile app/ lib/ config/ Rakefile
-      - run: bundle exec rails assets:precompile
-      - run: bundle exec rake errbit:bootstrap
-      - run: bundle exec rspec
+      - run: bundle exec rails zeitwerk:check
