@@ -587,7 +587,7 @@ GEM
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
-    temple (0.10.3)
+    temple (0.10.4)
     thor (1.4.0)
     thruster (0.1.14)
     thruster (0.1.14-aarch64-linux)
@@ -937,7 +937,7 @@ CHECKSUMS
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   super_diff (0.16.0) sha256=be915d5fcf13a50595cfb473ed07c2c3c5cb28e9e96424365108d77fdd47cad9
-  temple (0.10.3) sha256=df3145fe6577af1e25387eb7f7122d32ed51bdb6f2e7bb0f4fbf07b66151913b
+  temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   thruster (0.1.14) sha256=3457167768ef1ad5e5872859a91ed44cedad226a4265f9bd281aad0aafe99074
   thruster (0.1.14-aarch64-linux) sha256=b9d5d6909953402478b7b0ea143d5293aa98ed7dd1649fb2e57f886b7512d452
