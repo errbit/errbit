@@ -584,18 +584,18 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (2.7.2)
+    sqlite3 (2.7.3)
       mini_portile2 (~> 2.8.0)
-    sqlite3 (2.7.2-aarch64-linux-gnu)
-    sqlite3 (2.7.2-aarch64-linux-musl)
-    sqlite3 (2.7.2-arm-linux-gnu)
-    sqlite3 (2.7.2-arm-linux-musl)
-    sqlite3 (2.7.2-arm64-darwin)
-    sqlite3 (2.7.2-x86-linux-gnu)
-    sqlite3 (2.7.2-x86-linux-musl)
-    sqlite3 (2.7.2-x86_64-darwin)
-    sqlite3 (2.7.2-x86_64-linux-gnu)
-    sqlite3 (2.7.2-x86_64-linux-musl)
+    sqlite3 (2.7.3-aarch64-linux-gnu)
+    sqlite3 (2.7.3-aarch64-linux-musl)
+    sqlite3 (2.7.3-arm-linux-gnu)
+    sqlite3 (2.7.3-arm-linux-musl)
+    sqlite3 (2.7.3-arm64-darwin)
+    sqlite3 (2.7.3-x86-linux-gnu)
+    sqlite3 (2.7.3-x86-linux-musl)
+    sqlite3 (2.7.3-x86_64-darwin)
+    sqlite3 (2.7.3-x86_64-linux-gnu)
+    sqlite3 (2.7.3-x86_64-linux-musl)
     standard (1.51.1)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -973,17 +973,17 @@ CHECKSUMS
   snaky_hash (2.0.3) sha256=25a3d299566e8153fb02fa23fd9a9358845950f7a523ddbbe1fa1e0d79a6d456
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
-  sqlite3 (2.7.2) sha256=446376dfc5ffa0c6dd39dabf748b8c7c8a7f294cfa780dfc22dee67d43bdc9f5
-  sqlite3 (2.7.2-aarch64-linux-gnu) sha256=b1688e8661c65f65bb16a9879c8171c94d22322f4d8e9e452f396a3aa55bbe0a
-  sqlite3 (2.7.2-aarch64-linux-musl) sha256=9086f9370853825c5bbb4d1156c9b1494a7ab5052445469603de5a4f2d127ef1
-  sqlite3 (2.7.2-arm-linux-gnu) sha256=f31d361744775942c4ef7f645457736ad7cdc1c5128a6c19551753e969ccc9be
-  sqlite3 (2.7.2-arm-linux-musl) sha256=0dc0c1b06c0af0e8833508f212297f8665bf37ea624739fdde30d9adba015f20
-  sqlite3 (2.7.2-arm64-darwin) sha256=e09a781a69d793424864cac99daa17a24308fcda1dc459a94ef25ecf31082b60
-  sqlite3 (2.7.2-x86-linux-gnu) sha256=e6ea2f0186a17655b6aefa24d0b97b5989a47b73466bb7c93ec4ed4ee08ef7b7
-  sqlite3 (2.7.2-x86-linux-musl) sha256=932c8f8d36f90c0a148391f8e5b694be175c15bbac738dd21c79dbc5fbe5f5ab
-  sqlite3 (2.7.2-x86_64-darwin) sha256=92229c8de5a63a3ed909c6390d187439adeeb614700eed30cf19a4f11c3af370
-  sqlite3 (2.7.2-x86_64-linux-gnu) sha256=e15e8b1224e47a8fec2833afcc6c727742eab6a470c929a54551ab03d04dd4a4
-  sqlite3 (2.7.2-x86_64-linux-musl) sha256=1f7e386b82a78c24ef9f875b4891bcee51d1c2cd254f028b3ce3dd429605bc35
+  sqlite3 (2.7.3) sha256=d2b2fecd9341132f2cea3fde9061ee0fab9c9d532a8ecccfab4fe63d9621bf57
+  sqlite3 (2.7.3-aarch64-linux-gnu) sha256=00bab7e2ceb7e911b0a2c516bcb9ec0aa7ee57b9b231419e1788515319ac4317
+  sqlite3 (2.7.3-aarch64-linux-musl) sha256=035dca6c5bc0f45bb059f33cf774e96462563e460a2d5bd48972562bf3a78c8b
+  sqlite3 (2.7.3-arm-linux-gnu) sha256=c22a2593a8274cba5fc55be415cfddab3ff5d3275b5a78878daf214bf2a60db1
+  sqlite3 (2.7.3-arm-linux-musl) sha256=e735bea1c81eceff2e1b3388e6bccbcbf5c81405f7dbd69b5c80b3b4c4a92c89
+  sqlite3 (2.7.3-arm64-darwin) sha256=133772f4312a9d0fa0c16aab7c2abdda2ee93f47dded0f353a2981f7b9d2b9b4
+  sqlite3 (2.7.3-x86-linux-gnu) sha256=542d713070e222524acd902c67eda71cda4a2b2118164a7b9be4ff4dc3c7ef8e
+  sqlite3 (2.7.3-x86-linux-musl) sha256=a6ccb9e3bb4f4e60f04f7f003be28f1b626b4f153ba6d37afc464cf65d029c89
+  sqlite3 (2.7.3-x86_64-darwin) sha256=a857e364e858d79e634c66c02c130f79c633f0035d422b3381be9958859771f4
+  sqlite3 (2.7.3-x86_64-linux-gnu) sha256=11b2612fddf56602d238be7a984fa0633e591edd034f7520747bc0927b7fa865
+  sqlite3 (2.7.3-x86_64-linux-musl) sha256=4307278661bbe0a619da7a5da25f4417f6826246ee7b4a56a5c10c3731d5256a
   standard (1.51.1) sha256=6d0d98a1fac26d660393f37b3d9c864632bb934b17abfa23811996b20f87faf2
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.8.0) sha256=ed17b7d0e061b2a19a91dd434bef629439e2f32310f22f26acb451addc92b788
