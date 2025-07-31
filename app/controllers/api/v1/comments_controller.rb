@@ -28,7 +28,7 @@ module Api
         else
           render(
             body: {errors: comment.errors.full_messages}.to_json,
-            status: :unprocessable_entity
+            status: :unprocessable_content
           )
         end
       end

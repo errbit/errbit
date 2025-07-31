@@ -27,8 +27,8 @@ module Api
         merged_params = merged_params.merge!("key" => authorization_token) if authorization_token
         report = AirbrakeApi::V3::NoticeParser.new(merged_params).report
 
-        return render body: UNKNOWN_API_KEY, status: :unprocessable_entity unless report.valid?
-        return render body: VERSION_TOO_OLD, status: :unprocessable_entity unless report.should_keep?
+        return render body: UNKNOWN_API_KEY, status: :unprocessable_content unless report.valid?
+        return render body: VERSION_TOO_OLD, status: :unprocessable_content unless report.should_keep?
 
         report.generate_notice!
         render status: :created, json: {

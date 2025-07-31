@@ -24,10 +24,10 @@ class NoticesController < ApplicationController
         render body: "Notice for old app version ignored"
       end
     else
-      render body: "Your API key is unknown", status: :unprocessable_entity
+      render body: "Your API key is unknown", status: :unprocessable_content
     end
   rescue Nokogiri::XML::SyntaxError
-    render body: "The provided XML was not well-formed", status: :unprocessable_entity
+    render body: "The provided XML was not well-formed", status: :unprocessable_content
   end
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
@@ -46,10 +46,13 @@ class NoticesController < ApplicationController
 
   def notice_params
     return @notice_params if @notice_params
+
     @notice_params = params[:data] || request.raw_post
+
     if @notice_params.blank?
       fail ParamsError, "Need a data params in GET or raw post data"
     end
+
     @notice_params
   end
 
