@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "rails", "8.0.2"
+gem "rails", "8.0.2.1"
 
 gem "sprockets-rails"
 gem "activemodel-serializers-xml"
