@@ -168,7 +168,7 @@ GEM
     errbit_plugin (0.7.0)
     erubi (1.13.1)
     fabrication (3.0.0)
-    factory_bot (6.5.4)
+    factory_bot (6.5.5)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.0)
       factory_bot (~> 6.5)
@@ -772,7 +772,7 @@ CHECKSUMS
   errbit_plugin (0.7.0) sha256=2deec87f62dbc953ff86a69b46bb4d339678a9a9439342b85f3dfb909621d94d
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   fabrication (3.0.0) sha256=a6a0bfad9071348ad3cb1701df788524b888c0cdd044b988893e7509f7463be3
-  factory_bot (6.5.4) sha256=4707fb7d80a7c14d71feb069460587bfc342e4ff1ef28097e0ad69d5ddfce613
+  factory_bot (6.5.5) sha256=ce59295daee1b4704dab8a2fee6816f513d467c6aa3bc587860767d74a66efbe
   factory_bot_rails (6.5.0) sha256=4a7b61635424a57cc60412a18b72b9dcfb02fabfce2c930447a01dce8b37c0a2
   faker (3.5.2) sha256=f9a80291b2e3f259801d1dd552f0732fe04dce5d1f74e798365bc0413789c473
   faraday (2.13.4) sha256=c719ff52cfd0dbaeca79dd83ed3aeea3f621032abf8bc959d1c05666157cac26
