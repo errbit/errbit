@@ -1,0 +1,45 @@
+<% content_for :title, @user.name %>
+
+<% if Errbit::Config.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
+  <% content_for :title_style do %>
+    background: url('<%= gravatar %>') no-repeat;
+    padding-left: 106px;
+  <% end %>
+<% end %>
+
+<% content_for :action_bar do %>
+  <%= render "shared/link_github_account", user: @user %>
+  <%= render "shared/link_google_account", user: @user %>
+  <%= link_to t(".edit"), edit_user_path(@user), class: "button" %>
+  <%= link_to t(".destroy"), user_path(@user),
+              method: :delete,
+              data: { confirm: t(".confirm_delete") },
+              class: "delete button" %>
+<% end %>
+
+<table class="single_user">
+  <tr>
+    <th><%= t(".email") %></th>
+    <td class="main"><%= @user.email %></td>
+  </tr>
+  <% if Errbit::Config.user_has_username %>
+    <tr>
+      <th><%= t(".username") %></th>
+      <td class="main"><%= @user.username %></td>
+    </tr>
+  <% end %>
+  <% if Errbit::Config.github_authentication && @user.github_login.present? %>
+    <tr>
+      <th><%= "#{Errbit::Config.github_site_title} Login" %></th>
+      <td class="main"><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th><%= t(".admin") %></th>
+    <td><%= @user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+  </tr>
+  <tr>
+    <th><%= t(".created") %></th>
+    <td><%= @user.created_at.to_fs(:micro) %></td>
+  </tr>
+</table>
