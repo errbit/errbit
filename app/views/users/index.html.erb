@@ -13,7 +13,7 @@
   <thead>
     <tr>
       <% if Errbit::Config.use_gravatar %>
-        <th></th>
+        <th>&nbsp;</th>
       <% end %>
       <th><%= t(".name") %></th>
       <% if Errbit::Config.user_has_username %>
@@ -23,6 +23,7 @@
       <th><%= t(".admin") %></th>
     </tr>
   </thead>
+
   <tbody>
     <% @users.each do |user| %>
       <tr class="user_list">

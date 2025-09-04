@@ -6,7 +6,7 @@
   <%= link_to t(".cancel"), user_path(@user), class: "button" %>
 <% end %>
 
-<%= form_for @user, html: { autocomplete: "off" } do |f| %>
+<%= form_for @user, html: {autocomplete: "off"} do |f| %>
   <%= render "fields", f: f, user: @user %>
 
   <div class="buttons">
