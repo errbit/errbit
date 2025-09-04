@@ -1,0 +1,15 @@
+<% content_for :title, "#{t(".title")} #{@user.name}" %>
+
+<% content_for :action_bar do %>
+  <%= render "shared/link_github_account", user: @user %>
+  <%= render "shared/link_google_account", user: @user %>
+  <%= link_to t(".cancel"), user_path(@user), class: "button" %>
+<% end %>
+
+<%= form_for @user, html: { autocomplete: "off" } do |f| %>
+  <%= render "fields", f: f, user: @user %>
+
+  <div class="buttons">
+    <%= f.submit t(".update_user") %>
+  </div>
+<% end %>

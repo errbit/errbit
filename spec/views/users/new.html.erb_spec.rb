@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe "users/edit.html.haml", type: :view do
-  let(:user) { stub_model(User, name: "shingara") }
+RSpec.describe "users/new.html.erb", type: :view do
+  let(:user) { stub_model(User) }
 
   before do
     allow(view).to receive(:current_user).and_return(user)
