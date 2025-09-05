@@ -67,5 +67,8 @@ module Errbit
     config.to_prepare { Devise::Mailer.layout "mailer" }
 
     config.active_job.queue_adapter = :sucker_punch
+
+    # Compiles the ERB template with the frozen_string_literal true magic comment
+    config.action_view.frozen_string_literal = true
   end
 end
