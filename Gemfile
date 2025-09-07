@@ -118,6 +118,6 @@ gem "jquery-rails"
 gem "pjax_rails"
 gem "underscore-rails"
 
-gem "sucker_punch"
+# gem "sucker_punch"
 
 eval_gemfile "./UserGemfile"
