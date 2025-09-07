@@ -66,7 +66,7 @@ module Errbit
     # Configure Devise mailer to use our mailer layout.
     config.to_prepare { Devise::Mailer.layout "mailer" }
 
-    config.active_job.queue_adapter = :sucker_punch
+    config.active_job.queue_adapter = :async
 
     # Compiles the ERB template with the frozen_string_literal true magic comment
     config.action_view.frozen_string_literal = true
