@@ -23,7 +23,6 @@ require "email_spec"
 require "xmpp4r"
 require "xmpp4r/muc"
 require "fabrication"
-require "sucker_punch/testing/inline"
 require "errbit_plugin/mock_issue_tracker"
 
 # Requires supporting files with custom matchers and macros, etc,
