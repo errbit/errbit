@@ -596,8 +596,6 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.25.0)
     stringio (3.1.7)
-    sucker_punch (3.2.0)
-      concurrent-ruby (~> 1.0)
     super_diff (0.17.0)
       attr_extras (>= 6.2.4)
       diff-lcs
@@ -727,7 +725,6 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   standard (= 1.51.1)
-  sucker_punch
   super_diff
   thruster
   underscore-rails
@@ -962,7 +959,6 @@ CHECKSUMS
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.8.0) sha256=ed17b7d0e061b2a19a91dd434bef629439e2f32310f22f26acb451addc92b788
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
-  sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
   super_diff (0.17.0) sha256=75666ec7bd3e0a73b47ccafeb4d3ca43ead96e8abb030068656c9c11053283e1
   temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
