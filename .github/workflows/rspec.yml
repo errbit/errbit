@@ -17,6 +17,7 @@ permissions:
 env:
   CI: "true"
   SE_AVOID_STATS: "true"
+  ERRBIT_SQL_PORT: "true"
 
 jobs:
   rspec:
