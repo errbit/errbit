@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "rails", "8.0.2.1"
+gem "rails", "8.1.0.beta1"
 
 gem "sprockets-rails"
 gem "activemodel-serializers-xml"
@@ -118,6 +118,6 @@ gem "jquery-rails"
 gem "pjax_rails"
 gem "underscore-rails"
 
-gem "sucker_punch"
+# gem "sucker_punch"
 
 eval_gemfile "./UserGemfile"
