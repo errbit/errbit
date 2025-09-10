@@ -474,7 +474,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.4.3)
+    rexml (3.4.4)
     ri_cal (0.8.8)
     rspec-activemodel-mocks (1.3.0)
       activemodel (>= 3.0)
@@ -921,7 +921,7 @@ CHECKSUMS
   request_store (1.7.0) sha256=e1b75d5346a315f452242a68c937ef8e48b215b9453a77a6c0acdca2934c88cb
   responders (3.1.1) sha256=92f2a87e09028347368639cfb468f5fefa745cb0dc2377ef060db1cdd79a341a
   rest-client (2.1.0) sha256=35a6400bdb14fae28596618e312776c158f7ebbb0ccad752ff4fa142bf2747e3
-  rexml (3.4.3) sha256=0e2a4602dd7f02979e29a0c6bc0f57a76ca99fc093eee17cf9a1cd32fa95a115
+  rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
   ri_cal (0.8.8) sha256=200d7709e693e661b87230c2530e96bbe276591cf552f379bbee3aab86518fba
   rspec-activemodel-mocks (1.3.0) sha256=b51b111b726370a20a2103a8a6851296783a70d2b0bd0287bfa24d293f58d76e
   rspec-core (3.13.5) sha256=ab3f682897c6131c67f9a17cfee5022a597f283aebe654d329a565f9937a4fa3
