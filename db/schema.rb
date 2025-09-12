@@ -22,6 +22,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191818) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "name"
+    t.boolean "admin", default: false, null: false
+    t.integer "per_page", default: 30
+    t.string "time_zone", default: "UTC"
+    t.string "github_login"
+    t.string "github_oauth_token"
+    t.string "google_uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_errbit_users_on_email", unique: true
