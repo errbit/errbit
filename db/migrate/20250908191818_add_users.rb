@@ -24,13 +24,14 @@ class AddUsers < ActiveRecord::Migration[8.0]
       # ### Token_authenticatable
       # field :authentication_token, type: String
 
-      # field :github_login
-      # field :github_oauth_token
-      # field :google_uid
-      # field :name
-      # field :admin, type: Boolean, default: false
-      # field :per_page, type: Integer, default: PER_PAGE
-      # field :time_zone, default: "UTC"
+      t.string :name
+      t.boolean :admin, null: false, default: false
+      t.integer :per_page, default: 30
+      t.string :time_zone, default: "UTC"
+
+      t.string :github_login
+      t.string :github_oauth_token
+      t.string :google_uid
 
       t.timestamps null: false
     end
