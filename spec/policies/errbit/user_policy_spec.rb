@@ -80,23 +80,23 @@ RSpec.describe Errbit::UserPolicy do
     end
   end
 
-  # describe "#new?" do
-  #   context "when user is an admin" do
-  #     let(:user) { create(:user, admin: true) }
-  #
-  #     let(:record) { User.new }
-  #
-  #     it { is_expected.to permit_action(:new) }
-  #   end
-  #
-  #   context "when user is not an admin" do
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:record) { User.new }
-  #
-  #     it { is_expected.to forbid_action(:new) }
-  #   end
-  # end
+  describe "#new?" do
+    context "when user is an admin" do
+      let(:user) { create(:errbit_user, admin: true) }
+
+      let(:record) { Errbit::User.new }
+
+      it { is_expected.to permit_action(:new) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:record) { Errbit::User.new }
+
+      it { is_expected.to forbid_action(:new) }
+    end
+  end
 
   # describe "#update?" do
   #   context "when user is an admin" do
