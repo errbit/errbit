@@ -101,6 +101,7 @@ end
 
 group :test do
   gem "rails-controller-testing"
+  gem "shoulda-matchers"
   gem "rspec-rails", require: false
   gem "rspec-retry", require: false
   gem "rspec-activemodel-mocks"
