@@ -29,17 +29,17 @@ module Errbit
       create?
     end
 
-    # def update?
-    #   scope.where(id: record.id).exists?
-    # end
-    #
-    # def edit?
-    #   scope.where(id: record.id).exists?
-    # end
-    #
-    # def destroy?
-    #   scope.where(id: record.id).exists? && user.id != record.id
-    # end
+    def update?
+      scope.exists?(id: record.id)
+    end
+
+    def edit?
+      scope.exists?(id: record.id)
+    end
+
+    def destroy?
+      scope.exists?(id: record.id) && user.id != record.id
+    end
 
     def permitted_attributes
       if user.admin? && user.id != record.id
