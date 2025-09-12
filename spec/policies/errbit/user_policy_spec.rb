@@ -150,31 +150,31 @@ RSpec.describe Errbit::UserPolicy do
     end
   end
 
-  # describe "#destroy?" do
-  #   context "when user is an admin" do
-  #     let(:user) { create(:user, admin: true) }
-  #
-  #     let(:record) { create(:user, admin: false) }
-  #
-  #     it { is_expected.to permit_action(:destroy) }
-  #   end
-  #
-  #   context "when user is not an admin" do
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:record) { create(:user, admin: false) }
-  #
-  #     it { is_expected.to forbid_action(:destroy) }
-  #   end
-  #
-  #   context "when user is an owner" do
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:record) { user }
-  #
-  #     it { is_expected.to forbid_action(:destroy) }
-  #   end
-  # end
+  describe "#destroy?" do
+    context "when user is an admin" do
+      let(:user) { create(:errbit_user, admin: true) }
+
+      let(:record) { create(:errbit_user, admin: false) }
+
+      it { is_expected.to permit_action(:destroy) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:record) { create(:errbit_user, admin: false) }
+
+      it { is_expected.to forbid_action(:destroy) }
+    end
+
+    context "when user is an owner" do
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:record) { user }
+
+      it { is_expected.to forbid_action(:destroy) }
+    end
+  end
 
   describe "#permitted_attributes" do
     context "when user is an admin" do
