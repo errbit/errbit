@@ -25,10 +25,10 @@ module Errbit
       user.admin?
     end
 
-    # def new?
-    #   create?
-    # end
-    #
+    def new?
+      create?
+    end
+
     # def update?
     #   scope.where(id: record.id).exists?
     # end
