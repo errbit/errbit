@@ -16,6 +16,7 @@ permissions:
 
 env:
   CI: "true"
+  RAILS_ENV: "test"
   SE_AVOID_STATS: "true"
   ERRBIT_SQL_PORT: "true"
 
