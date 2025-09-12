@@ -36,31 +36,31 @@ RSpec.describe Errbit::UserPolicy do
     end
   end
 
-  # describe "#show?" do
-  #   context "when user is an admin" do
-  #     let(:user) { create(:user, admin: true) }
-  #
-  #     let(:record) { create(:user, admin: false) }
-  #
-  #     it { is_expected.to permit_action(:show) }
-  #   end
-  #
-  #   context "when user is not an admin" do
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:record) { create(:user, admin: false) }
-  #
-  #     it { is_expected.to forbid_action(:show) }
-  #   end
-  #
-  #   context "when user is an owner" do
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:record) { user }
-  #
-  #     it { is_expected.to permit_action(:show) }
-  #   end
-  # end
+  describe "#show?" do
+    context "when user is an admin" do
+      let(:user) { create(:errbit_user, admin: true) }
+
+      let(:record) { create(:errbit_user, admin: false) }
+
+      it { is_expected.to permit_action(:show) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:record) { create(:errbit_user, admin: false) }
+
+      it { is_expected.to forbid_action(:show) }
+    end
+
+    context "when user is an owner" do
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:record) { user }
+
+      it { is_expected.to permit_action(:show) }
+    end
+  end
 
   describe "#create?" do
     context "when user is an admin" do
