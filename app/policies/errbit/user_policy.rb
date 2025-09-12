@@ -58,13 +58,13 @@ module Errbit
         super
       end
 
-      # def resolve
-      #   if user.admin?
-      #     scope.all
-      #   else
-      #     scope.where(id: user.id)
-      #   end
-      # end
+      def resolve
+        if user.admin?
+          scope.all
+        else
+          scope.where(id: user.id)
+        end
+      end
     end
   end
 end

@@ -206,29 +206,29 @@ RSpec.describe Errbit::UserPolicy do
 end
 
 RSpec.describe Errbit::UserPolicy::Scope do
-  # describe "#resolve" do
-  #   context "when user is an admin" do
-  #     let(:admin) { create(:user, admin: true) }
-  #
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:scope) { User }
-  #
-  #     subject { described_class.new(admin, scope) }
-  #
-  #     it { expect(subject.resolve).to eq([admin, user]) }
-  #   end
-  #
-  #   context "when user is not an admin" do
-  #     let!(:admin) { create(:user, admin: true) }
-  #
-  #     let(:user) { create(:user, admin: false) }
-  #
-  #     let(:scope) { User }
-  #
-  #     subject { described_class.new(user, scope) }
-  #
-  #     it { expect(subject.resolve).to eq([user]) }
-  #   end
-  # end
+  describe "#resolve" do
+    context "when user is an admin" do
+      let(:admin) { create(:errbit_user, admin: true) }
+
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:scope) { Errbit::User }
+
+      subject { described_class.new(admin, scope) }
+
+      it { expect(subject.resolve).to eq([admin, user]) }
+    end
+
+    context "when user is not an admin" do
+      let!(:admin) { create(:errbit_user, admin: true) }
+
+      let(:user) { create(:errbit_user, admin: false) }
+
+      let(:scope) { Errbit::User }
+
+      subject { described_class.new(user, scope) }
+
+      it { expect(subject.resolve).to eq([user]) }
+    end
+  end
 end
