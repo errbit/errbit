@@ -40,14 +40,14 @@ module Errbit
     # def destroy?
     #   scope.where(id: record.id).exists? && user.id != record.id
     # end
-    #
-    # def permitted_attributes
-    #   if user.admin? && user.id != record.id
-    #     FIELDS + [:admin]
-    #   else
-    #     FIELDS
-    #   end
-    # end
+
+    def permitted_attributes
+      if user.admin? && user.id != record.id
+        FIELDS + [:admin]
+      else
+        FIELDS
+      end
+    end
 
     class Scope < ApplicationPolicy::Scope
       attr_reader :user, :scope
