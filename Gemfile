@@ -117,6 +117,7 @@ group :test do
   gem "super_diff"
   gem "webmock"
   gem "vcr"
+  gem "database_rewinder"
 end
 
 gem "puma"
