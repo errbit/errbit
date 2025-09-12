@@ -17,9 +17,9 @@ module Errbit
       false
     end
 
-    # def show?
-    #   scope.where(id: record.id).exists?
-    # end
+    def show?
+      scope.exists?(id: record.id)
+    end
 
     def create?
       user.admin?
