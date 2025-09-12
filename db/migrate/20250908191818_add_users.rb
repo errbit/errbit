@@ -21,8 +21,8 @@ class AddUsers < ActiveRecord::Migration[8.0]
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
-      # ### Token_authenticatable
-      # field :authentication_token, type: String
+      ## Token_authenticatable
+      t.string :authentication_token
 
       t.string :name
       t.boolean :admin, null: false, default: false
