@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
+  # namespace :errbit do
+  #   devise_for :users
+  # end
+
   # Hoptoad Notifier Routes
   match "/notifier_api/v2/notices" => "notices#create", :via => [:get, :post]
   get "/locate/:id" => "notices#locate", :as => :locate
