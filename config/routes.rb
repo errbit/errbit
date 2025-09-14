@@ -5,11 +5,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", :as => :rails_health_check
 
-  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
-
-  # namespace :errbit do
-  #   devise_for :users
-  # end
+  devise_for :users,
+    controllers: {omniauth_callbacks: "users/omniauth_callbacks"},
+    class_name: "Errbit::User"
 
   # Hoptoad Notifier Routes
   match "/notifier_api/v2/notices" => "notices#create", :via => [:get, :post]
@@ -96,5 +94,5 @@ Rails.application.routes.draw do
 
   match "/api/v3/projects/:project_id/notices" => "api/v3/notices#create", :via => [:post, :options]
 
-  root to: "apps#index"
+  root "apps#index"
 end
