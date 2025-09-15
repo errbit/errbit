@@ -15,6 +15,6 @@ class UserDestroy
       app.watchers.delete(watcher)
     end
 
-    user.destroy
+    user.destroy!
   end
 end
