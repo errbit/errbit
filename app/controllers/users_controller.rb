@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   def index
     @users = policy_scope(Errbit::User)
-      .order_by(name: :asc)
+      .order(name: :asc)
       .page(params[:page])
       .per(current_user.per_page)
   end
