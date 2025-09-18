@@ -4,6 +4,7 @@
   <%= link_to t(".cancel"), users_path, class: "button" %>
 <% end %>
 
+<%# TODO: change :put to :patch %>
 <%= form_for @config, url: site_config_index_path, method: :put do |f| %>
   <%= errors_for @config %>
 
