@@ -1,4 +1,4 @@
-<% if flash.any? %>
+<% unless flash.keys.empty? %>
   <ul id="flash-messages">
     <% flash.each do |type, message| %>
       <li class="<%= type %>"><%= message %></li>
