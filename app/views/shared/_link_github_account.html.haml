@@ -1,6 +1,0 @@
--# <%# locals: (user:) -%>
-- if Errbit::Config.github_authentication && user == current_user
-  - if user.github_account?
-    %span.github= link_to "Unlink #{Errbit::Config.github_site_title} account", user_unlink_github_path(user), method: :patch, data: { confirm: "Are you sure?" }
-  - else
-    %span.github= link_to "Link #{Errbit::Config.github_site_title} account", user_github_omniauth_authorize_path, method: :post

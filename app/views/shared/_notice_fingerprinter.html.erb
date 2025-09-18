@@ -1,0 +1,32 @@
+<%# locals: (f:) %>
+<%= f.fields_for :notice_fingerprinter do |g| %>
+  <div class="checkbox">
+    <%= g.check_box :error_class %>
+    <%= g.label :error_class, t(".error_class") %>
+  </div>
+
+  <div class="checkbox">
+    <%= g.check_box :message %>
+    <%= g.label :message, t(".message") %>
+  </div>
+
+  <div>
+    <%= g.label :backtrace_lines, t(".backtrace_lines") %>
+    <%= g.text_field :backtrace_lines %>
+  </div>
+
+  <div class="checkbox">
+    <%= g.check_box :component %>
+    <%= g.label :component, t(".component") %>
+  </div>
+
+  <div class="checkbox">
+    <%= g.check_box :action %>
+    <%= g.label :action, t(".action") %>
+  </div>
+
+  <div class="checkbox">
+    <%= g.check_box :environment_name %>
+    <%= g.label :environment_name, t(".environment_name") %>
+  </div>
+<% end %>
