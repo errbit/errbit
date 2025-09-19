@@ -24,22 +24,26 @@
     <th><%= t(".email") %></th>
     <td class="main"><%= @user.email %></td>
   </tr>
+
   <% if Errbit::Config.user_has_username %>
     <tr>
       <th><%= t(".username") %></th>
       <td class="main"><%= @user.username %></td>
     </tr>
   <% end %>
+
   <% if Errbit::Config.github_authentication && @user.github_login.present? %>
     <tr>
       <th><%= "#{Errbit::Config.github_site_title} Login" %></th>
       <td class="main"><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
     </tr>
   <% end %>
+
   <tr>
     <th><%= t(".admin") %></th>
     <td><%= @user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
   </tr>
+
   <tr>
     <th><%= t(".created") %></th>
     <td><%= @user.created_at.to_fs(:micro) %></td>
