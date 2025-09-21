@@ -229,7 +229,7 @@ RSpec.describe UsersController, type: :request do
             expect do
               post users_path,
                 params: {
-                  user: {
+                  errbit_user: {
                     email: email,
                     name: name,
                     password: password,
@@ -270,7 +270,7 @@ RSpec.describe UsersController, type: :request do
             expect do
               post users_path,
                 params: {
-                  user: {
+                  errbit_user: {
                     email: email,
                     name: name,
                     password: password,
@@ -304,7 +304,7 @@ RSpec.describe UsersController, type: :request do
           expect do
             post users_path,
               params: {
-                user: {
+                errbit_user: {
                   email: email,
                   name: name,
                   password: password,
@@ -336,7 +336,7 @@ RSpec.describe UsersController, type: :request do
         expect do
           post users_path,
             params: {
-              user: {
+              errbit_user: {
                 email: email,
                 name: name,
                 password: password,
@@ -370,7 +370,7 @@ RSpec.describe UsersController, type: :request do
           before do
             patch user_path(user),
               params: {
-                user: {
+                errbit_user: {
                   name: "Tyrion Lannister",
                   admin: false
                 }
@@ -396,7 +396,7 @@ RSpec.describe UsersController, type: :request do
           before do
             patch user_path(user),
               params: {
-                user: {
+                errbit_user: {
                   name: ""
                 }
               }
@@ -420,7 +420,7 @@ RSpec.describe UsersController, type: :request do
         before do
           patch user_path(user),
             params: {
-              user: {
+              errbit_user: {
                 name: "Tyrion Lannister",
                 admin: true
               }
@@ -443,7 +443,7 @@ RSpec.describe UsersController, type: :request do
       before do
         patch user_path(user),
           params: {
-            user: {
+            errbit_user: {
               name: Faker::Name.unique.name
             }
           }
