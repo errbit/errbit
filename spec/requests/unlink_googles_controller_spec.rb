@@ -6,7 +6,7 @@ RSpec.describe UnlinkGooglesController, type: :request do
   describe "#update" do
     context "when user is logged in" do
       context "when user has access" do
-        let!(:current_user) { create(:user, google_uid: "google-uid") }
+        let!(:current_user) { create(:errbit_user, google_uid: "google-uid") }
 
         before { sign_in(current_user) }
 
@@ -22,9 +22,9 @@ RSpec.describe UnlinkGooglesController, type: :request do
       end
 
       context "when user has not access" do
-        let!(:current_user) { create(:user, admin: false) }
+        let!(:current_user) { create(:errbit_user, admin: false) }
 
-        let!(:user) { create(:user) }
+        let!(:user) { create(:errbit_user) }
 
         before { sign_in(current_user) }
 
@@ -41,7 +41,7 @@ RSpec.describe UnlinkGooglesController, type: :request do
     end
 
     context "when user is not logged in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:errbit_user) }
 
       before { patch user_unlink_google_path(user) }
 
