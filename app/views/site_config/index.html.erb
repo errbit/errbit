@@ -1,0 +1,21 @@
+<% content_for :title, t(".title") %>
+
+<% content_for :action_bar do %>
+  <%= link_to t(".cancel"), users_path, class: "button" %>
+<% end %>
+
+<%# TODO: change :put to :patch %>
+<%= form_for @config, url: site_config_index_path, method: :put do |f| %>
+  <%= errors_for @config %>
+
+  <fieldset>
+    <legend><%= t("notice_fingerprinter.title") %></legend>
+    <p><%= t("notice_fingerprinter.text") %></p>
+
+    <%= render "shared/notice_fingerprinter", f: f %>
+  </fieldset>
+
+  <div class="buttons">
+    <%= f.submit t(".update_config") %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<% if current_user %>
+  <ul id="session-links">
+    <li>
+      <%= link_to destroy_user_session_path, id: "sign-out", method: :delete do %>
+        <i class="fa fa-circle"></i>
+        <%= t(".sign_out") %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to t(".edit_profile"), edit_user_path(current_user), id: "edit-profile" %>
+    </li>
+  </ul>
+<% end %>
