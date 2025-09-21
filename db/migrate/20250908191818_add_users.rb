@@ -38,5 +38,6 @@ class AddUsers < ActiveRecord::Migration[8.0]
 
     add_index :errbit_users, :email, unique: true
     add_index :errbit_users, :reset_password_token, unique: true
+    add_index :errbit_users, :github_login, unique: true
   end
 end
