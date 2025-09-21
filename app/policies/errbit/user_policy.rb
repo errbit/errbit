@@ -9,7 +9,7 @@ module Errbit
 
     # @param user [Errbit::User] The user making the request
     # @param record [Errbit::User] The record being accessed
-    def initialize(user, record)
+    def initialize(user, record) # rubocop:disable Lint/UselessMethodDefinition
       super
     end
 
@@ -54,7 +54,7 @@ module Errbit
 
       # @param user [Errbit::User]
       # @param scope [Errbit::User, Object] The scope of records being accessed
-      def initialize(user, scope)
+      def initialize(user, scope) # rubocop:disable Lint/UselessMethodDefinition
         super
       end
 
