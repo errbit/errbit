@@ -1,5 +1,5 @@
 services:
   mongo:
-    image: "mongo:8.0.13"
+    image: "mongo:8.0.14"
     ports:
       - "27017:27017"
