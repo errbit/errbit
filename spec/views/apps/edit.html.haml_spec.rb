@@ -5,11 +5,8 @@ require "rails_helper"
 RSpec.describe "apps/edit.html.haml", type: :view do
   let(:app) { stub_model(App) }
 
-  let(:app_decorate) { app }
-
   before do
     allow(view).to receive(:app).and_return(app)
-    allow(view).to receive(:app_decorate).and_return(app_decorate)
     allow(controller).to receive(:current_user).and_return(stub_model(User))
   end
 

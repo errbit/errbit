@@ -9,7 +9,6 @@ RSpec.describe "apps/new.html.haml", type: :view do
 
   before do
     allow(view).to receive(:app).and_return(app)
-    allow(view).to receive(:app_decorate).and_return(app_decorate)
     allow(controller).to receive(:current_user).and_return(stub_model(User))
   end
 
