@@ -7,19 +7,11 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  expose(:app_scope) do
+  expose(:apps) do
     params[:search].present? ? App.search(params[:search]) : App.all
   end
 
-  expose(:apps) do
-    app_scope.to_a.sort.map { |app| app }
-  end
-
   expose(:app)
-
-  expose(:app_decorate) do
-    app
-  end
 
   expose(:all_errs) do
     params[:all_errs].present?
