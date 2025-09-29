@@ -2,6 +2,7 @@
 
 class Issue
   include ActiveModel::Model
+
   attr_accessor :problem, :user, :body
 
   def issue_tracker
@@ -9,7 +10,7 @@ class Issue
   end
 
   def tracker
-    @tracker ||= issue_tracker && issue_tracker.tracker
+    @tracker ||= issue_tracker&.tracker
   end
 
   def render_body_args
