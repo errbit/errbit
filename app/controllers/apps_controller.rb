@@ -12,14 +12,12 @@ class AppsController < ApplicationController
   end
 
   expose(:apps) do
-    # app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
     app_scope.to_a.sort.map { |app| app }
   end
 
   expose(:app)
 
   expose(:app_decorate) do
-    # AppDecorator.new(app)
     app
   end
 
