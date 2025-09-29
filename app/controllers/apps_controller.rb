@@ -12,13 +12,15 @@ class AppsController < ApplicationController
   end
 
   expose(:apps) do
-    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+    # app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+    app_scope.to_a.sort.map { |app| app }
   end
 
   expose(:app)
 
   expose(:app_decorate) do
-    AppDecorator.new(app)
+    # AppDecorator.new(app)
+    app
   end
 
   expose(:all_errs) do
@@ -101,6 +103,7 @@ class AppsController < ApplicationController
 
   def regenerate_api_key
     app.regenerate_api_key!
+
     redirect_to edit_app_path(app)
   end
 
@@ -155,6 +158,7 @@ class AppsController < ApplicationController
       params[:app][:email_at_notices] = email_at_notices
     else
       default_array = params[:app][:email_at_notices] = Errbit::Config.email_at_notices
+
       flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(", ")})."
     end
   end
