@@ -12,12 +12,10 @@ class ProblemsController < ApplicationController
   end
 
   expose(:app) do
-    # AppDecorator.new(app_scope.find(params[:app_id]))
     app_scope.find(params[:app_id])
   end
 
   expose(:problem) do
-    # ProblemDecorator.new(app.problems.find(params[:id]))
     app.problems.find(params[:id])
   end
 
