@@ -196,6 +196,7 @@ class App
     update_attribute(:api_key, SecureRandom.hex)
   end
 
+  # TODO: check and remove dead code
   def use_site_fingerprinter
     notice_fingerprinter.source == "site"
   end
