@@ -9,6 +9,7 @@ RSpec.describe Errbit::User, type: :model do
 
   it { is_expected.to validate_presence_of(:name) }
 
+
   describe "#github_login" do
     # subject { build(:errbit_user, email: "me@example.com", github_login: "biow0lf") }
 
@@ -33,5 +34,11 @@ RSpec.describe Errbit::User, type: :model do
     subject { create(:errbit_user) }
 
     it { expect(subject.attributes_for_super_diff).to eq(id: subject.id, name: subject.name) }
+  end
+
+  # private methods
+
+  describe "#generate_authentication_token" do
+
   end
 end
