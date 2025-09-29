@@ -147,13 +147,6 @@ GEM
     dotenv-rails (3.1.8)
       dotenv (= 3.1.8)
       railties (>= 6.1)
-    draper (4.0.6)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
-      activemodel-serializers-xml (>= 1.0)
-      activesupport (>= 5.0)
-      request_store (>= 1.0)
-      ruby2_keywords
     drb (2.2.3)
     email_spec (2.3.0)
       htmlentities (~> 4.3.3)
@@ -468,8 +461,6 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
-    request_store (1.7.0)
-      rack (>= 1.4)
     responders (3.2.0)
       actionpack (>= 7.0)
       railties (>= 7.0)
@@ -551,7 +542,6 @@ GEM
       rubocop (~> 1.72, >= 1.72.1)
       rubocop-ast (>= 1.44.0, < 2.0)
     ruby-progressbar (1.13.0)
-    ruby2_keywords (0.0.5)
     rubyzip (3.2.2)
     rushover (0.3.0)
       json
@@ -665,7 +655,6 @@ DEPENDENCIES
   decent_exposure
   devise
   dotenv-rails
-  draper
   email_spec
   errbit_github_plugin
   errbit_plugin
@@ -779,7 +768,6 @@ CHECKSUMS
   domain_name (0.6.20240107) sha256=5f693b2215708476517479bf2b3802e49068ad82167bcd2286f899536a17d933
   dotenv (3.1.8) sha256=9e1176060ced581f8e6ce4384e91361817763a76e3c625c8bddc18b35bd392c3
   dotenv-rails (3.1.8) sha256=46c9d1226a8b58a83b5f61325aa8cffd25cea1c0fafdfbbbee1e5dfea77980c4
-  draper (4.0.6) sha256=e96990bffd4d98806913972f5ae2e6a7e8a5fb5433f17b80fbed7ba99d3c9236
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   email_spec (2.3.0) sha256=df23be7a131186f7a3d5be3b35eaac9196f9ac13bd26c9c3d59341e13d852d11
   erb (6.0.0) sha256=2730893f9d8c9733f16cab315a4e4b71c1afa9cabc1a1e7ad1403feba8f52579
@@ -919,7 +907,6 @@ CHECKSUMS
   reactionview (0.1.6) sha256=d2f466efe758043c8dc1ea136b561c0c4510fd416528e00ed5ef39b5b0ef2b43
   regexp_parser (2.11.3) sha256=ca13f381a173b7a93450e53459075c9b76a10433caadcb2f1180f2c741fc55a4
   reline (0.6.3) sha256=1198b04973565b36ec0f11542ab3f5cfeeec34823f4e54cebde90968092b1835
-  request_store (1.7.0) sha256=e1b75d5346a315f452242a68c937ef8e48b215b9453a77a6c0acdca2934c88cb
   responders (3.2.0) sha256=89c2d6ac0ae16f6458a11524cae4a8efdceba1a3baea164d28ee9046bd3df55a
   rest-client (2.1.0) sha256=35a6400bdb14fae28596618e312776c158f7ebbb0ccad752ff4fa142bf2747e3
   rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
@@ -943,7 +930,6 @@ CHECKSUMS
   rubocop-rspec_rails (2.32.0) sha256=4a0d641c72f6ebb957534f539d9d0a62c47abd8ce0d0aeee1ef4701e892a9100
   rubocop-thread_safety (0.7.3) sha256=067cdd52fbf5deffc18995437e45b5194236eaff4f71de3375a1f6052e48f431
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
-  ruby2_keywords (0.0.5) sha256=ffd13740c573b7301cf7a2e61fc857b2a8e3d3aff32545d6f8300d8bae10e3ef
   rubyzip (3.2.2) sha256=c0ed99385f0625415c8f05bcae33fe649ed2952894a95ff8b08f26ca57ea5b3c
   rushover (0.3.0) sha256=8490d0f8fc0421d774122ac0f299bb4c1dc3bf482cd759df5ed635965b30dd48
   sawyer (0.9.3) sha256=0d0f19298408047037638639fe62f4794483fb04320269169bd41af2bdcf5e41
