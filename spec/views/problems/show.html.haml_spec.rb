@@ -46,7 +46,7 @@ RSpec.describe "problems/show.html.haml", type: :view do
     }
   end
 
-  let(:app) { AppDecorator.new(problem.app) }
+  let(:app) { problem.app }
 
   before do
     allow(view).to receive(:app).and_return(app)
@@ -62,11 +62,12 @@ RSpec.describe "problems/show.html.haml", type: :view do
   def with_issue_tracker(tracker, _problem)
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(trackers)
 
-    app.issue_tracker = IssueTrackerDecorator.new(
-      IssueTracker.new(type_tracker: tracker, options: {
+    app.issue_tracker = IssueTracker.new(
+      type_tracker: tracker,
+      options: {
         api_token: "token token token",
         project_id: "1234"
-      })
+      }
     )
   end
 
