@@ -3,7 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "problems/show.ics.erb", type: :view do
-  let(:problem) { ProblemDecorator.new(Fabricate(:problem)) }
+  # let(:problem) { ProblemDecorator.new(Fabricate(:problem)) }
+  let(:problem) { Fabricate(:problem) }
 
   before do
     allow(view).to receive(:problem).and_return(problem)
