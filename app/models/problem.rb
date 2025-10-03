@@ -314,6 +314,10 @@ class Problem
       (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
   end
 
+  def link_text
+    message.presence || error_class
+  end
+
   private
 
   def attribute_count_decrease(name, value)

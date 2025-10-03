@@ -196,8 +196,23 @@ class App
     update_attribute(:api_key, SecureRandom.hex)
   end
 
+  # TODO: check and remove dead code
   def use_site_fingerprinter
     notice_fingerprinter.source == "site"
+  end
+
+  # TODO: check and remove dead code
+  def custom_notice_fingerprinter_style
+    use_site_fingerprinter ? "display: none" : "display: inline"
+  end
+
+  # TODO: check and remove dead code
+  # def notify_user_display
+  #   notify_all_users ? "display: none;" : ""
+  # end
+
+  def notify_err_display
+    notify_on_errs ? "" : "display: none;"
   end
 
   private

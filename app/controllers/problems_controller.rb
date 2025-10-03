@@ -12,11 +12,11 @@ class ProblemsController < ApplicationController
   end
 
   expose(:app) do
-    AppDecorator.new(app_scope.find(params[:app_id]))
+    app_scope.find(params[:app_id])
   end
 
   expose(:problem) do
-    ProblemDecorator.new(app.problems.find(params[:id]))
+    app.problems.find(params[:id])
   end
 
   expose(:all_errs) do
@@ -54,11 +54,11 @@ class ProblemsController < ApplicationController
       if params[:notice_id]
         Notice.find(params[:notice_id])
       else
-        @notices = problem.object.notices.reverse_ordered
+        @notices = problem.notices.reverse_ordered
           .page(params[:notice]).per(1)
         @notices.first
       end
-    @notice = notice ? NoticeDecorator.new(notice) : nil
+    @notice = notice ? notice : nil
     @comment = Comment.new
   end
 
