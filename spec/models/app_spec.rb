@@ -247,6 +247,44 @@ RSpec.describe App, type: :model do
     end
   end
 
+  describe "#custom_notice_fingerprinter_style" do
+    subject { Fabricate(:app) }
+
+    context "when we use use_site_fingerprinter" do
+      it "is using custom notice fingerprinter style" do
+        subject.update(notice_fingerprinter: {source: "site"})
+
+        expect(subject.custom_notice_fingerprinter_style).to eq("display: none")
+      end
+    end
+
+    context "when we don't use use_site_fingerprinter" do
+      it "is not using custom notice fingerprinter style" do
+        subject.update(notice_fingerprinter: {source: nil})
+
+        expect(subject.custom_notice_fingerprinter_style).to eq("display: inline")
+      end
+    end
+  end
+
+  describe "#notify_err_display" do
+    context "when notify on errors is false" do
+      subject { Fabricate(:app, notify_on_errs: false) }
+
+      it "is expected to return display:none" do
+        expect(subject.notify_err_display).to eq("display: none;")
+      end
+    end
+
+    context "when notify on errors is true" do
+      subject { Fabricate(:app, notify_on_errs: true) }
+
+      it "is expected to return blank" do
+        expect(subject.notify_err_display).to eq("")
+      end
+    end
+  end
+
   context "searching" do
     it "finds the correct record" do
       found = Fabricate(:app, name: "Foo")
