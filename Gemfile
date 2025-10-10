@@ -58,7 +58,7 @@ gem "ri_cal"
 gem "json"
 
 # For Ruby 2.7+
-gem "bigdecimal", "3.3.0"
+gem "bigdecimal", "3.3.1"
 
 # Ruby 3.1 + Rails 6.1
 gem "rexml"
