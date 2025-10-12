@@ -30,4 +30,20 @@ RSpec.describe AppPolicy do
       it { is_expected.to forbid_action(:index) }
     end
   end
+
+  describe "#show?" do
+    let(:record) { create(:app) }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to permit_action(:show) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to permit_action(:show) }
+    end
+  end
 end
