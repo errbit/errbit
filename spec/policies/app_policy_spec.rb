@@ -127,3 +127,17 @@ RSpec.describe AppPolicy do
     end
   end
 end
+
+RSpec.describe AppPolicy::Scope do
+  describe "#resolve" do
+    let(:user) { create(:user, admin: false) }
+
+    let!(:app) { create(:app) }
+
+    let(:scope) { App }
+
+    subject { described_class.new(user, scope) }
+
+    it { expect(subject.resolve).to eq([app]) }
+  end
+end
