@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
     end
+
     redirect_to app_problem_path(app, problem)
   end
 
