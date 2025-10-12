@@ -12,20 +12,26 @@ class AppPolicy < ApplicationPolicy
   end
 
   def show?
+    true
   end
 
   def create?
+    admin?
   end
 
   def new?
+    admin?
   end
 
   def update?
+    admin?
   end
 
   def edit?
+    admin?
   end
 
   def destroy?
+    admin?
   end
 end
