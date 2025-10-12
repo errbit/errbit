@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class WatchersController < ApplicationController
-  expose :app
-  expose :watchers, -> { app.watchers }
-
   def update
-    watchers.create(user_id: current_user.id)
+    app = App.find(params[:app_id])
+
+    app.watchers.create!(user: current_user)
 
     flash[:success] = t(".success", app: app.name)
 
@@ -13,8 +12,11 @@ class WatchersController < ApplicationController
   end
 
   def destroy
-    watcher = watchers.where(user_id: params[:id]).first
-    watchers.delete(watcher)
+    app = App.find(params[:app_id])
+
+    watcher = app.watchers.where(user_id: params[:id]).first
+
+    app.watchers.delete(watcher)
 
     flash[:success] = t(".success", app: app.name)
 

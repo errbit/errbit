@@ -61,7 +61,9 @@ class AppsController < ApplicationController
     initialize_subclassed_notification_service
 
     if app.save
-      redirect_to app_url(app), flash: {success: I18n.t("controllers.apps.flash.create.success")}
+      flash[:success] = I18n.t("controllers.apps.flash.create.success")
+
+      redirect_to app_url(app)
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.create.error")
 
@@ -75,7 +77,9 @@ class AppsController < ApplicationController
     app.update(app_params)
 
     if app.save
-      redirect_to app_url(app), flash: {success: I18n.t("controllers.apps.flash.update.success")}
+      flash[:success] = I18n.t("controllers.apps.flash.update.success")
+
+      redirect_to app_url(app)
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.update.error")
 
@@ -85,9 +89,12 @@ class AppsController < ApplicationController
 
   def destroy
     if app.destroy
-      redirect_to apps_url, flash: {success: I18n.t("controllers.apps.flash.destroy.success")}
+      flash[:success] = I18n.t("controllers.apps.flash.destroy.success")
+
+      redirect_to apps_url
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.destroy.error")
+
       render :show
     end
   end
