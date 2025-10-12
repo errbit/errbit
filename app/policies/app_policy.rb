@@ -16,22 +16,22 @@ class AppPolicy < ApplicationPolicy
   end
 
   def create?
-    admin?
+    user.admin?
   end
 
   def new?
-    admin?
+    user.admin?
   end
 
   def update?
-    admin?
+    user.admin?
   end
 
   def edit?
-    admin?
+    user.admin?
   end
 
   def destroy?
-    admin?
+    user.admin?
   end
 end
