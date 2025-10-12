@@ -46,4 +46,84 @@ RSpec.describe AppPolicy do
       it { is_expected.to permit_action(:show) }
     end
   end
+
+  describe "#create?" do
+    let(:record) { App.new }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to permit_action(:create) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to forbid_action(:create) }
+    end
+  end
+
+  describe "#new?" do
+    let(:record) { App.new }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to permit_action(:new) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to forbid_action(:new) }
+    end
+  end
+
+  describe "#update?" do
+    let(:record) { create(:app) }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to permit_action(:update) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to forbid_action(:update) }
+    end
+  end
+
+  describe "#edit?" do
+    let(:record) { create(:app) }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to permit_action(:edit) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to forbid_action(:edit) }
+    end
+  end
+
+  describe "#destroy?" do
+    let(:record) { create(:app) }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to permit_action(:destroy) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to forbid_action(:destroy) }
+    end
+  end
 end
