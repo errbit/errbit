@@ -6,4 +6,8 @@ class AppPolicy < ApplicationPolicy
   def initialize(user, record)
     super
   end
+
+  def index?
+    false
+  end
 end

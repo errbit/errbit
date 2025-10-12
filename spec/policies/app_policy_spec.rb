@@ -14,4 +14,20 @@ RSpec.describe AppPolicy do
       it { expect { subject }.to raise_error(Pundit::NotAuthorizedError) }
     end
   end
+
+  describe "#index" do
+    let(:record) { create(:app) }
+
+    context "when user is an admin" do
+      let(:user) { create(:user, admin: true) }
+
+      it { is_expected.to forbid_action(:index) }
+    end
+
+    context "when user is not an admin" do
+      let(:user) { create(:user, admin: false) }
+
+      it { is_expected.to forbid_action(:index) }
+    end
+  end
 end
