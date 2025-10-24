@@ -73,4 +73,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 3000
 
-CMD ["sh", "-c", "./bin/rails server -p ${PORT:-3000}"]
+CMD ["sh", "-c", "HTTP_PORT=${PORT:-3000} ./bin/thrust ./bin/rails server"]
