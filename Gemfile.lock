@@ -598,7 +598,7 @@ GEM
     stringio (3.1.7)
     sucker_punch (3.2.0)
       concurrent-ruby (~> 1.0)
-    super_diff (0.16.0)
+    super_diff (0.17.0)
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
@@ -963,7 +963,7 @@ CHECKSUMS
   standard-performance (1.8.0) sha256=ed17b7d0e061b2a19a91dd434bef629439e2f32310f22f26acb451addc92b788
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
   sucker_punch (3.2.0) sha256=8eeb8d59254210f85b57fc9534c5a64f5e7d7498060dd6b9b50e33a89b100567
-  super_diff (0.16.0) sha256=be915d5fcf13a50595cfb473ed07c2c3c5cb28e9e96424365108d77fdd47cad9
+  super_diff (0.17.0) sha256=75666ec7bd3e0a73b47ccafeb4d3ca43ead96e8abb030068656c9c11053283e1
   temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   thruster (0.1.16) sha256=daa74b5b88e75df5a8f82559d9cd242391c5941735bdfe33a66fb266120168ad
