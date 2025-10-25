@@ -560,7 +560,7 @@ GEM
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
     securerandom (0.4.1)
-    selenium-webdriver (4.37.0)
+    selenium-webdriver (4.38.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -951,7 +951,7 @@ CHECKSUMS
   rushover (0.3.0) sha256=8490d0f8fc0421d774122ac0f299bb4c1dc3bf482cd759df5ed635965b30dd48
   sawyer (0.9.3) sha256=0d0f19298408047037638639fe62f4794483fb04320269169bd41af2bdcf5e41
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
-  selenium-webdriver (4.37.0) sha256=50873c16ad6c8720048a410f65ecac4bfef26abc7b31e8562477b504b2b976a6
+  selenium-webdriver (4.38.0) sha256=0a84e71fef66394ae8d9290d3a5bc24b33de49d45a7aa57fc09f246218bf102f
   simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
   simplecov-html (0.13.2) sha256=bd0b8e54e7c2d7685927e8d6286466359b6f16b18cb0df47b508e8d73c777246
   simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
