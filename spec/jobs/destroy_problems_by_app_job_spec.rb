@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe DestroyProblemsByAppJob, type: :job do
+  it { expect(subject).to be_an(ApplicationJob) }
+
   it "destroys all problems" do
     app = Fabricate(:app)
     problem = Fabricate(:problem, app: app)
