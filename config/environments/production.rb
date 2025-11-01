@@ -45,20 +45,30 @@ Rails.application.configure do
   # want to log everything, set the level to "debug".
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
-  # Use a different cache store in production.
+  # Prevent health checks from clogging up the logs.
+  config.silence_healthcheck_path = "/up"
+
+  # Don't log any deprecations.
+  config.active_support.report_deprecations = false
+
+  # Replace the default in-process memory cache store with a durable alternative.
   # config.cache_store = :mem_cache_store
 
-  # Use a real queuing backend for Active Job (and separate queues per environment).
+  # Replace the default in-process and non-durable queuing backend for Active Job.
   # config.active_job.queue_adapter = :resque
-  # config.active_job.queue_name_prefix = "errbit_production"
-
-  # Disable caching for Action Mailer templates even if Action Controller
-  # caching is enabled.
-  config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+
+  # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
+  # config.action_mailer.smtp_settings = {
+  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
+  #   password: Rails.application.credentials.dig(:smtp, :password),
+  #   address: "smtp.example.com",
+  #   port: 587,
+  #   authentication: :plain
+  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
