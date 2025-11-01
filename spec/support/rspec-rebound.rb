@@ -26,4 +26,10 @@ RSpec.configure do |config|
   #     Capybara.reset!
   #   end
   # end
+
+  config.retry_callback = proc do |ex|
+    if ex.metadata[:system]
+      Capybara.reset!
+    end
+  end
 end
