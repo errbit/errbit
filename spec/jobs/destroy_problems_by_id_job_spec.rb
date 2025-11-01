@@ -10,7 +10,7 @@ RSpec.describe DestroyProblemsByIdJob, type: :job do
     problem1 = Fabricate(:problem, app: app)
 
     expect do
-      DestroyProblemsByIdJob.perform_later([problem1.id])
+      described_class.perform_later([problem1.id])
     end.to change(Problem, :count).by(-1)
 
     expect(app.problems.count).to eq(0)
@@ -20,7 +20,7 @@ RSpec.describe DestroyProblemsByIdJob, type: :job do
     app = Fabricate(:app)
 
     expect do
-      DestroyProblemsByIdJob.perform_later([])
+      described_class.perform_later([])
     end.not_to change(Problem, :count)
 
     expect(app.problems.count).to eq(0)
