@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DestroyProblemsByAppJob < ActiveJob::Base
+class DestroyProblemsByAppJob < ApplicationJob
   queue_as :default
 
   # @param app_id [String]

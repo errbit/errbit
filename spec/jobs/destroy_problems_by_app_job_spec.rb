@@ -3,12 +3,14 @@
 require "rails_helper"
 
 RSpec.describe DestroyProblemsByAppJob, type: :job do
+  it { expect(subject).to be_an(ApplicationJob) }
+
   it "destroys all problems" do
     app = Fabricate(:app)
     problem = Fabricate(:problem, app: app)
 
     expect do
-      DestroyProblemsByAppJob.perform_later(app.id)
+      described_class.perform_later(app.id)
     end.to change(Problem, :count).by(-1)
 
     expect(app.problems.count).to eq(0)
@@ -18,7 +20,7 @@ RSpec.describe DestroyProblemsByAppJob, type: :job do
     app = Fabricate(:app)
 
     expect do
-      DestroyProblemsByAppJob.perform_later(app.id)
+      described_class.perform_later(app.id)
     end.not_to change(Problem, :count)
 
     expect(app.problems.count).to eq(0)
