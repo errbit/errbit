@@ -18,16 +18,16 @@ docker run --rm errbit/errbit bundle exec rake secret
 
 ## Which image version should I use?
 
-As of 2023, we are not releasing non-latest tags to docker hub (last release was v0.9.0 in 2020).
-Please use [errbit/errbit:latest](https://hub.docker.com/r/errbit/errbit/tags), which is updated on main builds.
-If you are interested in using official release tags of errbit, contributions to the CI process and shipping stable releases would be welcome.
+We are again releasing non-latest tags to Docker Hub. Please see
+[errbit/errbit](https://hub.docker.com/r/errbit/errbit/tags), which is
+updated on main builds and stable releases.
 
 ## Standalone Errbit App
 
-Assuming you have a mongo host available, you can run errbit using `docker
+Assuming you have a Mongo host available, you can run Errbit using `docker
 run`, exposing its HTTP interface on port 3000:
 
-```shell
+```bash
 docker run \
   -e "RAILS_ENV=production" \
   -e "MONGO_URL=mongodb://my-mongo-host" \
@@ -50,7 +50,7 @@ docker run \
 
 ## Errbit + Dependencies via Docker Compose
 
-Docker compose can take care of starting up a mongo container along with the
+Docker compose can take care of starting up a Mongo container along with the
 Errbit application container and linking the two containers together:
 
 ```shell
