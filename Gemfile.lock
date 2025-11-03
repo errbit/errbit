@@ -462,7 +462,7 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
-    reactionview (0.1.5)
+    reactionview (0.1.6)
       actionview (>= 7.0)
       herb (>= 0.7.5, < 1.0.0)
     regexp_parser (2.11.3)
@@ -916,7 +916,7 @@ CHECKSUMS
   rb-fsevent (0.11.2) sha256=43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe
   rb-inotify (0.11.1) sha256=a0a700441239b0ff18eb65e3866236cd78613d6b9f78fea1f9ac47a85e47be6e
   rdoc (6.15.1) sha256=28bfac73cd8b226a8079f53a564ceaccdb5b4480e34335100001570ddb1a481a
-  reactionview (0.1.5) sha256=ac56455347cb070fac259f5c06293d2a1f68b01aa5387747a2315381eb270baa
+  reactionview (0.1.6) sha256=d2f466efe758043c8dc1ea136b561c0c4510fd416528e00ed5ef39b5b0ef2b43
   regexp_parser (2.11.3) sha256=ca13f381a173b7a93450e53459075c9b76a10433caadcb2f1180f2c741fc55a4
   reline (0.6.2) sha256=1dad26a6008872d59c8e05244b119347c9f2ddaf4a53dce97856cd5f30a02846
   request_store (1.7.0) sha256=e1b75d5346a315f452242a68c937ef8e48b215b9453a77a6c0acdca2934c88cb
