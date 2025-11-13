@@ -385,6 +385,13 @@ RSpec/SortMetadata:
 RSpec/LeadingSubject:
   Enabled: false
 
+RSpec/LeakyConstantDeclaration:
+  Enabled: true
+
+# TODO: enable with update to rubocop-rspec 3.8.0
+#RSpec/LeakyLocalVariable:
+#  Enabled: true
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
@@ -414,6 +421,9 @@ Style/DisableSyntax:
 # This is new RSpec default. Disable.
 RSpecRails/InferredSpecType:
   Enabled: false
+
+RSpecRails/HttpStatusNameConsistency:
+  Enabled: true
 
 # Rails rules:
 
