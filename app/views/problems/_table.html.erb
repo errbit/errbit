@@ -1,0 +1,123 @@
+<%# locals: (problems:) %>
+<%
+  any_issue_links = problems.any? { |e| e.issue_link.present? && e.issue_link != 'pending' }
+  on_page_that_can_include_multiple_different_apps = params[:controller] == 'problems'
+%>
+
+<%= form_tag do %>
+  <table class="errs selectable">
+    <thead>
+      <tr>
+        <th><%= check_box_tag "toggle_problems_checkboxes" %></th>
+        <% if on_page_that_can_include_multiple_different_apps %>
+          <th><%= link_for_sort t('.app') %></th>
+        <% else %>
+          <th><%= link_for_sort t('.env'), 'environment' %></th>
+        <% end %>
+        <th><%= link_for_sort t('.what_and_where_html'), "message" %></th>
+        <th><%= link_for_sort t('.latest'), "last_notice_at" %></th>
+        <th class="count-header"><%= link_for_sort t('.count') %></th>
+        <% if any_issue_links %>
+          <th>Issue</th>
+        <% end %>
+        <th><%= t('.resolve') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% ProblemDecorator.decorate_collection(problems).each do |problem| %>
+        <tr class="<%= problem.resolved? ? 'resolved' : 'unresolved' %>">
+          <td class="select narrow-as-possible">
+            <div class="td-container">
+              <%= check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s) %>
+            </div>
+          </td>
+          <td class="app">
+            <div class="td-container">
+              <% if on_page_that_can_include_multiple_different_apps %>
+                <%= link_to problem.app.name, app_path(problem.app), class: "name nowrap", title: problem.app.name %>
+                <span class="environment nowrap" title="<%= problem.environment %>">
+                  <%= link_to problem.environment, problems_path(environment: problem.environment) %>
+                </span>
+              <% else %>
+                <span class="environment nowrap" title="<%= problem.environment %>">
+                  <%= link_to problem.environment, app_path(problem.app, environment: problem.environment) %>
+                </span>
+              <% end %>
+            </div>
+          </td>
+          <td class="message">
+            <div class="td-container">
+              <%= link_to problem.link_text, app_problem_path(problem.app, problem), class: "nowrap", title: problem.message %>
+              <em class="nowrap" title="<%= problem.where %>"><%= problem.where %></em>
+              <% if problem.comments_count > 0 %>
+                <% comment = problem.comments.last %>
+                <br>
+                <div class="inline_comment nowrap">
+                  <% if comment.user %>
+                    <em class="commenter">
+                      <%= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s %>:
+                    </em>
+                  <% end %>
+                  <em><%= truncate(comment.body, length: 100, separator: ' ') %></em>
+                </div>
+              <% end %>
+            </div>
+          </td>
+          <td class="latest">
+            <% value = "#{time_ago_in_words(problem.last_notice_at)} #{t('problems.table.ago')}" %>
+            <div class="td-container nowrap" title="<%= value %>"><%= value %></div>
+          </td>
+          <td class="count narrow-as-possible">
+            <div class="td-container">
+              <%= link_to problem.notices_count, app_problem_path(problem.app, problem) %>
+            </div>
+          </td>
+          <% if any_issue_links %>
+            <td class="issue_link narrow-as-possible">
+              <% if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending' %>
+                <%= link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank" %>
+              <% end %>
+            </td>
+          <% end %>
+          <td class="resolve narrow-as-possible">
+            <div class="td-container">
+              <% if problem.unresolved? %>
+                <%= link_to image_tag("thumbs-up.png"),
+                            resolve_app_problem_path(problem.app, problem),
+                            title: "Resolve",
+                            method: :put,
+                            data: { confirm: problem_confirm('resolve_one') },
+                            class: "resolve" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      <% if problems.none? %>
+        <tr>
+          <td colspan="100">
+            <em>No errs here</em>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate problems %>
+
+  <div class="tab-bar">
+    <ul>
+      <% [:merge, :unmerge, :resolve, :unresolve, :delete].each do |action| %>
+        <li>
+          <%= submit_tag t(".#{action}").capitalize,
+                         id: "#{action}_problems",
+                         class: "button",
+                         data: {
+                           action: polymorphic_path([action == :delete ? :destroy : action, :several_problems]),
+                           confirm: problem_confirm(action)
+                         } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
