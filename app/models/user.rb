@@ -6,7 +6,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise(*Errbit::Config.devise_modules)
+  # devise(*Errbit::Config.devise_modules)
 
   field :email
   field :github_login
@@ -127,6 +127,19 @@ class User
     {
       id: id.to_s,
       name: name
+    }
+  end
+
+  # For migration from MongoDB to SQL store
+  def attributes_for_migration
+    {
+      name: name,
+      admin: admin,
+      per_page: per_page,
+      time_zone: time_zone,
+      github_login: github_login,
+      github_oauth_token: github_oauth_token,
+      google_uid: google_uid
     }
   end
 
