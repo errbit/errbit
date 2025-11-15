@@ -13,6 +13,8 @@
 ActiveRecord::Schema[8.0].define(version: 2025_09_08_191820) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "name"
+    t.string "github_repo"
+    t.string "bitbucket_repo"
     t.string "repository_branch"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

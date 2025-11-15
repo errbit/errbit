@@ -7,13 +7,13 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  expose(:app_scope) do
-    params[:search].present? ? App.search(params[:search]) : App.all
-  end
-
-  expose(:apps) do
-    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
-  end
+  # expose(:app_scope) do
+  #   params[:search].present? ? App.search(params[:search]) : App.all
+  # end
+  #
+  # expose(:apps) do
+  #   app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+  # end
 
   expose(:app)
 
@@ -42,6 +42,9 @@ class AppsController < ApplicationController
   end
 
   def index
+    scope = params[:search].present? ? Errbit::App.search(params[:search]) : Errbit::App.all
+
+    @apps = scope.to_a.sort.map { |app| Errbit::AppDecorator.new(app) }
   end
 
   def show
