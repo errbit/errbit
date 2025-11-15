@@ -21,9 +21,9 @@ module Errbit
     #   github_login.present? ? false : super
     # end
 
-    # def github_account?
-    #   github_login.present? && github_oauth_token.present?
-    # end
+    def github_account?
+      github_login.present? && github_oauth_token.present?
+    end
 
     # def can_create_github_issues?
     #   # github_account? && Errbit::Config.github_access_scope.include?("repo")
@@ -34,9 +34,9 @@ module Errbit
     #   # self[:github_login] = login
     # end
 
-    # def google_account?
-    #   google_uid.present?
-    # end
+    def google_account?
+      google_uid.present?
+    end
 
     # def ensure_authentication_token
     #   # if authentication_token.blank?
