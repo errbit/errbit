@@ -5,8 +5,8 @@ class AddApps < ActiveRecord::Migration[8.0]
     create_table :errbit_apps do |t|
       t.string :name
       # field :api_key
-      # field :github_repo
-      # field :bitbucket_repo
+      t.string :github_repo
+      t.string :bitbucket_repo
       # field :custom_backtrace_url_template
       # field :asset_host
       t.string :repository_branch
