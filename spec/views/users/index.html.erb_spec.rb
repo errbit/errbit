@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "users/index.html.erb", type: :view do
-  let(:user) { create(:user) }
+  let(:user) { create(:errbit_user) }
 
   before { assign(:users, Kaminari.paginate_array([user], total_count: 1).page(1)) }
 

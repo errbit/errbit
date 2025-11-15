@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "users/new.html.erb", type: :view do
-  let(:user) { stub_model(User) }
+  let(:user) { stub_model(Errbit::User) }
 
   before do
     allow(view).to receive(:current_user).and_return(user)
@@ -11,15 +11,15 @@ RSpec.describe "users/new.html.erb", type: :view do
     assign(:user, user)
   end
 
-  it "should have per_page option" do
+  it "is expected to have per_page option" do
     render
 
-    expect(rendered).to match(/id="user_per_page"/)
+    expect(rendered).to match(/id="errbit_user_per_page"/)
   end
 
-  it "should have time_zone option" do
+  it "is expected to have time_zone option" do
     render
 
-    expect(rendered).to match(/id="user_time_zone"/)
+    expect(rendered).to match(/id="errbit_user_time_zone"/)
   end
 end
