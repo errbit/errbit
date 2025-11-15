@@ -45,14 +45,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191820) do
   end
 
   create_table "errbit_watchers", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "app_id", null: false
+    t.integer "errbit_user_id"
+    t.integer "errbit_app_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["app_id"], name: "index_errbit_watchers_on_app_id"
-    t.index ["user_id"], name: "index_errbit_watchers_on_user_id"
+    t.index ["errbit_app_id"], name: "index_errbit_watchers_on_errbit_app_id"
+    t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
   end
 
-  add_foreign_key "errbit_watchers", "apps"
-  add_foreign_key "errbit_watchers", "users"
+  add_foreign_key "errbit_watchers", "errbit_apps"
+  add_foreign_key "errbit_watchers", "errbit_users"
 end
