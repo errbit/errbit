@@ -25,7 +25,7 @@ RSpec.describe UserDestroy do
       expect do
         described_class.new(user).destroy
       end.to change {
-        app.reload.watchers.where(user_id: user.id).count
+        app.reload.watchers.where(user: user).count
       }.from(1).to(0)
     end
   end
