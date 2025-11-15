@@ -2,8 +2,8 @@
 
 module Errbit
   class Watcher < ApplicationRecord
-    belongs_to :user, optional: true
+    belongs_to :user, class_name: "Errbit::User", optional: true
 
-    belongs_to :app
+    belongs_to :app, class_name: "Errbit::App"
   end
 end
