@@ -57,6 +57,9 @@ The list of requirements to install Errbit are:
 
 * Ruby 3.4
 * MongoDB >= 7.0
+* PostgreSQL
+* MySQL / MariaDB
+* Sqlite3
 
 Installation
 ------------
