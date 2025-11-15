@@ -130,16 +130,21 @@ class User
     }
   end
 
-  # For migration from MongoDB to SQL store
+  # For migration from MongoDB to SQL store.
+  # TODO: remove after migration
   def attributes_for_migration
     {
+      email: email,
+      encrypted_password: encrypted_password,
       name: name,
       admin: admin,
       per_page: per_page,
       time_zone: time_zone,
       github_login: github_login,
       github_oauth_token: github_oauth_token,
-      google_uid: google_uid
+      google_uid: google_uid,
+      created_at: created_at,
+      updated_at: updated_at
     }
   end
 
