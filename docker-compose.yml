@@ -4,7 +4,7 @@ volumes:
 
 services:
   mongo:
-    image: "mongo:8.2.2"
+    image: "docker.io/library/mongo:8.2.2"
     container_name: "errbit_mongo"
     restart: "unless-stopped"
     volumes:
