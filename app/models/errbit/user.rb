@@ -44,9 +44,9 @@ module Errbit
     #   # end
     # end
 
-    # def self.token_authentication_key
-    #   # :auth_token
-    # end
+    def self.token_authentication_key
+      :auth_token
+    end
 
     # def reset_password(new_password, new_password_confirmation)
     #   # self.password = new_password
