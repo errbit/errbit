@@ -9,6 +9,31 @@ module Errbit
     validates :name, presence: true
     validates :github_login, uniqueness: {allow_nil: true}
 
+    def self.valid_google_domain?(email)
+      return true if Errbit::Config.google_authorized_domains.nil?
+
+      match_data = /.+@(?<domain>.+)$/.match(email)
+
+      return false if match_data.blank?
+
+      Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
+    end
+
+    def self.create_from_google_oauth2(access_token)
+      email = access_token.dig(:info, :email)
+      name = access_token.dig(:info, :name)
+      uid = access_token[:uid]
+
+      user = Errbit::User.where(email: email).first
+
+      user ||= Errbit::User.create(name: name,
+        email: email,
+        google_uid: uid,
+        password: Devise.friendly_token[0, 20])
+
+      user
+    end
+
     def per_page
       super || PER_PAGE
     end
