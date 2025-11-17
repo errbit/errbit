@@ -3,6 +3,8 @@
 class AddUsers < ActiveRecord::Migration[8.0]
   def change
     create_table :errbit_users do |t|
+      t.string :bson_id
+
       ## Database authenticatable
       t.string :email, null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -36,6 +38,8 @@ class AddUsers < ActiveRecord::Migration[8.0]
 
       t.timestamps null: false
     end
+
+    add_index :errbit_users, :bson_id, unique: true
 
     add_index :errbit_users, :email, unique: true
     add_index :errbit_users, :reset_password_token, unique: true
