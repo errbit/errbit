@@ -7,7 +7,12 @@ module Errbit
     devise(*Errbit::Config.devise_modules)
 
     validates :name, presence: true
+
     validates :github_login, uniqueness: {allow_nil: true}
+
+    if Errbit::Config.user_has_username
+      validates :username, presence: true
+    end
 
     def self.valid_google_domain?(email)
       return true if Errbit::Config.google_authorized_domains.nil?

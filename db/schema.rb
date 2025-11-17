@@ -33,6 +33,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191820) do
     t.string "last_sign_in_ip"
     t.string "authentication_token"
     t.string "name"
+    t.string "username"
     t.boolean "admin", default: false, null: false
     t.integer "per_page", default: 30
     t.string "time_zone", default: "UTC"

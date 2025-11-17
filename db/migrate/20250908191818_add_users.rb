@@ -25,6 +25,7 @@ class AddUsers < ActiveRecord::Migration[8.0]
       t.string :authentication_token
 
       t.string :name
+      t.string :username
       t.boolean :admin, null: false, default: false
       t.integer :per_page, default: 30
       t.string :time_zone, default: "UTC"
