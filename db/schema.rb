@@ -21,8 +21,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191821) do
   end
 
   create_table "errbit_problems", force: :cascade do |t|
+    t.integer "errbit_app_id", null: false
+    t.string "error_class"
+    t.string "environment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["errbit_app_id"], name: "index_errbit_problems_on_errbit_app_id"
   end
 
   create_table "errbit_users", force: :cascade do |t|
@@ -63,6 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191821) do
     t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
   end
 
+  add_foreign_key "errbit_problems", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_users"
 end
