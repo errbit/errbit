@@ -3,8 +3,8 @@
 namespace :errbit do
   desc "Migrate from MongoDB to SQL"
   task migrate: :environment do
-    User.each do |user|
-      errbit_user = Errbit.new
+    User.find_each do |user|
+      errbit_user = Errbit::User.new
       errbit_user.attributes = user.attributes_for_migration
       errbit_user.save! # TODO: save without validation
     end
