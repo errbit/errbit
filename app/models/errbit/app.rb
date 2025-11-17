@@ -6,8 +6,6 @@ module Errbit
 
     has_many :problems, class_name: "Errbit::Problem", dependent: :destroy
 
-    # has_many :problems, inverse_of: :app, dependent: :destroy
-
     def github_repo?
       github_repo.present?
     end

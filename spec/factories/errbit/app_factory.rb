@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :errbit_app, class: "Errbit::App" do
     name { Faker::App.unique.name }
 
-    repository_branch { "main" }
+    repository_branch { ["main", "master"].sample }
   end
 end
