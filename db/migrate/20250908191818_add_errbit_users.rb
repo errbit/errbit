@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddUsers < ActiveRecord::Migration[8.0]
+class AddErrbitUsers < ActiveRecord::Migration[8.0]
   def change
     create_table :errbit_users do |t|
       t.string :bson_id

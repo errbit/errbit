@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddWatchers < ActiveRecord::Migration[8.0]
+class AddErrbitWatchers < ActiveRecord::Migration[8.0]
   def change
     create_table :errbit_watchers do |t|
       t.references :errbit_user, null: true, foreign_key: true
