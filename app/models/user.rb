@@ -133,6 +133,7 @@ class User
   # For migration from MongoDB to SQL store.
   # TODO: remove after migration
   def attributes_for_migration
+    # TODO: check for missing fields
     {
       email: email,
       encrypted_password: encrypted_password,

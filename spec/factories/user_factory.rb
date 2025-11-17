@@ -6,8 +6,6 @@ FactoryBot.define do
 
     name { Faker::Name.unique.name }
 
-    password { Faker::Internet.password }
-
     admin { [true, false].sample }
   end
 end

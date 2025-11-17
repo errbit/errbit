@@ -6,7 +6,7 @@ namespace :errbit do
     User.each do |user|
       errbit_user = Errbit.new
       errbit_user.attributes = user.attributes_for_migration
-      errbit_user.save!
+      errbit_user.save! # TODO: save without validation
     end
   end
 end
