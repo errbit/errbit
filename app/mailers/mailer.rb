@@ -32,8 +32,8 @@ class Mailer < ActionMailer::Base
   def comment_notification(comment)
     @comment = comment
     @user = comment.user
-    @problem = ProblemDecorator.new comment.err
-    @notice = NoticeDecorator.new comment.err.notices.first
+    @problem = ProblemDecorator.new(comment.err)
+    @notice = NoticeDecorator.new(comment.err.notices.first)
     @app = @problem.app
 
     recipients = @comment.notification_recipients
