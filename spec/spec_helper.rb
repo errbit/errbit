@@ -12,7 +12,6 @@ SimpleCov.start "rails" do
   # https://github.com/simplecov-ruby/simplecov/issues/1057
   # enable_coverage_for_eval
 
-  add_group "Decorators", "app/decorators"
   add_group "Interactors", "app/interactors"
   add_group "Policies", "app/policies"
 end
@@ -43,8 +42,4 @@ RSpec.configure do |config|
 
   config.include Haml, type: :helper
   config.include Haml::Helpers, type: :helper
-
-  config.before(:each, type: :decorator) do |_|
-    Draper::ViewContext.current.class_eval { include Haml::Helpers }
-  end
 end

@@ -7,19 +7,11 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  expose(:app_scope) do
+  expose(:apps) do
     params[:search].present? ? App.search(params[:search]) : App.all
   end
 
-  expose(:apps) do
-    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
-  end
-
   expose(:app)
-
-  expose(:app_decorate) do
-    AppDecorator.new(app)
-  end
 
   expose(:all_errs) do
     params[:all_errs].present?
@@ -101,6 +93,7 @@ class AppsController < ApplicationController
 
   def regenerate_api_key
     app.regenerate_api_key!
+
     redirect_to edit_app_path(app)
   end
 
@@ -155,6 +148,7 @@ class AppsController < ApplicationController
       params[:app][:email_at_notices] = email_at_notices
     else
       default_array = params[:app][:email_at_notices] = Errbit::Config.email_at_notices
+
       flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(", ")})."
     end
   end

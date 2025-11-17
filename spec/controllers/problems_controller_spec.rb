@@ -248,8 +248,8 @@ RSpec.describe ProblemsController, type: :controller do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(Fabricate(:notice)) }
-      let(:problem) { ProblemDecorator.new(notice.problem) }
+      let(:notice) { Fabricate(:notice) }
+      let(:problem) { notice.problem }
       let(:issue_tracker) do
         Fabricate(:issue_tracker).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
@@ -320,8 +320,8 @@ RSpec.describe ProblemsController, type: :controller do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(Fabricate(:notice)) }
-      let(:problem) { ProblemDecorator.new(notice.problem) }
+      let(:notice) { Fabricate(:notice) }
+      let(:problem) { notice.problem }
       let(:issue_tracker) do
         Fabricate(:issue_tracker).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
