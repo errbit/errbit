@@ -27,6 +27,10 @@ class Watcher
     user.try(:email) || email
   end
 
+  def email_choosen
+    email.blank? ? "chosen" : ""
+  end
+
   private
 
   def ensure_user_or_email

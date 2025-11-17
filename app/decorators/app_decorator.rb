@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AppDecorator < Draper::Decorator
-  decorates_association :watchers
   decorates_association :issue_tracker
   delegate_all
 

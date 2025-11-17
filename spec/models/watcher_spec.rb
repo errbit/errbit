@@ -33,4 +33,18 @@ RSpec.describe Watcher, type: :model do
       expect(watcher.address).to eq "widgets@acme.com"
     end
   end
+
+  describe "#email_choosen" do
+    context "with email define" do
+      it "return blank" do
+        expect(described_class.new(email: "foo").email_choosen).to eq("")
+      end
+    end
+
+    context "without email define" do
+      it "return choosen" do
+        expect(described_class.new(email: "").email_choosen).to eq("chosen")
+      end
+    end
+  end
 end

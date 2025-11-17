@@ -603,4 +603,18 @@ RSpec.describe Problem, type: :model do
       expect(subject.url).to eq("http://memyselfandi.com/apps/#{subject.app.id}/problems/#{subject.id}")
     end
   end
+
+  describe "#link_text" do
+    context "when message is present" do
+      subject { Fabricate(:problem, message: "Test message") }
+
+      it { expect(subject.link_text).to eq("Test message") }
+    end
+
+    context "when message is not present" do
+      subject { Fabricate(:problem, message: nil, error_class: "ErrorClass") }
+
+      it { expect(subject.link_text).to eq("ErrorClass") }
+    end
+  end
 end
