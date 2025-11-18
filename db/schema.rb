@@ -12,30 +12,36 @@
 
 ActiveRecord::Schema[8.0].define(version: 2025_09_08_191822) do
   create_table "errbit_apps", force: :cascade do |t|
+    t.string "bson_id"
     t.string "name"
     t.string "github_repo"
     t.string "bitbucket_repo"
     t.string "repository_branch"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_apps_on_bson_id", unique: true
   end
 
   create_table "errbit_comments", force: :cascade do |t|
+    t.string "bson_id"
     t.integer "errbit_user_id", null: false
     t.integer "errbit_problem_id", null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_comments_on_bson_id", unique: true
     t.index ["errbit_problem_id"], name: "index_errbit_comments_on_errbit_problem_id"
     t.index ["errbit_user_id"], name: "index_errbit_comments_on_errbit_user_id"
   end
 
   create_table "errbit_problems", force: :cascade do |t|
+    t.string "bson_id"
     t.integer "errbit_app_id", null: false
     t.string "error_class"
     t.string "environment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_problems_on_bson_id", unique: true
     t.index ["errbit_app_id"], name: "index_errbit_problems_on_errbit_app_id"
   end
 
@@ -69,10 +75,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191822) do
   end
 
   create_table "errbit_watchers", force: :cascade do |t|
+    t.string "bson_id"
     t.integer "errbit_user_id"
     t.integer "errbit_app_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_watchers_on_bson_id", unique: true
     t.index ["errbit_app_id"], name: "index_errbit_watchers_on_errbit_app_id"
     t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
   end

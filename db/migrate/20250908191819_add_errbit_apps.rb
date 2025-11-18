@@ -3,6 +3,8 @@
 class AddErrbitApps < ActiveRecord::Migration[8.0]
   def change
     create_table :errbit_apps do |t|
+      t.string :bson_id
+
       t.string :name
       # field :api_key
       t.string :github_repo
@@ -17,5 +19,7 @@ class AddErrbitApps < ActiveRecord::Migration[8.0]
 
       t.timestamps null: false
     end
+
+    add_index :errbit_apps, :bson_id, unique: true
   end
 end
