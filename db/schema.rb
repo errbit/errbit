@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_08_191821) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_08_191822) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "name"
     t.string "github_repo"
@@ -18,6 +18,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191821) do
     t.string "repository_branch"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "errbit_comments", force: :cascade do |t|
+    t.integer "errbit_user_id", null: false
+    t.integer "errbit_problem_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["errbit_problem_id"], name: "index_errbit_comments_on_errbit_problem_id"
+    t.index ["errbit_user_id"], name: "index_errbit_comments_on_errbit_user_id"
   end
 
   create_table "errbit_problems", force: :cascade do |t|
@@ -67,6 +77,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191821) do
     t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
   end
 
+  add_foreign_key "errbit_comments", "errbit_problems"
+  add_foreign_key "errbit_comments", "errbit_users"
   add_foreign_key "errbit_problems", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_users"
