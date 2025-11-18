@@ -135,15 +135,25 @@ class User
   def attributes_for_migration
     # TODO: check for missing fields
     {
+      bson_id: id,
       email: email,
-      encrypted_password: encrypted_password,
+      github_login: github_login,
+      github_oauth_token: github_oauth_token,
+      google_uid: google_uid,
       name: name,
       admin: admin,
       per_page: per_page,
       time_zone: time_zone,
-      github_login: github_login,
-      github_oauth_token: github_oauth_token,
-      google_uid: google_uid,
+      encrypted_password: encrypted_password,
+      reset_password_token: reset_password_token,
+      reset_password_sent_at: reset_password_sent_at,
+      remember_created_at: remember_created_at,
+      sign_in_count: sign_in_count,
+      current_sign_in_at: current_sign_in_at,
+      last_sign_in_at: last_sign_in_at,
+      current_sign_in_ip: current_sign_in_ip,
+      last_sign_in_ip: last_sign_in_ip,
+      authentication_token: authentication_token,
       created_at: created_at,
       updated_at: updated_at
     }
