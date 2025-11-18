@@ -14,7 +14,7 @@ class ProblemMerge
     child_problems.each do |problem|
       merged_problem.errs.concat problem.errs
       merged_problem.comments.concat problem.comments
-      problem.reload # deference all associate objet to avoid delete him after
+      problem.reload # deference all associate object to avoid delete him after
       ProblemDestroy.execute(problem)
     end
     merged_problem.recache
