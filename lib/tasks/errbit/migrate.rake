@@ -11,11 +11,13 @@ namespace :errbit do
 
     App.find_each do |app|
       errbit_app = Errbit::App.find_or_initialize_by(bson_id: app.id.to_s)
-
+      # TODO: finish
       errbit_app.save(validate: false)
 
       app.watchers.find_each do |watcher|
-
+        errbit_watcher = Errbit::Watcher.find_or_initialize_by(bson_id: watcher.id.to_s)
+        # TODO: finish
+        errbit_watcher.save(validate: false)
       end
     end
   end
