@@ -84,7 +84,7 @@ group :development, :test do
   gem "rubocop-disable_syntax", require: false
   gem "rubocop-thread_safety", require: false
   gem "rubocop-factory_bot", require: false
-  gem "standard", "1.51.1", require: false
+  gem "standard", "1.52.0", require: false
   gem "faker"
   gem "factory_bot_rails"
   gem "brakeman", require: false
