@@ -15,11 +15,11 @@ class AppsController < ApplicationController
   #   app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
   # end
 
-  expose(:app)
-
-  expose(:app_decorate) do
-    AppDecorator.new(app)
-  end
+  # expose(:app)
+  #
+  # expose(:app_decorate) do
+  #   AppDecorator.new(app)
+  # end
 
   expose(:all_errs) do
     params[:all_errs].present?
@@ -48,7 +48,7 @@ class AppsController < ApplicationController
   end
 
   def show
-    app
+    @app = Errbit::App.find(params[:id]).decorate
   end
 
   def new

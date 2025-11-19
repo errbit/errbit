@@ -13,7 +13,7 @@ class AddErrbitApps < ActiveRecord::Migration[8.0]
       # field :asset_host
       t.string :repository_branch
       t.string :current_app_version
-      # field :notify_all_users, type: Boolean, default: false
+      t.boolean :notify_all_users, null: false, default: false
       # field :notify_on_errs, type: Boolean, default: true
       # field :email_at_notices, type: Array, default: Errbit::Config.email_at_notices
 

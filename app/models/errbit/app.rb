@@ -6,6 +6,11 @@ module Errbit
 
     has_many :problems, class_name: "Errbit::Problem", foreign_key: :errbit_app_id, dependent: :destroy
 
+    # @param user [User]
+    def watched_by?(user)
+      watchers.exists?(user: user)
+    end
+
     def github_repo?
       github_repo.present?
     end

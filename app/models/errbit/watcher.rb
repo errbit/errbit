@@ -11,5 +11,9 @@ module Errbit
       class_name: "Errbit::App",
       inverse_of: :watchers,
       foreign_key: :errbit_app_id
+
+    def label
+      user.present? ? user.name : email
+    end
   end
 end

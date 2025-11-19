@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191822) do
     t.string "bitbucket_repo"
     t.string "repository_branch"
     t.string "current_app_version"
+    t.boolean "notify_all_users", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bson_id"], name: "index_errbit_apps_on_bson_id", unique: true
