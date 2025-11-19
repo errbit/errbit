@@ -6,13 +6,13 @@ class AddErrbitApps < ActiveRecord::Migration[8.0]
       t.string :bson_id
 
       t.string :name
-      # field :api_key
+      t.string :api_key
       t.string :github_repo
       t.string :bitbucket_repo
       # field :custom_backtrace_url_template
       # field :asset_host
       t.string :repository_branch
-      # field :current_app_version
+      t.string :current_app_version
       # field :notify_all_users, type: Boolean, default: false
       # field :notify_on_errs, type: Boolean, default: true
       # field :email_at_notices, type: Array, default: Errbit::Config.email_at_notices

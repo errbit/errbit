@@ -14,9 +14,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_191822) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "bson_id"
     t.string "name"
+    t.string "api_key"
     t.string "github_repo"
     t.string "bitbucket_repo"
     t.string "repository_branch"
+    t.string "current_app_version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bson_id"], name: "index_errbit_apps_on_bson_id", unique: true
