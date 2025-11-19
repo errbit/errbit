@@ -6,6 +6,9 @@ class CommentsController < ApplicationController
   expose :comment
 
   def create
+    app = Errbit::App.find(params[:app_id])
+    problem = app.problems.find(params[:problem_id])
+
     problem.comments << comment
 
     if problem.save
