@@ -77,6 +77,9 @@ group :development, :test do
   gem "pg", "~> 1.1"
   gem "trilogy", "~> 2.7"
 
+  gem "prosopite"
+  gem "pg_query"
+
   gem "airbrake", "~> 4.3.5", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false

@@ -11,6 +11,18 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  if Rails.env.local?
+    around_action :n_plus_one_detection
+
+    def n_plus_one_detection
+      Prosopite.scan
+
+      yield
+    ensure
+      Prosopite.finish
+    end
+  end
+
   private
 
   def require_admin!
