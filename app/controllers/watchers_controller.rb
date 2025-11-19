@@ -14,9 +14,9 @@ class WatchersController < ApplicationController
   def destroy
     app = Errbit::App.find(params[:app_id])
 
-    watcher = app.watchers.where(user: current_user).first
+    watcher = app.watchers.find_by!(user: current_user)
 
-    # app.watchers.delete(watcher)
+    watcher.destroy!
 
     flash[:success] = t(".success", app: app.name)
 
