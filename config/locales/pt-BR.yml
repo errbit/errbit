@@ -220,7 +220,7 @@ pt-BR:
       github_repo: Repositório GitHub
       message: Mensagem
       no_error_yet: "Nenhum erro foi capturado até então, certifique-se de que sua aplicação está configurada"
-      no_watcher: "Infelizmente, ninguém está observando esta aplicação"
+      no_watchers: "Infelizmente, ninguém está observando esta aplicação"
       repository: Repositório
       revision: Versão
       show_hide: "(exibir/ocultar)"
