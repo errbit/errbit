@@ -137,7 +137,7 @@ RSpec.describe Problem, type: :model do
       er = ActiveModel::Errors.new(problem)
       er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
-      expect(problem.valid?).o eq(false)
+      expect(problem.valid?).to eq(false)
       expect do
         problem.resolve!
       end.to raise_error(Mongoid::Errors::Validations)
