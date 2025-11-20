@@ -14,8 +14,8 @@ class Problem
     user_agents: :user_agent_string
   }.freeze
 
-  field :last_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
   field :first_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
+  field :last_notice_at, type: ActiveSupport::TimeWithZone, default: proc { Time.zone.now }
   field :resolved, type: Boolean, default: false
   field :resolved_at, type: Time
   field :issue_link, type: String
@@ -36,8 +36,8 @@ class Problem
   index app_id: 1
   index app_name: 1
   index message: 1
-  index last_notice_at: 1
   index first_notice_at: 1
+  index last_notice_at: 1
   index resolved_at: 1
   index notices_count: 1
 
@@ -54,7 +54,8 @@ class Problem
   has_many :comments, inverse_of: :err, dependent: :destroy
 
   validates :environment, presence: true
-  validates :last_notice_at, :first_notice_at, presence: true
+  validates :first_notice_at, presence: true
+  validates :last_notice_at, presence: true
 
   before_create :cache_app_attributes
 
