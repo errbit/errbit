@@ -24,7 +24,7 @@ class Watcher
   end
 
   def address
-    user.try(:email) || email
+    user&.email || email
   end
 
   def email_choosen
