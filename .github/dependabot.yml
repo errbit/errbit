@@ -8,22 +8,30 @@ updates:
     allow:
       - dependency-type: "direct"
       - dependency-type: "indirect"
+    assignees:
+      - "biow0lf"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 99
+    assignees:
+      - "biow0lf"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "biow0lf"
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "biow0lf"
 
   - package-ecosystem: "docker-compose"
     directory: "/"
