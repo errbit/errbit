@@ -249,7 +249,7 @@ en:
       github_repo: GitHub Repo
       message: Message
       no_error_yet: "No errors have been caught yet, make sure you set up your app"
-      no_watcher: "Sadly, no one is watching this app"
+      no_watchers: "Sadly, no one is watching this app"
       repository: Repository
       revision: Revision
       show_hide: "(show/hide)"
@@ -275,10 +275,10 @@ en:
     search:
       search_placeholder: "Search for application"
   watchers:
+    create:
+      success: "You are now watching %{app}"
     destroy:
       success: "You are no longer watching %{app}"
-    update:
-      success: "You are now watching %{app}"
   site_config:
     index:
       title: Config

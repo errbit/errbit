@@ -15,7 +15,7 @@ RSpec.describe "A user can watch and unwatch an application", type: :system, ret
       click_link app.name
       click_link I18n.t("apps.show.watch")
 
-      expect(page).to have_content(I18n.t("watchers.update.success", app: app.name))
+      expect(page).to have_content(I18n.t("watchers.create.success", app: app.name))
     end
   end
 

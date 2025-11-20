@@ -220,7 +220,7 @@ pt-BR:
       github_repo: Repositório GitHub
       message: Mensagem
       no_error_yet: "Nenhum erro foi capturado até então, certifique-se de que sua aplicação está configurada"
-      no_watcher: "Infelizmente, ninguém está observando esta aplicação"
+      no_watchers: "Infelizmente, ninguém está observando esta aplicação"
       repository: Repositório
       revision: Versão
       show_hide: "(exibir/ocultar)"
@@ -246,10 +246,10 @@ pt-BR:
     search:
       search_placeholder: "Search for application"
   watchers:
+    create:
+      success: "Agora você está observando %{app}"
     destroy:
       success: "Você não está mais observando %{app}"
-    update:
-      success: "Agora você está observando %{app}"
   site_config:
     index:
       title: Configurações
