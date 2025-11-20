@@ -274,11 +274,11 @@ en:
       update: "Update App"
     search:
       search_placeholder: "Search for application"
-  watchers:
+  watch:
+    create:
+      success: "You are now watching %{app}"
     destroy:
       success: "You are no longer watching %{app}"
-    update:
-      success: "You are now watching %{app}"
   site_config:
     index:
       title: Config

@@ -245,11 +245,11 @@ pt-BR:
       update: "Atualizar Aplicação"
     search:
       search_placeholder: "Search for application"
-  watchers:
+  watch:
+    create:
+      success: "Agora você está observando %{app}"
     destroy:
       success: "Você não está mais observando %{app}"
-    update:
-      success: "Agora você está observando %{app}"
   site_config:
     index:
       title: Configurações

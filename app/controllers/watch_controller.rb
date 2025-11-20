@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class WatchersController < ApplicationController
-  def update
+class WatchController < ApplicationController
+  def create
     app = App.find(params[:app_id])
 
     app.watchers.create!(user: current_user)
@@ -14,7 +14,7 @@ class WatchersController < ApplicationController
   def destroy
     app = App.find(params[:app_id])
 
-    watcher = app.watchers.where(user_id: params[:id]).first
+    watcher = app.watchers.where(user: current_user).first
 
     app.watchers.delete(watcher)
 

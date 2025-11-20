@@ -57,7 +57,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :watchers, only: [:destroy, :update]
+    resource :watch, only: [:create, :destroy]
 
     member do
       post :regenerate_api_key
@@ -92,5 +92,5 @@ Rails.application.routes.draw do
 
   match "/api/v3/projects/:project_id/notices" => "api/v3/notices#create", :via => [:post, :options]
 
-  root to: "apps#index"
+  root "apps#index"
 end
