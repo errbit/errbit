@@ -57,7 +57,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :watch, only: [:create, :destroy]
+    resource :watchers, only: [:create, :destroy]
 
     member do
       post :regenerate_api_key

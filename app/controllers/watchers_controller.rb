@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WatchController < ApplicationController
+class WatchersController < ApplicationController
   def create
     app = App.find(params[:app_id])
 

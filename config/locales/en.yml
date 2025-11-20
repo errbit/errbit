@@ -274,7 +274,7 @@ en:
       update: "Update App"
     search:
       search_placeholder: "Search for application"
-  watch:
+  watchers:
     create:
       success: "You are now watching %{app}"
     destroy:

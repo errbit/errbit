@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe WatchController, type: :controller do
+RSpec.describe WatchersController, type: :controller do
   let(:user) { Fabricate(:user) }
   let(:problem) { Fabricate(:problem) }
 
@@ -11,15 +11,17 @@ RSpec.describe WatchController, type: :controller do
   describe "#create" do
     let(:app) { Fabricate(:app) }
 
-    context "successful watcher update" do
+    context "successful watcher create" do
       before do
-        put :update, params: {app_id: app.id, id: user.id.to_s}
+        post :create, params: {app_id: app.id}
+
         problem.reload
       end
 
       it "should be watching" do
         app.reload
-        expect(app.watchers.first.user_id).to eq user.id
+
+        expect(app.watchers.first.user_id).to eq(user.id)
       end
 
       it "should redirect to app page" do
@@ -39,7 +41,8 @@ RSpec.describe WatchController, type: :controller do
       let(:watcher) { app.watchers.first }
 
       before do
-        delete :destroy, params: {app_id: app.id, id: watcher.user.id.to_s}
+        delete :destroy, params: {app_id: app.id}
+
         problem.reload
       end
 
