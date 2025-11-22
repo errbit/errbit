@@ -77,6 +77,7 @@
               <%= link_to problem.notices_count, app_problem_path(problem.app, problem) %>
             </div>
 
+            <%# TODO: this if looks like wrong and should be up for one element (td in td?). %>
             <% if any_issue_links %>
               <td class="issue_link narrow-as-possible">
                 <% if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != "pending" %>
