@@ -1,0 +1,134 @@
+<% content_for :page_title, problem.message %>
+<% content_for :title_css_class, "err_show #{"resolved" if problem.resolved?}" %>
+<% content_for :title, problem.error_class || truncate(problem.message, length: 32) %>
+
+<% content_for :meta do %>
+  <strong><%= t(".app") + ":" %></strong>
+  <%= link_to app.name, app %>
+  <strong><%= t(".where") + ":" %></strong>
+  <%= problem.where %><br>
+  <strong><%= t(".environment") + ":" %></strong>
+  <%= problem.environment %>
+  <strong><%= t(".first_notice") + ":" %></strong>
+  <%= problem.first_notice_at.to_fs(:precise) %>
+  <strong><%= t(".last_notice") + ":" %></strong>
+  <%= problem.last_notice_at.to_fs(:precise) %>
+<% end %>
+
+<% content_for :action_bar do %>
+  <% if problem.unresolved? %>
+    <span><%= link_to t(".resolve"), [:resolve, app, problem], method: :put,
+      data: { confirm: problem_confirm("resolve_one") }, class: "resolve" %></span>
+  <% end %>
+
+  <% if current_user.authentication_token %>
+    <span>
+      <%= link_to polymorphic_path([app, problem], format: :ics, auth_token: current_user.authentication_token) do %>
+        <i class="fa fa-calendar"></i>
+        iCal
+      <% end %>
+    </span>
+  <% end %>
+
+  <span><%= link_to t(".up"), (request.env["HTTP_REFERER"] ? :back : app_problems_path(app)), class: "up" %></span>
+  <br>
+  <%= render "issue_tracker_links", app: app, problem: problem %>
+<% end %>
+
+<% content_for :comments do %>
+  <h3><%= t(".comments") %></h3>
+
+  <% problem.comments.ordered.each do |comment| %>
+    <div class="window">
+      <table class="comment">
+        <tr>
+          <th>
+            <% if comment.user %>
+              <% if Errbit::Config.use_gravatar %>
+                <%= gravatar_tag(comment.user.email, s: 24) %>
+              <% end %>
+              <span class="comment-info">
+                <%= time_ago_in_words(comment.created_at, include_seconds: true) + " " + t(".ago_by") %>
+                <%= link_to comment.user.email, comment.user %>
+              </span>
+            <% else %>
+              <span class="comment-info">
+                <%= time_ago_in_words(comment.created_at, include_seconds: true) + " " + t(".ago_by_unknown_user") %>
+              </span>
+            <% end %>
+            <span class="delete">
+              <%= link_to "&#10008;".html_safe, [app, problem, comment],
+                method: :delete, data: { confirm: t("comments.confirm_delete") },
+                class: "destroy-comment" %>
+            </span>
+          </th>
+        </tr>
+
+        <tr>
+          <td><%= auto_link_format(comment.body) %></td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+
+  <%= form_for [app, problem, @comment] do |comment_form| %>
+    <p><%= t(".add_a_comment") %></p>
+    <%= comment_form.text_area :body %>
+    <%= comment_form.submit t(".save_comment") %>
+  <% end %>
+<% end %>
+
+<h4><%= @notice&.message %></h4>
+
+<% if params[:notice_id] %>
+  <p><%= t(".notice_by_id", notice_id: params[:notice_id]) %></p>
+<% else %>
+  <%= paginate @notices, param_name: :notice, theme: :notices %>
+<% end %>
+
+<div class="tab-bar">
+  <ul>
+    <li><%= link_to t(".summary"), "#summary", rel: "summary", class: "button" %></li>
+    <li><%= link_to t(".backtrace"), "#backtrace", rel: "backtrace", class: "button" %></li>
+    <% if @notice && @notice.user_attributes.present? %>
+      <li><%= link_to t(".user"), "#user_attributes", rel: "user_attributes", class: "button" %></li>
+    <% end %>
+    <li><%= link_to t(".environment"), "#environment", rel: "environment", class: "button" %></li>
+    <li><%= link_to t(".parameters"), "#params", rel: "params", class: "button" %></li>
+    <li><%= link_to t(".session"), "#session", rel: "session", class: "button" %></li>
+  </ul>
+</div>
+
+<% if @notice %>
+  <div id="summary">
+    <h3><%= t(".summary") %></h3>
+    <%= render "notices/summary", notice: @notice, problem: problem %>
+  </div>
+
+  <div id="backtrace">
+    <h3>Backtrace</h3>
+    <%= render "notices/backtrace", backtrace: @notice.backtrace %>
+  </div>
+
+  <% if @notice.user_attributes.present? %>
+    <div id="user_attributes">
+      <h3>User</h3>
+      <%= render "notices/user_attributes", user_attributes: @notice.user_attributes %>
+    </div>
+  <% end %>
+
+  <div id="environment">
+    <h3>Environment</h3>
+    <%= render "notices/environment", notice: @notice %>
+  </div>
+
+  <div id="params">
+    <h3>Parameters</h3>
+    <%= render "notices/params", notice: @notice %>
+  </div>
+
+  <div id="session">
+    <h3>Session</h3>
+    <%= render "notices/session", notice: @notice %>
+  </div>
+<% end %>

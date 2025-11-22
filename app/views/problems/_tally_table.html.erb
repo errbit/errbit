@@ -1,0 +1,35 @@
+<%# locals: (rows:) %>
+
+<div class="head_and_tail">
+  <table class="tally head">
+    <tbody>
+      <% head(rows).each do |row| %>
+        <tr>
+          <td class="percent"><%= number_to_percentage(row[0], precision: 1) %></td>
+          <th class="value"><%= row[1] %></th>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <% if rows.size > head_size %>
+      <tfoot>
+        <tr>
+          <td colspan="2">
+            <%= link_to "Show more...", "#", class: "show_tail" %>
+          </td>
+        </tr>
+      </tfoot>
+    <% end %>
+  </table>
+
+  <table class="tally tail" style="display: none">
+    <tbody>
+      <% tail(rows).each do |row| %>
+        <tr>
+          <td class="percent"><%= number_to_percentage(row[0], precision: 1) %></td>
+          <th class="value"><%= row[1] %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
