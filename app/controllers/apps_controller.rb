@@ -7,19 +7,19 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  expose(:app_scope) do
-    params[:search].present? ? App.search(params[:search]) : App.all
-  end
+  # expose(:app_scope) do
+  #   params[:search].present? ? App.search(params[:search]) : App.all
+  # end
+  #
+  # expose(:apps) do
+  #   app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+  # end
 
-  expose(:apps) do
-    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
-  end
-
-  expose(:app)
-
-  expose(:app_decorate) do
-    AppDecorator.new(app)
-  end
+  # expose(:app)
+  #
+  # expose(:app_decorate) do
+  #   AppDecorator.new(app)
+  # end
 
   expose(:all_errs) do
     params[:all_errs].present?
@@ -42,18 +42,21 @@ class AppsController < ApplicationController
   end
 
   def index
+    @apps = Errbit::App.all.decorate
   end
 
   def show
-    app
+    @app = Errbit::App.find(params[:id]).decorate
   end
 
   def new
-    plug_params(app)
+    # plug_params(app)
+    # @app = Errbit::App.find(params[:id]).decorate
   end
 
   def edit
-    plug_params(app)
+    # plug_params(app)
+    @app = Errbit::App.find(params[:id]).decorate
   end
 
   def create
@@ -105,6 +108,8 @@ class AppsController < ApplicationController
   end
 
   def search
+    @apps = Errbit::App.search(params[:search]).decorate
+
     respond_to do |format|
       format.html { render :index }
       format.js

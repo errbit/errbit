@@ -11,6 +11,18 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  # if Rails.env.local?
+  #   around_action :n_plus_one_detection
+  #
+  #   def n_plus_one_detection
+  #     Prosopite.scan
+  #
+  #     yield
+  #   ensure
+  #     Prosopite.finish
+  #   end
+  # end
+
   private
 
   def require_admin!
@@ -26,8 +38,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user_from_token!
-    user_token = params[User.token_authentication_key].presence
-    user = user_token && User.find_by(authentication_token: user_token)
+    user_token = params[Errbit::User.token_authentication_key].presence
+    user = user_token && Errbit::User.find_by(authentication_token: user_token)
 
     sign_in user, store: false if user
   end

@@ -8,9 +8,9 @@ RSpec.describe UsersController, type: :request do
   describe "#index" do
     context "when user is logged in" do
       context "when user has access" do
-        let!(:current_user) { create(:user, name: "Jon Snow", admin: true) }
+        let!(:current_user) { create(:errbit_user, name: "Jon Snow", admin: true) }
 
-        let!(:user) { create(:user, name: "Tyrion Lannister") }
+        let!(:user) { create(:errbit_user, name: "Tyrion Lannister") }
 
         before { sign_in(current_user) }
 
@@ -26,7 +26,7 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
@@ -58,9 +58,9 @@ RSpec.describe UsersController, type: :request do
   describe "#show" do
     context "when user is logged in" do
       context "when user has access" do
-        let(:current_user) { create(:user, admin: true) }
+        let(:current_user) { create(:errbit_user, admin: true) }
 
-        let(:user) { create(:user, admin: false) }
+        let(:user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
@@ -76,11 +76,11 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
-        let(:user) { create(:user, admin: false) }
+        let(:user) { create(:errbit_user, admin: false) }
 
         before { get user_path(user) }
 
@@ -95,7 +95,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when user is not logged in" do
-      let!(:user) { create(:user) }
+      let!(:user) { create(:errbit_user) }
 
       before { get user_path(user) }
 
@@ -112,7 +112,7 @@ RSpec.describe UsersController, type: :request do
   describe "#new" do
     context "when user is logged in" do
       context "when user has access" do
-        let(:current_user) { create(:user, admin: true) }
+        let(:current_user) { create(:errbit_user, admin: true) }
 
         before { sign_in(current_user) }
 
@@ -128,7 +128,7 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
@@ -160,9 +160,9 @@ RSpec.describe UsersController, type: :request do
   describe "#edit" do
     context "when user is logged in" do
       context "when user has access" do
-        let(:current_user) { create(:user, admin: true) }
+        let(:current_user) { create(:errbit_user, admin: true) }
 
-        let!(:user) { create(:user, admin: false) }
+        let!(:user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
@@ -178,9 +178,9 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
-        let(:user) { create(:user, admin: false) }
+        let(:user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
@@ -197,7 +197,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when user is not logged in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:errbit_user) }
 
       before { get edit_user_path(user) }
 
@@ -215,7 +215,7 @@ RSpec.describe UsersController, type: :request do
     context "when user is logged in" do
       context "when user has access" do
         context "when new record is valid" do
-          let(:current_user) { create(:user, admin: true) }
+          let(:current_user) { create(:errbit_user, admin: true) }
 
           before { sign_in(current_user) }
 
@@ -229,7 +229,7 @@ RSpec.describe UsersController, type: :request do
             expect do
               post users_path,
                 params: {
-                  user: {
+                  errbit_user: {
                     email: email,
                     name: name,
                     password: password,
@@ -237,7 +237,7 @@ RSpec.describe UsersController, type: :request do
                     admin: true
                   }
                 }
-            end.to change(User, :count).by(1)
+            end.to change(Errbit::User, :count).by(1)
           end
 
           it "is expected to create a new user with status found" do
@@ -256,7 +256,7 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when new record is not valid" do
-          let(:current_user) { create(:user, admin: true) }
+          let(:current_user) { create(:errbit_user, admin: true) }
 
           before { sign_in(current_user) }
 
@@ -270,7 +270,7 @@ RSpec.describe UsersController, type: :request do
             expect do
               post users_path,
                 params: {
-                  user: {
+                  errbit_user: {
                     email: email,
                     name: name,
                     password: password,
@@ -278,7 +278,7 @@ RSpec.describe UsersController, type: :request do
                     admin: true
                   }
                 }
-            end.not_to change(User, :count)
+            end.not_to change(Errbit::User, :count)
           end
 
           it "is expected to render template new with status ok" do
@@ -290,7 +290,7 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
@@ -304,7 +304,7 @@ RSpec.describe UsersController, type: :request do
           expect do
             post users_path,
               params: {
-                user: {
+                errbit_user: {
                   email: email,
                   name: name,
                   password: password,
@@ -312,7 +312,7 @@ RSpec.describe UsersController, type: :request do
                   admin: true
                 }
               }
-          end.not_to change(User, :count)
+          end.not_to change(Errbit::User, :count)
         end
 
         it "is expected to redirect to root path with status found" do
@@ -336,7 +336,7 @@ RSpec.describe UsersController, type: :request do
         expect do
           post users_path,
             params: {
-              user: {
+              errbit_user: {
                 email: email,
                 name: name,
                 password: password,
@@ -344,7 +344,7 @@ RSpec.describe UsersController, type: :request do
                 admin: true
               }
             }
-        end.not_to change(User, :count)
+        end.not_to change(Errbit::User, :count)
       end
 
       it "is expected to redirect to new user session path with status found" do
@@ -361,16 +361,16 @@ RSpec.describe UsersController, type: :request do
     context "when user is logged in" do
       context "when user has access" do
         context "when record is valid" do
-          let(:current_user) { create(:user, admin: true) }
+          let(:current_user) { create(:errbit_user, admin: true) }
 
           before { sign_in(current_user) }
 
-          let(:user) { create(:user, admin: true, name: "Jon Snow") }
+          let(:user) { create(:errbit_user, admin: true, name: "Jon Snow") }
 
           before do
             patch user_path(user),
               params: {
-                user: {
+                errbit_user: {
                   name: "Tyrion Lannister",
                   admin: false
                 }
@@ -387,16 +387,16 @@ RSpec.describe UsersController, type: :request do
         end
 
         context "when record is not valid" do
-          let(:current_user) { create(:user, admin: true) }
+          let(:current_user) { create(:errbit_user, admin: true) }
 
           before { sign_in(current_user) }
 
-          let(:user) { create(:user) }
+          let(:user) { create(:errbit_user) }
 
           before do
             patch user_path(user),
               params: {
-                user: {
+                errbit_user: {
                   name: ""
                 }
               }
@@ -411,16 +411,16 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
-        let(:user) { create(:user, admin: false, name: "Jon Snow") }
+        let(:user) { create(:errbit_user, admin: false, name: "Jon Snow") }
 
         before do
           patch user_path(user),
             params: {
-              user: {
+              errbit_user: {
                 name: "Tyrion Lannister",
                 admin: true
               }
@@ -438,12 +438,12 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when user is not logged in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:errbit_user) }
 
       before do
         patch user_path(user),
           params: {
-            user: {
+            errbit_user: {
               name: Faker::Name.unique.name
             }
           }
@@ -462,15 +462,15 @@ RSpec.describe UsersController, type: :request do
   describe "#destroy" do
     context "when user is logged in" do
       context "when user has access" do
-        let(:current_user) { create(:user, admin: true) }
+        let(:current_user) { create(:errbit_user, admin: true) }
 
-        let!(:user) { create(:user, admin: false) }
+        let!(:user) { create(:errbit_user, admin: false) }
 
         before { sign_in(current_user) }
 
         before { expect(UserDestroy).to receive(:new).with(user).and_call_original }
 
-        before { expect { delete user_path(user) }.to change(User, :count).by(-1) }
+        before { expect { delete user_path(user) }.to change(Errbit::User, :count).by(-1) }
 
         it "is expected to redirect to users path with status found" do
           expect(response).to redirect_to(users_path)
@@ -482,15 +482,15 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user has not access" do
-        let(:current_user) { create(:user, admin: false) }
+        let(:current_user) { create(:errbit_user, admin: false) }
 
-        let!(:user) { create(:user, admin: true) }
+        let!(:user) { create(:errbit_user, admin: true) }
 
         before { sign_in(current_user) }
 
         before { expect(UserDestroy).not_to receive(:new) }
 
-        before { expect { delete user_path(user) }.not_to change(User, :count) }
+        before { expect { delete user_path(user) }.not_to change(Errbit::User, :count) }
 
         it "is expected to redirect to users path with status found" do
           expect(response).to redirect_to(root_path)
@@ -502,13 +502,13 @@ RSpec.describe UsersController, type: :request do
       end
 
       context "when user try to destroy himself" do
-        let(:current_user) { create(:user) }
+        let(:current_user) { create(:errbit_user) }
 
         before { sign_in(current_user) }
 
         before { expect(UserDestroy).not_to receive(:new) }
 
-        before { expect { delete user_path(current_user) }.not_to change(User, :count) }
+        before { expect { delete user_path(current_user) }.not_to change(Errbit::User, :count) }
 
         it "is expected to redirect to users path with status found" do
           expect(response).to redirect_to(users_path)
@@ -521,7 +521,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when user is not logged in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:errbit_user) }
 
       before { delete user_path(user) }
 

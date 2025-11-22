@@ -7,7 +7,7 @@ RSpec.describe Problem, type: :model do
     it "requires an environment" do
       err = Fabricate.build(:problem, environment: nil)
 
-      expect(err).not_to be_valid
+      expect(err.valid?).to eq(false)
 
       expect(err.errors[:environment]).to include("can't be blank")
     end
@@ -43,13 +43,13 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).not_to be_nil
+      expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
-      expect(problem.last_notice_at).to eq notice1.reload.created_at
+      expect(problem.last_notice_at).to eq(notice1.reload.created_at)
 
       notice2 = Fabricate(:notice, err: err)
-      expect(problem.last_notice_at).to eq notice2.reload.created_at
+      expect(problem.last_notice_at).to eq(notice2.reload.created_at)
     end
   end
 
@@ -57,7 +57,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).not_to be_nil
+      expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
@@ -116,7 +116,7 @@ RSpec.describe Problem, type: :model do
       travel_to(expected_resolved_at) do
         problem.resolve!
       end
-      expect(problem.resolved_at.to_s).to eq expected_resolved_at.to_s
+      expect(problem.resolved_at.to_s).to eq(expected_resolved_at.to_s)
     end
 
     it "should not reset notice count" do
@@ -125,7 +125,7 @@ RSpec.describe Problem, type: :model do
       expect(original_notices_count).to be > 0
 
       problem.resolve!
-      expect(problem.notices_count).to eq original_notices_count
+      expect(problem.notices_count).to eq(original_notices_count)
     end
 
     it "should throw an err if it's not successful" do
@@ -137,7 +137,7 @@ RSpec.describe Problem, type: :model do
       er = ActiveModel::Errors.new(problem)
       er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
-      expect(problem).not_to be_valid
+      expect(problem.valid?).to eq(false)
       expect do
         problem.resolve!
       end.to raise_error(Mongoid::Errors::Validations)
@@ -149,10 +149,10 @@ RSpec.describe Problem, type: :model do
       problem1 = Fabricate(:notice).problem
       problem2 = Fabricate(:notice).problem
       merged_problem = Problem.merge!(problem1, problem2)
-      expect(merged_problem.errs.length).to eq 2
+      expect(merged_problem.errs.length).to eq(2)
 
       expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
-      expect(merged_problem.errs(true).length).to eq 1
+      expect(merged_problem.errs(true).length).to eq(1)
     end
 
     it "runs smoothly for problem without errs" do
@@ -165,8 +165,7 @@ RSpec.describe Problem, type: :model do
       it "only finds resolved Problems" do
         resolved = Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
-        expect(Problem.resolved.all).to include(resolved)
-        expect(Problem.resolved.all).not_to include(unresolved)
+        expect(Problem.resolved.all).to eq([resolved])
       end
     end
 
@@ -174,8 +173,7 @@ RSpec.describe Problem, type: :model do
       it "only finds unresolved Problems" do
         resolved = Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
-        expect(Problem.unresolved.all).not_to include(resolved)
-        expect(Problem.unresolved.all).to include(unresolved)
+        expect(Problem.unresolved.all).to eq([unresolved])
       end
     end
 
@@ -191,7 +189,7 @@ RSpec.describe Problem, type: :model do
 
       it "find on where message" do
         problem = Fabricate(:problem, where: "cyril")
-        expect(Problem.search("cyril").entries).to eq [problem]
+        expect(Problem.search("cyril").entries).to eq([problem])
       end
 
       it "finds with notice_id as argument" do
