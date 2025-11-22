@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "problems/index.html.haml", type: :view do
+RSpec.describe "problems/index.html.erb", type: :view do
   let(:problem_1) { Fabricate(:problem) }
 
   let(:problem_2) { Fabricate(:problem, app: problem_1.app) }

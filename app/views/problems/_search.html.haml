@@ -1,3 +1,0 @@
--# <%# locals: (all_errs:, app_id:, params_sort:, params_order:) -%>
-= form_tag search_problems_path(all_errs: all_errs, app_id: app_id, sort: params_sort, order: params_order), method: :get, remote: true do
-    = text_field_tag :search, params[:search], placeholder: t(".search_placeholder")

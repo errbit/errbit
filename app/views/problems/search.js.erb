@@ -1,0 +1,5 @@
+$("#problem_table").empty().append("<%= j render("problems/table", problems: problems) %>");
+$("#flash-messages").empty();
+toggleProblemsCheckboxes();
+bindProblemButtonsActions();
+
