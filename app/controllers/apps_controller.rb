@@ -50,11 +50,13 @@ class AppsController < ApplicationController
   end
 
   def new
-    plug_params(app)
+    # plug_params(app)
+    # @app = Errbit::App.find(params[:id]).decorate
   end
 
   def edit
-    plug_params(app)
+    # plug_params(app)
+    @app = Errbit::App.find(params[:id]).decorate
   end
 
   def create

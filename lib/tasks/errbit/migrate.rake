@@ -16,7 +16,7 @@ namespace :errbit do
 
       app.watchers.find_each do |watcher|
         errbit_watcher = Errbit::Watcher.find_or_initialize_by(bson_id: watcher.id.to_s)
-        # TODO: finish
+        errbit_watcher.attributes = watcher.attributes_for_migration.compact_blank
         errbit_watcher.save(validate: false)
       end
     end
