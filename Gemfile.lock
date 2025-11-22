@@ -228,6 +228,12 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    icalendar (2.12.1)
+      base64
+      ice_cube (~> 0.16)
+      logger
+      ostruct
+    ice_cube (0.17.0)
     io-console (0.8.1)
     irb (1.15.3)
       pp (>= 0.6.0)
@@ -683,6 +689,7 @@ DEPENDENCIES
   hoptoad_notifier!
   htmlentities
   httparty
+  icalendar
   jquery-rails
   json
   kaminari
@@ -830,6 +837,8 @@ CHECKSUMS
   http-cookie (1.1.0) sha256=38a5e60d1527eebc396831b8c4b9455440509881219273a6c99943d29eadbb19
   httparty (0.23.2) sha256=72d52830ab5862115a3c9a4b16738dd67d9a691ffd796cf86bad8abaa8f1febb
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
+  icalendar (2.12.1) sha256=ecff56c550aed551f29ad1faad0da54bf62362dfaf22a428bd7ad782938fe764
+  ice_cube (0.17.0) sha256=32deb45dda4b4acc53505c2f581f6d32b5afc04d29b9004769944a0df5a5fcbe
   io-console (0.8.1) sha256=1e15440a6b2f67b6ea496df7c474ed62c860ad11237f29b3bd187f054b925fcb
   irb (1.15.3) sha256=4349edff1efa7ff7bfd34cb9df74a133a588ba88c2718098b3b4468b81184aaa
   jquery-rails (4.6.1) sha256=619f3496cdcdeaae1fd6dafa52dbac3fc45b745d4e09712da4184a16b3a8d9c0
