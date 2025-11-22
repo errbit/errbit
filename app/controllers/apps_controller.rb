@@ -42,9 +42,7 @@ class AppsController < ApplicationController
   end
 
   def index
-    scope = params[:search].present? ? Errbit::App.search(params[:search]) : Errbit::App.all
-
-    @apps = scope.to_a.sort.map { |app| Errbit::AppDecorator.new(app) }
+    @apps = Errbit::App.all.decorate
   end
 
   def show
@@ -108,6 +106,8 @@ class AppsController < ApplicationController
   end
 
   def search
+    @apps = Errbit::App.search(params[:search]).decorate
+
     respond_to do |format|
       format.html { render :index }
       format.js
