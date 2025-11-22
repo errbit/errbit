@@ -1,23 +1,23 @@
 <% content_for :page_title, problem.message %>
-<% content_for :title_css_class, "err_show #{'resolved' if problem.resolved?}" %>
+<% content_for :title_css_class, "err_show #{"resolved" if problem.resolved?}" %>
 <% content_for :title, problem.error_class || truncate(problem.message, length: 32) %>
 
 <% content_for :meta do %>
-  <strong><%= t(".app") + ':' %></strong>
+  <strong><%= t(".app") + ":" %></strong>
   <%= link_to app.name, app %>
-  <strong><%= t(".where") + ':' %></strong>
+  <strong><%= t(".where") + ":" %></strong>
   <%= problem.where %><br>
-  <strong><%= t(".environment") + ':' %></strong>
+  <strong><%= t(".environment") + ":" %></strong>
   <%= problem.environment %>
-  <strong><%= t(".first_notice") + ':' %></strong>
+  <strong><%= t(".first_notice") + ":" %></strong>
   <%= problem.first_notice_at.to_fs(:precise) %>
-  <strong><%= t(".last_notice") + ':' %></strong>
+  <strong><%= t(".last_notice") + ":" %></strong>
   <%= problem.last_notice_at.to_fs(:precise) %>
 <% end %>
 
 <% content_for :action_bar do %>
   <% if problem.unresolved? %>
-    <span><%= link_to t('.resolve'), [:resolve, app, problem], method: :put,
+    <span><%= link_to t(".resolve"), [:resolve, app, problem], method: :put,
       data: { confirm: problem_confirm("resolve_one") }, class: "resolve" %></span>
   <% end %>
 
@@ -63,6 +63,7 @@
             </span>
           </th>
         </tr>
+
         <tr>
           <td><%= auto_link_format(comment.body) %></td>
         </tr>
@@ -77,7 +78,7 @@
   <% end %>
 <% end %>
 
-<h4><%= @notice.try(:message) %></h4>
+<h4><%= @notice&.message %></h4>
 
 <% if params[:notice_id] %>
   <p><%= t(".notice_by_id", notice_id: params[:notice_id]) %></p>
