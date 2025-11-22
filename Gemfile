@@ -55,7 +55,6 @@ gem "rushover"
 # Hubot
 gem "httparty"
 
-gem "ri_cal"
 gem "icalendar"
 gem "json"
 
