@@ -406,6 +406,7 @@ Naming/FileName:
     - "spec/support/mongoid-rspec.rb"
     - "spec/support/rspec-retry.rb"
     - "spec/support/selenium-webdriver.rb"
+    - "spec/support/rspec-rebound.rb"
 
 # Disabled syntax:
 
