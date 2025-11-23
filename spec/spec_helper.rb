@@ -37,7 +37,7 @@ RSpec.configure do |config|
 
   config.alias_example_to :fit, focused: true
 
-  config.before(:each) do
+  config.before do
     Mongoid::Config.truncate!
   end
 

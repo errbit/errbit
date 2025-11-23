@@ -19,13 +19,13 @@ RSpec.describe ProblemsController, type: :controller do
   let(:problem) { Fabricate(:problem, app: app, environment: "production") }
 
   describe "GET /problems" do
-    before(:each) do
+    before do
       sign_in user
       @problem = Fabricate(:notice, err: Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production"))).problem
     end
 
     context "pagination" do
-      before(:each) do
+      before do
         35.times { Fabricate :err }
       end
 
@@ -42,7 +42,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "with environment filters" do
-      before(:each) do
+      before do
         environments = ["production", "test", "development", "staging"]
         20.times do |i|
           Fabricate(:problem, environment: environments[i % environments.length])
@@ -351,14 +351,14 @@ RSpec.describe ProblemsController, type: :controller do
   end
 
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
-    before(:each) do
+    before do
       sign_in user
     end
 
     context "problem with issue" do
       let(:err) { Fabricate(:err, problem: Fabricate(:problem, issue_link: "http://some.host")) }
 
-      before(:each) do
+      before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
         err.problem.reload
       end
@@ -375,7 +375,7 @@ RSpec.describe ProblemsController, type: :controller do
     context "err without issue" do
       let(:err) { Fabricate :err }
 
-      before(:each) do
+      before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
         err.problem.reload
       end
@@ -387,7 +387,7 @@ RSpec.describe ProblemsController, type: :controller do
   end
 
   describe "Bulk Actions" do
-    before(:each) do
+    before do
       sign_in user
       @problem1 = Fabricate(:err, problem: Fabricate(:problem, resolved: true)).problem
       @problem2 = Fabricate(:err, problem: Fabricate(:problem, resolved: false)).problem

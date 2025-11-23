@@ -60,7 +60,7 @@ RSpec.describe AppsController, type: :controller do
 
   describe "GET /apps/:id" do
     context "logged in as an admin" do
-      before(:each) do
+      before do
         sign_in admin
       end
 
@@ -90,7 +90,7 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "pagination" do
-        before(:each) do
+        before do
           35.times { Fabricate(:err, problem: Fabricate(:problem, app: app)) }
         end
 
@@ -107,7 +107,7 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "with resolved errors" do
-        before(:each) do
+        before do
           problem_resolved && problem
         end
 
@@ -127,7 +127,7 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "with environment filters" do
-        before(:each) do
+        before do
           environments = ["production", "test", "development", "staging"]
           20.times do |i|
             Fabricate(:problem, app: app, environment: environments[i % environments.length])
@@ -299,7 +299,7 @@ RSpec.describe AppsController, type: :controller do
       # TODO: what is `cur`?
       context "setting up issue tracker", cur: true do
         context "unknown tracker type" do
-          before(:each) do
+          before do
             put :update, params: {id: @app.id, app: {issue_tracker_attributes: {
               type_tracker: "unknown", options: {project_id: "1234", api_token: "123123", account: "myapp"}
             }}}
@@ -313,7 +313,7 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "selecting 'use site fingerprinter'" do
-        before(:each) do
+        before do
           SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
 
           put :update, params: {
@@ -335,7 +335,7 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "not selecting 'use site fingerprinter'" do
-        before(:each) do
+        before do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
           put :update, params: {id: @app.id, app: {
             notice_fingerprinter_attributes: {backtrace_lines: 42},

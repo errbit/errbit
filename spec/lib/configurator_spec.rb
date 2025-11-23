@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Configurator do
-  before(:each) do
+  before do
     allow(ENV).to receive(:[]).and_return(nil)
     allow(ENV).to receive(:[]).with("VARONE").and_return("zoom")
     allow(ENV).to receive(:[]).with("VARTHREE").and_return("zipp")

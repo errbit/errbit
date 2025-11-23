@@ -77,7 +77,7 @@ RSpec.describe NoticesController, type: :controller do
 
   describe "GET /locate/:id" do
     context "when logged in as an admin" do
-      before(:each) do
+      before do
         @user = Fabricate(:admin)
         sign_in @user
       end
@@ -93,7 +93,7 @@ RSpec.describe NoticesController, type: :controller do
 
   describe "GET /notices/:id" do
     context "when logged in as an admin" do
-      before(:each) do
+      before do
         @user = Fabricate(:admin)
         sign_in @user
       end

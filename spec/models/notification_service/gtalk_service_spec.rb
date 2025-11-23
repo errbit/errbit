@@ -33,7 +33,7 @@ https://#{Errbit::Config.host}/apps/#{problem.app.id}
   end
 
   describe "multiple users_ids" do
-    before(:each) do
+    before do
       # setup
       @notice = Fabricate :notice
       @notification_service = Fabricate :gtalk_notification_service, app: @notice.app
