@@ -7,7 +7,7 @@ RSpec.describe Problem, type: :model do
     it "requires an environment" do
       err = Fabricate.build(:problem, environment: nil)
 
-      expect(err).not_to be_valid
+      expect(err.valid?).to eq(false)
 
       expect(err.errors[:environment]).to include("can't be blank")
     end
@@ -137,7 +137,7 @@ RSpec.describe Problem, type: :model do
       er = ActiveModel::Errors.new(problem)
       er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
-      expect(problem).not_to be_valid
+      expect(problem.valid?).to eq(false)
       expect do
         problem.resolve!
       end.to raise_error(Mongoid::Errors::Validations)
