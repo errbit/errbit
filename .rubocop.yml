@@ -438,3 +438,9 @@ Rails/SkipsModelValidations:
 
 Capybara/AmbiguousClick:
   Enabled: true
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - "config/routes.rb"
+    - "config/initializers/devise.rb"
