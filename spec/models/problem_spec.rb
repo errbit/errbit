@@ -478,7 +478,7 @@ RSpec.describe Problem, type: :model do
         end
 
         it "return the issue_tracker label" do
-          expect(problem.issue_type).to eql "mock"
+          expect(problem.issue_type).to eq("mock")
         end
       end
 
@@ -488,14 +488,14 @@ RSpec.describe Problem, type: :model do
         end
 
         it "return nil" do
-          expect(problem.issue_type).to be_nil
+          expect(problem.issue_type).to eq(nil)
         end
       end
     end
 
     context "with issue_type fill in Problem" do
       it "return the value associate" do
-        expect(Problem.new(issue_type: "foo").issue_type).to eql "foo"
+        expect(Problem.new(issue_type: "foo").issue_type).to eq("foo")
       end
     end
   end
@@ -526,16 +526,16 @@ RSpec.describe Problem, type: :model do
       end
 
       it "update information about this notice" do
-        expect(problem.message).to eq notice.message
-        expect(problem.where).to eq notice.where
+        expect(problem.message).to eq(notice.message)
+        expect(problem.where).to eq(notice.where)
       end
 
       it "update first_notice_at" do
-        expect(problem.first_notice_at).to eq notice.reload.created_at
+        expect(problem.first_notice_at).to eq(notice.reload.created_at)
       end
 
       it "update last_notice_at" do
-        expect(problem.last_notice_at).to eq notice.reload.created_at
+        expect(problem.last_notice_at).to eq(notice.reload.created_at)
       end
 
       it "update stats messages" do
