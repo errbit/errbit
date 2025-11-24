@@ -52,8 +52,10 @@ class User
 
   def self.valid_google_domain?(email)
     return true if Errbit::Config.google_authorized_domains.nil?
+
     match_data = /.+@(?<domain>.+)$/.match(email)
     return false if match_data.nil?
+
     Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
   end
 
@@ -117,6 +119,7 @@ class User
 
     self.class.validators_on(:password).map { |v| v.validate_each(self, :password, password) }
     return false if errors.any?
+
     save(validate: false)
   end
 

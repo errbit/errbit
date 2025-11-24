@@ -85,6 +85,7 @@ module NotificationServices
     def backtrace_lines(problem)
       notice = NoticeDecorator.new problem.notices.last
       return unless notice
+
       backtrace = notice.backtrace
       return unless backtrace
 
