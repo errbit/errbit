@@ -43,7 +43,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).not_to be_nil
+      expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.last_notice_at).to eq notice1.reload.created_at
@@ -57,7 +57,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).not_to be_nil
+      expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
@@ -116,7 +116,7 @@ RSpec.describe Problem, type: :model do
       travel_to(expected_resolved_at) do
         problem.resolve!
       end
-      expect(problem.resolved_at.to_s).to eq expected_resolved_at.to_s
+      expect(problem.resolved_at.to_s).to eq(expected_resolved_at.to_s)
     end
 
     it "should not reset notice count" do
@@ -466,7 +466,7 @@ RSpec.describe Problem, type: :model do
         let(:issue_tracker) { nil }
 
         it "return nil" do
-          expect(problem.issue_type).to be_nil
+          expect(problem.issue_type).to eq(nil)
         end
       end
 
