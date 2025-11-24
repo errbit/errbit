@@ -21,7 +21,7 @@ RSpec.describe Configurator do
 
   it "provides nothing for missing variables" do
     result = Configurator.run(four: ["VAREIGHTY"])
-    expect(result.four).to be_nil
+    expect(result.four).to eq(nil)
   end
 
   it "overrides existing variables" do
@@ -38,7 +38,7 @@ RSpec.describe Configurator do
   it "extracts symbol values" do
     allow(ENV).to receive(:[]).with("MYSYMBOL").and_return(":asymbol")
     result = Configurator.run(mysymbol: ["MYSYMBOL"])
-    expect(result.mysymbol).to be(:asymbol)
+    expect(result.mysymbol).to eq(:asymbol)
   end
 
   it "extracts array values" do
@@ -50,13 +50,13 @@ RSpec.describe Configurator do
   it "extracts booleans" do
     allow(ENV).to receive(:[]).with("MYBOOLEAN").and_return("true")
     result = Configurator.run(myboolean: ["MYBOOLEAN"])
-    expect(result.myboolean).to be(true)
+    expect(result.myboolean).to eq(true)
   end
 
   it "extracts numbers" do
     allow(ENV).to receive(:[]).with("MYNUMBER").and_return("0")
     result = Configurator.run(mynumber: ["MYNUMBER"])
-    expect(result.mynumber).to be(0)
+    expect(result.mynumber).to eq(0)
   end
 
   it "parses empty variables" do

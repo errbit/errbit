@@ -14,7 +14,7 @@ RSpec.describe "Fabrication", type: :model do
     context "Fabricate(:#{fabricator_name})" do
       subject { Fabricate.build(fabricator_name) }
 
-      it { is_expected.to be_valid }
+      it { expect(subject.valid?).to eq(true) }
     end
   end
 end

@@ -16,12 +16,12 @@ RSpec.describe ProblemMerge do
 
     it "extract first problem like merged_problem" do
       problem_merge = ProblemMerge.new(problem, problem, problem_1)
-      expect(problem_merge.merged_problem).to eql problem
+      expect(problem_merge.merged_problem).to eq(problem)
     end
 
     it "extract other problem like child_problems" do
       problem_merge = ProblemMerge.new(problem, problem, problem_1)
-      expect(problem_merge.child_problems).to eql [problem_1]
+      expect(problem_merge.child_problems).to eq([problem_1])
     end
   end
 
@@ -52,8 +52,8 @@ RSpec.describe ProblemMerge do
     it "keeps the issue link" do
       problem.update_attributes(issue_link: "http://foo.com", issue_type: "mock")
       problem_merge.merge
-      expect(problem.reload.issue_link).to eq "http://foo.com"
-      expect(problem.reload.issue_type).to eq "mock"
+      expect(problem.reload.issue_link).to eq("http://foo.com")
+      expect(problem.reload.issue_type).to eq("mock")
     end
 
     it "update problem cache" do
@@ -72,7 +72,7 @@ RSpec.describe ProblemMerge do
         end.to change {
           problem.comments.size
         }.from(1).to(2)
-        expect(comment_2.reload.err).to eq problem
+        expect(comment_2.reload.err).to eq(problem)
       end
     end
   end

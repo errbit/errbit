@@ -35,19 +35,19 @@ RSpec.describe BacktraceDecorator, type: :decorator do
 
     it "puts the first two in-app lines in separate groups" do
       expect(grouped[0][0]).to be_present
-      expect(grouped[0][1]).to eq [backtrace.lines[0]]
+      expect(grouped[0][1]).to eq([backtrace.lines[0]])
       expect(grouped[1][0]).to be_present
-      expect(grouped[1][1]).to eq [backtrace.lines[1]]
+      expect(grouped[1][1]).to eq([backtrace.lines[1]])
     end
 
     it "puts the first out-of-app line in its own group" do
-      expect(grouped[2][0]).to eq false
-      expect(grouped[2][1]).to eq [backtrace.lines[2]]
+      expect(grouped[2][0]).to eq(false)
+      expect(grouped[2][1]).to eq([backtrace.lines[2]])
     end
 
     it "puts the last two out-of-app lines together in one group" do
-      expect(grouped[4][0]).to eq false
-      expect(grouped[4][1]).to eq [backtrace.lines[4], backtrace.lines[5]]
+      expect(grouped[4][0]).to eq(false)
+      expect(grouped[4][1]).to eq([backtrace.lines[4], backtrace.lines[5]])
     end
   end
 

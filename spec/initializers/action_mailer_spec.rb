@@ -16,14 +16,14 @@ RSpec.describe "initializers/action_mailer" do
       allow(Errbit::Config).to receive(:email_delivery_method).and_return(:smtp)
       load_initializer
 
-      expect(ActionMailer::Base.delivery_method).to be(:smtp)
+      expect(ActionMailer::Base.delivery_method).to eq(:smtp)
     end
 
     it "sets the delivery method to :sendmail" do
       allow(Errbit::Config).to receive(:email_delivery_method).and_return(:sendmail)
       load_initializer
 
-      expect(ActionMailer::Base.delivery_method).to be(:sendmail)
+      expect(ActionMailer::Base.delivery_method).to eq(:sendmail)
     end
   end
 

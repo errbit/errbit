@@ -7,7 +7,7 @@ RSpec.describe Problem, type: :model do
     it "requires an environment" do
       err = Fabricate.build(:problem, environment: nil)
 
-      expect(err).not_to be_valid
+      expect(err.valid?).to eq(false)
 
       expect(err.errors[:environment]).to include("can't be blank")
     end
@@ -43,7 +43,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the latest notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).not_to be_nil
+      expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.last_notice_at).to eq notice1.reload.created_at
@@ -57,7 +57,7 @@ RSpec.describe Problem, type: :model do
     it "returns the created_at timestamp of the first notice" do
       err = Fabricate(:err)
       problem = err.problem
-      expect(problem).not_to be_nil
+      expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
@@ -116,7 +116,7 @@ RSpec.describe Problem, type: :model do
       travel_to(expected_resolved_at) do
         problem.resolve!
       end
-      expect(problem.resolved_at.to_s).to eq expected_resolved_at.to_s
+      expect(problem.resolved_at.to_s).to eq(expected_resolved_at.to_s)
     end
 
     it "should not reset notice count" do
@@ -137,7 +137,7 @@ RSpec.describe Problem, type: :model do
       er = ActiveModel::Errors.new(problem)
       er.add(:resolved, :blank)
       allow(problem).to receive(:errors).and_return(er)
-      expect(problem).not_to be_valid
+      expect(problem.valid?).to eq(false)
       expect do
         problem.resolve!
       end.to raise_error(Mongoid::Errors::Validations)
@@ -152,7 +152,7 @@ RSpec.describe Problem, type: :model do
       expect(merged_problem.errs.length).to eq 2
 
       expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
-      expect(merged_problem.errs(true).length).to eq 1
+      expect(merged_problem.errs(true).length).to eq(1)
     end
 
     it "runs smoothly for problem without errs" do
@@ -285,7 +285,7 @@ RSpec.describe Problem, type: :model do
     it "gets correct relative percentages when all zeros for data" do
       two_weeks_ago = 13.days.ago
       relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, "day")
-      expect(relative_percentages).to eq(([0] * 14))
+      expect(relative_percentages).to eq([0] * 14)
     end
   end
 
@@ -336,7 +336,7 @@ RSpec.describe Problem, type: :model do
     before { app.reload }
 
     it "is set when a problem is created" do
-      assert_equal app.name, problem.app_name
+      expect(problem.app_name).to eq(app.name)
     end
 
     it "is updated when an app is updated" do
@@ -466,7 +466,7 @@ RSpec.describe Problem, type: :model do
         let(:issue_tracker) { nil }
 
         it "return nil" do
-          expect(problem.issue_type).to be_nil
+          expect(problem.issue_type).to eq(nil)
         end
       end
 
@@ -478,7 +478,7 @@ RSpec.describe Problem, type: :model do
         end
 
         it "return the issue_tracker label" do
-          expect(problem.issue_type).to eql "mock"
+          expect(problem.issue_type).to eq("mock")
         end
       end
 
@@ -488,14 +488,14 @@ RSpec.describe Problem, type: :model do
         end
 
         it "return nil" do
-          expect(problem.issue_type).to be_nil
+          expect(problem.issue_type).to eq(nil)
         end
       end
     end
 
     context "with issue_type fill in Problem" do
       it "return the value associate" do
-        expect(Problem.new(issue_type: "foo").issue_type).to eql "foo"
+        expect(Problem.new(issue_type: "foo").issue_type).to eq("foo")
       end
     end
   end
@@ -526,16 +526,16 @@ RSpec.describe Problem, type: :model do
       end
 
       it "update information about this notice" do
-        expect(problem.message).to eq notice.message
-        expect(problem.where).to eq notice.where
+        expect(problem.message).to eq(notice.message)
+        expect(problem.where).to eq(notice.where)
       end
 
       it "update first_notice_at" do
-        expect(problem.first_notice_at).to eq notice.reload.created_at
+        expect(problem.first_notice_at).to eq(notice.reload.created_at)
       end
 
       it "update last_notice_at" do
-        expect(problem.last_notice_at).to eq notice.reload.created_at
+        expect(problem.last_notice_at).to eq(notice.reload.created_at)
       end
 
       it "update stats messages" do
