@@ -23,7 +23,7 @@ RSpec.describe OutdatedProblemClearer do
     context "without old problems" do
       it "do nothing" do
         expect do
-          expect(outdated_problem_clearer.execute).to eq 0
+          expect(outdated_problem_clearer.execute).to eq(0)
         end.not_to change {
           Problem.count
         }
@@ -46,12 +46,12 @@ RSpec.describe OutdatedProblemClearer do
 
       it "deletes old problems" do
         expect do
-          expect(outdated_problem_clearer.execute).to eq 2
+          expect(outdated_problem_clearer.execute).to eq(2)
         end.to change {
           Problem.count
         }.by(-2)
-        expect(Problem.where(_id: problems.first.id).first).to be_nil
-        expect(Problem.where(_id: problems.second.id).first).to be_nil
+        expect(Problem.where(_id: problems.first.id).first).to eq(nil)
+        expect(Problem.where(_id: problems.second.id).first).to eq(nil)
       end
 
       it "compact database" do
