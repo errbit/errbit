@@ -36,13 +36,13 @@ RSpec.describe ErrorReport, type: :model do
 
   describe "#app" do
     it "find the good app" do
-      expect(error_report.app).to eq app
+      expect(error_report.app).to eq(app)
     end
   end
 
   describe "#backtrace" do
     it "should have valid backtrace" do
-      expect(error_report.backtrace).to be_valid
+      expect(error_report.backtrace.valid?).to eq(true)
     end
   end
 
@@ -101,34 +101,34 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "has complete backtrace" do
-        expect(subject.backtrace_lines.size).to eq 73
-        expect(subject.backtrace_lines.last["file"]).to eq "[GEM_ROOT]/bin/rake"
+        expect(subject.backtrace_lines.size).to eq(73)
+        expect(subject.backtrace_lines.last["file"]).to eq("[GEM_ROOT]/bin/rake")
       end
 
       it "has server_environment" do
-        expect(subject.server_environment["environment-name"]).to eq "development"
+        expect(subject.server_environment["environment-name"]).to eq("development")
       end
 
       it "has request" do
-        expect(subject.request["url"]).to eq "http://example.org/verify/cupcake=fistfight&lovebird=doomsayer"
-        expect(subject.request["params"]["controller"]).to eq "application"
+        expect(subject.request["url"]).to eq("http://example.org/verify/cupcake=fistfight&lovebird=doomsayer")
+        expect(subject.request["params"]["controller"]).to eq("application")
       end
 
       it "has notifier" do
-        expect(subject.notifier["name"]).to eq "Hoptoad Notifier"
+        expect(subject.notifier["name"]).to eq("Hoptoad Notifier")
       end
 
       it "get user_attributes" do
-        expect(subject.user_attributes["id"]).to eq "123"
-        expect(subject.user_attributes["name"]).to eq "Mr. Bean"
-        expect(subject.user_attributes["email"]).to eq "mr.bean@example.com"
-        expect(subject.user_attributes["username"]).to eq "mrbean"
+        expect(subject.user_attributes["id"]).to eq("123")
+        expect(subject.user_attributes["name"]).to eq("Mr. Bean")
+        expect(subject.user_attributes["email"]).to eq("mr.bean@example.com")
+        expect(subject.user_attributes["username"]).to eq("mrbean")
       end
 
       it "valid env_vars" do
         # XML: <var key="SCRIPT_NAME"/>
         expect(subject.env_vars).to have_key("SCRIPT_NAME")
-        expect(subject.env_vars["SCRIPT_NAME"]).to be_nil # blank ends up nil
+        expect(subject.env_vars["SCRIPT_NAME"]).to eq(nil) # blank ends up nil
 
         # XML representation:
         # <var key="rack.session.options">
@@ -148,7 +148,7 @@ RSpec.describe ErrorReport, type: :model do
           "id" => nil
         }
         expect(subject.env_vars).to have_key("rack_session_options")
-        expect(subject.env_vars["rack_session_options"]).to eql(expected)
+        expect(subject.env_vars["rack_session_options"]).to eq(expected)
       end
     end
   end
@@ -343,7 +343,7 @@ RSpec.describe ErrorReport, type: :model do
   describe "#valid?" do
     context "with valid error report" do
       it "return true" do
-        expect(error_report.valid?).to be true
+        expect(error_report.valid?).to eq(true)
       end
     end
 
@@ -353,7 +353,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "return false" do
-        expect(error_report.valid?).to be false
+        expect(error_report.valid?).to eq(false)
       end
     end
   end
@@ -361,7 +361,7 @@ RSpec.describe ErrorReport, type: :model do
   describe "#notice" do
     context "before generate_notice!" do
       it "return nil" do
-        expect(error_report.notice).to be nil
+        expect(error_report.notice).to eq(nil)
       end
     end
 
@@ -371,7 +371,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "return the notice" do
-        expect(error_report.notice).to be_a Notice
+        expect(error_report.notice).to be_a(Notice)
       end
     end
   end
@@ -385,7 +385,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       it "return true" do
-        expect(error_report.should_keep?).to be true
+        expect(error_report.should_keep?).to eq(true)
       end
     end
 
@@ -397,13 +397,13 @@ RSpec.describe ErrorReport, type: :model do
       it "return true if current or newer" do
         error_report.server_environment["app-version"] = "1.0"
 
-        expect(error_report.should_keep?).to be true
+        expect(error_report.should_keep?).to eq(true)
       end
 
       it "return false if older" do
         error_report.server_environment["app-version"] = "0.9"
 
-        expect(error_report.should_keep?).to be false
+        expect(error_report.should_keep?).to eq(false)
       end
     end
   end
