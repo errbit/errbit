@@ -33,32 +33,32 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
 
   it "responds with 201 created on success" do
     post :create, body: legit_body, params: {**legit_params}
-    expect(response.status).to be(201)
+    expect(response).to have_http_status(:created)
   end
 
   it "responds with 201 created on success with token in Airbrake Token header" do
     request.headers["X-Airbrake-Token"] = project_id
     post :create, body: legit_body, params: {project_id: 123}
-    expect(response.status).to be(201)
+    expect(response).to have_http_status(:created)
   end
 
   it "responds with 201 created on success with token in Authorization header" do
     request.headers["Authorization"] = "Bearer #{project_id}"
     post :create, body: legit_body, params: {project_id: 123}
-    expect(response.status).to be(201)
+    expect(response).to have_http_status(:created)
   end
 
   it "responds with 422 when Authorization header is not valid" do
     request.headers["Authorization"] = "incorrect"
     post :create, body: legit_body, params: {project_id: 123}
-    expect(response.status).to be(422)
+    expect(response).to have_http_status(:unprocessable_content)
   end
 
   it "responds with 400 when request attributes are not valid" do
     allow_any_instance_of(AirbrakeApi::V3::NoticeParser)
       .to receive(:report).and_raise(AirbrakeApi::ParamsError)
     post :create, params: {project_id: "ID"}
-    expect(response.status).to eq(400)
+    expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq("Invalid request")
   end
 
@@ -66,13 +66,13 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
     app.current_app_version = "1.1.0"
     app.save!
     post :create, body: legit_body, params: {**legit_params}
-    expect(response.status).to eq(422)
+    expect(response).to have_http_status(:unprocessable_content)
   end
 
   it "responds with 422 when project_id is invalid" do
     post :create, body: legit_body, params: {project_id: "hm?", key: "wha?"}
 
-    expect(response.status).to eq(422)
+    expect(response).to have_http_status(:unprocessable_content)
     expect(response.body).to eq("Your API key is unknown")
   end
 

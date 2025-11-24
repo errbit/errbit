@@ -64,7 +64,7 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
       it "returns a 404 if the problem cannot be found" do
         get :show, params: {auth_token: @user.authentication_token, format: "json", id: "IdontExist"}
 
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
