@@ -11,13 +11,13 @@ RSpec.describe ProblemsHelper, type: :helper do
     end
 
     it "sanitizes body of html tags" do
-      expect(helper.auto_link_format("Hello, <b>World!</b>")).to eq "<p>Hello, World!</p>"
+      expect(helper.auto_link_format("Hello, <b>World!</b>")).to eq("<p>Hello, World!</p>")
     end
   end
 
   describe "#gravatar_tag" do
     let(:email) { "gravatar@example.com" }
-    let(:email_hash) { Digest::MD5.hexdigest email }
+    let(:email_hash) { Digest::MD5.hexdigest(email) }
     let(:base_url) { "https://secure.gravatar.com/avatar/#{email_hash}" }
 
     context "default config" do
@@ -39,7 +39,7 @@ RSpec.describe ProblemsHelper, type: :helper do
 
     context "no email" do
       it "should not render the tag" do
-        expect(helper.gravatar_tag(nil)).to be_nil
+        expect(helper.gravatar_tag(nil)).to eq(nil)
       end
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe ProblemsHelper, type: :helper do
 
     context "with email" do
       let(:email) { "gravatar@example.com" }
-      let(:email_hash) { Digest::MD5.hexdigest email }
+      let(:email_hash) { Digest::MD5.hexdigest(email) }
 
       it "should return the https url" do
         expect(helper.gravatar_url(email)).to eq("https://secure.gravatar.com/avatar/#{email_hash}?d=identicon")
