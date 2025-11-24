@@ -336,7 +336,7 @@ RSpec.describe Problem, type: :model do
     before { app.reload }
 
     it "is set when a problem is created" do
-      assert_equal app.name, problem.app_name
+      expect(problem.app_name).to eq(app.name)
     end
 
     it "is updated when an app is updated" do
