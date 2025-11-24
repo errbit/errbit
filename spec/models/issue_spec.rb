@@ -85,7 +85,9 @@ RSpec.describe Issue, type: :model do
           issue_tracker.tracker.options.clear
         end
 
-        it("returns false") { expect(subject.save).to eq(false) }
+        it "returns false" do
+          expect(subject.save).to eq(false)
+        end
 
         it "adds the errors" do
           subject.save
