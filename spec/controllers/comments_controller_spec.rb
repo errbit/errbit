@@ -9,7 +9,7 @@ RSpec.describe CommentsController, type: :controller do
   describe "POST /apps/:app_id/errs/:id/comments/create" do
     render_views
 
-    before(:each) do
+    before do
       sign_in Fabricate(:admin)
     end
 
@@ -17,7 +17,7 @@ RSpec.describe CommentsController, type: :controller do
       let(:problem) { Fabricate(:problem) }
       let(:user) { Fabricate(:user) }
 
-      before(:each) do
+      before do
         post :create, params: {
           app_id: problem.app.id,
           problem_id: problem.id,
@@ -42,7 +42,7 @@ RSpec.describe CommentsController, type: :controller do
   describe "DELETE /apps/:app_id/errs/:id/comments/:id/destroy" do
     render_views
 
-    before(:each) do
+    before do
       sign_in Fabricate(:admin)
     end
 
@@ -50,7 +50,7 @@ RSpec.describe CommentsController, type: :controller do
       let(:problem) { Fabricate(:problem_with_comments) }
       let(:comment) { problem.reload.comments.first }
 
-      before(:each) do
+      before do
         delete :destroy, params: {
           app_id: problem.app.id,
           problem_id: problem.id,

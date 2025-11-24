@@ -14,6 +14,7 @@ class ProblemRecacher
       problem.destroy if problem.notices_count == 0
 
       next unless (index + 1) % LOG_EVERY == 0
+
       puts format(LOG_ITR, (index * 100 / count), count - index)
     end
 

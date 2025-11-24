@@ -178,8 +178,8 @@ RSpec.describe ErrorReport, type: :model do
       error_report.generate_notice!
       problem.reload
 
-      expect(problem.resolved_at).to be(nil)
-      expect(problem.resolved).to be(false)
+      expect(problem.resolved_at).to eq(nil)
+      expect(problem.resolved).to eq(false)
     end
 
     it "caches notice counts" do
@@ -187,10 +187,10 @@ RSpec.describe ErrorReport, type: :model do
       problem = error_report.problem
       problem.reload
 
-      expect(problem.notices_count).to be(1)
-      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to be(1)
-      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to be(1)
-      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to be(1)
+      expect(problem.notices_count).to eq(1)
+      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(1)
+      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(1)
+      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(1)
     end
 
     it "increments notice counts" do
@@ -200,10 +200,10 @@ RSpec.describe ErrorReport, type: :model do
       problem = error_report.problem
       problem.reload
 
-      expect(problem.notices_count).to be(2)
-      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to be(2)
-      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to be(2)
-      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to be(2)
+      expect(problem.notices_count).to eq(2)
+      expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(2)
+      expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(2)
+      expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(2)
     end
   end
 

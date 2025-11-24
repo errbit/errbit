@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe IssueTrackerDecorator, type: :decorator do
+RSpec.describe IssueTrackerTypeDecorator, type: :decorator do
   let(:fake_tracker_class) do
     klass = Class.new(ErrbitPlugin::IssueTracker) do
       def self.label

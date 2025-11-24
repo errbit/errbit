@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe NotificationServices::WebhookService, type: :model do
-  it "it should send a notification to a user-specified URL" do
+  it "should send a notification to a user-specified URL" do
     notice = Fabricate :notice
     notification_service = Fabricate :webhook_notification_service, app: notice.app
     problem = notice.problem

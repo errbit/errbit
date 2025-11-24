@@ -73,7 +73,7 @@ RSpec.describe Mailer do
 
     before { email }
 
-    it_should_behave_like "a notification email"
+    it_behaves_like "a notification email"
 
     it "should html-escape the notice's message for the html part" do
       email_html_body = email.body.parts.detect { |p| p.content_type.match(/html/) }.body.raw_source

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe NotificationServices::HubotService, type: :model do
-  it "it should send a notification to Hubot" do
+  it "should send a notification to Hubot" do
     notice = Fabricate :notice
     notification_service = Fabricate :hubot_notification_service, app: notice.app
     problem = notice.problem
