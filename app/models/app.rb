@@ -103,7 +103,7 @@ class App
 
   # Legacy apps don't have notify_on_errs param
   def notify_on_errs
-    !(super == false)
+    super != false
   end
   alias_method :notify_on_errs?, :notify_on_errs
 
