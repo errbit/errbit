@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe NotificationServices::PushoverService, type: :model do
-  it "it should send a notification to Pushover" do
+  it "should send a notification to Pushover" do
     notice = Fabricate :notice
     notification_service = Fabricate :pushover_notification_service, app: notice.app
     problem = notice.problem

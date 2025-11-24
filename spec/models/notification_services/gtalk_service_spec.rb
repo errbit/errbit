@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe NotificationServices::GtalkService, type: :model do
-  it "it should send a notification to gtalk" do
+  it "should send a notification to gtalk" do
     notice = Fabricate :notice
     notice.problem
     notification_service = Fabricate :gtalk_notification_service, app: notice.app
@@ -93,7 +93,7 @@ https://#{Errbit::Config.host}/apps/#{@problem.app.id}
     end
   end
 
-  it "it should send a notification to room only" do
+  it "should send a notification to room only" do
     notice = Fabricate :notice
     notice.problem
     notification_service = Fabricate :gtalk_notification_service, app: notice.app

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe NotificationServices::CampfireService, type: :model do
-  it "it should send a notification to campfire" do
+  it "should send a notification to campfire" do
     notice = Fabricate :notice
     notification_service = Fabricate :campfire_notification_service, app: notice.app
     problem = notice.problem
