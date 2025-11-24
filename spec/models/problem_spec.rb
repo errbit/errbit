@@ -152,7 +152,7 @@ RSpec.describe Problem, type: :model do
       expect(merged_problem.errs.length).to eq 2
 
       expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
-      expect(merged_problem.errs(true).length).to eq 1
+      expect(merged_problem.errs(true).length).to eq(1)
     end
 
     it "runs smoothly for problem without errs" do
@@ -285,7 +285,7 @@ RSpec.describe Problem, type: :model do
     it "gets correct relative percentages when all zeros for data" do
       two_weeks_ago = 13.days.ago
       relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, "day")
-      expect(relative_percentages).to eq(([0] * 14))
+      expect(relative_percentages).to eq([0] * 14)
     end
   end
 
