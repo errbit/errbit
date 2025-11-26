@@ -30,7 +30,6 @@ require "errbit_plugin/mock_issue_tracker"
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 Mongoid::Config.truncate!
 Mongoid::Tasks::Database.create_indexes
-ActionMailer::Base.delivery_method = :test
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
