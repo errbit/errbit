@@ -22,29 +22,12 @@ require "rspec/rails"
 require "email_spec"
 require "xmpp4r"
 require "xmpp4r/muc"
-require "fabrication"
 require "errbit_plugin/mock_issue_tracker"
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-Mongoid::Config.truncate!
-Mongoid::Tasks::Database.create_indexes
-ActionMailer::Base.delivery_method = :test
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
-
-  config.alias_example_to :fit, focused: true
-
-  config.before do
-    Mongoid::Config.truncate!
-  end
-
-  config.include Haml, type: :helper
-  config.include Haml::Helpers, type: :helper
-
-  config.before(:each, type: :decorator) do |_|
-    Draper::ViewContext.current.class_eval { include Haml::Helpers }
-  end
 end
