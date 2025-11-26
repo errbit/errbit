@@ -196,6 +196,7 @@ pt-BR:
       repository_branch: Ramo do repositório
       github_repo: Repositório do GitHub
       bitbucket_repo: Repositório do BitBucket
+      custom_backtrace_url_template: Custom Backtrace URL Template
       asset_host: Servidor de 'Assets'
       asset_host_help: Usado para gerar links dos erros JavaScript
       asset_host_placeholder: "ex.: https://assets.example.com"
