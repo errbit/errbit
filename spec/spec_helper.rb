@@ -35,8 +35,6 @@ ActionMailer::Base.delivery_method = :test
 RSpec.configure do |config|
   config.disable_monkey_patching!
 
-  config.alias_example_to :fit, focused: true
-
   config.before do
     Mongoid::Config.truncate!
   end
