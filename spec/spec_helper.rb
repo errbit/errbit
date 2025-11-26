@@ -27,13 +27,7 @@ require "errbit_plugin/mock_issue_tracker"
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-Mongoid::Config.truncate!
-Mongoid::Tasks::Database.create_indexes
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
-
-  config.before do
-    Mongoid::Config.truncate!
-  end
 end
