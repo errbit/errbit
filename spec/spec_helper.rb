@@ -38,8 +38,4 @@ RSpec.configure do |config|
   config.before do
     Mongoid::Config.truncate!
   end
-
-  config.before(:each, type: :decorator) do |_|
-    Draper::ViewContext.current.class_eval { include Haml::Helpers }
-  end
 end
