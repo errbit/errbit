@@ -15,10 +15,10 @@
   = f.text_field :repository_branch, placeholder: "e.g. main"
 %div
   = f.label :github_repo, t(".github_repo")
-  = f.text_field :github_repo, placeholder: "e.g. errbit/errbit from https://github.com/errbit/errbit"
+  = f.text_field :github_repo, placeholder: "e.g. errbit/errbit for https://github.com/errbit/errbit"
 %div
   = f.label :bitbucket_repo, t(".bitbucket_repo")
-  = f.text_field :bitbucket_repo, placeholder: "e.g. errbit/errbit from https://bitbucket.org/errbit/errbit"
+  = f.text_field :bitbucket_repo, placeholder: "e.g. errbit/errbit for https://bitbucket.org/errbit/errbit"
 %div
   = f.label :custom_backtrace_url_template, t(".custom_backtrace_url_template")
   = f.text_field :custom_backtrace_url_template, placeholder: "https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}"
