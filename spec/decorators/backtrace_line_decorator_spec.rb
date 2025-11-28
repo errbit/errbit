@@ -74,8 +74,9 @@ RSpec.describe BacktraceLineDecorator, type: :decorator do
     it "adds a link to the source file" do
       link = backtrace_line_in_app.link_to_source_file(app) { "mytext" }
       expect(link).to eq(
-        '<a target="_blank" href="https://github.com/foo/bar/blob/main/pat' \
-        'h/to/file/ea315ea4.rb#L884">mytext</a>'
+        '<a target="_blank" ' \
+        'rel="noopener noreferrer" ' \
+        'href="https://github.com/foo/bar/blob/main/path/to/file/ea315ea4.rb#L884">mytext</a>'
       )
     end
   end
