@@ -87,7 +87,7 @@ RSpec.describe Mailer do
     it "should have links to source files" do
       skip_for(engine: "jruby")
 
-      expect(email).to have_body_text('<a target="_blank" href="http://example.com/path/to/file.js">path/to/file.js')
+      expect(email).to have_body_text('<a target="_blank" rel="noopener noreferrer" href="http://example.com/path/to/file.js">path/to/file.js')
     end
 
     it "should have links to source files" do
