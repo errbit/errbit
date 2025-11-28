@@ -16,15 +16,15 @@
         - if any_github_repos? or any_bitbucket_repos?
           %td.github_repo
             - if app.github_repo?
-              = link_to(app.github_repo, app.github_url, :target => '_blank')
+              = link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer")
             - if app.bitbucket_repo?
-              = link_to(app.bitbucket_repo, app.bitbucket_url, :target => '_blank')
+              = link_to(app.bitbucket_repo, app.bitbucket_url, target: "_blank", rel: "noopener noreferrer")
         - if any_notification_services?
           %td.notification_service
             - if app.notification_service_configured?
               - notification_service_img = image_tag("#{app.notification_service.label}_goto.png")
               - if app.notification_service.url
-                = link_to( notification_service_img, app.notification_service.url, :target => "_blank" )
+                = link_to( notification_service_img, app.notification_service.url, target: "_blank", rel: "noopener noreferrer")
               - else
                 = notification_service_img
         - if any_issue_trackers?

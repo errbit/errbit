@@ -56,7 +56,7 @@
           %th=t('.github_repo')
       %tbody
         %tr
-          %td= link_to(app.github_repo, app.github_url, :target => '_blank')
+          %td= link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer")
 
 - if app.problems.any?
   %h3.clear=t('.errors')

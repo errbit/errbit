@@ -49,7 +49,7 @@
             - if any_issue_links
               %td.issue_link.narrow-as-possible
                 - if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending'
-                  = link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, :target => "_blank"
+                  = link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank", rel: "noopener noreferrer"
           %td.resolve.narrow-as-possible
             %div.td-container= link_to image_tag("thumbs-up.png"), resolve_app_problem_path(problem.app, problem),
               :title => "Resolve", :method => :put, :data => { :confirm => problem_confirm('resolve_one') },
