@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe WatchersController, type: :controller do
-  let(:user) { Fabricate(:user) }
+  let(:user) { create(:user) }
   let(:problem) { Fabricate(:problem) }
 
   before { sign_in user }

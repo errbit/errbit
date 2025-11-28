@@ -15,7 +15,8 @@ RSpec.describe "problems/index.html.erb", type: :view do
     )
     allow(view).to receive(:params_sort).and_return("last_notice_at")
     allow(view).to receive(:params_order).and_return("asc")
-    allow(controller).to receive(:current_user).and_return(Fabricate(:user))
+
+    allow(controller).to receive(:current_user).and_return(create(:user))
   end
 
   describe "with problem" do

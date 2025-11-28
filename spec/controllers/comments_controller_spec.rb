@@ -10,12 +10,12 @@ RSpec.describe CommentsController, type: :controller do
     render_views
 
     before do
-      sign_in Fabricate(:admin)
+      sign_in create(:user, admin: true)
     end
 
     context "successful comment creation" do
       let(:problem) { Fabricate(:problem) }
-      let(:user) { Fabricate(:user) }
+      let(:user) { create(:user) }
 
       before do
         post :create, params: {
@@ -43,7 +43,7 @@ RSpec.describe CommentsController, type: :controller do
     render_views
 
     before do
-      sign_in Fabricate(:admin)
+      sign_in create(:user, admin: true)
     end
 
     context "successful comment deletion" do

@@ -56,7 +56,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
     assign :notices, problem.notices.page(1).per(1)
     assign :notice, problem.notices.first
 
-    allow(controller).to receive(:current_user).and_return(Fabricate(:user))
+    allow(controller).to receive(:current_user).and_return(create(:user))
   end
 
   def with_issue_tracker(tracker, _problem)

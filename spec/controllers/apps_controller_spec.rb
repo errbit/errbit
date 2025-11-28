@@ -8,7 +8,7 @@ RSpec.describe AppsController, type: :controller do
 
   let(:app_params) { {name: "BestApp"} }
   let(:admin) { Fabricate(:admin) }
-  let(:user) { Fabricate(:user) }
+  let(:user) { create(:user) }
   let(:watcher) { Fabricate(:user_watcher, app: app, user: user) }
   let(:unwatched_app) { Fabricate(:app) }
   let(:app) { unwatched_app }
@@ -80,9 +80,9 @@ RSpec.describe AppsController, type: :controller do
       end
 
       it "should list available watchers by name" do
-        Fabricate(:user, name: "Carol")
-        Fabricate(:user, name: "Alice")
-        Fabricate(:user, name: "Betty")
+        create(:user, name: "Carol")
+        create(:user, name: "Alice")
+        create(:user, name: "Betty")
 
         get :show, params: {id: app.id}
 
@@ -96,13 +96,13 @@ RSpec.describe AppsController, type: :controller do
 
         it "should have default per_page value for user" do
           get :show, params: {id: app.id}
-          expect(controller.problems.to_a.size).to eq User::PER_PAGE
+          expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
         end
 
         it "should be able to override default per_page value" do
           admin.update_attribute :per_page, 10
           get :show, params: {id: app.id}
-          expect(controller.problems.to_a.size).to eq 10
+          expect(controller.problems.to_a.size).to eq(10)
         end
       end
 

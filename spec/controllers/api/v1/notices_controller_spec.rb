@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Api::V1::NoticesController, type: :controller do
   context "when logged in" do
     before do
-      @user = Fabricate(:user)
+      @user = create(:user)
     end
 
     describe "GET /api/v1/notices" do
