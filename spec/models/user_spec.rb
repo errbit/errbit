@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe User, type: :model do
   context "validations" do
     it "require that a name is present" do
-      user = Fabricate.build(:user, name: nil)
+      user = build(:user, name: nil)
 
       expect(user.valid?).to eq(false)
 
@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
     end
 
     it "requires password without github login" do
-      user = Fabricate.build(:user, password: nil)
+      user = build(:user, password: nil)
 
       expect(user.valid?).to eq(false)
 
@@ -21,16 +21,16 @@ RSpec.describe User, type: :model do
     end
 
     it "doesn't require password with github login" do
-      user = Fabricate.build(:user, password: nil, github_login: "nashby")
+      user = build(:user, password: nil, github_login: "biow0lf")
 
       expect(user.valid?).to eq(true)
     end
 
     it "requires uniq github login" do
-      user1 = Fabricate(:user, github_login: "nashby")
+      user1 = create(:user, github_login: "biow0lf")
       expect(user1.valid?).to eq(true)
 
-      user2 = Fabricate.build(:user, github_login: "nashby")
+      user2 = build(:user, github_login: "biow0lf")
       user2.save
       expect(user2.valid?).to eq(false)
 
@@ -38,24 +38,24 @@ RSpec.describe User, type: :model do
     end
 
     it "allows blank / null github_login" do
-      user1 = Fabricate(:user, github_login: " ")
+      user1 = create(:user, github_login: " ")
       expect(user1.valid?).to eq(true)
 
-      user2 = Fabricate.build(:user, github_login: " ")
+      user2 = build(:user, github_login: " ")
       user2.save
 
       expect(user2.valid?).to eq(true)
     end
 
     it "disables validations when reset password" do
-      user = Fabricate.build(:user, email: "")
+      user = build(:user, email: "")
       user.save(validate: false)
 
       expect(user.reset_password("Password123", "Password123")).to eq(true)
     end
 
     it "should require a password with minimum of 8 characters" do
-      user = Fabricate.build(:user)
+      user = build(:user)
 
       user.reset_password("1234567", "1234578")
 
@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "#attributes_for_super_diff" do
-    subject { Fabricate(:user) }
+    subject { create(:user) }
 
     it { expect(subject.attributes_for_super_diff).to eq(id: subject.id.to_s, name: subject.name) }
   end
