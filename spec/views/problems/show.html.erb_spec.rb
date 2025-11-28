@@ -169,7 +169,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
           before do
             problem.issue_link = nil
 
-            user = Fabricate(:user, github_login: "test_user", github_oauth_token: "abcdef")
+            user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
 
             allow(controller).to receive(:current_user).and_return(user)
           end
