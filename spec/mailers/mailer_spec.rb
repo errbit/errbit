@@ -93,7 +93,7 @@ RSpec.describe Mailer do
     it "should have links to source files" do
       skip_for(engine: "ruby")
 
-      expect(email).to have_body_text('<a href="http://example.com/path/to/file.js" target="_blank">path/to/file.js')
+      expect(email).to have_body_text('<a href="http://example.com/path/to/file.js" rel="noopener noreferrer" target="_blank">path/to/file.js')
     end
 
     it "should have the error count in the subject" do
