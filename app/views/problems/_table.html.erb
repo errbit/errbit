@@ -81,7 +81,7 @@
             <% if any_issue_links %>
               <td class="issue_link narrow-as-possible">
                 <% if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != "pending" %>
-                  <%= link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank" %>
+                  <%= link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank", rel: "noopener noreferrer" %>
                 <% end %>
               </td>
             <% end %>
