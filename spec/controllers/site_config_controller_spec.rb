@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe SiteConfigController, type: :controller do
   it_requires_admin_privileges for: {
     index: :get,
-    update: :put
+    update: :patch
   }
 
   let(:admin) { create(:user, admin: true) }
@@ -20,7 +20,7 @@ RSpec.describe SiteConfigController, type: :controller do
 
   describe "#update" do
     it "updates" do
-      put :update, params: {
+      patch :update, params: {
         site_config: {
           notice_fingerprinter_attributes: {
             backtrace_lines: 3,
@@ -36,7 +36,7 @@ RSpec.describe SiteConfigController, type: :controller do
     end
 
     it "redirects to the index" do
-      put :update, params: {
+      patch :update, params: {
         site_config: {
           notice_fingerprinter_attributes: {
             error_class: true
@@ -48,7 +48,7 @@ RSpec.describe SiteConfigController, type: :controller do
     end
 
     it "flashes a confirmation" do
-      put :update, params: {
+      patch :update, params: {
         site_config: {
           notice_fingerprinter_attributes: {
             error_class: true
@@ -60,7 +60,7 @@ RSpec.describe SiteConfigController, type: :controller do
     end
 
     it "updates apps that are using site wide notice fingerprinter" do
-      put :update, params: {
+      patch :update, params: {
         site_config: {
           notice_fingerprinter_attributes: {
             backtrace_lines: 10,
@@ -75,7 +75,7 @@ RSpec.describe SiteConfigController, type: :controller do
       expect(app.notice_fingerprinter.backtrace_lines).to eq(10)
       expect(app.notice_fingerprinter.environment_name).to eq(false)
 
-      put :update, params: {
+      patch :update, params: {
         site_config: {
           notice_fingerprinter_attributes: {
             backtrace_lines: 11,
