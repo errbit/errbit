@@ -296,6 +296,8 @@ en:
       action: Action
       environment_name: Environment name
       update_config: Update Config
+    update:
+      success: "Updated site config"
   notices:
     summary:
       message: Message
