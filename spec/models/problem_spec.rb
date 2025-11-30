@@ -89,7 +89,7 @@ RSpec.describe Problem, type: :model do
 
   describe "#resolved?" do
     it "should start out as unresolved" do
-      problem = Problem.new
+      problem = described_class.new
       expect(problem).not_to be_resolved
       expect(problem).to be_unresolved
     end
@@ -195,7 +195,7 @@ RSpec.describe Problem, type: :model do
       end
 
       it "finds with notice_id as argument" do
-        app = Fabricate(:app)
+        app = create(:app)
         problem = Fabricate(:problem, app: app)
         err = Fabricate(:err, problem: problem)
         notice = Fabricate(:notice, err: err, message: "ERR 1")
@@ -209,7 +209,7 @@ RSpec.describe Problem, type: :model do
 
   context "notice counter cache" do
     before do
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem = Fabricate(:problem, app: @app)
       @err = Fabricate(:err, problem: @problem)
     end
@@ -235,7 +235,7 @@ RSpec.describe Problem, type: :model do
 
   context "sparklines-related methods" do
     before do
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem = Fabricate(:problem, app: @app)
       @err = Fabricate(:err, problem: @problem)
     end
@@ -291,13 +291,13 @@ RSpec.describe Problem, type: :model do
 
   context "filtered" do
     before do
-      @app1 = Fabricate(:app)
+      @app1 = create(:app)
       @problem1 = Fabricate(:problem, app: @app1)
 
-      @app2 = Fabricate(:app)
+      @app2 = create(:app)
       @problem2 = Fabricate(:problem, app: @app2)
 
-      @app3 = Fabricate(:app)
+      @app3 = create(:app)
       @app3.update_attribute(:name, "app3")
 
       @problem3 = Fabricate(:problem, app: @app3)
@@ -454,9 +454,7 @@ RSpec.describe Problem, type: :model do
 
   describe "#issue_type" do
     context "without issue_type fill in Problem" do
-      let(:problem) do
-        Problem.new(app: app)
-      end
+      let(:problem) { described_class.new(app: app) }
 
       let(:app) do
         App.new(issue_tracker: issue_tracker)
@@ -495,7 +493,7 @@ RSpec.describe Problem, type: :model do
 
     context "with issue_type fill in Problem" do
       it "return the value associate" do
-        expect(Problem.new(issue_type: "foo").issue_type).to eq("foo")
+        expect(described_class.new(issue_type: "foo").issue_type).to eq("foo")
       end
     end
   end
@@ -514,9 +512,7 @@ RSpec.describe Problem, type: :model do
     it "update the notice_count" do
       expect do
         problem.recache
-      end.to change {
-        problem.notices_count
-      }.from(0).to(1)
+      end.to change(problem, :notices_count).from(0).to(1)
     end
 
     context "with only one notice" do

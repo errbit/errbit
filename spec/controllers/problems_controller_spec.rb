@@ -10,7 +10,7 @@ RSpec.describe ProblemsController, type: :controller do
     params: {app_id: "dummyid", id: "dummyid"}
   )
 
-  let(:app) { Fabricate(:app) }
+  let(:app) { create(:app) }
 
   let(:err) { Fabricate(:err, problem: problem) }
 
@@ -27,7 +27,7 @@ RSpec.describe ProblemsController, type: :controller do
 
     context "pagination" do
       before do
-        35.times { Fabricate :err }
+        35.times { Fabricate(:err) }
       end
 
       it "should have default per_page value for user" do
@@ -117,7 +117,7 @@ RSpec.describe ProblemsController, type: :controller do
   describe "GET /problems/search" do
     before do
       sign_in user
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem1 = Fabricate(:problem, app: @app, message: "Most important")
       @problem2 = Fabricate(:problem, app: @app, message: "Very very important")
     end
@@ -512,7 +512,7 @@ RSpec.describe ProblemsController, type: :controller do
     describe "POST /apps/:app_id/problems/destroy_all" do
       before do
         sign_in user
-        @app = Fabricate(:app)
+        @app = create(:app)
         @problem1 = Fabricate(:problem, app: @app)
         @problem2 = Fabricate(:problem, app: @app)
       end

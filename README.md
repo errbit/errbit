@@ -5,7 +5,7 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
 
-### The open source, self-hosted error catcher
+## The open source, self-hosted error catcher
 
 Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](https://www.airbrake.io) API compliant, so you can just
@@ -45,21 +45,19 @@ point the `airbrake` gem to your Errbit server (see
   </tr>
 </table>
 
-Mailing List
-------------
+## Mailing List
 
 Join the Google Group at https://groups.google.com/group/errbit to receive
 updates and notifications.
 
-# Requirements
+## Requirements
 
 The list of requirements to install Errbit are:
 
 * Ruby 3.4
 * MongoDB >= 7.0
 
-Installation
-------------
+## Installation
 
 *Note*: This app is intended for people with experience deploying and maintaining
 Rails applications.
@@ -70,18 +68,17 @@ Rails applications.
 * `bundle exec rake errbit:bootstrap`
 * `bundle exec rails server`
 
-Configuration
--------------
+## Configuration
 
 Errbit configuration is done entirely through environment variables. See
 [configuration](docs/configuration.md)
 
-Deployment
-----------
+## Deployment
+
 See [notes on deployment](docs/deployment.md)
 
-Notice Grouping
----------------
+## Notice Grouping
+
 The way Errbit arranges notices into error groups is configurable. By default,
 Errbit uses the notice's error class, error message, complete backtrace,
 component (or controller), action and environment name to generate a unique
@@ -97,16 +94,17 @@ refingerprint old notices, you can run
 Since version 0.7.0, the notice grouping can be separately configured for each
 app (under the "edit" menu).
 
-Managing apps
----------------------
+## Managing apps
+
 An Errbit app is a place to collect error notifications from your external
 application deployments.
 
 See [apps](docs/apps.md)
 
-Authentication
---------------
-### Configuring GitHub authentication:
+## Authentication
+
+### Configuring GitHub authentication
+
 * Set `GITHUB_AUTHENTICATION=true`
 * Register your instance of Errbit at https://github.com/settings/applications/new
 
@@ -149,7 +147,7 @@ few others that could make sense for your needs:
   organization can log in to Errbit through GitHub. Errbit will provision
   accounts for new users.
 
-### Configuring Google authentication:
+### Configuring Google authentication
 
 * Set `GOOGLE_AUTHENTICATION=true`
 * Register your instance of Errbit at https://console.developers.google.com/apis/api/plus/overview
@@ -168,7 +166,7 @@ When you start your application, you should see the option to **Sign in with
 Google** on the Login page. You will also be able to link your Google profile
 to your user account on your **Edit profile** page.
 
-### Configuring LDAP authentication:
+### Configuring LDAP authentication
 
 * Set `ERRBIT_USER_HAS_USERNAME=true`
 * Follow the [devise_ldap_authenticatable setup instructions](https://github.com/cschiewek/devise_ldap_authenticatable).
@@ -237,13 +235,11 @@ it will be displayed under the *User Details* tab:
 
 This tab will be hidden if no user information is available.
 
-Configuration
--------------
+## Configuration
 
 https://github.com/airbrake/airbrake
 
-Javascript error notifications
---------------------------------------
+## Javascript error notifications
 
 You can log javascript errors that occur in your application by including the
 [airbrake-js](https://github.com/airbrake/airbrake-js) javascript library.
@@ -262,8 +258,8 @@ var airbrake = new airbrakeJs.Client({
 });
 ```
 
-Plugins and Integrations
-------------------------
+## Plugins and Integrations
+
 You can extend Errbit by adding Ruby gems and plugins which are typically gems.
 It's nice to keep track of which gems are core Errbit dependencies and which
 gems are your own dependencies. If you want to add gems to your own Errbit,
@@ -276,8 +272,8 @@ echo "gem 'errbit_jira_plugin'" > UserGemfile
 bundle install
 ```
 
-Issue Trackers
---------------
+## Issue Trackers
+
 Each issue tracker integration is implemented as a gem that depends on
 [errbit_plugin](https://github.com/errbit/errbit_plugin). The only officially
 supported issue tracker plugin is
@@ -286,8 +282,7 @@ supported issue tracker plugin is
 If you want to implement your own issue tracker plugin, read the README.md file
 at [errbit_plugin](https://github.com/errbit/errbit_plugin).
 
-What if Errbit has an error?
-----------------------------
+## What if Errbit has an error?
 
 Errbit will log its own errors to an internal app named **Self.Errbit**.  The
 **Self.Errbit** app is automatically created when the first error happens.
@@ -310,27 +305,25 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
   * You can now easily post bug reports to GitHub Issues by clicking the
     **Create Issue** button on a **Self.Errbit** error.
 
-Getting Help
-------------
+## Getting Help
 
 If you need help, try asking your question on StackOverflow using the
 tag errbit:
 https://stackoverflow.com/questions/tagged/errbit
 
-Use Errbit with applications written in other languages
--------------------------------------------------------
+## Use Errbit with applications written in other languages
 
 In theory, any Airbrake-compatible error catcher for other languages should work with Errbit.
 Solutions known to work are listed below:
 
-| Language            | Project                                                                                                                             |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| PHP (&gt;= 5.3)     | [wasilak/errbit-php](https://github.com/wasilak/errbit-php)                                                                         |
-| OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP)                                                                         |
-| Python              | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py) , [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
+| Language            | Project                                                             |
+|---------------------|---------------------------------------------------------------------|
+| PHP (&gt;= 5.3)     | [wasilak/errbit-php](https://github.com/wasilak/errbit-php)         |
+| OOP PHP (&gt;= 5.3) | [emgiezet/errbitPHP](https://github.com/emgiezet/errbitPHP)         |
+| Python              | [mkorenkov/errbit.py](https://github.com/mkorenkov/errbit.py)       |
+| Python              | [pulseenergy/airbrakepy](https://github.com/pulseenergy/airbrakepy) |
 
-People using Errbit
--------------------
+## People using Errbit
 
 See our wiki page for a [list of people and companies around the world who use
 Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit). You may
@@ -338,8 +331,7 @@ Errbit](https://github.com/errbit/errbit/wiki/People-using-Errbit). You may
 page](https://github.com/errbit/errbit/wiki/People-using-Errbit/_edit), and add
 your name and country to the list if you are using Errbit.
 
-Special Thanks
---------------
+## Special Thanks
 
 * [Michael Parenteau](http://michaelparenteau.com) - For rocking the Errbit design and providing a great user experience.
 * [Nick Recobra (@oruen)](https://github.com/oruen) - Nick is Errbit's first core contributor. He's been working hard at making Errbit more awesome.
@@ -352,17 +344,18 @@ Special Thanks
 
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for more details.
 
-Contributing to Errbit
-------------
+## Contributing to Errbit
 
 See the [contribution guidelines](CONTRIBUTING.md)
 
-Running tests
--------------
+## Running tests
 
 Check the [.github/workflows/rspec.yml](.github/workflows/rspec.yml) file to see how tests are run
 
-Copyright
----------
+## License
 
-Copyright (&copy;) 2010-2025 Errbit Team
+Errbit is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+## Copyright
+
+Copyright &copy; 2010-2025 Errbit Team
