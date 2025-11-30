@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Sign in with GitHub", type: :system, retry: 3 do
   context "sign in via GitHub with recognized user" do
-    let!(:user) { Fabricate(:user, github_login: "nashby") }
+    let!(:user) { create(:user, github_login: "nashby") }
 
     before { expect(Errbit::Config).to receive(:github_authentication).and_return(true).twice }
 

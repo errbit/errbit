@@ -15,7 +15,7 @@ RSpec.describe Watcher, type: :model do
       watcher.email = nil
       expect(watcher.valid?).to eq(false)
 
-      watcher.user = Fabricate(:user)
+      watcher.user = create(:user)
       watcher.watcher_type = "user"
       expect(watcher.valid?).to eq(true)
     end
@@ -23,7 +23,7 @@ RSpec.describe Watcher, type: :model do
 
   context "address" do
     it "returns the user's email address if there is a user" do
-      user = Fabricate(:user, email: "foo@bar.com")
+      user = create(:user, email: "foo@bar.com")
       watcher = Fabricate(:user_watcher, user: user)
       expect(watcher.address).to eq("foo@bar.com")
     end
