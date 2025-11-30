@@ -14,11 +14,11 @@ RSpec.describe IssueTracker, type: :model do
 
   describe "#tracker" do
     context "with type_tracker class not exist" do
-      let(:app) { Fabricate(:app) }
+      let(:app) { create(:app) }
 
       it "return NoneIssueTracker" do
         issue_tracker = IssueTracker.new(type_tracker: "Foo", app: app)
-        expect(issue_tracker.tracker).to be_a ErrbitPlugin::NoneIssueTracker
+        expect(issue_tracker.tracker).to be_a(ErrbitPlugin::NoneIssueTracker)
       end
     end
   end

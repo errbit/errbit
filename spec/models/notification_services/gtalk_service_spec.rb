@@ -4,9 +4,9 @@ require "rails_helper"
 
 RSpec.describe NotificationServices::GtalkService, type: :model do
   it "should send a notification to gtalk" do
-    notice = Fabricate :notice
+    notice = Fabricate(:notice)
     notice.problem
-    notification_service = Fabricate :gtalk_notification_service, app: notice.app
+    notification_service = Fabricate(:gtalk_notification_service, app: notice.app)
     problem = notice.problem
 
     gtalk = double("GtalkService")
@@ -18,7 +18,7 @@ RSpec.describe NotificationServices::GtalkService, type: :model do
     expect(gtalk).to receive(:auth).with(notification_service.api_token)
     message_value = "#{problem.app.name}
 https://#{Errbit::Config.host}/apps/#{problem.app.id}
-#{notification_service.notification_description problem}"
+#{notification_service.notification_description(problem)}"
 
     expect(Jabber::Message).to receive(:new).with(notification_service.user_id, message_value).and_return(message)
     expect(Jabber::Message).to receive(:new).with(notification_service.room_id, message_value).and_return(message)
@@ -35,12 +35,12 @@ https://#{Errbit::Config.host}/apps/#{problem.app.id}
   describe "multiple users_ids" do
     before do
       # setup
-      @notice = Fabricate :notice
-      @notification_service = Fabricate :gtalk_notification_service, app: @notice.app
+      @notice = Fabricate(:notice)
+      @notification_service = Fabricate(:gtalk_notification_service, app: @notice.app)
       @problem = @notice.problem
       @error_msg = "#{@problem.app.name}
 https://#{Errbit::Config.host}/apps/#{@problem.app.id}
-#{@notification_service.notification_description @problem}"
+#{@notification_service.notification_description(@problem)}"
 
       @gtalk = double("GtalkService")
       expect(@gtalk).to receive(:connect)

@@ -9,7 +9,7 @@ RSpec.describe NoticesController, type: :controller do
 
   let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
-  let(:app) { Fabricate(:app) }
+  let(:app) { create(:app) }
 
   let(:error_report) { double(valid?: true, generate_notice!: true, notice: notice, should_keep?: true) }
 

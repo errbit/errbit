@@ -9,7 +9,7 @@ RSpec.describe WatchersController, type: :controller do
   before { sign_in user }
 
   describe "#create" do
-    let(:app) { Fabricate(:app) }
+    let(:app) { create(:app) }
 
     context "successful watcher create" do
       before do
@@ -32,7 +32,7 @@ RSpec.describe WatchersController, type: :controller do
 
   describe "#destroy" do
     let(:app) do
-      a = Fabricate(:app)
+      a = create(:app)
       Fabricate(:user_watcher, app: a, user: user)
       a
     end
