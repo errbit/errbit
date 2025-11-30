@@ -26,6 +26,12 @@ Fabricator :slack_notification_service, from: :notification_service, class_name:
   room_id { sequence(:room_id) { |i| "#room-#{i}" } }
 end
 
-["campfire", "hoiio", "hubot", "pushover", "webhook"].each do |t|
-  Fabricator "#{t}_notification_service".to_sym, from: :notification_service, class_name: "NotificationServices::#{t.camelcase}Service"
-end
+Fabricator :campfire_notification_service, from: :notification_service, class_name: "NotificationServices::CampfireService"
+
+Fabricator :hoiio_notification_service, from: :notification_service, class_name: "NotificationServices::HoiioService"
+
+Fabricator :hubot_notification_service, from: :notification_service, class_name: "NotificationServices::HubotService"
+
+Fabricator :pushover_notification_service, from: :notification_service, class_name: "NotificationServices::PushoverService"
+
+Fabricator :webhook_notification_service, from: :notification_service, class_name: "NotificationServices::WebhookService"
