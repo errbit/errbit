@@ -17,7 +17,7 @@
 
 <% content_for :action_bar do %>
   <% if problem.unresolved? %>
-    <span><%= link_to t(".resolve"), [:resolve, app, problem], method: :put,
+    <span><%= link_to t(".resolve"), [:resolve, app, problem], method: :patch,
       data: { confirm: problem_confirm("resolve_one") }, class: "resolve" %></span>
   <% end %>
 

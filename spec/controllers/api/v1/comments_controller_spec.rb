@@ -35,7 +35,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
         get :index, params: {problem_id: @problem.id, auth_token: @user.authentication_token}
         expect(response).to be_successful
         comments = JSON.parse response.body
-        expect(comments.length).to eq 2
+        expect(comments.length).to eq(2)
       end
     end
 

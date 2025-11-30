@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe ProblemsController, type: :controller do
   it_requires_authentication(
     for: {
-      index: :get, show: :get, resolve: :put, search: :get
+      index: :get, show: :get, resolve: :patch, search: :get
     },
     params: {app_id: "dummyid", id: "dummyid"}
   )
@@ -239,7 +239,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
   end
 
-  describe "PUT /apps/:app_id/problems/:id/resolve" do
+  describe "PATCH /apps/:app_id/problems/:id/resolve" do
     before do
       sign_in user
 
@@ -247,20 +247,20 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     it "finds the app and the problem" do
-      put :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
 
       expect(controller.app).to eq @err.app
       expect(controller.problem).to eq(@err.problem)
     end
 
     it "should resolve the issue" do
-      put :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
 
       expect(@err.problem.reload.resolved).to eq(true)
     end
 
     it "should display a message" do
-      put :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
 
       expect(request.flash[:success]).to match(/Great news/)
     end
@@ -268,7 +268,7 @@ RSpec.describe ProblemsController, type: :controller do
     it "should redirect to the app page" do
       request.env["HTTP_REFERER"] = app_path(@err.app)
 
-      put :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
 
       expect(response).to redirect_to(app_path(@err.app))
     end
@@ -276,7 +276,7 @@ RSpec.describe ProblemsController, type: :controller do
     it "should redirect back to problems page" do
       request.env["HTTP_REFERER"] = problems_path
 
-      put :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
 
       expect(response).to redirect_to(problems_path)
     end
@@ -525,13 +525,13 @@ RSpec.describe ProblemsController, type: :controller do
       end
 
       it "should display a message" do
-        put :destroy_all, params: {app_id: @app.id}
+        patch :destroy_all, params: {app_id: @app.id}
         expect(request.flash[:success]).to match(/be deleted/)
       end
 
       it "should redirect back to the app page" do
         request.env["HTTP_REFERER"] = edit_app_path(@app)
-        put :destroy_all, params: {app_id: @app.id}
+        patch :destroy_all, params: {app_id: @app.id}
         expect(response).to redirect_to(edit_app_path(@app))
       end
     end

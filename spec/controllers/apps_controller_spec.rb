@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe AppsController, type: :controller do
   it_requires_authentication
-  it_requires_admin_privileges for: {new: :get, edit: :get, create: :post, update: :put, destroy: :delete}
+  it_requires_admin_privileges for: {new: :get, edit: :get, create: :post, update: :patch, destroy: :delete}
 
   let(:app_params) { {name: "BestApp"} }
   let(:admin) { create(:user, admin: true) }
@@ -237,19 +237,19 @@ RSpec.describe AppsController, type: :controller do
       end
     end
 
-    describe "PUT /apps/:id" do
+    describe "PATCH /apps/:id" do
       before do
         @app = Fabricate(:app)
       end
 
       context "when the update is successful" do
         it "should redirect to the app page" do
-          put :update, params: {id: @app.id, app: app_params}
+          patch :update, params: {id: @app.id, app: app_params}
           expect(response).to redirect_to(app_path(@app))
         end
 
         it "should display a message" do
-          put :update, params: {id: @app.id, app: app_params}
+          patch :update, params: {id: @app.id, app: app_params}
           expect(request.flash[:success]).to match(/success/)
         end
       end
@@ -257,14 +257,14 @@ RSpec.describe AppsController, type: :controller do
       context "changing name" do
         it "should redirect to app page" do
           id = @app.id
-          put :update, params: {id: id, app: {name: "new name"}}
+          patch :update, params: {id: id, app: {name: "new name"}}
           expect(response).to redirect_to(app_path(id))
         end
       end
 
       context "when the update is unsuccessful" do
         it "should render the edit page" do
-          put :update, params: {id: @app.id, app: {name: ""}}
+          patch :update, params: {id: @app.id, app: {name: ""}}
           expect(response).to render_template(:edit)
         end
       end
@@ -276,7 +276,7 @@ RSpec.describe AppsController, type: :controller do
         end
 
         it "should parse legal csv values" do
-          put :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
+          patch :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
           @app.reload
           expect(@app.email_at_notices).to eq([1, 4, 7, 8, 10])
         end
@@ -284,23 +284,22 @@ RSpec.describe AppsController, type: :controller do
         context "failed parsing of CSV" do
           it "should set the default value" do
             @app = Fabricate(:app, email_at_notices: [1, 2, 3, 4])
-            put :update, params: {id: @app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
+            patch :update, params: {id: @app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
             @app.reload
             expect(@app.email_at_notices).to eq(Errbit::Config.email_at_notices)
           end
 
           it "should display a message" do
-            put :update, params: {id: @app.id, app: {email_at_notices: "qwertyuiop"}}
+            patch :update, params: {id: @app.id, app: {email_at_notices: "qwertyuiop"}}
             expect(request.flash[:error]).to match(/Couldn't parse/)
           end
         end
       end
 
-      # TODO: what is `cur`?
-      context "setting up issue tracker", cur: true do
+      context "setting up issue tracker" do
         context "unknown tracker type" do
           before do
-            put :update, params: {id: @app.id, app: {issue_tracker_attributes: {
+            patch :update, params: {id: @app.id, app: {issue_tracker_attributes: {
               type_tracker: "unknown", options: {project_id: "1234", api_token: "123123", account: "myapp"}
             }}}
             @app.reload
@@ -316,7 +315,7 @@ RSpec.describe AppsController, type: :controller do
         before do
           SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
 
-          put :update, params: {
+          patch :update, params: {
             id: @app.id,
             app: {
               notice_fingerprinter_attributes: {
@@ -337,7 +336,7 @@ RSpec.describe AppsController, type: :controller do
       context "not selecting 'use site fingerprinter'" do
         before do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-          put :update, params: {id: @app.id, app: {
+          patch :update, params: {id: @app.id, app: {
             notice_fingerprinter_attributes: {backtrace_lines: 42},
             use_site_fingerprinter: "0"
           }}
