@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :app do
-    name { Faker::App.unique.name }
+    sequence(:name) { |n| "App ##{n}" }
 
     repository_branch { ["main", "master"].sample }
   end
