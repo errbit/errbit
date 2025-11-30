@@ -8,7 +8,7 @@ RSpec.describe SiteConfigController, type: :controller do
     update: :put
   }
 
-  let(:admin) { Fabricate(:admin) }
+  let(:admin) { create(:user, admin: true) }
 
   before { sign_in admin }
 
