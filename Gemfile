@@ -8,7 +8,6 @@ gem "reactionview"
 gem "sprockets-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
-gem "decent_exposure"
 gem "devise"
 gem "pundit"
 gem "dotenv-rails"
@@ -73,6 +72,13 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "thruster", require: false
 
 group :development, :test do
+  gem "sqlite3", ">= 2.1"
+  gem "pg", "~> 1.1"
+  gem "trilogy", "~> 2.7"
+
+  # gem "prosopite"
+  # gem "pg_query"
+
   gem "airbrake", "~> 4.3.5", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
@@ -98,6 +104,7 @@ end
 
 group :test do
   gem "rails-controller-testing"
+  gem "shoulda-matchers"
   gem "rspec-rails", require: false
   gem "rspec-rebound", require: false
   gem "rspec-activemodel-mocks"
@@ -112,6 +119,7 @@ group :test do
   gem "super_diff"
   gem "webmock"
   gem "vcr"
+  gem "database_rewinder"
 end
 
 gem "puma"

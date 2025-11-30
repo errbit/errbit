@@ -5,7 +5,8 @@ namespace :errbit do
   task demo: :environment do
     require "fabrication"
 
-    app = Fabricate(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
+    # app = Fabricate(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
+    app = FactoryBot.create(:errbit_app, name: "Demo App #{Time.zone.now.strftime("%N")}")
 
     # Report a number of errors for the application
     app.problems.delete_all
@@ -55,7 +56,7 @@ namespace :errbit do
             request: {
               "component" => "main",
               "action" => "error",
-              "url" => "http://example.com/post/#{[111, 222, 333].sample}"
+              "url" => "https://example.com/post/#{[111, 222, 333].sample}"
             },
             server_environment: {"environment-name" => Rails.env.to_s},
             notifier: {name: "seeds.rb"},
@@ -63,7 +64,7 @@ namespace :errbit do
               id: "1234",
               username: "jsmith",
               name: "John Smith",
-              url: "http://www.example.com/users/jsmith"
+              url: "https://example.com/users/jsmith"
             }
           )
         ).generate_notice!
