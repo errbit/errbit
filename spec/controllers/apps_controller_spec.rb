@@ -13,7 +13,7 @@ RSpec.describe AppsController, type: :controller do
   let(:unwatched_app) { create(:app) }
   let(:app) { unwatched_app }
   let(:watched_app1) do
-    a = Fabricate(:app)
+    a = create(:app)
     Fabricate(:user_watcher, user: user, app: a)
     a
   end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Api::V3::NoticesController, type: :controller do
-  let(:app) { Fabricate(:app) }
+  let(:app) { create(:app) }
   let(:project_id) { app.api_key }
   let(:legit_params) { {project_id: project_id, key: project_id} }
   let(:legit_body) do

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Notices management", type: :request do
-  let(:errbit_app) { Fabricate(:app, api_key: "APIKEY") }
+  let(:errbit_app) { create(:app, api_key: "APIKEY") }
 
   describe "create a new notice" do
     context "with valid notice" do
@@ -29,7 +29,7 @@ RSpec.describe "Notices management", type: :request do
     end
 
     context "with notice with bad api_key" do
-      let(:errbit_app) { Fabricate(:app) }
+      let(:errbit_app) { create(:app) }
 
       let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
