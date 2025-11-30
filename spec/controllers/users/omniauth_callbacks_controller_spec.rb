@@ -23,11 +23,11 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context "Linking a GitHub account to a signed in user" do
     before do
-      sign_in @user = Fabricate(:user)
+      sign_in @user = create(:user)
     end
 
     it "should show an error if another user already has that GitHub login" do
-      Fabricate(:user, github_login: "existing_user")
+      create(:user, github_login: "existing_user")
       stub_env_for_github_omniauth("existing_user")
       get :github
 
@@ -92,11 +92,11 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context "Linking a Google account to a signed in user" do
     before do
-      sign_in @user = Fabricate(:user)
+      sign_in @user = create(:user)
     end
 
     it "should show an error if another user already has that google login" do
-      Fabricate(:user, google_uid: "111111111111111111111")
+      create(:user, google_uid: "111111111111111111111")
       stub_env_for_google_omniauth("111111111111111111111")
       get :google_oauth2
 

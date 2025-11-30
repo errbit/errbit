@@ -49,7 +49,7 @@ def it_requires_admin_privileges(options = {})
     before do
       sign_out :user
 
-      sign_in Fabricate(:user)
+      sign_in create(:user)
     end
 
     options[:for].each do |action, method|

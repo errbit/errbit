@@ -96,7 +96,7 @@ RSpec.describe ProblemsController, type: :controller do
 
   describe "GET /problems - previously all" do
     it "gets a paginated list of all problems" do
-      sign_in Fabricate(:user)
+      sign_in create(:user)
 
       problems = Kaminari.paginate_array((1..30).to_a)
 
