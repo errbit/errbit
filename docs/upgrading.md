@@ -2,7 +2,9 @@
 
 ## Upgrading Errbit from v0.10.0 to v0.11.0
 
-* Support for MongoDB 4.0, 4.2, 4.4 and 5.0 has been removed.
+* Add support for MongoDB 8.2.
+* Support for MongoDB 6.0 has been removed.
+* Deprecated support for MongoDB 4.0, 4.2, 4.4 and 5.0 has been removed.
 
 ## Upgrading Errbit from v0.9.0 to v0.10.0
 
