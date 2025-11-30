@@ -129,7 +129,7 @@ RSpec.describe App, type: :model do
   context "notification recipients" do
     it "should send notices to either all users plus watchers, or the configured watchers" do
       @app = Fabricate(:app)
-      3.times { Fabricate(:user) }
+      3.times { create(:user) }
       5.times { Fabricate(:watcher, app: @app) }
       @app.notify_all_users = true
       expect(@app.notification_recipients.size).to eq(8)

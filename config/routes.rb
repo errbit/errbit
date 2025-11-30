@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :site_config, only: :index do
     collection do
-      put :update
+      patch :update
     end
   end
 
@@ -49,8 +49,8 @@ Rails.application.routes.draw do
 
       member do
         get :xhr_sparkline
-        put :resolve
-        put :unresolve
+        patch :resolve
+        patch :unresolve
         post :create_issue
         post :close_issue
         delete :unlink_issue

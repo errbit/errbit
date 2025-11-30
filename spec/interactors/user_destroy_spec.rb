@@ -13,7 +13,7 @@ RSpec.describe UserDestroy do
   end
 
   describe "#destroy" do
-    let!(:user) { Fabricate(:user) }
+    let!(:user) { create(:user) }
 
     it "should delete user" do
       expect do

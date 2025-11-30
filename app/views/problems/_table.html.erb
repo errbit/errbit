@@ -93,7 +93,7 @@
                 <%= link_to image_tag("thumbs-up.png"),
                             resolve_app_problem_path(problem.app, problem),
                             title: "Resolve",
-                            method: :put,
+                            method: :patch,
                             data: { confirm: problem_confirm("resolve_one") },
                             class: "resolve" %>
               <% end %>

@@ -236,11 +236,8 @@ RSpec.describe ErrorReport, type: :model do
     before do
       app.notify_on_errs = true
       app.save
-      watcher = app.watchers.build(email: "foo@example.com")
-      watcher.save
-      # TODO: uncomment with new mongoid 6.2.x or later
-      # app.watchers.build(email: 'foo@example.com')
-      # app.save
+      app.watchers.build(email: "foo@example.com")
+      app.save
     end
 
     it "send email" do
