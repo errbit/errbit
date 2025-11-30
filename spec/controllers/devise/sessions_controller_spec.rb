@@ -11,7 +11,7 @@ RSpec.describe Devise::SessionsController, type: :controller do
     end
 
     let(:app) { Fabricate(:app) }
-    let(:user) { Fabricate(:user) }
+    let(:user) { create(:user) }
 
     it "redirects to app index page if there are no apps for the user" do
       post :create, params: {user: {"email" => user.email, "password" => user.password}}

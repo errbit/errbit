@@ -14,7 +14,7 @@ RSpec.describe ProblemsController, type: :controller do
 
   let(:err) { Fabricate(:err, problem: problem) }
 
-  let(:user) { Fabricate(:user) }
+  let(:user) { create(:user) }
 
   let(:problem) { Fabricate(:problem, app: app, environment: "production") }
 

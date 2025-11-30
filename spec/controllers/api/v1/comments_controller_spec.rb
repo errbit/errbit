@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Api::V1::CommentsController, type: :controller do
   context "when logged in" do
     before do
-      @user = Fabricate(:user)
+      @user = create(:user)
     end
 
     describe "GET /api/v1/problems/:problem_id/comments" do
