@@ -7,7 +7,7 @@ RSpec.describe AppsController, type: :controller do
   it_requires_admin_privileges for: {new: :get, edit: :get, create: :post, update: :put, destroy: :delete}
 
   let(:app_params) { {name: "BestApp"} }
-  let(:admin) { Fabricate(:admin) }
+  let(:admin) { create(:user, admin: true) }
   let(:user) { create(:user) }
   let(:watcher) { Fabricate(:user_watcher, app: app, user: user) }
   let(:unwatched_app) { Fabricate(:app) }
@@ -44,7 +44,7 @@ RSpec.describe AppsController, type: :controller do
         sign_in admin
         unwatched_app && watched_app1 && watched_app2
         get :index
-        expect(controller.apps.entries).to eq App.all.to_a.sort.entries
+        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe AppsController, type: :controller do
         sign_in user
         unwatched_app && watched_app1 && watched_app2
         get :index
-        expect(controller.apps.entries).to eq App.all.to_a.sort.entries
+        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
       end
     end
   end
@@ -66,7 +66,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "finds the app" do
         get :show, params: {id: app.id}
-        expect(controller.app).to eq app
+        expect(controller.app).to eq(app)
       end
 
       it "should not raise errors for app with err without notices" do
@@ -114,14 +114,14 @@ RSpec.describe AppsController, type: :controller do
         context "and no params" do
           it "shows only unresolved problems" do
             get :show, params: {id: app.id}
-            expect(controller.problems.size).to eq 1
+            expect(controller.problems.size).to eq(1)
           end
         end
 
         context "and all_problems=true params" do
           it "shows all errors" do
             get :show, params: {id: app.id, all_errs: true}
-            expect(controller.problems.size).to eq 2
+            expect(controller.problems.size).to eq(2)
           end
         end
       end
@@ -137,35 +137,35 @@ RSpec.describe AppsController, type: :controller do
         context "no params" do
           it "shows errs for all environments" do
             get :show, params: {id: app.id}
-            expect(controller.problems.size).to eq 20
+            expect(controller.problems.size).to eq(20)
           end
         end
 
         context "environment production" do
           it "shows errs for just production" do
             get :show, params: {id: app.id, environment: "production"}
-            expect(controller.problems.size).to eq 5
+            expect(controller.problems.size).to eq(5)
           end
         end
 
         context "environment staging" do
           it "shows errs for just staging" do
             get :show, params: {id: app.id, environment: "staging"}
-            expect(controller.problems.size).to eq 5
+            expect(controller.problems.size).to eq(5)
           end
         end
 
         context "environment development" do
           it "shows errs for just development" do
             get :show, params: {id: app.id, environment: "development"}
-            expect(controller.problems.size).to eq 5
+            expect(controller.problems.size).to eq(5)
           end
         end
 
         context "environment test" do
           it "shows errs for just test" do
             get :show, params: {id: app.id, environment: "test"}
-            expect(controller.problems.size).to eq 5
+            expect(controller.problems.size).to eq(5)
           end
         end
       end
@@ -173,11 +173,11 @@ RSpec.describe AppsController, type: :controller do
 
     context "logged in as a user" do
       it "finds the app even when not watching it" do
-        sign_in Fabricate(:user)
+        sign_in create(:user)
         app = Fabricate(:app)
 
         get :show, params: {id: app.id}
-        expect(controller.app).to eq app
+        expect(controller.app).to eq(app)
       end
     end
   end
@@ -202,7 +202,7 @@ RSpec.describe AppsController, type: :controller do
         expect(controller.app).to be_a(App)
         expect(controller.app).to be_new_record
         expect(controller.app.name).to be_blank
-        expect(controller.app.github_repo).to eq "test/example"
+        expect(controller.app.github_repo).to eq("test/example")
       end
     end
 
@@ -210,7 +210,7 @@ RSpec.describe AppsController, type: :controller do
       it "finds the correct app" do
         app = Fabricate(:app)
         get :edit, params: {id: app.id}
-        expect(controller.app).to eq app
+        expect(controller.app).to eq(app)
       end
     end
 
@@ -278,7 +278,7 @@ RSpec.describe AppsController, type: :controller do
         it "should parse legal csv values" do
           put :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
           @app.reload
-          expect(@app.email_at_notices).to eq [1, 4, 7, 8, 10]
+          expect(@app.email_at_notices).to eq([1, 4, 7, 8, 10])
         end
 
         context "failed parsing of CSV" do
@@ -286,7 +286,7 @@ RSpec.describe AppsController, type: :controller do
             @app = Fabricate(:app, email_at_notices: [1, 2, 3, 4])
             put :update, params: {id: @app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
             @app.reload
-            expect(@app.email_at_notices).to eq Errbit::Config.email_at_notices
+            expect(@app.email_at_notices).to eq(Errbit::Config.email_at_notices)
           end
 
           it "should display a message" do
@@ -307,7 +307,7 @@ RSpec.describe AppsController, type: :controller do
           end
 
           it "should not create issue tracker" do
-            expect(@app.issue_tracker_configured?).to eq false
+            expect(@app.issue_tracker_configured?).to eq(false)
           end
         end
       end
@@ -347,7 +347,7 @@ RSpec.describe AppsController, type: :controller do
           fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except("_id", "source")
           expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except("_id", "source")
           expect(fingerprinter_attrs).not_to eq(expected_attrs)
-          expect(@app.notice_fingerprinter.backtrace_lines).to be 42
+          expect(@app.notice_fingerprinter.backtrace_lines).to eq(42)
         end
       end
     end
@@ -359,7 +359,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "should find the app" do
         delete :destroy, params: {id: @app.id}
-        expect(controller.app).to eq @app
+        expect(controller.app).to eq(@app)
       end
 
       it "should destroy the app" do
@@ -389,7 +389,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "redirect to root with flash error" do
         post :regenerate_api_key, params: {id: "foo"}
-        expect(request).to redirect_to root_path
+        expect(request).to redirect_to(root_path)
       end
     end
 
