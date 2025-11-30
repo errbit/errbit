@@ -35,7 +35,7 @@ RSpec.describe BacktraceLineDecorator, type: :decorator do
     described_class.new(nil)
   end
 
-  let(:app) { create(:app, github_repo: "foo/bar", repository_branch: "master") }
+  let(:app) { create(:app, github_repo: "foo/bar", repository_branch: "main") }
 
   describe "#to_s" do
     it "returns a nice string representation of the first line" do
