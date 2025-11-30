@@ -26,7 +26,7 @@ RSpec.shared_examples "a notification email" do
 
   it "should send the email" do
     email
-    expect(ActionMailer::Base.deliveries.size).to eq 1
+    expect(ActionMailer::Base.deliveries.size).to eq(1)
   end
 end
 
@@ -56,7 +56,7 @@ RSpec.describe Mailer do
       p
     end
 
-    let!(:user) { Fabricate(:admin) }
+    let!(:user) { create(:user, admin: true) }
 
     let(:error_report) do
       instance_double(
@@ -120,7 +120,7 @@ RSpec.describe Mailer do
     end
 
     it "should be sent to comment notification recipients" do
-      expect(@email.to).to eq recipients
+      expect(@email.to).to eq(recipients)
     end
 
     it "should have the notices count in the body" do
