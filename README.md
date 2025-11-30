@@ -365,4 +365,4 @@ Check the [.github/workflows/rspec.yml](.github/workflows/rspec.yml) file to see
 Copyright
 ---------
 
-Copyright (&copy;) 2010-2025 Errbit Team
+Copyright &copy; 2010-2025 Errbit Team
