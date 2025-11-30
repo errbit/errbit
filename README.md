@@ -47,7 +47,7 @@ point the `airbrake` gem to your Errbit server (see
 
 ## Mailing List
 
-Join the Google Group at https://groups.google.com/group/errbit to receive
+Join the [Google Group](https://groups.google.com/group/errbit) to receive
 updates and notifications.
 
 ## Requirements
@@ -178,8 +178,8 @@ Errbit::Config.devise_modules << :ldap_authenticatable
 ```
 
 * If you are authenticating by `username`, you will need to set the user's
-email manually before authentication. You must add the following lines to
-`app/models/user.rb`:
+  email manually before authentication. You must add the following lines to
+  `app/models/user.rb`:
 
 ```ruby
 def ldap_before_save
@@ -282,7 +282,7 @@ supported issue tracker plugin is
 If you want to implement your own issue tracker plugin, read the README.md file
 at [errbit_plugin](https://github.com/errbit/errbit_plugin).
 
-## What if Errbit has an error?
+## If Errbit has an error
 
 Errbit will log its own errors to an internal app named **Self.Errbit**.  The
 **Self.Errbit** app is automatically created when the first error happens.
