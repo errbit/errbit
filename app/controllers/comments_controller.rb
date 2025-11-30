@@ -9,18 +9,18 @@ class CommentsController < ApplicationController
     problem.comments << comment
 
     if problem.save
-      flash[:success] = "Comment saved!"
+      flash[:success] = I18n.t("comments.create.success")
     else
-      flash[:error] = "I'm sorry, your comment was blank! Try again?"
+      flash[:error] = I18n.t("comments.create.error")
     end
     redirect_to app_problem_path(app, problem)
   end
 
   def destroy
     if comment.destroy
-      flash[:success] = "Comment deleted!"
+      flash[:success] = I18n.t("comments.destroy.success")
     else
-      flash[:error] = "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
+      flash[:error] = I18n.t("comments.destroy.error")
     end
 
     redirect_to app_problem_path(app, problem)

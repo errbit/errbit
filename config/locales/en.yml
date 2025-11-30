@@ -159,6 +159,12 @@ en:
       graph-24-hours: Graph (24 hours)
   comments:
     confirm_delete: "Permanently delete this comment?"
+    create:
+      success: "Comment saved!"
+      error: "I'm sorry, your comment was blank! Try again?"
+    destroy:
+      success: "Comment deleted!"
+      error: "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
   users:
     index:
       new: Add a New User
