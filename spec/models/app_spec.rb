@@ -255,4 +255,10 @@ RSpec.describe App, type: :model do
       expect(App.search("Foo").to_a).not_to include(not_found)
     end
   end
+
+  describe "#attributes_for_super_diff" do
+    subject { create(:app) }
+
+    it { expect(subject.attributes_for_super_diff).to eq(id: subject.id.to_s, name: subject.name) }
+  end
 end

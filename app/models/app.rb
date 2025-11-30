@@ -200,6 +200,13 @@ class App
     notice_fingerprinter.source == "site"
   end
 
+  def attributes_for_super_diff
+    {
+      id: id.to_s,
+      name: name
+    }
+  end
+
   private
 
   def store_cached_attributes_on_problems
