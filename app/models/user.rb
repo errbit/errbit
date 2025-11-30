@@ -52,7 +52,7 @@ class User
 
   class << self
     # @param email [String]
-    def self.valid_google_domain?(email)
+    def valid_google_domain?(email)
       return true if Errbit::Config.google_authorized_domains.blank?
 
       match_data = /.+@(?<domain>.+)$/.match(email)
