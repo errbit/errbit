@@ -14,14 +14,14 @@ RSpec.describe "users/show.html.erb", type: :view do
   end
 
   context "with GitHub authentication" do
-    it "shows github login" do
+    it "is expected to show github login" do
       user.github_login = "test_user"
       render
       expect(rendered).to match(/GitHub/)
       expect(rendered).to match(/test_user/)
     end
 
-    it "does not show github if blank" do
+    it "is expected not show github if blank" do
       user.github_login = " "
       render
       expect(rendered).not_to match(/GitHub/)

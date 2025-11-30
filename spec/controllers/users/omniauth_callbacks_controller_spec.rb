@@ -78,7 +78,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
   end
 
-  def stub_env_for_google_omniauth(login, _token = nil)
+  def stub_env_for_google_omniauth(login, _ = nil)
     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/closed#issue/608
     request.env["devise.mapping"] = Devise.mappings[:user]
     request.env["omniauth.auth"] = Hashie::Mash.new(

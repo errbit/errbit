@@ -46,10 +46,10 @@ RSpec.describe Problem, type: :model do
       expect(problem).not_to eq(nil)
 
       notice1 = Fabricate(:notice, err: err)
-      expect(problem.last_notice_at).to eq notice1.reload.created_at
+      expect(problem.last_notice_at).to eq(notice1.reload.created_at)
 
       notice2 = Fabricate(:notice, err: err)
-      expect(problem.last_notice_at).to eq notice2.reload.created_at
+      expect(problem.last_notice_at).to eq(notice2.reload.created_at)
     end
   end
 
@@ -164,18 +164,18 @@ RSpec.describe Problem, type: :model do
     context "resolved" do
       it "only finds resolved Problems" do
         resolved = Fabricate(:problem, resolved: true)
-        unresolved = Fabricate(:problem, resolved: false)
-        expect(Problem.resolved.all).to include(resolved)
-        expect(Problem.resolved.all).not_to include(unresolved)
+        Fabricate(:problem, resolved: false)
+
+        expect(Problem.resolved.all).to eq([resolved])
       end
     end
 
     context "unresolved" do
       it "only finds unresolved Problems" do
-        resolved = Fabricate(:problem, resolved: true)
+        Fabricate(:problem, resolved: true)
         unresolved = Fabricate(:problem, resolved: false)
-        expect(Problem.unresolved.all).not_to include(resolved)
-        expect(Problem.unresolved.all).to include(unresolved)
+
+        expect(Problem.unresolved.all).to eq([unresolved])
       end
     end
 
@@ -191,7 +191,7 @@ RSpec.describe Problem, type: :model do
 
       it "find on where message" do
         problem = Fabricate(:problem, where: "cyril")
-        expect(Problem.search("cyril").entries).to eq [problem]
+        expect(Problem.search("cyril").entries).to eq([problem])
       end
 
       it "finds with notice_id as argument" do
@@ -202,7 +202,7 @@ RSpec.describe Problem, type: :model do
 
         problem2 = Fabricate(:problem, where: "cyril")
         expect(problem2).not_to eq(problem)
-        expect(Problem.search(notice.id).entries).to eq [problem]
+        expect(Problem.search(notice.id).entries).to eq([problem])
       end
     end
   end
@@ -215,7 +215,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "#notices_count returns 0 by default" do
-      expect(@problem.notices_count).to eq 0
+      expect(@problem.notices_count).to eq(0)
     end
 
     it "adding a notice increases #notices_count by 1" do
@@ -329,7 +329,7 @@ RSpec.describe Problem, type: :model do
   end
 
   describe "#app_name" do
-    let!(:app) { Fabricate(:app) }
+    let!(:app) { create(:app) }
 
     let!(:problem) { Fabricate(:problem, app: app) }
 
@@ -349,7 +349,7 @@ RSpec.describe Problem, type: :model do
 
   context "notice messages cache" do
     before do
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem = Fabricate(:problem, app: @app)
       @err = Fabricate(:err, problem: @problem)
     end
@@ -376,7 +376,7 @@ RSpec.describe Problem, type: :model do
 
   context "notice hosts cache" do
     before do
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem = Fabricate(:problem, app: @app)
       @err = Fabricate(:err, problem: @problem)
     end
@@ -396,7 +396,7 @@ RSpec.describe Problem, type: :model do
 
   context "notice user_agents cache" do
     before do
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem = Fabricate(:problem, app: @app)
       @err = Fabricate(:err, problem: @problem)
     end
@@ -429,12 +429,12 @@ RSpec.describe Problem, type: :model do
 
   context "comment counter cache" do
     before do
-      @app = Fabricate(:app)
+      @app = create(:app)
       @problem = Fabricate(:problem, app: @app)
     end
 
     it "#comments_count returns 0 by default" do
-      expect(@problem.comments_count).to eq 0
+      expect(@problem.comments_count).to eq(0)
     end
 
     it "adding a comment increases #comments_count by 1" do
@@ -568,8 +568,8 @@ RSpec.describe Problem, type: :model do
       end
 
       it "update information about this notice" do
-        expect(problem.message).to eq notice.message
-        expect(problem.where).to eq notice.where
+        expect(problem.message).to eq(notice.message)
+        expect(problem.where).to eq(notice.where)
       end
 
       it "update first_notice_at" do

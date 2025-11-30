@@ -11,13 +11,13 @@ RSpec.describe "users/edit.html.erb", type: :view do
     assign(:user, user)
   end
 
-  it "should have per_page option" do
+  it "is expected to have per_page option" do
     render
 
     expect(rendered).to match(/id="user_per_page"/)
   end
 
-  it "should have time_zone option" do
+  it "is expected to have time_zone option" do
     render
 
     expect(rendered).to match(/id="user_time_zone"/)
