@@ -15,17 +15,17 @@ RSpec.describe UserDestroy do
   describe "#destroy" do
     let!(:user) { create(:user) }
 
-    it "should delete user" do
+    it "is expected to delete user" do
       expect do
-        UserDestroy.new(user).destroy
-      end.to change(User, :count)
+        described_class.new(user).destroy
+      end.to change(User, :count).from(1).to(0)
     end
 
-    it "should delete watcher" do
+    it "is expected to delete watcher" do
       expect do
-        UserDestroy.new(user).destroy
+        described_class.new(user).destroy
       end.to change {
-        app.reload.watchers.where(user_id: user.id).count
+        app.reload.watchers.where(user: user).count
       }.from(1).to(0)
     end
   end
