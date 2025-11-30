@@ -5,7 +5,7 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
 
-### The open source, self-hosted error catcher
+## The open source, self-hosted error catcher
 
 Errbit is a tool for collecting and managing errors from other applications.
 It is [Airbrake](https://www.airbrake.io) API compliant, so you can just
@@ -45,21 +45,19 @@ point the `airbrake` gem to your Errbit server (see
   </tr>
 </table>
 
-Mailing List
-------------
+## Mailing List
 
 Join the Google Group at https://groups.google.com/group/errbit to receive
 updates and notifications.
 
-# Requirements
+## Requirements
 
 The list of requirements to install Errbit are:
 
 * Ruby 3.4
 * MongoDB >= 7.0
 
-Installation
-------------
+## Installation
 
 *Note*: This app is intended for people with experience deploying and maintaining
 Rails applications.
@@ -353,7 +351,7 @@ Special Thanks
 See the [contributors graph](https://github.com/errbit/errbit/graphs/contributors) for more details.
 
 Contributing to Errbit
-------------
+----------------------
 
 See the [contribution guidelines](CONTRIBUTING.md)
 
