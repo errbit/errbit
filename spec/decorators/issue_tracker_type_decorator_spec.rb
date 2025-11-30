@@ -36,7 +36,7 @@ RSpec.describe IssueTrackerTypeDecorator, type: :decorator do
   let(:fake_tracker) { IssueTrackerDecorator.new(fake_tracker_class.new) }
   let(:decorator) { IssueTrackerTypeDecorator.new(fake_tracker_class) }
 
-  describe "::note" do
+  describe ".note" do
     it "return the html_safe of Note" do
       expect(decorator.note).to eq(fake_tracker_class.note)
     end
