@@ -5,19 +5,19 @@ require "rails_helper"
 RSpec.describe Notice, type: :model do
   context "validations" do
     it "requires a backtrace" do
-      notice = Fabricate.build(:notice, backtrace: nil)
+      notice = build(:notice, backtrace: nil)
       expect(notice.valid?).to eq(false)
       expect(notice.errors[:backtrace_id]).to include("can't be blank")
     end
 
     it "requires the server_environment" do
-      notice = Fabricate.build(:notice, server_environment: nil)
+      notice = build(:notice, server_environment: nil)
       expect(notice.valid?).to eq(false)
       expect(notice.errors[:server_environment]).to include("can't be blank")
     end
 
     it "requires the notifier" do
-      notice = Fabricate.build(:notice, notifier: nil)
+      notice = build(:notice, notifier: nil)
       expect(notice.valid?).to eq(false)
       expect(notice.errors[:notifier]).to include("can't be blank")
     end
@@ -49,7 +49,7 @@ RSpec.describe Notice, type: :model do
     end
 
     it "truncates the message" do
-      notice = Fabricate(:notice, message: long_message)
+      notice = create(:notice, message: long_message)
       expect(long_message.length).to be > Notice::MESSAGE_LENGTH_LIMIT
       expect(notice.message.length).to eq(Notice::MESSAGE_LENGTH_LIMIT)
     end
@@ -74,7 +74,7 @@ RSpec.describe Notice, type: :model do
     end
 
     it "truncates the long multibyte string message" do
-      notice = Fabricate(:notice, message: long_mb_message)
+      notice = create(:notice, message: long_mb_message)
       expect(long_mb_message.bytesize).to be > Notice::MESSAGE_LENGTH_LIMIT
       expect(notice.message.bytesize).to eq(Notice::MESSAGE_LENGTH_LIMIT)
     end
@@ -88,8 +88,8 @@ RSpec.describe Notice, type: :model do
 
     [:server_environment, :request, :notifier].each do |key|
       it "replaces . with &#46; and $ with &#36; in keys used in #{key}" do
-        err = Fabricate(:err)
-        notice = Fabricate(:notice, :err => err, key => @hash)
+        err = create(:err)
+        notice = create(:notice, err: err, key: @hash)
         expect(notice.send(key)).to eq(@hash_sanitized)
       end
     end
@@ -97,7 +97,7 @@ RSpec.describe Notice, type: :model do
 
   describe "user agent" do
     it "should be parsed and human-readable" do
-      notice = Fabricate.build(:notice, request: {"cgi-data" => {
+      notice = build(:notice, request: {"cgi-data" => {
         "HTTP_USER_AGENT" => "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16"
       }})
       expect(notice.user_agent.browser).to eq("Chrome")
@@ -105,41 +105,47 @@ RSpec.describe Notice, type: :model do
     end
 
     it "should be nil if HTTP_USER_AGENT is blank" do
-      notice = Fabricate.build(:notice)
+      notice = build(:notice)
       expect(notice.user_agent).to eq(nil)
     end
   end
 
   describe "user agent string" do
     it "should be parsed and human-readable" do
-      notice = Fabricate.build(:notice, request: {"cgi-data" => {"HTTP_USER_AGENT" => "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16"}})
+      notice = build(:notice, request: {"cgi-data" => {"HTTP_USER_AGENT" => "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16"}})
+
       expect(notice.user_agent_string).to eq("Chrome 10.0.648.204 (OS X 10.6.7)")
     end
 
     it "should be nil if HTTP_USER_AGENT is blank" do
-      notice = Fabricate.build(:notice)
+      notice = build(:notice)
+
       expect(notice.user_agent_string).to eq("N/A")
     end
   end
 
   describe "host" do
     it "returns host if url is valid" do
-      notice = Fabricate.build(:notice, request: {"url" => "http://example.com/resource/12"})
+      notice = build(:notice, request: {"url" => "http://example.com/resource/12"})
+
       expect(notice.host).to eq("example.com")
     end
 
     it "returns 'N/A' when url is not valid" do
-      notice = Fabricate.build(:notice, request: {"url" => "file:///path/to/some/resource/12"})
+      notice = build(:notice, request: {"url" => "file:///path/to/some/resource/12"})
+
       expect(notice.host).to eq("N/A")
     end
 
     it "returns 'N/A' when url is not valid" do
-      notice = Fabricate.build(:notice, request: {"url" => "some string"})
+      notice = build(:notice, request: {"url" => "some string"})
+
       expect(notice.host).to eq("N/A")
     end
 
     it "returns 'N/A' when url is empty" do
-      notice = Fabricate.build(:notice, request: {})
+      notice = build(:notice, request: {})
+
       expect(notice.host).to eq("N/A")
     end
   end
@@ -147,6 +153,7 @@ RSpec.describe Notice, type: :model do
   describe "request" do
     it "returns empty hash if not set" do
       notice = Notice.new
+
       expect(notice.request).to eq({})
     end
   end
@@ -154,13 +161,17 @@ RSpec.describe Notice, type: :model do
   describe "env_vars" do
     it "returns the cgi-data" do
       notice = Notice.new
+
       notice.request = {"cgi-data" => {"ONE" => "TWO"}}
+
       expect(notice.env_vars).to eq("ONE" => "TWO")
     end
 
     it "always returns a hash" do
       notice = Notice.new
+
       notice.request = {"cgi-data" => []}
+
       expect(notice.env_vars).to eq({})
     end
   end
