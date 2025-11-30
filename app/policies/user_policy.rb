@@ -17,7 +17,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    scope.where(id: record.id).exists?
+    scope.exists?(id: record.id)
   end
 
   def create?
@@ -29,15 +29,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    scope.where(id: record.id).exists?
+    scope.exists?(id: record.id)
   end
 
   def edit?
-    scope.where(id: record.id).exists?
+    scope.exists?(id: record.id)
   end
 
   def destroy?
-    scope.where(id: record.id).exists? && user.id != record.id
+    scope.exists?(id: record.id) && user.id != record.id
   end
 
   def permitted_attributes
