@@ -134,12 +134,12 @@ You can change the OAuth scope Errbit requests from GitHub by setting
 few others that could make sense for your needs:
 
 <dl>
-<dt>GITHUB_ACCESS_SCOPE="['repo']"</dt>
-<dd>Allow creating issues for public and private repos</dd>
-<dt>GITHUB_ACCESS_SCOPE="['public_repo']"</dt>
-<dd>Allow creating issues for public repos only</dd>
-<dt>GITHUB_ACCESS_SCOPE="[]"</dt>
-<dd>No permissions at all, but allows Errbit login through GitHub</dd>
+  <dt>GITHUB_ACCESS_SCOPE="['repo']"</dt>
+  <dd>Allow creating issues for public and private repos</dd>
+  <dt>GITHUB_ACCESS_SCOPE="['public_repo']"</dt>
+  <dd>Allow creating issues for public repos only</dd>
+  <dt>GITHUB_ACCESS_SCOPE="[]"</dt>
+  <dd>No permissions at all, but allows Errbit login through GitHub</dd>
 </dl>
 
 * `GITHUB_ORG_ID` is an optional environment variable you can set to your own
