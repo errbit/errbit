@@ -3,7 +3,8 @@
 require "rails_helper"
 
 RSpec.describe ProblemRecacher do
-  let(:app) { Fabricate(:app) }
+  let(:app) { create(:app) }
+
   let(:backtrace) do
     Fabricate(:backtrace)
   end
@@ -30,6 +31,7 @@ RSpec.describe ProblemRecacher do
 
     it "has three problems for the five notices" do
       expect(Notice.count).to eq(5)
+
       expect(Problem.count).to eq(3)
     end
 

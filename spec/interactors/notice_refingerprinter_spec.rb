@@ -3,7 +3,8 @@
 require "rails_helper"
 
 RSpec.describe NoticeRefingerprinter do
-  let(:app) { Fabricate(:app) }
+  let(:app) { create(:app) }
+
   let(:backtrace) do
     Fabricate(:backtrace)
   end
@@ -23,6 +24,7 @@ RSpec.describe NoticeRefingerprinter do
 
     it "has only one err" do
       described_class.run
+
       expect(Err.count).to eq(1)
     end
   end
@@ -41,6 +43,7 @@ RSpec.describe NoticeRefingerprinter do
 
     it "has three errs with default fingerprinter" do
       described_class.run
+
       expect(Err.count).to eq(3)
     end
 
@@ -50,6 +53,7 @@ RSpec.describe NoticeRefingerprinter do
       fingerprinter.save!
 
       described_class.run
+
       expect(Err.count).to eq(1)
     end
   end
