@@ -10,7 +10,7 @@ RSpec.describe AppsController, type: :controller do
   let(:admin) { create(:user, admin: true) }
   let(:user) { create(:user) }
   let(:watcher) { Fabricate(:user_watcher, app: app, user: user) }
-  let(:unwatched_app) { Fabricate(:app) }
+  let(:unwatched_app) { create(:app) }
   let(:app) { unwatched_app }
   let(:watched_app1) do
     a = Fabricate(:app)
@@ -18,7 +18,7 @@ RSpec.describe AppsController, type: :controller do
     a
   end
   let(:watched_app2) do
-    a = Fabricate(:app)
+    a = create(:app)
     Fabricate(:user_watcher, user: user, app: a)
     a
   end
@@ -174,7 +174,8 @@ RSpec.describe AppsController, type: :controller do
     context "logged in as a user" do
       it "finds the app even when not watching it" do
         sign_in create(:user)
-        app = Fabricate(:app)
+
+        app = create(:app)
 
         get :show, params: {id: app.id}
         expect(controller.app).to eq(app)
@@ -196,8 +197,7 @@ RSpec.describe AppsController, type: :controller do
       end
 
       it "should copy attributes from an existing app" do
-        @app = Fabricate(:app, name: "do not copy",
-          github_repo: "test/example")
+        @app = create(:app, name: "do not copy", github_repo: "test/example")
         get :new, params: {copy_attributes_from: @app.id}
         expect(controller.app).to be_a(App)
         expect(controller.app).to be_new_record
@@ -208,15 +208,18 @@ RSpec.describe AppsController, type: :controller do
 
     describe "GET /apps/:id/edit" do
       it "finds the correct app" do
-        app = Fabricate(:app)
+        app = create(:app)
+
         get :edit, params: {id: app.id}
+
         expect(controller.app).to eq(app)
       end
     end
 
     describe "POST /apps" do
       before do
-        @app = Fabricate(:app)
+        @app = create(:app)
+
         allow(App).to receive(:new).and_return(@app)
       end
 
@@ -239,7 +242,7 @@ RSpec.describe AppsController, type: :controller do
 
     describe "PATCH /apps/:id" do
       before do
-        @app = Fabricate(:app)
+        @app = create(:app)
       end
 
       context "when the update is successful" do
@@ -277,20 +280,26 @@ RSpec.describe AppsController, type: :controller do
 
         it "should parse legal csv values" do
           patch :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
+
           @app.reload
+
           expect(@app.email_at_notices).to eq([1, 4, 7, 8, 10])
         end
 
         context "failed parsing of CSV" do
           it "should set the default value" do
-            @app = Fabricate(:app, email_at_notices: [1, 2, 3, 4])
+            @app = create(:app, email_at_notices: [1, 2, 3, 4])
+
             patch :update, params: {id: @app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
+
             @app.reload
+
             expect(@app.email_at_notices).to eq(Errbit::Config.email_at_notices)
           end
 
           it "should display a message" do
             patch :update, params: {id: @app.id, app: {email_at_notices: "qwertyuiop"}}
+
             expect(request.flash[:error]).to match(/Couldn't parse/)
           end
         end
@@ -299,9 +308,20 @@ RSpec.describe AppsController, type: :controller do
       context "setting up issue tracker" do
         context "unknown tracker type" do
           before do
-            patch :update, params: {id: @app.id, app: {issue_tracker_attributes: {
-              type_tracker: "unknown", options: {project_id: "1234", api_token: "123123", account: "myapp"}
-            }}}
+            patch :update, params: {
+              id: @app.id,
+              app: {
+                issue_tracker_attributes: {
+                  type_tracker: "unknown",
+                  options: {
+                    project_id: "1234",
+                    api_token: "123123",
+                    account: "myapp"
+                  }
+                }
+              }
+            }
+
             @app.reload
           end
 
@@ -336,10 +356,16 @@ RSpec.describe AppsController, type: :controller do
       context "not selecting 'use site fingerprinter'" do
         before do
           SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-          patch :update, params: {id: @app.id, app: {
-            notice_fingerprinter_attributes: {backtrace_lines: 42},
-            use_site_fingerprinter: "0"
-          }}
+
+          patch :update, params: {
+            id: @app.id,
+            app: {
+              notice_fingerprinter_attributes: {
+                backtrace_lines: 42
+              },
+              use_site_fingerprinter: "0"
+            }
+          }
         end
 
         it "shouldn't copy site fingerprinter into app fingerprinter" do
@@ -353,7 +379,7 @@ RSpec.describe AppsController, type: :controller do
 
     describe "DELETE /apps/:id" do
       before do
-        @app = Fabricate(:app)
+        @app = create(:app)
       end
 
       it "should find the app" do
@@ -370,11 +396,13 @@ RSpec.describe AppsController, type: :controller do
 
       it "should display a message" do
         delete :destroy, params: {id: @app.id}
+
         expect(request.flash[:success]).to match(/success/)
       end
 
       it "should redirect to the apps page" do
         delete :destroy, params: {id: @app.id}
+
         expect(response).to redirect_to(apps_path)
       end
     end
@@ -388,6 +416,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "redirect to root with flash error" do
         post :regenerate_api_key, params: {id: "foo"}
+
         expect(request).to redirect_to(root_path)
       end
     end
@@ -409,8 +438,8 @@ RSpec.describe AppsController, type: :controller do
   describe "GET /apps/search" do
     before do
       sign_in user
-      @app1 = Fabricate(:app, name: "Foo")
-      @app2 = Fabricate(:app, name: "Bar")
+      @app1 = create(:app, name: "Foo")
+      @app2 = create(:app, name: "Bar")
     end
 
     it "renders successfully" do
@@ -425,12 +454,14 @@ RSpec.describe AppsController, type: :controller do
 
     it "searches problems for given string" do
       get :search, params: {search: "\"Foo\""}
+
       expect(controller.apps).to include(@app1)
       expect(controller.apps).not_to include(@app2)
     end
 
     it "works when given string is empty" do
       get :search, params: {search: ""}
+
       expect(controller.apps).to include(@app1)
       expect(controller.apps).to include(@app2)
     end

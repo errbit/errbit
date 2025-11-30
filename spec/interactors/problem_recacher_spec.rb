@@ -5,14 +5,13 @@ require "rails_helper"
 RSpec.describe ProblemRecacher do
   let(:app) { create(:app) }
 
-  let(:backtrace) do
-    Fabricate(:backtrace)
-  end
+  let(:backtrace) { Fabricate(:backtrace) }
 
   before do
     notices
 
     NoticeRefingerprinter.run
+
     described_class.run
   end
 
