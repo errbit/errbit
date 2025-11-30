@@ -129,7 +129,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
 
     context "create issue links" do
-      let(:app) { Fabricate(:app, github_repo: "test_user/test_repo") }
+      let(:app) { create(:app, github_repo: "test_user/test_repo") }
 
       it "should allow creating issue for github if application has a github tracker" do
         problem = Fabricate(:problem_with_comments, app: app)

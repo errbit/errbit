@@ -6,8 +6,8 @@ RSpec.describe DestroyProblemsByAppJob, type: :job do
   it { expect(subject).to be_an(ApplicationJob) }
 
   it "destroys all problems" do
-    app = Fabricate(:app)
-    problem = Fabricate(:problem, app: app)
+    app = create(:app)
+    Fabricate(:problem, app: app)
 
     expect do
       described_class.perform_later(app.id)
@@ -17,7 +17,7 @@ RSpec.describe DestroyProblemsByAppJob, type: :job do
   end
 
   it "should work with a fresh new application" do
-    app = Fabricate(:app)
+    app = create(:app)
 
     expect do
       described_class.perform_later(app.id)
