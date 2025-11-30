@@ -27,12 +27,7 @@ RSpec.describe ErrorReport, type: :model do
 
   let(:error_report) { ErrorReport.new(xml) }
 
-  let!(:app) do
-    Fabricate(
-      :app,
-      api_key: "APIKEY"
-    )
-  end
+  let!(:app) { create(:app, api_key: "APIKEY") }
 
   describe "#app" do
     it "find the good app" do
@@ -102,6 +97,7 @@ RSpec.describe ErrorReport, type: :model do
 
       it "has complete backtrace" do
         expect(subject.backtrace_lines.size).to eq(73)
+
         expect(subject.backtrace_lines.last["file"]).to eq("[GEM_ROOT]/bin/rake")
       end
 
@@ -111,6 +107,7 @@ RSpec.describe ErrorReport, type: :model do
 
       it "has request" do
         expect(subject.request["url"]).to eq("http://example.org/verify/cupcake=fistfight&lovebird=doomsayer")
+
         expect(subject.request["params"]["controller"]).to eq("application")
       end
 
@@ -120,14 +117,18 @@ RSpec.describe ErrorReport, type: :model do
 
       it "get user_attributes" do
         expect(subject.user_attributes["id"]).to eq("123")
+
         expect(subject.user_attributes["name"]).to eq("Mr. Bean")
+
         expect(subject.user_attributes["email"]).to eq("mr.bean@example.com")
+
         expect(subject.user_attributes["username"]).to eq("mrbean")
       end
 
       it "valid env_vars" do
         # XML: <var key="SCRIPT_NAME"/>
         expect(subject.env_vars).to have_key("SCRIPT_NAME")
+
         expect(subject.env_vars["SCRIPT_NAME"]).to eq(nil) # blank ends up nil
 
         # XML representation:
@@ -147,7 +148,9 @@ RSpec.describe ErrorReport, type: :model do
           "domain" => nil,
           "id" => nil
         }
+
         expect(subject.env_vars).to have_key("rack_session_options")
+
         expect(subject.env_vars["rack_session_options"]).to eq(expected)
       end
     end
@@ -160,9 +163,13 @@ RSpec.describe ErrorReport, type: :model do
       notice = error_report.notice.reload
 
       expect(problem.environment).to eq("development")
+
       expect(problem.error_class).to eq("HoptoadTestingException")
+
       expect(problem.last_notice_at).to eq(notice.created_at)
+
       expect(problem.message).to eq(notice.message)
+
       expect(problem.where).to eq(notice.where)
     end
 
@@ -179,6 +186,7 @@ RSpec.describe ErrorReport, type: :model do
       problem.reload
 
       expect(problem.resolved_at).to eq(nil)
+
       expect(problem.resolved).to eq(false)
     end
 
@@ -188,8 +196,11 @@ RSpec.describe ErrorReport, type: :model do
       problem.reload
 
       expect(problem.notices_count).to eq(1)
+
       expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(1)
+
       expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(1)
+
       expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(1)
     end
 
@@ -201,8 +212,11 @@ RSpec.describe ErrorReport, type: :model do
       problem.reload
 
       expect(problem.notices_count).to eq(2)
+
       expect(problem.user_agents["382b0f5185773fa0f67a8ed8056c7759"]["count"]).to eq(2)
+
       expect(problem.messages["9449f087eee0499e2d9029ae3dacaf53"]["count"]).to eq(2)
+
       expect(problem.hosts["1bdf72e04d6b50c82a48c7e4dd38cc69"]["count"]).to eq(2)
     end
   end
