@@ -292,18 +292,18 @@ on GitHub Issues. You can post this manually at
 [https://github.com/errbit/errbit/issues](https://github.com/errbit/errbit/issues),
 or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
 
-  * Go to the **Self.Errbit** app's edit page. If that app does not exist yet,
-    go to the apps page and click **Add a new App** to create it. (You can also
-    create it by running `bundle exec rake airbrake:test`.)
-  * In the **Issue Tracker** section, click **GitHub Issues**.
-  * Fill in the **Account/Repository** field with **errbit/errbit**.
-  * Fill in the **Username** field with your GitHub username.
-  * If you are logged in on [GitHub](https://github.com), you can find your
-    **API Token** on this page:
-    [https://github.com/account/admin](https://github.com/account/admin).
-  * Save the settings by clicking **Update App** (or **Add App**)
-  * You can now easily post bug reports to GitHub Issues by clicking the
-    **Create Issue** button on a **Self.Errbit** error.
+* Go to the **Self.Errbit** app's edit page. If that app does not exist yet,
+  go to the apps page and click **Add a new App** to create it. (You can also
+  create it by running `bundle exec rake airbrake:test`.)
+* In the **Issue Tracker** section, click **GitHub Issues**.
+* Fill in the **Account/Repository** field with **errbit/errbit**.
+* Fill in the **Username** field with your GitHub username.
+* If you are logged in on [GitHub](https://github.com), you can find your
+  **API Token** on this page:
+  [https://github.com/account/admin](https://github.com/account/admin).
+* Save the settings by clicking **Update App** (or **Add App**)
+* You can now easily post bug reports to GitHub Issues by clicking the
+  **Create Issue** button on a **Self.Errbit** error.
 
 ## Getting Help
 
