@@ -351,6 +351,10 @@ See the [contribution guidelines](CONTRIBUTING.md)
 
 Check the [.github/workflows/rspec.yml](.github/workflows/rspec.yml) file to see how tests are run
 
+## License
+
+Errbit is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
 ## Copyright
 
 Copyright &copy; 2010-2025 Errbit Team
