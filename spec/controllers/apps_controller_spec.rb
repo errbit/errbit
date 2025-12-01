@@ -9,27 +9,27 @@ RSpec.describe AppsController, type: :controller do
   let(:app_params) { {name: "BestApp"} }
   let(:admin) { create(:user, admin: true) }
   let(:user) { create(:user) }
-  let(:watcher) { Fabricate(:user_watcher, app: app, user: user) }
+  let(:watcher) { create(:user_watcher, app: app, user: user) }
   let(:unwatched_app) { create(:app) }
   let(:app) { unwatched_app }
   let(:watched_app1) do
     a = create(:app)
-    Fabricate(:user_watcher, user: user, app: a)
+    create(:user_watcher, user: user, app: a)
     a
   end
   let(:watched_app2) do
     a = create(:app)
-    Fabricate(:user_watcher, user: user, app: a)
+    create(:user_watcher, user: user, app: a)
     a
   end
   let(:err) do
-    Fabricate(:err, problem: problem)
+    create(:err, problem: problem)
   end
   let(:notice) do
-    Fabricate(:notice, err: err)
+    create(:notice, err: err)
   end
   let(:problem) do
-    Fabricate(:problem, app: app)
+    create(:problem, app: app)
   end
   let(:problem_resolved) { Fabricate(:problem_resolved, app: app) }
   let(:notice_fingerprinter) do
@@ -130,13 +130,14 @@ RSpec.describe AppsController, type: :controller do
         before do
           environments = ["production", "test", "development", "staging"]
           20.times do |i|
-            Fabricate(:problem, app: app, environment: environments[i % environments.length])
+            create(:problem, app: app, environment: environments[i % environments.length])
           end
         end
 
         context "no params" do
           it "shows errs for all environments" do
             get :show, params: {id: app.id}
+
             expect(controller.problems.size).to eq(20)
           end
         end
@@ -144,6 +145,7 @@ RSpec.describe AppsController, type: :controller do
         context "environment production" do
           it "shows errs for just production" do
             get :show, params: {id: app.id, environment: "production"}
+
             expect(controller.problems.size).to eq(5)
           end
         end
@@ -151,6 +153,7 @@ RSpec.describe AppsController, type: :controller do
         context "environment staging" do
           it "shows errs for just staging" do
             get :show, params: {id: app.id, environment: "staging"}
+
             expect(controller.problems.size).to eq(5)
           end
         end
@@ -158,6 +161,7 @@ RSpec.describe AppsController, type: :controller do
         context "environment development" do
           it "shows errs for just development" do
             get :show, params: {id: app.id, environment: "development"}
+
             expect(controller.problems.size).to eq(5)
           end
         end
@@ -165,6 +169,7 @@ RSpec.describe AppsController, type: :controller do
         context "environment test" do
           it "shows errs for just test" do
             get :show, params: {id: app.id, environment: "test"}
+
             expect(controller.problems.size).to eq(5)
           end
         end
@@ -178,6 +183,7 @@ RSpec.describe AppsController, type: :controller do
         app = create(:app)
 
         get :show, params: {id: app.id}
+
         expect(controller.app).to eq(app)
       end
     end

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Watcher, type: :model do
   context "validations" do
     it "requires an email address or an associated user" do
-      watcher = Fabricate.build(:watcher, email: nil, user: nil)
+      watcher = build(:watcher, email: nil, user: nil)
       expect(watcher.valid?).to eq(false)
       expect(watcher.errors[:base]).to include("You must specify either a user or an email address")
 
@@ -24,12 +24,12 @@ RSpec.describe Watcher, type: :model do
   context "address" do
     it "returns the user's email address if there is a user" do
       user = create(:user, email: "foo@bar.com")
-      watcher = Fabricate(:user_watcher, user: user)
+      watcher = create(:user_watcher, user: user)
       expect(watcher.address).to eq("foo@bar.com")
     end
 
     it "returns the email if there is no user" do
-      watcher = Fabricate(:watcher, email: "widgets@acme.com")
+      watcher = create(:watcher, email: "widgets@acme.com")
       expect(watcher.address).to eq("widgets@acme.com")
     end
   end

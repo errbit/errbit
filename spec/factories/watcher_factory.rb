@@ -8,4 +8,10 @@ FactoryBot.define do
 
     sequence(:email) { |n| "email#{n}@example.com" }
   end
+
+  factory :user_watcher, parent: :watcher do
+    user
+
+    watcher_type { "user" }
+  end
 end
