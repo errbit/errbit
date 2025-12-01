@@ -17,5 +17,11 @@ FactoryBot.define do
     request { {"component" => "foo", "action" => "bar"} }
 
     notifier { {"name" => "Notifier", "version" => "1", "url" => "http://toad.com"} }
+
+    after(:create) do |notice|
+      Problem.cache_notice(notice.err.problem_id, notice)
+
+      notice.problem.reload
+    end
   end
 end
