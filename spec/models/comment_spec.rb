@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Comment, type: :model do
   context "validations" do
     it "should require a body" do
-      comment = Fabricate.build(:comment, body: nil)
+      comment = build(:comment, body: nil)
       expect(comment.valid?).to eq(false)
       expect(comment.errors[:body]).to include("can't be blank")
     end
@@ -15,8 +15,8 @@ RSpec.describe Comment, type: :model do
     let(:app) { create(:app) }
     let!(:watcher) { Fabricate(:watcher, app: app) }
     let(:err) { Fabricate(:problem, app: app) }
-    let(:comment_user) { Fabricate(:user, email: "author@example.com") }
-    let(:comment) { Fabricate.build(:comment, err: err, user: comment_user) }
+    let(:comment_user) { create(:user, email: "author@example.com") }
+    let(:comment) { build(:comment, err: err, user: comment_user) }
 
     before do
       Fabricate(:user_watcher, app: app, user: comment_user)
@@ -32,7 +32,7 @@ RSpec.describe Comment, type: :model do
     let!(:watcher) { Fabricate(:watcher, app: app) }
     let(:err) { Fabricate(:problem, app: app) }
     let(:comment_user) { create(:user, email: "author@example.com") }
-    let(:comment) { Fabricate.build(:comment, err: err, user: comment_user) }
+    let(:comment) { build(:comment, err: err, user: comment_user) }
 
     before do
       Fabricate(:user_watcher, app: app, user: comment_user)
