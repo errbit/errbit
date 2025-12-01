@@ -51,9 +51,9 @@ RSpec.describe ProblemDestroy do
   end
 
   context "in integration way" do
-    let!(:problem) { Fabricate(:problem) }
-    let!(:comment_1) { Fabricate(:comment, err: problem) }
-    let!(:comment_2) { Fabricate(:comment, err: problem) }
+    let!(:problem) { create(:problem) }
+    let!(:comment_1) { create(:comment, err: problem) }
+    let!(:comment_2) { create(:comment, err: problem) }
     let!(:err_1) { Fabricate(:err, problem: problem) }
     let!(:err_2) { Fabricate(:err, problem: problem) }
     let!(:notice_1_1) { Fabricate(:notice, err: err_1) }
