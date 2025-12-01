@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe NotificationServices::WebhookService, type: :model do
   it "should send a notification to a user-specified URL" do
-    notice = Fabricate(:notice)
+    notice = create(:notice)
     notification_service = Fabricate(:webhook_notification_service, app: notice.app)
     problem = notice.problem
 
@@ -17,7 +17,7 @@ RSpec.describe NotificationServices::WebhookService, type: :model do
 
   describe "#message_for_webhook" do
     it "should return an hash with all the keys nested inside 'problem' key" do
-      notice = Fabricate(:notice)
+      notice = create(:notice)
       notification_service = Fabricate(:webhook_notification_service, app: notice.app)
       problem = notice.problem
 
