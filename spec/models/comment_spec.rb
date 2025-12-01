@@ -13,8 +13,8 @@ RSpec.describe Comment, type: :model do
 
   context "notification_recipients" do
     let(:app) { create(:app) }
-    let!(:watcher) { Fabricate(:watcher, app: app) }
-    let(:err) { Fabricate(:problem, app: app) }
+    let!(:watcher) { create(:watcher, app: app) }
+    let(:err) { create(:problem, app: app) }
     let(:comment_user) { create(:user, email: "author@example.com") }
     let(:comment) { build(:comment, err: err, user: comment_user) }
 
@@ -29,8 +29,8 @@ RSpec.describe Comment, type: :model do
 
   context "emailable?" do
     let(:app) { create(:app, notify_on_errs: true) }
-    let!(:watcher) { Fabricate(:watcher, app: app) }
-    let(:err) { Fabricate(:problem, app: app) }
+    let!(:watcher) { create(:watcher, app: app) }
+    let(:err) { create(:problem, app: app) }
     let(:comment_user) { create(:user, email: "author@example.com") }
     let(:comment) { build(:comment, err: err, user: comment_user) }
 
