@@ -4,8 +4,9 @@ require "rails_helper"
 
 RSpec.describe "issue_trackers/markdown.erb", type: :view do
   let(:problem) do
-    problem = Fabricate(:problem)
-    Fabricate(:notice, err: Fabricate(:err, problem: problem))
+    problem = create(:problem)
+    err = create(:err, problem: problem)
+    create(:notice, err: err)
     problem
   end
 
