@@ -145,13 +145,13 @@ RSpec.describe App, type: :model do
 
   context "notification recipients" do
     it "should send notices to either all users plus watchers, or the configured watchers" do
-      @app = create(:app)
+      app = create(:app)
       3.times { create(:user) }
-      5.times { create(:watcher, app: @app) }
-      @app.notify_all_users = true
-      expect(@app.notification_recipients.size).to eq(8)
-      @app.notify_all_users = false
-      expect(@app.notification_recipients.size).to eq(5)
+      5.times { create(:watcher, app: app) }
+      app.notify_all_users = true
+      expect(app.notification_recipients.size).to eq(8)
+      app.notify_all_users = false
+      expect(app.notification_recipients.size).to eq(5)
     end
   end
 
@@ -177,13 +177,13 @@ RSpec.describe App, type: :model do
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do
-      @app = create(:app, name: "app", github_repo: "url")
-      @copy_app = create(:app, name: "copy_app", github_repo: "copy url")
-      @copy_watcher = create(:watcher, email: "copywatcher@example.com", app: @copy_app)
-      @app.copy_attributes_from(@copy_app.id)
-      expect(@app.name).to eq("app")
-      expect(@app.github_repo).to eq("copy url")
-      expect(@app.watchers.first.email).to eq("copywatcher@example.com")
+      app = create(:app, name: "app", github_repo: "url")
+      copy_app = create(:app, name: "copy_app", github_repo: "copy url")
+      create(:watcher, email: "copywatcher@example.com", app: copy_app)
+      app.copy_attributes_from(copy_app.id)
+      expect(app.name).to eq("app")
+      expect(app.github_repo).to eq("copy url")
+      expect(app.watchers.first.email).to eq("copywatcher@example.com")
     end
   end
 
