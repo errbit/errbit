@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "apps/show.atom.builder", type: :view do
-  let(:notice) { Fabricate(:notice) }
+  let(:notice) { create(:notice) }
 
   let(:app) { notice.app }
 
