@@ -54,8 +54,8 @@ RSpec.describe ProblemDestroy do
     let!(:problem) { create(:problem) }
     let!(:comment_1) { create(:comment, err: problem) }
     let!(:comment_2) { create(:comment, err: problem) }
-    let!(:err_1) { Fabricate(:err, problem: problem) }
-    let!(:err_2) { Fabricate(:err, problem: problem) }
+    let!(:err_1) { create(:err, problem: problem) }
+    let!(:err_2) { create(:err, problem: problem) }
     let!(:notice_1_1) { Fabricate(:notice, err: err_1) }
     let!(:notice_1_2) { Fabricate(:notice, err: err_1) }
     let!(:notice_2_1) { Fabricate(:notice, err: err_2) }
