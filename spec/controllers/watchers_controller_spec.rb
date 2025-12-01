@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe WatchersController, type: :controller do
   let(:user) { create(:user) }
-  let(:problem) { Fabricate(:problem) }
+  let(:problem) { create(:problem) }
 
   before { sign_in user }
 
@@ -33,7 +33,7 @@ RSpec.describe WatchersController, type: :controller do
   describe "#destroy" do
     let(:app) do
       a = create(:app)
-      Fabricate(:user_watcher, app: a, user: user)
+      create(:user_watcher, app: a, user: user)
       a
     end
 
