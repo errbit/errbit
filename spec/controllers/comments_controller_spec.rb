@@ -4,7 +4,6 @@ require "rails_helper"
 
 RSpec.describe CommentsController, type: :controller do
   let(:app) { create(:app) }
-  let(:err) { Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production")) }
 
   describe "POST /apps/:app_id/errs/:id/comments/create" do
     render_views
