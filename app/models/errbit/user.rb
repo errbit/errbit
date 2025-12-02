@@ -2,7 +2,7 @@
 
 module Errbit
   class User < ApplicationRecord
-    PER_PAGE = 30
+    paginates_per 30
 
     devise(*Errbit::Config.devise_modules)
 

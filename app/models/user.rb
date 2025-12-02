@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User
-  PER_PAGE = 30
+  paginates_per 30
 
   include Mongoid::Document
   include Mongoid::Timestamps
