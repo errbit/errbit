@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "problems/show.html.erb", type: :view do
-  let(:problem) { Fabricate(:problem) }
+  let(:problem) { create(:problem) }
 
-  let(:comment) { Fabricate(:comment) }
+  let(:comment) { create(:comment) }
 
   let(:pivotal_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
@@ -118,7 +118,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
 
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
       controller.request.env["HTTP_REFERER"] = nil
-      problem = Fabricate(:problem_with_comments)
+      problem = create(:problem_with_comments)
 
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
@@ -132,7 +132,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
       let(:app) { create(:app, github_repo: "test_user/test_repo") }
 
       it "should allow creating issue for github if application has a github tracker" do
-        problem = Fabricate(:problem_with_comments, app: app)
+        problem = create(:problem_with_comments, app: app)
 
         with_issue_tracker("github", problem)
 
@@ -212,7 +212,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
 
   describe "content_for :comments" do
     before do
-      problem = Fabricate(:problem_with_comments)
+      problem = create(:problem_with_comments)
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
       allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
