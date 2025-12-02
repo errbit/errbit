@@ -14,9 +14,9 @@ RSpec.describe OutdatedProblemClearer do
   describe "#execute" do
     let!(:problems) do
       [
-        Fabricate(:problem),
-        Fabricate(:problem),
-        Fabricate(:problem)
+        create(:problem),
+        create(:problem),
+        create(:problem)
       ]
     end
 

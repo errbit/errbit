@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe ProblemRecacher do
   let(:app) { create(:app) }
 
-  let(:backtrace) { Fabricate(:backtrace) }
+  let(:backtrace) { create(:backtrace) }
 
   before do
     notices
@@ -22,7 +22,7 @@ RSpec.describe ProblemRecacher do
         b = backtrace.clone
         b.lines[5][:number] = line_numbers.shift
         b.save!
-        notice = Fabricate(:notice, backtrace: b, app: app)
+        notice = create(:notice, backtrace: b, app: app)
         notice.save!
         notice
       end
