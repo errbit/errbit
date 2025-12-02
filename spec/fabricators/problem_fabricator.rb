@@ -1,30 +1,30 @@
 # frozen_string_literal: true
 
-Fabricator(:problem) do
-  app { Fabricate(:app) }
+# Fabricator(:problem) do
+#   app { Fabricate(:app) }
+#
+#   comments { [] }
+#
+#   error_class "FooError"
+#
+#   environment "production"
+# end
 
-  comments { [] }
+# Fabricator(:problem_with_comments, from: :problem) do
+#   after_create do |parent|
+#     3.times do
+#       Fabricate(:comment, err: parent)
+#     end
+#   end
+# end
 
-  error_class "FooError"
-
-  environment "production"
-end
-
-Fabricator(:problem_with_comments, from: :problem) do
-  after_create do |parent|
-    3.times do
-      Fabricate(:comment, err: parent)
-    end
-  end
-end
-
-Fabricator(:problem_with_errs, from: :problem) do
-  after_create do |parent|
-    3.times do
-      Fabricate(:err, problem: parent)
-    end
-  end
-end
+# Fabricator(:problem_with_errs, from: :problem) do
+#   after_create do |parent|
+#     3.times do
+#       Fabricate(:err, problem: parent)
+#     end
+#   end
+# end
 
 Fabricator(:problem_resolved, from: :problem) do
   after_create do |pr|
