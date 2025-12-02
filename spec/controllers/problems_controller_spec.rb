@@ -291,7 +291,7 @@ RSpec.describe ProblemsController, type: :controller do
       let(:notice) { NoticeDecorator.new(create(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
-        Fabricate(:issue_tracker).tap do |t|
+        create(:issue_tracker).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
@@ -370,7 +370,7 @@ RSpec.describe ProblemsController, type: :controller do
       let(:notice) { NoticeDecorator.new(create(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
-        Fabricate(:issue_tracker).tap do |t|
+        create(:issue_tracker).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
