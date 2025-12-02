@@ -10,4 +10,10 @@ FactoryBot.define do
 
     environment { "production" }
   end
+
+  factory :problem_with_comments, parent: :problem do
+    after(:build) do |problem|
+      create_list(:comment, 3, err: problem)
+    end
+  end
 end
