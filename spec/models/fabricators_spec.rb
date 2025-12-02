@@ -2,6 +2,8 @@
 
 require "rails_helper"
 
+# TODO: add factory bot factories validator/linter.
+
 # Fabrication::Config.fabricator_path.each do |folder|
 #   Dir.glob(File.join(Rails.root, folder, "**", "*.rb")).each do |file|
 #     require file
