@@ -89,7 +89,7 @@ RSpec.describe Notice, type: :model do
     [:server_environment, :request, :notifier].each do |key|
       it "replaces . with &#46; and $ with &#36; in keys used in #{key}" do
         err = create(:err)
-        notice = create(:notice, err: err, key => @hash)
+        notice = create(:notice, err: err, "#{key}": @hash)
         expect(notice.send(key)).to eq(@hash_sanitized)
       end
     end
