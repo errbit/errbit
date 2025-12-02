@@ -91,17 +91,20 @@ RSpec.describe AppsController, type: :controller do
 
       context "pagination" do
         before do
-          35.times { Fabricate(:err, problem: Fabricate(:problem, app: app)) }
+          35.times { create(:err, problem: create(:problem, app: app)) }
         end
 
         it "should have default per_page value for user" do
           get :show, params: {id: app.id}
+
           expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
         end
 
         it "should be able to override default per_page value" do
           admin.update_attribute :per_page, 10
+
           get :show, params: {id: app.id}
+
           expect(controller.problems.to_a.size).to eq(10)
         end
       end
