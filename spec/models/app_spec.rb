@@ -199,9 +199,9 @@ RSpec.describe App, type: :model do
     end
 
     it "returns the correct err if one already exists" do
-      existing = Fabricate(
-        :err,
-        problem: Fabricate(:problem, app: app),
+      problem = create(:problem, app: app)
+      existing = create(:err,
+        problem: problem,
         fingerprint: conditions[:fingerprint]
       )
       expect(Err.where(fingerprint: conditions[:fingerprint]).first).to eq(existing)
