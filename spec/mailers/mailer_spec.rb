@@ -36,7 +36,7 @@ RSpec.describe Mailer do
     include EmailSpec::Matchers
 
     let(:notice) do
-      n = Fabricate(:notice, message: "class < ActionController::Base")
+      n = create(:notice, message: "class < ActionController::Base")
       n.backtrace.lines.last[:file] = "[PROJECT_ROOT]/path/to/file.js"
       n
     end
@@ -93,7 +93,7 @@ RSpec.describe Mailer do
     end
 
     context "with a very long message" do
-      let(:notice) { Fabricate(:notice, message: 6.times.collect { |_a| "0123456789" }.join("")) }
+      let(:notice) { create(:notice, message: 6.times.collect { |_a| "0123456789" }.join("")) }
 
       it "should truncate the long message" do
         expect(email.subject).to match(/ \d{47}\.{3}$/)
@@ -105,17 +105,17 @@ RSpec.describe Mailer do
     include EmailSpec::Helpers
     include EmailSpec::Matchers
 
-    let!(:notice) { Fabricate(:notice) }
+    let!(:notice) { create(:notice) }
 
-    let!(:comment) { Fabricate(:comment, err: notice.problem) }
+    let!(:comment) { create(:comment, err: notice.problem) }
 
-    let!(:watcher) { Fabricate(:watcher, app: comment.app) }
+    let!(:watcher) { create(:watcher, app: comment.app) }
 
     let(:recipients) { ["recipient@example.com", "another@example.com"] }
 
     before do
       expect(comment).to receive(:notification_recipients).and_return(recipients)
-      Fabricate(:notice, err: notice.err)
+      create(:notice, err: notice.err)
       @email = Mailer.comment_notification(comment).deliver_now
     end
 
