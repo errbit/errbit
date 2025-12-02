@@ -3,6 +3,12 @@
 FactoryBot.define do
   factory :notification_service do
     app
+
+    sequence(:room_id) { |n| "word#{n}" }
+
+    sequence(:api_token) { |n| "word#{n}" }
+
+    sequence(:subdomain) { |n| "word#{n}" }
   end
 
   factory :gtalk_notification_service, parent: :notification_service, class: "NotificationServices::GtalkService" do
@@ -47,16 +53,3 @@ end
 #
 #   room_id { sequence(:room_id) { |i| "#room-#{i}" } }
 # end
-
-
-
-
-# Fabricator :campfire_notification_service, from: :notification_service, class_name: "NotificationServices::CampfireService"
-#
-# Fabricator :hoiio_notification_service, from: :notification_service, class_name: "NotificationServices::HoiioService"
-#
-# Fabricator :hubot_notification_service, from: :notification_service, class_name: "NotificationServices::HubotService"
-#
-# Fabricator :pushover_notification_service, from: :notification_service, class_name: "NotificationServices::PushoverService"
-#
-# Fabricator :webhook_notification_service, from: :notification_service, class_name: "NotificationServices::WebhookService"
