@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe NoticeFingerprinter, type: :model do
   let(:fingerprinter) { described_class.new }
-  let(:notice) { Fabricate(:notice) }
-  let(:backtrace) { Fabricate(:backtrace) }
+  let(:notice) { create(:notice) }
+  let(:backtrace) { create(:backtrace) }
 
   describe "#generate" do
     it "generates the same fingerprint for the same notice" do
@@ -39,8 +39,8 @@ RSpec.describe NoticeFingerprinter, type: :model do
     end
 
     context "two backtraces have the same first two lines" do
-      let(:backtrace1) { Fabricate(:backtrace) }
-      let(:backtrace2) { Fabricate(:backtrace) }
+      let(:backtrace1) { create(:backtrace) }
+      let(:backtrace2) { create(:backtrace) }
 
       before do
         backtrace1.lines[0] = backtrace2.lines[0]

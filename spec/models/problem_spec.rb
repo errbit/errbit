@@ -13,31 +13,31 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  # describe "Fabrication" do
-  #   context "Fabricate(:problem)" do
-  #     it "should have no comment" do
-  #       expect do
-  #         Fabricate(:problem)
-  #       end.not_to change(Comment, :count)
-  #     end
-  #   end
-  #
-  #   context "Fabricate(:problem_with_comments)" do
-  #     it "should have 3 comments" do
-  #       expect do
-  #         Fabricate(:problem_with_comments)
-  #       end.to change(Comment, :count).by(3)
-  #     end
-  #   end
-  #
-  #   context "Fabricate(:problem_with_errs)" do
-  #     it "should have 3 errs" do
-  #       expect do
-  #         Fabricate(:problem_with_errs)
-  #       end.to change(Err, :count).by(3)
-  #     end
-  #   end
-  # end
+  describe "FactoryBot" do
+    context "create(:problem)" do
+      it "should have no comment" do
+        expect do
+          create(:problem)
+        end.not_to change(Comment, :count)
+      end
+    end
+
+    context "create(:problem_with_comments)" do
+      it "should have 3 comments" do
+        expect do
+          create(:problem_with_comments)
+        end.to change(Comment, :count).by(3)
+      end
+    end
+
+    context "create(:problem_with_errs)" do
+      it "should have 3 errs" do
+        expect do
+          create(:problem_with_errs)
+        end.to change(Err, :count).by(3)
+      end
+    end
+  end
 
   describe "#last_notice_at" do
     it "returns the created_at timestamp of the latest notice" do
@@ -80,7 +80,7 @@ RSpec.describe Problem, type: :model do
   context "being created" do
     context "when the app has err notifications set to false" do
       it "should not send an email notification" do
-        app = Fabricate(:app_with_watcher, notify_on_errs: false)
+        app = create(:app_with_watcher, notify_on_errs: false)
         expect(Mailer).not_to receive(:err_notification)
         create(:problem, app: app)
       end

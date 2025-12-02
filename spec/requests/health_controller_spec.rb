@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe HealthController, type: :request do
-  let(:errbit_app) { Fabricate(:app, api_key: "APIKEY") }
+  let(:errbit_app) { create(:app, api_key: "APIKEY") }
 
   describe "api_key_tester" do
     it "will let you know when the api_key is not valid" do

@@ -12,14 +12,14 @@ FactoryBot.define do
   end
 
   factory :problem_with_comments, parent: :problem do
-    after(:build) do |problem|
-      build_list(:comment, 3, err: problem)
+    after(:create) do |problem|
+      create_list(:comment, 3, err: problem)
     end
   end
 
   factory :problem_with_errs, parent: :problem do
-    after(:build) do |problem|
-      build_list(:err, 3, problem: problem)
+    after(:create) do |problem|
+      create_list(:err, 3, problem: problem)
     end
   end
 

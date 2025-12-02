@@ -6,11 +6,11 @@
 #   repository_branch "main"
 # end
 
-Fabricator(:app_with_watcher, from: :app) do
-  watchers(count: 1) do |parent, _|
-    Fabricate.build(:watcher, app: parent)
-  end
-end
+# Fabricator(:app_with_watcher, from: :app) do
+#   watchers(count: 1) do |parent, _|
+#     Fabricate.build(:watcher, app: parent)
+#   end
+# end
 
 # Fabricator(:watcher) do
 #   app

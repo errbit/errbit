@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe NoticesController, type: :controller do
   it_requires_authentication for: {locate: :get}
 
-  let(:notice) { Fabricate(:notice) }
+  let(:notice) { create(:notice) }
 
   let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
@@ -83,8 +83,9 @@ RSpec.describe NoticesController, type: :controller do
       end
 
       it "should locate notice and redirect to problem" do
-        problem = Fabricate(:problem, app: app, environment: "production")
-        notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
+        problem = create(:problem, app: app, environment: "production")
+        err = create(:err, problem: problem)
+        notice = create(:notice, err: err)
         get :locate, params: {id: notice.id}
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
       end
@@ -99,8 +100,9 @@ RSpec.describe NoticesController, type: :controller do
       end
 
       it "should locate notice and redirect to problem with notice_id" do
-        problem = Fabricate(:problem, app: app, environment: "production")
-        notice = Fabricate(:notice, err: Fabricate(:err, problem: problem))
+        problem = create(:problem, app: app, environment: "production")
+        err = create(:err, problem: problem)
+        notice = create(:notice, err: err)
         get :show_by_id, params: {id: notice.id}
         expect(response).to redirect_to(app_problem_path(problem.app, problem, notice_id: notice.id))
       end
