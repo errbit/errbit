@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe ProblemMerge do
-  let(:problem) { Fabricate(:problem_with_errs) }
+  let(:problem) { create(:problem_with_errs) }
 
-  let(:problem_1) { Fabricate(:problem_with_errs) }
+  let(:problem_1) { create(:problem_with_errs) }
 
   describe "#initialize" do
     it "failed if less than 2 uniq problem pass in args" do

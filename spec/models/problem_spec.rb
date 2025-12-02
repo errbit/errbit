@@ -498,7 +498,7 @@ RSpec.describe Problem, type: :model do
   end
 
   describe "#recache" do
-    let(:problem) { Fabricate(:problem_with_errs) }
+    let(:problem) { create(:problem_with_errs) }
 
     let(:first_errs) { problem.errs }
 
