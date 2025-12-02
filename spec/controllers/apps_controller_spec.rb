@@ -31,7 +31,7 @@ RSpec.describe AppsController, type: :controller do
   let(:problem) do
     create(:problem, app: app)
   end
-  let(:problem_resolved) { Fabricate(:problem_resolved, app: app) }
+  let(:problem_resolved) { create(:problem_resolved, app: app) }
   let(:notice_fingerprinter) do
     nf = SiteConfig.document.notice_fingerprinter
     nf.backtrace_lines = 10

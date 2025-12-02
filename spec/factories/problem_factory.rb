@@ -23,15 +23,13 @@ FactoryBot.define do
     end
   end
 
-  # factory :problem_resolved, parent: :problem do
-  #
-  # end
+  factory :problem_resolved, parent: :problem do
+    after(:create) do |problem|
+      err = create(:err, problem: problem)
 
-  # Fabricator(:problem_resolved, from: :problem) do
-  #   after_create do |pr|
-  #     Fabricate(:notice, err: Fabricate(:err, problem: pr))
-  #
-  #     pr.resolve!
-  #   end
-  # end
+      create(:notice, err: err)
+
+      problem.resolve!
+    end
+  end
 end
