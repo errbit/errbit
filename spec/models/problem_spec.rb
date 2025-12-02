@@ -469,7 +469,7 @@ RSpec.describe Problem, type: :model do
 
       context "with issue_tracker valid associate to app" do
         let(:issue_tracker) do
-          Fabricate(:issue_tracker).tap do |t|
+          create(:issue_tracker).tap do |t|
             t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
           end
         end
