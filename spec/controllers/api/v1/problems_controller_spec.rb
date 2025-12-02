@@ -10,9 +10,9 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
     describe "GET /api/v1/problems/:id" do
       before do
-        notice = Fabricate(:notice)
-        err = Fabricate(:err, notices: [notice])
-        @problem = Fabricate(:problem, errs: [err])
+        notice = create(:notice)
+        err = create(:err, notices: [notice])
+        @problem = create(:problem, errs: [err])
       end
 
       it "should return JSON if JSON is requested" do
@@ -70,10 +70,10 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
     describe "GET /api/v1/problems" do
       before do
-        Fabricate(:problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 2))
-        Fabricate(:problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 21))
-        Fabricate(:problem, first_notice_at: Date.new(2012, 8, 21))
-        Fabricate(:problem, first_notice_at: Date.new(2012, 8, 30))
+        create(:problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 2))
+        create(:problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 21))
+        create(:problem, first_notice_at: Date.new(2012, 8, 21))
+        create(:problem, first_notice_at: Date.new(2012, 8, 30))
       end
 
       it "should return JSON if JSON is requested" do
