@@ -14,7 +14,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     context "successful comment creation" do
-      let(:problem) { Fabricate(:problem) }
+      let(:problem) { create(:problem) }
       let(:user) { create(:user) }
 
       before do
@@ -47,7 +47,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     context "successful comment deletion" do
-      let(:problem) { Fabricate(:problem_with_comments) }
+      let(:problem) { create(:problem_with_comments) }
       let(:comment) { problem.reload.comments.first }
 
       before do
