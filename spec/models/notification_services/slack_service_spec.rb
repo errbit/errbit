@@ -25,7 +25,7 @@ RSpec.describe NotificationServices::SlackService, type: :model do
   end
 
   let(:service) do
-    Fabricate(:slack_notification_service,
+    create(:slack_notification_service,
       app: notice.app,
       service_url: service_url,
       room_id: room_id)

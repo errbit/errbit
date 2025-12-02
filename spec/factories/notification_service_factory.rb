@@ -1,5 +1,27 @@
 # frozen_string_literal: true
 
+FactoryBot.define do
+  factory :notification_service do
+    app
+  end
+
+  factory :gtalk_notification_service, parent: :notification_service, class: "NotificationServices::GtalkService" do
+  end
+
+  factory :slack_notification_service, parent: :notification_service, class: "NotificationServices::SlackService" do
+  end
+
+  factory :campfire_notification_service, parent: :notification_service, class: "NotificationServices::CampfireService"
+
+  factory :hoiio_notification_service, parent: :notification_service, class: "NotificationServices::HoiioService"
+
+  factory :hubot_notification_service, parent: :notification_service, class: "NotificationServices::HubotService"
+
+  factory :pushover_notification_service, parent: :notification_service, class: "NotificationServices::PushoverService"
+
+  factory :webhook_notification_service, parent: :notification_service, class: "NotificationServices::WebhookService"
+end
+
 # Fabricator :notification_service do
 #   app
 #
@@ -25,7 +47,10 @@
 #
 #   room_id { sequence(:room_id) { |i| "#room-#{i}" } }
 # end
-#
+
+
+
+
 # Fabricator :campfire_notification_service, from: :notification_service, class_name: "NotificationServices::CampfireService"
 #
 # Fabricator :hoiio_notification_service, from: :notification_service, class_name: "NotificationServices::HoiioService"

@@ -77,7 +77,7 @@ RSpec.describe "Callback on Notice", type: :model do
   end
 
   describe "email notifications for resolved issues" do
-    let(:notification_service) { Fabricate(:campfire_notification_service) }
+    let(:notification_service) { create(:campfire_notification_service) }
     let(:app) do
       create(:app_with_watcher,
         notify_on_errs: true,
@@ -105,7 +105,7 @@ RSpec.describe "Callback on Notice", type: :model do
   end
 
   describe "send email when notification service is configured but fails" do
-    let(:notification_service) { Fabricate(:campfire_notification_service) }
+    let(:notification_service) { create(:campfire_notification_service) }
     let(:app) do
       create(:app_with_watcher,
         notify_on_errs: true,
@@ -131,8 +131,8 @@ RSpec.describe "Callback on Notice", type: :model do
 
   describe "should not send a notification if a notification service is not" \
            "configured" do
-    let(:notification_service) { Fabricate(:notification_service) }
-    let(:app) { Fabricate(:app, notification_service: notification_service) }
+    let(:notification_service) { create(:notification_service) }
+    let(:app) { create(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
     before { Errbit::Config.per_app_notify_at_notices = true }
@@ -147,9 +147,9 @@ RSpec.describe "Callback on Notice", type: :model do
 
   describe "should send a notification at desired intervals" do
     let(:notification_service) do
-      Fabricate(:campfire_notification_service, notify_at_notices: [1, 2])
+      create(:campfire_notification_service, notify_at_notices: [1, 2])
     end
-    let(:app) { Fabricate(:app, notification_service: notification_service) }
+    let(:app) { create(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
     before { Errbit::Config.per_app_notify_at_notices = true }
