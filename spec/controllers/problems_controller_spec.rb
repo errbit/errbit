@@ -22,7 +22,7 @@ RSpec.describe ProblemsController, type: :controller do
     before do
       sign_in user
 
-      @problem = Fabricate(:notice, err: Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production"))).problem
+      @problem = create(:notice, err: create(:err, problem: create(:problem, app: app, environment: "production"))).problem
     end
 
     context "pagination" do
@@ -104,7 +104,7 @@ RSpec.describe ProblemsController, type: :controller do
 
       3.times { problems << create(:err).problem }
 
-      3.times { problems << Fabricate(:err, problem: Fabricate(:problem, resolved: true)).problem }
+      3.times { problems << create(:err, problem: create(:problem, resolved: true)).problem }
 
       expect(Problem).to receive(:ordered_by).and_return(
         double("proxy", page: double("other_proxy", per: problems))
@@ -403,7 +403,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "problem with issue" do
-      let(:err) { Fabricate(:err, problem: Fabricate(:problem, issue_link: "http://some.host")) }
+      let(:err) { create(:err, problem: create(:problem, issue_link: "http://some.host")) }
 
       before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
@@ -436,8 +436,8 @@ RSpec.describe ProblemsController, type: :controller do
   describe "Bulk Actions" do
     before do
       sign_in user
-      @problem1 = Fabricate(:err, problem: Fabricate(:problem, resolved: true)).problem
-      @problem2 = Fabricate(:err, problem: Fabricate(:problem, resolved: false)).problem
+      @problem1 = create(:err, problem: create(:problem, resolved: true)).problem
+      @problem2 = create(:err, problem: create(:problem, resolved: false)).problem
     end
 
     context "POST /problems/merge_several" do
