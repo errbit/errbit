@@ -145,26 +145,26 @@ RSpec.describe App, type: :model do
 
   context "notification recipients" do
     it "should send notices to either all users plus watchers, or the configured watchers" do
-      @app = create(:app)
+      app = create(:app)
       3.times { create(:user) }
-      5.times { Fabricate(:watcher, app: @app) }
-      @app.notify_all_users = true
-      expect(@app.notification_recipients.size).to eq(8)
-      @app.notify_all_users = false
-      expect(@app.notification_recipients.size).to eq(5)
+      5.times { create(:watcher, app: app) }
+      app.notify_all_users = true
+      expect(app.notification_recipients.size).to eq(8)
+      app.notify_all_users = false
+      expect(app.notification_recipients.size).to eq(5)
     end
   end
 
   describe "#emailable?" do
     it "should be true if notify on errs and there are notification recipients" do
       app = create(:app, notify_on_errs: true, notify_all_users: false)
-      2.times { Fabricate(:watcher, app: app) }
+      2.times { create(:watcher, app: app) }
       expect(app.emailable?).to eq(true)
     end
 
     it "should be false if notify on errs is disabled" do
       app = create(:app, notify_on_errs: false, notify_all_users: false)
-      2.times { Fabricate(:watcher, app: app) }
+      2.times { create(:watcher, app: app) }
       expect(app.emailable?).to eq(false)
     end
 
@@ -177,13 +177,13 @@ RSpec.describe App, type: :model do
 
   context "copying attributes from existing app" do
     it "should only copy the necessary fields" do
-      @app = create(:app, name: "app", github_repo: "url")
-      @copy_app = Fabricate(:app, name: "copy_app", github_repo: "copy url")
-      @copy_watcher = Fabricate(:watcher, email: "copywatcher@example.com", app: @copy_app)
-      @app.copy_attributes_from(@copy_app.id)
-      expect(@app.name).to eq("app")
-      expect(@app.github_repo).to eq("copy url")
-      expect(@app.watchers.first.email).to eq("copywatcher@example.com")
+      app = create(:app, name: "app", github_repo: "url")
+      copy_app = create(:app, name: "copy_app", github_repo: "copy url")
+      create(:watcher, email: "copywatcher@example.com", app: copy_app)
+      app.copy_attributes_from(copy_app.id)
+      expect(app.name).to eq("app")
+      expect(app.github_repo).to eq("copy url")
+      expect(app.watchers.first.email).to eq("copywatcher@example.com")
     end
   end
 
@@ -199,9 +199,9 @@ RSpec.describe App, type: :model do
     end
 
     it "returns the correct err if one already exists" do
-      existing = Fabricate(
-        :err,
-        problem: Fabricate(:problem, app: app),
+      problem = create(:problem, app: app)
+      existing = create(:err,
+        problem: problem,
         fingerprint: conditions[:fingerprint]
       )
       expect(Err.where(fingerprint: conditions[:fingerprint]).first).to eq(existing)

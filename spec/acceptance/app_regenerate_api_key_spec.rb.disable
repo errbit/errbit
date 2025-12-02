@@ -5,9 +5,7 @@ require "acceptance/acceptance_helper"
 RSpec.feature "Regeneration api_Key" do
   let(:app) { create(:app) }
   let(:admin) { create(:user, admin: true) }
-  let(:user) do
-    Fabricate(:user_watcher, app: app).user
-  end
+  let(:user) { create(:user_watcher, app: app).user }
 
   before do
     app && admin
@@ -38,9 +36,7 @@ end
 
 RSpec.feature "Create an application" do
   let(:admin) { create(:user, admin: true) }
-  let(:user) do
-    Fabricate(:user_watcher, app: app).user
-  end
+  let(:user) { create(:user_watcher, app: app).user }
 
   before do
     admin

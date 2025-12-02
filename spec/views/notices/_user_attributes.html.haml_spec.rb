@@ -7,7 +7,7 @@ RSpec.describe "notices/_user_attributes.html.haml", type: :view do
     let(:notice) do
       user_attributes = {"foo" => {"bar" => "https://example.com"}}
 
-      Fabricate(:notice, user_attributes: user_attributes)
+      create(:notice, user_attributes: user_attributes)
     end
 
     it "renders table with user attributes" do

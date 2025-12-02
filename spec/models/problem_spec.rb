@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Problem, type: :model do
   context "validations" do
     it "requires an environment" do
-      err = Fabricate.build(:problem, environment: nil)
+      err = build(:problem, environment: nil)
 
       expect(err.valid?).to eq(false)
 
@@ -13,27 +13,27 @@ RSpec.describe Problem, type: :model do
     end
   end
 
-  describe "Fabrication" do
-    context "Fabricate(:problem)" do
+  describe "FactoryBot" do
+    context "create(:problem)" do
       it "should have no comment" do
         expect do
-          Fabricate(:problem)
+          create(:problem)
         end.not_to change(Comment, :count)
       end
     end
 
-    context "Fabricate(:problem_with_comments)" do
+    context "create(:problem_with_comments)" do
       it "should have 3 comments" do
         expect do
-          Fabricate(:problem_with_comments)
+          create(:problem_with_comments)
         end.to change(Comment, :count).by(3)
       end
     end
 
-    context "Fabricate(:problem_with_errs)" do
+    context "create(:problem_with_errs)" do
       it "should have 3 errs" do
         expect do
-          Fabricate(:problem_with_errs)
+          create(:problem_with_errs)
         end.to change(Err, :count).by(3)
       end
     end
@@ -41,38 +41,38 @@ RSpec.describe Problem, type: :model do
 
   describe "#last_notice_at" do
     it "returns the created_at timestamp of the latest notice" do
-      err = Fabricate(:err)
+      err = create(:err)
       problem = err.problem
       expect(problem).not_to eq(nil)
 
-      notice1 = Fabricate(:notice, err: err)
+      notice1 = create(:notice, err: err)
       expect(problem.last_notice_at).to eq(notice1.reload.created_at)
 
-      notice2 = Fabricate(:notice, err: err)
+      notice2 = create(:notice, err: err)
       expect(problem.last_notice_at).to eq(notice2.reload.created_at)
     end
   end
 
   describe "#first_notice_at" do
     it "returns the created_at timestamp of the first notice" do
-      err = Fabricate(:err)
+      err = create(:err)
       problem = err.problem
       expect(problem).not_to eq(nil)
 
-      notice1 = Fabricate(:notice, err: err)
+      notice1 = create(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
 
-      Fabricate(:notice, err: err)
+      create(:notice, err: err)
       expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
     end
   end
 
   describe "#message" do
     it "adding a notice caches its message" do
-      err = Fabricate(:err)
+      err = create(:err)
       problem = err.problem
       expect do
-        Fabricate(:notice, err: err, message: "ERR 1")
+        create(:notice, err: err, message: "ERR 1")
       end.to change(problem, :message).from(nil).to("ERR 1")
     end
   end
@@ -80,9 +80,9 @@ RSpec.describe Problem, type: :model do
   context "being created" do
     context "when the app has err notifications set to false" do
       it "should not send an email notification" do
-        app = Fabricate(:app_with_watcher, notify_on_errs: false)
+        app = create(:app_with_watcher, notify_on_errs: false)
         expect(Mailer).not_to receive(:err_notification)
-        Fabricate(:problem, app: app)
+        create(:problem, app: app)
       end
     end
   end
@@ -95,7 +95,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "should be able to be resolved" do
-      problem = Fabricate(:problem)
+      problem = create(:problem)
       expect(problem).not_to be_resolved
       problem.resolve!
       expect(problem.reload).to be_resolved
@@ -104,14 +104,14 @@ RSpec.describe Problem, type: :model do
 
   describe "#resolve!" do
     it "marks the problem as resolved" do
-      problem = Fabricate(:problem)
+      problem = create(:problem)
       expect(problem).not_to be_resolved
       problem.resolve!
       expect(problem).to be_resolved
     end
 
     it "should record the time when it was resolved" do
-      problem = Fabricate(:problem)
+      problem = create(:problem)
       expected_resolved_at = Time.zone.now
       travel_to(expected_resolved_at) do
         problem.resolve!
@@ -120,7 +120,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "should not reset notice count" do
-      problem = Fabricate(:problem, notices_count: 1)
+      problem = create(:problem, notices_count: 1)
       original_notices_count = problem.notices_count
       expect(original_notices_count).to be > 0
 
@@ -129,7 +129,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "should throw an err if it's not successful" do
-      problem = Fabricate(:problem)
+      problem = create(:problem)
       expect(problem).not_to be_resolved
       allow(problem).to receive(:valid?).and_return(false)
       ## update_attributes not test #valid? but #errors.any?
@@ -146,8 +146,8 @@ RSpec.describe Problem, type: :model do
 
   describe "#unmerge!" do
     it "creates a separate problem for each err" do
-      problem1 = Fabricate(:notice).problem
-      problem2 = Fabricate(:notice).problem
+      problem1 = create(:notice).problem
+      problem2 = create(:notice).problem
       merged_problem = Problem.merge!(problem1, problem2)
       expect(merged_problem.errs.length).to eq 2
 
@@ -156,15 +156,15 @@ RSpec.describe Problem, type: :model do
     end
 
     it "runs smoothly for problem without errs" do
-      expect { Fabricate(:problem).unmerge! }.not_to raise_error
+      expect { create(:problem).unmerge! }.not_to raise_error
     end
   end
 
   context "Scopes" do
     context "resolved" do
       it "only finds resolved Problems" do
-        resolved = Fabricate(:problem, resolved: true)
-        Fabricate(:problem, resolved: false)
+        resolved = create(:problem, resolved: true)
+        create(:problem, resolved: false)
 
         expect(Problem.resolved.all).to eq([resolved])
       end
@@ -172,8 +172,8 @@ RSpec.describe Problem, type: :model do
 
     context "unresolved" do
       it "only finds unresolved Problems" do
-        Fabricate(:problem, resolved: true)
-        unresolved = Fabricate(:problem, resolved: false)
+        create(:problem, resolved: true)
+        unresolved = create(:problem, resolved: false)
 
         expect(Problem.unresolved.all).to eq([unresolved])
       end
@@ -181,26 +181,26 @@ RSpec.describe Problem, type: :model do
 
     context "searching" do
       it "finds the correct record" do
-        find = Fabricate(:problem, resolved: false, error_class: "theErrorclass::other",
+        find = create(:problem, resolved: false, error_class: "theErrorclass::other",
           message: "other", where: "errorclass", environment: "development", app_name: "other")
-        dont_find = Fabricate(:problem, resolved: false, error_class: "Batman",
+        dont_find = create(:problem, resolved: false, error_class: "Batman",
           message: "todo", where: "classerror", environment: "development", app_name: "other")
         expect(Problem.search("theErrorClass").unresolved).to include(find)
         expect(Problem.search("theErrorClass").unresolved).not_to include(dont_find)
       end
 
       it "find on where message" do
-        problem = Fabricate(:problem, where: "cyril")
+        problem = create(:problem, where: "cyril")
         expect(Problem.search("cyril").entries).to eq([problem])
       end
 
       it "finds with notice_id as argument" do
         app = create(:app)
-        problem = Fabricate(:problem, app: app)
-        err = Fabricate(:err, problem: problem)
-        notice = Fabricate(:notice, err: err, message: "ERR 1")
+        problem = create(:problem, app: app)
+        err = create(:err, problem: problem)
+        notice = create(:notice, err: err, message: "ERR 1")
 
-        problem2 = Fabricate(:problem, where: "cyril")
+        problem2 = create(:problem, where: "cyril")
         expect(problem2).not_to eq(problem)
         expect(Problem.search(notice.id).entries).to eq([problem])
       end
@@ -210,8 +210,8 @@ RSpec.describe Problem, type: :model do
   context "notice counter cache" do
     before do
       @app = create(:app)
-      @problem = Fabricate(:problem, app: @app)
-      @err = Fabricate(:err, problem: @problem)
+      @problem = create(:problem, app: @app)
+      @err = create(:err, problem: @problem)
     end
 
     it "#notices_count returns 0 by default" do
@@ -220,12 +220,12 @@ RSpec.describe Problem, type: :model do
 
     it "adding a notice increases #notices_count by 1" do
       expect do
-        Fabricate(:notice, err: @err, message: "ERR 1")
+        create(:notice, err: @err, message: "ERR 1")
       end.to change(@problem.reload, :notices_count).by(1)
     end
 
     it "removing a notice decreases #notices_count by 1" do
-      Fabricate(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 1")
       expect do
         @err.notices.first.destroy
         @problem.reload
@@ -236,16 +236,16 @@ RSpec.describe Problem, type: :model do
   context "sparklines-related methods" do
     before do
       @app = create(:app)
-      @problem = Fabricate(:problem, app: @app)
-      @err = Fabricate(:err, problem: @problem)
+      @problem = create(:problem, app: @app)
+      @err = create(:err, problem: @problem)
     end
 
     it "gets correct notice counts when grouping by day" do
       now = Time.current
       two_weeks_ago = 13.days.ago
-      Fabricate(:notice, err: @err, message: "ERR 1")
-      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.days.ago)
-      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.days.ago)
+      create(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 2", created_at: 3.days.ago)
+      create(:notice, err: @err, message: "ERR 3", created_at: 3.days.ago)
       three_days_ago_yday = (now - 3.days).yday
       three_days_ago = @problem.grouped_notice_counts(two_weeks_ago, "day").detect { |grouping| grouping["_id"]["day"] == three_days_ago_yday }
       expect(three_days_ago["count"]).to eq(2)
@@ -256,9 +256,9 @@ RSpec.describe Problem, type: :model do
 
     it "gets correct notice counts when grouping by hour" do
       twenty_four_hours_ago = 23.hours.ago
-      Fabricate(:notice, err: @err, message: "ERR 1")
-      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.hours.ago)
-      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.hours.ago)
+      create(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 2", created_at: 3.hours.ago)
+      create(:notice, err: @err, message: "ERR 3", created_at: 3.hours.ago)
       count_by_hour_for_last_24_hours = @problem.zero_filled_grouped_noticed_counts(twenty_four_hours_ago, "hour").map { |h| h.values.first }
       expect(count_by_hour_for_last_24_hours.size).to eq(24)
       expect(count_by_hour_for_last_24_hours).to eq(([0] * 20) + [2, 0, 0, 1])
@@ -266,18 +266,18 @@ RSpec.describe Problem, type: :model do
 
     it "gets correct relative percentages when grouping by hour" do
       two_weeks_ago = 13.days.ago
-      Fabricate(:notice, err: @err, message: "ERR 1")
-      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.days.ago)
-      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.days.ago)
+      create(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 2", created_at: 3.days.ago)
+      create(:notice, err: @err, message: "ERR 3", created_at: 3.days.ago)
       relative_percentages = @problem.grouped_notice_count_relative_percentages(two_weeks_ago, "day")
       expect(relative_percentages).to eq(([0] * 10) + [100, 0, 0, 50])
     end
 
     it "gets correct relative percentages when grouping by hour" do
       twenty_four_hours_ago = 23.hours.ago
-      Fabricate(:notice, err: @err, message: "ERR 1")
-      Fabricate(:notice, err: @err, message: "ERR 2", created_at: 3.hours.ago)
-      Fabricate(:notice, err: @err, message: "ERR 3", created_at: 3.hours.ago)
+      create(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 2", created_at: 3.hours.ago)
+      create(:notice, err: @err, message: "ERR 3", created_at: 3.hours.ago)
       relative_percentages = @problem.grouped_notice_count_relative_percentages(twenty_four_hours_ago, "hour")
       expect(relative_percentages).to eq(([0] * 20) + [100, 0, 0, 50])
     end
@@ -292,15 +292,15 @@ RSpec.describe Problem, type: :model do
   context "filtered" do
     before do
       @app1 = create(:app)
-      @problem1 = Fabricate(:problem, app: @app1)
+      @problem1 = create(:problem, app: @app1)
 
       @app2 = create(:app)
-      @problem2 = Fabricate(:problem, app: @app2)
+      @problem2 = create(:problem, app: @app2)
 
       @app3 = create(:app)
       @app3.update_attribute(:name, "app3")
 
-      @problem3 = Fabricate(:problem, app: @app3)
+      @problem3 = create(:problem, app: @app3)
     end
 
     it "#filtered returns problems but excludes those attached to the specified apps" do
@@ -331,7 +331,7 @@ RSpec.describe Problem, type: :model do
   describe "#app_name" do
     let!(:app) { create(:app) }
 
-    let!(:problem) { Fabricate(:problem, app: app) }
+    let!(:problem) { create(:problem, app: app) }
 
     before { app.reload }
 
@@ -350,8 +350,8 @@ RSpec.describe Problem, type: :model do
   context "notice messages cache" do
     before do
       @app = create(:app)
-      @problem = Fabricate(:problem, app: @app)
-      @err = Fabricate(:err, problem: @problem)
+      @problem = create(:problem, app: @app)
+      @err = create(:err, problem: @problem)
     end
 
     it "#messages should be empty by default" do
@@ -359,7 +359,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "removing a notice removes string from #messages" do
-      Fabricate(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 1")
       expect do
         @err.notices.first.destroy
         @problem.reload
@@ -367,7 +367,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "removing a notice from the problem with broken counter should not raise an error" do
-      Fabricate(:notice, err: @err, message: "ERR 1")
+      create(:notice, err: @err, message: "ERR 1")
       @problem.messages = {}
       @problem.save!
       expect { @err.notices.first.destroy }.not_to raise_error
@@ -377,8 +377,8 @@ RSpec.describe Problem, type: :model do
   context "notice hosts cache" do
     before do
       @app = create(:app)
-      @problem = Fabricate(:problem, app: @app)
-      @err = Fabricate(:err, problem: @problem)
+      @problem = create(:problem, app: @app)
+      @err = create(:err, problem: @problem)
     end
 
     it "#hosts should be empty by default" do
@@ -386,7 +386,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "removing a notice removes string from #hosts" do
-      Fabricate(:notice, err: @err, request: {"url" => "http://example.com/resource/12"})
+      create(:notice, err: @err, request: {"url" => "http://example.com/resource/12"})
       expect do
         @err.notices.first.destroy
         @problem.reload
@@ -397,8 +397,8 @@ RSpec.describe Problem, type: :model do
   context "notice user_agents cache" do
     before do
       @app = create(:app)
-      @problem = Fabricate(:problem, app: @app)
-      @err = Fabricate(:err, problem: @problem)
+      @problem = create(:problem, app: @app)
+      @err = create(:err, problem: @problem)
     end
 
     it "#user_agents should be empty by default" do
@@ -406,8 +406,7 @@ RSpec.describe Problem, type: :model do
     end
 
     it "removing a notice removes string from #user_agents" do
-      Fabricate(
-        :notice,
+      create(:notice,
         err: @err,
         request: {
           "cgi-data" => {
@@ -430,7 +429,7 @@ RSpec.describe Problem, type: :model do
   context "comment counter cache" do
     before do
       @app = create(:app)
-      @problem = Fabricate(:problem, app: @app)
+      @problem = create(:problem, app: @app)
     end
 
     it "#comments_count returns 0 by default" do
@@ -439,12 +438,12 @@ RSpec.describe Problem, type: :model do
 
     it "adding a comment increases #comments_count by 1" do
       expect do
-        Fabricate(:comment, err: @problem)
+        create(:comment, err: @problem)
       end.to change(@problem, :comments_count).by(1)
     end
 
     it "removing a comment decreases #comments_count by 1" do
-      Fabricate(:comment, err: @problem)
+      create(:comment, err: @problem)
       expect do
         @problem.reload.comments.first.destroy
         @problem.reload
@@ -470,7 +469,7 @@ RSpec.describe Problem, type: :model do
 
       context "with issue_tracker valid associate to app" do
         let(:issue_tracker) do
-          Fabricate(:issue_tracker).tap do |t|
+          create(:issue_tracker).tap do |t|
             t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
           end
         end
@@ -499,11 +498,11 @@ RSpec.describe Problem, type: :model do
   end
 
   describe "#recache" do
-    let(:problem) { Fabricate(:problem_with_errs) }
+    let(:problem) { create(:problem_with_errs) }
 
     let(:first_errs) { problem.errs }
 
-    let!(:notice) { Fabricate(:notice, err: first_errs.first) }
+    let!(:notice) { create(:notice, err: first_errs.first) }
 
     before do
       problem.update_attribute(:notices_count, 0)
@@ -554,9 +553,9 @@ RSpec.describe Problem, type: :model do
     end
 
     context "with several notices" do
-      let!(:notice_2) { Fabricate(:notice, err: first_errs.first) }
+      let!(:notice_2) { create(:notice, err: first_errs.first) }
 
-      let!(:notice_3) { Fabricate(:notice, err: first_errs.first) }
+      let!(:notice_3) { create(:notice, err: first_errs.first) }
 
       before do
         problem.update_attributes!(messages: {})
@@ -591,7 +590,7 @@ RSpec.describe Problem, type: :model do
   end
 
   describe "#url" do
-    subject { Fabricate(:problem) }
+    subject { create(:problem) }
 
     before { expect(Errbit::Config).to receive(:host).and_return("memyselfandi.com") }
 
@@ -602,13 +601,13 @@ RSpec.describe Problem, type: :model do
 
   describe "#link_text" do
     context "when message is present" do
-      subject { Fabricate(:problem, message: "Test message") }
+      subject { create(:problem, message: "Test message") }
 
       it { expect(subject.link_text).to eq("Test message") }
     end
 
     context "when message is not present" do
-      subject { Fabricate(:problem, message: nil, error_class: "ErrorClass") }
+      subject { create(:problem, message: nil, error_class: "ErrorClass") }
 
       it { expect(subject.link_text).to eq("ErrorClass") }
     end

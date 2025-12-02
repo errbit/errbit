@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ApplicationHelper, type: :helper do
-  let(:notice) { Fabricate(:notice) }
+  let(:notice) { create(:notice) }
 
   describe "#generate_problem_ical" do
     it "return the ical format" do

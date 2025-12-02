@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Callback on Comment", type: :model do
   context "when a Comment is saved" do
-    let(:comment) { Fabricate.build(:comment) }
+    let(:comment) { build(:comment) }
 
     context "and it is emailable?" do
       before { allow(comment).to receive(:emailable?).and_return(true) }

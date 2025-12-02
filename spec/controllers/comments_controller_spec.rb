@@ -4,7 +4,6 @@ require "rails_helper"
 
 RSpec.describe CommentsController, type: :controller do
   let(:app) { create(:app) }
-  let(:err) { Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production")) }
 
   describe "POST /apps/:app_id/errs/:id/comments/create" do
     render_views
@@ -14,7 +13,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     context "successful comment creation" do
-      let(:problem) { Fabricate(:problem) }
+      let(:problem) { create(:problem) }
       let(:user) { create(:user) }
 
       before do
@@ -47,7 +46,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     context "successful comment deletion" do
-      let(:problem) { Fabricate(:problem_with_comments) }
+      let(:problem) { create(:problem_with_comments) }
       let(:comment) { problem.reload.comments.first }
 
       before do

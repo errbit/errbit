@@ -6,4 +6,10 @@ FactoryBot.define do
 
     repository_branch { ["main", "master"].sample }
   end
+
+  factory :app_with_watcher, parent: :app do
+    after(:build) do |app|
+      build(:watcher, app: app)
+    end
+  end
 end

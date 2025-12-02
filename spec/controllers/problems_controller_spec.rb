@@ -12,22 +12,22 @@ RSpec.describe ProblemsController, type: :controller do
 
   let(:app) { create(:app) }
 
-  let(:err) { Fabricate(:err, problem: problem) }
+  let(:err) { create(:err, problem: problem) }
 
   let(:user) { create(:user) }
 
-  let(:problem) { Fabricate(:problem, app: app, environment: "production") }
+  let(:problem) { create(:problem, app: app, environment: "production") }
 
   describe "GET /problems" do
     before do
       sign_in user
 
-      @problem = Fabricate(:notice, err: Fabricate(:err, problem: Fabricate(:problem, app: app, environment: "production"))).problem
+      @problem = create(:notice, err: create(:err, problem: create(:problem, app: app, environment: "production"))).problem
     end
 
     context "pagination" do
       before do
-        35.times { Fabricate(:err) }
+        35.times { create(:err) }
       end
 
       it "should have default per_page value for user" do
@@ -37,7 +37,7 @@ RSpec.describe ProblemsController, type: :controller do
       end
 
       it "should be able to override default per_page value" do
-        user.update_attribute :per_page, 10
+        user.update_attribute(:per_page, 10)
 
         get :index
 
@@ -50,7 +50,7 @@ RSpec.describe ProblemsController, type: :controller do
         environments = ["production", "test", "development", "staging"]
 
         20.times do |i|
-          Fabricate(:problem, environment: environments[i % environments.length])
+          create(:problem, environment: environments[i % environments.length])
         end
       end
 
@@ -81,6 +81,7 @@ RSpec.describe ProblemsController, type: :controller do
       context "environment development" do
         it "shows problems for just development" do
           get :index, params: {environment: "development"}
+
           expect(controller.problems.size).to eq(5)
         end
       end
@@ -88,6 +89,7 @@ RSpec.describe ProblemsController, type: :controller do
       context "environment test" do
         it "shows problems for just test" do
           get :index, params: {environment: "test"}
+
           expect(controller.problems.size).to eq(5)
         end
       end
@@ -100,9 +102,9 @@ RSpec.describe ProblemsController, type: :controller do
 
       problems = Kaminari.paginate_array((1..30).to_a)
 
-      3.times { problems << Fabricate(:err).problem }
+      3.times { problems << create(:err).problem }
 
-      3.times { problems << Fabricate(:err, problem: Fabricate(:problem, resolved: true)).problem }
+      3.times { problems << create(:err, problem: create(:problem, resolved: true)).problem }
 
       expect(Problem).to receive(:ordered_by).and_return(
         double("proxy", page: double("other_proxy", per: problems))
@@ -118,8 +120,8 @@ RSpec.describe ProblemsController, type: :controller do
     before do
       sign_in user
       @app = create(:app)
-      @problem1 = Fabricate(:problem, app: @app, message: "Most important")
-      @problem2 = Fabricate(:problem, app: @app, message: "Very very important")
+      @problem1 = create(:problem, app: @app, message: "Most important")
+      @problem2 = create(:problem, app: @app, message: "Very very important")
     end
 
     it "renders successfully" do
@@ -205,7 +207,7 @@ RSpec.describe ProblemsController, type: :controller do
     context "pagination" do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|
-          coll << Fabricate(:notice, err: err, created_at: i.seconds.from_now)
+          coll << create(:notice, err: err, created_at: i.seconds.from_now)
         end
       end
 
@@ -243,7 +245,7 @@ RSpec.describe ProblemsController, type: :controller do
     before do
       sign_in user
 
-      @err = Fabricate(:err)
+      @err = create(:err)
     end
 
     it "finds the app and the problem" do
@@ -286,10 +288,10 @@ RSpec.describe ProblemsController, type: :controller do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(Fabricate(:notice)) }
+      let(:notice) { NoticeDecorator.new(create(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
-        Fabricate(:issue_tracker).tap do |t|
+        create(:issue_tracker).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
@@ -365,10 +367,10 @@ RSpec.describe ProblemsController, type: :controller do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(Fabricate(:notice)) }
+      let(:notice) { NoticeDecorator.new(create(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
-        Fabricate(:issue_tracker).tap do |t|
+        create(:issue_tracker).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
@@ -401,7 +403,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "problem with issue" do
-      let(:err) { Fabricate(:err, problem: Fabricate(:problem, issue_link: "http://some.host")) }
+      let(:err) { create(:err, problem: create(:problem, issue_link: "http://some.host")) }
 
       before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
@@ -418,7 +420,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "err without issue" do
-      let(:err) { Fabricate :err }
+      let(:err) { create(:err) }
 
       before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
@@ -434,8 +436,8 @@ RSpec.describe ProblemsController, type: :controller do
   describe "Bulk Actions" do
     before do
       sign_in user
-      @problem1 = Fabricate(:err, problem: Fabricate(:problem, resolved: true)).problem
-      @problem2 = Fabricate(:err, problem: Fabricate(:problem, resolved: false)).problem
+      @problem1 = create(:err, problem: create(:problem, resolved: true)).problem
+      @problem2 = create(:err, problem: create(:problem, resolved: false)).problem
     end
 
     context "POST /problems/merge_several" do
@@ -513,8 +515,8 @@ RSpec.describe ProblemsController, type: :controller do
       before do
         sign_in user
         @app = create(:app)
-        @problem1 = Fabricate(:problem, app: @app)
-        @problem2 = Fabricate(:problem, app: @app)
+        @problem1 = create(:problem, app: @app)
+        @problem2 = create(:problem, app: @app)
       end
 
       it "destroys all problems" do

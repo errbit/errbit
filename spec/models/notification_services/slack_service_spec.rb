@@ -4,17 +4,19 @@ require "rails_helper"
 
 RSpec.describe NotificationServices::SlackService, type: :model do
   let(:backtrace) do
-    Fabricate :backtrace, lines: [
-      {number: 22, file: "/path/to/file/1.rb", method: "first_method"},
-      {number: 44, file: "/path/to/file/2.rb", method: "second_method"},
-      {number: 11, file: "/path/to/file/3.rb", method: "third_method"},
-      {number: 103, file: "/path/to/file/4.rb", method: "fourth_method"},
-      {number: 923, file: "/path/to/file/5.rb", method: "fifth_method"},
-      {number: 8, file: "/path/to/file/6.rb", method: "sixth_method"}
-    ]
+    create(:backtrace,
+      lines: [
+        {number: 22, file: "/path/to/file/1.rb", method: "first_method"},
+        {number: 44, file: "/path/to/file/2.rb", method: "second_method"},
+        {number: 11, file: "/path/to/file/3.rb", method: "third_method"},
+        {number: 103, file: "/path/to/file/4.rb", method: "fourth_method"},
+        {number: 923, file: "/path/to/file/5.rb", method: "fifth_method"},
+        {number: 8, file: "/path/to/file/6.rb", method: "sixth_method"}
+      ]
+    )
   end
 
-  let(:notice) { Fabricate :notice, backtrace: backtrace }
+  let(:notice) { create(:notice, backtrace: backtrace) }
 
   let(:problem) { notice.problem }
 
@@ -23,7 +25,7 @@ RSpec.describe NotificationServices::SlackService, type: :model do
   end
 
   let(:service) do
-    Fabricate(:slack_notification_service,
+    create(:slack_notification_service,
       app: notice.app,
       service_url: service_url,
       room_id: room_id)

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Comment, type: :model do
   context "validations" do
     it "should require a body" do
-      comment = Fabricate.build(:comment, body: nil)
+      comment = build(:comment, body: nil)
       expect(comment.valid?).to eq(false)
       expect(comment.errors[:body]).to include("can't be blank")
     end
@@ -13,14 +13,12 @@ RSpec.describe Comment, type: :model do
 
   context "notification_recipients" do
     let(:app) { create(:app) }
-    let!(:watcher) { Fabricate(:watcher, app: app) }
-    let(:err) { Fabricate(:problem, app: app) }
-    let(:comment_user) { Fabricate(:user, email: "author@example.com") }
-    let(:comment) { Fabricate.build(:comment, err: err, user: comment_user) }
+    let!(:watcher) { create(:watcher, app: app) }
+    let(:err) { create(:problem, app: app) }
+    let(:comment_user) { create(:user, email: "author@example.com") }
+    let(:comment) { build(:comment, err: err, user: comment_user) }
 
-    before do
-      Fabricate(:user_watcher, app: app, user: comment_user)
-    end
+    before { create(:user_watcher, app: app, user: comment_user) }
 
     it "includes app notification_recipients except user email" do
       expect(comment.notification_recipients).to eq([watcher.address])
@@ -29,14 +27,12 @@ RSpec.describe Comment, type: :model do
 
   context "emailable?" do
     let(:app) { create(:app, notify_on_errs: true) }
-    let!(:watcher) { Fabricate(:watcher, app: app) }
-    let(:err) { Fabricate(:problem, app: app) }
+    let!(:watcher) { create(:watcher, app: app) }
+    let(:err) { create(:problem, app: app) }
     let(:comment_user) { create(:user, email: "author@example.com") }
-    let(:comment) { Fabricate.build(:comment, err: err, user: comment_user) }
+    let(:comment) { build(:comment, err: err, user: comment_user) }
 
-    before do
-      Fabricate(:user_watcher, app: app, user: comment_user)
-    end
+    before { create(:user_watcher, app: app, user: comment_user) }
 
     it "should be true if app is emailable? and there are notification recipients" do
       expect(comment.emailable?).to eq(true)

@@ -3,9 +3,9 @@
 namespace :errbit do
   desc "Add a demo app & errors to your database (for testing)"
   task demo: :environment do
-    require "fabrication"
+    require "factory_bot_rails"
 
-    app = Fabricate(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
+    app = create(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
 
     # Report a number of errors for the application
     app.problems.delete_all
@@ -70,7 +70,7 @@ namespace :errbit do
       end
     end
 
-    Fabricate(:notice, err: Fabricate(:err, problem: Fabricate(:problem, app: app)))
+    create(:notice, err: create(:err, problem: create(:problem, app: app)))
     puts "=== Created demo app: '#{app.name}', with example errors."
   end
 end

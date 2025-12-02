@@ -103,7 +103,6 @@ group :test do
   gem "rspec-activemodel-mocks"
   gem "mongoid-rspec"
   gem "pundit-matchers"
-  gem "fabrication"
   gem "capybara"
   gem "selenium-webdriver"
   gem "launchy"

@@ -4,9 +4,9 @@ require "rails_helper"
 
 RSpec.describe NotificationServices::GtalkService, type: :model do
   it "should send a notification to gtalk" do
-    notice = Fabricate(:notice)
+    notice = create(:notice)
     notice.problem
-    notification_service = Fabricate(:gtalk_notification_service, app: notice.app)
+    notification_service = create(:gtalk_notification_service, app: notice.app)
     problem = notice.problem
 
     gtalk = double("GtalkService")
@@ -35,8 +35,8 @@ https://#{Errbit::Config.host}/apps/#{problem.app.id}
   describe "multiple users_ids" do
     before do
       # setup
-      @notice = Fabricate(:notice)
-      @notification_service = Fabricate(:gtalk_notification_service, app: @notice.app)
+      @notice = create(:notice)
+      @notification_service = create(:gtalk_notification_service, app: @notice.app)
       @problem = @notice.problem
       @error_msg = "#{@problem.app.name}
 https://#{Errbit::Config.host}/apps/#{@problem.app.id}
@@ -94,9 +94,9 @@ https://#{Errbit::Config.host}/apps/#{@problem.app.id}
   end
 
   it "should send a notification to room only" do
-    notice = Fabricate :notice
+    notice = create(:notice)
     notice.problem
-    notification_service = Fabricate :gtalk_notification_service, app: notice.app
+    notification_service = create(:gtalk_notification_service, app: notice.app)
     problem = notice.problem
 
     gtalk = double("GtalkService")

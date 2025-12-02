@@ -77,7 +77,7 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
   end
 
   it "ignores notices for older api" do
-    app = Fabricate(:app, current_app_version: "2.0")
+    app = create(:app, current_app_version: "2.0")
     post :create, body: legit_body, params: {project_id: app.api_key, key: app.api_key}
     expect(response.body).to eq("Notice for old app version ignored")
     expect(Notice.count).to eq(0)

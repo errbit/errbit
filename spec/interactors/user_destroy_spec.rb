@@ -3,17 +3,10 @@
 require "rails_helper"
 
 RSpec.describe UserDestroy do
-  let(:app) do
-    Fabricate(
-      :app,
-      watchers: [
-        Fabricate.build(:user_watcher, user: user)
-      ]
-    )
-  end
-
   describe "#destroy" do
+    let!(:app) { create(:app) }
     let!(:user) { create(:user) }
+    let!(:user_watcher) { create(:user_watcher, app: app, user: user) }
 
     it "is expected to delete user" do
       expect do

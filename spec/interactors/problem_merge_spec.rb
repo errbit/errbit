@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe ProblemMerge do
-  let(:problem) { Fabricate(:problem_with_errs) }
+  let(:problem) { create(:problem_with_errs) }
 
-  let(:problem_1) { Fabricate(:problem_with_errs) }
+  let(:problem_1) { create(:problem_with_errs) }
 
   describe "#initialize" do
     it "failed if less than 2 uniq problem pass in args" do
@@ -34,9 +34,9 @@ RSpec.describe ProblemMerge do
 
     let(:merged_errs) { problem_1.errs }
 
-    let!(:notice) { Fabricate(:notice, err: first_errs.first) }
+    let!(:notice) { create(:notice, err: first_errs.first) }
 
-    let!(:notice_1) { Fabricate(:notice, err: merged_errs.first) }
+    let!(:notice_1) { create(:notice, err: merged_errs.first) }
 
     it "delete one of problem" do
       expect do
@@ -62,9 +62,9 @@ RSpec.describe ProblemMerge do
     end
 
     context "with problem with comment" do
-      let!(:comment) { Fabricate(:comment, err: problem) }
+      let!(:comment) { create(:comment, err: problem) }
 
-      let!(:comment_2) { Fabricate(:comment, err: problem_1, user: comment.user) }
+      let!(:comment_2) { create(:comment, err: problem_1, user: comment.user) }
 
       it "merge comment" do
         expect do

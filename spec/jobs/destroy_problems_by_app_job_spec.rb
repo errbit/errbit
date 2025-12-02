@@ -7,7 +7,7 @@ RSpec.describe DestroyProblemsByAppJob, type: :job do
 
   it "destroys all problems" do
     app = create(:app)
-    Fabricate(:problem, app: app)
+    create(:problem, app: app)
 
     expect do
       described_class.perform_later(app.id)

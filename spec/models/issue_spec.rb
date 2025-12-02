@@ -6,10 +6,10 @@ RSpec.describe Issue, type: :model do
   subject { described_class.new(problem: problem, user: user, body: body) }
 
   let(:problem) { notice.problem }
-  let(:notice) { Fabricate(:notice) }
+  let(:notice) { create(:notice) }
   let(:user) { create(:user, admin: true) }
   let(:issue_tracker) do
-    Fabricate(:issue_tracker).tap do |t|
+    create(:issue_tracker).tap do |t|
       t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
     end
   end
