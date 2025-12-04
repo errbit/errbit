@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Sign in and sign out with email and password", type: :system, retry: 3 do
-  let!(:user) { create(:user, password: "password") }
+  let!(:user) { create(:errbit_user, password: "password") }
 
   context "when user successful sign in and sign out" do
     it "is expected to sign in user and sign out" do

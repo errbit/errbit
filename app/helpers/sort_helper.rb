@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SortHelper
-  def link_for_sort(name, field = nil)
+  def link_for_sort(name, params_sort, params_order, all_errs, field = nil)
     field ||= name.underscore
     current = (params_sort == field)
     order = (current && (params_order == "asc")) ? "desc" : "asc"

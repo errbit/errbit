@@ -3,20 +3,22 @@
 require "rails_helper"
 
 RSpec.describe "apps/show.html.haml", type: :view do
-  let(:app) { stub_model(App) }
+  let(:app) { stub_model(Errbit::App) }
 
-  let(:user) { stub_model(User) }
+  let(:user) { stub_model(Errbit::User) }
 
   let(:action_bar) do
     view.content_for(:action_bar)
   end
 
   before do
-    allow(view).to receive(:app).and_return(app)
     allow(view).to receive(:all_errs).and_return(false)
     allow(view).to receive(:params_order).and_return("asc")
     allow(view).to receive(:params_sort).and_return("latest_notice_at")
+
     allow(controller).to receive(:current_user).and_return(user)
+
+    assign(:app, app)
   end
 
   describe "content_for :action_bar" do

@@ -9,7 +9,7 @@ RSpec.describe CommentsController, type: :controller do
     render_views
 
     before do
-      sign_in create(:user, admin: true)
+      sign_in create(:errbit_user, admin: true)
     end
 
     context "successful comment creation" do

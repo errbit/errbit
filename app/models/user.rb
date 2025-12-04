@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class User
-  PER_PAGE = 30
+  paginates_per 30
 
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise(*Errbit::Config.devise_modules)
+  # devise(*Errbit::Config.devise_modules)
 
   field :email
   field :github_login
@@ -56,7 +56,8 @@ class User
       return true if Errbit::Config.google_authorized_domains.blank?
 
       match_data = /.+@(?<domain>.+)$/.match(email)
-      return false if match_data.nil?
+
+      return false if match_data.blank?
 
       Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
     end
@@ -131,6 +132,34 @@ class User
     {
       id: id.to_s,
       name: name
+    }
+  end
+
+  # For migration from MongoDB to SQL store.
+  # TODO: remove after migration
+  def attributes_for_migration
+    {
+      bson_id: id,
+      email: email,
+      github_login: github_login,
+      github_oauth_token: github_oauth_token,
+      google_uid: google_uid,
+      name: name,
+      admin: admin,
+      per_page: per_page,
+      time_zone: time_zone,
+      encrypted_password: encrypted_password,
+      reset_password_token: reset_password_token,
+      reset_password_sent_at: reset_password_sent_at,
+      remember_created_at: remember_created_at,
+      sign_in_count: sign_in_count,
+      current_sign_in_at: current_sign_in_at,
+      last_sign_in_at: last_sign_in_at,
+      current_sign_in_ip: current_sign_in_ip,
+      last_sign_in_ip: last_sign_in_ip,
+      authentication_token: authentication_token,
+      created_at: created_at,
+      updated_at: updated_at
     }
   end
 
