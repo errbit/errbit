@@ -24,8 +24,8 @@ ENV RAILS_ENV="production" \
     BOOTSNAP_READONLY="true"
 
 RUN set -eux ; \
-    gem update --system "3.7.2" ; \
-    gem install bundler --version "2.7.2" --force
+    gem update --system "4.0.0" ; \
+    gem install bundler --version "4.0.0" --force
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -37,7 +37,7 @@ RUN set -eux ; \
     apt-get install --no-install-recommends -y build-essential git pkg-config libyaml-dev
 
 # Install application gems
-COPY Gemfile Gemfile.lock UserGemfile ./
+COPY .ruby-version Gemfile Gemfile.lock UserGemfile ./
 RUN set -eux ; \
     bundle install ; \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git ; \
