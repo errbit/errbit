@@ -37,7 +37,7 @@ RUN set -eux ; \
     apt-get install --no-install-recommends -y build-essential git pkg-config libyaml-dev
 
 # Install application gems
-COPY Gemfile Gemfile.lock UserGemfile ./
+COPY .ruby-version Gemfile Gemfile.lock UserGemfile ./
 RUN set -eux ; \
     bundle install ; \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git ; \
