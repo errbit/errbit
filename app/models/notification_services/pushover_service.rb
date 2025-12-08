@@ -25,11 +25,15 @@ module NotificationServices
     end
 
     def create_notification(problem)
-      # build the hoi client
-      notification = Rushover::Client.new(subdomain)
-
-      # send push notification to pushover
-      notification.notify(api_token, "#{notification_description problem}", priority: 1, title: "Errbit Notification", url: "https://#{Errbit::Config.host}/apps/#{problem.app.id}", url_title: "Link to error")
+      Pushover2::Message.new(
+        token: subdomain,
+        user: api_token,
+        message: notification_description(problem),
+        priority: 1,
+        title: "Errbit Notification",
+        url: "https://#{Errbit::Config.host}/apps/#{problem.app.id}",
+        url_title: "Link to error"
+      ).push
     end
   end
 end
