@@ -25,7 +25,6 @@ module NotificationServices
     end
 
     def create_notification(problem)
-      # build the hoi client
       notification = Rushover::Client.new(subdomain)
 
       # send push notification to pushover
