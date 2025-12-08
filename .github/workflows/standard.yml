@@ -35,14 +35,4 @@ jobs:
           bundler: "latest"
           bundler-cache: true
 
-      - run: |
-          bin/standardrb \
-            app/controllers/users_controller.rb \
-            app/controllers/unlink_githubs_controller.rb \
-            app/controllers/unlink_googles_controller.rb \
-            app/interactors/user_destroy.rb \
-            spec/factories/app_factory.rb \
-            spec/factories/user_factory.rb \
-            spec/requests/users_controller_spec.rb \
-            spec/requests/unlink_githubs_controller_spec.rb \
-            spec/requests/unlink_googles_controller_spec.rb
+      - run: bin/standardrb

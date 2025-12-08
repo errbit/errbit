@@ -23,11 +23,11 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context "Linking a GitHub account to a signed in user" do
     before do
-      sign_in @user = create(:user)
+      sign_in @user = create(:errbit_user)
     end
 
     it "should show an error if another user already has that GitHub login" do
-      create(:user, github_login: "existing_user")
+      create(:errbit_user, github_login: "existing_user")
       stub_env_for_github_omniauth("existing_user")
       get :github
 
@@ -92,11 +92,11 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context "Linking a Google account to a signed in user" do
     before do
-      sign_in @user = create(:user)
+      sign_in @user = create(:errbit_user)
     end
 
     it "should show an error if another user already has that google login" do
-      create(:user, google_uid: "111111111111111111111")
+      create(:errbit_user, google_uid: "111111111111111111111")
       stub_env_for_google_omniauth("111111111111111111111")
       get :google_oauth2
 
@@ -113,5 +113,6 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
   end
 
+  # TODO: update this comment
   # See spec/acceptance/sign_in_with_github_spec.rb for 'Signing in with GitHub' integration tests.
 end

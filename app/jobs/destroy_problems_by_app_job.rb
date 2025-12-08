@@ -3,10 +3,8 @@
 class DestroyProblemsByAppJob < ApplicationJob
   queue_as :default
 
-  # @param app_id [String]
-  def perform(app_id)
-    app = App.find_by(id: app_id)
-
+  # @param app [Errbit::App]
+  def perform(app)
     ProblemDestroy.execute(app.problems)
   end
 end

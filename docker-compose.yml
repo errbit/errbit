@@ -1,5 +1,25 @@
+volumes:
+  mongo_data: {}
+  postgresql_data: {}
+
 services:
   mongo:
-    image: "mongo:8.2"
+    image: "docker.io/library/mongo:8.2"
+    container_name: "errbit_mongo"
+    restart: "unless-stopped"
+    volumes:
+      - "mongo_data:/data/db:rw"
     ports:
       - "27017:27017"
+
+  postgresql:
+    image: "docker.io/library/postgres:18"
+    container_name: "errbit_postgresql"
+    restart: "unless-stopped"
+    volumes:
+      - "postgresql_data:/var/lib/postgresql/data:rw"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      PGDATA: "/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
