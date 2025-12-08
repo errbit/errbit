@@ -53,14 +53,14 @@ module NotificationServices
         # has to look like this to be formatted properly in the client
         message = "#{problem.app.name}\n" \
           "https://#{Errbit::Config.host}/apps/#{problem.app.id}\n" \
-          "#{notification_description problem}"
+          "#{notification_description(problem)}"
 
         # post the issue to the xmpp room(s)
         send_to_users(client, message) if user_id.present?
         send_to_muc(client, message) if room_id.present?
       end
     ensure
-      client.close unless client.nil?
+      client&.close
     end
 
     private
