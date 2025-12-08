@@ -51,8 +51,8 @@ gem "campy"
 gem "xmpp4r", require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
 gem "hoi"
-# Pushover (iOS Push notifications)
-gem "rushover"
+# Pushover (iOS/Android Push notifications)
+gem "pushover2", git: "https://github.com/biow0lf/pushover2.git", branch: "main"
 # Hubot
 gem "httparty"
 
