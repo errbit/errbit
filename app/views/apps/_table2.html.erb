@@ -19,7 +19,21 @@
 
   <tbody>
     <% apps.each do |app| %>
+      <tr>
+        <td class="name"><%= link_to(app.name, app_path(app)) %></td>
 
+        <% if any_github_repos? || any_bitbucket_repos? %>
+          <td class="github_repo">
+            <% if app.github_repo? %>
+              <%= link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer") %>
+            <% end %>
+            <% if app.bitbucket_repo? %>
+              <%= link_to(app.bitbucket_repo, app.bitbucket_url, target: "_blank", rel: "noopener noreferrer") %>
+            <% end %>
+          </td>
+        <% end %>
+
+      </tr>
     <% end %>
 
     <% if apps.none? %>

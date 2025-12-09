@@ -15,7 +15,7 @@
     - apps.each do |app|
       %tr
         %td.name= link_to(app.name, app_path(app))
-        - if any_github_repos? or any_bitbucket_repos?
+        - if any_github_repos? || any_bitbucket_repos?
           %td.github_repo
             - if app.github_repo?
               = link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer")
