@@ -10,5 +10,17 @@
         <%= render "shared/session" %>
       </div>
     </div>
+
+    <div id="content-wrapper">
+
+    </div>
+
+    <div id="footer">
+      <%= t(".powered_html", link: link_to(t(".errbit"), "https://github.com/errbit/errbit", target: "_blank")) %>
+      <br>
+      <%= Errbit::Version %>
+    </div>
+
+    <%= yield :scripts %>
   </body>
 </html>
