@@ -33,6 +33,41 @@
           </td>
         <% end %>
 
+        <% if any_notification_services? %>
+          <td class="notification_service">
+            <% if app.notification_service_configured? %>
+              <% notification_service_img = image_tag("#{app.notification_service.label}_goto.png") %>
+
+              <% if app.notification_service.url %>
+                <%= link_to(notification_service_img, app.notification_service.url, target: "_blank", rel: "noopener noreferrer") %>
+              <% else %>
+                <%= notification_service_img %>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+
+        <% if any_issue_trackers? %>
+          <td class="issue_tracker">
+            <% if app.issue_tracker_configured? %>
+              <% tracker_img = image_tag(app.issue_tracker.type.icons[:goto]) %>
+
+              <% if app.issue_tracker.url %>
+                <%= link_to(tracker_img, app.issue_tracker.url) %>
+              <% else %>
+                <%= tracker_img %>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+
+        <td class="count">
+          <% if app.problem_count > 0 %>
+            <% unresolved = app.unresolved_count %>
+
+            <%= link_to(unresolved, app_path(app), class: (unresolved == 0 ? "resolved" : "")) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
 
