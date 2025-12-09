@@ -1,0 +1,13 @@
+<% content_for :title, t(".title") %>
+
+<% content_for :action_bar do %>
+  <%= link_to_copy_attributes_from_other_app %>
+
+  <%= link_to(t(".cancel"), apps_path, class: "button") %>
+<% end %>
+
+<%= form_for app_decorate do |f| %>
+  <%= render "fields", f: f, app: app %>
+
+  <div class="buttons"><%= f.submit t(".add_app") %></div>
+<% end %>

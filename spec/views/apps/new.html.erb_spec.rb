@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "apps/edit.html.haml", type: :view do
+RSpec.describe "apps/new.html.erb", type: :view do
   let(:app) { stub_model(App) }
 
   let(:app_decorate) { AppDecorator.new(app) }
@@ -18,26 +18,10 @@ RSpec.describe "apps/edit.html.haml", type: :view do
       view.content_for(:action_bar)
     end
 
-    it "should confirm the 'reset' link" do
+    it "should confirm the 'cancel' link" do
       render
 
-      expect(action_bar).to have_selector(
-        format(
-          'a.button[data-confirm="%s"]',
-          I18n.t("apps.confirm_destroy_all_problems")
-        )
-      )
-    end
-
-    it "should confirm the 'destroy' link" do
-      render
-
-      expect(action_bar).to have_selector(
-        format(
-          'a.button[data-confirm="%s"]',
-          I18n.t("apps.confirm_delete")
-        )
-      )
+      expect(action_bar).to have_selector("a.button", text: "cancel")
     end
   end
 
