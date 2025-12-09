@@ -30,6 +30,12 @@
         <h1><%= yield :title %></h1>
 
         <span class="meta"><%= yield :meta %></span>
+
+        <% if (action_bar = yield(:action_bar)).present? %>
+          <div id="action-bar">
+            <%= action_bar %>
+          </div>
+        <% end %>
       </div>
 
       <div id="content">
