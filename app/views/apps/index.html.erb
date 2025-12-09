@@ -1,0 +1,24 @@
+<% content_for :title, t(".title") %>
+
+<% content_for :action_bar do %>
+  <% if current_user.admin? %>
+    <span>
+      <%= link_to(new_app_path) do %>
+        <i class="fa fa-plus-circle"></i>
+        <%= t(".new_app") %>
+      <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+<section>
+  <%= render "apps/search" %>
+</section>
+
+<br>
+
+<section>
+  <div id="app_table" class="app_table">
+    <%= render "apps/table", apps: apps %>
+  </div>
+</section>
