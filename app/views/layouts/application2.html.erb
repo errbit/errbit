@@ -12,7 +12,21 @@
     </div>
 
     <div id="content-wrapper">
+      <div id="content-title">
 
+      </div>
+
+      <div id="content">
+        <%= render "shared/flash_messages" %>
+
+        <%= yield %>
+      </div>
+
+      <% if content_for?(:comments) %>
+        <div id="content-comments">
+          <%= yield :comments %>
+        </div>
+      <% end %>
     </div>
 
     <div id="footer">
