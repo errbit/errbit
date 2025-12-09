@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      <%= t(".title") %>
+      &mdash;
+      <%= yield(:page_title).present? ? yield(:page_title) : yield(:title) %>
+    </title>
+
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+    <%= favicon_link_tag %>
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag :application %>
+    <%= javascript_include_tag :application %>
+
+    <%= yield :head %>
+  </head>
+  <body id="<%= controller.controller_name %>" class="<%= controller.action_name %>">
+    <div id="header">
+      <div>
+        <%= link_to t(".errbit"), root_path, id: "site-name" %>
+        <%= render "shared/navigation" if current_user %>
+        <%= render "shared/session" %>
+      </div>
+    </div>
+
+    <div id="content-wrapper">
+      <div id="content-title" class="<%= yield :title_css_class %>" style="<%= yield :title_style %>">
+        <h1><%= yield :title %></h1>
+
+        <span class="meta"><%= yield :meta %></span>
+
+        <% if (action_bar = yield(:action_bar)).present? %>
+          <div id="action-bar">
+            <%= action_bar %>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="content">
+        <%= render "shared/flash_messages" %>
+
+        <%= yield %>
+      </div>
+
+      <% if content_for?(:comments) %>
+        <div id="content-comments">
+          <%= yield :comments %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="footer">
+      <%= t(".powered_html", link: link_to(t(".errbit"), "https://github.com/errbit/errbit", target: "_blank")) %>
+      <br>
+      <%= Errbit::Version %>
+    </div>
+
+    <%= yield :scripts %>
+  </body>
+</html>
