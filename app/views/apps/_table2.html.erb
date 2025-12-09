@@ -23,7 +23,14 @@
     <% end %>
 
     <% if apps.none? %>
-
+      <tr>
+        <td colspan="3">
+          <em>
+            <%= t(".no_apps") %>
+            <%= link_to(t(".click_to_create"), new_app_path) %>
+          </em>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
