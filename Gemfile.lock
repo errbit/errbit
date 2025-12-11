@@ -194,7 +194,7 @@ GEM
       railties (>= 3.2, < 9.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    haml (7.0.2)
+    haml (7.1.0)
       temple (>= 0.8.2)
       thor
       tilt
@@ -807,7 +807,7 @@ CHECKSUMS
   ffi (1.17.2-x86_64-linux-musl) sha256=97c0eb3981414309285a64dc4d466bd149e981c279a56371ef811395d68cb95c
   font-awesome-rails (4.7.0.9) sha256=b45044908fbf3178b8d84fbae415dae4b9bf847612bcb1170d88ed13842c8732
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
-  haml (7.0.2) sha256=c5b47858dddf533c182f5e80d00fa1768c8b01708611de8e20418a50720c03aa
+  haml (7.1.0) sha256=aed691bddcaaf4855398b3e4dd39d8590600b0f0151f4def1c2aa83bfd444248
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
   hashie (5.0.0) sha256=9d6c4e51f2a36d4616cbc8a322d619a162d8f42815a792596039fc95595603da
   herb (0.8.4) sha256=0255052f9b5ee64baadba7aacd05a022c30f78faa2f1962e09adf1735faabef6
