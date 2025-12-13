@@ -73,3 +73,9 @@
     </tr>
   </table>
 </div>
+
+<script>
+  $.ajax({url: "<%= xhr_sparkline_app_problem_path(app_id: notice.app.id, id: problem.id) %>"}).then(function(response) {
+    $("#sparkline-placeholder").replaceWith(response);
+  });
+</script>
