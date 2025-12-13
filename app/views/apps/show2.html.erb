@@ -79,3 +79,27 @@
     </table>
   <% end %>
 </div>
+
+<% if app.github_repo? %>
+  <h3 id="repository_toggle">
+    <%= t(".repository") %>
+
+    <span class="click_span"><%= t(".show_hide") %></span>
+  </h3>
+
+  <div id="repository_div">
+    <table class="repository">
+      <thead>
+        <tr>
+          <th><%= t(".github_repo") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer") %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
