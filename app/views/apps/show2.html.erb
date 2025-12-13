@@ -7,4 +7,19 @@
 <% end %>
 
 <% content_for :meta do %>
+  <% if app.current_app_version.present? %>
+    <strong><%= "Latest App Version:" %></strong>
+
+    <%= app.current_app_version %>
+  <% end %>
+
+  <strong><%= t(".errors_caught") %></strong>
+  <%= app.problems.count %>
+
+  <strong><%= t(".api_key") %></strong>
+  <%= app.api_key %>
+<% end %>
+
+<% content_for :action_bar do %>
+
 <% end %>
