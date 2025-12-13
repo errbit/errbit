@@ -119,5 +119,7 @@
     </div>
   </section>
 <% else %>
+  <h3 class="clear"><%= t(".no_error_yet") %></h3>
 
+  <%= render "configuration_instructions_wrapper", app: app %>
 <% end %>
