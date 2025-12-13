@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "notices/_summary.html.haml", type: :view do
+RSpec.describe "notices/_summary.html.erb", type: :view do
   let(:notice) { create(:notice, framework: "Rails 3.2.11") }
 
   it "renders application framework" do

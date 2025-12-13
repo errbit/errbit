@@ -1,0 +1,81 @@
+<%# locals: (notice:, problem:) %>
+
+<div class="window">
+  <table class="summary">
+    <tr>
+      <th><%= t(".message") %></th>
+      <td class="main nowrap"><%= message_graph(problem) %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".error_class") %></th>
+      <td><%= notice.error_class %></td>
+    </tr>
+
+    <% if notice.request["url"].present? %>
+      <tr>
+        <th><%= t(".url") %></th>
+        <td class="nowrap"><%= link_to notice.request["url"], notice.request["url"] %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <th><%= t(".where") %></th>
+      <td><%= notice.where %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".occurred") %></th>
+      <td><%= notice.created_at.to_fs(:precise) %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".similar") %></th>
+      <td><%= problem.notices_count - 1 %></td>
+    </tr>
+
+    <tr id="sparkline-placeholder"></tr>
+
+    <tr>
+      <th><%= t(".browser") %></th>
+      <td><%= user_agent_graph(problem) %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".tenant") %></th>
+      <td><%= tenant_graph(problem) %></td>
+    </tr>
+
+    <% if notice.server_environment && notice.server_environment["hostname"] %>
+      <tr>
+        <th><%= t(".app_server") %></th>
+        <td><%= notice.server_environment && notice.server_environment["hostname"] %></td>
+      </tr>
+    <% end %>
+
+    <% if notice.app_version.present? %>
+      <tr>
+        <th><%= t(".app_version") %></th>
+        <td><%= notice.app_version %></td>
+      </tr>
+    <% end %>
+
+    <% if notice.framework %>
+      <tr>
+        <th><%= t(".framework") %></th>
+        <td><%= notice.framework %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <th><%= t(".relative_directory") %></th>
+      <td><%= notice.server_environment && notice.server_environment["project-root"] %></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+  $.ajax({url: "<%= xhr_sparkline_app_problem_path(app_id: notice.app.id, id: problem.id) %>"}).then(function(response) {
+    $("#sparkline-placeholder").replaceWith(response);
+  });
+</script>
