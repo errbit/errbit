@@ -11,5 +11,12 @@
       <th><%= t(".error_class") %></th>
       <td><%= notice.error_class %></td>
     </tr>
+
+    <% if notice.request["url"].present? %>
+      <tr>
+        <th><%= t(".url") %></th>
+        <td class="nowrap"><%= link_to notice.request["url"], notice.request["url"] %></td>
+      </tr>
+    <% end %>
   </table>
 </div>
