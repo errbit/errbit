@@ -1,4 +1,15 @@
 <%# locals: (notice:, problem:) %>
 
 <div class="window">
+  <table class="summary">
+    <tr>
+      <th><%= t(".message") %></th>
+      <td class="main nowrap"><%= message_graph(problem) %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".error_class") %></th>
+      <td><%= notice.error_class %></td>
+    </tr>
+  </table>
 </div>
