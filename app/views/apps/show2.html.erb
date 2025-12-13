@@ -21,5 +21,29 @@
 <% end %>
 
 <% content_for :action_bar do %>
+  <% if current_user.admin? %>
+    <%= link_to t(".edit"), edit_app_path(app), class: "button" %>
+  <% end %>
 
+  <% if all_errs %>
+    <%= link_to t(".unresolved_errs"), app_path(app, sort: params_sort, order: params_order), class: "button" %>
+  <% else %>
+    <%= link_to t(".all_errs"), app_path(app, all_errs: true, sort: params_sort, order: params_order), class: "button" %>
+  <% end %>
+
+  <% if app.watched_by?(current_user) %>
+    <%= link_to t(".unwatch"), app_watchers_path(app_id: app), method: :delete, class: "button" %>
+  <% else %>
+    <%= link_to t(".watch"), app_watchers_path(app_id: app), method: :post, class: "button" %>
+  <% end %>
 <% end %>
+
+<h3 id="watchers_toggle">
+  <%= t(".watchers") %>
+
+  <span class="click_span"><%= t(".show_hide") %></span>
+</h3>
+
+<div id="watchers_div">
+
+</div>
