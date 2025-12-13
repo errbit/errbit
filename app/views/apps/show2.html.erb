@@ -45,5 +45,37 @@
 </h3>
 
 <div id="watchers_div">
+  <% if app.notify_all_users %>
+    <table class="watchers">
+      <thead>
+        <tr>
+          <th><%= t(".all_users_notified") %></th>
+        </tr>
+      </thead>
+    </table>
+  <% else %>
+    <table class="watchers">
+      <thead>
+        <tr>
+          <th><%= t(".user_or_email") %></th>
+        </tr>
+      </thead>
 
+      <tbody>
+        <% app.watchers.each do |watcher| %>
+          <tr>
+            <td><%= watcher.label %></td>
+          </tr>
+        <% end %>
+
+        <% if app.watchers.none? %>
+          <tr>
+            <td>
+              <em><%= t(".no_watchers") %></em>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
