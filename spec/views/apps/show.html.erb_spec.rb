@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "apps/show.html.haml", type: :view do
+RSpec.describe "apps/show.html.erb", type: :view do
   let(:app) { stub_model(App) }
 
   let(:user) { stub_model(User) }
