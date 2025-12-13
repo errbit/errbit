@@ -45,5 +45,31 @@
       <th><%= t(".tenant") %></th>
       <td><%= tenant_graph(problem) %></td>
     </tr>
+
+    <% if notice.server_environment && notice.server_environment["hostname"] %>
+      <tr>
+        <th><%= t(".app_server") %></th>
+        <td><%= notice.server_environment && notice.server_environment["hostname"] %></td>
+      </tr>
+    <% end %>
+
+    <% if notice.app_version.present? %>
+      <tr>
+        <th><%= t(".app_version") %></th>
+        <td><%= notice.app_version %></td>
+      </tr>
+    <% end %>
+
+    <% if notice.framework %>
+      <tr>
+        <th><%= t(".framework") %></th>
+        <td><%= notice.framework %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <th><%= t(".relative_directory") %></th>
+      <td><%= notice.server_environment && notice.server_environment["project-root"] %></td>
+    </tr>
   </table>
 </div>
