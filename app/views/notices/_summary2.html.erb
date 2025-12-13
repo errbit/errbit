@@ -18,5 +18,20 @@
         <td class="nowrap"><%= link_to notice.request["url"], notice.request["url"] %></td>
       </tr>
     <% end %>
+
+    <tr>
+      <th><%= t(".where") %></th>
+      <td><%= notice.where %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".occurred") %></th>
+      <td><%= notice.created_at.to_fs(:precise) %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".similar") %></th>
+      <td><%= problem.notices_count - 1 %></td>
+    </tr>
   </table>
 </div>
