@@ -33,5 +33,17 @@
       <th><%= t(".similar") %></th>
       <td><%= problem.notices_count - 1 %></td>
     </tr>
+
+    <tr id="sparkline-placeholder"></tr>
+
+    <tr>
+      <th><%= t(".browser") %></th>
+      <td><%= user_agent_graph(problem) %></td>
+    </tr>
+
+    <tr>
+      <th><%= t(".tenant") %></th>
+      <td><%= tenant_graph(problem) %></td>
+    </tr>
   </table>
 </div>
