@@ -60,11 +60,11 @@
 <h3>Environment</h3>
 
 <table>
-  <% for key, val in notice.env_vars %>
+  <% for key, value in notice.env_vars %>
     <tr>
       <td><%= h(key) %></td>
 
-      <td><%= h(val) %></td>
+      <td><%= h(value) %></td>
     </tr>
   <% end %>
 </table>
