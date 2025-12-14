@@ -56,3 +56,15 @@
     </tr>
   <% end %>
 </table>
+
+<h3>Environment</h3>
+
+<table>
+  <% for key, val in notice.env_vars %>
+    <tr>
+      <td><%= h(key) %></td>
+
+      <td><%= h(val) %></td>
+    </tr>
+  <% end %>
+</table>
