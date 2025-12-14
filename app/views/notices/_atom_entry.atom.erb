@@ -1,3 +1,11 @@
 <h2><%= notice.message %></h2>
 
 <h3>Summary</h3>
+
+<% if notice.request["url"].present? %>
+  <p>
+    <strong>URL:</strong>
+
+    <%= link_to(notice.request["url"], notice.request["url"]) %>
+  </p>
+<% end %>
