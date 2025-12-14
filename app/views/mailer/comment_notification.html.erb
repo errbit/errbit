@@ -26,3 +26,23 @@
     </table>
   </td>
 </tr>
+
+<tr>
+  <td class="section">
+    <table cellpadding="0" cellspacing="0" border="0" align="left">
+      <tbody>
+        <tr>
+          <td class="content" valign="top">
+            <div>
+              <p class="heading">COMMENT:</p>
+
+              <br>
+
+              <p><%= @comment.body.to_s.gsub("\n", "<br>").html_safe %></p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
