@@ -10,10 +10,35 @@
 
 <% unless app.new_record? %>
   <div>
-    <label><%= t(".api_key") %>></label>
+    <label><%= t(".api_key") %></label>
 
     <span><%= app.api_key %></span>
 
     <%= link_to(t(".regenerate_api_key"), regenerate_api_key_app_path(app), class: "button", method: :post) %>
   </div>
 <% end %>
+
+<div>
+  <%= f.label :repository_branch, t(".repository_branch") %>
+
+  <%= f.text_field :repository_branch, placeholder: "e.g. main" %>
+</div>
+
+<div>
+  <%= f.label :github_repo, t(".github_repo") %>
+
+  <%= f.text_field :github_repo, placeholder: "e.g. errbit/errbit for https://github.com/errbit/errbit" %>
+</div>
+
+<div>
+  <%= f.label :bitbucket_repo, t(".bitbucket_repo") %>
+
+  <%= f.text_field :bitbucket_repo, placeholder: "e.g. errbit/errbit for https://bitbucket.org/errbit/errbit" %>
+</div>
+
+<div>
+  <%= f.label :custom_backtrace_url_template, t(".custom_backtrace_url_template") %>
+
+  <%= f.text_field :custom_backtrace_url_template, placeholder: "e.g. https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}" %>
+</div>
+
