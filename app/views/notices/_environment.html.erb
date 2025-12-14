@@ -1,0 +1,14 @@
+<%# locals: (notice:) %>
+
+<div class="window">
+  <table class="environment">
+    <% html_entities = HTMLEntities.new %>
+
+    <% notice.env_vars.sort_by {|pair| pair[0]}.each do |key, value| %>
+      <tr>
+        <th><%= h(html_entities.decode(key)) %></th>
+        <td class="main"><%= h(html_entities.decode(value)) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

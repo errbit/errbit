@@ -1,0 +1,70 @@
+<h2><%= notice.message %></h2>
+
+<h3>Summary</h3>
+
+<% if notice.request["url"].present? %>
+  <p>
+    <strong>URL:</strong>
+
+    <%= link_to(notice.request["url"], notice.request["url"]) %>
+  </p>
+<% end %>
+
+<p>
+  <strong>Where:</strong>
+
+  <%= notice.where %>
+</p>
+
+<p>
+  <strong>Occurred:</strong>
+
+  <%= notice.created_at.to_fs(:micro) %>
+</p>
+
+<p>
+  <strong>Similar:</strong>
+
+  <%= notice.problem.notices_count - 1 %>
+</p>
+
+<h3>Params</h3>
+
+<p>
+  <%= pretty_hash(notice.params) %>
+</p>
+
+<h3>Session</h3>
+
+<p>
+  <%= pretty_hash(notice.session) %>
+</p>
+
+<h3>Backtrace</h3>
+
+<table>
+  <% for line in notice.backtrace_lines %>
+    <tr>
+      <td>
+        <%= "#{line["number"]}:" %>
+        &nbsp;&nbsp;
+      </td>
+
+      <td>
+        <%= raw "#{h line["file_relative"]} -> #{content_tag :strong, h(line["method"])}" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Environment</h3>
+
+<table>
+  <% for key, value in notice.env_vars %>
+    <tr>
+      <td><%= h(key) %></td>
+
+      <td><%= h(value) %></td>
+    </tr>
+  <% end %>
+</table>
