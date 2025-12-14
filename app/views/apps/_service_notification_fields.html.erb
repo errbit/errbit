@@ -1,0 +1,51 @@
+<fieldset>
+  <legend>Notification Service</legend>
+
+  <%= f.fields_for :notification_service do |w| %>
+    <div class="notification_service nested">
+      <div class="choose">
+        <%= label_tag :type_none, for: label_for_attr(w, "type_notificationservice"), class: "label_radio none" do %>
+          <%= w.radio_button :type, "NotificationService", "data-section" => "none" %>
+
+          (None)
+        <% end %>
+
+        <% NotificationService.subclasses.each do |notification_service| %>
+          <%= label_tag "type_#{notification_service.label}:", for: label_for_attr(w, "type_#{notification_service.name.downcase.gsub(":", "")}"), class: "label_radio #{notification_service.label}" do %>
+            <%= w.radio_button :type, notification_service.name, "data-section" => notification_service.label %>
+
+            <%= notification_service.name[/::(.*)Service/,1].titleize %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="notification_params none <%= (w.object && !(w.object.class < NotificationService)) ? "chosen" : "" %>"></div>
+
+      <% NotificationService.subclasses.each do |notification_service| %>
+        <div class="notification_params <%= "#{w.object.is_a?(notification_service) ? "chosen" : ""} #{notification_service.label}" %>">
+          <% notification_service::FIELDS.each do |field, field_info| %>
+            <%= w.label field, field_info[:label] || field.to_s.titleize %>
+
+            <% if field_info[:hint].present? %>
+              <em><%= field_info[:hint] %></em>
+            <% end %>
+
+            <% field_type = field == :password ? :password_field : :text_field %>
+
+            <% value = field == :notify_at_notices ? w.object.notify_at_notices.join(", ") : w.object.send(field) %>
+
+            <%= w.send field_type, field, placeholder: field_info[:placeholder], value: value %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="image_preloader">
+        <% (NotificationService.subclasses.map{|t| t.label } << "none").each do |notification_service| %>
+          <%= image_tag "#{notification_service}_inactive.png" %>
+
+          <%= image_tag "#{notification_service}_create.png" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</fieldset>
