@@ -1,0 +1,23 @@
+<fieldset>
+  <legend>Notification Service</legend>
+
+  <%= f.fields_for :notification_service do |w| %>
+    <div class="notification_service nested">
+      <div class="choose">
+        <%= label_tag :type_none, for: label_for_attr(w, "type_notificationservice"), class: "label_radio none" do %>
+          <%= w.radio_button :type, "NotificationService", "data-section" => "none" %>
+
+          (None)
+        <% end %>
+
+        <% NotificationService.subclasses.each do |notification_service| %>
+          <%= label_tag "type_#{notification_service.label}:", for: label_for_attr(w, "type_#{notification_service.name.downcase.gsub(":", "")}"), class: "label_radio #{notification_service.label}" do %>
+            <%= w.radio_button :type, notification_service.name, "data-section" => notification_service.label %>
+
+            <%= notification_service.name[/::(.*)Service/,1].titleize %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</fieldset>
