@@ -57,3 +57,23 @@
 
   <%= f.text_field :current_app_version, placeholder: t(".latest_app_version_placeholder") %>
 </div>
+
+<fieldset>
+  <legend><%= t(".notifications") %></legend>
+
+  <div class="checkbox">
+    <%= f.check_box :notify_on_errs, "data-show-when-checked" => ".email_at_notices_nested" %>
+
+    <%= f.label :notify_on_errs, t(".notify_on_errors") %>
+  </div>
+
+  <% if Errbit::Config.per_app_email_at_notices %>
+    <div class="email_at_notices_nested" style="<%= app_decorate.notify_err_display %>">
+      <div class="field-helpertext">Send a notification every</div>
+
+      <%= f.text_field :email_at_notices, value: app_decorate.email_at_notices %>
+
+      <div class="field-helpertext">times an error occurs (comma separated).</div>
+    </div>
+  <% end %>
+</fieldset>
