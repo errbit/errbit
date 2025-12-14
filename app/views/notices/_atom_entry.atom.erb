@@ -33,3 +33,26 @@
 <p>
   <%= pretty_hash(notice.params) %>
 </p>
+
+<h3>Session</h3>
+
+<p>
+  <%= pretty_hash(notice.session) %>
+</p>
+
+<h3>Backtrace</h3>
+
+<table>
+  <% for line in notice.backtrace_lines %>
+    <tr>
+      <td>
+        <%= "#{line["number"]}:" %>
+        &nbsp;&nbsp;
+      </td>
+
+      <td>
+        <%= raw "#{h line["file_relative"]} -> #{content_tag :strong, h(line["method"])}" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
