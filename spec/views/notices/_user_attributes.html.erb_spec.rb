@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "notices/_user_attributes.html.haml", type: :view do
+RSpec.describe "notices/_user_attributes.html.erb", type: :view do
   describe "autolink" do
     let(:notice) do
       user_attributes = {"foo" => {"bar" => "https://example.com"}}
