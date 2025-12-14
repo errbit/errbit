@@ -46,3 +46,43 @@
     </table>
   </td>
 </tr>
+
+<tr>
+  <td class="section">
+    <table cellpadding="0" cellspacing="0" border="0" align="left">
+      <tbody>
+        <tr>
+          <td class="content" valign="top">
+            <div>
+              <p class="heading">ERROR MESSAGE:</p>
+
+              <p><%= @problem.message %></p>
+
+              <p class="heading">WHERE:</p>
+
+              <p class="monospace">
+                <%= @problem.where %>
+              </p>
+
+              <p class="heading">URL:</p>
+
+              <p class="monospace">
+                <% if @notice.request["url"].present? %>
+                  <%= link_to @notice.request["url"], @notice.request["url"] %>
+                <% end %>
+              </p>
+
+              <p class="heading">BROWSER:</p>
+
+              <p class="monospace">
+                <%= user_agent_graph(@problem) %>
+              </p>
+
+              <br>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
