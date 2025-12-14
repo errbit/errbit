@@ -9,3 +9,27 @@
     <%= link_to(notice.request["url"], notice.request["url"]) %>
   </p>
 <% end %>
+
+<p>
+  <strong>Where:</strong>
+
+  <%= notice.where %>
+</p>
+
+<p>
+  <strong>Occurred:</strong>
+
+  <%= notice.created_at.to_fs(:micro) %>
+</p>
+
+<p>
+  <strong>Similar:</strong>
+
+  <%= notice.problem.notices_count - 1 %>
+</p>
+
+<h3>Params</h3>
+
+<p>
+  <%= pretty_hash(notice.params) %>
+</p>
