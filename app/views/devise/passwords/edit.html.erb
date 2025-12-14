@@ -1,0 +1,23 @@
+<% content_for :title, "Change your password" %>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :patch }) do |f| %>
+  <%= errors_for resource %>
+
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="required">
+    <%= f.label :password, "New password" %>
+
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="required">
+    <%= f.label :password_confirmation, "Type your new password again" %>
+
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+
+
+  %div.buttons= f.submit "Change my password"
+<% end %>
