@@ -77,3 +77,28 @@
     </div>
   <% end %>
 </fieldset>
+
+<fieldset>
+  <legend><%= t("notice_fingerprinter.title") %></legend>
+
+  <p><%= t("notice_fingerprinter.text") %></p>
+
+  <div class="checkbox">
+    <%= f.check_box :use_site_fingerprinter, "data-hide-when-checked" => ".custom_notice_fingerprinter" %>
+
+    <%= f.label :use_site_fingerprinter, t(".use_site_fingerprinter") %>
+
+    <div class="custom_notice_fingerprinter" style="<%= app_decorate.custom_notice_fingerprinter_style %>">
+      <%= render "shared/notice_fingerprinter", f: f %>
+    </div>
+  </div>
+</fieldset>
+
+<div class="checkbox">
+  <%= f.check_box :notify_all_users %>
+
+  <%= f.label :notify_all_users, t(".notify_all_users") %>
+</div>
+
+<%#= render "issue_tracker_fields", f: f %>
+<%#= render "service_notification_fields", f: f %>
