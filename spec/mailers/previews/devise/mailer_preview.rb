@@ -6,10 +6,11 @@ module Devise
     end
 
     def reset_password_instructions
-      user = FactoryBot.create(:user, reset_password_token: "token-123")
+      resource = FactoryBot.create(:user, reset_password_token: "token-123")
 
-      @resource = user
-      @token = user.reset_password_token
+      token = resource.reset_password_token
+
+      Devise::Mailer.reset_password_instructions(resource, token)
     end
 
     def unlock_instructions
