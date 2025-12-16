@@ -4,7 +4,7 @@ class MailerPreview < ActionMailer::Preview
   def err_notification
     error_report = nil
 
-    Mailer.err_notification(error_report)
+    Mailer.with(error_report: error_report).err_notification
   end
 
   def comment_notification
@@ -12,6 +12,6 @@ class MailerPreview < ActionMailer::Preview
     # problem
     comment = FactoryBot.create(:comment, user: user)
 
-    Mailer.comment_notification(comment)
+    Mailer.with(comment: comment).comment_notification
   end
 end

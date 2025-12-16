@@ -81,7 +81,7 @@ RSpec.describe Problem, type: :model do
     context "when the app has err notifications set to false" do
       it "should not send an email notification" do
         app = create(:app_with_watcher, notify_on_errs: false)
-        expect(Mailer).not_to receive(:err_notification)
+        expect(Mailer).not_to receive(:with)
         create(:problem, app: app)
       end
     end
