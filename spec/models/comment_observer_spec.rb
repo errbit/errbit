@@ -10,9 +10,13 @@ RSpec.describe "Callback on Comment", type: :model do
       before { allow(comment).to receive(:emailable?).and_return(true) }
 
       it "should send an email notification" do
-        expect(Mailer).to receive(:comment_notification)
-          .with(comment)
-          .and_return(double("email", deliver_now: true))
+        expect(Mailer).to receive(:with).with(comment: comment) do
+          double.tap do |a|
+            expect(a).to receive(:comment_notification)
+              .and_return(double("email", deliver_now: true))
+          end
+        end
+
         comment.save
       end
     end
@@ -21,7 +25,8 @@ RSpec.describe "Callback on Comment", type: :model do
       before { allow(comment).to receive(:emailable?).and_return(false) }
 
       it "should not send an email notification" do
-        expect(Mailer).not_to receive(:comment_notification)
+        expect(Mailer).not_to receive(:with)
+
         comment.save
       end
     end

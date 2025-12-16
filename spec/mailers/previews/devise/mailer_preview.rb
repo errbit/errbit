@@ -2,23 +2,12 @@
 
 module Devise
   class MailerPreview < ActionMailer::Preview
-    def confirmation_instructions
-    end
-
     def reset_password_instructions
-      user = FactoryBot.create(:user, reset_password_token: "token-123")
+      record = FactoryBot.create(:user, reset_password_token: "reset-password-token")
 
-      @resource = user
-      @token = user.reset_password_token
-    end
+      token = record.reset_password_token
 
-    def unlock_instructions
-    end
-
-    def email_changed
-    end
-
-    def password_change
+      Devise::Mailer.reset_password_instructions(record, token)
     end
   end
 end

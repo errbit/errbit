@@ -68,7 +68,7 @@ RSpec.describe Mailer do
     end
 
     let(:email) do
-      Mailer.err_notification(error_report).deliver_now
+      Mailer.with(error_report: error_report).err_notification.deliver_now
     end
 
     before { email }
@@ -116,7 +116,7 @@ RSpec.describe Mailer do
     before do
       expect(comment).to receive(:notification_recipients).and_return(recipients)
       create(:notice, err: notice.err)
-      @email = Mailer.comment_notification(comment).deliver_now
+      @email = Mailer.with(comment: comment).comment_notification.deliver_now
     end
 
     it "should be sent to comment notification recipients" do

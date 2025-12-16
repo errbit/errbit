@@ -21,7 +21,7 @@ class Comment
   scope :ordered, -> { order_by(:created_at.asc) }
 
   def deliver_email
-    Mailer.comment_notification(self).deliver_now
+    Mailer.with(comment: self).comment_notification.deliver_now
   end
 
   def notification_recipients

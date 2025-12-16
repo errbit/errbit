@@ -14,7 +14,9 @@ class Mailer < ApplicationMailer
     "Precedence" => "bulk",
     "Auto-Submitted" => "auto-generated"
 
-  def err_notification(error_report)
+  def err_notification
+    error_report = params[:error_report]
+
     @notice = NoticeDecorator.new(error_report.notice)
     @app = AppDecorator.new(error_report.app)
 
@@ -29,7 +31,9 @@ class Mailer < ApplicationMailer
       subject: "#{count}[#{@app.name}][#{@notice.environment_name}] #{@notice.message.truncate(50)}"
   end
 
-  def comment_notification(comment)
+  def comment_notification
+    comment = params[:comment]
+
     @comment = comment
     @user = comment.user
     @problem = ProblemDecorator.new(comment.err)
