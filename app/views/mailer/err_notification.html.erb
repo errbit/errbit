@@ -33,6 +33,26 @@
         <tr>
           <td class="content" valign="top">
             <div>
+              <p class="heading">ERROR MESSAGE:</p>
+
+              <p><%= @notice.message %></p>
+
+              <p class="heading">WHERE:</p>
+
+              <p class="monospace">
+                <%= @notice.where %>
+              </p>
+
+              <% @notice.backtrace.lines.each do |line| %>
+                <% next unless line.in_app? %>
+
+                <p class="backtrace">
+                  <%= line.link_to_source_file(@app) do %>
+                    <%= line %>
+                  <% end %>
+                </p>
+              <% end %>
+
               
             </div>
           </td>
