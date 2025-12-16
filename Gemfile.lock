@@ -194,10 +194,6 @@ GEM
       railties (>= 3.2, < 9.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    haml (7.1.0)
-      temple (>= 0.8.2)
-      thor
-      tilt
     hashdiff (1.2.1)
     hashie (5.0.0)
     herb (0.8.4)
@@ -604,14 +600,12 @@ GEM
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
-    temple (0.10.4)
     thor (1.4.0)
     thruster (0.1.17)
     thruster (0.1.17-aarch64-linux)
     thruster (0.1.17-arm64-darwin)
     thruster (0.1.17-x86_64-darwin)
     thruster (0.1.17-x86_64-linux)
-    tilt (2.6.1)
     timeout (0.5.0)
     tsort (0.2.0)
     tzinfo (2.0.6)
@@ -677,7 +671,6 @@ DEPENDENCIES
   faker
   faraday-retry
   font-awesome-rails
-  haml
   herb
   hoi
   hoptoad_notifier!
@@ -807,7 +800,6 @@ CHECKSUMS
   ffi (1.17.2-x86_64-linux-musl) sha256=97c0eb3981414309285a64dc4d466bd149e981c279a56371ef811395d68cb95c
   font-awesome-rails (4.7.0.9) sha256=b45044908fbf3178b8d84fbae415dae4b9bf847612bcb1170d88ed13842c8732
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
-  haml (7.1.0) sha256=aed691bddcaaf4855398b3e4dd39d8590600b0f0151f4def1c2aa83bfd444248
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
   hashie (5.0.0) sha256=9d6c4e51f2a36d4616cbc8a322d619a162d8f42815a792596039fc95595603da
   herb (0.8.4) sha256=0255052f9b5ee64baadba7aacd05a022c30f78faa2f1962e09adf1735faabef6
@@ -965,14 +957,12 @@ CHECKSUMS
   standard-performance (1.9.0) sha256=49483d31be448292951d80e5e67cdcb576c2502103c7b40aec6f1b6e9c88e3f2
   stringio (3.1.9) sha256=c111af13d3a73eab96a3bc2655ecf93788d13d28cb8e25c1dcbff89ace885121
   super_diff (0.18.0) sha256=9f5e77464fa75150619f7783174fbbe1bbac50a1eaf157cd39ad5584b0eac142
-  temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   thruster (0.1.17) sha256=6f3f1de43e22f0162d81cbc363f45ee42a1b8460213856c1a899cbf0d3297235
   thruster (0.1.17-aarch64-linux) sha256=1b3a34b2814185c2aeaf835b5ecff5348cdcf8e77809f7a092d46e4b962a16ba
   thruster (0.1.17-arm64-darwin) sha256=75da66fc4a0f012f9a317f6362f786a3fa953879a3fa6bed8deeaebf1c1d66ec
   thruster (0.1.17-x86_64-darwin) sha256=b49e4c52563d1476d3aa1e12f7f57febb4510ac163f6abeac7c7c0de8a54437f
   thruster (0.1.17-x86_64-linux) sha256=77b8f335075bd4ece7631dc84a19a710a1e6e7102cbce147b165b45851bdfcd3
-  tilt (2.6.1) sha256=35a99bba2adf7c1e362f5b48f9b581cce4edfba98117e34696dde6d308d84770
   timeout (0.5.0) sha256=852aefd13f41d84c2d0d83099b275034c6517395884b58e635acc8847c9190cb
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
