@@ -17,13 +17,13 @@ RSpec.describe "site_config/index.html.erb", type: :view do
   end
 
   it "has fields for notice fingerprinter attributes" do
-    fingerprinter_fields = %w[
-      error_class
-      message
-      backtrace_lines
-      component
-      action
-      environment_name
+    fingerprinter_fields = [
+      "error_class",
+      "message",
+      "backtrace_lines",
+      "component",
+      "action",
+      "environment_name"
     ]
 
     fingerprinter_fields.each do |field|
