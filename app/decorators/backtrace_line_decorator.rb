@@ -40,7 +40,7 @@ class BacktraceLineDecorator < Draper::Decorator
   end
 
   def link_to_source_file(app, &block)
-    text = h.capture_haml(&block)
+    text = h.capture(&block)
 
     link_to_in_app_source_file(app, text) || text
   end
