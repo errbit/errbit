@@ -53,7 +53,31 @@
                 </p>
               <% end %>
 
-              
+              <br>
+
+              <% if @notice.app_version.present? %>
+                <p class="heading">APP VERSION:</p>
+
+                <p class="monospace">
+                  <%= @notice.app_version %>
+                </p>
+
+                <br>
+              <% end %>
+
+              <br>
+
+              <% if @notice.server_environment.present? && @notice.server_environment["hostname"].present? %>
+                <p class="heading">APP SERVER:</p>
+
+                <p class="monospace">
+                  <%= @notice.server_environment["hostname"] %>
+                </p>
+
+                <br>
+              <% end %>
+
+
             </div>
           </td>
         </tr>
