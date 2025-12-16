@@ -52,7 +52,7 @@ gem "xmpp4r", require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
 gem "hoi"
 # Pushover (iOS/Android Push notifications)
-gem "pushover2", git: "https://github.com/biow0lf/pushover2.git", branch: "main"
+gem "pushover2"
 # Hubot
 gem "httparty"
 

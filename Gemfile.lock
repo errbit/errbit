@@ -1,14 +1,4 @@
 GIT
-  remote: https://github.com/biow0lf/pushover2.git
-  revision: 99cba42c694a0cfaf13bc8992400cea54282878c
-  branch: main
-  specs:
-    pushover2 (0.1.0)
-      json
-      net-http
-      uri
-
-GIT
   remote: https://github.com/errbit/hoptoad_notifier
   revision: 9b6a6f5017c5ca52b07b8d5c64c79b6d44c121d3
   branch: errbit
@@ -403,6 +393,10 @@ GEM
       rspec-expectations (~> 3.12)
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
+    pushover2 (0.1.0)
+      json
+      net-http
+      uri
     racc (1.8.1)
     rack (3.2.4)
     rack-protection (4.2.1)
@@ -690,7 +684,7 @@ DEPENDENCIES
   puma
   pundit
   pundit-matchers
-  pushover2!
+  pushover2
   rack-timeout
   rails (= 8.0.4)
   rails-controller-testing
@@ -883,7 +877,7 @@ CHECKSUMS
   puma (7.1.0) sha256=e45c10cb124f224d448c98db653a75499794edbecadc440ad616cf50f2fd49dd
   pundit (2.5.2) sha256=e374152baa24f90b630428293faf4b4c5468fc3cc010165f7d8fcb44ce108bbd
   pundit-matchers (4.0.0) sha256=59d6077a1d575ea7cceca3ed73df5257488ee1a111ec707b2a797e76908cffd5
-  pushover2 (0.1.0)
+  pushover2 (0.1.0) sha256=8c3d9e3953eb89f0e96b52394a7d8d07401f8b8cfb1fce8a29f751ff3d2afe8f
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   rack (3.2.4) sha256=5d74b6f75082a643f43c1e76b419c40f0e5527fcfee1e669ac1e6b73c0ccb6f6
   rack-protection (4.2.1) sha256=cf6e2842df8c55f5e4d1a4be015e603e19e9bc3a7178bae58949ccbb58558bac
