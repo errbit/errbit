@@ -202,8 +202,7 @@ RSpec.describe App, type: :model do
       problem = create(:problem, app: app)
       existing = create(:err,
         problem: problem,
-        fingerprint: conditions[:fingerprint]
-      )
+        fingerprint: conditions[:fingerprint])
       expect(Err.where(fingerprint: conditions[:fingerprint]).first).to eq(existing)
       expect(app.find_or_create_err!(conditions)).to eq(existing)
     end
