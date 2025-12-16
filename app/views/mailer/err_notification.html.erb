@@ -5,7 +5,19 @@
         <tr>
           <td class="content" valign="top">
             <div>
+              <p>
+                An error has just occurred in
+                <%= link_to(@app.name, app_url(@app), class: "bold") << "," %>
+                on the
+                <span class="bold"><%= @notice.environment_name %></span>
+                environment.
+                <br>
+                This error has occurred <%= pluralize(@notice.problem.notices_count, "time") %>.
+              </p>
 
+              <p>
+                <%= link_to("Click here to view the error on Errbit", app_problem_url(@app, @notice.problem), class: "bold") << "." %>
+              </p>
             </div>
           </td>
         </tr>
