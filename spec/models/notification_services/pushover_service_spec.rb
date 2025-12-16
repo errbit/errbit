@@ -8,11 +8,20 @@ RSpec.describe NotificationServices::PushoverService, type: :model do
     notification_service = create(:pushover_notification_service, app: notice.app)
     problem = notice.problem
 
-    notification = double("PushoverService")
-    allow(Rushover::Client).to receive(:new).and_return(notification)
-    allow(notification).to receive(:notify).and_return(true)
-
-    expect(notification).to receive(:notify)
+    expect(Pushover2::Message).to receive(:new)
+      .with(
+        token: notification_service.subdomain,
+        user: notification_service.api_token,
+        message: notification_service.notification_description(problem),
+        priority: 1,
+        title: "Errbit Notification",
+        url: "https://#{Errbit::Config.host}/apps/#{problem.app.id}",
+        url_title: "Link to error"
+      ) do
+      double.tap do |a|
+        expect(a).to receive(:push)
+      end
+    end
 
     notification_service.create_notification(problem)
   end
