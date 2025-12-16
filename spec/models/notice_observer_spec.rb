@@ -50,10 +50,14 @@ RSpec.describe "Callback on Notice", type: :model do
     custom_thresholds.each do |threshold|
       it "sends an email notification after #{threshold} notice(s)" do
         # set to just before the threshold
-        @problem.update_attributes notices_count: threshold - 1
+        @problem.update_attributes(notices_count: threshold - 1)
 
-        expect(Mailer).to receive(:err_notification)
-          .and_return(double("email", deliver_now: true))
+        expect(Mailer).to receive(:with) do
+          double.tap do |a|
+            expect(a).to receive(:err_notification)
+              .and_return(double("email", deliver_now: true))
+          end
+        end
 
         error_report = ErrorReport.new(notice_attrs)
         error_report.generate_notice!
@@ -63,14 +67,14 @@ RSpec.describe "Callback on Notice", type: :model do
     it "doesn't email after 5 notices" do
       @problem.update_attributes notices_count: 5
 
-      expect(Mailer).not_to receive(:err_notification)
+      expect(Mailer).not_to receive(:with)
 
       error_report = ErrorReport.new(notice_attrs)
       error_report.generate_notice!
     end
 
     it "notify self if mailer fails" do
-      expect(Mailer).to receive(:err_notification).and_raise(ArgumentError)
+      expect(Mailer).to receive(:with).and_raise(ArgumentError)
       expect(HoptoadNotifier).to receive(:notify)
       ErrorReport.new(notice_attrs).generate_notice!
     end
@@ -97,8 +101,12 @@ RSpec.describe "Callback on Notice", type: :model do
       err.problem.update_attributes notices_count: 99
       err.problem.resolve!
 
-      expect(Mailer).to receive(:err_notification)
-        .and_return(double("email", deliver_now: true))
+      expect(Mailer).to receive(:with) do
+        double.tap do |a|
+          expect(a).to receive(:err_notification)
+            .and_return(double("email", deliver_now: true))
+        end
+      end
 
       ErrorReport.new(notice_attrs).generate_notice!
     end
@@ -122,8 +130,13 @@ RSpec.describe "Callback on Notice", type: :model do
 
       expect(error_report.app.notification_service)
         .to receive(:create_notification).and_raise(ArgumentError)
-      expect(Mailer)
-        .to receive(:err_notification).and_return(double(deliver_now: true))
+
+      expect(Mailer).to receive(:with) do
+        double.tap do |a|
+          expect(a).to receive(:err_notification)
+            .and_return(double(deliver_now: true))
+        end
+      end
 
       error_report.generate_notice!
     end
