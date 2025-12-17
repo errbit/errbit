@@ -60,7 +60,7 @@ gem "icalendar"
 gem "json"
 
 # For Ruby 2.7+
-gem "bigdecimal", "3.3.1"
+gem "bigdecimal", "4.0.0"
 
 # Ruby 3.1 + Rails 6.1
 gem "rexml"
