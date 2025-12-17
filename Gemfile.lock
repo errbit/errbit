@@ -641,7 +641,6 @@ DEPENDENCIES
   actionmailer_inline_css
   activemodel-serializers-xml
   airbrake (~> 4.3.5)
-  bigdecimal (= 3.3.1)
   bootsnap (>= 1.4.4)
   brakeman
   bundler-audit
@@ -690,7 +689,6 @@ DEPENDENCIES
   rails-controller-testing
   rails_autolink
   reactionview
-  rexml
   rspec-activemodel-mocks
   rspec-rails
   rspec-rebound
@@ -966,4 +964,4 @@ RUBY VERSION
   ruby 3.4.7
 
 BUNDLED WITH
-  4.0.0
+  4.0.2
