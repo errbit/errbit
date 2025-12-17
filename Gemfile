@@ -59,9 +59,6 @@ gem "httparty"
 gem "icalendar"
 gem "json"
 
-# Ruby 3.1 + Rails 6.1
-gem "rexml"
-
 gem "pry-rails"
 
 # Reduces boot times through caching; required in config/boot.rb
