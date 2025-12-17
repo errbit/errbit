@@ -593,7 +593,7 @@ GEM
     thruster (0.1.17-arm64-darwin)
     thruster (0.1.17-x86_64-darwin)
     thruster (0.1.17-x86_64-linux)
-    timeout (0.5.0)
+    timeout (0.6.0)
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -943,7 +943,7 @@ CHECKSUMS
   thruster (0.1.17-arm64-darwin) sha256=75da66fc4a0f012f9a317f6362f786a3fa953879a3fa6bed8deeaebf1c1d66ec
   thruster (0.1.17-x86_64-darwin) sha256=b49e4c52563d1476d3aa1e12f7f57febb4510ac163f6abeac7c7c0de8a54437f
   thruster (0.1.17-x86_64-linux) sha256=77b8f335075bd4ece7631dc84a19a710a1e6e7102cbce147b165b45851bdfcd3
-  timeout (0.5.0) sha256=852aefd13f41d84c2d0d83099b275034c6517395884b58e635acc8847c9190cb
+  timeout (0.6.0) sha256=6d722ad619f96ee383a0c557ec6eb8c4ecb08af3af62098a0be5057bf00de1af
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
