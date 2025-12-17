@@ -12,8 +12,7 @@ RSpec.describe NotificationServices::SlackService, type: :model do
         {number: 103, file: "/path/to/file/4.rb", method: "fourth_method"},
         {number: 923, file: "/path/to/file/5.rb", method: "fifth_method"},
         {number: 8, file: "/path/to/file/6.rb", method: "sixth_method"}
-      ]
-    )
+      ])
   end
 
   let(:notice) { create(:notice, backtrace: backtrace) }

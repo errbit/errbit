@@ -85,8 +85,7 @@ RSpec.describe "Callback on Notice", type: :model do
     let(:app) do
       create(:app_with_watcher,
         notify_on_errs: true,
-        email_at_notices: [1, 100]
-      )
+        email_at_notices: [1, 100])
     end
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
@@ -117,8 +116,7 @@ RSpec.describe "Callback on Notice", type: :model do
     let(:app) do
       create(:app_with_watcher,
         notify_on_errs: true,
-        notification_service: notification_service
-      )
+        notification_service: notification_service)
     end
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 

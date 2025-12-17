@@ -412,8 +412,7 @@ RSpec.describe Problem, type: :model do
           "cgi-data" => {
             "HTTP_USER_AGENT" => "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16"
           }
-        }
-      )
+        })
       expect do
         @err.notices.first.destroy
         @problem.reload

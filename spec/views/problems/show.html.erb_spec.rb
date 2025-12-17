@@ -104,7 +104,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
 
       render
 
-      expect(action_bar).not_to have_selector('a.resolve[data-confirm=""]')
+      expect(action_bar).to have_no_selector('a.resolve[data-confirm=""]')
     end
 
     it "should link 'up' to HTTP_REFERER if is set" do
