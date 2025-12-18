@@ -604,6 +604,9 @@ GEM
     thruster (0.1.17-x86_64-linux)
     timeout (0.6.0)
     tsort (0.2.0)
+    turbo-rails (2.0.20)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     underscore-rails (1.8.3)
@@ -717,6 +720,7 @@ DEPENDENCIES
   stimulus-rails
   super_diff
   thruster
+  turbo-rails
   underscore-rails
   uri
   useragent
@@ -953,6 +957,7 @@ CHECKSUMS
   thruster (0.1.17-x86_64-linux) sha256=77b8f335075bd4ece7631dc84a19a710a1e6e7102cbce147b165b45851bdfcd3
   timeout (0.6.0) sha256=6d722ad619f96ee383a0c557ec6eb8c4ecb08af3af62098a0be5057bf00de1af
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
+  turbo-rails (2.0.20) sha256=cbcbb4dd3ce59f6471c9f911b1655b2c721998cc8303959d982da347f374ea95
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
   unicode-display_width (3.2.0) sha256=0cdd96b5681a5949cdbc2c55e7b420facae74c4aaf9a9815eee1087cb1853c42
