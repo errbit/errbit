@@ -47,8 +47,6 @@ gem "hoptoad_notifier",
 # Notification services
 # ---------------------------------------
 gem "campy"
-# Google Talk
-gem "xmpp4r", require: ["xmpp4r", "xmpp4r/muc"]
 # Hoiio (SMS)
 gem "hoi"
 # Pushover.net (iOS/Android Push notifications)
