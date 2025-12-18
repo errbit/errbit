@@ -1,7 +1,7 @@
 <% if current_user %>
   <ul id="session-links">
     <li>
-      <%= link_to destroy_user_session_path, id: "sign-out", method: :delete do %>
+      <%= link_to destroy_user_session_path, id: "sign-out", data: {turbo_method: :delete} do %>
         <i class="fa fa-circle"></i>
         <%= t(".sign_out") %>
       <% end %>
