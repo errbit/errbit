@@ -110,8 +110,4 @@ group :test do
   gem "vcr"
 end
 
-gem "jquery-rails"
-gem "pjax_rails"
-gem "underscore-rails"
-
 eval_gemfile "./UserGemfile"
