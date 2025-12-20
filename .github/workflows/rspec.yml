@@ -54,5 +54,5 @@ jobs:
       - run: bundle exec bootsnap precompile app/ lib/ config/ Rakefile
       - run: bundle exec rails zeitwerk:check
       - run: bundle exec rails assets:precompile
-      - run: bundle exec rake errbit:bootstrap
+      - run: bundle exec rails errbit:bootstrap
       - run: bundle exec rspec
