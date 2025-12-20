@@ -400,15 +400,23 @@ form input[type=checkbox]:focus + label{
 }
 
 form input[type=submit] {
-  display: block; width: auto; padding: 0.5em;
-  font-size: 1.2em; line-height: 1em; text-transform: uppercase;
-  border: none; color: #FFF; background-color: #387fc1;
+  display: block;
+  width: auto;
+  padding: 0.5em;
+  font-size: 1.2em;
+  line-height: 1em;
+  text-transform: uppercase;
+  border: none;
+  color: #FFF;
+  background-color: #387fc1;
   cursor: pointer;
 }
+
 form input[type=submit].button {
   font-size: 1em;
   text-transform: none;
 }
+
 form div.buttons {
   color: #666;
   background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 bottom repeat-x;
@@ -418,22 +426,27 @@ form div.buttons {
   border: 1px solid #bbb;
   display: inline-block;
 }
+
 form div.buttons:hover {
   color: #666;
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
+
 form div.buttons input, form div.buttons button {
   padding: 0 20px;
   color: #666;
   background: none;
   display: inline-block;
   height: 36px;
-  font-size: 14px; font-weight: bold; line-height: 36px; text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF;
-  -moz-text-shadow: 1px 1px 0px #FFF;
-  -webkit-text-shadow: 1px 1px 0px #FFF;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 36px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #FFF;
+  -moz-text-shadow: 1px 1px 0 #FFF;
+  -webkit-text-shadow: 1px 1px 0 #FFF;
   border: none;
 }
 
@@ -471,6 +484,7 @@ form .error-messages h2 {
   font-size: 1.2em;
   border-color: #F99;
 }
+
 form .error-messages ul {
   margin-left: 2em;
   list-style-type: square;
@@ -485,7 +499,6 @@ form input#app_email_at_notices {
   margin: 0 5px;
 }
 
-
 /* Tables */
 table {
   width: 100%;
@@ -493,21 +506,26 @@ table {
   margin-bottom: 1.5em;
   border-collapse: separate;
 }
+
 table thead th {
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #FFF;
 }
+
 table th, table td {
   border-top: 1px solid #C6C6C6;
   padding: 10px 8px;
   text-align: left;
 }
+
 table tbody tr:first-child th, table tbody tr:first-child td {
   border-top: none;
 }
+
 table thead + tbody tr:first-child td {
   border-top: 1px solid #C6C6C6;
 }
+
 table th { background-color: #ececec; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 table tbody tr:nth-child(odd) td { background-color: #F9F9F9; }
 table .main { width: 100%; }
@@ -546,11 +564,11 @@ pre {
   font-size: 17px;
   text-align: center;
 }
+
 .pagination em {
   font-style: normal;
   font-weight: bold;
 }
-
 
 /* Buttons */
 input[type="submit"].button,
@@ -569,46 +587,50 @@ a.button {
   text-align: center;
   text-shadow: 0 1px 0 #fff;
 }
+
 input[type="submit"]:hover.button,
 a:hover.button {
-  box-shadow: 0px 0px 4px #bfbfbf;
-  -moz-box-shadow: 0px 0px 4px #bfbfbf;
-  -webkit-box-shadow: 0px 0px 4px #bfbfbf;
+  box-shadow: 0 0 4px #bfbfbf;
+  -moz-box-shadow: 0 0 4px #bfbfbf;
+  -webkit-box-shadow: 0 0 4px #bfbfbf;
   text-decoration: none;
   background-color: #e5e5e5;
 }
+
 a.button.active {
   border-color: #fff;
   background-color: #CCC;
   background-image: none;
 }
 
-
 /* Tab Bar */
 .tab-bar {
   margin-top: 12px;
 }
+
 #content .tab-bar a.button {
-  border-bottom:0;
-  margin-bottom:0;
-  border-top-left-radius:12px;
-  border-top-right-radius:12px;
-  border-bottom-left-radius:0;
-  border-bottom-right-radius:0;
-  height:30px;
+  border-bottom: 0;
+  margin-bottom: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 30px;
 }
+
 #content .tab-bar a.button.active {
   background: #FFF;
   color: #444;
-  border-color:#ccc;
-  border-style:solid;
-  border-width:1px 1px 0;
-  margin-bottom:-1px;
-  height:31px;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px 1px 0;
+  margin-bottom: -1px;
+  height: 31px;
 }
+
 .tab-bar ul {
   padding: 9px 0 0;
-  line-height:0;
+  line-height: 0;
 }
 .tab-bar li {
   display: inline-block;
@@ -622,6 +644,7 @@ div.issue_tracker.nested .tracker_params, div.notification_service.nested .notif
 div.nested .chosen {
   display: block !important;
 }
+
 div.nested .choose {
   margin-bottom: 0.5em;
 }
@@ -691,7 +714,7 @@ div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, 
 .image_preloader { display: none; }
 
 /* Apps Table */
-table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
+table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2; }
 
 table.apps td.name { width: 100%; }
 table.apps td { padding: 16px 20px; }
@@ -700,18 +723,22 @@ table.apps th { padding: 10px 20px; }
 table.apps td.issue_tracker, table.apps td.count {
   text-align: center;
 }
+
 table.apps td.issue_tracker, table.apps td.count {
   padding: 10px 8px;
 }
+
 table.apps td.issue_tracker img { vertical-align: top; }
 
 td.message .line {
-  display:inline-block;
-  margin-left:1em;
+  display: inline-block;
+  margin-left: 1em;
 }
+
 td.latest {
   white-space: nowrap;
 }
+
 td.count .td-container, td.issue_link .td-container, td.resolve .td-container {
   text-align: center;
 }
@@ -731,10 +758,12 @@ td.count .td-container, td.issue_link .td-container, td.resolve .td-container {
   -moz-opacity: 0.8;
   -webkit-opacity: 0.8
 }
+
 .count a.resolved {
   background-color: #05B81d;
   border: 1px solid #080;
 }
+
 .count a:hover {
   text-decoration: none;
   opacity: 1;
@@ -747,16 +776,20 @@ table.errs td.app .environment {
   font-size: 0.8em;
   color: #999;
 }
+
 table.errs {
   width: 100%;
 }
+
 table.errs td.narrow-as-possible {
   width: 1px;
   white-space: nowrap;
 }
+
 table.errs .nowrap {
   white-space: nowrap;
 }
+
 /**
  * td-container is useful for getting overflowing text to hide in a fluid-width
  * table without having to set static widths on each column
@@ -767,16 +800,20 @@ table.errs .td-container {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 table.errs .count .td-container {
   width: auto;
 }
+
 table.errs .count-header {
   text-align: center;
 }
+
 table.errs td.message em {
   color: #727272;
   font-size: 0.9em;
 }
+
 table.errs tr.resolved td > * {
   opacity: 0.5;
   -moz-opacity: 0.5;
@@ -785,28 +822,31 @@ table.errs tr.resolved td > * {
 
 /* Tally tables */
 table.tally {
-  border:none;
+  border: none;
 }
+
 table.tally td,
 table.tally th {
-  border:none !important;
-  background:none !important;
-  padding:8px 0 0;
+  border: none !important;
+  background: none !important;
+  padding: 8px 0 0;
 }
+
 table.tally tbody tr:first-child td,
 table.tally tbody tr:first-child th {
-  padding-top:0;
+  padding-top: 0;
 }
+
 table.tally td.percent {
   padding-right: 10px;
 }
+
 table.tally th.value {
   width: 100%;
   text-transform: none;
 }
 
 /* Sparklines */
-
 #sparkline-placeholder {
   display: none;
 }
@@ -857,18 +897,18 @@ table.tally th.value {
   height: 16px;
   margin-right: 1em;
 }
+
 .notice-pagination-loader img {
   vertical-align: middle
 }
-
 
 /* Backtrace */
 .window {
   width: 100%;
   margin-bottom: 1em;
   overflow: auto;
-  border:1px solid #ccc;
-  padding:1px;
+  border: 1px solid #ccc;
+  padding: 1px;
 }
 
 .window table {
@@ -910,9 +950,11 @@ table.backtrace td.line {
   vertical-align: top;
   white-space: nowrap;
 }
+
 table.backtrace td.line .file {
   font-weight: bold;
 }
+
 table.backtrace td.line .method {
   color: #aaa;
   font-weight: bold;
@@ -922,6 +964,7 @@ table.backtrace td.line.in-app {
   color: #2adb2e;
   background-color: #2f2f2f;
 }
+
 table.backtrace td.line.in-app .path,
 table.backtrace td.line.in-app .number { color: #2ACB2E; }
 table.backtrace td.line.in-app .file   { color: #3AFB3E; }
@@ -936,6 +979,7 @@ table.backtrace td.line.in-app a .file { color: #31C4FF; }
 table.backtrace tr.hidden_external_backtrace {
   display: none;
 }
+
 table.backtrace td.backtrace_separator span {
   cursor: pointer;
   display: inline-block;
@@ -968,19 +1012,23 @@ h3#watchers_toggle, h3#repository_toggle {
   margin: 30px 0 0 0;
   text-transform: uppercase;
 }
+
 table.comment tbody th {
   text-transform: none;
   font-weight: normal;
   height: 20px;
   line-height: 0.5em;
 }
+
 table.comment th span, table.comment th img {
   vertical-align: middle;
 }
+
 table.comment th span.comment-info {
   line-height: 21px;
   float: left;
 }
+
 table.comment img.gravatar {
   margin-right: 7px;
   float: left;
@@ -989,6 +1037,7 @@ table.comment img.gravatar {
 table.comment tbody td {
   background-color: #F9F9F9;
 }
+
 #content-comments a.destroy-comment {
   color: #EE0000;
   margin-right: 5px;
@@ -997,13 +1046,16 @@ table.comment tbody td {
   line-height: 1;
   float: right;
 }
+
 #content-comments a.destroy-comment:hover {
   text-decoration: none;
   color: #AA0000;
 }
+
 #content-comments #comment_submit {
   margin-top: 15px;
 }
+
 /* Inline comments in tables */
 table.errs tr td.message .inline_comment {
   display: inline-block;
@@ -1017,14 +1069,17 @@ table.errs tr td.message .inline_comment {
   text-overflow: ellipsis;
   width: 300px;
 }
+
 table.errs tr:hover td.message .inline_comment {
   background-color: #D5E0FA;
   border-color: #DBDBDB;
   text-shadow: 0 1px 0 #FFFFFF;
 }
+
 table.errs tr td.message .inline_comment em {
   color: #444;
 }
+
 table.errs tr td.message .inline_comment em.commenter {
   color: #777;
 }
@@ -1037,10 +1092,10 @@ textarea#comment_body {
 .current.asc:after { content: ' ↑'; }
 .current.desc:after { content: ' ↓'; }
 
-
 table.users td {
   vertical-align: middle;
 }
+
 table.users td img.gravatar {
   vertical-align: middle;
   margin-left: 3px;
