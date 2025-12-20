@@ -1,5 +1,11 @@
+volumes:
+  mongodb_data:
+    external: true
+
 services:
   mongo:
     image: "mongo:8.2"
     ports:
       - "27017:27017"
+    volumes:
+      - "mongodb_data:/data/db:rw"

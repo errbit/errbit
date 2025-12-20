@@ -33,6 +33,7 @@ gem "rails_autolink"
 gem "useragent"
 gem "uri"
 gem "rack-timeout", require: false
+gem "puma"
 
 # ~/.rbenv/versions/3.4.2/lib/ruby/gems/3.4.0/gems/mongoid-9.0.6/lib/mongoid/indexable.rb:6: warning: ~/.rbenv/versions/3.4.2/lib/ruby/3.4.0/ostruct.rb was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
 # You can add ostruct to your Gemfile or gemspec to silence this warning.
@@ -106,7 +107,6 @@ group :test do
   gem "vcr"
 end
 
-gem "puma"
 gem "jquery-rails"
 gem "pjax_rails"
 gem "underscore-rails"

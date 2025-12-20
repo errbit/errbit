@@ -5,7 +5,7 @@ namespace :errbit do
   task demo: :environment do
     require "factory_bot_rails"
 
-    app = create(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
+    app = FactoryBot.create(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
 
     # Report a number of errors for the application
     app.problems.delete_all
@@ -70,7 +70,10 @@ namespace :errbit do
       end
     end
 
-    create(:notice, err: create(:err, problem: create(:problem, app: app)))
+    problem = FactoryBot.create(:problem, app: app)
+    err = FactoryBot.create(:err, problem: problem)
+    FactoryBot.create(:notice, err: err)
+
     puts "=== Created demo app: '#{app.name}', with example errors."
   end
 end
