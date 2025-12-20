@@ -18,15 +18,19 @@ export default class extends Controller {
         console.log(this.auth_keyTarget.value)
     }
 
-    click() {
+    click(event) {
+        event.preventDefault()
+
         console.log("Bingo 222!")
 
-        Turbo.navigator
+        // Turbo.visit()
 
         // Set email field on password reset page to email that user entered on this page
         // location.href = $(this).attr("href") + "?email=" + encodeURIComponent($("#user_email").val());
 
 
         console.log(this.auth_keyTarget.value)
+
+
     }
 }
