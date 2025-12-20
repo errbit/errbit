@@ -23,7 +23,7 @@
     "SMTP_SERVER": "smtp.sendgrid.net"
   },
   "scripts": {
-    "postdeploy": "bundle exec rake errbit:bootstrap"
+    "postdeploy": "bundle exec rails errbit:bootstrap"
   },
   "addons": ["scheduler:standard", "sendgrid:starter"]
 }
