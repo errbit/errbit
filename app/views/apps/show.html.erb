@@ -38,69 +38,73 @@
   <% end %>
 <% end %>
 
-<h3 id="watchers_toggle">
-  <%= t(".watchers") %>
+<div data-controller="reveal">
+  <h3 id="watchers_toggle">
+    <%= t(".watchers") %>
 
-  <span class="click_span"><%= t(".show_hide") %></span>
-</h3>
+    <button data-action="reveal#toggle"><%= t(".show_hide") %></button>
+  </h3>
 
-<div id="watchers_div">
-  <% if app.notify_all_users %>
-    <table class="watchers">
-      <thead>
-        <tr>
-          <th><%= t(".all_users_notified") %></th>
-        </tr>
-      </thead>
-    </table>
-  <% else %>
-    <table class="watchers">
-      <thead>
-        <tr>
-          <th><%= t(".user_or_email") %></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% app.watchers.each do |watcher| %>
+  <div class="hidden" data-reveal-target="item">
+    <% if app.notify_all_users %>
+      <table class="watchers">
+        <thead>
           <tr>
-            <td><%= watcher.label %></td>
+            <th><%= t(".all_users_notified") %></th>
           </tr>
-        <% end %>
-
-        <% if app.watchers.none? %>
+        </thead>
+      </table>
+    <% else %>
+      <table class="watchers">
+        <thead>
           <tr>
-            <td>
-              <em><%= t(".no_watchers") %></em>
-            </td>
+            <th><%= t(".user_or_email") %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+        </thead>
+
+        <tbody>
+          <% app.watchers.each do |watcher| %>
+            <tr>
+              <td><%= watcher.label %></td>
+            </tr>
+          <% end %>
+
+          <% if app.watchers.none? %>
+            <tr>
+              <td>
+                <em><%= t(".no_watchers") %></em>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>
 
 <% if app.github_repo? %>
-  <h3 id="repository_toggle">
-    <%= t(".repository") %>
+  <div data-controller="reveal">
+    <h3 id="repository_toggle">
+      <%= t(".repository") %>
 
-    <span class="click_span"><%= t(".show_hide") %></span>
-  </h3>
+      <button data-action="reveal#toggle"><%= t(".show_hide") %></button>
+    </h3>
 
-  <div id="repository_div">
-    <table class="repository">
-      <thead>
-        <tr>
-          <th><%= t(".github_repo") %></th>
-        </tr>
-      </thead>
+    <div class="hidden" data-reveal-target="item">
+      <table class="repository">
+        <thead>
+          <tr>
+            <th><%= t(".github_repo") %></th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr>
-          <td><%= link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer") %></td>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr>
+            <td><%= link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer") %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 <% end %>
 
