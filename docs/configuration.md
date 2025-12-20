@@ -59,7 +59,7 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 <dd>defaults to `errbit@errbit.example.com`
 <dt>ERRBIT_ADMIN_PASSWORD
 <dd>Password of initial admin user
-<dd>defaults to some random string (see output of `$ rake db:seed`)
+<dd>defaults to some random string (see output of `$ bundle exec rails db:seed`)
 <dt>ERRBIT_ADMIN_USER
 <dd>Username of initial admin user
 <dd>defaults to `errbit`
@@ -91,10 +91,10 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 <dd>Let every application have its own configuration rather than using `ERRBIT_NOTIFY_AT_NOTICES`. If this value is set to true, you can configure each app using the web UI.
 <dd>defaults to false
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
-<dd>Number of days to keep errors in the database when running `rake errbit:clear_outdated`
+<dd>Number of days to keep errors in the database when running `bundle exec rails errbit:clear_outdated`
 <dd>defaults to nil (off)
 <dt>SECRET_KEY_BASE
-<dd>For production environments, you should run `rake secret` to generate a secret, unique key for this parameter
+<dd>For production environments, you should run `bundle exec rails secret` to generate a secret, unique key for this parameter
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
 <dt>MONGO_URL
 <dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL

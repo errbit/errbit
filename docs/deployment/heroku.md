@@ -53,7 +53,7 @@ Now that you have your connection URI, click the deploy button below and start y
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/main)
 
-After deploying the application, you still need to run `rake errbit:bootstrap`
+After deploying the application, you still need to run `bundle exec rails errbit:bootstrap`
 to create indexes and get your admin user set up. You can do this by clicking the `Run Console` button in the More dropdown button of your new Heroku app. Then paste the rake command above and be sure to copy your admin credentials!
 
 ![Run Console](./example/atlas7.png)
@@ -87,7 +87,7 @@ git commit -m "Update db/seeds.rb with initial login"
 ```shell
 heroku apps:create
 heroku addons:create sendgrid:starter
-heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
+heroku config:set SECRET_KEY_BASE="$(bundle exec rails secret)"
 heroku config:set MONGODB_URI="<URI HERE>"
 heroku config:set ERRBIT_HOST=some-hostname.example.com
 heroku config:set ERRBIT_EMAIL_FROM=example@example.com
@@ -99,7 +99,7 @@ git push heroku main
 ### Prepare the DB
 
 ```shell
-heroku run rake errbit:bootstrap
+heroku run rails errbit:bootstrap
 ```
 
 ### Schedule recurring tasks
@@ -114,8 +114,8 @@ Option 1. With the heroku-scheduler add-on (replacement for cron):
 heroku addons:create scheduler:standard
 
 # Go open the dashboard to schedule the job.  You should use
-# 'rake errbit:clear_resolved' as the task command, and schedule it
-# at whatever frequency you like (once/day should work great).
+# 'bundle exec rails errbit:clear_resolved' as the task command, and schedule
+# it at whatever frequency you like (once/day should work great).
 heroku addons:create scheduler
 ```
 
@@ -129,5 +129,5 @@ heroku addons:create cron:daily
 Option 3. Clear resolved errors manually:
 
 ```shell
-heroku run rake errbit:clear_resolved
+heroku run rails errbit:clear_resolved
 ```
