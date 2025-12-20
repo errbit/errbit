@@ -13,7 +13,7 @@ If you don't already have one, you can generate a suitable `SECRET_KEY_BASE`
 with:
 
 ```shell
-docker run --rm errbit/errbit bundle exec rake secret
+docker run --rm errbit/errbit bundle exec rails secret
 ```
 
 ## Which image version should I use?
@@ -36,7 +36,7 @@ docker run \
   errbit/errbit:latest
 ```
 
-Now run `bundle exec rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
+Now run `bundle exec rails errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
 Docker container:
 
 ```shell
@@ -45,7 +45,7 @@ docker run \
   -e "RAILS_ENV=production" \
   -e "MONGO_URL=mongodb://my-mongo-host" \
   errbit/errbit:latest \
-  bundle exec rake errbit:bootstrap
+  bundle exec rails errbit:bootstrap
 ```
 
 ## Errbit + Dependencies via Docker Compose
@@ -57,9 +57,9 @@ Errbit application container and linking the two containers together:
 docker-compose up -e "SECRET_KEY_BASE=my$ecre7key123"
 ```
 
-Now run `bundle exec rake errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
+Now run `bundle exec rails errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
 Docker container:
 
 ```shell
-docker exec errbit_errbit_1 bundle exec rake errbit:bootstrap
+docker exec errbit_errbit_1 bundle exec rails errbit:bootstrap
 ```
