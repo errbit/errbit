@@ -67,6 +67,6 @@ class UsersController < ApplicationController
       flash[:success] = t(".success", name: @user.name)
     end
 
-    redirect_to users_path
+    redirect_to users_path, status: :see_other
   end
 end
