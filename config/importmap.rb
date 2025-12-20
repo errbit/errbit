@@ -2,6 +2,9 @@
 
 # Pin npm packages by running ./bin/importmap
 
+# Enable integrity calculation globally
+enable_integrity!
+
 pin "application"
 pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
