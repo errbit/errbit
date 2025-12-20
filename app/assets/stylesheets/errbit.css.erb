@@ -23,7 +23,7 @@ body {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 { padding: 0.2em 0; margin-bottom: 1em; border-bottom: 1px solid #dedede;}
-h1 { font-size: 2.0em; line-height: 1.2em; text-shadow: 1px 1px 0 #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;}
+h1 { font-size: 2.0em; line-height: 1.2em; text-shadow: 1px 1px 0 #FFF; -webkit-text-shadow: 1px 1px 0 #FFF;}
 h2 { font-size: 1.7em; line-height: 1.2em; }
 h3 { font-size: 1.5em; line-height: 1.2em; }
 h4 { font-size: 1.3em; line-height: 1.2em; }
@@ -50,12 +50,14 @@ a.action  { float: right; font-size: 0.9em; }
   margin-bottom: 24px;
   height: 71px;
   border-bottom: 1px solid #fff;
-  position:relative;
+  position: relative;
   background: #000000;
 }
+
 #header > div {
   height: 71px;
 }
+
 #header #site-name {
   display: block;
   width: 88px;
@@ -73,6 +75,7 @@ a.action  { float: right; font-size: 0.9em; }
   right: 0;
   font-size: 0.9em;
 }
+
 #header #session-links li {
   float: right;
   margin-left: 10px;
@@ -84,14 +87,17 @@ a.action  { float: right; font-size: 0.9em; }
   border: 1px solid #484B4F;
   font-size: 14px;
 }
+
 #header #session-links li:hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
+
 #header #session-links li:hover a {
   color: white;
 }
+
 #header #session-links a {
   color: #ccc;
   padding: 0 14px;
@@ -99,11 +105,13 @@ a.action  { float: right; font-size: 0.9em; }
   height: 30px;
   display: inline-block;
 }
+
 #header #session-links #sign-out i {
   color: #cc0033;
   font-size: 11px;
   margin-right: 3px;
 }
+
 #header #session-links a:hover {
   text-decoration: none;
 }
@@ -114,6 +122,7 @@ a.action  { float: right; font-size: 0.9em; }
   bottom: 0;
   left: 172px;
 }
+
 #nav-bar li {
   float: left;
   height: 34px;
@@ -129,6 +138,7 @@ a.action  { float: right; font-size: 0.9em; }
   -webkit-border-top-right-radius: 12px;
   border: 1px solid #bbb;
 }
+
 #nav-bar li.active {
   border-color: #fff;
   background: #FFF url(<%= asset_path "images/button-bg.png" %>) 0 -2px repeat-x;
@@ -136,6 +146,7 @@ a.action  { float: right; font-size: 0.9em; }
   margin-bottom:-2px;
   height: 37px;
 }
+
 #nav-bar li.active a {
   color: #333;
 }
@@ -143,6 +154,7 @@ a.action  { float: right; font-size: 0.9em; }
 #nav-bar li i {
   margin-right: 5px;
 }
+
 #nav-bar li a {
   color: #666;
   padding: 0 20px;
@@ -152,11 +164,13 @@ a.action  { float: right; font-size: 0.9em; }
   height: 37px;
   display: inline-block;
   text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF;
-  -webkit-text-shadow: 1px 1px 0px #FFF;
+  text-shadow: 1px 1px 0 #FFF;
+  -webkit-text-shadow: 1px 1px 0 #FFF;
   background: transparent 10px 6px no-repeat;
 }
+
 #nav-bar li a:hover { color: #666;}
+
 #nav-bar li:not(.active):hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
@@ -188,14 +202,20 @@ a.action  { float: right; font-size: 0.9em; }
 #content-comments {
   background-color: #ffffff;
 }
+
 #content-title h1, #content-comments h3 {
-  padding: 0; margin: 0;
+  padding: 0;
+  margin: 0;
   width: 85%;
   border: none;
   color: #636363;
-  font-size: 2em; line-height: 1em; font-weight: bold; font-family: arial, sans-serif;
+  font-size: 2em;
+  line-height: 1em;
+  font-weight: bold;
+  font-family: arial, sans-serif;
   word-wrap: break-word;
 }
+
 #content-comments h3 {
   font-size: 1.5em;
   margin-bottom: 14px;
@@ -207,8 +227,10 @@ a.action  { float: right; font-size: 0.9em; }
 #action-bar {
   position: absolute;
   text-align: right;
-  top: 22px; right: 24px;
+  top: 22px;
+  right: 24px;
 }
+
 #action-bar span {
   display: inline-block;
   margin-left: 18px;
@@ -221,6 +243,7 @@ a.action  { float: right; font-size: 0.9em; }
   -webkit-border-radius: 50px;
   border: 1px solid #bbb;
 }
+
 #action-bar span a {
   color: #666;
   padding: 0 20px;
@@ -230,16 +253,20 @@ a.action  { float: right; font-size: 0.9em; }
   height: 39px;
   display: inline-block;
   text-decoration: none;
-  text-shadow: 1px 1px 0px #FFF; -webkit-text-shadow: 1px 1px 0px #FFF;
+  text-shadow: 1px 1px 0 #FFF;
+  -webkit-text-shadow: 1px 1px 0 #FFF;
   background: transparent 10px 8px no-repeat;
   white-space: nowrap;
 }
-#action-bar a:hover { text-decoration: none;}
+
+#action-bar a:hover { text-decoration: none; }
+
 #action-bar span:hover {
   box-shadow: 0 0 3px #69c;
   -moz-box-shadow: 0 0 3px #69c;
   -webkit-box-shadow: 0 0 3px #69c;
 }
+
 #action-bar a i {
   margin-right: 5px;
 }
@@ -257,7 +284,8 @@ a.action  { float: right; font-size: 0.9em; }
 
 /* Content */
 #content {
-  padding: 20px; border-top: 1px solid #C6C6C6;
+  padding: 20px;
+  border-top: 1px solid #C6C6C6;
   background-color: #FFF;
 }
 
@@ -270,31 +298,36 @@ a.action  { float: right; font-size: 0.9em; }
 /* Footer */
 #footer {
   padding: 20px 0;
-  font-size: 0.8em; text-align: center;
+  font-size: 0.8em;
+  text-align: center;
   color: #929292;
 }
 
 /* Flash Messages */
 #flash-messages li {
   padding: 13px 45px;
-  margin-bottom:25px;
+  margin-bottom: 25px;
   border: 1px solid #C6C6C6;
   background-color: #F9F9F9;
   line-height: 1em;
 }
+
 #flash-messages li.notice {
   padding-left: 20px;
   background-color: #b5eeff;
   border: 1px solid #6cf;
 }
+
 #flash-messages li.success {
   background: #cfc url(<%= asset_path "images/icons/success.png" %>) 16px 50% no-repeat;
   border: 1px solid #6c3;
 }
+
 #flash-messages li.error {
-  background: #fcc url(<%= asset_path "images/icons/error.png" %>)   16px 50% no-repeat;
+  background: #fcc url(<%= asset_path "images/icons/error.png" %>) 16px 50% no-repeat;
   border: 1px solid #f99;
 }
+
 #flash-messages .alert {
   background: #ffc url(<%= asset_path "images/icons/warning.png" %>) 10px 7px no-repeat;
   border-color: #e4bb69;
@@ -307,45 +340,67 @@ form#new_app,
 form.edit_app {
   width: 620px;
 }
-form > div, form fieldset > div { margin: 1em 0;}
+
+form > div, form fieldset > div { margin: 1em 0; }
+
 form fieldset {
-  padding: 0.8em; margin-bottom: 1em;
-  background-color: #F0F0F0; border: 1px solid #C6C6C6; border-left: none; border-right: none;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  background-color: #F0F0F0;
+  border: 1px solid #C6C6C6;
+  border-left: none;
+  border-right: none;
 }
+
 form fieldset legend {
-  font-size: 1.2em; font-weight: bold; text-transform: uppercase;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
   color: #555;
 }
+
 form label {
-  font-weight: bold; text-transform: uppercase; line-height: 1.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.6em;
   display: inline-block;
 }
+
 form label.inline { display: inline; }
 form .checkbox label { display: inline; }
 form .required label:after { font-family: FontAwesome; content: "\f069"; color: #cc0033; margin-left: 5px; font-weight: normal; }
 form .field_with_errors label { color: #900; }
 form input[type=text], form input[type=password], form input[type=email] {
-  width: 96%; padding: 0.8em;
+  width: 96%;
+  padding: 0.8em;
   font-size: 1em;
-  color: #787878; border: 1px solid #C6C6C6;
+  color: #787878;
+  border: 1px solid #C6C6C6;
 }
+
 form textarea {
-  width: 100%; padding: 0.8em;
-  font-size: inherit; font-family: inherit;
-  color: #787878; border: 1px solid #C6C6C6;
+  width: 100%;
+  padding: 0.8em;
+  font-size: inherit;
+  font-family: inherit;
+  color: #787878;
+  border: 1px solid #C6C6C6;
 }
+
 form textarea.short { height: 8em; }
 form textarea.supershort { height: 4em; }
 form input[type=text]:focus, form input[type=password]:focus, form input[type=email]:focus, form textarea:focus {
-  box-shadow: 0px 0px 4px #69C;
-  -moz-box-shadow: 0px 0px 4px #69C;
-  -webkit-box-shadow: 0px 0px 4px #69C
+  box-shadow: 0 0 4px #69C;
+  -moz-box-shadow: 0 0 4px #69C;
+  -webkit-box-shadow: 0 0 4px #69C
 }
+
 form input[type=checkbox]:focus + label{
   color: #69C;
 }
+
 form input[type=submit] {
-  display:block; width: auto; padding: 0.5em;
+  display: block; width: auto; padding: 0.5em;
   font-size: 1.2em; line-height: 1em; text-transform: uppercase;
   border: none; color: #FFF; background-color: #387fc1;
   cursor: pointer;
