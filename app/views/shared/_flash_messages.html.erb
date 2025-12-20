@@ -1,8 +1,7 @@
 <% unless flash.keys.empty? %>
-  <ul id="flash-messages">
+  <ul id="flash-messages" data-turbo-temporary>
     <% flash.each do |type, message| %>
       <li class="<%= type %>"><%= message %></li>
     <% end %>
   </ul>
 <% end %>
-
