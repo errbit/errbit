@@ -65,7 +65,7 @@ Rails applications.
 * [Install MongoDB](https://www.mongodb.org/downloads)
 * `git clone https://github.com/errbit/errbit.git`
 * `bundle install`
-* `bundle exec rake errbit:bootstrap`
+* `bundle exec rails errbit:bootstrap`
 * `bundle exec rails server`
 
 ## Configuration
@@ -89,7 +89,7 @@ fingerprints are displayed as separate errors.
 Changing the fingerprinter (under the "Config" menu) applies to all apps and
 the change affects only notices that arrive after the change. If you want to
 refingerprint old notices, you can run
-`bundle exec rake errbit:notice_refingerprint`.
+`bundle exec rails errbit:notice_refingerprint`.
 
 Since version 0.7.0, the notice grouping can be separately configured for each
 app (under the "edit" menu).
@@ -208,10 +208,10 @@ When upgrading Errbit, please run:
 ```shell
 git pull origin main # assuming origin is the github.com/errbit/errbit repo
 bundle install
-bundle exec rake db:migrate
-bundle exec rake db:mongoid:remove_undefined_indexes
-bundle exec rake db:mongoid:create_indexes
-bundle exec rake assets:precompile
+bundle exec rails db:migrate
+bundle exec rails db:mongoid:remove_undefined_indexes
+bundle exec rails db:mongoid:create_indexes
+bundle exec rails assets:precompile
 ```
 
 This will ensure that your application stays up to date with any schema changes.
@@ -294,7 +294,7 @@ or you can set up the GitHub Issues tracker for your **Self.Errbit** app:
 
 * Go to the **Self.Errbit** app's edit page. If that app does not exist yet,
   go to the apps page and click **Add a new App** to create it. (You can also
-  create it by running `bundle exec rake airbrake:test`.)
+  create it by running `bundle exec rails airbrake:test`.)
 * In the **Issue Tracker** section, click **GitHub Issues**.
 * Fill in the **Account/Repository** field with **errbit/errbit**.
 * Fill in the **Username** field with your GitHub username.
