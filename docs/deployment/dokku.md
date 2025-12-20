@@ -26,5 +26,5 @@ git push dokku main
 ## Prepare the DB
 
 ```shell
-dokku run errbit rake errbit:bootstrap
+dokku run errbit rails errbit:bootstrap
 ```
