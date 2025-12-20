@@ -46,7 +46,8 @@ class Notice
   # Overwrite the default setter to make sure the message length is no larger
   # than the limit we impose.
   def message=(m)
-    truncated_m = m.mb_chars.compose.limit(MESSAGE_LENGTH_LIMIT).to_s
+    truncated_m = m.truncate_bytes(MESSAGE_LENGTH_LIMIT, omission: nil)
+
     super(m.is_a?(String) ? truncated_m : m)
   end
 
