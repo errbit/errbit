@@ -8,6 +8,7 @@ gem "rails", "8.1.1"
 
 gem "reactionview"
 gem "sprockets-rails"
+gem "importmap-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"
