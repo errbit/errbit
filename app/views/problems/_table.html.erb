@@ -5,10 +5,10 @@
 <% on_page_that_can_include_multiple_different_apps = params[:controller] == "problems" %>
 
 <%= form_tag do %>
-  <table class="errs selectable">
+  <table class="errs selectable" data-controller="checkbox-select-all">
     <thead>
       <tr>
-        <th><%= check_box_tag "toggle_problems_checkboxes" %></th>
+        <th><%= check_box_tag "toggle_problems_checkboxes", data: {target: "checkbox-select-all.checkboxAll"} %></th>
         <% if on_page_that_can_include_multiple_different_apps %>
           <th><%= link_for_sort t(".app") %></th>
         <% else %>
@@ -29,7 +29,8 @@
         <tr class="<%= problem.resolved? ? "resolved" : "unresolved" %>">
           <td class="select narrow-as-possible">
             <div class="td-container">
-              <%= check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s) %>
+              <%#= check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s) %>
+              <%= check_box_tag "ids[]", problem.id, false, data: {target: "checkbox-select-all.checkbox"} %>
             </div>
           </td>
 
@@ -76,16 +77,15 @@
             <div class="td-container">
               <%= link_to problem.notices_count, app_problem_path(problem.app, problem) %>
             </div>
-
-            <%# TODO: this if looks like wrong and should be up for one element (td in td?). %>
-            <% if any_issue_links %>
-              <td class="issue_link narrow-as-possible">
-                <% if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != "pending" %>
-                  <%= link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank", rel: "noopener noreferrer" %>
-                <% end %>
-              </td>
-            <% end %>
           </td>
+
+          <% if any_issue_links %>
+            <td class="issue_link narrow-as-possible">
+              <% if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != "pending" %>
+                <%= link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank", rel: "noopener noreferrer" %>
+              <% end %>
+            </td>
+          <% end %>
 
           <td class="resolve narrow-as-possible">
             <div class="td-container">
