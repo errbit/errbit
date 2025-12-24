@@ -12,12 +12,16 @@
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
     <%= csp_meta_tag %>
+    <%= action_cable_meta_tag %>
+
     <%= stylesheet_link_tag :application %>
     <%= javascript_include_tag :app %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload", integrity: true %>
     <%= javascript_importmap_tags %>
 
     <%= yield :head %>
   </head>
+
   <body id="<%= controller.controller_name %>" class="<%= controller.action_name %>">
     <div id="header">
       <div>

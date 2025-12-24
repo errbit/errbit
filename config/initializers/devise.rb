@@ -30,7 +30,7 @@ Devise.setup do |config|
   # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
+  # config.parent_mailer = "ActionMailer::Base"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -331,8 +331,8 @@ Devise.setup do |config|
   # apps is `200 OK` and `302 Found` respectively, but new apps are generated with
   # these new defaults that match Hotwire/Turbo behavior.
   # Note: These might become the new default in future versions of Devise.
-  # config.responder.error_status = :unprocessable_content
-  # config.responder.redirect_status = :see_other
+  config.responder.error_status = :unprocessable_content
+  config.responder.redirect_status = :see_other
 
   # ==> Configuration for :registerable
 

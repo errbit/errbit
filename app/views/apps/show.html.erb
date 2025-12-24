@@ -32,9 +32,9 @@
   <% end %>
 
   <% if app.watched_by?(current_user) %>
-    <%= link_to t(".unwatch"), app_watchers_path(app_id: app), method: :delete, class: "button" %>
+    <%= link_to t(".unwatch"), app_watchers_path(app_id: app), class: "button", data: {turbo_method: :delete} %>
   <% else %>
-    <%= link_to t(".watch"), app_watchers_path(app_id: app), method: :post, class: "button" %>
+    <%= link_to t(".watch"), app_watchers_path(app_id: app), class: "button", data: {turbo_method: :post} %>
   <% end %>
 <% end %>
 
