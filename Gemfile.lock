@@ -198,17 +198,17 @@ GEM
     hashdiff (1.2.1)
     hashie (5.1.0)
       logger
-    herb (0.8.6)
-    herb (0.8.6-aarch64-linux-gnu)
-    herb (0.8.6-aarch64-linux-musl)
-    herb (0.8.6-arm-linux-gnu)
-    herb (0.8.6-arm-linux-musl)
-    herb (0.8.6-arm64-darwin)
-    herb (0.8.6-x86-linux-gnu)
-    herb (0.8.6-x86-linux-musl)
-    herb (0.8.6-x86_64-darwin)
-    herb (0.8.6-x86_64-linux-gnu)
-    herb (0.8.6-x86_64-linux-musl)
+    herb (0.8.7)
+    herb (0.8.7-aarch64-linux-gnu)
+    herb (0.8.7-aarch64-linux-musl)
+    herb (0.8.7-arm-linux-gnu)
+    herb (0.8.7-arm-linux-musl)
+    herb (0.8.7-arm64-darwin)
+    herb (0.8.7-x86-linux-gnu)
+    herb (0.8.7-x86-linux-musl)
+    herb (0.8.7-x86_64-darwin)
+    herb (0.8.7-x86_64-linux-gnu)
+    herb (0.8.7-x86_64-linux-musl)
     hoi (0.0.7)
       httparty
       json
@@ -796,17 +796,17 @@ CHECKSUMS
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
   hashie (5.1.0) sha256=c266471896f323c446ea8207f8ffac985d2718df0a0ba98651a3057096ca3870
-  herb (0.8.6) sha256=e2c8fe05e972b93b2d68fe74b8a27619890ed2a88d45aa8e1180f4c9ea44e647
-  herb (0.8.6-aarch64-linux-gnu) sha256=46b1bcc6816ae5ab5ba9df180f72d8f4651632ea008811d1c0ef5664c503e842
-  herb (0.8.6-aarch64-linux-musl) sha256=f7ae1bec7f91853fb217f94e22e6691464b5223ad37c83f3d67848f46a65872e
-  herb (0.8.6-arm-linux-gnu) sha256=65f9976bd75428ef954a65758d2acfff1f99c6cafbc149c5bc8e5155d55a5a2a
-  herb (0.8.6-arm-linux-musl) sha256=51acda8990ea8fd142b3c71ac6f389eedd284edc4cae77ffa59347f4f0a897d0
-  herb (0.8.6-arm64-darwin) sha256=29fe5be5c31196129784abe22fe1e52e445938a1f1cfc20af531e1cb08c54b3a
-  herb (0.8.6-x86-linux-gnu) sha256=5d4fef9aa72cd2e2272dfe28bdb371dfb939ac6abe07580811f1cf902bd128d9
-  herb (0.8.6-x86-linux-musl) sha256=28904bd4fdf3acd780c4ecef3fac9165c4d35f682c3e55e8c3025d352551b2f2
-  herb (0.8.6-x86_64-darwin) sha256=b433b6711e2e053b8e6da70345cde1c675c53ad3e3f5799be7807967949097c9
-  herb (0.8.6-x86_64-linux-gnu) sha256=9412e95077c75ba069bf12cbb67f603a34f152407542b31faac414db7a5deb87
-  herb (0.8.6-x86_64-linux-musl) sha256=b4125d7bbe078d7500a9908f9a547e97941bd1ea9cfc666b9de40a479cdd0286
+  herb (0.8.7) sha256=73c5216b1e1b2e84c55411804a95768b1bbbfc99ccc7ee88724ea41498fd2aeb
+  herb (0.8.7-aarch64-linux-gnu) sha256=a9b59feefc518042b31bf0b7cd2e5857f61555380f36d872b6bf5fca1b49c697
+  herb (0.8.7-aarch64-linux-musl) sha256=9f61389d91b3c0e1f45dd53c4d04a64c29ed4e5d12ec2a85859f645b9d999592
+  herb (0.8.7-arm-linux-gnu) sha256=16af723371e0c9eb9048b2c254df2d8d2633e7ced2bfd3ff9a6c9e2bfb44eec4
+  herb (0.8.7-arm-linux-musl) sha256=4f37c99fdbc1deb4ff9b1f13099a7a743bb0b570ce8fa993f2fa5130909d90a1
+  herb (0.8.7-arm64-darwin) sha256=f8b0d295fb941ce7e88d39146528c8bab702aa937703be6632528a8fdddebffc
+  herb (0.8.7-x86-linux-gnu) sha256=b830833b509e136e787da75d23e75084934f3e0621be0e4a70466b530ad9b3ce
+  herb (0.8.7-x86-linux-musl) sha256=4dbcc89c7b8581eb7ba278258c6e57b01ba72ecc4054a2e6139ab3ee07a9a1ed
+  herb (0.8.7-x86_64-darwin) sha256=f61cb1fb7a45e9aad9ac71b76ddace3527e8a6040f7bddbe210517cb01b09abc
+  herb (0.8.7-x86_64-linux-gnu) sha256=bd456eec87593b128e5bfe13b614418ceab42fd332965d371008f3754bcf6169
+  herb (0.8.7-x86_64-linux-musl) sha256=48ea60845b065fe6071af826ce1a6236944248f7cc0c23780226e0f48ec16709
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   hoptoad_notifier (2.4.11)
   htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
