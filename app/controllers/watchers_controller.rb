@@ -8,7 +8,7 @@ class WatchersController < ApplicationController
 
     flash[:success] = t(".success", app: app.name)
 
-    redirect_to app_path(app)
+    redirect_to app_path(app), status: :see_other
   end
 
   def destroy
@@ -20,6 +20,6 @@ class WatchersController < ApplicationController
 
     flash[:success] = t(".success", app: app.name)
 
-    redirect_to app_path(app)
+    redirect_to app_path(app), status: :see_other
   end
 end

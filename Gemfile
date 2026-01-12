@@ -10,6 +10,7 @@ gem "reactionview"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "importmap-rails"
+gem "turbo-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"
@@ -108,9 +109,5 @@ group :test do
   gem "webmock"
   gem "vcr"
 end
-
-gem "jquery-rails"
-gem "pjax_rails"
-gem "underscore-rails"
 
 eval_gemfile "./UserGemfile"
