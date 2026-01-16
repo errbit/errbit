@@ -88,7 +88,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "listen", "~> 3.5"
+  gem "listen", "~> 3.10"
   gem "bundler-audit", require: false
 end
 
