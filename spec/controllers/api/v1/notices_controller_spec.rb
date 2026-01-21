@@ -55,6 +55,16 @@ RSpec.describe Api::V1::NoticesController, type: :controller do
 
         expect(notices.length).to eq(4)
       end
+
+      it "should return notice objects with correct fields" do
+        get :index, params: {auth_token: @user.authentication_token, format: "json"}
+
+        notices = JSON.parse(response.body)
+        notice = notices.first
+
+        expect(notice).to be_a(Hash)
+        expect(notice.keys).to match_array(["_id", "created_at", "message", "error_class"])
+      end
     end
   end
 end
