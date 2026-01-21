@@ -25,7 +25,7 @@ module Api
         end
 
         respond_to do |format|
-          format.any(:html, :json) { render json: JSON.dump(results) } # render JSON if no extension specified on path
+          format.any(:html, :json) { render json: results } # render JSON if no extension specified on path
           format.xml { render xml: results }
         end
       end
