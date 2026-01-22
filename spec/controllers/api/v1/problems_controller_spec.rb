@@ -115,6 +115,20 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
         expect(problems.length).to eq(4)
       end
+
+      it "should return problem objects with correct fields" do
+        get :index, params: {auth_token: @user.authentication_token, format: "json"}
+
+        problems = JSON.parse(response.body)
+        problem = problems.first
+
+        expect(problem).to be_a(Hash)
+        expect(problem.keys).to match_array([
+          "_id", "app_id", "app_name", "environment", "message", "where",
+          "first_notice_at", "last_notice_at", "resolved", "resolved_at",
+          "notices_count"
+        ])
+      end
     end
   end
 end
