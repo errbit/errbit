@@ -19,7 +19,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
       it "should return JSON if JSON is requested" do
         get :index, params: {problem_id: @problem.id, auth_token: @user.authentication_token, format: "json"}
 
-        expect { JSON.parse(response.body) }.not_to raise_error
+        expect { response.parsed_body }.not_to raise_error
       end
 
       it "should return XML if XML is requested" do
@@ -31,7 +31,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
       it "should return JSON by default" do
         get :index, params: {problem_id: @problem.id, auth_token: @user.authentication_token}
 
-        expect { JSON.parse(response.body) }.not_to raise_error
+        expect { response.parsed_body }.not_to raise_error
       end
 
       it "should return all comments of a problem" do
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
         expect(response).to be_successful
 
-        comments = JSON.parse response.body
+        comments = JSON.parse(response.body)
 
         expect(comments.length).to eq(2)
       end
@@ -68,7 +68,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
           expect(response).not_to be_successful
 
-          errors = JSON.parse response.body
+          errors = JSON.parse(response.body)
 
           expect(errors).to eq("errors" => ["Body can't be blank"])
         end
