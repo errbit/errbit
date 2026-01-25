@@ -33,7 +33,7 @@ RSpec.describe "Callback on Notice", type: :model do
 
   describe "email notifications (configured individually for each app)" do
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
-    custom_thresholds = [2, 4, 8, 16, 32, 64]
+    let(:custom_thresholds) { [2, 4, 8, 16, 32, 64] }
     let(:app) do
       create(:app_with_watcher, email_at_notices: custom_thresholds)
     end

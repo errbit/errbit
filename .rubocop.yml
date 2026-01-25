@@ -395,9 +395,8 @@ RSpec/LeakyConstantDeclaration:
 RSpec/LetSetup:
   Enabled: false
 
-# TODO: enable with update to rubocop-rspec 3.8.0
-#RSpec/LeakyLocalVariable:
-#  Enabled: true
+RSpec/LeakyLocalVariable:
+  Enabled: true
 
 # Naming rules:
 
