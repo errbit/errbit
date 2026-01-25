@@ -25,7 +25,14 @@ jobs:
       - name: Harden Runner
         uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
         with:
-          egress-policy: audit
+          disable-sudo-and-containers: true
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443
+            hosted-compute-watchdog-prod-iad-02.githubapp.com:443
+            index.rubygems.org:443
+            release-assets.githubusercontent.com:443
+            rubygems.org:443
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Ruby
