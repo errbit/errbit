@@ -56,7 +56,7 @@ module ApplicationHelper
   end
 
   def tail(collection)
-    collection.to_a[head_size..-1].to_a
+    collection.to_a[head_size..].to_a
   end
 
   def issue_tracker_types
