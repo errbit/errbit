@@ -104,7 +104,7 @@ GEM
     bigdecimal (3.1.9-java)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (7.1.2)
+    brakeman (7.1.1)
       racc
     bson (5.0.2)
     bson (5.0.2-java)
@@ -754,7 +754,7 @@ CHECKSUMS
   bigdecimal (3.1.9) sha256=2ffc742031521ad69c2dfc815a98e426a230a3d22aeac1995826a75dabfad8cc
   bigdecimal (3.1.9-java) sha256=dd9b8f7c870664cd9538a1325ce385ba57a6627969177258c4f0e661a7be4456
   bootsnap (1.18.4) sha256=ac4c42af397f7ee15521820198daeff545e4c360d2772c601fbdc2c07d92af55
-  brakeman (7.1.2) sha256=6b04927710a2e7d13a72248b5d404c633188e02417f28f3d853e4b6370d26dce
+  brakeman (7.1.1) sha256=629426b5d6496c75e3ffa2299e1ab1bb3ba721fea03d8808414c083660439498
   bson (5.0.2) sha256=eeac55a357c3103bdf3f903954ded8eb2dab15ae29f10d8bc62afb359971d523
   bson (5.0.2-java) sha256=f73e7b37d2c6d297580e74b905a11749a0b4d6c776fd095688180c56bda0affd
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
