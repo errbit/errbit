@@ -143,8 +143,7 @@ RSpec.describe "Callback on Notice", type: :model do
     end
   end
 
-  describe "should not send a notification if a notification service is not" \
-           "configured" do
+  describe "should not send a notification if a notification service is not configured" do
     let(:notification_service) { create(:notification_service) }
     let(:app) { create(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
