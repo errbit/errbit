@@ -69,12 +69,10 @@ class User
 
       user = User.where(email: email).first
 
-      user ||= User.create(name: name,
+      user || User.create(name: name,
         email: email,
         google_uid: uid,
         password: Devise.friendly_token[0, 20])
-
-      user
     end
   end
 
