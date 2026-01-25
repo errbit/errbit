@@ -17,7 +17,7 @@ module Errbit
     end
 
     def source_version
-      source_version = ENV["SOURCE_VERSION"]
+      source_version = ENV.fetch("SOURCE_VERSION", nil)
       source_version[0...8] if source_version.present?
     end
 
