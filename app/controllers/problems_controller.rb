@@ -100,7 +100,7 @@ class ProblemsController < ApplicationController
 
     flash[:success] = t(".the_error_has_been_resolved")
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def resolve_several
@@ -108,7 +108,7 @@ class ProblemsController < ApplicationController
 
     flash[:success] = "Great news everyone! #{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t("n_errs_have.been_resolved")}."
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def unresolve_several
@@ -116,7 +116,7 @@ class ProblemsController < ApplicationController
 
     flash[:success] = "#{I18n.t(:n_errs_have, count: selected_problems.count)} #{I18n.t("n_errs_have.been_unresolved")}."
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def merge_several
@@ -128,7 +128,7 @@ class ProblemsController < ApplicationController
       flash[:notice] = I18n.t("controllers.problems.flash.merge_several.success", nb: selected_problems.count)
     end
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def unmerge_several
@@ -136,7 +136,7 @@ class ProblemsController < ApplicationController
 
     flash[:success] = "#{I18n.t(:n_errs_have, count: all.length)} #{I18n.t("n_errs_have.been_unmerged")}."
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def destroy_several
@@ -144,7 +144,7 @@ class ProblemsController < ApplicationController
 
     flash[:notice] = "#{I18n.t(:n_errs, count: selected_problems.size)} #{I18n.t("n_errs.will_be_deleted")}."
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def destroy_all
@@ -152,7 +152,7 @@ class ProblemsController < ApplicationController
 
     flash[:success] = "#{I18n.t(:n_errs, count: app.problems.count)} #{I18n.t("n_errs.will_be_deleted")}."
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 
   def search
@@ -169,6 +169,6 @@ class ProblemsController < ApplicationController
 
     flash[:notice] = I18n.t("controllers.problems.flash.no_select_problem")
 
-    redirect_back fallback_location: root_path
+    redirect_back_or_to(root_path)
   end
 end
