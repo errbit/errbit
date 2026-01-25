@@ -13,14 +13,14 @@ RSpec.describe OutdatedProblemClearer do
     context "without old problems" do
       it "do nothing" do
         expect do
-          expect(described_class.execute).to eq(0)
-        end.not_to change(Problem.count)
+          expect(subject.execute).to eq(0)
+        end.not_to change(Problem, :count)
       end
 
       it "not compact database" do
         allow(Mongoid.default_client).to receive(:command).and_call_original
         expect(Mongoid.default_client).not_to receive(:command).with(compact: an_instance_of(String))
-        described_class.execute
+        subject.execute
       end
     end
 
@@ -34,8 +34,8 @@ RSpec.describe OutdatedProblemClearer do
 
       it "deletes old problems" do
         expect do
-          expect(described_class.execute).to eq(2)
-        end.to change(Problem.count).by(-2)
+          expect(subject.execute).to eq(2)
+        end.to change(Problem, :count).by(-2)
 
         expect(Problem.where(_id: problems.first.id).first).to eq(nil)
         expect(Problem.where(_id: problems.second.id).first).to eq(nil)
@@ -44,7 +44,7 @@ RSpec.describe OutdatedProblemClearer do
       it "compact database" do
         expect(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
 
-        described_class.execute
+        subject.execute
       end
     end
   end
