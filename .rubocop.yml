@@ -417,6 +417,11 @@ Naming/FileName:
     - "spec/support/selenium-webdriver.rb"
     - "spec/support/rspec-rebound.rb"
 
+# name_1, name_2, etc instead of name1, name2
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: snake_case
+
 # Disabled syntax:
 
 # Disable shorthand hash syntax like: ({ x:, y: })
