@@ -398,6 +398,9 @@ RSpec/LetSetup:
 RSpec/LeakyLocalVariable:
   Enabled: true
 
+RSpec/ReceiveMessages:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
