@@ -13,29 +13,29 @@ AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
 
-# We use standard as a linter and formatter instead Rubocop.
+# We use standard as a linter and formatter instead of Rubocop.
 # Also, we are explicitly disable all rubocop rules what
 # already enabled in standard. And standard-performance.
 
 # Standard rules. Style:
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/StringLiterals:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/HashSyntax:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/NestedParenthesizedCalls:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantRegexpArgument:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/PercentLiteralDelimiters:
   Enabled: false
 
@@ -265,6 +265,10 @@ Lint/ConstantDefinitionInBlock:
 
 # Enforced by standard. Disable.
 Lint/UselessTimes:
+  Enabled: false
+
+# We are using empty blocks in specs as placeholders for future implementation.
+Lint/EmptyBlock:
   Enabled: false
 
 # Standard-performance rules.
