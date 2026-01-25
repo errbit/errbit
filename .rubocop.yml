@@ -115,45 +115,45 @@ Style/ConditionalAssignment:
 Style/ItAssignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/EachWithObject:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/GlobalStdStream:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/StringLiteralsInInterpolation:
   Enabled: false
 
-# Disabled as in standard.
+# Disabled as in `standard`.
 Style/HashAsLastArrayItem:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/Alias:
   Enabled: false
 
 # Standard rules. Layout:
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/HashAlignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/FirstArrayElementIndentation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/SpaceInsideStringInterpolation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/DotPosition:
   Enabled: false
 
@@ -319,7 +319,7 @@ Style/WordArray:
 Style/Documentation:
   Enabled: false
 
-# Disable as in standard.
+# Disable as in `standard`.
 Style/ArgumentsForwarding:
   Enabled: false
 
@@ -353,7 +353,7 @@ RSpec/IndexedLet:
 RSpec/NamedSubject:
   Enabled: false
 
-# Ignore system and requests specs.
+# Ignore `system` and `requests` specs.
 RSpec/ExampleLength:
   Enabled: true
   Exclude:
@@ -391,6 +391,9 @@ RSpec/LeadingSubject:
 
 RSpec/LeakyConstantDeclaration:
   Enabled: true
+
+RSpec/LetSetup:
+  Enabled: false
 
 # TODO: enable with update to rubocop-rspec 3.8.0
 #RSpec/LeakyLocalVariable:
