@@ -18,14 +18,19 @@ RSpec.describe App, type: :model do
   context "validations" do
     it "requires a name" do
       app = build(:app, name: nil)
+
       expect(app.valid?).to eq(false)
+
       expect(app.errors[:name]).to include("can't be blank")
     end
 
     it "requires unique names" do
       create(:app, name: "Errbit")
+
       app = build(:app, name: "Errbit")
+
       expect(app.valid?).to eq(false)
+
       expect(app.errors[:name]).to eq(["has already been taken"])
     end
 
@@ -146,8 +151,8 @@ RSpec.describe App, type: :model do
   context "notification recipients" do
     it "should send notices to either all users plus watchers, or the configured watchers" do
       app = create(:app)
-      3.times { create(:user) }
-      5.times { create(:watcher, app: app) }
+      create_list(:user, 3)
+      create_list(:watcher, 5, app: app)
       app.notify_all_users = true
       expect(app.notification_recipients.size).to eq(8)
       app.notify_all_users = false
@@ -158,13 +163,15 @@ RSpec.describe App, type: :model do
   describe "#emailable?" do
     it "should be true if notify on errs and there are notification recipients" do
       app = create(:app, notify_on_errs: true, notify_all_users: false)
-      2.times { create(:watcher, app: app) }
+
+      create_list(:watcher, 2, app: app)
+
       expect(app.emailable?).to eq(true)
     end
 
     it "should be false if notify on errs is disabled" do
       app = create(:app, notify_on_errs: false, notify_all_users: false)
-      2.times { create(:watcher, app: app) }
+      create_list(:watcher, 2, app: app)
       expect(app.emailable?).to eq(false)
     end
 

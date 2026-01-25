@@ -12,13 +12,7 @@ RSpec.describe OutdatedProblemClearer do
   end
 
   describe "#execute" do
-    let!(:problems) do
-      [
-        create(:problem),
-        create(:problem),
-        create(:problem)
-      ]
-    end
+    let!(:problems) { create_list(:problem, 3) }
 
     context "without old problems" do
       it "do nothing" do

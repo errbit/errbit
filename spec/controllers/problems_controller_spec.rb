@@ -26,9 +26,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "pagination" do
-      before do
-        35.times { create(:err) }
-      end
+      before { create_list(:err, 35) }
 
       it "should have default per_page value for user" do
         get :index
