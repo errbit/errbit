@@ -62,7 +62,7 @@ class User
     end
 
     # @param access_token [String]
-    def create_from_google_oauth2(access_token)
+    def create_from_google_oauth2(access_token) # rubocop:disable Naming/VariableNumber
       email = access_token.dig(:info, :email)
       name = access_token.dig(:info, :name)
       uid = access_token[:uid]
