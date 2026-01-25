@@ -7,26 +7,20 @@ RSpec.describe OutdatedProblemClearer do
     allow(Errbit::Config).to receive(:notice_deprecation_days).and_return(7)
   end
 
-  let(:outdated_problem_clearer) do
-    OutdatedProblemClearer.new
-  end
-
   describe "#execute" do
     let!(:problems) { create_list(:problem, 3) }
 
     context "without old problems" do
       it "do nothing" do
         expect do
-          expect(outdated_problem_clearer.execute).to eq(0)
-        end.not_to change {
-          Problem.count
-        }
+          expect(described_class.execute).to eq(0)
+        end.not_to change(Problem.count)
       end
 
       it "not compact database" do
         allow(Mongoid.default_client).to receive(:command).and_call_original
         expect(Mongoid.default_client).not_to receive(:command).with(compact: an_instance_of(String))
-        outdated_problem_clearer.execute
+        described_class.execute
       end
     end
 
@@ -40,17 +34,17 @@ RSpec.describe OutdatedProblemClearer do
 
       it "deletes old problems" do
         expect do
-          expect(outdated_problem_clearer.execute).to eq(2)
-        end.to change {
-          Problem.count
-        }.by(-2)
+          expect(described_class.execute).to eq(2)
+        end.to change(Problem.count).by(-2)
+
         expect(Problem.where(_id: problems.first.id).first).to eq(nil)
         expect(Problem.where(_id: problems.second.id).first).to eq(nil)
       end
 
       it "compact database" do
         expect(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
-        outdated_problem_clearer.execute
+
+        described_class.execute
       end
     end
   end

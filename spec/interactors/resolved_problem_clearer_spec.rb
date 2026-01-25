@@ -14,9 +14,7 @@ RSpec.describe ResolvedProblemClearer do
       it "do nothing" do
         expect do
           expect(resolved_problem_clearer.execute).to eq(0)
-        end.not_to change {
-          Problem.count
-        }
+        end.not_to change(Problem.count)
       end
 
       it "not compact database" do
@@ -37,9 +35,8 @@ RSpec.describe ResolvedProblemClearer do
       it "delete problem resolve" do
         expect do
           expect(resolved_problem_clearer.execute).to eq(2)
-        end.to change {
-          Problem.count
-        }.by(-2)
+        end.to change(Problem.count).by(-2)
+
         expect(Problem.where(_id: problems.first.id).first).to eq(nil)
         expect(Problem.where(_id: problems.second.id).first).to eq(nil)
       end
