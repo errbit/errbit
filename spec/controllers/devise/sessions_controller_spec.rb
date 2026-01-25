@@ -23,7 +23,7 @@ RSpec.describe Devise::SessionsController, type: :controller do
     it "displays a friendly error when credentials are invalid" do
       post :create, params: {user: {"email" => "whatever", "password" => "somethinginvalid"}}
 
-      expect(request.flash["alert"]).to eq(I18n.t("devise.failure.not_found_in_database", authentication_keys: "Email"))
+      expect(request.flash["alert"]).to eq(I18n.t("devise.failure.not_found_in_database", authentication_keys: "email"))
     end
   end
 end
