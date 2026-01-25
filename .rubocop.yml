@@ -15,7 +15,7 @@ AllCops:
 
 # We use standard as a linter and formatter instead of Rubocop.
 # Also, we are explicitly disable all rubocop rules what
-# already enabled in standard. And standard-performance.
+# already enabled in `standard`. And standard-performance.
 
 # Standard rules. Style:
 
@@ -39,79 +39,79 @@ Style/RedundantRegexpArgument:
 Style/PercentLiteralDelimiters:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantBegin:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/SuperWithArgsParentheses:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/Encoding:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/NumericLiteralPrefix:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantParentheses:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/EmptyMethod:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/SingleLineMethods:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/SafeNavigation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RescueStandardError:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantSelf:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/TernaryParentheses:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantLineContinuation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/SlicingWithRange:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/MultilineIfModifier:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantCondition:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/RedundantInterpolation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/OrAssignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/ConditionalAssignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Style/ItAssignment:
   Enabled: false
 
