@@ -45,7 +45,7 @@ RSpec.describe ErrorReport, type: :model do
     it "save a notice" do
       expect do
         error_report.generate_notice!
-      end.to change(app.reload.problems.count).by(1)
+      end.to change(app.reload.problems, :count).by(1)
     end
 
     context "with a minimal notice" do
@@ -56,7 +56,7 @@ RSpec.describe ErrorReport, type: :model do
       it "save a notice" do
         expect do
           error_report.generate_notice!
-        end.to change(app.reload.problems.count).by(1)
+        end.to change(app.reload.problems, :count).by(1)
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe ErrorReport, type: :model do
       it "save a notice" do
         expect do
           error_report.generate_notice!
-        end.to change(app.reload.problems.count).by(1)
+        end.to change(app.reload.problems, :count).by(1)
       end
     end
 
@@ -225,7 +225,7 @@ RSpec.describe ErrorReport, type: :model do
       error_report.generate_notice!
 
       error_report.generate_notice!
-    end.to change(Notice.count).by(1)
+    end.to change(Notice, :count).by(1)
   end
 
   it "find the correct err for the notice" do
