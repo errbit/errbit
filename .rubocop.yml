@@ -401,6 +401,9 @@ RSpec/LeakyLocalVariable:
 RSpec/ReceiveMessages:
   Enabled: false
 
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
@@ -433,7 +436,7 @@ Style/DisableSyntax:
 
 # RSpec Rails rules:
 
-# This is new RSpec default. Disable.
+# This is a new RSpec default. Disable.
 RSpecRails/InferredSpecType:
   Enabled: false
 
@@ -458,3 +461,26 @@ Metrics/BlockLength:
   Exclude:
     - "config/routes.rb"
     - "config/initializers/devise.rb"
+
+# Remove after migration
+
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/NoExpectationExample:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
