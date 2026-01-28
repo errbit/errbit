@@ -26,9 +26,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "pagination" do
-      before do
-        35.times { create(:err) }
-      end
+      before { create_list(:err, 35) }
 
       it "should have default per_page value for user" do
         get :index
@@ -120,8 +118,8 @@ RSpec.describe ProblemsController, type: :controller do
     before do
       sign_in user
       @app = create(:app)
-      @problem1 = create(:problem, app: @app, message: "Most important")
-      @problem2 = create(:problem, app: @app, message: "Very very important")
+      @problem_1 = create(:problem, app: @app, message: "Most important")
+      @problem_2 = create(:problem, app: @app, message: "Very very important")
     end
 
     it "renders successfully" do
@@ -139,17 +137,17 @@ RSpec.describe ProblemsController, type: :controller do
     it "searches problems for given string" do
       get :search, params: {search: "\"Most important\""}
 
-      expect(controller.problems).to include(@problem1)
+      expect(controller.problems).to include(@problem_1)
 
-      expect(controller.problems).not_to include(@problem2)
+      expect(controller.problems).not_to include(@problem_2)
     end
 
     it "works when given string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.problems).to include(@problem1)
+      expect(controller.problems).to include(@problem_1)
 
-      expect(controller.problems).to include(@problem2)
+      expect(controller.problems).to include(@problem_2)
     end
   end
 
@@ -383,6 +381,7 @@ RSpec.describe ProblemsController, type: :controller do
 
       it "should redirect to problem page" do
         post :close_issue, params: {app_id: problem.app.id, id: problem.id}
+
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to be_blank
       end
@@ -391,6 +390,7 @@ RSpec.describe ProblemsController, type: :controller do
     context "when app has no issue tracker" do
       it "should redirect to problem page" do
         post :close_issue, params: {app_id: problem.app.id, id: problem.id}
+
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to eq("This app has no issue tracker")
       end
@@ -436,19 +436,21 @@ RSpec.describe ProblemsController, type: :controller do
   describe "Bulk Actions" do
     before do
       sign_in user
-      @problem1 = create(:err, problem: create(:problem, resolved: true)).problem
-      @problem2 = create(:err, problem: create(:problem, resolved: false)).problem
+      @problem_1 = create(:err, problem: create(:problem, resolved: true)).problem
+      @problem_2 = create(:err, problem: create(:problem, resolved: false)).problem
     end
 
     context "POST /problems/merge_several" do
       it "should require at least two problems" do
-        post :merge_several, params: {problems: [@problem1.id.to_s]}
+        post :merge_several, params: {problems: [@problem_1.id.to_s]}
+
         expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.need_two_errors_merge"))
       end
 
       it "should merge the problems" do
         expect(ProblemMerge).to receive(:new).and_return(double(merge: true))
-        post :merge_several, params: {problems: [@problem1.id.to_s, @problem2.id.to_s]}
+
+        post :merge_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
       end
     end
 
@@ -459,11 +461,11 @@ RSpec.describe ProblemsController, type: :controller do
       end
 
       it "should unmerge a merged problem" do
-        merged_problem = Problem.merge!(@problem1, @problem2)
-        expect(merged_problem.errs.length).to eq 2
+        merged_problem = Problem.merge!(@problem_1, @problem_2)
+        expect(merged_problem.errs.length).to eq(2)
         expect do
           post :unmerge_several, params: {problems: [merged_problem.id.to_s]}
-          expect(merged_problem.reload.errs.length).to eq 1
+          expect(merged_problem.reload.errs.length).to eq(1)
         end.to change(Problem, :count).by(1)
       end
     end
@@ -471,42 +473,48 @@ RSpec.describe ProblemsController, type: :controller do
     context "POST /problems/resolve_several" do
       it "should require at least one problem" do
         post :resolve_several, params: {problems: []}
+
         expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
       end
 
       it "should resolve the issue" do
-        post :resolve_several, params: {problems: [@problem2.id.to_s]}
-        expect(@problem2.reload.resolved?).to eq(true)
+        post :resolve_several, params: {problems: [@problem_2.id.to_s]}
+
+        expect(@problem_2.reload.resolved?).to eq(true)
       end
 
       it "should display a message about 1 err" do
-        post :resolve_several, params: {problems: [@problem2.id.to_s]}
+        post :resolve_several, params: {problems: [@problem_2.id.to_s]}
+
         expect(flash[:success]).to match(/1 error has been resolved/)
       end
 
       it "should display a message about 2 errs" do
-        post :resolve_several, params: {problems: [@problem1.id.to_s, @problem2.id.to_s]}
+        post :resolve_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
+
         expect(flash[:success]).to match(/2 errors have been resolved/)
-        expect(controller.selected_problems).to eq([@problem1, @problem2])
+        expect(controller.selected_problems).to eq([@problem_1, @problem_2])
       end
     end
 
     context "POST /problems/unresolve_several" do
       it "should require at least one problem" do
         post :unresolve_several, params: {problems: []}
+
         expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
       end
 
       it "should unresolve the issue" do
-        post :unresolve_several, params: {problems: [@problem1.id.to_s]}
-        expect(@problem1.reload.resolved?).to eq(false)
+        post :unresolve_several, params: {problems: [@problem_1.id.to_s]}
+
+        expect(@problem_1.reload.resolved?).to eq(false)
       end
     end
 
     context "POST /problems/destroy_several" do
       it "should delete the problems" do
         expect do
-          post :destroy_several, params: {problems: [@problem1.id.to_s]}
+          post :destroy_several, params: {problems: [@problem_1.id.to_s]}
         end.to change(Problem, :count).by(-1)
       end
     end
@@ -515,25 +523,29 @@ RSpec.describe ProblemsController, type: :controller do
       before do
         sign_in user
         @app = create(:app)
-        @problem1 = create(:problem, app: @app)
-        @problem2 = create(:problem, app: @app)
+        @problem_1 = create(:problem, app: @app)
+        @problem_2 = create(:problem, app: @app)
       end
 
       it "destroys all problems" do
         expect do
           post :destroy_all, params: {app_id: @app.id}
         end.to change(Problem, :count).by(-2)
+
         expect(controller.app).to eq(@app)
       end
 
       it "should display a message" do
         patch :destroy_all, params: {app_id: @app.id}
+
         expect(request.flash[:success]).to match(/be deleted/)
       end
 
       it "should redirect back to the app page" do
         request.env["HTTP_REFERER"] = edit_app_path(@app)
+
         patch :destroy_all, params: {app_id: @app.id}
+
         expect(response).to redirect_to(edit_app_path(@app))
       end
     end

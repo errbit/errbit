@@ -16,25 +16,19 @@ RSpec.describe Problem, type: :model do
   describe "FactoryBot" do
     context "create(:problem)" do
       it "should have no comment" do
-        expect do
-          create(:problem)
-        end.not_to change(Comment, :count)
+        expect { create(:problem) }.not_to change(Comment, :count)
       end
     end
 
     context "create(:problem_with_comments)" do
       it "should have 3 comments" do
-        expect do
-          create(:problem_with_comments)
-        end.to change(Comment, :count).by(3)
+        expect { create(:problem_with_comments) }.to change(Comment, :count).by(3)
       end
     end
 
     context "create(:problem_with_errs)" do
       it "should have 3 errs" do
-        expect do
-          create(:problem_with_errs)
-        end.to change(Err, :count).by(3)
+        expect { create(:problem_with_errs) }.to change(Err, :count).by(3)
       end
     end
   end
@@ -45,11 +39,11 @@ RSpec.describe Problem, type: :model do
       problem = err.problem
       expect(problem).not_to eq(nil)
 
-      notice1 = create(:notice, err: err)
-      expect(problem.last_notice_at).to eq(notice1.reload.created_at)
+      notice_1 = create(:notice, err: err)
+      expect(problem.last_notice_at).to eq(notice_1.reload.created_at)
 
-      notice2 = create(:notice, err: err)
-      expect(problem.last_notice_at).to eq(notice2.reload.created_at)
+      notice_2 = create(:notice, err: err)
+      expect(problem.last_notice_at).to eq(notice_2.reload.created_at)
     end
   end
 
@@ -59,11 +53,11 @@ RSpec.describe Problem, type: :model do
       problem = err.problem
       expect(problem).not_to eq(nil)
 
-      notice1 = create(:notice, err: err)
-      expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
+      notice_1 = create(:notice, err: err)
+      expect(problem.first_notice_at.to_i).to be_within(1).of(notice_1.created_at.to_i)
 
       create(:notice, err: err)
-      expect(problem.first_notice_at.to_i).to be_within(1).of(notice1.created_at.to_i)
+      expect(problem.first_notice_at.to_i).to be_within(1).of(notice_1.created_at.to_i)
     end
   end
 
@@ -113,9 +107,11 @@ RSpec.describe Problem, type: :model do
     it "should record the time when it was resolved" do
       problem = create(:problem)
       expected_resolved_at = Time.zone.now
+
       travel_to(expected_resolved_at) do
         problem.resolve!
       end
+
       expect(problem.resolved_at.to_s).to eq(expected_resolved_at.to_s)
     end
 
@@ -125,7 +121,7 @@ RSpec.describe Problem, type: :model do
       expect(original_notices_count).to be > 0
 
       problem.resolve!
-      expect(problem.notices_count).to eq original_notices_count
+      expect(problem.notices_count).to eq(original_notices_count)
     end
 
     it "should throw an err if it's not successful" do
@@ -146,10 +142,10 @@ RSpec.describe Problem, type: :model do
 
   describe "#unmerge!" do
     it "creates a separate problem for each err" do
-      problem1 = create(:notice).problem
-      problem2 = create(:notice).problem
-      merged_problem = Problem.merge!(problem1, problem2)
-      expect(merged_problem.errs.length).to eq 2
+      problem_1 = create(:notice).problem
+      problem_2 = create(:notice).problem
+      merged_problem = Problem.merge!(problem_1, problem_2)
+      expect(merged_problem.errs.length).to eq(2)
 
       expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
       expect(merged_problem.errs(true).length).to eq(1)
@@ -200,8 +196,8 @@ RSpec.describe Problem, type: :model do
         err = create(:err, problem: problem)
         notice = create(:notice, err: err, message: "ERR 1")
 
-        problem2 = create(:problem, where: "cyril")
-        expect(problem2).not_to eq(problem)
+        problem_2 = create(:problem, where: "cyril")
+        expect(problem_2).not_to eq(problem)
         expect(Problem.search(notice.id).entries).to eq([problem])
       end
     end
@@ -291,40 +287,40 @@ RSpec.describe Problem, type: :model do
 
   context "filtered" do
     before do
-      @app1 = create(:app)
-      @problem1 = create(:problem, app: @app1)
+      @app_1 = create(:app)
+      @problem_1 = create(:problem, app: @app_1)
 
-      @app2 = create(:app)
-      @problem2 = create(:problem, app: @app2)
+      @app_2 = create(:app)
+      @problem_2 = create(:problem, app: @app_2)
 
-      @app3 = create(:app)
-      @app3.update_attribute(:name, "app3")
+      @app_3 = create(:app)
+      @app_3.update_attribute(:name, "app3")
 
-      @problem3 = create(:problem, app: @app3)
+      @problem_3 = create(:problem, app: @app_3)
     end
 
     it "#filtered returns problems but excludes those attached to the specified apps" do
-      expect(Problem.filtered("-app:'#{@app1.name}'")).to include(@problem2)
-      expect(Problem.filtered("-app:'#{@app1.name}'")).not_to include(@problem1)
+      expect(Problem.filtered("-app:'#{@app_1.name}'")).to include(@problem_2)
+      expect(Problem.filtered("-app:'#{@app_1.name}'")).not_to include(@problem_1)
 
-      filtered_results_with_two_exclusions = Problem.filtered("-app:'#{@app1.name}' -app:app3")
-      expect(filtered_results_with_two_exclusions).not_to include(@problem1)
-      expect(filtered_results_with_two_exclusions).to include(@problem2)
-      expect(filtered_results_with_two_exclusions).not_to include(@problem3)
+      filtered_results_with_two_exclusions = Problem.filtered("-app:'#{@app_1.name}' -app:app3")
+      expect(filtered_results_with_two_exclusions).not_to include(@problem_1)
+      expect(filtered_results_with_two_exclusions).to include(@problem_2)
+      expect(filtered_results_with_two_exclusions).not_to include(@problem_3)
     end
 
     it "#filtered does not explode if given a nil filter" do
       filtered_results = Problem.filtered(nil)
-      expect(filtered_results).to include(@problem1)
-      expect(filtered_results).to include(@problem2)
-      expect(filtered_results).to include(@problem3)
+      expect(filtered_results).to include(@problem_1)
+      expect(filtered_results).to include(@problem_2)
+      expect(filtered_results).to include(@problem_3)
     end
 
     it "#filtered does nothing for unimplemented filter types" do
       filtered_results = Problem.filtered("filterthatdoesnotexist:hotapp")
-      expect(filtered_results).to include(@problem1)
-      expect(filtered_results).to include(@problem2)
-      expect(filtered_results).to include(@problem3)
+      expect(filtered_results).to include(@problem_1)
+      expect(filtered_results).to include(@problem_2)
+      expect(filtered_results).to include(@problem_3)
     end
   end
 

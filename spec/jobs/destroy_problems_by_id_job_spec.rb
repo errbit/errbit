@@ -7,10 +7,10 @@ RSpec.describe DestroyProblemsByIdJob, type: :job do
 
   it "destroys all selected problems" do
     app = create(:app)
-    problem1 = create(:problem, app: app)
+    problem = create(:problem, app: app)
 
     expect do
-      described_class.perform_later([problem1.id])
+      described_class.perform_later([problem.id])
     end.to change(Problem, :count).by(-1)
 
     expect(app.problems.count).to eq(0)

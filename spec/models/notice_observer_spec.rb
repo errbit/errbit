@@ -33,7 +33,7 @@ RSpec.describe "Callback on Notice", type: :model do
 
   describe "email notifications (configured individually for each app)" do
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
-    custom_thresholds = [2, 4, 8, 16, 32, 64]
+    let(:custom_thresholds) { [2, 4, 8, 16, 32, 64] }
     let(:app) do
       create(:app_with_watcher, email_at_notices: custom_thresholds)
     end
@@ -47,8 +47,8 @@ RSpec.describe "Callback on Notice", type: :model do
 
     after { Errbit::Config.per_app_email_at_notices = false }
 
-    custom_thresholds.each do |threshold|
-      it "sends an email notification after #{threshold} notice(s)" do
+    it "sends an email notification" do
+      custom_thresholds.each do |threshold|
         # set to just before the threshold
         @problem.update_attributes(notices_count: threshold - 1)
 
@@ -65,7 +65,7 @@ RSpec.describe "Callback on Notice", type: :model do
     end
 
     it "doesn't email after 5 notices" do
-      @problem.update_attributes notices_count: 5
+      @problem.update_attributes(notices_count: 5)
 
       expect(Mailer).not_to receive(:with)
 
@@ -113,14 +113,17 @@ RSpec.describe "Callback on Notice", type: :model do
 
   describe "send email when notification service is configured but fails" do
     let(:notification_service) { create(:campfire_notification_service) }
+
     let(:app) do
       create(:app_with_watcher,
         notify_on_errs: true,
         notification_service: notification_service)
     end
+
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
     before { Errbit::Config.per_app_notify_at_notices = true }
+
     after { Errbit::Config.per_app_notify_at_notices = false }
 
     it "sends email" do
@@ -140,8 +143,7 @@ RSpec.describe "Callback on Notice", type: :model do
     end
   end
 
-  describe "should not send a notification if a notification service is not" \
-           "configured" do
+  describe "should not send a notification if a notification service is not configured" do
     let(:notification_service) { create(:notification_service) }
     let(:app) { create(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }

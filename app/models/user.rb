@@ -62,19 +62,17 @@ class User
     end
 
     # @param access_token [String]
-    def create_from_google_oauth2(access_token)
+    def create_from_google_oauth2(access_token) # rubocop:disable Naming/VariableNumber
       email = access_token.dig(:info, :email)
       name = access_token.dig(:info, :name)
       uid = access_token[:uid]
 
       user = User.where(email: email).first
 
-      user ||= User.create(name: name,
+      user || User.create(name: name,
         email: email,
         google_uid: uid,
         password: Devise.friendly_token[0, 20])
-
-      user
     end
   end
 

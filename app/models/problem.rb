@@ -235,7 +235,7 @@ class Problem
     new_problems = [self]
 
     # create new problems for each err that needs one
-    (problem_errs[1..-1] || []).each do |err|
+    (problem_errs[1..] || []).each do |err|
       new_problems << app.problems.create(attrs)
       err.update_attribute(:problem, new_problems.last)
     end
