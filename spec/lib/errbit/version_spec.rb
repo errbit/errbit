@@ -13,7 +13,8 @@ RSpec.describe Errbit::Version do
     end
 
     it "does not use a commit sha" do
-      allow(ENV).to receive(:[]).with("SOURCE_VERSION").and_return("abcd1234efgh56789")
+      expect(ENV).not_to receive(:fetch).with("SOURCE_VERSION", nil)
+
       expect(subject).to eq(version)
     end
   end
