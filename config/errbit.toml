@@ -1,0 +1,30 @@
+[main]
+host = "errbit.example.com"
+gravatar = false
+gravatar_default = "identicon"
+github = false
+google = false
+
+[github]
+url = "https://github.com"
+api_url = "https://api.github.com"
+site_title = "GitHub"
+
+[google]
+site_title = "Google"
+
+#CONFIRM_RESOLVE_ERR=true
+#ERRBIT_CONFIRM_ERR_ACTIONS=true
+#ERRBIT_USER_HAS_USERNAME=false
+#ALLOW_COMMENTS_WITH_ISSUE_TRACKER=true
+#SECRET_KEY_BASE=fsdfds
+#ERRBIT_EMAIL_FROM='errbit@example.com'
+#ERRBIT_EMAIL_AT_NOTICES='[1,10,100]'
+#ERRBIT_PER_APP_EMAIL_AT_NOTICES=false
+#ERRBIT_NOTIFY_AT_NOTICES='[0]'
+#ERRBIT_PER_APP_NOTIFY_AT_NOTICES=false
+#MONGO_URL='mongodb://localhost'
+#ERRBIT_LOG_LOCATION=STDOUT
+
+#GITHUB_ACCESS_SCOPE='[repo]'
+#DEVISE_MODULES='[database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]'
