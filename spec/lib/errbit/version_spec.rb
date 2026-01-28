@@ -27,11 +27,13 @@ RSpec.describe Errbit::Version do
 
     it "handles a missing commit sha" do
       allow(ENV).to receive(:[]).with("SOURCE_VERSION").and_return(nil)
+
       expect(subject).to end_with("dev")
     end
 
     it "shortens a present commit sha" do
-      allow(ENV).to receive(:[]).with("SOURCE_VERSION").and_return("abcd1234efgh56789")
+      expect(ENV).to receive(:fetch).with("SOURCE_VERSION", nil).and_return("abcd1234efgh56789")
+
       expect(subject).to end_with("dev-abcd1234")
     end
   end
