@@ -12,12 +12,12 @@ RSpec.describe AppsController, type: :controller do
   let(:watcher) { create(:user_watcher, app: app, user: user) }
   let(:unwatched_app) { create(:app) }
   let(:app) { unwatched_app }
-  let(:watched_app1) do
+  let(:watched_app_1) do
     a = create(:app)
     create(:user_watcher, user: user, app: a)
     a
   end
-  let(:watched_app2) do
+  let(:watched_app_2) do
     a = create(:app)
     create(:user_watcher, user: user, app: a)
     a
@@ -42,7 +42,7 @@ RSpec.describe AppsController, type: :controller do
     context "when logged in as an admin" do
       it "finds all apps" do
         sign_in admin
-        unwatched_app && watched_app1 && watched_app2
+        unwatched_app && watched_app_1 && watched_app_2
         get :index
         expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
       end
@@ -51,7 +51,7 @@ RSpec.describe AppsController, type: :controller do
     context "when logged in as a regular user" do
       it "finds all apps" do
         sign_in user
-        unwatched_app && watched_app1 && watched_app2
+        unwatched_app && watched_app_1 && watched_app_2
         get :index
         expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
       end
@@ -447,32 +447,34 @@ RSpec.describe AppsController, type: :controller do
   describe "GET /apps/search" do
     before do
       sign_in user
-      @app1 = create(:app, name: "Foo")
-      @app2 = create(:app, name: "Bar")
+      @app_1 = create(:app, name: "Foo")
+      @app_2 = create(:app, name: "Bar")
     end
 
     it "renders successfully" do
       get :search
+
       expect(response).to be_successful
     end
 
     it "renders index template" do
       get :search
+
       expect(response).to render_template("apps/index")
     end
 
     it "searches problems for given string" do
       get :search, params: {search: "\"Foo\""}
 
-      expect(controller.apps).to include(@app1)
-      expect(controller.apps).not_to include(@app2)
+      expect(controller.apps).to include(@app_1)
+      expect(controller.apps).not_to include(@app_2)
     end
 
     it "works when given string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.apps).to include(@app1)
-      expect(controller.apps).to include(@app2)
+      expect(controller.apps).to include(@app_1)
+      expect(controller.apps).to include(@app_2)
     end
   end
 end
