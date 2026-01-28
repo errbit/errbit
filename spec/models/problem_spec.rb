@@ -196,8 +196,8 @@ RSpec.describe Problem, type: :model do
         err = create(:err, problem: problem)
         notice = create(:notice, err: err, message: "ERR 1")
 
-        problem2 = create(:problem, where: "cyril")
-        expect(problem2).not_to eq(problem)
+        problem_2 = create(:problem, where: "cyril")
+        expect(problem_2).not_to eq(problem)
         expect(Problem.search(notice.id).entries).to eq([problem])
       end
     end
