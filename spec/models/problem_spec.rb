@@ -288,39 +288,39 @@ RSpec.describe Problem, type: :model do
   context "filtered" do
     before do
       @app_1 = create(:app)
-      @problem1 = create(:problem, app: @app_1)
+      @problem_1 = create(:problem, app: @app_1)
 
-      @app2 = create(:app)
-      @problem2 = create(:problem, app: @app2)
+      @app_2 = create(:app)
+      @problem_2 = create(:problem, app: @app_2)
 
-      @app3 = create(:app)
-      @app3.update_attribute(:name, "app3")
+      @app_3 = create(:app)
+      @app_3.update_attribute(:name, "app3")
 
-      @problem3 = create(:problem, app: @app3)
+      @problem_3 = create(:problem, app: @app_3)
     end
 
     it "#filtered returns problems but excludes those attached to the specified apps" do
-      expect(Problem.filtered("-app:'#{@app_1.name}'")).to include(@problem2)
-      expect(Problem.filtered("-app:'#{@app_1.name}'")).not_to include(@problem1)
+      expect(Problem.filtered("-app:'#{@app_1.name}'")).to include(@problem_2)
+      expect(Problem.filtered("-app:'#{@app_1.name}'")).not_to include(@problem_1)
 
       filtered_results_with_two_exclusions = Problem.filtered("-app:'#{@app_1.name}' -app:app3")
-      expect(filtered_results_with_two_exclusions).not_to include(@problem1)
-      expect(filtered_results_with_two_exclusions).to include(@problem2)
-      expect(filtered_results_with_two_exclusions).not_to include(@problem3)
+      expect(filtered_results_with_two_exclusions).not_to include(@problem_1)
+      expect(filtered_results_with_two_exclusions).to include(@problem_2)
+      expect(filtered_results_with_two_exclusions).not_to include(@problem_3)
     end
 
     it "#filtered does not explode if given a nil filter" do
       filtered_results = Problem.filtered(nil)
-      expect(filtered_results).to include(@problem1)
-      expect(filtered_results).to include(@problem2)
-      expect(filtered_results).to include(@problem3)
+      expect(filtered_results).to include(@problem_1)
+      expect(filtered_results).to include(@problem_2)
+      expect(filtered_results).to include(@problem_3)
     end
 
     it "#filtered does nothing for unimplemented filter types" do
       filtered_results = Problem.filtered("filterthatdoesnotexist:hotapp")
-      expect(filtered_results).to include(@problem1)
-      expect(filtered_results).to include(@problem2)
-      expect(filtered_results).to include(@problem3)
+      expect(filtered_results).to include(@problem_1)
+      expect(filtered_results).to include(@problem_2)
+      expect(filtered_results).to include(@problem_3)
     end
   end
 
