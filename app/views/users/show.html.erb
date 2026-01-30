@@ -25,7 +25,7 @@
     <td class="main"><%= @user.email %></td>
   </tr>
 
-  <% if Config.main.user_has_username? %>
+  <% if Config.errbit.user_has_username? %>
     <tr>
       <th><%= t(".username") %></th>
       <td class="main"><%= @user.username %></td>

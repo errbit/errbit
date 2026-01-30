@@ -10,6 +10,7 @@ email_at_notices = [1, 10, 100]
 notify_at_notices = [0]
 devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
 log_location = "STDOUT"
+notice_deprecation_days = 7
 
 [email]
 from = "errbit@example.com"

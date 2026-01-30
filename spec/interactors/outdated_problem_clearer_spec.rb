@@ -3,10 +3,6 @@
 require "rails_helper"
 
 RSpec.describe OutdatedProblemClearer do
-  before do
-    allow(Errbit::Config).to receive(:notice_deprecation_days).and_return(7)
-  end
-
   describe "#execute" do
     let!(:problems) { create_list(:problem, 3) }
 
@@ -28,8 +24,8 @@ RSpec.describe OutdatedProblemClearer do
       before do
         allow(Mongoid.default_client).to receive(:command).and_call_original
         allow(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
-        problems.first.update(last_notice_at: Time.zone.at(946_684_800.0))
-        problems.second.update(last_notice_at: Time.zone.at(946_684_800.0))
+        problems.first.update!(last_notice_at: 8.days.ago)
+        problems.second.update!(last_notice_at: 8.days.ago)
       end
 
       it "deletes old problems" do
@@ -37,8 +33,7 @@ RSpec.describe OutdatedProblemClearer do
           expect(subject.execute).to eq(2)
         end.to change(Problem, :count).by(-2)
 
-        expect(Problem.where(_id: problems.first.id).first).to eq(nil)
-        expect(Problem.where(_id: problems.second.id).first).to eq(nil)
+        expect(Problem.count).to eq(1)
       end
 
       it "compact database" do

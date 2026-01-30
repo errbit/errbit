@@ -2,7 +2,7 @@
 
 class OutdatedProblemClearer
   ##
-  # Clear all problem not present for more than one week.
+  # Clear all problems that not present for more than one week.
   #
   def execute
     nb_problem_outdated.tap do |nb|
@@ -23,7 +23,7 @@ class OutdatedProblemClearer
   end
 
   def criteria
-    @criteria ||= Problem.where(:last_notice_at.lt => Errbit::Config.notice_deprecation_days.to_f.days.ago)
+    @criteria ||= Problem.where(:last_notice_at.lt => Config.errbit.notice_deprecation_days.to_i.days.ago)
   end
 
   def compact_database
