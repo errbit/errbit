@@ -1,13 +1,14 @@
 <%# locals: (user:) %>
-<% if Errbit::Config.google_authentication && user == current_user %>
+
+<% if Config.google.enabled? && user == current_user %>
   <span class="google">
     <% if user.google_account? %>
-      <%= link_to "Unlink #{Errbit::Config.google_site_title} account",
+      <%= link_to "Unlink #{Config.google.site_title} account",
                   user_unlink_google_path(user),
                   method: :patch,
                   data: { confirm: "Are you sure?" } %>
     <% else %>
-      <%= link_to "Link #{Errbit::Config.google_site_title} account",
+      <%= link_to "Link #{Config.google.site_title} account",
                   user_google_oauth2_omniauth_authorize_path,
                   method: :post %>
     <% end %>

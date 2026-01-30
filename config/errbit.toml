@@ -8,6 +8,8 @@ enabled = false
 url = "https://github.com"
 api_url = "https://api.github.com"
 site_title = "GitHub"
+client_id = ""
+secret = ""
 
 [google]
 enabled = false
