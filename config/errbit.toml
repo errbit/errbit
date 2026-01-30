@@ -2,6 +2,10 @@
 host = "errbit.example.com"
 devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
 user_has_username = false
+mongo_url = "mongodb://localhost"
+email_at_notices = [1, 10, 100]
+per_app_notify_at_notices = false
+notify_at_notices = [0]
 
 [gravatar]
 enabled = false
@@ -19,16 +23,16 @@ secret = ""
 [google]
 enabled = false
 site_title = "Google"
+redirect_uri = ""
+client_id = ""
+secret = ""
 
 #CONFIRM_RESOLVE_ERR=true
 #ERRBIT_CONFIRM_ERR_ACTIONS=true
-#ERRBIT_USER_HAS_USERNAME=false
 #ALLOW_COMMENTS_WITH_ISSUE_TRACKER=true
 #SECRET_KEY_BASE=fsdfds
 #ERRBIT_EMAIL_FROM='errbit@example.com'
 #ERRBIT_EMAIL_AT_NOTICES='[1,10,100]'
-#ERRBIT_PER_APP_EMAIL_AT_NOTICES=false
-#ERRBIT_NOTIFY_AT_NOTICES='[0]'
 #ERRBIT_PER_APP_NOTIFY_AT_NOTICES=false
 #MONGO_URL='mongodb://localhost'
 #ERRBIT_LOG_LOCATION=STDOUT
