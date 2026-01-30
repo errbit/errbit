@@ -1,13 +1,18 @@
 [main]
 host = "errbit.example.com"
-gravatar = false
-gravatar_default = "identicon"
+devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
+user_has_username = false
+
+[gravatar]
+enabled = false
+default = "identicon"
 
 [github]
 enabled = false
 url = "https://github.com"
 api_url = "https://api.github.com"
 site_title = "GitHub"
+access_scope = ["repo"]
 client_id = ""
 secret = ""
 
@@ -27,6 +32,3 @@ site_title = "Google"
 #ERRBIT_PER_APP_NOTIFY_AT_NOTICES=false
 #MONGO_URL='mongodb://localhost'
 #ERRBIT_LOG_LOCATION=STDOUT
-
-#GITHUB_ACCESS_SCOPE='[repo]'
-#DEVISE_MODULES='[database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]'

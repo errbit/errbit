@@ -6,7 +6,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise(*Errbit::Config.devise_modules)
+  devise(*Config.main.devise_modules)
 
   field :email
   field :github_login
@@ -45,7 +45,7 @@ class User
   validates :name, presence: true
   validates :github_login, uniqueness: {allow_nil: true}
 
-  if Errbit::Config.user_has_username
+  if Config.main.user_has_username?
     field :username
     validates :username, presence: true
   end
