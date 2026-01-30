@@ -11,7 +11,7 @@ admin_username = ENV["ERRBIT_ADMIN_USER"] || "errbit"
 def admin_email
   return "admin@example.com" if heroku_pr_review_app?
 
-  ENV["ERRBIT_ADMIN_EMAIL"] || "errbit@#{Config.main.host}"
+  ENV["ERRBIT_ADMIN_EMAIL"] || "errbit@#{Config.host}"
 end
 
 def admin_pass
