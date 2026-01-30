@@ -8,7 +8,7 @@ class Mailer < ApplicationMailer
   helper ApplicationHelper
 
   default :from => Config.email.from,
-    "X-Errbit-Host" => Config.main.host,
+    "X-Errbit-Host" => Config.host,
     "X-Mailer" => "Errbit",
     "X-Auto-Response-Suppress" => "OOF, AutoReply",
     "Precedence" => "bulk",

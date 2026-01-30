@@ -587,9 +587,9 @@ RSpec.describe Problem, type: :model do
   describe "#url" do
     subject { create(:problem) }
 
-    before { Config.main.host = "memyselfandi.com" }
+    before { Config.host = "memyselfandi.com" }
 
-    after { Config.main.host = "errbit.example.com" }
+    after { Config.host = "errbit.example.com" }
 
     it "uses the configured host" do
       expect(subject.url).to eq("http://memyselfandi.com/apps/#{subject.app.id}/problems/#{subject.id}")
