@@ -24,7 +24,7 @@
   <div class="required">
     <%= f.label auth_key %>
 
-    <%= f.text_field auth_key, type: (Config.main.user_has_username? ? "text" : "email"), tabindex: 1, autofocus: true %>
+    <%= f.text_field auth_key, type: (Config.errbit.user_has_username? ? "text" : "email"), tabindex: 1, autofocus: true %>
   </div>
 
   <div class="required">

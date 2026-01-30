@@ -58,7 +58,7 @@
                 <div class="inline_comment nowrap">
                   <% if comment.user %>
                     <em class="commenter">
-                      <%= (Config.main.user_has_username? ? comment.user.username : comment.user.email).to_s %>:
+                      <%= (Config.errbit.user_has_username? ? comment.user.username : comment.user.email).to_s %>:
                     </em>
                   <% end %>
                   <em><%= truncate(comment.body, length: 100, separator: " ") %></em>

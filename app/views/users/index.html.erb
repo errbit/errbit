@@ -16,7 +16,7 @@
         <th>&nbsp;</th>
       <% end %>
       <th><%= t(".name") %></th>
-      <% if Config.main.user_has_username? %>
+      <% if Config.errbit.user_has_username? %>
         <th><%= t(".username") %></th>
       <% end %>
       <th class="main"><%= t(".email") %></th>
@@ -31,7 +31,7 @@
           <td><%= gravatar_tag(user.email, s: 24) %></td>
         <% end %>
         <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
-        <% if Config.main.user_has_username? %>
+        <% if Config.errbit.user_has_username? %>
           <td><%= user.username %></td>
         <% end %>
         <td><%= user.email %></td>

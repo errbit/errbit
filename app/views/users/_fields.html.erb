@@ -7,7 +7,7 @@
   <%= f.text_field :name %>
 </div>
 
-<% if Config.main.user_has_username? %>
+<% if Config.errbit.user_has_username? %>
   <div class="required">
     <%= f.label :username, t(".username") %>
     <%= f.text_field :username %>

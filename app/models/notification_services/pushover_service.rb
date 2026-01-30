@@ -31,7 +31,7 @@ module NotificationServices
         message: notification_description(problem),
         priority: 1,
         title: "Errbit Notification",
-        url: "https://#{Config.host}/apps/#{problem.app.id}",
+        url: "https://#{Config.errbit.host}/apps/#{problem.app.id}",
         url_title: "Link to error"
       ).push
     end
