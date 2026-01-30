@@ -7,6 +7,7 @@ email_at_notices = [1, 10, 100]
 per_app_notify_at_notices = false
 notify_at_notices = [0]
 per_app_email_at_notices = false
+confirm_err_actions = true
 
 [email]
 from = "errbit@example.com"
@@ -33,9 +34,6 @@ secret = ""
 authorized_domains = []
 
 #CONFIRM_RESOLVE_ERR=true
-#ERRBIT_CONFIRM_ERR_ACTIONS=true
 #ALLOW_COMMENTS_WITH_ISSUE_TRACKER=true
 #SECRET_KEY_BASE=fsdfds
-#ERRBIT_EMAIL_AT_NOTICES='[1,10,100]'
-#MONGO_URL='mongodb://localhost'
 #ERRBIT_LOG_LOCATION=STDOUT

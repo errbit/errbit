@@ -2,7 +2,7 @@
 
 module ProblemsHelper
   def problem_confirm(action)
-    t(format("problems.confirm.%s", action)) unless Errbit::Config.confirm_err_actions.eql? false
+    t(format("problems.confirm.%s", action)) if Config.main.confirm_err_actions?
   end
 
   def auto_link_format(body)
@@ -27,7 +27,7 @@ module ProblemsHelper
     return if email.blank?
 
     default_options = {
-      d: Errbit::Config.gravatar_default
+      d: Config.gravatar.default
     }
     options.reverse_merge!(default_options)
     params = options.extract!(:s, :d).delete_if { |_, v| v.blank? }
