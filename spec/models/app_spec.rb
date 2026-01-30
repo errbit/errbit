@@ -12,7 +12,7 @@ RSpec.describe App, type: :model do
 
     it { is_expected.to have_fields(:notify_all_users, :notify_on_errs).of_type(Mongoid::Boolean) }
 
-    it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Config.main.email_at_notices) }
+    it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Config.errbit.email_at_notices) }
   end
 
   context "validations" do
