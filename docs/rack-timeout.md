@@ -1,4 +1,4 @@
-# Configuring rack-timeout gem
+# Configuring `rack-timeout` gem
 
 | ENV                              | Default | Default in container |
 |----------------------------------|---------|----------------------|

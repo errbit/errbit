@@ -38,3 +38,23 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 
 #### Base parameters
 
+This is part of the default configuration:
+
+```toml
+[errbit]
+host = "errbit.example.com" # Mapped as `ERRBIT_HOST` env variable
+user_has_username = false
+mongo_url = "mongodb://localhost"
+confirm_err_actions = true
+confirm_resolve_err = true
+per_app_notify_at_notices = false
+per_app_email_at_notices = false
+email_at_notices = [1, 10, 100]
+notify_at_notices = [0]
+devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
+log_location = "STDOUT"
+notice_deprecation_days = 7
+```
+
+Any options can be overridden by environment variables. See a comment for each env on each line how to override it.
+

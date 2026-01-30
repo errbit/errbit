@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-deprecator = ActiveSupport::Deprecation.new(nil, "Errbit")
-
 class Errbit::DeprecationError < RuntimeError; end
 
 if ENV["USER_GEMFILE"].present?
