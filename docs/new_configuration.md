@@ -1,12 +1,12 @@
 # Configuring Errbit
 
 Following the recommendation of [12factor.net](https://12factor.net/config),
-Errbit can take all of its configuration from environment variables or
+Errbit can take all of its configuration from environment variables and/or
 from a TOML configuration file `config/errbit.toml`.
 
 In order of precedence Errbit uses:
 
-1. Environment variables (for example MY_VALUE=abc bundle exec puma)
+1. Environment variables (for example `MY_VALUE=abc bundle exec puma`)
 2. Default values from `config/errbit.toml` file
 
 ## Configuration Parameters
@@ -30,9 +30,9 @@ In order of precedence Errbit uses:
 
 You can look more about thruster env's [here](https://github.com/basecamp/thruster).
 
-### rack-timeout parameters
+### `rack-timeout` parameters
 
-[Here](./rack-timeout.md).
+[rack-timeout defaults in Errbit](./rack-timeout.md).
 
 ### Application parameters
 
