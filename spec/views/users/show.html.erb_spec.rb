@@ -8,7 +8,7 @@ RSpec.describe "users/show.html.erb", type: :view do
   end
 
   before do
-    allow(Errbit::Config).to receive(:github_authentication).and_return(true)
+    Config.github.enabled = true
     allow(controller).to receive(:current_user).and_return(stub_model(User))
     assign(:user, user)
   end
