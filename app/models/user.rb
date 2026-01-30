@@ -58,7 +58,7 @@ class User
       match_data = /.+@(?<domain>.+)$/.match(email)
       return false if match_data.nil?
 
-      Config.google.authorized_domains.split(",").include?(match_data[:domain])
+      Config.google.authorized_domains.include?(match_data[:domain])
     end
 
     # @param access_token [String]
