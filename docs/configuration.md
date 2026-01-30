@@ -68,7 +68,7 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 <dd>defaults to true
 <dt>ERRBIT_USER_HAS_USERNAME
 <dd>Allow users to have a username field
-<dd>defaults to true
+<dd>defaults to false
 <dt>ERRBIT_USE_GRAVATAR
 <dd>Enable gravatar
 <dd>defaults to true
