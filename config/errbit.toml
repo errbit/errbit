@@ -1,16 +1,37 @@
-[main]
+[errbit]
 host = "errbit.example.com"
-devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
 user_has_username = false
 mongo_url = "mongodb://localhost"
-email_at_notices = [1, 10, 100]
-per_app_notify_at_notices = false
-notify_at_notices = [0]
-per_app_email_at_notices = false
 confirm_err_actions = true
+confirm_resolve_err = true
+per_app_notify_at_notices = false
+per_app_email_at_notices = false
+email_at_notices = [1, 10, 100]
+notify_at_notices = [0]
+devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
+log_location = "STDOUT"
 
 [email]
 from = "errbit@example.com"
+delivery_method = "smtp"
+
+[smtp.settings]
+address = ""
+port = 587
+domain = ""
+user_name = ""
+password = ""
+authentication = ""
+enable_starttls = false
+enable_starttls_auto = true
+openssl_verify_mode = "peer"
+tls = true
+open_timeout = 30
+read_timeout = 30
+
+[sendmail.settings]
+location = ""
+arguments = ""
 
 [gravatar]
 enabled = false
@@ -24,6 +45,7 @@ site_title = "GitHub"
 access_scope = ["repo"]
 client_id = ""
 secret = ""
+org_ids = []
 
 [google]
 enabled = false
@@ -32,8 +54,4 @@ redirect_uri = ""
 client_id = ""
 secret = ""
 authorized_domains = []
-
-#CONFIRM_RESOLVE_ERR=true
-#ALLOW_COMMENTS_WITH_ISSUE_TRACKER=true
-#SECRET_KEY_BASE=fsdfds
-#ERRBIT_LOG_LOCATION=STDOUT
+auto_provision = false
