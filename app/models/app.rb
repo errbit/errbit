@@ -15,7 +15,7 @@ class App
   field :current_app_version
   field :notify_all_users, type: Boolean, default: false
   field :notify_on_errs, type: Boolean, default: true
-  field :email_at_notices, type: Array, default: Errbit::Config.email_at_notices
+  field :email_at_notices, type: Array, default: Config.main.email_at_notices
 
   # Some legacy apps may have string as key instead of BSON::ObjectID
   # identity :type => String
@@ -120,7 +120,7 @@ class App
   end
 
   def github_url
-    "#{Errbit::Config.github_url}/#{github_repo}" if github_repo?
+    "#{Config.github.url}/#{github_repo}" if github_repo?
   end
 
   def github_url_to_file(file)
@@ -189,7 +189,7 @@ class App
   end
 
   def email_at_notices
-    Errbit::Config.per_app_email_at_notices ? super : Errbit::Config.email_at_notices
+    Config.main.per_app_email_at_notices ? super : Config.main.email_at_notices
   end
 
   def regenerate_api_key!
@@ -231,7 +231,7 @@ class App
   def normalize_github_repo
     return if github_repo.blank?
 
-    github_host = URI.parse(Errbit::Config.github_url).host
+    github_host = URI.parse(Config.github.url).host
     github_host = Regexp.escape(github_host)
 
     self.github_repo = github_repo.strip
