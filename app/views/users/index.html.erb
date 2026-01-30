@@ -12,7 +12,7 @@
 <table class="users">
   <thead>
     <tr>
-      <% if Errbit::Config.use_gravatar %>
+      <% if Config.gravatar.enabled? %>
         <th>&nbsp;</th>
       <% end %>
       <th><%= t(".name") %></th>
@@ -27,7 +27,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr class="user_list">
-        <% if Errbit::Config.use_gravatar %>
+        <% if Config.gravatar.enabled? %>
           <td><%= gravatar_tag(user.email, s: 24) %></td>
         <% end %>
         <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
