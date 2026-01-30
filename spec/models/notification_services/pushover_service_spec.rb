@@ -15,7 +15,7 @@ RSpec.describe NotificationServices::PushoverService, type: :model do
         message: notification_service.notification_description(problem),
         priority: 1,
         title: "Errbit Notification",
-        url: "https://#{Errbit::Config.host}/apps/#{problem.app.id}",
+        url: "https://#{Config.main.host}/apps/#{problem.app.id}",
         url_title: "Link to error"
       ) do
       double.tap do |a|
