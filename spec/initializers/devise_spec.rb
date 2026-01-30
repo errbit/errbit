@@ -26,8 +26,9 @@ RSpec.describe Devise do
     end
 
     it "sets the client options correctly for the a GitHub Enterprise github_url" do
-      allow(Errbit::Config).to receive(:github_url).and_return("https://github.example.com")
-      allow(Errbit::Config).to receive(:github_api_url).and_return("https://github.example.com/api/v3")
+      Config.github.url = "https://github.example.com"
+      Config.github.api_url = "https://github.example.com/api/v3"
+
       load_initializer
 
       options = Devise.omniauth_configs[:github].options
