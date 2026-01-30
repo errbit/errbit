@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module ProblemsHelper
+  # @param action [String, Symbol]
   def problem_confirm(action)
     t(format("problems.confirm.%s", action)) if Config.main.confirm_err_actions?
   end
 
+  # @param body [String]
   def auto_link_format(body)
     sanitize(
       auto_link(simple_format(body), :all, target: "_blank").html_safe,
