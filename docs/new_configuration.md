@@ -71,3 +71,11 @@ Allow users to have a username field.
 
 Default: `false`
 Default in container: as default
+
+##### `ERRBIT_MONGO_URL`
+
+URL connection string for mongo in the form `mongodb://username:password@example.com:port`.
+
+To more easily set up connections to third party mongo providers, you can call this value `MONGODB_URI`, `MONGOLAB_URI`, `MONGOHQ_URL`, `MONGODB_URL` or `MONGO_URL`.
+
+NOTE: `MONGO_URL` env is deprecated. Use `ERRBIT_MONGO_URL` instead.
