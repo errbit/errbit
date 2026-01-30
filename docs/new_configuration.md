@@ -42,9 +42,9 @@ This is part of the default configuration:
 
 ```toml
 [errbit]
-host = "errbit.example.com" # Mapped as `ERRBIT_HOST` env variable
-user_has_username = false
-mongo_url = "mongodb://localhost"
+host = "errbit.example.com" # Mapped as `ERRBIT_HOST` env variable. String.
+user_has_username = false # Mapped as `ERRBIT_USER_HAS_USERNAME` env variable. String: "true" or "false".
+mongo_url = "mongodb://localhost" # Mapped as ERRBIT_MONGO_URL env variable. String.
 confirm_err_actions = true
 confirm_resolve_err = true
 per_app_notify_at_notices = false
