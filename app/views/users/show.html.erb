@@ -1,6 +1,6 @@
 <% content_for :title, @user.name %>
 
-<% if Errbit::Config.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
+<% if Config.gravatar.enabled? && (gravatar = gravatar_url(@user.email, s: 86)) %>
   <% content_for :title_style do %>
     background: url('<%= gravatar %>') no-repeat;
     padding-left: 106px;
