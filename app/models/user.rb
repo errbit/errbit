@@ -53,12 +53,12 @@ class User
   class << self
     # @param email [String]
     def valid_google_domain?(email)
-      return true if Errbit::Config.google_authorized_domains.blank?
+      return true if Config.google.authorized_domains.blank?
 
       match_data = /.+@(?<domain>.+)$/.match(email)
       return false if match_data.nil?
 
-      Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
+      Config.google.authorized_domains.split(",").include?(match_data[:domain])
     end
 
     # @param access_token [String]
@@ -93,7 +93,7 @@ class User
   end
 
   def can_create_github_issues?
-    github_account? && Errbit::Config.github_access_scope.include?("repo")
+    github_account? && Config.github.access_scope.include?("repo")
   end
 
   def github_login=(login)

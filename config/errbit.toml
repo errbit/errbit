@@ -26,6 +26,7 @@ site_title = "Google"
 redirect_uri = ""
 client_id = ""
 secret = ""
+authorized_domains = []
 
 #CONFIRM_RESOLVE_ERR=true
 #ERRBIT_CONFIRM_ERR_ACTIONS=true
