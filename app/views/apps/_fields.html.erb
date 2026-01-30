@@ -67,7 +67,7 @@
     <%= f.label :notify_on_errs, t(".notify_on_errors") %>
   </div>
 
-  <% if Errbit::Config.per_app_email_at_notices %>
+  <% if Config.main.per_app_email_at_notices? %>
     <div class="email_at_notices_nested" style="<%= app_decorate.notify_err_display %>">
       <div class="field-helpertext">Send a notification every</div>
 
