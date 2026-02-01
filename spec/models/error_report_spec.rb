@@ -257,12 +257,8 @@ RSpec.describe ErrorReport, type: :model do
     end
 
     context "when email_at_notices config is specified", type: :mailer do
-      before do
-        allow(Errbit::Config).to receive(:email_at_notices).and_return(email_at_notices)
-      end
-
       context "as [0]" do
-        let(:email_at_notices) { [0] }
+        before { Config.errbit.email_at_notices = [0] }
 
         it "sends email on 1st occurrence" do
           described_class.new(xml).generate_notice!
@@ -284,7 +280,7 @@ RSpec.describe ErrorReport, type: :model do
       end
 
       context "as [1,3]" do
-        let(:email_at_notices) { [1, 3] }
+        before { Config.errbit.email_at_notices = [1, 3] }
 
         it "sends email on 1st occurrence" do
           described_class.new(xml).generate_notice!
