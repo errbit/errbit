@@ -281,7 +281,7 @@ Devise.setup do |config|
       scope: Config.github.access_scope.join(","),
       skip_info: true,
       client_options: {
-        site: Config.github.api_url,
+        site: Config.github.api_url.to_s,
         authorize_url: "#{Config.github.url}/login/oauth/authorize",
         token_url: "#{Config.github.url}/login/oauth/access_token"
       }
@@ -295,7 +295,7 @@ Devise.setup do |config|
 
   if Config.google.enabled? || Rails.env.test?
     google_options = {
-      redirect_uri: Config.google.redirect_uri
+      redirect_uri: Config.google.redirect_uri.to_s,
     }.compact
 
     config.omniauth :google_oauth2,
