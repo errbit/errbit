@@ -1,5 +1,5 @@
 [errbit]
-host = "errbit.example.com"
+#host = "errbit.example.com"
 user_has_username = false
 mongo_url = "mongodb://localhost"
 confirm_err_actions = true

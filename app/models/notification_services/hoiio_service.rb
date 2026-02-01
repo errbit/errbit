@@ -38,7 +38,7 @@ module NotificationServices
 
       # send sms
       room_id.split(",").each do |number|
-        sms.send dest: number, msg: "https://#{Config.errbit.host}/apps/#{problem.app.id} #{notification_description(problem)}"
+        sms.send dest: number, msg: "https://#{Rails.configuration.errbit.host}/apps/#{problem.app.id} #{notification_description(problem)}"
       end
     end
   end

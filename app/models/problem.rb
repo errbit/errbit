@@ -199,7 +199,7 @@ class Problem
     Rails.application.routes.url_helpers.app_problem_url(
       app,
       self,
-      host: Config.errbit.host
+      host: Rails.configuration.errbit.host
     )
   end
 

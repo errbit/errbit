@@ -8,7 +8,7 @@ RSpec.shared_examples "a notification email" do
   end
 
   it "should have X-Errbit-Host header" do
-    expect(email).to have_header("X-Errbit-Host", Config.errbit.host)
+    expect(email).to have_header("X-Errbit-Host", Rails.configuration.errbit.host)
   end
 
   it "should have Precedence header" do
