@@ -1,6 +1,4 @@
 [errbit]
-#host = "errbit.example.com"
-user_has_username = false
 mongo_url = "mongodb://localhost"
 confirm_err_actions = true
 confirm_resolve_err = true
@@ -8,7 +6,6 @@ per_app_notify_at_notices = false
 per_app_email_at_notices = false
 email_at_notices = [1, 10, 100]
 notify_at_notices = [0]
-devise_modules = ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
 log_location = "STDOUT"
 notice_deprecation_days = 7
 

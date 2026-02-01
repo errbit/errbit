@@ -26,7 +26,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = Config.email.from
+  config.mailer_sender = Rails.configuration.errbit.email_from
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -48,7 +48,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [Config.errbit.user_has_username? ? :username : :email]
+  config.authentication_keys = [Rails.configuration.errbit.user_has_username ? :username : :email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -60,12 +60,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [Config.errbit.user_has_username? ? :username : :email]
+  config.case_insensitive_keys = [Rails.configuration.errbit.user_has_username ? :username : :email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [Config.errbit.user_has_username? ? :username : :email]
+  config.strip_whitespace_keys = [Rails.configuration.errbit.user_has_username ? :username : :email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -276,33 +276,33 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  if Config.github.enabled? || Rails.env.test?
-    github_options = {
-      scope: Config.github.access_scope.join(","),
-      skip_info: true,
-      client_options: {
-        site: Config.github.api_url.to_s,
-        authorize_url: "#{Config.github.url}/login/oauth/authorize",
-        token_url: "#{Config.github.url}/login/oauth/access_token"
-      }
-    }
+  # if Config.github.enabled? || Rails.env.test?
+  #   github_options = {
+  #     scope: Config.github.access_scope.join(","),
+  #     skip_info: true,
+  #     client_options: {
+  #       site: Config.github.api_url.to_s,
+  #       authorize_url: "#{Config.github.url}/login/oauth/authorize",
+  #       token_url: "#{Config.github.url}/login/oauth/access_token"
+  #     }
+  #   }
+  #
+  #   config.omniauth :github,
+  #     Config.github.client_id,
+  #     Config.github.secret,
+  #     github_options
+  # end
 
-    config.omniauth :github,
-      Config.github.client_id,
-      Config.github.secret,
-      github_options
-  end
-
-  if Config.google.enabled? || Rails.env.test?
-    google_options = {
-      redirect_uri: Config.google.redirect_uri.to_s
-    }.compact
-
-    config.omniauth :google_oauth2,
-      Config.google.client_id,
-      Config.google.secret,
-      google_options
-  end
+  # if Config.google.enabled? || Rails.env.test?
+  #   google_options = {
+  #     redirect_uri: Config.google.redirect_uri.to_s
+  #   }.compact
+  #
+  #   config.omniauth :google_oauth2,
+  #     Config.google.client_id,
+  #     Config.google.secret,
+  #     google_options
+  # end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
