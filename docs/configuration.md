@@ -52,7 +52,8 @@ URL connection string for mongo in the form `mongodb://username:password@example
 To more easily set up connections to third party mongo providers, you can call
 this value `MONGODB_URI`, `MONGOLAB_URI`, `MONGOHQ_URL`, `MONGODB_URL` or `MONGO_URL`.
 
-Default: `mongodb://localhost/errbit_<Rails.env>`
+Default: `mongodb://localhost/errbit_<Rails.env>` e.g.
+`mongodb://localhost/errbit_development` for development environment.
 
 #### `ERRBIT_HOST`
 

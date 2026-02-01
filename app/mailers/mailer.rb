@@ -7,7 +7,7 @@ require Rails.root.join("config/routes.rb")
 class Mailer < ApplicationMailer
   helper ApplicationHelper
 
-  default :from => Config.email.from,
+  default :from => Rails.configuration.errbit.email_from,
     "X-Errbit-Host" => Rails.configuration.errbit.host,
     "X-Mailer" => "Errbit",
     "X-Auto-Response-Suppress" => "OOF, AutoReply",

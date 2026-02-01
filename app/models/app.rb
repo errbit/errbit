@@ -15,7 +15,7 @@ class App
   field :current_app_version
   field :notify_all_users, type: Boolean, default: false
   field :notify_on_errs, type: Boolean, default: true
-  field :email_at_notices, type: Array, default: Config.errbit.email_at_notices
+  field :email_at_notices, type: Array, default: Rails.configuration.errbit.email_at_notices
 
   # Some legacy apps may have string as key instead of BSON::ObjectID
   # identity :type => String

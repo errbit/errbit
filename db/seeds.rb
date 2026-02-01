@@ -26,7 +26,7 @@ def heroku_pr_review_app?
 end
 
 puts "Creating an initial admin user:"
-puts "-- username: #{admin_username}" if Config.errbit.user_has_username?
+puts "-- username: #{admin_username}" if Rails.configuration.errbit.user_has_username
 puts "-- email:    #{admin_email}"
 puts "-- password: #{admin_pass}"
 puts ""
@@ -38,6 +38,6 @@ user = User.find_or_initialize_by(email: admin_email)
 user.name = "Errbit Admin"
 user.password = admin_pass
 user.password_confirmation = admin_pass
-user.username = admin_username if Config.errbit.user_has_username?
+user.username = admin_username if Rails.configuration.errbit.user_has_username
 user.admin = true
 user.save!

@@ -1,6 +1,10 @@
 defaults: &defaults
   host: <%= ENV.fetch("ERRBIT_HOST", "errbit.example.com") %>
+  user_has_username: <%= ENV.fetch("ERRBIT_USER_HAS_USERNAME", "false") == "true" %>
   confirm_err_actions: <%= ENV.fetch("ERRBIT_CONFIRM_ERR_ACTIONS", "true") == "true" %>
+  email_at_notices: [1, 10, 100]
+  devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
+  email_from: <%= ENV.fetch("ERRBIT_EMAIL_FROM", "errbit@example.com") %>
 
 development:
   <<: *defaults
