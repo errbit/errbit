@@ -22,8 +22,8 @@ RSpec.describe ProblemsHelper, type: :helper do
 
     context "default config" do
       before do
-        allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
-        allow(Errbit::Config).to receive(:gravatar_default).and_return("identicon")
+        Config.gravatar.enabled = true
+        Config.gravatar.default = "identicon"
       end
 
       it "should render image_tag with correct alt and src" do
@@ -54,6 +54,11 @@ RSpec.describe ProblemsHelper, type: :helper do
     end
 
     context "with email" do
+      before do
+        Config.gravatar.enabled = true
+        Config.gravatar.default = "identicon"
+      end
+
       let(:email) { "gravatar@example.com" }
       let(:email_hash) { Digest::MD5.hexdigest(email) }
 
