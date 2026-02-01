@@ -59,26 +59,30 @@ Default: `mongodb://localhost/errbit_<Rails.env>`
 Hostname to use when building links back to Errbit.
 
 Default: `errbit.example.com`
+
 Default in container: as default.
 
-| Environment variable         | Description                                           | Default              | Default in container |
-|------------------------------|-------------------------------------------------------|----------------------|----------------------|
-| `MONGO_URL`                  |                                                       |                      |                      |
-| `ERRBIT_HOST`                | Hostname to use when building links back to Errbit    | `errbit.example.com` | as default           |
-| `ERRBIT_ADMIN_EMAIL`         |                                                       |                      |                      |
-| `ERRBIT_ADMIN_PASSWORD`      |                                                       |                      |                      |
-| `ERRBIT_ADMIN_USER`          |                                                       |                      |                      |
-| `ERRBIT_CONFIRM_ERR_ACTIONS` | Present confirmation dialogs when users act on errors | `true`               | as default           |
-| `ERRBIT_USER_HAS_USERNAME`   |                                                       |                      |                      |
-| `ERRBIT_USE_GRAVATAR`        |                                                       |                      |                      |
-| `ERRBIT_GRAVATAR_DEFAULT`    |                                                       |                      |                      |
-| `ERRBIT_EMAIL_FROM`          |                                                       |                      |                      |
+#### `ERRBIT_ADMIN_EMAIL`
+
+E-Mail address of initial admin user.
+
+Default: `errbit@errbit.example.com`
+
+Default in container: `errbit@errbit.example.com`
+
+| Environment variable         | Description                                           | Default  | Default in container |
+|------------------------------|-------------------------------------------------------|----------|----------------------|
+| `MONGO_URL`                  |                                                       |          |                      |
+| `ERRBIT_ADMIN_PASSWORD`      |                                                       |          |                      |
+| `ERRBIT_ADMIN_USER`          |                                                       |          |                      |
+| `ERRBIT_CONFIRM_ERR_ACTIONS` | Present confirmation dialogs when users act on errors | `true`   | as default           |
+| `ERRBIT_USER_HAS_USERNAME`   |                                                       |          |                      |
+| `ERRBIT_USE_GRAVATAR`        |                                                       |          |                      |
+| `ERRBIT_GRAVATAR_DEFAULT`    |                                                       |          |                      |
+| `ERRBIT_EMAIL_FROM`          |                                                       |          |                      |
 
 
 <dl>
-<dt>ERRBIT_ADMIN_EMAIL
-<dd>E-Mail address of initial admin user
-<dd>defaults to `errbit@errbit.example.com`
 <dt>ERRBIT_ADMIN_PASSWORD
 <dd>Password of initial admin user
 <dd>defaults to some random string (see output of `$ bundle exec rails db:seed`)
