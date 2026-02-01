@@ -123,10 +123,8 @@ GEM
       xpath (~> 3.2)
     childprocess (5.1.0)
       logger (~> 1.5)
-    citrus (3.0.2)
     coderay (1.1.3)
     concurrent-ruby (1.3.6)
-    configurate (0.6.0)
     connection_pool (3.0.2)
     crack (1.0.1)
       bigdecimal
@@ -609,9 +607,6 @@ GEM
     thruster (0.1.18-x86_64-darwin)
     thruster (0.1.18-x86_64-linux)
     timeout (0.6.0)
-    toml-rb (4.1.0)
-      citrus (~> 3.0, > 3.0)
-      racc (~> 1.7)
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -662,7 +657,6 @@ DEPENDENCIES
   bundler-audit
   campy
   capybara
-  configurate
   decent_exposure
   devise
   draper
@@ -727,7 +721,6 @@ DEPENDENCIES
   super_diff
   syslog
   thruster
-  toml-rb
   underscore-rails
   uri
   useragent
@@ -764,10 +757,8 @@ CHECKSUMS
   campy (1.0.0) sha256=fc353b535c448afad5acfc972264b609a9a461335b09cda151d3e7bbf9504ef6
   capybara (3.40.0) sha256=42dba720578ea1ca65fd7a41d163dd368502c191804558f6e0f71b391054aeef
   childprocess (5.1.0) sha256=9a8d484be2fd4096a0e90a0cd3e449a05bc3aa33f8ac9e4d6dcef6ac1455b6ec
-  citrus (3.0.2) sha256=4ec2412fc389ad186735f4baee1460f7900a8e130ffe3f216b30d4f9c684f650
   coderay (1.1.3) sha256=dc530018a4684512f8f38143cd2a096c9f02a1fc2459edcfe534787a7fc77d4b
   concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
-  configurate (0.6.0) sha256=39e8223483a10d2327fb1340e02794629cc60b0620db19c955c83c633a2595a6
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
   crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
@@ -965,7 +956,6 @@ CHECKSUMS
   thruster (0.1.18-x86_64-darwin) sha256=355b6c0ee30ead7f7096448de4f0f9e8acc8454d2ef24b2d54965c5d813f1c67
   thruster (0.1.18-x86_64-linux) sha256=0ec1ff5f12289c1ac10cf8e28ce6b5266f4e73416b34a664b79d037c7d955c40
   timeout (0.6.0) sha256=6d722ad619f96ee383a0c557ec6eb8c4ecb08af3af62098a0be5057bf00de1af
-  toml-rb (4.1.0) sha256=14456ec4549e4703881bf04b83a56f3264ef99884880092d83c98a2058d95846
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
