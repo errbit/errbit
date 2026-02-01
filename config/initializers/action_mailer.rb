@@ -18,12 +18,12 @@ if Config.email.delivery_method == "smtp"
 end
 
 if Config.email.delivery_method == "sendmail"
-#   sendmail_settings = {}
-#   sendmail_settings[:location] = Errbit::Config.sendmail_location if Errbit::Config.sendmail_location
-#   sendmail_settings[:arguments] = Errbit::Config.sendmail_arguments if Errbit::Config.sendmail_arguments
+  sendmail_settings = {}
+  sendmail_settings[:location] = Config.sendmail.settings.location if Config.sendmail.settings.location.present?
+  sendmail_settings[:arguments] = Config.sendmail.settings.arguments if Config.sendmail.settings.arguments.present?
 
   ActionMailer::Base.delivery_method = :sendmail
-#   ActionMailer::Base.sendmail_settings = sendmail_settings
+  ActionMailer::Base.sendmail_settings = sendmail_settings
 end
 
 # Set config specific values
