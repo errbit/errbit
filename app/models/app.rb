@@ -189,7 +189,7 @@ class App
   end
 
   def email_at_notices
-    Config.errbit.per_app_email_at_notices ? super : Config.errbit.email_at_notices
+    Config.errbit.per_app_email_at_notices? ? super : Config.errbit.email_at_notices
   end
 
   def regenerate_api_key!
