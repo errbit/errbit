@@ -12,8 +12,8 @@ if Config.email.delivery_method == "smtp"
     user_name: Config.smtp.settings.user_name.to_s,
     password: Config.smtp.settings.password.to_s,
     authentication: Config.smtp.settings.authentication.to_sym,
-    enable_starttls_auto: Config.smtp.settings.enable_starttls_auto,
-    openssl_verify_mode: Config.smtp.settings.openssl_verify_mode
+    enable_starttls_auto: Config.smtp.settings.enable_starttls_auto?,
+    openssl_verify_mode: Config.smtp.settings.openssl_verify_mode.to_s
   }
 end
 
