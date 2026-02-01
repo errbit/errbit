@@ -44,9 +44,9 @@ module Errbit
     # Custom directories with classes and modules you want to eager load.
     config.eager_load_paths << Rails.root.join("lib").to_s
 
-    config.before_initialize do
-      config.secret_key_base = Errbit::Config.secret_key_base
-    end
+    # config.before_initialize do
+    #   config.secret_key_base = Errbit::Config.secret_key_base
+    # end
 
     initializer "errbit.mongoid", before: "mongoid.load-config" do
       require Rails.root.join("config/mongo")
