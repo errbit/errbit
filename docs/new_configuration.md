@@ -58,14 +58,14 @@ notice_deprecation_days = 7
 
 Any options can be overridden by environment variables. See a comment for each env on each line how to override it.
 
-##### `ERRBIT_HOST`
+##### `Config.errbit.host` or `ENV["ERRBIT_HOST"]`
 
 Hostname to use when building links back to Errbit.
 
 Default: `errbit.example.com`
 Default in container: as default
 
-##### `ERRBIT_USER_HAS_USERNAME`
+##### `Config.errbit.user_has_username` or `ENV["ERRBIT_USER_HAS_USERNAME"]`
 
 Allow users to have a username field.
 
