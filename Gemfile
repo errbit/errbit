@@ -10,8 +10,8 @@ gem "reactionview"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "importmap-rails"
-gem "configurate"
-gem "toml-rb"
+gem "configurate" # drop
+gem "toml-rb" # drop
 gem "syslog", require: false
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"

@@ -9,8 +9,7 @@ environment.
 In order of precedence Errbit uses:
 
 1. Environment variables (for example `MY_VALUE=abc bundle exec puma`)
-2. Values provided in a `.env` file
-3. Default values from `.env.default` file
+2. Values provided in a `config/errbit.yml` file
 
 ## Configuration Parameters
 
@@ -82,7 +81,7 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 <dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [1,10,100]
 <dt>ERRBIT_PER_APP_EMAIL_AT_NOTICES
-<dd>Let every application have it's own configuration rather than using `ERRBIT_EMAIL_AT_NOTICES`. If this value is true, you can configure each app using the web UI.
+<dd>Let every application have its own configuration rather than using `ERRBIT_EMAIL_AT_NOTICES`. If this value is true, you can configure each app using the web UI.
 <dd>defaults to false
 <dt>ERRBIT_NOTIFY_AT_NOTICES
 <dd>Notify each application's configured notification service after the set number of occurrences of the same error. [0] means notify on every occurrence.
