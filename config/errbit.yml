@@ -1,0 +1,11 @@
+defaults: &defaults
+  host: <%= ENV.fetch("ERRBIT_HOST", "errbit.example.com") %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

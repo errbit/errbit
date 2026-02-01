@@ -70,5 +70,7 @@ module Errbit
 
     # Compiles the ERB template with the frozen_string_literal true magic comment
     config.action_view.frozen_string_literal = true
+
+    config.errbit = config_for(:errbit)
   end
 end
