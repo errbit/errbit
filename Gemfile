@@ -12,6 +12,7 @@ gem "stimulus-rails"
 gem "importmap-rails"
 gem "configurate"
 gem "toml-rb"
+gem "syslog", require: false
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"

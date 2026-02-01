@@ -601,6 +601,8 @@ GEM
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
+    syslog (0.3.0)
+      logger
     thor (1.5.0)
     thruster (0.1.18)
     thruster (0.1.18-aarch64-linux)
@@ -725,6 +727,7 @@ DEPENDENCIES
   standard (= 1.53.0)
   stimulus-rails
   super_diff
+  syslog
   thruster
   toml-rb
   underscore-rails
@@ -957,6 +960,7 @@ CHECKSUMS
   stimulus-rails (1.3.4) sha256=765676ffa1f33af64ce026d26b48e8ffb2e0b94e0f50e9119e11d6107d67cb06
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
   super_diff (0.18.0) sha256=9f5e77464fa75150619f7783174fbbe1bbac50a1eaf157cd39ad5584b0eac142
+  syslog (0.3.0) sha256=4dfe6e7bd5adb6383706bb4ad5a05da1f3a09917a507e8f913c73287085c7408
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   thruster (0.1.18) sha256=f025103bc7c8e6747436bb9de058c366840d2871560574ea7070a9bc8608a889
   thruster (0.1.18-aarch64-linux) sha256=16f3d49468d76a9a5de86b7bdedf535b7b80da7c16495ca8ec96cfdc256870e2
