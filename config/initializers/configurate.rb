@@ -4,13 +4,10 @@ require "configurate/provider/toml"
 
 Config ||= Configurate::Settings.create do
   add_provider Configurate::Provider::Env
-  add_provider Configurate::Provider::Dynamic if Rails.env.local?
-
+  add_provider Configurate::Provider::Dynamic
   add_provider Configurate::Provider::TOML,
     Rails.root.join("config", "errbit.toml"), required: true
 end
-
-# ["MONGODB_URI", "MONGOLAB_URI", "MONGOHQ_URL", "MONGODB_URL", "MONGO_URL"]
 
 if ENV.fetch("MONGODB_URI", nil).present?
   Config.errbit.mongo_url = ENV["MONGODB_URI"]
