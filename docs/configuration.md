@@ -85,23 +85,28 @@ Password of initial admin user.
 
 Default: some random string (see output of `$ bundle exec rails db:seed`)
 
-| Environment variable         | Description                                           | Default  | Default in container |
-|------------------------------|-------------------------------------------------------|----------|----------------------|
-| `MONGO_URL`                  |                                                       |          |                      |
-| `ERRBIT_CONFIRM_ERR_ACTIONS` | Present confirmation dialogs when users act on errors | `true`   | as default           |
-| `ERRBIT_USER_HAS_USERNAME`   |                                                       |          |                      |
-| `ERRBIT_USE_GRAVATAR`        |                                                       |          |                      |
-| `ERRBIT_GRAVATAR_DEFAULT`    |                                                       |          |                      |
-| `ERRBIT_EMAIL_FROM`          |                                                       |          |                      |
+#### `ERRBIT_CONFIRM_ERR_ACTIONS`
+
+Present confirmation dialogs when users act on errors.
+
+Default: `true`
+
+Default in container: as default.
+
+
+| Environment variable         | Description  | Default  | Default in container |
+|------------------------------|--------------|----------|----------------------|
+| `MONGO_URL`                  |              |          |                      |
+| `ERRBIT_USER_HAS_USERNAME`   |              |          |                      |
+| `ERRBIT_USE_GRAVATAR`        |              |          |                      |
+| `ERRBIT_GRAVATAR_DEFAULT`    |              |          |                      |
+| `ERRBIT_EMAIL_FROM`          |              |          |                      |
 
 ### GitHub
 
 #### 
 
 <dl>
-<dt>ERRBIT_CONFIRM_ERR_ACTIONS
-<dd>Present confirmation dialogs when users act on errors
-<dd>defaults to true
 <dt>ERRBIT_USER_HAS_USERNAME
 <dd>Allow users to have a username field
 <dd>defaults to false
