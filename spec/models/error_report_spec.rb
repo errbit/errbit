@@ -279,7 +279,7 @@ RSpec.describe ErrorReport, type: :model do
         end
       end
 
-      context "as [1,3]" do
+      context "as [1, 3]" do
         before { Config.errbit.email_at_notices = [1, 3] }
 
         it "sends email on 1st occurrence" do
