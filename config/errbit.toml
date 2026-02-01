@@ -23,10 +23,8 @@ domain = ""
 user_name = ""
 password = ""
 authentication = ""
-enable_starttls = false
 enable_starttls_auto = true
 openssl_verify_mode = "peer"
-tls = true
 open_timeout = 30
 read_timeout = 30
 
