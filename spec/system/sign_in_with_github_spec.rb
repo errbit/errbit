@@ -3,10 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with GitHub", type: :system, retry: 3 do
+  before { Config.github.enabled = true }
+
   context "sign in via GitHub with recognized user" do
     let!(:user) { create(:user, github_login: "biow0lf") }
-
-    before { expect(Errbit::Config).to receive(:github_authentication).and_return(true).twice }
 
     before { OmniAuth.config.mock_auth[:github] = Faker::Omniauth.github(name: "biow0lf") }
 
