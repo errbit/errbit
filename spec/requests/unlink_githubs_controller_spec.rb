@@ -20,6 +20,8 @@ RSpec.describe UnlinkGithubsController, type: :request do
           expect(assigns(:user).github_login).to eq(nil)
 
           expect(assigns(:user).github_oauth_token).to eq(nil)
+
+          expect(request.flash[:success]).to eq("Successfully unlinked GitHub account!")
         end
       end
 
