@@ -295,7 +295,7 @@ Devise.setup do |config|
 
   if Config.google.enabled? || Rails.env.test?
     google_options = {
-      redirect_uri: Config.google.redirect_uri.to_s,
+      redirect_uri: Config.google.redirect_uri.to_s
     }.compact
 
     config.omniauth :google_oauth2,
