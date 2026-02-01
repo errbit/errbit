@@ -3,7 +3,7 @@
 module ProblemsHelper
   # @param action [String, Symbol]
   def problem_confirm(action)
-    t(format("problems.confirm.%s", action)) if Config.errbit.confirm_err_actions?
+    t(format("problems.confirm.%s", action)) if Rails.configuration.errbit.confirm_err_actions
   end
 
   # @param body [String]

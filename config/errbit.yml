@@ -1,5 +1,6 @@
 defaults: &defaults
   host: <%= ENV.fetch("ERRBIT_HOST", "errbit.example.com") %>
+  confirm_err_actions: <%= ENV.fetch("ERRBIT_CONFIRM_ERR_ACTIONS", "true") == "true" %>
 
 development:
   <<: *defaults

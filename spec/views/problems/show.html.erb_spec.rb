@@ -87,7 +87,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
 
     it "should not confirm the 'resolve' link if configured to" do
-      Config.errbit.confirm_err_actions = true
+      Rails.configuration.errbit.confirm_err_actions = true
 
       render
 
@@ -100,7 +100,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
 
     it "should not confirm the 'resolve' link if configured not to" do
-      Config.errbit.confirm_err_actions = false
+      Rails.configuration.errbit.confirm_err_actions = false
 
       render
 

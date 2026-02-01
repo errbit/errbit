@@ -1,10 +1,7 @@
 # Configuring Errbit
 
 Following the recommendation of [12factor.net](https://12factor.net/config),
-Errbit takes all of its configuration from environment variables. You can use
-[dotenv](https://github.com/bkeepers/dotenv), which is included in the
-`Gemfile`, to fill in any values that you can't or won't supply through the
-environment.
+Errbit takes all of its configuration from environment variables.
 
 In order of precedence Errbit uses:
 
@@ -13,43 +10,69 @@ In order of precedence Errbit uses:
 
 ## Configuration Parameters
 
-### Build-in Ruby on Rails parameters
+### Build-in Ruby on Rails environment variables
 
-| Environment variable       | Description       | Default       | Default in container |
-|----------------------------|-------------------|---------------|----------------------|
-| `RAILS_ENV`                | Environment       | `development` | `production`         |
-| `PORT`                     | Port              | `3000`        | as default           |
-| `RAILS_MAX_THREADS`        | Rails max threads | `3`           | as default           |
-| `WEB_CONCURRENCY`          | Number of CPU     | not set       | not set              |
-| `RAILS_LOG_LEVEL`          | Log level         | `info`        | `info`               |
+#### `RAILS_ENV`
 
-### Thruster parameters
+Environment. Can be `production`, `development`, or `test`.
 
-| Environment variable  | Description                                              |
-|-----------------------|----------------------------------------------------------|
-| `THRUSTER_TLS_DOMAIN` | Domain name to get certificate e.g. `errbit.example.com` |
+Use `production` for run production Errbit. This is the default in the
+container.
+
+#### `SECRET_KEY_BASE`
+
+Generate with `rails secret`. Changing it will break all active browser sessions.
+
+| Environment variable | Description       | Default       | Default in container |
+|----------------------|-------------------|---------------|----------------------|
+| `PORT`               | Port              | `3000`        | as default           |
+| `RAILS_MAX_THREADS`  | Rails max threads | `3`           | as default           |
+| `WEB_CONCURRENCY`    | Number of CPU     | not set       | not set              |
+| `RAILS_LOG_LEVEL`    | Log level         | `info`        | `info`               |
+
+### Thruster environment variables
+
+#### `THRUSTER_TLS_DOMAIN`
+
+Domain name to get certificate e.g. `errbit.example.com`
+
+Default: not set
 
 You can look more about thruster env's [here](https://github.com/basecamp/thruster).
 
-### rack-timeout parameters
+### rack-timeout environment variables
 
 [Here](./rack-timeout.md).
 
-### Application parameters
+### Application environment variables
 
-| Environment variable         | Description                                        | Default              | Default in container |
-|------------------------------|----------------------------------------------------|----------------------|----------------------|
-| `MONGO_URL`                  |                                                    |                      |                      |
-| `SECRET_KEY_BASE`            |                                                    |                      |                      |
-| `ERRBIT_HOST`                | Hostname to use when building links back to Errbit | `errbit.example.com` | as default           |
-| `ERRBIT_ADMIN_EMAIL`         |                                                    |                      |                      |
-| `ERRBIT_ADMIN_PASSWORD`      |                                                    |                      |                      |
-| `ERRBIT_ADMIN_USER`          |                                                    |                      |                      |
-| `ERRBIT_CONFIRM_ERR_ACTIONS` |                                                    |                      |                      |
-| `ERRBIT_USER_HAS_USERNAME`   |                                                    |                      |                      |
-| `ERRBIT_USE_GRAVATAR`        |                                                    |                      |                      |
-| `ERRBIT_GRAVATAR_DEFAULT`    |                                                    |                      |                      |
-| `ERRBIT_EMAIL_FROM`          |                                                    |                      |                      |
+#### `MONGO_URL`
+
+URL connection string for mongo in the form `mongodb://username:password@example.com:port`.
+To more easily set up connections to third party mongo providers, you can call
+this value `MONGODB_URI`, `MONGOLAB_URI`, `MONGOHQ_URL`, `MONGODB_URL` or `MONGO_URL`.
+
+Default: `mongodb://localhost/errbit_<Rails.env>`
+
+#### `ERRBIT_HOST`
+
+Hostname to use when building links back to Errbit.
+
+Default: `errbit.example.com`
+Default in container: as default.
+
+| Environment variable         | Description                                           | Default              | Default in container |
+|------------------------------|-------------------------------------------------------|----------------------|----------------------|
+| `MONGO_URL`                  |                                                       |                      |                      |
+| `ERRBIT_HOST`                | Hostname to use when building links back to Errbit    | `errbit.example.com` | as default           |
+| `ERRBIT_ADMIN_EMAIL`         |                                                       |                      |                      |
+| `ERRBIT_ADMIN_PASSWORD`      |                                                       |                      |                      |
+| `ERRBIT_ADMIN_USER`          |                                                       |                      |                      |
+| `ERRBIT_CONFIRM_ERR_ACTIONS` | Present confirmation dialogs when users act on errors | `true`               | as default           |
+| `ERRBIT_USER_HAS_USERNAME`   |                                                       |                      |                      |
+| `ERRBIT_USE_GRAVATAR`        |                                                       |                      |                      |
+| `ERRBIT_GRAVATAR_DEFAULT`    |                                                       |                      |                      |
+| `ERRBIT_EMAIL_FROM`          |                                                       |                      |                      |
 
 
 <dl>
@@ -95,9 +118,6 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 <dt>SECRET_KEY_BASE
 <dd>For production environments, you should run `bundle exec rails secret` to generate a secret, unique key for this parameter
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
-<dt>MONGO_URL
-<dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
-<dd>defaults to mongodb://localhost/errbit_&lt;Rails.env&gt;
 <dt>GITHUB_URL
 <dd>Use this URL for interacting GitHub. This is useful if you have a GitHub enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com
