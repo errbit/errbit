@@ -6,14 +6,14 @@ require_relative "configurate"
 if Config.email.delivery_method == "smtp"
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    address: Config.smtp.settings.address.to_s,
+    address: Config.smtp.settings.address.get,
     port: Config.smtp.settings.port.to_i,
-    domain: Config.smtp.settings.domain.to_s,
-    user_name: Config.smtp.settings.user_name.to_s,
-    password: Config.smtp.settings.password.to_s,
-    authentication: Config.smtp.settings.authentication.to_sym,
+    domain: Config.smtp.settings.domain.get,
+    user_name: Config.smtp.settings.user_name.get,
+    password: Config.smtp.settings.password.get,
+    authentication: Config.smtp.settings.authentication.get&.to_sym,
     enable_starttls_auto: Config.smtp.settings.enable_starttls_auto?,
-    openssl_verify_mode: Config.smtp.settings.openssl_verify_mode.to_s
+    openssl_verify_mode: Config.smtp.settings.openssl_verify_mode.get
   }
 end
 
