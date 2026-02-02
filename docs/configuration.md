@@ -104,7 +104,13 @@ Default in container: as default.
 
 ### GitHub
 
-#### 
+#### `GITHUB_AUTHENTICATION`
+
+Allow GitHub sign-in via OAuth.
+
+Default: `false`
+
+Default in container: as default.
 
 <dl>
 <dt>ERRBIT_USER_HAS_USERNAME
@@ -134,18 +140,12 @@ Default in container: as default.
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
 <dd>Number of days to keep errors in the database when running `bundle exec rails errbit:clear_outdated`
 <dd>defaults to nil (off)
-<dt>SECRET_KEY_BASE
-<dd>For production environments, you should run `bundle exec rails secret` to generate a secret, unique key for this parameter
-<dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
 <dt>GITHUB_URL
 <dd>Use this URL for interacting GitHub. This is useful if you have a GitHub enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com
 <dt>GITHUB_API_URL</dt>
 <dd>For GitHub enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
 <dd>defaults to https://api.github.com</dd>
-<dt>GITHUB_AUTHENTICATION
-<dd>Allow GitHub sign-in via OAuth
-<dd>defaults to true
 <dt>GITHUB_CLIENT_ID
 <dd>Client id of your GitHub application
 <dt>GITHUB_SECRET

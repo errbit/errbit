@@ -276,8 +276,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  # if Config.github.enabled? || Rails.env.test?
-  #   github_options = {
+  if Rails.configuration.errbit.github_authentication || Rails.env.test?
+    github_options = {
   #     scope: Config.github.access_scope.join(","),
   #     skip_info: true,
   #     client_options: {
@@ -285,13 +285,13 @@ Devise.setup do |config|
   #       authorize_url: "#{Config.github.url}/login/oauth/authorize",
   #       token_url: "#{Config.github.url}/login/oauth/access_token"
   #     }
-  #   }
-  #
+    }
+
   #   config.omniauth :github,
   #     Config.github.client_id,
   #     Config.github.secret,
   #     github_options
-  # end
+  end
 
   # if Config.google.enabled? || Rails.env.test?
   #   google_options = {
