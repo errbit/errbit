@@ -112,6 +112,16 @@ Default: `false`
 
 Default in container: as default.
 
+### Google
+
+#### `GOOGLE_AUTHENTICATION`
+
+Allow Google sign-in via OAuth.
+
+Default: `false`
+
+Default in container: as default.
+
 <dl>
 <dt>ERRBIT_USER_HAS_USERNAME
 <dd>Allow users to have a username field
@@ -158,9 +168,6 @@ Default in container: as default.
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
 <dd>defaults to GitHub</dd>
-<dt>GOOGLE_AUTHENTICATION
-<dd>Allow google sign-in via OAuth
-<dd>defaults to true
 <dt>GOOGLE_AUTO_PROVISION
 <dd>Allow automatic account creation after sign-in via OAuth
 <dt>GOOGLE_CLIENT_ID
