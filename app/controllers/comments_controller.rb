@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
       flash[:error] = I18n.t("comments.destroy.error")
     end
 
-    redirect_to app_problem_path(app, problem)
+    redirect_to app_problem_path(app, problem), status: :see_other
   end
 
   private

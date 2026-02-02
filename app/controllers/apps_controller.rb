@@ -91,7 +91,7 @@ class AppsController < ApplicationController
     if app.destroy
       flash[:success] = I18n.t("controllers.apps.flash.destroy.success")
 
-      redirect_to apps_url
+      redirect_to apps_url, status: :see_other
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.destroy.error")
 

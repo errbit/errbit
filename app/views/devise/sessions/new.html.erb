@@ -7,32 +7,48 @@
     <div class="action-bar">
       <% if Errbit::Config.github_authentication %>
         <span class="github">
-          <%= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, method: :post %>
+          <%= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, data: {turbo_method: :post} %>
         </span>
       <% end %>
 
       <% if Errbit::Config.google_authentication %>
         <span class="google">
-          <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
+          <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, data: {turbo_method: :post} %>
         </span>
       <% end %>
     </div>
   <% end %>
 <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), data: {controller: "forgot-password"}) do |f| %>
   <div class="required">
     <%= f.label auth_key %>
 
-    <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), tabindex: 1, autofocus: true %>
+    <%= f.text_field auth_key,
+                     type: (Errbit::Config.user_has_username ? "text" : "email"),
+                     tabindex: 1,
+                     autocomplete: "username",
+                     autofocus: true,
+                     data: {
+                       "forgot-password-target": "auth_key"
+                     }
+    %>
   </div>
 
   <div class="required">
-    <%= link_to "forgot it?", new_password_path(resource_name), class: "float-right", id: "forgot_password" %>
+    <%= link_to "forgot it?",
+                new_password_path(resource_name),
+                class: "float-right",
+                id: "forgot_password",
+                data: {
+                  action: "click->forgot-password#click",
+                  "forgot-password-target": "href"
+                }
+    %>
 
     <%= f.label :password %>
 
-    <%= f.password_field :password, tabindex: 2 %>
+    <%= f.password_field :password, tabindex: 2, autocomplete: "current-password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -49,12 +65,3 @@
     </button>
   </div>
 <% end %>
-
-<script>
-  $("a#forgot_password").click(function(){
-    // Set email field on password reset page to email that user entered on this page
-    location.href = $(this).attr("href") + "?email=" + encodeURIComponent($("#user_email").val());
-
-    return false;
-  });
-</script>
