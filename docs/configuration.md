@@ -112,6 +112,45 @@ Default: `false`
 
 Default in container: as default.
 
+#### `GITHUB_URL`
+
+Use this URL for interacting GitHub. This is useful if you have a GitHub
+enterprise account, and you're using a URL other than `https://github.com`.
+
+Default: `https://github.com`
+
+Default in container: as default.
+
+#### `GITHUB_API_URL`
+
+For GitHub enterprise accounts, the API URL could be something like `https://github.example.com/api/v3`.
+
+Default: `https://api.github.com`
+
+Default in container: as default.
+
+#### `GITHUB_CLIENT_ID`
+
+Client ID of your GitHub application.
+
+Default: not set
+
+#### `GITHUB_SECRET`
+
+Secret key for your GitHub application.
+
+Default: not set
+
+<dt>GITHUB_ORG_ID
+<dd>ID of your GitHub organization. If set, Errbit will create user accounts for users in your GitHub organization who sign into Errbit without having a user account
+<dt>GITHUB_ACCESS_SCOPE
+<dd>OAuth scope to request from users when they sign in through GitHub
+<dd>defaults to [repo]
+<dt>GITHUB_SITE_TITLE</dt>
+<dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
+<dd>defaults to GitHub</dd>
+
+
 ### Google
 
 #### `GOOGLE_AUTHENTICATION`
@@ -150,24 +189,6 @@ Default in container: as default.
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
 <dd>Number of days to keep errors in the database when running `bundle exec rails errbit:clear_outdated`
 <dd>defaults to nil (off)
-<dt>GITHUB_URL
-<dd>Use this URL for interacting GitHub. This is useful if you have a GitHub enterprise account and you're using a URL other than https://github.com
-<dd>defaults to https://github.com
-<dt>GITHUB_API_URL</dt>
-<dd>For GitHub enterprise accounts, the API URL could be something like https://github.example.com/api/v3</dd>
-<dd>defaults to https://api.github.com</dd>
-<dt>GITHUB_CLIENT_ID
-<dd>Client id of your GitHub application
-<dt>GITHUB_SECRET
-<dd>Secret key for your GitHub application
-<dt>GITHUB_ORG_ID
-<dd>ID of your GitHub organization. If set, Errbit will create user accounts for users in your GitHub organization who sign into Errbit without having a user account
-<dt>GITHUB_ACCESS_SCOPE
-<dd>OAuth scope to request from users when they sign in through GitHub
-<dd>defaults to [repo]
-<dt>GITHUB_SITE_TITLE</dt>
-<dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
-<dd>defaults to GitHub</dd>
 <dt>GOOGLE_AUTO_PROVISION
 <dd>Allow automatic account creation after sign-in via OAuth
 <dt>GOOGLE_CLIENT_ID
