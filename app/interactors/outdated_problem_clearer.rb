@@ -2,9 +2,12 @@
 
 class OutdatedProblemClearer
   ##
-  # Clear all problem not present for more than one week.
+  # Clear all problems that not present for more than a number of days from
+  # the `ERRBIT_PROBLEM_DESTROY_AFTER_DAYS` environment variable.
   #
   def execute
+    return if Rails.configuration.errbit.notice_deprecation_days.blank?
+
     nb_problem_outdated.tap do |nb|
       if nb > 0
         criteria.each do |problem|
@@ -23,7 +26,7 @@ class OutdatedProblemClearer
   end
 
   def criteria
-    @criteria ||= Problem.where(:last_notice_at.lt => Errbit::Config.notice_deprecation_days.to_f.days.ago)
+    @criteria ||= Problem.where(:last_notice_at.lt => Rails.configuration.errbit.notice_deprecation_days.to_i.days.ago)
   end
 
   def compact_database

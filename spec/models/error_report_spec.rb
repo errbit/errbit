@@ -217,6 +217,7 @@ RSpec.describe ErrorReport, type: :model do
 
   it "save a notice assignes to err" do
     error_report.generate_notice!
+
     expect(error_report.notice.err).to be_a(Err)
   end
 
@@ -257,12 +258,13 @@ RSpec.describe ErrorReport, type: :model do
     end
 
     context "when email_at_notices config is specified", type: :mailer do
-      before do
-        allow(Errbit::Config).to receive(:email_at_notices).and_return(email_at_notices)
-      end
-
       context "as [0]" do
-        let(:email_at_notices) { [0] }
+        before do
+          expect(Rails.configuration.errbit)
+            .to receive(:email_at_notices)
+            .and_return([0])
+            .at_least(:once)
+        end
 
         it "sends email on 1st occurrence" do
           described_class.new(xml).generate_notice!
@@ -283,8 +285,13 @@ RSpec.describe ErrorReport, type: :model do
         end
       end
 
-      context "as [1,3]" do
-        let(:email_at_notices) { [1, 3] }
+      context "as [1, 3]" do
+        before do
+          expect(Rails.configuration.errbit)
+            .to receive(:email_at_notices)
+            .and_return([1, 3])
+            .at_least(:once)
+        end
 
         it "sends email on 1st occurrence" do
           described_class.new(xml).generate_notice!

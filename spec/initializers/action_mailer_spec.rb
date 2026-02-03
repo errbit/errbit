@@ -12,15 +12,23 @@ RSpec.describe "initializers/action_mailer" do
   end
 
   describe "delivery method" do
-    it "sets the delivery method to :smtp" do
-      allow(Errbit::Config).to receive(:email_delivery_method).and_return(:smtp)
+    it "sets the delivery method to smtp" do
+      expect(Rails.configuration.errbit)
+        .to receive(:email_delivery_method)
+        .and_return("smtp")
+        .at_least(:once)
+
       load_initializer
 
       expect(ActionMailer::Base.delivery_method).to eq(:smtp)
     end
 
-    it "sets the delivery method to :sendmail" do
-      allow(Errbit::Config).to receive(:email_delivery_method).and_return(:sendmail)
+    it "sets the delivery method to sendmail" do
+      expect(Rails.configuration.errbit)
+        .to receive(:email_delivery_method)
+        .and_return("sendmail")
+        .at_least(:once)
+
       load_initializer
 
       expect(ActionMailer::Base.delivery_method).to eq(:sendmail)
@@ -29,24 +37,25 @@ RSpec.describe "initializers/action_mailer" do
 
   describe "smtp settings" do
     it "lets smtp settings be set" do
-      allow(Errbit::Config).to receive(:email_delivery_method).and_return(:smtp)
-      allow(Errbit::Config).to receive(:smtp_address).and_return("smtp.somedomain.com")
-      allow(Errbit::Config).to receive(:smtp_port).and_return(998)
-      allow(Errbit::Config).to receive(:smtp_authentication).and_return(:login)
-      allow(Errbit::Config).to receive(:smtp_user_name).and_return("my-username")
-      allow(Errbit::Config).to receive(:smtp_password).and_return("my-password")
-      allow(Errbit::Config).to receive(:smtp_domain).and_return("someotherdomain.com")
-      allow(Errbit::Config).to receive(:smtp_enable_starttls_auto).and_return(true)
-      allow(Errbit::Config).to receive(:smtp_openssl_verify_mode).and_return("peer")
+      expect(Rails.configuration.errbit).to receive(:email_delivery_method).and_return("smtp").at_least(:once)
+      expect(Rails.configuration.errbit).to receive(:smtp_address).and_return("smtp.somedomain.com")
+      expect(Rails.configuration.errbit).to receive(:smtp_port).and_return(998)
+      expect(Rails.configuration.errbit).to receive(:smtp_domain).and_return("someotherdomain.com")
+      expect(Rails.configuration.errbit).to receive(:smtp_user_name).and_return("my-username")
+      expect(Rails.configuration.errbit).to receive(:smtp_password).and_return("my-password")
+      expect(Rails.configuration.errbit).to receive(:smtp_authentication).and_return(:login)
+      expect(Rails.configuration.errbit).to receive(:smtp_enable_starttls_auto).and_return(true)
+      expect(Rails.configuration.errbit).to receive(:smtp_openssl_verify_mode).and_return("peer")
+
       load_initializer
 
       expect(ActionMailer::Base.smtp_settings).to eq(
         address: "smtp.somedomain.com",
         port: 998,
-        authentication: :login,
+        domain: "someotherdomain.com",
         user_name: "my-username",
         password: "my-password",
-        domain: "someotherdomain.com",
+        authentication: :login,
         enable_starttls_auto: true,
         openssl_verify_mode: "peer"
       )

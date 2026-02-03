@@ -6,7 +6,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise(*Errbit::Config.devise_modules)
+  devise(*Rails.configuration.errbit.devise_modules)
 
   field :email
   field :github_login
@@ -45,7 +45,7 @@ class User
   validates :name, presence: true
   validates :github_login, uniqueness: {allow_nil: true}
 
-  if Errbit::Config.user_has_username
+  if Rails.configuration.errbit.user_has_username
     field :username
     validates :username, presence: true
   end
@@ -53,12 +53,12 @@ class User
   class << self
     # @param email [String]
     def valid_google_domain?(email)
-      return true if Errbit::Config.google_authorized_domains.blank?
+      return true if Rails.configuration.errbit.google_authorized_domains.blank?
 
       match_data = /.+@(?<domain>.+)$/.match(email)
       return false if match_data.nil?
 
-      Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
+      Rails.configuration.errbit.google_authorized_domains.include?(match_data[:domain])
     end
 
     # @param access_token [String]
@@ -93,7 +93,7 @@ class User
   end
 
   def can_create_github_issues?
-    github_account? && Errbit::Config.github_access_scope.include?("repo")
+    github_account? && Rails.configuration.errbit.github_access_scope.include?("repo")
   end
 
   def github_login=(login)

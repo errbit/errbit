@@ -39,13 +39,14 @@ RSpec.describe "Callback on Notice", type: :model do
     end
 
     before do
-      Errbit::Config.per_app_email_at_notices = true
+      expect(Rails.configuration.errbit)
+        .to receive(:per_app_email_at_notices)
+        .and_return(true)
+        .at_least(:once)
       error_report = ErrorReport.new(notice_attrs)
       error_report.generate_notice!
       @problem = error_report.notice.err.problem
     end
-
-    after { Errbit::Config.per_app_email_at_notices = false }
 
     it "sends an email notification" do
       custom_thresholds.each do |threshold|
@@ -89,8 +90,12 @@ RSpec.describe "Callback on Notice", type: :model do
     end
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
-    before { Errbit::Config.per_app_email_at_notices = true }
-    after { Errbit::Config.per_app_email_at_notices = false }
+    before do
+      expect(Rails.configuration.errbit)
+        .to receive(:per_app_email_at_notices)
+        .and_return(true)
+        .at_least(:once)
+    end
 
     it "sends email the first time after the error is resolved" do
       error_report = ErrorReport.new(notice_attrs)
@@ -122,9 +127,11 @@ RSpec.describe "Callback on Notice", type: :model do
 
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
-    before { Errbit::Config.per_app_notify_at_notices = true }
-
-    after { Errbit::Config.per_app_notify_at_notices = false }
+    before do
+      expect(Rails.configuration.errbit)
+        .to receive(:per_app_notify_at_notices)
+        .and_return(true)
+    end
 
     it "sends email" do
       error_report = ErrorReport.new(notice_attrs)
@@ -148,9 +155,6 @@ RSpec.describe "Callback on Notice", type: :model do
     let(:app) { create(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
-    before { Errbit::Config.per_app_notify_at_notices = true }
-    after { Errbit::Config.per_app_notify_at_notices = false }
-
     it "should not create a campfire notification" do
       error_report = ErrorReport.new(notice_attrs)
       expect(error_report.app.notification_service).not_to receive(:create_notification)
@@ -165,8 +169,12 @@ RSpec.describe "Callback on Notice", type: :model do
     let(:app) { create(:app, notification_service: notification_service) }
     let(:notice_attrs) { notice_attrs_for.call(app.api_key) }
 
-    before { Errbit::Config.per_app_notify_at_notices = true }
-    after { Errbit::Config.per_app_notify_at_notices = false }
+    before do
+      expect(Rails.configuration.errbit)
+        .to receive(:per_app_notify_at_notices)
+        .and_return(true)
+        .at_least(:once)
+    end
 
     it "should create a campfire notification on first notice" do
       error_report = ErrorReport.new(notice_attrs)

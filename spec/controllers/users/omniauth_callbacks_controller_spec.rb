@@ -8,7 +8,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     request.env["devise.mapping"] = Devise.mappings[:user]
     request.env["omniauth.auth"] = Hashie::Mash.new(
       provider: "github",
-      extra: {raw_info: {login: login, email: email}},
+      extra: {raw_info: {login: login, email: email, name: "John Smith"}},
       credentials: {token: token}
     )
   end
@@ -46,11 +46,10 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context "Creating a new user via GitHub authentication" do
     before do
-      Errbit::Config.github_org_id = 42
-    end
-
-    after do
-      Errbit::Config.github_org_id = nil
+      expect(Rails.configuration.errbit)
+        .to receive(:github_org_id)
+        .and_return(42)
+        .at_least(:once)
     end
 
     context "User has valid emails defined" do

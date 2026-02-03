@@ -1,6 +1,6 @@
 <% content_for :title, @user.name %>
 
-<% if Errbit::Config.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
+<% if Rails.configuration.errbit.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
   <% content_for :title_style do %>
     background: url('<%= gravatar %>') no-repeat;
     padding-left: 106px;
@@ -25,17 +25,17 @@
     <td class="main"><%= @user.email %></td>
   </tr>
 
-  <% if Errbit::Config.user_has_username %>
+  <% if Rails.configuration.errbit.user_has_username %>
     <tr>
       <th><%= t(".username") %></th>
       <td class="main"><%= @user.username %></td>
     </tr>
   <% end %>
 
-  <% if Errbit::Config.github_authentication && @user.github_login.present? %>
+  <% if Rails.configuration.errbit.github_authentication && @user.github_login.present? %>
     <tr>
-      <th><%= "#{Errbit::Config.github_site_title} Login" %></th>
-      <td class="main"><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
+      <th><%= "#{Rails.configuration.errbit.github_site_title} Login" %></th>
+      <td class="main"><%= link_to @user.github_login, "#{Rails.configuration.errbit.github_url}/#{@user.github_login}" %></td>
     </tr>
   <% end %>
 

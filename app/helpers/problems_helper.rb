@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module ProblemsHelper
+  # @param action [String, Symbol]
   def problem_confirm(action)
-    t(format("problems.confirm.%s", action)) unless Errbit::Config.confirm_err_actions.eql? false
+    t(format("problems.confirm.%s", action)) if Rails.configuration.errbit.confirm_err_actions
   end
 
+  # @param body [String]
   def auto_link_format(body)
     sanitize(
       auto_link(simple_format(body), :all, target: "_blank").html_safe,
@@ -27,7 +29,7 @@ module ProblemsHelper
     return if email.blank?
 
     default_options = {
-      d: Errbit::Config.gravatar_default
+      d: Rails.configuration.errbit.gravatar_default
     }
     options.reverse_merge!(default_options)
     params = options.extract!(:s, :d).delete_if { |_, v| v.blank? }

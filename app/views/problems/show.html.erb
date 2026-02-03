@@ -44,7 +44,7 @@
         <tr>
           <th>
             <% if comment.user %>
-              <% if Errbit::Config.use_gravatar %>
+              <% if Rails.configuration.errbit.use_gravatar %>
                 <%= gravatar_tag(comment.user.email, s: 24) %>
               <% end %>
               <span class="comment-info">

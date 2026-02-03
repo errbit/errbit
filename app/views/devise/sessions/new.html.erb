@@ -2,18 +2,18 @@
 
 <% auth_key = Devise.authentication_keys.first %>
 
-<% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
+<% if Rails.configuration.errbit.github_authentication || Rails.configuration.errbit.google_authentication %>
   <% content_for :action_bar do %>
     <div class="action-bar">
-      <% if Errbit::Config.github_authentication %>
+      <% if Rails.configuration.errbit.github_authentication %>
         <span class="github">
-          <%= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, method: :post %>
+          <%= link_to "Sign in with #{Rails.configuration.errbit.github_site_title}", user_github_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
 
-      <% if Errbit::Config.google_authentication %>
+      <% if Rails.configuration.errbit.google_authentication %>
         <span class="google">
-          <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
+          <%= link_to "Sign in with #{Rails.configuration.errbit.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
     </div>
@@ -24,7 +24,7 @@
   <div class="required">
     <%= f.label auth_key %>
 
-    <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), tabindex: 1, autofocus: true %>
+    <%= f.text_field auth_key, type: (Rails.configuration.errbit.user_has_username ? "text" : "email"), tabindex: 1, autofocus: true %>
   </div>
 
   <div class="required">

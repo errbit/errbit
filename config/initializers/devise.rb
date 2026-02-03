@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = Errbit::Config.email_from
+  config.mailer_sender = Rails.configuration.errbit.email_from
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -46,7 +46,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [Errbit::Config.user_has_username ? :username : :email]
+  config.authentication_keys = [Rails.configuration.errbit.user_has_username ? :username : :email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -58,12 +58,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [Errbit::Config.user_has_username ? :username : :email]
+  config.case_insensitive_keys = [Rails.configuration.errbit.user_has_username ? :username : :email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [Errbit::Config.user_has_username ? :username : :email]
+  config.strip_whitespace_keys = [Rails.configuration.errbit.user_has_username ? :username : :email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -274,31 +274,31 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  if Errbit::Config.github_authentication || Rails.env.test?
+  if Rails.configuration.errbit.github_authentication || Rails.env.test?
     github_options = {
-      scope: Errbit::Config.github_access_scope.join(","),
+      scope: Rails.configuration.errbit.github_access_scope,
       skip_info: true,
       client_options: {
-        site: Errbit::Config.github_api_url,
-        authorize_url: "#{Errbit::Config.github_url}/login/oauth/authorize",
-        token_url: "#{Errbit::Config.github_url}/login/oauth/access_token"
+        site: Rails.configuration.errbit.github_api_url,
+        authorize_url: "#{Rails.configuration.errbit.github_url}/login/oauth/authorize",
+        token_url: "#{Rails.configuration.errbit.github_url}/login/oauth/access_token"
       }
     }
 
     config.omniauth :github,
-      Errbit::Config.github_client_id,
-      Errbit::Config.github_secret,
+      Rails.configuration.errbit.github_client_id,
+      Rails.configuration.errbit.github_secret,
       github_options
   end
 
-  if Errbit::Config.google_authentication || Rails.env.test?
+  if Rails.configuration.errbit.google_authentication || Rails.env.test?
     google_options = {
-      redirect_uri: Errbit::Config.google_redirect_uri
+      redirect_uri: Rails.configuration.errbit.google_redirect_uri
     }.compact
 
     config.omniauth :google_oauth2,
-      Errbit::Config.google_client_id,
-      Errbit::Config.google_secret,
+      Rails.configuration.errbit.google_client_id,
+      Rails.configuration.errbit.google_secret,
       google_options
   end
 

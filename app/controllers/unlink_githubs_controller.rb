@@ -8,7 +8,7 @@ class UnlinkGithubsController < ApplicationController
 
     @user.update!(github_login: nil, github_oauth_token: nil)
 
-    flash[:success] = "Successfully unlinked #{Errbit::Config.github_site_title} account!"
+    flash[:success] = "Successfully unlinked #{Rails.configuration.errbit.github_site_title} account!"
 
     redirect_to user_path(@user)
   end

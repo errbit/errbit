@@ -4,9 +4,19 @@ require "rails_helper"
 
 RSpec.describe "Sign in with Google with auto provision", type: :system, retry: 3 do
   context "create an account for recognized user if they log in" do
-    before { expect(Errbit::Config).to receive(:google_authentication).and_return(true) }
+    before do
+      expect(Rails.configuration.errbit)
+        .to receive(:google_authentication)
+        .and_return(true)
+        .at_least(:once)
+    end
 
-    before { expect(Errbit::Config).to receive(:google_auto_provision).and_return(true) }
+    before do
+      expect(Rails.configuration.errbit)
+        .to receive(:google_auto_provision)
+        .and_return(true)
+        .at_least(:once)
+    end
 
     before { OmniAuth.config.mock_auth[:google_oauth2] = Faker::Omniauth.google(uid: "123456789") }
 

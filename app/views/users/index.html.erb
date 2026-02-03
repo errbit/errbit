@@ -12,11 +12,11 @@
 <table class="users">
   <thead>
     <tr>
-      <% if Errbit::Config.use_gravatar %>
+      <% if Rails.configuration.errbit.use_gravatar %>
         <th>&nbsp;</th>
       <% end %>
       <th><%= t(".name") %></th>
-      <% if Errbit::Config.user_has_username %>
+      <% if Rails.configuration.errbit.user_has_username %>
         <th><%= t(".username") %></th>
       <% end %>
       <th class="main"><%= t(".email") %></th>
@@ -27,11 +27,11 @@
   <tbody>
     <% @users.each do |user| %>
       <tr class="user_list">
-        <% if Errbit::Config.use_gravatar %>
+        <% if Rails.configuration.errbit.use_gravatar %>
           <td><%= gravatar_tag(user.email, s: 24) %></td>
         <% end %>
         <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
-        <% if Errbit::Config.user_has_username %>
+        <% if Rails.configuration.errbit.user_has_username %>
           <td><%= user.username %></td>
         <% end %>
         <td><%= user.email %></td>
