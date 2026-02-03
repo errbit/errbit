@@ -3,6 +3,7 @@ defaults: &defaults
   user_has_username: <%= ENV.fetch("ERRBIT_USER_HAS_USERNAME", "false") == "true" %>
   confirm_err_actions: <%= ENV.fetch("ERRBIT_CONFIRM_ERR_ACTIONS", "true") == "true" %>
   email_at_notices: [1, 10, 100]
+  per_app_email_at_notices: <%= ENV.fetch("ERRBIT_PER_APP_EMAIL_AT_NOTICES", "false") == "true" %>
   devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
   email_from: <%= ENV.fetch("ERRBIT_EMAIL_FROM", "errbit@example.com") %>
   github_authentication: <%= ENV.fetch("GITHUB_AUTHENTICATION", "false") == "true" %>
