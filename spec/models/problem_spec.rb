@@ -587,7 +587,9 @@ RSpec.describe Problem, type: :model do
   describe "#url" do
     subject { create(:problem) }
 
-    before { Rails.configuration.errbit.host = "memyselfandi.com" }
+    before do
+      expect(Rails.configuration.errbit).to receive(:host).and_return("memyselfandi.com")
+    end
 
     it "uses the configured host" do
       expect(subject.url).to eq("http://memyselfandi.com/apps/#{subject.app.id}/problems/#{subject.id}")
