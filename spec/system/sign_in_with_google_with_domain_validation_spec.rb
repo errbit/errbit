@@ -3,11 +3,26 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with Google with domain validation", type: :system, retry: 3 do
-  before { Config.google.enabled = true }
+  before do
+    expect(Rails.configuration.errbit)
+      .to receive(:google_authentication)
+      .and_return(true)
+      .at_least(:once)
+  end
 
-  before { Config.google.auto_provision = true }
+  before do
+    expect(Rails.configuration.errbit)
+      .to receive(:google_auto_provision)
+      .and_return(true)
+      .at_least(:once)
+  end
 
-  before { Config.google.authorized_domains = ["example.com"] }
+  before do
+    expect(Rails.configuration.errbit)
+      .to receive(:google_authorized_domains)
+      .and_return(["example.com"])
+      .at_least(:once)
+  end
 
   context "create an account for recognized user if their account email is from a trusted domain" do
     before { OmniAuth.config.mock_auth[:google_oauth2] = Faker::Omniauth.google(email: "me@example.com", uid: "123456789") }
