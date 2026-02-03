@@ -282,14 +282,11 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "changing email_at_notices" do
-        # before { Config.errbit.per_app_email_at_notices = true }
-
-        # before do
-        #   expect(Rails.configuration.errbit)
-        #     .to receive(:per_app_email_at_notices)
-        #     .and_return(true)
-        #     # .at_least(:once)
-        # end
+        before do
+          allow(Rails.configuration.errbit)
+            .to receive(:per_app_email_at_notices)
+            .and_return(true)
+        end
 
         it "should parse legal csv values" do
           patch :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
