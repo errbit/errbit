@@ -172,16 +172,28 @@ Default: `false`
 
 Default in container: as default.
 
+### Gravatar
+
+#### `ERRBIT_USE_GRAVATAR`
+
+Enable gravatar.
+
+Default: `false`
+
+Default in container: as default.
+
+#### `ERRBIT_GRAVATAR_DEFAULT`
+
+Default gravatar image (see https://en.gravatar.com/site/implement/images/).
+
+Default: `identicon`
+
+Default in container: as default.
+
 <dl>
 <dt>ERRBIT_USER_HAS_USERNAME
 <dd>Allow users to have a username field
 <dd>defaults to false
-<dt>ERRBIT_USE_GRAVATAR
-<dd>Enable gravatar
-<dd>defaults to true
-<dt>ERRBIT_GRAVATAR_DEFAULT
-<dd>Default gravatar image (see https://en.gravatar.com/site/implement/images/)
-<dd>identicon
 <dt>ERRBIT_EMAIL_FROM
 <dd>The value that should be set in the 'from' field for outgoing emails
 <dd>defaults to errbit@example.com
