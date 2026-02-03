@@ -588,7 +588,9 @@ RSpec.describe Problem, type: :model do
     subject { create(:problem) }
 
     before do
-      expect(Rails.configuration.errbit).to receive(:host).and_return("memyselfandi.com")
+      expect(Rails.configuration.errbit)
+        .to receive(:host)
+        .and_return("memyselfandi.com")
     end
 
     it "uses the configured host" do
