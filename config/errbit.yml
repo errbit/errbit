@@ -7,7 +7,11 @@ defaults: &defaults
   devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
   email_from: <%= ENV.fetch("ERRBIT_EMAIL_FROM", "errbit@example.com") %>
   github_authentication: <%= ENV.fetch("GITHUB_AUTHENTICATION", "false") == "true" %>
+  github_client_id: <%= ENV.fetch("GITHUB_CLIENT_ID", "") %>
+  github_secret: <%= ENV.fetch("GITHUB_SECRET", "") %>
   github_url: <%= ENV.fetch("GITHUB_URL", "https://github.com") %>
+  github_api_url: <%= ENV.fetch("GITHUB_API_URL", "https://api.github.com") %>
+  github_access_scope: <%= ENV.fetch("GITHUB_ACCESS_SCOPE", "repo") %>
   github_site_title: <%= ENV.fetch("GITHUB_SITE_TITLE", "GitHub") %>
   google_authentication: <%= ENV.fetch("GOOGLE_AUTHENTICATION", "false") == "true" %>
   google_site_title: <%= ENV.fetch("GOOGLE_SITE_TITLE", "Google") %>

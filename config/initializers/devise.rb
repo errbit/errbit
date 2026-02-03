@@ -278,19 +278,19 @@ Devise.setup do |config|
 
   if Rails.configuration.errbit.github_authentication || Rails.env.test?
     github_options = {
-  #     scope: Config.github.access_scope.join(","),
-  #     skip_info: true,
-  #     client_options: {
-  #       site: Config.github.api_url.to_s,
-  #       authorize_url: "#{Config.github.url}/login/oauth/authorize",
-  #       token_url: "#{Config.github.url}/login/oauth/access_token"
-  #     }
+      scope: Rails.configuration.errbit.github_access_scope,
+      skip_info: true,
+      client_options: {
+        site: Rails.configuration.errbit.github_api_url,
+        authorize_url: "#{Rails.configuration.errbit.github_url}/login/oauth/authorize",
+        token_url: "#{Rails.configuration.errbit.github_url}/login/oauth/access_token"
+      }
     }
 
-  #   config.omniauth :github,
-  #     Config.github.client_id,
-  #     Config.github.secret,
-  #     github_options
+    config.omniauth :github,
+      Rails.configuration.errbit.github_client_id,
+      Rails.configuration.errbit.github_secret,
+      github_options
   end
 
   # if Config.google.enabled? || Rails.env.test?
