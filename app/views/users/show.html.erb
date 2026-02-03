@@ -1,6 +1,6 @@
 <% content_for :title, @user.name %>
 
-<% if Config.gravatar.enabled? && (gravatar = gravatar_url(@user.email, s: 86)) %>
+<% if Rails.configuration.errbit.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
   <% content_for :title_style do %>
     background: url('<%= gravatar %>') no-repeat;
     padding-left: 106px;
@@ -25,7 +25,7 @@
     <td class="main"><%= @user.email %></td>
   </tr>
 
-  <% if Config.errbit.user_has_username? %>
+  <% if Rails.configuration.errbit.user_has_username %>
     <tr>
       <th><%= t(".username") %></th>
       <td class="main"><%= @user.username %></td>
