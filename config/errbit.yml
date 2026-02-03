@@ -29,6 +29,8 @@ defaults: &defaults
   google_redirect_uri: <%= ENV.fetch("GOOGLE_REDIRECT_URI", nil) %>
   google_authorized_domains: <%= ENV.fetch("GOOGLE_AUTHORIZED_DOMAINS", "").split(",") %>
 
+  email_delivery_method: <%= ENV.fetch("EMAIL_DELIVERY_METHOD", nil) %>
+
   devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
 
 development:

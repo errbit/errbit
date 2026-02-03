@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Set SMTP settings if given.
-# if Config.email.delivery_method == "smtp"
-#   ActionMailer::Base.delivery_method = :smtp
-#   ActionMailer::Base.smtp_settings = {
+if Rails.configuration.errbit.email_delivery_method == "smtp"
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
 #     address: Config.smtp.settings.address.get,
 #     port: Config.smtp.settings.port.to_i,
 #     domain: Config.smtp.settings.domain.get,
@@ -12,17 +12,18 @@
 #     authentication: Config.smtp.settings.authentication.get&.to_sym,
 #     enable_starttls_auto: Config.smtp.settings.enable_starttls_auto?,
 #     openssl_verify_mode: Config.smtp.settings.openssl_verify_mode.get
-#   }
-# end
+  }
+end
 
-# if Config.email.delivery_method == "sendmail"
-#   sendmail_settings = {}
+if Rails.configuration.errbit.email_delivery_method == "sendmail"
+  ActionMailer::Base.delivery_method = :sendmail
+
+  sendmail_settings = {}
 #   sendmail_settings[:location] = Config.sendmail.settings.location if Config.sendmail.settings.location.present?
 #   sendmail_settings[:arguments] = Config.sendmail.settings.arguments if Config.sendmail.settings.arguments.present?
-#
-#   ActionMailer::Base.delivery_method = :sendmail
-#   ActionMailer::Base.sendmail_settings = sendmail_settings
-# end
+
+  ActionMailer::Base.sendmail_settings = sendmail_settings
+end
 
 # Set config specific values
 (ActionMailer::Base.default_url_options ||= {}).tap do |default|

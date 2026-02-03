@@ -275,11 +275,11 @@ Default in container: as default.
 
 #### `EMAIL_DELIVERY_METHOD`
 
-`:smtp` or `:sendmail`, depending on how you want Errbit to send email.
+`smtp` or `sendmail`, depending on how you want Errbit to send email.
 
 Default: not set.
 
-Default in container: as default.
+Default in container: not set.
 
 #### `SMTP_SERVER`
 
@@ -287,7 +287,7 @@ Server address for outgoing SMTP messages.
 
 Default: not set.
 
-Default in container: as default.
+Default in container: not set.
 
 #### `SMTP_PORT`
 
@@ -295,7 +295,7 @@ Server port for outgoing SMTP messages.
 
 Default: not set.
 
-Default in container: as default.
+Default in container: not set.
 
 <dl>
 <dt>SMTP_AUTHENTICATION

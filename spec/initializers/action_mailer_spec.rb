@@ -12,16 +12,22 @@ RSpec.describe "initializers/action_mailer" do
   end
 
   describe "delivery method" do
-    it "sets the delivery method to :smtp" do
-      Config.email.delivery_method = "smtp"
+    it "sets the delivery method to smtp" do
+      expect(Rails.configuration.errbit)
+        .to receive(:email_delivery_method)
+        .and_return("smtp")
+        .at_least(:once)
 
       load_initializer
 
       expect(ActionMailer::Base.delivery_method).to eq(:smtp)
     end
 
-    it "sets the delivery method to :sendmail" do
-      Config.email.delivery_method = "sendmail"
+    it "sets the delivery method to sendmail" do
+      expect(Rails.configuration.errbit)
+        .to receive(:email_delivery_method)
+        .and_return("sendmail")
+        .at_least(:once)
 
       load_initializer
 

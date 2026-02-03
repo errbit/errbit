@@ -3,7 +3,7 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def github_auto_sign_up(github_token)
-      return if Rails.configuration.errbit.github_org_id.nil?
+      return if Rails.configuration.errbit.github_org_id.blank?
 
       # See if the user is a member of the organization that we have access for
       # If they are, automatically create an account
