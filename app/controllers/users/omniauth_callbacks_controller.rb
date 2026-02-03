@@ -59,7 +59,7 @@ module Users
       google_uid = request.env["omniauth.auth"][:uid]
       google_email = request.env["omniauth.auth"].dig(:info, :email)
       google_user = User.where(google_uid: google_uid).first
-      google_site_title = Config.google.site_title
+      google_site_title = Rails.configuration.errbit.google_site_title
 
       # If user is already signed in, link google details to their account
       if current_user
@@ -79,7 +79,7 @@ module Users
         flash[:success] = I18n.t("devise.omniauth_callbacks.success", kind: google_site_title)
 
         sign_in_and_redirect google_user, event: :authentication
-      elsif Config.google.auto_provision
+      elsif Rails.configuration.errbit.google_auto_provision
         if User.valid_google_domain?(google_email)
           user = User.create_from_google_oauth2(request.env["omniauth.auth"])
 
