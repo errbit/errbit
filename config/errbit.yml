@@ -11,6 +11,11 @@ defaults: &defaults
   github_site_title: <%= ENV.fetch("GITHUB_SITE_TITLE", "GitHub") %>
   google_authentication: <%= ENV.fetch("GOOGLE_AUTHENTICATION", "false") == "true" %>
   google_site_title: <%= ENV.fetch("GOOGLE_SITE_TITLE", "Google") %>
+  google_auto_provision: <%= ENV.fetch("GOOGLE_AUTO_PROVISION", "false") == "true" %>
+  google_client_id: <%= ENV.fetch("GOOGLE_CLIENT_ID", "") %>
+  google_secret: <%= ENV.fetch("GOOGLE_SECRET", "") %>
+  google_redirect_uri: <%= ENV.fetch("GOOGLE_REDIRECT_URI", "") %>
+  google_authorized_domains: <%= ENV.fetch("GOOGLE_AUTHORIZED_DOMAINS", "") %>
   use_gravatar: <%= ENV.fetch("ERRBIT_USE_GRAVATAR", "false") == "true" %>
   gravatar_default: <%= ENV.fetch("ERRBIT_GRAVATAR_DEFAULT", "identicon") %>
 
