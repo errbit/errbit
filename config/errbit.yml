@@ -12,14 +12,17 @@ defaults: &defaults
   log_location: <%= ENV.fetch("ERRBIT_LOG_LOCATION", "STDOUT") %>
   notice_deprecation_days: <%= ENV.fetch("ERRBIT_PROBLEM_DESTROY_AFTER_DAYS", nil) %>
 
-  devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
+  github_url: <%= ENV.fetch("GITHUB_URL", "https://github.com") %>
   github_authentication: <%= ENV.fetch("GITHUB_AUTHENTICATION", "false") == "true" %>
   github_client_id: <%= ENV.fetch("GITHUB_CLIENT_ID", nil) %>
   github_secret: <%= ENV.fetch("GITHUB_SECRET", nil) %>
-  github_url: <%= ENV.fetch("GITHUB_URL", "https://github.com") %>
+  # github_org_id: ["GITHUB_ORG_ID"],
+  github_access_scope: <%= ENV.fetch("GITHUB_ACCESS_SCOPE", "[repo]").gsub("[", "").gsub("]", "").split(",") %>
   github_api_url: <%= ENV.fetch("GITHUB_API_URL", "https://api.github.com") %>
-  github_access_scope: <%= ENV.fetch("GITHUB_ACCESS_SCOPE", "repo") %>
   github_site_title: <%= ENV.fetch("GITHUB_SITE_TITLE", "GitHub") %>
+
+  devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
+
   google_authentication: <%= ENV.fetch("GOOGLE_AUTHENTICATION", "false") == "true" %>
   google_site_title: <%= ENV.fetch("GOOGLE_SITE_TITLE", "Google") %>
   google_auto_provision: <%= ENV.fetch("GOOGLE_AUTO_PROVISION", "false") == "true" %>
