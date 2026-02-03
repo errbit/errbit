@@ -7,9 +7,9 @@ if Rails.configuration.errbit.email_delivery_method == "smtp"
     address: Rails.configuration.errbit.smtp_address,
     port: Rails.configuration.errbit.smtp_port,
     domain: Rails.configuration.errbit.smtp_domain,
-#     user_name: Config.smtp.settings.user_name.get,
-#     password: Config.smtp.settings.password.get,
-#     authentication: Config.smtp.settings.authentication.get&.to_sym,
+    user_name: Rails.configuration.errbit.smtp_user_name,
+    password: Rails.configuration.errbit.smtp_password,
+    authentication: Rails.configuration.errbit.smtp_authentication,
 #     enable_starttls_auto: Config.smtp.settings.enable_starttls_auto?,
 #     openssl_verify_mode: Config.smtp.settings.openssl_verify_mode.get
   }

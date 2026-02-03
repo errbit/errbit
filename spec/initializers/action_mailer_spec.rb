@@ -41,15 +41,18 @@ RSpec.describe "initializers/action_mailer" do
       expect(Rails.configuration.errbit).to receive(:smtp_address).and_return("smtp.somedomain.com") ##.at_least(:once)
       expect(Rails.configuration.errbit).to receive(:smtp_port).and_return(998) ##.at_least(:once)
       expect(Rails.configuration.errbit).to receive(:smtp_domain).and_return("someotherdomain.com") ##.at_least(:once)
+      expect(Rails.configuration.errbit).to receive(:smtp_user_name).and_return("my-username") ##.at_least(:once)
+      expect(Rails.configuration.errbit).to receive(:smtp_password).and_return("my-password") ##.at_least(:once)
+      expect(Rails.configuration.errbit).to receive(:smtp_authentication).and_return(:login) ##.at_least(:once)
 
       # Config.email.delivery_method = "smtp"
       # Config.smtp.settings.address = "smtp.somedomain.com"
       # Config.smtp.settings.port = 998
       # Config.smtp.settings.domain = "someotherdomain.com"
-      #
       # Config.smtp.settings.user_name = "my-username"
       # Config.smtp.settings.password = "my-password"
       # Config.smtp.settings.authentication = "login"
+      # 
       # Config.smtp.settings.enable_starttls_auto = true
       # Config.smtp.settings.openssl_verify_mode = "peer"
 

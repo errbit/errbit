@@ -33,11 +33,11 @@ defaults: &defaults
   smtp_address: <%= ENV.fetch("SMTP_SERVER", nil) %>
   smtp_port: <%= ENV.fetch("SMTP_PORT", nil) %>
   smtp_domain: <%= ENV.fetch("SMTP_DOMAIN", nil) %>
-#  smtp_authentication: ["SMTP_AUTHENTICATION"],
+  smtp_user_name: <%= ENV.fetch("SMTP_USERNAME", nil) %>
+  smtp_password: <%= ENV.fetch("SMTP_PASSWORD", nil) %>
+  smtp_authentication: <%= ENV.fetch("SMTP_AUTHENTICATION", nil)&.to_sym %>
 #  smtp_enable_starttls_auto: ["SMTP_ENABLE_STARTTLS_AUTO"],
 #  smtp_openssl_verify_mode: ["SMTP_OPENSSL_VERIFY_MODE"],
-#  smtp_user_name: ["SMTP_USERNAME", "SENDGRID_USERNAME"],
-#  smtp_password: ["SMTP_PASSWORD", "SENDGRID_PASSWORD"],
 #  smtp_domain: ["SMTP_DOMAIN", "SENDGRID_DOMAIN", lambda do |values|
 #    values[:smtp_domain] ||
 #                           (values[:email_from] && values[:email_from].split("@").last) || nil
