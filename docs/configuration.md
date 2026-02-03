@@ -297,24 +297,72 @@ Default: not set.
 
 Default in container: not set.
 
-<dl>
-<dt>SMTP_AUTHENTICATION
-<dd>Authentication method for the SMTP connection (see http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration)
-<dt>SMTP_USERNAME
-<dd>Username for SMTP auth, you could also set SENDGRID_USERNAME
-<dt>SMTP_PASSWORD
-<dd>Password for SMTP auth, you could also set SENDGRID_PASSWORD
-<dt>SMTP_DOMAIN
-<dd>HELO domain to set for outgoing SMTP messages, you can also use SENDGRID_DOMAIN
-<dt>SMTP_ENABLE_STARTTLS_AUTO
-<dd>Detects if STARTTLS is enabled in your SMTP server and starts to use it
-<dt>SMTP_OPENSSL_VERIFY_MODE
-<dd>When using TLS, you can set how OpenSSL checks the certificate. This is really useful if you need to validate a self-signed and/or a wildcard certificate. You can use the name of an OpenSSL verify constant ('none', 'peer', 'client_once', 'fail_if_no_peer_cert').
-<dt>SENDMAIL_LOCATION
-<dd>Path to sendmail
-<dt>SENDMAIL_ARGUMENTS
-<dd>Custom arguments for sendmail
-</dl>
+#### `SMTP_AUTHENTICATION`
+
+Authentication method for the SMTP connection (see http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SMTP_USERNAME`
+
+Username for SMTP auth, you could also set `SENDGRID_USERNAME`.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SMTP_PASSWORD`
+
+Password for SMTP auth, you could also set `SENDGRID_PASSWORD`.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SMTP_DOMAIN`
+
+HELO domain to set for outgoing SMTP messages, you can also use `SENDGRID_DOMAIN`.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SMTP_ENABLE_STARTTLS_AUTO`
+
+Detects if STARTTLS is enabled in your SMTP server and starts to use it.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SMTP_OPENSSL_VERIFY_MODE`
+
+When using TLS, you can set how OpenSSL checks the certificate. This is really
+useful if you need to validate a self-signed and/or a wildcard certificate. You
+can use the name of an OpenSSL verify constant (`none`, `peer`, `client_once`,
+`fail_if_no_peer_cert`).
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SENDMAIL_LOCATION`
+
+Path to sendmail.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `SENDMAIL_ARGUMENTS`
+
+Custom arguments for sendmail.
+
+Default: not set.
+
+Default in container: not set.
 
 ### Devise configuration
 
