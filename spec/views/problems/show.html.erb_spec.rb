@@ -87,7 +87,9 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
 
     it "should not confirm the 'resolve' link if configured to" do
-      Rails.configuration.errbit.confirm_err_actions = true
+      expect(Rails.configuration.errbit)
+        .to receive(:confirm_err_actions)
+        .and_return(true)
 
       render
 
@@ -100,7 +102,9 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
 
     it "should not confirm the 'resolve' link if configured not to" do
-      Rails.configuration.errbit.confirm_err_actions = false
+      expect(Rails.configuration.errbit)
+        .to receive(:confirm_err_actions)
+        .and_return(false)
 
       render
 
@@ -215,7 +219,10 @@ RSpec.describe "problems/show.html.erb", type: :view do
       problem = create(:problem_with_comments)
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
-      Rails.configuration.errbit.use_gravatar = true
+      expect(Rails.configuration.errbit)
+        .to receive(:use_gravatar)
+        .and_return(true)
+        .at_least(:once)
     end
 
     it "displays comments and new comment form" do
