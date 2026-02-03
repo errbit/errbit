@@ -102,6 +102,31 @@ Default: `nil` (disabled)
 
 Default in container: as default.
 
+#### `ERRBIT_USER_HAS_USERNAME`
+
+Allow users to have a username field.
+
+Default: `false`
+
+Default in container: as default.
+
+<dt>ERRBIT_EMAIL_FROM
+<dd>The value that should be set in the 'from' field for outgoing emails
+<dd>defaults to errbit@example.com
+<dt>ERRBIT_EMAIL_AT_NOTICES
+<dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
+<dd>defaults to [1,10,100]
+<dt>ERRBIT_PER_APP_EMAIL_AT_NOTICES
+<dd>Let every application have its own configuration rather than using `ERRBIT_EMAIL_AT_NOTICES`. If this value is true, you can configure each app using the web UI.
+<dd>defaults to false
+<dt>ERRBIT_NOTIFY_AT_NOTICES
+<dd>Notify each application's configured notification service after the set number of occurrences of the same error. [0] means notify on every occurrence.
+<dd>defaults to [0]
+<dt>ERRBIT_PER_APP_NOTIFY_AT_NOTICES
+<dd>Let every application have its own configuration rather than using `ERRBIT_NOTIFY_AT_NOTICES`. If this value is set to true, you can configure each app using the web UI.
+<dd>defaults to false
+
+
 | Environment variable         | Description  | Default  | Default in container |
 |------------------------------|--------------|----------|----------------------|
 | `MONGO_URL`                  |              |          |                      |
@@ -247,24 +272,6 @@ Default: `identicon`
 Default in container: as default.
 
 <dl>
-<dt>ERRBIT_USER_HAS_USERNAME
-<dd>Allow users to have a username field
-<dd>defaults to false
-<dt>ERRBIT_EMAIL_FROM
-<dd>The value that should be set in the 'from' field for outgoing emails
-<dd>defaults to errbit@example.com
-<dt>ERRBIT_EMAIL_AT_NOTICES
-<dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
-<dd>defaults to [1,10,100]
-<dt>ERRBIT_PER_APP_EMAIL_AT_NOTICES
-<dd>Let every application have its own configuration rather than using `ERRBIT_EMAIL_AT_NOTICES`. If this value is true, you can configure each app using the web UI.
-<dd>defaults to false
-<dt>ERRBIT_NOTIFY_AT_NOTICES
-<dd>Notify each application's configured notification service after the set number of occurrences of the same error. [0] means notify on every occurrence.
-<dd>defaults to [0]
-<dt>ERRBIT_PER_APP_NOTIFY_AT_NOTICES
-<dd>Let every application have its own configuration rather than using `ERRBIT_NOTIFY_AT_NOTICES`. If this value is set to true, you can configure each app using the web UI.
-<dd>defaults to false
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER
