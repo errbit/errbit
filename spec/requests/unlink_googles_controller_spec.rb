@@ -19,7 +19,7 @@ RSpec.describe UnlinkGooglesController, type: :request do
 
           expect(assigns(:user).google_uid).to eq(nil)
 
-          expect(request.flash[:success]).to eq("Successfully unlinked Google account!")
+          expect(request.flash[:success]).to eq("Successfully unlinked #{Rails.configuration.errbit.google_site_title} account!")
         end
       end
 
