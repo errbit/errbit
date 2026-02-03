@@ -93,7 +93,7 @@ class User
   end
 
   def can_create_github_issues?
-    github_account? && Config.github.access_scope.include?("repo")
+    github_account? && Rails.configuration.errbit.github_access_scope.include?("repo")
   end
 
   def github_login=(login)
