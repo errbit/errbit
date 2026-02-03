@@ -8,9 +8,9 @@ module Users
       # See if the user is a member of the organization that we have access for
       # If they are, automatically create an account
       client = Octokit::Client.new(access_token: github_token)
-      client.api_endpoint = Rails.configuration.errbit.github_authentication.github_api_url
+      client.api_endpoint = Rails.configuration.errbit.github_api_url
       org_ids = client.organizations.map(&:id)
-      return if org_ids.exclude?(Rails.configuration.errbit.github_authentication.github_org_id.to_i)
+      return if org_ids.exclude?(Rails.configuration.errbit.github_org_id.to_i)
 
       user_email = github_get_user_email(client)
       if user_email.blank?
