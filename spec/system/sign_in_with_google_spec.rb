@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with Google", type: :system, retry: 3 do
-  before { Rails.configuration.errbit.google_authentication = true }
+  before { expect(Rails.configuration.errbit).to receive(:google_authentication).and_return(true).at_least(:once) }
 
   context "sign in via Google with recognized user" do
     let!(:user) { create(:user, google_uid: "123456789") }
