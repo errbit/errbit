@@ -154,7 +154,7 @@ class AppsController < ApplicationController
     if email_at_notices.any?
       params[:app][:email_at_notices] = email_at_notices
     else
-      default_array = params[:app][:email_at_notices] = Config.errbit.email_at_notices
+      default_array = params[:app][:email_at_notices] = Rails.configuration.errbit.email_at_notices
       flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(", ")})."
     end
   end

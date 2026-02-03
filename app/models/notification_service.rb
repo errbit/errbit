@@ -18,12 +18,12 @@ class NotificationService
   field :api_token, type: String
   field :subdomain, type: String
   field :sender_name, type: String
-  field :notify_at_notices, type: Array, default: Config.errbit.notify_at_notices
+  field :notify_at_notices, type: Array, default: Rails.configuration.errbit.notify_at_notices
   embedded_in :app, inverse_of: :notification_service
 
   validate :check_params
 
-  FIELDS = if Config.errbit.per_app_notify_at_notices
+  FIELDS = if Rails.configuration.errbit.per_app_notify_at_notices
     [
       [:notify_at_notices,
         {
@@ -36,7 +36,7 @@ class NotificationService
   end
 
   def notify_at_notices
-    Config.errbit.per_app_notify_at_notices ? super : Config.errbit.notify_at_notices
+    Rails.configuration.errbit.per_app_notify_at_notices ? super : Rails.configuration.errbit.notify_at_notices
   end
 
   # Subclasses are responsible for overwriting this method.
