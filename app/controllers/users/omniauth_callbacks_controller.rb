@@ -3,14 +3,14 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def github_auto_sign_up(github_token)
-      return if Config.github.org_ids.empty?
+      return if Rails.configuration.errbit.github_org_id.nil?
 
       # See if the user is a member of the organization that we have access for
       # If they are, automatically create an account
       client = Octokit::Client.new(access_token: github_token)
-      client.api_endpoint = Config.github.api_url
+      client.api_endpoint = Rails.configuration.errbit.github_authentication.github_api_url
       org_ids = client.organizations.map(&:id)
-      return if (org_ids & Config.github.org_ids).empty?
+      return if org_ids.exclude?(Rails.configuration.errbit.github_authentication.github_org_id.to_i)
 
       user_email = github_get_user_email(client)
       if user_email.blank?
@@ -18,14 +18,14 @@ module Users
 
         nil
       else
-        User.create(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
+        User.create!(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
       end
     end
 
     def github
       github_login = request.env["omniauth.auth"].dig(:extra, :raw_info, :login)
       github_token = request.env["omniauth.auth"].dig(:credentials, :token)
-      github_site_title = Config.github.site_title
+      github_site_title = Rails.configuration.errbit.github_site_title
       github_user = User.where(github_login: github_login).first || github_auto_sign_up(github_token)
 
       # If user is already signed in, link GitHub details to their account

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with GitHub", type: :system, retry: 3 do
-  before { Config.github.enabled = true }
+  before { Rails.configuration.errbit.github_authentication = true }
 
   context "sign in via GitHub with recognized user" do
     let!(:user) { create(:user, github_login: "biow0lf") }
