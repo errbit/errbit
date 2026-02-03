@@ -53,12 +53,12 @@ class User
   class << self
     # @param email [String]
     def valid_google_domain?(email)
-      return true if Config.google.authorized_domains.blank?
+      return true if Rails.configuration.errbit.google_authorized_domains.blank?
 
       match_data = /.+@(?<domain>.+)$/.match(email)
       return false if match_data.nil?
 
-      Config.google.authorized_domains.include?(match_data[:domain])
+      Rails.configuration.errbit.google_authorized_domains.include?(match_data[:domain])
     end
 
     # @param access_token [String]
