@@ -93,6 +93,14 @@ Default: `true`
 
 Default in container: as default.
 
+#### `ERRBIT_PROBLEM_DESTROY_AFTER_DAYS`
+
+Number of days to keep errors in the database when running
+`bundle exec rails errbit:clear_outdated`.
+
+Default: `nil` (disabled)
+
+Default in container: as default.
 
 | Environment variable         | Description  | Default  | Default in container |
 |------------------------------|--------------|----------|----------------------|
@@ -257,9 +265,6 @@ Default in container: as default.
 <dt>ERRBIT_PER_APP_NOTIFY_AT_NOTICES
 <dd>Let every application have its own configuration rather than using `ERRBIT_NOTIFY_AT_NOTICES`. If this value is set to true, you can configure each app using the web UI.
 <dd>defaults to false
-<dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
-<dd>Number of days to keep errors in the database when running `bundle exec rails errbit:clear_outdated`
-<dd>defaults to nil (off)
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER

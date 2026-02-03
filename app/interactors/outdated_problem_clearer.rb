@@ -23,7 +23,7 @@ class OutdatedProblemClearer
   end
 
   def criteria
-    @criteria ||= Problem.where(:last_notice_at.lt => Config.errbit.notice_deprecation_days.to_i.days.ago)
+    @criteria ||= Problem.where(:last_notice_at.lt => Rails.configuration.errbit.notice_deprecation_days.to_i.days.ago)
   end
 
   def compact_database
