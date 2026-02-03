@@ -39,9 +39,8 @@ defaults: &defaults
   smtp_enable_starttls_auto: <%= ENV.fetch("SMTP_ENABLE_STARTTLS_AUTO", nil) == "true" %>
   smtp_openssl_verify_mode: <%= ENV.fetch("SMTP_OPENSSL_VERIFY_MODE", nil) %>
 
-#  # sendmail settings
-#  sendmail_location: ["SENDMAIL_LOCATION"],
-#  sendmail_arguments: ["SENDMAIL_ARGUMENTS"],
+  sendmail_location: <%= ENV.fetch("SENDMAIL_LOCATION", nil) %>
+  sendmail_arguments: <%= ENV.fetch("SENDMAIL_ARGUMENTS", nil) %>
 
   devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
 

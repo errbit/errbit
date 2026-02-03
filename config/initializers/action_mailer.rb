@@ -19,8 +19,14 @@ if Rails.configuration.errbit.email_delivery_method == "sendmail"
   ActionMailer::Base.delivery_method = :sendmail
 
   sendmail_settings = {}
-#   sendmail_settings[:location] = Config.sendmail.settings.location if Config.sendmail.settings.location.present?
-#   sendmail_settings[:arguments] = Config.sendmail.settings.arguments if Config.sendmail.settings.arguments.present?
+
+  if Rails.configuration.errbit.sendmail_location.present?
+    sendmail_settings[:location] = Rails.configuration.errbit.sendmail_location
+  end
+
+  if Rails.configuration.errbit.sendmail_arguments.present?
+    sendmail_settings[:arguments] = Rails.configuration.errbit.sendmail_arguments
+  end
 
   ActionMailer::Base.sendmail_settings = sendmail_settings
 end
