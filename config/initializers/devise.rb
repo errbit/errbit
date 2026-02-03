@@ -293,16 +293,16 @@ Devise.setup do |config|
       github_options
   end
 
-  # if Config.google.enabled? || Rails.env.test?
-  #   google_options = {
-  #     redirect_uri: Config.google.redirect_uri.to_s
-  #   }.compact
-  #
-  #   config.omniauth :google_oauth2,
-  #     Config.google.client_id,
-  #     Config.google.secret,
-  #     google_options
-  # end
+  if Rails.configuration.errbit.google_authentication || Rails.env.test?
+    google_options = {
+      redirect_uri: Rails.configuration.errbit.google_redirect_uri
+    }.compact
+
+    config.omniauth :google_oauth2,
+      Rails.configuration.errbit.google_client_id,
+      Rails.configuration.errbit.google_secret,
+      google_options
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
