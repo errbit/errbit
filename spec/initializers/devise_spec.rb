@@ -26,8 +26,8 @@ RSpec.describe Devise do
     end
 
     it "sets the client options correctly for the a GitHub Enterprise github_url" do
-      Config.github.url = "https://github.example.com"
-      Config.github.api_url = "https://github.example.com/api/v3"
+      Rails.configuration.errbit.github_url = "https://github.example.com"
+      Rails.configuration.errbit.github_api_url = "https://github.example.com/api/v3"
 
       load_initializer
 
