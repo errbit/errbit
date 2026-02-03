@@ -22,8 +22,7 @@ RSpec.describe ProblemsHelper, type: :helper do
 
     context "default config" do
       before do
-        Config.gravatar.enabled = true
-        Config.gravatar.default = "identicon"
+        Rails.configuration.errbit.use_gravatar = true
       end
 
       it "should render image_tag with correct alt and src" do
@@ -55,8 +54,7 @@ RSpec.describe ProblemsHelper, type: :helper do
 
     context "with email" do
       before do
-        Config.gravatar.enabled = true
-        Config.gravatar.default = "identicon"
+        Rails.configuration.errbit.use_gravatar = true
       end
 
       let(:email) { "gravatar@example.com" }
