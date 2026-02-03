@@ -281,11 +281,23 @@ Default: not set.
 
 Default in container: as default.
 
+#### `SMTP_SERVER`
+
+Server address for outgoing SMTP messages.
+
+Default: not set.
+
+Default in container: as default.
+
+#### `SMTP_PORT`
+
+Server port for outgoing SMTP messages.
+
+Default: not set.
+
+Default in container: as default.
+
 <dl>
-<dt>SMTP_SERVER
-<dd>Server address for outgoing SMTP messages
-<dt>SMTP_PORT
-<dd>Server port for outgoing SMTP messages
 <dt>SMTP_AUTHENTICATION
 <dd>Authentication method for the SMTP connection (see http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration)
 <dt>SMTP_USERNAME
