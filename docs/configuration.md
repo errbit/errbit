@@ -271,9 +271,17 @@ Default: `identicon`
 
 Default in container: as default.
 
+### Email delivery
+
+#### `EMAIL_DELIVERY_METHOD`
+
+`:smtp` or `:sendmail`, depending on how you want Errbit to send email.
+
+Default: not set.
+
+Default in container: as default.
+
 <dl>
-<dt>EMAIL_DELIVERY_METHOD
-<dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER
 <dd>Server address for outgoing SMTP messages
 <dt>SMTP_PORT
@@ -294,7 +302,14 @@ Default in container: as default.
 <dd>Path to sendmail
 <dt>SENDMAIL_ARGUMENTS
 <dd>Custom arguments for sendmail
-<dt>DEVISE_MODULES
-<dd>Devise modules to enable
-<dd>defaults to [database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]
 </dl>
+
+### Devise configuration
+
+#### `DEVISE_MODULES`
+
+Devise modules to enable.
+
+Default: `[database_authenticatable,recoverable,rememberable,trackable,validatable,omniauthable]`
+
+Default in container: as default.
