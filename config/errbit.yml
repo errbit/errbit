@@ -16,7 +16,7 @@ defaults: &defaults
   github_authentication: <%= ENV.fetch("GITHUB_AUTHENTICATION", "false") == "true" %>
   github_client_id: <%= ENV.fetch("GITHUB_CLIENT_ID", nil) %>
   github_secret: <%= ENV.fetch("GITHUB_SECRET", nil) %>
-  # github_org_id: ["GITHUB_ORG_ID"],
+  github_org_id: <%= ENV.fetch("GITHUB_ORG_ID", nil) %>
   github_access_scope: <%= ENV.fetch("GITHUB_ACCESS_SCOPE", "[repo]").gsub("[", "").gsub("]", "").split(",") %>
   github_api_url: <%= ENV.fetch("GITHUB_API_URL", "https://api.github.com") %>
   github_site_title: <%= ENV.fetch("GITHUB_SITE_TITLE", "GitHub") %>
