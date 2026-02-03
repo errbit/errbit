@@ -98,8 +98,6 @@ Default in container: as default.
 |------------------------------|--------------|----------|----------------------|
 | `MONGO_URL`                  |              |          |                      |
 | `ERRBIT_USER_HAS_USERNAME`   |              |          |                      |
-| `ERRBIT_USE_GRAVATAR`        |              |          |                      |
-| `ERRBIT_GRAVATAR_DEFAULT`    |              |          |                      |
 | `ERRBIT_EMAIL_FROM`          |              |          |                      |
 
 ### GitHub
