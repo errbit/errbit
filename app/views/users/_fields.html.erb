@@ -7,7 +7,7 @@
   <%= f.text_field :name %>
 </div>
 
-<% if Config.errbit.user_has_username? %>
+<% if Rails.configuration.errbit.user_has_username %>
   <div class="required">
     <%= f.label :username, t(".username") %>
     <%= f.text_field :username %>
@@ -19,9 +19,9 @@
   <%= f.text_field :email %>
 </div>
 
-<% if Config.github.enabled? %>
+<% if Rails.configuration.errbit.github_authentication %>
   <div>
-    <%= f.label :github_login, "#{Config.github.site_title} login" %>
+    <%= f.label :github_login, "#{Rails.configuration.errbit.github_site_title} login" %>
     <%= f.text_field :github_login %>
   </div>
 <% end %>
