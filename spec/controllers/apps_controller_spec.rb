@@ -282,7 +282,14 @@ RSpec.describe AppsController, type: :controller do
       end
 
       context "changing email_at_notices" do
-        before { Config.errbit.per_app_email_at_notices = true }
+        # before { Config.errbit.per_app_email_at_notices = true }
+
+        # before do
+        #   expect(Rails.configuration.errbit)
+        #     .to receive(:per_app_email_at_notices)
+        #     .and_return(true)
+        #     # .at_least(:once)
+        # end
 
         it "should parse legal csv values" do
           patch :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
@@ -300,7 +307,7 @@ RSpec.describe AppsController, type: :controller do
 
             @app.reload
 
-            expect(@app.email_at_notices).to eq(Config.errbit.email_at_notices)
+            expect(@app.email_at_notices).to eq(Rails.configuration.errbit.email_at_notices)
           end
 
           it "should display a message" do
