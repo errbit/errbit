@@ -1,7 +1,9 @@
 defaults: &defaults
   host: <%= ENV.fetch("ERRBIT_HOST", "errbit.example.com") %>
-  user_has_username: <%= ENV.fetch("ERRBIT_USER_HAS_USERNAME", "false") == "true" %>
   confirm_err_actions: <%= ENV.fetch("ERRBIT_CONFIRM_ERR_ACTIONS", "true") == "true" %>
+  user_has_username: <%= ENV.fetch("ERRBIT_USER_HAS_USERNAME", "false") == "true" %>
+  use_gravatar: <%= ENV.fetch("ERRBIT_USE_GRAVATAR", "false") == "true" %>
+  gravatar_default: <%= ENV.fetch("ERRBIT_GRAVATAR_DEFAULT", "identicon") %>
   email_at_notices: [1, 10, 100]
   per_app_email_at_notices: <%= ENV.fetch("ERRBIT_PER_APP_EMAIL_AT_NOTICES", "false") == "true" %>
   devise_modules: ["database_authenticatable", "recoverable", "rememberable", "trackable", "validatable", "omniauthable"]
@@ -20,8 +22,6 @@ defaults: &defaults
   google_secret: <%= ENV.fetch("GOOGLE_SECRET", "") %>
   google_redirect_uri: <%= ENV.fetch("GOOGLE_REDIRECT_URI", "") %>
   google_authorized_domains: <%= ENV.fetch("GOOGLE_AUTHORIZED_DOMAINS", "") %>
-  use_gravatar: <%= ENV.fetch("ERRBIT_USE_GRAVATAR", "false") == "true" %>
-  gravatar_default: <%= ENV.fetch("ERRBIT_GRAVATAR_DEFAULT", "identicon") %>
 
 development:
   <<: *defaults
