@@ -45,7 +45,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   end
 
   context "Creating a new user via GitHub authentication" do
-      before do
+    before do
       expect(Rails.configuration.errbit)
         .to receive(:github_org_id)
         .and_return(42)
