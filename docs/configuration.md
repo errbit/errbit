@@ -141,15 +141,26 @@ Secret key for your GitHub application.
 
 Default: not set
 
-<dt>GITHUB_ORG_ID
-<dd>ID of your GitHub organization. If set, Errbit will create user accounts for users in your GitHub organization who sign into Errbit without having a user account
-<dt>GITHUB_ACCESS_SCOPE
-<dd>OAuth scope to request from users when they sign in through GitHub
-<dd>defaults to [repo]
-<dt>GITHUB_SITE_TITLE</dt>
-<dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
-<dd>defaults to GitHub</dd>
+#### `GITHUB_ORG_ID`
 
+ID of your GitHub organization. If set, Errbit will create user accounts for
+users in your GitHub organization who sign into Errbit without having a user
+account.
+
+Default: not set
+
+#### `GITHUB_ACCESS_SCOPE`
+
+OAuth scope to request from users when they sign in through GitHub.
+
+Default: `[repo]`
+
+#### `GITHUB_SITE_TITLE`
+
+The title to use for GitHub. This value is whatever you want displayed in the
+Errbit UI when referring to GitHub.
+
+Default: `GitHub`
 
 ### Google
 
