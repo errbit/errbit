@@ -16,7 +16,7 @@ namespace :errbit do
     if Errbit::Config.notice_deprecation_days.present?
       puts "=== Cleared #{OutdatedProblemClearer.new.execute} outdated errors from the database."
     else
-      puts "=== ERRBIT_PROBLEM_DESTROY_AFTER_DAYS not set. Old problems will not be destroyed."
+      puts "=== Environment variable ERRBIT_PROBLEM_DESTROY_AFTER_DAYS not set. Old problems will not be destroyed."
     end
   end
 
@@ -28,7 +28,7 @@ namespace :errbit do
 
   desc "Remove notices in batch"
   task :notices_delete, [:problem_id] => [:environment] do
-    BATCH_SIZE = 1000
+    BATCH_SIZE = 1_000
     if args[:problem_id]
       item_count = Problem.find(args[:problem_id]).notices.count
       removed_count = 0
