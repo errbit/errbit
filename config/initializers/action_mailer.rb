@@ -6,7 +6,7 @@ if Rails.configuration.errbit.email_delivery_method == "smtp"
   ActionMailer::Base.smtp_settings = {
     address: Rails.configuration.errbit.smtp_address,
     port: Rails.configuration.errbit.smtp_port,
-#     domain: Config.smtp.settings.domain.get,
+    domain: Rails.configuration.errbit.smtp_domain,
 #     user_name: Config.smtp.settings.user_name.get,
 #     password: Config.smtp.settings.password.get,
 #     authentication: Config.smtp.settings.authentication.get&.to_sym,

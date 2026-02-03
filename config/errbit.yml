@@ -32,6 +32,7 @@ defaults: &defaults
   email_delivery_method: <%= ENV.fetch("EMAIL_DELIVERY_METHOD", nil) %>
   smtp_address: <%= ENV.fetch("SMTP_SERVER", nil) %>
   smtp_port: <%= ENV.fetch("SMTP_PORT", nil) %>
+  smtp_domain: <%= ENV.fetch("SMTP_DOMAIN", nil) %>
 #  smtp_authentication: ["SMTP_AUTHENTICATION"],
 #  smtp_enable_starttls_auto: ["SMTP_ENABLE_STARTTLS_AUTO"],
 #  smtp_openssl_verify_mode: ["SMTP_OPENSSL_VERIFY_MODE"],
