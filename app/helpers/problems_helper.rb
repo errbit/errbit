@@ -29,7 +29,7 @@ module ProblemsHelper
     return if email.blank?
 
     default_options = {
-      d: Config.gravatar.default
+      d: Rails.configuration.errbit.gravatar_default
     }
     options.reverse_merge!(default_options)
     params = options.extract!(:s, :d).delete_if { |_, v| v.blank? }

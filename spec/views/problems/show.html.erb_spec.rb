@@ -215,7 +215,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
       problem = create(:problem_with_comments)
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
-      Config.gravatar.enabled = true
+      Rails.configuration.errbit.use_gravatar = true
     end
 
     it "displays comments and new comment form" do

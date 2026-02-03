@@ -120,7 +120,7 @@ class App
   end
 
   def github_url
-    "#{Config.github.url}/#{github_repo}" if github_repo?
+    "#{Rails.configuration.errbit.github_url}/#{github_repo}" if github_repo?
   end
 
   def github_url_to_file(file)
@@ -231,7 +231,7 @@ class App
   def normalize_github_repo
     return if github_repo.blank?
 
-    github_host = URI.parse(Config.github.url).host
+    github_host = URI.parse(Rails.configuration.errbit.github_url).host
     github_host = Regexp.escape(github_host)
 
     self.github_repo = github_repo.strip
