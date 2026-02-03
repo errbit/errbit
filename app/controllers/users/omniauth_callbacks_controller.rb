@@ -18,7 +18,11 @@ module Users
 
         nil
       else
-        User.create!(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
+        User.create!(
+          name: request.env["omniauth.auth"].extra.raw_info.name,
+          email: user_email,
+          password: Devise.friendly_token
+        )
       end
     end
 

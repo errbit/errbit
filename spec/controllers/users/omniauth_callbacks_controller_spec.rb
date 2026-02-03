@@ -45,9 +45,12 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   end
 
   context "Creating a new user via GitHub authentication" do
-    before { Config.github.enabled = true }
-
-    before { Config.github.org_ids = [42] }
+      before do
+      expect(Rails.configuration.errbit)
+        .to receive(:github_org_id)
+        .and_return(42)
+        .at_least(:once)
+    end
 
     context "User has valid emails defined" do
       it "should log in the user" do
