@@ -7,7 +7,9 @@ defaults: &defaults
   email_from: <%= ENV.fetch("ERRBIT_EMAIL_FROM", "errbit@example.com") %>
   github_authentication: <%= ENV.fetch("GITHUB_AUTHENTICATION", "false") == "true" %>
   github_url: <%= ENV.fetch("GITHUB_URL", "https://github.com") %>
+  github_site_title: <%= ENV.fetch("GITHUB_SITE_TITLE", "GitHub") %>
   google_authentication: <%= ENV.fetch("GOOGLE_AUTHENTICATION", "false") == "true" %>
+  google_site_title: <%= ENV.fetch("GOOGLE_SITE_TITLE", "Google") %>
 
 development:
   <<: *defaults
