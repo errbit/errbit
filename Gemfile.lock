@@ -286,7 +286,7 @@ GEM
     mini_portile2 (2.8.9)
     minitest (6.0.1)
       prism (~> 1.5)
-    mongo (2.22.0)
+    mongo (2.23.0)
       base64
       bson (>= 4.14.1, < 6.0.0)
     mongoid (9.0.10)
@@ -840,7 +840,7 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.9) sha256=0cd7c7f824e010c072e33f68bc02d85a00aeb6fce05bb4819c03dfd3c140c289
   minitest (6.0.1) sha256=7854c74f48e2e975969062833adc4013f249a4b212f5e7b9d5c040bf838d54bb
-  mongo (2.22.0) sha256=8eff6211f3bb29b7461e4ff6f35d1422f3966fa072c5423888b5271b8c09b6bb
+  mongo (2.23.0) sha256=be2fe4cc6f7119fa6b79e82a1963b2406856b4dc92d0ccfb74db543897be3109
   mongoid (9.0.10) sha256=351192e70027276748f3c946b8926fad9254356e36021dacb5cec08d0740f21d
   mongoid-compatibility (1.0.0) sha256=08e5770d102258a3b8f39443057de42cde61d465980f182954b1b70d965465e8
   mongoid-rspec (4.2.0) sha256=0811fccdc6dcca21987486208a0f614cc395620ccb7ce884b9bce0b5a677ecc8
