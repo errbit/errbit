@@ -16,6 +16,12 @@
           <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
+
+      <% if Errbit::Config.oidc_enabled %>
+        <span class="oidc">
+          <%= link_to "Sign in with OpenID Connect", user_openid_connect_omniauth_authorize_path, method: :post %>
+        </span>
+      <% end %>
     </div>
   <% end %>
 <% end %>

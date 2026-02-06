@@ -302,6 +302,24 @@ Devise.setup do |config|
       google_options
   end
 
+  if Errbit::Config.oidc_enabled || Rails.env.test?
+    config.omniauth :openid_connect, {
+      name: ENV.fetch("OIDC_NAME", nil).to_sym,
+      issuer: ENV.fetch("OIDC_ISSUER", nil),
+      scope: ENV.fetch("OIDC_SCOPES", "openid,profile,email").split(",").map(&:to_sym),
+      discovery: true,
+      response_type: :code,
+      client_options: {
+        port: 443,
+        scheme: "https",
+        host: ENV.fetch("OIDC_HOST", nil),
+        identifier: ENV.fetch("OIDC_CLIENT_ID", nil),
+        secret: ENV.fetch("OIDC_SECRET", nil),
+        redirect_uri: ENV.fetch("OIDC_REDIRECT_URI", nil)
+      }
+    }
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
