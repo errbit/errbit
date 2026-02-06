@@ -304,17 +304,17 @@ Devise.setup do |config|
 
   if ENV.fetch("OIDC_ENABLED", "false") == "true"
     config.omniauth :openid_connect, {
-      name: :my_provider,
-      scope: [:openid, :email, :profile, :address],
+      name: ENV.fetch("OIDC_NAME", nil).to_sym,
+      scope: ENV.fetch("OIDC_SCOPES", []).split(",").map(&:to_sym),
       response_type: :code,
       uid_field: "preferred_username",
       client_options: {
         port: 443,
         scheme: "https",
-        host: "myprovider.com",
-        identifier: ENV["OP_CLIENT_ID"],
-        secret: ENV["OP_SECRET_KEY"],
-        redirect_uri: "http://myapp.com/users/auth/openid_connect/callback",
+        host: ENV.fetch("OIDC_HOST", nil),
+        identifier: ENV.fetch("OIDC_CLIENT_ID", nil),
+        secret: ENV.fetch("OIDC_SECRET", nil),
+        redirect_uri: "http://myapp.com/users/auth/openid_connect/callback"
       }
     }
   end
