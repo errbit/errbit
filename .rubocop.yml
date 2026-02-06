@@ -157,113 +157,113 @@ Layout/SpaceInsideStringInterpolation:
 Layout/DotPosition:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/ExtraSpacing:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/ArgumentAlignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/MultilineMethodCallBraceLayout:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/AccessModifierIndentation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/FirstHashElementIndentation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/IndentationWidth:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/ElseAlignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/EndAlignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/MultilineHashBraceLayout:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/EmptyLineBetweenDefs:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/MultilineArrayBraceLayout:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/SpaceAroundOperators:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/ArrayAlignment:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/AssignmentIndentation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/ClosingParenthesisIndentation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/LineLength:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Layout/CaseIndentation:
   Enabled: false
 
 # Standard rules. Lint:
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/ImplicitStringConcatenation:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/TripleQuotes:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/IneffectiveAccessModifier:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/SymbolConversion:
   Enabled: false
 
-# Enforced by rubocop and standard
+# Enforced by `rubocop` and `standard`.
 Lint/CopDirectiveSyntax:
   Enabled: true
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/DuplicateMethods:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/ConstantDefinitionInBlock:
   Enabled: false
 
-# Enforced by standard. Disable.
+# Enforced by `standard`. Disable.
 Lint/UselessTimes:
   Enabled: false
 
@@ -273,25 +273,25 @@ Lint/EmptyBlock:
 
 # Standard-performance rules.
 
-# Enforced by standard-performance. Disable.
+# Enforced by `standard-performance`. Disable.
 Performance/Detect:
   Enabled: false
 
-# Enforced by standard-performance. Disable.
+# Enforced by `standard-performance`. Disable.
 Performance/StringIdentifierArgument:
   Enabled: false
 
-# Enforced by standard-performance. Disable.
+# Enforced by `standard-performance`. Disable.
 Performance/RegexpMatch:
   Enabled: false
 
-# Always enable rubocop Security:
+# Always enable `rubocop` Security:
 
-# Enforced by rubocop and standard
+# Enforced by `rubocop` and `standard`.
 Security/JSONLoad:
   Enabled: true
 
-# Our rubocop rules
+# Our `rubocop` rules
 
 # Bundler rules.
 
