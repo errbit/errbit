@@ -2,7 +2,7 @@
 
 <% auth_key = Devise.authentication_keys.first %>
 
-<% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
+<% if Errbit::Config.github_authentication || Errbit::Config.google_authentication || Errbit::Config.oidc_authentication %>
   <% content_for :action_bar do %>
     <div class="action-bar">
       <% if Errbit::Config.github_authentication %>
@@ -14,6 +14,12 @@
       <% if Errbit::Config.google_authentication %>
         <span class="google">
           <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
+        </span>
+      <% end %>
+
+      <% if Errbit::Config.oidc_authentication %>
+        <span class="oidc">
+          <%= link_to "Sign in with OpenID Connect", user_openid_connect_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
     </div>
