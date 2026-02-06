@@ -104,6 +104,27 @@ module Users
       end
     end
 
+    def openid_connect
+      name = request.env["omniauth.auth"].dig(:info, :name)
+      email = request.env["omniauth.auth"].dig(:info, :email)
+
+      oidc_site_title = Errbit::Config.oidc_site_title
+
+      user = User.where(email: email).first
+
+      if user.present?
+        user.update!(name: name)
+
+        flash[:success] = I18n.t("devise.omniauth_callbacks.success", kind: oidc_site_title)
+
+        sign_in_and_redirect user, event: :authentication
+      else
+        flash[:error] = "There are no authorized users with #{oidc_site_title} login '#{email}'. Please ask an administrator to register your user account."
+
+        redirect_to new_user_session_path
+      end
+    end
+
     private
 
     def update_user_with_github_attributes(user, login, token)

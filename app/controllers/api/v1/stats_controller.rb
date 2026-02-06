@@ -22,7 +22,7 @@ module Api
         }
 
         respond_to do |format|
-          format.any(:html, :json) { render json: stats } # render JSON if no extension specified on path
+          format.any(:html, :json) { render json: stats } # render JSON if no extension specified on a path
           format.xml { render xml: stats }
         end
       end
