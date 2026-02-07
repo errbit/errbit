@@ -306,6 +306,10 @@ Devise.setup do |config|
     config.omniauth :openid_connect, {
       name: ENV.fetch("OIDC_NAME", nil).to_sym,
       scope: ENV.fetch("OIDC_SCOPES", []).split(",").map(&:to_sym),
+      # discovery: true,
+      # state: proc { SecureRandom.hex(32) },
+      # require_state: true,
+      send_state: false,
       response_type: :code,
       uid_field: "preferred_username",
       client_options: {
@@ -314,7 +318,7 @@ Devise.setup do |config|
         host: ENV.fetch("OIDC_HOST", nil),
         identifier: ENV.fetch("OIDC_CLIENT_ID", nil),
         secret: ENV.fetch("OIDC_SECRET", nil),
-        redirect_uri: "http://myapp.com/users/auth/openid_connect/callback"
+        redirect_uri: "http://localhost:3000/users/auth/openid_connect/callback"
       }
     }
   end
