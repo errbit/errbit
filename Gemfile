@@ -84,6 +84,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "brakeman", require: false
   gem "herb", require: false
+  gem "httplog"
 end
 
 group :development do
