@@ -18,7 +18,7 @@
       <% end %>
 
       <span class="oidc">
-        <%= link_to "Sign in with OIDC", [:user, :openid_connect, :omniauth_callback], method: :post %>
+        <%= link_to "Sign in with OpenID Connect", user_openid_connect_omniauth_authorize_path, method: :post %>
       </span>
     </div>
   <% end %>
