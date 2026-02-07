@@ -104,6 +104,10 @@ module Users
       end
     end
 
+    def gitlab
+      Rails.logger.info("Aloha")
+    end
+
     private
 
     def update_user_with_github_attributes(user, login, token)
