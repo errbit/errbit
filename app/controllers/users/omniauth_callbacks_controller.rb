@@ -105,6 +105,13 @@ module Users
     end
 
     def openid_connect
+      name = request.env["omniauth.auth"].dig(:info, :name) # => "Igor Zubkov"
+      email = request.env["omniauth.auth"].dig(:info, :email) # => "igor.zubkov@gmail.com"
+
+
+
+
+
       Rails.logger.info("Aloha")
     end
 
