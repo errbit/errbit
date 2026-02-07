@@ -105,8 +105,8 @@ module Users
     end
 
     def openid_connect
-      name = request.env["omniauth.auth"].dig(:info, :name) # => "Igor Zubkov"
-      email = request.env["omniauth.auth"].dig(:info, :email) # => "igor.zubkov@gmail.com"
+      name = request.env["omniauth.auth"].dig(:info, :name)
+      email = request.env["omniauth.auth"].dig(:info, :email)
 
       oidc_site_title = Errbit::Config.oidc_site_title
 
