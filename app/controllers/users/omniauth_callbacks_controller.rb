@@ -108,11 +108,21 @@ module Users
       name = request.env["omniauth.auth"].dig(:info, :name) # => "Igor Zubkov"
       email = request.env["omniauth.auth"].dig(:info, :email) # => "igor.zubkov@gmail.com"
 
+      oidc_site_title = Errbit::Config.oidc_site_title
 
+      user = User.where(email: email).first
 
+      if user.present?
+        user.update!(name: name)
 
+        flash[:success] = I18n.t "devise.omniauth_callbacks.success", kind: oidc_site_title
 
-      Rails.logger.info("Aloha")
+        sign_in_and_redirect user, event: :authentication
+      else
+        flash[:error] = "There are no authorized users with #{oidc_site_title} login '#{email}'. Please ask an administrator to register your user account."
+
+        redirect_to new_user_session_path
+      end
     end
 
     private
