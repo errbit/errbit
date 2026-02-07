@@ -115,7 +115,7 @@ module Users
       if user.present?
         user.update!(name: name)
 
-        flash[:success] = I18n.t "devise.omniauth_callbacks.success", kind: oidc_site_title
+        flash[:success] = I18n.t("devise.omniauth_callbacks.success", kind: oidc_site_title)
 
         sign_in_and_redirect user, event: :authentication
       else
