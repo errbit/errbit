@@ -302,7 +302,9 @@ Devise.setup do |config|
       google_options
   end
 
-  if ENV.fetch("OIDC_ENABLED", "false") == "true"
+  # if ENV.fetch("OIDC_ENABLED", "false") == "true"
+    # binding.pry
+
     config.omniauth :openid_connect, {
       name: ENV.fetch("OIDC_NAME", nil).to_sym,
       scope: ENV.fetch("OIDC_SCOPES", []).split(",").map(&:to_sym),
@@ -311,17 +313,18 @@ Devise.setup do |config|
       # require_state: true,
       send_state: false,
       response_type: :code,
-      uid_field: "preferred_username",
+      response_mode: :form_post,
+      # uid_field: "preferred_username",
       client_options: {
         port: 443,
         scheme: "https",
         host: ENV.fetch("OIDC_HOST", nil),
         identifier: ENV.fetch("OIDC_CLIENT_ID", nil),
         secret: ENV.fetch("OIDC_SECRET", nil),
-        redirect_uri: "http://localhost:3000/users/auth/openid_connect/callback"
+        redirect_uri: "https://localhost:3000/users/auth/openid_connect/callback"
       }
     }
-  end
+  # end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
