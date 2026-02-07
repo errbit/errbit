@@ -104,7 +104,7 @@ module Users
       end
     end
 
-    def gitlab
+    def openid_connect
       Rails.logger.info("Aloha")
     end
 
