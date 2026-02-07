@@ -302,7 +302,7 @@ Devise.setup do |config|
       google_options
   end
 
-  if ENV.fetch("OIDC_ENABLED", "false") == "true"
+  if Errbit::Config.oidc_enabled || Rails.env.test?
     config.omniauth :openid_connect, {
       name: ENV.fetch("OIDC_NAME", nil).to_sym,
       issuer: "https://gitlab.com",
