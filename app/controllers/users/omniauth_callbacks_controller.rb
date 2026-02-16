@@ -110,7 +110,7 @@ module Users
 
       oidc_site_title = Errbit::Config.oidc_site_title
 
-      user = User.where(email: email).first
+      user = User.find_by(email: email)
 
       if user.present?
         user.update!(name: name)
