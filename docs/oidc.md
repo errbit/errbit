@@ -24,7 +24,7 @@ Default: `nil`
 
 List of scopes for OIDC.
 
-Default: `[]`
+Default: `openid,profile,email`.
 
 ### `OIDC_HOST`
 
@@ -63,7 +63,7 @@ export OIDC_ENABLED="true"
 export OIDC_NAME="gitlab"
 export OIDC_ISSUER="https://gitlab.com"
 export OIDC_SITE_TITLE="GitLab.com"
-export OIDC_SCOPES="openid,email,read_user"
+export OIDC_SCOPES="openid,profile,email"
 export OIDC_HOST="gitlab.com" # or "gitlab.example.com"
 export OIDC_CLIENT_ID="client-id"
 export OIDC_SECRET="secret"
