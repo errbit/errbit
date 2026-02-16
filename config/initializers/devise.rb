@@ -306,14 +306,9 @@ Devise.setup do |config|
     config.omniauth :openid_connect, {
       name: ENV.fetch("OIDC_NAME", nil).to_sym,
       issuer: ENV.fetch("OIDC_ISSUER", nil),
-      scope: ENV.fetch("OIDC_SCOPES", []).split(",").map(&:to_sym),
+      scope: ENV.fetch("OIDC_SCOPES", "openid,profile,email").split(",").map(&:to_sym),
       discovery: true,
-      # state: proc { SecureRandom.hex(32) },
-      # require_state: true,
-      # send_state: false,
       response_type: :code,
-      # response_mode: :form_post,
-      # uid_field: "preferred_username",
       client_options: {
         port: 443,
         scheme: "https",
