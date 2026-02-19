@@ -48,6 +48,8 @@ jobs:
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 # 1.12.1
         with:
+          # Here we are using an image from Amazon's ECR rather than the default image from Docker Hub
+          mongodb-image: "public.ecr.aws/docker/library/mongo"
           mongodb-version: ${{ matrix.mongodb-version }}
 
       - run: bundle exec bootsnap precompile --gemfile
