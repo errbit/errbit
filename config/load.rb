@@ -45,6 +45,11 @@ Errbit::Config = Configurator.run(
   google_secret: ["GOOGLE_SECRET"],
   google_redirect_uri: ["GOOGLE_REDIRECT_URI"],
   google_authorized_domains: ["GOOGLE_AUTHORIZED_DOMAINS"],
+  # OIDC
+  oidc_enabled: ["OIDC_ENABLED"],
+  oidc_site_title: ["OIDC_SITE_TITLE"],
+  oidc_issuer: ["OIDC_ISSUER"],
+
 
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
     values[:email_delivery_method] && values[:email_delivery_method].to_sym

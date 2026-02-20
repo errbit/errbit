@@ -31,6 +31,7 @@ gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
+gem "omniauth_openid_connect"
 gem "rails_autolink"
 gem "useragent"
 gem "uri"
@@ -90,6 +91,7 @@ end
 group :development do
   gem "listen", "~> 3.10"
   gem "bundler-audit", require: false
+  gem "httplog"
 end
 
 group :test do
