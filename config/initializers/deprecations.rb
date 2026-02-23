@@ -19,14 +19,6 @@ if ENV["SERVE_STATIC_ASSETS"].present?
   )
 end
 
-if ENV["RACK_ENV"].present?
-  # Make it error in v0.11.0 release and remove in v0.12.0
-  deprecator.warn(
-    "ENV['RACK_ENV'] support is removed and has no effect in Errbit v0.10.0. " \
-    "Replace it with build-in Ruby on Rails ENV['RAILS_ENV']."
-  )
-end
-
 if ENV["ERRBIT_ENFORCE_SSL"].present?
   # Make it error in v0.11.0 release and remove in v0.12.0
   deprecator.warn(
