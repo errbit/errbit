@@ -20,3 +20,18 @@ spec/examples.txt
 NOTES
 *.swp
 /node_modules
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
+# Developer-local Claude Code settings
+.claude/settings.local.json
+
+# IDE configs
+.vscode/
+
+# Generated reports
+RAILS_AUDIT_REPORT.md
+
+# npm lockfile (Rails app — only devDependency on prettier)
+package-lock.json
