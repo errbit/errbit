@@ -19,11 +19,16 @@
     <%= javascript_importmap_tags %>
 
     <%= yield :head %>
-
   </head>
 
   <body>
     <div class="container">
+      <% if (action_bar = yield(:action_bar)).present? %>
+        <div id="row">
+          <%= action_bar %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </div>
   </body>

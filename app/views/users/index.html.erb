@@ -1,12 +1,11 @@
 <% content_for :title, t(".title") %>
 
 <% content_for :action_bar do %>
-  <span>
-    <%= link_to new_user_path do %>
-      <i class="fa fa-plus-circle"></i>
-      <%= t(".new") %>
+  <div class="col-12 text-end">
+    <%= link_to new_user_path, class: "btn btn-primary" do %>
+      <%= inline_svg_tag "icons/plus-circle.svg" %> <%= t(".new") %>
     <% end %>
-  </span>
+  </div>
 <% end %>
 
 <div class="row">
