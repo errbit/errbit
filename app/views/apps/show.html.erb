@@ -22,19 +22,29 @@
 
 <% content_for :action_bar do %>
   <% if current_user.admin? %>
-    <%= link_to t(".edit"), edit_app_path(app), class: "button" %>
+    <%= link_to edit_app_path(app), class: "button" do %>
+      <%= fa_icon("pen-to-square") %> <%= t(".edit") %>
+    <% end %>
   <% end %>
 
   <% if all_errs %>
-    <%= link_to t(".unresolved_errs"), app_path(app, sort: params_sort, order: params_order), class: "button" %>
+    <%= link_to app_path(app, sort: params_sort, order: params_order), class: "button" do %>
+      <%= fa_icon("filter") %> <%= t(".unresolved_errs") %>
+    <% end %>
   <% else %>
-    <%= link_to t(".all_errs"), app_path(app, all_errs: true, sort: params_sort, order: params_order), class: "button" %>
+    <%= link_to app_path(app, all_errs: true, sort: params_sort, order: params_order), class: "button" do %>
+      <%= fa_icon("list") %> <%= t(".all_errs") %>
+    <% end %>
   <% end %>
 
   <% if app.watched_by?(current_user) %>
-    <%= link_to t(".unwatch"), app_watchers_path(app_id: app), method: :delete, class: "button" %>
+    <%= link_to app_watchers_path(app_id: app), method: :delete, class: "button" do %>
+      <%= fa_icon("eye-slash") %> <%= t(".unwatch") %>
+    <% end %>
   <% else %>
-    <%= link_to t(".watch"), app_watchers_path(app_id: app), method: :post, class: "button" %>
+    <%= link_to app_watchers_path(app_id: app), method: :post, class: "button" do %>
+      <%= fa_icon("eye") %> <%= t(".watch") %>
+    <% end %>
   <% end %>
 <% end %>
 

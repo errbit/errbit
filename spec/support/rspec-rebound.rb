@@ -28,7 +28,7 @@ RSpec.configure do |config|
   # end
 
   config.retry_callback = proc do |ex|
-    if ex.metadata[:system]
+    if ex.metadata[:system] || ex.metadata[:feature]
       Capybara.reset!
     end
   end

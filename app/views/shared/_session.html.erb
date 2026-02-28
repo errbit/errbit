@@ -2,12 +2,15 @@
   <ul id="session-links">
     <li>
       <%= link_to destroy_user_session_path, id: "sign-out", method: :delete do %>
-        <i class="fa fa-circle"></i>
+        <%= fa_icon("right-from-bracket") %>
         <%= t(".sign_out") %>
       <% end %>
     </li>
     <li>
-      <%= link_to t(".edit_profile"), edit_user_path(current_user), id: "edit-profile" %>
+      <%= link_to edit_user_path(current_user), id: "edit-profile" do %>
+        <%= fa_icon("user-pen") %>
+        <%= t(".edit_profile") %>
+      <% end %>
     </li>
   </ul>
 <% end %>

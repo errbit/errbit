@@ -3,11 +3,17 @@
 <% content_for :action_bar do %>
   <%= link_to_copy_attributes_from_other_app %>
 
-  <%= link_to(t(".cancel"), apps_path, class: "button") %>
+  <%= link_to apps_path, class: "button" do %>
+    <%= fa_icon("arrow-rotate-left") %> <%= t(".cancel") %>
+  <% end %>
 <% end %>
 
 <%= form_for app_decorate do |f| %>
   <%= render "fields", f: f, app: app %>
 
-  <div class="buttons"><%= f.submit t(".add_app") %></div>
+  <div class="buttons">
+    <%= button_tag(type: "submit") do %>
+      <%= fa_icon("plus") %> <%= t(".add_app") %>
+    <% end %>
+  </div>
 <% end %>

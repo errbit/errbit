@@ -1,6 +1,5 @@
 volumes:
   mongodb_data:
-    external: true
 
 services:
   mongo:
