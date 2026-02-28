@@ -8,7 +8,7 @@
 -%>
 <%= paginator.render do %>
   <nav>
-    <ul class="pagination">
+    <ul class="pagination justify-content-center">
       <%= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| %>
