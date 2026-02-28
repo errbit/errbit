@@ -13,7 +13,8 @@
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag :new_application %>
+    <%= stylesheet_link_tag "new_application", "data-turbo-track": "reload", integrity: true %>
+    <%= stylesheet_link_tag "bootstrap", "data-turbo-track": "reload", integrity: true %>
     <%= javascript_include_tag :new_app %>
     <%= javascript_importmap_tags %>
 
