@@ -19,7 +19,7 @@
     class: "delete button" %>
 <% end %>
 
-<table class="single_user">
+<table class="table table-bordered table-hover table-striped">
   <tr>
     <th><%= t(".email") %></th>
     <td class="main"><%= @user.email %></td>
@@ -41,7 +41,13 @@
 
   <tr>
     <th><%= t(".admin") %></th>
-    <td><%= @user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+    <td>
+      <% if @user.admin? %>
+        <%= inline_svg_tag "icons/check-circle.svg", class: "text-success" %>
+      <% else %>
+        <%= inline_svg_tag "icons/x-circle.svg", class: "text-danger" %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>

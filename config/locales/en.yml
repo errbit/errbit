@@ -180,8 +180,6 @@ en:
       email: Email
       username: Username
       admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
       created: Created
       edit: edit
       destroy: destroy

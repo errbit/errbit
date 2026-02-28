@@ -152,8 +152,6 @@ pt-BR:
       email: E-mail
       username: Usuário
       admin: Adminstrador?
-      admin_yes: Sim
-      admin_no: Não
       created: Criado em
       edit: editar
       destroy: excluir
