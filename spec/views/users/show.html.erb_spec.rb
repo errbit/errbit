@@ -57,9 +57,10 @@ RSpec.describe "users/show.html.erb", type: :view do
 
       it "should confirm the 'resolve' link by default" do
         render
+
         expect(view.content_for(:action_bar)).to have_selector(
           format(
-            'a.delete[data-confirm="%s"]',
+            'a[data-turbo-confirm="%s"]',
             t("users.show.confirm_delete")
           )
         )

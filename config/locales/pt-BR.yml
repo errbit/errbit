@@ -27,6 +27,15 @@ pt-BR:
       errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
 
+  application:
+    navbar:
+      apps: "Aplicações"
+      errors: "Erros"
+      users: "Usuários"
+      config: "Configurações"
+      edit_profile: "Editar conta"
+      sign_out: "Sair"
+
   shared:
     navigation:
       apps: "Aplicações"
@@ -80,6 +89,7 @@ pt-BR:
         sign_in: "Entrar"
   problems:
     index:
+      errors: "Erros"
       all_errors: "Todos os erros"
       unresolved_errors: "Erros não resolvidos"
       hide_resolved: "ocultar resolvidos"
@@ -145,15 +155,11 @@ pt-BR:
       username: Usuário
       email: E-mail
       admin: Administrador?
-      admin_yes: Sim
-      admin_no: Não
     show:
       name: Nome
       email: E-mail
       username: Usuário
       admin: Adminstrador?
-      admin_yes: Sim
-      admin_no: Não
       created: Criado em
       edit: editar
       destroy: excluir
@@ -174,9 +180,11 @@ pt-BR:
       success: "Isto é triste. %{name} não faz mais parte do seu time."
       error: "Você não pode excluir a si mesmo"
     fields:
-      name: Nome
+      name: "Nome"
+      name_placeholder: "Jon Snow"
       username: Usuário
       email: E-mail
+      email_placeholder: "jon.snow@example.com"
       entries: Registros por página
       time_zone: Fuso horário
       password: Senha
