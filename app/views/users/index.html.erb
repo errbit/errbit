@@ -37,7 +37,14 @@
               <td><%= user.username %></td>
             <% end %>
             <td><%= user.email %></td>
-            <td class="text-center"><%= user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+            <td class="text-center">
+              <% if user.admin? %>
+                <%= inline_svg_tag "icons/check-circle.svg", class: "text-success" %>
+              <% else %>
+                <%= inline_svg_tag "icons/x-circle.svg", class: "text-danger" %>
+              <% end %>
+              <%#= user.admin? ? t(".admin_yes") : t(".admin_no") %>
+            </td>
           </tr>
         <% end %>
       </tbody>
