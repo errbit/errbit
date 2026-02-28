@@ -10,37 +10,39 @@
 <% end %>
 
 <div class="row">
-  <table class="table table-bordered table-hover table-striped col-12">
-    <thead>
-      <tr>
-        <% if Errbit::Config.use_gravatar %>
-          <th scope="col">&nbsp;</th>
-        <% end %>
-        <th scope="col" class="text-center"><%= t(".name") %></th>
-        <% if Errbit::Config.user_has_username %>
-          <th scope="col" class="text-center"><%= t(".username") %></th>
-        <% end %>
-        <th scope="col" class="text-center"><%= t(".email") %></th>
-        <th scope="col" class="text-center"><%= t(".admin") %></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @users.each do |user| %>
+  <div class="col-12">
+    <table class="table table-bordered table-hover table-striped col-12">
+      <thead>
         <tr>
           <% if Errbit::Config.use_gravatar %>
-            <td><%= gravatar_tag(user.email, s: 24) %></td>
+            <th scope="col">&nbsp;</th>
           <% end %>
-          <td><%= link_to user.name, user_path(user) %></td>
+          <th scope="col" class="text-center"><%= t(".name") %></th>
           <% if Errbit::Config.user_has_username %>
-            <td><%= user.username %></td>
+            <th scope="col" class="text-center"><%= t(".username") %></th>
           <% end %>
-          <td><%= user.email %></td>
-          <td class="text-center"><%= user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+          <th scope="col" class="text-center"><%= t(".email") %></th>
+          <th scope="col" class="text-center"><%= t(".admin") %></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <% if Errbit::Config.use_gravatar %>
+              <td class="text-center"><%= gravatar_tag(user.email, s: 24) %></td>
+            <% end %>
+            <td><%= link_to user.name, user_path(user) %></td>
+            <% if Errbit::Config.user_has_username %>
+              <td><%= user.username %></td>
+            <% end %>
+            <td><%= user.email %></td>
+            <td class="text-center"><%= user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <%= paginate @users %>
