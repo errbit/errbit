@@ -9,36 +9,38 @@
   </span>
 <% end %>
 
-<table class="users">
-  <thead>
-    <tr>
-      <% if Errbit::Config.use_gravatar %>
-        <th>&nbsp;</th>
-      <% end %>
-      <th><%= t(".name") %></th>
-      <% if Errbit::Config.user_has_username %>
-        <th><%= t(".username") %></th>
-      <% end %>
-      <th class="main"><%= t(".email") %></th>
-      <th><%= t(".admin") %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr class="user_list">
+<div class="row">
+  <table class="table table-bordered table-hover table-striped col-12">
+    <thead>
+      <tr>
         <% if Errbit::Config.use_gravatar %>
-          <td><%= gravatar_tag(user.email, s: 24) %></td>
+          <th scope="col">&nbsp;</th>
         <% end %>
-        <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
+        <th scope="col"><%= t(".name") %></th>
         <% if Errbit::Config.user_has_username %>
-          <td><%= user.username %></td>
+          <th scope="col"><%= t(".username") %></th>
         <% end %>
-        <td><%= user.email %></td>
-        <td><%= user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+        <th scope="col"><%= t(".email") %></th>
+        <th scope="col"><%= t(".admin") %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <% if Errbit::Config.use_gravatar %>
+            <td><%= gravatar_tag(user.email, s: 24) %></td>
+          <% end %>
+          <td><%= link_to user.name, user_path(user) %></td>
+          <% if Errbit::Config.user_has_username %>
+            <td><%= user.username %></td>
+          <% end %>
+          <td><%= user.email %></td>
+          <td><%= user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate @users %>
