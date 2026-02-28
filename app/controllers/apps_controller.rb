@@ -101,14 +101,12 @@ class AppsController < ApplicationController
 
   def regenerate_api_key
     app.regenerate_api_key!
+
     redirect_to edit_app_path(app)
   end
 
   def search
-    respond_to do |format|
-      format.html { render :index }
-      format.js
-    end
+    render :index
   end
 
   private
