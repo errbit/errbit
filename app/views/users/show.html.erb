@@ -1,22 +1,24 @@
-<% content_for :title, @user.name %>
-
-<% if Errbit::Config.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
-  <% content_for :title_style do %>
-    background: url('<%= gravatar %>') no-repeat;
-    padding-left: 106px;
+<% content_for :title do %>
+  <% if Errbit::Config.use_gravatar %>
+    <%= gravatar_tag(@user.email, s: 86) %>
   <% end %>
+  <%= @user.name %>
 <% end %>
 
 <% content_for :action_bar do %>
   <%= render "shared/link_github_account", user: @user %>
   <%= render "shared/link_google_account", user: @user %>
-  <%= link_to t(".edit"), edit_user_path(@user), class: "button" %>
-  <%= link_to t(".destroy"), user_path(@user),
+  <%= link_to edit_user_path(@user), class: "button" do %>
+    <%= fa_icon("pen-to-square") %> <%= t(".edit") %>
+  <% end %>
+  <%= link_to user_path(@user),
     method: :delete,
     data: {
       confirm: t(".confirm_delete")
     },
-    class: "delete button" %>
+    class: "delete button" do %>
+    <%= fa_icon("trash") %> <%= t(".destroy") %>
+  <% end %>
 <% end %>
 
 <table class="single_user">

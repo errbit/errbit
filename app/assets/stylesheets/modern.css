@@ -1,0 +1,1004 @@
+/* ============================================================
+   Errbit Modern UI Overlay
+   ============================================================
+   This stylesheet layers a modern look on top of errbit.css.erb
+   via CSS source order. Loaded after errbit in application.css.
+
+   SIZING NOTE: errbit.css.erb sets html { font-size: 62.8% }
+   (~10px) making rem units unreliable. We override the base
+   font-size and use explicit px values throughout for
+   predictable sizing.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Minimal Base Reset (replaces the old Eric Meyer reset.css)
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------
+   Design Tokens
+   ------------------------------------------------------------ */
+:root {
+  --color-errbit-header-from: #1a1a2e;
+  --color-errbit-header-to: #16213e;
+  --color-errbit-bg: #f1f5f9;
+  --color-errbit-surface: #ffffff;
+  --color-errbit-border: #e2e8f0;
+  --color-errbit-text: #334155;
+  --color-errbit-muted: #64748b;
+  --color-errbit-accent: #3b82f6;
+  --color-errbit-accent-hover: #2563eb;
+  --color-errbit-danger: #dc2626;
+  --color-errbit-success: #16a34a;
+  --color-errbit-warning: #d97706;
+  --color-errbit-notice: #2563eb;
+}
+
+/* ============================================================
+   BASE TYPOGRAPHY — Fix the undersized root font
+   ============================================================ */
+html {
+  font-size: 100% !important; /* 16px base instead of 62.8% (~10px) */
+  background-color: var(--color-errbit-bg) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+  color: var(--color-errbit-text);
+}
+
+body {
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+
+/* Headings — sensible sizes now that base is 16px */
+h1 { font-size: 28px !important; line-height: 1.2 !important; }
+h2 { font-size: 22px !important; line-height: 1.3 !important; }
+h3 { font-size: 18px !important; line-height: 1.3 !important; }
+h4 { font-size: 16px !important; line-height: 1.4 !important; }
+h5 { font-size: 15px !important; line-height: 1.4 !important; }
+h6 { font-size: 14px !important; line-height: 1.4 !important; }
+
+/* Links */
+a { font-size: inherit; }
+
+/* Paragraphs */
+p { font-size: 15px; line-height: 1.6; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+/* --- Container (responsive) --------------------------------- */
+#header > div,
+#content-wrapper,
+#footer {
+  max-width: 1140px !important;
+  width: 100% !important;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+/* --- Header ------------------------------------------------- */
+#header {
+  background: linear-gradient(
+    135deg,
+    var(--color-errbit-header-from),
+    var(--color-errbit-header-to)
+  ) !important;
+  border-bottom: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+  height: auto !important;
+  min-height: 64px;
+  margin-bottom: 24px !important;
+}
+
+#header > div {
+  display: flex !important;
+  align-items: center;
+  height: auto !important;
+  min-height: 64px;
+  position: relative;
+}
+
+#header #site-name {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  flex-shrink: 0;
+}
+
+/* --- Navigation --------------------------------------------- */
+#nav-bar {
+  position: static !important;
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  bottom: auto !important;
+  left: auto !important;
+}
+
+#nav-bar ul {
+  display: flex !important;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nav-bar li {
+  float: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 8px !important;
+  height: auto !important;
+  margin-right: 4px;
+  transition: background-color 0.15s ease;
+}
+
+#nav-bar li a {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-shadow: none !important;
+  -webkit-text-shadow: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  height: auto !important;
+  padding: 8px 16px !important;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+#nav-bar li a i {
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+#nav-bar li:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+#nav-bar li:hover a {
+  color: #ffffff !important;
+}
+
+#nav-bar li.active {
+  background-color: rgba(255, 255, 255, 0.18) !important;
+  border: none !important;
+  margin-bottom: 0 !important;
+  height: auto !important;
+}
+
+#nav-bar li.active a {
+  color: #ffffff !important;
+}
+
+/* --- Session Links ------------------------------------------ */
+#header #session-links {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#header #session-links li {
+  float: none !important;
+  margin-left: 0 !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 9999px !important;
+  font-size: 14px !important;
+  transition: background-color 0.15s ease;
+}
+
+#header #session-links li:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+#header #session-links a {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 13px !important;
+  padding: 0 16px !important;
+  line-height: 36px !important;
+  height: 36px !important;
+}
+
+#header #session-links li:hover a {
+  color: #ffffff !important;
+}
+
+#header #session-links #sign-out i {
+  color: inherit !important;
+  font-size: inherit !important;
+}
+
+/* --- Content Wrapper ---------------------------------------- */
+#content-wrapper {
+  border-radius: 12px !important;
+  border: 1px solid var(--color-errbit-border) !important;
+  background-color: var(--color-errbit-surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+/* --- Content Title ------------------------------------------ */
+#content-title {
+  background-color: #f8fafc !important;
+  border-top: none !important;
+  border-bottom: 1px solid var(--color-errbit-border) !important;
+  padding: 28px 28px !important;
+}
+
+#content-title h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif !important;
+  text-shadow: none !important;
+  -webkit-text-shadow: none !important;
+  color: #1e293b !important;
+  font-size: 26px !important;
+  line-height: 1.2 !important;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#content-title h1 img.gravatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+#content-title .meta {
+  font-size: 14px !important;
+  color: #64748b !important;
+  line-height: 1.5 !important;
+}
+
+/* Make err title bar bigger to fit more buttons */
+#content-title.err_show {
+  padding: 28px !important;
+}
+
+/* --- Action Bar --------------------------------------------- */
+#action-bar span {
+  background: var(--color-errbit-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--color-errbit-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.15s ease;
+}
+
+#action-bar span:hover {
+  background-color: #f8fafc !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+#action-bar span a {
+  text-shadow: none !important;
+  -webkit-text-shadow: none !important;
+  color: var(--color-errbit-text) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 40px !important;
+  height: 40px !important;
+  padding: 0 20px !important;
+}
+
+/* --- Content Area ------------------------------------------- */
+#content {
+  border-top: 1px solid var(--color-errbit-border) !important;
+  padding: 24px !important;
+  font-size: 15px;
+}
+
+/* --- Footer ------------------------------------------------- */
+#footer {
+  padding: 24px 0 !important;
+  color: var(--color-errbit-muted) !important;
+  font-size: 14px !important;
+}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+/* --- Flash Messages ----------------------------------------- */
+#flash-messages li {
+  border-radius: 8px !important;
+  padding: 14px 20px !important;
+  margin-bottom: 16px !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  background-image: none !important;
+}
+
+#flash-messages li.notice {
+  background-color: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1e40af;
+}
+
+#flash-messages li.success {
+  background-color: #f0fdf4 !important;
+  border: 1px solid #bbf7d0 !important;
+  color: #166534;
+}
+
+#flash-messages li.error {
+  background-color: #fef2f2 !important;
+  border: 1px solid #fecaca !important;
+  color: #991b1b;
+}
+
+#flash-messages .alert {
+  background-color: #fffbeb !important;
+  background-image: none !important;
+  border: 1px solid #fde68a !important;
+  color: #92400e;
+}
+
+/* --- Buttons ------------------------------------------------ */
+.button,
+input[type="submit"].button,
+a.button,
+button.button {
+  background-color: var(--color-errbit-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--color-errbit-border) !important;
+  border-radius: 8px !important;
+  color: var(--color-errbit-text) !important;
+  text-shadow: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 40px !important;
+  min-height: 40px !important;
+  padding: 0 20px !important;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+input[type="submit"]:hover.button,
+a:hover.button,
+a.button:hover,
+button.button:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  text-decoration: none !important;
+}
+
+.button:active,
+a.button:active,
+button.button:active {
+  background-color: #e2e8f0 !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.button:focus-visible,
+a.button:focus-visible,
+button.button:focus-visible {
+  outline: 2px solid var(--color-errbit-accent) !important;
+  outline-offset: 2px !important;
+}
+
+a.button.active {
+  background-color: var(--color-errbit-accent) !important;
+  border-color: var(--color-errbit-accent) !important;
+  color: #ffffff !important;
+}
+
+/* Submit buttons — fallback for any input[type="submit"] not using .button */
+form input[type="submit"] {
+  background-color: var(--color-errbit-surface) !important;
+  border: 1px solid var(--color-errbit-border) !important;
+  border-radius: 8px !important;
+  color: var(--color-errbit-text) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 0 20px !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 40px !important;
+  min-height: 40px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Button groups (div.buttons wrapper) — transparent, button handles its own styling */
+form div.buttons {
+  background: none !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Upgraded submit buttons (JS converts input->button for icon injection) */
+form div.buttons button[type=submit],
+form .buttons button[type=submit],
+#content-comments form button[type=submit] {
+  background-color: var(--color-errbit-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--color-errbit-border) !important;
+  border-radius: 8px !important;
+  color: var(--color-errbit-text) !important;
+  text-shadow: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 40px !important;
+  min-height: 40px !important;
+  padding: 0 20px !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+form div.buttons button[type=submit]:hover,
+form .buttons button[type=submit]:hover,
+#content-comments form button[type=submit]:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+form div.buttons button[type=submit] i,
+#content-comments form button[type=submit] i {
+  margin-right: 4px;
+}
+
+/* --- Form Inputs -------------------------------------------- */
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+  color: var(--color-errbit-text) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+form textarea {
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  min-height: 120px !important;
+  box-sizing: border-box !important;
+  color: var(--color-errbit-text) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form textarea:focus {
+  border-color: var(--color-errbit-accent) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  -moz-box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  -webkit-box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  outline: none;
+}
+
+/* Select dropdowns */
+form select {
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-size: 15px !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+  color: var(--color-errbit-text) !important;
+  background-color: var(--color-errbit-surface) !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* --- Form field groups (stacked label + input) -------------- */
+#content form > div {
+  margin-bottom: 20px !important;
+}
+
+#content form > div > label {
+  margin-bottom: 6px !important;
+}
+
+#content form input[type="text"],
+#content form input[type="password"],
+#content form input[type="email"] {
+  width: 100% !important;
+  display: block !important;
+}
+
+/* --- Fieldsets ---------------------------------------------- */
+form fieldset {
+  background-color: #f8fafc !important;
+  border: 1px solid var(--color-errbit-border) !important;
+  border-left: 1px solid var(--color-errbit-border) !important;
+  border-right: 1px solid var(--color-errbit-border) !important;
+  border-radius: 10px !important;
+  padding: 20px !important;
+}
+
+form fieldset legend {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--color-errbit-muted) !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --- Labels ------------------------------------------------- */
+form label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  text-transform: uppercase;
+  line-height: 1.5 !important;
+  display: block !important;
+  letter-spacing: 0.04em;
+}
+
+/* --- Required field indicator (replaces old FA4 asterisk) --- */
+form .required label::after {
+  font-family: inherit !important;
+  content: "" !important;
+  display: inline-block !important;
+  width: 6px !important;
+  height: 6px !important;
+  background-color: #ef4444 !important;
+  border-radius: 50% !important;
+  margin-left: 6px !important;
+  vertical-align: super !important;
+  font-size: 0 !important;
+}
+
+/* --- Search inputs ------------------------------------------ */
+form input[type="text"][name*="search"],
+form input[type="text"][placeholder*="earch"],
+input.search-input {
+  padding-left: 40px !important;
+  font-size: 15px !important;
+  min-height: 44px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: 12px center !important;
+  background-size: 18px 18px !important;
+}
+
+/* --- Pagination --------------------------------------------- */
+.pagination {
+  font-size: 15px !important;
+}
+
+.pagination em {
+  display: inline-block;
+  padding: 4px 14px;
+  background-color: var(--color-errbit-accent);
+  color: #ffffff;
+  border-radius: 9999px;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 14px;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.pagination a:hover {
+  background-color: #eff6ff;
+  text-decoration: none !important;
+}
+
+/* --- Error Messages ----------------------------------------- */
+form .error-messages {
+  background: #fef2f2 !important;
+  border: 1px solid #fecaca !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  font-size: 15px !important;
+}
+
+form .error-messages h2 {
+  border-color: #fecaca !important;
+  color: #991b1b;
+  font-size: 18px !important;
+}
+
+/* ============================================================
+   TABLES & DATA DISPLAY
+   ============================================================ */
+
+/* --- Base Tables -------------------------------------------- */
+table {
+  border: 1px solid var(--color-errbit-border) !important;
+  border-radius: 10px !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden;
+  font-size: 15px !important;
+}
+
+table thead th {
+  background-color: #f8fafc !important;
+  border-top: none !important;
+  border-bottom: 1px solid var(--color-errbit-border) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em;
+  color: var(--color-errbit-muted) !important;
+  padding: 12px 16px !important;
+}
+
+table th,
+table td {
+  border-top: 1px solid #f1f5f9 !important;
+  padding: 12px 16px !important;
+  font-size: 15px !important;
+}
+
+table tbody tr:first-child td {
+  border-top: none !important;
+}
+
+table th {
+  background-color: #f8fafc !important;
+  font-size: 14px !important;
+}
+
+table tbody tr:nth-child(odd) td {
+  background-color: #fafbfc !important;
+}
+
+table tbody tr:nth-child(even) td {
+  background-color: var(--color-errbit-surface) !important;
+}
+
+/* --- Apps & Problems Tables --------------------------------- */
+table.apps tbody tr:hover td,
+table.errs tbody tr:hover td {
+  background-color: #eff6ff !important;
+}
+
+table.apps td {
+  padding: 16px 20px !important;
+}
+
+table.apps th {
+  padding: 12px 20px !important;
+}
+
+table.errs td {
+  padding: 14px 16px !important;
+}
+
+/* --- Count Badges ------------------------------------------- */
+.count a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: 2px 10px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--color-errbit-muted) !important;
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 9999px !important;
+  opacity: 1 !important;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.count a.resolved {
+  color: var(--color-errbit-muted) !important;
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.count a:hover {
+  color: var(--color-errbit-text) !important;
+  background-color: #e2e8f0 !important;
+  border-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+/* --- Resolve Button ----------------------------------------- */
+td.resolve a.resolve {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: var(--color-errbit-muted);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+td.resolve a.resolve:hover {
+  color: var(--color-errbit-success);
+  background-color: #f0fdf4;
+}
+
+td.resolve a.resolve:active {
+  background-color: #dcfce7;
+}
+
+/* --- Environment Labels ------------------------------------- */
+table.errs td.app .environment {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  font-size: 12px !important;
+  color: var(--color-errbit-muted) !important;
+  font-weight: 500;
+}
+
+/* --- Inline Comments ---------------------------------------- */
+table.errs tr td.message .inline_comment {
+  background-color: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  border-radius: 6px !important;
+  text-shadow: none !important;
+  padding: 4px 10px !important;
+  font-size: 14px !important;
+}
+
+table.errs tr:hover td.message .inline_comment {
+  background-color: #dbeafe !important;
+  border-color: #93c5fd !important;
+  text-shadow: none !important;
+}
+
+/* --- Tab Bar ------------------------------------------------ */
+.tab-bar {
+  margin-top: 12px !important;
+}
+
+.tab-bar ul {
+  border-bottom: 1px solid var(--color-errbit-border) !important;
+}
+
+#content .tab-bar a.button {
+  border-radius: 8px 8px 0 0 !important;
+  border: 1px solid transparent !important;
+  border-bottom: 1px solid var(--color-errbit-border) !important;
+  font-size: 14px !important;
+  padding: 0 20px !important;
+  line-height: 40px !important;
+  min-height: 40px !important;
+  margin-bottom: -1px !important;
+  position: relative !important;
+}
+
+#content .tab-bar a.button.active {
+  background: var(--color-errbit-surface) !important;
+  color: var(--color-errbit-text) !important;
+  border-color: var(--color-errbit-border) !important;
+  border-bottom-color: var(--color-errbit-surface) !important;
+  font-weight: 600 !important;
+}
+
+/* --- Backtrace ---------------------------------------------- */
+.window {
+  border-radius: 8px !important;
+  border: 1px solid #374151 !important;
+  overflow: hidden !important;
+}
+
+table.backtrace {
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: 13px !important;
+}
+
+table.backtrace td.line {
+  font-size: 13px !important;
+  padding: 3px 10px !important;
+}
+
+/* --- Comments Section --------------------------------------- */
+#content-comments {
+  border-top: 1px solid var(--color-errbit-border);
+  padding: 28px 28px !important;
+}
+
+#content-comments h3 {
+  font-size: 20px !important;
+}
+
+table.comment {
+  border: 1px solid var(--color-errbit-border) !important;
+  border-radius: 8px !important;
+}
+
+table.comment img.gravatar {
+  border-radius: 9999px !important;
+}
+
+textarea#comment_body {
+  width: 100% !important;
+  min-height: 120px !important;
+  font-size: 15px !important;
+}
+
+/* --- Tally Tables ------------------------------------------- */
+table.tally td,
+table.tally th {
+  font-size: 14px !important;
+}
+
+/* --- Single-record summary tables (problem detail) ---------- */
+table.single_user td,
+table.single_user th {
+  font-size: 15px !important;
+  padding: 10px 16px !important;
+}
+
+/* --- User Avatars ------------------------------------------- */
+table.users td img.gravatar {
+  border-radius: 9999px !important;
+}
+
+/* --- Resolved title state ----------------------------------- */
+#content-title.err_show.resolved {
+  background-color: #dcfce7 !important;
+}
+
+/* --- Show/Hide Toggle Buttons ------------------------------- */
+h3#watchers_toggle,
+h3#repository_toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+
+h3#watchers_toggle button,
+h3#repository_toggle button {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  color: var(--color-errbit-accent) !important;
+  background: none !important;
+  border: none !important;
+  padding: 4px 0 !important;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  line-height: 1 !important;
+}
+
+h3#watchers_toggle button:hover,
+h3#repository_toggle button:hover {
+  color: var(--color-errbit-accent-hover) !important;
+  text-decoration: underline;
+}
+
+/* --- Action Button Icons (Font Awesome 7) -------------------- */
+
+/* Neutralize old FA4 pseudo-element icons from errbit.css.erb --
+   we now use explicit <i> tags instead */
+#action-bar .resolve:before,
+#action-bar a.up:before,
+#action-bar span.github a:before,
+#action-bar span.google a:before {
+  content: none !important;
+}
+
+/* Consistent icon spacing inside action-bar and buttons */
+#action-bar a i,
+#action-bar span a i,
+.button i,
+.tab-bar button.button i {
+  margin-right: 4px;
+}
+
+.tab-bar button.button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  line-height: 1 !important;
+  height: 40px !important;
+}
+
+/* --- Sort arrows -------------------------------------------- */
+.current.asc:after,
+.current.desc:after {
+  color: var(--color-errbit-accent);
+}
+
+/* --- Notice pagination (problem detail) --------------------- */
+.notice-pagination {
+  font-size: 15px !important;
+}
+
+/* --- Helper text in forms ----------------------------------- */
+form .field-helpertext {
+  font-size: 14px !important;
+  color: var(--color-errbit-muted) !important;
+}
+
+/* --- Checkbox labels ---------------------------------------- */
+form .checkbox label,
+form label.inline {
+  display: inline !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+}
+
+/* --- Issue tracker / notification service forms ------------- */
+div.issue_tracker.nested label.label_radio,
+div.notification_service.nested label.label_radio {
+  font-size: 14px !important;
+}
+
+div.issue_tracker.nested .choose,
+div.notification_service.nested .choose {
+  border-radius: 8px !important;
+  padding: 14px !important;
+}
+
+/* --- Meta info (problem detail header) ---------------------- */
+#content-title .meta strong {
+  font-weight: 600;
+}
+
+/* --- Raw data display --------------------------------------- */
+.raw_data {
+  font-size: 14px !important;
+  border-radius: 8px !important;
+}
+
+/* --- Code blocks -------------------------------------------- */
+pre {
+  font-size: 14px !important;
+  border-radius: 6px !important;
+}
+
+/* --- Sparkline graphs --------------------------------------- */
+.spark {
+  border-radius: 4px !important;
+}

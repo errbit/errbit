@@ -14,7 +14,9 @@
 
     <span><%= app.api_key %></span>
 
-    <%= link_to(t(".regenerate_api_key"), regenerate_api_key_app_path(app), class: "button", method: :post) %>
+    <%= link_to regenerate_api_key_app_path(app), class: "button", method: :post do %>
+      <%= fa_icon("arrows-rotate") %> <%= t(".regenerate_api_key") %>
+    <% end %>
   </div>
 <% end %>
 

@@ -8,9 +8,7 @@
       <div class="choose">
         <% issue_tracker_types.each do |tracker_type| %>
           <%= issue_tracker_form.label :type_tracker, class: "label_radio #{tracker_type.label}", value: tracker_type.label do %>
-            <% icon = tracker_type == issue_tracker_form.object.type ? :create : :inactive %>
-
-            <img class="icon" src="<%= tracker_type.icons[icon] %>" data-icon="#{tracker_type.icons}">
+            <i class="icon <%= fa_icon_class(tracker_type.label) %>"></i>
 
             <%= issue_tracker_form.radio_button :type_tracker, tracker_type.label, "data-section" => tracker_type.label %>
 

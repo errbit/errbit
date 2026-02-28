@@ -1,7 +1,9 @@
 <% content_for :title, t(".title") %>
 
 <% content_for :action_bar do %>
-  <%= link_to t(".cancel"), users_path, class: "button" %>
+  <%= link_to users_path, class: "button" do %>
+    <%= fa_icon("arrow-rotate-left") %> <%= t(".cancel") %>
+  <% end %>
 <% end %>
 
 <%= form_for @config, url: site_config_index_path, method: :patch do |f| %>
@@ -15,6 +17,8 @@
   </fieldset>
 
   <div class="buttons">
-    <%= f.submit t(".update_config") %>
+    <%= button_tag(type: "submit") do %>
+      <%= fa_icon("floppy-disk") %> <%= t(".update_config") %>
+    <% end %>
   </div>
 <% end %>

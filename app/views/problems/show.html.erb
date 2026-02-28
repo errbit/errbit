@@ -17,20 +17,28 @@
 
 <% content_for :action_bar do %>
   <% if problem.unresolved? %>
-    <span><%= link_to t(".resolve"), [:resolve, app, problem], method: :patch,
-      data: { confirm: problem_confirm("resolve_one") }, class: "resolve" %></span>
+    <span>
+      <%= link_to [:resolve, app, problem], method: :patch,
+        data: { confirm: problem_confirm("resolve_one") }, class: "resolve" do %>
+        <%= fa_icon("thumbs-up") %> <%= t(".resolve") %>
+      <% end %>
+    </span>
   <% end %>
 
   <% if current_user.authentication_token %>
     <span>
       <%= link_to polymorphic_path([app, problem], format: :ics, auth_token: current_user.authentication_token) do %>
-        <i class="fa fa-calendar"></i>
+        <%= fa_icon("calendar") %>
         iCal
       <% end %>
     </span>
   <% end %>
 
-  <span><%= link_to t(".up"), (request.env["HTTP_REFERER"] ? :back : app_problems_path(app)), class: "up" %></span>
+  <span>
+    <%= link_to (request.env["HTTP_REFERER"] ? :back : app_problems_path(app)), class: "up" do %>
+      <%= fa_icon("chevron-up") %> <%= t(".up") %>
+    <% end %>
+  </span>
   <br>
   <%= render "issue_tracker_links", app: app, problem: problem %>
 <% end %>
@@ -57,9 +65,11 @@
               </span>
             <% end %>
             <span class="delete">
-              <%= link_to "&#10008;".html_safe, [app, problem, comment],
+              <%= link_to [app, problem, comment],
                 method: :delete, data: { confirm: t("comments.confirm_delete") },
-                class: "destroy-comment" %>
+                class: "destroy-comment" do %>
+                <%= fa_icon("xmark") %>
+              <% end %>
             </span>
           </th>
         </tr>
@@ -74,7 +84,11 @@
   <%= form_for [app, problem, @comment] do |comment_form| %>
     <p><%= t(".add_a_comment") %></p>
     <%= comment_form.text_area :body %>
-    <%= comment_form.submit t(".save_comment") %>
+    <div class="buttons">
+      <%= button_tag(type: "submit") do %>
+        <%= fa_icon("floppy-disk") %> <%= t(".save_comment") %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>
 

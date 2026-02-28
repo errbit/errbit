@@ -1,11 +1,17 @@
 <% content_for :title, t(".title") %>
 
-<% content_for :action_bar, link_to(t(".cancel"), users_path, class: "button") %>
+<% content_for :action_bar do %>
+  <%= link_to users_path, class: "button" do %>
+    <%= fa_icon("arrow-rotate-left") %> <%= t(".cancel") %>
+  <% end %>
+<% end %>
 
 <%= form_for @user do |f| %>
   <%= render "fields", f: f, user: @user %>
 
   <div class="buttons">
-    <%= f.submit t(".add_user") %>
+    <%= button_tag(type: "submit") do %>
+      <%= fa_icon("plus") %> <%= t(".add_user") %>
+    <% end %>
   </div>
 <% end %>

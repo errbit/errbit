@@ -4,7 +4,7 @@
   <% if current_user.admin? %>
     <span>
       <%= link_to(new_app_path) do %>
-        <i class="fa fa-plus-circle"></i>
+        <%= fa_icon("circle-plus") %>
         <%= t(".new_app") %>
       <% end %>
     </span>

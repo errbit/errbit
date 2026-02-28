@@ -91,8 +91,6 @@ function activateTypeSelector(field_class, section_class) {
     wrapper.find('div.chosen.'+section_class).removeClass('chosen').find('input').attr('disabled','disabled');
     wrapper.find('div.'+section_class+'.'+chosen).addClass('chosen').find('input').removeAttr('disabled');
 
-    wrapper.find('.icon').each(function(){ $(this).attr('src', $(this).data('iconInactive')) });
-    input.siblings('.icon').each(function(){ $(this).attr('src', $(this).data('iconCreate')) });
   });
 }
 

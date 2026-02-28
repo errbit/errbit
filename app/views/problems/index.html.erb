@@ -6,9 +6,13 @@
 
 <% content_for :action_bar do %>
   <% if all_errs %>
-    <%= link_to t(".hide_resolved"), problems_path(sort: params_sort, order: params_order), class: "button" %>
+    <%= link_to problems_path(sort: params_sort, order: params_order), class: "button" do %>
+      <%= fa_icon("filter") %> <%= t(".hide_resolved") %>
+    <% end %>
   <% else %>
-    <%= link_to t(".show_resolved"), problems_path(all_errs: true, sort: params_sort, order: params_order), class: "button" %>
+    <%= link_to problems_path(all_errs: true, sort: params_sort, order: params_order), class: "button" do %>
+      <%= fa_icon("list") %> <%= t(".show_resolved") %>
+    <% end %>
   <% end %>
 <% end %>
 

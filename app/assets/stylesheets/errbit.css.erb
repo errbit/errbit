@@ -581,55 +581,44 @@ div.notification_service.nested .choose  {
   padding: 12px;
 
 }
-div.issue_tracker.nested img {
-  vertical-align: middle;
-}
-
-div.notification_service.nested img {
-  vertical-align: middle;
-}
-
-/* Icons for Issue Tracker Radio Buttons */
-div.issue_tracker.nested label.label_radio {
+/* Icons for Issue Tracker / Notification Service Radio Buttons */
+div.issue_tracker.nested label.label_radio,
+div.notification_service.nested label.label_radio {
   color: #929292;
   margin-right: 8px;
-}
-
-div.notification_service.nested label.label_radio  {
-  color: #929292;
-  padding-left: 33px;
   margin-bottom: 6px;
-  margin-right: 8px;
   line-height: 30px;
+  cursor: pointer;
+  display: inline-block;
 }
 
-div.notification_service.nested .choose {
-  padding-bottom: 6px;
-}
-
-div.issue_tracker.nested label.label_radio:hover, div.notification_service.nested label.label_radio:hover {
+div.issue_tracker.nested label.label_radio:hover,
+div.notification_service.nested label.label_radio:hover {
   color: #696969;
 }
 
-div.issue_tracker.nested .label_radio input {
+div.issue_tracker.nested .label_radio input,
+div.notification_service.nested .label_radio input {
   display: none;
 }
 
-div.notification_service.nested .label_radio input {
-  position: absolute; left: -9999px;
-}
-
-.button-icon {
-  float: left;
-  margin: 5px 0 0 6px;
-}
-
-div.issue_tracker.nested label.r_on, div.issue_tracker.nested label.r_on:hover, div.notification_service.nested label.r_on, div.notification_service.nested label.r_on:hover {
+div.issue_tracker.nested label.r_on,
+div.issue_tracker.nested label.r_on:hover,
+div.notification_service.nested label.r_on,
+div.notification_service.nested label.r_on:hover {
   color: #191919;
 }
 
-/* Icons need to be preloaded, otherwise it looks bad */
-.image_preloader { display: none; }
+div.issue_tracker.nested label.label_radio .icon,
+div.notification_service.nested label.label_radio .icon {
+  width: 1.2em;
+  text-align: center;
+  margin-right: 4px;
+}
+
+.button-icon {
+  margin-right: 4px;
+}
 
 /* Apps Table */
 table.apps tbody tr:hover td ,table.errs tbody tr:hover td { background-color: #F2F2F2;}
@@ -930,16 +919,16 @@ table.comment tbody td {
   background-color: #F9F9F9;
 }
 #content-comments a.destroy-comment {
-  color: #EE0000;
+  color: #888;
   margin-right: 5px;
   margin-top: 2px;
-  font-size: 21px;
+  font-size: 14px;
   line-height: 1;
   float: right;
 }
 #content-comments a.destroy-comment:hover {
   text-decoration: none;
-  color: #AA0000;
+  color: #EE0000;
 }
 #content-comments #comment_submit {
   margin-top: 15px;

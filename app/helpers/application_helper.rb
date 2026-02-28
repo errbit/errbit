@@ -65,6 +65,36 @@ module ApplicationHelper
     end
   end
 
+  FA_ICON_MAP = {
+    "github" => "fa-brands fa-github",
+    "gitlab" => "fa-brands fa-gitlab",
+    "bitbucket" => "fa-brands fa-bitbucket",
+    "jira" => "fa-brands fa-jira",
+    "pivotal" => "fa-solid fa-chart-bar",
+    "mingle" => "fa-solid fa-columns",
+    "redmine" => "fa-solid fa-bug",
+    "fogbugz" => "fa-solid fa-bug-slash",
+    "lighthouseapp" => "fa-solid fa-lightbulb",
+    "unfuddle" => "fa-solid fa-clipboard-list",
+    "slack" => "fa-brands fa-slack",
+    "campfire" => "fa-solid fa-fire",
+    "pushover" => "fa-solid fa-bell",
+    "hubot" => "fa-solid fa-robot",
+    "hoiio" => "fa-solid fa-phone",
+    "webhook" => "fa-solid fa-globe",
+    "none" => "fa-solid fa-ban"
+  }.freeze
+
+  def fa_icon_class(label)
+    FA_ICON_MAP[label.to_s.downcase] || "fa-solid fa-circle-question"
+  end
+
+  def fa_icon(name, prefix: "fa-solid", **options)
+    css = "#{prefix} fa-#{name}"
+    css = "#{css} #{options.delete(:class)}" if options[:class]
+    tag.i(**options, class: css)
+  end
+
   private
 
   def total_from_tallies(tallies)

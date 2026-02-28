@@ -2,15 +2,15 @@
 
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    # Chrome headless
     driven_by :selenium_chrome_headless
-    # Chrome non-headless
-    # driven_by :selenium_chrome
-    # Firefox headless
-    # driven_by :selenium_headless
-    # Firefox non-headless
-    # driven_by :selenium
-    # Rack test
-    # driven_by :rack_test
+  end
+
+  config.before(:each, type: :feature) do
+    driver = ENV["HEADLESS"] == "false" ? :selenium_chrome : :selenium_chrome_headless
+    Capybara.current_driver = driver
+  end
+
+  config.after(:each, type: :feature) do
+    Capybara.use_default_driver
   end
 end

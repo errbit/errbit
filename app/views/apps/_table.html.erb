@@ -36,12 +36,12 @@
         <% if any_notification_services? %>
           <td class="notification_service">
             <% if app.notification_service_configured? %>
-              <% notification_service_img = image_tag("#{app.notification_service.label}_goto.png") %>
-
               <% if app.notification_service.url %>
-                <%= link_to(notification_service_img, app.notification_service.url, target: "_blank", rel: "noopener noreferrer") %>
+                <%= link_to app.notification_service.url, target: "_blank", rel: "noopener noreferrer" do %>
+                  <i class="<%= fa_icon_class(app.notification_service.label) %>"></i>
+                <% end %>
               <% else %>
-                <%= notification_service_img %>
+                <i class="<%= fa_icon_class(app.notification_service.label) %>"></i>
               <% end %>
             <% end %>
           </td>
@@ -50,12 +50,12 @@
         <% if any_issue_trackers? %>
           <td class="issue_tracker">
             <% if app.issue_tracker_configured? %>
-              <% tracker_img = image_tag(app.issue_tracker.type.icons[:goto]) %>
-
               <% if app.issue_tracker.url %>
-                <%= link_to(tracker_img, app.issue_tracker.url) %>
+                <%= link_to app.issue_tracker.url do %>
+                  <i class="<%= fa_icon_class(app.issue_tracker.type_tracker) %>"></i>
+                <% end %>
               <% else %>
-                <%= tracker_img %>
+                <i class="<%= fa_icon_class(app.issue_tracker.type_tracker) %>"></i>
               <% end %>
             <% end %>
           </td>

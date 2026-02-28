@@ -5,6 +5,8 @@
     <div class="notification_service nested">
       <div class="choose">
         <%= label_tag :type_none, for: label_for_attr(w, "type_notificationservice"), class: "label_radio none" do %>
+          <i class="icon <%= fa_icon_class("none") %>"></i>
+
           <%= w.radio_button :type, "NotificationService", "data-section" => "none" %>
 
           (None)
@@ -12,6 +14,8 @@
 
         <% NotificationService.subclasses.each do |notification_service| %>
           <%= label_tag "type_#{notification_service.label}:", for: label_for_attr(w, "type_#{notification_service.name.downcase.gsub(":", "")}"), class: "label_radio #{notification_service.label}" do %>
+            <i class="icon <%= fa_icon_class(notification_service.label) %>"></i>
+
             <%= w.radio_button :type, notification_service.name, "data-section" => notification_service.label %>
 
             <%= notification_service.name[/::(.*)Service/,1].titleize %>
@@ -38,14 +42,6 @@
           <% end %>
         </div>
       <% end %>
-
-      <div class="image_preloader">
-        <% (NotificationService.subclasses.map{|t| t.label } << "none").each do |notification_service| %>
-          <%= image_tag "#{notification_service}_inactive.png" %>
-
-          <%= image_tag "#{notification_service}_create.png" %>
-        <% end %>
-      </div>
     </div>
   <% end %>
 </fieldset>
