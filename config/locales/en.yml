@@ -54,6 +54,8 @@ en:
       title: "Errbit"
       errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
+    new_application:
+      title: "Errbit"
 
   shared:
     navigation:
