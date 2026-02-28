@@ -175,8 +175,6 @@ en:
       username: Username
       email: Email
       admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
     show:
       name: Name
       email: Email

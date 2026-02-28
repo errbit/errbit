@@ -147,8 +147,6 @@ pt-BR:
       username: Usuário
       email: E-mail
       admin: Administrador?
-      admin_yes: Sim
-      admin_no: Não
     show:
       name: Nome
       email: E-mail
