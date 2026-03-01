@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  layout "new_application"
+
   def index
     @users = policy_scope(User)
       .order_by(name: :asc)

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# e.g. "v1.13.1"
+VERSION=$1
+
+if [ -z "$VERSION" ]; then
+  echo "Usage: $0 v<version>. e.g. v1.13.1"
+  exit 1
+fi
+
+mkdir -p app/assets/images/icons
+
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/x-circle.svg" > app/assets/images/icons/x-circle.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/check-circle.svg" > app/assets/images/icons/check-circle.svg
+
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/plus-circle.svg" > app/assets/images/icons/plus-circle.svg

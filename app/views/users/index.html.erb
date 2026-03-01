@@ -1,44 +1,53 @@
 <% content_for :title, t(".title") %>
 
 <% content_for :action_bar do %>
-  <span>
-    <%= link_to new_user_path do %>
-      <i class="fa fa-plus-circle"></i>
-      <%= t(".new") %>
+  <div class="col-12 text-end">
+    <%= link_to new_user_path, class: "btn btn-primary" do %>
+      <%= inline_svg_tag "icons/plus-circle.svg" %> <%= t(".new") %>
     <% end %>
-  </span>
+  </div>
 <% end %>
 
-<table class="users">
-  <thead>
-    <tr>
-      <% if Errbit::Config.use_gravatar %>
-        <th>&nbsp;</th>
-      <% end %>
-      <th><%= t(".name") %></th>
-      <% if Errbit::Config.user_has_username %>
-        <th><%= t(".username") %></th>
-      <% end %>
-      <th class="main"><%= t(".email") %></th>
-      <th><%= t(".admin") %></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <% if Errbit::Config.use_gravatar %>
+            <th scope="col">&nbsp;</th>
+          <% end %>
+          <th scope="col" class="text-center"><%= t(".name") %></th>
+          <% if Errbit::Config.user_has_username %>
+            <th scope="col" class="text-center"><%= t(".username") %></th>
+          <% end %>
+          <th scope="col" class="text-center"><%= t(".email") %></th>
+          <th scope="col" class="text-center"><%= t(".admin") %></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr class="user_list">
-        <% if Errbit::Config.use_gravatar %>
-          <td><%= gravatar_tag(user.email, s: 24) %></td>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <% if Errbit::Config.use_gravatar %>
+              <td class="text-center"><%= gravatar_tag(user.email, s: 24) %></td>
+            <% end %>
+            <td><%= link_to user.name, user_path(user) %></td>
+            <% if Errbit::Config.user_has_username %>
+              <td><%= user.username %></td>
+            <% end %>
+            <td><%= user.email %></td>
+            <td class="text-center">
+              <% if user.admin? %>
+                <%= inline_svg_tag "icons/check-circle.svg", class: "text-success" %>
+              <% else %>
+                <%= inline_svg_tag "icons/x-circle.svg", class: "text-danger" %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-        <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
-        <% if Errbit::Config.user_has_username %>
-          <td><%= user.username %></td>
-        <% end %>
-        <td><%= user.email %></td>
-        <td><%= user.admin? ? t(".admin_yes") : t(".admin_no") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%= paginate @users %>

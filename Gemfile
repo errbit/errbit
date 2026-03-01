@@ -32,6 +32,7 @@ gem "omniauth-rails_csrf_protection"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "rails_autolink"
+gem "inline_svg"
 gem "useragent"
 gem "uri"
 gem "rack-timeout", require: false

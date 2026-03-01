@@ -54,6 +54,8 @@ en:
       title: "Errbit"
       errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
+    new_application:
+      title: "Errbit"
 
   shared:
     navigation:
@@ -173,15 +175,11 @@ en:
       username: Username
       email: Email
       admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
     show:
       name: Name
       email: Email
       username: Username
       admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
       created: Created
       edit: edit
       destroy: destroy
