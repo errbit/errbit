@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# e.g. "v1.13.1"
+VERSION=$1
+
+if [ -z "$VERSION" ]; then
+  echo "Usage: $0 v<version>. e.g. v1.13.1"
+  exit 1
+fi
+
+mkdir -p app/assets/images/icons
+
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/x-circle.svg" > app/assets/images/icons/x-circle.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/check-circle.svg" > app/assets/images/icons/check-circle.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/plus-circle.svg" > app/assets/images/icons/plus-circle.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/pencil-square.svg" > app/assets/images/icons/pencil-square.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/trash.svg" > app/assets/images/icons/trash.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/person-fill-add.svg" > app/assets/images/icons/person-fill-add.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/hand-thumbs-up-fill.svg" > app/assets/images/icons/hand-thumbs-up-fill.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/arrow-repeat.svg" > app/assets/images/icons/arrow-repeat.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/github.svg" > app/assets/images/icons/github.svg
+curl -s "https://raw.githubusercontent.com/twbs/icons/refs/tags/$VERSION/icons/google.svg" > app/assets/images/icons/google.svg
