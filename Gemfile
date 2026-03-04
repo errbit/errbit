@@ -6,7 +6,6 @@ ruby file: ".ruby-version"
 
 gem "rails", "8.1.2"
 
-gem "reactionview"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "importmap-rails"
