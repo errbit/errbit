@@ -21,31 +21,49 @@
 <% end %>
 
 <% content_for :action_bar do %>
-  <% if current_user.admin? %>
-    <%= link_to t(".edit"), edit_app_path(app), class: "button" %>
-  <% end %>
+  <div class="row">
+    <div class="col">
+      <% if current_user.admin? %>
+        <%= link_to t(".edit"), edit_app_path(app), class: "btn btn-primary" %>
+      <% end %>
 
-  <% if all_errs %>
-    <%= link_to t(".unresolved_errs"), app_path(app, sort: params_sort, order: params_order), class: "button" %>
-  <% else %>
-    <%= link_to t(".all_errs"), app_path(app, all_errs: true, sort: params_sort, order: params_order), class: "button" %>
-  <% end %>
+      <% if all_errs %>
+        <%= link_to t(".unresolved_errs"), app_path(app, sort: params_sort, order: params_order), class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to t(".all_errs"), app_path(app, all_errs: true, sort: params_sort, order: params_order), class: "btn btn-primary" %>
+      <% end %>
 
-  <% if app.watched_by?(current_user) %>
-    <%= link_to t(".unwatch"), app_watchers_path(app_id: app), method: :delete, class: "button" %>
-  <% else %>
-    <%= link_to t(".watch"), app_watchers_path(app_id: app), method: :post, class: "button" %>
-  <% end %>
+      <% if app.watched_by?(current_user) %>
+        <%= link_to t(".unwatch"), app_watchers_path(app_id: app), method: :delete, class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to t(".watch"), app_watchers_path(app_id: app), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
-<div data-controller="reveal">
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item"><%= link_to("Apps", apps_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= app.name %></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
+<div data-controller="reveal" data-reveal-hidden-class="d-none">
   <h3 id="watchers_toggle">
     <%= t(".watchers") %>
 
-    <button data-action="reveal#toggle"><%= t(".show_hide") %></button>
+    <button class="btn btn-primary btn-sm" data-action="reveal#toggle"><%= t(".show_hide") %></button>
   </h3>
 
-  <div class="hidden" data-reveal-target="item">
+  <div class="d-none" data-reveal-target="item">
     <% if app.notify_all_users %>
       <table class="watchers">
         <thead>
@@ -83,15 +101,15 @@
 </div>
 
 <% if app.github_repo? %>
-  <div data-controller="reveal">
+  <div data-controller="reveal" data-reveal-hidden-class="d-none">
     <h3 id="repository_toggle">
       <%= t(".repository") %>
 
-      <button data-action="reveal#toggle"><%= t(".show_hide") %></button>
+      <button class="btn btn-primary btn-sm" data-action="reveal#toggle"><%= t(".show_hide") %></button>
     </h3>
 
-    <div class="hidden" data-reveal-target="item">
-      <table class="repository">
+    <div class="d-none" data-reveal-target="item">
+      <table class="">
         <thead>
           <tr>
             <th><%= t(".github_repo") %></th>
@@ -109,21 +127,17 @@
 <% end %>
 
 <% if app.problems.any? %>
-  <h3 class="clear"><%= t(".errors") %></h3>
+  <h3 class=""><%= t(".errors") %></h3>
 
-  <section>
+  <div class="row">
     <%= render "problems/search", all_errs: all_errs, app_id: app.id, params_sort: params_sort, params_order: params_order %>
-  </section>
+  </div>
 
-  <br>
-
-  <section>
-    <div class="problem_table" id="problem_table">
-      <%= render "problems/table", problems: problems %>
-    </div>
-  </section>
+  <div id="problems" class="row table-responsive">
+    <%= render "problems/table", problems: problems %>
+  </div>
 <% else %>
-  <h3 class="clear"><%= t(".no_error_yet") %></h3>
+  <h3><%= t(".no_error_yet") %></h3>
 
   <%= render "configuration_instructions_wrapper", app: app %>
 <% end %>

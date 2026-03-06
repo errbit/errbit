@@ -1,11 +1,27 @@
 <% content_for :title, t(".title") %>
 
-<% content_for :action_bar, link_to(t(".cancel"), users_path, class: "button") %>
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item"><%= link_to("Users", users_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page">New user</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+<% end %>
 
 <%= form_for @user do |f| %>
   <%= render "fields", f: f, user: @user %>
 
-  <div class="buttons">
-    <%= f.submit t(".add_user") %>
+  <div class="row">
+    <div class="col text-center">
+      <%= button_tag type: :submit, class: "btn btn-primary" do %>
+        <%= inline_svg_tag "icons/floppy.svg" %> <%= t(".add_user") %>
+      <% end %>
+    </div>
   </div>
 <% end %>
