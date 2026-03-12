@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up Ruby
-        uses: ruby/setup-ruby@9d13dd6ce2979b207024f719160a99112fb38eea # v1.291.0
+        uses: ruby/setup-ruby@4eb9f110bac952a8b68ecf92e3b5c7a987594ba6 # v1.292.0
         with:
           rubygems: "latest"
           bundler: "latest"
