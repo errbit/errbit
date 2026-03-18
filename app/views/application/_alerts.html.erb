@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert" data-turbo-temporary>
+    <%= flash[:notice].html_safe %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" data-turbo-temporary>
+    <%= flash[:alert].html_safe %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>

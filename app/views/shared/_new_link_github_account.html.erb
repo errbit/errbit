@@ -1,0 +1,22 @@
+<%# locals: (user:) %>
+
+<% if Errbit::Config.github_authentication && user == current_user %>
+  <span class="github">
+    <% if user.github_account? %>
+      <%= link_to user_unlink_github_path(user),
+                  method: :patch,
+                  data: {
+                    confirm: "Are you sure?"
+                  },
+                  class: "" do %>
+        <%= inline_svg_tag "icons/github.svg" %> <%= "Unlink #{Errbit::Config.github_site_title} account" %>
+      <% end %>
+    <% else %>
+      <%= link_to user_github_omniauth_authorize_path,
+                  method: :post,
+                  class: "btn btn-primary" do %>
+        <%= inline_svg_tag "icons/github.svg" %> <%= "Link #{Errbit::Config.github_site_title} account" %>
+      <% end %>
+    <% end %>
+  </span>
+<% end %>
