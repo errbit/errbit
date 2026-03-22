@@ -212,7 +212,7 @@ GEM
     hoi (0.0.7)
       httparty
       json
-    htmlentities (4.3.4)
+    htmlentities (4.4.2)
     httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
@@ -816,7 +816,7 @@ CHECKSUMS
   herb (0.8.10-x86_64-linux-musl) sha256=bd1b2bf9f0ab9ceecdd874cdf03424176b83fa3c937188568c011cecf40b5d7f
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   hoptoad_notifier (2.4.11)
-  htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
+  htmlentities (4.4.2) sha256=bbafbdf69f2eca9262be4efef7e43e6a1de54c95eb600f26984f71d2fe96c5c3
   httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   icalendar (2.12.2) sha256=b63dfb784b4d1214bceaec40097e61eaf78c8691929d7f217779956d9019d9f5
