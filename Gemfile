@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby file: ".ruby-version"
 
-gem "rails", "8.1.2"
+gem "rails", "8.1.2.1"
 
 gem "sprockets-rails"
 gem "stimulus-rails"
