@@ -1,4 +1,4 @@
-name: build-and-publish
+name: Build and Publish
 
 on:
   push:
@@ -60,9 +60,10 @@ jobs:
           images: ${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}
           tags: |
             type=raw,value=latest
-            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
+            type=sha
 
       - name: Build and push
         uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # v7.0.0
