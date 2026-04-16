@@ -1,18 +1,16 @@
-<% content_for :title, "Sign in" %>
-
-<% auth_key = Devise.authentication_keys.first %>
+<% content_for :title, t(".sign_in") %>
 
 <% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
   <% content_for :action_bar do %>
-    <div class="action-bar">
+    <div class="">
       <% if Errbit::Config.github_authentication %>
-        <span class="github">
+        <span class="">
           <%= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
 
       <% if Errbit::Config.google_authentication %>
-        <span class="google">
+        <span class="">
           <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
@@ -20,41 +18,62 @@
   <% end %>
 <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="required">
-    <%= f.label auth_key %>
-
-    <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), tabindex: 1, autofocus: true %>
-  </div>
-
-  <div class="required">
-    <%= link_to "forgot it?", new_password_path(resource_name), class: "float-right", id: "forgot_password" %>
-
-    <%= f.label :password %>
-
-    <%= f.password_field :password, tabindex: 2 %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="checkbox">
-      <%= f.check_box :remember_me, tabindex: 3 %>
-
-      <%= f.label :remember_me %>
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= t(".sign_in") %></li>
+        </ol>
+      </nav>
     </div>
-  <% end %>
-
-  <div class="buttons">
-    <button type="submit" class="sign_in">
-      <%= t(".sign_in") %>
-    </button>
   </div>
 <% end %>
 
-<script>
-  $("a#forgot_password").click(function(){
-    // Set email field on password reset page to email that user entered on this page
-    location.href = $(this).attr("href") + "?email=" + encodeURIComponent($("#user_email").val());
+<div class="row">
+  <div class="col">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-3">
+        <% auth_key = Devise.authentication_keys.first %>
 
-    return false;
-  });
+        <%= f.label auth_key, class: "form-label" %>
+
+        <% type = Errbit::Config.user_has_username ? "text" : "email" %>
+
+        <%= f.text_field auth_key, type: type, tabindex: 1, autofocus: true, required: true, class: "form-control", autocomplete: "username" %>
+      </div>
+
+      <div class="mb-3">
+        <%#= link_to "forgot it?", new_password_path(resource_name), class: "float-right", id: "forgot_password" %>
+
+        <%= f.label :password, class: "form-label" %>
+
+        <%= f.password_field :password, tabindex: 2, required: true, class: "form-control", autocomplete: "current-password", minlength: 8 %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check">
+          <%= f.check_box :remember_me, tabindex: 3, class: "form-check-input", checked: true %>
+
+          <%= f.label :remember_me, class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">
+          <%= t(".sign_in") %>
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  // $("a#forgot_password").click(function(){
+  //   // Set email field on password reset page to email that user entered on this page
+  //   location.href = $(this).attr("href") + "?email=" + encodeURIComponent($("#user_email").val());
+  //
+  //   return false;
+  // });
 </script>

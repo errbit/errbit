@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = I18n.t("comments.create.error")
     end
+
     redirect_to app_problem_path(app, problem)
   end
 
