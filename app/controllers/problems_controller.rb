@@ -7,44 +7,7 @@ class ProblemsController < ApplicationController
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
-  expose(:app_scope) do
-    params[:app_id] ? App.where(_id: params[:app_id]) : App.all
-  end
-
-  expose(:app) do
-    AppDecorator.new(app_scope.find(params[:app_id]))
-  end
-
-  expose(:problem) do
-    ProblemDecorator.new(app.problems.find(params[:id]))
-  end
-
-  expose(:all_errs) do
-    params[:all_errs]
-  end
-
-  expose(:filter) do
-    params[:filter]
-  end
-
-  expose(:params_environment) do
-    params[:environment]
-  end
-
-  # to use with_app_exclusions, hit a path like /problems?filter=-app:noisy_app%20-app:another_noisy_app
-  # it would be possible to add a really fancy UI for it at some point, but for now, it's really
-  # useful if there are noisy apps that you want to ignore.
-  expose(:problems) do
-    finder = Problem
-      .for_apps(app_scope)
-      .in_env(params_environment)
-      .filtered(filter)
-      .all_else_unresolved(all_errs)
-      .ordered_by(params_sort, params_order)
-
-    finder = finder.search(params[:search]) if params[:search].present?
-    finder.page(params[:page]).per(current_user.per_page)
-  end
+  helper_method :app_scope, :app, :problem, :all_errs, :filter, :params_environment, :problems
 
   def index
   end
@@ -163,6 +126,47 @@ class ProblemsController < ApplicationController
   end
 
   private
+
+  def app_scope
+    @app_scope ||= params[:app_id] ? App.where(_id: params[:app_id]) : App.all
+  end
+
+  def app
+    @app ||= AppDecorator.new(app_scope.find(params[:app_id]))
+  end
+
+  def problem
+    @problem ||= ProblemDecorator.new(app.problems.find(params[:id]))
+  end
+
+  def all_errs
+    @all_errs ||= params[:all_errs]
+  end
+
+  def filter
+    @filter ||= params[:filter]
+  end
+
+  def params_environment
+    @params_environment ||= params[:environment]
+  end
+
+  # to use with_app_exclusions, hit a path like /problems?filter=-app:noisy_app%20-app:another_noisy_app
+  # it would be possible to add a really fancy UI for it at some point, but for now, it's really
+  # useful if there are noisy apps that you want to ignore.
+  def problems
+    @problems ||= begin
+      finder = Problem
+        .for_apps(app_scope)
+        .in_env(params_environment)
+        .filtered(filter)
+        .all_else_unresolved(all_errs)
+        .ordered_by(params_sort, params_order)
+
+      finder = finder.search(params[:search]) if params[:search].present?
+      finder.page(params[:page]).per(current_user.per_page)
+    end
+  end
 
   def need_selected_problem
     return if err_ids.any?

@@ -7,39 +7,7 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  expose(:app_scope) do
-    params[:search].present? ? App.search(params[:search]) : App.all
-  end
-
-  expose(:apps) do
-    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
-  end
-
-  expose(:app)
-
-  expose(:app_decorate) do
-    AppDecorator.new(app)
-  end
-
-  expose(:all_errs) do
-    params[:all_errs].present?
-  end
-
-  expose(:problems) do
-    if request.format == :atom
-      app.problems.unresolved.ordered
-    else
-      pr = app.problems
-      pr = pr.unresolved unless all_errs
-      pr.in_env(
-        params[:environment]
-      ).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
-    end
-  end
-
-  expose(:users) do
-    User.all.sort_by { |u| u.name.downcase }
-  end
+  helper_method :app_scope, :apps, :app, :app_decorate, :all_errs, :problems, :users
 
   def index
   end
@@ -112,6 +80,42 @@ class AppsController < ApplicationController
   end
 
   private
+
+  def app_scope
+    @app_scope ||= params[:search].present? ? App.search(params[:search]) : App.all
+  end
+
+  def apps
+    @apps ||= app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+  end
+
+  def app
+    @app ||= App.find(params[:app_id] || params[:id])
+  end
+
+  def app_decorate
+    @app_decorate ||= AppDecorator.new(app)
+  end
+
+  def all_errs
+    @all_errs ||= params[:all_errs].present?
+  end
+
+  def problems
+    @problems ||= if request.format == :atom
+      app.problems.unresolved.ordered
+    else
+      pr = app.problems
+      pr = pr.unresolved unless all_errs
+      pr.in_env(
+        params[:environment]
+      ).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
+    end
+  end
+
+  def users
+    @users ||= User.all.sort_by { |u| u.name.downcase }
+  end
 
   def initialize_subclassed_notification_service
     notification_type = app_params
