@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1
 
-FROM registry.docker.com/library/ruby:4.0.2-slim@sha256:12f002ff598856284c9fd35526712d5431c47d60dd91eb3a00f9e01777c762d5 AS base
+FROM registry.docker.com/library/ruby:4.0.3-slim@sha256:0b3d0a3854498216a3c30586a2da996734b18112f2a024c9939651d02cad1745 AS base
 
 # Rails app lives here
 WORKDIR /rails
