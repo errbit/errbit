@@ -695,7 +695,6 @@ DEPENDENCIES
   omniauth-github
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
-  ostruct
   pjax_rails
   pry-rails
   puma
