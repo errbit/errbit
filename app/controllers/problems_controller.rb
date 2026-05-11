@@ -52,7 +52,7 @@ class ProblemsController < ApplicationController
   def show
     notice =
       if params[:notice_id]
-        Notice.find(params[:notice_id])
+        Notice.find(params.expect(:notice_id))
       else
         @notices = problem.object.notices.reverse_ordered
           .page(params[:notice]).per(1)
@@ -63,7 +63,7 @@ class ProblemsController < ApplicationController
   end
 
   def show_by_id
-    problem = Problem.find(params[:id])
+    problem = Problem.find(params.expect(:id))
     redirect_to app_problem_path(problem.app, problem)
   end
 
