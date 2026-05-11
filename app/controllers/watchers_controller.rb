@@ -2,7 +2,7 @@
 
 class WatchersController < ApplicationController
   def create
-    app = App.find(params[:app_id])
+    app = App.find(params.expect(:app_id))
 
     app.watchers.create!(user: current_user)
 
@@ -12,7 +12,7 @@ class WatchersController < ApplicationController
   end
 
   def destroy
-    app = App.find(params[:app_id])
+    app = App.find(params.expect(:app_id))
 
     watcher = app.watchers.where(user: current_user).first
 
