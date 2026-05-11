@@ -32,7 +32,7 @@ module Api
 
       def show
         result = benchmark("[api/v1/problems_controller/show] query time") do
-          Problem.only(FIELDS).find(params[:id])
+          Problem.only(FIELDS).find(params.expect(:id))
         rescue Mongoid::Errors::DocumentNotFound
           head :not_found
           return false

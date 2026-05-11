@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params.expect(:id))
 
     authorize @user
   end
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params.expect(:id))
 
     authorize @user
   end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params.expect(:id))
 
     authorize @user
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find(params.expect(:id))
 
     if @user == current_user
       flash[:error] = t(".error")

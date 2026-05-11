@@ -8,15 +8,15 @@ class ProblemsController < ApplicationController
   ]
 
   expose(:app_scope) do
-    params[:app_id] ? App.where(_id: params[:app_id]) : App.all
+    params[:app_id] ? App.where(_id: params.expect(:app_id)) : App.all
   end
 
   expose(:app) do
-    AppDecorator.new(app_scope.find(params[:app_id]))
+    AppDecorator.new(app_scope.find(params.expect(:app_id)))
   end
 
   expose(:problem) do
-    ProblemDecorator.new(app.problems.find(params[:id]))
+    ProblemDecorator.new(app.problems.find(params.expect(:id)))
   end
 
   expose(:all_errs) do
@@ -52,7 +52,7 @@ class ProblemsController < ApplicationController
   def show
     notice =
       if params[:notice_id]
-        Notice.find(params[:notice_id])
+        Notice.find(params.expect(:notice_id))
       else
         @notices = problem.object.notices.reverse_ordered
           .page(params[:notice]).per(1)
@@ -63,7 +63,7 @@ class ProblemsController < ApplicationController
   end
 
   def show_by_id
-    problem = Problem.find(params[:id])
+    problem = Problem.find(params.expect(:id))
     redirect_to app_problem_path(problem.app, problem)
   end
 
