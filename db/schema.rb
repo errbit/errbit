@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_192604) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_13_204143) do
+  create_table "errbit_apps", force: :cascade do |t|
+    t.string "api_key"
+    t.string "asset_host"
+    t.string "bitbucket_repo"
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.string "current_app_version"
+    t.string "custom_backtrace_url_template"
+    t.text "email_at_notices"
+    t.string "github_repo"
+    t.string "name"
+    t.boolean "notify_all_users", default: false, null: false
+    t.boolean "notify_on_errs", default: true, null: false
+    t.string "repository_branch"
+    t.datetime "updated_at", null: false
+    t.index ["api_key"], name: "index_errbit_apps_on_api_key", unique: true
+    t.index ["bson_id"], name: "index_errbit_apps_on_bson_id", unique: true
+    t.index ["name"], name: "index_errbit_apps_on_name", unique: true
+  end
+
   create_table "errbit_users", force: :cascade do |t|
     t.boolean "admin", default: false, null: false
     t.string "authentication_token"
