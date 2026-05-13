@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_213042) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_13_214424) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "api_key"
     t.string "asset_host"
@@ -39,6 +39,48 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_213042) do
     t.datetime "updated_at", null: false
     t.index ["bson_id"], name: "index_errbit_backtraces_on_bson_id", unique: true
     t.index ["fingerprint"], name: "index_errbit_backtraces_on_fingerprint", unique: true
+  end
+
+  create_table "errbit_errs", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_problem_id", null: false
+    t.string "fingerprint"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_errs_on_bson_id", unique: true
+    t.index ["errbit_problem_id"], name: "index_errbit_errs_on_errbit_problem_id"
+    t.index ["fingerprint"], name: "index_errbit_errs_on_fingerprint"
+  end
+
+  create_table "errbit_problems", force: :cascade do |t|
+    t.string "app_name"
+    t.string "bson_id"
+    t.integer "comments_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.string "environment"
+    t.integer "errbit_app_id", null: false
+    t.string "error_class"
+    t.datetime "first_notice_at"
+    t.json "hosts"
+    t.string "issue_link"
+    t.string "issue_type"
+    t.datetime "last_notice_at"
+    t.string "message"
+    t.json "messages"
+    t.integer "notices_count", default: 0, null: false
+    t.boolean "resolved", default: false, null: false
+    t.datetime "resolved_at"
+    t.datetime "updated_at", null: false
+    t.json "user_agents"
+    t.string "where"
+    t.index ["app_name"], name: "index_errbit_problems_on_app_name"
+    t.index ["bson_id"], name: "index_errbit_problems_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_problems_on_errbit_app_id"
+    t.index ["first_notice_at"], name: "index_errbit_problems_on_first_notice_at"
+    t.index ["last_notice_at"], name: "index_errbit_problems_on_last_notice_at"
+    t.index ["message"], name: "index_errbit_problems_on_message"
+    t.index ["notices_count"], name: "index_errbit_problems_on_notices_count"
+    t.index ["resolved_at"], name: "index_errbit_problems_on_resolved_at"
   end
 
   create_table "errbit_site_configs", force: :cascade do |t|
@@ -96,6 +138,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_213042) do
     t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
   end
 
+  add_foreign_key "errbit_errs", "errbit_problems"
+  add_foreign_key "errbit_problems", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_users"
 end
