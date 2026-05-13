@@ -4,6 +4,12 @@ module Errbit
   class App < ApplicationRecord
     serialize :email_at_notices, type: Array, coder: YAML
 
+    has_many :watchers,
+      class_name: "Errbit::Watcher",
+      foreign_key: :errbit_app_id,
+      inverse_of: :app,
+      dependent: :destroy
+
     before_validation :generate_api_key, on: :create
     before_save :normalize_github_repo
 
@@ -16,6 +22,10 @@ module Errbit
       self[:notify_on_errs] != false
     end
     alias_method :notify_on_errs?, :notify_on_errs
+
+    def watched_by?(user)
+      watchers.where(errbit_user_id: user.id).exists?
+    end
 
     def repo_branch
       repository_branch.present? ? repository_branch : "main"
