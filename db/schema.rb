@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_204638) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_13_210330) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "api_key"
     t.string "asset_host"
@@ -29,6 +29,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_204638) do
     t.index ["api_key"], name: "index_errbit_apps_on_api_key", unique: true
     t.index ["bson_id"], name: "index_errbit_apps_on_bson_id", unique: true
     t.index ["name"], name: "index_errbit_apps_on_name", unique: true
+  end
+
+  create_table "errbit_site_configs", force: :cascade do |t|
+    t.boolean "action", default: true, null: false
+    t.integer "backtrace_lines", default: -1
+    t.string "bson_id"
+    t.boolean "component", default: true, null: false
+    t.datetime "created_at", null: false
+    t.boolean "environment_name", default: true, null: false
+    t.boolean "error_class", default: true, null: false
+    t.boolean "message", default: true, null: false
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_site_configs_on_bson_id", unique: true
   end
 
   create_table "errbit_users", force: :cascade do |t|
