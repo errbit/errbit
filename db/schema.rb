@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_204143) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_13_204638) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "api_key"
     t.string "asset_host"
@@ -60,4 +60,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_204143) do
     t.index ["github_login"], name: "index_errbit_users_on_github_login", unique: true
     t.index ["reset_password_token"], name: "index_errbit_users_on_reset_password_token", unique: true
   end
+
+  create_table "errbit_watchers", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.integer "errbit_app_id", null: false
+    t.integer "errbit_user_id"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_watchers_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_watchers_on_errbit_app_id"
+    t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
+  end
+
+  add_foreign_key "errbit_watchers", "errbit_apps"
+  add_foreign_key "errbit_watchers", "errbit_users"
 end
