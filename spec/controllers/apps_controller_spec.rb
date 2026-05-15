@@ -7,124 +7,107 @@ RSpec.describe AppsController, type: :controller do
   it_requires_admin_privileges for: {new: :get, edit: :get, create: :post, update: :patch, destroy: :delete}
 
   let(:app_params) { {name: "BestApp"} }
-  let(:admin) { create(:user, admin: true) }
-  let(:user) { create(:user) }
-  let(:watcher) { create(:user_watcher, app: app, user: user) }
-  let(:unwatched_app) { create(:app) }
+  let(:admin) { create(:errbit_user, admin: true) }
+  let(:user) { create(:errbit_user) }
+  let(:unwatched_app) { create(:errbit_app) }
   let(:app) { unwatched_app }
-  let(:watched_app_1) do
-    a = create(:app)
-    create(:user_watcher, user: user, app: a)
-    a
-  end
-  let(:watched_app_2) do
-    a = create(:app)
-    create(:user_watcher, user: user, app: a)
-    a
-  end
-  let(:err) do
-    create(:err, problem: problem)
-  end
-  let(:notice) do
-    create(:notice, err: err)
-  end
-  let(:problem) do
-    create(:problem, app: app)
-  end
-  let(:problem_resolved) { create(:problem_resolved, app: app) }
-  let(:notice_fingerprinter) do
-    nf = SiteConfig.document.notice_fingerprinter
-    nf.backtrace_lines = 10
-    nf
-  end
+  let(:watcher) { create(:errbit_user_watcher, app: app, user: user) }
 
   describe "GET /apps" do
     context "when logged in as an admin" do
       it "finds all apps" do
         sign_in admin
-        unwatched_app && watched_app_1 && watched_app_2
+        unwatched_app
+
         get :index
-        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
+
+        expect(controller.send(:apps).map(&:object)).to eq(Errbit::App.all.to_a.sort)
       end
     end
 
     context "when logged in as a regular user" do
       it "finds all apps" do
         sign_in user
-        unwatched_app && watched_app_1 && watched_app_2
+        unwatched_app
+
         get :index
-        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
+
+        expect(controller.send(:apps).map(&:object)).to eq(Errbit::App.all.to_a.sort)
       end
     end
   end
 
   describe "GET /apps/:id" do
-    context "logged in as an admin" do
-      before do
-        sign_in admin
-      end
+    context "when logged in as an admin" do
+      before { sign_in admin }
 
       it "finds the app" do
         get :show, params: {id: app.id}
-        expect(controller.app).to eq(app)
+
+        expect(controller.send(:app)).to eq(app)
       end
 
-      it "should not raise errors for app with err without notices" do
-        err
+      it "does not raise errors for an app with an err but no notices" do
+        create(:errbit_err, problem: create(:errbit_problem, app: app))
+
         expect { get :show, params: {id: app.id} }.not_to raise_error
       end
 
-      it "should list atom feed successfully" do
+      it "responds successfully for the atom feed" do
         get :show, params: {id: app.id, format: "atom"}
+
         expect(response).to be_successful
       end
 
-      it "should list available watchers by name" do
-        create(:user, name: "Carol")
-        create(:user, name: "Alice")
-        create(:user, name: "Betty")
+      it "lists available watchers by name" do
+        create(:errbit_user, name: "Carol")
+        create(:errbit_user, name: "Alice")
+        create(:errbit_user, name: "Betty")
 
         get :show, params: {id: app.id}
 
-        expect(controller.users.to_a).to eq(User.all.to_a.sort_by(&:name))
+        expect(controller.send(:users).to_a).to eq(Errbit::User.all.to_a.sort_by { |u| u.name.downcase })
       end
 
-      context "pagination" do
-        before do
-          35.times { create(:err, problem: create(:problem, app: app)) }
-        end
+      context "with default pagination" do
+        before { 35.times { create(:errbit_err, problem: create(:errbit_problem, app: app)) } }
 
-        it "should have default per_page value for user" do
+        it "uses the default per_page value" do
           get :show, params: {id: app.id}
 
-          expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
+          expect(controller.send(:problems).to_a.size).to eq(Errbit::User::PER_PAGE)
         end
 
-        it "should be able to override default per_page value" do
-          admin.update_attribute :per_page, 10
+        it "honors the user's per_page override" do
+          admin.update!(per_page: 10)
 
           get :show, params: {id: app.id}
 
-          expect(controller.problems.to_a.size).to eq(10)
+          expect(controller.send(:problems).to_a.size).to eq(10)
         end
       end
 
       context "with resolved errors" do
-        before do
-          problem_resolved && problem
+        let!(:resolved_problem) do
+          p = create(:errbit_problem, app: app)
+          p.resolve!
+          p
         end
+        let!(:open_problem) { create(:errbit_problem, app: app) }
 
-        context "and no params" do
+        context "without all_errs param" do
           it "shows only unresolved problems" do
             get :show, params: {id: app.id}
-            expect(controller.problems.size).to eq(1)
+
+            expect(controller.send(:problems).size).to eq(1)
           end
         end
 
-        context "and all_problems=true params" do
-          it "shows all errors" do
+        context "with all_errs=true" do
+          it "shows all problems" do
             get :show, params: {id: app.id, all_errs: true}
-            expect(controller.problems.size).to eq(2)
+
+            expect(controller.send(:problems).size).to eq(2)
           end
         end
       end
@@ -133,284 +116,202 @@ RSpec.describe AppsController, type: :controller do
         before do
           environments = ["production", "test", "development", "staging"]
           20.times do |i|
-            create(:problem, app: app, environment: environments[i % environments.length])
+            create(:errbit_problem, app: app, environment: environments[i % environments.length])
           end
         end
 
-        context "no params" do
-          it "shows errs for all environments" do
+        context "without any environment param" do
+          it "shows problems for every environment" do
             get :show, params: {id: app.id}
 
-            expect(controller.problems.size).to eq(20)
+            expect(controller.send(:problems).size).to eq(20)
           end
         end
 
-        context "environment production" do
-          it "shows errs for just production" do
+        context "with environment=production" do
+          it "filters to just production" do
             get :show, params: {id: app.id, environment: "production"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(controller.send(:problems).size).to eq(5)
           end
         end
 
-        context "environment staging" do
-          it "shows errs for just staging" do
+        context "with environment=staging" do
+          it "filters to just staging" do
             get :show, params: {id: app.id, environment: "staging"}
 
-            expect(controller.problems.size).to eq(5)
-          end
-        end
-
-        context "environment development" do
-          it "shows errs for just development" do
-            get :show, params: {id: app.id, environment: "development"}
-
-            expect(controller.problems.size).to eq(5)
-          end
-        end
-
-        context "environment test" do
-          it "shows errs for just test" do
-            get :show, params: {id: app.id, environment: "test"}
-
-            expect(controller.problems.size).to eq(5)
+            expect(controller.send(:problems).size).to eq(5)
           end
         end
       end
     end
 
-    context "logged in as a user" do
+    context "when logged in as a regular user" do
       it "finds the app even when not watching it" do
-        sign_in create(:user)
+        sign_in create(:errbit_user)
+        the_app = create(:errbit_app)
 
-        app = create(:app)
+        get :show, params: {id: the_app.id}
 
-        get :show, params: {id: app.id}
-
-        expect(controller.app).to eq(app)
+        expect(controller.send(:app)).to eq(the_app)
       end
     end
   end
 
-  context "logged in as an admin" do
-    before do
-      sign_in admin
-    end
+  context "when signed in as an admin" do
+    before { sign_in admin }
 
     describe "GET /apps/new" do
       it "instantiates a new app with a prebuilt watcher" do
         get :new
-        expect(controller.app).to be_a(App)
-        expect(controller.app).to be_new_record
-        expect(controller.app.watchers).not_to be_empty
+
+        expect(controller.send(:app)).to be_a(Errbit::App)
+        expect(controller.send(:app)).to be_new_record
+        expect(controller.send(:app).watchers).not_to be_empty
       end
 
-      it "should copy attributes from an existing app" do
-        @app = create(:app, name: "do not copy", github_repo: "test/example")
-        get :new, params: {copy_attributes_from: @app.id}
-        expect(controller.app).to be_a(App)
-        expect(controller.app).to be_new_record
-        expect(controller.app.name).to be_blank
-        expect(controller.app.github_repo).to eq("test/example")
+      it "copies attributes from an existing app when copy_attributes_from is set" do
+        @existing = create(:errbit_app, name: "do not copy", github_repo: "test/example")
+
+        get :new, params: {copy_attributes_from: @existing.id}
+
+        expect(controller.send(:app)).to be_a(Errbit::App)
+        expect(controller.send(:app)).to be_new_record
+        expect(controller.send(:app).name).to be_blank
+        expect(controller.send(:app).github_repo).to eq("test/example")
       end
     end
 
     describe "GET /apps/:id/edit" do
       it "finds the correct app" do
-        app = create(:app)
+        the_app = create(:errbit_app)
 
-        get :edit, params: {id: app.id}
+        get :edit, params: {id: the_app.id}
 
-        expect(controller.app).to eq(app)
+        expect(controller.send(:app)).to eq(the_app)
       end
     end
 
     describe "POST /apps" do
-      before do
-        @app = create(:app)
+      context "with a successful create" do
+        it "redirects to the app page" do
+          post :create, params: {app: app_params}
 
-        allow(App).to receive(:new).and_return(@app)
-      end
-
-      context "when the create is successful" do
-        before do
-          expect(@app).to receive(:save).and_return(true)
+          expect(response).to redirect_to(app_path(assigns(:app)))
         end
 
-        it "should redirect to the app page" do
+        it "flashes a success message" do
           post :create, params: {app: app_params}
-          expect(response).to redirect_to(app_path(@app))
-        end
 
-        it "should display a message" do
-          post :create, params: {app: app_params}
           expect(request.flash[:success]).to match(/success/)
         end
       end
     end
 
     describe "PATCH /apps/:id" do
-      before do
-        @app = create(:app)
-      end
+      let!(:the_app) { create(:errbit_app) }
 
-      context "when the update is successful" do
-        it "should redirect to the app page" do
-          patch :update, params: {id: @app.id, app: app_params}
-          expect(response).to redirect_to(app_path(@app))
+      context "with a successful update" do
+        it "redirects to the app page" do
+          patch :update, params: {id: the_app.id, app: app_params}
+
+          expect(response).to redirect_to(app_path(the_app))
         end
 
-        it "should display a message" do
-          patch :update, params: {id: @app.id, app: app_params}
+        it "flashes a success message" do
+          patch :update, params: {id: the_app.id, app: app_params}
+
           expect(request.flash[:success]).to match(/success/)
         end
       end
 
-      context "changing name" do
-        it "should redirect to app page" do
-          id = @app.id
-          patch :update, params: {id: id, app: {name: "new name"}}
-          expect(response).to redirect_to(app_path(id))
+      context "when changing the name" do
+        it "redirects to the app page" do
+          patch :update, params: {id: the_app.id, app: {name: "new name"}}
+
+          expect(response).to redirect_to(app_path(the_app))
         end
       end
 
-      context "when the update is unsuccessful" do
-        it "should render the edit page" do
-          patch :update, params: {id: @app.id, app: {name: ""}}
+      context "with an unsuccessful update" do
+        it "renders the edit page" do
+          patch :update, params: {id: the_app.id, app: {name: ""}}
+
           expect(response).to render_template(:edit)
         end
       end
 
-      context "changing email_at_notices" do
-        before do
-          allow(Errbit::Config)
-            .to receive(:per_app_email_at_notices).and_return(true)
+      context "when changing email_at_notices" do
+        before { allow(Errbit::Config).to receive(:per_app_email_at_notices).and_return(true) }
+
+        it "parses legal CSV values" do
+          patch :update, params: {id: the_app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
+
+          the_app.reload
+
+          expect(the_app.email_at_notices).to eq([1, 4, 7, 8, 10])
         end
 
-        it "should parse legal csv values" do
-          patch :update, params: {id: @app.id, app: {email_at_notices: "1,   4,      7,8,  10"}}
+        context "when CSV parsing fails" do
+          it "resets to the default value" do
+            patch :update, params: {id: the_app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
 
-          @app.reload
+            the_app.reload
 
-          expect(@app.email_at_notices).to eq([1, 4, 7, 8, 10])
-        end
-
-        context "failed parsing of CSV" do
-          it "should set the default value" do
-            @app = create(:app, email_at_notices: [1, 2, 3, 4])
-
-            patch :update, params: {id: @app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
-
-            @app.reload
-
-            expect(@app.email_at_notices).to eq(Errbit::Config.email_at_notices)
+            expect(the_app.email_at_notices).to eq(Errbit::Config.email_at_notices)
           end
 
-          it "should display a message" do
-            patch :update, params: {id: @app.id, app: {email_at_notices: "qwertyuiop"}}
+          it "flashes an error message" do
+            patch :update, params: {id: the_app.id, app: {email_at_notices: "qwertyuiop"}}
 
             expect(request.flash[:error]).to match(/Couldn't parse/)
           end
         end
       end
 
-      context "setting up issue tracker" do
-        context "unknown tracker type" do
-          before do
-            patch :update, params: {
-              id: @app.id,
-              app: {
-                issue_tracker_attributes: {
-                  type_tracker: "unknown",
-                  options: {
-                    project_id: "1234",
-                    api_token: "123123",
-                    account: "myapp"
-                  }
-                }
+      context "when setting up an issue tracker with an unknown type" do
+        before do
+          patch :update, params: {
+            id: the_app.id,
+            app: {
+              issue_tracker_attributes: {
+                type_tracker: "unknown",
+                options: {project_id: "1234", api_token: "123123", account: "myapp"}
               }
             }
-
-            @app.reload
-          end
-
-          it "should not create issue tracker" do
-            expect(@app.issue_tracker_configured?).to eq(false)
-          end
-        end
-      end
-
-      context "selecting 'use site fingerprinter'" do
-        before do
-          SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
-
-          patch :update, params: {
-            id: @app.id,
-            app: {
-              notice_fingerprinter_attributes: {
-                backtrace_lines: 42
-              },
-              use_site_fingerprinter: "1"
-            }
           }
+          the_app.reload
         end
 
-        it "should copy site fingerprinter into app fingerprinter" do
-          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except("_id", "source")
-          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except("_id", "source")
-          expect(fingerprinter_attrs).to eq(expected_attrs)
-        end
-      end
-
-      context "not selecting 'use site fingerprinter'" do
-        before do
-          SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
-
-          patch :update, params: {
-            id: @app.id,
-            app: {
-              notice_fingerprinter_attributes: {
-                backtrace_lines: 42
-              },
-              use_site_fingerprinter: "0"
-            }
-          }
-        end
-
-        it "shouldn't copy site fingerprinter into app fingerprinter" do
-          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except("_id", "source")
-          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except("_id", "source")
-          expect(fingerprinter_attrs).not_to eq(expected_attrs)
-          expect(@app.notice_fingerprinter.backtrace_lines).to eq(42)
+        it "does not create an issue tracker" do
+          expect(the_app.issue_tracker_configured?).to eq(false)
         end
       end
     end
 
     describe "DELETE /apps/:id" do
-      before do
-        @app = create(:app)
+      let!(:the_app) { create(:errbit_app) }
+
+      it "finds the app" do
+        delete :destroy, params: {id: the_app.id}
+
+        expect(controller.send(:app)).to eq(the_app)
       end
 
-      it "should find the app" do
-        delete :destroy, params: {id: @app.id}
-        expect(controller.app).to eq(@app)
+      it "destroys the app" do
+        delete :destroy, params: {id: the_app.id}
+
+        expect { the_app.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      it "should destroy the app" do
-        delete :destroy, params: {id: @app.id}
-        expect do
-          @app.reload
-        end.to raise_error(Mongoid::Errors::DocumentNotFound)
-      end
-
-      it "should display a message" do
-        delete :destroy, params: {id: @app.id}
+      it "flashes a success message" do
+        delete :destroy, params: {id: the_app.id}
 
         expect(request.flash[:success]).to match(/success/)
       end
 
-      it "should redirect to the apps page" do
-        delete :destroy, params: {id: @app.id}
+      it "redirects to the apps page" do
+        delete :destroy, params: {id: the_app.id}
 
         expect(response).to redirect_to(apps_path)
       end
@@ -418,28 +319,25 @@ RSpec.describe AppsController, type: :controller do
   end
 
   describe "POST /apps/:id/regenerate_api_key" do
-    context "like watcher" do
-      before do
-        sign_in watcher.user
-      end
+    context "when called by a watcher (non-admin)" do
+      before { sign_in watcher.user }
 
-      it "redirect to root with flash error" do
-        post :regenerate_api_key, params: {id: "foo"}
+      it "redirects to root path" do
+        post :regenerate_api_key, params: {id: app.id}
 
         expect(request).to redirect_to(root_path)
       end
     end
 
-    context "like admin" do
-      before do
-        sign_in admin
-      end
+    context "when called by an admin" do
+      before { sign_in admin }
 
-      it "redirect_to app view" do
-        expect do
+      it "regenerates the api_key and redirects to the edit page" do
+        expect {
           post :regenerate_api_key, params: {id: app.id}
-          expect(request).to redirect_to edit_app_path(app)
-        end.to change { app.reload.api_key }
+        }.to change { app.reload.api_key }
+
+        expect(request).to redirect_to(edit_app_path(app))
       end
     end
   end
@@ -447,8 +345,8 @@ RSpec.describe AppsController, type: :controller do
   describe "GET /apps/search" do
     before do
       sign_in user
-      @app_1 = create(:app, name: "Foo")
-      @app_2 = create(:app, name: "Bar")
+      @app_foo = create(:errbit_app, name: "Foo")
+      @app_bar = create(:errbit_app, name: "Bar")
     end
 
     it "renders successfully" do
@@ -457,24 +355,23 @@ RSpec.describe AppsController, type: :controller do
       expect(response).to be_successful
     end
 
-    it "renders index template" do
+    it "renders the index template" do
       get :search
 
       expect(response).to render_template("apps/index")
     end
 
-    it "searches problems for given string" do
-      get :search, params: {search: "\"Foo\""}
+    it "filters apps by the search string" do
+      get :search, params: {search: "Foo"}
 
-      expect(controller.apps).to include(@app_1)
-      expect(controller.apps).not_to include(@app_2)
+      expect(controller.send(:apps).map(&:object)).to include(@app_foo)
+      expect(controller.send(:apps).map(&:object)).not_to include(@app_bar)
     end
 
-    it "works when given string is empty" do
+    it "returns every app when the search string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.apps).to include(@app_1)
-      expect(controller.apps).to include(@app_2)
+      expect(controller.send(:apps).map(&:object)).to include(@app_foo, @app_bar)
     end
   end
 end
