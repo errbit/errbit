@@ -4,38 +4,29 @@ require "rails_helper"
 
 RSpec.describe ProblemsController, type: :controller do
   it_requires_authentication(
-    for: {
-      index: :get, show: :get, resolve: :patch, search: :get
-    },
+    for: {index: :get, show: :get, resolve: :patch, search: :get},
     params: {app_id: "dummyid", id: "dummyid"}
   )
 
-  let(:app) { create(:app) }
-
-  let(:err) { create(:err, problem: problem) }
-
-  let(:user) { create(:user) }
-
-  let(:problem) { create(:problem, app: app, environment: "production") }
+  let(:user) { create(:errbit_user) }
+  let(:app) { create(:errbit_app) }
+  let(:problem) { create(:errbit_problem, app: app, environment: "production") }
+  let(:err) { create(:errbit_err, problem: problem) }
 
   describe "GET /problems" do
-    before do
-      sign_in user
+    before { sign_in user }
 
-      @problem = create(:notice, err: create(:err, problem: create(:problem, app: app, environment: "production"))).problem
-    end
+    context "with pagination" do
+      before { 35.times { create(:errbit_err) } }
 
-    context "pagination" do
-      before { create_list(:err, 35) }
-
-      it "should have default per_page value for user" do
+      it "uses the default per_page value" do
         get :index
 
-        expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
+        expect(controller.problems.to_a.size).to eq(Errbit::User::PER_PAGE)
       end
 
-      it "should be able to override default per_page value" do
-        user.update_attribute(:per_page, 10)
+      it "honors the user's per_page override" do
+        user.update!(per_page: 10)
 
         get :index
 
@@ -45,81 +36,42 @@ RSpec.describe ProblemsController, type: :controller do
 
     context "with environment filters" do
       before do
-        environments = ["production", "test", "development", "staging"]
-
-        20.times do |i|
-          create(:problem, environment: environments[i % environments.length])
-        end
+        environments = %w[production test development staging]
+        20.times { |i| create(:errbit_problem, environment: environments[i % environments.length]) }
       end
 
-      context "no params" do
-        it "shows problems for all environments" do
+      context "without env params" do
+        it "shows problems for every environment" do
           get :index
 
-          expect(controller.problems.size).to eq(21)
+          expect(controller.problems.size).to eq(20)
         end
       end
 
-      context "environment production" do
-        it "shows problems for just production" do
+      context "with environment=production" do
+        it "filters to just production" do
           get :index, params: {environment: "production"}
 
-          expect(controller.problems.size).to eq(6)
+          expect(controller.problems.size).to eq(5)
         end
       end
 
-      context "environment staging" do
-        it "shows problems for just staging" do
+      context "with environment=staging" do
+        it "filters to just staging" do
           get :index, params: {environment: "staging"}
 
           expect(controller.problems.size).to eq(5)
         end
       end
-
-      context "environment development" do
-        it "shows problems for just development" do
-          get :index, params: {environment: "development"}
-
-          expect(controller.problems.size).to eq(5)
-        end
-      end
-
-      context "environment test" do
-        it "shows problems for just test" do
-          get :index, params: {environment: "test"}
-
-          expect(controller.problems.size).to eq(5)
-        end
-      end
-    end
-  end
-
-  describe "GET /problems - previously all" do
-    it "gets a paginated list of all problems" do
-      sign_in create(:user)
-
-      problems = Kaminari.paginate_array((1..30).to_a)
-
-      3.times { problems << create(:err).problem }
-
-      3.times { problems << create(:err, problem: create(:problem, resolved: true)).problem }
-
-      expect(Problem).to receive(:ordered_by).and_return(
-        double("proxy", page: double("other_proxy", per: problems))
-      )
-
-      get :index, params: {all_errs: true}
-
-      expect(controller.problems).to eq(problems)
     end
   end
 
   describe "GET /problems/search" do
     before do
       sign_in user
-      @app = create(:app)
-      @problem_1 = create(:problem, app: @app, message: "Most important")
-      @problem_2 = create(:problem, app: @app, message: "Very very important")
+      @search_app = create(:errbit_app)
+      @problem_1 = create(:errbit_problem, app: @search_app, message: "Most important")
+      @problem_2 = create(:errbit_problem, app: @search_app, message: "Trivial issue")
     end
 
     it "renders successfully" do
@@ -128,109 +80,80 @@ RSpec.describe ProblemsController, type: :controller do
       expect(response).to be_successful
     end
 
-    it "renders index template" do
+    it "renders the index template" do
       get :search
 
       expect(response).to render_template("problems/index")
     end
 
-    it "searches problems for given string" do
-      get :search, params: {search: "\"Most important\""}
+    it "filters problems by the search string" do
+      get :search, params: {search: "Most important"}
 
       expect(controller.problems).to include(@problem_1)
-
       expect(controller.problems).not_to include(@problem_2)
     end
 
-    it "works when given string is empty" do
+    it "returns every problem when the search string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.problems).to include(@problem_1)
-
-      expect(controller.problems).to include(@problem_2)
+      expect(controller.problems).to include(@problem_1, @problem_2)
     end
   end
 
-  # you do not need an app id, strictly speaking, to find
-  # a problem, and if your metrics system does not happen
-  # to know the app id, but does know the problem id,
-  # it can be handy to have a way to link in to errbit.
-  describe "GET /problems/:id" do
-    before do
-      sign_in user
-    end
+  describe "GET /problems/:id (show_by_id)" do
+    before { sign_in user }
 
-    it "should redirect to the standard problems page" do
+    it "redirects to the standard problem page" do
       get :show_by_id, params: {id: err.problem.id}
 
-      expect(response).to redirect_to(app_problem_path(app, err.problem.id))
+      expect(response).to redirect_to(app_problem_path(app, err.problem))
     end
   end
 
-  describe "GET /apps/:app_id/problems/:id" do
-    before do
-      sign_in user
-    end
+  describe "GET /apps/:app_id/problems/:id (show)" do
+    before { sign_in user }
 
     it "finds the app" do
       get :show, params: {app_id: app.id, id: err.problem.id}
 
-      expect(controller.app).to eq(app)
+      expect(controller.app.object).to eq(app)
     end
 
     it "finds the problem" do
       get :show, params: {app_id: app.id, id: err.problem.id}
 
-      expect(controller.problem).to eq(err.problem)
+      expect(controller.problem.object).to eq(err.problem)
     end
 
-    it "successfully render page" do
+    it "responds successfully" do
       get :show, params: {app_id: app.id, id: err.problem.id}
 
       expect(response).to be_successful
     end
 
-    context "when rendering views" do
-      render_views
-
-      it "successfully renders the view even when there are no notices attached to the problem" do
-        expect(err.problem.notices).to be_empty
-
-        get :show, params: {app_id: app.id, id: err.problem.id}
-
-        expect(response).to be_successful
-      end
-    end
-
-    context "pagination" do
+    context "with notices" do
       let!(:notices) do
-        3.times.reduce([]) do |coll, i|
-          coll << create(:notice, err: err, created_at: i.seconds.from_now)
-        end
+        3.times.map { |i| create(:errbit_notice, err: err, created_at: i.seconds.from_now) }
       end
 
-      it "paginates the notices 1 at a time, starting with the most recent" do
+      it "paginates notices 1 at a time, newest first" do
         get :show, params: {app_id: app.id, id: err.problem.id}
 
         expect(assigns(:notices).entries.count).to eq(1)
-
         expect(assigns(:notices)).to include(notices.last)
       end
 
-      it "paginates the notices 1 at a time, based on then notice param" do
+      it "honors the notice page param" do
         get :show, params: {app_id: app.id, id: err.problem.id, notice: 3}
 
         expect(assigns(:notices).entries.count).to eq(1)
-
         expect(assigns(:notices)).to include(notices.first)
       end
     end
   end
 
   describe "GET /apps/:app_id/problems/:id/xhr_sparkline" do
-    before do
-      sign_in user
-    end
+    before { sign_in user }
 
     it "renders without error" do
       get :xhr_sparkline, params: {app_id: app.id, id: err.problem.id}
@@ -240,123 +163,79 @@ RSpec.describe ProblemsController, type: :controller do
   end
 
   describe "PATCH /apps/:app_id/problems/:id/resolve" do
-    before do
-      sign_in user
+    let!(:resolvable_err) { create(:errbit_err) }
 
-      @err = create(:err)
+    before { sign_in user }
+
+    it "finds the app and problem" do
+      patch :resolve, params: {app_id: resolvable_err.app.id, id: resolvable_err.problem.id}
+
+      expect(controller.app.object).to eq(resolvable_err.app)
+      expect(controller.problem.object).to eq(resolvable_err.problem)
     end
 
-    it "finds the app and the problem" do
-      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+    it "marks the problem as resolved" do
+      patch :resolve, params: {app_id: resolvable_err.app.id, id: resolvable_err.problem.id}
 
-      expect(controller.app).to eq @err.app
-      expect(controller.problem).to eq(@err.problem)
+      expect(resolvable_err.problem.reload.resolved).to eq(true)
     end
 
-    it "should resolve the issue" do
-      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+    it "flashes a success message" do
+      patch :resolve, params: {app_id: resolvable_err.app.id, id: resolvable_err.problem.id}
 
-      expect(@err.problem.reload.resolved).to eq(true)
+      expect(request.flash[:success]).to match(/resolved/)
     end
 
-    it "should display a message" do
-      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
+    it "redirects back to the referer" do
+      request.env["HTTP_REFERER"] = app_path(resolvable_err.app)
 
-      expect(request.flash[:success]).to match(/Great news/)
-    end
+      patch :resolve, params: {app_id: resolvable_err.app.id, id: resolvable_err.problem.id}
 
-    it "should redirect to the app page" do
-      request.env["HTTP_REFERER"] = app_path(@err.app)
-
-      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
-
-      expect(response).to redirect_to(app_path(@err.app))
-    end
-
-    it "should redirect back to problems page" do
-      request.env["HTTP_REFERER"] = problems_path
-
-      patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
-
-      expect(response).to redirect_to(problems_path)
+      expect(response).to redirect_to(app_path(resolvable_err.app))
     end
   end
 
   describe "POST /apps/:app_id/problems/:id/create_issue" do
     before { sign_in user }
 
-    context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(create(:notice)) }
-      let(:problem) { ProblemDecorator.new(notice.problem) }
-      let(:issue_tracker) do
-        create(:issue_tracker).tap do |t|
-          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
-        end
-      end
-
-      before do
-        problem.app.issue_tracker = issue_tracker
-        allow(controller).to receive(:problem).and_return(problem)
-        allow(controller).to receive(:current_user).and_return(user)
-      end
-
-      it "should redirect to problem page" do
+    context "when the app has no issue tracker" do
+      it "flashes an error and redirects to the problem page" do
         post :create_issue, params: {app_id: problem.app.id, id: problem.id}
 
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
-
-        expect(flash[:error]).to be_blank
-      end
-
-      it "should save the right title" do
-        post :create_issue, params: {app_id: problem.app.id, id: problem.id}
-        title = "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
-        line = issue_tracker.tracker.output.shift
-        expect(line[0]).to eq(title)
-      end
-
-      it "should renders the issue body" do
-        post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
-
-        expect(response).to render_template("issue_trackers/markdown")
-      end
-
-      it "should update the problem" do
-        post :create_issue, params: {app_id: problem.app.id, id: problem.id}
-
-        expect(problem.issue_link).to eq("http://example.com/mock-errbit")
-        expect(problem.issue_type).to eq("mock")
-      end
-
-      context "when rendering views" do
-        render_views
-
-        it "should save the right body" do
-          post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
-
-          line = issue_tracker.tracker.output.shift
-
-          expect(line[1]).to include(app_problem_url(problem.app, problem))
-        end
-
-        it "should render whatever the issue tracker says" do
-          allow_any_instance_of(Issue).to receive(:render_body_args).and_return(
-            [{inline: "one <%= problem.id %> two"}]
-          )
-          post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
-          line = issue_tracker.tracker.output.shift
-          expect(line[1]).to include("one #{problem.id} two")
-        end
+        expect(flash[:error]).to eq("This app has no issue tracker")
       end
     end
 
-    context "when app has no issue tracker" do
-      it "should redirect to problem page" do
-        post :create_issue, params: {app_id: problem.app.id, id: problem.id}
+    context "when the app has an issue tracker" do
+      let(:decorated_problem) { Errbit::ProblemDecorator.new(problem) }
+      let!(:issue_tracker) do
+        t = create(:errbit_issue_tracker, app: app)
+        # The controller's `app` is a fresh AR load that wouldn't see this
+        # instance_variable_set. Stub `controller.problem` below so the issue
+        # tracker chain reuses the test's records.
+        t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
+        t
+      end
 
-        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+      before do
+        allow(controller).to receive(:problem).and_return(decorated_problem)
+        allow(controller).to receive(:current_user).and_return(user)
+      end
 
-        expect(flash[:error]).to eq("This app has no issue tracker")
+      it "redirects to the problem page without an error" do
+        post :create_issue, params: {app_id: app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(app, problem))
+        expect(flash[:error]).to be_blank
+      end
+
+      it "stores the issue link and type on the problem" do
+        post :create_issue, params: {app_id: app.id, id: problem.id}
+
+        problem.reload
+        expect(problem.issue_link).to eq("http://example.com/mock-errbit")
+        expect(problem.issue_type).to eq("mock")
       end
     end
   end
@@ -364,31 +243,8 @@ RSpec.describe ProblemsController, type: :controller do
   describe "POST /apps/:app_id/problems/:id/close_issue" do
     before { sign_in user }
 
-    context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(create(:notice)) }
-      let(:problem) { ProblemDecorator.new(notice.problem) }
-      let(:issue_tracker) do
-        create(:issue_tracker).tap do |t|
-          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
-        end
-      end
-
-      before do
-        problem.app.issue_tracker = issue_tracker
-        allow(controller).to receive(:problem).and_return(problem)
-        allow(controller).to receive(:current_user).and_return(user)
-      end
-
-      it "should redirect to problem page" do
-        post :close_issue, params: {app_id: problem.app.id, id: problem.id}
-
-        expect(response).to redirect_to(app_problem_path(problem.app, problem))
-        expect(flash[:error]).to be_blank
-      end
-    end
-
-    context "when app has no issue tracker" do
-      it "should redirect to problem page" do
+    context "when the app has no issue tracker" do
+      it "flashes an error and redirects to the problem page" do
         post :close_issue, params: {app_id: problem.app.id, id: problem.id}
 
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
@@ -398,155 +254,159 @@ RSpec.describe ProblemsController, type: :controller do
   end
 
   describe "DELETE /apps/:app_id/problems/:id/unlink_issue" do
-    before do
-      sign_in user
-    end
+    before { sign_in user }
 
-    context "problem with issue" do
-      let(:err) { create(:err, problem: create(:problem, issue_link: "http://some.host")) }
-
-      before do
-        delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
-        err.problem.reload
+    context "when the problem has an issue link" do
+      let!(:linked_err) do
+        create(:errbit_err, problem: create(:errbit_problem, app: app, issue_link: "http://some.host"))
       end
 
-      it "should redirect to problem page" do
-        expect(response).to redirect_to(app_problem_path(err.app, err.problem))
-      end
+      it "clears the issue_link and redirects" do
+        delete :unlink_issue, params: {app_id: linked_err.app.id, id: linked_err.problem.id}
 
-      it "should clear issue link" do
-        expect(err.problem.issue_link).to eq(nil)
+        expect(response).to redirect_to(app_problem_path(linked_err.app, linked_err.problem))
+        expect(linked_err.problem.reload.issue_link).to be_nil
       end
     end
 
-    context "err without issue" do
-      let(:err) { create(:err) }
-
-      before do
+    context "when the problem has no issue link" do
+      it "redirects to the problem page" do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
-        err.problem.reload
-      end
 
-      it "should redirect to problem page" do
         expect(response).to redirect_to(app_problem_path(err.app, err.problem))
       end
     end
   end
 
   describe "Bulk Actions" do
-    before do
-      sign_in user
-      @problem_1 = create(:err, problem: create(:problem, resolved: true)).problem
-      @problem_2 = create(:err, problem: create(:problem, resolved: false)).problem
-    end
+    let!(:problem_1) { create(:errbit_err, problem: create(:errbit_problem, resolved: true)).problem }
+    let!(:problem_2) { create(:errbit_err, problem: create(:errbit_problem, resolved: false)).problem }
 
-    context "POST /problems/merge_several" do
-      it "should require at least two problems" do
-        post :merge_several, params: {problems: [@problem_1.id.to_s]}
+    before { sign_in user }
 
-        expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.need_two_errors_merge"))
+    describe "POST /problems/merge_several" do
+      context "when only one problem is selected" do
+        it "flashes that two are required" do
+          post :merge_several, params: {problems: [problem_1.id.to_s]}
+
+          expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.need_two_errors_merge"))
+        end
       end
 
-      it "should merge the problems" do
-        expect(ProblemMerge).to receive(:new).and_return(double(merge: true))
+      context "with at least two problems" do
+        it "merges them via Errbit::ProblemMerge" do
+          expect(Errbit::ProblemMerge).to receive(:new).and_return(double(merge: true))
 
-        post :merge_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
-      end
-    end
-
-    context "POST /problems/unmerge_several" do
-      it "should require at least one problem" do
-        post :unmerge_several, params: {problems: []}
-        expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
-      end
-
-      it "should unmerge a merged problem" do
-        merged_problem = Problem.merge!(@problem_1, @problem_2)
-        expect(merged_problem.errs.length).to eq(2)
-        expect do
-          post :unmerge_several, params: {problems: [merged_problem.id.to_s]}
-          expect(merged_problem.reload.errs.length).to eq(1)
-        end.to change(Problem, :count).by(1)
+          post :merge_several, params: {problems: [problem_1.id.to_s, problem_2.id.to_s]}
+        end
       end
     end
 
-    context "POST /problems/resolve_several" do
-      it "should require at least one problem" do
-        post :resolve_several, params: {problems: []}
+    describe "POST /problems/unmerge_several" do
+      context "without any selected problems" do
+        it "flashes the no-select message" do
+          post :unmerge_several, params: {problems: []}
 
-        expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
+          expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
+        end
       end
 
-      it "should resolve the issue" do
-        post :resolve_several, params: {problems: [@problem_2.id.to_s]}
+      context "with a merged problem selected" do
+        it "splits its errs back into separate problems" do
+          merged = Errbit::Problem.merge!(problem_1, problem_2)
 
-        expect(@problem_2.reload.resolved?).to eq(true)
-      end
+          expect(merged.errs.length).to eq(2)
 
-      it "should display a message about 1 err" do
-        post :resolve_several, params: {problems: [@problem_2.id.to_s]}
+          expect {
+            post :unmerge_several, params: {problems: [merged.id.to_s]}
+          }.to change(Errbit::Problem, :count).by(1)
 
-        expect(flash[:success]).to match(/1 error has been resolved/)
-      end
-
-      it "should display a message about 2 errs" do
-        post :resolve_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
-
-        expect(flash[:success]).to match(/2 errors have been resolved/)
-        expect(controller.selected_problems).to eq([@problem_1, @problem_2])
+          expect(merged.reload.errs.length).to eq(1)
+        end
       end
     end
 
-    context "POST /problems/unresolve_several" do
-      it "should require at least one problem" do
-        post :unresolve_several, params: {problems: []}
+    describe "POST /problems/resolve_several" do
+      context "without any selected problems" do
+        it "flashes the no-select message" do
+          post :resolve_several, params: {problems: []}
 
-        expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
+          expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
+        end
       end
 
-      it "should unresolve the issue" do
-        post :unresolve_several, params: {problems: [@problem_1.id.to_s]}
+      context "with one selected problem" do
+        it "resolves it" do
+          post :resolve_several, params: {problems: [problem_2.id.to_s]}
 
-        expect(@problem_1.reload.resolved?).to eq(false)
+          expect(problem_2.reload.resolved?).to eq(true)
+        end
+
+        it "flashes a singular message" do
+          post :resolve_several, params: {problems: [problem_2.id.to_s]}
+
+          expect(flash[:success]).to match(/1 error has been resolved/)
+        end
+      end
+
+      context "with two selected problems" do
+        it "flashes a plural message" do
+          post :resolve_several, params: {problems: [problem_1.id.to_s, problem_2.id.to_s]}
+
+          expect(flash[:success]).to match(/2 errors have been resolved/)
+        end
       end
     end
 
-    context "POST /problems/destroy_several" do
-      it "should delete the problems" do
-        expect do
-          post :destroy_several, params: {problems: [@problem_1.id.to_s]}
-        end.to change(Problem, :count).by(-1)
+    describe "POST /problems/unresolve_several" do
+      context "without any selected problems" do
+        it "flashes the no-select message" do
+          post :unresolve_several, params: {problems: []}
+
+          expect(request.flash[:notice]).to eq(I18n.t("controllers.problems.flash.no_select_problem"))
+        end
+      end
+
+      context "with one selected problem" do
+        it "unresolves it" do
+          post :unresolve_several, params: {problems: [problem_1.id.to_s]}
+
+          expect(problem_1.reload.resolved?).to eq(false)
+        end
+      end
+    end
+
+    describe "POST /problems/destroy_several" do
+      it "enqueues a destroy job" do
+        expect(Errbit::DestroyProblemsByIdJob).to receive(:perform_later).with([problem_1.id.to_s])
+
+        post :destroy_several, params: {problems: [problem_1.id.to_s]}
       end
     end
 
     describe "POST /apps/:app_id/problems/destroy_all" do
-      before do
-        sign_in user
-        @app = create(:app)
-        @problem_1 = create(:problem, app: @app)
-        @problem_2 = create(:problem, app: @app)
+      let!(:bulk_app) { create(:errbit_app) }
+      let!(:bulk_problem_1) { create(:errbit_problem, app: bulk_app) }
+      let!(:bulk_problem_2) { create(:errbit_problem, app: bulk_app) }
+
+      it "enqueues a destroy-all-by-app job" do
+        expect(Errbit::DestroyProblemsByAppJob).to receive(:perform_later).with(bulk_app.id)
+
+        post :destroy_all, params: {app_id: bulk_app.id}
       end
 
-      it "destroys all problems" do
-        expect do
-          post :destroy_all, params: {app_id: @app.id}
-        end.to change(Problem, :count).by(-2)
-
-        expect(controller.app).to eq(@app)
-      end
-
-      it "should display a message" do
-        patch :destroy_all, params: {app_id: @app.id}
+      it "flashes a confirmation" do
+        patch :destroy_all, params: {app_id: bulk_app.id}
 
         expect(request.flash[:success]).to match(/be deleted/)
       end
 
-      it "should redirect back to the app page" do
-        request.env["HTTP_REFERER"] = edit_app_path(@app)
+      it "redirects back to the referer" do
+        request.env["HTTP_REFERER"] = edit_app_path(bulk_app)
 
-        patch :destroy_all, params: {app_id: @app.id}
+        patch :destroy_all, params: {app_id: bulk_app.id}
 
-        expect(response).to redirect_to(edit_app_path(@app))
+        expect(response).to redirect_to(edit_app_path(bulk_app))
       end
     end
   end

@@ -2,6 +2,12 @@
 
 module Errbit
   class Problem < ApplicationRecord
+    # Routes (`resources :problems`, nested under apps), form helpers, partial
+    # paths, and i18n scopes still use the un-namespaced "problem" key.
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, nil, "Problem")
+    end
+
     CACHED_NOTICE_ATTRIBUTES = {
       messages: :message,
       hosts: :host,
@@ -41,6 +47,23 @@ module Errbit
     scope :unresolved, -> { where(resolved: false) }
     scope :ordered, -> { order(last_notice_at: :desc) }
     scope :for_apps, ->(apps) { where(errbit_app_id: apps.map(&:id)) }
+
+    # If `value` matches an existing notice id, return that notice's problem.
+    # Otherwise LIKE-search the cached text columns. Mirrors the Mongoid
+    # `$text` scope while staying within plain SQL.
+    scope :search, lambda { |value|
+      notice = Errbit::Notice.where(id: value).first
+      next where(id: notice.err.errbit_problem_id) if notice
+
+      pattern = "%#{value}%"
+      where(
+        arel_table[:error_class].matches(pattern)
+          .or(arel_table[:message].matches(pattern))
+          .or(arel_table[:app_name].matches(pattern))
+          .or(arel_table[:environment].matches(pattern))
+          .or(arel_table[:where].matches(pattern))
+      )
+    }
 
     def self.all_else_unresolved(fetch_all)
       fetch_all ? all : where(resolved: false)
@@ -136,6 +159,30 @@ module Errbit
 
     def link_text
       message.presence || error_class
+    end
+
+    def self.merge!(*problems)
+      result = Errbit::ProblemMerge.new(problems).merge
+      result.reload
+    end
+
+    def merged?
+      errs.length > 1
+    end
+
+    def unmerge!
+      attrs = {error_class: error_class, environment: environment}
+      problem_errs = errs.to_a
+
+      new_problems = [self]
+      (problem_errs[1..] || []).each do |err|
+        new_problems << app.problems.create(attrs)
+        err.update!(problem: new_problems.last)
+      end
+
+      errs.reset
+      new_problems.each(&:recache)
+      new_problems
     end
 
     def cache_app_attributes
