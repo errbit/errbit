@@ -32,7 +32,7 @@ module Api
 
         report.generate_notice!
         render status: :created, json: {
-          id: report.notice.id,
+          id: report.notice.id.to_s,
           url: report.problem.url
         }
       rescue AirbrakeApi::ParamsError
