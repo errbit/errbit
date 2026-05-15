@@ -3,28 +3,21 @@
 require "rails_helper"
 
 RSpec.describe WatchersController, type: :controller do
-  let(:user) { create(:user) }
-  let(:problem) { create(:problem) }
+  let(:user) { create(:errbit_user) }
 
   before { sign_in user }
 
   describe "#create" do
-    let(:app) { create(:app) }
+    let(:app) { create(:errbit_app) }
 
-    context "successful watcher create" do
-      before do
-        post :create, params: {app_id: app.id}
+    context "when create succeeds" do
+      before { post :create, params: {app_id: app.id} }
 
-        problem.reload
+      it "adds the current user as an Errbit::Watcher on the app" do
+        expect(app.watchers.reload.first.user).to eq(user)
       end
 
-      it "should be watching" do
-        app.reload
-
-        expect(app.watchers.first.user_id).to eq(user.id)
-      end
-
-      it "should redirect to app page" do
+      it "redirects to the app page" do
         expect(response).to redirect_to(app_path(app))
       end
     end
@@ -32,25 +25,22 @@ RSpec.describe WatchersController, type: :controller do
 
   describe "#destroy" do
     let(:app) do
-      a = create(:app)
-      create(:user_watcher, app: a, user: user)
+      a = create(:errbit_app)
+      create(:errbit_user_watcher, app: a, user: user)
       a
     end
 
-    context "successful watcher deletion" do
-      let(:watcher) { app.watchers.first }
+    context "when destroy succeeds" do
+      let!(:watcher) { app.watchers.find_by(errbit_user_id: user.id) }
 
-      before do
-        delete :destroy, params: {app_id: app.id}
+      before { delete :destroy, params: {app_id: app.id} }
 
-        problem.reload
+      it "removes the watcher" do
+        expect(Errbit::Watcher.where(id: watcher.id)).to be_empty
+        expect(app.watchers.reload).to be_empty
       end
 
-      it "should delete the watcher" do
-        expect(app.watchers.detect { |w| w.id.to_s == watcher.id }).to eq(nil)
-      end
-
-      it "should redirect to app page" do
+      it "redirects to the app page" do
         expect(response).to redirect_to(app_path(app))
       end
     end
