@@ -25,6 +25,10 @@ module Errbit
       actual_comments = Errbit::Comment.where(errbit_problem_id: merged_problem.id).count
       merged_problem.update_column(:comments_count, actual_comments)
 
+      # update_all also leaves the in-memory errs/comments collections stale.
+      # Reset them so callers see the moved rows on the next access.
+      merged_problem.errs.reset
+      merged_problem.comments.reset
       merged_problem.recache
       merged_problem
     end
