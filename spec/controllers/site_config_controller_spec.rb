@@ -8,18 +8,20 @@ RSpec.describe SiteConfigController, type: :controller do
     update: :patch
   }
 
-  let(:admin) { create(:user, admin: true) }
+  let(:admin) { create(:errbit_user, admin: true) }
 
   before { sign_in admin }
 
   describe "#index" do
-    it "has an index action" do
+    it "responds successfully" do
       get :index
+
+      expect(response).to be_successful
     end
   end
 
   describe "#update" do
-    it "updates" do
+    it "writes the submitted fingerprinter fields to SiteConfig" do
       patch :update, params: {
         site_config: {
           notice_fingerprinter_attributes: {
@@ -29,19 +31,15 @@ RSpec.describe SiteConfigController, type: :controller do
         }
       }
 
-      fingerprinter = SiteConfig.document.notice_fingerprinter
+      document = Errbit::SiteConfig.document
 
-      expect(fingerprinter.environment_name).to eq(false)
-      expect(fingerprinter.backtrace_lines).to eq(3)
+      expect(document.environment_name).to eq(false)
+      expect(document.backtrace_lines).to eq(3)
     end
 
     it "redirects to the index" do
       patch :update, params: {
-        site_config: {
-          notice_fingerprinter_attributes: {
-            error_class: true
-          }
-        }
+        site_config: {notice_fingerprinter_attributes: {error_class: true}}
       }
 
       expect(response).to redirect_to(site_config_index_path)
@@ -49,45 +47,66 @@ RSpec.describe SiteConfigController, type: :controller do
 
     it "flashes a confirmation" do
       patch :update, params: {
-        site_config: {
-          notice_fingerprinter_attributes: {
-            error_class: true
-          }
-        }
+        site_config: {notice_fingerprinter_attributes: {error_class: true}}
       }
 
-      expect(request.flash[:success]).to eq "Updated site config"
+      expect(request.flash[:success]).to eq("Updated site config")
     end
 
-    it "updates apps that are using site wide notice fingerprinter" do
-      patch :update, params: {
-        site_config: {
-          notice_fingerprinter_attributes: {
-            backtrace_lines: 10,
-            environment_name: false
+    context "with an Errbit::App that follows the site-wide fingerprinter" do
+      let!(:app) do
+        a = create(:errbit_app)
+        a.create_notice_fingerprinter(
+          error_class: true,
+          message: true,
+          backtrace_lines: -1,
+          component: true,
+          action: true,
+          environment_name: true,
+          source: Errbit::SiteConfig::CONFIG_SOURCE_SITE
+        )
+        a
+      end
+
+      it "propagates the change to the app's fingerprinter" do
+        patch :update, params: {
+          site_config: {
+            notice_fingerprinter_attributes: {backtrace_lines: 11, environment_name: false}
           }
         }
-      }
 
-      app = App.new(name: "my_app")
-      app.save
+        app.reload
+        expect(app.notice_fingerprinter.backtrace_lines).to eq(11)
+        expect(app.notice_fingerprinter.environment_name).to eq(false)
+      end
+    end
 
-      expect(app.notice_fingerprinter.backtrace_lines).to eq(10)
-      expect(app.notice_fingerprinter.environment_name).to eq(false)
+    context "with an Errbit::App that has opted into a per-app fingerprinter" do
+      let!(:app) do
+        a = create(:errbit_app)
+        a.create_notice_fingerprinter(
+          error_class: true,
+          message: true,
+          backtrace_lines: 5,
+          component: true,
+          action: true,
+          environment_name: true,
+          source: Errbit::SiteConfig::CONFIG_SOURCE_APP
+        )
+        a
+      end
 
-      patch :update, params: {
-        site_config: {
-          notice_fingerprinter_attributes: {
-            backtrace_lines: 11,
-            environment_name: true
+      it "leaves the app's fingerprinter untouched" do
+        patch :update, params: {
+          site_config: {
+            notice_fingerprinter_attributes: {backtrace_lines: 99, environment_name: false}
           }
         }
-      }
 
-      app.reload
-
-      expect(app.notice_fingerprinter.backtrace_lines).to eq(11)
-      expect(app.notice_fingerprinter.environment_name).to eq(true)
+        app.reload
+        expect(app.notice_fingerprinter.backtrace_lines).to eq(5)
+        expect(app.notice_fingerprinter.environment_name).to eq(true)
+      end
     end
   end
 end
