@@ -12,6 +12,10 @@ module Errbit
 
     validate :validate_tracker
 
+    def options
+      super&.with_indifferent_access || ActiveSupport::HashWithIndifferentAccess.new
+    end
+
     delegate :configured?, to: :tracker
     delegate :create_issue, to: :tracker
     delegate :close_issue, to: :tracker
