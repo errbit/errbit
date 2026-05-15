@@ -22,7 +22,7 @@ module Errbit
     after_create :deliver_email, if: :emailable?
 
     def deliver_email
-      Mailer.with(comment: self).comment_notification.deliver_now
+      Errbit::Mailer.with(comment: self).comment_notification.deliver_now
     end
 
     def notification_recipients
