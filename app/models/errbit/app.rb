@@ -22,6 +22,12 @@ module Errbit
       inverse_of: :app,
       dependent: :destroy
 
+    has_one :notice_fingerprinter,
+      class_name: "Errbit::NoticeFingerprinter",
+      foreign_key: :errbit_app_id,
+      inverse_of: :app,
+      dependent: :destroy
+
     before_validation :generate_api_key, on: :create
     before_save :normalize_github_repo
 
