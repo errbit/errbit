@@ -61,13 +61,8 @@ module Errbit
       def resolve
         if user.admin?
           scope.all
-        elsif user.is_a?(Errbit::User)
-          scope.where(id: user.id)
         else
-          # Transition: Devise's current_user may still be a Mongoid User while
-          # the controller acts on Errbit::User. Map across via the bson_id
-          # column so the same person can still act on their own row.
-          scope.where(bson_id: user.id.to_s)
+          scope.where(id: user.id)
         end
       end
     end

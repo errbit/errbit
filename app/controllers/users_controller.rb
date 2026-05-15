@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   def destroy
     @user = Errbit::User.find(params.expect(:id))
 
-    if same_as_current_user?(@user)
+    if @user == current_user
       flash[:error] = t(".error")
     else
       authorize @user
@@ -68,18 +68,5 @@ class UsersController < ApplicationController
     end
 
     redirect_to users_path
-  end
-
-  private
-
-  # During the Mongo→SQL port, current_user may still be a Mongoid User while
-  # the resource is an Errbit::User. They identify the same person when their
-  # bson_id links match.
-  def same_as_current_user?(user)
-    if current_user.is_a?(Errbit::User)
-      user.id == current_user.id
-    else
-      user.bson_id.present? && user.bson_id == current_user.id.to_s
-    end
   end
 end
