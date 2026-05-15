@@ -26,7 +26,7 @@ module AirbrakeApi
       end
 
       def report
-        ErrorReport.new(attributes)
+        Errbit::ErrorReport.new(attributes)
       end
 
       private
