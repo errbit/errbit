@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_232131) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_081228) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "api_key"
     t.string "asset_host"
@@ -62,6 +62,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_232131) do
     t.index ["bson_id"], name: "index_errbit_errs_on_bson_id", unique: true
     t.index ["errbit_problem_id"], name: "index_errbit_errs_on_errbit_problem_id"
     t.index ["fingerprint"], name: "index_errbit_errs_on_fingerprint"
+  end
+
+  create_table "errbit_notice_fingerprinters", force: :cascade do |t|
+    t.boolean "action", default: true, null: false
+    t.integer "backtrace_lines", default: -1, null: false
+    t.string "bson_id"
+    t.boolean "component", default: true, null: false
+    t.datetime "created_at", null: false
+    t.boolean "environment_name", default: true, null: false
+    t.integer "errbit_app_id"
+    t.boolean "error_class", default: true, null: false
+    t.boolean "message", default: true, null: false
+    t.string "source"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_notice_fingerprinters_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_notice_fingerprinters_on_errbit_app_id", unique: true
   end
 
   create_table "errbit_notices", force: :cascade do |t|
@@ -175,6 +191,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_232131) do
   add_foreign_key "errbit_comments", "errbit_problems"
   add_foreign_key "errbit_comments", "errbit_users"
   add_foreign_key "errbit_errs", "errbit_problems"
+  add_foreign_key "errbit_notice_fingerprinters", "errbit_apps"
   add_foreign_key "errbit_notices", "errbit_apps"
   add_foreign_key "errbit_notices", "errbit_backtraces"
   add_foreign_key "errbit_notices", "errbit_errs"
