@@ -36,9 +36,11 @@ module Errbit
     scope :for_errs, ->(errs) { where(errbit_err_id: errs.map(&:id)) }
 
     def message=(m)
-      truncated_m = m.truncate_bytes(MESSAGE_LENGTH_LIMIT, omission: nil)
-
-      super(m.is_a?(String) ? truncated_m : m)
+      if m.is_a?(String)
+        super(m.truncate_bytes(MESSAGE_LENGTH_LIMIT, omission: nil))
+      else
+        super
+      end
     end
 
     def user_agent
