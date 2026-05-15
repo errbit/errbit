@@ -12,6 +12,12 @@ module Errbit
       inverse_of: :user,
       dependent: :destroy
 
+    has_many :watchers,
+      class_name: "Errbit::Watcher",
+      foreign_key: :errbit_user_id,
+      inverse_of: :user,
+      dependent: :destroy
+
     before_save :ensure_authentication_token
 
     validates :name, presence: true
