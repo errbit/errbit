@@ -18,7 +18,7 @@ module Users
 
         nil
       else
-        User.create(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
+        Errbit::User.create(name: request.env["omniauth.auth"].extra.raw_info.name, email: user_email)
       end
     end
 
@@ -26,7 +26,7 @@ module Users
       github_login = request.env["omniauth.auth"].dig(:extra, :raw_info, :login)
       github_token = request.env["omniauth.auth"].dig(:credentials, :token)
       github_site_title = Errbit::Config.github_site_title
-      github_user = User.where(github_login: github_login).first || github_auto_sign_up(github_token)
+      github_user = Errbit::User.where(github_login: github_login).first || github_auto_sign_up(github_token)
 
       # If user is already signed in, link GitHub details to their account
       if current_user
@@ -58,7 +58,7 @@ module Users
     def google_oauth2
       google_uid = request.env["omniauth.auth"][:uid]
       google_email = request.env["omniauth.auth"].dig(:info, :email)
-      google_user = User.where(google_uid: google_uid).first
+      google_user = Errbit::User.where(google_uid: google_uid).first
       google_site_title = Errbit::Config.google_site_title
 
       # If user is already signed in, link google details to their account
@@ -80,8 +80,8 @@ module Users
 
         sign_in_and_redirect google_user, event: :authentication
       elsif Errbit::Config.google_auto_provision
-        if User.valid_google_domain?(google_email)
-          user = User.create_from_google_oauth2(request.env["omniauth.auth"])
+        if Errbit::User.valid_google_domain?(google_email)
+          user = Errbit::User.create_from_google_oauth2(request.env["omniauth.auth"])
 
           if user.persisted?
             flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: google_site_title

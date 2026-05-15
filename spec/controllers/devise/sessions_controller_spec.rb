@@ -10,11 +10,9 @@ RSpec.describe Devise::SessionsController, type: :controller do
       @request.env["devise.mapping"] = Devise.mappings[:user]
     end
 
-    let(:app) { create(:app) }
+    let(:user) { create(:errbit_user) }
 
-    let(:user) { create(:user) }
-
-    it "redirects to app index page if there are no apps for the user" do
+    it "redirects to app index page on successful sign-in" do
       post :create, params: {user: {"email" => user.email, "password" => user.password}}
 
       expect(response).to redirect_to(root_path)
