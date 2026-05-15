@@ -4,6 +4,12 @@ module Errbit
   class Notice < ApplicationRecord
     UNAVAILABLE = "N/A"
 
+    # Routes (`resources :notices`), form helpers, partial paths, and i18n
+    # scopes still use the un-namespaced "notice" key.
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, nil, "Notice")
+    end
+
     # Mongo will not accept index keys larger than 1,024 bytes and that includes
     # some amount of BSON encoding overhead, so keep it under 1,000 bytes to be
     # safe.
