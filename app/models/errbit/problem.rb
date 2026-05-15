@@ -77,6 +77,16 @@ module Errbit
       order(column => order)
     end
 
+    def url
+      Rails.application.routes.url_helpers.app_problem_url(
+        app, self, host: Errbit::Config.host
+      )
+    end
+
+    def notices
+      Errbit::Notice.for_errs(errs).ordered
+    end
+
     def resolve!
       update!(resolved: true, resolved_at: Time.zone.now)
     end

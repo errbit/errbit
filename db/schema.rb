@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_15_082430) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_082431) do
   create_table "errbit_apps", force: :cascade do |t|
     t.string "api_key"
     t.string "asset_host"
@@ -113,6 +113,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_082430) do
     t.index ["errbit_err_id"], name: "index_errbit_notices_on_errbit_err_id"
   end
 
+  create_table "errbit_notification_services", force: :cascade do |t|
+    t.string "api_token"
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_app_id"
+    t.string "mentions"
+    t.text "notify_at_notices"
+    t.string "room_id"
+    t.string "sender_name"
+    t.string "service"
+    t.string "service_url"
+    t.string "subdomain"
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.string "user_id"
+    t.index ["bson_id"], name: "index_errbit_notification_services_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_notification_services_on_errbit_app_id", unique: true
+    t.index ["type"], name: "index_errbit_notification_services_on_type"
+  end
+
   create_table "errbit_problems", force: :cascade do |t|
     t.string "app_name"
     t.string "bson_id"
@@ -207,6 +227,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_082430) do
   add_foreign_key "errbit_notices", "errbit_apps"
   add_foreign_key "errbit_notices", "errbit_backtraces"
   add_foreign_key "errbit_notices", "errbit_errs"
+  add_foreign_key "errbit_notification_services", "errbit_apps"
   add_foreign_key "errbit_problems", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_apps"
   add_foreign_key "errbit_watchers", "errbit_users"

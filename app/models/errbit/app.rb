@@ -34,6 +34,12 @@ module Errbit
       inverse_of: :app,
       dependent: :destroy
 
+    has_one :notification_service,
+      class_name: "Errbit::NotificationService",
+      foreign_key: :errbit_app_id,
+      inverse_of: :app,
+      dependent: :destroy
+
     before_validation :generate_api_key, on: :create
     before_save :normalize_github_repo
 
