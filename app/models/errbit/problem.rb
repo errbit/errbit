@@ -166,6 +166,40 @@ module Errbit
       result.reload
     end
 
+    # Apply a freshly-received notice to the problem's cached fields:
+    # latest environment/error_class/message/where/last_notice_at, the
+    # resolved-flag reset, the messages/hosts/user_agents digest counters,
+    # and notices_count++. Mirrors the Mongoid `cache_notice` atomic upsert
+    # in a single `UPDATE` via `save!`.
+    def self.cache_notice(id, notice)
+      problem = find(id)
+
+      problem.update!(
+        environment: notice.environment_name,
+        error_class: notice.error_class,
+        last_notice_at: notice.created_at.utc,
+        message: notice.message,
+        resolved: false,
+        resolved_at: nil,
+        where: notice.where,
+        notices_count: (problem.notices_count || 0) + 1,
+        messages: increment_hash_counter(problem.messages, Digest::MD5.hexdigest(notice.message.to_s), notice.message),
+        hosts: increment_hash_counter(problem.hosts, Digest::MD5.hexdigest(notice.host.to_s), notice.host),
+        user_agents: increment_hash_counter(problem.user_agents, Digest::MD5.hexdigest(notice.user_agent_string.to_s), notice.user_agent_string)
+      )
+
+      problem
+    end
+
+    def self.increment_hash_counter(hash, key, value)
+      result = (hash || {}).deep_dup
+      result[key] ||= {"value" => value, "count" => 0}
+      result[key]["value"] = value
+      result[key]["count"] += 1
+      result
+    end
+    private_class_method :increment_hash_counter
+
     def merged?
       errs.length > 1
     end
