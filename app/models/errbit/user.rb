@@ -4,6 +4,20 @@ module Errbit
   class User < ApplicationRecord
     PER_PAGE = 30
 
+    # During the Mongo→SQL port, routes and views still use the un-namespaced
+    # "user" key (resources :users, params[:user], user_path, …). Override
+    # model_name so Rails' form helpers, Pundit's param_key, partial paths and
+    # i18n scopes all match.
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, nil, "User")
+    end
+
+    # Pundit infers the policy class via model_name → "UserPolicy" (Mongoid).
+    # Force it back to the namespaced policy explicitly.
+    def self.policy_class
+      Errbit::UserPolicy
+    end
+
     devise(*Errbit::Config.devise_modules)
 
     has_many :comments,
