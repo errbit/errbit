@@ -35,6 +35,18 @@ module Errbit
     end
     alias_method :notify_on_errs?, :notify_on_errs
 
+    def emailable?
+      notify_on_errs? && notification_recipients.any?
+    end
+
+    def notification_recipients
+      if notify_all_users
+        (Errbit::User.all.map(&:email).reject(&:blank?) + watchers.map(&:address)).uniq
+      else
+        watchers.map(&:address)
+      end
+    end
+
     def watched_by?(user)
       watchers.where(errbit_user_id: user.id).exists?
     end

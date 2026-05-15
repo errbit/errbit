@@ -19,6 +19,12 @@ module Errbit
       inverse_of: :problem,
       dependent: :destroy
 
+    has_many :comments,
+      class_name: "Errbit::Comment",
+      foreign_key: :errbit_problem_id,
+      inverse_of: :err,
+      dependent: :destroy
+
     attribute :first_notice_at, default: -> { Time.zone.now }
     attribute :last_notice_at, default: -> { Time.zone.now }
     attribute :user_agents, default: -> { {} }
