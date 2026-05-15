@@ -6,6 +6,12 @@ module Errbit
 
     devise(*Errbit::Config.devise_modules)
 
+    has_many :comments,
+      class_name: "Errbit::Comment",
+      foreign_key: :errbit_user_id,
+      inverse_of: :user,
+      dependent: :destroy
+
     before_save :ensure_authentication_token
 
     validates :name, presence: true
