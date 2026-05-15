@@ -109,6 +109,24 @@ module Errbit
       find_by!(api_key: key)
     end
 
+    # Accepts a hash with the following attributes:
+    #
+    # * <tt>:error_class</tt>  - required to create a new Problem
+    # * <tt>:environment</tt>  - required to create a new Problem
+    # * <tt>:fingerprint</tt>  - a unique value identifying the err/notice group
+    #
+    def find_or_create_err!(attrs)
+      err = Errbit::Err.where(fingerprint: attrs[:fingerprint]).first
+      return err if err
+
+      problem = problems.create!(
+        error_class: attrs[:error_class],
+        environment: attrs[:environment],
+        app_name: name
+      )
+      problem.errs.create!(attrs.slice(:fingerprint))
+    end
+
     def attributes_for_super_diff
       {
         id: id,

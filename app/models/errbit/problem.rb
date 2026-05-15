@@ -87,6 +87,41 @@ module Errbit
       Errbit::Notice.for_errs(errs).ordered
     end
 
+    def recache
+      notice_records = notices.to_a
+
+      CACHED_NOTICE_ATTRIBUTES.each do |attr, source|
+        counts = Hash.new(0)
+        values = {}
+
+        notice_records.each do |notice|
+          value = notice.send(source) || "N/A"
+          key = Digest::MD5.hexdigest(value)
+          counts[key] += 1
+          values[key] = value
+        end
+
+        hash = counts.each_with_object({}) do |(key, count), h|
+          h[key] = {"value" => values[key], "count" => count}
+        end
+
+        send(:"#{attr}=", hash)
+      end
+
+      first_notice = notice_records.min_by(&:created_at)
+      last_notice = notice_records.max_by(&:created_at)
+
+      self.notices_count = notice_records.size
+      if first_notice
+        self.first_notice_at = first_notice.created_at
+        self.message = first_notice.message
+        self.where = first_notice.where
+      end
+      self.last_notice_at = last_notice.created_at if last_notice
+
+      save
+    end
+
     def resolve!
       update!(resolved: true, resolved_at: Time.zone.now)
     end
