@@ -2,6 +2,22 @@
 
 module Errbit
   class App < ApplicationRecord
+    include Comparable
+
+    # Routes (`resources :apps`), form helpers (`form_with model: app`), Pundit
+    # `param_key`, partial paths, and i18n scopes all live under the un-namespaced
+    # "app" key. Override `model_name` so they match even though the class is
+    # under `Errbit::`.
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, nil, "App")
+    end
+
+    # Pundit infers the policy class via model_name → "AppPolicy" (Mongoid).
+    # Force it back to the namespaced policy.
+    def self.policy_class
+      Errbit::AppPolicy
+    end
+
     serialize :email_at_notices, type: Array, coder: YAML
 
     has_many :watchers,
@@ -40,11 +56,21 @@ module Errbit
       inverse_of: :app,
       dependent: :destroy
 
+    accepts_nested_attributes_for :issue_tracker,
+      allow_destroy: true,
+      reject_if: proc { |attrs| !ErrbitPlugin::Registry.issue_trackers.keys.map(&:to_s).include?(attrs[:type_tracker].to_s) }
+    accepts_nested_attributes_for :notification_service,
+      allow_destroy: true,
+      reject_if: proc { |attrs| !Errbit::NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
+    accepts_nested_attributes_for :notice_fingerprinter
+
     before_validation :generate_api_key, on: :create
     before_save :normalize_github_repo
 
     validates :name, presence: true, uniqueness: {allow_blank: true}
     validates :api_key, presence: true, uniqueness: {allow_blank: true}
+    validates_associated :issue_tracker
+    validates_associated :notice_fingerprinter
 
     scope :search, ->(value) { where(arel_table[:name].matches("%#{value}%")) }
 
@@ -125,6 +151,56 @@ module Errbit
         app_name: name
       )
       problem.errs.create!(attrs.slice(:fingerprint))
+    end
+
+    def issue_tracker_configured?
+      issue_tracker.present? && issue_tracker.configured?
+    end
+
+    def notification_service_configured?
+      notification_service.present? &&
+        notification_service.class < Errbit::NotificationService &&
+        notification_service.configured?
+    end
+
+    def unresolved_count
+      @unresolved_count ||= problems.unresolved.count
+    end
+
+    def problem_count
+      @problem_count ||= problems.count
+    end
+
+    # Compare by unresolved errs, then by total problem count, then by name.
+    def <=>(other)
+      (other.unresolved_count <=> unresolved_count).nonzero? ||
+        (other.problem_count <=> problem_count).nonzero? ||
+        name <=> other.name
+    end
+
+    # Copy field values (and the singular relations) from another app. Used by
+    # the "New App" form's "copy attributes from existing app" feature.
+    def copy_attributes_from(app_id)
+      copy_app = Errbit::App.find_by(id: app_id)
+      return if copy_app.blank?
+
+      excluded = %w[id bson_id name created_at updated_at]
+      (copy_app.attributes.keys - excluded).each do |k|
+        send(:"#{k}=", copy_app.send(k))
+      end
+
+      if (it = copy_app.issue_tracker)
+        build_issue_tracker(it.attributes.except(*excluded, "errbit_app_id"))
+      end
+
+      if (ns = copy_app.notification_service)
+        attrs = ns.attributes.except(*excluded, "errbit_app_id")
+        build_notification_service(attrs).becomes!(ns.class)
+      end
+
+      copy_app.watchers.each do |w|
+        watchers.build(w.attributes.except(*excluded, "errbit_app_id"))
+      end
     end
 
     def attributes_for_super_diff
