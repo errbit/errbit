@@ -3,53 +3,55 @@
 require "rails_helper"
 
 RSpec.describe "Notices management", type: :request do
-  let(:errbit_app) { create(:app, api_key: "APIKEY") }
+  let!(:errbit_app) { create(:errbit_app, api_key: "APIKEY") }
+  # Errbit::ErrorReport#fingerprint calls `app.notice_fingerprinter.generate(...)`;
+  # the AR App doesn't auto-create one on .create, so seed it here.
+  let!(:notice_fingerprinter) { create(:errbit_notice_fingerprinter, app: errbit_app) }
 
-  describe "create a new notice" do
-    context "with valid notice" do
+  describe "POST /notifier_api/v2/notices" do
+    context "with a valid notice" do
       let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
-      it "save a new notice" do
-        expect do
+      it "saves a new problem for the app" do
+        expect {
           post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
-        end.to change(errbit_app.problems, :count).by(1)
+        }.to change { errbit_app.problems.count }.by(1)
       end
     end
 
-    context "with notice with empty backtrace" do
+    context "with a notice that has an empty backtrace" do
       let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice_without_line_of_backtrace.xml").read }
 
-      it "save a new notice" do
-        expect do
+      it "saves a new problem for the app" do
+        expect {
           post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
-        end.to change(errbit_app.problems, :count).by(1)
+        }.to change { errbit_app.problems.count }.by(1)
       end
     end
 
-    context "with notice with bad api_key" do
-      let(:errbit_app) { create(:app) }
-
+    context "with an unknown api_key" do
+      let!(:errbit_app) { create(:errbit_app) }
       let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
-      it "not save a new notice and return 422" do
-        expect do
+      it "returns 422 and creates no problem" do
+        expect {
           post "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to have_http_status(:unprocessable_content)
           expect(response.body).to eq("Your API key is unknown")
-        end.not_to change(errbit_app.problems, :count)
+        }.not_to change { errbit_app.problems.count }
       end
     end
 
-    context "with GET request" do
+    context "with a GET request" do
       let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
-      it "save a new notice" do
-        expect do
+      it "saves a new problem for the app" do
+        expect {
           get "/notifier_api/v2/notices", params: {data: xml}
           expect(response).to be_successful
-        end.to change(errbit_app.problems, :count).by(1)
+        }.to change { errbit_app.problems.count }.by(1)
       end
     end
   end
