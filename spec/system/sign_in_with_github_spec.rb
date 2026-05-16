@@ -3,16 +3,14 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with GitHub", type: :system, retry: 3 do
-  context "sign in via GitHub with recognized user" do
-    let!(:user) { create(:user, github_login: "biow0lf") }
+  context "when the GitHub user matches a known Errbit::User" do
+    let!(:user) { create(:errbit_user, github_login: "biow0lf") }
 
     before { expect(Errbit::Config).to receive(:github_authentication).and_return(true).twice }
-
     before { OmniAuth.config.mock_auth[:github] = Faker::Omniauth.github(name: "biow0lf") }
-
     after { OmniAuth.config.mock_auth[:github] = nil }
 
-    it "is expected to sign in user via GitHub" do
+    it "signs the user in" do
       visit root_path
 
       click_link "Sign in with GitHub"
@@ -21,8 +19,8 @@ RSpec.describe "Sign in with GitHub", type: :system, retry: 3 do
     end
   end
 
-  context "reject unrecognized user" do
-    it "is expected to reject unrecognized user" do
+  context "without a matching Errbit::User" do
+    it "rejects the unrecognized GitHub user" do
       visit root_path
 
       click_link "Sign in with GitHub"

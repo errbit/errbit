@@ -3,16 +3,14 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with Google", type: :system, retry: 3 do
-  context "sign in via Google with recognized user" do
-    let!(:user) { create(:user, google_uid: "123456789") }
+  context "when the Google user matches a known Errbit::User" do
+    let!(:user) { create(:errbit_user, google_uid: "123456789") }
 
     before { expect(Errbit::Config).to receive(:google_authentication).and_return(true) }
-
     before { OmniAuth.config.mock_auth[:google_oauth2] = Faker::Omniauth.google(uid: "123456789") }
-
     after { OmniAuth.config.mock_auth[:google_oauth2] = nil }
 
-    it "is expected to sign in user via Google" do
+    it "signs the user in" do
       visit root_path
 
       click_link "Sign in with Google"
@@ -21,8 +19,8 @@ RSpec.describe "Sign in with Google", type: :system, retry: 3 do
     end
   end
 
-  context "reject unrecognized user" do
-    it "is expected to reject unrecognized user" do
+  context "without a matching Errbit::User" do
+    it "rejects the unrecognized Google user" do
       visit root_path
 
       click_link "Sign in with Google"
