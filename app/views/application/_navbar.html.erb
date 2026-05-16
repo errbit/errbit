@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md bg-body-tertiary border rounded" aria-label="Errbit navbar">
+  <div class="container-fluid">
+    <%= link_to("Errbit", root_url, class: "navbar-brand") %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav me-auto">
+        <% if current_user %>
+          <li class="nav-item">
+            <%= link_to(t(".apps"), apps_path, class: "nav-link") %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to(t(".errors"), problems_path, class: "nav-link") %>
+          </li>
+
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to(t(".users"), users_path, class: "nav-link") %>
+            </li>
+          <% end %>
+
+          <li class="nav-item">
+            <%= link_to(t(".config"), site_config_index_path, class: "nav-link") %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to t(".edit_profile"), edit_user_path(current_user), class: "nav-link" %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to(t(".sign_out"), destroy_user_session_path, method: :delete, class: "nav-link") %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%#= link_to(t(".sign_in"), new_user_session_path, class: "nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%#= link_to(t(".sign_up"), new_user_registration_path, class: "nav-link") %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

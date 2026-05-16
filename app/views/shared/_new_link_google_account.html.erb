@@ -1,0 +1,22 @@
+<%# locals: (user:) %>
+
+<% if Errbit::Config.google_authentication && user == current_user %>
+  <span class="google">
+    <% if user.google_account? %>
+      <%= link_to user_unlink_google_path(user),
+                  method: :patch,
+                  data: {
+                    confirm: "Are you sure?"
+                  },
+                  class: "btn btn-primary" do %>
+        <%= inline_svg_tag "icons/google.svg" %> <%= "Unlink #{Errbit::Config.google_site_title} account" %>
+      <% end %>
+    <% else %>
+      <%= link_to user_google_oauth2_omniauth_authorize_path,
+                  method: :post,
+                  class: "btn btn-primary" do %>
+        <%= inline_svg_tag "icons/google.svg" %> <%= "Link #{Errbit::Config.google_site_title} account" %>
+      <% end %>
+    <% end %>
+  </span>
+<% end %>

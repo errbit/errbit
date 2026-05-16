@@ -2,23 +2,33 @@
 
 <% content_for :action_bar do %>
   <% if current_user.admin? %>
-    <span>
-      <%= link_to(new_app_path) do %>
-        <i class="fa fa-plus-circle"></i>
-        <%= t(".new_app") %>
-      <% end %>
-    </span>
+    <div class="row">
+      <div class="col-12 text-end">
+        <%= link_to new_app_path, class: "btn btn-primary" do %>
+          <%= inline_svg_tag "icons/plus-circle.svg" %> <%= t(".new_app") %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 <% end %>
 
-<section>
-  <%= render "apps/search" %>
-</section>
-
-<br>
-
-<section>
-  <div id="app_table" class="app_table">
-    <%= render "apps/table", apps: apps %>
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= t(".title") %></li>
+        </ol>
+      </nav>
+    </div>
   </div>
-</section>
+<% end %>
+
+<div class="row">
+  <%= render "apps/search" %>
+</div>
+
+<div class="row table-responsive">
+  <%= render "apps/table", apps: apps %>
+</div>
