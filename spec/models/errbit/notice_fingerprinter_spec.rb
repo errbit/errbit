@@ -28,19 +28,19 @@ RSpec.describe Errbit::NoticeFingerprinter, type: :model do
       expect(described_class.new(app: nil).valid?).to eq(true)
     end
 
-    it "can be associated to an app" do
+    it "is auto-built when its app is created" do
       app = create(:errbit_app)
-      fingerprinter = create(:errbit_notice_fingerprinter, app: app)
 
-      expect(fingerprinter.app).to eq(app)
-      expect(app.reload.notice_fingerprinter).to eq(fingerprinter)
+      expect(app.notice_fingerprinter).to be_present
+      expect(app.notice_fingerprinter.app).to eq(app)
     end
 
     it "is destroyed when its app is destroyed" do
-      fingerprinter = create(:errbit_notice_fingerprinter)
+      app = create(:errbit_app)
+      app.notice_fingerprinter # force load
 
       expect {
-        fingerprinter.app.destroy
+        app.destroy
       }.to change(described_class, :count).by(-1)
     end
   end
