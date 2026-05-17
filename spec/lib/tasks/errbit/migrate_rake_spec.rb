@@ -165,14 +165,18 @@ RSpec.describe "errbit:migrate" do
   end
 
   describe ":notice_fingerprinters" do
-    it "migrates an embedded fingerprinter linked to its app" do
+    it "merges the Mongo embedded fingerprinter onto the app's auto-built row" do
       mongo_app = App.create!(name: "FP App")
       mongo_app.notice_fingerprinter.update!(message: false, backtrace_lines: 5, source: "site")
 
+      # Errbit::App#ensure_notice_fingerprinter auto-creates the fingerprinter
+      # during :apps. The :notice_fingerprinters task then overwrites that row
+      # with the Mongo values (and stamps the bson_id). Net count delta is 0.
       invoke(:apps)
-      expect { invoke(:notice_fingerprinters) }.to change(Errbit::NoticeFingerprinter, :count).by(1)
+      expect { invoke(:notice_fingerprinters) }.not_to change(Errbit::NoticeFingerprinter, :count)
 
       ar = Errbit::App.find_by!(bson_id: mongo_app._id.to_s).reload.notice_fingerprinter
+      expect(ar.bson_id).to eq(mongo_app.notice_fingerprinter._id.to_s)
       expect(ar.message).to eq(false)
       expect(ar.backtrace_lines).to eq(5)
       expect(ar.source).to eq("site")
