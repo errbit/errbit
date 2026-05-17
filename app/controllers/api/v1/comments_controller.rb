@@ -7,11 +7,12 @@ module Api
       skip_before_action :authenticate_user!
 
       respond_to :json, :xml
-      FIELDS = ["_id", "err_id", "user_id", "body"].freeze
 
       def index
         results = benchmark("[api/v1/comments_controller/index] query time") do
-          Comment.where(err_id: params[:problem_id]).only(FIELDS).to_a
+          Errbit::Comment.where(errbit_problem_id: params[:problem_id])
+            .to_a
+            .map { |comment| serialize_comment(comment) }
         end
 
         respond_to do |format|
@@ -21,10 +22,10 @@ module Api
       end
 
       def create
-        comment = Comment.new(comment_params)
+        comment = Errbit::Comment.new(comment_params)
 
         if comment.save
-          render status: :created, json: comment
+          render status: :created, json: serialize_comment(comment)
         else
           render(
             body: {errors: comment.errors.full_messages}.to_json,
@@ -36,8 +37,20 @@ module Api
       private
 
       def comment_params
-        # merge makes a copy, merge! edits in place
-        params.require(:comment).permit(:body).merge!(user_id: current_user.id, err_id: params[:problem_id])
+        params.require(:comment).permit(:body).merge(
+          errbit_user_id: current_user.id,
+          errbit_problem_id: params[:problem_id]
+        )
+      end
+
+      # Preserve the Mongoid-era API contract: keys `_id`, `err_id`, `user_id`.
+      def serialize_comment(comment)
+        {
+          "_id" => comment.id.to_s,
+          "err_id" => comment.errbit_problem_id.to_s,
+          "user_id" => comment.errbit_user_id.to_s,
+          "body" => comment.body
+        }
       end
     end
   end

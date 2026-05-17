@@ -11,7 +11,7 @@ class NoticesController < ApplicationController
 
   def create
     # params[:data] if the notice came from a GET request, raw_post if it came via POST
-    report = ErrorReport.new(notice_params)
+    report = Errbit::ErrorReport.new(notice_params)
 
     if report.valid?
       if report.should_keep?
@@ -32,12 +32,12 @@ class NoticesController < ApplicationController
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.
   def locate
-    problem = Notice.find(params.expect(:id)).problem
+    problem = Errbit::Notice.find(params.expect(:id)).problem
     redirect_to app_problem_path(problem.app, problem)
   end
 
   def show_by_id
-    notice = Notice.find(params.expect(:id))
+    notice = Errbit::Notice.find(params.expect(:id))
     problem = notice.problem
     redirect_to app_problem_path(problem.app, problem, notice_id: notice.id)
   end

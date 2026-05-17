@@ -3,14 +3,14 @@
 require "rails_helper"
 
 RSpec.describe "apps/new.html.erb", type: :view do
-  let(:app) { stub_model(App) }
+  let(:app) { stub_model(Errbit::App) }
 
-  let(:app_decorate) { AppDecorator.new(app) }
+  let(:app_decorate) { Errbit::AppDecorator.new(app) }
 
   before do
     allow(view).to receive(:app).and_return(app)
     allow(view).to receive(:app_decorate).and_return(app_decorate)
-    allow(controller).to receive(:current_user).and_return(stub_model(User))
+    allow(controller).to receive(:current_user).and_return(stub_model(Errbit::User))
   end
 
   describe "content_for :action_bar" do
@@ -27,7 +27,7 @@ RSpec.describe "apps/new.html.erb", type: :view do
 
   context "with invalid app" do
     let(:app) do
-      app = stub_model(App)
+      app = stub_model(Errbit::App)
       app.errors.add(:base, "You must specify your")
       app
     end
