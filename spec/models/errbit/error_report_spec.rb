@@ -21,8 +21,9 @@ end
 RSpec.describe Errbit::ErrorReport, type: :model do
   let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
   let(:error_report) { described_class.new(xml) }
+  # Errbit::App#ensure_notice_fingerprinter (before_create) auto-builds the
+  # fingerprinter from SiteConfig, so this spec no longer seeds one.
   let!(:app) { create(:errbit_app, api_key: "APIKEY") }
-  let!(:notice_fingerprinter) { create(:errbit_notice_fingerprinter, app: app) }
 
   describe "#app" do
     it "finds the app by api_key" do

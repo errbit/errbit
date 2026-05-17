@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Errbit::NoticeRefingerprinter do
   let(:app) { create(:errbit_app) }
-  let!(:fingerprinter) { create(:errbit_notice_fingerprinter, app: app) }
+  let(:fingerprinter) { app.notice_fingerprinter }
 
   describe ".run" do
     context "with identical backtraces" do

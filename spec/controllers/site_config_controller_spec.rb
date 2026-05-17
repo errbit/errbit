@@ -56,7 +56,9 @@ RSpec.describe SiteConfigController, type: :controller do
     context "with an Errbit::App that follows the site-wide fingerprinter" do
       let!(:app) do
         a = create(:errbit_app)
-        a.create_notice_fingerprinter(
+        # The before_create callback auto-builds a "site"-sourced fingerprinter;
+        # update its values to the test's baseline.
+        a.notice_fingerprinter.update!(
           error_class: true,
           message: true,
           backtrace_lines: -1,
@@ -84,7 +86,7 @@ RSpec.describe SiteConfigController, type: :controller do
     context "with an Errbit::App that has opted into a per-app fingerprinter" do
       let!(:app) do
         a = create(:errbit_app)
-        a.create_notice_fingerprinter(
+        a.notice_fingerprinter.update!(
           error_class: true,
           message: true,
           backtrace_lines: 5,
