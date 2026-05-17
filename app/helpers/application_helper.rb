@@ -61,7 +61,7 @@ module ApplicationHelper
 
   def issue_tracker_types
     ErrbitPlugin::Registry.issue_trackers.map do |_, object|
-      IssueTrackerTypeDecorator.new(object)
+      Errbit::IssueTrackerTypeDecorator.new(object)
     end
   end
 
