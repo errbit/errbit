@@ -7,7 +7,7 @@ RSpec.describe "notices/_user_attributes.html.erb", type: :view do
     let(:notice) do
       user_attributes = {"foo" => {"bar" => "https://example.com"}}
 
-      create(:notice, user_attributes: user_attributes)
+      create(:errbit_notice, user_attributes: user_attributes)
     end
 
     it "renders table with user attributes" do

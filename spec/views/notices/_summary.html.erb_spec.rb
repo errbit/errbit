@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "notices/_summary.html.erb", type: :view do
-  let(:notice) { create(:notice, framework: "Rails 3.2.11") }
+  let(:notice) { create(:errbit_notice, framework: "Rails 3.2.11") }
 
   it "renders application framework" do
     render "notices/summary", notice: notice, problem: notice.problem

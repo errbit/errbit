@@ -2,6 +2,12 @@
 
 module Errbit
   class Comment < ApplicationRecord
+    # Routes (`resources :comments`), form helpers, partial paths, and i18n
+    # scopes still use the un-namespaced "comment" key.
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, nil, "Comment")
+    end
+
     belongs_to :err,
       class_name: "Errbit::Problem",
       foreign_key: :errbit_problem_id,

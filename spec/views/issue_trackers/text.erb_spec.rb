@@ -4,14 +4,14 @@ require "rails_helper"
 
 RSpec.describe "issue_trackers/text.erb", type: :view do
   let(:problem) do
-    problem = create(:problem)
-    err = create(:err, problem: problem)
-    create(:notice, err: err)
+    problem = create(:errbit_problem)
+    err = create(:errbit_err, problem: problem)
+    create(:errbit_notice, err: err)
     problem
   end
 
   before do
-    allow(view).to receive(:problem).and_return(ProblemDecorator.new(problem))
+    allow(view).to receive(:problem).and_return(Errbit::ProblemDecorator.new(problem))
   end
 
   it "has the problem url" do
