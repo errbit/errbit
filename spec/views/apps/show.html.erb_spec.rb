@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "apps/show.html.erb", type: :view do
-  let(:app) { stub_model(App) }
+  let(:app) { stub_model(Errbit::App) }
 
-  let(:user) { stub_model(User) }
+  let(:user) { stub_model(Errbit::User) }
 
   let(:action_bar) do
     view.content_for(:action_bar)
