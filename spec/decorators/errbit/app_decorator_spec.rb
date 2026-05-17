@@ -50,27 +50,31 @@ RSpec.describe Errbit::AppDecorator, type: :decorator do
   describe "#use_site_fingerprinter" do
     it "is true when notice_fingerprinter is nil" do
       app = create(:errbit_app)
+      # Errbit::App auto-builds a fingerprinter on create; explicitly drop it
+      # to exercise the nil branch of the decorator.
+      app.notice_fingerprinter.destroy
+      app.reload
 
       expect(described_class.new(app).use_site_fingerprinter).to eq(true)
     end
 
     it "is true when the fingerprinter source is nil" do
       app = create(:errbit_app)
-      create(:errbit_notice_fingerprinter, app: app, source: nil)
+      app.notice_fingerprinter.update!(source: nil)
 
       expect(described_class.new(app.reload).use_site_fingerprinter).to eq(true)
     end
 
     it "is true when the fingerprinter source is 'site'" do
       app = create(:errbit_app)
-      create(:errbit_notice_fingerprinter, app: app, source: Errbit::SiteConfig::CONFIG_SOURCE_SITE)
+      app.notice_fingerprinter.update!(source: Errbit::SiteConfig::CONFIG_SOURCE_SITE)
 
       expect(described_class.new(app.reload).use_site_fingerprinter).to eq(true)
     end
 
     it "is false when the fingerprinter source is not 'site'" do
       app = create(:errbit_app)
-      create(:errbit_notice_fingerprinter, app: app, source: Errbit::SiteConfig::CONFIG_SOURCE_APP)
+      app.notice_fingerprinter.update!(source: Errbit::SiteConfig::CONFIG_SOURCE_APP)
 
       expect(described_class.new(app.reload).use_site_fingerprinter).to eq(false)
     end

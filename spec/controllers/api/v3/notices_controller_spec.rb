@@ -4,7 +4,6 @@ require "rails_helper"
 
 RSpec.describe Api::V3::NoticesController, type: :controller do
   let(:app) { create(:errbit_app) }
-  let!(:fingerprinter) { create(:errbit_notice_fingerprinter, app: app) }
   let(:project_id) { app.api_key }
   let(:legit_params) { {project_id: project_id, key: project_id} }
   let(:legit_body) { Rails.root.join("spec/fixtures/api_v3_request.json").read }
@@ -91,7 +90,6 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
 
   it "ignores notices for older app versions" do
     older_app = create(:errbit_app, current_app_version: "2.0")
-    create(:errbit_notice_fingerprinter, app: older_app)
 
     post :create, body: legit_body, params: {project_id: older_app.api_key, key: older_app.api_key}
 
