@@ -1,1 +1,1 @@
-<%= generate_problem_ical(problem.notices.object.order_by(:created_at.asc)) %>
+<%= generate_problem_ical(problem.notices.object.reorder(created_at: :asc)) %>

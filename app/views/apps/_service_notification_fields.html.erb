@@ -4,24 +4,24 @@
   <%= f.fields_for :notification_service do |w| %>
     <div class="notification_service nested">
       <div class="choose">
-        <%= label_tag :type_none, for: label_for_attr(w, "type_notificationservice"), class: "label_radio none" do %>
-          <%= w.radio_button :type, "NotificationService", "data-section" => "none" %>
+        <%= label_tag :type_none, for: label_for_attr(w, "type_errbitnotificationservice"), class: "label_radio none" do %>
+          <%= w.radio_button :type, "Errbit::NotificationService", "data-section" => "none" %>
 
           (None)
         <% end %>
 
-        <% NotificationService.subclasses.each do |notification_service| %>
+        <% Errbit::NotificationService.subclasses.each do |notification_service| %>
           <%= label_tag "type_#{notification_service.label}:", for: label_for_attr(w, "type_#{notification_service.name.downcase.gsub(":", "")}"), class: "label_radio #{notification_service.label}" do %>
             <%= w.radio_button :type, notification_service.name, "data-section" => notification_service.label %>
 
-            <%= notification_service.name[/::(.*)Service/,1].titleize %>
+            <%= notification_service.name.demodulize.sub(/Service\z/, "").titleize %>
           <% end %>
         <% end %>
       </div>
 
-      <div class="notification_params none <%= (w.object && !(w.object.class < NotificationService)) ? "chosen" : "" %>"></div>
+      <div class="notification_params none <%= (w.object && !(w.object.class < Errbit::NotificationService)) ? "chosen" : "" %>"></div>
 
-      <% NotificationService.subclasses.each do |notification_service| %>
+      <% Errbit::NotificationService.subclasses.each do |notification_service| %>
         <div class="notification_params <%= "#{w.object.is_a?(notification_service) ? "chosen" : ""} #{notification_service.label}" %>">
           <% notification_service::FIELDS.each do |field, field_info| %>
             <%= w.label field, field_info[:label] || field.to_s.titleize %>
@@ -40,7 +40,7 @@
       <% end %>
 
       <div class="image_preloader">
-        <% (NotificationService.subclasses.map{|t| t.label } << "none").each do |notification_service| %>
+        <% (Errbit::NotificationService.subclasses.map { |t| t.label } << "none").each do |notification_service| %>
           <%= image_tag "#{notification_service}_inactive.png" %>
 
           <%= image_tag "#{notification_service}_create.png" %>
