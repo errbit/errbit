@@ -12,5 +12,11 @@ FactoryBot.define do
     server_environment { {"environment-name" => "production"} }
     request { {"component" => "foo", "action" => "bar"} }
     notifier { {"name" => "Notifier", "version" => "1", "url" => "http://toad.com"} }
+
+    after(:create) do |notice|
+      Errbit::Problem.cache_notice(notice.err.errbit_problem_id, notice)
+
+      notice.problem.reload
+    end
   end
 end
