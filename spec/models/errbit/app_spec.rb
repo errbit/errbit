@@ -211,4 +211,45 @@ RSpec.describe Errbit::App, type: :model do
 
     it { expect(subject.attributes_for_super_diff).to eq(id: subject.id, name: subject.name) }
   end
+
+  describe "before_create :ensure_notice_fingerprinter" do
+    it "auto-builds a fingerprinter on create using SiteConfig defaults" do
+      app = create(:errbit_app)
+
+      expect(app.notice_fingerprinter).to be_present
+      expect(app.notice_fingerprinter.source).to eq(Errbit::SiteConfig::CONFIG_SOURCE_SITE)
+    end
+
+    it "does not replace an existing fingerprinter" do
+      app = build(:errbit_app)
+      app.build_notice_fingerprinter(error_class: false, backtrace_lines: 5, source: "app")
+      app.save!
+
+      expect(app.notice_fingerprinter.backtrace_lines).to eq(5)
+      expect(app.notice_fingerprinter.source).to eq("app")
+    end
+  end
+
+  describe "after_update :store_cached_attributes_on_problems" do
+    it "syncs app_name onto its problems when the app is renamed" do
+      app = create(:errbit_app, name: "Original")
+      problem = create(:errbit_problem, app: app)
+
+      expect(problem.reload.app_name).to eq("Original")
+
+      app.update!(name: "Renamed")
+
+      expect(problem.reload.app_name).to eq("Renamed")
+    end
+
+    it "does not touch problems when other attributes change" do
+      app = create(:errbit_app, name: "Stable")
+      problem = create(:errbit_problem, app: app)
+      problem.update!(app_name: "Stale")
+
+      app.update!(github_repo: "foo/bar")
+
+      expect(problem.reload.app_name).to eq("Stale")
+    end
+  end
 end
