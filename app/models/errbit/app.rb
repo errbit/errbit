@@ -63,14 +63,21 @@ module Errbit
       allow_destroy: true,
       reject_if: proc { |attrs| !Errbit::NotificationService.subclasses.map(&:to_s).include?(attrs[:type].to_s) }
     accepts_nested_attributes_for :notice_fingerprinter
+    accepts_nested_attributes_for :watchers,
+      allow_destroy: true,
+      reject_if: proc { |attrs| attrs[:errbit_user_id].blank? && attrs[:email].blank? }
 
     before_validation :generate_api_key, on: :create
     before_save :normalize_github_repo
+    before_create :ensure_notice_fingerprinter
+    after_find :ensure_notice_fingerprinter
+    after_update :store_cached_attributes_on_problems
 
     validates :name, presence: true, uniqueness: {allow_blank: true}
     validates :api_key, presence: true, uniqueness: {allow_blank: true}
     validates_associated :issue_tracker
     validates_associated :notice_fingerprinter
+    validates_associated :watchers
 
     scope :search, ->(value) { where(arel_table[:name].matches("%#{value}%")) }
 
@@ -225,6 +232,25 @@ module Errbit
       self.github_repo = github_repo.strip
       self.github_repo = github_repo.sub(%r{(git@|https?://)#{github_host}(/|:)}, "")
       self.github_repo = github_repo.sub(/\.git$/, "")
+    end
+
+    # Seed the app's notice fingerprinter from SiteConfig if it doesn't have
+    # one yet. Fires both before_create (so a freshly-built app gets a
+    # fingerprinter at the moment of creation) and after_find (so legacy rows
+    # written before this callback existed pick one up on first access).
+    def ensure_notice_fingerprinter
+      return if association(:notice_fingerprinter).loaded? && notice_fingerprinter.present?
+      return if notice_fingerprinter.present?
+
+      build_notice_fingerprinter(Errbit::SiteConfig.document.notice_fingerprinter_attributes)
+    end
+
+    # Keep the `app_name` cache on every problem of this app in sync when the
+    # app is renamed. Mirrors the Mongoid `after_update` callback.
+    def store_cached_attributes_on_problems
+      return unless saved_change_to_name?
+
+      problems.update_all(app_name: name)
     end
   end
 end

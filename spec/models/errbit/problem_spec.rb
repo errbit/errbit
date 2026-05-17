@@ -244,4 +244,115 @@ RSpec.describe Errbit::Problem, type: :model do
       expect(problem.link_text).to eq("RuntimeError")
     end
   end
+
+  describe "#uncache_notice" do
+    let(:app) { create(:errbit_app) }
+    let(:problem) { create(:errbit_problem, app: app) }
+    let(:err) { create(:errbit_err, problem: problem) }
+    let!(:first_notice) { Errbit::Problem.cache_notice(problem.id, build(:errbit_notice, err: err, app: app, message: "first").tap { |n| n.created_at = 2.days.ago; n.save! }) && err.notices.find_by(message: "first") }
+    let!(:second_notice) { Errbit::Problem.cache_notice(problem.id, build(:errbit_notice, err: err, app: app, message: "second").tap { |n| n.created_at = 1.day.ago; n.save! }) && err.notices.find_by(message: "second") }
+
+    it "decrements notices_count" do
+      expect { problem.reload.uncache_notice(second_notice) }
+        .to change { problem.reload.notices_count }.from(2).to(1)
+    end
+
+    it "refreshes the cached scalar fields from the latest remaining notice" do
+      problem.reload.uncache_notice(second_notice)
+
+      expect(problem.reload.message).to eq("second")
+    end
+
+    it "drops the message digest entry when its count hits zero" do
+      digest = Digest::MD5.hexdigest("second")
+      expect(problem.reload.messages).to have_key(digest)
+
+      problem.reload.uncache_notice(second_notice)
+
+      expect(problem.reload.messages).not_to have_key(digest)
+    end
+  end
+
+  describe "#issue_type" do
+    it "returns the stored value when set" do
+      problem = build(:errbit_problem, issue_type: "github")
+
+      expect(problem.issue_type).to eq("github")
+    end
+
+    it "falls back to the app's issue tracker type when unset" do
+      app = create(:errbit_app)
+      app.build_issue_tracker(type_tracker: "mock", options: {"foo" => "1"})
+      app.issue_tracker.save!(validate: false)
+      problem = create(:errbit_problem, app: app, issue_type: nil)
+
+      allow(app.issue_tracker).to receive(:configured?).and_return(true)
+      allow(problem.app).to receive(:issue_tracker_configured?).and_return(true)
+      allow(problem.app).to receive(:issue_tracker).and_return(app.issue_tracker)
+
+      expect(problem.issue_type).to eq("mock")
+    end
+
+    it "returns nil when issue_type is unset and the app has no tracker" do
+      problem = create(:errbit_problem, issue_type: nil)
+
+      expect(problem.issue_type).to be_nil
+    end
+  end
+
+  describe "#grouped_notice_count_relative_percentages" do
+    let(:problem) { create(:errbit_problem) }
+    let(:err) { create(:errbit_err, problem: problem) }
+
+    it "returns one entry per bucket as a percentage of the max bucket" do
+      base = Time.zone.parse("2026-05-15 12:00:00")
+      [base + 1.hour, base + 2.hours, base + 2.hours, base + 3.hours, base + 3.hours, base + 3.hours].each do |t|
+        n = build(:errbit_notice, err: err, app: err.app)
+        n.created_at = t
+        n.save!
+      end
+
+      result = problem.grouped_notice_count_relative_percentages(base, "hour")
+
+      expect(result.size).to eq(24)
+      # Bucket-0 (hour 12) has 0; bucket-1 (hour 13) has 1; bucket-2 (hour 14) has 2;
+      # bucket-3 (hour 15) has 3 → max 3 → percentages 0%, 33.3%, 66.6%, 100%, 0%…
+      expect(result[0]).to eq(0)
+      expect(result[1]).to be_within(0.01).of(100.0 / 3)
+      expect(result[2]).to be_within(0.01).of(200.0 / 3)
+      expect(result[3]).to be_within(0.01).of(100.0)
+    end
+
+    it "returns all zeros when there are no notices in the window" do
+      result = problem.grouped_notice_count_relative_percentages(1.year.ago, "day")
+
+      expect(result.size).to eq(14)
+      expect(result.uniq).to eq([0])
+    end
+  end
+
+  describe "Errbit::Notice before_destroy :problem_recache" do
+    let(:app) { create(:errbit_app) }
+    let(:problem) { create(:errbit_problem, app: app) }
+    let(:err) { create(:errbit_err, problem: problem) }
+    let!(:notice_a) do
+      n = build(:errbit_notice, err: err, app: app, message: "A")
+      n.created_at = 2.days.ago
+      n.save!
+      Errbit::Problem.cache_notice(problem.id, n)
+      n
+    end
+    let!(:notice_b) do
+      n = build(:errbit_notice, err: err, app: app, message: "B")
+      n.created_at = 1.day.ago
+      n.save!
+      Errbit::Problem.cache_notice(problem.id, n)
+      n
+    end
+
+    it "decrements the problem's notices_count when a notice is destroyed" do
+      expect { notice_b.destroy }
+        .to change { problem.reload.notices_count }.from(2).to(1)
+    end
+  end
 end

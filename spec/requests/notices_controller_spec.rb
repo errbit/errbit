@@ -4,9 +4,6 @@ require "rails_helper"
 
 RSpec.describe "Notices management", type: :request do
   let!(:errbit_app) { create(:errbit_app, api_key: "APIKEY") }
-  # Errbit::ErrorReport#fingerprint calls `app.notice_fingerprinter.generate(...)`;
-  # the AR App doesn't auto-create one on .create, so seed it here.
-  let!(:notice_fingerprinter) { create(:errbit_notice_fingerprinter, app: errbit_app) }
 
   describe "POST /notifier_api/v2/notices" do
     context "with a valid notice" do

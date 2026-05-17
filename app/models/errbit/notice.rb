@@ -36,6 +36,7 @@ module Errbit
     validates :notifier, presence: true
 
     before_save :sanitize
+    before_destroy :problem_recache
 
     scope :ordered, -> { order(created_at: :asc) }
     scope :reverse_ordered, -> { order(created_at: :desc) }
@@ -126,6 +127,10 @@ module Errbit
     end
 
     private
+
+    def problem_recache
+      problem&.uncache_notice(self)
+    end
 
     def sanitize
       [:server_environment, :request, :notifier].each do |h|

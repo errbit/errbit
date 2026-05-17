@@ -161,6 +161,13 @@ module Errbit
       message.presence || error_class
     end
 
+    # Override the column reader: when the stored value is nil, fall back to
+    # the app's configured issue tracker type. Cached into the in-memory
+    # attribute (Mongoid behavior) without persisting.
+    def issue_type
+      self[:issue_type] ||= (app.issue_tracker_configured? && app.issue_tracker.type_tracker) || nil
+    end
+
     def self.merge!(*problems)
       result = Errbit::ProblemMerge.new(problems).merge
       result.reload
@@ -200,6 +207,45 @@ module Errbit
     end
     private_class_method :increment_hash_counter
 
+    # Counterpart to `cache_notice`: when a notice is destroyed, refresh the
+    # problem's cached fields from the most recent remaining notice and
+    # decrement the matching hash counter (or drop the digest entry entirely).
+    def uncache_notice(notice)
+      last_notice = notices.reorder(created_at: :desc).first
+      return unless last_notice
+
+      attrs = {
+        environment: last_notice.environment_name,
+        error_class: last_notice.error_class,
+        last_notice_at: last_notice.created_at,
+        message: last_notice.message,
+        where: last_notice.where,
+        notices_count: (notices_count.to_i > 1) ? notices_count - 1 : 0
+      }
+
+      CACHED_NOTICE_ATTRIBUTES.each do |attr, source|
+        attrs[attr] = decrement_hash_counter(send(attr), Digest::MD5.hexdigest(notice.send(source).to_s))
+      end
+
+      update!(attrs)
+    end
+
+    private
+
+    def decrement_hash_counter(hash, key)
+      result = (hash || {}).deep_dup
+
+      if result[key] && result[key]["count"].to_i > 1
+        result[key]["count"] -= 1
+      else
+        result.delete(key)
+      end
+
+      result
+    end
+
+    public
+
     def merged?
       errs.length > 1
     end
@@ -221,6 +267,39 @@ module Errbit
 
     def cache_app_attributes
       self.app_name = app.name if app
+    end
+
+    # Bucketed notice counts since the given moment, grouped by `:yday` or
+    # `:hour`. Returns the Mongoid-shaped output [{"_id" => {group_by => bucket},
+    # "count" => n}, ...]. Used by `xhr_sparkline`.
+    def grouped_notice_counts(since, group_by = "day")
+      time_method = (group_by == "day") ? :yday : :hour
+
+      Errbit::Notice
+        .for_errs(errs)
+        .where("created_at > ?", since)
+        .pluck(:created_at)
+        .group_by { |t| t.send(time_method) }
+        .map { |bucket, ts| {"_id" => {group_by => bucket}, "count" => ts.size} }
+        .sort_by { |row| row["_id"][group_by] }
+    end
+
+    def zero_filled_grouped_noticed_counts(since, group_by = "day")
+      non_zero_filled = grouped_notice_counts(since, group_by)
+      buckets = (group_by == "day") ? 14 : 24
+      time_method = (group_by == "day") ? :yday : :hour
+
+      bucket_times = Array.new(buckets) { |i| (since + i.send(group_by)).send(time_method) }
+      bucket_times.map do |bucket_time|
+        match = non_zero_filled.detect { |row| row.dig("_id", group_by) == bucket_time }
+        {bucket_time => match ? match["count"] : 0}
+      end
+    end
+
+    def grouped_notice_count_relative_percentages(since, group_by = "day")
+      counts = zero_filled_grouped_noticed_counts(since, group_by).map { |h| h.values.first }
+      max = counts.max
+      counts.map { |n| max.zero? ? 0 : (n.to_f / max.to_f) * 100.0 }
     end
   end
 end
