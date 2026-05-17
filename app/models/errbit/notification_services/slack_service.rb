@@ -82,7 +82,7 @@ module Errbit
       end
 
       def backtrace_lines(problem)
-        notice = NoticeDecorator.new(problem.notices.last)
+        notice = Errbit::NoticeDecorator.new(problem.notices.last)
         return unless notice
 
         backtrace = notice.backtrace

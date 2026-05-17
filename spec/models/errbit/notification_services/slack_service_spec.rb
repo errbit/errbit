@@ -80,11 +80,6 @@ RSpec.describe Errbit::NotificationServices::SlackService, type: :model do
   end
 
   describe "#create_notification" do
-    # The `backtrace_lines` private method wraps the notice via NoticeDecorator,
-    # which depends on a decorator for `Errbit::Backtrace`. Decorators aren't
-    # ported yet, so stub it for these tests.
-    before { allow(service).to receive(:backtrace_lines).and_return("```backtrace```") }
-
     context "with room_id" do
       it "POSTs the payload to the Slack webhook" do
         expect(HTTParty).to receive(:post)
