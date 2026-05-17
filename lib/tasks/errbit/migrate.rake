@@ -282,9 +282,15 @@ namespace :errbit do
             errbit_app_id = Helpers.ar_id_for(Errbit::App, mongo_app._id)
             next unless errbit_app_id
 
-            ar = Errbit::NoticeFingerprinter.find_or_initialize_by(bson_id: mongo_fp._id.to_s)
+            # Errbit::App#ensure_notice_fingerprinter (before_create) already
+            # made a fingerprinter row for every migrated app. There is at
+            # most one per app (unique index on errbit_app_id); look it up by
+            # app and overwrite with the values from the Mongo embedded
+            # fingerprinter, stamping its bson_id for traceability.
+            ar = Errbit::NoticeFingerprinter.find_or_initialize_by(errbit_app_id: errbit_app_id)
 
             Helpers.assign_and_save!(ar, {
+              bson_id: mongo_fp._id.to_s,
               errbit_app_id: errbit_app_id,
               error_class: mongo_fp.error_class.nil? ? true : mongo_fp.error_class,
               message: mongo_fp.message.nil? ? true : mongo_fp.message,
