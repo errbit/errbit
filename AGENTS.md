@@ -6,7 +6,7 @@ Errbit is being ported from MongoDB/Mongoid to SQL/ActiveRecord on branch `claud
 
 - **Old Mongoid models** live at `app/models/*.rb` (e.g. `app/models/user.rb` → `User`). They stay in place.
 - **New AR models** live under the `Errbit::` namespace at `app/models/errbit/*.rb` (e.g. `app/models/errbit/user.rb` → `Errbit::User`).
-- Both ORMs coexist during the port — the Devise initializer requires both `devise/orm/mongoid` and `devise/orm/active_record`.
+- Both ORMs coexist during the port. Devise is wired only to `Errbit::User` (AR); the Mongoid `User` keeps its legacy fields as plain data for the migration rake task but is no longer a Devise model.
 
 ## Conventions for ported models
 
