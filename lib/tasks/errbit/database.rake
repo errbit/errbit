@@ -3,18 +3,18 @@
 namespace :errbit do
   desc "Updates cached attributes on Problem"
   task problem_recache: :environment do
-    ProblemRecacher.run
+    Errbit::ProblemRecacher.run
   end
 
   desc "Delete resolved errors from the database. (Useful for limited heroku databases)"
   task clear_resolved: :environment do
-    puts "=== Cleared #{ResolvedProblemClearer.new.execute} resolved errors from the database."
+    puts "=== Cleared #{Errbit::ResolvedProblemClearer.new.execute} resolved errors from the database."
   end
 
   desc "Delete old errors from the database. (Useful for limited heroku databases)"
   task clear_outdated: :environment do
     if Errbit::Config.notice_deprecation_days.present?
-      puts "=== Cleared #{OutdatedProblemClearer.new.execute} outdated errors from the database."
+      puts "=== Cleared #{Errbit::OutdatedProblemClearer.new.execute} outdated errors from the database."
     else
       puts "=== ERRBIT_PROBLEM_DESTROY_AFTER_DAYS not set. Old problems will not be destroyed."
     end
@@ -22,20 +22,20 @@ namespace :errbit do
 
   desc "Regenerate fingerprints"
   task notice_refingerprint: :environment do
-    NoticeRefingerprinter.run
-    ProblemRecacher.run
+    Errbit::NoticeRefingerprinter.run
+    Errbit::ProblemRecacher.run
   end
 
   desc "Remove notices in batch"
-  task :notices_delete, [:problem_id] => [:environment] do
+  task :notices_delete, [:problem_id] => [:environment] do |_task, args|
     BATCH_SIZE = 1000
     if args[:problem_id]
-      item_count = Problem.find(args[:problem_id]).notices.count
+      item_count = Errbit::Problem.find(args[:problem_id]).notices.count
       removed_count = 0
       puts "Notices to remove: #{item_count}"
       while item_count > 0
-        Problem.find(args[:problem_id]).notices.limit(BATCH_SIZE).each do |notice|
-          notice.remove
+        Errbit::Problem.find(args[:problem_id]).notices.limit(BATCH_SIZE).each do |notice|
+          notice.destroy
           removed_count += 1
         end
         item_count -= BATCH_SIZE
