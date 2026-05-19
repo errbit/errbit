@@ -5,7 +5,7 @@ namespace :errbit do
   task demo: :environment do
     require "factory_bot_rails"
 
-    app = FactoryBot.create(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
+    app = FactoryBot.create(:errbit_app, name: "Demo App #{Time.zone.now.strftime("%N")}")
 
     # Report a number of errors for the application
     app.problems.delete_all
@@ -46,7 +46,7 @@ namespace :errbit do
 
     errors.each do |error_template|
       rand(34).times do
-        ErrorReport.new(
+        Errbit::ErrorReport.new(
           error_template.reverse_merge(
             api_key: app.api_key,
             error_class: "StandardError",
@@ -70,9 +70,9 @@ namespace :errbit do
       end
     end
 
-    problem = FactoryBot.create(:problem, app: app)
-    err = FactoryBot.create(:err, problem: problem)
-    FactoryBot.create(:notice, err: err)
+    problem = FactoryBot.create(:errbit_problem, app: app)
+    err = FactoryBot.create(:errbit_err, problem: problem)
+    FactoryBot.create(:errbit_notice, err: err)
 
     puts "=== Created demo app: '#{app.name}', with example errors."
   end
