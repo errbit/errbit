@@ -19,8 +19,8 @@ RSpec.describe "errbit:migrate" do
         email: "ported@example.com",
         name: "Ported",
         admin: true,
-        password: "secret-password",
-        password_confirmation: "secret-password"
+        encrypted_password: "fake-encrypted-pw",
+        authentication_token: "fake-token"
       )
 
       expect { invoke(:users) }.to change(Errbit::User, :count).by(1)
@@ -37,7 +37,7 @@ RSpec.describe "errbit:migrate" do
       created = 3.years.ago.change(usec: 0)
       updated = 1.year.ago.change(usec: 0)
 
-      mongo_user = User.create!(email: "old@example.com", name: "Old", password: "secret-password")
+      mongo_user = User.create!(email: "old@example.com", name: "Old")
       mongo_user.update_attributes!(created_at: created, updated_at: updated)
 
       invoke(:users)
@@ -48,7 +48,7 @@ RSpec.describe "errbit:migrate" do
     end
 
     it "is idempotent — re-running updates the existing record" do
-      mongo_user = User.create!(email: "twice@example.com", name: "Twice", password: "secret-password")
+      mongo_user = User.create!(email: "twice@example.com", name: "Twice")
 
       invoke(:users)
       mongo_user.update!(name: "Renamed")
@@ -57,9 +57,8 @@ RSpec.describe "errbit:migrate" do
       expect(Errbit::User.find_by!(bson_id: mongo_user._id.to_s).name).to eq("Renamed")
     end
 
-    it "skips devise validations so users without passwords still migrate" do
-      mongo_user = User.new(email: "gh@example.com", name: "GH", github_login: "gh-handle")
-      mongo_user.save(validate: false)
+    it "migrates github-only users without password fields populated" do
+      mongo_user = User.create!(email: "gh@example.com", name: "GH", github_login: "gh-handle")
 
       expect { invoke(:users) }.to change(Errbit::User, :count).by(1)
       expect(Errbit::User.find_by!(bson_id: mongo_user._id.to_s).github_login).to eq("gh-handle")
@@ -110,7 +109,7 @@ RSpec.describe "errbit:migrate" do
 
   describe ":watchers" do
     it "migrates embedded watchers and resolves user references via bson_id" do
-      mongo_user = User.create!(email: "watcher@example.com", name: "Watcher", password: "secret-password")
+      mongo_user = User.create!(email: "watcher@example.com", name: "Watcher")
       mongo_app = App.create!(name: "Watched")
       mongo_app.watchers.create!(user_id: mongo_user._id)
       mongo_app.watchers.create!(email: "external@example.com")
@@ -273,7 +272,7 @@ RSpec.describe "errbit:migrate" do
 
   describe ":comments" do
     it "creates an Errbit::Comment linked to its problem and user via bson_id" do
-      mongo_user = User.create!(email: "c@example.com", name: "Commenter", password: "secret-password")
+      mongo_user = User.create!(email: "c@example.com", name: "Commenter")
       mongo_app = App.create!(name: "Comment App")
       mongo_problem = Problem.create!(app: mongo_app, environment: "production", error_class: "X")
       mongo_comment = Comment.create!(err: mongo_problem, user: mongo_user, body: "first comment")
@@ -292,7 +291,7 @@ RSpec.describe "errbit:migrate" do
 
   describe ":all" do
     it "runs every migration in dependency order with one Rake invocation" do
-      mongo_user = User.create!(email: "all@example.com", name: "All", password: "secret-password")
+      mongo_user = User.create!(email: "all@example.com", name: "All")
       mongo_app = App.create!(name: "All App")
       mongo_problem = Problem.create!(app: mongo_app, environment: "production", error_class: "X")
       mongo_err = Err.create!(problem: mongo_problem, fingerprint: "all-fp")

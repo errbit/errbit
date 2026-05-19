@@ -6,8 +6,6 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise(*Errbit::Config.devise_modules)
-
   field :email
   field :github_login
   field :github_oauth_token
@@ -17,30 +15,20 @@ class User
   field :per_page, type: Integer, default: PER_PAGE
   field :time_zone, default: "UTC"
 
-  ## Devise field
-  ### Database Authenticatable
+  # Legacy fields preserved so the Mongo → SQL migration rake task can copy
+  # them into Errbit::User. The Mongoid User itself no longer uses Devise.
   field :encrypted_password, type: String
-
-  ### Recoverable
   field :reset_password_token, type: String
   field :reset_password_sent_at, type: Time
-
-  ### Rememberable
   field :remember_created_at, type: Time
-
-  ### Trackable
   field :sign_in_count, type: Integer
   field :current_sign_in_at, type: Time
   field :last_sign_in_at, type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip, type: String
-
-  ### Token_authenticatable
   field :authentication_token, type: String
 
   index authentication_token: 1
-
-  before_save :ensure_authentication_token
 
   validates :name, presence: true
   validates :github_login, uniqueness: {allow_nil: true}
@@ -71,8 +59,7 @@ class User
 
       user || User.create(name: name,
         email: email,
-        google_uid: uid,
-        password: Devise.friendly_token[0, 20])
+        google_uid: uid)
     end
   end
 
@@ -82,10 +69,6 @@ class User
 
   def watching?(app)
     apps.all.include?(app)
-  end
-
-  def password_required?
-    github_login.present? ? false : super
   end
 
   def github_account?
@@ -105,39 +88,10 @@ class User
     google_uid.present?
   end
 
-  def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
-
-  def self.token_authentication_key
-    :auth_token
-  end
-
-  def reset_password(new_password, new_password_confirmation)
-    self.password = new_password
-    self.password_confirmation = new_password_confirmation
-
-    self.class.validators_on(:password).map { |v| v.validate_each(self, :password, password) }
-    return false if errors.any?
-
-    save(validate: false)
-  end
-
   def attributes_for_super_diff
     {
       id: id.to_s,
       name: name
     }
-  end
-
-  private
-
-  def generate_authentication_token
-    loop do
-      token = Devise.friendly_token
-      break token unless User.where(authentication_token: token).first
-    end
   end
 end
