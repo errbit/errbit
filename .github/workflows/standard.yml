@@ -45,6 +45,7 @@ jobs:
 
       - run: |
           bin/standardrb \
+            db/migrate/*.rb \
             app/controllers/users_controller.rb \
             app/controllers/unlink_githubs_controller.rb \
             app/controllers/unlink_googles_controller.rb \
