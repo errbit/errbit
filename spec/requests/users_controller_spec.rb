@@ -178,10 +178,10 @@ RSpec.describe UsersController, type: :request do
       before { sign_in(current_user) }
 
       before do
-        expect {
+        expect do
           post users_path,
             params: {user: {email: email, name: name, password: password, password_confirmation: password, admin: true}}
-        }.to change(Errbit::User, :count).by(1)
+        end.to change(Errbit::User, :count).by(1)
       end
 
       it "creates a new Errbit::User and redirects to it" do
@@ -200,10 +200,10 @@ RSpec.describe UsersController, type: :request do
       before { sign_in(current_user) }
 
       before do
-        expect {
+        expect do
           post users_path,
             params: {user: {email: "", name: Faker::Name.unique.name, password: "secret123", password_confirmation: "secret123", admin: true}}
-        }.not_to change(Errbit::User, :count)
+        end.not_to change(Errbit::User, :count)
       end
 
       it "renders new" do
@@ -218,10 +218,10 @@ RSpec.describe UsersController, type: :request do
       before { sign_in(current_user) }
 
       before do
-        expect {
+        expect do
           post users_path,
             params: {user: {email: "a@b.com", name: "X", password: "secret123", password_confirmation: "secret123", admin: true}}
-        }.not_to change(Errbit::User, :count)
+        end.not_to change(Errbit::User, :count)
       end
 
       it "redirects to root with not-authorized flash" do
