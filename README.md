@@ -358,4 +358,4 @@ Errbit is available as open source under the terms of the [MIT License](http://o
 
 ## Copyright
 
-Copyright &copy; 2010-2025 Errbit Team
+Copyright &copy; 2010-2026 Errbit Team
