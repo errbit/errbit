@@ -2,7 +2,7 @@
 
 <% auth_key = Devise.authentication_keys.first %>
 
-<% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
+<% if Errbit::Config.github_authentication || Errbit::Config.google_authentication || Errbit::Config.oidc_authentication %>
   <% content_for :action_bar do %>
     <div class="action-bar">
       <% if Errbit::Config.github_authentication %>
@@ -17,7 +17,7 @@
         </span>
       <% end %>
 
-      <% if Errbit::Config.oidc_enabled %>
+      <% if Errbit::Config.oidc_authentication %>
         <span class="oidc">
           <%= link_to "Sign in with OpenID Connect", user_openid_connect_omniauth_authorize_path, method: :post %>
         </span>
