@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Sign in with OpenID Connect", type: :system, retry: 3 do
-  before { expect(Errbit::Config).to receive(:oidc_enabled).and_return(true).at_least(:once).times }
+  before { expect(Errbit::Config).to receive(:oidc_authentication).and_return(true).at_least(:once).times }
 
   before { expect(Errbit::Config).to receive(:oidc_site_title).and_return("OpenID Connect").at_least(:once).times }
 
