@@ -2,7 +2,7 @@
 
 ## Environment variables
 
-### `OIDC_ENABLED`
+### `OIDC_AUTHENTICATION`
 
 Enable OIDC?
 
@@ -59,7 +59,7 @@ Replace `localhost:3000` with your application's host.
 ### GitLab.com or any gitlab-powered instance
 
 ```shell
-export OIDC_ENABLED="true"
+export OIDC_AUTHENTICATION="true"
 export OIDC_NAME="gitlab"
 export OIDC_ISSUER="https://gitlab.com"
 export OIDC_SITE_TITLE="GitLab.com"
