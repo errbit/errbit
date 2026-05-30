@@ -37,6 +37,7 @@ Errbit::Config = Configurator.run(
   github_access_scope: ["GITHUB_ACCESS_SCOPE"],
   github_api_url: ["GITHUB_API_URL"],
   github_site_title: ["GITHUB_SITE_TITLE"],
+
   # google
   google_authentication: ["GOOGLE_AUTHENTICATION"],
   google_auto_provision: ["GOOGLE_AUTO_PROVISION"],
@@ -45,6 +46,9 @@ Errbit::Config = Configurator.run(
   google_secret: ["GOOGLE_SECRET"],
   google_redirect_uri: ["GOOGLE_REDIRECT_URI"],
   google_authorized_domains: ["GOOGLE_AUTHORIZED_DOMAINS"],
+
+  # MCP
+  mcp_server_enabled: ["ERRBIT_MCP_SERVER"],
 
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
     values[:email_delivery_method] && values[:email_delivery_method].to_sym
