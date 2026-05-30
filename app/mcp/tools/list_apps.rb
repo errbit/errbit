@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-class GetApps < MCP::Tool
-  tool_name "errbit_list_apps"
-  description "Get a list of all apps in Errbit"
-
+module Mcp
+  module Tools
+    class ListApps < MCP::Tool
+      tool_name "errbit_list_apps"
+      description "List apps in Errbit"
+    end
+  end
 end
