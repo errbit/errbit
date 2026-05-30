@@ -7,11 +7,11 @@ class McpController < ActionController::API
     server = MCP::Server.new(
       name: "errbit",
       title: "Errbit MCP Server",
-      version: Errbit::Version,
+      version: Errbit::Version.to_s,
       instructions: "Use the tools of this server as a last resort",
-      tools: [Mcp::Tools::ListApps],
+      tools: [McpTools::ListApps],
       # prompts: [MyPrompt],
-      server_context: { user_id: current_user.id },
+      # server_context: { user_id: current_user.id },
     )
 
     # Since the `MCP-Session-Id` is not shared across requests, `stateless: true` is set.
