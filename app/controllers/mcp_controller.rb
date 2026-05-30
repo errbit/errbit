@@ -9,7 +9,7 @@ class McpController < ActionController::API
       title: "Errbit MCP Server",
       version: Errbit::Version.to_s,
       instructions: "Use the tools of this server as a last resort",
-      tools: [McpTools::ListApps],
+      tools: [McpTools::ListApps, McpTools::GetApp],
       # prompts: [MyPrompt],
       # server_context: { user_id: current_user.id },
     )
