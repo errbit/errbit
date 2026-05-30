@@ -424,6 +424,9 @@ GEM
       uri
     racc (1.8.1)
     rack (3.2.6)
+    rack-cors (3.0.0)
+      logger
+      rack (>= 3.0.14)
     rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -714,6 +717,7 @@ DEPENDENCIES
   pundit
   pundit-matchers
   pushover2
+  rack-cors
   rack-timeout
   rails (= 8.1.3)
   rails-controller-testing
@@ -914,6 +918,7 @@ CHECKSUMS
   pushover2 (0.1.0) sha256=8c3d9e3953eb89f0e96b52394a7d8d07401f8b8cfb1fce8a29f751ff3d2afe8f
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   rack (3.2.6) sha256=5ed78e1f73b2e25679bec7d45ee2d4483cc4146eb1be0264fc4d94cb5ef212c2
+  rack-cors (3.0.0) sha256=7b95be61db39606906b61b83bd7203fa802b0ceaaad8fcb2fef39e097bf53f68
   rack-protection (4.2.1) sha256=cf6e2842df8c55f5e4d1a4be015e603e19e9bc3a7178bae58949ccbb58558bac
   rack-session (2.1.2) sha256=595434f8c0c3473ae7d7ac56ecda6cc6dfd9d37c0b2b5255330aa1576967ffe8
   rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463

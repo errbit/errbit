@@ -38,6 +38,7 @@ gem "uri"
 gem "rack-timeout", require: false
 gem "puma"
 gem "ostruct"
+gem "rack-cors"
 gem "mcp"
 
 # Please don't update hoptoad_notifier to airbrake.
