@@ -17,9 +17,9 @@ module McpTools
     def self.call(id:)
       app = App.find(id)
 
-      MCP::Tool::Response.new([{ type: "text", text: app.to_md_full }])
+      MCP::Tool::Response.new([{type: "text", text: app.to_md_full}])
     rescue Mongoid::Errors::DocumentNotFound
-      MCP::Tool::Response.new([{ type: "text", text: "App not found" }])
+      MCP::Tool::Response.new([{type: "text", text: "App not found"}])
     end
   end
 end
