@@ -14,3 +14,13 @@ url = "http://localhost:3000/mcp"
 ```
 
 Make sure to replace `http://localhost:3000/mcp` with the actual URL of your Errbit Server.
+
+## Available tools
+
+### Get apps
+
+`errbit_list_apps`
+
+### Get app details
+
+`errbit_get_app`
