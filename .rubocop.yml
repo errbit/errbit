@@ -135,6 +135,10 @@ Style/HashAsLastArrayItem:
 Style/Alias:
   Enabled: false
 
+# Disabled as in `standard`.
+Style/NegatedIf:
+  Enabled: false
+
 # Standard rules. Layout:
 
 # Enforced by `standard`. Disable.

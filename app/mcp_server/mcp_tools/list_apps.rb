@@ -8,7 +8,7 @@ module McpTools
     def self.call
       apps = App.all
 
-      apps_formatted = apps.map { |app| app.to_md_short }
+      apps_formatted = apps.map(&:to_md_short)
 
       MCP::Tool::Response.new([{type: "text", text: apps_formatted.join("\n---\n")}])
     end
