@@ -15,7 +15,7 @@ module McpTools
     )
 
     def self.call(id:)
-      app = App.find_by(_id: id)
+      app = App.find_by!(_id: id)
 
       output =
         <<~APP
