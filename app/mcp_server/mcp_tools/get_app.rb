@@ -21,8 +21,8 @@ module McpTools
         <<~APP
           ID: #{app.id}
           Name: #{app.name}
-          Created At: #{app.created_at}
-          Updated At: #{app.updated_at}
+          Created At: #{app.created_at.iso8601}
+          Updated At: #{app.updated_at.iso8601}
         APP
 
       MCP::Tool::Response.new([{ type: "text", text: output }])
