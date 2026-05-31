@@ -200,6 +200,22 @@ class App
     notice_fingerprinter.source == "site"
   end
 
+  def to_md_short
+    <<~APP
+      ID: #{id}
+      Name: #{name}
+    APP
+  end
+
+  def to_md_full
+    <<~APP
+      ID: #{id}
+      Name: #{name}
+      Created At: #{created_at.iso8601}
+      Updated At: #{updated_at.iso8601}
+    APP
+  end
+
   def attributes_for_super_diff
     {
       id: id.to_s,
