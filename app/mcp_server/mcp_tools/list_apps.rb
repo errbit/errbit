@@ -4,6 +4,14 @@ module McpTools
   class ListApps < MCP::Tool
     tool_name "errbit_list_apps"
     description "List apps in Errbit"
+    input_schema(
+      properties: {
+        page: {
+          type: "number",
+          description: ""
+        }
+      },
+    )
 
     def self.call
       apps = App.all

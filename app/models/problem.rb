@@ -319,6 +319,12 @@ class Problem
     message.presence || error_class
   end
 
+  def to_md
+    <<~PROBLEM
+
+    PROBLEM
+  end
+
   private
 
   def attribute_count_decrease(name, value)
