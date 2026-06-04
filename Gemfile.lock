@@ -99,7 +99,7 @@ GEM
       multi_json
     ast (2.4.3)
     attr_extras (7.1.0)
-    auth-sanitizer (0.1.5)
+    auth-sanitizer (0.2.0)
       version_gem (~> 1.1, >= 1.1.9)
     base64 (0.3.0)
     bcrypt (3.1.22)
@@ -757,7 +757,7 @@ CHECKSUMS
   airbrake (4.3.8) sha256=d06947194f5dcd7e192c28067f2c47728511d75326c17045094c3a0b84f68c2d
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   attr_extras (7.1.0) sha256=d96fc9a9dd5d85ba2d37762440a816f840093959ae26bb90da994c2d9f1fc827
-  auth-sanitizer (0.1.5) sha256=9ab74c1d1ff7fc21fb31cc5ec4fa12e8b787bf1c8eedd763193c332b19e3c0d8
+  auth-sanitizer (0.2.0) sha256=3b9763c1156546a5982d5d71a7904fb292a14ca2b9bd3f959061f22d732b60a0
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bcrypt (3.1.22) sha256=1f0072e88c2d705d94aff7f2c5cb02eb3f1ec4b8368671e19112527489f29032
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
