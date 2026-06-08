@@ -3,10 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "A user can watch and unwatch an application", type: :system, retry: 3 do
-  context "when user log in and watch a project" do
-    it "is expected to log in and watch a project" do
-      current_user = create(:user)
-      app = create(:app)
+  context "when user signs in and watches a project" do
+    it "creates a watcher for the app" do
+      current_user = create(:errbit_user)
+      app = create(:errbit_app)
 
       sign_in(current_user)
 
@@ -19,10 +19,10 @@ RSpec.describe "A user can watch and unwatch an application", type: :system, ret
     end
   end
 
-  context "when user log in and unwatch a project" do
-    it "is expected to log in and unwatch a project" do
-      current_user = create(:user)
-      app = create(:app)
+  context "when user signs in and unwatches a project" do
+    it "destroys their existing watcher on the app" do
+      current_user = create(:errbit_user)
+      app = create(:errbit_app)
 
       app.watchers.create!(user: current_user)
 

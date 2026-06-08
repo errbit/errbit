@@ -4,12 +4,12 @@ require "rails_helper"
 
 RSpec.describe "users/show.html.erb", type: :view do
   let(:user) do
-    stub_model(User, created_at: Time.zone.now, email: "test@example.com")
+    stub_model(Errbit::User, created_at: Time.zone.now, email: "test@example.com")
   end
 
   before do
     allow(Errbit::Config).to receive(:github_authentication).and_return(true)
-    allow(controller).to receive(:current_user).and_return(stub_model(User))
+    allow(controller).to receive(:current_user).and_return(stub_model(Errbit::User))
     assign(:user, user)
   end
 

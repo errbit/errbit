@@ -136,6 +136,7 @@ GEM
       addressable
       ssrf_filter (~> 1.5)
     csv (3.3.5)
+    database_rewinder (1.1.0)
     date (3.5.1)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
@@ -570,6 +571,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    shoulda-matchers (7.0.1)
+      activesupport (>= 7.1)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -587,6 +590,18 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    sqlite3 (2.9.4)
+      mini_portile2 (~> 2.8.0)
+    sqlite3 (2.9.4-aarch64-linux-gnu)
+    sqlite3 (2.9.4-aarch64-linux-musl)
+    sqlite3 (2.9.4-arm-linux-gnu)
+    sqlite3 (2.9.4-arm-linux-musl)
+    sqlite3 (2.9.4-arm64-darwin)
+    sqlite3 (2.9.4-x86-linux-gnu)
+    sqlite3 (2.9.4-x86-linux-musl)
+    sqlite3 (2.9.4-x86_64-darwin)
+    sqlite3 (2.9.4-x86_64-linux-gnu)
+    sqlite3 (2.9.4-x86_64-linux-musl)
     ssrf_filter (1.5.0)
     standard (1.54.0)
       language_server-protocol (~> 3.17.0.2)
@@ -667,6 +682,7 @@ DEPENDENCIES
   bundler-audit
   campy
   capybara
+  database_rewinder
   decent_exposure
   devise
   dotenv
@@ -725,8 +741,10 @@ DEPENDENCIES
   rubocop-rspec_rails
   rubocop-thread_safety
   selenium-webdriver
+  shoulda-matchers
   simplecov
   sprockets-rails
+  sqlite3 (>= 2.1)
   standard (= 1.54.0)
   stimulus-rails
   super_diff
@@ -777,6 +795,7 @@ CHECKSUMS
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   css_parser (3.0.0) sha256=eaf0e9283fd581d06e815235ceef4f0910c0b394c606355dbc69f93e84443885
   csv (3.3.5) sha256=6e5134ac3383ef728b7f02725d9872934f523cb40b961479f69cf3afa6c8e73f
+  database_rewinder (1.1.0) sha256=950398ba97bb20fb4653b6ee502a7d6658a6333a61d88ba756217f32bfa04510
   date (3.5.1) sha256=750d06384d7b9c15d562c76291407d89e368dda4d4fff957eb94962d325a0dc0
   decent_exposure (3.0.4) sha256=5ce9e3df24f8d77f094b2e612d1c43a78a2de879847ccbb57c0e596e6c303cf1
   devise (5.0.4) sha256=d605f2b85854e74e56ee789e2d398702bc2d06e6bcd894717a670a3199c74cc1
@@ -950,12 +969,24 @@ CHECKSUMS
   sawyer (0.9.3) sha256=0d0f19298408047037638639fe62f4794483fb04320269169bd41af2bdcf5e41
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   selenium-webdriver (4.44.0) sha256=6f1df072529af369589c46f0e01132952aabb250cfd683c274d74dc1eb5d8477
+  shoulda-matchers (7.0.1) sha256=b4bfd8744c10e0a36c8ac1a687f921ee7e25ed529e50488d61b79a8688749c77
   simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
   simplecov-html (0.13.2) sha256=bd0b8e54e7c2d7685927e8d6286466359b6f16b18cb0df47b508e8d73c777246
   simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
   snaky_hash (2.0.5) sha256=70e74137d6738aef067950a3bb9a4d2655778be4bc9725efc36e7607feb22cdd
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
+  sqlite3 (2.9.4) sha256=6161c5b9c17886b289558e6c8082b28a22a814736d2433c9a67f4c6bfcde5c97
+  sqlite3 (2.9.4-aarch64-linux-gnu) sha256=ecabed721e6eaad54601d2685f09029d90025efc8d931040dc89cb3f8a2080ec
+  sqlite3 (2.9.4-aarch64-linux-musl) sha256=ffb4255947fb54c8c3eeca97460c9702b40de91ce390455ef7367ca6a3929a31
+  sqlite3 (2.9.4-arm-linux-gnu) sha256=9ee2008b9fbec984c3c165b0d7eedd2bd2a415100b761bfa3a4c6fbec9208bf6
+  sqlite3 (2.9.4-arm-linux-musl) sha256=8dc1fe4da6977992cd62decf4a93ccf6cc2e124a5e6a340160d52092f70e837a
+  sqlite3 (2.9.4-arm64-darwin) sha256=1d5aad413a815d236e96d43f05a1acc600b6cd086800770342a3f9c2877499ff
+  sqlite3 (2.9.4-x86-linux-gnu) sha256=5cab40ea734796802853501bd23b6162eec391dc37f3bf04bc2ffbda9c8bf93d
+  sqlite3 (2.9.4-x86-linux-musl) sha256=936e2d4a428887fac15f55e26a18671fbb4e522bffaa43969fadf7b40ab25214
+  sqlite3 (2.9.4-x86_64-darwin) sha256=f280c476e360b73e86165a5e59b72801385b4a6c3a47f8af5ecefb9d90bec17f
+  sqlite3 (2.9.4-x86_64-linux-gnu) sha256=537a3eda71b1df1336d0055cbebe55a7317c34870c192c7b6b9d8d0be6871847
+  sqlite3 (2.9.4-x86_64-linux-musl) sha256=3fc5e865b4be9a85d998203ef8d0c0fdcb92f20acf34a254346ff8a19088efec
   ssrf_filter (1.5.0) sha256=e03dcdb9d1730d7f6710532a606b3543df2a448a0293ce04a2d995523c5a97f6
   standard (1.54.0) sha256=7a4b08f83d9893083c8f03bc486f0feeb6a84d48233b40829c03ef4767ea0100
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b

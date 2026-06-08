@@ -1,70 +1,35 @@
 # frozen_string_literal: true
 
 class ProblemsController < ApplicationController
-  include ProblemsSearcher
-
   before_action :need_selected_problem, only: [
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
-  expose(:app_scope) do
-    params[:app_id] ? App.where(_id: params.expect(:app_id)) : App.all
-  end
-
-  expose(:app) do
-    AppDecorator.new(app_scope.find(params.expect(:app_id)))
-  end
-
-  expose(:problem) do
-    ProblemDecorator.new(app.problems.find(params.expect(:id)))
-  end
-
-  expose(:all_errs) do
-    params[:all_errs]
-  end
-
-  expose(:filter) do
-    params[:filter]
-  end
-
-  expose(:params_environment) do
-    params[:environment]
-  end
-
-  # to use with_app_exclusions, hit a path like /problems?filter=-app:noisy_app%20-app:another_noisy_app
-  # it would be possible to add a really fancy UI for it at some point, but for now, it's really
-  # useful if there are noisy apps that you want to ignore.
-  expose(:problems) do
-    finder = Problem
-      .for_apps(app_scope)
-      .in_env(params_environment)
-      .filtered(filter)
-      .all_else_unresolved(all_errs)
-      .ordered_by(params_sort, params_order)
-
-    finder = finder.search(params[:search]) if params[:search].present?
-    finder.page(params[:page]).per(current_user.per_page)
-  end
+  helper_method :app, :problem, :problems, :all_errs, :filter,
+    :params_environment, :params_sort, :params_order,
+    :selected_problems, :selected_problems_ids, :err_ids
 
   def index
   end
 
   def show
-    notice =
-      if params[:notice_id]
-        Notice.find(params.expect(:notice_id))
-      else
-        @notices = problem.object.notices.reverse_ordered
-          .page(params[:notice]).per(1)
-        @notices.first
-      end
-    @notice = notice ? NoticeDecorator.new(notice) : nil
-    @comment = Comment.new
+    notice = if params[:notice_id]
+      Errbit::Notice.find(params.expect(:notice_id))
+    else
+      # `notices` is pre-ordered ASC for callers like recache; use `.reorder`
+      # to override (AR appends order clauses instead of replacing).
+      @notices = problem.object.notices.reorder(created_at: :desc)
+        .page(params[:notice]).per(1)
+      @notices.first
+    end
+
+    @notice = notice ? Errbit::NoticeDecorator.new(notice) : nil
+    @comment = Errbit::Comment.new
   end
 
   def show_by_id
-    problem = Problem.find(params.expect(:id))
-    redirect_to app_problem_path(problem.app, problem)
+    record = Errbit::Problem.find(params.expect(:id))
+    redirect_to app_problem_path(record.app, record)
   end
 
   def xhr_sparkline
@@ -72,7 +37,7 @@ class ProblemsController < ApplicationController
   end
 
   def close_issue
-    issue = Issue.new(problem: problem, user: current_user)
+    issue = Errbit::Issue.new(problem: problem, user: current_user)
 
     flash[:error] = issue.errors.full_messages.join(", ") unless issue.close
 
@@ -80,7 +45,7 @@ class ProblemsController < ApplicationController
   end
 
   def create_issue
-    issue = Issue.new(problem: problem, user: current_user)
+    issue = Errbit::Issue.new(problem: problem, user: current_user)
 
     issue.body = render_to_string(*issue.render_body_args)
 
@@ -90,7 +55,7 @@ class ProblemsController < ApplicationController
   end
 
   def unlink_issue
-    problem.update_attribute(:issue_link, nil)
+    problem.update(issue_link: nil)
 
     redirect_to app_problem_path(app, problem)
   end
@@ -123,7 +88,7 @@ class ProblemsController < ApplicationController
     if selected_problems.length < 2
       flash[:notice] = I18n.t("controllers.problems.flash.need_two_errors_merge")
     else
-      ProblemMerge.new(selected_problems).merge
+      Errbit::ProblemMerge.new(selected_problems).merge
 
       flash[:notice] = I18n.t("controllers.problems.flash.merge_several.success", nb: selected_problems.count)
     end
@@ -140,7 +105,7 @@ class ProblemsController < ApplicationController
   end
 
   def destroy_several
-    DestroyProblemsByIdJob.perform_later(selected_problems_ids)
+    Errbit::DestroyProblemsByIdJob.perform_later(selected_problems_ids)
 
     flash[:notice] = "#{I18n.t(:n_errs, count: selected_problems.size)} #{I18n.t("n_errs.will_be_deleted")}."
 
@@ -148,7 +113,7 @@ class ProblemsController < ApplicationController
   end
 
   def destroy_all
-    DestroyProblemsByAppJob.perform_later(app.id)
+    Errbit::DestroyProblemsByAppJob.perform_later(app.id)
 
     flash[:success] = "#{I18n.t(:n_errs, count: app.problems.count)} #{I18n.t("n_errs.will_be_deleted")}."
 
@@ -159,6 +124,70 @@ class ProblemsController < ApplicationController
     respond_to do |format|
       format.html { render :index }
       format.js
+    end
+  end
+
+  # Helper-method-exposed accessors. Kept public so controller specs that read
+  # `controller.app`, `controller.problems`, etc. continue to work (mirroring
+  # the previous decent_exposure behavior).
+
+  def app_scope
+    @app_scope ||= params[:app_id] ? Errbit::App.where(id: params.expect(:app_id)) : Errbit::App.all
+  end
+
+  def app
+    @app ||= Errbit::AppDecorator.new(app_scope.find(params.expect(:app_id)))
+  end
+
+  def problem
+    @problem ||= Errbit::ProblemDecorator.new(app.problems.find(params.expect(:id)))
+  end
+
+  def all_errs
+    params[:all_errs]
+  end
+
+  def filter
+    params[:filter]
+  end
+
+  def params_environment
+    params[:environment]
+  end
+
+  def params_sort
+    @params_sort ||= ["environment", "app", "message", "last_notice_at", "count"].include?(params[:sort]) ? params[:sort] : "last_notice_at"
+  end
+
+  def params_order
+    @params_order ||= ["asc", "desc"].include?(params[:order]) ? params[:order] : "desc"
+  end
+
+  def err_ids
+    @err_ids ||= (params[:problems] || []).compact
+  end
+
+  def selected_problems
+    @selected_problems ||= Array(Errbit::Problem.where(id: err_ids))
+  end
+
+  def selected_problems_ids
+    selected_problems.map { |p| p.id.to_s }
+  end
+
+  # To use with_app_exclusions, hit a path like
+  # /problems?filter=-app:noisy_app%20-app:another_noisy_app — useful when
+  # there are noisy apps that should be ignored.
+  def problems
+    @problems ||= begin
+      finder = Errbit::Problem
+        .for_apps(app_scope)
+        .in_env(params_environment)
+        .filtered(filter)
+        .all_else_unresolved(all_errs)
+        .ordered_by(params_sort, params_order)
+      finder = finder.search(params[:search]) if params[:search].present?
+      finder.page(params[:page]).per(current_user.per_page)
     end
   end
 

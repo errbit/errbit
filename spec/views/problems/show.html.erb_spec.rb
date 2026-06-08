@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "problems/show.html.erb", type: :view do
-  let(:problem) { create(:problem) }
+  let(:problem) { create(:errbit_problem) }
 
-  let(:comment) { create(:comment) }
+  let(:comment) { create(:errbit_comment) }
 
   let(:pivotal_tracker) do
     Class.new(ErrbitPlugin::MockIssueTracker) do
@@ -46,7 +46,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
     }
   end
 
-  let(:app) { AppDecorator.new(problem.app) }
+  let(:app) { Errbit::AppDecorator.new(problem.app) }
 
   before do
     allow(view).to receive(:app).and_return(app)
@@ -56,18 +56,27 @@ RSpec.describe "problems/show.html.erb", type: :view do
     assign :notices, problem.notices.page(1).per(1)
     assign :notice, problem.notices.first
 
-    allow(controller).to receive(:current_user).and_return(create(:user))
+    allow(controller).to receive(:current_user).and_return(create(:errbit_user))
   end
 
   def with_issue_tracker(tracker, _problem)
     allow(ErrbitPlugin::Registry).to receive(:issue_trackers).and_return(trackers)
 
-    app.issue_tracker = IssueTrackerDecorator.new(
-      IssueTracker.new(type_tracker: tracker, options: {
-        api_token: "token token token",
-        project_id: "1234"
-      })
-    )
+    issue_tracker = Errbit::IssueTracker.new(type_tracker: tracker, options: {
+      api_token: "token token token",
+      project_id: "1234"
+    })
+
+    # Assign without triggering AR autosave (the mock tracker fails validation
+    # by design — but we only need the association readable for rendering).
+    target = app.respond_to?(:object) ? app.object : app
+    target.association(:issue_tracker).target = issue_tracker
+
+    # The view calls `app.issue_tracker.type`, which requires the decorator.
+    # If the spec stubbed view.app with a raw model, re-stub it as decorated.
+    unless app.respond_to?(:object)
+      allow(view).to receive(:app).and_return(Errbit::AppDecorator.new(target))
+    end
   end
 
   describe "content_for :action_bar" do
@@ -118,7 +127,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
 
     it "should link 'up' to app_problems_path if HTTP_REFERER isn't set'" do
       controller.request.env["HTTP_REFERER"] = nil
-      problem = create(:problem_with_comments)
+      problem = create(:errbit_problem_with_comments)
 
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
@@ -129,15 +138,15 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
 
     context "create issue links" do
-      let(:app) { create(:app, github_repo: "test_user/test_repo") }
+      let(:app) { create(:errbit_app, github_repo: "test_user/test_repo") }
 
       it "should allow creating issue for github if application has a github tracker" do
-        problem = create(:problem_with_comments, app: app)
-
-        with_issue_tracker("github", problem)
+        problem = create(:errbit_problem_with_comments, app: app)
 
         allow(view).to receive(:problem).and_return(problem)
-        allow(view).to receive(:app).and_return(problem.app)
+        allow(view).to receive(:app).and_return(Errbit::AppDecorator.new(problem.app))
+
+        with_issue_tracker("github", problem)
 
         render
 
@@ -145,9 +154,9 @@ RSpec.describe "problems/show.html.erb", type: :view do
       end
 
       context "without issue tracker associate on app" do
-        let(:problem) { Problem.new(new_record: false, app: app) }
+        let(:problem) { stub_model(Errbit::Problem, app: app) }
 
-        let(:app) { App.new(new_record: false) }
+        let(:app) { stub_model(Errbit::App) }
 
         it "not see link to create issue" do
           render
@@ -162,14 +171,14 @@ RSpec.describe "problems/show.html.erb", type: :view do
         end
 
         context "with app having github_repo" do
-          let(:app) { App.new(new_record: false, github_repo: "foo/bar") }
+          let(:app) { stub_model(Errbit::App, github_repo: "foo/bar") }
 
-          let(:problem) { Problem.new(new_record: false, app: app) }
+          let(:problem) { stub_model(Errbit::Problem, app: app) }
 
           before do
             problem.issue_link = nil
 
-            user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
+            user = create(:errbit_user, github_login: "test_user", github_oauth_token: "abcdef")
 
             allow(controller).to receive(:current_user).and_return(user)
           end
@@ -212,7 +221,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
 
   describe "content_for :comments" do
     before do
-      problem = create(:problem_with_comments)
+      problem = create(:errbit_problem_with_comments)
       allow(view).to receive(:problem).and_return(problem)
       allow(view).to receive(:app).and_return(problem.app)
       allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
@@ -238,9 +247,15 @@ RSpec.describe "problems/show.html.erb", type: :view do
     it "displays comment when comment has no user" do
       with_issue_tracker("pivotal", problem)
 
-      first_comment = view.problem.comments.first
-      first_comment.user.destroy
-      first_comment.reload
+      # Simulate a comment whose author is missing — DB-level FKs + the
+      # User → Comment cascade rule out actually deleting the user, so stub
+      # `user` on the first comment only. The other two retain their user so
+      # gravatars still render.
+      orphan_id = view.problem.comments.ordered.first.id
+      original_user = Errbit::Comment.instance_method(:user)
+      allow_any_instance_of(Errbit::Comment).to receive(:user) do |comment|
+        (comment.id == orphan_id) ? nil : original_user.bind_call(comment)
+      end
 
       render
 
