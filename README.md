@@ -250,11 +250,11 @@ documentation at https://github.com/airbrake/airbrake-js/blob/master/README.md
 
 ```javascript
 var airbrake = new airbrakeJs.Client({
-  projectId: 'ERRBIT API KEY',
-  projectKey: 'ERRBIT API KEY (again)',
-  reporter: 'xhr',
+  projectId: "ERRBIT API KEY",
+  projectKey: "ERRBIT API KEY (again)",
+  reporter: "xhr",
   remoteConfig: false,
-  host: 'https://myerrbit.com'
+  host: "https://errbit.example.com"
 });
 ```
 
