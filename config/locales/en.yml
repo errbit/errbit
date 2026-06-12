@@ -55,6 +55,15 @@ en:
       errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
 
+  application:
+    navbar:
+      apps: "Apps"
+      errors: "Errors"
+      users: "Users"
+      config: "Config"
+      edit_profile: "Edit profile"
+      sign_out: "Sign out"
+
   shared:
     navigation:
       apps: "Apps"
@@ -108,6 +117,7 @@ en:
         sign_in: "Sign in"
   problems:
     index:
+      errors: "Errors"
       all_errors: "All Errors"
       unresolved_errors: "Unresolved Errors"
       hide_resolved: "hide resolved"
@@ -173,15 +183,11 @@ en:
       username: Username
       email: Email
       admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
     show:
       name: Name
       email: Email
       username: Username
       admin: Admin?
-      admin_yes: "Yes"
-      admin_no: "No"
       created: Created
       edit: edit
       destroy: destroy
@@ -202,9 +208,11 @@ en:
       success: "That's sad. %{name} is no longer part of your team."
       error: "You can't delete yourself"
     fields:
-      name: Name
+      name: "Name"
+      name_placeholder: "Jon Snow"
       username: Username
       email: Email
+      email_placeholder: "jon.snow@example.com"
       entries: Entries per page
       time_zone: Time Zone
       password: Password

@@ -23,7 +23,7 @@ RSpec.describe "apps/show.html.erb", type: :view do
     it "should confirm the 'cancel' link" do
       render
 
-      expect(action_bar).to have_selector("a.button", text: "all errors")
+      expect(action_bar).to have_selector("a.btn", text: "all errors")
     end
   end
 

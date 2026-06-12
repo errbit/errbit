@@ -9,7 +9,7 @@ gem "rails", "8.1.3"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "importmap-rails"
-gem "turbo-rails"
+gem "turbo-rails", require: false
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "decent_exposure"
