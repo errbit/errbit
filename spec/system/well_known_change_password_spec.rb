@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "/.well-known/change-password", type: :system do
-  it "when user successfully redirected to change password form" do
+  it "redirects an already logged-in user to the change password form" do
     user = create(:user, email: "me@example.com", password: "eidii7EeooVe8ahk")
 
     visit new_user_session_path
@@ -13,7 +13,7 @@ RSpec.describe "/.well-known/change-password", type: :system do
 
     click_button I18n.t("devise.sessions.new.sign_in")
 
-    expect(page).to have_content(I18n.t("devise.sessions.signed_in"))
+    expect(page).to have_text(I18n.t("devise.sessions.signed_in"))
 
     visit "/.well-known/change-password"
 
