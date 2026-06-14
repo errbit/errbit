@@ -3,7 +3,7 @@
 class McpController < ActionController::API
   before_action :mcp_enabled?
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     server = MCP::Server.new(
       name: "errbit",
       title: "Errbit MCP Server",
