@@ -10,7 +10,7 @@ module McpTools
           type: "number",
           description: ""
         }
-      },
+      }
     )
 
     def self.call
