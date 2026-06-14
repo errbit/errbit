@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
+  get ".well-known/change-password",
+    to: "well_known#change_password",
+    as: "well_known_change_password"
+
   # Hoptoad Notifier Routes
   match "/notifier_api/v2/notices" => "notices#create", :via => [:get, :post]
   get "/locate/:id" => "notices#locate", :as => :locate
