@@ -57,6 +57,12 @@ The list of requirements to install Errbit are:
 * Ruby 4.0
 * MongoDB >= 7.0
 
+## Compatibility
+
+Errbit is API-compliant with Airbrake and supports:
+* Airbrake ruby gem (API v2 and v3)
+* Airbrake-JS and other compatible clients
+
 ## Installation
 
 *Note*: This app is intended for people with experience deploying and maintaining
