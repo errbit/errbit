@@ -1,0 +1,15 @@
+require:
+  - standard
+
+inherit_mode:
+  merge:
+    - Exclude
+
+inherit_gem:
+  standard: config/ruby-3.4.yml
+
+AllCops:
+  TargetRubyVersion: 4.0
+  NewCops: enable
+  Exclude:
+    - "bin/*"
