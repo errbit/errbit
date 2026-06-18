@@ -3,15 +3,15 @@
 <% content_for :title, problem.error_class || truncate(problem.message, length: 32) %>
 
 <% content_for :meta do %>
-  <strong><%= t(".app") + ":" %></strong>
+  <strong><%= t(".app") %>:</strong>
   <%= link_to app.name, app %>
-  <strong><%= t(".where") + ":" %></strong>
+  <strong><%= t(".where") %>:</strong>
   <%= problem.where %><br>
-  <strong><%= t(".environment") + ":" %></strong>
+  <strong><%= t(".environment") %>:</strong>
   <%= problem.environment %>
-  <strong><%= t(".first_notice") + ":" %></strong>
+  <strong><%= t(".first_notice") %>:</strong>
   <%= problem.first_notice_at.to_fs(:precise) %>
-  <strong><%= t(".last_notice") + ":" %></strong>
+  <strong><%= t(".last_notice") %>:</strong>
   <%= problem.last_notice_at.to_fs(:precise) %>
 <% end %>
 
@@ -48,12 +48,12 @@
                 <%= gravatar_tag(comment.user.email, s: 24) %>
               <% end %>
               <span class="comment-info">
-                <%= time_ago_in_words(comment.created_at, include_seconds: true) + " " + t(".ago_by") %>
+                <%= time_ago_in_words(comment.created_at, include_seconds: true) %> <%= t(".ago_by") %>
                 <%= link_to comment.user.email, comment.user %>
               </span>
             <% else %>
               <span class="comment-info">
-                <%= time_ago_in_words(comment.created_at, include_seconds: true) + " " + t(".ago_by_unknown_user") %>
+                <%= time_ago_in_words(comment.created_at, include_seconds: true) %> <%= t(".ago_by_unknown_user") %>
               </span>
             <% end %>
             <span class="delete">
