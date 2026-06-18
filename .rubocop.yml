@@ -7,6 +7,7 @@ plugins:
   - rubocop-performance
   - rubocop-thread_safety
   - rubocop-factory_bot
+  - rubocop-erb
   - rubocop-disable_syntax
 
 AllCops:
