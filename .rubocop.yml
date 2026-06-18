@@ -1,5 +1,9 @@
-require:
+plugins:
   - standard
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-erb
+  - rubocop-disable_syntax
 
 inherit_mode:
   merge:
