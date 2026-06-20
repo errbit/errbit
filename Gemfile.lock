@@ -163,7 +163,7 @@ GEM
       launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
     erb (6.0.4)
-    errbit_github_plugin (0.4.0)
+    errbit_github_plugin (0.5.0)
       activesupport
       errbit_plugin
       faraday-retry
@@ -797,7 +797,7 @@ CHECKSUMS
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   email_spec (2.3.1) sha256=5e8891319427fd6de0f3883dffe3c2ac4f5434359a33ed9c48e6d68e9f712f1b
   erb (6.0.4) sha256=38e3803694be357fe2bfe312487c74beaf9fb4e5beb3e22498952fe1645b95d9
-  errbit_github_plugin (0.4.0) sha256=23114c00120f62011ea748871fd8909b5e585b0c382e79e351feacad620d441d
+  errbit_github_plugin (0.5.0) sha256=58db10fbc1012e2b71209e2d5928b3405560b8b6733b9562870c6a9079e0a42a
   errbit_plugin (0.8.0) sha256=dfd883a4f0e55b5742cb839b0f623ac6188e52e7424f4a5f19aa11a136b09846
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   factory_bot (6.6.0) sha256=1fc1b3b5620ec980a6a27aec1b6ec8c250ca82962e970e8a40f93e8d388d4b89
