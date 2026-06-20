@@ -9,3 +9,12 @@ services:
       - "27017:27017"
     volumes:
       - "errbit_mongodb_data:/data/db:rw"
+
+  mcp_inspector:
+    image: "ghcr.io/modelcontextprotocol/inspector:latest"
+    ports:
+      - "6274:6274"
+      - "6277:6277"
+    environment:
+      HOST: "0.0.0.0"
+      MCP_AUTO_OPEN_ENABLED: "false"

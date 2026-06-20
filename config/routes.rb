@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "/locate/:id" => "notices#locate", :as => :locate
   get "/notices/:id" => "notices#show_by_id", :as => :show_notice_by_id
 
+  resources :mcp, only: :create
+
   resources :notices, only: :show
 
   resources :users do
