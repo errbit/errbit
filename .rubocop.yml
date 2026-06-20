@@ -1,19 +1,38 @@
-plugins:
+require:
   - standard
-  - rubocop-rails
-  - rubocop-rspec
-  - rubocop-erb
-  - rubocop-disable_syntax
+#  - standard-custom
+#  - standard-performance
+#  - rubocop-performance
+
+#plugins:
+#  - standard
+#  - rubocop-capybara
+#  - rubocop-rails
+#  - rubocop-rake
+#  - rubocop-rspec
+#  - rubocop-rspec_rails
+#  - rubocop-performance
+#  - rubocop-thread_safety
+#  - rubocop-factory_bot
+#  - rubocop-erb
+#  - rubocop-disable_syntax
+
+
 
 inherit_mode:
   merge:
     - Exclude
 
 inherit_gem:
-  standard: config/ruby-3.4.yml
+  standard: config/base.yml
+#  standard-custom: config/base.yml
+#  standard-performance: config/base.yml
+
+#inherit_gem:
+#  standard: config/ruby-3.4.yml
 
 AllCops:
-  TargetRubyVersion: 4.0
+  TargetRubyVersion: 3.4
   NewCops: enable
   Exclude:
     - "bin/*"
