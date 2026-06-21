@@ -737,6 +737,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   standard (= 1.55.0)
+  standard-custom
   stimulus-rails
   super_diff
   thruster

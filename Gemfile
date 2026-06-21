@@ -68,6 +68,8 @@ gem "thruster", require: false
 
 group :development, :test do
   gem "airbrake", "~> 4.3.5", require: false
+  gem "standard", "1.55.0", require: false
+  gem "standard-custom", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
@@ -79,7 +81,6 @@ group :development, :test do
   gem "rubocop-thread_safety", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-erb", require: false
-  gem "standard", "1.55.0", require: false
   gem "faker"
   gem "factory_bot_rails"
   gem "brakeman", require: false

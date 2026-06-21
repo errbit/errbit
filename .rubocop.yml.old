@@ -1,0 +1,464 @@
+plugins:
+  - rubocop-capybara
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-rspec_rails
+  - rubocop-performance
+  - rubocop-thread_safety
+  - rubocop-factory_bot
+  - rubocop-erb
+  - rubocop-disable_syntax
+
+AllCops:
+  TargetRubyVersion: 4.0
+  NewCops: enable
+
+# We use standard as a linter and formatter instead of Rubocop.
+# Also, we are explicitly disable all rubocop rules what
+# already enabled in `standard`. And standard-performance.
+
+# Standard rules. Style:
+
+# Enforced by `standard`. Disable.
+Style/StringLiterals:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/HashSyntax:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantRegexpArgument:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantBegin:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/SuperWithArgsParentheses:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/Encoding:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/NumericLiteralPrefix:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantParentheses:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/EmptyMethod:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/SingleLineMethods:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/SafeNavigation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RescueStandardError:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantSelf:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/TernaryParentheses:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantLineContinuation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/SlicingWithRange:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/MultilineIfModifier:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantCondition:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/RedundantInterpolation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/OrAssignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/ConditionalAssignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/ItAssignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/EachWithObject:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/GlobalStdStream:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+# Disabled as in `standard`.
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Style/Alias:
+  Enabled: false
+
+# Standard rules. Layout:
+
+# Enforced by `standard`. Disable.
+Layout/HashAlignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/DotPosition:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/ExtraSpacing:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/ArgumentAlignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/AccessModifierIndentation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/IndentationWidth:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/ElseAlignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/EndAlignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/MultilineHashBraceLayout:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/MultilineArrayBraceLayout:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/ArrayAlignment:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/AssignmentIndentation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/LineLength:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Layout/CaseIndentation:
+  Enabled: false
+
+# Standard rules. Lint:
+
+# Enforced by `standard`. Disable.
+Lint/ImplicitStringConcatenation:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Lint/TripleQuotes:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Lint/SymbolConversion:
+  Enabled: false
+
+# Enforced by `rubocop` and `standard`.
+Lint/CopDirectiveSyntax:
+  Enabled: true
+
+# Enforced by `standard`. Disable.
+Lint/DuplicateMethods:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+# Enforced by `standard`. Disable.
+Lint/UselessTimes:
+  Enabled: false
+
+# We are using empty blocks in specs as placeholders for future implementation.
+Lint/EmptyBlock:
+  Enabled: false
+
+# Standard-performance rules.
+
+# Enforced by `standard-performance`. Disable.
+Performance/Detect:
+  Enabled: false
+
+# Enforced by `standard-performance`. Disable.
+Performance/StringIdentifierArgument:
+  Enabled: false
+
+# Enforced by `standard-performance`. Disable.
+Performance/RegexpMatch:
+  Enabled: false
+
+# Always enable `rubocop` Security:
+
+# Enforced by `rubocop` and `standard`.
+Security/JSONLoad:
+  Enabled: true
+
+# Our `rubocop` rules
+
+# Bundler rules.
+
+Bundler/OrderedGems:
+  Enabled: false
+
+# Gemspec rules
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+# Style rules
+
+# Don't allow %i[foo bar baz]
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+# Don't allow %w[foo bar baz]
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+# Disable warnings like "Missing top-level documentation comment for"
+Style/Documentation:
+  Enabled: false
+
+# Disable as in `standard`.
+Style/ArgumentsForwarding:
+  Enabled: false
+
+# RSpec rules
+
+# Prefer eq over be.
+RSpec/BeEq:
+  Enabled: false
+
+# Prefer eq over eql.
+RSpec/BeEql:
+  Enabled: false
+
+# We prefer to use `expect` over `allow`.
+RSpec/StubbedMock:
+  Enabled: false
+
+# We prefer multiple before blocks in tests.
+RSpec/ScatteredSetup:
+  Enabled: false
+
+# We use `expect` in before hooks.
+RSpec/ExpectInHook:
+  Enabled: false
+
+# We use item_1, item_2, etc. Disable.
+RSpec/IndexedLet:
+  Enabled: false
+
+# We don't use named subject's
+RSpec/NamedSubject:
+  Enabled: false
+
+# Ignore `system` and `requests` specs.
+RSpec/ExampleLength:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
+
+# Ignore multiple expectations in system specs.
+RSpec/MultipleExpectations:
+  Enabled: true
+  Exclude:
+    - "spec/system/**/*.rb"
+    - "spec/requests/**/*.rb"
+
+# Extend maximum example nesting from 3 to 5.
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 5
+
+# Just ignore
+RSpec/ScatteredLet:
+  Enabled: false
+
+# Enforce receive style
+RSpec/MessageSpies:
+  Enabled: true
+  EnforcedStyle: receive
+
+# We prefer `type: :system, retry: 3` instead of sorted `retry: 3, type: :system`
+RSpec/SortMetadata:
+  Enabled: false
+
+# We prefer `let() { } and then subject {}`
+RSpec/LeadingSubject:
+  Enabled: false
+
+RSpec/LeakyConstantDeclaration:
+  Enabled: true
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/LeakyLocalVariable:
+  Enabled: true
+
+RSpec/ReceiveMessages:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
+# Naming rules:
+
+# Disable anonymous block forwarding.
+Naming/BlockForwarding:
+  Enabled: true
+  EnforcedStyle: explicit
+
+# Enable and exclude specific files.
+Naming/FileName:
+  Enabled: true
+  Exclude:
+    - "spec/support/mongoid-rspec.rb"
+    - "spec/support/rspec-retry.rb"
+    - "spec/support/selenium-webdriver.rb"
+    - "spec/support/rspec-rebound.rb"
+
+# name_1, name_2, etc instead of name1, name2
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: snake_case
+
+# Disabled syntax:
+
+# Disable shorthand hash syntax like: ({ x:, y: })
+# Disable % style literals
+Style/DisableSyntax:
+  DisableSyntax:
+    - shorthand_hash_syntax
+    - percent_literals
+
+# RSpec Rails rules:
+
+# This is a new RSpec default. Disable.
+RSpecRails/InferredSpecType:
+  Enabled: false
+
+RSpecRails/HttpStatusNameConsistency:
+  Enabled: true
+
+# Rails rules:
+
+# We don't use ActiveRecord.
+Rails/ActiveRecordAliases:
+  Enabled: false
+
+# We don't use ActiveRecord.
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Capybara/AmbiguousClick:
+  Enabled: true
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - "config/routes.rb"
+    - "config/initializers/devise.rb"
