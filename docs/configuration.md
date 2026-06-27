@@ -61,7 +61,7 @@ Default in container: same as default value.
 
 TIP: The Errbit team recommends setting `RAILS_MAX_THREADS` to `2` in production.
 
-### `thruster` environment variables
+### `thruster` (gem) environment variables
 
 #### `THRUSTER_TLS_DOMAIN`
 
