@@ -81,7 +81,7 @@ You can learn more about thruster environment variables [here](https://github.co
 
 [Here](./rack-timeout.md).
 
-### Application parameters
+### Application environment variables
 
 | Environment variable         | Description                                        | Default              | Default in container |
 |------------------------------|----------------------------------------------------|----------------------|----------------------|
