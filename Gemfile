@@ -34,6 +34,7 @@ gem "omniauth-google-oauth2"
 gem "rails_autolink"
 gem "inline_svg"
 gem "useragent"
+gem "nokogiri"
 gem "uri"
 gem "rack-timeout", require: false
 gem "puma"

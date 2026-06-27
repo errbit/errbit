@@ -12,7 +12,7 @@ HoptoadNotifier.module_eval do
       app = App.find_or_initialize_by(name: "Self.Errbit")
       app.github_repo = "errbit/errbit"
       app.save!
-      notice.send("api_key=", app.api_key)
+      notice.send(:api_key=, app.api_key)
 
       # Create notice internally.
       report = ErrorReport.new(notice.to_xml)
