@@ -47,7 +47,9 @@ Errbit::Config = Configurator.run(
   google_authorized_domains: ["GOOGLE_AUTHORIZED_DOMAINS"],
 
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
-    values[:email_delivery_method]&.to_sym
+    if values[:email_delivery_method].is_a?(String)
+      values[:email_delivery_method].to_sym
+    end
   end],
 
   # smtp settings
