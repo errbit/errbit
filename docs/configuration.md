@@ -61,15 +61,19 @@ Default in container: same as default value.
 
 TIP: Errbit team recommends to set `RAILS_MAX_THREADS` to `2` for production environment.
 
-### Thruster parameters
+### `thruster` environment variables
 
-| Environment variable  | Description                                              |
-|-----------------------|----------------------------------------------------------|
-| `THRUSTER_TLS_DOMAIN` | Domain name to get certificate e.g. `errbit.example.com` |
+#### `THRUSTER_TLS_DOMAIN`
+
+Domain name to get certificate e.g. `errbit.example.com`
+
+Default: not set.
+
+Default in container: not set.
 
 You can look more about thruster env's [here](https://github.com/basecamp/thruster).
 
-### rack-timeout parameters
+### `rack-timeout` environment variables
 
 [Here](./rack-timeout.md).
 
