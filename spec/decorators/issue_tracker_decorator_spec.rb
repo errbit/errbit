@@ -28,9 +28,11 @@ RSpec.describe IssueTrackerDecorator, type: :decorator do
   end
 
   let(:issue_tracker) do
-    it = IssueTracker.new
-    allow(it).to receive(:tracker).and_return(fake_tracker)
-    it
+    instance = IssueTracker.new
+
+    allow(instance).to receive(:tracker).and_return(fake_tracker)
+
+    instance
   end
 
   let(:decorator) do
