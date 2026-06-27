@@ -14,7 +14,7 @@ In order of precedence Errbit uses:
 
 ## Configuration Parameters
 
-### Built-in Ruby on Rails environment variables
+### Ruby on Rails / Puma environment variables
 
 #### `RAILS_ENV`
 
@@ -29,11 +29,11 @@ Default in container: `production`.
 
 #### `PORT`
 
-Port to run the web server on.
+Port for Puma (Rails server) to listen on.
 
 Default: `3000`.
 
-Default in container: same as default value.
+Default in official Docker image: `3000` (the image exposes port `80` by default).
 
 #### `RAILS_LOG_LEVEL`
 
