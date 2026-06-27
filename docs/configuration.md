@@ -14,12 +14,29 @@ In order of precedence Errbit uses:
 
 ## Configuration Parameters
 
-### Build-in Ruby on Rails parameters
+### Build-in Ruby on Rails environment variables
+
+#### `RAILS_ENV`
+
+Environment. Can be `production`, `development`, or `test`.
+
+Use `production` for run production Errbit. This is the default in the
+container.
+
+Default: `development`.
+
+Default in container: `production`.
+
+#### `PORT`
+
+Port to run the web server on.
+
+Default: `3000`.
+
+Default in container: same as default value.
 
 | Environment variable       | Description       | Default       | Default in container |
 |----------------------------|-------------------|---------------|----------------------|
-| `RAILS_ENV`                | Environment       | `development` | `production`         |
-| `PORT`                     | Port              | `3000`        | as default           |
 | `RAILS_MAX_THREADS`        | Rails max threads | `3`           | as default           |
 | `WEB_CONCURRENCY`          | Number of CPU     | not set       | not set              |
 | `RAILS_LOG_LEVEL`          | Log level         | `info`        | `info`               |
@@ -34,7 +51,7 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 
 ### rack-timeout parameters
 
-[Here](./rack-timeout.md).
+[Here](rack-timeout).
 
 ### Application parameters
 
