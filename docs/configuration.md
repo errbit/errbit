@@ -144,7 +144,7 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 <dt>SMTP_PORT
 <dd>Server port for outgoing SMTP messages
 <dt>SMTP_AUTHENTICATION
-<dd>Authentication method for the SMTP connection (see http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration)
+<dd>Authentication method for the SMTP connection (see https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration)
 <dt>SMTP_USERNAME
 <dd>Username for SMTP auth, you could also set SENDGRID_USERNAME
 <dt>SMTP_PASSWORD
