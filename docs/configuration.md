@@ -35,11 +35,31 @@ Default: `3000`.
 
 Default in container: same as default value.
 
-| Environment variable       | Description       | Default       | Default in container |
-|----------------------------|-------------------|---------------|----------------------|
-| `RAILS_MAX_THREADS`        | Rails max threads | `3`           | as default           |
-| `WEB_CONCURRENCY`          | Number of CPU     | not set       | not set              |
-| `RAILS_LOG_LEVEL`          | Log level         | `info`        | `info`               |
+#### `RAILS_LOG_LEVEL`
+
+Log level for Rails. Can be `:debug`, `:info`, `:warn`, `:error`, or `:fatal`.
+
+Default: `:debug`.
+
+Default in container: `:info`.
+
+#### `WEB_CONCURRENCY`
+
+Number of Puma workers to run.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `RAILS_MAX_THREADS`
+
+Maximum number of threads to use for Puma.
+
+Default: `3`.
+
+Default in container: same as default value.
+
+TIP: Errbit team recommends to set `RAILS_MAX_THREADS` to `2` for production environment.
 
 ### Thruster parameters
 
@@ -51,7 +71,7 @@ You can look more about thruster env's [here](https://github.com/basecamp/thrust
 
 ### rack-timeout parameters
 
-[Here](rack-timeout).
+[Here](./rack-timeout.md).
 
 ### Application parameters
 
