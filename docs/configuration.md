@@ -18,7 +18,7 @@ In order of precedence Errbit uses:
 
 #### `RAILS_ENV`
 
-Environment. Can be `production`, `development`, or `test`.
+Environment. Common values include `production`, `development`, and `test`.
 
 Use `production` to run Errbit in production. This is the default in the
 container.
@@ -68,13 +68,13 @@ TIP: The Errbit team recommends setting `RAILS_MAX_THREADS` to `2` in production
 
 #### `THRUSTER_TLS_DOMAIN`
 
-Domain name to get certificate e.g. `errbit.example.com`
+Domain name to get certificate, e.g., `errbit.example.com`.
 
 Default: not set.
 
 Default in container: not set.
 
-You can look more about thruster env's [here](https://github.com/basecamp/thruster).
+You can learn more about thruster environment variables [here](https://github.com/basecamp/thruster).
 
 ### `rack-timeout` environment variables
 
