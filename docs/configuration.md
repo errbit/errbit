@@ -47,7 +47,8 @@ Default in container: `info`.
 
 #### `WEB_CONCURRENCY`
 
-Number of Puma workers to run.
+Puma workers (processes). Note: Errbit's `config/puma.rb` does not set
+`workers`, so `WEB_CONCURRENCY` is ignored unless you customize Puma config.
 
 Default: not set.
 
