@@ -14,7 +14,7 @@ In order of precedence Errbit uses:
 
 ## Configuration Parameters
 
-### Build-in Ruby on Rails environment variables
+### Built-in Ruby on Rails environment variables
 
 #### `RAILS_ENV`
 
@@ -59,7 +59,7 @@ Default: `3`.
 
 Default in container: same as default value.
 
-TIP: Errbit team recommends to set `RAILS_MAX_THREADS` to `2` for production environment.
+TIP: The Errbit team recommends setting `RAILS_MAX_THREADS` to `2` in production.
 
 ### `thruster` environment variables
 
