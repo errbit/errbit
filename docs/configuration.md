@@ -14,25 +14,70 @@ In order of precedence Errbit uses:
 
 ## Configuration Parameters
 
-### Build-in Ruby on Rails parameters
+### Ruby on Rails / Puma environment variables
 
-| Environment variable       | Description       | Default       | Default in container |
-|----------------------------|-------------------|---------------|----------------------|
-| `RAILS_ENV`                | Environment       | `development` | `production`         |
-| `PORT`                     | Port              | `3000`        | as default           |
-| `RAILS_MAX_THREADS`        | Rails max threads | `3`           | as default           |
-| `WEB_CONCURRENCY`          | Number of CPU     | not set       | not set              |
-| `RAILS_LOG_LEVEL`          | Log level         | `info`        | `info`               |
+#### `RAILS_ENV`
 
-### Thruster parameters
+Environment. Common values include `production`, `development`, and `test`.
 
-| Environment variable  | Description                                              |
-|-----------------------|----------------------------------------------------------|
-| `THRUSTER_TLS_DOMAIN` | Domain name to get certificate e.g. `errbit.example.com` |
+Use `production` to run Errbit in production. This is the default in the
+container.
 
-You can look more about thruster env's [here](https://github.com/basecamp/thruster).
+Default: `development`.
 
-### rack-timeout parameters
+Default in container: `production`.
+
+#### `PORT`
+
+Port for Puma (Rails server) to listen on.
+
+Default: `3000`.
+
+Default in container: `3000` (Puma). Note: the official Docker image exposes
+port `80` by default.
+
+#### `RAILS_LOG_LEVEL`
+
+Log level for Rails in production (read from `RAILS_LOG_LEVEL` in
+`config/environments/production.rb`). Can be `debug`, `info`, `warn`,
+`error`, or `fatal`.
+
+Default in production: `info`.
+
+Default in container: `info`.
+
+#### `WEB_CONCURRENCY`
+
+Puma workers (processes). Note: Errbit's `config/puma.rb` does not set
+`workers`, so `WEB_CONCURRENCY` is ignored unless you customize Puma config.
+
+Default: not set.
+
+Default in container: not set.
+
+#### `RAILS_MAX_THREADS`
+
+Maximum number of threads to use for Puma.
+
+Default: `3`.
+
+Default in container: same as default value.
+
+TIP: The Errbit team recommends setting `RAILS_MAX_THREADS` to `2` in production.
+
+### `thruster` (gem) environment variables
+
+#### `THRUSTER_TLS_DOMAIN`
+
+Domain name to get certificate, e.g., `errbit.example.com`.
+
+Default: not set.
+
+Default in container: not set.
+
+You can learn more about thruster environment variables [here](https://github.com/basecamp/thruster).
+
+### `rack-timeout` environment variables
 
 [Here](./rack-timeout.md).
 
