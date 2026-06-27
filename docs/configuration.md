@@ -33,7 +33,8 @@ Port for Puma (Rails server) to listen on.
 
 Default: `3000`.
 
-Default in official Docker image: `3000` (the image exposes port `80` by default).
+Default in container: `3000` (Puma). Note: the official Docker image exposes
+port `80` by default.
 
 #### `RAILS_LOG_LEVEL`
 
