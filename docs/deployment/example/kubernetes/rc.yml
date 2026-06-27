@@ -65,6 +65,6 @@ spec:
          - name: "SMTP_PASSWORD"
            value: ""
          - name: "SMTP_DOMAIN"
-           value: "example.com"
+           value: "example.org"
          - name: "ERRBIT_HOST"
            value: "errbit.example.org"
