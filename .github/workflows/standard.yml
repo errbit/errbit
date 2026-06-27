@@ -48,5 +48,5 @@ jobs:
             app/controllers/users_controller.rb \
             app/controllers/unlink_githubs_controller.rb \
             app/controllers/unlink_googles_controller.rb \
-            app/interactors/user_destroy.rb \
+            app/interactors \
             spec
