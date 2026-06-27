@@ -20,7 +20,7 @@ In order of precedence Errbit uses:
 
 Environment. Can be `production`, `development`, or `test`.
 
-Use `production` for run production Errbit. This is the default in the
+Use `production` to run Errbit in production. This is the default in the
 container.
 
 Default: `development`.
