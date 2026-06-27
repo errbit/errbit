@@ -37,11 +37,13 @@ Default in container: same as default value.
 
 #### `RAILS_LOG_LEVEL`
 
-Log level for Rails. Can be `:debug`, `:info`, `:warn`, `:error`, or `:fatal`.
+Log level for Rails in production (read from `RAILS_LOG_LEVEL` in
+`config/environments/production.rb`). Can be `debug`, `info`, `warn`,
+`error`, or `fatal`.
 
-Default: `:debug`.
+Default in production: `info`.
 
-Default in container: `:info`.
+Default in container: `info`.
 
 #### `WEB_CONCURRENCY`
 
