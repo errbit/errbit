@@ -4,31 +4,31 @@
 
 Default: `15`.
 
-Default in container: as default.
+Default in container: same as default value.
 
 ## `RACK_TIMEOUT_WAIT_TIMEOUT`
 
 Default: `30`.
 
-Default in container: as default.
+Default in container: same as default value.
 
 ## `RACK_TIMEOUT_WAIT_OVERTIME`
 
 Default: `60`.
 
-Default in container: as default.
+Default in container: same as default value.
 
 ## `RACK_TIMEOUT_SERVICE_PAST_WAIT`
 
 Default: `false`.
 
-Default in container: as default.
+Default in container: same as default value.
 
 ## `RACK_TIMEOUT_TERM_ON_TIMEOUT`
 
 Default: `0`.
 
-Default in container: as default.
+Default in container: same as default value.
 
 ## Links
 
