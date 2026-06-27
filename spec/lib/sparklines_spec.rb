@@ -14,7 +14,7 @@ RSpec.describe Sparklines do
   it "has the right number of i tags" do
     percentages = [75, 100]
     html = described_class.for_relative_percentages(percentages)
-    document = Nokogiri::HTML5(html)
+    document = Nokogiri::HTML.fragment(html)
     number_of_i_tags = document.css("i").count
     expect(number_of_i_tags).to eq(2)
   end
