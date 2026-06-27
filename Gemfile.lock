@@ -704,6 +704,7 @@ DEPENDENCIES
   listen (~> 3.10)
   mongoid
   mongoid-rspec
+  nokogiri
   octokit
   omniauth
   omniauth-github
