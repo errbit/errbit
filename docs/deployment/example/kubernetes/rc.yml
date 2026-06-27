@@ -38,33 +38,33 @@ spec:
         env:
          - name: "PORT"
            value: "3000"
-         - name: MONGO_URL
-           value: ''
-         - name: GOOGLE_AUTHENTICATION
-           value: 'true'
-         - name: GOOGLE_CLIENT_ID
-           value: ''
-         - name: GOOGLE_SECRET
-           value: ''
+         - name: "MONGO_URL"
+           value: ""
+         - name: "GOOGLE_AUTHENTICATION"
+           value: "true"
+         - name: "GOOGLE_CLIENT_ID"
+           value: ""
+         - name: "GOOGLE_SECRET"
+           value: ""
          - name: "RAILS_ENV"
            value: "production"
-         - name: ERRBIT_USE_GRAVATAR
-           value: 'true'
-         - name: GITHUB_AUTHENTICATION
-           value: 'true'
-         - name: EMAIL_DELIVERY_METHOD
-           value: smtp
-         - name: ERRBIT_EMAIL_FROM
-           value: 'alarm@example.com'
-         - name: SMTP_SERVER
-           value: smtp.mailgun.org
-         - name: SMTP_PORT
-           value: '587'
-         - name: SMTP_USERNAME
-           value: 'postmaster@example.com'
-         - name: SMTP_PASSWORD
-           value: ''
-         - name: SMTP_DOMAIN
-           value: 'example.com'
-         - name: ERRBIT_HOST
-           value: 'errbit.example.com'
+         - name: "ERRBIT_USE_GRAVATAR"
+           value: "true"
+         - name: "GITHUB_AUTHENTICATION"
+           value: "true"
+         - name: "EMAIL_DELIVERY_METHOD"
+           value: "smtp"
+         - name: "ERRBIT_EMAIL_FROM"
+           value: "errbit@errbit.example.org"
+         - name: "SMTP_SERVER"
+           value: "smtp.mailgun.org"
+         - name: "SMTP_PORT"
+           value: "587"
+         - name: "SMTP_USERNAME"
+           value: "postmaster@example.org"
+         - name: "SMTP_PASSWORD"
+           value: ""
+         - name: "SMTP_DOMAIN"
+           value: "example.org"
+         - name: "ERRBIT_HOST"
+           value: "errbit.example.org"
