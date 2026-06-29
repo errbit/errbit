@@ -36,9 +36,8 @@ module ApplicationHelper
   end
 
   def tally(collection)
-    collection.values.inject({}) do |tallies, tally|
+    collection.values.each_with_object({}) do |tally, tallies|
       tallies[tally["value"]] = tally["count"]
-      tallies
     end
   end
 
