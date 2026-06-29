@@ -32,6 +32,6 @@ class NoticeFingerprinter
       end
     end
 
-    Digest::MD5.hexdigest(material.map(&:to_s).join)
+    Digest::MD5.hexdigest(material.join)
   end
 end
