@@ -13,7 +13,7 @@ class Watcher
 
   before_validation :clear_unused_watcher_type
 
-  attr_accessor :watcher_type
+  attr_writer :watcher_type
 
   def watcher_type
     @watcher_type ||= email.present? ? "email" : "user"
