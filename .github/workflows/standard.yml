@@ -49,4 +49,5 @@ jobs:
             app/controllers/unlink_githubs_controller.rb \
             app/controllers/unlink_googles_controller.rb \
             app/interactors \
+            app/helpers \
             spec
