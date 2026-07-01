@@ -57,6 +57,12 @@ The list of requirements to install Errbit are:
 * Ruby 4.0
 * MongoDB >= 7.0
 
+## Compatibility
+
+Errbit is API-compliant with Airbrake and supports:
+* Airbrake ruby gem (API v2 and v3)
+* Airbrake-JS and other compatible clients
+
 ## Installation
 
 *Note*: This app is intended for people with experience deploying and maintaining
@@ -100,6 +106,12 @@ An Errbit app is a place to collect error notifications from your external
 application deployments.
 
 See [apps](docs/apps.md)
+
+## Issue Status Management
+
+Problems in Errbit can be in one of the following states:
+* **Unresolved**: The problem requires attention.
+* **Resolved**: The problem has been fixed. If the same error is reported again, Errbit will automatically reopen it and change its status back to Unresolved.
 
 ## Authentication
 
@@ -226,7 +238,7 @@ and let them know when you've fixed the bug.
 
 The Airbrake gem will look for `current_user` or `current_member`. By default,
 it will only send the `id` of the user, to specify other attributes you can
-set `config.user_attributes`. See [the Airbrake wiki for more information](https://github.com/airbrake/airbrake/wiki/Sending-current-user-information).
+set `config.user_attributes`. See the [Airbrake Ruby README](https://github.com/airbrake/airbrake-ruby#add_filter) for more information on how to add user data.
 
 If user information is received with an error report,
 it will be displayed under the *User Details* tab:
