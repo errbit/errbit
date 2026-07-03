@@ -27,7 +27,14 @@ Rails.application.configure do
   config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  #
+  # Disable force_ssl for case where the app is running behind a reverse proxy
+  # that terminates SSL and forwards requests to the app over HTTP. This is
+  # common in containerized deployments where SSL termination is handled by
+  # a load balancer or reverse proxy.
+  #
+  # Default: force_ssl is true.
+  config.force_ssl = ENV.fetch("ERRBIT_DISABLE_FORCE_SSL") == "false"
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
