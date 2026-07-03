@@ -268,7 +268,7 @@ GEM
     kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
-    language_server-protocol (3.17.0.5)
+    language_server-protocol (3.17.0.6)
     launchy (3.1.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
@@ -854,7 +854,7 @@ CHECKSUMS
   kaminari-core (1.2.2) sha256=3bd26fec7370645af40ca73b9426a448d09b8a8ba7afa9ba3c3e0d39cdbb83ff
   kaminari-i18n (0.5.0) sha256=f20efcd31370f07eb423defdb296b8e05e48c8bc897655c636bc1b69b0fbe252
   kaminari-mongoid (1.0.2) sha256=7d28be9a8322d82bca36e6b4983f2f91e1149eee84755b52ce26c0cd0f040ebc
-  language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
+  language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   launchy (3.1.1) sha256=72b847b5cc961589dde2c395af0108c86ff0119f42d4648d25b5440ebb10059e
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   listen (3.10.0) sha256=c6e182db62143aeccc2e1960033bebe7445309c7272061979bb098d03760c9d2
