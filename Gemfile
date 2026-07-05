@@ -36,7 +36,7 @@ gem "inline_svg"
 gem "useragent"
 gem "nokogiri"
 gem "uri"
-gem "rack-timeout", require: false
+gem "rack-timeout"
 gem "puma"
 gem "ostruct"
 
