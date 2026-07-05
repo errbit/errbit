@@ -33,6 +33,9 @@ services:
       RAILS_MAX_THREADS: "2"
       ERRBIT_HOST: "errbit.example.com"
       THRUSTER_TLS_DOMAIN: "errbit.example.com"
+    ports:
+      - "80:80" # Listen HTTP traffic
+      - "443:443" # Listen HTTPS traffic
     volumes:
       - "./thruster:/rails/storage/thruster:rw" # Volume for storing ACME certificate
 ```
