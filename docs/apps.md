@@ -35,11 +35,11 @@ support clickable backtraces with other repositories.
 
 The following fields are available for this template:
 
-- %{branch}: The repo branch name
-- %{file}: The relative file/path name of the backtrace file
-- %{line}: The line number the backtrace occurred
-- %{ebranch}: The URI escaped version of the branch name
-- %{efile}: The URI escaped version of the file name
+- `%{branch}`: The repo branch name
+- `%{file}`: The relative file/path name of the backtrace file
+- `%{line}`: The line number the backtrace occurred
+- `%{ebranch}`: The URI escaped version of the branch name
+- `%{efile}`: The URI escaped version of the file name
 
 A few examples:
 
