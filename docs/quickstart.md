@@ -62,7 +62,7 @@ services:
       - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
       - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
     ports:
-      - "80:80" # Listen for HTTPS traffic
+      - "80:80" # Listen for HTTP traffic
       - "443:443" # Listen for HTTPS traffic
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock" # Traefik needs access to Docker socket to discover containers
