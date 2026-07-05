@@ -34,8 +34,8 @@ services:
       ERRBIT_HOST: "errbit.example.com"
       THRUSTER_TLS_DOMAIN: "errbit.example.com"
     ports:
-      - "80:80" # Listen HTTP traffic
-      - "443:443" # Listen HTTPS traffic
+      - "80:80" # Listen for HTTP traffic
+      - "443:443" # Listen for HTTPS traffic
     volumes:
       - "./thruster:/rails/storage/thruster:rw" # Volume for storing ACME certificate
 ```
@@ -62,8 +62,8 @@ services:
       - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
       - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
     ports:
-      - "80:80" # Listen HTTP traffic
-      - "443:443" # Listen HTTPS traffic
+      - "80:80" # Listen for HTTPS traffic
+      - "443:443" # Listen for HTTPS traffic
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock" # Traefik needs access to Docker socket to discover containers
       - "./acme.json:/acme.json" # Here we store ACME certificates
