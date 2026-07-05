@@ -12,7 +12,7 @@ those applications. If that's the case, set the LATEST APP VERSION field
 for your Errbit app, and Errbit will ignore notices from older
 application versions. Be sure your notifier is setting the
 context.version field in its notifications (see
-[https://airbrake.io/docs/](https://airbrake.io/docs/)).
+[https://docs.airbrake.io/](https://docs.airbrake.io/)).
 
 ## Excluding some apps when viewing problems (plus other awesome filtering in future)
 
