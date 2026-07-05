@@ -83,9 +83,20 @@ You can learn more about thruster environment variables [here](https://github.co
 
 ### Application environment variables
 
+#### `MONGO_URL`
+
+MongoDB connection string in the form
+`mongodb://username:password@example.com:port/database`. To make it easier to
+connect to third-party MongoDB providers, you can supply this value under any of
+these names (the first one set wins): `MONGODB_URI`, `MONGOLAB_URI`,
+`MONGOHQ_URL`, `MONGODB_URL`, or `MONGO_URL`.
+
+Default: `mongodb://localhost` (resolves to `mongodb://localhost/errbit_<Rails.env>`).
+
+Default in container: same as default value.
+
 | Environment variable         | Description                                        | Default              | Default in container |
 |------------------------------|----------------------------------------------------|----------------------|----------------------|
-| `MONGO_URL`                  |                                                    |                      |                      |
 | `SECRET_KEY_BASE`            |                                                    |                      |                      |
 | `ERRBIT_HOST`                | Hostname to use when building links back to Errbit | `errbit.example.com` | as default           |
 | `ERRBIT_ADMIN_EMAIL`         |                                                    |                      |                      |
@@ -141,9 +152,6 @@ You can learn more about thruster environment variables [here](https://github.co
 <dt>SECRET_KEY_BASE
 <dd>For production environments, you should run `bundle exec rails secret` to generate a secret, unique key for this parameter
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
-<dt>MONGO_URL
-<dd>URL connection string for mongo in the form mongodb://username:password@example.com:port To more easily set up connections to third party mongo providers, you can call this value MONGODB_URI, MONGOLAB_URI, MONGOHQ_URL, MONGODB_URL or MONGO_URL
-<dd>defaults to mongodb://localhost/errbit_&lt;Rails.env&gt;
 <dt>GITHUB_URL
 <dd>Use this URL for interacting GitHub. This is useful if you have a GitHub enterprise account and you're using a URL other than https://github.com
 <dd>defaults to https://github.com

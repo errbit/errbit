@@ -8,7 +8,7 @@ This is a quickstart guide to get you up and running with the Errbit.
 * Docker with Docker Compose plugin
 * Public IPv4 address
 * (Optional) Public IPv6 address
-* Domain name for errbit. E.g. `errbit.example.com`
+* Domain name for Errbit. E.g. `errbit.example.com`
 
 ## Installing dependencies
 
@@ -33,6 +33,9 @@ services:
       RAILS_MAX_THREADS: "2"
       ERRBIT_HOST: "errbit.example.com"
       THRUSTER_TLS_DOMAIN: "errbit.example.com"
+    ports:
+      - "80:80" # Listen for HTTP traffic
+      - "443:443" # Listen for HTTPS traffic
     volumes:
       - "./thruster:/rails/storage/thruster:rw" # Volume for storing ACME certificate
 ```
@@ -59,8 +62,8 @@ services:
       - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
       - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
     ports:
-      - "80:80" # Listen HTTP traffic
-      - "443:443" # Listen HTTPS traffic
+      - "80:80" # Listen for HTTP traffic
+      - "443:443" # Listen for HTTPS traffic
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock" # Traefik needs access to Docker socket to discover containers
       - "./acme.json:/acme.json" # Here we store ACME certificates

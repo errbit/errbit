@@ -2,19 +2,19 @@
 
 ## `RACK_TIMEOUT_SERVICE_TIMEOUT`
 
-Default: `15`.
+Default: `15` (seconds).
 
 Default in container: same as default value.
 
 ## `RACK_TIMEOUT_WAIT_TIMEOUT`
 
-Default: `30`.
+Default: `30` (seconds).
 
 Default in container: same as default value.
 
 ## `RACK_TIMEOUT_WAIT_OVERTIME`
 
-Default: `60`.
+Default: `60` (seconds).
 
 Default in container: same as default value.
 
