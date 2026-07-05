@@ -38,4 +38,6 @@ to the TLS certificate.
 
 ## Health Checks
 
-Default Rails health check at `/up`. If you need.
+Errbit exposes the default Rails health check at `/up`, which returns 200 if
+the app boots with no exceptions, otherwise 500. You can use this endpoint for
+load balancer or container orchestration health checks.

@@ -12,7 +12,7 @@ those applications. If that's the case, set the LATEST APP VERSION field
 for your Errbit app, and Errbit will ignore notices from older
 application versions. Be sure your notifier is setting the
 context.version field in its notifications (see
-[https://airbrake.io/docs/](https://airbrake.io/docs/)).
+[https://docs.airbrake.io/](https://docs.airbrake.io/)).
 
 ## Excluding some apps when viewing problems (plus other awesome filtering in future)
 
@@ -35,11 +35,11 @@ support clickable backtraces with other repositories.
 
 The following fields are available for this template:
 
-- %{branch}: The repo branch name
-- %{file}: The relative file/path name of the backtrace file
-- %{line}: The line number the backtrace occurred
-- %{ebranch}: The URI escaped version of the branch name
-- %{efile}: The URI escaped version of the file name
+- `%{branch}`: The repo branch name
+- `%{file}`: The relative file/path name of the backtrace file
+- `%{line}`: The line number the backtrace occurred
+- `%{ebranch}`: The URI escaped version of the branch name
+- `%{efile}`: The URI escaped version of the file name
 
 A few examples:
 
