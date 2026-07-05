@@ -24,7 +24,7 @@ Create `docker-compose.yml` with the following content:
 ```yaml
 services:
   errbit:
-    image: "docker.io/errbit/errbit:latest"
+    image: "docker.io/errbit/errbit:0.11"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
@@ -66,7 +66,7 @@ services:
       - "./acme.json:/acme.json" # Here we store ACME certificates
 
   errbit:
-    image: "docker.io/errbit/errbit:latest"
+    image: "docker.io/errbit/errbit:0.11"
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
