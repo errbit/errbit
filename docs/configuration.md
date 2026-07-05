@@ -83,9 +83,16 @@ You can learn more about thruster environment variables [here](https://github.co
 
 ### Application environment variables
 
+#### `MONGO_URL`
+
+Default: not set.
+
+Default in container: not set.
+
+
+
 | Environment variable         | Description                                        | Default              | Default in container |
 |------------------------------|----------------------------------------------------|----------------------|----------------------|
-| `MONGO_URL`                  |                                                    |                      |                      |
 | `SECRET_KEY_BASE`            |                                                    |                      |                      |
 | `ERRBIT_HOST`                | Hostname to use when building links back to Errbit | `errbit.example.com` | as default           |
 | `ERRBIT_ADMIN_EMAIL`         |                                                    |                      |                      |
