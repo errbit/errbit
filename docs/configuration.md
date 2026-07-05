@@ -85,11 +85,15 @@ You can learn more about thruster environment variables [here](https://github.co
 
 #### `MONGO_URL`
 
-Default: not set.
+MongoDB connection string in the form
+`mongodb://username:password@example.com:port/database`. To make it easier to
+connect to third-party MongoDB providers, you can supply this value under any of
+these names (the first one set wins): `MONGODB_URI`, `MONGOLAB_URI`,
+`MONGOHQ_URL`, `MONGODB_URL`, or `MONGO_URL`.
 
-Default in container: not set.
+Default: `mongodb://localhost` (resolves to `mongodb://localhost/errbit_<Rails.env>`).
 
-
+Default in container: same as default value.
 
 | Environment variable         | Description                                        | Default              | Default in container |
 |------------------------------|----------------------------------------------------|----------------------|----------------------|
