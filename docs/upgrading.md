@@ -1,5 +1,9 @@
 # Upgrading Errbit
 
+## Upgrading Errbit from v0.11.0 to v0.11.2
+
+* Add support for MongoDB 8.3.
+
 ## Upgrading Errbit from v0.10.0 to v0.11.0
 
 * Add support for MongoDB 8.2.
