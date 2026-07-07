@@ -19,7 +19,7 @@
 
       <% if Errbit::Config.oidc_authentication %>
         <span class="oidc">
-          <%= link_to "Sign in with OpenID Connect", user_openid_connect_omniauth_authorize_path, method: :post %>
+          <%= link_to "Sign in with #{Errbit::Config.oidc_site_title}", user_openid_connect_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
     </div>
