@@ -1,4 +1,4 @@
-# OIDC aka OpenID Connect
+# OIDC (OpenID Connect)
 
 ## Environment variables
 
