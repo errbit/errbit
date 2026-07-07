@@ -91,7 +91,6 @@ end
 group :development do
   gem "listen", "~> 3.10"
   gem "bundler-audit", require: false
-  gem "httplog"
 end
 
 group :test do
