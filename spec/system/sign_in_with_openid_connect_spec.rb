@@ -29,7 +29,7 @@ RSpec.describe "Sign in with OpenID Connect", type: :system, retry: 3 do
     it "is expected to create an account" do
       visit root_path
 
-      click_link "Sign in with OpenID Connect"
+      click_link "Sign in with #{Errbit::Config.oidc_site_title}"
 
       expect(page).to have_content(I18n.t("devise.omniauth_callbacks.success", kind: "OpenID Connect"))
     end
