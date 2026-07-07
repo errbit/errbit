@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "problems/index.html.erb", type: :view do
-  let(:problem_1) { create(:problem) }
+  let(:problem_1) { create(:errbit_problem) }
 
-  let(:problem_2) { create(:problem, app: problem_1.app) }
+  let(:problem_2) { create(:errbit_problem, app: problem_1.app) }
 
   before do
     allow(view).to receive(:selected_problems).and_return([])
@@ -16,7 +16,7 @@ RSpec.describe "problems/index.html.erb", type: :view do
     allow(view).to receive(:params_sort).and_return("last_notice_at")
     allow(view).to receive(:params_order).and_return("asc")
 
-    allow(controller).to receive(:current_user).and_return(create(:user))
+    allow(controller).to receive(:current_user).and_return(create(:errbit_user))
   end
 
   describe "with problem" do

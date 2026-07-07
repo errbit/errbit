@@ -2,32 +2,32 @@
 
 class UsersController < ApplicationController
   def index
-    @users = policy_scope(User)
-      .order_by(name: :asc)
+    @users = policy_scope(Errbit::User)
+      .order(name: :asc)
       .page(params[:page])
       .per(current_user.per_page)
   end
 
   def show
-    @user = User.find(params.expect(:id))
+    @user = Errbit::User.find(params.expect(:id))
 
     authorize @user
   end
 
   def new
-    @user = User.new
+    @user = Errbit::User.new
 
     authorize @user
   end
 
   def edit
-    @user = User.find(params.expect(:id))
+    @user = Errbit::User.find(params.expect(:id))
 
     authorize @user
   end
 
   def create
-    @user = User.new(permitted_attributes(User.new))
+    @user = Errbit::User.new(permitted_attributes(Errbit::User.new))
 
     authorize @user
 
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params.expect(:id))
+    @user = Errbit::User.find(params.expect(:id))
 
     authorize @user
 
@@ -55,14 +55,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params.expect(:id))
+    @user = Errbit::User.find(params.expect(:id))
 
     if @user == current_user
       flash[:error] = t(".error")
     else
       authorize @user
 
-      UserDestroy.new(@user).destroy
+      Errbit::UserDestroy.new(@user).destroy
 
       flash[:success] = t(".success", name: @user.name)
     end

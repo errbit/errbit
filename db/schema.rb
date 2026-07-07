@@ -1,0 +1,234 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_082431) do
+  create_table "errbit_apps", force: :cascade do |t|
+    t.string "api_key"
+    t.string "asset_host"
+    t.string "bitbucket_repo"
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.string "current_app_version"
+    t.string "custom_backtrace_url_template"
+    t.text "email_at_notices"
+    t.string "github_repo"
+    t.string "name"
+    t.boolean "notify_all_users", default: false, null: false
+    t.boolean "notify_on_errs", default: true, null: false
+    t.string "repository_branch"
+    t.datetime "updated_at", null: false
+    t.index ["api_key"], name: "index_errbit_apps_on_api_key", unique: true
+    t.index ["bson_id"], name: "index_errbit_apps_on_bson_id", unique: true
+    t.index ["name"], name: "index_errbit_apps_on_name", unique: true
+  end
+
+  create_table "errbit_backtraces", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.string "fingerprint"
+    t.json "lines"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_backtraces_on_bson_id", unique: true
+    t.index ["fingerprint"], name: "index_errbit_backtraces_on_fingerprint", unique: true
+  end
+
+  create_table "errbit_comments", force: :cascade do |t|
+    t.text "body"
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_problem_id", null: false
+    t.integer "errbit_user_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_comments_on_bson_id", unique: true
+    t.index ["errbit_problem_id"], name: "index_errbit_comments_on_errbit_problem_id"
+    t.index ["errbit_user_id"], name: "index_errbit_comments_on_errbit_user_id"
+  end
+
+  create_table "errbit_errs", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_problem_id", null: false
+    t.string "fingerprint"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_errs_on_bson_id", unique: true
+    t.index ["errbit_problem_id"], name: "index_errbit_errs_on_errbit_problem_id"
+    t.index ["fingerprint"], name: "index_errbit_errs_on_fingerprint"
+  end
+
+  create_table "errbit_issue_trackers", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_app_id"
+    t.json "options"
+    t.string "type_tracker"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_issue_trackers_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_issue_trackers_on_errbit_app_id", unique: true
+  end
+
+  create_table "errbit_notice_fingerprinters", force: :cascade do |t|
+    t.boolean "action", default: true, null: false
+    t.integer "backtrace_lines", default: -1, null: false
+    t.string "bson_id"
+    t.boolean "component", default: true, null: false
+    t.datetime "created_at", null: false
+    t.boolean "environment_name", default: true, null: false
+    t.integer "errbit_app_id"
+    t.boolean "error_class", default: true, null: false
+    t.boolean "message", default: true, null: false
+    t.string "source"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_notice_fingerprinters_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_notice_fingerprinters_on_errbit_app_id", unique: true
+  end
+
+  create_table "errbit_notices", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_app_id", null: false
+    t.integer "errbit_backtrace_id", null: false
+    t.integer "errbit_err_id", null: false
+    t.string "error_class"
+    t.string "framework"
+    t.text "message"
+    t.json "notifier"
+    t.json "request"
+    t.json "server_environment"
+    t.datetime "updated_at", null: false
+    t.json "user_attributes"
+    t.index ["bson_id"], name: "index_errbit_notices_on_bson_id", unique: true
+    t.index ["created_at"], name: "index_errbit_notices_on_created_at"
+    t.index ["errbit_app_id"], name: "index_errbit_notices_on_errbit_app_id"
+    t.index ["errbit_backtrace_id"], name: "index_errbit_notices_on_errbit_backtrace_id"
+    t.index ["errbit_err_id", "created_at", "id"], name: "index_errbit_notices_on_err_created_id"
+    t.index ["errbit_err_id"], name: "index_errbit_notices_on_errbit_err_id"
+  end
+
+  create_table "errbit_notification_services", force: :cascade do |t|
+    t.string "api_token"
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.integer "errbit_app_id"
+    t.string "mentions"
+    t.text "notify_at_notices"
+    t.string "room_id"
+    t.string "sender_name"
+    t.string "service"
+    t.string "service_url"
+    t.string "subdomain"
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.string "user_id"
+    t.index ["bson_id"], name: "index_errbit_notification_services_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_notification_services_on_errbit_app_id", unique: true
+    t.index ["type"], name: "index_errbit_notification_services_on_type"
+  end
+
+  create_table "errbit_problems", force: :cascade do |t|
+    t.string "app_name"
+    t.string "bson_id"
+    t.integer "comments_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.string "environment"
+    t.integer "errbit_app_id", null: false
+    t.string "error_class"
+    t.datetime "first_notice_at"
+    t.json "hosts"
+    t.string "issue_link"
+    t.string "issue_type"
+    t.datetime "last_notice_at"
+    t.string "message"
+    t.json "messages"
+    t.integer "notices_count", default: 0, null: false
+    t.boolean "resolved", default: false, null: false
+    t.datetime "resolved_at"
+    t.datetime "updated_at", null: false
+    t.json "user_agents"
+    t.string "where"
+    t.index ["app_name"], name: "index_errbit_problems_on_app_name"
+    t.index ["bson_id"], name: "index_errbit_problems_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_problems_on_errbit_app_id"
+    t.index ["first_notice_at"], name: "index_errbit_problems_on_first_notice_at"
+    t.index ["last_notice_at"], name: "index_errbit_problems_on_last_notice_at"
+    t.index ["message"], name: "index_errbit_problems_on_message"
+    t.index ["notices_count"], name: "index_errbit_problems_on_notices_count"
+    t.index ["resolved_at"], name: "index_errbit_problems_on_resolved_at"
+  end
+
+  create_table "errbit_site_configs", force: :cascade do |t|
+    t.boolean "action", default: true, null: false
+    t.integer "backtrace_lines", default: -1
+    t.string "bson_id"
+    t.boolean "component", default: true, null: false
+    t.datetime "created_at", null: false
+    t.boolean "environment_name", default: true, null: false
+    t.boolean "error_class", default: true, null: false
+    t.boolean "message", default: true, null: false
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_site_configs_on_bson_id", unique: true
+  end
+
+  create_table "errbit_users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
+    t.string "authentication_token"
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "github_login"
+    t.string "github_oauth_token"
+    t.string "google_uid"
+    t.datetime "last_sign_in_at"
+    t.string "last_sign_in_ip"
+    t.string "name"
+    t.integer "per_page", default: 30
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.integer "sign_in_count", default: 0, null: false
+    t.string "time_zone", default: "UTC"
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.index ["authentication_token"], name: "index_errbit_users_on_authentication_token", unique: true
+    t.index ["bson_id"], name: "index_errbit_users_on_bson_id", unique: true
+    t.index ["email"], name: "index_errbit_users_on_email", unique: true
+    t.index ["github_login"], name: "index_errbit_users_on_github_login", unique: true
+    t.index ["reset_password_token"], name: "index_errbit_users_on_reset_password_token", unique: true
+  end
+
+  create_table "errbit_watchers", force: :cascade do |t|
+    t.string "bson_id"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.integer "errbit_app_id", null: false
+    t.integer "errbit_user_id"
+    t.datetime "updated_at", null: false
+    t.index ["bson_id"], name: "index_errbit_watchers_on_bson_id", unique: true
+    t.index ["errbit_app_id"], name: "index_errbit_watchers_on_errbit_app_id"
+    t.index ["errbit_user_id"], name: "index_errbit_watchers_on_errbit_user_id"
+  end
+
+  add_foreign_key "errbit_comments", "errbit_problems"
+  add_foreign_key "errbit_comments", "errbit_users"
+  add_foreign_key "errbit_errs", "errbit_problems"
+  add_foreign_key "errbit_issue_trackers", "errbit_apps"
+  add_foreign_key "errbit_notice_fingerprinters", "errbit_apps"
+  add_foreign_key "errbit_notices", "errbit_apps"
+  add_foreign_key "errbit_notices", "errbit_backtraces"
+  add_foreign_key "errbit_notices", "errbit_errs"
+  add_foreign_key "errbit_notification_services", "errbit_apps"
+  add_foreign_key "errbit_problems", "errbit_apps"
+  add_foreign_key "errbit_watchers", "errbit_apps"
+  add_foreign_key "errbit_watchers", "errbit_users"
+end

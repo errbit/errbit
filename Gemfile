@@ -39,6 +39,7 @@ gem "uri"
 gem "rack-timeout"
 gem "puma"
 gem "ostruct"
+gem "sqlite3", ">= 2.1"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -98,6 +99,8 @@ group :test do
   gem "rspec-rebound", require: false
   gem "rspec-activemodel-mocks"
   gem "mongoid-rspec"
+  gem "shoulda-matchers"
+  gem "database_rewinder"
   gem "pundit-matchers"
   gem "capybara"
   gem "selenium-webdriver"

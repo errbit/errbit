@@ -25,7 +25,7 @@
     </thead>
 
     <tbody>
-      <% ProblemDecorator.decorate_collection(problems).each do |problem| %>
+      <% Errbit::ProblemDecorator.decorate_collection(problems).each do |problem| %>
         <tr class="<%= problem.resolved? ? "resolved" : "unresolved" %>">
           <td class="select narrow-as-possible">
             <div class="td-container">
