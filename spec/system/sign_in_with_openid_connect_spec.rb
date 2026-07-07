@@ -39,7 +39,7 @@ RSpec.describe "Sign in with OpenID Connect", type: :system, retry: 3 do
     it "is expected to reject unrecognized user" do
       visit root_path
 
-      click_link "Sign in with OpenID Connect"
+      click_link "Sign in with #{Errbit::Config.oidc_site_title}"
 
       expect(page).to have_content("There are no authorized users with OpenID Connect login")
     end
