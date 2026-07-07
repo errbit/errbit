@@ -2,7 +2,7 @@
 
 Sometimes we need working HTTPS on localhost.
 
-For e.g. testing google auth.
+For example, testing Google auth.
 
 ## Install `mkcert`
 
