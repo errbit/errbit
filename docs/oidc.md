@@ -4,9 +4,11 @@
 
 ### `OIDC_AUTHENTICATION`
 
-Enable OIDC?
+Enable OIDC (OpenID Connect)?
 
 Default: `false`
+
+Default in container: `false`.
 
 ### `OIDC_NAME`
 
