@@ -12,9 +12,9 @@ SimpleCov.start "rails" do
   # https://github.com/simplecov-ruby/simplecov/issues/1057
   # enable_coverage_for_eval
 
-  add_group "Decorators", "app/decorators"
-  add_group "Interactors", "app/interactors"
-  add_group "Policies", "app/policies"
+  group "Decorators", "app/decorators"
+  group "Interactors", "app/interactors"
+  group "Policies", "app/policies"
 end
 
 require File.expand_path("../../config/environment", __FILE__)
