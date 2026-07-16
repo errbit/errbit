@@ -80,7 +80,7 @@ group :development, :test do
   gem "rubocop-thread_safety", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-erb", require: false
-  gem "standard", "1.55.0", require: false
+  gem "standard", "1.56.0", require: false
   gem "faker"
   gem "factory_bot_rails"
   gem "brakeman", require: false
