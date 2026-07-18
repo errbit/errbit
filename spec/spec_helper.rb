@@ -8,13 +8,14 @@ require "simplecov"
 
 SimpleCov.start "rails" do
   enable_coverage :branch
+  enable_coverage :method
+  enable_coverage :eval
   primary_coverage :branch
-  # https://github.com/simplecov-ruby/simplecov/issues/1057
-  # enable_coverage_for_eval
 
   group "Decorators", "app/decorators"
   group "Interactors", "app/interactors"
   group "Policies", "app/policies"
+  group "Views", "app/views"
 end
 
 require File.expand_path("../../config/environment", __FILE__)
