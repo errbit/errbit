@@ -25,7 +25,7 @@ module Errbit
 
     class << self
       def to_s
-        new("0.11.2", false).full_version
+        new("0.11.3", false).full_version
       end
     end
   end
