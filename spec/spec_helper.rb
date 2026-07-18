@@ -8,6 +8,7 @@ require "simplecov"
 
 SimpleCov.start "rails" do
   enable_coverage :branch
+  enable_coverage :method
   enable_coverage :eval
   primary_coverage :branch
 
