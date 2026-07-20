@@ -161,7 +161,7 @@ GEM
       htmlentities (~> 4.3)
       launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
-    erb (6.0.5)
+    erb (6.0.6)
     errbit_github_plugin (0.5.0)
       activesupport
       errbit_plugin
@@ -791,7 +791,7 @@ CHECKSUMS
   draper (4.0.6) sha256=e96990bffd4d98806913972f5ae2e6a7e8a5fb5433f17b80fbed7ba99d3c9236
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   email_spec (2.3.1) sha256=5e8891319427fd6de0f3883dffe3c2ac4f5434359a33ed9c48e6d68e9f712f1b
-  erb (6.0.5) sha256=858e63488cb796c9daba8b6e9ff4b3879c395022049be9a66a8e00980e612eac
+  erb (6.0.6) sha256=a9b24986700f5bf127c4f297c5403c3ca41b83b0a316c0cd09a096b56e644ae5
   errbit_github_plugin (0.5.0) sha256=58db10fbc1012e2b71209e2d5928b3405560b8b6733b9562870c6a9079e0a42a
   errbit_plugin (0.8.0) sha256=dfd883a4f0e55b5742cb839b0f623ac6188e52e7424f4a5f19aa11a136b09846
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
