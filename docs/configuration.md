@@ -108,6 +108,9 @@ Default in container: same as default value.
 | `ERRBIT_GRAVATAR_DEFAULT`    |                                                    |                      |                      |
 | `ERRBIT_EMAIL_FROM`          |                                                    |                      |                      |
 
+### OIDC (OpenID Connect)
+
+[Documentation here](oidc.md)
 
 <dl>
 <dt>ERRBIT_ADMIN_EMAIL
