@@ -30,6 +30,9 @@ module Errbit
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: ["assets", "tasks"])
 
+    config.action_mailer.delivery_method = :postmark
+    config.action_mailer.postmark_settings = { api_token: ENV.fetch("POSTMARK_API_TOKEN", nil) }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
