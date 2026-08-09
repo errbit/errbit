@@ -69,6 +69,7 @@ gem "thruster", require: false
 
 group :development, :test do
   gem "airbrake", "~> 4.3.5", require: false
+  gem "rubydex", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
