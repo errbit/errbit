@@ -13,6 +13,7 @@ plugins:
 AllCops:
   TargetRubyVersion: 4.0
   NewCops: enable
+  UseProjectIndex: true
 
 # We use standard as a linter and formatter instead of Rubocop.
 # Also, we are explicitly disable all rubocop rules what
