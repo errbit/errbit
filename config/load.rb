@@ -5,6 +5,22 @@ Dotenv.load(".env.default")
 
 require_relative "../app/lib/configurator"
 
+notice_thresholds = lambda do |values, key|
+  value = values[key]
+  threshold_values = if value.is_a?(Array)
+    value
+  else
+    value = value.to_s.strip
+    value = value[1...-1] if value.match?(/\A(['"]).*\1\z/)
+    value.delete_prefix("[").delete_suffix("]").split(",")
+  end
+
+  threshold_values
+    .map { |v| v.to_s.strip }
+    .reject(&:empty?)
+    .map { |v| Integer(v, 10) }
+end
+
 # map config keys to environment variables
 #
 # We use the first non-nil environment variable in the list. If the last array
@@ -16,9 +32,13 @@ Errbit::Config = Configurator.run(
   use_gravatar: ["ERRBIT_USE_GRAVATAR"],
   gravatar_default: ["ERRBIT_GRAVATAR_DEFAULT"],
   email_from: ["ERRBIT_EMAIL_FROM"],
-  email_at_notices: ["ERRBIT_EMAIL_AT_NOTICES"],
+  email_at_notices: ["ERRBIT_EMAIL_AT_NOTICES", lambda do |values|
+    notice_thresholds.call(values, :email_at_notices)
+  end],
   per_app_email_at_notices: ["ERRBIT_PER_APP_EMAIL_AT_NOTICES"],
-  notify_at_notices: ["ERRBIT_NOTIFY_AT_NOTICES"],
+  notify_at_notices: ["ERRBIT_NOTIFY_AT_NOTICES", lambda do |values|
+    notice_thresholds.call(values, :notify_at_notices)
+  end],
   per_app_notify_at_notices: ["ERRBIT_PER_APP_NOTIFY_AT_NOTICES"],
   log_location: ["ERRBIT_LOG_LOCATION"],
   notice_deprecation_days: ["ERRBIT_PROBLEM_DESTROY_AFTER_DAYS"],
