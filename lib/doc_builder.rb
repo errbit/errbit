@@ -4,7 +4,7 @@ require 'fileutils'
 require 'oga'
 
 # Walk the github refs looking for all release tags and gathering up all the
-# files from the docs/ folder for each release (plus master).
+# files from the docs/ folder for each release (plus main).
 class DocBuilder
   attr_reader :versions
 
@@ -19,8 +19,8 @@ class DocBuilder
       build_tree(tag.target.tree, tag.name.dup)
     end
 
-    master = @repo.branches['master']
-    build_tree(master.target.tree, 'master')
+    main = @repo.branches['main']
+    build_tree(main.target.tree, 'main')
   end
 
   def build_tree(tree, version)
@@ -97,12 +97,12 @@ class DocBuilder
     end
   end
 
-  # master first, then descending numerically (by semver semantics)
+  # main first, then descending numerically (by semver semantics)
   def sort_versions
     @versions.sort! do |a,b|
-      if a == 'master'
+      if a == 'main'
         -1
-      elsif b == 'master'
+      elsif b == 'main'
         1
       else
         va = a.sub(/^v/, '')
