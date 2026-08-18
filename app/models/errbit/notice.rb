@@ -117,6 +117,8 @@ module Errbit
     private
 
     def problem_recache
+      return if Errbit.migrating?
+
       problem&.uncache_notice(self)
     end
 

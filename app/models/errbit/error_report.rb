@@ -71,6 +71,7 @@ module Errbit
     end
 
     def email_notification
+      return if Errbit.migrating?
       return unless app.emailable? && should_email?
 
       Errbit::Mailer.with(error_report: self).err_notification.deliver_now
@@ -85,6 +86,7 @@ module Errbit
     end
 
     def services_notification
+      return if Errbit.migrating?
       return unless app.notification_service_configured? && should_notify?
 
       app.notification_service.create_notification(problem)

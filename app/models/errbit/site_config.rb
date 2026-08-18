@@ -39,6 +39,8 @@ module Errbit
     end
 
     def denormalize
+      return if Errbit.migrating?
+
       attrs = notice_fingerprinter_attributes
 
       Errbit::App.find_each do |app|

@@ -217,6 +217,7 @@ module Errbit
     end
 
     def store_cached_attributes_on_problems
+      return if Errbit.migrating?
       return unless saved_change_to_name?
 
       problems.update_all(app_name: name)

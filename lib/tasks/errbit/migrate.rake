@@ -2,7 +2,23 @@
 
 module Errbit
   module MigrateHelpers
+    BATCH_SIZE = Integer(ENV.fetch("ERRBIT_MIGRATE_BATCH_SIZE", 1000))
+
     module_function
+
+    def each_mongo(criteria)
+      criteria = criteria.no_timeout if criteria.respond_to?(:no_timeout)
+      criteria = criteria.batch_size(BATCH_SIZE) if criteria.respond_to?(:batch_size)
+      criteria.each { |record| yield record }
+    end
+
+    def with_import_mode
+      previous = Errbit.migrating?
+      Errbit.migrating = true
+      yield
+    ensure
+      Errbit.migrating = previous
+    end
 
     def ar_id_for(klass, mongo_id)
       return nil if mongo_id.blank?
@@ -29,7 +45,7 @@ module Errbit
       attrs[:created_at] ||= Time.current if attrs.key?(:created_at)
       attrs[:updated_at] ||= attrs[:created_at] || Time.current if attrs.key?(:updated_at)
       record.assign_attributes(attrs)
-      record.save!(validate: false)
+      with_import_mode { record.save!(validate: false) }
       existed ? stats[:updated] += 1 : stats[:created] += 1
     rescue => e
       stats[:failed] += 1
@@ -100,7 +116,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::User) do
-        ::User.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::User.all) do |mongo|
           ar = Errbit::User.find_or_initialize_by(bson_id: mongo.id.to_s)
           Errbit::MigrateHelpers.assign_and_save!(ar, {
             email: mongo.email.to_s,
@@ -136,7 +152,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::SiteConfig) do
-        ::SiteConfig.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::SiteConfig.all) do |mongo|
           ar = Errbit::SiteConfig.find_or_initialize_by(bson_id: mongo.id.to_s)
           fp = mongo.notice_fingerprinter
           Errbit::MigrateHelpers.assign_and_save!(ar, {
@@ -160,7 +176,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::App) do
-        ::App.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::App.all) do |mongo|
           ar = Errbit::App.find_or_initialize_by(bson_id: mongo.id.to_s)
           Errbit::MigrateHelpers.assign_and_save!(ar, {
             name: mongo.name,
@@ -188,7 +204,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::Watcher) do
-        ::App.all.each do |mongo_app|
+        Errbit::MigrateHelpers.each_mongo(::App.all) do |mongo_app|
           app_id = Errbit::MigrateHelpers.ar_id_for(Errbit::App, mongo_app.id)
           next unless app_id
 
@@ -213,7 +229,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::IssueTracker) do
-        ::App.all.each do |mongo_app|
+        Errbit::MigrateHelpers.each_mongo(::App.all) do |mongo_app|
           mongo = mongo_app.issue_tracker
           next if mongo.blank?
 
@@ -239,7 +255,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::NotificationService) do
-        ::App.all.each do |mongo_app|
+        Errbit::MigrateHelpers.each_mongo(::App.all) do |mongo_app|
           mongo = mongo_app.notification_service
           next if mongo.blank?
 
@@ -274,7 +290,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::NoticeFingerprinter) do
-        ::App.all.each do |mongo_app|
+        Errbit::MigrateHelpers.each_mongo(::App.all) do |mongo_app|
           mongo = mongo_app.notice_fingerprinter
           next if mongo.blank?
 
@@ -306,7 +322,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::Backtrace) do
-        ::Backtrace.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::Backtrace.all) do |mongo|
           ar = Errbit::Backtrace.find_or_initialize_by(bson_id: mongo.id.to_s)
           Errbit::MigrateHelpers.assign_and_save!(ar, {
             fingerprint: mongo.fingerprint,
@@ -325,7 +341,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::Problem) do
-        ::Problem.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::Problem.all) do |mongo|
           app_id = Errbit::MigrateHelpers.ar_id_for(Errbit::App, mongo.app_id)
           unless app_id
             stats[:failed] += 1
@@ -366,7 +382,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::Err) do
-        ::Err.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::Err.all) do |mongo|
           problem_id = Errbit::MigrateHelpers.ar_id_for(Errbit::Problem, mongo.problem_id)
           unless problem_id
             stats[:failed] += 1
@@ -392,7 +408,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::Notice) do
-        ::Notice.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::Notice.all) do |mongo|
           app_id = Errbit::MigrateHelpers.ar_id_for(Errbit::App, mongo.app_id)
           err_id = Errbit::MigrateHelpers.ar_id_for(Errbit::Err, mongo.err_id)
           backtrace_id = Errbit::MigrateHelpers.ar_id_for(Errbit::Backtrace, mongo.backtrace_id)
@@ -428,7 +444,7 @@ namespace :errbit do
     task comments: :environment do
       stats = Errbit::MigrateHelpers.stats
 
-      ::Comment.all.each do |mongo|
+      Errbit::MigrateHelpers.each_mongo(::Comment.all) do |mongo|
         problem_id = Errbit::MigrateHelpers.ar_id_for(Errbit::Problem, mongo.err_id)
         user_id = Errbit::MigrateHelpers.ar_id_for(Errbit::User, mongo.user_id)
 
@@ -467,7 +483,7 @@ namespace :errbit do
       stats = Errbit::MigrateHelpers.stats
 
       Errbit::MigrateHelpers.with_preserved_timestamps(Errbit::Problem) do
-        ::Problem.all.each do |mongo|
+        Errbit::MigrateHelpers.each_mongo(::Problem.all) do |mongo|
           ar = Errbit::Problem.find_by(bson_id: mongo.id.to_s)
           unless ar
             stats[:failed] += 1
@@ -511,7 +527,7 @@ namespace :errbit do
       embedded_notification_services = 0
       embedded_notice_fingerprinters = 0
 
-      ::App.all.each do |mongo_app|
+      Errbit::MigrateHelpers.each_mongo(::App.all) do |mongo_app|
         embedded_watchers += mongo_app.watchers.count
         embedded_issue_trackers += 1 if mongo_app.issue_tracker.present?
         embedded_notification_services += 1 if mongo_app.notification_service.present?
@@ -523,25 +539,25 @@ namespace :errbit do
       Errbit::MigrateHelpers.verify_count("notification services", embedded_notification_services, Errbit::NotificationService.where.not(bson_id: nil).count, stats)
       Errbit::MigrateHelpers.verify_count("notice fingerprinters", embedded_notice_fingerprinters, Errbit::NoticeFingerprinter.where.not(bson_id: nil).count, stats)
 
-      ::Problem.all.each do |mongo|
+      Errbit::MigrateHelpers.each_mongo(::Problem.all) do |mongo|
         sql = Errbit::Problem.find_by(bson_id: mongo.id.to_s)
         Errbit::MigrateHelpers.verify_mapping("problem", mongo.id, stats) { sql&.app.present? }
         Errbit::MigrateHelpers.verify_problem_state(mongo, sql, stats) if sql
       end
 
-      ::Err.all.each do |mongo|
+      Errbit::MigrateHelpers.each_mongo(::Err.all) do |mongo|
         sql = Errbit::Err.find_by(bson_id: mongo.id.to_s)
         Errbit::MigrateHelpers.verify_mapping("err", mongo.id, stats) { sql&.problem.present? }
       end
 
-      ::Notice.all.each do |mongo|
+      Errbit::MigrateHelpers.each_mongo(::Notice.all) do |mongo|
         sql = Errbit::Notice.find_by(bson_id: mongo.id.to_s)
         Errbit::MigrateHelpers.verify_mapping("notice", mongo.id, stats) do
           sql&.app.present? && sql.err.present? && sql.backtrace.present?
         end
       end
 
-      ::Comment.all.each do |mongo|
+      Errbit::MigrateHelpers.each_mongo(::Comment.all) do |mongo|
         sql = Errbit::Comment.find_by(bson_id: mongo.id.to_s)
         Errbit::MigrateHelpers.verify_mapping("comment", mongo.id, stats) { sql&.err.present? && sql.user.present? }
       end

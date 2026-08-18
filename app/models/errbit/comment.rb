@@ -34,6 +34,8 @@ module Errbit
     end
 
     def emailable?
+      return false if Errbit.migrating?
+
       app.emailable? && notification_recipients.any?
     end
   end
