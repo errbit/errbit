@@ -2,7 +2,7 @@
 
 class UnlinkGithubsController < ApplicationController
   def update
-    @user = User.find(params.expect(:user_id))
+    @user = Errbit::User.find(params.expect(:user_id))
 
     authorize @user
 
