@@ -43,6 +43,53 @@ module Errbit
     def stats
       {created: 0, updated: 0, failed: 0}
     end
+
+    def verify_stats
+      {checked: 0, failed: 0}
+    end
+
+    def verify_count(label, mongo_count, sql_count, stats)
+      stats[:checked] += 1
+      return if mongo_count == sql_count
+
+      stats[:failed] += 1
+      warn "  failed #{label}: Mongo has #{mongo_count}, SQL has #{sql_count}"
+    end
+
+    def verify_mapping(label, mongo_id, stats)
+      stats[:checked] += 1
+      return if yield
+
+      stats[:failed] += 1
+      warn "  failed #{label} bson_id=#{mongo_id}: missing SQL relationship mapping"
+    end
+
+    def verify_problem_state(mongo, sql, stats)
+      state = {
+        first_notice_at: mongo.first_notice_at,
+        last_notice_at: mongo.last_notice_at,
+        resolved: mongo.resolved || false,
+        resolved_at: mongo.resolved_at,
+        notices_count: mongo.notices_count || 0,
+        comments_count: mongo.comments_count || 0,
+        messages: normalize_hash(mongo.messages || {}),
+        hosts: normalize_hash(mongo.hosts || {}),
+        user_agents: normalize_hash(mongo.user_agents || {})
+      }
+
+      state.each do |attribute, mongo_value|
+        stats[:checked] += 1
+        next if sql.public_send(attribute) == mongo_value
+
+        stats[:failed] += 1
+        warn "  failed problem state bson_id=#{mongo.id} #{attribute}: Mongo #{mongo_value.inspect}, SQL #{sql.public_send(attribute).inspect}"
+      end
+    end
+
+    def print_verification_summary(stats)
+      puts "=== Verified MongoDB to SQL migration: #{stats[:checked]} checks, #{stats[:failed]} failed."
+      raise "MongoDB to SQL migration verification failed with #{stats[:failed]} issue(s)." if stats[:failed] > 0
+    end
   end
 end
 
@@ -444,6 +491,62 @@ namespace :errbit do
       end
 
       Errbit::MigrateHelpers.print_summary("problem states", stats)
+    end
+
+    desc "Verify migrated SQL data against MongoDB source data. Run after errbit:migrate:all."
+    task verify: :environment do
+      stats = Errbit::MigrateHelpers.verify_stats
+
+      Errbit::MigrateHelpers.verify_count("users", ::User.count, Errbit::User.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("site configs", ::SiteConfig.count, Errbit::SiteConfig.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("apps", ::App.count, Errbit::App.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("backtraces", ::Backtrace.count, Errbit::Backtrace.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("problems", ::Problem.count, Errbit::Problem.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("errs", ::Err.count, Errbit::Err.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("notices", ::Notice.count, Errbit::Notice.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("comments", ::Comment.count, Errbit::Comment.where.not(bson_id: nil).count, stats)
+
+      embedded_watchers = 0
+      embedded_issue_trackers = 0
+      embedded_notification_services = 0
+      embedded_notice_fingerprinters = 0
+
+      ::App.all.each do |mongo_app|
+        embedded_watchers += mongo_app.watchers.count
+        embedded_issue_trackers += 1 if mongo_app.issue_tracker.present?
+        embedded_notification_services += 1 if mongo_app.notification_service.present?
+        embedded_notice_fingerprinters += 1 if mongo_app.notice_fingerprinter.present?
+      end
+
+      Errbit::MigrateHelpers.verify_count("watchers", embedded_watchers, Errbit::Watcher.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("issue trackers", embedded_issue_trackers, Errbit::IssueTracker.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("notification services", embedded_notification_services, Errbit::NotificationService.where.not(bson_id: nil).count, stats)
+      Errbit::MigrateHelpers.verify_count("notice fingerprinters", embedded_notice_fingerprinters, Errbit::NoticeFingerprinter.where.not(bson_id: nil).count, stats)
+
+      ::Problem.all.each do |mongo|
+        sql = Errbit::Problem.find_by(bson_id: mongo.id.to_s)
+        Errbit::MigrateHelpers.verify_mapping("problem", mongo.id, stats) { sql&.app.present? }
+        Errbit::MigrateHelpers.verify_problem_state(mongo, sql, stats) if sql
+      end
+
+      ::Err.all.each do |mongo|
+        sql = Errbit::Err.find_by(bson_id: mongo.id.to_s)
+        Errbit::MigrateHelpers.verify_mapping("err", mongo.id, stats) { sql&.problem.present? }
+      end
+
+      ::Notice.all.each do |mongo|
+        sql = Errbit::Notice.find_by(bson_id: mongo.id.to_s)
+        Errbit::MigrateHelpers.verify_mapping("notice", mongo.id, stats) do
+          sql&.app.present? && sql.err.present? && sql.backtrace.present?
+        end
+      end
+
+      ::Comment.all.each do |mongo|
+        sql = Errbit::Comment.find_by(bson_id: mongo.id.to_s)
+        Errbit::MigrateHelpers.verify_mapping("comment", mongo.id, stats) { sql&.err.present? && sql.user.present? }
+      end
+
+      Errbit::MigrateHelpers.print_verification_summary(stats)
     end
 
     desc "Run all MongoDB to SQL migrations in dependency order."

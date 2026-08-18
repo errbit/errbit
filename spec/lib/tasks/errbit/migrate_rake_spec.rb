@@ -104,6 +104,8 @@ RSpec.describe "errbit:migrate" do
 
       invoke(:all)
 
+      expect { invoke(:verify) }.not_to raise_error
+
       expect(Errbit::User.count).to eq(counts[:users])
       expect(Errbit::App.count).to eq(counts[:apps])
       expect(Errbit::Problem.count).to eq(counts[:problems])
@@ -111,6 +113,21 @@ RSpec.describe "errbit:migrate" do
       expect(Errbit::Backtrace.count).to eq(counts[:backtraces])
       expect(Errbit::Notice.count).to eq(counts[:notices])
       expect(Errbit::Comment.count).to eq(counts[:comments])
+    end
+  end
+
+  describe ":verify" do
+    it "fails when migrated problem cached state does not match Mongo" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app, notices_count: 2)
+      create(:err, problem: mongo_problem)
+
+      invoke(:all)
+
+      Errbit::Problem.find_by!(bson_id: mongo_problem.id.to_s).update_columns(notices_count: 99)
+
+      expect { invoke(:verify) }
+        .to raise_error(RuntimeError, /migration verification failed with 1 issue/)
     end
   end
 end
