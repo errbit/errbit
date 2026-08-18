@@ -54,10 +54,15 @@ module Errbit
 
     def print_summary(label, stats)
       puts "=== Migrated #{label}: #{stats[:created]} created, #{stats[:updated]} updated, #{stats[:failed]} failed."
+      raise "MongoDB to SQL migration failed for #{label} with #{stats[:failed]} failed row(s)." if strict? && stats[:failed] > 0
     end
 
     def stats
       {created: 0, updated: 0, failed: 0}
+    end
+
+    def strict?
+      ActiveModel::Type::Boolean.new.cast(ENV["ERRBIT_MIGRATE_STRICT"])
     end
 
     def verify_stats

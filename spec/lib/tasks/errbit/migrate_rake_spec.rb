@@ -14,6 +14,14 @@ RSpec.describe "errbit:migrate" do
     task.invoke
   end
 
+  def with_env(key, value)
+    previous = ENV[key]
+    ENV[key] = value
+    yield
+  ensure
+    ENV[key] = previous
+  end
+
   describe ":users" do
     it "creates SQL users linked by bson_id and is idempotent" do
       mongo_user = create(:user, email: "ported@example.com", name: "Ported", admin: true)
@@ -163,6 +171,75 @@ RSpec.describe "errbit:migrate" do
       expect(sql_notice.request["&#36;params"]["nested&#46;key"]).to eq("value")
       expect(Errbit::Backtrace.find_by!(bson_id: mongo_backtrace.id.to_s).lines.first["file.name"]).to eq("app.rb")
     end
+
+    it "can resume after a strict migration failure without duplicating existing rows" do
+      mongo_user = create(:user, email: "resume@example.com", name: "Before Resume")
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app)
+      mongo_err = create(:err, problem: mongo_problem)
+
+      notice_id = BSON::ObjectId.new
+      Notice.collection.insert_one(
+        _id: notice_id,
+        app_id: mongo_app.id,
+        err_id: mongo_err.id,
+        backtrace_id: BSON::ObjectId.new,
+        message: "resume notice",
+        error_class: "RuntimeError",
+        server_environment: {"environment-name" => "production"},
+        request: {},
+        notifier: {"name" => "rspec"},
+        created_at: Time.current,
+        updated_at: Time.current
+      )
+
+      with_env("ERRBIT_MIGRATE_STRICT", "true") do
+        expect { invoke(:all) }
+          .to raise_error(RuntimeError, /migration failed for notices with 1 failed row/)
+      end
+
+      counts_after_failure = {
+        users: Errbit::User.count,
+        apps: Errbit::App.count,
+        problems: Errbit::Problem.count,
+        errs: Errbit::Err.count,
+        notices: Errbit::Notice.count
+      }
+      expect(counts_after_failure).to include(users: 1, apps: 1, problems: 1, errs: 1, notices: 0)
+
+      mongo_backtrace = create(:backtrace, lines: [{"file" => "resume.rb", "number" => 1}])
+      Notice.collection.find(_id: notice_id).update_one("$set" => {backtrace_id: mongo_backtrace.id})
+      mongo_user.update!(name: "After Resume")
+
+      with_env("ERRBIT_MIGRATE_STRICT", "true") do
+        expect { invoke(:all) }.not_to raise_error
+      end
+
+      expect(Errbit::User.count).to eq(counts_after_failure[:users])
+      expect(Errbit::App.count).to eq(counts_after_failure[:apps])
+      expect(Errbit::Problem.count).to eq(counts_after_failure[:problems])
+      expect(Errbit::Err.count).to eq(counts_after_failure[:errs])
+      expect(Errbit::Notice.count).to eq(1)
+      expect(Errbit::User.find_by!(bson_id: mongo_user.id.to_s).name).to eq("After Resume")
+      expect(Errbit::Notice.find_by!(bson_id: notice_id.to_s).backtrace.bson_id).to eq(mongo_backtrace.id.to_s)
+    end
+  end
+
+  describe "strict failure mode" do
+    it "raises when a task records failed rows" do
+      create(:problem)
+
+      with_env("ERRBIT_MIGRATE_STRICT", "true") do
+        expect { invoke(:problems) }
+          .to raise_error(RuntimeError, /migration failed for problems with 1 failed row/)
+      end
+    end
+
+    it "does not raise by default when a task records failed rows" do
+      create(:problem)
+
+      expect { invoke(:problems) }.not_to raise_error
+    end
   end
 
   describe ":verify" do
@@ -221,6 +298,57 @@ RSpec.describe "errbit:migrate" do
       expect(Errbit::Mailer).not_to receive(:with)
 
       invoke(:all)
+    end
+
+    it "does not deliver error report emails or service notifications in import mode" do
+      app = create(:errbit_app, notify_on_errs: true, email_at_notices: [0])
+      create(:errbit_watcher, app: app, email: "watcher@example.com")
+      create(:errbit_webhook_service, app: app)
+
+      report = Errbit::ErrorReport.new(
+        api_key: app.api_key,
+        error_class: "RuntimeError",
+        message: "import mode boom",
+        backtrace: [{"file" => "app.rb", "number" => 1, "method" => "call"}],
+        request: {"component" => "imports", "action" => "create", "url" => "https://example.test"},
+        server_environment: {"environment-name" => "production"},
+        notifier: {"name" => "rspec"}
+      )
+
+      expect(Errbit::Mailer).not_to receive(:with)
+      expect_any_instance_of(Errbit::NotificationServices::WebhookService).not_to receive(:create_notification)
+
+      Errbit::MigrateHelpers.with_import_mode { report.generate_notice! }
+    end
+
+    it "does not denormalize app names in import mode" do
+      app = create(:errbit_app, name: "Original App")
+      problem = create(:errbit_problem, app: app, app_name: "Original App")
+
+      Errbit::MigrateHelpers.with_import_mode { app.update!(name: "Imported App") }
+
+      expect(problem.reload.app_name).to eq("Original App")
+    end
+
+    it "does not denormalize site fingerprinters in import mode" do
+      app = create(:errbit_app)
+      app.notice_fingerprinter.update!(message: true, source: Errbit::SiteConfig::CONFIG_SOURCE_SITE)
+      site_config = create(:errbit_site_config, message: true)
+
+      Errbit::MigrateHelpers.with_import_mode { site_config.update!(message: false) }
+
+      expect(app.notice_fingerprinter.reload.message).to eq(true)
+    end
+
+    it "does not recache problems when notices are destroyed in import mode" do
+      problem = create(:errbit_problem, notices_count: 5)
+      err = create(:errbit_err, problem: problem)
+      notice = create(:errbit_notice, err: err)
+      problem.update_columns(notices_count: 5)
+
+      Errbit::MigrateHelpers.with_import_mode { notice.destroy! }
+
+      expect(problem.reload.notices_count).to eq(5)
     end
   end
 end
