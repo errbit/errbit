@@ -3,18 +3,14 @@
 require "rails_helper"
 
 RSpec.describe CommentsController, type: :controller do
-  let(:app) { create(:app) }
-
   describe "POST /apps/:app_id/errs/:id/comments/create" do
-    render_views
-
     before do
-      sign_in create(:user, admin: true)
+      sign_in create(:errbit_user, admin: true)
     end
 
     context "successful comment creation" do
-      let(:problem) { create(:problem) }
-      let(:user) { create(:user) }
+      let(:problem) { create(:errbit_problem) }
+      let(:user) { create(:errbit_user) }
 
       before do
         post :create, params: {
@@ -39,14 +35,13 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe "DELETE /apps/:app_id/errs/:id/comments/:id/destroy" do
-    render_views
-
     before do
-      sign_in create(:user, admin: true)
+      sign_in create(:errbit_user, admin: true)
     end
 
     context "successful comment deletion" do
-      let(:problem) { create(:problem_with_comments) }
+      let(:problem) { create(:errbit_problem) }
+      let!(:created_comment) { create(:errbit_comment, err: problem) }
       let(:comment) { problem.reload.comments.first }
 
       before do

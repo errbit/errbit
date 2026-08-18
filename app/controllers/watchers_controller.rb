@@ -2,7 +2,7 @@
 
 class WatchersController < ApplicationController
   def create
-    app = App.find(params.expect(:app_id))
+    app = Errbit::App.find(params.expect(:app_id))
 
     app.watchers.create!(user: current_user)
 
@@ -12,11 +12,9 @@ class WatchersController < ApplicationController
   end
 
   def destroy
-    app = App.find(params.expect(:app_id))
+    app = Errbit::App.find(params.expect(:app_id))
 
-    watcher = app.watchers.where(user: current_user).first
-
-    app.watchers.delete(watcher)
+    app.watchers.where(errbit_user_id: current_user.id).destroy_all
 
     flash[:success] = t(".success", app: app.name)
 
