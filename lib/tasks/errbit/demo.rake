@@ -5,7 +5,7 @@ namespace :errbit do
   task demo: :environment do
     require "factory_bot_rails"
 
-    app = FactoryBot.create(:app, name: "Demo App #{Time.zone.now.strftime("%N")}")
+    app = FactoryBot.create(:errbit_app, name: "Demo App #{Time.zone.now.strftime("%N")}")
 
     # Report a number of errors for the application
     app.problems.delete_all
@@ -30,15 +30,14 @@ namespace :errbit do
       message: "unexpected tSTRING_BEG, expecting keyword_do or '{' or '('"
     }]
 
-    RANDOM_METHODS = ActiveSupport.methods.shuffle[1..8]
-
-    def random_backtrace
+    random_methods = ActiveSupport.methods.shuffle[1..8]
+    random_backtrace = -> do
       backtrace = []
       99.times do |t|
         backtrace << {
           "number" => t.hash % 1000,
           "file" => "/path/to/file.rb",
-          "method" => RANDOM_METHODS.sample.to_s
+          "method" => random_methods.sample.to_s
         }
       end
       backtrace
@@ -46,12 +45,12 @@ namespace :errbit do
 
     errors.each do |error_template|
       rand(34).times do
-        ErrorReport.new(
+        Errbit::ErrorReport.new(
           error_template.reverse_merge(
             api_key: app.api_key,
             error_class: "StandardError",
             message: "Oops. Something went wrong!",
-            backtrace: random_backtrace,
+            backtrace: random_backtrace.call,
             request: {
               "component" => "main",
               "action" => "error",
@@ -70,9 +69,9 @@ namespace :errbit do
       end
     end
 
-    problem = FactoryBot.create(:problem, app: app)
-    err = FactoryBot.create(:err, problem: problem)
-    FactoryBot.create(:notice, err: err)
+    problem = FactoryBot.create(:errbit_problem, app: app)
+    err = FactoryBot.create(:errbit_err, problem: problem)
+    FactoryBot.create(:errbit_notice, err: err)
 
     puts "=== Created demo app: '#{app.name}', with example errors."
   end
