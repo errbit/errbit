@@ -15,7 +15,13 @@ RSpec.describe "SQL HTML runtime", type: :request do
     get apps_path
     expect(response).to be_successful
 
+    get new_app_path
+    expect(response).to be_successful
+
     get app_path(app)
+    expect(response).to be_successful
+
+    get edit_app_path(app)
     expect(response).to be_successful
   end
 
