@@ -6,7 +6,7 @@ module AirbrakeApi
       class ParamsError < StandardError
       end
 
-      attr_reader :params, :error
+      attr_reader :params
 
       def initialize(params = {})
         @params = params.is_a?(ActionController::Parameters) ? params.to_unsafe_h : params
@@ -26,7 +26,7 @@ module AirbrakeApi
       end
 
       def report
-        ErrorReport.new(attributes)
+        Errbit::ErrorReport.new(attributes)
       end
 
       private

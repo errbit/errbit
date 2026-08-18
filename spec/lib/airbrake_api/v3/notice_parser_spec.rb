@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe AirbrakeApi::V3::NoticeParser do
-  let(:app) { create(:app) }
+  let(:app) { create(:errbit_app) }
 
   let(:notifier_params) do
     {
