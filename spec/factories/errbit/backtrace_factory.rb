@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :errbit_backtrace, class: "Errbit::Backtrace" do
-    lines { [{"file" => "app/models/user.rb", "number" => 1, "method" => "call"}] }
+    sequence(:lines) { |number| [{"file" => "app/models/user.rb", "number" => number, "method" => "call"}] }
     fingerprint { Errbit::Backtrace.generate_fingerprint(lines) }
   end
 end

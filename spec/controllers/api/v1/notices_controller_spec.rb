@@ -5,15 +5,15 @@ require "rails_helper"
 RSpec.describe Api::V1::NoticesController, type: :controller do
   context "when logged in" do
     before do
-      @user = create(:user)
+      @user = create(:errbit_user)
     end
 
     describe "GET /api/v1/notices" do
       before do
-        create(:notice, created_at: Time.zone.parse("2012-08-01"))
-        create(:notice, created_at: Time.zone.parse("2012-08-01"))
-        create(:notice, created_at: Time.zone.parse("2012-08-21"))
-        create(:notice, created_at: Time.zone.parse("2012-08-30"))
+        create(:errbit_notice, created_at: Time.zone.parse("2012-08-01"))
+        create(:errbit_notice, created_at: Time.zone.parse("2012-08-01"))
+        create(:errbit_notice, created_at: Time.zone.parse("2012-08-21"))
+        create(:errbit_notice, created_at: Time.zone.parse("2012-08-30"))
       end
 
       it "should return JSON if JSON is requested" do
