@@ -1,0 +1,133 @@
+<tr>
+  <td class="section">
+    <table cellpadding="0" cellspacing="0" border="0" align="left">
+      <tbody>
+        <tr>
+          <td class="content" valign="top">
+            <div>
+              <p>
+                An error has just occurred in
+                <%= link_to(@app.name, app_url(@app), class: "bold") << "," %>
+                on the
+                <span class="bold"><%= @notice.environment_name %></span>
+                environment.
+                <br>
+                This error has occurred <%= pluralize(@notice.problem.notices_count, "time") %>.
+              </p>
+
+              <p>
+                <%= link_to("Click here to view the error on Errbit", app_problem_url(@app, @notice.problem), class: "bold") << "." %>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="section">
+    <table cellpadding="0" cellspacing="0" border="0" align="left">
+      <tbody>
+        <tr>
+          <td class="content" valign="top">
+            <div>
+              <p class="heading">ERROR MESSAGE:</p>
+
+              <p><%= @notice.message %></p>
+
+              <p class="heading">WHERE:</p>
+
+              <p class="monospace">
+                <%= @notice.where %>
+              </p>
+
+              <% @notice.backtrace.lines.each do |line| %>
+                <% next unless line.in_app? %>
+
+                <p class="backtrace">
+                  <%= line.link_to_source_file(@app) do %>
+                    <%= line %>
+                  <% end %>
+                </p>
+              <% end %>
+
+              <br>
+
+              <% if @notice.app_version.present? %>
+                <p class="heading">APP VERSION:</p>
+
+                <p class="monospace">
+                  <%= @notice.app_version %>
+                </p>
+
+                <br>
+              <% end %>
+
+              <br>
+
+              <% if @notice.server_environment.present? && @notice.server_environment["hostname"].present? %>
+                <p class="heading">APP SERVER:</p>
+
+                <p class="monospace">
+                  <%= @notice.server_environment["hostname"] %>
+                </p>
+
+                <br>
+              <% end %>
+
+              <p class="heading">URL:</p>
+
+              <p class="monospace">
+                <% if @notice.request["url"].present? %>
+                  <%= link_to @notice.request["url"], @notice.request["url"] %>
+                <% end %>
+              </p>
+
+              <p class="heading">BROWSER:</p>
+
+              <p class="monospace">
+                <%= user_agent_graph(@notice.problem) %>
+              </p>
+
+              <br>
+
+              <% if @notice.user_attributes.present? %>
+                <p class="heading">USER:</p>
+
+                <table>
+                  <% @notice.user_attributes.each do |key, value| %>
+                    <tr>
+                      <td style="text-align: right; padding-right: 10px; color: #6a6a6a;"><%= key.to_s.titleize + ":" %></td>
+
+                      <td><%= auto_link(value.to_s) %></td>
+                    </tr>
+                  <% end %>
+                </table>
+
+                <br>
+              <% end %>
+
+              <% if @notice.backtrace.lines.any? %>
+                <br>
+
+                <p class="heading">FULL BACKTRACE:</p>
+
+                <% @notice.backtrace.lines.each do |line| %>
+                  <p class="backtrace">
+                    <%= line.link_to_source_file(@app) do %>
+                      <%= line %>
+                    <% end %>
+                  </p>
+                <% end %>
+
+                <br>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
