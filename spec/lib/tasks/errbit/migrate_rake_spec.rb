@@ -412,5 +412,157 @@ RSpec.describe "errbit:migrate" do
       expect(sql_problem.notices_count).to eq(0)
       expect(sql_problem.comments_count).to eq(0)
     end
+
+    it "migrates base NotificationService with no subclass fields" do
+      mongo_app = create(:app, name: "Base Service App")
+      App.collection.find_one_and_update(
+        {_id: mongo_app.id},
+        {"$set" => {
+          "notification_service._id" => BSON::ObjectId.new.to_s,
+          "notification_service._type" => "NotificationService",
+          "notification_service.notify_at_notices" => []
+        }}
+      )
+
+      invoke(:all)
+
+      sql_app = Errbit::App.find_by!(bson_id: mongo_app.id.to_s)
+      expect(sql_app.notification_service).to be_a(Errbit::NotificationService)
+      expect(sql_app.notification_service.class).not_to be < Errbit::NotificationServices
+    end
+
+    it "migrates problems with resolved_at timestamps" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem,
+        app: mongo_app,
+        resolved: true,
+        resolved_at: Time.utc(2026, 7, 16, 9, 8, 10),
+        notices_count: 10)
+
+      invoke(:all)
+
+      sql_problem = Errbit::Problem.find_by(bson_id: mongo_problem.id.to_s)
+      expect(sql_problem.resolved).to eq(true)
+      expect(sql_problem.resolved_at).to be_a(Time)
+      expect(sql_problem.resolved_at.year).to eq(2026)
+      expect(sql_problem.resolved_at.month).to eq(7)
+      expect(sql_problem.notices_count).to eq(10)
+    end
+
+    it "migrates notices with null environment-name" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app)
+      mongo_err = create(:err, problem: mongo_problem)
+      mongo_backtrace = create(:backtrace, lines: [{"file" => "app.rb", "number" => 1}])
+      mongo_notice = create(:notice,
+        app: mongo_app,
+        err: mongo_err,
+        backtrace: mongo_backtrace,
+        server_environment: {"environment-name" => nil, "hostname" => "areprer7"})
+
+      invoke(:all)
+
+      sql_notice = Errbit::Notice.find_by!(bson_id: mongo_notice.id.to_s)
+      expect(sql_notice.server_environment["environment-name"]).to be_nil
+      expect(sql_notice.server_environment["hostname"]).to eq("areprer7")
+    end
+
+    it "migrates backtraces with empty lines" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app)
+      mongo_err = create(:err, problem: mongo_problem)
+      mongo_backtrace = create(:backtrace, lines: [{"file" => "", "number" => "", "method" => ""}])
+      create(:notice,
+        app: mongo_app,
+        err: mongo_err,
+        backtrace: mongo_backtrace,
+        message: "empty backtrace test")
+
+      invoke(:all)
+
+      sql_backtrace = Errbit::Backtrace.find_by!(bson_id: mongo_backtrace.id.to_s)
+      expect(sql_backtrace.lines).to eq([{"file" => "", "number" => "", "method" => ""}])
+    end
+
+    it "migrates problems with large user agent distributions" do
+      mongo_app = create(:app)
+      user_agents = {}
+      113.times do |i|
+        key = "ua-#{i.to_s.rjust(32, '0')}"
+        user_agents[key] = {"value" => "Mozilla/5.0 (Test #{i})", "count" => i + 1}
+      end
+      mongo_problem = create(:problem, app: mongo_app, user_agents: user_agents)
+
+      invoke(:all)
+
+      sql_problem = Errbit::Problem.find_by(bson_id: mongo_problem.id.to_s)
+      expect(sql_problem.user_agents.keys.length).to eq(113)
+      expect(sql_problem.user_agents.values.map { |v| v["count"] }.max).to eq(113)
+    end
+
+    it "migrates multi-line error messages" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app)
+      mongo_err = create(:err, problem: mongo_problem)
+      mongo_backtrace = create(:backtrace, lines: [{"file" => "app.rb", "number" => 1}])
+      multi_line_message = "unsupported key type `ssh-ed25519'\nnet-ssh requires the following gems for ed25519 support:\n * ed25519 (>= 1.2, < 2.0)\n * bcrypt_pbkdf (>= 1.0, < 2.0)\nSee https://github.com/net-ssh/net-ssh/issues/565"
+      mongo_notice = create(:notice,
+        app: mongo_app,
+        err: mongo_err,
+        backtrace: mongo_backtrace,
+        message: multi_line_message)
+
+      invoke(:all)
+
+      sql_notice = Errbit::Notice.find_by!(bson_id: mongo_notice.id.to_s)
+      expect(sql_notice.message).to include("ssh-ed25519")
+      expect(sql_notice.message).to include("net-ssh")
+      expect(sql_notice.message).to include("github.com")
+    end
+
+    it "migrates apps with empty bitbucket_repo" do
+      mongo_app = create(:app, name: "Empty Bitbucket App", bitbucket_repo: "")
+
+      invoke(:all)
+
+      sql_app = Errbit::App.find_by!(bson_id: mongo_app.id.to_s)
+      expect(sql_app.bitbucket_repo).to eq("")
+    end
+
+    it "migrates base NotificationService with notify_at_notices [0]" do
+      mongo_app = create(:app, name: "Base Service Notify Zero")
+      App.collection.find_one_and_update(
+        {_id: mongo_app.id},
+        {"$set" => {
+          "notification_service._id" => BSON::ObjectId.new.to_s,
+          "notification_service._type" => "NotificationService",
+          "notification_service.notify_at_notices" => [0]
+        }}
+      )
+
+      invoke(:all)
+
+      sql_app = Errbit::App.find_by!(bson_id: mongo_app.id.to_s)
+      expect(sql_app.notification_service).to be_a(Errbit::NotificationService)
+      expect(sql_app.notification_service.notify_at_notices).to eq([0])
+    end
+
+    it "migrates problems with server_environment containing null app-version" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app)
+      mongo_err = create(:err, problem: mongo_problem)
+      mongo_backtrace = create(:backtrace, lines: [{"file" => "app.rb", "number" => 1}])
+      mongo_notice = create(:notice,
+        app: mongo_app,
+        err: mongo_err,
+        backtrace: mongo_backtrace,
+        server_environment: {"environment-name" => "production-7.2", "app-version" => nil, "hostname" => "areprer7"})
+
+      invoke(:all)
+
+      sql_notice = Errbit::Notice.find_by!(bson_id: mongo_notice.id.to_s)
+      expect(sql_notice.server_environment["app-version"]).to be_nil
+      expect(sql_notice.server_environment["hostname"]).to eq("areprer7")
+    end
   end
 end
