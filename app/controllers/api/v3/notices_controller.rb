@@ -31,6 +31,7 @@ module Api
         return render body: VERSION_TOO_OLD, status: :unprocessable_content unless report.should_keep?
 
         report.generate_notice!
+
         render status: :created, json: {
           id: report.notice.id,
           url: report.problem.url
