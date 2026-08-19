@@ -351,4 +351,66 @@ RSpec.describe "errbit:migrate" do
       expect(problem.reload.notices_count).to eq(5)
     end
   end
+
+  describe "production data shapes" do
+    it "migrates notices with attack payloads without corruption" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app)
+      mongo_err = create(:err, problem: mongo_problem)
+      mongo_backtrace = create(:backtrace, lines: [{"file" => "app.rb", "number" => 1}])
+      mongo_notice = create(:notice,
+        app: mongo_app,
+        err: mongo_err,
+        backtrace: mongo_backtrace,
+        message: "ActionDispatch::Http::MimeNegotiation::InvalidType: \"../../../../../../../../../../etc/services{{\" is not a valid MIME type",
+        server_environment: {"environment-name" => "production"},
+        notifier: {"name" => "airbrake"},
+        error_class: "ActionDispatch::Http::MimeNegotiation::InvalidType")
+
+      invoke(:all)
+
+      sql_notice = Errbit::Notice.find_by!(bson_id: mongo_notice.id.to_s)
+
+      expect(sql_notice.message).to include("../../../")
+      expect(sql_notice.message).to include("{{")
+      expect(sql_notice.error_class).to eq("ActionDispatch::Http::MimeNegotiation::InvalidType")
+    end
+
+    it "preserves large hash distributions in cached problem attributes" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem,
+        app: mongo_app,
+        user_agents: {
+          "dc00bef7e8c25c784d905ac8639b027c" => {"value" => "Chrome 60.0.3112.113 (Windows 10)", "count" => 1140},
+          "1140e65909cc5a48ecbbc1f2ab12ee0e" => {"value" => "Chrome 123.0.6312.86 ()", "count" => 3},
+          "d5bdbe02c8d406bf1abadda0441ac0d9" => {"value" => "Safari 14.1.1 (OS X 10.15.6)", "count" => 8}
+        },
+        hosts: {
+          "7c6845b7e2f69d04ae20652df7dd8e80" => {"value" => "10.0.0.1", "count" => 10}
+        },
+        messages: {
+          "39363b3685df81a25a3d03e2f0af075e" => {"value" => "ActionDispatch::Http::MimeNegotiation::InvalidType", "count" => 10}
+        })
+
+      invoke(:all)
+
+      sql_problem = Errbit::Problem.find_by(bson_id: mongo_problem.id.to_s)
+      expect(sql_problem.user_agents.keys).to eq(mongo_problem.user_agents.keys)
+      expect(sql_problem.user_agents.values.map { |v| v["count"] }).to contain_exactly(1140, 3, 8)
+      expect(sql_problem.hosts["7c6845b7e2f69d04ae20652df7dd8e80"]["value"]).to eq("10.0.0.1")
+      expect(sql_problem.messages["39363b3685df81a25a3d03e2f0af075e"]["count"]).to eq(10)
+    end
+
+    it "handles problems with notices_count of 0" do
+      mongo_app = create(:app)
+      mongo_problem = create(:problem, app: mongo_app, notices_count: 0, comments_count: 0)
+      mongo_problem.update!(notices_count: 0)
+
+      invoke(:all)
+
+      sql_problem = Errbit::Problem.find_by(bson_id: mongo_problem.id.to_s)
+      expect(sql_problem.notices_count).to eq(0)
+      expect(sql_problem.comments_count).to eq(0)
+    end
+  end
 end
