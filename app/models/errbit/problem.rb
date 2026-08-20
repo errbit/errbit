@@ -168,13 +168,13 @@ module Errbit
         resolved: false,
         resolved_at: nil,
         where: notice.where,
-        notices_count: Arel.sql("NOTICES_COUNT + 1"),
         messages: increment_hash_counter(problem.messages, Digest::MD5.hexdigest(notice.message.to_s), notice.message),
         hosts: increment_hash_counter(problem.hosts, Digest::MD5.hexdigest(notice.host.to_s), notice.host),
         user_agents: increment_hash_counter(problem.user_agents, Digest::MD5.hexdigest(notice.user_agent_string.to_s), notice.user_agent_string)
       )
 
-      problem
+      where(id: problem.id).update_all("notices_count = notices_count + 1")
+      problem.reload
     end
 
     def self.increment_hash_counter(hash, key, value)
