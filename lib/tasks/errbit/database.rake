@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 namespace :errbit do
+  namespace :sqlite do
+    desc "Configure SQLite write-ahead logging"
+    task configure: :environment do
+      next unless ActiveRecord::Base.connection.adapter_name == "SQLite"
+
+      ActiveRecord::Base.connection.execute("PRAGMA journal_mode = WAL")
+    end
+  end
+
   desc "Updates cached attributes on Problem"
   task problem_recache: :environment do
     Errbit::ProblemRecacher.run

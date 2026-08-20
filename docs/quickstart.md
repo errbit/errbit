@@ -28,7 +28,6 @@ services:
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
-      MONGO_URL: "mongodb://host:27017/errbit_production" # Replace with URL to your MongoDB instance
       SECRET_KEY_BASE: "secret-key-base" # Replace with a secure secret key. You can generate new one with `rails secret`
       RAILS_MAX_THREADS: "2"
       ERRBIT_HOST: "errbit.example.com"
@@ -37,6 +36,7 @@ services:
       - "80:80" # Listen for HTTP traffic
       - "443:443" # Listen for HTTPS traffic
     volumes:
+      - "./storage:/rails/storage:rw" # Persistent SQLite database and WAL files
       - "./thruster:/rails/storage/thruster:rw" # Volume for storing ACME certificate
 ```
 
@@ -73,7 +73,6 @@ services:
     container_name: "errbit"
     restart: "unless-stopped"
     environment:
-      MONGO_URL: "mongodb://host:27017/errbit_production" # Replace with URL to your MongoDB instance
       SECRET_KEY_BASE: "secret-key-base" # Replace with a secure secret key. You can generate new one with `rails secret`
       RAILS_MAX_THREADS: "2"
       ERRBIT_HOST: "errbit.example.com" # Replace with your domain name
@@ -83,6 +82,8 @@ services:
       - "traefik.http.routers.errbit.tls=true"
       - "traefik.http.routers.errbit.tls.certresolver=letsencrypt"
       - "traefik.http.routers.errbit.entrypoints=websecure"
+    volumes:
+      - "./storage:/rails/storage:rw" # Persistent SQLite database and WAL files
 ```
 
 Run with:
@@ -90,6 +91,27 @@ Run with:
 ```shell
 docker compose pull
 docker compose up -d
+```
+
+## SQLite operations
+
+Errbit configures SQLite write-ahead logging (WAL) during bootstrap. WAL lets
+readers continue while a write is in progress, but SQLite still allows only one
+writer. Run a single Errbit process for small, low-write deployments; use a
+server database for higher write concurrency. If you bypass bootstrap or deploy
+outside Docker, run this once after `db:migrate` and before serving traffic:
+
+```shell
+bin/rails errbit:sqlite:configure
+```
+
+The `storage` mount must retain `production.sqlite3` and its `-wal` and `-shm`
+sidecar files, plus `.mongo_to_sql_migrated` after a verified migration. Do not
+copy the database file while Errbit is running. Create a consistent backup with
+SQLite instead:
+
+```shell
+docker compose exec errbit sqlite3 /rails/storage/production.sqlite3 ".backup '/rails/storage/production-backup.sqlite3'"
 ```
 
 Stop with:
