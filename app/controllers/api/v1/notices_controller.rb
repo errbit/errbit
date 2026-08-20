@@ -15,7 +15,7 @@ module Api
         end
 
         results = benchmark("[api/v1/notices_controller] query time") do
-          scope.page(page).per(per_page).to_a.map { |notice| serialize_notice(notice) }
+          scope.to_a.map { |notice| serialize_notice(notice) }
         end
 
         respond_to do |format|
