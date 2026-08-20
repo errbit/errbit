@@ -141,16 +141,6 @@ RSpec.describe Problem, type: :model do
   end
 
   describe "#unmerge!" do
-    it "creates a separate problem for each err" do
-      problem_1 = create(:notice).problem
-      problem_2 = create(:notice).problem
-      merged_problem = Problem.merge!(problem_1, problem_2)
-      expect(merged_problem.errs.length).to eq(2)
-
-      expect { merged_problem.unmerge! }.to change(Problem, :count).by(1)
-      expect(merged_problem.errs(true).length).to eq(1)
-    end
-
     it "runs smoothly for problem without errs" do
       expect { create(:problem).unmerge! }.not_to raise_error
     end

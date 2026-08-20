@@ -23,6 +23,18 @@ RSpec.describe Errbit::Problem, type: :model do
     expect(problem.hosts.values.first).to include("value" => "example.com", "count" => 1)
   end
 
+  it "creates a separate problem for each merged err" do
+    first = create(:errbit_problem)
+    second = create(:errbit_problem, app: first.app)
+    create(:errbit_err, problem: first)
+    create(:errbit_err, problem: second)
+
+    merged = described_class.merge!(first, second)
+
+    expect { merged.unmerge! }.to change(described_class, :count).by(1)
+    expect(merged.reload.errs.count).to eq(1)
+  end
+
   it "supports SQL search over cached text columns" do
     match = create(:errbit_problem, error_class: "SpecialRuntimeError")
     create(:errbit_problem, error_class: "OtherError")

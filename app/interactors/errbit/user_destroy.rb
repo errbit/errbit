@@ -8,8 +8,6 @@ module Errbit
       @user = user
     end
 
-    def destroy
-      user.destroy
-    end
+    delegate :destroy, to: :user
   end
 end
