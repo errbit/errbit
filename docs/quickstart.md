@@ -86,6 +86,16 @@ services:
       - "./storage:/rails/storage:rw" # Persistent SQLite database and WAL files
 ```
 
+Create the bind-mounted storage directory before starting the container. The
+image runs as UID/GID `1000`, so the directory must be writable by that user.
+It stores `production.sqlite3`, its `-wal` and `-shm` sidecars, and the
+Mongo-to-SQL cutover marker.
+
+```shell
+mkdir -p storage
+sudo chown 1000:1000 storage
+```
+
 Run with:
 
 ```shell

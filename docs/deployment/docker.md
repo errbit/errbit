@@ -56,6 +56,11 @@ docker run \
   bundle exec rails db:migrate errbit:sqlite:configure errbit:migrate:all
 ```
 
+The default entrypoint runs `errbit:sqlite:configure` through
+`errbit:bootstrap`. If you bypass bootstrap or deploy outside Docker, run
+`bin/rails errbit:sqlite:configure` once after `db:migrate` and before serving
+traffic.
+
 ## Errbit + Dependencies via Docker Compose
 
 Docker compose can take care of starting up a mongo container along with the
