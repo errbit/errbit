@@ -497,7 +497,7 @@ RSpec.describe "errbit:migrate" do
       mongo_app = create(:app)
       user_agents = {}
       113.times do |i|
-        key = "ua-#{i.to_s.rjust(32, '0')}"
+        key = "ua-#{i.to_s.rjust(32, "0")}"
         user_agents[key] = {"value" => "Mozilla/5.0 (Test #{i})", "count" => i + 1}
       end
       mongo_problem = create(:problem, app: mongo_app, user_agents: user_agents)
