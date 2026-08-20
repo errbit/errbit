@@ -5,11 +5,11 @@ require "rails_helper"
 RSpec.describe NoticesController, type: :controller do
   it_requires_authentication for: {locate: :get}
 
-  let(:notice) { create(:notice) }
+  let(:notice) { create(:errbit_notice) }
 
   let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
 
-  let(:app) { create(:app) }
+  let(:app) { create(:errbit_app) }
 
   let(:error_report) { double(valid?: true, generate_notice!: true, notice: notice, should_keep?: true) }
 
@@ -24,7 +24,7 @@ RSpec.describe NoticesController, type: :controller do
 
     context "with all params" do
       before do
-        expect(ErrorReport).to receive(:new).with(xml).and_return(error_report)
+        expect(Errbit::ErrorReport).to receive(:new).with(xml).and_return(error_report)
       end
 
       context "with xml pass in raw_port" do
@@ -78,14 +78,14 @@ RSpec.describe NoticesController, type: :controller do
   describe "GET /locate/:id" do
     context "when logged in as an admin" do
       before do
-        @user = create(:user, admin: true)
+        @user = create(:errbit_user, admin: true)
         sign_in @user
       end
 
       it "should locate notice and redirect to problem" do
-        problem = create(:problem, app: app, environment: "production")
-        err = create(:err, problem: problem)
-        notice = create(:notice, err: err)
+        problem = create(:errbit_problem, app: app, environment: "production")
+        err = create(:errbit_err, problem: problem)
+        notice = create(:errbit_notice, err: err)
         get :locate, params: {id: notice.id}
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
       end
@@ -95,14 +95,14 @@ RSpec.describe NoticesController, type: :controller do
   describe "GET /notices/:id" do
     context "when logged in as an admin" do
       before do
-        @user = create(:user, admin: true)
+        @user = create(:errbit_user, admin: true)
         sign_in @user
       end
 
       it "should locate notice and redirect to problem with notice_id" do
-        problem = create(:problem, app: app, environment: "production")
-        err = create(:err, problem: problem)
-        notice = create(:notice, err: err)
+        problem = create(:errbit_problem, app: app, environment: "production")
+        err = create(:errbit_err, problem: problem)
+        notice = create(:errbit_notice, err: err)
         get :show_by_id, params: {id: notice.id}
         expect(response).to redirect_to(app_problem_path(problem.app, problem, notice_id: notice.id))
       end

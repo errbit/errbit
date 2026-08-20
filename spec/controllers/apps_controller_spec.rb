@@ -7,35 +7,33 @@ RSpec.describe AppsController, type: :controller do
   it_requires_admin_privileges for: {new: :get, edit: :get, create: :post, update: :patch, destroy: :delete}
 
   let(:app_params) { {name: "BestApp"} }
-  let(:admin) { create(:user, admin: true) }
-  let(:user) { create(:user) }
-  let(:watcher) { create(:user_watcher, app: app, user: user) }
-  let(:unwatched_app) { create(:app) }
+  let(:admin) { create(:errbit_user, admin: true) }
+  let(:user) { create(:errbit_user) }
+  let(:watcher) { create(:errbit_watcher, app: app, user: user, email: nil, watcher_type: "user") }
+  let(:unwatched_app) { create(:errbit_app) }
   let(:app) { unwatched_app }
   let(:watched_app_1) do
-    a = create(:app)
-    create(:user_watcher, user: user, app: a)
+    a = create(:errbit_app)
+    create(:errbit_watcher, user: user, app: a, email: nil, watcher_type: "user")
     a
   end
   let(:watched_app_2) do
-    a = create(:app)
-    create(:user_watcher, user: user, app: a)
+    a = create(:errbit_app)
+    create(:errbit_watcher, user: user, app: a, email: nil, watcher_type: "user")
     a
   end
   let(:err) do
-    create(:err, problem: problem)
+    create(:errbit_err, problem: problem)
   end
   let(:notice) do
-    create(:notice, err: err)
+    create(:errbit_notice, err: err)
   end
   let(:problem) do
-    create(:problem, app: app)
+    create(:errbit_problem, app: app)
   end
-  let(:problem_resolved) { create(:problem_resolved, app: app) }
+  let(:problem_resolved) { create(:errbit_problem, app: app, resolved: true) }
   let(:notice_fingerprinter) do
-    nf = SiteConfig.document.notice_fingerprinter
-    nf.backtrace_lines = 10
-    nf
+    Errbit::SiteConfig.document.notice_fingerprinter_attributes.merge(backtrace_lines: 10)
   end
 
   describe "GET /apps" do
@@ -44,7 +42,7 @@ RSpec.describe AppsController, type: :controller do
         sign_in admin
         unwatched_app && watched_app_1 && watched_app_2
         get :index
-        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
+        expect(controller.send(:apps).entries).to eq(Errbit::App.all.to_a.sort.entries)
       end
     end
 
@@ -53,7 +51,7 @@ RSpec.describe AppsController, type: :controller do
         sign_in user
         unwatched_app && watched_app_1 && watched_app_2
         get :index
-        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
+        expect(controller.send(:apps).entries).to eq(Errbit::App.all.to_a.sort.entries)
       end
     end
   end
@@ -66,7 +64,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "finds the app" do
         get :show, params: {id: app.id}
-        expect(controller.app).to eq(app)
+        expect(controller.send(:app)).to eq(app)
       end
 
       it "should not raise errors for app with err without notices" do
@@ -80,24 +78,24 @@ RSpec.describe AppsController, type: :controller do
       end
 
       it "should list available watchers by name" do
-        create(:user, name: "Carol")
-        create(:user, name: "Alice")
-        create(:user, name: "Betty")
+        create(:errbit_user, name: "Carol")
+        create(:errbit_user, name: "Alice")
+        create(:errbit_user, name: "Betty")
 
         get :show, params: {id: app.id}
 
-        expect(controller.users.to_a).to eq(User.all.to_a.sort_by(&:name))
+        expect(controller.send(:users).to_a).to eq(Errbit::User.all.to_a.sort_by(&:name))
       end
 
       context "pagination" do
         before do
-          35.times { create(:err, problem: create(:problem, app: app)) }
+          35.times { create(:errbit_err, problem: create(:errbit_problem, app: app)) }
         end
 
         it "should have default per_page value for user" do
           get :show, params: {id: app.id}
 
-          expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
+          expect(controller.send(:problems).to_a.size).to eq(Errbit::User::PER_PAGE)
         end
 
         it "should be able to override default per_page value" do
@@ -105,7 +103,7 @@ RSpec.describe AppsController, type: :controller do
 
           get :show, params: {id: app.id}
 
-          expect(controller.problems.to_a.size).to eq(10)
+          expect(controller.send(:problems).to_a.size).to eq(10)
         end
       end
 
@@ -117,14 +115,14 @@ RSpec.describe AppsController, type: :controller do
         context "and no params" do
           it "shows only unresolved problems" do
             get :show, params: {id: app.id}
-            expect(controller.problems.size).to eq(1)
+            expect(controller.send(:problems).size).to eq(1)
           end
         end
 
         context "and all_problems=true params" do
           it "shows all errors" do
             get :show, params: {id: app.id, all_errs: true}
-            expect(controller.problems.size).to eq(2)
+            expect(controller.send(:problems).size).to eq(2)
           end
         end
       end
@@ -133,7 +131,7 @@ RSpec.describe AppsController, type: :controller do
         before do
           environments = ["production", "test", "development", "staging"]
           20.times do |i|
-            create(:problem, app: app, environment: environments[i % environments.length])
+            create(:errbit_problem, app: app, environment: environments[i % environments.length])
           end
         end
 
@@ -141,7 +139,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for all environments" do
             get :show, params: {id: app.id}
 
-            expect(controller.problems.size).to eq(20)
+            expect(controller.send(:problems).size).to eq(20)
           end
         end
 
@@ -149,7 +147,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just production" do
             get :show, params: {id: app.id, environment: "production"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(controller.send(:problems).size).to eq(5)
           end
         end
 
@@ -157,7 +155,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just staging" do
             get :show, params: {id: app.id, environment: "staging"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(controller.send(:problems).size).to eq(5)
           end
         end
 
@@ -165,7 +163,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just development" do
             get :show, params: {id: app.id, environment: "development"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(controller.send(:problems).size).to eq(5)
           end
         end
 
@@ -173,7 +171,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just test" do
             get :show, params: {id: app.id, environment: "test"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(controller.send(:problems).size).to eq(5)
           end
         end
       end
@@ -181,13 +179,13 @@ RSpec.describe AppsController, type: :controller do
 
     context "logged in as a user" do
       it "finds the app even when not watching it" do
-        sign_in create(:user)
+        sign_in create(:errbit_user)
 
-        app = create(:app)
+        app = create(:errbit_app)
 
         get :show, params: {id: app.id}
 
-        expect(controller.app).to eq(app)
+        expect(controller.send(:app)).to eq(app)
       end
     end
   end
@@ -200,36 +198,36 @@ RSpec.describe AppsController, type: :controller do
     describe "GET /apps/new" do
       it "instantiates a new app with a prebuilt watcher" do
         get :new
-        expect(controller.app).to be_a(App)
-        expect(controller.app).to be_new_record
-        expect(controller.app.watchers).not_to be_empty
+        expect(controller.send(:app)).to be_a(Errbit::App)
+        expect(controller.send(:app)).to be_new_record
+        expect(controller.send(:app).watchers).not_to be_empty
       end
 
       it "should copy attributes from an existing app" do
-        @app = create(:app, name: "do not copy", github_repo: "test/example")
+        @app = create(:errbit_app, name: "do not copy", github_repo: "test/example")
         get :new, params: {copy_attributes_from: @app.id}
-        expect(controller.app).to be_a(App)
-        expect(controller.app).to be_new_record
-        expect(controller.app.name).to be_blank
-        expect(controller.app.github_repo).to eq("test/example")
+        expect(controller.send(:app)).to be_a(Errbit::App)
+        expect(controller.send(:app)).to be_new_record
+        expect(controller.send(:app).name).to be_blank
+        expect(controller.send(:app).github_repo).to eq("test/example")
       end
     end
 
     describe "GET /apps/:id/edit" do
       it "finds the correct app" do
-        app = create(:app)
+        app = create(:errbit_app)
 
         get :edit, params: {id: app.id}
 
-        expect(controller.app).to eq(app)
+        expect(controller.send(:app)).to eq(app)
       end
     end
 
     describe "POST /apps" do
       before do
-        @app = create(:app)
+        @app = create(:errbit_app)
 
-        allow(App).to receive(:new).and_return(@app)
+        allow(Errbit::App).to receive(:new).and_return(@app)
       end
 
       context "when the create is successful" do
@@ -251,7 +249,7 @@ RSpec.describe AppsController, type: :controller do
 
     describe "PATCH /apps/:id" do
       before do
-        @app = create(:app)
+        @app = create(:errbit_app)
       end
 
       context "when the update is successful" do
@@ -297,7 +295,7 @@ RSpec.describe AppsController, type: :controller do
 
         context "failed parsing of CSV" do
           it "should set the default value" do
-            @app = create(:app, email_at_notices: [1, 2, 3, 4])
+            @app = create(:errbit_app, email_at_notices: [1, 2, 3, 4])
 
             patch :update, params: {id: @app.id, app: {email_at_notices: "asdf, -1,0,foobar,gd00,0,abc"}}
 
@@ -342,7 +340,7 @@ RSpec.describe AppsController, type: :controller do
 
       context "selecting 'use site fingerprinter'" do
         before do
-          SiteConfig.document.update!(notice_fingerprinter: notice_fingerprinter)
+          Errbit::SiteConfig.document.update!(notice_fingerprinter_attributes: notice_fingerprinter)
 
           patch :update, params: {
             id: @app.id,
@@ -356,15 +354,15 @@ RSpec.describe AppsController, type: :controller do
         end
 
         it "should copy site fingerprinter into app fingerprinter" do
-          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except("_id", "source")
-          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except("_id", "source")
+          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.slice(*Errbit::SiteConfig::NOTICE_FINGERPRINTER_FIELDS.map(&:to_s))
+          expected_attrs = Errbit::SiteConfig.document.attributes.slice(*Errbit::SiteConfig::NOTICE_FINGERPRINTER_FIELDS.map(&:to_s))
           expect(fingerprinter_attrs).to eq(expected_attrs)
         end
       end
 
       context "not selecting 'use site fingerprinter'" do
         before do
-          SiteConfig.document.update_attributes(notice_fingerprinter: notice_fingerprinter)
+          Errbit::SiteConfig.document.update!(notice_fingerprinter_attributes: notice_fingerprinter)
 
           patch :update, params: {
             id: @app.id,
@@ -378,8 +376,8 @@ RSpec.describe AppsController, type: :controller do
         end
 
         it "shouldn't copy site fingerprinter into app fingerprinter" do
-          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.except("_id", "source")
-          expected_attrs = SiteConfig.document.notice_fingerprinter.attributes.except("_id", "source")
+          fingerprinter_attrs = @app.reload.notice_fingerprinter.attributes.slice(*Errbit::SiteConfig::NOTICE_FINGERPRINTER_FIELDS.map(&:to_s))
+          expected_attrs = Errbit::SiteConfig.document.attributes.slice(*Errbit::SiteConfig::NOTICE_FINGERPRINTER_FIELDS.map(&:to_s))
           expect(fingerprinter_attrs).not_to eq(expected_attrs)
           expect(@app.notice_fingerprinter.backtrace_lines).to eq(42)
         end
@@ -388,19 +386,19 @@ RSpec.describe AppsController, type: :controller do
 
     describe "DELETE /apps/:id" do
       before do
-        @app = create(:app)
+        @app = create(:errbit_app)
       end
 
       it "should find the app" do
         delete :destroy, params: {id: @app.id}
-        expect(controller.app).to eq(@app)
+        expect(controller.send(:app)).to eq(@app)
       end
 
       it "should destroy the app" do
         delete :destroy, params: {id: @app.id}
         expect do
           @app.reload
-        end.to raise_error(Mongoid::Errors::DocumentNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "should display a message" do
@@ -447,8 +445,8 @@ RSpec.describe AppsController, type: :controller do
   describe "GET /apps/search" do
     before do
       sign_in user
-      @app_1 = create(:app, name: "Foo")
-      @app_2 = create(:app, name: "Bar")
+      @app_1 = create(:errbit_app, name: "Foo")
+      @app_2 = create(:errbit_app, name: "Bar")
     end
 
     it "renders successfully" do
@@ -464,17 +462,17 @@ RSpec.describe AppsController, type: :controller do
     end
 
     it "searches problems for given string" do
-      get :search, params: {search: "\"Foo\""}
+      get :search, params: {search: "Foo"}
 
-      expect(controller.apps).to include(@app_1)
-      expect(controller.apps).not_to include(@app_2)
+      expect(controller.send(:apps)).to include(@app_1)
+      expect(controller.send(:apps)).not_to include(@app_2)
     end
 
     it "works when given string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.apps).to include(@app_1)
-      expect(controller.apps).to include(@app_2)
+      expect(controller.send(:apps)).to include(@app_1)
+      expect(controller.send(:apps)).to include(@app_2)
     end
   end
 end
