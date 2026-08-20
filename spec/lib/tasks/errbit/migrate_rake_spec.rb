@@ -14,12 +14,8 @@ RSpec.describe "errbit:migrate" do
     task.invoke
   end
 
-  def with_env(key, value)
-    previous = ENV[key]
-    ENV[key] = value
-    yield
-  ensure
-    ENV[key] = previous
+  before do
+    FileUtils.rm_f(Errbit::MigrateHelpers.cutover_marker)
   end
 
   describe ":users" do
@@ -110,6 +106,7 @@ RSpec.describe "errbit:migrate" do
       expect(sql_notice.backtrace).to eq(sql_backtrace)
       expect(sql_comment.err).to eq(sql_problem)
       expect(sql_comment.user).to eq(sql_user)
+      expect(Errbit::MigrateHelpers.cutover_marker).to exist
 
       counts = {
         users: Errbit::User.count,
@@ -193,10 +190,8 @@ RSpec.describe "errbit:migrate" do
         updated_at: Time.current
       )
 
-      with_env("ERRBIT_MIGRATE_STRICT", "true") do
-        expect { invoke(:all) }
-          .to raise_error(RuntimeError, /migration failed for notices with 1 failed row/)
-      end
+      expect { invoke(:all) }
+        .to raise_error(RuntimeError, /migration failed for notices with 1 failed row/)
 
       counts_after_failure = {
         users: Errbit::User.count,
@@ -211,9 +206,7 @@ RSpec.describe "errbit:migrate" do
       Notice.collection.find(_id: notice_id).update_one("$set" => {backtrace_id: mongo_backtrace.id})
       mongo_user.update!(name: "After Resume")
 
-      with_env("ERRBIT_MIGRATE_STRICT", "true") do
-        expect { invoke(:all) }.not_to raise_error
-      end
+      expect { invoke(:all) }.not_to raise_error
 
       expect(Errbit::User.count).to eq(counts_after_failure[:users])
       expect(Errbit::App.count).to eq(counts_after_failure[:apps])
@@ -225,20 +218,36 @@ RSpec.describe "errbit:migrate" do
     end
   end
 
-  describe "strict failure mode" do
+  describe "failure mode" do
     it "raises when a task records failed rows" do
       create(:problem)
 
-      with_env("ERRBIT_MIGRATE_STRICT", "true") do
-        expect { invoke(:problems) }
-          .to raise_error(RuntimeError, /migration failed for problems with 1 failed row/)
-      end
+      expect { invoke(:problems) }
+        .to raise_error(RuntimeError, /migration failed for problems with 1 failed row/)
     end
 
-    it "does not raise by default when a task records failed rows" do
-      create(:problem)
+    it "raises rather than silently skipping a unique SQL collision" do
+      mongo_user = create(:user, email: "collision@example.com")
+      create(:errbit_user, email: mongo_user.email)
 
-      expect { invoke(:problems) }.not_to raise_error
+      expect { invoke(:users) }
+        .to raise_error(RuntimeError, /migration failed for users with 1 failed row/)
+    end
+  end
+
+  describe "cutover guard" do
+    it "refuses to boot when MongoDB data has not been verified in SQL" do
+      create(:user)
+
+      expect { Rake::Task["errbit:ensure_sql_cutover"].tap(&:reenable).invoke }
+        .to raise_error(RuntimeError, /MongoDB data was detected/)
+    end
+
+    it "allows boot after a verified migration" do
+      create(:user)
+      invoke(:all)
+
+      expect { Rake::Task["errbit:ensure_sql_cutover"].tap(&:reenable).invoke }.not_to raise_error
     end
   end
 
