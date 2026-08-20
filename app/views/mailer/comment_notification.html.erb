@@ -38,7 +38,7 @@
 
               <br>
 
-              <p><%= @comment.body.to_s.gsub("\n", "<br>").html_safe %></p>
+              <%= simple_format(@comment.body) %>
             </div>
           </td>
         </tr>

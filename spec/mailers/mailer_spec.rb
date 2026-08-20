@@ -130,5 +130,21 @@ RSpec.describe Mailer do
     it "should have the comment body" do
       expect(@email).to have_body_text(comment.body)
     end
+
+    context "when the comment body contains HTML" do
+      let!(:comment) do
+        create(:comment,
+          err: notice.problem,
+          body: "<script>alert('xss')</script>\n\nA second paragraph")
+      end
+
+      it "should escape the HTML and preserve paragraphs" do
+        html_body = @email.body.parts.detect { |part| part.content_type.match(/html/) }.body.raw_source
+
+        expect(html_body).not_to include("<script>alert('xss')</script>")
+        expect(html_body).to include("alert('xss')")
+        expect(html_body).to match(/<p[^>]*>A second paragraph<\/p>/)
+      end
+    end
   end
 end
