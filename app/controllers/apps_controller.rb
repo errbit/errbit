@@ -12,12 +12,14 @@ class AppsController < ApplicationController
   end
 
   expose(:apps) do
+    # archspec:disable-next-line dependencies.allow -- TODO: move presentation decoration out of controllers
     app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
   end
 
   expose(:app)
 
   expose(:app_decorate) do
+    # archspec:disable-next-line dependencies.allow -- TODO: move presentation decoration out of controllers
     AppDecorator.new(app)
   end
 
