@@ -100,6 +100,8 @@ GEM
       rbtree3 (~> 0.6)
     anonymous_loader (0.1.3)
       version_gem (~> 1.1, >= 1.1.14)
+    archspec (1.0.1)
+      prism (>= 1.0)
     ast (2.4.3)
     attr_extras (7.1.0)
     auth-sanitizer (0.2.3)
@@ -671,6 +673,7 @@ DEPENDENCIES
   actionmailer_inline_css
   activemodel-serializers-xml
   airbrake
+  archspec
   bootsnap (>= 1.4.4)
   brakeman
   bundler-audit
@@ -770,6 +773,7 @@ CHECKSUMS
   airbrake (13.0.5) sha256=901f5074c25d5ef77ed87f5bde7a28400a7324f5d7013a8a12d07e0099cc31b6
   airbrake-ruby (6.2.2) sha256=293e34fb36e763e1b6d67ab584cce7c5b6fe9eea1a70c26d8c13c0f5d7de2fbc
   anonymous_loader (0.1.3) sha256=084a18e2439144d955447dc11dfc982f41fcd1583ad32d4d55151325dc44cb55
+  archspec (1.0.1) sha256=8282695874f5c55e4e4dd4d830e4168a5d7a22ed5bf8100e3f4af207e4e4adb1
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   attr_extras (7.1.0) sha256=d96fc9a9dd5d85ba2d37762440a816f840093959ae26bb90da994c2d9f1fc827
   auth-sanitizer (0.2.3) sha256=db10aac92cfbe4c64ab637eebcbe1d67395d1694798041362173370f59933e3c

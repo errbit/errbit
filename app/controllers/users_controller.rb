@@ -62,6 +62,7 @@ class UsersController < ApplicationController
     else
       authorize @user
 
+      # archspec:disable-next-line dependencies.allow -- TODO: move user destruction behind an application boundary
       UserDestroy.new(@user).destroy
 
       flash[:success] = t(".success", name: @user.name)

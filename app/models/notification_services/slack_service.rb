@@ -83,6 +83,7 @@ module NotificationServices
     end
 
     def backtrace_lines(problem)
+      # archspec:disable-next-line dependencies.forbid -- TODO: replace the UI decorator with a notification-specific formatter
       notice = NoticeDecorator.new(problem.notices.last)
       return unless notice
 

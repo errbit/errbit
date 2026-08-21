@@ -25,6 +25,7 @@ module Api
         # merge makes a copy, merge! edits in place
         merged_params.merge!("key" => request.headers["X-Airbrake-Token"]) if request.headers["X-Airbrake-Token"]
         merged_params.merge!("key" => authorization_token) if authorization_token
+        # archspec:disable-next-line dependencies.allow -- TODO: move API parsing behind an application boundary
         report = AirbrakeApi::V3::NoticeParser.new(merged_params).report
 
         return render body: UNKNOWN_API_KEY, status: :unprocessable_content unless report.valid?
@@ -35,6 +36,7 @@ module Api
           id: report.notice.id,
           url: report.problem.url
         }
+      # archspec:disable-next-line dependencies.allow -- TODO: move API parsing behind an application boundary
       rescue AirbrakeApi::ParamsError
         render body: "Invalid request", status: :bad_request
       end
