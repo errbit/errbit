@@ -7,6 +7,7 @@ module Errbit
       hosts: :host,
       user_agents: :user_agent_string
     }.freeze
+    CACHE_MUTEX = Mutex.new
 
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, nil, "Problem")
@@ -158,23 +159,27 @@ module Errbit
     end
 
     def self.cache_notice(id, notice)
-      problem = find(id)
+      CACHE_MUTEX.synchronize do
+        problem = find(id)
 
-      problem.update!(
-        environment: notice.environment_name,
-        error_class: notice.error_class,
-        last_notice_at: notice.created_at.utc,
-        message: notice.message,
-        resolved: false,
-        resolved_at: nil,
-        where: notice.where,
-        messages: increment_hash_counter(problem.messages, Digest::MD5.hexdigest(notice.message.to_s), notice.message),
-        hosts: increment_hash_counter(problem.hosts, Digest::MD5.hexdigest(notice.host.to_s), notice.host),
-        user_agents: increment_hash_counter(problem.user_agents, Digest::MD5.hexdigest(notice.user_agent_string.to_s), notice.user_agent_string)
-      )
+        problem.with_lock do
+          problem.update!(
+            environment: notice.environment_name,
+            error_class: notice.error_class,
+            last_notice_at: notice.created_at.utc,
+            message: notice.message,
+            notices_count: problem.notices_count.to_i + 1,
+            resolved: false,
+            resolved_at: nil,
+            where: notice.where,
+            messages: increment_hash_counter(problem.messages, Digest::MD5.hexdigest(notice.message.to_s), notice.message),
+            hosts: increment_hash_counter(problem.hosts, Digest::MD5.hexdigest(notice.host.to_s), notice.host),
+            user_agents: increment_hash_counter(problem.user_agents, Digest::MD5.hexdigest(notice.user_agent_string.to_s), notice.user_agent_string)
+          )
+        end
 
-      where(id: problem.id).update_all("notices_count = notices_count + 1")
-      problem.reload
+        problem.reload
+      end
     end
 
     def self.increment_hash_counter(hash, key, value)
@@ -187,23 +192,26 @@ module Errbit
     private_class_method :increment_hash_counter
 
     def uncache_notice(notice)
-      last_notice = notices.reorder(created_at: :desc).first
-      return unless last_notice
+      remaining_notices = notices.where.not(id: notice.id).to_a
+      last_notice = remaining_notices.max_by(&:created_at)
 
       attrs = {
-        environment: last_notice.environment_name,
-        error_class: last_notice.error_class,
-        last_notice_at: last_notice.created_at,
-        message: last_notice.message,
-        where: last_notice.where,
-        notices_count: (notices_count.to_i > 1) ? notices_count - 1 : 0
+        notices_count: remaining_notices.size,
+        messages: cached_notice_distribution(remaining_notices, :message),
+        hosts: cached_notice_distribution(remaining_notices, :host),
+        user_agents: cached_notice_distribution(remaining_notices, :user_agent_string)
       }
-
-      CACHED_NOTICE_ATTRIBUTES.each do |attr, source|
-        attrs[attr] = decrement_hash_counter(send(attr), Digest::MD5.hexdigest(notice.send(source).to_s))
+      if last_notice
+        attrs.merge!(
+          environment: last_notice.environment_name,
+          error_class: last_notice.error_class,
+          last_notice_at: last_notice.created_at,
+          message: last_notice.message,
+          where: last_notice.where
+        )
       end
 
-      update!(attrs)
+      update_columns(attrs)
     end
 
     def merged?
@@ -261,16 +269,20 @@ module Errbit
 
     private
 
-    def decrement_hash_counter(hash, key)
-      result = (hash || {}).deep_dup
+    def cached_notice_distribution(notices, source)
+      counts = Hash.new(0)
+      values = {}
 
-      if result[key] && result[key]["count"].to_i > 1
-        result[key]["count"] -= 1
-      else
-        result.delete(key)
+      notices.each do |notice|
+        value = notice.send(source) || "N/A"
+        key = Digest::MD5.hexdigest(value)
+        counts[key] += 1
+        values[key] = value
       end
 
-      result
+      counts.each_with_object({}) do |(key, count), hash|
+        hash[key] = {"value" => values[key], "count" => count}
+      end
     end
   end
 end

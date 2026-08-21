@@ -236,6 +236,14 @@ RSpec.describe "errbit:migrate" do
   end
 
   describe "cutover guard" do
+    around do |example|
+      previous_mongo_url = ENV["MONGO_URL"]
+      ENV["MONGO_URL"] = "mongodb://localhost/errbit_test"
+      example.run
+    ensure
+      ENV["MONGO_URL"] = previous_mongo_url
+    end
+
     it "refuses to boot when MongoDB data has not been verified in SQL" do
       create(:user)
 
@@ -248,6 +256,18 @@ RSpec.describe "errbit:migrate" do
       invoke(:all)
 
       expect { Rake::Task["errbit:ensure_sql_cutover"].tap(&:reenable).invoke }.not_to raise_error
+    end
+  end
+
+  describe "fresh SQLite installation" do
+    it "does not query legacy MongoDB models without a Mongo URL" do
+      mongo_variables = %w[MONGODB_URI MONGOLAB_URI MONGOHQ_URL MONGODB_URL MONGO_URL]
+      previous_values = mongo_variables.to_h { |name| [name, ENV.delete(name)] }
+      expect(::User).not_to receive(:exists?)
+
+      Rake::Task["errbit:ensure_sql_cutover"].tap(&:reenable).invoke
+    ensure
+      previous_values&.each { |name, value| ENV[name] = value }
     end
   end
 

@@ -1,5 +1,12 @@
 # Deploy to Heroku
 
+> This document describes the legacy MongoDB deployment path. The bridge
+> release uses SQLite for normal operation, and Heroku's ephemeral filesystem
+> is not suitable for persistent SQLite storage. Use a platform with persistent
+> storage for a new SQLite deployment. Existing MongoDB installations should
+> follow [the migration instructions](../upgrading.md) before moving to the
+> SQLite runtime.
+
 ## The Easy Way
 
 If you just want to get started with Errbit and you're not sure how to proceed,

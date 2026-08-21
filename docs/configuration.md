@@ -83,17 +83,20 @@ You can learn more about thruster environment variables [here](https://github.co
 
 ### Application environment variables
 
-#### `MONGO_URL`
+#### `MONGO_URL` (migration only)
 
-MongoDB connection string in the form
+Only required while migrating an existing MongoDB installation to SQLite.
+MongoDB is not required for a new installation or for normal SQLite runtime
+operation. Set this explicitly for migration commands, using a connection string
+in the form
 `mongodb://username:password@example.com:port/database`. To make it easier to
 connect to third-party MongoDB providers, you can supply this value under any of
 these names (the first one set wins): `MONGODB_URI`, `MONGOLAB_URI`,
 `MONGOHQ_URL`, `MONGODB_URL`, or `MONGO_URL`.
 
-Default: `mongodb://localhost` (resolves to `mongodb://localhost/errbit_<Rails.env>`).
+Default: not set.
 
-Default in container: same as default value.
+Default in container: not set.
 
 | Environment variable         | Description                                        | Default              | Default in container |
 |------------------------------|----------------------------------------------------|----------------------|----------------------|

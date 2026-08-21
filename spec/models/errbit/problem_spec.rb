@@ -23,6 +23,36 @@ RSpec.describe Errbit::Problem, type: :model do
     expect(problem.hosts.values.first).to include("value" => "example.com", "count" => 1)
   end
 
+  it "uncaches the newest notice using the newest remaining notice" do
+    problem = create(:errbit_problem)
+    err = create(:errbit_err, problem: problem)
+    first_notice = create(:errbit_notice, err: err, message: "first")
+    newest_notice = create(:errbit_notice, err: err, message: "newest")
+    first_notice.update!(created_at: 1.hour.ago)
+    newest_notice.update!(created_at: 1.minute.ago)
+
+    described_class.cache_notice(problem.id, first_notice)
+    described_class.cache_notice(problem.id, newest_notice)
+    newest_notice.destroy!
+
+    expect(problem.reload).to have_attributes(
+      notices_count: 1,
+      message: "first",
+      last_notice_at: first_notice.created_at
+    )
+  end
+
+  it "decrements the cache when removing the final notice" do
+    problem = create(:errbit_problem)
+    err = create(:errbit_err, problem: problem)
+    notice = create(:errbit_notice, err: err)
+    described_class.cache_notice(problem.id, notice)
+
+    notice.destroy!
+
+    expect(problem.reload).to have_attributes(notices_count: 0, messages: {}, hosts: {}, user_agents: {})
+  end
+
   it "creates a separate problem for each merged err" do
     first = create(:errbit_problem)
     second = create(:errbit_problem, app: first.app)

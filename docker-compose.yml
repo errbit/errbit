@@ -1,11 +1,11 @@
-volumes:
-  errbit_mongodb_data:
-    external: true
-
 services:
-  mongo:
-    image: "mongo:8.2"
+  errbit:
+    build: .
+    environment:
+      RAILS_ENV: production
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE:?SECRET_KEY_BASE must be set}"
+      ERRBIT_HOST: errbit.example.com
     ports:
-      - "27017:27017"
+      - "3000:80"
     volumes:
-      - "errbit_mongodb_data:/data/db:rw"
+      - "./storage:/rails/storage:rw"

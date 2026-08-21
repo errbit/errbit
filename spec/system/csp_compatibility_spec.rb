@@ -3,14 +3,14 @@
 require "rails_helper"
 
 RSpec.describe "CSP-compatible browser behavior", type: :system, retry: 3 do
-  let!(:user) { create(:user, admin: true) }
+  let!(:user) { create(:errbit_user, admin: true) }
 
   it "loads the notice sparkline" do
-    app = create(:app)
-    problem = create(:problem, app: app)
-    err = create(:err, problem: problem)
-    notice = create(:notice, app: app, err: err)
-    create(:notice, app: app, err: err)
+    app = create(:errbit_app)
+    problem = create(:errbit_problem, app: app)
+    err = create(:errbit_err, problem: problem)
+    notice = create(:errbit_notice, app: app, err: err)
+    create(:errbit_notice, app: app, err: err)
     sign_in user
 
     visit app_problem_path(notice.app, notice.problem)
@@ -25,7 +25,7 @@ RSpec.describe "CSP-compatible browser behavior", type: :system, retry: 3 do
 
   it "toggles conditional application fields without inline styles" do
     allow(Errbit::Config).to receive(:per_app_email_at_notices).and_return(true)
-    app = create(:app, notify_on_errs: false, notice_fingerprinter: nil)
+    app = create(:errbit_app, notify_on_errs: false, notice_fingerprinter: nil)
     sign_in user
 
     visit edit_app_path(app)
@@ -38,7 +38,7 @@ RSpec.describe "CSP-compatible browser behavior", type: :system, retry: 3 do
   end
 
   it "updates the app search without evaluating a JavaScript response" do
-    create(:app, name: "Searchable Demo App")
+    create(:errbit_app, name: "Searchable Demo App")
     sign_in user
 
     visit apps_path
@@ -49,9 +49,9 @@ RSpec.describe "CSP-compatible browser behavior", type: :system, retry: 3 do
   end
 
   it "updates the problem search without evaluating a JavaScript response" do
-    app = create(:app)
-    create(:problem, app: app, message: "Searchable problem")
-    create(:problem, app: app, message: "Other problem")
+    app = create(:errbit_app)
+    create(:errbit_problem, app: app, message: "Searchable problem")
+    create(:errbit_problem, app: app, message: "Other problem")
     sign_in user
 
     visit problems_path

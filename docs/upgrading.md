@@ -9,9 +9,12 @@ data is being copied.
 1. Back up MongoDB.
 2. Ensure `/rails/storage` is persistent and writable by the Rails process. It
    must retain the SQLite database, WAL sidecars, and cutover marker.
-3. Run `bin/rails db:migrate errbit:sqlite:configure errbit:migrate:all` in a
-   one-off container using the same `MONGO_URL`, `SECRET_KEY_BASE`, and mounted
-   storage as the application.
+3. Set `MONGO_URL` explicitly and run
+   `bin/rails db:migrate errbit:sqlite:configure errbit:migrate:all` in a
+   one-off container using the same MongoDB connection, `SECRET_KEY_BASE`, and
+   mounted storage as the application. A MongoDB URL is deliberately not
+   provided by the default environment because new installations do not need
+   MongoDB.
 4. Start Errbit normally. If bootstrap is bypassed, run
    `bin/rails errbit:sqlite:configure` after `db:migrate` and before serving
    traffic.
