@@ -34,7 +34,7 @@
       <td><%= problem.notices_count - 1 %></td>
     </tr>
 
-    <tr id="sparkline-placeholder"></tr>
+    <tr id="sparkline-placeholder" data-sparkline-url="<%= xhr_sparkline_app_problem_path(app_id: notice.app.id, id: problem.id) %>"></tr>
 
     <tr>
       <th><%= t(".browser") %></th>
@@ -73,9 +73,3 @@
     </tr>
   </table>
 </div>
-
-<script>
-  $.ajax({url: "<%= xhr_sparkline_app_problem_path(app_id: notice.app.id, id: problem.id) %>"}).then(function(response) {
-    $("#sparkline-placeholder").replaceWith(response);
-  });
-</script>

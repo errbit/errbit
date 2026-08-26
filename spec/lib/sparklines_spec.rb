@@ -3,11 +3,11 @@
 require "rails_helper"
 
 RSpec.describe Sparklines do
-  it "includes each percentage and adds a percent sign" do
+  it "includes a height class for each percentage" do
     percentages = [33, 75, 100]
     html = described_class.for_relative_percentages(percentages)
     percentages.each do |percentage|
-      expect(html).to include("#{percentage}%")
+      expect(html).to include("height-#{percentage}")
     end
   end
 

@@ -68,7 +68,7 @@
   </div>
 
   <% if Errbit::Config.per_app_email_at_notices %>
-    <div class="email_at_notices_nested" style="<%= app_decorate.notify_err_display %>">
+    <div class="email_at_notices_nested <%= app_decorate.notify_err_class %>">
       <div class="field-helpertext">Send a notification every</div>
 
       <%= f.text_field :email_at_notices, value: app_decorate.email_at_notices %>
@@ -88,7 +88,7 @@
 
     <%= f.label :use_site_fingerprinter, t(".use_site_fingerprinter") %>
 
-    <div class="custom_notice_fingerprinter" style="<%= app_decorate.custom_notice_fingerprinter_style %>">
+    <div class="custom_notice_fingerprinter <%= app_decorate.custom_notice_fingerprinter_class %>">
       <%= render "shared/notice_fingerprinter", f: f %>
     </div>
   </div>

@@ -16,16 +16,16 @@ class AppDecorator < Draper::Decorator
     object.notice_fingerprinter.attributes["source"] == SiteConfig::CONFIG_SOURCE_SITE
   end
 
-  def custom_notice_fingerprinter_style
-    use_site_fingerprinter ? "display: none" : "display: inline"
+  def custom_notice_fingerprinter_class
+    use_site_fingerprinter ? "hidden" : ""
   end
 
   def notify_user_display
     object.notify_all_users ? "display: none;" : ""
   end
 
-  def notify_err_display
-    object.notify_on_errs ? "" : "display: none;"
+  def notify_err_class
+    object.notify_on_errs ? "" : "hidden"
   end
 
   def custom_backtrace_url(file, line)

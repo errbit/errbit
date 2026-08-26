@@ -49,12 +49,3 @@
     </button>
   </div>
 <% end %>
-
-<script>
-  $("a#forgot_password").click(function(){
-    // Set email field on password reset page to email that user entered on this page
-    location.href = $(this).attr("href") + "?email=" + encodeURIComponent($("#user_email").val());
-
-    return false;
-  });
-</script>

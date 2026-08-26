@@ -171,6 +171,9 @@ a.action  { float: right; font-size: 0.9em;}
   border-bottom: 1px solid #FFF;
   background-color: #f2f2f2;
 }
+#content-title {
+  display: flow-root;
+}
 
 /* Make err title bar bigger to fit more buttons */
 #content-title.err_show {
@@ -770,6 +773,10 @@ table.tally th.value {
   padding: 0;
   vertical-align: bottom;
 }
+/* Use classes for dynamic heights so sparkline rendering remains CSP-compatible. */
+<% (0..100).each do |percent| %>
+.spark > i.height-<%= percent %> { height: <%= percent %>%; }
+<% end %>
 
 /* Resolve Errs */
 #action-bar .resolve:before {
@@ -797,6 +804,12 @@ table.tally th.value {
   width: 16px;
   height: 16px;
   margin-right: 1em;
+}
+.title-avatar {
+  float: left;
+  width: 86px;
+  height: 86px;
+  margin-right: 20px;
 }
 .notice-pagination-loader img {
   vertical-align: middle

@@ -44,4 +44,14 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
       expect(page).to have_content(I18n.t("devise.failure.invalid", authentication_keys: "email"))
     end
   end
+
+  it "carries the entered email to the password reset form" do
+    visit new_user_session_path
+
+    fill_in "Email", with: user.email
+    click_link "forgot it?"
+
+    expect(page).to have_current_path(new_user_password_path, ignore_query: true)
+    expect(page).to have_field("Email", with: user.email)
+  end
 end
