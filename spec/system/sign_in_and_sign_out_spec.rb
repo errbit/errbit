@@ -10,6 +10,8 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
       visit root_path
 
       expect(page).to have_content(I18n.t("devise.failure.unauthenticated"))
+      expect(page).to have_css('input[name="user[email]"][autocomplete="email"]')
+      expect(page).to have_css('input[name="user[password]"][autocomplete="current-password"]')
 
       fill_in "Email", with: user.email
       fill_in "Password", with: "password"
@@ -53,5 +55,11 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
 
     expect(page).to have_current_path(new_user_password_path, ignore_query: true)
     expect(page).to have_field("Email", with: user.email)
+  end
+
+  it "renders the password reset email autocomplete attribute" do
+    visit new_user_password_path
+
+    expect(page).to have_css('input[name="user[email]"][autocomplete="email"]')
   end
 end

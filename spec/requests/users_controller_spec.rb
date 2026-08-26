@@ -124,6 +124,9 @@ RSpec.describe UsersController, type: :request do
           expect(response).to have_http_status(:ok)
 
           expect(assigns(:user).new_record?).to eq(true)
+          expect(response.body).to include('name="user[password]"')
+          expect(response.body).to include('name="user[password_confirmation]"')
+          expect(response.body.scan('autocomplete="new-password"').size).to eq(2)
         end
       end
 

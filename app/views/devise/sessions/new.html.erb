@@ -1,6 +1,7 @@
 <% content_for :title, "Sign in" %>
 
 <% auth_key = Devise.authentication_keys.first %>
+<% auth_key_autocomplete = Errbit::Config.user_has_username ? "username" : "email" %>
 
 <% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
   <% content_for :action_bar do %>
@@ -24,7 +25,7 @@
   <div class="required">
     <%= f.label auth_key %>
 
-    <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), tabindex: 1, autofocus: true %>
+    <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), autocomplete: auth_key_autocomplete, tabindex: 1, autofocus: true %>
   </div>
 
   <div class="required">
@@ -32,7 +33,7 @@
 
     <%= f.label :password %>
 
-    <%= f.password_field :password, tabindex: 2 %>
+    <%= f.password_field :password, autocomplete: "current-password", tabindex: 2 %>
   </div>
 
   <% if devise_mapping.rememberable? %>

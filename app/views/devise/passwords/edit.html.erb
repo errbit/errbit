@@ -8,13 +8,13 @@
   <div class="required">
     <%= f.label :password, "New password" %>
 
-    <%= f.password_field :password %>
+    <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="required">
     <%= f.label :password_confirmation, "Type your new password again" %>
 
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="buttons">
