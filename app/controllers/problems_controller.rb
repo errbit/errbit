@@ -157,8 +157,13 @@ class ProblemsController < ApplicationController
 
   def search
     respond_to do |format|
-      format.html { render :index }
-      format.js
+      format.html do
+        if request.xhr?
+          render partial: "problems/table", locals: {problems: problems}, layout: false
+        else
+          render :index
+        end
+      end
     end
   end
 

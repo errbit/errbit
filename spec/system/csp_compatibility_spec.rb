@@ -36,4 +36,32 @@ RSpec.describe "CSP-compatible browser behavior", type: :system, retry: 3 do
     uncheck "Notify on errors"
     expect(page).to have_css(".email_at_notices_nested", visible: :hidden)
   end
+
+  it "updates the app search without evaluating a JavaScript response" do
+    create(:app, name: "Searchable Demo App")
+    sign_in user
+
+    visit apps_path
+    fill_in "search", with: "Searchable"
+    find("#search").send_keys(:enter)
+
+    expect(page).to have_css("#app_table", text: "Searchable Demo App")
+  end
+
+  it "updates the problem search without evaluating a JavaScript response" do
+    app = create(:app)
+    create(:problem, app: app, message: "Searchable problem")
+    create(:problem, app: app, message: "Other problem")
+    sign_in user
+
+    visit problems_path
+    fill_in "search", with: "Searchable"
+    find("#search").send_keys(:enter)
+
+    expect(page).to have_css("#problem_table", text: "Searchable problem")
+    expect(page).not_to have_css("#problem_table", text: "Other problem")
+
+    check "toggle_problems_checkboxes"
+    expect(page).to have_checked_field("problems[]")
+  end
 end

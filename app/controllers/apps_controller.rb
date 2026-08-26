@@ -106,8 +106,13 @@ class AppsController < ApplicationController
 
   def search
     respond_to do |format|
-      format.html { render :index }
-      format.js
+      format.html do
+        if request.xhr?
+          render partial: "apps/table", locals: {apps: apps}, layout: false
+        else
+          render :index
+        end
+      end
     end
   end
 

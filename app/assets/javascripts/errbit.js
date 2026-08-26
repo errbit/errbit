@@ -40,6 +40,18 @@ $(function() {
     });
   }
 
+  $(document).on('ajax:success', 'form.search-form', function(_event, data) {
+    var form = $(this);
+    var target = $(form.data('search-target'));
+
+    target.html(data);
+    $('#flash-messages').empty();
+    if (target.attr('id') == 'problem_table') {
+      toggleProblemsCheckboxes();
+      bindProblemButtonsActions();
+    }
+  });
+
   function activateTabbedPanels() {
     $('.tab-bar a').each(function(){
       var tab = $(this);
