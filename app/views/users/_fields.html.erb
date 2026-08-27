@@ -10,13 +10,13 @@
 <% if Errbit::Config.user_has_username %>
   <div class="required">
     <%= f.label :username, t(".username") %>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, autocomplete: "username" %>
   </div>
 <% end %>
 
 <div class="required">
   <%= f.label :email, t(".email") %>
-  <%= f.text_field :email %>
+  <%= f.text_field :email, autocomplete: "email" %>
 </div>
 
 <% if Errbit::Config.github_authentication %>

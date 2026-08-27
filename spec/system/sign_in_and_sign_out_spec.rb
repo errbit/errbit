@@ -62,4 +62,26 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
 
     expect(page).to have_css('input[name="user[email]"][autocomplete="email"]')
   end
+
+  it "renders the password reset new-password autocomplete attributes" do
+    token = user.send_reset_password_instructions
+    visit edit_user_password_path(reset_password_token: token)
+
+    expect(page).to have_css('input[name="user[password]"][autocomplete="new-password"]')
+    expect(page).to have_css('input[name="user[password_confirmation]"][autocomplete="new-password"]')
+  end
+
+  it "renders the username autocomplete attribute when username authentication is enabled" do
+    allow(Errbit::Config).to receive(:user_has_username).and_return(true)
+    allow(Devise).to receive(:authentication_keys).and_return([:username])
+    allow(User).to receive(:new).and_wrap_original do |original, *args|
+      original.call(*args).tap do |resource|
+        allow(resource).to receive(:username).and_return(nil)
+      end
+    end
+
+    visit new_user_session_path
+
+    expect(page).to have_css('input[name="user[username]"][autocomplete="username"]')
+  end
 end
