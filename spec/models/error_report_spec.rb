@@ -125,27 +125,7 @@ RSpec.describe ErrorReport, type: :model do
 
         expect(subject.env_vars["SCRIPT_NAME"]).to eq(nil) # blank ends up nil
 
-        # XML representation:
-        # <var key="rack.session.options">
-        #   <var key="secure">false</var>
-        #   <var key="httponly">true</var>
-        #   <var key="path">/</var>
-        #   <var key="expire_after"/>
-        #   <var key="domain"/>
-        #   <var key="id"/>
-        # </var>
-        expected = {
-          "secure" => "false",
-          "httponly" => "true",
-          "path" => "/",
-          "expire_after" => nil,
-          "domain" => nil,
-          "id" => nil
-        }
-
-        expect(subject.env_vars).to have_key("rack_session_options")
-
-        expect(subject.env_vars["rack_session_options"]).to eq(expected)
+        expect(subject.env_vars).not_to have_key("rack_session_options")
       end
     end
   end
