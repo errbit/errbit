@@ -9,7 +9,7 @@ class Notice
   UNAVAILABLE = "N/A"
   FILTERED_TEXT = "[FILTERED]"
 
-  # Fail closed for sensitive-looking keys, even when this drops benign diagnostics.
+  # Fail closed for sensitive-looking keys, even when this redacts benign diagnostics.
   SENSITIVE_KEY_PATTERN = /passw|secret|token|api[_-]?key|authorization|credential|cookie|csrf|session|salt|certificate|crypt|otp|ssn|cvv|cvc/i
   INTERNAL_CGI_KEY = /\A(?:action_dispatch|action_controller|rack(?:[._]|\z)|puma(?:[._]|\z)|warden|rails_rack|routes?_|ROUTES_)/i
 
@@ -132,6 +132,15 @@ class Notice
     message.gsub(/(#<.+?):[0-9a-f]x[0-9a-f]+(>)/, '\1\2')
   end
 
+  def sanitized_attributes(privacy:)
+    {
+      "server_environment" => sanitize_hash(server_environment, privacy: privacy),
+      "request" => sanitize_request(request, privacy: privacy),
+      "notifier" => sanitize_hash(notifier, privacy: privacy),
+      "user_attributes" => sanitize_hash(user_attributes, privacy: privacy)
+    }
+  end
+
   private
 
   def problem_recache
@@ -139,11 +148,15 @@ class Notice
   end
 
   def sanitize
-    privacy = privacy_sanitization?
-    self.server_environment = sanitize_hash(server_environment, privacy: privacy)
-    self.request = sanitize_request(request, privacy: privacy)
-    self.notifier = sanitize_hash(notifier, privacy: privacy)
-    self.user_attributes = sanitize_hash(user_attributes, privacy: privacy)
+    assign_sanitized_attributes(privacy: privacy_sanitization?)
+  end
+
+  def assign_sanitized_attributes(privacy:)
+    sanitized = sanitized_attributes(privacy: privacy)
+    self.server_environment = sanitized["server_environment"]
+    self.request = sanitized["request"]
+    self.notifier = sanitized["notifier"]
+    self.user_attributes = sanitized["user_attributes"]
   end
 
   def sanitize_request(value, privacy:)
@@ -224,7 +237,7 @@ class Notice
   end
 
   def sanitize_key(key)
-    key.is_a?(String) ? key.gsub(".", "&#46;").gsub(/^\$/, "&#36;") : key
+    key.to_s.gsub(".", "&#46;").gsub(/^\$/, "&#36;")
   end
 
   def sanitize_url(value)

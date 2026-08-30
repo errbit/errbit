@@ -93,6 +93,18 @@ RSpec.describe Notice, type: :model do
         expect(notice.send(key)).to eq(@hash_sanitized)
       end
     end
+
+    it "normalizes symbol keys to strings" do
+      notice = create(:notice, request: {
+        password: "secret",
+        safe_key: "value"
+      })
+
+      expect(notice.request).to eq(
+        "password" => Notice::FILTERED_TEXT,
+        "safe_key" => "value"
+      )
+    end
   end
 
   describe "sensitive request data sanitization" do

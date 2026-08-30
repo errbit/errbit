@@ -58,8 +58,9 @@ retained, while sensitive leaves such as `csrf_token`, `access_token`, and
 `password` are replaced with `[FILTERED]`.
 
 Errbit intentionally uses broad fail-closed built-in key matching. Some benign
-diagnostic keys whose names resemble sensitive terms may be omitted. This favors
-preventing secret persistence over retaining every diagnostic field.
+diagnostic values whose key names resemble sensitive terms may be replaced with
+`[FILTERED]`. This favors preventing secret persistence over retaining every
+diagnostic value.
 
 Add literal case-insensitive custom key names with a comma-separated value:
 
@@ -83,3 +84,27 @@ server environment data, notifier data, and user attributes. With
 `ERRBIT_SANITIZE_NOTICE_DATA=true`, inspect the latest demo notice and verify
 that sensitive values display as `[FILTERED]`, while safe values remain visible.
 Framework-internal CGI values and URL credentials/fragments are removed.
+
+## Scrubbing Historical Notices
+
+Ingestion sanitization does not modify notices already stored in MongoDB. Back up
+the database first and, for large installations, run the historical scrubber
+during a maintenance or low-traffic window. It performs a dry run by default:
+
+```sh
+bin/rails errbit:sanitize_historical_notices
+```
+
+Review the reported counts, then apply the scrub with the exact write flag
+`DRY_RUN=false`:
+
+```sh
+DRY_RUN=false BATCH_SIZE=500 bin/rails errbit:sanitize_historical_notices
+```
+
+Use `LIMIT` to process a bounded number of notices during a trial run. The task
+forces privacy sanitization on, is safe to rerun, updates notices without
+touching timestamps, and reports failures without printing notice contents. It
+sanitizes the same four notice fields as ingestion: `request`,
+`server_environment`, `notifier`, and `user_attributes`. It does not sanitize
+`message` or `backtrace`.
