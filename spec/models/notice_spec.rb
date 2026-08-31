@@ -108,6 +108,30 @@ RSpec.describe Notice, type: :model do
   end
 
   describe "sensitive request data sanitization" do
+    it "uses the app setting when it overrides the global setting" do
+      allow(Errbit::Config).to receive(:sanitize_notice_data).and_return(false)
+      app = create(:app, sanitize_notice_data: true)
+      notice = create(:notice, app: app, request: {"params" => {"password" => "secret"}})
+
+      expect(notice.params["password"]).to eq(Notice::FILTERED_TEXT)
+    end
+
+    it "uses the global setting when the app inherits it" do
+      allow(Errbit::Config).to receive(:sanitize_notice_data).and_return(false)
+      app = create(:app, sanitize_notice_data: nil)
+      notice = create(:notice, app: app, request: {"params" => {"password" => "secret"}})
+
+      expect(notice.params["password"]).to eq("secret")
+    end
+
+    it "uses the app setting when it disables sanitization" do
+      allow(Errbit::Config).to receive(:sanitize_notice_data).and_return(true)
+      app = create(:app, sanitize_notice_data: false)
+      notice = create(:notice, app: app, request: {"params" => {"password" => "secret"}})
+
+      expect(notice.params["password"]).to eq("secret")
+    end
+
     it "redacts sensitive data and preserves safe request metadata" do
       notice = create(:notice,
         server_environment: {

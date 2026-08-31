@@ -94,6 +94,18 @@
   </div>
 </fieldset>
 
+<fieldset>
+  <legend><%= t(".privacy") %></legend>
+
+  <em><%= t(".privacy_help") %></em>
+
+  <%= f.select :sanitize_notice_data, [
+    [t(".privacy_inherit"), ""],
+    [t(".privacy_enabled"), "true"],
+    [t(".privacy_disabled"), "false"]
+  ], selected: app.sanitize_notice_data&.to_s %>
+</fieldset>
+
 <div class="checkbox">
   <%= f.check_box :notify_all_users %>
 

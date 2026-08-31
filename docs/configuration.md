@@ -143,6 +143,9 @@ Default in container: same as default value.
 <dt>ERRBIT_SENSITIVE_KEYS
 <dd>Comma-separated additional sensitive key names whose values are redacted when notice sanitization is enabled</dd>
 <dd>These literal, case-insensitive names augment Errbit's built-in filtering and cannot disable it</dd>
+<dt>App-level notice data privacy
+<dd>Administrators can configure each app to inherit the global notice sanitization setting, always sanitize, or disable sanitization for newly ingested notices</dd>
+<dd>An explicit app setting overrides <code>ERRBIT_SANITIZE_NOTICE_DATA</code>; historical notice scrubbing always sanitizes</dd>
 <dt>ERRBIT_EMAIL_AT_NOTICES
 <dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [1,10,100]

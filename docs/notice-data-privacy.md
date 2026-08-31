@@ -76,6 +76,17 @@ CGI internals, and URL/query data. MongoDB key escaping and invalid-string
 protection remain enabled, but sensitive data may be persisted. The
 `[FILTERED]` replacement is only used when privacy sanitization is enabled.
 
+## App-Level Override
+
+Administrators can override the global setting when editing an app. Each app can
+inherit the global value, always sanitize notice data, or disable sanitization for
+newly ingested notices. An explicit app setting takes precedence over
+`ERRBIT_SANITIZE_NOTICE_DATA`, so an app set to always sanitize is protected even
+when the global setting is `false`.
+
+The override does not change historical notices. The historical scrubber always
+sanitizes the notices it processes, regardless of the global or app-level setting.
+
 ## Demo Verification
 
 Run `bin/rails errbit:demo` in a non-production database to create a demo notice

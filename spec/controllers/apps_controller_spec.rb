@@ -314,6 +314,22 @@ RSpec.describe AppsController, type: :controller do
         end
       end
 
+      context "changing notice data privacy" do
+        it "stores an explicit app-level override" do
+          patch :update, params: {id: @app.id, app: {sanitize_notice_data: "true"}}
+
+          expect(@app.reload.sanitize_notice_data).to eq(true)
+        end
+
+        it "stores the inherit setting when the field is blank" do
+          @app.update!(sanitize_notice_data: false)
+
+          patch :update, params: {id: @app.id, app: {sanitize_notice_data: ""}}
+
+          expect(@app.reload.sanitize_notice_data).to be_nil
+        end
+      end
+
       context "setting up issue tracker" do
         context "unknown tracker type" do
           before do

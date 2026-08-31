@@ -11,8 +11,8 @@ RSpec.describe "initializers/notice_sanitization" do
     allow(Errbit::Config).to receive(:sanitize_notice_data).and_return(false)
 
     expect(Rails.logger).to receive(:warn).with(
-      "ERRBIT_SANITIZE_NOTICE_DATA=false. Sensitive notice data may be persisted by Errbit. " \
-      "Configure client-side Airbrake filtering where possible."
+      "ERRBIT_SANITIZE_NOTICE_DATA=false. Sensitive notice data may be persisted for apps " \
+      "that inherit the global setting. Configure app-level or client-side Airbrake filtering where possible."
     )
 
     load_initializer

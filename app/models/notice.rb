@@ -229,7 +229,8 @@ class Notice
   end
 
   def privacy_sanitization?
-    Errbit::Config.sanitize_notice_data != false
+    app_setting = app&.sanitize_notice_data
+    app_setting.nil? ? Errbit::Config.sanitize_notice_data != false : app_setting
   end
 
   def custom_sensitive_keys

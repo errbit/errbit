@@ -237,6 +237,11 @@ en:
       latest_app_version: Latest App Version
       latest_app_version_help: "Mobile apps can set this to ignore any error below this version. ie: 1.4.3"
       latest_app_version_placeholder: "e.g. 2.0.1 from the Bundle Identifier on an iOS app"
+      privacy: Notice Data Privacy
+      privacy_help: Choose whether this app inherits the global setting or overrides it for newly ingested notices.
+      privacy_inherit: Use global setting
+      privacy_enabled: Always sanitize notice data
+      privacy_disabled: Do not sanitize notice data
       notifications: Notifications
       notify_on_errors: Notify on errors
       notify_all_users: Send notifications to all users
