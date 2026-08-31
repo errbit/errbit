@@ -40,12 +40,7 @@ gem "rack-timeout"
 gem "puma"
 gem "ostruct"
 gem "securerandom"
-
-# Please don't update hoptoad_notifier to airbrake.
-# It's for internal use only, and we monkeypatch certain methods
-gem "hoptoad_notifier",
-  git: "https://github.com/errbit/hoptoad_notifier",
-  branch: "errbit"
+gem "airbrake", require: false
 
 # Notification services
 # ---------------------------------------
@@ -69,7 +64,6 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "thruster", require: false
 
 group :development, :test do
-  gem "airbrake", require: false
   gem "rubydex", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false

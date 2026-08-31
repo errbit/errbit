@@ -75,7 +75,7 @@ RSpec.describe "Callback on Notice", type: :model do
 
     it "notify self if mailer fails" do
       expect(Mailer).to receive(:with).and_raise(ArgumentError)
-      expect(HoptoadNotifier).to receive(:notify)
+      expect(Errbit::SelfErrorReporter).to receive(:notify)
       ErrorReport.new(notice_attrs).generate_notice!
     end
   end
@@ -138,6 +138,7 @@ RSpec.describe "Callback on Notice", type: :model do
             .and_return(double(deliver_now: true))
         end
       end
+      expect(Errbit::SelfErrorReporter).to receive(:notify).with(instance_of(ArgumentError))
 
       error_report.generate_notice!
     end

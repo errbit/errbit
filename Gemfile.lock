@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/errbit/hoptoad_notifier
-  revision: 9b6a6f5017c5ca52b07b8d5c64c79b6d44c121d3
-  branch: errbit
-  specs:
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -689,7 +680,6 @@ DEPENDENCIES
   font-awesome-rails
   herb
   hoi
-  hoptoad_notifier!
   htmlentities
   httparty
   icalendar
@@ -837,7 +827,6 @@ CHECKSUMS
   herb (0.10.3-x86_64-linux-gnu) sha256=cbb49b66f2bdc92d17109d1ea9452e88ba6a8ae52e9ddd5279deff83dcc4c66d
   herb (0.10.3-x86_64-linux-musl) sha256=c84482d6b57f13c2e1a0fa029649efb0e5fdc876a3fd564bae09cf42bd4d5ae1
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
-  hoptoad_notifier (2.4.11)
   htmlentities (4.4.2) sha256=bbafbdf69f2eca9262be4efef7e43e6a1de54c95eb600f26984f71d2fe96c5c3
   httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5

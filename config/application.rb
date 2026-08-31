@@ -16,6 +16,8 @@ require "action_view/railtie"
 # require "action_cable/engine"
 # require "rails/test_unit/railtie"
 
+require_relative "../lib/errbit/self_error_reporter"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -43,6 +45,22 @@ module Errbit
 
     # Custom directories with classes and modules you want to eager load.
     config.eager_load_paths << Rails.root.join("lib").to_s
+
+    config.middleware.insert_after(
+      ActionDispatch::DebugExceptions,
+      Errbit::SelfErrorReporter::Middleware
+    )
+
+    initializer "errbit.airbrake" do
+      Airbrake.configure do |config|
+        config.environment = Rails.env.to_s
+        config.root_directory = Rails.root
+      end
+    end
+
+    initializer "errbit.disable_external_airbrake_middleware", after: "airbrake.middleware" do |app|
+      app.config.middleware.delete(Airbrake::Rack::Middleware)
+    end
 
     config.before_initialize do
       config.secret_key_base = Errbit::Config.secret_key_base
