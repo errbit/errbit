@@ -186,6 +186,45 @@ class AppsController < ApplicationController
   end
 
   def app_params
-    params.require(:app).permit!
+    params.require(:app).permit(
+      :name,
+      :repository_branch,
+      :github_repo,
+      :bitbucket_repo,
+      :custom_backtrace_url_template,
+      :asset_host,
+      :current_app_version,
+      :notify_all_users,
+      :notify_on_errs,
+      :sanitize_notice_data,
+      :use_site_fingerprinter,
+      {email_at_notices: []},
+      watchers_attributes: [:id, :user_id, :email, :watcher_type, :_destroy],
+      issue_tracker_attributes: [:id, :type_tracker, :_destroy, {options: {}}],
+      notification_service_attributes: [
+        :id,
+        :type,
+        :room_id,
+        :mentions,
+        :user_id,
+        :service_url,
+        :service,
+        :api_token,
+        :subdomain,
+        :sender_name,
+        {notify_at_notices: []},
+        :_destroy
+      ],
+      notice_fingerprinter_attributes: [
+        :id,
+        :error_class,
+        :message,
+        :backtrace_lines,
+        :component,
+        :action,
+        :environment_name,
+        :source
+      ]
+    )
   end
 end

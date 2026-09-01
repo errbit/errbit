@@ -64,6 +64,22 @@ RSpec.describe Configurator do
     expect(result.myboolean).to eq(true)
   end
 
+  it "extracts false booleans" do
+    allow(ENV).to receive(:[]).with("MYBOOLEAN").and_return("false")
+
+    result = described_class.run(myboolean: ["MYBOOLEAN"])
+
+    expect(result.myboolean).to eq(false)
+  end
+
+  it "leaves an unset boolean nil" do
+    allow(ENV).to receive(:[]).with("MYBOOLEAN").and_return(nil)
+
+    result = described_class.run(myboolean: ["MYBOOLEAN"])
+
+    expect(result.myboolean).to be_nil
+  end
+
   it "extracts numbers" do
     allow(ENV).to receive(:[]).with("MYNUMBER").and_return("0")
 

@@ -6,6 +6,9 @@ Errbit takes all of its configuration from environment variables. You can use
 `Gemfile`, to fill in any values that you can't or won't supply through the
 environment.
 
+See [Protecting Notice Data](notice-data-privacy.md) for client-side Airbrake and
+Rails filtering guidance and Errbit's server-side privacy controls.
+
 In order of precedence Errbit uses:
 
 1. Environment variables (for example MY_VALUE=abc bundle exec puma)
@@ -134,6 +137,15 @@ Default in container: same as default value.
 <dt>ERRBIT_EMAIL_FROM
 <dd>The value that should be set in the 'from' field for outgoing emails
 <dd>defaults to errbit@example.com
+<dt>ERRBIT_SANITIZE_NOTICE_DATA
+<dd>Enable server-side privacy sanitization before notice data is stored</dd>
+<dd>defaults to true. Set to false only when legacy notice retention is required; sensitive data may then be persisted</dd>
+<dt>ERRBIT_SENSITIVE_KEYS
+<dd>Comma-separated additional sensitive key names whose values are redacted when notice sanitization is enabled</dd>
+<dd>These literal, case-insensitive names augment Errbit's built-in filtering and cannot disable it</dd>
+<dt>App-level notice data privacy
+<dd>Administrators can configure each app to inherit the global notice sanitization setting, always sanitize, or disable sanitization for newly ingested notices</dd>
+<dd>An explicit app setting overrides <code>ERRBIT_SANITIZE_NOTICE_DATA</code>; historical notice scrubbing always sanitizes</dd>
 <dt>ERRBIT_EMAIL_AT_NOTICES
 <dd>Errbit notifies watchers via email after the set number of occurrences of the same error. [0] means notify on every occurrence.
 <dd>defaults to [1,10,100]

@@ -209,6 +209,11 @@ pt-BR:
       latest_app_version: Última versão da aplicação
       latest_app_version_help: "Aplicações móveis podem atribuir valor a este campo afim de ignorar qualquer erro abaixo desta versão. ex: 1.4.3"
       latest_app_version_placeholder: "ex: 2.0.1 do identificador de pacote em um app IOS"
+      privacy: Privacidade dos dados das notificações
+      privacy_help: Escolha se esta aplicação herda a configuração global ou a substitui para novas notificações.
+      privacy_inherit: Usar configuração global
+      privacy_enabled: Sempre sanitizar dados das notificações
+      privacy_disabled: Não sanitizar dados das notificações
       notifications: Notificações
       notify_on_errors: Notificar em caso de erros
       notify_all_users: Enviar notificações para todos os usuários

@@ -11,6 +11,7 @@ RSpec.describe App, type: :model do
     it { is_expected.to have_fields(:api_key, :github_repo, :bitbucket_repo, :asset_host, :repository_branch) }
 
     it { is_expected.to have_fields(:notify_all_users, :notify_on_errs).of_type(Mongoid::Boolean) }
+    it { is_expected.to have_field(:sanitize_notice_data).of_type(Mongoid::Boolean) }
 
     it { is_expected.to have_field(:email_at_notices).of_type(Array).with_default_value_of(Errbit::Config.email_at_notices) }
   end

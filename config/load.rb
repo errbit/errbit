@@ -22,6 +22,8 @@ Errbit::Config = Configurator.run(
   per_app_notify_at_notices: ["ERRBIT_PER_APP_NOTIFY_AT_NOTICES"],
   log_location: ["ERRBIT_LOG_LOCATION"],
   notice_deprecation_days: ["ERRBIT_PROBLEM_DESTROY_AFTER_DAYS"],
+  sanitize_notice_data: ["ERRBIT_SANITIZE_NOTICE_DATA"],
+  sensitive_keys: ["ERRBIT_SENSITIVE_KEYS"],
 
   secret_key_base: ["SECRET_KEY_BASE"],
   mongo_url: ["MONGODB_URI", "MONGOLAB_URI", "MONGOHQ_URL", "MONGODB_URL", "MONGO_URL"],
