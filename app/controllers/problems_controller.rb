@@ -7,6 +7,8 @@ class ProblemsController < ApplicationController
     :resolve_several, :unresolve_several, :unmerge_several
   ]
 
+  before_action :need_github_issue_permission, only: [:create_issue, :close_issue]
+
   expose(:app_scope) do
     params[:app_id] ? App.where(_id: params.expect(:app_id)) : App.all
   end
@@ -170,5 +172,17 @@ class ProblemsController < ApplicationController
     flash[:notice] = I18n.t("controllers.problems.flash.no_select_problem")
 
     redirect_back_or_to(root_path)
+  end
+
+  # Both creating and closing a GitHub issue go through the user's own OAuth
+  # token when they have linked their GitHub account, so a read-only scope
+  # cannot do either.
+  def need_github_issue_permission
+    return unless app.issue_tracker&.type_tracker == "github"
+    return if current_user.github_issues_permitted?
+
+    flash[:error] = I18n.t("controllers.problems.flash.github_issue_forbidden")
+
+    redirect_to app_problem_path(app, problem)
   end
 end
