@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-feed.updated(problems.first.try(:created_at) || Time.now)
+feed.updated(problems.first.try(:created_at) || Time.current)
 
 problems.each do |problem|
   notice = problem.notices.first
