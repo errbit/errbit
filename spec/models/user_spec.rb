@@ -63,6 +63,36 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#can_create_github_issues?" do
+    def user_with_github_account
+      build(:user, github_login: "biow0lf", github_oauth_token: "abcdef")
+    end
+
+    it "is false without a github account" do
+      allow(Errbit::Config).to receive(:github_access_scope).and_return(["repo"])
+
+      expect(build(:user).can_create_github_issues?).to eq(false)
+    end
+
+    it "is true with the repo scope" do
+      allow(Errbit::Config).to receive(:github_access_scope).and_return(["repo"])
+
+      expect(user_with_github_account.can_create_github_issues?).to eq(true)
+    end
+
+    it "is true with the public_repo scope" do
+      allow(Errbit::Config).to receive(:github_access_scope).and_return(["public_repo"])
+
+      expect(user_with_github_account.can_create_github_issues?).to eq(true)
+    end
+
+    it "is false without a write scope" do
+      allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+      expect(user_with_github_account.can_create_github_issues?).to eq(false)
+    end
+  end
+
   context "First user" do
     it "should be created this admin access via db:seed" do
       expect do

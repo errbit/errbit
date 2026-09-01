@@ -93,7 +93,7 @@ class User
   end
 
   def can_create_github_issues?
-    github_account? && Errbit::Config.github_access_scope.include?("repo")
+    github_account? && (Errbit::Config.github_access_scope & ["repo", "public_repo"]).any?
   end
 
   def github_login=(login)
