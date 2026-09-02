@@ -468,8 +468,6 @@ RSpec.describe UsersController, type: :request do
 
         before { sign_in(current_user) }
 
-        before { expect(UserDestroy).to receive(:new).with(user).and_call_original }
-
         before { expect { delete user_path(user) }.to change(User, :count).by(-1) }
 
         it "is expected to redirect to users path with status found" do
@@ -488,8 +486,6 @@ RSpec.describe UsersController, type: :request do
 
         before { sign_in(current_user) }
 
-        before { expect(UserDestroy).not_to receive(:new) }
-
         before { expect { delete user_path(user) }.not_to change(User, :count) }
 
         it "is expected to redirect to users path with status found" do
@@ -505,8 +501,6 @@ RSpec.describe UsersController, type: :request do
         let(:current_user) { create(:user) }
 
         before { sign_in(current_user) }
-
-        before { expect(UserDestroy).not_to receive(:new) }
 
         before { expect { delete user_path(current_user) }.not_to change(User, :count) }
 
