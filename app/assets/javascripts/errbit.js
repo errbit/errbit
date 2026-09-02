@@ -2,7 +2,7 @@
 
 $(function() {
 
-  var currentTab = "summary";
+  var currentTab = window.location.hash.replace(/^#/, '') || "summary";
 
   function init() {
 
@@ -30,7 +30,13 @@ $(function() {
     $('.notice-pagination').each(function() {
       $.pjax.defaults = {timeout: 2000};
 
-      $('#content').pjax('.notice-pagination a').on('pjax:start', function() {
+      $(document).pjax('.notice-pagination a', '#content').on('pjax:click', function(event, options) {
+        // Carry the fragment on the request URL so pjax's full-navigation
+        // fallback (timeout/error) also preserves the active tab
+        if (currentTab) {
+          options.url = options.url.split('#')[0] + '#' + currentTab;
+        }
+      }).on('pjax:start', function() {
         $('.notice-pagination-loader').css("visibility", "visible");
         currentTab = $('.tab-bar ul li a.button.active').attr('rel');
       }).on('pjax:end', function() {
@@ -51,12 +57,23 @@ $(function() {
       activateTab($(this));
       return(false);
     });
-    activateTab($('.tab-bar ul li a.button[rel=' + currentTab + ']'));
+    var tab = $('.tab-bar ul li a.button').filter(function() {
+      return $(this).attr('rel') === currentTab;
+    });
+    if (!tab.length) {
+      tab = $('.tab-bar ul li a.button[rel=summary]');
+    }
+    activateTab(tab);
   }
 
   function activateTab(tab) {
     tab = $(tab);
     var panel = $('#'+tab.attr('rel'));
+
+    currentTab = tab.attr('rel');
+    if (currentTab) {
+      history.replaceState(history.state, '', '#' + currentTab);
+    }
 
     tab.closest('.tab-bar').find('a.active').removeClass('active');
     tab.addClass('active');
