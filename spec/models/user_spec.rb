@@ -26,6 +26,14 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to eq(true)
     end
 
+    it "allows clearing an existing locale preference" do
+      user = create(:user, locale: "pt-BR")
+      user.locale = ""
+
+      expect(user.save).to eq(true)
+      expect(user.reload.locale).to be_nil
+    end
+
     it "requires uniq github login" do
       user_1 = create(:user, github_login: "biow0lf")
       expect(user_1.valid?).to eq(true)
