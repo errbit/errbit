@@ -57,6 +57,7 @@ gem "hoi"
 gem "pushover2"
 # Hubot
 gem "httparty"
+gem "http_accept_language"
 
 gem "icalendar"
 gem "json"

@@ -220,6 +220,7 @@ GEM
       httparty
       json
     htmlentities (4.4.2)
+    http_accept_language (2.1.1)
     httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
@@ -697,6 +698,7 @@ DEPENDENCIES
   hoi
   hoptoad_notifier!
   htmlentities
+  http_accept_language
   httparty
   icalendar
   importmap-rails
@@ -845,6 +847,7 @@ CHECKSUMS
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   hoptoad_notifier (2.4.11)
   htmlentities (4.4.2) sha256=bbafbdf69f2eca9262be4efef7e43e6a1de54c95eb600f26984f71d2fe96c5c3
+  http_accept_language (2.1.1) sha256=0043f0d55a148cf45b604dbdd197cb36437133e990016c68c892d49dbea31634
   httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   icalendar (2.12.4) sha256=acf9b8b166dad4679b8be2cc3202260896c199ab7302f748c760c97e9d32e3a2
