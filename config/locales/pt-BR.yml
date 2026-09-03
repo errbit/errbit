@@ -106,19 +106,8 @@ pt-BR:
       unlink_google:
         success: "Conta do %{email} desvinculada com sucesso!"
   devise:
-    registrations:
-      signed_up_but_unconfirmed: "Uma mensagem foi enviada para o seu e-mail com um link de confirmação. Acesse o link para ativar sua conta."
-      signed_up_but_inactive: "Você se registrou com sucesso. Entretanto, só será possível entrar no sistema quando sua conta for ativada."
-      signed_up_but_locked: "Você se registrou com sucesso. Entratanto, não será possível entrar no sistema porque sua conta está bloqueada."
-    omniauth_callbacks:
-      failure: 'Não foi possível autenticá-lo a partir da conta %{kind} porque "%{reason}".'
-      success: "Autenticado com sucesso a partir da conta %{kind}."
     google_login:
-      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
-    sessions:
-      new:
-        sign_in: "Entrar"
-        sign_in_with: "Entrar com %{provider}"
+      domain_unauthorized: "O domínio do e-mail da conta não está autorizado para login. Entre com uma conta de um domínio confiável."
   problems:
     index:
       all_errors: "Todos os erros"
