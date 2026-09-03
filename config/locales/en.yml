@@ -165,6 +165,11 @@ en:
       unresolve: Unresolve
       delete: Delete
       ago: ago
+    issue_tracker_links:
+      go_to_issue: "go to issue"
+      unlink_confirm: "Unlink err issues?"
+      unlink_issue: "unlink issue"
+      close_issue: "close issue"
     confirm:
       delete: "Permanently delete selected issues?"
       resolve: "Resolve selected issues? They can be unresolved later."
@@ -198,6 +203,8 @@ en:
     sparkline:
       graph-2-weeks: Graph (2 weeks)
       graph-24-hours: Graph (24 hours)
+    tally_table:
+      show_more: "Show more..."
   comments:
     confirm_delete: "Permanently delete this comment?"
     create:
@@ -290,12 +297,12 @@ en:
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
       are_you_sure: "Are you sure?"
-      atom_title: "Errbit notices for %{name} at %{host}"
       edit: edit
       environment: Environment
       errors: Errors
       errors_caught: "Errors Caught:"
       github_repo: GitHub Repo
+      latest_app_version: Latest App Version
       message: Message
       no_error_yet: "No errors have been caught yet, make sure you set up your app"
       no_watchers: "Sadly, no one is watching this app"
