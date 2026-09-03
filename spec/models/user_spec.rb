@@ -34,6 +34,21 @@ RSpec.describe User, type: :model do
       expect(user.reload.locale).to be_nil
     end
 
+    it "allows profile updates with blank password fields" do
+      user = create(:user)
+      user.assign_attributes(locale: "pt-BR", password: "", password_confirmation: "")
+
+      expect(user.save).to eq(true)
+      expect(user.reload.locale).to eq("pt-BR")
+    end
+
+    it "still rejects an invalid password change" do
+      user = create(:user)
+      user.assign_attributes(password: "short", password_confirmation: "mismatch")
+
+      expect(user.save).to eq(false)
+    end
+
     it "requires uniq github login" do
       user_1 = create(:user, github_login: "biow0lf")
       expect(user_1.valid?).to eq(true)

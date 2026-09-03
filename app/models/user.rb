@@ -87,6 +87,8 @@ class User # rubocop:disable Metrics/ClassLength
   end
 
   def password_required?
+    return false if persisted? && password.blank? && password_confirmation.blank?
+
     github_login.present? ? false : super
   end
 
