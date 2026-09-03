@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User
+class User # rubocop:disable Metrics/ClassLength
   PER_PAGE = 30
 
   include Mongoid::Document
@@ -16,6 +16,7 @@ class User
   field :admin, type: Boolean, default: false
   field :per_page, type: Integer, default: PER_PAGE
   field :time_zone, default: "UTC"
+  field :locale, type: String
 
   ## Devise field
   ### Database Authenticatable
@@ -44,6 +45,7 @@ class User
 
   validates :name, presence: true
   validates :github_login, uniqueness: {allow_nil: true}
+  validates :locale, inclusion: {in: ->(_) { Errbit::Locales.identifiers }, allow_nil: true}, if: :locale_changed?
 
   if Errbit::Config.user_has_username
     field :username
@@ -99,6 +101,10 @@ class User
   def github_login=(login)
     login = nil if login.is_a?(String) && login.strip.empty?
     self[:github_login] = login
+  end
+
+  def locale=(value)
+    self[:locale] = value.to_s.strip.presence&.then { |locale| Errbit::Locales.normalize(locale) }
   end
 
   def google_account?

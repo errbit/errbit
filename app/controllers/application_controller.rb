@@ -29,13 +29,15 @@ class ApplicationController < ActionController::Base
   def set_locale
     return if request.path.match?(Errbit::LocaleMiddleware::API_PATHS)
 
-    I18n.locale = if user_signed_in? && Errbit::Locales.include?(current_user.locale)
-      current_user.locale
-    else
-      I18n.locale
-    end
+    I18n.locale = authenticated_locale || I18n.locale
+  end
 
-    response.headers["Vary"] = [response.headers["Vary"], "Accept-Language"].compact.join(", ")
+  def authenticated_locale
+    return unless user_signed_in?
+    return I18n.locale if current_user.locale.blank?
+
+    locale = Errbit::Locales.normalize(current_user.locale)
+    Errbit::Locales.include?(locale) ? locale : I18n.default_locale
   end
 
   def authenticate_user_from_token!

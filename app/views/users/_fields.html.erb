@@ -37,6 +37,11 @@
 </div>
 
 <div class="required">
+  <%= f.label :locale, t(".locale") %>
+  <%= f.select :locale, [[t(".automatic"), nil], *Errbit::Locales.selectable.map { |catalog| [catalog.name, catalog.identifier] }] %>
+</div>
+
+<div class="required">
   <%= f.label :password, t(".password") %>
   <%= f.password_field :password, autocomplete: "off" %>
 </div>
