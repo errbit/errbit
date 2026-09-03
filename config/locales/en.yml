@@ -79,6 +79,7 @@ en:
       user_not_authorized: "You are not authorized to perform this action."
     apps:
       flash:
+        parse_error: "Couldn't parse your notification frequency. Value was reset to default (%{default_value})."
         create:
           success: "Your app was successfully created."
           error: "Your app could not be created."
@@ -94,6 +95,36 @@ en:
         need_two_errors_merge: "You must select at least two errors to merge"
         merge_several:
           success: "%{nb} errors have been merged."
+        resolve_several:
+          one: "1 error has been resolved. Great news everyone!"
+          other: "%{count} errors have been resolved. Great news everyone!"
+        unresolve_several:
+          one: "1 error has been unresolved."
+          other: "%{count} errors have been unresolved."
+        unmerge_several:
+          one: "1 error has been unmerged."
+          other: "%{count} errors have been unmerged."
+        destroy_several:
+          one: "1 error will be deleted."
+          other: "%{count} errors will be deleted."
+        destroy_all:
+          one: "1 error will be deleted."
+          other: "%{count} errors will be deleted."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "Could not retrieve user's email from GitHub"
+          already_registered: "User already registered with %{github_site_title} login '%{github_login}'!"
+          linked: "Successfully linked %{github_site_title} account!"
+          not_authorized: "There are no authorized users with %{github_site_title} login '%{github_login}'. Please ask an administrator to register your user account."
+        google:
+          already_registered: "User already registered with %{google_site_title} login '%{google_email}'!"
+          linked: "Successfully linked %{google_email} account!"
+          not_authorized: "There are no authorized users with %{google_site_title} login '%{google_email}'. Please ask an administrator to register your user account."
+      unlink_github:
+        success: "Successfully unlinked %{github_site_title} account!"
+      unlink_google:
+        success: "Successfully unlinked %{email} account!"
   devise:
     registrations:
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
