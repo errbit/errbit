@@ -6,11 +6,11 @@ RSpec.describe Errbit::Locales do
   before { described_class.reload! }
 
   it "discovers the Errbit UI catalogs" do
-    expect(described_class.selectable.map(&:identifier)).to eq(%w[en pt-BR])
+    expect(described_class.selectable.map(&:identifier)).to eq(["en", "es", "pt-BR"])
   end
 
   it "returns catalog autonyms" do
-    expect(described_class.selectable.map(&:name)).to eq(["English", "Português (Brasil)"])
+    expect(described_class.selectable.map(&:name)).to eq(["English", "Español", "Português (Brasil)"])
   end
 
   it "normalizes regional identifiers" do
