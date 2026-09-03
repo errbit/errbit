@@ -3,6 +3,7 @@
 <% if app.issue_tracker_configured? %>
   <% tracker = app.issue_tracker %>
   <% tracker_type = tracker.type %>
+  <% can_use_tracker = tracker.type_tracker != "github" || current_user.github_issues_permitted? %>
 
   <% if problem.issue_link.present? %>
     <span>
@@ -22,7 +23,7 @@
       <% end %>
     </span>
 
-    <% if tracker.tracker.respond_to?(:close_issue) %>
+    <% if can_use_tracker && tracker.tracker.respond_to?(:close_issue) %>
       <span>
         <%= link_to close_issue_app_problem_path(app, problem),
             method: :post,
@@ -40,9 +41,11 @@
         creating...
       <% end %>
     </span>
-    <%= link_to "retry", create_issue_app_problem_path(app, problem), method: :post %>
+    <% if can_use_tracker %>
+      <%= link_to "retry", create_issue_app_problem_path(app, problem), method: :post %>
+    <% end %>
 
-  <% else %>
+  <% elsif can_use_tracker %>
     <span>
       <%= link_to create_issue_app_problem_path(app, problem),
           method: :post,
