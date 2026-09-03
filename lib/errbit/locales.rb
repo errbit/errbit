@@ -11,6 +11,8 @@ module Errbit
     module_function
 
     def selectable
+      return load_catalogs if Rails.application.config.enable_reloading
+
       @selectable ||= load_catalogs
     end
 
