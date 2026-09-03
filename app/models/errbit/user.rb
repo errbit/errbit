@@ -1,0 +1,110 @@
+# frozen_string_literal: true
+
+module Errbit
+  class User < ApplicationRecord
+    PER_PAGE = 30
+
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, nil, "User")
+    end
+
+    devise(*Errbit::Config.devise_modules)
+
+    has_many :comments,
+      class_name: "Errbit::Comment",
+      foreign_key: :errbit_user_id,
+      inverse_of: :user,
+      dependent: :destroy
+
+    has_many :watchers,
+      class_name: "Errbit::Watcher",
+      foreign_key: :errbit_user_id,
+      inverse_of: :user,
+      dependent: :destroy
+
+    before_save :ensure_authentication_token
+
+    validates :name, presence: true
+    validates :github_login, uniqueness: {allow_nil: true}
+    validates :username, presence: true, if: -> { Errbit::Config.user_has_username }
+
+    class << self
+      def valid_google_domain?(email)
+        return true if Errbit::Config.google_authorized_domains.blank?
+
+        match_data = /.+@(?<domain>.+)$/.match(email)
+        return false if match_data.nil?
+
+        Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
+      end
+
+      def create_from_google_oauth2(access_token)
+        email = access_token.dig(:info, :email)
+        name = access_token.dig(:info, :name)
+        uid = access_token[:uid]
+
+        where(email: email).first || create(name: name, email: email, google_uid: uid, password: Devise.friendly_token[0, 20])
+      end
+
+      def token_authentication_key
+        :auth_token
+      end
+    end
+
+    def per_page
+      super || PER_PAGE
+    end
+
+    def watching?(app)
+      watchers.where(errbit_app_id: app.id).exists?
+    end
+
+    def password_required?
+      github_login.present? ? false : super
+    end
+
+    def github_account?
+      github_login.present? && github_oauth_token.present?
+    end
+
+    def can_create_github_issues?
+      github_account? && Errbit::Config.github_access_scope.include?("repo")
+    end
+
+    def github_login=(login)
+      login = nil if login.is_a?(String) && login.strip.empty?
+      self[:github_login] = login
+    end
+
+    def google_account?
+      google_uid.present?
+    end
+
+    def ensure_authentication_token
+      self.authentication_token = generate_authentication_token if authentication_token.blank?
+    end
+
+    def reset_password(new_password, new_password_confirmation)
+      self.password = new_password
+      self.password_confirmation = new_password_confirmation
+
+      self.class.validators_on(:password).each { |validator| validator.validate_each(self, :password, password) }
+      return false if errors.any?
+
+      save(validate: false)
+    end
+
+    def attributes_for_super_diff
+      {id: id, name: name}
+    end
+
+    private
+
+    def generate_authentication_token
+      loop do
+        token = Devise.friendly_token
+        break token unless Errbit::User.where(authentication_token: token).first
+      end
+    end
+  end
+end

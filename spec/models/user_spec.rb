@@ -64,12 +64,20 @@ RSpec.describe User, type: :model do
   end
 
   context "First user" do
-    it "should be created this admin access via db:seed" do
+    around do |example|
+      previous_email = ENV["ERRBIT_ADMIN_EMAIL"]
+      ENV["ERRBIT_ADMIN_EMAIL"] = "admin@example.test"
+      example.run
+    ensure
+      ENV["ERRBIT_ADMIN_EMAIL"] = previous_email
+    end
+
+    it "creates the SQL admin user via db:seed" do
       expect do
         allow($stdout).to receive(:puts).and_return(true)
-        require Rails.root.join("db/seeds.rb")
+        load Rails.root.join("db/seeds.rb")
       end.to change {
-        User.where(admin: true).count
+        Errbit::User.where(admin: true).count
       }.by(1)
     end
   end

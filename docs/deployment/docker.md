@@ -5,8 +5,10 @@ make Docker deployment easy. You can pass all of [Errbit's
 configuration](/docs/configuration.md) to the Docker container using
 `docker run -e`.
 
-When running Errbit using `docker run` you must specify a `MONGO_URL`. If
-you're running in a production environment, you should also specify
+When running Errbit using `docker run` you must persist `/rails/storage` and
+make it writable by the image's UID/GID `1000`. It stores SQLite, WAL sidecars,
+and the verified Mongo-to-SQL cutover marker. If you're running in a production
+environment, you should also specify
 `RAILS_ENV=production` and `SECRET_KEY_BASE=some-secret-key`.
 
 If you don't already have one, you can generate a suitable `SECRET_KEY_BASE`
@@ -24,42 +26,56 @@ If you are interested in using official release tags of errbit, contributions to
 
 ## Standalone Errbit App
 
-Assuming you have a mongo host available, you can run errbit using `docker
-run`, exposing its HTTP interface on port 3000:
+Assuming you have persistent local storage available, you can run Errbit using
+`docker run`, exposing its HTTP interface on port 3000:
 
 ```shell
+mkdir -p storage
+sudo chown 1000:1000 storage
+
 docker run \
   -e "RAILS_ENV=production" \
-  -e "MONGO_URL=mongodb://my-mongo-host" \
   -e "SECRET_KEY_BASE=my$ecre7key123" \
+  -v "$(pwd)/storage:/rails/storage" \
   -p 3000:3000 \
   errbit/errbit:latest
 ```
 
-Now run `bundle exec rails errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
-Docker container:
+To migrate an existing MongoDB deployment, stop Errbit and run the migration in
+a one-off container with the same persistent storage mount. It verifies the
+copy before recording the cutover:
 
 ```shell
 docker run \
   --rm \
   -e "RAILS_ENV=production" \
-  -e "MONGO_URL=mongodb://my-mongo-host" \
+  -e "MONGO_URL=mongodb://my-mongo-host/errbit_production" \
+  -e "SECRET_KEY_BASE=my$ecre7key123" \
+  -v "$(pwd)/storage:/rails/storage" \
   errbit/errbit:latest \
-  bundle exec rails errbit:bootstrap
+  bundle exec rails db:migrate errbit:sqlite:configure errbit:migrate:all
 ```
 
-## Errbit + Dependencies via Docker Compose
+The default entrypoint runs `errbit:sqlite:configure` through
+`errbit:bootstrap`. If you bypass bootstrap or deploy outside Docker, run
+`bin/rails errbit:sqlite:configure` once after `db:migrate` and before serving
+traffic.
 
-Docker compose can take care of starting up a mongo container along with the
-Errbit application container and linking the two containers together:
+## Errbit via Docker Compose
+
+The normal Compose deployment uses SQLite and does not start MongoDB:
 
 ```shell
-docker-compose up -e "SECRET_KEY_BASE=my$ecre7key123"
+mkdir -p storage
+sudo chown 1000:1000 storage
+docker compose up -d --build
 ```
 
-Now run `bundle exec rails errbit:bootstrap` to bootstrap the Errbit db within an ephemeral
-Docker container:
+For an existing MongoDB installation, run the migration separately with an
+explicit `MONGO_URL` before starting the normal SQLite deployment:
 
 ```shell
-docker exec errbit_errbit_1 bundle exec rails errbit:bootstrap
+docker compose run --rm \
+  -e MONGO_URL="mongodb://my-mongo-host/errbit_production" \
+  errbit bundle exec rails db:migrate errbit:sqlite:configure errbit:migrate:all
 ```

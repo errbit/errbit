@@ -10,9 +10,9 @@ RSpec.describe Devise::SessionsController, type: :controller do
       @request.env["devise.mapping"] = Devise.mappings[:user]
     end
 
-    let(:app) { create(:app) }
+    let(:app) { create(:errbit_app) }
 
-    let(:user) { create(:user) }
+    let(:user) { create(:errbit_user) }
 
     it "redirects to app index page if there are no apps for the user" do
       post :create, params: {user: {"email" => user.email, "password" => user.password}}

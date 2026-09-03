@@ -55,14 +55,13 @@ updates and notifications.
 The list of requirements to install Errbit are:
 
 * Ruby 4.0
-* MongoDB >= 7.0
+* SQLite 3
 
 ## Installation
 
 *Note*: This app is intended for people with experience deploying and maintaining
 Rails applications.
 
-* [Install MongoDB](https://www.mongodb.org/downloads)
 * `git clone https://github.com/errbit/errbit.git`
 * `bundle install`
 * `bundle exec rails errbit:bootstrap`
@@ -209,12 +208,14 @@ When upgrading Errbit, please run:
 git pull origin main # assuming origin is the github.com/errbit/errbit repo
 bundle install
 bundle exec rails db:migrate
-bundle exec rails db:mongoid:remove_undefined_indexes
-bundle exec rails db:mongoid:create_indexes
 bundle exec rails assets:precompile
 ```
 
 This will ensure that your application stays up to date with any schema changes.
+
+When upgrading an existing MongoDB installation to the SQLite runtime, follow
+the [migration instructions](docs/upgrading.md) instead. MongoDB is retained in
+the bridge release only for that migration path.
 
 There are additional steps if you are [upgrading from a version prior to v0.4.0](docs/upgrading.md).
 

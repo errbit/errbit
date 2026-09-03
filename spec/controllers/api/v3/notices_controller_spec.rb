@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Api::V3::NoticesController, type: :controller do
-  let(:app) { create(:app) }
+  let(:app) { create(:errbit_app) }
 
   let(:project_id) { app.api_key }
 
@@ -32,7 +32,7 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
   it "returns created notice id in json format" do
     post :create, body: legit_body, params: {**legit_params}
 
-    notice = Notice.last
+    notice = Errbit::Notice.last
 
     expect(response.parsed_body).to eq(
       "id" => notice.id.to_s,
@@ -96,9 +96,9 @@ RSpec.describe Api::V3::NoticesController, type: :controller do
   end
 
   it "ignores notices for older api" do
-    app = create(:app, current_app_version: "2.0")
+    app = create(:errbit_app, current_app_version: "2.0")
     post :create, body: legit_body, params: {project_id: app.api_key, key: app.api_key}
     expect(response.body).to eq("Notice for old app version ignored")
-    expect(Notice.count).to eq(0)
+    expect(Errbit::Notice.count).to eq(0)
   end
 end

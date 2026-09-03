@@ -1,5 +1,31 @@
 # Upgrading Errbit
 
+## Upgrading to 0.12
+
+Version 0.12 moves Errbit's runtime data from MongoDB to SQLite. Stop Errbit
+before beginning the migration so no notices are written to MongoDB while SQL
+data is being copied.
+
+1. Back up MongoDB.
+2. Ensure `/rails/storage` is persistent and writable by the Rails process. It
+   must retain the SQLite database, WAL sidecars, and cutover marker.
+3. Set `MONGO_URL` explicitly and run
+   `bin/rails db:migrate errbit:sqlite:configure errbit:migrate:all` in a
+   one-off container using the same MongoDB connection, `SECRET_KEY_BASE`, and
+   mounted storage as the application. A MongoDB URL is deliberately not
+   provided by the default environment because new installations do not need
+   MongoDB.
+4. Start Errbit normally. If bootstrap is bypassed, run
+   `bin/rails errbit:sqlite:configure` after `db:migrate` and before serving
+   traffic.
+
+`errbit:migrate:all` fails if any source row cannot be imported and runs its
+verification pass before recording the completed migration. If MongoDB data is
+detected without that completed migration, container boot refuses to seed or
+serve an empty SQL database.
+
+Keep the MongoDB backup until the SQL deployment has been validated.
+
 ## Upgrading Errbit from v0.11.0 to v0.11.1
 
 * Add support for MongoDB 8.3.

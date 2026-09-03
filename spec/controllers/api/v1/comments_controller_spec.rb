@@ -5,15 +5,15 @@ require "rails_helper"
 RSpec.describe Api::V1::CommentsController, type: :controller do
   context "when logged in" do
     before do
-      @user = create(:user)
+      @user = create(:errbit_user)
     end
 
     describe "GET /api/v1/problems/:problem_id/comments" do
       before do
-        @problem = create(:problem)
-        create(:comment, err: @problem)
-        create(:comment, err: @problem)
-        create(:comment)
+        @problem = create(:errbit_problem)
+        create(:errbit_comment, err: @problem)
+        create(:errbit_comment, err: @problem)
+        create(:errbit_comment)
       end
 
       it "should return JSON if JSON is requested" do
@@ -47,14 +47,14 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
     describe "POST /api/v1/problems/:problem_id/comments" do
       before do
-        @problem = create(:problem)
+        @problem = create(:errbit_problem)
       end
 
       context "with valid params" do
         it "should create comment" do
           expect do
             post :create, params: {problem_id: @problem.id, auth_token: @user.authentication_token, comment: {body: "I'll take a look at it."}}
-          end.to change(Comment, :count)
+          end.to change(Errbit::Comment, :count)
 
           expect(response).to be_successful
         end
@@ -64,7 +64,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
         it "shouldn't create comment" do
           expect do
             post :create, params: {problem_id: @problem.id, auth_token: @user.authentication_token, comment: {body: nil}}
-          end.not_to change(Comment, :count)
+          end.not_to change(Errbit::Comment, :count)
 
           expect(response).not_to be_successful
 

@@ -5,18 +5,18 @@ require "rails_helper"
 RSpec.describe Api::V1::ProblemsController, type: :controller do
   context "when logged in" do
     before do
-      @user = create(:user)
+      @user = create(:errbit_user)
     end
 
     describe "GET /api/v1/problems/:id" do
       before do
-        notice = create(:notice)
-        err = create(:err, notices: [notice])
-        @problem = create(:problem, errs: [err])
+        @problem = create(:errbit_problem)
+        err = create(:errbit_err, problem: @problem)
+        create(:errbit_notice, err: err)
       end
 
       it "should return JSON if JSON is requested" do
-        get :show, params: {auth_token: @user.authentication_token, format: "json", id: Problem.first.id}
+        get :show, params: {auth_token: @user.authentication_token, format: "json", id: Errbit::Problem.first.id}
 
         expect { JSON.parse(response.body) }.not_to raise_error
       end
@@ -70,10 +70,10 @@ RSpec.describe Api::V1::ProblemsController, type: :controller do
 
     describe "GET /api/v1/problems" do
       before do
-        create(:problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 2))
-        create(:problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 21))
-        create(:problem, first_notice_at: Date.new(2012, 8, 21))
-        create(:problem, first_notice_at: Date.new(2012, 8, 30))
+        create(:errbit_problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 2))
+        create(:errbit_problem, first_notice_at: Date.new(2012, 8, 1), resolved_at: Date.new(2012, 8, 21))
+        create(:errbit_problem, first_notice_at: Date.new(2012, 8, 21))
+        create(:errbit_problem, first_notice_at: Date.new(2012, 8, 30))
       end
 
       it "should return JSON if JSON is requested" do

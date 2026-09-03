@@ -8,13 +8,15 @@ RSpec.describe SiteConfigController, type: :controller do
     update: :patch
   }
 
-  let(:admin) { create(:user, admin: true) }
+  let(:admin) { create(:errbit_user, admin: true) }
 
   before { sign_in admin }
 
   describe "#index" do
-    it "has an index action" do
+    it "responds successfully" do
       get :index
+
+      expect(response).to be_successful
     end
   end
 
@@ -29,7 +31,7 @@ RSpec.describe SiteConfigController, type: :controller do
         }
       }
 
-      fingerprinter = SiteConfig.document.notice_fingerprinter
+      fingerprinter = Errbit::SiteConfig.document.notice_fingerprinter
 
       expect(fingerprinter.environment_name).to eq(false)
       expect(fingerprinter.backtrace_lines).to eq(3)
@@ -69,8 +71,8 @@ RSpec.describe SiteConfigController, type: :controller do
         }
       }
 
-      app = App.new(name: "my_app")
-      app.save
+      app = Errbit::App.new(name: "my_app")
+      app.save!
 
       expect(app.notice_fingerprinter.backtrace_lines).to eq(10)
       expect(app.notice_fingerprinter.environment_name).to eq(false)

@@ -5,4 +5,34 @@ if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
   export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
 fi
 
+server_command() {
+  local args=("$@")
+  local i
+
+  for ((i = 0; i < ${#args[@]}; i++)); do
+    case "$(basename -- "${args[$i]}")" in
+      rails)
+        if [ "${args[$((i + 1))]:-}" = "server" ]; then
+          return 0
+        fi
+        ;;
+      puma)
+        return 0
+        ;;
+    esac
+  done
+
+  return 1
+}
+
+if server_command "$@"; then
+  if [ "${ERRBIT_SKIP_DB_PREPARE:-false}" = "true" ] && [ "${ERRBIT_SKIP_BOOTSTRAP:-false}" != "true" ]; then
+    ./bin/rails db:seed
+  elif [ "${ERRBIT_SKIP_BOOTSTRAP:-false}" != "true" ]; then
+    ./bin/rails errbit:bootstrap
+  elif [ "${ERRBIT_SKIP_DB_PREPARE:-false}" != "true" ]; then
+    ./bin/rails db:migrate
+  fi
+fi
+
 exec "${@}"

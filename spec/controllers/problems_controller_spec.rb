@@ -10,28 +10,28 @@ RSpec.describe ProblemsController, type: :controller do
     params: {app_id: "dummyid", id: "dummyid"}
   )
 
-  let(:app) { create(:app) }
+  let(:app) { create(:errbit_app) }
 
-  let(:err) { create(:err, problem: problem) }
+  let(:err) { create(:errbit_err, problem: problem) }
 
-  let(:user) { create(:user) }
+  let(:user) { create(:errbit_user) }
 
-  let(:problem) { create(:problem, app: app, environment: "production") }
+  let(:problem) { create(:errbit_problem, app: app, environment: "production") }
 
   describe "GET /problems" do
     before do
       sign_in user
 
-      @problem = create(:notice, err: create(:err, problem: create(:problem, app: app, environment: "production"))).problem
+      @problem = create(:errbit_notice, err: create(:errbit_err, problem: create(:errbit_problem, app: app, environment: "production"))).problem
     end
 
     context "pagination" do
-      before { create_list(:err, 35) }
+      before { create_list(:errbit_err, 35) }
 
       it "should have default per_page value for user" do
         get :index
 
-        expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
+        expect(controller.problems.to_a.size).to eq(Errbit::User::PER_PAGE)
       end
 
       it "should be able to override default per_page value" do
@@ -48,7 +48,7 @@ RSpec.describe ProblemsController, type: :controller do
         environments = ["production", "test", "development", "staging"]
 
         20.times do |i|
-          create(:problem, environment: environments[i % environments.length])
+          create(:errbit_problem, environment: environments[i % environments.length])
         end
       end
 
@@ -96,30 +96,23 @@ RSpec.describe ProblemsController, type: :controller do
 
   describe "GET /problems - previously all" do
     it "gets a paginated list of all problems" do
-      sign_in create(:user)
+      sign_in create(:errbit_user)
 
-      problems = Kaminari.paginate_array((1..30).to_a)
-
-      3.times { problems << create(:err).problem }
-
-      3.times { problems << create(:err, problem: create(:problem, resolved: true)).problem }
-
-      expect(Problem).to receive(:ordered_by).and_return(
-        double("proxy", page: double("other_proxy", per: problems))
-      )
+      3.times { create(:errbit_err) }
+      3.times { create(:errbit_err, problem: create(:errbit_problem, resolved: true)) }
 
       get :index, params: {all_errs: true}
 
-      expect(controller.problems).to eq(problems)
+      expect(controller.problems.count).to eq(6)
     end
   end
 
   describe "GET /problems/search" do
     before do
       sign_in user
-      @app = create(:app)
-      @problem_1 = create(:problem, app: @app, message: "Most important")
-      @problem_2 = create(:problem, app: @app, message: "Very very important")
+      @app = create(:errbit_app)
+      @problem_1 = create(:errbit_problem, app: @app, message: "Most important")
+      @problem_2 = create(:errbit_problem, app: @app, message: "Very very important")
     end
 
     it "renders successfully" do
@@ -135,7 +128,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     it "searches problems for given string" do
-      get :search, params: {search: "\"Most important\""}
+      get :search, params: {search: "Most important"}
 
       expect(controller.problems).to include(@problem_1)
 
@@ -205,7 +198,7 @@ RSpec.describe ProblemsController, type: :controller do
     context "pagination" do
       let!(:notices) do
         3.times.reduce([]) do |coll, i|
-          coll << create(:notice, err: err, created_at: i.seconds.from_now)
+          coll << create(:errbit_notice, err: err, created_at: i.seconds.from_now)
         end
       end
 
@@ -243,7 +236,7 @@ RSpec.describe ProblemsController, type: :controller do
     before do
       sign_in user
 
-      @err = create(:err)
+      @err = create(:errbit_err)
     end
 
     it "finds the app and the problem" do
@@ -286,10 +279,10 @@ RSpec.describe ProblemsController, type: :controller do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(create(:notice)) }
-      let(:problem) { ProblemDecorator.new(notice.problem) }
+      let(:notice) { Errbit::NoticeDecorator.new(create(:errbit_notice)) }
+      let(:problem) { Errbit::ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
-        create(:issue_tracker).tap do |t|
+        create(:errbit_issue_tracker, app: problem.app, type_tracker: "mock", options: {foo: "one", bar: "two"}).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
@@ -340,7 +333,7 @@ RSpec.describe ProblemsController, type: :controller do
         end
 
         it "should render whatever the issue tracker says" do
-          allow_any_instance_of(Issue).to receive(:render_body_args).and_return(
+          allow_any_instance_of(Errbit::Issue).to receive(:render_body_args).and_return(
             [{inline: "one <%= problem.id %> two"}]
           )
           post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
@@ -365,10 +358,10 @@ RSpec.describe ProblemsController, type: :controller do
     before { sign_in user }
 
     context "when app has a issue tracker" do
-      let(:notice) { NoticeDecorator.new(create(:notice)) }
-      let(:problem) { ProblemDecorator.new(notice.problem) }
+      let(:notice) { Errbit::NoticeDecorator.new(create(:errbit_notice)) }
+      let(:problem) { Errbit::ProblemDecorator.new(notice.problem) }
       let(:issue_tracker) do
-        create(:issue_tracker).tap do |t|
+        create(:errbit_issue_tracker, app: problem.app, type_tracker: "mock", options: {foo: "one", bar: "two"}).tap do |t|
           t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
         end
       end
@@ -403,7 +396,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "problem with issue" do
-      let(:err) { create(:err, problem: create(:problem, issue_link: "http://some.host")) }
+      let(:err) { create(:errbit_err, problem: create(:errbit_problem, issue_link: "http://some.host")) }
 
       before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
@@ -420,7 +413,7 @@ RSpec.describe ProblemsController, type: :controller do
     end
 
     context "err without issue" do
-      let(:err) { create(:err) }
+      let(:err) { create(:errbit_err) }
 
       before do
         delete :unlink_issue, params: {app_id: err.app.id, id: err.problem.id}
@@ -436,8 +429,8 @@ RSpec.describe ProblemsController, type: :controller do
   describe "Bulk Actions" do
     before do
       sign_in user
-      @problem_1 = create(:err, problem: create(:problem, resolved: true)).problem
-      @problem_2 = create(:err, problem: create(:problem, resolved: false)).problem
+      @problem_1 = create(:errbit_err, problem: create(:errbit_problem, resolved: true)).problem
+      @problem_2 = create(:errbit_err, problem: create(:errbit_problem, resolved: false)).problem
     end
 
     context "POST /problems/merge_several" do
@@ -448,7 +441,7 @@ RSpec.describe ProblemsController, type: :controller do
       end
 
       it "should merge the problems" do
-        expect(ProblemMerge).to receive(:new).and_return(double(merge: true))
+        expect(Errbit::ProblemMerge).to receive(:new).and_return(double(merge: true))
 
         post :merge_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
       end
@@ -461,12 +454,12 @@ RSpec.describe ProblemsController, type: :controller do
       end
 
       it "should unmerge a merged problem" do
-        merged_problem = Problem.merge!(@problem_1, @problem_2)
+        merged_problem = Errbit::Problem.merge!(@problem_1, @problem_2)
         expect(merged_problem.errs.length).to eq(2)
         expect do
           post :unmerge_several, params: {problems: [merged_problem.id.to_s]}
           expect(merged_problem.reload.errs.length).to eq(1)
-        end.to change(Problem, :count).by(1)
+        end.to change(Errbit::Problem, :count).by(1)
       end
     end
 
@@ -515,22 +508,22 @@ RSpec.describe ProblemsController, type: :controller do
       it "should delete the problems" do
         expect do
           post :destroy_several, params: {problems: [@problem_1.id.to_s]}
-        end.to change(Problem, :count).by(-1)
+        end.to change(Errbit::Problem, :count).by(-1)
       end
     end
 
     describe "POST /apps/:app_id/problems/destroy_all" do
       before do
         sign_in user
-        @app = create(:app)
-        @problem_1 = create(:problem, app: @app)
-        @problem_2 = create(:problem, app: @app)
+        @app = create(:errbit_app)
+        @problem_1 = create(:errbit_problem, app: @app)
+        @problem_2 = create(:errbit_problem, app: @app)
       end
 
       it "destroys all problems" do
         expect do
           post :destroy_all, params: {app_id: @app.id}
-        end.to change(Problem, :count).by(-2)
+        end.to change(Errbit::Problem, :count).by(-2)
 
         expect(controller.app).to eq(@app)
       end

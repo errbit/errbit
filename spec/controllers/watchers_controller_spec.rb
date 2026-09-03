@@ -3,25 +3,24 @@
 require "rails_helper"
 
 RSpec.describe WatchersController, type: :controller do
-  let(:user) { create(:user) }
-  let(:problem) { create(:problem) }
+  let(:user) { create(:errbit_user) }
 
   before { sign_in user }
 
   describe "#create" do
-    let(:app) { create(:app) }
+    let(:app) { create(:errbit_app) }
 
     context "successful watcher create" do
       before do
         post :create, params: {app_id: app.id}
 
-        problem.reload
+        app.reload
       end
 
       it "should be watching" do
         app.reload
 
-        expect(app.watchers.first.user_id).to eq(user.id)
+        expect(app.watchers.first.user).to eq(user)
       end
 
       it "should redirect to app page" do
@@ -32,8 +31,8 @@ RSpec.describe WatchersController, type: :controller do
 
   describe "#destroy" do
     let(:app) do
-      a = create(:app)
-      create(:user_watcher, app: a, user: user)
+      a = create(:errbit_app)
+      create(:errbit_watcher, app: a, user: user, email: nil, watcher_type: "user")
       a
     end
 
@@ -43,7 +42,7 @@ RSpec.describe WatchersController, type: :controller do
       before do
         delete :destroy, params: {app_id: app.id}
 
-        problem.reload
+        app.reload
       end
 
       it "should delete the watcher" do

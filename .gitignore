@@ -1,6 +1,11 @@
 .bundle
 .env
 db/*.sqlite3
+storage/*.sqlite3
+storage/*.sqlite3-*
+storage/.mongo_to_sql_migrated
+errbit_dump-*.archive
+errbit_dump-*.archive.gz
 log/*.log
 tmp/**/*
 tmp/*

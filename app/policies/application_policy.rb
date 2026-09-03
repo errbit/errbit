@@ -4,7 +4,7 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   # @param user [User] The user making the request
-  # @param record [Mongoid::Document] The record being accessed
+  # @param record [Object] The record being accessed
   def initialize(user, record)
     raise Pundit::NotAuthorizedError, "must be logged in" if user.blank?
 

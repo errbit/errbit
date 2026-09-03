@@ -1,5 +1,10 @@
 # Deploy to Dokku
 
+> This document describes the legacy MongoDB deployment path. For a new
+> SQLite deployment, provide persistent storage for `/rails/storage`. Existing
+> MongoDB installations should follow [the migration instructions](../upgrading.md)
+> before moving to the SQLite runtime.
+
 Deployment to Dokku is very similar to Heroku.
 For more details see [Heroku](heroku.md) guide.
 
