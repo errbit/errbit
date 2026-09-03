@@ -180,6 +180,8 @@ pt-BR:
       email: E-mail
       entries: Registros por página
       time_zone: Fuso horário
+      locale: Idioma
+      automatic: Automático
       password: Senha
       password_confirmation: Confirmação de Senha
       admin: Adminstrador?
