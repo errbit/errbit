@@ -57,6 +57,14 @@ en:
       powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
+    link_github_account:
+      link: "Link %{provider} account"
+      unlink: "Unlink %{provider} account"
+      confirm: "Are you sure?"
+    link_google_account:
+      link: "Link %{provider} account"
+      unlink: "Unlink %{provider} account"
+      confirm: "Are you sure?"
     navigation:
       apps: "Apps"
       errors: "Errors"
@@ -138,6 +146,7 @@ en:
     sessions:
       new:
         sign_in: "Sign in"
+        sign_in_with: "Sign in with %{provider}"
   problems:
     index:
       all_errors: "All Errors"
