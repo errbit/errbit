@@ -137,6 +137,11 @@ pt-BR:
       unresolve: Tornar não resolvido
       delete: Excluir
       ago: atrás
+    issue_tracker_links:
+      go_to_issue: "ir para o problema"
+      unlink_confirm: "Desvincular problemas do Errbit?"
+      unlink_issue: "desvincular problema"
+      close_issue: "fechar problema"
     confirm:
       delete: "Excluir permanentemente os itens selecionados?"
       resolve: "Resolver os itens selecionados? Isto não poderá ser alterado depois."
@@ -170,6 +175,8 @@ pt-BR:
     sparkline:
       graph-2-weeks: Graph (2 weeks)
       graph-24-hours: Graph (24 hours)
+    tally_table:
+      show_more: "Mostrar mais..."
   comments:
     confirm_delete: "Excluir permanentemente este comentário?"
     create:
@@ -262,12 +269,12 @@ pt-BR:
       all_users_notified: "Todos os usuários serão notificados quando algo acontecer."
       api_key: "Chave de Acesso da API:"
       are_you_sure: "Está certo disto?"
-      atom_title: "Notificações do Errbit para %{name} em %{host}"
       edit: editar
       environment: Ambiente
       errors: Erros
       errors_caught: "Erros Capturados:"
       github_repo: Repositório GitHub
+      latest_app_version: Última versão da aplicação
       message: Mensagem
       no_error_yet: "Nenhum erro foi capturado até então, certifique-se de que sua aplicação está configurada"
       no_watchers: "Infelizmente, ninguém está observando esta aplicação"
