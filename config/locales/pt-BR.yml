@@ -59,6 +59,7 @@ pt-BR:
       user_not_authorized: "You are not authorized to perform this action."
     apps:
       flash:
+        parse_error: "Não foi possível interpretar a frequência de notificações. O valor foi redefinido para o padrão (%{default_value})."
         create:
           success: "Sua aplicação foi criado com sucesso."
           error: "Sua aplicação não pôde ser criada."
@@ -74,6 +75,36 @@ pt-BR:
         need_two_errors_merge: "Você deve selecionar ao menos 2 erros para mesclá-los"
         merge_several:
           success: "%{nb} erros foram mesclados."
+        resolve_several:
+          one: "1 erro foi resolvido. Boas notícias para todos!"
+          other: "%{count} erros foram resolvidos. Boas notícias para todos!"
+        unresolve_several:
+          one: "1 erro deixou de ser resolvido."
+          other: "%{count} erros deixaram de ser resolvidos."
+        unmerge_several:
+          one: "1 erro foi separado."
+          other: "%{count} erros foram separados."
+        destroy_several:
+          one: "1 erro será excluído."
+          other: "%{count} erros serão excluídos."
+        destroy_all:
+          one: "1 erro será excluído."
+          other: "%{count} erros serão excluídos."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "Não foi possível obter o e-mail do GitHub"
+          already_registered: "O usuário já está registrado com o login '%{github_login}' do %{github_site_title}!"
+          linked: "Conta do %{github_site_title} vinculada com sucesso!"
+          not_authorized: "Não há usuários autorizados com o login '%{github_login}' do %{github_site_title}. Peça a um administrador para registrar sua conta."
+        google:
+          already_registered: "O usuário já está registrado com o login '%{google_email}' do %{google_site_title}!"
+          linked: "Conta do %{google_email} vinculada com sucesso!"
+          not_authorized: "Não há usuários autorizados com o login '%{google_email}' do %{google_site_title}. Peça a um administrador para registrar sua conta."
+      unlink_github:
+        success: "Conta do %{github_site_title} desvinculada com sucesso!"
+      unlink_google:
+        success: "Conta do %{email} desvinculada com sucesso!"
   devise:
     registrations:
       signed_up_but_unconfirmed: "Uma mensagem foi enviada para o seu e-mail com um link de confirmação. Acesse o link para ativar sua conta."
@@ -87,6 +118,7 @@ pt-BR:
     sessions:
       new:
         sign_in: "Entrar"
+        sign_in_with: "Entrar com %{provider}"
   problems:
     index:
       all_errors: "Todos os erros"
