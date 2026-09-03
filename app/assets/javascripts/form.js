@@ -36,14 +36,14 @@ function makeNestedItemsDestroyable(wrapper) {
   wrapper.find('.nested').each(function(){
     var nestedItem = $(this);
     var destroyLink = $('<a/>').text('remove').addClass('remove-nested');
-    destroyLink.css('float','right');
+    destroyLink.addClass('float-right');
     nestedItem.find('label').first().before(destroyLink);
   })
 }
 
 function appendNestedItem() {
   var addLink = $(this);
-  var nestedItem = addLink.parent().find('.nested').first().clone().show();
+  var nestedItem = addLink.parent().find('.nested').first().clone().removeClass('hidden');
   var timestamp = new Date();
   timestamp = timestamp.valueOf();
 
@@ -71,7 +71,7 @@ function removeNestedItem() {
     var destroyFlag = $('<input/>').attr('name',destroyFlagName).attr('type','hidden').val('true');
     $("input[name='"+idFieldName+"']").after(destroyFlag);
   }
-  nestedItem.hide();
+  nestedItem.addClass('hidden');
 }
 
 
@@ -102,13 +102,13 @@ function activateCheckboxHooks() {
   $('input[type="checkbox"][data-hide-when-checked]').each(function(){
     $(this).change(function(){
       var el = $($(this).data('hide-when-checked'));
-      el.toggle(!$(this).is(':checked'));
+      el.toggleClass('hidden', $(this).is(':checked'));
     });
   });
   $('input[type="checkbox"][data-show-when-checked]').each(function(){
     $(this).change(function(){
       var el = $($(this).data('show-when-checked'));
-      el.toggle($(this).is(':checked'));
+      el.toggleClass('hidden', !$(this).is(':checked'));
     });
   });
 }
@@ -124,4 +124,3 @@ function activateLabelIcons() {
     });
   };
 };
-

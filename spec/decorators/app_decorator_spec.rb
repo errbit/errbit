@@ -19,13 +19,29 @@ RSpec.describe AppDecorator, type: :decorator do
     end
   end
 
-  describe "#notify_err_display" do
-    it "return display:none if no notify" do
-      expect(described_class.new(double(notify_on_errs: false)).notify_err_display).to eq("display: none;")
+  describe "#notify_err_class" do
+    it "returns hidden if no notify" do
+      expect(described_class.new(double(notify_on_errs: false)).notify_err_class).to eq("hidden")
     end
 
-    it "return blank if no notify" do
-      expect(described_class.new(double(notify_on_errs: true)).notify_err_display).to eq("")
+    it "returns blank if notify" do
+      expect(described_class.new(double(notify_on_errs: true)).notify_err_class).to eq("")
+    end
+  end
+
+  describe "#custom_notice_fingerprinter_class" do
+    it "returns hidden when using the site fingerprinter" do
+      fingerprinter = double(attributes: {"source" => SiteConfig::CONFIG_SOURCE_SITE})
+      app = double(notice_fingerprinter: fingerprinter)
+
+      expect(described_class.new(app).custom_notice_fingerprinter_class).to eq("hidden")
+    end
+
+    it "returns blank when using a custom fingerprinter" do
+      fingerprinter = double(attributes: {"source" => "custom"})
+      app = double(notice_fingerprinter: fingerprinter)
+
+      expect(described_class.new(app).custom_notice_fingerprinter_class).to eq("")
     end
   end
 

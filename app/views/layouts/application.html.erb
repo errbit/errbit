@@ -29,7 +29,8 @@
     </div>
 
     <div id="content-wrapper">
-      <div id="content-title" class="<%= yield :title_css_class %>" style="<%= yield :title_style %>">
+      <div id="content-title" class="<%= yield :title_css_class %>">
+        <%= yield :title_avatar %>
         <h1><%= yield :title %></h1>
 
         <span class="meta"><%= yield :meta %></span>

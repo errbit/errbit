@@ -16,7 +16,7 @@ $(function() {
 
     // On page apps/:app_id/edit
     $('a.copy_config').on("click", function() {
-      $('select.choose_other_app').show().focus();
+      $('select.choose_other_app').removeClass('hidden').focus();
     });
 
     $('select.choose_other_app').on("change", function() {
@@ -31,20 +31,33 @@ $(function() {
       $.pjax.defaults = {timeout: 2000};
 
       $('#content').pjax('.notice-pagination a').on('pjax:start', function() {
-        $('.notice-pagination-loader').css("visibility", "visible");
+        $('.notice-pagination-loader').addClass('visible');
         currentTab = $('.tab-bar ul li a.button.active').attr('rel');
       }).on('pjax:end', function() {
         activateTabbedPanels();
+        loadSparklines();
       });
     });
   }
+
+  $(document).on('ajax:success', 'form.search-form', function(_event, data) {
+    var form = $(this);
+    var target = $(form.data('search-target'));
+
+    target.html(data);
+    $('#flash-messages').empty();
+    if (target.attr('id') == 'problem_table') {
+      toggleProblemsCheckboxes();
+      bindProblemButtonsActions();
+    }
+  });
 
   function activateTabbedPanels() {
     $('.tab-bar a').each(function(){
       var tab = $(this);
       var panel = $('#'+tab.attr('rel'));
       panel.addClass('panel');
-      panel.find('h3').hide();
+      panel.find('h3').addClass('hidden');
     });
 
     $('.tab-bar a').click(function(){
@@ -64,8 +77,8 @@ $(function() {
     // If clicking into 'backtrace' tab, hide external backtrace
     if (tab.attr('rel') == "backtrace") { hide_external_backtrace(); }
 
-    $('.panel').hide();
-    panel.show();
+    $('.panel').addClass('hidden');
+    panel.removeClass('hidden');
   }
 
   window.toggleProblemsCheckboxes = function() {
@@ -112,12 +125,12 @@ $(function() {
   toggleRequiredPasswordMarks();
 
   function hide_external_backtrace() {
-    $('tr.toggle_external_backtrace').hide();
-    $('td.backtrace_separator').show();
+    $('tr.toggle_external_backtrace').addClass('hidden_external_backtrace');
+    $('td.backtrace_separator').removeClass('hidden');
   }
   function show_external_backtrace() {
-    $('tr.toggle_external_backtrace').show();
-    $('td.backtrace_separator').hide();
+    $('tr.toggle_external_backtrace').removeClass('hidden_external_backtrace');
+    $('td.backtrace_separator').addClass('hidden');
   }
   // Show external backtrace lines when clicking separator
   $(document).on('click', 'td.backtrace_separator span', show_external_backtrace);
@@ -125,9 +138,26 @@ $(function() {
   hide_external_backtrace();
 
   $('.head a.show_tail').click(function(e) {
-    $(this).hide().closest('.head_and_tail').find('.tail').show();
+    $(this).addClass('hidden').closest('.head_and_tail').find('.tail').removeClass('hidden');
     e.preventDefault();
   });
+
+  function loadSparklines() {
+    $('#sparkline-placeholder[data-sparkline-url]').each(function() {
+      var placeholder = $(this);
+      $.ajax({url: placeholder.data('sparkline-url')}).then(function(response) {
+        placeholder.replaceWith(response);
+      });
+    });
+  }
+
+  $('a#forgot_password').click(function(e) {
+    // Set email field on password reset page to email that user entered on this page.
+    e.preventDefault();
+    window.location.href = $(this).attr('href') + '?email=' + encodeURIComponent($('#user_email').val());
+  });
+
+  loadSparklines();
 
   init();
 });
