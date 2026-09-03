@@ -29,6 +29,14 @@ pt-BR:
       powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
+    link_github_account:
+      link: "Vincular conta do %{provider}"
+      unlink: "Desvincular conta do %{provider}"
+      confirm: "Tem certeza?"
+    link_google_account:
+      link: "Vincular conta do %{provider}"
+      unlink: "Desvincular conta do %{provider}"
+      confirm: "Tem certeza?"
     navigation:
       apps: "Aplicações"
       errors: "Erros"
