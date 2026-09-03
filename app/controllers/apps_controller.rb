@@ -155,7 +155,7 @@ class AppsController < ApplicationController
       params[:app][:email_at_notices] = email_at_notices
     else
       default_array = params[:app][:email_at_notices] = Errbit::Config.email_at_notices
-      flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(", ")})."
+      flash[:error] = t("controllers.apps.flash.parse_error", default_value: default_array.join(", "))
     end
   end
 
@@ -173,7 +173,7 @@ class AppsController < ApplicationController
       params[:app][:notification_service_attributes][:notify_at_notices] = notify_at_notices
     else
       default_array = params[:app][:notification_service_attributes][:notify_at_notices] = Errbit::Config.notify_at_notices
-      flash[:error] = "Couldn't parse your notification frequency. Value was reset to default (#{default_array.join(", ")})."
+      flash[:error] = t("controllers.apps.flash.parse_error", default_value: default_array.join(", "))
     end
   end
 

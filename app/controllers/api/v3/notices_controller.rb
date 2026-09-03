@@ -5,6 +5,7 @@ module Api
     class NoticesController < ApplicationController
       VERSION_TOO_OLD = "Notice for old app version ignored"
       UNKNOWN_API_KEY = "Your API key is unknown"
+      INVALID_REQUEST = "Invalid request"
 
       skip_before_action :verify_authenticity_token
       skip_before_action :authenticate_user!
@@ -36,7 +37,7 @@ module Api
           url: report.problem.url
         }
       rescue AirbrakeApi::ParamsError
-        render body: "Invalid request", status: :bad_request
+        render body: INVALID_REQUEST, status: :bad_request
       end
 
       private
