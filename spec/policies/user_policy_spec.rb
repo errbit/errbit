@@ -7,7 +7,7 @@ RSpec.describe UserPolicy do
 
   it do
     expect(described_class::FIELDS)
-      .to eq([:name, :username, :email, :password, :github_login, :per_page, :time_zone, :password, :password_confirmation])
+      .to eq([:name, :username, :email, :password, :github_login, :per_page, :time_zone, :locale, :password, :password_confirmation])
   end
 
   describe "#initialize" do
