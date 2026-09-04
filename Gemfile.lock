@@ -735,6 +735,7 @@ DEPENDENCIES
   rubocop-rspec_rails
   rubocop-thread_safety
   rubydex
+  securerandom
   selenium-webdriver
   simplecov
   sprockets-rails

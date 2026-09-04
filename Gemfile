@@ -39,6 +39,7 @@ gem "uri"
 gem "rack-timeout"
 gem "puma"
 gem "ostruct"
+gem "securerandom"
 
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
