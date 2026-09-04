@@ -58,7 +58,7 @@ class App
   scope :search, ->(value) { where("$text" => {"$search" => value}) }
 
   scope :watched_by, lambda { |user|
-    where watchers: {"$elemMatch" => {"user_id" => user.id}}
+    where watchers: {"$elemMatch" => {user_id: user.id}}
   }
 
   def build_notice_fingerprinter
@@ -112,7 +112,7 @@ class App
   end
 
   def repo_branch
-    repository_branch.present? ? repository_branch : "main"
+    repository_branch.presence || "main"
   end
 
   def github_repo?
@@ -210,9 +210,7 @@ class App
   private
 
   def store_cached_attributes_on_problems
-    Problem.where(app_id: id).update_all(
-      app_name: name
-    )
+    Problem.where(app_id: id).update_all(app_name: name)
   end
 
   def generate_api_key

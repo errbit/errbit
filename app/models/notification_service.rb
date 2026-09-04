@@ -53,8 +53,8 @@ class NotificationService
     _type
   end
 
-  def type=(t)
-    self._type = t
+  def type=(type)
+    self._type = type
   end
 
   def url
@@ -65,9 +65,7 @@ class NotificationService
     self::LABEL
   end
 
-  def label
-    self.class.label
-  end
+  delegate :label, to: :class
 
   def configured?
     api_token.present?
