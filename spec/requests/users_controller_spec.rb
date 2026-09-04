@@ -124,6 +124,10 @@ RSpec.describe UsersController, type: :request do
           expect(response).to have_http_status(:ok)
 
           expect(assigns(:user).new_record?).to eq(true)
+          form = response.parsed_body
+          expect(form.at_css('input[name="user[email]"][autocomplete="email"]')).not_to be_nil
+          expect(form.at_css('input[name="user[password]"][autocomplete="new-password"]')).not_to be_nil
+          expect(form.at_css('input[name="user[password_confirmation]"][autocomplete="new-password"]')).not_to be_nil
         end
       end
 
@@ -174,6 +178,10 @@ RSpec.describe UsersController, type: :request do
           expect(response).to have_http_status(:ok)
 
           expect(assigns(:user)).to eq(user)
+          form = response.parsed_body
+          expect(form.at_css('input[name="user[email]"][autocomplete="email"]')).not_to be_nil
+          expect(form.at_css('input[name="user[password]"][autocomplete="new-password"]')).not_to be_nil
+          expect(form.at_css('input[name="user[password_confirmation]"][autocomplete="new-password"]')).not_to be_nil
         end
       end
 

@@ -6,7 +6,7 @@
   <div class="required">
     <%= f.label :email %>
 
-    <%= f.text_field :email, value: params[:email] %>
+    <%= f.text_field :email, value: params[:email], autocomplete: "email" %>
   </div>
 
   <div class="buttons">

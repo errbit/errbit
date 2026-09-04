@@ -10,6 +10,8 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
       visit root_path
 
       expect(page).to have_content(I18n.t("devise.failure.unauthenticated"))
+      expect(page).to have_css('input[name="user[email]"][autocomplete="email"]')
+      expect(page).to have_css('input[name="user[password]"][autocomplete="current-password"]')
 
       fill_in "Email", with: user.email
       fill_in "Password", with: "password"
@@ -53,5 +55,33 @@ RSpec.describe "Sign in and sign out with email and password", type: :system, re
 
     expect(page).to have_current_path(new_user_password_path, ignore_query: true)
     expect(page).to have_field("Email", with: user.email)
+  end
+
+  it "renders the password reset email autocomplete attribute" do
+    visit new_user_password_path
+
+    expect(page).to have_css('input[name="user[email]"][autocomplete="email"]')
+  end
+
+  it "renders the password reset new-password autocomplete attributes" do
+    token = user.send_reset_password_instructions
+    visit edit_user_password_path(reset_password_token: token)
+
+    expect(page).to have_css('input[name="user[password]"][autocomplete="new-password"]')
+    expect(page).to have_css('input[name="user[password_confirmation]"][autocomplete="new-password"]')
+  end
+
+  it "renders the username autocomplete attribute when username authentication is enabled" do
+    allow(Errbit::Config).to receive(:user_has_username).and_return(true)
+    allow(Devise).to receive(:authentication_keys).and_return([:username])
+    allow(User).to receive(:new).and_wrap_original do |original, *args|
+      original.call(*args).tap do |resource|
+        allow(resource).to receive(:username).and_return(nil)
+      end
+    end
+
+    visit new_user_session_path
+
+    expect(page).to have_css('input[name="user[username]"][autocomplete="username"]')
   end
 end
