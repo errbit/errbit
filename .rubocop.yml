@@ -14,6 +14,7 @@ AllCops:
   TargetRubyVersion: 4.0
   NewCops: enable
   UseProjectIndex: true
+  ProjectIndexIncludesGems: true
 
 # We use standard as a linter and formatter instead of Rubocop.
 # Also, we are explicitly disable all rubocop rules what
@@ -135,6 +136,10 @@ Style/HashAsLastArrayItem:
 
 # Enforced by `standard`. Disable.
 Style/Alias:
+  Enabled: false
+
+# Disabled as in `standard`.
+Style/IfUnlessModifier:
   Enabled: false
 
 # Standard rules. Layout:
@@ -364,10 +369,7 @@ RSpec/ExampleLength:
 
 # Ignore multiple expectations in system specs.
 RSpec/MultipleExpectations:
-  Enabled: true
-  Exclude:
-    - "spec/system/**/*.rb"
-    - "spec/requests/**/*.rb"
+  Enabled: false
 
 # Extend maximum example nesting from 3 to 5.
 RSpec/NestedGroups:
