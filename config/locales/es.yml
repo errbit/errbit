@@ -1,0 +1,328 @@
+# Traducción castellana de Errbit.
+
+es:
+  locale_name: Español
+  flash:
+    apps:
+      create:
+        success: "¡Todo listo! Configura tu aplicación con la clave de API que aparece abajo"
+      update:
+        success: "Buenas noticias: '%{app_name}' se ha actualizado correctamente."
+      destroy:
+        success: "'%{app_name}' se ha eliminado correctamente."
+  n_errs:
+    one: "%{count} error"
+    other: "%{count} errores"
+    will_be_deleted: se eliminarán
+  n_errs_have:
+    one: "%{count} error ha sido"
+    other: "%{count} errores han sido"
+    been_resolved: resuelto(s)
+    been_unresolved: marcado(s) como no resuelto(s)
+    been_unmerged: separado(s)
+    been_deleted: eliminado(s)
+  layouts:
+    application:
+      title: "Errbit"
+      errbit: "Errbit"
+      powered_html: "Desarrollado por %{link}: el receptor de errores de código abierto."
+  shared:
+    link_github_account:
+      link: "Vincular cuenta de %{provider}"
+      unlink: "Desvincular cuenta de %{provider}"
+      confirm: "¿Estás seguro?"
+    link_google_account:
+      link: "Vincular cuenta de %{provider}"
+      unlink: "Desvincular cuenta de %{provider}"
+      confirm: "¿Estás seguro?"
+    navigation:
+      apps: "Aplicaciones"
+      errors: "Errores"
+      users: "Usuarios"
+      config: "Configuración"
+    session:
+      sign_out: "Cerrar sesión"
+      edit_profile: "Editar perfil"
+    notice_fingerprinter:
+      error_class: Clase del error
+      message: Mensaje del error
+      backtrace_lines: Número de líneas del backtrace (-1 para ilimitado)
+      component: Componente (o controlador)
+      action: Acción
+      environment_name: Nombre del entorno
+  controllers:
+    application:
+      require_admin: "No tienes permiso para hacer eso"
+      user_not_authorized: "No tienes autorización para realizar esta acción."
+    apps:
+      flash:
+        parse_error: "No se ha podido interpretar la frecuencia de notificaciones. Se ha restaurado el valor predeterminado (%{default_value})."
+        create:
+          success: "La aplicación se ha creado correctamente."
+          error: "No se ha podido crear la aplicación."
+        update:
+          success: "La aplicación se ha actualizado correctamente."
+          error: "No se ha podido actualizar la aplicación."
+        destroy:
+          success: "La aplicación se ha eliminado correctamente."
+          error: "No se ha podido eliminar la aplicación."
+    problems:
+      flash:
+        no_select_problem: "No has seleccionado ningún error"
+        need_two_errors_merge: "Debes seleccionar al menos dos errores para fusionarlos"
+        merge_several:
+          success: "%{nb} errores fusionados."
+        resolve_several:
+          one: "Se ha resuelto 1 error. ¡Buenas noticias!"
+          other: "Se han resuelto %{count} errores. ¡Buenas noticias!"
+        unresolve_several:
+          one: "Se ha marcado 1 error como no resuelto."
+          other: "Se han marcado %{count} errores como no resueltos."
+        unmerge_several:
+          one: "Se ha separado 1 error."
+          other: "Se han separado %{count} errores."
+        destroy_several:
+          one: "Se eliminará 1 error."
+          other: "Se eliminarán %{count} errores."
+        destroy_all:
+          one: "Se eliminará 1 error."
+          other: "Se eliminarán %{count} errores."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "No se ha podido obtener el correo electrónico de GitHub"
+          already_registered: "El usuario ya está registrado con el inicio de sesión '%{github_login}' de %{github_site_title}."
+          linked: "¡Cuenta de %{github_site_title} vinculada correctamente!"
+          not_authorized: "No hay usuarios autorizados con el inicio de sesión '%{github_login}' de %{github_site_title}. Pide a un administrador que registre tu cuenta."
+        google:
+          already_registered: "El usuario ya está registrado con el inicio de sesión '%{google_email}' de %{google_site_title}."
+          linked: "¡Cuenta de %{google_email} vinculada correctamente!"
+          not_authorized: "No hay usuarios autorizados con el inicio de sesión '%{google_email}' de %{google_site_title}. Pide a un administrador que registre tu cuenta."
+      unlink_github:
+        success: "¡Cuenta de %{github_site_title} desvinculada correctamente!"
+      unlink_google:
+        success: "¡Cuenta de %{email} desvinculada correctamente!"
+  devise:
+    google_login:
+      domain_unauthorized: "El dominio del correo electrónico no está autorizado para iniciar sesión. Usa una cuenta de un dominio de confianza."
+  problems:
+    index:
+      all_errors: "Todos los errores"
+      unresolved_errors: "Errores no resueltos"
+      hide_resolved: "ocultar resueltos"
+      show_resolved: "mostrar resueltos"
+    table:
+      app: Aplicación
+      env: Entorno
+      what_and_where_html: "Dónde y qué"
+      latest: Último
+      count: Cantidad
+      merge: Fusionar
+      unmerge: Separar
+      resolve: Resolver
+      unresolve: Marcar como no resuelto
+      delete: Eliminar
+      ago: hace
+    issue_tracker_links:
+      go_to_issue: "ir al problema"
+      unlink_confirm: "¿Desvincular los problemas de Errbit?"
+      unlink_issue: "desvincular problema"
+      close_issue: "cerrar problema"
+    confirm:
+      delete: "¿Eliminar permanentemente los problemas seleccionados?"
+      resolve: "¿Resolver los problemas seleccionados? Se podrán marcar como no resueltos más adelante."
+      resolve_one: "¿Resolver este problema? Se podrá marcar como no resuelto más adelante."
+      merge: "¿Fusionar los problemas seleccionados? Se podrán separar más adelante."
+      unmerge: "¿Separar los problemas seleccionados? Se podrán volver a fusionar más adelante."
+      unresolve: "¿Marcar como no resueltos los problemas seleccionados? Se podrán resolver de nuevo."
+    search:
+      search_placeholder: "Buscar problemas"
+    resolve:
+      the_error_has_been_resolved: "¡Buenas noticias! Se ha resuelto el error."
+    show:
+      comments: Comentarios
+      add_a_comment: Añadir un comentario
+      save_comment: Guardar comentario
+      summary: Resumen
+      backtrace: Backtrace
+      user: Usuario
+      parameters: Parámetros
+      session: Sesión
+      ago_by: hace, por
+      ago_by_unknown_user: hace, por [Usuario desconocido]
+      first_notice: Primera notificación
+      last_notice: Última notificación
+      environment: Entorno
+      app: Aplicación
+      where: Dónde
+      up: arriba
+      resolve: resolver
+      notice_by_id: "Notificación: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Gráfico (2 semanas)
+      graph-24-hours: Gráfico (24 horas)
+    tally_table:
+      show_more: "Mostrar más..."
+  comments:
+    confirm_delete: "¿Eliminar permanentemente este comentario?"
+    create:
+      success: "¡Comentario guardado!"
+      error: "El comentario estaba vacío. Inténtalo de nuevo."
+    destroy:
+      success: "¡Comentario eliminado!"
+      error: "No se ha podido eliminar el comentario."
+  users:
+    index:
+      new: Añadir un usuario
+      title: Usuarios
+      name: Nombre
+      username: Nombre de usuario
+      email: Correo electrónico
+      admin: "¿Administrador?"
+      admin_yes: "Sí"
+      admin_no: "No"
+    show:
+      name: Nombre
+      email: Correo electrónico
+      username: Nombre de usuario
+      admin: Administrador
+      admin_yes: "Sí"
+      admin_no: "No"
+      created: Creado
+      edit: editar
+      destroy: eliminar
+      confirm_delete: "¿Eliminar permanentemente este usuario?"
+    new:
+      title: Nuevo usuario
+      cancel: cancelar
+      add_user: Añadir usuario
+    edit:
+      title: Editar
+      cancel: cancelar
+      update_user: Actualizar usuario
+    create:
+      success: "%{name} ya forma parte del equipo. No olvides añadirle como observador de un proyecto."
+    update:
+      success: "La información de %{name} se ha actualizado correctamente."
+    destroy:
+      success: "Qué pena. %{name} ya no forma parte de tu equipo."
+      error: "No puedes eliminarte a ti mismo"
+    fields:
+      name: Nombre
+      username: Nombre de usuario
+      email: Correo electrónico
+      entries: Entradas por página
+      time_zone: Zona horaria
+      locale: Idioma
+      automatic: Automático
+      password: Contraseña
+      password_confirmation: Confirmación de contraseña
+      admin: "¿Administrador?"
+  apps:
+    confirm_delete: "¿Eliminar permanentemente esta aplicación?"
+    confirm_destroy_all_problems: "¿Eliminar permanentemente todos los errores de esta aplicación?"
+    index:
+      title: Aplicaciones
+      new_app: Añadir una aplicación
+    table:
+      name: Nombre
+      repository: Repositorio
+      notify: Servicio de notificaciones
+      tracker: Gestor de incidencias
+      errors: Errores
+      no_apps: "No hay aplicaciones."
+      click_to_create: "Pulsa aquí para crear la primera"
+    fields:
+      name: Nombre
+      api_key: Clave de API
+      repository_branch: Rama del repositorio
+      github_repo: Repositorio de GitHub
+      bitbucket_repo: Repositorio de BitBucket
+      custom_backtrace_url_template: Plantilla de URL de backtrace personalizada
+      asset_host: Servidor de recursos
+      asset_host_help: Se usa para generar enlaces de errores de JavaScript
+      asset_host_placeholder: "p. ej., https://assets.example.com"
+      latest_app_version: Última versión de la aplicación
+      latest_app_version_help: "Las aplicaciones móviles pueden establecerlo para ignorar errores anteriores a esta versión. Ej.: 1.4.3"
+      latest_app_version_placeholder: "p. ej., 2.0.1 del identificador del paquete de una aplicación iOS"
+      notifications: Notificaciones
+      notify_on_errors: Notificar errores
+      notify_all_users: Notificar a todos los usuarios
+      regenerate_api_key: Regenerar clave de API
+      use_site_fingerprinter: Usar el fingerprinter del sitio
+    show:
+      all_errs: todos los errores
+      all_users_notified: "Se notificará a todos los usuarios cuando ocurra algo."
+      api_key: "Clave de API:"
+      are_you_sure: "¿Estás seguro?"
+      edit: editar
+      environment: Entorno
+      errors: Errores
+      errors_caught: "Errores capturados:"
+      github_repo: Repositorio de GitHub
+      latest_app_version: Última versión de la aplicación
+      message: Mensaje
+      no_error_yet: "Todavía no se han capturado errores; configura tu aplicación"
+      no_watchers: "Nadie está observando esta aplicación"
+      repository: Repositorio
+      revision: Revisión
+      show_hide: "(mostrar/ocultar)"
+      unresolved_errs: errores no resueltos
+      unwatch: dejar de observar
+      user_or_email: Usuario o correo electrónico
+      watch: observar
+      watchers: Observadores
+      when: Cuándo
+      who: Quién
+    issue_tracker_fields:
+      legend: Gestor de incidencias
+    new:
+      add_app: Añadir aplicación
+      cancel: cancelar
+      title: Añadir aplicación
+    edit:
+      title: Editar aplicación
+      destroy: eliminar aplicación
+      cancel: cancelar
+      seriously: "¿En serio?"
+      update: Actualizar aplicación
+    search:
+      search_placeholder: Buscar aplicación
+  watchers:
+    create:
+      success: "Ahora observas %{app}"
+    destroy:
+      success: "Ya no observas %{app}"
+  site_config:
+    index:
+      title: Configuración
+      cancel: cancelar
+      error_class: Clase del error
+      message: Mensaje del error
+      backtrace_lines: Número de líneas del backtrace (-1 para ilimitado)
+      component: Componente (o controlador)
+      action: Acción
+      environment_name: Nombre del entorno
+      update_config: Actualizar configuración
+    update:
+      success: "Configuración del sitio actualizada"
+  notices:
+    summary:
+      message: Mensaje
+      error_class: Clase del error
+      url: URL
+      where: Dónde
+      occurred: Ocurrió
+      similar: Similar
+      browser: Navegador
+      tenant: Origen
+      app_server: Servidor de aplicaciones
+      app_version: Versión de la aplicación
+      framework: Framework
+      relative_directory: Directorio relativo
+  notice_fingerprinter:
+    title: Fingerprinter de notificaciones
+    text: El fingerprinter determina cómo se agrupan las notificaciones de error. Cada elemento habilitado cuenta para distinguir un error.
+  paginator:
+    viewing_occurrence: viendo la ocurrencia
+    of: de

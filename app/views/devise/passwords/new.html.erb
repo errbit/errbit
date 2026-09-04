@@ -1,4 +1,4 @@
-<% content_for :title, "Forgot your password?" %>
+<% content_for :title, t(".forgot_your_password") %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= errors_for resource %>
@@ -10,6 +10,6 @@
   </div>
 
   <div class="buttons">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit t(".send_me_reset_password_instructions") %>
   </div>
 <% end %>

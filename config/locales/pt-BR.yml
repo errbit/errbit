@@ -2,6 +2,7 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 pt-BR:
+  locale_name: Português (Brasil)
   flash:
     apps:
       create:
@@ -28,6 +29,14 @@ pt-BR:
       powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
+    link_github_account:
+      link: "Vincular conta do %{provider}"
+      unlink: "Desvincular conta do %{provider}"
+      confirm: "Tem certeza?"
+    link_google_account:
+      link: "Vincular conta do %{provider}"
+      unlink: "Desvincular conta do %{provider}"
+      confirm: "Tem certeza?"
     navigation:
       apps: "Aplicações"
       errors: "Erros"
@@ -50,6 +59,7 @@ pt-BR:
       user_not_authorized: "You are not authorized to perform this action."
     apps:
       flash:
+        parse_error: "Não foi possível interpretar a frequência de notificações. O valor foi redefinido para o padrão (%{default_value})."
         create:
           success: "Sua aplicação foi criado com sucesso."
           error: "Sua aplicação não pôde ser criada."
@@ -65,19 +75,39 @@ pt-BR:
         need_two_errors_merge: "Você deve selecionar ao menos 2 erros para mesclá-los"
         merge_several:
           success: "%{nb} erros foram mesclados."
+        resolve_several:
+          one: "1 erro foi resolvido. Boas notícias para todos!"
+          other: "%{count} erros foram resolvidos. Boas notícias para todos!"
+        unresolve_several:
+          one: "1 erro deixou de ser resolvido."
+          other: "%{count} erros deixaram de ser resolvidos."
+        unmerge_several:
+          one: "1 erro foi separado."
+          other: "%{count} erros foram separados."
+        destroy_several:
+          one: "1 erro será excluído."
+          other: "%{count} erros serão excluídos."
+        destroy_all:
+          one: "1 erro será excluído."
+          other: "%{count} erros serão excluídos."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "Não foi possível obter o e-mail do GitHub"
+          already_registered: "O usuário já está registrado com o login '%{github_login}' do %{github_site_title}!"
+          linked: "Conta do %{github_site_title} vinculada com sucesso!"
+          not_authorized: "Não há usuários autorizados com o login '%{github_login}' do %{github_site_title}. Peça a um administrador para registrar sua conta."
+        google:
+          already_registered: "O usuário já está registrado com o login '%{google_email}' do %{google_site_title}!"
+          linked: "Conta do %{google_email} vinculada com sucesso!"
+          not_authorized: "Não há usuários autorizados com o login '%{google_email}' do %{google_site_title}. Peça a um administrador para registrar sua conta."
+      unlink_github:
+        success: "Conta do %{github_site_title} desvinculada com sucesso!"
+      unlink_google:
+        success: "Conta do %{email} desvinculada com sucesso!"
   devise:
-    registrations:
-      signed_up_but_unconfirmed: "Uma mensagem foi enviada para o seu e-mail com um link de confirmação. Acesse o link para ativar sua conta."
-      signed_up_but_inactive: "Você se registrou com sucesso. Entretanto, só será possível entrar no sistema quando sua conta for ativada."
-      signed_up_but_locked: "Você se registrou com sucesso. Entratanto, não será possível entrar no sistema porque sua conta está bloqueada."
-    omniauth_callbacks:
-      failure: 'Não foi possível autenticá-lo a partir da conta %{kind} porque "%{reason}".'
-      success: "Autenticado com sucesso a partir da conta %{kind}."
     google_login:
-      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
-    sessions:
-      new:
-        sign_in: "Entrar"
+      domain_unauthorized: "O domínio do e-mail da conta não está autorizado para login. Entre com uma conta de um domínio confiável."
   problems:
     index:
       all_errors: "Todos os erros"
@@ -96,6 +126,11 @@ pt-BR:
       unresolve: Tornar não resolvido
       delete: Excluir
       ago: atrás
+    issue_tracker_links:
+      go_to_issue: "ir para o problema"
+      unlink_confirm: "Desvincular problemas do Errbit?"
+      unlink_issue: "desvincular problema"
+      close_issue: "fechar problema"
     confirm:
       delete: "Excluir permanentemente os itens selecionados?"
       resolve: "Resolver os itens selecionados? Isto não poderá ser alterado depois."
@@ -129,6 +164,8 @@ pt-BR:
     sparkline:
       graph-2-weeks: Graph (2 weeks)
       graph-24-hours: Graph (24 hours)
+    tally_table:
+      show_more: "Mostrar mais..."
   comments:
     confirm_delete: "Excluir permanentemente este comentário?"
     create:
@@ -179,6 +216,8 @@ pt-BR:
       email: E-mail
       entries: Registros por página
       time_zone: Fuso horário
+      locale: Idioma
+      automatic: Automático
       password: Senha
       password_confirmation: Confirmação de Senha
       admin: Adminstrador?
@@ -219,12 +258,12 @@ pt-BR:
       all_users_notified: "Todos os usuários serão notificados quando algo acontecer."
       api_key: "Chave de Acesso da API:"
       are_you_sure: "Está certo disto?"
-      atom_title: "Notificações do Errbit para %{name} em %{host}"
       edit: editar
       environment: Ambiente
       errors: Erros
       errors_caught: "Erros Capturados:"
       github_repo: Repositório GitHub
+      latest_app_version: Última versão da aplicação
       message: Mensagem
       no_error_yet: "Nenhum erro foi capturado até então, certifique-se de que sua aplicação está configurada"
       no_watchers: "Infelizmente, ninguém está observando esta aplicação"

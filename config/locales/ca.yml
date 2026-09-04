@@ -1,0 +1,328 @@
+# Traduccio catalana d'Errbit.
+
+ca:
+  locale_name: Català
+  flash:
+    apps:
+      create:
+        success: "Ja està! Configura la teva aplicació amb la clau d'API que apareix a continuació"
+      update:
+        success: "Bones notícies: '%{app_name}' s'ha actualitzat correctament."
+      destroy:
+        success: "'%{app_name}' s'ha suprimit correctament."
+  n_errs:
+    one: "%{count} error"
+    other: "%{count} errors"
+    will_be_deleted: se suprimiran
+  n_errs_have:
+    one: "%{count} error ha estat"
+    other: "%{count} errors han estat"
+    been_resolved: resolt(s)
+    been_unresolved: marcats com a no resolts
+    been_unmerged: separats
+    been_deleted: suprimits
+  layouts:
+    application:
+      title: "Errbit"
+      errbit: "Errbit"
+      powered_html: "Desenvolupat per %{link}: el receptor d'errors de codi obert."
+  shared:
+    link_github_account:
+      link: "Enllaça el compte de %{provider}"
+      unlink: "Desenllaça el compte de %{provider}"
+      confirm: "N'estàs segur?"
+    link_google_account:
+      link: "Enllaça el compte de %{provider}"
+      unlink: "Desenllaça el compte de %{provider}"
+      confirm: "N'estàs segur?"
+    navigation:
+      apps: "Aplicacions"
+      errors: "Errors"
+      users: "Usuaris"
+      config: "Configuració"
+    session:
+      sign_out: "Tanca la sessió"
+      edit_profile: "Edita el perfil"
+    notice_fingerprinter:
+      error_class: Classe de l'error
+      message: Missatge de l'error
+      backtrace_lines: Nombre de línies de la traça (-1 per a il·limitades)
+      component: Component (o controlador)
+      action: Acció
+      environment_name: Nom de l'entorn
+  controllers:
+    application:
+      require_admin: "No tens permís per fer-ho"
+      user_not_authorized: "No tens autorització per fer aquesta acció."
+    apps:
+      flash:
+        parse_error: "No s'ha pogut interpretar la freqüència de notificacions. S'ha restaurat el valor predeterminat (%{default_value})."
+        create:
+          success: "L'aplicació s'ha creat correctament."
+          error: "No s'ha pogut crear l'aplicació."
+        update:
+          success: "L'aplicació s'ha actualitzat correctament."
+          error: "No s'ha pogut actualitzar l'aplicació."
+        destroy:
+          success: "L'aplicació s'ha suprimit correctament."
+          error: "No s'ha pogut suprimir l'aplicació."
+    problems:
+      flash:
+        no_select_problem: "No has seleccionat cap error"
+        need_two_errors_merge: "Has de seleccionar almenys dos errors per fusionar-los"
+        merge_several:
+          success: "%{nb} errors fusionats."
+        resolve_several:
+          one: "S'ha resolt 1 error. Bones notícies!"
+          other: "S'han resolt %{count} errors. Bones notícies!"
+        unresolve_several:
+          one: "1 error s'ha marcat com a no resolt."
+          other: "%{count} errors s'han marcat com a no resolts."
+        unmerge_several:
+          one: "S'ha separat 1 error."
+          other: "S'han separat %{count} errors."
+        destroy_several:
+          one: "Se suprimirà 1 error."
+          other: "Se suprimiran %{count} errors."
+        destroy_all:
+          one: "Se suprimirà 1 error."
+          other: "Se suprimiran %{count} errors."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "No s'ha pogut obtenir el correu electrònic de GitHub"
+          already_registered: "L'usuari ja està registrat amb l'inici de sessió '%{github_login}' de %{github_site_title}."
+          linked: "El compte de %{github_site_title} s'ha enllaçat correctament!"
+          not_authorized: "No hi ha usuaris autoritzats amb l'inici de sessió '%{github_login}' de %{github_site_title}. Demana a un administrador que registri el teu compte."
+        google:
+          already_registered: "L'usuari ja està registrat amb l'inici de sessió '%{google_email}' de %{google_site_title}!"
+          linked: "El compte de %{google_email} s'ha enllaçat correctament!"
+          not_authorized: "No hi ha usuaris autoritzats amb l'inici de sessió '%{google_email}' de %{google_site_title}. Demana a un administrador que registri el teu compte."
+      unlink_github:
+        success: "El compte de %{github_site_title} s'ha desenllaçat correctament!"
+      unlink_google:
+        success: "El compte de %{email} s'ha desenllaçat correctament!"
+  devise:
+    google_login:
+      domain_unauthorized: "El domini del correu electrònic no està autoritzat per iniciar sessió. Usa un compte d'un domini de confiança."
+  problems:
+    index:
+      all_errors: "Tots els errors"
+      unresolved_errors: "Errors no resolts"
+      hide_resolved: "amaga els resolts"
+      show_resolved: "mostra els resolts"
+    table:
+      app: Aplicació
+      env: Entorn
+      what_and_where_html: "On i què"
+      latest: Últim
+      count: Quantitat
+      merge: Fusiona
+      unmerge: Separa
+      resolve: Resol
+      unresolve: Marca com a no resolt
+      delete: Suprimeix
+      ago: fa
+    issue_tracker_links:
+      go_to_issue: "ves a l'incident"
+      unlink_confirm: "Vols desenllaçar els incidents d'Errbit?"
+      unlink_issue: "desenllaça l'incident"
+      close_issue: "tanca l'incident"
+    confirm:
+      delete: "Vols suprimir permanentment els problemes seleccionats?"
+      resolve: "Vols resoldre els problemes seleccionats? Es podran marcar com a no resolts més endavant."
+      resolve_one: "Vols resoldre aquest problema? Es podrà marcar com a no resolt més endavant."
+      merge: "Vols fusionar els problemes seleccionats? Es podran separar més endavant."
+      unmerge: "Vols separar els problemes seleccionats? Es podran tornar a fusionar més endavant."
+      unresolve: "Vols marcar com a no resolts els problemes seleccionats? Es podran resoldre de nou."
+    search:
+      search_placeholder: "Cerca problemes"
+    resolve:
+      the_error_has_been_resolved: "Bones notícies! L'error s'ha resolt."
+    show:
+      comments: Comentaris
+      add_a_comment: Afegeix un comentari
+      save_comment: Desa el comentari
+      summary: Resum
+      backtrace: Traça
+      user: Usuari
+      parameters: Paràmetres
+      session: Sessió
+      ago_by: fa, per
+      ago_by_unknown_user: fa, per [Usuari desconegut]
+      first_notice: Primera notificació
+      last_notice: Última notificació
+      environment: Entorn
+      app: Aplicació
+      where: On
+      up: amunt
+      resolve: resol
+      notice_by_id: "Notificació: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Gràfic (2 setmanes)
+      graph-24-hours: Gràfic (24 hores)
+    tally_table:
+      show_more: "Mostra'n més..."
+  comments:
+    confirm_delete: "Vols suprimir permanentment aquest comentari?"
+    create:
+      success: "Comentari desat!"
+      error: "El comentari era buit. Torna-ho a provar."
+    destroy:
+      success: "Comentari suprimit!"
+      error: "No s'ha pogut suprimir el comentari."
+  users:
+    index:
+      new: Afegeix un usuari
+      title: Usuaris
+      name: Nom
+      username: Nom d'usuari
+      email: Correu electrònic
+      admin: "Administrador?"
+      admin_yes: "Sí"
+      admin_no: "No"
+    show:
+      name: Nom
+      email: Correu electrònic
+      username: Nom d'usuari
+      admin: Administrador
+      admin_yes: "Sí"
+      admin_no: "No"
+      created: Creat
+      edit: edita
+      destroy: suprimeix
+      confirm_delete: "Vols suprimir permanentment aquest usuari?"
+    new:
+      title: Nou usuari
+      cancel: cancel·la
+      add_user: Afegeix un usuari
+    edit:
+      title: Edita
+      cancel: cancel·la
+      update_user: Actualitza l'usuari
+    create:
+      success: "%{name} ja forma part de l'equip. No oblidis afegir-lo com a observador d'un projecte."
+    update:
+      success: "La informació de %{name} s'ha actualitzat correctament."
+    destroy:
+      success: "Quina pena. %{name} ja no forma part del teu equip."
+      error: "No et pots suprimir a tu mateix"
+    fields:
+      name: Nom
+      username: Nom d'usuari
+      email: Correu electrònic
+      entries: Entrades per pàgina
+      time_zone: Zona horària
+      locale: Idioma
+      automatic: Automàtic
+      password: Contrasenya
+      password_confirmation: Confirmació de la contrasenya
+      admin: "Administrador?"
+  apps:
+    confirm_delete: "Vols suprimir permanentment aquesta aplicació?"
+    confirm_destroy_all_problems: "Vols suprimir permanentment tots els errors d'aquesta aplicació?"
+    index:
+      title: Aplicacions
+      new_app: Afegeix una aplicació
+    table:
+      name: Nom
+      repository: Repositori
+      notify: Servei de notificacions
+      tracker: Gestor d'incidències
+      errors: Errors
+      no_apps: "No hi ha aplicacions."
+      click_to_create: "Prem aquí per crear la primera"
+    fields:
+      name: Nom
+      api_key: Clau d'API
+      repository_branch: Branca del repositori
+      github_repo: Repositori de GitHub
+      bitbucket_repo: Repositori de BitBucket
+      custom_backtrace_url_template: Plantilla d'URL de traça personalitzada
+      asset_host: Servidor de recursos
+      asset_host_help: S'utilitza per generar enllaços d'errors de JavaScript
+      asset_host_placeholder: "p. ex., https://assets.example.com"
+      latest_app_version: Última versió de l'aplicació
+      latest_app_version_help: "Les aplicacions mòbils poden establir-la per ignorar errors anteriors a aquesta versió. Ex.: 1.4.3"
+      latest_app_version_placeholder: "p. ex., 2.0.1 de l'identificador del paquet d'una aplicació iOS"
+      notifications: Notificacions
+      notify_on_errors: Notifica els errors
+      notify_all_users: Notifica tots els usuaris
+      regenerate_api_key: Regenera la clau d'API
+      use_site_fingerprinter: Usa el fingerprinter del lloc
+    show:
+      all_errs: tots els errors
+      all_users_notified: "Es notificarà a tots els usuaris quan passi alguna cosa."
+      api_key: "Clau d'API:"
+      are_you_sure: "N'estàs segur?"
+      edit: edita
+      environment: Entorn
+      errors: Errors
+      errors_caught: "Errors capturats:"
+      github_repo: Repositori de GitHub
+      latest_app_version: Última versió de l'aplicació
+      message: Missatge
+      no_error_yet: "Encara no s'han capturat errors; configura la teva aplicació"
+      no_watchers: "Ningú observa aquesta aplicació"
+      repository: Repositori
+      revision: Revisió
+      show_hide: "(mostra/amaga)"
+      unresolved_errs: errors no resolts
+      unwatch: deixa d'observar
+      user_or_email: Usuari o correu electrònic
+      watch: observa
+      watchers: Observadors
+      when: Quan
+      who: Qui
+    issue_tracker_fields:
+      legend: Gestor d'incidències
+    new:
+      add_app: Afegeix una aplicació
+      cancel: cancel·la
+      title: Afegeix una aplicació
+    edit:
+      title: Edita l'aplicació
+      destroy: suprimeix l'aplicació
+      cancel: cancel·la
+      seriously: "De debò?"
+      update: Actualitza l'aplicació
+    search:
+      search_placeholder: Cerca una aplicació
+  watchers:
+    create:
+      success: "Ara observes %{app}"
+    destroy:
+      success: "Ja no observes %{app}"
+  site_config:
+    index:
+      title: Configuració
+      cancel: cancel·la
+      error_class: Classe de l'error
+      message: Missatge de l'error
+      backtrace_lines: Nombre de línies de la traça (-1 per a il·limitades)
+      component: Component (o controlador)
+      action: Acció
+      environment_name: Nom de l'entorn
+      update_config: Actualitza la configuració
+    update:
+      success: "Configuració del lloc actualitzada"
+  notices:
+    summary:
+      message: Missatge
+      error_class: Classe de l'error
+      url: URL
+      where: On
+      occurred: Ha ocorregut
+      similar: Similar
+      browser: Navegador
+      tenant: Origen
+      app_server: Servidor d'aplicacions
+      app_version: Versió de l'aplicació
+      framework: Framework
+      relative_directory: Directori relatiu
+  notice_fingerprinter:
+    title: Fingerprinter de notificacions
+    text: El fingerprinter determina com s'agrupen les notificacions d'error. Cada element habilitat contribueix a distingir un error.
+  paginator:
+    viewing_occurrence: veient l'ocurrència
+    of: de

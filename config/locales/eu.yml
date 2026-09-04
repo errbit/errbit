@@ -1,0 +1,328 @@
+# Errbiten euskarazko itzulpena.
+
+eu:
+  locale_name: Euskara
+  flash:
+    apps:
+      create:
+        success: "Oso ondo! Konfiguratu aplikazioa beheko API gakoarekin"
+      update:
+        success: "Albiste onak! '%{app_name}' behar bezala eguneratu da."
+      destroy:
+        success: "'%{app_name}' behar bezala ezabatu da."
+  n_errs:
+    one: "%{count} errore"
+    other: "%{count} errore"
+    will_be_deleted: ezabatu egingo dira
+  n_errs_have:
+    one: "%{count} errore"
+    other: "%{count} errore"
+    been_resolved: konponduta
+    been_unresolved: konpondu gabe
+    been_unmerged: bananduta
+    been_deleted: ezabatuta
+  layouts:
+    application:
+      title: "Errbit"
+      errbit: "Errbit"
+      powered_html: "%{link} bidez garatua: kode irekiko errore-hartzailea."
+  shared:
+    link_github_account:
+      link: "%{provider} kontua lotu"
+      unlink: "%{provider} kontua askatu"
+      confirm: "Ziur zaude?"
+    link_google_account:
+      link: "%{provider} kontua lotu"
+      unlink: "%{provider} kontua askatu"
+      confirm: "Ziur zaude?"
+    navigation:
+      apps: "Aplikazioak"
+      errors: "Erroreak"
+      users: "Erabiltzaileak"
+      config: "Konfigurazioa"
+    session:
+      sign_out: "Saioa itxi"
+      edit_profile: "Profila editatu"
+    notice_fingerprinter:
+      error_class: Errore-klasea
+      message: Errore-mezua
+      backtrace_lines: Backtrace lerro kopurua (-1 mugagabea)
+      component: Osagaia (edo kontrolatzailea)
+      action: Ekintza
+      environment_name: Ingurunearen izena
+  controllers:
+    application:
+      require_admin: "Ez duzu hori egiteko baimenik"
+      user_not_authorized: "Ez duzu ekintza hau egiteko baimenik."
+    apps:
+      flash:
+        parse_error: "Ezin izan da jakinarazpen-maiztasuna interpretatu. Balioa lehenetsira berrezarri da (%{default_value})."
+        create:
+          success: "Aplikazioa behar bezala sortu da."
+          error: "Ezin izan da aplikazioa sortu."
+        update:
+          success: "Aplikazioa behar bezala eguneratu da."
+          error: "Ezin izan da aplikazioa eguneratu."
+        destroy:
+          success: "Aplikazioa behar bezala ezabatu da."
+          error: "Ezin izan da aplikazioa ezabatu."
+    problems:
+      flash:
+        no_select_problem: "Ez duzu errorerik hautatu"
+        need_two_errors_merge: "Gutxienez bi errore hautatu behar dituzu elkartzeko"
+        merge_several:
+          success: "%{nb} errore elkartu dira."
+        resolve_several:
+          one: "Errore 1 konpondu da. Albiste onak!"
+          other: "%{count} errore konpondu dira. Albiste onak!"
+        unresolve_several:
+          one: "Errore 1 konpondu gabeko gisa markatu da."
+          other: "%{count} errore konpondu gabeko gisa markatu dira."
+        unmerge_several:
+          one: "Errore 1 banandu da."
+          other: "%{count} errore banandu dira."
+        destroy_several:
+          one: "Errore 1 ezabatu egingo da."
+          other: "%{count} errore ezabatu egingo dira."
+        destroy_all:
+          one: "Errore 1 ezabatu egingo da."
+          other: "%{count} errore ezabatu egingo dira."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "Ezin izan da GitHub-eko erabiltzailearen helbide elektronikoa eskuratu"
+          already_registered: "Erabiltzailea dagoeneko erregistratuta dago '%{github_login}' %{github_site_title} saio-hasierarekin!"
+          linked: "%{github_site_title} kontua behar bezala lotu da!"
+          not_authorized: "Ez dago '%{github_login}' %{github_site_title} saio-hasierarekin baimendutako erabiltzailerik. Eskatu administratzaile bati zure kontua erregistratzeko."
+        google:
+          already_registered: "Erabiltzailea dagoeneko erregistratuta dago '%{google_email}' %{google_site_title} saio-hasierarekin!"
+          linked: "%{google_email} kontua behar bezala lotu da!"
+          not_authorized: "Ez dago '%{google_email}' %{google_site_title} saio-hasierarekin baimendutako erabiltzailerik. Eskatu administratzaile bati zure kontua erregistratzeko."
+      unlink_github:
+        success: "%{github_site_title} kontua behar bezala askatu da!"
+      unlink_google:
+        success: "%{email} kontua behar bezala askatu da!"
+  devise:
+    google_login:
+      domain_unauthorized: "Kontuaren helbide elektronikoaren domeinua ez dago baimenduta. Hasi saioa domeinu fidagarri bateko kontu batekin."
+  problems:
+    index:
+      all_errors: "Errore guztiak"
+      unresolved_errors: "Konpondu gabeko erroreak"
+      hide_resolved: "konpondutakoak ezkutatu"
+      show_resolved: "konpondutakoak erakutsi"
+    table:
+      app: Aplikazioa
+      env: Ingurunea
+      what_and_where_html: "Non eta zer"
+      latest: Azkena
+      count: Kopurua
+      merge: Elkartu
+      unmerge: Banandu
+      resolve: Konpondu
+      unresolve: Konpondu gabeko gisa markatu
+      delete: Ezabatu
+      ago: duela
+    issue_tracker_links:
+      go_to_issue: "joan arazora"
+      unlink_confirm: "Errbit arazoak askatu?"
+      unlink_issue: "arazoa askatu"
+      close_issue: "arazoa itxi"
+    confirm:
+      delete: "Hautatutako arazoak behin betiko ezabatu?"
+      resolve: "Hautatutako arazoak konpondu? Gero konpondu gabeko gisa markatu ahal izango dira."
+      resolve_one: "Arazo hau konpondu? Gero konpondu gabeko gisa markatu ahal izango da."
+      merge: "Hautatutako arazoak elkartu? Gero banandu ahal izango dira."
+      unmerge: "Hautatutako arazoak banandu? Gero berriro elkartu ahal izango dira."
+      unresolve: "Hautatutako arazoak konpondu gabeko gisa markatu? Berriro konpondu ahal izango dira."
+    search:
+      search_placeholder: "Arazoak bilatu"
+    resolve:
+      the_error_has_been_resolved: "Albiste onak! Errorea konpondu da."
+    show:
+      comments: Iruzkinak
+      add_a_comment: Iruzkin bat gehitu
+      save_comment: Iruzkina gorde
+      summary: Laburpena
+      backtrace: Backtrace
+      user: Erabiltzailea
+      parameters: Parametroak
+      session: Saioa
+      ago_by: duela, egilea
+      ago_by_unknown_user: duela, [Erabiltzaile ezezaguna]
+      first_notice: Lehen jakinarazpena
+      last_notice: Azken jakinarazpena
+      environment: Ingurunea
+      app: Aplikazioa
+      where: Non
+      up: gora
+      resolve: konpondu
+      notice_by_id: "Jakinarazpena: %{notice_id}"
+    sparkline:
+      graph-2-weeks: Grafikoa (2 aste)
+      graph-24-hours: Grafikoa (24 ordu)
+    tally_table:
+      show_more: "Gehiago erakutsi..."
+  comments:
+    confirm_delete: "Iruzkin hau behin betiko ezabatu?"
+    create:
+      success: "Iruzkina gorde da!"
+      error: "Iruzkina hutsik dago. Saiatu berriro."
+    destroy:
+      success: "Iruzkina ezabatu da!"
+      error: "Ezin izan da iruzkina ezabatu."
+  users:
+    index:
+      new: Erabiltzaile berria gehitu
+      title: Erabiltzaileak
+      name: Izena
+      username: Erabiltzaile-izena
+      email: Helbide elektronikoa
+      admin: "Administratzailea?"
+      admin_yes: "Bai"
+      admin_no: "Ez"
+    show:
+      name: Izena
+      email: Helbide elektronikoa
+      username: Erabiltzaile-izena
+      admin: Administratzailea
+      admin_yes: "Bai"
+      admin_no: "Ez"
+      created: Sortua
+      edit: editatu
+      destroy: ezabatu
+      confirm_delete: "Erabiltzaile hau behin betiko ezabatu?"
+    new:
+      title: Erabiltzaile berria
+      cancel: utzi
+      add_user: Erabiltzailea gehitu
+    edit:
+      title: Editatu
+      cancel: utzi
+      update_user: Erabiltzailea eguneratu
+    create:
+      success: "%{name} taldeko kide da orain. Ez ahaztu proiektuaren begirale gisa gehitzea."
+    update:
+      success: "%{name} erabiltzailearen informazioa behar bezala eguneratu da."
+    destroy:
+      success: "Tamalez, %{name} ez dago zure taldean."
+      error: "Ezin duzu zeure burua ezabatu"
+    fields:
+      name: Izena
+      username: Erabiltzaile-izena
+      email: Helbide elektronikoa
+      entries: Sarrera orrialdeko
+      time_zone: Ordu-eremua
+      locale: Hizkuntza
+      automatic: Automatikoa
+      password: Pasahitza
+      password_confirmation: Pasahitzaren berrespena
+      admin: "Administratzailea?"
+  apps:
+    confirm_delete: "Aplikazio hau behin betiko ezabatu?"
+    confirm_destroy_all_problems: "Aplikazio honetako errore guztiak behin betiko ezabatu?"
+    index:
+      title: Aplikazioak
+      new_app: Aplikazio berria gehitu
+    table:
+      name: Izena
+      repository: Biltegia
+      notify: Jakinarazpen-zerbitzua
+      tracker: Arazoen kudeatzailea
+      errors: Erroreak
+      no_apps: "Ez dago aplikaziorik."
+      click_to_create: "Egin klik hemen lehenengoa sortzeko"
+    fields:
+      name: Izena
+      api_key: API gakoa
+      repository_branch: Biltegiaren adarra
+      github_repo: GitHub biltegia
+      bitbucket_repo: BitBucket biltegia
+      custom_backtrace_url_template: Backtrace URL pertsonalizatuaren txantiloia
+      asset_host: Baliabideen zerbitzaria
+      asset_host_help: JavaScript erroreen estekak sortzeko erabiltzen da
+      asset_host_placeholder: "adib. https://assets.example.com"
+      latest_app_version: Aplikazioaren azken bertsioa
+      latest_app_version_help: "Aplikazio mugikorrek hau ezar dezakete bertsio honen aurreko erroreak baztertzeko. Adib.: 1.4.3"
+      latest_app_version_placeholder: "adib. iOS aplikazio bateko Bundle Identifier-eko 2.0.1"
+      notifications: Jakinarazpenak
+      notify_on_errors: Erroreen berri eman
+      notify_all_users: Erabiltzaile guztiei jakinarazi
+      regenerate_api_key: API gakoa berriz sortu
+      use_site_fingerprinter: Gunearen fingerprinter-a erabili
+    show:
+      all_errs: errore guztiak
+      all_users_notified: "Erabiltzaile guztiei jakinaraziko zaie zerbait gertatzen denean."
+      api_key: "API gakoa:"
+      are_you_sure: "Ziur zaude?"
+      edit: editatu
+      environment: Ingurunea
+      errors: Erroreak
+      errors_caught: "Atzemandako erroreak:"
+      github_repo: GitHub biltegia
+      latest_app_version: Aplikazioaren azken bertsioa
+      message: Mezua
+      no_error_yet: "Oraindik ez da errorerik atzeman; konfiguratu aplikazioa"
+      no_watchers: "Zoritxarrez, inork ez du aplikazio hau begiratzen"
+      repository: Biltegia
+      revision: Berrikuspena
+      show_hide: "(erakutsi/ezkutatu)"
+      unresolved_errs: konpondu gabeko erroreak
+      unwatch: begiratzeari utzi
+      user_or_email: Erabiltzailea edo helbide elektronikoa
+      watch: begiratu
+      watchers: Begiraleak
+      when: Noiz
+      who: Nork
+    issue_tracker_fields:
+      legend: Arazoen kudeatzailea
+    new:
+      add_app: Aplikazioa gehitu
+      cancel: utzi
+      title: Aplikazioa gehitu
+    edit:
+      title: Aplikazioa editatu
+      destroy: aplikazioa ezabatu
+      cancel: utzi
+      seriously: "Benetan?"
+      update: Aplikazioa eguneratu
+    search:
+      search_placeholder: Aplikazioa bilatu
+  watchers:
+    create:
+      success: "%{app} begiratzen ari zara orain"
+    destroy:
+      success: "Jada ez duzu %{app} begiratzen"
+  site_config:
+    index:
+      title: Konfigurazioa
+      cancel: utzi
+      error_class: Errore-klasea
+      message: Errore-mezua
+      backtrace_lines: Backtrace lerro kopurua (-1 mugagabea)
+      component: Osagaia (edo kontrolatzailea)
+      action: Ekintza
+      environment_name: Ingurunearen izena
+      update_config: Konfigurazioa eguneratu
+    update:
+      success: "Gunearen konfigurazioa eguneratu da"
+  notices:
+    summary:
+      message: Mezua
+      error_class: Errore-klasea
+      url: URLa
+      where: Non
+      occurred: Noiz gertatu den
+      similar: Antzekoa
+      browser: Nabigatzailea
+      tenant: Jatorria
+      app_server: Aplikazio-zerbitzaria
+      app_version: Aplikazioaren bertsioa
+      framework: Framework-a
+      relative_directory: Direktorio erlatiboa
+  notice_fingerprinter:
+    title: Jakinarazpenen fingerprinter-a
+    text: Jakinarazpenen fingerprinter-ak errore-jakinarazpenak nola taldekatzen diren zehazten du. Gaitutako elementu bakoitzak errore baten berezitasunean eragiten du.
+  paginator:
+    viewing_occurrence: agerraldia ikusten
+    of: " / "

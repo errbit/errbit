@@ -1,4 +1,4 @@
-<% content_for :title, "Sign in" %>
+<% content_for :title, t("devise.sessions.new.sign_in") %>
 
 <% auth_key = Devise.authentication_keys.first %>
 <% auth_key_autocomplete = Errbit::Config.user_has_username ? "username" : "email" %>
@@ -8,13 +8,13 @@
     <div class="action-bar">
       <% if Errbit::Config.github_authentication %>
         <span class="github">
-          <%= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, method: :post %>
+          <%= link_to t("devise.shared.links.sign_in_with_provider", provider: Errbit::Config.github_site_title), user_github_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
 
       <% if Errbit::Config.google_authentication %>
         <span class="google">
-          <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
+          <%= link_to t("devise.shared.links.sign_in_with_provider", provider: Errbit::Config.google_site_title), user_google_oauth2_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
     </div>

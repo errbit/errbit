@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  locale_name: English
   flash:
     apps:
       create:
@@ -56,6 +57,14 @@ en:
       powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
+    link_github_account:
+      link: "Link %{provider} account"
+      unlink: "Unlink %{provider} account"
+      confirm: "Are you sure?"
+    link_google_account:
+      link: "Link %{provider} account"
+      unlink: "Unlink %{provider} account"
+      confirm: "Are you sure?"
     navigation:
       apps: "Apps"
       errors: "Errors"
@@ -78,6 +87,7 @@ en:
       user_not_authorized: "You are not authorized to perform this action."
     apps:
       flash:
+        parse_error: "Couldn't parse your notification frequency. Value was reset to default (%{default_value})."
         create:
           success: "Your app was successfully created."
           error: "Your app could not be created."
@@ -93,19 +103,39 @@ en:
         need_two_errors_merge: "You must select at least two errors to merge"
         merge_several:
           success: "%{nb} errors have been merged."
+        resolve_several:
+          one: "1 error has been resolved. Great news everyone!"
+          other: "%{count} errors have been resolved. Great news everyone!"
+        unresolve_several:
+          one: "1 error has been unresolved."
+          other: "%{count} errors have been unresolved."
+        unmerge_several:
+          one: "1 error has been unmerged."
+          other: "%{count} errors have been unmerged."
+        destroy_several:
+          one: "1 error will be deleted."
+          other: "%{count} errors will be deleted."
+        destroy_all:
+          one: "1 error will be deleted."
+          other: "%{count} errors will be deleted."
+    users:
+      omniauth_callbacks:
+        github:
+          email_not_found: "Could not retrieve user's email from GitHub"
+          already_registered: "User already registered with %{github_site_title} login '%{github_login}'!"
+          linked: "Successfully linked %{github_site_title} account!"
+          not_authorized: "There are no authorized users with %{github_site_title} login '%{github_login}'. Please ask an administrator to register your user account."
+        google:
+          already_registered: "User already registered with %{google_site_title} login '%{google_email}'!"
+          linked: "Successfully linked %{google_email} account!"
+          not_authorized: "There are no authorized users with %{google_site_title} login '%{google_email}'. Please ask an administrator to register your user account."
+      unlink_github:
+        success: "Successfully unlinked %{github_site_title} account!"
+      unlink_google:
+        success: "Successfully unlinked %{email} account!"
   devise:
-    registrations:
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
-      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
-      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-    omniauth_callbacks:
-      failure: 'Could not authenticate you from %{kind} because "%{reason}".'
-      success: "Successfully authenticated from %{kind} account."
     google_login:
       domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
-    sessions:
-      new:
-        sign_in: "Sign in"
   problems:
     index:
       all_errors: "All Errors"
@@ -124,6 +154,11 @@ en:
       unresolve: Unresolve
       delete: Delete
       ago: ago
+    issue_tracker_links:
+      go_to_issue: "go to issue"
+      unlink_confirm: "Unlink err issues?"
+      unlink_issue: "unlink issue"
+      close_issue: "close issue"
     confirm:
       delete: "Permanently delete selected issues?"
       resolve: "Resolve selected issues? They can be unresolved later."
@@ -157,6 +192,8 @@ en:
     sparkline:
       graph-2-weeks: Graph (2 weeks)
       graph-24-hours: Graph (24 hours)
+    tally_table:
+      show_more: "Show more..."
   comments:
     confirm_delete: "Permanently delete this comment?"
     create:
@@ -207,6 +244,8 @@ en:
       email: Email
       entries: Entries per page
       time_zone: Time Zone
+      locale: Language
+      automatic: Automatic
       password: Password
       password_confirmation: Password Confirmation
       admin: Admin?
@@ -247,12 +286,12 @@ en:
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
       are_you_sure: "Are you sure?"
-      atom_title: "Errbit notices for %{name} at %{host}"
       edit: edit
       environment: Environment
       errors: Errors
       errors_caught: "Errors Caught:"
       github_repo: GitHub Repo
+      latest_app_version: Latest App Version
       message: Message
       no_error_yet: "No errors have been caught yet, make sure you set up your app"
       no_watchers: "Sadly, no one is watching this app"

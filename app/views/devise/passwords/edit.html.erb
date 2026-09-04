@@ -1,4 +1,4 @@
-<% content_for :title, "Change your password" %>
+<% content_for :title, t(".change_your_password") %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :patch }) do |f| %>
   <%= errors_for resource %>
@@ -6,18 +6,18 @@
   <%= f.hidden_field :reset_password_token %>
 
   <div class="required">
-    <%= f.label :password, "New password" %>
+    <%= f.label :password, t(".new_password") %>
 
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="required">
-    <%= f.label :password_confirmation, "Type your new password again" %>
+    <%= f.label :password_confirmation, t(".confirm_new_password") %>
 
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="buttons">
-    <%= f.submit "Change my password" %>
+    <%= f.submit t(".change_my_password") %>
   </div>
 <% end %>
