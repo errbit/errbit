@@ -90,7 +90,7 @@ class ErrorReport
 
     Mailer.with(error_report: self).err_notification.deliver_now
   rescue => e
-    HoptoadNotifier.notify(e)
+    Errbit::SelfErrorReporter.notify(e)
   end
 
   def should_notify?
@@ -105,7 +105,7 @@ class ErrorReport
 
     app.notification_service.create_notification(problem)
   rescue => e
-    HoptoadNotifier.notify(e)
+    Errbit::SelfErrorReporter.notify(e)
   end
 
   ##
