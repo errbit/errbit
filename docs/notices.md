@@ -4,11 +4,9 @@ This page describes how to look up notices in the Errbit UI.
 
 ## /locate/[notice_id]
 
-Errbit points clients to this path (in the response body) when they successfully
-submit a notice. When you hit this path in a browser (you have to be
-authenticated), it will redirect you to the associated Problem. Using the
-language used in Errbit code, Notices belong to Errs, Problems can have many
-Errs, and Problems belong to Apps.
+When you hit this path in a browser (you have to be authenticated), it redirects
+you to the associated Problem. Using the language used in Errbit code, Notices
+belong to Errs, Problems can have many Errs, and Problems belong to Apps.
 
 ## /notices/[notice_id]
 
