@@ -298,7 +298,6 @@ RSpec.describe ErrorReport, type: :model do
         end
       end
     end
-
   end
 
   describe "#valid?" do
