@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
-  get "/locate/:id" => "notices#locate", :as => :locate
   get "/notices/:id" => "notices#show_by_id", :as => :show_notice_by_id
 
   resources :notices, only: :show
