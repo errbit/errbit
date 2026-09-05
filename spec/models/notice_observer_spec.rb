@@ -6,7 +6,7 @@ RSpec.describe "Callback on Notice", type: :model do
   let(:notice_attrs_for) do
     lambda do |api_key|
       {
-        error_class: "HoptoadTestingException",
+        error_class: "TestError",
         message: "some message",
         backtrace: [
           {
@@ -22,9 +22,9 @@ RSpec.describe "Callback on Notice", type: :model do
         },
         api_key: api_key,
         notifier: {
-          "name" => "Hoptoad Notifier",
-          "version" => "2.3.2",
-          "url" => "http://hoptoadapp.com"
+          "name" => "Test Notifier",
+          "version" => "1.0",
+          "url" => "https://example.org/notifier"
         },
         framework: "Rails: 3.2.11"
       }
