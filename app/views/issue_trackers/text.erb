@@ -4,8 +4,8 @@ Errbit link: <%= app_problem_url problem.app, problem %>
 
 Summary
 -------
-<% if notice.request['url'].present? %>
-URL:      <%= notice.request['url'] %>
+<% if notice.request["url"].present? %>
+URL:      <%= notice.request["url"] %>
 <% end %>
 Where:    <%= notice.where %>
 Occurred: <%= notice.created_at.to_fs(:micro) %>
@@ -16,6 +16,6 @@ Env:      <%= pretty_hash notice.env_vars %>
 
 Backtrace
 ---------
-<% notice.backtrace.lines.each do |line| %><%= sprintf('%5d: %s **%s', line.number, line.file_relative, line.method) %>
+<% notice.backtrace.lines.each do |line| %><%= sprintf("%5d: %s **%s", line.number, line.file_relative, line.method) %>
 <% end %>
 <% end %>
