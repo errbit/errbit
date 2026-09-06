@@ -34,11 +34,11 @@ class Issue
 
     return false if errors.present?
 
-    tracker.errors.each { |k, err| errors.add k, err }
+    tracker.errors.each { |k, err| errors.add(k, err) }
 
     return false if errors.present?
 
-    if issue_tracker.respond_to? :close_issue
+    if issue_tracker.respond_to?(:close_issue)
       issue_tracker.close_issue(problem.issue_link, user: user.as_document)
     end
 
@@ -50,12 +50,12 @@ class Issue
   end
 
   def save
-    errors.add :base, "The issue has no body" unless body
-    errors.add :base, "This app has no issue tracker" unless issue_tracker
+    errors.add(:base, "The issue has no body") unless body
+    errors.add(:base, "This app has no issue tracker") unless issue_tracker
 
     return false if errors.present?
 
-    tracker.errors.each { |k, err| errors.add k, err }
+    tracker.errors.each { |k, err| errors.add(k, err) }
 
     return false if errors.present?
 
