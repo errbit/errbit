@@ -371,7 +371,7 @@ RSpec/ExampleLength:
     - "spec/system/**/*.rb"
     - "spec/requests/**/*.rb"
 
-# Ignore multiple expectations in system specs.
+# Ignore multiple expectations in all specs.
 RSpec/MultipleExpectations:
   Enabled: false
 
