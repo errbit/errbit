@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Comment, type: :model do
   context "validations" do
-    it "requires a body" do
+    it "is expected to require a body" do
       comment = build(:comment, body: nil)
       expect(comment.valid?).to eq(false)
       expect(comment.errors[:body]).to include("can't be blank")
