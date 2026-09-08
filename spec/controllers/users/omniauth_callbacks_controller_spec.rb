@@ -114,4 +114,103 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   end
 
   # See spec/acceptance/sign_in_with_github_spec.rb for 'Signing in with GitHub' integration tests.
+
+  describe "#openid_connect" do
+    before do
+      Errbit::Config.oidc_issuer = "https://issuer.example.com"
+      Errbit::Config.oidc_site_title = "OpenID Connect"
+      Errbit::Config.oidc_auto_provision = false
+      request.env["devise.mapping"] = Devise.mappings[:user]
+    end
+
+    after do
+      Errbit::Config.oidc_issuer = nil
+      Errbit::Config.oidc_site_title = "OpenID Connect"
+      Errbit::Config.oidc_auto_provision = false
+      Errbit::Config.oidc_authorized_domains = nil
+    end
+
+    def stub_env_for_oidc(uid: "subject-1", email: "user@example.com", verified: true, name: "OIDC User")
+      request.env["omniauth.auth"] = Hashie::Mash.new(
+        provider: "openid_connect", uid: uid,
+        info: {email: email, email_verified: verified, name: name}
+      )
+    end
+
+    it "signs in by issuer and UID" do
+      user = create(:user, oidc_issuer: Errbit::Config.oidc_issuer, oidc_uid: "subject-1")
+      stub_env_for_oidc
+
+      get :openid_connect
+
+      expect(response).to redirect_to(root_path)
+      expect(controller.current_user).to eq(user)
+    end
+
+    it "rejects an unverified email without selecting an email match" do
+      create(:user, email: "user@example.com")
+      stub_env_for_oidc(verified: false)
+
+      get :openid_connect
+
+      expect(response).to redirect_to(new_user_session_path)
+      expect(request.flash[:error]).to include("verified email")
+    end
+
+    it "signs in an existing identity without email claims" do
+      user = create(:user, oidc_issuer: Errbit::Config.oidc_issuer, oidc_uid: "subject-1")
+      stub_env_for_oidc(email: nil, verified: false)
+
+      get :openid_connect
+
+      expect(response).to redirect_to(root_path)
+      expect(controller.current_user).to eq(user)
+    end
+
+    it "rejects a callback without a UID" do
+      stub_env_for_oidc(uid: nil)
+
+      get :openid_connect
+
+      expect(response).to redirect_to(new_user_session_path)
+      expect(request.flash[:error]).to include("user identifier")
+    end
+
+    it "rejects a callback without an email" do
+      stub_env_for_oidc(email: nil)
+
+      get :openid_connect
+
+      expect(response).to redirect_to(new_user_session_path)
+      expect(request.flash[:error]).to include("email address")
+    end
+
+    it "preserves an existing name when the provider omits one" do
+      user = create(:user, name: "Existing Name", oidc_issuer: Errbit::Config.oidc_issuer, oidc_uid: "subject-1")
+      stub_env_for_oidc(name: nil)
+
+      get :openid_connect
+
+      expect(response).to redirect_to(root_path)
+      expect(user.reload.name).to eq("Existing Name")
+    end
+
+    it "provisions a valid unknown user through the callback" do
+      Errbit::Config.oidc_auto_provision = true
+      stub_env_for_oidc
+
+      expect { get :openid_connect }.to change(User, :count).by(1)
+      expect(response).to redirect_to(root_path)
+      expect(User.where(oidc_uid: "subject-1").first).to be_present
+    end
+
+    it "rejects provisioning from an unauthorized domain" do
+      Errbit::Config.oidc_auto_provision = true
+      Errbit::Config.oidc_authorized_domains = "trusted.example"
+      stub_env_for_oidc
+
+      expect { get :openid_connect }.not_to change(User, :count)
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end

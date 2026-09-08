@@ -12,6 +12,8 @@ class User
   field :github_login
   field :github_oauth_token
   field :google_uid
+  field :oidc_issuer
+  field :oidc_uid
   field :name
   field :admin, type: Boolean, default: false
   field :per_page, type: Integer, default: PER_PAGE
@@ -39,6 +41,7 @@ class User
   field :authentication_token, type: String
 
   index authentication_token: 1
+  index({oidc_issuer: 1, oidc_uid: 1}, unique: true, sparse: true)
 
   before_save :ensure_authentication_token
 
@@ -73,6 +76,57 @@ class User
         email: email,
         google_uid: uid,
         password: Devise.friendly_token[0, 20])
+    end
+
+    def find_or_create_from_openid_connect(auth, auto_provision: false)
+      issuer = Errbit::Config.oidc_issuer
+      uid = auth[:uid].to_s
+      return if issuer.blank? || uid.blank?
+
+      user = where(oidc_issuer: issuer, oidc_uid: uid).first
+      return user if user
+
+      email = auth.dig(:info, :email).to_s.strip.downcase
+      return unless email.present? && oidc_email_verified?(auth)
+
+      user = where(email: email, oidc_issuer: nil, oidc_uid: nil).find_one_and_update(
+        {"$set" => {oidc_issuer: issuer, oidc_uid: uid}},
+        return_document: :after
+      )
+      return user if user
+
+      user = where(oidc_issuer: issuer, oidc_uid: uid).first
+      return user if user
+
+      user = where(email: email).first
+      return if user && (user.oidc_uid.present? || user.oidc_issuer.present?)
+      return unless auto_provision
+
+      return if oidc_authorized_domains.present? && oidc_authorized_domains.exclude?(email.split("@").last)
+
+      begin
+        create(
+          name: auth.dig(:info, :name).presence || email,
+          email: email,
+          oidc_issuer: issuer,
+          oidc_uid: uid,
+          password: Devise.friendly_token[0, 20]
+        )
+      rescue Mongo::Error::OperationFailure => error
+        raise unless error.code == 11_000
+
+        where(oidc_issuer: issuer, oidc_uid: uid).first
+      end
+    end
+
+    def oidc_email_verified?(auth)
+      verified = auth.dig(:info, :email_verified)
+      verified = auth.dig(:extra, :raw_info, :email_verified) if verified.nil?
+      verified == true || verified.to_s.casecmp("true").zero?
+    end
+
+    def oidc_authorized_domains
+      Errbit::Config.oidc_authorized_domains.to_s.split(",").map { |domain| domain.strip.downcase }.reject(&:blank?)
     end
   end
 
