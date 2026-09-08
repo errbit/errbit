@@ -13,7 +13,9 @@ module Api
 
       def create
         response.headers["Access-Control-Allow-Origin"] = "*"
+
         response.headers["Access-Control-Allow-Headers"] = "origin, content-type, accept"
+
         return render(status: :ok, body: "") if request.method == "OPTIONS"
 
         merged_params = if request.raw_post.present?
@@ -24,13 +26,17 @@ module Api
 
         # merge makes a copy, merge! edits in place
         merged_params.merge!("key" => request.headers["X-Airbrake-Token"]) if request.headers["X-Airbrake-Token"]
+
         merged_params.merge!("key" => authorization_token) if authorization_token
+
         report = AirbrakeApi::V3::NoticeParser.new(merged_params).report
 
         return render body: UNKNOWN_API_KEY, status: :unprocessable_content unless report.valid?
+
         return render body: VERSION_TOO_OLD, status: :unprocessable_content unless report.should_keep?
 
         report.generate_notice!
+
         render status: :created, json: {
           id: report.notice.id,
           url: report.problem.url

@@ -20,6 +20,7 @@ class AppDecorator < Draper::Decorator
     use_site_fingerprinter ? "hidden" : ""
   end
 
+  # TODO: rename to notify_user_display_class
   def notify_user_display
     object.notify_all_users ? "display: none;" : ""
   end
@@ -29,7 +30,13 @@ class AppDecorator < Draper::Decorator
   end
 
   def custom_backtrace_url(file, line)
-    format(custom_backtrace_url_template, branch: object.repo_branch, file: file, line: line,
-      ebranch: CGI.escape(object.repo_branch), efile: CGI.escape(file))
+    format(
+      custom_backtrace_url_template,
+      branch: object.repo_branch,
+      file: file,
+      line: line,
+      ebranch: CGI.escape(object.repo_branch),
+      efile: CGI.escape(file)
+    )
   end
 end

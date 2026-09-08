@@ -127,9 +127,9 @@ class AppsController < ApplicationController
     # set the app's notification service
     available_notification_classes = [NotificationService] + NotificationService.subclasses
     notification_class = available_notification_classes.detect { |c| c.name == notification_type }
-    unless notification_class.nil?
-      app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
-    end
+    return if notification_class.nil?
+
+    app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
   end
 
   def plug_params(app)
@@ -154,7 +154,7 @@ class AppsController < ApplicationController
       .gsub(/-\d+/, "")
       .split(",")
       .map { |v| v.strip.to_i }
-      .reject { |v| v == 0 }
+      .reject { |v| v.zero? }
 
     if email_at_notices.any?
       params[:app][:email_at_notices] = email_at_notices

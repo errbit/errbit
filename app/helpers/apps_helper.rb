@@ -4,8 +4,8 @@ module AppsHelper
   def link_to_copy_attributes_from_other_app
     return if App.count <= 1
 
-    html = link_to("copy settings from another app", "#",
-      class: "button copy_config")
+    html = link_to("copy settings from another app", "#", class: "button copy_config")
+
     html << select("duplicate", "app",
       App.all.asc(:name).reject { |a| a == @app }
       .collect { |p| [p.name, p.id] }, {include_blank: "[choose app]"},
@@ -15,21 +15,25 @@ module AppsHelper
 
   def any_github_repos?
     detect_any_apps_with_attributes if @any_github_repos.nil?
+
     @any_github_repos
   end
 
   def any_notification_services?
     detect_any_apps_with_attributes if @any_notification_services.present?
+
     @any_notification_services
   end
 
   def any_bitbucket_repos?
     detect_any_apps_with_attributes if @any_bitbucket_repos.nil?
+
     @any_bitbucket_repos
   end
 
   def any_issue_trackers?
     detect_any_apps_with_attributes if @any_issue_trackers.nil?
+
     @any_issue_trackers
   end
 

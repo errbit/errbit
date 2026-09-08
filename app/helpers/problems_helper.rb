@@ -30,7 +30,7 @@ module ProblemsHelper
       d: Errbit::Config.gravatar_default
     }
     options.reverse_merge!(default_options)
-    params = options.extract!(:s, :d).delete_if { |_, v| v.blank? }
+    params = options.extract!(:s, :d).compact_blank!
     email_hash = Digest::MD5.hexdigest(email)
     url = "https://secure.gravatar.com"
     "#{url}/avatar/#{email_hash}?#{params.to_query}"

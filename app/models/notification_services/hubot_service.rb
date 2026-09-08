@@ -15,9 +15,9 @@ module NotificationServices
     ]
 
     def check_params
-      if FIELDS.detect { |f| self[f[0]].blank? }
-        errors.add :base, "You must specify the URL of your hubot"
-      end
+      return if !FIELDS.detect { |f| self[f[0]].blank? }
+
+      errors.add(:base, "You must specify the URL of your hubot")
     end
 
     def url

@@ -11,9 +11,9 @@ module NotificationServices
     ]
 
     def check_params
-      if FIELDS.detect { |f| self[f[0]].blank? }
-        errors.add :base, "You must specify the URL"
-      end
+      return if !FIELDS.detect { |f| self[f[0]].blank? }
+
+      errors.add(:base, "You must specify the URL")
     end
 
     def message_for_webhook(problem)
