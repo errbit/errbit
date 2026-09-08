@@ -48,6 +48,8 @@ jobs:
             app/controllers/users_controller.rb \
             app/controllers/unlink_githubs_controller.rb \
             app/controllers/unlink_googles_controller.rb \
-            app/interactors \
+            app/models/problem.rb \
+            app/models/notice.rb \
+            app/models/user.rb \
             app/helpers \
             spec

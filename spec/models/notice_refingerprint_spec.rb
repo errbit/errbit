@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe NoticeRefingerprinter do
+RSpec.describe Notice, type: :model do
   let(:app) { create(:app) }
 
   let(:backtrace) { create(:backtrace) }
@@ -21,7 +21,7 @@ RSpec.describe NoticeRefingerprinter do
     end
 
     it "has only one err" do
-      described_class.run
+      described_class.refingerprint_all
 
       expect(Err.count).to eq(1)
     end
@@ -40,7 +40,7 @@ RSpec.describe NoticeRefingerprinter do
     end
 
     it "has three errs with default fingerprinter" do
-      described_class.run
+      described_class.refingerprint_all
 
       expect(Err.count).to eq(3)
     end
@@ -50,7 +50,7 @@ RSpec.describe NoticeRefingerprinter do
       fingerprinter.backtrace_lines = 4
       fingerprinter.save!
 
-      described_class.run
+      described_class.refingerprint_all
 
       expect(Err.count).to eq(1)
     end

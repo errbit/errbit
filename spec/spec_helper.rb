@@ -13,7 +13,6 @@ SimpleCov.start "rails" do
   primary_coverage :branch
 
   group "Decorators", "app/decorators"
-  group "Interactors", "app/interactors"
   group "Policies", "app/policies"
   group "Views", "app/views"
 end

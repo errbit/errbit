@@ -38,6 +38,32 @@ class Notice
   validates :notifier, presence: true
 
   scope :ordered, -> { order_by(:created_at.asc) }
+
+  def self.refingerprint_all
+    count = Notice.count
+    Rails.logger.info format("Regenerating notice fingerprints for %i notices", count)
+
+    Notice.no_timeout.each_with_index do |notice, index|
+      app = notice.app
+      notice.err = app.find_or_create_err!(
+        error_class: notice.error_class,
+        environment: notice.environment_name,
+        fingerprint: app.notice_fingerprinter.generate(app.api_key, notice, notice.backtrace)
+      )
+      notice.save!
+
+      next unless (index + 1) % 100 == 0
+
+      Rails.logger.info format(
+        "%.1f%% complete, %i notice(s) remaining", index * 100 / count, count - index
+      )
+    end
+
+    Rails.logger.info "Finished generating notice fingerprints"
+    Rails.logger.info "Destroying orphaned err records"
+    Err.each { |err| err.destroy if err.notices.size == 0 }
+    Rails.logger.info "Finished destroying orphaned err records"
+  end
   scope :reverse_ordered, -> { order_by(:created_at.desc) }
   scope :for_errs, lambda { |errs|
     where(:err_id.in => errs.all.map(&:id))
@@ -141,7 +167,7 @@ class Notice
 
   def sanitize_hash(hash)
     hash.recurse do |recurse_hash|
-      recurse_hash.inject({}) do |h, (k, v)|
+      recurse_hash.each_with_object({}) do |(k, v), h|
         if k.is_a?(String)
           h[k.gsub(".", "&#46;").gsub(/^\$/, "&#36;")] = v
         else

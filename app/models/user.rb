@@ -41,6 +41,7 @@ class User
   index authentication_token: 1
 
   before_save :ensure_authentication_token
+  before_destroy :remove_from_watched_apps
 
   validates :name, presence: true
   validates :github_login, uniqueness: {allow_nil: true}
@@ -133,6 +134,13 @@ class User
   end
 
   private
+
+  def remove_from_watched_apps
+    App.watched_by(self).each do |app|
+      watcher = app.watchers.where(user: self).first
+      app.watchers.delete(watcher) if watcher
+    end
+  end
 
   def generate_authentication_token
     loop do
