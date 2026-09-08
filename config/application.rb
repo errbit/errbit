@@ -16,6 +16,7 @@ require "action_view/railtie"
 # require "action_cable/engine"
 # require "rails/test_unit/railtie"
 
+require_relative "../app/lib/errbit/version"
 require_relative "../lib/errbit/self_error_reporter"
 
 # Require the gems listed in Gemfile, including any gems
@@ -55,6 +56,7 @@ module Errbit
       Airbrake.configure do |config|
         config.environment = Rails.env.to_s
         config.root_directory = Rails.root
+        config.app_version = Errbit::Version.to_s
       end
     end
 

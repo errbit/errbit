@@ -56,6 +56,7 @@ RSpec.describe Errbit::SelfErrorReporter do
     notice = Notice.last
     expect(notice.error_class).to eq("StandardError")
     expect(notice.message).to include("self error")
+    expect(notice.app_version).to eq(Errbit::Version.to_s)
   end
 
   it "passes the Self.Errbit app API key to the Airbrake v3 parser" do
