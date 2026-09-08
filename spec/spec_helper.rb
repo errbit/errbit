@@ -16,6 +16,8 @@ SimpleCov.start "rails" do
   group "Interactors", "app/interactors"
   group "Policies", "app/policies"
   group "Views", "app/views"
+
+  skip "app/views/kaminari"
 end
 
 require File.expand_path("../../config/environment", __FILE__)
