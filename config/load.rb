@@ -46,6 +46,18 @@ Errbit::Config = Configurator.run(
   google_redirect_uri: ["GOOGLE_REDIRECT_URI"],
   google_authorized_domains: ["GOOGLE_AUTHORIZED_DOMAINS"],
 
+  # OIDC
+  oidc_authentication: ["OIDC_AUTHENTICATION"],
+  oidc_site_title: ["OIDC_SITE_TITLE"],
+  oidc_issuer: ["OIDC_ISSUER"],
+  oidc_client_id: ["OIDC_CLIENT_ID"],
+  oidc_secret: ["OIDC_SECRET"],
+  oidc_redirect_uri: ["OIDC_REDIRECT_URI"],
+  oidc_scopes: ["OIDC_SCOPES"],
+  oidc_uid_field: ["OIDC_UID_FIELD"],
+  oidc_auto_provision: ["OIDC_AUTO_PROVISION"],
+  oidc_authorized_domains: ["OIDC_AUTHORIZED_DOMAINS"],
+
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
     email_delivery_method = values[:email_delivery_method]
 

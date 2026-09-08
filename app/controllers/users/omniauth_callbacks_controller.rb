@@ -104,6 +104,35 @@ module Users
       end
     end
 
+    def openid_connect
+      auth = request.env["omniauth.auth"]
+      site_title = Errbit::Config.oidc_site_title
+
+      if current_user
+        flash[:error] = "Linking #{site_title} accounts is not supported."
+        return redirect_to user_path(current_user)
+      end
+
+      uid = auth&.dig(:uid).to_s
+      return oidc_failure("#{site_title} did not provide a usable user identifier.") if uid.blank?
+
+      user = User.find_or_create_from_openid_connect(
+        auth,
+        auto_provision: Errbit::Config.oidc_auto_provision
+      )
+      if user&.persisted?
+        user.update(name: auth.dig(:info, :name)) if auth.dig(:info, :name).present? && user.name.blank?
+        flash[:success] = I18n.t("devise.omniauth_callbacks.success", kind: site_title)
+        sign_in_and_redirect user, event: :authentication
+      else
+        email = auth&.dig(:info, :email).to_s.strip
+        return oidc_failure("#{site_title} did not provide an email address.") if email.blank?
+        return oidc_failure("#{site_title} did not provide a verified email address.") unless User.oidc_email_verified?(auth)
+
+        oidc_failure("There are no authorized users with #{site_title} login '#{email}'. Please ask an administrator to register your user account.")
+      end
+    end
+
     private
 
     def update_user_with_github_attributes(user, login, token)
@@ -111,6 +140,11 @@ module Users
         github_login: login,
         github_oauth_token: token
       )
+    end
+
+    def oidc_failure(message)
+      flash[:error] = message
+      redirect_to new_user_session_path
     end
 
     def github_get_user_email(client)
