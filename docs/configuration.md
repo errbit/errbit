@@ -63,6 +63,15 @@ Default: `3`.
 
 Default in container: same as default value.
 
+#### `ERRBIT_MCP_SERVER`, `ERRBIT_MCP_AUTH_TOKEN`, and `ERRBIT_MCP_ALLOWED_HOSTS`
+
+Enable the server-to-server MCP endpoint, which currently exposes read-only
+tools, and configure its bearer token. `ERRBIT_MCP_SERVER` defaults to `false`; when enabled in production,
+`ERRBIT_MCP_AUTH_TOKEN` is required. `ERRBIT_MCP_ALLOWED_HOSTS` defaults to
+`ERRBIT_HOST` when omitted or empty; standard deployments need not set it. It
+accepts a comma-separated host allow-list for reverse-proxy deployments. See
+[MCP](mcp.md) for setup, limits, and client configuration.
+
 TIP: The Errbit team recommends setting `RAILS_MAX_THREADS` to `2` in production.
 
 ### `thruster` (gem) environment variables
@@ -149,6 +158,15 @@ Default in container: same as default value.
 <dt>ERRBIT_PROBLEM_DESTROY_AFTER_DAYS
 <dd>Number of days to keep errors in the database when running `bundle exec rails errbit:clear_outdated`
 <dd>defaults to nil (off)
+<dt>ERRBIT_MCP_SERVER
+<dd>Enable the server-to-server MCP endpoint, which currently exposes read-only tools. When enabled, `ERRBIT_MCP_AUTH_TOKEN` is required in production.
+<dd>defaults to false
+<dt>ERRBIT_MCP_AUTH_TOKEN
+<dd>Bearer token required to access the MCP endpoint. This is distinct from application ingestion API keys.
+<dd>defaults to nil
+<dt>ERRBIT_MCP_ALLOWED_HOSTS
+<dd>Comma-separated Host header allow-list for the MCP endpoint. A bare host permits every port; a host with a port permits only that port.
+<dd>defaults to ERRBIT_HOST when omitted or empty; leaving it empty does not disable Host validation
 <dt>SECRET_KEY_BASE
 <dd>For production environments, you should run `bundle exec rails secret` to generate a secret, unique key for this parameter
 <dd>defaults to f258ed69266dc8ad0ca79363c3d2f945c388a9c5920fc9a1ae99a98fbb619f135001c6434849b625884a9405a60cd3d50fc3e3b07ecd38cbed7406a4fccdb59c
