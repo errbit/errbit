@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resource :unlink_github, only: :update
 
     resource :unlink_google, only: :update
+
+    resource :unlink_oidc, only: :update
   end
 
   resources :site_config, only: :index do

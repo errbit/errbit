@@ -190,6 +190,31 @@ Default in container: same as default value.
 <dt>GOOGLE_SITE_TITLE</dt>
 <dd>The title to use for Google. This value is whatever you want displayed in the Errbit UI when referring to Google.</dd>
 <dd>defaults to Google</dd>
+<dt>OIDC_AUTHENTICATION
+<dd>Allow sign-in through an OpenID Connect provider. See <a href="openid-connect.md">docs/openid-connect.md</a>
+<dd>defaults to false
+<dt>OIDC_ISSUER
+<dd>Issuer URL of the provider, copied verbatim from its discovery document, trailing slash included (for authentik: https://authentik.example.com/application/o/&lt;slug&gt;/)
+<dt>OIDC_CLIENT_ID
+<dd>Client id of the application registered with the provider
+<dt>OIDC_SECRET
+<dd>Client secret of that application
+<dt>OIDC_SITE_TITLE</dt>
+<dd>The title to use for the OpenID Connect provider. This value is whatever you want displayed in the Errbit UI when referring to it.</dd>
+<dd>defaults to OpenID Connect</dd>
+<dt>OIDC_SCOPE
+<dd>Scopes to request from the provider. The email scope is required.
+<dd>defaults to [openid,profile,email]
+<dt>OIDC_REDIRECT_URI
+<dd>The redirect URI registered with the provider
+<dd>defaults to https://$ERRBIT_HOST/users/auth/openid_connect/callback
+<dt>OIDC_UID_FIELD
+<dd>Claim identifying the account. Only change this if the provider does not issue a stable subject.
+<dd>defaults to sub
+<dt>OIDC_AUTO_PROVISION
+<dd>Allow automatic account creation after sign-in through the provider
+<dt>OIDC_AUTHORIZED_DOMAINS
+<dd>A comma-delimited list of account email domains an account may be created for, matched case-insensitively. It gates OIDC_AUTO_PROVISION only: a user whose identity is already linked signs in whatever their domain. Blank means any domain.
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER

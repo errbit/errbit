@@ -103,6 +103,8 @@ en:
       success: "Successfully authenticated from %{kind} account."
     google_login:
       domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
+    oidc_login:
+      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
         sign_in: "Sign in"

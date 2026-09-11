@@ -46,6 +46,30 @@ Errbit::Config = Configurator.run(
   google_redirect_uri: ["GOOGLE_REDIRECT_URI"],
   google_authorized_domains: ["GOOGLE_AUTHORIZED_DOMAINS"],
 
+  # OpenID Connect
+  oidc_authentication: ["OIDC_AUTHENTICATION"],
+  oidc_auto_provision: ["OIDC_AUTO_PROVISION"],
+  oidc_site_title: ["OIDC_SITE_TITLE"],
+  oidc_client_id: ["OIDC_CLIENT_ID"],
+  # Read verbatim, like github_app_private_key: a client secret has no
+  # business being run through YAML.
+  oidc_secret: [->(_values) { ENV.fetch("OIDC_SECRET", nil) }],
+  # Kept verbatim, trailing slash included: the OpenID Connect discovery
+  # document is rejected unless the issuer it reports matches this string
+  # exactly, and authentik reports one ending in a slash.
+  oidc_issuer: ["OIDC_ISSUER"],
+  oidc_scope: ["OIDC_SCOPE"],
+  # Unlike the github and google strategies, omniauth_openid_connect never
+  # derives the redirect URI from the request, so default it to the callback
+  # route on ERRBIT_HOST. Set OIDC_REDIRECT_URI when errbit is not reached
+  # over https at that host.
+  oidc_redirect_uri: ["OIDC_REDIRECT_URI", lambda do |values|
+    values[:oidc_redirect_uri].presence ||
+      "https://#{values[:host]}/users/auth/openid_connect/callback"
+  end],
+  oidc_uid_field: ["OIDC_UID_FIELD"],
+  oidc_authorized_domains: ["OIDC_AUTHORIZED_DOMAINS"],
+
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
     email_delivery_method = values[:email_delivery_method]
 

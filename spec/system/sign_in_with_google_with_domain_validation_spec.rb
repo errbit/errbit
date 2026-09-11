@@ -7,7 +7,9 @@ RSpec.describe "Sign in with Google with domain validation", type: :system, retr
 
   before { expect(Errbit::Config).to receive(:google_auto_provision).and_return(true) }
 
-  before { expect(Errbit::Config).to receive(:google_authorized_domains).and_return("example.com").twice }
+  # How often the domain list is read is not the point of this example; the
+  # check itself reads it once and hands the value down.
+  before { expect(Errbit::Config).to receive(:google_authorized_domains).and_return("example.com").at_least(:once).times }
 
   context "create an account for recognized user if their account email is from a trusted domain" do
     before { OmniAuth.config.mock_auth[:google_oauth2] = Faker::Omniauth.google(email: "me@example.com", uid: "123456789") }

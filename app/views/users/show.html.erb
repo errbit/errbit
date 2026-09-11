@@ -9,6 +9,7 @@
 <% content_for :action_bar do %>
   <%= render "shared/link_github_account", user: @user %>
   <%= render "shared/link_google_account", user: @user %>
+  <%= render "shared/link_oidc_account", user: @user %>
   <%= link_to t(".edit"), edit_user_path(@user), class: "button" %>
   <%= link_to t(".destroy"), user_path(@user),
     method: :delete,

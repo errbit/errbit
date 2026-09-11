@@ -1,0 +1,15 @@
+<%# locals: (user:) %>
+<% if Errbit::Config.oidc_authentication && user == current_user %>
+  <span class="oidc">
+    <% if user.oidc_account? %>
+      <%= link_to "Unlink #{Errbit::Config.oidc_site_title} account",
+                  user_unlink_oidc_path(user),
+                  method: :patch,
+                  data: { confirm: "Are you sure?" } %>
+    <% else %>
+      <%= link_to "Link #{Errbit::Config.oidc_site_title} account",
+                  user_openid_connect_omniauth_authorize_path,
+                  method: :post %>
+    <% end %>
+  </span>
+<% end %>
