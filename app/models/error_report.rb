@@ -19,9 +19,8 @@ class ErrorReport
     :notifier, :problem, :problem_was_resolved, :request, :server_environment,
     :user_attributes
 
-  def initialize(xml_or_attributes)
-    @attributes = xml_or_attributes
-    @attributes = Hoptoad.parse_xml!(@attributes) if @attributes.is_a? String
+  def initialize(attributes)
+    @attributes = attributes
     @attributes = @attributes.with_indifferent_access
     @attributes.each { |k, v| instance_variable_set(:"@#{k}", v) }
   end

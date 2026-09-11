@@ -3,57 +3,6 @@
 require "rails_helper"
 
 RSpec.describe "Notices management", type: :request do
-  let(:errbit_app) { create(:app, api_key: "APIKEY") }
-
-  describe "create a new notice" do
-    context "with valid notice" do
-      let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
-
-      it "save a new notice" do
-        expect do
-          post "/notifier_api/v2/notices", params: {data: xml}
-          expect(response).to be_successful
-        end.to change(errbit_app.problems, :count).by(1)
-      end
-    end
-
-    context "with notice with empty backtrace" do
-      let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice_without_line_of_backtrace.xml").read }
-
-      it "save a new notice" do
-        expect do
-          post "/notifier_api/v2/notices", params: {data: xml}
-          expect(response).to be_successful
-        end.to change(errbit_app.problems, :count).by(1)
-      end
-    end
-
-    context "with notice with bad api_key" do
-      let(:errbit_app) { create(:app) }
-
-      let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
-
-      it "not save a new notice and return 422" do
-        expect do
-          post "/notifier_api/v2/notices", params: {data: xml}
-          expect(response).to have_http_status(:unprocessable_content)
-          expect(response.body).to eq("Your API key is unknown")
-        end.not_to change(errbit_app.problems, :count)
-      end
-    end
-
-    context "with GET request" do
-      let(:xml) { Rails.root.join("spec/fixtures/hoptoad_test_notice.xml").read }
-
-      it "save a new notice" do
-        expect do
-          get "/notifier_api/v2/notices", params: {data: xml}
-          expect(response).to be_successful
-        end.to change(errbit_app.problems, :count).by(1)
-      end
-    end
-  end
-
   describe "malformed request parameters" do
     before do
       allow(Errbit::SelfErrorReporter).to receive(:public_environment?).and_return(true)
@@ -89,7 +38,7 @@ RSpec.describe "Notices management", type: :request do
       notice_count = Notice.count
 
       expect do
-        post "/notifier_api/v2/notices", params: "{", headers: {
+        post "/api/v3/projects/invalid/notices", params: "{", headers: {
           "CONTENT_TYPE" => "application/json",
           "ACCEPT" => "application/json"
         }
@@ -100,7 +49,7 @@ RSpec.describe "Notices management", type: :request do
       notice = Notice.last
       expect(notice.error_class).to eq("ActionDispatch::Http::Parameters::ParseError")
       expect(notice.request["cgi-data"]).to include(
-        "PATH_INFO" => "/notifier_api/v2/notices",
+        "PATH_INFO" => "/api/v3/projects/invalid/notices",
         "REQUEST_METHOD" => "POST",
         "CONTENT_TYPE" => "application/json"
       )
