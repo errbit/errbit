@@ -34,8 +34,17 @@ class Configurator
   #   config.key_one
   #   #=> 'another'
   #
-  # @param Hash map of configuration keys with array values where the array is
-  #   a list of environment variables to scan for configuration
+  # @example Using typed values
+  #   config = Configurator.run(
+  #     port: {env: 'PORT', type: :integer}
+  #   )
+  #
+  #   config.port
+  #   #=> 3000
+  #
+  # @param [Hash] mapping configuration keys mapped to legacy environment-name
+  #   arrays or typed definitions with :env, :type, and optional :override keys
+  #   Supported types are :boolean, :integer, :string_array, and :integer_array.
   # @return OpenStruct configuration object
   def self.run(mapping)
     reader = new(mapping)
@@ -54,13 +63,104 @@ class Configurator
 
   # Process the environment variable values and store the overrides
   def scan
-    @mapping.each do |key, values|
-      @overrides[key] = values.pop if values.last.is_a? Proc
-      env_name = values.find { |v| ENV[v] }
-      @storage[key] = if env_name
-        ENV[env_name].empty? ? "" : YAML.parse(ENV[env_name]).to_ruby
-      end
+    @mapping.each do |key, definition|
+      env_names, type, override = parse_definition(definition)
+      @overrides[key] = override if override
+      env_name = env_names.find { |name| ENV[name] }
+      @storage[key] = parse_value(ENV[env_name], type, env_name) if env_name
     end
+  end
+
+  def parse_definition(definition)
+    if definition.is_a?(Hash)
+      env_names = Array(definition.fetch(:env))
+      raise ArgumentError, "configuration environment names cannot be empty" if env_names.empty?
+
+      [env_names, definition[:type], definition[:override]]
+    else
+      values = Array(definition).dup
+      override = values.pop if values.last.is_a? Proc
+      [values, nil, override]
+    end
+  end
+
+  def parse_value(value, type, env_name)
+    return value.empty? ? "" : YAML.parse(value).to_ruby unless type
+
+    case type
+    when :boolean
+      parse_boolean(value, env_name)
+    when :integer
+      parse_integer(value, env_name)
+    when :string_array
+      parse_array(value, env_name) { |item| item.to_s.strip }
+    when :integer_array
+      parse_array(value, env_name) { |item| parse_integer(item, env_name) }
+    else
+      raise ArgumentError, "Unsupported configuration type #{type.inspect}"
+    end
+  end
+
+  def parse_boolean(value, env_name)
+    value = strip_quotes(value.to_s.strip)
+    raise ArgumentError, "#{env_name} cannot be empty" if value.empty?
+
+    case value.downcase
+    when "true" then true
+    when "false" then false
+    else
+      raise ArgumentError, "#{env_name} must be true or false"
+    end
+  end
+
+  def parse_integer(value, env_name)
+    value = strip_quotes(value.to_s.strip)
+    raise ArgumentError, "#{env_name} cannot be empty" if value.empty?
+
+    begin
+      Integer(value, 10)
+    rescue ArgumentError
+      raise ArgumentError, "#{env_name} must contain an integer, got #{value.inspect}"
+    end
+  end
+
+  def parse_array(value, env_name)
+    value = value.to_s.strip
+    raise ArgumentError, "#{env_name} cannot be empty" if value.empty?
+
+    value = strip_quotes(value)
+    values = if value.start_with?("[") || value.end_with?("]")
+      unless value.start_with?("[") && value.end_with?("]")
+        raise ArgumentError, "#{env_name} must contain a valid list"
+      end
+
+      parse_yaml_array(value, env_name)
+    else
+      value.split(",")
+    end
+
+    if values.any? { |item| item.to_s.strip.empty? }
+      raise ArgumentError, "#{env_name} must not contain empty list elements"
+    end
+
+    values.map { |item| yield item }
+  end
+
+  def strip_quotes(value)
+    if value.match?(/\A(['"]).*\1\z/)
+      value[1...-1]
+    else
+      value
+    end
+  end
+
+  def parse_yaml_array(value, env_name)
+    parsed = YAML.safe_load(value, permitted_classes: [], aliases: false)
+    raise ArgumentError, "#{env_name} must contain a list" unless parsed.is_a?(Array)
+
+    parsed
+  rescue Psych::Exception
+    raise ArgumentError, "#{env_name} must contain a valid list"
   end
 
   # Apply the override functions
