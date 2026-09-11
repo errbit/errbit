@@ -4,7 +4,7 @@
 
 <% on_page_that_can_include_multiple_different_apps = params[:controller] == "problems" %>
 
-<%= form_tag do %>
+<%= form_tag({}, authenticity_token: form_authenticity_token) do %>
   <table class="errs selectable">
     <thead>
       <tr>
