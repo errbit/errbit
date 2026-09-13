@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AppsController < ApplicationController
-  layout "errbit"
+  layout "errbit", except: :index
 
   include ProblemsSearcher
 
