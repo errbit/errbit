@@ -7,8 +7,6 @@ module ProblemsSearcher
     helper_method :params_sort, :params_order, :selected_problems, :selected_problems_ids, :err_ids
   end
 
-  private
-
   def params_sort
     @params_sort ||= if ["environment", "app", "message", "last_notice_at", "count"].member?(params[:sort])
       params[:sort]

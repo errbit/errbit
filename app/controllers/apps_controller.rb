@@ -84,8 +84,6 @@ class AppsController < ApplicationController
     end
   end
 
-  private
-
   def app_scope
     @app_scope ||= params[:search].present? ? App.search(params[:search]) : App.all
   end
@@ -95,7 +93,11 @@ class AppsController < ApplicationController
   end
 
   def app
-    @app ||= App.find(params[:app_id] || params[:id])
+    @app ||= if params[:app_id] || params[:id]
+      App.find(params[:app_id] || params[:id])
+    else
+      App.new(request.get? ? {} : app_params)
+    end
   end
 
   def app_decorate
@@ -121,6 +123,8 @@ class AppsController < ApplicationController
   def users
     @users ||= User.all.sort_by { |u| u.name.downcase }
   end
+
+  private
 
   def initialize_subclassed_notification_service
     notification_type = app_params

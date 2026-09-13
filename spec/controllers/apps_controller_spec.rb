@@ -249,6 +249,18 @@ RSpec.describe AppsController, type: :controller do
       end
     end
 
+    describe "POST /apps without stubs" do
+      it "builds and persists a new app from submitted params" do
+        expect do
+          post :create, params: {app: app_params}
+        end.to change(App, :count).by(1)
+
+        expect(controller.app).to be_persisted
+        expect(controller.app).to be_a(App)
+        expect(controller.app.name).to eq("BestApp")
+      end
+    end
+
     describe "PATCH /apps/:id" do
       before do
         @app = create(:app)

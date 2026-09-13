@@ -130,8 +130,6 @@ class ProblemsController < ApplicationController
     end
   end
 
-  private
-
   def app_scope
     @app_scope ||= params[:app_id] ? App.where(_id: params.expect(:app_id)) : App.all
   end
@@ -172,6 +170,8 @@ class ProblemsController < ApplicationController
       finder.page(params[:page]).per(current_user.per_page)
     end
   end
+
+  private
 
   def need_selected_problem
     return if err_ids.any?

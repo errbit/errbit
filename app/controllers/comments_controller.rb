@@ -24,8 +24,6 @@ class CommentsController < ApplicationController
     redirect_to app_problem_path(app, problem)
   end
 
-  private
-
   def app
     @app ||= App.find(params[:app_id])
   end
@@ -35,8 +33,14 @@ class CommentsController < ApplicationController
   end
 
   def comment
-    @comment ||= Comment.new(comment_params)
+    @comment ||= if params[:id]
+      Comment.find(params[:id])
+    else
+      Comment.new(comment_params)
+    end
   end
+
+  private
 
   def comment_params
     # merge makes a copy, merge! edits in place
