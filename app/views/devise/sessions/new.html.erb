@@ -43,6 +43,17 @@
                              autocomplete: "current-password",
                              tabindex: 2 %>
       </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check">
+          <%= f.check_box :remember_me, class: "form-check-input", checked: true, tabindex: 3 %>
+          <%= f.label :remember_me, "Remember me", class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <div class="text-center">
+        <%= f.submit t(".sign_in"), class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 </div>
@@ -51,19 +62,5 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div>
     <%= link_to "forgot it?", new_password_path(resource_name), id: "forgot_password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div>
-      <%= f.check_box :remember_me, tabindex: 3 %>
-
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div>
-    <button type="submit">
-      <%= t(".sign_in") %>
-    </button>
   </div>
 <% end %>
