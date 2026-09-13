@@ -206,9 +206,11 @@ en:
       success: "That's sad. %{name} is no longer part of your team."
       error: "You can't delete yourself"
     fields:
-      name: Name
+      name: "Name"
+      name_placeholder: "Jon Snow"
       username: Username
       email: Email
+      email_placeholder: "jon.snow@example.com"
       entries: Entries per page
       time_zone: Time Zone
       password: Password
