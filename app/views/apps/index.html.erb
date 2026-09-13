@@ -1,5 +1,18 @@
 <% content_for :title, t(".title") %>
 
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= t(".title") %></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
 <% content_for :action_bar do %>
   <% if current_user.admin? %>
     <span>
