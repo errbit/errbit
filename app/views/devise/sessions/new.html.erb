@@ -1,8 +1,5 @@
 <% content_for :title, "Sign in" %>
 
-<% auth_key = Devise.authentication_keys.first %>
-<% auth_key_autocomplete = Errbit::Config.user_has_username ? "username" : "email" %>
-
 <% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
   <% content_for :action_bar do %>
     <div>
@@ -21,6 +18,25 @@
   <% end %>
 <% end %>
 
+<% auth_key = Devise.authentication_keys.first %>
+
+<% auth_text = Errbit::Config.user_has_username ? "Username" : "Email address" %>
+
+<% auth_key_autocomplete = Errbit::Config.user_has_username ? "username" : "email" %>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center m-auto">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-3">
+        <%= f.label auth_key, auth_text, class: "form-label" %>
+
+        <%= f.email_field auth_key, class: "form-control", placeholder: auth_text, required: true, autofocus: true, autocomplete: auth_key_autocomplete, tabindex: 1 %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div>
     <%= f.label auth_key %>
@@ -29,7 +45,7 @@
   </div>
 
   <div>
-    <%= link_to "forgot it?", new_password_path(resource_name), class: "float-right", id: "forgot_password" %>
+    <%= link_to "forgot it?", new_password_path(resource_name), id: "forgot_password" %>
 
     <%= f.label :password %>
 
