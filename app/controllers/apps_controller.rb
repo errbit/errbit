@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AppsController < ApplicationController
+  layout "errbit"
+
   include ProblemsSearcher
 
   before_action :require_admin!, except: [:index, :show, :search]
