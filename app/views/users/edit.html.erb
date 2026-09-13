@@ -8,7 +8,7 @@
           <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
           <li class="breadcrumb-item"><%= link_to("Users", users_path) %></li>
           <li class="breadcrumb-item"><%= link_to(@user.name, user_path(@user)) %></li>
-          <li class="breadcrumb-item active" aria-current="page"><%= "#{t(".title")} #{@user.name}" %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= t(".title") %></li>
         </ol>
       </nav>
     </div>
