@@ -1,5 +1,19 @@
 <% content_for :title, @user.name %>
 
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item"><%= link_to("Users", users_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
 <% if Errbit::Config.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
   <% content_for :title_avatar do %>
     <%= image_tag gravatar, class: "title-avatar", alt: "" %>
