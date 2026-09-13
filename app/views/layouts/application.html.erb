@@ -42,7 +42,7 @@
         <% end %>
       </div>
 
-      <div>
+      <div class="container">
         <%= render "shared/flash_messages" %>
 
         <%= yield %>
@@ -55,10 +55,16 @@
       <% end %>
     </div>
 
-    <div>
-      <%= t(".powered_html", link: link_to(t(".errbit"), "https://github.com/errbit/errbit", target: "_blank")) %>
-      <br>
-      <%= Errbit::Version %>
+    <div class="container">
+      <div class="row text-center">
+        <div class="col text-muted">
+          <%= t(".powered_html", link: link_to(t(".errbit"), "https://github.com/errbit/errbit", target: "_blank")) %>
+
+          <br>
+
+          <%= Errbit::Version %>
+        </div>
+      </div>
     </div>
 
     <%= yield :scripts %>
