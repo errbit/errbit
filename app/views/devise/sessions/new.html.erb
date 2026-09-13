@@ -1,3 +1,14 @@
+<div class="row">
+  <div class="col">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+        <li class="breadcrumb-item active" aria-current="page">Sign in</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
 <% content_for :title, "Sign in" %>
 
 <% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
