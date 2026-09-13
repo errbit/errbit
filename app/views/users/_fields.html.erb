@@ -2,19 +2,19 @@
 
 <%= errors_for user %>
 
-<div class="required">
+<div class="">
   <%= f.label :name, t(".name") %>
   <%= f.text_field :name %>
 </div>
 
 <% if Errbit::Config.user_has_username %>
-  <div class="required">
+  <div class="">
     <%= f.label :username, t(".username") %>
     <%= f.text_field :username, autocomplete: "username" %>
   </div>
 <% end %>
 
-<div class="required">
+<div class="">
   <%= f.label :email, t(".email") %>
   <%= f.text_field :email, autocomplete: "email" %>
 </div>
@@ -26,28 +26,28 @@
   </div>
 <% end %>
 
-<div class="required">
+<div class="">
   <%= f.label :per_page, t(".entries") %>
   <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>
 </div>
 
-<div class="required">
+<div class="">
   <%= f.label :time_zone, t(".time_zone") %>
   <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all %>
 </div>
 
-<div class="required">
+<div class="">
   <%= f.label :password, t(".password") %>
   <%= f.password_field :password, autocomplete: "new-password" %>
 </div>
 
-<div class="required">
+<div class="">
   <%= f.label :password_confirmation, t(".password_confirmation") %>
   <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
 </div>
 
 <% if current_user.admin? %>
-  <div class="checkbox">
+  <div class="">
     <%= f.check_box :admin %>
     <%= f.label :admin, t(".admin") %>
   </div>
