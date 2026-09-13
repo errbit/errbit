@@ -11,6 +11,7 @@
 
 <% content_for :title, "Sign in" %>
 
+<!-- TODO: style later
 <% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
   <% content_for :action_bar do %>
     <div>
@@ -28,6 +29,7 @@
     </div>
   <% end %>
 <% end %>
+-->
 
 <% auth_key = Devise.authentication_keys.first %>
 
