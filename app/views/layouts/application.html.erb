@@ -7,7 +7,8 @@
       <%= yield(:page_title).present? ? yield(:page_title) : yield(:title) %>
     </title>
 
-    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
@@ -22,35 +23,35 @@
   <body>
     <div>
       <div>
-        <%= link_to t(".errbit"), root_path %>
-        <%= render "shared/navigation" if current_user %>
-        <%= render "shared/session" %>
+        <%#= link_to t(".errbit"), root_path %>
+        <%#= render "shared/navigation" if current_user %>
+        <%#= render "shared/session" %>
       </div>
     </div>
 
     <div>
       <div>
         <%= yield :title_avatar %>
-        <h1><%= yield :title %></h1>
+        <h1><%#= yield :title %></h1>
 
         <span><%= yield :meta %></span>
 
         <% if (action_bar = yield(:action_bar)).present? %>
           <div>
-            <%= action_bar %>
+            <%#= action_bar %>
           </div>
         <% end %>
       </div>
 
       <div class="container">
-        <%= render "shared/flash_messages" %>
+        <%#= render "shared/flash_messages" %>
 
         <%= yield %>
       </div>
 
       <% if content_for?(:comments) %>
         <div>
-          <%= yield :comments %>
+          <%#= yield :comments %>
         </div>
       <% end %>
     </div>
