@@ -32,23 +32,23 @@
     class: "delete button" %>
 <% end %>
 
-<table class="single_user">
+<table id="user" class="table table-striped table-hover table-bordered">
   <tr>
     <th><%= t(".email") %></th>
-    <td class="main"><%= @user.email %></td>
+    <td><%= @user.email %></td>
   </tr>
 
   <% if Errbit::Config.user_has_username %>
     <tr>
       <th><%= t(".username") %></th>
-      <td class="main"><%= @user.username %></td>
+      <td><%= @user.username %></td>
     </tr>
   <% end %>
 
   <% if Errbit::Config.github_authentication && @user.github_login.present? %>
     <tr>
       <th><%= "#{Errbit::Config.github_site_title} Login" %></th>
-      <td class="main"><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
+      <td><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
     </tr>
   <% end %>
 
