@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col">
       <%= f.label :username, t(".username"), class: "form-label" %>
-      <%= f.text_field :username, autocomplete: "username" %>
+      <%= f.text_field :username, autocomplete: "username", class: "form-control", required: true %>
     </div>
   </div>
 <% end %>
@@ -21,7 +21,7 @@
 <div class="row">
   <div class="col">
     <%= f.label :email, t(".email"), class: "form-label" %>
-    <%= f.text_field :email, autocomplete: "email" %>
+    <%= f.text_field :email, autocomplete: "email", placeholder: t(".email_placeholder"), class: "form-control", required: true %>
   </div>
 </div>
 
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="col">
       <%= f.label :github_login, "#{Errbit::Config.github_site_title} login", class: "form-label" %>
-      <%= f.text_field :github_login %>
+      <%= f.text_field :github_login, class: "form-control" %>
     </div>
   </div>
 <% end %>
@@ -37,28 +37,28 @@
 <div class="row">
   <div class="col">
     <%= f.label :per_page, t(".entries"), class: "form-label" %>
-    <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>
+    <%= f.select :per_page, [10, 20, 30, 50, 75, 100], {}, {class: "form-select"}  %>
   </div>
 </div>
 
 <div class="row">
   <div class="col">
     <%= f.label :time_zone, t(".time_zone"), class: "form-label" %>
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all, {}, class: "form-select" %>
   </div>
 </div>
 
 <div class="row">
   <div class="col">
     <%= f.label :password, t(".password"), class: "form-label" %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
   </div>
 </div>
 
 <div class="row">
   <div class="col">
     <%= f.label :password_confirmation, t(".password_confirmation"), class: "form-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 </div>
 
@@ -67,7 +67,7 @@
     <div class="col">
       <div class="form-check">
         <%= f.check_box :admin, class: "form-check-input" %>
-        <%= f.label :admin, t(".admin") %>
+        <%= f.label :admin, t(".admin"), class: "form-check-label" %>
       </div>
     </div>
   </div>
