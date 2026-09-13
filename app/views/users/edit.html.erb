@@ -24,7 +24,11 @@
 <%= form_for @user, html: {autocomplete: "off"} do |f| %>
   <%= render "fields", f: f, user: @user %>
 
-  <div class="">
-    <%= f.submit t(".update_user") %>
+  <div class="row">
+    <div class="col text-center">
+      <%= button_tag type: :submit, class: "btn btn-primary" do %>
+        <%= inline_svg_tag "icons/floppy.svg" %> <%= t(".update_user") %>
+      <% end %>
+    </div>
   </div>
 <% end %>
