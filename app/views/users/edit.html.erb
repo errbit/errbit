@@ -1,5 +1,20 @@
 <% content_for :title, "#{t(".title")} #{@user.name}" %>
 
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item"><%= link_to("Users", users_path) %></li>
+          <li class="breadcrumb-item"><%= link_to(@user.name, user_path(@user)) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= "#{t(".title")} #{@user.name}" %></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
 <% content_for :action_bar do %>
   <%= render "shared/link_github_account", user: @user %>
   <%= render "shared/link_google_account", user: @user %>
@@ -9,7 +24,7 @@
 <%= form_for @user, html: {autocomplete: "off"} do |f| %>
   <%= render "fields", f: f, user: @user %>
 
-  <div class="buttons">
+  <div class="">
     <%= f.submit t(".update_user") %>
   </div>
 <% end %>
