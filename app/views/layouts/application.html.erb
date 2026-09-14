@@ -13,7 +13,7 @@
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag :application %>
+    <%= stylesheet_link_tag :application, integrity: true %>
     <%= javascript_include_tag :app %>
     <%= javascript_importmap_tags %>
 
@@ -29,9 +29,15 @@
       </div>
     </div>
 
+    <% if (breadcrumb = yield(:breadcrumb)).present? %>
+      <div class="container">
+        <%= breadcrumb %>
+      </div>
+    <% end %>
+
     <div>
       <div>
-        <%= yield :title_avatar %>
+        <%#= yield :title_avatar %>
         <h1><%#= yield :title %></h1>
 
         <span><%= yield :meta %></span>
