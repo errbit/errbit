@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  layout "errbit"
+
   expose :app
   expose :problem
   expose :comment
