@@ -44,10 +44,12 @@
   </div>
 </div>
 
-<div>
-  <%= f.label :custom_backtrace_url_template, t(".custom_backtrace_url_template") %>
+<div class="row">
+  <div class="col">
+    <%= f.label :custom_backtrace_url_template, t(".custom_backtrace_url_template"), class: "form-label" %>
 
-  <%= f.text_field :custom_backtrace_url_template, placeholder: "e.g. https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}" %>
+    <%= f.text_field :custom_backtrace_url_template, placeholder: "e.g. https://gitea.example.com/repos/name/src/branch/%{branch}/%{file}#L%{line}", class: "form-control" %>
+  </div>
 </div>
 
 <div>
