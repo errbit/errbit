@@ -43,7 +43,7 @@
       <div class="mb-3">
         <%= f.label auth_key, auth_text, class: "form-label" %>
 
-        <%= f.email_field auth_key, class: "form-control", placeholder: auth_text, required: true, autofocus: true, autocomplete: auth_key_autocomplete, tabindex: 1 %>
+        <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), class: "form-control", placeholder: auth_text, required: true, autofocus: true, autocomplete: auth_key_autocomplete, tabindex: 1 %>
       </div>
 
       <div class="mb-3">
