@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  expose :app
-  expose :problem
-  expose :comment
+  helper_method :app, :problem, :comment
 
   def create
     problem.comments << comment
@@ -24,6 +22,22 @@ class CommentsController < ApplicationController
     end
 
     redirect_to app_problem_path(app, problem)
+  end
+
+  def app
+    @app ||= App.find(params[:app_id])
+  end
+
+  def problem
+    @problem ||= app.problems.find(params[:problem_id])
+  end
+
+  def comment
+    @comment ||= if params[:id]
+      Comment.find(params[:id])
+    else
+      Comment.new(comment_params)
+    end
   end
 
   private
