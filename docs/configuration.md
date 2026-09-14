@@ -190,6 +190,20 @@ Default in container: same as default value.
 <dt>GOOGLE_SITE_TITLE</dt>
 <dd>The title to use for Google. This value is whatever you want displayed in the Errbit UI when referring to Google.</dd>
 <dd>defaults to Google</dd>
+<dt>OIDC_AUTHENTICATION</dt>
+<dd>Enable OpenID Connect sign-in; defaults to false</dd>
+<dt>OIDC_SITE_TITLE</dt>
+<dd>Display title for the OpenID Connect provider; defaults to OpenID Connect</dd>
+<dt>OIDC_ISSUER, OIDC_CLIENT_ID, OIDC_SECRET, OIDC_REDIRECT_URI</dt>
+<dd>OpenID Connect provider settings, required when OIDC is enabled. Host, scheme, and port are derived from the issuer.</dd>
+<dt>OIDC_SCOPES</dt>
+<dd>Comma-separated OpenID Connect scopes; defaults to openid,profile,email</dd>
+<dt>OIDC_UID_FIELD</dt>
+<dd>Stable UID claim; defaults to sub</dd>
+<dt>OIDC_AUTO_PROVISION</dt>
+<dd>Allow automatic creation of users with verified provider email; defaults to false</dd>
+<dt>OIDC_AUTHORIZED_DOMAINS</dt>
+<dd>Optional comma-separated exact email domains allowed for provisioning</dd>
 <dt>EMAIL_DELIVERY_METHOD
 <dd>:smtp or :sendmail, depending on how you want Errbit to send email
 <dt>SMTP_SERVER

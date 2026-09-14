@@ -302,6 +302,43 @@ Devise.setup do |config|
       google_options
   end
 
+  if Errbit::Config.oidc_authentication || Rails.env.test?
+    if Errbit::Config.oidc_authentication
+      missing = %i[oidc_issuer oidc_client_id oidc_secret oidc_redirect_uri].select do |key|
+        Errbit::Config.public_send(key).blank?
+      end
+      raise ArgumentError, "Missing OIDC configuration: #{missing.join(", ")}" if missing.any?
+    end
+
+    issuer = nil
+    if Errbit::Config.oidc_authentication
+      begin
+        issuer = URI.parse(Errbit::Config.oidc_issuer)
+      rescue URI::InvalidURIError
+        raise ArgumentError, "OIDC_ISSUER must be a valid HTTPS issuer URL without query or fragment"
+      end
+      unless issuer.scheme == "https" && issuer.host.present? && issuer.query.nil? && issuer.fragment.nil?
+        raise ArgumentError, "OIDC_ISSUER must be a valid HTTPS issuer URL without query or fragment"
+      end
+    end
+
+    config.omniauth :openid_connect,
+      name: :openid_connect,
+      issuer: Errbit::Config.oidc_issuer,
+      scope: Errbit::Config.oidc_scopes.to_s.split(",").map(&:strip).reject(&:blank?),
+      uid_field: Errbit::Config.oidc_uid_field || "sub",
+      discovery: true,
+      response_type: :code,
+      client_options: {
+        port: issuer&.port,
+        scheme: issuer&.scheme,
+        host: issuer&.host,
+        identifier: Errbit::Config.oidc_client_id,
+        secret: Errbit::Config.oidc_secret,
+        redirect_uri: Errbit::Config.oidc_redirect_uri
+      }
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
