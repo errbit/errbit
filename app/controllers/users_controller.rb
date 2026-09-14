@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  layout "errbit"
+  layout "errbit", except: :index
 
   def index
     @users = policy_scope(User)
