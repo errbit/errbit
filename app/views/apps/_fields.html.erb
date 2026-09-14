@@ -2,13 +2,15 @@
 
 <%= errors_for app %>
 
-<div class="">
-  <%= f.label :name, t(".name") %>
+<div class="row">
+  <div class="col">
+    <%= f.label :name, t(".name"), class: "form-label" %>
 
-  <%= f.text_field :name %>
+    <%= f.text_field :name, placeholder: "", class: "form-control" %>
+  </div>
 </div>
 
-<% unless app.new_record? %>
+<% if !app.new_record? %>
   <div>
     <label><%= t(".api_key") %></label>
 
@@ -18,22 +20,28 @@
   </div>
 <% end %>
 
-<div>
-  <%= f.label :repository_branch, t(".repository_branch") %>
+<div class="row">
+  <div class="col">
+    <%= f.label :repository_branch, t(".repository_branch"), class: "form-label" %>
 
-  <%= f.text_field :repository_branch, placeholder: "e.g. main" %>
+    <%= f.text_field :repository_branch, placeholder: "e.g. main", class: "form-control" %>
+  </div>
 </div>
 
-<div>
-  <%= f.label :github_repo, t(".github_repo") %>
+<div class="row">
+  <div class="col">
+    <%= f.label :github_repo, t(".github_repo"), class: "form-label" %>
 
-  <%= f.text_field :github_repo, placeholder: "e.g. errbit/errbit for https://github.com/errbit/errbit" %>
+    <%= f.text_field :github_repo, placeholder: "e.g. errbit/errbit for https://github.com/errbit/errbit", class: "form-control" %>
+  </div>
 </div>
 
-<div>
-  <%= f.label :bitbucket_repo, t(".bitbucket_repo") %>
+<div class="row">
+  <div class="col">
+    <%= f.label :bitbucket_repo, t(".bitbucket_repo"), class: "form-label" %>
 
-  <%= f.text_field :bitbucket_repo, placeholder: "e.g. errbit/errbit for https://bitbucket.org/errbit/errbit" %>
+    <%= f.text_field :bitbucket_repo, placeholder: "e.g. errbit/errbit for https://bitbucket.org/errbit/errbit", class: "form-control" %>
+  </div>
 </div>
 
 <div>
