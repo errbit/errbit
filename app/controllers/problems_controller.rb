@@ -12,10 +12,12 @@ class ProblemsController < ApplicationController
   end
 
   expose(:app) do
+    # archspec:disable-next-line dependencies.allow -- TODO: move presentation decoration out of controllers
     AppDecorator.new(app_scope.find(params.expect(:app_id)))
   end
 
   expose(:problem) do
+    # archspec:disable-next-line dependencies.allow -- TODO: move presentation decoration out of controllers
     ProblemDecorator.new(app.problems.find(params.expect(:id)))
   end
 
@@ -58,6 +60,7 @@ class ProblemsController < ApplicationController
           .page(params[:notice]).per(1)
         @notices.first
       end
+    # archspec:disable-next-line dependencies.allow -- TODO: move presentation decoration out of controllers
     @notice = notice ? NoticeDecorator.new(notice) : nil
     @comment = Comment.new
   end
@@ -123,6 +126,7 @@ class ProblemsController < ApplicationController
     if selected_problems.length < 2
       flash[:notice] = I18n.t("controllers.problems.flash.need_two_errors_merge")
     else
+      # archspec:disable-next-line dependencies.allow -- TODO: move problem orchestration behind an application boundary
       ProblemMerge.new(selected_problems).merge
 
       flash[:notice] = I18n.t("controllers.problems.flash.merge_several.success", nb: selected_problems.count)
