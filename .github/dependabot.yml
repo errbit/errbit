@@ -29,6 +29,7 @@ updates:
       interval: "daily"
     cooldown:
       default-days: 0
+    open-pull-requests-limit: 99
     assignees:
       - "biow0lf"
 
@@ -38,6 +39,7 @@ updates:
       interval: "daily"
     cooldown:
       default-days: 0
+    open-pull-requests-limit: 99
     assignees:
       - "biow0lf"
 
@@ -47,5 +49,6 @@ updates:
       interval: "daily"
     cooldown:
       default-days: 0
+    open-pull-requests-limit: 99
     assignees:
       - "biow0lf"
