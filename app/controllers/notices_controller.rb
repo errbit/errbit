@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class NoticesController < ApplicationController
+  VERSION_TOO_OLD = "Notice for old app version ignored"
+  UNKNOWN_API_KEY = "Your API key is unknown"
+  XML_NOT_WELL_FORMED = "The provided XML was not well-formed"
+
   class ParamsError < StandardError
   end
 
@@ -21,13 +25,13 @@ class NoticesController < ApplicationController
         end
         render xml: api_xml
       else
-        render body: "Notice for old app version ignored"
+        render body: VERSION_TOO_OLD
       end
     else
-      render body: "Your API key is unknown", status: :unprocessable_content
+      render body: UNKNOWN_API_KEY, status: :unprocessable_content
     end
   rescue Nokogiri::XML::SyntaxError
-    render body: "The provided XML was not well-formed", status: :unprocessable_content
+    render body: XML_NOT_WELL_FORMED, status: :unprocessable_content
   end
 
   # Redirects a notice to the problem page. Useful when using User Information at Airbrake gem.

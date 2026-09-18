@@ -14,7 +14,7 @@ module Users
 
       user_email = github_get_user_email(client)
       if user_email.nil?
-        flash[:error] = "Could not retrieve user's email from GitHub"
+        flash[:error] = t("controllers.users.omniauth_callbacks.github.email_not_found")
 
         nil
       else
@@ -32,12 +32,12 @@ module Users
       if current_user
         # ... unless a user is already registered with same GitHub login
         if github_user && github_user != current_user
-          flash[:error] = "User already registered with #{github_site_title} login '#{github_login}'!"
+          flash[:error] = t("controllers.users.omniauth_callbacks.github.already_registered", github_site_title: github_site_title, github_login: github_login)
         else
           # Add GitHub details to current user
           update_user_with_github_attributes(current_user, github_login, github_token)
 
-          flash[:success] = "Successfully linked #{github_site_title} account!"
+          flash[:success] = t("controllers.users.omniauth_callbacks.github.linked", github_site_title: github_site_title)
         end
         # User must have clicked 'link account' from their user page, so redirect there.
         redirect_to user_path(current_user)
@@ -49,7 +49,7 @@ module Users
       elsif flash[:error]
         redirect_to new_user_session_path
       else
-        flash[:error] = "There are no authorized users with #{github_site_title} login '#{github_login}'. Please ask an administrator to register your user account."
+        flash[:error] = t("controllers.users.omniauth_callbacks.github.not_authorized", github_site_title: github_site_title, github_login: github_login)
 
         redirect_to new_user_session_path
       end
@@ -65,12 +65,12 @@ module Users
       if current_user
         # ... unless a user is already registered with same google login
         if google_user && google_user != current_user
-          flash[:error] = "User already registered with #{google_site_title} login '#{google_email}'!"
+          flash[:error] = t("controllers.users.omniauth_callbacks.google.already_registered", google_site_title: google_site_title, google_email: google_email)
         else
           # Add google details to current user
           current_user.update(google_uid: google_uid)
 
-          flash[:success] = "Successfully linked #{google_email} account!"
+          flash[:success] = t("controllers.users.omniauth_callbacks.google.linked", google_email: google_email)
         end
 
         # User must have clicked 'link account' from their user page, so redirect there.
@@ -98,7 +98,7 @@ module Users
           redirect_to new_user_session_path
         end
       else
-        flash[:error] = "There are no authorized users with #{google_site_title} login '#{google_email}'. Please ask an administrator to register your user account."
+        flash[:error] = t("controllers.users.omniauth_callbacks.google.not_authorized", google_site_title: google_site_title, google_email: google_email)
 
         redirect_to new_user_session_path
       end

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user_from_token!
   before_action :authenticate_user!
   before_action :set_time_zone
+  before_action :set_locale
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -23,6 +24,20 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     Time.zone = current_user.time_zone if user_signed_in?
+  end
+
+  def set_locale
+    return if request.path.match?(Errbit::LocaleMiddleware::API_PATHS)
+
+    I18n.locale = authenticated_locale || I18n.locale
+  end
+
+  def authenticated_locale
+    return unless user_signed_in?
+    return I18n.locale if current_user.locale.blank?
+
+    locale = Errbit::Locales.normalize(current_user.locale)
+    Errbit::Locales.include?(locale) ? locale : I18n.default_locale
   end
 
   def authenticate_user_from_token!

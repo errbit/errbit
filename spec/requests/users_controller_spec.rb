@@ -5,6 +5,20 @@ require "rails_helper"
 RSpec.describe UsersController, type: :request do
   # before { I18n.locale = "pt-BR" }
 
+  describe "#edit with a Portuguese locale" do
+    let(:current_user) { create(:user, admin: false, locale: "pt-BR") }
+
+    before do
+      sign_in(current_user)
+      get edit_user_path(current_user)
+    end
+
+    it "renders the profile form" do
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Vincular conta do GitHub")
+    end
+  end
+
   describe "#index" do
     context "when user is logged in" do
       context "when user has access" do
