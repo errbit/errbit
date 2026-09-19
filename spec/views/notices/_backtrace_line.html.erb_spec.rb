@@ -16,8 +16,9 @@ RSpec.describe "notices/_backtrace_line.html.erb", type: :view do
   end
 
   before do
+    assign(:app, double)
     allow(line).to receive(:link_to_source_file) { |&block| view.capture(&block) }
-    render partial: "notices/backtrace_line", locals: {line: line, app: double}
+    render partial: "notices/backtrace_line", locals: {line: line}
   end
 
   it "preserves gem highlighting" do

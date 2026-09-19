@@ -44,7 +44,7 @@ RSpec.describe AppsController, type: :controller do
         sign_in admin
         unwatched_app && watched_app_1 && watched_app_2
         get :index
-        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
+        expect(assigns(:apps).entries).to eq(App.all.to_a.sort.entries)
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe AppsController, type: :controller do
         sign_in user
         unwatched_app && watched_app_1 && watched_app_2
         get :index
-        expect(controller.apps.entries).to eq(App.all.to_a.sort.entries)
+        expect(assigns(:apps).entries).to eq(App.all.to_a.sort.entries)
       end
     end
   end
@@ -66,7 +66,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "finds the app" do
         get :show, params: {id: app.id}
-        expect(controller.app).to eq(app)
+        expect(assigns(:app)).to eq(app)
       end
 
       it "should not raise errors for app with err without notices" do
@@ -79,16 +79,6 @@ RSpec.describe AppsController, type: :controller do
         expect(response).to be_successful
       end
 
-      it "should list available watchers by name" do
-        create(:user, name: "Carol")
-        create(:user, name: "Alice")
-        create(:user, name: "Betty")
-
-        get :show, params: {id: app.id}
-
-        expect(controller.users.to_a).to eq(User.all.to_a.sort_by(&:name))
-      end
-
       context "pagination" do
         before do
           35.times { create(:err, problem: create(:problem, app: app)) }
@@ -97,7 +87,7 @@ RSpec.describe AppsController, type: :controller do
         it "should have default per_page value for user" do
           get :show, params: {id: app.id}
 
-          expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
+          expect(assigns(:problems).to_a.size).to eq(User::PER_PAGE)
         end
 
         it "should be able to override default per_page value" do
@@ -105,7 +95,7 @@ RSpec.describe AppsController, type: :controller do
 
           get :show, params: {id: app.id}
 
-          expect(controller.problems.to_a.size).to eq(10)
+          expect(assigns(:problems).to_a.size).to eq(10)
         end
       end
 
@@ -117,14 +107,14 @@ RSpec.describe AppsController, type: :controller do
         context "and no params" do
           it "shows only unresolved problems" do
             get :show, params: {id: app.id}
-            expect(controller.problems.size).to eq(1)
+            expect(assigns(:problems).size).to eq(1)
           end
         end
 
         context "and all_problems=true params" do
           it "shows all errors" do
             get :show, params: {id: app.id, all_errs: true}
-            expect(controller.problems.size).to eq(2)
+            expect(assigns(:problems).size).to eq(2)
           end
         end
       end
@@ -141,7 +131,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for all environments" do
             get :show, params: {id: app.id}
 
-            expect(controller.problems.size).to eq(20)
+            expect(assigns(:problems).size).to eq(20)
           end
         end
 
@@ -149,7 +139,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just production" do
             get :show, params: {id: app.id, environment: "production"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(assigns(:problems).size).to eq(5)
           end
         end
 
@@ -157,7 +147,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just staging" do
             get :show, params: {id: app.id, environment: "staging"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(assigns(:problems).size).to eq(5)
           end
         end
 
@@ -165,7 +155,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just development" do
             get :show, params: {id: app.id, environment: "development"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(assigns(:problems).size).to eq(5)
           end
         end
 
@@ -173,7 +163,7 @@ RSpec.describe AppsController, type: :controller do
           it "shows errs for just test" do
             get :show, params: {id: app.id, environment: "test"}
 
-            expect(controller.problems.size).to eq(5)
+            expect(assigns(:problems).size).to eq(5)
           end
         end
       end
@@ -187,7 +177,7 @@ RSpec.describe AppsController, type: :controller do
 
         get :show, params: {id: app.id}
 
-        expect(controller.app).to eq(app)
+        expect(assigns(:app)).to eq(app)
       end
     end
   end
@@ -200,18 +190,18 @@ RSpec.describe AppsController, type: :controller do
     describe "GET /apps/new" do
       it "instantiates a new app with a prebuilt watcher" do
         get :new
-        expect(controller.app).to be_a(App)
-        expect(controller.app).to be_new_record
-        expect(controller.app.watchers).not_to be_empty
+        expect(assigns(:app)).to be_a(App)
+        expect(assigns(:app)).to be_new_record
+        expect(assigns(:app).watchers).not_to be_empty
       end
 
       it "should copy attributes from an existing app" do
         @app = create(:app, name: "do not copy", github_repo: "test/example")
         get :new, params: {copy_attributes_from: @app.id}
-        expect(controller.app).to be_a(App)
-        expect(controller.app).to be_new_record
-        expect(controller.app.name).to be_blank
-        expect(controller.app.github_repo).to eq("test/example")
+        expect(assigns(:app)).to be_a(App)
+        expect(assigns(:app)).to be_new_record
+        expect(assigns(:app).name).to be_blank
+        expect(assigns(:app).github_repo).to eq("test/example")
       end
     end
 
@@ -221,7 +211,7 @@ RSpec.describe AppsController, type: :controller do
 
         get :edit, params: {id: app.id}
 
-        expect(controller.app).to eq(app)
+        expect(assigns(:app)).to eq(app)
       end
     end
 
@@ -255,9 +245,9 @@ RSpec.describe AppsController, type: :controller do
           post :create, params: {app: app_params}
         end.to change(App, :count).by(1)
 
-        expect(controller.app).to be_persisted
-        expect(controller.app).to be_a(App)
-        expect(controller.app.name).to eq("BestApp")
+        expect(assigns(:app)).to be_persisted
+        expect(assigns(:app)).to be_a(App)
+        expect(assigns(:app).name).to eq("BestApp")
       end
     end
 
@@ -405,7 +395,7 @@ RSpec.describe AppsController, type: :controller do
 
       it "should find the app" do
         delete :destroy, params: {id: @app.id}
-        expect(controller.app).to eq(@app)
+        expect(assigns(:app)).to eq(@app)
       end
 
       it "should destroy the app" do
@@ -478,15 +468,15 @@ RSpec.describe AppsController, type: :controller do
     it "searches problems for given string" do
       get :search, params: {search: "\"Foo\""}
 
-      expect(controller.apps).to include(@app_1)
-      expect(controller.apps).not_to include(@app_2)
+      expect(assigns(:apps)).to include(@app_1)
+      expect(assigns(:apps)).not_to include(@app_2)
     end
 
     it "works when given string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.apps).to include(@app_1)
-      expect(controller.apps).to include(@app_2)
+      expect(assigns(:apps)).to include(@app_1)
+      expect(assigns(:apps)).to include(@app_2)
     end
   end
 end

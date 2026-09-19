@@ -7,76 +7,90 @@ class AppsController < ApplicationController
   before_action :parse_email_at_notices_or_set_default, only: [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, only: [:create, :update]
 
-  helper_method :app_scope, :apps, :app, :app_decorate, :all_errs, :problems, :users
-
   def index
+    @apps = decorated_apps
   end
 
   def show
-    app
+    @app = App.find(params.expect(:id))
+    load_app_show
   end
 
   def new
-    plug_params(app)
+    @app = App.new
+    plug_params(@app)
+    @app_decorate = AppDecorator.new(@app)
   end
 
   def edit
-    plug_params(app)
+    @app = App.find(params.expect(:id))
+    plug_params(@app)
+    @app_decorate = AppDecorator.new(@app)
   end
 
   def create
     process_fingerprinter_choice
+    @app = App.new(app_params)
     initialize_subclassed_notification_service
 
-    if app.save
+    if @app.save
       flash[:success] = I18n.t("controllers.apps.flash.create.success")
 
-      redirect_to app_url(app)
+      redirect_to app_url(@app)
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.create.error")
+      @app_decorate = AppDecorator.new(@app)
 
       render :new
     end
   end
 
   def update
+    @app = App.find(params.expect(:id))
     process_fingerprinter_choice
     initialize_subclassed_notification_service
-    app.update(app_params)
+    @app.update(app_params)
 
-    if app.save
+    if @app.save
       flash[:success] = I18n.t("controllers.apps.flash.update.success")
 
-      redirect_to app_url(app)
+      redirect_to app_url(@app)
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.update.error")
+      @app_decorate = AppDecorator.new(@app)
 
       render :edit
     end
   end
 
   def destroy
-    if app.destroy
+    @app = App.find(params.expect(:id))
+
+    if @app.destroy
       flash[:success] = I18n.t("controllers.apps.flash.destroy.success")
 
       redirect_to apps_url
     else
       flash.now[:error] = I18n.t("controllers.apps.flash.destroy.error")
+      load_app_show
 
       render :show
     end
   end
 
   def regenerate_api_key
-    app.regenerate_api_key!
-    redirect_to edit_app_path(app)
+    @app = App.find(params.expect(:id))
+    @app.regenerate_api_key!
+    redirect_to edit_app_path(@app)
   end
 
   def search
+    @apps = decorated_apps
+
     respond_to do |format|
       format.html do
         if request.xhr?
-          render partial: "apps/table", locals: {apps: apps}, layout: false
+          render partial: "apps/table", locals: {apps: @apps}, layout: false
         else
           render :index
         end
@@ -84,47 +98,31 @@ class AppsController < ApplicationController
     end
   end
 
-  def app_scope
-    @app_scope ||= params[:search].present? ? App.search(params[:search]) : App.all
-  end
-
-  def apps
-    @apps ||= app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
-  end
-
-  def app
-    @app ||= if params[:app_id] || params[:id]
-      App.find(params[:app_id] || params[:id])
-    else
-      App.new(request.get? ? {} : app_params)
-    end
-  end
-
-  def app_decorate
-    @app_decorate ||= AppDecorator.new(app)
-  end
-
-  def all_errs
-    @all_errs ||= params[:all_errs].present?
-  end
-
-  def problems
-    @problems ||= if request.format == :atom
-      app.problems.unresolved.ordered
-    else
-      pr = app.problems
-      pr = pr.unresolved unless all_errs
-      pr.in_env(
-        params[:environment]
-      ).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
-    end
-  end
-
-  def users
-    @users ||= User.all.sort_by { |u| u.name.downcase }
-  end
-
   private
+
+  def decorated_apps
+    app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+  end
+
+  def app_scope
+    params[:search].present? ? App.search(params[:search]) : App.all
+  end
+
+  def load_app_show
+    @all_errs = params[:all_errs].present?
+    @params_sort = params_sort
+    @params_order = params_order
+    @selected_problems = selected_problems
+    @problems = app_show_problems
+  end
+
+  def app_show_problems
+    return @app.problems.unresolved.ordered if request.format == :atom
+
+    pr = @app.problems
+    pr = pr.unresolved unless @all_errs
+    pr.in_env(params[:environment]).ordered_by(@params_sort, @params_order).page(params[:page]).per(current_user.per_page)
+  end
 
   def initialize_subclassed_notification_service
     notification_type = app_params
@@ -137,7 +135,7 @@ class AppsController < ApplicationController
     notification_class = available_notification_classes.detect { |c| c.name == notification_type }
     return if notification_class.nil?
 
-    app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
+    @app.notification_service = notification_class.new(params[:app][:notification_service_attributes])
   end
 
   def plug_params(app)
