@@ -49,12 +49,11 @@ RSpec.describe "problems/show.html.erb", type: :view do
   let(:app) { AppDecorator.new(problem.app) }
 
   before do
-    allow(view).to receive(:app).and_return(app)
-    allow(view).to receive(:problem).and_return(problem)
-
-    assign :comment, comment
-    assign :notices, problem.notices.page(1).per(1)
-    assign :notice, problem.notices.first
+    assign(:app, app)
+    assign(:problem, problem)
+    assign(:comment, comment)
+    assign(:notices, problem.notices.page(1).per(1))
+    assign(:notice, problem.notices.first)
 
     allow(controller).to receive(:current_user).and_return(create(:user))
   end
@@ -120,8 +119,8 @@ RSpec.describe "problems/show.html.erb", type: :view do
       controller.request.env["HTTP_REFERER"] = nil
       problem = create(:problem_with_comments)
 
-      allow(view).to receive(:problem).and_return(problem)
-      allow(view).to receive(:app).and_return(problem.app)
+      assign(:problem, problem)
+      assign(:app, problem.app)
 
       render
 
@@ -136,8 +135,8 @@ RSpec.describe "problems/show.html.erb", type: :view do
 
         with_issue_tracker("github", problem)
 
-        allow(view).to receive(:problem).and_return(problem)
-        allow(view).to receive(:app).and_return(problem.app)
+        assign(:problem, problem)
+        assign(:app, problem.app)
 
         render
 
@@ -211,10 +210,11 @@ RSpec.describe "problems/show.html.erb", type: :view do
   end
 
   describe "content_for :comments" do
+    let(:problem) { create(:problem_with_comments) }
+
     before do
-      problem = create(:problem_with_comments)
-      allow(view).to receive(:problem).and_return(problem)
-      allow(view).to receive(:app).and_return(problem.app)
+      assign(:problem, problem)
+      assign(:app, problem.app)
       allow(Errbit::Config).to receive(:use_gravatar).and_return(true)
     end
 
@@ -238,7 +238,7 @@ RSpec.describe "problems/show.html.erb", type: :view do
     it "displays comment when comment has no user" do
       with_issue_tracker("pivotal", problem)
 
-      first_comment = view.problem.comments.first
+      first_comment = problem.comments.first
       first_comment.user.destroy
       first_comment.reload
 
