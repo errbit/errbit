@@ -2,7 +2,7 @@
 
 class UserPolicy < ApplicationPolicy
   FIELDS = [
-    :name, :username, :email, :password, :github_login, :per_page, :time_zone,
+    :name, :username, :email, :password, :github_login, :per_page, :time_zone, :locale,
     :password, :password_confirmation
   ].freeze
 

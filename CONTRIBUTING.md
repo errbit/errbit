@@ -22,6 +22,27 @@ For code changes:
 - For anything that should be configurable, use environment variables and
   update the [configuration documentation](docs/configuration.md)
 
+## Translations
+
+Errbit UI translations live in `config/locales`. Developers own the source keys
+in `en.yml`; translated catalogs may omit values and fall back to English in
+production. Keep locale filenames and their top-level YAML keys identical, and
+give every catalog a non-empty `locale_name` autonym.
+
+Do not add API or notifier response messages to the locale catalogs. Those
+responses intentionally remain English. In development and test, selecting an
+incomplete locale raises a missing-translation error so contributors notice
+missing UI translations. Production falls back to English for missing
+non-English values.
+
+Run the catalog check inside the documented Podman test environment:
+
+```sh
+bundle exec rake errbit:i18n:check
+```
+
+See [docs/i18n.md](docs/i18n.md) for the catalog rules.
+
 ## Feature Requests
 
 If you'd like to add a feature to Errbit, please start by opening an

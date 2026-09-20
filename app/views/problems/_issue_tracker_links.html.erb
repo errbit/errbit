@@ -8,17 +8,17 @@
     <span>
       <%= link_to problem.issue_link, class: "goto-issue issue-tracker-button" do %>
         <img class="button-icon" src="<%= tracker_type.icons[:goto] %>">
-        go to issue
+         <%= t(".go_to_issue") %>
       <% end %>
     </span>
 
     <span>
       <%= link_to unlink_issue_app_problem_path(app, problem),
           method: :delete,
-          data: { confirm: "Unlink err issues?" },
+          data: { confirm: t(".unlink_confirm") },
           class: "unlink-issue issue-tracker-button" do %>
         <img class="button-icon" src="<%= tracker_type.icons[:create] %>">
-        unlink issue
+         <%= t(".unlink_issue") %>
       <% end %>
     </span>
 
@@ -28,7 +28,7 @@
             method: :post,
             class: "close-issue" do %>
           <img class="button-icon" src="<%= tracker_type.icons[:create] %>">
-          close issue
+           <%= t(".close_issue") %>
         <% end %>
       </span>
     <% end %>
