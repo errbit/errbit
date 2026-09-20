@@ -31,7 +31,7 @@ RSpec.describe ProblemsController, type: :controller do
       it "should have default per_page value for user" do
         get :index
 
-        expect(controller.problems.to_a.size).to eq(User::PER_PAGE)
+        expect(assigns(:problems).to_a.size).to eq(User::PER_PAGE)
       end
 
       it "should be able to override default per_page value" do
@@ -39,7 +39,7 @@ RSpec.describe ProblemsController, type: :controller do
 
         get :index
 
-        expect(controller.problems.to_a.size).to eq(10)
+        expect(assigns(:problems).to_a.size).to eq(10)
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe ProblemsController, type: :controller do
         it "shows problems for all environments" do
           get :index
 
-          expect(controller.problems.size).to eq(21)
+          expect(assigns(:problems).size).to eq(21)
         end
       end
 
@@ -64,7 +64,7 @@ RSpec.describe ProblemsController, type: :controller do
         it "shows problems for just production" do
           get :index, params: {environment: "production"}
 
-          expect(controller.problems.size).to eq(6)
+          expect(assigns(:problems).size).to eq(6)
         end
       end
 
@@ -72,7 +72,7 @@ RSpec.describe ProblemsController, type: :controller do
         it "shows problems for just staging" do
           get :index, params: {environment: "staging"}
 
-          expect(controller.problems.size).to eq(5)
+          expect(assigns(:problems).size).to eq(5)
         end
       end
 
@@ -80,7 +80,7 @@ RSpec.describe ProblemsController, type: :controller do
         it "shows problems for just development" do
           get :index, params: {environment: "development"}
 
-          expect(controller.problems.size).to eq(5)
+          expect(assigns(:problems).size).to eq(5)
         end
       end
 
@@ -88,7 +88,7 @@ RSpec.describe ProblemsController, type: :controller do
         it "shows problems for just test" do
           get :index, params: {environment: "test"}
 
-          expect(controller.problems.size).to eq(5)
+          expect(assigns(:problems).size).to eq(5)
         end
       end
     end
@@ -110,7 +110,7 @@ RSpec.describe ProblemsController, type: :controller do
 
       get :index, params: {all_errs: true}
 
-      expect(controller.problems).to eq(problems)
+      expect(assigns(:problems)).to eq(problems)
     end
   end
 
@@ -137,17 +137,17 @@ RSpec.describe ProblemsController, type: :controller do
     it "searches problems for given string" do
       get :search, params: {search: "\"Most important\""}
 
-      expect(controller.problems).to include(@problem_1)
+      expect(assigns(:problems)).to include(@problem_1)
 
-      expect(controller.problems).not_to include(@problem_2)
+      expect(assigns(:problems)).not_to include(@problem_2)
     end
 
     it "works when given string is empty" do
       get :search, params: {search: ""}
 
-      expect(controller.problems).to include(@problem_1)
+      expect(assigns(:problems)).to include(@problem_1)
 
-      expect(controller.problems).to include(@problem_2)
+      expect(assigns(:problems)).to include(@problem_2)
     end
   end
 
@@ -175,13 +175,13 @@ RSpec.describe ProblemsController, type: :controller do
     it "finds the app" do
       get :show, params: {app_id: app.id, id: err.problem.id}
 
-      expect(controller.app).to eq(app)
+      expect(assigns(:app)).to eq(app)
     end
 
     it "finds the problem" do
       get :show, params: {app_id: app.id, id: err.problem.id}
 
-      expect(controller.problem).to eq(err.problem)
+      expect(assigns(:problem)).to eq(err.problem)
     end
 
     it "successfully render page" do
@@ -249,8 +249,8 @@ RSpec.describe ProblemsController, type: :controller do
     it "finds the app and the problem" do
       patch :resolve, params: {app_id: @err.app.id, id: @err.problem.id}
 
-      expect(controller.app).to eq @err.app
-      expect(controller.problem).to eq(@err.problem)
+      expect(assigns(:app)).to eq @err.app
+      expect(assigns(:problem)).to eq(@err.problem)
     end
 
     it "should resolve the issue" do
@@ -288,15 +288,13 @@ RSpec.describe ProblemsController, type: :controller do
     context "when app has a issue tracker" do
       let(:notice) { NoticeDecorator.new(create(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
-      let(:issue_tracker) do
-        create(:issue_tracker).tap do |t|
-          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
-        end
-      end
+      let(:mock_tracker) { ErrbitPlugin::MockIssueTracker.new(foo: "one", bar: "two") }
 
       before do
-        problem.app.issue_tracker = issue_tracker
-        allow(controller).to receive(:problem).and_return(problem)
+        allow_any_instance_of(IssueTracker).to receive(:tracker).and_return(mock_tracker)
+        app = App.find(problem.app.id)
+        app.build_issue_tracker(type_tracker: "mock", options: {foo: "one", bar: "two"})
+        app.save!
         allow(controller).to receive(:current_user).and_return(user)
       end
 
@@ -311,7 +309,7 @@ RSpec.describe ProblemsController, type: :controller do
       it "should save the right title" do
         post :create_issue, params: {app_id: problem.app.id, id: problem.id}
         title = "[#{problem.environment}][#{problem.where}] #{problem.message.to_s.truncate(100)}"
-        line = issue_tracker.tracker.output.shift
+        line = mock_tracker.output.shift
         expect(line[0]).to eq(title)
       end
 
@@ -324,7 +322,7 @@ RSpec.describe ProblemsController, type: :controller do
       it "should update the problem" do
         post :create_issue, params: {app_id: problem.app.id, id: problem.id}
 
-        expect(problem.issue_link).to eq("http://example.com/mock-errbit")
+        expect(problem.reload.issue_link).to eq("http://example.com/mock-errbit")
         expect(problem.issue_type).to eq("mock")
       end
 
@@ -334,17 +332,17 @@ RSpec.describe ProblemsController, type: :controller do
         it "should save the right body" do
           post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
 
-          line = issue_tracker.tracker.output.shift
+          line = mock_tracker.output.shift
 
           expect(line[1]).to include(app_problem_url(problem.app, problem))
         end
 
         it "should render whatever the issue tracker says" do
           allow_any_instance_of(Issue).to receive(:render_body_args).and_return(
-            [{inline: "one <%= problem.id %> two"}]
+            [{inline: "one <%= @problem.id %> two"}]
           )
           post :create_issue, params: {app_id: problem.app.id, id: problem.id, format: "html"}
-          line = issue_tracker.tracker.output.shift
+          line = mock_tracker.output.shift
           expect(line[1]).to include("one #{problem.id} two")
         end
       end
@@ -367,15 +365,13 @@ RSpec.describe ProblemsController, type: :controller do
     context "when app has a issue tracker" do
       let(:notice) { NoticeDecorator.new(create(:notice)) }
       let(:problem) { ProblemDecorator.new(notice.problem) }
-      let(:issue_tracker) do
-        create(:issue_tracker).tap do |t|
-          t.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(t.options))
-        end
-      end
+      let(:mock_tracker) { ErrbitPlugin::MockIssueTracker.new(foo: "one", bar: "two") }
 
       before do
-        problem.app.issue_tracker = issue_tracker
-        allow(controller).to receive(:problem).and_return(problem)
+        allow_any_instance_of(IssueTracker).to receive(:tracker).and_return(mock_tracker)
+        app = App.find(problem.app.id)
+        app.build_issue_tracker(type_tracker: "mock", options: {foo: "one", bar: "two"})
+        app.save!
         allow(controller).to receive(:current_user).and_return(user)
       end
 
@@ -493,7 +489,7 @@ RSpec.describe ProblemsController, type: :controller do
         post :resolve_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
 
         expect(flash[:success]).to match(/2 errors have been resolved/)
-        expect(controller.selected_problems).to eq([@problem_1, @problem_2])
+        expect(assigns(:selected_problems)).to eq([@problem_1, @problem_2])
       end
     end
 
@@ -532,7 +528,7 @@ RSpec.describe ProblemsController, type: :controller do
           post :destroy_all, params: {app_id: @app.id}
         end.to change(Problem, :count).by(-2)
 
-        expect(controller.app).to eq(@app)
+        expect(assigns(:app)).to eq(@app)
       end
 
       it "should display a message" do
