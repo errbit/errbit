@@ -46,6 +46,14 @@ Errbit::Config = Configurator.run(
   google_redirect_uri: ["GOOGLE_REDIRECT_URI"],
   google_authorized_domains: ["GOOGLE_AUTHORIZED_DOMAINS"],
 
+  # MCP
+  mcp_server_enabled: ["ERRBIT_MCP_SERVER"],
+  mcp_auth_token: ["ERRBIT_MCP_AUTH_TOKEN"],
+  mcp_allowed_hosts: ["ERRBIT_MCP_ALLOWED_HOSTS", lambda do |values|
+    configured_hosts = values[:mcp_allowed_hosts]
+    configured_hosts.present? ? configured_hosts.split(",").map(&:strip).compact_blank : [values[:host]]
+  end],
+
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
     email_delivery_method = values[:email_delivery_method]
 

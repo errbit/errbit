@@ -41,6 +41,7 @@ gem "uri"
 gem "rack-timeout"
 gem "puma"
 gem "ostruct"
+gem "mcp"
 gem "securerandom"
 gem "airbrake", require: false
 
