@@ -8,7 +8,7 @@ Rails.application.configure do
     policy.base_uri :self
     policy.connect_src :self
     policy.font_src :self
-    policy.form_action :self
+    policy.form_action :self, "https://github.com", "https://accounts.google.com"
     policy.frame_src :self
     policy.frame_ancestors :self
     policy.img_src :self, "https://secure.gravatar.com", :data
