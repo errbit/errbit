@@ -5,21 +5,22 @@ require "rails_helper"
 RSpec.describe "Content Security Policy", type: :request do
   it "generates a different nonce for each response" do
     get new_user_session_path
-    first_nonce = response.headers.fetch("Content-Security-Policy").match(/nonce-([^' ]+)/)[1]
+    first_nonce = response.headers.fetch("content-security-policy").match(/nonce-([^' ]+)/)[1]
 
     get new_user_session_path
-    second_nonce = response.headers.fetch("Content-Security-Policy").match(/nonce-([^' ]+)/)[1]
+    second_nonce = response.headers.fetch("content-security-policy").match(/nonce-([^' ]+)/)[1]
 
     expect(second_nonce).not_to eq(first_nonce)
   end
 
-  it "is expected to set Content Security Policy headers" do
-    # stub SecureRandom.base64 to verify nonce-es values
-    expect(SecureRandom).to receive(:base64).and_return("U6sDCLHA1gHdzM7vepm6dA==")
-
+  it "is expected to set CSP headers with nonce equal to csp-nonce from response html" do
     get new_user_session_path
 
-    policies = response.headers.fetch("Content-Security-Policy").split(";").map(&:strip)
+    nonce = Nokogiri::HTML5(response.body).at_css("meta[name='csp-nonce']").attribute("content").value
+
+    expect(nonce.present?).to eq(true)
+
+    policies = response.headers.fetch("content-security-policy").split(";").map(&:strip)
 
     expect(policies).to include("default-src 'self'")
 
@@ -39,10 +40,24 @@ RSpec.describe "Content Security Policy", type: :request do
 
     expect(policies).to include("object-src 'none'")
 
-    expect(policies).to include("script-src 'self' 'nonce-U6sDCLHA1gHdzM7vepm6dA=='")
+    expect(policies).to include("script-src 'self' 'nonce-#{nonce}'")
 
-    expect(policies).to include("style-src 'self' 'nonce-U6sDCLHA1gHdzM7vepm6dA=='")
+    expect(policies).to include("style-src 'self' 'nonce-#{nonce}'")
 
     expect(policies).to include("upgrade-insecure-requests")
+  end
+
+  it "is expected to include nonce for <script> tags" do
+    get new_user_session_path
+
+    # binding.pry
+
+    nonce = response.headers.fetch("Content-Security-Policy").match(/nonce-([^' ]+)/)[1]
+
+    expect(response.body).to match(/<script src=[^>]+nonce="#{Regexp.escape(nonce)}"/)
+
+    expect(response.body).to match(/<script type=[^>]+nonce="#{Regexp.escape(nonce)}"/)
+
+    true
   end
 end
