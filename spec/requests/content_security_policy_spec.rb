@@ -21,23 +21,36 @@ RSpec.describe "Content Security Policy", type: :request do
     expect(second_nonce).not_to eq(first_nonce)
   end
 
-  it "restricts fonts and frames to the application origin" do
+  it "is expected to set Content Security Policy headers" do
+    # stub SecureRandom.base64 to verify nonce-es values
+    expect(SecureRandom).to receive(:base64).and_return("U6sDCLHA1gHdzM7vepm6dA==")
+
     get new_user_session_path
 
-    policy = response.headers.fetch("Content-Security-Policy")
+    policies = response.headers.fetch("Content-Security-Policy").split(";").map(&:strip)
 
-    expect(policy).to include("font-src 'self'")
-    expect(policy).to include("frame-src 'self'")
-    expect(policy).not_to include("font-src 'self' https:")
-    expect(policy).not_to include("font-src 'self' data:")
-  end
+    expect(policies).to include("default-src 'self'")
 
-  it "allows Gravatar images without allowing arbitrary HTTPS images" do
-    get new_user_session_path
+    expect(policies).to include("base-uri 'self'")
 
-    policy = response.headers.fetch("Content-Security-Policy")
+    expect(policies).to include("connect-src 'self'")
 
-    expect(policy).to include("img-src 'self' https://secure.gravatar.com data:")
-    expect(policy).not_to include("img-src 'self' https:;")
+    expect(policies).to include("font-src 'self'")
+
+    expect(policies).to include("form-action 'self' #{Errbit::Config.github_url} https://accounts.google.com")
+
+    expect(policies).to include("frame-src 'self'")
+
+    expect(policies).to include("frame-ancestors 'self'")
+
+    expect(policies).to include("img-src 'self' https://secure.gravatar.com data:")
+
+    expect(policies).to include("object-src 'none'")
+
+    expect(policies).to include("script-src 'self' 'nonce-U6sDCLHA1gHdzM7vepm6dA=='")
+
+    expect(policies).to include("style-src 'self' 'nonce-U6sDCLHA1gHdzM7vepm6dA=='")
+
+    expect(policies).to include("upgrade-insecure-requests")
   end
 end
