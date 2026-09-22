@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe "Content Security Policy", type: :request do
   it "generates a different nonce for each response" do
     get new_user_session_path
+
     first_nonce = response.headers.fetch("content-security-policy").match(/nonce-([^' ]+)/)[1]
 
     get new_user_session_path
@@ -50,14 +51,10 @@ RSpec.describe "Content Security Policy", type: :request do
   it "is expected to include nonce for <script> tags" do
     get new_user_session_path
 
-    # binding.pry
-
     nonce = response.headers.fetch("Content-Security-Policy").match(/nonce-([^' ]+)/)[1]
 
     expect(response.body).to match(/<script src=[^>]+nonce="#{Regexp.escape(nonce)}"/)
 
     expect(response.body).to match(/<script type=[^>]+nonce="#{Regexp.escape(nonce)}"/)
-
-    true
   end
 end
