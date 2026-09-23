@@ -2,39 +2,35 @@
 
 require "rails_helper"
 
-RSpec.describe OutdatedProblemClearer do
-  before do
-    allow(Errbit::Config).to receive(:notice_deprecation_days).and_return(7)
-  end
-
-  describe "#execute" do
+RSpec.describe Problem, type: :model do
+  describe ".clear_resolved!" do
     let!(:problems) { create_list(:problem, 3) }
 
-    context "without old problems" do
+    context "without problem resolved" do
       it "do nothing" do
         expect do
-          expect(subject.execute).to eq(0)
+          expect(described_class.clear_resolved!).to eq(0)
         end.not_to change(Problem, :count)
       end
 
       it "not compact database" do
         allow(Mongoid.default_client).to receive(:command).and_call_original
         expect(Mongoid.default_client).not_to receive(:command).with(compact: an_instance_of(String))
-        subject.execute
+        described_class.clear_resolved!
       end
     end
 
-    context "with old problems" do
+    context "with problem resolve" do
       before do
         allow(Mongoid.default_client).to receive(:command).and_call_original
         allow(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
-        problems.first.update(last_notice_at: Time.zone.at(946_684_800.0))
-        problems.second.update(last_notice_at: Time.zone.at(946_684_800.0))
+        problems.first.resolve!
+        problems.second.resolve!
       end
 
-      it "deletes old problems" do
+      it "delete problem resolve" do
         expect do
-          expect(subject.execute).to eq(2)
+          expect(described_class.clear_resolved!).to eq(2)
         end.to change(Problem, :count).by(-2)
 
         expect(Problem.where(_id: problems.first.id).first).to eq(nil)
@@ -44,7 +40,7 @@ RSpec.describe OutdatedProblemClearer do
       it "compact database" do
         expect(Mongoid.default_client).to receive(:command).with(compact: an_instance_of(String)).at_least(1)
 
-        subject.execute
+        described_class.clear_resolved!
       end
     end
   end

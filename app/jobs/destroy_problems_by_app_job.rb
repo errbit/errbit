@@ -7,6 +7,6 @@ class DestroyProblemsByAppJob < ApplicationJob
   def perform(app_id)
     app = App.find_by(id: app_id)
 
-    ProblemDestroy.execute(app.problems)
+    Problem.destroy_all_with_dependencies(app.problems)
   end
 end
