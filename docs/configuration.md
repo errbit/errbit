@@ -83,6 +83,13 @@ You can learn more about thruster environment variables [here](https://github.co
 
 ### Application environment variables
 
+Errbit validates settings with a known type while loading the environment. Array
+settings use the bracketed format shown below as the canonical syntax. Typed
+arrays also accept comma-separated and single-value forms.
+Boolean settings must be `true` or `false`, and numeric settings must contain a
+valid integer. Invalid typed settings prevent Errbit from booting so a
+configuration error is reported immediately.
+
 #### `MONGO_URL`
 
 MongoDB connection string in the form
@@ -186,7 +193,7 @@ Default in container: same as default value.
 <dd>The redirect URI for your application (useful if you want to redirect using HTTPS)
 <dd>defaults to the HTTP location of ERRBIT_HOST
 <dt>GOOGLE_AUTHORIZED_DOMAINS
-<dd>A comma-delimited list of account domains that are permitted to sign-in (recommended to set when GOOGLE_AUTO_PROVISION is set to true)
+<dd>A list of account domains that are permitted to sign-in (recommended to set when GOOGLE_AUTO_PROVISION is set to true). Bracketed array syntax is canonical; comma-separated values are also accepted.
 <dt>GOOGLE_SITE_TITLE</dt>
 <dd>The title to use for Google. This value is whatever you want displayed in the Errbit UI when referring to Google.</dd>
 <dd>defaults to Google</dd>
@@ -205,7 +212,7 @@ Default in container: same as default value.
 <dt>SMTP_DOMAIN
 <dd>HELO domain to set for outgoing SMTP messages, you can also use SENDGRID_DOMAIN
 <dt>SMTP_ENABLE_STARTTLS_AUTO
-<dd>Detects if STARTTLS is enabled in your SMTP server and starts to use it
+<dd>Detects if STARTTLS is enabled in your SMTP server and starts to use it. Must be `true` or `false`.
 <dt>SMTP_OPENSSL_VERIFY_MODE
 <dd>When using TLS, you can set how OpenSSL checks the certificate. This is really useful if you need to validate a self-signed and/or a wildcard certificate. You can use the name of an OpenSSL verify constant ('none', 'peer', 'client_once', 'fail_if_no_peer_cert').
 <dt>SENDMAIL_LOCATION

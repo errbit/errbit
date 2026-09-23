@@ -58,7 +58,7 @@ class User
       match_data = /.+@(?<domain>.+)$/.match(email)
       return false if match_data.nil?
 
-      Errbit::Config.google_authorized_domains.split(",").include?(match_data[:domain])
+      Errbit::Config.google_authorized_domains.include?(match_data[:domain])
     end
 
     # @param access_token [String]
