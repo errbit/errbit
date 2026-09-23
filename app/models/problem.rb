@@ -220,6 +220,7 @@ class Problem
   end
 
   def self.merge!(*problems)
+    # archspec:disable-next-line dependencies.forbid -- TODO: move merge orchestration fully into the interactor
     ProblemMerge.new(problems).merge
   end
 
