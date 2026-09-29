@@ -628,8 +628,8 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     underscore-rails (1.8.3)
-    unicode-display_width (3.2.0)
-      unicode-emoji (~> 4.1)
+    unicode-display_width (3.3.0)
+      unicode-emoji (~> 4.3)
     unicode-emoji (4.3.0)
     uri (1.1.1)
     useragent (0.16.11)
@@ -991,7 +991,7 @@ CHECKSUMS
   turbo-rails (2.0.23) sha256=ee0d90733aafff056cf51ff11e803d65e43cae258cc55f6492020ec1f9f9315f
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   underscore-rails (1.8.3) sha256=d37d0a297df9078a27e00df6bfa3f3b110eb27dd8f84c1588a9727a2cfbada47
-  unicode-display_width (3.2.0) sha256=0cdd96b5681a5949cdbc2c55e7b420facae74c4aaf9a9815eee1087cb1853c42
+  unicode-display_width (3.3.0) sha256=4b7aa66a4b11db50f6f7e98411215cd0dd10eaecb665d36eec5bcacb3fa0b613
   unicode-emoji (4.3.0) sha256=11c02fa73290378c066bb0562cd4c87d8e1b706fbbe0059ca12746a4244de8ce
   uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
