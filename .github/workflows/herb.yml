@@ -40,4 +40,4 @@ jobs:
 
       - run: |
           gem install herb
-          gem exec herb analize
+          gem exec herb analyze
