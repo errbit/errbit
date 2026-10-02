@@ -17,6 +17,10 @@ on:
 # Declare default permissions as read only.
 permissions: read-all
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   analysis:
     name: Scorecard analysis

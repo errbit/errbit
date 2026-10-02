@@ -16,6 +16,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   CI: "true"
   SE_AVOID_STATS: "true"
