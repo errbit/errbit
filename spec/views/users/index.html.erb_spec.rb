@@ -10,6 +10,6 @@ RSpec.describe "users/index.html.erb", type: :view do
   it "should see users option" do
     render
 
-    expect(rendered).to match(/class="user_list"/)
+    expect(rendered).to match(/id="users"/)
   end
 end

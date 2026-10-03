@@ -1,5 +1,19 @@
 <% content_for :title, @user.name %>
 
+<% content_for :breadcrumb do %>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+          <li class="breadcrumb-item"><%= link_to("Users", users_path) %></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
 <% if Errbit::Config.use_gravatar && (gravatar = gravatar_url(@user.email, s: 86)) %>
   <% content_for :title_avatar do %>
     <%= image_tag gravatar, class: "title-avatar", alt: "" %>
@@ -18,23 +32,28 @@
     class: "delete button" %>
 <% end %>
 
-<table class="single_user">
+<table id="user" class="table table-striped table-hover table-bordered">
+  <tr>
+    <th><%= t(".name") %></th>
+    <td><%= @user.name %></td>
+  </tr>
+
   <tr>
     <th><%= t(".email") %></th>
-    <td class="main"><%= @user.email %></td>
+    <td><%= @user.email %></td>
   </tr>
 
   <% if Errbit::Config.user_has_username %>
     <tr>
       <th><%= t(".username") %></th>
-      <td class="main"><%= @user.username %></td>
+      <td><%= @user.username %></td>
     </tr>
   <% end %>
 
   <% if Errbit::Config.github_authentication && @user.github_login.present? %>
     <tr>
       <th><%= "#{Errbit::Config.github_site_title} Login" %></th>
-      <td class="main"><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
+      <td><%= link_to @user.github_login, "#{Errbit::Config.github_url}/#{@user.github_login}" %></td>
     </tr>
   <% end %>
 
