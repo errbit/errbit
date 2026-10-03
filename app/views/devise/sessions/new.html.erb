@@ -1,52 +1,79 @@
+<div class="row">
+  <div class="col">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+        <li class="breadcrumb-item active" aria-current="page">Sign in</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
 <% content_for :title, "Sign in" %>
 
-<% auth_key = Devise.authentication_keys.first %>
-<% auth_key_autocomplete = Errbit::Config.user_has_username ? "username" : "email" %>
-
+<!-- TODO: style later
 <% if Errbit::Config.github_authentication || Errbit::Config.google_authentication %>
   <% content_for :action_bar do %>
-    <div class="action-bar">
+    <div>
       <% if Errbit::Config.github_authentication %>
-        <span class="github">
+        <span>
           <%= link_to "Sign in with #{Errbit::Config.github_site_title}", user_github_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
 
       <% if Errbit::Config.google_authentication %>
-        <span class="google">
+        <span>
           <%= link_to "Sign in with #{Errbit::Config.google_site_title}", user_google_oauth2_omniauth_authorize_path, method: :post %>
         </span>
       <% end %>
     </div>
   <% end %>
 <% end %>
+-->
+
+<% auth_key = Devise.authentication_keys.first %>
+
+<% auth_text = Errbit::Config.user_has_username ? "Username" : "Email address" %>
+
+<% auth_key_autocomplete = Errbit::Config.user_has_username ? "username" : "email" %>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center m-auto">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-3">
+        <%= f.label auth_key, auth_text, class: "form-label" %>
+
+        <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), class: "form-control", placeholder: auth_text, required: true, autofocus: true, autocomplete: auth_key_autocomplete, tabindex: 1 %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, "Password", class: "form-label" %>
+
+        <%= f.password_field :password,
+                             class: "form-control",
+                             placeholder: "Password",
+                             required: true,
+                             autocomplete: "current-password",
+                             tabindex: 2 %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check">
+          <%= f.check_box :remember_me, class: "form-check-input", checked: true, tabindex: 3 %>
+          <%= f.label :remember_me, "Remember me", class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <div class="text-center">
+        <%= f.submit t(".sign_in"), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="required">
-    <%= f.label auth_key %>
-
-    <%= f.text_field auth_key, type: (Errbit::Config.user_has_username ? "text" : "email"), autocomplete: auth_key_autocomplete, tabindex: 1, autofocus: true %>
-  </div>
-
-  <div class="required">
-    <%= link_to "forgot it?", new_password_path(resource_name), class: "float-right", id: "forgot_password" %>
-
-    <%= f.label :password %>
-
-    <%= f.password_field :password, autocomplete: "current-password", tabindex: 2 %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="checkbox">
-      <%= f.check_box :remember_me, tabindex: 3 %>
-
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="buttons">
-    <button type="submit" class="sign_in">
-      <%= t(".sign_in") %>
-    </button>
+  <div>
+    <%= link_to "forgot it?", new_password_path(resource_name), id: "forgot_password" %>
   </div>
 <% end %>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class NoticesController < ApplicationController
+  layout "errbit"
+
   class ParamsError < StandardError
   end
 
