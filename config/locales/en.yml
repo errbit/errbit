@@ -54,6 +54,10 @@ en:
       title: "Errbit"
       errbit: "Errbit"
       powered_html: "Powered by %{link} : the open source error catcher."
+    errbit: # TODO: remove after porting to Bootstrap 5
+      title: "Errbit"
+      errbit: "Errbit"
+      powered_html: "Powered by %{link} : the open source error catcher."
 
   shared:
     navigation:
