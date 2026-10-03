@@ -80,20 +80,12 @@ class User
     super || PER_PAGE
   end
 
-  def watching?(app)
-    apps.all.include?(app)
-  end
-
   def password_required?
     github_login.present? ? false : super
   end
 
   def github_account?
     github_login.present? && github_oauth_token.present?
-  end
-
-  def can_create_github_issues?
-    github_account? && Errbit::Config.github_access_scope.include?("repo")
   end
 
   def github_login=(login)

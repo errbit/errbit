@@ -92,11 +92,6 @@ class App
     problem.errs.create!(attrs.slice(:fingerprint, :problem_id))
   end
 
-  # Mongoid Bug: find(id) on association proxies returns an Enumerator
-  def self.find_by_id!(app_id)
-    find app_id
-  end
-
   def self.find_by_api_key!(key)
     find_by(api_key: key)
   end
