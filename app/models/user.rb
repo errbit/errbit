@@ -93,7 +93,15 @@ class User
   end
 
   def can_create_github_issues?
-    github_account? && Errbit::Config.github_access_scope.include?("repo")
+    github_account? && (Errbit::Config.github_access_scope & ["repo", "public_repo"]).any?
+  end
+
+  # The GitHub issue tracker creates issues with the user's own OAuth token
+  # when they have linked their GitHub account. Users who have not linked one
+  # fall back to the credentials configured on the app itself, and we cannot
+  # inspect the permissions of those, so we have to assume they are sufficient.
+  def github_issues_permitted?
+    !github_account? || can_create_github_issues?
   end
 
   def github_login=(login)
