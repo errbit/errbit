@@ -26,6 +26,7 @@ module AirbrakeApi
       end
 
       def report
+        # archspec:disable-next-line dependencies.forbid -- TODO: separate API parsing from application report construction
         ErrorReport.new(attributes)
       end
 
