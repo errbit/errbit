@@ -17,16 +17,17 @@ class AppDecorator < Draper::Decorator
   end
 
   def custom_notice_fingerprinter_class
-    use_site_fingerprinter ? "hidden" : ""
+    use_site_fingerprinter ? "d-none" : ""
   end
 
   # TODO: rename to notify_user_display_class
-  def notify_user_display
-    object.notify_all_users ? "display: none;" : ""
-  end
+  # TODO: looks like a dead code
+  # def notify_user_display
+  #   object.notify_all_users ? "display: none;" : ""
+  # end
 
   def notify_err_class
-    object.notify_on_errs ? "" : "hidden"
+    object.notify_on_errs ? "" : "d-none"
   end
 
   def custom_backtrace_url(file, line)

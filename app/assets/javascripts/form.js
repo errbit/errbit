@@ -11,7 +11,6 @@ $(function(){
   if($('div.notification_service.nested').length)
     activateTypeSelector('notification_service', 'notification_params');
 
-  $('body').addClass('has-js');
   $('.label_radio').click(function(){
     activateLabelIcons();
   });
