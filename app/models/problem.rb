@@ -137,6 +137,73 @@ class Problem
     }, return_document: :after)
   end
 
+  def self.merge!(*problems)
+    problems = problems.flatten.uniq
+    raise ArgumentError, "need at least 2 unique problems" if problems.length < 2
+
+    merged_problem = problems.first
+    child_problems = problems[1..]
+
+    child_problems.each do |problem|
+      merged_problem.errs.concat problem.errs
+      merged_problem.comments.concat problem.comments
+      problem.reload # dereference all associations before deleting the problem
+      problem.destroy_with_dependencies
+    end
+    merged_problem.recache
+    merged_problem
+  end
+
+  def self.recache_all
+    count = Problem.count
+    Rails.logger.info format("Re-caching problem attributes for %i problems", count)
+
+    Problem.no_timeout.each_with_index do |problem, index|
+      problem.recache
+      problem.destroy if problem.notices_count == 0
+
+      next unless (index + 1) % 100 == 0
+
+      Rails.logger.info format(
+        "%.1f%% complete, %i problem(s) remaining", index * 100 / count, count - index
+      )
+    end
+
+    Rails.logger.info "Finished re-caching problem attributes"
+  end
+
+  def self.clear_resolved!
+    problems = Problem.resolved
+    count = problems.count
+    return count if count.zero?
+
+    problems.each(&:destroy_with_dependencies)
+    compact_database
+    count
+  end
+
+  def self.clear_outdated!
+    problems = Problem.where(:last_notice_at.lt => Errbit::Config.notice_deprecation_days.to_f.days.ago)
+    count = problems.count
+    return count if count.zero?
+
+    problems.each(&:destroy_with_dependencies)
+    compact_database
+    count
+  end
+
+  def self.compact_database
+    collections = Mongoid.default_client.collections
+    collections.map(&:name).map do |collection|
+      Mongoid.default_client.command compact: collection
+    rescue Mongo::Error::OperationFailure => e
+      next if /CMD_NOT_ALLOWED: compact/.match?(e.message)
+
+      raise e
+    end
+  end
+  private_class_method :compact_database
+
   def uncache_notice(notice)
     last_notice = notices.last
 
@@ -195,6 +262,20 @@ class Problem
     save
   end
 
+  def destroy_with_dependencies
+    errs_ids = errs.pluck(:id)
+    comments_ids = comments.pluck(:id)
+
+    Notice.delete_all(err_id: {"$in" => errs_ids})
+    Err.delete_all(_id: {"$in" => errs_ids})
+    Comment.delete_all(_id: {"$in" => comments_ids})
+    delete
+  end
+
+  def self.destroy_all_with_dependencies(problems)
+    Array(problems).each(&:destroy_with_dependencies).count
+  end
+
   def url
     Rails.application.routes.url_helpers.app_problem_url(
       app,
@@ -217,10 +298,6 @@ class Problem
 
   def unresolved?
     !resolved?
-  end
-
-  def self.merge!(*problems)
-    ProblemMerge.new(problems).merge
   end
 
   def merged?

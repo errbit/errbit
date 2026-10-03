@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe ProblemRecacher do
+RSpec.describe Problem, type: :model do
   let(:app) { create(:app) }
 
   let(:backtrace) { create(:backtrace) }
@@ -10,9 +10,9 @@ RSpec.describe ProblemRecacher do
   before do
     notices
 
-    NoticeRefingerprinter.run
+    Notice.refingerprint_all
 
-    described_class.run
+    described_class.recache_all
   end
 
   context "minor backtrace differences" do
