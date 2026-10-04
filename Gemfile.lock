@@ -219,7 +219,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    icalendar (2.12.4)
+    icalendar (2.12.5)
       base64
       ice_cube (~> 0.16)
       logger
@@ -840,7 +840,7 @@ CHECKSUMS
   htmlentities (4.4.2) sha256=bbafbdf69f2eca9262be4efef7e43e6a1de54c95eb600f26984f71d2fe96c5c3
   httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
-  icalendar (2.12.4) sha256=acf9b8b166dad4679b8be2cc3202260896c199ab7302f748c760c97e9d32e3a2
+  icalendar (2.12.5) sha256=bda963d46bb08d9de1366eff05308c1e60a178532422fcc11d60360f84f58156
   ice_cube (0.17.0) sha256=32deb45dda4b4acc53505c2f581f6d32b5afc04d29b9004769944a0df5a5fcbe
   importmap-rails (2.2.3) sha256=7101be2a4dc97cf1558fb8f573a718404c5f6bcfe94f304bf1f39e444feeb16a
   inline_svg (1.10.0) sha256=5b652934236fd9f8adc61f3fd6e208b7ca3282698b19f28659971da84bf9a10f
