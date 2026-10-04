@@ -47,8 +47,8 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@14594264cd68ce8a2345dd349bc3d138a4ef85c8 # v1.327.0
         with:
-          rubygems: "4.0.21"
-          bundler: "4.0.21"
+          rubygems: "4.0.22"
+          bundler: "4.0.22"
           bundler-cache: true
 
       - run: bin/brakeman --format github --quiet --run-all-checks || true
