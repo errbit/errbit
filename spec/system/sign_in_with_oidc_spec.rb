@@ -34,6 +34,25 @@ RSpec.describe "Sign in with OpenID Connect", type: :system, retry: 3 do
     end
   end
 
+  # How an identity provider's own dashboard links to errbit: a GET at the
+  # authorize path, which has to end up posting the request phase.
+  context "arriving from the provider's dashboard" do
+    let!(:user) { create(:user, oidc_uid: "subject-123") }
+
+    before do
+      OmniAuth.config.mock_auth[:openid_connect] =
+        mock_oidc_auth(uid: "subject-123", email: user.email)
+    end
+
+    it "is expected to sign in the user" do
+      visit user_openid_connect_omniauth_authorize_path
+
+      expect(page).to have_content(
+        I18n.t("devise.omniauth_callbacks.success", kind: Errbit::Config.oidc_site_title)
+      )
+    end
+  end
+
   context "reject an unknown identity" do
     before { allow(Errbit::Config).to receive(:oidc_auto_provision).and_return(false) }
 

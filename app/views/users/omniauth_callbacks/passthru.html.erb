@@ -1,0 +1,18 @@
+<% content_for :title, "Sign in with #{@provider_title}" %>
+
+<%= form_tag omniauth_authorize_path(:user, @provider), id: "omniauth_passthru" do %>
+  <p>
+    <%= t(".redirecting", provider: @provider_title) %>
+  </p>
+
+  <div class="buttons">
+    <button type="submit" class="sign_in">
+      <%= t(".sign_in", provider: @provider_title) %>
+    </button>
+  </div>
+<% end %>
+
+<%# The button is the fallback; with JavaScript the post happens by itself. %>
+<%= javascript_tag nonce: true do %>
+  document.getElementById("omniauth_passthru").submit();
+<% end %>

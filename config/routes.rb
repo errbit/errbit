@@ -7,6 +7,18 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
+  # An identity provider's application dashboard links straight at the
+  # authorize path with a GET, but omniauth 2 runs the request phase on POST
+  # only. Devise routes that path for the methods omniauth allows, so the GET
+  # reaches either #passthru or no route at all depending on the devise
+  # version; route it either way and let #passthru post it properly.
+  devise_scope :user do
+    get "/users/auth/:provider",
+      to: "users/omniauth_callbacks#passthru",
+      as: :omniauth_passthru,
+      constraints: {provider: Regexp.union(Devise.omniauth_configs.keys.map(&:to_s))}
+  end
+
   # Hoptoad Notifier Routes
   match "/notifier_api/v2/notices" => "notices#create", :via => [:get, :post]
   get "/locate/:id" => "notices#locate", :as => :locate

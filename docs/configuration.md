@@ -213,6 +213,9 @@ Default in container: same as default value.
 <dd>defaults to sub
 <dt>OIDC_AUTO_PROVISION
 <dd>Allow automatic account creation after sign-in through the provider
+<dt>CSP_FORM_ACTION_ORIGINS
+<dd>Extra origins the Content Security Policy lets the sign-in flow navigate to, on top of the ones derived from the enabled providers. Needed for a provider whose authorization endpoint is not on its issuer's host.
+<dd>e.g. [https://id.example.com,https://id-stage.example.com]
 <dt>OIDC_AUTHORIZED_DOMAINS
 <dd>A comma-delimited list of account email domains an account may be created for, matched case-insensitively. It gates OIDC_AUTO_PROVISION only: a user whose identity is already linked signs in whatever their domain. Blank means any domain.
 <dt>EMAIL_DELIVERY_METHOD

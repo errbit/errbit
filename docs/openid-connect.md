@@ -161,6 +161,28 @@ OIDC_AUTHORIZED_DOMAINS=example.com
 
 Restart Errbit. The login page gains a **Sign in with authentik** button.
 
+## Signing in from the provider
+
+The provider's own application dashboard can link straight at
+`https://errbit.example.com/users/auth/openid_connect`. That is a `GET`, and
+OmniAuth runs the request phase on `POST` only, so Errbit answers it with a
+page that posts the request itself - it needs no JavaScript, there is a button
+to press if the automatic post does not happen.
+
+Errbit's Content Security Policy has to allow the browser to leave for the
+provider. The `form-action` directive is built from the configured providers
+at boot, taking the origin of `OIDC_ISSUER` among them. A provider that serves
+its authorization endpoint from a *different* host than its issuer, or an
+installation that is pointed at more than one provider over its life, adds the
+rest with `CSP_FORM_ACTION_ORIGINS`:
+
+```sh
+CSP_FORM_ACTION_ORIGINS='[https://id.example.com,https://id-stage.example.com]'
+```
+
+Only the origin of each entry is used, so a full URL is fine. Errbit has to be
+restarted for a change to take effect.
+
 ## Troubleshooting
 
 <dl>
@@ -177,12 +199,27 @@ Restart Errbit. The login page gains a **Sign in with authentik** button.
     <code>ERRBIT_HOST</code>. It has to be registered on the provider
     verbatim, scheme and trailing path included.
   </dd>
+  <dt>The button does nothing in Chrome but works in Firefox</dt>
+  <dd>
+    A <code>form-action</code> that does not name the provider. The sign-in
+    links are real form submissions, and Chrome checks
+    <code>form-action</code> against every hop of the redirect chain that
+    follows - the provider and the callback both - while Firefox checks only
+    the form's own action. The browser console names the blocked URL; nothing
+    appears in the Errbit log beyond the <code>POST</code>, because the
+    browser never follows the redirect. Check that the provider's origin is in
+    the policy and that <code>OIDC_REDIRECT_URI</code> points back at this
+    Errbit rather than at some other host. <code>CSP_FORM_ACTION_ORIGINS</code>
+    adds an origin the policy does not derive by itself.
+  </dd>
   <dt>Sign-in ends on the login page with no error</dt>
   <dd>
     The sign-in link is a <code>POST</code>
     (<a href="https://github.com/cookpad/omniauth-rails_csrf_protection">omniauth-rails_csrf_protection</a>).
-    Opening <code>/users/auth/openid_connect</code> in the address bar, or
-    through a proxy that rewrites the request, will not work.
+    Opening <code>/users/auth/openid_connect</code> in the address bar reaches
+    the page described under <em>Signing in from the provider</em> instead,
+    which posts it properly; a proxy that rewrites the request still will not
+    work.
   </dd>
   <dt>Errbit redirects to http:// after a successful sign-in</dt>
   <dd>

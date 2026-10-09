@@ -2,6 +2,29 @@
 
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    # Errbit::Config key holding the name to show for each provider.
+    SITE_TITLES = {
+      "github" => :github_site_title,
+      "google_oauth2" => :google_site_title,
+      "openid_connect" => :oidc_site_title
+    }.freeze
+
+    # Reached by a GET on the authorize path, which is how an identity
+    # provider's dashboard links to an application. Devise answers that with a
+    # bare 404; hand back the same request as a form post instead, so the link
+    # works rather than reading "Not found. Authentication passthru."
+    def passthru
+      provider = params[:provider].to_s
+      title_key = SITE_TITLES[provider]
+
+      return super unless title_key && Devise.omniauth_configs.key?(provider.to_sym)
+
+      @provider = provider
+      @provider_title = Errbit::Config.public_send(title_key)
+
+      render "users/omniauth_callbacks/passthru"
+    end
+
     def github_auto_sign_up(github_token)
       return if Errbit::Config.github_org_id.nil?
 

@@ -70,6 +70,11 @@ Errbit::Config = Configurator.run(
   oidc_uid_field: ["OIDC_UID_FIELD"],
   oidc_authorized_domains: ["OIDC_AUTHORIZED_DOMAINS"],
 
+  # Extra origins the sign-in flow is allowed to navigate to, for a provider
+  # whose authorization endpoint does not live on the issuer's own host. See
+  # config/initializers/content_security_policy.rb.
+  csp_form_action_origins: ["CSP_FORM_ACTION_ORIGINS"],
+
   email_delivery_method: ["EMAIL_DELIVERY_METHOD", lambda do |values|
     email_delivery_method = values[:email_delivery_method]
 
