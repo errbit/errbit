@@ -101,6 +101,12 @@ application deployments.
 
 See [apps](docs/apps.md)
 
+## Issue Status Management
+
+Problems in Errbit can be in one of the following states:
+* **Unresolved**: The problem requires attention.
+* **Resolved**: The problem has been fixed. If the same error is reported again, Errbit will automatically reopen it and change its status back to Unresolved.
+
 ## Authentication
 
 ### Configuring GitHub authentication
