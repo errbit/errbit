@@ -79,4 +79,18 @@ RSpec.describe User, type: :model do
 
     it { expect(subject.attributes_for_super_diff).to eq(id: subject.id.to_s, name: subject.name) }
   end
+
+  describe ".valid_google_domain?" do
+    before do
+      allow(Errbit::Config).to receive(:google_authorized_domains).and_return(["example.com", "example.org"])
+    end
+
+    it "accepts an authorized domain" do
+      expect(described_class.valid_google_domain?("user@example.com")).to be(true)
+    end
+
+    it "rejects an unauthorized domain" do
+      expect(described_class.valid_google_domain?("user@example.net")).to be(false)
+    end
+  end
 end
