@@ -31,9 +31,41 @@
   <% end %>
 
   <span><%= link_to t(".up"), (request.env["HTTP_REFERER"] ? :back : app_problems_path(app)), class: "up" %></span>
+
+  <span>
+    <%= link_to '#', id: 'copy-as-markdown-btn', class: 'button items-center' do %>
+      <i class="fa fa-copy"></i>
+      <span>Copy as Markdown</span>
+    <% end %>
+  </span>
+
   <br>
   <%= render "issue_tracker_links", app: app, problem: problem %>
 <% end %>
+
+<textarea id="markdown-payload" style="display: none;" aria-hidden="true"><%= notice_as_markdown(@notice || @problem.current_notice) %></textarea>
+
+<script>
+  document.getElementById('copy-as-markdown-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const payload = document.getElementById('markdown-payload').value;
+    const btn = this;
+    
+    navigator.clipboard.writeText(payload).then(() => {
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa fa-check"></i> <span>Copied! ✓</span>';
+      btn.classList.add('success'); // adjust class to match Errbit styling framework
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove('success');
+      }, 2000);
+    }).catch(err => {
+      console.error('Could not copy markdown text: ', err);
+      alert('Failed to copy to clipboard.');
+    });
+  });
+</script>
 
 <% content_for :comments do %>
   <h3><%= t(".comments") %></h3>
