@@ -13,12 +13,20 @@ class Issue
     @tracker ||= issue_tracker&.tracker
   end
 
+  # The body is the markup the issue tracker gets, so it has to render bare.
+  # Without this, render_to_string wraps it in the Errbit page layout and the
+  # issue ends up holding a whole HTML document.
   def render_body_args
-    if tracker.respond_to?(:render_body_args)
-      tracker.render_body_args
-    else
-      [{template: "issue_trackers/markdown"}]
-    end
+    args =
+      if tracker.respond_to?(:render_body_args)
+        tracker.render_body_args
+      else
+        [{template: "issue_trackers/markdown"}]
+      end
+
+    return args + [{layout: false}] unless args.last.is_a?(Hash)
+
+    args[0..-2] + [{layout: false}.merge(args.last)]
   end
 
   def title
