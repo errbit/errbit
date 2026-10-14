@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe UserDestroy do
+RSpec.describe User, type: :model do
   describe "#destroy" do
     let!(:app) { create(:app) }
     let!(:user) { create(:user) }
@@ -10,13 +10,13 @@ RSpec.describe UserDestroy do
 
     it "is expected to delete user" do
       expect do
-        described_class.new(user).destroy
+        user.destroy
       end.to change(User, :count).from(1).to(0)
     end
 
     it "is expected to delete watcher" do
       expect do
-        described_class.new(user).destroy
+        user.destroy
       end.to change {
         app.reload.watchers.where(user: user).count
       }.from(1).to(0)
