@@ -1,4 +1,5 @@
 <%# locals: (user:) %>
+
 <% if Errbit::Config.google_authentication && user == current_user %>
   <span class="google">
     <% if user.google_account? %>
