@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProblemsController < ApplicationController
+  layout "errbit"
+
   include ProblemsSearcher
 
   before_action :need_selected_problem, only: [
