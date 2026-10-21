@@ -9,7 +9,8 @@
 
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
 
-    <%= favicon_link_tag %>
+    <%= favicon_link_tag "favicon.ico", sizes: "48x48" %>
+    <%= favicon_link_tag "favicon.svg", type: "image/svg+xml" %>
     <%= csrf_meta_tag %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag :application, integrity: true %>
