@@ -53,10 +53,13 @@ jobs:
           bundler: "4.0.23"
           bundler-cache: true
 
+      # https://github.com/supercharge/mongodb-github-action/issues/81
+      # https://jira.mongodb.org/browse/SERVER-121912
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 # 1.12.1
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-extra-env: GLIBC_TUNABLES=glibc.pthread.rseq=1
 
       - run: bundle exec bootsnap precompile --gemfile
       - run: bundle exec bootsnap precompile app/ lib/ config/ Rakefile
