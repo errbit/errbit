@@ -56,7 +56,8 @@ jobs:
       # https://github.com/supercharge/mongodb-github-action/issues/81
       # https://jira.mongodb.org/browse/SERVER-121912
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 # 1.12.1
+        # uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 # 1.12.1
+        uses: supercharge/mongodb-github-action@89d1ecb837145f486898e235478a7e267f68c44e # main
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
           mongodb-extra-env: GLIBC_TUNABLES=glibc.pthread.rseq=1
