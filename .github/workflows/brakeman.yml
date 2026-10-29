@@ -18,14 +18,18 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  run:
+  brakeman:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
         with:
           disable-sudo-and-containers: true
           egress-policy: block
@@ -37,10 +41,14 @@ jobs:
             rubygems.org:443
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
-          rubygems: latest
-          bundler: latest
+          persist-credentials: false
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@651ff0d62c5c79bed6d53ec518387aae20e72c1a # v1.329.0
+        with:
+          rubygems: "4.0.23"
+          bundler: "4.0.23"
           bundler-cache: true
+
       - run: bin/brakeman --format github --quiet --run-all-checks || true

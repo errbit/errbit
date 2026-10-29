@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby file: ".ruby-version"
 
-gem "rails", "8.1.3.1"
+gem "rails", "8.1.4"
 
 gem "sprockets-rails"
 gem "stimulus-rails"
@@ -13,6 +13,7 @@ gem "turbo-rails"
 gem "activemodel-serializers-xml"
 gem "actionmailer_inline_css"
 gem "devise"
+gem "devise-i18n"
 gem "pundit"
 gem "dotenv"
 gem "draper"
@@ -31,6 +32,7 @@ gem "omniauth-rails_csrf_protection"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "rails_autolink"
+gem "rails-i18n"
 gem "inline_svg"
 gem "useragent"
 gem "nokogiri"
@@ -75,7 +77,7 @@ group :development, :test do
   gem "rubocop-thread_safety", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-erb", require: false
-  gem "standard", "1.56.0", require: false
+  gem "standard", "1.57.0", require: false
   gem "faker"
   gem "factory_bot_rails"
   gem "brakeman", require: false

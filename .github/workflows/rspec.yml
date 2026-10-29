@@ -16,6 +16,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   CI: "true"
   SE_AVOID_STATS: "true"
@@ -27,30 +31,36 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["4.0.6"]
-        mongodb-version: ["7.0", "8.0", "8.2", "8.3"]
+        ruby: ["4.0.7"]
+        mongodb-version: ["7.0", "8.0", "8.2", "8.3", "9.0"]
 
     steps:
       - name: Harden the runner (Audit all outbound calls)
-        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
         with:
           disable-sudo: true
           egress-policy: audit
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Set up Ruby
-        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
+        uses: ruby/setup-ruby@651ff0d62c5c79bed6d53ec518387aae20e72c1a # v1.329.0
         with:
           ruby-version: ${{ matrix.ruby }}
-          rubygems: "latest"
-          bundler: "latest"
+          rubygems: "4.0.23"
+          bundler: "4.0.23"
           bundler-cache: true
 
+      # https://github.com/supercharge/mongodb-github-action/issues/81
+      # https://jira.mongodb.org/browse/SERVER-121912
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 # 1.12.1
+        # uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 # 1.12.1
+        uses: supercharge/mongodb-github-action@89d1ecb837145f486898e235478a7e267f68c44e # main
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-extra-env: GLIBC_TUNABLES=glibc.pthread.rseq=1
 
       - run: bundle exec bootsnap precompile --gemfile
       - run: bundle exec bootsnap precompile app/ lib/ config/ Rakefile

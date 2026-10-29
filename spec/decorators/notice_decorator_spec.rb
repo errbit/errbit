@@ -2,5 +2,5 @@
 
 require "rails_helper"
 
-RSpec.describe NoticeDecorator, type: :decorator do # rubocop:disable Lint/EmptyBlock, RSpec/EmptyExampleGroup
+RSpec.describe NoticeDecorator, type: :decorator do # rubocop:disable Lint/EmptyBlock
 end
