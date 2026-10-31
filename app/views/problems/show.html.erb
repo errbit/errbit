@@ -1,44 +1,44 @@
-<% content_for :page_title, problem.message %>
-<% content_for :title_css_class, "err_show #{"resolved" if problem.resolved?}" %>
-<% content_for :title, problem.error_class || truncate(problem.message, length: 32) %>
+<% content_for :page_title, @problem.message %>
+<% content_for :title_css_class, "err_show #{"resolved" if @problem.resolved?}" %>
+<% content_for :title, @problem.error_class || truncate(@problem.message, length: 32) %>
 
 <% content_for :meta do %>
   <strong><%= t(".app") %>:</strong>
-  <%= link_to app.name, app %>
+  <%= link_to @app.name, @app %>
   <strong><%= t(".where") %>:</strong>
-  <%= problem.where %><br>
+  <%= @problem.where %><br>
   <strong><%= t(".environment") %>:</strong>
-  <%= problem.environment %>
+  <%= @problem.environment %>
   <strong><%= t(".first_notice") %>:</strong>
-  <%= problem.first_notice_at.to_fs(:precise) %>
+  <%= @problem.first_notice_at.to_fs(:precise) %>
   <strong><%= t(".last_notice") %>:</strong>
-  <%= problem.last_notice_at.to_fs(:precise) %>
+  <%= @problem.last_notice_at.to_fs(:precise) %>
 <% end %>
 
 <% content_for :action_bar do %>
-  <% if problem.unresolved? %>
-    <span><%= link_to t(".resolve"), [:resolve, app, problem], method: :patch,
+  <% if @problem.unresolved? %>
+    <span><%= link_to t(".resolve"), [:resolve, @app, @problem], method: :patch,
       data: { confirm: problem_confirm("resolve_one") }, class: "resolve" %></span>
   <% end %>
 
   <% if current_user.authentication_token %>
     <span>
-      <%= link_to polymorphic_path([app, problem], format: :ics, auth_token: current_user.authentication_token) do %>
+      <%= link_to polymorphic_path([@app, @problem], format: :ics, auth_token: current_user.authentication_token) do %>
         <i class="fa fa-calendar"></i>
         iCal
       <% end %>
     </span>
   <% end %>
 
-  <span><%= link_to t(".up"), (request.env["HTTP_REFERER"] ? :back : app_problems_path(app)), class: "up" %></span>
+  <span><%= link_to t(".up"), (request.env["HTTP_REFERER"] ? :back : app_problems_path(@app)), class: "up" %></span>
   <br>
-  <%= render "issue_tracker_links", app: app, problem: problem %>
+  <%= render "issue_tracker_links", app: @app, problem: @problem %>
 <% end %>
 
 <% content_for :comments do %>
   <h3><%= t(".comments") %></h3>
 
-  <% problem.comments.ordered.each do |comment| %>
+  <% @problem.comments.ordered.each do |comment| %>
     <div class="window">
       <table class="comment">
         <tr>
@@ -57,7 +57,7 @@
               </span>
             <% end %>
             <span class="delete">
-              <%= link_to "&#10008;".html_safe, [app, problem, comment],
+              <%= link_to "&#10008;".html_safe, [@app, @problem, comment],
                 method: :delete, data: { confirm: t("comments.confirm_delete") },
                 class: "destroy-comment" %>
             </span>
@@ -71,7 +71,7 @@
     </div>
   <% end %>
 
-  <%= form_for [app, problem, @comment] do |comment_form| %>
+  <%= form_for [@app, @problem, @comment] do |comment_form| %>
     <p><%= t(".add_a_comment") %></p>
     <%= comment_form.text_area :body %>
     <%= comment_form.submit t(".save_comment") %>
@@ -102,7 +102,7 @@
 <% if @notice %>
   <div id="summary">
     <h3><%= t(".summary") %></h3>
-    <%= render "notices/summary", notice: @notice, problem: problem %>
+    <%= render "notices/summary", notice: @notice, problem: @problem %>
   </div>
 
   <div id="backtrace">

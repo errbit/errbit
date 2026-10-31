@@ -12,10 +12,10 @@ RSpec.describe "apps/show.html.erb", type: :view do
   end
 
   before do
-    allow(view).to receive(:app).and_return(app)
-    allow(view).to receive(:all_errs).and_return(false)
-    allow(view).to receive(:params_order).and_return("asc")
-    allow(view).to receive(:params_sort).and_return("latest_notice_at")
+    assign(:app, app)
+    assign(:all_errs, false)
+    assign(:params_order, "asc")
+    assign(:params_sort, "latest_notice_at")
     allow(controller).to receive(:current_user).and_return(user)
   end
 

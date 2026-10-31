@@ -8,8 +8,8 @@ RSpec.describe "apps/edit.html.erb", type: :view do
   let(:app_decorate) { AppDecorator.new(app) }
 
   before do
-    allow(view).to receive(:app).and_return(app)
-    allow(view).to receive(:app_decorate).and_return(app_decorate)
+    assign(:app, app)
+    assign(:app_decorate, app_decorate)
     allow(controller).to receive(:current_user).and_return(stub_model(User))
   end
 
