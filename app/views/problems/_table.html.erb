@@ -80,7 +80,7 @@
             <%# TODO: this if looks like wrong and should be up for one element (td in td?). %>
             <% if any_issue_links %>
               <td class="issue_link narrow-as-possible">
-                <% if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != "pending" %>
+                <% if problem.issue_type.present? && problem.issue_link.present? && problem.issue_link != "pending" %>
                   <%= link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, target: "_blank", rel: "noopener noreferrer" %>
                 <% end %>
               </td>
