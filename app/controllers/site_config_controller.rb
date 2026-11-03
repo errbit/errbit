@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SiteConfigController < ApplicationController
+  layout "errbit"
+
   before_action :require_admin!
 
   def index
