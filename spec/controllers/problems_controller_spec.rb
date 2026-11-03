@@ -448,7 +448,7 @@ RSpec.describe ProblemsController, type: :controller do
       end
 
       it "should merge the problems" do
-        expect(ProblemMerge).to receive(:new).and_return(double(merge: true))
+        expect(Problem).to receive(:merge!).with(@problem_1, @problem_2).and_return(true)
 
         post :merge_several, params: {problems: [@problem_1.id.to_s, @problem_2.id.to_s]}
       end
