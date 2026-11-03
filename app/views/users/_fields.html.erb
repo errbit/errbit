@@ -33,7 +33,7 @@
 
 <div class="required">
   <%= f.label :time_zone, t(".time_zone") %>
-  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all %>
 </div>
 
 <div class="required">
