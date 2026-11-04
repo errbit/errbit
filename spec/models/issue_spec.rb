@@ -59,12 +59,26 @@ RSpec.describe Issue, type: :model do
         allow(subject.tracker).to receive(:render_body_args).and_return(
           ["my", {custom: "args"}]
         )
-        expect(subject.render_body_args).to eq(["my", {custom: "args"}])
+        expect(subject.render_body_args).to eq(["my", {layout: false, custom: "args"}])
+      end
+
+      it "appends the render options to custom args without any" do
+        allow(subject.tracker).to receive(:render_body_args).and_return(["my"])
+
+        expect(subject.render_body_args).to eq(["my", {layout: false}])
+      end
+
+      it "lets a tracker keep its own layout" do
+        allow(subject.tracker).to receive(:render_body_args).and_return(
+          [{template: "custom", layout: "issue"}]
+        )
+
+        expect(subject.render_body_args).to eq([{template: "custom", layout: "issue"}])
       end
 
       it "returns default args if none exist" do
         expect(subject.render_body_args)
-          .to eq([template: "issue_trackers/markdown"])
+          .to eq([{template: "issue_trackers/markdown", layout: false}])
       end
     end
 

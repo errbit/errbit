@@ -139,9 +139,87 @@ RSpec.describe "problems/show.html.erb", type: :view do
         allow(view).to receive(:problem).and_return(problem)
         allow(view).to receive(:app).and_return(problem.app)
 
+        user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
+
+        allow(controller).to receive(:current_user).and_return(user)
+        allow(Errbit::Config).to receive(:github_access_scope).and_return(["repo"])
+
         render
 
         expect(action_bar).to have_selector("span a.create-issue", text: "create issue")
+      end
+
+      it "should not offer the github create issue button to linked users without github write access" do
+        problem = create(:problem_with_comments, app: app)
+
+        with_issue_tracker("github", problem)
+
+        allow(view).to receive(:problem).and_return(problem)
+        allow(view).to receive(:app).and_return(problem.app)
+
+        user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
+
+        allow(controller).to receive(:current_user).and_return(user)
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        render
+
+        expect(action_bar).to have_no_selector("span a.create-issue")
+      end
+
+      # Such users fall back to the credentials configured on the app, whose
+      # permissions we cannot inspect, so the button has to stay offered.
+      it "should still offer the github create issue button to users without a linked github account" do
+        problem = create(:problem_with_comments, app: app)
+
+        with_issue_tracker("github", problem)
+
+        allow(view).to receive(:problem).and_return(problem)
+        allow(view).to receive(:app).and_return(problem.app)
+
+        allow(controller).to receive(:current_user).and_return(create(:user))
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        render
+
+        expect(action_bar).to have_selector("span a.create-issue", text: "create issue")
+      end
+
+      it "should not offer the github close issue button to linked users without github write access" do
+        problem = create(:problem_with_comments, app: app, issue_link: "http://github.com/test_user/test_repo/issues/1")
+
+        with_issue_tracker("github", problem)
+
+        allow(view).to receive(:problem).and_return(problem)
+        allow(view).to receive(:app).and_return(problem.app)
+
+        user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
+
+        allow(controller).to receive(:current_user).and_return(user)
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        render
+
+        expect(action_bar).to have_no_selector("span a.close-issue")
+        expect(action_bar).to have_selector("span a.unlink-issue", text: "unlink issue")
+      end
+
+      it "should offer the github close issue button to linked users with github write access" do
+        problem = create(:problem_with_comments, app: app, issue_link: "http://github.com/test_user/test_repo/issues/1")
+
+        with_issue_tracker("github", problem)
+
+        allow(view).to receive(:problem).and_return(problem)
+        allow(view).to receive(:app).and_return(problem.app)
+
+        user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
+
+        allow(controller).to receive(:current_user).and_return(user)
+        allow(Errbit::Config).to receive(:github_access_scope).and_return(["repo"])
+
+        render
+
+        expect(action_bar).to have_selector("span a.close-issue", text: "close issue")
       end
 
       context "without issue tracker associate on app" do
