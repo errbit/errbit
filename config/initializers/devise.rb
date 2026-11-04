@@ -302,6 +302,41 @@ Devise.setup do |config|
       google_options
   end
 
+  if Errbit::Config.oidc_authentication || Rails.env.test?
+    # Discovery happens lazily, in the request and callback phases, so an
+    # incomplete configuration would not surface until somebody pressed the
+    # sign-in button, and then as a WebFinger lookup of "https://:443".
+    if Errbit::Config.oidc_authentication
+      missing = {
+        OIDC_ISSUER: Errbit::Config.oidc_issuer,
+        OIDC_CLIENT_ID: Errbit::Config.oidc_client_id,
+        OIDC_SECRET: Errbit::Config.oidc_secret,
+        # Without either of these the redirect URI comes out as
+        # "https:///users/auth/openid_connect/callback", which the provider
+        # rejects with nothing to go on.
+        ERRBIT_HOST: ENV["OIDC_REDIRECT_URI"].presence || Errbit::Config.host
+      }.select { |_name, value| value.blank? }.keys
+
+      if missing.any?
+        raise "OIDC_AUTHENTICATION is enabled but #{missing.join(", ")} #{(missing.size == 1) ? "is" : "are"} not set"
+      end
+    end
+
+    oidc_options = {
+      issuer: Errbit::Config.oidc_issuer,
+      discovery: true,
+      scope: Array(Errbit::Config.oidc_scope).map(&:to_sym).presence,
+      uid_field: Errbit::Config.oidc_uid_field,
+      client_options: {
+        identifier: Errbit::Config.oidc_client_id,
+        secret: Errbit::Config.oidc_secret,
+        redirect_uri: Errbit::Config.oidc_redirect_uri
+      }
+    }.compact
+
+    config.omniauth :openid_connect, oidc_options
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

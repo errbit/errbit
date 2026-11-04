@@ -2,6 +2,29 @@
 
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    # Errbit::Config key holding the name to show for each provider.
+    SITE_TITLES = {
+      "github" => :github_site_title,
+      "google_oauth2" => :google_site_title,
+      "openid_connect" => :oidc_site_title
+    }.freeze
+
+    # Reached by a GET on the authorize path, which is how an identity
+    # provider's dashboard links to an application. Devise answers that with a
+    # bare 404; hand back the same request as a form post instead, so the link
+    # works rather than reading "Not found. Authentication passthru."
+    def passthru
+      provider = params[:provider].to_s
+      title_key = SITE_TITLES[provider]
+
+      return super unless title_key && Devise.omniauth_configs.key?(provider.to_sym)
+
+      @provider = provider
+      @provider_title = Errbit::Config.public_send(title_key)
+
+      render "users/omniauth_callbacks/passthru"
+    end
+
     def github_auto_sign_up(github_token)
       return if Errbit::Config.github_org_id.nil?
 
@@ -104,6 +127,53 @@ module Users
       end
     end
 
+    def openid_connect
+      auth = request.env["omniauth.auth"]
+      oidc_uid = auth[:uid]
+      oidc_email = auth.dig(:info, :email).presence&.downcase
+      oidc_site_title = Errbit::Config.oidc_site_title
+      # A blank uid would match every account that has not linked an identity
+      # yet, since Mongoid reads nil as "null or missing".
+      oidc_user = User.where(oidc_uid: oidc_uid).first if oidc_uid.present?
+
+      if oidc_uid.blank?
+        flash[:error] = "#{oidc_site_title} did not identify the account."
+
+        redirect_to new_user_session_path
+      elsif current_user
+        # If user is already signed in, link the OpenID Connect identity to
+        # their account ... unless another user already claimed it
+        if oidc_user && oidc_user != current_user
+          flash[:error] = "User already registered with #{oidc_site_title} login '#{oidc_email}'!"
+        elsif current_user.update(oidc_uid: oidc_uid)
+          flash[:success] = "Successfully linked #{oidc_site_title} account!"
+        else
+          flash[:error] = current_user.errors.full_messages.join("\n")
+        end
+
+        # User must have clicked 'link account' from their user page, so redirect there.
+        redirect_to user_path(current_user)
+      elsif oidc_user
+        flash[:success] = I18n.t "devise.omniauth_callbacks.success", kind: oidc_site_title
+
+        sign_in_and_redirect oidc_user, event: :authentication
+      elsif !Errbit::Config.oidc_auto_provision
+        flash[:error] = "There are no authorized users with #{oidc_site_title} login '#{oidc_email}'. Please ask an administrator to register your user account."
+
+        redirect_to new_user_session_path
+      elsif oidc_email.blank?
+        flash[:error] = "#{oidc_site_title} did not provide an email address."
+
+        redirect_to new_user_session_path
+      elsif !User.valid_oidc_domain?(oidc_email)
+        flash[:error] = I18n.t "devise.oidc_login.domain_unauthorized"
+
+        redirect_to new_user_session_path
+      else
+        provision_oidc_user(auth, oidc_email, oidc_site_title)
+      end
+    end
+
     private
 
     def update_user_with_github_attributes(user, login, token)
@@ -111,6 +181,22 @@ module Users
         github_login: login,
         github_oauth_token: token
       )
+    end
+
+    def provision_oidc_user(auth, oidc_email, oidc_site_title)
+      user = User.create_from_oidc(auth)
+
+      if user.nil?
+        flash[:error] = "An account for #{oidc_email} already exists. Sign in with your password and link your #{oidc_site_title} account from your profile page."
+
+        redirect_to new_user_session_path
+      elsif user.errors.empty?
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: oidc_site_title
+
+        sign_in_and_redirect user, event: :authentication
+      else
+        redirect_to new_user_session_path, alert: user.errors.full_messages.join("\n")
+      end
     end
 
     def github_get_user_email(client)

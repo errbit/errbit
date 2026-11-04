@@ -166,6 +166,29 @@ When you start your application, you should see the option to **Sign in with
 Google** on the Login page. You will also be able to link your Google profile
 to your user account on your **Edit profile** page.
 
+### Configuring OpenID Connect authentication
+
+Errbit can sign users in against any OpenID Connect provider - authentik,
+Keycloak, Okta, Microsoft Entra ID, ... - discovering its endpoints from the
+issuer:
+
+```sh
+OIDC_AUTHENTICATION=true
+OIDC_SITE_TITLE='authentik'
+OIDC_ISSUER=https://authentik.example.com/application/o/errbit/
+OIDC_CLIENT_ID=<client id>
+OIDC_SECRET='<client secret>'
+OIDC_AUTO_PROVISION=true
+OIDC_AUTHORIZED_DOMAINS=example.com
+```
+
+Register Errbit with the provider using the callback URL
+`https://errbit.example.com/users/auth/openid_connect/callback`.
+
+See [docs/openid-connect.md](docs/openid-connect.md) for the full set of
+options, how accounts are matched and provisioned, and a worked authentik
+example.
+
 ### Configuring LDAP authentication
 
 * Set `ERRBIT_USER_HAS_USERNAME=true`

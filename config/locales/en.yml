@@ -103,6 +103,8 @@ en:
       success: "Successfully authenticated from %{kind} account."
     google_login:
       domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
+    oidc_login:
+      domain_unauthorized: "Account's email domain is not authorized for login. Please log in with an account from a trusted domain."
     sessions:
       new:
         sign_in: "Sign in"
@@ -166,6 +168,10 @@ en:
       success: "Comment deleted!"
       error: "Sorry, I couldn't delete your comment for some reason. I hope you don't have any sensitive information in there!"
   users:
+    omniauth_callbacks:
+      passthru:
+        redirecting: "Taking you to %{provider} to sign in ..."
+        sign_in: "Sign in with %{provider}"
     index:
       new: Add a New User
       title: Users

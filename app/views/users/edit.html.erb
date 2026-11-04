@@ -3,6 +3,7 @@
 <% content_for :action_bar do %>
   <%= render "shared/link_github_account", user: @user %>
   <%= render "shared/link_google_account", user: @user %>
+  <%= render "shared/link_oidc_account", user: @user %>
   <%= link_to t(".cancel"), user_path(@user), class: "button" %>
 <% end %>
 
