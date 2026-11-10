@@ -196,7 +196,7 @@ GEM
     globalid (1.4.0)
       activesupport (>= 6.1)
     hashdiff (1.2.1)
-    hashie (5.1.0)
+    hashie (5.2.0)
       logger
     herb (0.11.1)
     herb (0.11.1-aarch64-linux-gnu)
@@ -823,7 +823,7 @@ CHECKSUMS
   font-awesome-rails (4.7.0.9) sha256=b45044908fbf3178b8d84fbae415dae4b9bf847612bcb1170d88ed13842c8732
   globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
-  hashie (5.1.0) sha256=c266471896f323c446ea8207f8ffac985d2718df0a0ba98651a3057096ca3870
+  hashie (5.2.0) sha256=357a22635195c2e3911fbbc3de9a7d528843d1f42ab0aae02171048f16332d72
   herb (0.11.1) sha256=7a5a74c4931b341a2b7b7f5a530616801f5721a633d2655f002156ff553cd2d7
   herb (0.11.1-aarch64-linux-gnu) sha256=5484e0fc0bd5d040380cbbf503e86dccf3fc1d33428b7ad02715ee7dcaa018f9
   herb (0.11.1-aarch64-linux-musl) sha256=1113663d5e7832dad601547edb4606557ac84def516479ee5136fc7072747a58
