@@ -1,5 +1,5 @@
-Errbit link: <%= app_problem_url problem.app, problem %>
-<% if notice = problem.notices.first %>
+Errbit link: <%= app_problem_url @problem.app, @problem %>
+<% if notice = @problem.notices.first %>
 <% notice.message %>
 
 Summary
