@@ -55,4 +55,4 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: run prettier
-        run: yarn prettier --check "*.{yml,yaml}" ".github/*.{yml,yaml}" ".github/**/*.{yml,yaml}" "config/**/*.{yml,yaml}"
+        run: yarn prettier --check "*.{yml,yaml}" ".github/**/*.{yml,yaml}" "config/**/*.{yml,yaml}"
