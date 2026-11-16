@@ -293,7 +293,7 @@ GEM
     mongo (2.26.1)
       base64
       bson (>= 4.14.1, < 6.0.0)
-    mongoid (9.1.1)
+    mongoid (9.1.2)
       activemodel (>= 5.1, < 8.2, != 7.0.0)
       concurrent-ruby (>= 1.0.5, < 2.0)
       mongo (>= 2.18.0, < 3.0.0)
@@ -867,7 +867,7 @@ CHECKSUMS
   mini_portile2 (2.8.9) sha256=0cd7c7f824e010c072e33f68bc02d85a00aeb6fce05bb4819c03dfd3c140c289
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   mongo (2.26.1) sha256=ed47d4bc9d5c372976fa28ab3945878afaa8d0a9b6f7cbda7a0bdfd7e48157c5
-  mongoid (9.1.1) sha256=eaf0e14f34374fd7b8cb041e913d4c60daa66e1b841188f4635296bcdb2e3337
+  mongoid (9.1.2) sha256=77dade514b2fea07828a22386b4c69af7637522518de491cb78af2a9ec9d6f97
   mongoid-compatibility (1.1.0) sha256=c62b337fd198940c4996100c2c9978fbff097336f3ae2ff5bc98946137ee6949
   mongoid-rspec (4.2.0) sha256=0811fccdc6dcca21987486208a0f614cc395620ccb7ce884b9bce0b5a677ecc8
   msgpack (1.8.7) sha256=dfefec761b5f9047e6e8d95d2c7f8af4b3725d984a01942adc533aa819a2df33
