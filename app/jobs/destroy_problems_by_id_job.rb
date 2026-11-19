@@ -13,6 +13,6 @@ class DestroyProblemsByIdJob < ApplicationJob
 
     problems = Problem.find(bson_problem_ids).to_a
 
-    ProblemDestroy.execute(problems)
+    Problem.destroy_all_with_dependencies(problems)
   end
 end
