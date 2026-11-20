@@ -29,7 +29,7 @@
         <tr class="<%= problem.resolved? ? "resolved" : "unresolved" %>">
           <td class="select narrow-as-possible">
             <div class="td-container">
-              <%= check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s) %>
+              <%= check_box_tag "problems[]", problem.id, @selected_problems.member?(problem.id.to_s) %>
             </div>
           </td>
 
