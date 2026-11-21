@@ -223,10 +223,6 @@ class Problem
     ProblemMerge.new(problems).merge
   end
 
-  def merged?
-    errs.length > 1
-  end
-
   def unmerge!
     attrs = {error_class: error_class, environment: environment}
     problem_errs = errs.to_a
@@ -317,22 +313,5 @@ class Problem
 
   def link_text
     message.presence || error_class
-  end
-
-  private
-
-  def attribute_count_decrease(name, value)
-    counter = send(name)
-    index = attribute_index(value)
-    if counter[index] && counter[index]["count"] > 1
-      counter[index]["count"] -= 1
-    else
-      counter.delete(index)
-    end
-    counter
-  end
-
-  def attribute_index(value)
-    Digest::MD5.hexdigest(value.to_s)
   end
 end
