@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     else
       authorize @user
 
-      UserDestroy.new(@user).destroy
+      @user.destroy
 
       flash[:success] = t(".success", name: @user.name)
     end
