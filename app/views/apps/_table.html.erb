@@ -1,6 +1,6 @@
 <%# locals: (apps:) %>
 
-<table class="apps">
+<table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
       <th><%= t(".name") %></th>
@@ -20,10 +20,10 @@
   <tbody>
     <% apps.each do |app| %>
       <tr>
-        <td class="name"><%= link_to(app.name, app_path(app)) %></td>
+        <td class=""><%= link_to(app.name, app_path(app)) %></td>
 
         <% if any_github_repos? || any_bitbucket_repos? %>
-          <td class="github_repo">
+          <td class="">
             <% if app.github_repo? %>
               <%= link_to(app.github_repo, app.github_url, target: "_blank", rel: "noopener noreferrer") %>
             <% end %>
@@ -61,7 +61,7 @@
           </td>
         <% end %>
 
-        <td class="count">
+        <td class="">
           <% if app.problem_count > 0 %>
             <% unresolved = app.unresolved_count %>
 
