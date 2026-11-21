@@ -359,6 +359,56 @@ RSpec.describe ProblemsController, type: :controller do
         expect(flash[:error]).to eq("This app has no issue tracker")
       end
     end
+
+    context "when app has a github issue tracker" do
+      let(:notice) { NoticeDecorator.new(create(:notice)) }
+      let(:problem) { ProblemDecorator.new(notice.problem) }
+
+      before do
+        tracker = problem.app.build_issue_tracker(type_tracker: "github", options: {foo: "one", bar: "two"})
+        tracker.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(tracker.options))
+
+        allow(controller).to receive(:problem).and_return(problem)
+        allow(controller).to receive(:app).and_return(AppDecorator.new(problem.app))
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it "refuses linked github users without a write scope" do
+        user.update(github_login: "biow0lf", github_oauth_token: "abcdef")
+
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        post :create_issue, params: {app_id: problem.app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+
+        expect(flash[:error]).to eq(I18n.t("controllers.problems.flash.github_issue_forbidden"))
+      end
+
+      it "allows linked github users with a write scope" do
+        user.update(github_login: "biow0lf", github_oauth_token: "abcdef")
+
+        allow(Errbit::Config).to receive(:github_access_scope).and_return(["repo"])
+
+        post :create_issue, params: {app_id: problem.app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+
+        expect(flash[:error]).to be_blank
+      end
+
+      # Without a linked account the tracker uses the credentials configured
+      # on the app, so the OAuth scope Errbit requests is irrelevant.
+      it "allows users without a linked github account" do
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        post :create_issue, params: {app_id: problem.app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+
+        expect(flash[:error]).to be_blank
+      end
+    end
   end
 
   describe "POST /apps/:app_id/problems/:id/close_issue" do
@@ -393,6 +443,54 @@ RSpec.describe ProblemsController, type: :controller do
 
         expect(response).to redirect_to(app_problem_path(problem.app, problem))
         expect(flash[:error]).to eq("This app has no issue tracker")
+      end
+    end
+
+    context "when app has a github issue tracker" do
+      let(:notice) { NoticeDecorator.new(create(:notice)) }
+      let(:problem) { ProblemDecorator.new(notice.problem) }
+
+      before do
+        tracker = problem.app.build_issue_tracker(type_tracker: "github", options: {foo: "one", bar: "two"})
+        tracker.instance_variable_set(:@tracker, ErrbitPlugin::MockIssueTracker.new(tracker.options))
+
+        allow(controller).to receive(:problem).and_return(problem)
+        allow(controller).to receive(:app).and_return(AppDecorator.new(problem.app))
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it "refuses linked github users without a write scope" do
+        user.update(github_login: "biow0lf", github_oauth_token: "abcdef")
+
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        post :close_issue, params: {app_id: problem.app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+
+        expect(flash[:error]).to eq(I18n.t("controllers.problems.flash.github_issue_forbidden"))
+      end
+
+      it "allows linked github users with a write scope" do
+        user.update(github_login: "biow0lf", github_oauth_token: "abcdef")
+
+        allow(Errbit::Config).to receive(:github_access_scope).and_return(["repo"])
+
+        post :close_issue, params: {app_id: problem.app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+
+        expect(flash[:error]).to be_blank
+      end
+
+      it "allows users without a linked github account" do
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        post :close_issue, params: {app_id: problem.app.id, id: problem.id}
+
+        expect(response).to redirect_to(app_problem_path(problem.app, problem))
+
+        expect(flash[:error]).to be_blank
       end
     end
   end

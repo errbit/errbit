@@ -91,6 +91,7 @@ en:
       flash:
         no_select_problem: "You have not selected any errors"
         need_two_errors_merge: "You must select at least two errors to merge"
+        github_issue_forbidden: "Your GitHub account is not authorized to create or close issues (missing repo/public_repo OAuth scope)"
         merge_several:
           success: "%{nb} errors have been merged."
   devise:
