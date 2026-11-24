@@ -213,7 +213,7 @@ GEM
       httparty
       json
     htmlentities (4.4.2)
-    httparty (0.24.3)
+    httparty (0.25.1)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -842,7 +842,7 @@ CHECKSUMS
   herb (0.11.2-x86_64-linux-musl) sha256=aa6e7aa38d44de757d3076e331234f55ed2f392c2bd0203a3aa4ceea0b6bdd3e
   hoi (0.0.7) sha256=bbea294ad76f08fcc6931f17e689ab3342cb09d73472fd5f7f1a1744af5f836d
   htmlentities (4.4.2) sha256=bbafbdf69f2eca9262be4efef7e43e6a1de54c95eb600f26984f71d2fe96c5c3
-  httparty (0.24.3) sha256=5c95cf29ca70d5bfd834e56140ddfca6e94166c3b870cde9c25d157cdb5a00d2
+  httparty (0.25.1) sha256=354f84b766f9a3e077d64fc8b61a71c88e7c8a890eac4178d30d3269458c1dc5
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   icalendar (2.14.0) sha256=e1eec38259d66b9461c702f33d405b35258a49785e59068e7c26e987bccf68b5
   ice_cube (0.17.0) sha256=32deb45dda4b4acc53505c2f581f6d32b5afc04d29b9004769944a0df5a5fcbe
