@@ -8,7 +8,7 @@ Rails.application.configure do
     policy.base_uri :self
     policy.connect_src :self
     policy.font_src :self
-    policy.form_action :self
+    policy.form_action :self, Errbit::Config.github_url, "https://accounts.google.com"
     policy.frame_src :self
     policy.frame_ancestors :self
     policy.img_src :self, "https://secure.gravatar.com", :data
@@ -18,7 +18,7 @@ Rails.application.configure do
     policy.upgrade_insecure_requests if Rails.env.production?
   end
 
-  config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
+  config.content_security_policy_nonce_generator = ->(_) { SecureRandom.base64(16) }
   config.content_security_policy_nonce_directives = ["script-src", "style-src"]
   config.content_security_policy_nonce_auto = true
 end
