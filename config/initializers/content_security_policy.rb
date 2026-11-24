@@ -15,7 +15,7 @@ Rails.application.configure do
     policy.object_src :none
     policy.script_src :self
     policy.style_src :self
-    policy.upgrade_insecure_requests if Rails.env.production? || Rails.env.test?
+    policy.upgrade_insecure_requests if Rails.env.production?
   end
 
   config.content_security_policy_nonce_generator = ->(_) { SecureRandom.base64(16) }
