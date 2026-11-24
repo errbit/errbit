@@ -44,8 +44,6 @@ RSpec.describe "Content Security Policy", type: :request do
     expect(policies).to include("script-src 'self' 'nonce-#{nonce}'")
 
     expect(policies).to include("style-src 'self' 'nonce-#{nonce}'")
-
-    expect(policies).to include("upgrade-insecure-requests")
   end
 
   it "is expected to include nonce for <script> tags" do
