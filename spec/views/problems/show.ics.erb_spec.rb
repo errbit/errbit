@@ -6,7 +6,7 @@ RSpec.describe "problems/show.ics.erb", type: :view do
   let(:problem) { ProblemDecorator.new(create(:problem)) }
 
   before do
-    allow(view).to receive(:problem).and_return(problem)
+    assign(:problem, problem)
   end
 
   it "works" do

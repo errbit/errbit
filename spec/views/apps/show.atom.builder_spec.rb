@@ -10,8 +10,8 @@ RSpec.describe "apps/show.atom.builder", type: :view do
   let(:problems) { [notice.problem] }
 
   before do
-    allow(view).to receive(:app).and_return(app)
-    allow(view).to receive(:problems).and_return(problems)
+    assign(:app, app)
+    assign(:problems, problems)
   end
 
   context "with errs" do
